@@ -1,0 +1,25 @@
+{
+ "itemId": "linear_equations_two_var.slope.TB.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:43Z",
+ "reviewer": "visual-review-agent-SA",
+ "codeHash": "de33a39f900629ee1a5b4d8e81ce8196cdfb860190905a95b6c17793f9f0af84",
+ "samples": [
+  "linear_equations_two_var.slope.TB.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "기울기 6/3=2 = -a/3 → a=-6 = C. 표의 선 ℓ 은 본문 기호이며 그림 라벨 아님. 풀림.",
+ "restampedAt": "2026-10-05T00:00:00Z",
+ "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
+}

@@ -1,0 +1,400 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 6,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 6,
+   "crossScored": 6,
+   "correct": {
+    "agree": 6,
+    "of": 6,
+    "fablePass": 6,
+    "opusPass": 6
+   },
+   "compliance": {
+    "agree": 6,
+    "of": 6,
+    "fablePass": 6,
+    "opusPass": 6
+   },
+   "hardFit": {
+    "agree": 4,
+    "of": 6,
+    "fablePass": 6,
+    "opusPass": 4
+   },
+   "adoptedBoth": 4,
+   "adoptedOneOnly": 2,
+   "yieldBoth": 0.667,
+   "costUsd": 0.99,
+   "costPerAdoptedBoth": 0.247,
+   "fableOnlyPass": 2,
+   "opusOnlyPass": 0
+  },
+  "sat_math": {
+   "cand": 4,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 4,
+   "crossScored": 4,
+   "correct": {
+    "agree": 4,
+    "of": 4,
+    "fablePass": 4,
+    "opusPass": 4
+   },
+   "compliance": {
+    "agree": 4,
+    "of": 4,
+    "fablePass": 4,
+    "opusPass": 4
+   },
+   "hardFit": {
+    "agree": 4,
+    "of": 4,
+    "fablePass": 4,
+    "opusPass": 4
+   },
+   "adoptedBoth": 4,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 1,
+   "costUsd": 0.578,
+   "costPerAdoptedBoth": 0.145,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 10,
+   "rw": 6,
+   "math": 4,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "recipe-cross_text_connections-00",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_unstated_rebuttal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation"
+    ],
+    "note": "Text 1의 근거가 '한낮 측정값'이라는 점과 Text 2의 '가장 위험한 시간은 밤, 수관이 밤에 열을 가둠'이라는 전제를 결합해야만 A가 도출되며, Text 2는 Text 1을 언급하지 않는다. B는 Text 1 결론 반복, D는 비용이라는 외부 쟁점, C는 Text 2 결론의 재진술이라 각 오답 기능이 명확하다. 다만 C는 Varghese가 실제로 주장하는 내용이므로 '사실상 참이지만 질문(Text 1에 대한 반응)에 답하지 않음' 유형의 함정이라 수험생 이의 가능성이 약간 있으나, A가 명백히 최선의 답이므로 판정에는 영향 없음. 수관이 야간 복사냉각을 막아 기온을 높일 수 있다는 내용은 실제 도시기후 연구와도 부합함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "cross_text_stance_inference"
+    ],
+    "note": "정답 A는 맞다. Text 2의 전제(가장 위험한 시간은 밤이고, 울창한 수관은 밤에 열을 가둔다)를 Text 1의 근거인 한낮 측정값에 연결하면 A가 나온다. 다만 Text 2가 \"judged by conditions during the hours when people are most vulnerable\"이라고 기준을 거의 그대로 밝혀 주기 때문에, 추론 거리가 짧아 전형적인 medium 수준에 머문다. 오답도 쉽게 걸러진다. B는 Text 1을 반복하고, C는 Text 2 문장을 그대로 옮겼으며, D는 본문에 없는 쟁점을 끌어온다. 그래서 강도 차이를 가리는 판단(calibrated_claim_strength)이나 두 텍스트의 일치·차이를 미묘하게 종합하는 판단이 필요 없다. 또한 C는 Varghese가 실제로 하는 주장이어서 \"그녀가 어떻게 반응할까\"라는 질문에 대해 논란이 생길 여지가 조금 있다.",
+    "issue": "C 해설이 약하다. C는 Varghese가 실제로 한 주장을 그대로 옮긴 문장이라 그녀가 동의하는 내용인데, 해설은 이를 \"Text 1에 대한 반응이 아니다\"라는 이유 하나로만 배제한다."
+   },
+   "cost": 0.189844
+  },
+  {
+   "cid": "recipe-cross_text_connections-01",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_weak_point_target",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation",
+     "two_sided_position_synthesis"
+    ],
+    "note": "Text 1의 결론(자기인식→평판 관리)과 근거(거울 체류↔덜 물기 상관)가 분리되어 있고, Text 2는 '거울 체류 = 자기인식'이라는 가정만을 대담성·경험이라는 대안 설명으로 흔든다. A는 가정을 정확히 짚었고, B는 결론(Text 2가 부정하지 않음), C는 Text 2가 다루지 않는 부수 관찰, D는 Text 2가 명시적으로 동의하는 부분으로 오답 설계가 체크리스트에 부합한다. Text 2의 입장이 명시되지 않아 수험자가 스스로 반응을 추론해야 하며, 가정과 결론을 구분하는 논증 분석이 필요해 medium 이상. 해설의 근거·수치 모두 지문과 일치.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "cross_text_stance_inference"
+    ],
+    "note": "정답 A는 옳다. Text 2는 대담한 개체가 거울, 큐브, 원판 등 어떤 새로운 물체 앞에서든 똑같이 오래 머문다고 밝혀 '거울 앞 체류 시간 = 자기인식'이라는 가정을 직접 겨냥한다. 다만 Text 2가 이 반박을 거의 대놓고 제시하고, A의 문구 'rather than some broader tendency'가 Text 2의 요지를 그대로 알려 준다. 그래서 스스로 입장을 추론할 여지가 적다. 오답도 B·D는 Text 2가 동의하는 내용이고 C는 Text 2와 무관해 쉽게 지워지므로, 미묘한 강도 차이를 가려야 하는 부분이 없다. 따라서 전형적인 medium 수준으로 판단한다.",
+    "issue": "사소한 문제: 해설은 D를 Text 1의 '주장'으로 다루지만, Text 1은 무는 행동이 평판을 해친다고만 말할 뿐 고객이 다시 오지 않는다고 명시하지는 않는다. 정답 판정에는 영향이 없다."
+   },
+   "cost": 0.185568
+  },
+  {
+   "cid": "recipe-cross_text_connections-02",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "perspective_bound_evaluation_author_criterion",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "perspective_bound_evaluation",
+     "cross_text_stance_inference",
+     "calibrated_claim_strength"
+    ],
+    "note": "Text 1의 기준(형태와 독립된 증거: 잔류물·뼈·식물 유체)이 명시되어 있고, Parra의 결론은 형태 변화(항아리 형상·급격성·전면성)에만 의존하므로 C가 유일하게 Text 1 기준에서 도출된다. A는 Parra 자신의 논리(Text 2 기준), B는 Text 1의 잔류물 기준을 언급하면서 형태 속성(액체 적합성)을 독립 증거로 오인한 혼합형, D는 '검증되지 않음'을 '틀림'으로 과장한 강도 초과 오답이다. 해설의 각 오답 분석도 본문과 일치하며 모순 없음. 가상의 연구자·사이트로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "perspective_bound_evaluation",
+     "cross_text_stance_inference",
+     "calibrated_claim_strength"
+    ],
+    "note": "정답 C는 Text 1의 기준(형태와 무관한 독립 증거)에 따라 판정된다. A는 Parra 자신의 논리이고, B는 형태의 속성인 '액체 적합성'을 독립 증거로 잘못 취급해 두 관점을 섞은 오답으로, 이 함정이 미묘해서 효과적이다. D는 본문 밖 일반론이며, Text 1이 문제 삼는 '검증 여부'가 아니라 결론 자체를 의심한다는 점에서 강도도 어긋난다. C의 'plausible'은 Text 1의 'however elegant'와 대체로 부합한다.",
+    "issue": ""
+   },
+   "cost": 0.15883400000000003
+  },
+  {
+   "cid": "recipe-cross_text_connections-03",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_unstated_rebuttal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation"
+    ],
+    "note": "Text 1의 'same volume of drivers'라는 숨은 전제를 Text 2의 유발 수요 관찰과 대응시켜야 하며, 이 반박은 어느 텍스트에도 명시되지 않아 추론이 필요함. A가 유일하게 Text 1의 논리 구조를 직접 겨냥함. C는 Text 2의 사실을 정확히 반복하지만 Text 1 추론과의 연결이 없어 '반응'으로는 A보다 열위 — 표준 SAT 오답 패턴이며 해설도 이를 정확히 설명. B는 Text 1 반복, D는 외부 쟁점(비용·환경)으로 체크리스트 4·5 충족. 지문은 일반적 유발 수요 개념을 독자적으로 서술한 것으로 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation"
+    ],
+    "note": "정답을 고르려면 Text 1의 숨은 전제('same volume of drivers', 운전자 수 고정)를 찾아내고, Text 2의 유발 수요 관찰로 그 전제를 반박해야 한다. C는 Text 2의 내용을 그대로 옮긴 매력적 오답이지만, Text 1의 추론 중 어느 부분을 겨냥하는지 밝히지 않아 A보다 약하다. 다만 C가 사실상 반박의 근거가 되기 때문에 변별력은 중상 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.173256
+  },
+  {
+   "cid": "recipe-cross_text_connections-04",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_weak_point_target",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "calibrated_claim_strength"
+    ],
+    "note": "Text 1은 관찰(대량 집중, 지역 점토) → 중간 추론(중앙 작업장) → 결론(엘리트 통제 특화 생산)이 구분됨. Text 2는 '추가 모인 곳=베 짠 곳'이라는 숨은 가정만 공격하며 대량 집중 자체(D)는 인정. B는 본문에 명시되지 않은 가정이므로 스스로 추론해야 하고, A는 결론이라 '가장 직접적' 강도 판별을 요구함. 수용 가능.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "two_sided_position_synthesis"
+    ],
+    "note": "Text 1은 근거(추의 대량 집중)에서 중간 결론(작업장)을 거쳐 최종 결론(엘리트 경제)으로 이어진다. Text 2는 '추가 발견된 장소 = 베를 짠 장소'라는 숨은 가정만 공격한다. 정답이 본문에 명시되지 않은 가정을 추론해야 하는 것이므로 medium보다 한 단계 높다. A는 결론이라는 함정, D는 양쪽이 동의하는 부분이라는 함정으로 잘 설계되었다. C는 명백한 무관 오답이어서 변별력이 약하다.",
+    "issue": "D 해설의 'Text 2도 인정한다'는 표현은 Text 2가 Stanek의 유적을 직접 다루지 않으므로 다소 느슨하지만, 논리 흐름을 해칠 정도는 아니다."
+   },
+   "cost": 0.140144
+  },
+  {
+   "cid": "recipe-cross_text_connections-05",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "perspective_bound_evaluation_author_criterion",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "perspective_bound_evaluation",
+     "cross_text_stance_inference",
+     "calibrated_claim_strength"
+    ],
+    "note": "Text 1 explicitly states Farouk's criterion (multiple independent evidence types must converge; close fit to one type alone may reflect burial/discovery bias). Text 2 gives Reyes's conclusion resting on coins alone with pottery/documents unexamined, so it is directly judgeable. C follows uniquely from Farouk's standard. A applies Reyes's own density/consistency standard; B mixes Farouk-like caution with Reyes's single-evidence remedy (more coins); D overstates to blanket rejection Farouk never endorses. Explanation is accurate and consistent. Fictional scholars/data; no copyright concern. Standard SAT paired-passage format and length.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "perspective_bound_evaluation",
+     "calibrated_claim_strength"
+    ],
+    "note": "정답 C는 Farouk의 다중 독립 증거 기준을 그대로 적용한 결과다. A는 Reyes의 기준, B는 두 관점을 섞은 혼합형 함정(동전만 더 모으라는 보완책), D는 강도를 넘어선 과잉 거부다. 다만 Text 2에 '도자기·문헌 미검토'가 명시되어 있어 추론 거리는 짧다. 그래서 hard 중에서도 쉬운 편이다.",
+    "issue": ""
+   },
+   "cost": 0.142032
+  },
+  {
+   "cid": "recipe-systems_linear-00",
+   "skill": "systems_linear",
+   "system": "sat_math",
+   "recipeId": "systems_linear_condition_param_then_solve",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": "pass",
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "무수히 많은 해 조건(계수·상수항 비례)으로 k 결정",
+     "결정된 k를 새 연립식에 적용해 재풀이",
+     "해 좌표를 결합(x+y)하는 추가 단계"
+    ],
+    "note": "검산: k=4, 새 연립식 해 (2.5, 1), x+y=3.5로 정답 C 확인. 해설 계산 및 오답 분석(D=k값 중간값, B=x만, A=x−y) 모두 일치. 계수 결정→재풀이→합산의 다단계 추론을 요구하여 hard 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "무수히 많은 해 조건으로 계수 결정",
+     "결정된 계수로 새 연립식 풀이(다단계 연결)"
+    ],
+    "note": "k=4, x=2.5, y=1, x+y=3.5 검산 완료. 오답 D(k), B(x), A(x−y)는 모두 그럴듯한 중간값이다. 난이도는 계산량이 아니라 두 단계를 이어 푸는 데서 나온다. 다만 문제 설정이 다소 인위적이다.",
+    "issue": ""
+   },
+   "cost": 0.151246
+  },
+  {
+   "cid": "recipe-systems_linear-01",
+   "skill": "systems_linear",
+   "system": "sat_math",
+   "recipeId": "systems_linear_word_two_constraints_one_hidden",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": "pass",
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "연립방정식 해를 파생량(가격 변동에 따른 총액 차이)으로 변환",
+     "증가분과 감소분의 부호를 구분하여 순변화 계산"
+    ],
+    "note": "검산: x=32, y=13 (7·32+12·13=224+156=380 ✓). 일요일 변화 2·32−1·13=51 ✓. 해설 논리·수치 일치, 오답 분석 타당. 체크리스트 3항목 모두 충족.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "미지수를 구한 뒤 파생량(변화량) 계산",
+     "증감 부호 처리"
+    ],
+    "note": "검산 결과 x=32, y=13(224+156=380), 증가액은 64-13=51로 정답이 맞다. 오답 선지는 원래 미지수 값, 한쪽 변화만 반영한 값, 부호를 혼동한 값으로 구성되어 있다. 다만 파생량을 한 단계만 더 계산하면 되므로 hard 난이도로는 경계선 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.13726
+  },
+  {
+   "cid": "recipe-systems_linear-02",
+   "skill": "systems_linear",
+   "system": "sat_math",
+   "recipeId": "systems_linear_condition_param_then_solve",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": "pass",
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "해 없음 조건(계수비 동일·상수비 상이)으로 k 결정",
+     "결정된 k를 새 연립식에 대입해 재풀이",
+     "해의 좌표 합이라는 파생량 계산"
+    ],
+    "note": "검산: 2/6=k/15 → k=5, 6x+15y=21≠20이므로 해 없음 성립. 새 연립식 2x+5y=7, 6x+12y=20 → y=1/3, x=8/3, x+y=3 (B) 정확. 오답 C(46/15)도 k=21/4 대입 시 실제로 나오는 값임을 확인. D=5는 k 중간값, A=8/3은 x만 본 값으로 체크리스트 3 충족. 숫자 단순, 두 단계 사고 요구로 hard 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "해 없음 조건으로 계수 결정",
+     "결정된 계수를 새 연립식에 넣어 다시 풀기"
+    ],
+    "note": "k=5, 새 연립식의 해는 x=8/3, y=1/3이고 x+y=3으로 정답이 맞다. 오답 C는 k=21/4를 넣어 다시 풀면 x=14/5, y=4/15, 합 46/15로 해설과 일치한다. 오답 A(x만 구한 값)와 D(k=5)도 그럴듯한 오류에서 나온 값이다.",
+    "issue": ""
+   },
+   "cost": 0.1623708
+  },
+  {
+   "cid": "recipe-systems_linear-03",
+   "skill": "systems_linear",
+   "system": "sat_math",
+   "recipeId": "systems_linear_word_two_constraints_one_hidden",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": "pass",
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "연립방정식 해를 파생량(가격 변화에 따른 총액 차이)으로 재해석",
+     "증가/감소 방향을 부호로 모델링하여 순변화량 계산"
+    ],
+    "note": "검산: x=16, y=24 (6·16+9·24=312 확인). 차이 = 2·16 − 24 = 8, 또는 8·16+8·24=320−312=8. 정답 A 옳음. 오답 B(16)는 미지수 x 원래 값, C(32)와 D(56)는 부호·누락 오류로 각각 타당한 함정. 해설 논리·수치 일관.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "미지수를 구한 뒤 가격 변화량 식으로 파생량 계산",
+     "증감 부호 처리"
+    ],
+    "note": "검산 결과 x=16, y=24이고 변화량은 8이다. 오답 선지에는 원래 미지수 값(16), 한쪽 변화만 반영한 값(32), 부호를 잘못 처리한 값(56)이 있어 모두 타당하다. 파생량을 묻는 단계가 하나 더 있어 hard 난이도로는 경계선이지만 인정할 만하다.",
+    "issue": ""
+   },
+   "cost": 0.127616
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+{
+ "itemId": "two_variable_data.conditional_share.TW.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:35.609Z",
+ "reviewer": "visual-review-agent-SE",
+ "codeHash": "1133509aa46292cd3161f253a4a41f8308702278b2c4372341b4b30325a5d2f0",
+ "samples": [
+  "two_variable_data.conditional_share.TW.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "Solved from image: 60/112*168=90 (C). Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact.",
+ "restampedAt": "2026-10-05T00:00:00Z",
+ "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
+}

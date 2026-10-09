@@ -1,0 +1,42 @@
+{
+ "itemId": "inference_margin_error.sample_size_effect.ST.P",
+ "generatedAt": "2026-10-07T05:02:00.524Z",
+ "codeHash": "83792cc3d4bc478fb2fbaabea0752e676c7b4bc565f7cb53958e808b96744940",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/inference_margin_error.sample_size_effect.ST.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "inference_margin_error.sample_size_effect.ST.P.png",
+   "mobileFile": "inference_margin_error.sample_size_effect.ST.P.m375.png",
+   "archetypeId": "ime.sample_size_effect.ST.P.inverse",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "The table shown summarizes a random-sample survey of registered voters in Clay County about a park bond, in which each person said whether they favor a new park bond. The researchers plan a new survey of the same population with a margin of error of 1 percentage point. Assume the margin of error varies inversely with the square root of the sample size.",
+   "question": "How many people should be in the sample for the new survey?",
+   "options": [
+    "1200",
+    "38",
+    "600",
+    "300"
+   ],
+   "correctIndex": 2,
+   "answer": "600",
+   "explanation": "(1) 현재 오차범위는 2, 목표는 1 이다. (2) 오차범위를 2 ÷ 1 = 2 분의 1 로 줄여야 한다. (3) 오차범위는 √n 에 반비례하므로 √n 을 같은 배수만큼 키워야 한다. (4) n 은 2² = 4 배가 되어야 한다. (5) 새 표본 크기 = 150 × 4 = 600 이다. 따라서 정답은 600이다.",
+   "structuralIssues": []
+  }
+ ]
+}

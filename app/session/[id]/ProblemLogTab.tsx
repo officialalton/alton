@@ -12,15 +12,20 @@ import {
   removeTeacherPick,
 } from "./problemlog-actions";
 import MathCanvas from "./MathCanvas";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
+import { fmtIntlEn } from "@/lib/format-datetime-en";
 
 const REASONS = ["단어", "로직", "해석", "기타"];
+// 저장값(DB)은 그대로 두고 화면 라벨만 영어로 보여준다.
+const REASON_LABEL: Record<string, string> = { "단어": "Vocabulary", "로직": "Logic", "해석": "Interpretation", "기타": "Other" };
 const FORMAT_LABEL: Record<ProblemLogEntry["format"], string> = {
-  mc: "객관식",
-  essay: "서술형",
-  math: "수학",
+  mc: "Multiple choice",
+  spr: "Numeric entry",
+  essay: "Written response",
+  math: "Math",
 };
-const UNSPECIFIED_UNIT = "단원 미지정";
-const ALL = "전체";
+const UNSPECIFIED_UNIT = "No unit";
+const ALL = "All";
 
 export default function ProblemLogTab({
   initialEntries,
@@ -93,11 +98,11 @@ export default function ProblemLogTab({
 
   return (
     <div className="max-w-[720px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">문제 기록</h1>
+      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">Problem History</h1>
       <p className="text-[13px] text-grey-500 mb-5">
         {isTeacher
-          ? "학생이 지금까지 풀었던 문제 기록입니다."
-          : "지금까지 풀었던 문제 기록입니다."}
+          ? "Problems this student has worked on so far."
+          : "Problems you have worked on so far."}
       </p>
 
       <FilterBar
@@ -122,7 +127,7 @@ export default function ProblemLogTab({
 
       {filtered.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mt-4">
-          조건에 맞는 문제 기록이 없습니다.
+          No problem history matches these filters.
         </div>
       ) : (
         <div className="mt-4">
@@ -184,7 +189,7 @@ function FilterBar({
     <div className="flex flex-col gap-3">
       {subjects.length > 1 && (
         <ChipRow
-          label="과목"
+          label="Subject"
           options={[ALL, ...subjects]}
           value={subjectFilter}
           onChange={onSubject}
@@ -192,29 +197,29 @@ function FilterBar({
       )}
       {units.length > 1 && (
         <ChipRow
-          label="단원"
+          label="Unit"
           options={[ALL, ...units]}
           value={unitFilter}
           onChange={onUnit}
         />
       )}
       <ChipRow
-        label="정답여부"
+        label="Result"
         options={[
-          { id: "all", label: "전체" },
-          { id: "correct", label: "정답" },
-          { id: "incorrect", label: "오답" },
+          { id: "all", label: "All" },
+          { id: "correct", label: "Correct" },
+          { id: "incorrect", label: "Incorrect" },
         ]}
         value={correctFilter}
         onChange={onCorrect}
       />
       <ChipRow
-        label="형식"
+        label="Format"
         options={[
-          { id: "all", label: "전체" },
-          { id: "mc", label: "객관식" },
-          { id: "essay", label: "서술형" },
-          { id: "math", label: "수학" },
+          { id: "all", label: "All" },
+          { id: "mc", label: "Multiple choice" },
+          { id: "essay", label: "Written response" },
+          { id: "math", label: "Math" },
         ]}
         value={formatFilter}
         onChange={onFormat}
@@ -222,12 +227,12 @@ function FilterBar({
       <div className="flex gap-4">
         <ToggleChip
           active={savedOnly}
-          label="★ 저장한 문제만"
+          label="★ Saved only"
           onClick={() => onSavedOnly(!savedOnly)}
         />
         <ToggleChip
           active={pickOnly}
-          label="🏷 선생님 픽만"
+          label="🏷 Teacher picks only"
           onClick={() => onPickOnly(!pickOnly)}
         />
       </div>
@@ -317,6 +322,7 @@ function LogCard({
   onPickSaved: (pick: ProblemLogEntry["teacherPick"]) => void;
   onPickRemoved: () => void;
 }) {
+  const tz = useViewerTimezone();
   const preview = entry.passage.slice(0, 110);
 
   return (
@@ -330,12 +336,12 @@ function LogCard({
             <Badge>{FORMAT_LABEL[entry.format]}</Badge>
             {entry.format === "mc" && entry.correct !== null && (
               <Badge tone={entry.correct ? "green" : "red"}>
-                {entry.correct ? "정답" : "오답"}
+                {entry.correct ? "Correct" : "Incorrect"}
               </Badge>
             )}
-            {entry.teacherPick && <Badge tone="yellow">🏷 선생님 픽</Badge>}
+            {entry.teacherPick && <Badge tone="yellow">🏷 Teacher pick</Badge>}
             <span className="text-[11.5px] text-grey-500">
-              {formatKoreanDateTime(entry.attemptedAt)}
+              {formatKoreanDateTime(entry.attemptedAt, tz)}
             </span>
           </div>
           <p className="text-[13px] text-ink leading-[1.5]">
@@ -349,7 +355,7 @@ function LogCard({
             className={
               "text-[16px] shrink-0 " + (entry.saved ? "text-yellow" : "text-grey-300")
             }
-            title={entry.saved ? "저장됨" : "저장하기"}
+            title={entry.saved ? "Saved" : "Save"}
           >
             {entry.saved ? "★" : "☆"}
           </button>
@@ -423,8 +429,8 @@ function DetailBody({ entry }: { entry: ProblemLogEntry }) {
                 }
               >
                 {opt}
-                {isResponse && !isCorrect ? " (내 응답)" : ""}
-                {isCorrect ? " (정답)" : ""}
+                {isResponse && !isCorrect ? " (my answer)" : ""}
+                {isCorrect ? " (correct)" : ""}
               </div>
             );
           })}
@@ -433,17 +439,18 @@ function DetailBody({ entry }: { entry: ProblemLogEntry }) {
       {entry.format !== "mc" && typeof entry.response === "string" && (
         <div className="mb-3">
           <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">
-            내 응답
+            My response
           </div>
           {entry.format === "math" ? (
-            <img src={entry.response} alt="내 풀이" className="border border-grey-200 rounded-lg" />
+            // eslint-disable-next-line @next/next/no-img-element -- 캔버스에서 뽑은 data URL이라 next/image 최적화 대상이 아님
+            <img src={entry.response} alt="My work" className="border border-grey-200 rounded-lg" />
           ) : (
             <p className="text-[13px] text-ink whitespace-pre-wrap">{entry.response}</p>
           )}
         </div>
       )}
       <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">
-        해설
+        Explanation
       </div>
       <p className="text-[13px] text-grey-500 leading-[1.6]">{entry.explanation}</p>
     </div>
@@ -469,7 +476,7 @@ function RetrySection({
         onClick={() => setOpen(true)}
         className="text-[12px] font-bold px-4 py-2 rounded-lg border border-grey-200"
       >
-        🔁 다시 풀기
+        🔁 Try again
       </button>
     );
   }
@@ -479,7 +486,7 @@ function RetrySection({
     try {
       const res = await retryMcAttempt(entry.problemId, index);
       setSelected(index);
-      setResult(res.correct ? "정답입니다!" : res.done ? "오답입니다. 정답을 확인하세요." : "오답입니다. 다시 시도해보세요.");
+      setResult(res.correct ? "Correct!" : res.done ? "Incorrect. Check the answer." : "Incorrect. Try again.");
       if (res.done) {
         onRetried({
           ...entry,
@@ -509,7 +516,7 @@ function RetrySection({
         attemptedAt: new Date().toISOString(),
         teacherPick: null,
       });
-      setResult("제출했습니다.");
+      setResult("Submitted.");
     } finally {
       setSubmitting(false);
     }
@@ -528,7 +535,7 @@ function RetrySection({
         attemptedAt: new Date().toISOString(),
         teacherPick: null,
       });
-      setResult("제출했습니다.");
+      setResult("Submitted.");
     } finally {
       setSubmitting(false);
     }
@@ -536,7 +543,7 @@ function RetrySection({
 
   return (
     <div className="w-full">
-      <div className="text-[12px] font-bold text-ink mb-2">다시 풀기</div>
+      <div className="text-[12px] font-bold text-ink mb-2">Try again</div>
       {entry.format === "mc" && entry.options && (
         <div className="mb-2">
           {entry.options.map((opt, i) => (
@@ -568,7 +575,7 @@ function RetrySection({
               onClick={submitEssay}
               className="text-[12px] font-bold px-4 py-2 rounded-lg bg-green text-white disabled:opacity-50"
             >
-              제출하기
+              Submit
             </button>
           )}
         </div>
@@ -630,7 +637,7 @@ function TeacherPickPanel({
         onClick={() => setOpen(true)}
         className="text-[12px] font-bold px-4 py-2 rounded-lg border border-grey-200 mt-3"
       >
-        🏷 선생님 픽
+        🏷 Teacher pick
       </button>
     );
   }
@@ -638,7 +645,7 @@ function TeacherPickPanel({
   return (
     <div className="mt-3 border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5">
       <div className="text-[12px] font-bold text-ink mb-2">
-        어떤 부분에서 픽했나요? (복수 선택 가능)
+        Why did you pick this? (select all that apply)
       </div>
       <div className="flex gap-2 flex-wrap mb-2">
         {REASONS.map((r) => (
@@ -652,7 +659,7 @@ function TeacherPickPanel({
                 : "border-grey-200 text-grey-500")
             }
           >
-            {r}
+            {REASON_LABEL[r] ?? r}
           </button>
         ))}
       </div>
@@ -660,7 +667,7 @@ function TeacherPickPanel({
         <textarea
           value={reasonText}
           onChange={(e) => setReasonText(e.target.value)}
-          placeholder="사유를 입력하세요"
+          placeholder="Enter a reason"
           className="w-full min-h-[60px] px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] mb-2"
         />
       )}
@@ -670,7 +677,7 @@ function TeacherPickPanel({
           onClick={handleSave}
           className="text-[12px] font-bold px-4 py-2 rounded-lg bg-green text-white disabled:opacity-50"
         >
-          태깅 저장
+          Save tag
         </button>
         {entry.teacherPick && (
           <button
@@ -678,26 +685,26 @@ function TeacherPickPanel({
             onClick={handleRemove}
             className="text-[12px] font-semibold px-4 py-2 rounded-lg text-red"
           >
-            픽 취소
+            Remove pick
           </button>
         )}
         <button
           onClick={() => setOpen(false)}
           className="text-[12px] font-semibold px-4 py-2 rounded-lg text-grey-500"
         >
-          취소
+          Cancel
         </button>
       </div>
     </div>
   );
 }
 
-function formatKoreanDateTime(iso: string) {
-  return new Intl.DateTimeFormat("ko-KR", {
-    month: "long",
+function formatKoreanDateTime(iso: string, tz: string) {
+  return fmtIntlEn(new Date(iso), {
+    month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  }).format(new Date(iso));
+  }, tz);
 }

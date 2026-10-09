@@ -1,0 +1,321 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-045",
+ "chunkId": "rev-fable_judge-045",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-045.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-06-057",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Steam hissed from the iron, and the back room of the Manila tailor shop smelled of starch and scorched cotton. Putri had worked there for forty years under the owner's rule that no apprentice could sit while a customer was in the front room, even if the customer was only browsing. Her grandson Kiet, twelve and newly apprenticed, stood for three hours on his first Saturday while a man fingered every bolt of linen and bought nothing. Kiet asked why. Putri said that was simply how it was done. The narrator notes that she had once fainted at the cutting table during such a wait, and that the owner himself had never been seen standing longer than it took to collect the day's money. Yet when Kiet swayed, it was Putri who quietly slid a crate behind his knees, out of sight of the door.",
+   "question": "Which choice best describes the narrator's attitude toward the rule in the tailor shop?",
+   "options": [
+    "Admiring of its strict discipline",
+    "Amused by its old-fashioned charm",
+    "Critical of it, kind toward Putri",
+    "Neutral about it and about the owner"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-058",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Kingston's last diner before the highway keeps its coffee hot all night,\nand that is where my father, Errol, told me nothing.\nHe had run the coastal race faster than any man his age,\nthen slowed in the final mile to let me pass him.\nI, Hemi, stubborn as a fence post, wanted him to say it.\nHe salted his eggs and spoke about the weather.\nI hated him a little for the gift, and for the silence,\nand for the way he tipped the waitress twice what he could spare,\nas if generosity were a habit he could not break.\nI keep the medal in a drawer I seldom open.\nI am still not sure which of us won.",
+   "question": "Which choice best describes the speaker's attitude toward his father?",
+   "options": [
+    "Openly grateful for the father's victory",
+    "Bitterly certain that the father cheated",
+    "Lightly amused by the father's silence",
+    "Resentful yet reluctantly admiring"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-059",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "By the end of my first winter as Bogdan's apprentice, I believed there was nothing in wood he could not do. He could hear a crack before it opened and fit a joint so tight that water would not pass. Then one afternoon on the salt flat outside Tbilisi, where we had gone to collect weathered planks, he showed me a photograph of a cabinet he had built at twenty. It leaned slightly to the left. He said he had kept the photograph for fifty years to remember that his hands had once been ignorant. I, Bronislaw, had never imagined him ignorant of anything. I studied the crooked cabinet and felt, oddly, more devoted to him than before. That evening I watched him plane a board and noticed, for the first time, how carefully he checked a measurement twice.",
+   "question": "Which choice best describes the narrator's attitude toward Bogdan?",
+   "options": [
+    "Admiring, and newly aware of his growth",
+    "Disappointed, having learned of his flaws",
+    "Envious of the talent he was born with",
+    "Wary of the secrets he keeps from others"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-062",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Three things never changed on my route: the pothole by the market, the fare, and Kemoy stepping off at Charlotte Street with the same two words, Later, driver. For eleven years I took it as the careless habit of a busy man who fixed radios for a living. Then, in my last week before retirement, I carried my dead transistor into his shop, a narrow room crowded with gutted cabinets and coils of wire. Without looking up from the solder, he told me that his father had said goodbye once, at the airport, and had never come back. On my final morning he handed me the radio, humming with a cricket match, and stepped off at Charlotte Street. Later, driver, he said, and this time I heard something new inside the words. Behind him a vendor was hosing down the pavement, and the water ran gold under the early sun.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe the daily route a bus driver followed for eleven years before retiring",
+    "To explain how a radio repairman in Port of Spain learned his trade from his father",
+    "To suggest that people should never take the ordinary habits of others for granted",
+    "To show how the narrator comes to hear a passenger's usual parting words differently"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-06-063",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, Jiwoo would still recall the argument in the boarding-house kitchen in Krakow, over the four hundred zloty he owed his uncle. His uncle insisted the money had been handed over on a Tuesday, in cash, beside the stove. Jiwoo remembered a Thursday and an envelope. Nneka, who rented the room above and had been peeling potatoes that evening, was asked to settle it. She described a Wednesday, a folded bank slip, and an uncle who was laughing. At first Jiwoo resented her for complicating things. Only later, writing to her from Seoul, did he admit that her version had made both men stop shouting, because neither could be entirely right anymore. He repaid the debt that winter. Nneka's reply came on thin blue paper, smelling faintly of the dill she still grew on her windowsill.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show how a third, conflicting account eased a family dispute by unsettling certainty",
+    "To recount a disagreement over the exact day a sum of money changed hands in a kitchen",
+    "To describe Jiwoo's letters to a former neighbor after he moved away from Krakow",
+    "To argue that memories of past events are never reliable enough to be trusted"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-06-064",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Hedwig was a legend before I ever met her. In our orchestra it was said that she could hear a single flat note from the back of a cathedral, and I, the youngest of the violinists, supposed she had been born with such ears. One evening our train to Saint-Louis was delayed, and the company crowded into the station cafe at Dakar. While the others played cards, Hedwig sat apart, copying a score by hand and humming each line under her breath, her pen hand stained to the knuckle. She had done this, the oboist whispered to me, every night for thirty years. When we reached Saint-Louis, I bought a cheap notebook and began copying my own parts before sleeping. Outside the cafe that evening, a boy had been selling roasted peanuts in paper cones, calling out the price in three languages.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To recount a delayed train journey during which an orchestra waited in a station cafe",
+    "To show the narrator coming to see a conductor's fame as earned by labor, not gift",
+    "To describe the musical duties of the youngest violinist in a touring orchestra",
+    "To suggest that every talented person must work very hard to deserve their fame"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-06-066",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "After midnight, the last bus out of central Kyoto carried only the two of them and a driver who kept the radio low. Silas held the accident report on his knee, the one his father had told him to sign. It said the bicycle had swerved without warning. Sachiko, whose mother rented the rooms above his father's shop, watched him read it twice. Hers had been the bicycle; her wrist was still wrapped in gauze. Silas remembered glancing at his telephone while backing his father's van out of the alley, and he remembered, too, that she had not mentioned this to anyone. At the next stop he borrowed her pen, crossed out a line, and wrote in the margin in small, careful letters. The bus turned onto a wide avenue, where the shuttered fish stalls glistened under the rain.",
+   "question": "Based on the text, why does Silas most likely change the report?",
+   "options": [
+    "He fears that Sachiko will go to the police if the statement stays as it was written.",
+    "He knows the report hides his own role in the accident, which Sachiko never revealed.",
+    "He wants to win the gratitude of Sachiko, which a corrected report will likely bring.",
+    "He was ordered by his father to fix a mistake in the report before he could sign it."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-06-067",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "When the mayor asked me to meet him in the shuttered cinema, I knew he wanted something he could not ask for in daylight. Dust lay on the velvet seats, and the screen hung gray and slack, like a sail with no wind. Joaquim spoke quickly. If I told the provincial inspectors that the fever had passed, the summer visitors would return, the cinema would reopen, and the town might survive another year. I thought of the Ferreira boy, still coughing in the back room of my clinic. My hands would not stay still; I folded and refolded my gloves. Still, as he talked, I caught myself picturing the lobby bright again, children lined up for sweets, and the thought warmed me before I could stop it. Above us, a pigeon shifted in the projection booth, scattering a little rain of plaster onto the aisle.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Hopeful, as the narrator looks forward to the reopening of the town's cinema",
+    "Optimistic, with only a slight undercurrent of unease about the mayor's plan",
+    "Uneasy, though touched by a faint and unwelcome glimmer of hope for the town",
+    "Nostalgic, as the narrator recalls the summers when the cinema was still busy"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-06-069",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Smells of boiled cabbage and cold stone filled the stairwell where Roxana waited for me, her coat still dusted with snow from the courtyard. For a month she had kept me on the bench while our fencing team won, using the footwork drills I had drawn for her in my notebook. The newspapers had printed only her name. I meant to walk past her without a word. Instead she held out my notebook, its pages now crowded with her own notes in the margins, each one beginning with my initials. Tomorrow you fence first, she said, and they will ask you where the drills came from. I took the notebook and found that I could not speak. From the floor above came the scrape of a neighbor dragging a samovar across the boards.",
+   "question": "Which choice best describes the relationship between the narrator and Roxana as presented in the text?",
+   "options": [
+    "Beneath the narrator's resentment, the coach quietly honors the narrator's share in their work.",
+    "The narrator's resentment toward the coach has hardened into a lasting refusal to speak.",
+    "The coach has long relied on the narrator to defend her reputation in the newspapers.",
+    "Like most coaches and athletes, they share a formal bond built mainly on obedience."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-06-070",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, Nicolas would remember the boots more clearly than the songs. Every Saturday that last autumn, before their set in the plaza, Sergio left his left boot at a shoe repair stall near the cathedral in Seville, where an old cobbler glued the split sole back together without comment. The duo was drawing fewer listeners each week, though neither of them said so. Nicolas noticed that Sergio had begun to miss the high note in their closing song and to cover it with a flourish on the guitar; Nicolas, in turn, pretended not to hear. Each Saturday the cobbler held the boot up to the light, pressed the seam with his thumb, and handed it back. Each week the glue held for a few days, and then the sole began, quietly, to open again. One evening Nicolas saw Sergio wince as he stepped onto a curb, the boot gaping at the toe, and still say nothing. After the stall closed, the cobbler swept leather scraps into the gutter, where pigeons inspected them and moved on.",
+   "question": "In the text, the boot that is repeatedly repaired most likely symbolizes which of the following?",
+   "options": [
+    "Sergio's pride in keeping up a neat appearance before the audience in the plaza",
+    "The duo's habit of covering over their decline instead of facing it openly",
+    "The cobbler's quiet loyalty to the regular customers who visit his stall",
+    "The general hardships of earning a living as street musicians in a big city"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-071",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "By the third week of term, Dvora still sat at the farthest table in the seed-saving cooperative in Haifa, sorting lentils without a word to me. I was the new teacher, and she had made it plain that she considered me temporary. Her father, I learned from the director, was to be moved from his farm in the hills to a small room in the city, and he had refused to go. One afternoon she showed me a cabinet of glass jars, each labeled in faded ink with the name of a village that no longer appeared on any map. These were carried here in coat pockets, she said. Some of them still come up every spring. I watched her lift a jar of dark wheat and turn it slowly, as if weighing it. The next morning, she asked me for an empty jar and a label, and she wrote the name of her father's farm on it in careful letters. Rain fell on the tin roof all that day, and the director kept the stove burning in the back room.",
+   "question": "In the text, the labeled jars of seeds most likely symbolize which of the following?",
+   "options": [
+    "The cooperative's success in selling its grain to many of the nearby villages",
+    "Dvora's distrust of the new teacher who has recently joined the cooperative",
+    "The hope that something of a home can survive being carried somewhere new",
+    "The loss of farmland that has been swallowed up by the growing city nearby"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-072",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Twelve hours to Chiang Mai, two berths, one pot of tea: those were the terms of the journey Judge Aung had invited me on. For six years I had typed his rulings late into the night while my mother's shop closed and my own law exams went untaken. He had never once asked what those nights cost me, and I had added each of them, silently, to a ledger I kept in the dark. Somewhere past Lampang he set down his cup and told me that he had refused a promotion, twice, so that I would not be reassigned to a stranger. I had not known. I am Linh, I wanted to say, and I have been keeping the wrong accounts. Instead I poured him more tea. Outside, the hills went blue, and a vendor passed along the corridor with a basket of sticky rice.",
+   "question": "As used in the text, the phrase “a ledger I kept in the dark” most nearly suggests",
+   "options": [
+    "a written record of the judge's rulings that the narrator typed late at night",
+    "a secret plan to leave the judge's office and finally sit for the law exams",
+    "a silent tally of resentments the narrator had been keeping against Aung",
+    "a debt of money the narrator owed to her mother after the shop had closed"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-073",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Amelie had known Matthias since they were six, and for most of those years they had communicated in nods across the school music room in Marseille where both now taught. His reputation as the finest piano teacher in the city had arrived slowly and then all at once, after three of his pupils won the regional competition. This spring, sorting old files, Amelie found the pieces those pupils had played, marked in her own handwriting, and beside them his notes thanking her for fingerings she had once suggested and then forgotten. She understood that his fame stood partly on her forgotten afternoons. When he came in, she held up the folder. Matthias only nodded, the way he always had, but he did not look away. The radiator ticked under the window, and somewhere down the hall a student was practicing scales in the wrong key.",
+   "question": "As used in the text, the phrase “his fame stood partly on her forgotten afternoons” most nearly suggests that",
+   "options": [
+    "Matthias became famous only after Amelie stopped teaching in the afternoons",
+    "Amelie resented the long afternoons she had spent sorting files for Matthias",
+    "Matthias's reputation was far weaker than most people in the city believed",
+    "Matthias's success rested in part on help Amelie gave and failed to remember"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-074",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Three rows of tea beneath the Glasgow glass,\ntwo lanterns, and one ledger on the sill:\nso Donal kept the hothouse, year on year,\nand kept, as well, a grudge he would not spill.\nThen Yuying came with chain and measuring rod\nto mark the boundary his father lost;\nshe paced the beds and did not speak of blame,\nbut paused where every bud lay black with frost.\nHe watched her kneel and cup a withered leaf\nas if it were a sparrow, small and cold.\nHis anger, long a stone inside his coat,\ngrew lighter than the rain upon the panes.\nHe showed her where the oldest bushes stood.\nOutside, the river barges sounded low,\nand steam rose from the gutters of the town.",
+   "question": "As used in the text, the phrase “a stone inside his coat” most nearly suggests",
+   "options": [
+    "a resentment Donal had carried privately and heavily for a long time",
+    "a valuable object Donal had hidden away from the visiting surveyor",
+    "a physical illness Donal had suffered during the cold Glasgow winters",
+    "a weapon Donal had meant to use against the surveyor and her chain"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-075",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Dhaka's river port was where I first met Vikram, cooking lentils in the cramped galley of a cargo ship long before he ever touched a garden. Years later he tended the roses at the house Janelle bought on the edge of the city, and she asked him, more than once, why the previous owner had left so suddenly. Vikram only shrugged and went on pruning. I knew the answer, and so did he: the old man's son had been in trouble, and the sale had paid his debts. Vikram's silence was a lid pressed down on a simmering pot, held there so that the family's shame would not boil over into the neighborhood's talk. Janelle eventually stopped asking. In the galley, I remember, he had kept a dented brass spoon hanging from a nail, and he would let no one else stir with it.",
+   "question": "As used in the text, the phrase “a lid pressed down on a simmering pot” most nearly suggests",
+   "options": [
+    "an angry outburst that Vikram was struggling to hide from the new owner",
+    "a deliberate effort to keep a troubling secret contained to protect others",
+    "a cooking habit that Vikram had carried over from his years on the ship",
+    "a growing impatience with the new owner's repeated and nosy questions"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-076",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Gravel crunched under our boots as Edith led me down to the dry riverbed outside Busan, where the ferry had once crossed before the river shifted its course. It was ten years to the day since her husband had drowned there, and I, Nikos, her restless apprentice, had proposed a proper ceremony: candles, a hired priest, perhaps a stone carved with his name. Edith would have none of it. She knelt instead among the cracked plates of mud and pressed a single pebble into her coat pocket, as she had done each year. Grief, she told me, is a riverbed; the water leaves, but the shape stays. I said nothing, ashamed of my candles. On the far bank a farmer was leading an ox along the old ferry road, its bell clanking at every step.",
+   "question": "As used in the text, the phrase “the water leaves, but the shape stays” most nearly suggests that",
+   "options": [
+    "the river near Busan has dried up but may someday return to its old course",
+    "Edith believes her husband's body still lies somewhere beneath the riverbed",
+    "the sharpest pain of a loss may fade while its lasting imprint remains",
+    "simple public ceremonies last longer than a stone carved with a name"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-082",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Vermont had given Efua's cellar three inches of river by morning, and Ciara came down the steps in borrowed boots, grumbling before she reached the bottom. \"Your boat,\" she said, nodding at the half-planked hull on its sawhorses. \"Twelve years, and now it's sitting in a puddle like a soggy loaf.\" Efua, who had sailed tankers for thirty years, only lifted a lantern. Ciara kept talking: about the furnace, the mud, the smell. Then the light caught the keel, and she stopped. Water had risen just high enough to lap the bottom board, and the hull, for the first time, was floating, a finger's width off its stands. Neither woman spoke. Ciara crouched and laid her palm against the cold, steady side of it, as carefully as if it might startle.",
+   "question": "Which choice best describes the shift in tone that occurs in the passage?",
+   "options": [
+    "It shifts from cheerful curiosity to quiet disappointment as the flood damage becomes clear.",
+    "It shifts from practical worry to open anger as Ciara blames Efua for the flooded cellar.",
+    "It shifts from teasing complaint to hushed wonder when the unfinished hull begins to float.",
+    "It shifts from solemn grief to playful relief when the furnace is found undamaged by water."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-083",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Chalk dust, the hum of a ceiling fan, and the sour smell of photocopies greeted Sharda each morning at the language school in Mumbai. She had moved there in June, and Noa, who had followed her from Pune a month later, still sat beside her in the back row. They traded jokes in the margins of their grammar sheets, mocking the teacher's fondness for the passive voice. Sharda's laughter came easily until the day she noticed Noa's notebook was missing. Noa shrugged and said she had left it at home. That afternoon Sharda found the notebook inside her own bag, its pages filled with Sharda's absent lessons copied out in Noa's careful hand, every week she had been sick. She held it for a long moment without turning a single page.",
+   "question": "Which choice best describes a shift in tone in the passage?",
+   "options": [
+    "It moves from nervous anticipation to calm acceptance as Sharda adjusts to the new school.",
+    "It moves from bitter rivalry to cautious friendship as Noa begins sharing her notes.",
+    "It moves from formal description to sharp criticism of the teacher's methods.",
+    "It moves from playful mischief to stunned gratitude as Sharda grasps Noa's hidden effort."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-084",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Four rules for the lighthouse at Lyon's river bend:\nwipe the lens at dusk, log the barges,\nnever leave the lamp alone,\nand do not listen to the quay.\n\nCamille kept them all for Talon's sake,\nand Talon kept them, mostly, for hers.\nBut someone on the quay had said\nhe would not come home from college,\nand the baker said it to her twice.\n\nTonight she wipes the lens too hard.\nThen she finds his note beneath the logbook,\nfolded small in his crooked hand:\nleave the lamp on for me in May.\n\nShe laughs once, alone in the glass room,\nand lets the beam swing wide across the water.",
+   "question": "Which choice best describes the shift in tone in the poem?",
+   "options": [
+    "It moves from anxious strictness to relieved warmth when Camille finds her son's note.",
+    "It moves from joyful celebration to grief when Camille hears the rumor about Talon.",
+    "It moves from detached observation to anger directed at the baker on the quay.",
+    "It moves from playful mockery of the rules to solemn respect for the lighthouse."
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-045 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-045.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-06-057 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nSteam hissed from the iron, and the back room of the Manila tailor shop smelled of starch and scorched cotton. Putri had worked there for forty years under the owner's rule that no apprentice could sit while a customer was in the front room, even if the customer was only browsing. Her grandson Kiet, twelve and newly apprenticed, stood for three hours on his first Saturday while a man fingered every bolt of linen and bought nothing. Kiet asked why. Putri said that was simply how it was done. The narrator notes that she had once fainted at the cutting table during such a wait, and that the owner himself had never been seen standing longer than it took to collect the day's money. Yet when Kiet swayed, it was Putri who quietly slid a crate behind his knees, out of sight of the door.\n\n[질문] Which choice best describes the narrator's attitude toward the rule in the tailor shop?\nA) Admiring of its strict discipline\nB) Amused by its old-fashioned charm\nC) Critical of it, kind toward Putri\nD) Neutral about it and about the owner\n### lit40-medium-06-058 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nKingston's last diner before the highway keeps its coffee hot all night,\nand that is where my father, Errol, told me nothing.\nHe had run the coastal race faster than any man his age,\nthen slowed in the final mile to let me pass him.\nI, Hemi, stubborn as a fence post, wanted him to say it.\nHe salted his eggs and spoke about the weather.\nI hated him a little for the gift, and for the silence,\nand for the way he tipped the waitress twice what he could spare,\nas if generosity were a habit he could not break.\nI keep the medal in a drawer I seldom open.\nI am still not sure which of us won.\n\n[질문] Which choice best describes the speaker's attitude toward his father?\nA) Openly grateful for the father's victory\nB) Bitterly certain that the father cheated\nC) Lightly amused by the father's silence\nD) Resentful yet reluctantly admiring\n### lit40-medium-06-059 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nBy the end of my first winter as Bogdan's apprentice, I believed there was nothing in wood he could not do. He could hear a crack before it opened and fit a joint so tight that water would not pass. Then one afternoon on the salt flat outside Tbilisi, where we had gone to collect weathered planks, he showed me a photograph of a cabinet he had built at twenty. It leaned slightly to the left. He said he had kept the photograph for fifty years to remember that his hands had once been ignorant. I, Bronislaw, had never imagined him ignorant of anything. I studied the crooked cabinet and felt, oddly, more devoted to him than before. That evening I watched him plane a board and noticed, for the first time, how carefully he checked a measurement twice.\n\n[질문] Which choice best describes the narrator's attitude toward Bogdan?\nA) Admiring, and newly aware of his growth\nB) Disappointed, having learned of his flaws\nC) Envious of the talent he was born with\nD) Wary of the secrets he keeps from others\n### lit40-medium-06-062 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nThree things never changed on my route: the pothole by the market, the fare, and Kemoy stepping off at Charlotte Street with the same two words, Later, driver. For eleven years I took it as the careless habit of a busy man who fixed radios for a living. Then, in my last week before retirement, I carried my dead transistor into his shop, a narrow room crowded with gutted cabinets and coils of wire. Without looking up from the solder, he told me that his father had said goodbye once, at the airport, and had never come back. On my final morning he handed me the radio, humming with a cricket match, and stepped off at Charlotte Street. Later, driver, he said, and this time I heard something new inside the words. Behind him a vendor was hosing down the pavement, and the water ran gold under the early sun.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe the daily route a bus driver followed for eleven years before retiring\nB) To explain how a radio repairman in Port of Spain learned his trade from his father\nC) To suggest that people should never take the ordinary habits of others for granted\nD) To show how the narrator comes to hear a passenger's usual parting words differently\n### lit40-medium-06-063 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nYears later, Jiwoo would still recall the argument in the boarding-house kitchen in Krakow, over the four hundred zloty he owed his uncle. His uncle insisted the money had been handed over on a Tuesday, in cash, beside the stove. Jiwoo remembered a Thursday and an envelope. Nneka, who rented the room above and had been peeling potatoes that evening, was asked to settle it. She described a Wednesday, a folded bank slip, and an uncle who was laughing. At first Jiwoo resented her for complicating things. Only later, writing to her from Seoul, did he admit that her version had made both men stop shouting, because neither could be entirely right anymore. He repaid the debt that winter. Nneka's reply came on thin blue paper, smelling faintly of the dill she still grew on her windowsill.\n\n[질문] Which choice best states the main purpose of the text?\nA) To show how a third, conflicting account eased a family dispute by unsettling certainty\nB) To recount a disagreement over the exact day a sum of money changed hands in a kitchen\nC) To describe Jiwoo's letters to a former neighbor after he moved away from Krakow\nD) To argue that memories of past events are never reliable enough to be trusted\n### lit40-medium-06-064 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nHedwig was a legend before I ever met her. In our orchestra it was said that she could hear a single flat note from the back of a cathedral, and I, the youngest of the violinists, supposed she had been born with such ears. One evening our train to Saint-Louis was delayed, and the company crowded into the station cafe at Dakar. While the others played cards, Hedwig sat apart, copying a score by hand and humming each line under her breath, her pen hand stained to the knuckle. She had done this, the oboist whispered to me, every night for thirty years. When we reached Saint-Louis, I bought a cheap notebook and began copying my own parts before sleeping. Outside the cafe that evening, a boy had been selling roasted peanuts in paper cones, calling out the price in three languages.\n\n[질문] Which choice best states the main purpose of the text?\nA) To recount a delayed train journey during which an orchestra waited in a station cafe\nB) To show the narrator coming to see a conductor's fame as earned by labor, not gift\nC) To describe the musical duties of the youngest violinist in a touring orchestra\nD) To suggest that every talented person must work very hard to deserve their fame\n### lit40-medium-06-066 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nAfter midnight, the last bus out of central Kyoto carried only the two of them and a driver who kept the radio low. Silas held the accident report on his knee, the one his father had told him to sign. It said the bicycle had swerved without warning. Sachiko, whose mother rented the rooms above his father's shop, watched him read it twice. Hers had been the bicycle; her wrist was still wrapped in gauze. Silas remembered glancing at his telephone while backing his father's van out of the alley, and he remembered, too, that she had not mentioned this to anyone. At the next stop he borrowed her pen, crossed out a line, and wrote in the margin in small, careful letters. The bus turned onto a wide avenue, where the shuttered fish stalls glistened under the rain.\n\n[질문] Based on the text, why does Silas most likely change the report?\nA) He fears that Sachiko will go to the police if the statement stays as it was written.\nB) He knows the report hides his own role in the accident, which Sachiko never revealed.\nC) He wants to win the gratitude of Sachiko, which a corrected report will likely bring.\nD) He was ordered by his father to fix a mistake in the report before he could sign it.\n### lit40-medium-06-067 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nWhen the mayor asked me to meet him in the shuttered cinema, I knew he wanted something he could not ask for in daylight. Dust lay on the velvet seats, and the screen hung gray and slack, like a sail with no wind. Joaquim spoke quickly. If I told the provincial inspectors that the fever had passed, the summer visitors would return, the cinema would reopen, and the town might survive another year. I thought of the Ferreira boy, still coughing in the back room of my clinic. My hands would not stay still; I folded and refolded my gloves. Still, as he talked, I caught myself picturing the lobby bright again, children lined up for sweets, and the thought warmed me before I could stop it. Above us, a pigeon shifted in the projection booth, scattering a little rain of plaster onto the aisle.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Hopeful, as the narrator looks forward to the reopening of the town's cinema\nB) Optimistic, with only a slight undercurrent of unease about the mayor's plan\nC) Uneasy, though touched by a faint and unwelcome glimmer of hope for the town\nD) Nostalgic, as the narrator recalls the summers when the cinema was still busy\n### lit40-medium-06-069 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nSmells of boiled cabbage and cold stone filled the stairwell where Roxana waited for me, her coat still dusted with snow from the courtyard. For a month she had kept me on the bench while our fencing team won, using the footwork drills I had drawn for her in my notebook. The newspapers had printed only her name. I meant to walk past her without a word. Instead she held out my notebook, its pages now crowded with her own notes in the margins, each one beginning with my initials. Tomorrow you fence first, she said, and they will ask you where the drills came from. I took the notebook and found that I could not speak. From the floor above came the scrape of a neighbor dragging a samovar across the boards.\n\n[질문] Which choice best describes the relationship between the narrator and Roxana as presented in the text?\nA) Beneath the narrator's resentment, the coach quietly honors the narrator's share in their work.\nB) The narrator's resentment toward the coach has hardened into a lasting refusal to speak.\nC) The coach has long relied on the narrator to defend her reputation in the newspapers.\nD) Like most coaches and athletes, they share a formal bond built mainly on obedience.\n### lit40-medium-06-070 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nYears later, Nicolas would remember the boots more clearly than the songs. Every Saturday that last autumn, before their set in the plaza, Sergio left his left boot at a shoe repair stall near the cathedral in Seville, where an old cobbler glued the split sole back together without comment. The duo was drawing fewer listeners each week, though neither of them said so. Nicolas noticed that Sergio had begun to miss the high note in their closing song and to cover it with a flourish on the guitar; Nicolas, in turn, pretended not to hear. Each Saturday the cobbler held the boot up to the light, pressed the seam with his thumb, and handed it back. Each week the glue held for a few days, and then the sole began, quietly, to open again. One evening Nicolas saw Sergio wince as he stepped onto a curb, the boot gaping at the toe, and still say nothing. After the stall closed, the cobbler swept leather scraps into the gutter, where pigeons inspected them and moved on.\n\n[질문] In the text, the boot that is repeatedly repaired most likely symbolizes which of the following?\nA) Sergio's pride in keeping up a neat appearance before the audience in the plaza\nB) The duo's habit of covering over their decline instead of facing it openly\nC) The cobbler's quiet loyalty to the regular customers who visit his stall\nD) The general hardships of earning a living as street musicians in a big city\n### lit40-medium-06-071 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nBy the third week of term, Dvora still sat at the farthest table in the seed-saving cooperative in Haifa, sorting lentils without a word to me. I was the new teacher, and she had made it plain that she considered me temporary. Her father, I learned from the director, was to be moved from his farm in the hills to a small room in the city, and he had refused to go. One afternoon she showed me a cabinet of glass jars, each labeled in faded ink with the name of a village that no longer appeared on any map. These were carried here in coat pockets, she said. Some of them still come up every spring. I watched her lift a jar of dark wheat and turn it slowly, as if weighing it. The next morning, she asked me for an empty jar and a label, and she wrote the name of her father's farm on it in careful letters. Rain fell on the tin roof all that day, and the director kept the stove burning in the back room.\n\n[질문] In the text, the labeled jars of seeds most likely symbolize which of the following?\nA) The cooperative's success in selling its grain to many of the nearby villages\nB) Dvora's distrust of the new teacher who has recently joined the cooperative\nC) The hope that something of a home can survive being carried somewhere new\nD) The loss of farmland that has been swallowed up by the growing city nearby\n### lit40-medium-06-072 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nTwelve hours to Chiang Mai, two berths, one pot of tea: those were the terms of the journey Judge Aung had invited me on. For six years I had typed his rulings late into the night while my mother's shop closed and my own law exams went untaken. He had never once asked what those nights cost me, and I had added each of them, silently, to a ledger I kept in the dark. Somewhere past Lampang he set down his cup and told me that he had refused a promotion, twice, so that I would not be reassigned to a stranger. I had not known. I am Linh, I wanted to say, and I have been keeping the wrong accounts. Instead I poured him more tea. Outside, the hills went blue, and a vendor passed along the corridor with a basket of sticky rice.\n\n[질문] As used in the text, the phrase “a ledger I kept in the dark” most nearly suggests\nA) a written record of the judge's rulings that the narrator typed late at night\nB) a secret plan to leave the judge's office and finally sit for the law exams\nC) a silent tally of resentments the narrator had been keeping against Aung\nD) a debt of money the narrator owed to her mother after the shop had closed\n### lit40-medium-06-073 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nAmelie had known Matthias since they were six, and for most of those years they had communicated in nods across the school music room in Marseille where both now taught. His reputation as the finest piano teacher in the city had arrived slowly and then all at once, after three of his pupils won the regional competition. This spring, sorting old files, Amelie found the pieces those pupils had played, marked in her own handwriting, and beside them his notes thanking her for fingerings she had once suggested and then forgotten. She understood that his fame stood partly on her forgotten afternoons. When he came in, she held up the folder. Matthias only nodded, the way he always had, but he did not look away. The radiator ticked under the window, and somewhere down the hall a student was practicing scales in the wrong key.\n\n[질문] As used in the text, the phrase “his fame stood partly on her forgotten afternoons” most nearly suggests that\nA) Matthias became famous only after Amelie stopped teaching in the afternoons\nB) Amelie resented the long afternoons she had spent sorting files for Matthias\nC) Matthias's reputation was far weaker than most people in the city believed\nD) Matthias's success rested in part on help Amelie gave and failed to remember\n### lit40-medium-06-074 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nThree rows of tea beneath the Glasgow glass,\ntwo lanterns, and one ledger on the sill:\nso Donal kept the hothouse, year on year,\nand kept, as well, a grudge he would not spill.\nThen Yuying came with chain and measuring rod\nto mark the boundary his father lost;\nshe paced the beds and did not speak of blame,\nbut paused where every bud lay black with frost.\nHe watched her kneel and cup a withered leaf\nas if it were a sparrow, small and cold.\nHis anger, long a stone inside his coat,\ngrew lighter than the rain upon the panes.\nHe showed her where the oldest bushes stood.\nOutside, the river barges sounded low,\nand steam rose from the gutters of the town.\n\n[질문] As used in the text, the phrase “a stone inside his coat” most nearly suggests\nA) a resentment Donal had carried privately and heavily for a long time\nB) a valuable object Donal had hidden away from the visiting surveyor\nC) a physical illness Donal had suffered during the cold Glasgow winters\nD) a weapon Donal had meant to use against the surveyor and her chain\n### lit40-medium-06-075 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nDhaka's river port was where I first met Vikram, cooking lentils in the cramped galley of a cargo ship long before he ever touched a garden. Years later he tended the roses at the house Janelle bought on the edge of the city, and she asked him, more than once, why the previous owner had left so suddenly. Vikram only shrugged and went on pruning. I knew the answer, and so did he: the old man's son had been in trouble, and the sale had paid his debts. Vikram's silence was a lid pressed down on a simmering pot, held there so that the family's shame would not boil over into the neighborhood's talk. Janelle eventually stopped asking. In the galley, I remember, he had kept a dented brass spoon hanging from a nail, and he would let no one else stir with it.\n\n[질문] As used in the text, the phrase “a lid pressed down on a simmering pot” most nearly suggests\nA) an angry outburst that Vikram was struggling to hide from the new owner\nB) a deliberate effort to keep a troubling secret contained to protect others\nC) a cooking habit that Vikram had carried over from his years on the ship\nD) a growing impatience with the new owner's repeated and nosy questions\n### lit40-medium-06-076 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nGravel crunched under our boots as Edith led me down to the dry riverbed outside Busan, where the ferry had once crossed before the river shifted its course. It was ten years to the day since her husband had drowned there, and I, Nikos, her restless apprentice, had proposed a proper ceremony: candles, a hired priest, perhaps a stone carved with his name. Edith would have none of it. She knelt instead among the cracked plates of mud and pressed a single pebble into her coat pocket, as she had done each year. Grief, she told me, is a riverbed; the water leaves, but the shape stays. I said nothing, ashamed of my candles. On the far bank a farmer was leading an ox along the old ferry road, its bell clanking at every step.\n\n[질문] As used in the text, the phrase “the water leaves, but the shape stays” most nearly suggests that\nA) the river near Busan has dried up but may someday return to its old course\nB) Edith believes her husband's body still lies somewhere beneath the riverbed\nC) the sharpest pain of a loss may fade while its lasting imprint remains\nD) simple public ceremonies last longer than a stone carved with a name\n### lit40-medium-06-082 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nVermont had given Efua's cellar three inches of river by morning, and Ciara came down the steps in borrowed boots, grumbling before she reached the bottom. \"Your boat,\" she said, nodding at the half-planked hull on its sawhorses. \"Twelve years, and now it's sitting in a puddle like a soggy loaf.\" Efua, who had sailed tankers for thirty years, only lifted a lantern. Ciara kept talking: about the furnace, the mud, the smell. Then the light caught the keel, and she stopped. Water had risen just high enough to lap the bottom board, and the hull, for the first time, was floating, a finger's width off its stands. Neither woman spoke. Ciara crouched and laid her palm against the cold, steady side of it, as carefully as if it might startle.\n\n[질문] Which choice best describes the shift in tone that occurs in the passage?\nA) It shifts from cheerful curiosity to quiet disappointment as the flood damage becomes clear.\nB) It shifts from practical worry to open anger as Ciara blames Efua for the flooded cellar.\nC) It shifts from teasing complaint to hushed wonder when the unfinished hull begins to float.\nD) It shifts from solemn grief to playful relief when the furnace is found undamaged by water.\n### lit40-medium-06-083 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nChalk dust, the hum of a ceiling fan, and the sour smell of photocopies greeted Sharda each morning at the language school in Mumbai. She had moved there in June, and Noa, who had followed her from Pune a month later, still sat beside her in the back row. They traded jokes in the margins of their grammar sheets, mocking the teacher's fondness for the passive voice. Sharda's laughter came easily until the day she noticed Noa's notebook was missing. Noa shrugged and said she had left it at home. That afternoon Sharda found the notebook inside her own bag, its pages filled with Sharda's absent lessons copied out in Noa's careful hand, every week she had been sick. She held it for a long moment without turning a single page.\n\n[질문] Which choice best describes a shift in tone in the passage?\nA) It moves from nervous anticipation to calm acceptance as Sharda adjusts to the new school.\nB) It moves from bitter rivalry to cautious friendship as Noa begins sharing her notes.\nC) It moves from formal description to sharp criticism of the teacher's methods.\nD) It moves from playful mischief to stunned gratitude as Sharda grasps Noa's hidden effort.\n### lit40-medium-06-084 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nFour rules for the lighthouse at Lyon's river bend:\nwipe the lens at dusk, log the barges,\nnever leave the lamp alone,\nand do not listen to the quay.\n\nCamille kept them all for Talon's sake,\nand Talon kept them, mostly, for hers.\nBut someone on the quay had said\nhe would not come home from college,\nand the baker said it to her twice.\n\nTonight she wipes the lens too hard.\nThen she finds his note beneath the logbook,\nfolded small in his crooked hand:\nleave the lamp on for me in May.\n\nShe laughs once, alone in the glass room,\nand lets the beam swing wide across the water.\n\n[질문] Which choice best describes the shift in tone in the poem?\nA) It moves from anxious strictness to relieved warmth when Camille finds her son's note.\nB) It moves from joyful celebration to grief when Camille hears the rumor about Talon.\nC) It moves from detached observation to anger directed at the baker on the quay.\nD) It moves from playful mockery of the rules to solemn respect for the lighthouse."
+}

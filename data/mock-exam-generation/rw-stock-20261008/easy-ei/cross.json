@@ -1,0 +1,716 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 20,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 20,
+   "crossScored": 20,
+   "correct": {
+    "agree": 19,
+    "of": 20,
+    "fablePass": 20,
+    "opusPass": 19
+   },
+   "compliance": {
+    "agree": 20,
+    "of": 20,
+    "fablePass": 20,
+    "opusPass": 20
+   },
+   "hardFit": {
+    "agree": 20,
+    "of": 20,
+    "fablePass": 20,
+    "opusPass": 20
+   },
+   "adoptedBoth": 19,
+   "adoptedOneOnly": 1,
+   "yieldBoth": 0.95,
+   "costUsd": 2.3,
+   "costPerAdoptedBoth": 0.121,
+   "fableOnlyPass": 1,
+   "opusOnlyPass": 0
+  },
+  "sat_math": {
+   "cand": 0,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 0,
+   "crossScored": 0,
+   "correct": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "compliance": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "hardFit": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "adoptedBoth": 0,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 0,
+   "costUsd": 0,
+   "costPerAdoptedBoth": null,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 19,
+   "rw": 19,
+   "math": 0,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "easy-transitions-200",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A는 첫 문장(물에 산란)과의 직접 대조로 가장 논리적이며 타당. 다만 D(For example)가 \"a very different pattern\"이라는 일반 진술의 구체화로 읽힐 여지가 있어 경합 오답으로 다소 강한 편. 사실관계(코키 개구리의 직접발생, 육상 산란)는 정확. 저작권 문제 없음.",
+    "issue": "D 배제 근거(\"더 큰 집단의 예시가 아니다\")가 다소 약함. '매우 다른 방식을 따른다'는 일반 진술 뒤에 구체적 행동이 오므로 'For example'도 문맥상 일정 부분 성립 가능하며, 해설이 이 경합을 충분히 해소하지 못함."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "'Instead'는 바로 앞 문장보다 첫 문장(연못·개울에 알을 낳음)과 대조된다. 바로 앞 문장이 이미 차이를 말하고 있어서 약간 어색하지만 SAT 관행상 허용 범위다. 코키 개구리가 직접 발생한다는 내용은 사실이다.",
+    "issue": "D 오답 설명의 표현이 한국어와 약간 다르다(\"not an example of a larger group\" vs \"다른 사례가 아니라 같은 개구리의 대체 행동\"). 결론은 같아 경미함."
+   },
+   "cost": 0.150904
+  },
+  {
+   "cid": "easy-transitions-201",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(떠나려는 꿈)과 뒤 문장(계획을 접고 남기로 함)이 명확히 대조되어 B(However)가 유일하게 성립함. 오답 A/C/D는 각각 예시·유사·첨가로 전형적 오개념 선택지이며 규칙을 알면 즉시 배제됨. 가상의 작가·소설로 저작권 문제 없음. 한국어·영어 해설 결론 및 글자 참조 일치, 영어 해설에 한글 없음. 단일 개념(대조 전환어)·한 단계 추론으로 easy에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "'However, when her grandfather falls ill...'처럼 쉼표 뒤에 종속절이 와도 문법상 문제없다. 꿈과 그 꿈을 포기하는 내용 사이의 대조가 지문에 분명히 드러나 있어 easy 난이도에 맞다. 가상의 소설이며 저작권 문제는 없다.",
+    "issue": ""
+   },
+   "cost": 0.115676
+  },
+  {
+   "cid": "easy-transitions-202",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "첫 문장(극도의 건조함) → 둘째 문장(건조하고 맑은 공기 덕분에 망원경에 적합)은 명확한 원인-결과 관계로 C 'As a result'가 유일하게 성립. A·D(대조), B(예시)는 전형적 오개념 오답으로 규칙을 알면 즉시 배제 가능. 사실관계(아타카마 사막의 건조함, ALMA·파라날 등 천문대 존재) 정확. 한국어·영어 해설 모두 같은 결론과 글자 참조를 갖고 자연스러움. 사소한 점: 둘째 문장이 결과만이 아니라 원인(dry, clear air)을 다시 언급하고 '고도'라는 새 요소를 추가하지만 논리 흐름을 해치지 않음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "극도의 건조함과 망원경 설치 적합성은 인과 관계이므로 C가 맞다. 둘째 문장의 'high altitude'는 첫 문장에서 나온 내용이 아니지만, 'dry, clear air'가 첫 문장과 직접 이어지므로 인과 관계는 그대로 성립한다. 오답 3개는 흔한 연결어 오개념에 해당한다.",
+    "issue": ""
+   },
+   "cost": 0.135796
+  },
+  {
+   "cid": "easy-transitions-203",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "인과 관계가 지문에 명시적으로 드러나며(값싼 선불 요금 도입 → 우편물 두 배 증가), 한 단계 추론으로 D가 유일한 논리적 전환어. 오답은 대조·예시·유사 등 전형적 전환어 오개념으로 구성됨. 역사적 사실(1840 Penny Post, 수신자 부담·거리 기반 요금, 첫해 우편량 급증)도 정확. 한·영 해설 모두 D를 일관되게 뒷받침하고 선택지 참조 일치, 한글 혼입 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "한 번의 인과 추론만 필요한 전형적인 easy 문항이다. 우편물이 첫해에 두 배 넘게 늘었다는 내용은 1839년 약 7,600만 통에서 1840년 약 1억 6,900만 통으로 늘었다는 역사 기록과 맞는다. 오답 세 개(대조·예시·유사)는 모두 전형적인 오개념이다.",
+    "issue": ""
+   },
+   "cost": 0.11501800000000001
+  },
+  {
+   "cid": "easy-transitions-204",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞(몇 달 만에 소진, 잦은 교체) vs 뒤(10년 이상 지속)의 명확한 대조로 A가 유일한 정답. 오답 B·C·D는 각각 예시·결과·유사라는 전형적 오개념 선택지로 적절. 한·영 해설 결론과 글자 참조 일치, 영어 해설 자연스럽고 한글 없음. 사실 관계(초기 전구 단명, LED 장수명) 무리 없음. 단일 규칙·한 단계 추론·평이한 어휘로 easy 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "초기 전구의 짧은 수명과 LED의 긴 수명이 분명하게 대조되어 단서가 지문에 바로 드러난다. 오답(예시·결과·유사)은 전형적인 오개념 선택지로 easy 난이도에 적합하다. 다만 C는 '잦은 교체 비용이 LED 개발로 이어졌다'는 식으로 인과로 읽힐 여지가 아주 약간 있다.",
+    "issue": ""
+   },
+   "cost": 0.114174
+  },
+  {
+   "cid": "easy-transitions-205",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "앞 문장(죽은 듯 보임)과 뒤 문장(비 오면 다시 초록색으로 회복)은 명확한 대조 관계이므로 However가 유일하게 논리적임. 오답은 예시·유사·인과라는 전형적 전환어 오개념으로 구성되어 easy 기준에 부합. 해설 한·영 모두 정답 글자와 논리가 일치하고 모순 없음. 부활고사리의 생태 서술도 사실과 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "'looks completely dead'와 'turn bright green again'의 대조가 지문에 분명히 드러나 있다. 오답은 예시·유사·인과를 나타내는 연결어로, 흔히 헷갈리는 선택지들이다. 사실관계도 맞다(부활고사리는 건조 시 수분을 크게 잃었다가 비가 오면 하루 안에 회복한다).",
+    "issue": ""
+   },
+   "cost": 0.10800799999999999
+  },
+  {
+   "cid": "easy-transitions-206",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "Clara의 꿈(도시 유학)과 아버지의 고집(집에 남기) 사이의 명백한 대조이므로 However가 유일하게 논리적임. A·B·D는 각각 유사·예시·인과라는 전형적 오개념으로 그럴듯하되 규칙을 알면 즉시 배제됨. 가상의 소설·작가를 사용해 저작권 문제 없음. 한국어·영어 해설 모두 정답 C와 선택지 참조가 일치하고 자연스러움. 단일 개념(대조 전환어)으로 풀리는 easy 수준에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "꿈과 아버지의 반대가 명확히 대조됨. 단서가 직접적이고 한 단계 추론이라 easy에 적합. D(As a result)는 그럴듯한 오답이라 할 수 있음. 가상의 작품으로 보이며 저작권 문제는 없음.",
+    "issue": ""
+   },
+   "cost": 0.10013160000000002
+  },
+  {
+   "cid": "easy-transitions-207",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(뿌리가 파도를 늦추고 흙을 붙잡음) → 뒤 문장(마을 홍수 피해 감소)은 명확한 인과 관계이므로 D 'As a result'가 정답. A(대조), C(유사 추가)는 명백히 배제되고 B(예시)는 전형적 오개념으로 그럴듯함. 한·영 해설 모두 D를 일관되게 뒷받침하며 글자 참조 일치, 영어 해설에 한글 없음. 맹그로브 관련 사실도 정확. 단일 규칙·한 단계 추론으로 easy 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "명확한 인과 관계라서 한 단계 추론으로 풀 수 있다. B(예시)는 그럴듯한 오답으로 작동한다. 다만 '홍수 피해 감소'를 '보호 작용의 사례'로 읽을 여지가 아주 조금 있다. 그래도 D가 가장 논리적이라는 점은 분명하다.",
+    "issue": ""
+   },
+   "cost": 0.1101716
+  },
+  {
+   "cid": "easy-transitions-208",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(비싸고 거리별로 오르는 요금, 가정이 우편 사용 불가)과 빈칸 문장(단일 저렴 요금 도입)이 명확히 대조되므로 \"however\"가 정답. \"In 1840, however, the government...\" 위치도 자연스러움. 역사적 사실(1840년 Penny Black, 1년 내 우편량 2배 이상 증가)도 대체로 정확. 한국어·영어 해설 모두 정답 A를 일관되게 뒷받침하며 오답 배제 근거도 타당. 단일 규칙(대조 전환어)으로 풀리고 오답은 전형적 전환어 오개념이므로 easy에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "이전의 비싼 거리 비례 요금과 새로 도입된 낮은 균일 요금이 대조되는 구조라 정답은 however 하나뿐입니다. 오답들은 전형적인 연결어 오개념입니다. 사실관계도 맞습니다(Penny Black 1840년, 우편물 수 이듬해 약 2배 증가). 다만 'Before the 1830s'는 1840년 개혁과 시점이 살짝 어긋나 어색하지만 틀린 진술은 아닙니다.",
+    "issue": "한국어 해설은 '1840년 이전'이라고 했지만 지문은 'Before the 1830s'라고 씁니다. 사소한 불일치이며 결론에는 영향이 없습니다."
+   },
+   "cost": 0.1297196
+  },
+  {
+   "cid": "easy-transitions-209",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "앞 문장(재료가 비·부식에 강함)→뒤 문장(수십 년 지속)의 명확한 인과 관계로 B가 유일하게 성립. However는 대조 아님, For example은 예시 아님, Similarly는 비교 대상 없음. 해설 한·영 모두 글자 참조 일치, 한글 혼입 없음. 지문은 일반적 사실(네팔 1990년대 강철 보행교)로 저작권 우려 없음. 단일 규칙(인과 연결어)으로 한 단계 추론, 평이한 어휘 — easy에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "The blank sets up a single cause-and-effect step: the materials resist rain and rot, so the bridges last a long time. The wrong answers are believable. \"However\" can look right because the old and new bridges contrast. But the sentence just before the blank is already about the new bridges, so there's no contrast at the blank. The historical claim (\"in the 1990s\") is general background and isn't needed to solve the item.",
+    "issue": ""
+   },
+   "cost": 0.0999736
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-200",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "C가 메모 3·4를 정확히 결합해 '과학자들의 관심 이유'를 명시. A·B·D는 모두 메모에 근거한 사실이지만 목표(연구 이유)와 무관해 규칙 적용으로 바로 배제됨. 한·영 해설 모두 선택지 글자 일치, 모순 없음. 아홀로틀 관련 사실도 정확. 쉬운 난이도에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "C만 연구 이유를 다루어 목표와 직접 대응하므로 easy 난이도에 적합하다. 오답들은 메모 내용을 정확히 옮긴 그럴듯한 진술이다.",
+    "issue": ""
+   },
+   "cost": 0.11573599999999999
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-201",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "목표(줄거리 설명)에 부합하는 선택지는 D뿐이며, A·B·C는 각각 작가 경력·문체·출간 연도/양식으로 전형적 오답 유형이다. 한국어·영어 해설 모두 결론과 글자 참조가 일치하고 정확하다. 가상의 작가·작품으로 저작권 문제 없음. easy 난이도에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "줄거리 vs 작가·문체·출간정보 구분 한 단계로 해결됨. 오답 선택지는 모두 노트에 근거하므로 그럴듯함. 인물과 작품은 가상으로 보임.",
+    "issue": ""
+   },
+   "cost": 0.11059680000000001
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-202",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A는 과거·현재 면적과 90% 이상 감소율을 모두 제시해 '얼마나 줄었는지'를 강조한다는 목표에 정확히 부합. B(위치·접경국), C(원인), D(과거 면적만)는 노트 내용과 일치하지만 목표를 충족하지 못하는 전형적 오답으로 적절. 한국어·영어 해설 모두 선택지 참조와 결론이 일치하며 모순 없음. 차드호 수치(1960년대 약 25,000㎢ → 현재 약 1,500㎢, 90% 이상 감소)는 통상 인용되는 수치와 부합. 지문·선택지 구조가 표준 Digital SAT rhetorical synthesis 형식이며 쉬운 난이도에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "이 문항은 목표 하나에 맞춰 하나의 규칙으로 푸는 전형적인 easy 문항이다. 오답은 각각 위치(B), 원인(C), 과거 면적만 제시(D)로, 그럴듯하게 들리지만 목표에는 맞지 않는다. 노트의 수치(25,000→1,500, 90% 넘게 감소)는 실제 자료와 대체로 일치한다.",
+    "issue": ""
+   },
+   "cost": 0.11466880000000002
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-203",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 B만 Penny Black을 직접 명명·정의하며, 오답 A·C·D는 모두 노트의 정확한 정보이지만 Penny Black 자체를 언급하지 않아 목표(소개)에 맞지 않는다. 한국어·영어 해설 모두 동일 결론과 선택지 참조를 가지며 모순 없음. 사실관계(1840년 5월 Penny Black, 빅토리아 여왕 초상, Rowland Hill 개혁) 정확. 단일 규칙(목표 문구와 선택지 내용 일치)으로 한 단계 추론이면 풀리므로 easy에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B만 Penny Black을 언급하고 정의하므로 한 단계로 풀린다. 사실관계(1840년 5월, 1페니, 빅토리아 여왕, 우편량 증가)도 정확하다. 오답 선택지는 모두 노트에 있는 관련 내용이라 그럴듯하지만 목표를 충족하지 못한다. easy 난이도에 적합하다.",
+    "issue": ""
+   },
+   "cost": 0.11493679999999999
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-204",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C 검산: 목표(작동 방식 설명)에 부합하는 메모(곤돌라에 띄워 넣고 바퀴 회전) 사용. A는 연도·수위 차, B는 건설 이전 상황, D는 정체 소개+메모 밖 평가로 명확히 배제되며 전형적 오답 패턴. 해설 한·영 동일 결론, 글자 참조 일치, 한글 없음. 팔커크 휠 사실관계(2002 개통, 24m, 11 locks, 4분 반회전) 정확. 메모 형식·문항 형식 SAT 표준에 부합. 난이도 easy 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "사실관계(2002년 개통, 수위 차 약 24m, 예전에는 갑문 11개로 하루 가까이 소요, 반 바퀴에 약 4분)가 맞다. 목표와 직접 일치하는 단서가 하나뿐인 easy 수준 문항이다. 오답 선택지는 모두 메모에 있는 관련 정보라서 그럴듯하다. 다만 D에는 메모에 없는 평가가 들어가 있어 조금 쉽게 배제된다.",
+    "issue": ""
+   },
+   "cost": 0.11674480000000001
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-205",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "D만이 재생 능력과 인간 조직 재생 연구라는 '이유'를 연결하며, A·B·C는 메모의 사실을 정확히 반영하되 과학자의 관심 이유를 담지 않아 규칙(목표 일치) 하나로 배제된다. 메모 내용 사실관계도 정확하고(아홀로틀 유형성숙, 재생 연구), 한·영 해설 결론 및 글자 참조 일치. 영어 해설에 한글 없음. D가 다른 선택지보다 길어 다소 눈에 띄는 점은 있으나 실제 SAT easy 문항에서도 흔한 패턴이므로 난이도 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "메모 하나(과학자들이 연구한다)와 목표를 연결하면 바로 풀리는 easy 문항이다. 오답은 모두 메모 내용과 맞지만 목표와 관련 없는 전형적 오답이다. 고칠 점은 한글 표기 오타 하나뿐이다.",
+    "issue": "한국어 해설에서 axolotl을 '아롤로틀'로 잘못 적었다(올바른 표기는 '아홀로틀'). 사소한 오타이며 논리에는 문제가 없다."
+   },
+   "cost": 0.1109868
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-206",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "가상의 작가·작품으로 저작권 문제 없음. 목표(문체 묘사)에 직접 대응하는 메모는 세 번째 하나뿐이며 A가 이를 정확히 사용. B(배경), C(줄거리), D(작가 경력)는 모두 메모에 충실하지만 목표와 무관한 전형적 오답으로 기능. 한 가지 규칙(목표 일치 여부)만으로 풀리므로 easy에 적합. 한국어·영어 해설 모두 선택지 참조가 일치하고 결론이 동일함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "가상의 작가·작품이다. 목표(문체)와 맞는 메모가 하나뿐이라 한 단계로 풀 수 있다. 오답은 배경·줄거리·작가 경력으로 이루어진 전형적인 오답 유형이다. 난이도 easy에 맞다.",
+    "issue": ""
+   },
+   "cost": 0.10681879999999999
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-207",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B는 '담수의 양'이라는 목표를 유일하게 직접 충족하며, 노트의 사실(20%, 1,642m, 300여 하천, 네르파)은 실제 알려진 정보와 일치한다. 오답은 각각 담수 관련 생물(A), 유입 하천(C), 깊이(D)로 목표와 인접하지만 '양'을 말하지 않는 전형적 오개념 선택지로 적절하다. 한·영 해설 결론과 글자 참조가 일치하고 영어 해설에 한글 없음. easy 난이도에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "사실(깊이 약 1,642m, 지표 담수 약 20%, 유입 하천 300여 개, 담수 물범 네르파) 정확. 목표와 직결되는 노트가 하나라 easy에 적합. D(깊이)와 C(유입 하천)는 '물의 양'과 헷갈릴 수 있는 그럴듯한 오답.",
+    "issue": ""
+   },
+   "cost": 0.1088928
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-208",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "목표(\"법이 허용한 것\")와 C의 \"allowed town councils to collect a small tax to fund free public libraries\"가 직접 대응. A는 사례, B·D는 법 이전 상황이라 전형적 오답으로 기능. 1850 Public Libraries Act·1852 Manchester 개관은 역사적 사실과 일치. 영어 해설은 한국어 해설과 동일 결론·글자 참조이며 자연스럽고 한글 없음. 노트 어휘 평이, 단일 규칙(목표-정보 직접 대응)으로 해결 가능하여 easy에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 C만 법이 허용한 내용(지방세 징수로 무료 도서관 재원 마련)을 진술함. A는 사례, B·D는 배경으로, 목표와 관련된 그럴듯한 오답임. 사실관계(1850년 법, 1852년 맨체스터 개관)도 정확함. easy 난이도에 적합함.",
+    "issue": ""
+   },
+   "cost": 0.1082148
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-209",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D만이 휠의 기능(배를 들어 올려 높이가 다른 두 운하 연결)을 서술하여 '목적' 설명 목표에 부합. A·B·C는 각각 연도/위치, 회전 시간, 휠 이전 상황만 다루는 전형적 오답(관련 없는 세부 사항)으로 easy 난이도에 적절. 노트 사실(2002년 개장, 24m, 11개 갑문, 약 5분)과 실제 Falkirk Wheel 정보 일치. 한·영 해설 모두 D를 일관되게 지지하며 글자 참조 정확, 영어 자연스럽고 한글 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 D만 휠의 기능(높이가 다른 운하 사이로 배를 옮김)을 설명함. C는 노트의 '운하 사이'라는 정보를 '스코틀랜드의 배'로 일반화했지만 오답 선택지라 문제가 되지 않음. 사실관계(2002년 개장, 약 24m, 회전 1회 약 5분)는 실제와 맞음. 오답들은 단순한 세부 사항이어서 easy 난이도에 적절함.",
+    "issue": ""
+   },
+   "cost": 0.11291680000000001
+  }
+ ]
+}

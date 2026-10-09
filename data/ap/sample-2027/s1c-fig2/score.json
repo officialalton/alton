@@ -1,0 +1,366 @@
+[
+ {
+  "key": "s1c-fig2-01-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "criterion"
+  ],
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig2-02-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:Correct value -4 not among options; 11 omits the 3f' term.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig2-03-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig2-04-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The correct value, -5/36, is not among the options (-4, -23/6, 23/36, -23/36).",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig2-05-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [],
+  "reasons": [
+   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
+  ],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig2-06-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:Correct answer 24 is not among the choices; key likely intended f(4)=3 or a different setup.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig2-07-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:Correct left sum is 38; no option matches. Option 44 equals the trapezoidal approximation, likely the intended key by mistake.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig2-08-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig2-09-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig2-10-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig2-11-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig2-12-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig2-13-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig2-14-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "criterion"
+  ],
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig2-15-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The table gives $7/m for each perpendicular side, but the stem says $5/m. Using $7 gives $733.21, which is not a choice, so the stem's value was used.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig2-16-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:Table gives g(2)=0, making q undefined at x=2; no option is correct.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig2-17-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:Correct left Riemann sum is 46, which is not among the choices 38, 20, 40, 39.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig2-18-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The correct value is -1, and none of the options (-5/3, 2, -2, -14) matches it.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig2-19-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver"
+  ],
+  "reasons": [
+   "solver_disagrees:No option matches the table entry at (-1,1) (slope 3). x+y gives 0 there. It is likely a typo in the table.",
+   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig2-20-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The table says R(6)=4.8 > R(4)=2.2, so R isn't decreasing as stated. The right sum from the table is 20.0 kWh, but every option says 14.0. Because R increases on [4,6], the under/over conclusion isn't justified either.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig2-21-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig2-22-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig2-23-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig2-24-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ }
+]

@@ -1,0 +1,315 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-058",
+ "chunkId": "rev-fable_judge-058",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-058.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-02-063",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Sensible women may always have a good measure of political influence of the right sort, if they choose. And it is in one sense a duty on their part to claim this influence, and to exert it, but always in the true womanly way. The influence of good sense, of a sound judgment, of good feeling may always he theirs. Let us see that we preserve this influence, and that we use it wisely. But let us cherish our happy immunities as women by keeping aloof from all public personal action in the political field.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from urging women to use influence to cautioning against public action.",
+    "It moves from mocking women's political views to praising their quiet sense.",
+    "It moves from doubting women's judgment to demanding full political rights.",
+    "It moves from calmly describing a duty to angrily rejecting all influence."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-064",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "On Twelfth Night the little ones were christened, and then the trooper bethought himself of his promise to get back soon. The storms had ceased, but worse had befallen; the sea was frozen over as far as eye reached, and the island was cut off from all communication with the outer world. There was nothing for it but to wait. It proved the longest and hardest winter any one then living could remember. Easter was at hand before the ice broke up, and let a fishing smack slip over to Ystad, on the mainland. It came back with news that set the whole island wondering.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It recounts a christening in detail, then explains why the trooper never returned.",
+    "It describes a delay caused by the frozen sea, then hints at surprising news.",
+    "It praises the island's winter beauty, then contrasts it with the mainland.",
+    "It presents the trooper's promise, then shows him breaking it on purpose."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-066",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "The testimony in such a case must, under the conditions of the present life, be forever inaccessible. It lies wholly outside the range of experience. However abundant it may be, we cannot expect to meet with it. And accordingly our failure to produce it does not raise even the slightest presumption against our theory. When conceived in this way, the belief in a future life is without scientific support; but at the same time it is placed beyond the need of scientific support and beyond the range of scientific criticism.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It presents evidence for a future life, then dismisses opposing objections.",
+    "It criticizes belief in a future life, then urges readers to abandon it.",
+    "It recounts a personal experience, then generalizes it into a theory.",
+    "It claims the evidence is unreachable, then draws a conclusion about criticism."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-072",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Where the ball passed, not one of us precisely knew; but I fancy it must have been over our heads, and that the wind of it may have contributed to our disaster.\n\nAt any rate, the boat sank by the stern, quite gently, in three feet of water, leaving the captain and myself, facing each other, on our feet. The other three took complete headers, and came up again, drenched and bubbling.\n\nSo far there was no great harm. No lives were lost, and we could wade ashore in safety. But there were all our stores at the bottom, and, to make things worse, only two guns out of five remained in a state for service. Mine I had snatched from my knees and held over my head, by a sort of instinct.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "He regards the sinking with calm good humor while noting the real losses.",
+    "He recalls the sinking with lasting terror and shame at his own panic.",
+    "He blames the captain angrily for steering the boat into danger.",
+    "He shows complete indifference to the loss of the stores and guns."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-073",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "I was not very uncomfortable, for I had not been all over into the water. I drove down to the lumber shed, took the squire in, and headed towards home. The senator was shivering with cold, though fortunately it was a very warm day for the season, and he did not absolutely suffer.\n\nIt had been cloudy and threatening rain all the afternoon and evening, and before we reached the main road it began to pour in torrents. I had an oil-cloth, which I put over the trunk and the mail. Under ordinary circumstances, a seven-mile ride in such a heavy rain would have been a great misfortune; but, as both of us had been in the river, it did not make much difference to us.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "He feels bitter frustration that the rain ruined an otherwise pleasant trip.",
+    "He accepts the downpour practically, since they were already soaked.",
+    "He is consumed by worry that the senator will fall seriously ill.",
+    "He takes quiet amusement in the squire's unfortunate soaking."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-074",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "\"See, Winter comes, to rule the varied year,\nSullen and sad, with all his rising train,\nVapours, and clouds, and storms. Be these my theme,\nThese! that exalt the soul to solemn thought,\nAnd heavenly musing. Welcome, kindred glooms!\nCongenial horrors, hail! with frequent foot,\nPleased have I, in my cheerful morn of life,\nWhen nursed by careless Solitude I lived,\nAnd sung of Nature with unceasing joy,\nPleased have I wander'd through your rough domain;\nTrod the pure virgin-snows, myself as pure;\nHeard the winds roar, and the big torrents burst;\nOr seen the deep-fermenting tempest brew'd\nIn the grim evening sky. Thus passed the time,\nTill through the lucid chambers of the south\nLook'd out the joyous Spring, look'd out, and smiled!\"",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "He dreads winter's arrival and longs only for the return of spring.",
+    "He treats winter with indifference, since it no longer affects him.",
+    "He welcomes winter's storms as kindred companions that lift the soul.",
+    "He regrets ever having wandered through winter's harsh domain."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-075",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "I have achieved none of those objects which the instinct of mankind especially prompts them to pursue, and the accomplishment of which must therefore beget a native satisfaction. The truly wise, after all their speculations, will be led into the common path, and, in homage to the human nature that pervades them, will gather gold, and till the earth, and set out trees, and build a house. But I have scorned such wisdom. I have rejected, also, the settled, sober, careful gladness of a man by his own fireside, with those around him whose welfare is committed to his trust and all their guidance to his fond authority.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "He takes triumphant pride in having escaped the common path of others.",
+    "He resents the wise for gathering gold while he remained poor.",
+    "He is confused about which goals mankind instinctively pursues.",
+    "He admits with rueful candor that he has spurned what others value."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-076",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "The police station lodging-house, where the soft side of a plank is the regulation couch, is next in order. The manner in which this police bed is \"made up\" is interesting in its simplicity. The loose planks that make the platform are simply turned over, and the job is done, with an occasional coat of white-wash thrown in to sweeten things. I know of only one easier way, but, so far as I am informed, it has never been introduced in this country. It used to be practised, if report spoke truly, in certain old-country towns.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "He views the police bed with dry mockery of its crude simplicity.",
+    "He sincerely admires the efficiency of the police bed's design.",
+    "He expresses open outrage and demands that the stations be reformed.",
+    "He feels nostalgic fondness for customs from old-country towns."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-077",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "The night was cloudy and black, and every line in the architecture of the largest building in the world was defined in light, even to the cross, which, as I have said before, is at the height of a mountain from the base. For about an hour it was a delicate but vast structure of shining lines, like a drawing of a glorious temple on the clouds. At eight, as the clock struck, flakes of fire burst from every point, and the whole building seemed started into flame. It was done by a simultaneous kindling of torches in a thousand points, a man stationed at each. The glare seemed to exceed that of noonday. No description can give an idea of it.\n\nI am not sure that I have not been a little tedious in describing the ceremonies of the holy week.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "He finds the illumination tiresome and wishes it had ended sooner.",
+    "He is awed by the spectacle yet worries he has described too much.",
+    "He doubts the religious meaning behind the week's ceremonies.",
+    "He is frightened by the sudden fire and fears for the building."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-078",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "Not that it must be for a moment supposed that our Women are destitute of affection. But unfortunately the passion of the moment predominates, in the Frail Sex, over every other consideration. This is, of course, a necessity arising from their unfortunate conformation. For as they have no pretensions to an angle, being inferior in this respect to the very lowest of the Isosceles, they are consequently wholly devoid of brain-power, and have neither reflection, judgment nor forethought, and hardly any memory. Hence, in their fits of fury, they remember no claims and recognize no distinctions.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "It argues that women are more affectionate by nature than men are.",
+    "It describes one woman's violent outburst and its consequences.",
+    "It gives the narrator's explanation of why women act on sudden passion.",
+    "It questions the reasoning ability of the lowest Isosceles figures."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-079",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "In the end she rejected both courses and decided for the riding costume. The reason she gave for this decision--the reason she gave herself--was that the riding costume would invest the call with an air of accident, of impulse. The real reason.\n\nIt may be that some feminine reader can guess why she chose the most startling, the most gracefully becoming, the most artlessly physical apparel in her wardrobe.\n\nShe said nothing to her father at lunch about her plans. Why should she speak of them? He might oppose; also, she might change her mind. After lunch she set out on her usual ride, galloping away into the hills--but she had put twenty-five dollars in bills in her trousers pocket.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "It shows a woman openly arguing with her father about her plans.",
+    "It shows the narrator criticizing the woman's choice of clothing.",
+    "It describes an ordinary ride taken purely for exercise in the hills.",
+    "It reveals a woman's concealed motives and quiet preparations for a call."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-080",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "Every hand was hard at work over its appointed task, and there was no evidence in that silent well-ordered hive, of the recent little revolution.\n\nWhen the mathematician, having made his way to his own work-bench, had passed his unerring hand over it, he found all as he had left it—not a thing disturbed; every tool, every scrap of metal, every morsel of wire lying intact. Even the little steel coil which had come to such sudden grief, had been carefully rewound into proper compass, and placed ready to hand by Isaac Habrecht. “It is correctly adjusted, I think?” he said, as Dasipodius took it up.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "It shows the workshop restored to order, with even the damage quietly mended.",
+    "It depicts a revolt in the workshop that is still spreading among workers.",
+    "It describes the mathematician's anger on discovering his tools missing.",
+    "It reveals that Isaac Habrecht damaged the steel coil on purpose."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-081",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "We see ourselves reflected in the characters that most interest us. Thus have we hoped and loved, sinned and suffered. A mirror for the face has a bewitching attraction for all nations; what wonder then that a mirror for the soul is so generally fascinating? It is the business of a judicious parent to guide this instinct aright, and thus make it productive of genuine culture, as well as of amusement. The profligate and strongly-exciting works, with which our circulating libraries are overrun, operate on the mind as alcohol does on the body; but this intellectual intoxication produces effects more difficult to cure, than its type in the physical system.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To praise circulating libraries for offering readers a wide and exciting variety of books",
+    "To urge parents to direct children's attraction to fiction toward worthwhile reading",
+    "To explain why people in all nations are attracted to their own reflections",
+    "To argue that reading novels harms the body in the same way alcohol does"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-082",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "The action of water, occasioning an immense pressure, is evident at first sight. A delicious spring issues from the cave, which unfortunately was so swollen as to prevent my entrance. Three miles hence, I observed two Indian forts. The larger is surrounded by a trench, which is now about seven feet deep and three quarters of an inch in length. In the swollen one the ditch is considerably deeper and more distinct, encircling it on every side, excepting where an entrance, wide enough to admit a carriage, has been left untouched by the spade.",
+   "question": "Which choice best describes the main purpose of the text?",
+   "options": [
+    "To explain why the narrator decided to abandon his journey",
+    "To argue that the Indian forts were built to store spring water",
+    "To record the narrator's observations of natural and built features he encountered",
+    "To compare the narrator's home region with the unfamiliar landscape he is now visiting"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-083",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "The first sunshine I saw in Paris, unsettled all my previous impressions completely. I had seen every place of interest through the dull heavy atmosphere of a week's rain, and it was in such leaden colors alone that the finer squares and palaces had become familiar to me. The effect of a clear sun upon them was wonderful. The sudden gilding of the dome of the Invalides by Napoleon must have been something like it. I took advantage of it to see everything over again, and it seemed to me like another city. I never realized so forcibly the beauty of sunshine. Architecture, particularly, is nothing without it. Everything looks heavy and flat.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Paris's palaces look more impressive during rain than in sunshine",
+    "The narrator regrets spending an entire rainy week indoors during his stay in Paris",
+    "Napoleon designed the dome of the Invalides to reflect sunlight",
+    "Seeing Paris in sunlight after days of rain transformed the narrator's view of it"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-084",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "My life has been spent pretty equally between the two countries, and I flatter myself I speak both languages without any foreign accent.\n\nI count England my headquarters now: it is \"home\" to me. But a few years ago I was resident in Germany, only going over to London now and then on business. I will not mention the town where I lived. It is unnecessary to do so, and in the peculiar experience I am about to relate I think real names of people and places are just as well, or better, avoided.\n\nI was connected with a large and important firm of engineers. I had been bred up to the profession, and was credited with a certain amount of talent; and I was considered--and, with all modesty, I think I deserved the opinion--steady and reliable, so that I had already attained a fair position in the house, and was looked upon as a \"rising man\".",
+   "question": "Based on the text, why does the narrator choose not to name the town where he lived?",
+   "options": [
+    "He has forgotten the town's name after many years in England",
+    "He is ashamed of the large firm of engineers that employed him in that town",
+    "He believes the experience he will relate is best told without real names",
+    "He wants to hide the fact that he once lived and worked in Germany"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-085",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "The very size of the nursery building terrified him. The crowd of strange faces hushed his grief into dumb silence. The nurses seemed like enemies that intended him some bodily harm, and from whom he would run away the moment their backs were turned.\n\nThe child looked up to impart these thoughts to his foster-mother, and she was gone. He searched wildly around; his innocent eyes grew large with affright; his mouth and chin began to quiver; and his poor little hands were pressed hard down upon the bench where they had seated him. That baby-struggle was a pitiful thing to witness. That tiny form, taking up its first battle of life, with no weapons but its terror and its tears, was touching beyond description.",
+   "question": "Based on the text, why does the child press his hands hard down upon the bench?",
+   "options": [
+    "He is impatient to be taken away to play with the other children in the nursery",
+    "He is trying to hide from the nurses he dislikes",
+    "He is angry that he was made to sit on a hard bench",
+    "He is frightened after discovering that his foster-mother has left"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-086",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "Bright and glistening ones are apt to scare the fish, and they generally fail when the pinch comes. It’s very provoking to have your leader break just about the time you are ready to slip your dip-net under a trout you have worked hard for. I hold that two flies on one line are enough. They are sometimes more than a novice wants to manage, especially when he catches a weed or a root with one hook and a trout with the other, or when two heavy fish take his flies at the same instant and run off in different directions.",
+   "question": "Based on the text, why does the speaker recommend using no more than two flies on one line?",
+   "options": [
+    "Additional flies can create tangles and struggles that are hard to manage",
+    "Bright, glistening flies on a crowded line tend to scare away the wary trout",
+    "Trout refuse to bite when they see several hooks at once",
+    "A leader with several flies is too heavy to cast properly"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-087",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "From poverty and experience of oppression comes the most militant Democracy. Let us not be afraid of this our brother-man. Let us not judge him by the superficial and unimportant differences between him and us. Let us welcome him. He needs us, but not more than we need him, and his familiarity with hard work, and his nature unspoiled by over-prosperity. Above all, we need his children. They will be American through and through. They will help us to outvote and to over-balance and to counteract the supercilious breed of falsely educated who have fallen away from the high and noble ideal of the equality and the brotherhood of man.",
+   "question": "Based on the text, why does the speaker urge readers to welcome the immigrant?",
+   "options": [
+    "The speaker hopes the immigrant will teach Americans a new language",
+    "The speaker believes the immigrant and his children will strengthen democracy",
+    "The speaker thinks the immigrant needs charity and protection more than anything else",
+    "The speaker wants the immigrant to adopt the habits of the prosperous"
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-058 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-058.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-02-063 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nSensible women may always have a good measure of political influence of the right sort, if they choose. And it is in one sense a duty on their part to claim this influence, and to exert it, but always in the true womanly way. The influence of good sense, of a sound judgment, of good feeling may always he theirs. Let us see that we preserve this influence, and that we use it wisely. But let us cherish our happy immunities as women by keeping aloof from all public personal action in the political field.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from urging women to use influence to cautioning against public action.\nB) It moves from mocking women's political views to praising their quiet sense.\nC) It moves from doubting women's judgment to demanding full political rights.\nD) It moves from calmly describing a duty to angrily rejecting all influence.\n### lit40-easy-02-064 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nOn Twelfth Night the little ones were christened, and then the trooper bethought himself of his promise to get back soon. The storms had ceased, but worse had befallen; the sea was frozen over as far as eye reached, and the island was cut off from all communication with the outer world. There was nothing for it but to wait. It proved the longest and hardest winter any one then living could remember. Easter was at hand before the ice broke up, and let a fishing smack slip over to Ystad, on the mainland. It came back with news that set the whole island wondering.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It recounts a christening in detail, then explains why the trooper never returned.\nB) It describes a delay caused by the frozen sea, then hints at surprising news.\nC) It praises the island's winter beauty, then contrasts it with the mainland.\nD) It presents the trooper's promise, then shows him breaking it on purpose.\n### lit40-easy-02-066 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nThe testimony in such a case must, under the conditions of the present life, be forever inaccessible. It lies wholly outside the range of experience. However abundant it may be, we cannot expect to meet with it. And accordingly our failure to produce it does not raise even the slightest presumption against our theory. When conceived in this way, the belief in a future life is without scientific support; but at the same time it is placed beyond the need of scientific support and beyond the range of scientific criticism.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It presents evidence for a future life, then dismisses opposing objections.\nB) It criticizes belief in a future life, then urges readers to abandon it.\nC) It recounts a personal experience, then generalizes it into a theory.\nD) It claims the evidence is unreachable, then draws a conclusion about criticism.\n### lit40-easy-02-072 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nWhere the ball passed, not one of us precisely knew; but I fancy it must have been over our heads, and that the wind of it may have contributed to our disaster.\n\nAt any rate, the boat sank by the stern, quite gently, in three feet of water, leaving the captain and myself, facing each other, on our feet. The other three took complete headers, and came up again, drenched and bubbling.\n\nSo far there was no great harm. No lives were lost, and we could wade ashore in safety. But there were all our stores at the bottom, and, to make things worse, only two guns out of five remained in a state for service. Mine I had snatched from my knees and held over my head, by a sort of instinct.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) He regards the sinking with calm good humor while noting the real losses.\nB) He recalls the sinking with lasting terror and shame at his own panic.\nC) He blames the captain angrily for steering the boat into danger.\nD) He shows complete indifference to the loss of the stores and guns.\n### lit40-easy-02-073 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nI was not very uncomfortable, for I had not been all over into the water. I drove down to the lumber shed, took the squire in, and headed towards home. The senator was shivering with cold, though fortunately it was a very warm day for the season, and he did not absolutely suffer.\n\nIt had been cloudy and threatening rain all the afternoon and evening, and before we reached the main road it began to pour in torrents. I had an oil-cloth, which I put over the trunk and the mail. Under ordinary circumstances, a seven-mile ride in such a heavy rain would have been a great misfortune; but, as both of us had been in the river, it did not make much difference to us.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) He feels bitter frustration that the rain ruined an otherwise pleasant trip.\nB) He accepts the downpour practically, since they were already soaked.\nC) He is consumed by worry that the senator will fall seriously ill.\nD) He takes quiet amusement in the squire's unfortunate soaking.\n### lit40-easy-02-074 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\n\"See, Winter comes, to rule the varied year,\nSullen and sad, with all his rising train,\nVapours, and clouds, and storms. Be these my theme,\nThese! that exalt the soul to solemn thought,\nAnd heavenly musing. Welcome, kindred glooms!\nCongenial horrors, hail! with frequent foot,\nPleased have I, in my cheerful morn of life,\nWhen nursed by careless Solitude I lived,\nAnd sung of Nature with unceasing joy,\nPleased have I wander'd through your rough domain;\nTrod the pure virgin-snows, myself as pure;\nHeard the winds roar, and the big torrents burst;\nOr seen the deep-fermenting tempest brew'd\nIn the grim evening sky. Thus passed the time,\nTill through the lucid chambers of the south\nLook'd out the joyous Spring, look'd out, and smiled!\"\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) He dreads winter's arrival and longs only for the return of spring.\nB) He treats winter with indifference, since it no longer affects him.\nC) He welcomes winter's storms as kindred companions that lift the soul.\nD) He regrets ever having wandered through winter's harsh domain.\n### lit40-easy-02-075 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nI have achieved none of those objects which the instinct of mankind especially prompts them to pursue, and the accomplishment of which must therefore beget a native satisfaction. The truly wise, after all their speculations, will be led into the common path, and, in homage to the human nature that pervades them, will gather gold, and till the earth, and set out trees, and build a house. But I have scorned such wisdom. I have rejected, also, the settled, sober, careful gladness of a man by his own fireside, with those around him whose welfare is committed to his trust and all their guidance to his fond authority.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) He takes triumphant pride in having escaped the common path of others.\nB) He resents the wise for gathering gold while he remained poor.\nC) He is confused about which goals mankind instinctively pursues.\nD) He admits with rueful candor that he has spurned what others value.\n### lit40-easy-02-076 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nThe police station lodging-house, where the soft side of a plank is the regulation couch, is next in order. The manner in which this police bed is \"made up\" is interesting in its simplicity. The loose planks that make the platform are simply turned over, and the job is done, with an occasional coat of white-wash thrown in to sweeten things. I know of only one easier way, but, so far as I am informed, it has never been introduced in this country. It used to be practised, if report spoke truly, in certain old-country towns.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) He views the police bed with dry mockery of its crude simplicity.\nB) He sincerely admires the efficiency of the police bed's design.\nC) He expresses open outrage and demands that the stations be reformed.\nD) He feels nostalgic fondness for customs from old-country towns.\n### lit40-easy-02-077 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nThe night was cloudy and black, and every line in the architecture of the largest building in the world was defined in light, even to the cross, which, as I have said before, is at the height of a mountain from the base. For about an hour it was a delicate but vast structure of shining lines, like a drawing of a glorious temple on the clouds. At eight, as the clock struck, flakes of fire burst from every point, and the whole building seemed started into flame. It was done by a simultaneous kindling of torches in a thousand points, a man stationed at each. The glare seemed to exceed that of noonday. No description can give an idea of it.\n\nI am not sure that I have not been a little tedious in describing the ceremonies of the holy week.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) He finds the illumination tiresome and wishes it had ended sooner.\nB) He is awed by the spectacle yet worries he has described too much.\nC) He doubts the religious meaning behind the week's ceremonies.\nD) He is frightened by the sudden fire and fears for the building.\n### lit40-easy-02-078 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nNot that it must be for a moment supposed that our Women are destitute of affection. But unfortunately the passion of the moment predominates, in the Frail Sex, over every other consideration. This is, of course, a necessity arising from their unfortunate conformation. For as they have no pretensions to an angle, being inferior in this respect to the very lowest of the Isosceles, they are consequently wholly devoid of brain-power, and have neither reflection, judgment nor forethought, and hardly any memory. Hence, in their fits of fury, they remember no claims and recognize no distinctions.\n\n[질문] Which choice best states the main idea of the text?\nA) It argues that women are more affectionate by nature than men are.\nB) It describes one woman's violent outburst and its consequences.\nC) It gives the narrator's explanation of why women act on sudden passion.\nD) It questions the reasoning ability of the lowest Isosceles figures.\n### lit40-easy-02-079 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nIn the end she rejected both courses and decided for the riding costume. The reason she gave for this decision--the reason she gave herself--was that the riding costume would invest the call with an air of accident, of impulse. The real reason.\n\nIt may be that some feminine reader can guess why she chose the most startling, the most gracefully becoming, the most artlessly physical apparel in her wardrobe.\n\nShe said nothing to her father at lunch about her plans. Why should she speak of them? He might oppose; also, she might change her mind. After lunch she set out on her usual ride, galloping away into the hills--but she had put twenty-five dollars in bills in her trousers pocket.\n\n[질문] Which choice best states the main idea of the text?\nA) It shows a woman openly arguing with her father about her plans.\nB) It shows the narrator criticizing the woman's choice of clothing.\nC) It describes an ordinary ride taken purely for exercise in the hills.\nD) It reveals a woman's concealed motives and quiet preparations for a call.\n### lit40-easy-02-080 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nEvery hand was hard at work over its appointed task, and there was no evidence in that silent well-ordered hive, of the recent little revolution.\n\nWhen the mathematician, having made his way to his own work-bench, had passed his unerring hand over it, he found all as he had left it—not a thing disturbed; every tool, every scrap of metal, every morsel of wire lying intact. Even the little steel coil which had come to such sudden grief, had been carefully rewound into proper compass, and placed ready to hand by Isaac Habrecht. “It is correctly adjusted, I think?” he said, as Dasipodius took it up.\n\n[질문] Which choice best states the main idea of the text?\nA) It shows the workshop restored to order, with even the damage quietly mended.\nB) It depicts a revolt in the workshop that is still spreading among workers.\nC) It describes the mathematician's anger on discovering his tools missing.\nD) It reveals that Isaac Habrecht damaged the steel coil on purpose.\n### lit40-easy-02-081 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nWe see ourselves reflected in the characters that most interest us. Thus have we hoped and loved, sinned and suffered. A mirror for the face has a bewitching attraction for all nations; what wonder then that a mirror for the soul is so generally fascinating? It is the business of a judicious parent to guide this instinct aright, and thus make it productive of genuine culture, as well as of amusement. The profligate and strongly-exciting works, with which our circulating libraries are overrun, operate on the mind as alcohol does on the body; but this intellectual intoxication produces effects more difficult to cure, than its type in the physical system.\n\n[질문] Which choice best states the main purpose of the text?\nA) To praise circulating libraries for offering readers a wide and exciting variety of books\nB) To urge parents to direct children's attraction to fiction toward worthwhile reading\nC) To explain why people in all nations are attracted to their own reflections\nD) To argue that reading novels harms the body in the same way alcohol does\n### lit40-easy-02-082 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nThe action of water, occasioning an immense pressure, is evident at first sight. A delicious spring issues from the cave, which unfortunately was so swollen as to prevent my entrance. Three miles hence, I observed two Indian forts. The larger is surrounded by a trench, which is now about seven feet deep and three quarters of an inch in length. In the swollen one the ditch is considerably deeper and more distinct, encircling it on every side, excepting where an entrance, wide enough to admit a carriage, has been left untouched by the spade.\n\n[질문] Which choice best describes the main purpose of the text?\nA) To explain why the narrator decided to abandon his journey\nB) To argue that the Indian forts were built to store spring water\nC) To record the narrator's observations of natural and built features he encountered\nD) To compare the narrator's home region with the unfamiliar landscape he is now visiting\n### lit40-easy-02-083 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nThe first sunshine I saw in Paris, unsettled all my previous impressions completely. I had seen every place of interest through the dull heavy atmosphere of a week's rain, and it was in such leaden colors alone that the finer squares and palaces had become familiar to me. The effect of a clear sun upon them was wonderful. The sudden gilding of the dome of the Invalides by Napoleon must have been something like it. I took advantage of it to see everything over again, and it seemed to me like another city. I never realized so forcibly the beauty of sunshine. Architecture, particularly, is nothing without it. Everything looks heavy and flat.\n\n[질문] Which choice best states the main idea of the text?\nA) Paris's palaces look more impressive during rain than in sunshine\nB) The narrator regrets spending an entire rainy week indoors during his stay in Paris\nC) Napoleon designed the dome of the Invalides to reflect sunlight\nD) Seeing Paris in sunlight after days of rain transformed the narrator's view of it\n### lit40-easy-02-084 — skill inferences · 유형 character_motivation · 요청 난이도 easy\n[지문]\nMy life has been spent pretty equally between the two countries, and I flatter myself I speak both languages without any foreign accent.\n\nI count England my headquarters now: it is \"home\" to me. But a few years ago I was resident in Germany, only going over to London now and then on business. I will not mention the town where I lived. It is unnecessary to do so, and in the peculiar experience I am about to relate I think real names of people and places are just as well, or better, avoided.\n\nI was connected with a large and important firm of engineers. I had been bred up to the profession, and was credited with a certain amount of talent; and I was considered--and, with all modesty, I think I deserved the opinion--steady and reliable, so that I had already attained a fair position in the house, and was looked upon as a \"rising man\".\n\n[질문] Based on the text, why does the narrator choose not to name the town where he lived?\nA) He has forgotten the town's name after many years in England\nB) He is ashamed of the large firm of engineers that employed him in that town\nC) He believes the experience he will relate is best told without real names\nD) He wants to hide the fact that he once lived and worked in Germany\n### lit40-easy-02-085 — skill inferences · 유형 character_motivation · 요청 난이도 easy\n[지문]\nThe very size of the nursery building terrified him. The crowd of strange faces hushed his grief into dumb silence. The nurses seemed like enemies that intended him some bodily harm, and from whom he would run away the moment their backs were turned.\n\nThe child looked up to impart these thoughts to his foster-mother, and she was gone. He searched wildly around; his innocent eyes grew large with affright; his mouth and chin began to quiver; and his poor little hands were pressed hard down upon the bench where they had seated him. That baby-struggle was a pitiful thing to witness. That tiny form, taking up its first battle of life, with no weapons but its terror and its tears, was touching beyond description.\n\n[질문] Based on the text, why does the child press his hands hard down upon the bench?\nA) He is impatient to be taken away to play with the other children in the nursery\nB) He is trying to hide from the nurses he dislikes\nC) He is angry that he was made to sit on a hard bench\nD) He is frightened after discovering that his foster-mother has left\n### lit40-easy-02-086 — skill inferences · 유형 character_motivation · 요청 난이도 easy\n[지문]\nBright and glistening ones are apt to scare the fish, and they generally fail when the pinch comes. It’s very provoking to have your leader break just about the time you are ready to slip your dip-net under a trout you have worked hard for. I hold that two flies on one line are enough. They are sometimes more than a novice wants to manage, especially when he catches a weed or a root with one hook and a trout with the other, or when two heavy fish take his flies at the same instant and run off in different directions.\n\n[질문] Based on the text, why does the speaker recommend using no more than two flies on one line?\nA) Additional flies can create tangles and struggles that are hard to manage\nB) Bright, glistening flies on a crowded line tend to scare away the wary trout\nC) Trout refuse to bite when they see several hooks at once\nD) A leader with several flies is too heavy to cast properly\n### lit40-easy-02-087 — skill inferences · 유형 character_motivation · 요청 난이도 easy\n[지문]\nFrom poverty and experience of oppression comes the most militant Democracy. Let us not be afraid of this our brother-man. Let us not judge him by the superficial and unimportant differences between him and us. Let us welcome him. He needs us, but not more than we need him, and his familiarity with hard work, and his nature unspoiled by over-prosperity. Above all, we need his children. They will be American through and through. They will help us to outvote and to over-balance and to counteract the supercilious breed of falsely educated who have fallen away from the high and noble ideal of the equality and the brotherhood of man.\n\n[질문] Based on the text, why does the speaker urge readers to welcome the immigrant?\nA) The speaker hopes the immigrant will teach Americans a new language\nB) The speaker believes the immigrant and his children will strengthen democracy\nC) The speaker thinks the immigrant needs charity and protection more than anything else\nD) The speaker wants the immigrant to adopt the habits of the prosperous"
+}

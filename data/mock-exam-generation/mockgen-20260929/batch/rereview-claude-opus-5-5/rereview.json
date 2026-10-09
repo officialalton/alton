@@ -1,0 +1,176 @@
+[
+ {
+  "gid": "193b7a8a-d1c9-4d8c-a9c2-2dcc62fa3966",
+  "skill": "words_in_context",
+  "recipeId": "words_in_context_reversal_signal",
+  "correctOk": false,
+  "complianceOk": true,
+  "hardFitOk": false,
+  "which": [],
+  "note": "빈칸이 통념(예상) 문장 안에 있다. 그래서 정답 dwindle은 통념과 반대 방향이 아니라 통념과 같은 방향이며, 체크리스트 2번을 충족하지 못한다. 'However' 뒤의 역전 내용은 빈칸의 극성을 확인해 줄 뿐이다. 예상 문장만 읽어도 'slowly starving'에서 '감소'를 곧바로 떠올릴 수 있어, 전형적인 medium 수준의 문맥 매칭 문항이다. B는 'slowly'라는 단서로 강도 차이를 가려 배제할 수 있으므로 정답은 하나로 정해진다. 다만 'plummet sharply'는 뜻이 겹치는 중복 표현이라 선택지로서 어색하다.",
+  "hold": true
+ },
+ {
+  "gid": "36c2d24c-c0d2-4ecb-aedb-b057cf186d85",
+  "skill": "rhetorical_synthesis",
+  "recipeId": "rhetorical_synthesis_certainty_level_choice",
+  "correctOk": true,
+  "complianceOk": true,
+  "hardFitOk": false,
+  "which": [
+   "claim_certainty_discrimination"
+  ],
+  "note": "정답 A가 옳고, 해설도 정답과 들어맞는다. 다만 오답들이 너무 쉽게 걸러진다. B와 D는 'firmly established', 'now considered certain'처럼 누가 봐도 과장된 표현을 쓰고, C는 노트 4를 정면으로 부정한다. 게다가 A만이 목표로 제시된 '확립 vs 미확인' 대비 구조를 갖추고 있어서 이것만 봐도 바로 고를 수 있다. 확실성 수준을 헷갈리게 만드는 미묘한 오답(예: 확립된 사실 둘을 짝지은 보기, 노트 1과 노트 2를 적절한 확실성으로 대비한 보기)이 없어서 전형적인 medium 수준에 머문다.",
+  "hold": true
+ },
+ {
+  "gid": "4a31de8b-e22b-44c2-9475-3d83e8312d71",
+  "skill": "central_ideas_details",
+  "recipeId": "central_ideas_details_right_size_claim",
+  "correctOk": true,
+  "complianceOk": true,
+  "hardFitOk": true,
+  "which": [
+   "scope_calibration",
+   "evidence_weighting_under_partial_data"
+  ],
+  "note": "'Octopolis' 등 실제 사례를 가져왔지만 지문은 새로 쓴 것으로 보인다. 정답 B는 한정 표현(caution) 덕분에 적절한 범위를 갖추었다. 다만 C의 과잉확장이 너무 뚜렷해 hard 변별력은 중상 수준이다.",
+  "hold": false
+ },
+ {
+  "gid": "4ee505bd-842b-464e-916b-3eb8a1fafeda",
+  "skill": "inferences",
+  "recipeId": "inferences_theory_direction_reversal",
+  "correctOk": true,
+  "complianceOk": true,
+  "hardFitOk": false,
+  "which": [
+   "theory_to_case_application"
+  ],
+  "note": "지문이 이론을 'In other words' 문장으로 다시 풀어 쓰고, 듀엣이 비용이 큰 신호라는 점까지 직접 밝혀 준다. 그래서 정답 A는 거의 바꿔 말하기 수준이고, 난이도는 주로 지문 길이에서 나온다. 방향을 뒤집은 오답은 B와 C(비용 감소)가 해당한다. D는 원인과 결과를 서로 바꾼 것이 아니라 제3의 요인을 제시한 것이어서, 원인-결과 교환 오답은 없다.",
+  "hold": true
+ },
+ {
+  "gid": "60699183-562c-4deb-9618-1893883ee9cb",
+  "skill": "words_in_context",
+  "recipeId": "words_in_context_stage_shift",
+  "correctOk": true,
+  "complianceOk": false,
+  "hardFitOk": false,
+  "which": [],
+  "note": "지문은 낙관·초기 성공 → 유발 수요로 인한 실패 → 경제학자의 평가, 이렇게 세 단계로 짜여 있다. 빈칸은 두 번째 단계의 시작부('But as more lanes opened')가 아니라 네 번째 문장에 있다. 'undermine'은 '약화시키다/훼손하다'에 가까워 논증을 통한 비판을 가리키기에는 다소 부정확하지만(critique, discredit가 더 정밀함), 선택지 가운데 유일하게 성립하므로 정답으로 인정한다. 'celebrate'는 첫 단계에 어울리는 오답으로 적절하다. 반면 'recall'과 'misplace'는 정답과 의미가 비슷하면서 기능이나 품사가 어긋나는 오답에 해당하지 않는다. 난이도는 단순한 긍정/부정 대조 파악 수준이다. 역전 구조가 있기는 하지만 표면 단서('But', 'merely postpones')가 너무 뚜렷해서 hard 수준의 추가 사고를 요구하지 않는다.",
+  "hold": true
+ },
+ {
+  "gid": "904acc79-51e1-4dbc-a238-de5b5c03bef1",
+  "skill": "inferences",
+  "recipeId": "inferences_claim_support_or_undermine",
+  "correctOk": false,
+  "complianceOk": true,
+  "hardFitOk": false,
+  "which": [],
+  "note": "A는 예측 문장('esca가 지역 먹이 구성을 따라 변한다')을 거의 그대로 옮긴 선택지여서 표면 일치만으로 풀린다. hard 특성(방향 반전 함정, 증거 충분성 판단)이 실제로 요구되지 않는다. 방향이 반대인 사실을 지지처럼 위장한 오답도 없다(B, C, D 모두 무관형). 또 '포식자나 경쟁자를 끌어들인다'는 메커니즘과 A의 '먹이와 닮음' 사이에 논리적 긴장이 있다. 이 긴장을 짚으면 A 대신 '먹이가 먹는 생물을 흉내 낸다'는 해석이 나올 수 있어 정답의 정밀성이 약해진다.",
+  "hold": true
+ },
+ {
+  "gid": "a261968d-1578-45e3-a353-3496f6e2ef0c",
+  "skill": "form_structure_sense",
+  "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+  "correctOk": true,
+  "complianceOk": true,
+  "hardFitOk": false,
+  "which": [],
+  "note": "전형적인 현수 수식어 문항이다. 보기 중 사람 행위자는 A 하나뿐이고 나머지 셋은 모두 무생물(자료·장소·기록보관소)이라 '누가 분석하는가'만 물어도 바로 풀린다. 의미상 행위자를 가려야 하는 경쟁 보기(예: 그럴듯한 다른 사람·기관 주체)가 없어 hard의 추가 사고를 요구하지 않는다. 난이도는 수식어구 길이와 어휘에서만 온다.",
+  "hold": true
+ },
+ {
+  "gid": "aecf2238-d19d-4e26-b4c5-35be13bc21b6",
+  "skill": "inferences",
+  "recipeId": "inferences_claim_support_or_undermine",
+  "correctOk": true,
+  "complianceOk": true,
+  "hardFitOk": true,
+  "which": [
+   "evidence_sufficiency_evaluation",
+   "theory_to_case_application"
+  ],
+  "note": "C correctly ties the planners' claim about the whole grid to the critics' local slowdowns and accepts both. Checklist item 4 fails: no wrong answer disguises an opposite-direction fact as support. B and D are clearly irrelevant, so the distractors are weak. A is the only somewhat tempting trap. The hard level is borderline.",
+  "hold": false
+ },
+ {
+  "gid": "b4d78401-9f7e-4f7b-b547-7b7262efffbb",
+  "skill": "words_in_context",
+  "recipeId": "words_in_context_stage_shift",
+  "correctOk": true,
+  "complianceOk": false,
+  "hardFitOk": false,
+  "which": [],
+  "note": "두 번째 단계는 'Recent acoustic tagging'에서 시작한다. 그런데 빈칸은 그 단계가 시작되는 곳이 아니라 마지막 문장에 있다. 선택지는 모두 동사여서 기능이나 품사가 어긋나는 오답이 없다. 'however'와 'since... actually'라는 단서가 너무 뚜렷해서 전형적인 medium 수준에서 풀린다. 통념이 뒤집히는 구조는 있지만 답을 역으로 추론할 필요가 없다. 지문이 길 뿐 추가로 요구하는 사고는 없다.",
+  "hold": true
+ },
+ {
+  "gid": "ba30a3ec-acd6-4a7f-9b20-4cb725ab8da5",
+  "skill": "central_ideas_details",
+  "recipeId": "central_ideas_details_dual_stance_reaction",
+  "correctOk": true,
+  "complianceOk": true,
+  "hardFitOk": true,
+  "which": [
+   "dual_source_synthesis",
+   "scope_calibration"
+  ],
+  "note": "A는 연구소 결과를 뒤집어 Oyelaran의 입장만 반영하므로 입장 반전형과 한쪽 반영형을 겸한다. 다만 독립된 '한쪽 텍스트만 반영한' 오답은 뚜렷하지 않다. D는 근거 없는 극단적 서술이라 쉽게 제거된다. 전반적으로 두 텍스트를 통합해 조건을 추론하게 하는 구조는 적절하다.",
+  "hold": false
+ },
+ {
+  "gid": "cde092ea-22a1-481f-9d2c-426f46562288",
+  "skill": "central_ideas_details",
+  "recipeId": "central_ideas_details_underlying_implication",
+  "correctOk": true,
+  "complianceOk": false,
+  "hardFitOk": false,
+  "which": [
+   "paradox_and_implicit_inference"
+  ],
+  "note": "사실 오류: 베게너는 후속 판에서 극이탈력(Polflucht)과 조석력 같은 이동 메커니즘을 제안했고, 1929년 판에서는 맨틀 대류도 검토했다. 책 내용도 상당 부분 개정했다. 따라서 \"메커니즘 문제를 다루지 않았다\", \"가설을 거의 바꾸지 않았다\"는 서술은 역사적으로 부정확하다. 정답 C는 지문의 'not to revising... but to compiling' 문장과 마지막 문장을 거의 그대로 바꿔 쓴 것이어서 추론의 폭이 좁다. 제도적 접근 부족이라는 반론을 지문이 직접 반박하므로 B와 D도 쉽게 제거된다. A는 어긋남의 방향을 뒤집은 오답으로 적절하다. 다만 지문 문장을 그대로 옮긴 오답은 없다. 난이도는 대부분 지문 길이에서 오며, medium 수준으로 판단한다.",
+  "hold": true
+ },
+ {
+  "gid": "e281fc12-349e-4572-9488-3bcfdfb73d0e",
+  "skill": "form_structure_sense",
+  "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+  "correctOk": false,
+  "complianceOk": true,
+  "hardFitOk": false,
+  "which": [
+   "dangling_modifier_subject_matching"
+  ],
+  "note": "사람 명사가 A 하나뿐이다. 'studying'과 'have found'의 행위자는 사람이어야 하므로 선택지가 바로 좁혀지는 전형적인 medium 수준의 현수 수식어 문항이다. D는 수 일치 오류 때문에 쉽게 제거되므로 그럴듯한 오답으로서 약하다.",
+  "hold": true
+ },
+ {
+  "gid": "e4d8ac1f-907d-4799-bf82-9ee2b550aee0",
+  "skill": "rhetorical_synthesis",
+  "recipeId": "rhetorical_synthesis_dual_fact_merge",
+  "correctOk": true,
+  "complianceOk": true,
+  "hardFitOk": true,
+  "which": [
+   "relation_direction_judgment",
+   "multi_source_goal_integration"
+  ],
+  "note": "B만 대조 목표와 자원적 이유를 모두 충족한다. A는 원료와 제법만 담고 접근성은 빠져 있다. C는 노트에 없는 내용(rich color, great skill)을 넣었다. D는 인과의 방향을 뒤집어 인디고도 상류층 전용이었다고 서술하는데, 이는 노트와 모순되며 방향 판별을 요구하는 효과적인 함정이다. 노트 6개 중에서 필요한 정보를 골라 종합해야 하므로 hard로서 적정 수준이다. B의 'royalty' 단순화는 경미한 문제다.",
+  "hold": false
+ },
+ {
+  "gid": "e9f5ab8a-623a-458f-b189-1ab18e16d3c3",
+  "skill": "central_ideas_details",
+  "recipeId": "central_ideas_details_right_size_claim",
+  "correctOk": true,
+  "complianceOk": true,
+  "hardFitOk": false,
+  "which": [],
+  "note": "정답 B가 맞고 해설도 일관됨. 다만 구조가 '주장 + 예시'로 전형적인 medium 문항에 가깝다. 오답(A: 세부만 다룸, C: 메커니즘만 다룸, D: '지구상 가장' 식의 비교 확장)은 표지가 뚜렷해 쉽게 지울 수 있다. 지문이 길고 세부가 많은 것 말고는 hard다운 추가 추론(역설 파악, 부분 데이터 저울질 등)을 요구하지 않는다.",
+  "hold": true
+ }
+]

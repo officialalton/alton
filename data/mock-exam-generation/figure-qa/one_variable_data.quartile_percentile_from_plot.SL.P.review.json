@@ -1,0 +1,23 @@
+{
+ "itemId": "one_variable_data.quartile_percentile_from_plot.SL.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T08:00:06Z",
+ "reviewer": "claude-sonnet-5.5 (math-D session)",
+ "codeHash": "82486f23b124f25856ff62ffbc072a6e9b132efc3747d22f4f6d582c3e3ccae3",
+ "samples": [
+  "one_variable_data.quartile_percentile_from_plot.SL.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass",
+  "multi_figure_consistent": "n/a",
+  "choice_distinct_one_rule": "n/a"
+ },
+ "defects": [],
+ "notes": "줄기-잎: 줄기 열·세로선·오름차순 잎·Key(단위 포함) 확인, 데스크톱·375px 읽음. [재스탬프: 병합·sl-kit 메타 문구만 변경, 렌더 마크업·샘플 본문 동일 확인]"
+}

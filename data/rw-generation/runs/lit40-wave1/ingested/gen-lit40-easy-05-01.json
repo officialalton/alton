@@ -1,0 +1,959 @@
+{
+ "taskId": "gen-lit40-easy-05-01",
+ "passed": [
+  {
+   "candidateId": "lit40-easy-05-003",
+   "task": "gen-lit40-easy-05-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-003",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 2,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Paloma",
+      "Konrad"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "german_austrian"
+     ],
+     "locale": "Galicia",
+     "setting": "a mountain bus stop",
+     "relationship": "a nurse and her night patient",
+     "conflict": "over a map, a route or a way home",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a mountain bus stop in Galicia; a nurse and her night patient over a map, a route or a way home"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "By that rule everything is a failure. Married life is a failure; its laws are grossly violated. Home life is a failure; there are many miserable homes. The school is a failure; many a father has put thousands of dollars into the education of his son and found it wasted in riotous living. The church is a failure; many of its members are Christians only in name and not a few are hypocrites. But we know by the loyal, loving husbands and wives of every community that married life is not a failure. We know by the happy homes about us, with sweetest of household ties binding the family circle, that home life is not a failure.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "It moves from hopeful praise of the family to bitter doubt about the church.",
+     "It moves from playful mockery of schools to solemn grief over lost sons.",
+     "It moves from firm confidence in marriage to growing uncertainty about the happy home.",
+     "It moves from a bleak list of failures to a confident affirmation of their worth."
+    ],
+    "correct_letter": "D",
+    "explanation": "글 앞부분은 결혼·가정·학교·교회를 차례로 'a failure'라고 부르는 어두운 나열이다. 'But we know'부터는 충실한 부부와 행복한 가정을 근거로 그것들이 실패가 아니라고 확신 있게 말한다. 따라서 D가 정답이다. A와 C는 어조 변화의 방향이 반대이고, B의 장난스러운 조롱은 지문에 없다."
+   },
+   "notes": [],
+   "tone": [
+    "earnest",
+    "reassuring"
+   ],
+   "devices": [
+    "repetition",
+    "parallelism"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "By that rule everything is a failure. Married life is a failure; its laws are grossly violated. Home life is a failure; there are many miserable homes. The school is a failure; many a father has put thousands of dollars into the education of his son and found it wasted in riotous living. The church is a failure; many of its members are Christians only in name and not a few are hypocrites. But we know by the loyal, loving husbands and wives of every community that married life is not a failure. We know by the happy homes about us, with sweetest of household ties binding the family circle, that home life is not a failure.",
+    "source": {
+     "author": "Bain, George W.",
+     "work": "Wit, humor, reason, rhetoric, prose, poetry and story woven into eight popular lectures",
+     "year": 1915,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1927,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/16858",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-16858",
+     "corpusTextSha256": "932849bf0220826503b20b17061c504f18ced938a609e9a37c63af9f220711f2",
+     "excerptSha256": "6be244d0cbce1d9bc407a7225f38e9a91cdba7fc514cfdfa57bf75bbf3a975fe",
+     "sliceSha256": "41bb2df77ea3c735512cf7bcc43cceb7ee081a02192a762ec25e71019f1745ca",
+     "location": {
+      "startChar": 303996,
+      "endChar": 304623,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 82
+     },
+     "genre": "short_story",
+     "workForm": "poetry"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-004",
+   "task": "gen-lit40-easy-05-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-004",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "text_structure",
+    "genre": "short_story",
+    "seed": {
+     "index": 3,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Mai",
+      "Budi"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Manila",
+     "setting": "a radio repair shop",
+     "relationship": "a mother and a daughter planning a wedding",
+     "conflict": "over how to describe an accident honestly",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a radio repair shop in Manila; a mother and a daughter planning a wedding over how to describe an accident honestly"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "The first emotion her presence excited was a quick sense of the strange fact that, after all these years of loneliness, such a magnificent person should be his wife. For she was magnificent, in the maturity of her beauty, her head erect, her complexion splendid, her auburn tresses undimmed, a certain plenitude in her very glance. He saw in a moment that she wished to seem to him beautiful, she had endeavored to dress herself to the best effect. Perhaps, after all, it was only for this she had delayed; she wished to give herself every possible touch. For some moments they said nothing; they had not stood face to face for nearly ten years, and they met now as adversaries.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "It records a man's admiration of his wife's looks and then reveals the tension between them.",
+     "It recounts a couple's long separation and then explains the reasons for their first quarrel.",
+     "It praises a woman's careful dressing and then describes her refusal to meet her husband.",
+     "It presents a man's loneliness and then shows his decision to leave his wife for good."
+    ],
+    "correct_letter": "A",
+    "explanation": "글은 남자가 아내의 'magnificent' 아름다움에 놀라는 데서 시작해 그녀가 아름다워 보이려 했다는 추측으로 이어진다. 마지막에는 두 사람이 10년 만에 'as adversaries'로 마주한다고 말해 긴장을 드러낸다. 따라서 A가 정답이다. B의 다툼 이유 설명, C의 만남 거절, D의 떠나는 결심은 지문에 없다."
+   },
+   "notes": [],
+   "tone": [
+    "observant",
+    "tense"
+   ],
+   "devices": [
+    "characterization",
+    "juxtaposition"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "The first emotion her presence excited was a quick sense of the strange fact that, after all these years of loneliness, such a magnificent person should be his wife. For she was magnificent, in the maturity of her beauty, her head erect, her complexion splendid, her auburn tresses undimmed, a certain plenitude in her very glance. He saw in a moment that she wished to seem to him beautiful, she had endeavored to dress herself to the best effect. Perhaps, after all, it was only for this she had delayed; she wished to give herself every possible touch. For some moments they said nothing; they had not stood face to face for nearly ten years, and they met now as adversaries.",
+    "source": {
+     "author": "James, Henry",
+     "work": "Georgina's Reasons",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1916,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/21771",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-21771",
+     "corpusTextSha256": "6db15a633e923516431540d395c2da52c567cd4cc2df68efa748634f9bfa8a6e",
+     "excerptSha256": "514efd155c6bd421fb1c8641477320bc26e90017b27ffeb588ca7786be0c2ea8",
+     "sliceSha256": "abd8ee7ca79243862d0b225b3b2a03217efa6e3d8dc472dc297949fa8db644e0",
+     "location": {
+      "startChar": 122817,
+      "endChar": 123495,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 86
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-006",
+   "task": "gen-lit40-easy-05-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-006",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "narrator_attitude",
+    "genre": "short_story",
+    "seed": {
+     "index": 5,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Elan",
+      "Margaux"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "french"
+     ],
+     "locale": "Marseille",
+     "setting": "a train compartment",
+     "relationship": "two night-shift coworkers",
+     "conflict": "over an unspoken agreement to avoid one subject",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a train compartment in Marseille; two night-shift coworkers over an unspoken agreement to avoid one subject"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "How changed we were from what we had been a few short hours before! Hopeless, sad-eyed misery, hunger, feverish anxiety, desperation, then; thankfulness, serenity, joy too deep for utterance now. That I know was the cheeriest hour of my eventful life. The winds howled, and blew the snow wildly about our prison house, but they were powerless to distress us any more. I liked Harris. He might have been better done, perhaps, but I am free to say that no man ever agreed with me better than Harris, or afforded me so large a degree of satisfaction.",
+    "question": "Which choice best describes the narrator's attitude toward Harris?",
+    "options": [
+     "Suspicious, because Harris caused the misery of the earlier hungry hours",
+     "Indifferent, because the narrator is focused only on the storm",
+     "Regretful, because the narrator wishes Harris had stayed away",
+     "Warmly approving, because Harris gave the narrator great satisfaction"
+    ],
+    "correct_letter": "D",
+    "explanation": "서술자는 'I liked Harris'라고 직접 말한다. 또한 누구도 Harris만큼 자신과 잘 맞거나 'so large a degree of satisfaction'을 준 적이 없다고 덧붙인다. 따라서 D가 정답이다. A와 C는 이 호감과 반대이고, B는 폭풍이 더 이상 괴롭히지 못한다고 한 뒤 Harris 이야기로 넘어가는 흐름과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "cheerful",
+    "wry"
+   ],
+   "devices": [
+    "irony",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "How changed we were from what we had been a few short hours before! Hopeless, sad-eyed misery, hunger, feverish anxiety, desperation, then; thankfulness, serenity, joy too deep for utterance now. That I know was the cheeriest hour of my eventful life. The winds howled, and blew the snow wildly about our prison house, but they were powerless to distress us any more. I liked Harris. He might have been better done, perhaps, but I am free to say that no man ever agreed with me better than Harris, or afforded me so large a degree of satisfaction.",
+    "source": {
+     "author": "Twain, Mark",
+     "work": "Sketches New and Old",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1910,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/3189",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-3189",
+     "corpusTextSha256": "ce1965229e7e8c2b8fb16f98b9c433177272a62330c7718389678b869e9ecca3",
+     "excerptSha256": "172b7bda7dd3fc5160afb23af196b3ac128e348d366aca374b1fd954b875add5",
+     "sliceSha256": "4e087de60f9e27a123a055a097a43d56ffc3fb8b63974b0315b453585b6caaf2",
+     "location": {
+      "startChar": 491767,
+      "endChar": 492319,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 89
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-007",
+   "task": "gen-lit40-easy-05-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-007",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "main_idea_or_purpose",
+    "genre": "short_story",
+    "seed": {
+     "index": 6,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Suhyun",
+      "Kai"
+     ],
+     "nameCultures": [
+      "korean",
+      "indigenous_american"
+     ],
+     "locale": "Jeju Island",
+     "setting": "an old cinema projection booth",
+     "relationship": "an interpreter and her client",
+     "conflict": "when old loyalties collide with new ones",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "an old cinema projection booth in Jeju Island; an interpreter and her client when old loyalties collide with new ones"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "There has, unfortunately, been some evidence in the past year that another such conspiracy is on foot. The danger to which these fiends expose their fellow-tenants is appalling. A fire-panic at night in a tenement, by no means among the rare experiences in New York, with the surging, half-smothered crowds on stairs and fire-escapes, the frantic mothers and crying children, the wild struggle to save the little that is their all, is a horror that has few parallels in human experience.\n\nI cannot think without a shudder of one such scene in a First Avenue tenement. It was in the middle of the night. The fire had swept up with sudden fury from a restaurant on the street floor, cutting off escape.",
+    "question": "Which choice best states the main purpose of the text?",
+    "options": [
+     "To stress the terrible danger of tenement fires and begin recalling one such fire",
+     "To argue that restaurants should never be allowed on the street floors of tenements",
+     "To praise the mothers who saved their children during a fire on First Avenue",
+     "To explain how fire-escapes were first added to tenements in New York"
+    ],
+    "correct_letter": "A",
+    "explanation": "글은 공동주택 화재가 'appalling'하며 거의 비할 데 없는 공포라고 강조한다. 이어 서술자는 First Avenue 공동주택에서 겪은 한 장면을 떨며 떠올리기 시작한다. 따라서 A가 정답이다. B의 규제 주장, C의 어머니 칭송, D의 비상계단 역사는 지문에 나오지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "urgent",
+    "grave"
+   ],
+   "devices": [
+    "imagery",
+    "anecdote"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "There has, unfortunately, been some evidence in the past year that another such conspiracy is on foot. The danger to which these fiends expose their fellow-tenants is appalling. A fire-panic at night in a tenement, by no means among the rare experiences in New York, with the surging, half-smothered crowds on stairs and fire-escapes, the frantic mothers and crying children, the wild struggle to save the little that is their all, is a horror that has few parallels in human experience.\n\nI cannot think without a shudder of one such scene in a First Avenue tenement. It was in the middle of the night. The fire had swept up with sudden fury from a restaurant on the street floor, cutting off escape.",
+    "source": {
+     "author": "Riis, Jacob A. (Jacob August)",
+     "work": "How the Other Half Lives: Studies Among the Tenements of New York",
+     "year": 1890,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1914,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/45502",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-45502",
+     "corpusTextSha256": "c67e0d275ba30775009485c1a25b9b9c8f02c5d6d585c2b69b765013e7cbb920",
+     "excerptSha256": "3a8414301902f6aa3428c915cfa7b9aa51e1de300a68dc1c0eaad64e8256073a",
+     "sliceSha256": "5e3f068db4861dda3cc7184c807080a64d76740dff559ecbfcdcf90227f6c10a",
+     "location": {
+      "startChar": 174894,
+      "endChar": 175594,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 37
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-008",
+   "task": "gen-lit40-easy-05-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-008",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 7,
+     "genre": "short_story",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Fatma",
+      "Eleni"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Thessaloniki",
+     "setting": "an open-air market",
+     "relationship": "a foreman and a young hire",
+     "conflict": "about an ending that nobody wants to admit",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "an open-air market in Thessaloniki; a foreman and a young hire about an ending that nobody wants to admit"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "In moodily turning over a heap of mining clothing, blankets, and india-rubber boots, he had come upon an old pickaxe--the one he had found in the shaft; the one he had carefully preserved for a year, and then forgotten! Why had he not remembered it before? He was frightened, not only at this sudden resurrection of the proof he was seeking, but at his own fateful forgetfulness. Why had he never thought of this when Slinn was speaking? A sense of shame, as if he had voluntarily withheld it from the wronged man, swept over him.",
+    "question": "As used in the text, the phrase “sudden resurrection of the proof” most nearly suggests that",
+    "options": [
+     "a piece of forgotten evidence has unexpectedly reappeared",
+     "a buried object has been dug up again from the bottom of the shaft",
+     "a dead man has been brought back to tell his story",
+     "a lost tool has been repaired and made useful again"
+    ],
+    "correct_letter": "A",
+    "explanation": "그는 옷더미를 뒤지다가 1년 동안 보관하고는 잊어버린 곡괭이를 우연히 발견한다. 이 곡괭이는 그가 찾던 증거이므로 'resurrection'은 잊힌 증거가 갑자기 다시 나타났다는 뜻이다. 따라서 A가 정답이다. B는 곡괭이가 옷더미에서 나왔다는 사실과 맞지 않고, C와 D는 비유를 글자 그대로 잘못 읽은 것이다."
+   },
+   "notes": [],
+   "tone": [
+    "anxious",
+    "remorseful"
+   ],
+   "devices": [
+    "metaphor"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "In moodily turning over a heap of mining clothing, blankets, and india-rubber boots, he had come upon an old pickaxe--the one he had found in the shaft; the one he had carefully preserved for a year, and then forgotten! Why had he not remembered it before? He was frightened, not only at this sudden resurrection of the proof he was seeking, but at his own fateful forgetfulness. Why had he never thought of this when Slinn was speaking? A sense of shame, as if he had voluntarily withheld it from the wronged man, swept over him.",
+    "source": {
+     "author": "Harte, Bret",
+     "work": "A Millionaire of Rough-and-Ready",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1902,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/2280",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-2280",
+     "corpusTextSha256": "1ed4cee1686dac2f91db5166d02cd6e3cc0184090fcadbf988ecbaa43bb63aab",
+     "excerptSha256": "10d3781ecddb8c4dc9f587714a2a7f1ef225b7f789c7d65f72ca18671d193a5e",
+     "sliceSha256": "ab30d9221ff20b25ca6ba2471cf98db251a86412496470c6cccd4a4cb1b32154",
+     "location": {
+      "startChar": 145894,
+      "endChar": 146428,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 91
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-009",
+   "task": "gen-lit40-easy-05-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-009",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 8,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Samira",
+      "Salma"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "arabic_levantine"
+     ],
+     "locale": "Marrakesh",
+     "setting": "a barbershop",
+     "relationship": "a teacher and a student who will not speak",
+     "conflict": "over a borrowed object never returned",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a barbershop in Marrakesh; a teacher and a student who will not speak over a borrowed object never returned"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "You need me because you are a strong man and are afraid that your very strength will lead you into ignoble warfare. You are afraid of your strength, not of your weakness. So you ask me to help you. Without thinking, you ask me to marry you to-morrow. The idea came to you like a flash of light in the darkness. Five minutes--yes, one minute before you asked it of me, Freddy dear, you were floundering in the darkness, uncertain which way to turn. You were afraid of the things you could not see. You looked for some place in which to hide.",
+    "question": "As used in the text, the phrase “like a flash of light in the darkness” most nearly suggests that the idea",
+    "options": [
+     "came slowly after many nights of careful thought",
+     "arrived suddenly and showed a way out of confusion",
+     "frightened Freddy as much as the unseen things did",
+     "was a dangerous impulse that should be ignored"
+    ],
+    "correct_letter": "B",
+    "explanation": "화자는 청혼 바로 몇 분 전까지 Freddy가 'floundering in the darkness'하며 어디로 갈지 몰랐다고 말한다. 그러므로 어둠 속 섬광은 생각이 갑자기 떠올라 혼란 속에서 길을 보여 주었다는 뜻이다. 따라서 B가 정답이다. A는 'Without thinking'과 반대이고, C와 D는 생각이 그를 돕는 역할을 했다는 맥락과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "perceptive",
+    "tender"
+   ],
+   "devices": [
+    "simile",
+    "metaphor"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "You need me because you are a strong man and are afraid that your very strength will lead you into ignoble warfare. You are afraid of your strength, not of your weakness. So you ask me to help you. Without thinking, you ask me to marry you to-morrow. The idea came to you like a flash of light in the darkness. Five minutes--yes, one minute before you asked it of me, Freddy dear, you were floundering in the darkness, uncertain which way to turn. You were afraid of the things you could not see. You looked for some place in which to hide.",
+    "source": {
+     "author": "McCutcheon, George Barr",
+     "work": "Black is White",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1928,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/54097",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-54097",
+     "corpusTextSha256": "1f5b73f1d9d67f5c6b52127cf3f23d73bece718813f2aa01c66f5799a18791fa",
+     "excerptSha256": "8f1c502eb2762653db27c8b53714d258af608a3af036169f725e134beec98e3b",
+     "sliceSha256": "e965f530aac50564439550c48071cfb2237f10cf4dfb4b7274f26edc07676ca0",
+     "location": {
+      "startChar": 280226,
+      "endChar": 280766,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 54
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-012",
+   "task": "gen-lit40-easy-05-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-012",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 11,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Lorenzo",
+      "Aigerim"
+     ],
+     "nameCultures": [
+      "italian",
+      "persian_central_asian"
+     ],
+     "locale": "Bologna",
+     "setting": "a monastery guesthouse",
+     "relationship": "a girl and an old family friend",
+     "conflict": "about what to tell a younger sibling",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a monastery guesthouse in Bologna; a girl and an old family friend about what to tell a younger sibling"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "There might have been a slight blush on her cheek at appearing before so many people on such an undertaking; but yet, with a slight laugh and a smile on her lips, she advanced towards the stone. There was a perfect silence among the crowd of spectators as she touched the stone. It did not move. Again and again she touched it, with all the force she could exert. The stone remained as immovable as if part of the mass on which it rested. There was a general groan uttered by the crowd, an evidence of their full belief in the truth of the legend, while, at the same moment, a piercing cry was heard, and the unhappy damsel was seen to fall fainting to the ground.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "It moves from fearful dread to relieved laughter as the crowd cheers.",
+     "It moves from solemn silence to playful teasing among the spectators.",
+     "It moves from light confidence to dismay as the stone refuses to move.",
+     "It moves from angry defiance to calm acceptance of the old legend."
+    ],
+    "correct_letter": "C",
+    "explanation": "처음에 그녀는 'a slight laugh and a smile'을 띠고 가볍게 돌로 다가간다. 그러나 돌이 꿈쩍도 하지 않자 군중이 신음하고 그녀는 비명과 함께 쓰러진다. 따라서 가벼운 자신감에서 낙담으로 바뀌는 C가 정답이다. A와 B는 방향이 반대이고, D의 분노와 체념은 지문에 없다."
+   },
+   "notes": [],
+   "tone": [
+    "suspenseful",
+    "somber"
+   ],
+   "devices": [
+    "contrast",
+    "foreshadowing"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "There might have been a slight blush on her cheek at appearing before so many people on such an undertaking; but yet, with a slight laugh and a smile on her lips, she advanced towards the stone. There was a perfect silence among the crowd of spectators as she touched the stone. It did not move. Again and again she touched it, with all the force she could exert. The stone remained as immovable as if part of the mass on which it rested. There was a general groan uttered by the crowd, an evidence of their full belief in the truth of the legend, while, at the same moment, a piercing cry was heard, and the unhappy damsel was seen to fall fainting to the ground.",
+    "source": {
+     "author": "Kingston, William Henry Giles",
+     "work": "Foxholme Hall, and Other Tales",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1880,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/40692",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-40692",
+     "corpusTextSha256": "62fd70656274d62cbb136e237c56ec37a7afcbf9add29783f8c927ffc1c4d0a9",
+     "excerptSha256": "346801eb4773369a306fef228ee4419e7a7d0c9efae1d85c48092acb5ed6648a",
+     "sliceSha256": "9c19602a6501d1fa807d97e03b944b5dd0b0f93675d8ac74234b4d989084fc34",
+     "location": {
+      "startChar": 82463,
+      "endChar": 83132,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 17
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-015",
+   "task": "gen-lit40-easy-05-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-015",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 14,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Bahram",
+      "Nora"
+     ],
+     "nameCultures": [
+      "persian_central_asian",
+      "english"
+     ],
+     "locale": "Lima",
+     "setting": "a night-shift pharmacy",
+     "relationship": "a pair of lifelong friends who rarely speak",
+     "conflict": "after a teacher's remark that changed everything",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a night-shift pharmacy in Lima; a pair of lifelong friends who rarely speak after a teacher's remark that changed everything"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "To make a long story short, three years later Ralph returned to the capital, and, after having worn out several tutors, actually succeeded in entering the University.\n\nThe first year of college life is a happy time to every young man, and Ralph enjoyed its processions, its parliamentary gatherings, and its leisure, as well as the rest. He was certainly not the man to be sentimental over the loss of a young girl whom, moreover, he had only known for a few weeks. Nevertheless, he thought of her at odd times, but not enough to disturb his pleasure. The standing of his family, his own handsome appearance, and his immaculate linen opened to him the best houses of the city, and he became a great favorite in society.",
+    "question": "As used in the text, the phrase “worn out several tutors” most nearly suggests that Ralph",
+    "options": [
+     "was so hard to teach that his tutors gave up one after another",
+     "owned so many old books that his tutors could not read them all",
+     "spent so much money that his family could not pay his tutors",
+     "traveled so much that his tutors grew tired of following him"
+    ],
+    "correct_letter": "A",
+    "explanation": "Ralph는 여러 가정교사를 거친 끝에야 'actually succeeded' 대학에 들어갔다고 한다. 'actually'는 입학이 뜻밖일 만큼 그가 가르치기 어려운 학생이었음을 보여 준다. 따라서 A가 정답이다. B, C, D는 책·돈·여행처럼 지문에 근거가 없는 이유를 든다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "light"
+   ],
+   "devices": [
+    "hyperbole",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "To make a long story short, three years later Ralph returned to the capital, and, after having worn out several tutors, actually succeeded in entering the University.\n\nThe first year of college life is a happy time to every young man, and Ralph enjoyed its processions, its parliamentary gatherings, and its leisure, as well as the rest. He was certainly not the man to be sentimental over the loss of a young girl whom, moreover, he had only known for a few weeks. Nevertheless, he thought of her at odd times, but not enough to disturb his pleasure. The standing of his family, his own handsome appearance, and his immaculate linen opened to him the best houses of the city, and he became a great favorite in society.",
+    "source": {
+     "author": "Boyesen, Hjalmar Hjorth",
+     "work": "A Good-For-Nothing 1876",
+     "year": 1876,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1895,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/23174",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-23174",
+     "corpusTextSha256": "66ab3c8166f981a2518e33e4778b2774e63aad4faa73b789ca0a93f135215396",
+     "excerptSha256": "ca89f209017ee6bbf71a6a11aeedea2b752f15420204ec6ec1950afe35c80e6c",
+     "sliceSha256": "54865a4dc4a58722e8f54f82d385d3a70f4380dc693c57de092227913ecbb049",
+     "location": {
+      "startChar": 12721,
+      "endChar": 13440,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 23
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-016",
+   "task": "gen-lit40-easy-05-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-016",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 15,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Mathis"
+     ],
+     "nameCultures": [
+      "french"
+     ],
+     "locale": "the Mississippi Delta",
+     "setting": "a flooded cellar",
+     "relationship": "a daughter caring for her mother",
+     "conflict": "over a witness account that differs",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a flooded cellar in the Mississippi Delta; a daughter caring for her mother over a witness account that differs"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Not a change did the family make in their routine, for they had still plenty of time for everything. Not a fresh incongruous article was added to the old simple seasoned household gods. Athole had not an additional gown of costlier material. Dr. Peter even bought fewer books than usual, and denied himself an improved telescope which he had thought of buying. He could do star-gazing without it, every time he was called out on a clear night, and perhaps it was not worth the while of a man of his age to fix the study on the latest scientific basis. It seemed as if the family were called upon to testify to a different order of things, and to utter their small protest against the opposite extreme.",
+    "question": "As used in the text, the phrase “old simple seasoned household gods” most nearly suggests the family's",
+    "options": [
+     "new purchases chosen to impress the neighbors",
+     "familiar, long-used belongings that they valued",
+     "religious statues kept in a special room",
+     "costly treasures hidden away for later use"
+    ],
+    "correct_letter": "B",
+    "explanation": "가족은 일상을 바꾸지 않았고 새 물건도 더하지 않았으며 Athole은 비싼 옷을 사지 않았다고 한다. 이 맥락에서 'household gods'는 오래 써서 정든 소박한 살림살이를 가리킨다. 따라서 B가 정답이다. A와 D는 새 물건이나 값비싼 물건이라 맥락과 반대이고, C는 비유를 글자 그대로 읽은 것이다."
+   },
+   "notes": [],
+   "tone": [
+    "restrained",
+    "approving"
+   ],
+   "devices": [
+    "metaphor"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Not a change did the family make in their routine, for they had still plenty of time for everything. Not a fresh incongruous article was added to the old simple seasoned household gods. Athole had not an additional gown of costlier material. Dr. Peter even bought fewer books than usual, and denied himself an improved telescope which he had thought of buying. He could do star-gazing without it, every time he was called out on a clear night, and perhaps it was not worth the while of a man of his age to fix the study on the latest scientific basis. It seemed as if the family were called upon to testify to a different order of things, and to utter their small protest against the opposite extreme.",
+    "source": {
+     "author": "Tytler, Sarah",
+     "work": "Saint Mungo's city; vol. 2 [of 3]",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1914,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/79372",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-79372",
+     "corpusTextSha256": "79f300fa70d17367cdd3426263e17b6259ee2de78e0d3653b545ac4caae60bea",
+     "excerptSha256": "828ccca99660067627f066e68feeb7af82dd17e20f632e5b5eec8c4e69202089",
+     "sliceSha256": "4571b79591e69dfbf67ba7b70a1e6c887f9275fdc80bbb3bdcd0c64df00f1ffe",
+     "location": {
+      "startChar": 105997,
+      "endChar": 106698,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 38
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-019",
+   "task": "gen-lit40-easy-05-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-019",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 18,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Omar",
+      "Emil"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "dutch_nordic"
+     ],
+     "locale": "Lagos",
+     "setting": "a metro platform",
+     "relationship": "a coach and a benched star",
+     "conflict": "over a recipe that was never written down",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a metro platform in Lagos; a coach and a benched star over a recipe that was never written down"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "There was a band of music playing in the tent, and people were sitting drinking and smoking at one end. Katie shrank back with horror; everybody had such a coarse, bold look, so different from anything she had ever seen before. And her own knowledge of right and wrong, and the modest way in which she had been brought up, at once warned her not to accept the invitation. She was already beginning heartily to repent having come to Oakfield. Her head ached with all the noise and excitement; and she felt the truth of the saying that unlawful pleasures can never bring true happiness. She fancied she had more influence with Fanny than with the rest, and hastily drew her on one side.",
+    "question": "As used in the text, the phrase “shrank back with horror” most nearly suggests that Katie",
+    "options": [
+     "pulled away at once from a scene that shocked her",
+     "grew physically smaller and weaker as the crowd in the tent pressed in",
+     "felt sick because of the smoke in the tent",
+     "feared that the band would ask her to play"
+    ],
+    "correct_letter": "A",
+    "explanation": "Katie는 천막 안 사람들이 'coarse, bold'해 보여 자신이 보아 온 것과 너무 다르다고 느낀다. 이어 바른 교육을 받은 그녀의 양심이 초대를 받지 말라고 경고하므로, 이 표현은 충격받아 즉시 물러서는 반응을 뜻한다. 따라서 A가 정답이다. B는 비유를 글자 그대로 읽은 것이고, C와 D는 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "disapproving",
+    "moralizing"
+   ],
+   "devices": [
+    "imagery",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "There was a band of music playing in the tent, and people were sitting drinking and smoking at one end. Katie shrank back with horror; everybody had such a coarse, bold look, so different from anything she had ever seen before. And her own knowledge of right and wrong, and the modest way in which she had been brought up, at once warned her not to accept the invitation. She was already beginning heartily to repent having come to Oakfield. Her head ached with all the noise and excitement; and she felt the truth of the saying that unlawful pleasures can never bring true happiness. She fancied she had more influence with Fanny than with the rest, and hastily drew her on one side.",
+    "source": {
+     "author": "O'Brien, Charlotte Grace",
+     "work": "The happiness of Hazelbrook",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1909,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/78045",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-78045",
+     "corpusTextSha256": "2cd7210d184e2023f611a59a696b48570565b0de0d516b8b349281656d00cac0",
+     "excerptSha256": "0e3df979afe2d1cd2028b2f373d570b9359e0e3ad8dd6837fb6e5c5c38517f39",
+     "sliceSha256": "1799e62a99f71e4dcad36ebfc09a922b82029ee79fb6eb92a37b87f9ecafd528",
+     "location": {
+      "startChar": 36709,
+      "endChar": 37393,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 41
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-easy-05-001",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-002",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-005",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-010",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-011",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-013",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(18단어, 다음 16)",
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-014",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-017",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-018",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

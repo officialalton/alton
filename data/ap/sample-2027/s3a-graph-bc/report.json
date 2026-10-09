@@ -1,0 +1,34 @@
+{
+ "run": "s3a-graph-bc",
+ "subject": "ap_calculus_bc",
+ "generatedAt": "2026-10-09T08:29:53.243Z",
+ "totalCostUsd": 0.13,
+ "newSpendSinceBaseline": 0.13,
+ "cap": 50,
+ "calls": 12,
+ "candidates": 3,
+ "mcCandidates": 3,
+ "frqCandidates": 0,
+ "passedAll": 1,
+ "adopted": 1,
+ "mcAdopted": 1,
+ "frqAdopted": 0,
+ "reserve": 0,
+ "yield": 0.333,
+ "costPerAdopted": 0.131,
+ "callsPerAdopted": 12,
+ "duplicateRejected": 0,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 3
+ },
+ "rejectionReasons": {
+  "criterion_failed_key_scoring": 1,
+  "criterion_failed_scope_skill": 1
+ },
+ "unfilledCells": [
+  "ap_calculus_bc-m01",
+  "ap_calculus_bc-m03"
+ ]
+}

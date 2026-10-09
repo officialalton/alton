@@ -1,0 +1,976 @@
+[
+ {
+  "key": "ap_calculus_ab-m01-k0",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Product rule: e^{x/2}(8x/(4x^2+1)+0.5ln(4x^2+1)) at 2 = e(0.9412+1.4166)=6.409",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "6.409"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Chain rule combined with product rule at a point; fits 3.1 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f'(2)=e(16/17+0.5 ln17)=6.409; unique among options."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. Expression ln(4x^2+1)e^{0.5x} is readable as a product; slightly awkward but clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor corresponds to a distinct, verified misconception and is explained in the rationale."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 s, calculator evaluation of a derivative value is typical of AP."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: key verified, distractors map to distinct errors, in scope and appropriate load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires product rule combined with two separate chain-rule applications (ln of a quadratic, exponential with linear exponent), then a calculator evaluation at x=2. Distractors reflect common slips (dropping a term, missing the 0.5 factor). Moderate depth, no representation changes, no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m01-k1",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Product rule: e^{0.6}(6/11+0.2 ln11)=1.8221*1.02503≈1.868",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1.868"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Product plus chain rule at a point; fits 3.1 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f'(3)=e^0.6(6/11+0.2 ln11)=1.868; unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The '1x^2' coefficient is an awkward artifact but not ambiguous. Should be x^2+2."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches its stated misconception and the explanation covers all three."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds. The calculator is only for arithmetic evaluation, but this is acceptable for a calculator-active item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and clean chain/product rule item. Minor cosmetic issue with the '1x^2' wording; the calculator is used only for numeric evaluation. Passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires the product rule combined with two chain rule applications (ln of a quadratic and an exponential with a linear exponent), then a calculator evaluation at x=3. The concept depth and reasoning steps are moderate and typical of AP chain rule practice. The options are plausible values from common errors such as omitting an inner derivative. The expression's \"1x^2\" is slightly awkward but interpretable and does not drive the difficulty.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m01-k2",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Product rule: f'(1)=e^0.3(8/6+0.3ln6)=1.34986*1.87086≈2.525",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2.525"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Chain rule with product rule, evaluated at a point; fits 3.1 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2.525 is unique and correct; the distractors are distinct values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear. The notation ln(...)e^{...} is slightly unusual but parseable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct misconception and was checked numerically. The explanations cover each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds; calculator use for the numeric evaluation is consistent with the designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: a unique correct key, distractors tied to realistic misconceptions, and in-scope content with a reasonable calculator load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires product rule combined with two chain rule applications (ln of a polynomial, exponential with linear exponent), then a calculator evaluation at x=1. Several reasoning steps and a procedure choice, but a single representation and clean numbers. Typical of AP-style 3.1 mock items.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m01-k3",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Product rule: f'(1)=e^0.4(8/9+0.4 ln9)=1.49182*1.76778≈2.637",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "2.637"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Chain and product rule on a composite product, evaluated numerically; fits 3.1 / 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f'(1)=e^0.4(8/9+0.4 ln9)≈2.637; unique among options."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and the product reading is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct misconception (verified numerically), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, a calculator is reasonable, and the options are parallel values."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, has a unique key and well-motivated distractors, and is suitable for the AP exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Product rule plus two chain rule applications (ln of quadratic, exponential with linear exponent), then calculator evaluation at x=1. Correct answer 2.637. Distractors reflect omitted-term errors (e.g., 1.326 is only the first term). Standard procedural item, clean numbers, no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m01-k4",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Product rule: e^0.3(1.6+0.3ln5)=2.812",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "2.812"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Product and chain rule at a point; fits 3.1 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f'(1)=e^0.3(1.6+0.3ln5)=2.8115; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The product reading of ln(4x^2+1)e^{0.3x} is standard and acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct misconception, and the numeric values match the described errors. Explanation covers all wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, short numeric options, and calculator use is plausible for a decimal value."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean chain/product rule item with well-motivated distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires product rule combined with two chain rule applications (ln of a quadratic, exponential with linear exponent), then calculator evaluation at x=1. Correct answer is 2.812 (option A). Distractors reflect plausible misconceptions such as omitting the second product-rule term. Concept depth and steps are appropriate for a full mock; numbers are clean and wording is clear.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m01-k5",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Product rule: f'(3)=e^{1.5}(24/40+0.5 ln40)=4.4817*2.4444≈10.955",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "10.955"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 75 seconds, and the calculator is used only for the final evaluation.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean chain rule and product rule evaluation. The key is correct, the distractors are plausible, and the load is typical of an AP exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Product rule combined with two chain rule applications (ln of a quadratic, exponential with a linear exponent), followed by a calculator evaluation at x=3. Correct answer is 10.955 (option B). The distractors match common errors such as dropping the 0.5 factor or skipping the product rule. Moderate reasoning steps, no representation changes, minimal reading, and calculator-friendly numbers. This is a standard procedural item appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k0",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f(1)≈3.65 is less than 4.7, so c > 1, which rules out 1.000, 0.689 and 0.996. f(1.223)≈1.223·e^0.6115+2.446≈4.700.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1.223"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 80 seconds, requires a calculator, has no needless arithmetic, and the options are parallel 3-decimal values.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct calculator IVT root-finding question with a unique key and distinct distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The continuity hypothesis is given and the range check is trivial. The task is to solve f(x)=4.7 with a calculator, which is one procedural step with clean numbers. It needs little conceptual depth and no representation changes. The distractors are plain numeric values, not misconception-based options.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k1",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f(x)=x e^{2x}+x. f(0)=0 and f(2)≈111.2, so 66.7 lies between them. f(1.794)=1.794·e^{3.588}+1.794≈1.794·36.17+1.794≈66.7.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1.794"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "IVT with a numerical solve on a calculator fits topic 1.16 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f is increasing on [0,2], so the root is unique. f(1.794)≈66.7, so the key is correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The expression xe^{x/0.5}+1x is awkward (x/0.5 and the coefficient 1x) but unambiguous. The rounding convention is not stated, though the options make it clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors are distinct and each corresponds to a stated misconception. Midpoint and linear interpolation are weak for a calculator item. Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, one calculator solve, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and suitable. The key 1.794 checks out, and the unique root follows from f being increasing. The only weakness is the unnatural expression form and the weak distractors, which are minor and not disqualifying."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item checks the IVT hypotheses (continuity, and 66.7 lies between f(0)=0 and f(2)≈111.2) and then finds c by calculator, either by solving xe^{2x}+x=66.7 or by substituting the four options. The concept depth is low, there are few reasoning steps, and there is a single representation (an algebraic expression). The distractors are not misconception-based, and the stem is terse with slightly odd notation (x/0.5, 1x) but unambiguous. Computation is modest and calculator-supported, so this is basic IVT application practice rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k2",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f(1.689)≈1.689·e^0.8445+5.067≈3.930+5.067≈8.997≈9",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1.689"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "IVT with numerical solve on calculator fits topic 1.16 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f is increasing on [0,3], f(0)=0 and f(3)≈22.5, so the solution is unique. f(1.689)≈8.997, so the key is correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete; uniqueness is implied but can be checked on a calculator."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches its stated misconception: midpoint, linear interpolation (3·9/22.45≈1.203), and solving f=k/2 (f(0.973)≈4.5). The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds with a calculator, with clean options and a consistent calculator designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable item. The key 1.689 is correct and unique, and the distractors map to realistic misconceptions that were checked numerically. The only minor issue is that uniqueness of c is implied rather than stated in the stem."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item is a direct calculator application of the IVT: set f(x)=9 and solve numerically with the graphing calculator's intersection or solver. The stem already states continuity, so no hypothesis needs to be checked. There are only one or two reasoning steps and little representation change. The distractors can be eliminated by substituting into f. The computation is simple and there is no ambiguity, so this is a routine procedural item rather than a full-mock exam-prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k3",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f(0)=0 and f(3)≈19.4, so 7.8 lies between them. f is increasing on [0,3], so there is only one solution. Checking x=1.766: 1.766·e^0.883 + 3.532 ≈ 4.270 + 3.532 ≈ 7.80.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1.766"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "IVT-solve with calculator fits 1.16/1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f increasing, unique root 1.766; verified."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (midpoint, linear interpolation, wrong target); each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "~80s, calculator required for solving, parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound calculator-based IVT item with a unique correct key and plausible distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step task: solve f(c)=7.8 with a calculator (graph intersection or solver). Continuity and the IVT conclusion are already given in the stem, so no hypothesis checking or procedure choice is needed. Answer c≈1.766 verified. Distractors are just nearby values and do not target specific misconceptions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k4",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f(x)=xe^{2x}+2x; f(1.626)≈1.626·25.84+3.25≈45.3",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1.626"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "IVT with a numerical solve on a calculator; fits topic 1.16 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f is increasing, so the root is unique. f(1.626) is about 45.26, which matches the key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The expression x e^{x/0.5} is awkward and would read better as e^{2x}, but it is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions: linear interpolation (0.800 checks out), midpoint, and solving for k/2 (1.348 checks out). Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, a calculator is required and appropriate, and the numbers are clean."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and verified, and the distractors are realistic. The only flaw is the awkward x/0.5 exponent, which is minor."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The stem states continuity and the IVT conclusion. The student only needs to solve f(c)=45.3 with a calculator (graph intersection/solver) or test the options. The options are easy to eliminate (1.000 gives about 9.4, 0.800 gives about 5.6). The unique answer 1.626 gives about 45.27. There is a single procedure, one representation (an expression, optionally graphed), no hypothesis to check, and no heavy computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k5",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "2.592",
+     "brief_reasoning": "f(x)=xe^x+2x; f(2.592)≈2.592·13.357+5.184≈39.80. f is increasing on [0,3], so this c is unique.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "IVT guarantee then numerically solving f(c)=k with a calculator; fits 1.16 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f is increasing on [0,3], f(0)=0 and f(3)≈66.3 so k=39.8 is attained; unique solution 2.592; key is correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stray 'e^{x/1}' is a template artifact that is awkward but not ambiguous; it should be simplified to e^x."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct (midpoint, wrong target k/2, linear interpolation) and every wrong option is explained in the rationale; the midpoint distractor is somewhat weak."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds with a graphing calculator, a single step, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and unique key (2.592), an appropriate calculator-based IVT solve, and distinct distractors. The only blemish is the cosmetic 'x/1' exponent artifact. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item is essentially a single calculator equation solve (x e^x + 2x = 39.8, so c ≈ 2.592). Continuity is given and the IVT is only cited, so no hypothesis needs checking and there is no choice of procedure. The numbers are clean and reading load is minimal. The 'e^{x/1}' notation is odd but harmless. Distractors are just nearby values, so the option set is not misconception-rich.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m03-k0",
+  "cellId": "ap_calculus_ab-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separating variables gives y = 2e^(x^2/4), so f(3) = 2e^2.25 ≈ 18.975.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "18.975"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Separable particular solution evaluated at a point; topic 7.7, skill 1.E, AB scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "y=2e^(x^2/4), f(3)=2e^2.25≈18.975; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete, and the initial condition is given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors map to distinct misconceptions (2e^4.5, 2+0.25*9, 2e^1.5), and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, light calculator use, options in parallel decimal form."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and suitable. The key 18.975 is verified, the distractors reflect distinct misconceptions, and the scope and calculator use are appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AB separation-of-variables with initial condition: separate, integrate both sides, solve for C, evaluate at x=3 with a calculator. Clean numbers, minimal reading, and distractors reflect common errors (missing 1/2 factor, linear approximation). It is a typical exam-style procedural item, above pure recall but not deep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m03-k1",
+  "cellId": "ap_calculus_ab-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separating variables gives y = 5e^{x^2/4}, so f(3) = 5e^{2.25} ≈ 47.439.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "47.439"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Separation of variables with initial condition, evaluated at a point; squarely 7.7 / 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "y=5e^{x^2/4}; f(3)=5e^{2.25}=47.439 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct misconception (5e^{4.5}, 5e^{1.5}, 5+2.25); the explanation addresses all three."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, light calculator use, typical for an AP calculator-section MC."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, in-scope item with distinct misconception distractors and appropriate load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single standard separable DE with an initial condition: separate, integrate both sides, solve for the constant, evaluate at x=3. The calculator is used only for e^2.25. The distractors match common errors (a wrong antiderivative, dropped factors), and there are no unfair difficulty sources. This is direct procedure application, suited to basic learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m03-k2",
+  "cellId": "ap_calculus_ab-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separating variables gives y = 3e^(0.1x^2), so f(3) = 3e^0.9 ≈ 7.379.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "7.379"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Separation of variables with an initial condition, evaluated at a point; this is the core of 7.7 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f(3)=3e^0.9≈7.379 is unique; each distractor corresponds to a distinct error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors map to distinct misconceptions, and the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, short, with a light calculator use for e^0.9."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well-formed. The key 7.379 is verified, and the distractors are realistic and distinct."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single separable ODE with an initial condition: separate, integrate, apply the IC, then evaluate with a calculator (3e^0.9 = 7.379). Standard procedural skill 1.E with a misconception-rich option set (3+0.9, forgetting the 1/2 factor in the integral, etc.). Numbers are clean, wording is unambiguous, and there is no extra reading load.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m03-k3",
+  "cellId": "ap_calculus_ab-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separate variables: y=2e^{0.15x^2}, so f(3)=2e^{1.35}≈7.715",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "7.715"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Separable DE with initial condition, evaluation at a point; in scope for AB 7.7, skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 7.715 = 2e^{1.35}, unique; matches the independent solver."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct realistic error: forgot 1/2, treated x as constant, added instead of exponentiating. All wrong options are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds; calculator needed only to evaluate the exponential; options are parallel decimals."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, in-scope separable-equation value question. The key is unique and the distractors reflect distinct misconceptions. Calculator use is minimal but legitimate. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct separation of variables: integrate both sides, apply f(0)=2 to get y=2e^{0.15x^2}, then evaluate at x=3 with a calculator. One procedure, no representation changes, clean numbers, and distractors based on exponent errors. Routine application of the topic skill.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m03-k4",
+  "cellId": "ap_calculus_ab-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separate: ln y = 0.15x^2 + C, y=2e^{0.15x^2}; f(3)=2e^{1.35}≈7.715",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "7.715"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Separation of variables with initial condition, evaluate with calculator; fits 7.7 / 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2e^{1.35}=7.715 unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct realistic error and its value matches that error; explanation covers all wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 s, light calculator use."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean separable-DE item with well-motivated distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single standard separable DE with an initial condition: separate, integrate, apply f(0)=2, evaluate at x=3 with a calculator. Direct procedural application of one rule, no representation changes or added reasoning twists. Distractors reflect common errors (missing 1/2 in integration, dropping the constant) but do not add depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m03-k5",
+  "cellId": "ap_calculus_ab-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separate variables: y=3e^{0.1x^2}, so f(3)=3e^{0.9}≈7.379",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "7.379"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Separation of variables with an initial condition, evaluated at a point; AB Unit 7.7 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "y=3e^{0.1x^2}, f(3)=3e^{0.9}=7.379; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "5.466 = 3e^{0.6} (exponent kx); 18.149 = 3e^{1.8} (forgot 1/2); 3.900 = 3+0.9 (additive error). All distinct and all explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds; a calculator is reasonable for evaluating the exponential; clean numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item with a unique key and distinct, realistic distractors. It fits topic 7.7 and the calculator designation."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard separable DE with an initial condition: separate variables, integrate to get ln y = 0.1x^2 + C, apply f(0)=3, evaluate 3e^0.9 ≈ 7.379 with a calculator. Requires a full procedure of about 4 steps but uses clean numbers and no extra context. Distractors reflect plausible errors such as linear estimation or a wrong exponent. This is typical AP exam difficulty for 7.7.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ }
+]

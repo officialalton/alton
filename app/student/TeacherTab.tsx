@@ -9,6 +9,9 @@ import type {
 } from "./teacher-data";
 import type { ChatMessage } from "./chat-data";
 import ChatPanel from "./ChatPanel";
+import { formatCurriculumProgressLabel } from "@/lib/curriculum-overlay-progress";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
+import { fmtIntlEn } from "@/lib/format-datetime-en";
 
 type SubView =
   | { type: "list" }
@@ -55,12 +58,10 @@ export default function TeacherTab({
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">선생님</h1>
-
+    <div className="max-w-[640px]">
       {teachers.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          매칭된 선생님이 없습니다.
+          No teacher has been matched yet.
         </div>
       ) : (
         teachers.map((t) => (
@@ -80,14 +81,21 @@ export default function TeacherTab({
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-1.5 mb-3.5">
+            <div className="flex flex-col gap-1 mb-3.5">
               {t.subjects.map((s) => (
-                <span
-                  key={s.subjectName}
-                  className="text-[12px] font-semibold px-3 py-1 rounded-full bg-grey-100 text-ink"
-                >
-                  {s.subjectName} · {s.currentSession}/{s.totalSessions}회차
-                </span>
+                <div key={s.subjectName} className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-[12px] font-semibold px-3 py-1 rounded-full bg-grey-100 text-ink">
+                    {s.subjectName} ·{" "}
+                    {formatCurriculumProgressLabel({
+                      totalUnits: s.totalSessions,
+                      doneUnits: s.currentSession,
+                      sourceLabel: null,
+                    })}
+                  </span>
+                  {s.curriculumSourceLabel && (
+                    <span className="text-[11px] text-grey-400">{s.curriculumSourceLabel}</span>
+                  )}
+                </div>
               ))}
             </div>
 
@@ -96,13 +104,13 @@ export default function TeacherTab({
                 onClick={() => setSubView({ type: "profile", teacherId: t.teacherId })}
                 className="text-[12px] font-bold px-4 py-2 rounded-lg border border-grey-200"
               >
-                프로필 보기
+                View profile
               </button>
               <button
                 onClick={() => setSubView({ type: "chat", teacherId: t.teacherId })}
                 className="text-[12px] font-bold px-4 py-2 rounded-lg bg-ink text-white"
               >
-                💬 메시지
+                💬 Message
               </button>
             </div>
           </div>
@@ -121,13 +129,14 @@ function ProfileView({
   history: TeacherSessionHistoryItem[];
   onBack: () => void;
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
   const [showHistory, setShowHistory] = useState(false);
 
   return (
     <div className="max-w-[560px] px-8 py-8">
-      <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold mb-4">
-        ← 뒤로
+      <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
+        ← Back
       </button>
 
       <div className="flex items-center gap-3 mb-4">
@@ -164,10 +173,10 @@ function ProfileView({
           onClick={() => setShowHistory(true)}
           className="text-[12.5px] font-bold px-4 py-2.5 rounded-lg border border-grey-200"
         >
-          이 선생님과 진행한 수업 내역 보기
+          View lessons with this teacher
         </button>
       ) : history.length === 0 ? (
-        <p className="text-[12.5px] text-grey-500">아직 진행한 수업이 없습니다.</p>
+        <p className="text-[12.5px] text-grey-500">No lessons yet.</p>
       ) : (
         history.map((h) => (
           <button
@@ -176,10 +185,10 @@ function ProfileView({
             className="w-full text-left border-[1.5px] border-grey-200 rounded-lg px-4 py-3 mb-2"
           >
             <div className="text-[12px] text-grey-500">
-              {formatKoreanDateTime(h.scheduledAt)}
+              {formatKoreanDateTime(h.scheduledAt, tz)}
             </div>
             <div className="text-[13px] font-semibold text-ink">
-              {h.subjectName} · {h.sessionNumber}회차
+              {h.subjectName} · Session {h.sessionNumber}
             </div>
           </button>
         ))
@@ -188,13 +197,13 @@ function ProfileView({
   );
 }
 
-function formatKoreanDateTime(iso: string | null) {
+function formatKoreanDateTime(iso: string | null, tz: string) {
   if (!iso) return "";
-  return new Intl.DateTimeFormat("ko-KR", {
-    month: "long",
+  return fmtIntlEn(new Date(iso), {
+    month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  }).format(new Date(iso));
+  }, tz);
 }

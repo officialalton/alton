@@ -1,0 +1,318 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "second_solver",
+ "runId": "lit40-wave1",
+ "taskId": "rev-second_solver-046",
+ "chunkId": "rev-second_solver-046",
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-046.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "opus|fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "boolean",
+    "confidence": "high|medium|low",
+    "note": "풀이 한 줄"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-06-085",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "A drawer of lead type slid open with a groan when Hamza needed the letter that, in our shared wall's language of knocks, meant come over. I had lived beside his printing press in Beirut for six years and knew its moods: the thump of the platen, the hiss of the ink roller, the mutter of a man who disliked every street map he had ever printed. That evening he spread a new one across his table and jabbed at the errors, a missing alley here, a renamed square there, until I, Mehreen, began to defend the city's mapmakers out of pure stubbornness. Then he traced a faint pencil line I had not noticed. It ran from my door to his, through the plaster. \"This,\" he said, \"they always leave out.\" I stopped arguing.",
+   "question": "Which choice best describes the shift in tone in the passage?",
+   "options": [
+    "It shifts from bitter resentment to forgiveness as the narrator finally pardons Hamza's many insults.",
+    "It shifts from bickering humor to quiet tenderness when Hamza reveals the line between their homes.",
+    "It shifts from nostalgic longing to practical urgency as the neighbors correct the map's mistakes.",
+    "It shifts from fearful suspicion to trust when the narrator learns the purpose of the knocking."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-086",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Three things were forbidden in the Gdansk library where my aunt Ksenia worked: food, whispering, and the name Dmitri. I was fifteen, cooking her dinners that winter, and I broke the first rule constantly, smuggling dumplings in my coat to eat between the stacks. Ksenia scolded me in her flat librarian's voice and confiscated them with the same efficiency she used for overdue books. I thought her made of index cards. One evening, shelving a returned atlas, I found a slip tucked inside: a borrower's card, decades old, signed Dmitri in a child's looping script. Beneath it, in Ksenia's neat hand, someone had renewed the loan every year. I carried it to her desk. She looked at it for a long time, and her voice, when it came, was barely a whisper.",
+   "question": "Which choice best describes the shift in tone in the passage?",
+   "options": [
+    "It shifts from fearful obedience to rebellious defiance as the narrator breaks the library rules.",
+    "It shifts from warm affection to cold suspicion when the narrator uncovers Ksenia's secret.",
+    "It shifts from wry amusement at Ksenia's strictness to solemn recognition of her hidden grief.",
+    "It shifts from somber mourning to lighthearted relief once the forgotten name is spoken aloud."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-087",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Spools of thread rattled in Baoyu's tin as she climbed into the old projection booth above the shuttered cinema in Chengdu, where she had sewn costumes for twenty years. Hari, her only apprentice, was already there, pinning hems by the dusty window. The theater's owner had sold the building; one of them could follow him to his new shop across the river, and one could not. Baoyu had rehearsed the speech for days. Instead, she watched Hari work. He knotted thread the way she had taught him, then in a way she hadn't, a small twist that held better than hers. She remembered her own teacher, decades earlier, watching her the same way before stepping aside. When the owner climbed the stairs, Baoyu set the tin of spools in Hari's hands and turned to the projector.",
+   "question": "Which choice best describes the overall structure of the passage?",
+   "options": [
+    "It describes a conflict between two workers, then shows them agreeing to share a new shop.",
+    "It presents the long history of a cinema, then explains why its owner decided to sell the building.",
+    "It contrasts two sewing techniques, then argues that the older method is superior.",
+    "It introduces a difficult choice, then traces the observations that lead Baoyu to resolve it."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-088",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "By noon the line at Matteo's noodle stall in Bologna stretched past the fountain, and every customer obeyed the sign nailed above the counter: one bowl per person, no exceptions. Caio, who had taught Matteo arithmetic forty years before, reached the front and asked for two. Matteo pointed at the sign without looking up. \"Rules are rules, maestro.\" Caio nodded, paid for one, and stepped aside. He did not leave. Instead he stood by the fountain and gave his bowl, untouched, to a boy whose mother had been turned away for asking the same thing. Matteo watched the boy eat. Then he watched the next customer, a widow with two grandchildren, reach the counter. He reached up, pried the sign loose, and slid it under the cash drawer, where flour soon covered it.",
+   "question": "Which choice best describes the overall structure of the passage?",
+   "options": [
+    "It establishes a rigid rule, shows a quiet act that exposes its cost, and ends with the rule being abandoned.",
+    "It describes a busy market, then shifts to a lengthy debate between two former classmates about the fairness of the stall's prices.",
+    "It recounts a teacher's lesson from the past, then shows a student applying it decades later.",
+    "It introduces a popular stall, then explains the economic reasons for limiting customers' orders."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-089",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "I watched Renata glue the broken bowl at the ceramics studio in Valparaiso the spring I turned sixteen, and I told her, with all the scorn I could gather, that a mended bowl was still a broken one. She had married my father that winter; the bowl had been my mother's, and I had dropped it, not quite by accident. Renata did not argue. She filled the cracks with a gold-tinted resin and set the bowl on the kiln shelf to cure. For weeks I ignored it. Then Ximena, the studio's owner, asked me to carry it to the display window. In the afternoon light the seams looked less like damage than like a map. I still believe some things cannot be repaired. I have also kept the bowl on my desk for nine years.",
+   "question": "Which choice best describes the overall structure of the passage?",
+   "options": [
+    "It describes how to repair pottery, then argues that carefully repaired objects are always more valuable than new ones.",
+    "It recounts the narrator's early scorn for a repair, then traces a gradual and incomplete change in her view.",
+    "It presents a conflict between Renata and Ximena, then shows the narrator taking Ximena's side.",
+    "It opens with the narrator's present-day life, then flashes back to the day her mother left."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-091",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "When the Surabaya market opened at dawn, Arisa unrolled her mother's batik across the stall table before the fruit sellers had even lifted their shutters. Her mother, too weak now to walk the aisles, still drew the patterns each night in wax by lamplight, and Arisa dyed and sold them. Customers stopped all morning. They traced the waxy borders with their fingertips, called the work extraordinary, and photographed it for their cousins abroad. __A tourist asked whether the artist would sign one, then left without buying anything.__ By noon Arisa had sold two small scarves, enough for rice and her mother's medicine but not for the new wax. On the walk home she rehearsed what she would say, something about the praise, and decided to tell her mother only that people had loved the colors.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It introduces a customer whose later purchase allows Arisa to buy wax for her mother.",
+    "It suggests that Arisa's mother is becoming famous among visitors from other countries.",
+    "It reveals that Arisa quietly resents the tourists because they misunderstand her mother's patterns.",
+    "It sharpens the contrast between the admiration the batik receives and the little money it earns."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-092",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Lindiwe had always translated for her father at the beekeeper's yard in Addis Ababa, turning buyers' English into his Zulu and back again, smoothing his blunt prices into polite offers. He trusted her completely, and she liked being trusted. Then, in March, her teacher returned an essay about the hives with a single comment: You write as if you are apologizing for him. Lindiwe read it on the bus and again at the gate. __That afternoon, when a buyer called the honey too expensive, she repeated her father's answer word for word: \"Then buy cheaper honey.\"__ Thandiwe, her younger sister, gasped. Her father looked at her as though seeing a stranger, then laughed, a sound she had not heard from him in the yard before. The buyer paid the full price.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows Lindiwe acting on her teacher's remark by translating her father's words without softening them.",
+    "It reveals that Lindiwe secretly disagrees with her father's high prices and wants the buyer to leave the yard.",
+    "It explains why the buyer later decides to purchase honey from a cheaper seller.",
+    "It establishes that Lindiwe has never before translated for her father in the yard."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-093",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "When I was twelve, Ephraim, my violin teacher, made me play scales among the cabbages in a community garden in Tromso, because, he said, plants did not flatter anyone. He was exacting to the point of cruelty: a slightly sour note meant starting the whole piece over. Somewhere in those years, he claimed, I had promised to play at the garden's midsummer supper. I did not remember any such promise, and I suspect he invented it. __Still, I practiced that summer as I never had before, with Yiannis, the gardener, nodding along between the rows.__ On the night of the supper, my bow trembled on the first note and steadied on the second. I have since forgotten nearly everything I played. I remember the cabbages, enormous and blue in the long evening light.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It reveals that the narrator finally remembers making the promise to Ephraim.",
+    "It shows the narrator committing to a promise she doubts she ever made, preparing for the performance.",
+    "It suggests that Yiannis, rather than Ephraim, is the narrator's true teacher.",
+    "It criticizes Ephraim's strict methods by showing that the narrator stubbornly refused to practice at all."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-095",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "\"You're the ranger who closed the ridge trail,\" Koa said, still breathing hard at the cemetery gate where the search party had found him. Bokhee, who had spent four hours in Auckland's drizzle looking for him, did not answer at once. The narrator of this town's small dramas, I watched from the caretaker's shed. Koa had come to scatter his grandfather's ashes on the ridge, and he had missed the one clear evening of the month. He blamed the closure; he blamed the map; he blamed Bokhee most of all. She let him. She handed him a thermos, then, when he had finished, a folded paper: the reopening date, written in her own hand, and a note that she would walk him up herself. I have seen many people argue with grief. Few of them meet anyone so patient.",
+   "question": "Which choice best describes the narrator's attitude toward Bokhee?",
+   "options": [
+    "Amused, because the narrator finds her refusal to defend herself somewhat foolish.",
+    "Critical, because the narrator believes she closed the trail without good reason.",
+    "Admiring, because the narrator values her patient kindness toward a grieving man.",
+    "Indifferent, because the narrator watches the encounter only from a distance."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-096",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "I married Kian in April, and by June I was living in his mother's rented farmhouse outside Lima, waiting with her for a letter from the consulate that would decide whether he could return from abroad. Valentina did not like me; she said so plainly on my second day. She corrected how I folded the sheets and how I salted the beans. Yet each morning she walked the long road to the post office before I woke, and each morning she came back and told me, without being asked, that there was nothing yet. Once I found her asleep at the kitchen table with my mended blouse in her lap. I folded it the way she preferred and said nothing. I am still not sure whether she likes me. I no longer think it is the most important question.",
+   "question": "Which choice best describes the narrator's attitude toward Valentina?",
+   "options": [
+    "Resentful, because the narrator feels that Valentina's criticism has made her unwelcome.",
+    "Fearful, because the narrator worries that Valentina will turn Kian against her.",
+    "Dismissive, because the narrator considers Valentina's household rules trivial and outdated.",
+    "Appreciative, because the narrator recognizes care beneath Valentina's blunt manner."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-097",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Jamal laid the gift beside Shigeru's tray\nin the dining hall of the Delta camp:\na pocketknife, worn smooth, his grandfather's.\n\nI was the one who carried words between them,\nand I chose the wrong ones, I think.\nShigeru heard keep this to cut ties\nand set the knife down as if it burned.\n\nAll week the cicadas argued in the oaks.\nAll week the two of them ate at separate tables.\n\nOn the last night I tried again, slower,\nthe way you open a jar that has stuck:\nkeep this, so you can whittle a way back.\nShigeru turned the knife in the lamplight\nand smiled the way a door opens.",
+   "question": "Which choice best describes the speaker's attitude toward her role in the misunderstanding?",
+   "options": [
+    "Regretful but determined to repair the error she believes she made.",
+    "Defensive, insisting that the misunderstanding was Jamal's fault alone.",
+    "Detached, describing the conflict as though she played no part in it.",
+    "Amused by the confusion and unconcerned about its effect on the two men."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-098",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "When the monastery guesthouse in Manchester began clearing out its rooms, I took a job helping Grant, who ran the secondhand shop that bought the contents. Most of it went quickly: iron bedframes, hymnals, a box of mismatched spoons. The last item was a plain wooden chair with one short leg, and a woman named Dana came every day for a week to ask for it. Grant refused each time. He said it was promised to a collector; later he said it was not for sale; finally he simply pretended not to hear her. I thought him stubborn, even petty. On Friday I learned that the chair had stood in the room where Dana's brother had stayed as a novice, and that Grant had been searching all week for the matching short-legged table.",
+   "question": "Which choice best describes the narrator's attitude toward Grant over the course of the passage?",
+   "options": [
+    "Steady admiration, since the narrator always trusts Grant's judgment about selling items.",
+    "Initial disapproval that gives way to recognition of a motive the narrator had not seen.",
+    "Growing suspicion that Grant is hiding the chair in order to sell it at a higher price.",
+    "Lasting amusement at Grant's refusals, which the narrator treats as a running joke."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-100",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "After midnight the pharmacy in Accra was nearly silent, and Adaeze worked the counter alone until Kofi arrived with the letter. He had been her father's closest friend, and he had translated the letter her father sent from Lagos years ago, the one that said he would not return. Now Kofi set the original beside her register. \"I told you he chose to stay,\" he said. \"His words were closer to 'I am not permitted to leave.' I thought that softer meaning would keep you waiting forever.\" Adaeze read the Yoruba lines slowly, the way she checked a prescription. For a decade she had answered his birthdays with silence. A taxi idled outside, its radio playing highlife, while a moth circled the blue sign above the door.",
+   "question": "Which choice best states the main purpose of the passage?",
+   "options": [
+    "To recount a night when Adaeze worked alone at a pharmacy until an old friend visited her.",
+    "To describe the strict procedures Adaeze follows when checking customers' prescriptions late at night.",
+    "To suggest that honesty is always the best choice, even when the truth may cause pain.",
+    "To show how learning a letter's true wording forces Adaeze to reconsider years of resentment."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-07-001",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "\"Your heel is worn on the left, as it always was,\" said Anacleto, without lifting his eyes from the awl. Pavel had set the boot on the counter of the little stall in Oaxaca and waited, as if nine years were a matter that required no remark. In their youth the two men had baked on opposite corners of the same street, each rising earlier to spite the other, each claiming the better crust. Now Anacleto mended shoes, and Pavel, it seemed, had come back with nothing but a cracked boot. Neither spoke of the ovens or of the winter Pavel vanished. Yet when the work was done, Anacleto refused the coins, and Pavel, after a long moment, left on the counter a small loaf wrapped in paper, still warm. Outside, a cart of marigolds rattled past toward the market, its driver singing off-key.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show two former rivals renewing a bond through gestures, not explanations",
+    "To recount how a baker who vanished for years came back to have a boot repaired",
+    "To explain why Anacleto abandoned baking and took up the trade of mending shoes",
+    "To suggest that old quarrels always fade once enough years have quietly passed"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-07-002",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "When Hassan and I first climbed the wall of the abandoned orchard behind his father's rental houses in Colombo, we were twelve and wanted only mangoes. Within a summer we had cleared the weeds, propped the sagging trees, and sold enough fruit at the junction to pay my family's rent for a month. I remember that I was proud, and that Hassan was prouder. But success has a way of being noticed. His father began asking what the orchard earned, and my mother began worrying aloud that we owed him for every mango. Hassan and I still met under the trees, though now we counted the fruit before we talked. Haoran, my younger brother, stopped coming with us altogether. Years later, I still keep a bent pruning hook on a nail by my door, its handle wrapped in blue electrical tape.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe how two children cleared an overgrown orchard and sold its mangoes",
+    "To reflect on how a shared success drew a friendship into two families' tensions",
+    "To argue that the orchard's owner, not his tenants' children, should have restored it",
+    "To suggest that every childhood friendship eventually yields to adult concerns"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-07-003",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Auckland summers, in my memory, smelled of hot tar and of the rooftop water tank where I hid after my father left. Kainoa, who sold fish from the back of a van on our street, found me there one afternoon holding my father's old diving watch, its strap cracked. He did not ask about it. Instead he handed me a snapper to carry home and said the watch still kept good time. For weeks afterward he timed his deliveries by it, calling up to the roof for the hour, as though the watch had a job worth doing. I began to wind it each morning without being told. Kamal, my cousin, thought the whole arrangement ridiculous. Below the tank, the neighbor's lemon tree dropped its fruit into the gutter, and nobody gathered it.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To recount how a fish seller found a boy hiding on a roof with a cracked watch",
+    "To explain why the narrator's cousin disapproved of the fish seller's arrangement",
+    "To show how a neighbor's quiet attention gave an absent father's watch a new use",
+    "To suggest that grief always eases once a child is given ordinary work to do"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-07-004",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "On her first morning in Rotterdam, Hana stood in the customs line with her boots tied to her duffel bag, the same boots she had barely worn all last season on the bench. Lars, her new coach, waited beyond the glass with a club scarf folded over his arm. When the officer asked the purpose of her visit, Hana said work, then corrected herself and said football. Months earlier she had told a reporter that she no longer knew what she was for. At the gate, Lars offered to carry the duffel, but Hana shook her head and slung it over her own shoulder, boots knocking against her back. Outside, a tram slid past the terminal, its windows fogged with breath.",
+   "question": "Based on the text, why does Hana most likely correct her answer to the officer?",
+   "options": [
+    "She is nervous that the officer will doubt her stated reason for entering the country.",
+    "She hopes Lars will overhear her and decide to place her in the starting lineup.",
+    "She has been told by the club that work visas are not issued to visiting athletes.",
+    "She wants to claim football as her identity again after a purposeless season."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-07-005",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Who leaves a recipe tin buried under a ferry terminal? Kalani asked herself this as she knelt in the sand the storm had stripped from around the pilings on Maui. The tin was rusted, but inside, wrapped in oilcloth, were cards in her grandmother's slanted hand. Aunt Mattie, who ran the terminal snack counter and allowed no one else near her stove, had always said there were no family recipes, only work. Kalani turned one card over and found Mattie's own childhood initials penciled in a corner beside a smear of what might have been coconut. She tucked the tin into her apron instead of carrying it straight to her aunt, and that afternoon she cooked the first recipe alone, before Mattie's shift began. Gulls circled the docked ferry, waiting for the passengers' scraps.",
+   "question": "Based on the text, why does Kalani most likely cook the recipe before her aunt arrives?",
+   "options": [
+    "She expects her aunt to deny the recipes and wants to cook them before that happens.",
+    "She feels guilty for digging under the terminal and fears her aunt will scold her for it.",
+    "She wants to earn a permanent place beside her aunt at the snack counter's stove.",
+    "She has been instructed by a note in the tin to cook her grandmother's recipes in secret."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-07-006",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "After the rains ended, Zawadi went to the seed cooperative in Nairobi to collect his late grandfather's share, and Neema, who had sorted beans beside the old man for forty years, met him at the door with a ledger. They argued first about the jar labels, which Zawadi wanted printed and Neema insisted on writing by hand. Her voice was sharp, but she kept touching the shelf where his grandfather's chair had stood. Zawadi noticed that she had saved the speckled cowpeas his grandfather favored in a separate tin, tied with the same frayed string he had always used. When he finally conceded the labels, Neema laughed softly and pressed the tin into his hands without a word. He stood holding it, feeling its weight shift as the seeds settled. In the yard, a boy was chasing a goat between the drying racks.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Irritable, dwelling on a stubborn quarrel over how the jar labels should be written",
+    "Tender, with brief surface bickering giving way to shared grief and affection",
+    "Combative, though softened at moments by small hints of fondness between the two",
+    "Celebratory, reflecting the cooperative's pride in a plentiful harvest after the rains"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자(두 번째 풀이자)다. 정답 표시가 없다. 직접 풀고 정답 외에 방어 가능한 선택지가 있는지 판정한다. 다른 풀이자의 답은 모른다.\n청크 rev-second_solver-046 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-046.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"opus|fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"boolean\",\"confidence\":\"high|medium|low\",\"note\":\"풀이 한 줄\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-06-085 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nA drawer of lead type slid open with a groan when Hamza needed the letter that, in our shared wall's language of knocks, meant come over. I had lived beside his printing press in Beirut for six years and knew its moods: the thump of the platen, the hiss of the ink roller, the mutter of a man who disliked every street map he had ever printed. That evening he spread a new one across his table and jabbed at the errors, a missing alley here, a renamed square there, until I, Mehreen, began to defend the city's mapmakers out of pure stubbornness. Then he traced a faint pencil line I had not noticed. It ran from my door to his, through the plaster. \"This,\" he said, \"they always leave out.\" I stopped arguing.\n\n[질문] Which choice best describes the shift in tone in the passage?\nA) It shifts from bitter resentment to forgiveness as the narrator finally pardons Hamza's many insults.\nB) It shifts from bickering humor to quiet tenderness when Hamza reveals the line between their homes.\nC) It shifts from nostalgic longing to practical urgency as the neighbors correct the map's mistakes.\nD) It shifts from fearful suspicion to trust when the narrator learns the purpose of the knocking.\n### lit40-medium-06-086 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nThree things were forbidden in the Gdansk library where my aunt Ksenia worked: food, whispering, and the name Dmitri. I was fifteen, cooking her dinners that winter, and I broke the first rule constantly, smuggling dumplings in my coat to eat between the stacks. Ksenia scolded me in her flat librarian's voice and confiscated them with the same efficiency she used for overdue books. I thought her made of index cards. One evening, shelving a returned atlas, I found a slip tucked inside: a borrower's card, decades old, signed Dmitri in a child's looping script. Beneath it, in Ksenia's neat hand, someone had renewed the loan every year. I carried it to her desk. She looked at it for a long time, and her voice, when it came, was barely a whisper.\n\n[질문] Which choice best describes the shift in tone in the passage?\nA) It shifts from fearful obedience to rebellious defiance as the narrator breaks the library rules.\nB) It shifts from warm affection to cold suspicion when the narrator uncovers Ksenia's secret.\nC) It shifts from wry amusement at Ksenia's strictness to solemn recognition of her hidden grief.\nD) It shifts from somber mourning to lighthearted relief once the forgotten name is spoken aloud.\n### lit40-medium-06-087 — skill text_structure_purpose · 유형 text_structure\n[지문]\nSpools of thread rattled in Baoyu's tin as she climbed into the old projection booth above the shuttered cinema in Chengdu, where she had sewn costumes for twenty years. Hari, her only apprentice, was already there, pinning hems by the dusty window. The theater's owner had sold the building; one of them could follow him to his new shop across the river, and one could not. Baoyu had rehearsed the speech for days. Instead, she watched Hari work. He knotted thread the way she had taught him, then in a way she hadn't, a small twist that held better than hers. She remembered her own teacher, decades earlier, watching her the same way before stepping aside. When the owner climbed the stairs, Baoyu set the tin of spools in Hari's hands and turned to the projector.\n\n[질문] Which choice best describes the overall structure of the passage?\nA) It describes a conflict between two workers, then shows them agreeing to share a new shop.\nB) It presents the long history of a cinema, then explains why its owner decided to sell the building.\nC) It contrasts two sewing techniques, then argues that the older method is superior.\nD) It introduces a difficult choice, then traces the observations that lead Baoyu to resolve it.\n### lit40-medium-06-088 — skill text_structure_purpose · 유형 text_structure\n[지문]\nBy noon the line at Matteo's noodle stall in Bologna stretched past the fountain, and every customer obeyed the sign nailed above the counter: one bowl per person, no exceptions. Caio, who had taught Matteo arithmetic forty years before, reached the front and asked for two. Matteo pointed at the sign without looking up. \"Rules are rules, maestro.\" Caio nodded, paid for one, and stepped aside. He did not leave. Instead he stood by the fountain and gave his bowl, untouched, to a boy whose mother had been turned away for asking the same thing. Matteo watched the boy eat. Then he watched the next customer, a widow with two grandchildren, reach the counter. He reached up, pried the sign loose, and slid it under the cash drawer, where flour soon covered it.\n\n[질문] Which choice best describes the overall structure of the passage?\nA) It establishes a rigid rule, shows a quiet act that exposes its cost, and ends with the rule being abandoned.\nB) It describes a busy market, then shifts to a lengthy debate between two former classmates about the fairness of the stall's prices.\nC) It recounts a teacher's lesson from the past, then shows a student applying it decades later.\nD) It introduces a popular stall, then explains the economic reasons for limiting customers' orders.\n### lit40-medium-06-089 — skill text_structure_purpose · 유형 text_structure\n[지문]\nI watched Renata glue the broken bowl at the ceramics studio in Valparaiso the spring I turned sixteen, and I told her, with all the scorn I could gather, that a mended bowl was still a broken one. She had married my father that winter; the bowl had been my mother's, and I had dropped it, not quite by accident. Renata did not argue. She filled the cracks with a gold-tinted resin and set the bowl on the kiln shelf to cure. For weeks I ignored it. Then Ximena, the studio's owner, asked me to carry it to the display window. In the afternoon light the seams looked less like damage than like a map. I still believe some things cannot be repaired. I have also kept the bowl on my desk for nine years.\n\n[질문] Which choice best describes the overall structure of the passage?\nA) It describes how to repair pottery, then argues that carefully repaired objects are always more valuable than new ones.\nB) It recounts the narrator's early scorn for a repair, then traces a gradual and incomplete change in her view.\nC) It presents a conflict between Renata and Ximena, then shows the narrator taking Ximena's side.\nD) It opens with the narrator's present-day life, then flashes back to the day her mother left.\n### lit40-medium-06-091 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nWhen the Surabaya market opened at dawn, Arisa unrolled her mother's batik across the stall table before the fruit sellers had even lifted their shutters. Her mother, too weak now to walk the aisles, still drew the patterns each night in wax by lamplight, and Arisa dyed and sold them. Customers stopped all morning. They traced the waxy borders with their fingertips, called the work extraordinary, and photographed it for their cousins abroad. __A tourist asked whether the artist would sign one, then left without buying anything.__ By noon Arisa had sold two small scarves, enough for rice and her mother's medicine but not for the new wax. On the walk home she rehearsed what she would say, something about the praise, and decided to tell her mother only that people had loved the colors.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It introduces a customer whose later purchase allows Arisa to buy wax for her mother.\nB) It suggests that Arisa's mother is becoming famous among visitors from other countries.\nC) It reveals that Arisa quietly resents the tourists because they misunderstand her mother's patterns.\nD) It sharpens the contrast between the admiration the batik receives and the little money it earns.\n### lit40-medium-06-092 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nLindiwe had always translated for her father at the beekeeper's yard in Addis Ababa, turning buyers' English into his Zulu and back again, smoothing his blunt prices into polite offers. He trusted her completely, and she liked being trusted. Then, in March, her teacher returned an essay about the hives with a single comment: You write as if you are apologizing for him. Lindiwe read it on the bus and again at the gate. __That afternoon, when a buyer called the honey too expensive, she repeated her father's answer word for word: \"Then buy cheaper honey.\"__ Thandiwe, her younger sister, gasped. Her father looked at her as though seeing a stranger, then laughed, a sound she had not heard from him in the yard before. The buyer paid the full price.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows Lindiwe acting on her teacher's remark by translating her father's words without softening them.\nB) It reveals that Lindiwe secretly disagrees with her father's high prices and wants the buyer to leave the yard.\nC) It explains why the buyer later decides to purchase honey from a cheaper seller.\nD) It establishes that Lindiwe has never before translated for her father in the yard.\n### lit40-medium-06-093 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nWhen I was twelve, Ephraim, my violin teacher, made me play scales among the cabbages in a community garden in Tromso, because, he said, plants did not flatter anyone. He was exacting to the point of cruelty: a slightly sour note meant starting the whole piece over. Somewhere in those years, he claimed, I had promised to play at the garden's midsummer supper. I did not remember any such promise, and I suspect he invented it. __Still, I practiced that summer as I never had before, with Yiannis, the gardener, nodding along between the rows.__ On the night of the supper, my bow trembled on the first note and steadied on the second. I have since forgotten nearly everything I played. I remember the cabbages, enormous and blue in the long evening light.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It reveals that the narrator finally remembers making the promise to Ephraim.\nB) It shows the narrator committing to a promise she doubts she ever made, preparing for the performance.\nC) It suggests that Yiannis, rather than Ephraim, is the narrator's true teacher.\nD) It criticizes Ephraim's strict methods by showing that the narrator stubbornly refused to practice at all.\n### lit40-medium-06-095 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\n\"You're the ranger who closed the ridge trail,\" Koa said, still breathing hard at the cemetery gate where the search party had found him. Bokhee, who had spent four hours in Auckland's drizzle looking for him, did not answer at once. The narrator of this town's small dramas, I watched from the caretaker's shed. Koa had come to scatter his grandfather's ashes on the ridge, and he had missed the one clear evening of the month. He blamed the closure; he blamed the map; he blamed Bokhee most of all. She let him. She handed him a thermos, then, when he had finished, a folded paper: the reopening date, written in her own hand, and a note that she would walk him up herself. I have seen many people argue with grief. Few of them meet anyone so patient.\n\n[질문] Which choice best describes the narrator's attitude toward Bokhee?\nA) Amused, because the narrator finds her refusal to defend herself somewhat foolish.\nB) Critical, because the narrator believes she closed the trail without good reason.\nC) Admiring, because the narrator values her patient kindness toward a grieving man.\nD) Indifferent, because the narrator watches the encounter only from a distance.\n### lit40-medium-06-096 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nI married Kian in April, and by June I was living in his mother's rented farmhouse outside Lima, waiting with her for a letter from the consulate that would decide whether he could return from abroad. Valentina did not like me; she said so plainly on my second day. She corrected how I folded the sheets and how I salted the beans. Yet each morning she walked the long road to the post office before I woke, and each morning she came back and told me, without being asked, that there was nothing yet. Once I found her asleep at the kitchen table with my mended blouse in her lap. I folded it the way she preferred and said nothing. I am still not sure whether she likes me. I no longer think it is the most important question.\n\n[질문] Which choice best describes the narrator's attitude toward Valentina?\nA) Resentful, because the narrator feels that Valentina's criticism has made her unwelcome.\nB) Fearful, because the narrator worries that Valentina will turn Kian against her.\nC) Dismissive, because the narrator considers Valentina's household rules trivial and outdated.\nD) Appreciative, because the narrator recognizes care beneath Valentina's blunt manner.\n### lit40-medium-06-097 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nJamal laid the gift beside Shigeru's tray\nin the dining hall of the Delta camp:\na pocketknife, worn smooth, his grandfather's.\n\nI was the one who carried words between them,\nand I chose the wrong ones, I think.\nShigeru heard keep this to cut ties\nand set the knife down as if it burned.\n\nAll week the cicadas argued in the oaks.\nAll week the two of them ate at separate tables.\n\nOn the last night I tried again, slower,\nthe way you open a jar that has stuck:\nkeep this, so you can whittle a way back.\nShigeru turned the knife in the lamplight\nand smiled the way a door opens.\n\n[질문] Which choice best describes the speaker's attitude toward her role in the misunderstanding?\nA) Regretful but determined to repair the error she believes she made.\nB) Defensive, insisting that the misunderstanding was Jamal's fault alone.\nC) Detached, describing the conflict as though she played no part in it.\nD) Amused by the confusion and unconcerned about its effect on the two men.\n### lit40-medium-06-098 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nWhen the monastery guesthouse in Manchester began clearing out its rooms, I took a job helping Grant, who ran the secondhand shop that bought the contents. Most of it went quickly: iron bedframes, hymnals, a box of mismatched spoons. The last item was a plain wooden chair with one short leg, and a woman named Dana came every day for a week to ask for it. Grant refused each time. He said it was promised to a collector; later he said it was not for sale; finally he simply pretended not to hear her. I thought him stubborn, even petty. On Friday I learned that the chair had stood in the room where Dana's brother had stayed as a novice, and that Grant had been searching all week for the matching short-legged table.\n\n[질문] Which choice best describes the narrator's attitude toward Grant over the course of the passage?\nA) Steady admiration, since the narrator always trusts Grant's judgment about selling items.\nB) Initial disapproval that gives way to recognition of a motive the narrator had not seen.\nC) Growing suspicion that Grant is hiding the chair in order to sell it at a higher price.\nD) Lasting amusement at Grant's refusals, which the narrator treats as a running joke.\n### lit40-medium-06-100 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nAfter midnight the pharmacy in Accra was nearly silent, and Adaeze worked the counter alone until Kofi arrived with the letter. He had been her father's closest friend, and he had translated the letter her father sent from Lagos years ago, the one that said he would not return. Now Kofi set the original beside her register. \"I told you he chose to stay,\" he said. \"His words were closer to 'I am not permitted to leave.' I thought that softer meaning would keep you waiting forever.\" Adaeze read the Yoruba lines slowly, the way she checked a prescription. For a decade she had answered his birthdays with silence. A taxi idled outside, its radio playing highlife, while a moth circled the blue sign above the door.\n\n[질문] Which choice best states the main purpose of the passage?\nA) To recount a night when Adaeze worked alone at a pharmacy until an old friend visited her.\nB) To describe the strict procedures Adaeze follows when checking customers' prescriptions late at night.\nC) To suggest that honesty is always the best choice, even when the truth may cause pain.\nD) To show how learning a letter's true wording forces Adaeze to reconsider years of resentment.\n### lit40-medium-07-001 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\n\"Your heel is worn on the left, as it always was,\" said Anacleto, without lifting his eyes from the awl. Pavel had set the boot on the counter of the little stall in Oaxaca and waited, as if nine years were a matter that required no remark. In their youth the two men had baked on opposite corners of the same street, each rising earlier to spite the other, each claiming the better crust. Now Anacleto mended shoes, and Pavel, it seemed, had come back with nothing but a cracked boot. Neither spoke of the ovens or of the winter Pavel vanished. Yet when the work was done, Anacleto refused the coins, and Pavel, after a long moment, left on the counter a small loaf wrapped in paper, still warm. Outside, a cart of marigolds rattled past toward the market, its driver singing off-key.\n\n[질문] Which choice best states the main purpose of the text?\nA) To show two former rivals renewing a bond through gestures, not explanations\nB) To recount how a baker who vanished for years came back to have a boot repaired\nC) To explain why Anacleto abandoned baking and took up the trade of mending shoes\nD) To suggest that old quarrels always fade once enough years have quietly passed\n### lit40-medium-07-002 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nWhen Hassan and I first climbed the wall of the abandoned orchard behind his father's rental houses in Colombo, we were twelve and wanted only mangoes. Within a summer we had cleared the weeds, propped the sagging trees, and sold enough fruit at the junction to pay my family's rent for a month. I remember that I was proud, and that Hassan was prouder. But success has a way of being noticed. His father began asking what the orchard earned, and my mother began worrying aloud that we owed him for every mango. Hassan and I still met under the trees, though now we counted the fruit before we talked. Haoran, my younger brother, stopped coming with us altogether. Years later, I still keep a bent pruning hook on a nail by my door, its handle wrapped in blue electrical tape.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe how two children cleared an overgrown orchard and sold its mangoes\nB) To reflect on how a shared success drew a friendship into two families' tensions\nC) To argue that the orchard's owner, not his tenants' children, should have restored it\nD) To suggest that every childhood friendship eventually yields to adult concerns\n### lit40-medium-07-003 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nAuckland summers, in my memory, smelled of hot tar and of the rooftop water tank where I hid after my father left. Kainoa, who sold fish from the back of a van on our street, found me there one afternoon holding my father's old diving watch, its strap cracked. He did not ask about it. Instead he handed me a snapper to carry home and said the watch still kept good time. For weeks afterward he timed his deliveries by it, calling up to the roof for the hour, as though the watch had a job worth doing. I began to wind it each morning without being told. Kamal, my cousin, thought the whole arrangement ridiculous. Below the tank, the neighbor's lemon tree dropped its fruit into the gutter, and nobody gathered it.\n\n[질문] Which choice best states the main purpose of the text?\nA) To recount how a fish seller found a boy hiding on a roof with a cracked watch\nB) To explain why the narrator's cousin disapproved of the fish seller's arrangement\nC) To show how a neighbor's quiet attention gave an absent father's watch a new use\nD) To suggest that grief always eases once a child is given ordinary work to do\n### lit40-medium-07-004 — skill inferences · 유형 character_motivation\n[지문]\nOn her first morning in Rotterdam, Hana stood in the customs line with her boots tied to her duffel bag, the same boots she had barely worn all last season on the bench. Lars, her new coach, waited beyond the glass with a club scarf folded over his arm. When the officer asked the purpose of her visit, Hana said work, then corrected herself and said football. Months earlier she had told a reporter that she no longer knew what she was for. At the gate, Lars offered to carry the duffel, but Hana shook her head and slung it over her own shoulder, boots knocking against her back. Outside, a tram slid past the terminal, its windows fogged with breath.\n\n[질문] Based on the text, why does Hana most likely correct her answer to the officer?\nA) She is nervous that the officer will doubt her stated reason for entering the country.\nB) She hopes Lars will overhear her and decide to place her in the starting lineup.\nC) She has been told by the club that work visas are not issued to visiting athletes.\nD) She wants to claim football as her identity again after a purposeless season.\n### lit40-medium-07-005 — skill inferences · 유형 character_motivation\n[지문]\nWho leaves a recipe tin buried under a ferry terminal? Kalani asked herself this as she knelt in the sand the storm had stripped from around the pilings on Maui. The tin was rusted, but inside, wrapped in oilcloth, were cards in her grandmother's slanted hand. Aunt Mattie, who ran the terminal snack counter and allowed no one else near her stove, had always said there were no family recipes, only work. Kalani turned one card over and found Mattie's own childhood initials penciled in a corner beside a smear of what might have been coconut. She tucked the tin into her apron instead of carrying it straight to her aunt, and that afternoon she cooked the first recipe alone, before Mattie's shift began. Gulls circled the docked ferry, waiting for the passengers' scraps.\n\n[질문] Based on the text, why does Kalani most likely cook the recipe before her aunt arrives?\nA) She expects her aunt to deny the recipes and wants to cook them before that happens.\nB) She feels guilty for digging under the terminal and fears her aunt will scold her for it.\nC) She wants to earn a permanent place beside her aunt at the snack counter's stove.\nD) She has been instructed by a note in the tin to cook her grandmother's recipes in secret.\n### lit40-medium-07-006 — skill inferences · 유형 tone_or_mood\n[지문]\nAfter the rains ended, Zawadi went to the seed cooperative in Nairobi to collect his late grandfather's share, and Neema, who had sorted beans beside the old man for forty years, met him at the door with a ledger. They argued first about the jar labels, which Zawadi wanted printed and Neema insisted on writing by hand. Her voice was sharp, but she kept touching the shelf where his grandfather's chair had stood. Zawadi noticed that she had saved the speckled cowpeas his grandfather favored in a separate tin, tied with the same frayed string he had always used. When he finally conceded the labels, Neema laughed softly and pressed the tin into his hands without a word. He stood holding it, feeling its weight shift as the seeds settled. In the yard, a boy was chasing a goat between the drying racks.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Irritable, dwelling on a stubborn quarrel over how the jar labels should be written\nB) Tender, with brief surface bickering giving way to shared grief and affection\nC) Combative, though softened at moments by small hints of fondness between the two\nD) Celebratory, reflecting the cooperative's pride in a plentiful harvest after the rains"
+}

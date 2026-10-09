@@ -1,0 +1,44 @@
+{
+ "itemId": "lines_angles_triangles.similar_triangles.TR.P",
+ "generatedAt": "2026-10-07T05:02:00.919Z",
+ "codeHash": "ffd0cefa5ba2a78ee424b42a6e49a734da89b16994a9e46fabf6e1685ceab878",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.similar_triangles.TR.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tri-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.similar_triangles.TR.P.png",
+   "mobileFile": "lines_angles_triangles.similar_triangles.TR.P.m375.png",
+   "archetypeId": "lat.similar_triangles.TR.P.unit_ratio",
+   "seed": 11,
+   "signature": "triangle:scalene",
+   "stimulus": "A student draws the figure shown for a geometry assignment. The two triangles in the figure are similar, with triangle $CGT$ corresponding to triangle $KWY$ in the order of the vertices. Side lengths are marked in the figure shown.",
+   "question": "What is the perimeter, in the same units, of the second triangle, $KWY$?",
+   "options": [
+    "40",
+    "96",
+    "54",
+    "72"
+   ],
+   "correctIndex": 3,
+   "answer": "72",
+   "explanation": "(1) 그림에서 닮음 대응(CGT ↔ KWY)과 변 라벨을 읽는다. (2) 대응변의 비로 닮음비를 구한다: 32 : 24. (3) 첫 삼각형의 둘레는 24 + 15 + 15 = 54 이다. (4) 둘레도 같은 비로 커지므로 54 × 32/24 = 72 이다. (5) 따라서 72 이다. 따라서 정답은 72이다.",
+   "structuralIssues": []
+  }
+ ]
+}

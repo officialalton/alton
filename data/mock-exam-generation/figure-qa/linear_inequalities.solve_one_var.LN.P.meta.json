@@ -1,0 +1,44 @@
+{
+ "itemId": "linear_inequalities.solve_one_var.LN.P",
+ "generatedAt": "2026-10-07T05:02:00.635Z",
+ "codeHash": "d19a8f9bea48e1bd1b3b5376629343d535bd1af80c1c652150a1cb42679e7c69",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_inequalities.solve_one_var.LN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_inequalities.solve_one_var.LN.P.png",
+   "mobileFile": "linear_inequalities.solve_one_var.LN.P.m375.png",
+   "archetypeId": "lisg.solve_one_var.LN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "A student is studying a linear function in algebra class. The graph of the linear function $f$ is shown in the $xy$-plane. Consider the inequality $f(x) \\ge -39$.",
+   "question": "What is the least integer value of $x$ that satisfies the inequality?",
+   "options": [
+    "-46",
+    "-44",
+    "45",
+    "-45"
+   ],
+   "correctIndex": 3,
+   "answer": "-45",
+   "explanation": "(1) 그래프에 표시된 두 점 (-4, 2) 과 (-3, 3) 을 읽는다. (2) 기울기 = (3 - (2)) ÷ (-3 - (-4)) = 1 이다. (3) f(x) = 1x + (6) 이다. (4) 1x + (6) >= -39 에서 경계 x = -45 이다. (5) 가장 작은 정수해는 -45 이다. 따라서 정답은 -45이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "itemId": "one_variable_data.median.BX.C",
+ "generatedAt": "2026-10-07T05:02:00.862Z",
+ "codeHash": "256f32430423305659698e8ebc348ab62eb9810edfe9cbf47aee070f1d2c813f",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.median.BX.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.median.BX.C.png",
+   "mobileFile": "one_variable_data.median.BX.C.m375.png",
+   "archetypeId": "ovd.median.BX.C.inverse",
+   "seed": 11,
+   "signature": "figure_choice[data:boxplot]",
+   "stimulus": "Four box plots are shown for the waiting times for appointments of patients at a clinic. All four have the same minimum and maximum. The median is 60 minutes, and the interquartile range is 40 minutes.",
+   "question": "Which of the following box plots could show these data?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) 중앙값은 상자 안의 선이므로 60 인 그림만 남긴다. (2) 사분위범위는 Q3 - Q1 = 상자의 너비이므로 40 인 그림만 남긴다. (3) 조건을 만족하지 못하는 상자그림을 하나씩 지워 나간다. (4) 정답 상자그림: Q1 40, 중앙값 60, Q3 80. (5) 다른 상자그림은 조건 하나 이상이 어긋난다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}

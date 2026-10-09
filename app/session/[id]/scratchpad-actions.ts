@@ -34,7 +34,7 @@ export async function saveWhiteboardStrokes(
 ) {
   const { supabase } = await requireUser();
   const { error } = await supabase
-    .from("sessions")
+    .from("legacy_sessions")
     .update({ whiteboard_strokes: strokes })
     .eq("id", sessionId);
   if (error) throw new Error(error.message);

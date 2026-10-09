@@ -1,0 +1,890 @@
+{
+ "taskId": "gen-lit40-medium-06-04",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-06-062",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-062",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "main_idea_or_purpose",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 61,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Winston",
+      "Kemoy"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "caribbean"
+     ],
+     "locale": "Port of Spain",
+     "setting": "a radio repair shop",
+     "relationship": "a bus driver and a regular passenger",
+     "conflict": "about the proper way to say goodbye",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a radio repair shop in Port of Spain; a bus driver and a regular passenger about the proper way to say goodbye"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium"
+   },
+   "g": {
+    "passage": "Three things never changed on my route: the pothole by the market, the fare, and Kemoy stepping off at Charlotte Street with the same two words, Later, driver. For eleven years I took it as the careless habit of a busy man who fixed radios for a living. Then, in my last week before retirement, I carried my dead transistor into his shop, a narrow room crowded with gutted cabinets and coils of wire. Without looking up from the solder, he told me that his father had said goodbye once, at the airport, and had never come back. On my final morning he handed me the radio, humming with a cricket match, and stepped off at Charlotte Street. Later, driver, he said, and this time I heard something new inside the words. Behind him a vendor was hosing down the pavement, and the water ran gold under the early sun.",
+    "question": "Which choice best states the main purpose of the text?",
+    "options": [
+     "To describe the daily route a bus driver followed for eleven years before retiring",
+     "To explain how a radio repairman in Port of Spain learned his trade from his father",
+     "To suggest that people should never take the ordinary habits of others for granted",
+     "To show how the narrator comes to hear a passenger's usual parting words differently"
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분에서 화자는 Kemoy의 'Later, driver'를 바쁜 사람의 무심한 습관으로 여겼다. 중간에 Kemoy가 아버지가 단 한 번 작별 인사를 하고 돌아오지 않았다고 말하고, 마지막 날 화자는 같은 말에서 새로운 의미를 듣는다. 이 두 근거를 이으면 지문의 목적은 D, 익숙한 작별 말을 새롭게 이해하게 되는 과정을 보여 주는 것이다. A는 배경만 요약했고, B는 아버지 소재를 쓰지만 내용과 목적이 다르며, C는 지나치게 일반적인 교훈이다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "tender"
+   ],
+   "devices": [
+    "repetition",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-063",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-063",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "main_idea_or_purpose",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 62,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Nneka",
+      "Jiwoo"
+     ],
+     "nameCultures": [
+      "west_african",
+      "korean"
+     ],
+     "locale": "Krakow",
+     "setting": "a boarding-house kitchen",
+     "relationship": "an uncle and a nephew with a debt",
+     "conflict": "over a witness account that differs",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a boarding-house kitchen in Krakow; an uncle and a nephew with a debt over a witness account that differs"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium"
+   },
+   "g": {
+    "passage": "Years later, Jiwoo would still recall the argument in the boarding-house kitchen in Krakow, over the four hundred zloty he owed his uncle. His uncle insisted the money had been handed over on a Tuesday, in cash, beside the stove. Jiwoo remembered a Thursday and an envelope. Nneka, who rented the room above and had been peeling potatoes that evening, was asked to settle it. She described a Wednesday, a folded bank slip, and an uncle who was laughing. At first Jiwoo resented her for complicating things. Only later, writing to her from Seoul, did he admit that her version had made both men stop shouting, because neither could be entirely right anymore. He repaid the debt that winter. Nneka's reply came on thin blue paper, smelling faintly of the dill she still grew on her windowsill.",
+    "question": "Which choice best states the main purpose of the text?",
+    "options": [
+     "To show how a third, conflicting account eased a family dispute by unsettling certainty",
+     "To recount a disagreement over the exact day a sum of money changed hands in a kitchen",
+     "To describe Jiwoo's letters to a former neighbor after he moved away from Krakow",
+     "To argue that memories of past events are never reliable enough to be trusted"
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분에서 삼촌과 Jiwoo는 돈을 건넨 요일과 방식을 두고 다투고, Nneka는 또 다른 세 번째 진술을 내놓는다. 뒷부분에서 Jiwoo는 그 진술 덕분에 누구도 완전히 옳을 수 없게 되어 두 사람이 고함을 멈췄다고 인정하고, 그해 겨울 빚을 갚는다. 따라서 지문의 목적은 A, 엇갈린 증언이 확신을 흔들어 갈등을 풀었음을 보여 주는 것이다. B는 일화만 요약했고, C는 편지 소재를 쓰지만 목적이 다르며, D는 지나치게 일반화된 교훈이다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "reflective"
+   ],
+   "devices": [
+    "contrast",
+    "retrospection"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-064",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-064",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "main_idea_or_purpose",
+    "genre": "memoir",
+    "seed": {
+     "index": 63,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Hedwig",
+      "Seun"
+     ],
+     "nameCultures": [
+      "german_austrian",
+      "west_african"
+     ],
+     "locale": "Dakar",
+     "setting": "a train-station cafe",
+     "relationship": "a conductor and the youngest violinist",
+     "conflict": "after learning how someone really earned their reputation",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a train-station cafe in Dakar; a conductor and the youngest violinist after learning how someone really earned their reputation"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium"
+   },
+   "g": {
+    "passage": "Hedwig was a legend before I ever met her. In our orchestra it was said that she could hear a single flat note from the back of a cathedral, and I, the youngest of the violinists, supposed she had been born with such ears. One evening our train to Saint-Louis was delayed, and the company crowded into the station cafe at Dakar. While the others played cards, Hedwig sat apart, copying a score by hand and humming each line under her breath, her pen hand stained to the knuckle. She had done this, the oboist whispered to me, every night for thirty years. When we reached Saint-Louis, I bought a cheap notebook and began copying my own parts before sleeping. Outside the cafe that evening, a boy had been selling roasted peanuts in paper cones, calling out the price in three languages.",
+    "question": "Which choice best states the main purpose of the text?",
+    "options": [
+     "To recount a delayed train journey during which an orchestra waited in a station cafe",
+     "To show the narrator coming to see a conductor's fame as earned by labor, not gift",
+     "To describe the musical duties of the youngest violinist in a touring orchestra",
+     "To suggest that every talented person must work very hard to deserve their fame"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분에서 화자는 Hedwig의 뛰어난 귀가 타고난 것이라고 생각했다. 그러나 역 카페에서 그녀가 30년 동안 매일 밤 악보를 손으로 베껴 왔다는 사실을 알게 되고, 이후 화자도 자기 파트를 베끼기 시작한다. 이 앞뒤 대비를 이으면 지문의 목적은 B, 지휘자의 명성이 재능이 아니라 노력으로 얻은 것임을 화자가 깨닫는 과정을 보여 주는 것이다. A는 일화만 요약했고, C는 화자의 역할 소재를 쓰지만 목적이 다르며, D는 지나치게 일반적인 교훈이다."
+   },
+   "notes": [],
+   "tone": [
+    "admiring",
+    "earnest"
+   ],
+   "devices": [
+    "contrast",
+    "anecdote"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-066",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-066",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "character_motivation",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 65,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Sachiko",
+      "Silas"
+     ],
+     "nameCultures": [
+      "japanese",
+      "english"
+     ],
+     "locale": "Kyoto",
+     "setting": "a night bus",
+     "relationship": "a landlord's son and a tenant's daughter",
+     "conflict": "over how to describe an accident honestly",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a night bus in Kyoto; a landlord's son and a tenant's daughter over how to describe an accident honestly"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_character_motivation_medium"
+   },
+   "g": {
+    "passage": "After midnight, the last bus out of central Kyoto carried only the two of them and a driver who kept the radio low. Silas held the accident report on his knee, the one his father had told him to sign. It said the bicycle had swerved without warning. Sachiko, whose mother rented the rooms above his father's shop, watched him read it twice. Hers had been the bicycle; her wrist was still wrapped in gauze. Silas remembered glancing at his telephone while backing his father's van out of the alley, and he remembered, too, that she had not mentioned this to anyone. At the next stop he borrowed her pen, crossed out a line, and wrote in the margin in small, careful letters. The bus turned onto a wide avenue, where the shuttered fish stalls glistened under the rain.",
+    "question": "Based on the text, why does Silas most likely change the report?",
+    "options": [
+     "He fears that Sachiko will go to the police if the statement stays as it was written.",
+     "He knows the report hides his own role in the accident, which Sachiko never revealed.",
+     "He wants to win the gratitude of Sachiko, which a corrected report will likely bring.",
+     "He was ordered by his father to fix a mistake in the report before he could sign it."
+    ],
+    "correct_letter": "B",
+    "explanation": "보고서에는 자전거가 갑자기 방향을 틀었다고 적혀 있지만, Silas는 자신이 휴대폰을 보며 밴을 후진했다는 사실을 떠올린다. 또 Sachiko가 그 사실을 누구에게도 말하지 않았다는 점도 기억한다. 두 단서를 이으면 그는 보고서가 자기 잘못을 감추고 있고 Sachiko가 그것을 덮어 주었음을 알기에 고친다는 B가 정답이다. A는 다른 감정(두려움)에서 나온 동기, C는 결과를 동기로 착각한 것, D는 지문에 없는 외부 원인이다."
+   },
+   "notes": [],
+   "tone": [
+    "hushed",
+    "tense"
+   ],
+   "devices": [
+    "imagery",
+    "implication"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-067",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-067",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "short_story",
+    "seed": {
+     "index": 66,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Joaquim",
+      "Benedita"
+     ],
+     "nameCultures": [
+      "portuguese_brazilian",
+      "portuguese_brazilian"
+     ],
+     "locale": "Porto Alegre",
+     "setting": "a movie theater in the off-season",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "over a plan that depends on a lie",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a movie theater in the off-season in Porto Alegre; a mayor and the town's only doctor over a plan that depends on a lie"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "g": {
+    "passage": "When the mayor asked me to meet him in the shuttered cinema, I knew he wanted something he could not ask for in daylight. Dust lay on the velvet seats, and the screen hung gray and slack, like a sail with no wind. Joaquim spoke quickly. If I told the provincial inspectors that the fever had passed, the summer visitors would return, the cinema would reopen, and the town might survive another year. I thought of the Ferreira boy, still coughing in the back room of my clinic. My hands would not stay still; I folded and refolded my gloves. Still, as he talked, I caught myself picturing the lobby bright again, children lined up for sweets, and the thought warmed me before I could stop it. Above us, a pigeon shifted in the projection booth, scattering a little rain of plaster onto the aisle.",
+    "question": "Which choice best describes the overall tone of the text?",
+    "options": [
+     "Hopeful, as the narrator looks forward to the reopening of the town's cinema",
+     "Optimistic, with only a slight undercurrent of unease about the mayor's plan",
+     "Uneasy, though touched by a faint and unwelcome glimmer of hope for the town",
+     "Nostalgic, as the narrator recalls the summers when the cinema was still busy"
+    ],
+    "correct_letter": "C",
+    "explanation": "밤에만 꺼낼 수 있는 부탁, 바람 없는 돛 같은 화면, 여전히 기침하는 아이, 가만있지 못하는 손 등 불안의 단서가 지문 곳곳에 퍼져 있다. 동시에 화자는 다시 밝아진 로비를 상상하며 막을 새도 없이 마음이 따뜻해지는 희미한 희망도 느낀다. 불안이 더 두드러지고 희망은 약하게 섞여 있으므로 C가 정답이다. A는 덜 두드러진 정서만 말했고, B는 두 정서의 비중을 뒤집었으며, D는 소재와 어울리지만 지문에 단서가 약하다."
+   },
+   "notes": [],
+   "tone": [
+    "uneasy",
+    "conflicted"
+   ],
+   "devices": [
+    "simile",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-069",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-069",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 68,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Roxana",
+      "Lucia"
+     ],
+     "nameCultures": [
+      "persian_central_asian",
+      "spanish_iberian"
+     ],
+     "locale": "Samarkand",
+     "setting": "an apartment stairwell",
+     "relationship": "a coach and a benched star",
+     "conflict": "about who gets credit for shared work",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "an apartment stairwell in Samarkand; a coach and a benched star about who gets credit for shared work"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "Smells of boiled cabbage and cold stone filled the stairwell where Roxana waited for me, her coat still dusted with snow from the courtyard. For a month she had kept me on the bench while our fencing team won, using the footwork drills I had drawn for her in my notebook. The newspapers had printed only her name. I meant to walk past her without a word. Instead she held out my notebook, its pages now crowded with her own notes in the margins, each one beginning with my initials. Tomorrow you fence first, she said, and they will ask you where the drills came from. I took the notebook and found that I could not speak. From the floor above came the scrape of a neighbor dragging a samovar across the boards.",
+    "question": "Which choice best describes the relationship between the narrator and Roxana as presented in the text?",
+    "options": [
+     "Beneath the narrator's resentment, the coach quietly honors the narrator's share in their work.",
+     "The narrator's resentment toward the coach has hardened into a lasting refusal to speak.",
+     "The coach has long relied on the narrator to defend her reputation in the newspapers.",
+     "Like most coaches and athletes, they share a formal bond built mainly on obedience."
+    ],
+    "correct_letter": "A",
+    "explanation": "화자는 자신이 짠 훈련법으로 팀이 이겼는데도 신문에 코치 이름만 실리자 말없이 지나치려 할 만큼 서운해한다. 그러나 Roxana는 화자의 이니셜로 시작하는 메모가 가득한 노트를 돌려주고, 내일 먼저 나가 훈련법의 출처를 밝힐 기회를 준다. 두 단서를 이으면 화자의 원망 아래에서 코치가 조용히 화자의 몫을 인정한다는 A가 정답이다. B는 한쪽 감정만 반영했고, C는 관계의 방향을 뒤집었으며, D는 일반적 통념에서 고른 관계다."
+   },
+   "notes": [],
+   "tone": [
+    "tense",
+    "moving"
+   ],
+   "devices": [
+    "sensory imagery",
+    "dialogue"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-070",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-070",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "short_story",
+    "seed": {
+     "index": 69,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Sergio",
+      "Nicolas"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "latin_american"
+     ],
+     "locale": "Seville",
+     "setting": "a shoe repair stall",
+     "relationship": "two musicians in a failing duo",
+     "conflict": "while hiding a small failure",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a shoe repair stall in Seville; two musicians in a failing duo while hiding a small failure"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Years later, Nicolas would remember the boots more clearly than the songs. Every Saturday that last autumn, before their set in the plaza, Sergio left his left boot at a shoe repair stall near the cathedral in Seville, where an old cobbler glued the split sole back together without comment. The duo was drawing fewer listeners each week, though neither of them said so. Nicolas noticed that Sergio had begun to miss the high note in their closing song and to cover it with a flourish on the guitar; Nicolas, in turn, pretended not to hear. Each Saturday the cobbler held the boot up to the light, pressed the seam with his thumb, and handed it back. Each week the glue held for a few days, and then the sole began, quietly, to open again. One evening Nicolas saw Sergio wince as he stepped onto a curb, the boot gaping at the toe, and still say nothing. After the stall closed, the cobbler swept leather scraps into the gutter, where pigeons inspected them and moved on.",
+    "question": "In the text, the boot that is repeatedly repaired most likely symbolizes which of the following?",
+    "options": [
+     "Sergio's pride in keeping up a neat appearance before the audience in the plaza",
+     "The duo's habit of covering over their decline instead of facing it openly",
+     "The cobbler's quiet loyalty to the regular customers who visit his stall",
+     "The general hardships of earning a living as street musicians in a big city"
+    ],
+    "correct_letter": "B",
+    "explanation": "부츠의 갈라진 밑창은 매주 접착제로 붙여지지만 며칠 뒤 다시 조용히 벌어진다. 같은 시기에 듀오는 청중이 줄어드는데도 말하지 않고, Sergio는 놓친 고음을 기타 장식으로 덮으며 Nicolas는 못 들은 척한다. 두 흐름을 이으면 부츠는 쇠퇴를 마주하지 않고 덮어 두는 두 사람의 습관을 상징하므로 B가 정답이다. A는 겉모습에 대한 자존심으로 잘못 읽었고, C는 구두장이에 초점을 옮겼으며, D는 지나치게 일반적이다."
+   },
+   "notes": [],
+   "tone": [
+    "melancholy",
+    "understated"
+   ],
+   "devices": [
+    "symbolism",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-071",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-071",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 70,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Shamsuddin",
+      "Dvora"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "hebrew_jewish"
+     ],
+     "locale": "Haifa",
+     "setting": "a seed-saving cooperative",
+     "relationship": "a new teacher and a wary student",
+     "conflict": "about moving an elderly parent",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a seed-saving cooperative in Haifa; a new teacher and a wary student about moving an elderly parent"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "By the third week of term, Dvora still sat at the farthest table in the seed-saving cooperative in Haifa, sorting lentils without a word to me. I was the new teacher, and she had made it plain that she considered me temporary. Her father, I learned from the director, was to be moved from his farm in the hills to a small room in the city, and he had refused to go. One afternoon she showed me a cabinet of glass jars, each labeled in faded ink with the name of a village that no longer appeared on any map. These were carried here in coat pockets, she said. Some of them still come up every spring. I watched her lift a jar of dark wheat and turn it slowly, as if weighing it. The next morning, she asked me for an empty jar and a label, and she wrote the name of her father's farm on it in careful letters. Rain fell on the tin roof all that day, and the director kept the stove burning in the back room.",
+    "question": "In the text, the labeled jars of seeds most likely symbolize which of the following?",
+    "options": [
+     "The cooperative's success in selling its grain to many of the nearby villages",
+     "Dvora's distrust of the new teacher who has recently joined the cooperative",
+     "The hope that something of a home can survive being carried somewhere new",
+     "The loss of farmland that has been swallowed up by the growing city nearby"
+    ],
+    "correct_letter": "C",
+    "explanation": "유리병에는 지도에서 사라진 마을 이름이 붙어 있고, Dvora는 그 씨앗들이 코트 주머니에 담겨 옮겨졌지만 지금도 봄마다 싹을 틔운다고 말한다. 아버지가 농장을 떠나 도시로 옮겨야 하는 상황에서 그녀는 빈 병에 아버지 농장 이름을 적는다. 두 단서를 이으면 병은 옮겨지더라도 고향의 무언가가 살아남을 수 있다는 희망을 상징하므로 C가 정답이다. A는 지문에 없는 판매 이야기이고, B는 인물 관계로 초점을 옮겼으며, D는 상실만 강조해 씨앗이 다시 자란다는 점을 놓쳤다."
+   },
+   "notes": [],
+   "tone": [
+    "gentle",
+    "hopeful"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-072",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-072",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 71,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Aung",
+      "Linh"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Chiang Mai",
+     "setting": "a train compartment",
+     "relationship": "a retired judge and a young clerk",
+     "conflict": "over unequal sacrifices made in the past",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a train compartment in Chiang Mai; a retired judge and a young clerk over unequal sacrifices made in the past"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Twelve hours to Chiang Mai, two berths, one pot of tea: those were the terms of the journey Judge Aung had invited me on. For six years I had typed his rulings late into the night while my mother's shop closed and my own law exams went untaken. He had never once asked what those nights cost me, and I had added each of them, silently, to a ledger I kept in the dark. Somewhere past Lampang he set down his cup and told me that he had refused a promotion, twice, so that I would not be reassigned to a stranger. I had not known. I am Linh, I wanted to say, and I have been keeping the wrong accounts. Instead I poured him more tea. Outside, the hills went blue, and a vendor passed along the corridor with a basket of sticky rice.",
+    "question": "As used in the text, the phrase “a ledger I kept in the dark” most nearly suggests",
+    "options": [
+     "a written record of the judge's rulings that the narrator typed late at night",
+     "a secret plan to leave the judge's office and finally sit for the law exams",
+     "a silent tally of resentments the narrator had been keeping against Aung",
+     "a debt of money the narrator owed to her mother after the shop had closed"
+    ],
+    "correct_letter": "C",
+    "explanation": "화자는 판사가 자신의 희생을 한 번도 묻지 않았다고 느끼며 그 밤들을 하나씩 '어둠 속 장부'에 더해 왔다고 말한다. 뒤에서 판사의 숨은 희생을 알게 된 뒤 화자는 자신이 '잘못된 계산'을 해 왔다고 깨닫는다. 두 단서를 이으면 이 구절은 아무에게도 말하지 않은 원망의 기록을 뜻하므로 C가 정답이다. A는 '장부'를 문자 그대로 읽었고, B와 D는 시험과 가게 소재를 쓰지만 비유의 의미와 다르다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "chastened"
+   ],
+   "devices": [
+    "metaphor",
+    "extended metaphor"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-073",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-073",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 72,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Amelie",
+      "Matthias"
+     ],
+     "nameCultures": [
+      "french",
+      "german_austrian"
+     ],
+     "locale": "Marseille",
+     "setting": "a school music room",
+     "relationship": "a pair of lifelong friends who rarely speak",
+     "conflict": "after learning how someone really earned their reputation",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a school music room in Marseille; a pair of lifelong friends who rarely speak after learning how someone really earned their reputation"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Amelie had known Matthias since they were six, and for most of those years they had communicated in nods across the school music room in Marseille where both now taught. His reputation as the finest piano teacher in the city had arrived slowly and then all at once, after three of his pupils won the regional competition. This spring, sorting old files, Amelie found the pieces those pupils had played, marked in her own handwriting, and beside them his notes thanking her for fingerings she had once suggested and then forgotten. She understood that his fame stood partly on her forgotten afternoons. When he came in, she held up the folder. Matthias only nodded, the way he always had, but he did not look away. The radiator ticked under the window, and somewhere down the hall a student was practicing scales in the wrong key.",
+    "question": "As used in the text, the phrase “his fame stood partly on her forgotten afternoons” most nearly suggests that",
+    "options": [
+     "Matthias became famous only after Amelie stopped teaching in the afternoons",
+     "Amelie resented the long afternoons she had spent sorting files for Matthias",
+     "Matthias's reputation was far weaker than most people in the city believed",
+     "Matthias's success rested in part on help Amelie gave and failed to remember"
+    ],
+    "correct_letter": "D",
+    "explanation": "Amelie는 우승한 학생들의 악보에 자신의 필체가 남아 있고, 그 옆에 자신이 제안했다가 잊어버린 운지법에 대한 Matthias의 감사 메모가 있음을 발견한다. 앞부분에서는 그의 명성이 학생들의 우승 뒤에 생겼다고 설명한다. 두 단서를 이으면 이 구절은 그의 성공이 그녀가 주고도 잊은 도움에 일부 기대고 있다는 뜻이므로 D가 정답이다. A는 '오후'를 문자 그대로 읽었고, B는 지문에 없는 원망이며, C는 명성이 과장되었다고 잘못 해석했다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "wistful"
+   ],
+   "devices": [
+    "metaphor",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-074",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-074",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 73,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Donal",
+      "Yuying"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "chinese"
+     ],
+     "locale": "Glasgow",
+     "setting": "a tea plantation",
+     "relationship": "a keeper and a visiting surveyor",
+     "conflict": "about whether to forgive",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a tea plantation in Glasgow; a keeper and a visiting surveyor about whether to forgive"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Three rows of tea beneath the Glasgow glass,\ntwo lanterns, and one ledger on the sill:\nso Donal kept the hothouse, year on year,\nand kept, as well, a grudge he would not spill.\nThen Yuying came with chain and measuring rod\nto mark the boundary his father lost;\nshe paced the beds and did not speak of blame,\nbut paused where every bud lay black with frost.\nHe watched her kneel and cup a withered leaf\nas if it were a sparrow, small and cold.\nHis anger, long a stone inside his coat,\ngrew lighter than the rain upon the panes.\nHe showed her where the oldest bushes stood.\nOutside, the river barges sounded low,\nand steam rose from the gutters of the town.",
+    "question": "As used in the text, the phrase “a stone inside his coat” most nearly suggests",
+    "options": [
+     "a resentment Donal had carried privately and heavily for a long time",
+     "a valuable object Donal had hidden away from the visiting surveyor",
+     "a physical illness Donal had suffered during the cold Glasgow winters",
+     "a weapon Donal had meant to use against the surveyor and her chain"
+    ],
+    "correct_letter": "A",
+    "explanation": "시의 앞부분에서 Donal은 해마다 온실을 지키며 '털어놓지 않는 원한'도 함께 간직해 왔다고 나온다. 뒤에서 Yuying이 시든 잎을 조심스럽게 다루는 모습을 보자 그 분노가 '빗방울보다 가벼워진다'. 두 단서를 이으면 '코트 속의 돌'은 오래 혼자 무겁게 품어 온 원한을 뜻하므로 A가 정답이다. B와 D는 '돌'을 실제 물건으로 읽었고, C는 무거움을 질병으로 잘못 해석했다."
+   },
+   "notes": [],
+   "tone": [
+    "solemn",
+    "softening"
+   ],
+   "devices": [
+    "metaphor",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-075",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-075",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 74,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Vikram",
+      "Janelle"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "caribbean"
+     ],
+     "locale": "Dhaka",
+     "setting": "a ship's galley",
+     "relationship": "a gardener and the house's new owner",
+     "conflict": "over silence kept to protect someone",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a ship's galley in Dhaka; a gardener and the house's new owner over silence kept to protect someone"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Dhaka's river port was where I first met Vikram, cooking lentils in the cramped galley of a cargo ship long before he ever touched a garden. Years later he tended the roses at the house Janelle bought on the edge of the city, and she asked him, more than once, why the previous owner had left so suddenly. Vikram only shrugged and went on pruning. I knew the answer, and so did he: the old man's son had been in trouble, and the sale had paid his debts. Vikram's silence was a lid pressed down on a simmering pot, held there so that the family's shame would not boil over into the neighborhood's talk. Janelle eventually stopped asking. In the galley, I remember, he had kept a dented brass spoon hanging from a nail, and he would let no one else stir with it.",
+    "question": "As used in the text, the phrase “a lid pressed down on a simmering pot” most nearly suggests",
+    "options": [
+     "an angry outburst that Vikram was struggling to hide from the new owner",
+     "a deliberate effort to keep a troubling secret contained to protect others",
+     "a cooking habit that Vikram had carried over from his years on the ship",
+     "a growing impatience with the new owner's repeated and nosy questions"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분에서 Vikram은 Janelle의 거듭된 질문에 어깨만 으쓱하며 답하지 않는다. 화자는 전 주인의 아들이 곤경에 빠져 집을 팔았다는 사실을 Vikram도 알고 있었고, 그의 침묵이 그 가족의 수치가 동네 소문으로 번지지 않게 막았다고 설명한다. 두 단서를 이으면 이 비유는 다른 사람을 지키려고 비밀을 의도적으로 눌러 두는 행동을 뜻하므로 B가 정답이다. A와 D는 Vikram의 감정으로 잘못 읽었고, C는 배 주방 소재를 문자 그대로 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "measured",
+    "protective"
+   ],
+   "devices": [
+    "metaphor",
+    "frame narrative"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-076",
+   "task": "gen-lit40-medium-06-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-076",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 75,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Edith",
+      "Nikos"
+     ],
+     "nameCultures": [
+      "english",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Busan",
+     "setting": "a dried-riverbed crossing",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "over how to mark an anniversary",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a dried-riverbed crossing in Busan; an elder and a restless apprentice over how to mark an anniversary"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Gravel crunched under our boots as Edith led me down to the dry riverbed outside Busan, where the ferry had once crossed before the river shifted its course. It was ten years to the day since her husband had drowned there, and I, Nikos, her restless apprentice, had proposed a proper ceremony: candles, a hired priest, perhaps a stone carved with his name. Edith would have none of it. She knelt instead among the cracked plates of mud and pressed a single pebble into her coat pocket, as she had done each year. Grief, she told me, is a riverbed; the water leaves, but the shape stays. I said nothing, ashamed of my candles. On the far bank a farmer was leading an ox along the old ferry road, its bell clanking at every step.",
+    "question": "As used in the text, the phrase “the water leaves, but the shape stays” most nearly suggests that",
+    "options": [
+     "the river near Busan has dried up but may someday return to its old course",
+     "Edith believes her husband's body still lies somewhere beneath the riverbed",
+     "the sharpest pain of a loss may fade while its lasting imprint remains",
+     "simple public ceremonies last longer than a stone carved with a name"
+    ],
+    "correct_letter": "C",
+    "explanation": "Edith는 '슬픔은 강바닥'이라고 말한 뒤 이 구절을 덧붙인다. 남편이 죽은 지 10년이 지나 강물은 사라졌지만, 그녀는 해마다 같은 곳에서 조약돌을 주워 그 자리를 기억한다. 두 단서를 이으면 상실의 고통은 옅어져도 그 흔적은 사람 안에 남는다는 뜻이므로 C가 정답이다. A는 강을 문자 그대로 읽었고, B는 지문에 없는 추측이며, D는 의식 소재를 쓰지만 비유의 의미와 다르다."
+   },
+   "notes": [],
+   "tone": [
+    "elegiac",
+    "quiet"
+   ],
+   "devices": [
+    "metaphor",
+    "sensory imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-06-065",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(18단어, 다음 16)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-068",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(16단어, 다음 14)",
+    "오답 2개가 절대어(always/never/only 등)로 쉽게 소거됨"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-077",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-078",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-079",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-080",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  }
+ ],
+ "retryWords": [
+  {
+   "candidateId": "lit40-medium-06-061",
+   "instruction": "지문이 167단어로 깁니다. 같은 장면·같은 문항 설계를 유지하되 지문을 90~150단어(목표 약 120단어)로 다시 쓰고, 문항 전체를 새 지문에 맞게 다시 제출하라.",
+   "count": 167
+  }
+ ],
+ "extraIgnored": []
+}

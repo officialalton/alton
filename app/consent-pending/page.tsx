@@ -59,35 +59,35 @@ export default async function ConsentPendingPage() {
           ALTON <span className="text-red">EDUCATION</span>
         </div>
         <h1 className="text-[21px] font-extrabold text-ink mb-3">
-          보호자 동의가 필요합니다
+          Parent or guardian consent required
         </h1>
         <p className="text-[13.5px] text-grey-500 mb-6 leading-[1.6]">
-          만 13세 미만 학생은 보호자의 동의가 확인되어야 서비스를 이용할 수
-          있습니다.
+          Students under 13 need a parent or guardian&apos;s consent before using
+          the service.
           <br />
           {wasRevoked
-            ? "이전에 등록된 보호자 동의가 철회되어 이용이 다시 제한된 상태입니다."
-            : "아직 보호자 동의가 등록되지 않았습니다."}
+            ? "A previously recorded consent was withdrawn, so access is restricted again."
+            : "No parent or guardian consent has been recorded yet."}
         </p>
 
         <div className="rounded-lg bg-grey-100 p-4 mb-6 text-left text-[13px] text-grey-600 leading-[1.6]">
           {guardianNames.length > 0 ? (
             <p>
-              등록된 보호자: <strong>{guardianNames.join(", ")}</strong>
+              Parent/guardian on file: <strong>{guardianNames.join(", ")}</strong>
             </p>
           ) : (
-            <p>등록된 보호자 정보를 확인할 수 없습니다. 관리자에게 문의해주세요.</p>
+            <p>We couldn&apos;t find a parent or guardian on file. Please contact support.</p>
           )}
           <p className="mt-1.5">
             {noticeDelivered
-              ? "보호자에게 동의 관련 안내가 전달된 기록이 있습니다."
-              : "보호자에게 아직 동의 요청 안내가 전달되지 않았습니다."}
+              ? "A consent request has been sent to your parent or guardian."
+              : "A consent request has not been sent to your parent or guardian yet."}
           </p>
         </div>
 
         <p className="text-[12.5px] text-grey-400 mb-8 leading-[1.6]">
-          보호자 계정으로 로그인해 동의 절차를 진행해주세요. 동의가
-          완료되면 별도 절차 없이 정상적으로 서비스를 이용하실 수 있습니다.
+          Ask your parent or guardian to log in to their account and complete the
+          consent step. Once it&apos;s done, you can use the service right away.
         </p>
 
         <form action={logout}>
@@ -95,14 +95,14 @@ export default async function ConsentPendingPage() {
             type="submit"
             className="block w-full text-center bg-grey-200 text-ink font-bold text-[15px] py-3.5 rounded-lg hover:bg-grey-300"
           >
-            로그아웃
+            Log out
           </button>
         </form>
         <a
           href="mailto:support@alton.education"
           className="block mt-4 text-[12.5px] text-grey-400 underline"
         >
-          문의하기
+          Contact support
         </a>
       </div>
     </main>

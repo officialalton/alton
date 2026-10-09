@@ -1,0 +1,23 @@
+{
+ "itemId": "right_triangles_trigonometry.pythagorean_hypotenuse.TR.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T03:58:06Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "e4c589a36c2ebff124c1eb788caba941ab40f79789129d10288696265d1e8b12",
+ "samples": [
+  "right_triangles_trigonometry.pythagorean_hypotenuse.TR.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "삼각형 비례·각도·변 라벨이 값과 일치, 라벨 겹침 없음, 데스크톱·375px 확인(스냅샷은 LaTeX 미조판이라 \\sin 이 원문으로 보임, 앱 렌더와 무관). [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
+}

@@ -1,0 +1,42 @@
+{
+ "itemId": "circles.central_from_inscribed.CI.C",
+ "generatedAt": "2026-10-07T05:02:01.002Z",
+ "codeHash": "b60a3c8949bfd76742d938dff17a70d958c7f5e30f873156a10db03e11e0e2d8",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/circles.central_from_inscribed.CI.C.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "circles.central_from_inscribed.CI.C.png",
+   "mobileFile": "circles.central_from_inscribed.CI.C.m375.png",
+   "archetypeId": "ci.central_from_inscribed.CI.C.compose_kind",
+   "seed": 11,
+   "signature": "figure_choice[circle]",
+   "stimulus": "The angles marked $x°$ (central) and $y°$ (inscribed) satisfy $x = 2y$ in only one figure.",
+   "question": "Which of the following figures matches the relationship?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) 원주각의 꼭짓점이 중심각의 호(작은 호) 반대쪽(큰 호) 위에 있어야 한다. (2) 원주각이 향하는 호가 중심각이 향하는 호와 같아야 한다(끝점이 같다). (3) 이때 원주각은 중심각의 절반: x = 2y 이다. (4) 꼭짓점이 작은 호 위이면 x + 2y = 360 이 되어 x = 2y 가 아니다. (5) 끝점이 다른 그림은 다른 호를 향하므로 제외한다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}

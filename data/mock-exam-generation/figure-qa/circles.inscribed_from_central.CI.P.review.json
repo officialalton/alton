@@ -1,0 +1,23 @@
+{
+ "itemId": "circles.inscribed_from_central.CI.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:03:22Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "361fd4783ec054cdc9ba2b317c5506fe82c54b444534c592ec2e5d6a6ffbce65",
+ "samples": [
+  "circles.inscribed_from_central.CI.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "중심각 라벨 그림(큰 호·작은 호 위 원주각, 호 라벨 변형) 샘플 + 갤러리 4 연산자 확인: 호(빨강)·호 라벨·원주각·중심각 겹침 없음."
+}

@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 export type ReviewCategoryId = "concept" | "problemsolving" | "participation" | "homework";
+export type ReviewRating = "below" | "partial" | "average" | "excellent" | "outstanding";
 
 export type SessionReviewContext = {
   sessionId: string;
@@ -19,7 +20,7 @@ export type ExistingReview = {
   improve: string | null;
   nextPlan: string | null;
   submittedAt: string | null;
-  categories: Record<ReviewCategoryId, { finalText: string | null; reviewed: boolean }>;
+  categories: Record<ReviewCategoryId, { finalText: string | null; reviewed: boolean; rating: ReviewRating | null }>;
 };
 
 function extractName(rel: unknown): string {
@@ -32,7 +33,7 @@ export async function loadSessionReviewContext(
   sessionId: string
 ): Promise<SessionReviewContext | null> {
   const { data: session } = await supabase
-    .from("sessions")
+    .from("legacy_sessions")
     .select(
       "id, session_number, unit_title, note, teacher_comment, enrollment:enrollments(student_id, subject:subjects(name))"
     )
@@ -90,16 +91,17 @@ export async function loadExistingReview(
 
   const { data: categories } = await supabase
     .from("session_review_categories")
-    .select("category, final_text, reviewed")
+    .select("category, final_text, reviewed, rating")
     .eq("review_id", review.id);
 
   const categoryMap = Object.fromEntries(
-    CATEGORY_IDS.map((c) => [c, { finalText: null, reviewed: false }])
+    CATEGORY_IDS.map((c) => [c, { finalText: null, reviewed: false, rating: null }])
   ) as ExistingReview["categories"];
   for (const c of categories ?? []) {
     categoryMap[c.category as ReviewCategoryId] = {
       finalText: c.final_text,
       reviewed: c.reviewed,
+      rating: c.rating as ReviewRating | null,
     };
   }
 

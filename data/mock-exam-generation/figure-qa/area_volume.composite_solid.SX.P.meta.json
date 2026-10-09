@@ -1,0 +1,42 @@
+{
+ "itemId": "area_volume.composite_solid.SX.P",
+ "generatedAt": "2026-10-07T05:02:01.175Z",
+ "codeHash": "4539400b635ec7de74d63ee90653992dae2064236044cf00e4b5e78848809527",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/solid-x.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.composite_solid.SX.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/sx-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.composite_solid.SX.P.png",
+   "mobileFile": "area_volume.composite_solid.SX.P.m375.png",
+   "archetypeId": "av.composite_solid.SX.P.chain2",
+   "seed": 11,
+   "signature": "solid_x:cylinder_hemisphere",
+   "stimulus": "A tank for storing gas is a cylinder with a half-sphere cap, as in the figure; the radius and the cylinder height are labeled. Look at which edges and segments are labeled in the figure before you decide which relationship between them to use.",
+   "question": "What is the total volume of the solid, in cubic units?",
+   "options": [
+    "$891\\pi$",
+    "$486\\pi$",
+    "$1863\\pi$",
+    "$1377\\pi$"
+   ],
+   "correctIndex": 3,
+   "answer": "$1377\\pi$",
+   "explanation": "(1) 그림에서 반지름·원기둥의 높이 라벨을 읽는다. (2) 원기둥의 부피 = π × 9² × 11 = 891π 이다. (3) 반구의 부피 = ⅔ × π × 9³ = 486π 이다. (4) 합 = 891π + 486π = 1377π 이다. (5) 따라서 1377π 이다. 따라서 정답은 $1377\\pi$이다.",
+   "structuralIssues": []
+  }
+ ]
+}

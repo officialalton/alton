@@ -1,0 +1,23 @@
+{
+ "itemId": "inference_margin_error.sample_size_effect.BR.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:00:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-C session)",
+ "codeHash": "23fe7852e6316de2a5b56c2d7f855dd3b166e3d5415c0c88296138d3e69b0a4f",
+ "samples": [
+  "inference_margin_error.sample_size_effect.BR.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: A 1800, B 800, C 200(가장 작음, 오차범위 30) → A 는 9 배 → 30÷3=10 (A번 보기 10). 막대가 200 간격 눈금선과 일치, 축 제목 'Survey' 와 범주 A·B·C 구분 명확. 데스크톱·375px(레이아웃 이전 샘플과 동일, 범주 라벨만 변경) 판독 가능. (메타 정답: 10)"
+}

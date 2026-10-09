@@ -1,0 +1,466 @@
+[
+ {
+  "gid": "easy-boundaries-500",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Sea otters often float on their backs while they eat. An otter will place a flat rock on its chest and strike a clam against ______ the shell cracks open after a few hits.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Sea otters often float on their backs while they eat. An otter will place a flat rock on its chest and strike a clam against ______ the shell cracks open after a few hits.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "the rock until",
+    "the rock, until",
+    "the rock. Until",
+    "the rock; until"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "\"until the shell cracks open after a few hits\"는 종속절이므로 앞의 독립절에 문장부호 없이 바로 이어져야 하며, 따라서 A가 정답이다. B는 문장 끝에 오는 필수 종속절 앞에 불필요한 쉼표를 넣어 수식 관계를 끊는다. C는 \"Until the shell cracks open after a few hits.\"를 독립된 문장으로 만들어 문장 조각(fragment)을 남긴다. D의 세미콜론은 두 독립절 사이에만 쓸 수 있는데, 뒤의 내용은 종속절이므로 틀렸다.",
+   "explanationEn": "The words \"until the shell cracks open after a few hits\" form a dependent clause, so they should attach directly to the main clause with no punctuation. That makes A correct. B puts an unnecessary comma before a dependent clause that is essential to the meaning at the end of the sentence. C turns \"Until the shell cracks open after a few hits.\" into its own sentence, which leaves a fragment. D is wrong because a semicolon can only join two independent clauses, and the part after it is dependent.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "\"until the shell cracks open...\"는 문장 끝 필수 종속절이므로 A(무부호 연결)가 옳다. C는 조각, D는 세미콜론 오용으로 명백히 배제되며, B의 쉼표는 전형적 오개념 오답으로 적절하다. 한·영 해설 모두 동일 결론·글자 참조이며 오류 없음. 해달의 도구 사용 사실도 정확. 단일 규칙(종속절 부호)으로 풀리는 easy 난이도에 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "해달이 돌에 조개를 쳐서 깨는 행동은 사실이다. 문장 끝에 오는 필수 종속절(until) 앞에는 문장부호를 쓰지 않는다는 규칙 하나로 풀 수 있는 쉬운 문항이다. 오답은 전형적인 오개념(쉼표, 문장 조각, 세미콜론)으로 구성되어 있다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-boundaries-501",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In Ellen Marsh's novel The Lamplighter's Daughter, young Clara spends her evenings at the window of her aunt's narrow house, watching the fog roll in from the harbor. One night she sees a stranger standing beneath the gas lamp across the ______ he is holding a letter addressed to her late mother.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In Ellen Marsh's novel The Lamplighter's Daughter, young Clara spends her evenings at the window of her aunt's narrow house, watching the fog roll in from the harbor. One night she sees a stranger standing beneath the gas lamp across the ______ he is holding a letter addressed to her late mother.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "street,",
+    "street;",
+    "street",
+    "street, and so"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "빈칸 앞 \"One night she sees a stranger standing beneath the gas lamp across the street\"와 뒤 \"he is holding a letter addressed to her late mother\"는 모두 독립절이다. 접속사 없이 두 독립절을 연결하려면 세미콜론이 필요하므로 B가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. C는 아무 문장부호 없이 두 절을 붙여 무종지문(run-on)이 된다. D의 \"and so\"는 인과 관계를 나타내는데, 낯선 사람이 서 있다는 사실이 편지를 들고 있는 이유가 되지 않으므로 논리에 맞지 않는다.",
+   "explanationEn": "The text before the blank, \"One night she sees a stranger standing beneath the gas lamp across the street,\" and the text after it, \"he is holding a letter addressed to her late mother,\" are both independent clauses. When two independent clauses are joined without a conjunction, you need a semicolon, so B is correct. A uses only a comma, which creates a comma splice. C uses no punctuation at all, which creates a run-on sentence. D adds \"and so,\" which signals cause and effect, but the stranger standing there is not the reason he is holding the letter, so the logic doesn't work.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "B",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤가 모두 독립절이므로 세미콜론(B)이 정답이며, A는 쉼표 스플라이스, C는 무종지문으로 명확히 배제된다. 다만 D(\"street, and so\")는 쉼표+등위접속사 구조로 문법적으로는 Standard English 규범에 부합하고 논리(인과)상으로만 부적절하다. 문항이 \"conventions of Standard English\"를 묻는 boundaries 유형이므로 오답 세 개가 모두 문장부호/구조 오류여야 하는 SAT 관행과 어긋나며, 문법만 아는 학생에게 D가 정답 후보로 남아 경계 유형 문항의 순도가 떨어진다. 정답 자체는 B가 가장 적절하므로 오류로 판정하지는 않으나 D를 비문법적 선택지(예: \"street he\" 외의 다른 부호 오류)로 교체하는 것이 바람직하다. 해설(한·영)은 정답을 일관되게 뒷받침하고 글자 참조도 일치한다. 가상의 소설 인용으로 저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "두 독립절을 세미콜론으로 잇는 단일 규칙을 묻는 전형적인 easy 문항이다. A(쉼표 스플라이스)와 C(무종지문)는 전형적인 오개념이다. D는 문법상으로는 성립하므로 의미만 보고 배제해야 하지만, 인과 관계가 분명히 맞지 않아 오답이 하나로 정해진다. 가상의 작가와 작품이라 저작권 문제는 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-boundaries-504",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1959, engineers in the Netherlands began building a set of large storm-surge barriers along the country's southwestern coast. The project took nearly four decades to ______ the final barrier, a pair of enormous swinging gates near Rotterdam, was completed in 1997.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1959, engineers in the Netherlands began building a set of large storm-surge barriers along the country's southwestern coast. The project took nearly four decades to ______ the final barrier, a pair of enormous swinging gates near Rotterdam, was completed in 1997.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "finish; indeed,",
+    "finish, indeed,",
+    "finish indeed",
+    "finish, indeed"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸 앞 \"The project took nearly four decades to finish\"와 뒤 \"the final barrier ... was completed in 1997\"은 각각 독립절이다. 두 독립절을 이으려면 세미콜론 같은 강한 경계가 필요하고, 접속부사 indeed 뒤에는 쉼표를 찍으므로 A가 정답이다. B와 D는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. C는 문장부호 없이 두 독립절을 붙인 무종지문(run-on)이다.",
+   "explanationEn": "The text before the blank, \"The project took nearly four decades to finish,\" is an independent clause, and so is the text after it, \"the final barrier ... was completed in 1997.\" Joining two independent clauses takes a strong boundary such as a semicolon, and the transition word \"indeed\" is followed by a comma, so A is correct. B and D join the two independent clauses with only commas, which makes a comma splice. C has no punctuation at all, which makes a run-on sentence.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절(\"The project took nearly four decades to finish\" / \"the final barrier ... was completed in 1997\")이므로 세미콜론+접속부사+쉼표 구조인 A만 적격. B·D는 쉼표 스플라이스, C는 run-on으로 명확히 배제되며, 오답들은 전형적 오개념(쉼표로 절 연결)을 반영함. 델타 프로젝트(1950년대 말 착공)와 1997년 완공된 로테르담 인근 마에슬란트 방벽(한 쌍의 회전식 게이트) 사실관계도 정확. 한·영 해설 결론과 선택지 참조 일치, 영어 해설 자연스러움. 단일 규칙(독립절 경계)으로 해결되는 easy 난이도에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "정답은 A다. 독립절 두 개를 세미콜론으로 잇고, 접속부사 indeed 뒤에 쉼표를 찍은 형태다. B와 D는 쉼표 스플라이스, C는 무종지문(run-on)이라 오답이다. 오답은 모두 전형적인 오개념이라 easy 난이도에 맞다. 1997년 Maeslantkering 완공은 사실과 맞다. 다만 Delta Works의 착공 시점은 기준에 따라 1950년대 후반으로 볼 수 있어 1959년이라는 연도는 약간 논란의 여지가 있다. 그래도 문항 풀이에는 영향이 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-form_structure_sense-500",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Located in northern Chile, the Atacama Desert is one of the driest places on Earth. Some weather stations there have recorded almost no rainfall for decades. Each year, the cold ocean current that flows along the nearby coast ______ moist air from forming the clouds that would bring rain inland.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Located in northern Chile, the Atacama Desert is one of the driest places on Earth. Some weather stations there have recorded almost no rainfall for decades. Each year, the cold ocean current that flows along the nearby coast ______ moist air from forming the clouds that would bring rain inland.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "prevent",
+    "have prevented",
+    "prevents",
+    "are preventing"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸의 동사는 단수 주어 'the cold ocean current'와 수가 일치해야 하므로, 단수 동사 C 'prevents'가 정답이다. 'that flows along the nearby coast'는 주어를 꾸미는 수식어일 뿐 동사의 수에 영향을 주지 않는다. A 'prevent', B 'have prevented', D 'are preventing'은 모두 복수 동사이므로 단수 주어와 맞지 않는다. 바로 앞의 'coast'가 아니라 핵심 주어 'current'를 기준으로 판단해야 한다.",
+   "explanationEn": "The verb in the blank has to agree with the singular subject \"the cold ocean current,\" so the singular verb in C, \"prevents,\" is correct. The phrase \"that flows along the nearby coast\" just describes the subject, so it doesn't change whether the verb is singular or plural. A (\"prevent\"), B (\"have prevented\"), and D (\"are preventing\") are all plural verb forms, so none of them agrees with a singular subject. Make sure you match the verb to the main subject, \"current,\" not to the nearest noun, \"coast.\"",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "C",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'the cold ocean current'(단수)와 일치하는 'prevents'가 정답임을 직접 확인. A·B·D는 모두 복수형이라 배제됨. 한·영 해설 결론과 선택지 글자 참조 일치, 사실 오류 없음. 사소한 점: 해설이 '가장 가까운 명사 coast'를 함정으로 언급하지만 coast도 단수이므로 실제 복수 유인 함정은 아님(오류는 아니나 설득력 약함). 단일 규칙(주어-동사 수 일치)으로 풀리는 easy 적합 문항."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'current'는 단수이고 'Each year'가 반복되는 일을 나타내므로 단순 현재 단수형 'prevents'가 맞다. 주어와 동사 사이에 복수 명사가 없어서 오답을 끌어당기는 요소가 약하지만, 규칙 하나로 푸는 쉬운 문항으로는 적절하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-form_structure_sense-501",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the late nineteenth century, public libraries spread rapidly across many British towns. Supported by local taxes, these libraries offered free access to books for factory workers who could not afford to buy them. The reading rooms in the library at Leeds ______ especially popular with workers in the evenings, when they finished their shifts.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the late nineteenth century, public libraries spread rapidly across many British towns. Supported by local taxes, these libraries offered free access to books for factory workers who could not afford to buy them. The reading rooms in the library at Leeds ______ especially popular with workers in the evenings, when they finished their shifts.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "was",
+    "is",
+    "has been",
+    "were"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "이 문장의 주어는 복수 명사 \"reading rooms\"이므로 복수 동사가 필요하고, 지문은 19세기 후반을 묘사하므로 과거 시제여야 합니다. 따라서 D가 정답입니다. A는 과거 시제지만 단수형이라, 동사 바로 앞의 \"library\"나 \"Leeds\"를 주어로 착각할 때 고르기 쉬운 오답입니다. B는 단수형이고 현재 시제입니다. C도 단수형이며 지문의 과거 시점과 맞지 않습니다.",
+   "explanationEn": "The subject of this sentence is the plural noun \"reading rooms,\" so you need a plural verb, and since the passage describes the late nineteenth century, the verb should be in the past tense. That makes D the correct answer. A is past tense but singular, so it's an easy trap if you mistake \"library\" or \"Leeds,\" the words right before the verb, for the subject. B is singular and in the present tense. C is also singular, and it doesn't fit the passage's past time frame.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "D",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The reading rooms\"(복수) + 전치사구 \"in the library at Leeds\"가 끼어든 전형적 주어-동사 일치 문항. 19세기 후반이라는 시점이 명시되어 과거 시제가 바로 확인되므로 D \"were\"가 유일한 정답. 오답 A는 근접 명사(library/Leeds) 착각 유도, B·C는 수·시제 모두 불일치로 규칙을 알면 즉시 배제 가능. 한국어·영어 해설 모두 정답 및 선택지 참조가 일치하며 모순 없음. 지문은 일반적 역사 서술로 저작권 우려 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'reading rooms'는 복수이고, 중간에 낀 전치사구 'in the library at Leeds'는 수 일치에 영향을 주지 않습니다. 따라서 복수 과거형 were가 정답입니다. 오답 A·B·C는 모두 단수형이라 주어-동사 수 일치 규칙 하나만 알면 모두 배제됩니다. A는 바로 앞 명사를 주어로 착각하게 만드는 전형적인 함정입니다. 오답이 하나의 명시적 규칙만으로 걸러지므로 easy 난이도에 맞습니다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-form_structure_sense-502",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 2019, engineers in the Netherlands installed a footbridge made almost entirely of recycled plastic over a canal in the city of Zwolle. The bridge, built from thousands of discarded bottles and cups, ______ about one-quarter as much as a comparable steel bridge, so it can be lifted into place with a small crane.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 2019, engineers in the Netherlands installed a footbridge made almost entirely of recycled plastic over a canal in the city of Zwolle. The bridge, built from thousands of discarded bottles and cups, ______ about one-quarter as much as a comparable steel bridge, so it can be lifted into place with a small crane.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "weighs",
+    "weigh",
+    "are weighing",
+    "have weighed"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 'The bridge'이고, 'built from thousands of discarded bottles and cups'는 주어를 꾸미는 수식어일 뿐이다. 따라서 동사는 단수형이어야 하며, 일반적 사실을 진술하는 현재 시제 'weighs'인 A가 정답이다. B 'weigh', C 'are weighing', D 'have weighed'는 모두 복수 동사로, 바로 앞 복수 명사 'bottles and cups'에 잘못 일치시킨 것이다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"The bridge.\" The phrase \"built from thousands of discarded bottles and cups\" just describes the subject. That means the verb has to be singular, and the simple present \"weighs\" in A fits a general fact, so A is correct. B (\"weigh\"), C (\"are weighing\"), and D (\"have weighed\") are all plural verb forms. They wrongly agree with the nearby plural noun \"bottles and cups\" instead of the real subject.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'The bridge'(단수) + 분사 수식어 'built from ... bottles and cups' 뒤 동사 수일치 문항. 정답 A 'weighs' 검산 결과 옳음. 오답 B/C/D는 모두 복수형으로, 인접 복수 명사에 끌리는 전형적 오개념을 반영해 easy 기준에 부합. 한국어·영어 해설 모두 정답과 글자 참조가 일치하며 모순 없음. 지문의 세부(Zwolle 재활용 플라스틱 다리, 2019)는 SAT식 소재로 치명적 사실 오류 없음. 저작권 의심 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "단수 주어와 수식 분사구를 구분하는 주어-동사 수 일치 문제로, 쉬운 난이도에 맞다. 다만 지문의 사실 관계에 확인이 필요한 부분이 있다. 즈볼러의 재활용 플라스틱 구조물(PlasticRoad)은 2018년 9월에 설치된 자전거 도로로 알려져 있어, '2019년'과 '운하 위 보행교'라는 서술이 부정확할 수 있다. 확신할 수 없어 사실 오류로 판정하지는 않았다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-form_structure_sense-504",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In Elena Marsh's novel The Lamplighter's Daughter, a modern story told in the style of a nineteenth-century novel, young Clara Whitby lives in a foggy harbor town. Every evening, the old letters hidden in her grandmother's writing desk ______ Clara to imagine the lives of sailors who never came home.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In Elena Marsh's novel The Lamplighter's Daughter, a modern story told in the style of a nineteenth-century novel, young Clara Whitby lives in a foggy harbor town. Every evening, the old letters hidden in her grandmother's writing desk ______ Clara to imagine the lives of sailors who never came home.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "inspires",
+    "has inspired",
+    "inspire",
+    "is inspiring"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "이 문장의 주어는 복수 명사 'letters'이므로 복수 동사가 필요하다. C의 'inspire'는 복수 주어와 수가 일치하므로 정답이다. A의 'inspires', B의 'has inspired', D의 'is inspiring'은 모두 단수 동사이다. 이 선택지들은 동사 바로 앞에 있는 단수 명사 'desk'에 잘못 맞춘 것이다.",
+   "explanationEn": "The subject of this sentence is the plural noun \"letters,\" so the verb has to be plural. C, \"inspire,\" is a plural verb, so it agrees with the subject and is the correct answer. A (\"inspires\"), B (\"has inspired\"), and D (\"is inspiring\") are all singular verbs. They wrongly agree with \"desk,\" the singular noun that comes right before the blank, instead of with \"letters.\"",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "C",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'letters'(복수)와 동사 수 일치 문제. 삽입구 'hidden in her grandmother's writing desk'의 단수 명사 'desk'가 오답 유인. 정답 C 'inspire' 타당하며 A·B·D는 모두 단수형으로 배제됨. 한국어·영어 해설 결론과 글자 참조 일치, 영어 해설 자연스럽고 한글 없음. 가상의 작가·작품으로 저작권 문제 없음. 단일 규칙·한 단계 추론으로 easy 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 letters(복수)와 동사 사이에 전치사구 in her grandmother's writing desk가 끼어 있는 전형적인 주어-동사 수 일치 문항이다. 단서가 직접 드러나 easy 난이도에 맞다. 'Every evening'이 습관을 나타내므로 현재 시제 inspire가 가장 자연스럽다. 오답은 모두 단수형이라 규칙만 알면 바로 배제된다. 소설과 작가는 가상으로 보인다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-form_structure_sense-505",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The Okavango Delta in Botswana is unusual because its river never reaches the sea. Instead, the water spreads across the Kalahari Desert and slowly disappears into the sand and air. Each year, floodwaters from the highlands of Angola ______ the delta during the dry season, creating a huge green wetland where elephants, hippos, and many bird species gather.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The Okavango Delta in Botswana is unusual because its river never reaches the sea. Instead, the water spreads across the Kalahari Desert and slowly disappears into the sand and air. Each year, floodwaters from the highlands of Angola ______ the delta during the dry season, creating a huge green wetland where elephants, hippos, and many bird species gather.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "fills",
+    "has filled",
+    "is filling",
+    "fill"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "이 문장의 주어는 복수명사 \"floodwaters\"이고, \"from the highlands of Angola\"는 주어를 꾸미는 수식어일 뿐이다. 그러므로 동사는 복수형이어야 하며, \"Each year\"가 반복되는 사실을 나타내므로 단순현재형인 D \"fill\"이 정답이다. A \"fills\", B \"has filled\", C \"is filling\"은 모두 단수 동사여서, 바로 앞의 단수명사 \"Angola\"를 주어로 잘못 본 학생이 고를 수 있는 오답이다.",
+   "explanationEn": "The subject of this sentence is the plural noun \"floodwaters,\" and \"from the highlands of Angola\" is only a phrase that describes it. That means the verb has to be plural, and because \"Each year\" points to something that happens again and again, the simple present plural verb in D, \"fill,\" is correct. A (\"fills\"), B (\"has filled\"), and C (\"is filling\") are all singular verbs. You might pick one of them if you mistook the singular noun \"Angola,\" which sits right before the blank, for the subject.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "D",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 \"floodwaters\"(복수)와 수식어구 끝의 \"Angola\"(단수) 사이의 전형적 주어-동사 일치 함정. \"Each year\"로 단순현재 확정, D \"fill\"만 복수형이라 정답 유일. 세 오답 모두 단수형으로 근접명사 오개념을 반영해 그럴듯함. 한/영 해설 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 오카방고 델타 사실 정확. easy 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어-동사 수일치 단일 규칙 문항이다. 앞의 명사구 \"highlands of Angola\"가 수일치를 헷갈리게 하는 전형적인 함정 역할을 한다. 오카방고 델타의 홍수가 건기에 찾아온다는 서술은 사실과 맞다.",
+    "passed": true
+   }
+  }
+ }
+]

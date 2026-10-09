@@ -1,0 +1,315 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-054",
+ "chunkId": "rev-fable_judge-054",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-054.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-01-046",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "ELSIE.\n\nWhen I grow up I shall have eleven babies, because I have eleven favorite names, and I shall have them all at once, so they can have nice, happy times playing together, and there won't have to be any horrid older brother and sister, always getting the best of everything.\n\nTERESA.\n\nAnd I'll tell you what! I'll have eleven children too, to marry yours.\n\nBOB.\n\nNo, I'll marry one of them.\n\nELSIE.\n\nNo, you must marry one of us.\n\nBOB.\n\nWhich one?\n\nELSIE.\n\nWell, I think it would be best for you to marry me and be father for my eleven children. I want them to have a father. I love my father.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From bitter quarreling among the children to a tearful apology from Bob",
+    "From serious talk about family duties to mocking laughter at the parents",
+    "From shy silence among the children to loud boasting about their toys",
+    "From playful fantasy about babies to sincere love for a parent"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-047",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "The flower clusters are nearly ready to bloom, but the buds are still green. The tall stem has lifted them up into the air and sunlight, and, although the air is still cold, they continue to grow.\n\nSoon the green buds undergo a change. The topmost one on each flower cluster softens to a tender blue or pink.\n\nThe green buds grow lovely as they stand on their stems in the sun. Delicate tints steal over them, the green color fades away, and many colors take its place.\n\nThey open into charming flowers and give forth a delightful fragrance.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From plain notes on green buds to delighted praise of the blossoms",
+    "From eager hope for spring to disappointment at a late, cold spring",
+    "From scientific detachment about plants to anxious worry about frost",
+    "From gloomy description of winter to bored indifference toward flowers"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-048",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Nevertheless the reporter, in summing up the achievement, is bound to declare that that other book has not been learned. Under this constitution of which I have been speaking, the American people have achieved much material success and great political power. As a people they have been happy and prosperous. Their freedom has been secured to them, and for a period of seventy-five years they have lived and prospered without subjection to any form of tyranny. This in itself is much, and should, I think, be held as a preparation for greater things to follow. Such, I think, should be our opinion, although the nation is at the present burdened by so heavy a load of troubles.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From joyful praise of the nation to angry rejection of its constitution",
+    "From criticism of an unlearned lesson to measured praise of gains",
+    "From hopeful predictions about the future to grim despair over present troubles",
+    "From humorous mockery of reporters to solemn respect for political leaders"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-049",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Three honest generations of us have kept it clean and honorable, and our wives have done the same for us all down to you--all except my wife. I used to think that in marrying me you had placed me deeper in your debt than I could ever repay. Ever since the first time I saw you I loved you; and after that meeting I put my arms about no woman--arms that had been free enough before--until I put them around you. And since then the same. I have been an absolutely faithful husband to you. Do you understand what that means? I don't believe so. I preferred you to every other woman in the world.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From cheerful joking about his family to playful teasing of his wife",
+    "From cold anger at his wife to sudden forgiveness of her faults",
+    "From family pride to a pained insistence on his own loyalty",
+    "From calm business talk to nervous confusion about his past"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-050",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "Suddenly the roof was lifted and whirled down the swollen arroyo into the broad river. Floating logs struck against it, and as they tore along under the bridge they struck against the buttress with terrific force. Onward they were whirled; they could see the lights in the houses of the village and could hear the voices of men and women along the bluffs or in the trees where they had sought shelter.\n\nThe rain ceased falling, but the wind did not go down, rolling the waves over their raft. Once they lodged for a moment against a great oak where Crescimir strove in vain to make fast.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It explains why a flood happened and then describes how the village was rebuilt",
+    "It describes a calm evening and then recalls an earlier storm in the village",
+    "It introduces Crescimir's past and then explains why he fears the river",
+    "It traces the roof's rush downstream and then a failed try to stop it"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-051",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "I threw out my arms, expecting to catch the living body of some person; but not so--I caught nothing. As I turned round I felt the same touch on my right cheek. It might have been imagination, but I thought I again heard Lottie calling my name. The truth is, I was so much overcome with excitement that I scarcely knew what was going on around me. Harry was out but a few moments, returning accompanied by the fireman, who immediately lighted the lamp. We procured a lantern and began to search for the mysterious passenger. We carefully examined every seat, looking under each bench, but could find nobody. We went out and examined the rear platform, thinking that probably some one might be stealing a ride, but nothing of the sort was to be seen.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It moves from a strange touch to a careful search that finds no one",
+    "It moves from a cheerful journey with Harry to an argument with the fireman",
+    "It moves from a search of the train to a calm explanation of the noise",
+    "It moves from Lottie's arrival to the narrator's decision to leave the car"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-052",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "In most things we have given up the theory. It was soonest given up as regards food, because the evidence against it was there plainest and most overwhelming, in the severe suffering inflicted on some people by things \"disagreeing with them,\" as it was called, which others relished and profited by. It has only been surrendered with regard to children and youths, however, after a hard struggle. The idea of a young person being entitled to special treatment of any kind--that is, having in any respect a marked individuality--remains to this day odious to a great many of our theologians and teachers. It is, however, rapidly making its way, and has already obtained a secure footing in some of the colleges.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It praises a theory and then lists the colleges that first adopted it",
+    "It notes where a theory was dropped, then its slow retreat in schools",
+    "It describes a personal illness and then blames teachers for causing it",
+    "It defends theologians and then predicts that their views will spread"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-053",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "Against this preference shown the sketch it may be urged that to appreciate such suggestions presupposes as much art in the public as in the painter. But the ability to appreciate a thing when expressed is but half that necessary to express it. Some understanding must exist in the observer for any work to be intelligible. It is only a question of degree. The greater the art-sense in the person addressed, the more had better be left to it. Now in Japan the public is singularly artistic. In fact, the artistic appreciation of the masses there is something astonishing to us, accustomed to our immense intellectual differences between man and man. Sketches are thus peculiarly fitting to such a land.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It tells a story about a painter and then describes his travels in Japan",
+    "It praises detailed paintings and then criticizes the Japanese public",
+    "It answers an objection to sketches and then applies it to Japan",
+    "It compares several artists and then ranks their finished works"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-058",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Washington Flagg was gone, but his shadow was to linger for a while longer on our household. It was difficult to realize that the weight which had oppressed us had been removed. We were scarcely conscious of how heavy it had been until it was lifted. I was now and then forced to make an effort not to expect the colonel to dinner.\n\nA month or two after his disappearance an incident occurred which brought him back very vividly and in a somewhat sinister shape to our imaginations. Quite late one night there was a sharp ring at the door. Mary having gone to bed, I answered the bell.",
+   "question": "Which choice best describes the narrator's attitude toward Washington Flagg?",
+   "options": [
+    "Relief at his absence mixed with a lingering unease",
+    "Deep sorrow over his departure and eagerness for his quick return",
+    "Amused fondness for his habits and regret at having sent him away",
+    "Complete indifference to him and his effect on the household"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-059",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "I went mad, mad, I really did. I made up my mind to have a house I could live in comfortably, and I was generous enough to let my husband have something he liked too. Do you know, before he married me, fond as he was of his pictures and china and things, it had never occurred to him to build a place to put them in? But I changed all that. I practically rebuilt the house, as you see; let in a little light and air into the musty corners; let him have a gallery which has become the joy of his heart.",
+   "question": "Which choice best describes the narrator's attitude toward the changes she made to the house?",
+   "options": [
+    "She regrets them because they ruined her husband's collection",
+    "She is proud of them and sees them as a gift to him",
+    "She is unsure of them and worries that guests will disapprove",
+    "She is bored by them and wishes she had left the house alone"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-060",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Ye dwell beside our paths and homes,\nOur paths of sin, our homes of sorrow,\nAnd guilty man, where'er he roams,\nYour innocent mirth may borrow.\nThe birds of air before us fleet,\nThey cannot brook our shame to meet--\nBut we may taste your solace sweet,\nAnd come again to-morrow.\n\nYe fearless in your nests abide--\nNor may we scorn, too proudly wise,\nYour silent lessons undescried\nBy all but lowly eyes;\nFor ye could draw th' admiring gaze\nOf Him who worlds and hearts surveys:\nYour order wild, your fragrant maze,\nHe taught us how to prize.",
+   "question": "Which choice best describes the speaker's attitude toward the flowers addressed in the poem?",
+   "options": [
+    "Fearful suspicion of their wild and tangled growth",
+    "Mild annoyance that they distract people from prayer",
+    "Humble admiration for their comfort and lessons",
+    "Proud scorn for their silent and lowly existence"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-061",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Having received nothing, I have nothing to give. Fortunately, the only thing of importance to be said this evening can be said without technical knowledge of any kind. The School of Art needs better accommodation. The financial details will be explained to you by those who are more conversant with them than I am. I will only say that parsimony in this matter on the part of the government or other public bodies will, in my humble opinion, be unwise. I am not for a lavish expenditure of public money, even on education. It would be a misfortune if parental duty were to be cast on the State, and parents were to be allowed to forget that they are bound to provide their children with education as well as with bread.",
+   "question": "Which choice best describes the speaker's attitude toward public spending on the School of Art?",
+   "options": [
+    "He opposes any public money for art education.",
+    "He is indifferent and leaves the matter to experts.",
+    "He favors generous state funding for all schooling.",
+    "He supports it but warns against excessive outlay."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-062",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Bearings were taken to several remarkable hills for the purpose of connecting the survey.\n\nTwo swans passed over the valley to the north-west, which we considered as a sign that water lay in that direction.\n\nJune 20.--The weather broke up during the night, and the morning was fair and pleasant. However desirable it was that the horses should remain another day in this valley to recruit, yet, in the present unsettled state of the season, I was unwilling to lose an hour more than was absolutely necessary. We here left all the spare horse-shoes, broken axes, etc. in order to lighten the burden of the horses.",
+   "question": "Which choice best describes the narrator's attitude toward staying longer in the valley?",
+   "options": [
+    "Reluctant, given the uncertain season ahead",
+    "Eager, since the horses badly needed rest",
+    "Indifferent, as the weather had improved",
+    "Fearful, because the swans signaled danger"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-063",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "I parted from my pleasant Parisian friend and his family, however, with real regret. They were polite and refined, and had given me their intimacy voluntarily and without reserve. I shook hands with them on the quay, and wished the pale and quiet invalid better health, with more of feeling than is common with acquaintances of a day. I believe them kind and sincere, and I have not found these qualities growing so thickly in the world that I can thrust aside anything that resembles them, with a willing mistrust.\n\nThe quay of Marseilles is one of the most varied scenes to be met with in Europe. Vessels of all nations come trading to its port, and nearly every costume in the world may be seen in its busy crowds.",
+   "question": "Which choice best describes the narrator's attitude toward his Parisian friend and family?",
+   "options": [
+    "Polite but privately suspicious of their motives",
+    "Warmly fond and willing to trust their kindness",
+    "Relieved to be free of their constant company",
+    "Amused by how quickly they offered friendship"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-064",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "I am about to descend into that cupboard and to bring you one of those tablets. I saw you lock the cupboard half an hour ago, and I know you have the key in your possession. But I descend from Space; the doors, you see, remain unmoved. Now I am in the cupboard and am taking the tablet. Now I have it. Now I ascend with it.\n\nI rushed to the closet and dashed the door open. One of the tablets was gone. With a mocking laugh, the Stranger appeared in the other corner of the room, and at the same time the tablet appeared upon the floor.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show the narrator catching a thief in the act",
+    "To explain how the cupboard was secretly opened",
+    "To present a visitor proving an uncanny power",
+    "To describe an argument over a missing key"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-065",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "At least it may account for an apparent inconsistency, in that she married him without much hesitation.\n\nShe welcomed the admiration and attention of the friends he brought to the house by one means or another during the first few weeks. If she was surprised to find them cultured, clever, agreeable specimens, she failed to mention the discovery to him. They amused her and therefore served a purpose. She charmed them in exchange for the tribute they paid to her.\n\nThose whom she liked the least she took no pains to please; in fact, she endured them so politely that while they may have secretly resented her indifference, they could do no less than openly profess admiration for her.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show a wife growing fond of her husband's friends",
+    "To explain why the husband's friends resented him",
+    "To describe a woman openly rude to unwelcome guests",
+    "To portray a woman who accepts admiration coolly"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-066",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "In after years, how often came to those two the memory of that brief morn. Alone, with folded arms, Neil stood and watched the setting sun, as it went down across the waters at West End. The white sails of countless pleasure boats were framed against the sky. There came a strange, wild yearning in his heart to be upon the deep once more--to go forever from all this! And yet he could not leave her. He thought of taking her with him to foreign lands and beginning anew his life.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show a man torn between escape and devotion",
+    "To describe a lively regatta at West End",
+    "To explain why Neil decided to sail abroad alone",
+    "To recount a quarrel between two lovers at sunset"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-067",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "The eggs were all hatched, and the mother bird was hovering near. I shall never forget the curious expression of those young hawks sitting there on the ground. The expression was not one of youth, but of extreme age. Such an ancient, infirm look as they had,—the sharp, dark, and shrunken look about the face and eyes, and their feeble, tottering motions! They sat upon their elbows and the hind part of their bodies, and their pale, withered legs and feet extended before them in the most helpless fashion.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To explain how hawks build nests on the ground",
+    "To convey how oddly aged the young hawks looked",
+    "To show the mother bird defending her offspring",
+    "To argue that young hawks are unusually strong"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-068",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "Unfortunately, it is in this quality of personal effort that the sentiment of interest in the poor, upon which we have to depend, is too often lacking. People who are willing to give money feel that that ought to be enough. It is not. The money thus given is too apt to be wasted along with the sentiment that prompted the gift.\n\nEven when it comes to the third of the ways I spoke of as effective in dealing with the tenement-house problem, the building of model structures, the personal interest in the matter must form a large share of the capital invested, if it is to yield full returns.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To praise donors for their generous financial gifts",
+    "To argue that model buildings should be abandoned",
+    "To stress that personal effort must accompany money",
+    "To describe the daily lives of tenement residents"
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-054 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-054.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-01-046 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nELSIE.\n\nWhen I grow up I shall have eleven babies, because I have eleven favorite names, and I shall have them all at once, so they can have nice, happy times playing together, and there won't have to be any horrid older brother and sister, always getting the best of everything.\n\nTERESA.\n\nAnd I'll tell you what! I'll have eleven children too, to marry yours.\n\nBOB.\n\nNo, I'll marry one of them.\n\nELSIE.\n\nNo, you must marry one of us.\n\nBOB.\n\nWhich one?\n\nELSIE.\n\nWell, I think it would be best for you to marry me and be father for my eleven children. I want them to have a father. I love my father.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From bitter quarreling among the children to a tearful apology from Bob\nB) From serious talk about family duties to mocking laughter at the parents\nC) From shy silence among the children to loud boasting about their toys\nD) From playful fantasy about babies to sincere love for a parent\n### lit40-easy-01-047 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nThe flower clusters are nearly ready to bloom, but the buds are still green. The tall stem has lifted them up into the air and sunlight, and, although the air is still cold, they continue to grow.\n\nSoon the green buds undergo a change. The topmost one on each flower cluster softens to a tender blue or pink.\n\nThe green buds grow lovely as they stand on their stems in the sun. Delicate tints steal over them, the green color fades away, and many colors take its place.\n\nThey open into charming flowers and give forth a delightful fragrance.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From plain notes on green buds to delighted praise of the blossoms\nB) From eager hope for spring to disappointment at a late, cold spring\nC) From scientific detachment about plants to anxious worry about frost\nD) From gloomy description of winter to bored indifference toward flowers\n### lit40-easy-01-048 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nNevertheless the reporter, in summing up the achievement, is bound to declare that that other book has not been learned. Under this constitution of which I have been speaking, the American people have achieved much material success and great political power. As a people they have been happy and prosperous. Their freedom has been secured to them, and for a period of seventy-five years they have lived and prospered without subjection to any form of tyranny. This in itself is much, and should, I think, be held as a preparation for greater things to follow. Such, I think, should be our opinion, although the nation is at the present burdened by so heavy a load of troubles.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From joyful praise of the nation to angry rejection of its constitution\nB) From criticism of an unlearned lesson to measured praise of gains\nC) From hopeful predictions about the future to grim despair over present troubles\nD) From humorous mockery of reporters to solemn respect for political leaders\n### lit40-easy-01-049 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nThree honest generations of us have kept it clean and honorable, and our wives have done the same for us all down to you--all except my wife. I used to think that in marrying me you had placed me deeper in your debt than I could ever repay. Ever since the first time I saw you I loved you; and after that meeting I put my arms about no woman--arms that had been free enough before--until I put them around you. And since then the same. I have been an absolutely faithful husband to you. Do you understand what that means? I don't believe so. I preferred you to every other woman in the world.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From cheerful joking about his family to playful teasing of his wife\nB) From cold anger at his wife to sudden forgiveness of her faults\nC) From family pride to a pained insistence on his own loyalty\nD) From calm business talk to nervous confusion about his past\n### lit40-easy-01-050 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nSuddenly the roof was lifted and whirled down the swollen arroyo into the broad river. Floating logs struck against it, and as they tore along under the bridge they struck against the buttress with terrific force. Onward they were whirled; they could see the lights in the houses of the village and could hear the voices of men and women along the bluffs or in the trees where they had sought shelter.\n\nThe rain ceased falling, but the wind did not go down, rolling the waves over their raft. Once they lodged for a moment against a great oak where Crescimir strove in vain to make fast.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It explains why a flood happened and then describes how the village was rebuilt\nB) It describes a calm evening and then recalls an earlier storm in the village\nC) It introduces Crescimir's past and then explains why he fears the river\nD) It traces the roof's rush downstream and then a failed try to stop it\n### lit40-easy-01-051 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nI threw out my arms, expecting to catch the living body of some person; but not so--I caught nothing. As I turned round I felt the same touch on my right cheek. It might have been imagination, but I thought I again heard Lottie calling my name. The truth is, I was so much overcome with excitement that I scarcely knew what was going on around me. Harry was out but a few moments, returning accompanied by the fireman, who immediately lighted the lamp. We procured a lantern and began to search for the mysterious passenger. We carefully examined every seat, looking under each bench, but could find nobody. We went out and examined the rear platform, thinking that probably some one might be stealing a ride, but nothing of the sort was to be seen.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It moves from a strange touch to a careful search that finds no one\nB) It moves from a cheerful journey with Harry to an argument with the fireman\nC) It moves from a search of the train to a calm explanation of the noise\nD) It moves from Lottie's arrival to the narrator's decision to leave the car\n### lit40-easy-01-052 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nIn most things we have given up the theory. It was soonest given up as regards food, because the evidence against it was there plainest and most overwhelming, in the severe suffering inflicted on some people by things \"disagreeing with them,\" as it was called, which others relished and profited by. It has only been surrendered with regard to children and youths, however, after a hard struggle. The idea of a young person being entitled to special treatment of any kind--that is, having in any respect a marked individuality--remains to this day odious to a great many of our theologians and teachers. It is, however, rapidly making its way, and has already obtained a secure footing in some of the colleges.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It praises a theory and then lists the colleges that first adopted it\nB) It notes where a theory was dropped, then its slow retreat in schools\nC) It describes a personal illness and then blames teachers for causing it\nD) It defends theologians and then predicts that their views will spread\n### lit40-easy-01-053 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nAgainst this preference shown the sketch it may be urged that to appreciate such suggestions presupposes as much art in the public as in the painter. But the ability to appreciate a thing when expressed is but half that necessary to express it. Some understanding must exist in the observer for any work to be intelligible. It is only a question of degree. The greater the art-sense in the person addressed, the more had better be left to it. Now in Japan the public is singularly artistic. In fact, the artistic appreciation of the masses there is something astonishing to us, accustomed to our immense intellectual differences between man and man. Sketches are thus peculiarly fitting to such a land.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It tells a story about a painter and then describes his travels in Japan\nB) It praises detailed paintings and then criticizes the Japanese public\nC) It answers an objection to sketches and then applies it to Japan\nD) It compares several artists and then ranks their finished works\n### lit40-easy-01-058 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nWashington Flagg was gone, but his shadow was to linger for a while longer on our household. It was difficult to realize that the weight which had oppressed us had been removed. We were scarcely conscious of how heavy it had been until it was lifted. I was now and then forced to make an effort not to expect the colonel to dinner.\n\nA month or two after his disappearance an incident occurred which brought him back very vividly and in a somewhat sinister shape to our imaginations. Quite late one night there was a sharp ring at the door. Mary having gone to bed, I answered the bell.\n\n[질문] Which choice best describes the narrator's attitude toward Washington Flagg?\nA) Relief at his absence mixed with a lingering unease\nB) Deep sorrow over his departure and eagerness for his quick return\nC) Amused fondness for his habits and regret at having sent him away\nD) Complete indifference to him and his effect on the household\n### lit40-easy-01-059 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nI went mad, mad, I really did. I made up my mind to have a house I could live in comfortably, and I was generous enough to let my husband have something he liked too. Do you know, before he married me, fond as he was of his pictures and china and things, it had never occurred to him to build a place to put them in? But I changed all that. I practically rebuilt the house, as you see; let in a little light and air into the musty corners; let him have a gallery which has become the joy of his heart.\n\n[질문] Which choice best describes the narrator's attitude toward the changes she made to the house?\nA) She regrets them because they ruined her husband's collection\nB) She is proud of them and sees them as a gift to him\nC) She is unsure of them and worries that guests will disapprove\nD) She is bored by them and wishes she had left the house alone\n### lit40-easy-01-060 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nYe dwell beside our paths and homes,\nOur paths of sin, our homes of sorrow,\nAnd guilty man, where'er he roams,\nYour innocent mirth may borrow.\nThe birds of air before us fleet,\nThey cannot brook our shame to meet--\nBut we may taste your solace sweet,\nAnd come again to-morrow.\n\nYe fearless in your nests abide--\nNor may we scorn, too proudly wise,\nYour silent lessons undescried\nBy all but lowly eyes;\nFor ye could draw th' admiring gaze\nOf Him who worlds and hearts surveys:\nYour order wild, your fragrant maze,\nHe taught us how to prize.\n\n[질문] Which choice best describes the speaker's attitude toward the flowers addressed in the poem?\nA) Fearful suspicion of their wild and tangled growth\nB) Mild annoyance that they distract people from prayer\nC) Humble admiration for their comfort and lessons\nD) Proud scorn for their silent and lowly existence\n### lit40-easy-01-061 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nHaving received nothing, I have nothing to give. Fortunately, the only thing of importance to be said this evening can be said without technical knowledge of any kind. The School of Art needs better accommodation. The financial details will be explained to you by those who are more conversant with them than I am. I will only say that parsimony in this matter on the part of the government or other public bodies will, in my humble opinion, be unwise. I am not for a lavish expenditure of public money, even on education. It would be a misfortune if parental duty were to be cast on the State, and parents were to be allowed to forget that they are bound to provide their children with education as well as with bread.\n\n[질문] Which choice best describes the speaker's attitude toward public spending on the School of Art?\nA) He opposes any public money for art education.\nB) He is indifferent and leaves the matter to experts.\nC) He favors generous state funding for all schooling.\nD) He supports it but warns against excessive outlay.\n### lit40-easy-01-062 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nBearings were taken to several remarkable hills for the purpose of connecting the survey.\n\nTwo swans passed over the valley to the north-west, which we considered as a sign that water lay in that direction.\n\nJune 20.--The weather broke up during the night, and the morning was fair and pleasant. However desirable it was that the horses should remain another day in this valley to recruit, yet, in the present unsettled state of the season, I was unwilling to lose an hour more than was absolutely necessary. We here left all the spare horse-shoes, broken axes, etc. in order to lighten the burden of the horses.\n\n[질문] Which choice best describes the narrator's attitude toward staying longer in the valley?\nA) Reluctant, given the uncertain season ahead\nB) Eager, since the horses badly needed rest\nC) Indifferent, as the weather had improved\nD) Fearful, because the swans signaled danger\n### lit40-easy-01-063 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nI parted from my pleasant Parisian friend and his family, however, with real regret. They were polite and refined, and had given me their intimacy voluntarily and without reserve. I shook hands with them on the quay, and wished the pale and quiet invalid better health, with more of feeling than is common with acquaintances of a day. I believe them kind and sincere, and I have not found these qualities growing so thickly in the world that I can thrust aside anything that resembles them, with a willing mistrust.\n\nThe quay of Marseilles is one of the most varied scenes to be met with in Europe. Vessels of all nations come trading to its port, and nearly every costume in the world may be seen in its busy crowds.\n\n[질문] Which choice best describes the narrator's attitude toward his Parisian friend and family?\nA) Polite but privately suspicious of their motives\nB) Warmly fond and willing to trust their kindness\nC) Relieved to be free of their constant company\nD) Amused by how quickly they offered friendship\n### lit40-easy-01-064 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nI am about to descend into that cupboard and to bring you one of those tablets. I saw you lock the cupboard half an hour ago, and I know you have the key in your possession. But I descend from Space; the doors, you see, remain unmoved. Now I am in the cupboard and am taking the tablet. Now I have it. Now I ascend with it.\n\nI rushed to the closet and dashed the door open. One of the tablets was gone. With a mocking laugh, the Stranger appeared in the other corner of the room, and at the same time the tablet appeared upon the floor.\n\n[질문] Which choice best states the main purpose of the text?\nA) To show the narrator catching a thief in the act\nB) To explain how the cupboard was secretly opened\nC) To present a visitor proving an uncanny power\nD) To describe an argument over a missing key\n### lit40-easy-01-065 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nAt least it may account for an apparent inconsistency, in that she married him without much hesitation.\n\nShe welcomed the admiration and attention of the friends he brought to the house by one means or another during the first few weeks. If she was surprised to find them cultured, clever, agreeable specimens, she failed to mention the discovery to him. They amused her and therefore served a purpose. She charmed them in exchange for the tribute they paid to her.\n\nThose whom she liked the least she took no pains to please; in fact, she endured them so politely that while they may have secretly resented her indifference, they could do no less than openly profess admiration for her.\n\n[질문] Which choice best states the main purpose of the text?\nA) To show a wife growing fond of her husband's friends\nB) To explain why the husband's friends resented him\nC) To describe a woman openly rude to unwelcome guests\nD) To portray a woman who accepts admiration coolly\n### lit40-easy-01-066 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nIn after years, how often came to those two the memory of that brief morn. Alone, with folded arms, Neil stood and watched the setting sun, as it went down across the waters at West End. The white sails of countless pleasure boats were framed against the sky. There came a strange, wild yearning in his heart to be upon the deep once more--to go forever from all this! And yet he could not leave her. He thought of taking her with him to foreign lands and beginning anew his life.\n\n[질문] Which choice best states the main purpose of the text?\nA) To show a man torn between escape and devotion\nB) To describe a lively regatta at West End\nC) To explain why Neil decided to sail abroad alone\nD) To recount a quarrel between two lovers at sunset\n### lit40-easy-01-067 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nThe eggs were all hatched, and the mother bird was hovering near. I shall never forget the curious expression of those young hawks sitting there on the ground. The expression was not one of youth, but of extreme age. Such an ancient, infirm look as they had,—the sharp, dark, and shrunken look about the face and eyes, and their feeble, tottering motions! They sat upon their elbows and the hind part of their bodies, and their pale, withered legs and feet extended before them in the most helpless fashion.\n\n[질문] Which choice best states the main purpose of the text?\nA) To explain how hawks build nests on the ground\nB) To convey how oddly aged the young hawks looked\nC) To show the mother bird defending her offspring\nD) To argue that young hawks are unusually strong\n### lit40-easy-01-068 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nUnfortunately, it is in this quality of personal effort that the sentiment of interest in the poor, upon which we have to depend, is too often lacking. People who are willing to give money feel that that ought to be enough. It is not. The money thus given is too apt to be wasted along with the sentiment that prompted the gift.\n\nEven when it comes to the third of the ways I spoke of as effective in dealing with the tenement-house problem, the building of model structures, the personal interest in the matter must form a large share of the capital invested, if it is to yield full returns.\n\n[질문] Which choice best states the main purpose of the text?\nA) To praise donors for their generous financial gifts\nB) To argue that model buildings should be abandoned\nC) To stress that personal effort must accompany money\nD) To describe the daily lives of tenement residents"
+}

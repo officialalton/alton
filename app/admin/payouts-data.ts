@@ -1,4 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
+import { previousPayoutPeriod } from "@/lib/payout/payout-schedule";
 
 export type PayoutPeriod = { periodStart: string; periodEnd: string };
 
@@ -25,20 +27,9 @@ export type PayoutListItem = {
   paidAt: string | null;
 };
 
-function toDateOnly(d: Date): string {
-  return d.toISOString().slice(0, 10);
-}
-
+// 월 2회 정산(2026-10-06) — "직전에 끝난 정산 기간"(1~15일 또는 16일~말일).
 export function previousMonthRange(now: Date): PayoutPeriod {
-  const firstOfThisMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
-  const lastOfPrevMonth = new Date(firstOfThisMonth.getTime() - 1);
-  const firstOfPrevMonth = new Date(
-    Date.UTC(lastOfPrevMonth.getUTCFullYear(), lastOfPrevMonth.getUTCMonth(), 1)
-  );
-  return {
-    periodStart: toDateOnly(firstOfPrevMonth),
-    periodEnd: toDateOnly(lastOfPrevMonth),
-  };
+  return previousPayoutPeriod(now);
 }
 
 function extractName(rel: unknown): string {
@@ -63,7 +54,7 @@ export async function computePayoutAmounts(
     .select("id, hourly_rate_krw, profile:profiles(name)");
 
   const { data: sessions } = await supabase
-    .from("sessions")
+    .from("legacy_sessions")
     .select("duration_minutes, enrollment:enrollments(teacher_id)")
     .eq("status", "completed")
     .gte("scheduled_at", period.periodStart)
@@ -113,10 +104,10 @@ export async function loadPayouts(supabase: SupabaseClient): Promise<PayoutListI
   if (!payouts || payouts.length === 0) return [];
 
   const teacherIds = Array.from(new Set(payouts.map((p) => p.teacher_id)));
-  const { data: profiles } = await supabase
+  const { data: profiles } = await selectInChunks(teacherIds, (chunk) => supabase
     .from("profiles")
     .select("id, name")
-    .in("id", teacherIds);
+    .in("id", chunk));
   const nameById = new Map((profiles ?? []).map((p) => [p.id, p.name]));
 
   return payouts.map((p) => ({

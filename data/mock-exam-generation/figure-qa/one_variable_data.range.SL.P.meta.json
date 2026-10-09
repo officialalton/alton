@@ -1,0 +1,43 @@
+{
+ "itemId": "one_variable_data.range.SL.P",
+ "generatedAt": "2026-10-07T05:02:01.101Z",
+ "codeHash": "a28bd5658b60fc60482f8f2d73a55b97fcfc9374dfcfd15e56a563c3d186d1cb",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/stem-leaf.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.range.SL.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/sl-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.range.SL.P.png",
+   "mobileFile": "one_variable_data.range.SL.P.m375.png",
+   "archetypeId": "ovd.range.SL.P.inverse",
+   "seed": 11,
+   "signature": "stem_leaf",
+   "stimulus": "The stem-and-leaf plot shown gives the scores on a quiz for students in a class. One more value, greater than every value in the plot, is added. The range of the new data is 43 points. The plot contains all of the data needed for this question.",
+   "question": "What is the new value?",
+   "options": [
+    "8",
+    "83",
+    "118",
+    "43"
+   ],
+   "correctIndex": 1,
+   "answer": "83",
+   "explanation": "(1) 줄기-잎 그림에서 모든 값을 읽는다: 40, 43, 48, 51, 61, 67, 69, 75, 75 — 전체 9개. (2) 최솟값 40, 원래 최댓값 75 이다. (3) 새 값이 최댓값이 되므로 새 범위 = 새 값 - 40 이다. (4) 새 값 = 40 + 43 = 83 이다. (5) 따라서 답은 83 이다. 따라서 정답은 83이다.",
+   "structuralIssues": []
+  }
+ ]
+}

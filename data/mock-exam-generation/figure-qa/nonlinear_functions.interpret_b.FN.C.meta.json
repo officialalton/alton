@@ -1,0 +1,49 @@
+{
+ "itemId": "nonlinear_functions.interpret_b.FN.C",
+ "generatedAt": "2026-10-07T05:02:00.733Z",
+ "codeHash": "1e48919eda38699dd44153c965f6f142df715bf884177e5d7d81bb5c5863b862",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cplane-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/fnc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.interpret_b.FN.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ln-b-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.interpret_b.FN.C.png",
+   "mobileFile": "nonlinear_functions.interpret_b.FN.C.m375.png",
+   "archetypeId": "nbc.interpret_b.FN.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "Four candidate parabolas are shown, graphed on one set of axes.",
+   "question": "Exactly one of the four parabolas shown is the graph of $y = ax² + bx + c$ where $a = 2$ and $b = 0$. Which one is it?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) a = 2, b = 0 이므로 대칭축은 x = -b/(2a) = 0 이다. (2) 각 그래프에서 꼭짓점·열린 방향·지나는 점을 읽는다. (3) 첫째 조건을 어긴 그래프를 지운다. (4) 둘째 조건을 어긴 그래프를 지운다. (5) 남은 그래프가 정답이다. (6) 다른 그래프는 조건 하나 이상이 어긋난다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}

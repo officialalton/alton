@@ -36,40 +36,6 @@ vi.mock("@/lib/supabase-admin", () => ({
   }),
 }));
 
-describe("inviteParent", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-    getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
-    profileSingleMock.mockResolvedValue({ data: { role: "admin" } });
-    serverRpcMock.mockResolvedValue({
-      data: [{ invite_id: "invite1", raw_token: "rawtoken123" }],
-      error: null,
-    });
-    sendInviteEmailMock.mockResolvedValue(undefined);
-  });
-
-  it("account_invites에 초대를 생성하고 메일을 보낸 뒤 invite_id를 반환한다(계정은 아직 만들지 않음)", async () => {
-    const { inviteParent } = await import("./users-actions");
-    const inviteId = await inviteParent({ name: "김민지", email: "minji@example.com" });
-
-    expect(inviteId).toBe("invite1");
-    expect(serverRpcMock).toHaveBeenCalledWith("create_account_invite", {
-      p_email: "minji@example.com",
-      p_name: "김민지",
-      p_role: "parent",
-      p_household_id: null,
-    });
-    expect(sendInviteEmailMock).toHaveBeenCalledWith({
-      to: "minji@example.com",
-      name: "김민지",
-      token: "rawtoken123",
-      role: "parent",
-    });
-    expect(inviteUserByEmailMock).not.toHaveBeenCalled();
-    expect(parentsInsertMock).not.toHaveBeenCalled();
-  });
-});
-
 describe("inviteTeacher", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -231,6 +197,13 @@ describe("inviteStudent", () => {
   });
 });
 
+function contractsChain(rows: Record<string, unknown>[]) {
+  const c: Record<string, unknown> = {};
+  for (const m of ["select", "eq", "not"]) c[m] = () => c;
+  c.then = (res: (v: unknown) => unknown) => res({ data: rows, error: null });
+  return c;
+}
+
 describe("setTeacherHourlyRate", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -245,6 +218,7 @@ describe("setTeacherHourlyRate", () => {
       createAdminClient: () => ({
         from: (table: string) => {
           if (table === "teachers") return { update: teachersUpdateMock };
+          if (table === "teacher_contracts") return contractsChain([]);
           throw new Error(`unexpected table ${table}`);
         },
         rpc: rpcMock,
@@ -261,6 +235,24 @@ describe("setTeacherHourlyRate", () => {
       p_currency: "KRW",
     });
     expect(teachersUpdateMock).not.toHaveBeenCalled();
+  });
+
+  it("USD는 센트로 저장하고, 계약서가 열려 있거나 서명됐으면 시급 변경을 막는다", async () => {
+    const rpcMock = vi.fn().mockResolvedValue({ error: null });
+    let rows: Record<string, unknown>[] = [];
+    vi.doMock("@/lib/supabase-admin", () => ({
+      createAdminClient: () => ({ from: () => contractsChain(rows), rpc: rpcMock }),
+    }));
+    vi.resetModules();
+    const { setTeacherHourlyRate } = await import("./users-actions");
+    await setTeacherHourlyRate("teacher1", 50, "USD");
+    expect(rpcMock).toHaveBeenCalledWith("set_teacher_rate", { p_teacher_id: "teacher1", p_amount_minor: 5000, p_currency: "USD" });
+    rpcMock.mockClear();
+    rows = [{ status: "sent", docusign_envelope_status: "sent" }];
+    await expect(setTeacherHourlyRate("teacher1", 60, "USD")).rejects.toThrow(/무효 처리/);
+    rows = [{ status: "signed", docusign_envelope_status: "completed" }];
+    await expect(setTeacherHourlyRate("teacher1", 60, "USD")).rejects.toThrow(/합의서/);
+    expect(rpcMock).not.toHaveBeenCalled();
   });
 
   it("0 이하의 시급은 RPC 호출 전에 거부한다", async () => {
@@ -307,6 +299,97 @@ describe("setParentStatus", () => {
       p_new_status: "suspended",
       p_reason: null,
     });
+  });
+});
+
+describe("setStudentStatus", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
+    profileSingleMock.mockResolvedValue({ data: { role: "admin" } });
+  });
+
+  // 2026-09-24(Section 2) — transition_account_status()는 이미 'inactive'를
+  // 지원했지만(DB 상태 머신, R2) 이 액션의 타입 시그니처가 "active"|"pending"|
+  // "suspended"로만 좁혀져 있어 관리자 화면에서 장기 휴면 전환 자체가 안
+  // 됐다 — 타입을 넓혀 실제로 RPC까지 전달되는지 확인한다.
+  it("'inactive'로도 전환할 수 있다", async () => {
+    const rpcMock = vi.fn().mockResolvedValue({ error: null });
+    vi.doMock("@/utils/supabase/server", () => ({
+      createClient: async () => ({
+        auth: { getUser: getUserMock },
+        from: (table: string) => {
+          if (table === "profiles") {
+            return { select: () => ({ eq: () => ({ single: profileSingleMock }) }) };
+          }
+          throw new Error(`unexpected table ${table}`);
+        },
+        rpc: rpcMock,
+      }),
+    }));
+    vi.resetModules();
+    const { setStudentStatus } = await import("./users-actions");
+
+    await setStudentStatus("student1", "inactive");
+
+    expect(rpcMock).toHaveBeenCalledWith("transition_account_status", {
+      p_profile_id: "student1",
+      p_new_status: "inactive",
+      p_reason: null,
+    });
+  });
+});
+
+describe("recordClosedAccountAccess", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
+    profileSingleMock.mockResolvedValue({ data: { role: "admin" } });
+  });
+
+  it("사유와 함께 record_closed_account_access RPC를 호출한다", async () => {
+    const rpcMock = vi.fn().mockResolvedValue({ error: null });
+    vi.doMock("@/utils/supabase/server", () => ({
+      createClient: async () => ({
+        auth: { getUser: getUserMock },
+        from: (table: string) => {
+          if (table === "profiles") {
+            return { select: () => ({ eq: () => ({ single: profileSingleMock }) }) };
+          }
+          throw new Error(`unexpected table ${table}`);
+        },
+        rpc: rpcMock,
+      }),
+    }));
+    vi.resetModules();
+    const { recordClosedAccountAccess } = await import("./users-actions");
+
+    await recordClosedAccountAccess("student1", "법무팀 요청으로 확인");
+
+    expect(rpcMock).toHaveBeenCalledWith("record_closed_account_access", {
+      p_profile_id: "student1",
+      p_reason: "법무팀 요청으로 확인",
+    });
+  });
+
+  it("RPC가 실패하면 예외를 던진다", async () => {
+    const rpcMock = vi.fn().mockResolvedValue({ error: { message: "폐쇄된 계정이 아닙니다." } });
+    vi.doMock("@/utils/supabase/server", () => ({
+      createClient: async () => ({
+        auth: { getUser: getUserMock },
+        from: (table: string) => {
+          if (table === "profiles") {
+            return { select: () => ({ eq: () => ({ single: profileSingleMock }) }) };
+          }
+          throw new Error(`unexpected table ${table}`);
+        },
+        rpc: rpcMock,
+      }),
+    }));
+    vi.resetModules();
+    const { recordClosedAccountAccess } = await import("./users-actions");
+
+    await expect(recordClosedAccountAccess("student1", "사유")).rejects.toThrow("폐쇄된 계정이 아닙니다.");
   });
 });
 

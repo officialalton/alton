@@ -1,0 +1,157 @@
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import TeacherAvailabilityTab from "./TeacherAvailabilityTab";
+
+const baseProps = {
+  initialRules: [],
+  initialExceptions: [],
+  timezone: "America/Los_Angeles",
+  onAddRule: vi.fn().mockResolvedValue("rule1"),
+  onRemoveRule: vi.fn().mockResolvedValue(undefined),
+  onAddException: vi.fn().mockResolvedValue("ex1"),
+  onRemoveException: vi.fn().mockResolvedValue(undefined),
+  onLoadExternalBusy: vi.fn().mockResolvedValue([]),
+};
+
+describe("TeacherAvailabilityTab", () => {
+  // 2026-09-22(사용자 지시) — 설명 문단 제거, "Recurring Hours"/"Time Off"
+  // 서브탭 두 개로 분리.
+  it("설명 문단 없이 반복 일정 등록/휴무 일정 등록 서브탭만 보인다", () => {
+    render(<TeacherAvailabilityTab {...baseProps} />);
+    expect(screen.getByText("Recurring Hours")).toBeInTheDocument();
+    expect(screen.getByText("Time Off")).toBeInTheDocument();
+    expect(screen.queryByText(/반복 가능 시간\(주간 템플릿\)을 기본으로 두고/)).toBeNull();
+    expect(screen.queryByText("Date exceptions (monthly calendar)")).toBeNull();
+    fireEvent.click(screen.getByText("Time Off"));
+    expect(screen.getByText("Date exceptions (monthly calendar)")).toBeInTheDocument();
+    expect(screen.queryByText("Recurring availability (weekly template)")).toBeNull();
+  });
+
+  it("휴무 일정 등록 탭에서 월간 달력이 렌더링된다", () => {
+    render(<TeacherAvailabilityTab {...baseProps} />);
+    fireEvent.click(screen.getByText("Time Off"));
+    expect(screen.getByLabelText("Next month")).toBeInTheDocument();
+  });
+
+  it("선택한 날짜를 휴무로 등록하면 onAddException이 호출된다", async () => {
+    const onAddException = vi.fn().mockResolvedValue("ex1");
+    render(<TeacherAvailabilityTab {...baseProps} onAddException={onAddException} />);
+    fireEvent.click(screen.getByText("Time Off"));
+    fireEvent.click(screen.getByText("Mark this date as time off"));
+    await waitFor(() => expect(onAddException).toHaveBeenCalled());
+    expect(onAddException.mock.calls[0][0]).toMatchObject({ kind: "blocked" });
+  });
+
+  it("반복 가능시간이 등록돼 있으면 기본으로 주간 그리드가 렌더링된다", () => {
+    render(
+      <TeacherAvailabilityTab
+        {...baseProps}
+        initialRules={[
+          { id: "rule1", dayOfWeek: 1, startTimeLocal: "10:00", endTimeLocal: "17:00", timezone: "America/Los_Angeles", effectiveFrom: "2026-01-01", effectiveUntil: null },
+        ]}
+      />
+    );
+    expect(screen.getByTestId("weekly-availability-grid")).toBeInTheDocument();
+  });
+
+  it("그리드에서 블록을 클릭하면 onRemoveRule이 호출된다", async () => {
+    const onRemoveRule = vi.fn().mockResolvedValue(undefined);
+    render(
+      <TeacherAvailabilityTab
+        {...baseProps}
+        onRemoveRule={onRemoveRule}
+        initialRules={[
+          { id: "rule1", dayOfWeek: 1, startTimeLocal: "10:00", endTimeLocal: "17:00", timezone: "America/Los_Angeles", effectiveFrom: "2026-01-01", effectiveUntil: null },
+        ]}
+      />
+    );
+    fireEvent.click(screen.getByTestId("availability-block-rule1"));
+    await waitFor(() => expect(onRemoveRule).toHaveBeenCalledWith("rule1"));
+  });
+
+  it("목록 보기로 전환하면 요일·시간 텍스트 목록이 보인다", () => {
+    render(
+      <TeacherAvailabilityTab
+        {...baseProps}
+        initialRules={[
+          { id: "rule1", dayOfWeek: 1, startTimeLocal: "10:00", endTimeLocal: "17:00", timezone: "America/Los_Angeles", effectiveFrom: "2026-01-01", effectiveUntil: null },
+        ]}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "List" }));
+    expect(screen.getByText("Monday 10:00–17:00")).toBeInTheDocument();
+  });
+
+  it("기존 예외가 있는 날짜를 선택하면 삭제 버튼이 보인다", () => {
+    const todayKey = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles" }).format(new Date());
+    render(
+      <TeacherAvailabilityTab
+        {...baseProps}
+        initialExceptions={[{ id: "ex1", exceptionDate: todayKey, kind: "blocked", reason: null }]}
+      />
+    );
+    fireEvent.click(screen.getByText("Time Off"));
+    expect(screen.getByText("Delete this exception")).toBeInTheDocument();
+  });
+
+  // 2026-09-06 — 제품 오너 요구사항: 반복 규칙으로 특정 요일이 열려 있어도 특정
+  // 날짜의 일부 시간대만 개별로 휴무 조정할 수 있어야 한다.
+  it("이 날짜의 오픈 시간 타임라인이 반복 규칙을 반영해 렌더링된다", () => {
+    const todayKey = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles" }).format(new Date());
+    const dow = new Date(`${todayKey}T12:00:00Z`).getUTCDay();
+    render(
+      <TeacherAvailabilityTab
+        {...baseProps}
+        initialRules={[
+          { id: "rule1", dayOfWeek: dow, startTimeLocal: "09:00", endTimeLocal: "17:00", timezone: "America/Los_Angeles", effectiveFrom: "2026-01-01", effectiveUntil: null },
+        ]}
+      />
+    );
+    fireEvent.click(screen.getByText("Time Off"));
+    const timeline = screen.getByTestId("teacher-day-timeline");
+    expect(timeline).toHaveTextContent("09:00–17:00");
+  });
+
+  it("부분 시간 휴무를 등록하면 onAddException이 startTimeLocal/endTimeLocal과 함께 호출된다", async () => {
+    const onAddException = vi.fn().mockResolvedValue("ex-partial");
+    render(<TeacherAvailabilityTab {...baseProps} onAddException={onAddException} />);
+    fireEvent.click(screen.getByText("Time Off"));
+    fireEvent.click(screen.getByText("Block this time range"));
+    await waitFor(() => expect(onAddException).toHaveBeenCalled());
+    expect(onAddException.mock.calls[0][0]).toMatchObject({
+      kind: "blocked",
+      startTimeLocal: "13:00",
+      endTimeLocal: "14:00",
+    });
+  });
+
+  it("부분 시간 휴무 등록 후 목록에 표시되고 삭제할 수 있다", async () => {
+    const onAddException = vi.fn().mockResolvedValue("ex-partial");
+    const onRemoveException = vi.fn().mockResolvedValue(undefined);
+    render(<TeacherAvailabilityTab {...baseProps} onAddException={onAddException} onRemoveException={onRemoveException} />);
+    fireEvent.click(screen.getByText("Time Off"));
+    fireEvent.click(screen.getByText("Block this time range"));
+    await waitFor(() => expect(screen.getByText(/Partial time off: 13:00–14:00/)).toBeInTheDocument());
+    fireEvent.click(screen.getByText("Delete"));
+    await waitFor(() => expect(onRemoveException).toHaveBeenCalledWith("ex-partial"));
+  });
+
+  it("시간대가 저장돼 있지 않으면 안내를 보이고, 저장 시도는 서버 호출 없이 안내 문구로 막는다", async () => {
+    const onAddRule = vi.fn().mockResolvedValue("rule1");
+    const onOpenTimezoneSettings = vi.fn();
+    render(<TeacherAvailabilityTab {...baseProps} timezoneSaved={false} onAddRule={onAddRule} onOpenTimezoneSettings={onOpenTimezoneSettings} />);
+    expect(screen.getByTestId("availability-timezone-required")).toHaveTextContent("먼저 내 시간대를 설정");
+    fireEvent.click(screen.getByText("Set time zone"));
+    expect(onOpenTimezoneSettings).toHaveBeenCalled();
+    fireEvent.click(screen.getByText("Time Off"));
+    fireEvent.click(screen.getByText("Mark this date as time off"));
+    await waitFor(() => expect(screen.getAllByText(/먼저 내 시간대를 설정/).length).toBeGreaterThan(1));
+    expect(baseProps.onAddException).not.toHaveBeenCalled();
+    expect(onAddRule).not.toHaveBeenCalled();
+  });
+
+  it("시간대가 저장돼 있으면 안내가 없다", () => {
+    render(<TeacherAvailabilityTab {...baseProps} timezoneSaved />);
+    expect(screen.queryByTestId("availability-timezone-required")).toBeNull();
+  });
+});

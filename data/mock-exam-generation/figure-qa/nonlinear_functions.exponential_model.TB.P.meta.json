@@ -1,0 +1,42 @@
+{
+ "itemId": "nonlinear_functions.exponential_model.TB.P",
+ "generatedAt": "2026-10-07T05:02:00.501Z",
+ "codeHash": "83ae490068fbeb404c18b04530f897876ef752b0e4c5914c5573f3e9cb8cfd98",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.exponential_model.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.exponential_model.TB.P.png",
+   "mobileFile": "nonlinear_functions.exponential_model.TB.P.m375.png",
+   "archetypeId": "nf.exponential_model.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "A new online account tracks its followers. Each measurement is listed in the table, and the number of followers is multiplied by the same amount between consecutive entries. An exponential model of the form $y = a(b)^x$, where $a$ and $b$ are positive constants, fits the data, with $x$ the number of weeks.",
+   "question": "What is the value of $a$?",
+   "options": [
+    "14",
+    "28",
+    "2",
+    "7"
+   ],
+   "correctIndex": 3,
+   "answer": "7",
+   "explanation": "(1) 표에서 (1, 14), (2, 28) 을 읽는다. (2) 연속한 값의 비가 2 로 일정하다. (3) b = 2 이다. (4) x = 1 에서 x = 0 까지 1 번 거슬러 b 로 나눈다. (5) a = 14 ÷ 2^1 = 7 이다. 따라서 정답은 7이다.",
+   "structuralIssues": []
+  }
+ ]
+}

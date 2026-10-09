@@ -1,0 +1,1004 @@
+{
+ "taskId": "gen-lit40-medium-06-02",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-06-021",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-021",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "memoir",
+    "seed": {
+     "index": 20,
+     "genre": "memoir",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Miriam",
+      "Brigid"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "irish_scottish"
+     ],
+     "locale": "Porto Alegre",
+     "setting": "a cemetery gate",
+     "relationship": "a bus driver and a regular passenger",
+     "conflict": "over a repair that could never really fix it",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a cemetery gate in Porto Alegre; a bus driver and a regular passenger over a repair that could never really fix it"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "When Brigid drove the morning route past the cemetery gate in Porto Alegre, Miriam was always waiting there, holding the same cracked umbrella she had mended with wire and tape for three winters. Brigid privately thought the thing was beyond saving; the ribs bent sideways, and rain came through the patches in thin, stubborn threads. Still, each time Miriam climbed aboard and announced that she had fixed it again, Brigid nodded as though hearing news of a small victory. One wet Tuesday Brigid even kept a roll of electrical tape beside the fare box, telling herself it was only for the mirrors. Miriam noticed it, said nothing, and sat in the front seat as usual, shaking water from her sleeves. Outside, the gate's iron rails dripped onto the curb while the engine idled.",
+    "question": "Which choice best describes Brigid's attitude toward Miriam's repairs to the umbrella?",
+    "options": [
+     "She doubts the repairs can succeed but quietly respects and supports the effort.",
+     "She is irritated that Miriam wastes her time on a hopeless repair.",
+     "She is confident that the umbrella will soon work as well as new.",
+     "She feels indifferent and only pretends to listen to stay polite."
+    ],
+    "correct_letter": "A",
+    "explanation": "Brigid는 우산이 고칠 수 없는 상태라고 속으로 생각하지만(둘째 문장), Miriam이 고쳤다고 말할 때마다 작은 승리처럼 고개를 끄덕인다. 또 요금함 옆에 전기 테이프를 몰래 준비해 두는 행동은 그 노력을 조용히 돕고 싶어 함을 보여 준다. 따라서 회의적이지만 존중하고 지지하는 태도인 A가 정답이다. B는 짜증의 근거가 없고, C는 Brigid의 의심과 반대이며, D는 테이프를 준비한 적극적 행동과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "wry"
+   ],
+   "devices": [
+    "symbolism",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-022",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-022",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "main_idea_or_purpose",
+    "genre": "short_story",
+    "seed": {
+     "index": 21,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Thuy",
+      "Etienne"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "french"
+     ],
+     "locale": "Surabaya",
+     "setting": "a school music room",
+     "relationship": "a grandson and the grandfather's old friend",
+     "conflict": "over whether to sell a shared inheritance",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a school music room in Surabaya; a grandson and the grandfather's old friend over whether to sell a shared inheritance"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium"
+   },
+   "g": {
+    "passage": "Surabaya's afternoon heat pressed against the windows of the school music room, where Etienne had asked Thuy to meet him beside the old piano. The instrument had belonged jointly to Thuy's late grandfather and Etienne, and a buyer had offered a good price. Thuy came ready to agree; the money would pay for his first year of university. But Etienne only lifted the lid and played a halting tune, missing notes where, he said, the grandfather had always sung over him. Thuy recognized it at once from childhood evenings he had nearly forgotten. Later, walking home, he did not mention the buyer, and Etienne did not ask. Along the canal, vendors were folding their umbrellas, and a boy chased a runaway kite across the bridge.",
+    "question": "Which choice best states the main purpose of the text?",
+    "options": [
+     "To describe how Etienne taught Thuy to play a tune on an old piano",
+     "To show how a shared memory leads Thuy to reconsider selling the piano",
+     "To explain why the buyer's offer for the piano was unusually generous",
+     "To suggest that family possessions should never be sold for money"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분에서 Thuy는 등록금 때문에 피아노 판매에 동의할 생각으로 왔다. 그러나 Etienne이 할아버지와 함께하던 곡을 연주하자 Thuy는 잊고 있던 어린 시절을 떠올리고, 귀갓길에 구매자 이야기를 꺼내지 않는다. 이 두 지점을 이으면 공유된 기억이 판매 결심을 흔드는 과정을 보여 주는 B가 정답이다. A는 일화만 요약했고, C는 지문에 없는 목적이며, D는 지나치게 일반적인 교훈이다."
+   },
+   "notes": [],
+   "tone": [
+    "nostalgic",
+    "quiet"
+   ],
+   "devices": [
+    "juxtaposition",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-023",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-023",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "main_idea_or_purpose",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 22,
+     "genre": "novel_excerpt",
+     "pov": "third_omniscient",
+     "styleEra": "contemporary",
+     "names": [
+      "Anacleto",
+      "Emiliano"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Oaxaca",
+     "setting": "a noodle stall",
+     "relationship": "a landlord and a long-term tenant",
+     "conflict": "over who should stay behind",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a noodle stall in Oaxaca; a landlord and a long-term tenant over who should stay behind"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium"
+   },
+   "g": {
+    "passage": "Smoke from the chili oil stung Emiliano's eyes as he ladled broth at the noodle stall in Oaxaca, the stall he had rented from Anacleto for nineteen years. That morning Anacleto had brought papers: the block was being sold, and he was moving to his daughter's city. He offered Emiliano a share of the sale if he would leave quietly by spring. Emiliano listened, then handed him a bowl, as he did every Thursday. When customers came, Anacleto stood behind the counter without being asked and wiped the stools, scolding a boy for dripping sauce, exactly as he had when the stall first opened. By noon the papers lay under a jar of oregano, curling in the steam. Across the street, a bus unloaded schoolchildren in green sweaters.",
+    "question": "Which choice best describes the main purpose of the text?",
+    "options": [
+     "To recount how Anacleto delivered papers announcing the sale of the block",
+     "To explain why the noodle stall had become popular with schoolchildren",
+     "To reveal that Anacleto's attachment to the stall complicates his plan to leave",
+     "To argue that business arrangements always give way to old friendships"
+    ],
+    "correct_letter": "C",
+    "explanation": "앞부분에서 Anacleto는 건물을 팔고 떠나겠다는 서류를 가져온다. 하지만 이후 그는 부탁받지 않았는데도 카운터 뒤에서 의자를 닦고 손님을 챙기며, 서류는 오레가노 병 아래에 방치된다. 두 장면의 대비는 그가 가게에 대한 애착 때문에 떠나는 계획이 흔들림을 보여 주므로 C가 정답이다. A는 일화만 요약했고, B는 지문 소재를 쓰지만 목적이 다르며, D는 지나치게 일반적인 교훈이다."
+   },
+   "notes": [],
+   "tone": [
+    "warm",
+    "ambivalent"
+   ],
+   "devices": [
+    "contrast",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-025",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-025",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "main_idea_or_purpose",
+    "genre": "memoir",
+    "seed": {
+     "index": 24,
+     "genre": "memoir",
+     "pov": "second",
+     "styleEra": "contemporary",
+     "names": [
+      "Ngozi",
+      "Tunde"
+     ],
+     "nameCultures": [
+      "west_african",
+      "west_african"
+     ],
+     "locale": "Accra",
+     "setting": "a dried-riverbed crossing",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "while pretending to enjoy a gift that is wrong",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a dried-riverbed crossing in Accra; a mayor and the town's only doctor while pretending to enjoy a gift that is wrong"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium"
+   },
+   "g": {
+    "passage": "\"A fine hat, truly fine,\" Tunde said, turning the wide straw brim in his hands at the dried-riverbed crossing outside Accra. As mayor, he had commissioned it for Ngozi, the town's only doctor, to thank her for a year of night visits. I was twelve and carrying the parcel, so I saw her face before she found her smile: the hat was enormous, trimmed with plastic fruit, nothing she would ever wear. She put it on anyway and walked the whole crossing beside him, nodding at every greeting. Years afterward I learned she had kept it on a peg in her clinic, where patients waiting for stitches would stare at it and forget to be afraid. That afternoon the cracked mud glittered with mica, and goats picked their way along the old banks.",
+    "question": "Which choice best states the main purpose of the text?",
+    "options": [
+     "To show how Ngozi's polite acceptance of an unsuitable gift turned it into something useful",
+     "To describe the appearance of the hat that Tunde had commissioned for the doctor",
+     "To explain why the mayor wanted to thank the doctor for a year of night visits",
+     "To suggest that people should always be grateful for whatever gifts they receive"
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분에서 Ngozi는 자신이 절대 쓰지 않을 모자를 받고도 미소를 지으며 쓰고 걸어간다. 뒷부분에서 그녀는 그 모자를 진료소에 걸어 두었고, 환자들이 그것을 보며 두려움을 잊었다고 한다. 두 지점을 이으면 예의 바른 수용이 엉뚱한 선물을 쓸모 있는 것으로 바꾸었다는 A가 정답이다. B는 일화의 묘사만, C는 소재를 쓴 다른 목적, D는 일반적 교훈이다."
+   },
+   "notes": [],
+   "tone": [
+    "affectionate",
+    "humorous"
+   ],
+   "devices": [
+    "irony",
+    "flash-forward"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-026",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-026",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "character_motivation",
+    "genre": "short_story",
+    "seed": {
+     "index": 25,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Noemie",
+      "Remy"
+     ],
+     "nameCultures": [
+      "french",
+      "french"
+     ],
+     "locale": "Marseille",
+     "setting": "a community garden",
+     "relationship": "an uncle and a nephew with a debt",
+     "conflict": "over a recipe that was never written down",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a community garden in Marseille; an uncle and a nephew with a debt over a recipe that was never written down"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_character_motivation_medium"
+   },
+   "g": {
+    "passage": "When Remy arrived at the community garden in Marseille, Noemie was already kneeling among the basil, a notebook open on the soil beside her. For years Remy had owed her uncle money, and her uncle had owed him something too: the fish stew he had cooked at every festival but never written down. Since the funeral, Noemie had asked about the stew twice, each time stopping before she said why. Today Remy did not mention the debt. Instead he pinched a leaf of fennel, named it, and waited while she wrote. Then he named the saffron, the orange peel, the bay. Noemie's pencil moved faster, and she did not look up. Afterward he helped her carry the watering cans to the shed and latched its rusty door.",
+    "question": "Based on the text, why does Remy name the ingredients while Noemie writes?",
+    "options": [
+     "He is embarrassed about the money he owes and wants to change the subject.",
+     "He wants to preserve her uncle's unwritten recipe, which Noemie clearly longs for.",
+     "He hopes the recipe will earn enough at the festival to repay his debt.",
+     "He was asked by the garden's members to record the herbs that grow there."
+    ],
+    "correct_letter": "B",
+    "explanation": "지문은 삼촌의 생선 스튜가 한 번도 적힌 적 없다는 점과, Noemie가 장례식 이후 두 번이나 스튜에 대해 물었다는 점을 떨어진 문장에서 보여 준다. 이 두 단서를 이으면 Remy가 재료를 하나씩 불러 주는 것은 그녀가 원하는 레시피를 남겨 주려는 것임을 알 수 있으므로 B가 정답이다. A는 다른 감정(당혹)에서 나온 동기, C는 결과를 동기로 착각한 것, D는 지문에 없는 외부 원인이다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "restrained"
+   ],
+   "devices": [
+    "implication",
+    "listing"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-027",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-027",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "character_motivation",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 26,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Kagiso",
+      "Themba"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "east_south_african"
+     ],
+     "locale": "Cape Town",
+     "setting": "a barbershop",
+     "relationship": "a farmer and a surveyor from the city",
+     "conflict": "when an expected rival turns out to be an ally",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a barbershop in Cape Town; a farmer and a surveyor from the city when an expected rival turns out to be an ally"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_character_motivation_medium"
+   },
+   "g": {
+    "passage": "Years later, Kagiso would still remember the morning the surveyor from the city sat down in his barbershop in Cape Town. Themba had come to measure the farmland Kagiso's family had worked for generations, and the whole street expected a quarrel. Kagiso draped the cape over him and began trimming without a word. Halfway through, Themba remarked that the city's old maps placed the boundary well beyond the stone wall, not along it as the developers claimed. Kagiso paused, scissors raised, and then asked whether those maps could be copied before the hearing. Themba said they could, if someone knew which archive to ask. Kagiso finished the cut slowly and refused payment. Outside, a delivery van idled, its radio playing an old jazz station.",
+    "question": "Based on the text, why does Kagiso most likely refuse Themba's payment?",
+    "options": [
+     "He is still angry with Themba and does not want to accept his money.",
+     "He believes refusing payment will guarantee he wins the hearing.",
+     "He recognizes that Themba's information about the maps could help protect his land.",
+     "He has been told by the street's residents not to charge city officials."
+    ],
+    "correct_letter": "C",
+    "explanation": "Themba는 옛 지도가 경계를 돌담 너머로 표시한다고 말하고, Kagiso는 그 지도를 청문회 전에 복사할 수 있는지 묻는다. 이 두 문장을 이으면 Kagiso가 Themba를 적이 아닌 협력자로 보게 되었음을 알 수 있어 요금을 받지 않는 이유는 C이다. A는 다른 감정에서 나온 동기, B는 결과를 동기로 착각한 것, D는 지문에 없는 외부 원인이다."
+   },
+   "notes": [],
+   "tone": [
+    "tense",
+    "hopeful"
+   ],
+   "devices": [
+    "reversal",
+    "flashback"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-028",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-028",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "short_story",
+    "seed": {
+     "index": 27,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Carmela",
+      "Mateo"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "spanish_iberian"
+     ],
+     "locale": "Seville",
+     "setting": "a clock-maker's shop",
+     "relationship": "a gardener and the house's new owner",
+     "conflict": "about leaving versus staying loyal",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a clock-maker's shop in Seville; a gardener and the house's new owner about leaving versus staying loyal"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "g": {
+    "passage": "Ticking filled every corner of the clock-maker's shop in Seville, dozens of pendulums slightly out of step. Carmela had tended the courtyard garden behind it for thirty years, and Mateo, who had bought the building last month, found her there pruning the orange trees. He told her gently that he planned to pave the courtyard for a café. She thanked him, wiped her shears, and kept cutting, as though the branches still needed her by evening. Inside, Mateo wound a clock that had stopped, and for a moment the shop seemed almost cheerful. Yet each time a bell chimed the hour, Carmela's hands went still among the leaves, and she counted the strokes under her breath. At dusk she swept the fallen blossoms into a neat pile beside the gate.",
+    "question": "Which choice best describes the overall mood of the text?",
+    "options": [
+     "Cheerful, as the shop comes back to life under its new owner",
+     "Hopeful with brief worry, as Carmela trusts the garden will be spared",
+     "Peaceful and timeless, as the old shop continues its familiar routines",
+     "Wistful, with a quiet sense of loss beneath moments of brightness"
+    ],
+    "correct_letter": "D",
+    "explanation": "지문에는 Mateo가 시계를 감자 가게가 잠시 밝아지는 순간이 있지만, 정원을 포장한다는 소식 이후 Carmela가 계속 가지치기를 하고 종이 칠 때마다 손을 멈추고 횟수를 세는 장면이 더 두드러진다. 이 두 부분을 종합하면 밝은 순간 아래 상실감이 깔린 아쉬운 분위기인 D가 정답이다. A는 덜 두드러진 정서만 말했고, B는 두 정서의 비중을 뒤집었으며, C는 소재와 어울리지만 단서가 약하다."
+   },
+   "notes": [],
+   "tone": [
+    "wistful",
+    "melancholy"
+   ],
+   "devices": [
+    "auditory imagery",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-030",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-030",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 29,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Linton",
+      "Zawadi"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "east_south_african"
+     ],
+     "locale": "Samarkand",
+     "setting": "a vineyard at harvest",
+     "relationship": "a priest and a lapsed parishioner",
+     "conflict": "after a misunderstood gift",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a vineyard at harvest in Samarkand; a priest and a lapsed parishioner after a misunderstood gift"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "Zawadi had not entered the church in Samarkand for six years, so when Linton, the priest, left a basket of cuttings from the parish vines at her door, she assumed it was a reproach. She marched into the vineyard during harvest to return it. Linton, sleeves rolled and hands purple, only asked whether her late husband's rows still grew on the eastern slope. She admitted they did, though badly. He said the cuttings were meant to replace those rows, nothing more, and offered to help her graft them on Saturday. Zawadi hesitated, then took back the basket and told him to bring his own knife, since hers were dull. Pickers called to one another across the terraces, and a cart creaked downhill under its load.",
+    "question": "Based on the text, which choice best describes the relationship between Linton and Zawadi?",
+    "options": [
+     "Linton disapproves of Zawadi and uses the gift to urge her return to church.",
+     "Zawadi's initial suspicion gives way to acceptance of Linton's practical kindness.",
+     "Zawadi relies on Linton to manage the vineyard rows her husband left behind.",
+     "They are rivals who compete each year over whose grapes are harvested first."
+    ],
+    "correct_letter": "B",
+    "explanation": "Zawadi는 처음 바구니를 꾸짖음으로 오해해 돌려주러 가지만, Linton은 남편의 포도 줄을 대신할 묘목일 뿐이라며 접목을 돕겠다고 한다. Zawadi가 바구니를 다시 받고 칼을 가져오라고 말하는 행동은 의심이 수용으로 바뀌었음을 보여 주므로 B가 정답이다. A는 Zawadi의 오해만 반영한 관계, C는 의존 방향을 과장했고, D는 통념적 경쟁 관계로 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "warm",
+    "dry"
+   ],
+   "devices": [
+    "misunderstanding",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-031",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-031",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "short_story",
+    "seed": {
+     "index": 30,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Rivka",
+      "Chana"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "hebrew_jewish"
+     ],
+     "locale": "Haifa",
+     "setting": "a flooded cellar",
+     "relationship": "a retired judge and a young clerk",
+     "conflict": "over blame for a lost opportunity",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a flooded cellar in Haifa; a retired judge and a young clerk over blame for a lost opportunity"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "When the rains flooded the cellar of her house in Haifa, Rivka, a retired judge, summoned her former clerk, Chana, to help carry out the boxes of old case files. Ten years earlier Chana had misfiled an appeal, and a promotion both of them had wanted went to someone else; each still privately blamed the other. Standing knee-deep in the cold water, they lifted the boxes one by one, and the ink on the labels had run so badly that neither could tell whose handwriting was whose. Rivka held a dripping folder up to the light and laughed for the first time that afternoon. By evening the files were spread across the courtyard to dry, every label equally blurred, and Chana, without asking, began sorting them into a single pile rather than two.",
+    "question": "In the text, the blurred labels on the case files most likely represent",
+    "options": [
+     "the damage that the flood caused to Rivka's legal career over the years.",
+     "the carelessness that led Chana to misfile an appeal a decade earlier.",
+     "the fading of clear lines of blame between Rivka and Chana.",
+     "the importance of keeping court records in a dry, safe place."
+    ],
+    "correct_letter": "C",
+    "explanation": "지문은 두 사람이 승진 실패를 서로의 탓으로 여겨 왔다고 말한 뒤, 물에 번진 라벨 때문에 누구의 글씨인지 알 수 없게 되었다고 묘사한다. 이후 Chana가 서류를 두 더미가 아닌 한 더미로 정리하는 장면이 이어져, 번진 라벨이 책임 소재의 경계가 흐려짐을 상징함을 알 수 있다. 따라서 C가 정답이다. A와 D는 문자 그대로의 홍수 피해에 머물고, B는 과거 실수 자체만 가리켜 상징의 확장된 의미를 놓친다."
+   },
+   "notes": [],
+   "tone": [
+    "reconciliatory",
+    "wry"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-032",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-032",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 31,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Joon",
+      "Suhyun"
+     ],
+     "nameCultures": [
+      "korean",
+      "korean"
+     ],
+     "locale": "Busan",
+     "setting": "a stone bridge",
+     "relationship": "two musicians in a failing duo",
+     "conflict": "over an unspoken agreement to avoid one subject",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a stone bridge in Busan; two musicians in a failing duo over an unspoken agreement to avoid one subject"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Joon and Suhyun met on the stone bridge in Busan every evening before their set, as they had for eight years. Lately the duo drew smaller crowds, and both knew why, though neither said it: Suhyun had been offered a solo contract in Seoul. Instead they talked about the bridge. Joon pointed out a crack running between two stones, filled long ago with mortar that had weathered to a different color. Suhyun said the bridge would stand for another century that way. Each night after that, one of them would touch the patched seam while passing, as if checking it. On their last evening before the contract deadline, Suhyun pressed her palm flat against the mortar and held it there, and Joon looked away toward the harbor lights.",
+    "question": "In the text, the mortar-filled crack in the bridge most likely represents",
+    "options": [
+     "the decline in audiences that has troubled the duo's recent performances.",
+     "the long history of the city of Busan and its old stone architecture.",
+     "Suhyun's confidence that she will succeed in her solo career in Seoul.",
+     "the duo's strained partnership, held together by what they avoid saying."
+    ],
+    "correct_letter": "D",
+    "explanation": "지문은 두 사람이 Suhyun의 솔로 계약이라는 주제를 말하지 않고 대신 다리 이야기를 한다고 서술한다. 이어서 오래전 메운 균열을 매일 밤 확인하듯 만지고, 마감 전날 Suhyun이 손을 오래 대는 장면이 반복된다. 이 단서들을 이으면 균열과 모르타르는 말하지 않는 것으로 겨우 이어진 듀오의 관계를 상징하므로 D가 정답이다. A는 관객 감소라는 표면 정보, B는 문자 그대로의 의미, C는 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "melancholy",
+    "restrained"
+   ],
+   "devices": [
+    "symbolism",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-033",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-033",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 32,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Neema",
+      "Kiara"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "caribbean"
+     ],
+     "locale": "Nairobi",
+     "setting": "a rooftop laundry line",
+     "relationship": "a pair of lifelong friends who rarely speak",
+     "conflict": "when two traditions have to share one table",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a rooftop laundry line in Nairobi; a pair of lifelong friends who rarely speak when two traditions have to share one table"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "When Neema and Kiara hung their families' tablecloths side by side on the rooftop laundry line in Nairobi, neither said a word, as was their habit after forty years of friendship. Neema's cloth was stiff white cotton for her family's Sunday lunch; Kiara's was patterned in red and gold for the evening feast her relatives were bringing to the same house. The two cloths flapped against each other in the wind, tangling and parting and tangling again, a quarrel conducted entirely in cotton. Kiara reached up once to separate them, then let her hand fall. By late afternoon both were dry, and Neema folded them together, the white inside the red, so they would fit on the one long table downstairs.",
+    "question": "As used in the text, the phrase “a quarrel conducted entirely in cotton” most nearly suggests that",
+    "options": [
+     "the tablecloths' motion expresses the tension the silent friends never voice.",
+     "the friends argue loudly about which cloth should be used for the meal.",
+     "the cotton cloths are being damaged by the strong wind on the roof.",
+     "the two families have refused to share the long table downstairs."
+    ],
+    "correct_letter": "A",
+    "explanation": "지문 첫 문장에서 두 친구는 40년 우정 동안 습관처럼 말을 하지 않는다고 하고, 두 집안의 서로 다른 전통이 한 식탁을 나눠야 하는 상황이 제시된다. 바람에 엉키고 떨어지는 천을 말다툼에 비유한 표현은 말로 하지 않는 긴장이 천의 움직임으로 드러난다는 뜻이므로 A가 정답이다. B는 침묵한다는 서술과 모순되고, C는 문자 그대로의 해석이며, D는 마지막에 함께 접어 한 식탁에 올리는 장면과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "affectionate"
+   ],
+   "devices": [
+    "metaphor",
+    "personification"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-034",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-034",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 33,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Eamon",
+      "Larissa"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "portuguese_brazilian"
+     ],
+     "locale": "Glasgow",
+     "setting": "a beekeeper's yard",
+     "relationship": "two women who once shared a stage",
+     "conflict": "when old loyalties collide with new ones",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a beekeeper's yard in Glasgow; two women who once shared a stage when old loyalties collide with new ones"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Who would have guessed that Larissa would end up keeping bees in a Glasgow yard? Twenty years earlier she and her stage partner had toured every hall in Scotland, and Eamon, who had managed them both, now arrived at her gate with news: her old partner was staging a reunion and wanted Larissa to join. Larissa lifted a frame from the hive, heavy with comb, and said she had promised the neighborhood association a season of honey. Eamon watched the bees crawl over her bare wrists without stinging. Her old loyalty tugged at her one way, the new one another, and she stood between them like a hive with two queens, humming and uneasy. She asked him to come back after the harvest, when she might have an answer.",
+    "question": "As used in the text, the phrase “like a hive with two queens” most nearly suggests that Larissa",
+    "options": [
+     "has become an expert beekeeper with an unusually productive hive.",
+     "is torn between competing commitments that cannot easily coexist.",
+     "feels threatened by her former stage partner's growing fame.",
+     "intends to lead both the reunion and the neighborhood association."
+    ],
+    "correct_letter": "B",
+    "explanation": "지문은 옛 무대 파트너의 재결합 공연 제안과 동네 협회에 꿀을 약속한 새로운 책임을 함께 제시한다. 바로 앞 문장에서 옛 충성과 새 충성이 서로 다른 방향으로 그녀를 끌어당긴다고 말하므로, 여왕벌이 둘인 벌통은 공존하기 어려운 두 의무 사이의 갈등을 뜻한다. 따라서 B가 정답이다. A는 문자 그대로의 해석, C는 근거 없는 감정, D는 두 역할을 다 맡는다는 잘못된 추론이다."
+   },
+   "notes": [],
+   "tone": [
+    "contemplative",
+    "uneasy"
+   ],
+   "devices": [
+    "simile",
+    "rhetorical question"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-035",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-035",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 34,
+     "genre": "poetry",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Nora",
+      "Ruoxi"
+     ],
+     "nameCultures": [
+      "english",
+      "chinese"
+     ],
+     "locale": "Taipei",
+     "setting": "a school gymnasium",
+     "relationship": "an interpreter and her client",
+     "conflict": "about what to tell a younger sibling",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a school gymnasium in Taipei; an interpreter and her client about what to tell a younger sibling"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Tell him only that I'm tired, Ruoxi said,\nher voice small in the Taipei gym\nwhere her brother's team ran drills beneath the lights.\nNora, who carried words between two languages for pay,\nweighed the sentence like a coin with two faces.\nThe doctor's news sat folded in her pocket,\na paper boat she could not sail across the court.\nThe boy waved from the free-throw line, grinning,\nand Nora waved back, choosing the smaller truth,\nwhile sneakers squealed on the varnished floor\nand the scoreboard blinked its patient zeros.",
+    "question": "As used in the text, the phrase “a paper boat she could not sail across the court” most nearly suggests that Nora",
+    "options": [
+     "is unable to read the doctor's handwriting on the folded paper.",
+     "wishes she could join the brother's team practice on the court.",
+     "cannot bring herself to deliver the serious news to the boy.",
+     "plans to give the boy a small gift once the practice ends."
+    ],
+    "correct_letter": "C",
+    "explanation": "시에서 Ruoxi는 동생에게 피곤하다고만 전해 달라고 부탁하고, 통역사는 그 문장을 양면 동전처럼 저울질한다. 이후 그녀가 더 작은 진실을 택하며 손을 흔드는 장면과 이어 보면, 코트를 건너 띄울 수 없는 종이배는 의사의 소식을 소년에게 전하지 못하는 마음을 비유한다. 따라서 C가 정답이다. A와 D는 종이를 문자 그대로 해석했고, B는 코트라는 단어만 활용한 오독이다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "somber"
+   ],
+   "devices": [
+    "metaphor",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-036",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-036",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 35,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Cleotilde",
+      "Takoda"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "indigenous_american"
+     ],
+     "locale": "Valparaiso",
+     "setting": "a night-shift pharmacy",
+     "relationship": "a mother-in-law and a new bride",
+     "conflict": "about an ending that nobody wants to admit",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a night-shift pharmacy in Valparaiso; a mother-in-law and a new bride about an ending that nobody wants to admit"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "I worked the night shift at a pharmacy in Valparaiso the winter my marriage to Takoda was quietly coming apart, and his mother, Cleotilde, came in nearly every evening near midnight. She bought small things: throat lozenges, a comb, a single bandage. We talked about the fog, the price of oranges, her knees. Neither of us mentioned that Takoda had not slept at home in weeks. Our conversations were a bridge built only to its middle, and each night we walked out to the edge of it, admired the view, and turned back. Once she paused at the door and seemed about to say his name. Instead she pulled her scarf higher and stepped into the wet street, where taxis hissed past under the hill's yellow lamps.",
+    "question": "As used in the text, the phrase “a bridge built only to its middle” most nearly suggests that the conversations",
+    "options": [
+     "were difficult because the two women spoke different languages.",
+     "gradually brought the women to an open discussion of the marriage.",
+     "took place on the walk from the pharmacy across the town's bridge.",
+     "reached toward each other but always stopped short of the real subject."
+    ],
+    "correct_letter": "D",
+    "explanation": "화자는 둘이 안개, 오렌지 값, 무릎 이야기만 하고 Takoda가 몇 주째 집에 오지 않은 사실은 꺼내지 않았다고 말한다. 또 Cleotilde가 문 앞에서 그의 이름을 말하려다 멈추는 장면이 이어지므로, 중간까지만 지은 다리는 서로 다가가지만 핵심 주제 앞에서 늘 멈추는 대화를 뜻한다. 따라서 D가 정답이다. A는 근거 없는 언어 차이, B는 반대 방향의 진전, C는 문자 그대로의 해석이다."
+   },
+   "notes": [],
+   "tone": [
+    "melancholy",
+    "intimate"
+   ],
+   "devices": [
+    "metaphor",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-037",
+   "task": "gen-lit40-medium-06-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-037",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 36,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Meera",
+      "Eulalio"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "latin_american"
+     ],
+     "locale": "Lima",
+     "setting": "a mountain bus stop",
+     "relationship": "a pair of rival bakers",
+     "conflict": "over a tool or instrument inherited by the wrong person",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a mountain bus stop in Lima; a pair of rival bakers over a tool or instrument inherited by the wrong person"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Meera and Eulalio ran rival bakeries on opposite sides of the mountain bus stop outside Lima, and I spent my tenth summer carrying flour sacks for Meera. That year the old master baker of the village died and left his copper dough scraper not to Meera, his apprentice of twenty years, but to Eulalio, who had once insulted his bread in public. For weeks the scraper hung in Eulalio's window, untouched, a medal pinned on the wrong chest. Customers waiting for the bus whispered about it. Eulalio's loaves came out lopsided, and he stopped meeting anyone's eyes. One morning in August I found the scraper wrapped in brown paper on Meera's doorstep, no note attached. The early bus groaned up the switchbacks, its roof stacked with crates of potatoes.",
+    "question": "As used in the text, the phrase “a medal pinned on the wrong chest” most nearly suggests that the scraper",
+    "options": [
+     "was an honor that everyone sensed rightly belonged to someone else.",
+     "was a prize Eulalio had won in a public baking competition.",
+     "was too valuable to be used for ordinary daily baking.",
+     "was displayed to insult Meera in front of the customers."
+    ],
+    "correct_letter": "A",
+    "explanation": "지문은 스크레이퍼가 20년 제자인 Meera가 아니라 한때 스승의 빵을 모욕했던 Eulalio에게 남겨졌다고 설명한다. 이후 손님들이 수군대고 Eulalio가 눈을 피하다가 결국 Meera의 문 앞에 두고 가는 장면이 이어져, 잘못된 가슴에 단 훈장은 다른 사람에게 돌아갔어야 할 영예임을 뜻한다. 따라서 A가 정답이다. B는 훈장을 문자 그대로 상으로 해석했고, C는 근거가 없으며, D는 Eulalio의 위축된 태도와 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "nostalgic"
+   ],
+   "devices": [
+    "metaphor",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-06-024",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(14단어, 다음 12)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-029",
+   "stage": "distractor",
+   "reasons": [
+    "오답 2개가 절대어(always/never/only 등)로 쉽게 소거됨"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-038",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-039",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-040",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

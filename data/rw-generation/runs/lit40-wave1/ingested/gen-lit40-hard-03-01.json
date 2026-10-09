@@ -1,0 +1,1008 @@
+{
+ "taskId": "gen-lit40-hard-03-01",
+ "passed": [
+  {
+   "candidateId": "lit40-hard-03-001",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-001",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 0,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Salma",
+      "Wolfram"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "german_austrian"
+     ],
+     "locale": "Marrakesh",
+     "setting": "a lakeside dock",
+     "relationship": "a mother-in-law and a new bride",
+     "conflict": "over an invitation one of them refuses",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a lakeside dock in Marrakesh; a mother-in-law and a new bride over an invitation one of them refuses"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "words_in_context_lit_figurative_language_hard_v4"
+   },
+   "g": {
+    "passage": "Folded twice and then once more, Salma's invitation lay on the planks of the dock where she had set it, weighted with a lemon. Her new daughter-in-law had come to Marrakesh only that spring, and the lake below the rented villa was the one corner of the household where nobody followed anyone. Each evening the bride walked to the end of the dock, unfolded the card, read the date of Salma's luncheon, and folded it again along the same creases. She did not answer it, and she did not throw it into the water. Wolfram, watching from the terrace, called the card his mother's paper anchor. Salma heard him and went on shelling beans. On the third evening the bride carried the lemon back to the kitchen, sliced it, and served it with the tea, leaving the card on the boards with nothing on top of it.",
+    "question": "As used in the text, the phrase “paper anchor” most nearly suggests that the invitation is",
+    "options": [
+     "a demand that feels much too heavy for the bride to bear",
+     "a pull that keeps drawing the bride back to an unsettled choice",
+     "a boundary that marks how far out the bride may walk",
+     "a weight that holds the card down against the lake wind"
+    ],
+    "correct_letter": "B",
+    "explanation": "비유 앞에서 신부는 낯선 집안에서 혼자일 수 있는 부두로 가 매일 저녁 초대장을 펼쳤다 같은 접힘선대로 다시 접으며, 답하지도 버리지도 않는다. 이 반복은 초대장이 그녀를 계속 같은 결정 앞으로 되돌려 놓는다는 점을 보여 준다. 비유 뒤에서 그녀가 레몬을 치우고도 카드를 그대로 둔 것은 결정이 여전히 끝나지 않았음을 암시하므로 B가 정답이다. A는 무게 속성만 읽어 반복적으로 돌아오는 행동을 설명하지 못하고, C는 한계 속성을 읽은 해석이며, D는 레몬의 역할을 문자 그대로 읽은 해석이다."
+   },
+   "notes": [],
+   "tone": [
+    "restrained",
+    "wry"
+   ],
+   "devices": [
+    "metaphor",
+    "repetition",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-002",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-002",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 1,
+     "genre": "memoir",
+     "pov": "third_omniscient",
+     "styleEra": "late_20c",
+     "names": [
+      "Faisal",
+      "Ayita"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "indigenous_american"
+     ],
+     "locale": "Colombo",
+     "setting": "a fishing harbor",
+     "relationship": "a girl and an old family friend",
+     "conflict": "about keeping a family business open",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a fishing harbor in Colombo; a girl and an old family friend about keeping a family business open"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "words_in_context_lit_figurative_language_hard_v4"
+   },
+   "g": {
+    "passage": "When the ice truck stopped coming to the harbor in Colombo, Ayita began packing the morning catch in sawdust from the boatyard. Her family's stall had sold fish on the same corner for forty years, and the shutter now stuck halfway each dawn while the newer stalls rolled theirs up with a motor. Faisal, who had fished beside her grandfather, came by every morning, lifted the shutter the last few inches with his shoulder, and left without buying anything. Buyers still came, mostly old ones, and the scale still swung. One wet morning Faisal called the stall a lantern with the wick cut short. Ayita wrote the phrase on the back of a receipt. The following week she ordered a new shutter spring, then put the receipt in the cash tin beneath the coins, where she would see it each time she made change.",
+    "question": "As used in the text, the phrase “a lantern with the wick cut short” most nearly suggests that the stall is",
+    "options": [
+     "a source of comfort that still warms the harbor families",
+     "a light too dim to draw new buyers to the corner",
+     "a business still working but nearing the end of its run",
+     "a business whose worn fixtures need steady repair to function"
+    ],
+    "correct_letter": "C",
+    "explanation": "비유 앞에서 얼음 트럭이 끊기고 셔터가 반쯤 걸리는 등 가게가 쇠퇴하는 상황이 제시되고, Faisal은 매일 셔터를 끝까지 올려 주며 가게가 계속 문을 열게 돕는다. 여전히 손님이 오고 저울이 움직인다는 점은 가게가 아직 '빛을 내고' 있음을, 심지가 짧다는 것은 남은 시간이 길지 않음을 가리킨다. 비유 뒤에 Ayita가 새 스프링을 주문하면서도 그 문구를 매번 보이는 곳에 두는 것은 계속 운영하되 끝이 가깝다는 사실을 잊지 않으려는 행동이므로 C가 정답이다. A는 빛의 따뜻함만, B는 어둠의 정도만 읽은 해석이며, D는 셔터 수리를 문자 그대로 읽은 해석이다."
+   },
+   "notes": [],
+   "tone": [
+    "wistful",
+    "understated"
+   ],
+   "devices": [
+    "metaphor",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-003",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-003",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "short_story",
+    "seed": {
+     "index": 2,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Donal",
+      "Booker"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "african_american"
+     ],
+     "locale": "Glasgow",
+     "setting": "a rural post office",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "when a visitor arrives and sees what the family does not",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a rural post office in Glasgow; a mayor and the town's only doctor when a visitor arrives and sees what the family does not"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "g": {
+    "passage": "Stamps in hand, I waited behind Donal at the post office counter outside Glasgow. Every Thursday, the clerk had told me, the mayor posted a letter to the doctor, Booker, who lived three doors from him, and every Thursday Booker posted one back. Neither man, as far as the town knew, had spoken to the other since an election years before. That morning Booker came in while Donal was still at the counter. The mayor did not turn around. He slid his envelope across more slowly than usual, his whole manner ______. Booker set his own envelope beside it, close enough that the corners touched, and stood waiting until the clerk had stamped both together.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "stiffly formal",
+     "openly eager",
+     "stubbornly turned",
+     "quietly expectant"
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분에서 두 사람은 말을 하지 않으면서도 매주 편지를 주고받는 습관을 이어 왔으므로 Donal의 태도는 단절이 아니라 연결을 향해야 한다. 빈칸 뒤에서 Booker가 봉투 모서리를 맞대어 놓고 함께 도장이 찍히기를 기다리는 행동은 Donal의 느린 동작이 조용히 응답을 기다리는 것이었음을 보여 준다. 따라서 '조용히 기대하는'이라는 D가 정답이다. A는 돌아보지 않는 행동과는 맞지만 뒤의 호응을 설명하지 못하고, B는 정도가 지나치며, C는 지문의 'turn around'를 빌려 왔을 뿐 뒤 행동과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "reserved",
+    "understated"
+   ],
+   "devices": [
+    "understatement",
+    "gesture"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-004",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-004",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 3,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Rohan",
+      "Ishaan"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "indian_subcontinent"
+     ],
+     "locale": "Dhaka",
+     "setting": "a night bus",
+     "relationship": "a keeper and a visiting surveyor",
+     "conflict": "about the last item in a house being emptied",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a night bus in Dhaka; a keeper and a visiting surveyor about the last item in a house being emptied"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "g": {
+    "passage": "Rohan never sat by the window. On the night bus out of Dhaka he took the aisle seat, as he had on each of our three trips to the emptied house, and kept the brass clock on his knees with both hands spread over its face. I had surveyed the property, listed every fixture, and signed off on the sale; the clock was the one thing my inventory did not mention. Somewhere past the river crossing the bus braked hard. Rohan's hands stayed where they were, and when I offered to carry the clock in my bag, he answered with a nod that was ______. He passed it to me, then reached across and turned it face down before letting go.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "reluctantly willing",
+     "plainly relieved",
+     "firmly protective",
+     "carefully guarded"
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분에서 Rohan은 매번 시계를 무릎에 올리고 두 손으로 덮어 지키는 습관을 보인다. 그러나 빈칸 뒤에서 그는 결국 시계를 건네면서도 손을 놓기 전에 시계를 엎어 놓아 마지막까지 망설임을 드러낸다. 두 단서를 함께 만족하는 말은 '마지못해 응하는'이라는 A이다. B는 건네는 행동과는 맞지만 망설임의 어조를 놓치고, C는 앞의 보호 습관만 반영해 건네는 행동과 맞지 않으며, D는 손으로 덮는 장면의 표현을 빌렸을 뿐 뒤 행동을 설명하지 못한다."
+   },
+   "notes": [],
+   "tone": [
+    "subdued",
+    "tense"
+   ],
+   "devices": [
+    "gesture",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-005",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-005",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "poetry",
+    "seed": {
+     "index": 4,
+     "genre": "poetry",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Odessa",
+      "Isaiah"
+     ],
+     "nameCultures": [
+      "african_american",
+      "african_american"
+     ],
+     "locale": "Chicago's South Side",
+     "setting": "a river barge",
+     "relationship": "a pair of lifelong friends who rarely speak",
+     "conflict": "over a tool or instrument inherited by the wrong person",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a river barge in Chicago's South Side; a pair of lifelong friends who rarely speak over a tool or instrument inherited by the wrong person"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "g": {
+    "passage": "South Side water, brown beneath the barge,\nand Odessa on the deck with her father's trumpet,\nthe one he had meant for Isaiah, who could play.\nEach evening she polished the bell and set it down\nbeside the coil of rope where Isaiah sat mending,\nand each evening he did not look at it.\nForty years they had been friends this way,\nsaying little, passing bread across the hatch.\nThen came the night the engine failed\nand the barge drifted, lightless, toward the bridge.\nOdessa lifted the horn and blew one note,\nsour and long, a sound ______,\nand Isaiah set his net aside, took the trumpet from her hands,\nand answered with the same note, held steady,\nuntil the bridge-keeper's lantern swung toward them.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "loudly alarmed",
+     "plainly offered",
+     "proudly displayed",
+     "faintly hopeful"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분에서 Odessa는 매일 저녁 트럼펫을 닦아 Isaiah 옆에 내려놓으며 원래 그의 것이었어야 할 악기를 말없이 건네 왔다. 빈칸 뒤에서 Isaiah가 트럼펫을 받아 같은 음으로 응답하는 것은 그 음이 건넴의 제스처였음을 확인해 준다. 따라서 '분명히 건네진'이라는 B가 정답이다. A는 엔진 고장 상황만 반영해 Isaiah가 악기를 받는 이유를 설명하지 못하고, C는 닦는 행동을 빌려 왔으나 건넴과 맞지 않으며, D는 정도와 어조가 약해 뒤의 응답과 맞물리지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "elegiac"
+   ],
+   "devices": [
+    "imagery",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-006",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-006",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 5,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Rosalinda",
+      "Astrid"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "dutch_nordic"
+     ],
+     "locale": "Valparaiso",
+     "setting": "an abandoned orchard",
+     "relationship": "best friends after a move",
+     "conflict": "over how to mark an anniversary",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "an abandoned orchard in Valparaiso; best friends after a move over how to mark an anniversary"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "g": {
+    "passage": "By the tenth autumn of our friendship, Rosalinda had moved to the coast, and I followed her letters to Valparaiso as one follows a road. Every year she had insisted that our anniversary be marked with ceremony: a cake, a toast, some little speech that embarrassed us both. Astrid, she had written, you must not let the day pass plainly. When I arrived, the house was not ready, and she led me instead to an orchard above the harbor, long abandoned and gone wild. She said nothing of cake. Her proposal, made beneath a split pear tree, was ______. We gathered the fallen fruit into my shawl, sat on the low wall, and ate it without a word of speech.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "grandly ceremonial",
+     "coldly indifferent",
+     "unexpectedly simple",
+     "wildly overgrown"
+    ],
+    "correct_letter": "C",
+    "explanation": "앞부분에서 Rosalinda는 해마다 케이크와 건배, 연설로 기념일을 성대하게 치르자고 고집해 왔으므로, 이번 제안은 그 습관에서 벗어난다는 방향을 가진다. 빈칸 뒤에서 두 사람이 떨어진 과일을 주워 말없이 먹는 행동은 제안의 소박한 정도를 정해 준다. 따라서 '뜻밖에 소박한'이라는 C가 정답이다. A는 앞의 습관만 따라 뒤 행동과 맞지 않고, B는 소박함을 냉담함으로 한 단계 잘못 읽었으며, D는 과수원 묘사를 빌려 왔을 뿐 제안의 성격을 설명하지 못한다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "nostalgic"
+   ],
+   "devices": [
+    "contrast",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-007",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-007",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "memoir",
+    "seed": {
+     "index": 6,
+     "genre": "memoir",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Fatma",
+      "Xiulan"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "chinese"
+     ],
+     "locale": "Lisbon",
+     "setting": "a cemetery gate",
+     "relationship": "a mother and her son leaving for college",
+     "conflict": "over a recipe that was never written down",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a cemetery gate in Lisbon; a mother and her son leaving for college over a recipe that was never written down"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "g": {
+    "passage": "We walked to the cemetery gate in Lisbon on the morning before Xiulan sailed for college, because Fatma visited her mother's grave every Sunday and would not change the day for anyone. For years she had refused to write down the bean stew her mother taught her; recipes, she said, belonged in the hands. Xiulan had asked four times that week. At the gate she stopped, set down her basket, and began to recite: the onions, the bay leaf, the long hour of low heat. Her voice was ______. Xiulan copied each step into his notebook, and when he read the list back to her, she corrected the salt twice and let the rest stand.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "faintly reluctant",
+     "briskly offhand",
+     "softly mournful",
+     "steadily precise"
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분에서 Fatma는 요리법은 손에 있는 것이라며 오랫동안 받아 적기를 거부해 왔지만, 문 앞에서 스스로 재료와 순서를 하나씩 읊기 시작하며 방향을 바꾼다. 빈칸 뒤에서 그녀가 소금 양을 두 번 고치고 나머지는 그대로 두는 행동은 그 낭송이 꼼꼼하고 정확했음을 보여 준다. 따라서 D가 정답이다. A는 앞의 거부 습관만 반영해 뒤의 세심한 교정과 맞지 않고, B는 정확성과 반대되는 정도로 읽었으며, C는 묘지라는 배경을 빌렸을 뿐 뒤 행동과 이어지지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "measured",
+    "tender"
+   ],
+   "devices": [
+    "characterization",
+    "detail"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-008",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-008",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 7,
+     "genre": "short_story",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Dmitri",
+      "Anselm"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "german_austrian"
+     ],
+     "locale": "Tbilisi",
+     "setting": "a flooded cellar",
+     "relationship": "an author and her translator",
+     "conflict": "over an unfair rule everyone obeys",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a flooded cellar in Tbilisi; an author and her translator over an unfair rule everyone obeys"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4"
+   },
+   "g": {
+    "passage": "Years later, Dmitri would remember the cellar in Tbilisi by its smell of wet paper. The author's manuscripts had been stored there in tin trunks, and when the spring flood came he waded down beside her with a lamp, reading each label aloud: chapter four, the letters, the second draft of the novel he had spent two winters translating. The house rule, set by the landlord Anselm, was that no tenant might run the pump; one waited for Anselm, who was rarely home. The author repeated the rule courteously, thanked Dmitri for his patience, and asked whether he would mind holding the lamp a little higher. He minded nothing. He held it higher. Water reached the second strap of the trunks. Dmitri said, very politely, that he would wait upstairs for the landlord. He climbed the steps, set the lamp on the landing, and went out by the yard door, toward the pump shed.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "From patient deference to easy warmth, as Dmitri relaxes in the author's company",
+     "From patient deference to quiet resolve, as Dmitri stops treating the rule as binding",
+     "From patient deference to quiet resolve, as Dmitri regrets his own earlier slowness",
+     "From patient deference to growing resentment, as Dmitri turns against the author"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분은 상자 라벨을 하나하나 읽어 주는 촘촘한 묘사와 정중한 협조로 이루어져 있다. 물이 상자 끈까지 차오른 뒤 문장이 짧아지지만 Dmitri의 말투는 여전히 매우 정중하다. 그러나 마지막에 그가 위층이 아니라 펌프 창고로 향하는 동작은 그가 규칙을 더 이상 따르지 않기로 했음을 드러내므로 B가 정답이다. A는 유지된 정중함을 친밀함으로 바꿔 읽었고, C는 전환의 원인을 Dmitri 자신의 행동으로 뒤집었으며, D는 조용한 결심을 작가에 대한 원망으로 한 단계 과하게 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "courteous",
+    "resolute"
+   ],
+   "devices": [
+    "understatement",
+    "syntax shift"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-009",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-009",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 8,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Imani",
+      "Birdie"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "african_american"
+     ],
+     "locale": "Hanoi",
+     "setting": "a rooftop water tank",
+     "relationship": "old rivals in a chess club",
+     "conflict": "about an ending that nobody wants to admit",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a rooftop water tank in Hanoi; old rivals in a chess club about an ending that nobody wants to admit"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4"
+   },
+   "g": {
+    "passage": "Imani always brought the board. On the roof of the chess club in Hanoi, beside the rusted water tank, she set out the pieces with their felt bottoms facing the same way, aligned the clock, and poured Birdie's tea before her own. They had played there every Tuesday for eleven years, and their rivalry had its small ceremonies: the bow, the joke about Birdie's slow bishop, the scorecard initialed in green ink. Tonight the game went long. Both kings were bare. Neither could win. Birdie praised the endgame. Imani thanked her. Birdie offered another round. Imani said that would be lovely. She folded the board along its hinge, left the scorecard blank, and tucked the green pen into Birdie's coat pocket instead of her own.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "From friendly ritual to warmer courtesy, as the rivals grow closer through praise",
+     "From friendly ritual to guarded finality, as Birdie presses Imani to keep playing",
+     "From friendly ritual to guarded finality, as the draw leads Imani to let go",
+     "From friendly ritual to mild impatience, as Imani tires of Birdie's slow play"
+    ],
+    "correct_letter": "C",
+    "explanation": "앞부분은 말 배치와 차, 초록 잉크 서명 같은 의식이 촘촘하게 묘사되지만, 승부가 나지 않는 시점부터 문장이 짧은 주고받기로 바뀐다. 겉으로는 칭찬과 감사가 오가며 정중함이 유지된다. 마지막에 Imani가 점수표를 비워 두고 초록 펜을 Birdie의 주머니에 넣는 동작은 오랜 경쟁을 내려놓으려는 마음을 암시하므로 C가 정답이다. A는 겉 정중함을 친밀함의 증가로 읽었고, B는 원인을 상대의 압박으로 돌렸으며, D는 조용한 정리를 짜증으로 잘못 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "ceremonial",
+    "restrained"
+   ],
+   "devices": [
+    "syntax shift",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-010",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-010",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "poetry",
+    "seed": {
+     "index": 9,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Fiorella",
+      "Ottavio"
+     ],
+     "nameCultures": [
+      "italian",
+      "italian"
+     ],
+     "locale": "Bologna",
+     "setting": "a soccer field at dusk",
+     "relationship": "a retired judge and a young clerk",
+     "conflict": "about an object that belonged to someone gone",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a soccer field at dusk in Bologna; a retired judge and a young clerk about an object that belonged to someone gone"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4"
+   },
+   "g": {
+    "passage": "Once, at dusk, I walked the soccer field in Bologna\nwith Ottavio, who had clerked for me the final year\nbefore they took my robe and gave me a garden.\nStill he called me Judge Fiorella, and still he carried\nmy late husband's whistle, the silver one,\npolished and wrapped in a folded handkerchief,\nand spoke of it as evidence: its dent, its chain,\nthe date engraved in letters small as rulings.\nI answered him as I once answered counsel,\nwith thanks, with patience, with the proper phrases,\nand asked him kindly if he meant to keep it.\nHe said it was mine.\nThe field was empty.\nLights came on.\nA boy's ball rolled to the line and stopped.\nI thanked him for his care.\nI took the whistle from the cloth\nand, still thanking him, blew it once\nand sent the ball back to the boy.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "From formal reserve to casual warmth, as the speaker sets aside her courtroom manner",
+     "From formal reserve to quiet release, as Ottavio chooses to stop guarding the whistle",
+     "From formal reserve to open grief, as the empty field recalls the husband's absence",
+     "From formal reserve to quiet release, as the speaker puts the whistle back into use"
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분의 긴 행들은 호루라기를 증거물처럼 세밀하게 묘사하며 법정식의 정중한 거리감을 유지한다. 그가 호루라기를 화자의 것이라고 말한 뒤 행이 짧아지지만 화자는 여전히 감사의 말을 반복한다. 마지막에 화자가 호루라기를 꺼내 불어 공을 소년에게 돌려보내는 동작은 보존하던 유품을 다시 삶 속에서 쓰기로 한 마음을 보여 주므로 D가 정답이다. A는 유지된 정중함을 무시하고 겉 변화만 읽었고, B는 원인을 Ottavio의 결정으로 돌렸으며, C는 조용한 놓아줌을 드러난 슬픔으로 과하게 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "formal",
+    "tender"
+   ],
+   "devices": [
+    "imagery",
+    "line length shift",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-012",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-012",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "memoir",
+    "seed": {
+     "index": 11,
+     "genre": "memoir",
+     "pov": "third_omniscient",
+     "styleEra": "early_20c",
+     "names": [
+      "Hollis",
+      "Agnes"
+     ],
+     "nameCultures": [
+      "english",
+      "english"
+     ],
+     "locale": "Manchester",
+     "setting": "a monastery guesthouse",
+     "relationship": "two brothers who run a failing shop",
+     "conflict": "after an unsent apology",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a monastery guesthouse in Manchester; two brothers who run a failing shop after an unsent apology"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4"
+   },
+   "g": {
+    "passage": "We took a room at the monastery guesthouse in Manchester the winter our shop went under, Hollis and I, because Sister Agnes charged nothing and asked no questions. My brother made himself useful at once. He oiled the hinges, swept the chapel steps, sorted the donated boots by size and then by color, and each night at supper he described the shop's ledgers to Agnes in loving detail, as if the debts were old friends. The letter I had written him in November, apologizing for the loan I had hidden, was still folded in my coat. One evening Agnes asked him what he would do in spring. He said he did not know. He thanked her for the soup. He said the boots were finished. He rose, and on his way out he lifted my coat from its peg and handed it to me, the envelope's corner showing at the pocket.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "From busy cheerfulness to polite gratitude, as Hollis settles into life at the guesthouse",
+     "From busy cheerfulness to pointed quiet, as Hollis shows he knows of the apology withheld",
+     "From busy cheerfulness to pointed quiet, as Agnes's question reminds Hollis of the shop",
+     "From busy cheerfulness to bitter anger, as Hollis decides to break with his brother"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분은 경첩, 계단, 장화 정리, 장부 이야기까지 Hollis의 분주하고 밝은 모습이 촘촘하게 묘사된다. Agnes의 질문 뒤로 그의 대답은 짧아지지만 감사 인사는 그대로 이어진다. 마지막에 그가 봉투 모서리가 보이는 외투를 화자에게 건네는 동작은 화자가 보내지 않은 사과를 그가 알고 있음을 조용히 드러내므로 B가 정답이다. A는 유지된 감사만 읽었고, C는 원인을 Agnes의 질문으로 돌렸으며, D는 무언의 지적을 노골적인 분노로 과하게 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "understated",
+    "tense"
+   ],
+   "devices": [
+    "syntax shift",
+    "symbolism",
+    "gesture"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-017",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-017",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "underlined_portion_function",
+    "genre": "short_story",
+    "seed": {
+     "index": 16,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Yiannis",
+      "Eleni"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Istanbul",
+     "setting": "a kite-maker's yard",
+     "relationship": "a stepmother and a skeptical teenager",
+     "conflict": "when the plan works and nobody feels better",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a kite-maker's yard in Istanbul; a stepmother and a skeptical teenager when the plan works and nobody feels better"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 120,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4"
+   },
+   "g": {
+    "passage": "Istanbul's wind comes up off the water in the afternoon, and in the kite-maker's yard behind our building it rattles the paper drying on the lines. __Eleni had spent a week planning my birthday there, down to the color of the string.__ She wanted us to build a kite together, the two of us, since my father was working late again, and she had bought the frames and glue herself. I told her it was a kid's project. She said maybe. We cut the paper in silence. The kite-maker, an old man with glue on his sleeves, showed us how to lash the spars and then went inside for tea. By four the kite was finished, red and white, and it flew on the first try, higher than any other in the yard. Eleni held the spool. I stood beside her. Neither of us said anything for a long time. Then she handed me the spool, and I saw the line: blue, my mother's color, the one I had mentioned once, a year ago, without thinking she was listening.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It sets out the backdrop for the scene before the kite-building begins",
+     "It records a plan that the narrator's scornful reply soon undoes",
+     "It plants a detail that gains weight at the kite's final handoff",
+     "It shows the effort Eleni tends to give to family occasions"
+    ],
+    "correct_letter": "C",
+    "explanation": "밑줄 문장은 단독으로 읽으면 생일 준비 과정을 알려 주는 배경 설명처럼 보인다. 중간의 연 만들기와 비행 장면은 계획이 성공했지만 두 사람 모두 말이 없다는 점만 보여 준다. 마지막에 Eleni가 건넨 실이 화자 어머니의 색인 파란색임이 드러나면서, 밑줄 문장의 '실 색깔' 언급이 그녀의 세심한 관심을 미리 심어 둔 복선이었음을 알게 되므로 C가 정답이다. A는 밑줄 문장만 본 표면 기능이고, B는 바로 뒤 화자의 냉소적 대답과의 관계로 읽었으며, D는 지문 표현을 빌려 일반화했다."
+   },
+   "notes": [],
+   "tone": [
+    "subdued",
+    "bittersweet"
+   ],
+   "devices": [
+    "foreshadowing",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-018",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-018",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "underlined_portion_function",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 17,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Ren",
+      "Rangi"
+     ],
+     "nameCultures": [
+      "japanese",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Auckland",
+     "setting": "a printing press room",
+     "relationship": "two night-shift coworkers",
+     "conflict": "after a competition one of them lost on purpose",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a printing press room in Auckland; two night-shift coworkers after a competition one of them lost on purpose"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 120,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4"
+   },
+   "g": {
+    "passage": "By three in the morning the press room in Auckland smelled of hot ink and solvent, and Ren and Rangi had stopped pretending to talk. __Rangi had always been the faster typesetter, though he never let anyone time him.__ The plant's speed contest had ended at midnight: Ren had won the ribbon and the bonus by a margin of eleven seconds, and the manager had pinned the ribbon to the noticeboard beside the time clock. Afterward they ran the morning edition as usual. Rangi fed paper; Ren checked plates. Around two the folder jammed and they cleared it together, their hands black to the wrist. Now, as the last bundles came off the line, Ren noticed the tray Rangi had set during the contest, still on the bench. He ran his thumb down it. Every line was clean, except the last, where the rules required a full stop and Rangi had left the slot empty, a gap that would have taken the judges several seconds to fill by hand.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It offers a brief sketch of Rangi as a modest and private coworker",
+     "It explains why Ren's win, described next, came as a real surprise",
+     "It suggests that skill at the press is often kept from public view",
+     "It sets up an ability that the closing discovery shows was withheld"
+    ],
+    "correct_letter": "D",
+    "explanation": "밑줄 문장은 단독으로 읽으면 Rangi의 성격과 실력을 소개하는 묘사처럼 보인다. 중간의 신문 인쇄와 접지기 수리 장면은 두 사람의 평소 작업을 보여 줄 뿐이다. 마지막에 Ren이 대회 때 Rangi가 짠 판에서 일부러 비워 둔 마침표 자리를 발견하면서, 밑줄 문장의 '더 빠른 식자공'이라는 설명이 그가 일부러 져 주었다는 사실을 받쳐 주는 복선이 되므로 D가 정답이다. A는 밑줄 문장만 본 기능이고, B는 바로 뒤 우승 문장과의 관계로만 읽었으며, C는 지문 표현을 일반적 진술로 넓혔다."
+   },
+   "notes": [],
+   "tone": [
+    "tense",
+    "understated"
+   ],
+   "devices": [
+    "foreshadowing",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-019",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-019",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "underlined_portion_function",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 18,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Sadia",
+      "Ayesha"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Karachi",
+     "setting": "a mountain bus stop",
+     "relationship": "a brother and sister reading their mother's letters",
+     "conflict": "while rehearsing for an important performance",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a mountain bus stop in Karachi; a brother and sister reading their mother's letters while rehearsing for an important performance"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 120,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4"
+   },
+   "g": {
+    "passage": "We waited out the rain at the mountain bus stop above Karachi, my sister Sadia and I, with our mother's letters in a plastic sleeve and the audition two days away. __Our mother, Ayesha, had written to us every week of her last year abroad, always in pencil, on the backs of old concert programs.__ Sadia was to play the cello for the conservatory panel, and I was to turn her pages, so we rehearsed there under the tin roof, she humming the bars, I flipping imaginary leaves. Between passages we read a letter or two aloud. A bus came and went without us. A goat looked in at the shelter. When the rain slowed, Sadia took the score from her case and pulled out the page she always stumbled on, and I saw, faint along its margin, a line of pencil fingerings in our mother's hand that neither of us had ever noticed.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It introduces a habit of the mother's that the final discovery later echoes",
+     "It describes the letters that the siblings go on to read aloud in the shelter",
+     "It gives family background that explains the siblings' trip to the audition",
+     "It suggests that written messages can keep a parent's presence alive"
+    ],
+    "correct_letter": "A",
+    "explanation": "밑줄 문장은 단독으로 읽으면 어머니의 편지에 대한 배경 설명처럼 보인다. 중간의 연습 장면, 지나가는 버스와 염소는 밑줄 문장과 관계없어 보인다. 마지막에 악보 여백에서 어머니의 연필 운지 표시가 발견되면서, 밑줄 문장의 '늘 연필로 썼다'는 습관이 그 발견을 미리 준비한 단서였음이 드러나므로 A가 정답이다. B는 바로 뒤 편지 낭독과의 관계로만 읽었고, C는 표면적 배경 기능만 보았으며, D는 지문 내용을 일반적 주제로 넓혔다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "tender"
+   ],
+   "devices": [
+    "foreshadowing",
+    "detail"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-03-020",
+   "task": "gen-lit40-hard-03-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-03-020",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "underlined_portion_function",
+    "genre": "memoir",
+    "seed": {
+     "index": 19,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Milena",
+      "Alessia"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "italian"
+     ],
+     "locale": "Naples",
+     "setting": "a quiet library",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "about whether a small kindness was a cover for something else",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a quiet library in Naples; an elder and a restless apprentice about whether a small kindness was a cover for something else"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 120,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4"
+   },
+   "g": {
+    "passage": "Lamp oil and old glue were what I smelled first each morning in the library in Naples, where I was apprenticed to Milena the year I turned nineteen. __Every afternoon she brought me a pastry from the bakery on the corner and set it on my desk without a word.__ I was restless that year, forever asking to work in the reading room instead of the bindery, forever glancing at the door. Milena kept me at the bench, teaching me to resew spines and float torn pages. The pastries kept coming, wrapped in brown paper, and I ate them over my work and wondered whether they were apology or bribe. In the spring a collector came to inspect the library's oldest atlas. Milena showed him every repair and named each one; most were mine. He asked who had done the gathering on the fourth section, and she unfolded a square of brown pastry paper from her drawer, on which, in her small hand, she had kept a dated list of every page I had mended.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It portrays Milena as a generous mentor during the narrator's early months",
+     "It introduces a routine that the closing scene recasts as quiet record-keeping",
+     "It sets up the suspicion, raised soon after, that Milena meant to buy obedience",
+     "It suggests that small gifts between people can carry more than one meaning"
+    ],
+    "correct_letter": "B",
+    "explanation": "밑줄 문장은 단독으로 읽으면 Milena의 친절한 성격을 보여 주는 묘사처럼 보인다. 중간에서 화자는 제본 작업에 붙잡혀 있으며 과자가 사과인지 뇌물인지 의심하지만 답은 주어지지 않는다. 마지막에 Milena가 과자 포장지에 화자가 고친 모든 페이지를 날짜별로 적어 두었음이 드러나면서, 매일의 과자가 화자의 작업을 조용히 지켜보고 기록하는 수단이었음을 알게 되므로 B가 정답이다. A는 표면 기능만 보았고, C는 뒤에 나오는 의심과의 관계로만 읽었으며, D는 지문 표현을 일반적 주제로 넓혔다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "warm"
+   ],
+   "devices": [
+    "foreshadowing",
+    "irony",
+    "detail"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-hard-03-011",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 D 가 정답과 어휘 69% 중복"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-03-013",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 D 가 정답과 어휘 82% 중복"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-03-014",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 C 가 정답과 어휘 72% 중복"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-03-015",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 D 가 정답과 어휘 76% 중복"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-03-016",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 D 가 정답과 어휘 72% 중복"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

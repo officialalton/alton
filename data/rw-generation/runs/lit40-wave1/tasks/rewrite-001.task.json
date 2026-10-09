@@ -1,0 +1,1049 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "rewrite",
+ "runId": "lit40-wave1",
+ "taskId": "rewrite-001",
+ "chunkId": "rewrite-001",
+ "batchId": "lit40-hard-01",
+ "attempt": 1,
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-001.result.json",
+ "outputSchema": {
+  "chunkId": "작업 파일의 chunkId 를 그대로",
+  "model": "당신의 모델 이름(예: opus)",
+  "items": [
+   {
+    "candidateId": "후보의 candidateId 를 그대로",
+    "passage": "영어 지문(문항의 질문은 넣지 않는다)",
+    "question": "영어 질문 한 문장",
+    "options": [
+     "선택지 A",
+     "선택지 B",
+     "선택지 C",
+     "선택지 D"
+    ],
+    "correct_letter": "A|B|C|D (targetLetter 와 같게)",
+    "explanation": "한국어 해설 3~5문장",
+    "tone": [
+     "지문 어조 영어 단어 1~3개"
+    ],
+    "devices": [
+     "쓰인 문학 장치 영어 단어"
+    ],
+    "declaration": {
+     "original": true,
+     "noRealWorkQuoted": true,
+     "noCopyrightedSource": true
+    }
+   }
+  ]
+ },
+ "candidates": [
+  {
+   "candidateId": "lit40-hard-01-007",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "main_idea_or_purpose",
+   "genre": "novel_excerpt",
+   "targetLetter": "A",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard",
+   "spec": {
+    "candidateId": "lit40-hard-01-007",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "hard",
+    "questionType": "main_idea_or_purpose",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 6,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Dario",
+      "Bartolo"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Havana",
+     "setting": "a salt-water pool",
+     "relationship": "a grandfather and a granddaughter learning his language",
+     "conflict": "while hiding a small failure",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a salt-water pool in Havana; a grandfather and a granddaughter learning his language while hiding a small failure"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a salt-water pool in Havana; a grandfather and a granddaughter learning his language while hiding a small failure\n인물 이름: Dario, Bartolo 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(central_ideas_details_lit_main_idea_or_purpose_hard, 난이도 hard): 지문 전체의 요지나 서술 목적을 묻는다. 요지는 한 문장에 몰아 쓰지 않고, 처음의 구체적 일화·중간의 한 번 뒤집는 진술·끝의 사소한 관찰 세 곳에 나눠 둔다. 마지막 문장은 요지를 선언하지 않고 구체적 장면이나 사물로 닫는다. 정답은 세 곳을 모두 포괄하는 진술이고, 오답 3개는 각각 (a) 처음 일화만 요약한 선택지 (b) 중간 진술만 일반화한 선택지 (c) 끝의 관찰을 과장해 요지로 만든 선택지로 지문의 표현을 일부 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 3곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 처음 일화만 요약한 선택지 (2) 중간 진술만 일반화한 선택지 (3) 끝의 관찰을 과장해 요지로 삼은 선택지\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.",
+   "previous": {
+    "passage": "We called it the salt pool, though by Bartolo's ninth summer in Havana the sea had long since cracked its seaward wall. Each morning Dario sat on the edge with his trousers rolled and named things for her in the old language: tile, gull, the green rust on the ladder. She repeated each word and swam a length between words. On Thursday she stopped halfway, clung to the rope, and climbed out by the near ladder, saying the water was too cold. Dario, who had seen everything, said only that cold had two words, one for water and one for people, and made her practice both. She did not tell him she had wanted to reach the far wall before her mother arrived. He did not tell her he had noticed. When they walked home, she carried his towel, and he carried the word for rope, saying it over to himself.",
+    "question": "Which choice best states the main purpose of the passage?",
+    "options": [
+     "To show how a language lesson lets the two quietly protect each other's pride",
+     "To describe a daily routine of swimming lessons in a crumbling Havana pool",
+     "To argue that every language holds separate words for physical and emotional cold",
+     "To suggest that Dario is slowly losing his memory of the language he teaches"
+    ],
+    "correct_letter": "A",
+    "explanation": "처음에는 단어를 배우며 수영하는 일상이 제시되고, 중간에 Bartolo가 실패를 추위 탓으로 돌리자 Dario가 알면서도 '추위'의 두 단어로 수업을 이어 간다. 이어 서로 말하지 않은 사실이 대칭으로 놓이고, 마지막에 그가 '밧줄'이라는 단어를 되뇌는 장면은 그 실패를 조용히 기억하고 있음을 암시한다. 따라서 언어 수업을 통해 두 사람이 서로의 자존심을 지켜 준다는 A가 정답이다. B는 처음 일화만, C는 중간 진술만 일반화했고, D는 마지막 장면을 기억 상실로 과장했다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-011",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "character_motivation",
+   "genre": "novel_excerpt",
+   "targetLetter": "C",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "inferences_lit_character_motivation_hard",
+   "spec": {
+    "candidateId": "lit40-hard-01-011",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "character_motivation",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 10,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Cleotilde",
+      "Ofelia"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Valparaiso",
+     "setting": "a seaside promenade",
+     "relationship": "a nurse and her night patient",
+     "conflict": "after discovering a letter meant for someone else",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a seaside promenade in Valparaiso; a nurse and her night patient after discovering a letter meant for someone else"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "inferences_lit_character_motivation_hard"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a seaside promenade in Valparaiso; a nurse and her night patient after discovering a letter meant for someone else\n인물 이름: Cleotilde, Ofelia 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_character_motivation_hard, 난이도 hard): 인물이 한 행동을 하는 이유를 묻되 동기는 지문에 직접 서술하지 않는다. 동기를 암시하는 단서는 서로 떨어진 두 곳(예: 앞부분의 습관적 행동, 중간의 말 돌리기·회피)에 나눠 심고, 마지막 문장은 장면 묘사나 사물로 끝내 동기를 요약하지 않는다. 정답은 두 단서를 모두 설명하는 동기다. 오답 3개는 각각 (a) 앞 단서만 설명하는 동기 (b) 뒤 단서만 설명하는 동기 (c) 지문의 표현을 빌렸지만 인물의 다른 행동과 충돌하는 동기로 만들고, 셋 모두 이 인물이 가질 법한 감정이어야 한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 앞 단서만 설명하고 뒤 단서와 충돌하는 동기 (2) 뒤 단서만 설명하고 앞 단서를 무시하는 동기 (3) 지문의 구절을 빌려 쓰지만 인물의 다른 행동과 모순되는 동기\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.",
+   "previous": {
+    "passage": "“Walk me to the railing, if you are not too tired,” Ofelia said, though the doctor had forbidden the night air. I wheeled her along the promenade at Valparaiso, as I had each evening that month, and she counted the lamps aloud, as she always did, never once losing the number. That afternoon I had found, among her blankets, a letter addressed to her son in Santiago, unsealed and plainly unfinished. When I mentioned that the post left at dawn, she asked whether the gulls ever slept, and whether I had a son myself. At the railing she held out the letter and asked me to read it to her, slowly, every line. I read it. She corrected two words, made me read it again, and then folded it into my apron pocket and turned her chair, without my help, toward the lamps.",
+    "question": "Based on the passage, why does Ofelia most likely ask the narrator to read the letter aloud?",
+    "options": [
+     "She doubts her own memory and needs help recalling what she wrote",
+     "She wishes to keep the letter's contents secret from her son",
+     "She wants the letter sent but cannot bear to send it by herself",
+     "She is testing whether the nurse has already read her private letter"
+    ],
+    "correct_letter": "C",
+    "explanation": "Ofelia는 가로등 수를 한 번도 틀리지 않고 세며 편지의 두 단어를 직접 고칠 만큼 정신이 또렷하다. 그런데 우체국 이야기가 나오자 갈매기 이야기로 말을 돌려 스스로 편지를 부치는 일을 피한다. 결국 편지를 다듬은 뒤 간호사의 앞치마 주머니에 넣어 주므로, 편지가 전해지기를 바라면서도 혼자서는 보내지 못한다는 C가 정답이다. A는 또렷한 기억력과 충돌하고, B는 편지를 맡긴 행동과 모순되며, D는 지문에 근거가 없다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-013",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "tone_or_mood",
+   "genre": "short_story",
+   "targetLetter": "A",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "inferences_lit_tone_or_mood_hard",
+   "spec": {
+    "candidateId": "lit40-hard-01-013",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "tone_or_mood",
+    "genre": "short_story",
+    "seed": {
+     "index": 12,
+     "genre": "short_story",
+     "pov": "second",
+     "styleEra": "contemporary",
+     "names": [
+      "Haruto",
+      "Lindiwe"
+     ],
+     "nameCultures": [
+      "japanese",
+      "east_south_african"
+     ],
+     "locale": "Addis Ababa",
+     "setting": "a tailor's back room",
+     "relationship": "a pair of rival bakers",
+     "conflict": "while deciding whether a rule still applies",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a tailor's back room in Addis Ababa; a pair of rival bakers while deciding whether a rule still applies"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "inferences_lit_tone_or_mood_hard"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a tailor's back room in Addis Ababa; a pair of rival bakers while deciding whether a rule still applies\n인물 이름: Haruto, Lindiwe 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_hard, 난이도 hard): 지문 전체의 어조·분위기를 묻는다. 겉으로 드러나는 정서(예: 평온)와 행동·대조로 드러나는 실제 정서(예: 억눌린 불안)가 어긋나게 쓰되, 두 정서를 보여 주는 근거를 서로 떨어진 두 곳 이상에 둔다. 마지막 문장은 분위기를 명명하지 않는 구체 묘사로 끝낸다. 정답은 겉과 속을 함께 아우르는 어조이고, 오답 3개는 (a) 겉 정서만 반영한 어조 (b) 속 정서만 반영하되 강도를 과장한 어조 (c) 지문 단어를 쓰지만 중간에서 바뀐 어조를 한쪽으로 고정한 어조로 만든다 — 분위기가 정반대인 오답은 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 정서만 반영한 어조 (2) 속 정서를 과장한 어조 (3) 지문 단어를 쓰지만 변화하는 어조를 한쪽으로 고정한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.",
+   "previous": {
+    "passage": "Haruto has already taken the better chair when you arrive at the tailor's back room in Addis Ababa, so you take the stool by the bolts of cotton and say good morning as if you meant it. You and he have baked on the same street for nine years. The rule, written by no one, is that neither of you sells bread before seven; the market council has called you both to decide whether it still holds now that the bus station has moved. Lindiwe, the tailor, pours tea and leaves you to it. Haruto compliments your new ovens. You compliment his sign. He stirs his tea long after the sugar has gone, and you count the pins in the cushion beside you: forty, forty-one. When the clerk finally arrives, the two of you rise at the same moment, and each holds the curtain open for the other until it slips from both your hands.",
+    "question": "Which choice best describes the overall tone of the passage?",
+    "options": [
+     "Courteous on the surface, yet tense with a rivalry neither will voice",
+     "Calm and relaxed, reflecting an easy friendship between neighbors",
+     "Openly hostile, as each baker tries to humiliate the other aloud",
+     "Anxious at first, then fully at ease once the council clerk finally arrives"
+    ],
+    "correct_letter": "A",
+    "explanation": "두 제빵사는 인사와 칭찬을 주고받으며 겉으로는 예의 바르다. 그러나 좋은 의자를 먼저 차지하는 행동, 설탕이 녹은 뒤에도 차를 젓고 핀을 세는 행동은 말하지 않은 긴장을 보여 준다. 마지막에 서로 커튼을 붙잡아 주다 놓치는 장면도 양보 경쟁을 드러내므로 A가 정답이다. B는 겉 정서만 반영했고, C는 속 긴장을 과장했으며, D는 지문에 없는 마지막의 해소로 어조를 고정했다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-014",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "tone_or_mood",
+   "genre": "novel_excerpt",
+   "targetLetter": "B",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "inferences_lit_tone_or_mood_hard",
+   "spec": {
+    "candidateId": "lit40-hard-01-014",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "tone_or_mood",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 13,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Yuxuan",
+      "Weiqi"
+     ],
+     "nameCultures": [
+      "chinese",
+      "chinese"
+     ],
+     "locale": "Taipei",
+     "setting": "a rooftop water tank",
+     "relationship": "best friends after a move",
+     "conflict": "about whether to forgive",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a rooftop water tank in Taipei; best friends after a move about whether to forgive"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "inferences_lit_tone_or_mood_hard"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a rooftop water tank in Taipei; best friends after a move about whether to forgive\n인물 이름: Yuxuan, Weiqi 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 부사절·전치사구로 시작('When', 'Although', 'Beside' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_hard, 난이도 hard): 지문 전체의 어조·분위기를 묻는다. 겉으로 드러나는 정서(예: 평온)와 행동·대조로 드러나는 실제 정서(예: 억눌린 불안)가 어긋나게 쓰되, 두 정서를 보여 주는 근거를 서로 떨어진 두 곳 이상에 둔다. 마지막 문장은 분위기를 명명하지 않는 구체 묘사로 끝낸다. 정답은 겉과 속을 함께 아우르는 어조이고, 오답 3개는 (a) 겉 정서만 반영한 어조 (b) 속 정서만 반영하되 강도를 과장한 어조 (c) 지문 단어를 쓰지만 중간에서 바뀐 어조를 한쪽으로 고정한 어조로 만든다 — 분위기가 정반대인 오답은 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 정서만 반영한 어조 (2) 속 정서를 과장한 어조 (3) 지문 단어를 쓰지만 변화하는 어조를 한쪽으로 고정한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.",
+   "previous": {
+    "passage": "When Weiqi climbed up to the roof the first evening back, I was already sitting against the water tank, pretending to read. Taipei hummed below us, scooters and rain on tin, and she said the view had not changed, which was untrue; three new towers stood where the night market had been. I said it was nice of her to visit. “Yuxuan, I didn't visit,” she said. “I moved back.” For a while we talked about her new school, the price of mangoes, my brother's motorbike, and I laughed at the right places. Then she set her old key ring on the rim of the tank, the one with the plastic cat I had given her the summer she left without saying goodbye. I did not pick it up. I did not push it away either, and when the rain grew heavier, I moved a little to make room for her under the overhang.",
+    "question": "Which choice best describes the overall tone of the passage?",
+    "options": [
+     "Breezy and carefree, like any pleasant reunion between old friends",
+     "Casual on the surface, beneath which a guarded hurt slowly softens",
+     "Bitterly accusatory, as the narrator punishes Weiqi for leaving",
+     "Coolly guarded throughout, with no change at all in the narrator's stance"
+    ],
+    "correct_letter": "B",
+    "explanation": "두 사람은 학교와 망고 값 같은 가벼운 이야기를 나누고 화자는 적절한 곳에서 웃어 겉으로는 편안하다. 그러나 책을 읽는 척하는 모습과 '방문'이라는 거리 두는 말, 열쇠고리를 집지 않는 행동은 작별 없이 떠난 데 대한 상처를 보여 준다. 마지막에 비를 피할 자리를 내주는 행동은 그 경계가 조금씩 풀린다는 뜻이므로 B가 정답이다. A는 겉 정서만, C는 속 감정을 과장했고, D는 마지막의 변화를 무시했다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-015",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "tone_or_mood",
+   "genre": "personal_essay",
+   "targetLetter": "C",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "inferences_lit_tone_or_mood_hard",
+   "spec": {
+    "candidateId": "lit40-hard-01-015",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "tone_or_mood",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 14,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Larissa",
+      "Caio"
+     ],
+     "nameCultures": [
+      "portuguese_brazilian",
+      "portuguese_brazilian"
+     ],
+     "locale": "Lisbon",
+     "setting": "a monastery guesthouse",
+     "relationship": "two neighbors with a shared wall",
+     "conflict": "about the last item in a house being emptied",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a monastery guesthouse in Lisbon; two neighbors with a shared wall about the last item in a house being emptied"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "inferences_lit_tone_or_mood_hard"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a monastery guesthouse in Lisbon; two neighbors with a shared wall about the last item in a house being emptied\n인물 이름: Larissa, Caio 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_hard, 난이도 hard): 지문 전체의 어조·분위기를 묻는다. 겉으로 드러나는 정서(예: 평온)와 행동·대조로 드러나는 실제 정서(예: 억눌린 불안)가 어긋나게 쓰되, 두 정서를 보여 주는 근거를 서로 떨어진 두 곳 이상에 둔다. 마지막 문장은 분위기를 명명하지 않는 구체 묘사로 끝낸다. 정답은 겉과 속을 함께 아우르는 어조이고, 오답 3개는 (a) 겉 정서만 반영한 어조 (b) 속 정서만 반영하되 강도를 과장한 어조 (c) 지문 단어를 쓰지만 중간에서 바뀐 어조를 한쪽으로 고정한 어조로 만든다 — 분위기가 정반대인 오답은 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 정서만 반영한 어조 (2) 속 정서를 과장한 어조 (3) 지문 단어를 쓰지만 변화하는 어조를 한쪽으로 고정한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.",
+   "previous": {
+    "passage": "Years later, Larissa would describe that week as a matter of logistics. The guesthouse beside the old monastery in Lisbon was being sold, and she and Caio, who had shared its thin middle wall for twenty years, were the last tenants to clear their rooms. She labeled boxes. She rented a van. She told Caio, briskly, that the brass coat hook between their two doors belonged to neither of them and should stay for the buyers. Caio agreed. Yet on the final morning he found her on the landing with a screwdriver, loosening the hook's screws one quarter turn at a time, and then tightening them again. Neither of them mentioned it. They carried the last chair down together, and the hook stayed on the wall, a pale outline around it where twenty winters of coats had kept the paint from fading.",
+    "question": "Which choice best describes the overall tone of the passage?",
+    "options": [
+     "Efficient and businesslike, focused entirely on finishing the move",
+     "Openly mournful, dwelling at length on the sorrow of leaving home",
+     "Brisk and practical in manner, yet threaded with reluctant grief",
+     "Detached at first but finally joyful once the last chair is moved"
+    ],
+    "correct_letter": "C",
+    "explanation": "짧은 문장으로 상자에 이름을 붙이고 차를 빌리는 장면은 사무적이고 빠른 겉모습을 만든다. 그러나 마지막 날 Larissa가 옷걸이 나사를 풀었다 다시 조이는 행동과, 옷걸이 주변의 바래지 않은 자국 묘사는 떠나기 아쉬운 슬픔을 드러낸다. 겉과 속을 함께 아우르는 C가 정답이다. A는 겉 정서만, B는 슬픔을 과장했으며, D는 지문에 없는 기쁨으로 어조를 바꿨다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-017",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "relationship_between_characters",
+   "genre": "novel_excerpt",
+   "targetLetter": "A",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "inferences_lit_relationship_between_characters_hard",
+   "spec": {
+    "candidateId": "lit40-hard-01-017",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "relationship_between_characters",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 16,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Gil",
+      "Meilin"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "chinese"
+     ],
+     "locale": "Shanghai",
+     "setting": "a flooded cellar",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "about a debt neither will mention",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a flooded cellar in Shanghai; a mayor and the town's only doctor about a debt neither will mention"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_hard"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a flooded cellar in Shanghai; a mayor and the town's only doctor about a debt neither will mention\n인물 이름: Gil, Meilin 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_hard, 난이도 hard): 두 인물의 관계(서로에 대한 감정·권력 관계)를 추론하게 한다. 관계는 직접 서술하지 않고 호칭의 변화, 상대의 말을 받는 방식, 물건·자리 다루는 방식 등 서로 다른 두 곳 이상의 행동에서 드러낸다. 마지막 문장은 관계를 규정하지 않는 행동이나 배경으로 끝낸다. 정답은 두 곳의 단서를 모두 설명하는 관계이고, 오답 3개는 (a) 한 단서만 맞는 관계 (b) 표면의 정중함만 보고 고른 관계 (c) 단서의 방향(누가 누구에게)을 뒤집은 관계로 만든다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한 단서만 맞는 관계 (2) 표면의 정중함만 보고 고른 관계 (3) 누가 누구에게인지 방향을 뒤집은 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.",
+   "previous": {
+    "passage": "Shanghai had flooded again, and by midnight the water in the clinic's cellar reached my knees. Meilin had sent for me, not for the pumps, and I came, as I always do when she sends. She called me Mayor at the top of the stairs, as she does in front of the council, and handed me the lamp without asking. I held it while she lifted crates of vaccine onto the shelves, and I did not mention the winter she had sat three nights beside my father when no other doctor would come. She did not mention the clinic's lease, which I have renewed each year without a fee. When the last crate was dry, she took the higher step and offered me her hand, and I took it, and on the way up she said my name, just Gil, and told me to mind the loose board.",
+    "question": "Based on the passage, which choice best describes the relationship between the narrator and Meilin?",
+    "options": [
+     "Bound by unspoken debts, they show loyalty through acts rather than words",
+     "Meilin treats Gil with stiff formality because she quietly distrusts his office",
+     "Gil commands Meilin, who obeys him because she depends on his lease",
+     "Meilin feels indebted to Gil, while he believes he owes her nothing"
+    ],
+    "correct_letter": "A",
+    "explanation": "Gil은 Meilin이 아버지 곁을 지켜 준 일을 말하지 않고, Meilin은 무료로 갱신되는 임대 계약을 말하지 않아 서로의 빚이 양방향임을 보여 준다. 대신 Gil은 부르면 언제나 와서 등불을 들고, Meilin은 손을 내밀며 마지막에 이름을 불러 행동으로 유대를 드러낸다. 따라서 A가 정답이다. B는 'Mayor'라는 표면적 호칭만 보았고, C는 한 단서만 근거로 권력 관계를 만들었으며, D는 빚의 방향을 한쪽으로 뒤집었다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-022",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "short_story",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-hard-01-022",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 21,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Waya",
+      "Kamal"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Albuquerque",
+     "setting": "a night bus",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "while waiting for important news",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a night bus in Albuquerque; a young apprentice and a master carpenter while waiting for important news"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a night bus in Albuquerque; a young apprentice and a master carpenter while waiting for important news\n인물 이름: Waya, Kamal 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Would the call come before the bus reached Central Avenue? Waya kept turning his phone face down on his knee and then face up again. Beside him, Kamal sat with his hands folded over the toolbag, his knuckles scarred from thirty years of chisels. The bid for the church restoration had gone in a month ago; if it was accepted, Waya would cut his first joints on a job that mattered. Kamal had said nothing about it all evening. But when the bus jolted over a pothole, he steadied the bag before Waya could, and Waya saw that the old man's thumb had been running along the same seam of canvas for miles, worrying a groove into the cloth as if it were a board that would not come true. Waya looked out at the dark storefronts and let him keep at it.",
+    "question": "As used in the text, the phrase “a board that would not come true” most nearly suggests",
+    "options": [
+     "that Kamal considers the toolbag poorly made and in need of repair.",
+     "that Kamal is bored by the long ride and is idly passing the time.",
+     "that Kamal is anxiously working at an uncertainty he cannot fix.",
+     "that Kamal is quietly showing Waya how to test the grain of wood."
+    ],
+    "correct_letter": "C",
+    "explanation": "목수에게 'true'하지 않은 판재는 아무리 다듬어도 바로 서지 않는 나무를 뜻한다. Kamal은 저녁 내내 입찰 이야기를 하지 않지만, 같은 솔기를 몇 마일 동안 문지르는 행동으로 불안을 드러낸다. 따라서 이 비유는 그가 해결할 수 없는 불확실성을 붙들고 초조해한다는 뜻이므로 C가 정답이다. A와 D는 목공 표현을 글자 그대로 읽은 오독이고, B는 행동의 긴장감을 놓친 해석이다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-024",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "poetry",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-hard-01-024",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 23,
+     "genre": "poetry",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Errol",
+      "Consuelo"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "spanish_iberian"
+     ],
+     "locale": "Kingston",
+     "setting": "a stone bridge",
+     "relationship": "a father and his stubborn son",
+     "conflict": "after a misunderstood gift",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a stone bridge in Kingston; a father and his stubborn son after a misunderstood gift"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a stone bridge in Kingston; a father and his stubborn son after a misunderstood gift\n인물 이름: Errol, Consuelo 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "I gave you the fishing rod on your twelfth birthday, Errol,\nand you leaned it in the corner like a broom.\nConsuelo said you wanted books. I heard her\nthe way the river hears a pebble.\nNow we stand on the stone bridge over the Hope,\nyou with your satchel, I with nothing in my hands,\nand neither of us looks down at the water\nwhere I used to fish at your age.\nYou point to a heron, stiff as a nail.\nI almost tell you that my father gave me nothing,\nthat the rod was my whole vocabulary.\nInstead I count the stones in the railing,\neach one set by someone who did not explain it.",
+    "question": "As used in the text, the phrase “the way the river hears a pebble” most nearly suggests",
+    "options": [
+     "that the speaker took in Consuelo's words without changing his course.",
+     "that the speaker found Consuelo's remark sharp and painful to accept.",
+     "that Consuelo spoke so softly the speaker could not make out her words.",
+     "that the speaker and Consuelo often argued by the river about Errol."
+    ],
+    "correct_letter": "A",
+    "explanation": "강은 조약돌이 떨어져도 잠깐 물결이 일 뿐 흐름을 바꾸지 않는다. 화자는 아들이 책을 원한다는 Consuelo의 말을 들었지만 여전히 낚싯대를 선물했고, 그것이 자신의 유일한 '어휘'였다고 고백한다. 즉 말을 듣긴 했으나 행동은 바뀌지 않았다는 뜻이므로 A가 정답이다. B는 충격을, C는 소리 크기를 비유의 뜻으로 오해한 것이고, D는 근거가 없다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-025",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "personal_essay",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-hard-01-025",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 24,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Piper",
+      "Lucia"
+     ],
+     "nameCultures": [
+      "english",
+      "spanish_iberian"
+     ],
+     "locale": "Galicia",
+     "setting": "a school gymnasium",
+     "relationship": "a captain and a stowaway",
+     "conflict": "when two traditions have to share one table",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a school gymnasium in Galicia; a captain and a stowaway when two traditions have to share one table"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a school gymnasium in Galicia; a captain and a stowaway when two traditions have to share one table\n인물 이름: Piper, Lucia 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Piper had captained the girls' team at our school in Vigo for three seasons, and by the night of the winter dinner she ran the gymnasium like a deck: tables in rows, chairs squared, her grandmother's empanadas at the head. Lucia had arrived from Buenos Aires in October and came along that evening without being on any list; I think she slipped in behind the volunteers carrying folding chairs. She brought a tray of alfajores and set it down, hesitating, at the far corner. I watched Piper notice it. She said nothing. She lifted her grandmother's platter and slid it down the table until the two trays touched, then pulled up a chair at that end, the wrong end by her own rules, and sat. For the rest of the night the table listed toward Lucia's corner, a boat trimmed to an unexpected weight, and no one tried to set it straight.",
+    "question": "As used in the text, the phrase “a boat trimmed to an unexpected weight” most nearly suggests",
+    "options": [
+     "that the table was overloaded with food and close to collapsing.",
+     "that the gathering had rebalanced itself around the newcomer.",
+     "that Piper had lost control of the dinner she carefully planned.",
+     "that the guests were uneasy and wished Lucia had stayed home."
+    ],
+    "correct_letter": "B",
+    "explanation": "Piper는 체육관을 배의 갑판처럼 엄격히 정돈했지만, Lucia의 쟁반을 보고 말없이 할머니의 접시를 옮겨 붙이고 자신의 규칙상 '잘못된' 끝자리에 앉는다. 배가 새 무게에 맞춰 균형을 잡는다는 비유는 모임 전체가 새로 온 사람을 중심으로 다시 자리 잡았다는 뜻이므로 B가 정답이다. A는 비유를 물리적으로 읽은 오독이다. C와 D는 기운 테이블을 실패나 불편으로 본 표면 해석으로, 아무도 바로잡지 않았다는 서술과 맞지 않는다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-026",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "memoir",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-hard-01-026",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 25,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Anh",
+      "Shira"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "hebrew_jewish"
+     ],
+     "locale": "Manila",
+     "setting": "a ship's galley",
+     "relationship": "a new teacher and a wary student",
+     "conflict": "when the plan works and nobody feels better",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a ship's galley in Manila; a new teacher and a wary student when the plan works and nobody feels better"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a ship's galley in Manila; a new teacher and a wary student when the plan works and nobody feels better\n인물 이름: Anh, Shira 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Three rules governed the galley of the training ship docked at Manila that summer: knives point down, nothing left on the burners, and no one cries where the cook can see. I was nineteen, newly hired to teach English to the cadets, and Anh, the cook, let me hold class at his steel tables between meals. Shira, the quietest cadet, would not answer me for weeks. So I made a plan. I asked her to translate Anh's recipes for the others, and she did, fluently, in front of everyone. The cadets applauded. Anh grinned. Shira folded the recipe card into smaller and smaller squares until it was the size of a stamp. That night I scrubbed the same pot three times. The plan had worked, I kept telling myself; the success sat in me like a meal eaten standing up.",
+    "question": "As used in the text, the phrase “like a meal eaten standing up” most nearly suggests",
+    "options": [
+     "that the narrator was too busy teaching to sit down and eat properly.",
+     "that the narrator felt physically ill from rough conditions aboard ship.",
+     "that the narrator's achievement felt hasty and gave no real satisfaction.",
+     "that the narrator was eager to celebrate the success with the whole crew."
+    ],
+    "correct_letter": "C",
+    "explanation": "계획은 성공해 박수가 나왔지만, Shira는 레시피 카드를 우표 크기까지 접으며 불편함을 드러낸다. 화자가 같은 냄비를 세 번 닦고 '성공했다'고 스스로를 설득하는 모습도 마음이 편치 않음을 보여 준다. 서서 급히 먹은 식사의 비유는 성공이 허겁지겁 지나가 아무런 포만감을 주지 않았다는 뜻이므로 C가 정답이다. A와 B는 비유를 글자 그대로 읽었고, D는 화자의 불편한 심정과 반대된다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-032",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "short_story",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-hard-01-032",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 31,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Fiorella",
+      "Anneke"
+     ],
+     "nameCultures": [
+      "italian",
+      "dutch_nordic"
+     ],
+     "locale": "Bologna",
+     "setting": "a train-station cafe",
+     "relationship": "a brother and sister reading their mother's letters",
+     "conflict": "while one of them prepares to leave for good",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a train-station cafe in Bologna; a brother and sister reading their mother's letters while one of them prepares to leave for good"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a train-station cafe in Bologna; a brother and sister reading their mother's letters while one of them prepares to leave for good\n인물 이름: Fiorella, Anneke 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Two cups of espresso cooled on the zinc counter of the station cafe in Bologna while Fiorella untied the ribbon around their mother's letters. Anneke's train to Rotterdam left at 4:10, and her suitcase held everything she meant to keep. They read the first letters aloud, laughing at the spelling, at the recipes copied into the margins, at a long complaint about a neighbor's goat. Fiorella did the voices. Then Anneke unfolded one dated the spring she had first gone away, years ago, and read it silently. Fiorella waited for the voice, and none came. Anneke set the page face down, squared it against the others, and picked up her ticket, turning it over as though it might list a different time. Fiorella retied the ribbon slowly, making the bow twice.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From bitter resentment of the mother to forgiving acceptance of her flaws",
+     "From playful shared reminiscence to a hushed tension about the departure",
+     "From anxious haste about the train to relief that there is time to spare",
+     "From detached curiosity about the letters to open grief expressed in tears"
+    ],
+    "correct_letter": "B",
+    "explanation": "전반부에서 두 사람은 편지를 소리 내어 읽으며 철자와 염소 이야기에 웃고, Fiorella는 목소리 연기까지 한다. Anneke가 처음 떠났던 봄의 편지를 말없이 읽는 순간부터 웃음은 사라지고, 기차표를 뒤집어 보거나 리본을 천천히 두 번 묶는 동작으로 긴장이 드러난다. 따라서 장난스러운 회상에서 이별을 앞둔 조용한 긴장으로 바뀌는 B가 정답이다. D는 눈물을 흘린다고 했지만 지문의 감정은 끝까지 겉으로 드러나지 않는다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-033",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "novel_excerpt",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-hard-01-033",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 32,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Tamika",
+      "Ngozi"
+     ],
+     "nameCultures": [
+      "african_american",
+      "west_african"
+     ],
+     "locale": "Chicago's South Side",
+     "setting": "a ceramics studio",
+     "relationship": "a widow and the delivery boy",
+     "conflict": "after learning how someone really earned their reputation",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a ceramics studio in Chicago's South Side; a widow and the delivery boy after learning how someone really earned their reputation"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a ceramics studio in Chicago's South Side; a widow and the delivery boy after learning how someone really earned their reputation\n인물 이름: Tamika, Ngozi 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Clay forgives nothing. Tamika's husband had said that to every student who walked into the studio on Seventy-First Street, and for thirty years the neighborhood had repeated it as proof of his genius. She was boxing his glazes when Ngozi arrived with the kiln parts, a lanky boy who lingered to admire the famous blue bowls on the top shelf. My uncle fired those, he said cheerfully. Your husband paid him in lunch. Tamika laughed, assuming a joke, and handed him a bowl to carry. Ngozi turned it over and showed her the mark scratched faintly into the foot, two initials that were not her husband's. She set the box of glazes down. For a while she simply moved along the shelf, bowl by bowl, turning each one over with care.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From grief-stricken mourning to cheerful celebration of the husband's work",
+     "From suspicious hostility toward Ngozi to grateful trust in his account",
+     "From affectionate pride in a legacy to a sober, searching reconsideration",
+     "From casual indifference about the bowls to an outraged public accusation"
+    ],
+    "correct_letter": "C",
+    "explanation": "도입부는 남편의 말이 동네에서 천재성의 증거로 반복되었다고 전하며 유산에 대한 자부심을 보여 준다. Tamika는 처음에 Ngozi의 말을 농담으로 여겨 웃지만, 그릇 바닥의 다른 이니셜을 본 뒤 상자를 내려놓고 그릇을 하나하나 뒤집어 본다. 이 변화는 분노가 아니라 차분히 사실을 다시 따져 보는 태도이므로 C가 정답이다. D는 공개적으로 비난한다고 했지만 그녀는 아무 말도 하지 않는다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-034",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "poetry",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-hard-01-034",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "poetry",
+    "seed": {
+     "index": 33,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Thida",
+      "Neema"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "east_south_african"
+     ],
+     "locale": "Surabaya",
+     "setting": "a language school classroom",
+     "relationship": "a farmer and a surveyor from the city",
+     "conflict": "over an invitation one of them refuses",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a language school classroom in Surabaya; a farmer and a surveyor from the city over an invitation one of them refuses"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a language school classroom in Surabaya; a farmer and a surveyor from the city over an invitation one of them refuses\n인물 이름: Thida, Neema 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Once a week the language school in Surabaya\nlent its back classroom to anyone with a map.\nThida came from the rice terraces with mud on her sandals,\nNeema from the city office with a rolled survey,\nand for an hour they practiced polite English,\nwould you, could you, may I, laughing at the verbs.\nThen Neema asked her to the ministry dinner,\nwhere the new road would be announced.\nThida closed her notebook.\nShe studied the whiteboard where the teacher\nhad written, in blue, the word boundary,\nand did not erase it, and did not answer,\nand thanked Neema, very correctly, for the invitation.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From formal distance to growing warmth as the two practice together",
+     "From confusion about English verbs to confident mastery of the lesson",
+     "From enthusiasm about the new road to disappointment at its delay",
+     "From easy shared amusement to guarded courtesy after the invitation"
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분에서 두 사람은 공손한 영어 표현을 연습하며 동사를 두고 함께 웃는다. 그러나 새 도로 발표 만찬 초대를 받은 뒤 Thida는 공책을 덮고 'boundary'라는 단어를 바라보며 대답 없이 '매우 정확하게' 감사만 표한다. 앞에서 연습하던 공손함이 거리를 두는 수단으로 바뀌므로 D가 정답이다. A는 변화의 방향을 거꾸로 읽은 것이고, B와 C는 지문에 근거가 없다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-035",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "personal_essay",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-hard-01-035",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 34,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Fausto",
+      "Joaquim"
+     ],
+     "nameCultures": [
+      "portuguese_brazilian",
+      "portuguese_brazilian"
+     ],
+     "locale": "Porto Alegre",
+     "setting": "an apartment stairwell",
+     "relationship": "a grandson and the grandfather's old friend",
+     "conflict": "after a mistake that only one person noticed",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "an apartment stairwell in Porto Alegre; a grandson and the grandfather's old friend after a mistake that only one person noticed"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): an apartment stairwell in Porto Alegre; a grandson and the grandfather's old friend after a mistake that only one person noticed\n인물 이름: Fausto, Joaquim 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "After my grandfather's funeral in Porto Alegre, I volunteered to carry the folding chairs back up to the fourth floor, mostly so I would not have to talk. I was Fausto, the grandson who had read the eulogy, and I was proud of it; people squeezed my arm on the stairs and said how well I had captured him. On the third landing Joaquim, his oldest friend, stopped me and took two of the chairs. Lovely speech, he said. Then, while adjusting his grip, he mentioned that my grandfather had never fished a day in his life; the river stories had been Joaquim's own, told so often over dominoes that they had changed owners. He said it lightly. He carried the chairs the rest of the way. I climbed behind him counting the steps, which I had never once counted before.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From self-satisfied pride to quiet, chastened reflection",
+     "From fresh grief over the death to amusement at Joaquim",
+     "From resentment of Joaquim to admiration for his kindness",
+     "From nervous dread about speaking to relief at its success"
+    ],
+    "correct_letter": "A",
+    "explanation": "초반에 Fausto는 추도사를 자랑스러워하고, 사람들의 칭찬을 그대로 받아들인다. Joaquim이 강 이야기가 사실 자신의 것이었다고 가볍게 알려 준 뒤, Fausto는 말없이 뒤따라 오르며 처음으로 계단 수를 센다. 이 행동은 자신의 실수를 조용히 되새기는 마음을 보여 주므로 A가 정답이다. B는 Joaquim의 가벼운 말투만 보고 웃음으로 읽은 오독이고, C는 처음부터 원망이 있었다는 근거가 없다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-01-037",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "text_structure",
+   "genre": "short_story",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-hard-01-037",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "text_structure",
+    "genre": "short_story",
+    "seed": {
+     "index": 36,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Seoyeon",
+      "Mehrnaz"
+     ],
+     "nameCultures": [
+      "korean",
+      "persian_central_asian"
+     ],
+     "locale": "Accra",
+     "setting": "a radio repair shop",
+     "relationship": "a violin student and an exacting teacher",
+     "conflict": "over whether to sell a shared inheritance",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a radio repair shop in Accra; a violin student and an exacting teacher over whether to sell a shared inheritance"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a radio repair shop in Accra; a violin student and an exacting teacher over whether to sell a shared inheritance\n인물 이름: Seoyeon, Mehrnaz 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Sell it, Mehrnaz said, and you will be selling the only thing he ever tuned for both of us. Seoyeon did not answer. They stood in the radio repair shop off Oxford Street in Accra, where the technician had just lifted the back from the old valve set their late teacher had left to the two of them jointly. Inside, the tubes glowed amber. Seoyeon had come with a buyer's offer folded in her violin case; her tuition was due in a week. Mehrnaz, who corrected her bowing down to the angle of a wrist, said nothing more. The technician switched the radio on. A highlife station crackled in, then a violin concerto from somewhere far off, faint and slightly flat. Both women leaned toward it at once. Seoyeon heard Mehrnaz hum the correction under her breath, and found herself, without meaning to, humming it too.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "A history of the radio is given, followed by an account of its repair.",
+     "A disagreement is stated and then settled when one woman agrees to sell.",
+     "A dispute is introduced, set aside, and complicated by a shared habit.",
+     "A teacher's lesson is presented and then rejected by a defiant student."
+    ],
+    "correct_letter": "C",
+    "explanation": "글은 라디오를 팔지 말라는 Mehrnaz의 말로 갈등을 제시하고, Seoyeon의 등록금 사정이 그 갈등을 구체화한다. 이후 두 사람 모두 말을 멈추면서 논쟁은 잠시 보류된다. 라디오에서 음정이 약간 맞지 않는 바이올린 연주가 흘러나오자 두 사람은 똑같이 몸을 기울이고 함께 교정 음을 흥얼거린다. 이 공통된 습관이 판매 결정을 더 어렵게 만들므로 C가 정답이다. B는 결론이 났다고 보았지만 지문에서 결정은 끝내 내려지지 않는다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  }
+ ],
+ "instructions": "당신은 디지털 SAT Reading & Writing 문학 지문 문항 출제 위원이다. 아래 15개 후보 각각에 대해 문항 1개를 만들어 JSON 한 파일로 저장한다.\n작업: 재작성(1회) · 청크 rewrite-001\n규칙:\n1. 지문은 전부 새로 쓴 창작이다. 실제 작품의 문장·플롯·고유한 인물 설정을 쓰지 말고, 실존 작가·작품 이름이나 'From … by …' 같은 출처 머리글을 붙이지 않는다(발췌 지문 작업은 제공된 발췌를 한 글자도 바꾸지 않는다).\n2. 지문·질문·선택지는 영어만 쓴다. 해설(explanation)만 한국어 3~5문장이며, 글자 참조는 선택지 글자(A~D)로만 한다.\n3. 선택지는 정확히 4개, 정답은 1개이고 정답 위치는 후보별 targetLetter 와 같아야 한다(어기면 코드가 선택지를 재배치하거나 탈락시킨다).\n4. 선택지 길이·문체를 비슷하게 맞춘다. 정답이 가장 길거나 구체적이면 탈락한다. 오답 3개는 서로 다른 그럴듯한 오개념에서 나오게 하고 지문 표현을 일부 활용한다.\n5. 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 것이면 탈락한다. 근거를 서로 떨어진 둘 이상의 문장에 둔다.\n6. 후보별 names 에 있는 이름만 인물 이름으로 쓴다. 지정되지 않은 이름·'Tobias'·'Odalys'·'Wren' 은 쓰지 않는다. 후보별 openingStyle 을 따르고 첫 단어를 The·You·It·There 로 시작하지 않는다.\n7. 지문 단어 수는 후보별 words.min~words.max 안이어야 한다(코드가 센다). 시는 줄바꿈을 \\n 으로 유지한다.\n8. XML 태그·마크다운·내부 메모·플레이스홀더·'As an AI' 류 문장을 출력에 넣지 않는다. 밑줄 표시는 앱 규격대로 두 밑줄 기호 __문장__ 만 쓴다. 출처·작가를 지어내지 않는다.\n9. 선언: 모든 항목에 declaration 3개(original, noRealWorkQuoted, noCopyrightedSource)를 true 로 쓴다. 그럴 수 없는 항목은 만들지 말고 candidateId 만 빼라(탈락 처리된다).\n지문과 문항을 함께 새로 쓴다.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-001.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"작업 파일의 chunkId 를 그대로\",\"model\":\"당신의 모델 이름(예: opus)\",\"items\":[{\"candidateId\":\"후보의 candidateId 를 그대로\",\"passage\":\"영어 지문(문항의 질문은 넣지 않는다)\",\"question\":\"영어 질문 한 문장\",\"options\":[\"선택지 A\",\"선택지 B\",\"선택지 C\",\"선택지 D\"],\"correct_letter\":\"A|B|C|D (targetLetter 와 같게)\",\"explanation\":\"한국어 해설 3~5문장\",\"tone\":[\"지문 어조 영어 단어 1~3개\"],\"devices\":[\"쓰인 문학 장치 영어 단어\"],\"declaration\":{\"original\":true,\"noRealWorkQuoted\":true,\"noCopyrightedSource\":true}}]}\n허용 값: correct_letter ∈ {A,B,C,D}, options 길이 4, declaration 3개 모두 true. 후보의 candidateId 를 바꾸지 않는다. 항목 순서는 후보 순서를 따른다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 후보 임의 추가·삭제, 이 작업 파일 수정. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 후보\n### lit40-hard-01-007 — skill central_ideas_details · 유형 main_idea_or_purpose · 난이도 hard · 장르 novel_excerpt · targetLetter A\n유형 지시: 지문 전체의 요지나 서술 목적을 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a salt-water pool in Havana; a grandfather and a granddaughter learning his language while hiding a small failure\n인물 이름: Dario, Bartolo 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(central_ideas_details_lit_main_idea_or_purpose_hard, 난이도 hard): 지문 전체의 요지나 서술 목적을 묻는다. 요지는 한 문장에 몰아 쓰지 않고, 처음의 구체적 일화·중간의 한 번 뒤집는 진술·끝의 사소한 관찰 세 곳에 나눠 둔다. 마지막 문장은 요지를 선언하지 않고 구체적 장면이나 사물로 닫는다. 정답은 세 곳을 모두 포괄하는 진술이고, 오답 3개는 각각 (a) 처음 일화만 요약한 선택지 (b) 중간 진술만 일반화한 선택지 (c) 끝의 관찰을 과장해 요지로 만든 선택지로 지문의 표현을 일부 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 3곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 처음 일화만 요약한 선택지 (2) 중간 진술만 일반화한 선택지 (3) 끝의 관찰을 과장해 요지로 삼은 선택지\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: We called it the salt pool, though by Bartolo's ninth summer in Havana the sea had long since cracked its seaward wall. Each morning Dario sat on the edge with his trousers rolled and named things for her in the old language: tile, gull, the green rust on the ladder. She repeated each word and swam a length between words. On Thursday she stopped halfway, clung to the rope, and climbed out by the near ladder, saying the water was too cold. Dario, who had seen everything, said only that cold had two words, one for water and one for people, and made her practice both. She did not tell him she had wanted to reach the far wall before her mother arrived. He did not tell her he had noticed. When they walked home, she carried his towel, and he carried the word for rope, saying it over to himself.\n질문: Which choice best states the main purpose of the passage?\n선택지: To show how a language lesson lets the two quietly protect each other's pride | To describe a daily routine of swimming lessons in a crumbling Havana pool | To argue that every language holds separate words for physical and emotional cold | To suggest that Dario is slowly losing his memory of the language he teaches\n정답: A\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-011 — skill inferences · 유형 character_motivation · 난이도 hard · 장르 novel_excerpt · targetLetter C\n유형 지시: 인물이 어떤 행동을 한 이유·동기를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a seaside promenade in Valparaiso; a nurse and her night patient after discovering a letter meant for someone else\n인물 이름: Cleotilde, Ofelia 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_character_motivation_hard, 난이도 hard): 인물이 한 행동을 하는 이유를 묻되 동기는 지문에 직접 서술하지 않는다. 동기를 암시하는 단서는 서로 떨어진 두 곳(예: 앞부분의 습관적 행동, 중간의 말 돌리기·회피)에 나눠 심고, 마지막 문장은 장면 묘사나 사물로 끝내 동기를 요약하지 않는다. 정답은 두 단서를 모두 설명하는 동기다. 오답 3개는 각각 (a) 앞 단서만 설명하는 동기 (b) 뒤 단서만 설명하는 동기 (c) 지문의 표현을 빌렸지만 인물의 다른 행동과 충돌하는 동기로 만들고, 셋 모두 이 인물이 가질 법한 감정이어야 한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 앞 단서만 설명하고 뒤 단서와 충돌하는 동기 (2) 뒤 단서만 설명하고 앞 단서를 무시하는 동기 (3) 지문의 구절을 빌려 쓰지만 인물의 다른 행동과 모순되는 동기\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: “Walk me to the railing, if you are not too tired,” Ofelia said, though the doctor had forbidden the night air. I wheeled her along the promenade at Valparaiso, as I had each evening that month, and she counted the lamps aloud, as she always did, never once losing the number. That afternoon I had found, among her blankets, a letter addressed to her son in Santiago, unsealed and plainly unfinished. When I mentioned that the post left at dawn, she asked whether the gulls ever slept, and whether I had a son myself. At the railing she held out the letter and asked me to read it to her, slowly, every line. I read it. She corrected two words, made me read it again, and then folded it into my apron pocket and turned her chair, without my help, toward the lamps.\n질문: Based on the passage, why does Ofelia most likely ask the narrator to read the letter aloud?\n선택지: She doubts her own memory and needs help recalling what she wrote | She wishes to keep the letter's contents secret from her son | She wants the letter sent but cannot bear to send it by herself | She is testing whether the nurse has already read her private letter\n정답: C\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-013 — skill inferences · 유형 tone_or_mood · 난이도 hard · 장르 short_story · targetLetter A\n유형 지시: 지문 전체의 어조나 분위기를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a tailor's back room in Addis Ababa; a pair of rival bakers while deciding whether a rule still applies\n인물 이름: Haruto, Lindiwe 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_hard, 난이도 hard): 지문 전체의 어조·분위기를 묻는다. 겉으로 드러나는 정서(예: 평온)와 행동·대조로 드러나는 실제 정서(예: 억눌린 불안)가 어긋나게 쓰되, 두 정서를 보여 주는 근거를 서로 떨어진 두 곳 이상에 둔다. 마지막 문장은 분위기를 명명하지 않는 구체 묘사로 끝낸다. 정답은 겉과 속을 함께 아우르는 어조이고, 오답 3개는 (a) 겉 정서만 반영한 어조 (b) 속 정서만 반영하되 강도를 과장한 어조 (c) 지문 단어를 쓰지만 중간에서 바뀐 어조를 한쪽으로 고정한 어조로 만든다 — 분위기가 정반대인 오답은 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 정서만 반영한 어조 (2) 속 정서를 과장한 어조 (3) 지문 단어를 쓰지만 변화하는 어조를 한쪽으로 고정한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Haruto has already taken the better chair when you arrive at the tailor's back room in Addis Ababa, so you take the stool by the bolts of cotton and say good morning as if you meant it. You and he have baked on the same street for nine years. The rule, written by no one, is that neither of you sells bread before seven; the market council has called you both to decide whether it still holds now that the bus station has moved. Lindiwe, the tailor, pours tea and leaves you to it. Haruto compliments your new ovens. You compliment his sign. He stirs his tea long after the sugar has gone, and you count the pins in the cushion beside you: forty, forty-one. When the clerk finally arrives, the two of you rise at the same moment, and each holds the curtain open for the other until it slips from both your hands.\n질문: Which choice best describes the overall tone of the passage?\n선택지: Courteous on the surface, yet tense with a rivalry neither will voice | Calm and relaxed, reflecting an easy friendship between neighbors | Openly hostile, as each baker tries to humiliate the other aloud | Anxious at first, then fully at ease once the council clerk finally arrives\n정답: A\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-014 — skill inferences · 유형 tone_or_mood · 난이도 hard · 장르 novel_excerpt · targetLetter B\n유형 지시: 지문 전체의 어조나 분위기를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a rooftop water tank in Taipei; best friends after a move about whether to forgive\n인물 이름: Yuxuan, Weiqi 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 부사절·전치사구로 시작('When', 'Although', 'Beside' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_hard, 난이도 hard): 지문 전체의 어조·분위기를 묻는다. 겉으로 드러나는 정서(예: 평온)와 행동·대조로 드러나는 실제 정서(예: 억눌린 불안)가 어긋나게 쓰되, 두 정서를 보여 주는 근거를 서로 떨어진 두 곳 이상에 둔다. 마지막 문장은 분위기를 명명하지 않는 구체 묘사로 끝낸다. 정답은 겉과 속을 함께 아우르는 어조이고, 오답 3개는 (a) 겉 정서만 반영한 어조 (b) 속 정서만 반영하되 강도를 과장한 어조 (c) 지문 단어를 쓰지만 중간에서 바뀐 어조를 한쪽으로 고정한 어조로 만든다 — 분위기가 정반대인 오답은 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 정서만 반영한 어조 (2) 속 정서를 과장한 어조 (3) 지문 단어를 쓰지만 변화하는 어조를 한쪽으로 고정한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: When Weiqi climbed up to the roof the first evening back, I was already sitting against the water tank, pretending to read. Taipei hummed below us, scooters and rain on tin, and she said the view had not changed, which was untrue; three new towers stood where the night market had been. I said it was nice of her to visit. “Yuxuan, I didn't visit,” she said. “I moved back.” For a while we talked about her new school, the price of mangoes, my brother's motorbike, and I laughed at the right places. Then she set her old key ring on the rim of the tank, the one with the plastic cat I had given her the summer she left without saying goodbye. I did not pick it up. I did not push it away either, and when the rain grew heavier, I moved a little to make room for her under the overhang.\n질문: Which choice best describes the overall tone of the passage?\n선택지: Breezy and carefree, like any pleasant reunion between old friends | Casual on the surface, beneath which a guarded hurt slowly softens | Bitterly accusatory, as the narrator punishes Weiqi for leaving | Coolly guarded throughout, with no change at all in the narrator's stance\n정답: B\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-015 — skill inferences · 유형 tone_or_mood · 난이도 hard · 장르 personal_essay · targetLetter C\n유형 지시: 지문 전체의 어조나 분위기를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a monastery guesthouse in Lisbon; two neighbors with a shared wall about the last item in a house being emptied\n인물 이름: Larissa, Caio 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_hard, 난이도 hard): 지문 전체의 어조·분위기를 묻는다. 겉으로 드러나는 정서(예: 평온)와 행동·대조로 드러나는 실제 정서(예: 억눌린 불안)가 어긋나게 쓰되, 두 정서를 보여 주는 근거를 서로 떨어진 두 곳 이상에 둔다. 마지막 문장은 분위기를 명명하지 않는 구체 묘사로 끝낸다. 정답은 겉과 속을 함께 아우르는 어조이고, 오답 3개는 (a) 겉 정서만 반영한 어조 (b) 속 정서만 반영하되 강도를 과장한 어조 (c) 지문 단어를 쓰지만 중간에서 바뀐 어조를 한쪽으로 고정한 어조로 만든다 — 분위기가 정반대인 오답은 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 정서만 반영한 어조 (2) 속 정서를 과장한 어조 (3) 지문 단어를 쓰지만 변화하는 어조를 한쪽으로 고정한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Years later, Larissa would describe that week as a matter of logistics. The guesthouse beside the old monastery in Lisbon was being sold, and she and Caio, who had shared its thin middle wall for twenty years, were the last tenants to clear their rooms. She labeled boxes. She rented a van. She told Caio, briskly, that the brass coat hook between their two doors belonged to neither of them and should stay for the buyers. Caio agreed. Yet on the final morning he found her on the landing with a screwdriver, loosening the hook's screws one quarter turn at a time, and then tightening them again. Neither of them mentioned it. They carried the last chair down together, and the hook stayed on the wall, a pale outline around it where twenty winters of coats had kept the paint from fading.\n질문: Which choice best describes the overall tone of the passage?\n선택지: Efficient and businesslike, focused entirely on finishing the move | Openly mournful, dwelling at length on the sorrow of leaving home | Brisk and practical in manner, yet threaded with reluctant grief | Detached at first but finally joyful once the last chair is moved\n정답: C\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-017 — skill inferences · 유형 relationship_between_characters · 난이도 hard · 장르 novel_excerpt · targetLetter A\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a flooded cellar in Shanghai; a mayor and the town's only doctor about a debt neither will mention\n인물 이름: Gil, Meilin 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_hard, 난이도 hard): 두 인물의 관계(서로에 대한 감정·권력 관계)를 추론하게 한다. 관계는 직접 서술하지 않고 호칭의 변화, 상대의 말을 받는 방식, 물건·자리 다루는 방식 등 서로 다른 두 곳 이상의 행동에서 드러낸다. 마지막 문장은 관계를 규정하지 않는 행동이나 배경으로 끝낸다. 정답은 두 곳의 단서를 모두 설명하는 관계이고, 오답 3개는 (a) 한 단서만 맞는 관계 (b) 표면의 정중함만 보고 고른 관계 (c) 단서의 방향(누가 누구에게)을 뒤집은 관계로 만든다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한 단서만 맞는 관계 (2) 표면의 정중함만 보고 고른 관계 (3) 누가 누구에게인지 방향을 뒤집은 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Shanghai had flooded again, and by midnight the water in the clinic's cellar reached my knees. Meilin had sent for me, not for the pumps, and I came, as I always do when she sends. She called me Mayor at the top of the stairs, as she does in front of the council, and handed me the lamp without asking. I held it while she lifted crates of vaccine onto the shelves, and I did not mention the winter she had sat three nights beside my father when no other doctor would come. She did not mention the clinic's lease, which I have renewed each year without a fee. When the last crate was dry, she took the higher step and offered me her hand, and I took it, and on the way up she said my name, just Gil, and told me to mind the loose board.\n질문: Based on the passage, which choice best describes the relationship between the narrator and Meilin?\n선택지: Bound by unspoken debts, they show loyalty through acts rather than words | Meilin treats Gil with stiff formality because she quietly distrusts his office | Gil commands Meilin, who obeys him because she depends on his lease | Meilin feels indebted to Gil, while he believes he owes her nothing\n정답: A\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-022 — skill words_in_context · 유형 figurative_language · 난이도 hard · 장르 short_story · targetLetter C\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a night bus in Albuquerque; a young apprentice and a master carpenter while waiting for important news\n인물 이름: Waya, Kamal 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Would the call come before the bus reached Central Avenue? Waya kept turning his phone face down on his knee and then face up again. Beside him, Kamal sat with his hands folded over the toolbag, his knuckles scarred from thirty years of chisels. The bid for the church restoration had gone in a month ago; if it was accepted, Waya would cut his first joints on a job that mattered. Kamal had said nothing about it all evening. But when the bus jolted over a pothole, he steadied the bag before Waya could, and Waya saw that the old man's thumb had been running along the same seam of canvas for miles, worrying a groove into the cloth as if it were a board that would not come true. Waya looked out at the dark storefronts and let him keep at it.\n질문: As used in the text, the phrase “a board that would not come true” most nearly suggests\n선택지: that Kamal considers the toolbag poorly made and in need of repair. | that Kamal is bored by the long ride and is idly passing the time. | that Kamal is anxiously working at an uncertainty he cannot fix. | that Kamal is quietly showing Waya how to test the grain of wood.\n정답: C\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-024 — skill words_in_context · 유형 figurative_language · 난이도 hard · 장르 poetry · targetLetter A\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a stone bridge in Kingston; a father and his stubborn son after a misunderstood gift\n인물 이름: Errol, Consuelo 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: I gave you the fishing rod on your twelfth birthday, Errol,\nand you leaned it in the corner like a broom.\nConsuelo said you wanted books. I heard her\nthe way the river hears a pebble.\nNow we stand on the stone bridge over the Hope,\nyou with your satchel, I with nothing in my hands,\nand neither of us looks down at the water\nwhere I used to fish at your age.\nYou point to a heron, stiff as a nail.\nI almost tell you that my father gave me nothing,\nthat the rod was my whole vocabulary.\nInstead I count the stones in the railing,\neach one set by someone who did not explain it.\n질문: As used in the text, the phrase “the way the river hears a pebble” most nearly suggests\n선택지: that the speaker took in Consuelo's words without changing his course. | that the speaker found Consuelo's remark sharp and painful to accept. | that Consuelo spoke so softly the speaker could not make out her words. | that the speaker and Consuelo often argued by the river about Errol.\n정답: A\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-025 — skill words_in_context · 유형 figurative_language · 난이도 hard · 장르 personal_essay · targetLetter B\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a school gymnasium in Galicia; a captain and a stowaway when two traditions have to share one table\n인물 이름: Piper, Lucia 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Piper had captained the girls' team at our school in Vigo for three seasons, and by the night of the winter dinner she ran the gymnasium like a deck: tables in rows, chairs squared, her grandmother's empanadas at the head. Lucia had arrived from Buenos Aires in October and came along that evening without being on any list; I think she slipped in behind the volunteers carrying folding chairs. She brought a tray of alfajores and set it down, hesitating, at the far corner. I watched Piper notice it. She said nothing. She lifted her grandmother's platter and slid it down the table until the two trays touched, then pulled up a chair at that end, the wrong end by her own rules, and sat. For the rest of the night the table listed toward Lucia's corner, a boat trimmed to an unexpected weight, and no one tried to set it straight.\n질문: As used in the text, the phrase “a boat trimmed to an unexpected weight” most nearly suggests\n선택지: that the table was overloaded with food and close to collapsing. | that the gathering had rebalanced itself around the newcomer. | that Piper had lost control of the dinner she carefully planned. | that the guests were uneasy and wished Lucia had stayed home.\n정답: B\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-026 — skill words_in_context · 유형 figurative_language · 난이도 hard · 장르 memoir · targetLetter C\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a ship's galley in Manila; a new teacher and a wary student when the plan works and nobody feels better\n인물 이름: Anh, Shira 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Three rules governed the galley of the training ship docked at Manila that summer: knives point down, nothing left on the burners, and no one cries where the cook can see. I was nineteen, newly hired to teach English to the cadets, and Anh, the cook, let me hold class at his steel tables between meals. Shira, the quietest cadet, would not answer me for weeks. So I made a plan. I asked her to translate Anh's recipes for the others, and she did, fluently, in front of everyone. The cadets applauded. Anh grinned. Shira folded the recipe card into smaller and smaller squares until it was the size of a stamp. That night I scrubbed the same pot three times. The plan had worked, I kept telling myself; the success sat in me like a meal eaten standing up.\n질문: As used in the text, the phrase “like a meal eaten standing up” most nearly suggests\n선택지: that the narrator was too busy teaching to sit down and eat properly. | that the narrator felt physically ill from rough conditions aboard ship. | that the narrator's achievement felt hasty and gave no real satisfaction. | that the narrator was eager to celebrate the success with the whole crew.\n정답: C\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-032 — skill text_structure_purpose · 유형 tone_shift · 난이도 hard · 장르 short_story · targetLetter B\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a train-station cafe in Bologna; a brother and sister reading their mother's letters while one of them prepares to leave for good\n인물 이름: Fiorella, Anneke 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Two cups of espresso cooled on the zinc counter of the station cafe in Bologna while Fiorella untied the ribbon around their mother's letters. Anneke's train to Rotterdam left at 4:10, and her suitcase held everything she meant to keep. They read the first letters aloud, laughing at the spelling, at the recipes copied into the margins, at a long complaint about a neighbor's goat. Fiorella did the voices. Then Anneke unfolded one dated the spring she had first gone away, years ago, and read it silently. Fiorella waited for the voice, and none came. Anneke set the page face down, squared it against the others, and picked up her ticket, turning it over as though it might list a different time. Fiorella retied the ribbon slowly, making the bow twice.\n질문: Which choice best describes the shift in tone in the text?\n선택지: From bitter resentment of the mother to forgiving acceptance of her flaws | From playful shared reminiscence to a hushed tension about the departure | From anxious haste about the train to relief that there is time to spare | From detached curiosity about the letters to open grief expressed in tears\n정답: B\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-033 — skill text_structure_purpose · 유형 tone_shift · 난이도 hard · 장르 novel_excerpt · targetLetter C\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a ceramics studio in Chicago's South Side; a widow and the delivery boy after learning how someone really earned their reputation\n인물 이름: Tamika, Ngozi 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Clay forgives nothing. Tamika's husband had said that to every student who walked into the studio on Seventy-First Street, and for thirty years the neighborhood had repeated it as proof of his genius. She was boxing his glazes when Ngozi arrived with the kiln parts, a lanky boy who lingered to admire the famous blue bowls on the top shelf. My uncle fired those, he said cheerfully. Your husband paid him in lunch. Tamika laughed, assuming a joke, and handed him a bowl to carry. Ngozi turned it over and showed her the mark scratched faintly into the foot, two initials that were not her husband's. She set the box of glazes down. For a while she simply moved along the shelf, bowl by bowl, turning each one over with care.\n질문: Which choice best describes the shift in tone in the text?\n선택지: From grief-stricken mourning to cheerful celebration of the husband's work | From suspicious hostility toward Ngozi to grateful trust in his account | From affectionate pride in a legacy to a sober, searching reconsideration | From casual indifference about the bowls to an outraged public accusation\n정답: C\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-034 — skill text_structure_purpose · 유형 tone_shift · 난이도 hard · 장르 poetry · targetLetter D\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a language school classroom in Surabaya; a farmer and a surveyor from the city over an invitation one of them refuses\n인물 이름: Thida, Neema 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Once a week the language school in Surabaya\nlent its back classroom to anyone with a map.\nThida came from the rice terraces with mud on her sandals,\nNeema from the city office with a rolled survey,\nand for an hour they practiced polite English,\nwould you, could you, may I, laughing at the verbs.\nThen Neema asked her to the ministry dinner,\nwhere the new road would be announced.\nThida closed her notebook.\nShe studied the whiteboard where the teacher\nhad written, in blue, the word boundary,\nand did not erase it, and did not answer,\nand thanked Neema, very correctly, for the invitation.\n질문: Which choice best describes the shift in tone in the text?\n선택지: From formal distance to growing warmth as the two practice together | From confusion about English verbs to confident mastery of the lesson | From enthusiasm about the new road to disappointment at its delay | From easy shared amusement to guarded courtesy after the invitation\n정답: D\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-035 — skill text_structure_purpose · 유형 tone_shift · 난이도 hard · 장르 personal_essay · targetLetter A\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): an apartment stairwell in Porto Alegre; a grandson and the grandfather's old friend after a mistake that only one person noticed\n인물 이름: Fausto, Joaquim 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: After my grandfather's funeral in Porto Alegre, I volunteered to carry the folding chairs back up to the fourth floor, mostly so I would not have to talk. I was Fausto, the grandson who had read the eulogy, and I was proud of it; people squeezed my arm on the stairs and said how well I had captured him. On the third landing Joaquim, his oldest friend, stopped me and took two of the chairs. Lovely speech, he said. Then, while adjusting his grip, he mentioned that my grandfather had never fished a day in his life; the river stories had been Joaquim's own, told so often over dominoes that they had changed owners. He said it lightly. He carried the chairs the rest of the way. I climbed behind him counting the steps, which I had never once counted before.\n질문: Which choice best describes the shift in tone in the text?\n선택지: From self-satisfied pride to quiet, chastened reflection | From fresh grief over the death to amusement at Joaquim | From resentment of Joaquim to admiration for his kindness | From nervous dread about speaking to relief at its success\n정답: A\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-01-037 — skill text_structure_purpose · 유형 text_structure · 난이도 hard · 장르 short_story · targetLetter C\n유형 지시: 글 전체의 구조(전개 순서·초점의 이동)를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a radio repair shop in Accra; a violin student and an exacting teacher over whether to sell a shared inheritance\n인물 이름: Seoyeon, Mehrnaz 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Sell it, Mehrnaz said, and you will be selling the only thing he ever tuned for both of us. Seoyeon did not answer. They stood in the radio repair shop off Oxford Street in Accra, where the technician had just lifted the back from the old valve set their late teacher had left to the two of them jointly. Inside, the tubes glowed amber. Seoyeon had come with a buyer's offer folded in her violin case; her tuition was due in a week. Mehrnaz, who corrected her bowing down to the angle of a wrist, said nothing more. The technician switched the radio on. A highlife station crackled in, then a violin concerto from somewhere far off, faint and slightly flat. Both women leaned toward it at once. Seoyeon heard Mehrnaz hum the correction under her breath, and found herself, without meaning to, humming it too.\n질문: Which choice best describes the overall structure of the text?\n선택지: A history of the radio is given, followed by an account of its repair. | A disagreement is stated and then settled when one woman agrees to sell. | A dispute is introduced, set aside, and complicated by a shared habit. | A teacher's lesson is presented and then rejected by a defiant student.\n정답: C\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다."
+}

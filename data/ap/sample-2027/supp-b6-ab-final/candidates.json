@@ -1,0 +1,1974 @@
+[
+ {
+  "candidateKey": "ap_calculus_ab-f01-k0",
+  "cellId": "ap_calculus_ab-f01",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "8.1",
+  "unitCode": "8",
+  "skillPrimary": "1.E",
+  "structure": "frq_multipart",
+  "calculator": "required",
+  "archetype": "frq_model_analysis_calc",
+  "wording": "llm",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Multi-part FRQ-style item covering average value (integral on calculator), derivative meaning with units, a global-maximum justification (critical point plus endpoint check), and solving C(t)=15.5 for two roots to get a time interval. Each part is a standard AB procedure, but the four parts together need several reasoning steps and a few representation changes (formula, rate meaning, graph or sign behavior, equation solving). Concept depth is moderate and the reading load is short. The numbers are clean enough for a calculator and nothing is out of scope, so the difficulty is not driven by unfair sources.",
+  "payload": {
+   "archetype": "frq_model_analysis_calc",
+   "template": "model_analysis_calc",
+   "topic": "8.1",
+   "extra_topics": [
+    "4.1",
+    "5.5"
+   ],
+   "skill": "1.E",
+   "representative_skill": "1.E",
+   "calculator": "required",
+   "title": "Drug concentration model: average value, meaning of C', greatest concentration, time above a threshold",
+   "stimulus": {
+    "kind": "text",
+    "description": "Concentration of a drug in the bloodstream",
+    "data": {
+     "model": "C(t) = 20t e^(-t/3) milligrams per liter, 0 <= t <= 12 hours"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "The concentration of a drug in a patient's bloodstream is modeled by $C(t)=20te^{-t/3}$ milligrams per liter, where $t$ is the time in hours after the drug is given, for $0\\le t\\le 12$. Find the average concentration over the first $12$ hours.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.D",
+      "1.E"
+     ],
+     "model_answer": "(1/12) ∫₀^12 C(t) dt = 13.626 milligrams per liter.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Integral of C over [0, 12] divided by 12",
+       "required_elements": [
+        "(1/12) ∫_0^12 C(t) dt"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "13.626"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "8.1"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find $C'(1)$. Using correct units, explain the meaning of $C'(1)$ in the context of the problem.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.E",
+      "3.F"
+     ],
+     "model_answer": "C'(1) = 9.554: at t = 1 hour(s) the concentration is increasing at about 9.554 milligrams per liter per hour.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Value of C'(t) at the given time",
+       "required_elements": [
+        "9.554"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Interpretation with units: the rate of change of the concentration, in milligrams per liter per hour",
+       "required_elements": [
+        "rate of change of the concentration",
+        "milligrams per liter per hour"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": true
+      }
+     ],
+     "topic_codes": [
+      "4.1"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "At what time $t$ is the concentration greatest? Find the greatest concentration and justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "C'(t) = 20e^(-t/3)(1 - t/3) = 0 at t = 3; C' > 0 before and C' < 0 after, so the greatest concentration is C(3) = 22.073 milligrams per liter.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Sets C'(t) = 0 and solves, with the sign change of C' as the justification",
+       "required_elements": [
+        "t = 3",
+        "C' changes from positive to negative"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Greatest concentration value",
+       "required_elements": [
+        "22.073"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "5.5"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "The drug is effective when the concentration is at least $15.5$ milligrams per liter. Find the times at which the concentration is exactly $15.5$ milligrams per liter, and find the total length of time during $0\\le t\\le 12$ for which the drug is effective.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "3.E"
+     ],
+     "model_answer": "C(t) = 15.5 at t = 1.129 and t = 6.274; the drug is effective for 5.145 hours.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Equation C(t) = threshold",
+       "required_elements": [
+        "C(t) = 15.5"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Both solutions (calculator)",
+       "required_elements": [
+        "t = 1.129",
+        "t = 6.274"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": true,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "d3",
+       "points": 1,
+       "criterion": "Length of the interval of effectiveness: the difference of the solutions, with units",
+       "required_elements": [
+        "5.145 hours"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": true
+      }
+     ],
+     "topic_codes": [
+      "5.5"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "A=20",
+    "b=3",
+    "k=15.5",
+    "avg=13.626327",
+    "dC=9.553751",
+    "r1=1.129197",
+    "r2=6.273845",
+    "cmax=22.072766"
+   ],
+   "blueprint": {
+    "id": "frq_model_analysis_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "frq_bundle",
+    "concept": "Analyze a concentration model with a calculator: average value, the meaning of the derivative, the maximum, and the time interval above a threshold",
+    "topic": "8.1",
+    "skill": "1.E",
+    "student_thinking": [
+     "Average the model with an integral divided by the length",
+     "Differentiate the model and interpret the derivative with units",
+     "Locate the maximum with the sign of the derivative",
+     "Solve C(t) = threshold for both times and subtract"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "C rises to a single maximum at t = b and then falls, so C(t) = threshold has exactly two solutions in [0, T]",
+      "evidence": "C' changes sign once and C(T) is below the threshold"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "model formula",
+      "threshold"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the average is checked with sympy's symbolic integral, the derivative by central difference, and the two crossing times and the maximum by a 120001-point grid (independent of scipy quad and Brent's method)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.D",
+       "1.E"
+      ],
+      "topics": [
+       "8.1"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(1/12) ∫₀^12 C(t) dt = 13.626 milligrams per liter."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Integral of C over [0, 12] divided by 12",
+        "elements": [
+         "(1/12) ∫_0^12 C(t) dt"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Answer",
+        "elements": [
+         "13.626"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "1.E",
+       "3.F"
+      ],
+      "topics": [
+       "4.1"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "C'(1) = 9.554: at t = 1 hour(s) the concentration is increasing at about 9.554 milligrams per liter per hour."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Value of C'(t) at the given time",
+        "elements": [
+         "9.554"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Interpretation with units: the rate of change of the concentration, in milligrams per liter per hour",
+        "elements": [
+         "rate of change of the concentration",
+         "milligrams per liter per hour"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "3.B",
+       "3.E"
+      ],
+      "topics": [
+       "5.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "C'(t) = 20e^(-t/3)(1 - t/3) = 0 at t = 3; C' > 0 before and C' < 0 after, so the greatest concentration is C(3) = 22.073 milligrams per liter."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Sets C'(t) = 0 and solves, with the sign change of C' as the justification",
+        "elements": [
+         "t = 3",
+         "C' changes from positive to negative"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Greatest concentration value",
+        "elements": [
+         "22.073"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.E",
+       "3.E"
+      ],
+      "topics": [
+       "5.5"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "C(t) = 15.5 at t = 1.129 and t = 6.274; the drug is effective for 5.145 hours."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Equation C(t) = threshold",
+        "elements": [
+         "C(t) = 15.5"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Both solutions (calculator)",
+        "elements": [
+         "t = 1.129",
+         "t = 6.274"
+        ]
+       },
+       {
+        "row_id": "d3",
+        "points": 1,
+        "criterion": "Length of the interval of effectiveness: the difference of the solutions, with units",
+        "elements": [
+         "5.145 hours"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 6000,
+   "pack_id": "frq_model_analysis_calc-s6000"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_model_analysis_calc",
+   "facts": [
+    "A=20",
+    "b=3",
+    "k=15.5",
+    "avg=13.626327",
+    "dC=9.553751",
+    "r1=1.129197",
+    "r2=6.273845",
+    "cmax=22.072766"
+   ],
+   "seed": 6000
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard calculator FRQ on a drug concentration model, and all four parts are consistent with their rubrics. The solver confirmed every key, and nothing needs fixing.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item covering average value (integral on calculator), derivative meaning with units, a global-maximum justification (critical point plus endpoint check), and solving C(t)=15.5 for two roots to get a time interval. Each part is a standard AB procedure, but the four parts together need several reasoning steps and a few representation changes (formula, rate meaning, graph or sign behavior, equation solving). Concept depth is moderate and the reading load is short. The numbers are clean enough for a calculator and nothing is out of scope, so the difficulty is not driven by unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f01-k1",
+  "cellId": "ap_calculus_ab-f01",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "8.1",
+  "unitCode": "8",
+  "skillPrimary": "1.E",
+  "structure": "frq_multipart",
+  "calculator": "required",
+  "archetype": "frq_model_analysis_calc",
+  "wording": "llm",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Multi-part FRQ-style item mixing average value (integral setup plus calculator evaluation), a derivative with an interpretation that needs units, optimization with a justification (critical point plus endpoint or sign check), and a calculator root-finding step to get the time above a threshold. Concepts are all in AB scope. The difficulty comes from the number of reasoning steps and from switching between expression, context and graph. The computation is calculator-based and the numbers are clean, so the reading load is moderate and nothing is ambiguous. This matches full-mock exam difficulty.",
+  "payload": {
+   "archetype": "frq_model_analysis_calc",
+   "template": "model_analysis_calc",
+   "topic": "8.1",
+   "extra_topics": [
+    "4.1",
+    "5.5"
+   ],
+   "skill": "1.E",
+   "representative_skill": "1.E",
+   "calculator": "required",
+   "title": "Drug concentration model: average value, meaning of C', greatest concentration, time above a threshold",
+   "stimulus": {
+    "kind": "text",
+    "description": "Concentration of a drug in the bloodstream",
+    "data": {
+     "model": "C(t) = 30t e^(-t/4) milligrams per liter, 0 <= t <= 12 hours"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "The concentration of a drug in a patient's bloodstream is modeled by $C(t)=30te^{-t/4}$ milligrams per liter, where $t$ is the time in hours after the drug is given, for $0\\le t\\le 12$. A graphing calculator is required for this part. Find the average concentration over the first $12$ hours. Show the setup for your calculation.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.D",
+      "1.E"
+     ],
+     "model_answer": "(1/12) ∫₀^12 C(t) dt = 32.034 milligrams per liter.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Integral of C over [0, 12] divided by 12",
+       "required_elements": [
+        "(1/12) ∫_0^12 C(t) dt"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "32.034"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "8.1"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find $C'(1)$. Using correct units, explain the meaning of $C'(1)$ in the context of the problem.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.E",
+      "3.F"
+     ],
+     "model_answer": "C'(1) = 17.523: at t = 1 hour(s) the concentration is increasing at about 17.523 milligrams per liter per hour.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Value of C'(t) at the given time",
+       "required_elements": [
+        "17.523"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Interpretation with units: the rate of change of the concentration, in milligrams per liter per hour",
+       "required_elements": [
+        "rate of change of the concentration",
+        "milligrams per liter per hour"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": true
+      }
+     ],
+     "topic_codes": [
+      "4.1"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "At what time $t$ is the concentration greatest? Find the greatest concentration, and justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "C'(t) = 30e^(-t/4)(1 - t/4) = 0 at t = 4; C' > 0 before and C' < 0 after, so the greatest concentration is C(4) = 44.146 milligrams per liter.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Sets C'(t) = 0 and solves, with the sign change of C' as the justification",
+       "required_elements": [
+        "t = 4",
+        "C' changes from positive to negative"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Greatest concentration value",
+       "required_elements": [
+        "44.146"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "5.5"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "The drug is effective when the concentration is at least $22.1$ milligrams per liter. A graphing calculator is required for this part. Find the times at which the concentration is exactly $22.1$ milligrams per liter, and find the total length of time during $0\\le t\\le 12$ for which the drug is effective.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "3.E"
+     ],
+     "model_answer": "C(t) = 22.1 at t = 0.929 and t = 10.706; the drug is effective for 9.776 hours.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Equation C(t) = threshold",
+       "required_elements": [
+        "C(t) = 22.1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Both solutions (calculator)",
+       "required_elements": [
+        "t = 0.929",
+        "t = 10.706"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": true,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "d3",
+       "points": 1,
+       "criterion": "Length of the interval of effectiveness: the difference of the solutions, with units",
+       "required_elements": [
+        "9.776 hours"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": true
+      }
+     ],
+     "topic_codes": [
+      "5.5"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "A=30",
+    "b=4",
+    "k=22.1",
+    "avg=32.034069",
+    "dC=17.523018",
+    "r1=0.929335",
+    "r2=10.705515",
+    "cmax=44.145533"
+   ],
+   "blueprint": {
+    "id": "frq_model_analysis_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "frq_bundle",
+    "concept": "Analyze a concentration model with a calculator: average value, the meaning of the derivative, the maximum, and the time interval above a threshold",
+    "topic": "8.1",
+    "skill": "1.E",
+    "student_thinking": [
+     "Average the model with an integral divided by the length",
+     "Differentiate the model and interpret the derivative with units",
+     "Locate the maximum with the sign of the derivative",
+     "Solve C(t) = threshold for both times and subtract"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "C rises to a single maximum at t = b and then falls, so C(t) = threshold has exactly two solutions in [0, T]",
+      "evidence": "C' changes sign once and C(T) is below the threshold"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "model formula",
+      "threshold"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the average is checked with sympy's symbolic integral, the derivative by central difference, and the two crossing times and the maximum by a 120001-point grid (independent of scipy quad and Brent's method)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.D",
+       "1.E"
+      ],
+      "topics": [
+       "8.1"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(1/12) ∫₀^12 C(t) dt = 32.034 milligrams per liter."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Integral of C over [0, 12] divided by 12",
+        "elements": [
+         "(1/12) ∫_0^12 C(t) dt"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Answer",
+        "elements": [
+         "32.034"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "1.E",
+       "3.F"
+      ],
+      "topics": [
+       "4.1"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "C'(1) = 17.523: at t = 1 hour(s) the concentration is increasing at about 17.523 milligrams per liter per hour."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Value of C'(t) at the given time",
+        "elements": [
+         "17.523"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Interpretation with units: the rate of change of the concentration, in milligrams per liter per hour",
+        "elements": [
+         "rate of change of the concentration",
+         "milligrams per liter per hour"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "3.B",
+       "3.E"
+      ],
+      "topics": [
+       "5.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "C'(t) = 30e^(-t/4)(1 - t/4) = 0 at t = 4; C' > 0 before and C' < 0 after, so the greatest concentration is C(4) = 44.146 milligrams per liter."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Sets C'(t) = 0 and solves, with the sign change of C' as the justification",
+        "elements": [
+         "t = 4",
+         "C' changes from positive to negative"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Greatest concentration value",
+        "elements": [
+         "44.146"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.E",
+       "3.E"
+      ],
+      "topics": [
+       "5.5"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "C(t) = 22.1 at t = 0.929 and t = 10.706; the drug is effective for 9.776 hours."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Equation C(t) = threshold",
+        "elements": [
+         "C(t) = 22.1"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Both solutions (calculator)",
+        "elements": [
+         "t = 0.929",
+         "t = 10.706"
+        ]
+       },
+       {
+        "row_id": "d3",
+        "points": 1,
+        "criterion": "Length of the interval of effectiveness: the difference of the solutions, with units",
+        "elements": [
+         "9.776 hours"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 6001,
+   "pack_id": "frq_model_analysis_calc-s6001"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_model_analysis_calc",
+   "facts": [
+    "A=30",
+    "b=4",
+    "k=22.1",
+    "avg=32.034069",
+    "dC=17.523018",
+    "r1=0.929335",
+    "r2=10.705515",
+    "cmax=44.145533"
+   ],
+   "seed": 6001
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well-formed, but it is borderline on scope. Only part (a), worth 2 of 9 points, assesses topic 8.1. Parts (b), (c) and (d) assess 4.1, 5.5 and 5.5, so the bundle's dominant demand is not the target topic. The keys match the solver on every part.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Only 2 of 9 points target 8.1 and skill 1.E. The remaining parts cover the derivative interpretation, optimization and equation solving."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All values match the solver and the key is unique in each part. The rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The model, the domain and the threshold are given. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "An FRQ has no distractors. The rubric rows are consistent with the model answers."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points split 2/2/2/3 in about 15 minutes, which is within the official grain. The calculator load is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item mixing average value (integral setup plus calculator evaluation), a derivative with an interpretation that needs units, optimization with a justification (critical point plus endpoint or sign check), and a calculator root-finding step to get the time above a threshold. Concepts are all in AB scope. The difficulty comes from the number of reasoning steps and from switching between expression, context and graph. The computation is calculator-based and the numbers are clean, so the reading load is moderate and nothing is ambiguous. This matches full-mock exam difficulty.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f02-k0",
+  "cellId": "ap_calculus_ab-f02",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "2.4",
+  "unitCode": "2",
+  "skillPrimary": "3.B",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "frq_piecewise_diff",
+  "wording": "mixed",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP-style multi-part piecewise item. It requires the continuity definition (limits from both sides equal f(1)), comparing one-sided derivatives to justify differentiability, a tangent line, and applying the average value with FTC to f' (the integral of f' equals f(4)-f(0)). Concept depth is moderate, with a few representation changes between limits, derivatives and integrals. Arithmetic is light and the wording is clear, so the difficulty comes from the concepts, not unfair sources.",
+  "payload": {
+   "archetype": "frq_piecewise_diff",
+   "template": "piecewise_function_differentiability",
+   "topic": "2.4",
+   "extra_topics": [
+    "1.11",
+    "2.7",
+    "6.7"
+   ],
+   "skill": "3.B",
+   "representative_skill": "3.B",
+   "calculator": "not_allowed",
+   "title": "Piecewise function: continuity, differentiability, tangent line, average value of the derivative",
+   "stimulus": {
+    "kind": "text",
+    "description": "A piecewise defined function",
+    "data": {
+     "definition": "f(x) = x^2 -4x for x <= 1; f(x) = -4sqrt(x) +1 for x > 1"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Let $f$ be the function defined by $f(x)=\\begin{cases} x^{2}-4x, & x\\le 1\\\\ -4\\sqrt{x}+1, & x>1 \\end{cases}$. Show that $f$ is continuous at $x=1$.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.C"
+     ],
+     "model_answer": "f(1) = 1 -4 = -3; the left limit is -3; the right limit is -4(1) +1 = -3; the one-sided limits equal f(1), so f is continuous at x = 1.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Evaluates f(1) and the left-hand limit",
+       "required_elements": [
+        "f(1) = -3",
+        "left limit = -3"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Right-hand limit equal to f(1): the condition for continuity is met",
+       "required_elements": [
+        "right limit = -3"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "1.11"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Is $f$ differentiable at $x=1$? Justify your answer.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.C",
+      "3.E"
+     ],
+     "model_answer": "For x < 1, f'(x) = 2x -4, so the left derivative at 1 is -2; for x > 1, f'(x) = -4/(2 sqrt x), so the right derivative at 1 is -2. They are equal and f is continuous, so f is differentiable at x = 1.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Left-hand derivative at x = 1",
+       "required_elements": [
+        "-2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Right-hand derivative at x = 1",
+       "required_elements": [
+        "-2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b3",
+       "points": 1,
+       "criterion": "Justification and conclusion: the one-sided derivatives are equal, so f is differentiable (yes)",
+       "required_elements": [
+        "one-sided derivatives are equal",
+        "yes"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b2",
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "2.4"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Write an equation for the line tangent to the curve $y=f(x)$ at $x=1$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "The tangent line is y = -3 + -2(x - 1).",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Uses the slope f'(1) from part (b)",
+       "required_elements": [
+        "-2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Equation of the tangent line",
+       "required_elements": [
+        "y = -3 + -2(x - 1)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "2.7"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Find the average value of $f'(x)$ on the interval $0\\le x\\le 4$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "2.B"
+     ],
+     "model_answer": "(1/4) ∫₀⁴ f'(x) dx = (f(4) - f(0))/4 = (-7 - 0)/4 = -7/4.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Uses the Fundamental Theorem: the integral of f' from 0 to 4 is f(4) - f(0)",
+       "required_elements": [
+        "f(4) - f(0)",
+        "f(4) = -7"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Value of the average",
+       "required_elements": [
+        "-7/4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "6.7"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "p=-4",
+    "q=-4",
+    "r=1",
+    "f(1)=-3",
+    "f'(1)=-2",
+    "avg=-7/4"
+   ],
+   "blueprint": {
+    "id": "frq_piecewise_diff",
+    "subject": "ap_calculus_ab",
+    "kind": "frq_bundle",
+    "concept": "Check continuity and differentiability of a piecewise function at the break point, write the tangent line, and use the Fundamental Theorem for the average of the derivative",
+    "topic": "2.4",
+    "skill": "3.B",
+    "student_thinking": [
+     "Evaluate the one-sided limits and f(1)",
+     "Differentiate each piece and compare the one-sided derivatives",
+     "Write the tangent line from f(1) and f'(1)",
+     "Use f(4) - f(0) for the integral of the derivative"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the pieces were chosen so that the function is continuous and differentiable at x = 1",
+      "evidence": "the conditions 1 + p = q + r and 2 + p = q/2 hold by construction"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "piecewise definition"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the one-sided difference quotients (step 1e-7) and the numerical average of a central-difference derivative on [0, 4] (independent of the formulas for the derivatives and of the Fundamental Theorem)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "3.B",
+       "3.C"
+      ],
+      "topics": [
+       "1.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "f(1) = 1 -4 = -3; the left limit is -3; the right limit is -4(1) +1 = -3; the one-sided limits equal f(1), so f is continuous at x = 1."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Evaluates f(1) and the left-hand limit",
+        "elements": [
+         "f(1) = -3",
+         "left limit = -3"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Right-hand limit equal to f(1): the condition for continuity is met",
+        "elements": [
+         "right limit = -3"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "3.B",
+       "3.C",
+       "3.E"
+      ],
+      "topics": [
+       "2.4"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "For x < 1, f'(x) = 2x -4, so the left derivative at 1 is -2; for x > 1, f'(x) = -4/(2 sqrt x), so the right derivative at 1 is -2. They are equal and f is continuous, so f is differentiable at x = 1."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Left-hand derivative at x = 1",
+        "elements": [
+         "-2"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Right-hand derivative at x = 1",
+        "elements": [
+         "-2"
+        ]
+       },
+       {
+        "row_id": "b3",
+        "points": 1,
+        "criterion": "Justification and conclusion: the one-sided derivatives are equal, so f is differentiable (yes)",
+        "elements": [
+         "one-sided derivatives are equal",
+         "yes"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The tangent line is y = -3 + -2(x - 1)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Uses the slope f'(1) from part (b)",
+        "elements": [
+         "-2"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Equation of the tangent line",
+        "elements": [
+         "y = -3 + -2(x - 1)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.E",
+       "2.B"
+      ],
+      "topics": [
+       "6.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(1/4) ∫₀⁴ f'(x) dx = (f(4) - f(0))/4 = (-7 - 0)/4 = -7/4."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Uses the Fundamental Theorem: the integral of f' from 0 to 4 is f(4) - f(0)",
+        "elements": [
+         "f(4) - f(0)",
+         "f(4) = -7"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Value of the average",
+        "elements": [
+         "-7/4"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 6000,
+   "pack_id": "frq_piecewise_diff-s6000"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_piecewise_diff",
+   "facts": [
+    "p=-4",
+    "q=-4",
+    "r=1",
+    "f(1)=-3",
+    "f'(1)=-2",
+    "avg=-7/4"
+   ],
+   "seed": 6000
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 9-point piecewise FRQ passes all five criteria. The key is consistent and the solver agreed on every part. The 2/3/2/2 point split and rubric rows are reasonable, and the task is calculator-free with simple numbers. Part (d) uses the Fundamental Theorem (6.7), which the bundle lists as a related topic. It is valid because f' is continuous on [0,4].",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts (a) and (b) target justification of continuity and differentiability (3.B). Parts (c) and (d) use the related topics 2.7 and 6.7, which the bundle allows."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are correct and unique, and the rubric rows are consistent with the model answers. The FTC use in (d) is valid because f' is continuous on [0,4]."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The piecewise definition is complete in both the data and the prompt, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric rows are adequate, though common_errors are empty."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits about 15 minutes with no calculator needed and small numbers."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part piecewise item. It requires the continuity definition (limits from both sides equal f(1)), comparing one-sided derivatives to justify differentiability, a tangent line, and applying the average value with FTC to f' (the integral of f' equals f(4)-f(0)). Concept depth is moderate, with a few representation changes between limits, derivatives and integrals. Arithmetic is light and the wording is clear, so the difficulty comes from the concepts, not unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f02-k1",
+  "cellId": "ap_calculus_ab-f02",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "2.4",
+  "unitCode": "2",
+  "skillPrimary": "3.B",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "frq_piecewise_diff",
+  "wording": "mixed",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part FRQ-style piecewise item. (a) Verify the three-part continuity definition. (b) Compare one-sided derivatives (3 and 3) and conclude differentiability, which requires choosing the correct procedure and justification. (c) Tangent line from f(1)=2 and f'(1)=3. (d) Average value of f' on [0,4] via FTC: (f(4)-f(0))/4 = 2, which requires recognizing the continuity hypothesis across the break. Numbers are clean, no long arithmetic, no out-of-scope tools beyond the allowed related topics. Moderate depth and several representation changes fit a full-mock level.",
+  "payload": {
+   "archetype": "frq_piecewise_diff",
+   "template": "piecewise_function_differentiability",
+   "topic": "2.4",
+   "extra_topics": [
+    "1.11",
+    "2.7",
+    "6.7"
+   ],
+   "skill": "3.B",
+   "representative_skill": "3.B",
+   "calculator": "not_allowed",
+   "title": "Piecewise function: continuity, differentiability, tangent line, average value of the derivative",
+   "stimulus": {
+    "kind": "text",
+    "description": "A piecewise defined function",
+    "data": {
+     "definition": "f(x) = x^2 +1x for x <= 1; f(x) = 6sqrt(x) -4 for x > 1"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Let $f$ be the function defined by $f(x)=\\begin{cases} x^{2}+1x, & x\\le 1\\\\ 6\\sqrt{x}-4, & x>1 \\end{cases}$. Use the definition of continuity to show that $f$ is continuous at $x=1$.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.C"
+     ],
+     "model_answer": "f(1) = 1 +1 = 2; the left limit is 2; the right limit is 6(1) -4 = 2; the one-sided limits equal f(1), so f is continuous at x = 1.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Evaluates f(1) and the left-hand limit",
+       "required_elements": [
+        "f(1) = 2",
+        "left limit = 2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Right-hand limit equal to f(1): the condition for continuity is met",
+       "required_elements": [
+        "right limit = 2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "1.11"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Is $f$ differentiable at $x=1$? Justify your answer.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.C",
+      "3.E"
+     ],
+     "model_answer": "For x < 1, f'(x) = 2x +1, so the left derivative at 1 is 3; for x > 1, f'(x) = 6/(2 sqrt x), so the right derivative at 1 is 3. They are equal and f is continuous, so f is differentiable at x = 1.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Left-hand derivative at x = 1",
+       "required_elements": [
+        "3"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Right-hand derivative at x = 1",
+       "required_elements": [
+        "3"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b3",
+       "points": 1,
+       "criterion": "Justification and conclusion: the one-sided derivatives are equal, so f is differentiable (yes)",
+       "required_elements": [
+        "one-sided derivatives are equal",
+        "yes"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b2",
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "2.4"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Write an equation for the line tangent to the curve $y=f(x)$ at $x=1$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "The tangent line is y = 2 + 3(x - 1).",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Uses the slope f'(1) from part (b)",
+       "required_elements": [
+        "3"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Equation of the tangent line",
+       "required_elements": [
+        "y = 2 + 3(x - 1)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "2.7"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Find the average value of $f'(x)$ on the interval $0\\le x\\le 4$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "2.B"
+     ],
+     "model_answer": "(1/4) ∫₀⁴ f'(x) dx = (f(4) - f(0))/4 = (8 - 0)/4 = 2.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Uses the Fundamental Theorem: the integral of f' from 0 to 4 is f(4) - f(0)",
+       "required_elements": [
+        "f(4) - f(0)",
+        "f(4) = 8"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Value of the average",
+       "required_elements": [
+        "2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "6.7"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "p=1",
+    "q=6",
+    "r=-4",
+    "f(1)=2",
+    "f'(1)=3",
+    "avg=2"
+   ],
+   "blueprint": {
+    "id": "frq_piecewise_diff",
+    "subject": "ap_calculus_ab",
+    "kind": "frq_bundle",
+    "concept": "Check continuity and differentiability of a piecewise function at the break point, write the tangent line, and use the Fundamental Theorem for the average of the derivative",
+    "topic": "2.4",
+    "skill": "3.B",
+    "student_thinking": [
+     "Evaluate the one-sided limits and f(1)",
+     "Differentiate each piece and compare the one-sided derivatives",
+     "Write the tangent line from f(1) and f'(1)",
+     "Use f(4) - f(0) for the integral of the derivative"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the pieces were chosen so that the function is continuous and differentiable at x = 1",
+      "evidence": "the conditions 1 + p = q + r and 2 + p = q/2 hold by construction"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "piecewise definition"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the one-sided difference quotients (step 1e-7) and the numerical average of a central-difference derivative on [0, 4] (independent of the formulas for the derivatives and of the Fundamental Theorem)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "3.B",
+       "3.C"
+      ],
+      "topics": [
+       "1.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "f(1) = 1 +1 = 2; the left limit is 2; the right limit is 6(1) -4 = 2; the one-sided limits equal f(1), so f is continuous at x = 1."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Evaluates f(1) and the left-hand limit",
+        "elements": [
+         "f(1) = 2",
+         "left limit = 2"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Right-hand limit equal to f(1): the condition for continuity is met",
+        "elements": [
+         "right limit = 2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "3.B",
+       "3.C",
+       "3.E"
+      ],
+      "topics": [
+       "2.4"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "For x < 1, f'(x) = 2x +1, so the left derivative at 1 is 3; for x > 1, f'(x) = 6/(2 sqrt x), so the right derivative at 1 is 3. They are equal and f is continuous, so f is differentiable at x = 1."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Left-hand derivative at x = 1",
+        "elements": [
+         "3"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Right-hand derivative at x = 1",
+        "elements": [
+         "3"
+        ]
+       },
+       {
+        "row_id": "b3",
+        "points": 1,
+        "criterion": "Justification and conclusion: the one-sided derivatives are equal, so f is differentiable (yes)",
+        "elements": [
+         "one-sided derivatives are equal",
+         "yes"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The tangent line is y = 2 + 3(x - 1)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Uses the slope f'(1) from part (b)",
+        "elements": [
+         "3"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Equation of the tangent line",
+        "elements": [
+         "y = 2 + 3(x - 1)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.E",
+       "2.B"
+      ],
+      "topics": [
+       "6.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(1/4) ∫₀⁴ f'(x) dx = (f(4) - f(0))/4 = (8 - 0)/4 = 2."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Uses the Fundamental Theorem: the integral of f' from 0 to 4 is f(4) - f(0)",
+        "elements": [
+         "f(4) - f(0)",
+         "f(4) = 8"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Value of the average",
+        "elements": [
+         "2"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 6001,
+   "pack_id": "frq_piecewise_diff-s6001"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_piecewise_diff",
+   "facts": [
+    "p=1",
+    "q=6",
+    "r=-4",
+    "f(1)=2",
+    "f'(1)=3",
+    "avg=2"
+   ],
+   "seed": 6001
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, consistent 9-point piecewise-function FRQ. Parts (a) and (b) target continuity and differentiability (3.B), part (c) is the tangent line, and part (d) uses the FTC for the average of f'. The topics are explicitly allowed for this bundle. The only blemish is the awkward \"1x\" notation in the function definition.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts (a) and (b) fit topic 2.4 and skill 3.B. Parts (c) and (d) cover related topics 2.7 and 6.7, which the bundle allows. Each part is judged against its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are verified. f(1) = 2, both one-sided derivatives are 3, the tangent line is y = 2 + 3(x − 1), and the average value of f' is (8 − 0)/4 = 2. The rubric rows are consistent and their dependencies are sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The definition is complete. The \"x^2 +1x\" wording is a minor artifact but unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 9 points over about 15 minutes with no calculator is typical of an AP FRQ, and the arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style piecewise item. (a) Verify the three-part continuity definition. (b) Compare one-sided derivatives (3 and 3) and conclude differentiability, which requires choosing the correct procedure and justification. (c) Tangent line from f(1)=2 and f'(1)=3. (d) Average value of f' on [0,4] via FTC: (f(4)-f(0))/4 = 2, which requires recognizing the continuity hypothesis across the break. Numbers are clean, no long arithmetic, no out-of-scope tools beyond the allowed related topics. Moderate depth and several representation changes fit a full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

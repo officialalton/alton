@@ -4,8 +4,12 @@ import TeacherShell from "./TeacherShell";
 import type { TeacherDashboardData } from "./dashboard-data";
 import type { RosterStudent } from "./roster-data";
 
+const pushMock = vi.fn();
+vi.mock("./mock-exam-tab-actions", () => ({
+  loadTeacherMockExamTabDataAction: vi.fn(async () => ({ students: [], examSets: [], attemptsByStudent: {} })),
+}));
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+  useRouter: () => ({ push: pushMock, replace: vi.fn() }),
 }));
 
 vi.mock("@/app/login/actions", () => ({
@@ -34,6 +38,8 @@ const roster: RosterStudent[] = [
         subjectName: "SAT Math",
         currentSession: 8,
         totalSessions: 12,
+        source: "legacy",
+        curriculumSourceLabel: null,
       },
     ],
   },
@@ -48,46 +54,189 @@ const baseProps = {
   reviews: {},
   studentFeedback: {},
   reviewedSessionIds: [],
+  currentAssignments: [],
+  pastAssignments: [],
+  availabilityRules: [],
+  availabilityExceptions: [],
+  availabilityTimezone: "America/Los_Angeles",
+  lessonSchedule: [],
+  materialsLibraryTree: [],
+  vocabOverview: { students: [], books: [], recentQuizzes: [] },
 };
 
+vi.mock("@/lib/timezone-actions", () => ({
+  getMyTimezoneSettings: vi.fn(async () => ({ profileTimezone: null, householdId: null, householdDefaultTimezone: null, isPrimaryGuardian: false, resolvedTimezone: "America/Los_Angeles" })),
+  updateMyTimezone: vi.fn(async () => {}),
+  updateHouseholdDefaultTimezone: vi.fn(async () => {}),
+}));
+
+describe("TeacherShell — 시간대 온보딩", () => {
+  it("저장된 시간대가 없으면 배너를 보이고, 누르면 브라우저 감지값이 미리 선택된 시간대 모달이 열린다(다른 탭은 그대로 보임)", async () => {
+    const spy = vi.spyOn(Intl.DateTimeFormat.prototype, "resolvedOptions").mockReturnValue({ timeZone: "Asia/Seoul" } as Intl.ResolvedDateTimeFormatOptions);
+    render(<TeacherShell {...baseProps} timezoneSaved={false} />);
+    expect(screen.getByTestId("teacher-timezone-banner")).toBeInTheDocument();
+    expect(screen.getByText("Hello, 박서연")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Set time zone"));
+    const select = (await screen.findByDisplayValue(/Asia\/Seoul/)) as HTMLSelectElement;
+    expect(select.value).toBe("Asia/Seoul");
+    expect(screen.queryByText(/개인 설정 해제/)).toBeNull();
+    spy.mockRestore();
+  });
+
+  it("이미 시간대가 있는 선생님(기본값)에게는 배너가 없다", () => {
+    render(<TeacherShell {...baseProps} />);
+    expect(screen.queryByTestId("teacher-timezone-banner")).toBeNull();
+  });
+});
+
 describe("TeacherShell", () => {
-  it("사이드바 7개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  // 2026-09-12(P4-2): '정산' 탭이 실제로 구현되어 사이드바에 노출된다 —
+  // 이전(2026-09-10 UI/UX 정리 1차)에는 미구현이라 숨겨두고 이 스펙이 그 부재를
+  // 못박고 있었다. 나머지 라벨 정리('배정'→'담당 학생' 등)는 그대로 유지한다.
+  it("2026-09-12(P4-2): 사이드바에 '정산'을 포함한 항목을 보여주고, 기본 탭은 홈이다('배정'은 '담당 학생'으로)", () => {
     render(<TeacherShell {...baseProps} />);
-    ["홈", "일정", "수업", "학생", "커리큘럼", "교재", "정산"].forEach((label) =>
-      expect(screen.getByText(label)).toBeInTheDocument()
+    ["Home", "My Students", "Schedule", "Availability", "Curriculum", "Materials", "Payouts"].forEach((label) =>
+      expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
-    expect(screen.getByText("박서연 선생님, 안녕하세요")).toBeInTheDocument();
+    expect(screen.queryByText("학생")).toBeNull();
+    expect(screen.queryByText("수업 일정")).toBeNull();
+    expect(screen.queryByText("배정")).toBeNull();
+    expect(screen.getByText("Hello, 박서연")).toBeInTheDocument();
   });
 
-  it("수업 탭을 누르면 ScheduleTab이 렌더링된다", () => {
+  it("수업 탭을 누르면 딱 두 개의 서브탭('예정 수업'/'지난 수업')만 보이고, 지난 수업 서브탭에는 레거시 지각·노쇼 신고 기능이 흡수되어 있다", () => {
     render(<TeacherShell {...baseProps} />);
-    fireEvent.click(screen.getByText("수업"));
-    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("Schedule")[0]);
+    expect(screen.getByText("Upcoming")).toBeInTheDocument();
+    expect(screen.getByText("Past")).toBeInTheDocument();
+    expect(screen.getByText("Upcoming list")).toBeInTheDocument();
+    expect(screen.queryByText("지난 수업 기록·신고")).toBeNull();
+    expect(screen.queryByText("예정/지난 수업")).toBeNull();
+
+    fireEvent.click(screen.getByText("Past"));
+    expect(screen.getByText("No past lessons.")).toBeInTheDocument();
   });
 
-  it("학생 탭을 누르면 로스터가 렌더링된다", () => {
-    render(<TeacherShell {...baseProps} />);
-    fireEvent.click(screen.getByText("학생"));
-    expect(screen.getByText("지훈")).toBeInTheDocument();
-    expect(screen.getByText(/SAT Math · 8\/12회차/)).toBeInTheDocument();
+  it("담당 학생 탭에서 '커리큘럼 보기'는 없고 '커리큘럼' 버튼으로만 이동한다(M4 골든패스 #6/#7, 2026-09-22 카드 재구성)", () => {
+    const currentAssignments = [
+      {
+        assignmentId: "ta1",
+        subjectEnrollmentId: "se1",
+        studentId: "st1",
+        studentName: "지훈",
+        studentGrade: "11학년",
+        studentPhone: "010-0000-0000",
+        subjectId: "sub1",
+        subjectName: "SAT Math",
+        status: "active" as const,
+        effectiveFrom: "2026-08-01T00:00:00Z",
+        effectiveUntil: null,
+        hasLegacyCurriculum: true,
+      },
+    ];
+    render(<TeacherShell {...baseProps} currentAssignments={currentAssignments} />);
+    fireEvent.click(screen.getAllByText("My Students")[0]);
+    expect(screen.queryByText("커리큘럼 보기")).not.toBeInTheDocument();
+    // 좌측 nav와 모바일 하단 nav에도 같은 라벨의 "커리큘럼" 버튼이 있어(둘 다
+    // 단순 탭 전환), 학생 행의 "커리큘럼" 버튼(운영 커리큘럼 점프)은 마지막
+    // 항목이다.
+    const curriculumButtons = screen.getAllByText("Curriculum");
+    fireEvent.click(curriculumButtons[curriculumButtons.length - 1]);
+    expect(screen.getByText("지훈 / SAT Math")).toBeInTheDocument();
   });
 
-  it("로스터의 과목을 클릭하면 커리큘럼 탭의 학생별 뷰로 이동한다", () => {
-    render(<TeacherShell {...baseProps} />);
-    fireEvent.click(screen.getByText("학생"));
-    fireEvent.click(screen.getByText(/SAT Math · 8\/12회차/));
-    expect(screen.getByText("학생별")).toBeInTheDocument();
-  });
-
-  it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {
-    render(<TeacherShell {...baseProps} />);
-    fireEvent.click(screen.getByText("교재"));
-    expect(screen.getByText("교재 탭은 준비 중입니다.")).toBeInTheDocument();
+  it("2026-09-09(UAT 지적): '교재' 탭에서 담당 과목의 공개된 교재를 볼 수 있다", () => {
+    render(
+      <TeacherShell
+        {...baseProps}
+        materialsLibraryTree={[
+          {
+            subjectId: "sub1",
+            subjectName: "SAT Math",
+            flatDocIds: ["doc1"],
+            units: [
+              {
+                unitId: "u1",
+                unitTitle: "2회차",
+                keywordGroups: [
+                  { keywordId: "k1", label: "Quadratics", docs: [{ id: "doc1", title: "이차방정식 개념", kind: "html" }] },
+                ],
+              },
+            ],
+          },
+        ]}
+      />
+    );
+    fireEvent.click(screen.getAllByText("Materials")[0]);
+    expect(screen.getByText("SAT Math")).toBeInTheDocument();
+    expect(screen.getByText(/이차방정식 개념/)).toBeInTheDocument();
   });
 
   it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {
     render(<TeacherShell {...baseProps} />);
-    fireEvent.click(screen.getByText("박서연 선생님 ▾"));
-    expect(screen.getByText("로그아웃")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("박서연 ▾"));
+    expect(screen.getAllByText("Log out").length).toBeGreaterThan(0);
+  });
+
+  // 2026-09-21(UAT 지적) — 모의고사는 독립 라우트가 아니라 일반 탭이다(좌측 네비 유지).
+  // 사이드바 클릭은 다른 탭과 똑같이 `?tab=mock-exam` 탭 전환으로 동작해야 한다.
+  it("사이드바 'Mock Exams'를 누르면 탭 전환(?tab=mock-exam)으로 동작한다 — 독립 라우트로 나가지 않는다", () => {
+    pushMock.mockClear();
+    render(<TeacherShell {...baseProps} />);
+    fireEvent.click(screen.getAllByText("Mock Exams")[0]);
+    expect(pushMock).toHaveBeenCalledWith("?tab=mock-exam", { scroll: false });
+  });
+
+  it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {
+    render(<TeacherShell {...baseProps} />);
+    expect(screen.getAllByRole("button", { name: new RegExp("Home") })[0]).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getAllByRole("button", { name: new RegExp("My Students") })[0]
+    ).not.toHaveAttribute("aria-current");
+
+    fireEvent.click(screen.getAllByRole("button", { name: new RegExp("My Students") })[0]);
+    expect(screen.getAllByRole("button", { name: new RegExp("My Students") })[0]).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getAllByRole("button", { name: new RegExp("Home") })[0]
+    ).not.toHaveAttribute("aria-current");
+  });
+});
+
+describe("TeacherShell — 계정 메뉴 닫힘", () => {
+  function trigger() {
+    return screen.getAllByRole("button").find((b) => b.hasAttribute("data-account-menu-trigger"))!;
+  }
+  it("두 번째 클릭·바깥 클릭·Escape(포커스 복귀)로 닫히고 aria-expanded가 따라간다", () => {
+    render(<TeacherShell {...baseProps} />);
+    const t = trigger();
+    fireEvent.click(t);
+    expect(screen.getAllByText("Log out").length).toBeGreaterThan(0);
+    expect(t).toHaveAttribute("aria-expanded", "true");
+    fireEvent.click(t);
+    expect(screen.queryAllByText("Log out").length).toBe(0);
+    expect(t).toHaveAttribute("aria-expanded", "false");
+
+    fireEvent.click(t);
+    fireEvent.mouseDown(document.body);
+    expect(screen.queryAllByText("Log out").length).toBe(0);
+
+    fireEvent.click(t);
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(screen.queryAllByText("Log out").length).toBe(0);
+    expect(document.activeElement?.hasAttribute("data-account-menu-trigger")).toBe(true);
+  });
+  it("메뉴 안쪽 누름은 바깥 클릭으로 치지 않고, 탭을 바꾸면 닫힌다", () => {
+    render(<TeacherShell {...baseProps} />);
+    fireEvent.click(trigger());
+    fireEvent.mouseDown(screen.getAllByText("Time zone settings")[0]);
+    expect(screen.getAllByText("Log out").length).toBeGreaterThan(0);
+    fireEvent.click(screen.getAllByRole("button", { name: /My Students/ })[0]);
+    expect(screen.queryAllByText("Log out").length).toBe(0);
   });
 });

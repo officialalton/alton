@@ -36,14 +36,14 @@ cat /tmp/docusign_public.pem
 
 - [ ] **Step 2: 공개키를 DocuSign 앱 설정에 등록**
 
-사용자에게 안내: DocuSign 관리 콘솔(`https://apps.docusign.com` → 설정 → Apps and Keys)에서 Integration Key(`0389c0a9-f46a-4c03-bff2-2cc705f39678`)를 열고, "RSA 키페어 추가"에 Step 1에서 출력된 공개키 전체를 붙여넣는다.
+사용자에게 안내: DocuSign 관리 콘솔(`https://apps.docusign.com` → 설정 → Apps and Keys)에서 Integration Key(`<PRODUCTION_DOCUSIGN_INTEGRATION_KEY>`)를 열고, "RSA 키페어 추가"에 Step 1에서 출력된 공개키 전체를 붙여넣는다.
 
 - [ ] **Step 3: 최초 1회 사용자 동의(consent) URL 생성 및 승인**
 
 인증 서버는 프로덕션 계정이면 `account.docusign.com`, 데모/개발자 계정이면 `account-d.docusign.com`이다(사용자에게 어느 쪽인지 확인 — Base URI가 `na4.docusign.net`이므로 프로덕션 계정일 가능성이 높다). 아래 URL의 `{authServer}`와 `{redirectUri}`(DocuSign 앱에 등록된 리다이렉트 URI 아무거나, 예: `https://alton-ecru.vercel.app/login`)를 채워 사용자에게 브라우저로 열고 로그인/승인하게 한다:
 
 ```
-https://{authServer}/oauth/auth?response_type=code&scope=signature%20impersonation&client_id=0389c0a9-f46a-4c03-bff2-2cc705f39678&redirect_uri={redirectUri}
+https://{authServer}/oauth/auth?response_type=code&scope=signature%20impersonation&client_id=<PRODUCTION_DOCUSIGN_INTEGRATION_KEY>&redirect_uri={redirectUri}
 ```
 
 - [ ] **Step 4: 환경변수 등록 (로컬 `.env.local` + Vercel production)**
@@ -51,9 +51,9 @@ https://{authServer}/oauth/auth?response_type=code&scope=signature%20impersonati
 `.env.local`에 추가(줄바꿈은 `\n`으로 이스케이프):
 
 ```
-DOCUSIGN_INTEGRATION_KEY=0389c0a9-f46a-4c03-bff2-2cc705f39678
-DOCUSIGN_USER_ID=87b8e4d9-7992-44b9-a90b-13dab686b3f6
-DOCUSIGN_ACCOUNT_ID=74f2ac04-13cd-4495-ba70-d092a648b79f
+DOCUSIGN_INTEGRATION_KEY=<PRODUCTION_DOCUSIGN_INTEGRATION_KEY>
+DOCUSIGN_USER_ID=<PRODUCTION_DOCUSIGN_USER_ID>
+DOCUSIGN_ACCOUNT_ID=<PRODUCTION_DOCUSIGN_ACCOUNT_ID>
 DOCUSIGN_BASE_URI=https://na4.docusign.net
 DOCUSIGN_AUTH_SERVER=account.docusign.com
 DOCUSIGN_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----\n"
@@ -64,9 +64,9 @@ DOCUSIGN_WEBHOOK_TOKEN=<openssl rand -hex 32 로 생성한 임의 문자열>
 
 ```bash
 cat /tmp/docusign_private.pem | npx vercel env add DOCUSIGN_PRIVATE_KEY production
-echo "0389c0a9-f46a-4c03-bff2-2cc705f39678" | npx vercel env add DOCUSIGN_INTEGRATION_KEY production
-echo "87b8e4d9-7992-44b9-a90b-13dab686b3f6" | npx vercel env add DOCUSIGN_USER_ID production
-echo "74f2ac04-13cd-4495-ba70-d092a648b79f" | npx vercel env add DOCUSIGN_ACCOUNT_ID production
+echo "<PRODUCTION_DOCUSIGN_INTEGRATION_KEY>" | npx vercel env add DOCUSIGN_INTEGRATION_KEY production
+echo "<PRODUCTION_DOCUSIGN_USER_ID>" | npx vercel env add DOCUSIGN_USER_ID production
+echo "<PRODUCTION_DOCUSIGN_ACCOUNT_ID>" | npx vercel env add DOCUSIGN_ACCOUNT_ID production
 echo "https://na4.docusign.net" | npx vercel env add DOCUSIGN_BASE_URI production
 echo "account.docusign.com" | npx vercel env add DOCUSIGN_AUTH_SERVER production
 ```

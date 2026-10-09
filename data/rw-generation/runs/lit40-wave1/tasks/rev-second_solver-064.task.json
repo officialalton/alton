@@ -1,0 +1,300 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "second_solver",
+ "runId": "lit40-wave1",
+ "taskId": "rev-second_solver-064",
+ "chunkId": "rev-second_solver-064",
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-064.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "opus|fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "boolean",
+    "confidence": "high|medium|low",
+    "note": "풀이 한 줄"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-08-046",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Once, at the hour the ward lights dim to amber,\nMingyu asked me for a map of the old creek\nthat cut through his part of Shanghai before the city paved it.\nI am Yuxuan, a nurse; I keep charts, not maps,\nbut I drew what he described on the back of one:\na footbridge, a willow, the dry stones he crossed in August\nwhen the water had gone somewhere else to sleep.\nHe traced it with a finger that no longer trusted itself.\nThat is the way, he said, and closed his eyes.\nI folded the chart into his pocket.\nEvery night since, I have walked a riverbed of linoleum,\nlistening for the water to come home.",
+   "question": "As used in the text, the phrase “a riverbed of linoleum” most nearly suggests that the speaker",
+   "options": [
+    "resents the hospital for replacing the creek that once ran there.",
+    "has begun to sleepwalk through the ward during her night shifts.",
+    "still carries the patient's remembered route through her rounds.",
+    "believes the patient's map was too inaccurate to be followed."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-048",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Two rules governed the salt flat behind the house I rented outside Port of Spain: never walk on a pan that is still drying, and never rake against the wind. Shanice, my landlord, taught me both in my first month there, though I had only asked her about the leaking roof. She was the last person on that stretch of coast who still harvested salt by hand, and her own children had moved to offices in the city. She called me Alisha-girl, as if I were a niece rather than a tenant. Each evening she handed me the long wooden rake and corrected my wrist without comment. I assumed she simply wanted cheap help. Then, the summer she grew too ill to stand in the heat, she gave me the rake for good and called it the only lease she had ever meant. I rented that house eleven more years and never asked about the roof again.",
+   "question": "As used in the text, the phrase “the only lease she had ever meant” most nearly suggests that Shanice viewed",
+   "options": [
+    "teaching her craft as the true bond between her and the narrator.",
+    "the rental contract as a legal burden she wished to end quickly.",
+    "the rake as payment owed to her for many years of unpaid rent.",
+    "her illness as a reason to sell the salt flat to the narrator."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-054",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "On Tuesdays at four, Matheus brought the pharmacy order to the hospital waiting room in Porto Alegre, and on Tuesdays at four Putri was already there, folding the free newspapers into neat stacks for the volunteers. She had started the chore while her husband was a patient upstairs; she kept at it, she told Matheus briskly, only because the stacks were always a mess and someone had to fix them. He usually helped with the last pile before running to his next delivery. This week he arrived to find the papers already folded and Putri sitting with her hands empty in her lap. The volunteers had hired a cleaner, she said. Then, after a pause, she asked whether he might sit a moment anyway, since she no longer knew what to do with four o'clock.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from brisk practicality to a quiet admission of loneliness.",
+    "It moves from cheerful nostalgia to open anger at the volunteers.",
+    "It moves from anxious worry about a patient to calm, settled relief.",
+    "It moves from playful teasing to stiff, formal politeness toward Matheus."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-055",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "When Soren came home to the beekeeper's yard in Manila, he went straight to the hive their father had built, the one whose roof had split in the typhoon two years before. Kaya watched from the porch as he measured, sawed, and nailed with the energy of a man following orders, whistling and announcing every step: new cedar, tighter joints, good as before. She brought him water and laughed when a bee settled in his hair. By late afternoon the roof was whole. Soren stood back to admire it, and the whistling stopped. The bees had moved long ago to a hollow in the mango tree, and none of them came near the box. He set the hammer down very carefully, as though it might break, and asked Kaya, without turning, how long they had been gone.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from tense suspicion between siblings to relieved good cheer.",
+    "It moves from bustling confidence to a subdued, sorrowful recognition.",
+    "It moves from mournful reflection on the past to firm optimism.",
+    "It moves from playful rivalry to open resentment of his sister."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-056",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Dayoung had not spoken to me for two years when she mailed me a swimsuit, plain navy and one size too large. I read it as an insult, a remark on the weight I had gained after my divorce, and I left it in its box. Last month, in Busan for our aunt's birthday, I went alone to the salt-water pool by the breakwater where we had swum as girls. Dongsik, the attendant who had worked there since we were children, recognized me at once. He said my sister came every Sunday and always asked whether I had been in. Then he pointed to the lockers. Hers still bore a tag with both our names, written in the round letters of a ten-year-old. I stood a long time in the wet air, thinking of the navy suit, bought large the way our mother always bought clothes for girls she expected to grow.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from nostalgic warmth to bitter disappointment in a sister.",
+    "It moves from detached humor to anxious urgency about a reunion.",
+    "It moves from wounded suspicion to softened, regretful understanding.",
+    "It moves from calm curiosity to outright joy at meeting a sister."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-057",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Although the night-shift pharmacy on Calle Zanja sold only aspirin and cough syrup after midnight, Wenhua sat there every night that week, because its phone was the only one on the block that still worked. His daughter sat beside him with a dictionary, since the call would come from the embassy in English. Booker, the pharmacist, pretended not to notice them and kept the radio low. For hours nothing happened: the fan turned, a taxi driver bought antacid, Wenhua smoothed the same receipt over and over. At four in the morning the phone rang. His daughter listened, said yes three times, and hung up. Before she could translate, Wenhua read her face and began to laugh, and Booker, who had understood nothing, turned the radio all the way up.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It introduces a conflict between a father and daughter and then shows a stranger resolving it.",
+    "It describes a pharmacy's nightly routine and then explains why that routine is about to end.",
+    "It recounts a phone call in detail and then reflects on its lasting effects on a family.",
+    "It depicts a long, uneventful wait and then shifts to the moment the news arrives."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-059",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "\"Play the new one,\" the girl at the corner table called, the moment Thuy and Somchai finished their set at the roadside diner outside Surabaya. Somchai smiled and said the new song wasn't ready yet. He had said the same thing at every stop for a month. Thuy tuned her guitar and said nothing; she had stopped asking him where the new songs were. The girl, maybe eight, frowned at him. __Then why do you always say it's almost done?__ Her mother hushed her, but the question stayed on the table like spilled tea. Somchai laughed too loudly and began packing the amplifier. Thuy watched him wind the cable around his arm, tighter and tighter, and understood that there was no new song, and perhaps had not been one for a long time.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It reveals the girl's boredom with songs the duo has played too often.",
+    "It points out a flaw in Somchai's excuse that leads to Thuy's realization.",
+    "It shifts attention from the musicians to the girl's strict, watchful mother.",
+    "It suggests that the girl has already heard an early version of the song."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-060",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "We had been in Malek's radio repair shop in Woodstock for an hour, Amara and I, and the coach still had not mentioned the anniversary. It was ten years since the club's only championship; the board wanted a ceremony in Cape Town, and Amara, benched all season, had been asked to lead the parade. She wanted to refuse. Malek, who had coached her since she was eleven, kept his hands busy on a cracked radio from the stadium's old press box. __He had repaired that same radio before every final he had ever coached.__ When it finally crackled to life, he turned the dial to the station that had called the championship and set it on the counter between them. Amara listened to the old match replaying in a broadcaster's anniversary special and, after a long while, asked him what she should wear.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It explains why Amara has been kept on the bench for the whole season.",
+    "It suggests that Malek would rather fix radios than coach the team.",
+    "It hints that Malek's repair is his indirect answer about the anniversary.",
+    "It shows that the press box radio was damaged during the championship."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-061",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Saga had been folding dumplings wrong for three weeks before she told me about the offer. A hotel kitchen in Seoul wanted her, with a salary I could not match and a uniform with her name stitched on the pocket. I said nothing for a while and kept skimming the broth, which needs skimming whether or not anyone is leaving. When I was her age, I left a stall like this one and came back after a year, ashamed of how little the city had taught me. I did not tell her that. Some lessons spoil when they are handed over. Instead I showed her once more how to pinch the edge so the seam holds in boiling water, and I watched her hands rather than her face. Outside, the wind off the harbor rattled the plastic awning, and a customer called for a second bowl.",
+   "question": "Which choice best describes the narrator's attitude toward Saga's offer?",
+   "options": [
+    "Open resentment toward Saga for considering a job that would leave the stall short of help",
+    "Quiet relief that Saga will soon leave a stall where she has struggled to learn the work",
+    "Private unease held in check by a belief that Saga must reach her own decision",
+    "Firm certainty that Saga will return once she finds the city has little to teach her"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-062",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "When Amelie arrived at the laundromat on Calle Feria each afternoon, her grandfather Ivan was already scolding the dryers in a language she was only half learning. He had kept the place open for thirty-one years, through two floods and a decade in which the neighbors bought machines of their own. His ledger was a schoolchild's notebook, and its columns had been thinning for years; still he wrote the day's few coins in a careful hand, as if neatness might persuade the numbers. Amelie practiced verbs by reading his labels aloud: wash, wait, return. He corrected her accent with more patience than he ever showed the machines. Neither of them mentioned the letter from the landlord, folded under the coin tray where it had rested for a month. Down the street, a bakery lowered its shutter, and the smell of anise drifted in with the heat.",
+   "question": "Which choice best describes the narrator's attitude toward Ivan's efforts to keep the laundromat open?",
+   "options": [
+    "Mocking, treating his careful bookkeeping as proof that he misunderstands basic arithmetic",
+    "Admiring, presenting his persistence as certain to restore the business to its old success",
+    "Indifferent, recording his habits without hinting that the business faces real difficulty",
+    "Tender yet realistic, honoring his diligence while noting signs that the business is failing"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-063",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Film canisters rattled on the shelf when the power died, and I found myself stuck in a projection booth in Lima with a stranger named Sipho, who had come to repair the lens. For two hours we waited for the street to come back on. He told me that in his family a goodbye was never said at the door; you walked the guest to the corner, so the parting happened in open air. I had always considered such rituals a little theatrical. Yet when the lights returned and he packed his tools, I caught myself following him down the narrow stairs, past the ticket window, all the way to the end of the block. I am still not sure whose custom I was honoring. A bus went by with its windows fogged, carrying no one I knew.",
+   "question": "Which choice best describes the narrator's attitude toward Sipho's custom of parting?",
+   "options": [
+    "Former skepticism that has softened into a reluctant, almost unconscious acceptance",
+    "Steady contempt for a custom that the narrator regards as needlessly theatrical",
+    "Nostalgic longing for a family tradition the narrator practiced as a young child",
+    "Polite curiosity that never affects how the narrator actually behaves toward Sipho"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-064",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Aunt Themba never wasted water. Each morning in the community garden off Mirpur Road, she filled one dented can and divided it among the chilies, the gourds, and Edith's struggling mint, giving the mint the least. Edith, who cooked for the stall her aunt ran, assumed this was a judgment on her. That afternoon a neighbor mentioned, as if everyone knew, that Themba had once given up a place at a teachers' college so that Edith's mother could finish school instead. Edith said nothing. Later, watering alone, she noticed that her aunt's own plot, the farthest from the tap, had always received the last and smallest share. A rickshaw bell sounded beyond the fence, and pigeons lifted off the tin roof of the tool shed.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To recount how Edith learns that a neighbor knows private details of her family's past",
+    "To show Edith beginning to see her aunt's strictness as a pattern of quiet self-denial",
+    "To describe the daily routine of tending a crowded community garden in Dhaka",
+    "To suggest that every family hides sacrifices its younger members will never learn of"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-08-065",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Who pays a tutor in oranges? Miriam had asked this aloud the first week, when Fiorella refused her envelope of coins and accepted only a sack of fruit from the barge's hold. Since then the tutor had come every Thursday, climbing down the ladder with her books wrapped against the river damp, and Miriam's brother had begun reading the cargo lists to the crew with sudden pride. Miriam kept the coins in a tin, telling herself she would insist next time. But this evening she found her brother's old shoes, the pair that had split at the toe, replaced by a sturdy one, with a note in Fiorella's handwriting tucked inside: outgrown by my nephew. Miriam set the tin back on its shelf, unopened. Along the bank, a crane swung a pallet of cement toward a waiting truck.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To recount how Miriam's brother improves his reading by studying cargo lists with the crew",
+    "To explain why Fiorella prefers to be paid in fruit rather than in coins for her lessons",
+    "To trace Miriam's shift from wanting to settle a debt to accepting Fiorella's kindness",
+    "To suggest that generosity between strangers always means more than any form of payment"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-08-066",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Moira and I spent most of one winter competing to sell pastries in the lobby of a cinema in Samarkand that showed films only on weekends. Each Friday I arrived early to claim the table beside the poster of a forgotten comedy, and each Friday she was already there, her trays set out in tight rows. I used to count her customers instead of serving my own. In February the projector broke, and for three weeks no one came at all. We sat on opposite benches, then on the same bench, trading samples out of boredom. I learned that she folded her dough twice where I folded mine four times, and that her version was better. When the films returned, I set up wherever there was space. Snow slid from the marquee in long, soft sheets.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe the narrator's rivalry with Moira over the best table in the cinema lobby",
+    "To explain the differences between two techniques for folding pastry dough",
+    "To argue that competition between small businesses usually harms everyone involved",
+    "To show how an enforced pause loosened the narrator's habit of rivalry with Moira"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-08-067",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "When the monsoon filled our cellar in Karachi, my twin, Nadeesha, and I had been dividing our late father's house for two months without once mentioning why he had left it to us in equal halves. We split the furniture by alternating choices, the books by shelf, the kitchen by drawer. Every list was polite and complete, and none of it touched the subject. The flood made lists useless. We waded in together, passing up boxes neither of us had labeled, and in one of them were letters he had written to each of us and never sent. We read them sitting on the stairs, our feet still in the water, and for the first time that year we argued, loudly, about him. By evening the pump had begun its slow work, coughing brown water into the lane.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show how an accident broke the careful silence that had shaped the twins' dealings",
+    "To recount the method the twins used to divide their father's furniture and books",
+    "To describe the damage that a monsoon flood caused to a family home in Karachi",
+    "To suggest that arguments between siblings are a healthy part of every family's grief"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-08-069",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Rumors travel faster than buses. Xinyi, who had spent thirty years as a judge before retiring to the hills outside Hanoi, knew this better than most. Waiting at the mountain stop, she watched Nguyen, the young clerk from the district office, climb the road with his jaw set. Someone had carried to the landlord's wife what Nguyen had said about the landlord, and now the whole village was repeating it. Xinyi offered him half her bench. She had learned long ago that a story repeated often enough grows teeth, and that once it bites, no ruling can unsay it. She told him to apologize before evening, plainly and without excuses. Below them, mist filled the valley, and the bus horn sounded around the last bend.",
+   "question": "As used in the text, the phrase “grows teeth” most nearly suggests that a repeated story",
+   "options": [
+    "becomes more amusing to the villagers each time it is told",
+    "loses its details until it no longer resembles the original remark",
+    "gains the power to cause real harm to the people it concerns",
+    "grows so long that listeners eventually stop paying attention"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-071",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "By noon the riverbed is a road of cracked plates,\nand Clement crosses it the way he pays his debts:\nslowly, one stone at a time, never looking back.\nBogdan follows with the letter in his pocket,\nthe apology he wrote in March and never sent,\nits corners softened now to cloth.\nHe owes his uncle money, and something more,\na sentence he carries like a stone in a shoe,\nsmall enough to hide, too sharp to forget.\nOn the far bank a goat chews a plastic bag,\nand the heat makes the hills tremble.",
+   "question": "As used in the text, the phrase “like a stone in a shoe” most nearly suggests that the unsent apology",
+   "options": [
+    "causes Bogdan a constant, private discomfort that he cannot ignore",
+    "weighs him down so heavily that he cannot cross the dry riverbed",
+    "protects Bogdan from the sharp stones scattered across the crossing",
+    "reminds him only of the sum of money he still owes his uncle"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-08-073",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Secateurs clicked down every row of the vineyard that March in Auckland, but between Leilani and me there was only silence. She had taught me piano for six years, and when she invited me to play at her farewell concert, I said no, too quickly, and then could not explain why. For the whole harvest we worked the same slope without a word. Our silence was a vine grown across the path: each day it thickened, and each day it was harder to step over. I told myself she would speak first. She did not, and on the last afternoon I found her bucket left beside mine, half full of the grapes I had missed. I carried both to the truck. Wasps hung drowsy over the crushed fruit on the tarps.",
+   "question": "As used in the text, the phrase “a vine grown across the path” most nearly suggests that the silence between Leilani and the narrator",
+   "options": [
+    "was a natural part of the quiet, focused work of harvesting grapes",
+    "protected the narrator from having to explain her refusal to anyone",
+    "became a more stubborn obstacle the longer it was left alone",
+    "signaled that their friendship would only continue to grow stronger"
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자(두 번째 풀이자)다. 정답 표시가 없다. 직접 풀고 정답 외에 방어 가능한 선택지가 있는지 판정한다. 다른 풀이자의 답은 모른다.\n청크 rev-second_solver-064 — 18문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-064.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"opus|fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"boolean\",\"confidence\":\"high|medium|low\",\"note\":\"풀이 한 줄\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-08-046 — skill words_in_context · 유형 figurative_language\n[지문]\nOnce, at the hour the ward lights dim to amber,\nMingyu asked me for a map of the old creek\nthat cut through his part of Shanghai before the city paved it.\nI am Yuxuan, a nurse; I keep charts, not maps,\nbut I drew what he described on the back of one:\na footbridge, a willow, the dry stones he crossed in August\nwhen the water had gone somewhere else to sleep.\nHe traced it with a finger that no longer trusted itself.\nThat is the way, he said, and closed his eyes.\nI folded the chart into his pocket.\nEvery night since, I have walked a riverbed of linoleum,\nlistening for the water to come home.\n\n[질문] As used in the text, the phrase “a riverbed of linoleum” most nearly suggests that the speaker\nA) resents the hospital for replacing the creek that once ran there.\nB) has begun to sleepwalk through the ward during her night shifts.\nC) still carries the patient's remembered route through her rounds.\nD) believes the patient's map was too inaccurate to be followed.\n### lit40-medium-08-048 — skill words_in_context · 유형 figurative_language\n[지문]\nTwo rules governed the salt flat behind the house I rented outside Port of Spain: never walk on a pan that is still drying, and never rake against the wind. Shanice, my landlord, taught me both in my first month there, though I had only asked her about the leaking roof. She was the last person on that stretch of coast who still harvested salt by hand, and her own children had moved to offices in the city. She called me Alisha-girl, as if I were a niece rather than a tenant. Each evening she handed me the long wooden rake and corrected my wrist without comment. I assumed she simply wanted cheap help. Then, the summer she grew too ill to stand in the heat, she gave me the rake for good and called it the only lease she had ever meant. I rented that house eleven more years and never asked about the roof again.\n\n[질문] As used in the text, the phrase “the only lease she had ever meant” most nearly suggests that Shanice viewed\nA) teaching her craft as the true bond between her and the narrator.\nB) the rental contract as a legal burden she wished to end quickly.\nC) the rake as payment owed to her for many years of unpaid rent.\nD) her illness as a reason to sell the salt flat to the narrator.\n### lit40-medium-08-054 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nOn Tuesdays at four, Matheus brought the pharmacy order to the hospital waiting room in Porto Alegre, and on Tuesdays at four Putri was already there, folding the free newspapers into neat stacks for the volunteers. She had started the chore while her husband was a patient upstairs; she kept at it, she told Matheus briskly, only because the stacks were always a mess and someone had to fix them. He usually helped with the last pile before running to his next delivery. This week he arrived to find the papers already folded and Putri sitting with her hands empty in her lap. The volunteers had hired a cleaner, she said. Then, after a pause, she asked whether he might sit a moment anyway, since she no longer knew what to do with four o'clock.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from brisk practicality to a quiet admission of loneliness.\nB) It moves from cheerful nostalgia to open anger at the volunteers.\nC) It moves from anxious worry about a patient to calm, settled relief.\nD) It moves from playful teasing to stiff, formal politeness toward Matheus.\n### lit40-medium-08-055 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWhen Soren came home to the beekeeper's yard in Manila, he went straight to the hive their father had built, the one whose roof had split in the typhoon two years before. Kaya watched from the porch as he measured, sawed, and nailed with the energy of a man following orders, whistling and announcing every step: new cedar, tighter joints, good as before. She brought him water and laughed when a bee settled in his hair. By late afternoon the roof was whole. Soren stood back to admire it, and the whistling stopped. The bees had moved long ago to a hollow in the mango tree, and none of them came near the box. He set the hammer down very carefully, as though it might break, and asked Kaya, without turning, how long they had been gone.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from tense suspicion between siblings to relieved good cheer.\nB) It moves from bustling confidence to a subdued, sorrowful recognition.\nC) It moves from mournful reflection on the past to firm optimism.\nD) It moves from playful rivalry to open resentment of his sister.\n### lit40-medium-08-056 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nDayoung had not spoken to me for two years when she mailed me a swimsuit, plain navy and one size too large. I read it as an insult, a remark on the weight I had gained after my divorce, and I left it in its box. Last month, in Busan for our aunt's birthday, I went alone to the salt-water pool by the breakwater where we had swum as girls. Dongsik, the attendant who had worked there since we were children, recognized me at once. He said my sister came every Sunday and always asked whether I had been in. Then he pointed to the lockers. Hers still bore a tag with both our names, written in the round letters of a ten-year-old. I stood a long time in the wet air, thinking of the navy suit, bought large the way our mother always bought clothes for girls she expected to grow.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from nostalgic warmth to bitter disappointment in a sister.\nB) It moves from detached humor to anxious urgency about a reunion.\nC) It moves from wounded suspicion to softened, regretful understanding.\nD) It moves from calm curiosity to outright joy at meeting a sister.\n### lit40-medium-08-057 — skill text_structure_purpose · 유형 text_structure\n[지문]\nAlthough the night-shift pharmacy on Calle Zanja sold only aspirin and cough syrup after midnight, Wenhua sat there every night that week, because its phone was the only one on the block that still worked. His daughter sat beside him with a dictionary, since the call would come from the embassy in English. Booker, the pharmacist, pretended not to notice them and kept the radio low. For hours nothing happened: the fan turned, a taxi driver bought antacid, Wenhua smoothed the same receipt over and over. At four in the morning the phone rang. His daughter listened, said yes three times, and hung up. Before she could translate, Wenhua read her face and began to laugh, and Booker, who had understood nothing, turned the radio all the way up.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It introduces a conflict between a father and daughter and then shows a stranger resolving it.\nB) It describes a pharmacy's nightly routine and then explains why that routine is about to end.\nC) It recounts a phone call in detail and then reflects on its lasting effects on a family.\nD) It depicts a long, uneventful wait and then shifts to the moment the news arrives.\n### lit40-medium-08-059 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\n\"Play the new one,\" the girl at the corner table called, the moment Thuy and Somchai finished their set at the roadside diner outside Surabaya. Somchai smiled and said the new song wasn't ready yet. He had said the same thing at every stop for a month. Thuy tuned her guitar and said nothing; she had stopped asking him where the new songs were. The girl, maybe eight, frowned at him. __Then why do you always say it's almost done?__ Her mother hushed her, but the question stayed on the table like spilled tea. Somchai laughed too loudly and began packing the amplifier. Thuy watched him wind the cable around his arm, tighter and tighter, and understood that there was no new song, and perhaps had not been one for a long time.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It reveals the girl's boredom with songs the duo has played too often.\nB) It points out a flaw in Somchai's excuse that leads to Thuy's realization.\nC) It shifts attention from the musicians to the girl's strict, watchful mother.\nD) It suggests that the girl has already heard an early version of the song.\n### lit40-medium-08-060 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nWe had been in Malek's radio repair shop in Woodstock for an hour, Amara and I, and the coach still had not mentioned the anniversary. It was ten years since the club's only championship; the board wanted a ceremony in Cape Town, and Amara, benched all season, had been asked to lead the parade. She wanted to refuse. Malek, who had coached her since she was eleven, kept his hands busy on a cracked radio from the stadium's old press box. __He had repaired that same radio before every final he had ever coached.__ When it finally crackled to life, he turned the dial to the station that had called the championship and set it on the counter between them. Amara listened to the old match replaying in a broadcaster's anniversary special and, after a long while, asked him what she should wear.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It explains why Amara has been kept on the bench for the whole season.\nB) It suggests that Malek would rather fix radios than coach the team.\nC) It hints that Malek's repair is his indirect answer about the anniversary.\nD) It shows that the press box radio was damaged during the championship.\n### lit40-medium-08-061 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nSaga had been folding dumplings wrong for three weeks before she told me about the offer. A hotel kitchen in Seoul wanted her, with a salary I could not match and a uniform with her name stitched on the pocket. I said nothing for a while and kept skimming the broth, which needs skimming whether or not anyone is leaving. When I was her age, I left a stall like this one and came back after a year, ashamed of how little the city had taught me. I did not tell her that. Some lessons spoil when they are handed over. Instead I showed her once more how to pinch the edge so the seam holds in boiling water, and I watched her hands rather than her face. Outside, the wind off the harbor rattled the plastic awning, and a customer called for a second bowl.\n\n[질문] Which choice best describes the narrator's attitude toward Saga's offer?\nA) Open resentment toward Saga for considering a job that would leave the stall short of help\nB) Quiet relief that Saga will soon leave a stall where she has struggled to learn the work\nC) Private unease held in check by a belief that Saga must reach her own decision\nD) Firm certainty that Saga will return once she finds the city has little to teach her\n### lit40-medium-08-062 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nWhen Amelie arrived at the laundromat on Calle Feria each afternoon, her grandfather Ivan was already scolding the dryers in a language she was only half learning. He had kept the place open for thirty-one years, through two floods and a decade in which the neighbors bought machines of their own. His ledger was a schoolchild's notebook, and its columns had been thinning for years; still he wrote the day's few coins in a careful hand, as if neatness might persuade the numbers. Amelie practiced verbs by reading his labels aloud: wash, wait, return. He corrected her accent with more patience than he ever showed the machines. Neither of them mentioned the letter from the landlord, folded under the coin tray where it had rested for a month. Down the street, a bakery lowered its shutter, and the smell of anise drifted in with the heat.\n\n[질문] Which choice best describes the narrator's attitude toward Ivan's efforts to keep the laundromat open?\nA) Mocking, treating his careful bookkeeping as proof that he misunderstands basic arithmetic\nB) Admiring, presenting his persistence as certain to restore the business to its old success\nC) Indifferent, recording his habits without hinting that the business faces real difficulty\nD) Tender yet realistic, honoring his diligence while noting signs that the business is failing\n### lit40-medium-08-063 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nFilm canisters rattled on the shelf when the power died, and I found myself stuck in a projection booth in Lima with a stranger named Sipho, who had come to repair the lens. For two hours we waited for the street to come back on. He told me that in his family a goodbye was never said at the door; you walked the guest to the corner, so the parting happened in open air. I had always considered such rituals a little theatrical. Yet when the lights returned and he packed his tools, I caught myself following him down the narrow stairs, past the ticket window, all the way to the end of the block. I am still not sure whose custom I was honoring. A bus went by with its windows fogged, carrying no one I knew.\n\n[질문] Which choice best describes the narrator's attitude toward Sipho's custom of parting?\nA) Former skepticism that has softened into a reluctant, almost unconscious acceptance\nB) Steady contempt for a custom that the narrator regards as needlessly theatrical\nC) Nostalgic longing for a family tradition the narrator practiced as a young child\nD) Polite curiosity that never affects how the narrator actually behaves toward Sipho\n### lit40-medium-08-064 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nAunt Themba never wasted water. Each morning in the community garden off Mirpur Road, she filled one dented can and divided it among the chilies, the gourds, and Edith's struggling mint, giving the mint the least. Edith, who cooked for the stall her aunt ran, assumed this was a judgment on her. That afternoon a neighbor mentioned, as if everyone knew, that Themba had once given up a place at a teachers' college so that Edith's mother could finish school instead. Edith said nothing. Later, watering alone, she noticed that her aunt's own plot, the farthest from the tap, had always received the last and smallest share. A rickshaw bell sounded beyond the fence, and pigeons lifted off the tin roof of the tool shed.\n\n[질문] Which choice best states the main purpose of the text?\nA) To recount how Edith learns that a neighbor knows private details of her family's past\nB) To show Edith beginning to see her aunt's strictness as a pattern of quiet self-denial\nC) To describe the daily routine of tending a crowded community garden in Dhaka\nD) To suggest that every family hides sacrifices its younger members will never learn of\n### lit40-medium-08-065 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nWho pays a tutor in oranges? Miriam had asked this aloud the first week, when Fiorella refused her envelope of coins and accepted only a sack of fruit from the barge's hold. Since then the tutor had come every Thursday, climbing down the ladder with her books wrapped against the river damp, and Miriam's brother had begun reading the cargo lists to the crew with sudden pride. Miriam kept the coins in a tin, telling herself she would insist next time. But this evening she found her brother's old shoes, the pair that had split at the toe, replaced by a sturdy one, with a note in Fiorella's handwriting tucked inside: outgrown by my nephew. Miriam set the tin back on its shelf, unopened. Along the bank, a crane swung a pallet of cement toward a waiting truck.\n\n[질문] Which choice best states the main purpose of the text?\nA) To recount how Miriam's brother improves his reading by studying cargo lists with the crew\nB) To explain why Fiorella prefers to be paid in fruit rather than in coins for her lessons\nC) To trace Miriam's shift from wanting to settle a debt to accepting Fiorella's kindness\nD) To suggest that generosity between strangers always means more than any form of payment\n### lit40-medium-08-066 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nMoira and I spent most of one winter competing to sell pastries in the lobby of a cinema in Samarkand that showed films only on weekends. Each Friday I arrived early to claim the table beside the poster of a forgotten comedy, and each Friday she was already there, her trays set out in tight rows. I used to count her customers instead of serving my own. In February the projector broke, and for three weeks no one came at all. We sat on opposite benches, then on the same bench, trading samples out of boredom. I learned that she folded her dough twice where I folded mine four times, and that her version was better. When the films returned, I set up wherever there was space. Snow slid from the marquee in long, soft sheets.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe the narrator's rivalry with Moira over the best table in the cinema lobby\nB) To explain the differences between two techniques for folding pastry dough\nC) To argue that competition between small businesses usually harms everyone involved\nD) To show how an enforced pause loosened the narrator's habit of rivalry with Moira\n### lit40-medium-08-067 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nWhen the monsoon filled our cellar in Karachi, my twin, Nadeesha, and I had been dividing our late father's house for two months without once mentioning why he had left it to us in equal halves. We split the furniture by alternating choices, the books by shelf, the kitchen by drawer. Every list was polite and complete, and none of it touched the subject. The flood made lists useless. We waded in together, passing up boxes neither of us had labeled, and in one of them were letters he had written to each of us and never sent. We read them sitting on the stairs, our feet still in the water, and for the first time that year we argued, loudly, about him. By evening the pump had begun its slow work, coughing brown water into the lane.\n\n[질문] Which choice best states the main purpose of the text?\nA) To show how an accident broke the careful silence that had shaped the twins' dealings\nB) To recount the method the twins used to divide their father's furniture and books\nC) To describe the damage that a monsoon flood caused to a family home in Karachi\nD) To suggest that arguments between siblings are a healthy part of every family's grief\n### lit40-medium-08-069 — skill words_in_context · 유형 figurative_language\n[지문]\nRumors travel faster than buses. Xinyi, who had spent thirty years as a judge before retiring to the hills outside Hanoi, knew this better than most. Waiting at the mountain stop, she watched Nguyen, the young clerk from the district office, climb the road with his jaw set. Someone had carried to the landlord's wife what Nguyen had said about the landlord, and now the whole village was repeating it. Xinyi offered him half her bench. She had learned long ago that a story repeated often enough grows teeth, and that once it bites, no ruling can unsay it. She told him to apologize before evening, plainly and without excuses. Below them, mist filled the valley, and the bus horn sounded around the last bend.\n\n[질문] As used in the text, the phrase “grows teeth” most nearly suggests that a repeated story\nA) becomes more amusing to the villagers each time it is told\nB) loses its details until it no longer resembles the original remark\nC) gains the power to cause real harm to the people it concerns\nD) grows so long that listeners eventually stop paying attention\n### lit40-medium-08-071 — skill words_in_context · 유형 figurative_language\n[지문]\nBy noon the riverbed is a road of cracked plates,\nand Clement crosses it the way he pays his debts:\nslowly, one stone at a time, never looking back.\nBogdan follows with the letter in his pocket,\nthe apology he wrote in March and never sent,\nits corners softened now to cloth.\nHe owes his uncle money, and something more,\na sentence he carries like a stone in a shoe,\nsmall enough to hide, too sharp to forget.\nOn the far bank a goat chews a plastic bag,\nand the heat makes the hills tremble.\n\n[질문] As used in the text, the phrase “like a stone in a shoe” most nearly suggests that the unsent apology\nA) causes Bogdan a constant, private discomfort that he cannot ignore\nB) weighs him down so heavily that he cannot cross the dry riverbed\nC) protects Bogdan from the sharp stones scattered across the crossing\nD) reminds him only of the sum of money he still owes his uncle\n### lit40-medium-08-073 — skill words_in_context · 유형 figurative_language\n[지문]\nSecateurs clicked down every row of the vineyard that March in Auckland, but between Leilani and me there was only silence. She had taught me piano for six years, and when she invited me to play at her farewell concert, I said no, too quickly, and then could not explain why. For the whole harvest we worked the same slope without a word. Our silence was a vine grown across the path: each day it thickened, and each day it was harder to step over. I told myself she would speak first. She did not, and on the last afternoon I found her bucket left beside mine, half full of the grapes I had missed. I carried both to the truck. Wasps hung drowsy over the crushed fruit on the tarps.\n\n[질문] As used in the text, the phrase “a vine grown across the path” most nearly suggests that the silence between Leilani and the narrator\nA) was a natural part of the quiet, focused work of harvesting grapes\nB) protected the narrator from having to explain her refusal to anyone\nC) became a more stubborn obstacle the longer it was left alone\nD) signaled that their friendship would only continue to grow stronger"
+}

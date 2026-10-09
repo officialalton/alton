@@ -1,0 +1,41 @@
+{
+ "itemId": "circles.inscribed_circumscribed_polygon.CM.P",
+ "generatedAt": "2026-10-07T05:02:01.012Z",
+ "codeHash": "9d55b1c1075b1120200a8aa82b2522f47007ab988672817950b4874f68301e51",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/circles.inscribed_circumscribed_polygon.CM.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "circles.inscribed_circumscribed_polygon.CM.P.png",
+   "mobileFile": "circles.inscribed_circumscribed_polygon.CM.P.m375.png",
+   "archetypeId": "ci.inscribed_circumscribed_polygon.CM.P.compose_kind",
+   "seed": 11,
+   "signature": "composite",
+   "stimulus": "An architect sketches the plan below. Use the labels in the figure. The figure shows a square drawn inside a circle; all four vertices of the square lie on the circle.",
+   "question": "Find the area of the square.",
+   "options": [
+    "242",
+    "244",
+    "121",
+    "484"
+   ],
+   "correctIndex": 0,
+   "answer": "242",
+   "explanation": "(1) 그림에서 원의 반지름 11 을 읽는다. (2) 정사각형의 대각선 = 원의 지름 = 22 이다. (3) 정사각형의 넓이 = 대각선² ÷ 2 = 484 ÷ 2 이다. (4) = 242 이다. (5) 따라서 242 이다. 따라서 정답은 242이다.",
+   "structuralIssues": []
+  }
+ ]
+}

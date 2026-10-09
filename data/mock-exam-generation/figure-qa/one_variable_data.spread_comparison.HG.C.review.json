@@ -1,0 +1,24 @@
+{
+ "itemId": "one_variable_data.spread_comparison.HG.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T06:10:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-C session)",
+ "codeHash": "4d14ea397b056b4aa2622452f5baac29054f4df3dfe5cf73e60b1e65975788ee",
+ "samples": [
+  "one_variable_data.spread_comparison.HG.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass",
+  "multi_figure_consistent": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 범위 50·합계 29 → C(40~90 점유, 5+1+8+8+7=29, 범위 50). A 는 범위 60(합 35), B 는 범위 60(합 29), D 는 범위 50 이나 합 15. 메타 정답 C 일치. 네 그림이 같은 구간·같은 세로 눈금(최대 9)·같은 크기. 데스크톱 2x2·375px 1열 판독 가능.",
+ "leadReread": "2026-10-06 통합 후 데스크톱 PNG 재판독(렌더러 halo·문구 변경 반영) — 결함 없음"
+}

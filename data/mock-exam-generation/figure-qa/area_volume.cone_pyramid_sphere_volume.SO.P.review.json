@@ -1,0 +1,25 @@
+{
+ "itemId": "area_volume.cone_pyramid_sphere_volume.SO.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:29:10Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "9046c6db876aaa76c3674ddf31c477f9668936427b73f46ceb695f143175f42a",
+ "samples": [
+  "area_volume.cone_pyramid_sphere_volume.SO.P.png",
+  "area_volume.cone_pyramid_sphere_volume.SO.P~chain2.png",
+  "area_volume.cone_pyramid_sphere_volume.SO.P~repr_shift.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "샘플 PNG(데스크톱·375px) 직접 확인: 입체 라벨이 대응 치수에 놓이고 정답이 라벨 값과 일치(원뿔 27π·구 반 144π·정사각뿔 512·겉넓이 192/180/32π·닮은 입체 729π/960/30/2). 원뿔 반지름 라벨이 밑면 타원 호에 근접하나 판독 가능. 선택지의 \\pi 는 스냅샷 하네스가 수식을 렌더하지 않는 표기."
+}

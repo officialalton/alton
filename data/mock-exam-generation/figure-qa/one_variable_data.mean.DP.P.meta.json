@@ -1,0 +1,44 @@
+{
+ "itemId": "one_variable_data.mean.DP.P",
+ "generatedAt": "2026-10-07T05:02:00.888Z",
+ "codeHash": "96d650c7652ee764a8018bf62298d9f19fc151e396a7012ffdbfd1ab1f0285f5",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.mean.DP.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.mean.DP.P.png",
+   "mobileFile": "one_variable_data.mean.DP.P.m375.png",
+   "archetypeId": "ovd.mean.DP.P.inverse",
+   "seed": 11,
+   "signature": "data:dot_plot",
+   "stimulus": "The dot plot shown summarizes the number of text messages each person sent in an hour for a group of people in a survey. Each dot stands for one of them. Later, 2 more people join the group, and each of them has the same value. With them included, the mean of all the values is 10 messages.",
+   "question": "What is the value, in messages, for each of the 2 new people?",
+   "options": [
+    "28",
+    "14",
+    "4",
+    "10"
+   ],
+   "correctIndex": 1,
+   "answer": "14",
+   "explanation": "(1) 점도표에서 값과 점 개수를 읽는다: 6(3), 8(5), 10(4), 12(7) — 전체 19개. (2) 전체 개수 = 3 + 5 + 4 + 7 = 19 이다. (3) 합 = 6×3 + 8×5 + 10×4 + 12×7 = 182 이다. (4) 새 전체 개수 = 19 + 2 = 21, 새 합 = 10 × 21 = 210 이다. (5) 더해진 합 = 210 - 182 = 28 이다. (6) 한 명의 값 = 28 ÷ 2 = 14 이다. 따라서 정답은 14이다.",
+   "structuralIssues": []
+  }
+ ]
+}

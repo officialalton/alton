@@ -27,21 +27,21 @@ export default async function AccountSuspendedPage() {
           ALTON <span className="text-red">EDUCATION</span>
         </div>
         <h1 className="text-[21px] font-extrabold text-ink mb-3">
-          계정이 일시정지되었습니다
+          Your account is suspended
         </h1>
         <p className="text-[13.5px] text-grey-500 mb-8 leading-[1.6]">
-          현재 계정 이용이 일시적으로 제한되어 있습니다.
+          Access to this account is temporarily restricted.
           <br />
-          자세한 사유는 관리자에게 문의해주세요.
+          Please contact support for details.
           <br />
-          관리자가 계정을 다시 활성화하면 별도 절차 없이 로그인할 수 있습니다.
+          Once an administrator reactivates your account, you can log in as usual.
         </p>
         <form action={logout}>
           <button
             type="submit"
             className="block w-full text-center bg-grey-200 text-ink font-bold text-[15px] py-3.5 rounded-lg hover:bg-grey-300"
           >
-            로그아웃
+            Log out
           </button>
         </form>
       </div>

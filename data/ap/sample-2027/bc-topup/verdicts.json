@@ -1,0 +1,1016 @@
+[
+ {
+  "key": "ap_calculus_bc-m01-k0",
+  "cellId": "ap_calculus_bc-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Net area under x'(t) = 12+8+2-2 = 20; x(8) = 2+20 = 22",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "22"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integrating a velocity component graph to get position; fits 9.5 / 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Net area 20 plus x(0)=2 gives 22; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices and domain fully specify the graph; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor has a distinct, realistic error and an explanation; width-1 gives 12 correctly. The ignores_negative misconception is not represented, which is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, simple arithmetic, no calculator needed, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, in-scope item with well-built distractors; accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Net change from a piecewise-linear graph of x'(t) via geometric areas (rectangle, trapezoids, a negative triangle) plus an initial condition. Single concept, small numbers, clear wording. Distractors target omitting the initial value, counting only part of the area, and confusing velocity with position. The only subtlety is the sign of the final segment.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m01-k1",
+  "cellId": "ap_calculus_bc-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integral of x' from 0 to 4 = -6 + -2 = -8; x(4)=2-8=-6",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integrating a velocity component from a graph to recover position; fits 9.5 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x(4)=2+(-6)+(-2)=-6; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices, axes, domain given; line segments stated. Complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct plausible errors; each wrong option explained. The 'positive area only' label for 2 is slightly loose, since there is no positive area on [0,4], but the value arises from ignoring the signed area."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no calculator, simple numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, clean item. The only flaw is a minor imprecision in the explanation for distractor 2."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: x(4) = x(0) + integral of x'(t) from 0 to 4. The graph gives a simple triangle area (-8), and adding the initial value 2 gives -6. Only one representation change (graph to number) and about 3 short steps. The arithmetic is trivial and the wording is clear. Distractors target omitting the initial condition and sign errors, but the item has no extra procedural choice or theorem check, so it sits at the basic level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m02-k0",
+  "cellId": "ap_calculus_bc-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Area = 1/2 ∫ f^2 dθ. Each linear segment gives h(a²+ab+b²)/3: 19/3 + 13/3 + 13/3 = 15, so the area is 15/2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "15/2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Polar area from r-vs-theta graph; extracting data and setting up 1/2 ∫ r^2 fits 9.8 / 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified 15/2 by segment integrals 19/3+13/3+13/3=15, halved. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices, axes, domain given; r positive throughout; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct misconception (no 1/2, integral of r, squared integral); explanations cover all wrong options. Blueprint's trapezoid misconception not used, minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Exact-form options, modest non-calculator arithmetic, about 95 s is plausible."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key 15/2 is verified, the distractors are distinct and realistic, and the stimulus is complete. Arithmetic is moderate for a non-calculator item but acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the piecewise-linear graph, write the line equation for each segment, and set up the polar area integral (1/2)∫r² dθ. Three squared-linear integrals follow, with small clean numbers. Distractors target the missing 1/2 factor and common errors such as using the area under r. Concept depth and steps are typical of a full mock; arithmetic is modest and wording is clear.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m02-k1",
+  "cellId": "ap_calculus_bc-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Area = 1/2[∫0^1(3+θ)^2 + ∫1^2(6-2θ)^2] = 1/2(37/3+28/3)=65/6",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "65/6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 95 seconds, small arithmetic with exact values, and the non-calculator designation is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clean polar area item with a unique key and well-motivated distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read a piecewise-linear graph of r vs theta, write two linear equations for r, set up the polar area formula (1/2)∫r² dθ over two pieces, and evaluate simple polynomial integrals. Distractors reflect common errors such as omitting the 1/2 or misusing the endpoint. Numbers are clean and reading is minimal, so the difficulty is fair and appropriate for a full mock.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m03-k0",
+  "cellId": "ap_calculus_bc-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "r'>0 on (0,2), r'<0 on (2,6), r'=0 at 6 but stays nonpositive; sign change + to - only at θ=2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "θ=2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 80 seconds, no calculator needed, short parallel numeric options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, unique-key item on the sign change of r' from a graph. All five criteria pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: use the sign change of r' (read from a graph) to find a relative max of r, as in the first derivative test. Distractors include a zero of r' with no sign change (θ=6) and an endpoint. There is no computation and the polar context adds only a trivial link (r is the distance from the origin). It takes about two reasoning steps and one representation change (graph to behavior of r).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m03-k1",
+  "cellId": "ap_calculus_bc-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "θ=2",
+     "brief_reasoning": "r' changes from + to − at θ=2, so r has a relative max there. At θ=6, r' is 0 but stays negative on both sides.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Relates graph of r' to relative extrema of distance r; fits 9.7/2.E, no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answer θ=2: only sign change of r' from + to −. θ=6 touches zero without sign change; θ=0 is an endpoint with r increasing."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices, axes and domain fully specified; r>0 and differentiability stated in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; the explanation covers each wrong option. The θ=0 rationale is slightly weak but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, no calculation, short parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, the stimulus is complete, and the distractors encode realistic misconceptions. The item is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item applies the first derivative test to a graph of r'. A relative max of r occurs where r' changes from positive to negative, which happens only at θ=2. The θ=6 distractor is a zero of r' with no sign change, which tests a common misconception. Reasoning is short and needs no computation, and the polar context adds only the idea that distance from the origin is r. This is mostly Unit 5 content with a light connection to topic 9.7, so it suits basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m04-k0",
+  "cellId": "ap_calculus_bc-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "On [0,2], |f^(4)(x)| is at most 2 (it equals -2 throughout). The Lagrange error bound is 2·2^4/4! = 32/24 = 4/3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "4/3",
+     "flaw_note": "Minor: a piecewise-linear f^(4) with corners conflicts with 'derivatives of all orders', but this does not affect the answer."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Lagrange error bound with M read from a graph; fits 10.12/2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 4/3 is unique: f^(4) = -2 on [0,2], so M=2 and the bound is 2*16/24 = 4/3."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem says f has derivatives of all orders, but f^(4) is piecewise linear with a corner at x=3, so f^(5) does not exist there. This is a mathematical inconsistency, though the answer is unaffected because x=3 is outside [0,2]."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "-4/3 is a negative error bound, so it is trivially eliminated, and its 'why' (largest signed value) is inaccurate since the signed max on [0,2] is -2. The blueprint's wrong-interval misconception (M=6 on [0,4] gives 4) is not encoded in any option. The explanation formatting is sloppy: the correct option is not separately explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and non-calculator load are fine; the numbers are simple."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the stem's claim of derivatives of all orders contradicts the piecewise-linear f^(4) with a corner. The distractor set is also weak: a negative bound option with an inaccurate rationale, and no distractor for the wrong-interval misconception. Fail on stimulus and distractor quality."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must connect the graph of f^(4) to the Lagrange error bound: identify the 4th derivative for P_3, restrict to [0,2] instead of the full domain (where max |f^(4)| = 6), use the absolute value of negative values (M = 2), then compute 2*2^4/4! = 4/3. Distractors target misconceptions (sign, wrong M, wrong factorial). Arithmetic is light and the wording is clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m04-k1",
+  "cellId": "ap_calculus_bc-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "On [0,2], max|f^(4)| = 2. Lagrange bound = 2·2^4/4! = 32/24 = 4/3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "4/3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Lagrange error bound with the bound read from a graph of f^(4); fits 10.12 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "max|f4| on [0,2] is 2, so the bound is 2*16/24 = 4/3. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices are fully specified, the domain is given, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct, realistic error (wrong power, wrong interval, wrong factorial) and all are explained. The signed-max misconception from the blueprint is not used, which is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, exact values, light arithmetic, suitable for a non-calculator section."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed. The bound 2·2⁴/4! = 4/3 is unique, the distractors are realistic and explained, and the stimulus data is complete."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the graph on the correct interval [0,2], recognize that the max of |f^(4)| is 2 (from the negative segment, not the positive peak at x=3), then apply the Lagrange bound M|x|^4/4! = 2*16/24 = 4/3. Distractors reflect common misconceptions (using M=4 from the whole domain, ignoring absolute value). Arithmetic is light and the context is clean.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m05-k0",
+  "cellId": "ap_calculus_bc-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "By the alternating series error bound, the error |S - S_3| is at most the first omitted term, b_4 = 30/7.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "30/7"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds with no calculator needed. It is on the easy side but appropriate.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and correct. The key is the first omitted term, b_4 = 30/7, and each distractor reflects a distinct misconception. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of the alternating series error bound: the error is at most the first omitted term b_4 = 30/7, read directly from the table. The theorem hypotheses are given in the stem, no computation is needed, and the distractors (b_3, b_5, an unrelated value) target the off-by-one misconception. There is little representation change or multi-step reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m05-k1",
+  "cellId": "ap_calculus_bc-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Alternating series error bound for S_4 is the first omitted term b_5 = 27/14.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "27/14"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets alternating series error bound by extracting b_5 from a table; fits 10.10 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "27/14 = b_5 is the unique correct answer; hypotheses stated in stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete (n=1..6, b_n), exact fractions, clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are b_4, S_4, and b_5-b_6, each a distinct realistic misconception; explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no-calculator, exact-form options, typical MC load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous item with a unique key and distinct distractors. It is slightly easy but acceptable for 10.10 / 2.B."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The solver applies the alternating series error bound |R_4| <= b_5 and reads b_5 = 27/14 from the table. This is one-step recall plus a table lookup, with no hypothesis check (the stem gives that the terms decrease to 0) and no computation. The main misconception is using b_4 instead of b_5.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m06-k0",
+  "cellId": "ap_calculus_bc-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P3=-1+x-(2/2)x^2+(1/6)x^3; P3(2)=-1+2-4+4/3=-5/3",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-5/3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Builds a Maclaurin polynomial from tabulated derivatives, which fits 10.11 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "P3(2) = -5/3 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The options are plausible and distinct (no factorials, missing cubic term, cubic term alone). The explanation for 4/3 is muddled: it describes both 'evaluates derivatives at x' and 'reports only the cubic term'. This is a minor flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, exact values, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a correct unique key and a suitable scope. The only issue is a slightly muddled rationale for distractor D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single standard procedure: use the table to build the Maclaurin polynomial with factorial denominators, then evaluate at x=2. Small numbers, one representation change (table to polynomial expression), and distractors reflecting forgetting factorials. Direct application of the topic with no extra theorem checks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m06-k1",
+  "cellId": "ap_calculus_bc-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P3(1)=1+4-1/2+2/6=29/6",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "29/6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Taylor polynomial from tabulated derivatives; fits 10.11 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "29/6 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete; stem clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 6 and 31/6 map to clear misconceptions. The explanation for 1/3 is muddled, since the value is just the cubic term at x=1, but the option is still plausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, simple exact arithmetic, non-calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item. The only flaw is a slightly muddled explanation for the 1/3 distractor."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of the Maclaurin polynomial formula using table values: divide each f^(n)(0) by n!, sum the terms, and evaluate at x=1. The arithmetic is simple, with no extra reasoning layers or theorem checks. Distractors target factorial and sign errors.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m07-k0",
+  "cellId": "ap_calculus_bc-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The distance from the origin is |r|. It decreases when r and r' have opposite signs. At θ=6, r=2 and r'=-3, so the signs are opposite. At θ=4, r=-4 and r'=-4 have the same sign, so |r| is increasing there.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "θ=6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Relates signs of r and r' to distance from origin; fits 9.7 and 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only theta=6 has r and r' of opposite signs; unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has all needed columns and values; stem is clear. Theta in radians is implicit but standard."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect distinct misconceptions; explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, no calculator, no arithmetic load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, unique-key item; the distance from the origin is |r| and decreases when r and r' have opposite signs, which holds only at theta=6. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize distance = |r| and that it decreases when r and r' have opposite signs (r*r'<0), then check each table row. The negative-r row (r=-4, r'=-4) is a misconception-rich distractor, since r' < 0 does not imply decreasing distance. Numbers are simple, reading is minimal, and no calculator is needed. Concept depth is moderate with a small number of steps.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m07-k1",
+  "cellId": "ap_calculus_bc-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Distance |r| decreases when r and r' have opposite signs. At θ=6, r=3>0 and r'=-4<0. At θ=4, both are negative, so |r| increases.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "θ=6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.7 polar derivative interpretation, relating table values to the behavior of distance; fits 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "θ=6 is the unique option where r and r' have opposite signs."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data is complete. θ values are unitless and unsorted, but they are readable as radians."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct and realistic. The θ=2 explanation overstates by saying r'>0 never signals decreasing; this is a minor wording issue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, no arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and the skill and scope fit. The only flaw is a minor wording overstatement in the θ=2 distractor explanation."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Distance from the origin is |r|, so it decreases when r and r' have opposite signs. Only sign checks on a small table are needed, with no computation. The one distractor (θ=4, where r' is negative but r is also negative) tests the misconception that r'<0 means decreasing distance. The item is a single-concept check with low reading load and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m08-k0",
+  "cellId": "ap_calculus_bc-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "speed=sqrt((-6)^2+8^2)=10",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "10"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The arithmetic is trivial (36+64=100), so no calculator is needed. Time is about 60-70 seconds. Options are exact values.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct, in-scope MC item. The key of 10 is unique, the distractors reflect distinct misconceptions, and the load is light and appropriate for a non-calculator item."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-row table lookup followed by one application of speed = sqrt(x'^2 + y'^2) with a 6-8-10 triple. Distractors target common misconceptions (slope dy/dx, sum of component magnitudes, x' alone). No theorem checks, procedure choice, or multi-representation chaining, so it is a direct definition check suited to basic learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m08-k1",
+  "cellId": "ap_calculus_bc-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Speed = sqrt((-5)^2+12^2)=sqrt(169)=13",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "13"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Speed from velocity components in a table; fits 9.6 and 2.B, no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "sqrt(25+144)=13; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete with columns and rows; stem clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (component sum, slope, single component); each explained. Negative options are slightly weak since speed must be nonnegative, but still realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculator needed, clean 5-12-13 numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, in-scope MC item on speed from a table of velocity components. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read x'(2) = -5 and y'(2) = 12 from the table and compute speed = sqrt(x'^2 + y'^2) = sqrt(169) = 13. The numbers form a clean Pythagorean triple. Distractors reflect common misconceptions (adding components to get 17, giving dy/dx = -12/5, or giving x'(2) alone), but the concept depth and the number of reasoning steps remain low, which suits basic learning rather than a full-mock exam_prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f01-k0",
+  "cellId": "ap_calculus_bc-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Step size Δt=1. At P=20: P'=20(0.95)=19, so P(1)≈20+19=39. At P=39: P'=39(361/400)=35.1975, so P(2)≈39+35.1975=74.1975.",
+     "final_answer": "P(2) ≈ 74.1975 (=29679/400) hundred fish",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Differentiating gives P''=P'(1−P/200)=P(1−P/400)(1−P/200). This is positive for 0<P<200. On [0,2] P starts at 20 and stays below 200, so P is concave up there. Euler's tangent-line steps therefore lie below the curve.",
+     "final_answer": "Underestimate, because P is concave up for 0<P<200",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Starting from 0<P(0)<400, the solution increases toward the carrying capacity 400. dP/dt=P−P²/400 is a downward parabola in P with its maximum at P=200, which is half the carrying capacity.",
+     "final_answer": "lim P(t)=400; the population grows fastest when P=200",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Q'(0)=480(1−480/400)=−96<0. The population is above the carrying capacity of 400, so it decreases toward 400.",
+     "final_answer": "Q is decreasing at t=0 (Q'(0)=−96 hundred fish per year). The population starts above the carrying capacity of 400 hundred fish, so it falls toward 400.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Euler/logistic FRQ is in scope, with a correct and consistent key and a rubric that matches the solver's answers. Part (a) is the 1.E skill, and parts b-d are reasonable on their own skills. The point split of 3/2/2/2 is typical. The arithmetic in part (a) (39·361/400) is slightly ugly but manageable without a calculator.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part (a) is the target Euler skill. Parts b-d cover concavity, the carrying capacity and the sign of dP/dt, all within Unit 7."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique and correct. P(2) is approximately 74.2 versus a true value of about 112, so underestimate holds. The rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric rows and model answers are explicit."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points in about 15 minutes is typical for the AP exam, with no calculator needed. The arithmetic is mildly heavy but acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style multi-part item. It covers Euler's method with two steps, concavity via P'' to judge over/underestimate (needs a check that P stays below 200), logistic limit and max growth rate, and sign of the derivative above carrying capacity. Concept depth is moderate and reasoning is multi-step. The arithmetic in (a), 39*(361/400), is slightly awkward but doable without a calculator. Reading load is short and the wording is clear.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f01-k1",
+  "cellId": "ap_calculus_bc-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Δt=1. P'(0)=40(0.9)=36, so P(1)≈76. P'(1)≈76(0.81)=61.56, so P(2)≈76+61.56=137.56.",
+     "final_answer": "P(2) ≈ 137.56 (hundreds of fish)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "d²P/dt² = (dP/dt)(1 − P/200). For 40 < P < 200, dP/dt > 0 and d²P/dt² > 0, so P is concave up. Tangent lines lie below a concave-up curve, so each Euler step undershoots. The exact solution gives P(2) ≈ 180, which is still below 200, so P stays concave up on [0,2].",
+     "final_answer": "Underestimate, because P is concave up on [0,2]",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "The carrying capacity is 400, and since P(0)=40 is between 0 and 400, P(t) increases toward 400. dP/dt = P − P²/400 is a downward parabola in P, so it is largest at its vertex, P=200 (half the carrying capacity).",
+     "final_answer": "The limit is 400; the population grows fastest at P = 200",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Q'(0)=480(1−1.2)=−96, which is less than 0. The population starts above the carrying capacity of 400, so it shrinks toward 400.",
+     "final_answer": "Q is decreasing at t=0 (Q'(0) = −96 hundred fish per year). The population is above the lake's carrying capacity, so it declines toward 400 hundred fish.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Euler two-step answer 3439/25 = 137.56 is correct, and the underestimate conclusion is valid since the true solution stays below 200 on [0,2]. Parts c and d are standard logistic reasoning. The 9-point split of 3/2/2/2 fits the grain, and no calculator is needed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part a is Euler's method, skill 1.E. Parts b to d use related 7.4 and 7.9 topics and are allowed by the bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key values were checked: 36, 76, and 3439/25. The rubric rows are consistent, with a reasonable dependency chain."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The DE and initial condition are fully specified. There is a minor units oddity, since P is in hundreds but the model divides by 400."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to FRQ; the rubric is adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Arithmetic is light (76 × 0.81), and the load fits roughly 15 minutes without a calculator."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item in line with AP BC logistic/Euler questions. (a) is a two-step Euler computation with moderately unfriendly but manageable arithmetic (76*0.81). (b) requires deriving concavity from the differential equation, P'' = P'(1 - P/200), and checking that P stays below 200 on [0,2] to conclude underestimate. (c) requires the carrying capacity and the inflection point at P=200 with justification. (d) requires interpreting a start above carrying capacity (decreasing). It combines procedures with justification and several short reasoning chains, which suits a full mock. There are no out-of-scope topics, and the wording is clear.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

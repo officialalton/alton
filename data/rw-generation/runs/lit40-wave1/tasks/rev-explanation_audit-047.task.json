@@ -1,0 +1,352 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-047",
+ "chunkId": "rev-explanation_audit-047",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-047.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-07-008",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Parvin took the window seat on the night bus through Tehran, as she had since they were girls, and Aigerim, her twin, let her. Between them on the bench lay the folded plan of their mother's house, each room already marked in two colors of ink. Aigerim had told no one that she had failed the licensing exam that afternoon, the one she had promised to pass before they sold anything. When Parvin asked whether she wanted the room with the garden door, Aigerim said it did not matter, and Parvin, without looking up, drew a line that gave her both that room and the study beside it. \"You always liked the garden,\" Parvin said, as if the matter had been settled long ago. Outside, shuttered shops slid by under orange streetlights.",
+   "question": "Based on the text, which choice best describes the relationship between Parvin and Aigerim?",
+   "options": [
+    "A sister resents always yielding the window seat to her more demanding twin.",
+    "Aigerim shields Parvin from bad news by quietly handling the house herself.",
+    "Rivals compete over which of them will inherit the larger share of the house.",
+    "Twins know each other so well that one quietly gives way without being asked."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "D",
+   "explanation": "첫 문장에서 Aigerim은 어릴 때부터 그랬듯 창가 자리를 Parvin에게 내주고, 뒤에서는 Aigerim이 상관없다고 하자 Parvin이 묻지도 않고 정원 방과 서재를 모두 그녀에게 준다. 이를 이어 읽으면 서로를 깊이 알아 말없이 양보하는 쌍둥이 관계임을 알 수 있어 D가 정답이다. A는 한쪽 감정만 반영했고, B는 보살핌의 방향을 뒤집었다. C는 유산 분할이라는 소재에서 나온 일반적 통념이다."
+  },
+  {
+   "candidateId": "lit40-medium-07-009",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "When Siti walked along the seaside promenade in Hanoi each evening after working in Dewi's new garden, she carried the same black umbrella, furled tight, though the sky over the water was clear. Dewi, who had bought the house only that spring, asked once why she never opened it. Siti said it was for a storm that had not arrived. Their friend in the hospital on the hill had asked them both, that week, whether the doctors were hiding anything. Dewi wanted to tell her plainly. Siti only tightened the strap on the umbrella and said there was still time. On Thursday, rain came in sideways off the sea, and Siti stood under the awning of a noodle stall with the umbrella still closed, rain soaking her sleeves, until Dewi took it from her and opened it over them both. Below the railing, fishing boats knocked together in the swell.",
+   "question": "In the text, the closed umbrella most likely represents",
+   "options": [
+    "Siti's reluctance to face and share a painful truth even once it can't be avoided.",
+    "Siti's practical habit of preparing carefully for sudden changes in coastal weather.",
+    "the new house Dewi bought and the garden Siti tends there each working day.",
+    "Siti's wish to protect Dewi from the storms that often strike the promenade."
+   ],
+   "correct_letter": "A",
+   "explanation": "Siti는 맑은 날에도 우산을 접은 채 들고 다니며 아직 오지 않은 폭풍을 위한 것이라고 말한다. 친구에게 진실을 말하자는 Dewi의 말에 Siti는 우산 끈을 조이며 아직 시간이 있다고 하고, 막상 비가 오자 우산을 펴지 못한다. 이 두 장면을 이으면 우산은 피할 수 없게 된 뒤에도 고통스러운 진실을 마주하고 전하기를 주저하는 Siti의 마음을 상징하므로 A가 정답이다. B는 문자 그대로의 해석이고, C와 D는 지문의 반복 이미지와 연결되지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-07-010",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, Emre would still remember the cairn. When he came back from the army to the edge of the salt flat outside Cairo, he expected Hala to meet him with the cold silence she had promised in her last letter, the one that called him a deserter of the family. Instead she walked him past the drying pans to the low pile of stones he had begun as a boy, now taller than her waist. \"One for every week you were gone,\" she said, setting another on top. He counted without meaning to; there were no gaps. That evening she showed him the ledgers she had kept for their father's salt works, every column balanced, a line left blank beside each month for his signature. Wind moved across the flat, lifting a thin white dust that settled on their shoes.",
+   "question": "In the text, the cairn most likely represents",
+   "options": [
+    "the resentment Hala had built up toward Emre during the weeks he was gone",
+    "Hala's steady, unbroken faithfulness to her brother throughout his absence",
+    "the family salt works that Emre hoped one day to take over from their father",
+    "Emre's boyhood ambition to build something lasting out on the salt flat"
+   ],
+   "correct_letter": "B",
+   "explanation": "Hala는 오빠가 떠나 있던 매주 돌을 하나씩 올렸고, Emre가 세어 보니 빠진 주가 없었다. 또 그녀는 매달 오빠의 서명 칸을 비워 둔 장부를 보여 주어, 차갑게 맞으리라던 예상과 달리 그를 기다려 왔음을 드러낸다. 두 단서를 이으면 돌무더기는 오빠에 대한 꾸준하고 끊김 없는 충실함을 상징하므로 B가 정답이다. A는 편지의 표현에만 기댄 오독이고, C와 D는 지문 소재를 쓰지만 돌무더기의 의미와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-07-011",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Tell your mother you were with me the whole time, Weiqi said, pinning a wet shirt to the rooftop line above the Taipei alley. Zihan, who had wandered off the trail above the city for six hours before the ranger found her, watched the shirts snap in the wind. She knew the story was false; Weiqi had found her alone, mud to the knees, far from any marked path. But Weiqi said the truth would only get Zihan's hiking permit revoked and his own patrol questioned. Zihan agreed, and the lie settled between them like a stone in a shoe, small and impossible to forget with every step. All that evening she caught herself rehearsing it, changing a detail, then changing it back. Across the alley, a neighbor's radio played an old ballad over the rattle of an air conditioner.",
+   "question": "As used in the text, the phrase “like a stone in a shoe” most nearly suggests that the lie is",
+   "options": [
+    "a minor but constant discomfort that Zihan cannot stop noticing",
+    "a heavy burden that keeps Zihan from walking the trails again",
+    "a secret that Zihan has nearly forgotten by the end of the evening",
+    "a protective weight that steadies Zihan against her mother's anger"
+   ],
+   "correct_letter": "A",
+   "explanation": "이 비유 바로 뒤에는 작지만 걸음마다 잊을 수 없다는 설명이 붙어 있다. 또 그날 저녁 Zihan이 거짓말을 계속 되뇌며 세부를 바꿨다가 되돌리는 모습이 나와, 거짓말이 작지만 끊임없이 신경 쓰이는 불편함임을 뒷받침한다. 따라서 A가 정답이다. B는 비유를 문자 그대로 무거운 짐으로 읽었고, C는 계속 되뇐다는 내용과 반대이며, D는 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-012",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Did anyone else see the case fall? Layla asked the depot clerk in Beirut, though she already knew the answer. Her violin had slipped from the overhead rack when the bus braked, and Sigrid, her teacher, insisted that Layla had left the case unlatched. Layla remembered fastening both clasps. The driver said a passenger had bumped it; a woman by the window said no one had touched it at all. Each account was confident, and each was different, so that the truth seemed to splinter into pieces too small to hold. Sigrid examined the cracked bridge with her usual severity, then said only that bridges could be replaced and that Layla would practice on the spare instrument until Friday. Outside, buses idled in their bays, exhaust drifting over the ticket windows.",
+   "question": "As used in the text, the phrase “splinter into pieces too small to hold” most nearly suggests that",
+   "options": [
+    "the violin was so badly damaged that it could never be repaired",
+    "the conflicting accounts broke the event into fragments no one could join",
+    "Layla was too upset to recall what she had done with the case's clasps",
+    "the witnesses were careless people whose statements deserved no attention"
+   ],
+   "correct_letter": "B",
+   "explanation": "앞 문장들에서 Sigrid, Layla, 운전기사, 창가의 여자가 저마다 다른 이야기를 하고, 이 비유는 모두 확신에 차 있지만 서로 다르다는 문장에 이어 나온다. 그러므로 진실이 쪼개진다는 표현은 엇갈린 증언 때문에 사건을 하나의 이야기로 맞출 수 없다는 뜻이며 B가 정답이다. A는 깨진 브리지에 끌려 비유를 문자 그대로 읽었고, Sigrid가 브리지는 교체할 수 있다고 한 것과도 맞지 않는다. C와 D는 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-013",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Pass me the list, Marta said, and I did,\nmy mother's pencil hovering over names\nwhile snow sealed the cabin door outside Samarkand.\nAydin's family, she wrote, then paused,\nthe letter I never sent her folded in my coat\nlike a coal I kept from going out\nand kept from touching.\nWe counted chairs. We argued over lamb.\nShe did not ask, and I did not offer,\nthough twice her hand found my sleeve.\nBy the stove the kettle ticked as it cooled,\nand the window held a square of blue dusk.",
+   "question": "As used in the text, the phrase “like a coal I kept from going out” most nearly suggests that the speaker",
+   "options": [
+    "wishes she could finally forget a painful memory from the past",
+    "intends to raise an old grudge with her mother at the wedding",
+    "keeps an apology alive while not yet being ready to deliver it",
+    "plans to present the letter to her mother after the ceremony"
+   ],
+   "correct_letter": "C",
+   "explanation": "부치지 못한 편지는 꺼지지 않게 지켜 온 석탄에 비유되는데, 바로 다음 행에서 화자는 그것을 만지지도 않았다고 말한다. 뒤에서도 어머니는 묻지 않고 화자도 꺼내지 않아, 사과의 마음은 간직하지만 아직 전하지 못하는 상태임이 드러난다. 따라서 C가 정답이다. A는 잊고 싶다는 반대 방향이고, B는 원한이라는 근거 없는 해석이며, D는 지문에 없는 계획이다."
+  },
+  {
+   "candidateId": "lit40-medium-07-014",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Chess rivals make poor confidants. I learned this at four in the morning in my aunt's bakery in Albuquerque, where Dainius and I had met to argue, as usual, though not about openings. My younger brother had asked each of us, separately, whether he should quit the club after losing every game of the season. Dainius wanted to tell him the truth: that he played too fast. I wanted to tell him he would improve. Between the cooling racks we circled the question like two kings in an endgame, each step careful, neither willing to come close enough to be checked. By the time the first tray of conchas came out, we had agreed on nothing except that my brother deserved one answer, not two. Kaya, my aunt, unlocked the front door and flipped the sign.",
+   "question": "As used in the text, the phrase “circled the question like two kings in an endgame” most nearly suggests that the narrator and Dainius",
+   "options": [
+    "played a slow game of chess while waiting for the bakery to open",
+    "competed fiercely to prove who understood the brother better",
+    "paced the bakery restlessly because they were tired and anxious",
+    "approached the problem warily, each avoiding an exposed position"
+   ],
+   "correct_letter": "D",
+   "explanation": "비유 바로 뒤에서 두 사람은 한 걸음씩 조심하며 체크당할 만큼 가까이 다가가지 않으려 한다. 또 결국 아무것도 합의하지 못했다는 내용이 이어져, 서로 공격받을 입장을 피하며 문제를 조심스럽게 다루었음을 알 수 있다. 따라서 D가 정답이다. A는 비유를 실제 체스 경기로 읽었고, B는 격렬한 경쟁이라는 점에서 조심스러운 태도와 맞지 않으며, C는 피곤과 불안이라는 근거 없는 이유를 끌어왔다."
+  },
+  {
+   "candidateId": "lit40-medium-07-015",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "A folded bus ticket was all Solange ever left me. I had been her teacher for two years in the hills above Marseille, and in that time she had not said a word in class, though her essays ran long and fierce in pencil. On her last day before her family moved north, we waited together at the mountain bus stop, I with my briefcase, she with a backpack so full it seemed to lean on her. I had prepared a small speech about the proper way to say goodbye. I never gave it. When the bus came, she pressed the ticket into my hand, and on its back she had written a single line of thanks, the letters pressed so hard they had nearly torn through, a whole conversation squeezed into the width of a thumb. Genevieve, my colleague, later framed it for me. That spring, the broom on the hillside bloomed early and yellow.",
+   "question": "As used in the text, the phrase “a whole conversation squeezed into the width of a thumb” most nearly suggests that",
+   "options": [
+    "the brief note carried all that Solange had never said aloud",
+    "Solange's handwriting was too small for the teacher to read",
+    "Solange regretted not having had more time to talk at the stop",
+    "the teacher squeezed in a hurried final lesson before the bus"
+   ],
+   "correct_letter": "A",
+   "explanation": "앞에서 Solange는 2년 동안 수업 시간에 한마디도 하지 않았지만 글은 길고 강렬했다고 소개된다. 마지막에 그녀가 종이를 뚫을 듯 눌러 쓴 감사 한 줄은 그동안 말로 하지 않은 모든 것을 담은 것이므로, 엄지 너비에 압축된 대화라는 비유는 A를 뜻한다. B는 비유를 글씨 크기로 문자 그대로 읽었고, C는 지문에 없는 후회를 끌어왔다. D는 '압축'이라는 표현만 빌린 오답이다."
+  },
+  {
+   "candidateId": "lit40-medium-07-061",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "\"Mend the heel, and I will pay you when we sing again,\" Stanislav said, setting one worn slipper on my counter. I am Dmitri; I fix shoes now in a stall near the old bridge in Tbilisi, but twenty years ago she and I shared a stage at the opera house, two sopranos who had sworn, she insists, to sing our duet together once more before we grew old. I remember the opera house, the dust of the footlights, the way she tapped her toe before every entrance. I do not remember the vow. I hammered the heel while she hummed the opening bars, slightly flat, and waited for me to join. My throat was full of leather dust and doubt. Still, when she reached the high phrase, I heard my own voice catch it, rusty but whole, and the man at the next stall put down his knife to listen.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "The narrator recounts a past performance and then explains why she gave up singing for shoe repair.",
+    "A visitor invokes a shared pledge, the narrator doubts it, and she then acts as though it holds.",
+    "The narrator describes her stall at length and then contrasts it with a crowded opera house.",
+    "Two former singers argue over a vow, and one leaves the stall before it is resolved."
+   ],
+   "correct_letter": "B",
+   "explanation": "지문은 Stanislav가 함께 노래하자던 약속을 꺼내며 시작하고, 화자는 그 약속을 기억하지 못한다고 의심을 드러낸 뒤, 결국 그녀의 노래에 목소리를 보태며 약속이 유효한 듯 행동한다. 따라서 '약속 제시 → 의심 → 행동으로 수용'의 흐름을 말한 B가 정답이다. A는 신발 수선을 하게 된 이유가 설명되지 않으므로 틀리다. C는 가게 묘사가 길지 않고 대비 구조도 아니다. D는 두 사람이 다투거나 누군가 떠나는 장면이 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-062",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "When Rangi arrived at the hospital in Wailuku, his twin, Anahera, had already claimed the chair nearest the nurses' desk, a clipboard of their father's forms on his knee. For an hour they spoke only of parking and vending machines. Then Anahera began listing the rooms of the house in Paia: the lanai, the workshop, the bedroom with the warped door. He had been dividing it in his head, Rangi realized, deciding who would sell and who would stay on with the old man. Rangi had assumed the answer for years: the brother who never left would simply keep staying. But watching Anahera's thumb worry the edge of the clipboard, he saw how tired that brother was. So when the nurse called their name, it was Rangi who stood first, and on the drive home he asked which room had the better light.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes the waiting room closely, then recalls a childhood memory that both brothers still share.",
+    "It presents an argument between the brothers, then shows a nurse settling their dispute.",
+    "It moves from small talk to a hidden question about the house, then to one brother's changed view.",
+    "It lists the rooms of a house, then explains why the brothers agree to sell the property."
+   ],
+   "correct_letter": "C",
+   "explanation": "지문은 주차·자판기 같은 잡담에서 시작해 Anahera가 집의 방들을 나열하며 누가 남을지라는 숨은 질문으로 초점을 옮긴다. 이어 Rangi는 형제의 피로를 보고 오랜 가정을 바꾼다. 따라서 C가 정답이다. A의 어린 시절 회상, B의 다툼과 간호사의 중재, D의 매각 합의는 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-063",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, Kamala still told the story of the night train from Kochi to Kozhikode, when she found herself sharing a compartment with Tara, the neighbor whose kitchen backed onto her own. For a decade the two households had been painting a mural along their common wall, a river in turquoise and ochre, and for two years it had stopped at a half-finished heron. Neither woman had said why. In the swaying dark, Tara admitted she had run out of the blue she liked and was ashamed to ask for money. Kamala laughed so loudly that the ticket collector peered in. She had stopped, she confessed, because she believed Tara had grown tired of her. By the time the coconut palms turned gray with dawn, they had sketched the heron's other wing on the back of a ticket.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A description of a long journey is followed by an account of the scenery at sunrise.",
+    "A disagreement between neighbors is introduced and then settled with a passing stranger's help.",
+    "A mural's history is traced from its beginning to the day it was finally completed.",
+    "A stalled shared project is introduced, and then each woman's hidden reason is revealed."
+   ],
+   "correct_letter": "D",
+   "explanation": "지문은 먼저 두 이웃이 함께 그리던 벽화가 2년째 멈춰 있다는 상황을 제시한다. 이어 Tara는 물감 값을 말하기 부끄러웠다고, Kamala는 Tara가 자신에게 싫증 났다고 여겼다고 각자 숨긴 이유를 털어놓는다. 따라서 D가 정답이다. A는 여정 묘사가 중심이 아니고, B의 낯선 사람(검표원)은 갈등을 풀지 않으며, C는 벽화가 완성되지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-07-064",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Anh does not talk at breakfast. I learned this my first morning in the farmhouse his family rents outside Hanoi, where I had come as a guest of his sister. Tamar, his friend since childhood, sat across from him, and the two of them passed the fish sauce and the chili without a word. His mother apologized for them, calling them two stones. But I watched more closely. __When Tamar's cup ran low, Anh's hand was already on the teapot before she reached for it.__ Later, in the yard, Tamar knelt to retie a sandal strap that had come loose on Anh's foot, and he simply lifted his heel to help. Nobody else at the table seemed to notice. By noon the heat had pressed the rice fields into a single green sheet.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It gives an early sign that the friends' silence hides close attention, which a later scene confirms.",
+    "It suggests that Anh resents serving Tamar, a feeling that his mother tries hard to hide from the guest.",
+    "It shows that the narrator misreads the friends' habits, an error the yard scene later corrects.",
+    "It introduces a rivalry between the two friends that grows sharper as the morning goes on."
+   ],
+   "correct_letter": "A",
+   "explanation": "밑줄 문장은 Tamar가 손을 뻗기도 전에 Anh가 찻주전자를 드는 장면으로, 침묵 속에 세심한 배려가 있음을 처음 보여 준다. 이후 마당에서 Tamar가 샌들 끈을 묶어 주고 Anh가 발꿈치를 들어 주는 장면이 이를 다시 확인한다. 따라서 A가 정답이다. B의 원망, C의 화자의 오해, D의 경쟁 관계는 지문 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-065",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "What could a soldier at the city gate know of bread? Farhad wondered this as the customs man poked a rod through his sacks of flour, the same sacks Mehrnaz, his rival from across the bazaar, had sent back to him that morning with a mended seam. Last winter he had spread word that her ovens were cracked; her trade had never quite recovered. The seam was the work of a careful needle, small even stitches in red thread, her family's color. __He understood that a single sack, however finely sewn, could not undo what a whole season of rumor had done.__ The soldier waved him through. Farhad did not move at once. He turned the cart around, toward her shop rather than his own, while the mule complained and the gate lanterns swung in the wind.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It reveals that Farhad believes Mehrnaz mended the sack in order to mock him in front of the bazaar.",
+    "It marks Farhad's sense that her gesture cannot match his harm, setting up his turn.",
+    "It explains why the soldier distrusts Farhad's flour and delays his passage.",
+    "It suggests that Farhad plans to repay Mehrnaz by spreading a new rumor."
+   ],
+   "correct_letter": "B",
+   "explanation": "앞부분에서 Farhad는 지난겨울 Mehrnaz의 오븐에 대한 소문을 퍼뜨려 그녀의 장사를 망쳤고, 그녀는 오히려 자루를 정성껏 꿰매 돌려보냈다. 밑줄 문장은 그 작은 친절이 자신의 해악을 상쇄할 수 없다는 깨달음을 보여 주고, 이것이 그녀의 가게로 수레를 돌리는 행동으로 이어진다. 따라서 B가 정답이다. A의 조롱, C의 병사의 불신, D의 새 소문은 지문과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-07-068",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Canvas awnings snapped over Piper's souvenir stand on the Burlington promenade, where the lake wind smelled almost like the sea. Every afternoon Despina came to ask whether the postcards had changed. They had not. She bought one anyway, always the same lighthouse, and stood turning it over while she watched the ferry dock, waiting for word about her son's surgery in Boston. Piper, who had a dozen sharp ways to say that the rack was the rack, never used them. One might call the purchases foolish, and the gulls, at least, seemed to. But a woman who buys the same lighthouse eleven days running is not shopping; she is keeping a lamp lit, and Piper, to her credit, understood the difference. At four the ferry horn sounded, and the gulls rose all at once from the railing.",
+   "question": "Which choice best describes the narrator's attitude toward Despina's daily visits?",
+   "options": [
+    "Amused contempt for a customer who keeps wasting money on identical cards.",
+    "Detached indifference that reports the visits without any judgment.",
+    "Impatient disapproval of a customer who distracts Piper from work.",
+    "Gentle sympathy that finds a hopeful ritual in a seemingly odd habit."
+   ],
+   "correct_letter": "D",
+   "explanation": "서술자는 같은 등대 엽서를 매일 사는 행동을 어리석다고 볼 수도 있다고 인정하면서도, 그것을 아들의 소식을 기다리며 등불을 지키는 일로 재해석한다. 또한 날카로운 말을 아끼는 Piper를 칭찬하여 Despina에 대한 따뜻한 시선을 드러낸다. 따라서 D가 정답이다. A의 경멸과 C의 못마땅함은 서술자의 재해석과 맞지 않고, B는 서술자가 분명한 평가를 내리므로 틀리다."
+  },
+  {
+   "candidateId": "lit40-medium-07-069",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Stale butter and dust hang in the lobby of the old theater on Central Avenue in February, when you are the only one buying a ticket. You came because Mr. Lior, your old chemistry teacher, wrote to say he runs the projector now. Twelve years ago you gave him a framed periodic table for his retirement, and he set it face down on his desk without a word; you took it as an insult and stopped writing. Tonight he shows you the frame hanging in the booth, its glass cracked and taped from behind. He had been ashamed, he says, that a pupil could afford such a gift when he could not afford to stay. You notice how carefully he has kept it dusted. You were nineteen, Talon, you tell yourself, and quick to read silence as a verdict. Below the booth, the curtain parts on an empty house.",
+   "question": "Which choice best describes the narrator's attitude toward the younger self's reaction to Lior's gesture?",
+   "options": [
+    "Rueful self-criticism for having mistaken a private shame for contempt.",
+    "Lingering resentment that Lior never explained his silence much sooner.",
+    "Proud satisfaction that the gift has been carefully preserved for years.",
+    "Nostalgic delight in fond memories of the old chemistry classroom."
+   ],
+   "correct_letter": "A",
+   "explanation": "과거의 Talon은 선물을 엎어 놓은 행동을 모욕으로 받아들이고 연락을 끊었지만, Lior는 그것이 자신의 부끄러움 때문이었다고 밝힌다. 서술자는 '열아홉이었고 침묵을 판결로 읽는 데 성급했다'고 스스로를 돌아보며 후회 섞인 자기비판을 보인다. 따라서 A가 정답이다. B의 원망은 남아 있지 않고, C와 D는 과거 반응에 대한 태도가 아니다."
+  },
+  {
+   "candidateId": "lit40-medium-07-070",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Vienna's Westbahnhof cafe was where Konrad took me after the worst season of my apprenticeship, the autumn three of our staircases came back warped from a client's damp villa. I was twenty-two then, Camryn the American who measured twice and still cut wrong, and I expected a lecture. Instead he ordered two coffees and spent an hour describing his own first ruined commission, a cabinet that split in its first winter. I have since heard people praise mentors who never let you fail, and I find I distrust them a little. Konrad let me fail, then sat beside me among the departing travelers while it hurt. He did not rebuild the staircases for me; he only made sure I knew I could rebuild them. Outside, a night train to Munich was announced in three languages.",
+   "question": "Which choice best describes the narrator's attitude toward Konrad's way of handling the failed season?",
+   "options": [
+    "Mild embarrassment that Konrad shared such a personal story in public.",
+    "Grateful approval of a mentor who allowed failure and then offered company.",
+    "Quiet frustration that Konrad refused to repair the warped staircases himself.",
+    "Skeptical distance from the idea that a mentor should ever intervene."
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 실패를 막아 주는 멘토를 오히려 조금 불신한다고 말하며, Konrad가 실패하게 두고 아플 때 곁에 있어 준 방식을 높이 평가한다. 꾸짖는 대신 자신의 실패담을 들려준 장면도 그 고마움을 뒷받침한다. 따라서 B가 정답이다. A의 당혹감과 C의 불만은 지문에 없고, D는 화자가 Konrad의 개입(곁에 있어 줌)을 긍정하므로 틀리다."
+  },
+  {
+   "candidateId": "lit40-medium-07-071",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Wet iron and diesel rose from the river the morning Soren asked me to stop translating for him. I had interpreted for him for six years, at every meeting with Dutch buyers, and out of habit I still leaned toward his ear whenever anyone spoke. We were crossing the old stone bridge to the harbor office in Rotterdam when he said, in careful, slow Dutch, that he wanted to make his own mistakes now. I felt something close to grief, which embarrassed me. I, Marit, had built a version of myself around being needed in two languages at once. In the meeting I kept my hands folded and bit back three corrections. Looking back, I am fond of that woman and a little impatient with her: she mistook usefulness for closeness. A tugboat pushed a barge of gravel under the arch as we left.",
+   "question": "Which choice best describes the narrator's attitude toward her past reaction to Soren's request?",
+   "options": [
+    "Bitter regret that she ever agreed to stop interpreting for him.",
+    "Unqualified pride in how gracefully she accepted the sudden change.",
+    "Affectionate but critical understanding of her former dependence.",
+    "Lasting confusion about why Soren wanted to speak Dutch himself."
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 당시 슬픔에 가까운 감정을 느끼고 부끄러웠다고 회고하며, 필요한 존재가 되는 것에 자신을 맞춰 왔다고 인정한다. 이어 그때의 자신을 아끼면서도 쓸모를 친밀함으로 착각했다며 조금 답답해한다. 따라서 애정과 비판이 함께 있는 C가 정답이다. A의 쓰라린 후회, B의 순수한 자부심, D의 혼란은 지문과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-07-072",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Why must every book in the workshop be sewn by hand, even the cheap notebooks sold to tourists? Emiliano asked this every Saturday in the bindery in Oaxaca, and every Saturday his stepmother, Emil, said only that it was the rule. A glue gun sat unused on a shelf, a gift from a supplier. One afternoon a tourist returned a notebook she had bought years before, its spine still tight after a flood had soaked her suitcase. Emil said nothing, but she set it on the bench where Emiliano worked. That week he stopped asking and began counting stitches without being told. Outside, a vendor wheeled a cart of corn drinks past the open door, ringing a small brass bell.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A tourist returns a notebook to the workshop after many years of use.",
+    "A stepmother uses a supplier's gift to make the workshop more efficient.",
+    "Rules that are obeyed without explanation should always be questioned.",
+    "A teenager comes to accept a rule once he sees evidence of its value."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "correct_letter": "D",
+   "explanation": "앞부분에서 Emiliano는 손바느질 규칙에 매주 의문을 제기하지만, 홍수에도 튼튼했던 공책이 돌아온 뒤에는 질문을 멈추고 스스로 바늘땀을 센다. 두 장면의 대비가 규칙의 가치를 확인하고 받아들이는 과정을 보여 주므로 D가 정답이다. A는 일화만 요약했고, B는 글루건이 쓰이지 않으므로 틀리며, C는 지나치게 일반적이고 지문과 반대 방향의 교훈이다."
+  },
+  {
+   "candidateId": "lit40-medium-07-073",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Imani had kept the boarding-house kitchen in Addis Ababa for thirty years, and she did not expect her son's new bride to change its rules. On her first morning, Jomo offered to translate the Amharic menu board into English for the foreign lodgers. Imani agreed, then frowned when a guest ordered the gentle stew and complained that it burned his tongue. Jomo explained that the Amharic word meant patient, slow-cooked, not mild, and that she should have chosen better. That evening Imani handed her the chalk herself and stood beside her, naming each dish while Jomo searched for the truest English. Neither spoke of the morning. On the windowsill, a pot of rue leaned toward the last light.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A mother-in-law comes to trust a new bride who weighs words with care.",
+    "A foreign lodger complains about the spiciness of a stew he ordered.",
+    "A new bride takes over a kitchen against her mother-in-law's wishes.",
+    "Families grow closer when they share household duties with one another."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "correct_letter": "A",
+   "explanation": "처음에 Imani는 새 며느리가 부엌 규칙을 바꾸는 것을 달가워하지 않고 번역 실수에 얼굴을 찌푸린다. 그러나 Jomo가 단어의 정확한 뜻을 설명하고 책임을 인정하자, 저녁에는 직접 분필을 건네고 곁에서 함께 메뉴를 고친다. 이 대비가 신뢰의 형성을 보여 주므로 A가 정답이다. B는 일화만 요약했고, C는 시어머니의 뜻에 반한 것이 아니며, D는 지나치게 일반적인 교훈이다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-047 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-047.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-07-008 — skill inferences · 유형 relationship_between_characters\n[지문]\nParvin took the window seat on the night bus through Tehran, as she had since they were girls, and Aigerim, her twin, let her. Between them on the bench lay the folded plan of their mother's house, each room already marked in two colors of ink. Aigerim had told no one that she had failed the licensing exam that afternoon, the one she had promised to pass before they sold anything. When Parvin asked whether she wanted the room with the garden door, Aigerim said it did not matter, and Parvin, without looking up, drew a line that gave her both that room and the study beside it. \"You always liked the garden,\" Parvin said, as if the matter had been settled long ago. Outside, shuttered shops slid by under orange streetlights.\n\n[질문] Based on the text, which choice best describes the relationship between Parvin and Aigerim?\nA) A sister resents always yielding the window seat to her more demanding twin.\nB) Aigerim shields Parvin from bad news by quietly handling the house herself.\nC) Rivals compete over which of them will inherit the larger share of the house.\nD) Twins know each other so well that one quietly gives way without being asked.\n\n[표시된 정답] D\n[해설]\n첫 문장에서 Aigerim은 어릴 때부터 그랬듯 창가 자리를 Parvin에게 내주고, 뒤에서는 Aigerim이 상관없다고 하자 Parvin이 묻지도 않고 정원 방과 서재를 모두 그녀에게 준다. 이를 이어 읽으면 서로를 깊이 알아 말없이 양보하는 쌍둥이 관계임을 알 수 있어 D가 정답이다. A는 한쪽 감정만 반영했고, B는 보살핌의 방향을 뒤집었다. C는 유산 분할이라는 소재에서 나온 일반적 통념이다.\n### lit40-medium-07-009 — skill inferences · 유형 symbolism\n[지문]\nWhen Siti walked along the seaside promenade in Hanoi each evening after working in Dewi's new garden, she carried the same black umbrella, furled tight, though the sky over the water was clear. Dewi, who had bought the house only that spring, asked once why she never opened it. Siti said it was for a storm that had not arrived. Their friend in the hospital on the hill had asked them both, that week, whether the doctors were hiding anything. Dewi wanted to tell her plainly. Siti only tightened the strap on the umbrella and said there was still time. On Thursday, rain came in sideways off the sea, and Siti stood under the awning of a noodle stall with the umbrella still closed, rain soaking her sleeves, until Dewi took it from her and opened it over them both. Below the railing, fishing boats knocked together in the swell.\n\n[질문] In the text, the closed umbrella most likely represents\nA) Siti's reluctance to face and share a painful truth even once it can't be avoided.\nB) Siti's practical habit of preparing carefully for sudden changes in coastal weather.\nC) the new house Dewi bought and the garden Siti tends there each working day.\nD) Siti's wish to protect Dewi from the storms that often strike the promenade.\n\n[표시된 정답] A\n[해설]\nSiti는 맑은 날에도 우산을 접은 채 들고 다니며 아직 오지 않은 폭풍을 위한 것이라고 말한다. 친구에게 진실을 말하자는 Dewi의 말에 Siti는 우산 끈을 조이며 아직 시간이 있다고 하고, 막상 비가 오자 우산을 펴지 못한다. 이 두 장면을 이으면 우산은 피할 수 없게 된 뒤에도 고통스러운 진실을 마주하고 전하기를 주저하는 Siti의 마음을 상징하므로 A가 정답이다. B는 문자 그대로의 해석이고, C와 D는 지문의 반복 이미지와 연결되지 않는다.\n### lit40-medium-07-010 — skill inferences · 유형 symbolism\n[지문]\nYears later, Emre would still remember the cairn. When he came back from the army to the edge of the salt flat outside Cairo, he expected Hala to meet him with the cold silence she had promised in her last letter, the one that called him a deserter of the family. Instead she walked him past the drying pans to the low pile of stones he had begun as a boy, now taller than her waist. \"One for every week you were gone,\" she said, setting another on top. He counted without meaning to; there were no gaps. That evening she showed him the ledgers she had kept for their father's salt works, every column balanced, a line left blank beside each month for his signature. Wind moved across the flat, lifting a thin white dust that settled on their shoes.\n\n[질문] In the text, the cairn most likely represents\nA) the resentment Hala had built up toward Emre during the weeks he was gone\nB) Hala's steady, unbroken faithfulness to her brother throughout his absence\nC) the family salt works that Emre hoped one day to take over from their father\nD) Emre's boyhood ambition to build something lasting out on the salt flat\n\n[표시된 정답] B\n[해설]\nHala는 오빠가 떠나 있던 매주 돌을 하나씩 올렸고, Emre가 세어 보니 빠진 주가 없었다. 또 그녀는 매달 오빠의 서명 칸을 비워 둔 장부를 보여 주어, 차갑게 맞으리라던 예상과 달리 그를 기다려 왔음을 드러낸다. 두 단서를 이으면 돌무더기는 오빠에 대한 꾸준하고 끊김 없는 충실함을 상징하므로 B가 정답이다. A는 편지의 표현에만 기댄 오독이고, C와 D는 지문 소재를 쓰지만 돌무더기의 의미와 맞지 않는다.\n### lit40-medium-07-011 — skill words_in_context · 유형 figurative_language\n[지문]\nTell your mother you were with me the whole time, Weiqi said, pinning a wet shirt to the rooftop line above the Taipei alley. Zihan, who had wandered off the trail above the city for six hours before the ranger found her, watched the shirts snap in the wind. She knew the story was false; Weiqi had found her alone, mud to the knees, far from any marked path. But Weiqi said the truth would only get Zihan's hiking permit revoked and his own patrol questioned. Zihan agreed, and the lie settled between them like a stone in a shoe, small and impossible to forget with every step. All that evening she caught herself rehearsing it, changing a detail, then changing it back. Across the alley, a neighbor's radio played an old ballad over the rattle of an air conditioner.\n\n[질문] As used in the text, the phrase “like a stone in a shoe” most nearly suggests that the lie is\nA) a minor but constant discomfort that Zihan cannot stop noticing\nB) a heavy burden that keeps Zihan from walking the trails again\nC) a secret that Zihan has nearly forgotten by the end of the evening\nD) a protective weight that steadies Zihan against her mother's anger\n\n[표시된 정답] A\n[해설]\n이 비유 바로 뒤에는 작지만 걸음마다 잊을 수 없다는 설명이 붙어 있다. 또 그날 저녁 Zihan이 거짓말을 계속 되뇌며 세부를 바꿨다가 되돌리는 모습이 나와, 거짓말이 작지만 끊임없이 신경 쓰이는 불편함임을 뒷받침한다. 따라서 A가 정답이다. B는 비유를 문자 그대로 무거운 짐으로 읽었고, C는 계속 되뇐다는 내용과 반대이며, D는 지문에 근거가 없다.\n### lit40-medium-07-012 — skill words_in_context · 유형 figurative_language\n[지문]\nDid anyone else see the case fall? Layla asked the depot clerk in Beirut, though she already knew the answer. Her violin had slipped from the overhead rack when the bus braked, and Sigrid, her teacher, insisted that Layla had left the case unlatched. Layla remembered fastening both clasps. The driver said a passenger had bumped it; a woman by the window said no one had touched it at all. Each account was confident, and each was different, so that the truth seemed to splinter into pieces too small to hold. Sigrid examined the cracked bridge with her usual severity, then said only that bridges could be replaced and that Layla would practice on the spare instrument until Friday. Outside, buses idled in their bays, exhaust drifting over the ticket windows.\n\n[질문] As used in the text, the phrase “splinter into pieces too small to hold” most nearly suggests that\nA) the violin was so badly damaged that it could never be repaired\nB) the conflicting accounts broke the event into fragments no one could join\nC) Layla was too upset to recall what she had done with the case's clasps\nD) the witnesses were careless people whose statements deserved no attention\n\n[표시된 정답] B\n[해설]\n앞 문장들에서 Sigrid, Layla, 운전기사, 창가의 여자가 저마다 다른 이야기를 하고, 이 비유는 모두 확신에 차 있지만 서로 다르다는 문장에 이어 나온다. 그러므로 진실이 쪼개진다는 표현은 엇갈린 증언 때문에 사건을 하나의 이야기로 맞출 수 없다는 뜻이며 B가 정답이다. A는 깨진 브리지에 끌려 비유를 문자 그대로 읽었고, Sigrid가 브리지는 교체할 수 있다고 한 것과도 맞지 않는다. C와 D는 지문에 근거가 없다.\n### lit40-medium-07-013 — skill words_in_context · 유형 figurative_language\n[지문]\nPass me the list, Marta said, and I did,\nmy mother's pencil hovering over names\nwhile snow sealed the cabin door outside Samarkand.\nAydin's family, she wrote, then paused,\nthe letter I never sent her folded in my coat\nlike a coal I kept from going out\nand kept from touching.\nWe counted chairs. We argued over lamb.\nShe did not ask, and I did not offer,\nthough twice her hand found my sleeve.\nBy the stove the kettle ticked as it cooled,\nand the window held a square of blue dusk.\n\n[질문] As used in the text, the phrase “like a coal I kept from going out” most nearly suggests that the speaker\nA) wishes she could finally forget a painful memory from the past\nB) intends to raise an old grudge with her mother at the wedding\nC) keeps an apology alive while not yet being ready to deliver it\nD) plans to present the letter to her mother after the ceremony\n\n[표시된 정답] C\n[해설]\n부치지 못한 편지는 꺼지지 않게 지켜 온 석탄에 비유되는데, 바로 다음 행에서 화자는 그것을 만지지도 않았다고 말한다. 뒤에서도 어머니는 묻지 않고 화자도 꺼내지 않아, 사과의 마음은 간직하지만 아직 전하지 못하는 상태임이 드러난다. 따라서 C가 정답이다. A는 잊고 싶다는 반대 방향이고, B는 원한이라는 근거 없는 해석이며, D는 지문에 없는 계획이다.\n### lit40-medium-07-014 — skill words_in_context · 유형 figurative_language\n[지문]\nChess rivals make poor confidants. I learned this at four in the morning in my aunt's bakery in Albuquerque, where Dainius and I had met to argue, as usual, though not about openings. My younger brother had asked each of us, separately, whether he should quit the club after losing every game of the season. Dainius wanted to tell him the truth: that he played too fast. I wanted to tell him he would improve. Between the cooling racks we circled the question like two kings in an endgame, each step careful, neither willing to come close enough to be checked. By the time the first tray of conchas came out, we had agreed on nothing except that my brother deserved one answer, not two. Kaya, my aunt, unlocked the front door and flipped the sign.\n\n[질문] As used in the text, the phrase “circled the question like two kings in an endgame” most nearly suggests that the narrator and Dainius\nA) played a slow game of chess while waiting for the bakery to open\nB) competed fiercely to prove who understood the brother better\nC) paced the bakery restlessly because they were tired and anxious\nD) approached the problem warily, each avoiding an exposed position\n\n[표시된 정답] D\n[해설]\n비유 바로 뒤에서 두 사람은 한 걸음씩 조심하며 체크당할 만큼 가까이 다가가지 않으려 한다. 또 결국 아무것도 합의하지 못했다는 내용이 이어져, 서로 공격받을 입장을 피하며 문제를 조심스럽게 다루었음을 알 수 있다. 따라서 D가 정답이다. A는 비유를 실제 체스 경기로 읽었고, B는 격렬한 경쟁이라는 점에서 조심스러운 태도와 맞지 않으며, C는 피곤과 불안이라는 근거 없는 이유를 끌어왔다.\n### lit40-medium-07-015 — skill words_in_context · 유형 figurative_language\n[지문]\nA folded bus ticket was all Solange ever left me. I had been her teacher for two years in the hills above Marseille, and in that time she had not said a word in class, though her essays ran long and fierce in pencil. On her last day before her family moved north, we waited together at the mountain bus stop, I with my briefcase, she with a backpack so full it seemed to lean on her. I had prepared a small speech about the proper way to say goodbye. I never gave it. When the bus came, she pressed the ticket into my hand, and on its back she had written a single line of thanks, the letters pressed so hard they had nearly torn through, a whole conversation squeezed into the width of a thumb. Genevieve, my colleague, later framed it for me. That spring, the broom on the hillside bloomed early and yellow.\n\n[질문] As used in the text, the phrase “a whole conversation squeezed into the width of a thumb” most nearly suggests that\nA) the brief note carried all that Solange had never said aloud\nB) Solange's handwriting was too small for the teacher to read\nC) Solange regretted not having had more time to talk at the stop\nD) the teacher squeezed in a hurried final lesson before the bus\n\n[표시된 정답] A\n[해설]\n앞에서 Solange는 2년 동안 수업 시간에 한마디도 하지 않았지만 글은 길고 강렬했다고 소개된다. 마지막에 그녀가 종이를 뚫을 듯 눌러 쓴 감사 한 줄은 그동안 말로 하지 않은 모든 것을 담은 것이므로, 엄지 너비에 압축된 대화라는 비유는 A를 뜻한다. B는 비유를 글씨 크기로 문자 그대로 읽었고, C는 지문에 없는 후회를 끌어왔다. D는 '압축'이라는 표현만 빌린 오답이다.\n### lit40-medium-07-061 — skill text_structure_purpose · 유형 text_structure\n[지문]\n\"Mend the heel, and I will pay you when we sing again,\" Stanislav said, setting one worn slipper on my counter. I am Dmitri; I fix shoes now in a stall near the old bridge in Tbilisi, but twenty years ago she and I shared a stage at the opera house, two sopranos who had sworn, she insists, to sing our duet together once more before we grew old. I remember the opera house, the dust of the footlights, the way she tapped her toe before every entrance. I do not remember the vow. I hammered the heel while she hummed the opening bars, slightly flat, and waited for me to join. My throat was full of leather dust and doubt. Still, when she reached the high phrase, I heard my own voice catch it, rusty but whole, and the man at the next stall put down his knife to listen.\n\n[질문] Which choice best describes the overall structure of the text?\nA) The narrator recounts a past performance and then explains why she gave up singing for shoe repair.\nB) A visitor invokes a shared pledge, the narrator doubts it, and she then acts as though it holds.\nC) The narrator describes her stall at length and then contrasts it with a crowded opera house.\nD) Two former singers argue over a vow, and one leaves the stall before it is resolved.\n\n[표시된 정답] B\n[해설]\n지문은 Stanislav가 함께 노래하자던 약속을 꺼내며 시작하고, 화자는 그 약속을 기억하지 못한다고 의심을 드러낸 뒤, 결국 그녀의 노래에 목소리를 보태며 약속이 유효한 듯 행동한다. 따라서 '약속 제시 → 의심 → 행동으로 수용'의 흐름을 말한 B가 정답이다. A는 신발 수선을 하게 된 이유가 설명되지 않으므로 틀리다. C는 가게 묘사가 길지 않고 대비 구조도 아니다. D는 두 사람이 다투거나 누군가 떠나는 장면이 없다.\n### lit40-medium-07-062 — skill text_structure_purpose · 유형 text_structure\n[지문]\nWhen Rangi arrived at the hospital in Wailuku, his twin, Anahera, had already claimed the chair nearest the nurses' desk, a clipboard of their father's forms on his knee. For an hour they spoke only of parking and vending machines. Then Anahera began listing the rooms of the house in Paia: the lanai, the workshop, the bedroom with the warped door. He had been dividing it in his head, Rangi realized, deciding who would sell and who would stay on with the old man. Rangi had assumed the answer for years: the brother who never left would simply keep staying. But watching Anahera's thumb worry the edge of the clipboard, he saw how tired that brother was. So when the nurse called their name, it was Rangi who stood first, and on the drive home he asked which room had the better light.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes the waiting room closely, then recalls a childhood memory that both brothers still share.\nB) It presents an argument between the brothers, then shows a nurse settling their dispute.\nC) It moves from small talk to a hidden question about the house, then to one brother's changed view.\nD) It lists the rooms of a house, then explains why the brothers agree to sell the property.\n\n[표시된 정답] C\n[해설]\n지문은 주차·자판기 같은 잡담에서 시작해 Anahera가 집의 방들을 나열하며 누가 남을지라는 숨은 질문으로 초점을 옮긴다. 이어 Rangi는 형제의 피로를 보고 오랜 가정을 바꾼다. 따라서 C가 정답이다. A의 어린 시절 회상, B의 다툼과 간호사의 중재, D의 매각 합의는 지문에 없다.\n### lit40-medium-07-063 — skill text_structure_purpose · 유형 text_structure\n[지문]\nYears later, Kamala still told the story of the night train from Kochi to Kozhikode, when she found herself sharing a compartment with Tara, the neighbor whose kitchen backed onto her own. For a decade the two households had been painting a mural along their common wall, a river in turquoise and ochre, and for two years it had stopped at a half-finished heron. Neither woman had said why. In the swaying dark, Tara admitted she had run out of the blue she liked and was ashamed to ask for money. Kamala laughed so loudly that the ticket collector peered in. She had stopped, she confessed, because she believed Tara had grown tired of her. By the time the coconut palms turned gray with dawn, they had sketched the heron's other wing on the back of a ticket.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A description of a long journey is followed by an account of the scenery at sunrise.\nB) A disagreement between neighbors is introduced and then settled with a passing stranger's help.\nC) A mural's history is traced from its beginning to the day it was finally completed.\nD) A stalled shared project is introduced, and then each woman's hidden reason is revealed.\n\n[표시된 정답] D\n[해설]\n지문은 먼저 두 이웃이 함께 그리던 벽화가 2년째 멈춰 있다는 상황을 제시한다. 이어 Tara는 물감 값을 말하기 부끄러웠다고, Kamala는 Tara가 자신에게 싫증 났다고 여겼다고 각자 숨긴 이유를 털어놓는다. 따라서 D가 정답이다. A는 여정 묘사가 중심이 아니고, B의 낯선 사람(검표원)은 갈등을 풀지 않으며, C는 벽화가 완성되지 않는다.\n### lit40-medium-07-064 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nAnh does not talk at breakfast. I learned this my first morning in the farmhouse his family rents outside Hanoi, where I had come as a guest of his sister. Tamar, his friend since childhood, sat across from him, and the two of them passed the fish sauce and the chili without a word. His mother apologized for them, calling them two stones. But I watched more closely. __When Tamar's cup ran low, Anh's hand was already on the teapot before she reached for it.__ Later, in the yard, Tamar knelt to retie a sandal strap that had come loose on Anh's foot, and he simply lifted his heel to help. Nobody else at the table seemed to notice. By noon the heat had pressed the rice fields into a single green sheet.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It gives an early sign that the friends' silence hides close attention, which a later scene confirms.\nB) It suggests that Anh resents serving Tamar, a feeling that his mother tries hard to hide from the guest.\nC) It shows that the narrator misreads the friends' habits, an error the yard scene later corrects.\nD) It introduces a rivalry between the two friends that grows sharper as the morning goes on.\n\n[표시된 정답] A\n[해설]\n밑줄 문장은 Tamar가 손을 뻗기도 전에 Anh가 찻주전자를 드는 장면으로, 침묵 속에 세심한 배려가 있음을 처음 보여 준다. 이후 마당에서 Tamar가 샌들 끈을 묶어 주고 Anh가 발꿈치를 들어 주는 장면이 이를 다시 확인한다. 따라서 A가 정답이다. B의 원망, C의 화자의 오해, D의 경쟁 관계는 지문 근거가 없다.\n### lit40-medium-07-065 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nWhat could a soldier at the city gate know of bread? Farhad wondered this as the customs man poked a rod through his sacks of flour, the same sacks Mehrnaz, his rival from across the bazaar, had sent back to him that morning with a mended seam. Last winter he had spread word that her ovens were cracked; her trade had never quite recovered. The seam was the work of a careful needle, small even stitches in red thread, her family's color. __He understood that a single sack, however finely sewn, could not undo what a whole season of rumor had done.__ The soldier waved him through. Farhad did not move at once. He turned the cart around, toward her shop rather than his own, while the mule complained and the gate lanterns swung in the wind.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It reveals that Farhad believes Mehrnaz mended the sack in order to mock him in front of the bazaar.\nB) It marks Farhad's sense that her gesture cannot match his harm, setting up his turn.\nC) It explains why the soldier distrusts Farhad's flour and delays his passage.\nD) It suggests that Farhad plans to repay Mehrnaz by spreading a new rumor.\n\n[표시된 정답] B\n[해설]\n앞부분에서 Farhad는 지난겨울 Mehrnaz의 오븐에 대한 소문을 퍼뜨려 그녀의 장사를 망쳤고, 그녀는 오히려 자루를 정성껏 꿰매 돌려보냈다. 밑줄 문장은 그 작은 친절이 자신의 해악을 상쇄할 수 없다는 깨달음을 보여 주고, 이것이 그녀의 가게로 수레를 돌리는 행동으로 이어진다. 따라서 B가 정답이다. A의 조롱, C의 병사의 불신, D의 새 소문은 지문과 맞지 않는다.\n### lit40-medium-07-068 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nCanvas awnings snapped over Piper's souvenir stand on the Burlington promenade, where the lake wind smelled almost like the sea. Every afternoon Despina came to ask whether the postcards had changed. They had not. She bought one anyway, always the same lighthouse, and stood turning it over while she watched the ferry dock, waiting for word about her son's surgery in Boston. Piper, who had a dozen sharp ways to say that the rack was the rack, never used them. One might call the purchases foolish, and the gulls, at least, seemed to. But a woman who buys the same lighthouse eleven days running is not shopping; she is keeping a lamp lit, and Piper, to her credit, understood the difference. At four the ferry horn sounded, and the gulls rose all at once from the railing.\n\n[질문] Which choice best describes the narrator's attitude toward Despina's daily visits?\nA) Amused contempt for a customer who keeps wasting money on identical cards.\nB) Detached indifference that reports the visits without any judgment.\nC) Impatient disapproval of a customer who distracts Piper from work.\nD) Gentle sympathy that finds a hopeful ritual in a seemingly odd habit.\n\n[표시된 정답] D\n[해설]\n서술자는 같은 등대 엽서를 매일 사는 행동을 어리석다고 볼 수도 있다고 인정하면서도, 그것을 아들의 소식을 기다리며 등불을 지키는 일로 재해석한다. 또한 날카로운 말을 아끼는 Piper를 칭찬하여 Despina에 대한 따뜻한 시선을 드러낸다. 따라서 D가 정답이다. A의 경멸과 C의 못마땅함은 서술자의 재해석과 맞지 않고, B는 서술자가 분명한 평가를 내리므로 틀리다.\n### lit40-medium-07-069 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nStale butter and dust hang in the lobby of the old theater on Central Avenue in February, when you are the only one buying a ticket. You came because Mr. Lior, your old chemistry teacher, wrote to say he runs the projector now. Twelve years ago you gave him a framed periodic table for his retirement, and he set it face down on his desk without a word; you took it as an insult and stopped writing. Tonight he shows you the frame hanging in the booth, its glass cracked and taped from behind. He had been ashamed, he says, that a pupil could afford such a gift when he could not afford to stay. You notice how carefully he has kept it dusted. You were nineteen, Talon, you tell yourself, and quick to read silence as a verdict. Below the booth, the curtain parts on an empty house.\n\n[질문] Which choice best describes the narrator's attitude toward the younger self's reaction to Lior's gesture?\nA) Rueful self-criticism for having mistaken a private shame for contempt.\nB) Lingering resentment that Lior never explained his silence much sooner.\nC) Proud satisfaction that the gift has been carefully preserved for years.\nD) Nostalgic delight in fond memories of the old chemistry classroom.\n\n[표시된 정답] A\n[해설]\n과거의 Talon은 선물을 엎어 놓은 행동을 모욕으로 받아들이고 연락을 끊었지만, Lior는 그것이 자신의 부끄러움 때문이었다고 밝힌다. 서술자는 '열아홉이었고 침묵을 판결로 읽는 데 성급했다'고 스스로를 돌아보며 후회 섞인 자기비판을 보인다. 따라서 A가 정답이다. B의 원망은 남아 있지 않고, C와 D는 과거 반응에 대한 태도가 아니다.\n### lit40-medium-07-070 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nVienna's Westbahnhof cafe was where Konrad took me after the worst season of my apprenticeship, the autumn three of our staircases came back warped from a client's damp villa. I was twenty-two then, Camryn the American who measured twice and still cut wrong, and I expected a lecture. Instead he ordered two coffees and spent an hour describing his own first ruined commission, a cabinet that split in its first winter. I have since heard people praise mentors who never let you fail, and I find I distrust them a little. Konrad let me fail, then sat beside me among the departing travelers while it hurt. He did not rebuild the staircases for me; he only made sure I knew I could rebuild them. Outside, a night train to Munich was announced in three languages.\n\n[질문] Which choice best describes the narrator's attitude toward Konrad's way of handling the failed season?\nA) Mild embarrassment that Konrad shared such a personal story in public.\nB) Grateful approval of a mentor who allowed failure and then offered company.\nC) Quiet frustration that Konrad refused to repair the warped staircases himself.\nD) Skeptical distance from the idea that a mentor should ever intervene.\n\n[표시된 정답] B\n[해설]\n화자는 실패를 막아 주는 멘토를 오히려 조금 불신한다고 말하며, Konrad가 실패하게 두고 아플 때 곁에 있어 준 방식을 높이 평가한다. 꾸짖는 대신 자신의 실패담을 들려준 장면도 그 고마움을 뒷받침한다. 따라서 B가 정답이다. A의 당혹감과 C의 불만은 지문에 없고, D는 화자가 Konrad의 개입(곁에 있어 줌)을 긍정하므로 틀리다.\n### lit40-medium-07-071 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nWet iron and diesel rose from the river the morning Soren asked me to stop translating for him. I had interpreted for him for six years, at every meeting with Dutch buyers, and out of habit I still leaned toward his ear whenever anyone spoke. We were crossing the old stone bridge to the harbor office in Rotterdam when he said, in careful, slow Dutch, that he wanted to make his own mistakes now. I felt something close to grief, which embarrassed me. I, Marit, had built a version of myself around being needed in two languages at once. In the meeting I kept my hands folded and bit back three corrections. Looking back, I am fond of that woman and a little impatient with her: she mistook usefulness for closeness. A tugboat pushed a barge of gravel under the arch as we left.\n\n[질문] Which choice best describes the narrator's attitude toward her past reaction to Soren's request?\nA) Bitter regret that she ever agreed to stop interpreting for him.\nB) Unqualified pride in how gracefully she accepted the sudden change.\nC) Affectionate but critical understanding of her former dependence.\nD) Lasting confusion about why Soren wanted to speak Dutch himself.\n\n[표시된 정답] C\n[해설]\n화자는 당시 슬픔에 가까운 감정을 느끼고 부끄러웠다고 회고하며, 필요한 존재가 되는 것에 자신을 맞춰 왔다고 인정한다. 이어 그때의 자신을 아끼면서도 쓸모를 친밀함으로 착각했다며 조금 답답해한다. 따라서 애정과 비판이 함께 있는 C가 정답이다. A의 쓰라린 후회, B의 순수한 자부심, D의 혼란은 지문과 맞지 않는다.\n### lit40-medium-07-072 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nWhy must every book in the workshop be sewn by hand, even the cheap notebooks sold to tourists? Emiliano asked this every Saturday in the bindery in Oaxaca, and every Saturday his stepmother, Emil, said only that it was the rule. A glue gun sat unused on a shelf, a gift from a supplier. One afternoon a tourist returned a notebook she had bought years before, its spine still tight after a flood had soaked her suitcase. Emil said nothing, but she set it on the bench where Emiliano worked. That week he stopped asking and began counting stitches without being told. Outside, a vendor wheeled a cart of corn drinks past the open door, ringing a small brass bell.\n\n[질문] Which choice best states the main idea of the text?\nA) A tourist returns a notebook to the workshop after many years of use.\nB) A stepmother uses a supplier's gift to make the workshop more efficient.\nC) Rules that are obeyed without explanation should always be questioned.\nD) A teenager comes to accept a rule once he sees evidence of its value.\n\n[표시된 정답] D\n[해설]\n앞부분에서 Emiliano는 손바느질 규칙에 매주 의문을 제기하지만, 홍수에도 튼튼했던 공책이 돌아온 뒤에는 질문을 멈추고 스스로 바늘땀을 센다. 두 장면의 대비가 규칙의 가치를 확인하고 받아들이는 과정을 보여 주므로 D가 정답이다. A는 일화만 요약했고, B는 글루건이 쓰이지 않으므로 틀리며, C는 지나치게 일반적이고 지문과 반대 방향의 교훈이다.\n### lit40-medium-07-073 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nImani had kept the boarding-house kitchen in Addis Ababa for thirty years, and she did not expect her son's new bride to change its rules. On her first morning, Jomo offered to translate the Amharic menu board into English for the foreign lodgers. Imani agreed, then frowned when a guest ordered the gentle stew and complained that it burned his tongue. Jomo explained that the Amharic word meant patient, slow-cooked, not mild, and that she should have chosen better. That evening Imani handed her the chalk herself and stood beside her, naming each dish while Jomo searched for the truest English. Neither spoke of the morning. On the windowsill, a pot of rue leaned toward the last light.\n\n[질문] Which choice best states the main idea of the text?\nA) A mother-in-law comes to trust a new bride who weighs words with care.\nB) A foreign lodger complains about the spiciness of a stew he ordered.\nC) A new bride takes over a kitchen against her mother-in-law's wishes.\nD) Families grow closer when they share household duties with one another.\n\n[표시된 정답] A\n[해설]\n처음에 Imani는 새 며느리가 부엌 규칙을 바꾸는 것을 달가워하지 않고 번역 실수에 얼굴을 찌푸린다. 그러나 Jomo가 단어의 정확한 뜻을 설명하고 책임을 인정하자, 저녁에는 직접 분필을 건네고 곁에서 함께 메뉴를 고친다. 이 대비가 신뢰의 형성을 보여 주므로 A가 정답이다. B는 일화만 요약했고, C는 시어머니의 뜻에 반한 것이 아니며, D는 지나치게 일반적인 교훈이다."
+}

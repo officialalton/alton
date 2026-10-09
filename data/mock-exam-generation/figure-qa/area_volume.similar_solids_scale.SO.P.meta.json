@@ -1,0 +1,101 @@
+{
+ "itemId": "area_volume.similar_solids_scale.SO.P",
+ "generatedAt": "2026-10-07T05:02:01.094Z",
+ "codeHash": "c05b9fa90adf74db190b21c299c580b450bab495e405c35c22451e26529cb81a",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.similar_solids_scale.SO.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/so-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.similar_solids_scale.SO.P.png",
+   "mobileFile": "area_volume.similar_solids_scale.SO.P.m375.png",
+   "archetypeId": "av.similar_solids_scale.SO.P.compose_kind",
+   "seed": 11,
+   "signature": "solid:cylinder",
+   "stimulus": "A teacher shows the class the solid below. Use the labels in the figure. A cylindrical can is shown in the figure, with the labeled measurements. A second cylinder has the same shape, with every dimension scaled up by a factor of 3.",
+   "question": "Find the volume of the larger cylinder in terms of $\\pi$.",
+   "options": [
+    "$27\\pi$",
+    "$729\\pi$",
+    "$243\\pi$",
+    "$81\\pi$"
+   ],
+   "correctIndex": 1,
+   "answer": "$729\\pi$",
+   "explanation": "(1) 그림에서 반지름 3 과 높이 3 를 읽는다. (2) 작은 원기둥의 부피 = π × 3² × 3 = 27π 이다. (3) 닮음비가 3 이므로 부피비는 3³ = 27 이다. (4) 큰 원기둥의 부피 = 27π × 27 이다. (5) 따라서 729π 이다. 따라서 정답은 $729\\pi$이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "area_volume.similar_solids_scale.SO.P~chain2.png",
+   "mobileFile": "area_volume.similar_solids_scale.SO.P~chain2.m375.png",
+   "archetypeId": "av.similar_solids_scale.SO.P.chain2",
+   "seed": 11,
+   "signature": "solid:rectangular_prism",
+   "stimulus": "A warehouse worker looks at the package shown. Read each label carefully before computing. A shipping carton in the shape of a rectangular prism is shown, with its edges labeled. A larger prism is similar to the one shown. Its height measures 10 units, which matches the height labeled in the figure.",
+   "question": "What is the volume of the larger solid?",
+   "options": [
+    "480",
+    "120",
+    "240",
+    "960"
+   ],
+   "correctIndex": 3,
+   "answer": "960",
+   "explanation": "(1) 그림에서 길이 6, 너비 4, 높이 5 를 읽는다. (2) 대응하는 높이: 5 → 10 이므로 닮음비 = 2 이다. (3) 작은 직육면체의 부피 = 6 × 4 × 5 = 120 이다. (4) 부피비 = 2³ = 8 이다. (5) 따라서 120 × 8 = 960 이다. 따라서 정답은 960이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "area_volume.similar_solids_scale.SO.P~repr_shift.png",
+   "mobileFile": "area_volume.similar_solids_scale.SO.P~repr_shift.m375.png",
+   "archetypeId": "av.similar_solids_scale.SO.P.repr_shift",
+   "seed": 11,
+   "signature": "solid:cone",
+   "stimulus": "A warehouse worker looks at the package shown. A calculator is not necessary. The figure shows a right circular cone with its labeled dimensions. The base of a similar, larger cone has an area 25 times as large as the base of this cone.",
+   "question": "What is the radius of the larger cone?",
+   "options": [
+    "11",
+    "30",
+    "6",
+    "150"
+   ],
+   "correctIndex": 1,
+   "answer": "30",
+   "explanation": "(1) 그림에서 반지름 6 을 읽는다. (2) 밑면의 넓이비 = 25 이다. (3) 닮음비 = √25 = 5 이다. (4) 큰 원뿔의 반지름 = 5 × 6 이다. (5) 따라서 30 이다. 따라서 정답은 30이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "area_volume.similar_solids_scale.SO.P~inverse.png",
+   "mobileFile": "area_volume.similar_solids_scale.SO.P~inverse.m375.png",
+   "archetypeId": "av.similar_solids_scale.SO.P.inverse",
+   "seed": 11,
+   "signature": "solid:cube",
+   "stimulus": "A designer plans the object shown. Lengths are given in inches. A cube-shaped gift is shown in the figure, with the edge length marked. The cube is enlarged to a similar cube that holds 64 cubic units.",
+   "question": "What number gives the scale factor of the enlargement?",
+   "options": [
+    "2",
+    "8",
+    "32",
+    "4"
+   ],
+   "correctIndex": 0,
+   "answer": "2",
+   "explanation": "(1) 그림에서 모서리 2 를 읽고 큰 정육면체의 부피 64 는 지문에서 안다. (2) 작은 정육면체의 부피 = 2³ = 8 이다. (3) 큰 정육면체의 모서리 = ∛64 = 4 이다. (4) 닮음비 = 4 ÷ 2 이다. (5) 따라서 2 이다. 따라서 정답은 2이다.",
+   "structuralIssues": []
+  }
+ ]
+}

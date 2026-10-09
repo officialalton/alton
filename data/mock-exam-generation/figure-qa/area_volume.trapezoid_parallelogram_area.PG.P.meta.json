@@ -1,0 +1,43 @@
+{
+ "itemId": "area_volume.trapezoid_parallelogram_area.PG.P",
+ "generatedAt": "2026-10-07T05:02:00.974Z",
+ "codeHash": "0f56ab0f72d26d225ac3be1a1099461bf563f29f13829dab08072a8a12096d64",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.trapezoid_parallelogram_area.PG.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.trapezoid_parallelogram_area.PG.P.png",
+   "mobileFile": "area_volume.trapezoid_parallelogram_area.PG.P.m375.png",
+   "archetypeId": "av.trapezoid_parallelogram_area.PG.P.compose_kind",
+   "seed": 11,
+   "signature": "polygon:trapezoid",
+   "stimulus": "An architect sketches the plan shown. Trapezoid $FMQY$ in the figure has bases $FM$ and $YQ$. All lengths are in meters.",
+   "question": "How large is the area of the shape shown?",
+   "options": [
+    "286",
+    "165",
+    "143",
+    "121"
+   ],
+   "correctIndex": 2,
+   "answer": "143",
+   "explanation": "(1) 그림에서 밑변 15, 11 와 높이 11 를 읽는다. (2) 두 밑변의 합 = 15 + 11 = 26 이다. (3) 넓이 = ½ × 26 × 11 이다. (4) = 143 이다. (5) 따라서 143 이다. 따라서 정답은 143이다.",
+   "structuralIssues": []
+  }
+ ]
+}

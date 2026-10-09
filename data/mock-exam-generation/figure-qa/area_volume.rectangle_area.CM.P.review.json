@@ -1,0 +1,23 @@
+{
+ "itemId": "area_volume.rectangle_area.CM.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:12:52Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "2178e37969c9be8c49f4b23d90de8f5901021f4d66149f36d06fcfb3ea3f0ab5",
+ "samples": [
+  "area_volume.rectangle_area.CM.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "복합 도형(큰 직사각형 속 직사각형 음영 테두리, notToScale 표기) 샘플 데스크톱·375px 확인: 바깥 너비·높이·안쪽 너비·높이 라벨이 겹침 없이 놓이고 음영·Note 정상. 갤러리/샘플에서 4 연산자(음영 넓이·h 역산·비용·절반 문장) 확인."
+}

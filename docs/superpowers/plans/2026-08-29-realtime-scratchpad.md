@@ -1,5 +1,7 @@
 # 실시간 공동 필기 문서 Implementation Plan
 
+> **문서 상태: 과거 구현 이력·직접 재실행 금지.** 현재 결과를 이해할 때만 참고하고 신규 작업은 v3의 event+snapshot 동시성 기준을 따른다.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 세션뷰 "연습장 > Docs" 탭의 외부 Google Docs 링크 기능을 완전히 제거하고, 같은 자리에 Supabase Realtime 기반 실시간 공동 텍스트 문서를 넣는다.

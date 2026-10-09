@@ -1,0 +1,44 @@
+{
+ "itemId": "lines_angles_triangles.triangle_inequality.TR.P",
+ "generatedAt": "2026-10-07T05:02:00.952Z",
+ "codeHash": "b42c8c09431c96286771c93d7ad7fc19b1ec382b332ded50ffc8a9eb4304ec06",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.triangle_inequality.TR.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tri-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.triangle_inequality.TR.P.png",
+   "mobileFile": "lines_angles_triangles.triangle_inequality.TR.P.m375.png",
+   "archetypeId": "lat.triangle_inequality.TR.P.constraint_select",
+   "seed": 11,
+   "signature": "triangle:scalene",
+   "stimulus": "A map maker marks the figure shown. A sketch of triangle $AEQ$ is shown. Two of its side lengths are labeled, and the third side has length $x$. The value of $x$ is an integer.",
+   "question": "How many integers can $x$ equal?",
+   "options": [
+    "26",
+    "13",
+    "15",
+    "14"
+   ],
+   "correctIndex": 1,
+   "answer": "13",
+   "explanation": "(1) 그림에서 두 변의 길이 7, 20 와 미지의 변 x 를 읽는다. (2) 삼각형 부등식: 두 변의 합 > 나머지 한 변, 즉 |a − b| < x < a + b 이다. (3) 13 < x < 27 이고 x 가 정수이므로 14 ≤ x ≤ 26 이다. (4) 개수 = 26 - 14 + 1 = 13 이다. (5) 따라서 13 이다. 따라서 정답은 13이다.",
+   "structuralIssues": []
+  }
+ ]
+}

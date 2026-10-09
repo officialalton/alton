@@ -1,0 +1,42 @@
+{
+ "itemId": "evaluating_statistical_claims.study_design_random_assignment.ST.P",
+ "generatedAt": "2026-10-07T05:02:00.528Z",
+ "codeHash": "020ece0f793a5e913948372dada107ab5a6b73f7ba6bda43866b1b15af873f74",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/evaluating_statistical_claims.study_design_random_assignment.ST.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "evaluating_statistical_claims.study_design_random_assignment.ST.P.png",
+   "mobileFile": "evaluating_statistical_claims.study_design_random_assignment.ST.P.m375.png",
+   "archetypeId": "esc.study_design_random_assignment.ST.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "The table shown describes a study of whether a daily ear-training app improves pitch accuracy scores among musicians. Every participant either was given a daily ear-training app or was not, and every participant was classified as improved or not improved.",
+   "question": "Which statement best explains what can be concluded about a daily ear-training app from this experiment?",
+   "options": [
+    "Participants who chose a daily ear-training app may differ in other ways (for example, some musicians practice longer), so a difference other than a daily ear-training app could explain the result.",
+    "The study cannot support any conclusion because it had fewer than 200 participants.",
+    "Because more participants improved with a daily ear-training app, the study proves that a daily ear-training app works for all musicians at a conservatory.",
+    "Because participants were randomly assigned, other differences between the conditions should be balanced, so a daily ear-training app likely caused the improvement."
+   ],
+   "correctIndex": 3,
+   "answer": "Because participants were randomly assigned, other differences between the conditions should be balanced, so a daily ear-training app likely caused the improvement.",
+   "explanation": "(1) 개선 비율: 처치 39/50, 비처치 30/60 로 처치 쪽이 높다. (2) 배정 방법: 무작위. (3) 무작위 배정이면 다른 차이가 두 조건에 고르게 나뉜다. (4) 참가자 수나 개선 인원은 인과 판단의 근거가 아니다. (5) 따라서 처치가 원인일 가능성이 높다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}

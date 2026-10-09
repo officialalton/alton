@@ -4,6 +4,7 @@ import LibraryDocView from "./LibraryDocView";
 import * as problemlogActions from "@/app/session/[id]/problemlog-actions";
 import type { LibraryDocDetail } from "@/app/student/materials-data";
 
+vi.mock("@/app/session/[id]/AssetMaterialViewer", () => ({ default: () => <div data-testid="asset-viewer" /> }));
 vi.mock("@/app/session/[id]/problemlog-actions", () => ({
   retryMcAttempt: vi.fn(),
   retryEssayAttempt: vi.fn(),
@@ -11,7 +12,10 @@ vi.mock("@/app/session/[id]/problemlog-actions", () => ({
 }));
 
 const doc: LibraryDocDetail = {
+  kind: "html",
+  asset: null,
   id: "doc1",
+  subjectId: "sub1",
   title: "이차방정식 개념 정리",
   sections: [
     {
@@ -40,10 +44,20 @@ const doc: LibraryDocDetail = {
 };
 
 describe("LibraryDocView", () => {
+  // 2026-10-05 무료 회원 S3 — 무료 공개 HTML 교재도 teaching_tip 은 학생(무료 회원 포함)·보호자에게 보이지 않는다.
+  it("teaching_tip 은 교사·관리자에게만 보인다", () => {
+    const withTip: LibraryDocDetail = { ...doc, sections: [{ ...doc.sections[0], teachingTip: "<p>교사용 팁입니다</p>" }] };
+    const { unmount } = render(<LibraryDocView doc={withTip} viewerRole="student" />);
+    expect(screen.queryByText("교사용 팁입니다")).not.toBeInTheDocument();
+    unmount();
+    render(<LibraryDocView doc={withTip} viewerRole="parent" />);
+    expect(screen.queryByText("교사용 팁입니다")).not.toBeInTheDocument();
+  });
+
   it("제목, 목차, 본문을 보여준다", () => {
     render(<LibraryDocView doc={doc} viewerRole="student" />);
     expect(screen.getByText("이차방정식 개념 정리")).toBeInTheDocument();
-    expect(screen.getByText("목차")).toBeInTheDocument();
+    expect(screen.getByText("Contents")).toBeInTheDocument();
     expect(
       screen.getByText(/판별식을 이용하면 실근의 개수를 알 수 있습니다/)
     ).toBeInTheDocument();
@@ -68,7 +82,7 @@ describe("LibraryDocView", () => {
     });
     render(<LibraryDocView doc={doc} viewerRole="student" />);
     fireEvent.click(screen.getByText("중근"));
-    fireEvent.click(screen.getByText("채점하기"));
+    fireEvent.click(screen.getByText("Check answer"));
     await waitFor(() =>
       expect(problemlogActions.retryMcAttempt).toHaveBeenCalledWith("p1", 1)
     );
@@ -102,7 +116,7 @@ describe("LibraryDocView", () => {
     });
     render(<LibraryDocView doc={redactedDoc} viewerRole="student" />);
     fireEvent.click(screen.getByText("중근"));
-    fireEvent.click(screen.getByText("채점하기"));
+    fireEvent.click(screen.getByText("Check answer"));
     await waitFor(() =>
       expect(problemlogActions.retryMcAttempt).toHaveBeenCalledWith("p1", 1)
     );
@@ -117,7 +131,7 @@ describe("LibraryDocView", () => {
   it("선생님/관리자에게는 정답과 해설이 항상 보이고 입력은 불가능하다", () => {
     render(<LibraryDocView doc={doc} viewerRole="teacher" />);
     expect(screen.getByText("D=0이면 중근을 가집니다.")).toBeInTheDocument();
-    expect(screen.queryByText("채점하기")).not.toBeInTheDocument();
+    expect(screen.queryByText("Check answer")).not.toBeInTheDocument();
   });
 
   it("학부모에게는 정답/해설/선택지가 전부 숨겨지고 안내 문구만 보인다", () => {
@@ -126,7 +140,25 @@ describe("LibraryDocView", () => {
     expect(screen.queryByText("중근")).not.toBeInTheDocument();
     expect(screen.queryByText("D=0이면 중근을 가집니다.")).not.toBeInTheDocument();
     expect(
-      screen.getByText("이 문제는 학생 계정으로 로그인해야 풀 수 있습니다.")
+      screen.getByText("Sign in with a student account to solve this problem.")
     ).toBeInTheDocument();
+  });
+
+  it("이전/다음 자료 링크가 있으면 상단에 보이고, 없으면 이 영역이 안 보인다(2026-09-15)", () => {
+    const { rerender } = render(<LibraryDocView doc={doc} viewerRole="student" />);
+    expect(screen.queryByText(/→$/)).not.toBeInTheDocument();
+
+    rerender(
+      <LibraryDocView
+        doc={doc}
+        viewerRole="student"
+        prevDoc={{ id: "doc0", title: "이전 교재", href: "/materials/doc0" }}
+        nextDoc={{ id: "doc2", title: "다음 교재", href: "/materials/doc2" }}
+      />
+    );
+    const prevLink = screen.getByText(/이전 교재/).closest("a");
+    expect(prevLink).toHaveAttribute("href", "/materials/doc0");
+    const nextLink = screen.getByText(/다음 교재/).closest("a");
+    expect(nextLink).toHaveAttribute("href", "/materials/doc2");
   });
 });

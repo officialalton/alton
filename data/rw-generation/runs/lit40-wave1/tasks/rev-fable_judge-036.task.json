@@ -1,0 +1,340 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-036",
+ "chunkId": "rev-fable_judge-036",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-036.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-04-051",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Galway in winter kept one pharmacy open through the night, and it was there, in the year I clerked behind its counter, that I watched two rival bakers make peace. Darius, who had come from Tabriz, needed a remedy for his daughter's cough, but the label was printed in Irish and English, and he read neither well. Cormac, whose bakery faced his across the square, happened to be waiting for liniment. The week before, Cormac had learned that Darius refused to undercut his bread prices during the flour shortage. Now I saw Cormac read the label aloud, then pause and read it again more slowly, correcting “three spoonfuls” to “three small spoonfuls,” as the chemist had written in his cramped hand. Afterward the two men walked out together into the sleet, arguing about rye.",
+   "question": "Based on the text, why does Cormac most likely read the label a second time so carefully?",
+   "options": [
+    "He wishes to display his education to the clerk standing behind the counter.",
+    "He fears the chemist will blame him if the medicine is taken incorrectly.",
+    "He wants to return Darius's fairness by making the dose perfectly clear.",
+    "He hopes that the two of them can later walk home together through the sleet."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-04-052",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "I sold the lamp. That was how I began my confession to Nargis, the surveyor who had come north to chart the coast near Tromso, when she found me at the open-air market one Saturday in 1911. For two months she had lodged at my lighthouse, and on her first night she had admired the brass lamp my father once kept polished, calling it the only warm thing in the tower. I had also seen her coat, thinner than any winter there allowed, and her boots split at the seams. While she was out measuring the fjord, I carried the lamp down to the market without telling her. With the coins I bought wool and paid a cobbler's stall to mend her boots before she returned. Around us the fish sellers were shouting prices, and gulls quarreled over a dropped herring.",
+   "question": "Based on the text, why does the narrator most likely sell the lamp?",
+   "options": [
+    "She resents that Nargis admired her father's lamp more than her own work.",
+    "She hopes the sale will earn Nargis's gratitude and persuade her to stay longer.",
+    "She needs money because lighthouse keepers had gone unpaid that winter.",
+    "She wants to provide for needs of Nargis's that she noticed without being told."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-04-053",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "I watched from my balcony that evening, surprised that a ranger knew anything about tomatoes. Zoya knelt in the community garden below as if she had planted it herself. Selin had wandered down from the hills above Thessaloniki at dusk, her map soaked, and the garden gate was the first light she found. Zoya gave her water and then, without asking, a trowel. “The man who started these beds died in spring,” Zoya said. “Nobody finished the last row.” For an hour they worked side by side, laughing when Selin planted a seedling upside down, pausing only once when Zoya touched a wooden marker carved with initials. By full dark, the row was done, and Selin had stopped glancing at the hills. A dog barked from a neighbor's balcony, and somewhere a radio played an old waltz.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Warm and companionable, with a brief undercurrent of grief",
+    "Mournful and heavy, with only a flicker of lightheartedness",
+    "Grieving, focused mainly on the death of the garden's founder",
+    "Tense and anxious, centered on a lost hiker's search for safety"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-04-054",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Takoda had been a priest for eleven years and had never once been thanked in coin, a fact Sequoia reminded him of each Thursday as she kneaded bread in the boarding-house kitchen. “The whole parish praises your sermons,” she said, punching the dough, “and the whole parish lets you mend your own boots.” He laughed, but she did not; she had cooked for the house for nine years on the same terms, and the lodgers called her loaves the finest in Albuquerque while paying for her board alone. Still, when he rose to leave, she pressed a warm loaf into his hands and told him to eat it before the dust did. The stove ticked as it cooled, and a moth circled the lamp above the flour bin.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Affectionate and tender, with only a slight trace of complaint",
+    "Wryly indignant, though softened by evident affection",
+    "Devout and reverent, honoring the dignity of a priest's calling",
+    "Grateful, centered on the lodgers' high praise for the bread"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-04-055",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "When the boats come in at dawn to the harbor in Hanoi,\nthe rule is old: the tenants' catch is weighed first,\nand the landlord's scale is always kind to the landlord.\nEveryone obeys. My father obeys. I, Aoife, obey,\nmy hands smelling of salt and silence.\nBut this morning Somchai, the landlord's son,\nstood at the scale and read the true weight aloud,\nloud enough for the gulls, loud enough for the nets.\nMy heart knocked like a hull against the pier,\nafraid of what his father would say,\nand still I lifted my basket higher\nso the whole dock could see the numbers.\nSomewhere a bell rang for the market.\nA woman sold green mangoes from a bicycle,\nand the river kept pushing its brown water toward the sea.",
+   "question": "Which choice best describes the overall tone of the poem?",
+   "options": [
+    "Fearful and anxious, with only a faint glimmer of courage",
+    "Resigned, accepting an unfair rule as something unchangeable",
+    "Defiantly hopeful, though shadowed by some lingering fear",
+    "Nostalgic, fondly recalling the familiar routines of harbor life"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-04-056",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Years ago, when the orchestra rehearsed in a Kingston warehouse, Younghee, its youngest violinist, practiced alone beside the rooftop water tank, where the heat bent the air and no one could hear her mistakes. One afternoon she found a folded letter tucked beneath the tank's iron ladder. It praised “the girl who plays the hard passage twelve times without complaint,” and it was signed with an L, the initial of Linton, the conductor. She blushed so fiercely that she nearly dropped her bow. Only later did she learn it was a draft recommendation for another student, a cellist who also practiced up there. Even so, she carried the phrase with her for years, playing the hard passage twelve times, then thirteen. Below, the street vendors called out the price of ackee and saltfish.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Chiefly mortified, with just a trace of lingering fondness",
+    "Bitter, resenting the praise given to a different student",
+    "Embarrassed, focused mainly on a mistaken reading of a letter",
+    "Tenderly reflective, with a flash of youthful embarrassment"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-04-057",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Warm celluloid and machine oil: that smell still returns to me whenever it rains. In the projection booth of the old cinema in Kerala, Rajendra taught Zeynep to splice film without saying more than a dozen words a night. They had been friends since childhood, and talk had long ago become unnecessary between them. He would hold a strip up to the bulb, and she would nod; he would press the cement, and she would count the seconds under her breath. Everyone in town said that soon no theater would need such hands, and some nights the empty seats below seemed to agree. Yet the two of them worked as though each careful join were a promise. Rain drummed on the corrugated roof, and a bat slipped out through the vent.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Quietly devoted, shaded by a sense of loss",
+    "Mournful, with only a passing hint of devotion",
+    "Regretful, focused on the decline of the cinema",
+    "Playful, celebrating a friendship built on teasing"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-04-060",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "How do you tell a man the truth about his own fall? That was the question I carried up to the hospital roof in Busan each night, where I hung the ward's towels on the laundry line after my shift. Chulsoo, my night patient, had slipped from scaffolding, and his foreman, Gyeongho, wanted the report to say he had been careless. Chulsoo insisted the harness had been frayed. One night he asked me to write down his account exactly, and when I hesitated, he said, “You are the only one here who does not finish my sentences.” I wrote every word, then read it back to him twice. Afterward he asked, half joking, whether I would visit the scaffolding with him once he could walk. The towels snapped in the wind, and below us the harbor cranes swung their red lights over the water.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator and Chulsoo?",
+   "options": [
+    "A patient who distrusts his nurse and suspects that she sides with his foreman",
+    "A nurse who depends on her patient to help her finish her nightly chores",
+    "A typical hospital arrangement in which the nurse keeps a cool distance",
+    "A nurse and patient bound by trust built on her careful attention to his words"
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-04-061",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "\"Put your name beside mine on the cover,\" Kwame said, though he did not look up from the proofs. We had taken over the back rows of a shuttered cinema in Dakar because the owner, idle until the rainy months ended, rented it to us cheaply. For weeks I had turned his Wolof stories into English sentences, and he had read every page aloud to me, stopping to ask whether a word still sounded like him. I told him an interpreter's name belonged inside the book, in small print. He shook his head and penciled my initials into the margin of each chapter we had argued over most. Above us, the projector booth stood dark, and dust drifted through the single bar of light from the lobby door.",
+   "question": "Based on the text, how would the narrator's relationship with Kwame best be described?",
+   "options": [
+    "A collaboration in which Kwame credits the narrator more readily than she credits herself",
+    "A tense arrangement in which the narrator resents being left out of the credit",
+    "A formal partnership in which the narrator demands credit that Kwame withholds",
+    "A typical business bond in which Kwame treats the interpreter's work as minor"
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-04-062",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "When Ximena returned to the terraces in the hills outside Lima, Anacleto was still pruning the old tea bushes the way her mother had taught him, cutting each stem back hard so it would flush green in spring. She had not answered his letter for six years. He had written it the winter after the funeral, a single page saying he had been wrong to send her away to her aunt's house. Now he handed her the shears without a word. Along the row she noticed the bush he had cut too late the year before: its leaves had come in thin and bitter, and he had left it standing anyway. \"Some of them recover,\" he said. \"Some take longer.\" Ximena knelt and began clearing the dead wood from its base, while mist slid down from the ridge and settled over the lower rows.",
+   "question": "In the text, the bush that was cut too late most likely represents",
+   "options": [
+    "the decline of the plantation since the death of Ximena's mother",
+    "Anacleto's belated apology and his hope that it can still mend things",
+    "Ximena's resentment, which has grown bitter during her years away",
+    "the harsh discipline Anacleto once imposed on his stepdaughter"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-063",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Cairo had stayed behind us on the far side of the canal, and the farmhouse I had rented seemed to belong to no city at all. On my first morning, Thida showed me the lemon tree by the well, a graft she had bound to a wild root years earlier. The scar still showed, a pale ring where the two barks had met and refused, for a season, to agree. I said I did not know how long I would stay. Thida only tightened the old twine around a new cutting and told me grafts take best when no one watches them too closely. Each evening after that, Zaynab, I told myself, go and see the tree, and I walked to it before supper, pressing my thumb against the ring as if checking a pulse. By the end of the month a single green shoot had pushed out just above it. In the kitchen the kettle whistled, and the shutters knocked against the frame in the wind.",
+   "question": "In the text, the grafted lemon tree most likely symbolizes",
+   "options": [
+    "Thida's loyalty to the farmhouse and to its previous tenants",
+    "the narrator's regret about leaving her life in the city",
+    "the narrator's gradual effort to take root in a new place",
+    "the quiet conflict between the narrator and Thida over the garden"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-065",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Ramses Station, in the autumn of 1987, kept a narrow cafe beside platform four where students waited out the delays over sweet tea. Yasmin went there every Thursday to pay Karim, her younger brother's tutor, from an envelope she counted twice. He always refused the last coin, pressing it back into her palm with a joke about inflation. She never argued; instead she slipped it into a chipped glass jar on the counter, where the waiter collected change for the boy who swept the platforms. Neither of them ever spoke of it. By spring the jar was nearly full, its coins dull from handling, and the boy was wearing a pair of new shoes. When the trains at last ran on schedule again, the cafe rearranged its tables, but someone kept the jar beside the register.",
+   "question": "In the text, the glass jar most likely symbolizes",
+   "options": [
+    "a quiet generosity that Yasmin and Karim share without discussing it",
+    "Yasmin's lingering anxiety about the cost of her brother's lessons",
+    "Karim's reluctance to accept any payment for his teaching",
+    "the cafe's struggle to survive the station's long delays"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-066",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Sunethra kept the keeper's lodge at the reservoir above Lisbon in the year of the great drought, and it was there, in 1868, that Joaquim stumbled out of the pines after two nights astray. She fed him, dried his boots, and on the third morning walked him to the end of the dock, where a lantern hung on a post. It was her custom to light it for every departing traveler, even by day. Joaquim laughed and said a handshake would do. She lit it anyway. He told the story for years afterward: how he had looked back from the ridge and seen the small flame still burning above the water long after the lodge itself had vanished behind the trees. In his telling, he never said whether he waved.",
+   "question": "In the text, the lantern on the dock most likely represents",
+   "options": [
+    "the danger of crossing the hills without a guide",
+    "a farewell that lets Sunethra's care follow Joaquim",
+    "Sunethra's fear that Joaquim will become lost again",
+    "Joaquim's amusement at the keeper's formal customs"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-067",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "When Camila found the photograph in the drawer of my sea chest, she carried it out to the orchard where I was sitting among the dead mango trees. In the picture I was twenty, grinning on the deck of a freighter, an arm around a man I had not spoken of in forty years. She asked who he was. I told her the trees had stopped bearing the summer I came home, as if they had waited for me and then given up. She did not let me change the subject. She set the photograph on my knee and waited. For a while the memory sat in my chest like an anchor dropped in deep water, heavy and impossible to haul up alone. Then, slowly, with her still beside me, I began to tell her about the storm off Veracruz. Camila listened, peeling a dry branch into strips, while the wind moved through the bare limbs overhead.",
+   "question": "As used in the text, the phrase “like an anchor dropped in deep water” most nearly suggests that the memory is",
+   "options": [
+    "dangerous and likely to cause the narrator further harm",
+    "buried so long that the narrator has truly forgotten it",
+    "weighty and hard for the narrator to raise without help",
+    "steadying and a reliable source of comfort to the narrator"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-069",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "When the mourners left the hall in Chengdu,\nJianguo and I walked to the salt-water baths\nour grandfather had built in the year of floods.\nEleni, he asked, you passed your examinations?\nI nodded, and the lie went under\nlike a stone into the brine,\nwhere nothing sinks quite all the way.\n\nWe sat on the tiled edge, feet in the green water.\nHe spoke of the ledger he had kept for the old man,\nof figures he had copied twice.\nI watched my small untruth bob near the surface,\npale as a coin, refusing to drown.\n\nAbove the pool the paper lanterns swung,\nand someone in the courtyard swept the ash.",
+   "question": "As used in the text, the phrase “where nothing sinks quite all the way” most nearly suggests that the speaker's lie",
+   "options": [
+    "cannot be fully hidden and keeps threatening to resurface",
+    "was forgotten almost as soon as the speaker had told it",
+    "will soon be discovered and harshly judged by Jianguo",
+    "is far too small to carry any lasting importance at all"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-070",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "What does a town do when its two oldest customs both claim the same evening? In the Riga suburb where I grew up, the answer was worked out in 1991 at the back of Vesna's shoe repair stall, because she was mayor and the stall had the only table long enough. Pavel, the town's only doctor, wanted the midsummer supper to follow his family's Orthodox fast; Vesna's neighbors wanted the old Latvian songs and the cheese with caraway. For an hour they argued over awls and heel nails. Then Pavel took a needle from the bench and said the problem was simple stitching. Two leathers of different grain, he explained, can still be sewn into a single sole if the thread is patient. By midnight they had a menu that served both. I still keep a pair of shoes resoled at that stall, and the seam has never split.",
+   "question": "As used in the text, the phrase “sewn into a single sole” most nearly suggests",
+   "options": [
+    "forcing one tradition to give way entirely to the other",
+    "joining two different customs into one shared occasion",
+    "repairing an old friendship that had broken apart",
+    "simplifying the supper by removing its older rituals"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-071",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Not the river, Omar, Aponi said, before I had even opened my mouth. We were standing on the stone bridge below the mesa in the spring of 1879, the first time I had seen her since my family moved east to the trading post. As children we had crossed this bridge daily; the summer before I left, her brother had been caught by the flood beneath it. We had never spoken of it, and now we kept a fence of silence around that one field, walking beside it with great care. So we talked of horses, of my father's ledgers, of the new schoolhouse. Whenever the water grew loud below us, she pointed to a hawk or asked about the weather in the east. I let her. At dusk the shadows of the arches stretched across the dry wash, and a flock of sheep came down the far slope.",
+   "question": "As used in the text, the phrase “a fence of silence around that one field” most nearly suggests",
+   "options": [
+    "a quarrel that has ended the friendship between Omar and Aponi",
+    "the physical boundary dividing the two families' grazing lands",
+    "a shared and careful avoidance of one painful subject",
+    "Aponi's wish to keep Omar from returning to the plateau"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-079",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Although the salt-water pool at the community center in Dayton, Ohio, had been Paloma's for thirty years, she let me open it that morning, handing me the ring of keys with a ceremony that made me laugh. I was nineteen, her apprentice lifeguard, and restless; the new aquatic park across town had offered me a job at twice the pay. I joked about it while we tested the water and skimmed the leaves. Paloma joked back, asking whether the new place came with a wave machine and a manager half my age. Then she stopped skimming. She told me the pool had been dug by her father's crew, that she had taught every child in the neighborhood to float in its shallow end, and that she had hoped someone would know where the drain stuck in winter. I put down the net. Across the water, the morning light lay flat and bright on the tiles.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "It moves from nostalgic reflection to bitter accusation as Paloma blames the narrator.",
+    "It moves from anxious doubt to calm confidence as the narrator decides to leave.",
+    "It moves from formal instruction to casual joking as Paloma relaxes her standards.",
+    "It moves from playful banter to quiet seriousness as Paloma speaks of the pool."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-080",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Hasan, our foreman, had a habit of counting chairs. At every wedding we staffed in Thessaloniki that summer of 1872, he walked the hall twice before the guests arrived, tapping each chair back and muttering numbers, and I, newly hired, trailed behind him trying not to smile. That evening the hall was so crowded that the count fell apart at once; guests perched on window ledges, and the musicians spilled onto the stairs. I expected an outburst. Instead Hasan stood still among the dancers, and something in his face loosened. He told me, quite softly, that his father had been a foreman too and had once been dismissed because a single guest went without a seat. Then he handed me his tally slate. Keep it or break it, Sadia, he said. Beyond the doors, a cart rolled past on the wet stones.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "It moves from lightly amused observation to a tender, reflective mood.",
+    "It moves from fearful tension to triumphant celebration of the wedding.",
+    "It moves from solemn grief to cheerful relief once the guests arrive.",
+    "It moves from bitter complaint to grudging respect for Hasan's rules."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-001",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Nova had come up the mountain road above Marrakesh to repay an old loan, and the snow trapped both of them in Dalia's cabin for three days. On the first morning, Nova counted the money twice and set it on the table, but Dalia only pushed it aside and asked for help clearing the woodpile. Under the drift, the wind had uncovered a tin box Dalia had buried years earlier, holding every receipt from the loan, each one marked forgiven in faded pencil. Nova had spent a decade dreading this visit, rehearsing apologies on long bus rides. Now Dalia simply fed the stove and asked about Nova's work, as if no account had ever been open. Outside, the snow kept sliding off the cedar branches in soft, heavy sheets that hissed as they struck the ground.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show that a debt Nova had long feared was something Dalia had quietly released years before.",
+    "To recount how a heavy snowstorm forced Nova to remain in Dalia's mountain cabin for several days.",
+    "To describe the practical difficulties of keeping a remote cabin warm during a severe winter.",
+    "To suggest that family members should always settle their money matters without any delay."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-036 — 20문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-036.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-04-051 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nGalway in winter kept one pharmacy open through the night, and it was there, in the year I clerked behind its counter, that I watched two rival bakers make peace. Darius, who had come from Tabriz, needed a remedy for his daughter's cough, but the label was printed in Irish and English, and he read neither well. Cormac, whose bakery faced his across the square, happened to be waiting for liniment. The week before, Cormac had learned that Darius refused to undercut his bread prices during the flour shortage. Now I saw Cormac read the label aloud, then pause and read it again more slowly, correcting “three spoonfuls” to “three small spoonfuls,” as the chemist had written in his cramped hand. Afterward the two men walked out together into the sleet, arguing about rye.\n\n[질문] Based on the text, why does Cormac most likely read the label a second time so carefully?\nA) He wishes to display his education to the clerk standing behind the counter.\nB) He fears the chemist will blame him if the medicine is taken incorrectly.\nC) He wants to return Darius's fairness by making the dose perfectly clear.\nD) He hopes that the two of them can later walk home together through the sleet.\n### lit40-medium-04-052 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nI sold the lamp. That was how I began my confession to Nargis, the surveyor who had come north to chart the coast near Tromso, when she found me at the open-air market one Saturday in 1911. For two months she had lodged at my lighthouse, and on her first night she had admired the brass lamp my father once kept polished, calling it the only warm thing in the tower. I had also seen her coat, thinner than any winter there allowed, and her boots split at the seams. While she was out measuring the fjord, I carried the lamp down to the market without telling her. With the coins I bought wool and paid a cobbler's stall to mend her boots before she returned. Around us the fish sellers were shouting prices, and gulls quarreled over a dropped herring.\n\n[질문] Based on the text, why does the narrator most likely sell the lamp?\nA) She resents that Nargis admired her father's lamp more than her own work.\nB) She hopes the sale will earn Nargis's gratitude and persuade her to stay longer.\nC) She needs money because lighthouse keepers had gone unpaid that winter.\nD) She wants to provide for needs of Nargis's that she noticed without being told.\n### lit40-medium-04-053 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nI watched from my balcony that evening, surprised that a ranger knew anything about tomatoes. Zoya knelt in the community garden below as if she had planted it herself. Selin had wandered down from the hills above Thessaloniki at dusk, her map soaked, and the garden gate was the first light she found. Zoya gave her water and then, without asking, a trowel. “The man who started these beds died in spring,” Zoya said. “Nobody finished the last row.” For an hour they worked side by side, laughing when Selin planted a seedling upside down, pausing only once when Zoya touched a wooden marker carved with initials. By full dark, the row was done, and Selin had stopped glancing at the hills. A dog barked from a neighbor's balcony, and somewhere a radio played an old waltz.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Warm and companionable, with a brief undercurrent of grief\nB) Mournful and heavy, with only a flicker of lightheartedness\nC) Grieving, focused mainly on the death of the garden's founder\nD) Tense and anxious, centered on a lost hiker's search for safety\n### lit40-medium-04-054 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nTakoda had been a priest for eleven years and had never once been thanked in coin, a fact Sequoia reminded him of each Thursday as she kneaded bread in the boarding-house kitchen. “The whole parish praises your sermons,” she said, punching the dough, “and the whole parish lets you mend your own boots.” He laughed, but she did not; she had cooked for the house for nine years on the same terms, and the lodgers called her loaves the finest in Albuquerque while paying for her board alone. Still, when he rose to leave, she pressed a warm loaf into his hands and told him to eat it before the dust did. The stove ticked as it cooled, and a moth circled the lamp above the flour bin.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Affectionate and tender, with only a slight trace of complaint\nB) Wryly indignant, though softened by evident affection\nC) Devout and reverent, honoring the dignity of a priest's calling\nD) Grateful, centered on the lodgers' high praise for the bread\n### lit40-medium-04-055 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nWhen the boats come in at dawn to the harbor in Hanoi,\nthe rule is old: the tenants' catch is weighed first,\nand the landlord's scale is always kind to the landlord.\nEveryone obeys. My father obeys. I, Aoife, obey,\nmy hands smelling of salt and silence.\nBut this morning Somchai, the landlord's son,\nstood at the scale and read the true weight aloud,\nloud enough for the gulls, loud enough for the nets.\nMy heart knocked like a hull against the pier,\nafraid of what his father would say,\nand still I lifted my basket higher\nso the whole dock could see the numbers.\nSomewhere a bell rang for the market.\nA woman sold green mangoes from a bicycle,\nand the river kept pushing its brown water toward the sea.\n\n[질문] Which choice best describes the overall tone of the poem?\nA) Fearful and anxious, with only a faint glimmer of courage\nB) Resigned, accepting an unfair rule as something unchangeable\nC) Defiantly hopeful, though shadowed by some lingering fear\nD) Nostalgic, fondly recalling the familiar routines of harbor life\n### lit40-medium-04-056 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nYears ago, when the orchestra rehearsed in a Kingston warehouse, Younghee, its youngest violinist, practiced alone beside the rooftop water tank, where the heat bent the air and no one could hear her mistakes. One afternoon she found a folded letter tucked beneath the tank's iron ladder. It praised “the girl who plays the hard passage twelve times without complaint,” and it was signed with an L, the initial of Linton, the conductor. She blushed so fiercely that she nearly dropped her bow. Only later did she learn it was a draft recommendation for another student, a cellist who also practiced up there. Even so, she carried the phrase with her for years, playing the hard passage twelve times, then thirteen. Below, the street vendors called out the price of ackee and saltfish.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Chiefly mortified, with just a trace of lingering fondness\nB) Bitter, resenting the praise given to a different student\nC) Embarrassed, focused mainly on a mistaken reading of a letter\nD) Tenderly reflective, with a flash of youthful embarrassment\n### lit40-medium-04-057 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nWarm celluloid and machine oil: that smell still returns to me whenever it rains. In the projection booth of the old cinema in Kerala, Rajendra taught Zeynep to splice film without saying more than a dozen words a night. They had been friends since childhood, and talk had long ago become unnecessary between them. He would hold a strip up to the bulb, and she would nod; he would press the cement, and she would count the seconds under her breath. Everyone in town said that soon no theater would need such hands, and some nights the empty seats below seemed to agree. Yet the two of them worked as though each careful join were a promise. Rain drummed on the corrugated roof, and a bat slipped out through the vent.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Quietly devoted, shaded by a sense of loss\nB) Mournful, with only a passing hint of devotion\nC) Regretful, focused on the decline of the cinema\nD) Playful, celebrating a friendship built on teasing\n### lit40-medium-04-060 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nHow do you tell a man the truth about his own fall? That was the question I carried up to the hospital roof in Busan each night, where I hung the ward's towels on the laundry line after my shift. Chulsoo, my night patient, had slipped from scaffolding, and his foreman, Gyeongho, wanted the report to say he had been careless. Chulsoo insisted the harness had been frayed. One night he asked me to write down his account exactly, and when I hesitated, he said, “You are the only one here who does not finish my sentences.” I wrote every word, then read it back to him twice. Afterward he asked, half joking, whether I would visit the scaffolding with him once he could walk. The towels snapped in the wind, and below us the harbor cranes swung their red lights over the water.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator and Chulsoo?\nA) A patient who distrusts his nurse and suspects that she sides with his foreman\nB) A nurse who depends on her patient to help her finish her nightly chores\nC) A typical hospital arrangement in which the nurse keeps a cool distance\nD) A nurse and patient bound by trust built on her careful attention to his words\n### lit40-medium-04-061 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\n\"Put your name beside mine on the cover,\" Kwame said, though he did not look up from the proofs. We had taken over the back rows of a shuttered cinema in Dakar because the owner, idle until the rainy months ended, rented it to us cheaply. For weeks I had turned his Wolof stories into English sentences, and he had read every page aloud to me, stopping to ask whether a word still sounded like him. I told him an interpreter's name belonged inside the book, in small print. He shook his head and penciled my initials into the margin of each chapter we had argued over most. Above us, the projector booth stood dark, and dust drifted through the single bar of light from the lobby door.\n\n[질문] Based on the text, how would the narrator's relationship with Kwame best be described?\nA) A collaboration in which Kwame credits the narrator more readily than she credits herself\nB) A tense arrangement in which the narrator resents being left out of the credit\nC) A formal partnership in which the narrator demands credit that Kwame withholds\nD) A typical business bond in which Kwame treats the interpreter's work as minor\n### lit40-medium-04-062 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nWhen Ximena returned to the terraces in the hills outside Lima, Anacleto was still pruning the old tea bushes the way her mother had taught him, cutting each stem back hard so it would flush green in spring. She had not answered his letter for six years. He had written it the winter after the funeral, a single page saying he had been wrong to send her away to her aunt's house. Now he handed her the shears without a word. Along the row she noticed the bush he had cut too late the year before: its leaves had come in thin and bitter, and he had left it standing anyway. \"Some of them recover,\" he said. \"Some take longer.\" Ximena knelt and began clearing the dead wood from its base, while mist slid down from the ridge and settled over the lower rows.\n\n[질문] In the text, the bush that was cut too late most likely represents\nA) the decline of the plantation since the death of Ximena's mother\nB) Anacleto's belated apology and his hope that it can still mend things\nC) Ximena's resentment, which has grown bitter during her years away\nD) the harsh discipline Anacleto once imposed on his stepdaughter\n### lit40-medium-04-063 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nCairo had stayed behind us on the far side of the canal, and the farmhouse I had rented seemed to belong to no city at all. On my first morning, Thida showed me the lemon tree by the well, a graft she had bound to a wild root years earlier. The scar still showed, a pale ring where the two barks had met and refused, for a season, to agree. I said I did not know how long I would stay. Thida only tightened the old twine around a new cutting and told me grafts take best when no one watches them too closely. Each evening after that, Zaynab, I told myself, go and see the tree, and I walked to it before supper, pressing my thumb against the ring as if checking a pulse. By the end of the month a single green shoot had pushed out just above it. In the kitchen the kettle whistled, and the shutters knocked against the frame in the wind.\n\n[질문] In the text, the grafted lemon tree most likely symbolizes\nA) Thida's loyalty to the farmhouse and to its previous tenants\nB) the narrator's regret about leaving her life in the city\nC) the narrator's gradual effort to take root in a new place\nD) the quiet conflict between the narrator and Thida over the garden\n### lit40-medium-04-065 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nRamses Station, in the autumn of 1987, kept a narrow cafe beside platform four where students waited out the delays over sweet tea. Yasmin went there every Thursday to pay Karim, her younger brother's tutor, from an envelope she counted twice. He always refused the last coin, pressing it back into her palm with a joke about inflation. She never argued; instead she slipped it into a chipped glass jar on the counter, where the waiter collected change for the boy who swept the platforms. Neither of them ever spoke of it. By spring the jar was nearly full, its coins dull from handling, and the boy was wearing a pair of new shoes. When the trains at last ran on schedule again, the cafe rearranged its tables, but someone kept the jar beside the register.\n\n[질문] In the text, the glass jar most likely symbolizes\nA) a quiet generosity that Yasmin and Karim share without discussing it\nB) Yasmin's lingering anxiety about the cost of her brother's lessons\nC) Karim's reluctance to accept any payment for his teaching\nD) the cafe's struggle to survive the station's long delays\n### lit40-medium-04-066 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nSunethra kept the keeper's lodge at the reservoir above Lisbon in the year of the great drought, and it was there, in 1868, that Joaquim stumbled out of the pines after two nights astray. She fed him, dried his boots, and on the third morning walked him to the end of the dock, where a lantern hung on a post. It was her custom to light it for every departing traveler, even by day. Joaquim laughed and said a handshake would do. She lit it anyway. He told the story for years afterward: how he had looked back from the ridge and seen the small flame still burning above the water long after the lodge itself had vanished behind the trees. In his telling, he never said whether he waved.\n\n[질문] In the text, the lantern on the dock most likely represents\nA) the danger of crossing the hills without a guide\nB) a farewell that lets Sunethra's care follow Joaquim\nC) Sunethra's fear that Joaquim will become lost again\nD) Joaquim's amusement at the keeper's formal customs\n### lit40-medium-04-067 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nWhen Camila found the photograph in the drawer of my sea chest, she carried it out to the orchard where I was sitting among the dead mango trees. In the picture I was twenty, grinning on the deck of a freighter, an arm around a man I had not spoken of in forty years. She asked who he was. I told her the trees had stopped bearing the summer I came home, as if they had waited for me and then given up. She did not let me change the subject. She set the photograph on my knee and waited. For a while the memory sat in my chest like an anchor dropped in deep water, heavy and impossible to haul up alone. Then, slowly, with her still beside me, I began to tell her about the storm off Veracruz. Camila listened, peeling a dry branch into strips, while the wind moved through the bare limbs overhead.\n\n[질문] As used in the text, the phrase “like an anchor dropped in deep water” most nearly suggests that the memory is\nA) dangerous and likely to cause the narrator further harm\nB) buried so long that the narrator has truly forgotten it\nC) weighty and hard for the narrator to raise without help\nD) steadying and a reliable source of comfort to the narrator\n### lit40-medium-04-069 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nWhen the mourners left the hall in Chengdu,\nJianguo and I walked to the salt-water baths\nour grandfather had built in the year of floods.\nEleni, he asked, you passed your examinations?\nI nodded, and the lie went under\nlike a stone into the brine,\nwhere nothing sinks quite all the way.\n\nWe sat on the tiled edge, feet in the green water.\nHe spoke of the ledger he had kept for the old man,\nof figures he had copied twice.\nI watched my small untruth bob near the surface,\npale as a coin, refusing to drown.\n\nAbove the pool the paper lanterns swung,\nand someone in the courtyard swept the ash.\n\n[질문] As used in the text, the phrase “where nothing sinks quite all the way” most nearly suggests that the speaker's lie\nA) cannot be fully hidden and keeps threatening to resurface\nB) was forgotten almost as soon as the speaker had told it\nC) will soon be discovered and harshly judged by Jianguo\nD) is far too small to carry any lasting importance at all\n### lit40-medium-04-070 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nWhat does a town do when its two oldest customs both claim the same evening? In the Riga suburb where I grew up, the answer was worked out in 1991 at the back of Vesna's shoe repair stall, because she was mayor and the stall had the only table long enough. Pavel, the town's only doctor, wanted the midsummer supper to follow his family's Orthodox fast; Vesna's neighbors wanted the old Latvian songs and the cheese with caraway. For an hour they argued over awls and heel nails. Then Pavel took a needle from the bench and said the problem was simple stitching. Two leathers of different grain, he explained, can still be sewn into a single sole if the thread is patient. By midnight they had a menu that served both. I still keep a pair of shoes resoled at that stall, and the seam has never split.\n\n[질문] As used in the text, the phrase “sewn into a single sole” most nearly suggests\nA) forcing one tradition to give way entirely to the other\nB) joining two different customs into one shared occasion\nC) repairing an old friendship that had broken apart\nD) simplifying the supper by removing its older rituals\n### lit40-medium-04-071 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nNot the river, Omar, Aponi said, before I had even opened my mouth. We were standing on the stone bridge below the mesa in the spring of 1879, the first time I had seen her since my family moved east to the trading post. As children we had crossed this bridge daily; the summer before I left, her brother had been caught by the flood beneath it. We had never spoken of it, and now we kept a fence of silence around that one field, walking beside it with great care. So we talked of horses, of my father's ledgers, of the new schoolhouse. Whenever the water grew loud below us, she pointed to a hawk or asked about the weather in the east. I let her. At dusk the shadows of the arches stretched across the dry wash, and a flock of sheep came down the far slope.\n\n[질문] As used in the text, the phrase “a fence of silence around that one field” most nearly suggests\nA) a quarrel that has ended the friendship between Omar and Aponi\nB) the physical boundary dividing the two families' grazing lands\nC) a shared and careful avoidance of one painful subject\nD) Aponi's wish to keep Omar from returning to the plateau\n### lit40-medium-04-079 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nAlthough the salt-water pool at the community center in Dayton, Ohio, had been Paloma's for thirty years, she let me open it that morning, handing me the ring of keys with a ceremony that made me laugh. I was nineteen, her apprentice lifeguard, and restless; the new aquatic park across town had offered me a job at twice the pay. I joked about it while we tested the water and skimmed the leaves. Paloma joked back, asking whether the new place came with a wave machine and a manager half my age. Then she stopped skimming. She told me the pool had been dug by her father's crew, that she had taught every child in the neighborhood to float in its shallow end, and that she had hoped someone would know where the drain stuck in winter. I put down the net. Across the water, the morning light lay flat and bright on the tiles.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) It moves from nostalgic reflection to bitter accusation as Paloma blames the narrator.\nB) It moves from anxious doubt to calm confidence as the narrator decides to leave.\nC) It moves from formal instruction to casual joking as Paloma relaxes her standards.\nD) It moves from playful banter to quiet seriousness as Paloma speaks of the pool.\n### lit40-medium-04-080 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nHasan, our foreman, had a habit of counting chairs. At every wedding we staffed in Thessaloniki that summer of 1872, he walked the hall twice before the guests arrived, tapping each chair back and muttering numbers, and I, newly hired, trailed behind him trying not to smile. That evening the hall was so crowded that the count fell apart at once; guests perched on window ledges, and the musicians spilled onto the stairs. I expected an outburst. Instead Hasan stood still among the dancers, and something in his face loosened. He told me, quite softly, that his father had been a foreman too and had once been dismissed because a single guest went without a seat. Then he handed me his tally slate. Keep it or break it, Sadia, he said. Beyond the doors, a cart rolled past on the wet stones.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) It moves from lightly amused observation to a tender, reflective mood.\nB) It moves from fearful tension to triumphant celebration of the wedding.\nC) It moves from solemn grief to cheerful relief once the guests arrive.\nD) It moves from bitter complaint to grudging respect for Hasan's rules.\n### lit40-medium-05-001 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nNova had come up the mountain road above Marrakesh to repay an old loan, and the snow trapped both of them in Dalia's cabin for three days. On the first morning, Nova counted the money twice and set it on the table, but Dalia only pushed it aside and asked for help clearing the woodpile. Under the drift, the wind had uncovered a tin box Dalia had buried years earlier, holding every receipt from the loan, each one marked forgiven in faded pencil. Nova had spent a decade dreading this visit, rehearsing apologies on long bus rides. Now Dalia simply fed the stove and asked about Nova's work, as if no account had ever been open. Outside, the snow kept sliding off the cedar branches in soft, heavy sheets that hissed as they struck the ground.\n\n[질문] Which choice best states the main purpose of the text?\nA) To show that a debt Nova had long feared was something Dalia had quietly released years before.\nB) To recount how a heavy snowstorm forced Nova to remain in Dalia's mountain cabin for several days.\nC) To describe the practical difficulties of keeping a remote cabin warm during a severe winter.\nD) To suggest that family members should always settle their money matters without any delay."
+}

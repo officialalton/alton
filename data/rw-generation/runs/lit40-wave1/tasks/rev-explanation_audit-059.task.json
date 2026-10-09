@@ -1,0 +1,349 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-059",
+ "chunkId": "rev-explanation_audit-059",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-059.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-02-088",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "My name was sent in to headquarters, and I was soon summoned to appear there myself. Mr. and Mrs. B. accompanied me. We were ushered into the presence of Generals Mc., M. and H., where I was questioned and cross-questioned with regard to my views of the rebellion and my motive in wishing to engage in so perilous an undertaking. My views were freely given, my object briefly stated, and I had passed trial number one.\n\nNext I was examined with regard to my knowledge of the use of firearms, and in that department I sustained my character in a manner worthy of a veteran. Then I was again cross-questioned, but this time by a new committee of military stars.",
+   "question": "Based on the text, why is the narrator summoned to headquarters?",
+   "options": [
+    "To receive a reward for past bravery in battle",
+    "To be punished by the generals for openly criticizing their plans for the war",
+    "To be evaluated for a dangerous undertaking she wished to join",
+    "To serve as a witness for Mr. and Mrs. B."
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 본부로 불려가 반란에 대한 견해와 위험한 일에 참여하려는 동기를 질문받는다. 이어 총기 사용 능력까지 시험받으므로 위험한 임무에 적합한지 평가받는 C가 정답이다. A의 보상은 근거가 없고, B의 처벌도 언급되지 않는다. D는 B 부부가 동행했을 뿐 증인 역할이 아니다."
+  },
+  {
+   "candidateId": "lit40-easy-02-089",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "With the birds, their brothers, the summer tourists had flown southward at the rustling of the first autumnal leaf. Here and there a guide leaned idly against a post in front of one of the empty hotels. There was no other indication of life in the main street save the little group we have mentioned watching the departing carriage.\n\nThis carriage, a maroon body set upon red and black wheels, was drawn by four white horses and driven by the marquis. The doctor had prescribed white horses, and he took great credit to himself that morning as he stood on the hotel steps beside Mr. and Mrs. Denham, who followed the retreating vehicle rather thoughtfully with their eyes until it turned a corner of the narrow street and was lost to them.",
+   "question": "Which choice best describes the mood of the text?",
+   "options": [
+    "Festive and crowded, as the town celebrates the season's end",
+    "Tense and fearful, as the townspeople wait anxiously for a coming autumn storm",
+    "Comic and lively, as the marquis races the white horses",
+    "Quiet and somewhat wistful, as the season ends and a carriage departs"
+   ],
+   "correct_letter": "D",
+   "explanation": "관광객들은 새들처럼 남쪽으로 떠났고, 빈 호텔 앞에 기댄 안내인 말고는 거리에 생기가 없다고 묘사된다. 덴햄 부부는 떠나는 마차를 생각에 잠겨 바라보므로 조용하고 아쉬운 분위기인 D가 정답이다. A는 텅 빈 거리와 맞지 않고, B의 폭풍은 등장하지 않는다. C는 의사의 자부심을 과장해 읽은 것이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-090",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "There was no abyss of black loss in that girl's life!\n\nLucy just now was concerned only for Perry. How the poor man loved her! Why not marry him after all, and put him out of his pain? She was twenty-four. Most women at twenty-four had gone through their little tragedy of love. But she had had no tragedy. She told herself firmly that there had been no story of love in her life. There never could be, now. She was too old.\n\nShe was tired, too, and very lonely. This man would seat her on a throne and worship her every day. That would be pleasant enough.",
+   "question": "Which choice best describes the tone of the text?",
+   "options": [
+    "Wearily resigned, as Lucy considers marrying without love",
+    "Joyfully excited, as Lucy anticipates a romantic wedding",
+    "Bitterly angry, as Lucy blames Perry for her long years of loneliness",
+    "Playfully teasing, as Lucy mocks Perry's devotion"
+   ],
+   "correct_letter": "A",
+   "explanation": "루시는 스스로 사랑 이야기가 없었고 이제는 너무 늦었다고 단정하며, 피곤하고 외롭다고 느낀다. 그녀는 페리가 자신을 숭배할 것이 '꽤 괜찮을 것'이라고 생각할 뿐이어서 체념한 어조인 A가 정답이다. B의 기쁨은 사랑 없음과 맞지 않고, C의 분노와 D의 조롱은 오히려 페리를 불쌍히 여기는 태도와 어긋난다."
+  },
+  {
+   "candidateId": "lit40-easy-02-091",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "\"Take, take lobsters and lettuces,\nMind that they send you the fish that you order;\nTake, take a decent sized salad bowl,\nOne that's sufficiently deep in the border;\nCut into many a slice,\nAll of the fish that's nice;\nPlace in the bowl with due neatness and order;\nThen hard-boiled eggs you may\nAdd in a neat array,\nAll toward the bowl, just by way of a border.\n\n\"Take from the cellar of salt a proportion,\nTake from the castors both pepper and oil,\nWith vinegar too, but a moderate portion,--\nToo much of acid your salad will spoil;\nMix them together,\nYou need not mind whether\nYou blend them exactly in apple-pie order,\nBut when you've stirred away,\nMix up the whole you may,\nAll but the eggs which are used as a border.",
+   "question": "Which choice best describes the tone of the text?",
+   "options": [
+    "Mournful, lamenting a meal that has been ruined",
+    "Lighthearted, presenting a recipe in playful verse",
+    "Formal, warning readers about the dangers of acid",
+    "Anxious, worrying that the dinner guests will not arrive on time"
+   ],
+   "correct_letter": "B",
+   "explanation": "시는 바닷가재, 상추, 달걀 등을 넣는 샐러드 만드는 법을 '가져와라, 가져와라' 같은 반복과 운율로 경쾌하게 전한다. 정확하게 섞지 않아도 된다는 여유로운 말도 있으므로 가벼운 어조인 B가 정답이다. A의 슬픔은 없고, C는 식초를 조금만 넣으라는 조언을 과장했다. D의 손님 걱정은 언급되지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-02-093",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "July 1.--Dark cloudy morning, with showers of rain. However desirous I was to proceed, I found that to do so would greatly injure the horses. Towards noon it cleared up, permitting me to take a tolerable observation, to ascertain our situation. I consider ourselves as peculiarly fortunate in being blessed with so dry and favourable a season; since all attempts to penetrate into the country during rain, or after an inundation of the stream, must have failed. I am quite convinced that at this place, when the banks are overflowed, the waters must extend from thirty to forty miles on each side of the stream, as we are that distance from any eminence.",
+   "question": "Which choice best describes the tone of the text?",
+   "options": [
+    "Frustrated, complaining bitterly that the rain has ruined the entire expedition",
+    "Fearful, expecting the stream to flood the camp soon",
+    "Humorous, joking about the horses' dislike of rain",
+    "Careful and grateful, noting conditions and the luck of a dry season"
+   ],
+   "correct_letter": "D",
+   "explanation": "화자는 비 때문에 말이 다칠까 봐 출발을 미루고, 정오에 관측을 하는 등 상황을 신중하게 기록한다. 또한 건조하고 좋은 계절을 만나 특히 운이 좋다고 여기므로 D가 정답이다. A는 운이 좋다는 판단과 반대이고, B는 홍수에 대한 추정을 현재의 공포로 오해했다. C의 농담은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-094",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "Not so the Spirit of the Storm.\n\n\"Stay, sweet being! oh, stay and listen to me!\" he repeated, but the words only hastened her flight. He gazed after her till she disappeared, and when he found that it was useless to follow, and that there was not the remotest chance of her returning, he sat himself down on a rock which hung over the sea to consider what he should do. As he sat, the water became perfectly calm as a glass mirror; and looking into it, after some minutes' deep meditation he beheld the reflection of his own monstrous form.",
+   "question": "Based on the text, how does the Spirit of the Storm relate to the being he calls to?",
+   "options": [
+    "He longs for her company, but she wants to escape him",
+    "He commands her, and she obeys him at once and without any question",
+    "He fears her, so he hides on a rock above the sea",
+    "He resents her, and she tries to calm his anger"
+   ],
+   "correct_letter": "A",
+   "explanation": "폭풍의 정령은 '머물러 달라, 내 말을 들어 달라'고 외치지만, 그 말은 오히려 그녀의 도망을 재촉한다. 그는 그녀가 사라질 때까지 바라보다가 돌아올 가능성이 없음을 알고 앉아 고민하므로 A가 정답이다. B는 그녀가 순종하지 않으므로 틀렸다. C와 D의 두려움과 원망은 그리움을 드러내는 행동과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-02-095",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "The fat young man and his counsels were so present to his mind that he threw back his head and, putting his hands before his mouth, shouted aloud to the populous heavens. Whether from the position of his head or the sudden strain of the exertion, he seemed to see a momentary shock among the stars, and a diffusion of frosty light pass from one to another along the sky. At the same instant, a corner of the blind was lifted and lowered again at once. He laughed a loud ho-ho! \"One and another!\" thought Will. \"The stars tremble, and the blind goes up. Why, before Heaven, what a great magician I must be! Now if I were only a fool, should not I be in a pretty way?\"",
+   "question": "Based on the text, what is suggested about Will's feelings toward the fat young man?",
+   "options": [
+    "Will rejects the young man's advice as foolish and forgettable",
+    "Will is strongly affected by the young man's counsel and keeps it in mind",
+    "Will envies the young man for being a skilled magician",
+    "Will fears that the young man is secretly spying on him from behind the lifted blind"
+   ],
+   "correct_letter": "B",
+   "explanation": "뚱뚱한 청년과 그의 충고가 마음에 강하게 남아 있었기 때문에 윌은 하늘을 향해 크게 소리친다. 이어 자신이 바보라면 곤란하지 않겠느냐고 자문하는데, 이는 충고를 계속 의식하고 있음을 보여 주므로 B가 정답이다. A는 충고가 마음에 생생했다는 서술과 반대다. C는 마술사라는 말이 윌 자신에 대한 농담임을 놓쳤고, D는 블라인드를 올린 사람이 누구인지 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-097",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "While in our present position I cannot restrain a feeling of admiration for the earnestness of many of the members of our organization. Among them are some of Reading's most considerable citizens, men who occupy important stations, and carry weighty responsibilities. Strange figures, indeed, they make here, in far-off Maryland, resting upon their arms, and keeping watch for the invading foe. Could their loved ones see them at this moment, what moral heroes would they appear in their eyes! I could not help observing how strikingly the predominant characteristics of men are developed in critical emergencies. In our mutual concern for the common safety, it is in the strongest characters that we feel our chief reliance is to be placed.",
+   "question": "Based on the text, how does the narrator regard the other members of the organization?",
+   "options": [
+    "He resents them for leaving their families unprotected",
+    "He considers them too inexperienced and nervous to be trusted with their weapons",
+    "He envies the important stations they hold at home",
+    "He admires their earnestness and relies on the strongest among them"
+   ],
+   "correct_letter": "D",
+   "explanation": "화자는 조직원들의 진지함에 감탄을 억누를 수 없다고 말하고, 레딩의 유력 시민들이 먼 메릴랜드에서 경계를 서는 모습을 영웅적으로 그린다. 또 위기에서는 가장 강한 인물들에게 의지하게 된다고 하므로 D가 정답이다. A의 원망과 B의 불신은 감탄하는 태도와 반대다. C는 그들의 지위를 언급한 부분을 질투로 오해했다."
+  },
+  {
+   "candidateId": "lit40-easy-02-098",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "A clean-looking bed stood in one corner, a wash-stand, bureau, and two chairs, constituted the furniture. There were two windows--one in the east side, the other in the south--both covered with clean, snow-white curtains, nicely looped up from the middle. A mocking-bird sat on a tree near the south window, and seemed to be exerting himself to amuse me. I like mocking-birds; but this one was hoarse, and singing out of tune; a half dozen cats were holding a meeting on top of the smoke-house. I might have enjoyed the concert under more favorable circumstances, but the state of my nervous system was such as to deprive me of the pleasure. I needed sleep, and knew that it was my duty to endeavor to get it, so as to enable me to master the situation in which I was placed.",
+   "question": "In the text, the hoarse, out-of-tune mocking-bird most likely represents",
+   "options": [
+    "the narrator's inability to enjoy anything while so unsettled",
+    "the cheerful and musical welcome the narrator receives from her hosts",
+    "the narrator's love of music since childhood",
+    "the dangers lurking outside the narrator's window"
+   ],
+   "correct_letter": "A",
+   "explanation": "화자는 원래 흉내지빠귀를 좋아하지만, 이 새는 목이 쉬고 음이 맞지 않으며 지붕 위 고양이들의 '모임'까지 겹친다. 그녀는 신경이 곤두서 있어 이 '연주회'를 즐길 수 없었다고 말하므로 새는 불안한 상태를 상징하는 A가 정답이다. B는 새가 자신을 즐겁게 하려는 듯 보인다는 표현을 과대 해석했다. C의 어린 시절과 D의 위험은 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-099",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "Through the open door the sunlight streamed into the dark room. She flew to tables and chairs, and gave a rapid sweep of the hand over their surfaces.\n\n\"He has been dusting here,--and within a few days, too,\" she thought triumphantly.\n\nThe kitchen was perfection, as she always knew it would be, with one door opening to the shaded road and the other looking on the river; windows, too, framing the apple-orchard and the elms. She had chosen the furniture, but how differently it looked now that it was actually in place!",
+   "question": "In the text, the kitchen she finds in perfect order most likely represents",
+   "options": [
+    "her disappointment that the house was smaller than expected",
+    "her joy at seeing a long-imagined home come to life",
+    "her fear that someone else has taken her place",
+    "her regret about choosing the furniture herself"
+   ],
+   "correct_letter": "B",
+   "explanation": "그녀는 누군가 최근 먼지를 털었다는 사실에 의기양양해하고, 부엌이 늘 알던 대로 완벽하다고 느낀다. 직접 고른 가구가 실제로 자리에 놓이니 다르게 보인다고 감탄하므로 부엌은 상상하던 집이 실현된 기쁨을 나타내는 B가 정답이다. A의 실망과 D의 후회는 감탄과 반대다. C는 다른 사람이 청소한 것을 위협으로 오해했다."
+  },
+  {
+   "candidateId": "lit40-easy-02-100",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "Indeed, I fancy it is one of the most interesting cities in France. In an old engraving of it which I have, it is surrounded by a wall, and seems a city of church spires, and its ecclesiastical buildings are very old and numerous, but the walls are gone, and handsome boulevards have taken their place. Its modern fame depends on its wine, its spiced bread, and its mustard. I buy a mustard-pot—a characteristic specimen of French ingenuity. It is an earthenware pig. The back is hollow. You take off the top, and there is the place for the mustard and a long mustard-spoon, the crooked end of which does duty as a tail.",
+   "question": "In the text, the earthenware pig mustard-pot most likely represents",
+   "options": [
+    "the old city walls that once surrounded the town",
+    "the narrator's dislike of modern French boulevards",
+    "the inventive charm the narrator finds in the city",
+    "the narrator's homesickness while traveling in France"
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 이 도시가 프랑스에서 가장 흥미로운 곳 중 하나라고 말하고, 겨자로 유명하다고 소개한다. 그가 산 돼지 모양 겨자 단지는 숟가락 끝이 꼬리 역할을 하는 '프랑스적 독창성'의 표본으로 묘사되므로 C가 정답이다. A는 사라진 성벽과 무관하고, B는 대로를 '멋지다'고 한 표현과 반대다. D의 향수는 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-03-001",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "Under the deep shade of these trees we found an air pure and gratefully cool. Passing from the glare of the open country into the dusky forest, one seems to enter a door and ride into a vast covered hall. The whole sensation is of being roofed and enclosed. You are never tired of gazing down long vistas, where, in stately groups, stand tall shafts of pine. Columns they are, each with its own characteristic tinting and finish, yet all standing together with the air of relationship and harmony. Feathery branches, trimmed with living green, wave through the upper air, opening broken glimpses of the far blue, and catching on their polished surfaces reflections of the sun. Broad streams of light pour in, gilding purple trunks and falling in bright pathways along an undulating floor.",
+   "question": "Based on the text, the repeated comparison of the forest to a roofed hall lined with columns most strongly suggests that the forest is",
+   "options": [
+    "a dangerous place that travelers should avoid entering.",
+    "a crowded space where trees compete for the sunlight.",
+    "a dark refuge that hides the sky entirely from view.",
+    "a grand, ordered space that inspires quiet admiration."
+   ],
+   "correct_letter": "D",
+   "explanation": "지문은 숲을 '거대한 지붕 덮인 홀'에 비유하고 소나무 줄기를 '기둥(Columns)'이라 부르며 건축물 이미지를 반복한다. 기둥들이 '조화와 관계'를 이루며 서 있고 화자가 바라보는 데 결코 싫증 나지 않는다는 표현에서 장엄하고 질서 있는 공간에 대한 경탄이 드러나므로 D가 정답이다. A는 위험을 암시하는 단서가 없고, B는 경쟁이 아니라 조화를 강조한 지문과 어긋난다. C는 나뭇가지 사이로 '먼 푸른 하늘'이 보이고 햇빛이 쏟아진다는 내용과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-03-002",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Of course; I never can think of making myself comfortable, but you wound my feelings. If you cared for your own bed like any other man, you'd not have stayed out till this hour. Don't say that I drove you out of the house as soon as we came in it. I only just spoke about the dirt and the dust,--but the fact is, you'd be happy in a pig-sty! I thought I could have trusted that Mrs. Closepeg with untold gold; and did you only see the hearthrug? When we left home there was a tiger in it: I should like to know who could make out the tiger, now?",
+   "question": "As used in the text, the phrase “you'd be happy in a pig-sty” most nearly suggests that the listener",
+   "options": [
+    "is indifferent to how dirty his surroundings are.",
+    "secretly longs to live on a farm with animals.",
+    "has recently been working in a filthy stable.",
+    "prefers the company of animals to that of people."
+   ],
+   "correct_letter": "A",
+   "explanation": "화자는 먼지와 때를 이야기했을 뿐이라며 상대가 '돼지우리에서도 행복할 것'이라고 말한다. 이는 실제 돼지우리가 아니라 상대가 주변의 더러움에 전혀 신경 쓰지 않는다는 과장된 비난이므로 A가 정답이다. 앞에서 자기 잠자리도 챙기지 않는다는 불평과 망가진 깔개 이야기도 이를 뒷받침한다. B·C·D는 비유를 문자 그대로 받아들인 오답이다."
+  },
+  {
+   "candidateId": "lit40-easy-03-003",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "The air, besides, was fresh and stirring, and this, under the sheer sunbeams, was a wonderful refreshment to our senses.\n\nThe party spread itself abroad, in a fan shape, shouting and leaping to and fro. About the centre, and a good way behind the rest, Silver and I followed--I tethered by my rope, he ploughing, with deep pants, among the sliding gravel. From time to time, indeed, I had to lend him a hand, or he must have missed his footing and fallen backward down the hill.\n\nWe had thus proceeded for about half a mile, and were approaching the brow of the plateau, when the man upon the farthest left began to cry aloud, as if in terror. Shout after shout came from him, and the others began to run in his direction.",
+   "question": "As used in the text, the phrase “ploughing, with deep pants, among the sliding gravel” most nearly suggests that Silver is",
+   "options": [
+    "moving swiftly and easily ahead of the others.",
+    "laboring slowly and heavily through loose ground.",
+    "digging carefully in search of something buried.",
+    "marching proudly at the front of the whole party."
+   ],
+   "correct_letter": "B",
+   "explanation": "'쟁기질하듯 나아간다'는 표현은 깊이 숨을 헐떡이며 미끄러지는 자갈 속을 힘겹게 헤쳐 가는 모습을 나타내므로 B가 정답이다. 실버가 일행보다 한참 뒤처져 있고 화자가 손을 빌려주지 않으면 넘어질 뻔했다는 서술이 이를 뒷받침한다. A와 D는 뒤처져 있다는 내용과 반대이고, C는 '쟁기질'을 문자 그대로 땅을 판다는 뜻으로 오해한 것이다."
+  },
+  {
+   "candidateId": "lit40-easy-03-004",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "\"At his height,\nA speck scarce visible, the eagle heard,\nAnd felt his strong wing falter: terror-struck,\nFluttering and wildly screaming, down he sank--\nDown through the quivering air: another shout,--\nHis talons droop--his sunny eye grows dark--\nHis strengthless pennons fail--plump down he falls,\nEven like a stone. Amid the far-off hills,\nWith eye of fire, and shaggy mane uprear'd,\nThe sleeping lion in his den sprang up;\nListen'd awhile--then laid his monstrous mouth\nClose to the floor, and breathed hot roarings out\nIn fierce reply.\"",
+   "question": "As used in the text, the phrase “Even like a stone” most nearly suggests that the eagle",
+   "options": [
+    "hardens itself in anger against the shout.",
+    "glides gently toward a chosen landing place.",
+    "drops straight down, helpless and out of control.",
+    "hides motionless among the rocks of the hills."
+   ],
+   "correct_letter": "C",
+   "explanation": "독수리는 함성을 듣고 날개가 흔들리며 공포에 질려 떨어지고, 발톱이 늘어지고 깃이 힘을 잃는다. '돌처럼' 떨어진다는 직유는 날개의 힘을 잃고 아무런 통제 없이 곧장 추락한다는 뜻이므로 C가 정답이다. A는 '돌'의 단단함을 분노로 오해했고, B는 '힘없는 깃'과 맞지 않으며, D는 언덕 이야기를 잘못 연결했다."
+  },
+  {
+   "candidateId": "lit40-easy-03-005",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "You ask me how the planets are weighed? I reply, on the same principle by which a butcher weighs a ham in a spring-balance. When he picks the ham up, he feels a pull of the ham towards the earth. When he hangs it on the hook, this pull is transferred from his hand to the spring of the balance. The stronger the pull, the farther the spring is pulled down. What he reads on the scale is the strength of the pull. You know that this pull is simply the attraction of the earth on the ham. But, by a universal law of force, the ham attracts the earth exactly as much as the earth does the ham.",
+   "question": "As used in the text, the phrase “on the same principle by which a butcher weighs a ham” most nearly suggests that the writer believes",
+   "options": [
+    "planets are weighed by merchants who sell goods by weight.",
+    "the methods of astronomy are crude and often inaccurate.",
+    "the earth is as small and light as an everyday object.",
+    "a familiar everyday act shows the same law at work."
+   ],
+   "correct_letter": "D",
+   "explanation": "필자는 행성의 무게를 재는 방법을 정육점 주인이 용수철저울로 햄을 다는 일에 빗대어 설명한다. 이어서 햄이 지구를 끄는 힘과 지구가 햄을 끄는 힘이 같다는 '보편적인 힘의 법칙'을 제시하므로, 친숙한 일상 행동에 같은 법칙이 작동한다는 D가 정답이다. A는 비유를 문자 그대로 읽었고, B는 방법을 낮추는 단서가 없으며, C는 크기 비교로 오해한 것이다."
+  },
+  {
+   "candidateId": "lit40-easy-03-006",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "In appearance and manner the professional criminal has not changed much in the last decade. I knew him first over ten years ago, when making my earliest studies of tramp life. I saw him again five years ago, while on a short trip in Hoboland, and we have met recently on the railroads; and he looks just about as he did when we first got acquainted.\n\nOrdinarily he would not be noticed in mixed company by others than those accustomed to his ways. He is not like the tramp, whom practically any one can pick out in a crowd.",
+   "question": "As used in the text, the phrase “pick out in a crowd” most nearly suggests that the tramp",
+   "options": [
+    "is easily recognized by almost anyone who sees him.",
+    "is carefully chosen by others for special tasks.",
+    "is usually found among large public gatherings.",
+    "is eager to stand apart from his companions."
+   ],
+   "correct_letter": "A",
+   "explanation": "필자는 직업 범죄자는 섞인 무리 속에서 익숙한 사람 외에는 눈에 띄지 않는다고 말한 뒤 부랑자는 그와 다르다고 대조한다. 따라서 '군중 속에서 골라낼 수 있다'는 말은 부랑자가 거의 누구에게나 쉽게 알아보인다는 뜻이므로 A가 정답이다. B는 'pick'을 선발로 오해했고, C와 D는 '군중'을 문자 그대로 받아들인 오답이다."
+  },
+  {
+   "candidateId": "lit40-easy-03-007",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Some of the shapes had scowling faces and bright, fiery eyes; these were the spirits of Anger. Others, with sullen, anxious looks, seemed gathering up all they could reach, and Annie saw that the more they gained, the less they seemed to have; and these she knew were shapes of Selfishness. Spirits of Pride were there, who folded their shadowy garments round them, and turned scornfully away from all the rest. These and many others little Annie saw, which had come from her own heart, and taken form before her eyes.",
+   "question": "As used in the text, the phrase “folded their shadowy garments round them” most nearly suggests that the spirits of Pride",
+   "options": [
+    "feel cold and need protection from the weather.",
+    "hold themselves apart from others in self-regard.",
+    "are ashamed and wish to hide their faces away.",
+    "are preparing to leave the gathering in quiet."
+   ],
+   "correct_letter": "B",
+   "explanation": "교만의 영들은 그림자 같은 옷을 몸에 감싸고 다른 이들에게서 경멸하듯 돌아선다. 옷을 감싸는 동작은 스스로를 높이며 남들과 거리를 두는 태도를 나타내므로 B가 정답이다. A는 동작을 추위로, C는 부끄러움으로 잘못 해석했고, D는 떠난다는 단서가 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-03-014",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Once in the fresh air again he promptly recovered his boyish spirits. The light flying scud had already effaced the first rising stars; the lower creeping sea-fog had already blotted out the western shore and sea; but below him to the east the glittering lights of the city seemed to start up with a new, mysterious, and dazzling brilliancy. It was the valley of diamonds that Sindbad saw lying almost at his feet! Perhaps somewhere there the light of his own fame and fortune was already beginning to twinkle!\n\nHe returned to his humble roof joyous and inspired. As he entered the hall he heard his wife's voice and his own name mentioned, followed by that awkward, meaningless silence on his entrance which so plainly indicated either that he had been the subject of conversation or that it was not for his ears.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From gloomy doubt to sudden, confident triumph.",
+    "From hopeful elation to uneasy suspicion.",
+    "From calm description to angry confrontation.",
+    "From playful humor to deep, lasting grief."
+   ],
+   "correct_letter": "B",
+   "explanation": "전반부에서 그는 소년 같은 기운을 되찾고 도시 불빛을 신드바드의 '다이아몬드 계곡'에 비유하며 자신의 명성이 반짝이기 시작했을지 모른다고 들뜬다. 그러나 집에 들어서자 아내가 자기 이름을 말하다가 어색하게 침묵하는 것을 보고, 자신에 대한 이야기였거나 들으면 안 되는 이야기였음을 느낀다. 따라서 희망찬 들뜸에서 불안한 의심으로 바뀌는 B가 정답이다. C의 분노나 대결, D의 깊은 슬픔은 지문에 나타나지 않는다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-059 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-059.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-02-088 — skill inferences · 유형 character_motivation\n[지문]\nMy name was sent in to headquarters, and I was soon summoned to appear there myself. Mr. and Mrs. B. accompanied me. We were ushered into the presence of Generals Mc., M. and H., where I was questioned and cross-questioned with regard to my views of the rebellion and my motive in wishing to engage in so perilous an undertaking. My views were freely given, my object briefly stated, and I had passed trial number one.\n\nNext I was examined with regard to my knowledge of the use of firearms, and in that department I sustained my character in a manner worthy of a veteran. Then I was again cross-questioned, but this time by a new committee of military stars.\n\n[질문] Based on the text, why is the narrator summoned to headquarters?\nA) To receive a reward for past bravery in battle\nB) To be punished by the generals for openly criticizing their plans for the war\nC) To be evaluated for a dangerous undertaking she wished to join\nD) To serve as a witness for Mr. and Mrs. B.\n\n[표시된 정답] C\n[해설]\n화자는 본부로 불려가 반란에 대한 견해와 위험한 일에 참여하려는 동기를 질문받는다. 이어 총기 사용 능력까지 시험받으므로 위험한 임무에 적합한지 평가받는 C가 정답이다. A의 보상은 근거가 없고, B의 처벌도 언급되지 않는다. D는 B 부부가 동행했을 뿐 증인 역할이 아니다.\n### lit40-easy-02-089 — skill inferences · 유형 tone_or_mood\n[지문]\nWith the birds, their brothers, the summer tourists had flown southward at the rustling of the first autumnal leaf. Here and there a guide leaned idly against a post in front of one of the empty hotels. There was no other indication of life in the main street save the little group we have mentioned watching the departing carriage.\n\nThis carriage, a maroon body set upon red and black wheels, was drawn by four white horses and driven by the marquis. The doctor had prescribed white horses, and he took great credit to himself that morning as he stood on the hotel steps beside Mr. and Mrs. Denham, who followed the retreating vehicle rather thoughtfully with their eyes until it turned a corner of the narrow street and was lost to them.\n\n[질문] Which choice best describes the mood of the text?\nA) Festive and crowded, as the town celebrates the season's end\nB) Tense and fearful, as the townspeople wait anxiously for a coming autumn storm\nC) Comic and lively, as the marquis races the white horses\nD) Quiet and somewhat wistful, as the season ends and a carriage departs\n\n[표시된 정답] D\n[해설]\n관광객들은 새들처럼 남쪽으로 떠났고, 빈 호텔 앞에 기댄 안내인 말고는 거리에 생기가 없다고 묘사된다. 덴햄 부부는 떠나는 마차를 생각에 잠겨 바라보므로 조용하고 아쉬운 분위기인 D가 정답이다. A는 텅 빈 거리와 맞지 않고, B의 폭풍은 등장하지 않는다. C는 의사의 자부심을 과장해 읽은 것이다.\n### lit40-easy-02-090 — skill inferences · 유형 tone_or_mood\n[지문]\nThere was no abyss of black loss in that girl's life!\n\nLucy just now was concerned only for Perry. How the poor man loved her! Why not marry him after all, and put him out of his pain? She was twenty-four. Most women at twenty-four had gone through their little tragedy of love. But she had had no tragedy. She told herself firmly that there had been no story of love in her life. There never could be, now. She was too old.\n\nShe was tired, too, and very lonely. This man would seat her on a throne and worship her every day. That would be pleasant enough.\n\n[질문] Which choice best describes the tone of the text?\nA) Wearily resigned, as Lucy considers marrying without love\nB) Joyfully excited, as Lucy anticipates a romantic wedding\nC) Bitterly angry, as Lucy blames Perry for her long years of loneliness\nD) Playfully teasing, as Lucy mocks Perry's devotion\n\n[표시된 정답] A\n[해설]\n루시는 스스로 사랑 이야기가 없었고 이제는 너무 늦었다고 단정하며, 피곤하고 외롭다고 느낀다. 그녀는 페리가 자신을 숭배할 것이 '꽤 괜찮을 것'이라고 생각할 뿐이어서 체념한 어조인 A가 정답이다. B의 기쁨은 사랑 없음과 맞지 않고, C의 분노와 D의 조롱은 오히려 페리를 불쌍히 여기는 태도와 어긋난다.\n### lit40-easy-02-091 — skill inferences · 유형 tone_or_mood\n[지문]\n\"Take, take lobsters and lettuces,\nMind that they send you the fish that you order;\nTake, take a decent sized salad bowl,\nOne that's sufficiently deep in the border;\nCut into many a slice,\nAll of the fish that's nice;\nPlace in the bowl with due neatness and order;\nThen hard-boiled eggs you may\nAdd in a neat array,\nAll toward the bowl, just by way of a border.\n\n\"Take from the cellar of salt a proportion,\nTake from the castors both pepper and oil,\nWith vinegar too, but a moderate portion,--\nToo much of acid your salad will spoil;\nMix them together,\nYou need not mind whether\nYou blend them exactly in apple-pie order,\nBut when you've stirred away,\nMix up the whole you may,\nAll but the eggs which are used as a border.\n\n[질문] Which choice best describes the tone of the text?\nA) Mournful, lamenting a meal that has been ruined\nB) Lighthearted, presenting a recipe in playful verse\nC) Formal, warning readers about the dangers of acid\nD) Anxious, worrying that the dinner guests will not arrive on time\n\n[표시된 정답] B\n[해설]\n시는 바닷가재, 상추, 달걀 등을 넣는 샐러드 만드는 법을 '가져와라, 가져와라' 같은 반복과 운율로 경쾌하게 전한다. 정확하게 섞지 않아도 된다는 여유로운 말도 있으므로 가벼운 어조인 B가 정답이다. A의 슬픔은 없고, C는 식초를 조금만 넣으라는 조언을 과장했다. D의 손님 걱정은 언급되지 않는다.\n### lit40-easy-02-093 — skill inferences · 유형 tone_or_mood\n[지문]\nJuly 1.--Dark cloudy morning, with showers of rain. However desirous I was to proceed, I found that to do so would greatly injure the horses. Towards noon it cleared up, permitting me to take a tolerable observation, to ascertain our situation. I consider ourselves as peculiarly fortunate in being blessed with so dry and favourable a season; since all attempts to penetrate into the country during rain, or after an inundation of the stream, must have failed. I am quite convinced that at this place, when the banks are overflowed, the waters must extend from thirty to forty miles on each side of the stream, as we are that distance from any eminence.\n\n[질문] Which choice best describes the tone of the text?\nA) Frustrated, complaining bitterly that the rain has ruined the entire expedition\nB) Fearful, expecting the stream to flood the camp soon\nC) Humorous, joking about the horses' dislike of rain\nD) Careful and grateful, noting conditions and the luck of a dry season\n\n[표시된 정답] D\n[해설]\n화자는 비 때문에 말이 다칠까 봐 출발을 미루고, 정오에 관측을 하는 등 상황을 신중하게 기록한다. 또한 건조하고 좋은 계절을 만나 특히 운이 좋다고 여기므로 D가 정답이다. A는 운이 좋다는 판단과 반대이고, B는 홍수에 대한 추정을 현재의 공포로 오해했다. C의 농담은 지문에 없다.\n### lit40-easy-02-094 — skill inferences · 유형 relationship_between_characters\n[지문]\nNot so the Spirit of the Storm.\n\n\"Stay, sweet being! oh, stay and listen to me!\" he repeated, but the words only hastened her flight. He gazed after her till she disappeared, and when he found that it was useless to follow, and that there was not the remotest chance of her returning, he sat himself down on a rock which hung over the sea to consider what he should do. As he sat, the water became perfectly calm as a glass mirror; and looking into it, after some minutes' deep meditation he beheld the reflection of his own monstrous form.\n\n[질문] Based on the text, how does the Spirit of the Storm relate to the being he calls to?\nA) He longs for her company, but she wants to escape him\nB) He commands her, and she obeys him at once and without any question\nC) He fears her, so he hides on a rock above the sea\nD) He resents her, and she tries to calm his anger\n\n[표시된 정답] A\n[해설]\n폭풍의 정령은 '머물러 달라, 내 말을 들어 달라'고 외치지만, 그 말은 오히려 그녀의 도망을 재촉한다. 그는 그녀가 사라질 때까지 바라보다가 돌아올 가능성이 없음을 알고 앉아 고민하므로 A가 정답이다. B는 그녀가 순종하지 않으므로 틀렸다. C와 D의 두려움과 원망은 그리움을 드러내는 행동과 맞지 않는다.\n### lit40-easy-02-095 — skill inferences · 유형 relationship_between_characters\n[지문]\nThe fat young man and his counsels were so present to his mind that he threw back his head and, putting his hands before his mouth, shouted aloud to the populous heavens. Whether from the position of his head or the sudden strain of the exertion, he seemed to see a momentary shock among the stars, and a diffusion of frosty light pass from one to another along the sky. At the same instant, a corner of the blind was lifted and lowered again at once. He laughed a loud ho-ho! \"One and another!\" thought Will. \"The stars tremble, and the blind goes up. Why, before Heaven, what a great magician I must be! Now if I were only a fool, should not I be in a pretty way?\"\n\n[질문] Based on the text, what is suggested about Will's feelings toward the fat young man?\nA) Will rejects the young man's advice as foolish and forgettable\nB) Will is strongly affected by the young man's counsel and keeps it in mind\nC) Will envies the young man for being a skilled magician\nD) Will fears that the young man is secretly spying on him from behind the lifted blind\n\n[표시된 정답] B\n[해설]\n뚱뚱한 청년과 그의 충고가 마음에 강하게 남아 있었기 때문에 윌은 하늘을 향해 크게 소리친다. 이어 자신이 바보라면 곤란하지 않겠느냐고 자문하는데, 이는 충고를 계속 의식하고 있음을 보여 주므로 B가 정답이다. A는 충고가 마음에 생생했다는 서술과 반대다. C는 마술사라는 말이 윌 자신에 대한 농담임을 놓쳤고, D는 블라인드를 올린 사람이 누구인지 지문에 없다.\n### lit40-easy-02-097 — skill inferences · 유형 relationship_between_characters\n[지문]\nWhile in our present position I cannot restrain a feeling of admiration for the earnestness of many of the members of our organization. Among them are some of Reading's most considerable citizens, men who occupy important stations, and carry weighty responsibilities. Strange figures, indeed, they make here, in far-off Maryland, resting upon their arms, and keeping watch for the invading foe. Could their loved ones see them at this moment, what moral heroes would they appear in their eyes! I could not help observing how strikingly the predominant characteristics of men are developed in critical emergencies. In our mutual concern for the common safety, it is in the strongest characters that we feel our chief reliance is to be placed.\n\n[질문] Based on the text, how does the narrator regard the other members of the organization?\nA) He resents them for leaving their families unprotected\nB) He considers them too inexperienced and nervous to be trusted with their weapons\nC) He envies the important stations they hold at home\nD) He admires their earnestness and relies on the strongest among them\n\n[표시된 정답] D\n[해설]\n화자는 조직원들의 진지함에 감탄을 억누를 수 없다고 말하고, 레딩의 유력 시민들이 먼 메릴랜드에서 경계를 서는 모습을 영웅적으로 그린다. 또 위기에서는 가장 강한 인물들에게 의지하게 된다고 하므로 D가 정답이다. A의 원망과 B의 불신은 감탄하는 태도와 반대다. C는 그들의 지위를 언급한 부분을 질투로 오해했다.\n### lit40-easy-02-098 — skill inferences · 유형 symbolism\n[지문]\nA clean-looking bed stood in one corner, a wash-stand, bureau, and two chairs, constituted the furniture. There were two windows--one in the east side, the other in the south--both covered with clean, snow-white curtains, nicely looped up from the middle. A mocking-bird sat on a tree near the south window, and seemed to be exerting himself to amuse me. I like mocking-birds; but this one was hoarse, and singing out of tune; a half dozen cats were holding a meeting on top of the smoke-house. I might have enjoyed the concert under more favorable circumstances, but the state of my nervous system was such as to deprive me of the pleasure. I needed sleep, and knew that it was my duty to endeavor to get it, so as to enable me to master the situation in which I was placed.\n\n[질문] In the text, the hoarse, out-of-tune mocking-bird most likely represents\nA) the narrator's inability to enjoy anything while so unsettled\nB) the cheerful and musical welcome the narrator receives from her hosts\nC) the narrator's love of music since childhood\nD) the dangers lurking outside the narrator's window\n\n[표시된 정답] A\n[해설]\n화자는 원래 흉내지빠귀를 좋아하지만, 이 새는 목이 쉬고 음이 맞지 않으며 지붕 위 고양이들의 '모임'까지 겹친다. 그녀는 신경이 곤두서 있어 이 '연주회'를 즐길 수 없었다고 말하므로 새는 불안한 상태를 상징하는 A가 정답이다. B는 새가 자신을 즐겁게 하려는 듯 보인다는 표현을 과대 해석했다. C의 어린 시절과 D의 위험은 근거가 없다.\n### lit40-easy-02-099 — skill inferences · 유형 symbolism\n[지문]\nThrough the open door the sunlight streamed into the dark room. She flew to tables and chairs, and gave a rapid sweep of the hand over their surfaces.\n\n\"He has been dusting here,--and within a few days, too,\" she thought triumphantly.\n\nThe kitchen was perfection, as she always knew it would be, with one door opening to the shaded road and the other looking on the river; windows, too, framing the apple-orchard and the elms. She had chosen the furniture, but how differently it looked now that it was actually in place!\n\n[질문] In the text, the kitchen she finds in perfect order most likely represents\nA) her disappointment that the house was smaller than expected\nB) her joy at seeing a long-imagined home come to life\nC) her fear that someone else has taken her place\nD) her regret about choosing the furniture herself\n\n[표시된 정답] B\n[해설]\n그녀는 누군가 최근 먼지를 털었다는 사실에 의기양양해하고, 부엌이 늘 알던 대로 완벽하다고 느낀다. 직접 고른 가구가 실제로 자리에 놓이니 다르게 보인다고 감탄하므로 부엌은 상상하던 집이 실현된 기쁨을 나타내는 B가 정답이다. A의 실망과 D의 후회는 감탄과 반대다. C는 다른 사람이 청소한 것을 위협으로 오해했다.\n### lit40-easy-02-100 — skill inferences · 유형 symbolism\n[지문]\nIndeed, I fancy it is one of the most interesting cities in France. In an old engraving of it which I have, it is surrounded by a wall, and seems a city of church spires, and its ecclesiastical buildings are very old and numerous, but the walls are gone, and handsome boulevards have taken their place. Its modern fame depends on its wine, its spiced bread, and its mustard. I buy a mustard-pot—a characteristic specimen of French ingenuity. It is an earthenware pig. The back is hollow. You take off the top, and there is the place for the mustard and a long mustard-spoon, the crooked end of which does duty as a tail.\n\n[질문] In the text, the earthenware pig mustard-pot most likely represents\nA) the old city walls that once surrounded the town\nB) the narrator's dislike of modern French boulevards\nC) the inventive charm the narrator finds in the city\nD) the narrator's homesickness while traveling in France\n\n[표시된 정답] C\n[해설]\n화자는 이 도시가 프랑스에서 가장 흥미로운 곳 중 하나라고 말하고, 겨자로 유명하다고 소개한다. 그가 산 돼지 모양 겨자 단지는 숟가락 끝이 꼬리 역할을 하는 '프랑스적 독창성'의 표본으로 묘사되므로 C가 정답이다. A는 사라진 성벽과 무관하고, B는 대로를 '멋지다'고 한 표현과 반대다. D의 향수는 지문에 없다.\n### lit40-easy-03-001 — skill inferences · 유형 symbolism\n[지문]\nUnder the deep shade of these trees we found an air pure and gratefully cool. Passing from the glare of the open country into the dusky forest, one seems to enter a door and ride into a vast covered hall. The whole sensation is of being roofed and enclosed. You are never tired of gazing down long vistas, where, in stately groups, stand tall shafts of pine. Columns they are, each with its own characteristic tinting and finish, yet all standing together with the air of relationship and harmony. Feathery branches, trimmed with living green, wave through the upper air, opening broken glimpses of the far blue, and catching on their polished surfaces reflections of the sun. Broad streams of light pour in, gilding purple trunks and falling in bright pathways along an undulating floor.\n\n[질문] Based on the text, the repeated comparison of the forest to a roofed hall lined with columns most strongly suggests that the forest is\nA) a dangerous place that travelers should avoid entering.\nB) a crowded space where trees compete for the sunlight.\nC) a dark refuge that hides the sky entirely from view.\nD) a grand, ordered space that inspires quiet admiration.\n\n[표시된 정답] D\n[해설]\n지문은 숲을 '거대한 지붕 덮인 홀'에 비유하고 소나무 줄기를 '기둥(Columns)'이라 부르며 건축물 이미지를 반복한다. 기둥들이 '조화와 관계'를 이루며 서 있고 화자가 바라보는 데 결코 싫증 나지 않는다는 표현에서 장엄하고 질서 있는 공간에 대한 경탄이 드러나므로 D가 정답이다. A는 위험을 암시하는 단서가 없고, B는 경쟁이 아니라 조화를 강조한 지문과 어긋난다. C는 나뭇가지 사이로 '먼 푸른 하늘'이 보이고 햇빛이 쏟아진다는 내용과 맞지 않는다.\n### lit40-easy-03-002 — skill words_in_context · 유형 figurative_language\n[지문]\nOf course; I never can think of making myself comfortable, but you wound my feelings. If you cared for your own bed like any other man, you'd not have stayed out till this hour. Don't say that I drove you out of the house as soon as we came in it. I only just spoke about the dirt and the dust,--but the fact is, you'd be happy in a pig-sty! I thought I could have trusted that Mrs. Closepeg with untold gold; and did you only see the hearthrug? When we left home there was a tiger in it: I should like to know who could make out the tiger, now?\n\n[질문] As used in the text, the phrase “you'd be happy in a pig-sty” most nearly suggests that the listener\nA) is indifferent to how dirty his surroundings are.\nB) secretly longs to live on a farm with animals.\nC) has recently been working in a filthy stable.\nD) prefers the company of animals to that of people.\n\n[표시된 정답] A\n[해설]\n화자는 먼지와 때를 이야기했을 뿐이라며 상대가 '돼지우리에서도 행복할 것'이라고 말한다. 이는 실제 돼지우리가 아니라 상대가 주변의 더러움에 전혀 신경 쓰지 않는다는 과장된 비난이므로 A가 정답이다. 앞에서 자기 잠자리도 챙기지 않는다는 불평과 망가진 깔개 이야기도 이를 뒷받침한다. B·C·D는 비유를 문자 그대로 받아들인 오답이다.\n### lit40-easy-03-003 — skill words_in_context · 유형 figurative_language\n[지문]\nThe air, besides, was fresh and stirring, and this, under the sheer sunbeams, was a wonderful refreshment to our senses.\n\nThe party spread itself abroad, in a fan shape, shouting and leaping to and fro. About the centre, and a good way behind the rest, Silver and I followed--I tethered by my rope, he ploughing, with deep pants, among the sliding gravel. From time to time, indeed, I had to lend him a hand, or he must have missed his footing and fallen backward down the hill.\n\nWe had thus proceeded for about half a mile, and were approaching the brow of the plateau, when the man upon the farthest left began to cry aloud, as if in terror. Shout after shout came from him, and the others began to run in his direction.\n\n[질문] As used in the text, the phrase “ploughing, with deep pants, among the sliding gravel” most nearly suggests that Silver is\nA) moving swiftly and easily ahead of the others.\nB) laboring slowly and heavily through loose ground.\nC) digging carefully in search of something buried.\nD) marching proudly at the front of the whole party.\n\n[표시된 정답] B\n[해설]\n'쟁기질하듯 나아간다'는 표현은 깊이 숨을 헐떡이며 미끄러지는 자갈 속을 힘겹게 헤쳐 가는 모습을 나타내므로 B가 정답이다. 실버가 일행보다 한참 뒤처져 있고 화자가 손을 빌려주지 않으면 넘어질 뻔했다는 서술이 이를 뒷받침한다. A와 D는 뒤처져 있다는 내용과 반대이고, C는 '쟁기질'을 문자 그대로 땅을 판다는 뜻으로 오해한 것이다.\n### lit40-easy-03-004 — skill words_in_context · 유형 figurative_language\n[지문]\n\"At his height,\nA speck scarce visible, the eagle heard,\nAnd felt his strong wing falter: terror-struck,\nFluttering and wildly screaming, down he sank--\nDown through the quivering air: another shout,--\nHis talons droop--his sunny eye grows dark--\nHis strengthless pennons fail--plump down he falls,\nEven like a stone. Amid the far-off hills,\nWith eye of fire, and shaggy mane uprear'd,\nThe sleeping lion in his den sprang up;\nListen'd awhile--then laid his monstrous mouth\nClose to the floor, and breathed hot roarings out\nIn fierce reply.\"\n\n[질문] As used in the text, the phrase “Even like a stone” most nearly suggests that the eagle\nA) hardens itself in anger against the shout.\nB) glides gently toward a chosen landing place.\nC) drops straight down, helpless and out of control.\nD) hides motionless among the rocks of the hills.\n\n[표시된 정답] C\n[해설]\n독수리는 함성을 듣고 날개가 흔들리며 공포에 질려 떨어지고, 발톱이 늘어지고 깃이 힘을 잃는다. '돌처럼' 떨어진다는 직유는 날개의 힘을 잃고 아무런 통제 없이 곧장 추락한다는 뜻이므로 C가 정답이다. A는 '돌'의 단단함을 분노로 오해했고, B는 '힘없는 깃'과 맞지 않으며, D는 언덕 이야기를 잘못 연결했다.\n### lit40-easy-03-005 — skill words_in_context · 유형 figurative_language\n[지문]\nYou ask me how the planets are weighed? I reply, on the same principle by which a butcher weighs a ham in a spring-balance. When he picks the ham up, he feels a pull of the ham towards the earth. When he hangs it on the hook, this pull is transferred from his hand to the spring of the balance. The stronger the pull, the farther the spring is pulled down. What he reads on the scale is the strength of the pull. You know that this pull is simply the attraction of the earth on the ham. But, by a universal law of force, the ham attracts the earth exactly as much as the earth does the ham.\n\n[질문] As used in the text, the phrase “on the same principle by which a butcher weighs a ham” most nearly suggests that the writer believes\nA) planets are weighed by merchants who sell goods by weight.\nB) the methods of astronomy are crude and often inaccurate.\nC) the earth is as small and light as an everyday object.\nD) a familiar everyday act shows the same law at work.\n\n[표시된 정답] D\n[해설]\n필자는 행성의 무게를 재는 방법을 정육점 주인이 용수철저울로 햄을 다는 일에 빗대어 설명한다. 이어서 햄이 지구를 끄는 힘과 지구가 햄을 끄는 힘이 같다는 '보편적인 힘의 법칙'을 제시하므로, 친숙한 일상 행동에 같은 법칙이 작동한다는 D가 정답이다. A는 비유를 문자 그대로 읽었고, B는 방법을 낮추는 단서가 없으며, C는 크기 비교로 오해한 것이다.\n### lit40-easy-03-006 — skill words_in_context · 유형 figurative_language\n[지문]\nIn appearance and manner the professional criminal has not changed much in the last decade. I knew him first over ten years ago, when making my earliest studies of tramp life. I saw him again five years ago, while on a short trip in Hoboland, and we have met recently on the railroads; and he looks just about as he did when we first got acquainted.\n\nOrdinarily he would not be noticed in mixed company by others than those accustomed to his ways. He is not like the tramp, whom practically any one can pick out in a crowd.\n\n[질문] As used in the text, the phrase “pick out in a crowd” most nearly suggests that the tramp\nA) is easily recognized by almost anyone who sees him.\nB) is carefully chosen by others for special tasks.\nC) is usually found among large public gatherings.\nD) is eager to stand apart from his companions.\n\n[표시된 정답] A\n[해설]\n필자는 직업 범죄자는 섞인 무리 속에서 익숙한 사람 외에는 눈에 띄지 않는다고 말한 뒤 부랑자는 그와 다르다고 대조한다. 따라서 '군중 속에서 골라낼 수 있다'는 말은 부랑자가 거의 누구에게나 쉽게 알아보인다는 뜻이므로 A가 정답이다. B는 'pick'을 선발로 오해했고, C와 D는 '군중'을 문자 그대로 받아들인 오답이다.\n### lit40-easy-03-007 — skill words_in_context · 유형 figurative_language\n[지문]\nSome of the shapes had scowling faces and bright, fiery eyes; these were the spirits of Anger. Others, with sullen, anxious looks, seemed gathering up all they could reach, and Annie saw that the more they gained, the less they seemed to have; and these she knew were shapes of Selfishness. Spirits of Pride were there, who folded their shadowy garments round them, and turned scornfully away from all the rest. These and many others little Annie saw, which had come from her own heart, and taken form before her eyes.\n\n[질문] As used in the text, the phrase “folded their shadowy garments round them” most nearly suggests that the spirits of Pride\nA) feel cold and need protection from the weather.\nB) hold themselves apart from others in self-regard.\nC) are ashamed and wish to hide their faces away.\nD) are preparing to leave the gathering in quiet.\n\n[표시된 정답] B\n[해설]\n교만의 영들은 그림자 같은 옷을 몸에 감싸고 다른 이들에게서 경멸하듯 돌아선다. 옷을 감싸는 동작은 스스로를 높이며 남들과 거리를 두는 태도를 나타내므로 B가 정답이다. A는 동작을 추위로, C는 부끄러움으로 잘못 해석했고, D는 떠난다는 단서가 지문에 없다.\n### lit40-easy-03-014 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nOnce in the fresh air again he promptly recovered his boyish spirits. The light flying scud had already effaced the first rising stars; the lower creeping sea-fog had already blotted out the western shore and sea; but below him to the east the glittering lights of the city seemed to start up with a new, mysterious, and dazzling brilliancy. It was the valley of diamonds that Sindbad saw lying almost at his feet! Perhaps somewhere there the light of his own fame and fortune was already beginning to twinkle!\n\nHe returned to his humble roof joyous and inspired. As he entered the hall he heard his wife's voice and his own name mentioned, followed by that awkward, meaningless silence on his entrance which so plainly indicated either that he had been the subject of conversation or that it was not for his ears.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From gloomy doubt to sudden, confident triumph.\nB) From hopeful elation to uneasy suspicion.\nC) From calm description to angry confrontation.\nD) From playful humor to deep, lasting grief.\n\n[표시된 정답] B\n[해설]\n전반부에서 그는 소년 같은 기운을 되찾고 도시 불빛을 신드바드의 '다이아몬드 계곡'에 비유하며 자신의 명성이 반짝이기 시작했을지 모른다고 들뜬다. 그러나 집에 들어서자 아내가 자기 이름을 말하다가 어색하게 침묵하는 것을 보고, 자신에 대한 이야기였거나 들으면 안 되는 이야기였음을 느낀다. 따라서 희망찬 들뜸에서 불안한 의심으로 바뀌는 B가 정답이다. C의 분노나 대결, D의 깊은 슬픔은 지문에 나타나지 않는다."
+}

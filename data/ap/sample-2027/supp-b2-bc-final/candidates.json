@@ -1,0 +1,1942 @@
+[
+ {
+  "candidateKey": "ap_calculus_bc-f01-k0",
+  "cellId": "ap_calculus_bc-f01",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "frq_bundle",
+  "keywordCode": "10.11",
+  "unitCode": "10",
+  "skillPrimary": "1.E",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "frq_bc_taylor_diffeq",
+  "wording": "mixed",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Typical AP FRQ chain: differentiate the DE to get f'', f''' at 0, build P3, evaluate at 1/4, apply the Lagrange bound, and use the second derivative test. Concepts are standard and in scope. The multiple connected steps and the shifts between DE, polynomial, error bound, and calculus-based classification make it more than basic learning. Numbers are small and the wording is unambiguous, so the difficulty is not from unfair sources.",
+  "payload": {
+   "archetype": "frq_bc_taylor_diffeq",
+   "template": "taylor_from_diffeq_bc",
+   "topic": "10.11",
+   "extra_topics": [
+    "10.12",
+    "5.7"
+   ],
+   "skill": "1.E",
+   "representative_skill": "1.E",
+   "calculator": "not_allowed",
+   "title": "Taylor polynomial of a solution of a differential equation, approximation, Lagrange bound, second derivative test",
+   "stimulus": {
+    "kind": "text",
+    "description": "A differential equation with an initial condition",
+    "data": {
+     "equation": "dy/dx = 2x + y",
+     "initial": "f(0) = 0"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "The function $f$ is the solution of the differential equation $\\dfrac{dy}{dx}=2x+y$ with initial condition $f(0)=0$. Find $f'(0)$, $f''(0)$, and $f'''(0)$. Then write the Taylor polynomial of degree $3$ for $f$ about $x=0$.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "2.B"
+     ],
+     "model_answer": "f'(0) = 0; f''(x) = 2 + f'(x), so f''(0) = 2; f'''(x) = f''(x), so f'''(0) = 2. P3(x) = 2x^2/2 + 2x^3/6.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "f'(0) from the differential equation and the initial condition",
+       "required_elements": [
+        "f'(0) = 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Second and third derivatives by differentiating the equation (chain rule)",
+       "required_elements": [
+        "f''(0) = 2",
+        "f'''(0) = 2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a1",
+       "requires_both": true,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a3",
+       "points": 1,
+       "criterion": "Taylor polynomial of degree 3 with the factorials",
+       "required_elements": [
+        "2x^2/2 + 2x^3/6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "10.11"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Use the Taylor polynomial of degree $3$ from part (a) to approximate $f\\!\\left(1/4\\right)$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "P3(1/4) = 13/192.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Substitutes into the polynomial",
+       "required_elements": [
+        "P3(1/4)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Value of the approximation",
+       "required_elements": [
+        "13/192"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "10.11"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "It is known that $\\left|f^{(4)}(x)\\right|\\le 5$ for $0\\le x\\le 1/4$. Use the Lagrange error bound to find an upper bound for $\\left|f\\!\\left(1/4\\right)-P_3\\!\\left(1/4\\right)\\right|$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "3.D"
+     ],
+     "model_answer": "Error ≤ 5(1/4)^4/4! = 5/6144.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Lagrange error form M x^4/4!",
+       "required_elements": [
+        "5(1/4)^4/4!"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Value of the bound",
+       "required_elements": [
+        "5/6144"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "10.12"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Does $f$ have a relative minimum, a relative maximum, or neither at $x=0$? Give a reason for your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "f'(0) = 0 and f''(0) = 2 > 0, so by the Second Derivative Test f has a relative minimum at x = 0.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Justification: uses f'(0) = 0 (critical number) and the sign of f''(0)",
+       "required_elements": [
+        "f'(0) = 0",
+        "f''(0) = 2 > 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Conclusion: relative minimum by the Second Derivative Test",
+       "required_elements": [
+        "relative minimum"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "5.7"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "a=2",
+    "b=1",
+    "x=1/4",
+    "approx=13/192",
+    "lag=5/6144"
+   ],
+   "blueprint": {
+    "id": "frq_bc_taylor_diffeq",
+    "subject": "ap_calculus_bc",
+    "kind": "frq_bundle",
+    "concept": "Build the Taylor polynomial of a solution of a differential equation from repeated differentiation, approximate a value, bound the error, and classify the critical point",
+    "topic": "10.11",
+    "skill": "1.E",
+    "student_thinking": [
+     "Differentiate the equation repeatedly with the chain rule and evaluate at 0",
+     "Assemble the degree-3 polynomial with factorials",
+     "Apply the Lagrange error bound with the given derivative bound",
+     "Use the Second Derivative Test at the critical number"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "f has derivatives of all orders at 0 determined by the equation and the initial value",
+      "evidence": "the right side is linear in x and y"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "differential equation",
+      "initial condition"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the exact solution found by sympy's dsolve is expanded as a Maclaurin series and its coefficients compared with those from repeated differentiation of the equation",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.E",
+       "2.B"
+      ],
+      "topics": [
+       "10.11"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "f'(0) = 0; f''(x) = 2 + f'(x), so f''(0) = 2; f'''(x) = f''(x), so f'''(0) = 2. P3(x) = 2x^2/2 + 2x^3/6."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "f'(0) from the differential equation and the initial condition",
+        "elements": [
+         "f'(0) = 0"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Second and third derivatives by differentiating the equation (chain rule)",
+        "elements": [
+         "f''(0) = 2",
+         "f'''(0) = 2"
+        ]
+       },
+       {
+        "row_id": "a3",
+        "points": 1,
+        "criterion": "Taylor polynomial of degree 3 with the factorials",
+        "elements": [
+         "2x^2/2 + 2x^3/6"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "10.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "P3(1/4) = 13/192."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Substitutes into the polynomial",
+        "elements": [
+         "P3(1/4)"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Value of the approximation",
+        "elements": [
+         "13/192"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "1.E",
+       "3.D"
+      ],
+      "topics": [
+       "10.12"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Error ≤ 5(1/4)^4/4! = 5/6144."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Lagrange error form M x^4/4!",
+        "elements": [
+         "5(1/4)^4/4!"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Value of the bound",
+        "elements": [
+         "5/6144"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "3.B",
+       "3.E"
+      ],
+      "topics": [
+       "5.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "f'(0) = 0 and f''(0) = 2 > 0, so by the Second Derivative Test f has a relative minimum at x = 0."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Justification: uses f'(0) = 0 (critical number) and the sign of f''(0)",
+        "elements": [
+         "f'(0) = 0",
+         "f''(0) = 2 > 0"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Conclusion: relative minimum by the Second Derivative Test",
+        "elements": [
+         "relative minimum"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 5300,
+   "pack_id": "frq_bc_taylor_diffeq-s5300"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_bc_taylor_diffeq",
+   "facts": [
+    "a=2",
+    "b=1",
+    "x=1/4",
+    "approx=13/192",
+    "lag=5/6144"
+   ],
+   "seed": 5300
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts check out (P3 = x^2 + x^3/3, 13/192, 5/6144, relative minimum). The item fits the 10.11/10.12/5.7 span and the 3/2/2/2 point split, and it is suitable for a no-calculator FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP FRQ chain: differentiate the DE to get f'', f''' at 0, build P3, evaluate at 1/4, apply the Lagrange bound, and use the second derivative test. Concepts are standard and in scope. The multiple connected steps and the shifts between DE, polynomial, error bound, and calculus-based classification make it more than basic learning. Numbers are small and the wording is unambiguous, so the difficulty is not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_bc-f01-k1",
+  "cellId": "ap_calculus_bc-f01",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "frq_bundle",
+  "keywordCode": "10.11",
+  "unitCode": "10",
+  "skillPrimary": "1.E",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "frq_bc_taylor_diffeq",
+  "wording": "mixed",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part BC FRQ. Derivatives come from implicit differentiation of the DE: f'(0)=0, f''(0)=2, f'''(0)=6, so P3 = x^2 + x^3. Then evaluate P3(1/4)=5/64, apply the Lagrange bound 39/4! * (1/4)^4 = 13/2048, and use the second derivative test (f'=0, f''>0 gives a relative minimum). It combines several procedures and needs the DE-to-derivatives step, but the numbers are small and the wording is clear. This matches full-mock difficulty rather than basic skill practice or an advanced extension.",
+  "payload": {
+   "archetype": "frq_bc_taylor_diffeq",
+   "template": "taylor_from_diffeq_bc",
+   "topic": "10.11",
+   "extra_topics": [
+    "10.12",
+    "5.7"
+   ],
+   "skill": "1.E",
+   "representative_skill": "1.E",
+   "calculator": "not_allowed",
+   "title": "Taylor polynomial of a solution of a differential equation, approximation, Lagrange bound, second derivative test",
+   "stimulus": {
+    "kind": "text",
+    "description": "A differential equation with an initial condition",
+    "data": {
+     "equation": "dy/dx = 2x + 3y",
+     "initial": "f(0) = 0"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Let $f$ be the function that is the solution of the differential equation $\\dfrac{dy}{dx}=2x+3y$ with initial condition $f(0)=0$. Find $f'(0)$, $f''(0)$, and $f'''(0)$, and then write the Taylor polynomial of degree $3$ for $f$ about $x=0$.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "2.B"
+     ],
+     "model_answer": "f'(0) = 0; f''(x) = 2 + 3f'(x), so f''(0) = 2; f'''(x) = 3f''(x), so f'''(0) = 6. P3(x) = 2x^2/2 + 6x^3/6.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "f'(0) from the differential equation and the initial condition",
+       "required_elements": [
+        "f'(0) = 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Second and third derivatives by differentiating the equation (chain rule)",
+       "required_elements": [
+        "f''(0) = 2",
+        "f'''(0) = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a1",
+       "requires_both": true,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a3",
+       "points": 1,
+       "criterion": "Taylor polynomial of degree 3 with the factorials",
+       "required_elements": [
+        "2x^2/2 + 6x^3/6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "10.11"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Use the Taylor polynomial of degree $3$ from part (a) to approximate $f\\!\\left(1/4\\right)$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "P3(1/4) = 5/64.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Substitutes into the polynomial",
+       "required_elements": [
+        "P3(1/4)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Value of the approximation",
+       "required_elements": [
+        "5/64"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "10.11"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "It is known that $\\left|f^{(4)}(x)\\right|\\le 39$ for $0\\le x\\le 1/4$. Use the Lagrange error bound to find an upper bound for $\\left|f\\!\\left(1/4\\right)-P_3\\!\\left(1/4\\right)\\right|$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "3.D"
+     ],
+     "model_answer": "Error ≤ 39(1/4)^4/4! = 13/2048.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Lagrange error form M x^4/4!",
+       "required_elements": [
+        "39(1/4)^4/4!"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Value of the bound",
+       "required_elements": [
+        "13/2048"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "10.12"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Does $f$ have a relative minimum, a relative maximum, or neither at $x=0$? Give a reason for your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "f'(0) = 0 and f''(0) = 2 > 0, so by the Second Derivative Test f has a relative minimum at x = 0.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Justification: uses f'(0) = 0 (critical number) and the sign of f''(0)",
+       "required_elements": [
+        "f'(0) = 0",
+        "f''(0) = 2 > 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Conclusion: relative minimum by the Second Derivative Test",
+       "required_elements": [
+        "relative minimum"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "5.7"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "a=2",
+    "b=3",
+    "x=1/4",
+    "approx=5/64",
+    "lag=13/2048"
+   ],
+   "blueprint": {
+    "id": "frq_bc_taylor_diffeq",
+    "subject": "ap_calculus_bc",
+    "kind": "frq_bundle",
+    "concept": "Build the Taylor polynomial of a solution of a differential equation from repeated differentiation, approximate a value, bound the error, and classify the critical point",
+    "topic": "10.11",
+    "skill": "1.E",
+    "student_thinking": [
+     "Differentiate the equation repeatedly with the chain rule and evaluate at 0",
+     "Assemble the degree-3 polynomial with factorials",
+     "Apply the Lagrange error bound with the given derivative bound",
+     "Use the Second Derivative Test at the critical number"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "f has derivatives of all orders at 0 determined by the equation and the initial value",
+      "evidence": "the right side is linear in x and y"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "differential equation",
+      "initial condition"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the exact solution found by sympy's dsolve is expanded as a Maclaurin series and its coefficients compared with those from repeated differentiation of the equation",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.E",
+       "2.B"
+      ],
+      "topics": [
+       "10.11"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "f'(0) = 0; f''(x) = 2 + 3f'(x), so f''(0) = 2; f'''(x) = 3f''(x), so f'''(0) = 6. P3(x) = 2x^2/2 + 6x^3/6."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "f'(0) from the differential equation and the initial condition",
+        "elements": [
+         "f'(0) = 0"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Second and third derivatives by differentiating the equation (chain rule)",
+        "elements": [
+         "f''(0) = 2",
+         "f'''(0) = 6"
+        ]
+       },
+       {
+        "row_id": "a3",
+        "points": 1,
+        "criterion": "Taylor polynomial of degree 3 with the factorials",
+        "elements": [
+         "2x^2/2 + 6x^3/6"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "10.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "P3(1/4) = 5/64."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Substitutes into the polynomial",
+        "elements": [
+         "P3(1/4)"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Value of the approximation",
+        "elements": [
+         "5/64"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "1.E",
+       "3.D"
+      ],
+      "topics": [
+       "10.12"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Error ≤ 39(1/4)^4/4! = 13/2048."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Lagrange error form M x^4/4!",
+        "elements": [
+         "39(1/4)^4/4!"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Value of the bound",
+        "elements": [
+         "13/2048"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "3.B",
+       "3.E"
+      ],
+      "topics": [
+       "5.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "f'(0) = 0 and f''(0) = 2 > 0, so by the Second Derivative Test f has a relative minimum at x = 0."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Justification: uses f'(0) = 0 (critical number) and the sign of f''(0)",
+        "elements": [
+         "f'(0) = 0",
+         "f''(0) = 2 > 0"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Conclusion: relative minimum by the Second Derivative Test",
+        "elements": [
+         "relative minimum"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 5301,
+   "pack_id": "frq_bc_taylor_diffeq-s5301"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_bc_taylor_diffeq",
+   "facts": [
+    "a=2",
+    "b=3",
+    "x=1/4",
+    "approx=5/64",
+    "lag=13/2048"
+   ],
+   "seed": 5301
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and coherent 9-point BC Taylor FRQ with parts of 3, 2, 2 and 2 points. The key values (0, 2, 6; P3 = x^2 + x^3; 5/64; 13/2048; relative minimum) are consistent and exact. Rubric rows are properly dependency-chained, and no calculator is needed. Parts (c) and (d) span the legitimately related topics 10.12 and 5.7.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is building the Taylor polynomial from the differential equation (10.11). Parts (c) and (d) cover the related topics 10.12 and 5.7, which the bundle spans legitimately."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All values are correct and unique. Equivalent forms such as x^2 + x^3 should be accepted for row a3, which is a minor point."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The equation and initial condition are complete and unambiguous. Part (a) repeats the equation in its prompt, which is harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric rows are clear and consistent."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits about 15 minutes with no calculator, simple fractions, and a standard AP structure."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part BC FRQ. Derivatives come from implicit differentiation of the DE: f'(0)=0, f''(0)=2, f'''(0)=6, so P3 = x^2 + x^3. Then evaluate P3(1/4)=5/64, apply the Lagrange bound 39/4! * (1/4)^4 = 13/2048, and use the second derivative test (f'=0, f''>0 gives a relative minimum). It combines several procedures and needs the DE-to-derivatives step, but the numbers are small and the wording is clear. This matches full-mock difficulty rather than basic skill practice or an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_bc-f02-k0",
+  "cellId": "ap_calculus_bc-f02",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "frq_bundle",
+  "keywordCode": "6.13",
+  "unitCode": "6",
+  "skillPrimary": "1.E",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "frq_bc_improper_parts",
+  "wording": "llm",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Multi-part FRQ-style item on 6.13 with parts on 6.11 and 5.4. (a) requires integration by parts and a limit, with L'Hopital on t e^(-t/2), giving 4. (b) is a definite integral of the same antiderivative, giving 4 - 12e^(-2). (c) is a first-derivative max justification, with the critical point at t=2. (d) scales the result from (a), so k = 10/4 = 5/2. Concepts are standard for BC, the numbers are clean, and the reading load is light. It needs a few procedures across the parts and one limit evaluation, which is typical of a full mock. The difficulty comes from the math itself, not from the arithmetic or the wording.",
+  "payload": {
+   "archetype": "frq_bc_improper_parts",
+   "template": "improper_integral_by_parts",
+   "topic": "6.13",
+   "extra_topics": [
+    "6.11",
+    "5.4"
+   ],
+   "skill": "1.E",
+   "representative_skill": "1.E",
+   "calculator": "not_allowed",
+   "title": "Absorption rate te^(-t/b): improper integral, integration by parts, maximum rate, scaling",
+   "stimulus": {
+    "kind": "text",
+    "description": "A rate function for the absorption of a drug",
+    "data": {
+     "rate": "r(t) = t e^(-t/2) milligrams per hour, t >= 0"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "A drug is absorbed into the bloodstream at the rate $r(t)=te^{-t/2}$ milligrams per hour, where $t$ is measured in hours and $t\\ge 0$. Find $\\displaystyle\\int_0^{\\infty} r(t)\\,dt$, or show that the integral does not have a finite value. Show the work that leads to your answer.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.C",
+      "1.E"
+     ],
+     "model_answer": "Integration by parts gives ∫ t e^(-t/2) dt = -2t e^(-t/2) - 4e^(-t/2); ∫₀^∞ r(t) dt = lim as B→∞ of the antiderivative at B minus its value at 0 = 4 milligrams.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Writes the improper integral as a limit",
+       "required_elements": [
+        "lim_{B→∞} ∫_0^B r(t) dt"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Antiderivative by integration by parts",
+       "required_elements": [
+        "-2t e^(-t/2) - 4e^(-t/2)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a3",
+       "points": 1,
+       "criterion": "Value of the integral: converges to the total amount",
+       "required_elements": [
+        "4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "6.13"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find the total amount of the drug absorbed during the first $4$ hours. Give your answer in exact form.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.C",
+      "1.E"
+     ],
+     "model_answer": "∫₀^4 r(t) dt = 4 - \\frac{12}{e^{2}} milligrams.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Uses the antiderivative with limits 0 and 4",
+       "required_elements": [
+        "∫_0^4 r(t) dt"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Exact value",
+       "required_elements": [
+        "4 - \\frac{12}{e^{2}}"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "6.11"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "At what time $t>0$ is the rate of absorption greatest? Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "r'(t) = e^(-t/2)(1 - t/2) = 0 at t = 2; r' > 0 before and r' < 0 after, so the rate is greatest at t = 2.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Sets r'(t) = 0 and solves",
+       "required_elements": [
+        "t = 2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Justification: r' changes sign from positive to negative at that time",
+       "required_elements": [
+        "r' changes from positive to negative"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "5.4"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "For a constant $k>0$, the rate function $kte^{-t/2}$ gives a total absorbed amount of $10$ milligrams over all time $t\\ge 0$. Find $k$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "3.D"
+     ],
+     "model_answer": "k(4) = 10, so k = \\frac{5}{2}.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Uses linearity: k times the total amount from part (a) equals the given total",
+       "required_elements": [
+        "k(4) = 10"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Value of k",
+       "required_elements": [
+        "\\frac{5}{2}"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "6.13"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "b=2",
+    "T=4",
+    "K=10",
+    "total=4",
+    "part=4 - 12*exp(-2)",
+    "k=5/2"
+   ],
+   "blueprint": {
+    "id": "frq_bc_improper_parts",
+    "subject": "ap_calculus_bc",
+    "kind": "frq_bundle",
+    "concept": "Evaluate a convergent improper integral and a definite integral by parts, locate the maximum of a rate, and scale a rate to a target total",
+    "topic": "6.13",
+    "skill": "1.E",
+    "student_thinking": [
+     "Write the improper integral as a limit and use integration by parts",
+     "Evaluate the definite integral over a finite window exactly",
+     "Find the maximum rate with the sign of r'",
+     "Use linearity to scale the total"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "t e^(-t/b) decays faster than any power so the improper integral converges",
+      "evidence": "the limit of t e^(-t/b) at infinity is 0"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "rate function"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "scipy quad to infinity and over the finite window, and a 6001-point grid for the maximum rate (independent of the by-parts antiderivative and the derivative test)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.C",
+       "1.E"
+      ],
+      "topics": [
+       "6.13"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Integration by parts gives ∫ t e^(-t/2) dt = -2t e^(-t/2) - 4e^(-t/2); ∫₀^∞ r(t) dt = lim as B→∞ of the antiderivative at B minus its value at 0 = 4 milligrams."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Writes the improper integral as a limit",
+        "elements": [
+         "lim_{B→∞} ∫_0^B r(t) dt"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Antiderivative by integration by parts",
+        "elements": [
+         "-2t e^(-t/2) - 4e^(-t/2)"
+        ]
+       },
+       {
+        "row_id": "a3",
+        "points": 1,
+        "criterion": "Value of the integral: converges to the total amount",
+        "elements": [
+         "4"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "1.C",
+       "1.E"
+      ],
+      "topics": [
+       "6.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "∫₀^4 r(t) dt = 4 - \\frac{12}{e^{2}} milligrams."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Uses the antiderivative with limits 0 and 4",
+        "elements": [
+         "∫_0^4 r(t) dt"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Exact value",
+        "elements": [
+         "4 - \\frac{12}{e^{2}}"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "3.B",
+       "3.E"
+      ],
+      "topics": [
+       "5.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "r'(t) = e^(-t/2)(1 - t/2) = 0 at t = 2; r' > 0 before and r' < 0 after, so the rate is greatest at t = 2."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Sets r'(t) = 0 and solves",
+        "elements": [
+         "t = 2"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Justification: r' changes sign from positive to negative at that time",
+        "elements": [
+         "r' changes from positive to negative"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.E",
+       "3.D"
+      ],
+      "topics": [
+       "6.13"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "k(4) = 10, so k = \\frac{5}{2}."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Uses linearity: k times the total amount from part (a) equals the given total",
+        "elements": [
+         "k(4) = 10"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Value of k",
+        "elements": [
+         "\\frac{5}{2}"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 5300,
+   "pack_id": "frq_bc_improper_parts-s5300"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_bc_improper_parts",
+   "facts": [
+    "b=2",
+    "T=4",
+    "K=10",
+    "total=4",
+    "part=4 - 12*exp(-2)",
+    "k=5/2"
+   ],
+   "seed": 5300
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts have verified keys, and the rubric rows are consistent. Scope fits 6.13, 6.11 and 5.4 as allowed by the bundle. The 3/2/2/2 point split and non-calculator exact-form answers suit the exam. Pass.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item on 6.13 with parts on 6.11 and 5.4. (a) requires integration by parts and a limit, with L'Hopital on t e^(-t/2), giving 4. (b) is a definite integral of the same antiderivative, giving 4 - 12e^(-2). (c) is a first-derivative max justification, with the critical point at t=2. (d) scales the result from (a), so k = 10/4 = 5/2. Concepts are standard for BC, the numbers are clean, and the reading load is light. It needs a few procedures across the parts and one limit evaluation, which is typical of a full mock. The difficulty comes from the math itself, not from the arithmetic or the wording.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_bc-f02-k1",
+  "cellId": "ap_calculus_bc-f02",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "frq_bundle",
+  "keywordCode": "6.13",
+  "unitCode": "6",
+  "skillPrimary": "1.E",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "frq_bc_improper_parts",
+  "wording": "llm",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard BC FRQ-style multipart item. Part a needs integration by parts plus an improper-integral limit (with L'Hopital). Part b reuses the antiderivative. Part c is a first-derivative-test justification. Part d is a simple scaling step. Numbers are clean and the reading is short. Difficulty comes from procedure selection and multi-step reasoning, not from unfair sources.",
+  "payload": {
+   "archetype": "frq_bc_improper_parts",
+   "template": "improper_integral_by_parts",
+   "topic": "6.13",
+   "extra_topics": [
+    "6.11",
+    "5.4"
+   ],
+   "skill": "1.E",
+   "representative_skill": "1.E",
+   "calculator": "not_allowed",
+   "title": "Absorption rate te^(-t/b): improper integral, integration by parts, maximum rate, scaling",
+   "stimulus": {
+    "kind": "text",
+    "description": "A rate function for the absorption of a drug",
+    "data": {
+     "rate": "r(t) = t e^(-t/3) milligrams per hour, t >= 0"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "A drug is absorbed into the bloodstream at the rate $r(t)=te^{-t/3}$ milligrams per hour, where $t$ is measured in hours and $t\\ge 0$. Find $\\displaystyle\\int_0^{\\infty} r(t)\\,dt$, or show that the integral does not have a finite value. Show the work that leads to your answer.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.C",
+      "1.E"
+     ],
+     "model_answer": "Integration by parts gives ∫ t e^(-t/3) dt = -3t e^(-t/3) - 9e^(-t/3); ∫₀^∞ r(t) dt = lim as B→∞ of the antiderivative at B minus its value at 0 = 9 milligrams.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Writes the improper integral as a limit",
+       "required_elements": [
+        "lim_{B→∞} ∫_0^B r(t) dt"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Antiderivative by integration by parts",
+       "required_elements": [
+        "-3t e^(-t/3) - 9e^(-t/3)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a3",
+       "points": 1,
+       "criterion": "Value of the integral: converges to the total amount",
+       "required_elements": [
+        "9"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "6.13"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find the total amount of the drug absorbed during the first $3$ hours. Give your answer in exact form.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.C",
+      "1.E"
+     ],
+     "model_answer": "∫₀^3 r(t) dt = 9 - \\frac{18}{e} milligrams.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Uses the antiderivative with limits 0 and 3",
+       "required_elements": [
+        "∫_0^3 r(t) dt"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Exact value",
+       "required_elements": [
+        "9 - \\frac{18}{e}"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "6.11"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "At what time $t>0$ is the rate of absorption greatest? Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "r'(t) = e^(-t/3)(1 - t/3) = 0 at t = 3; r' > 0 before and r' < 0 after, so the rate is greatest at t = 3.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Sets r'(t) = 0 and solves",
+       "required_elements": [
+        "t = 3"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Justification: r' changes sign from positive to negative at that time",
+       "required_elements": [
+        "r' changes from positive to negative"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "5.4"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "For a constant $k>0$, the rate function $kte^{-t/3}$ gives a total absorbed amount of $10$ milligrams over all time $t\\ge 0$. Find $k$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "3.D"
+     ],
+     "model_answer": "k(9) = 10, so k = \\frac{10}{9}.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Uses linearity: k times the total amount from part (a) equals the given total",
+       "required_elements": [
+        "k(9) = 10"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Value of k",
+       "required_elements": [
+        "\\frac{10}{9}"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "6.13"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "b=3",
+    "T=3",
+    "K=10",
+    "total=9",
+    "part=9 - 18*exp(-1)",
+    "k=10/9"
+   ],
+   "blueprint": {
+    "id": "frq_bc_improper_parts",
+    "subject": "ap_calculus_bc",
+    "kind": "frq_bundle",
+    "concept": "Evaluate a convergent improper integral and a definite integral by parts, locate the maximum of a rate, and scale a rate to a target total",
+    "topic": "6.13",
+    "skill": "1.E",
+    "student_thinking": [
+     "Write the improper integral as a limit and use integration by parts",
+     "Evaluate the definite integral over a finite window exactly",
+     "Find the maximum rate with the sign of r'",
+     "Use linearity to scale the total"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "t e^(-t/b) decays faster than any power so the improper integral converges",
+      "evidence": "the limit of t e^(-t/b) at infinity is 0"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "rate function"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "scipy quad to infinity and over the finite window, and a 6001-point grid for the maximum rate (independent of the by-parts antiderivative and the derivative test)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.C",
+       "1.E"
+      ],
+      "topics": [
+       "6.13"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Integration by parts gives ∫ t e^(-t/3) dt = -3t e^(-t/3) - 9e^(-t/3); ∫₀^∞ r(t) dt = lim as B→∞ of the antiderivative at B minus its value at 0 = 9 milligrams."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Writes the improper integral as a limit",
+        "elements": [
+         "lim_{B→∞} ∫_0^B r(t) dt"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Antiderivative by integration by parts",
+        "elements": [
+         "-3t e^(-t/3) - 9e^(-t/3)"
+        ]
+       },
+       {
+        "row_id": "a3",
+        "points": 1,
+        "criterion": "Value of the integral: converges to the total amount",
+        "elements": [
+         "9"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "1.C",
+       "1.E"
+      ],
+      "topics": [
+       "6.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "∫₀^3 r(t) dt = 9 - \\frac{18}{e} milligrams."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Uses the antiderivative with limits 0 and 3",
+        "elements": [
+         "∫_0^3 r(t) dt"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Exact value",
+        "elements": [
+         "9 - \\frac{18}{e}"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "3.B",
+       "3.E"
+      ],
+      "topics": [
+       "5.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "r'(t) = e^(-t/3)(1 - t/3) = 0 at t = 3; r' > 0 before and r' < 0 after, so the rate is greatest at t = 3."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Sets r'(t) = 0 and solves",
+        "elements": [
+         "t = 3"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Justification: r' changes sign from positive to negative at that time",
+        "elements": [
+         "r' changes from positive to negative"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.E",
+       "3.D"
+      ],
+      "topics": [
+       "6.13"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "k(9) = 10, so k = \\frac{10}{9}."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Uses linearity: k times the total amount from part (a) equals the given total",
+        "elements": [
+         "k(9) = 10"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Value of k",
+        "elements": [
+         "\\frac{10}{9}"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 5301,
+   "pack_id": "frq_bc_improper_parts-s5301"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_bc_improper_parts",
+   "facts": [
+    "b=3",
+    "T=3",
+    "K=10",
+    "total=9",
+    "part=9 - 18*exp(-1)",
+    "k=10/9"
+   ],
+   "seed": 5301
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts have correct, unique answers (9; 9 - 18/e; t = 3; k = 10/9). The item is in scope for 6.13, 6.11 and 5.4, the rubric is consistent, and the load fits a 9-point non-calculator FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant demand is the improper integral by parts (6.13), with related parts from 6.11 and 5.4. Non-calculator and within BC unit scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and correct. Rubric rows are consistent and their dependencies are reasonable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 9 points fit the official grain, the arithmetic is light, and the load is about 15 minutes."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard BC FRQ-style multipart item. Part a needs integration by parts plus an improper-integral limit (with L'Hopital). Part b reuses the antiderivative. Part c is a first-derivative-test justification. Part d is a simple scaling step. Numbers are clean and the reading is short. Difficulty comes from procedure selection and multi-step reasoning, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 12,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

@@ -1,0 +1,359 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-014",
+ "chunkId": "rev-explanation_audit-014",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-014.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-02-048",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "We are told that in old Beirut there was a language school whose classroom had once been a farmer's barn, and that the farmer, Rashid, still came each evening to sit at the back. One spring a surveyor from the city, Mehreen, arrived with chains and stakes and announced that the new road would pass straight through the classroom wall. The council had decided it in winter; no one had thought to ask the farmer or the students. Rashid said nothing that night. __The next evening he brought a lamp, a slate, and a sack of beans, and he asked Mehreen to teach him the word for 'line' in every language the school taught.__ She taught him seven. By the last lesson she had redrawn the road along the orchard's edge, and the students carved her seven words into the doorframe.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows Rashid preparing to resist the surveyor by blocking the classroom with his supplies.",
+    "It marks a turn from silent grievance to an exchange that leads the surveyor to reconsider.",
+    "It suggests that Rashid has accepted the council's decision and wishes to begin a new life.",
+    "It explains why the council chose the old classroom as the route for the new road."
+   ],
+   "correct_letter": "B",
+   "explanation": "앞에서 Rashid는 묻지도 않고 내려진 결정 앞에서 침묵합니다. 밑줄 문장에서 그는 맞서는 대신 측량사에게 'line'이라는 단어를 배우겠다고 청하고, 이 수업을 거치며 Mehreen은 길을 과수원 가장자리로 다시 긋습니다. 따라서 침묵에서 교류로의 전환을 짚은 B가 정답입니다. A는 저항으로 오해했고, C는 결정을 받아들였다고 보며, D는 위원회의 이유를 설명하지 않아 틀립니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-049",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "'Two bowls, extra scallions, like always,' Dariush called from the noodle stall, though Linh and I had not eaten there together in six years. She sat across from me at the folding table outside the strip mall in Ohio, holding the envelope I had found in our father's desk drawer: letters from her, one every birthday, none of which he had ever passed on to me. I had driven three hours rehearsing how angry I would be. Instead I noticed how carefully she kept her nails short, the way our mother used to, and how she slid me the larger bowl without being asked. When she apologized for him, not for herself, I almost corrected her. Then I watched Dariush wipe the counter in slow circles and decided the correction could wait.",
+   "question": "Which choice best describes the narrator's attitude toward Linh in the text?",
+   "options": [
+    "Resentful, since the narrator blames Linh for hiding the birthday letters for years.",
+    "Indifferent, since the narrator cares more about the noodles than the conversation.",
+    "Softening, since the narrator's planned anger yields to small signs of Linh's care.",
+    "Suspicious, since the narrator doubts that Linh really wrote the letters she describes."
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 세 시간 동안 화낼 연습을 했다고 하지만, 막상 Linh의 짧은 손톱과 큰 그릇을 양보하는 모습 같은 작은 배려를 알아챕니다. 마지막에는 바로잡으려던 말도 미루기로 해 태도가 누그러졌음을 보여 줍니다. 따라서 C가 정답입니다. A는 편지를 숨긴 사람이 아버지이므로 틀리고, B와 D는 지문에 근거가 없습니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-050",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Reputations are stitched like coats, in rooms no customer sees. In the back room of the tailor's shop on Gold Avenue in Albuquerque, Elan found the ledger while hunting for a spool of gray thread. Every winter for eleven years, the landlord had been praised from the church steps for the warm coats he gave his poorest tenants. Every winter, in the tailor's cramped hand, the same coats were entered as unpaid. Takoda, the landlord's son, read the page over her shoulder and said nothing for a while. The town would go on admiring his father, no doubt, with the kind of sincerity that costs a town nothing. Elan returned the ledger to its shelf, and the two of them sat among the bolts of wool, listening to the old tailor's treadle beyond the curtain.",
+   "question": "Which choice best describes the narrator's attitude toward the landlord's reputation for generosity?",
+   "options": [
+    "Admiring, since the narrator suggests the landlord truly earned the town's praise through charity.",
+    "Indifferent, since the narrator attends only to the ordinary work done in the tailor's back room.",
+    "Outraged, since the narrator openly demands that the town punish the landlord for his deceit.",
+    "Wryly skeptical, since the narrator hints that the praise rests on labor done by someone else."
+   ],
+   "correct_letter": "D",
+   "explanation": "첫 문장은 평판이 손님이 보지 못하는 방에서 '꿰매진다'고 말하고, 장부에는 지주가 칭찬받은 외투가 재단사의 미수금으로 적혀 있습니다. 또 서술자는 마을의 존경을 '아무 대가도 들지 않는 진심'이라고 비꼽니다. 이 두 단서를 묶으면 은근히 냉소적인 D가 정답입니다. A는 반대 해석이고, B는 서술자의 논평을 무시하며, C는 처벌 요구가 없어 지나칩니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-051",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Once, at the ferry steps where Kerala's waters turn,\nI, Farhad, sat beside the boy I'd benched all spring,\nRohan, whose feet were quicker than my patience.\nHe watched the boats; I watched him and said nothing.\nA schoolmaster, waiting with his bundled books,\nhad told me that same morning, half in passing,\n'The swiftest colt is ruined by the whip.'\nI turned the words like coins inside my pocket.\nNow, when the horn called out across the backwater,\nI found I wished to ask the boy his mind,\nnot tell him his mistakes, as I had always told him.\nHe rose and went aboard; I did not stop him,\nbut kept his seat beside me, warm and empty,\nas herons settled low along the palms.",
+   "question": "Which choice best describes the speaker's attitude toward Rohan in the poem?",
+   "options": [
+    "Remorseful and newly attentive, as the speaker comes to value hearing Rohan's view.",
+    "Coldly dismissive, as the speaker still believes Rohan deserves to stay on the bench.",
+    "Openly envious, as the speaker resents the speed Rohan shows on the playing field.",
+    "Fearful and anxious, as the speaker worries Rohan will complain to the schoolmaster."
+   ],
+   "correct_letter": "A",
+   "explanation": "화자는 Rohan을 봄 내내 벤치에 앉혀 둔 코치로, 교사의 '가장 빠른 망아지도 채찍에 망가진다'는 말을 곱씹습니다. 이후 늘 실수만 지적하던 자신을 돌아보며 이제는 소년의 생각을 묻고 싶어 합니다. 이 두 근거로 볼 때 후회와 새로운 관심을 담은 A가 정답입니다. B는 변화한 태도와 반대이고, C·D는 지문에 근거가 없습니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-052",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Camphor, iodine, and the warm dust of the ceiling fan: that was the smell of the night-shift pharmacy in Accra where my brother Obinna worked, and where, after our mother's burial, he and I, Bao, spread her letters across the counter between customers. We were searching for her groundnut soup. Surely, I said, a woman who wrote to us every week for nine years had set it down somewhere. She had not. She wrote instead of the price of tomatoes, the neighbor's quarrel, the color of the harmattan sky. 'Stir until it tells you,' one letter said, of something else entirely. I laughed at that, and then, to my surprise, I could not stop. Obinna counted out tablets for a night watchman while I read on, and I began to think she had left the recipe in us rather than on paper.",
+   "question": "Which choice best describes the narrator's attitude toward her mother as revealed in the text?",
+   "options": [
+    "Frustrated, because the mother's letters seem to have hidden the recipe from her children.",
+    "Fondly amused, because the narrator finds the mother's habits endearing rather than lacking.",
+    "Distant and formal, because the narrator treats the letters mainly as records of prices.",
+    "Guilty, because the narrator regrets never having asked the mother for the recipe directly."
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 조리법 대신 토마토 값과 이웃의 다툼이 적힌 편지를 읽다가, 엉뚱한 맥락의 '알려 줄 때까지 저어라'라는 문장에 웃음을 멈추지 못합니다. 이어서 어머니가 조리법을 종이가 아니라 자식들 안에 남겼다고 생각합니다. 두 단서를 연결하면 애정 어린 즐거움을 담은 B가 정답입니다. A는 일부러 숨겼다는 근거가 없고, C는 정서적 반응을 무시하며, D의 죄책감은 드러나지 않습니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-053",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "We stopped at the roadside diner outside Lagos because the lorry had a split tire and Aiko said no tire was worth arguing with on an empty stomach. I was eleven that year, and the cassava harvest had failed so thoroughly that my father had stopped speaking at supper. Aiko had been his friend since before I was born, and she had driven up from the coast to bring us seed for the next planting. While the mechanic worked, she ordered two plates of rice and ate hers slowly, asking me, Folasade, the names of every bird on the wires. I knew she was keeping me from crying. I also knew, even then, that she had sold her own sewing machine to pay for the seed, though she never said so. When the tire was fixed, she paid for both plates and let me carry the change.",
+   "question": "Which choice best describes the narrator's attitude toward Aiko in the text?",
+   "options": [
+    "Puzzled, since the narrator cannot understand why Aiko chose to stop at the diner at all.",
+    "Resentful, since the narrator feels Aiko treated her like a small child during the delay.",
+    "Quietly grateful, since the narrator recognizes the care and sacrifice behind Aiko's actions.",
+    "Mildly bored, since the narrator mainly recalls the long wait for the mechanic to finish."
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 Aiko가 새 이름을 묻는 것이 자신을 울지 않게 하려는 배려였음을 알았다고 말합니다. 또 Aiko가 재봉틀을 팔아 씨앗 값을 마련했다는 사실도 알고 있었다고 덧붙입니다. 이 두 단서를 연결하면 조용한 감사를 표현한 C가 정답입니다. A·D는 화자의 깨달음을 놓치고, B는 배려를 원망으로 잘못 읽었습니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-054",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Nguyen, my dear neighbor, I write this by the lamp while the last crates of grapes wait on your porch. You will tell me again that a man who sailed forty years can keep a little vineyard and a wine shop running on Chicago's South Side through one more winter. Perhaps he can. I watched you today on the ladder with your bad knee wrapped in sailcloth, singing the same three bars of a song you have never finished, and I had not the heart to call you down. Your sons write that the shop should close. I think they are sensible, and I think they have never seen you count the barrels as if they were stars to steer by. So I will carry the crates in tomorrow, and I will say nothing more of closing until the frost does. Your friend, Winifred",
+   "question": "Which choice best describes the letter writer's attitude toward Nguyen's plan to keep the shop open?",
+   "options": [
+    "Disapproving, as the writer urges Nguyen to follow his sons' advice and close the shop.",
+    "Envious, as the writer wishes she had a vineyard and a wine shop of her own to manage.",
+    "Detached, as the writer reports the harvest's progress without offering any opinion.",
+    "Affectionately torn, as the writer doubts the plan yet supports Nguyen's devotion to it."
+   ],
+   "correct_letter": "D",
+   "explanation": "Winifred는 아들들의 폐업 주장이 '합리적'이라고 인정하며 계획에 의문을 품습니다. 그러나 사다리 위의 Nguyen을 차마 내려오라 하지 못했고, 내일 상자를 함께 옮기겠다며 그의 애정을 지지합니다. 이 두 면을 함께 담은 D가 정답입니다. A는 지지하는 면을 놓치고, B는 근거가 없으며, C는 감정이 뚜렷한 편지와 맞지 않습니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-055",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "We have been three days on the barge down to Dhaka, and my grandson has taken to reading the cargo list aloud to the boatmen. This morning he found my old trunk among the jute bales and read the name painted on its lid: Clara. He asked who she was. I told him she was a girl who once learned English verbs at a mission school and believed she would never live anywhere but beside a cold sea. He said it was a pretty name and asked why no one says it. I could not answer him at once. Tonight I find I do not want the name back, exactly, yet I was glad, absurdly glad, to hear it spoken in his voice over the water. Chana I have been for fifty years, and Chana I shall stay; but I have asked him to leave the lid as it is.",
+   "question": "Which choice best describes the diarist's attitude toward the name Clara?",
+   "options": [
+    "Fondly nostalgic, cherishing the name's memory without wishing to take it back.",
+    "Bitterly regretful, wishing she had never given up the name of her girlhood.",
+    "Embarrassed, hoping her grandson will soon forget the name he read on the trunk.",
+    "Indifferent, treating the name as just one more entry on the barge's cargo list."
+   ],
+   "correct_letter": "A",
+   "explanation": "일기 작성자는 손자가 그 이름을 부르는 것을 듣고 '터무니없이 기뻤다'고 하면서도 이름을 되찾고 싶지는 않다고 씁니다. 또 앞으로도 Chana로 남겠지만 트렁크 뚜껑의 이름은 그대로 두라고 부탁합니다. 이 두 단서를 연결하면 A가 정답입니다. B는 되찾고 싶지 않다는 말과 어긋나고, C는 이름을 남겨 두려는 행동과 반대이며, D는 기쁨을 무시합니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-056",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Once, when I kept the hills above Lima and still believed every lost traveler was a fool, a hiker named Miriam came down out of the fog onto the village soccer field at dusk. She had wandered two days without a map. I meant to scold her, as I scolded all of them, and I had the speech ready. But she sat in the goalmouth and told the boys how she had followed the sound of their ball to find her way, and how she had shared her last bread with a stray dog that walked beside her. The boys listened as if to a saint. I listened too, and somewhere between the bread and the dog my speech went cold in my mouth. I lit the lantern, gave her my coat, and walked her down to the road myself, Dario the scold for once saying nothing.",
+   "question": "Which choice best describes the narrator's attitude toward Miriam over the course of the text?",
+   "options": [
+    "Scornful throughout, as the narrator considers Miriam reckless for hiking without a map.",
+    "Shifting from disdain to quiet respect, as her story undoes the scolding he had planned.",
+    "Fearful, as the narrator suspects that Miriam is a spirit who has come out of the fog.",
+    "Envious, as the narrator wishes the village boys admired him as much as they admire her."
+   ],
+   "correct_letter": "B",
+   "explanation": "처음에 화자 Dario는 길 잃은 여행자를 모두 바보로 여기며 꾸중할 말을 준비합니다. 그러나 Miriam의 이야기를 듣는 사이 그 말이 '입 안에서 식었고', 그는 외투를 건네고 직접 길까지 바래다줍니다. 경멸에서 존중으로 바뀐 태도를 담은 B가 정답입니다. A는 변화를 놓치고, C·D는 지문에 근거가 없습니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-057",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Waiting rooms make liars of everyone. Marco had told Baoyu twice that he was fine, and she had told him twice that the surgery was routine. When his aunt's message arrived from Milan, offering a ticket and a room for as long as he wanted, he read it under the vending machine's glow and did not answer. Baoyu brought him tea he had not asked for and sat one chair away, as she always did. Near midnight a nurse called for family. Baoyu stood, then hesitated, as if unsure the word included her. Marco stood too, and walked beside her down the corridor. Outside the tall windows, the cranes along the river blinked red, one after another, patient as clocks.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A teenager receives an invitation from his aunt in Milan while waiting at a hospital at night.",
+    "A hospital's late-night routine shows how nurses decide which visitors count as family.",
+    "A teenager quietly turns from an offered escape toward the stepmother he has held at a distance.",
+    "Honesty between relatives matters most during periods of uncertainty and fear."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "correct_letter": "C",
+   "explanation": "앞부분에서 Marco는 밀라노로 떠날 수 있는 이모의 제안을 받고도 답하지 않고, 늘 한 칸 떨어져 앉는 새엄마 Baoyu와 거리를 둡니다. 뒷부분에서 '가족'이라는 말에 망설이는 Baoyu 곁에 Marco가 함께 일어나 걷습니다. 이 두 장면을 연결하면 C가 요지입니다. A는 일화 요약에 그치고, B는 소재만 빌린 다른 목적이며, D는 지나치게 일반적인 교훈입니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-058",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Years later I still remember the knife Budi gave me the spring after my grandfather died. I took it for an insult, a blade for a boy who could not yet hold one, and I left it rusting in a drawer. That summer I walked out alone to the abandoned orchard below Chiang Mai, where my grandfather's trees had gone wild with suckers and moss. Budi was there, pruning with an old knife exactly like mine. He showed me where to cut so a branch would fruit again, and he did not mention the drawer. By evening my hands were green with sap. A gecko clicked from the fence post, and somewhere down the hill a temple bell rang twice and stopped.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A boy receives a knife from his grandfather's old friend and leaves it in a drawer.",
+    "An abandoned orchard shows how farming near Chiang Mai has changed over the years.",
+    "Gifts from elders deserve gratitude, whatever they may seem to mean at first.",
+    "A boy realizes a gift he resented was meant to carry on his grandfather's work."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "correct_letter": "D",
+   "explanation": "앞부분에서 화자 Wira는 Budi의 칼을 모욕으로 여겨 서랍에 넣어 둡니다. 뒷부분에서 그는 할아버지의 과수원에서 같은 칼로 가지를 치는 Budi에게 열매 맺게 자르는 법을 배우며 선물의 뜻을 깨닫습니다. 두 장면의 대비에서 D가 요지로 읽힙니다. A는 일화 요약, B는 소재를 빌린 다른 목적, C는 지나치게 일반적인 교훈입니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-059",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "SUHYUN: You kept the seat by the door again.\nDAYOUNG: Someone has to. (She straightens a name card on the crowded table.) Your cousin's band is too loud.\n(A waiter passes with trays of abalone porridge. Guests press toward the stage.)\nSUHYUN: The Seoul firm wants an answer by Monday.\nDAYOUNG: (not looking up) Then answer them.\nSUHYUN: You could say stay.\nDAYOUNG: When have we ever said anything? (She slides her glass of tangerine juice toward Suhyun.) We fished off the same rocks for twenty years without talking. You'll know your way back.\n(Suhyun drinks. Dayoung moves her chair a little closer to the door, as if to keep it open.)\n(Onstage, the bride's grandmother begins a slow island song, and the band at last falls silent.)",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show a friend quietly blessing a departure she will not openly discuss.",
+    "To describe the music and food at a crowded wedding hall on Jeju Island.",
+    "To reveal that Dayoung resents Suhyun for considering a job in Seoul.",
+    "To suggest that true friendship never needs to be expressed in words."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "correct_letter": "A",
+   "explanation": "Dayoung은 남으라는 말을 하지 않고 '돌아오는 길은 알 거야'라고만 말하며 자기 주스를 Suhyun에게 밀어 줍니다. 또 문 쪽으로 의자를 옮겨 문을 열어 두려는 듯한 행동을 합니다. 두 단서를 연결하면 떠남을 조용히 축복하는 A가 목적입니다. B는 배경 소재만 다루고, C는 원망으로 오독했으며, D는 지나치게 일반적인 교훈입니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-060",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Four guards, two gates, one rule: no one enters the cemetery after ten. Camila and I worked the north gate in Valparaiso that winter, and Anacleto worked the south. Our plan was simple. On the anniversary of his brother's death, I would log him as sick, and Camila would swear she had seen him go home. He would slip inside and sit at the grave until dawn. At midnight he came to our gate, looked at the logbook, and closed it. 'If I lie to get in,' he said, 'I'll be lying to him too.' He sat outside the bars instead, on the cold step, and we carried our thermos out to join him. Below us, the funicular cars hung motionless on their cables, and a ship's horn sounded once from the harbor.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Three night guards devise a plan so a coworker can visit a grave after hours.",
+    "A planned deception gives way to a grief that the mourner insists on keeping honest.",
+    "A cemetery's strict rules reveal how Valparaiso traditionally honors its dead.",
+    "Friends should always be willing to break rules to help one another grieve."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "correct_letter": "B",
+   "explanation": "앞부분은 거짓 기록과 증언에 기대는 동료들의 계획을 소개합니다. 뒷부분에서 Anacleto는 거짓으로 들어가면 형에게도 거짓말하는 셈이라며 장부를 덮고 철문 밖에 앉습니다. 두 부분의 대비에서 B가 요지로 읽힙니다. A는 일화 요약, C는 소재를 쓴 다른 목적, D는 지나치게 일반적이고 지문과 어긋나는 교훈입니다."
+  },
+  {
+   "candidateId": "lit40-medium-02-061",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Tapping a cracked tuning fork against the piano lid, Father Kostas asked me, in the winter of 1912, to lead the boys' choir at the Easter vigil. I told him I had not set foot in his church for six years and did not mean to start for the sake of a hymn. He did not argue. He only asked whether I would play him the opening phrase anyway, and when I did, he hummed the second line under his breath, slightly flat, as he always had. I, Hasan, expected him to stop visiting the music room after that. Instead he arrived every Thursday through spring, bringing figs wrapped in newspaper, never once repeating his request, and we argued about Bach until the caretaker rattled his keys. Outside, the tram to Galata ground its wheels against the frozen rails.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To recount how the narrator declined to lead a choir at an Easter vigil one winter",
+    "To explain why the narrator stopped attending church services several years earlier",
+    "To show that a friendship endured even after the narrator refused a personal request",
+    "To suggest that music can resolve any disagreement between people of differing beliefs"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "correct_letter": "C",
+   "explanation": "앞부분에서 화자는 Kostas 신부의 성가대 지휘 부탁을 거절하지만 신부는 다투지 않고 함께 선율을 흥얼거린다. 뒷부분에서는 화자의 예상과 달리 신부가 봄 내내 목요일마다 찾아와 부탁을 되풀이하지 않고 우정을 이어 간다. 두 근거를 이으면 거절 뒤에도 관계가 지속되었음을 보여 주는 것이 목적이므로 C가 정답이다. A는 일화만 요약했고, B는 지문이 설명하지 않는 이유를 목적으로 삼았으며, D는 지나치게 일반적인 교훈이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-062",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Rain delays everything in this city, brother. I meant to be at Father's bench in the Thessaloniki garden by nine, with the wreath and the speech you and I drafted, but the gate was chained and the keeper late. A man named Stavros was waiting there too, holding only a dented watering can. When I asked what brought him, he said his wife had planted the tomatoes along the east wall, and that each year on the day she died he simply watered them and went home. I confess I thought it too small a gesture at first. Yet by the time the keeper arrived, I had folded our speech into my pocket, and I helped Stavros carry the can to the east wall before going to Father's bench. Your Radek. Across the path, a boy was chasing a loose hen between the bean poles.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe how a chained gate and a late keeper delayed the writer's morning visit",
+    "To ask the writer's brother to help revise the speech they had drafted together",
+    "To argue that grief is always best expressed privately rather than through ceremony",
+    "To convey how a stranger's modest ritual changed the writer's plans for remembrance"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "correct_letter": "D",
+   "explanation": "앞부분에서 Radek은 화환과 연설문을 준비해 아버지를 기리려 했고, Stavros의 소박한 물주기 의식을 처음에는 너무 작은 행동이라 여긴다. 뒷부분에서 그는 연설문을 접어 넣고 Stavros를 먼저 도운 뒤 아버지의 벤치로 간다. 두 부분의 대비가 낯선 이의 소박한 의식이 화자의 추모 계획을 바꾸었음을 보여 주므로 D가 정답이다. A는 지연 일화만 요약했고, B는 지문에 없는 요청이며, C는 지나치게 일반화된 주장이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-063",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Once, in a Cairo street where the lamps were lit late, two sisters kept a spice shop that sold less each year. Odile, the elder, swore that a thief in a green cloak had taken their saffron at dusk. Zaynab, the younger, swore no one had entered at all, for she had watched the door the whole hour. Each went alone to the quiet library behind the mosque to ask the keeper of records who was right, and each was sent home with the same answer: come back together. When at last they did, Odile recalled the cloak brushing the back window, and Zaynab recalled the shutter she had never thought to check. Between them, the thief at last had a road. In the reading room, a cat slept on a ledger no one had opened in years.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To illustrate that the sisters found the truth only by joining their partial accounts",
+    "To recount how a thief in a green cloak stole saffron from the sisters' struggling spice shop",
+    "To depict the library keeper as a judge who settles quarrels among the townspeople",
+    "To teach that people should always trust what they witness with their own eyes"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "correct_letter": "A",
+   "explanation": "앞부분에서 두 자매의 증언은 서로 어긋나고, 기록 관리인은 각자에게 함께 오라는 같은 답만 준다. 뒷부분에서 함께 온 자매가 각자 놓친 부분(뒤창의 망토, 확인하지 않은 덧문)을 맞추자 도둑의 경로가 드러난다. 따라서 부분적인 증언을 합쳐야 진실에 이른다는 것이 목적이므로 A가 정답이다. B는 사건만 요약했고, C는 관리인의 역할을 과장했으며, D는 지문과 어긋나는 일반적 교훈이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-064",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "On the last Saturday of August, I went down to the dock for mackerel as usual, and Eamon was already wrapping two in newspaper. \"Your mam still walking at night?\" he asked, not looking up. I said she was, and that Da had started locking the back door. An hour later the harbor master came along the boards asking who had untied the Kearneys' rowboat and let it drift into the reeds. Eamon had been on that dock since dawn; he saw everything that happened on it. He told the man he had been asleep in his chair. Then he lifted a blue wool scarf off a mooring post, folded it small, and slipped it into my coat pocket without a word. Cormac, he said, go on home now. Afterward he went back to gutting fish, flicking the heads to the gulls.",
+   "question": "Based on the text, why does Eamon most likely tell the harbor master he had been asleep?",
+   "options": [
+    "He wants to keep the narrator's mother from being blamed for the drifting rowboat.",
+    "He is embarrassed to admit that he failed to stop the Kearneys' rowboat from drifting away.",
+    "He hopes the harbor master will stop questioning people along the dock that day.",
+    "He resents the Kearneys for an old dispute over who may moor along the dock."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다",
+   "correct_letter": "A",
+   "explanation": "Eamon은 먼저 Cormac에게 어머니가 아직 밤에 돌아다니는지 묻는다. 이후 새벽부터 부두를 지켜본 그가 잠들어 있었다고 거짓말하고, 계류 기둥의 목도리를 몰래 Cormac의 주머니에 넣는다. 두 단서를 이으면 그가 배를 풀어 놓은 사람이 Cormac의 어머니임을 알고 그녀를 보호하려 했음을 알 수 있으므로 A가 정답이다. B는 다른 감정, C는 행동의 결과, D는 지문에 없는 외부 원인을 동기로 삼았다."
+  },
+  {
+   "candidateId": "lit40-medium-02-065",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "\"We cannot keep her in that room another rainy season,\" Abena said, lacing her boots in the mission school's drill hall in Accra, where she taught the girls their exercises. Chinedu, who swept the hall each evening, had heard her mother coughing through their shared wall for three nights running. He remembered, too, that his own father had died in a village two days' ride away while Chinedu was here in the city, learning of it only by letter a month afterward. So when Abena spoke of sending the old woman to a cousin in the hills, he set down his broom and proposed instead that they open a door through the wall, so that someone might always be within call. Abena stared at him. Above them, the climbing ropes hung motionless from the high beams.",
+   "question": "Based on the text, why does Chinedu most likely propose opening a door through the shared wall?",
+   "options": [
+    "He wishes to enlarge his own cramped rooms by using part of Abena's house.",
+    "He does not want Abena's mother to be ill and far away as his father was.",
+    "He expects Abena to reward him by finding him a better post at the school.",
+    "He is irritated by the coughing that has kept him awake for three nights."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다",
+   "correct_letter": "B",
+   "explanation": "Chinedu는 벽 너머로 Abena 어머니의 기침을 사흘 밤 들었고, 자신의 아버지가 먼 마을에서 홀로 죽어 한 달 뒤에야 편지로 소식을 들었던 일을 떠올린다. 그 직후 노모를 먼 친척에게 보내자는 말에 문을 내자고 제안하므로, 노모가 아버지처럼 멀리서 홀로 앓지 않기를 바란 것이다. 따라서 B가 정답이다. A는 결과를 동기로 착각했고, C는 지문에 없는 외부 원인이며, D는 다른 감정에서 나온 동기다."
+  },
+  {
+   "candidateId": "lit40-medium-02-066",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "MEHRNAZ, a railway clerk's daughter, stands on the Samarkand platform holding a sealed letter. LEILA, an old friend of her absent father, approaches with a traveling bag.\nLEILA: You've worn that letter thin, carrying it back and forth.\nMEHRNAZ: Mother says to give it to the first train going west. She says he will come home when he reads it.\nLEILA: (turning the letter in her hands) Your mother has sent one every month?\nMEHRNAZ: Every month for two years.\nLEILA: (quietly, slipping it into her own coat) Then let me carry this one. I am going west tonight, and I know the house where he stays.\n(She does not mention the second wife she met in that house.)\nMEHRNAZ: You'll put it into his hands?\nLEILA: Into no one else's.\n(A porter rolls a barrel of pomegranates down the platform.)",
+   "question": "Based on the text, why does Leila most likely offer to carry the letter herself?",
+   "options": [
+    "She is curious to learn what Mehrnaz's mother has written to her absent husband.",
+    "She hopes the gesture will earn her a warm welcome from Mehrnaz's family on her return.",
+    "She wishes to shield Mehrnaz's family from what she has seen at the father's house.",
+    "She has been asked by the railway to collect the mail bound for western towns."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다",
+   "correct_letter": "C",
+   "explanation": "Leila는 Mehrnaz의 어머니가 2년 동안 매달 편지를 보냈다는 말을 듣고 조용히 편지를 자기 외투에 넣는다. 지문의 지시문은 그녀가 그 집에서 본 아버지의 두 번째 아내에 대해 말하지 않는다고 밝힌다. 두 단서를 이으면 그녀는 가족이 감당하기 어려운 진실로부터 그들을 지키려 편지를 맡은 것이므로 C가 정답이다. A는 다른 감정, B는 결과를 동기로 착각한 것이며, D는 지문에 없는 외부 원인이다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-014 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-014.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-02-048 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nWe are told that in old Beirut there was a language school whose classroom had once been a farmer's barn, and that the farmer, Rashid, still came each evening to sit at the back. One spring a surveyor from the city, Mehreen, arrived with chains and stakes and announced that the new road would pass straight through the classroom wall. The council had decided it in winter; no one had thought to ask the farmer or the students. Rashid said nothing that night. __The next evening he brought a lamp, a slate, and a sack of beans, and he asked Mehreen to teach him the word for 'line' in every language the school taught.__ She taught him seven. By the last lesson she had redrawn the road along the orchard's edge, and the students carved her seven words into the doorframe.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows Rashid preparing to resist the surveyor by blocking the classroom with his supplies.\nB) It marks a turn from silent grievance to an exchange that leads the surveyor to reconsider.\nC) It suggests that Rashid has accepted the council's decision and wishes to begin a new life.\nD) It explains why the council chose the old classroom as the route for the new road.\n\n[표시된 정답] B\n[해설]\n앞에서 Rashid는 묻지도 않고 내려진 결정 앞에서 침묵합니다. 밑줄 문장에서 그는 맞서는 대신 측량사에게 'line'이라는 단어를 배우겠다고 청하고, 이 수업을 거치며 Mehreen은 길을 과수원 가장자리로 다시 긋습니다. 따라서 침묵에서 교류로의 전환을 짚은 B가 정답입니다. A는 저항으로 오해했고, C는 결정을 받아들였다고 보며, D는 위원회의 이유를 설명하지 않아 틀립니다.\n### lit40-medium-02-049 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\n'Two bowls, extra scallions, like always,' Dariush called from the noodle stall, though Linh and I had not eaten there together in six years. She sat across from me at the folding table outside the strip mall in Ohio, holding the envelope I had found in our father's desk drawer: letters from her, one every birthday, none of which he had ever passed on to me. I had driven three hours rehearsing how angry I would be. Instead I noticed how carefully she kept her nails short, the way our mother used to, and how she slid me the larger bowl without being asked. When she apologized for him, not for herself, I almost corrected her. Then I watched Dariush wipe the counter in slow circles and decided the correction could wait.\n\n[질문] Which choice best describes the narrator's attitude toward Linh in the text?\nA) Resentful, since the narrator blames Linh for hiding the birthday letters for years.\nB) Indifferent, since the narrator cares more about the noodles than the conversation.\nC) Softening, since the narrator's planned anger yields to small signs of Linh's care.\nD) Suspicious, since the narrator doubts that Linh really wrote the letters she describes.\n\n[표시된 정답] C\n[해설]\n화자는 세 시간 동안 화낼 연습을 했다고 하지만, 막상 Linh의 짧은 손톱과 큰 그릇을 양보하는 모습 같은 작은 배려를 알아챕니다. 마지막에는 바로잡으려던 말도 미루기로 해 태도가 누그러졌음을 보여 줍니다. 따라서 C가 정답입니다. A는 편지를 숨긴 사람이 아버지이므로 틀리고, B와 D는 지문에 근거가 없습니다.\n### lit40-medium-02-050 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nReputations are stitched like coats, in rooms no customer sees. In the back room of the tailor's shop on Gold Avenue in Albuquerque, Elan found the ledger while hunting for a spool of gray thread. Every winter for eleven years, the landlord had been praised from the church steps for the warm coats he gave his poorest tenants. Every winter, in the tailor's cramped hand, the same coats were entered as unpaid. Takoda, the landlord's son, read the page over her shoulder and said nothing for a while. The town would go on admiring his father, no doubt, with the kind of sincerity that costs a town nothing. Elan returned the ledger to its shelf, and the two of them sat among the bolts of wool, listening to the old tailor's treadle beyond the curtain.\n\n[질문] Which choice best describes the narrator's attitude toward the landlord's reputation for generosity?\nA) Admiring, since the narrator suggests the landlord truly earned the town's praise through charity.\nB) Indifferent, since the narrator attends only to the ordinary work done in the tailor's back room.\nC) Outraged, since the narrator openly demands that the town punish the landlord for his deceit.\nD) Wryly skeptical, since the narrator hints that the praise rests on labor done by someone else.\n\n[표시된 정답] D\n[해설]\n첫 문장은 평판이 손님이 보지 못하는 방에서 '꿰매진다'고 말하고, 장부에는 지주가 칭찬받은 외투가 재단사의 미수금으로 적혀 있습니다. 또 서술자는 마을의 존경을 '아무 대가도 들지 않는 진심'이라고 비꼽니다. 이 두 단서를 묶으면 은근히 냉소적인 D가 정답입니다. A는 반대 해석이고, B는 서술자의 논평을 무시하며, C는 처벌 요구가 없어 지나칩니다.\n### lit40-medium-02-051 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nOnce, at the ferry steps where Kerala's waters turn,\nI, Farhad, sat beside the boy I'd benched all spring,\nRohan, whose feet were quicker than my patience.\nHe watched the boats; I watched him and said nothing.\nA schoolmaster, waiting with his bundled books,\nhad told me that same morning, half in passing,\n'The swiftest colt is ruined by the whip.'\nI turned the words like coins inside my pocket.\nNow, when the horn called out across the backwater,\nI found I wished to ask the boy his mind,\nnot tell him his mistakes, as I had always told him.\nHe rose and went aboard; I did not stop him,\nbut kept his seat beside me, warm and empty,\nas herons settled low along the palms.\n\n[질문] Which choice best describes the speaker's attitude toward Rohan in the poem?\nA) Remorseful and newly attentive, as the speaker comes to value hearing Rohan's view.\nB) Coldly dismissive, as the speaker still believes Rohan deserves to stay on the bench.\nC) Openly envious, as the speaker resents the speed Rohan shows on the playing field.\nD) Fearful and anxious, as the speaker worries Rohan will complain to the schoolmaster.\n\n[표시된 정답] A\n[해설]\n화자는 Rohan을 봄 내내 벤치에 앉혀 둔 코치로, 교사의 '가장 빠른 망아지도 채찍에 망가진다'는 말을 곱씹습니다. 이후 늘 실수만 지적하던 자신을 돌아보며 이제는 소년의 생각을 묻고 싶어 합니다. 이 두 근거로 볼 때 후회와 새로운 관심을 담은 A가 정답입니다. B는 변화한 태도와 반대이고, C·D는 지문에 근거가 없습니다.\n### lit40-medium-02-052 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nCamphor, iodine, and the warm dust of the ceiling fan: that was the smell of the night-shift pharmacy in Accra where my brother Obinna worked, and where, after our mother's burial, he and I, Bao, spread her letters across the counter between customers. We were searching for her groundnut soup. Surely, I said, a woman who wrote to us every week for nine years had set it down somewhere. She had not. She wrote instead of the price of tomatoes, the neighbor's quarrel, the color of the harmattan sky. 'Stir until it tells you,' one letter said, of something else entirely. I laughed at that, and then, to my surprise, I could not stop. Obinna counted out tablets for a night watchman while I read on, and I began to think she had left the recipe in us rather than on paper.\n\n[질문] Which choice best describes the narrator's attitude toward her mother as revealed in the text?\nA) Frustrated, because the mother's letters seem to have hidden the recipe from her children.\nB) Fondly amused, because the narrator finds the mother's habits endearing rather than lacking.\nC) Distant and formal, because the narrator treats the letters mainly as records of prices.\nD) Guilty, because the narrator regrets never having asked the mother for the recipe directly.\n\n[표시된 정답] B\n[해설]\n화자는 조리법 대신 토마토 값과 이웃의 다툼이 적힌 편지를 읽다가, 엉뚱한 맥락의 '알려 줄 때까지 저어라'라는 문장에 웃음을 멈추지 못합니다. 이어서 어머니가 조리법을 종이가 아니라 자식들 안에 남겼다고 생각합니다. 두 단서를 연결하면 애정 어린 즐거움을 담은 B가 정답입니다. A는 일부러 숨겼다는 근거가 없고, C는 정서적 반응을 무시하며, D의 죄책감은 드러나지 않습니다.\n### lit40-medium-02-053 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nWe stopped at the roadside diner outside Lagos because the lorry had a split tire and Aiko said no tire was worth arguing with on an empty stomach. I was eleven that year, and the cassava harvest had failed so thoroughly that my father had stopped speaking at supper. Aiko had been his friend since before I was born, and she had driven up from the coast to bring us seed for the next planting. While the mechanic worked, she ordered two plates of rice and ate hers slowly, asking me, Folasade, the names of every bird on the wires. I knew she was keeping me from crying. I also knew, even then, that she had sold her own sewing machine to pay for the seed, though she never said so. When the tire was fixed, she paid for both plates and let me carry the change.\n\n[질문] Which choice best describes the narrator's attitude toward Aiko in the text?\nA) Puzzled, since the narrator cannot understand why Aiko chose to stop at the diner at all.\nB) Resentful, since the narrator feels Aiko treated her like a small child during the delay.\nC) Quietly grateful, since the narrator recognizes the care and sacrifice behind Aiko's actions.\nD) Mildly bored, since the narrator mainly recalls the long wait for the mechanic to finish.\n\n[표시된 정답] C\n[해설]\n화자는 Aiko가 새 이름을 묻는 것이 자신을 울지 않게 하려는 배려였음을 알았다고 말합니다. 또 Aiko가 재봉틀을 팔아 씨앗 값을 마련했다는 사실도 알고 있었다고 덧붙입니다. 이 두 단서를 연결하면 조용한 감사를 표현한 C가 정답입니다. A·D는 화자의 깨달음을 놓치고, B는 배려를 원망으로 잘못 읽었습니다.\n### lit40-medium-02-054 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nNguyen, my dear neighbor, I write this by the lamp while the last crates of grapes wait on your porch. You will tell me again that a man who sailed forty years can keep a little vineyard and a wine shop running on Chicago's South Side through one more winter. Perhaps he can. I watched you today on the ladder with your bad knee wrapped in sailcloth, singing the same three bars of a song you have never finished, and I had not the heart to call you down. Your sons write that the shop should close. I think they are sensible, and I think they have never seen you count the barrels as if they were stars to steer by. So I will carry the crates in tomorrow, and I will say nothing more of closing until the frost does. Your friend, Winifred\n\n[질문] Which choice best describes the letter writer's attitude toward Nguyen's plan to keep the shop open?\nA) Disapproving, as the writer urges Nguyen to follow his sons' advice and close the shop.\nB) Envious, as the writer wishes she had a vineyard and a wine shop of her own to manage.\nC) Detached, as the writer reports the harvest's progress without offering any opinion.\nD) Affectionately torn, as the writer doubts the plan yet supports Nguyen's devotion to it.\n\n[표시된 정답] D\n[해설]\nWinifred는 아들들의 폐업 주장이 '합리적'이라고 인정하며 계획에 의문을 품습니다. 그러나 사다리 위의 Nguyen을 차마 내려오라 하지 못했고, 내일 상자를 함께 옮기겠다며 그의 애정을 지지합니다. 이 두 면을 함께 담은 D가 정답입니다. A는 지지하는 면을 놓치고, B는 근거가 없으며, C는 감정이 뚜렷한 편지와 맞지 않습니다.\n### lit40-medium-02-055 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nWe have been three days on the barge down to Dhaka, and my grandson has taken to reading the cargo list aloud to the boatmen. This morning he found my old trunk among the jute bales and read the name painted on its lid: Clara. He asked who she was. I told him she was a girl who once learned English verbs at a mission school and believed she would never live anywhere but beside a cold sea. He said it was a pretty name and asked why no one says it. I could not answer him at once. Tonight I find I do not want the name back, exactly, yet I was glad, absurdly glad, to hear it spoken in his voice over the water. Chana I have been for fifty years, and Chana I shall stay; but I have asked him to leave the lid as it is.\n\n[질문] Which choice best describes the diarist's attitude toward the name Clara?\nA) Fondly nostalgic, cherishing the name's memory without wishing to take it back.\nB) Bitterly regretful, wishing she had never given up the name of her girlhood.\nC) Embarrassed, hoping her grandson will soon forget the name he read on the trunk.\nD) Indifferent, treating the name as just one more entry on the barge's cargo list.\n\n[표시된 정답] A\n[해설]\n일기 작성자는 손자가 그 이름을 부르는 것을 듣고 '터무니없이 기뻤다'고 하면서도 이름을 되찾고 싶지는 않다고 씁니다. 또 앞으로도 Chana로 남겠지만 트렁크 뚜껑의 이름은 그대로 두라고 부탁합니다. 이 두 단서를 연결하면 A가 정답입니다. B는 되찾고 싶지 않다는 말과 어긋나고, C는 이름을 남겨 두려는 행동과 반대이며, D는 기쁨을 무시합니다.\n### lit40-medium-02-056 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nOnce, when I kept the hills above Lima and still believed every lost traveler was a fool, a hiker named Miriam came down out of the fog onto the village soccer field at dusk. She had wandered two days without a map. I meant to scold her, as I scolded all of them, and I had the speech ready. But she sat in the goalmouth and told the boys how she had followed the sound of their ball to find her way, and how she had shared her last bread with a stray dog that walked beside her. The boys listened as if to a saint. I listened too, and somewhere between the bread and the dog my speech went cold in my mouth. I lit the lantern, gave her my coat, and walked her down to the road myself, Dario the scold for once saying nothing.\n\n[질문] Which choice best describes the narrator's attitude toward Miriam over the course of the text?\nA) Scornful throughout, as the narrator considers Miriam reckless for hiking without a map.\nB) Shifting from disdain to quiet respect, as her story undoes the scolding he had planned.\nC) Fearful, as the narrator suspects that Miriam is a spirit who has come out of the fog.\nD) Envious, as the narrator wishes the village boys admired him as much as they admire her.\n\n[표시된 정답] B\n[해설]\n처음에 화자 Dario는 길 잃은 여행자를 모두 바보로 여기며 꾸중할 말을 준비합니다. 그러나 Miriam의 이야기를 듣는 사이 그 말이 '입 안에서 식었고', 그는 외투를 건네고 직접 길까지 바래다줍니다. 경멸에서 존중으로 바뀐 태도를 담은 B가 정답입니다. A는 변화를 놓치고, C·D는 지문에 근거가 없습니다.\n### lit40-medium-02-057 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nWaiting rooms make liars of everyone. Marco had told Baoyu twice that he was fine, and she had told him twice that the surgery was routine. When his aunt's message arrived from Milan, offering a ticket and a room for as long as he wanted, he read it under the vending machine's glow and did not answer. Baoyu brought him tea he had not asked for and sat one chair away, as she always did. Near midnight a nurse called for family. Baoyu stood, then hesitated, as if unsure the word included her. Marco stood too, and walked beside her down the corridor. Outside the tall windows, the cranes along the river blinked red, one after another, patient as clocks.\n\n[질문] Which choice best states the main idea of the text?\nA) A teenager receives an invitation from his aunt in Milan while waiting at a hospital at night.\nB) A hospital's late-night routine shows how nurses decide which visitors count as family.\nC) A teenager quietly turns from an offered escape toward the stepmother he has held at a distance.\nD) Honesty between relatives matters most during periods of uncertainty and fear.\n\n[표시된 정답] C\n[해설]\n앞부분에서 Marco는 밀라노로 떠날 수 있는 이모의 제안을 받고도 답하지 않고, 늘 한 칸 떨어져 앉는 새엄마 Baoyu와 거리를 둡니다. 뒷부분에서 '가족'이라는 말에 망설이는 Baoyu 곁에 Marco가 함께 일어나 걷습니다. 이 두 장면을 연결하면 C가 요지입니다. A는 일화 요약에 그치고, B는 소재만 빌린 다른 목적이며, D는 지나치게 일반적인 교훈입니다.\n### lit40-medium-02-058 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nYears later I still remember the knife Budi gave me the spring after my grandfather died. I took it for an insult, a blade for a boy who could not yet hold one, and I left it rusting in a drawer. That summer I walked out alone to the abandoned orchard below Chiang Mai, where my grandfather's trees had gone wild with suckers and moss. Budi was there, pruning with an old knife exactly like mine. He showed me where to cut so a branch would fruit again, and he did not mention the drawer. By evening my hands were green with sap. A gecko clicked from the fence post, and somewhere down the hill a temple bell rang twice and stopped.\n\n[질문] Which choice best states the main idea of the text?\nA) A boy receives a knife from his grandfather's old friend and leaves it in a drawer.\nB) An abandoned orchard shows how farming near Chiang Mai has changed over the years.\nC) Gifts from elders deserve gratitude, whatever they may seem to mean at first.\nD) A boy realizes a gift he resented was meant to carry on his grandfather's work.\n\n[표시된 정답] D\n[해설]\n앞부분에서 화자 Wira는 Budi의 칼을 모욕으로 여겨 서랍에 넣어 둡니다. 뒷부분에서 그는 할아버지의 과수원에서 같은 칼로 가지를 치는 Budi에게 열매 맺게 자르는 법을 배우며 선물의 뜻을 깨닫습니다. 두 장면의 대비에서 D가 요지로 읽힙니다. A는 일화 요약, B는 소재를 빌린 다른 목적, C는 지나치게 일반적인 교훈입니다.\n### lit40-medium-02-059 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nSUHYUN: You kept the seat by the door again.\nDAYOUNG: Someone has to. (She straightens a name card on the crowded table.) Your cousin's band is too loud.\n(A waiter passes with trays of abalone porridge. Guests press toward the stage.)\nSUHYUN: The Seoul firm wants an answer by Monday.\nDAYOUNG: (not looking up) Then answer them.\nSUHYUN: You could say stay.\nDAYOUNG: When have we ever said anything? (She slides her glass of tangerine juice toward Suhyun.) We fished off the same rocks for twenty years without talking. You'll know your way back.\n(Suhyun drinks. Dayoung moves her chair a little closer to the door, as if to keep it open.)\n(Onstage, the bride's grandmother begins a slow island song, and the band at last falls silent.)\n\n[질문] Which choice best states the main purpose of the text?\nA) To show a friend quietly blessing a departure she will not openly discuss.\nB) To describe the music and food at a crowded wedding hall on Jeju Island.\nC) To reveal that Dayoung resents Suhyun for considering a job in Seoul.\nD) To suggest that true friendship never needs to be expressed in words.\n\n[표시된 정답] A\n[해설]\nDayoung은 남으라는 말을 하지 않고 '돌아오는 길은 알 거야'라고만 말하며 자기 주스를 Suhyun에게 밀어 줍니다. 또 문 쪽으로 의자를 옮겨 문을 열어 두려는 듯한 행동을 합니다. 두 단서를 연결하면 떠남을 조용히 축복하는 A가 목적입니다. B는 배경 소재만 다루고, C는 원망으로 오독했으며, D는 지나치게 일반적인 교훈입니다.\n### lit40-medium-02-060 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nFour guards, two gates, one rule: no one enters the cemetery after ten. Camila and I worked the north gate in Valparaiso that winter, and Anacleto worked the south. Our plan was simple. On the anniversary of his brother's death, I would log him as sick, and Camila would swear she had seen him go home. He would slip inside and sit at the grave until dawn. At midnight he came to our gate, looked at the logbook, and closed it. 'If I lie to get in,' he said, 'I'll be lying to him too.' He sat outside the bars instead, on the cold step, and we carried our thermos out to join him. Below us, the funicular cars hung motionless on their cables, and a ship's horn sounded once from the harbor.\n\n[질문] Which choice best states the main idea of the text?\nA) Three night guards devise a plan so a coworker can visit a grave after hours.\nB) A planned deception gives way to a grief that the mourner insists on keeping honest.\nC) A cemetery's strict rules reveal how Valparaiso traditionally honors its dead.\nD) Friends should always be willing to break rules to help one another grieve.\n\n[표시된 정답] B\n[해설]\n앞부분은 거짓 기록과 증언에 기대는 동료들의 계획을 소개합니다. 뒷부분에서 Anacleto는 거짓으로 들어가면 형에게도 거짓말하는 셈이라며 장부를 덮고 철문 밖에 앉습니다. 두 부분의 대비에서 B가 요지로 읽힙니다. A는 일화 요약, C는 소재를 쓴 다른 목적, D는 지나치게 일반적이고 지문과 어긋나는 교훈입니다.\n### lit40-medium-02-061 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nTapping a cracked tuning fork against the piano lid, Father Kostas asked me, in the winter of 1912, to lead the boys' choir at the Easter vigil. I told him I had not set foot in his church for six years and did not mean to start for the sake of a hymn. He did not argue. He only asked whether I would play him the opening phrase anyway, and when I did, he hummed the second line under his breath, slightly flat, as he always had. I, Hasan, expected him to stop visiting the music room after that. Instead he arrived every Thursday through spring, bringing figs wrapped in newspaper, never once repeating his request, and we argued about Bach until the caretaker rattled his keys. Outside, the tram to Galata ground its wheels against the frozen rails.\n\n[질문] Which choice best states the main purpose of the text?\nA) To recount how the narrator declined to lead a choir at an Easter vigil one winter\nB) To explain why the narrator stopped attending church services several years earlier\nC) To show that a friendship endured even after the narrator refused a personal request\nD) To suggest that music can resolve any disagreement between people of differing beliefs\n\n[표시된 정답] C\n[해설]\n앞부분에서 화자는 Kostas 신부의 성가대 지휘 부탁을 거절하지만 신부는 다투지 않고 함께 선율을 흥얼거린다. 뒷부분에서는 화자의 예상과 달리 신부가 봄 내내 목요일마다 찾아와 부탁을 되풀이하지 않고 우정을 이어 간다. 두 근거를 이으면 거절 뒤에도 관계가 지속되었음을 보여 주는 것이 목적이므로 C가 정답이다. A는 일화만 요약했고, B는 지문이 설명하지 않는 이유를 목적으로 삼았으며, D는 지나치게 일반적인 교훈이다.\n### lit40-medium-02-062 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nRain delays everything in this city, brother. I meant to be at Father's bench in the Thessaloniki garden by nine, with the wreath and the speech you and I drafted, but the gate was chained and the keeper late. A man named Stavros was waiting there too, holding only a dented watering can. When I asked what brought him, he said his wife had planted the tomatoes along the east wall, and that each year on the day she died he simply watered them and went home. I confess I thought it too small a gesture at first. Yet by the time the keeper arrived, I had folded our speech into my pocket, and I helped Stavros carry the can to the east wall before going to Father's bench. Your Radek. Across the path, a boy was chasing a loose hen between the bean poles.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe how a chained gate and a late keeper delayed the writer's morning visit\nB) To ask the writer's brother to help revise the speech they had drafted together\nC) To argue that grief is always best expressed privately rather than through ceremony\nD) To convey how a stranger's modest ritual changed the writer's plans for remembrance\n\n[표시된 정답] D\n[해설]\n앞부분에서 Radek은 화환과 연설문을 준비해 아버지를 기리려 했고, Stavros의 소박한 물주기 의식을 처음에는 너무 작은 행동이라 여긴다. 뒷부분에서 그는 연설문을 접어 넣고 Stavros를 먼저 도운 뒤 아버지의 벤치로 간다. 두 부분의 대비가 낯선 이의 소박한 의식이 화자의 추모 계획을 바꾸었음을 보여 주므로 D가 정답이다. A는 지연 일화만 요약했고, B는 지문에 없는 요청이며, C는 지나치게 일반화된 주장이다.\n### lit40-medium-02-063 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nOnce, in a Cairo street where the lamps were lit late, two sisters kept a spice shop that sold less each year. Odile, the elder, swore that a thief in a green cloak had taken their saffron at dusk. Zaynab, the younger, swore no one had entered at all, for she had watched the door the whole hour. Each went alone to the quiet library behind the mosque to ask the keeper of records who was right, and each was sent home with the same answer: come back together. When at last they did, Odile recalled the cloak brushing the back window, and Zaynab recalled the shutter she had never thought to check. Between them, the thief at last had a road. In the reading room, a cat slept on a ledger no one had opened in years.\n\n[질문] Which choice best states the main purpose of the text?\nA) To illustrate that the sisters found the truth only by joining their partial accounts\nB) To recount how a thief in a green cloak stole saffron from the sisters' struggling spice shop\nC) To depict the library keeper as a judge who settles quarrels among the townspeople\nD) To teach that people should always trust what they witness with their own eyes\n\n[표시된 정답] A\n[해설]\n앞부분에서 두 자매의 증언은 서로 어긋나고, 기록 관리인은 각자에게 함께 오라는 같은 답만 준다. 뒷부분에서 함께 온 자매가 각자 놓친 부분(뒤창의 망토, 확인하지 않은 덧문)을 맞추자 도둑의 경로가 드러난다. 따라서 부분적인 증언을 합쳐야 진실에 이른다는 것이 목적이므로 A가 정답이다. B는 사건만 요약했고, C는 관리인의 역할을 과장했으며, D는 지문과 어긋나는 일반적 교훈이다.\n### lit40-medium-02-064 — skill inferences · 유형 character_motivation\n[지문]\nOn the last Saturday of August, I went down to the dock for mackerel as usual, and Eamon was already wrapping two in newspaper. \"Your mam still walking at night?\" he asked, not looking up. I said she was, and that Da had started locking the back door. An hour later the harbor master came along the boards asking who had untied the Kearneys' rowboat and let it drift into the reeds. Eamon had been on that dock since dawn; he saw everything that happened on it. He told the man he had been asleep in his chair. Then he lifted a blue wool scarf off a mooring post, folded it small, and slipped it into my coat pocket without a word. Cormac, he said, go on home now. Afterward he went back to gutting fish, flicking the heads to the gulls.\n\n[질문] Based on the text, why does Eamon most likely tell the harbor master he had been asleep?\nA) He wants to keep the narrator's mother from being blamed for the drifting rowboat.\nB) He is embarrassed to admit that he failed to stop the Kearneys' rowboat from drifting away.\nC) He hopes the harbor master will stop questioning people along the dock that day.\nD) He resents the Kearneys for an old dispute over who may moor along the dock.\n\n[표시된 정답] A\n[해설]\nEamon은 먼저 Cormac에게 어머니가 아직 밤에 돌아다니는지 묻는다. 이후 새벽부터 부두를 지켜본 그가 잠들어 있었다고 거짓말하고, 계류 기둥의 목도리를 몰래 Cormac의 주머니에 넣는다. 두 단서를 이으면 그가 배를 풀어 놓은 사람이 Cormac의 어머니임을 알고 그녀를 보호하려 했음을 알 수 있으므로 A가 정답이다. B는 다른 감정, C는 행동의 결과, D는 지문에 없는 외부 원인을 동기로 삼았다.\n### lit40-medium-02-065 — skill inferences · 유형 character_motivation\n[지문]\n\"We cannot keep her in that room another rainy season,\" Abena said, lacing her boots in the mission school's drill hall in Accra, where she taught the girls their exercises. Chinedu, who swept the hall each evening, had heard her mother coughing through their shared wall for three nights running. He remembered, too, that his own father had died in a village two days' ride away while Chinedu was here in the city, learning of it only by letter a month afterward. So when Abena spoke of sending the old woman to a cousin in the hills, he set down his broom and proposed instead that they open a door through the wall, so that someone might always be within call. Abena stared at him. Above them, the climbing ropes hung motionless from the high beams.\n\n[질문] Based on the text, why does Chinedu most likely propose opening a door through the shared wall?\nA) He wishes to enlarge his own cramped rooms by using part of Abena's house.\nB) He does not want Abena's mother to be ill and far away as his father was.\nC) He expects Abena to reward him by finding him a better post at the school.\nD) He is irritated by the coughing that has kept him awake for three nights.\n\n[표시된 정답] B\n[해설]\nChinedu는 벽 너머로 Abena 어머니의 기침을 사흘 밤 들었고, 자신의 아버지가 먼 마을에서 홀로 죽어 한 달 뒤에야 편지로 소식을 들었던 일을 떠올린다. 그 직후 노모를 먼 친척에게 보내자는 말에 문을 내자고 제안하므로, 노모가 아버지처럼 멀리서 홀로 앓지 않기를 바란 것이다. 따라서 B가 정답이다. A는 결과를 동기로 착각했고, C는 지문에 없는 외부 원인이며, D는 다른 감정에서 나온 동기다.\n### lit40-medium-02-066 — skill inferences · 유형 character_motivation\n[지문]\nMEHRNAZ, a railway clerk's daughter, stands on the Samarkand platform holding a sealed letter. LEILA, an old friend of her absent father, approaches with a traveling bag.\nLEILA: You've worn that letter thin, carrying it back and forth.\nMEHRNAZ: Mother says to give it to the first train going west. She says he will come home when he reads it.\nLEILA: (turning the letter in her hands) Your mother has sent one every month?\nMEHRNAZ: Every month for two years.\nLEILA: (quietly, slipping it into her own coat) Then let me carry this one. I am going west tonight, and I know the house where he stays.\n(She does not mention the second wife she met in that house.)\nMEHRNAZ: You'll put it into his hands?\nLEILA: Into no one else's.\n(A porter rolls a barrel of pomegranates down the platform.)\n\n[질문] Based on the text, why does Leila most likely offer to carry the letter herself?\nA) She is curious to learn what Mehrnaz's mother has written to her absent husband.\nB) She hopes the gesture will earn her a warm welcome from Mehrnaz's family on her return.\nC) She wishes to shield Mehrnaz's family from what she has seen at the father's house.\nD) She has been asked by the railway to collect the mail bound for western towns.\n\n[표시된 정답] C\n[해설]\nLeila는 Mehrnaz의 어머니가 2년 동안 매달 편지를 보냈다는 말을 듣고 조용히 편지를 자기 외투에 넣는다. 지문의 지시문은 그녀가 그 집에서 본 아버지의 두 번째 아내에 대해 말하지 않는다고 밝힌다. 두 단서를 이으면 그녀는 가족이 감당하기 어려운 진실로부터 그들을 지키려 편지를 맡은 것이므로 C가 정답이다. A는 다른 감정, B는 결과를 동기로 착각한 것이며, D는 지문에 없는 외부 원인이다."
+}

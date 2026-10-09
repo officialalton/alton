@@ -1,0 +1,3231 @@
+{
+ "area_volume": {
+  "skill": "area_volume",
+  "n": 8,
+  "groupSize": 3,
+  "hiStats": {
+   "steps": 4,
+   "combine": 3,
+   "shift": 2,
+   "abstract": 2,
+   "subtle": 2.67,
+   "traps": [
+    [
+     "vertex_form_expansion_error",
+     1
+    ],
+    [
+     "x_intercept_condition_confusion",
+     1
+    ],
+    [
+     "constraint_ignoring",
+     1
+    ],
+    [
+     "boundary_miscount",
+     1
+    ],
+    [
+     "linear_scale_applied_to_volume",
+     1
+    ],
+    [
+     "surface_area_ratio_misuse",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 2,
+   "combine": 1.33,
+   "shift": 2,
+   "abstract": 1.33,
+   "subtle": 1.67,
+   "traps": [
+    [
+     "growth_vs_decay_confusion",
+     1
+    ],
+    [
+     "direction_confusion",
+     1
+    ],
+    [
+     "slope_intercept_confusion",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.7,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_condition_integration",
+    "description": "두 개 이상의 독립된 제약조건이나 정보(예산과 최소개수, 꼭짓점과 계수합 조건)를 동시에 만족시키는 해를 찾기 위해 여러 단계를 결합해야 한다.",
+    "evidence": [
+     "test4-Math-M2-Q26",
+     "test8-Math-M2-Q22"
+    ]
+   },
+   {
+    "name": "dimensional_scale_conversion",
+    "description": "길이·표면적·부피 사이의 닮음비 스케일링 관계를 인식하여 한 차원의 비율 정보를 다른 차원(부피)으로 변환하는 추상적 사고가 필요하다.",
+    "evidence": [
+     "test9-Math-M1-Q27"
+    ]
+   },
+   {
+    "name": "indirect_representation_construction",
+    "description": "주어진 정보(꼭짓점, 닮음비)를 바로 대입하지 않고 대수식이나 비율식을 재구성한 뒤 조건을 검증해야 한다.",
+    "evidence": [
+     "test4-Math-M2-Q26",
+     "test9-Math-M1-Q27"
+    ]
+   },
+   {
+    "name": "optimization_under_discrete_constraint",
+    "description": "단순 계산이 아니라 정수해 범위 내에서 최댓값 또는 경계값을 탐색하는 최적화적 사고가 요구된다.",
+    "evidence": [
+     "test8-Math-M2-Q22"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test4-Math-M2-Q26",
+   "test8-Math-M2-Q22",
+   "test9-Math-M1-Q27"
+  ]
+ },
+ "boundaries": {
+  "skill": "boundaries",
+  "n": 52,
+  "groupSize": 13,
+  "hiStats": {
+   "steps": 2.23,
+   "combine": 2,
+   "shift": 1.15,
+   "abstract": 1.23,
+   "subtle": 2.15,
+   "traps": [
+    [
+     "comma_splice",
+     5
+    ],
+    [
+     "punctuation_misuse",
+     5
+    ],
+    [
+     "dangling_modifier",
+     2
+    ],
+    [
+     "nonessential_clause_misuse",
+     1
+    ],
+    [
+     "verb_tense_confusion",
+     1
+    ],
+    [
+     "verb_tense_mismatch",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.38,
+   "combine": 1,
+   "shift": 1,
+   "abstract": 1,
+   "subtle": 1.54,
+   "traps": [
+    [
+     "subject_verb_agreement",
+     4
+    ],
+    [
+     "punctuation_misuse",
+     3
+    ],
+    [
+     "semicolon_comma_confusion",
+     1
+    ],
+    [
+     "tense_inconsistency",
+     1
+    ],
+    [
+     "comma_splice",
+     1
+    ],
+    [
+     "unneeded_punctuation",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.49,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "dangling_modifier_subject_matching",
+    "description": "문두의 분사구문·비교구문이 논리적으로 수식하는 대상이 무엇인지 파악하여 그 대상과 일치하는 주절 주어를 찾아내는 사고가 추가로 필요하다. 단순 수일치나 시제 판단을 넘어 수식어와 피수식어 사이의 의미적 연결을 추론해야 한다.",
+    "evidence": [
+     "test8-RW-M2-Q26",
+     "test7-RW-M2-Q25",
+     "test8-RW-M2-Q25"
+    ]
+   },
+   {
+    "name": "independent_clause_boundary_judgment",
+    "description": "두 개의 독립절이 실제로 완전한 별개의 생각인지 판단하고, 이를 연결할 때 등위접속사+쉼표, 세미콜론, 마침표 중 어떤 구두점 전략이 적절한지 여러 옵션을 비교·선택해야 한다. 단순히 절 경계에 구두점이 필요한지 여부만 판단하는 것이 아니라 절 간의 논리적 관계(대조, 설명, 강조)까지 고려해 구두점 종류를 결정해야 한다.",
+    "evidence": [
+     "test4-RW-M1-Q21",
+     "test4-RW-M1-Q23",
+     "test4-RW-M2-Q21",
+     "test4-RW-M2-Q23"
+    ]
+   },
+   {
+    "name": "inserted_modifier_vs_clause_discrimination",
+    "description": "삽입된 부사·수식어구를 절의 경계와 혼동하지 않고 구분하여, 그것이 독립절 사이에 끼어든 것인지 아니면 단순 삽입어인지를 판별한 뒤 올바른 구두점을 적용해야 한다.",
+    "evidence": [
+     "test4-RW-M1-Q26",
+     "test4-RW-M2-Q26",
+     "test8-RW-M2-Q25"
+    ]
+   },
+   {
+    "name": "parallel_list_punctuation_with_internal_commas",
+    "description": "목록 항목 내부에 이미 쉼표가 포함된 복잡한 병렬 구조에서, 항목 간 경계를 명확히 하기 위해 세미콜론을 언제 사용해야 하는지 판단하는 다단계 구조 분석이 필요하다.",
+    "evidence": [
+     "test4-RW-M1-Q25"
+    ]
+   },
+   {
+    "name": "temporal_reasoning_for_tense_selection",
+    "description": "단순 시제 일치가 아니라 'by 2023'과 같은 시간 표현이 나타내는 완료 시점을 추론하여 적절한 완료시제를 선택하는, 시간 흐름에 대한 논리적 추론이 추가로 요구된다.",
+    "evidence": [
+     "test11-RW-M1-Q22"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test8-RW-M2-Q26",
+   "test7-RW-M2-Q25",
+   "test8-RW-M2-Q25",
+   "test10-RW-M2-Q23",
+   "test11-RW-M1-Q22",
+   "test4-RW-M1-Q21",
+   "test4-RW-M1-Q23",
+   "test4-RW-M1-Q25",
+   "test4-RW-M1-Q26",
+   "test4-RW-M2-Q21",
+   "test4-RW-M2-Q23",
+   "test4-RW-M2-Q26",
+   "test6-RW-M1-Q25"
+  ]
+ },
+ "central_ideas_details": {
+  "skill": "central_ideas_details",
+  "n": 38,
+  "groupSize": 10,
+  "hiStats": {
+   "steps": 3,
+   "combine": 2.3,
+   "shift": 1.7,
+   "abstract": 2.2,
+   "subtle": 2.6,
+   "traps": [
+    [
+     "scope_overreach",
+     3
+    ],
+    [
+     "partial_computation",
+     2
+    ],
+    [
+     "overgeneralization",
+     2
+    ],
+    [
+     "literal_paraphrase_trap",
+     1
+    ],
+    [
+     "value_attribution_confusion",
+     1
+    ],
+    [
+     "paraphrase_distortion",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.1,
+   "combine": 1,
+   "shift": 1,
+   "abstract": 1,
+   "subtle": 1.1,
+   "traps": [
+    [
+     "emotion_mislabel",
+     2
+    ],
+    [
+     "scope_overreach",
+     2
+    ],
+    [
+     "overclaim",
+     1
+    ],
+    [
+     "wrong_focus",
+     1
+    ],
+    [
+     "row_column_swap",
+     1
+    ],
+    [
+     "too_narrow_detail",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.2,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "dual_source_synthesis",
+    "description": "단일 텍스트 요약을 넘어 두 텍스트나 텍스트-데이터 간 입장·관점 차이를 비교 통합해 반응이나 함의를 추론해야 한다.",
+    "evidence": [
+     "test10-RW-M2-Q10",
+     "test11-RW-M2-Q9",
+     "test11-RW-M1-Q13"
+    ]
+   },
+   {
+    "name": "paradox_and_implicit_inference",
+    "description": "명시된 진술을 그대로 찾는 것이 아니라 표면적 진술과 실제 의미 사이의 역설, 모순, 불확실성을 인식해 인물이나 주장에 대한 간접적 함의를 추론해야 한다.",
+    "evidence": [
+     "test7-RW-M1-Q11",
+     "test7-RW-M2-Q11",
+     "test11-RW-M1-Q12",
+     "test11-RW-M1-Q14"
+    ]
+   },
+   {
+    "name": "scope_calibration",
+    "description": "지문의 넓은 논지와 좁은 세부사항 중 어느 수준이 핵심 요지에 해당하는지 정확히 구별해, 과잉일반화나 과잉확장 없이 적절한 범위로 핵심을 좁혀야 한다.",
+    "evidence": [
+     "test8-RW-M1-Q10",
+     "test8-RW-M2-Q10",
+     "test11-RW-M1-Q14"
+    ]
+   },
+   {
+    "name": "structural_sequence_integration",
+    "description": "단일 사실 확인이 아니라 문단 내 여러 단계나 사건의 순서, 인과 구조를 파악해 이를 전체 의미 형성에 연결해야 한다.",
+    "evidence": [
+     "test8-RW-M2-Q8",
+     "test8-RW-M1-Q10"
+    ]
+   },
+   {
+    "name": "evidence_weighting_under_partial_data",
+    "description": "연구의 한계나 불완전한 정보(제약, 불확실성)를 고려하면서 새로운 발견의 의의를 부분적 근거만으로 종합적으로 판단해야 한다.",
+    "evidence": [
+     "test11-RW-M1-Q13",
+     "test8-RW-M2-Q10"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test11-RW-M1-Q13",
+   "test7-RW-M1-Q11",
+   "test7-RW-M2-Q11",
+   "test11-RW-M1-Q12",
+   "test11-RW-M1-Q14",
+   "test8-RW-M1-Q10",
+   "test10-RW-M2-Q10",
+   "test8-RW-M2-Q8",
+   "test8-RW-M2-Q10",
+   "test11-RW-M2-Q9"
+  ]
+ },
+ "circles": {
+  "skill": "circles",
+  "n": 11,
+  "groupSize": 3,
+  "hiStats": {
+   "steps": 3,
+   "combine": 2,
+   "shift": 1,
+   "abstract": 2,
+   "subtle": 2,
+   "traps": [
+    [
+     "scale_factor_misapplication",
+     1
+    ],
+    [
+     "translation_sign_error",
+     1
+    ],
+    [
+     "radius_ratio_vs_area_ratio",
+     1
+    ],
+    [
+     "incomplete_completing_square",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.67,
+   "combine": 1,
+   "shift": 1,
+   "abstract": 1,
+   "subtle": 1.33,
+   "traps": [
+    [
+     "radius_vs_diameter_confusion",
+     1
+    ],
+    [
+     "percent_vs_multiplier_confusion",
+     1
+    ],
+    [
+     "arc_angle_confusion",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": -0.02,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_step_combination",
+    "description": "단일 개념 적용에 그치지 않고 이동(shift)과 배율 변화 등 서로 다른 두 가지 이상의 조작을 하나의 식에 순차적으로 결합해 처리해야 한다.",
+    "evidence": [
+     "test6-Math-M1-Q23",
+     "test9-Math-M2-Q24"
+    ]
+   },
+   {
+    "name": "nonlinear_ratio_conversion",
+    "description": "길이 비율을 그대로 쓰지 않고 넓이나 상수항 변화처럼 제곱 관계로 변환해야 하는 비선형적 추론이 요구된다.",
+    "evidence": [
+     "test8-Math-M1-Q18",
+     "test6-Math-M1-Q23"
+    ]
+   },
+   {
+    "name": "algebraic_form_completion",
+    "description": "주어진 식을 완전제곱 형태 등으로 끝까지 변형해 표준형의 숨은 파라미터(중심, 최솟값 등)를 도출해야 한다.",
+    "evidence": [
+     "test9-Math-M2-Q24"
+    ]
+   },
+   {
+    "name": "sign_and_direction_tracking",
+    "description": "이동 방향이나 배율 적용 순서에서 부호 및 연산 순서를 끝까지 추적해야 실수 없이 답을 도출할 수 있다.",
+    "evidence": [
+     "test6-Math-M1-Q23",
+     "test9-Math-M2-Q24"
+    ]
+   },
+   {
+    "name": "abstract_parameter_reasoning",
+    "description": "구체적 숫자 대입보다 일반화된 문자 파라미터 상태에서 관계식을 추상적으로 조작해야 한다.",
+    "evidence": [
+     "test9-Math-M2-Q24",
+     "test8-Math-M1-Q18"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test6-Math-M1-Q23",
+   "test8-Math-M1-Q18",
+   "test9-Math-M2-Q24"
+  ]
+ },
+ "command_of_evidence_quant": {
+  "skill": "command_of_evidence_quant",
+  "n": 33,
+  "groupSize": 8,
+  "hiStats": {
+   "steps": 3.13,
+   "combine": 3,
+   "shift": 1.88,
+   "abstract": 1.88,
+   "subtle": 3,
+   "traps": [
+    [
+     "scope_overreach",
+     2
+    ],
+    [
+     "overgeneralization",
+     1
+    ],
+    [
+     "misread_graph_trend",
+     1
+    ],
+    [
+     "partial_comparison",
+     1
+    ],
+    [
+     "wrong_time_point",
+     1
+    ],
+    [
+     "reversed_relation",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.38,
+   "combine": 1,
+   "shift": 1.38,
+   "abstract": 1,
+   "subtle": 1,
+   "traps": [
+    [
+     "misread_axis",
+     2
+    ],
+    [
+     "value_lookup_error",
+     1
+    ],
+    [
+     "range_misread",
+     1
+    ],
+    [
+     "scope_overreach",
+     1
+    ],
+    [
+     "distractor_emotion",
+     1
+    ],
+    [
+     "row_column_mixup",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.75,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_value_integration",
+    "description": "단일 수치를 조회하는 것이 아니라 그래프나 표에서 여러 항목·시점·범주의 값을 함께 결합해 비교해야 결론을 도출할 수 있다.",
+    "evidence": [
+     "test6-RW-M1-Q14",
+     "test9-RW-M1-Q15",
+     "test4-RW-M1-Q17"
+    ]
+   },
+   {
+    "name": "trend_to_claim_mapping",
+    "description": "단순히 값을 읽는 것을 넘어, 데이터의 추세나 패턴 변화를 추상적인 주장(논지, 가설, 결론)과 연결지어 어떤 데이터가 그 주장을 뒷받침하는지 판단해야 한다.",
+    "evidence": [
+     "test7-RW-M1-Q16",
+     "test6-RW-M1-Q15",
+     "test10-RW-M1-Q17"
+    ]
+   },
+   {
+    "name": "scope_boundary_judgment",
+    "description": "제시된 주장이나 결론의 범위(전체 대 부분, 특정 유형 대 일반)를 정확히 파악하여, 부분적으로만 관련되거나 범위를 벗어나는 과잉일반화된 근거를 걸러내야 한다.",
+    "evidence": [
+     "test6-RW-M2-Q13",
+     "test9-RW-M1-Q15",
+     "test10-RW-M1-Q17"
+    ]
+   },
+   {
+    "name": "cross_category_comparison",
+    "description": "서로 다른 지역·종·항목 등 복수의 범주 간 데이터를 대조하여 그 차이나 관계(역전, 예상외 결과 등)를 추론해야 한다.",
+    "evidence": [
+     "test7-RW-M1-Q15",
+     "test4-RW-M1-Q17",
+     "test9-RW-M1-Q15"
+    ]
+   },
+   {
+    "name": "implicit_reasoning_from_data",
+    "description": "텍스트에 명시되지 않은 결론이나 추론(유전자 기능, 정부 효율성 변화 등)을 데이터 패턴으로부터 간접적으로 도출해야 하며, 단순 사실 확인으로는 해결되지 않는다.",
+    "evidence": [
+     "test10-RW-M1-Q17",
+     "test7-RW-M1-Q15",
+     "test6-RW-M1-Q14"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test10-RW-M1-Q17",
+   "test6-RW-M1-Q14",
+   "test6-RW-M1-Q15",
+   "test7-RW-M1-Q15",
+   "test7-RW-M1-Q16",
+   "test9-RW-M1-Q15",
+   "test4-RW-M1-Q17",
+   "test6-RW-M2-Q13"
+  ]
+ },
+ "command_of_evidence_text": {
+  "skill": "command_of_evidence_text",
+  "n": 31,
+  "groupSize": 8,
+  "hiStats": {
+   "steps": 3,
+   "combine": 3,
+   "shift": 1.25,
+   "abstract": 2.25,
+   "subtle": 2.88,
+   "traps": [
+    [
+     "correlation_vs_causation",
+     1
+    ],
+    [
+     "axis_confusion",
+     1
+    ],
+    [
+     "partial_computation",
+     1
+    ],
+    [
+     "scope_overreach",
+     1
+    ],
+    [
+     "correlation_causation",
+     1
+    ],
+    [
+     "correlation_not_causation",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 2,
+   "combine": 1.75,
+   "shift": 1.5,
+   "abstract": 1.5,
+   "subtle": 1.88,
+   "traps": [
+    [
+     "scope_overreach",
+     2
+    ],
+    [
+     "literal_vs_figurative",
+     1
+    ],
+    [
+     "literal_misread",
+     1
+    ],
+    [
+     "reversed_relation",
+     1
+    ],
+    [
+     "value_misread",
+     1
+    ],
+    [
+     "wrong_column",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.31,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_source_integration",
+    "description": "단일 자료 해석에 그치지 않고 그래프·표의 여러 변수나 두 개 이상의 자료(텍스트+그래프 등)를 동시에 결합해 하나의 결론을 도출해야 한다.",
+    "evidence": [
+     "test7-RW-M2-Q15",
+     "test9-RW-M2-Q15",
+     "test6-RW-M1-Q16"
+    ]
+   },
+   {
+    "name": "causal_reasoning_over_correlation",
+    "description": "단순 연관성이나 발생 사실을 넘어 인과 관계의 방향과 타당성을 직접 판단하여 가설을 지지하는지 검증해야 한다.",
+    "evidence": [
+     "test6-RW-M1-Q16",
+     "test10-RW-M2-Q15",
+     "test6-RW-M2-Q16",
+     "test4-RW-M1-Q14"
+    ]
+   },
+   {
+    "name": "hypothetical_construction",
+    "description": "주어진 자료를 그대로 읽는 것이 아니라 가설을 뒷받침할 수 있는 가상의 추가 증거나 결과를 논리적으로 구성해내야 한다.",
+    "evidence": [
+     "test10-RW-M2-Q15",
+     "test6-RW-M2-Q16"
+    ]
+   },
+   {
+    "name": "claim_evidence_precision_matching",
+    "description": "주제가 겹치더라도 주장의 정확한 범위와 논지에 완전히 부합하는 증거만을 선별하고, 부분적으로만 관련되거나 범위를 벗어난 매력적 오답을 배제해야 한다.",
+    "evidence": [
+     "test4-RW-M1-Q16",
+     "test7-RW-M1-Q13",
+     "test4-RW-M1-Q14"
+    ]
+   },
+   {
+    "name": "variable_relation_abstraction",
+    "description": "그래프나 표의 구체적 수치를 넘어 변수 간의 추상적 관계(축, 비율, 구조)를 파악하고 이를 다른 개념적 틀(예: 벌집 구조)에 적용해야 한다.",
+    "evidence": [
+     "test7-RW-M2-Q15",
+     "test9-RW-M2-Q15"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test6-RW-M1-Q16",
+   "test7-RW-M2-Q15",
+   "test9-RW-M2-Q15",
+   "test10-RW-M2-Q15",
+   "test4-RW-M1-Q14",
+   "test4-RW-M1-Q16",
+   "test6-RW-M2-Q16",
+   "test7-RW-M1-Q13"
+  ]
+ },
+ "cross_text_connections": {
+  "skill": "cross_text_connections",
+  "n": 7,
+  "groupSize": 2,
+  "hiStats": {
+   "steps": 3,
+   "combine": 3,
+   "shift": 1.5,
+   "abstract": 2,
+   "subtle": 3,
+   "traps": [
+    [
+     "overgeneralization",
+     1
+    ],
+    [
+     "one_sided_reading",
+     1
+    ],
+    [
+     "perspective_confusion",
+     1
+    ],
+    [
+     "overextension",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 3,
+   "combine": 2,
+   "shift": 1,
+   "abstract": 2,
+   "subtle": 2,
+   "traps": [
+    [
+     "scope_overreach",
+     1
+    ],
+    [
+     "function_vs_content_confusion",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.27,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "cross_text_stance_inference",
+    "description": "한 텍스트가 다른 텍스트의 주장에 어떻게 반응할지를 본문에 명시되지 않은 채 스스로 추론해야 한다. 하위 그룹은 한 지문 안에서 주어진 논증의 역할이나 기능을 식별하는 데 그친다.",
+    "evidence": [
+     "test11-RW-M1-Q9",
+     "test10-RW-M1-Q10"
+    ]
+   },
+   {
+    "name": "perspective_bound_evaluation",
+    "description": "한 저자의 관점과 전제를 유지한 채 다른 저자의 결론을 그 기준으로 평가해야 한다. 두 관점을 혼동하면 오답 선택지에 끌리게 된다.",
+    "evidence": [
+     "test10-RW-M1-Q10"
+    ]
+   },
+   {
+    "name": "two_sided_position_synthesis",
+    "description": "두 텍스트의 입장을 함께 고려해 일치하는 부분과 갈리는 부분을 종합해야 한다. 한쪽 텍스트만 읽고 판단하면 틀리도록 설계되어 있다.",
+    "evidence": [
+     "test11-RW-M1-Q9",
+     "test10-RW-M1-Q10"
+    ]
+   },
+   {
+    "name": "calibrated_claim_strength",
+    "description": "선택지가 실제 텍스트 입장을 지나치게 일반화하거나 확장한 것인지 강도를 가려내야 한다. 하위 그룹의 함정은 범위 초과나 기능과 내용의 혼동 정도이고, 상위 그룹은 입장의 미묘한 정도 차이를 구분해야 한다.",
+    "evidence": [
+     "test11-RW-M1-Q9",
+     "test10-RW-M1-Q10"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test11-RW-M1-Q9",
+   "test10-RW-M1-Q10"
+  ]
+ },
+ "equivalent_expressions": {
+  "skill": "equivalent_expressions",
+  "n": 32,
+  "groupSize": 8,
+  "hiStats": {
+   "steps": 3,
+   "combine": 2.5,
+   "shift": 2,
+   "abstract": 1.88,
+   "subtle": 2.5,
+   "traps": [
+    [
+     "exponent_base_mismatch",
+     1
+    ],
+    [
+     "coefficient_miscalc",
+     1
+    ],
+    [
+     "factor_pair_misassignment",
+     1
+    ],
+    [
+     "reciprocal_confusion",
+     1
+    ],
+    [
+     "sign_error_in_manipulation",
+     1
+    ],
+    [
+     "algebraic_isolation_error",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.5,
+   "combine": 1,
+   "shift": 1.13,
+   "abstract": 1,
+   "subtle": 1.13,
+   "traps": [
+    [
+     "sign_error",
+     2
+    ],
+    [
+     "arithmetic_slip",
+     2
+    ],
+    [
+     "fraction_manipulation",
+     1
+    ],
+    [
+     "scope_overreach",
+     1
+    ],
+    [
+     "incorrect_factoring",
+     1
+    ],
+    [
+     "partial_computation",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.65,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_step_chaining",
+    "description": "단순 대입이나 한 번의 정리로 끝나지 않고, 여러 대수적 조작 단계를 순서대로 연결해야 목표 형태나 값에 도달할 수 있다.",
+    "evidence": [
+     "test4-Math-M1-Q19",
+     "test7-Math-M1-Q19",
+     "test10-Math-M2-Q25"
+    ]
+   },
+   {
+    "name": "structural_reformulation",
+    "description": "주어진 식을 여러 변수가 얽힌 상태에서 목표 변수 중심으로 구조 자체를 재배열하거나 다른 동치 형태로 변형해야 한다.",
+    "evidence": [
+     "test4-Math-M1-Q19",
+     "test8-Math-M1-Q17",
+     "test7-Math-M1-Q19"
+    ]
+   },
+   {
+    "name": "cross_representation_mapping",
+    "description": "표의 수치, 지수함수 형태, 인수분해 구조 등 서로 다른 표현 방식 사이를 오가며 밑, 초기값, 계수 같은 숨은 요소를 추론해야 한다.",
+    "evidence": [
+     "test10-Math-M2-Q17",
+     "test7-Math-M2-Q17",
+     "test4-Math-M1-Q23"
+    ]
+   },
+   {
+    "name": "latent_condition_identification",
+    "description": "문제에 명시되지 않은 정수 조건, 증가율 기준값, 초기값 등 암묵적 제약을 식별해 이를 만족하는 항이나 값을 골라내야 한다.",
+    "evidence": [
+     "test4-Math-M1-Q23",
+     "test10-Math-M2-Q25",
+     "test7-Math-M2-Q17"
+    ]
+   },
+   {
+    "name": "combined_error_sensitivity",
+    "description": "부호, 역수, 지수 밑, 계수 등 여러 종류의 오류가 동시에 발생할 수 있는 조작을 거치면서 각 단계마다 서로 다른 함정을 피해야 한다.",
+    "evidence": [
+     "test7-Math-M1-Q19",
+     "test4-Math-M1-Q21",
+     "test4-Math-M1-Q23"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test4-Math-M1-Q21",
+   "test4-Math-M1-Q23",
+   "test7-Math-M1-Q19",
+   "test4-Math-M1-Q19",
+   "test7-Math-M2-Q17",
+   "test10-Math-M2-Q17",
+   "test8-Math-M1-Q17",
+   "test10-Math-M2-Q25"
+  ]
+ },
+ "form_structure_sense": {
+  "skill": "form_structure_sense",
+  "n": 57,
+  "groupSize": 14,
+  "hiStats": {
+   "steps": 2.36,
+   "combine": 2.21,
+   "shift": 1.14,
+   "abstract": 1.71,
+   "subtle": 2.29,
+   "traps": [
+    [
+     "modifier_dangling",
+     2
+    ],
+    [
+     "dangling_modifier",
+     2
+    ],
+    [
+     "comma_splice",
+     2
+    ],
+    [
+     "scope_overreach",
+     1
+    ],
+    [
+     "subject_mismatch",
+     1
+    ],
+    [
+     "overgeneralization",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.07,
+   "combine": 1,
+   "shift": 1,
+   "abstract": 1,
+   "subtle": 1.43,
+   "traps": [
+    [
+     "subject_verb_agreement",
+     3
+    ],
+    [
+     "punctuation_error",
+     2
+    ],
+    [
+     "verb_form_mismatch",
+     2
+    ],
+    [
+     "apostrophe_misplacement",
+     1
+    ],
+    [
+     "plural_possessive_confusion",
+     1
+    ],
+    [
+     "tense_inconsistency",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.18,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "dangling_modifier_subject_matching",
+    "description": "수식어구(분사구문 등)가 가리키는 실제 주체를 문장 전체에서 추적하여 주절의 주어와 논리적으로 일치시켜야 하며, 단순 인접 단어와의 형태적 일치가 아니라 의미상 행위자를 판별해야 한다.",
+    "evidence": [
+     "test7-RW-M1-Q25",
+     "test4-RW-M1-Q24",
+     "test4-RW-M2-Q24",
+     "test10-RW-M1-Q22"
+    ]
+   },
+   {
+    "name": "clause_relation_punctuation",
+    "description": "두 절 사이의 논리적 관계(대조, 인과, 나열)를 먼저 파악한 뒤 그에 맞는 구두점·접속사 구조(콤마 스플라이스 회피 등)를 선택해야 하는, 의미 판단이 선행되는 문장 결합 문제이다.",
+    "evidence": [
+     "test10-RW-M2-Q20",
+     "test10-RW-M2-Q21",
+     "test10-RW-M1-Q24"
+    ]
+   },
+   {
+    "name": "multi_step_evidence_inference",
+    "description": "지문 속 실험 결과나 현상 설명을 여러 단계에 걸쳐 논리적으로 연결하여, 명시되지 않은 결론(기능적 역할, 개념 훼손 여부, 후속 연구 방향 등)을 추론해야 한다.",
+    "evidence": [
+     "test10-RW-M2-Q18",
+     "test8-RW-M1-Q19",
+     "test10-RW-M2-Q19",
+     "test8-RW-M1-Q18"
+    ]
+   },
+   {
+    "name": "overgeneralization_scope_control",
+    "description": "지문에서 제시된 제한적 발견이나 사례를 근거로 과도하게 확장되거나 반대로 왜곡된 결론(과잉일반화, 반대 결론, 범위 초과)을 걸러내는 판단이 요구된다.",
+    "evidence": [
+     "test10-RW-M2-Q18",
+     "test8-RW-M1-Q19",
+     "test8-RW-M1-Q18"
+    ]
+   },
+   {
+    "name": "tense_agreement_across_context",
+    "description": "단일 문장 내 형태 일치를 넘어, 인용문과 주절 간 또는 병렬 구조 전체에 걸친 시제·형태 일관성을 문맥 전체를 고려해 판단해야 한다.",
+    "evidence": [
+     "test9-RW-M2-Q25",
+     "test10-RW-M1-Q24",
+     "test9-RW-M1-Q25"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test10-RW-M2-Q18",
+   "test7-RW-M1-Q25",
+   "test8-RW-M1-Q19",
+   "test10-RW-M2-Q19",
+   "test4-RW-M1-Q24",
+   "test4-RW-M2-Q24",
+   "test8-RW-M1-Q18",
+   "test10-RW-M1-Q27",
+   "test9-RW-M1-Q25",
+   "test9-RW-M2-Q25",
+   "test10-RW-M1-Q22",
+   "test10-RW-M1-Q24",
+   "test10-RW-M2-Q20",
+   "test10-RW-M2-Q21"
+  ]
+ },
+ "inference_margin_error": {
+  "skill": "inference_margin_error",
+  "n": 3,
+  "skipped": "표본 8 미만"
+ },
+ "inferences": {
+  "skill": "inferences",
+  "n": 35,
+  "groupSize": 9,
+  "hiStats": {
+   "steps": 3.11,
+   "combine": 3.11,
+   "shift": 1.44,
+   "abstract": 2.33,
+   "subtle": 2.89,
+   "traps": [
+    [
+     "reversed_relation",
+     3
+    ],
+    [
+     "overgeneralization",
+     2
+    ],
+    [
+     "irrelevant_detail",
+     2
+    ],
+    [
+     "partial_computation",
+     1
+    ],
+    [
+     "axis_confusion",
+     1
+    ],
+    [
+     "alternative_explanation",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.78,
+   "combine": 1.67,
+   "shift": 1.22,
+   "abstract": 1.44,
+   "subtle": 1.67,
+   "traps": [
+    [
+     "scope_overreach",
+     4
+    ],
+    [
+     "partial_computation",
+     2
+    ],
+    [
+     "value_misread",
+     1
+    ],
+    [
+     "expectation_mismatch",
+     1
+    ],
+    [
+     "reversed_relation",
+     1
+    ],
+    [
+     "value_lookup_error",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.4,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "theory_to_case_application",
+    "description": "제시된 이론적 개념(상관관계, 정직한 신호 등)을 구체적 사례나 집단에 적용해 새로운 결론을 도출해야 하며, 이때 관계의 방향을 뒤집어 함정에 빠지기 쉽다.",
+    "evidence": [
+     "test6-RW-M1-Q18",
+     "test8-RW-M2-Q18",
+     "test6-RW-M2-Q18"
+    ]
+   },
+   {
+    "name": "multi_source_integration",
+    "description": "그래프나 표의 시각 정보와 별도의 텍스트 진술(가설, 이론)을 함께 결합해 해석해야 하며, 단순히 하나의 자료만 읽어서는 답을 낼 수 없다.",
+    "evidence": [
+     "test10-RW-M2-Q17",
+     "test7-RW-M2-Q16",
+     "test10-RW-M2-Q16"
+    ]
+   },
+   {
+    "name": "evidence_sufficiency_evaluation",
+    "description": "주어진 진술이나 사실이 특정 결론이나 가설을 실제로 뒷받침하는지, 혹은 무관하거나 약화시키는지를 판단해야 한다.",
+    "evidence": [
+     "test8-RW-M1-Q17",
+     "test4-RW-M1-Q18",
+     "test10-RW-M2-Q16"
+    ]
+   },
+   {
+    "name": "counterexample_driven_generalization",
+    "description": "기존 개념이나 패턴에 대한 반증 사례나 예외를 인식하고, 이를 바탕으로 원래 결론을 수정하거나 새로운 일반화를 도출해야 한다.",
+    "evidence": [
+     "test8-RW-M2-Q18",
+     "test6-RW-M1-Q17"
+    ]
+   },
+   {
+    "name": "physical_structure_to_behavior_inference",
+    "description": "물리적 특징(골격 구조 등)과 같은 간접적 증거로부터 행동이나 기능에 대한 결론을 논리적으로 추론해야 한다.",
+    "evidence": [
+     "test6-RW-M1-Q17"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test10-RW-M2-Q17",
+   "test6-RW-M1-Q18",
+   "test7-RW-M2-Q16",
+   "test8-RW-M1-Q17",
+   "test8-RW-M2-Q18",
+   "test10-RW-M2-Q16",
+   "test4-RW-M1-Q18",
+   "test6-RW-M1-Q17",
+   "test6-RW-M2-Q18"
+  ]
+ },
+ "linear_equations_one_var": {
+  "skill": "linear_equations_one_var",
+  "n": 32,
+  "groupSize": 8,
+  "hiStats": {
+   "steps": 2.5,
+   "combine": 2.13,
+   "shift": 2.13,
+   "abstract": 1.38,
+   "subtle": 2.13,
+   "traps": [
+    [
+     "sequence_indexing_error",
+     1
+    ],
+    [
+     "inequality_direction_confusion",
+     1
+    ],
+    [
+     "term_misassignment",
+     1
+    ],
+    [
+     "unit_confusion",
+     1
+    ],
+    [
+     "ratio_misapplied_to_difference",
+     1
+    ],
+    [
+     "variable_swap",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.5,
+   "combine": 1,
+   "shift": 1,
+   "abstract": 1,
+   "subtle": 1,
+   "traps": [
+    [
+     "distribution_error",
+     1
+    ],
+    [
+     "equation_manipulation_error",
+     1
+    ],
+    [
+     "equation_setup_error",
+     1
+    ],
+    [
+     "reversed_relation",
+     1
+    ],
+    [
+     "percent_misread",
+     1
+    ],
+    [
+     "unit_price_division_error",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.59,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "verbal_to_symbolic_translation",
+    "description": "문장으로 서술된 상황(연속수, 점수 배점, 요금 구조, 두 미지수 관계)을 처음부터 스스로 변수와 식으로 번역해야 하며, 단순 대입이 아니라 관계 설정 자체가 핵심 과제이다.",
+    "evidence": [
+     "test7-Math-M2-Q23",
+     "test11-Math-M1-Q8",
+     "test7-Math-M1-Q21",
+     "test11-Math-M1-Q17"
+    ]
+   },
+   {
+    "name": "multi_quantity_structural_combination",
+    "description": "고정비와 단가, 구간별 조건, 두 개 이상의 미지수 관계 등 서로 다른 성격의 항을 하나의 식 또는 연립식으로 통합해야 한다.",
+    "evidence": [
+     "test7-Math-M1-Q4",
+     "test7-Math-M1-Q21",
+     "test11-Math-M1-Q17"
+    ]
+   },
+   {
+    "name": "representation_shift",
+    "description": "표, 그래프 등 비언어적 표현에서 기울기·절편·근의 개수 같은 정보를 추출해 대수식이나 조건으로 전환해야 한다.",
+    "evidence": [
+     "test4-Math-M2-Q6",
+     "test8-Math-M2-Q16"
+    ]
+   },
+   {
+    "name": "proportional_reasoning_beyond_literal",
+    "description": "단순 비율 계산이 아니라 비율이 유지되는 조건에서 변화량이나 차이를 간접적으로 추론해야 한다.",
+    "evidence": [
+     "test4-Math-M2-Q17"
+    ]
+   },
+   {
+    "name": "directional_condition_tracking",
+    "description": "부등식 방향이나 변수 간 대응 관계(누가 무엇에 곱해지는지, 큰 값과 작은 값의 배정)를 끝까지 일관되게 추적해야 오류를 피할 수 있다.",
+    "evidence": [
+     "test7-Math-M2-Q23",
+     "test11-Math-M1-Q8",
+     "test7-Math-M1-Q21"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test7-Math-M2-Q23",
+   "test11-Math-M1-Q8",
+   "test4-Math-M2-Q17",
+   "test7-Math-M1-Q21",
+   "test8-Math-M2-Q16",
+   "test11-Math-M1-Q17",
+   "test4-Math-M2-Q6",
+   "test7-Math-M1-Q4"
+  ]
+ },
+ "linear_equations_two_var": {
+  "skill": "linear_equations_two_var",
+  "n": 31,
+  "groupSize": 8,
+  "hiStats": {
+   "steps": 3.13,
+   "combine": 2.5,
+   "shift": 2.13,
+   "abstract": 1.88,
+   "subtle": 2.25,
+   "traps": [
+    [
+     "ratio_misapplication",
+     1
+    ],
+    [
+     "similar_triangle_setup_error",
+     1
+    ],
+    [
+     "parameter_elimination_error",
+     1
+    ],
+    [
+     "sign_error",
+     1
+    ],
+    [
+     "pythagorean_misapplication",
+     1
+    ],
+    [
+     "radical_simplify_error",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 2,
+   "combine": 1.38,
+   "shift": 1.13,
+   "abstract": 1,
+   "subtle": 1,
+   "traps": [
+    [
+     "substitution_error",
+     2
+    ],
+    [
+     "variable_confusion",
+     1
+    ],
+    [
+     "variable_substitution_error",
+     1
+    ],
+    [
+     "slope_sign_confusion",
+     1
+    ],
+    [
+     "sign_loss",
+     1
+    ],
+    [
+     "unit_conversion_error",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.62,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "cross_domain_structure_transfer",
+    "description": "닮은 삼각형, 지수적 배가, 그래프 교점 등 선형 방정식 외부의 기하·지수 개념 구조를 선형 관계로 번역하여 적용해야 한다.",
+    "evidence": [
+     "test6-Math-M2-Q27",
+     "test4-Math-M2-Q22",
+     "test10-Math-M2-Q16"
+    ]
+   },
+   {
+    "name": "implicit_condition_derivation",
+    "description": "문제에 명시되지 않은 조건(무한해를 위한 비례 관계, 해의 존재를 위한 비평행 조건, 기울기 일정성)을 스스로 도출해 식을 세워야 한다.",
+    "evidence": [
+     "test7-Math-M1-Q12",
+     "test11-Math-M1-Q25",
+     "test7-Math-M1-Q24"
+    ]
+   },
+   {
+    "name": "multi_representation_matching",
+    "description": "그래프, 표, 대수식 등 서로 다른 표현 형태 간의 대응 관계를 정확히 식별하고 어느 것이 올바른 해/식인지 판별해야 한다.",
+    "evidence": [
+     "test11-Math-M1-Q18",
+     "test7-Math-M2-Q11",
+     "test7-Math-M1-Q24"
+    ]
+   },
+   {
+    "name": "parameter_based_reasoning",
+    "description": "구체적 숫자 대신 매개변수나 미지 계수를 사용한 관계식을 다루며, 값을 소거하거나 비교하는 대수적 조작을 추가로 요구한다.",
+    "evidence": [
+     "test7-Math-M1-Q24",
+     "test11-Math-M1-Q25",
+     "test10-Math-M2-Q16"
+    ]
+   },
+   {
+    "name": "multi_step_synthesis",
+    "description": "단순 대입이나 한 단계 계산이 아니라 여러 개념(비율, 피타고라스, 지수 변환 등)을 연결해 최종 답까지 다단계로 종합해야 한다.",
+    "evidence": [
+     "test6-Math-M2-Q27",
+     "test4-Math-M2-Q22",
+     "test10-Math-M2-Q16"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test6-Math-M2-Q27",
+   "test7-Math-M1-Q24",
+   "test4-Math-M2-Q22",
+   "test7-Math-M1-Q12",
+   "test7-Math-M2-Q11",
+   "test10-Math-M2-Q16",
+   "test11-Math-M1-Q18",
+   "test11-Math-M1-Q25"
+  ]
+ },
+ "linear_functions": {
+  "skill": "linear_functions",
+  "n": 45,
+  "groupSize": 11,
+  "hiStats": {
+   "steps": 2.91,
+   "combine": 2.27,
+   "shift": 1.91,
+   "abstract": 1.45,
+   "subtle": 2,
+   "traps": [
+    [
+     "angle_sum_error",
+     2
+    ],
+    [
+     "fixed_variable_rate_mixup",
+     1
+    ],
+    [
+     "point_slope_misuse",
+     1
+    ],
+    [
+     "variable_substitution_error",
+     1
+    ],
+    [
+     "wrong_intercept_target",
+     1
+    ],
+    [
+     "arc_ratio_confusion",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.55,
+   "combine": 1,
+   "shift": 1,
+   "abstract": 1,
+   "subtle": 1,
+   "traps": [
+    [
+     "sign_error",
+     4
+    ],
+    [
+     "unit_price_inversion",
+     1
+    ],
+    [
+     "wrong_intercept_axis",
+     1
+    ],
+    [
+     "margin_of_error_misread",
+     1
+    ],
+    [
+     "reversed_relation",
+     1
+    ],
+    [
+     "substitution_slip",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.57,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_step_derivation_chain",
+    "description": "단일 대입이나 한 번의 역연산이 아니라, 여러 조건을 순차적으로 결합해 중간값을 먼저 구한 뒤 최종값을 도출하는 다단계 추론이 필요하다.",
+    "evidence": [
+     "test10-Math-M1-Q26",
+     "test11-Math-M1-Q27",
+     "test6-Math-M2-Q19"
+    ]
+   },
+   {
+    "name": "representation_translation",
+    "description": "문제 상황(구간별 요금, 부등식, 기하 도형 등)을 스스로 수식이나 식 구조로 번역해야 하며, 이미 주어진 식에 값만 넣는 것이 아니라 식 자체를 구성해야 한다.",
+    "evidence": [
+     "test10-Math-M1-Q26",
+     "test10-Math-M2-Q3",
+     "test11-Math-M2-Q17"
+    ]
+   },
+   {
+    "name": "cross_domain_integration",
+    "description": "선형함수 개념을 기하(합동, 이등변삼각형, 피타고라스, 호-지름 비율)나 통계(도수분포) 등 다른 수학 영역과 결합해 해석해야 한다.",
+    "evidence": [
+     "test10-Math-M2-Q9",
+     "test10-Math-M2-Q21",
+     "test9-Math-M2-Q12",
+     "test11-Math-M1-Q3"
+    ]
+   },
+   {
+    "name": "indirect_target_inference",
+    "description": "목표값이 식에 직접 주어지지 않아, 주어진 점이나 관계로부터 절편·상수·대응관계 등을 역으로 추론해내야 한다.",
+    "evidence": [
+     "test6-Math-M1-Q26",
+     "test11-Math-M1-Q27",
+     "test10-Math-M2-9"
+    ]
+   },
+   {
+    "name": "structural_pattern_classification",
+    "description": "개별 계산보다 상황이 어떤 함수/관계 유형(선형 vs 지수, 구간 겹침 여부 등)에 해당하는지 구조를 판별하는 추상적 분류 사고가 요구된다.",
+    "evidence": [
+     "test10-Math-M1-Q12",
+     "test6-Math-M2-Q19"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test10-Math-M1-Q26",
+   "test11-Math-M1-Q27",
+   "test6-Math-M1-Q26",
+   "test9-Math-M2-Q12",
+   "test10-Math-M1-Q12",
+   "test10-Math-M2-Q3",
+   "test10-Math-M2-Q9",
+   "test10-Math-M2-Q21",
+   "test11-Math-M1-Q3",
+   "test11-Math-M2-Q17",
+   "test6-Math-M2-Q19"
+  ]
+ },
+ "linear_inequalities": {
+  "skill": "linear_inequalities",
+  "n": 15,
+  "groupSize": 4,
+  "hiStats": {
+   "steps": 3.75,
+   "combine": 3,
+   "shift": 2,
+   "abstract": 2,
+   "subtle": 3,
+   "traps": [
+    [
+     "wrong_term_index",
+     1
+    ],
+    [
+     "inequality_direction_error",
+     1
+    ],
+    [
+     "ignoring_minimum_constraint",
+     1
+    ],
+    [
+     "budget_overshoot",
+     1
+    ],
+    [
+     "shift_direction_confusion",
+     1
+    ],
+    [
+     "root_sum_miscalc",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.5,
+   "combine": 1.25,
+   "shift": 1.5,
+   "abstract": 1.25,
+   "subtle": 1,
+   "traps": [
+    [
+     "slope_intercept_confusion",
+     1
+    ],
+    [
+     "variable_substitution_error",
+     1
+    ],
+    [
+     "reversed_relation",
+     1
+    ],
+    [
+     "boundary_exclusion",
+     1
+    ],
+    [
+     "inequality_direction_ignored",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.88,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_constraint_integration",
+    "description": "두 개 이상의 독립된 제약(예산·최소개수, 두 부등식 등)을 동시에 만족시키는 해를 찾기 위해 조건들을 결합적으로 고려해야 한다.",
+    "evidence": [
+     "test8-Math-M1-Q21",
+     "test8-Math-M1-Q22"
+    ]
+   },
+   {
+    "name": "indirect_variable_translation",
+    "description": "연속한 정수나 관계식처럼 변수를 직접 주지 않고 조건으로부터 변수 표현을 스스로 설정한 뒤 부등식으로 번역해야 한다.",
+    "evidence": [
+     "test7-Math-M1-Q23",
+     "test8-Math-M1-Q21"
+    ]
+   },
+   {
+    "name": "transformation_effect_reasoning",
+    "description": "함수의 평행이동 같은 추상적 변형이 근이나 해에 미치는 영향을 추론한 뒤 이를 수치 계산(근의 합 등)으로 연결해야 한다.",
+    "evidence": [
+     "test9-Math-M2-Q22"
+    ]
+   },
+   {
+    "name": "integer_solution_search",
+    "description": "부등식을 풀이하는 데 그치지 않고 조건을 만족하는 정수해 중 최댓값/최솟값을 탐색적으로 결정해야 한다.",
+    "evidence": [
+     "test8-Math-M1-Q21",
+     "test7-Math-M1-Q23"
+    ]
+   },
+   {
+    "name": "dual_condition_verification",
+    "description": "하나의 부등식만 확인하는 데 그치지 않고 여러 부등식 또는 조건 각각에 대해 후보 해를 개별 검증해야 한다.",
+    "evidence": [
+     "test8-Math-M1-Q22",
+     "test8-Math-M1-Q21"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test7-Math-M1-Q23",
+   "test8-Math-M1-Q21",
+   "test9-Math-M2-Q22",
+   "test8-Math-M1-Q22"
+  ]
+ },
+ "lines_angles_triangles": {
+  "skill": "lines_angles_triangles",
+  "n": 19,
+  "groupSize": 5,
+  "hiStats": {
+   "steps": 3.2,
+   "combine": 2.4,
+   "shift": 1.8,
+   "abstract": 2,
+   "subtle": 2.6,
+   "traps": [
+    [
+     "similar_triangle_misidentification",
+     1
+    ],
+    [
+     "ratio_misapplication",
+     1
+    ],
+    [
+     "redundant_info",
+     1
+    ],
+    [
+     "AA_sufficiency_confusion",
+     1
+    ],
+    [
+     "angle_pair_misidentification",
+     1
+    ],
+    [
+     "supplementary_confusion",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 2,
+   "combine": 1.6,
+   "shift": 1.4,
+   "abstract": 1,
+   "subtle": 1.6,
+   "traps": [
+    [
+     "wrong_correspondence",
+     2
+    ],
+    [
+     "angle_relation_confusion",
+     1
+    ],
+    [
+     "reversed_relation",
+     1
+    ],
+    [
+     "angle_sum_omission",
+     1
+    ],
+    [
+     "arithmetic_slip",
+     1
+    ],
+    [
+     "slope_intercept_mixup",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.82,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_condition_integration",
+    "description": "닮음, 비율, 평행조건 등 서로 다른 성질을 동시에 결합하여 하나의 결론을 도출해야 하며, 단일 관계식만으로는 해결되지 않는다.",
+    "evidence": [
+     "test6-Math-M1-Q27",
+     "test9-Math-M2-Q19",
+     "test10-Math-M1-Q24"
+    ]
+   },
+   {
+    "name": "sufficiency_judgment",
+    "description": "주어진 정보가 결론 도출에 이미 충분한지, 혹은 불필요하거나 무해한지를 판단하는 메타적 추론이 필요하다.",
+    "evidence": [
+     "test10-Math-M1-Q24",
+     "test9-Math-M2-Q19"
+    ]
+   },
+   {
+    "name": "impossible_case_identification",
+    "description": "가능한 각 관계를 모두 따져본 뒤 성립 불가능한 조합을 역으로 찾아내는 소거적 사고가 요구된다.",
+    "evidence": [
+     "test11-Math-M1-Q24",
+     "test11-Math-M2-Q23"
+    ]
+   },
+   {
+    "name": "abstract_relation_mapping",
+    "description": "구체적 도형 대응보다 각/변 관계를 추상적 규칙(AA 조건, 교각 성질 등)으로 일반화하여 적용해야 한다.",
+    "evidence": [
+     "test10-Math-M1-Q24",
+     "test11-Math-M1-Q24",
+     "test11-Math-M2-Q23"
+    ]
+   },
+   {
+    "name": "subtle_trap_discrimination",
+    "description": "유사해 보이는 대응·비율·조건 중 미묘하게 틀린 선택지를 구별해내는 세밀한 검토가 필요하다.",
+    "evidence": [
+     "test6-Math-M1-Q27",
+     "test9-Math-M2-Q19",
+     "test11-Math-M1-Q24"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test6-Math-M1-Q27",
+   "test10-Math-M1-Q24",
+   "test11-Math-M1-Q24",
+   "test9-Math-M2-Q19",
+   "test11-Math-M2-Q23"
+  ]
+ },
+ "nonlinear_equations_systems": {
+  "skill": "nonlinear_equations_systems",
+  "n": 30,
+  "groupSize": 8,
+  "hiStats": {
+   "steps": 3.25,
+   "combine": 2.88,
+   "shift": 2.13,
+   "abstract": 2,
+   "subtle": 2.75,
+   "traps": [
+    [
+     "algebraic_manipulation_error",
+     1
+    ],
+    [
+     "sign_error_isolation",
+     1
+    ],
+    [
+     "scale_factor_misapplication",
+     1
+    ],
+    [
+     "surface_to_volume_confusion",
+     1
+    ],
+    [
+     "discriminant_condition_missed",
+     1
+    ],
+    [
+     "miscount_intersections",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 2.13,
+   "combine": 1.25,
+   "shift": 1.25,
+   "abstract": 1,
+   "subtle": 1.25,
+   "traps": [
+    [
+     "sign_error",
+     4
+    ],
+    [
+     "partial_computation",
+     1
+    ],
+    [
+     "wrong_root_choice",
+     1
+    ],
+    [
+     "missed_negative_root",
+     1
+    ],
+    [
+     "cross_multiplication_error",
+     1
+    ],
+    [
+     "missed_root",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.62,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_step_variable_isolation",
+    "description": "단일 변환이 아니라 여러 변수와 식을 순차적으로 재배열하며 목표 변수를 단계적으로 고립시키는 다단계 대수 조작을 요구한다.",
+    "evidence": [
+     "test7-Math-M2-Q19",
+     "test4-Math-M2-Q21",
+     "test4-Math-M2-Q12"
+    ]
+   },
+   {
+    "name": "implicit_condition_translation",
+    "description": "문제에 명시되지 않은 기하·대수적 조건(접점, 유일해, 판별식 등)을 스스로 수식화하여 적용해야 한다.",
+    "evidence": [
+     "test4-Math-M1-Q24",
+     "test8-Math-M1-Q25",
+     "test8-Math-M1-Q24"
+    ]
+   },
+   {
+    "name": "cross_domain_conversion",
+    "description": "서로 다른 표현 형식이나 단위·차원(그래프↔식, 표면적↔부피, 밑 변환) 간 전환을 거쳐야 답에 도달한다.",
+    "evidence": [
+     "test9-Math-M2-Q27",
+     "test4-Math-M2-Q21",
+     "test4-Math-M2-Q12"
+    ]
+   },
+   {
+    "name": "structural_pattern_recognition",
+    "description": "그래프의 형태나 방정식의 구조(교점 개수, 끝행동 등)를 전체적으로 분석해 정성적 결론을 도출해야 한다.",
+    "evidence": [
+     "test8-Math-M1-Q15",
+     "test4-Math-M1-Q24",
+     "test9-Math-M2-Q27"
+    ]
+   },
+   {
+    "name": "constraint_filtering_after_solution",
+    "description": "해를 구한 뒤 추가로 주어진 수치적 조건(부등식, 범위)에 맞는 해를 선별하는 후처리적 판단이 필요하다.",
+    "evidence": [
+     "test8-Math-M1-Q24",
+     "test8-Math-M1-Q25",
+     "test4-Math-M1-Q24"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test7-Math-M2-Q19",
+   "test9-Math-M2-Q27",
+   "test4-Math-M1-Q24",
+   "test8-Math-M1-Q15",
+   "test8-Math-M1-Q24",
+   "test8-Math-M1-Q25",
+   "test4-Math-M2-Q12",
+   "test4-Math-M2-Q21"
+  ]
+ },
+ "nonlinear_functions": {
+  "skill": "nonlinear_functions",
+  "n": 58,
+  "groupSize": 15,
+  "hiStats": {
+   "steps": 3.13,
+   "combine": 2.6,
+   "shift": 2.07,
+   "abstract": 2.07,
+   "subtle": 2.4,
+   "traps": [
+    [
+     "shift_direction_error",
+     2
+    ],
+    [
+     "absolute_value_sign_ambiguity",
+     1
+    ],
+    [
+     "system_of_unknowns_error",
+     1
+    ],
+    [
+     "algebraic_rearrangement_error",
+     1
+    ],
+    [
+     "squaring_sign_loss",
+     1
+    ],
+    [
+     "wrong_intercept_sign",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.73,
+   "combine": 1.2,
+   "shift": 1.07,
+   "abstract": 1,
+   "subtle": 1.2,
+   "traps": [
+    [
+     "arithmetic_slip",
+     3
+    ],
+    [
+     "sign_error_root",
+     2
+    ],
+    [
+     "sign_error_in_vertex_formula",
+     1
+    ],
+    [
+     "correspondence_confusion",
+     1
+    ],
+    [
+     "discriminant_misuse",
+     1
+    ],
+    [
+     "radius_vs_diameter",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.47,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_condition_system_solving",
+    "description": "단순 대입이 아니라 여러 조건(절편, 계수 곱, 꼭짓점 등)을 연립방정식으로 변환해 복수의 미지수를 동시에 결정해야 한다.",
+    "evidence": [
+     "test4-Math-M1-Q27",
+     "test4-Math-M1-Q26",
+     "test4-Math-M2-Q19"
+    ]
+   },
+   {
+    "name": "indirect_representation_construction",
+    "description": "둘레·반지름·평행이동 등 문맥 정보를 직접 대입 가능한 형태가 아니라 한 단계 이상 변환(변 길이로 환산, 배율을 반지름에 반영 등)하여 함수식 자체를 새로 구성해야 한다.",
+    "evidence": [
+     "test4-Math-M1-Q18",
+     "test4-Math-M2-Q18",
+     "test6-Math-M2-Q23"
+    ]
+   },
+   {
+    "name": "qualitative_property_judgment",
+    "description": "구체적 수치 계산 없이 지수함수의 증가/감소, 밑의 범위 등 함수의 성질만으로 최댓값 존재 여부나 그래프 형태를 논리적으로 판별해야 한다.",
+    "evidence": [
+     "test8-Math-M1-Q26",
+     "test8-Math-M2-Q27",
+     "test10-Math-M1-Q17"
+    ]
+   },
+   {
+    "name": "transformation_effect_tracking",
+    "description": "평행이동, 형태 변형(전개·표준형 전환) 등 함수에 가해진 변화가 근, 절편, 표의 값 등 다른 결과에 미치는 영향을 간접적으로 추적해야 한다.",
+    "evidence": [
+     "test9-Math-M1-Q22",
+     "test9-Math-M1-Q17",
+     "test7-Math-M1-Q17"
+    ]
+   },
+   {
+    "name": "combinatorial_case_validation",
+    "description": "주어진 조건을 만족하는 계수나 해의 조합이 여러 개 가능한 상황에서 그래프 대응이나 부호 등 추가 제약을 따져 올바른 경우를 선별해야 한다.",
+    "evidence": [
+     "test11-Math-M2-Q18",
+     "test9-Math-M2-Q21",
+     "test4-Math-M1-Q26"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test4-Math-M1-Q27",
+   "test4-Math-M2-Q19",
+   "test11-Math-M2-Q18",
+   "test4-Math-M1-Q26",
+   "test8-Math-M1-Q26",
+   "test8-Math-M2-Q27",
+   "test4-Math-M1-Q18",
+   "test9-Math-M1-Q22",
+   "test9-Math-M2-Q21",
+   "test10-Math-M1-Q17",
+   "test4-Math-M2-Q18",
+   "test6-Math-M2-Q23",
+   "test7-Math-M1-Q17",
+   "test7-Math-M1-Q18",
+   "test9-Math-M1-Q17"
+  ]
+ },
+ "one_variable_data": {
+  "skill": "one_variable_data",
+  "n": 13,
+  "groupSize": 3,
+  "hiStats": {
+   "steps": 3.33,
+   "combine": 2.67,
+   "shift": 2,
+   "abstract": 2,
+   "subtle": 3,
+   "traps": [
+    [
+     "discriminant_zero_condition_missed",
+     1
+    ],
+    [
+     "sign_error_in_substitution",
+     1
+    ],
+    [
+     "outlier_effect_misjudge",
+     1
+    ],
+    [
+     "median_unchanged_assumption",
+     1
+    ],
+    [
+     "sign_shift_confusion",
+     1
+    ],
+    [
+     "table_misread",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 2,
+   "combine": 1,
+   "shift": 1,
+   "abstract": 1,
+   "subtle": 1,
+   "traps": [
+    [
+     "arithmetic_slip",
+     2
+    ],
+    [
+     "exponent_misapply",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.73,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_condition_synthesis",
+    "description": "단일 계산이 아니라 조건(판별식, 접점 등)을 먼저 도출한 뒤 이를 다시 방정식에 대입해 최종 값을 구하는 다단계 연결 추론이 필요하다.",
+    "evidence": [
+     "test4-Math-M2-Q24"
+    ]
+   },
+   {
+    "name": "statistic_sensitivity_reasoning",
+    "description": "데이터 값의 변화(극단값 추가 등)가 평균과 중앙값 같은 서로 다른 통계량에 각각 어떤 방향과 크기로 영향을 미치는지 구분해서 추론해야 한다.",
+    "evidence": [
+     "test8-Math-M1-Q23"
+    ]
+   },
+   {
+    "name": "transformation_mapping",
+    "description": "그래프나 함수의 이동·변환이 개별 데이터 포인트(좌표, 표의 값)에 미치는 대응 관계를 하나씩 추적하여 확인해야 한다.",
+    "evidence": [
+     "test9-Math-M2-Q17"
+    ]
+   },
+   {
+    "name": "abstract_condition_inference",
+    "description": "구체적 수치 대입보다 변수 간 조건(접함, 증가/감소 등)을 추상적으로 판단하는 사고가 필요하며, 이 과정에서 부호나 조건 누락이 함정으로 작용한다.",
+    "evidence": [
+     "test4-Math-M2-Q24",
+     "test9-Math-M2-Q17"
+    ]
+   },
+   {
+    "name": "indirect_effect_inference",
+    "description": "직접 계산으로 답이 나오지 않고, 한 변화가 다른 값에 미치는 간접적 영향을 논리적으로 추론해야 답을 얻을 수 있다.",
+    "evidence": [
+     "test8-Math-M1-Q23",
+     "test9-Math-M2-Q17"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test4-Math-M2-Q24",
+   "test8-Math-M1-Q23",
+   "test9-Math-M2-Q17"
+  ]
+ },
+ "percentages": {
+  "skill": "percentages",
+  "n": 14,
+  "groupSize": 4,
+  "hiStats": {
+   "steps": 3.25,
+   "combine": 2.5,
+   "shift": 2,
+   "abstract": 1.75,
+   "subtle": 2.5,
+   "traps": [
+    [
+     "sign_of_a_confusion",
+     1
+    ],
+    [
+     "system_solving_error",
+     1
+    ],
+    [
+     "factor_pair_misassignment",
+     1
+    ],
+    [
+     "wrong_ratio_side",
+     1
+    ],
+    [
+     "misassigned_variable",
+     1
+    ],
+    [
+     "reversed_relation",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1,
+   "combine": 1,
+   "shift": 1,
+   "abstract": 1,
+   "subtle": 1,
+   "traps": [
+    [
+     "percent_of_wrong_base",
+     1
+    ],
+    [
+     "percent_base_confusion",
+     1
+    ],
+    [
+     "percent_decimal_confusion",
+     1
+    ],
+    [
+     "percent_setup_error",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.7,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_step_chaining",
+    "description": "단일 퍼센트 계산이 아니라 여러 단계의 대수적 조작(연립, 대입, 역산)을 순서대로 거쳐야 답에 도달한다.",
+    "evidence": [
+     "test4-Math-M2-Q27",
+     "test9-Math-M2-Q16",
+     "test11-Math-M2-Q21"
+    ]
+   },
+   {
+    "name": "algebraic_translation",
+    "description": "문제 상황(변수 간 관계, 도형 조건 등)을 스스로 대수식이나 방정식으로 변환해야 하며, 이미 주어진 식에 값을 대입하는 것으로는 풀 수 없다.",
+    "evidence": [
+     "test9-Math-M2-Q16",
+     "test4-Math-M2-Q27",
+     "test11-Math-M2-Q21"
+    ]
+   },
+   {
+    "name": "cross_domain_combination",
+    "description": "퍼센트 개념이 인수분해, 삼각비, 연립방정식 등 다른 수학 영역과 결합되어 두 가지 이상의 지식을 동시에 적용해야 한다.",
+    "evidence": [
+     "test11-Math-M2-Q21",
+     "test4-Math-M2-Q23",
+     "test9-Math-M2-Q16"
+    ]
+   },
+   {
+    "name": "relation_direction_inference",
+    "description": "주어진 조건에서 변수나 항 사이의 방향성(부호, 대응 관계, 비율의 기준)을 스스로 판단해야 하며, 이를 잘못 설정하면 바로 오답으로 이어진다.",
+    "evidence": [
+     "test4-Math-M2-Q27",
+     "test9-Math-M2-Q16",
+     "test11-Math-M2-Q21"
+    ]
+   },
+   {
+    "name": "structural_case_identification",
+    "description": "단순 대입이 아니라 식의 구조(인수쌍, 조건을 만족하는 경우)를 분석하여 적절한 경우나 항을 식별해야 한다.",
+    "evidence": [
+     "test4-Math-M2-Q23"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test4-Math-M2-Q27",
+   "test4-Math-M2-Q23",
+   "test11-Math-M2-Q21",
+   "test9-Math-M2-Q16"
+  ]
+ },
+ "probability": {
+  "skill": "probability",
+  "n": 2,
+  "skipped": "표본 8 미만"
+ },
+ "ratios_rates_units": {
+  "skill": "ratios_rates_units",
+  "n": 16,
+  "groupSize": 4,
+  "hiStats": {
+   "steps": 2.5,
+   "combine": 2.25,
+   "shift": 2,
+   "abstract": 1.25,
+   "subtle": 2,
+   "traps": [
+    [
+     "point_slope_misuse",
+     1
+    ],
+    [
+     "proportion_setup_error",
+     1
+    ],
+    [
+     "linear_scale_confusion",
+     1
+    ],
+    [
+     "term_order_confusion",
+     1
+    ],
+    [
+     "variable_misassignment",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.5,
+   "combine": 1,
+   "shift": 1.25,
+   "abstract": 1,
+   "subtle": 1,
+   "traps": [
+    [
+     "percent_base_confusion",
+     1
+    ],
+    [
+     "misread_growth_vs_initial",
+     1
+    ],
+    [
+     "arithmetic_slip",
+     1
+    ],
+    [
+     "unit_conversion_error",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.69,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_step_integration",
+    "description": "단일 계산이 아니라 여러 단계의 값을 순차적으로 결합해 최종 답을 도출해야 하며, 중간 결과를 다음 단계 입력으로 재사용해야 한다.",
+    "evidence": [
+     "test11-Math-M2-Q27",
+     "test9-Math-M1-Q18",
+     "test7-Math-M2-Q4"
+    ]
+   },
+   {
+    "name": "nonlinear_scale_transfer",
+    "description": "길이-넓이, 제곱 관계처럼 선형적이지 않은 축척 변환을 인식하고 이를 다른 차원의 양에 적용해야 한다.",
+    "evidence": [
+     "test10-Math-M1-Q22"
+    ]
+   },
+   {
+    "name": "representation_shift",
+    "description": "표나 그래프 등 주어진 자료 표현을 식(기울기, 비율식)으로 변환한 뒤 그 식을 다시 해석해 답을 구해야 한다.",
+    "evidence": [
+     "test11-Math-M2-Q27",
+     "test9-Math-M1-Q18",
+     "test10-Math-M1-Q22"
+    ]
+   },
+   {
+    "name": "structural_term_assignment",
+    "description": "단가·고정비처럼 역할이 다른 여러 항을 구분해 올바른 위치와 순서로 식에 배치해야 하며, 혼동 시 항이 뒤바뀔 위험이 크다.",
+    "evidence": [
+     "test7-Math-M2-Q4"
+    ]
+   },
+   {
+    "name": "proportional_reasoning_under_change",
+    "description": "시간이나 조건 변화에 따라 비율 관계 자체를 재설정해야 하며, 단순 대입이 아니라 관계식을 새로 세우는 추상적 사고가 필요하다.",
+    "evidence": [
+     "test9-Math-M1-Q18",
+     "test11-Math-M2-Q27"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test11-Math-M2-Q27",
+   "test9-Math-M1-Q18",
+   "test10-Math-M1-Q22",
+   "test7-Math-M2-Q4"
+  ]
+ },
+ "rhetorical_synthesis": {
+  "skill": "rhetorical_synthesis",
+  "n": 51,
+  "groupSize": 13,
+  "hiStats": {
+   "steps": 3,
+   "combine": 3.54,
+   "shift": 1.85,
+   "abstract": 1.92,
+   "subtle": 2.23,
+   "traps": [
+    [
+     "goal_mismatch",
+     8
+    ],
+    [
+     "irrelevant_detail",
+     7
+    ],
+    [
+     "causal_misattribution",
+     1
+    ],
+    [
+     "incomplete_synthesis",
+     1
+    ],
+    [
+     "wrong_source_quote",
+     1
+    ],
+    [
+     "overclaim_certainty",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.77,
+   "combine": 2.23,
+   "shift": 1,
+   "abstract": 1.08,
+   "subtle": 1.92,
+   "traps": [
+    [
+     "irrelevant_detail",
+     5
+    ],
+    [
+     "scope_overreach",
+     3
+    ],
+    [
+     "causal_vs_contrast_confusion",
+     1
+    ],
+    [
+     "logic_reversal",
+     1
+    ],
+    [
+     "cause_effect_confusion",
+     1
+    ],
+    [
+     "contrast_vs_addition",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.48,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_source_goal_integration",
+    "description": "단일 사실 선택이 아니라 여러 메모/사건/정보를 목적에 맞게 동시에 종합하여 하나의 문장으로 통합해야 한다.",
+    "evidence": [
+     "test10-RW-M2-Q31",
+     "test11-RW-M1-Q31",
+     "test4-RW-M1-Q33",
+     "test4-RW-M2-Q33"
+    ]
+   },
+   {
+    "name": "purpose_scope_calibration",
+    "description": "제시된 목표(강조, 비교, 개관, 소개 등)의 범위와 초점을 정확히 파악해 그에 부합하는 정보 조합 수준(포괄성 대 구체성)을 스스로 판단해야 한다.",
+    "evidence": [
+     "test10-RW-M2-Q32",
+     "test10-RW-M2-Q33",
+     "test7-RW-M1-Q33",
+     "test8-RW-M2-Q32"
+    ]
+   },
+   {
+    "name": "claim_certainty_discrimination",
+    "description": "연구 결과의 확정적 주장과 통계적/잠정적 주장을 구분하여 과잉 일반화를 피하고 목적에 맞는 확실성 수준을 선택해야 한다.",
+    "evidence": [
+     "test8-RW-M2-Q33",
+     "test8-RW-M2-Q32"
+    ]
+   },
+   {
+    "name": "relation_direction_judgment",
+    "description": "단순 접속어 선택을 넘어, 인용이나 진술이 원래 주장을 반박하는지 지지하는지, 또는 두 대상 간 차이·인과의 방향을 목적에 맞게 판별해야 한다.",
+    "evidence": [
+     "test7-RW-M1-Q32",
+     "test11-RW-M2-Q33",
+     "test11-RW-M1-Q33"
+    ]
+   },
+   {
+    "name": "audience_appropriate_background_synthesis",
+    "description": "낯선 독자를 고려해 배경지식과 핵심 발견을 함께 결합함으로써 정보의 위계(배경 vs 핵심)를 스스로 설정해야 한다.",
+    "evidence": [
+     "test4-RW-M1-Q33",
+     "test4-RW-M2-Q32",
+     "test4-RW-M2-Q33"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test11-RW-M1-Q33",
+   "test10-RW-M2-Q31",
+   "test10-RW-M2-Q32",
+   "test10-RW-M2-Q33",
+   "test7-RW-M1-Q32",
+   "test8-RW-M2-Q33",
+   "test11-RW-M1-Q31",
+   "test11-RW-M2-Q33",
+   "test4-RW-M1-Q33",
+   "test4-RW-M2-Q32",
+   "test4-RW-M2-Q33",
+   "test7-RW-M1-Q33",
+   "test8-RW-M2-Q32"
+  ]
+ },
+ "right_triangles_trigonometry": {
+  "skill": "right_triangles_trigonometry",
+  "n": 18,
+  "groupSize": 5,
+  "hiStats": {
+   "steps": 3.2,
+   "combine": 2.2,
+   "shift": 1.8,
+   "abstract": 1.6,
+   "subtle": 2,
+   "traps": [
+    [
+     "variable_substitution_error",
+     1
+    ],
+    [
+     "system_setup_mistake",
+     1
+    ],
+    [
+     "formula_misapplication",
+     1
+    ],
+    [
+     "pythagorean_misapplication",
+     1
+    ],
+    [
+     "radical_simplification_error",
+     1
+    ],
+    [
+     "radical_form_error",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.8,
+   "combine": 1.4,
+   "shift": 1,
+   "abstract": 1,
+   "subtle": 1,
+   "traps": [
+    [
+     "arithmetic_slip",
+     1
+    ],
+    [
+     "missing_pythagorean_step",
+     1
+    ],
+    [
+     "wrong_leg_assignment",
+     1
+    ],
+    [
+     "pythagorean_misapplication",
+     1
+    ],
+    [
+     "wrong_side_assignment",
+     1
+    ],
+    [
+     "arc_angle_confusion",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.38,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "symbolic_parameter_reasoning",
+    "description": "구체적 수치가 아닌 매개변수나 미지의 계수가 포함된 방정식을 세우고 조건을 검증하는 추상적 조작을 요구한다.",
+    "evidence": [
+     "test7-Math-M2-Q24",
+     "test11-Math-M1-Q19"
+    ]
+   },
+   {
+    "name": "representation_shift",
+    "description": "피타고라스 정리나 근의 공식 결과를 특정 형태(무리수 단순화, 지정된 대수 형태)로 재표현하는 추가 변환 단계를 요구한다.",
+    "evidence": [
+     "test10-Math-M1-Q21",
+     "test4-Math-M1-Q22",
+     "test11-Math-M1-Q19"
+    ]
+   },
+   {
+    "name": "multi_concept_integration",
+    "description": "피타고라스 정리에 넓이 계산이나 근과 계수의 관계 같은 별도 개념을 결합해 순차적으로 적용해야 한다.",
+    "evidence": [
+     "test4-Math-M1-Q22",
+     "test10-Math-M2-Q27",
+     "test7-Math-M2-Q24"
+    ]
+   },
+   {
+    "name": "subtle_algebraic_error_sensitivity",
+    "description": "근호 단순화나 공식 적용 시 발생하는 미세한 대수적 오류(부호, 형태 불일치)를 스스로 점검해야 정답에 도달한다.",
+    "evidence": [
+     "test10-Math-M1-Q21",
+     "test4-Math-M1-Q22",
+     "test10-Math-M2-Q27"
+    ]
+   },
+   {
+    "name": "indirect_data_extraction",
+    "description": "표나 전개된 식처럼 직접 제시되지 않은 정보로부터 필요한 관계식을 역으로 추출해야 한다.",
+    "evidence": [
+     "test7-Math-M2-Q24",
+     "test10-Math-M2-Q27"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test7-Math-M2-Q24",
+   "test11-Math-M1-Q19",
+   "test4-Math-M1-Q22",
+   "test10-Math-M1-Q21",
+   "test10-Math-M2-Q27"
+  ]
+ },
+ "text_structure_purpose": {
+  "skill": "text_structure_purpose",
+  "n": 35,
+  "groupSize": 9,
+  "hiStats": {
+   "steps": 3,
+   "combine": 2.78,
+   "shift": 1.56,
+   "abstract": 2,
+   "subtle": 2.56,
+   "traps": [
+    [
+     "reversed_relation",
+     3
+    ],
+    [
+     "scope_overreach",
+     3
+    ],
+    [
+     "partial_computation",
+     2
+    ],
+    [
+     "order_mismatch",
+     1
+    ],
+    [
+     "overgeneralization",
+     1
+    ],
+    [
+     "plausible_but_partial",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 2,
+   "combine": 1.67,
+   "shift": 1.11,
+   "abstract": 1.33,
+   "subtle": 1.56,
+   "traps": [
+    [
+     "scope_overreach",
+     3
+    ],
+    [
+     "mood_vs_purpose_confusion",
+     1
+    ],
+    [
+     "literal_vs_implied",
+     1
+    ],
+    [
+     "term_definition_confusion",
+     1
+    ],
+    [
+     "overgeneralize_topic",
+     1
+    ],
+    [
+     "irrelevant_detail",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.5,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "multi_step_logical_chain_integration",
+    "description": "단일 문장의 기능 파악에 그치지 않고 여러 단계(주장-근거-결론 또는 순서화된 사건)를 연결해 논리적 역할을 종합적으로 재구성해야 한다.",
+    "evidence": [
+     "test10-RW-M1-Q7",
+     "test10-RW-M2-Q7",
+     "test8-RW-M1-Q9",
+     "test9-RW-M1-Q8"
+    ]
+   },
+   {
+    "name": "inter_text_perspective_inference",
+    "description": "두 입장이나 두 텍스트를 비교해 한쪽이 다른 쪽에 대해 보일 반응이나 차이를 간접적으로 추론해야 한다.",
+    "evidence": [
+     "test4-RW-M2-Q9",
+     "test9-RW-M2-Q9"
+    ]
+   },
+   {
+    "name": "evidence_role_discrimination",
+    "description": "제시된 근거(실험 결과, 비용-효과 등)가 결론을 뒷받침하는 정확한 논리적 역할을 식별하되, 범위를 넘어서거나 일부만 반영하는 유사 선택지를 구분해야 한다.",
+    "evidence": [
+     "test9-RW-M1-Q8",
+     "test9-RW-M2-Q8",
+     "test11-RW-M1-Q8"
+    ]
+   },
+   {
+    "name": "reversed_relation_resistance",
+    "description": "원인-결과나 인물 간 관계의 방향을 뒤집어 제시하는 매력적인 오답을 방지하기 위해 관계의 방향성을 정밀하게 추적해야 한다.",
+    "evidence": [
+     "test4-RW-M2-Q9",
+     "test8-RW-M1-Q9",
+     "test9-RW-M2-Q9"
+    ]
+   },
+   {
+    "name": "affective_state_extension_reasoning",
+    "description": "구체적 관찰이나 사건이 인물의 내면 감정 상태의 확장이나 변화로 이어지는 추상적 연결 고리를 추론해야 한다.",
+    "evidence": [
+     "test7-RW-M1-Q8",
+     "test8-RW-M1-Q9"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test10-RW-M1-Q7",
+   "test10-RW-M2-Q7",
+   "test4-RW-M2-Q9",
+   "test7-RW-M1-Q8",
+   "test8-RW-M1-Q9",
+   "test9-RW-M1-Q8",
+   "test9-RW-M2-Q8",
+   "test9-RW-M2-Q9",
+   "test11-RW-M1-Q8"
+  ]
+ },
+ "transitions": {
+  "skill": "transitions",
+  "n": 50,
+  "groupSize": 13,
+  "hiStats": {
+   "steps": 2.62,
+   "combine": 2.15,
+   "shift": 1.15,
+   "abstract": 1.85,
+   "subtle": 2,
+   "traps": [
+    [
+     "goal_mismatch",
+     2
+    ],
+    [
+     "transition_polarity",
+     2
+    ],
+    [
+     "transition_direction",
+     2
+    ],
+    [
+     "dangling_modifier",
+     2
+    ],
+    [
+     "contrast_vs_addition",
+     2
+    ],
+    [
+     "wrong_logical_relation",
+     2
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.69,
+   "combine": 1.54,
+   "shift": 1,
+   "abstract": 1.08,
+   "subtle": 1.69,
+   "traps": [
+    [
+     "contrast_addition_confusion",
+     3
+    ],
+    [
+     "contrast_continuation_confusion",
+     3
+    ],
+    [
+     "contrast_vs_addition_confusion",
+     2
+    ],
+    [
+     "opposite_transition",
+     1
+    ],
+    [
+     "list_punctuation_confusion",
+     1
+    ],
+    [
+     "semicolon_comma_confusion",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.36,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "goal_vs_content_discrimination",
+    "description": "단순히 사실 관계를 잇는 것이 아니라, 글의 목적·강조점(예: 결과가 아닌 목적, 거리 강조 등)에 부합하는 정보만 선별하여 문장을 구성해야 한다.",
+    "evidence": [
+     "test8-RW-M2-Q31",
+     "test8-RW-M2-Q30"
+    ]
+   },
+   {
+    "name": "multi_step_logical_inference",
+    "description": "단일 문장 간 관계 파악을 넘어, 모순되거나 반박되는 여러 관찰·수치 결과를 종합해 결론에 이르는 인과·논리적 방향을 추론해야 한다.",
+    "evidence": [
+     "test10-RW-M1-Q30",
+     "test10-RW-M2-Q30",
+     "test10-RW-M2-Q29",
+     "test11-RW-M2-Q29"
+    ]
+   },
+   {
+    "name": "non_local_referent_tracking",
+    "description": "수식어구나 비교 구문이 가리키는 실제 주어가 인접한 명사가 아닌 문장 내 다른 요소임을 판단해야 하는, 구조적으로 거리가 있는 지시관계 추론이 필요하다.",
+    "evidence": [
+     "test8-RW-M1-Q26",
+     "test8-RW-M1-Q27",
+     "test10-RW-M2-Q26"
+    ]
+   },
+   {
+    "name": "abstract_relation_beyond_surface_contrast",
+    "description": "표면적으로 비슷해 보이는 대조/추가 관계 중에서, 비유적 결론이나 정체성 강조처럼 더 추상적이고 함축적인 논리 관계를 식별해야 한다.",
+    "evidence": [
+     "test11-RW-M2-Q30",
+     "test4-RW-M1-Q28",
+     "test4-RW-M1-Q29",
+     "test11-RW-M1-Q29"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test8-RW-M2-Q31",
+   "test8-RW-M2-Q30",
+   "test10-RW-M1-Q30",
+   "test10-RW-M2-Q30",
+   "test11-RW-M2-Q30",
+   "test8-RW-M1-Q26",
+   "test8-RW-M1-Q27",
+   "test10-RW-M2-Q26",
+   "test10-RW-M2-Q29",
+   "test11-RW-M1-Q29",
+   "test11-RW-M2-Q29",
+   "test4-RW-M1-Q28",
+   "test4-RW-M1-Q29"
+  ]
+ },
+ "two_variable_data": {
+  "skill": "two_variable_data",
+  "n": 11,
+  "groupSize": 3,
+  "hiStats": {
+   "steps": 2.67,
+   "combine": 2.33,
+   "shift": 2,
+   "abstract": 2,
+   "subtle": 2,
+   "traps": [
+    [
+     "variable_substitution_error",
+     1
+    ],
+    [
+     "linear_vs_reciprocal_confusion",
+     1
+    ],
+    [
+     "coefficient_ratio_confusion",
+     1
+    ],
+    [
+     "constant_mismatch",
+     1
+    ],
+    [
+     "sign_of_slope_confusion",
+     1
+    ],
+    [
+     "intercept_misread",
+     1
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 2,
+   "combine": 1.67,
+   "shift": 1.67,
+   "abstract": 1,
+   "subtle": 1,
+   "traps": [
+    [
+     "misread_axis_scale",
+     1
+    ],
+    [
+     "extrapolation_error",
+     1
+    ],
+    [
+     "inequality_direction",
+     1
+    ],
+    [
+     "unit_confusion",
+     1
+    ],
+    [
+     "reciprocal_confusion",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.64,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "reverse_engineering_from_output",
+    "description": "주어진 값이나 조건에서 거꾸로 함수식의 계수(기울기, 절편 등)를 역산해내야 하며, 단순히 식에 대입해 값을 구하는 것보다 한 단계 더 추상적인 역방향 추론이 필요하다.",
+    "evidence": [
+     "test6-Math-M2-Q26",
+     "test7-Math-M2-Q12"
+    ]
+   },
+   {
+    "name": "structural_condition_recognition",
+    "description": "두 선형식이 무한해를 갖거나 특정 관계를 만족하려면 계수 간 비례 관계가 성립해야 한다는 구조적 조건을 추상적으로 인식해야 한다.",
+    "evidence": [
+     "test7-Math-M2-Q12"
+    ]
+   },
+   {
+    "name": "multi_attribute_model_matching",
+    "description": "그래프나 산점도에서 기울기의 부호와 절편의 값을 동시에 판단하여 여러 후보 모델 중 모든 조건을 만족하는 것을 골라내야 하며, 한 가지 속성만 확인해서는 오답에 빠진다.",
+    "evidence": [
+     "test8-Math-M1-Q11"
+    ]
+   },
+   {
+    "name": "representation_translation",
+    "description": "표, 그래프, 산점도 등 서로 다른 표현 형태로 주어진 정보를 함수식이나 대수적 관계로 변환하는 추가적인 해석 단계를 거쳐야 한다.",
+    "evidence": [
+     "test6-Math-M2-Q26",
+     "test8-Math-M1-Q11"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test6-Math-M2-Q26",
+   "test7-Math-M2-Q12",
+   "test8-Math-M1-Q11"
+  ]
+ },
+ "words_in_context": {
+  "skill": "words_in_context",
+  "n": 72,
+  "groupSize": 18,
+  "hiStats": {
+   "steps": 2.22,
+   "combine": 1.94,
+   "shift": 1.22,
+   "abstract": 2.17,
+   "subtle": 2.33,
+   "traps": [
+    [
+     "reversed_relation",
+     5
+    ],
+    [
+     "negation_trap",
+     3
+    ],
+    [
+     "scope_overreach",
+     3
+    ],
+    [
+     "near_synonym_mismatch",
+     3
+    ],
+    [
+     "literal_vs_figurative",
+     2
+    ],
+    [
+     "wrong_stage_label",
+     2
+    ]
+   ]
+  },
+  "loStats": {
+   "steps": 1.5,
+   "combine": 1.06,
+   "shift": 1,
+   "abstract": 1.44,
+   "subtle": 1.83,
+   "traps": [
+    [
+     "near_synonym_confusion",
+     7
+    ],
+    [
+     "opposite_meaning",
+     2
+    ],
+    [
+     "scope_overreach",
+     2
+    ],
+    [
+     "near_synonym_mismatch",
+     2
+    ],
+    [
+     "tone_mismatch",
+     1
+    ],
+    [
+     "overly_strong_word",
+     1
+    ]
+   ]
+  },
+  "positionCorrelation": 0.53,
+  "officialDifficulty": null,
+  "difficultySource": "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)",
+  "characteristics": [
+   {
+    "name": "reversed_relation_inference",
+    "description": "기존 통념·경향을 새 증거나 반박이 뒤집는 논리 구조를 파악해, 표면적 유사어가 아니라 관계가 역전된 정반대 방향의 어휘를 추론해야 한다.",
+    "evidence": [
+     "test8-RW-M2-Q5",
+     "test6-RW-M1-Q5",
+     "test11-RW-M1-Q4",
+     "test6-RW-M1-Q3"
+    ]
+   },
+   {
+    "name": "negation_layer_processing",
+    "description": "이중부정이나 부정어(isn't 등) 뒤에 이어지는 대조 표현을 논리적으로 재구성하여 실제 의미 극성을 역산해야 한다.",
+    "evidence": [
+     "test8-RW-M2-Q5",
+     "test9-RW-M2-Q5",
+     "test4-RW-M1-Q4"
+    ]
+   },
+   {
+    "name": "discourse_stage_structuring",
+    "description": "단순 단어-문맥 매칭을 넘어, 글 전체를 여러 논지/서술 단계(묘사→숙고, 반박→선언 등)로 구조화하고 빈칸이 어느 단계에 속하는지 판단해야 한다.",
+    "evidence": [
+     "test4-RW-M2-Q6",
+     "test4-RW-M2-Q7",
+     "test6-RW-M1-Q4",
+     "test6-RW-M2-Q4"
+    ]
+   },
+   {
+    "name": "multi_evidence_integration",
+    "description": "학계 논쟁, 지리적 사실, 개념 정의 등 서로 다른 정보원을 종합해 하나의 정밀한 관계어를 선택해야 하며, 단일 단서만으로는 답이 정해지지 않는다.",
+    "evidence": [
+     "test6-RW-M2-Q5",
+     "test7-RW-M1-Q5",
+     "test10-RW-M2-Q4",
+     "test10-RW-M1-Q4"
+    ]
+   },
+   {
+    "name": "confidence_calibration",
+    "description": "단정적 진술인지 추측·가능성 표현인지 글의 확신도 단서를 인식하고, 빈칸 어휘의 확신 강도를 그에 정밀하게 일치시켜야 한다.",
+    "evidence": [
+     "test10-RW-M2-Q3",
+     "test10-RW-M2-Q5",
+     "test6-RW-M1-Q2"
+    ]
+   }
+  ],
+  "hiRefs": [
+   "test8-RW-M2-Q5",
+   "test9-RW-M2-Q5",
+   "test6-RW-M1-Q5",
+   "test6-RW-M2-Q5",
+   "test4-RW-M1-Q4",
+   "test4-RW-M2-Q6",
+   "test4-RW-M2-Q7",
+   "test6-RW-M1-Q4",
+   "test6-RW-M2-Q4",
+   "test7-RW-M1-Q5",
+   "test10-RW-M1-Q4",
+   "test10-RW-M2-Q3",
+   "test10-RW-M2-Q4",
+   "test10-RW-M2-Q5",
+   "test11-RW-M1-Q4",
+   "test4-RW-M1-Q3",
+   "test6-RW-M1-Q2",
+   "test6-RW-M1-Q3"
+  ]
+ }
+}

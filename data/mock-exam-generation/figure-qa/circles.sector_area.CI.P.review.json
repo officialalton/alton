@@ -1,0 +1,23 @@
+{
+ "itemId": "circles.sector_area.CI.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:03:22Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "a534e02e48024b0de2259d79c3479cd8d3673c2827be319f01fea3e2feaad9e9",
+ "samples": [
+  "circles.sector_area.CI.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "음영 부채꼴 그림(중심각·반지름 라벨, 라디안 π/2 변형, 지름 변형) 샘플 데스크톱·375px + 갤러리 4 연산자 확인: 부채꼴 음영·중심각 호·라벨 겹침 없음(60° 좁은 부채꼴의 π/3 라벨은 반지름선에 근접하나 겹치지 않음). \\pi 는 스냅샷 한계(앱은 KaTeX)."
+}

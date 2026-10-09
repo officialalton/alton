@@ -1,0 +1,728 @@
+{
+ "taskId": "gen-lit40-hard-02-04",
+ "passed": [
+  {
+   "candidateId": "lit40-hard-02-061",
+   "task": "gen-lit40-hard-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-02-061",
+    "batchId": "lit40-hard-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "poetry",
+    "seed": {
+     "index": 60,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Akari",
+      "Kalani"
+     ],
+     "nameCultures": [
+      "japanese",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Riga",
+     "setting": "a metro platform",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "about a translation that changes the meaning",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a metro platform in Riga; a mayor and the town's only doctor about a translation that changes the meaning"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "g": {
+    "passage": "\"Read it again,\" Akari said, the mayor's paper folding in her glove.\nEach evening on the Riga platform, Kalani, the town's only doctor,\nhad copied the notice into three languages, slowly,\nchecking every verb against the old dictionary she carried.\nTonight the train was late; the lamps hummed above the tracks.\nAkari pointed to one line: her word for \"closed\"\nhad become \"abandoned\" in the version already pasted on the station wall.\nKalani was ______ by the error.\nShe did not argue or apologize.\nShe took a pencil from her coat, crossed out the word on the posted sheet,\nand wrote the smaller word above it, letter by letter,\nwhile the arriving train drowned whatever Akari said next.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "openly embarrassed",
+     "mildly amused",
+     "slowly distracted",
+     "quietly troubled"
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분에서 Kalani는 매일 저녁 모든 동사를 사전과 대조할 만큼 번역의 정확성에 마음을 쓰는 인물로 그려지므로 오류에 무심할 수 없다. 뒷부분에서 그녀는 따지지도 사과하지도 않고 연필로 한 글자씩 조용히 고쳐 쓰므로, 반응의 정도는 겉으로 드러나지 않는 차분한 동요여야 한다. 두 조건을 모두 만족하는 것은 D이다. A는 오류에 신경 쓴다는 점은 맞지만 드러내 놓고 당황한다는 정도가 뒤의 침착한 행동과 어긋나고, B는 정확성에 대한 그녀의 집착과 맞지 않으며, C는 지문의 'slowly'를 빌렸을 뿐 오류 앞에서의 반응을 설명하지 못한다."
+   },
+   "notes": [],
+   "tone": [
+    "restrained",
+    "tense"
+   ],
+   "devices": [
+    "imagery",
+    "juxtaposition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-02-062",
+   "task": "gen-lit40-hard-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-02-062",
+    "batchId": "lit40-hard-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 61,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Winifred",
+      "Hedwig"
+     ],
+     "nameCultures": [
+      "english",
+      "german_austrian"
+     ],
+     "locale": "Ohio",
+     "setting": "a clock-maker's shop",
+     "relationship": "a nurse and her night patient",
+     "conflict": "over a repair that could never really fix it",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a clock-maker's shop in Ohio; a nurse and her night patient over a repair that could never really fix it"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "g": {
+    "passage": "When I worked nights on the ward, I passed a clock-maker's shop in Ohio every morning, and Hedwig was always already at his bench, tightening the same brass wheel of the same tall clock. Winifred, my patient in bed four, had sent it there. Every week she asked whether it was ready, and every week I said soon. One morning Hedwig set down his loupe and told me the clock would never keep time again; the case had warped. I carried that sentence back to the ward like a cold cup of tea. Winifred, though, was ______ when I repeated it. She asked me to tell Hedwig to keep working on it anyway, and that night she wound her small wristwatch twice before sleeping, holding it near her ear.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "calmly accepting",
+     "openly distressed",
+     "coldly dismissive",
+     "mildly relieved"
+    ],
+    "correct_letter": "A",
+    "explanation": "Winifred는 매주 시계가 준비됐는지 묻는데, 이는 수리의 완성보다 수리가 계속되는 과정 자체에 마음을 두고 있음을 보여 준다. 고칠 수 없다는 말을 들은 뒤에도 그녀는 계속 작업해 달라고 부탁하고 손목시계를 태엽 감아 귀에 대므로 반응은 동요 없이 받아들이는 쪽이다. 따라서 A가 두 단서를 모두 만족한다. B는 시계에 대한 애착만 보고 고른 표현으로 뒤의 차분한 부탁과 맞지 않고, C는 지문의 'cold'를 빌린 표현으로 계속 고쳐 달라는 부탁과 어긋나며, D는 안도할 이유가 지문에 없다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "subdued"
+   ],
+   "devices": [
+    "simile",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-02-063",
+   "task": "gen-lit40-hard-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-02-063",
+    "batchId": "lit40-hard-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "memoir",
+    "seed": {
+     "index": 62,
+     "genre": "memoir",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Hasan",
+      "Savitri"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "indian_subcontinent"
+     ],
+     "locale": "Accra",
+     "setting": "a bus depot",
+     "relationship": "a stepmother and a skeptical teenager",
+     "conflict": "while hiding a small failure",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a bus depot in Accra; a stepmother and a skeptical teenager while hiding a small failure"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "g": {
+    "passage": "Coins rattled in Savitri's palm as she counted them a second time at the ticket window of the Accra depot. She did this every trip, my stepmother, recounting fares she had already counted at home, as if the numbers might change on the way over. I was fifteen and certain she did it to look busy. That afternoon the clerk said the Kumasi coach had left an hour earlier; she had read the timetable wrong. I waited for her to blame the board, or the clerk, or me. Instead she was ______ about it. She bought two cold sodas with part of the fare money, sat beside me on the bench, and asked me, of all people, to read the next departure aloud.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "visibly flustered",
+     "unexpectedly frank",
+     "politely evasive",
+     "busily occupied"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분에서 Savitri가 요금을 거듭 세는 습관은 실수를 두려워하는 사람처럼 보이게 하고, 화자는 그녀가 남 탓을 하리라 예상한다. 그러나 뒤에서 그녀는 자기 실수를 감추지 않고 화자 옆에 앉아 다음 출발 시각을 읽어 달라고 부탁하므로, 실수를 숨김없이 인정하는 태도가 드러난다. 따라서 B가 '예상과 달리'라는 의외성과 솔직함을 모두 담는다. A는 앞의 습관과만 맞고 뒤의 여유 있는 행동과 어긋나며, C는 도움을 청하는 행동과 맞지 않고, D는 지문의 'busy'를 빌린 표현일 뿐이다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "warm"
+   ],
+   "devices": [
+    "characterization",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-02-066",
+   "task": "gen-lit40-hard-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-02-066",
+    "batchId": "lit40-hard-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "poetry",
+    "seed": {
+     "index": 65,
+     "genre": "poetry",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Ama",
+      "Zainab"
+     ],
+     "nameCultures": [
+      "west_african",
+      "west_african"
+     ],
+     "locale": "Dakar",
+     "setting": "a seed-saving cooperative",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "about leaving versus staying loyal",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a seed-saving cooperative in Dakar; an elder and a restless apprentice about leaving versus staying loyal"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4"
+   },
+   "g": {
+    "passage": "By the ninth week of the dry season\nAma had taught Zainab every jar:\nmillet tied with red thread, cowpea with blue,\nokra wrapped in newsprint from the year of floods,\neach lid tapped twice, each name said aloud.\nZainab learned the counting and the drying racks,\nthe way a seed is tested in a cup of water,\nthe floaters tossed out, the sinkers kept.\nShe spoke of the bus to the coast,\nof cousins, of work in the port.\nAma kept sorting.\nThen Ama stopped naming.\nShe let a full jar stand open in the light.\nAt dusk she pressed a twist of cloth, unlabeled,\ninto the girl's hand,\nand turned back to the shelves\nbefore Zainab could untie it.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "It shifts from lively instruction to weary routine, as the elder grows tired of naming every jar.",
+     "It shifts from exacting instruction to a quiet release, as the elder doubts her own skill as a teacher.",
+     "It shifts from exacting instruction to a quiet release, as the elder comes to terms with the apprentice's plans.",
+     "It shifts from exacting instruction to a grieving protest, as the elder resists the apprentice's plans."
+    ],
+    "correct_letter": "C",
+    "explanation": "시의 앞부분은 실 색깔, 포장지, 뚜껑 두드리기까지 세세하게 나열하며 Ama의 엄격한 가르침을 보여 주지만, Zainab이 해안행 버스와 항구 일을 말한 뒤 행이 짧아지고 Ama는 이름 부르기를 멈춘다. 마지막에 이름표 없는 씨앗 꾸러미를 건네고 돌아서는 동작은 떠나려는 제자의 뜻을 받아들이고 보내 주는 마음으로 읽힌다. 따라서 C가 정답이다. A는 짧아진 행을 단순한 피로로 읽었고, B는 원인을 Ama 자신의 자질에 대한 의심으로 뒤집었으며, D는 선물을 건네는 행동과 맞지 않게 정도를 항의로 과장했다."
+   },
+   "notes": [],
+   "tone": [
+    "meticulous",
+    "tender"
+   ],
+   "devices": [
+    "cataloging",
+    "line length variation",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-02-073",
+   "task": "gen-lit40-hard-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-02-073",
+    "batchId": "lit40-hard-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "underlined_portion_function",
+    "genre": "short_story",
+    "seed": {
+     "index": 72,
+     "genre": "short_story",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Cleotilde",
+      "Imtiaz"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Lyon",
+     "setting": "an abandoned orchard",
+     "relationship": "old rivals in a chess club",
+     "conflict": "while deciding whether a rule still applies",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "an abandoned orchard in Lyon; old rivals in a chess club while deciding whether a rule still applies"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 120,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4"
+   },
+   "g": {
+    "passage": "Cleotilde and Imtiaz had played chess in the abandoned orchard outside Lyon every Sunday since the club lost its hall. __Their board sat on a stump, and the club's old rule, written on a card tucked beneath it, said that a touched piece must be moved.__ The pear trees had gone wild; fruit split on the grass and drew wasps. The two rivals spoke little, played slowly, and kept score in a notebook that neither would let the other hold. They had been trading the lead for eleven years. This Sunday a wasp landed on Imtiaz's queen. He brushed it away, and his knuckle tipped the queen onto its side. Cleotilde looked at the piece, then at the stump. Moving the queen now would cost him the game and the lead. She reached under the board, slid out the card, and folded it into her coat pocket. Then she set the queen upright on its square and waited.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It establishes the setting by showing how the two players arrange their weekly game.",
+     "It introduces a standard that later becomes the basis of a choice Cleotilde makes.",
+     "It contrasts the players' orderly game with the disorder of the wild orchard.",
+     "It explains why the two players keep score in a notebook neither will share."
+    ],
+    "correct_letter": "B",
+    "explanation": "밑줄 문장은 단독으로 보면 그루터기 위 체스판과 카드 한 장을 묘사하는 배경 설명처럼 보인다. 그러나 후반부에 Imtiaz가 실수로 퀸을 건드려 규칙대로라면 경기를 잃게 되자, Cleotilde가 그 카드를 빼서 주머니에 넣고 퀸을 다시 세운다. 따라서 밑줄 문장은 후반의 선택을 가능하게 하는 기준을 미리 심어 둔 복선이므로 B가 정답이다. A는 밑줄 문장의 표면 기능만 읽었고, C는 바로 뒤 문장의 무성한 과수원 묘사와의 관계로만 보았으며, D는 지문의 노트 표현을 빌렸지만 후반 사건과 연결되지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "understated",
+    "tense"
+   ],
+   "devices": [
+    "foreshadowing",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-02-074",
+   "task": "gen-lit40-hard-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-02-074",
+    "batchId": "lit40-hard-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "underlined_portion_function",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 73,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Larissa",
+      "Bogdan"
+     ],
+     "nameCultures": [
+      "portuguese_brazilian",
+      "slavic_baltic"
+     ],
+     "locale": "Maui",
+     "setting": "a movie theater in the off-season",
+     "relationship": "a girl and an old family friend",
+     "conflict": "about a name that no one uses anymore",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a movie theater in the off-season in Maui; a girl and an old family friend about a name that no one uses anymore"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 120,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4"
+   },
+   "g": {
+    "passage": "When the season ended on Maui, the little theater on Front Street ran one film a night for whoever wandered in, and Bogdan, who had run its projector for thirty years, let Larissa sit with him in the booth. __He called her Lara, the way her grandmother had, and she let him, though no one else had used that name since the funeral.__ They watched through the small square window while the reel ticked beside them. Between shows Bogdan oiled the gears and told her which seats squeaked and which ones leaked in the rain. One night in October he asked her to thread the projector herself. Her hands shook; the film slipped twice from the sprockets. When the picture finally steadied on the screen, Bogdan took a marker from his pocket. On the strip of tape above the booth door, where his own name had been written for thirty years, he added a second name beneath it: Lara.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It portrays Bogdan as an old friend who still misses Larissa's late grandmother.",
+     "It shifts the focus from family memories to the daily work of the booth.",
+     "It prepares for a later moment in which Bogdan marks Larissa as his successor.",
+     "It suggests that Larissa puts up with old habits out of politeness to Bogdan."
+    ],
+    "correct_letter": "C",
+    "explanation": "밑줄 문장은 단독으로 보면 Bogdan이 할머니를 그리워하며 옛 애칭을 쓰는 인물 묘사처럼 보인다. 그러나 후반부에 Larissa가 처음으로 혼자 영사기를 걸어 화면을 안정시키자, Bogdan은 자신의 이름 아래에 바로 그 애칭 'Lara'를 적어 그녀를 영사실의 후계자로 표시한다. 따라서 밑줄 문장은 그 애칭이 후반에 다른 의미를 얻도록 준비하는 복선이므로 C가 정답이다. A는 밑줄 문장의 표면만 읽었고, B는 바로 뒤 문장과의 관계로만 기능을 보았으며, D는 'let him'이라는 표현을 일반화했을 뿐 후반 사건을 설명하지 못한다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "quiet"
+   ],
+   "devices": [
+    "foreshadowing",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-02-076",
+   "task": "gen-lit40-hard-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-02-076",
+    "batchId": "lit40-hard-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "underlined_portion_function",
+    "genre": "memoir",
+    "seed": {
+     "index": 75,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Aiko",
+      "Haruo"
+     ],
+     "nameCultures": [
+      "japanese",
+      "japanese"
+     ],
+     "locale": "Hokkaido",
+     "setting": "a fishing harbor",
+     "relationship": "two women who once shared a stage",
+     "conflict": "over a secret discovered in a drawer",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a fishing harbor in Hokkaido; two women who once shared a stage over a secret discovered in a drawer"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 120,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4"
+   },
+   "g": {
+    "passage": "Aiko kept everything. In the harbor town in Hokkaido where we had both retired, her house held forty years of programs from the theater where we once sang duets, each one pressed flat and labeled by year. __She told me once, over tea, that she had never missed a single performance of mine, not even after we stopped singing together.__ I laughed, and she poured more tea. Her husband, Haruo, mended nets on the jetty below the house and waved whenever I passed. Last winter, after Aiko's stroke, Haruo asked me to help sort her desk. In the bottom drawer, under the programs, we found ticket stubs: one for every concert I had given alone, in Osaka, in Sapporo, in cities she had told me she had never visited. Haruo held one up to the window light. He did not ask me what it meant, and I put the stubs back in the order she had left them.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It offers a remark that the drawer's contents later show to be literally true.",
+     "It conveys a polite compliment that the narrator treats as a kind exaggeration.",
+     "It introduces the friendship that Haruo shares with the narrator in town.",
+     "It suggests that Aiko kept old records mainly out of a love of order."
+    ],
+    "correct_letter": "A",
+    "explanation": "밑줄 문장은 단독으로 보면 오랜 동료가 건넨 인사치레 같은 말이고, 화자도 웃어넘긴다. 그러나 후반부에 서랍에서 화자가 혼자 공연한 모든 콘서트의 표가 나오면서, Aiko가 가 본 적 없다던 도시까지 몰래 찾아가 공연을 보았다는 사실이 드러난다. 따라서 밑줄 문장은 나중에 문자 그대로 사실로 밝혀지는 말을 미리 심어 둔 것이므로 A가 정답이다. B는 밑줄 문장과 화자의 웃음만 보고 표면 기능을 골랐고, C는 바로 뒤 문장의 Haruo 소개와의 관계로만 보았으며, D는 'kept everything'을 빌려 일반화했을 뿐 서랍의 발견을 설명하지 못한다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "poignant"
+   ],
+   "devices": [
+    "foreshadowing",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-02-077",
+   "task": "gen-lit40-hard-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-02-077",
+    "batchId": "lit40-hard-02",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "hard",
+    "questionType": "narrator_attitude",
+    "genre": "short_story",
+    "seed": {
+     "index": 76,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Hamza",
+      "Joaquin"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "spanish_iberian"
+     ],
+     "locale": "Marrakesh",
+     "setting": "a ship's galley",
+     "relationship": "a shopkeeper and a persistent customer",
+     "conflict": "when one of them is offered a way out",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a ship's galley in Marrakesh; a shopkeeper and a persistent customer when one of them is offered a way out"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "central_ideas_details_lit_narrator_attitude_hard_v4"
+   },
+   "g": {
+    "passage": "I run a spice shop in Marrakesh that a former ship's cook built to look like a galley, all brass hooks and low beams, and every morning Joaquin ducks under those beams to complain about my saffron. Too damp, too pale, too expensive. He has said this for nine years. He buys a gram each time anyway, counted out of a jar he insists I lift down from the top shelf. Last month a hotel offered to buy my stock and the lease; I could retire to my daughter's house in Fes. I told Joaquin, mostly to watch his face. He said good, the hotel's saffron would at least be dry. I am not saying I was hurt, exactly. I signed nothing that week. I did move the jar to the lowest shelf, where a man with a bad back could reach it himself, and I wrote the price on the lid in larger numbers.",
+    "question": "Which choice best describes the narrator's attitude toward Joaquin?",
+    "options": [
+     "Weary irritation at his complaints while hoping the sale will put an end to them",
+     "Real fondness for him while feeling guilty about nearly selling the shop",
+     "Protective care for him while keeping up a show of mutual grumbling",
+     "Proud attachment to the galley shop while doubting its worth to customers"
+    ],
+    "correct_letter": "C",
+    "explanation": "앞부분에서 화자는 Joaquin의 불평을 건조하게 옮기고 그의 반응을 보려고 매각 이야기를 꺼내는 등 서로 투덜대는 말투를 유지한다. 중간의 'not saying I was hurt, exactly'라는 망설이는 정정은 그 말투 아래 감정이 있음을 암시한다. 뒤에서 화자는 아무것도 서명하지 않고, 허리가 아픈 Joaquin이 직접 닿도록 병을 아래 칸으로 옮기며 가격을 크게 적는데, 이는 그를 배려하는 행동이다. 따라서 C가 정답이며, A는 말투만 읽었고, B는 배려의 이유를 죄책감으로 바꾸었으며, D는 지문의 가게 묘사를 빌려 태도로 일반화했다."
+   },
+   "notes": [],
+   "tone": [
+    "dry",
+    "affectionate"
+   ],
+   "devices": [
+    "understatement",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-02-078",
+   "task": "gen-lit40-hard-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-02-078",
+    "batchId": "lit40-hard-02",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "hard",
+    "questionType": "narrator_attitude",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 77,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Kaya",
+      "Nneka"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "west_african"
+     ],
+     "locale": "Lagos",
+     "setting": "a shoe repair stall",
+     "relationship": "an interpreter and her client",
+     "conflict": "over a shared chore that has become a ritual",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a shoe repair stall in Lagos; an interpreter and her client over a shared chore that has become a ritual"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "central_ideas_details_lit_narrator_attitude_hard_v4"
+   },
+   "g": {
+    "passage": "Kaya had interpreted for Nneka for three years, and she would tell anyone who asked that the woman was impossible. Nneka changed her mind mid-sentence, made Kaya repeat whole contracts twice, and insisted, every Friday after their meetings, on stopping at the same shoe repair stall in Lagos to have the same left heel glued. The heel did not need gluing. Kaya said so, in two languages, to Nneka and to the cobbler. Neither listened. She would not have called the Fridays pleasant, not quite. Last week Nneka's company assigned a new interpreter, a young man with excellent references, and Nneka mentioned it in the car as though discussing the weather. Kaya said nothing. On Friday she went to the stall early, alone, paid the cobbler in advance for a month of heels, and left the receipt with Nneka's name on it.",
+    "question": "Which choice best describes Kaya's attitude toward Nneka, as conveyed in the text?",
+    "options": [
+     "Lasting exasperation with Nneka while doubting the new interpreter's skill",
+     "Warm attachment to Nneka while acting from guilt over past complaints",
+     "Dry amusement at the heel repairs while dismissing them as wasted money",
+     "Quiet devotion to their shared habit while voicing steady complaint about it"
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분의 Kaya는 Nneka를 '불가능한 사람'이라 말하고 굽 수리가 필요 없다고 두 언어로 불평한다. 중간의 'not pleasant, not quite'라는 망설이는 정정은 그 불평이 전부가 아님을 암시한다. 자신이 교체된다는 소식 뒤에도 Kaya는 혼자 가게에 가 한 달 치 굽 수리비를 미리 내고 Nneka 이름으로 영수증을 남기는데, 이는 함께해 온 금요일 습관을 지키려는 행동이다. 따라서 D가 정답이며, A는 말투만 읽었고, B는 애정의 이유를 죄책감으로 바꾸었으며, C는 지문의 굽 수리 표현을 빌려 불평 쪽으로만 일반화했다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "restrained"
+   ],
+   "devices": [
+    "understatement",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-02-079",
+   "task": "gen-lit40-hard-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-02-079",
+    "batchId": "lit40-hard-02",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "hard",
+    "questionType": "narrator_attitude",
+    "genre": "poetry",
+    "seed": {
+     "index": 78,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Solange",
+      "Jonah"
+     ],
+     "nameCultures": [
+      "french",
+      "english"
+     ],
+     "locale": "Vermont",
+     "setting": "a dried-riverbed crossing",
+     "relationship": "a retired judge and a young clerk",
+     "conflict": "over an unspoken agreement to avoid one subject",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a dried-riverbed crossing in Vermont; a retired judge and a young clerk over an unspoken agreement to avoid one subject"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "central_ideas_details_lit_narrator_attitude_hard_v4"
+   },
+   "g": {
+    "passage": "Two rules for the crossing at the dry riverbed in Vermont:\nstep on the flat stones, and do not mention the trial.\nSolange, retired from the bench, keeps the first rule loudly;\nshe lectures me on stones the way she once lectured juries,\nand I roll my eyes behind her, as clerks are allowed to do.\nHer rulings ran long. So do her walks.\nI would not call this friendship, exactly.\nThe second rule we keep without a word.\nLast week, halfway across, she slowed\nwhere the old flood line still stains the bank,\nthe place where the case began.\nI started talking about stones,\nthe gray ones, the split ones, the one shaped like a gavel,\nand kept on talking until we reached the far side,\nand offered my arm for the climb, which she took.",
+    "question": "Which choice best describes the speaker's attitude toward Solange?",
+    "options": [
+     "Protective loyalty toward her while keeping up a show of mild mockery",
+     "Mild impatience with her while enduring her lectures out of duty",
+     "Real respect for her while feeling guilty about the old trial",
+     "Fond interest in the stones while ignoring the flood line on the bank"
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분에서 화자는 Solange의 돌 강의에 뒤에서 눈을 굴리고 그녀의 판결과 산책이 길다고 농담하며 가벼운 조롱의 말투를 쓴다. 중간의 'not friendship, exactly'라는 망설이는 정정은 그 말투 아래 다른 감정이 있음을 암시한다. 뒤에서 Solange가 사건이 시작된 홍수선 앞에서 걸음을 늦추자 화자는 일부러 돌 이야기를 끝까지 이어 가고 팔을 내밀어 그녀를 지킨다. 따라서 A가 정답이며, B는 말투만 읽었고, C는 배려의 이유를 화자의 죄책감으로 바꾸었으며, D는 지문의 돌과 홍수선 표현을 빌렸을 뿐 화자의 의도를 설명하지 못한다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "protective"
+   ],
+   "devices": [
+    "understatement",
+    "simile",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-hard-02-064",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 C 가 정답과 어휘 64% 중복",
+    "복수 정답 위험: 선택지 D 가 정답과 어휘 69% 중복"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-02-065",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 D 가 정답과 어휘 73% 중복"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-02-067",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 B 가 정답과 어휘 60% 중복",
+    "복수 정답 위험: 선택지 C 가 정답과 어휘 71% 중복"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-02-068",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 C 가 정답과 어휘 60% 중복",
+    "복수 정답 위험: 선택지 D 가 정답과 어휘 71% 중복"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-02-069",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 D 가 정답과 어휘 71% 중복"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-02-070",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 D 가 정답과 어휘 64% 중복"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-02-071",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 B 가 정답과 어휘 89% 중복",
+    "복수 정답 위험: 선택지 C 가 정답과 어휘 74% 중복",
+    "오답 B·C 가 거의 같은 문장"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-02-072",
+   "stage": "distractor",
+   "reasons": [
+    "복수 정답 위험: 선택지 C 가 정답과 어휘 88% 중복",
+    "복수 정답 위험: 선택지 D 가 정답과 어휘 74% 중복",
+    "오답 C·D 가 거의 같은 문장"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-02-075",
+   "stage": "similarity",
+   "reasons": [
+    "문두 집중(3건 이미 같은 문두)"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-02-080",
+   "stage": "similarity",
+   "reasons": [
+    "문두 집중(4건 이미 같은 문두)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

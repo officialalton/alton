@@ -1,0 +1,40 @@
+{
+ "itemId": "two_variable_data.scatter_count_above.SC.P",
+ "generatedAt": "2026-10-07T05:02:00.443Z",
+ "codeHash": "af990c786aee5fdb03964f96ff590663d6fd098cb5ecc00f735cdb7b2885c289",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-lines.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.scatter_count_above.SC.P.png",
+   "mobileFile": "two_variable_data.scatter_count_above.SC.P.m375.png",
+   "archetypeId": "tvd.scatter_count_above.SC.P.constraint_select",
+   "seed": 11,
+   "signature": "data:scatter",
+   "stimulus": "The scatterplot shows the number of years a startup has operated and the startup's number of employees for 13 data points, along with a line of best fit.",
+   "question": "How many of the data points with years operating of at least 9 years are above the line of best fit?",
+   "options": [
+    "6",
+    "11",
+    "5",
+    "4"
+   ],
+   "correctIndex": 2,
+   "answer": "5",
+   "explanation": "(1) 그림에서 추세선이 지나는 두 격자점을 읽어 선의 위치를 파악한다. (2) x 값이 9 이상인 점만 고른다(11개). (3) 각 점이 추세선보다 위에 있는지 판정한다. (4) 위쪽에 있는 점을 센다: 5개. (5) 전체에서 센 위쪽 점(6개)이나, x 조건을 만족하는 점 중 아래쪽 점(6개)과 구별한다. 따라서 정답은 5이다.",
+   "structuralIssues": []
+  }
+ ]
+}

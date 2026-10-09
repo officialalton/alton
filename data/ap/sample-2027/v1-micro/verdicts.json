@@ -1,0 +1,797 @@
+[
+ {
+  "key": "ap_microeconomics-f01-k0",
+  "cellId": "ap_microeconomics-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "MR=120-2Q; set MR=MC=20 gives Q=50",
+     "final_answer": "50 units",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "P=120-50",
+     "final_answer": "$70",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(70-20)*50",
+     "final_answer": "$2,500",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Efficient Q=100; DWL=0.5*50*50",
+     "final_answer": "$1,250",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "MC=40: 120-2Q=40 gives Q=40, lower than 50",
+     "final_answer": "Decrease (to 40), because higher MC meets MR at a lower quantity",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts sit within 4.2 Monopoly; parts D and E use their own skills (3.C, 3.B), acceptable per-part judgment."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Keys are correct, but rubric rows award the point for the bare final answer only, even though A says 'Show your work' and the criterion mentions setting MR = MC; the work is not scored. Part E's row accepts 'decreases' plus 'MR = MC' without requiring the new quantity or the correct direction link beyond keywords."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table plus the notes (P = 120 - Q, MC = ATC = 20) fully specify the problem. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable for FRQ; the model answers are adequate, though common_errors are empty for every row."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Five 1-point parts of near-trivial single-step calculations. Official short FRQs have more varied point values, with graph or explanation components, and demand reasoning (e.g., why MR < P, labeling a graph). It lacks the setup/answer/justification rows of official items. The calculator is designated allowed with no real need."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The arithmetic is correct and the stimulus is complete. However, the item is five uniform 1-point computation steps with answer-only rubric rows (the work is not scored even though the prompt says 'Show your work') and no common errors listed. This deviates from the reference FRQ pattern of varied point values and setup/justification rows, so I fail it on key/scoring rigor and exam suitability."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style monopoly problem. The student must derive MR from linear demand (MR = 120 - 2Q), set MR = MC to find Q = 50, find P = 70 from demand, compute profit = (70-20)*50 = 2500, compute DWL as a triangle using the efficient Q = 100 (0.5*50*50 = 1250), and reason about a MC increase (Q falls to 40). Concepts are core to unit 4.2, and each part is short with easy arithmetic. The table and equation are consistent, and the table points are not on the MR=MC solution, so the student must use the equation rather than read the table. This is a moderate representation change (table to equation to graph-based areas).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_microeconomics-f01-k1",
+  "cellId": "ap_microeconomics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "MR=60-2Q=MC=10 → Q=25",
+     "final_answer": "25 units",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "P=60-25",
+     "final_answer": "$35",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(35-10)*25",
+     "final_answer": "$625",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Efficient Q=50; DWL=0.5*25*25",
+     "final_answer": "$312.50",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "MC=30: 60-2Q=30 → Q=15, down from 25",
+     "final_answer": "Decrease (to 15 units), since MR=MC at lower Q",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are on monopoly (4.2): MR=MC, price, profit, DWL, and a cost shock. Per-part skills are acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Q=25, P=35, profit=625, DWL=312.5, and the quantity decrease to 15 are unique and consistent. Rubric rows are clear, and E requires both direction and the MR=MC link."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table, the stated demand equation P=60-Q, and MC=ATC=10 fully specify the problem. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors are not applicable. Rubric rows are explicit with the model answers."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "This is a 5-point short FRQ, which matches the official grain. The task load is light and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, complete 5-point short monopoly FRQ with a unique key, a fully specified stimulus, and a standard load. No instant-reject conditions apply."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP monopoly FRQ-style item. Students derive MR from linear demand (MR = 60 - 2Q), set MR = MC to get Q = 25, find P = 35, profit = 625, and DWL = 312.5 (efficient Q = 50). Part E asks for comparative statics (MC up to 30 gives Q = 15, so quantity falls) with a brief explanation. The concepts are core to unit 4.2 and require moderate multi-step reasoning, but the arithmetic is simple and the wording is clear. The table's quantities do not include the optimum, so students must use the given equation rather than read the table, which is fair because the equation is stated.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_microeconomics-f01-k2",
+  "cellId": "ap_microeconomics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "MR=120-2Q=MC=10 → Q=55",
+     "final_answer": "55 units",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "P=120-55",
+     "final_answer": "$65",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(65-10)*55",
+     "final_answer": "$3,025",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Efficient Q=110; DWL=0.5*55*55",
+     "final_answer": "$1,512.50",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "MR=20 → Q=50; higher MC intersects downward-sloping MR at lower Q",
+     "final_answer": "Decrease (to 50 units)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Monopoly profit maximization, price, profit, DWL, and a comparative-static MC shift are all topic 4.2. Skill labels on D (3.C) and E (3.B) are slightly loose but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and defensible: Q=55, P=65, profit 3025, DWL 1512.5, and quantity decreases to 50. Rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table and the stated demand equation fully specify the market, and MC = ATC is stated. The monopoly quantity of 55 is not a table row, but the equation is given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so no distractors. Rubric rows are single-answer with no listed common errors, which is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 5-point short FRQ with five 1-point parts is the official grain. Load is reasonable for about 12 minutes. The calculator is allowed and not burdensome."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, unambiguous short FRQ on monopoly with a complete stimulus and consistent rubric. The only weakness is slightly loose skill labels on parts D and E, which does not justify rejection."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Micro monopoly FRQ: derive MR from linear demand, set MR=MC, find price from demand, compute profit and DWL triangle, then do simple comparative statics. Concepts are core to the unit, arithmetic is light, and the table and equation are consistent. Multi-part chaining makes it suitable for full mocks rather than basic learning, but it is not beyond AP scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_microeconomics-f01-k3",
+  "cellId": "ap_microeconomics-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "MR=120-2Q; set MR=MC=30 gives Q=45",
+     "final_answer": "Q = 45 units",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "P=120-45",
+     "final_answer": "$75",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(75-30)*45",
+     "final_answer": "$2,025",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Efficient Q=90; DWL=0.5*(90-45)*(75-30)",
+     "final_answer": "$1,012.50",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "MR=40 gives Q=40; a higher MC means MR=MC is reached at a lower Q",
+     "final_answer": "Decreases (to 40 units)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The arithmetic and keys are correct: Q=45, P=75, profit=2025, DWL=1012.5, and Q falls to 40 when MC rises to 40. The item fails on exam suitability and format fit.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts sit in topic 4.2 and the numeric parts test 3.A. Parts D and E are tagged 3.C and 3.B, which is acceptable because each part is judged against its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each key is unique and defensible. In part E, the post-shock quantity of 40 is correct. Part E's rubric requires only \"decreases\" and a link to MR = MC. This is consistent with the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and the notes state MC = ATC = 30 and the linear demand equation P = 120 - Q. The wording is clear. Part D says to compute DWL relative to the efficient quantity."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors lists are empty, but the rubric rows are otherwise adequate."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is a 5-point short FRQ, which matches the official short-FRQ grain. However, it is five 1-point parts that mostly chain simple calculations, with nothing on graph drawing or shading areas. The demand schedule lists 6 rows and does not show MR. The profit-maximizing quantity of 45 does not appear in the schedule, so students must use the equation in the notes. This makes the table partly redundant. The 12-minute estimate is high for the work involved. These points are a material departure from official short-FRQ style, which mixes calculation with graph-based explanation across 1-2 point parts."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP monopoly computation: derive MR from linear demand, set MR=MC (Q=45), find price from demand (P=75), compute profit (2025) and DWL triangle (1012.5), then do a comparative static with MC up to 40 (Q falls to 40). Requires multi-step reasoning across concepts, but the numbers are clean, the reading is light, and the content is fully in scope. It is a typical FRQ-style item suited to full mocks.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_microeconomics-f01-k4",
+  "cellId": "ap_microeconomics-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "P=100-Q gives MR=100-2Q. Setting MR=MC=10 gives Q=45.",
+     "final_answer": "Q = 45 units",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Putting Q=45 into demand: P=100-45=55.",
+     "final_answer": "$55",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Profit = (P-ATC)×Q = (55-10)×45 = 2025.",
+     "final_answer": "$2,025",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "P=MC gives the efficient quantity: 100-Q=10, so Q=90. DWL = 0.5×(90-45)×(55-10) = 1012.5.",
+     "final_answer": "$1,012.50",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "New MC is 30. Setting MR=30 gives 100-2Q=30, so Q=35. A higher MC means MR equals MC at a lower output.",
+     "final_answer": "Decreases, from 45 to 35 units, because MR now equals the higher MC at a smaller quantity.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Topic 4.2 fits. Part D is labeled skill 3.C, but the CED places 3.C in a different skill category, and the task is a surplus and deadweight-loss calculation (arguably topic 3.x/4.2 DWL). The label mismatch with the bundle skill 3.A is minor but real. Part E is labeled 3.B, which is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and consistent: Q=45, P=55, profit=2025, DWL=1012.5, and Q falls to 35. Part E rubric requires only 'decreases' and 'MR = MC', which is reasonable. The units row is absent, which is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table and notes fully specify demand and MC=ATC=10. MR is not given in the table, but the notes state linear demand P=100-Q, so students can derive it. Part E's rise of $20 is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so distractors are not applicable. The model answers are adequate and the rubric rows are consistent."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "All five parts are 1 point each, so the bundle is a 5-point short FRQ made of trivial sequential computations. The official short FRQ mixes graph drawing, labeling and explanation, and a graph is expected for monopoly. This item has no graph, and every part is a single-number answer. The calculator designation is allowed but unnecessary, since the arithmetic is simple. The structure deviates from the reference pattern, which uses varied point values and justification rows."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The keys are correct and the stimulus is complete. However, the five uniform 1-point numeric parts, the lack of a graph or justification, and the part D skill label (3.C) make the item a weak fit for the AP short FRQ format and the target skill labeling.\""
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP monopoly calculation sequence: derive MR = 100 - 2Q from linear demand, set MR = MC to get Q = 45, read P = 55 from demand, compute profit = (55 - 10) × 45 = $2,025, compute DWL = 0.5 × (90 - 45) × (55 - 10) = $1,012.50, then do a comparative-statics check where MC rises to 30 and Q falls to 35. It requires moderate conceptual depth (the MR curve lies below demand), with each part short and dependent on earlier results. Reading and arithmetic are light and the prompt is clear, so the difficulty comes from the economics and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_microeconomics-f02-k0",
+  "cellId": "ap_microeconomics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "If Y picks high fare, X earns 80 with low vs 63 with high. If Y picks low fare, X earns 42 with low vs 27 with high. Low fare pays more either way.",
+     "final_answer": "Yes. Airline X's dominant strategy is low fare.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The payoffs are symmetric, so low fare is also dominant for Y. When both play their dominant strategies, the result is (low, low).",
+     "final_answer": "Airline X chooses low fare and Airline Y chooses low fare.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "X's payoff in the (low, low) cell is 42.",
+     "final_answer": "$42 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "In the (high, high) cell each airline earns 63, which is more than 42 for both.",
+     "final_answer": "Yes. If both choose high fare, Airline X gets $63 million and Airline Y gets $63 million.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Each airline has a reason to cheat on a high-fare agreement, and nothing makes them keep it.",
+     "final_answer": "If the other airline charges a high fare, each airline can raise its profit from 63 to 80 by switching to a low fare. Low fare is each airline's dominant strategy, and an agreement that can't be enforced won't stop cheating. So both choose low fare and end up with 42 each.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.5 dominant strategy, Nash equilibrium and the cooperative outcome fit the CED. Parts A-D are 2.C readings; E is 2.B."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Keys A-D are correct and unique. Rubric rows rely on rigid keywords: 'regardless' in A1 and 'incentive'/'deviate' in E1. B1 requires only 'low fare' twice and may not enforce both firms' strategies. D1 does not require the yes/no determination. Valid paraphrases could be denied credit."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Payoff matrix data are complete: strategies, payoffs for both players and units. The stem does not explicitly state simultaneous one-shot play, which the blueprint claims is in the description."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "common_errors are empty in all rubric rows, and no explanation covers typical wrong answers, such as picking (high, high) as the Nash equilibrium or confusing the dominant strategy."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Five 1-point read-the-table parts are thin and redundant (A, B, C overlap). Part C is a pure lookup, there is no calculation, and 'calculator allowed' is not meaningful. It is weaker than an official short FRQ."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The keys are correct, but the rubric depends on rigid keywords, there is no common-error coverage, and the five 1-point table-reading parts are too thin and redundant for a short FRQ. The stem should also state simultaneous one-shot play. Fail pending revision."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard 2x2 prisoner's dilemma with a clear dominant strategy (low fare). Parts A-D require comparing payoffs within the matrix to find the dominant strategy, the Nash equilibrium (low, low) with a payoff of 42, and the Pareto-superior outcome (high, high) at (63, 63). Part E asks for the conceptual incentive-to-cheat explanation. Concept depth is introductory, there is no computation beyond comparing numbers, reading load is light, and the single representation is the matrix. This is a core textbook application suited to initial learning rather than a challenging full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_microeconomics-f02-k1",
+  "cellId": "ap_microeconomics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "If B advertises: A gets 93 from not advertising vs 66 from advertising. If B doesn't advertise: A gets 50 vs 32. So not advertising is better for A either way.",
+     "final_answer": "Yes. Firm A's dominant strategy is not advertise.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The game is symmetric, so not advertising is also dominant for Firm B. Both firms playing their dominant strategy gives the equilibrium.",
+     "final_answer": "Nash equilibrium: both firms choose not advertise, with payoffs (50, 50).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Firm A's payoff in the (not advertise, not advertise) cell is 50.",
+     "final_answer": "$50 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "In the (advertise, advertise) cell each firm gets 66, which is more than the 50 each gets in equilibrium.",
+     "final_answer": "Yes. Both firms advertise; Firm A gets $66 million and Firm B gets $66 million.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "If one firm advertises, the other earns more by not advertising (93 instead of 66). So each firm has an incentive to cheat on the deal.",
+     "final_answer": "Each firm has an incentive to deviate. If the other firm advertises, a firm earns $93M by not advertising instead of $66M. Not advertising is dominant, so without an enforceable agreement each firm expects the other to cheat. Both end up not advertising and earn $50M each, which is a prisoner's dilemma.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant strategy, Nash equilibrium and the prisoner's dilemma comparison are core to topic 4.5; per-part skills are appropriate (E is 2.B)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct and unique: not advertise is dominant for both firms, the equilibrium is (50,50), and (66,66) is the mutually better outcome. Rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The payoff matrix data is complete, with strategies, payoffs, units and format. One-shot play is not explicit in the wording but is implied."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ. Rubrics have no common_errors listed, which is minor; the model answers explain the reasoning adequately."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 5-point short FRQ with light load. The calculator is marked allowed although none is needed, which is harmless. The five 1-point parts are somewhat trivial but valid."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. Its matrix is fully specified and its rubrics are consistent. Minor weaknesses are the trivial reading parts and the lack of explicit common errors, so it passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 2x2 game: find the dominant strategy by comparing payoffs under each opponent choice, identify the Nash equilibrium (not advertise, not advertise at 50,50), find the Pareto-superior cell (advertise, advertise at 66,66), and explain the incentive to deviate (93 > 66). Concepts are core to the unit and each part requires only simple comparisons. The matrix has an unusual structure, since the cooperative-looking cell is the advertise/advertise cell and advertising is dominated, which requires careful reading but not extra knowledge. There is no heavy computation or reading load. This is typical full-mock FRQ difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_microeconomics-f02-k2",
+  "cellId": "ap_microeconomics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "If B plays high, A gets 98 from low vs 79 from high. If B plays low, A gets 58 from low vs 45 from high. Low output is better for A either way.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Yes. Low output is Firm A's dominant strategy."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The payoffs are symmetric, so low output is also dominant for Firm B. Both firms playing their dominant strategy gives (low, low).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Both firms choose low output: (Low, Low), with payoffs (58, 58)."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Firm A's payoff in the (Low, Low) cell is 58.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "$58 million"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "In (High, High), each firm gets 79, which is more than the 58 each gets in the Nash equilibrium.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Yes. In (High output, High output), Firm A gets $79 million and Firm B gets $79 million."
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "This is a prisoner's dilemma. Starting from (High, High), each firm can raise its profit from 79 to 98 by switching to low output. Low output is dominant, so neither firm can trust the other to keep the deal unless it is enforced.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Each firm has an incentive to cheat. If the rival produces high output, a firm earns $98M instead of $79M by switching to low output. Since low output is dominant for both, each firm acts in its own interest and they end up at (Low, Low) unless an agreement can be enforced.",
+     "flaw_note": "The strategy labels are economically reversed: normally restricting output is the cooperative move. The answers are still clear from the payoff matrix."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.5 dominant strategy, Nash equilibrium and the prisoner's dilemma fit the target topic. Part E is labeled skill 2.B while the bundle skill is 2.C, which is acceptable because each part is judged on its own skill."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The numeric keys are correct. However, the part B rubric requires only 'low output' twice, and that wording could be matched by a vague answer. The part A key (low output, regardless) is fine. The part E rubric needs only the words 'incentive' and 'deviate', which is a keyword-matching rubric. It also misstates the logic: from (high, high) the deviation is to low output, which the model answer does not make explicit."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The matrix is fully specified. The strategy labels are economically reversed, because in a Cournot-style oligopoly the cooperative or collusive move is low output and the defecting move is high output. Here low output is dominant and high output is the mutually better outcome. This confuses students who know the standard story, and the item also says nothing about collusion or cartels. The simultaneous, one-shot game is stated only in the blueprint, not in the student-facing stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Model answers are provided."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The five 1-point parts are mostly trivial matrix reads. The set is more like five stacked MC items than an AP short FRQ. A calculator is designated as allowed but is never needed. The reversed economic labeling also makes the item unrealistic for the exam."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The arithmetic is right, but the item fails on realism and rubric quality. The payoffs make high output the cooperative outcome and low output the dominant strategy, which is the reverse of the standard oligopoly logic. The simultaneous, one-shot, no-agreement condition is missing from the stem. The rubric relies on keyword matching in parts B and E. The calculator is allowed but never needed, and the parts are trivial matrix reads."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard 2x2 prisoner's dilemma. Students compare payoffs to find dominant strategies (both firms: low output), identify the Nash equilibrium (low, low) at 58 each, find the Pareto-better outcome (high, high) at 79 each, and explain the incentive to deviate without enforceable agreement. The only twist is that the labels are reversed from the usual convention (low output is dominant), which requires reading the matrix carefully but is not conceptually deep. Reading is light, there is no real computation, and each part is a short single-concept step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_microeconomics-f02-k3",
+  "cellId": "ap_microeconomics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "If Y high: low 106 > high 77; if Y low: low 57 > high 44.",
+     "final_answer": "Yes, low fare is X's dominant strategy.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Both firms have low fare as a dominant strategy (the game is symmetric).",
+     "final_answer": "(Low fare, Low fare), with payoffs (57, 57)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "X's payoff in the low/low cell.",
+     "final_answer": "$57 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Each firm earns 77 > 57 in the high/high cell.",
+     "final_answer": "Yes: both charge a high fare, with payoffs ($77 million, $77 million)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Each firm has an incentive to cheat.",
+     "final_answer": "If one firm charges a high fare, the other gains by switching to a low fare (106 > 77). Low fare is dominant for both, so without an enforceable agreement each firm has an incentive to cheat, and they end up at low/low.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, standard prisoner's dilemma short FRQ with five 1-point parts. The keys are unique and verified. Minor issues: the one-shot simultaneous condition is not stated in the stimulus even though the blueprint says it is, and the part E keyword rubric is brittle. Neither justifies rejection.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct and unique. Part E's required keywords \"incentive\" and \"deviate\" are brittle, so synonyms such as \"cheat\" or \"switch\" should be accepted."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The payoff matrix data is complete. The one-shot simultaneous play is not explicitly stated, so it would be better to add that sentence to the description."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Textbook prisoner's dilemma with a 2x2 matrix. Low is a dominant strategy for both firms, giving a Nash equilibrium at (low, low) with payoff 57. The Pareto-superior outcome (high, high) at (77,77) is not reached because each firm has an incentive to defect. The parts are scaffolded one step at a time, with simple integer comparisons, short reading, and no real calculation. It is a routine application of core concepts, not a multi-step or novel-context item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_microeconomics-f02-k4",
+  "cellId": "ap_microeconomics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "If Y high: low 84 > high 63. If Y low: low 39 > high 21. Low fare is dominant.",
+     "final_answer": "Yes, X's dominant strategy is low fare.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Both firms have low fare as their dominant strategy.",
+     "final_answer": "Both choose low fare (X low, Y low), payoffs (39, 39).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Payoff at (low, low).",
+     "final_answer": "$39 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "(high, high) gives 63 each, which is more than 39.",
+     "final_answer": "Yes, both choose high fare: X earns $63 million and Y earns $63 million.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Each firm has an incentive to cheat.",
+     "final_answer": "If one airline sets a high fare, the other can raise its profit from 63 to 84 by switching to a low fare. Low fare is dominant for each, so without a binding agreement each has an incentive to cheat (and fears being undercut, which would leave it with 21). Both end up at low/low.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.5 dominant strategy, Nash equilibrium and the cooperative outcome are all in scope. Parts A-D are interpretation of the matrix (2.C). Part E is labeled 2.B, which is acceptable since each part is judged against its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The payoffs give low fare as the dominant strategy for both firms, so the Nash equilibrium is (low, low) at 39 each. The key for A-D is unique and defensible. The (high, high) outcome at 63/63 is the only mutually better cell. The rubric rows are consistent. Rows are scored on element presence only, which is lenient but workable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The matrix data is complete, with both players, strategies, all four payoff cells, units and format. The one-shot simultaneous assumption is stated in the Part A prompt."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric elements are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item has 5 points as a short FRQ with five 1-point parts, which fits the official grain. The load is light and no calculator is needed, though the designation is \"allowed\", which is harmless. Parts C and D are somewhat trivial reads of the matrix."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clean 5-point game theory short FRQ with a unique key and a complete matrix. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard 2x2 prisoner's dilemma payoff matrix. Each part is a direct read-off or one-step comparison: low fare dominates for X (84>63, 39>21), Nash equilibrium is (low, low) with X earning 39, (high, high) at 63 each is better for both, and the incentive to defect (84>63) explains why it is unstable without enforcement. No real calculation is needed (the calculator is irrelevant), reading load is light, and the single representation (the matrix) is used throughout. The concepts are core to topic 4.5 and are tested at an introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ }
+]

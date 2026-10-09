@@ -1,0 +1,330 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "second_solver",
+ "runId": "lit40-wave1",
+ "taskId": "rev-second_solver-030",
+ "chunkId": "rev-second_solver-030",
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-030.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "opus|fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "boolean",
+    "confidence": "high|medium|low",
+    "note": "풀이 한 줄"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-hard-02-041",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "Who teaches scales on a bridge in February? Budi did, every Thursday of my fourteenth year, marching me from his flat to the stone span over the canal so that, he said, I could hear the note without a room to flatter it. He stopped me at every sour interval. He would tap the parapet twice, and I would begin again while barges slid underneath and my fingers went white. On the last of those Thursdays he set a coin on the stone and walked off without collecting it. Then he was gone: no letter, no forwarding address, eleven years. When he reappeared one spring, he gave no account of where he had been. I was teaching by then, and on a cold Thursday I had brought my own pupil to the same bridge, telling her that a room would only flatter her. Budi stood a little way off and listened through two scales. He did not tap the parapet once. When we finished, he nodded at my pupil, then at me, and went to buy chestnuts.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To recount how a strict teacher shaped the narrator through cold lessons and repeated correction on a bridge",
+    "To show how a reunion reveals that the narrator now passes on a method once endured as a student",
+    "To describe how a former teacher returns after many years away and offers no account of his absence",
+    "To suggest that the narrator's own work as a teacher prompted the former teacher to return after years"
+   ],
+   "recipeBeyondMedium": "요지가 한 사건이 아닌 두 사건의 관계이며, 오답이 모두 지문 사실과 양립하는 부분 요지·인과 뒤집기다"
+  },
+  {
+   "candidateId": "lit40-hard-02-042",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "“Nowhere on this street makes better broth,” I told my sister when she asked why I walked so far for breakfast. For two years I took the same stool at the stall, the one that faced away from the church of my childhood, and Father Bao, who still ate there before morning Mass, took the stool beside the pot. We nodded and did not speak. In March a notice went up on the church gate: he would be sent north after Easter. The following Monday I came twenty minutes earlier than usual. I ordered two bowls, paid for both, and left his with the cook, covered with a saucer to keep the steam in. I did this every morning for three weeks. I did not once go through the gate. On his final morning I turned my stool around, so that it faced the church, and sat there until he came.",
+   "question": "Based on the text, why does the narrator most likely begin arriving early and paying for Bao's bowl?",
+   "options": [
+    "She prefers the stall's broth to the food served elsewhere along the street.",
+    "She wants to honor the departing priest in a form that keeps her outside his services.",
+    "She has grown used to sharing the stall with the priest during her daily breakfast.",
+    "She regrets having stopped attending Mass and hopes to be welcomed back to it."
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고, 표면 명분을 받아들인 학생이 시점 단서에서 걸리도록 설계되어 있으며, 오답이 지문 사실과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-02-043",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "I only need the right angle, Alba told herself each evening as she carried Sunethra's photograph across the road to the soccer field. The picture was older than either of their houses: a dirt pitch, a crooked goal, a thin boy in the goalmouth whom Sunethra had once identified, through the wall they shared, as her husband. Alba would hold the print at arm's length and step left or right until the goalposts lined up. On the second evening she found the spot and marked the near post with a stub of chalk. She came back the next evening anyway, and the nine after that, always just as the streetlights flickered on, the minute Sunethra's bus let out at the corner. Boys shouted for the ball around her. On the twelfth evening Sunethra stopped at the fence with her shopping. Alba did not cross to her. She stood by the chalk mark and held the photograph up, angled toward the road.",
+   "question": "Based on the text, why does Alba most likely keep returning to the field after the second evening?",
+   "options": [
+    "She wants to find the exact place on the field where the photograph was taken.",
+    "She has come to enjoy spending evenings on the field among the boys playing there.",
+    "She hopes to give her neighbor an occasion to view the pictured place alongside her.",
+    "She feels guilty about keeping the photograph and wants to return it without speaking."
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고, 표면 명분을 받아들인 학생이 시점 단서에서 걸리도록 설계되어 있으며, 오답이 지문 사실과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-02-044",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "Years later, the binder on Peitavas Street still remembered the gardener who came in with a ledger wrapped in sacking. Stanislav had kept that book for the old owner of the house on the hill for thirty-one seasons, writing each planting in a narrow hand and heading every page with the owner's initials, as he had been taught. The spine is splitting, he told the binder; it will not last another winter. That was true. He had carried it in the week after the new owner, Marta, signed for the house, and not before, though the spine had been splitting for years. He asked that the old pages be resewn exactly as they were. Then he asked for forty blank leaves to be added behind them. When the book was ready, he did not take it to his shed. He walked it up the hill, set it on Marta's kitchen table, and laid his pencil across the first empty page.",
+   "question": "Based on the text, why does Stanislav most likely have the ledger rebound when he does?",
+   "options": [
+    "He worries that the ledger's damaged spine will not survive the coming winter.",
+    "He wishes to preserve the record of seasons he kept for the house's former owner.",
+    "He fears that the new owner will dismiss him unless he can prove his long service.",
+    "He intends to hand the new owner a way to continue the record kept before her."
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고, 표면 명분을 받아들인 학생이 시점 단서에서 걸리도록 설계되어 있으며, 오답이 지문 사실과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-02-046",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "Once the service ended, Nalani and I walked to our grandfather's radio shop because neither of us had a key to anywhere else. Same bell over the door. Same smell of solder and dust. Same calendar, stopped at a March four years gone. Nalani tested the counter with one finger and reported that it was sticky, which it had always been. I reported that the clock was slow, which it had also always been. We took turns naming things. At the back bench sat a transistor set with its case open, a tag in his handwriting tied to the dial: Koa, Tuesday. I did not read the rest of the tag. Nalani found the soldering iron and plugged it in from habit, then stood holding it while it warmed. After a while she reached over, unplugged it, and coiled the cord around her hand three times before setting it in its tray.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Bantering and fond toward the familiar clutter of the old shop",
+    "Bantering and quietly grieving toward the man who kept the shop",
+    "Bantering and quietly grieving toward a repair left unfinished for Koa",
+    "Bantering and quietly grieving toward a vanishing way of island life"
+   ],
+   "recipeBeyondMedium": "겉 어조만 읽으면 오답에 걸리고 속 어조의 원인까지 맞혀야 하며, 네 선택지 구조가 동일해 형식 단서가 없다"
+  },
+  {
+   "candidateId": "lit40-hard-02-047",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "“Take the clock, and I shall have the chairs,” Kwesi said, as though we were dealing cards. We had taken two cells in the monastery guesthouse above Taipei to settle our mother's house on paper, the brothers having lent us their long table and a pot of tea that never seemed to cool. Kwesi kept the list. I kept the pen. Rugs, mine; lamps, his; the copper kettle, to be sold. We went down the page at a good pace, and the bell for vespers rang twice before we reached the last line, which read only: erhu, to Meilin. I had never played it. Kwesi had played it every evening of our childhood, standing at the window while I did my sums. He passed me the list without remark. That night I carried the instrument along the cloister and set it, bow and all, outside his door.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Brisk and orderly toward the practical business of dividing an estate",
+    "Brisk and quietly guilty toward a mother who had favored the narrator",
+    "Brisk and quietly generous toward a twin passed over by their mother",
+    "Brisk and quietly generous toward relatives on both sides of the estate"
+   ],
+   "recipeBeyondMedium": "겉 어조만 읽으면 오답에 걸리고 속 어조의 원인까지 맞혀야 하며, 네 선택지 구조가 동일해 형식 단서가 없다"
+  },
+  {
+   "candidateId": "lit40-hard-02-048",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "Three rules governed the reading room on the second floor: no food, no phones, no voices above a whisper. Jonas kept all three, and when he needed Yusuf's attention he touched the edge of the table and murmured Ustaz, as he had since their first rehearsal eight years before, though Yusuf was barely older. They came most afternoons to copy out parts, the oud case propped between their chairs. That Thursday an envelope slid from the case's lid pocket: a festival in Lyon, addressed to Yusuf alone, offering a solo evening and a fee for one. Jonas read it, folded it along its creases, and returned it to the pocket. He said nothing. At four, the hour they usually packed up together, he copied out his own part of their new piece twice, left one copy on Yusuf's side of the table with the tempo markings filled in, and walked down the stairs ahead of him.",
+   "question": "Based on the text, which choice best describes the relationship between Jonas and Yusuf?",
+   "options": [
+    "Jonas is a pupil who treats Yusuf with the respect owed to a teacher.",
+    "Jonas and Yusuf are colleagues whose shared routine keeps them working side by side.",
+    "Jonas relies on Yusuf, who has been quietly securing chances for both of them.",
+    "Jonas is a partner prepared to absorb a loss so that Yusuf can advance."
+   ],
+   "recipeBeyondMedium": "관계의 방향(누가 누구에게 의존·양보하는가)을 읽어야 하고, 호칭이 주는 표면 관계가 가장 강한 오답으로 작동하며, 오답이 지문과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-02-049",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "A wall telephone hung beside the blackboard in Room 4, beige and seldom used. On her first morning Mira wrote her name on the board, and Hassan, from the back row, copied it into his notebook as Frau Lehrerin and did not look up again. He answered when called on. He called her Frau Lehrerin when he answered. In the second week a form from the immigration office lay on her desk; in the box marked contact number, the school's extension had been written in her handwriting. After that, Mira took her lunch at the desk instead of in the staff room. On Friday she missed the faculty meeting and received a note about it from the director, which she folded into her grammar book. When the telephone finally rang at ten past four, she lifted the receiver, listened, and held it out across the empty front row toward Hassan without saying a word.",
+   "question": "Based on the text, which choice best describes the relationship between Mira and Hassan?",
+   "options": [
+    "Mira is a teacher who has taken on Hassan's wait at some cost to herself.",
+    "Mira is a teacher whom Hassan addresses with formal and distant respect in class.",
+    "Hassan is a student who has been shielding his new teacher from the director.",
+    "Mira is a teacher whose new class has kept her too busy for the staff room."
+   ],
+   "recipeBeyondMedium": "관계의 방향(누가 누구에게 의존·양보하는가)을 읽어야 하고, 호칭이 주는 표면 관계가 가장 강한 오답으로 작동하며, 오답이 지문과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-02-050",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "Saturdays belong to the market. Renata pushes the wheelchair between the stalls, and her mother, who has called her señora since the wedding, points with her cane at what she will not eat. Not the yuca; it is for other people's kitchens. Not the black beans; her own mother made lentils. Renata pays for both anyway and hangs the bags on the chair's handles. At home there is one table and two ways of setting it, and on alternate Sundays the lentils win. This week the coin purse her mother keeps inside her sleeve is lighter by the price of a pound of beans, and the bag Renata finds on the counter, knotted the old way, was not bought by Renata. Her mother says nothing about it. At dinner she lays the lentil spoon in the drawer and sets the ladle beside Renata's pot, handle turned toward her own plate.",
+   "question": "Based on the text, which choice best describes the relationship between Renata and her mother?",
+   "options": [
+    "The mother is a parent who keeps a formal distance from her married daughter.",
+    "The mother is a parent who quietly yields her own custom to make room for Renata's.",
+    "Renata is a caregiver who has been setting aside her own customs for her mother.",
+    "Renata is a daughter who shops for her mother each week at a crowded market."
+   ],
+   "recipeBeyondMedium": "관계의 방향(누가 누구에게 의존·양보하는가)을 읽어야 하고, 호칭이 주는 표면 관계가 가장 강한 오답으로 작동하며, 오답이 지문과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-02-051",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "Cloth tape, yellowed and marked in both inches and Chinese cun, hung around my mother's neck from the week we rented the farmhouse west of Shanghai. Yuying measured everything herself: the parlor, the courtyard, the width of the door through which my bridal chair would have to pass. When I offered to hold the other end, she pinned it under her shoe instead. We expected the groom's aunt to arrive with opinions, and in the second week she did, stepping down from a cart with lists of her own. That afternoon in the courtyard my mother unwound the tape and, without a word, held out the brass end to her. The two of them walked the length of the wall together, calling numbers to each other. On the morning the aunt left, my mother wound the tape into a tight coil, tied it with red thread, and set it in the older woman's hand.",
+   "question": "In the text, the tape measure most likely represents",
+   "options": [
+    "the careful planning needed to fit a wedding into a small rented house.",
+    "the mother's wish to keep each decision about the wedding in her own hands.",
+    "the mother's control of the wedding, which she comes to place in another's keeping.",
+    "the tension between two older women that is mended as the wedding nears."
+   ],
+   "recipeBeyondMedium": "사물이 두 맥락에서 다른 의미를 띠고, 가장 강한 오답이 인물 관계로 읽은 그럴듯한 상징 해석이다"
+  },
+  {
+   "candidateId": "lit40-hard-02-052",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "Diesel and wet wool, and under them the faint smell of tea from Kenji's flask: the last bus out of Asahikawa always smelled the same in January. Hana boarded two stops after him, as she had every night that week, carrying the same wrapped cup. She had bought it at his shop in the autumn. There was a hairline crack along its rim, she said, and she wished to exchange it. He said there was no crack. She said there had been one since the day she bought it. Neither mentioned the shop's other business, the debt her brother had left on Kenji's books the year before. On the fourth night, near Biei, Kenji took the cup from her, unwrapped it, and tipped it under the dim ceiling bulb until the line showed. He did not hand it back. He unscrewed his flask, filled the cracked cup to the brim, and passed it across the aisle to her.",
+   "question": "In the text, the cracked cup most likely represents",
+   "options": [
+    "a faulty purchase that the customer wants the shopkeeper to exchange for a new one.",
+    "the customer's insistence on being proven right in a minor dispute over goods.",
+    "a friendship between the two that the brother's debt has damaged past repair.",
+    "an old harm that the shopkeeper admits and makes room for instead of fixing."
+   ],
+   "recipeBeyondMedium": "사물이 두 맥락에서 다른 의미를 띠고, 가장 강한 오답이 인물 관계로 읽은 그럴듯한 상징 해석이다"
+  },
+  {
+   "candidateId": "lit40-hard-02-053",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "What is a reputation made of, if not of things nobody sees? For six years Ngozi rode Dewi's omnibus from the Marina to her shop, and for six years she signalled her stop by rapping a brass thimble twice against the rail. All Lagos knew her name for the coats she made for merchants' weddings. In the wet season Dewi carried a torn sailcloth jacket to the shop and was sent through to the back room to wait. There, under a lamp, lay a heap of garments no merchant would wear: patched shirts, a porter's trousers, a child's frock, each pinned with a scrap of paper bearing no price. A second thimble sat on the bench, worn so thin at the crown that light came through it. The next morning, when Ngozi raised her hand at her stop, Dewi had already drawn up the horses, and she rode the last stretch with the thimble closed in her fist.",
+   "question": "In the text, the thimble most likely represents",
+   "options": [
+    "the hidden, unpaid work that lies beneath the tailor's public standing.",
+    "the tailor's habit of making her wishes known to those who serve her.",
+    "the bond between driver and passenger that grows strained and then recovers.",
+    "the tool a tailor relies on to protect her fingers while she sews."
+   ],
+   "recipeBeyondMedium": "사물이 두 맥락에서 다른 의미를 띠고, 가장 강한 오답이 인물 관계로 읽은 그럴듯한 상징 해석이다"
+  },
+  {
+   "candidateId": "lit40-hard-02-054",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Sit before you fall, Shirin told him, and Farhad sat, his bandaged hand held away from his coat. Three winters earlier she had carried the post across the pass in his place while he lay with fever, and had lost two toes to the cold. Now it was his hand that had paid, bringing her brother down from the ridge. In the hospital waiting room he kept counting on his good fingers, under his breath, and each time he reached a sum he began again. Between them the account had become a column of figures written on river ice, and neither would look at it directly. A nurse called a name that was not theirs. Shirin bent and retied her boot, the one with the stuffed toe, and pulled the lace tighter than it needed to be.",
+   "question": "As used in the text, the phrase “a column of figures written on river ice” most nearly suggests",
+   "options": [
+    "a tally of debts between them that will not settle into a final sum.",
+    "a coldness between them that has grown out of the harsh winters they shared.",
+    "an account between them so fragile that a single word might break it apart.",
+    "a written record of the winter journeys each of them made across the pass."
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  },
+  {
+   "candidateId": "lit40-hard-02-055",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "When the minibus to Entoto is late, which is most mornings, the queue at the stop leans into the wind like a row of fence posts. Baraka, whose father owns our building, waits at the front with a plastic jug of water he does not drink. He has done this since my mother's knee gave out. Each morning he hands the jug to her at the corner and walks on before she can thank him, and each month the rent notice under our door arrives a week later than the last. My cousin, visiting from Durban, watched this once and said nothing. That night, while we washed up, she called Baraka the shim under our table, and my mother laughed and said the table was perfectly level. In the morning the table rocked, slightly, when I set down the bread.",
+   "question": "As used in the text, the phrase “the shim under our table” most nearly suggests",
+   "options": [
+    "a minor helper whose part in the household is small and easily replaced",
+    "a hidden support that keeps the household steady without being noticed",
+    "a source of strain the family must bear under the landlord's pressure",
+    "a carpenter's wedge used to level the family's uneven kitchen table"
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  },
+  {
+   "candidateId": "lit40-hard-02-056",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Reels arrive on Marlon's bicycle each Thursday,\ntins strapped behind him like stacked moons.\nHe climbs the iron stairs to my booth\nand stays to watch me thread the gate.\nMy husband ran this lamp for thirty years;\nthe owners still send flowers on his birthday\nand a card that says the town is grateful.\nNo envelope has come with either.\nThree nights a week I splice what breaks,\npatch the sprockets, trim the burnt frames\nso no one in the dark below can tell.\nThe audience applauds the actors.\nMarlon applauds the leader running out.\nI am the seam in a borrowed coat.\nDownstairs the ushers sweep the aisles;\nthe owners count the house.\nAt midnight Marlon counts my coins for the bus\nand slips his own tip into the pile,\nthen walks his bicycle beside me down the hill.",
+   "question": "As used in the text, the phrase “the seam in a borrowed coat” most nearly suggests",
+   "options": [
+    "a small role that matters little to the films being shown",
+    "a link to her husband that she keeps by doing his job",
+    "work that holds each showing together while others receive the praise",
+    "a stitched repair she once made to a coat she borrowed"
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  },
+  {
+   "candidateId": "lit40-hard-02-057",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Above the warehouses of the Speicherstadt, on a roof reached by forty-one steps, the washing line of Remedios and Wolfram has hung for nineteen years. He splices it fresh each spring, as sailmakers once did, tucking the strands under and over while she holds the far end and watches his hands. Neither of them says much. He does not explain the tucks; she does not ask. On ordinary Mondays she pegs out sheets, and he takes his shirts down before dark. Their friendship is a line strung with pegs and little else, swaying between two chimneys in the harbor wind. This spring his fingers were slow, and he stopped halfway. Remedios took the loose strands from him, tucked the next three herself, crookedly, and he let the crooked ones stand.",
+   "question": "As used in the text, the phrase “a line strung with pegs and little else” most nearly suggests",
+   "options": [
+    "a friendship that has grown empty, with little left between them to share",
+    "a friendship that sways in the harbor wind and might give way before long",
+    "a shared washing line that the two have used on many ordinary Mondays",
+    "a friendship kept strung and ready with few words hung upon it"
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  },
+  {
+   "candidateId": "lit40-hard-02-058",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Years later the bread smell will still come back to you among the looms. Neema and Yiannis had baked on opposite corners of Long Street for twenty years, and both had learned the trade as children in the old bakery house, kneading at the same long table. When the weaving cooperative bought the house and emptied it for looms, both of them came on the last day. You were the girl sent to sweep. They walked the bare rooms twice without speaking to each other. The only thing left was the proving table, scarred by two generations of knives, too heavy to carry and too old to sell. Neema ran her palm along it. Yiannis did the same from the other end. To you, the table was a tide line. When the movers came, the two bakers lifted it together and set it down in the street between their shops.",
+   "question": "As used in the text, the phrase “a tide line” most nearly suggests",
+   "options": [
+    "a shared mark recording where the two bakers' early lives once overlapped",
+    "a boundary dividing the two bakers, just as their shops divide the street",
+    "a sign that the bakers' rivalry rises and falls in a regular rhythm",
+    "a line of stains left on old wood by many years of baking"
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  },
+  {
+   "candidateId": "lit40-hard-02-059",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "Wet clay and kiln dust: the studio near the wharf smelled the same the morning after the newspaper ran its photograph of their collapsed display at the harbor fair. Meera, the elder, had always checked every shelf twice before a show and every glaze recipe three times, and she had checked the fair stand too; the trestle had simply given way. Annika arrived late with the paper folded under her arm. All morning customers came in, looked, and left. Meera stayed at the wheel, and her manner toward the shop's few visitors was ______. She greeted each one by name, answered what was asked, and offered nothing more, and when a child knocked a cup from the low shelf, she swept up the pieces herself before anyone could apologize.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "anxiously watchful",
+    "carefully composed",
+    "coolly distant",
+    "openly embarrassed"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다"
+  },
+  {
+   "candidateId": "lit40-hard-02-060",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "Four hundred sheets an hour was the rule of the night shift, and Rukhsana kept to it as she kept to everything, counting under her breath and never stopping the press to talk. She and I had inherited her uncle's share in the shop between us, and a buyer from Bombay had offered to take it off our hands. For a week I spoke of nothing else. She inked the forme, pulled the lever, set the sheet aside. At last, past midnight, I asked her outright whether we should sell. Her reply was ______. She said the offer was a fair one. Then she counted the stack she had just pulled and began another, and in the morning she left the buyer's letter on my desk with its corners squared, unsigned.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "briskly efficient",
+    "warmly approving",
+    "guardedly noncommittal",
+    "sharply dismissive"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다"
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자(두 번째 풀이자)다. 정답 표시가 없다. 직접 풀고 정답 외에 방어 가능한 선택지가 있는지 판정한다. 다른 풀이자의 답은 모른다.\n청크 rev-second_solver-030 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-030.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"opus|fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"boolean\",\"confidence\":\"high|medium|low\",\"note\":\"풀이 한 줄\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-hard-02-041 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nWho teaches scales on a bridge in February? Budi did, every Thursday of my fourteenth year, marching me from his flat to the stone span over the canal so that, he said, I could hear the note without a room to flatter it. He stopped me at every sour interval. He would tap the parapet twice, and I would begin again while barges slid underneath and my fingers went white. On the last of those Thursdays he set a coin on the stone and walked off without collecting it. Then he was gone: no letter, no forwarding address, eleven years. When he reappeared one spring, he gave no account of where he had been. I was teaching by then, and on a cold Thursday I had brought my own pupil to the same bridge, telling her that a room would only flatter her. Budi stood a little way off and listened through two scales. He did not tap the parapet once. When we finished, he nodded at my pupil, then at me, and went to buy chestnuts.\n\n[질문] Which choice best states the main purpose of the text?\nA) To recount how a strict teacher shaped the narrator through cold lessons and repeated correction on a bridge\nB) To show how a reunion reveals that the narrator now passes on a method once endured as a student\nC) To describe how a former teacher returns after many years away and offers no account of his absence\nD) To suggest that the narrator's own work as a teacher prompted the former teacher to return after years\n### lit40-hard-02-042 — skill inferences · 유형 character_motivation\n[지문]\n“Nowhere on this street makes better broth,” I told my sister when she asked why I walked so far for breakfast. For two years I took the same stool at the stall, the one that faced away from the church of my childhood, and Father Bao, who still ate there before morning Mass, took the stool beside the pot. We nodded and did not speak. In March a notice went up on the church gate: he would be sent north after Easter. The following Monday I came twenty minutes earlier than usual. I ordered two bowls, paid for both, and left his with the cook, covered with a saucer to keep the steam in. I did this every morning for three weeks. I did not once go through the gate. On his final morning I turned my stool around, so that it faced the church, and sat there until he came.\n\n[질문] Based on the text, why does the narrator most likely begin arriving early and paying for Bao's bowl?\nA) She prefers the stall's broth to the food served elsewhere along the street.\nB) She wants to honor the departing priest in a form that keeps her outside his services.\nC) She has grown used to sharing the stall with the priest during her daily breakfast.\nD) She regrets having stopped attending Mass and hopes to be welcomed back to it.\n### lit40-hard-02-043 — skill inferences · 유형 character_motivation\n[지문]\nI only need the right angle, Alba told herself each evening as she carried Sunethra's photograph across the road to the soccer field. The picture was older than either of their houses: a dirt pitch, a crooked goal, a thin boy in the goalmouth whom Sunethra had once identified, through the wall they shared, as her husband. Alba would hold the print at arm's length and step left or right until the goalposts lined up. On the second evening she found the spot and marked the near post with a stub of chalk. She came back the next evening anyway, and the nine after that, always just as the streetlights flickered on, the minute Sunethra's bus let out at the corner. Boys shouted for the ball around her. On the twelfth evening Sunethra stopped at the fence with her shopping. Alba did not cross to her. She stood by the chalk mark and held the photograph up, angled toward the road.\n\n[질문] Based on the text, why does Alba most likely keep returning to the field after the second evening?\nA) She wants to find the exact place on the field where the photograph was taken.\nB) She has come to enjoy spending evenings on the field among the boys playing there.\nC) She hopes to give her neighbor an occasion to view the pictured place alongside her.\nD) She feels guilty about keeping the photograph and wants to return it without speaking.\n### lit40-hard-02-044 — skill inferences · 유형 character_motivation\n[지문]\nYears later, the binder on Peitavas Street still remembered the gardener who came in with a ledger wrapped in sacking. Stanislav had kept that book for the old owner of the house on the hill for thirty-one seasons, writing each planting in a narrow hand and heading every page with the owner's initials, as he had been taught. The spine is splitting, he told the binder; it will not last another winter. That was true. He had carried it in the week after the new owner, Marta, signed for the house, and not before, though the spine had been splitting for years. He asked that the old pages be resewn exactly as they were. Then he asked for forty blank leaves to be added behind them. When the book was ready, he did not take it to his shed. He walked it up the hill, set it on Marta's kitchen table, and laid his pencil across the first empty page.\n\n[질문] Based on the text, why does Stanislav most likely have the ledger rebound when he does?\nA) He worries that the ledger's damaged spine will not survive the coming winter.\nB) He wishes to preserve the record of seasons he kept for the house's former owner.\nC) He fears that the new owner will dismiss him unless he can prove his long service.\nD) He intends to hand the new owner a way to continue the record kept before her.\n### lit40-hard-02-046 — skill inferences · 유형 tone_or_mood\n[지문]\nOnce the service ended, Nalani and I walked to our grandfather's radio shop because neither of us had a key to anywhere else. Same bell over the door. Same smell of solder and dust. Same calendar, stopped at a March four years gone. Nalani tested the counter with one finger and reported that it was sticky, which it had always been. I reported that the clock was slow, which it had also always been. We took turns naming things. At the back bench sat a transistor set with its case open, a tag in his handwriting tied to the dial: Koa, Tuesday. I did not read the rest of the tag. Nalani found the soldering iron and plugged it in from habit, then stood holding it while it warmed. After a while she reached over, unplugged it, and coiled the cord around her hand three times before setting it in its tray.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Bantering and fond toward the familiar clutter of the old shop\nB) Bantering and quietly grieving toward the man who kept the shop\nC) Bantering and quietly grieving toward a repair left unfinished for Koa\nD) Bantering and quietly grieving toward a vanishing way of island life\n### lit40-hard-02-047 — skill inferences · 유형 tone_or_mood\n[지문]\n“Take the clock, and I shall have the chairs,” Kwesi said, as though we were dealing cards. We had taken two cells in the monastery guesthouse above Taipei to settle our mother's house on paper, the brothers having lent us their long table and a pot of tea that never seemed to cool. Kwesi kept the list. I kept the pen. Rugs, mine; lamps, his; the copper kettle, to be sold. We went down the page at a good pace, and the bell for vespers rang twice before we reached the last line, which read only: erhu, to Meilin. I had never played it. Kwesi had played it every evening of our childhood, standing at the window while I did my sums. He passed me the list without remark. That night I carried the instrument along the cloister and set it, bow and all, outside his door.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Brisk and orderly toward the practical business of dividing an estate\nB) Brisk and quietly guilty toward a mother who had favored the narrator\nC) Brisk and quietly generous toward a twin passed over by their mother\nD) Brisk and quietly generous toward relatives on both sides of the estate\n### lit40-hard-02-048 — skill inferences · 유형 relationship_between_characters\n[지문]\nThree rules governed the reading room on the second floor: no food, no phones, no voices above a whisper. Jonas kept all three, and when he needed Yusuf's attention he touched the edge of the table and murmured Ustaz, as he had since their first rehearsal eight years before, though Yusuf was barely older. They came most afternoons to copy out parts, the oud case propped between their chairs. That Thursday an envelope slid from the case's lid pocket: a festival in Lyon, addressed to Yusuf alone, offering a solo evening and a fee for one. Jonas read it, folded it along its creases, and returned it to the pocket. He said nothing. At four, the hour they usually packed up together, he copied out his own part of their new piece twice, left one copy on Yusuf's side of the table with the tempo markings filled in, and walked down the stairs ahead of him.\n\n[질문] Based on the text, which choice best describes the relationship between Jonas and Yusuf?\nA) Jonas is a pupil who treats Yusuf with the respect owed to a teacher.\nB) Jonas and Yusuf are colleagues whose shared routine keeps them working side by side.\nC) Jonas relies on Yusuf, who has been quietly securing chances for both of them.\nD) Jonas is a partner prepared to absorb a loss so that Yusuf can advance.\n### lit40-hard-02-049 — skill inferences · 유형 relationship_between_characters\n[지문]\nA wall telephone hung beside the blackboard in Room 4, beige and seldom used. On her first morning Mira wrote her name on the board, and Hassan, from the back row, copied it into his notebook as Frau Lehrerin and did not look up again. He answered when called on. He called her Frau Lehrerin when he answered. In the second week a form from the immigration office lay on her desk; in the box marked contact number, the school's extension had been written in her handwriting. After that, Mira took her lunch at the desk instead of in the staff room. On Friday she missed the faculty meeting and received a note about it from the director, which she folded into her grammar book. When the telephone finally rang at ten past four, she lifted the receiver, listened, and held it out across the empty front row toward Hassan without saying a word.\n\n[질문] Based on the text, which choice best describes the relationship between Mira and Hassan?\nA) Mira is a teacher who has taken on Hassan's wait at some cost to herself.\nB) Mira is a teacher whom Hassan addresses with formal and distant respect in class.\nC) Hassan is a student who has been shielding his new teacher from the director.\nD) Mira is a teacher whose new class has kept her too busy for the staff room.\n### lit40-hard-02-050 — skill inferences · 유형 relationship_between_characters\n[지문]\nSaturdays belong to the market. Renata pushes the wheelchair between the stalls, and her mother, who has called her señora since the wedding, points with her cane at what she will not eat. Not the yuca; it is for other people's kitchens. Not the black beans; her own mother made lentils. Renata pays for both anyway and hangs the bags on the chair's handles. At home there is one table and two ways of setting it, and on alternate Sundays the lentils win. This week the coin purse her mother keeps inside her sleeve is lighter by the price of a pound of beans, and the bag Renata finds on the counter, knotted the old way, was not bought by Renata. Her mother says nothing about it. At dinner she lays the lentil spoon in the drawer and sets the ladle beside Renata's pot, handle turned toward her own plate.\n\n[질문] Based on the text, which choice best describes the relationship between Renata and her mother?\nA) The mother is a parent who keeps a formal distance from her married daughter.\nB) The mother is a parent who quietly yields her own custom to make room for Renata's.\nC) Renata is a caregiver who has been setting aside her own customs for her mother.\nD) Renata is a daughter who shops for her mother each week at a crowded market.\n### lit40-hard-02-051 — skill inferences · 유형 symbolism\n[지문]\nCloth tape, yellowed and marked in both inches and Chinese cun, hung around my mother's neck from the week we rented the farmhouse west of Shanghai. Yuying measured everything herself: the parlor, the courtyard, the width of the door through which my bridal chair would have to pass. When I offered to hold the other end, she pinned it under her shoe instead. We expected the groom's aunt to arrive with opinions, and in the second week she did, stepping down from a cart with lists of her own. That afternoon in the courtyard my mother unwound the tape and, without a word, held out the brass end to her. The two of them walked the length of the wall together, calling numbers to each other. On the morning the aunt left, my mother wound the tape into a tight coil, tied it with red thread, and set it in the older woman's hand.\n\n[질문] In the text, the tape measure most likely represents\nA) the careful planning needed to fit a wedding into a small rented house.\nB) the mother's wish to keep each decision about the wedding in her own hands.\nC) the mother's control of the wedding, which she comes to place in another's keeping.\nD) the tension between two older women that is mended as the wedding nears.\n### lit40-hard-02-052 — skill inferences · 유형 symbolism\n[지문]\nDiesel and wet wool, and under them the faint smell of tea from Kenji's flask: the last bus out of Asahikawa always smelled the same in January. Hana boarded two stops after him, as she had every night that week, carrying the same wrapped cup. She had bought it at his shop in the autumn. There was a hairline crack along its rim, she said, and she wished to exchange it. He said there was no crack. She said there had been one since the day she bought it. Neither mentioned the shop's other business, the debt her brother had left on Kenji's books the year before. On the fourth night, near Biei, Kenji took the cup from her, unwrapped it, and tipped it under the dim ceiling bulb until the line showed. He did not hand it back. He unscrewed his flask, filled the cracked cup to the brim, and passed it across the aisle to her.\n\n[질문] In the text, the cracked cup most likely represents\nA) a faulty purchase that the customer wants the shopkeeper to exchange for a new one.\nB) the customer's insistence on being proven right in a minor dispute over goods.\nC) a friendship between the two that the brother's debt has damaged past repair.\nD) an old harm that the shopkeeper admits and makes room for instead of fixing.\n### lit40-hard-02-053 — skill inferences · 유형 symbolism\n[지문]\nWhat is a reputation made of, if not of things nobody sees? For six years Ngozi rode Dewi's omnibus from the Marina to her shop, and for six years she signalled her stop by rapping a brass thimble twice against the rail. All Lagos knew her name for the coats she made for merchants' weddings. In the wet season Dewi carried a torn sailcloth jacket to the shop and was sent through to the back room to wait. There, under a lamp, lay a heap of garments no merchant would wear: patched shirts, a porter's trousers, a child's frock, each pinned with a scrap of paper bearing no price. A second thimble sat on the bench, worn so thin at the crown that light came through it. The next morning, when Ngozi raised her hand at her stop, Dewi had already drawn up the horses, and she rode the last stretch with the thimble closed in her fist.\n\n[질문] In the text, the thimble most likely represents\nA) the hidden, unpaid work that lies beneath the tailor's public standing.\nB) the tailor's habit of making her wishes known to those who serve her.\nC) the bond between driver and passenger that grows strained and then recovers.\nD) the tool a tailor relies on to protect her fingers while she sews.\n### lit40-hard-02-054 — skill words_in_context · 유형 figurative_language\n[지문]\nSit before you fall, Shirin told him, and Farhad sat, his bandaged hand held away from his coat. Three winters earlier she had carried the post across the pass in his place while he lay with fever, and had lost two toes to the cold. Now it was his hand that had paid, bringing her brother down from the ridge. In the hospital waiting room he kept counting on his good fingers, under his breath, and each time he reached a sum he began again. Between them the account had become a column of figures written on river ice, and neither would look at it directly. A nurse called a name that was not theirs. Shirin bent and retied her boot, the one with the stuffed toe, and pulled the lace tighter than it needed to be.\n\n[질문] As used in the text, the phrase “a column of figures written on river ice” most nearly suggests\nA) a tally of debts between them that will not settle into a final sum.\nB) a coldness between them that has grown out of the harsh winters they shared.\nC) an account between them so fragile that a single word might break it apart.\nD) a written record of the winter journeys each of them made across the pass.\n### lit40-hard-02-055 — skill words_in_context · 유형 figurative_language\n[지문]\nWhen the minibus to Entoto is late, which is most mornings, the queue at the stop leans into the wind like a row of fence posts. Baraka, whose father owns our building, waits at the front with a plastic jug of water he does not drink. He has done this since my mother's knee gave out. Each morning he hands the jug to her at the corner and walks on before she can thank him, and each month the rent notice under our door arrives a week later than the last. My cousin, visiting from Durban, watched this once and said nothing. That night, while we washed up, she called Baraka the shim under our table, and my mother laughed and said the table was perfectly level. In the morning the table rocked, slightly, when I set down the bread.\n\n[질문] As used in the text, the phrase “the shim under our table” most nearly suggests\nA) a minor helper whose part in the household is small and easily replaced\nB) a hidden support that keeps the household steady without being noticed\nC) a source of strain the family must bear under the landlord's pressure\nD) a carpenter's wedge used to level the family's uneven kitchen table\n### lit40-hard-02-056 — skill words_in_context · 유형 figurative_language\n[지문]\nReels arrive on Marlon's bicycle each Thursday,\ntins strapped behind him like stacked moons.\nHe climbs the iron stairs to my booth\nand stays to watch me thread the gate.\nMy husband ran this lamp for thirty years;\nthe owners still send flowers on his birthday\nand a card that says the town is grateful.\nNo envelope has come with either.\nThree nights a week I splice what breaks,\npatch the sprockets, trim the burnt frames\nso no one in the dark below can tell.\nThe audience applauds the actors.\nMarlon applauds the leader running out.\nI am the seam in a borrowed coat.\nDownstairs the ushers sweep the aisles;\nthe owners count the house.\nAt midnight Marlon counts my coins for the bus\nand slips his own tip into the pile,\nthen walks his bicycle beside me down the hill.\n\n[질문] As used in the text, the phrase “the seam in a borrowed coat” most nearly suggests\nA) a small role that matters little to the films being shown\nB) a link to her husband that she keeps by doing his job\nC) work that holds each showing together while others receive the praise\nD) a stitched repair she once made to a coat she borrowed\n### lit40-hard-02-057 — skill words_in_context · 유형 figurative_language\n[지문]\nAbove the warehouses of the Speicherstadt, on a roof reached by forty-one steps, the washing line of Remedios and Wolfram has hung for nineteen years. He splices it fresh each spring, as sailmakers once did, tucking the strands under and over while she holds the far end and watches his hands. Neither of them says much. He does not explain the tucks; she does not ask. On ordinary Mondays she pegs out sheets, and he takes his shirts down before dark. Their friendship is a line strung with pegs and little else, swaying between two chimneys in the harbor wind. This spring his fingers were slow, and he stopped halfway. Remedios took the loose strands from him, tucked the next three herself, crookedly, and he let the crooked ones stand.\n\n[질문] As used in the text, the phrase “a line strung with pegs and little else” most nearly suggests\nA) a friendship that has grown empty, with little left between them to share\nB) a friendship that sways in the harbor wind and might give way before long\nC) a shared washing line that the two have used on many ordinary Mondays\nD) a friendship kept strung and ready with few words hung upon it\n### lit40-hard-02-058 — skill words_in_context · 유형 figurative_language\n[지문]\nYears later the bread smell will still come back to you among the looms. Neema and Yiannis had baked on opposite corners of Long Street for twenty years, and both had learned the trade as children in the old bakery house, kneading at the same long table. When the weaving cooperative bought the house and emptied it for looms, both of them came on the last day. You were the girl sent to sweep. They walked the bare rooms twice without speaking to each other. The only thing left was the proving table, scarred by two generations of knives, too heavy to carry and too old to sell. Neema ran her palm along it. Yiannis did the same from the other end. To you, the table was a tide line. When the movers came, the two bakers lifted it together and set it down in the street between their shops.\n\n[질문] As used in the text, the phrase “a tide line” most nearly suggests\nA) a shared mark recording where the two bakers' early lives once overlapped\nB) a boundary dividing the two bakers, just as their shops divide the street\nC) a sign that the bakers' rivalry rises and falls in a regular rhythm\nD) a line of stains left on old wood by many years of baking\n### lit40-hard-02-059 — skill words_in_context · 유형 word_in_context\n[지문]\nWet clay and kiln dust: the studio near the wharf smelled the same the morning after the newspaper ran its photograph of their collapsed display at the harbor fair. Meera, the elder, had always checked every shelf twice before a show and every glaze recipe three times, and she had checked the fair stand too; the trestle had simply given way. Annika arrived late with the paper folded under her arm. All morning customers came in, looked, and left. Meera stayed at the wheel, and her manner toward the shop's few visitors was ______. She greeted each one by name, answered what was asked, and offered nothing more, and when a child knocked a cup from the low shelf, she swept up the pieces herself before anyone could apologize.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) anxiously watchful\nB) carefully composed\nC) coolly distant\nD) openly embarrassed\n### lit40-hard-02-060 — skill words_in_context · 유형 word_in_context\n[지문]\nFour hundred sheets an hour was the rule of the night shift, and Rukhsana kept to it as she kept to everything, counting under her breath and never stopping the press to talk. She and I had inherited her uncle's share in the shop between us, and a buyer from Bombay had offered to take it off our hands. For a week I spoke of nothing else. She inked the forme, pulled the lever, set the sheet aside. At last, past midnight, I asked her outright whether we should sell. Her reply was ______. She said the offer was a fair one. Then she counted the stack she had just pulled and began another, and in the morning she left the buyer's letter on my desk with its corners squared, unsigned.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) briskly efficient\nB) warmly approving\nC) guardedly noncommittal\nD) sharply dismissive"
+}

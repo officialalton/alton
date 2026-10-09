@@ -1,0 +1,100 @@
+{
+ "itemId": "linear_equations_one_var.literal_rearrange.PG.P",
+ "generatedAt": "2026-10-07T05:02:00.978Z",
+ "codeHash": "b205e3b57dfcd8d9076561fee57504f54cc65844de90d89c6bbdebf069534f92",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_equations_one_var.literal_rearrange.PG.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_equations_one_var.literal_rearrange.PG.P.png",
+   "mobileFile": "linear_equations_one_var.literal_rearrange.PG.P.m375.png",
+   "archetypeId": "le.literal_rearrange.PG.P.compose_kind",
+   "seed": 11,
+   "signature": "polygon:rectangle",
+   "stimulus": "A teacher asks the class to rearrange a formula. Adding all four sides of a rectangle gives its perimeter, $P = 2\\ell + 2w$. The perimeter of the rectangle in the figure is 52. All lengths are in centimeters. The formula must be rearranged before you substitute.",
+   "question": "What is the value of $\\ell$?",
+   "options": [
+    "42",
+    "21",
+    "16",
+    "26"
+   ],
+   "correctIndex": 2,
+   "answer": "16",
+   "explanation": "(1) 그림에서 w = 10 를 읽고 P = 52 는 지문에서 안다. (2) P = 2ℓ + 2w 에서 ℓ 에 대해 정리한다. (3) 2ℓ = P - 2w = 52 - 20 = 32 이다. (4) ℓ = 32 ÷ 2 = 16 이다. (5) 따라서 16 이다. 따라서 정답은 16이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "linear_equations_one_var.literal_rearrange.PG.P~inverse.png",
+   "mobileFile": "linear_equations_one_var.literal_rearrange.PG.P~inverse.m375.png",
+   "archetypeId": "le.literal_rearrange.PG.P.inverse",
+   "seed": 11,
+   "signature": "polygon:trapezoid",
+   "stimulus": "Half the sum of the parallel sides times the height gives the area of a trapezoid: $A = \\frac{1}{2}(b_1 + b_2)h$. The area of the trapezoid in the figure is 70, and the base labeled $b$ is unknown.",
+   "question": "In the figure shown, what is $b$?",
+   "options": [
+    "4",
+    "20",
+    "36",
+    "10"
+   ],
+   "correctIndex": 0,
+   "answer": "4",
+   "explanation": "(1) 그림에서 b₁ = 16, h = 7 를 읽고 A = 70 는 지문에서 안다. (2) A = ½(b₁ + b₂)h 에서 b₂ 에 대해 정리한다. (3) b₁ + b₂ = 2A ÷ h = 140 ÷ 7 = 20 이다. (4) b₂ = 20 - 16 = 4 이다. (5) 따라서 4 이다. 따라서 정답은 4이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "linear_equations_one_var.literal_rearrange.PG.P~chain2.png",
+   "mobileFile": "linear_equations_one_var.literal_rearrange.PG.P~chain2.m375.png",
+   "archetypeId": "le.literal_rearrange.PG.P.chain2",
+   "seed": 11,
+   "signature": "polygon:rhombus",
+   "stimulus": "A contractor works from the sketch below. The area $A$ of a rhombus is $A = \\frac{1}{2}d_1 d_2$, where $d_1$ and $d_2$ are the lengths of its diagonals. The rhombus shown has area 152, and one diagonal is labeled $d$. All measurements use the same unit of length.",
+   "question": "How long are the two diagonals together?",
+   "options": [
+    "152",
+    "35",
+    "16",
+    "27"
+   ],
+   "correctIndex": 1,
+   "answer": "35",
+   "explanation": "(1) 그림에서 d₁ = 19 을 읽고 A = 152 는 지문에서 안다. (2) A = ½d₁d₂ 에서 d₂ 에 대해 정리한다. (3) d₂ = 2A ÷ d₁ = 304 ÷ 19 = 16 이다. (4) 두 대각선의 합 = 19 + 16 이다. (5) 따라서 35 이다. 따라서 정답은 35이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "linear_equations_one_var.literal_rearrange.PG.P~repr_shift.png",
+   "mobileFile": "linear_equations_one_var.literal_rearrange.PG.P~repr_shift.m375.png",
+   "archetypeId": "le.literal_rearrange.PG.P.repr_shift",
+   "seed": 11,
+   "signature": "polygon:regular",
+   "stimulus": "A math club member solves this practice problem. Multiplying the number of sides by the side length gives the perimeter of a regular polygon: $P = ns$. The perimeter of the figure is 70. Rearranging first makes the arithmetic simpler.",
+   "question": "Find the side length marked $s$.",
+   "options": [
+    "10",
+    "70",
+    "11",
+    "63"
+   ],
+   "correctIndex": 0,
+   "answer": "10",
+   "explanation": "(1) 그림의 다각형은 꼭짓점이 7개이므로 n = 7 이다. (2) P = ns 에서 s 에 대해 정리한다. (3) s = P ÷ n = 70 ÷ 7 이다. (4) = 10 이다. (5) 따라서 10 이다. 따라서 정답은 10이다.",
+   "structuralIssues": []
+  }
+ ]
+}

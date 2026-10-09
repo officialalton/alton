@@ -1,0 +1,266 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "second_solver",
+ "runId": "lit-hard-v4-pilot",
+ "taskId": "rev-second_solver-001",
+ "chunkId": "rev-second_solver-001",
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/rev-second_solver-001.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "opus|fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "boolean",
+    "confidence": "high|medium|low",
+    "note": "풀이 한 줄"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "hardv4-hard-01-001",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Folding his newspaper into a hard square, Hemi informed the compartment that Tane had never in his life tied a decent knot. Tane, opposite, went on polishing the brass medal the regatta committee had pinned to him that morning, and Hemi added that the wind had done the sailing and Tane had merely sat in the boat taking credit for the weather. A clerk two seats down laughed. Hemi did not laugh. He had not meant it as a joke, exactly; it was more the sort of thing a man says to keep his hands busy. When the train lurched past Newmarket, the medal slid from Tane's knee. Hemi caught it before it reached the floor, wiped the ribbon on his own sleeve, and kept it in his fist until the platform. Tane's name would be in tomorrow's paper, and the wharf would talk of little else. On the platform Hemi tucked the medal into his neighbor's breast pocket, buttoned the flap shut, and walked ahead to find them a cab.",
+   "question": "Which choice best describes Hemi's attitude toward Tane as conveyed in the text?",
+   "options": [
+    "Dismissive of Tane's victory while eager to keep the joke going",
+    "Attentive to Tane while mainly worried about the attention ahead",
+    "Quietly proud of Tane while hiding it behind gruff complaints",
+    "Doubtful that Tane earned the medal while careful to protect it"
+   ],
+   "recipeBeyondMedium": "말투와 행동의 어긋남을 읽어야 하고, 네 선택지가 같은 양가 구조라 형식 단서가 없다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-002",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Father Mohan cannot cook. He has told me so himself, three times, while standing in my cellar up to his shins in Nile water and asking about my mother's lentil bread. I said the recipe went into the ground with her, which was not a lie, exactly, since she never measured anything and I only ever watched. He nodded and lifted another sack of flour onto the shelf above the waterline. For a man who preaches at me every feast day, he carries flour poorly; half of it was paste by noon. When he had gone, I found the sacks stacked by weight, the ruined ones set apart, and a pencil note on the lid of the bread tin asking only what she had used in place of salt. I kept the note. On Sunday, I set a loaf on the vestry step before the bells, and went home by the long road so as not to pass his door.",
+   "question": "Which choice best describes the narrator's attitude toward Father Mohan?",
+   "options": [
+    "Mildly mocking of Mohan's efforts while weary of his preaching",
+    "Warm toward Mohan while driven mainly by guilt about her mother",
+    "Skeptical of Mohan's cooking while curious about his pencil note",
+    "Grudgingly appreciative of Mohan's help while unwilling to say so"
+   ],
+   "recipeBeyondMedium": "말투와 행동의 어긋남을 읽어야 하고, 네 선택지가 같은 양가 구조라 형식 단서가 없다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-003",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Flour dust on the counter showed every mark of Astrid's borrowed fountain pen, which she had been tapping since six. I had lent it to her at the notary's office in March, for one signature, and I reminded her of this whenever we met, usually while she was mispronouncing 'gracias' to someone who spoke perfect English. Clients like Astrid keep interpreters humble; they also keep us broke. I wanted the pen back, or I told myself I did, which is not quite the same. When the baker came out with the first trays, Astrid asked me how to say that the bread smelled like her grandmother's kitchen. I gave her the words slowly, twice, and let her say them herself. Later, when she reached for the pen to sign for the order, I looked at the window and asked the baker about the weather in the hills.",
+   "question": "Which choice best describes the narrator's attitude toward Astrid?",
+   "options": [
+    "Affectionate toward Astrid while posing as a put-upon creditor",
+    "Irritated by Astrid's habits while resigned to losing the pen",
+    "Patient with Astrid while hoping to earn her future business",
+    "Humble about her own work while still wanting the pen back"
+   ],
+   "recipeBeyondMedium": "말투와 행동의 어긋남을 읽어야 하고, 네 선택지가 같은 양가 구조라 형식 단서가 없다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-004",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "Two bakers share my scale. Every morning before I open, Wira and Arisa come through the back door of the shop with their sacks, and each accuses the other of resting a thumb on the brass pan. I have watched this for six years from behind a bolt of silk. They weigh, they quarrel about the weight, they leave by separate doors. On the wall above the scale someone keeps a chalk tally in two columns, and I have never asked whose hand it is. Last winter Arisa went to her sister's in Hai Phong for a month. Wira came at the usual hour, weighed his flour, and then, without a word to me, weighed out a second sack and set it by the door Arisa always used. He frowned at the pan for a long while, lifted his thumb from the edge, and weighed it again. Each morning the second column on the wall grew by one mark.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Two rival bakers share a scale and argue each morning over its fairness.",
+    "Two rival bakers keep up a morning quarrel that quietly binds them together.",
+    "One baker, left alone, keeps weighing flour at the usual hour each morning.",
+    "Two rival bakers grow closer because one baker's absence ends their quarrel."
+   ],
+   "recipeBeyondMedium": "요지가 한 사건이 아닌 두 사건의 관계이며, 오답이 모두 지문 사실과 양립하는 부분 요지·인과 뒤집기다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-005",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "I met Ayesha for the first time at the cafe in Shanghai South Station, where she thanked me for keeping her late uncle's garden exactly as he had left it. I accepted the thanks and the green tea. I did not mention the plum tree by the gate, which had died in March and which I had replaced, at my own cost, with one from a nursery in Songjiang. In my coat that day was a folded receipt that I kept meaning to throw away. A year later we met at the same table. Ayesha slid a photograph across to me: her uncle, young, beside the gate, the plum tree behind him already thick and crooked. She asked whether I thought a tree could straighten itself with age. I said some did. She nodded, put the photograph back in her bag, and ordered us both another pot.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A gardener accepts praise for a garden while concealing a costly replacement.",
+    "A new owner shares an old photograph of her uncle beside the garden gate.",
+    "A gardener's hidden repair is likely seen through and tactfully left unspoken.",
+    "A gardener's silence about a repair makes the owner doubt his other work."
+   ],
+   "recipeBeyondMedium": "요지가 한 사건이 아닌 두 사건의 관계이며, 오답이 모두 지문 사실과 양립하는 부분 요지·인과 뒤집기다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-006",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "By the autumn of 1931 the ranger Eunseo had given up the mountain and taken the job of marking the school field in lime. Eleven years earlier she had found a hiker named Bokhee in the fog below the crater, half a day off the trail, and had walked him down without once letting go of his collar, saying in front of the whole village that a fool deserved the fog. He had left the island the next week. She still kept, in her coat, the collar button that had come off in her hand. At dusk one evening a man came onto the field with a dozen boys and a ball. He set them in a row along her fresh white line and told them that anyone who crossed it before the whistle would run the field twice. Eunseo started toward him, the words she had saved ready in her mouth. Bokhee raised his hand to her, then blew his own whistle, and the boys ran.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A ranger once shamed a lost hiker publicly while leading him to safety.",
+    "A man trains a row of boys to wait for his whistle at a line.",
+    "A ranger's later regret leads her to treat a returning hiker more gently.",
+    "A ranger's old harshness lives on in the hiker's teaching, overtaking her apology."
+   ],
+   "recipeBeyondMedium": "요지가 한 사건이 아닌 두 사건의 관계이며, 오답이 모두 지문 사실과 양립하는 부분 요지·인과 뒤집기다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-007",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "When the garden gate opened on Thursdays, Avraham was always already inside, sorting the post that came for the plot holders into the tin box by the tool shed. He had done this since Miriam's father left for Beirut, and no one had asked him to. That morning Miriam held out an envelope she had found under the seed packets in her father's drawer, addressed in his hand to a woman in Jaffa. Avraham glanced at the postmark space, which was blank, and at the date in the corner, which was the week before her father went away. He said that the post office was on his way home and he might as well take it. He had already been through that drawer twice that spring, looking, he said, for bean seed. He slid the envelope into his inner coat pocket, not the satchel, and knelt to turn the soil in her father's empty bed.",
+   "question": "Based on the text, why does Avraham most likely take the envelope from Miriam?",
+   "options": [
+    "To post it on his way home as a small favor to Miriam",
+    "To secure a letter he had been hunting for on his own",
+    "To continue the post duties he took on for the garden's members",
+    "To spare himself questions from Miriam about her father's leaving"
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고, 표면 명분을 받아들인 학생이 시점 단서에서 걸리도록 설계되어 있으며, 오답이 지문 사실과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-008",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "Armand had watched Fatma row his grandfather out past the breakwater every dawn of his childhood, and every dawn she had made the old man retie the bow line before she would push off. Now she was at the quay before the lamps were out, insisting on rowing him to the Marseille steamer herself. The harbor boatmen, she said, charged a boy with a trunk double. The steamer did not sail until noon. Armand had said so twice. She rowed slowly, stopping twice in the middle of the Golden Horn to make him check the ropes on his trunk, which he had tied and she had already checked on the quay. Fifty yards from the steamer's ladder she shipped her oars, folded her hands in her lap, and waited.",
+   "question": "Based on the text, why does Fatma most likely insist on rowing Armand to the steamer herself?",
+   "options": [
+    "To save him the high fare the harbor boatmen would charge",
+    "To keep up the dawn routine she once shared with his grandfather",
+    "To give him one last lesson in managing without her help",
+    "To delay a parting she was reluctant to face just yet"
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고, 표면 명분을 받아들인 학생이 시점 단서에서 걸리도록 설계되어 있으며, 오답이 지문 사실과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-009",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "Whenever Mathis came for the rent, he stopped on the stone bridge below our building and asked to see my mother's photograph again, the one from 1952 with every shutter on the rue open and painted. He said his father wanted the old colors for the repairs. Theo, he called me, as if we were still twelve. In the second week of August he asked to borrow it outright. That was the week the notice went up in the lobby that the building had been sold, and the week, as everyone in Marseille knows, when no office in the city answers its telephone. He gave me a receipt in his own handwriting. A month later he brought the photograph back in a stiff envelope stamped by the city archive, with the date of a hearing penciled on the flap.",
+   "question": "Based on the text, why does Mathis most likely borrow the photograph?",
+   "options": [
+    "To match the original shutter colors for his father's repairs",
+    "To keep a reminder of the childhood he shared with Theo",
+    "To make amends to Theo's family for his father's sale",
+    "To submit it as a record for keeping the building unchanged"
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고, 표면 명분을 받아들인 학생이 시점 단서에서 걸리도록 설계되어 있으며, 오답이 지문 사실과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-010",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "Chiang Mai has no sea, so the salt flat my sister Thuy rented that dry season was a shallow pan of brine a farmer had given up on, two hours east of the city. I arrived on the noon bus. She had swept a path to the hut. She had set out one cup, then a second cup. She had bought the good fish sauce, the kind our father kept on the high shelf, and left the bottle unopened beside my plate. We talked about the price of rakes. We talked about the bus. When I asked why she had written after eleven years, she said the crust needed raking before the wind came up, and went out to rake it. I stood at the door with the bottle in my hand for a long time, and then I carried a second rake out to the far end of the pan and began where she had not.",
+   "question": "Which choice best describes the tone of the text?",
+   "options": [
+    "Matter-of-fact and guardedly tender toward a returning sister",
+    "Dry and amused toward a sister's small domestic fussing",
+    "Calm and wary toward a sister's possibly hidden motives",
+    "Reserved and tender toward family and the past"
+   ],
+   "recipeBeyondMedium": "겉 어조만 읽으면 오답에 걸리고 속 어조의 원인까지 맞혀야 하며, 네 선택지 구조가 동일해 형식 단서가 없다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-011",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "\"He is my nephew, and he swims well,\" I told the attendant at the sea-pool, and signed the ledger in my best schoolroom hand. Babatunde stood behind me with his towel folded into a square. He had not spoken a word in my classroom since Michaelmas, and he did not speak now. The attendant took my shilling. The pool was cut into the rocks below the fort, and the tide refreshed it twice a day, and the water was green and very still. I had prepared a little speech about courage. I did not give it. When he reached the edge he stopped, and I stopped beside him, and I watched a crab work along the wall rather than his face. He went in at last without a sound. I sat on the warm rock with my boots still laced and my hand on his towel until his head came up the third time.",
+   "question": "Which choice best describes the tone of the text?",
+   "options": [
+    "Brisk and businesslike toward a pupil's seaside outing",
+    "Composed and anxiously watchful toward a wordless pupil",
+    "Composed and uneasy toward her own small deception",
+    "Calm and protective toward the children in her care"
+   ],
+   "recipeBeyondMedium": "겉 어조만 읽으면 오답에 걸리고 속 어조의 원인까지 맞혀야 하며, 네 선택지 구조가 동일해 형식 단서가 없다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-012",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "I was told the galley came off a Caspian ferry, bolted piece by piece into the back of my mother-in-law's restaurant in Tehran. Vesna liked to say the stove had crossed more water than she had. Three burners. One drawer that stuck. A brass ladle with a dent near the lip, used for soup, for rice, for knocking the drawer loose. Its hook had been put up by my husband's brother the year before we buried him. On my first morning I reached for the ladle, and she moved a wooden spoon into my hand before my fingers closed. Later, washing up, I watched her run her thumb along the dent twice before hanging it on its hook, apart from the others. Neither of us mentioned it. When I came in the next week, the ladle was lying on my side of the counter, beside the onions I was supposed to cut. Vesna was at the far burner with her back to me, stirring with the wooden spoon.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Playful and lighthearted toward the odd features of an old kitchen",
+    "Guarded and resentful toward a newcomer handling the family's things",
+    "Dry and quietly attentive toward a loss the two women share",
+    "Wistful and reflective toward the long history of the restaurant"
+   ],
+   "recipeBeyondMedium": "겉 어조만 읽으면 오답에 걸리고 속 어조의 원인까지 맞혀야 하며, 네 선택지 구조가 동일해 형식 단서가 없다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-013",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "Two pencils, sharpened to the same length, lay beside the survey map when Aigerim arrived at the reading room. Annika stood and pulled out the chair across from her own. Thank you for coming into the city, she whispered, as if they were strangers meeting at a bank. Aigerim kept her coat on and answered that it was kind of her to arrange the room. Between them the map showed the farm their uncle had left them: forty hectares, a barn, the creek marked in blue ink. Annika turned the map so the creek faced Aigerim. Under it lay a folder. Inside were tax receipts for six years, each stamped paid, each signed in Annika's narrow hand and none in Aigerim's. Aigerim read them slowly and did not look up. Outside the tall windows of the Hamburg library a tram went past. When the buyer's offer came out of the folder last, Annika laid one of the pencils across it, capped her pen, and slid the offer, unsigned, back inside.",
+   "question": "Based on the text, which choice best describes the relationship between Annika and Aigerim?",
+   "options": [
+    "Distant co-heirs who meet only to settle a legal matter in a polite way",
+    "Co-owners in which Annika is steering Aigerim toward accepting the buyer's offer",
+    "Co-owners in which Aigerim has long supported Annika's life in the city",
+    "Co-owners in which Annika has quietly carried costs to keep Aigerim's farm intact"
+   ],
+   "recipeBeyondMedium": "관계의 방향(누가 누구에게 의존·양보하는가)을 읽어야 하고, 호칭이 주는 표면 관계가 가장 강한 오답으로 작동하며, 오답이 지문과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-014",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "Three rules hung over the music-room door: no food, no running, no instruments without permission. Shanice broke the first one every Friday, when Mr. Marlon came to the window with a newspaper parcel of sprats and said, Good afternoon, young lady, exactly as he said it to every customer on the street. She paid him in coins counted out on the sill. He counted them again, slowly, and each time handed one back, explaining that his scale was off today. In December she gave him a harmonica wrapped in foil. He had told her once that he played as a boy; she had not asked what he played. He turned it over, blew a thin note through the wrong end, and laughed loudly enough that the choir girls looked up. The next Friday the parcel was larger. He set it on the sill, took no coins at all, and stood a while longer than usual, the harmonica showing from his shirt pocket, still in its foil.",
+   "question": "Based on the text, which choice best describes Marlon's relationship with Shanice?",
+   "options": [
+    "He treats her formally while quietly bearing small costs on her behalf",
+    "He keeps a polite, businesslike distance from her as from his other customers",
+    "He is amused by her mistaken gift and gently teases her about it",
+    "He depends on her weekly purchases to keep his small trade going"
+   ],
+   "recipeBeyondMedium": "관계의 방향(누가 누구에게 의존·양보하는가)을 읽어야 하고, 호칭이 주는 표면 관계가 가장 강한 오답으로 작동하며, 오답이 지문과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "hardv4-hard-01-015",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "Marrakesh. An old cinema projection booth, late afternoon. Boxes are stacked to the ceiling everywhere except beside the projector. SAMIRA holds a clipboard. SUNJA holds a reel of film in a dented case.\nSAMIRA: Madam, the caterer needs the deposit by Thursday.\nSUNJA: Then the caterer shall have it, Mademoiselle.\n(Both nearly smile. Neither does.)\nSAMIRA: The movers come at nine. Everything goes. The projector is already listed for sale.\nSUNJA: And this? (She lifts the reel.)\nSAMIRA: The first film you ever ran here. The buyer asked for it too.\n(SUNJA sets an envelope on the clipboard. SAMIRA opens it: the deposit, in cash, and a receipt from the projector's buyer, dated yesterday.)\nSAMIRA: You sold it already.\nSUNJA: Thursday is close.\n(SAMIRA looks at the reel for a long moment. She tears off a strip of tape, writes KEEP on it, and presses it onto the case. She hands the reel back to her mother and crosses the projector off her list.)",
+   "question": "Based on the text, which choice best describes the relationship between Sunja and Samira?",
+   "options": [
+    "Two women whose formal titles reflect a strained and distant family bond",
+    "Two women whose playful formality covers quiet sacrifices made for each other",
+    "Two women whose talk about the reel reveals a clash over emptying the house",
+    "Two women whose wedding plans show the mother relying on her daughter's money"
+   ],
+   "recipeBeyondMedium": "관계의 방향(누가 누구에게 의존·양보하는가)을 읽어야 하고, 호칭이 주는 표면 관계가 가장 강한 오답으로 작동하며, 오답이 지문과 충돌하지 않는다"
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자(두 번째 풀이자)다. 정답 표시가 없다. 직접 풀고 정답 외에 방어 가능한 선택지가 있는지 판정한다. 다른 풀이자의 답은 모른다.\n청크 rev-second_solver-001 — 15문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/rev-second_solver-001.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"opus|fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"boolean\",\"confidence\":\"high|medium|low\",\"note\":\"풀이 한 줄\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### hardv4-hard-01-001 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nFolding his newspaper into a hard square, Hemi informed the compartment that Tane had never in his life tied a decent knot. Tane, opposite, went on polishing the brass medal the regatta committee had pinned to him that morning, and Hemi added that the wind had done the sailing and Tane had merely sat in the boat taking credit for the weather. A clerk two seats down laughed. Hemi did not laugh. He had not meant it as a joke, exactly; it was more the sort of thing a man says to keep his hands busy. When the train lurched past Newmarket, the medal slid from Tane's knee. Hemi caught it before it reached the floor, wiped the ribbon on his own sleeve, and kept it in his fist until the platform. Tane's name would be in tomorrow's paper, and the wharf would talk of little else. On the platform Hemi tucked the medal into his neighbor's breast pocket, buttoned the flap shut, and walked ahead to find them a cab.\n\n[질문] Which choice best describes Hemi's attitude toward Tane as conveyed in the text?\nA) Dismissive of Tane's victory while eager to keep the joke going\nB) Attentive to Tane while mainly worried about the attention ahead\nC) Quietly proud of Tane while hiding it behind gruff complaints\nD) Doubtful that Tane earned the medal while careful to protect it\n### hardv4-hard-01-002 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nFather Mohan cannot cook. He has told me so himself, three times, while standing in my cellar up to his shins in Nile water and asking about my mother's lentil bread. I said the recipe went into the ground with her, which was not a lie, exactly, since she never measured anything and I only ever watched. He nodded and lifted another sack of flour onto the shelf above the waterline. For a man who preaches at me every feast day, he carries flour poorly; half of it was paste by noon. When he had gone, I found the sacks stacked by weight, the ruined ones set apart, and a pencil note on the lid of the bread tin asking only what she had used in place of salt. I kept the note. On Sunday, I set a loaf on the vestry step before the bells, and went home by the long road so as not to pass his door.\n\n[질문] Which choice best describes the narrator's attitude toward Father Mohan?\nA) Mildly mocking of Mohan's efforts while weary of his preaching\nB) Warm toward Mohan while driven mainly by guilt about her mother\nC) Skeptical of Mohan's cooking while curious about his pencil note\nD) Grudgingly appreciative of Mohan's help while unwilling to say so\n### hardv4-hard-01-003 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nFlour dust on the counter showed every mark of Astrid's borrowed fountain pen, which she had been tapping since six. I had lent it to her at the notary's office in March, for one signature, and I reminded her of this whenever we met, usually while she was mispronouncing 'gracias' to someone who spoke perfect English. Clients like Astrid keep interpreters humble; they also keep us broke. I wanted the pen back, or I told myself I did, which is not quite the same. When the baker came out with the first trays, Astrid asked me how to say that the bread smelled like her grandmother's kitchen. I gave her the words slowly, twice, and let her say them herself. Later, when she reached for the pen to sign for the order, I looked at the window and asked the baker about the weather in the hills.\n\n[질문] Which choice best describes the narrator's attitude toward Astrid?\nA) Affectionate toward Astrid while posing as a put-upon creditor\nB) Irritated by Astrid's habits while resigned to losing the pen\nC) Patient with Astrid while hoping to earn her future business\nD) Humble about her own work while still wanting the pen back\n### hardv4-hard-01-004 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nTwo bakers share my scale. Every morning before I open, Wira and Arisa come through the back door of the shop with their sacks, and each accuses the other of resting a thumb on the brass pan. I have watched this for six years from behind a bolt of silk. They weigh, they quarrel about the weight, they leave by separate doors. On the wall above the scale someone keeps a chalk tally in two columns, and I have never asked whose hand it is. Last winter Arisa went to her sister's in Hai Phong for a month. Wira came at the usual hour, weighed his flour, and then, without a word to me, weighed out a second sack and set it by the door Arisa always used. He frowned at the pan for a long while, lifted his thumb from the edge, and weighed it again. Each morning the second column on the wall grew by one mark.\n\n[질문] Which choice best states the main idea of the text?\nA) Two rival bakers share a scale and argue each morning over its fairness.\nB) Two rival bakers keep up a morning quarrel that quietly binds them together.\nC) One baker, left alone, keeps weighing flour at the usual hour each morning.\nD) Two rival bakers grow closer because one baker's absence ends their quarrel.\n### hardv4-hard-01-005 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nI met Ayesha for the first time at the cafe in Shanghai South Station, where she thanked me for keeping her late uncle's garden exactly as he had left it. I accepted the thanks and the green tea. I did not mention the plum tree by the gate, which had died in March and which I had replaced, at my own cost, with one from a nursery in Songjiang. In my coat that day was a folded receipt that I kept meaning to throw away. A year later we met at the same table. Ayesha slid a photograph across to me: her uncle, young, beside the gate, the plum tree behind him already thick and crooked. She asked whether I thought a tree could straighten itself with age. I said some did. She nodded, put the photograph back in her bag, and ordered us both another pot.\n\n[질문] Which choice best states the main idea of the text?\nA) A gardener accepts praise for a garden while concealing a costly replacement.\nB) A new owner shares an old photograph of her uncle beside the garden gate.\nC) A gardener's hidden repair is likely seen through and tactfully left unspoken.\nD) A gardener's silence about a repair makes the owner doubt his other work.\n### hardv4-hard-01-006 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nBy the autumn of 1931 the ranger Eunseo had given up the mountain and taken the job of marking the school field in lime. Eleven years earlier she had found a hiker named Bokhee in the fog below the crater, half a day off the trail, and had walked him down without once letting go of his collar, saying in front of the whole village that a fool deserved the fog. He had left the island the next week. She still kept, in her coat, the collar button that had come off in her hand. At dusk one evening a man came onto the field with a dozen boys and a ball. He set them in a row along her fresh white line and told them that anyone who crossed it before the whistle would run the field twice. Eunseo started toward him, the words she had saved ready in her mouth. Bokhee raised his hand to her, then blew his own whistle, and the boys ran.\n\n[질문] Which choice best states the main idea of the text?\nA) A ranger once shamed a lost hiker publicly while leading him to safety.\nB) A man trains a row of boys to wait for his whistle at a line.\nC) A ranger's later regret leads her to treat a returning hiker more gently.\nD) A ranger's old harshness lives on in the hiker's teaching, overtaking her apology.\n### hardv4-hard-01-007 — skill inferences · 유형 character_motivation\n[지문]\nWhen the garden gate opened on Thursdays, Avraham was always already inside, sorting the post that came for the plot holders into the tin box by the tool shed. He had done this since Miriam's father left for Beirut, and no one had asked him to. That morning Miriam held out an envelope she had found under the seed packets in her father's drawer, addressed in his hand to a woman in Jaffa. Avraham glanced at the postmark space, which was blank, and at the date in the corner, which was the week before her father went away. He said that the post office was on his way home and he might as well take it. He had already been through that drawer twice that spring, looking, he said, for bean seed. He slid the envelope into his inner coat pocket, not the satchel, and knelt to turn the soil in her father's empty bed.\n\n[질문] Based on the text, why does Avraham most likely take the envelope from Miriam?\nA) To post it on his way home as a small favor to Miriam\nB) To secure a letter he had been hunting for on his own\nC) To continue the post duties he took on for the garden's members\nD) To spare himself questions from Miriam about her father's leaving\n### hardv4-hard-01-008 — skill inferences · 유형 character_motivation\n[지문]\nArmand had watched Fatma row his grandfather out past the breakwater every dawn of his childhood, and every dawn she had made the old man retie the bow line before she would push off. Now she was at the quay before the lamps were out, insisting on rowing him to the Marseille steamer herself. The harbor boatmen, she said, charged a boy with a trunk double. The steamer did not sail until noon. Armand had said so twice. She rowed slowly, stopping twice in the middle of the Golden Horn to make him check the ropes on his trunk, which he had tied and she had already checked on the quay. Fifty yards from the steamer's ladder she shipped her oars, folded her hands in her lap, and waited.\n\n[질문] Based on the text, why does Fatma most likely insist on rowing Armand to the steamer herself?\nA) To save him the high fare the harbor boatmen would charge\nB) To keep up the dawn routine she once shared with his grandfather\nC) To give him one last lesson in managing without her help\nD) To delay a parting she was reluctant to face just yet\n### hardv4-hard-01-009 — skill inferences · 유형 character_motivation\n[지문]\nWhenever Mathis came for the rent, he stopped on the stone bridge below our building and asked to see my mother's photograph again, the one from 1952 with every shutter on the rue open and painted. He said his father wanted the old colors for the repairs. Theo, he called me, as if we were still twelve. In the second week of August he asked to borrow it outright. That was the week the notice went up in the lobby that the building had been sold, and the week, as everyone in Marseille knows, when no office in the city answers its telephone. He gave me a receipt in his own handwriting. A month later he brought the photograph back in a stiff envelope stamped by the city archive, with the date of a hearing penciled on the flap.\n\n[질문] Based on the text, why does Mathis most likely borrow the photograph?\nA) To match the original shutter colors for his father's repairs\nB) To keep a reminder of the childhood he shared with Theo\nC) To make amends to Theo's family for his father's sale\nD) To submit it as a record for keeping the building unchanged\n### hardv4-hard-01-010 — skill inferences · 유형 tone_or_mood\n[지문]\nChiang Mai has no sea, so the salt flat my sister Thuy rented that dry season was a shallow pan of brine a farmer had given up on, two hours east of the city. I arrived on the noon bus. She had swept a path to the hut. She had set out one cup, then a second cup. She had bought the good fish sauce, the kind our father kept on the high shelf, and left the bottle unopened beside my plate. We talked about the price of rakes. We talked about the bus. When I asked why she had written after eleven years, she said the crust needed raking before the wind came up, and went out to rake it. I stood at the door with the bottle in my hand for a long time, and then I carried a second rake out to the far end of the pan and began where she had not.\n\n[질문] Which choice best describes the tone of the text?\nA) Matter-of-fact and guardedly tender toward a returning sister\nB) Dry and amused toward a sister's small domestic fussing\nC) Calm and wary toward a sister's possibly hidden motives\nD) Reserved and tender toward family and the past\n### hardv4-hard-01-011 — skill inferences · 유형 tone_or_mood\n[지문]\n\"He is my nephew, and he swims well,\" I told the attendant at the sea-pool, and signed the ledger in my best schoolroom hand. Babatunde stood behind me with his towel folded into a square. He had not spoken a word in my classroom since Michaelmas, and he did not speak now. The attendant took my shilling. The pool was cut into the rocks below the fort, and the tide refreshed it twice a day, and the water was green and very still. I had prepared a little speech about courage. I did not give it. When he reached the edge he stopped, and I stopped beside him, and I watched a crab work along the wall rather than his face. He went in at last without a sound. I sat on the warm rock with my boots still laced and my hand on his towel until his head came up the third time.\n\n[질문] Which choice best describes the tone of the text?\nA) Brisk and businesslike toward a pupil's seaside outing\nB) Composed and anxiously watchful toward a wordless pupil\nC) Composed and uneasy toward her own small deception\nD) Calm and protective toward the children in her care\n### hardv4-hard-01-012 — skill inferences · 유형 tone_or_mood\n[지문]\nI was told the galley came off a Caspian ferry, bolted piece by piece into the back of my mother-in-law's restaurant in Tehran. Vesna liked to say the stove had crossed more water than she had. Three burners. One drawer that stuck. A brass ladle with a dent near the lip, used for soup, for rice, for knocking the drawer loose. Its hook had been put up by my husband's brother the year before we buried him. On my first morning I reached for the ladle, and she moved a wooden spoon into my hand before my fingers closed. Later, washing up, I watched her run her thumb along the dent twice before hanging it on its hook, apart from the others. Neither of us mentioned it. When I came in the next week, the ladle was lying on my side of the counter, beside the onions I was supposed to cut. Vesna was at the far burner with her back to me, stirring with the wooden spoon.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Playful and lighthearted toward the odd features of an old kitchen\nB) Guarded and resentful toward a newcomer handling the family's things\nC) Dry and quietly attentive toward a loss the two women share\nD) Wistful and reflective toward the long history of the restaurant\n### hardv4-hard-01-013 — skill inferences · 유형 relationship_between_characters\n[지문]\nTwo pencils, sharpened to the same length, lay beside the survey map when Aigerim arrived at the reading room. Annika stood and pulled out the chair across from her own. Thank you for coming into the city, she whispered, as if they were strangers meeting at a bank. Aigerim kept her coat on and answered that it was kind of her to arrange the room. Between them the map showed the farm their uncle had left them: forty hectares, a barn, the creek marked in blue ink. Annika turned the map so the creek faced Aigerim. Under it lay a folder. Inside were tax receipts for six years, each stamped paid, each signed in Annika's narrow hand and none in Aigerim's. Aigerim read them slowly and did not look up. Outside the tall windows of the Hamburg library a tram went past. When the buyer's offer came out of the folder last, Annika laid one of the pencils across it, capped her pen, and slid the offer, unsigned, back inside.\n\n[질문] Based on the text, which choice best describes the relationship between Annika and Aigerim?\nA) Distant co-heirs who meet only to settle a legal matter in a polite way\nB) Co-owners in which Annika is steering Aigerim toward accepting the buyer's offer\nC) Co-owners in which Aigerim has long supported Annika's life in the city\nD) Co-owners in which Annika has quietly carried costs to keep Aigerim's farm intact\n### hardv4-hard-01-014 — skill inferences · 유형 relationship_between_characters\n[지문]\nThree rules hung over the music-room door: no food, no running, no instruments without permission. Shanice broke the first one every Friday, when Mr. Marlon came to the window with a newspaper parcel of sprats and said, Good afternoon, young lady, exactly as he said it to every customer on the street. She paid him in coins counted out on the sill. He counted them again, slowly, and each time handed one back, explaining that his scale was off today. In December she gave him a harmonica wrapped in foil. He had told her once that he played as a boy; she had not asked what he played. He turned it over, blew a thin note through the wrong end, and laughed loudly enough that the choir girls looked up. The next Friday the parcel was larger. He set it on the sill, took no coins at all, and stood a while longer than usual, the harmonica showing from his shirt pocket, still in its foil.\n\n[질문] Based on the text, which choice best describes Marlon's relationship with Shanice?\nA) He treats her formally while quietly bearing small costs on her behalf\nB) He keeps a polite, businesslike distance from her as from his other customers\nC) He is amused by her mistaken gift and gently teases her about it\nD) He depends on her weekly purchases to keep his small trade going\n### hardv4-hard-01-015 — skill inferences · 유형 relationship_between_characters\n[지문]\nMarrakesh. An old cinema projection booth, late afternoon. Boxes are stacked to the ceiling everywhere except beside the projector. SAMIRA holds a clipboard. SUNJA holds a reel of film in a dented case.\nSAMIRA: Madam, the caterer needs the deposit by Thursday.\nSUNJA: Then the caterer shall have it, Mademoiselle.\n(Both nearly smile. Neither does.)\nSAMIRA: The movers come at nine. Everything goes. The projector is already listed for sale.\nSUNJA: And this? (She lifts the reel.)\nSAMIRA: The first film you ever ran here. The buyer asked for it too.\n(SUNJA sets an envelope on the clipboard. SAMIRA opens it: the deposit, in cash, and a receipt from the projector's buyer, dated yesterday.)\nSAMIRA: You sold it already.\nSUNJA: Thursday is close.\n(SAMIRA looks at the reel for a long moment. She tears off a strip of tape, writes KEEP on it, and presses it onto the case. She hands the reel back to her mother and crosses the projector off her list.)\n\n[질문] Based on the text, which choice best describes the relationship between Sunja and Samira?\nA) Two women whose formal titles reflect a strained and distant family bond\nB) Two women whose playful formality covers quiet sacrifices made for each other\nC) Two women whose talk about the reel reveals a clash over emptying the house\nD) Two women whose wedding plans show the mother relying on her daughter's money"
+}

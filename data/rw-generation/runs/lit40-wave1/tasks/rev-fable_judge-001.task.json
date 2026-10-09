@@ -1,0 +1,341 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-001",
+ "chunkId": "rev-fable_judge-001",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-001.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-hard-01-001",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Darius came down to the harbor every Thursday, though he claimed he only wanted the air. I told him the air smelled of diesel and gutted mullet, and he agreed and stayed anyway. We mended nets side by side. He asked about my knees, my brother's boat, the price of ice. He never asked why I had stopped coming to the church on the hill, and I never offered. Once a boy ran past shouting that the bells were being repaired, and Darius bent lower over the knot he was tying until the boy was gone. I complained, as always, that he worked too slowly and wasted good twine. Still, on the Thursday he was ill, I left the end of the net unfinished, folded it over the bollard where he usually sat, and went home early. When he returned, he found the frayed corner waiting and said nothing about it, only threaded his needle and began where he had stopped.",
+   "question": "Which choice best describes the narrator's attitude toward Darius?",
+   "options": [
+    "Resentful of Darius's repeated efforts to draw him back to the hill church",
+    "Indifferent to Darius's company, which he tolerates only out of habit",
+    "Quietly appreciative of Darius's restraint, despite routine complaints",
+    "Amused by Darius's clumsiness with the nets and the wasted twine"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-002",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "When the fog came in off the Cornish water, Jonah lit the second lamp in the workshop and bent again over the ledger he was binding. Nargis had come to speak of her grandmother, who could no longer manage the stairs of the cottage above. She had rehearsed the English words on the walk from the station, plain and reasonable: a room in town, a nurse, a window on the square. Jonah heard her out, then showed her how the old woman had once taught him to pare leather so thin the light came through it. Nargis took the knife, as she had when she was a child, and pared badly. Later, gathering her coat, she noticed that he had set aside a strip of the finest calfskin, labelled in her grandmother's hand, which he had never once used. She said she would write to the nurse on Monday, and she buttoned her coat slowly, and she did not take the strip away from his bench.",
+   "question": "Which choice best describes Nargis's attitude toward Jonah as presented in the passage?",
+   "options": [
+    "Impatient with Jonah's refusal to discuss the matter in plain, simple English",
+    "Contemptuous of Jonah's devotion to an old-fashioned and dying craft",
+    "Persuaded by Jonah's lesson to abandon her plan for the grandmother",
+    "Resolved on her plan yet gentle toward Jonah's attachment to the past"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-004",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Smell of wet ink and wool sacking filled the post office the winter I practiced my recitation there, because it was the only building on our stretch of the plateau with a stove that stayed lit. Tallulah, who sorted the mail and had once ridden with my father, listened from behind the grille. I told her that she corrected my pauses too often and that my father would have let me speak at my own pace. She only nodded and went on stamping letters. On the evening before the program, however, I arrived early and found her chair turned to face the bench where I stood, and I recited the whole piece to it before she came in. When she did, I began again from the first line, slower this time, waiting at each pause for the small tap of her pencil against the counter.",
+   "question": "Which choice best describes the narrator's attitude toward Tallulah?",
+   "options": [
+    "Openly hostile toward Tallulah, whom she blames for her father's absence",
+    "Outwardly impatient with Tallulah but quietly reliant on her guidance",
+    "Largely indifferent to Tallulah, valuing only the warmth of the stove",
+    "Admiring of Tallulah chiefly for her past travels with the father"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-005",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Tromso in March was all slush and salt, and you pushed your mother's chair three streets to Soren's shop because she would let no one else cut her hair. Soren worked in silence, as he always had, the scissors ticking like a clock under the mirror. Halfway through, your mother said she was sorry for the years she had not written, for the wedding she had not attended. You told her the wind had been loud and asked her to repeat it, and when she did, you asked Soren whether the back should be shorter. Afterward you brushed the cut hair from her collar with your own glove, carefully, the way she had once brushed snow from yours. On the walk home you named the shops you passed, one by one, until the door.",
+   "question": "Which choice best describes the narrator's attitude toward the mother in the passage?",
+   "options": [
+    "Openly forgiving, eager to accept the apology and move past old hurts",
+    "Coldly resentful, performing each duty mainly to shame the mother",
+    "Tenderly attentive, yet unwilling to take up the mother's apology",
+    "Mildly bored, more interested in the barbershop than the mother"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-006",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "“You take the kitchen, I'll take the garden plot,” Itzel said, laying the keys on the bench between the bean rows. Milena agreed too quickly, and for an hour the twins sorted the contents of their mother's house aloud: two kettles, one clock, a drawer of mismatched string. Every Sunday for eleven years they had come to this plot in Gdansk to water the tomatoes she had planted. Neither of them, Milena admitted while coiling the hose, had ever liked tomatoes. Itzel laughed and said she had always given hers to the neighbors. They went on listing furniture, assigning it, trading it back. At six, when the sprinklers in the other plots began to hiss, both of them reached for the same watering can, and Milena let go first, and then Itzel handed it back, and they filled it together at the tap.",
+   "question": "Which choice best states the main purpose of the passage?",
+   "options": [
+    "To recount how the twins divided their mother's furniture and goods",
+    "To suggest that family duties are usually kept up without any real pleasure",
+    "To show that a shared watering can is a family's most valued object",
+    "To show that dividing the house cannot divide the ritual the twins share"
+   ],
+   "recipeBeyondMedium": "요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-hard-01-007",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "We called it the salt pool, though by Bartolo's ninth summer in Havana the sea had long since cracked its seaward wall. Each morning Dario sat on the edge with his trousers rolled and named things for her in the old language: tile, gull, the green rust on the ladder. She repeated each word and swam a length between words. On Thursday she stopped halfway, clung to the rope, and climbed out by the near ladder, saying the water was too cold. Dario, who had seen everything, said only that cold had two words, one for water and one for people, and made her practice both. She did not tell him she had wanted to reach the far wall before her mother arrived. He did not tell her he had noticed. When they walked home, she carried his towel, and he carried the word for rope, saying it over to himself.",
+   "question": "Which choice best states the main purpose of the passage?",
+   "options": [
+    "To show how a language lesson lets the two quietly protect each other's pride",
+    "To describe a daily routine of swimming lessons in a crumbling Havana pool",
+    "To argue that every language holds separate words for physical and emotional cold",
+    "To suggest that Dario is slowly losing his memory of the language he teaches"
+   ],
+   "recipeBeyondMedium": "요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-hard-01-009",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "Wool remembers every hand. Aster had said so to the cooperative in Cape Town on the morning Kagiso, who had bought the old house and its looms, tangled a warp before thirty weavers and the visiting buyers. Kagiso laughed too loudly and left the shed. That evening Aster, who also kept the garden behind the house, found her among the lemon trees and said nothing about looms; she asked instead which beds should be turned for winter. Kagiso, to her own surprise, knew. Her grandmother had grown lemons in Mafikeng, and she named the soil and the pruning months without stopping. Aster listened as if being taught. In the following week Kagiso came to the shed each dawn, before the others, and Aster left a single spool beside her bench, already wound, its loose end tucked under so that it would not unravel.",
+   "question": "Which choice best states the main purpose of the passage?",
+   "options": [
+    "To recount how Kagiso tangled a warp before the whole cooperative and its buyers",
+    "To argue that skill in gardening usually leads to skill in weaving",
+    "To show how Aster restores Kagiso's confidence by first letting her teach",
+    "To suggest that a single wound spool repaired the entire cooperative"
+   ],
+   "recipeBeyondMedium": "요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-hard-01-010",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "Once, near the end of my nights at the pharmacy in Lima, Valentina came in at two in the morning and did not ask for anything on the shelves. For six years she had sent me her chapters typed, never handwritten; the notebooks she kept locked in a drawer her own sister had never seen. That week a colleague had told me, kindly and wrongly, that Valentina was talking to a translator in Madrid. I said as much while I rang up the mints she finally chose. She looked at the fluorescent tubes and remarked that they made everyone look like a ghost of themselves. Then she set a green notebook on the counter, its pages crowded with her slanted ink and crossed-out lines, and said she would collect it Thursday. I put it under the register, beside the night ledger, and kept my hand on its cover until the bell over the door stopped swinging.",
+   "question": "Based on the passage, why does Valentina most likely leave the notebook with the narrator?",
+   "options": [
+    "She wants the narrator to hide her private notebooks from her sister",
+    "She means to show her trust in the narrator without answering the rumor aloud",
+    "She is too embarrassed by the rumor to discuss her writing at all",
+    "She intends to hand over a final draft before she leaves Lima for Madrid at last"
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고 떨어진 두 단서를 결합해야 하며, 오답이 한 단서만 설명하는 부분 정답이다"
+  },
+  {
+   "candidateId": "lit40-hard-01-011",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "“Walk me to the railing, if you are not too tired,” Ofelia said, though the doctor had forbidden the night air. I wheeled her along the promenade at Valparaiso, as I had each evening that month, and she counted the lamps aloud, as she always did, never once losing the number. That afternoon I had found, among her blankets, a letter addressed to her son in Santiago, unsealed and plainly unfinished. When I mentioned that the post left at dawn, she asked whether the gulls ever slept, and whether I had a son myself. At the railing she held out the letter and asked me to read it to her, slowly, every line. I read it. She corrected two words, made me read it again, and then folded it into my apron pocket and turned her chair, without my help, toward the lamps.",
+   "question": "Based on the passage, why does Ofelia most likely ask the narrator to read the letter aloud?",
+   "options": [
+    "She doubts her own memory and needs help recalling what she wrote",
+    "She wishes to keep the letter's contents secret from her son",
+    "She wants the letter sent but cannot bear to send it by herself",
+    "She is testing whether the nurse has already read her private letter"
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고 떨어진 두 단서를 결합해야 하며, 오답이 한 단서만 설명하는 부분 정답이다"
+  },
+  {
+   "candidateId": "lit40-hard-01-013",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "Haruto has already taken the better chair when you arrive at the tailor's back room in Addis Ababa, so you take the stool by the bolts of cotton and say good morning as if you meant it. You and he have baked on the same street for nine years. The rule, written by no one, is that neither of you sells bread before seven; the market council has called you both to decide whether it still holds now that the bus station has moved. Lindiwe, the tailor, pours tea and leaves you to it. Haruto compliments your new ovens. You compliment his sign. He stirs his tea long after the sugar has gone, and you count the pins in the cushion beside you: forty, forty-one. When the clerk finally arrives, the two of you rise at the same moment, and each holds the curtain open for the other until it slips from both your hands.",
+   "question": "Which choice best describes the overall tone of the passage?",
+   "options": [
+    "Courteous on the surface, yet tense with a rivalry neither will voice",
+    "Calm and relaxed, reflecting an easy friendship between neighbors",
+    "Openly hostile, as each baker tries to humiliate the other aloud",
+    "Anxious at first, then fully at ease once the council clerk finally arrives"
+   ],
+   "recipeBeyondMedium": "겉 정서와 속 정서의 어긋남을 두 곳 이상의 단서로 종합해야 하며 오답은 한쪽만 반영한다"
+  },
+  {
+   "candidateId": "lit40-hard-01-014",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "When Weiqi climbed up to the roof the first evening back, I was already sitting against the water tank, pretending to read. Taipei hummed below us, scooters and rain on tin, and she said the view had not changed, which was untrue; three new towers stood where the night market had been. I said it was nice of her to visit. “Yuxuan, I didn't visit,” she said. “I moved back.” For a while we talked about her new school, the price of mangoes, my brother's motorbike, and I laughed at the right places. Then she set her old key ring on the rim of the tank, the one with the plastic cat I had given her the summer she left without saying goodbye. I did not pick it up. I did not push it away either, and when the rain grew heavier, I moved a little to make room for her under the overhang.",
+   "question": "Which choice best describes the overall tone of the passage?",
+   "options": [
+    "Breezy and carefree, like any pleasant reunion between old friends",
+    "Casual on the surface, beneath which a guarded hurt slowly softens",
+    "Bitterly accusatory, as the narrator punishes Weiqi for leaving",
+    "Coolly guarded throughout, with no change at all in the narrator's stance"
+   ],
+   "recipeBeyondMedium": "겉 정서와 속 정서의 어긋남을 두 곳 이상의 단서로 종합해야 하며 오답은 한쪽만 반영한다"
+  },
+  {
+   "candidateId": "lit40-hard-01-015",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "Years later, Larissa would describe that week as a matter of logistics. The guesthouse beside the old monastery in Lisbon was being sold, and she and Caio, who had shared its thin middle wall for twenty years, were the last tenants to clear their rooms. She labeled boxes. She rented a van. She told Caio, briskly, that the brass coat hook between their two doors belonged to neither of them and should stay for the buyers. Caio agreed. Yet on the final morning he found her on the landing with a screwdriver, loosening the hook's screws one quarter turn at a time, and then tightening them again. Neither of them mentioned it. They carried the last chair down together, and the hook stayed on the wall, a pale outline around it where twenty winters of coats had kept the paint from fading.",
+   "question": "Which choice best describes the overall tone of the passage?",
+   "options": [
+    "Efficient and businesslike, focused entirely on finishing the move",
+    "Openly mournful, dwelling at length on the sorrow of leaving home",
+    "Brisk and practical in manner, yet threaded with reluctant grief",
+    "Detached at first but finally joyful once the last chair is moved"
+   ],
+   "recipeBeyondMedium": "겉 정서와 속 정서의 어긋남을 두 곳 이상의 단서로 종합해야 하며 오답은 한쪽만 반영한다"
+  },
+  {
+   "candidateId": "lit40-hard-01-016",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "Bees do not forgive clumsiness. Orla had said so the first spring Paloma rented the cottage behind her yard in Riga, and for eleven years after, the two women spoke mostly through notes about rent and the sagging gate. Paloma signed hers with her full name and the date. Orla signed hers with a single initial. This morning a hive swarmed onto the fence between them, and Orla, her veil torn, stood very still. Paloma crossed the yard with her own veil in her hand and said, “Orla, put this on,” as if she had always used the name. Orla put it on. Afterward, when the swarm had been coaxed into a fresh box, Orla carried the only bench out of the shed and set it on Paloma's side of the fence, then sat on an overturned bucket beside it and handed her the smoker to hold.",
+   "question": "Based on the passage, which choice best describes the relationship between Orla and Paloma?",
+   "options": [
+    "Paloma resents Orla's authority as landlord and seeks to embarrass her",
+    "They share a strictly businesslike bond, polite but without warmth",
+    "Orla shelters a helpless Paloma, who depends entirely on her beekeeping expertise",
+    "Their long formality hides a mutual regard that both now begin to show"
+   ],
+   "recipeBeyondMedium": "표면 정중함 아래의 관계를 두 곳의 행동 단서로 추론해야 하며, 오답은 단서 방향을 뒤집거나 일부만 설명한다"
+  },
+  {
+   "candidateId": "lit40-hard-01-017",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "Shanghai had flooded again, and by midnight the water in the clinic's cellar reached my knees. Meilin had sent for me, not for the pumps, and I came, as I always do when she sends. She called me Mayor at the top of the stairs, as she does in front of the council, and handed me the lamp without asking. I held it while she lifted crates of vaccine onto the shelves, and I did not mention the winter she had sat three nights beside my father when no other doctor would come. She did not mention the clinic's lease, which I have renewed each year without a fee. When the last crate was dry, she took the higher step and offered me her hand, and I took it, and on the way up she said my name, just Gil, and told me to mind the loose board.",
+   "question": "Based on the passage, which choice best describes the relationship between the narrator and Meilin?",
+   "options": [
+    "Bound by unspoken debts, they show loyalty through acts rather than words",
+    "Meilin treats Gil with stiff formality because she quietly distrusts his office",
+    "Gil commands Meilin, who obeys him because she depends on his lease",
+    "Meilin feels indebted to Gil, while he believes he owes her nothing"
+   ],
+   "recipeBeyondMedium": "표면 정중함 아래의 관계를 두 곳의 행동 단서로 추론해야 하며, 오답은 단서 방향을 뒤집거나 일부만 설명한다"
+  },
+  {
+   "candidateId": "lit40-hard-01-018",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "“Somebody could have signed the form,” Leah said, before Colby had even hung up his coat. The customs post at the Ohio rail yard had lost its chance at the federal contract that morning, and everyone in the cramped office knew the paperwork had arrived a day late. Colby, who had trained her for two years, said only that the coffee was burnt again. He poured himself a cup anyway. Leah went on sorting manifests, slapping each one down harder than the last. Around noon a freight inspector asked who was responsible for the missing signature, and Colby answered before she could: the delay was his, he said, an old man's forgetting. Leah stopped sorting. When the inspector left, she took the burnt coffee from Colby's desk, poured it out, and set a fresh pot going without a word.",
+   "question": "Based on the passage, which choice best describes the relationship between Leah and Colby?",
+   "options": [
+    "Colby resents Leah for costing the office its federal contract",
+    "Leah's anger gives way to grateful regard as Colby shields her",
+    "The two keep a cordial, professional distance throughout the day",
+    "Leah defers to Colby only because he is the senior officer"
+   ],
+   "recipeBeyondMedium": "표면 정중함 아래의 관계를 두 곳의 행동 단서로 추론해야 하며, 오답은 단서 방향을 뒤집거나 일부만 설명한다"
+  },
+  {
+   "candidateId": "lit40-hard-01-019",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "Two rules held on Birdie's barge: no singing after dark, and no one touches the lantern on the stern. I kept both the summer I stayed with her on the river outside Thessaloniki, though I had sung beside her for six seasons in the music halls, and though the lantern, cracked and blackened, had once hung over our stage. Birdie trimmed its wick every evening and never lit it. Her niece, who was seven, asked me one night why we had stopped singing together. I told her our voices had grown tired. The child looked at the lantern and asked why, then, Aunt Birdie still cleaned it. Neither of us answered. Later, when the girl was asleep, Birdie took a match from her apron, struck it, and held it near the wick until the flame reached her fingers and went out.",
+   "question": "In the passage, the lantern on the stern most likely represents",
+   "options": [
+    "Birdie's wish to forbid all singing aboard the barge once darkness falls",
+    "the danger that river travel poses to anyone careless with fire",
+    "the shared past on stage that neither woman can relight or discard",
+    "the niece's curiosity about the adults' lives before the river"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-020",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "Once each spring, for as long as either of us could remember, Layla and I rented the same farmhouse beyond the walls of Marrakesh, and once each spring we said perhaps twenty words to each other. That year the grafted orange tree by the well bore fruit for the first time. Layla had cut and bound its branch four springs before, with twine and a paste of clay, and had told no one. When the farmer's wife praised the oranges, Layla shrugged and said the tree had simply been lucky. Yet each morning I saw her walk the long way to the well, past the tree, and touch the scar where the branch had joined, as one touches a sleeping child's forehead. On our last evening she set a single orange on my windowsill, unpeeled, with a length of twine still knotted around its stem.",
+   "question": "In the passage, the grafted orange tree most likely represents",
+   "options": [
+    "the farmer's wife's admiration for the farmhouse orchard",
+    "the good luck that Layla claims alone produced the fruit",
+    "the narrator's envy of Layla's skill with plants and trees",
+    "Layla's hidden pride in a patient work she will not claim"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-021",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "When you reach the cemetery gate above Otaru in February, Burak is already there, holding the metronome that belonged to your old teacher. For eleven years the three of you rehearsed to its dry tick, and since the funeral neither of you has set it going. Yuto, he says, and offers it to you, as he has twice before, and twice before you have pushed it back into his gloved hands. Your duo has lost its booking at the hotel bar; lately you have both been playing a little ahead of each other, a little behind, as if each of you were listening for a different beat. Snow collects on the iron bars. Burak winds the metronome, then stops before releasing the arm. Neither of you says aloud who it was that kept you together. Walking down the hill afterward, you notice that the two of you have fallen into step without trying, and you do not mention it, and neither does he.",
+   "question": "In the text, the teacher's metronome most likely symbolizes",
+   "options": [
+    "the shared sense of timing that the duo relied on and has now lost.",
+    "a burden of grief that Burak hopes to escape by handing it to Yuto.",
+    "the formal training that the two musicians believe they have outgrown.",
+    "a valuable keepsake that each man feels the other deserves to own."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-022",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Would the call come before the bus reached Central Avenue? Waya kept turning his phone face down on his knee and then face up again. Beside him, Kamal sat with his hands folded over the toolbag, his knuckles scarred from thirty years of chisels. The bid for the church restoration had gone in a month ago; if it was accepted, Waya would cut his first joints on a job that mattered. Kamal had said nothing about it all evening. But when the bus jolted over a pothole, he steadied the bag before Waya could, and Waya saw that the old man's thumb had been running along the same seam of canvas for miles, worrying a groove into the cloth as if it were a board that would not come true. Waya looked out at the dark storefronts and let him keep at it.",
+   "question": "As used in the text, the phrase “a board that would not come true” most nearly suggests",
+   "options": [
+    "that Kamal considers the toolbag poorly made and in need of repair.",
+    "that Kamal is bored by the long ride and is idly passing the time.",
+    "that Kamal is anxiously working at an uncertainty he cannot fix.",
+    "that Kamal is quietly showing Waya how to test the grain of wood."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-023",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Damp velvet and old butter: the closed cinema near the Maas smelled of every winter it had survived. Zeynep had borrowed the key from the owner because Saga refused to talk at school, and here, at least, no one would pass the door. They sat in the fourth row. Saga's little brother would be home at six, expecting to hear whether their father was coming back from Izmir, and Saga had rehearsed two different answers on the tram. Neither of them mentioned this. Zeynep talked about the projector, about how the old operator used to thread film by hand. Saga nodded, watching the blank screen, which hung in front of them like a page left for someone else to write. When the radiator ticked, both of them glanced at the clock above the exit.",
+   "question": "As used in the text, the phrase “like a page left for someone else to write” most nearly suggests",
+   "options": [
+    "that the cinema has been abandoned and will not show films again.",
+    "that Saga wishes she could become a writer rather than a student.",
+    "that Zeynep hopes a film will help Saga forget her family worries.",
+    "that the answer owed to the brother remains unformed by either of them."
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-001 — 20문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-001.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-hard-01-001 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nDarius came down to the harbor every Thursday, though he claimed he only wanted the air. I told him the air smelled of diesel and gutted mullet, and he agreed and stayed anyway. We mended nets side by side. He asked about my knees, my brother's boat, the price of ice. He never asked why I had stopped coming to the church on the hill, and I never offered. Once a boy ran past shouting that the bells were being repaired, and Darius bent lower over the knot he was tying until the boy was gone. I complained, as always, that he worked too slowly and wasted good twine. Still, on the Thursday he was ill, I left the end of the net unfinished, folded it over the bollard where he usually sat, and went home early. When he returned, he found the frayed corner waiting and said nothing about it, only threaded his needle and began where he had stopped.\n\n[질문] Which choice best describes the narrator's attitude toward Darius?\nA) Resentful of Darius's repeated efforts to draw him back to the hill church\nB) Indifferent to Darius's company, which he tolerates only out of habit\nC) Quietly appreciative of Darius's restraint, despite routine complaints\nD) Amused by Darius's clumsiness with the nets and the wasted twine\n### lit40-hard-01-002 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nWhen the fog came in off the Cornish water, Jonah lit the second lamp in the workshop and bent again over the ledger he was binding. Nargis had come to speak of her grandmother, who could no longer manage the stairs of the cottage above. She had rehearsed the English words on the walk from the station, plain and reasonable: a room in town, a nurse, a window on the square. Jonah heard her out, then showed her how the old woman had once taught him to pare leather so thin the light came through it. Nargis took the knife, as she had when she was a child, and pared badly. Later, gathering her coat, she noticed that he had set aside a strip of the finest calfskin, labelled in her grandmother's hand, which he had never once used. She said she would write to the nurse on Monday, and she buttoned her coat slowly, and she did not take the strip away from his bench.\n\n[질문] Which choice best describes Nargis's attitude toward Jonah as presented in the passage?\nA) Impatient with Jonah's refusal to discuss the matter in plain, simple English\nB) Contemptuous of Jonah's devotion to an old-fashioned and dying craft\nC) Persuaded by Jonah's lesson to abandon her plan for the grandmother\nD) Resolved on her plan yet gentle toward Jonah's attachment to the past\n### lit40-hard-01-004 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nSmell of wet ink and wool sacking filled the post office the winter I practiced my recitation there, because it was the only building on our stretch of the plateau with a stove that stayed lit. Tallulah, who sorted the mail and had once ridden with my father, listened from behind the grille. I told her that she corrected my pauses too often and that my father would have let me speak at my own pace. She only nodded and went on stamping letters. On the evening before the program, however, I arrived early and found her chair turned to face the bench where I stood, and I recited the whole piece to it before she came in. When she did, I began again from the first line, slower this time, waiting at each pause for the small tap of her pencil against the counter.\n\n[질문] Which choice best describes the narrator's attitude toward Tallulah?\nA) Openly hostile toward Tallulah, whom she blames for her father's absence\nB) Outwardly impatient with Tallulah but quietly reliant on her guidance\nC) Largely indifferent to Tallulah, valuing only the warmth of the stove\nD) Admiring of Tallulah chiefly for her past travels with the father\n### lit40-hard-01-005 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nTromso in March was all slush and salt, and you pushed your mother's chair three streets to Soren's shop because she would let no one else cut her hair. Soren worked in silence, as he always had, the scissors ticking like a clock under the mirror. Halfway through, your mother said she was sorry for the years she had not written, for the wedding she had not attended. You told her the wind had been loud and asked her to repeat it, and when she did, you asked Soren whether the back should be shorter. Afterward you brushed the cut hair from her collar with your own glove, carefully, the way she had once brushed snow from yours. On the walk home you named the shops you passed, one by one, until the door.\n\n[질문] Which choice best describes the narrator's attitude toward the mother in the passage?\nA) Openly forgiving, eager to accept the apology and move past old hurts\nB) Coldly resentful, performing each duty mainly to shame the mother\nC) Tenderly attentive, yet unwilling to take up the mother's apology\nD) Mildly bored, more interested in the barbershop than the mother\n### lit40-hard-01-006 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 hard · hard 기준: 요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다\n[지문]\n“You take the kitchen, I'll take the garden plot,” Itzel said, laying the keys on the bench between the bean rows. Milena agreed too quickly, and for an hour the twins sorted the contents of their mother's house aloud: two kettles, one clock, a drawer of mismatched string. Every Sunday for eleven years they had come to this plot in Gdansk to water the tomatoes she had planted. Neither of them, Milena admitted while coiling the hose, had ever liked tomatoes. Itzel laughed and said she had always given hers to the neighbors. They went on listing furniture, assigning it, trading it back. At six, when the sprinklers in the other plots began to hiss, both of them reached for the same watering can, and Milena let go first, and then Itzel handed it back, and they filled it together at the tap.\n\n[질문] Which choice best states the main purpose of the passage?\nA) To recount how the twins divided their mother's furniture and goods\nB) To suggest that family duties are usually kept up without any real pleasure\nC) To show that a shared watering can is a family's most valued object\nD) To show that dividing the house cannot divide the ritual the twins share\n### lit40-hard-01-007 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 hard · hard 기준: 요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다\n[지문]\nWe called it the salt pool, though by Bartolo's ninth summer in Havana the sea had long since cracked its seaward wall. Each morning Dario sat on the edge with his trousers rolled and named things for her in the old language: tile, gull, the green rust on the ladder. She repeated each word and swam a length between words. On Thursday she stopped halfway, clung to the rope, and climbed out by the near ladder, saying the water was too cold. Dario, who had seen everything, said only that cold had two words, one for water and one for people, and made her practice both. She did not tell him she had wanted to reach the far wall before her mother arrived. He did not tell her he had noticed. When they walked home, she carried his towel, and he carried the word for rope, saying it over to himself.\n\n[질문] Which choice best states the main purpose of the passage?\nA) To show how a language lesson lets the two quietly protect each other's pride\nB) To describe a daily routine of swimming lessons in a crumbling Havana pool\nC) To argue that every language holds separate words for physical and emotional cold\nD) To suggest that Dario is slowly losing his memory of the language he teaches\n### lit40-hard-01-009 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 hard · hard 기준: 요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다\n[지문]\nWool remembers every hand. Aster had said so to the cooperative in Cape Town on the morning Kagiso, who had bought the old house and its looms, tangled a warp before thirty weavers and the visiting buyers. Kagiso laughed too loudly and left the shed. That evening Aster, who also kept the garden behind the house, found her among the lemon trees and said nothing about looms; she asked instead which beds should be turned for winter. Kagiso, to her own surprise, knew. Her grandmother had grown lemons in Mafikeng, and she named the soil and the pruning months without stopping. Aster listened as if being taught. In the following week Kagiso came to the shed each dawn, before the others, and Aster left a single spool beside her bench, already wound, its loose end tucked under so that it would not unravel.\n\n[질문] Which choice best states the main purpose of the passage?\nA) To recount how Kagiso tangled a warp before the whole cooperative and its buyers\nB) To argue that skill in gardening usually leads to skill in weaving\nC) To show how Aster restores Kagiso's confidence by first letting her teach\nD) To suggest that a single wound spool repaired the entire cooperative\n### lit40-hard-01-010 — skill inferences · 유형 character_motivation · 요청 난이도 hard · hard 기준: 동기를 한 문장에서 읽을 수 없고 떨어진 두 단서를 결합해야 하며, 오답이 한 단서만 설명하는 부분 정답이다\n[지문]\nOnce, near the end of my nights at the pharmacy in Lima, Valentina came in at two in the morning and did not ask for anything on the shelves. For six years she had sent me her chapters typed, never handwritten; the notebooks she kept locked in a drawer her own sister had never seen. That week a colleague had told me, kindly and wrongly, that Valentina was talking to a translator in Madrid. I said as much while I rang up the mints she finally chose. She looked at the fluorescent tubes and remarked that they made everyone look like a ghost of themselves. Then she set a green notebook on the counter, its pages crowded with her slanted ink and crossed-out lines, and said she would collect it Thursday. I put it under the register, beside the night ledger, and kept my hand on its cover until the bell over the door stopped swinging.\n\n[질문] Based on the passage, why does Valentina most likely leave the notebook with the narrator?\nA) She wants the narrator to hide her private notebooks from her sister\nB) She means to show her trust in the narrator without answering the rumor aloud\nC) She is too embarrassed by the rumor to discuss her writing at all\nD) She intends to hand over a final draft before she leaves Lima for Madrid at last\n### lit40-hard-01-011 — skill inferences · 유형 character_motivation · 요청 난이도 hard · hard 기준: 동기를 한 문장에서 읽을 수 없고 떨어진 두 단서를 결합해야 하며, 오답이 한 단서만 설명하는 부분 정답이다\n[지문]\n“Walk me to the railing, if you are not too tired,” Ofelia said, though the doctor had forbidden the night air. I wheeled her along the promenade at Valparaiso, as I had each evening that month, and she counted the lamps aloud, as she always did, never once losing the number. That afternoon I had found, among her blankets, a letter addressed to her son in Santiago, unsealed and plainly unfinished. When I mentioned that the post left at dawn, she asked whether the gulls ever slept, and whether I had a son myself. At the railing she held out the letter and asked me to read it to her, slowly, every line. I read it. She corrected two words, made me read it again, and then folded it into my apron pocket and turned her chair, without my help, toward the lamps.\n\n[질문] Based on the passage, why does Ofelia most likely ask the narrator to read the letter aloud?\nA) She doubts her own memory and needs help recalling what she wrote\nB) She wishes to keep the letter's contents secret from her son\nC) She wants the letter sent but cannot bear to send it by herself\nD) She is testing whether the nurse has already read her private letter\n### lit40-hard-01-013 — skill inferences · 유형 tone_or_mood · 요청 난이도 hard · hard 기준: 겉 정서와 속 정서의 어긋남을 두 곳 이상의 단서로 종합해야 하며 오답은 한쪽만 반영한다\n[지문]\nHaruto has already taken the better chair when you arrive at the tailor's back room in Addis Ababa, so you take the stool by the bolts of cotton and say good morning as if you meant it. You and he have baked on the same street for nine years. The rule, written by no one, is that neither of you sells bread before seven; the market council has called you both to decide whether it still holds now that the bus station has moved. Lindiwe, the tailor, pours tea and leaves you to it. Haruto compliments your new ovens. You compliment his sign. He stirs his tea long after the sugar has gone, and you count the pins in the cushion beside you: forty, forty-one. When the clerk finally arrives, the two of you rise at the same moment, and each holds the curtain open for the other until it slips from both your hands.\n\n[질문] Which choice best describes the overall tone of the passage?\nA) Courteous on the surface, yet tense with a rivalry neither will voice\nB) Calm and relaxed, reflecting an easy friendship between neighbors\nC) Openly hostile, as each baker tries to humiliate the other aloud\nD) Anxious at first, then fully at ease once the council clerk finally arrives\n### lit40-hard-01-014 — skill inferences · 유형 tone_or_mood · 요청 난이도 hard · hard 기준: 겉 정서와 속 정서의 어긋남을 두 곳 이상의 단서로 종합해야 하며 오답은 한쪽만 반영한다\n[지문]\nWhen Weiqi climbed up to the roof the first evening back, I was already sitting against the water tank, pretending to read. Taipei hummed below us, scooters and rain on tin, and she said the view had not changed, which was untrue; three new towers stood where the night market had been. I said it was nice of her to visit. “Yuxuan, I didn't visit,” she said. “I moved back.” For a while we talked about her new school, the price of mangoes, my brother's motorbike, and I laughed at the right places. Then she set her old key ring on the rim of the tank, the one with the plastic cat I had given her the summer she left without saying goodbye. I did not pick it up. I did not push it away either, and when the rain grew heavier, I moved a little to make room for her under the overhang.\n\n[질문] Which choice best describes the overall tone of the passage?\nA) Breezy and carefree, like any pleasant reunion between old friends\nB) Casual on the surface, beneath which a guarded hurt slowly softens\nC) Bitterly accusatory, as the narrator punishes Weiqi for leaving\nD) Coolly guarded throughout, with no change at all in the narrator's stance\n### lit40-hard-01-015 — skill inferences · 유형 tone_or_mood · 요청 난이도 hard · hard 기준: 겉 정서와 속 정서의 어긋남을 두 곳 이상의 단서로 종합해야 하며 오답은 한쪽만 반영한다\n[지문]\nYears later, Larissa would describe that week as a matter of logistics. The guesthouse beside the old monastery in Lisbon was being sold, and she and Caio, who had shared its thin middle wall for twenty years, were the last tenants to clear their rooms. She labeled boxes. She rented a van. She told Caio, briskly, that the brass coat hook between their two doors belonged to neither of them and should stay for the buyers. Caio agreed. Yet on the final morning he found her on the landing with a screwdriver, loosening the hook's screws one quarter turn at a time, and then tightening them again. Neither of them mentioned it. They carried the last chair down together, and the hook stayed on the wall, a pale outline around it where twenty winters of coats had kept the paint from fading.\n\n[질문] Which choice best describes the overall tone of the passage?\nA) Efficient and businesslike, focused entirely on finishing the move\nB) Openly mournful, dwelling at length on the sorrow of leaving home\nC) Brisk and practical in manner, yet threaded with reluctant grief\nD) Detached at first but finally joyful once the last chair is moved\n### lit40-hard-01-016 — skill inferences · 유형 relationship_between_characters · 요청 난이도 hard · hard 기준: 표면 정중함 아래의 관계를 두 곳의 행동 단서로 추론해야 하며, 오답은 단서 방향을 뒤집거나 일부만 설명한다\n[지문]\nBees do not forgive clumsiness. Orla had said so the first spring Paloma rented the cottage behind her yard in Riga, and for eleven years after, the two women spoke mostly through notes about rent and the sagging gate. Paloma signed hers with her full name and the date. Orla signed hers with a single initial. This morning a hive swarmed onto the fence between them, and Orla, her veil torn, stood very still. Paloma crossed the yard with her own veil in her hand and said, “Orla, put this on,” as if she had always used the name. Orla put it on. Afterward, when the swarm had been coaxed into a fresh box, Orla carried the only bench out of the shed and set it on Paloma's side of the fence, then sat on an overturned bucket beside it and handed her the smoker to hold.\n\n[질문] Based on the passage, which choice best describes the relationship between Orla and Paloma?\nA) Paloma resents Orla's authority as landlord and seeks to embarrass her\nB) They share a strictly businesslike bond, polite but without warmth\nC) Orla shelters a helpless Paloma, who depends entirely on her beekeeping expertise\nD) Their long formality hides a mutual regard that both now begin to show\n### lit40-hard-01-017 — skill inferences · 유형 relationship_between_characters · 요청 난이도 hard · hard 기준: 표면 정중함 아래의 관계를 두 곳의 행동 단서로 추론해야 하며, 오답은 단서 방향을 뒤집거나 일부만 설명한다\n[지문]\nShanghai had flooded again, and by midnight the water in the clinic's cellar reached my knees. Meilin had sent for me, not for the pumps, and I came, as I always do when she sends. She called me Mayor at the top of the stairs, as she does in front of the council, and handed me the lamp without asking. I held it while she lifted crates of vaccine onto the shelves, and I did not mention the winter she had sat three nights beside my father when no other doctor would come. She did not mention the clinic's lease, which I have renewed each year without a fee. When the last crate was dry, she took the higher step and offered me her hand, and I took it, and on the way up she said my name, just Gil, and told me to mind the loose board.\n\n[질문] Based on the passage, which choice best describes the relationship between the narrator and Meilin?\nA) Bound by unspoken debts, they show loyalty through acts rather than words\nB) Meilin treats Gil with stiff formality because she quietly distrusts his office\nC) Gil commands Meilin, who obeys him because she depends on his lease\nD) Meilin feels indebted to Gil, while he believes he owes her nothing\n### lit40-hard-01-018 — skill inferences · 유형 relationship_between_characters · 요청 난이도 hard · hard 기준: 표면 정중함 아래의 관계를 두 곳의 행동 단서로 추론해야 하며, 오답은 단서 방향을 뒤집거나 일부만 설명한다\n[지문]\n“Somebody could have signed the form,” Leah said, before Colby had even hung up his coat. The customs post at the Ohio rail yard had lost its chance at the federal contract that morning, and everyone in the cramped office knew the paperwork had arrived a day late. Colby, who had trained her for two years, said only that the coffee was burnt again. He poured himself a cup anyway. Leah went on sorting manifests, slapping each one down harder than the last. Around noon a freight inspector asked who was responsible for the missing signature, and Colby answered before she could: the delay was his, he said, an old man's forgetting. Leah stopped sorting. When the inspector left, she took the burnt coffee from Colby's desk, poured it out, and set a fresh pot going without a word.\n\n[질문] Based on the passage, which choice best describes the relationship between Leah and Colby?\nA) Colby resents Leah for costing the office its federal contract\nB) Leah's anger gives way to grateful regard as Colby shields her\nC) The two keep a cordial, professional distance throughout the day\nD) Leah defers to Colby only because he is the senior officer\n### lit40-hard-01-019 — skill inferences · 유형 symbolism · 요청 난이도 hard\n[지문]\nTwo rules held on Birdie's barge: no singing after dark, and no one touches the lantern on the stern. I kept both the summer I stayed with her on the river outside Thessaloniki, though I had sung beside her for six seasons in the music halls, and though the lantern, cracked and blackened, had once hung over our stage. Birdie trimmed its wick every evening and never lit it. Her niece, who was seven, asked me one night why we had stopped singing together. I told her our voices had grown tired. The child looked at the lantern and asked why, then, Aunt Birdie still cleaned it. Neither of us answered. Later, when the girl was asleep, Birdie took a match from her apron, struck it, and held it near the wick until the flame reached her fingers and went out.\n\n[질문] In the passage, the lantern on the stern most likely represents\nA) Birdie's wish to forbid all singing aboard the barge once darkness falls\nB) the danger that river travel poses to anyone careless with fire\nC) the shared past on stage that neither woman can relight or discard\nD) the niece's curiosity about the adults' lives before the river\n### lit40-hard-01-020 — skill inferences · 유형 symbolism · 요청 난이도 hard\n[지문]\nOnce each spring, for as long as either of us could remember, Layla and I rented the same farmhouse beyond the walls of Marrakesh, and once each spring we said perhaps twenty words to each other. That year the grafted orange tree by the well bore fruit for the first time. Layla had cut and bound its branch four springs before, with twine and a paste of clay, and had told no one. When the farmer's wife praised the oranges, Layla shrugged and said the tree had simply been lucky. Yet each morning I saw her walk the long way to the well, past the tree, and touch the scar where the branch had joined, as one touches a sleeping child's forehead. On our last evening she set a single orange on my windowsill, unpeeled, with a length of twine still knotted around its stem.\n\n[질문] In the passage, the grafted orange tree most likely represents\nA) the farmer's wife's admiration for the farmhouse orchard\nB) the good luck that Layla claims alone produced the fruit\nC) the narrator's envy of Layla's skill with plants and trees\nD) Layla's hidden pride in a patient work she will not claim\n### lit40-hard-01-021 — skill inferences · 유형 symbolism · 요청 난이도 hard\n[지문]\nWhen you reach the cemetery gate above Otaru in February, Burak is already there, holding the metronome that belonged to your old teacher. For eleven years the three of you rehearsed to its dry tick, and since the funeral neither of you has set it going. Yuto, he says, and offers it to you, as he has twice before, and twice before you have pushed it back into his gloved hands. Your duo has lost its booking at the hotel bar; lately you have both been playing a little ahead of each other, a little behind, as if each of you were listening for a different beat. Snow collects on the iron bars. Burak winds the metronome, then stops before releasing the arm. Neither of you says aloud who it was that kept you together. Walking down the hill afterward, you notice that the two of you have fallen into step without trying, and you do not mention it, and neither does he.\n\n[질문] In the text, the teacher's metronome most likely symbolizes\nA) the shared sense of timing that the duo relied on and has now lost.\nB) a burden of grief that Burak hopes to escape by handing it to Yuto.\nC) the formal training that the two musicians believe they have outgrown.\nD) a valuable keepsake that each man feels the other deserves to own.\n### lit40-hard-01-022 — skill words_in_context · 유형 figurative_language · 요청 난이도 hard\n[지문]\nWould the call come before the bus reached Central Avenue? Waya kept turning his phone face down on his knee and then face up again. Beside him, Kamal sat with his hands folded over the toolbag, his knuckles scarred from thirty years of chisels. The bid for the church restoration had gone in a month ago; if it was accepted, Waya would cut his first joints on a job that mattered. Kamal had said nothing about it all evening. But when the bus jolted over a pothole, he steadied the bag before Waya could, and Waya saw that the old man's thumb had been running along the same seam of canvas for miles, worrying a groove into the cloth as if it were a board that would not come true. Waya looked out at the dark storefronts and let him keep at it.\n\n[질문] As used in the text, the phrase “a board that would not come true” most nearly suggests\nA) that Kamal considers the toolbag poorly made and in need of repair.\nB) that Kamal is bored by the long ride and is idly passing the time.\nC) that Kamal is anxiously working at an uncertainty he cannot fix.\nD) that Kamal is quietly showing Waya how to test the grain of wood.\n### lit40-hard-01-023 — skill words_in_context · 유형 figurative_language · 요청 난이도 hard\n[지문]\nDamp velvet and old butter: the closed cinema near the Maas smelled of every winter it had survived. Zeynep had borrowed the key from the owner because Saga refused to talk at school, and here, at least, no one would pass the door. They sat in the fourth row. Saga's little brother would be home at six, expecting to hear whether their father was coming back from Izmir, and Saga had rehearsed two different answers on the tram. Neither of them mentioned this. Zeynep talked about the projector, about how the old operator used to thread film by hand. Saga nodded, watching the blank screen, which hung in front of them like a page left for someone else to write. When the radiator ticked, both of them glanced at the clock above the exit.\n\n[질문] As used in the text, the phrase “like a page left for someone else to write” most nearly suggests\nA) that the cinema has been abandoned and will not show films again.\nB) that Saga wishes she could become a writer rather than a student.\nC) that Zeynep hopes a film will help Saga forget her family worries.\nD) that the answer owed to the brother remains unformed by either of them."
+}

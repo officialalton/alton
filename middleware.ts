@@ -7,6 +7,8 @@ const ROLE_PREFIXES: Record<string, string> = {
   parent: "/parent",
   teacher: "/teacher",
   admin: "/admin",
+  // 2026-09-22(컨설턴트 포지션) — 관리자와 완전히 별도인 role·포털.
+  consultant: "/consultant",
 };
 
 export async function middleware(request: NextRequest) {
@@ -43,5 +45,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/student/:path*", "/parent/:path*", "/teacher/:path*", "/admin/:path*"],
+  matcher: ["/student/:path*", "/parent/:path*", "/teacher/:path*", "/admin/:path*", "/consultant/:path*"],
 };

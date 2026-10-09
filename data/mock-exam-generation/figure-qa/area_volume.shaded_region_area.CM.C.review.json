@@ -1,0 +1,23 @@
+{
+ "itemId": "area_volume.shaded_region_area.CM.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:12:52Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "66e01f24f5d07da283cff4107c74f2900d178c17e9edd8ed043e29006dab90e0",
+ "samples": [
+  "area_volume.shaded_region_area.CM.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "복합 도형 선택지 4개(변 라벨·지름 라벨·음영 위치 다른 그림) 샘플 데스크톱·375px 확인: 정답 B(변 4, 16 − 4π)만 지문 넓이와 일치, 오답은 원/정사각형 위치 교환·음영이 안쪽 도형 규칙, 네 그림 크기 동일."
+}

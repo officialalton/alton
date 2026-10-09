@@ -1,0 +1,539 @@
+[
+ {
+  "label": "screen_verified_now(게시 가능: 화면 검증 증거 있음)",
+  "partialDisjointSets": {
+   "MC Part A (계산기 불가 29)": 0,
+   "MC Part B (계산기 필수 13)": 0,
+   "FRQ Part A (2)": 1,
+   "FRQ Part B (4)": 0
+  },
+  "disjointFullSets": 0,
+  "firstShortAfter": {
+   "shortfall": [
+    {
+     "sectionKey": "ap_mc_b",
+     "need": 13,
+     "have": 10
+    },
+    {
+     "sectionKey": "ap_frq_b",
+     "need": 4,
+     "have": 2
+    }
+   ],
+   "composition": [
+    "unit_1_below_min_4/5",
+    "unit_2_below_min_4/5",
+    "unit_3_below_min_2/3",
+    "unit_7_below_min_2/3"
+   ],
+   "diversity": []
+  },
+  "items": 102,
+  "mc": {
+   "n": 90,
+   "byCalc": {
+    "not_allowed": 76,
+    "required": 14
+   },
+   "families": 30,
+   "effective": 57
+  },
+  "frq": {
+   "n": 12,
+   "byCalc": {
+    "required": 5,
+    "not_allowed": 7
+   },
+   "families": 4
+  },
+  "unitRows": [
+   {
+    "unit": "1",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 14,
+    "families": 4,
+    "effective": 8,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "2",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 14,
+    "families": 4,
+    "effective": 8,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "3",
+    "weight": "5-10%",
+    "needMin": 3,
+    "needMax": 4,
+    "have": 7,
+    "families": 2,
+    "effective": 4,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "4",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 11,
+    "families": 4,
+    "effective": 8,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "5",
+    "weight": "15-20%",
+    "needMin": 7,
+    "needMax": 8,
+    "have": 14,
+    "families": 5,
+    "effective": 10,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "6",
+    "weight": "15-20%",
+    "needMin": 7,
+    "needMax": 8,
+    "have": 14,
+    "families": 5,
+    "effective": 8,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "7",
+    "weight": "5-10%",
+    "needMin": 3,
+    "needMax": 4,
+    "have": 6,
+    "families": 2,
+    "effective": 4,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "8",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 10,
+    "families": 4,
+    "effective": 7,
+    "shortfallVsMin": 0
+   }
+  ],
+  "plan": {
+   "ok": false,
+   "shortfall": [
+    {
+     "sectionKey": "ap_mc_b",
+     "need": 13,
+     "have": 10
+    },
+    {
+     "sectionKey": "ap_frq_b",
+     "need": 4,
+     "have": 2
+    }
+   ],
+   "compositionIssues": [
+    "unit_1_below_min_4/5",
+    "unit_2_below_min_4/5",
+    "unit_3_below_min_2/3",
+    "unit_7_below_min_2/3"
+   ],
+   "diversityIssues": []
+  }
+ },
+ {
+  "label": "usable_now(auto_passed)",
+  "partialDisjointSets": {
+   "MC Part A (계산기 불가 29)": 2,
+   "MC Part B (계산기 필수 13)": 0,
+   "FRQ Part A (2)": 6,
+   "FRQ Part B (4)": 2
+  },
+  "disjointFullSets": 0,
+  "firstShortAfter": {
+   "shortfall": [],
+   "composition": [
+    "unit_2_below_min_4/5",
+    "unit_6_below_min_6/7"
+   ],
+   "diversity": []
+  },
+  "items": 237,
+  "mc": {
+   "n": 202,
+   "byCalc": {
+    "not_allowed": 156,
+    "required": 46
+   },
+   "families": 73,
+   "effective": 106
+  },
+  "frq": {
+   "n": 35,
+   "byCalc": {
+    "required": 12,
+    "na": 6,
+    "not_allowed": 17
+   },
+   "families": 14
+  },
+  "unitRows": [
+   {
+    "unit": "1",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 31,
+    "families": 8,
+    "effective": 13,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "2",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 26,
+    "families": 9,
+    "effective": 13,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "3",
+    "weight": "5-10%",
+    "needMin": 3,
+    "needMax": 4,
+    "have": 21,
+    "families": 7,
+    "effective": 10,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "4",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 22,
+    "families": 7,
+    "effective": 11,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "5",
+    "weight": "15-20%",
+    "needMin": 7,
+    "needMax": 8,
+    "have": 34,
+    "families": 12,
+    "effective": 18,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "6",
+    "weight": "15-20%",
+    "needMin": 7,
+    "needMax": 8,
+    "have": 33,
+    "families": 15,
+    "effective": 19,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "7",
+    "weight": "5-10%",
+    "needMin": 3,
+    "needMax": 4,
+    "have": 17,
+    "families": 7,
+    "effective": 10,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "8",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 18,
+    "families": 8,
+    "effective": 12,
+    "shortfallVsMin": 0
+   }
+  ],
+  "plan": {
+   "ok": false,
+   "shortfall": [],
+   "compositionIssues": [
+    "unit_2_below_min_4/5",
+    "unit_6_below_min_6/7"
+   ],
+   "diversityIssues": []
+  }
+ },
+ {
+  "label": "after_revalidation_pass(auto_passed+re-validated needs_revalidation)",
+  "partialDisjointSets": {
+   "MC Part A (계산기 불가 29)": 2,
+   "MC Part B (계산기 필수 13)": 0,
+   "FRQ Part A (2)": 6,
+   "FRQ Part B (4)": 2
+  },
+  "disjointFullSets": 0,
+  "firstShortAfter": {
+   "shortfall": [],
+   "composition": [
+    "unit_2_below_min_4/5",
+    "unit_6_below_min_6/7"
+   ],
+   "diversity": []
+  },
+  "items": 237,
+  "mc": {
+   "n": 202,
+   "byCalc": {
+    "not_allowed": 156,
+    "required": 46
+   },
+   "families": 73,
+   "effective": 106
+  },
+  "frq": {
+   "n": 35,
+   "byCalc": {
+    "required": 12,
+    "na": 6,
+    "not_allowed": 17
+   },
+   "families": 14
+  },
+  "unitRows": [
+   {
+    "unit": "1",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 31,
+    "families": 8,
+    "effective": 13,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "2",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 26,
+    "families": 9,
+    "effective": 13,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "3",
+    "weight": "5-10%",
+    "needMin": 3,
+    "needMax": 4,
+    "have": 21,
+    "families": 7,
+    "effective": 10,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "4",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 22,
+    "families": 7,
+    "effective": 11,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "5",
+    "weight": "15-20%",
+    "needMin": 7,
+    "needMax": 8,
+    "have": 34,
+    "families": 12,
+    "effective": 18,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "6",
+    "weight": "15-20%",
+    "needMin": 7,
+    "needMax": 8,
+    "have": 33,
+    "families": 15,
+    "effective": 19,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "7",
+    "weight": "5-10%",
+    "needMin": 3,
+    "needMax": 4,
+    "have": 17,
+    "families": 7,
+    "effective": 10,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "8",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 18,
+    "families": 8,
+    "effective": 12,
+    "shortfallVsMin": 0
+   }
+  ],
+  "plan": {
+   "ok": false,
+   "shortfall": [],
+   "compositionIssues": [
+    "unit_2_below_min_4/5",
+    "unit_6_below_min_6/7"
+   ],
+   "diversityIssues": []
+  }
+ },
+ {
+  "label": "potential_if_revalidated(auto_passed+needs_revalidation)",
+  "partialDisjointSets": {
+   "MC Part A (계산기 불가 29)": 3,
+   "MC Part B (계산기 필수 13)": 0,
+   "FRQ Part A (2)": 6,
+   "FRQ Part B (4)": 2
+  },
+  "disjointFullSets": 0,
+  "firstShortAfter": {
+   "shortfall": [],
+   "composition": [
+    "unit_2_below_min_4/5",
+    "unit_6_below_min_6/7"
+   ],
+   "diversity": []
+  },
+  "items": 263,
+  "mc": {
+   "n": 228,
+   "byCalc": {
+    "not_allowed": 174,
+    "required": 54
+   },
+   "families": 99,
+   "effective": 132
+  },
+  "frq": {
+   "n": 35,
+   "byCalc": {
+    "required": 12,
+    "na": 6,
+    "not_allowed": 17
+   },
+   "families": 14
+  },
+  "unitRows": [
+   {
+    "unit": "1",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 34,
+    "families": 11,
+    "effective": 16,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "2",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 31,
+    "families": 14,
+    "effective": 18,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "3",
+    "weight": "5-10%",
+    "needMin": 3,
+    "needMax": 4,
+    "have": 21,
+    "families": 7,
+    "effective": 10,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "4",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 23,
+    "families": 8,
+    "effective": 12,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "5",
+    "weight": "15-20%",
+    "needMin": 7,
+    "needMax": 8,
+    "have": 41,
+    "families": 19,
+    "effective": 25,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "6",
+    "weight": "15-20%",
+    "needMin": 7,
+    "needMax": 8,
+    "have": 39,
+    "families": 21,
+    "effective": 25,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "7",
+    "weight": "5-10%",
+    "needMin": 3,
+    "needMax": 4,
+    "have": 20,
+    "families": 10,
+    "effective": 13,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "8",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 19,
+    "families": 9,
+    "effective": 13,
+    "shortfallVsMin": 0
+   }
+  ],
+  "plan": {
+   "ok": false,
+   "shortfall": [],
+   "compositionIssues": [
+    "unit_2_below_min_4/5",
+    "unit_6_below_min_6/7"
+   ],
+   "diversityIssues": []
+  }
+ }
+]

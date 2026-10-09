@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { randomUUID } from "node:crypto";
 import { test, expect } from "@playwright/test";
 import { DEV_PASSWORD } from "./helpers";
 
@@ -10,8 +11,11 @@ import { DEV_PASSWORD } from "./helpers";
 
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const DUP_EMAIL = "dup-e2e@example.com";
-const DUP_ID = "e1111111-0000-0000-0000-000000000001";
+// 병합은 되돌릴 수 없고(원본 계정이 closed로 남는다) 감사 이력도 지울 수 없으므로,
+// 실행마다 새 중복 계정(UUID·이메일)을 만든다 — 고정 ID를 쓰면 두 번째 실행부터
+// "이미 병합된 계정입니다"로 실패한다.
+const DUP_ID = randomUUID();
+const DUP_EMAIL = `dup-e2e-${DUP_ID}@example.com`;
 const SURVIVOR_ID = "dddddddd-0000-0000-0000-000000000001";
 
 function setupDuplicateTeacher() {
@@ -56,15 +60,15 @@ test("병합된 원본 계정은 실제 로그인 시도 시 강제 로그아웃
   mergeIntoSurvivor();
 
   await page.goto("/login");
-  await page.getByLabel("이메일").fill(DUP_EMAIL);
-  await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "로그인", exact: true }).click();
+  await page.getByLabel("Email").fill(DUP_EMAIL);
+  await page.getByLabel("Password").fill(DEV_PASSWORD);
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
 
   // resolveAccountDestination()이 closed 상태를 감지해 signOut() 후
   // /login?error=...로 보낸다(R2 Task 2에서 이미 검증된 경로 — 병합이
   // 그 경로를 정확히 태우는지만 여기서 확인).
   await expect(page).toHaveURL(/\/login/);
-  await expect(page.getByText(/계정이 폐쇄되어 로그인할 수 없습니다/)).toBeVisible();
+  await expect(page.getByText(/account is closed and cannot sign in/)).toBeVisible();
 
   await page.goto("/teacher");
   await expect(page).toHaveURL(/\/login/);

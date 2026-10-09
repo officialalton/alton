@@ -1,0 +1,23 @@
+{
+ "itemId": "percentages.percent_change.SB.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T08:00:06Z",
+ "reviewer": "claude-sonnet-5.5 (math-D session)",
+ "codeHash": "5b3d0ade5c81b0ab9303b5244872c6cc6a89bdcb4c9ad8569d47f23404f1a8b2",
+ "samples": [
+  "percentages.percent_change.SB.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass",
+  "multi_figure_consistent": "n/a",
+  "choice_distinct_one_rule": "n/a"
+ },
+ "defects": [],
+ "notes": "누적 막대: 조각 높이=값, 조각 안 값 라벨·범례·축 제목 확인, 데스크톱·375px 읽음. [재스탬프: easy/medium 문구 변형 추가, 샘플 본문·렌더 동일 확인]"
+}

@@ -1,0 +1,42 @@
+{
+ "itemId": "one_variable_data.mean.TB.P",
+ "generatedAt": "2026-10-07T05:02:00.473Z",
+ "codeHash": "992887594d77d0bb08516e4b76257f29c93a9da76e5342e4cd9f340c9bae9c4c",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.mean.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.mean.TB.P.png",
+   "mobileFile": "one_variable_data.mean.TB.P.m375.png",
+   "archetypeId": "ovd.mean.TB.P.inverse",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "To collect data, a ski resort recorded its daily snowfall. The results are shown in the table. One more value is then recorded. The mean of all the values, including the new one, is 16 centimeters.",
+   "question": "What is the new value, in centimeters?",
+   "options": [
+    "2",
+    "4",
+    "16",
+    "18"
+   ],
+   "correctIndex": 1,
+   "answer": "4",
+   "explanation": "(1) 표의 값을 읽는다: 5, 30, 29, 18, 1, 25 (6개). (2) 합 = 5 + 30 + 29 + 18 + 1 + 25 = 108 이다. (3) 값의 개수는 6 이고, 새 값을 넣으면 7 개이다. (4) 새 합 = 16 × 7 = 112 이다. (5) 새 값 = 112 - 108 = 4 이다. 따라서 정답은 4이다.",
+   "structuralIssues": []
+  }
+ ]
+}

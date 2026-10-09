@@ -1,13 +1,13 @@
 "use server";
 
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import type { Memo } from "./memo-data";
 
 export async function addMemo(
   enrollmentId: string,
   text: string
 ): Promise<Memo> {
-  const { supabase, profile } = await requireUser();
+  const { supabase, profile } = await requireStudentFeature("class");
 
   const { data, error } = await supabase
     .from("session_memos")

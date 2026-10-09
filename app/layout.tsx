@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
+import AnalyticsScripts from "@/lib/analytics/AnalyticsScripts";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -14,18 +15,29 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: "Alton Education — 프리미엄 SAT·AP 비대면 코칭",
+  title: "ALTON — Free SAT Practice Tests, Learning Tools & Premium Tutoring",
   description:
-    "한국 최상위권 대학원생 튜터와 체계적인 학습 관리 시스템으로, 미국 명문대 진학을 목표로 하는 학생들의 SAT·AP 점수를 확실하게 끌어올립니다.",
+    "Practice with free SAT tests, understand your mistakes, and keep your review organized. Premium tutoring and educational consulting are available when you need more support.",
+  openGraph: {
+    title: "ALTON — Free SAT Practice Tests, Learning Tools & Premium Tutoring",
+    description:
+      "Practice with free SAT tests, understand your mistakes, and keep your review organized. Premium tutoring and educational consulting are available when you need more support.",
+    type: "website",
+    siteName: "ALTON Education",
+  },
+  twitter: { card: "summary", title: "ALTON — Free SAT Practice Tests, Learning Tools & Premium Tutoring" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="ko"
+      lang="en"
       className={`${inter.variable} ${notoSansKr.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <AnalyticsScripts />
+      </body>
     </html>
   );
 }

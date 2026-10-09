@@ -1,0 +1,49 @@
+{
+ "version": "v10-bio-data-short",
+ "run": "v10-bio",
+ "subject": "ap_biology",
+ "archetypeList": "biodata",
+ "seed0": 2100,
+ "candidatesPerCell": 4,
+ "capUsd": 0.4,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "1",
+  "AP_SYNC_CONC": "10"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/bio-frq-checks.ts",
+  "lib/ap-generation/archetype-checks/bio-data-short.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts"
+ ],
+ "expected": {
+  "generatorHash": "6e2b756305a1",
+  "reviewerPromptHash": "e2cfc88eb330",
+  "difficultyPromptHash": "9bda2250d42c",
+  "parserHash": "7528bbe8cdfc",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ }
+}

@@ -1,0 +1,606 @@
+{
+ "taskId": "gen-lit40-medium-06-01",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-06-004",
+   "task": "gen-lit40-medium-06-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-004",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 3,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Linus",
+      "Bao"
+     ],
+     "nameCultures": [
+      "german_austrian",
+      "southeast_asian"
+     ],
+     "locale": "Vienna",
+     "setting": "a movie theater in the off-season",
+     "relationship": "a violin student and an exacting teacher",
+     "conflict": "about starting over somewhere unfamiliar",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a movie theater in the off-season in Vienna; a violin student and an exacting teacher about starting over somewhere unfamiliar"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "On the first Monday of November, the movie theater in Vienna was closed for the season, and Bao had rented its empty stage for lessons. Linus arrived with his violin and a list of complaints. The hall was cold, the seats smelled of dust, and nothing about this city resembled the conservatory he had left. Bao listened, tuned his A string sharply, and said they would begin with open strings, as beginners do. Linus played them with exaggerated boredom. Then the note rose into the dark balcony and returned to him, rounder and slower than any sound he had made at home. He stopped. He played it again, softly this time, and waited for the echo as if it might answer a question. Bao said nothing, but she moved her chair closer, and for the rest of the hour neither of them looked at the clock.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "From grudging resentment toward the lesson to quiet absorption in the hall's sound",
+     "From open admiration for Bao to disappointment in her old-fashioned methods",
+     "From nervous excitement about the city to calm indifference toward the music",
+     "From playful teasing between the two to tense rivalry over the instrument"
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분에서 Linus는 불평 목록을 들고 오고 지루한 척 개방현을 켜며 불만을 드러낸다. 그러나 소리가 발코니에서 메아리쳐 돌아오자 그는 멈추고, 부드럽게 다시 연주하며 그 소리에 몰입한다. 따라서 불만에서 몰입으로의 전환을 말한 A가 정답이다. B는 처음에 Bao를 존경했다는 근거가 없고, C와 D는 각각 무관심과 경쟁이라는 결말이 지문의 몰입한 분위기와 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "resentful",
+    "absorbed"
+   ],
+   "devices": [
+    "imagery",
+    "tone shift"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-009",
+   "task": "gen-lit40-medium-06-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-009",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "text_structure",
+    "genre": "short_story",
+    "seed": {
+     "index": 8,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Malek",
+      "Dalia"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "arabic_levantine"
+     ],
+     "locale": "Cairo",
+     "setting": "a lighthouse station",
+     "relationship": "a grandfather and a granddaughter learning his language",
+     "conflict": "while one of them quietly changes their mind",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a lighthouse station in Cairo; a grandfather and a granddaughter learning his language while one of them quietly changes their mind"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Words were Malek's first gift to every keeper he trained. At the lighthouse station on the edge of Cairo's old harbor district, he now taught them to his granddaughter, Dalia, who had grown up speaking only the language of her mother's country. Each evening he named a part of the lamp in Arabic, and she repeated it, stumbling, while the beam swept the dark water. She told him she was learning only to please him, that she would leave for her studies abroad in the fall and forget it all. He did not argue. One night the power failed, and Malek, his eyes weak, asked her to talk him through the backup switches. She found herself calling each one by the name he had taught her, without translating. When the light returned, she did not mention her plans, and the next evening she arrived before he did, notebook already open.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "It describes a power failure, then flashes back to explain why the lighthouse matters to Malek.",
+     "It presents a routine and a character's dismissive stance, then shows an event that quietly alters it.",
+     "It contrasts two characters' memories of the lighthouse, then reveals which memory is accurate.",
+     "It lists the parts of the lamp, then explains how each part was named by an earlier keeper."
+    ],
+    "correct_letter": "B",
+    "explanation": "지문은 먼저 할아버지가 매일 저녁 램프 부품의 아랍어 이름을 가르치는 일상과, Dalia가 곧 떠나 잊을 것이라는 무심한 태도를 제시한다. 이후 정전이라는 사건에서 그녀는 번역 없이 그 이름을 쓰게 되고, 다음 날 먼저 와서 공책을 펼친다. 따라서 일상과 태도 제시 후 그것을 조용히 바꾸는 사건을 보여준다는 B가 정답이다. A는 회상 구조가 없고, C와 D는 기억 대조나 부품 이름의 유래 설명이 지문에 없다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "hopeful"
+   ],
+   "devices": [
+    "symbolism",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-013",
+   "task": "gen-lit40-medium-06-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-013",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "short_story",
+    "seed": {
+     "index": 12,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Nandi",
+      "Mandla"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "east_south_african"
+     ],
+     "locale": "Addis Ababa",
+     "setting": "an old cinema projection booth",
+     "relationship": "a teenage cook and her stern aunt",
+     "conflict": "while arguing about something smaller than the real quarrel",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "an old cinema projection booth in Addis Ababa; a teenage cook and her stern aunt while arguing about something smaller than the real quarrel"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "A wooden spoon tapped twice against the pot was Mandla's signal that dinner was late, and Nandi heard it all the way up in the old projection booth. She had turned the booth above her aunt's cinema in Addis Ababa into a kitchen of her own, with a hot plate and a shelf of spices, and she cooked there whenever she wanted to be left alone. Tonight Mandla climbed the narrow stairs and announced that the stew needed more salt. Nandi answered that it was perfect. They argued about salt for ten minutes, voices rising over the hum of the cooling projector. __Neither of them mentioned the letter from the culinary school in Nairobi, still unopened on the shelf between the cumin and the cardamom.__ At last Mandla tasted the stew again, set down the spoon, and said quietly that perhaps it was fine after all.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It explains why Mandla dislikes the spices Nandi keeps in the booth.",
+     "It suggests that the argument about salt stands in for a larger, unspoken disagreement.",
+     "It reveals that Nandi has already decided to reject the culinary school's offer.",
+     "It shows that Mandla is unaware that Nandi has applied to any school."
+    ],
+    "correct_letter": "B",
+    "explanation": "두 사람은 소금 문제로 10분이나 언성을 높이지만, 밑줄 문장은 둘 다 아직 뜯지 않은 요리학교 편지에 대해서는 말하지 않는다고 알려준다. 마지막에 Mandla가 조용히 물러서는 모습까지 함께 보면, 소금 다툼이 더 큰 갈등을 대신하고 있음을 알 수 있다. 따라서 B가 정답이다. A는 향신료에 대한 반감 근거가 없고, C는 편지가 아직 열리지 않았으므로 맞지 않으며, D는 '둘 다' 언급하지 않는다는 표현과 모순된다."
+   },
+   "notes": [],
+   "tone": [
+    "tense",
+    "understated"
+   ],
+   "devices": [
+    "subtext",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-015",
+   "task": "gen-lit40-medium-06-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-015",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 14,
+     "genre": "personal_essay",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Kwesi",
+      "Samira"
+     ],
+     "nameCultures": [
+      "west_african",
+      "arabic_levantine"
+     ],
+     "locale": "Beirut",
+     "setting": "a ceramics studio",
+     "relationship": "best friends after a move",
+     "conflict": "after a surprising success that makes things harder",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a ceramics studio in Beirut; best friends after a move after a surprising success that makes things harder"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Beirut's oldest ceramics studio sits above a tire shop, and that is where Samira and I, Kwesi, spent every Saturday after her family moved across the city. Distance made our friendship deliberate; we had to plan it now, and the studio became our fixed point. Last spring, one of my bowls was chosen for a gallery show downtown. Samira hugged me in the doorway and said she had always known. Then, over the following weeks, she began arriving late, leaving early, finding reasons to work at the far wheel. __One Saturday I found her old glaze test tiles, the ones we had made together our first month, boxed and labeled for the shelf marked \"give away.\"__ I did not ask about them. Instead, I brought the box back to our table and set it between us, and after a while she took out a tile and began, very carefully, to describe what she had hoped it would become.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It explains how the narrator first learned to mix glazes at the studio.",
+     "It reveals that Samira has decided to stop making ceramics altogether.",
+     "It shows that the studio has begun discarding work by former members.",
+     "It offers concrete evidence of Samira's withdrawal that prompts the narrator to act."
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분은 화자의 성공 이후 Samira가 늦게 오고 일찍 떠나는 등 점점 멀어지는 모습을 보여준다. 밑줄 문장은 두 사람이 함께 만든 타일이 '기증' 선반에 놓인 것을 발견하는 장면으로, 그 거리감을 구체적으로 보여준다. 이를 본 화자가 상자를 다시 테이블로 가져오므로 D가 정답이다. A는 유약 배합 학습과 무관하고, B는 그녀가 도자기를 그만둔다는 근거가 없으며, C는 스튜디오의 정책에 대한 내용이 없다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "uneasy"
+   ],
+   "devices": [
+    "symbolism",
+    "anecdote"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-017",
+   "task": "gen-lit40-medium-06-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-017",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "short_story",
+    "seed": {
+     "index": 16,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Solange",
+      "Anselmo"
+     ],
+     "nameCultures": [
+      "french",
+      "portuguese_brazilian"
+     ],
+     "locale": "Lisbon",
+     "setting": "a bakery before opening",
+     "relationship": "a grandmother and her grandson",
+     "conflict": "while one of them prepares to leave for good",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a bakery before opening in Lisbon; a grandmother and her grandson while one of them prepares to leave for good"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "I watched my grandmother, Solange, shape the morning loaves at the Lisbon bakery an hour before the shutters opened, the way I had watched her since I was small enough to sit on the flour sacks. In three days I, Anselmo, would board a ship for a job across the ocean, and I had come to say a proper goodbye. I had prepared a speech. She handed me an apron instead. For an hour we worked side by side, and she corrected my folding with a flick of her knuckle, never once mentioning my departure. At first her silence stung; I wanted her to say she would miss me. But as the ovens warmed, I noticed she had set aside a small, tightly wrapped loaf, the kind that keeps for a week, and that she was teaching me, fold by fold, how to make it myself.",
+    "question": "Which choice best describes the narrator's attitude toward Solange by the end of the text?",
+    "options": [
+     "He comes to appreciate that her lessons express care she does not state aloud.",
+     "He remains hurt that she refuses to acknowledge his decision to leave.",
+     "He feels amused by her strictness and doubts the value of her methods.",
+     "He grows impatient with her and wishes he had left without visiting."
+    ],
+    "correct_letter": "A",
+    "explanation": "Anselmo는 처음에 할머니가 떠남을 언급하지 않아 서운해한다. 그러나 오래 보관되는 빵을 따로 싸 두고 그 빵 만드는 법을 하나하나 가르쳐 주는 모습을 보며, 그것이 말하지 않은 애정 표현임을 깨닫는다. 따라서 A가 정답이다. B는 처음의 감정에만 해당하고, C의 회의와 D의 조급함은 지문의 흐름과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "reflective"
+   ],
+   "devices": [
+    "symbolism",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-018",
+   "task": "gen-lit40-medium-06-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-018",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 17,
+     "genre": "novel_excerpt",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Alonso",
+      "Fatma"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Galicia",
+     "setting": "a bus depot",
+     "relationship": "an old teacher and a former pupil",
+     "conflict": "when a child's question exposes an adult's evasion",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a bus depot in Galicia; an old teacher and a former pupil when a child's question exposes an adult's evasion"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Alonso had taught geography in the village for forty years, and he still spoke as if every bus leaving the Galician depot were a lesson. Fatma, once his brightest pupil, now drove the morning route, and she let him ride free in the front seat. Today her small son rode with them. Halfway to the coast, the boy asked Alonso why he never visited the cities he had taught about. Alonso began an answer about railways and expense, then about his late wife's health, then about the weather in Madrid. The boy listened with a frown. Fatma kept her eyes on the road. She remembered how certain Alonso had sounded in class, how he had made every distant place seem within reach, and she felt something gentler than disappointment watching him stumble now. When they reached the coast, she pulled over a moment longer than necessary, so he could see the water before getting off.",
+    "question": "Which choice best describes the narrator's attitude toward Alonso?",
+    "options": [
+     "Openly mocking, highlighting his excuses to diminish his former authority",
+     "Sympathetic, noting his evasions while treating his vulnerability with kindness",
+     "Coldly neutral, reporting his words without suggesting any emotional response",
+     "Reverent, presenting him as wiser than the boy who questions him"
+    ],
+    "correct_letter": "B",
+    "explanation": "서술자는 Alonso가 철도, 아내의 건강, 날씨로 대답을 계속 돌리는 모습을 그대로 보여주어 그의 회피를 드러낸다. 동시에 Fatma가 실망보다 부드러운 감정을 느끼고, 그가 바다를 볼 수 있게 차를 잠시 더 세우는 장면을 통해 그의 약함을 따뜻하게 감싼다. 따라서 B가 정답이다. A의 조롱, C의 냉정한 중립, D의 숭배는 회피와 연민이 함께 담긴 서술과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "gentle",
+    "wistful"
+   ],
+   "devices": [
+    "characterization",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-019",
+   "task": "gen-lit40-medium-06-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-019",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "poetry",
+    "seed": {
+     "index": 18,
+     "genre": "poetry",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Emil",
+      "Ingrid"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Rotterdam",
+     "setting": "a kite-maker's yard",
+     "relationship": "cousins reunited at a funeral",
+     "conflict": "about moving an elderly parent",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a kite-maker's yard in Rotterdam; cousins reunited at a funeral about moving an elderly parent"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Three kites hung drying in the Rotterdam yard,\ntwo red, one patched with a map of somewhere else,\nthe day after we buried our uncle.\nEmil spoke first, in the voice of lists:\nthe stairs, the stove, the doctor's warnings,\nthe home outside the city with a garden view.\nIngrid wound string around her fingers\nand said our aunt still climbed to this yard every morning\nto test the wind for kites no one would buy.\nI said nothing, cousin to them both.\nI watched our aunt through the kitchen window,\nher hands smoothing paper as if the house were listening,\nand I understood that both of them were right,\nand that the yard, not the stairs,\nwas what we were really deciding to take from her.",
+    "question": "Which choice best describes the speaker's attitude toward the decision about the aunt?",
+    "options": [
+     "Firmly convinced that moving her is the only responsible choice",
+     "Dismissive of both cousins' concerns as exaggerated and selfish",
+     "Torn, recognizing the sense of each view and the loss either entails",
+     "Indifferent, since the speaker plans to leave the matter to the cousins"
+    ],
+    "correct_letter": "C",
+    "explanation": "화자는 실용적 이유를 나열하는 Emil과 숙모의 매일의 습관을 말하는 Ingrid 모두가 옳다고 깨닫는다. 또한 마지막에서 결국 계단이 아니라 마당을 그녀에게서 빼앗게 된다고 말하며 어느 쪽이든 상실이 따른다는 것을 인식한다. 따라서 양쪽을 이해하며 갈등하는 C가 정답이다. A는 한쪽만 지지하고, B는 두 사람이 옳다는 표현과 모순되며, D는 화자가 깊이 관찰하는 모습과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "elegiac",
+    "conflicted"
+   ],
+   "devices": [
+    "imagery",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-020",
+   "task": "gen-lit40-medium-06-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-06-020",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 19,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Dolores",
+      "Daphne"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Havana",
+     "setting": "a ship's galley",
+     "relationship": "a widow and the delivery boy",
+     "conflict": "while learning to let go of a habit",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a ship's galley in Havana; a widow and the delivery boy while learning to let go of a habit"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Two coffee cups set out on the galley counter every morning: that was Dolores's habit for eleven years after her husband died. She had cooked for his crew on the old cargo ship moored in Havana harbor, and when the ship became a floating restaurant, she stayed on in its narrow galley. I, Daphne, delivered her produce each dawn. At first I found the second cup a little sad and a little strange, and I placed the onions carefully around it as if it were fragile. One morning she poured coffee into both cups and handed the second to me. \"He would want it used,\" she said, and nothing more. I drank it standing up, too surprised to sit. Since then, the cup is waiting for me when I arrive, and I have come to see it less as a memorial than as an invitation she chose to keep open.",
+    "question": "Which choice best describes the narrator's attitude toward Dolores's habit by the end of the text?",
+    "options": [
+     "Uneasy pity for a widow who cannot accept her husband's death",
+     "Mild amusement at a ritual she considers old-fashioned and odd",
+     "Polite indifference toward a routine that does not concern her",
+     "Grateful understanding of a gesture she now sees as welcoming"
+    ],
+    "correct_letter": "D",
+    "explanation": "Daphne는 처음에 두 번째 잔을 조금 슬프고 이상하게 여겨 조심스럽게 피해 다녔다. 그러나 Dolores가 그 잔을 건네며 '그이도 쓰이길 바랄 것'이라고 말한 뒤, 화자는 그 잔을 추모가 아닌 열린 초대로 보게 된다. 따라서 D가 정답이다. A는 처음의 인상에 가깝고 결말의 태도가 아니며, B의 재미와 C의 무관심은 화자의 변화된 감정과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "warm",
+    "reflective"
+   ],
+   "devices": [
+    "symbolism",
+    "anecdote"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-06-001",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-002",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-003",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-005",
+   "stage": "distractor",
+   "reasons": [
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-006",
+   "stage": "distractor",
+   "reasons": [
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-007",
+   "stage": "distractor",
+   "reasons": [
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-008",
+   "stage": "distractor",
+   "reasons": [
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-010",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(20단어, 다음 17)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-011",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(18단어, 다음 15)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-012",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(18단어, 다음 15)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-014",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(18단어, 다음 14)",
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-016",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(16단어, 다음 14)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

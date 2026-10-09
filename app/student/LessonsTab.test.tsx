@@ -74,8 +74,8 @@ describe("LessonsTab", () => {
         myFeedback={{}}
       />
     );
-    expect(screen.getByText(/SAT Math · 8회차/)).toBeInTheDocument();
-    expect(screen.getByText("수업 준비")).toBeInTheDocument();
+    expect(screen.getByText(/SAT Math · Session 8/)).toBeInTheDocument();
+    expect(screen.getByText("Prepare")).toBeInTheDocument();
   });
 
   it("지난 수업 서브탭에서 리뷰 미작성 표시가 보인다", () => {
@@ -89,8 +89,8 @@ describe("LessonsTab", () => {
         myFeedback={{}}
       />
     );
-    fireEvent.click(screen.getByText("지난 수업"));
-    expect(screen.getByText(/리뷰 보기 \(미작성\)/)).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Past"));
+    expect(screen.getByText(/View review \(not yet written\)/)).toBeInTheDocument();
   });
 
   it("과목 칩을 누르면 커리큘럼 뷰로 이동한다", () => {
@@ -104,9 +104,9 @@ describe("LessonsTab", () => {
         myFeedback={{}}
       />
     );
-    fireEvent.click(screen.getByText(/SAT Math · 8회차/));
-    expect(screen.getByText("8 / 12회차")).toBeInTheDocument();
-    expect(screen.getByText(/7회차 · 이차방정식과 이차함수/)).toBeInTheDocument();
+    fireEvent.click(screen.getByText(/SAT Math · Session 8/));
+    expect(screen.getByText("Session 8 / 12")).toBeInTheDocument();
+    expect(screen.getByText(/Session 7 · 이차방정식과 이차함수/)).toBeInTheDocument();
   });
 
   it("리뷰 보기를 누르면 리뷰 패널로 이동한다", () => {
@@ -120,10 +120,10 @@ describe("LessonsTab", () => {
         myFeedback={{}}
       />
     );
-    fireEvent.click(screen.getByText("지난 수업"));
-    fireEvent.click(screen.getByText(/리뷰 보기/));
+    fireEvent.click(screen.getByText("Past"));
+    fireEvent.click(screen.getByText(/View review/));
     expect(
-      screen.getByText("아직 선생님이 리포트를 작성하지 않았습니다.")
+      screen.getByText("Your teacher hasn't written a report yet.")
     ).toBeInTheDocument();
   });
 });

@@ -1,0 +1,1044 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "generate",
+ "runId": "lit40-wave1",
+ "taskId": "gen-lit40-hard-03-01",
+ "chunkId": "gen-lit40-hard-03-01",
+ "batchId": "lit40-hard-03",
+ "attempt": 0,
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-hard-03-01.result.json",
+ "outputSchema": {
+  "chunkId": "작업 파일의 chunkId 를 그대로",
+  "model": "당신의 모델 이름(예: opus)",
+  "items": [
+   {
+    "candidateId": "후보의 candidateId 를 그대로",
+    "passage": "영어 지문(문항의 질문은 넣지 않는다)",
+    "question": "영어 질문 한 문장",
+    "options": [
+     "선택지 A",
+     "선택지 B",
+     "선택지 C",
+     "선택지 D"
+    ],
+    "correct_letter": "A|B|C|D (targetLetter 와 같게)",
+    "explanation": "한국어 해설 3~5문장",
+    "tone": [
+     "지문 어조 영어 단어 1~3개"
+    ],
+    "devices": [
+     "쓰인 문학 장치 영어 단어"
+    ],
+    "declaration": {
+     "original": true,
+     "noRealWorkQuoted": true,
+     "noCopyrightedSource": true
+    }
+   }
+  ]
+ },
+ "candidates": [
+  {
+   "candidateId": "lit40-hard-03-001",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "personal_essay",
+   "targetLetter": "B",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "words_in_context_lit_figurative_language_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-001",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 0,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Salma",
+      "Wolfram"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "german_austrian"
+     ],
+     "locale": "Marrakesh",
+     "setting": "a lakeside dock",
+     "relationship": "a mother-in-law and a new bride",
+     "conflict": "over an invitation one of them refuses",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a lakeside dock in Marrakesh; a mother-in-law and a new bride over an invitation one of them refuses"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "words_in_context_lit_figurative_language_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a lakeside dock in Marrakesh; a mother-in-law and a new bride over an invitation one of them refuses\n인물 이름: Salma, Wolfram 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_figurative_language_hard_v4, 난이도 hard): 지문에 있는 비유 구절이 문맥에서 전하는 의미를 묻는다. 관용 표현·상투적 은유는 쓰지 않고 이 지문 안에서만 의미가 정해지는 신선한 비유를 쓴다. 비유가 가리키는 대상의 의미를 정하는 단서는 비유 앞의 두 곳과 비유 뒤의 한 곳에 나눠 두며, 비유 바로 다음 문장이 해석을 알려 주면 안 된다. 오답 3개는 모두 비유로서 합리적인 해석이어야 하며 문자 해석은 많아야 하나다. 오답은 비유가 가진 서로 다른 속성(무게·한계·소리·온도 등)을 하나씩 골라 해석한 것이고, 정답은 두 단서를 만족하는 속성이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 비유의 한 속성(예: 무게)에서 나온 해석. 앞 단서 한 곳만 설명한다 (2) 지문 표현을 빌려 다른 속성(예: 한계)에서 나온 해석. 뒤 단서를 설명하지 못한다 (3) 문자 해석이거나 정답의 의미 범위를 한 단계 넓힌 해석. 절대어 없이 온건하게 쓴다\n금지: 비유 직후 문장이 비유를 풀어 쓴다 / 관용적으로 의미가 알려진 비유(stone in the chest 등)를 쓴다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 비유 앞 1: 대상이 처한 상황 / 비유 앞 2: 인물의 반복 행동 / 비유 뒤: 해석을 한 번 뒤집는 사소한 디테일(해석을 주지 않음). 직접 서술 금지 — 비유의 뜻을 풀어 주는 문장, 동격·'that is' 정의 금지.\n정답 설계: 추론 2단계 — 비유의 후보 속성 중 앞 단서와 뒤 단서를 동시에 만족하는 속성을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 비유를 문맥 없이 읽었을 때 가장 먼저 떠오르는 해석이 오답인가 (2) 세 오답 사이에 같은 속성이 중복되지 않는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-002",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "memoir",
+   "targetLetter": "C",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "words_in_context_lit_figurative_language_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-002",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 1,
+     "genre": "memoir",
+     "pov": "third_omniscient",
+     "styleEra": "late_20c",
+     "names": [
+      "Faisal",
+      "Ayita"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "indigenous_american"
+     ],
+     "locale": "Colombo",
+     "setting": "a fishing harbor",
+     "relationship": "a girl and an old family friend",
+     "conflict": "about keeping a family business open",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a fishing harbor in Colombo; a girl and an old family friend about keeping a family business open"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "words_in_context_lit_figurative_language_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a fishing harbor in Colombo; a girl and an old family friend about keeping a family business open\n인물 이름: Faisal, Ayita 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 부사절·전치사구로 시작('When', 'Although', 'Beside' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_figurative_language_hard_v4, 난이도 hard): 지문에 있는 비유 구절이 문맥에서 전하는 의미를 묻는다. 관용 표현·상투적 은유는 쓰지 않고 이 지문 안에서만 의미가 정해지는 신선한 비유를 쓴다. 비유가 가리키는 대상의 의미를 정하는 단서는 비유 앞의 두 곳과 비유 뒤의 한 곳에 나눠 두며, 비유 바로 다음 문장이 해석을 알려 주면 안 된다. 오답 3개는 모두 비유로서 합리적인 해석이어야 하며 문자 해석은 많아야 하나다. 오답은 비유가 가진 서로 다른 속성(무게·한계·소리·온도 등)을 하나씩 골라 해석한 것이고, 정답은 두 단서를 만족하는 속성이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 비유의 한 속성(예: 무게)에서 나온 해석. 앞 단서 한 곳만 설명한다 (2) 지문 표현을 빌려 다른 속성(예: 한계)에서 나온 해석. 뒤 단서를 설명하지 못한다 (3) 문자 해석이거나 정답의 의미 범위를 한 단계 넓힌 해석. 절대어 없이 온건하게 쓴다\n금지: 비유 직후 문장이 비유를 풀어 쓴다 / 관용적으로 의미가 알려진 비유(stone in the chest 등)를 쓴다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 비유 앞 1: 대상이 처한 상황 / 비유 앞 2: 인물의 반복 행동 / 비유 뒤: 해석을 한 번 뒤집는 사소한 디테일(해석을 주지 않음). 직접 서술 금지 — 비유의 뜻을 풀어 주는 문장, 동격·'that is' 정의 금지.\n정답 설계: 추론 2단계 — 비유의 후보 속성 중 앞 단서와 뒤 단서를 동시에 만족하는 속성을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 비유를 문맥 없이 읽었을 때 가장 먼저 떠오르는 해석이 오답인가 (2) 세 오답 사이에 같은 속성이 중복되지 않는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-003",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "word_in_context",
+   "genre": "short_story",
+   "targetLetter": "D",
+   "words": {
+    "min": 100,
+    "max": 150
+   },
+   "recipeId": "words_in_context_lit_word_in_context_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-003",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "short_story",
+    "seed": {
+     "index": 2,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Donal",
+      "Booker"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "african_american"
+     ],
+     "locale": "Glasgow",
+     "setting": "a rural post office",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "when a visitor arrives and sees what the family does not",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a rural post office in Glasgow; a mayor and the town's only doctor when a visitor arrives and sees what the family does not"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a rural post office in Glasgow; a mayor and the town's only doctor when a visitor arrives and sees what the family does not\n인물 이름: Donal, Booker 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 100~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_word_in_context_hard_v4, 난이도 hard): 빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현 (2) 정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다 (3) 지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다\n금지: 선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다 / 빈칸 바로 뒤에 의미를 풀이하는 구를 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 100~150단어.\n지문 설계: 근거 위치 — 앞: 인물의 습관적·반복 행동(제약 1) / 중간: 사건이 한 번 전환되는 지점 / 빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음). 직접 서술 금지 — 빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지.\n정답 설계: 추론 2단계 — 앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함) (2) 정답을 빈칸 뒤 문장만으로 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-004",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "word_in_context",
+   "genre": "novel_excerpt",
+   "targetLetter": "A",
+   "words": {
+    "min": 100,
+    "max": 150
+   },
+   "recipeId": "words_in_context_lit_word_in_context_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-004",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 3,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Rohan",
+      "Ishaan"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "indian_subcontinent"
+     ],
+     "locale": "Dhaka",
+     "setting": "a night bus",
+     "relationship": "a keeper and a visiting surveyor",
+     "conflict": "about the last item in a house being emptied",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a night bus in Dhaka; a keeper and a visiting surveyor about the last item in a house being emptied"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a night bus in Dhaka; a keeper and a visiting surveyor about the last item in a house being emptied\n인물 이름: Rohan, Ishaan 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 100~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_word_in_context_hard_v4, 난이도 hard): 빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현 (2) 정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다 (3) 지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다\n금지: 선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다 / 빈칸 바로 뒤에 의미를 풀이하는 구를 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 100~150단어.\n지문 설계: 근거 위치 — 앞: 인물의 습관적·반복 행동(제약 1) / 중간: 사건이 한 번 전환되는 지점 / 빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음). 직접 서술 금지 — 빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지.\n정답 설계: 추론 2단계 — 앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함) (2) 정답을 빈칸 뒤 문장만으로 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-005",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "word_in_context",
+   "genre": "poetry",
+   "targetLetter": "B",
+   "words": {
+    "min": 100,
+    "max": 150
+   },
+   "recipeId": "words_in_context_lit_word_in_context_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-005",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "poetry",
+    "seed": {
+     "index": 4,
+     "genre": "poetry",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Odessa",
+      "Isaiah"
+     ],
+     "nameCultures": [
+      "african_american",
+      "african_american"
+     ],
+     "locale": "Chicago's South Side",
+     "setting": "a river barge",
+     "relationship": "a pair of lifelong friends who rarely speak",
+     "conflict": "over a tool or instrument inherited by the wrong person",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a river barge in Chicago's South Side; a pair of lifelong friends who rarely speak over a tool or instrument inherited by the wrong person"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a river barge in Chicago's South Side; a pair of lifelong friends who rarely speak over a tool or instrument inherited by the wrong person\n인물 이름: Odessa, Isaiah 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 100~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_word_in_context_hard_v4, 난이도 hard): 빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현 (2) 정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다 (3) 지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다\n금지: 선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다 / 빈칸 바로 뒤에 의미를 풀이하는 구를 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 100~150단어.\n지문 설계: 근거 위치 — 앞: 인물의 습관적·반복 행동(제약 1) / 중간: 사건이 한 번 전환되는 지점 / 빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음). 직접 서술 금지 — 빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지.\n정답 설계: 추론 2단계 — 앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함) (2) 정답을 빈칸 뒤 문장만으로 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-006",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "word_in_context",
+   "genre": "personal_essay",
+   "targetLetter": "C",
+   "words": {
+    "min": 100,
+    "max": 150
+   },
+   "recipeId": "words_in_context_lit_word_in_context_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-006",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 5,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Rosalinda",
+      "Astrid"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "dutch_nordic"
+     ],
+     "locale": "Valparaiso",
+     "setting": "an abandoned orchard",
+     "relationship": "best friends after a move",
+     "conflict": "over how to mark an anniversary",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "an abandoned orchard in Valparaiso; best friends after a move over how to mark an anniversary"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): an abandoned orchard in Valparaiso; best friends after a move over how to mark an anniversary\n인물 이름: Rosalinda, Astrid 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 100~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_word_in_context_hard_v4, 난이도 hard): 빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현 (2) 정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다 (3) 지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다\n금지: 선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다 / 빈칸 바로 뒤에 의미를 풀이하는 구를 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 100~150단어.\n지문 설계: 근거 위치 — 앞: 인물의 습관적·반복 행동(제약 1) / 중간: 사건이 한 번 전환되는 지점 / 빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음). 직접 서술 금지 — 빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지.\n정답 설계: 추론 2단계 — 앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함) (2) 정답을 빈칸 뒤 문장만으로 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-007",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "word_in_context",
+   "genre": "memoir",
+   "targetLetter": "D",
+   "words": {
+    "min": 100,
+    "max": 150
+   },
+   "recipeId": "words_in_context_lit_word_in_context_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-007",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "memoir",
+    "seed": {
+     "index": 6,
+     "genre": "memoir",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Fatma",
+      "Xiulan"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "chinese"
+     ],
+     "locale": "Lisbon",
+     "setting": "a cemetery gate",
+     "relationship": "a mother and her son leaving for college",
+     "conflict": "over a recipe that was never written down",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a cemetery gate in Lisbon; a mother and her son leaving for college over a recipe that was never written down"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a cemetery gate in Lisbon; a mother and her son leaving for college over a recipe that was never written down\n인물 이름: Fatma, Xiulan 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 100~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_word_in_context_hard_v4, 난이도 hard): 빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현 (2) 정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다 (3) 지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다\n금지: 선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다 / 빈칸 바로 뒤에 의미를 풀이하는 구를 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 100~150단어.\n지문 설계: 근거 위치 — 앞: 인물의 습관적·반복 행동(제약 1) / 중간: 사건이 한 번 전환되는 지점 / 빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음). 직접 서술 금지 — 빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지.\n정답 설계: 추론 2단계 — 앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함) (2) 정답을 빈칸 뒤 문장만으로 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-008",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "short_story",
+   "targetLetter": "B",
+   "words": {
+    "min": 120,
+    "max": 180
+   },
+   "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-008",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 7,
+     "genre": "short_story",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Dmitri",
+      "Anselm"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "german_austrian"
+     ],
+     "locale": "Tbilisi",
+     "setting": "a flooded cellar",
+     "relationship": "an author and her translator",
+     "conflict": "over an unfair rule everyone obeys",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a flooded cellar in Tbilisi; an author and her translator over an unfair rule everyone obeys"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a flooded cellar in Tbilisi; an author and her translator over an unfair rule everyone obeys\n인물 이름: Dmitri, Anselm 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_tone_shift_hard_v4, 난이도 hard): 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다. 전환은 'but·however' 같은 표지나 감정어로 알리지 않고 (1) 문장 길이와 세부 묘사의 해상도 변화 (2) 화제의 이탈(말하던 대상이 사라짐) (3) 겉 어조(정중함 등)는 유지한 채 속 어조만 바뀌는 방식으로 만든다. 전환 지점 앞뒤에 단서를 나눠 두고, 전환 후 어조의 '원인'은 끝 동작 한 곳에서만 읽히게 한다. 선택지는 모두 '전환 방향과 의미'를 같은 문장틀로 쓴다. 오답 3개는 (a) 겉 어조 변화만 포착 (b) 방향은 맞으나 원인을 뒤집음 (c) 방향은 맞고 정도·성격을 한 단계 달리 읽음이며 지문 사실과 모두 양립한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 변화만 포착한 선택지(유지된 정중함을 변화로 읽음). 속 변화 단서를 설명하지 못한다 (2) 전환의 방향은 맞지만 원인을 뒤집은 선택지(상대의 행동 때문이 아니라 화자 자신의 행동 때문이라는 식). 지문과 충돌하지 않는다 (3) 방향은 맞지만 성격·정도를 한 단계 달리 읽은 선택지(조용한 재검토를 분노로 읽는 등). 절대어 없이 온건하게 쓴다\n금지: 전환 전과 후의 감정어를 한 문장씩 나란히 둔다 / 전환 후 문장이 전환 이유를 서술한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 겉 어조와 세부 묘사가 촘촘한 구간 / 전환 지점: 화제 이탈 또는 문장 길이 변화 / 끝: 원인을 암시하는 동작 하나. 직접 서술 금지 — 'but·however·suddenly', 감정어, 전환의 이유를 서술하는 문장 금지.\n정답 설계: 추론 2단계 — 전환 지점의 형식적 변화와 끝 동작의 원인 단서를 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 전환 후 어조의 원인을 정답만 만족하는가 (2) 겉 어조만 보는 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-009",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "novel_excerpt",
+   "targetLetter": "C",
+   "words": {
+    "min": 120,
+    "max": 180
+   },
+   "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-009",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 8,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Imani",
+      "Birdie"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "african_american"
+     ],
+     "locale": "Hanoi",
+     "setting": "a rooftop water tank",
+     "relationship": "old rivals in a chess club",
+     "conflict": "about an ending that nobody wants to admit",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a rooftop water tank in Hanoi; old rivals in a chess club about an ending that nobody wants to admit"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a rooftop water tank in Hanoi; old rivals in a chess club about an ending that nobody wants to admit\n인물 이름: Imani, Birdie 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_tone_shift_hard_v4, 난이도 hard): 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다. 전환은 'but·however' 같은 표지나 감정어로 알리지 않고 (1) 문장 길이와 세부 묘사의 해상도 변화 (2) 화제의 이탈(말하던 대상이 사라짐) (3) 겉 어조(정중함 등)는 유지한 채 속 어조만 바뀌는 방식으로 만든다. 전환 지점 앞뒤에 단서를 나눠 두고, 전환 후 어조의 '원인'은 끝 동작 한 곳에서만 읽히게 한다. 선택지는 모두 '전환 방향과 의미'를 같은 문장틀로 쓴다. 오답 3개는 (a) 겉 어조 변화만 포착 (b) 방향은 맞으나 원인을 뒤집음 (c) 방향은 맞고 정도·성격을 한 단계 달리 읽음이며 지문 사실과 모두 양립한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 변화만 포착한 선택지(유지된 정중함을 변화로 읽음). 속 변화 단서를 설명하지 못한다 (2) 전환의 방향은 맞지만 원인을 뒤집은 선택지(상대의 행동 때문이 아니라 화자 자신의 행동 때문이라는 식). 지문과 충돌하지 않는다 (3) 방향은 맞지만 성격·정도를 한 단계 달리 읽은 선택지(조용한 재검토를 분노로 읽는 등). 절대어 없이 온건하게 쓴다\n금지: 전환 전과 후의 감정어를 한 문장씩 나란히 둔다 / 전환 후 문장이 전환 이유를 서술한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 겉 어조와 세부 묘사가 촘촘한 구간 / 전환 지점: 화제 이탈 또는 문장 길이 변화 / 끝: 원인을 암시하는 동작 하나. 직접 서술 금지 — 'but·however·suddenly', 감정어, 전환의 이유를 서술하는 문장 금지.\n정답 설계: 추론 2단계 — 전환 지점의 형식적 변화와 끝 동작의 원인 단서를 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 전환 후 어조의 원인을 정답만 만족하는가 (2) 겉 어조만 보는 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-010",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "poetry",
+   "targetLetter": "D",
+   "words": {
+    "min": 120,
+    "max": 180
+   },
+   "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-010",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "poetry",
+    "seed": {
+     "index": 9,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Fiorella",
+      "Ottavio"
+     ],
+     "nameCultures": [
+      "italian",
+      "italian"
+     ],
+     "locale": "Bologna",
+     "setting": "a soccer field at dusk",
+     "relationship": "a retired judge and a young clerk",
+     "conflict": "about an object that belonged to someone gone",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a soccer field at dusk in Bologna; a retired judge and a young clerk about an object that belonged to someone gone"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a soccer field at dusk in Bologna; a retired judge and a young clerk about an object that belonged to someone gone\n인물 이름: Fiorella, Ottavio 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_tone_shift_hard_v4, 난이도 hard): 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다. 전환은 'but·however' 같은 표지나 감정어로 알리지 않고 (1) 문장 길이와 세부 묘사의 해상도 변화 (2) 화제의 이탈(말하던 대상이 사라짐) (3) 겉 어조(정중함 등)는 유지한 채 속 어조만 바뀌는 방식으로 만든다. 전환 지점 앞뒤에 단서를 나눠 두고, 전환 후 어조의 '원인'은 끝 동작 한 곳에서만 읽히게 한다. 선택지는 모두 '전환 방향과 의미'를 같은 문장틀로 쓴다. 오답 3개는 (a) 겉 어조 변화만 포착 (b) 방향은 맞으나 원인을 뒤집음 (c) 방향은 맞고 정도·성격을 한 단계 달리 읽음이며 지문 사실과 모두 양립한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 변화만 포착한 선택지(유지된 정중함을 변화로 읽음). 속 변화 단서를 설명하지 못한다 (2) 전환의 방향은 맞지만 원인을 뒤집은 선택지(상대의 행동 때문이 아니라 화자 자신의 행동 때문이라는 식). 지문과 충돌하지 않는다 (3) 방향은 맞지만 성격·정도를 한 단계 달리 읽은 선택지(조용한 재검토를 분노로 읽는 등). 절대어 없이 온건하게 쓴다\n금지: 전환 전과 후의 감정어를 한 문장씩 나란히 둔다 / 전환 후 문장이 전환 이유를 서술한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 겉 어조와 세부 묘사가 촘촘한 구간 / 전환 지점: 화제 이탈 또는 문장 길이 변화 / 끝: 원인을 암시하는 동작 하나. 직접 서술 금지 — 'but·however·suddenly', 감정어, 전환의 이유를 서술하는 문장 금지.\n정답 설계: 추론 2단계 — 전환 지점의 형식적 변화와 끝 동작의 원인 단서를 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 전환 후 어조의 원인을 정답만 만족하는가 (2) 겉 어조만 보는 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-011",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "personal_essay",
+   "targetLetter": "A",
+   "words": {
+    "min": 120,
+    "max": 180
+   },
+   "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-011",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 10,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Faris",
+      "Rania"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "arabic_levantine"
+     ],
+     "locale": "Cairo",
+     "setting": "a community garden",
+     "relationship": "a widow and the delivery boy",
+     "conflict": "while one of them prepares to leave for good",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a community garden in Cairo; a widow and the delivery boy while one of them prepares to leave for good"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a community garden in Cairo; a widow and the delivery boy while one of them prepares to leave for good\n인물 이름: Faris, Rania 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_tone_shift_hard_v4, 난이도 hard): 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다. 전환은 'but·however' 같은 표지나 감정어로 알리지 않고 (1) 문장 길이와 세부 묘사의 해상도 변화 (2) 화제의 이탈(말하던 대상이 사라짐) (3) 겉 어조(정중함 등)는 유지한 채 속 어조만 바뀌는 방식으로 만든다. 전환 지점 앞뒤에 단서를 나눠 두고, 전환 후 어조의 '원인'은 끝 동작 한 곳에서만 읽히게 한다. 선택지는 모두 '전환 방향과 의미'를 같은 문장틀로 쓴다. 오답 3개는 (a) 겉 어조 변화만 포착 (b) 방향은 맞으나 원인을 뒤집음 (c) 방향은 맞고 정도·성격을 한 단계 달리 읽음이며 지문 사실과 모두 양립한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 변화만 포착한 선택지(유지된 정중함을 변화로 읽음). 속 변화 단서를 설명하지 못한다 (2) 전환의 방향은 맞지만 원인을 뒤집은 선택지(상대의 행동 때문이 아니라 화자 자신의 행동 때문이라는 식). 지문과 충돌하지 않는다 (3) 방향은 맞지만 성격·정도를 한 단계 달리 읽은 선택지(조용한 재검토를 분노로 읽는 등). 절대어 없이 온건하게 쓴다\n금지: 전환 전과 후의 감정어를 한 문장씩 나란히 둔다 / 전환 후 문장이 전환 이유를 서술한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 겉 어조와 세부 묘사가 촘촘한 구간 / 전환 지점: 화제 이탈 또는 문장 길이 변화 / 끝: 원인을 암시하는 동작 하나. 직접 서술 금지 — 'but·however·suddenly', 감정어, 전환의 이유를 서술하는 문장 금지.\n정답 설계: 추론 2단계 — 전환 지점의 형식적 변화와 끝 동작의 원인 단서를 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 전환 후 어조의 원인을 정답만 만족하는가 (2) 겉 어조만 보는 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-012",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "memoir",
+   "targetLetter": "B",
+   "words": {
+    "min": 120,
+    "max": 180
+   },
+   "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-012",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "memoir",
+    "seed": {
+     "index": 11,
+     "genre": "memoir",
+     "pov": "third_omniscient",
+     "styleEra": "early_20c",
+     "names": [
+      "Hollis",
+      "Agnes"
+     ],
+     "nameCultures": [
+      "english",
+      "english"
+     ],
+     "locale": "Manchester",
+     "setting": "a monastery guesthouse",
+     "relationship": "two brothers who run a failing shop",
+     "conflict": "after an unsent apology",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a monastery guesthouse in Manchester; two brothers who run a failing shop after an unsent apology"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "text_structure_purpose_lit_tone_shift_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a monastery guesthouse in Manchester; two brothers who run a failing shop after an unsent apology\n인물 이름: Hollis, Agnes 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_tone_shift_hard_v4, 난이도 hard): 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다. 전환은 'but·however' 같은 표지나 감정어로 알리지 않고 (1) 문장 길이와 세부 묘사의 해상도 변화 (2) 화제의 이탈(말하던 대상이 사라짐) (3) 겉 어조(정중함 등)는 유지한 채 속 어조만 바뀌는 방식으로 만든다. 전환 지점 앞뒤에 단서를 나눠 두고, 전환 후 어조의 '원인'은 끝 동작 한 곳에서만 읽히게 한다. 선택지는 모두 '전환 방향과 의미'를 같은 문장틀로 쓴다. 오답 3개는 (a) 겉 어조 변화만 포착 (b) 방향은 맞으나 원인을 뒤집음 (c) 방향은 맞고 정도·성격을 한 단계 달리 읽음이며 지문 사실과 모두 양립한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 변화만 포착한 선택지(유지된 정중함을 변화로 읽음). 속 변화 단서를 설명하지 못한다 (2) 전환의 방향은 맞지만 원인을 뒤집은 선택지(상대의 행동 때문이 아니라 화자 자신의 행동 때문이라는 식). 지문과 충돌하지 않는다 (3) 방향은 맞지만 성격·정도를 한 단계 달리 읽은 선택지(조용한 재검토를 분노로 읽는 등). 절대어 없이 온건하게 쓴다\n금지: 전환 전과 후의 감정어를 한 문장씩 나란히 둔다 / 전환 후 문장이 전환 이유를 서술한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 겉 어조와 세부 묘사가 촘촘한 구간 / 전환 지점: 화제 이탈 또는 문장 길이 변화 / 끝: 원인을 암시하는 동작 하나. 직접 서술 금지 — 'but·however·suddenly', 감정어, 전환의 이유를 서술하는 문장 금지.\n정답 설계: 추론 2단계 — 전환 지점의 형식적 변화와 끝 동작의 원인 단서를 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 전환 후 어조의 원인을 정답만 만족하는가 (2) 겉 어조만 보는 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-013",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "text_structure",
+   "genre": "short_story",
+   "targetLetter": "C",
+   "words": {
+    "min": 130,
+    "max": 190
+   },
+   "recipeId": "text_structure_purpose_lit_text_structure_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-013",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "text_structure",
+    "genre": "short_story",
+    "seed": {
+     "index": 12,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Lars",
+      "Gunnar"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Rotterdam",
+     "setting": "a hillside terrace",
+     "relationship": "a ranger and a lost hiker",
+     "conflict": "while hiding a small failure",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a hillside terrace in Rotterdam; a ranger and a lost hiker while hiding a small failure"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 130,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_text_structure_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a hillside terrace in Rotterdam; a ranger and a lost hiker while hiding a small failure\n인물 이름: Lars, Gunnar 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 130~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_text_structure_hard_v4, 난이도 hard): 글 전체의 구조(전개 순서·초점의 이동)를 묻는다. 지문 중간에서 인물의 인식 또는 서술의 초점이 한 번 이동하고, 마지막은 해결되지 않는다. 정답은 '관찰·제스처를 기술한 뒤, 요청(또는 사건)이 그 제스처를 다시 읽게 만든다'처럼 재해석 단계를 포함한 구조 서술이다. 선택지 4개는 모두 'begins with X, then Y, ends with Z' 형태의 구조 서술이며, 모든 선택지의 사건 서술은 지문 사실과 일치해야 한다(지문에 없는 사건·사과·언쟁을 넣지 않는다). 오답은 (a) 전반부만 요약한 구조 (b) 인식 변화의 방향·순서를 뒤집은 구조 (c) 결말의 기능을 오독한 구조다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 전반부 전개만 구조로 요약한 선택지. 지문 사실에 충실하다 (2) 인식 변화의 방향·순서를 뒤집은 구조(처음 오해했다가 바로잡는 순서를 반대로 서술). 사건 서술 자체는 지문과 일치한다 (3) 지문 표현을 빌려 결말의 기능을 해결·결론으로 오독한 구조\n금지: 오답에 지문에 없는 사건(언쟁·사과·이사 결정)을 넣어 사실 오류로 소거되게 한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 130~190단어.\n지문 설계: 근거 위치 — 앞: 관찰·제스처 묘사 / 중간: 요청 또는 사건이 제스처를 다시 읽게 함 / 끝: 해결되지 않은 장면. 직접 서술 금지 — 구조를 말해 주는 메타 문장('Looking back', 'It was then that she understood') 금지.\n정답 설계: 추론 3단계 — 초기 묘사 의미 -> 사건으로 인한 재해석 -> 열린 결말의 기능을 구조 서술로 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답에 지문에 없는 사건이 한 건도 없는가 (2) 재해석 단계를 모르는 학생이 어느 오답을 고르는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-014",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "text_structure",
+   "genre": "novel_excerpt",
+   "targetLetter": "D",
+   "words": {
+    "min": 130,
+    "max": 190
+   },
+   "recipeId": "text_structure_purpose_lit_text_structure_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-014",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "text_structure",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 13,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Tamika",
+      "Beulah"
+     ],
+     "nameCultures": [
+      "african_american",
+      "african_american"
+     ],
+     "locale": "the Mississippi Delta",
+     "setting": "a snowed-in cabin",
+     "relationship": "two women who once shared a stage",
+     "conflict": "about a debt neither will mention",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a snowed-in cabin in the Mississippi Delta; two women who once shared a stage about a debt neither will mention"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 130,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_text_structure_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a snowed-in cabin in the Mississippi Delta; two women who once shared a stage about a debt neither will mention\n인물 이름: Tamika, Beulah 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 부사절·전치사구로 시작('When', 'Although', 'Beside' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 130~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_text_structure_hard_v4, 난이도 hard): 글 전체의 구조(전개 순서·초점의 이동)를 묻는다. 지문 중간에서 인물의 인식 또는 서술의 초점이 한 번 이동하고, 마지막은 해결되지 않는다. 정답은 '관찰·제스처를 기술한 뒤, 요청(또는 사건)이 그 제스처를 다시 읽게 만든다'처럼 재해석 단계를 포함한 구조 서술이다. 선택지 4개는 모두 'begins with X, then Y, ends with Z' 형태의 구조 서술이며, 모든 선택지의 사건 서술은 지문 사실과 일치해야 한다(지문에 없는 사건·사과·언쟁을 넣지 않는다). 오답은 (a) 전반부만 요약한 구조 (b) 인식 변화의 방향·순서를 뒤집은 구조 (c) 결말의 기능을 오독한 구조다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 전반부 전개만 구조로 요약한 선택지. 지문 사실에 충실하다 (2) 인식 변화의 방향·순서를 뒤집은 구조(처음 오해했다가 바로잡는 순서를 반대로 서술). 사건 서술 자체는 지문과 일치한다 (3) 지문 표현을 빌려 결말의 기능을 해결·결론으로 오독한 구조\n금지: 오답에 지문에 없는 사건(언쟁·사과·이사 결정)을 넣어 사실 오류로 소거되게 한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 130~190단어.\n지문 설계: 근거 위치 — 앞: 관찰·제스처 묘사 / 중간: 요청 또는 사건이 제스처를 다시 읽게 함 / 끝: 해결되지 않은 장면. 직접 서술 금지 — 구조를 말해 주는 메타 문장('Looking back', 'It was then that she understood') 금지.\n정답 설계: 추론 3단계 — 초기 묘사 의미 -> 사건으로 인한 재해석 -> 열린 결말의 기능을 구조 서술로 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답에 지문에 없는 사건이 한 건도 없는가 (2) 재해석 단계를 모르는 학생이 어느 오답을 고르는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-015",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "text_structure",
+   "genre": "personal_essay",
+   "targetLetter": "A",
+   "words": {
+    "min": 130,
+    "max": 190
+   },
+   "recipeId": "text_structure_purpose_lit_text_structure_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-015",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "text_structure",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 14,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Stanislav",
+      "Soraya"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "persian_central_asian"
+     ],
+     "locale": "Tehran",
+     "setting": "an old cinema projection booth",
+     "relationship": "an interpreter and her client",
+     "conflict": "over whether to sell a shared inheritance",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "an old cinema projection booth in Tehran; an interpreter and her client over whether to sell a shared inheritance"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 130,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_text_structure_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): an old cinema projection booth in Tehran; an interpreter and her client over whether to sell a shared inheritance\n인물 이름: Stanislav, Soraya 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 130~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_text_structure_hard_v4, 난이도 hard): 글 전체의 구조(전개 순서·초점의 이동)를 묻는다. 지문 중간에서 인물의 인식 또는 서술의 초점이 한 번 이동하고, 마지막은 해결되지 않는다. 정답은 '관찰·제스처를 기술한 뒤, 요청(또는 사건)이 그 제스처를 다시 읽게 만든다'처럼 재해석 단계를 포함한 구조 서술이다. 선택지 4개는 모두 'begins with X, then Y, ends with Z' 형태의 구조 서술이며, 모든 선택지의 사건 서술은 지문 사실과 일치해야 한다(지문에 없는 사건·사과·언쟁을 넣지 않는다). 오답은 (a) 전반부만 요약한 구조 (b) 인식 변화의 방향·순서를 뒤집은 구조 (c) 결말의 기능을 오독한 구조다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 전반부 전개만 구조로 요약한 선택지. 지문 사실에 충실하다 (2) 인식 변화의 방향·순서를 뒤집은 구조(처음 오해했다가 바로잡는 순서를 반대로 서술). 사건 서술 자체는 지문과 일치한다 (3) 지문 표현을 빌려 결말의 기능을 해결·결론으로 오독한 구조\n금지: 오답에 지문에 없는 사건(언쟁·사과·이사 결정)을 넣어 사실 오류로 소거되게 한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 130~190단어.\n지문 설계: 근거 위치 — 앞: 관찰·제스처 묘사 / 중간: 요청 또는 사건이 제스처를 다시 읽게 함 / 끝: 해결되지 않은 장면. 직접 서술 금지 — 구조를 말해 주는 메타 문장('Looking back', 'It was then that she understood') 금지.\n정답 설계: 추론 3단계 — 초기 묘사 의미 -> 사건으로 인한 재해석 -> 열린 결말의 기능을 구조 서술로 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답에 지문에 없는 사건이 한 건도 없는가 (2) 재해석 단계를 모르는 학생이 어느 오답을 고르는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-016",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "text_structure",
+   "genre": "memoir",
+   "targetLetter": "B",
+   "words": {
+    "min": 130,
+    "max": 190
+   },
+   "recipeId": "text_structure_purpose_lit_text_structure_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-016",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "text_structure",
+    "genre": "memoir",
+    "seed": {
+     "index": 15,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Tyrese",
+      "Nicolas"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "latin_american"
+     ],
+     "locale": "Mumbai",
+     "setting": "a night-shift pharmacy",
+     "relationship": "a teacher and a student who will not speak",
+     "conflict": "about moving an elderly parent",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a night-shift pharmacy in Mumbai; a teacher and a student who will not speak about moving an elderly parent"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 130,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_text_structure_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a night-shift pharmacy in Mumbai; a teacher and a student who will not speak about moving an elderly parent\n인물 이름: Tyrese, Nicolas 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 130~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_text_structure_hard_v4, 난이도 hard): 글 전체의 구조(전개 순서·초점의 이동)를 묻는다. 지문 중간에서 인물의 인식 또는 서술의 초점이 한 번 이동하고, 마지막은 해결되지 않는다. 정답은 '관찰·제스처를 기술한 뒤, 요청(또는 사건)이 그 제스처를 다시 읽게 만든다'처럼 재해석 단계를 포함한 구조 서술이다. 선택지 4개는 모두 'begins with X, then Y, ends with Z' 형태의 구조 서술이며, 모든 선택지의 사건 서술은 지문 사실과 일치해야 한다(지문에 없는 사건·사과·언쟁을 넣지 않는다). 오답은 (a) 전반부만 요약한 구조 (b) 인식 변화의 방향·순서를 뒤집은 구조 (c) 결말의 기능을 오독한 구조다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 전반부 전개만 구조로 요약한 선택지. 지문 사실에 충실하다 (2) 인식 변화의 방향·순서를 뒤집은 구조(처음 오해했다가 바로잡는 순서를 반대로 서술). 사건 서술 자체는 지문과 일치한다 (3) 지문 표현을 빌려 결말의 기능을 해결·결론으로 오독한 구조\n금지: 오답에 지문에 없는 사건(언쟁·사과·이사 결정)을 넣어 사실 오류로 소거되게 한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 130~190단어.\n지문 설계: 근거 위치 — 앞: 관찰·제스처 묘사 / 중간: 요청 또는 사건이 제스처를 다시 읽게 함 / 끝: 해결되지 않은 장면. 직접 서술 금지 — 구조를 말해 주는 메타 문장('Looking back', 'It was then that she understood') 금지.\n정답 설계: 추론 3단계 — 초기 묘사 의미 -> 사건으로 인한 재해석 -> 열린 결말의 기능을 구조 서술로 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답에 지문에 없는 사건이 한 건도 없는가 (2) 재해석 단계를 모르는 학생이 어느 오답을 고르는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-017",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "underlined_portion_function",
+   "genre": "short_story",
+   "targetLetter": "C",
+   "words": {
+    "min": 120,
+    "max": 190
+   },
+   "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-017",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "underlined_portion_function",
+    "genre": "short_story",
+    "seed": {
+     "index": 16,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Yiannis",
+      "Eleni"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Istanbul",
+     "setting": "a kite-maker's yard",
+     "relationship": "a stepmother and a skeptical teenager",
+     "conflict": "when the plan works and nobody feels better",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a kite-maker's yard in Istanbul; a stepmother and a skeptical teenager when the plan works and nobody feels better"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 120,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a kite-maker's yard in Istanbul; a stepmother and a skeptical teenager when the plan works and nobody feels better\n인물 이름: Yiannis, Eleni 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_underlined_portion_function_hard_v4, 난이도 hard): 지문의 문장 하나를 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다. 밑줄 문장은 단독으로 읽으면 한 가지 기능(배경 설명·성격 묘사·분위기 전환)으로 보이지만, 지문 뒤쪽 사건이 그 기능을 바꿔 놓는다(복선·반어). 밑줄 문장 바로 앞뒤 문장은 기능을 설명하거나 뒤집지 않는다. 오답 3개는 모두 밑줄 문장과 지문 사실에 근거한 기능이어야 하며 (a) 밑줄 문장만 본 기능 (b) 바로 뒤 문장과의 관계로 본 기능 (c) 지문 표현을 빌려 일반화한 기능이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 밑줄 문장만 단독으로 읽은 기능(배경 설명 등). 지문 후반 단서를 설명하지 못한다 (2) 바로 뒤 문장과의 관계로 읽어 기능의 방향을 뒤집은 선택지(복선이 아니라 해소로 읽음) (3) 지문의 표현을 빌려 일반적 기능으로 넓힌 선택지. 지문과 양립하지만 후반 단서와 맞지 않는다\n금지: 밑줄 문장 바로 뒤에서 의미를 뒤집거나 설명한다 / 정답 외 선택지가 지문 사실과 정면 충돌한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~190단어.\n지문 설계: 근거 위치 — 앞: 밑줄 문장(단독으로는 배경 설명처럼 보임) / 중간: 기능과 무관해 보이는 장면 / 뒤: 밑줄 문장을 복선·반어로 읽게 하는 사건. 직접 서술 금지 — 밑줄 문장의 의미를 풀이하는 인접 문장, 'foreshadow'류 메타 서술 금지.\n정답 설계: 추론 3단계 — 밑줄 문장의 표면 기능 -> 후반 사건 확인 -> 기능 재해석. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 밑줄 직전·직후 문장만 읽고 정답을 고를 수 없는가 (2) 표면 기능을 고른 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-018",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "underlined_portion_function",
+   "genre": "novel_excerpt",
+   "targetLetter": "D",
+   "words": {
+    "min": 120,
+    "max": 190
+   },
+   "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-018",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "underlined_portion_function",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 17,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Ren",
+      "Rangi"
+     ],
+     "nameCultures": [
+      "japanese",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Auckland",
+     "setting": "a printing press room",
+     "relationship": "two night-shift coworkers",
+     "conflict": "after a competition one of them lost on purpose",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a printing press room in Auckland; two night-shift coworkers after a competition one of them lost on purpose"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 120,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a printing press room in Auckland; two night-shift coworkers after a competition one of them lost on purpose\n인물 이름: Ren, Rangi 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_underlined_portion_function_hard_v4, 난이도 hard): 지문의 문장 하나를 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다. 밑줄 문장은 단독으로 읽으면 한 가지 기능(배경 설명·성격 묘사·분위기 전환)으로 보이지만, 지문 뒤쪽 사건이 그 기능을 바꿔 놓는다(복선·반어). 밑줄 문장 바로 앞뒤 문장은 기능을 설명하거나 뒤집지 않는다. 오답 3개는 모두 밑줄 문장과 지문 사실에 근거한 기능이어야 하며 (a) 밑줄 문장만 본 기능 (b) 바로 뒤 문장과의 관계로 본 기능 (c) 지문 표현을 빌려 일반화한 기능이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 밑줄 문장만 단독으로 읽은 기능(배경 설명 등). 지문 후반 단서를 설명하지 못한다 (2) 바로 뒤 문장과의 관계로 읽어 기능의 방향을 뒤집은 선택지(복선이 아니라 해소로 읽음) (3) 지문의 표현을 빌려 일반적 기능으로 넓힌 선택지. 지문과 양립하지만 후반 단서와 맞지 않는다\n금지: 밑줄 문장 바로 뒤에서 의미를 뒤집거나 설명한다 / 정답 외 선택지가 지문 사실과 정면 충돌한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~190단어.\n지문 설계: 근거 위치 — 앞: 밑줄 문장(단독으로는 배경 설명처럼 보임) / 중간: 기능과 무관해 보이는 장면 / 뒤: 밑줄 문장을 복선·반어로 읽게 하는 사건. 직접 서술 금지 — 밑줄 문장의 의미를 풀이하는 인접 문장, 'foreshadow'류 메타 서술 금지.\n정답 설계: 추론 3단계 — 밑줄 문장의 표면 기능 -> 후반 사건 확인 -> 기능 재해석. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 밑줄 직전·직후 문장만 읽고 정답을 고를 수 없는가 (2) 표면 기능을 고른 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-019",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "underlined_portion_function",
+   "genre": "personal_essay",
+   "targetLetter": "A",
+   "words": {
+    "min": 120,
+    "max": 190
+   },
+   "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-019",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "underlined_portion_function",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 18,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Sadia",
+      "Ayesha"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Karachi",
+     "setting": "a mountain bus stop",
+     "relationship": "a brother and sister reading their mother's letters",
+     "conflict": "while rehearsing for an important performance",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a mountain bus stop in Karachi; a brother and sister reading their mother's letters while rehearsing for an important performance"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 120,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a mountain bus stop in Karachi; a brother and sister reading their mother's letters while rehearsing for an important performance\n인물 이름: Sadia, Ayesha 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_underlined_portion_function_hard_v4, 난이도 hard): 지문의 문장 하나를 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다. 밑줄 문장은 단독으로 읽으면 한 가지 기능(배경 설명·성격 묘사·분위기 전환)으로 보이지만, 지문 뒤쪽 사건이 그 기능을 바꿔 놓는다(복선·반어). 밑줄 문장 바로 앞뒤 문장은 기능을 설명하거나 뒤집지 않는다. 오답 3개는 모두 밑줄 문장과 지문 사실에 근거한 기능이어야 하며 (a) 밑줄 문장만 본 기능 (b) 바로 뒤 문장과의 관계로 본 기능 (c) 지문 표현을 빌려 일반화한 기능이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 밑줄 문장만 단독으로 읽은 기능(배경 설명 등). 지문 후반 단서를 설명하지 못한다 (2) 바로 뒤 문장과의 관계로 읽어 기능의 방향을 뒤집은 선택지(복선이 아니라 해소로 읽음) (3) 지문의 표현을 빌려 일반적 기능으로 넓힌 선택지. 지문과 양립하지만 후반 단서와 맞지 않는다\n금지: 밑줄 문장 바로 뒤에서 의미를 뒤집거나 설명한다 / 정답 외 선택지가 지문 사실과 정면 충돌한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~190단어.\n지문 설계: 근거 위치 — 앞: 밑줄 문장(단독으로는 배경 설명처럼 보임) / 중간: 기능과 무관해 보이는 장면 / 뒤: 밑줄 문장을 복선·반어로 읽게 하는 사건. 직접 서술 금지 — 밑줄 문장의 의미를 풀이하는 인접 문장, 'foreshadow'류 메타 서술 금지.\n정답 설계: 추론 3단계 — 밑줄 문장의 표면 기능 -> 후반 사건 확인 -> 기능 재해석. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 밑줄 직전·직후 문장만 읽고 정답을 고를 수 없는가 (2) 표면 기능을 고른 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  },
+  {
+   "candidateId": "lit40-hard-03-020",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "underlined_portion_function",
+   "genre": "memoir",
+   "targetLetter": "B",
+   "words": {
+    "min": 120,
+    "max": 190
+   },
+   "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-020",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "underlined_portion_function",
+    "genre": "memoir",
+    "seed": {
+     "index": 19,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Milena",
+      "Alessia"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "italian"
+     ],
+     "locale": "Naples",
+     "setting": "a quiet library",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "about whether a small kindness was a cover for something else",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a quiet library in Naples; an elder and a restless apprentice about whether a small kindness was a cover for something else"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 120,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a quiet library in Naples; an elder and a restless apprentice about whether a small kindness was a cover for something else\n인물 이름: Milena, Alessia 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_underlined_portion_function_hard_v4, 난이도 hard): 지문의 문장 하나를 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다. 밑줄 문장은 단독으로 읽으면 한 가지 기능(배경 설명·성격 묘사·분위기 전환)으로 보이지만, 지문 뒤쪽 사건이 그 기능을 바꿔 놓는다(복선·반어). 밑줄 문장 바로 앞뒤 문장은 기능을 설명하거나 뒤집지 않는다. 오답 3개는 모두 밑줄 문장과 지문 사실에 근거한 기능이어야 하며 (a) 밑줄 문장만 본 기능 (b) 바로 뒤 문장과의 관계로 본 기능 (c) 지문 표현을 빌려 일반화한 기능이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 밑줄 문장만 단독으로 읽은 기능(배경 설명 등). 지문 후반 단서를 설명하지 못한다 (2) 바로 뒤 문장과의 관계로 읽어 기능의 방향을 뒤집은 선택지(복선이 아니라 해소로 읽음) (3) 지문의 표현을 빌려 일반적 기능으로 넓힌 선택지. 지문과 양립하지만 후반 단서와 맞지 않는다\n금지: 밑줄 문장 바로 뒤에서 의미를 뒤집거나 설명한다 / 정답 외 선택지가 지문 사실과 정면 충돌한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~190단어.\n지문 설계: 근거 위치 — 앞: 밑줄 문장(단독으로는 배경 설명처럼 보임) / 중간: 기능과 무관해 보이는 장면 / 뒤: 밑줄 문장을 복선·반어로 읽게 하는 사건. 직접 서술 금지 — 밑줄 문장의 의미를 풀이하는 인접 문장, 'foreshadow'류 메타 서술 금지.\n정답 설계: 추론 3단계 — 밑줄 문장의 표면 기능 -> 후반 사건 확인 -> 기능 재해석. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 밑줄 직전·직후 문장만 읽고 정답을 고를 수 없는가 (2) 표면 기능을 고른 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+  }
+ ],
+ "instructions": "당신은 디지털 SAT Reading & Writing 문학 지문 문항 출제 위원이다. 아래 20개 후보 각각에 대해 문항 1개를 만들어 JSON 한 파일로 저장한다.\n작업: 새 문항 생성 · 청크 gen-lit40-hard-03-01\n규칙:\n1. 지문은 전부 새로 쓴 창작이다. 실제 작품의 문장·플롯·고유한 인물 설정을 쓰지 말고, 실존 작가·작품 이름이나 'From … by …' 같은 출처 머리글을 붙이지 않는다(발췌 지문 작업은 제공된 발췌를 한 글자도 바꾸지 않는다).\n2. 지문·질문·선택지는 영어만 쓴다. 해설(explanation)만 한국어 3~5문장이며, 글자 참조는 선택지 글자(A~D)로만 한다.\n3. 선택지는 정확히 4개, 정답은 1개이고 정답 위치는 후보별 targetLetter 와 같아야 한다(어기면 코드가 선택지를 재배치하거나 탈락시킨다).\n4. 선택지 길이·문체를 비슷하게 맞춘다. 정답이 가장 길거나 구체적이면 탈락한다. 오답 3개는 서로 다른 그럴듯한 오개념에서 나오게 하고 지문 표현을 일부 활용한다.\n5. 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 것이면 탈락한다. 근거를 서로 떨어진 둘 이상의 문장에 둔다.\n6. 후보별 names 에 있는 이름만 인물 이름으로 쓴다. 지정되지 않은 이름·'Tobias'·'Odalys'·'Wren' 은 쓰지 않는다. 후보별 openingStyle 을 따르고 첫 단어를 The·You·It·There 로 시작하지 않는다.\n7. 지문 단어 수는 후보별 words.min~words.max 안이어야 한다(코드가 센다). 시는 줄바꿈을 \\n 으로 유지한다.\n8. XML 태그·마크다운·내부 메모·플레이스홀더·'As an AI' 류 문장을 출력에 넣지 않는다. 밑줄 표시는 앱 규격대로 두 밑줄 기호 __문장__ 만 쓴다. 출처·작가를 지어내지 않는다.\n9. 선언: 모든 항목에 declaration 3개(original, noRealWorkQuoted, noCopyrightedSource)를 true 로 쓴다. 그럴 수 없는 항목은 만들지 말고 candidateId 만 빼라(탈락 처리된다).\n지문과 문항을 함께 새로 쓴다.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-hard-03-01.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"작업 파일의 chunkId 를 그대로\",\"model\":\"당신의 모델 이름(예: opus)\",\"items\":[{\"candidateId\":\"후보의 candidateId 를 그대로\",\"passage\":\"영어 지문(문항의 질문은 넣지 않는다)\",\"question\":\"영어 질문 한 문장\",\"options\":[\"선택지 A\",\"선택지 B\",\"선택지 C\",\"선택지 D\"],\"correct_letter\":\"A|B|C|D (targetLetter 와 같게)\",\"explanation\":\"한국어 해설 3~5문장\",\"tone\":[\"지문 어조 영어 단어 1~3개\"],\"devices\":[\"쓰인 문학 장치 영어 단어\"],\"declaration\":{\"original\":true,\"noRealWorkQuoted\":true,\"noCopyrightedSource\":true}}]}\n허용 값: correct_letter ∈ {A,B,C,D}, options 길이 4, declaration 3개 모두 true. 후보의 candidateId 를 바꾸지 않는다. 항목 순서는 후보 순서를 따른다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 후보 임의 추가·삭제, 이 작업 파일 수정. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 후보\n### lit40-hard-03-001 — skill words_in_context · 유형 figurative_language · 난이도 hard · 장르 personal_essay · targetLetter B\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a lakeside dock in Marrakesh; a mother-in-law and a new bride over an invitation one of them refuses\n인물 이름: Salma, Wolfram 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_figurative_language_hard_v4, 난이도 hard): 지문에 있는 비유 구절이 문맥에서 전하는 의미를 묻는다. 관용 표현·상투적 은유는 쓰지 않고 이 지문 안에서만 의미가 정해지는 신선한 비유를 쓴다. 비유가 가리키는 대상의 의미를 정하는 단서는 비유 앞의 두 곳과 비유 뒤의 한 곳에 나눠 두며, 비유 바로 다음 문장이 해석을 알려 주면 안 된다. 오답 3개는 모두 비유로서 합리적인 해석이어야 하며 문자 해석은 많아야 하나다. 오답은 비유가 가진 서로 다른 속성(무게·한계·소리·온도 등)을 하나씩 골라 해석한 것이고, 정답은 두 단서를 만족하는 속성이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 비유의 한 속성(예: 무게)에서 나온 해석. 앞 단서 한 곳만 설명한다 (2) 지문 표현을 빌려 다른 속성(예: 한계)에서 나온 해석. 뒤 단서를 설명하지 못한다 (3) 문자 해석이거나 정답의 의미 범위를 한 단계 넓힌 해석. 절대어 없이 온건하게 쓴다\n금지: 비유 직후 문장이 비유를 풀어 쓴다 / 관용적으로 의미가 알려진 비유(stone in the chest 등)를 쓴다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 비유 앞 1: 대상이 처한 상황 / 비유 앞 2: 인물의 반복 행동 / 비유 뒤: 해석을 한 번 뒤집는 사소한 디테일(해석을 주지 않음). 직접 서술 금지 — 비유의 뜻을 풀어 주는 문장, 동격·'that is' 정의 금지.\n정답 설계: 추론 2단계 — 비유의 후보 속성 중 앞 단서와 뒤 단서를 동시에 만족하는 속성을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 비유를 문맥 없이 읽었을 때 가장 먼저 떠오르는 해석이 오답인가 (2) 세 오답 사이에 같은 속성이 중복되지 않는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-002 — skill words_in_context · 유형 figurative_language · 난이도 hard · 장르 memoir · targetLetter C\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a fishing harbor in Colombo; a girl and an old family friend about keeping a family business open\n인물 이름: Faisal, Ayita 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 부사절·전치사구로 시작('When', 'Although', 'Beside' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_figurative_language_hard_v4, 난이도 hard): 지문에 있는 비유 구절이 문맥에서 전하는 의미를 묻는다. 관용 표현·상투적 은유는 쓰지 않고 이 지문 안에서만 의미가 정해지는 신선한 비유를 쓴다. 비유가 가리키는 대상의 의미를 정하는 단서는 비유 앞의 두 곳과 비유 뒤의 한 곳에 나눠 두며, 비유 바로 다음 문장이 해석을 알려 주면 안 된다. 오답 3개는 모두 비유로서 합리적인 해석이어야 하며 문자 해석은 많아야 하나다. 오답은 비유가 가진 서로 다른 속성(무게·한계·소리·온도 등)을 하나씩 골라 해석한 것이고, 정답은 두 단서를 만족하는 속성이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 비유의 한 속성(예: 무게)에서 나온 해석. 앞 단서 한 곳만 설명한다 (2) 지문 표현을 빌려 다른 속성(예: 한계)에서 나온 해석. 뒤 단서를 설명하지 못한다 (3) 문자 해석이거나 정답의 의미 범위를 한 단계 넓힌 해석. 절대어 없이 온건하게 쓴다\n금지: 비유 직후 문장이 비유를 풀어 쓴다 / 관용적으로 의미가 알려진 비유(stone in the chest 등)를 쓴다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 비유 앞 1: 대상이 처한 상황 / 비유 앞 2: 인물의 반복 행동 / 비유 뒤: 해석을 한 번 뒤집는 사소한 디테일(해석을 주지 않음). 직접 서술 금지 — 비유의 뜻을 풀어 주는 문장, 동격·'that is' 정의 금지.\n정답 설계: 추론 2단계 — 비유의 후보 속성 중 앞 단서와 뒤 단서를 동시에 만족하는 속성을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 비유를 문맥 없이 읽었을 때 가장 먼저 떠오르는 해석이 오답인가 (2) 세 오답 사이에 같은 속성이 중복되지 않는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-003 — skill words_in_context · 유형 word_in_context · 난이도 hard · 장르 short_story · targetLetter D\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a rural post office in Glasgow; a mayor and the town's only doctor when a visitor arrives and sees what the family does not\n인물 이름: Donal, Booker 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 100~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_word_in_context_hard_v4, 난이도 hard): 빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현 (2) 정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다 (3) 지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다\n금지: 선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다 / 빈칸 바로 뒤에 의미를 풀이하는 구를 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 100~150단어.\n지문 설계: 근거 위치 — 앞: 인물의 습관적·반복 행동(제약 1) / 중간: 사건이 한 번 전환되는 지점 / 빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음). 직접 서술 금지 — 빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지.\n정답 설계: 추론 2단계 — 앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함) (2) 정답을 빈칸 뒤 문장만으로 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-004 — skill words_in_context · 유형 word_in_context · 난이도 hard · 장르 novel_excerpt · targetLetter A\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a night bus in Dhaka; a keeper and a visiting surveyor about the last item in a house being emptied\n인물 이름: Rohan, Ishaan 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 100~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_word_in_context_hard_v4, 난이도 hard): 빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현 (2) 정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다 (3) 지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다\n금지: 선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다 / 빈칸 바로 뒤에 의미를 풀이하는 구를 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 100~150단어.\n지문 설계: 근거 위치 — 앞: 인물의 습관적·반복 행동(제약 1) / 중간: 사건이 한 번 전환되는 지점 / 빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음). 직접 서술 금지 — 빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지.\n정답 설계: 추론 2단계 — 앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함) (2) 정답을 빈칸 뒤 문장만으로 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-005 — skill words_in_context · 유형 word_in_context · 난이도 hard · 장르 poetry · targetLetter B\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a river barge in Chicago's South Side; a pair of lifelong friends who rarely speak over a tool or instrument inherited by the wrong person\n인물 이름: Odessa, Isaiah 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 100~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_word_in_context_hard_v4, 난이도 hard): 빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현 (2) 정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다 (3) 지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다\n금지: 선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다 / 빈칸 바로 뒤에 의미를 풀이하는 구를 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 100~150단어.\n지문 설계: 근거 위치 — 앞: 인물의 습관적·반복 행동(제약 1) / 중간: 사건이 한 번 전환되는 지점 / 빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음). 직접 서술 금지 — 빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지.\n정답 설계: 추론 2단계 — 앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함) (2) 정답을 빈칸 뒤 문장만으로 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-006 — skill words_in_context · 유형 word_in_context · 난이도 hard · 장르 personal_essay · targetLetter C\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): an abandoned orchard in Valparaiso; best friends after a move over how to mark an anniversary\n인물 이름: Rosalinda, Astrid 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 100~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_word_in_context_hard_v4, 난이도 hard): 빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현 (2) 정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다 (3) 지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다\n금지: 선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다 / 빈칸 바로 뒤에 의미를 풀이하는 구를 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 100~150단어.\n지문 설계: 근거 위치 — 앞: 인물의 습관적·반복 행동(제약 1) / 중간: 사건이 한 번 전환되는 지점 / 빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음). 직접 서술 금지 — 빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지.\n정답 설계: 추론 2단계 — 앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함) (2) 정답을 빈칸 뒤 문장만으로 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-007 — skill words_in_context · 유형 word_in_context · 난이도 hard · 장르 memoir · targetLetter D\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a cemetery gate in Lisbon; a mother and her son leaving for college over a recipe that was never written down\n인물 이름: Fatma, Xiulan 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 100~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_word_in_context_hard_v4, 난이도 hard): 빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현 (2) 정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다 (3) 지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다\n금지: 선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다 / 빈칸 바로 뒤에 의미를 풀이하는 구를 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 100~150단어.\n지문 설계: 근거 위치 — 앞: 인물의 습관적·반복 행동(제약 1) / 중간: 사건이 한 번 전환되는 지점 / 빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음). 직접 서술 금지 — 빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지.\n정답 설계: 추론 2단계 — 앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함) (2) 정답을 빈칸 뒤 문장만으로 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-008 — skill text_structure_purpose · 유형 tone_shift · 난이도 hard · 장르 short_story · targetLetter B\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a flooded cellar in Tbilisi; an author and her translator over an unfair rule everyone obeys\n인물 이름: Dmitri, Anselm 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_tone_shift_hard_v4, 난이도 hard): 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다. 전환은 'but·however' 같은 표지나 감정어로 알리지 않고 (1) 문장 길이와 세부 묘사의 해상도 변화 (2) 화제의 이탈(말하던 대상이 사라짐) (3) 겉 어조(정중함 등)는 유지한 채 속 어조만 바뀌는 방식으로 만든다. 전환 지점 앞뒤에 단서를 나눠 두고, 전환 후 어조의 '원인'은 끝 동작 한 곳에서만 읽히게 한다. 선택지는 모두 '전환 방향과 의미'를 같은 문장틀로 쓴다. 오답 3개는 (a) 겉 어조 변화만 포착 (b) 방향은 맞으나 원인을 뒤집음 (c) 방향은 맞고 정도·성격을 한 단계 달리 읽음이며 지문 사실과 모두 양립한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 변화만 포착한 선택지(유지된 정중함을 변화로 읽음). 속 변화 단서를 설명하지 못한다 (2) 전환의 방향은 맞지만 원인을 뒤집은 선택지(상대의 행동 때문이 아니라 화자 자신의 행동 때문이라는 식). 지문과 충돌하지 않는다 (3) 방향은 맞지만 성격·정도를 한 단계 달리 읽은 선택지(조용한 재검토를 분노로 읽는 등). 절대어 없이 온건하게 쓴다\n금지: 전환 전과 후의 감정어를 한 문장씩 나란히 둔다 / 전환 후 문장이 전환 이유를 서술한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 겉 어조와 세부 묘사가 촘촘한 구간 / 전환 지점: 화제 이탈 또는 문장 길이 변화 / 끝: 원인을 암시하는 동작 하나. 직접 서술 금지 — 'but·however·suddenly', 감정어, 전환의 이유를 서술하는 문장 금지.\n정답 설계: 추론 2단계 — 전환 지점의 형식적 변화와 끝 동작의 원인 단서를 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 전환 후 어조의 원인을 정답만 만족하는가 (2) 겉 어조만 보는 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-009 — skill text_structure_purpose · 유형 tone_shift · 난이도 hard · 장르 novel_excerpt · targetLetter C\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a rooftop water tank in Hanoi; old rivals in a chess club about an ending that nobody wants to admit\n인물 이름: Imani, Birdie 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_tone_shift_hard_v4, 난이도 hard): 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다. 전환은 'but·however' 같은 표지나 감정어로 알리지 않고 (1) 문장 길이와 세부 묘사의 해상도 변화 (2) 화제의 이탈(말하던 대상이 사라짐) (3) 겉 어조(정중함 등)는 유지한 채 속 어조만 바뀌는 방식으로 만든다. 전환 지점 앞뒤에 단서를 나눠 두고, 전환 후 어조의 '원인'은 끝 동작 한 곳에서만 읽히게 한다. 선택지는 모두 '전환 방향과 의미'를 같은 문장틀로 쓴다. 오답 3개는 (a) 겉 어조 변화만 포착 (b) 방향은 맞으나 원인을 뒤집음 (c) 방향은 맞고 정도·성격을 한 단계 달리 읽음이며 지문 사실과 모두 양립한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 변화만 포착한 선택지(유지된 정중함을 변화로 읽음). 속 변화 단서를 설명하지 못한다 (2) 전환의 방향은 맞지만 원인을 뒤집은 선택지(상대의 행동 때문이 아니라 화자 자신의 행동 때문이라는 식). 지문과 충돌하지 않는다 (3) 방향은 맞지만 성격·정도를 한 단계 달리 읽은 선택지(조용한 재검토를 분노로 읽는 등). 절대어 없이 온건하게 쓴다\n금지: 전환 전과 후의 감정어를 한 문장씩 나란히 둔다 / 전환 후 문장이 전환 이유를 서술한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 겉 어조와 세부 묘사가 촘촘한 구간 / 전환 지점: 화제 이탈 또는 문장 길이 변화 / 끝: 원인을 암시하는 동작 하나. 직접 서술 금지 — 'but·however·suddenly', 감정어, 전환의 이유를 서술하는 문장 금지.\n정답 설계: 추론 2단계 — 전환 지점의 형식적 변화와 끝 동작의 원인 단서를 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 전환 후 어조의 원인을 정답만 만족하는가 (2) 겉 어조만 보는 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-010 — skill text_structure_purpose · 유형 tone_shift · 난이도 hard · 장르 poetry · targetLetter D\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a soccer field at dusk in Bologna; a retired judge and a young clerk about an object that belonged to someone gone\n인물 이름: Fiorella, Ottavio 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_tone_shift_hard_v4, 난이도 hard): 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다. 전환은 'but·however' 같은 표지나 감정어로 알리지 않고 (1) 문장 길이와 세부 묘사의 해상도 변화 (2) 화제의 이탈(말하던 대상이 사라짐) (3) 겉 어조(정중함 등)는 유지한 채 속 어조만 바뀌는 방식으로 만든다. 전환 지점 앞뒤에 단서를 나눠 두고, 전환 후 어조의 '원인'은 끝 동작 한 곳에서만 읽히게 한다. 선택지는 모두 '전환 방향과 의미'를 같은 문장틀로 쓴다. 오답 3개는 (a) 겉 어조 변화만 포착 (b) 방향은 맞으나 원인을 뒤집음 (c) 방향은 맞고 정도·성격을 한 단계 달리 읽음이며 지문 사실과 모두 양립한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 변화만 포착한 선택지(유지된 정중함을 변화로 읽음). 속 변화 단서를 설명하지 못한다 (2) 전환의 방향은 맞지만 원인을 뒤집은 선택지(상대의 행동 때문이 아니라 화자 자신의 행동 때문이라는 식). 지문과 충돌하지 않는다 (3) 방향은 맞지만 성격·정도를 한 단계 달리 읽은 선택지(조용한 재검토를 분노로 읽는 등). 절대어 없이 온건하게 쓴다\n금지: 전환 전과 후의 감정어를 한 문장씩 나란히 둔다 / 전환 후 문장이 전환 이유를 서술한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 겉 어조와 세부 묘사가 촘촘한 구간 / 전환 지점: 화제 이탈 또는 문장 길이 변화 / 끝: 원인을 암시하는 동작 하나. 직접 서술 금지 — 'but·however·suddenly', 감정어, 전환의 이유를 서술하는 문장 금지.\n정답 설계: 추론 2단계 — 전환 지점의 형식적 변화와 끝 동작의 원인 단서를 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 전환 후 어조의 원인을 정답만 만족하는가 (2) 겉 어조만 보는 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-011 — skill text_structure_purpose · 유형 tone_shift · 난이도 hard · 장르 personal_essay · targetLetter A\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a community garden in Cairo; a widow and the delivery boy while one of them prepares to leave for good\n인물 이름: Faris, Rania 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_tone_shift_hard_v4, 난이도 hard): 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다. 전환은 'but·however' 같은 표지나 감정어로 알리지 않고 (1) 문장 길이와 세부 묘사의 해상도 변화 (2) 화제의 이탈(말하던 대상이 사라짐) (3) 겉 어조(정중함 등)는 유지한 채 속 어조만 바뀌는 방식으로 만든다. 전환 지점 앞뒤에 단서를 나눠 두고, 전환 후 어조의 '원인'은 끝 동작 한 곳에서만 읽히게 한다. 선택지는 모두 '전환 방향과 의미'를 같은 문장틀로 쓴다. 오답 3개는 (a) 겉 어조 변화만 포착 (b) 방향은 맞으나 원인을 뒤집음 (c) 방향은 맞고 정도·성격을 한 단계 달리 읽음이며 지문 사실과 모두 양립한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 변화만 포착한 선택지(유지된 정중함을 변화로 읽음). 속 변화 단서를 설명하지 못한다 (2) 전환의 방향은 맞지만 원인을 뒤집은 선택지(상대의 행동 때문이 아니라 화자 자신의 행동 때문이라는 식). 지문과 충돌하지 않는다 (3) 방향은 맞지만 성격·정도를 한 단계 달리 읽은 선택지(조용한 재검토를 분노로 읽는 등). 절대어 없이 온건하게 쓴다\n금지: 전환 전과 후의 감정어를 한 문장씩 나란히 둔다 / 전환 후 문장이 전환 이유를 서술한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 겉 어조와 세부 묘사가 촘촘한 구간 / 전환 지점: 화제 이탈 또는 문장 길이 변화 / 끝: 원인을 암시하는 동작 하나. 직접 서술 금지 — 'but·however·suddenly', 감정어, 전환의 이유를 서술하는 문장 금지.\n정답 설계: 추론 2단계 — 전환 지점의 형식적 변화와 끝 동작의 원인 단서를 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 전환 후 어조의 원인을 정답만 만족하는가 (2) 겉 어조만 보는 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-012 — skill text_structure_purpose · 유형 tone_shift · 난이도 hard · 장르 memoir · targetLetter B\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a monastery guesthouse in Manchester; two brothers who run a failing shop after an unsent apology\n인물 이름: Hollis, Agnes 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_tone_shift_hard_v4, 난이도 hard): 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다. 전환은 'but·however' 같은 표지나 감정어로 알리지 않고 (1) 문장 길이와 세부 묘사의 해상도 변화 (2) 화제의 이탈(말하던 대상이 사라짐) (3) 겉 어조(정중함 등)는 유지한 채 속 어조만 바뀌는 방식으로 만든다. 전환 지점 앞뒤에 단서를 나눠 두고, 전환 후 어조의 '원인'은 끝 동작 한 곳에서만 읽히게 한다. 선택지는 모두 '전환 방향과 의미'를 같은 문장틀로 쓴다. 오답 3개는 (a) 겉 어조 변화만 포착 (b) 방향은 맞으나 원인을 뒤집음 (c) 방향은 맞고 정도·성격을 한 단계 달리 읽음이며 지문 사실과 모두 양립한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 변화만 포착한 선택지(유지된 정중함을 변화로 읽음). 속 변화 단서를 설명하지 못한다 (2) 전환의 방향은 맞지만 원인을 뒤집은 선택지(상대의 행동 때문이 아니라 화자 자신의 행동 때문이라는 식). 지문과 충돌하지 않는다 (3) 방향은 맞지만 성격·정도를 한 단계 달리 읽은 선택지(조용한 재검토를 분노로 읽는 등). 절대어 없이 온건하게 쓴다\n금지: 전환 전과 후의 감정어를 한 문장씩 나란히 둔다 / 전환 후 문장이 전환 이유를 서술한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 겉 어조와 세부 묘사가 촘촘한 구간 / 전환 지점: 화제 이탈 또는 문장 길이 변화 / 끝: 원인을 암시하는 동작 하나. 직접 서술 금지 — 'but·however·suddenly', 감정어, 전환의 이유를 서술하는 문장 금지.\n정답 설계: 추론 2단계 — 전환 지점의 형식적 변화와 끝 동작의 원인 단서를 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 전환 후 어조의 원인을 정답만 만족하는가 (2) 겉 어조만 보는 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-013 — skill text_structure_purpose · 유형 text_structure · 난이도 hard · 장르 short_story · targetLetter C\n유형 지시: 글 전체의 구조(전개 순서·초점의 이동)를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a hillside terrace in Rotterdam; a ranger and a lost hiker while hiding a small failure\n인물 이름: Lars, Gunnar 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 130~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_text_structure_hard_v4, 난이도 hard): 글 전체의 구조(전개 순서·초점의 이동)를 묻는다. 지문 중간에서 인물의 인식 또는 서술의 초점이 한 번 이동하고, 마지막은 해결되지 않는다. 정답은 '관찰·제스처를 기술한 뒤, 요청(또는 사건)이 그 제스처를 다시 읽게 만든다'처럼 재해석 단계를 포함한 구조 서술이다. 선택지 4개는 모두 'begins with X, then Y, ends with Z' 형태의 구조 서술이며, 모든 선택지의 사건 서술은 지문 사실과 일치해야 한다(지문에 없는 사건·사과·언쟁을 넣지 않는다). 오답은 (a) 전반부만 요약한 구조 (b) 인식 변화의 방향·순서를 뒤집은 구조 (c) 결말의 기능을 오독한 구조다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 전반부 전개만 구조로 요약한 선택지. 지문 사실에 충실하다 (2) 인식 변화의 방향·순서를 뒤집은 구조(처음 오해했다가 바로잡는 순서를 반대로 서술). 사건 서술 자체는 지문과 일치한다 (3) 지문 표현을 빌려 결말의 기능을 해결·결론으로 오독한 구조\n금지: 오답에 지문에 없는 사건(언쟁·사과·이사 결정)을 넣어 사실 오류로 소거되게 한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 130~190단어.\n지문 설계: 근거 위치 — 앞: 관찰·제스처 묘사 / 중간: 요청 또는 사건이 제스처를 다시 읽게 함 / 끝: 해결되지 않은 장면. 직접 서술 금지 — 구조를 말해 주는 메타 문장('Looking back', 'It was then that she understood') 금지.\n정답 설계: 추론 3단계 — 초기 묘사 의미 -> 사건으로 인한 재해석 -> 열린 결말의 기능을 구조 서술로 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답에 지문에 없는 사건이 한 건도 없는가 (2) 재해석 단계를 모르는 학생이 어느 오답을 고르는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-014 — skill text_structure_purpose · 유형 text_structure · 난이도 hard · 장르 novel_excerpt · targetLetter D\n유형 지시: 글 전체의 구조(전개 순서·초점의 이동)를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a snowed-in cabin in the Mississippi Delta; two women who once shared a stage about a debt neither will mention\n인물 이름: Tamika, Beulah 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 부사절·전치사구로 시작('When', 'Although', 'Beside' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 130~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_text_structure_hard_v4, 난이도 hard): 글 전체의 구조(전개 순서·초점의 이동)를 묻는다. 지문 중간에서 인물의 인식 또는 서술의 초점이 한 번 이동하고, 마지막은 해결되지 않는다. 정답은 '관찰·제스처를 기술한 뒤, 요청(또는 사건)이 그 제스처를 다시 읽게 만든다'처럼 재해석 단계를 포함한 구조 서술이다. 선택지 4개는 모두 'begins with X, then Y, ends with Z' 형태의 구조 서술이며, 모든 선택지의 사건 서술은 지문 사실과 일치해야 한다(지문에 없는 사건·사과·언쟁을 넣지 않는다). 오답은 (a) 전반부만 요약한 구조 (b) 인식 변화의 방향·순서를 뒤집은 구조 (c) 결말의 기능을 오독한 구조다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 전반부 전개만 구조로 요약한 선택지. 지문 사실에 충실하다 (2) 인식 변화의 방향·순서를 뒤집은 구조(처음 오해했다가 바로잡는 순서를 반대로 서술). 사건 서술 자체는 지문과 일치한다 (3) 지문 표현을 빌려 결말의 기능을 해결·결론으로 오독한 구조\n금지: 오답에 지문에 없는 사건(언쟁·사과·이사 결정)을 넣어 사실 오류로 소거되게 한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 130~190단어.\n지문 설계: 근거 위치 — 앞: 관찰·제스처 묘사 / 중간: 요청 또는 사건이 제스처를 다시 읽게 함 / 끝: 해결되지 않은 장면. 직접 서술 금지 — 구조를 말해 주는 메타 문장('Looking back', 'It was then that she understood') 금지.\n정답 설계: 추론 3단계 — 초기 묘사 의미 -> 사건으로 인한 재해석 -> 열린 결말의 기능을 구조 서술로 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답에 지문에 없는 사건이 한 건도 없는가 (2) 재해석 단계를 모르는 학생이 어느 오답을 고르는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-015 — skill text_structure_purpose · 유형 text_structure · 난이도 hard · 장르 personal_essay · targetLetter A\n유형 지시: 글 전체의 구조(전개 순서·초점의 이동)를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): an old cinema projection booth in Tehran; an interpreter and her client over whether to sell a shared inheritance\n인물 이름: Stanislav, Soraya 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 130~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_text_structure_hard_v4, 난이도 hard): 글 전체의 구조(전개 순서·초점의 이동)를 묻는다. 지문 중간에서 인물의 인식 또는 서술의 초점이 한 번 이동하고, 마지막은 해결되지 않는다. 정답은 '관찰·제스처를 기술한 뒤, 요청(또는 사건)이 그 제스처를 다시 읽게 만든다'처럼 재해석 단계를 포함한 구조 서술이다. 선택지 4개는 모두 'begins with X, then Y, ends with Z' 형태의 구조 서술이며, 모든 선택지의 사건 서술은 지문 사실과 일치해야 한다(지문에 없는 사건·사과·언쟁을 넣지 않는다). 오답은 (a) 전반부만 요약한 구조 (b) 인식 변화의 방향·순서를 뒤집은 구조 (c) 결말의 기능을 오독한 구조다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 전반부 전개만 구조로 요약한 선택지. 지문 사실에 충실하다 (2) 인식 변화의 방향·순서를 뒤집은 구조(처음 오해했다가 바로잡는 순서를 반대로 서술). 사건 서술 자체는 지문과 일치한다 (3) 지문 표현을 빌려 결말의 기능을 해결·결론으로 오독한 구조\n금지: 오답에 지문에 없는 사건(언쟁·사과·이사 결정)을 넣어 사실 오류로 소거되게 한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 130~190단어.\n지문 설계: 근거 위치 — 앞: 관찰·제스처 묘사 / 중간: 요청 또는 사건이 제스처를 다시 읽게 함 / 끝: 해결되지 않은 장면. 직접 서술 금지 — 구조를 말해 주는 메타 문장('Looking back', 'It was then that she understood') 금지.\n정답 설계: 추론 3단계 — 초기 묘사 의미 -> 사건으로 인한 재해석 -> 열린 결말의 기능을 구조 서술로 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답에 지문에 없는 사건이 한 건도 없는가 (2) 재해석 단계를 모르는 학생이 어느 오답을 고르는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-016 — skill text_structure_purpose · 유형 text_structure · 난이도 hard · 장르 memoir · targetLetter B\n유형 지시: 글 전체의 구조(전개 순서·초점의 이동)를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a night-shift pharmacy in Mumbai; a teacher and a student who will not speak about moving an elderly parent\n인물 이름: Tyrese, Nicolas 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 130~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_text_structure_hard_v4, 난이도 hard): 글 전체의 구조(전개 순서·초점의 이동)를 묻는다. 지문 중간에서 인물의 인식 또는 서술의 초점이 한 번 이동하고, 마지막은 해결되지 않는다. 정답은 '관찰·제스처를 기술한 뒤, 요청(또는 사건)이 그 제스처를 다시 읽게 만든다'처럼 재해석 단계를 포함한 구조 서술이다. 선택지 4개는 모두 'begins with X, then Y, ends with Z' 형태의 구조 서술이며, 모든 선택지의 사건 서술은 지문 사실과 일치해야 한다(지문에 없는 사건·사과·언쟁을 넣지 않는다). 오답은 (a) 전반부만 요약한 구조 (b) 인식 변화의 방향·순서를 뒤집은 구조 (c) 결말의 기능을 오독한 구조다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 전반부 전개만 구조로 요약한 선택지. 지문 사실에 충실하다 (2) 인식 변화의 방향·순서를 뒤집은 구조(처음 오해했다가 바로잡는 순서를 반대로 서술). 사건 서술 자체는 지문과 일치한다 (3) 지문 표현을 빌려 결말의 기능을 해결·결론으로 오독한 구조\n금지: 오답에 지문에 없는 사건(언쟁·사과·이사 결정)을 넣어 사실 오류로 소거되게 한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 130~190단어.\n지문 설계: 근거 위치 — 앞: 관찰·제스처 묘사 / 중간: 요청 또는 사건이 제스처를 다시 읽게 함 / 끝: 해결되지 않은 장면. 직접 서술 금지 — 구조를 말해 주는 메타 문장('Looking back', 'It was then that she understood') 금지.\n정답 설계: 추론 3단계 — 초기 묘사 의미 -> 사건으로 인한 재해석 -> 열린 결말의 기능을 구조 서술로 결합. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답에 지문에 없는 사건이 한 건도 없는가 (2) 재해석 단계를 모르는 학생이 어느 오답을 고르는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-017 — skill text_structure_purpose · 유형 underlined_portion_function · 난이도 hard · 장르 short_story · targetLetter C\n유형 지시: 지문의 한 문장을 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 밑줄 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a kite-maker's yard in Istanbul; a stepmother and a skeptical teenager when the plan works and nobody feels better\n인물 이름: Yiannis, Eleni 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_underlined_portion_function_hard_v4, 난이도 hard): 지문의 문장 하나를 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다. 밑줄 문장은 단독으로 읽으면 한 가지 기능(배경 설명·성격 묘사·분위기 전환)으로 보이지만, 지문 뒤쪽 사건이 그 기능을 바꿔 놓는다(복선·반어). 밑줄 문장 바로 앞뒤 문장은 기능을 설명하거나 뒤집지 않는다. 오답 3개는 모두 밑줄 문장과 지문 사실에 근거한 기능이어야 하며 (a) 밑줄 문장만 본 기능 (b) 바로 뒤 문장과의 관계로 본 기능 (c) 지문 표현을 빌려 일반화한 기능이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 밑줄 문장만 단독으로 읽은 기능(배경 설명 등). 지문 후반 단서를 설명하지 못한다 (2) 바로 뒤 문장과의 관계로 읽어 기능의 방향을 뒤집은 선택지(복선이 아니라 해소로 읽음) (3) 지문의 표현을 빌려 일반적 기능으로 넓힌 선택지. 지문과 양립하지만 후반 단서와 맞지 않는다\n금지: 밑줄 문장 바로 뒤에서 의미를 뒤집거나 설명한다 / 정답 외 선택지가 지문 사실과 정면 충돌한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~190단어.\n지문 설계: 근거 위치 — 앞: 밑줄 문장(단독으로는 배경 설명처럼 보임) / 중간: 기능과 무관해 보이는 장면 / 뒤: 밑줄 문장을 복선·반어로 읽게 하는 사건. 직접 서술 금지 — 밑줄 문장의 의미를 풀이하는 인접 문장, 'foreshadow'류 메타 서술 금지.\n정답 설계: 추론 3단계 — 밑줄 문장의 표면 기능 -> 후반 사건 확인 -> 기능 재해석. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 밑줄 직전·직후 문장만 읽고 정답을 고를 수 없는가 (2) 표면 기능을 고른 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-018 — skill text_structure_purpose · 유형 underlined_portion_function · 난이도 hard · 장르 novel_excerpt · targetLetter D\n유형 지시: 지문의 한 문장을 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 밑줄 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a printing press room in Auckland; two night-shift coworkers after a competition one of them lost on purpose\n인물 이름: Ren, Rangi 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_underlined_portion_function_hard_v4, 난이도 hard): 지문의 문장 하나를 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다. 밑줄 문장은 단독으로 읽으면 한 가지 기능(배경 설명·성격 묘사·분위기 전환)으로 보이지만, 지문 뒤쪽 사건이 그 기능을 바꿔 놓는다(복선·반어). 밑줄 문장 바로 앞뒤 문장은 기능을 설명하거나 뒤집지 않는다. 오답 3개는 모두 밑줄 문장과 지문 사실에 근거한 기능이어야 하며 (a) 밑줄 문장만 본 기능 (b) 바로 뒤 문장과의 관계로 본 기능 (c) 지문 표현을 빌려 일반화한 기능이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 밑줄 문장만 단독으로 읽은 기능(배경 설명 등). 지문 후반 단서를 설명하지 못한다 (2) 바로 뒤 문장과의 관계로 읽어 기능의 방향을 뒤집은 선택지(복선이 아니라 해소로 읽음) (3) 지문의 표현을 빌려 일반적 기능으로 넓힌 선택지. 지문과 양립하지만 후반 단서와 맞지 않는다\n금지: 밑줄 문장 바로 뒤에서 의미를 뒤집거나 설명한다 / 정답 외 선택지가 지문 사실과 정면 충돌한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~190단어.\n지문 설계: 근거 위치 — 앞: 밑줄 문장(단독으로는 배경 설명처럼 보임) / 중간: 기능과 무관해 보이는 장면 / 뒤: 밑줄 문장을 복선·반어로 읽게 하는 사건. 직접 서술 금지 — 밑줄 문장의 의미를 풀이하는 인접 문장, 'foreshadow'류 메타 서술 금지.\n정답 설계: 추론 3단계 — 밑줄 문장의 표면 기능 -> 후반 사건 확인 -> 기능 재해석. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 밑줄 직전·직후 문장만 읽고 정답을 고를 수 없는가 (2) 표면 기능을 고른 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-019 — skill text_structure_purpose · 유형 underlined_portion_function · 난이도 hard · 장르 personal_essay · targetLetter A\n유형 지시: 지문의 한 문장을 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 밑줄 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a mountain bus stop in Karachi; a brother and sister reading their mother's letters while rehearsing for an important performance\n인물 이름: Sadia, Ayesha 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_underlined_portion_function_hard_v4, 난이도 hard): 지문의 문장 하나를 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다. 밑줄 문장은 단독으로 읽으면 한 가지 기능(배경 설명·성격 묘사·분위기 전환)으로 보이지만, 지문 뒤쪽 사건이 그 기능을 바꿔 놓는다(복선·반어). 밑줄 문장 바로 앞뒤 문장은 기능을 설명하거나 뒤집지 않는다. 오답 3개는 모두 밑줄 문장과 지문 사실에 근거한 기능이어야 하며 (a) 밑줄 문장만 본 기능 (b) 바로 뒤 문장과의 관계로 본 기능 (c) 지문 표현을 빌려 일반화한 기능이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 밑줄 문장만 단독으로 읽은 기능(배경 설명 등). 지문 후반 단서를 설명하지 못한다 (2) 바로 뒤 문장과의 관계로 읽어 기능의 방향을 뒤집은 선택지(복선이 아니라 해소로 읽음) (3) 지문의 표현을 빌려 일반적 기능으로 넓힌 선택지. 지문과 양립하지만 후반 단서와 맞지 않는다\n금지: 밑줄 문장 바로 뒤에서 의미를 뒤집거나 설명한다 / 정답 외 선택지가 지문 사실과 정면 충돌한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~190단어.\n지문 설계: 근거 위치 — 앞: 밑줄 문장(단독으로는 배경 설명처럼 보임) / 중간: 기능과 무관해 보이는 장면 / 뒤: 밑줄 문장을 복선·반어로 읽게 하는 사건. 직접 서술 금지 — 밑줄 문장의 의미를 풀이하는 인접 문장, 'foreshadow'류 메타 서술 금지.\n정답 설계: 추론 3단계 — 밑줄 문장의 표면 기능 -> 후반 사건 확인 -> 기능 재해석. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 밑줄 직전·직후 문장만 읽고 정답을 고를 수 없는가 (2) 표면 기능을 고른 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n### lit40-hard-03-020 — skill text_structure_purpose · 유형 underlined_portion_function · 난이도 hard · 장르 memoir · targetLetter B\n유형 지시: 지문의 한 문장을 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 밑줄 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a quiet library in Naples; an elder and a restless apprentice about whether a small kindness was a cover for something else\n인물 이름: Milena, Alessia 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_underlined_portion_function_hard_v4, 난이도 hard): 지문의 문장 하나를 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다. 밑줄 문장은 단독으로 읽으면 한 가지 기능(배경 설명·성격 묘사·분위기 전환)으로 보이지만, 지문 뒤쪽 사건이 그 기능을 바꿔 놓는다(복선·반어). 밑줄 문장 바로 앞뒤 문장은 기능을 설명하거나 뒤집지 않는다. 오답 3개는 모두 밑줄 문장과 지문 사실에 근거한 기능이어야 하며 (a) 밑줄 문장만 본 기능 (b) 바로 뒤 문장과의 관계로 본 기능 (c) 지문 표현을 빌려 일반화한 기능이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 밑줄 문장만 단독으로 읽은 기능(배경 설명 등). 지문 후반 단서를 설명하지 못한다 (2) 바로 뒤 문장과의 관계로 읽어 기능의 방향을 뒤집은 선택지(복선이 아니라 해소로 읽음) (3) 지문의 표현을 빌려 일반적 기능으로 넓힌 선택지. 지문과 양립하지만 후반 단서와 맞지 않는다\n금지: 밑줄 문장 바로 뒤에서 의미를 뒤집거나 설명한다 / 정답 외 선택지가 지문 사실과 정면 충돌한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~190단어.\n지문 설계: 근거 위치 — 앞: 밑줄 문장(단독으로는 배경 설명처럼 보임) / 중간: 기능과 무관해 보이는 장면 / 뒤: 밑줄 문장을 복선·반어로 읽게 하는 사건. 직접 서술 금지 — 밑줄 문장의 의미를 풀이하는 인접 문장, 'foreshadow'류 메타 서술 금지.\n정답 설계: 추론 3단계 — 밑줄 문장의 표면 기능 -> 후반 사건 확인 -> 기능 재해석. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 밑줄 직전·직후 문장만 읽고 정답을 고를 수 없는가 (2) 표면 기능을 고른 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+}

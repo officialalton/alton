@@ -1,0 +1,63 @@
+{
+ "itemId": "area_volume.triangle_area.TR.P",
+ "generatedAt": "2026-10-07T05:02:00.926Z",
+ "codeHash": "67e40e3ee7ada532262f3c3ef78f12a1012a5f71dfe5a31a2f5ac2574d31da2b",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.triangle_area.TR.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tri-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.triangle_area.TR.P.png",
+   "mobileFile": "area_volume.triangle_area.TR.P.m375.png",
+   "archetypeId": "av.triangle_area.TR.P.inverse",
+   "seed": 11,
+   "signature": "triangle:scalene",
+   "stimulus": "A surveyor records the diagram shown. In the figure shown, $MY$ is the altitude of triangle $MSU$ to side $SU$. Lengths are given in the same unit. The area of triangle $MSU$ is 136 square units.",
+   "question": "What is the length of the altitude, labeled $h$?",
+   "options": [
+    "119",
+    "8",
+    "16",
+    "32"
+   ],
+   "correctIndex": 2,
+   "answer": "16",
+   "explanation": "(1) 그림에서 밑변 SU = 17, 높이는 h 이고 넓이는 136 이다. (2) 삼각형의 넓이는 ½ × 밑변 × 높이 이다. (3) 136 = ½ × 17 × h 이다. (4) h = 2 × 136 ÷ 17 = 16 이다. (5) 따라서 16 이다. 따라서 정답은 16이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "area_volume.triangle_area.TR.P~chain2.png",
+   "mobileFile": "area_volume.triangle_area.TR.P~chain2.m375.png",
+   "archetypeId": "av.triangle_area.TR.P.chain2",
+   "seed": 11,
+   "signature": "triangle:right",
+   "stimulus": "A designer plans the layout shown. Right triangle $JMU$ is shown, and its right angle is at vertex $J$. Two of its side lengths are labeled.",
+   "question": "What is the area of the triangle, in square units?",
+   "options": [
+    "300",
+    "294",
+    "490",
+    "588"
+   ],
+   "correctIndex": 1,
+   "answer": "294",
+   "explanation": "(1) 그림에서 직각삼각형의 두 변 28 과 35 을 읽는다. 35 은 직각 맞은편이므로 빗변이다. (2) 다른 직각변은 √(35² - 28²) = 21 이다. (3) 두 직각변은 28, 21 이다. (4) 넓이 = ½ × 28 × 21 = 294 이다. (5) 따라서 294 이다. 따라서 정답은 294이다.",
+   "structuralIssues": []
+  }
+ ]
+}

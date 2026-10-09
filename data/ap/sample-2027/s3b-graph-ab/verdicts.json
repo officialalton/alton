@@ -1,0 +1,333 @@
+[
+ {
+  "key": "ap_calculus_ab-m01-k0",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "g(7)=4, g'(7)=-3; h'=(-3/10)/sqrt(1-0.16)=-0.327",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-0.327"
+    }
+   ]
+  },
+  "review": {
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option maps to a distinct misconception and is explained; the 1.091 'why' is slightly odd but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short task with a single calculator evaluation, so the calculator designation is a mild stretch but consistent."
+   },
+   "instant_reject": [],
+   "key_scoring": {
+    "pass": true,
+    "notes": "g(7)=4, g'(7)=-3, h'(7)=-0.327; the key is unique, and x=7 is interior to a segment so g is differentiable there."
+   },
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.4 derivative of arcsin with the chain rule, using values read from a graph; the skill is rule application."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data is complete (axes, vertices) and the stem is clear. The graph range covers all vertices."
+   },
+   "summary": "The item is correct, with a unique key of -0.327 and distinct, explained distractors. It is a clean topic 3.4 item, and the calculator use is minimal but acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires reading the correct linear segment from the graph (slope -3, g(7)=4), applying the arcsin chain rule with the 1/10 factor, and evaluating. This combines a graph-to-expression representation change with 3-4 reasoning steps; the numbers are clean and the distractors target plausible misconceptions (wrong segment, missing factor). It is typical of an AP exam-level item rather than basic practice.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k0",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "instant_reject_out_of_scope_knowledge",
+   "reference_pattern_mismatch",
+   "difficulty_from_unfair_sources"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "g(7)=3, g'(7)=1; h'(7)=e^{1.5}*(1/2)=2.241",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2.241"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item requires the chain rule (Unit 3), which is out of scope for Unit 2 topic 2.7. Reject.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "h(x)=e^{g(x)/2} is a composite function requiring the chain rule, which is Unit 3 and explicitly out of scope for Unit 2 topic 2.7. The rationale itself calls this the inner derivative."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "g(7)=3, g'(7)=1, so h'(7)=0.5e^1.5=2.241. Key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are plausible. The 10.043 rationale is imprecise, since it also needs the factor g'/2 omitted or not, and the missing_half misconception has no matching option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and calculator load are fine."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Item needs the chain rule for e^{g(x)/2} (Unit 3), which is out of scope for Unit 2 topic 2.7. Otherwise it is moderate: identify the segment containing x=7, get g(7)=3 and g'(7)=1 from the graph, differentiate, and evaluate e^{1.5}*0.5 = 2.241. Distractors: 0.5 (forgot the exponential factor), 4.482 (forgot the 1/2), 10.043 (e^{g(7)} with other slip). Arithmetic is light. Concept depth would merit exam_prep, but the required chain rule is out of the stated scope, so it should be revised, for example by removing the g(x)/2 composition.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": true,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m03-k0",
+  "cellId": "ap_calculus_ab-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Velocity at t=1 is slope of segment (0,4)-(2,2) = -1; speed = |v| = 1.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.2: reads velocity from the slope of a position graph and converts it to speed. Fits skill 2.B with no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope of the segment (0,4)-(2,2) is -1, so the speed is 1. The key is unique and correct. t=1 is not a vertex, so the derivative exists."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The vertices, axes and ranges are complete and consistent. The stem is clear and the units are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are signed velocity (-1), average velocity over [0,8] (1/4) and position (3). Each is a distinct misconception, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Takes about 60-80 seconds, requires no calculator, and has no arithmetic burden. Options are short numeric values."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key is unique and the distractors encode distinct misconceptions. It fits topic 4.2 and skill 2.B and has a typical AP load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read two vertices on the segment containing t=1, compute slope -1, then take absolute value to get speed. The only conceptual hurdle is velocity vs. speed (distractor -1) and picking the wrong segment (distractor 3). Little reading or computation, and one representation change (graph to slope).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m04-k0",
+  "cellId": "ap_calculus_ab-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "g and h are continuous with g(2)=h(2)=3, so by the squeeze theorem lim f = 3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Squeeze Theorem applied with graphs; hypotheses (inequality, equal limits) must be checked. Fits 1.8/3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "g(2)=h(2)=3, both continuous piecewise linear; unique answer 3."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices fully specified, axes adequate, g<=h consistent throughout; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct graph-misreading distractors, each explained; somewhat similar in kind but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, about 85 seconds, typical of AP."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct squeeze-theorem graph item with a unique key and plausible distractors. Acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept Squeeze Theorem application: read g and h at x=2 from the graphs, confirm both limits equal 3, and conclude the limit of f is 3. The hypothesis check is just that the two bounding limits agree. There is no computation, and the distractors are values read at other x-coordinates. This is a straightforward entry-level item for the topic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m05-k0",
+  "cellId": "ap_calculus_ab-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "u=x^2 gives (1/2)∫0^4 f = (1/2)(1+8)=9/2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "9/2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "u-substitution with limit change and area from graph; in scope for 6.9/1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "(1/2)(1+8)=9/2 verified from vertices; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete: axes and vertices; f piecewise linear, continuous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 1, 1/2, 9 match distinct misconceptions; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, simple arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct key 9/2, complete graph, distinct distractors, appropriate load. Accept."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires u-substitution with u=x^2 and a change of limits (0 to 4), then evaluating a definite integral of a piecewise-linear graph using trapezoid areas. Multiple steps and a graph-to-integral representation change, with light arithmetic and clear wording. Distractors reflect real misconceptions (omitting the 1/2 factor, mishandling the limits). Fits typical AP exam-level substitution item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m06-k0",
+  "cellId": "ap_calculus_ab-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "95.137",
+     "brief_reasoning": "L: y=1+x/2; intersections x≈0.2904, 2.5385; V=π∫[(4sinx+2)^2-(3+x/2)^2]dx ≈ π(61.44-31.13) ≈ 95.2",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Washer method about y=-2, topic 8.10, calculator needed for intersections and integral."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 95.137 verified by independent solver; the other options are distinct and clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data gives f and L (through (0,1) and (4,3)) with a grid step of 1; the line is readable from the figure. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (x-axis, missing pi, squared difference); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical calculator-active MC load, about 2 minutes."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound washer-method item about y=-2 with a verified key and distinct distractors; the stimulus is complete enough to determine L."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Washer method about y=-2 with a sine curve and a line. The student must find the intersection bounds with the calculator, identify the outer and inner radii as distances to the shifted axis, set up pi*integral of ((f+2)^2-(L+2)^2), and evaluate it with the calculator. This takes a graph-to-expression change and several steps, and the distractors target typical misconceptions (wrong axis, missing pi, disc instead of washer). The wording is clear and the computation is calculator-based, so it is standard AP-level.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ }
+]

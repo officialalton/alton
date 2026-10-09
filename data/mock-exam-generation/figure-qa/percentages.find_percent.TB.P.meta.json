@@ -1,0 +1,42 @@
+{
+ "itemId": "percentages.find_percent.TB.P",
+ "generatedAt": "2026-10-07T05:02:00.490Z",
+ "codeHash": "12c890865c19a3cf68ec598879eaa116f78f1dfa24a04c2f69894b4251a1a573",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/percentages.find_percent.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "percentages.find_percent.TB.P.png",
+   "mobileFile": "percentages.find_percent.TB.P.m375.png",
+   "archetypeId": "pct.find_percent.TB.P.chain2",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "For a report, a factory listed the number of parts made on several assembly lines last month, as shown in the table.",
+   "question": "The parts made on Line 5 and on Line 4 together make up what percent of the total for all the assembly lines in the table?",
+   "options": [
+    "150",
+    "22",
+    "60",
+    "40"
+   ],
+   "correctIndex": 2,
+   "answer": "60",
+   "explanation": "(1) 표에서 값을 읽는다: Line 1 155, Line 2 45, Line 4 190, Line 5 110. (2) 합계 = 155 + 45 + 190 + 110 = 500 이다. (3) 두 행의 합 = 110 + 190 = 300 이다. (4) 300 ÷ 500 = 0.6 이다. (5) 퍼센트로 바꾸면 60% 이다. 따라서 정답은 60이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,63 @@
+{
+ "itemId": "lines_angles_triangles.congruent_triangles.TR.P",
+ "generatedAt": "2026-10-07T05:02:00.956Z",
+ "codeHash": "8e3b8b1fab8678848b7acc25fa2ce6b21ecff2982fbb81f4a105ac84dfdb6408",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.congruent_triangles.TR.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tri-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.congruent_triangles.TR.P.png",
+   "mobileFile": "lines_angles_triangles.congruent_triangles.TR.P.m375.png",
+   "archetypeId": "lat.congruent_triangles.TR.P.inverse",
+   "seed": 11,
+   "signature": "triangle:scalene",
+   "stimulus": "In the figure shown, triangle $LRZ$ is congruent to triangle $EJT$ (vertices correspond in the order written). The figure gives some side lengths and angle measures.",
+   "question": "What is the degree measure of the angle at vertex $J$?",
+   "options": [
+    "63",
+    "117",
+    "147",
+    "96"
+   ],
+   "correctIndex": 0,
+   "answer": "63",
+   "explanation": "(1) 합동이므로 꼭짓점이 순서대로 대응한다: LRZ ↔ EJT. 그림의 라벨을 읽는다. (2) 첫 삼각형에서 ∠Z = 33° 이고 둘째 삼각형에서 ∠E = 84° 이다. (3) 대응각은 같으므로 ∠L = ∠E = 84° 이다. (4) 삼각형 LRZ 에서 나머지 각 ∠R = 180° - 33° - 84° = 63° 이다. (5) ∠J 는 ∠R 와 대응하므로 63° 이다. 따라서 정답은 63이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "lines_angles_triangles.congruent_triangles.TR.P~compose_kind.png",
+   "mobileFile": "lines_angles_triangles.congruent_triangles.TR.P~compose_kind.m375.png",
+   "archetypeId": "lat.congruent_triangles.TR.P.compose_kind",
+   "seed": 11,
+   "signature": "triangle:right",
+   "stimulus": "Right triangle $STY$ is congruent to right triangle $BUZ$, with $S$, $T$, $Y$ corresponding to $U$, $B$, $Z$, respectively. Some side lengths are shown in the figure.",
+   "question": "What is the area of triangle $BUZ$?",
+   "options": [
+    "7",
+    "40",
+    "24",
+    "48"
+   ],
+   "correctIndex": 2,
+   "answer": "24",
+   "explanation": "(1) 합동인 직각삼각형이므로 대응변이 같다. 그림에서 ST = 8, SY = 6 이고 BUZ 에는 직각변 8 과 빗변 10 이 있다. (2) 10 이 빗변이므로 BUZ 의 다른 직각변은 √(10² - 8²) = 6 이다. (3) 두 직각변은 8, 6 이다. (4) 넓이 = ½ × 8 × 6 = 24 이다. (5) 따라서 24 이다. 따라서 정답은 24이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+{
+ "itemId": "lines_angles_triangles.isosceles_base_angle.TR.P",
+ "generatedAt": "2026-10-07T05:02:00.961Z",
+ "codeHash": "1f23409173e76f9f55ce17ee8f3e32faf457aedeaa82ba6de7ce81e28711ccb5",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.isosceles_base_angle.TR.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tri-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.isosceles_base_angle.TR.P.png",
+   "mobileFile": "lines_angles_triangles.isosceles_base_angle.TR.P.m375.png",
+   "archetypeId": "lat.isosceles_base_angle.TR.P.chain2",
+   "seed": 11,
+   "signature": "triangle:isosceles",
+   "stimulus": "An architect sketches a triangular roof truss. Triangle $FHR$ is isosceles with $FH = FR$, as the tick marks in the figure show. Angle measures are labeled in degrees.",
+   "question": "How many degrees is the angle formed by the two equal sides?",
+   "options": [
+    "51",
+    "20",
+    "129",
+    "78"
+   ],
+   "correctIndex": 3,
+   "answer": "78",
+   "explanation": "(1) 그림에서 AB = AC(눈금)이므로 밑각이 같다. 꼭지각 F = (2x+38)°, 밑각 H = (2x+11)° 이다. (2) 꼭지각 + 밑각 × 2 = 180° 이므로 ((2x+38)) + 2((2x+11)) = 180 이다. (3) x = 20 이다. (4) 꼭지각 = 78° 이다. (5) 따라서 78 이다. 따라서 정답은 78이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+{
+ "itemId": "linear_inequalities.compound_inequality_number_line.NL.P",
+ "generatedAt": "2026-10-07T05:02:01.120Z",
+ "codeHash": "54f21e822df634c2fbaf186ca2de971a1dfb86ff71bbabfd9f73218b0b7bc1ac",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/number-line.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_inequalities.compound_inequality_number_line.NL.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/nl-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_inequalities.compound_inequality_number_line.NL.P.png",
+   "mobileFile": "linear_inequalities.compound_inequality_number_line.NL.P.m375.png",
+   "archetypeId": "li.compound_inequality_number_line.NL.P.inverse",
+   "seed": 11,
+   "signature": "number_line",
+   "stimulus": "A compound inequality in $x$ has the solution set graphed on the number line shown. The inequality is $p \\le 4x + 2 < q$, where $p$ and $q$ are constants. Answer the question using only the number line shown.",
+   "question": "What is the value of $p + q$?",
+   "options": [
+    "9",
+    "40",
+    "36",
+    "28"
+   ],
+   "correctIndex": 1,
+   "answer": "40",
+   "explanation": "(1) 그림은 1(찬 점) 에서 8(빈 점) 까지의 구간이다. (2) 해집합: 1 ≤ x < 8 이다. (3) 작은 끝값 1 을 4x + 2 에 대입하면 p = 6 이다. (4) 큰 끝값 8 을 대입하면 q = 34 이다. (5) 따라서 답은 40 이다. 따라서 정답은 40이다.",
+   "structuralIssues": []
+  }
+ ]
+}

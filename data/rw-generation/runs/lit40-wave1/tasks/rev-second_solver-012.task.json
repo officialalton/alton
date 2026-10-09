@@ -1,0 +1,321 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "second_solver",
+ "runId": "lit40-wave1",
+ "taskId": "rev-second_solver-012",
+ "chunkId": "rev-second_solver-012",
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-012.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "opus|fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "boolean",
+    "confidence": "high|medium|low",
+    "note": "풀이 한 줄"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-02-001",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "\"Put that down before the stew scorches,\" Wenhua said, without turning from the stove. Sequoia folded the envelope twice, then a third time, as if smaller paper might hold fewer words. The galley had been salvaged from a decommissioned steamer and hauled inland decades ago, and on windy nights the whole trailer creaked like it still remembered water. The letter was addressed to her aunt, in a hand Sequoia did not know, and she had read only the first line before her pulse began knocking in her ears. She wondered, briefly, who in the world still wrote to Wenhua at all. Then the ladle struck the pot rim, sharp as a gavel, and Sequoia slid the envelope under the flour tin. Outside, the mesa held the last orange light, and the onions hissed in the pan.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Curious, as a girl delights in uncovering a family secret",
+    "Intrigued, with only a faint undercurrent of unease",
+    "Nostalgic, as the galley's long history at sea is recalled",
+    "Uneasy, with a brief flicker of guilty curiosity"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-02-002",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Some objects refuse to leave with their owners. When I bought the house above the tide pools in Maui, Mika, the gardener, came with it, and so did a cracked snorkel mask hanging on a nail by the salt-water pool. I offered to throw it out. Mika looked at the mask the way one looks at a sleeping dog, then said that Moira, who had lived here thirty years, used it every dawn, even after she could no longer swim far. I laughed, a little embarrassed, and admitted I had already tried it on. Mika laughed too, which surprised us both. Now I glance at that nail whenever the tide fills the pool, and I find myself rinsing the mask, though I never wear it. Mika trims the hibiscus along the wall on Thursdays.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Wistful, softened by brief moments of shared humor",
+    "Amused, with only a passing touch of sadness",
+    "Playful, centered on an awkward joke between strangers",
+    "Practical, focused on what to keep or throw away"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-02-003",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Tbilisi in February smelled of wet stone and glue, at least inside the bookbinder's workshop where our chess club met after closing. Dainius walked in that evening as though eleven years were a short errand. He set his coat on the press and asked whether the board by the window was free. Nobody answered. I was Tatiana, his oldest rival, so the question was really mine, and I found my hands squaring a stack of signatures that were already square. He offered no reason for leaving, and I did not ask; asking would have meant admitting I had counted the years. Still, I pushed the white pieces toward him, the way I always had when he was losing. Behind us the binder pulled thread through a spine, slow and even.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Warm, as old rivals happily resume a familiar game",
+    "Guarded, with an undercurrent of reluctant affection",
+    "Affectionate, with only a slight trace of wariness",
+    "Mournful, as the narrator grieves the lost years of play"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-02-004",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "By four this morning I was already at the bakery, Esperanza, kneading before the ovens were warm, because I could not stay in the house another hour. You asked how the division went. On paper, perfectly: my brother takes the upper floor and the boathouse, I keep the kitchen and our mother's piano, and the lawyer called it a model settlement. I suppose I should be glad that no one shouted. Yet when I carried my half of the plates down the stairs, each stack seemed to weigh more than the last, and I caught myself setting out two cups out of habit. Snow is falling on the harbor now in Tromso, and the first loaves are browning. I will write again when the shop closes. Yours, Jens",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Relieved, as a difficult division ends without a quarrel",
+    "Content, with only a slight trace of lingering sorrow",
+    "Heavyhearted, with only a faint sense of relief",
+    "Anxious, as the writer worries about the bakery's future"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-02-005",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "I unfolded the scarf on the barge's narrow deck while the Red River slid brown and slow beneath us in Hanoi. It was mustard yellow, the one color I had refused to wear since childhood, and Faris, my younger brother's tutor, watched my face as though it were an exam he had studied for. My brother must have told him yellow was my favorite; my brother thought jokes were a form of love. I tied the scarf at my throat and said it matched the lanterns on the far bank. Faris let out a breath and began explaining, too quickly, how well the boy was doing with fractions. I nodded at every fraction. Along the bank, a woman was hanging fish to dry on a line of bamboo poles.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator, Kainoa, and Faris?",
+   "options": [
+    "Faris is relieved, while Kainoa is indifferent to his nervous efforts.",
+    "Kainoa seeks Faris's approval as she anxiously studies his face.",
+    "They are rivals competing for the younger brother's affection.",
+    "Faris anxiously seeks Kainoa's approval, and she kindly spares him."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-02-006",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Agnes had not expected anyone to find her in the courtyard, where the fountain had been dry since before her family moved to Colombo. She was scraping lichen from its rim with a thumbnail when Rukhsana sat down beside her, close enough that their shoulders touched. Neither of them mentioned the assembly, or the speech Agnes had forgotten halfway through in front of the whole school. Instead Rukhsana opened a paper cone of roasted peanuts and tipped half of them into Agnes's palm, the way she had every afternoon since they were seven. Agnes ate one, then another, and felt her face cool. Overhead, a crow walked the length of the wall and dropped a twig into the empty basin.",
+   "question": "Based on the text, which choice best describes the relationship between Agnes and Rukhsana?",
+   "options": [
+    "Rukhsana stays loyal to Agnes and tactfully avoids the subject of the speech.",
+    "Agnes feels ashamed and wishes Rukhsana would leave her alone in the courtyard.",
+    "Agnes comforts Rukhsana by sharing peanuts as she has since they were seven.",
+    "They are new acquaintances who bond over a shared dislike of the school."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-02-007",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "When Freja arrived at the community garden in Rotterdam, Ingeborg was already kneeling between the bean rows, as she did every Saturday before rehearsal. Freja held out the letter from the Vienna academy, and Ingeborg glanced at it only long enough to say, You are still flat on the high E. Then she handed Freja a trowel and pointed to the weeds she always left for her. Freja knelt and worked beside her without speaking, though twice she caught the older woman watching her hands instead of the soil. Later, when Freja stood to go, Ingeborg pressed a jar of last year's honey into her coat pocket and turned back to the beans before Freja could thank her. A gull circled the shed roof and settled on the rain barrel.",
+   "question": "Based on the text, which choice best describes the relationship between Ingeborg and Freja?",
+   "options": [
+    "Ingeborg is indifferent to Freja and cares only about her intonation.",
+    "Ingeborg hides a protective fondness for Freja behind her usual strictness.",
+    "Freja watches over Ingeborg, who depends on her help in the garden.",
+    "They are competitors hoping to win the same place at the academy."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-02-008",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, I still think of the night shifts at the old signal station outside Marrakesh, where Hamza and I watched a beacon that no ship would ever need. That spring I had borrowed money from him for my mother's medicine, and every Friday I held out a folded envelope. Every Friday he pushed it back across the desk and asked, instead, whether I could take his last two hours so he could see his daughter before school. I always said yes, and he always left a thermos of mint tea on my chair. We never wrote down what either of us owed. On clear nights, the lamp swept across the dark olive groves and caught the eyes of foxes.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator, Samira, and Hamza?",
+   "options": [
+    "Hamza feels generous, but Samira finds the loan humiliating and burdensome.",
+    "Samira lends Hamza money and asks him to cover her late shifts.",
+    "They trade favors freely, trusting each other without keeping strict accounts.",
+    "They are strict colleagues who record carefully every debt between them."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-02-009",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Diesel and wet umbrellas: that is how the bus depot in Taipei smelled the morning I saw Kamal again, twenty years after we last sang together at the harbor theater. She was standing at the ticket window, arguing softly with the clerk, and when I reached the counter he told me my fare to Tainan had already been paid. I turned, but Kamal was studying the timetable with great concentration. I bought two cups of hot soy milk from the kiosk and set one on the bench beside her without a word, the way she used to leave water by my music stand. She lifted it and nodded, still reading departure times. Somewhere behind us an engine coughed, and pigeons rose from the rafters in a gray sheet.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator, Xiulan, and Kamal?",
+   "options": [
+    "Kamal regrets their old partnership and avoids speaking to Xiulan.",
+    "Xiulan pays Kamal's fare to repay an old kindness from the theater.",
+    "They are former rivals whose competition has faded into indifference.",
+    "They share a lasting fondness expressed through quiet, unspoken care."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-02-010",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Hamburg has been all rain since you left the farmhouse, Ottilie, and the piano has gone a half step flat without you to complain about it. I know you think I changed the chorus on purpose. When I translated your line about the river, I wrote that it carries us away, and you meant that it carries us home; I see now how much that small word cost you onstage. I have kept your chair by the window and your scores in the order you left them. If you come back for the autumn concerts, I will sing your version, word for word, even if the audience never notices. The landlord's geese have found a way into the barn again.",
+   "question": "Based on the text, which choice best describes the relationship between the letter writer, Lena, and Ottilie?",
+   "options": [
+    "Lena values the duo and wants to repair the rift her words caused.",
+    "Ottilie resents Lena and has decided to end the duo for good.",
+    "Ottilie wants Lena to come home and sing the original chorus.",
+    "They are business partners who care mainly about concert income."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-02-012",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "I took the last night bus out of Marseille with my violin across my knees and, in my coat pocket, the cake of rosin Remy had given me at my first lesson. It was cracked down the middle now, worn into a shallow valley by eight years of his insistence that I bow slower, slower. The audition in Paris was in the morning, and the teacher there had already written that he used only a newer, softer rosin; he would supply it. Twice, as the bus wound along the coast, I took Remy's cake out, meaning to leave it on the seat beside me. Twice I put it back. Somewhere past Aix, I rubbed my thumb along the crack until it was warm, and I did not sleep. The windows showed only my own reflection, and behind it, the dark.",
+   "question": "In the text, the cake of rosin most likely represents which of the following?",
+   "options": [
+    "Noemie's resentment of Remy's strict and old-fashioned methods",
+    "Noemie's fear that her violin is too damaged to play well",
+    "Noemie's lasting tie to Remy as she turns toward a new teacher",
+    "Noemie's eagerness to adopt the habits of the Paris teacher"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-013",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "\"Stand still and they'll forget you're here,\" Ivy said, working the bellows of the smoker until gray clouds drifted over the hives. Hortense obeyed, as she had obeyed in Ivy's classroom thirty years before. The bees grew sluggish and mild, and Ivy lifted out a heavy frame without a single sting. \"Smoke doesn't hurt them,\" Ivy said. \"It only tells them not to worry.\" Hortense remembered the ginger biscuits Ivy used to slip her after school, always on the afternoons the headmaster called her father in. She had thought them comfort. Now, watching the drowsy bees surrender their honey, she wondered what else had been lifted out of that house while she was busy chewing. Ivy offered her a jar of the honey, and Hortense, after a moment, took it.",
+   "question": "In the text, the smoke most likely represents which of the following?",
+   "options": [
+    "A peaceful harmony that Ivy has built with the natural world",
+    "A danger that Hortense has learned to fear since childhood",
+    "A punishment that teachers once gave to disobedient students",
+    "A gentleness that calms someone while masking another intent"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-014",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Three rules my uncle Dewi kept at the loom:\ncount every thread, owe no one, trust no rival.\nWe owed the cooperative in Bologna\nmore than a winter's linen could repay,\nand Nora, at the next loom, wove faster than us both.\nHe called her the competition. I called her nothing.\nBut when our warp snapped on the morning of the market,\nit was Nora who knotted it, thread across thread,\nher weft running sideways through our long, straight lines.\nWarp holds still; weft crosses over.\nNeither one alone is cloth.\nBy evening the bolt was finished, and my uncle,\ncounting, lost his place, and laughed, and counted again.",
+   "question": "In the poem, the warp and weft most likely represent which of the following?",
+   "options": [
+    "How opposing forces can bind together into something stronger",
+    "The uncle's strict rules for keeping his accounts in order",
+    "The debt that grows heavier as the long winter continues",
+    "The rivalry that drives each weaver to work ever faster"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-015",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Havana's outskirts still had a post office with a brass telegraph key bolted to the counter, though no message had passed through it in decades. I had come there as a new teacher, Roshane, to teach Morse code to anyone who wanted to learn, and the only one who came was Valentina, fourteen, arms folded, certain the key was a museum piece. Its knob was worn bright, a shallow dip pressed into it by thumbs I would never meet. On the first day Valentina refused to touch it. On the fifth, she tapped out her own name, badly, and set her thumb exactly in that hollow without noticing. By the end of the month she was correcting my rhythm. When I left, the postmistress asked whether to remove the key at last. Valentina answered before I could, and the key stayed.",
+   "question": "In the text, the worn hollow on the telegraph key most likely represents which of the following?",
+   "options": [
+    "The uselessness of a machine that no longer sends any messages",
+    "A skill handed down through many people, now reaching Valentina",
+    "Valentina's stubborn resistance to learning from a stranger",
+    "The postmistress's wish to modernize the old post office"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-016",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "After the winter my father chipped Wilhelmina's blue serving bowl, he turned it every morning so the broken edge faced the kitchen wall. Wilhelmina ran the boarding house in Bergen and counted her dishes the way other people count money, yet she never seemed to see the chip. I saw it. I was eleven and stubborn and had been told I was wrong about everything that year, so I said nothing, which felt like winning. Each morning I watched him rotate the bowl before Leopoldina, the cook, filled it with porridge, and each morning, after he left, I checked that the edge still faced the wall. Neither of us ever spoke of it. When we moved out in spring, he lifted the bowl last, turned it once more, and set it down exactly as it had been.",
+   "question": "In the text, the chipped bowl most likely represents which of the following?",
+   "options": [
+    "The father's careless habits that annoyed the landlady",
+    "The family's poverty during their years at the house",
+    "A mistake that father and son silently agree to hide",
+    "The son's wish to expose his father's carelessness"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-017",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Cornwall's smallest harbor, so the old tale goes, held one boat that belonged to two people: old Ephraim and the granddaughter who had come to learn his tongue. A merchant named Albert offered gold for the boat, enough to fill both their pockets. Ephraim did not answer. Instead he handed the girl a torn net and taught her the old word for each knot as she mended it: one for the knot that holds, one for the knot that forgives, one for the knot that remembers. All winter she mended and spoke, until the words came to her without thinking. In spring Albert returned with more gold. The girl looked at the net spread across the seawall, every knot with a name, and told him the boat was not for sale. Ephraim only nodded and went down to the water.",
+   "question": "In the text, the mended net most likely represents which of the following?",
+   "options": [
+    "The hard labor that the girl secretly wishes to escape",
+    "The wealth that Albert hopes to gain from the harbor",
+    "The damage that the old boat has suffered over time",
+    "The heritage that binds the girl to Ephraim's language"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-018",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Bogdan, the caretaker of the school gymnasium in Riga, let the two women in after hours, as he had every Thursday since the mother's knees began to fail. The daughter swept the long floor while her mother sat on the lowest bench and wound the climbing ropes, slowly, the way she had done for thirty years. In nine days the daughter would board a plane for Toronto and not come back. Neither of them mentioned it. Instead the mother asked Bogdan to turn off the radio, and when the daughter dropped the broom, the clatter rang out alone in the high room. Her mother did not look up. She was practicing the silence, Bogdan thought, the way the girls on the team once practiced a vault before the real meet. He locked the doors behind them at ten.",
+   "question": "As used in the text, the phrase “practicing the silence” most nearly suggests that the mother is",
+   "options": [
+    "trying to calm her daughter before a stressful journey.",
+    "showing irritation at the noise of the dropped broom.",
+    "preparing herself for life after her daughter is gone.",
+    "training herself to ignore Bogdan's many interruptions."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-019",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Although they had not spoken in a month, Imani and Themba both arrived at the kite-maker's yard in Addis Ababa on the morning of the festival, each pretending to have come for something else. The festival contract, the one that would have filled both their ovens all year, had gone to a hotel kitchen across the city after each baker's sample arrived late. Themba said Imani had kept the only van. Imani said Themba had never once been on time. Overhead, the kite-maker's children ran with paper hawks and bright diamonds, and a gust tore one of the diamonds loose. That contract, Themba said quietly, was a kite with no string. They watched the loose diamond rise, wobbling, over the eucalyptus trees until it was only a speck.",
+   "question": "As used in the text, the phrase “a kite with no string” most nearly suggests that the contract was",
+   "options": [
+    "a fragile agreement that the bakers could still easily repair.",
+    "a festival honor that only the kite-maker had power to grant.",
+    "a minor opportunity hardly worth the bakers' long argument.",
+    "a chance that had drifted beyond either baker's control."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-020",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Once, in a Galician spring, the river climbed\ninto the cellar of the old clinic, and Rafael,\nthe night nurse, waded down with a lantern\nto carry up the jars of plum preserve\nhe had meant as a gift for Esteban in bed seven.\nEsteban, who could not lift a spoon by then,\nlooked at the dripping jar a long time\nand pushed it back across the blanket.\nKeep it, he said. You saved it. It is yours.\nRafael set it on the sill and understood:\nin that room where the water kept rising,\nthe old man's pride still kept its head above water.\nThe rain went on all night against the shutters.",
+   "question": "As used in the text, the phrase “kept its head above water” most nearly suggests that Esteban's pride",
+   "options": [
+    "survived despite his growing weakness and dependence.",
+    "made him fear that the flood would reach his room.",
+    "turned into anger at Rafael for entering the cellar.",
+    "gave him hope of recovering enough to leave the clinic."
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자(두 번째 풀이자)다. 정답 표시가 없다. 직접 풀고 정답 외에 방어 가능한 선택지가 있는지 판정한다. 다른 풀이자의 답은 모른다.\n청크 rev-second_solver-012 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-012.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"opus|fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"boolean\",\"confidence\":\"high|medium|low\",\"note\":\"풀이 한 줄\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-02-001 — skill inferences · 유형 tone_or_mood\n[지문]\n\"Put that down before the stew scorches,\" Wenhua said, without turning from the stove. Sequoia folded the envelope twice, then a third time, as if smaller paper might hold fewer words. The galley had been salvaged from a decommissioned steamer and hauled inland decades ago, and on windy nights the whole trailer creaked like it still remembered water. The letter was addressed to her aunt, in a hand Sequoia did not know, and she had read only the first line before her pulse began knocking in her ears. She wondered, briefly, who in the world still wrote to Wenhua at all. Then the ladle struck the pot rim, sharp as a gavel, and Sequoia slid the envelope under the flour tin. Outside, the mesa held the last orange light, and the onions hissed in the pan.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Curious, as a girl delights in uncovering a family secret\nB) Intrigued, with only a faint undercurrent of unease\nC) Nostalgic, as the galley's long history at sea is recalled\nD) Uneasy, with a brief flicker of guilty curiosity\n### lit40-medium-02-002 — skill inferences · 유형 tone_or_mood\n[지문]\nSome objects refuse to leave with their owners. When I bought the house above the tide pools in Maui, Mika, the gardener, came with it, and so did a cracked snorkel mask hanging on a nail by the salt-water pool. I offered to throw it out. Mika looked at the mask the way one looks at a sleeping dog, then said that Moira, who had lived here thirty years, used it every dawn, even after she could no longer swim far. I laughed, a little embarrassed, and admitted I had already tried it on. Mika laughed too, which surprised us both. Now I glance at that nail whenever the tide fills the pool, and I find myself rinsing the mask, though I never wear it. Mika trims the hibiscus along the wall on Thursdays.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Wistful, softened by brief moments of shared humor\nB) Amused, with only a passing touch of sadness\nC) Playful, centered on an awkward joke between strangers\nD) Practical, focused on what to keep or throw away\n### lit40-medium-02-003 — skill inferences · 유형 tone_or_mood\n[지문]\nTbilisi in February smelled of wet stone and glue, at least inside the bookbinder's workshop where our chess club met after closing. Dainius walked in that evening as though eleven years were a short errand. He set his coat on the press and asked whether the board by the window was free. Nobody answered. I was Tatiana, his oldest rival, so the question was really mine, and I found my hands squaring a stack of signatures that were already square. He offered no reason for leaving, and I did not ask; asking would have meant admitting I had counted the years. Still, I pushed the white pieces toward him, the way I always had when he was losing. Behind us the binder pulled thread through a spine, slow and even.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Warm, as old rivals happily resume a familiar game\nB) Guarded, with an undercurrent of reluctant affection\nC) Affectionate, with only a slight trace of wariness\nD) Mournful, as the narrator grieves the lost years of play\n### lit40-medium-02-004 — skill inferences · 유형 tone_or_mood\n[지문]\nBy four this morning I was already at the bakery, Esperanza, kneading before the ovens were warm, because I could not stay in the house another hour. You asked how the division went. On paper, perfectly: my brother takes the upper floor and the boathouse, I keep the kitchen and our mother's piano, and the lawyer called it a model settlement. I suppose I should be glad that no one shouted. Yet when I carried my half of the plates down the stairs, each stack seemed to weigh more than the last, and I caught myself setting out two cups out of habit. Snow is falling on the harbor now in Tromso, and the first loaves are browning. I will write again when the shop closes. Yours, Jens\n\n[질문] Which choice best describes the overall tone of the text?\nA) Relieved, as a difficult division ends without a quarrel\nB) Content, with only a slight trace of lingering sorrow\nC) Heavyhearted, with only a faint sense of relief\nD) Anxious, as the writer worries about the bakery's future\n### lit40-medium-02-005 — skill inferences · 유형 relationship_between_characters\n[지문]\nI unfolded the scarf on the barge's narrow deck while the Red River slid brown and slow beneath us in Hanoi. It was mustard yellow, the one color I had refused to wear since childhood, and Faris, my younger brother's tutor, watched my face as though it were an exam he had studied for. My brother must have told him yellow was my favorite; my brother thought jokes were a form of love. I tied the scarf at my throat and said it matched the lanterns on the far bank. Faris let out a breath and began explaining, too quickly, how well the boy was doing with fractions. I nodded at every fraction. Along the bank, a woman was hanging fish to dry on a line of bamboo poles.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator, Kainoa, and Faris?\nA) Faris is relieved, while Kainoa is indifferent to his nervous efforts.\nB) Kainoa seeks Faris's approval as she anxiously studies his face.\nC) They are rivals competing for the younger brother's affection.\nD) Faris anxiously seeks Kainoa's approval, and she kindly spares him.\n### lit40-medium-02-006 — skill inferences · 유형 relationship_between_characters\n[지문]\nAgnes had not expected anyone to find her in the courtyard, where the fountain had been dry since before her family moved to Colombo. She was scraping lichen from its rim with a thumbnail when Rukhsana sat down beside her, close enough that their shoulders touched. Neither of them mentioned the assembly, or the speech Agnes had forgotten halfway through in front of the whole school. Instead Rukhsana opened a paper cone of roasted peanuts and tipped half of them into Agnes's palm, the way she had every afternoon since they were seven. Agnes ate one, then another, and felt her face cool. Overhead, a crow walked the length of the wall and dropped a twig into the empty basin.\n\n[질문] Based on the text, which choice best describes the relationship between Agnes and Rukhsana?\nA) Rukhsana stays loyal to Agnes and tactfully avoids the subject of the speech.\nB) Agnes feels ashamed and wishes Rukhsana would leave her alone in the courtyard.\nC) Agnes comforts Rukhsana by sharing peanuts as she has since they were seven.\nD) They are new acquaintances who bond over a shared dislike of the school.\n### lit40-medium-02-007 — skill inferences · 유형 relationship_between_characters\n[지문]\nWhen Freja arrived at the community garden in Rotterdam, Ingeborg was already kneeling between the bean rows, as she did every Saturday before rehearsal. Freja held out the letter from the Vienna academy, and Ingeborg glanced at it only long enough to say, You are still flat on the high E. Then she handed Freja a trowel and pointed to the weeds she always left for her. Freja knelt and worked beside her without speaking, though twice she caught the older woman watching her hands instead of the soil. Later, when Freja stood to go, Ingeborg pressed a jar of last year's honey into her coat pocket and turned back to the beans before Freja could thank her. A gull circled the shed roof and settled on the rain barrel.\n\n[질문] Based on the text, which choice best describes the relationship between Ingeborg and Freja?\nA) Ingeborg is indifferent to Freja and cares only about her intonation.\nB) Ingeborg hides a protective fondness for Freja behind her usual strictness.\nC) Freja watches over Ingeborg, who depends on her help in the garden.\nD) They are competitors hoping to win the same place at the academy.\n### lit40-medium-02-008 — skill inferences · 유형 relationship_between_characters\n[지문]\nYears later, I still think of the night shifts at the old signal station outside Marrakesh, where Hamza and I watched a beacon that no ship would ever need. That spring I had borrowed money from him for my mother's medicine, and every Friday I held out a folded envelope. Every Friday he pushed it back across the desk and asked, instead, whether I could take his last two hours so he could see his daughter before school. I always said yes, and he always left a thermos of mint tea on my chair. We never wrote down what either of us owed. On clear nights, the lamp swept across the dark olive groves and caught the eyes of foxes.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator, Samira, and Hamza?\nA) Hamza feels generous, but Samira finds the loan humiliating and burdensome.\nB) Samira lends Hamza money and asks him to cover her late shifts.\nC) They trade favors freely, trusting each other without keeping strict accounts.\nD) They are strict colleagues who record carefully every debt between them.\n### lit40-medium-02-009 — skill inferences · 유형 relationship_between_characters\n[지문]\nDiesel and wet umbrellas: that is how the bus depot in Taipei smelled the morning I saw Kamal again, twenty years after we last sang together at the harbor theater. She was standing at the ticket window, arguing softly with the clerk, and when I reached the counter he told me my fare to Tainan had already been paid. I turned, but Kamal was studying the timetable with great concentration. I bought two cups of hot soy milk from the kiosk and set one on the bench beside her without a word, the way she used to leave water by my music stand. She lifted it and nodded, still reading departure times. Somewhere behind us an engine coughed, and pigeons rose from the rafters in a gray sheet.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator, Xiulan, and Kamal?\nA) Kamal regrets their old partnership and avoids speaking to Xiulan.\nB) Xiulan pays Kamal's fare to repay an old kindness from the theater.\nC) They are former rivals whose competition has faded into indifference.\nD) They share a lasting fondness expressed through quiet, unspoken care.\n### lit40-medium-02-010 — skill inferences · 유형 relationship_between_characters\n[지문]\nHamburg has been all rain since you left the farmhouse, Ottilie, and the piano has gone a half step flat without you to complain about it. I know you think I changed the chorus on purpose. When I translated your line about the river, I wrote that it carries us away, and you meant that it carries us home; I see now how much that small word cost you onstage. I have kept your chair by the window and your scores in the order you left them. If you come back for the autumn concerts, I will sing your version, word for word, even if the audience never notices. The landlord's geese have found a way into the barn again.\n\n[질문] Based on the text, which choice best describes the relationship between the letter writer, Lena, and Ottilie?\nA) Lena values the duo and wants to repair the rift her words caused.\nB) Ottilie resents Lena and has decided to end the duo for good.\nC) Ottilie wants Lena to come home and sing the original chorus.\nD) They are business partners who care mainly about concert income.\n### lit40-medium-02-012 — skill inferences · 유형 symbolism\n[지문]\nI took the last night bus out of Marseille with my violin across my knees and, in my coat pocket, the cake of rosin Remy had given me at my first lesson. It was cracked down the middle now, worn into a shallow valley by eight years of his insistence that I bow slower, slower. The audition in Paris was in the morning, and the teacher there had already written that he used only a newer, softer rosin; he would supply it. Twice, as the bus wound along the coast, I took Remy's cake out, meaning to leave it on the seat beside me. Twice I put it back. Somewhere past Aix, I rubbed my thumb along the crack until it was warm, and I did not sleep. The windows showed only my own reflection, and behind it, the dark.\n\n[질문] In the text, the cake of rosin most likely represents which of the following?\nA) Noemie's resentment of Remy's strict and old-fashioned methods\nB) Noemie's fear that her violin is too damaged to play well\nC) Noemie's lasting tie to Remy as she turns toward a new teacher\nD) Noemie's eagerness to adopt the habits of the Paris teacher\n### lit40-medium-02-013 — skill inferences · 유형 symbolism\n[지문]\n\"Stand still and they'll forget you're here,\" Ivy said, working the bellows of the smoker until gray clouds drifted over the hives. Hortense obeyed, as she had obeyed in Ivy's classroom thirty years before. The bees grew sluggish and mild, and Ivy lifted out a heavy frame without a single sting. \"Smoke doesn't hurt them,\" Ivy said. \"It only tells them not to worry.\" Hortense remembered the ginger biscuits Ivy used to slip her after school, always on the afternoons the headmaster called her father in. She had thought them comfort. Now, watching the drowsy bees surrender their honey, she wondered what else had been lifted out of that house while she was busy chewing. Ivy offered her a jar of the honey, and Hortense, after a moment, took it.\n\n[질문] In the text, the smoke most likely represents which of the following?\nA) A peaceful harmony that Ivy has built with the natural world\nB) A danger that Hortense has learned to fear since childhood\nC) A punishment that teachers once gave to disobedient students\nD) A gentleness that calms someone while masking another intent\n### lit40-medium-02-014 — skill inferences · 유형 symbolism\n[지문]\nThree rules my uncle Dewi kept at the loom:\ncount every thread, owe no one, trust no rival.\nWe owed the cooperative in Bologna\nmore than a winter's linen could repay,\nand Nora, at the next loom, wove faster than us both.\nHe called her the competition. I called her nothing.\nBut when our warp snapped on the morning of the market,\nit was Nora who knotted it, thread across thread,\nher weft running sideways through our long, straight lines.\nWarp holds still; weft crosses over.\nNeither one alone is cloth.\nBy evening the bolt was finished, and my uncle,\ncounting, lost his place, and laughed, and counted again.\n\n[질문] In the poem, the warp and weft most likely represent which of the following?\nA) How opposing forces can bind together into something stronger\nB) The uncle's strict rules for keeping his accounts in order\nC) The debt that grows heavier as the long winter continues\nD) The rivalry that drives each weaver to work ever faster\n### lit40-medium-02-015 — skill inferences · 유형 symbolism\n[지문]\nHavana's outskirts still had a post office with a brass telegraph key bolted to the counter, though no message had passed through it in decades. I had come there as a new teacher, Roshane, to teach Morse code to anyone who wanted to learn, and the only one who came was Valentina, fourteen, arms folded, certain the key was a museum piece. Its knob was worn bright, a shallow dip pressed into it by thumbs I would never meet. On the first day Valentina refused to touch it. On the fifth, she tapped out her own name, badly, and set her thumb exactly in that hollow without noticing. By the end of the month she was correcting my rhythm. When I left, the postmistress asked whether to remove the key at last. Valentina answered before I could, and the key stayed.\n\n[질문] In the text, the worn hollow on the telegraph key most likely represents which of the following?\nA) The uselessness of a machine that no longer sends any messages\nB) A skill handed down through many people, now reaching Valentina\nC) Valentina's stubborn resistance to learning from a stranger\nD) The postmistress's wish to modernize the old post office\n### lit40-medium-02-016 — skill inferences · 유형 symbolism\n[지문]\nAfter the winter my father chipped Wilhelmina's blue serving bowl, he turned it every morning so the broken edge faced the kitchen wall. Wilhelmina ran the boarding house in Bergen and counted her dishes the way other people count money, yet she never seemed to see the chip. I saw it. I was eleven and stubborn and had been told I was wrong about everything that year, so I said nothing, which felt like winning. Each morning I watched him rotate the bowl before Leopoldina, the cook, filled it with porridge, and each morning, after he left, I checked that the edge still faced the wall. Neither of us ever spoke of it. When we moved out in spring, he lifted the bowl last, turned it once more, and set it down exactly as it had been.\n\n[질문] In the text, the chipped bowl most likely represents which of the following?\nA) The father's careless habits that annoyed the landlady\nB) The family's poverty during their years at the house\nC) A mistake that father and son silently agree to hide\nD) The son's wish to expose his father's carelessness\n### lit40-medium-02-017 — skill inferences · 유형 symbolism\n[지문]\nCornwall's smallest harbor, so the old tale goes, held one boat that belonged to two people: old Ephraim and the granddaughter who had come to learn his tongue. A merchant named Albert offered gold for the boat, enough to fill both their pockets. Ephraim did not answer. Instead he handed the girl a torn net and taught her the old word for each knot as she mended it: one for the knot that holds, one for the knot that forgives, one for the knot that remembers. All winter she mended and spoke, until the words came to her without thinking. In spring Albert returned with more gold. The girl looked at the net spread across the seawall, every knot with a name, and told him the boat was not for sale. Ephraim only nodded and went down to the water.\n\n[질문] In the text, the mended net most likely represents which of the following?\nA) The hard labor that the girl secretly wishes to escape\nB) The wealth that Albert hopes to gain from the harbor\nC) The damage that the old boat has suffered over time\nD) The heritage that binds the girl to Ephraim's language\n### lit40-medium-02-018 — skill words_in_context · 유형 figurative_language\n[지문]\nBogdan, the caretaker of the school gymnasium in Riga, let the two women in after hours, as he had every Thursday since the mother's knees began to fail. The daughter swept the long floor while her mother sat on the lowest bench and wound the climbing ropes, slowly, the way she had done for thirty years. In nine days the daughter would board a plane for Toronto and not come back. Neither of them mentioned it. Instead the mother asked Bogdan to turn off the radio, and when the daughter dropped the broom, the clatter rang out alone in the high room. Her mother did not look up. She was practicing the silence, Bogdan thought, the way the girls on the team once practiced a vault before the real meet. He locked the doors behind them at ten.\n\n[질문] As used in the text, the phrase “practicing the silence” most nearly suggests that the mother is\nA) trying to calm her daughter before a stressful journey.\nB) showing irritation at the noise of the dropped broom.\nC) preparing herself for life after her daughter is gone.\nD) training herself to ignore Bogdan's many interruptions.\n### lit40-medium-02-019 — skill words_in_context · 유형 figurative_language\n[지문]\nAlthough they had not spoken in a month, Imani and Themba both arrived at the kite-maker's yard in Addis Ababa on the morning of the festival, each pretending to have come for something else. The festival contract, the one that would have filled both their ovens all year, had gone to a hotel kitchen across the city after each baker's sample arrived late. Themba said Imani had kept the only van. Imani said Themba had never once been on time. Overhead, the kite-maker's children ran with paper hawks and bright diamonds, and a gust tore one of the diamonds loose. That contract, Themba said quietly, was a kite with no string. They watched the loose diamond rise, wobbling, over the eucalyptus trees until it was only a speck.\n\n[질문] As used in the text, the phrase “a kite with no string” most nearly suggests that the contract was\nA) a fragile agreement that the bakers could still easily repair.\nB) a festival honor that only the kite-maker had power to grant.\nC) a minor opportunity hardly worth the bakers' long argument.\nD) a chance that had drifted beyond either baker's control.\n### lit40-medium-02-020 — skill words_in_context · 유형 figurative_language\n[지문]\nOnce, in a Galician spring, the river climbed\ninto the cellar of the old clinic, and Rafael,\nthe night nurse, waded down with a lantern\nto carry up the jars of plum preserve\nhe had meant as a gift for Esteban in bed seven.\nEsteban, who could not lift a spoon by then,\nlooked at the dripping jar a long time\nand pushed it back across the blanket.\nKeep it, he said. You saved it. It is yours.\nRafael set it on the sill and understood:\nin that room where the water kept rising,\nthe old man's pride still kept its head above water.\nThe rain went on all night against the shutters.\n\n[질문] As used in the text, the phrase “kept its head above water” most nearly suggests that Esteban's pride\nA) survived despite his growing weakness and dependence.\nB) made him fear that the flood would reach his room.\nC) turned into anger at Rafael for entering the cellar.\nD) gave him hope of recovering enough to leave the clinic."
+}

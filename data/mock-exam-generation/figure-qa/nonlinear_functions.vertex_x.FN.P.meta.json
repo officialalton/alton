@@ -1,0 +1,45 @@
+{
+ "itemId": "nonlinear_functions.vertex_x.FN.P",
+ "generatedAt": "2026-10-07T05:02:00.562Z",
+ "codeHash": "b7cb6124ceeb82f282d451f07572fa02a39aae9150ed6d1bc41040ba693ce833",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t5-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.vertex_x.FN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.vertex_x.FN.P.png",
+   "mobileFile": "nonlinear_functions.vertex_x.FN.P.m375.png",
+   "archetypeId": "nfg.vertex_x.FN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "In a practice set, a function is shown as a graph. A quadratic function $q$ is graphed in the $xy$-plane shown. Points on the graph are marked.",
+   "question": "What is the $x$-coordinate of the vertex of the graph of $y = q(x)$?",
+   "options": [
+    "4",
+    "3",
+    "2",
+    "-2"
+   ],
+   "correctIndex": 2,
+   "answer": "2",
+   "explanation": "(1) 그래프에 표시된 점을 읽는다: (3, -5), (4, -2), (5, 3). (2) y = ax² + bx + c 에 세 점을 대입해 세 식을 만든다. (3) 연립해 풀면 a = 1, b = -4, c = -2 이다. (4) 식: y = 1x² - 4x - 2 이다. (5) 꼭짓점 x = -(-4) ÷ (2 × 1) = 2 이다. 따라서 정답은 2이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "itemId": "probability.simple.BR.P",
+ "generatedAt": "2026-10-07T05:02:00.902Z",
+ "codeHash": "d72b4d6e7650d48c230acfe4dfbe796c66b68f55c1967cd4d874656c9cdeca0d",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t4-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/probability.simple.BR.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "probability.simple.BR.P.png",
+   "mobileFile": "probability.simple.BR.P.m375.png",
+   "archetypeId": "pr.simple.BR.P.chain2",
+   "seed": 11,
+   "signature": "data:bar",
+   "stimulus": "The graph shown summarizes the number of books each student read last month for a group of students in a reading club; bar heights give how many students had each value. One of these students is chosen at random.",
+   "question": "What is the probability that the value recorded for the chosen student is greater than the mean of the data?",
+   "options": [
+    "3/4",
+    "13/21",
+    "3/7",
+    "4/7"
+   ],
+   "correctIndex": 3,
+   "answer": "4/7",
+   "explanation": "(1) 그래프에서 값과 막대 높이(도수)를 읽는다: 2(9), 3(8), 4(3), 5(1) — 전체 21개. (2) 전체 개수 = 9 + 8 + 3 + 1 = 21 이다. (3) 합 = 2×9 + 3×8 + 4×3 + 5×1 = 59 이다. (4) 평균 = 59 ÷ 21 ≈ 2.81 이다. (5) 평균보다 큰 값의 도수 합은 12 이다. (6) 확률 = 12/21 = 4/7 이다. 따라서 정답은 4/7이다.",
+   "structuralIssues": []
+  }
+ ]
+}

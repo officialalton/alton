@@ -1,0 +1,47 @@
+{
+ "itemId": "inference_margin_error.population_estimate.BR.P",
+ "generatedAt": "2026-10-07T05:02:00.812Z",
+ "codeHash": "14374e3c2f92f0831bc9ddfee9c0f1883779f0c6017d24ca4f31632d125f5317",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t4-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t7-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t7bar-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/inference_margin_error.population_estimate.BR.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "inference_margin_error.population_estimate.BR.P.png",
+   "mobileFile": "inference_margin_error.population_estimate.BR.P.m375.png",
+   "archetypeId": "ime.population_estimate.BR.P.repr_shift",
+   "seed": 11,
+   "signature": "data:bar",
+   "stimulus": "A survey asked a random sample of commuters whether they use public transit daily. The graph shows the responses, and the graph title gives the total number of commuters in the whole population.",
+   "question": "Based on the survey, what is the best estimate of the number of commuters in the population who use public transit daily?",
+   "options": [
+    "2530",
+    "1840",
+    "225",
+    "2070"
+   ],
+   "correctIndex": 3,
+   "answer": "2070",
+   "explanation": "(1) 막대그래프에서 읽는다: Yes 225, No 200, Unsure 75 — 표본 500, 모집단 4600. (2) 표본 크기 = 225 + 200 + 75 = 500 이다. (3) 표본 비율 = 225/500 이다. (4) 무작위 표본이므로 이 비율을 모집단에 적용한다. (5) 추정치 = 4600 × 225/500 = 2070 이다. 따라서 정답은 2070이다.",
+   "structuralIssues": []
+  }
+ ]
+}

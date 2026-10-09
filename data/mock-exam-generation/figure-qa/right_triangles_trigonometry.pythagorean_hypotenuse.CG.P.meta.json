@@ -1,0 +1,46 @@
+{
+ "itemId": "right_triangles_trigonometry.pythagorean_hypotenuse.CG.P",
+ "generatedAt": "2026-10-07T05:02:01.019Z",
+ "codeHash": "1bcbe744037406c364052197d7868f32cfcbe6639f5f4428484247d428261226",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cgc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/right_triangles_trigonometry.pythagorean_hypotenuse.CG.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "right_triangles_trigonometry.pythagorean_hypotenuse.CG.P.png",
+   "mobileFile": "right_triangles_trigonometry.pythagorean_hypotenuse.CG.P.m375.png",
+   "archetypeId": "av.pythagorean_hypotenuse.CG.P.compose_kind",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "A student plots the points shown on a coordinate grid. The figure is drawn on a coordinate plane. The figure shows triangle DLW on a coordinate grid; the right angle is at L.",
+   "question": "What is the length of DW?",
+   "options": [
+    "1",
+    "7",
+    "25",
+    "5"
+   ],
+   "correctIndex": 3,
+   "answer": "5",
+   "explanation": "(1) 그림에서 D, L, W 의 좌표를 읽는다. (2) 직각변 DL = 4 이다. (3) 직각변 LW = 3 이다. (4) 빗변² = 4² + 3² = 25 이다. (5) 따라서 DW = 5 이다. 따라서 정답은 5이다.",
+   "structuralIssues": []
+  }
+ ]
+}

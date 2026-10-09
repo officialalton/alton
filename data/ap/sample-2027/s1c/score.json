@@ -1,0 +1,687 @@
+[
+ {
+  "key": "s1c-01-k0",
+  "defect": "none",
+  "archetype": "lim_alg",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-02-k0",
+  "defect": "none",
+  "archetype": "inflection_count",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-03-k0",
+  "defect": "none",
+  "archetype": "volume_calc",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-04-k0",
+  "defect": "none",
+  "archetype": "product_table",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-05-k0",
+  "defect": "missing_condition",
+  "archetype": "prop_integrals",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:Only ∫0^2 f is given, but ∫0^6 f is needed. ∫2^6 f is unknown. -13 assumes the bound was meant to be 6 (∫0^6 f = 1).",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-06-k0",
+  "defect": "missing_condition",
+  "archetype": "avg_value_calc",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The stem leaves out the interval needed to find an average value. [1,5] was inferred from the answer choices.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-07-k0",
+  "defect": "none",
+  "archetype": "linearization",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-08-k0",
+  "defect": "none",
+  "archetype": "ivt",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-09-k0",
+  "defect": "none",
+  "archetype": "accum_context_calc",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-10-k0",
+  "defect": "none",
+  "archetype": "inflection_count",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-11-k0",
+  "defect": "missing_condition",
+  "archetype": "product_table",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The stem asks for h'(2) but never defines h in terms of f and g. -12 assumes h = f·g. Other readings, such as a quotient (20) or a sum (-8), give answers not among the options.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-12-k0",
+  "defect": "missing_condition",
+  "archetype": "ivt",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The stem never says f is continuous. The IVT needs continuity, so as written it guarantees nothing. The intended answer, 3/2, only works if we assume f is continuous on [0,4].",
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-13-k0",
+  "defect": "missing_condition",
+  "archetype": "implicit_slope",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The stem never says at which point to evaluate dy/dx, so the question cannot be answered with a single number as written. I assumed (1,2), the obvious integer point on the curve; (-1,-2) also gives -3/7.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-14-k0",
+  "defect": "missing_condition",
+  "archetype": "accum_context_calc",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The stem doesn't give the starting amount of water. With no starting amount the answer would be 95.88, which isn't an option. Choice A only works if the tank starts with 50 gallons.",
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-15-k0",
+  "defect": "missing_condition",
+  "archetype": "related_rates",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The stem leaves out the instantaneous radius (or volume), so the rate can't be determined. The answer choices suggest r = 5 was intended.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-16-k0",
+  "defect": "missing_condition",
+  "archetype": "ftc_accum",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:Stem only says f is 'defined'; FTC requires f continuous (at least at t=9) to conclude h'(3)=6f(9). Missing continuity condition.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_missing_condition"
+  ]
+ },
+ {
+  "key": "s1c-17-k0",
+  "defect": "none",
+  "archetype": "product_table",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-18-k0",
+  "defect": "none",
+  "archetype": "quotient_rule_eval",
+  "flagged": true,
+  "paths": [
+   "criterion"
+  ],
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ]
+ },
+ {
+  "key": "s1c-19-k0",
+  "defect": "none",
+  "archetype": "lim_table",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-20-k0",
+  "defect": "missing_condition",
+  "archetype": "related_rates",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The stem leaves out the instant (radius) at which the rate is asked for, so the answer can't be determined.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-21-k0",
+  "defect": "missing_condition",
+  "archetype": "ivt",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The stem never says f is continuous on [0,4], and the IVT needs continuity. As written, the theorem guarantees nothing for any of the choices. The intended answer is 6.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-22-k0",
+  "defect": "none",
+  "archetype": "accum_context_calc",
+  "flagged": true,
+  "paths": [
+   "criterion"
+  ],
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ]
+ },
+ {
+  "key": "s1c-23-k0",
+  "defect": "none",
+  "archetype": "diff_cont",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-24-k0",
+  "defect": "none",
+  "archetype": "extrema_classification",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-25-k0",
+  "defect": "missing_condition",
+  "archetype": "linearization",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The stem never says where the tangent line touches the graph. It is presumably x=49, as the answer choices suggest, but that should be stated.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-26-k0",
+  "defect": "missing_condition",
+  "archetype": "cont_piece",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The function is not defined at x=4: neither piece covers x=4, since one uses x<4 and the other x>4. That means f cannot be continuous at 4 for any k; k=3 only makes the limit exist, which is a removable discontinuity. One of the pieces should use ≤ or ≥.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-27-k0",
+  "defect": "none",
+  "archetype": "motion_calc",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-28-k0",
+  "defect": "none",
+  "archetype": "motion_calc",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-29-k0",
+  "defect": "none",
+  "archetype": "volume_calc",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-30-k0",
+  "defect": "none",
+  "archetype": "separable_particular",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-31-k0",
+  "defect": "missing_condition",
+  "archetype": "prop_integrals",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:No information is given about ∫_2^6 f(x)dx. Any of the options could be correct depending on that value (e.g., ∫_2^6 f = −1 gives −6). The stem probably left out a given.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-32-k0",
+  "defect": "none",
+  "archetype": "linearization",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-33-k0",
+  "defect": "missing_condition",
+  "archetype": "cont_piece",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:f is not defined at x=3 (the cases are x<3 and x>3). So f cannot be continuous at x=3 for any k. 4/3 only makes the limit exist (a removable discontinuity). One case should use ≤ or ≥.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key"
+  ]
+ },
+ {
+  "key": "s1c-34-k0",
+  "defect": "none",
+  "archetype": "separable_particular",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-35-k0",
+  "defect": "none",
+  "archetype": "prop_integrals",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-36-k0",
+  "defect": "missing_condition",
+  "archetype": "diff_cont",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:Likely the item meant one piece to include x=1 (≤ or ≥). Then f would be continuous but not differentiable, making C the intended answer. As written, f(1) is undefined, so A is strictly correct.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_multiple_correct",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-37-k0",
+  "defect": "none",
+  "archetype": "extrema_classification",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-38-k0",
+  "defect": "none",
+  "archetype": "implicit_slope",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-39-k0",
+  "defect": "missing_condition",
+  "archetype": "separable_particular",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:No initial condition is given, so f(2) = Ce^4 cannot be determined. Both e^4 (if f(0)=1) and 2e^4 (if f(0)=2) are possible.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_multiple_correct",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-40-k0",
+  "defect": "none",
+  "archetype": "separable_particular",
+  "flagged": true,
+  "paths": [
+   "criterion"
+  ],
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ]
+ },
+ {
+  "key": "s1c-41-k0",
+  "defect": "none",
+  "archetype": "avg_value_calc",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-42-k0",
+  "defect": "none",
+  "archetype": "cont_piece",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-43-k0",
+  "defect": "none",
+  "archetype": "ivt",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-44-k0",
+  "defect": "missing_condition",
+  "archetype": "ftc_accum",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The stem only says f is 'defined' and never says f is continuous. The FTC step h'(x)=f(x^2)·2x needs continuity (at least at t=4), so a needed condition is missing; the sentence looks cut off. If f is continuous, the answer is 12.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-45-k0",
+  "defect": "missing_condition",
+  "archetype": "product_table",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The stem never defines h. The product rule gives −12, which matches an option. Other definitions would give 2 (sum) or 4 (quotient), and a composition would need f'(−3), which the table doesn't give.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key",
+   "instant_reject_multiple_correct",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-46-k0",
+  "defect": "missing_condition",
+  "archetype": "diff_cont",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:Neither piece includes x=2, so f(2) is undefined. The intended answer is probably C (continuous but not differentiable), but taken literally the answer is D.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-47-k0",
+  "defect": "none",
+  "archetype": "avg_value_calc",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ },
+ {
+  "key": "s1c-48-k0",
+  "defect": "missing_condition",
+  "archetype": "area_setup",
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "instant_missing_condition",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The stem names only one graph (y = 3x), and one line can't enclose a region. The second curve (probably y = x²) is missing and had to be guessed from the options.",
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ]
+ },
+ {
+  "key": "s1c-49-k0",
+  "defect": "none",
+  "archetype": "cont_piece",
+  "flagged": true,
+  "paths": [
+   "criterion"
+  ],
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ]
+ },
+ {
+  "key": "s1c-50-k0",
+  "defect": "none",
+  "archetype": "implicit_slope",
+  "flagged": false,
+  "paths": [],
+  "reasons": []
+ }
+]

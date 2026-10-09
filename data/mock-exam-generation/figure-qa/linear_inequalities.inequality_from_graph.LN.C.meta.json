@@ -1,0 +1,49 @@
+{
+ "itemId": "linear_inequalities.inequality_from_graph.LN.C",
+ "generatedAt": "2026-10-07T05:02:00.703Z",
+ "codeHash": "2e33b4486f3a252d297aff793a7413d2fe38fe7e88d0eb2aa9b1fd2459c635ee",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cplane-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_inequalities.inequality_from_graph.LN.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ln-b-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/lnc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_inequalities.inequality_from_graph.LN.C.png",
+   "mobileFile": "linear_inequalities.inequality_from_graph.LN.C.m375.png",
+   "archetypeId": "ifcg.inequality_from_graph.LN.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "Four graphs of linear inequalities are shown in the $xy$-plane, all with the same axes.",
+   "question": "Which of the four graphs shown is the graph of an inequality whose line bounding the shaded area has slope 1 and $y$-intercept 1, and the shaded area is over the line, with the line itself solid?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) 경계선 y = 1x + 1, 음영은 위, 경계는 실선. (2) 각 그래프의 경계선·음영 방향·점선/실선을 읽는다. (3) 조건을 하나라도 어긴 그래프를 지운다. (4) 남은 그래프가 정답이다. (5) 다른 그래프는 경계선이나 음영·점선 조건이 어긋난다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}

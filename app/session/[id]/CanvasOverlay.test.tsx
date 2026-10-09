@@ -34,7 +34,7 @@ describe("CanvasOverlay", () => {
       </CanvasOverlay>
     );
     expect(screen.getByText("본문 내용")).toBeInTheDocument();
-    expect(screen.queryByText("✏️ 필기 모드")).not.toBeInTheDocument();
+    expect(screen.queryByText("✏️ Drawing mode")).not.toBeInTheDocument();
 
     rerender(
       <CanvasOverlay
@@ -46,7 +46,7 @@ describe("CanvasOverlay", () => {
         <p>본문 내용</p>
       </CanvasOverlay>
     );
-    expect(screen.getByText("✏️ 필기 모드")).toBeInTheDocument();
+    expect(screen.getByText("✏️ Drawing mode")).toBeInTheDocument();
   });
 
   it("필기 모드를 켜면 색상/펜·지우개/전체 지우기 컨트롤이 나타난다", () => {
@@ -60,10 +60,10 @@ describe("CanvasOverlay", () => {
         <p>본문</p>
       </CanvasOverlay>
     );
-    expect(screen.queryByText("전체 지우기")).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText("✏️ 필기 모드"));
-    expect(screen.getByText("전체 지우기")).toBeInTheDocument();
-    expect(screen.getByText("펜")).toBeInTheDocument();
-    expect(screen.getByText("지우개")).toBeInTheDocument();
+    expect(screen.queryByText("Clear all")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("✏️ Drawing mode"));
+    expect(screen.getByText("Clear all")).toBeInTheDocument();
+    expect(screen.getByText("Pen")).toBeInTheDocument();
+    expect(screen.getByText("Eraser")).toBeInTheDocument();
   });
 });

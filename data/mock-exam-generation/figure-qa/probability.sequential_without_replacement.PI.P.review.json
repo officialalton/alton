@@ -1,0 +1,23 @@
+{
+ "itemId": "probability.sequential_without_replacement.PI.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T08:00:06Z",
+ "reviewer": "claude-sonnet-5.5 (math-D session)",
+ "codeHash": "855b20a2a65f267c3706671beceef9a1adb3a91b3e2782908260535e0cfe2caa",
+ "samples": [
+  "probability.sequential_without_replacement.PI.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass",
+  "multi_figure_consistent": "n/a",
+  "choice_distinct_one_rule": "n/a"
+ },
+ "defects": [],
+ "notes": "원그래프: 부채꼴 각도가 값에 비례, 라벨이 자기 부채꼴 바깥에 겹침 없이 배치, 데스크톱·375px 읽음. 스냅샷은 LaTeX 미조판(k\\pi 가 원문으로 보임 — 앱에서는 KaTeX). [재스탬프: easy/medium 문구 변형 추가, 샘플 본문·렌더 동일 확인]"
+}

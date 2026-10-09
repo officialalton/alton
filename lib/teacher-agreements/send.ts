@@ -1,0 +1,150 @@
+import { randomUUID } from "node:crypto";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import { assertDocusignSandboxBaseUri, createEnvelope } from "@/lib/docusign";
+import { loadCurrentTeacherRate } from "./rate";
+import { agreementChecklist, prepareTeacherAgreement, type PrepareResult, type TeacherAgreementInputs } from "./prepare";
+
+import { agreementCoversFourItems, agreementKindForForm } from "@/lib/legal/recording-scope";
+import { deriveAgreementStatus, MAIN_TEACHER_FORMS, type TeacherAgreementStatus } from "./status";
+export type { TeacherAgreementStatus };
+
+export type TeacherAgreementState = {
+  status: TeacherAgreementStatus;
+  sentAt: string | null;
+  signedAt: string | null;
+  form: string | null;
+  /** signed-copy archiving: null until signed */
+  archive: { status: string; lastError: string | null; retryCount: number } | null;
+  inputs: TeacherAgreementInputs | null;
+  /** empty = ready to send */
+  missing: string[];
+  /** per-requirement ✓/✗ for the admin panel; send is enabled only when every item is ok */
+  checklist: { key: string; label: string; ok: boolean }[];
+  ready: boolean;
+  /** signed on a text version without the four recording-consent items: an amended agreement / re-consent is required (no notice is sent automatically) */
+  amendmentRequired: boolean;
+};
+
+const INPUT_COLUMNS =
+  "work_country, work_region, work_location_detail, mailing_address, start_date, supervisor_name, prior_materials, engagement_type";
+
+export async function loadBasics(admin: SupabaseClient, teacherId: string) {
+  const [{ data: teacher }, { data: profile }, { data: prov }, { data: inputs }, rate, { data: payout }] = await Promise.all([
+    admin.from("teachers").select("workspace_email").eq("id", teacherId).maybeSingle(),
+    admin.from("profiles").select("name").eq("id", teacherId).maybeSingle(),
+    admin.from("teacher_workspace_provisioning").select("status").eq("linked_teacher_id", teacherId).maybeSingle(),
+    admin.from("teacher_agreement_inputs").select(INPUT_COLUMNS).eq("teacher_id", teacherId).maybeSingle(),
+    loadCurrentTeacherRate(admin, teacherId),
+    admin.from("teacher_payout_accounts").select("account_holder_name, bank_name, account_number_last4, currency").eq("teacher_id", teacherId).maybeSingle(),
+  ]);
+  return {
+    teacherName: (profile?.name as string | undefined) ?? "",
+    workspaceEmail: (teacher?.workspace_email as string | null | undefined) ?? null,
+    rate: rate ? { amountMinor: rate.amountMinor, currency: rate.currency } : null,
+    payoutAccount: payout
+      ? { holderName: payout.account_holder_name as string, bankName: payout.bank_name as string, last4: payout.account_number_last4 as string, currency: payout.currency as string }
+      : null,
+    workspaceProvisioned: prov?.status === "created",
+    inputs: (inputs as TeacherAgreementInputs | null) ?? null,
+  };
+}
+
+/** Admin-facing state: latest agreement status plus what is still missing before it can be sent. */
+export async function loadTeacherAgreementState(admin: SupabaseClient, teacherId: string): Promise<TeacherAgreementState> {
+  const basics = await loadBasics(admin, teacherId);
+  const { data: rows } = await admin
+    .from("teacher_contracts")
+    .select("status, docusign_envelope_status, sent_at, signed_at, agreement_form, template_version, drive_sync_status, drive_last_error, drive_retry_count")
+    .eq("teacher_id", teacherId)
+    .in("agreement_form", [...MAIN_TEACHER_FORMS])
+    .order("sent_at", { ascending: false })
+    .limit(1);
+  const latest = rows?.[0];
+  const status: TeacherAgreementStatus = deriveAgreementStatus(latest);
+  const prepared = prepareTeacherAgreement(basics);
+  const missing = prepared.ok ? [] : prepared.missing;
+  return {
+    status,
+    sentAt: (latest?.sent_at as string | null | undefined) ?? null,
+    signedAt: (latest?.signed_at as string | null | undefined) ?? null,
+    form: (latest?.agreement_form as string | null | undefined) ?? null,
+    archive: latest?.drive_sync_status
+      ? {
+          status: latest.drive_sync_status as string,
+          lastError: (latest.drive_last_error as string | null) ?? null,
+          retryCount: (latest.drive_retry_count as number | null) ?? 0,
+        }
+      : null,
+    inputs: basics.inputs,
+    missing,
+    checklist: agreementChecklist(basics),
+    amendmentRequired: status === "signed" && !agreementCoversFourItems(agreementKindForForm(latest?.agreement_form as string | undefined) ?? "teacher", latest?.template_version as string | undefined),
+    ready: prepared.ok && agreementChecklist(basics).every((c) => c.ok) && (status === "not_sent" || status === "declined" || status === "voided"),
+  };
+}
+
+export class TeacherAgreementNotReadyError extends Error {
+  constructor(readonly missing: string[]) {
+    super(`계약서를 발송할 수 없습니다. 누락: ${missing.join(", ")}`);
+    this.name = "TeacherAgreementNotReadyError";
+  }
+}
+
+/**
+ * Sends the teacher agreement through DocuSign to the teacher's @alton.education address. Authorization is the
+ * caller's job (admin server action). Blocks — before any DocuSign call — when a required input is missing or
+ * when an unsigned agreement is already open; never touches an existing signed record.
+ */
+export async function sendTeacherAgreementInternal(
+  admin: SupabaseClient,
+  params: { teacherId: string; actorUserId: string; webhookUrl: string }
+): Promise<{ envelopeId: string; agreementId: string }> {
+  assertDocusignSandboxBaseUri();
+  const basics = await loadBasics(admin, params.teacherId);
+
+  const { data: open } = await admin
+    .from("teacher_contracts")
+    .select("id, status, docusign_envelope_status")
+    .eq("teacher_id", params.teacherId)
+    .in("agreement_form", [...MAIN_TEACHER_FORMS]);
+  if ((open ?? []).some((r) => r.status === "signed")) throw new Error("이미 서명 완료된 선생님 계약서가 있습니다.");
+  if ((open ?? []).some((r) => r.status === "sent" && ["sent", "delivered"].includes(r.docusign_envelope_status as string))) {
+    throw new Error("이미 발송되어 서명 대기 중인 계약서가 있습니다.");
+  }
+
+  const agreementId = randomUUID();
+  const prepared: PrepareResult = prepareTeacherAgreement({ ...basics, agreementId });
+  if (!prepared.ok) throw new TeacherAgreementNotReadyError(prepared.missing);
+
+  const { envelopeId } = await createEnvelope({
+    recipientEmail: prepared.recipientEmail,
+    recipientName: basics.teacherName,
+    documentHtml: prepared.html,
+    emailSubject: "Alton Education Teacher Agreement",
+    documentName: "Alton Education Teacher Agreement",
+    webhookUrl: params.webhookUrl,
+  });
+
+  const { error } = await admin.from("teacher_contracts").insert({
+    id: agreementId,
+    teacher_id: params.teacherId,
+    doc_type: prepared.form,
+    agreement_form: prepared.form,
+    template_version: prepared.templateVersion,
+    docusign_envelope_id: envelopeId,
+    docusign_envelope_status: "sent",
+    docusign_status_updated_at: new Date().toISOString(),
+    status: "sent",
+    sent_at: new Date().toISOString(),
+    sent_by: params.actorUserId,
+    recipient_email: prepared.recipientEmail,
+    inputs_snapshot: { ...basics.inputs, rate: basics.rate },
+  });
+  if (error) {
+    // The envelope exists but is not recorded — surface loudly so it can be voided by hand.
+    console.error(JSON.stringify({ type: "teacher_agreement_record_failed", teacherId: params.teacherId, envelopeId, error: error.message }));
+    throw new Error(error.message);
+  }
+  console.info(JSON.stringify({ type: "teacher_agreement_envelope_sent", teacherId: params.teacherId, agreementId, envelopeId, form: prepared.form }));
+  return { envelopeId, agreementId };
+}

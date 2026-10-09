@@ -1,0 +1,42 @@
+{
+ "itemId": "systems_linear.word_system.TB.P",
+ "generatedAt": "2026-10-07T05:02:00.511Z",
+ "codeHash": "c658edc8e79416946b6e7516cdf4ba16a664df418f76faf99971e16beccece17",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/systems_linear.word_system.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "systems_linear.word_system.TB.P.png",
+   "mobileFile": "systems_linear.word_system.TB.P.m375.png",
+   "archetypeId": "sl.word_system.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "Consider the following purchase. The table shown gives the cost per item for two types of lessons. A student took a total of 13 lessons at a music school and spent 734 dollars altogether.",
+   "question": "How many small-group lessons were included?",
+   "options": [
+    "14",
+    "8",
+    "6",
+    "5"
+   ],
+   "correctIndex": 3,
+   "answer": "5",
+   "explanation": "(1) 표에서 Private 58, Small-group 54 달러를 읽는다. (2) a + b = 13, 58a + 54b = 734 로 놓는다. (3) a = 13 - b 를 대입: 58(13 - b) + 54b = 734 이다. (4) (58 - 54)b = 20 이므로 b = 5, a = 8 이다. (5) 확인: 58·8 + 54·5 = 734 이다. 따라서 정답은 5이다.",
+   "structuralIssues": []
+  }
+ ]
+}

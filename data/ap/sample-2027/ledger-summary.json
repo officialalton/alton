@@ -1,0 +1,16 @@
+{
+ "ledgerSpent": 91.2412,
+ "approvedRangeBaseline": 61.21,
+ "preRangeSpend": 1.26,
+ "cumulativeUsd": 31.2912,
+ "stopLine": 45,
+ "totalCap": 50,
+ "headroomToStopLine": 13.7088,
+ "includesInvalidMeasurements": [
+  {
+   "run": "v8-bio-r",
+   "usd": 0.1146,
+   "reason": "Repair attempt ran without the frozen Bio reviewer configuration (shell env lost: AP_SUBJECT_NOTES/AP_FLAT_REVIEW unset) and the wording rewrite was not adopted, so the item was unchanged. Its pass is a re-judgement under a different reviewer config, not a valid post-repair result. Cost counted in the ledger."
+  }
+ ]
+}

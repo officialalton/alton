@@ -1,0 +1,24 @@
+{
+ "itemId": "nonlinear_equations_systems.circle_equation_graph.CG.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T14:48:50Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "1c64297b5fa69702212fd9a2ae79e4fc2bd8a7c46646965d32534cc9a52a0a68",
+ "samples": [
+  "nonlinear_equations_systems.circle_equation_graph.CG.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "샘플 PNG(데스크톱·375px)와 변형별 갤러리를 직접 확인: 점·원·다각형이 좌표 격자 위의 정수 좌표에 놓이고 라벨이 점 옆에 읽히며 정답이 그림 값과 일치. 원이 눈금 숫자와 겹치는 곳이 있으나 판독 가능. 선택지 수식은 스냅샷 하네스가 렌더하지 않는 표기. [재스탬프: 키트 해시 등록으로 코드 해시만 갱신, 샘플 PNG 바이트 동일]",
+ "leadReread": "2026-10-06 통합 후 데스크톱 PNG 재판독(렌더러 halo·문구 변경 반영) — 결함 없음"
+}

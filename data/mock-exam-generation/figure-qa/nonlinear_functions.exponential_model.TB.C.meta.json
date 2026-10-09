@@ -1,0 +1,43 @@
+{
+ "itemId": "nonlinear_functions.exponential_model.TB.C",
+ "generatedAt": "2026-10-07T05:02:00.532Z",
+ "codeHash": "46fb9658461c0dfc6928ebebd999c30ea80a84e130aa94e5ac7c57b0754a49a6",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.exponential_model.TB.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.exponential_model.TB.C.png",
+   "mobileFile": "nonlinear_functions.exponential_model.TB.C.m375.png",
+   "archetypeId": "nf.exponential_model.TB.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[data:table]",
+   "stimulus": "The function $D$ models the number of digital books borrowed through a new program, $b$ months after observations began. The starting amount is 32, and each month the amount increases by 50% of the amount one month earlier.",
+   "question": "Which table gives values of $D(b)$ that are consistent with this model?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 2,
+   "answer": "C",
+   "explanation": "(1) 50% 증가는 매번 1.5 배가 되는 것이다. (2) 모형은 D(b) = 32·(1.5)^b 이다. (3) 표의 각 b 에서 값을 계산한다: 32, 48, 72, 108. (4) 정답 표의 값 32, 48, 72, 108 은 모두 이 모형으로 계산된다. (5) 나머지 표는 일정하게 더하기·한 주기 밀림·반대 배율 중 하나로 만들어졌다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}

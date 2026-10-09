@@ -1,0 +1,337 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-035",
+ "chunkId": "rev-fable_judge-035",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-035.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-04-026",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Kites do not haggle. My landlord, Faris, does, and for eleven years I have rented the room above his yard in Beirut and watched him do it with every buyer who climbs the stairs. Bamboo, paper, glue: he prices each one as if it were gold leaf, then throws in a tail for free and calls it charity. So when a developer offered to buy the yard, the house, and my room, I assumed I would be treated to the performance of a lifetime. Instead Faris, who shares the deed with his brother abroad, sat on an overturned crate and said nothing for a long while. Then he showed me the diamond kite his father had built the year they arrived, its frame mended so often that hardly any of the first wood remains. I had thought of the yard as a stage for his bargaining. That evening it looked more like a ledger of everything his family had refused to let go.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "It shifts from wry amusement to tenderness.",
+    "It shifts from open anger to calm indifference.",
+    "It shifts from solemn grief to cheerful resolve.",
+    "It shifts from firm certainty to bewildered panic."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-029",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Why did his grandmother always cook two portions of fish curry when the ferry crew numbered only eleven? Arjun had wondered this since his first season in the galley of the river ferry out of Dhaka. Each evening she ladled twelve bowls, covered the last with a tin plate, and set it on the shelf by the porthole. By morning it was empty and scrubbed. Arjun assumed a rat, or a greedy deckhand, and said nothing. Then one night he stayed awake behind the rice sacks and saw his uncle Ishaan, whom the family spoke of as lost in debt and shame, climb through the cargo hatch and eat in silence. His grandmother sat beside him, mending a net, and did not look up. In the morning Arjun asked her nothing. He only covered the twelfth bowl himself, and set it by the porthole.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A conflict between two crew members is introduced and then settled by the grandmother.",
+    "A family memory is recounted and then contrasted with a failure in the present day.",
+    "A plan the grandson devises is described step by step and then shown to fail.",
+    "A puzzling routine is presented, and a discovery then explains and continues it."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-030",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Siti had worked at the seed-saving cooperative in Hanoi for two years before her aunt spoke to her about anything except labels. Nguyen ran the drying room like a clinic. Seeds were weighed, sealed, and dated; packets were stacked by month; mistakes were corrected with a finger tapping the shelf, never a word. Siti learned the work by watching that finger. She cooked lunch for the volunteers and ate hers alone on the steps. Then, one wet afternoon, she found an unlabeled jar of small black beans behind the rice drawers and began, as she had been taught, to write unknown. Nguyen took the pen from her. These were your mother's, she said. She grew them on the roof the year you were born, and I have not been able to say her name in this room since. She wrote it on the label herself, slowly, and handed the pen back.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes a long, wordless routine and then presents the moment it is broken.",
+    "It recounts a sharp argument and then explains the misunderstanding behind it.",
+    "It contrasts two workplaces and then explains why one character prefers the first.",
+    "It introduces a mystery about a jar and then leaves the jar's origin unresolved."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-033",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Salt keeps nothing secret. On the flats outside Marrakesh it shows every footprint, every drag of a rake, and so the whole crew saw Malek stop when Lindiwe arrived with the old rake-master's wooden rake on her shoulder. She was nineteen, three weeks on the job, and the old man's granddaughter; the rake had come to her in his will. Malek assigned her the farthest pan and said nothing about it. __When he took off his gloves at noon, the ridges across his palms matched, groove for groove, the worn places on that handle, where for twenty years he had pulled it beside the old man.__ Lindiwe noticed. She worked the far pan until dusk, then walked back across the white crust and leaned the rake against Malek's shed. It pulls left, she told him. You will know how to correct it. He did not thank her, but the next morning he moved her pan closer to his own.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It suggests that Malek is too exhausted to work alongside the rest of the crew.",
+    "It shows that Lindiwe has already mastered the rake despite her short time there.",
+    "It indicates that the rake was badly damaged before Lindiwe inherited it.",
+    "It reveals the personal history behind Malek's reaction to the inheritance."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-034",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "What do you tell a seven-year-old when the money stops? Hassan asked it of no one as he pushed his delivery bicycle across the dried riverbed on the edge of Lagos, the crates of bread rattling behind him. Since his father's shop had closed, he had been telling his little sister that their father was traveling for business. Seoyeon, the widow who bought six loaves every Friday, was waiting at the far bank. She had overheard his sister boasting about the trip. __Children forgive the hard truth sooner than they forgive the kind lie, she said, because the lie tells them they were not trusted.__ Hassan wanted to argue, but she had already turned toward her gate. That evening he sat his sister on the step, gave her the heel of the last loaf, and told her, carefully, that their father was home every day now and was looking for work, and that the family would need her help.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It offers advice that Hassan resists at first but later follows.",
+    "It explains why Seoyeon has decided to stop buying bread from Hassan.",
+    "It reveals that Seoyeon once misled her own children about money.",
+    "It shows that Hassan's sister already knows the truth about the shop."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-035",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "\"You are the one with the map, then,\" the farmer said as I took the seat beside her on the night bus out of Sapporo. Her name was Chiyo, and she had recognized the city survey office's logo on my tube of drawings. I am Aiko; I mark where roads will go. For an hour she told me, without bitterness, about the cherry tree at the corner of her field, and about the promise she had made to her granddaughter that it would bloom there until the girl was grown. I knew the corner. My line ran through it. __Somewhere past Asahikawa, I unrolled the drawing on my knees and folded it so that the small red cross over her field disappeared into the crease.__ I told myself it was only to keep the paper from sliding. In the morning I filed my report as written. But I asked my supervisor, for the first time in six years, whether the line could bend.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows the narrator deciding to destroy the survey drawing in secret.",
+    "It signals the narrator's first private unease about her assignment.",
+    "It indicates that the narrator was careless with her official documents.",
+    "It reveals that Chiyo had asked the narrator directly to alter the map."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-036",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "We split the house our mother left us the way she had taught us to split a bolt of cloth at the weaving cooperative: measure twice, cut once, argue never. Marcus took the kitchen and the back porch. I took the front rooms and the loom. When the cooperative's director called to say that Marcus's quilt had been chosen for the state museum, he shrugged into the phone and said it was just scraps. He told me the same thing that night, twice, while we taped boxes. He said the museum probably needed something to fill a wall. __Yet when he packed the quilt to send it, he folded it so that the little muslin tag stitched with his name lay on top, square in the center, where anyone opening the box would see it first.__ I did not mention it. I only wrote fragile on the box in my best letters, and let him think I had not noticed.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It suggests that Marcus plans to keep the quilt rather than send it.",
+    "It explains why the brothers chose to divide the house the way they did.",
+    "It provides a detail that quietly undercuts Marcus's claim of indifference.",
+    "It reveals that the narrator resents the attention his brother is receiving."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-037",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Pins bristled from Freja's sleeve like the quills of a small, offended animal as she marched the length of the summer camp dining hall in Rotterdam, inspecting the costumes laid out on the long tables. She had sewn for the camp's play for thirty summers and had never once let an apprentice cut the cloth. Thorvald, her only apprentice, sixteen and earnest, had asked every morning for a week. Every morning she had told him his hands were too hasty, and every afternoon she had left the good shears, quite by accident, a little closer to his end of the table. On the eighth day she announced, to the rafters rather than to him, that her wrists ached and that someone might as well ruin the velvet as let it sit. Then she sat down with her tea and pretended, with tremendous concentration, not to watch his first cut.",
+   "question": "Which choice best describes the narrator's attitude toward Freja?",
+   "options": [
+    "Open scorn for her refusal to share her craft",
+    "Affectionate amusement at her stubborn pride",
+    "Detached neutrality toward her daily routine",
+    "Anxious pity for her failing health and wrists"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-038",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Forty-one letters, two rubber bands, one shoebox: that was what Ama carried into the empty classroom at the language school in Accra where she now taught French in the evenings. Our mother had written them to me, Seun, during my six years at university abroad, and Ama had kept them after the funeral. We read them at a student's desk under the buzzing tube light. In every letter our mother praised my examinations. In almost every letter, near the end, she mentioned in passing that Ama had taken another shift at the market, or had postponed her own course for another year. I had read those lines at the time and skimmed past them. Now Ama read them aloud in an even voice, smoothing each page flat, and when she reached the one about the year she gave up her scholarship, she only said that the handwriting was very neat that month. I could not look at her, and I could not look away.",
+   "question": "Which choice best describes the narrator's attitude toward Ama?",
+   "options": [
+    "Resentful envy of the praise Ama now receives",
+    "Amused tolerance of Ama's careful habits",
+    "Remorseful admiration for Ama's sacrifice",
+    "Cautious suspicion of Ama's reasons for sharing"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-039",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Folding chairs in rows on the gymnasium floor,\nthe Lima heat pressing through the high windows,\nand I in my borrowed white, braced\nfor Renata, Santiago's mother,\nwho had said, the week before, that I was too young\nto know what I was promising.\nI had rehearsed my answers to her like a debate.\nBut when the sound system shrieked and died\nand the aunts began to murmur,\nit was Renata who climbed onto a bench,\nher good shoes in one hand,\nand sang the first hymn without a microphone\nuntil the whole room followed.\nLater she pinned my slipping veil\nwith a clip from her own hair\nand told me, gruffly, that she had been too young once, too.\nI keep that clip in a dish by the door.\nI still do not know all her reasons.\nI know whose voice filled the room\nwhen mine would not come.",
+   "question": "Which choice best describes the speaker's attitude toward Renata?",
+   "options": [
+    "Lingering suspicion of Renata's true motives",
+    "Playful mockery of Renata's gruff manner",
+    "Polite indifference toward Renata's gestures",
+    "Newfound gratitude that replaces wariness"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-040",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Bleach, damp plaster, and the neighbor's frying onions filled the stairwell of our building in Galicia the evening my brother came home. Sergio climbed the four flights slowly, as if counting them, and stopped on each landing to touch the rail. I, Chiara, had planned the anniversary for weeks: a dinner for our father's old friends, candles, his favorite songs on the record player. Sergio listened to the plan on the third-floor landing and said he could not sit in a room full of people tonight. I wanted to argue. Instead I noticed how he kept his back to the wall, and how his hand flinched when a door banged above us. So I cancelled the dinner by text, one guest at a time, while he waited beside me. We marked the day on the stairs instead, sharing a single candle and our father's harmonica, which neither of us could play, until the timer light clicked off and we did not bother to turn it on again.",
+   "question": "Which choice best describes the narrator's attitude toward Sergio?",
+   "options": [
+    "Protective tenderness toward his fragile state",
+    "Resentful impatience with his refusal of her plan",
+    "Bemused detachment from his unusual behavior",
+    "Fearful awe of his experiences as a soldier"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-041",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Why did I never ask Amelie for the scissors back? Her uncle's tailoring shop on Chicago's South Side had a back room that smelled of steam and chalk, and that was where she first lent me the brass-handled shears, the summer my family moved onto her block. I was Colby, the new boy who cut paper stars badly, and she said a good tool would fix my hands. It did not, but I kept the shears through two more moves and a decade of silence between us. Each time I unpacked them, I meant to write to her. Instead I would oil the hinge, test the blades on a scrap of newsprint, and set them back in their drawer as if they were still on loan. Last spring a cousin mentioned that Amelie now runs the shop herself. I bought a card that week; it is still blank, propped against the window above my desk.",
+   "question": "Which choice best describes the narrator's attitude toward his friendship with Amelie?",
+   "options": [
+    "Resentful, since he takes her silence about the shears as proof she forgot him",
+    "Affectionate toward the friendship yet sheepish about his long delay in reaching out",
+    "Proud, chiefly of having kept the shears in good condition through several moves",
+    "Indifferent, treating the shears as an ordinary tool rather than a reminder of her"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-042",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "By the time you receive this, dear Samira, the barber on Calle Obispo will have swept up the last of my hair and, I hope, the last of our argument. You insisted the mirror in his Havana shop hung crooked; I insisted it was the floor. We spent an entire afternoon on it, you tapping your cane like a gavel, I quoting the level I had borrowed from the clerk's office. I see now that neither of us cared about the mirror. You were hurt that I had accepted the post in Santiago without consulting you, and I was annoyed that I still wanted your blessing. Forgive the clumsy way I argued. You taught me that a ruling should be stated plainly, and here is mine: I am going, and I will write every month. The barber says the mirror has hung that way since 1921, and he refuses to straighten it.\nMoira",
+   "question": "Which choice best describes Moira's attitude toward Samira in the letter?",
+   "options": [
+    "Defiant, dismissing Samira's past guidance as irrelevant to her new career",
+    "Amused, treating the quarrel over the mirror as a harmless joke between them",
+    "Respectful, valuing Samira's influence while still asserting her own decision",
+    "Apologetic, giving up her plan to leave in order to repair their friendship"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-043",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "When Piper saw Tariq folding towels at the coin laundry in Dayton, Ohio, she nearly left her basket behind. Twelve years earlier they had sung the same duet at the county finals, and only one scholarship had been offered; Piper took it to the conservatory, and Tariq stayed home to run her father's dry-cleaning counter. Now Tariq nodded at the dryers. “Number four still eats quarters,” she said, as if no time had passed. Piper wanted to apologize but instead asked whether Tariq still sang. “At church, sometimes. Nobody grades me there.” Piper laughed, then stopped, hearing in the remark both a joke and a wound she had never been allowed to see. Across the room, a lint screen rattled loose and a child chased a single red sock beneath the folding table.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To recount how two former singers by chance meet again while doing laundry in Dayton",
+    "To show that the old machines in a laundromat frequently break and annoy customers",
+    "To suggest that every success in life inevitably requires that someone else must lose",
+    "To reveal how an old opportunity that favored one woman still quietly shapes both women"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-04-044",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, Fatma would remember that the argument began over a cracked piano lid. Agnes, the master carpenter, had brought her apprentice to a school music room in Nairobi to replace a hinge, and while Fatma sanded, Agnes announced that her elderly mother would move into the workshop's back room. “She is too old for the stairs at home,” Agnes said, measuring twice. Fatma objected that the sawdust would choke the old woman. Agnes replied only that a joint holds best when the pieces sit close. By evening, Fatma noticed, Agnes had planed the lid so smoothly that it closed without a sound, and she had set aside the softest offcuts, as if already building something small and careful. Outside, the school choir was practicing scales that climbed and fell against the tin roof.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To suggest that Agnes approaches caring for her mother with the patience of her craft",
+    "To describe how an apprentice and a carpenter repaired a piano lid in a music room",
+    "To explain why sawdust in a workshop makes it unsafe for elderly people to live there",
+    "To argue that families should always live close together as parents grow older"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-04-046",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Cape Town's narrow canal at the waterfront is where Baraka kept his floating shop, a barge selling rope, tea, and secondhand compasses. I was the customer who came every Thursday, and Bao, his niece, was the one who rang up my purchases. For months I asked Baraka the same question: why not move to the new mall, where tourists actually walk? He would tap the hull and say the barge had fed three generations of his family. Then one Thursday I found Bao packing boxes; she had taken a job inland, and Baraka was helping her tape them shut. “Loyal is not the same as stuck,” he told me, and he sold me a compass at half price. I still keep it on my desk, though its needle swings slightly east of north.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe the goods sold on a barge shop moored along a canal in Cape Town",
+    "To persuade readers that small shops should move to malls to attract tourists",
+    "To show that Baraka's loyalty to his barge does not keep him from blessing a departure",
+    "To suggest that people should never abandon the places where their families began"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-04-047",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "On Sunday evenings in Lyon, my father, Lachlan, walked me along the quay he insisted on calling “the seafront,” though the Rhône was the only water in sight. I was nine, and my English was already better than his French. One evening I asked why we never visited his town in Scotland. “Margaux,” he said, using my full name as he did only to close a subject, and then he pointed at a passing barge and explained its engine at great length. I let him. Weeks later, I found a letter in his coat addressed to a brother I had never heard of, stamped twice as returned. When he next asked me to fill in a school form, I noticed he left the box for relatives abroad empty. Years afterward, the quay was repaved, and its iron benches were replaced with smooth white stone.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To recount a series of walks a father and his daughter took along a river in Lyon",
+    "To explain why the narrator's father preferred speaking English instead of French",
+    "To suggest that all parents keep secrets in order to protect their young children",
+    "To show how a child gradually recognizes that her father is avoiding a painful past"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-04-048",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Do you remember the rule you made in the Hamburg courtyard last summer, Grandfather Konrad? Beside the dry fountain, we were to speak only German, even if I needed ten minutes to ask for a glass of water. I complained, and you pretended not to understand me until I found the verbs. Yesterday I sat on that stone rim again and, without thinking, asked a neighbor's child for directions in German. She answered in German, and I understood every word. I had planned to write that the rule could end now that I am nearly fluent. Instead I find I would rather keep it, because beside that fountain your language has started to feel like mine too. The fountain itself is still dry, but someone has planted red geraniums in its basin.\nWith love, Mira",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To explain why Mira now values a once-resented rule as a bond with her grandfather",
+    "To describe how Mira asked a neighbor's child for directions beside a fountain",
+    "To complain that Konrad's rule made Mira's early lessons slow and frustrating",
+    "To argue that strict rules are the most effective way to learn any language"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-04-049",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "“Warm hall tonight, wasn't it?” Ksenia said, though the hall in Gdansk had been half empty. She and Daphne had stopped at the clock-maker's shop on the way home because Daphne's metronome had broken during the second set. Ksenia had heard the exact moment it failed: Daphne's violin slipped ahead by half a beat, and for eight bars the duo was not a duo at all. No one in the audience had stirred. Twice that week Daphne had wondered aloud whether they should stop performing. Now, while the old clock-maker examined the metronome under his lamp, Ksenia quietly paid for the repair before Daphne could open her purse. On the counter, a ship's clock ticked loudly, its brass face reflecting the gray harbor light.",
+   "question": "Based on the text, why does Ksenia most likely pay for the metronome repair?",
+   "options": [
+    "She hopes to spare Daphne embarrassment and keep her from giving up the duo.",
+    "She is angry that Daphne's error spoiled the concert in front of the audience.",
+    "She wants the metronome fixed so that Daphne will never rush the tempo again.",
+    "She owes the clock-maker money from an earlier repair of her own instrument."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-04-050",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Silas wanted the chessboard. Nora knew this the moment he climbed the stairs to her ceramics studio above the Cornish harbor, pretending to admire her glazes. Her aunt's cottage had been emptied over the summer, and the board, a scarred walnut square on which Nora and Silas had played every Tuesday for thirty years, was the only thing left unclaimed. He mentioned, too casually, that his own board had warped in the damp. Later, setting down his cup, he remarked that he had never once beaten her on that particular board, and he laughed a little too long. Nora wrapped the board in newspaper and handed it to him without a word. Then she returned to the wheel, where a half-shaped bowl was drying at the rim.",
+   "question": "Based on the text, why does Nora most likely give Silas the chessboard?",
+   "options": [
+    "She feels sorry that Silas cannot afford to buy himself a new chessboard.",
+    "She recognizes that the board holds Silas's memories of their long rivalry.",
+    "She wants to finally clear the last item out of her aunt's emptied cottage.",
+    "She is annoyed that Silas keeps interrupting her work at the potter's wheel."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-035 — 20문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-035.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-04-026 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nKites do not haggle. My landlord, Faris, does, and for eleven years I have rented the room above his yard in Beirut and watched him do it with every buyer who climbs the stairs. Bamboo, paper, glue: he prices each one as if it were gold leaf, then throws in a tail for free and calls it charity. So when a developer offered to buy the yard, the house, and my room, I assumed I would be treated to the performance of a lifetime. Instead Faris, who shares the deed with his brother abroad, sat on an overturned crate and said nothing for a long while. Then he showed me the diamond kite his father had built the year they arrived, its frame mended so often that hardly any of the first wood remains. I had thought of the yard as a stage for his bargaining. That evening it looked more like a ledger of everything his family had refused to let go.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) It shifts from wry amusement to tenderness.\nB) It shifts from open anger to calm indifference.\nC) It shifts from solemn grief to cheerful resolve.\nD) It shifts from firm certainty to bewildered panic.\n### lit40-medium-04-029 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\nWhy did his grandmother always cook two portions of fish curry when the ferry crew numbered only eleven? Arjun had wondered this since his first season in the galley of the river ferry out of Dhaka. Each evening she ladled twelve bowls, covered the last with a tin plate, and set it on the shelf by the porthole. By morning it was empty and scrubbed. Arjun assumed a rat, or a greedy deckhand, and said nothing. Then one night he stayed awake behind the rice sacks and saw his uncle Ishaan, whom the family spoke of as lost in debt and shame, climb through the cargo hatch and eat in silence. His grandmother sat beside him, mending a net, and did not look up. In the morning Arjun asked her nothing. He only covered the twelfth bowl himself, and set it by the porthole.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A conflict between two crew members is introduced and then settled by the grandmother.\nB) A family memory is recounted and then contrasted with a failure in the present day.\nC) A plan the grandson devises is described step by step and then shown to fail.\nD) A puzzling routine is presented, and a discovery then explains and continues it.\n### lit40-medium-04-030 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\nSiti had worked at the seed-saving cooperative in Hanoi for two years before her aunt spoke to her about anything except labels. Nguyen ran the drying room like a clinic. Seeds were weighed, sealed, and dated; packets were stacked by month; mistakes were corrected with a finger tapping the shelf, never a word. Siti learned the work by watching that finger. She cooked lunch for the volunteers and ate hers alone on the steps. Then, one wet afternoon, she found an unlabeled jar of small black beans behind the rice drawers and began, as she had been taught, to write unknown. Nguyen took the pen from her. These were your mother's, she said. She grew them on the roof the year you were born, and I have not been able to say her name in this room since. She wrote it on the label herself, slowly, and handed the pen back.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes a long, wordless routine and then presents the moment it is broken.\nB) It recounts a sharp argument and then explains the misunderstanding behind it.\nC) It contrasts two workplaces and then explains why one character prefers the first.\nD) It introduces a mystery about a jar and then leaves the jar's origin unresolved.\n### lit40-medium-04-033 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nSalt keeps nothing secret. On the flats outside Marrakesh it shows every footprint, every drag of a rake, and so the whole crew saw Malek stop when Lindiwe arrived with the old rake-master's wooden rake on her shoulder. She was nineteen, three weeks on the job, and the old man's granddaughter; the rake had come to her in his will. Malek assigned her the farthest pan and said nothing about it. __When he took off his gloves at noon, the ridges across his palms matched, groove for groove, the worn places on that handle, where for twenty years he had pulled it beside the old man.__ Lindiwe noticed. She worked the far pan until dusk, then walked back across the white crust and leaned the rake against Malek's shed. It pulls left, she told him. You will know how to correct it. He did not thank her, but the next morning he moved her pan closer to his own.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It suggests that Malek is too exhausted to work alongside the rest of the crew.\nB) It shows that Lindiwe has already mastered the rake despite her short time there.\nC) It indicates that the rake was badly damaged before Lindiwe inherited it.\nD) It reveals the personal history behind Malek's reaction to the inheritance.\n### lit40-medium-04-034 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nWhat do you tell a seven-year-old when the money stops? Hassan asked it of no one as he pushed his delivery bicycle across the dried riverbed on the edge of Lagos, the crates of bread rattling behind him. Since his father's shop had closed, he had been telling his little sister that their father was traveling for business. Seoyeon, the widow who bought six loaves every Friday, was waiting at the far bank. She had overheard his sister boasting about the trip. __Children forgive the hard truth sooner than they forgive the kind lie, she said, because the lie tells them they were not trusted.__ Hassan wanted to argue, but she had already turned toward her gate. That evening he sat his sister on the step, gave her the heel of the last loaf, and told her, carefully, that their father was home every day now and was looking for work, and that the family would need her help.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It offers advice that Hassan resists at first but later follows.\nB) It explains why Seoyeon has decided to stop buying bread from Hassan.\nC) It reveals that Seoyeon once misled her own children about money.\nD) It shows that Hassan's sister already knows the truth about the shop.\n### lit40-medium-04-035 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\n\"You are the one with the map, then,\" the farmer said as I took the seat beside her on the night bus out of Sapporo. Her name was Chiyo, and she had recognized the city survey office's logo on my tube of drawings. I am Aiko; I mark where roads will go. For an hour she told me, without bitterness, about the cherry tree at the corner of her field, and about the promise she had made to her granddaughter that it would bloom there until the girl was grown. I knew the corner. My line ran through it. __Somewhere past Asahikawa, I unrolled the drawing on my knees and folded it so that the small red cross over her field disappeared into the crease.__ I told myself it was only to keep the paper from sliding. In the morning I filed my report as written. But I asked my supervisor, for the first time in six years, whether the line could bend.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows the narrator deciding to destroy the survey drawing in secret.\nB) It signals the narrator's first private unease about her assignment.\nC) It indicates that the narrator was careless with her official documents.\nD) It reveals that Chiyo had asked the narrator directly to alter the map.\n### lit40-medium-04-036 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nWe split the house our mother left us the way she had taught us to split a bolt of cloth at the weaving cooperative: measure twice, cut once, argue never. Marcus took the kitchen and the back porch. I took the front rooms and the loom. When the cooperative's director called to say that Marcus's quilt had been chosen for the state museum, he shrugged into the phone and said it was just scraps. He told me the same thing that night, twice, while we taped boxes. He said the museum probably needed something to fill a wall. __Yet when he packed the quilt to send it, he folded it so that the little muslin tag stitched with his name lay on top, square in the center, where anyone opening the box would see it first.__ I did not mention it. I only wrote fragile on the box in my best letters, and let him think I had not noticed.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It suggests that Marcus plans to keep the quilt rather than send it.\nB) It explains why the brothers chose to divide the house the way they did.\nC) It provides a detail that quietly undercuts Marcus's claim of indifference.\nD) It reveals that the narrator resents the attention his brother is receiving.\n### lit40-medium-04-037 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nPins bristled from Freja's sleeve like the quills of a small, offended animal as she marched the length of the summer camp dining hall in Rotterdam, inspecting the costumes laid out on the long tables. She had sewn for the camp's play for thirty summers and had never once let an apprentice cut the cloth. Thorvald, her only apprentice, sixteen and earnest, had asked every morning for a week. Every morning she had told him his hands were too hasty, and every afternoon she had left the good shears, quite by accident, a little closer to his end of the table. On the eighth day she announced, to the rafters rather than to him, that her wrists ached and that someone might as well ruin the velvet as let it sit. Then she sat down with her tea and pretended, with tremendous concentration, not to watch his first cut.\n\n[질문] Which choice best describes the narrator's attitude toward Freja?\nA) Open scorn for her refusal to share her craft\nB) Affectionate amusement at her stubborn pride\nC) Detached neutrality toward her daily routine\nD) Anxious pity for her failing health and wrists\n### lit40-medium-04-038 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nForty-one letters, two rubber bands, one shoebox: that was what Ama carried into the empty classroom at the language school in Accra where she now taught French in the evenings. Our mother had written them to me, Seun, during my six years at university abroad, and Ama had kept them after the funeral. We read them at a student's desk under the buzzing tube light. In every letter our mother praised my examinations. In almost every letter, near the end, she mentioned in passing that Ama had taken another shift at the market, or had postponed her own course for another year. I had read those lines at the time and skimmed past them. Now Ama read them aloud in an even voice, smoothing each page flat, and when she reached the one about the year she gave up her scholarship, she only said that the handwriting was very neat that month. I could not look at her, and I could not look away.\n\n[질문] Which choice best describes the narrator's attitude toward Ama?\nA) Resentful envy of the praise Ama now receives\nB) Amused tolerance of Ama's careful habits\nC) Remorseful admiration for Ama's sacrifice\nD) Cautious suspicion of Ama's reasons for sharing\n### lit40-medium-04-039 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nFolding chairs in rows on the gymnasium floor,\nthe Lima heat pressing through the high windows,\nand I in my borrowed white, braced\nfor Renata, Santiago's mother,\nwho had said, the week before, that I was too young\nto know what I was promising.\nI had rehearsed my answers to her like a debate.\nBut when the sound system shrieked and died\nand the aunts began to murmur,\nit was Renata who climbed onto a bench,\nher good shoes in one hand,\nand sang the first hymn without a microphone\nuntil the whole room followed.\nLater she pinned my slipping veil\nwith a clip from her own hair\nand told me, gruffly, that she had been too young once, too.\nI keep that clip in a dish by the door.\nI still do not know all her reasons.\nI know whose voice filled the room\nwhen mine would not come.\n\n[질문] Which choice best describes the speaker's attitude toward Renata?\nA) Lingering suspicion of Renata's true motives\nB) Playful mockery of Renata's gruff manner\nC) Polite indifference toward Renata's gestures\nD) Newfound gratitude that replaces wariness\n### lit40-medium-04-040 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nBleach, damp plaster, and the neighbor's frying onions filled the stairwell of our building in Galicia the evening my brother came home. Sergio climbed the four flights slowly, as if counting them, and stopped on each landing to touch the rail. I, Chiara, had planned the anniversary for weeks: a dinner for our father's old friends, candles, his favorite songs on the record player. Sergio listened to the plan on the third-floor landing and said he could not sit in a room full of people tonight. I wanted to argue. Instead I noticed how he kept his back to the wall, and how his hand flinched when a door banged above us. So I cancelled the dinner by text, one guest at a time, while he waited beside me. We marked the day on the stairs instead, sharing a single candle and our father's harmonica, which neither of us could play, until the timer light clicked off and we did not bother to turn it on again.\n\n[질문] Which choice best describes the narrator's attitude toward Sergio?\nA) Protective tenderness toward his fragile state\nB) Resentful impatience with his refusal of her plan\nC) Bemused detachment from his unusual behavior\nD) Fearful awe of his experiences as a soldier\n### lit40-medium-04-041 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nWhy did I never ask Amelie for the scissors back? Her uncle's tailoring shop on Chicago's South Side had a back room that smelled of steam and chalk, and that was where she first lent me the brass-handled shears, the summer my family moved onto her block. I was Colby, the new boy who cut paper stars badly, and she said a good tool would fix my hands. It did not, but I kept the shears through two more moves and a decade of silence between us. Each time I unpacked them, I meant to write to her. Instead I would oil the hinge, test the blades on a scrap of newsprint, and set them back in their drawer as if they were still on loan. Last spring a cousin mentioned that Amelie now runs the shop herself. I bought a card that week; it is still blank, propped against the window above my desk.\n\n[질문] Which choice best describes the narrator's attitude toward his friendship with Amelie?\nA) Resentful, since he takes her silence about the shears as proof she forgot him\nB) Affectionate toward the friendship yet sheepish about his long delay in reaching out\nC) Proud, chiefly of having kept the shears in good condition through several moves\nD) Indifferent, treating the shears as an ordinary tool rather than a reminder of her\n### lit40-medium-04-042 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nBy the time you receive this, dear Samira, the barber on Calle Obispo will have swept up the last of my hair and, I hope, the last of our argument. You insisted the mirror in his Havana shop hung crooked; I insisted it was the floor. We spent an entire afternoon on it, you tapping your cane like a gavel, I quoting the level I had borrowed from the clerk's office. I see now that neither of us cared about the mirror. You were hurt that I had accepted the post in Santiago without consulting you, and I was annoyed that I still wanted your blessing. Forgive the clumsy way I argued. You taught me that a ruling should be stated plainly, and here is mine: I am going, and I will write every month. The barber says the mirror has hung that way since 1921, and he refuses to straighten it.\nMoira\n\n[질문] Which choice best describes Moira's attitude toward Samira in the letter?\nA) Defiant, dismissing Samira's past guidance as irrelevant to her new career\nB) Amused, treating the quarrel over the mirror as a harmless joke between them\nC) Respectful, valuing Samira's influence while still asserting her own decision\nD) Apologetic, giving up her plan to leave in order to repair their friendship\n### lit40-medium-04-043 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nWhen Piper saw Tariq folding towels at the coin laundry in Dayton, Ohio, she nearly left her basket behind. Twelve years earlier they had sung the same duet at the county finals, and only one scholarship had been offered; Piper took it to the conservatory, and Tariq stayed home to run her father's dry-cleaning counter. Now Tariq nodded at the dryers. “Number four still eats quarters,” she said, as if no time had passed. Piper wanted to apologize but instead asked whether Tariq still sang. “At church, sometimes. Nobody grades me there.” Piper laughed, then stopped, hearing in the remark both a joke and a wound she had never been allowed to see. Across the room, a lint screen rattled loose and a child chased a single red sock beneath the folding table.\n\n[질문] Which choice best states the main purpose of the text?\nA) To recount how two former singers by chance meet again while doing laundry in Dayton\nB) To show that the old machines in a laundromat frequently break and annoy customers\nC) To suggest that every success in life inevitably requires that someone else must lose\nD) To reveal how an old opportunity that favored one woman still quietly shapes both women\n### lit40-medium-04-044 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nYears later, Fatma would remember that the argument began over a cracked piano lid. Agnes, the master carpenter, had brought her apprentice to a school music room in Nairobi to replace a hinge, and while Fatma sanded, Agnes announced that her elderly mother would move into the workshop's back room. “She is too old for the stairs at home,” Agnes said, measuring twice. Fatma objected that the sawdust would choke the old woman. Agnes replied only that a joint holds best when the pieces sit close. By evening, Fatma noticed, Agnes had planed the lid so smoothly that it closed without a sound, and she had set aside the softest offcuts, as if already building something small and careful. Outside, the school choir was practicing scales that climbed and fell against the tin roof.\n\n[질문] Which choice best states the main purpose of the text?\nA) To suggest that Agnes approaches caring for her mother with the patience of her craft\nB) To describe how an apprentice and a carpenter repaired a piano lid in a music room\nC) To explain why sawdust in a workshop makes it unsafe for elderly people to live there\nD) To argue that families should always live close together as parents grow older\n### lit40-medium-04-046 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nCape Town's narrow canal at the waterfront is where Baraka kept his floating shop, a barge selling rope, tea, and secondhand compasses. I was the customer who came every Thursday, and Bao, his niece, was the one who rang up my purchases. For months I asked Baraka the same question: why not move to the new mall, where tourists actually walk? He would tap the hull and say the barge had fed three generations of his family. Then one Thursday I found Bao packing boxes; she had taken a job inland, and Baraka was helping her tape them shut. “Loyal is not the same as stuck,” he told me, and he sold me a compass at half price. I still keep it on my desk, though its needle swings slightly east of north.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe the goods sold on a barge shop moored along a canal in Cape Town\nB) To persuade readers that small shops should move to malls to attract tourists\nC) To show that Baraka's loyalty to his barge does not keep him from blessing a departure\nD) To suggest that people should never abandon the places where their families began\n### lit40-medium-04-047 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nOn Sunday evenings in Lyon, my father, Lachlan, walked me along the quay he insisted on calling “the seafront,” though the Rhône was the only water in sight. I was nine, and my English was already better than his French. One evening I asked why we never visited his town in Scotland. “Margaux,” he said, using my full name as he did only to close a subject, and then he pointed at a passing barge and explained its engine at great length. I let him. Weeks later, I found a letter in his coat addressed to a brother I had never heard of, stamped twice as returned. When he next asked me to fill in a school form, I noticed he left the box for relatives abroad empty. Years afterward, the quay was repaved, and its iron benches were replaced with smooth white stone.\n\n[질문] Which choice best states the main purpose of the text?\nA) To recount a series of walks a father and his daughter took along a river in Lyon\nB) To explain why the narrator's father preferred speaking English instead of French\nC) To suggest that all parents keep secrets in order to protect their young children\nD) To show how a child gradually recognizes that her father is avoiding a painful past\n### lit40-medium-04-048 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nDo you remember the rule you made in the Hamburg courtyard last summer, Grandfather Konrad? Beside the dry fountain, we were to speak only German, even if I needed ten minutes to ask for a glass of water. I complained, and you pretended not to understand me until I found the verbs. Yesterday I sat on that stone rim again and, without thinking, asked a neighbor's child for directions in German. She answered in German, and I understood every word. I had planned to write that the rule could end now that I am nearly fluent. Instead I find I would rather keep it, because beside that fountain your language has started to feel like mine too. The fountain itself is still dry, but someone has planted red geraniums in its basin.\nWith love, Mira\n\n[질문] Which choice best states the main purpose of the text?\nA) To explain why Mira now values a once-resented rule as a bond with her grandfather\nB) To describe how Mira asked a neighbor's child for directions beside a fountain\nC) To complain that Konrad's rule made Mira's early lessons slow and frustrating\nD) To argue that strict rules are the most effective way to learn any language\n### lit40-medium-04-049 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\n“Warm hall tonight, wasn't it?” Ksenia said, though the hall in Gdansk had been half empty. She and Daphne had stopped at the clock-maker's shop on the way home because Daphne's metronome had broken during the second set. Ksenia had heard the exact moment it failed: Daphne's violin slipped ahead by half a beat, and for eight bars the duo was not a duo at all. No one in the audience had stirred. Twice that week Daphne had wondered aloud whether they should stop performing. Now, while the old clock-maker examined the metronome under his lamp, Ksenia quietly paid for the repair before Daphne could open her purse. On the counter, a ship's clock ticked loudly, its brass face reflecting the gray harbor light.\n\n[질문] Based on the text, why does Ksenia most likely pay for the metronome repair?\nA) She hopes to spare Daphne embarrassment and keep her from giving up the duo.\nB) She is angry that Daphne's error spoiled the concert in front of the audience.\nC) She wants the metronome fixed so that Daphne will never rush the tempo again.\nD) She owes the clock-maker money from an earlier repair of her own instrument.\n### lit40-medium-04-050 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nSilas wanted the chessboard. Nora knew this the moment he climbed the stairs to her ceramics studio above the Cornish harbor, pretending to admire her glazes. Her aunt's cottage had been emptied over the summer, and the board, a scarred walnut square on which Nora and Silas had played every Tuesday for thirty years, was the only thing left unclaimed. He mentioned, too casually, that his own board had warped in the damp. Later, setting down his cup, he remarked that he had never once beaten her on that particular board, and he laughed a little too long. Nora wrapped the board in newspaper and handed it to him without a word. Then she returned to the wheel, where a half-shaped bowl was drying at the rim.\n\n[질문] Based on the text, why does Nora most likely give Silas the chessboard?\nA) She feels sorry that Silas cannot afford to buy himself a new chessboard.\nB) She recognizes that the board holds Silas's memories of their long rivalry.\nC) She wants to finally clear the last item out of her aunt's emptied cottage.\nD) She is annoyed that Silas keeps interrupting her work at the potter's wheel."
+}

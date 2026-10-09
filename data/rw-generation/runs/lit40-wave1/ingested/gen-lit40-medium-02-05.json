@@ -1,0 +1,1065 @@
+{
+ "taskId": "gen-lit40-medium-02-05",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-02-081",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-081",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "drama",
+    "seed": {
+     "index": 80,
+     "genre": "drama",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Irena",
+      "Anushka"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "slavic_baltic"
+     ],
+     "locale": "Tbilisi",
+     "setting": "a weaving cooperative",
+     "relationship": "two musicians in a failing duo",
+     "conflict": "over a shared chore that has become a ritual",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a weaving cooperative in Tbilisi; two musicians in a failing duo over a shared chore that has become a ritual"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "When the looms of the Tbilisi weaving cooperative fall silent each evening, I set two chairs by the window, and Anushka begins unwinding the tangled yarn the weavers leave behind. We used to play here for them on Fridays; now nobody asks. IRENA: You could leave the yarn tonight. ANUSHKA: (without looking up) And give up the only thing we still do on time? Later, when I reach for my violin case, she slides the spool toward me first, as she always does, so that I hold one end while she winds. Neither of us mentions the concert hall that cancelled our booking. IRENA: Same tempo as yesterday? ANUSHKA: Slower. Your hands are tired. Outside, a tram rattles past and the courtyard lamps flicker on one by one.",
+    "question": "Based on the text, how would the relationship between Irena and Anushka most likely be described?",
+    "options": [
+     "Anushka resents Irena for the cancelled booking and uses the yarn to avoid talking to her.",
+     "Though their partnership is faltering, they stay attentive to each other through a familiar routine.",
+     "Irena depends on Anushka's guidance, but Anushka has grown tired of the yarn and of Irena.",
+     "They are rivals for the weavers' attention, each secretly hoping to perform alone on Fridays."
+    ],
+    "correct_letter": "B",
+    "explanation": "Anushka는 실 감기를 '아직 제때 하는 유일한 일'이라 부르며 둘의 공연 활동이 기울었음을 드러낸다. 동시에 Irena에게 먼저 실패를 건네고, 손이 피곤하다며 템포를 늦추자고 하는 행동은 서로를 세심하게 살피는 관계임을 보여 준다. 따라서 B가 정답이다. A와 C는 한쪽의 감정만 부정적으로 확대했고, D는 지문에 근거 없는 경쟁 관계라는 통념이다."
+   },
+   "notes": [],
+   "tone": [
+    "wistful",
+    "tender"
+   ],
+   "devices": [
+    "dialogue",
+    "stage directions",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-082",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-082",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 81,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Ayesha",
+      "Bronislaw"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "slavic_baltic"
+     ],
+     "locale": "Rotterdam",
+     "setting": "an open-air market",
+     "relationship": "a violin student and an exacting teacher",
+     "conflict": "about a promise nobody remembers making",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "an open-air market in Rotterdam; a violin student and an exacting teacher about a promise nobody remembers making"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "Rotterdam on market mornings smelled of herring and wet canvas, and it was there, between the cheese stalls, that Ayesha met Bronislaw each week to carry his violin home. He had never asked her to; she believed he once had, years ago, though neither of them could recall the words. He corrected her bowing even as they walked, tapping her wrist with two fingers whenever her arm drooped beneath the case. Yet when a fishmonger jostled her, Bronislaw stepped between them without a word and took the case himself for the length of a stall. By the canal he handed it back, remarking only that her left shoulder was still too high. Gulls wheeled over the awnings, and a bell somewhere across the water struck ten.",
+    "question": "Based on the text, how would the relationship between Ayesha and Bronislaw most likely be described?",
+    "options": [
+     "Ayesha feels obligated to Bronislaw, who regards her as little more than a porter for his case.",
+     "Ayesha shields Bronislaw from the crowd, while he relies on her to correct his habits.",
+     "Bronislaw is exacting about Ayesha's playing but quietly protective of her beyond the lesson.",
+     "They have given up formal lessons and now meet only as friendly equals at the market."
+    ],
+    "correct_letter": "C",
+    "explanation": "Bronislaw는 걸으면서도 손목을 두드리며 활 자세를 고치고, 운하에서는 어깨가 높다고 지적하는 엄격한 선생이다. 그러나 생선 장수가 Ayesha를 밀치자 말없이 사이에 서서 가방을 대신 드는 행동은 그녀를 보호하려는 마음을 드러낸다. 두 단서를 연결하면 C가 정답이다. A는 Ayesha 쪽 의무감만 반영했고, B는 보호와 교정의 방향을 뒤바꿨으며, D는 계속되는 교정과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "gentle",
+    "observant"
+   ],
+   "devices": [
+    "imagery",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-083",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-083",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "memoir",
+    "seed": {
+     "index": 82,
+     "genre": "memoir",
+     "pov": "third_omniscient",
+     "styleEra": "late_20c",
+     "names": [
+      "Joon",
+      "Jakub"
+     ],
+     "nameCultures": [
+      "korean",
+      "slavic_baltic"
+     ],
+     "locale": "Busan",
+     "setting": "a barbershop",
+     "relationship": "a conductor and the youngest violinist",
+     "conflict": "over unequal sacrifices made in the past",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a barbershop in Busan; a conductor and the youngest violinist over unequal sacrifices made in the past"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "By the winter of 1994, Joon had conducted the Busan youth orchestra for eleven years, and every Thursday he still sat in the same barbershop chair beside Jakub, its youngest violinist. Jakub had given up a scholarship abroad to stay with the ensemble when two players quit; Joon knew this, and Jakub knew that he knew. That afternoon Joon paid for both haircuts before Jakub could reach his wallet, then busied himself with a newspaper. Jakub, for his part, folded the receipt carefully into his coat rather than throwing it away. Later, at rehearsal, Joon gave him the solo that had always gone to the concertmaster, and no one in the hall questioned it. Snow had started again by the time the barber swept the floor and pulled the shutter halfway down.",
+    "question": "Based on the text, how would the relationship between Joon and Jakub most likely be described?",
+    "options": [
+     "Jakub resents Joon for the lost scholarship and refuses to accept any of his gestures.",
+     "Jakub feels indebted to Joon, who once gave up a scholarship to keep the orchestra going.",
+     "Joon treats Jakub as most conductors treat junior players, with distant formality.",
+     "Joon feels indebted to Jakub and tries, without speaking of it, to repay him."
+    ],
+    "correct_letter": "D",
+    "explanation": "Jakub이 오케스트라를 위해 해외 장학금을 포기했고 Joon이 그 사실을 안다는 점이 먼저 제시된다. 이후 Joon이 이발비를 몰래 먼저 내고 신문 뒤로 숨는 행동, 그리고 늘 악장에게 가던 솔로를 Jakub에게 주는 행동은 말없이 빚을 갚으려는 마음을 보여 준다. 따라서 D가 정답이다. A는 영수증을 소중히 접는 행동과 맞지 않고, B는 희생의 방향을 뒤집었으며, C는 지휘자에 대한 일반적 통념이다."
+   },
+   "notes": [],
+   "tone": [
+    "restrained",
+    "reflective"
+   ],
+   "devices": [
+    "understatement",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-084",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-084",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "letter",
+    "seed": {
+     "index": 83,
+     "genre": "letter",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Danish",
+      "Pouya"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "persian_central_asian"
+     ],
+     "locale": "Karachi",
+     "setting": "a tailor's back room",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "when an expected rival turns out to be an ally",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a tailor's back room in Karachi; a mayor and the town's only doctor when an expected rival turns out to be an ally"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "I am writing from the back room of a tailor's shop on Burns Road, among bolts of cotton, because it is the only quiet place in Karachi tonight. When the council told me you would speak at Thursday's meeting, I prepared for an attack on my road plan; you have opposed me on nearly every vote since I became mayor. Instead you stood and urged the council to pass it, saying the ambulance could not reach the hill villages without it. I learned afterward that you had spent two nights checking my figures so they would survive the auditors. I do not yet know how to thank a doctor I spent a year arguing with, Pouya, except to say that I was wrong about you. The tailor has begun pressing collars beside me, and steam is clouding the lamp.",
+    "question": "Based on the letter, how would Danish, the mayor writing it, most likely describe his relationship with Pouya?",
+    "options": [
+     "He had expected Pouya to oppose him but now sees the doctor as a valued supporter.",
+     "Pouya has long admired him, though he still regards the doctor as a dangerous critic.",
+     "He supported Pouya's plans in council, and Pouya now owes him thanks for that help.",
+     "They remain political enemies who cooperate only when the auditors require it."
+    ],
+    "correct_letter": "A",
+    "explanation": "편지의 화자인 시장은 Pouya가 거의 모든 표결에서 자신에게 반대해 왔기에 공격을 예상했다고 말한다. 그러나 Pouya는 도로 계획 통과를 촉구했고, 감사를 통과하도록 이틀 밤 수치를 검토해 주었으며, 시장은 그에 대해 틀렸다고 인정한다. 이 단서들을 이으면 A가 정답이다. B는 감정의 방향을 왜곡했고, C는 도움을 준 쪽을 뒤바꿨으며, D는 정적 관계라는 통념에 머문다."
+   },
+   "notes": [],
+   "tone": [
+    "grateful",
+    "candid"
+   ],
+   "devices": [
+    "epistolary form",
+    "reversal"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-085",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-085",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 84,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "third_omniscient",
+     "styleEra": "contemporary",
+     "names": [
+      "Tatiana",
+      "Jakub"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "slavic_baltic"
+     ],
+     "locale": "Riga",
+     "setting": "a clock-maker's shop",
+     "relationship": "a mother and her son leaving for college",
+     "conflict": "over an unfair rule everyone obeys",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a clock-maker's shop in Riga; a mother and her son leaving for college over an unfair rule everyone obeys"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "Brass gears ticked on every wall of Tatiana's clock shop in Riga, where an old rule held that no clock could be sold until it had run a full year without losing a minute. Everyone obeyed it, though customers grumbled and many fine clocks were melted down for a single lost minute. On the morning Jakub was to leave for university, he found his mother lifting down the small clock he had built at twelve, which had once lost four minutes in a single winter. Keep it, she said, pressing it into his bag. A year is too long to wait for some things. Jakub said nothing, but at the station he wound it carefully and set it to her time. Snow drifted against the shop window long after the train had gone, and the wall clocks struck noon together.",
+    "question": "Based on the text, how would the relationship between Tatiana and Jakub most likely be described?",
+    "options": [
+     "Jakub is eager to escape his mother's rules, while Tatiana hopes the clock will keep him home.",
+     "Tatiana bends a long-obeyed rule for her son, who quietly honors what her gesture means.",
+     "Jakub persuades his mother to break the rule, and she reluctantly gives up the clock.",
+     "Like most parents and children, they argue about rules until the son finally leaves."
+    ],
+    "correct_letter": "B",
+    "explanation": "모두가 지켜 온 '1년 무오차' 규칙 아래에서 Tatiana는 오차가 났던 아들의 시계를 가방에 넣어 주며 규칙을 스스로 굽힌다. Jakub은 말없이 역에서 시계를 감아 어머니의 시간에 맞추는데, 이는 어머니의 마음을 존중하는 행동이다. 두 장면을 연결하면 B가 정답이다. A는 한쪽 감정을 지어냈고, C는 설득의 방향을 뒤집었으며, D는 부모 자식 갈등에 대한 통념이다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "quiet"
+   ],
+   "devices": [
+    "fable framing",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-086",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-086",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "short_story",
+    "seed": {
+     "index": 85,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Zofia",
+      "Eda"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Thessaloniki",
+     "setting": "a rooftop water tank",
+     "relationship": "an immigrant father and his English-speaking daughter",
+     "conflict": "over an apology offered too late",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a rooftop water tank in Thessaloniki; an immigrant father and his English-speaking daughter over an apology offered too late"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "When Zofia climbed to the roof that last evening in Thessaloniki, her father was already kneeling beside the water tank, a tin of sealant open at his knee. For eleven summers the tank had wept a thin rust-colored line down the wall, and for eleven summers he had said he would fix it next week. Eda, from the next roof, used to joke that the stain was older than Zofia's English. Zofia had stopped noticing it, the way she had stopped noticing that he never asked about the school prize ceremony he had missed. Now he pressed the sealant into the seam with his thumb and said, in Greek, that he should have done this long ago. She answered in English that it was fine, though her suitcase was already packed downstairs. Below them, the harbor lights came on and a ferry horn sounded twice.",
+    "question": "In the text, the leaking water tank most likely represents",
+    "options": [
+     "the father's pride in his practical skills, which Zofia has never truly valued",
+     "the family's lack of money, which has kept them from making needed repairs",
+     "a long-neglected hurt that her father tries to mend only as she is leaving",
+     "the language gap between father and daughter, which neither one can bridge"
+    ],
+    "correct_letter": "C",
+    "explanation": "물탱크는 11년 동안 새면서도 '다음 주'로 미뤄졌고, Zofia가 그 얼룩을 잊은 방식은 아버지가 놓친 시상식을 잊은 방식과 겹쳐 서술된다. 아버지는 딸이 떠나는 날에야 틈을 메우며 진작 했어야 했다고 말하고, 딸의 가방은 이미 싸여 있다. 따라서 탱크는 너무 늦게 다뤄지는 오래된 상처를 상징하므로 C가 정답이다. D는 언어 차이가 언급되어 그럴듯하지만 반복된 수리 지연과 사과의 맥락을 설명하지 못하고, A와 B는 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "melancholy",
+    "restrained"
+   ],
+   "devices": [
+    "symbolism",
+    "parallelism",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-087",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-087",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 86,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Shirin",
+      "Bahram"
+     ],
+     "nameCultures": [
+      "persian_central_asian",
+      "persian_central_asian"
+     ],
+     "locale": "Tehran",
+     "setting": "a salt flat",
+     "relationship": "a teenage cook and her stern aunt",
+     "conflict": "after a mistake that only one person noticed",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a salt flat in Tehran; a teenage cook and her stern aunt after a mistake that only one person noticed"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Tehran's southern road ended where the salt flat began, and it was there my aunt took me the morning after the wedding supper. I had salted the lamb twice; I knew it the moment Bahram, our guest of honor, praised the dish and reached for his water. My aunt had tasted it too, I was certain, for her mouth tightened, yet she said nothing at table and nothing on the long drive. On the flat she bent, broke off a plate of white crust, and showed me the dark earth kept moist beneath it. Salt covers, Shirin, she said; it also keeps. I did not understand her then. I only watched her wrap the shard in her handkerchief, as carefully as she folded our best linen, and carry it home in her sleeve. The wind lifted a fine white dust across the plain, erasing our footprints behind us.",
+    "question": "In the text, the salt crust most likely represents",
+    "options": [
+     "the harsh judgment Shirin expects from her aunt after the failed wedding supper",
+     "the guest's polite pretense that the oversalted lamb had tasted good",
+     "the barren future Shirin fears if she cannot become a skilled cook",
+     "the aunt's choice to shield Shirin's error while keeping it as a lesson"
+    ],
+    "correct_letter": "D",
+    "explanation": "이모는 요리가 짰다는 것을 알았지만 식탁에서도 차 안에서도 아무 말 하지 않았다. 소금 평원에서 이모는 소금 껍질 아래 촉촉하게 보존된 흙을 보여 주며 '소금은 덮고, 또 간직한다'고 말하고, 그 조각을 소중히 싸서 가져간다. 이를 연결하면 소금 껍질은 실수를 덮어 주되 교훈으로 간직하는 이모의 선택을 상징하므로 D가 정답이다. A는 이모의 실제 반응과 맞지 않고, B와 C는 소금과 표면적으로만 연결된다."
+   },
+   "notes": [],
+   "tone": [
+    "contemplative",
+    "subdued"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery",
+    "foreshadowing"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-088",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-088",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "poetry",
+    "seed": {
+     "index": 87,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Dolores",
+      "Tariq"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "arabic_levantine"
+     ],
+     "locale": "Beirut",
+     "setting": "a courtyard with a dry fountain",
+     "relationship": "a keeper and a visiting surveyor",
+     "conflict": "while pretending nothing has changed",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a courtyard with a dry fountain in Beirut; a keeper and a visiting surveyor while pretending nothing has changed"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Nothing has changed, I tell the surveyor.\nI am Dolores, keeper of this Beirut court,\nand every dawn I sweep the fountain's bowl\nas though the water only stepped away.\nTariq writes figures in his leather book;\nhe does not ask why moss has turned to dust,\nwhy coins of other summers rust and stay\nunwished-upon beneath my careful broom.\nWe speak of walls, of tiles, of wells to dig,\nand when his shadow crosses the stone lip\nhe steps around it, as one steps around\na sleeper no one wishes to awake.\nAt noon the swallows circle, find no pool,\nand settle on the gate to preen and wait.",
+    "question": "In the text, the dry fountain most likely represents",
+    "options": [
+     "a loss that both Dolores and Tariq quietly avoid naming",
+     "the surveyor's plan to rebuild the courtyard into something new",
+     "Dolores's confidence that the water will soon return on its own",
+     "the ordinary decay that comes to every old building with time"
+    ],
+    "correct_letter": "A",
+    "explanation": "Dolores는 '아무것도 변하지 않았다'고 말하면서도 매일 마른 분수대를 물이 잠시 떠난 듯 쓴다. Tariq 역시 이끼가 먼지가 된 이유를 묻지 않고 잠든 사람을 피하듯 분수 가장자리를 돌아간다. 두 인물의 행동을 연결하면 분수는 둘 다 말하지 않으려는 상실을 상징하므로 A가 정답이다. C는 '물이 잠시 떠난 듯'이라는 표현에 기대지만 화자의 가장임을 놓치고, B와 D는 근거가 부족하다."
+   },
+   "notes": [],
+   "tone": [
+    "elegiac",
+    "hushed"
+   ],
+   "devices": [
+    "symbolism",
+    "simile",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-089",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-089",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 88,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Moshe",
+      "Assunta"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "italian"
+     ],
+     "locale": "Bologna",
+     "setting": "a snowed-in cabin",
+     "relationship": "an old teacher and a former pupil",
+     "conflict": "while waiting for important news",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a snowed-in cabin in Bologna; an old teacher and a former pupil while waiting for important news"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "What does one do with hours that will not move? I asked myself this in the cabin above Bologna, where snow had closed the road for three days and the telegram from the hospital could not reach us. My old teacher, Moshe, spent the mornings mending a lamp whose wick had long since burned away. He trimmed a new one from a strip of his shirt, filled the reservoir, polished the glass, and then set it, unlit, on the sill facing the valley. Not yet, Assunta, he said, when I offered him a match. Each evening he wiped the frost from that pane before any other. On the fourth day a boy on skis appeared at the bend of the road, and Moshe rose so quickly that his chair fell. Pine branches shed their snow in soft collapses all around the clearing.",
+    "question": "In the text, the unlit lamp most likely represents",
+    "options": [
+     "Moshe's grief over a loss that he believes has already happened",
+     "Moshe's guarded hope, kept ready but held back until the news arrives",
+     "Assunta's impatience with her teacher's slow and stubborn habits",
+     "the cabin's isolation, which the heavy snow has made complete and lasting"
+    ],
+    "correct_letter": "B",
+    "explanation": "Moshe는 등잔에 새 심지를 만들고 기름을 채워 완전히 준비하지만 '아직은 아니다'라며 불을 켜지 않는다. 그는 매일 저녁 그 창의 성에를 먼저 닦고, 소식을 가져올 소년이 보이자 의자가 넘어질 만큼 급히 일어선다. 이를 이으면 등잔은 준비되었지만 소식 전까지 억눌러 둔 희망을 상징하므로 B가 정답이다. A는 이미 상실을 확신한다는 근거가 없고, C와 D는 등잔의 준비 과정을 설명하지 못한다."
+   },
+   "notes": [],
+   "tone": [
+    "suspenseful",
+    "tender"
+   ],
+   "devices": [
+    "symbolism",
+    "rhetorical question",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-090",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-090",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "memoir",
+    "seed": {
+     "index": 89,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Zoya",
+      "Kamala"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "indian_subcontinent"
+     ],
+     "locale": "Dhaka",
+     "setting": "a tea plantation",
+     "relationship": "twin brothers dividing a house",
+     "conflict": "when a rumor reaches the wrong person",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a tea plantation in Dhaka; twin brothers dividing a house when a rumor reaches the wrong person"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Zoya, our mother used to say, was the twin who spoke first, and Kamala the one who remembered. When we came back to the tea estate outside Dhaka to divide her bungalow, I spoke first again: I chalked a line down the veranda so each of us would know her half. By evening a rumor had reached Kamala through the plantation clerk that I meant to sell my side to the factory. She did not ask me about it. She simply moved our mother's cracked teapot, the one we had broken as girls and glued back together, from the shared shelf to her own room. I found it there the next morning, its old seam darkened with tea, a crack that had held for thirty years. Monsoon rain had already blurred my chalk line into a pale smear across the boards.",
+    "question": "In the text, the cracked teapot most likely represents",
+    "options": [
+     "Kamala's wish to keep the entire bungalow for herself after the division",
+     "the value of the estate, which the factory hopes to purchase from Zoya",
+     "the sisters' bond, once broken and repaired, now strained by the rumor",
+     "their mother's strict rules, which both daughters still obey without question"
+    ],
+    "correct_letter": "C",
+    "explanation": "찻주전자는 자매가 어릴 때 깨뜨렸다가 함께 붙인 물건으로, 30년 동안 버텨 온 금이 강조된다. 소문을 들은 Kamala는 묻지 않고 이 주전자를 공용 선반에서 자기 방으로 옮기는데, 이는 공유하던 관계가 흔들리고 있음을 보여 준다. 따라서 주전자는 한 번 깨졌다 회복된 뒤 소문으로 다시 긴장된 자매의 유대를 상징하므로 C가 정답이다. A는 Kamala의 행동을 탐욕으로만 읽은 것이고, B와 D는 지문 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "wistful",
+    "tense"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-091",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-091",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 90,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Nasrin",
+      "Yaa"
+     ],
+     "nameCultures": [
+      "persian_central_asian",
+      "west_african"
+     ],
+     "locale": "Kingston",
+     "setting": "a fishing harbor",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "about whether a small kindness was a cover for something else",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a fishing harbor in Kingston; an elder and a restless apprentice about whether a small kindness was a cover for something else"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Although the old tale says an apprentice must mend nets for seven years before she sails, I had mended them for only three when Nasrin gave me one of my own. She had worked on it, the other fishers told me, every night of the hurricane season, by the lamp at the end of the Kingston pier. Its mesh was finer than any I had seen, too fine, I thought, for the deep water I longed to fish. I wondered whether she meant it as a gift or as a tether, a net good only for the shallows near her own boat. When I asked, she laughed and said that every net catches what its maker hopes for. I hung it on my door that night and lay awake listening to it sway. Pelicans dove all morning beyond the breakwater, rising with their throats full.",
+    "question": "In the text, the net that Nasrin makes most likely represents",
+    "options": [
+     "the seven years of training the speaker must finish before she may sail",
+     "the danger of the deep water, which Nasrin herself once barely survived",
+     "the speaker's restless wish to leave the harbor and fish far offshore",
+     "a kindness the speaker suspects may also be a way to keep her nearby"
+    ],
+    "correct_letter": "D",
+    "explanation": "Nasrin은 폭풍 철 내내 밤마다 그물을 짜 줄 만큼 정성을 들였지만, 화자는 그물코가 깊은 바다에는 너무 촘촘하다고 느낀다. 화자는 그것이 선물인지 얕은 물에 묶어 두는 끈인지 의심하고, Nasrin은 그물은 만든 이가 바라는 것을 잡는다고 답한다. 이를 연결하면 그물은 곁에 두려는 의도일지도 모르는 친절을 상징하므로 D가 정답이다. C는 화자의 소망과 관련은 있지만 그물이 아니라 화자 자신의 욕구이고, A와 B는 근거가 부족하다."
+   },
+   "notes": [],
+   "tone": [
+    "ambivalent",
+    "lyrical"
+   ],
+   "devices": [
+    "symbolism",
+    "fable framing",
+    "ambiguity"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-092",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-092",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 91,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Tui"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Auckland",
+     "setting": "a mountain bus stop",
+     "relationship": "a daughter caring for her mother",
+     "conflict": "when old loyalties collide with new ones",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a mountain bus stop in Auckland; a daughter caring for her mother when old loyalties collide with new ones"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Rain dripped from the tin roof of the bus shelter in the hills above Auckland as I buttoned my mother's coat to her chin. I am Tui, and for two years I have been the one who remembers her pills, her appointments, the names of her old friends. This morning she wanted the city bus to her church, where the women still save her a seat; I had promised my new manager I would be at the clinic by nine. Her hand on my arm was a small anchor, light but certain, and I felt the whole morning swing around it. When the first bus came, I let it pass. Mist slid down the slope and settled over the empty road.",
+    "question": "As used in the text, the phrase “a small anchor” most nearly suggests that the mother's touch",
+    "options": [
+     "drags Tui down into sadness and exhaustion",
+     "shows that the mother is frightened of the rain",
+     "holds Tui in place despite being gentle",
+     "steers Tui firmly toward her new job in the city"
+    ],
+    "correct_letter": "C",
+    "explanation": "닻은 배를 한자리에 붙잡아 두는 물건이며, 지문은 어머니의 손이 '가볍지만 확실하다'고 덧붙인다. 이어 화자는 아침 전체가 그 손을 중심으로 흔들린다고 느끼고, 결국 첫 버스를 보내 버린다. 따라서 이 구절은 부드럽지만 Tui를 붙잡아 두는 손길을 뜻하므로 C가 정답이다. A는 닻의 '가라앉음'만 떠올린 해석이고, D는 오히려 반대 방향이며, B는 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "conflicted"
+   ],
+   "devices": [
+    "metaphor",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-093",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-093",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 92,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Weiqi",
+      "Nicolas"
+     ],
+     "nameCultures": [
+      "chinese",
+      "latin_american"
+     ],
+     "locale": "Shanghai",
+     "setting": "a rural post office",
+     "relationship": "a seamstress and her only apprentice",
+     "conflict": "over an unspoken agreement to avoid one subject",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a rural post office in Shanghai; a seamstress and her only apprentice over an unspoken agreement to avoid one subject"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Paper dust and machine oil filled the back of the rural post office outside Shanghai, where Weiqi rented a corner to sew and Nicolas, her only apprentice, pressed seams beside her. Every few days a letter arrived from the tailoring school in Lima that had accepted him, and each time Weiqi set it face down under the pincushion. Neither of them spoke of it. Their silence was a seam sewn so neatly that no stitch showed on the outside, though both could feel its ridge whenever their talk drifted toward the future. Nicolas threaded her needles before she asked; Weiqi taught him the hardest collars first. At closing, the postmaster rolled down the shutter, and bicycles rattled off into the drizzle.",
+    "question": "As used in the text, the phrase “a seam sewn so neatly” most nearly suggests that their silence is",
+    "options": [
+     "fragile and likely to split open at any moment",
+     "comforting because they have nothing left to discuss",
+     "temporary, a habit they will soon both abandon",
+     "carefully kept, hiding a tension both still sense"
+    ],
+    "correct_letter": "D",
+    "explanation": "솔기가 너무 깔끔해 겉에서는 바늘땀이 보이지 않는다는 표현은 두 사람이 침묵을 정성껏 유지하고 있음을 뜻한다. 그러나 대화가 미래로 흐를 때마다 둘 다 그 솔기의 '두둑'을 느낀다는 문장은 감춰진 긴장이 있음을 보여 준다. 앞서 Weiqi가 편지를 엎어 두는 행동도 이를 뒷받침하므로 D가 정답이다. A는 긴장을 과장했고, B는 감춰진 갈등을 무시하며, C는 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "tense"
+   ],
+   "devices": [
+    "metaphor",
+    "sensory imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-095",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-095",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 94,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Jordan",
+      "Sadia"
+     ],
+     "nameCultures": [
+      "english",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Vermont",
+     "setting": "an old cinema projection booth",
+     "relationship": "a new teacher and a wary student",
+     "conflict": "while rehearsing for an important performance",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "an old cinema projection booth in Vermont; a new teacher and a wary student while rehearsing for an important performance"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Again, from the second verse, Jordan said, leaning against the old projector in the booth above the Vermont cinema where the drama club rehearsed. Sadia, who had transferred in October and spoken perhaps forty words to her new teacher since, lowered her script but did not lift her eyes. For weeks she had treated each of his suggestions as a door she might be locked behind. Tonight, though, she asked whether she could try the line slower, and when he nodded she did, and the booth went quiet in the way rooms go quiet when something has landed. Jordan wrote nothing down. He only reached over and switched off the work light so the stage below glowed through the little window. Dust turned slowly in the beam.",
+    "question": "As used in the text, the phrase “a door she might be locked behind” most nearly suggests that Sadia saw Jordan's suggestions as",
+    "options": [
+     "openings that would lead her toward greater success",
+     "possible traps that might confine her if she accepted",
+     "signs that Jordan wanted her to leave the drama club",
+     "chores she resented doing in the cramped little projection booth"
+    ],
+    "correct_letter": "B",
+    "explanation": "'갇힐 수도 있는 문'이라는 비유는 제안을 받아들이면 빠져나올 수 없게 될까 경계하는 마음을 나타낸다. Sadia가 전학 후 거의 말을 하지 않고 대본을 내려도 눈을 들지 않는다는 묘사가 이런 경계심을 뒷받침하며, 오늘 밤 스스로 제안을 하는 변화와 대비된다. 따라서 B가 정답이다. A는 '문'을 긍정적 기회로만 읽었고, C와 D는 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "hopeful",
+    "hushed"
+   ],
+   "devices": [
+    "metaphor",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-096",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-096",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 95,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Arisa",
+      "Jiayi"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "chinese"
+     ],
+     "locale": "Chiang Mai",
+     "setting": "a rented farmhouse",
+     "relationship": "a landlord's son and a tenant's daughter",
+     "conflict": "over whether to sell a shared inheritance",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a rented farmhouse in Chiang Mai; a landlord's son and a tenant's daughter over whether to sell a shared inheritance"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "We inherited the farmhouse outside Chiang Mai the way some people inherit a quarrel: Arisa, whose father had owned the land, and I, Jiayi, whose mother had rented it for twenty years and planted every mango tree on it. A will written in two hands left it to both of us. Arisa's brother had found a buyer; my aunt wanted the trees kept. We walked the rows each evening, neither of us mentioning the price. Every tree was a ledger, I wrote that year, its rings recording the debts our families owed each other and never paid. Once Arisa pressed a palm to a trunk my mother had grafted and said nothing for a long time. In the yard, the dogs slept in the red dust beneath the water jars.",
+    "question": "As used in the text, the phrase “Every tree was a ledger” most nearly suggests that the trees",
+    "options": [
+     "are worth a great deal of money to the waiting buyer",
+     "remind Jiayi of the account books her mother once kept",
+     "hold a record of what each family has given and owed",
+     "have grown too old to bear much fruit any longer"
+    ],
+    "correct_letter": "C",
+    "explanation": "장부는 주고받은 것을 기록하는 문서이며, 지문은 나무의 나이테가 두 집안이 서로 진 빚을 기록한다고 풀어 설명한다. 땅은 Arisa의 아버지 소유였지만 나무는 Jiayi의 어머니가 심었다는 앞부분의 설명이 서로에게 빚진 관계를 뒷받침한다. 따라서 C가 정답이다. A는 매수자 이야기에서 나온 금전적 해석이고, B는 '장부'를 문자 그대로 읽었으며, D는 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "bittersweet"
+   ],
+   "devices": [
+    "metaphor",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-097",
+   "task": "gen-lit40-medium-02-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-097",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 96,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Lorenzo",
+      "Callum"
+     ],
+     "nameCultures": [
+      "italian",
+      "irish_scottish"
+     ],
+     "locale": "the Cornish coast",
+     "setting": "a customs checkpoint",
+     "relationship": "a mother and a daughter planning a wedding",
+     "conflict": "over an old photograph",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a customs checkpoint in the Cornish coast; a mother and a daughter planning a wedding over an old photograph"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Declare anything? the customs officer, Lorenzo, asked as my mother and I reached the little checkpoint on the Cornish coast, where an old tale says brides once paid their toll in shells. My mother handed over a single photograph: her own wedding, the groom's half torn away. I had meant to show it to Callum before we chose the chapel, she told me. Lorenzo studied it and waved us through. On the cliff path she explained that the torn-away man had drowned off this coast before I was born, and that the man I called father had married her the next spring. The photograph was a locked chest washed ashore, and I could not decide whether I wanted the key. Gulls hung above the checkpoint roof, motionless against the wind.",
+    "question": "As used in the text, the phrase “a locked chest washed ashore” most nearly suggests that the photograph",
+    "options": [
+     "is a valuable object that customs must inspect",
+     "is a burden the mother wants to be rid of at last",
+     "contains a hidden treasure that her mother hopes to sell",
+     "holds a hidden past that has surfaced unexpectedly"
+    ],
+    "correct_letter": "D",
+    "explanation": "해변에 밀려온 잠긴 상자는 바다에 묻혀 있던 것이 뜻밖에 떠올랐지만 아직 열리지 않은 상태를 뜻한다. 어머니는 결혼 준비 중에 찢긴 사진을 꺼내고, 그 남자가 이 바다에서 익사했다는 숨겨진 과거를 처음 밝힌다. 화자가 열쇠를 원하는지 모르겠다고 한 것도 아직 다 알지 못한 비밀임을 보여 주므로 D가 정답이다. A와 C는 상자를 문자 그대로 귀중품으로 읽었고, B는 어머니가 사진을 버리려 한다는 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "mysterious",
+    "uneasy"
+   ],
+   "devices": [
+    "metaphor",
+    "fable framing"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-02-094",
+   "stage": "distractor",
+   "reasons": [
+    "오답 2개가 절대어(always/never/only 등)로 쉽게 소거됨"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-098",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-099",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-100",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

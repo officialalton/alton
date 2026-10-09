@@ -1,0 +1,169 @@
+[
+ {
+  "key": "ap_calculus_bc-m01-k0",
+  "cellId": "ap_calculus_bc-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "r=2/3, a1=81, S=81/(1/3)=243",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "243"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Geometric series sum with ratio from data; fits 10.2 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Terms 81,54,36,24 have constant ratio 2/3; sum 243 is correct and unique given exact values."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Graph y-axis ticks every 10 (max 83) and no labeled points, so values 81, 54, 36, 24 cannot be read exactly; a student could read 80 and 55 and get a different ratio. Key's unique defensibility depends on unreadable exact values. Points should be labeled or gridlines made fine enough."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 162, 195, 243/5 reflect distinct misconceptions and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, no calculator, clean numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Mathematically sound, but the graph does not allow exact reading of the plotted values (axis step 10, unlabeled points), which undermines the precision the key relies on. Fail on stimulus completeness; fixable by labeling the points."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read a_1=81 and the ratio 2/3 from the graph, then apply a/(1-r)=243. Only one representation change and about 3 short steps; the arithmetic is simple and the distractors (partial sum 195, wrong ratio, 1+r in the denominator) are plausible but the concept is direct formula application.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m02-k0",
+  "cellId": "ap_calculus_bc-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Carrying capacity is 40 (the dashed asymptote). A logistic population grows fastest at half the carrying capacity: P = 40/2 = 20.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "20"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Logistic max growth at K/2 from graph; fits 7.9 and reasonably 2.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "K=40 from dashed line; 20 is unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Data complete; y-axis step 4 is slightly odd but 40 and 20 are on ticks."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (P(0), K, K/4); all wrong options explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator needed, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item; key 20 is unique. Minor: unusual y-axis step of 4, and the 10 distractor is thin."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads carrying capacity K=40 from the dashed asymptote and recalls that logistic growth rate is maximized at P=K/2=20 (the inflection point). Single core concept, minimal computation, short stem. Distractors (initial value 7, 10, asymptote 40) address common misconceptions but the item is a direct recall/application of the logistic model property.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m03-k0",
+  "cellId": "ap_calculus_bc-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "On (2,4), x(t)=4 and y(t)=0 are both constant, so x'(t)=0 and y'(t)=0. In every other listed interval, at least one coordinate is changing.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "(2,4)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Labeled 9.5 (integrating vector-valued functions), but the task is identifying rest from slopes of position graphs (derivative/speed, topic 9.2/9.4). No integration is involved, so the dominant demand is not the target topic."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "(2,4) is the unique interval where both x and y are constant."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertex data is complete and consistent with the options. Collinear vertices at t=2 for x and t=4 for y are harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions (only x flat, only y flat, both moving), and the explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Fast, no calculator, standard format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean, with a unique key and good distractors. It fails scope because it is labeled topic 9.5 (integrating vector-valued functions) but only tests rest from the slopes of position graphs, which is a differentiation and speed topic."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step graph reading: find the interval where both x(t) and y(t) have zero slope. No computation, no integration, and a low-depth concept. The item also does not match topic 9.5.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ }
+]

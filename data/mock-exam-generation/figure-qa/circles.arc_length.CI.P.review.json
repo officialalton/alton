@@ -1,0 +1,23 @@
+{
+ "itemId": "circles.arc_length.CI.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T06:51:17Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "0d0873858d5800387cb0913b7b02da5cd1cc755c6ac513e3f893a92447717cd5",
+ "samples": [
+  "circles.arc_length.CI.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "원 그림(중심각 120° 호 강조, 반지름 9) 샘플 데스크톱 확인 + 갤러리(도·라디안·x°·지름 4 연산자): 호(빨강)·중심각 호·라벨이 겹침 없이 표시, 지름 문항은 중심각을 아래 반원에 두어 지름 라벨이 광선과 겹치지 않게 함. \\pi 는 스냅샷 한계(앱은 KaTeX)."
+}

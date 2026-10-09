@@ -1,0 +1,34 @@
+{
+ "run": "s1c",
+ "subject": "ap_calculus_ab",
+ "generatorCommit": "f5606151+dirty",
+ "gateVersion": "v2-code-first-final-2026-10-08",
+ "reviewerPromptHash": "57a7b8de43d7",
+ "difficultyPromptHash": "9bda2250d42c",
+ "models": {
+  "gen": "claude-sonnet-5-5",
+  "solve": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "difficulty": "claude-sonnet-5-5",
+  "spot": "claude-fable-5-1"
+ },
+ "policy": {
+  "firstCandidatesPerCell": 1,
+  "repairLimit": 1,
+  "codeChecksBeforeLlm": true,
+  "independentVerification": true,
+  "templateStop": {
+   "window": 4,
+   "maxSameReason": 2
+  },
+  "denominator": "first_candidates",
+  "manifestFile": "run_manifest.json"
+ },
+ "seeds": {
+  "first": [
+   0
+  ],
+  "note": "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED"
+ },
+ "frozenAt": "2026-10-08T18:43:09.349Z"
+}

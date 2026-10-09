@@ -1,0 +1,43 @@
+{
+ "itemId": "inference_margin_error.margin_interval.NL.P",
+ "generatedAt": "2026-10-07T05:02:01.125Z",
+ "codeHash": "15be9b63dcf2563832f377cbfcbd290054ed6c5130151e56646717485a9e0b07",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/number-line.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/inference_margin_error.margin_interval.NL.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/nl-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "inference_margin_error.margin_interval.NL.P.png",
+   "mobileFile": "inference_margin_error.margin_interval.NL.P.m375.png",
+   "archetypeId": "ime.margin_interval.NL.P.inverse",
+   "seed": 11,
+   "signature": "number_line",
+   "stimulus": "A random sample of shoppers was asked whether they bring their own bags. The number line shown gives the plausible interval for the percent of all shoppers at a downtown market who bring their own bags. The interval is the sample percent plus or minus the margin of error. A larger study keeps the same sample percent but doubles the margin of error. Answer the question using only the number line shown.",
+   "question": "What is the greatest plausible percent in the new interval?",
+   "options": [
+    "88",
+    "80",
+    "8",
+    "84"
+   ],
+   "correctIndex": 3,
+   "answer": "84",
+   "explanation": "(1) 수직선에서 구간의 두 끝을 읽는다: 72% ~ 80%. (2) 표본 % = 76%, 오차범위 = 4 이다. (3) 새 오차범위 = 2 × 4 = 8 이다. (4) 새 위 끝 = 76 + 8 = 84 이다. (5) 따라서 답은 84 이다. 따라서 정답은 84이다.",
+   "structuralIssues": []
+  }
+ ]
+}
