@@ -13,6 +13,8 @@ describe.each(files)("증거 파일 %s", (f) => {
     const by = new Map<string, ScreenEntry[]>();
     for (const e of ev.entries) { expect(validateScreenEntry(e, process.cwd())).toBeNull(); (by.get(e.candidate_key) ?? by.set(e.candidate_key, []).get(e.candidate_key)!).push(e); }
     for (const [k, es] of by) { const p = stock.get(k); if (p) expect(judgeScreenEntries(es, p, process.cwd(), { requireResult: ev.schema !== "ap-screen-evidence/v1", requireStimulus: ev.schema === "ap-screen-evidence/v3" })).toEqual({ ok: true }); }
-    expect(itemContentHash(stock.get([...by.keys()][0])!)).toBe(ev.entries.find((e) => e.candidate_key === [...by.keys()][0])!.content_hash);
+    // 보조 적재 배치(bc-topup 등)의 키는 items.json 에 없다 — 재고에 있는 첫 후보만 대조한다.
+    const firstInStock = [...by.keys()].find((k) => stock.has(k));
+    if (firstInStock) expect(itemContentHash(stock.get(firstInStock)!)).toBe(ev.entries.find((e) => e.candidate_key === firstInStock)!.content_hash);
   });
 });
