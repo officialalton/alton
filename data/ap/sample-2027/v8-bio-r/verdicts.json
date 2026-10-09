@@ -1,0 +1,73 @@
+[
+ {
+  "key": "ap_biology-f01-r0-k0",
+  "cellId": "ap_biology-f01-r0",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Rate rises from 14.2 µmol/min at pH 5 to 17.6 µmol/min at pH 7, then falls to 7.7 µmol/min at pH 9. pH 7 has the greatest initial rate.",
+     "final_answer": "Rate increases from pH 5 (14.2) to pH 7 (17.6), then decreases sharply at pH 9 (7.7). pH 7 has the greatest rate.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(17.6-7.7)/7.7 x 100 = 9.9/7.7 x 100 ≈ 128.6%",
+     "final_answer": "About a 129% increase (128.6%)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "pH 7: 15.58-19.62; pH 5: 12.48-15.92. These ranges overlap (15.58-15.92), so the difference is not statistically supported.",
+     "final_answer": "Not statistically supported, because the ±2SE ranges overlap.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "At pH 9, the high pH changes the ionization of R groups. This disrupts the hydrogen and ionic bonds that hold the enzyme's tertiary structure, so the active site changes shape (partial denaturation). Fewer enzyme-substrate complexes form, so the rate drops from 17.6 to 7.7 µmol/min. The pH 9 range (6.72-8.68) does not overlap the pH 7 range (15.58-19.62), so this decrease is supported.",
+     "final_answer": "pH 9 is farther from the amylase optimum (about pH 7). The changed ionization of amino acid R groups disrupts the bonds that hold the active site's shape, which reduces substrate binding and catalysis. As a result, the rate falls from 17.6 to 7.7 µmol/min, and the ±2SE ranges do not overlap.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Four 1-point parts, matching the short FRQ grain. Part A (4.B) is the target data-description skill. Parts B, C and D assess 5.A, 5.B and 6.C, which is acceptable per part. Keys are unique and defensible, and the rubric rows list common errors. The table is complete, with means, ±2SE and n. A calculator is justified by the percent change calculation.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A directly assesses 4.B. The other parts use their own skills and stay within topic 3.2 and the data-analysis practices."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The values (128.6%, overlapping ranges of 15.58 to 19.62 and 12.48 to 15.92) are consistent. The rubric accepts alternative wording. Part D is scored as a single explanation."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete (columns, rows, n, units in the description) and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "As an FRQ, the rubric lists realistic common errors (dividing by the new value, evidence without reasoning, attributing the drop to substrate depletion)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 10 minutes, light reading, and a calculator is appropriate for the percent change."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts on a small table: describe the trend, a one-step percent change, an error-bar (2SE) overlap judgment, and a conceptual explanation of pH effects on enzyme structure. Part C is the most demanding because the intervals overlap only slightly (15.58-19.62 vs 12.48-15.92), so students must reason carefully about the overlap. The content is standard for AP Biology and typical of FRQ-style data analysis, and the reading and arithmetic loads are modest and fair.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ }
+]

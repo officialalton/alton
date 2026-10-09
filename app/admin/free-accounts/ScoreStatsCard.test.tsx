@@ -6,7 +6,7 @@ import type { AttemptFacts } from "@/lib/mock-exam/score-aggregate";
 
 vi.mock("@/lib/mock-exam/score-estimate", async (orig) => ({ ...(await orig<typeof import("@/lib/mock-exam/score-estimate")>()) }));
 
-const sec = (total: number, correct: number | null) => ({ total, correct, complete: correct !== null, route: "higher" as const });
+const sec = (total: number, correct: number | null) => ({ total, correct, complete: correct !== null, route: "higher" as const, answered: total });
 const f = (id: string, over: Partial<AttemptFacts> = {}): AttemptFacts => ({
   attemptId: id, examName: "S", track: "sat", apSubject: null, format: "mst", status: "graded", startedAt: null,
   gradedAt: `2026-10-0${id}T00:00:00Z`, attemptSeq: 1, sections: { rw: sec(54, 40), math: sec(44, 30) }, ...over,

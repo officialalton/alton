@@ -149,3 +149,23 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 ## 원문 수식 점검은 토큰 단위다 (2026-10-09)
 - `lib/ap-exam/raw-math-scan.ts`: 렌더된 DOM 의 텍스트 노드에서 TeX 명령·`^{`·산문 부등호 `<=`·평문 거듭제곱·렌더 안 된 `$…$`·`\uXXXX` 를 찾는다. KaTeX 출력, `<code>`/`<pre>`/`<kbd>`, 이스케이프된 달러(`\$`), 통화 표기, `[data-raw-math-ok]` 영역은 제외(양성·음성 픽스처 테스트). 자동 화면 점검 증거 v3 는 제출 전 문제 영역(`stimulus_no_raw_tex`)과 제출 후 해설(`result_no_raw_tex`) 모두 필수.
 - 표 칸의 평문 수식(`m^2`, `t>=0`, `e^(-0.3 t)`)은 표 렌더가 위첨자·≤≥ 로 그린다. 본문과 겹치는 자료 텍스트는 숨긴다(`stimulus-display.ts`).
+
+## 테스트 계정 제외 감사 (2026-10-09)
+교차 학생 집계 경로별 상태(테스트 계정 = `students.is_test_account`):
+| 경로 | 상태 |
+|---|---|
+| Free Accounts 목록·분석·전환 퍼널(`admin_free_accounts_list/analytics`) | 제외(기본 `p_include_test=false`, 제외 건수 `testAccountsExcluded` 별도 표기) — `app/admin/free-accounts.integration.test.ts` |
+| 문항 노출 횟수 `mock_exam_problem_exposure_counts` | 제외(407) |
+| 난이도 변경 영향 `problem_difficulty_set_impact`(시작된 응시 수) | 제외(407) |
+| 관리자 응시 내역(목록) | 포함하되 "테스트" 배지 |
+| 오류 신고 영향 `problem_error_report_detail`(채점/진행 응시 수) | **전체 포함 — 의도**: 재채점 영향 범위는 테스트 계정 응시도 재채점되므로 전부 세야 한다(학습 통계 아님) |
+| 학생 단위(학습 요약·약점·통계·학부모/상담사 보기: `student_stats_aggregate`, `mock_exam_weakness_summary`, `free_member_learning_summary`, `admin_student_mock_attempt_facts` …) | 한 학생만 읽는 경로라 교차 집계 아님 — 해당 없음 |
+| 상담 전환(`register_consult_interest`·상담 요청) | 쓰기 경로, 집계는 Free Accounts 분석 scope 안에서만 — 제외됨 |
+교차 학생으로 응시를 세는 다른 경로는 찾지 못했다(DB 함수 전수 + 앱 코드 `mock_exam_attempts` 조회 전수 확인).
+
+## 결함·활성화 차단: SAT 고정형(비 MST·비 AP) 서버 시간 제한 미구현 (2026-10-09, 마이그레이션 `20262100000410`)
+- **결함**: 고정형 SAT 응시(`format='fixed'`)는 시간 제한이 **클라이언트 타이머뿐**이다. 서버(`mock_exam_save_answer`·`mock_exam_submit`)는 만료 뒤 저장·제출을 막지 않는다(MST 는 모듈 시계, AP 는 406 서버 시계가 있음). "Time is up… Answers can no longer be changed." 문구는 이 경로에서 서버 강제가 아니다.
+- **현재 영향 없음**: 비프로덕션 점검(2026-10-09)에서 공개된 고정형 SAT 세트는 0개(`Test Set 1` draft 만), MST 13개·ap_fixed 2개 공개. 비활성 경로다.
+- **활성화 차단 가드(410)**: 비 AP 고정형 세트는 **공개 불가**(`mock_exam_sets` 트리거)이고 이미 공개돼 있어도 **새 응시 시작 불가**(`mock_exam_attempts` 트리거). 관리자 화면에 보이는 오류는 한·영 병기. MST·AP 는 영향 없음. 레거시 테스트 픽스처만 세션 설정 `alton.allow_fixed_sat_without_time_limit=on`(vitest 통합 설정)으로 우회한다.
+- **해제 조건**: 고정형에 서버 기준 섹션 시계(406 과 같은 방식)와 만료 뒤 저장 거절·마감 settle 을 구현하고 테스트한 뒤, 410 의 트리거 2개·함수 2개를 제거한다(되돌리기 SQL 은 파일 머리 주석). 그 전까지 어떤 화면·문서도 클라이언트 타이머를 "강제되는 시간 제한"으로 표현하지 않는다.
+- 회귀 테스트: `lib/mock-exam/fixed-sat-guard.integration.test.ts`.

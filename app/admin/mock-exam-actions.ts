@@ -52,6 +52,14 @@ export type MockExamSetSummary = {
   publishedAt: string | null;
   /** 2026-10-05 무료 회원 S2 — free=무료 회원에게도 공개(공개+문항 구성 완료 세트만, DB 트리거가 강제). */
   accessTier: "free" | "tutoring";
+  /** AP 세트(마이그레이션 401): exam_program='ap' 이면 R&W/Math 열 대신 섹션 구성·문항 수로 보인다. 미설정은 SAT. */
+  examProgram?: "sat" | "ap";
+  apSubject?: string | null;
+  apLabel?: "full_practice" | "mc_practice" | "frq_practice" | null;
+  sectionLayout?: { sections: { key: string; kind: "mc" | "frq"; label: string; minutes: number; count: number; calculator: string }[] } | null;
+  /** 전체 문항 수와 섹션별 문항 수(DB 집계 한 번). */
+  itemTotal?: number;
+  sectionCounts?: Record<string, number>;
 };
 
 /** includeArchived=false(기본, "생성/검토/공개" 서브탭용)면 보관된 세트를 뺀다.
@@ -63,7 +71,7 @@ export async function listMockExamSets(
   const db = createAdminClient();
   let query = db
     .from("mock_exam_sets")
-    .select("id, set_group_id, version_no, name, difficulty_tier, status, format, readiness_status, readiness_report, created_at, published_at, access_tier")
+    .select("id, set_group_id, version_no, name, difficulty_tier, status, format, readiness_status, readiness_report, created_at, published_at, access_tier, exam_program, ap_subject, ap_label, section_layout")
     .order("created_at", { ascending: false });
   if (opts.archivedOnly) query = query.not("archived_at", "is", null);
   else if (!opts.includeArchived) query = query.is("archived_at", null);
@@ -71,11 +79,11 @@ export async function listMockExamSets(
   if (error) throw new Error(error.message);
 
   // 문항 수는 DB에서 집계한다 — 전체 행을 읽어 세면 PostgREST 기본 1,000행 상한에 걸려 최신 세트가 0으로 보인다.
-  const { data: itemCounts, error: countsErr } = await db.rpc("mock_exam_set_item_counts");
+  const { data: itemCounts, error: countsErr } = await db.rpc("mock_exam_set_item_totals");
   if (countsErr) throw new Error(countsErr.message);
-  const countsBySet = new Map<string, { rw: number; math: number }>();
-  for (const row of (itemCounts ?? []) as { exam_set_id: string; rw_count: number; math_count: number }[]) {
-    countsBySet.set(row.exam_set_id, { rw: row.rw_count, math: row.math_count });
+  const countsBySet = new Map<string, { total: number; sections: Record<string, number> }>();
+  for (const row of (itemCounts ?? []) as { exam_set_id: string; total_count: number; section_counts: Record<string, number> }[]) {
+    countsBySet.set(row.exam_set_id, { total: row.total_count, sections: row.section_counts ?? {} });
   }
 
   return (sets ?? []).map((s) => ({
@@ -85,8 +93,14 @@ export async function listMockExamSets(
     name: s.name,
     difficultyTier: s.difficulty_tier,
     status: s.status,
-    rwCount: countsBySet.get(s.id)?.rw ?? 0,
-    mathCount: countsBySet.get(s.id)?.math ?? 0,
+    rwCount: countsBySet.get(s.id)?.sections.rw ?? 0,
+    mathCount: countsBySet.get(s.id)?.sections.math ?? 0,
+    itemTotal: countsBySet.get(s.id)?.total ?? 0,
+    sectionCounts: countsBySet.get(s.id)?.sections ?? {},
+    examProgram: (s.exam_program === "ap" ? "ap" : "sat") as "sat" | "ap",
+    apSubject: (s.ap_subject as string | null) ?? null,
+    apLabel: (s.ap_label as MockExamSetSummary["apLabel"]) ?? null,
+    sectionLayout: (s.section_layout as MockExamSetSummary["sectionLayout"]) ?? null,
     createdAt: s.created_at,
     publishedAt: s.published_at,
     format: (s.format ?? "fixed") as "fixed" | "mst",
@@ -712,4 +726,37 @@ export async function listMockExamRoutingPoliciesAction(): Promise<MockExamRouti
     note: r.note,
     createdAt: r.created_at,
   }));
+}
+
+// ── AP 문항 풀(마이그레이션 421) — 과목 전환기. 과목 목록 1회 + 과목 선택마다 RPC 1회. ──
+export type ApPoolSubject = { subject: string; stock: number; converted: number };
+export type ApPoolTopicRow = {
+  unit: string; keyword_code: string; kind: string; topic_label: string | null;
+  stock: number; candidate: number; mock_exam: number; lesson: number; review_env: number; launch: number;
+  assigned_published: number; assigned_draft: number;
+};
+export type ApPoolBreakdownRow = { key: string; stock: number; mock_exam: number; lesson: number };
+export type ApPoolSummary = {
+  subject: string;
+  topics: ApPoolTopicRow[];
+  bySkill: ApPoolBreakdownRow[];
+  byStructure: ApPoolBreakdownRow[];
+  byCalculator: ApPoolBreakdownRow[];
+  purposes: { kind: string; purpose: string; target: number; converted: number; inReviewEnv: number; launched: number; shortfall: number; unallocatedReady: number }[];
+  shortfalls: { dimension: string; kind: string; unitCode: string | null; skillCategory: string | null; keywordCode: string | null; calculatorUse: string | null; representation: string | null; target: number; achieved: number; shortfall: number }[];
+  totals: { stock: number; mockExam: number; lesson: number; assignedPublished: number; assignedDraft: number };
+};
+
+export async function listMockExamApPoolSubjectsAction(): Promise<ApPoolSubject[]> {
+  await requireAdmin();
+  const { data, error } = await createAdminClient().rpc("mock_exam_ap_pool_subjects");
+  if (error) throw new Error(error.message);
+  return (data ?? []) as ApPoolSubject[];
+}
+
+export async function getMockExamApPoolAction(subject: string): Promise<ApPoolSummary> {
+  await requireAdmin();
+  const { data, error } = await createAdminClient().rpc("mock_exam_ap_pool", { p_subject: subject });
+  if (error) throw new Error(error.message);
+  return data as ApPoolSummary;
 }

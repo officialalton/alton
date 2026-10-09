@@ -1,10 +1,11 @@
 // 모의고사 점수 집계 단일 모듈(순수 함수). 학생·학부모·컨설턴트·관리자 화면과 Free Accounts가 모두 이 모듈을 쓴다.
 // 규칙: graded 응시만 / 총점은 같은 응시의 R&W·Math가 둘 다 있을 때만 / 응시 간 섹션 합성 금지 /
 // 재응시는 별개 레코드 / 기록 없음은 0이 아니라 null / 모든 요약에 표본 수. 추정 방식은 score-estimate.ts 그대로.
-import { estimateScore, type ScoreRange, type ScoreRoute } from "./score-estimate";
+import { estimateScoreWithPolicy, type ScoreRange, type ScoreRoute } from "./score-estimate";
 
 export type ExamTrack = "sat" | "ap";
-export type SectionFacts = { total: number; correct: number | null; complete: boolean; route: ScoreRoute | null };
+/** answered = 출제된 문항 중 유효 응답(null·공백 제외)을 낸 수. 모르면 undefined — 범위 정책(80%)은 모르는 값을 충분하다고 보지 않는다. */
+export type SectionFacts = { total: number; correct: number | null; complete: boolean; route: ScoreRoute | null; answered?: number | null };
 export type AttemptFacts = {
   attemptId: string;
   examName: string;
@@ -17,7 +18,7 @@ export type AttemptFacts = {
   attemptSeq: number;
   sections: { rw: SectionFacts; math: SectionFacts };
 };
-export type EstimateReason = null | "not_graded" | "no_estimate_fixed" | "no_estimate_ap" | "section_incomplete";
+export type EstimateReason = null | "not_graded" | "no_estimate_fixed" | "no_estimate_ap" | "section_incomplete" | "insufficient_responses";
 export type AttemptEstimate = { rw: ScoreRange | null; math: ScoreRange | null; total: ScoreRange | null; reason: EstimateReason };
 export type Metric = "total" | "rw" | "math";
 export type ScorePoint = { attemptId: string; at: string; attemptSeq: number; partial: false; total: ScoreRange | null; rw: ScoreRange | null; math: ScoreRange | null };
@@ -43,11 +44,12 @@ export function estimateAttempt(f: AttemptFacts): AttemptEstimate {
   if (f.format !== "mst") return { ...none, reason: "no_estimate_fixed" };
   const { rw, math } = f.sections;
   if (!rw.complete || !math.complete) return { ...none, reason: "section_incomplete" };
-  const e = estimateScore(
-    [{ section: "rw", total: rw.total, correct: rw.correct }, { section: "math", total: math.total, correct: math.correct }],
+  const out = estimateScoreWithPolicy(
+    [{ section: "rw", total: rw.total, correct: rw.correct, answered: rw.answered }, { section: "math", total: math.total, correct: math.correct, answered: math.answered }],
     { rw: rw.route, math: math.route },
   );
-  return e ? { rw: e.rw, math: e.math, total: e.total, reason: null } : { ...none, reason: "section_incomplete" };
+  const e = out.estimate;
+  return e ? { rw: e.rw, math: e.math, total: e.total, reason: null } : { ...none, reason: out.reason === "insufficient_responses" ? "insufficient_responses" : "section_incomplete" };
 }
 
 /** 점수 포인트(응시 단위, 완료 시각 오름차순). 추정이 없는 응시는 제외된다. */

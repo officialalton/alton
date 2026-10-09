@@ -6,7 +6,7 @@ import { trackEvent } from "@/lib/analytics/track";
 import { dedupeStem } from "@/lib/problem-text-guards";
 import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 import { computeMockExamReport, weakSkills, type BreakdownRow } from "@/lib/mock-exam/report";
-import { SCORE_DISCLAIMER_EN, type ScoreRange } from "@/lib/mock-exam/score-estimate";
+import { INSUFFICIENT_RESPONSES_TEXT, SCORE_DISCLAIMER_EN, type ScoreRange } from "@/lib/mock-exam/score-estimate";
 import { buildKeyInsights } from "@/lib/mock-exam/insights";
 import { attemptLabel } from "@/lib/mock-exam/open-list";
 import { satDomainDisplayName, satSkillDisplayName } from "@/lib/sat-keywords/taxonomy";
@@ -529,10 +529,19 @@ export default function MockExamResultView({
             </div>
           )}
 
+          {!scoreEstimate && attempt.format === "mst" && attempt.scoreEstimateNote === "insufficient_responses" && (
+            <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-score-estimate-insufficient">
+              <h3 className="mb-1 text-[13px] font-bold">Estimated Score Range</h3>
+              <p className="mb-1 text-[11.5px] font-semibold text-grey-500">Internal estimate — accuracy not verified</p>
+              <p className="text-[13px] font-semibold text-grey-600">{INSUFFICIENT_RESPONSES_TEXT}</p>
+              <p className="mt-2 text-[11.5px] text-grey-400">Your results and the right/wrong analysis below are still available. {SCORE_DISCLAIMER_EN}</p>
+            </div>
+          )}
+
           {scoreEstimate && (
             <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-score-estimate">
               <h3 className="mb-1 text-[13px] font-bold">Estimated Score Range</h3>
-              <p className="mb-3 text-[11.5px] font-semibold text-grey-500">Internal estimate — not an official College Board score</p>
+              <p className="mb-3 text-[11.5px] font-semibold text-grey-500">Internal estimate — accuracy not verified; not an official College Board score</p>
               <div className="flex flex-col gap-3">
                 <ScoreRangeBar label="R&W" range={scoreEstimate.rw} min={200} max={800} />
                 <ScoreRangeBar label="Math" range={scoreEstimate.math} min={200} max={800} />

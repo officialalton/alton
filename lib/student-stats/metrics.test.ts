@@ -50,7 +50,7 @@ describe("computeSkillStats", () => {
 describe("computeMockStats", () => {
   const raw: RawStatsAggregate["mock"] = [
     { attemptId: "a1", gradedAt: "2026-09-01T00:00:00Z", format: "mst", rwRoute: "higher", mathRoute: "lower",
-      sections: [{ section: "rw", total: 6, correct: 5 }, { section: "math", total: 4, correct: 2 }],
+      sections: [{ section: "rw", total: 6, correct: 5, answered: 6 }, { section: "math", total: 4, correct: 2, answered: 4 }],
       domains: [{ domain: "algebra", total: 4, correct: 2 }, { domain: "rw_craft_structure", total: 6, correct: 5 }] },
     { attemptId: "a2", gradedAt: "2026-09-10T00:00:00Z", format: "fixed", rwRoute: null, mathRoute: null,
       sections: [{ section: "rw", total: 10, correct: 7 }, { section: "math", total: 10, correct: 5 }], domains: [] },

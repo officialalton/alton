@@ -109,7 +109,7 @@ export type RawStatsAggregate = {
     format: string;
     rwRoute: "higher" | "lower" | null;
     mathRoute: "higher" | "lower" | null;
-    sections: { section: "rw" | "math"; total: number; correct: number }[];
+    sections: { section: "rw" | "math"; total: number; correct: number; answered?: number }[];
     domains: { domain: string; total: number; correct: number }[];
   }[];
   homework: {

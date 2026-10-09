@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, lazy, useEffect, useState, useTransition } from "react";
+import { Fragment, Suspense, lazy, useEffect, useState, useTransition } from "react";
 import {
   assembleMockExamSet,
   archiveMockExamSetAction,
@@ -11,6 +11,8 @@ import {
   publishMockExamSet,
   listAllMockExamAttemptsAction,
   getMockExamPoolSummaryAction,
+  listMockExamApPoolSubjectsAction,
+  type ApPoolSubject,
   listMockExamRoutingPoliciesAction,
   type MockExamRoutingPolicyRow,
   type MockExamPoolRow,
@@ -26,11 +28,14 @@ import { domainShort, skillLabel } from "@/lib/problem-taxonomy";
 import MockExamSetContentViewer from "@/app/components/MockExamSetContentViewer";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
+import { SORT_LABEL, apSectionLines, apSetLabelText, apTargetCount, groupSets, latestVersionIds, programKey, programName, setCountsText, type SetSort } from "@/lib/mock-exam/set-list-view";
 
 // 대체 문항 필요 표시는 문제 오류 신고 기능(별도 액션 모듈) — 기존 화면 첫 렌더에 영향이 없도록 lazy 로 불러온다.
 const ReplacementNeedsBlock = lazy(() => import("./ReplacementNeeds").then((m) => ({ default: m.ReplacementNeedsBlock })));
 // hard 난이도 점검(2026-10-01) — 별도 서브탭이라 lazy 로 불러온다.
 const DifficultyReviewPanel = lazy(() => import("./DifficultyReviewPanel"));
+// AP 과목별 풀(2026-10-08) — 과목을 고를 때만 불러온다.
+const ApPoolView = lazy(() => import("./ApPoolView"));
 const ReplacementBadge = lazy(() => import("./ReplacementNeeds").then((m) => ({ default: m.ReplacementBadge })));
 
 const TIER_LABEL: Record<DifficultyTier, string> = { foundation: "기본", standard: "표준", advanced: "상위" };
@@ -85,6 +90,45 @@ export default function MockExamSetsPanel({ initialSets }: { initialSets: MockEx
  * 배정은 서로 다른 문항 수 — 여러 세트에 있어도 1회, 공개·초안 세트에 모두 있으면 공개로만 센다, 보관 세트는 제외.
  */
 function PoolTab() {
+  const [program, setProgram] = useState<string>("sat"); // "sat"(기본) | AP 과목 코드
+  const [apSubjects, setApSubjects] = useState<ApPoolSubject[]>([]);
+  useEffect(() => {
+    let cancelled = false;
+    listMockExamApPoolSubjectsAction()
+      .then((r) => { if (!cancelled) setApSubjects(r); })
+      .catch(() => { /* 과목 목록 실패 시 SAT 만 보인다 */ });
+    return () => { cancelled = true; };
+  }, []);
+  const switcher = (
+    <div className="mt-2 flex flex-wrap gap-1.5" data-testid="pool-program-switcher">
+      {[{ key: "sat", label: "SAT" }, ...apSubjects.map((a) => ({ key: a.subject, label: programName(a.subject) }))].map((o) => (
+        <button
+          key={o.key}
+          type="button"
+          onClick={() => setProgram(o.key)}
+          aria-pressed={program === o.key}
+          className={"rounded-full border px-2.5 py-0.5 text-[12px] font-bold " + (program === o.key ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600")}
+        >
+          {o.label}
+        </button>
+      ))}
+    </div>
+  );
+  if (program !== "sat") {
+    return (
+      <section className="rounded-xl border border-grey-200 bg-white p-5" data-testid="mock-pool-summary-ap">
+        <h2 className="text-sm font-semibold text-ink">모의고사 문항 풀</h2>
+        {switcher}
+        <Suspense fallback={<p className="mt-2 text-xs text-grey-500">불러오는 중...</p>}>
+          <ApPoolView key={program} subject={program} subjectName={programName(program)} />
+        </Suspense>
+      </section>
+    );
+  }
+  return <SatPool switcher={switcher} />;
+}
+
+function SatPool({ switcher }: { switcher: React.ReactNode }) {
   const [rows, setRows] = useState<MockExamPoolRow[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
@@ -105,6 +149,7 @@ function PoolTab() {
   return (
     <section className="rounded-xl border border-grey-200 bg-white p-5" data-testid="mock-pool-summary">
       <h2 className="text-sm font-semibold text-ink">모의고사 문항 풀</h2>
+      {switcher}
       {rows && (
         <p className="mt-1 text-xs text-grey-500" data-testid="mock-pool-header">
           풀 {t.pool} · 배정 {t.pub + t.draft} · 남음 {remaining} · 일반용(제외) {t.general}
@@ -432,40 +477,116 @@ function readinessSummary(r: MstReadinessReport): string {
 }
 
 function SetListTable({ sets, emptyLabel }: { sets: MockExamSetSummary[]; emptyLabel: string }) {
+  const [filter, setFilter] = useState<string>("all");
+  const [sort, setSort] = useState<SetSort>("latest");
+  const programs = Array.from(new Set(sets.map(programKey))).sort((a, b) => (a === "sat" ? -1 : b === "sat" ? 1 : programName(a).localeCompare(programName(b))));
+  const shown = filter === "all" ? sets : sets.filter((x) => programKey(x) === filter);
+  const groups = groupSets(shown, sort);
+  const latest = latestVersionIds(sets);
+  const anyAp = shown.some((x) => x.examProgram === "ap");
+  const apOnly = shown.length > 0 && shown.every((x) => x.examProgram === "ap");
+  const chip = (k: string, label: string) => (
+    <button
+      key={k}
+      type="button"
+      onClick={() => setFilter(k)}
+      aria-pressed={filter === k}
+      className={"rounded-full border px-2.5 py-0.5 text-[12px] font-bold " + (filter === k ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600")}
+    >
+      {label}
+    </button>
+  );
   return (
-    <section className="rounded-xl border border-grey-200 bg-white p-5">
-      <h2 className="text-sm font-semibold text-ink">세트 목록</h2>
+    <section className="rounded-xl border border-grey-200 bg-white p-5" data-testid="set-list">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h2 className="text-sm font-semibold text-ink">세트 목록</h2>
+        <label className="flex items-center gap-1 text-[12px] text-grey-500">
+          정렬
+          <select value={sort} onChange={(e) => setSort(e.target.value as SetSort)} className="rounded border border-grey-300 px-1.5 py-0.5 text-[12px] text-ink">
+            {(Object.keys(SORT_LABEL) as SetSort[]).map((k) => (
+              <option key={k} value={k}>{SORT_LABEL[k]}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+      {programs.length > 1 && (
+        <div className="mt-2 flex flex-wrap gap-1.5" data-testid="set-program-filter">
+          {chip("all", `전체 ${sets.length}`)}
+          {programs.map((k) => chip(k, `${programName(k)} ${sets.filter((x) => programKey(x) === k).length}`))}
+        </div>
+      )}
       <table className="mt-3 w-full text-left text-sm">
         <thead>
           <tr className="text-xs text-grey-500">
-            <th className="py-1">이름</th>
+            <th className="py-1">이름 · 버전</th>
             <th>등급</th>
             <th>상태</th>
-            <th>R&W</th>
-            <th>Math</th>
+            {apOnly ? (
+              <th colSpan={2}>구성 · 문항 수</th>
+            ) : (
+              <>
+                <th>R&W{anyAp ? " / AP 구성" : ""}</th>
+                <th>Math</th>
+              </>
+            )}
           </tr>
         </thead>
         <tbody>
-          {sets.map((s) => (
-            <tr key={s.id} className="border-t border-grey-100">
-              <td className="py-2">
-                {s.name} <span className="text-xs text-grey-400">v{s.versionNo}</span>
-                {s.status !== "archived" && (
-                  <Suspense fallback={null}>
-                    <ReplacementBadge examSetId={s.id} />
-                  </Suspense>
-                )}
-              </td>
-              <td>{TIER_LABEL[s.difficultyTier]}</td>
-              <td>
-                <span className={s.status === "published" ? "text-green" : s.status === "draft" ? "text-grey-500" : "text-grey-300"}>
-                  {STATUS_LABEL[s.status]}
-                </span>
-                <ReadinessBadge set={s} />
-              </td>
-              <td>{s.rwCount}</td>
-              <td>{s.mathCount}</td>
-            </tr>
+          {groups.map((g) => (
+            <Fragment key={g.key}>
+              {(programs.length > 1 || g.key !== "sat") && (
+                <tr data-testid={`set-group-${g.key}`}>
+                  <td colSpan={5} className="bg-grey-50 px-2 py-1 text-[12px] font-bold text-grey-600">
+                    {g.name} <span className="font-normal text-grey-400">({g.sets.length})</span>
+                  </td>
+                </tr>
+              )}
+              {g.sets.map((s) => {
+                const isDraft = s.status === "draft";
+                const isAp = s.examProgram === "ap";
+                return (
+                  <tr key={s.id} className={"border-t border-grey-100 " + (isDraft ? "text-grey-500" : "")} data-status={s.status} data-testid="set-row">
+                    <td className="py-2">
+                      {s.name}{" "}
+                      <span className="text-xs text-grey-500" title={`계열 ${s.setGroupId.slice(0, 8)}`}>
+                        v{s.versionNo}{latest.has(s.id) ? " · 최신" : " · 이전"}
+                      </span>
+                      <span className="ml-1 text-[11px] text-grey-400">{fmtDate(s.createdAt)}</span>
+                      {isAp && (
+                        <span className="ml-2 rounded bg-grey-100 px-1.5 py-0.5 text-[11px] font-bold text-grey-600" data-testid="ap-set-label">
+                          {programName(programKey(s))} · {apSetLabelText(s)}
+                        </span>
+                      )}
+                      {s.status !== "archived" && (
+                        <Suspense fallback={null}>
+                          <ReplacementBadge examSetId={s.id} />
+                        </Suspense>
+                      )}
+                    </td>
+                    <td>{TIER_LABEL[s.difficultyTier]}</td>
+                    <td>
+                      <span className={s.status === "published" ? "text-green" : isDraft ? "rounded border border-dashed border-grey-300 px-1.5 py-0.5 text-[11px] text-grey-500" : "text-grey-300"}>
+                        {STATUS_LABEL[s.status]}
+                      </span>
+                      <ReadinessBadge set={s} />
+                    </td>
+                    {isAp ? (
+                      <td colSpan={2} className="py-2 text-[12px] text-grey-600" data-testid="ap-set-structure">
+                        <span className="font-bold">문항 {s.itemTotal ?? 0}/{apTargetCount(s)}</span>
+                        {apSectionLines(s).map((l) => (
+                          <span key={l} className="block text-grey-500">{l}</span>
+                        ))}
+                      </td>
+                    ) : (
+                      <>
+                        <td>{s.rwCount}</td>
+                        <td>{s.mathCount}</td>
+                      </>
+                    )}
+                  </tr>
+                );
+              })}
+            </Fragment>
           ))}
           {sets.length === 0 ? (
             <tr>
@@ -555,7 +676,7 @@ function ReviewTab() {
                   selectedId === s.id ? "bg-ink text-white" : "bg-grey-100 text-ink hover:bg-grey-200"
                 }`}
               >
-                {s.name} v{s.versionNo} · {TIER_LABEL[s.difficultyTier]} · R&W {s.rwCount} · Math {s.mathCount}
+                {s.name} v{s.versionNo} · {TIER_LABEL[s.difficultyTier]} · {setCountsText(s)}
               </button>
             </li>
           ))}
@@ -712,7 +833,7 @@ function PublishTab() {
                   selectedId === s.id ? "bg-ink text-white" : "bg-grey-100 text-ink hover:bg-grey-200"
                 }`}
               >
-                {s.name} v{s.versionNo} · {TIER_LABEL[s.difficultyTier]} · R&W {s.rwCount} · Math {s.mathCount}
+                {s.name} v{s.versionNo} · {TIER_LABEL[s.difficultyTier]} · {setCountsText(s)}
                 {s.accessTier === "free" && (
                   <span className="ml-2 rounded bg-green-bg px-1.5 py-0.5 text-[10.5px] font-bold text-green" data-testid="access-tier-badge">
                     무료 공개
@@ -819,7 +940,7 @@ function ArchiveTab() {
                   selectedId === s.id ? "bg-ink text-white" : "bg-grey-100 text-ink hover:bg-grey-200"
                 }`}
               >
-                {s.name} v{s.versionNo} · {TIER_LABEL[s.difficultyTier]} · R&W {s.rwCount} · Math {s.mathCount}
+                {s.name} v{s.versionNo} · {TIER_LABEL[s.difficultyTier]} · {setCountsText(s)}
               </button>
             </li>
           ))}

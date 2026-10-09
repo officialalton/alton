@@ -19,5 +19,15 @@ export function bioDataShortDesignChecks(p: Json): ArchIssue[] {
   // 표 해석 파트: 값을 인용하게 한다(단순 읽기 개선), 통계 파트: 특정 두 수준을 지정하고 범위 비교를 요구
   const A = parts.find((x) => x.purpose === "table_interpretation"); if (A && !/values?|data/i.test(A.prompt ?? "")) add("table_part_no_evidence", "표 해석 파트가 표 값 인용을 요구하지 않는다");
   const C = parts.find((x) => x.purpose === "statistical_reasoning"); if (C && /if any/i.test(C.prompt ?? "")) add("stat_part_open_ended", "통계 파트가 '있다면'식 열린 질문이다(특정 두 수준을 지정해야 한다)");
+  // D(개념 파트): 하나의 설명(주장-증거 관계로 완성)이지 독립 요구 두 개를 한 점에 묶은 것이 아니다
+  for (const x of parts.filter((q) => q.concept_needed)) { const rows: Json[] = x.rubric_rows ?? []; if (rows.length !== 1 || (rows[0].required_elements ?? []).length !== 1 || rows[0].requires_both || !rows[0].single_explanation) add("concept_part_two_independent_requirements", `파트 ${x.label}: 개념 파트의 1점은 하나의 설명(single_explanation, 필수 요소 1개)이어야 한다 — 독립 요구 두 개를 묶지 않는다`); }
+  // 약점 분석 귀속: 개념 수준 증거는 개념 파트(D)만, 나머지는 데이터 스킬. 파트별 스킬을 정확히 기록하고 번들이 토픽 3.2 를 넓게 평가한다고 표기하지 않는다
+  const wa = p.weakness_attribution as Json | undefined; const conceptParts = parts.filter((x) => x.concept_needed).map((x) => x.label);
+  if (!wa || JSON.stringify([...(wa.concept_level_parts ?? [])].sort()) !== JSON.stringify([...conceptParts].sort())) add("concept_attribution_mismatch", "weakness_attribution.concept_level_parts 가 개념 파트와 다르다");
+  for (const x of parts) { if (!x.concept_needed && (x.topic_role !== "context" || x.evidence_role !== "data_skill")) add("data_part_not_marked_context", `파트 ${x.label}: 데이터 스킬 파트는 topic_role=context, evidence_role=data_skill 이어야 한다`); if (wa && wa.skill_level && JSON.stringify(wa.skill_level[x.label]) !== JSON.stringify((x.skill_codes ?? [])[0])) add("skill_level_attribution_mismatch", `파트 ${x.label}: 스킬 귀속 ${wa.skill_level[x.label]} ≠ 파트 스킬 ${(x.skill_codes ?? []).join("/")}`); }
+  if (!/only in part|only part/i.test(p.blueprint?.concept ?? "")) add("bundle_overclaims_topic", "설계도 개념 설명이 토픽 개념을 D 에서만 평가한다고 밝히지 않는다(번들이 토픽 3.2 를 넓게 평가한다고 표기 금지)");
   return out;
 }
+/** 약점 분석 훅: 이 번들에서 개념 수준(토픽) 증거에 기여하는 파트. 데이터 파트 점수를 개념 숙달로 합산하지 않는다. */
+export const conceptEvidenceParts = (p: Json): string[] => (p.parts ?? []).filter((x: Json) => x.evidence_role === "concept" && x.concept_needed).map((x: Json) => x.label);
+export const dataSkillParts = (p: Json): { part: string; skill: string }[] => (p.parts ?? []).filter((x: Json) => x.evidence_role === "data_skill").map((x: Json) => ({ part: x.label, skill: (x.skill_codes ?? [])[0] }));

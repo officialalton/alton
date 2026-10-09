@@ -1,0 +1,290 @@
+[
+ {
+  "key": "ap_biology-f01-k0",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Rate rises from 14.2 at pH 5 to 17.6 at pH 7, then falls to 7.7 at pH 9.",
+     "final_answer": "The rate goes up from pH 5 (14.2 µmol/min) to pH 7 (17.6 µmol/min), then drops sharply at pH 9 (7.7 µmol/min). pH 7 has the greatest mean rate.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(17.6-7.7)/7.7 x 100",
+     "final_answer": "(17.6 − 7.7)/7.7 × 100 ≈ +128.6% (about a 129% increase)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "pH 7: 15.58–19.62; pH 5: 12.48–15.92. The ranges overlap.",
+     "final_answer": "Not statistically supported. The ±2SE ranges overlap between 15.58 and 15.92: pH 7 is 15.58–19.62 and pH 5 is 12.48–15.92.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Denaturation and changes in active-site charge at high pH.",
+     "final_answer": "At pH 9 the rate (7.7 ± 0.98) is less than half the rate at pH 7 (17.6 ± 2.02), and the ±2SE ranges do not overlap (6.72–8.68 vs 15.58–19.62). High pH changes the ionization of R groups, which disrupts the hydrogen and ionic bonds that hold the enzyme's tertiary structure together. This changes the shape and charge of the active site, so less starch can bind and fewer enzyme–substrate complexes form, which lowers the rate. pH 7 is closer to amylase's optimum pH.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mostly sound and the arithmetic is verified. It is weak as an AP-style short FRQ. Part A's single point bundles three demands, and the bundle's topic 3.2 content is concentrated in one part, with the other parts being generic data skills. I recommend revision rather than acceptance.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A assesses 4.B (describe data), part D assesses topic 3.2 (pH effect on enzyme shape and the active site), and B and C cover the data skills. The bundle as a whole requires the topic concept, so scope passes."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part A's rubric row combines three demands in one point (direction of change across all three levels, the greatest level, and cited values), and the model answer \"peaks\" is vague. The alt phrasings are acceptable. In part B, \"numeric_tolerance 1.29\" on a 128.6 answer is odd but workable. Part C's conclusion is borderline: the ranges overlap only slightly (15.58 to 15.92), and AP convention treats overlap of 2SE intervals as not supported, so the key is defensible. Part D's rubric is loose, since the model answer calls it \"denaturation\" without detail, but meaning-based grading handles it."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with levels, mean ± 2SE and n, and the wording is clear. The pH 5 and pH 7 ranges overlap slightly, which is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item, though common_errors are listed for each part."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The AP Biology short FRQ pattern is four 1-point parts in about 10 minutes, and this item has four parts, so the grain is fine. The problem is that the four parts assess four different skills (4.B, 5.A, 5.B, 6.C), and only part D requires the enzyme concept. The bundle is a generic data-analysis template whose topic content is thin. Part A, which carries the target skill, is also trivial. Part D's wording (\"what you know about the structure and function of enzymes\") is acceptable. The calculator is needed only for part B, which is fine."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP Bio data-analysis item: describe table trend, compute percent change (simple), interpret overlap of 2SE intervals (the most demanding step, with a near-overlap of 15.58 vs 15.92 requiring careful calculation), and explain pH effect on enzyme structure (active site shape and denaturation). Concepts are in scope, the reading load is modest, the arithmetic is light, and the stimulus is clear, so the difficulty is appropriate for a full mock.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_biology-f01-k1",
+  "cellId": "ap_biology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Protein digested goes down as pH goes up: 14.3 mg at pH 2, 4.1 mg at pH 7 and 1.5 mg at pH 12. The most digestion is at pH 2.",
+     "final_answer": "Digestion falls as pH rises (14.3 → 4.1 → 1.5 mg). pH 2 has the most protein digested (14.3 mg).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(14.3−1.5)/1.5 × 100 = 853%",
+     "final_answer": "About an 853% increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The pH 2 range is 12.58–16.02 mg and the pH 7 range is 3.44–4.76 mg. The ranges do not overlap, so the difference is statistically supported.",
+     "final_answer": "Yes, the difference is supported because the ±2SE ranges do not overlap.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Pepsin works best at acidic pH, like the stomach. At pH 12, changes in charge/ionization break hydrogen and ionic bonds, so the enzyme loses its shape (denatures). The active site changes shape and substrate binds less well, so digestion drops from 14.3 mg at pH 2 to 1.5 mg at pH 12.",
+     "final_answer": "High pH denatures pepsin and changes its active site, so less substrate binds. Pepsin's optimum pH is acidic (about 2), which is why digestion is 14.3 mg at pH 2 but only 1.5 mg at pH 12.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a short FRQ with four 1-point parts, which fits the official grain. Part A assesses skill 4.B directly. Parts B and C are data skills (5.A and 5.B). Part D requires the enzyme/pH denaturation concept (topic 3.2). Judged at the bundle level, the topic concept is required, so scope passes. All numbers used appear in the table, and the data object is complete.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle as a whole requires the topic 3.2 concept in part D. Part A matches skill 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and defensible. Part B's value of 853.3% is correct within the stated tolerance, and the solver's 853% matches. The ±2SE ranges for part C are correct and do not overlap. Part D's rubric is a single combined data-plus-mechanism explanation, which is consistent with its grading note."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table lists the pH levels, the mean ± 2SE and n. The description and column headers are clear. The units appear in the description."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric lists common errors for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, about 10 minutes for four points, and the calculator use is minimal. The calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short scaffolded parts typical of AP Bio data-analysis FRQs: describe a trend from a table, compute a percent change (about 853%), compare ±2SE intervals for non-overlap (12.58-16.02 vs 3.44-4.76), and explain reduced activity at extreme pH via denaturation and active-site shape change. Concept depth is moderate, with a few reasoning steps and light computation. The table is small and the wording is clear, so no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_biology-f01-k2",
+  "cellId": "ap_biology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Rate rises from 6.0 at pH 4 to 18.0 at pH 7, then falls to 9.0 at pH 10; greatest at pH 7.",
+     "final_answer": "Rate increases from pH 4 (6.0 µmol/min) to pH 7 (18.0 µmol/min), then decreases at pH 10 (9.0 µmol/min). pH 7 has the greatest rate.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(18.0-6.0)/6.0 ×100 = 200%",
+     "final_answer": "200% increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "pH 7: 15.2–20.8; pH 10: 7.9–10.1; no overlap.",
+     "final_answer": "Yes, statistically supported: the ±2SE ranges (15.2–20.8 vs 7.9–10.1) do not overlap.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Low pH changes the charges on amino acid R groups, which disrupts H-bonds and ionic bonds. This alters the tertiary structure and active site shape, so less substrate binds and fewer enzyme–substrate complexes form. The rate at pH 4 (6.0) is one-third of the rate at pH 7 (18.0), and the error bars don't overlap.",
+     "final_answer": "pH 7 is near amylase's optimum. At pH 4 the extra H+ ions change the ionization of R groups, which disrupts the bonds that hold the protein's shape. The active site changes shape or becomes partly denatured, so the substrate binds less well. The rate falls from 18.0 to 6.0 µmol/min, and the 2SE ranges (5.08–6.92 vs 15.2–20.8) show this is a real difference.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Four 1-point parts in the short-FRQ format, with a complete table (levels, mean ± 2SE, n). The key values are correct: 200% change, non-overlapping ranges of 15.2-20.8 and 7.9-10.1, peak at pH 7. Part D's single-explanation rubric lists accepted alternative phrasings. The topic concept (pH effect on enzyme shape) is required in part D, and the other parts assess legitimate data skills. The load fits the short-FRQ format and the calculator designation is consistent.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Bundle covers 3.2 via part D, with A-C as legitimate data skills (4.B, 5.A, 5.B)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and defensible, and the rubric rows are consistent with the model answers. Part D's alternative phrasings are listed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and every number the parts use appears in the table. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ with no distractors. The rubric lists realistic common errors for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a short data FRQ, and the calculator is used only for the percent change."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP Bio data-analysis item (skill 4.B). Parts: describe trend with values, one-step percent change (200%), compare non-overlapping 2SE ranges (15.2-20.8 vs 7.9-10.1), and explain pH effect on enzyme shape/active site using data. Moderate concept depth, few steps, light arithmetic, in-scope content; matches a full-mock free-response data question.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f01-k3",
+  "cellId": "ap_biology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "As pH rises, the mean drops: 13.6 mg at pH 2, 3.8 mg at pH 7 and 1.5 mg at pH 12. The most protein was digested at pH 2.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "The mean amount digested goes down as pH goes up (13.6 → 3.8 → 1.5 mg). The greatest amount, 13.6 mg, was at pH 2."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Percent change = (13.6 − 1.5)/1.5 × 100 = 12.1/1.5 × 100 ≈ 806.7%.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "About an 807% increase"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE range at pH 2 is 12.48–14.72 mg. At pH 7 it is 3.28–4.32 mg. The two ranges do not overlap.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Yes. The ±2SE ranges (12.48–14.72 mg and 3.28–4.32 mg) do not overlap, so the difference is statistically supported."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Pepsin's optimum pH is acidic, which matches the stomach. At pH 12, the change in H+ concentration disrupts ionic and hydrogen bonds. This changes the enzyme's 3D shape and active site, so it is denatured. Less substrate can bind, giving 1.5 mg digested compared with 13.6 mg at pH 2.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Pepsin works best at an acidic pH (around 2). At pH 12, the high pH disrupts the bonds that hold the enzyme's shape, so the active site is denatured. Less protein can bind and be digested: 1.5 mg compared with 13.6 mg at pH 2."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable as a short FRQ with four 1-point parts. Part A tests the target skill 4.B. Parts B and C test the official data skills 5.A and 5.B. Part D requires the enzyme-denaturation concept, so the bundle as a whole covers topic 3.2. The keys are unique and consistent with the table: the percent change is 806.7% with a stated tolerance, and the ±2SE ranges (12.48-14.72 and 3.28-4.32) do not overlap. The stimulus is complete and clear. The rubric rows are single-point, with alternative phrasings listed. The task load fits about 10 minutes, and calculator use is appropriate for the percent-change calculation.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A matches 4.B. Parts B and C assess 5.A and 5.B, which are legitimate data skills. Part D requires the 3.2 concept (denaturation and active site). Topic fit holds for the bundle as a whole."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has a unique defensible answer, and the independent solver matched all four. Part D's rubric requires data and mechanism together in one explanation, which is acceptable for a 1-point row."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table includes the pH levels, mean ± 2SE and n, and every number used in the parts appears in it. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The common_errors lists in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and typical of an AP Biology short FRQ. The calculator is designated as allowed, and one part calls for a simple calculation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part data-analysis FRQ. It requires describing a trend from a table, a single percent-change calculation, comparing ±2SE intervals for non-overlap, and a conceptual explanation of pH effects on enzyme structure and function (denaturation or active-site change, pepsin's acidic optimum). Each part is short and uses core, in-scope content, but together they demand several skills and linking data to concepts, which suits a full mock rather than basic learning. It is not advanced because the statistics are limited to interval overlap and the calculations are simple.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

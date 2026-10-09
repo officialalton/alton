@@ -21,11 +21,16 @@ s=re.sub(r'^(inspector_port\s*=\s*)8083', r'\g<1>8583', s, flags=re.M)
 open(p,'w').write(s)
 PY
     if ! npx tsx scripts/dev/isolated-guard-cli.ts config; then git checkout HEAD -- supabase/config.toml; exit 1; fi
-    mkdir -p tmp; printf '{"projectId":"%s","createdAt":"%s"}\n' "$ID" "$(date -u +%FT%TZ)" > "$LOCK"
+    # 이 워크트리에만 pre-commit 훅 설치(스택이 떠 있는 동안 config.toml 격리 값 커밋 차단). 원래 core.hooksPath 는 tmp/hooks-path.orig 에 보관, stop 에서 복원.
+    mkdir -p tmp; git config --worktree --get core.hooksPath > tmp/hooks-path.orig 2>/dev/null || true
+    git config extensions.worktreeConfig true; git config --worktree core.hooksPath "$(pwd)/scripts/dev/hooks"
+    printf '{"projectId":"%s","createdAt":"%s"}\n' "$ID" "$(date -u +%FT%TZ)" > "$LOCK"
     npx supabase start ;;
   stop)
     ID="$(npx tsx scripts/dev/isolated-guard-cli.ts teardown)" || exit 1
     npx supabase stop --project-id "$ID" --no-backup
-    git checkout HEAD -- supabase/config.toml; rm -f "$LOCK"; echo "정리 완료: $ID" ;;
+    git checkout HEAD -- supabase/config.toml; rm -f "$LOCK"
+    if [[ -s tmp/hooks-path.orig ]]; then git config --worktree core.hooksPath "$(cat tmp/hooks-path.orig)"; else git config --worktree --unset core.hooksPath 2>/dev/null || true; fi; rm -f tmp/hooks-path.orig
+    echo "정리 완료: $ID" ;;
   *) echo "usage: $0 start ALTON_<name> | stop" >&2; exit 1 ;;
 esac

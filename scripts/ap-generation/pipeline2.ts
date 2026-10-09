@@ -6,6 +6,7 @@ import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { runBatch, toolInput, estimate, ledger, type BatchReq } from "../mock-exam-generation/batch-lib";
 import { validateBlueprint, type Blueprint } from "../../lib/ap-generation/blueprint";
+import { bundleReferenceChecks, refineParts } from "../../lib/ap-generation/part-refine";
 import { bioDataShortDesignChecks } from "../../lib/ap-generation/archetype-checks/bio-data-short";
 import { gateBioFrq } from "../../lib/ap-generation/bio-frq-checks";
 import { gateMicroFrq } from "../../lib/ap-generation/micro-frq-checks";
@@ -61,7 +62,7 @@ function py(args: string[]): unknown {
 }
 
 type Cell = { cellId: string; archetype: string; kind: "mc" | "frq_bundle"; unitCode: string; topic: string; skill: string; calculator: string; candidates: number; extraTopics: string[]; template?: string };
-type Cand = { key: string; cellId: string; archetype: string; kind: "mc" | "frq_bundle"; pack: Json; polished?: Json; item: McPack | FrqPack | null; wording: "llm" | "template" };
+type Cand = { key: string; cellId: string; archetype: string; kind: "mc" | "frq_bundle"; pack: Json; polished?: Json; item: McPack | FrqPack | null; wording: "llm" | "mixed" | "template" };
 
 const SEEDS_PER_CELL = Number(process.env.AP_MC_CANDS ?? 4);
 const FRQ_CANDS = Number(process.env.AP_FRQ_CANDS ?? 4);
@@ -70,7 +71,7 @@ function writeManifest(extra: Partial<RunManifest> = {}) {
   const commit = spawnSync("git", ["rev-parse", "--short", "HEAD"], { encoding: "utf-8" }).stdout.trim();
   const dirty = spawnSync("git", ["status", "--porcelain", "scripts/ap-generation", "lib/ap-generation"], { encoding: "utf-8" }).stdout.trim() ? "+dirty" : "";
   const m: RunManifest = { run: RUN, subject: SUBJECT, generatorCommit: commit + dirty, gateVersion: "v2-code-first-final-2026-10-08", reviewerPromptHash: sha(REVIEW_SYS + JSON.stringify(reviewTool)), difficultyPromptHash: sha(DIFF_SYS + JSON.stringify(diffTool)),
-    arm: process.env.AP_ARM, repairDefinition: process.env.AP_REPAIR_DEF, parserHash: sha(readFileSync(path.resolve(process.cwd(), "lib/ap-generation/review-parse.ts"), "utf-8")), models: { ...MODELS }, policy: POLICY, seeds: { first: [SEED0], note: "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED" }, frozenAt: new Date().toISOString(), ...extra };
+    flags: { flatReview: Boolean(process.env.AP_FLAT_REVIEW), subjectNotes: Boolean(process.env.AP_SUBJECT_NOTES), requireBlueprint: Boolean(process.env.AP_REQUIRE_BLUEPRINT), legacyItems: Boolean(process.env.AP_LEGACY_ITEMS), repair: Boolean(process.env.AP_REPAIR) }, arm: process.env.AP_ARM, repairDefinition: process.env.AP_REPAIR_DEF, parserHash: sha(readFileSync(path.resolve(process.cwd(), "lib/ap-generation/review-parse.ts"), "utf-8")), models: { ...MODELS }, policy: POLICY, seeds: { first: [SEED0], note: "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED" }, frozenAt: new Date().toISOString(), ...extra };
   const issues = manifestIssues(m); if (issues.length) throw new Error(issues.join(", "));
   writeFileSync(path.join(DIR, POLICY.manifestFile), JSON.stringify(m, null, 1));
 }
@@ -150,7 +151,7 @@ function buildCands(): Cand[] {
   const packs = genPacks(); const gen = resultMap("gen"); const out: Cand[] = [];
   for (const c of cells()) packs[c.cellId].forEach((pack, i) => {
     const key = `${c.cellId}-k${i}`; const r = gen.get(key); const polished = r ? (toolInput(r as never) as Json | null) : null;
-    let item: McPack | FrqPack | null = null; let wording: "llm" | "template" = "template";
+    let item: McPack | FrqPack | null = null; let wording: "llm" | "mixed" | "template" = "template";
     if (c.kind === "mc") {
       const mp = { ...(pack as unknown as McPack) } as McPack;
       let stem = mp.stem; const expl = structuredExplanation(pack);
@@ -161,9 +162,8 @@ function buildCands(): Cand[] {
     } else {
       const fp = JSON.parse(JSON.stringify(pack)) as FrqPack;
       if (polished && polished.prompts && typeof polished.prompts === "object") {
-        const pr = polished.prompts as Record<string, string>; let ok = true;
-        for (const pt of fp.parts) { const np = pr[pt.label]; if (typeof np !== "string" || wordingPreserves(pt.prompt, np).length) { ok = false; break; } }
-        if (ok) { for (const pt of fp.parts) pt.prompt = pr[pt.label]; wording = "llm"; }
+        // 파트 단위 채택(무료 재검사): 수치·수식·동사·자료 참조가 맞는 파트만 새 문장을 쓰고 번들 일관성이 깨지면 전부 되돌린다. 번들 검증 상태는 번들 전체 통과로만 결정된다.
+        const rr = refineParts(fp, polished.prompts as Record<string, string>); for (let i = 0; i < fp.parts.length; i++) fp.parts[i].prompt = rr.pack.parts[i].prompt; wording = rr.wording;
       }
       item = fp;
     }
@@ -183,6 +183,7 @@ function checkStage() {
     if (c.item && c.kind === "frq_bundle" && SUBJECT === "ap_biology" && !process.env.AP_LEGACY_ITEMS) reasons.push(...gateBioFrq(c.item as unknown as Record<string, unknown>, { topics: new Set(topicTitle.keys()) }).map((x) => `bio_free:${x.code}`)); // Bio FRQ 무료 결정적 검사 (공통 (a)(c) 규칙)
     if (c.item && c.kind === "frq_bundle" && (c.item as unknown as { archetype?: string }).archetype === "frq_bio_data_short") reasons.push(...bioDataShortDesignChecks(c.item as unknown as Record<string, unknown>).map((x) => x.code)); // 원형 내부 설계 조건 (b): 전역 게이트 아님
     if (c.item && c.kind === "frq_bundle" && SUBJECT === "ap_microeconomics" && !process.env.AP_LEGACY_ITEMS) reasons.push(...gateMicroFrq(c.item as unknown as Record<string, unknown>, { topics: new Set(topicTitle.keys()), skills: skillSet }).map((x) => `micro_free:${x.code}`)); // Micro FRQ 무료 결정적 설계 검사
+    if (c.item && c.kind === "frq_bundle" && !process.env.AP_LEGACY_ITEMS) reasons.push(...bundleReferenceChecks(c.item as unknown as FrqPack).map((x) => `bundle_ref:${x}`)); // 번들 수준 참조·조건 일관성
     if (c.item) reasons.push(...generatorDefects(c.item as unknown as Record<string, unknown>).map((d) => `generator_defect:${d.code}`)); // 생성기 결함(중괄호 미닫힘·표 본문 누락 등)은 LLM 단계 전에 차단
     if (process.env.AP_EVAL_BYPASS) reasons = reasons.filter((r) => r.startsWith("generator_defect")); // 결함 주입 평가: 주입과 무관한 구형식 품질 게이트로 평가에서 빠지지 않게 한다
     if (process.env.AP_SKIP_GUIDE_MEMBERSHIP) reasons = reasons.filter((r) => !["archetype_not_in_guide", "frq_template_not_in_guide"].includes(r)); // 구방식 arm 은 코드 원형 목록 밖이 당연하다(구조 규칙만 면제)

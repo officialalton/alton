@@ -7,12 +7,12 @@ export type FactsRpcRow = {
   attempt_id: string; exam_name: string; exam_track: string; ap_subject: string | null; difficulty_tier: string; format: string;
   status: string; started_at: string | null; submitted_at: string | null; graded_at: string | null;
   attempt_seq: number; score_adjusted: boolean;
-  rw_total: number; rw_correct: number | null; rw_complete: boolean; rw_route: string | null;
-  math_total: number; math_correct: number | null; math_complete: boolean; math_route: string | null;
+  rw_total: number; rw_correct: number | null; rw_complete: boolean; rw_route: string | null; rw_answered?: number | null;
+  math_total: number; math_correct: number | null; math_complete: boolean; math_route: string | null; math_answered?: number | null;
 };
 
 const route = (r: string | null): ScoreRoute | null => (r === "higher" || r === "lower" ? r : null);
-const section = (total: number, correct: number | null, complete: boolean, r: string | null): SectionFacts => ({ total, correct, complete, route: route(r) });
+const section = (total: number, correct: number | null, complete: boolean, r: string | null, answered?: number | null): SectionFacts => ({ total, correct, complete, route: route(r), answered });
 
 export function factsFromRpcRows(rows: FactsRpcRow[]): AttemptHistoryRow[] {
   return rows.map((r, i) => ({
@@ -26,8 +26,8 @@ export function factsFromRpcRows(rows: FactsRpcRow[]): AttemptHistoryRow[] {
     gradedAt: r.graded_at,
     attemptSeq: r.attempt_seq,
     sections: {
-      rw: section(r.rw_total, r.rw_correct, r.rw_complete, r.rw_route),
-      math: section(r.math_total, r.math_correct, r.math_complete, r.math_route),
+      rw: section(r.rw_total, r.rw_correct, r.rw_complete, r.rw_route, r.rw_answered),
+      math: section(r.math_total, r.math_correct, r.math_complete, r.math_route, r.math_answered),
     },
     difficultyTier: r.difficulty_tier,
     submittedAt: r.submitted_at,
