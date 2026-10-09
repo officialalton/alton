@@ -10,6 +10,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { chromium, type Page } from "@playwright/test";
 import { gateCandidate } from "../../lib/ap-figures/gate";
+import { STOCK_FILES } from "./keys-file";
 import { scanRawMath, type RawMathHit } from "../../lib/ap-exam/raw-math-scan";
 // 토큰 단위 점검(lib/ap-exam/raw-math-scan.ts): KaTeX 수식·코드·이스케이프 달러는 제외하고 텍스트 노드의 원문 수식만 센다.
 const SCAN = `(${scanRawMath.toString()})`;
@@ -101,7 +102,7 @@ async function resultPass(page: Page, rows: Row[], lastSection?: string): Promis
 async function main() {
   const wd = Number(arg("watchdog-sec", "0")); if (wd) setTimeout(() => { console.error(`watchdog ${wd}s 초과 — 중단`); process.exit(2); }, wd * 1000).unref(); // 개발 서버가 멈추면 세트 단위로 끊고 다시 돌린다
   const state = JSON.parse(readFileSync("tmp/ap-demo-state.json", "utf-8")) as { run: string; students: Record<string, string>; sets: string[] };
-  const stock = [...JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")), ...JSON.parse(readFileSync("data/ap/stock/s1a-items.json", "utf-8"))] as { stockKey: string; payload: Record<string, unknown> }[];
+  const stock = STOCK_FILES.flatMap((f) => { try { return JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")); } catch { return []; } }) as { stockKey: string; payload: Record<string, unknown> }[];
   const keysByHash = new Map<string, string[]>();
   for (const s of stock) { const h = itemContentHash(s.payload); (keysByHash.get(h) ?? keysByHash.set(h, []).get(h)!).push(s.stockKey); }
   const shotDir = arg("shots-dir", `tmp/ap-screen-evidence/${state.run}`); mkdirSync(shotDir, { recursive: true });

@@ -8,6 +8,7 @@ import { execFileSync } from "node:child_process";
 import { connect } from "../keywords/db";
 import { convertCandidate, type CandidateRow } from "../../lib/ap-exam/convert-run";
 import { AP_LAYOUTS, AP_SUBJECT_NAME } from "../../lib/ap-exam/layouts";
+import { readKeysFile, STOCK_FILES } from "./keys-file";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 
 const STATE = path.resolve(process.cwd(), "tmp/ap-demo-state.json");
@@ -23,7 +24,7 @@ async function seed() {
   const conn = await connect(); if (!conn || conn.target !== "local") throw new Error("로컬 DB 에서만 실행합니다.");
   const RUN = `apdemo${Date.now().toString(36)}`;
   const readItems = (f: string) => JSON.parse(readFileSync(path.resolve(process.cwd(), f), "utf-8"));
-  const items = [...readItems("data/ap/stock/items.json"), ...(ALL ? readItems("data/ap/stock/s1a-items.json") : [])] as (CandidateRow & { validation: string; keywordCode: string; difficultyProvisional: string; run: string; stockKey: string; calculator: string })[];
+  const items = [...readItems("data/ap/stock/items.json"), ...(ALL ? STOCK_FILES.slice(1).flatMap((f) => { try { return readItems(`data/ap/stock/${f}.json`); } catch { return []; } }) : [])] as (CandidateRow & { validation: string; keywordCode: string; difficultyProvisional: string; run: string; stockKey: string; calculator: string })[];
   const state: { run: string; students: Record<string, string>; sets: string[] } = { run: RUN, students: {}, sets: [] };
   const admin = psql(`select id from profiles where role = 'admin' limit 1;`);
   const subj: Record<string, string> = {};
@@ -41,9 +42,9 @@ async function seed() {
     chosen.length = 0;
     chosen.push(...items.filter((c) => c.validation === "auto_passed" && !scan.get(c.stockKey) && gateCandidate(c).status !== "fail"));
   }
+  let SEL_SECTION = new Map<string, string>(); // 선택 목록이 정한 섹션(없으면 계산기 필드로 배정)
   if (KEYS_FILE) {
-    const raw = readFileSync(path.resolve(process.cwd(), KEYS_FILE), "utf-8").trim();
-    const keys = raw.startsWith("[") ? (JSON.parse(raw) as string[]) : raw.split("\n").map((l) => l.trim()).filter(Boolean);
+    const { keys, sectionOf: selSection } = readKeysFile(KEYS_FILE); SEL_SECTION = selSection;
     const by = new Map(items.map((c) => [c.stockKey, c]));
     const missing = keys.filter((k) => !by.has(k)); if (missing.length) throw new Error(`재고에 없는 키: ${missing.join(", ")}`);
     chosen.length = 0; chosen.push(...keys.map((k) => by.get(k)!));
@@ -62,6 +63,7 @@ async function seed() {
   }
   // 세트: 과목별(데모용 소형 구조 — 공식 문항 수 아님)
   const mk = async (code: string, label: "mc_practice" | "full_practice", name: string, tier: "free" | "tutoring", slice?: { mc: [number, number]; frq: [number, number] }) => {
+    const keyMap = new Map(chosen.map((c) => [`${RUN}-${c.stockKey.replace(/[^A-Za-z0-9_.-]/g, "_")}`, c.stockKey]));
     const rows = psql(`select i.candidate_key || '|' || cp.problem_id || '|' || cp.problem_version_id || '|' || i.kind || '|' || i.keyword_code from ap_candidate_items i join ap_candidate_problems cp on cp.candidate_key = i.candidate_key where i.run_id = ${q(RUN)} and i.ap_subject_code = ${q(code)} and i.purpose = 'mock_exam' order by i.candidate_key;`).split("\n").filter(Boolean).map((l) => l.split("|"));
     const mc = rows.filter((r) => r[3] === "mc").slice(...(slice?.mc ?? [0, 1e9])), frq = rows.filter((r) => r[3] === "frq_bundle").slice(...(slice?.frq ?? [0, 1e9]));
     const sections = [...(mc.length ? [{ key: "ap_mc", kind: "mc", label: "Section I: Multiple Choice", minutes: 25, count: mc.length, calculator: code === "ap_calculus_ab" ? "not_allowed" : "allowed", options: code === "ap_microeconomics" ? 5 : 4 }] : []), ...(label === "full_practice" && frq.length ? [{ key: "ap_frq", kind: "frq", label: "Section II: Free Response", minutes: 20, count: frq.length, calculator: "allowed" }] : [])];
@@ -77,8 +79,9 @@ async function seed() {
   if (KEYS_FILE) {
     // 선택 목록으로 공식 풀 레이아웃(AB: MC Part A 29 계산기 불가 + Part B 13 필수, FRQ A 2 + B 4)을 채운다. 구성이 안 맞으면 공개 게이트가 거절한다(보고용).
     const sub = chosen[0].apSubjectCode; const layout = AP_LAYOUTS[sub];
+    const keyMap = new Map(chosen.map((c) => [`${RUN}-${c.stockKey.replace(/[^A-Za-z0-9_.-]/g, "_")}`, c.stockKey]));
     const rows = psql(`select i.candidate_key || '|' || cp.problem_id || '|' || cp.problem_version_id || '|' || i.kind || '|' || i.keyword_code || '|' || i.calculator from ap_candidate_items i join ap_candidate_problems cp on cp.candidate_key = i.candidate_key where i.run_id = ${q(RUN)} and i.purpose = 'mock_exam' order by i.candidate_key;`).split("\n").filter(Boolean).map((l) => l.split("|"));
-    const sectionOf = (r: string[]) => (r[3] === "mc" ? (r[5] === "required" ? "ap_mc_b" : "ap_mc_a") : (r[5] === "not_allowed" ? "ap_frq_b" : "ap_frq_a"));
+    const sectionOf = (r: string[]) => SEL_SECTION.get(keyMap.get(r[0]) ?? "") ?? (r[3] === "mc" ? (r[5] === "required" ? "ap_mc_b" : "ap_mc_a") : (r[5] === "not_allowed" ? "ap_frq_b" : "ap_frq_a"));
     const id = psql(`insert into mock_exam_sets (name, difficulty_tier, status, format, readiness_status, exam_program, ap_subject, ap_label, section_layout) values (${q(`${RUN}-${AP_SUBJECT_NAME[sub]} Full Practice Exam (selection)`)}, 'standard', 'draft', 'ap_fixed', 'not_applicable', 'ap', ${q(sub)}, 'full_practice', ${q(JSON.stringify({ sections: layout }))}::jsonb) returning id;`);
     const pos: Record<string, number> = {};
     for (const r of rows) { const sec = sectionOf(r); pos[sec] = (pos[sec] ?? 0) + 1; psql(`insert into mock_exam_set_items (exam_set_id, section, position, problem_id, problem_version_id, sat_domain, difficulty) values ('${id}', ${q(sec)}, ${pos[sec]}, '${r[1]}', '${r[2]}', ${q(`ap:${r[4]}`)}, 'medium');`); }
