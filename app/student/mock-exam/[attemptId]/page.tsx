@@ -55,6 +55,8 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
       } catch { /* 이름 없이 코드만 */ }
     }
     // w-full: body 가 flex-col 이라 mx-auto 만 있으면 main 이 내용 최소폭(문항 번호 줄 796px)까지 늘어나 모바일에서 가로 스크롤·번호 버튼 클릭 불가가 됐다(2026-10-09 화면 점검에서 발견). *
+    // 응시 중에는 SAT 응시 화면처럼 전체 화면 레이아웃(자체 위 막대에 제목·타이머가 있다). 결과는 기존 카드형 페이지.
+    if (!isGraded) return <ApExamTakeClient attempt={attempt} />;
     return (
       <main className={`mx-auto w-full px-4 py-6 ${isGraded ? "max-w-4xl" : "max-w-5xl"}`}>
         {isGraded && (
@@ -64,7 +66,7 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
           {attempt.examSetName}
           {attempt.attemptNo && (attempt.attemptTotal ?? 1) > 1 ? <span className="ml-2 text-[13px] font-semibold text-grey-500">Attempt {attempt.attemptNo}</span> : null}
         </h1>
-        {isGraded ? <ApExamResultView attempt={attempt} attempts={attempts} topicNames={topicNames} /> : <ApExamTakeClient attempt={attempt} />}
+        <ApExamResultView attempt={attempt} attempts={attempts} topicNames={topicNames} />
       </main>
     );
   }

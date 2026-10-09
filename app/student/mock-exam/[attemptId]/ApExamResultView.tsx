@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 import { AP_SUBJECT_NAME, apBadgeText, apCoverageLines, apGuidanceLines, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
+import { AccuracyBarList } from "@/app/components/AccuracyBars";
 import AttemptSwitcher from "./AttemptSwitcher";
 import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
@@ -60,7 +61,8 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
       {byTopic.length > 0 && (
         <section className="rounded-lg border border-grey-200 bg-white p-4" aria-label="Topics to review">
           <h3 className="mb-2 text-[13px] font-bold">Topics to review</h3>
-          <ul className="flex flex-col gap-1 text-[12.5px]">{byTopic.map((t) => <li key={t.topic} className="flex justify-between"><span>Topic {t.topic}{topicNames?.[t.topic] ? ` · ${topicNames[t.topic]}` : ""}</span><span className={t.correct === t.total ? "text-green" : "text-red"}>{t.correct}/{t.total}</span></li>)}</ul>
+          <p className="mb-3 text-[11.5px] text-grey-500">Weakest first. Bars show accuracy on multiple-choice questions; topics with few questions are shown lighter.</p>
+          <AccuracyBarList testId="ap-topic-bars" highlightFirst rows={byTopic.map((t) => ({ key: t.topic, label: `Topic ${t.topic}${topicNames?.[t.topic] ? ` · ${topicNames[t.topic]}` : ""}`, correct: t.correct, total: t.total }))} />
         </section>
       )}
 

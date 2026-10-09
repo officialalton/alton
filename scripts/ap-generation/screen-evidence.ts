@@ -102,6 +102,7 @@ async function resultPass(page: Page, rows: Row[], lastSection?: string): Promis
 async function main() {
   const wd = Number(arg("watchdog-sec", "0")); if (wd) setTimeout(() => { console.error(`watchdog ${wd}s 초과 — 중단`); process.exit(2); }, wd * 1000).unref(); // 개발 서버가 멈추면 세트 단위로 끊고 다시 돌린다
   const state = JSON.parse(readFileSync("tmp/ap-demo-state.json", "utf-8")) as { run: string; students: Record<string, string>; sets: string[] };
+  if (arg("set-ids", "")) state.sets = arg("set-ids", "").split(","); // 데모 세트 대신 지정한 세트(예: 실제 조립된 연습 세트)를 점검
   const stock = STOCK_FILES.flatMap((f) => { try { return JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")); } catch { return []; } }) as { stockKey: string; payload: Record<string, unknown> }[];
   const keysByHash = new Map<string, string[]>();
   for (const s of stock) { const h = itemContentHash(s.payload); (keysByHash.get(h) ?? keysByHash.set(h, []).get(h)!).push(s.stockKey); }

@@ -54,7 +54,7 @@ async function main() {
   check("FRQ 다문항: 새로고침 뒤에도 두 문항 입력 복원", v1 === "Q1 answer alpha" && v2 === "Q2 answer beta", `${v1.slice(0, 10)} / ${v2.slice(0, 10)}`);
   // 노트북 저장 토글(FRQ)
   await page.getByTestId("toggle-saved-to-practice").click(); await page.waitForTimeout(700);
-  check("FRQ 문항을 My Notebook 에 저장 가능(저장 표시)", /Saved/.test((await page.getByTestId("toggle-saved-to-practice").textContent()) ?? "") && Number(psql(`select count(*) from mock_exam_answers where attempt_id = '${att}' and saved_to_practice`)) === 1);
+  check("FRQ 문항을 My Notebook 에 저장 가능(저장 표시)", (await page.getByTestId("toggle-saved-to-practice").getAttribute("aria-pressed")) === "true" && Number(psql(`select count(*) from mock_exam_answers where attempt_id = '${att}' and saved_to_practice`)) === 1);
 
   // 섹션별 만료: Part A(MC) 서버 시계를 과거로 → 그 섹션만 저장 거절, 다른 섹션은 계속 가능
   psql(`update mock_exam_attempts set ap_section_entered = ap_section_entered || jsonb_build_object('ap_mc_a', to_char((now() - interval '70 minutes') at time zone 'utc', 'YYYY-MM-DD"T"HH24:MI:SS.US"Z"')) where id = '${att}'`);
