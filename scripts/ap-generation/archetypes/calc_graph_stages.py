@@ -25,4 +25,7 @@ STAGES = {
         "c_lagrange_min_degree_calc", "c_taylor_actual_error_calc", "c_series_integral_calc", "c_taylor_from_diffeq_calc", "c_integral_test_bound_calc", "c_geometric_terms_needed_calc",
         "c_series_recognize_sum", "c_term_diff_sum", "c_ratio_limit_e", "c_partial_sum_term", "c_telescoping_sum", "c_integral_test_choice", "c_comparison_benchmark", "c_alt_test_choice",
     ],
+    # 배치 2: FRQ 새 유형(AB 3, BC 전용 2) — 후보는 유형마다 여러 시드(같은 유형의 다른 수치 묶음은 독립 문항군이 아니라 형제로 센다)
+    "supp_b2_ab": ["frq_table_values", "frq_function_analysis", "frq_rate_in_out"],
+    "supp_b2_bc": ["frq_bc_taylor_diffeq", "frq_bc_improper_parts"],
 }

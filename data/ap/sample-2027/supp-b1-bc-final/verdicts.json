@@ -1,0 +1,773 @@
+[
+ {
+  "key": "ap_calculus_bc-m01-k0",
+  "cellId": "ap_calculus_bc-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "For D, the terms b_n = 1/√n are positive, decrease as n grows, and approach 0, so the alternating series test shows the series converges. In A, cos(1/n) approaches 1, not 0. In B, n²/(n²+3) approaches 1, not 0. In C, (n+1)/n approaches 1, not 0. Since the terms of A, B and C don't go to 0, the test's conditions fail for those three.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly applies the alternating series test conditions (3.D, topic 10.7)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique series whose terms decrease to 0; A, B, C have terms tending to 1."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and the options are exact expressions."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distractors all fail the limit-zero condition, which is somewhat repetitive. Each is explained and plausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator needed, about 60-90 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, and the item is in scope and suitable for the exam. Its main weakness is that all three distractors fail the same condition, so the decreasing condition is never tested. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: check the AST hypotheses (limit of b_n = 0, decreasing). Three distractors fail the limit-to-zero condition (b_n -> 1), and only the correct option needs a monotonicity check. There is no heavy computation, one representation (symbolic), and short reading. It is a good misconception-rich option set, but the depth is a direct application of the test.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m02-k0",
+  "cellId": "ap_calculus_bc-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Converges, by limit comparison with sum 1/n^3",
+     "brief_reasoning": "The ratio of the terms to 1/n^3 tends to 4/3, which is finite and positive. Since p = 3 > 1, the p-series converges, so the given series converges.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Limit comparison with a rational term, topic 10.6, skill 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Ratio to 1/n^3 tends to 4/3; p=3>1 so converges. Unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions and each is explained. The option 1 explanation is slightly thin because it does not state that the conclusion is false."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-100 seconds, no calculator needed, with parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound limit-comparison question with a unique correct key and distinct distractors, and it fits topic 10.6, skill 3.D. I recommend accepting it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the dominant terms to get 4/(3n^3), apply limit comparison with the p-series for p=3 (limit 4/3), and conclude convergence. There is minimal computation and no representation change. The options pair a conclusion with a comparison series, which gives some misconception coverage, but it is a routine application of the test.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m03-k0",
+  "cellId": "ap_calculus_bc-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Sum = 4/(1−0.9) = 40. The error after n terms is 40(0.9)^n, so we need 0.9^n < 0.00125. That gives n > ln(0.00125)/ln(0.9) ≈ 63.4. Check: n=63 gives an error of about 0.052; n=64 gives about 0.047. So the least n is 64.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "64"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Geometric series remainder, topic 10.2, procedural application with calculator; in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Sum 40, remainder 40(0.9)^n <0.05 gives n>63.4, so 64 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "42 and 43 correspond to verified misconceptions; 65 is off by one. Explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, a clean calculator use, and a typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key 64 is correct and unique, and the distractors map to realistic errors. Scope, wording and load are suitable, so the item passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires deriving the geometric tail 40(0.9)^n, setting up an inequality, and solving with logarithms (n>63.4, so n=64). Standard multi-step procedural item with plausible distractors (off-by-one, wrong tail formula). Clean numbers, concise wording, in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m04-k0",
+  "cellId": "ap_calculus_bc-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "S8≈1.527422; integral from 8 to ∞ of 1/x² = 1/8 = 0.125; sum ≈1.6524",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1.6524"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integral test tail bound fits 10.4 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "S8+1/8=1.6524 unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is self-contained. Minor N vs 8 inconsistency only in explanation."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct plausible error and the explanation covers each wrong option; the 1.6385 value is S8+1/9 which is a lower bound, consistent with rationale."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light calculator use, about 100 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope integral test tail bound item with distinct distractors and adequate explanations; passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of the integral-test tail bound S_n + integral from n to infinity. The student sums 8 simple terms with a calculator, evaluates the improper integral of 1/x^2 as 1/8, and adds. Distractors include the lower bound (integral from 9), the partial sum alone, and an arithmetic slip. There is little conceptual depth beyond recalling the bound formula and no representation changes.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m05-k0",
+  "cellId": "ap_calculus_bc-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Σ 1/(n(ln n)^2) from n=2",
+     "brief_reasoning": "Substitute u = ln x: the integral from 2 to ∞ of dx/(x(ln x)^2) equals 1/ln 2, which is finite, so the series converges. The other three integrals diverge: A is a p-series with p = 1/2; for B, the integral of (ln x)/x is (ln x)^2/2, which grows without bound; for C, the integral is (1/2)ln(x^2+1), which also grows without bound.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Small issue: (ln n)/n is not decreasing between n=2 and n=3, so the stem's claim is slightly off for B. This doesn't change the answer."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integral test choice fits 10.4 and skill 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique series whose improper integral converges; A, B, C integrals diverge."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Stem asserts all terms are decreasing for the indicated n, but (ln n)/n is increasing on [2,e), so for n=2 to 3 it is not decreasing. The stated hypothesis is false for option B."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, non-calculator, exact antiderivatives."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (D) is correct and unique, but the stem falsely states that every listed series has decreasing terms. (ln n)/n increases on [2, e), so the integral test hypothesis is misstated for option B. A rigorous item about justifying a test should not contain a false hypothesis. The fix is to start B at n = 3, or to say \"eventually decreasing\"."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must apply the integral test across four series, choosing and executing u-substitutions (ln x, x^2+1) and evaluating improper integrals to find the one that converges. Hypotheses are given, so there is no checking burden. The numbers are clean and the reading load is minimal. The difficulty comes from the need to evaluate several improper integrals and from plausible distractors (such as the p-series intuition for A and the squared factor in D), which is typical for a mock exam item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m06-k0",
+  "cellId": "ap_calculus_bc-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Bound = 2^{n+1} e (1/2)^{n+1}/(n+1)! = e/(n+1)! < 0.0005 requires (n+1)!>5437; 7!=5040 fails, 8!=40320 works, so n=7.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "7"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 100 seconds, with modest computation and a parallel set of numeric options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope item with a unique key (n=7) and plausible, distinct distractors."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires the general (n+1)th derivative of e^(2x), bounding it on the interval, applying the Lagrange error formula, noticing that 2^(n+1)*(0.5)^(n+1) cancels to leave e/(n+1)!, and then testing factorials to find the least n. The near-miss n=6 (0.00054 vs 0.0005) rewards careful checking. The numbers are clean and the reading load is minimal; this is a typical mock-exam level item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m07-k0",
+  "cellId": "ap_calculus_bc-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "a4=S4-S3=8/5-3/2=1/10",
+     "choice_index": 3,
+     "final_answer": "1/10",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Partial sums and terms of a series (10.1); applying the rule a_n = S_n - S_(n-1) fits 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "a4 = 8/5 - 3/2 = 1/10; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors cover the wrong-order subtraction, S_4 itself, and the limit of the partial sums. The explanation has a minor typo: it labels 1/10 as incorrect where it should say -1/10, and it uses m instead of n in places. This does not change the key, so I did not fail the item for it."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, non-calculator, exact fractions, about 85 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and suitable for the exam. The only flaw is a minor explanation typo (it labels 1/10 as incorrect where it should say -1/10, and it uses m for n), which does not affect the key."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of a_n = S_n - S_{n-1}: compute S_4 = 8/5 and S_3 = 3/2, giving a_4 = 1/10. The distractors are misconceptions (S_4, the limit of S_n, and a sign error). There is little concept depth, no representation change, and only simple fraction arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m08-k0",
+  "cellId": "ap_calculus_bc-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The ratio of consecutive terms is a_{n+1}/a_n = 2(n/(n+1))^n. As n goes to infinity this tends to 2/e.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "2/e"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard 10.8 ratio test limit; skill 1.E procedure."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "L=2/e is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions, each explained in the rationale."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, exact-form options, appropriate for non-calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope ratio test limit item with a unique key and sensible distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard BC ratio test item requiring simplification of the factorial and n^n terms and recognition of the limit (1+1/n)^n = e. The result is 2/e. It needs several algebraic steps and a known-limit insight, and the distractors reflect common errors such as inverting e or dropping the n^n factor. There is no heavy arithmetic or reading load, and everything is in scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m09-k0",
+  "cellId": "ap_calculus_bc-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integrate 1 - x^2 + x^4/2 from 0 to 0.8: 0.8 - 0.512/3 + 0.32768/10 = 0.6621",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.6621"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Term-by-term integration of a Maclaurin series fits 10.15 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.8 - 0.512/3 + 0.32768/10 = 0.6621; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reproduces a distinct, realistic error (two terms, no division by the new exponent, evaluating without integrating). The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, light calculator use, four numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key 0.6621 is verified and the distractors map to distinct misconceptions, with minor weakness only in the generic key rationale."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Substitute -x^2 into the e^u series, integrate three terms, and evaluate at 0.8. It is a single routine procedure with light arithmetic and no theorem checks, representation changes, or procedure choices. The item is clear and in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m10-k0",
+  "cellId": "ap_calculus_bc-m10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Use ln(1+x) = Σ_{n=1}^∞ (−1)^{n+1} xⁿ/n with x = 1/5, so the sum is ln(1 + 1/5) = ln(6/5).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "ln(6/5)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short item, about 95 seconds, no calculator needed, exact-form options. This is typical of the AP exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics, key, and scope are sound. The only flaw is the key option's \"why\" field, which holds the skill description instead of a rationale, so the distractor/explanation criterion fails under strict review. Because that fails, the item needs a fix before use."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct recognition of the ln(1+x) Maclaurin series with x=1/5 (within the radius of convergence), then simplify 1+1/5 = 6/5. Single concept, one substitution step, no heavy arithmetic. Distractors reflect sign or substitution errors.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m11-k0",
+  "cellId": "ap_calculus_bc-m11",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "ln1.9=0.641854; P4(0.9)=0.9-0.405+0.243-0.164025=0.573975; diff 0.0679",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.0679"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The calculator is needed, the time load is about 100 seconds, and the options are parallel decimals. This is typical of an AP item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in scope, key, stimulus, and suitability. The only weakness is the distractor explanation, which is slightly generic. I marked that criterion as failing."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of the Maclaurin polynomial for ln(1+x): write P4, evaluate at 0.9, compare with calculator value of ln(1.9). Single procedure, no theorem check, modest arithmetic with calculator allowed. Distractors reflect common errors such as wrong degree or sign.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m12-k0",
+  "cellId": "ap_calculus_bc-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "y'(0)=1, y''=y+xy' gives 2, y'''=2y'+xy'' gives 2; P(0.2)=2+0.2+0.04+0.002667=2.2427",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "2.2427"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Taylor polynomial from a differential equation via repeated differentiation is squarely in 10.11; skill 1.E procedure application."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "y'(0)=1, y''(0)=2, y'''(0)=2; P3(0.2)=2.242667. Key unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct misconception (degree 2, dropped f(0), no factorials) and is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, four numeric options, light calculator use consistent with designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item with well-motivated distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must repeatedly differentiate the differential equation (product rule) to get f', f'', f''' at 0, build the degree-3 Taylor polynomial with correct factorials, and evaluate at 0.2. Standard AP BC procedure. Distractors reflect real misconceptions: omitting the cubic term, omitting the constant term, and forgetting the factorial. Numbers are clean and reading load is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m13-k0",
+  "cellId": "ap_calculus_bc-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Partial fractions give 1/(n(n+3)) = (1/3)(1/n - 1/(n+3)). The series telescopes to (1/3)(1+1/2+1/3) = 11/18.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "11/18"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Telescoping sum via partial fractions is a standard 10.1 task; dominant demand is the sum of a convergent series through partial sums."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "1/(n(n+3)) = (1/3)(1/n - 1/(n+3)); the sum is (1/3)(1+1/2+1/3) = 11/18. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions (1, 11/6 without the 1/3 factor, 1/3 first term only). The explanation covers every wrong option. The 'factor 1/k' wording is a minor notation mismatch (n vs k) in the explanation only."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, no calculator needed, clean exact values."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope telescoping series item with a unique key and sensible distractors; it passes all five criteria. The only blemish is a minor n/k notation slip in one distractor explanation."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires partial fractions, recognizing a telescoping series with shift 3, identifying the three surviving terms, and taking the limit of partial sums. Distractors reflect common errors (missing 1/3 factor, partial survivors). Standard BC exam-level procedure with small fractions and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m14-k0",
+  "cellId": "ap_calculus_bc-m14",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f'(x)=sum x^{n-1}/4^n = 1/(4-x); f'(2)=1/2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1/2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Term-by-term differentiation of a power series and summing the resulting geometric series is squarely 10.15 / 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f'(x)=1/(4-x), so f'(2)=1/2. The key is unique; the other options are not equal to 1/2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem is complete and clear. The interval |x|<4 is stated, and no stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rationales for 1/4 and 2 do not match their values. Keeping x^n would give sum (x/4)^n = 1 at x=2, not 1/4. Forgetting the 1/k factor does not yield 2. The explanation also uses generic k instead of 4. The ln 2 distractor (f(2)) is sound."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, non-calculator, exact-form options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mathematically correct and in scope, with a unique key of 1/2. The distractor rationales for 1/4 and 2 are inaccurate and do not match the values they claim to produce, so the item fails on distractor explanation and needs those rationales revised."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires term-by-term differentiation of a power series, simplifying n/n, recognizing the resulting geometric series and summing it at x=2 (within the interval of convergence). Multiple procedural steps with a plausible misconception-based option set; arithmetic is trivial and wording is clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ }
+]

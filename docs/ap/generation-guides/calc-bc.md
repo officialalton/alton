@@ -93,3 +93,10 @@ BC 샘플(MC 30): 공유 AB 14 + BC 전용 16(U6 3, U7 2, U8 1, U9 5, U10 5).
 | c_taylor_from_diffeq_calc | 10.11 | 1.E | required | Picard iteration of the integral equation y = y0 + integral of F(x, y), truncated at x^3, gives the same coeff |
 | c_telescoping_sum | 10.1 | 1.E | not_allowed | the partial sums up to 200000 terms plus a tail estimate are accumulated in floating point (independent of the |
 | c_term_diff_sum | 10.15 | 1.E | not_allowed | the terms n x^(n-1)/(n k^n) = x^(n-1)/k^n are summed numerically (400 terms) at the given x (independent of th |
+
+보강(supplement, 2026-10-09 오너 승인) BC 전용 FRQ 새 유형:
+
+| id | 대표 토픽 / 스킬 / 계산기 | 파트 | 독립 검증 |
+|---|---|---|---|
+| `frq_bc_taylor_diffeq` | 10.11(+10.12, 5.7) / 1.E / 불가 | a 미분방정식에서 f'(0)·f''(0)·f'''(0)과 3차 테일러 다항식(3) / b 근삿값(2) / c 라그랑주 오차 한계(2) / d 2계 도함수 판정(2) | sympy dsolve 해의 매클로린 계수 |
+| `frq_bc_improper_parts` | 6.13(+6.11, 5.4) / 1.E / 불가 | a 이상적분(부분적분)(3) / b 유한 구간 정확값(2) / c 최대 속도 시각(2) / d 목표 총량에 맞는 상수(2) | scipy quad 무한 구간·유한 구간, 격자 최댓값 |

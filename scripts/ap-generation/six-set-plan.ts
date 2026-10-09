@@ -7,6 +7,7 @@ import { gateCandidate } from "../../lib/ap-figures/gate";
 import { clusterLookAlikes } from "../../lib/ap-exam/look-alike";
 import { selectMc, type Cand } from "../../lib/ap-exam/ab-select";
 import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
+import { suppItemNames } from "./supp-batches";
 
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const FLOOR = Number(arg("--floor", "10")); const AB1_FLOOR = 9;
@@ -15,7 +16,7 @@ type It = { key: string; kind: "mc" | "frq"; subj: "ab" | "bc"; unit: number; sk
 const scan = new Set((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string }[]).map((r) => r.key));
 const bcCur = JSON.parse(readFileSync("data/ap/curriculum-2027/ap_calculus_bc.json", "utf-8")) as ApCurriculumFile;
 const scope = new Map(bcCur.units.flatMap((u) => u.topics.map((t) => [t.code, (t as unknown as { scope: string }).scope] as const)));
-const raws = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "graph-s1-items", "graph-s2a-items", "graph-s2b-items", "graph-s3a-items", "graph-s3b-items", "graph-s3c-items", "graph-s3d-items", "graph-s3e-items", "graph-s3f-items", "graph-s3g-items"].flatMap((f) => JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as Raw[]).filter((i) => (i.apSubjectCode === "ap_calculus_ab" || i.apSubjectCode === "ap_calculus_bc") && i.validation === "auto_passed" && !scan.has(i.stockKey) && !i.duplicateOf);
+const raws = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "graph-s1-items", "graph-s2a-items", "graph-s2b-items", "graph-s3a-items", "graph-s3b-items", "graph-s3c-items", "graph-s3d-items", "graph-s3e-items", "graph-s3f-items", "graph-s3g-items", ...suppItemNames()].flatMap((f) => JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as Raw[]).filter((i) => (i.apSubjectCode === "ap_calculus_ab" || i.apSubjectCode === "ap_calculus_bc") && i.validation === "auto_passed" && !scan.has(i.stockKey) && !i.duplicateOf);
 const seen = new Set<string>(); const uniq = raws.filter((r) => (seen.has(r.stockKey) ? false : (seen.add(r.stockKey), true)));
 const gated = uniq.map((i) => ({ i, g: gateCandidate({ stockKey: i.stockKey, candidateKey: i.stockKey, apSubjectCode: i.apSubjectCode, kind: i.kind, payload: i.payload }) })).filter((x) => x.g.status !== "fail");
 const P = (r: Raw) => r.payload as { archetype?: string; stem?: string; stimulus?: { kind?: string }; blueprint?: { student_thinking?: string[] } };

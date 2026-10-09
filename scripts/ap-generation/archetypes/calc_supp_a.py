@@ -74,12 +74,12 @@ def c_taylor_actual_error_calc(rng):
     dM = float(max(abs(sp.lambdify(x, sp.diff(fs, x, n + 1), "math")(c * i / 400)) for i in range(401)))
     lag = dM * c ** (n + 1) / math.factorial(n + 1)
     jn = next(j for j in range(n + 1, n + 6) if coeff(j))
-    ds = [("Reports the Lagrange error bound, an upper limit for the error, instead of the actual error.", lag), (f"Uses the polynomial of degree {n - 1} instead of degree {n}.", abs(ff(c) - Pn(n - 1, c))),
-          (f"Uses the polynomial of degree {n + 1} instead of degree {n}.", abs(ff(c) - Pn(n + 1, c))), ("Reports the value of the polynomial itself instead of its error.", Pn(n, c)),
-          ("Reports the size of the first omitted nonzero term of the series instead of the error.", abs(coeff(jn) * c ** jn))]
+    ds = [(f"Reports the Lagrange error bound {lag:.4f}, an upper limit for the error, instead of the actual error.", lag), (f"Uses the polynomial of degree {n - 1}, whose error at x = {c:g} is {abs(ff(c) - Pn(n - 1, c)):.4f}, instead of the degree {n} polynomial.", abs(ff(c) - Pn(n - 1, c))),
+          (f"Uses the polynomial of degree {n + 1}, whose error at x = {c:g} is {abs(ff(c) - Pn(n + 1, c)):.4f}, instead of the degree {n} polynomial.", abs(ff(c) - Pn(n + 1, c))), (f"Reports P_{n}({c:g}) = {Pn(n, c):.4f}, the value of the polynomial, instead of its error.", Pn(n, c)),
+          (f"Reports the size {abs(coeff(jn) * c ** jn):.4f} of the first omitted nonzero term of the series instead of the actual error.", abs(coeff(jn) * c ** jn))]
     opts_ = numopts(ds, key_v, dec4)
     stem = f"Let $P_{{{n}}}(x)$ be the Maclaurin polynomial of degree ${n}$ for $f(x)={ftex}$. What is the value of $\\left|f({c:g})-P_{{{n}}}({c:g})\\right|$?"
-    key = Opt(dec4(key_v), True, f"Evaluate f({c:g}) and the degree-{n} Maclaurin polynomial at x = {c:g} with a calculator and take the absolute value of the difference.", key_v)
+    key = Opt(dec4(key_v), True, f"With a calculator f({c:g}) = {ff(c):.4f} and P_{n}({c:g}) = {Pn(n, c):.4f}, so the absolute error is {key_v:.4f}.", key_v)
     bpr = _nb("c_taylor_actual_error_calc", "10.11", "1.E", "required", "Compute the actual error of a Maclaurin polynomial approximation with a calculator",
               ["Write the Maclaurin polynomial of the given degree", "Evaluate the polynomial and the function at the given point", "Take the absolute value of the difference"],
               [("the Maclaurin polynomial of degree n uses the terms of the series through x^n", "stated in the problem")],
@@ -240,10 +240,12 @@ def c_series_recognize_sum(rng):
         ser = f"\\dfrac{{(-1)^{{n+1}}}}{{n\\cdot {k}^{{n}}}}"
         lo = 1
         num = sum(((-1) ** (n + 1)) / (n * k ** n) for n in range(1, 400))
-        ds = [(-sp.log(1 - sp.Rational(1, k)), "Uses the series for -ln(1 - x), which has no alternating signs."), (sp.log(k + 1), "Substitutes x = k instead of x = 1/k into the series for ln(1 + x)."),
-              (sp.Rational(1, k), "Takes the first term of the series as the sum."), (sp.log(sp.Rational(k, k + 1)), "Reverses the sign of the logarithm, ln(k/(k + 1)).")]
+        key_why = f"The terms are (-1)^(n+1) x^n/n with x = 1/{k}, the Maclaurin series of ln(1 + x), so the sum is ln(1 + 1/{k}) = ln({k + 1}/{k})."
+        ds = [(-sp.log(1 - sp.Rational(1, k)), f"Uses the series for -ln(1 - x) at x = 1/{k}, which has no alternating signs, giving -ln({k - 1}/{k})."), (sp.log(k + 1), f"Substitutes x = {k} instead of x = 1/{k} into ln(1 + x), giving ln({k + 1})."),
+              (sp.Rational(1, k), f"Takes the first term, 1/{k}, as the sum of the whole series."), (sp.log(sp.Rational(k, k + 1)), f"Reverses the logarithm, giving ln({k}/{k + 1}) = -ln({k + 1}/{k}), which has the wrong sign.")]
     else:
         key_e = sp.sqrt(3) * sp.pi / 6
+        key_why = "Write each term as sqrt(3) (-1)^n (1/sqrt 3)^(2n+1)/(2n+1), which is sqrt(3) times the Maclaurin series of arctan x at x = 1/sqrt 3, so the sum is sqrt(3) arctan(1/sqrt 3) = sqrt(3) pi/6."
         ser = "\\dfrac{(-1)^{n}}{(2n+1)\\,3^{n}}"
         lo = 0
         num = sum(((-1) ** n) / ((2 * n + 1) * 3 ** n) for n in range(0, 400))
@@ -253,7 +255,7 @@ def c_series_recognize_sum(rng):
         raise ValueError("independent_check_failed")
     pool = opts([(w, v) for v, w in ds], key_e, anyfmt)
     stem = f"What is the sum of the series ${SERIES}_{{n={lo}}}^{{\\infty}} {ser}$?"
-    key = Opt(anyfmt(key_e), True, "Recognize a Maclaurin series evaluated at a point inside its interval of convergence and give the value of the function there.", key_e)
+    key = Opt(anyfmt(key_e), True, key_why, key_e)
     bpr = _nb("c_series_recognize_sum", "10.15", "1.E", "not_allowed", "Find the sum of a numerical series by recognizing it as a known Maclaurin series evaluated at a point",
               ["Match the general term to the Maclaurin series of ln(1 + x) or arctan x", "Identify the value of x that produces the given terms, including any constant factor", "Evaluate the function at that x exactly"],
               [("the point lies inside the interval of convergence of the Maclaurin series", "the ratio of the terms has absolute value less than 1 and the alternating series converges")],
@@ -270,11 +272,11 @@ def c_term_diff_sum(rng):
     num = sum(a_ ** (n - 1) / k ** n for n in range(1, 400))
     if abs(num - float(key_e)) > 1e-9:
         raise ValueError("independent_check_failed")
-    ds = [(sp.Rational(k, k - a_), "Forgets the factor 1/k when the exponent is lowered by differentiating."), (-sp.log(1 - sp.Rational(a_, k)), "Reports f(a), the value of the function, instead of f'(a)."),
-          (sp.Rational(a_, k * (k - a_)), "Keeps the power x^n instead of x^(n-1) after differentiating term by term."), (sp.Rational(1, (k - a_) ** 2), "Differentiates the closed form of the sum a second time.")]
+    ds = [(sp.Rational(k, k - a_), f"Drops the factor 1/{k} from each differentiated term, summing x^(n-1)/{k}^(n-1) = 1/(1 - x/{k}) = {k}/({k} - x) at x = {a_}."), (-sp.log(1 - sp.Rational(a_, k)), f"Reports f({a_}) = -ln(1 - {a_}/{k}), the value of the function, instead of the value of its derivative."),
+          (sp.Rational(a_, k - a_), f"Keeps the power x^n instead of lowering it to x^(n-1), summing (x/{k})^n = (x/{k})/(1 - x/{k}) = x/({k} - x) at x = {a_}."), (sp.Rational(1, (k - a_) ** 2), f"Differentiates the closed form 1/({k} - x) of the derivative once more, giving 1/({k} - x)^2.")]
     pool = opts([(w, v) for v, w in ds], key_e, anyfmt)
     stem = f"A function $f$ is defined by $f(x)={SERIES}_{{n=1}}^{{\\infty}} \\dfrac{{x^{{n}}}}{{n\\cdot {k}^{{n}}}}$ for $|x|<{k}$. What is the value of $f'({a_})$?"
-    key = Opt(anyfmt(key_e), True, "Differentiate term by term to get a geometric series with first term 1/k and ratio x/k, then sum it at the given x.", key_e)
+    key = Opt(anyfmt(key_e), True, f"Differentiating term by term gives sum x^(n-1)/{k}^n, a geometric series with first term 1/{k} and ratio x/{k}, whose sum is 1/({k} - x); at x = {a_} this is 1/{k - a_}.", key_e)
     bpr = _nb("c_term_diff_sum", "10.15", "1.E", "not_allowed", "Differentiate a power series term by term and sum the resulting geometric series at a point",
               ["Differentiate each term of the power series with respect to x", "Recognize a geometric series with first term 1/k and ratio x/k", "Sum it with a/(1 - r) at the given x"],
               [("a power series can be differentiated term by term inside its interval of convergence", "the given x lies in (-k, k)")],
@@ -369,36 +371,40 @@ def c_telescoping_sum(rng):
 
 
 # 10.4 적분 판정법으로 수렴하는 급수 고르기
-_INT_CONV = [("\\dfrac{1}{n(\\ln n)^{2}}", "n\\ge 2", lambda n: 1 / (n * math.log(n) ** 2), "The integral of 1/(x (ln x)^2) from 2 to infinity equals 1/ln 2, which is finite."),
+_INT_CONV = [("\\dfrac{1}{n(\\ln n)^{2}}", "n\\ge 2", lambda n: 1 / (n * math.log(n) ** 2), "The integral of 1/(x (ln x)^2) from 2 to infinity equals 1/ln 2 (substitute u = ln x), which is finite."),
              ("n e^{-n^{2}}", "n\\ge 1", lambda n: n * math.exp(-n * n), "The integral of x e^(-x^2) from 1 to infinity equals e^(-1)/2, which is finite."),
              ("\\dfrac{1}{n^{3/2}}", "n\\ge 1", lambda n: n ** -1.5, "The integral of x^(-3/2) from 1 to infinity equals 2, which is finite.")]
-_INT_DIV = [("\\dfrac{1}{n\\ln n}", "n\\ge 2", "The integral of 1/(x ln x) from 2 to infinity is ln(ln x) evaluated to infinity, which diverges."),
-            ("\\dfrac{\\ln n}{n}", "n\\ge 2", "The integral of (ln x)/x from 2 to infinity is (ln x)^2/2, which diverges."),
-            ("\\dfrac{1}{\\sqrt{n}}", "n\\ge 1", "The integral of x^(-1/2) from 1 to infinity diverges, since it is a p-integral with p = 1/2."),
-            ("\\dfrac{n}{n^{2}+1}", "n\\ge 1", "The integral of x/(x^2+1) from 1 to infinity is (1/2) ln(x^2+1), which diverges."),
-            ("\\dfrac{1}{n}", "n\\ge 1", "The integral of 1/x from 1 to infinity diverges.")]
+_INT_DIV = [("\\dfrac{1}{n\\ln n}", "n\\ge 2", lambda n: 1 / (n * math.log(n)), "The integral of 1/(x ln x) from 2 to infinity is ln(ln x) evaluated to infinity, which diverges."),
+            ("\\dfrac{\\ln n}{n}", "n\\ge 3", lambda n: math.log(n) / n, "The integral of (ln x)/x from 3 to infinity is (ln x)^2/2, which grows without bound."),
+            ("\\dfrac{1}{\\sqrt{n}}", "n\\ge 1", lambda n: n ** -0.5, "The integral of x^(-1/2) from 1 to infinity diverges, since it is a p-integral with p = 1/2."),
+            ("\\dfrac{n}{n^{2}+1}", "n\\ge 1", lambda n: n / (n * n + 1), "The integral of x/(x^2+1) from 1 to infinity is (1/2) ln(x^2+1), which grows without bound."),
+            ("\\dfrac{1}{n}", "n\\ge 1", lambda n: 1 / n, "The integral of 1/x from 1 to infinity diverges.")]
 
 
 def c_integral_test_choice(rng):
     conv = rng.choice(_INT_CONV)
     divs = rng.sample(_INT_DIV, 3)
-    # 독립: 수렴 후보는 부분합이 안정되고(큰 N 의 증가분이 작다), 발산 후보는 계속 증가하는지 수치로 확인
+    # 독립 경로 1: 모든 보기의 항이 표시된 시작 번호부터 정말 감소하는지(스템의 가설이 참이어야 한다)
+    for s_ in [conv] + divs:
+        st = int(s_[1].split("ge ")[1])
+        if not all(s_[2](n + 1) < s_[2](n) for n in range(st, st + 400)):
+            raise ValueError("hypothesis_false")
+    # 독립 경로 2: 수렴 후보는 큰 N 의 꼬리 합이 작다
     f = conv[2]
-    lo = 2 if "2" in conv[1] else 1
     inc = sum(f(n) for n in range(10 ** 5, 10 ** 5 + 10 ** 5))
     if inc > 0.02:
         raise ValueError("independent_check_failed")
     idx = lambda s_: s_[1].replace("\\ge ", "=")
     mk = lambda s_: f"$\\displaystyle\\sum_{{{idx(s_)}}}^{{\\infty}} {s_[0]}$"
     key_text = mk(conv)
-    pool = [Opt(mk(d), False, d[2], None) for d in divs]
+    pool = [Opt(mk(d), False, d[3], None) for d in divs]
     stem = "The terms of each of the following series are positive, continuous, and decreasing functions of $n$ for the indicated values of $n$. For which of the following series does the integral test show that the series converges?"
     key = Opt(key_text, True, conv[3] + " So the integral test shows convergence.", None)
     bpr = _nb("c_integral_test_choice", "10.4", "3.D", "not_allowed", "Choose the series whose related improper integral converges, so the integral test shows convergence",
               ["Replace each term by the corresponding function f(x)", "Evaluate or compare each improper integral from the starting index to infinity", "Select the series whose integral is finite"],
-              [("each f is positive, continuous, and decreasing so the integral test applies", "stated in the stem and true for the listed series")],
+              [("each f is positive, continuous, and decreasing so the integral test applies", "stated in the stem and checked numerically for every listed series")],
               [("log_reciprocal_diverges", "treats 1/(n ln n) like a convergent p-series"), ("sqrt_p_series", "treats p = 1/2 as convergent"), ("ln_over_n", "treats (ln n)/n as convergent because it tends to 0"), ("rational_n_over_n2", "treats n/(n^2+1) as convergent")],
-              "for the convergent series the tail sum over n from 10^5 to 2*10^5 is checked to be small, and each integral is evaluated with sympy")
+              "every listed term is checked numerically to be decreasing from its starting index, and the convergent series has a small tail sum over n from 10^5 to 2*10^5; each integral is evaluated with sympy")
     return build("c_integral_test_choice", "10.4", "3.D", "not_allowed", stem, key, pool, rng, bpr, 100, [f"conv={conv[0]}", f"divs={[d[0] for d in divs]}"])
 
 

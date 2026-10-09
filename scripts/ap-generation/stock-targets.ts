@@ -6,11 +6,12 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { buildAbTargets, cellStatus, type CellTarget, type ItemAttrs } from "../../lib/ap-generation/targets";
 import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
 import { connect } from "../keywords/db";
+import { suppItemNames } from "./supp-batches";
 
 const SUBJECT = "ap_calculus_ab";
 type It = ItemAttrs & { apSubjectCode: string; stockKey: string; validation: string };
 const read = (f: string) => JSON.parse(readFileSync(f, "utf-8")) as It[];
-const files = ["data/ap/stock/items.json", "data/ap/stock/s1a-items.json", "data/ap/stock/v1ab-items.json", "data/ap/stock/v45ab-items.json", "data/ap/stock/bc-topup-items.json", "data/ap/stock/graph-s1-items.json", "data/ap/stock/graph-s2a-items.json", "data/ap/stock/graph-s2b-items.json", "data/ap/stock/graph-s3a-items.json", "data/ap/stock/graph-s3b-items.json", "data/ap/stock/graph-s3c-items.json", "data/ap/stock/graph-s3d-items.json", "data/ap/stock/graph-s3e-items.json", "data/ap/stock/graph-s3f-items.json", "data/ap/stock/graph-s3g-items.json"].filter(existsSync);
+const files = ["data/ap/stock/items.json", "data/ap/stock/s1a-items.json", "data/ap/stock/v1ab-items.json", "data/ap/stock/v45ab-items.json", "data/ap/stock/bc-topup-items.json", "data/ap/stock/graph-s1-items.json", "data/ap/stock/graph-s2a-items.json", "data/ap/stock/graph-s2b-items.json", "data/ap/stock/graph-s3a-items.json", "data/ap/stock/graph-s3b-items.json", "data/ap/stock/graph-s3c-items.json", "data/ap/stock/graph-s3d-items.json", "data/ap/stock/graph-s3e-items.json", "data/ap/stock/graph-s3f-items.json", "data/ap/stock/graph-s3g-items.json", ...suppItemNames().map((n) => `data/ap/stock/${n}.json`)].filter(existsSync);
 const defect = new Set((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string }[]).map((r) => r.key));
 const items = files.flatMap(read).filter((i) => i.apSubjectCode === SUBJECT && i.validation === "auto_passed" && !defect.has(i.stockKey)).map((i) => ({ ...i, candidateKey: i.stockKey }));
 const cur = JSON.parse(readFileSync(`data/ap/curriculum-2027/${SUBJECT}.json`, "utf-8")) as ApCurriculumFile;

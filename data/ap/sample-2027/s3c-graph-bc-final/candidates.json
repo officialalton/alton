@@ -190,7 +190,7 @@
    "options": [
     {
      "text": "$1.881$",
-     "why": "Update (x, y) three times: y_{k+1} = y_k + h (x_k + sin y_k) using the slope at the left end, with a calculator.",
+     "why": "Update (x, y) three times: $y_{k+1} = y_k + h\\,(x_k + \\sin y_k)$ using the slope at the left end, with a calculator.",
      "value": "1.8812925"
     },
     {
@@ -266,7 +266,7 @@
    },
    "seed": 3900,
    "pack_id": "c_bc_euler_calc-s3900",
-   "explanation_en": "The correct answer is 1.881. Update (x, y) three times: y_{k+1} = y_k + h (x_k + sin y_k) using the slope at the left end, with a calculator.\n2.156 is incorrect: Uses y instead of sin y in the differential equation.\n2.074 is incorrect: Uses the x-value at the right end of each step in the slope instead of the left end.\n1.819 is incorrect: Does not update y between steps: every step uses sin(y0)."
+   "explanation_en": "The correct answer is 1.881. Update (x, y) three times: $y_{k+1} = y_k + h\\,(x_k + \\sin y_k)$ using the slope at the left end, with a calculator.\n2.156 is incorrect: Uses y instead of sin y in the differential equation.\n2.074 is incorrect: Uses the x-value at the right end of each step in the slope instead of the left end.\n1.819 is incorrect: Does not update y between steps: every step uses sin(y0)."
   },
   "verification": {
    "generatedByCode": true,

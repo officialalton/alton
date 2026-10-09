@@ -174,3 +174,11 @@ BC 전용 용어(series/converge/Taylor/Maclaurin/parametric/polar/vector/Euler/
 | g_volume_triangle_graph | 8.8 | 1.D | not_allowed | numerical quadrature of (sqrt(3)/4) f^2 on the interpolated graph (independent of exact quadratic pieces) |
 | g_volume_washer_graph | 8.11 | 1.D | not_allowed | numerical quadrature of f^2 - g^2 with breakpoints at the vertices times pi (independent of exact quadratic pi |
 | g_washer_curve_line_calc | 8.11 | 1.D | required | composite Simpson rule on pi (f^2 - L^2) between Brent-found roots (independent of scipy quad) |
+
+보강(supplement, 2026-10-09 오너 승인) FRQ 새 유형(기존 유형과 풀이 구조가 다른 것만):
+
+| id | 대표 토픽 / 스킬 / 계산기 | 파트 | 독립 검증 |
+|---|---|---|---|
+| `frq_table_values` | 3.1(+2.9, 5.1, 6.2) / 1.E / 불가 | a 표에서 합성함수 미분(2) / b 몫의 법칙(2) / c 평균변화율 + 평균값 정리 정당화(3) / d 폭이 다른 사다리꼴 합(2) | 로그 미분으로 몫 미분 재계산, 부동소수점 사다리꼴 |
+| `frq_function_analysis` | 5.4(+5.5, 5.6, 2.7) / 3.E / 불가 | a 접선(2) / b 상대극값 f' 부호(3) / c 변곡점 f'' 부호(2) / d 닫힌 구간 절대 최대·최소(2) | 중심차분 기울기, 수치 도함수 Brent, 격자 최댓값 |
+| `frq_rate_in_out` | 8.3(+4.1, 5.5) / 3.E / 계산기 | a 총 유입량(2) / b 순변화율 부호·단위(2) / c 시각의 양(2) / d 최대량 시각 정당화(3) | sympy 기호 적분, 순변화 함수 격자 최댓값 |

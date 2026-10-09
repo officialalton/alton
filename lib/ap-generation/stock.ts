@@ -53,7 +53,7 @@ export type BuildOpts = { history?: Record<string, HistoryEntry[]>; expert?: Rec
 export function buildStock(runs: Record<string, RawCand[]>, opts: BuildOpts = {}): StockItem[] {
   const items: StockItem[] = [];
   for (const [run, list] of Object.entries(runs)) for (const c of list) {
-    const gate = (c as { gateOverride?: string }).gateOverride ?? GATE_OF_RUN[run] ?? run; const passedOwn = !c.rejectionReason;
+    const gate = (c as { gateOverride?: string }).gateOverride ?? GATE_OF_RUN[run] ?? (run.startsWith("supp-") ? LATEST_GATE : run); const passedOwn = !c.rejectionReason;
     const validation: Validation = !passedOwn ? "rejected" : gate === LATEST_GATE || gate === REVALIDATED_GATE ? "auto_passed" : "needs_revalidation";
     const sampled = passedOwn && !c.reserve;
     items.push({ ...c, run, stockKey: `${run}:${c.candidateKey}`, pipeline: pipelineOf(c), validation, gateVersion: gate, expertStatus: opts.expert?.[`${run}:${c.candidateKey}`] ?? "unreviewed", releaseTier: "candidate", renderVerified: Boolean(opts.rendered?.has(`${run}:${c.candidateKey}`)), screenVerified: Boolean(opts.screened?.has(`${run}:${c.candidateKey}`)), reviewEnvReady: false,

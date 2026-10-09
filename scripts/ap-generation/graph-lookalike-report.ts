@@ -3,6 +3,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { lookAlikeReason } from "../../lib/ap-exam/look-alike";
+import { suppItemNames } from "./supp-batches";
 
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const NEW = arg("--file", "graph-s1-items");
@@ -11,7 +12,7 @@ const scan = new Set((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", 
 const load = (f: string) => JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as Raw[];
 const P = (r: Raw) => r.payload as { archetype?: string; stem?: string; stimulus?: { kind?: string }; blueprint?: { student_thinking?: string[] } };
 const ok = (i: Raw) => (i.apSubjectCode === "ap_calculus_ab" || i.apSubjectCode === "ap_calculus_bc") && i.validation === "auto_passed" && !scan.has(i.stockKey) && !i.duplicateOf && i.kind === "mc";
-const oldFiles = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "graph-s1-items", "graph-s2a-items", "graph-s2b-items", "graph-s3a-items", "graph-s3b-items", "graph-s3c-items", "graph-s3d-items", "graph-s3e-items", "graph-s3f-items", "graph-s3g-items"].filter((f) => f !== NEW);
+const oldFiles = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "graph-s1-items", "graph-s2a-items", "graph-s2b-items", "graph-s3a-items", "graph-s3b-items", "graph-s3c-items", "graph-s3d-items", "graph-s3e-items", "graph-s3f-items", "graph-s3g-items", ...suppItemNames()].filter((f) => f !== NEW);
 const olds = oldFiles.flatMap((f) => { try { return load(f); } catch { return []; } }).filter(ok);
 const news = load(NEW).filter(ok);
 const inp = (i: Raw) => ({ key: i.stockKey, family: i.itemFamilyId, archetype: P(i).archetype, topic: i.keywordCode, stimKind: P(i).stimulus?.kind ?? "none", stem: P(i).stem ?? "", thinking: P(i).blueprint?.student_thinking });
