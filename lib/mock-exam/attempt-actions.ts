@@ -122,6 +122,33 @@ export async function submitMockExamAttemptAction(attemptId: string): Promise<Ac
   return { ok: true, value: { attempt } };
 }
 
+/** AP: 섹션 시계 시작/재동기화 — 서버가 정한 남은 시간(초)을 섹션별로 돌려준다(서버 기준 시계, 마이그레이션 406). */
+export async function enterApSectionAction(attemptId: string, section: string): Promise<ActionResult<{ remaining: Record<string, number> }>> {
+  try {
+    const { supabase } = await requireStudentFeature("mock_exam");
+    const { data, error } = await supabase.rpc("mock_exam_ap_enter_section", { p_attempt_id: attemptId, p_section: section });
+    if (error) return { ok: false, error: toErr(error, "Could not start the section timer.") };
+    return { ok: true, value: { remaining: (data ?? {}) as Record<string, number> } };
+  } catch (e) {
+    return { ok: false, error: toErr(e, "Could not start the section timer.") };
+  }
+}
+
+/** AP: 마지막 섹션이 서버 시계로 만료됐으면 마감(채점 완료)한다. 멱등 — 반환은 응시 상태. */
+export async function settleApAttemptAction(attemptId: string): Promise<ActionResult<{ status: string; attempt: MockExamAttemptDetail | null }>> {
+  try {
+    const { supabase } = await requireStudentFeature("mock_exam");
+    const { data, error } = await supabase.rpc("mock_exam_ap_settle", { p_attempt_id: attemptId });
+    if (error) return { ok: false, error: toErr(error, "Could not check the exam time.") };
+    const status = String(data ?? "");
+    if (status === "graded") { revalidatePath("/student"); revalidatePath("/teacher"); revalidatePath("/parent"); }
+    const attempt = status === "graded" ? await loadMockExamAttemptDetail(supabase, attemptId) : null;
+    return { ok: true, value: { status, attempt } };
+  } catch (e) {
+    return { ok: false, error: toErr(e, "Could not check the exam time.") };
+  }
+}
+
 /** 교사 흐름 마지막: 자동 채점 결과를 확정한다(사양 7절 "자동 채점 가능한 문항은 서버가 계산하고,
  * 교사가 확정하는 기존 정책을 따른다" — homework_batches 의 gradeHomeworkBatchAction 과 같은 역할).
  * 확정 전까지 학생·학부모에게 정답·해설·정오는 보이지 않는다. */

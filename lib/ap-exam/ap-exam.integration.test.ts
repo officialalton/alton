@@ -233,9 +233,9 @@ describe("학생 응시 흐름(무료 회원)", () => {
   });
   it("시작 → 문항 상세: 선택지 수·섹션 레이아웃, 정답·해설 비노출", () => {
     attemptA = asUser(freeA, `select mock_exam_open_start('${setId}');`);
-    // 마이그레이션 405: 답 없이 AP 타이머만 돌아도(섹션 시간 저장) 응시가 in_progress 가 된다(SAT 섹션은 그대로).
+    // 마이그레이션 405→406: 답 없이 AP 섹션 타이머만 시작해도(enter_section) 응시가 in_progress 가 된다(SAT 섹션 시간 저장은 그대로).
     expect(psql(`select status from mock_exam_attempts where id = '${attemptA}';`)).toBe("assigned");
-    asUser(freeA, `select mock_exam_save_section_time('${attemptA}', 'ap_mc', 1700);`);
+    asUser(freeA, `select mock_exam_ap_enter_section('${attemptA}', 'ap_mc');`); // 406: 섹션 진입(서버 시계 시작)이 in_progress 로 올린다(405 의 시간 저장 방식 대체)
     expect(psql(`select status || '|' || (started_at is not null) from mock_exam_attempts where id = '${attemptA}';`)).toBe("in_progress|true");
     psql(`update mock_exam_attempts set status = 'assigned', started_at = null where id = '${attemptA}';`);
     asUser(freeA, `select mock_exam_save_section_time('${attemptA}', 'rw', 1700);`);
@@ -321,5 +321,83 @@ describe("부분 연습 세트: 실제 RPC 출력 → 배지·안내", () => {
     expect(apBadgeText({ subject: SUBJ, label: d.apLabel, layout: d.sectionLayout, name: d.examSetName })).toBe("Non-Calculator Practice");
     // 섹션 구성을 못 받아도(구버전 응답) 세트 이름으로 같은 배지
     expect(apBadgeText({ subject: "ap_calculus_ab", label: "mc_practice", layout: null, name: "AP Calculus AB — Calculator Practice" })).toBe("Calculator Practice");
+  });
+});
+
+// ── 서버 기준 시간 제한(마이그레이션 406) ─────────────────────────────────────────────
+describe("AP 시간 제한은 서버가 정한다", () => {
+  let tset: string, tAttempt: string, a1: string, a2: string, itemIds: string[];
+  const entered = (secAgoMinutes: number) => psql(`update mock_exam_attempts set ap_section_entered = jsonb_build_object('ap_mc', to_char((now() - interval '${secAgoMinutes} minutes') at time zone 'utc', 'YYYY-MM-DD"T"HH24:MI:SS.US"Z"')) where id = '${tAttempt}';`);
+  const rpc = (sql: string) => asUser(freeB, sql);
+  it("준비: 1분짜리 단일 섹션 세트 + 응시", () => {
+    addCandidate("tm1"); addCandidate("tm2");
+    a1 = convert("tm1", "mock_exam"); a2 = convert("tm2", "mock_exam");
+    const layout = { sections: [{ key: "ap_mc", kind: "mc", label: "Section I", minutes: 1, count: 2, calculator: "allowed", options: 4 }] };
+    tset = createApSet("timing", "mc_practice", "free", layout);
+    addItem(tset, a1, "ap_mc", 1); addItem(tset, a2, "ap_mc", 2); publishSet(tset, "free");
+    tAttempt = rpc(`select mock_exam_open_start('${tset}');`);
+    itemIds = psql(`select string_agg(id::text, ',' order by position) from mock_exam_set_items where exam_set_id = '${tset}';`).split(",");
+    expect(psql(`select status from mock_exam_attempts where id = '${tAttempt}';`)).toBe("assigned");
+  });
+  it("진입 전에는 시계가 없고, 첫 답 저장이 진입이다. 상세의 남은 시간은 서버 계산", () => {
+    const d0 = JSON.parse(rpc(`select mock_exam_attempt_detail('${tAttempt}')::text;`)) as { timeRemainingSeconds: Record<string, number> };
+    expect(d0.timeRemainingSeconds.ap_mc).toBe(60);
+    rpc(`select mock_exam_save_answer('${tAttempt}', '${itemIds[0]}', '1', 3);`);
+    expect(psql(`select status || '|' || (ap_section_entered ? 'ap_mc') from mock_exam_attempts where id = '${tAttempt}';`)).toBe("in_progress|true");
+    const d1 = JSON.parse(rpc(`select mock_exam_attempt_detail('${tAttempt}')::text;`)) as { timeRemainingSeconds: Record<string, number> };
+    expect(d1.timeRemainingSeconds.ap_mc).toBeLessThanOrEqual(60);
+    // 클라이언트가 보낸 남은 시간은 저장하지 않는다(서버 기준).
+    rpc(`select mock_exam_save_section_time('${tAttempt}', 'ap_mc', 9999);`);
+    expect(psql(`select coalesce(time_remaining_seconds::text, 'null') from mock_exam_attempts where id = '${tAttempt}';`)).not.toMatch(/9999/);
+  });
+  it("(a) 만료 뒤 답 저장·변경은 거절되고 저장돼 있던 답은 그대로다", () => {
+    entered(5);
+    expect(fails(() => rpc(`select mock_exam_save_answer('${tAttempt}', '${itemIds[1]}', '2', 3);`))).toMatch(/Time is up for this section/);
+    expect(fails(() => rpc(`select mock_exam_save_answer('${tAttempt}', '${itemIds[0]}', '3', 3);`))).toMatch(/Time is up for this section/);
+    expect(psql(`select count(*) || '|' || min(response::text) from mock_exam_answers where attempt_id = '${tAttempt}';`)).toBe('1|"1"');
+    const d = JSON.parse(rpc(`select mock_exam_attempt_detail('${tAttempt}')::text;`)) as { timeRemainingSeconds: Record<string, number> };
+    expect(d.timeRemainingSeconds.ap_mc).toBe(0);
+  });
+  it("(c) 화면을 닫은 채 만료돼도 다음 열 때 마감(settle)된다 — 멱등, 중복 행 없음", () => {
+    expect(rpc(`select mock_exam_ap_settle('${tAttempt}');`)).toBe("graded");
+    expect(rpc(`select mock_exam_ap_settle('${tAttempt}');`)).toBe("graded");
+    expect(psql(`select status || '|' || (submitted_at is not null) || '|' || (graded_at is not null) from mock_exam_attempts where id = '${tAttempt}';`)).toBe("graded|true|true");
+    expect(psql(`select count(*) from mock_exam_attempts where student_id = (select student_id from mock_exam_attempts where id = '${tAttempt}') and exam_set_id = '${tset}';`)).toBe("1");
+  });
+  it("(b)(d) 재시도·더블클릭·두 탭 제출은 오류 없이 멱등이고 시각·행이 바뀌지 않는다; 결과 상세가 열린다", () => {
+    const before = psql(`select submitted_at::text || '|' || graded_at::text from mock_exam_attempts where id = '${tAttempt}';`);
+    for (let i = 0; i < 3; i++) rpc(`select mock_exam_submit('${tAttempt}');`);
+    expect(psql(`select submitted_at::text || '|' || graded_at::text from mock_exam_attempts where id = '${tAttempt}';`)).toBe(before);
+    expect(psql(`select count(*) from mock_exam_answers where attempt_id = '${tAttempt}';`)).toBe("1");
+    const d = JSON.parse(rpc(`select mock_exam_attempt_detail('${tAttempt}')::text;`)) as { status: string; items: { correctIndex: number | null; explanation: string | null }[] };
+    expect(d.status).toBe("graded");
+    expect(d.items.some((i) => i.correctIndex !== null)).toBe(true); // 제출 뒤에는 정답·해설이 열린다
+    expect(fails(() => rpc(`select mock_exam_save_answer('${tAttempt}', '${itemIds[1]}', '2', 3);`))).toMatch(/already been submitted/);
+  });
+  it("만료 전 settle 은 아무것도 하지 않고, 수동 제출 뒤 settle 도 그대로(동시 호출)", () => {
+    const att2 = asUser(freeA, `select mock_exam_open_start('${tset}');`);
+    asUser(freeA, `select mock_exam_save_answer('${att2}', '${itemIds[0]}', '0', 2);`);
+    expect(asUser(freeA, `select mock_exam_ap_settle('${att2}');`)).toBe("in_progress");
+    asUser(freeA, `select mock_exam_submit('${att2}');`);
+    asUser(freeA, `select mock_exam_submit('${att2}');`);
+    expect(asUser(freeA, `select mock_exam_ap_settle('${att2}');`)).toBe("graded");
+    // 다른 학생의 응시는 건드릴 수 없다
+    expect(fails(() => rpc(`select mock_exam_ap_settle('${att2}');`))).toMatch(/only continue your own/);
+  });
+  it("407: 테스트 계정 응시는 문항 노출 집계에서 빠지고, 테스트 표식을 풀면 센다", () => {
+    const cnt = () => Number(psql(`select coalesce(sum(attempt_count), 0) from mock_exam_problem_exposure_counts() where problem_id = '${a1}';`));
+    const fb = psql(`select student_id from mock_exam_attempts where id = '${tAttempt}';`);
+    expect(psql(`select is_test_account from students where id = '${fb}';`)).toBe("t"); // @example.com 패턴으로 자동 표식
+    expect(cnt()).toBe(0);
+    psql(`update students set is_test_account = false where id = '${fb}';`);
+    expect(cnt()).toBe(1);
+    psql(`update students set is_test_account = true where id = '${fb}';`);
+    expect(cnt()).toBe(0);
+  });
+  it("SAT 제출은 기존처럼 이미 제출된 응시에 오류를 낸다(회귀)", () => {
+    const sat = psql(`insert into mock_exam_sets (name, difficulty_tier, status, format, readiness_status, published_at, access_tier) values (${q(`${RUN}-sat-submit`)}, 'standard', 'published', 'fixed', 'not_applicable', now(), 'free') returning id;`);
+    const att = asUser(freeA, `select mock_exam_open_start('${sat}');`);
+    asUser(freeA, `select mock_exam_submit('${att}');`);
+    expect(fails(() => asUser(freeA, `select mock_exam_submit('${att}');`))).toMatch(/already been submitted/);
   });
 });

@@ -12,6 +12,8 @@ vi.mock("@/lib/mock-exam/attempt-actions", () => ({
   toggleMockExamFlagAction: vi.fn(async () => ({ ok: true, value: undefined })),
   toggleMockExamSavedToPracticeAction: vi.fn(async () => ({ ok: true, value: undefined })),
   recordMockExamEntryAction: vi.fn(async () => ({ ok: true, value: undefined })),
+  enterApSectionAction: vi.fn(async () => ({ ok: true, value: { remaining: {} } })),
+  settleApAttemptAction: vi.fn(async () => ({ ok: true, value: { status: "in_progress", attempt: null } })),
 }));
 vi.mock("@/app/session/[id]/MockExamMathTools", () => ({ default: () => null, MockExamToolButtons: () => <span data-testid="calc-buttons" /> }));
 vi.mock("@/app/components/ProblemErrorReportButton", () => ({ default: () => <button type="button">Report a problem</button> }));

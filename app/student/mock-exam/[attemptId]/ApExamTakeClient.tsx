@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam/attempt-data";
 import {
   saveMockExamAnswerAction,
-  saveMockExamSectionTimeAction,
+  enterApSectionAction,
+  settleApAttemptAction,
   submitMockExamAttemptAction,
   toggleMockExamFlagAction,
   toggleMockExamSavedToPracticeAction,
@@ -66,6 +67,9 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
   );
   const [locked, setLocked] = useState<Record<string, boolean>>({});
   const tickRef = useRef(remaining);
+  const sectionRef = useRef(sectionKey);
+  const finalKeyRef = useRef(layout[layout.length - 1]?.key);
+  useEffect(() => { sectionRef.current = sectionKey; }, [sectionKey]);
   useEffect(() => { tickRef.current = remaining; }, [remaining]);
   const currentItemId = current?.setItemId;
   useEffect(() => {
@@ -80,11 +84,12 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
     }, 1000);
     return () => clearInterval(timer);
   }, [section, isSubmitted, currentItemId]);
-  useEffect(() => {
-    if (isSubmitted) return;
-    const persist = setInterval(() => { for (const s of layout) void saveMockExamSectionTimeAction(attempt.id, s.key as "rw", tickRef.current[s.key] ?? s.minutes * 60); }, 15000);
-    return () => clearInterval(persist);
-  }, [attempt.id, isSubmitted, layout]);
+  // 서버 시계(마이그레이션 406): 섹션에 들어갈 때마다 서버에 알리고, 서버가 계산한 남은 시간으로 맞춘다. 클라이언트 값은 저장하지 않는다.
+  const enterSection = useCallback(async (key: string) => {
+    const r = await enterApSectionAction(attempt.id, key);
+    if (r.ok) setRemaining((prev) => ({ ...prev, ...r.value.remaining }));
+  }, [attempt.id]);
+  useEffect(() => { if (!isSubmitted && sectionKey) void enterSection(sectionKey); }, [isSubmitted, sectionKey, enterSection]);
 
   // 마지막 섹션(단일 섹션 포함)의 시간이 끝나면 자동 제출한다 — 더 풀 문항이 없는데 제출 버튼까지 번호를 눌러 가게 하지 않는다.
   // 중간 섹션이 끝나면 잠금 안내와 함께 "다음 섹션" 버튼이 보인다(SAT 도 시간 소진 시 해당 섹션만 잠그고 직접 제출 또는 모든 섹션 잠금 시 마감).
@@ -104,7 +109,13 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
     setStatus("saving"); setError(null);
     const r = await saveMockExamAnswerAction(attempt.id, setItemId, value, itemSecondsRef.current[setItemId]);
     setStatus(r.ok ? "saved" : "error");
-    if (!r.ok) setError(r.error);
+    if (!r.ok) {
+      setError(r.error);
+      if (/Time is up/i.test(r.error)) { // 서버 시계가 이미 만료 — 이 섹션을 잠그고, 마지막 섹션이면 서버가 마감했는지 확인한다.
+        setLocked((l) => ({ ...l, [sectionRef.current]: true }));
+        if (sectionRef.current === finalKeyRef.current) void settleApAttemptAction(attempt.id).then((x) => { if (x.ok && x.value.attempt) setSubmittedAttempt(x.value.attempt); });
+      }
+    }
   }, [attempt.id]);
   const flush = useCallback(async () => {
     const p = pending.current;
@@ -162,7 +173,6 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
   async function handleSubmit() {
     setSubmitting(true); setError(null);
     await flush();
-    for (const s of layout) await saveMockExamSectionTimeAction(attempt.id, s.key as "rw", tickRef.current[s.key] ?? 0);
     const r = await submitMockExamAttemptAction(attempt.id);
     setSubmitting(false);
     if (!r.ok) { setError(r.error); return; }

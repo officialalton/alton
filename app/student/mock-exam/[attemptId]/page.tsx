@@ -20,7 +20,12 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
   const { attemptId } = await params;
   const { user, supabase } = await requireUser();
   // RPC 가 권한 없음·잘못된 id 로 오류를 던지면 500 대신 404 (남의 응시 URL 을 직접 열 때).
-  const attempt = await loadMockExamAttemptDetail(supabase, attemptId).catch(() => null);
+  let attempt = await loadMockExamAttemptDetail(supabase, attemptId).catch(() => null);
+  // AP: 화면을 닫은 채 마지막 섹션이 서버 시계로 만료됐으면 지금 마감하고(멱등) 결과를 연다.
+  if (attempt && attempt.studentId === user.id && attempt.examProgram === "ap" && (attempt.status === "in_progress" || attempt.status === "assigned")) {
+    const { data: st } = await supabase.rpc("mock_exam_ap_settle", { p_attempt_id: attemptId });
+    if (st === "graded") attempt = await loadMockExamAttemptDetail(supabase, attemptId).catch(() => null);
+  }
   if (!attempt || attempt.studentId !== user.id) notFound();
 
   // 2026-09-21(UAT 지적) — 이 라우트는 AdminShell/StudentShell 밖 독립 진입점이라 왼쪽
