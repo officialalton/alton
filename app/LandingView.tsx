@@ -2,7 +2,9 @@ import ConsultForm from "./ConsultForm";
 import { Icon } from "./landing-icons";
 import { CtaButton, Eyebrow, PublicFooter, PublicHeader, SplitTitle, sentenceCase } from "./components/public/PublicShell";
 import { publicFontClass } from "./components/public/fonts";
-import { heroHeadline } from "@/lib/landing/claims";
+import { HERO_HEADLINE } from "@/lib/landing/claims";
+import AvailabilityCard from "./components/public/AvailabilityCard";
+import { EMPTY_AVAILABILITY, type LandingAvailability } from "@/lib/landing/practice-test-count";
 import DirectorPortrait from "./components/public/DirectorPortrait";
 import { DIRECTOR, DIRECTOR_INTERVIEW } from "@/lib/landing/director";
 import { EXPERT, FAQ, FEATURES, FINAL_CTA, HERO, NEXT_STEP } from "@/lib/landing/copy";
@@ -11,45 +13,7 @@ import type { LandingDestinations } from "@/lib/landing/cta";
 const FEATURE_ICONS = ["goal", "report", "homework", "essay"] as const;
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
-/** 히어로 미리보기 — 실제 학생 화면의 구조(결과·약점 영역·오답 노트·단어장)를 보여주는 문서형 도식. 점수 수치는 싣지 않는다. */
-function ProductPreview() {
-  return (
-    <div role="img" aria-label="Illustrative preview of practice test results, weak areas, mistake notebook and vocabulary builder" className="relative w-full max-w-[520px] lg:ml-auto">
-      <div className="p-doc">
-        <div className="flex items-center justify-between border-b border-[var(--p-line)] pb-4">
-          <strong className="p-serif text-[22px] font-normal">Practice Test Results</strong>
-          <span className="p-label !text-[10.5px]">Illustrative preview</span>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          {[
-            { name: "Reading & Writing", note: "Module 1 → Module 2" },
-            { name: "Math", note: "Module 1 → Module 2" },
-          ].map((s) => (
-            <div key={s.name} className="flex flex-col gap-2">
-              <span className="text-[14px] font-semibold">{s.name}</span>
-              <span className="p-sk" style={{ width: "88%" }} />
-              <span className="p-mono text-[11px] text-[var(--p-mute)]">{s.note}</span>
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-col gap-2.5">
-          <span className="p-sk" style={{ width: "100%" }} />
-          <span className="p-sk" style={{ width: "92%" }} />
-          <span className="p-sk p-sk-red" style={{ width: "70%" }} />
-          <span className="p-sk" style={{ width: "46%" }} />
-        </div>
-        <div className="p-note self-start">Where to focus next</div>
-        <div className="grid grid-cols-2 gap-3">
-          <div className="p-note">Mistake notebook</div>
-          <div className="p-note">Vocabulary builder</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function LandingView({ dest, practiceTestCount = 0, apPracticeSetCount = 0 }: { dest: LandingDestinations; practiceTestCount?: number; apPracticeSetCount?: number }) {
-  const headline = heroHeadline(practiceTestCount, apPracticeSetCount);
+export default function LandingView({ dest, availability = EMPTY_AVAILABILITY }: { dest: LandingDestinations; availability?: LandingAvailability }) {
   return (
     <div id="top" className={publicFontClass}>
       <PublicHeader dest={dest} />
@@ -61,11 +25,10 @@ export default function LandingView({ dest, practiceTestCount = 0, apPracticeSet
             <div className="flex flex-col gap-7">
               <Eyebrow>{sentenceCase(HERO.eyebrow)}</Eyebrow>
               <h1 className="p-h1">
-                {headline.line1}
+                {HERO_HEADLINE.line1}
                 <br />
-                <em>{headline.line2}</em>
+                <em>{HERO_HEADLINE.line2}</em>
               </h1>
-              {headline.growing && <p className="m-0 mt-2 text-[13.5px] text-[var(--p-mute)]">{headline.growing}</p>}
               <p className="p-lede max-w-[560px]">{HERO.supporting}</p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <CtaButton href={dest.freeLearning} ctaName="free_learning" section="hero">{HERO.primaryCta}</CtaButton>
@@ -80,7 +43,7 @@ export default function LandingView({ dest, practiceTestCount = 0, apPracticeSet
                 <p className="m-0 text-[13.5px] leading-[1.6] text-[var(--p-mute)] max-w-[520px]">{HERO.freeNote}</p>
               </div>
             </div>
-            <ProductPreview />
+            <AvailabilityCard data={availability} />
           </div>
         </section>
 

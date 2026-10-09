@@ -109,3 +109,11 @@
 .public-theme .p-qa > div { border-top: 1px solid var(--p-line); padding: 26px 0; display: grid; gap: 10px; }
 .public-theme .p-qa > div:last-child { border-bottom: 1px solid var(--p-line); }
 .public-theme .p-qa h3 { margin: 0; font-family: var(--font-p-serif), Georgia, serif; font-weight: 400; font-size: 22px; line-height: 1.25; color: var(--p-ink); }
+
+/* 2026-10-09 가용성 카드(히어로) */
+.public-theme .p-live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--p-red); display: inline-block; }
+.public-theme .p-bar { display: block; height: 6px; background: var(--p-skeleton); }
+.public-theme .p-bar > span { display: block; height: 100%; background: var(--p-ink); transform-origin: left; animation: p-bar-in .7s ease-out both; }
+.public-theme .p-coming { border: 1px dashed var(--p-line); padding: 14px 16px; background: transparent; }
+@keyframes p-bar-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .public-theme .p-bar > span { animation: none; } }
