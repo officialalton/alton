@@ -95,3 +95,11 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 
 ## 8. import 재적재 안전(2026-10-09)
 `import-candidates.ts` 는 이미 DB 에 있는 키의 `render_verified`·`screen_verified`·`render/screen_evidence`·`release_tier`·`problem_id`·`purpose`·`converted_*`·`expert_status` 를 **절대 덮어쓰지 않는다**. 기존 행은 검증 판정 필드(review_state, rejection_reason, gate_version, 문항군·중복·defect_flags, is_current/load_batch_id 등)만 갱신하고, 변환된 행은 판정 **승격**(예: needs_revalidation→auto_passed)에 딸린 3필드(review_state, gate_version, rejection_reason)만 갱신한다. 검증·변환된 행의 판정은 강등하지 않는다. payload 는 내용(stimulus·stem·options·key_index·key_index_final·parts)이 바뀌고 검증·변환되지 않은 행에서만 쓴다(402 트리거가 검증을 푸는 것을 피함). 새 키만 전체 행 insert. 규칙은 순수 함수 `lib/ap-generation/import-merge.ts`(테스트 8건). `--report` 는 dry-run 에서도 보존/갱신 건수와 키 목록을 `data/ap/stock/import-merge-report.json` 에 쓴다. 시뮬레이션(증거 153개 키가 검증·변환된 상태로 있다고 가정): 새 키 68(S1a), 기존 갱신 633, 검증·변환 보존 153(보호 필드 patch 0건), 판정 승격 143(그중 검증·변환 행 3건 — 실제 DB 에서 이 3건이 이미 auto_passed 면 승격 0). 승격 143건은 미검증·미변환 행에 적용되고, 검증·변환 행에 걸리는 키는 `--report` 의 `upgradeOnVerifiedKeys` 로 확인한다.
+
+## 9. 보조 배치와 칸 목표 명령(2026-10-09 3차)
+**18개(AB 계산기 필수 MC 3원형) 보조 배치**: 라벨 `ab-calc-mc-2026-10-09`. 18행 = auto_passed 16 + exact_duplicate 2(diffeq_value_calc 의 작은 매개변수 공간에서 동일 문항 발생), 문항군 3(원형당 1; 군당 유효 2개 상한 → 유효 6). 렌더·학생 화면 검증 전에는 사용하지 않는다.
+1. `npx tsx scripts/ap-generation/stock.ts`(한 번의 계산으로 items.json·s1a-items.json·v1ab-items.json·v45ab-items.json 동시 갱신) → `npx tsx scripts/ap-generation/defect-scan.ts --extra data/ap/stock/s1a-items.json --extra data/ap/stock/v1ab-items.json --extra data/ap/stock/v45ab-items.json`
+2. 안전 병합 importer(기존 검증·변환 필드 보존): `npx tsx scripts/ap-generation/import-candidates.ts --items data/ap/stock/v1ab-items.json --batch ab-calc-mc-2026-10-09 --supplement --report`(dry-run) → 같은 명령에 `--execute`.
+3. (선택, AB 보강 15개) `--items data/ap/stock/v45ab-items.json --batch ab-reinforce-2026-10-09 --supplement`.
+4. 점검: `npx tsx scripts/ap-generation/stock-consistency.ts`(보조 파일 3개를 합쳐 DB 현재 배치와 비교).
+**재고 목표(마이그레이션 404 적용 후)**: `npx tsx scripts/ap-generation/stock-targets.ts`(파일 생성·합계/칸별 부족 출력) → `--load`(dry-run) → `--load --execute` → 적재 후 `--verify`(파일 칸별 부족 = DB `ap_stock_cell_shortfall_v`). 합계는 `ap_stock_total_v`. 로컬 롤백 트랜잭션(402~404 + 851행 재현)에서 파일과 뷰의 28개 칸 목표가 전부 일치함을 확인했다.

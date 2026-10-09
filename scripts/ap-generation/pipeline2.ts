@@ -6,6 +6,8 @@ import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { runBatch, toolInput, estimate, ledger, type BatchReq } from "../mock-exam-generation/batch-lib";
 import { validateBlueprint, type Blueprint } from "../../lib/ap-generation/blueprint";
+import { gateBioFrq } from "../../lib/ap-generation/bio-frq-checks";
+import { gateMicroFrq } from "../../lib/ap-generation/micro-frq-checks";
 import { generatorDefects } from "../../lib/ap-generation/generator-defects";
 import { normalizeReview, recoverFromBlocks } from "../../lib/ap-generation/review-parse";
 import { calibrateFrq, calibrateMc, gateDuplicate, gateFrq, gateMc, gateNoCalcExact, wordingPreserves, type FrqPack, type McPack } from "../../lib/ap-generation/gates";
@@ -177,6 +179,8 @@ function checkStage() {
     const cell = cm.get(c.cellId)!;
     let reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...(calcAbGuide ? gateGuideMc(calcAbGuide, c.item as McPack) : []), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet, { requirePartTopics: SUBJECT === "ap_biology" && !process.env.AP_LEGACY_ITEMS, topics: new Set(topicTitle.keys()) }), ...calibrateFrq(c.item as FrqPack, SUBJECT), ...(calcAbGuide ? gateGuideFrq(calcAbGuide, c.item as FrqPack) : [])];
     for (const code of bpCheck()[c.key] ?? []) reasons.push(`blueprint:${code}`); // 설계도 실패는 LLM 단계 전에 차단
+    if (c.item && c.kind === "frq_bundle" && SUBJECT === "ap_biology" && !process.env.AP_LEGACY_ITEMS) reasons.push(...gateBioFrq(c.item as unknown as Record<string, unknown>, { topics: new Set(topicTitle.keys()) }).map((x) => `bio_free:${x.code}`)); // Bio FRQ 무료 결정적 설계 검사
+    if (c.item && c.kind === "frq_bundle" && SUBJECT === "ap_microeconomics" && !process.env.AP_LEGACY_ITEMS) reasons.push(...gateMicroFrq(c.item as unknown as Record<string, unknown>, { topics: new Set(topicTitle.keys()), skills: skillSet }).map((x) => `micro_free:${x.code}`)); // Micro FRQ 무료 결정적 설계 검사
     if (c.item) reasons.push(...generatorDefects(c.item as unknown as Record<string, unknown>).map((d) => `generator_defect:${d.code}`)); // 생성기 결함(중괄호 미닫힘·표 본문 누락 등)은 LLM 단계 전에 차단
     if (process.env.AP_EVAL_BYPASS) reasons = reasons.filter((r) => r.startsWith("generator_defect")); // 결함 주입 평가: 주입과 무관한 구형식 품질 게이트로 평가에서 빠지지 않게 한다
     if (process.env.AP_SKIP_GUIDE_MEMBERSHIP) reasons = reasons.filter((r) => !["archetype_not_in_guide", "frq_template_not_in_guide"].includes(r)); // 구방식 arm 은 코드 원형 목록 밖이 당연하다(구조 규칙만 면제)
@@ -244,7 +248,7 @@ Agreement of an independent solver is supporting evidence only. Fail when unsure
 // 재검증(S2): 코드가 키를 검증하지 않은 기존(LLM 직접 생성) 문항용. 코드 우선 전제 문장을 바꾸고 과목별 공식 기준 메모를 덧붙인다. S1a/S1b(칼큘러스 동결 검토기)에는 영향 없음.
 const SUBJECT_NOTES: Record<string, string> = {
   ap_biology: "SUBJECT NOTES (AP Biology): four options; items must test data/experiment interpretation, prediction or argumentation, not rote recall, and reject conclusions the data do not support. Every number the item uses must appear in the stimulus data. Free response: judge each PART against its own skill and its own rubric rows (the bundle skill is only a label); long FRQ = 9 points, short FRQ = four 1-point parts. Per-point time estimates are an internal reference only: never reject for estimated minutes. The bundle's representative skill is only a label: NEVER fail scope_skill because the parts assess different official skills. Alternative accepted phrasings listed in a rubric row (alt_solutions) count as accepted answers; do not call a rubric rigid when equivalent wordings are listed.",
-  ap_microeconomics: "SUBJECT NOTES (AP Microeconomics): FIVE options (A-E), options may be short sentences; graphs must be fully specified as data (curves or labeled points with prices and quantities); calculations (elasticity, surplus, profit, MR=MC, payoff matrices) must be unambiguous. Free response: long FRQ = 10 points, short FRQ = 5 points with parts of 1-2 points mixing calculation and explanation (setup and answer rows are normal); judge each part against its own rubric rows, and do not reject for low per-part demand when the grain matches the official short-FRQ format.",
+  ap_microeconomics: "SUBJECT NOTES (AP Microeconomics): FIVE options (A-E), options may be short sentences; graphs must be fully specified as data (curves or labeled points with prices and quantities); calculations (elasticity, surplus, profit, MR=MC, payoff matrices) must be unambiguous. The bundle's representative skill is only a label: never fail scope_skill because the parts assess different official skills. Rubric rows are judged on meaning; listed alternative wordings count as accepted. Free response: long FRQ = 10 points, short FRQ = 5 points with parts of 1-2 points mixing calculation and explanation (setup and answer rows are normal); judge each part against its own rubric rows, and do not reject for low per-part demand when the grain matches the official short-FRQ format.",
   ap_calculus_ab: "",
 };
 const REVIEW_SYS = !process.env.AP_LEGACY_ITEMS && process.env.AP_SUBJECT_NOTES ? REVIEW_SYS_BASE + "\n" + (SUBJECT_NOTES[SUBJECT] ?? "") : process.env.AP_LEGACY_ITEMS
