@@ -74,3 +74,22 @@ BC 샘플(MC 30): 공유 AB 14 + BC 전용 16(U6 3, U7 2, U8 1, U9 5, U10 5).
 | g_vector_displacement_graph | 9.5 | 1.D | not_allowed | numerical quadrature of each interpolated velocity component plus the initial position (independent of trapezo |
 
 보강(bc-topup) 원형: param_xvel_graph, polar_area_graph, polar_rprime_graph, lagrange_graph, alt_series_table, taylor_table, polar_table_distance, param_speed_table (`calc_bc_topup.py`). FRQ: frq_polar_region(극좌표 영역, 계산기, 9.8/9.7), frq_euler_logistic.
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_alt_test_choice | 10.7 | 3.D | not_allowed | b_n is checked to be strictly decreasing for 2 <= n < 300 and its limit evaluated at n = 10^6; the distractors |
+| c_comparison_benchmark | 10.6 | 3.D | not_allowed | the ratio of the general term to 1/n^(q-p) is evaluated at n = 10^6 and by sympy's limit, and must be finite a |
+| c_geometric_terms_needed_calc | 10.2 | 1.E | required | partial sums are accumulated term by term in floating point and compared with the closed-form sum a/(1 - r) (i |
+| c_integral_test_bound_calc | 10.4 | 1.E | required | the sum is computed from 200000 terms plus the exact tail, and the tail integral by scipy quad (independent of |
+| c_integral_test_choice | 10.4 | 3.D | not_allowed | for the convergent series the tail sum over n from 10^5 to 2*10^5 is checked to be small, and each integral is |
+| c_lagrange_min_degree_calc | 10.12 | 1.E | required | for the two critical degrees, the maximum of /f^(n+1)/ is found by a 2001-point grid on [0, c] and the bound r |
+| c_partial_sum_term | 10.1 | 1.E | not_allowed | the first m terms are generated one by one and their exact sum is compared with S_m; the difference is also co |
+| c_ratio_limit_e | 10.8 | 1.E | not_allowed | the ratio is evaluated at n = 10^7 using logarithms in floating point and compared with c/e (independent of th |
+| c_series_integral_calc | 10.15 | 1.E | required | the truncated series is rebuilt with sympy's series expansion and integrated numerically by quadrature (indepe |
+| c_series_recognize_sum | 10.15 | 1.E | not_allowed | partial sums of 400 terms computed in floating point (independent of the recognition of the series) |
+| c_taylor_actual_error_calc | 10.11 | 1.E | required | the coefficients come from the series closed form (not sympy's series expansion used to generate the options)  |
+| c_taylor_from_diffeq_calc | 10.11 | 1.E | required | Picard iteration of the integral equation y = y0 + integral of F(x, y), truncated at x^3, gives the same coeff |
+| c_telescoping_sum | 10.1 | 1.E | not_allowed | the partial sums up to 200000 terms plus a tail estimate are accumulated in floating point (independent of the |
+| c_term_diff_sum | 10.15 | 1.E | not_allowed | the terms n x^(n-1)/(n k^n) = x^(n-1)/k^n are summed numerically (400 terms) at the given x (independent of th |

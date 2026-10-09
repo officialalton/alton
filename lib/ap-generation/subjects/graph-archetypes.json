@@ -4,7 +4,7 @@
   "topic": "5.5",
   "skill": "1.E",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "maximum of f over a 6001-point grid on [0, 6] (independent of the candidate comparison)"
   ],
@@ -20,7 +20,7 @@
   "topic": "6.5",
   "skill": "3.E",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "sign of the integrand on a fine grid and Brent roots (independent of the Fundamental Theorem argument)"
   ],
@@ -32,11 +32,28 @@
   "bc": false
  },
  {
+  "id": "c_alt_test_choice",
+  "topic": "10.7",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "b_n is checked to be strictly decreasing for 2 <= n < 300 and its limit evaluated at n = 10^6; the distractors' limits are evaluated symbolically"
+  ],
+  "misconceptions": [
+   "limit of b_n is 1/2, not zero",
+   "b_n = 1 + 1/n tends to 1",
+   "cos(1/n) tends to 1, not zero",
+   "ratio of equal degrees tends to 1"
+  ],
+  "bc": true
+ },
+ {
   "id": "c_area_between_calc",
   "topic": "8.4",
   "skill": "1.D",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "composite Simpson rule on f - g between the Brent root (independent of scipy quad)"
   ],
@@ -53,7 +70,7 @@
   "topic": "10.10",
   "skill": "1.E",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "terms computed in floating point and the first index with b_(N+1) below the tolerance found by direct search (independent of solving the inequality)"
   ],
@@ -70,7 +87,7 @@
   "topic": "7.5",
   "skill": "1.E",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "the iteration recomputed as a table of floating-point values (independent of the loop implementation)"
   ],
@@ -87,7 +104,7 @@
   "topic": "6.14",
   "skill": "1.E",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "scipy quad to a finite upper bound of 40 compared with the infinite-range quad (independent of the infinite-range algorithm)"
   ],
@@ -100,11 +117,28 @@
   "bc": true
  },
  {
+  "id": "c_comparison_benchmark",
+  "topic": "10.6",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the ratio of the general term to 1/n^(q-p) is evaluated at n = 10^6 and by sympy's limit, and must be finite and positive"
+  ],
+  "misconceptions": [
+   "benchmark exponent one too large",
+   "benchmark exponent too small",
+   "right series, wrong conclusion",
+   "uses only the denominator degree"
+  ],
+  "bc": true
+ },
+ {
   "id": "c_decay_model_calc",
   "topic": "7.8",
   "skill": "1.E",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "Runge-Kutta numerical integration of dy/dt = -ky with k recomputed from the two data points (independent of the exponential solution)"
   ],
@@ -121,7 +155,7 @@
   "topic": "8.9",
   "skill": "1.D",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "composite Simpson rule on pi f^2 (independent of scipy quad)"
   ],
@@ -138,7 +172,7 @@
   "topic": "6.4",
   "skill": "1.D",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "central difference (step 1e-6) of F computed by scipy quad (independent of the Fundamental Theorem)"
   ],
@@ -151,11 +185,28 @@
   "bc": false
  },
  {
+  "id": "c_geometric_terms_needed_calc",
+  "topic": "10.2",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "partial sums are accumulated term by term in floating point and compared with the closed-form sum a/(1 - r) (independent of the remainder formula)"
+  ],
+  "misconceptions": [
+   "compares the nth term to the tolerance",
+   "drops 1/(1 - r)",
+   "one term too few",
+   "one term too many"
+  ],
+  "bc": true
+ },
+ {
   "id": "c_implicit_slope_calc",
   "topic": "3.2",
   "skill": "1.E",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "the curve is solved for y(x) with Brent's method near the point and differentiated by central difference (independent of implicit differentiation)"
   ],
@@ -172,7 +223,7 @@
   "topic": "5.6",
   "skill": "2.E",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "Brent's method on the lambdified f'' near the reported root and a sign-change check (independent of the polynomial root finder)"
   ],
@@ -185,11 +236,62 @@
   "bc": false
  },
  {
+  "id": "c_integral_test_bound_calc",
+  "topic": "10.4",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the sum is computed from 200000 terms plus the exact tail, and the tail integral by scipy quad (independent of the closed forms); the ordering lower bound < sum < upper bound is verified"
+  ],
+  "misconceptions": [
+   "integral from N+1",
+   "omits the tail",
+   "adds one term",
+   "reports the actual sum"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_integral_test_choice",
+  "topic": "10.4",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "for the convergent series the tail sum over n from 10^5 to 2*10^5 is checked to be small, and each integral is evaluated with sympy"
+  ],
+  "misconceptions": [
+   "treats 1/(n ln n) like a convergent p-series",
+   "treats p = 1/2 as convergent",
+   "treats (ln n)/n as convergent because it tends to 0",
+   "treats n/(n^2+1) as convergent"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_lagrange_min_degree_calc",
+  "topic": "10.12",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "for the two critical degrees, the maximum of |f^(n+1)| is found by a 2001-point grid on [0, c] and the bound recomputed (independent of the closed form k^(n+1) e^(kc))"
+  ],
+  "misconceptions": [
+   "uses n! in the denominator",
+   "drops the exponential factor",
+   "drops the k power",
+   "reports the number of terms"
+  ],
+  "bc": true
+ },
+ {
   "id": "c_linear_approx_overunder_calc",
   "topic": "4.6",
   "skill": "1.F",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "the exact f(a + dx) is compared with the tangent line value (independent of the sign of f'')"
   ],
@@ -205,7 +307,7 @@
   "topic": "6.2",
   "skill": "1.E",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "direct sum of the lambdified integrand at the midpoints (independent of the closed form of the points)"
   ],
@@ -222,7 +324,7 @@
   "topic": "4.2",
   "skill": "1.E",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "bisection on v over a fine grid (independent of Brent's method)"
   ],
@@ -235,11 +337,28 @@
   "bc": false
  },
  {
+  "id": "c_partial_sum_term",
+  "topic": "10.1",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the first m terms are generated one by one and their exact sum is compared with S_m; the difference is also computed symbolically in n"
+  ],
+  "misconceptions": [
+   "reports S_m",
+   "subtracts in the wrong order",
+   "gives a_(m+1)",
+   "reports the limit"
+  ],
+  "bc": true
+ },
+ {
   "id": "c_quotient_deriv_calc",
   "topic": "2.9",
   "skill": "1.E",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "central difference (step 1e-6) of the original function (independent of the quotient rule)"
   ],
@@ -252,11 +371,28 @@
   "bc": false
  },
  {
+  "id": "c_ratio_limit_e",
+  "topic": "10.8",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the ratio is evaluated at n = 10^7 using logarithms in floating point and compared with c/e (independent of the limit definition of e)"
+  ],
+  "misconceptions": [
+   "treats (n/(n+1))^n as 1",
+   "gets e instead of 1/e",
+   "drops the constant c",
+   "takes the reciprocal"
+  ],
+  "bc": true
+ },
+ {
   "id": "c_related_rates_cone_calc",
   "topic": "4.5",
   "skill": "1.D",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "V(h) inverted numerically by Brent's method and differentiated by central difference in time (independent of the chain rule)"
   ],
@@ -273,7 +409,7 @@
   "topic": "5.7",
   "skill": "3.D",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "maximum of f over a fine grid on [0, 20] compared with f at the critical number (independent of the Second Derivative Test)"
   ],
@@ -286,11 +422,113 @@
   "bc": false
  },
  {
+  "id": "c_series_integral_calc",
+  "topic": "10.15",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the truncated series is rebuilt with sympy's series expansion and integrated numerically by quadrature (independent of the term-by-term antiderivative formula)"
+  ],
+  "misconceptions": [
+   "uses only two terms",
+   "evaluates instead of integrating",
+   "forgets to divide by the new exponent",
+   "reports the exact integral"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_series_recognize_sum",
+  "topic": "10.15",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "partial sums of 400 terms computed in floating point (independent of the recognition of the series)"
+  ],
+  "misconceptions": [
+   "uses a series without alternating signs",
+   "substitutes the wrong x",
+   "uses the first term",
+   "drops the constant factor"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_taylor_actual_error_calc",
+  "topic": "10.11",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the coefficients come from the series closed form (not sympy's series expansion used to generate the options) and are checked against sympy series; the function value comes from the math library"
+  ],
+  "misconceptions": [
+   "reports the Lagrange bound",
+   "uses a lower degree",
+   "uses a higher degree",
+   "reports the polynomial value"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_taylor_from_diffeq_calc",
+  "topic": "10.11",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "Picard iteration of the integral equation y = y0 + integral of F(x, y), truncated at x^3, gives the same coefficients (independent of repeated implicit differentiation)"
+  ],
+  "misconceptions": [
+   "stops at degree 2",
+   "omits the factorials",
+   "forgets the chain rule factor",
+   "omits f(0)"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_telescoping_sum",
+  "topic": "10.1",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the partial sums up to 200000 terms plus a tail estimate are accumulated in floating point (independent of the partial fraction decomposition)"
+  ],
+  "misconceptions": [
+   "assumes everything cancels",
+   "keeps the first term",
+   "forgets the partial fraction constant",
+   "adds an extra term"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_term_diff_sum",
+  "topic": "10.15",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the terms n x^(n-1)/(n k^n) = x^(n-1)/k^n are summed numerically (400 terms) at the given x (independent of the geometric-series formula)"
+  ],
+  "misconceptions": [
+   "forgets the factor 1/k",
+   "reports f instead of f'",
+   "keeps the power x^n after differentiating",
+   "differentiates again"
+  ],
+  "bc": true
+ },
+ {
   "id": "c_trig_deriv_calc",
   "topic": "2.10",
   "skill": "1.C",
   "calculator": "required",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "central difference (step 1e-6) of the original function (independent of the symbolic derivative)"
   ],

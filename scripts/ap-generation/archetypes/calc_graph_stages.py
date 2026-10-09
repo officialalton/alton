@@ -20,4 +20,9 @@ STAGES = {
     "graph_s3a_bc": ["g_alt_series_graph", "g_param_arclength_graphs_calc", "g_lagrange_p2_calc"],
     "graph_s2_bc": ["g_lagrange_decimal_calc", "g_taylor_deriv_graph", "g_param_speed_graphs", "g_param_dydx_graphs", "g_euler_graph", "g_vector_displacement_graph"],
     "graph_s2_ab": ["g_quotient_mixed_calc", "g_second_deriv_mixed_calc", "g_extreme_mixed_calc", "g_trapezoid_unequal_graph", "g_separable_graph_calc", "g_context_roc_meaning"],
+    # 2026-10-09 오너 승인 보강(supplement, docs/ap/supplement-report.md): 배치 1 = BC 단원 10 필수 부족·대체 어려운 구조
+    "supp_b1_bc": [
+        "c_lagrange_min_degree_calc", "c_taylor_actual_error_calc", "c_series_integral_calc", "c_taylor_from_diffeq_calc", "c_integral_test_bound_calc", "c_geometric_terms_needed_calc",
+        "c_series_recognize_sum", "c_term_diff_sum", "c_ratio_limit_e", "c_partial_sum_term", "c_telescoping_sum", "c_integral_test_choice", "c_comparison_benchmark", "c_alt_test_choice",
+    ],
 }
