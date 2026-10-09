@@ -41,6 +41,19 @@ describe("autoMathExplanation", () => {
 
 import { readFileSync } from "node:fs";
 import katex from "katex";
+describe("부등호·괄호 지수·대괄호 거듭제곱", () => {
+  it("산문 부등호 사슬", () => {
+    expect(autoMathExplanation("with t in minutes, 0 <= t <= 6.")).toBe("with t in minutes, $0 \\le t \\le 6$.");
+    expect(autoMathExplanation("negative for x<=2 and")).toBe("negative for $x\\le 2$ and");
+    expect(autoMathExplanation("when t >= 0, then")).toBe("when $t \\ge 0$, then");
+    expect(autoMathExplanation("5 > 3 and a < b")).toBe("5 > 3 and a < b"); // <=·>= 가 없으면 그대로
+  });
+  it("괄호 지수는 중괄호로, 대괄호 밑도 처리", () => {
+    expect(autoMathExplanation("H(t) = 20 + 50 e^(- 0.3t) for")).toContain("$e^{- 0.3t}$");
+    expect(autoMathExplanation("/[g(2)]^2 = 24/9")).toContain("$[g(2)]^2$");
+  });
+});
+
 describe("재고 전수: 정규화 뒤 $...$ 밖에 원문 TeX 가 남지 않는다", () => {
   it("items.json·s1a-items.json 의 해설·모범 답안", () => {
     const items = [...JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")), ...JSON.parse(readFileSync("data/ap/stock/s1a-items.json", "utf-8"))] as { stockKey: string; validation: string; payload: { explanation_en?: string; parts?: { model_answer?: string }[] } }[];

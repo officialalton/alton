@@ -13,6 +13,7 @@ import {
   recordMockExamEntryAction,
 } from "@/lib/mock-exam/attempt-actions";
 import { AP_SUBJECT_NAME, CALCULATOR_TEXT, apBadgeText, apCoverageLines, apGuidanceLines, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
+import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
 import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 import { frqAnswerToJson, parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
 import LearningText from "@/app/session/[id]/LearningText";
@@ -254,7 +255,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
             </div>
             {apPassageForDisplay(current.passage, current.question) && <LearningText text={apPassageForDisplay(current.passage, current.question) as string} className="mb-3 text-[13.5px]" />}
             {current.figure ? <ProblemFigure spec={current.figure} text={problemText(current.passage, current.question, current.options)} className="mb-4" /> : null}
-            {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[14px]" />}
+            {current.question && <LearningText text={autoMathExplanation(current.question)} className="mb-3 font-semibold text-[14px]" />}
 
             {current.format === "mc" && current.options ? (
               <div className="flex flex-col gap-2" role="radiogroup" aria-label="Answer choices">
@@ -269,7 +270,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
                       }}
                       className={`flex min-w-0 items-start gap-2.5 rounded-lg border-2 px-3 py-2 text-left text-[13.5px] ${chosen ? "border-ink bg-ink/5 font-bold" : "border-grey-200"} ${out ? "opacity-50" : ""}`}>
                       <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold ${chosen ? "border-ink bg-ink text-white" : "border-grey-400 text-grey-500"}`}>{chosen ? "✓" : LETTERS[i]}</span>
-                      <span className={`min-w-0 break-words ${out ? "line-through" : ""}`}><LearningText text={opt} /></span>
+                      <span className={`min-w-0 break-words ${out ? "line-through" : ""}`}><LearningText text={autoMathExplanation(opt)} /></span>
                     </button>
                   );
                 })}
@@ -282,7 +283,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
                     <label htmlFor={`frq-${current.setItemId}-${p.label}`} className="mb-1 block text-[13px] font-semibold">
                       ({p.label}) <span className="font-normal text-grey-500">[{p.points} {p.points === 1 ? "point" : "points"}]</span>
                     </label>
-                    <LearningText text={p.prompt} className="mb-1.5 text-[13.5px]" />
+                    <LearningText text={autoMathExplanation(p.prompt)} className="mb-1.5 text-[13.5px]" />
                     <textarea id={`frq-${current.setItemId}-${p.label}`} data-testid={`frq-input-${p.label}`} rows={p.mode === "calculate" ? 4 : 6}
                       value={frqValues[p.label] ?? ""} onChange={(e) => editPart(current, p.label, e.target.value)} onBlur={() => void flush()}
                       className={`w-full rounded-lg border border-grey-300 px-3 py-2 text-[13.5px] ${p.mode === "code" ? "font-mono" : ""}`} placeholder="Type your answer" />

@@ -78,14 +78,14 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
               <p className="mb-2 text-[12px] font-bold text-grey-500">Question {n}{it.format === "mc" ? (it.correct === true ? " · Correct" : it.response ? " · Incorrect" : " · Not answered") : " · Free response"}</p>
               {apPassageForDisplay(it.passage, it.question) && <LearningText text={apPassageForDisplay(it.passage, it.question) as string} className="mb-2 text-[13.5px]" />}
               {it.figure ? <ProblemFigure spec={it.figure} text={problemText(it.passage, it.question, it.options)} className="mb-3" /> : null}
-              {it.question && <LearningText text={it.question} className="mb-2 font-semibold text-[14px]" />}
+              {it.question && <LearningText text={autoMathExplanation(it.question)} className="mb-2 font-semibold text-[14px]" />}
               {it.format === "mc" && it.options ? (
                 <ul className="flex flex-col gap-1.5">
                   {it.options.map((o, i) => {
                     const isKey = it.correctIndex === i, mine = it.response === String(i);
                     return (
                       <li key={i} className={`flex gap-2 rounded-lg border px-3 py-1.5 text-[13px] ${isKey ? "border-green bg-green/10" : mine ? "border-red bg-red/5" : "border-grey-200"}`}>
-                        <span className="font-bold">{LETTERS[i]}</span><span className="min-w-0 break-words"><LearningText text={o} /></span>
+                        <span className="font-bold">{LETTERS[i]}</span><span className="min-w-0 break-words"><LearningText text={autoMathExplanation(o)} /></span>
                         {isKey && <span className="ml-auto text-[11px] font-bold text-green">Correct answer</span>}
                         {mine && !isKey && <span className="ml-auto text-[11px] font-bold text-red">Your answer</span>}
                       </li>
@@ -96,7 +96,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
                 <div className="flex flex-col gap-2">
                   {(it.parts ?? []).map((p) => (
                     <div key={p.label}>
-                      <div className="text-[12.5px] font-semibold"><span>({p.label}) [{p.points} pt]</span> <LearningText text={p.prompt} className="inline" /></div>
+                      <div className="text-[12.5px] font-semibold"><span>({p.label}) [{p.points} pt]</span> <LearningText text={autoMathExplanation(p.prompt)} className="inline" /></div>
                       <p className="mt-1 whitespace-pre-wrap rounded border border-grey-200 bg-grey-50 px-3 py-2 text-[13px]" data-testid={`frq-answer-${p.label}`}>{parseFrqAnswer(it.response ?? "")[p.label] || "(no answer)"}</p>
                     </div>
                   ))}
