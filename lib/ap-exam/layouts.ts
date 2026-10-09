@@ -104,7 +104,11 @@ const sameKeys = (a: string[], b: string[]) => a.length === b.length && a.every(
 export function apPartialOfLayout(layout: LayoutLike | null | undefined): ApPartialId | null {
   if (!layout?.length) return null;
   const keys = layout.map((s) => s.key);
-  return (Object.keys(AP_PARTIALS) as ApPartialId[]).find((id) => sameKeys(keys, AP_PARTIALS[id].sectionKeys)) ?? null;
+  const exact = (Object.keys(AP_PARTIALS) as ApPartialId[]).find((id) => sameKeys(keys, AP_PARTIALS[id].sectionKeys));
+  if (exact) return exact;
+  // 짧은 FRQ 연습 세트(2~4 묶음): FRQ 섹션 키의 부분집합이면 Free-Response 부분 세트
+  if (keys.every((k) => AP_PARTIALS.frq.sectionKeys.includes(k))) return "frq";
+  return null;
 }
 /** 공식 풀 구성(모든 공식 섹션이 공식 문항 수·시간으로 존재)일 때만 true. */
 export function isOfficialFullLayout(subject: string | null | undefined, layout: LayoutLike | null | undefined): boolean {
@@ -113,16 +117,22 @@ export function isOfficialFullLayout(subject: string | null | undefined, layout:
   return layout.length === off.length && off.every((o) => layout.some((s) => s.key === o.key && s.count === o.count && s.minutes === o.minutes));
 }
 /** 목록·응시·결과 화면의 배지. 부분 연습이면 파트 배지, 풀 구성이 확인될 때만 "Full Practice Exam". 레이아웃을 모르면 풀 시험이라고 말하지 않는다. */
-export function apBadgeText(o: { subject?: string | null; label?: ApSetLabel | null; layout?: LayoutLike | null }): string {
-  const partial = apPartialOfLayout(o.layout);
+/** 세트 이름이 정확히 "<과목> — <부분 연습 이름>" 이면 그 부분 id. 섹션 구성을 못 받은 경우(요약 행·구버전 응답)의 보조 판별이다. */
+export function apPartialOfName(subject: string | null | undefined, name: string | null | undefined): ApPartialId | null {
+  if (!subject || !name || !AP_PARTIAL_SUBJECTS.includes(subject)) return null;
+  return (Object.keys(AP_PARTIALS) as ApPartialId[]).find((id) => name.replace(/\s+\d+$/, "") === partialSetName(subject, id)) ?? null;
+}
+export function apBadgeText(o: { subject?: string | null; label?: ApSetLabel | null; layout?: LayoutLike | null; name?: string | null }): string {
+  const partial = apPartialOfLayout(o.layout) ?? (o.layout?.length ? null : apPartialOfName(o.subject, o.name));
   if (partial && AP_PARTIAL_SUBJECTS.includes(o.subject ?? "")) return AP_PARTIALS[partial].nameSuffix;
   if (o.label === "full_practice") return isOfficialFullLayout(o.subject, o.layout) ? AP_LABEL_TEXT.full_practice : "Practice Set";
   return o.label ? AP_LABEL_TEXT[o.label] : "Practice Set";
 }
 const CALC_RULE: Record<ApCalculator, string> = { allowed: "Calculator allowed.", not_allowed: "No calculator is allowed.", required: "A graphing calculator is required.", na: "" };
 /** 시작 안내(영어): 파트·계산기 규칙·문항 수·시간. 값은 세트 레이아웃(공식 복사본)에서 읽는다. */
-export function apGuidanceLines(o: { subject?: string | null; layout?: (LayoutLike[number] & { label?: string })[] | null }): string[] {
-  const layout = o.layout ?? []; if (!layout.length) return [];
+export function apGuidanceLines(o: { subject?: string | null; layout?: (LayoutLike[number] & { label?: string })[] | null; name?: string | null }): string[] {
+  const byName = o.layout?.length ? null : apPartialOfName(o.subject, o.name);
+  const layout = o.layout?.length ? o.layout : byName ? sectionsForPartial(o.subject as string, byName) : []; if (!layout.length) return [];
   const partial = apPartialOfLayout(layout); const exam = AP_SUBJECT_NAME[o.subject ?? ""] ?? "AP";
   const secOf = (k: string) => layout.find((s) => s.key === k);
   if (partial === "noncalc_mc" || partial === "calc_mc") {
@@ -130,11 +140,35 @@ export function apGuidanceLines(o: { subject?: string | null; layout?: (LayoutLi
     return [`Practice for ${exam} Section I, ${part}: ${s.count} multiple-choice questions in ${s.minutes} minutes. ${CALC_RULE[s.calculator ?? "na"]}`.trim()];
   }
   if (partial === "frq") {
-    const a = secOf("ap_frq_a")!, b = secOf("ap_frq_b")!;
+    const a = secOf("ap_frq_a"), b = secOf("ap_frq_b");
+    const n = (a?.count ?? 0) + (b?.count ?? 0), mins = (a?.minutes ?? 0) + (b?.minutes ?? 0);
+    const official = a?.count === 2 && b?.count === 4;
+    const part = (x: typeof a, name: string) => (x ? `${name} (${x.count} question${x.count === 1 ? "" : "s"}, ${x.minutes} min): ${x.calculator === "not_allowed" ? "no calculator" : "calculator allowed"}.` : "");
     return [
-      `Practice for ${exam} Section II: ${a.count + b.count} free-response questions in ${a.minutes + b.minutes} minutes.`,
-      `Part A (${a.count} questions, ${a.minutes} min): ${a.calculator === "not_allowed" ? "no calculator" : "calculator allowed"}. Part B (${b.count} questions, ${b.minutes} min): ${b.calculator === "not_allowed" ? "no calculator" : "calculator allowed"}.`,
+      official
+        ? `Practice for ${exam} Section II: ${n} free-response questions in ${mins} minutes.`
+        : `Free-response practice: ${n} question${n === 1 ? "" : "s"} in ${mins} minutes. This is a shorter set, not the official ${exam} Section II (6 questions, 90 minutes).`,
+      [part(a, "Part A"), part(b, "Part B")].filter(Boolean).join(" "),
     ];
   }
   return layout.map((s) => `${(s as { label?: string }).label ?? s.key}: ${s.count} questions · ${s.minutes} min${CALC_RULE[s.calculator ?? "na"] ? ` · ${CALC_RULE[s.calculator ?? "na"].replace(/\.$/, "")}` : ""}`);
+}
+
+// ── 다루는 단원 안내(부분 세트는 과목 전체가 아니라 일부 단원만 다룬다) ─────────────────────────
+/** sat_domain("ap:4.3") 목록 → 정렬된 단원 번호("4"). */
+export function apUnitsFromDomains(domains: (string | null | undefined)[]): string[] {
+  return [...new Set(domains.map((d) => /^ap:(\d+)\./.exec(d ?? "")?.[1]).filter((u): u is string => !!u))].sort((a, b) => Number(a) - Number(b));
+}
+const unitList = (u: string[]) => (u.length === 1 ? `Unit ${u[0]}` : `Units ${u.join(", ")}`);
+/** 시작·결과 화면의 단원 안내. 공식 풀 구성에는 붙이지 않는다. 내부의 단원 불균형은 UI 에 "전범위 커버"로 주장하지 않는다. */
+export function apCoverageLines(o: { subject?: string | null; units?: string[] | null; layout?: LayoutLike | null; name?: string | null; label?: ApSetLabel | null; result?: boolean }): string[] {
+  const units = o.units ?? []; if (!units.length) return [];
+  if (o.label === "full_practice" && isOfficialFullLayout(o.subject, o.layout)) return [];
+  const exam = AP_SUBJECT_NAME[o.subject ?? ""] ?? "AP";
+  return [
+    `Covers ${unitList(units)}.`,
+    o.result
+      ? `Your result reflects only ${units.length === 1 ? "this unit" : "these units"}. It is not a measure of your achievement across the whole ${exam} course.`
+      : `This practice set covers only ${units.length === 1 ? "this unit" : "these units"}, so a result on it should not be read as achievement across the whole ${exam} course.`,
+  ];
 }

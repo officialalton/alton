@@ -139,3 +139,38 @@ describe("부분 세트 표시 정책", () => {
   });
   it("Full Practice Exam 은 공식 구성 충족 전에는 불가", () => { expect(fullPracticeLabelAllowed(false)).toBe(false); expect(fullPracticeLabelAllowed(true)).toBe(true); });
 });
+
+import { planFrqShortSet } from "./assemble";
+import { AP_LAYOUTS, apBadgeText, apGuidanceLines } from "./layouts";
+describe("짧은 Free-Response 연습 세트(2~4 묶음)", () => {
+  const f = (n: number, calc: string, fam: string, arch: string, o: Partial<AssembleCandidate> = {}) => c(n, { kind: "frq_bundle", calculator: calc, itemFamilyId: fam, archetype: arch, keywordCode: `${1 + (n % 8)}.1`, ...o });
+  it("서로 다른 문항군 3개 → 3묶음, 계산기 허용은 Part A·불가는 Part B, 문항당 15분", () => {
+    const pool = [f(1, "required", "a", "x1"), f(2, "not_allowed", "b", "x2"), f(3, "not_allowed", "c", "x3"), f(4, "not_allowed", "c", "x3")]; // c 는 같은 문항군 중복
+    const p = planFrqShortSet("ap_calculus_ab", pool);
+    expect(p.ok).toBe(true); expect(p.composition.bundles).toBe(3); expect(p.composition.families).toBe(3);
+    expect(p.layoutSections.map((s) => [s.key, s.count, s.minutes])).toEqual([["ap_frq_a", 1, 15], ["ap_frq_b", 2, 30]]);
+    expect(p.totalMinutes).toBe(45); expect(p.name).toBe("AP Calculus AB — Free-Response Practice");
+    expect(new Set(p.items.map((i) => i.c.itemFamilyId)).size).toBe(3);
+  });
+  it("최대 4개, 문항군이 하나뿐이면(같은 원형의 변형) 만들지 않고 보고한다", () => {
+    const many = Array.from({ length: 8 }, (_, i) => f(i, i % 2 ? "not_allowed" : "required", `fam${i}`, `arch${i}`));
+    expect(planFrqShortSet("ap_calculus_ab", many).composition.bundles).toBe(4);
+    const one = Array.from({ length: 6 }, (_, i) => f(i, "not_allowed", "same", "arch"));
+    const p = planFrqShortSet("ap_calculus_ab", one);
+    expect(p.ok).toBe(false); expect(p.shortage[0]).toMatch(/2개 이상 필요/);
+  });
+  it("겹침 한도: 다른 세트에 쓴 묶음은 새 묶음이 모자랄 때만, 한도까지", () => {
+    const pool = [f(1, "required", "a", "x1"), f(2, "not_allowed", "b", "x2")];
+    expect(planFrqShortSet("ap_calculus_ab", pool, { used: new Set(["p1", "p2"]), overlapMax: 0 }).ok).toBe(false);
+    expect(planFrqShortSet("ap_calculus_ab", pool, { used: new Set(["p1", "p2"]), overlapMax: 1 }).ok).toBe(false);
+    expect(planFrqShortSet("ap_calculus_ab", pool, { used: new Set(["p1", "p2"]), overlapMax: 2 }).ok).toBe(true);
+  });
+  it("화면 문구: 실제 문항 수·시간·파트별 계산기, 공식 6문항 시험이라고 하지 않는다", () => {
+    const layout = [{ ...AP_LAYOUTS.ap_calculus_ab.find((x) => x.key === "ap_frq_a")!, count: 1, minutes: 15 }, { ...AP_LAYOUTS.ap_calculus_ab.find((x) => x.key === "ap_frq_b")!, count: 2, minutes: 30 }];
+    const g = apGuidanceLines({ subject: "ap_calculus_ab", layout }).join(" ");
+    expect(g).toContain("3 questions in 45 minutes"); expect(g).toContain("not the official AP Calculus AB Section II (6 questions, 90 minutes)");
+    expect(g).toContain("Part A (1 question, 15 min): calculator allowed."); expect(g).toContain("Part B (2 questions, 30 min): no calculator.");
+    expect(apBadgeText({ subject: "ap_calculus_ab", label: "frq_practice", layout })).toBe("Free-Response Practice");
+    expect(apBadgeText({ subject: "ap_calculus_ab", label: "frq_practice", layout: layout.slice(1) })).toBe("Free-Response Practice");
+  });
+});

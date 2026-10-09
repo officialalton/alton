@@ -233,15 +233,22 @@ export function renderApGraph(spec: ApGraphSpec): { svg: string; alt: string; is
   return { svg: o.join(""), alt, issues };
 }
 
+/** 표 글자(HTML): 이스케이프 + 평문 수식 표기를 읽기 좋게 — `<=`·`>=` → ≤·≥, `m^2`·`e^(-0.3 t)`·`10^-18` → 위첨자. 생성기가 표 칸에 평문으로 쓴 수식이 화면에 그대로 `^` 로 남지 않게 한다. */
+export function escMath(t: string): string {
+  let s = esc(t);
+  s = s.replace(/&lt;=/g, "\u2264").replace(/&gt;=/g, "\u2265");
+  return s.replace(/([A-Za-z0-9)\u00b5\u03bc])\^(\([^()]*\)|\{[^{}]*\}|[-\u2212]?[A-Za-z0-9.]+)/g, (_m, b: string, e: string) => `${b}<sup>${e.replace(/^[({]|[)}]$/g, "")}</sup>`);
+}
+
 export function renderApTable(spec: ApTableSpec): { markup: string; alt: string; issues: FigureIssue[] } {
   const issues: FigureIssue[] = [];
-  const cell = (c: string | number) => esc(typeof c === "number" ? fnum(c) : c);
+  const cell = (c: string | number) => escMath(typeof c === "number" ? fnum(c) : c);
   const num = (c: string | number) => typeof c === "number" || /^-?[\d,.]+%?$/.test(String(c).trim());
-  const head = spec.columns.map((c) => `<th scope="col" style="border:1px solid #6b7280;padding:6px 10px;background:#f3f4f6;text-align:left;font-weight:600">${esc(c)}</th>`).join("");
+  const head = spec.columns.map((c) => `<th scope="col" style="border:1px solid #6b7280;padding:6px 10px;background:#f3f4f6;text-align:left;font-weight:600">${escMath(c)}</th>`).join("");
   const body = spec.rows.map((r) => `<tr>${r.map((c, i) => `<td style="border:1px solid #9ca3af;padding:6px 10px;${num(c) && i > 0 ? "text-align:right;font-variant-numeric:tabular-nums" : ""}">${cell(c)}</td>`).join("")}</tr>`).join("");
-  const cap = spec.title ? `<caption style="caption-side:top;text-align:left;font-weight:600;padding-bottom:6px">${esc(spec.title)}</caption>` : "";
-  const notes = (spec.notes ?? []).length ? `<ul style="margin:6px 0 0;padding-left:18px;font-size:12px;color:#374151">${(spec.notes ?? []).map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : "";
-  const unit = spec.units ? `<div style="font-size:12px;color:#374151;margin-top:4px">Units: ${esc(spec.units)}</div>` : "";
+  const cap = spec.title ? `<caption style="caption-side:top;text-align:left;font-weight:600;padding-bottom:6px">${escMath(spec.title)}</caption>` : "";
+  const notes = (spec.notes ?? []).length ? `<ul style="margin:6px 0 0;padding-left:18px;font-size:12px;color:#374151">${(spec.notes ?? []).map((n) => `<li>${escMath(n)}</li>`).join("")}</ul>` : "";
+  const unit = spec.units ? `<div style="font-size:12px;color:#374151;margin-top:4px">Units: ${escMath(spec.units)}</div>` : "";
   const markup = `<figure style="margin:0"><table style="border-collapse:collapse;font-size:14px;max-width:100%">${cap}<thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>${unit}${notes}</figure>`;
   const alt = `${spec.title ? spec.title + ". " : ""}Table with columns ${spec.columns.join(", ")} and ${spec.rows.length} rows.`;
   return { markup, alt, issues };
@@ -249,8 +256,8 @@ export function renderApTable(spec: ApTableSpec): { markup: string; alt: string;
 
 export function renderApTableSet(spec: ApTableSetSpec): { markup: string; alt: string; issues: FigureIssue[] } {
   const parts = spec.tables.map((t) => renderApTable(t));
-  const notes = (spec.notes ?? []).length ? `<ul style="margin:8px 0 0;padding-left:18px;font-size:12px;color:#374151">${(spec.notes ?? []).map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : "";
-  const markup = `<div class="ap-table-set" style="display:flex;flex-direction:column;gap:14px;max-width:100%">${spec.title ? `<div style="font-weight:700">${esc(spec.title)}</div>` : ""}${parts.map((p) => p.markup).join("")}${notes}</div>`;
+  const notes = (spec.notes ?? []).length ? `<ul style="margin:8px 0 0;padding-left:18px;font-size:12px;color:#374151">${(spec.notes ?? []).map((n) => `<li>${escMath(n)}</li>`).join("")}</ul>` : "";
+  const markup = `<div class="ap-table-set" style="display:flex;flex-direction:column;gap:14px;max-width:100%">${spec.title ? `<div style="font-weight:700">${escMath(spec.title)}</div>` : ""}${parts.map((p) => p.markup).join("")}${notes}</div>`;
   return { markup, alt: `${spec.title ? spec.title + ". " : ""}${parts.map((p) => p.alt).join(" ")}`, issues: parts.flatMap((p) => p.issues) };
 }
 

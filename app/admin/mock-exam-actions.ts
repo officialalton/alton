@@ -607,6 +607,8 @@ export async function getMockExamSetContentAction(examSetId: string): Promise<Mo
 
 export type MockExamAttemptHistoryRow = {
   attemptId: string;
+  /** 테스트 계정(students.is_test_account)의 응시 — 통계에서 제외되며 목록에는 "테스트"로 표시한다. */
+  isTestAccount: boolean;
   studentId: string;
   studentName: string | null;
   examSetName: string;
@@ -641,14 +643,16 @@ export async function listAllMockExamAttemptsAction(): Promise<MockExamAttemptHi
 
   const studentIds = Array.from(new Set(attempts.map((a) => a.student_id)));
   const examSetIds = Array.from(new Set(attempts.map((a) => a.exam_set_id)));
-  const [{ data: profiles }, { data: sets }, expectedCounts, { data: answers }] = await Promise.all([
+  const [{ data: profiles }, { data: sets }, expectedCounts, { data: answers }, { data: testRows }] = await Promise.all([
     selectInChunks(studentIds, (chunk) => db.from("profiles").select("id, name").in("id", chunk)),
     selectInChunks(examSetIds, (chunk) => db.from("mock_exam_sets").select("id, name").in("id", chunk)),
     // 응시자가 실제로 풀 문항 수(라우팅 세트는 M2 변형 하나만 센다) — DB에서 집계(1,000행 상한 회피).
     db.rpc("mock_exam_set_expected_counts"),
     // 채점 완료 응시만, 응시당 문항 ~100개 × 청크 8 < PostgREST 1,000행 상한.
     selectInChunks(attempts.filter((a) => a.status === "graded").map((a) => a.id), (chunk) => db.from("mock_exam_answers").select("attempt_id, correct").in("attempt_id", chunk), 8),
+    selectInChunks(studentIds, (chunk) => db.from("students").select("id, is_test_account").in("id", chunk)),
   ]);
+  const testStudents = new Set((testRows ?? []).filter((r) => r.is_test_account).map((r) => r.id as string));
   const nameByStudent = new Map((profiles ?? []).map((p) => [p.id, p.name as string | null]));
   const nameBySet = new Map((sets ?? []).map((s) => [s.id, s.name as string]));
   const totalCountBySet = new Map<string, number>();
@@ -661,6 +665,7 @@ export async function listAllMockExamAttemptsAction(): Promise<MockExamAttemptHi
 
   return attempts.map((a) => ({
     attemptId: a.id,
+    isTestAccount: testStudents.has(a.student_id),
     studentId: a.student_id,
     studentName: nameByStudent.get(a.student_id) ?? null,
     examSetName: nameBySet.get(a.exam_set_id) ?? "Mock exam",

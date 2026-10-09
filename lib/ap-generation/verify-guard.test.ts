@@ -84,4 +84,11 @@ describe("screen evidence", () => {
     expect(validateScreenEntry(mk("390x844"), dir, Date.now(), { requireResult: true })).toMatch(/결과 화면 점검 미실시/);
     expect(judgeScreenEntries([withRc({ result: "pass" }), { ...withRc({ result: "pass" }), viewport: "1280x800" }], payload, dir, { requireResult: true })).toEqual({ ok: true });
   });
+  it("문제 영역 점검(v3): 실패·na 거부, 없으면 requireStimulus 일 때만 거부", () => {
+    const w = (rc: unknown) => mk("390x844", { checks: { ...checks, stimulus_no_raw_tex: rc as never } });
+    expect(validateScreenEntry(w({ result: "pass" }), dir)).toBeNull();
+    expect(validateScreenEntry(w({ result: "fail", note: "e^{" }), dir)).toMatch(/문제 영역 점검 실패/);
+    expect(validateScreenEntry(w({ result: "na" }), dir)).toMatch(/na 불가/);
+    expect(validateScreenEntry(mk("390x844"), dir, Date.now(), { requireStimulus: true })).toMatch(/문제 영역 점검 미실시/);
+  });
 });

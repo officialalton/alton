@@ -128,3 +128,24 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 3. (선택, AB 보강 15개) `--items data/ap/stock/v45ab-items.json --batch ab-reinforce-2026-10-09 --supplement`.
 4. 점검: `npx tsx scripts/ap-generation/stock-consistency.ts`(보조 파일 3개를 합쳐 DB 현재 배치와 비교).
 **재고 목표(마이그레이션 404 적용 후)**: `npx tsx scripts/ap-generation/stock-targets.ts`(파일 생성·합계/칸별 부족 출력) → `--load`(dry-run) → `--load --execute` → 적재 후 `--verify`(파일 칸별 부족 = DB `ap_stock_cell_shortfall_v`). 합계는 `ap_stock_total_v`. 로컬 롤백 트랜잭션(402~404 + 851행 재현)에서 파일과 뷰의 28개 칸 목표가 전부 일치함을 확인했다.
+
+## 시간 제한은 서버가 정한다 (2026-10-09, 마이그레이션 `20262100000406`)
+- 섹션 시계는 그 섹션에 **처음 들어간 시각**(`mock_exam_attempts.ap_section_entered`)부터 공식 분이다. 들어가기는 `mock_exam_ap_enter_section`(응시 화면이 섹션 진입 때 호출) 또는 첫 답 저장이다. 화면의 남은 시간은 서버가 계산해 상세(`timeRemainingSeconds`)로 준다. 클라이언트가 보낸 남은 시간은 저장하지 않는다(`mock_exam_save_section_time` 은 AP 에서 무시).
+- 만료(+5초 유예) 뒤 그 섹션의 답 저장·변경은 거절된다(`Time is up for this section…`). 마지막 섹션이 만료되면 `mock_exam_ap_settle` 이 응시를 채점 완료로 마감한다(멱등). 화면을 닫은 채 만료돼도 서버 페이지가 다음에 열 때 settle 을 호출해 결과 화면을 연다. 클라이언트는 마지막 섹션 소진 때 제출(멱등)을 호출한다.
+- `mock_exam_submit` 은 AP 에서 멱등이다(이미 제출·채점된 응시에 재시도·더블클릭·두 탭이 다시 불러도 오류·행 추가·시각 변경 없음). SAT 는 기존처럼 오류. 회귀 테스트: `lib/ap-exam/ap-exam.integration.test.ts` "AP 시간 제한은 서버가 정한다".
+- 되돌리기: 파일 머리 주석.
+
+## 테스트 계정은 통계에서 제외한다 (2026-10-09, 마이그레이션 `20262100000407`)
+- 기존 규약 재사용: `students.is_test_account`(이메일이 `example.com`·`.test`·`uat-`/`e2e-`/`qa-`/`test-` 로 시작하면 자동 표식, 관리자가 `admin_set_test_account` 로 지정·해제). 비프로덕션에서 사람이 눌러 본 계정은 이 표식을 붙인다.
+- 제외 대상: Free Accounts 목록·분석(이미 기본 제외), 문항 노출 횟수 `mock_exam_problem_exposure_counts`(교체 필요 판단), 난이도 변경 영향 `problem_difficulty_set_impact`(407 에서 제외로 변경). 학생 개인 통계(`student_stats_aggregate` 등)는 학생 단위라 영향 없음. 관리자 응시 내역 목록은 테스트 계정 응시도 보이되 "테스트" 배지를 붙인다.
+
+## 단원 안내 (2026-10-09, 마이그레이션 `20262100000408`)
+- 부분 세트의 목록·응시·결과 화면에 `Covers Units 4, 5, 6, 8.` 와 "과목 전체 성취로 읽지 말라"는 안내를 보인다(공식 풀 구성에는 생략). 단원 = 문항 `sat_domain`(`ap:4.3` → 4). 카탈로그에 `apUnits` 를 싣는다. 단원 불균형은 내부 부족 목록으로만 두고 화면에서 전범위를 주장하지 않는다.
+
+## 짧은 Free-Response 연습 (2026-10-09)
+- 서로 다른 문항군의 검증된 FRQ 묶음 **2~4개**로 만든다(`planFrqShortSet`). 시간은 묶음당 15분(공식 환산), 계산기 허용 묶음은 Part A·불가 묶음은 Part B. 화면은 실제 문항 수·시간·파트별 계산기를 말하고 "공식 6문항·90분 시험이 아님"을 명시한다. 이름은 `AP Calculus AB — Free-Response Practice`(번호는 `--seq`).
+- 제공 조건 = FRQ 흐름 점검 통과: `scripts/ap-generation/frq-flow-check.ts`(입력·자동 저장·새로고침 복원·제출 전 비노출·제출·답안+채점 가이드 열람(참고 피드백, 공식 채점 아님)·AP 점수 없음·이중 제출 멱등·재응시). 공식 6문항 세트(Part A 2 + Part B 4)는 별도로 `--partial frq`.
+
+## 원문 수식 점검은 토큰 단위다 (2026-10-09)
+- `lib/ap-exam/raw-math-scan.ts`: 렌더된 DOM 의 텍스트 노드에서 TeX 명령·`^{`·산문 부등호 `<=`·평문 거듭제곱·렌더 안 된 `$…$`·`\uXXXX` 를 찾는다. KaTeX 출력, `<code>`/`<pre>`/`<kbd>`, 이스케이프된 달러(`\$`), 통화 표기, `[data-raw-math-ok]` 영역은 제외(양성·음성 픽스처 테스트). 자동 화면 점검 증거 v3 는 제출 전 문제 영역(`stimulus_no_raw_tex`)과 제출 후 해설(`result_no_raw_tex`) 모두 필수.
+- 표 칸의 평문 수식(`m^2`, `t>=0`, `e^(-0.3 t)`)은 표 렌더가 위첨자·≤≥ 로 그린다. 본문과 겹치는 자료 텍스트는 숨긴다(`stimulus-display.ts`).
