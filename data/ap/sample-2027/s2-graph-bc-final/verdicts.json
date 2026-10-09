@@ -1,0 +1,331 @@
+[
+ {
+  "key": "ap_calculus_bc-m01-k0",
+  "cellId": "ap_calculus_bc-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Step1: slope 5-1=4, y(2)=9. Step2: slope 1-9=-8, y(4)=9-16=-7.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-7"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Euler's method with two steps; graph read-off is a modest added representation. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "y1=9, y2=-7; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices complete; g(0)=5, g(2)=1 are read at vertices. Axes cover the data."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reproduces from its stated misconception (-1, 3, 13 verified). Explanation covers all wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, small integer arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear, and in scope, with distinct, realistic distractors and a suitable time and arithmetic load. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-step Euler's method requiring reading g(0)=5 and g(2)=1 from a graph, then iterating with slope depending on x and y. Small integer arithmetic gives -7. Distractors reflect plausible slips (one step, sign errors, using the wrong g value). A moderate multi-step item with one representation change, suitable for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m02-k0",
+  "cellId": "ap_calculus_bc-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "max|f''''| on [0,1.4] is 3 at x=1; bound = 3(1.4)^4/24 = 0.480",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.480"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 100 seconds, light calculator use, and decimal options are appropriate.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key 0.480 is unique and the distractors are distinct and explained. No instant-reject conditions apply."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the graph of f^(4), restrict to [0,1.4], recognize that the max of |f^(4)| is 3 (at the vertex x=1, a negative value), and apply the Lagrange bound M/4!*(1.4)^4 = 0.480. Distractors reflect real misconceptions: using the whole-graph max of 6, using the wrong interval, or using the signed maximum. Numbers are simple, and the calculator is needed only for 1.4^4.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m03-k0",
+  "cellId": "ap_calculus_bc-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "x'(5)=3/2, y'(5)=-5/2, ratio -5/3",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-5/3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.1 dy/dx from graphs of x(t), y(t); applies the rule; in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x'(5)=3/2, y'(5)=-5/2, dy/dx=-5/3; unique, t=5 interior to a segment."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices fully specified, axes cover range, wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors match difference, product and position-ratio misconceptions; each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no calculator needed, exact-form options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item: the key -5/3 is unique, the stimulus data are complete, the distractors encode distinct misconceptions, and it is suitable for a non-calculator exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Identify the segment containing t=5 (t from 4 to 6), read the slopes of x (3/2) and y (-5/2) from the graphs, and divide to get dy/dx = -5/3. This is a single procedure with one representation change (graph to slope to derivative) and trivial arithmetic. The distractors target common errors such as multiplying slopes or inverting the ratio. Concept depth is shallow and there are no hypotheses to check.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m04-k0",
+  "cellId": "ap_calculus_bc-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At t=4, x'(4)=6 and y'(4)=8, so speed = sqrt(6^2+8^2) = sqrt(100) = 10.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "10"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading x' and y' from graphs and computing speed fits 9.6 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x'(4)=6, y'(4)=8, speed=10. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices fully specified, axes cover the range, wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions: component sum, no square root, single component. Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, no calculator needed, clean numbers, realistic AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, in-scope item; all five criteria pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read x'(4)=6 and y'(4)=8 from two graphs, then compute sqrt(36+64)=10. One concept (speed = magnitude of velocity), minimal computation, clean 6-8-10 numbers. Distractors reflect common misconceptions (sum of components, omitting square root, using only x'). Straightforward single-step extraction, below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m05-k0",
+  "cellId": "ap_calculus_bc-m05",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem says f has derivatives of all orders, but the piecewise-linear graph of f' has a corner at x=2, so f''(2) does not exist. The stem contradicts the stimulus, though the answer is unaffected.",
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "1",
+     "brief_reasoning": "f(0)=1, f'(0)=3, f''(0)=slope of first segment=-2; P2=1+3x-x^2; P2(3)=1.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The stem says f has derivatives of all orders, but the piecewise-linear graph of f' has a corner at x=2, so f''(2) does not exist. The stem contradicts the stimulus, though the answer is unaffected."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading f'(0) and f''(0) from the graph of f' and forming P2 fits 10.11 / 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "P2=1+3x-x^2, P2(3)=1. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem says f has derivatives of all orders, but f' is piecewise linear with a corner at x=2, so f'' does not exist there. The premise contradicts the stimulus. The graph data is otherwise complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor value matches its stated misconception. The explanation covers all three wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculator needed, clean numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the skill fit is good. The stem's claim of derivatives of all orders contradicts the corner of f' at x=2 in the graph. This is a stem/stimulus inconsistency, so the item should be revised, for example by saying f is twice differentiable at 0 or by using a smooth f'."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read f'(0)=3 from the graph, compute f''(0) as the slope of the first segment (-2), build P_2(x)=1+3x-x^2 using the 1/2! factor, and evaluate at x=3. Requires a graph-to-derivative-to-polynomial representation change and a few steps; the arithmetic is light and the wording is clear. Distractors target misconceptions such as omitting the factorial and confusing P_2(3) with f(3).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m06-k0",
+  "cellId": "ap_calculus_bc-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "(8,10)",
+     "brief_reasoning": "Δx=∫0^4 x' = 4-1 = 3; Δy=∫0^4 y' = 1+4 = 5; (5,5)+(3,5) = (8,10)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.5, integrating velocity components from a graph to get position; the skill 1.D is satisfied by choosing position = initial + integral."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: Δx=3 and Δy=5, so the position is (8,10). The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The vertices for both curves and the axes are complete. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors map to distinct misconceptions and each is explained. (4,7) matches adding the velocities at t=4. (10,8) is a coordinate swap of the correct answer."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The arithmetic is simple, it is doable without a calculator, and the time load is typical."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. The key (8,10) is verified, the stimulus is complete, and the distractors are meaningful. It passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must interpret two piecewise-linear velocity graphs, compute signed areas (triangle and trapezoids) for each component over [0,4], and add the initial position. Concept is standard (position = initial + integral of velocity), numbers are small, and distractors target common errors (omitting initial position, swapping components, sign errors). Moderate multi-step, appropriate for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ }
+]

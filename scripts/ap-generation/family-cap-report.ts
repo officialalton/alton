@@ -8,7 +8,7 @@ const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? p
 const SUBJECT = arg("--subject") || "ap_calculus_ab"; const BC = SUBJECT === "ap_calculus_bc";
 type It = { stockKey: string; apSubjectCode: string; kind: "mc" | "frq_bundle"; validation: string; keywordCode: string; calculator: string; itemFamilyId: string; payload: Record<string, any>; skillPrimary?: string; duplicateOf?: string | null; archetype?: string };
 const scan = new Set((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string }[]).map((r) => r.key));
-const files = ["items", "s1a-items", "v1ab-items", "v45ab-items", ...(BC ? ["bc-topup-items", "graph-s1-items"] : ["graph-s1-items"])];
+const files = ["items", "s1a-items", "v1ab-items", "v45ab-items", ...(BC ? ["bc-topup-items", "graph-s1-items", "graph-s2a-items", "graph-s2b-items"] : ["graph-s1-items", "graph-s2a-items", "graph-s2b-items"])];
 const all = files.flatMap((f) => { try { return JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as It[]; } catch { return [] as It[]; } }).filter((i) => (BC ? ["ap_calculus_ab", "ap_calculus_bc"].includes(i.apSubjectCode) : i.apSubjectCode === SUBJECT) && i.validation === "auto_passed" && !scan.has(i.stockKey) && !i.duplicateOf);
 const abSel = JSON.parse(readFileSync("data/ap/stock/ab-full-set-selection.json", "utf-8")).keys as Record<string, string[]>; const abKeys = new Set(Object.values(abSel).flat());
 const by = new Map(all.map((i) => [i.stockKey, i]));

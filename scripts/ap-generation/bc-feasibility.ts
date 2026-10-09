@@ -7,7 +7,7 @@ type It = { stockKey: string; apSubjectCode: string; kind: "mc" | "frq_bundle"; 
 const scan = new Set((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string }[]).map((r) => r.key));
 const bcCur = JSON.parse(readFileSync("data/ap/curriculum-2027/ap_calculus_bc.json", "utf-8")) as ApCurriculumFile;
 const scope = new Map(bcCur.units.flatMap((u) => u.topics.map((t) => [t.code, (t as unknown as { scope: string }).scope] as const)));
-const files = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "graph-s1-items"];
+const files = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "graph-s1-items", "graph-s2a-items", "graph-s2b-items"];
 const all = files.flatMap((f) => JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as It[]).filter((i) => (i.apSubjectCode === "ap_calculus_ab" || i.apSubjectCode === "ap_calculus_bc") && i.validation === "auto_passed" && !scan.has(i.stockKey) && !i.duplicateOf);
 const abSel = JSON.parse(readFileSync("data/ap/stock/ab-full-set-selection.json", "utf-8")).keys as Record<string, string[]>; const abUsed = new Set(Object.values(abSel).flat());
 type C = { key: string; kind: "mc" | "frq"; unit: number; skill: number; calc: string; fam: string; type: string; graph: boolean; bcOnly: boolean; native: boolean; inAbSet: boolean };
