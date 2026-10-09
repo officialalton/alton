@@ -268,7 +268,7 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
     expect(sets.find((s) => s.id === result.examSetId)?.status).toBe("draft");
   });
 
-  it("같은 계열에 새 버전을 공개하면 이전 공개본은 archived로 내려간다(공개는 계열당 하나)", async () => {
+  it("같은 계열에는 공개본이 하나뿐이다 — 이전 공개본을 보관해야 새 버전을 공개할 수 있다(DB 제약; 고정형 공개는 앱 액션이 막혀 있어 psql 로 검증)", async () => {
     const { assembleMockExamSet, listMockExamSets } = await import("./mock-exam-actions");
     const groupName = `버전 교체 세트 ${Date.now()}`;
     const first = await assembleMockExamSet({ name: groupName, difficultyTier: "advanced", rwCount: 5, mathCount: 5 });
@@ -293,6 +293,8 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
       `);
     }
 
+    expect(() => psql(`update mock_exam_sets set status = 'published', published_at = now() where id = '${secondSetId}';`)).toThrow(/mock_exam_sets_one_published_per_group/);
+    psql(`update mock_exam_sets set status = 'archived', archived_at = now() where id = '${first.examSetId}';`);
     psql(`update mock_exam_sets set status = 'published', published_at = now() where id = '${secondSetId}';`);
     const sets = await listMockExamSets();
     const firstAfter = sets.find((s) => s.id === first.examSetId);
