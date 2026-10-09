@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mergeEnv, projectsPublishing, verifySameIsolatedStack } from "./stack-identity";
+import { mergeEnv, projectsPublishing, verifyIsolatedApi, verifySameIsolatedStack } from "./stack-identity";
 
 const ps = (rows: [string, string][]) => rows.map(([n, p]) => `${n}|${p}`).join("\n");
 const SHARED = ps([["supabase_db_ALTON", "0.0.0.0:54422->5432/tcp, [::]:54422->5432/tcp"], ["supabase_kong_ALTON", "0.0.0.0:54421->8000/tcp"], ["supabase_rest_ALTON", "3000/tcp"]]);
@@ -58,5 +58,15 @@ describe("env 병합(모든 env 파일을 읽은 뒤 결정)", () => {
     expect(m.C).toBe("1");
     expect(m.D).toBe("q");
     expect(m.SUPABASE_TEST_DB_URL).toContain("54522");
+  });
+});
+
+describe("API 전용 스크립트의 스택 확인", () => {
+  it("격리 kong 컨테이너면 통과, 공유·다른 project 혼재·컨테이너 없음이면 차단", () => {
+    expect(verifyIsolatedApi({ apiUrls: [api(54521)], dockerPs: SHARED + "\n" + ISO })).toEqual({ ok: true, projectId: "ALTON_apev1" });
+    expect(verifyIsolatedApi({ apiUrls: [api(54421)], dockerPs: SHARED + "\n" + ISO }).ok).toBe(false);
+    expect(verifyIsolatedApi({ apiUrls: [api(54521), api(54531)], dockerPs: ISO }).ok).toBe(false);
+    expect(verifyIsolatedApi({ apiUrls: [api(54521)], dockerPs: "" }).ok).toBe(false);
+    expect(verifyIsolatedApi({ apiUrls: [], dockerPs: ISO }).ok).toBe(false);
   });
 });

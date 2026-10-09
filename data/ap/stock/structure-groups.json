@@ -28,6 +28,11 @@
     { "archetypes": ["g_fprime_inc_concave", "g_accum_justify_graph"], "basis": "그래프 부호와 기울기 부호 두 조건을 동시에 만족하는 구간(f'→f, f→∫f 한 단계 이동뿐)" },
     { "archetypes": ["g_avg_roc_graph", "g_avg_roc_mixed_calc"], "basis": "구간 평균변화율: 그래프 두 값 → 식−그래프 차(계산기)" },
     { "archetypes": ["g_volume_base_graph", "g_volume_semicircle_graph", "g_volume_triangle_graph"], "basis": "같은 그래프 밑면, 단면 도형만 정사각형/반원/정삼각형(도형 상수 1·π/8·√3/4)" },
-    { "archetypes": ["g_washer_curve_line_calc", "g_volume_axis_shift_calc"], "basis": "같은 그림(4 sin x 와 직선 L), 회전축 x축 → y=−2(반지름에 s 더함)" }
+    { "archetypes": ["g_washer_curve_line_calc", "g_volume_axis_shift_calc"], "basis": "같은 그림(4 sin x 와 직선 L), 회전축 x축 → y=−2(반지름에 s 더함)" },
+    { "archetypes": ["optimization", "c_optimization_rect_calc"], "basis": "[보강 2026-10-09] 곡선 아래 y축 대칭 직사각형의 최대 넓이: 포물선(손 계산) → 코사인 곡선(계산기), 같은 질문·풀이 골격" },
+    { "archetypes": ["c_inflection_calc", "c_fastest_increase_calc"], "basis": "[보강] 2계 도함수의 근을 수치로 풀어 구한다: 변곡점의 x 좌표 ↔ 변화율이 가장 큰 시각(변곡점과 같은 점)" },
+    { "archetypes": ["g_total_distance_graph", "c_total_distance_calc"], "basis": "[보강] 총 이동거리 = ∫|v| (속도 그래프 → 식, 부호가 바뀌는 점에서 분할)" },
+    { "archetypes": ["c_accum_interval_calc", "c_increasing_interval_calc"], "basis": "[보강·경계 사례] 도함수(누적함수의 피적분함수 ↔ f') 영점을 수치로 찾아 증가 구간을 고른다 — 보수적으로 같은 군" },
+    { "archetypes": ["g_abs_max_fprime", "c_accum_max_value_calc"], "basis": "[보강·경계 사례] f' 정보에서 부호가 바뀌는 점을 찾고 f 의 최댓값을 ∫ 로 계산(그래프 → 식+계산기) — 보수적으로 같은 군" }
   ]
 }

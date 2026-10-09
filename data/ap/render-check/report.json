@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-09T17:45:11.239Z",
- "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json (1061행)",
+ "generatedAt": "2026-10-09T17:55:55.557Z",
+ "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json (1065행)",
  "all": {
-  "total": 1061,
+  "total": 1065,
   "pass": 675,
   "fail": 1,
-  "notApplicable": 385
+  "notApplicable": 389
  },
  "liveStates": {
-  "total": 592,
+  "total": 595,
   "pass": 326,
   "fail": 0,
-  "notApplicable": 266
+  "notApplicable": 269
  },
  "byType": [
   {
@@ -121,18 +121,18 @@
   },
   {
    "type": "text",
-   "total": 86,
+   "total": 90,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 86
+   "notApplicable": 90
   }
  ],
  "bySubject": {
   "ap_calculus_ab": {
-   "total": 553,
+   "total": 557,
    "pass": 286,
    "fail": 1,
-   "notApplicable": 266
+   "notApplicable": 270
   },
   "ap_biology": {
    "total": 200,
@@ -155,7 +155,7 @@
  },
  "figureNeed": {
   "required": 624,
-  "text_only": 385,
+  "text_only": 389,
   "supporting": 52
  },
  "errorCodes": {
@@ -18171,6 +18171,62 @@
    "subject": "ap_calculus_bc",
    "kind": "frq_bundle",
    "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-b6-ab-final:ap_calculus_ab-f01-k0",
+   "contentHash": "4c635be6111b3f2b54541d84f5ed76f2add70d982a5c16c2e7e1c31a33f93621",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-b6-ab-final:ap_calculus_ab-f01-k1",
+   "contentHash": "5d056ddad033499bd14a26fb6eee03988106424253e0fd5414dc5781869e130f",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-b6-ab-final:ap_calculus_ab-f02-k0",
+   "contentHash": "5d62ce8f03106539e62b04113a9093129149dbcb4fbe24dd6e1af7982d3f49f0",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-b6-ab-final:ap_calculus_ab-f02-k1",
+   "contentHash": "2e4afad40beb48635ee260ba6df8886213cc842eade6ec0b12bd830c7f91762c",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
    "stimKind": "text",
    "renderType": "text",
    "need": "text_only",

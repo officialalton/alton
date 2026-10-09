@@ -25,3 +25,6 @@
 
 ## 2026-10-09 후속: 필수 부족과 예비를 따로 센다
 `exact-assignment-report.md` §5 — 게시·예약 항목을 제외한 품질 통과·고유 재고로 세트 필수 부족(MC 2·FRQ 0)과 1.5배 예비 부족(MC 35 중 예비 33 + FRQ 10)을 분리하고 비용(누적 $27.9992, 중단선 $45, 상한 $50)을 병기했다. `npx tsx scripts/ap-generation/reserve-plan.ts` 로 재현.
+
+## 2026-10-09 후속 2: 보강 실행 결과
+오너 승인 보강(MC 35 + FRQ 10 목표)을 실행해 **MC 39·FRQ 10 통과**(독립 구조 MC 28·FRQ 새 유형 6, 나머지는 형제·기존 군 합류)를 얻었다. 세트 필수 부족은 MC 2 → **0**, 1.5배 채움률은 계산기 필수 Part B 102%·BC 전용 단원 9·10 124%·FRQ A/B 100%·BC 전용 111%. 남은 예비 부족은 그래프 필수 MC 4·단원 6 MC 4·단원 2 MC 1(새 독립 구조 필요). 게시(AB#1 고정)·예약(5세트 배정)·미사용 예비를 분리한 표는 `supplement-report.md` §4, `npx tsx scripts/ap-generation/supplement-status.ts`.

@@ -69,6 +69,38 @@ export function verifySameIsolatedStack(input: { dbUrl: string | undefined; apiU
   return { ok: true, projectId: id };
 }
 
+/** DB 접속이 없고 API(supabase-js)만 쓰는 스크립트용: 모든 API URL 이 같은 격리 project 의 kong 컨테이너를 가리키는지. */
+export function verifyIsolatedApi(input: { apiUrls: string[]; dockerPs: string }): StackResult {
+  const apis = input.apiUrls.map((u) => u.trim()).filter(Boolean);
+  if (apis.length === 0) return { ok: false, reasons: ["API URL 이 없다."] };
+  const reasons: string[] = []; const ids = new Set<string>();
+  for (const u of apis) {
+    const p = hostPortOf(u);
+    if (!p) { reasons.push(`API URL ${u} 이 로컬 포트 URL 이 아니다.`); continue; }
+    const kids = projectsPublishing(input.dockerPs, "kong", p);
+    if (kids.length !== 1) reasons.push(`API 포트 ${p} 를 게시하는 supabase_kong_* 컨테이너가 ${kids.length}개다(정확히 1개여야 한다).`);
+    kids.forEach((k) => ids.add(k));
+  }
+  if (reasons.length) return { ok: false, reasons };
+  if (ids.size !== 1) return { ok: false, reasons: [`API URL 들이 서로 다른 project 를 가리킨다: ${[...ids].join(", ")}.`] };
+  const id = [...ids][0];
+  if (id.toLowerCase() === SHARED_PROJECT_ID.toLowerCase()) return { ok: false, reasons: [`대상이 공유 스택(project ${id}) 이다.`] };
+  if (!ISOLATED_RX.test(id)) return { ok: false, reasons: [`project id ${id} 는 격리 스택 형식(ALTON_<이름>)이 아니다.`] };
+  return { ok: true, projectId: id };
+}
+
+/** API 만 쓰는 스크립트 진입부: 모든 env 파일을 읽어 process.env 에 반영한 뒤 API 대상이 격리 스택인지 docker 로 확인(아니면 쓰기 전에 종료). */
+export function assertIsolatedApiOrExit(apiVars: string[]): { projectId: string; apiUrl: string } {
+  const merged = mergeEnv(process.env, readEnvFiles());
+  for (const [k, v] of Object.entries(merged)) if (v !== undefined && process.env[k] === undefined) process.env[k] = v;
+  const apiUrls = apiVars.map((k) => merged[k] ?? "").filter(Boolean);
+  let ps = "";
+  try { ps = dockerPsSnapshot(); } catch (e) { console.error(`docker 로 대상 스택을 확인하지 못했다(${(e as Error).message}). 중단.`); process.exit(1); }
+  const r = verifyIsolatedApi({ apiUrls, dockerPs: ps });
+  if (!r.ok) { console.error(`대상 스택 검증 실패 — 쓰기 전에 중단: ${r.reasons.join(" ")}`); process.exit(1); }
+  return { projectId: r.projectId, apiUrl: apiUrls[0] };
+}
+
 export function dockerPsSnapshot(): string {
   return execFileSync("docker", ["ps", "--format", "{{.Names}}|{{.Ports}}"], { encoding: "utf-8", timeout: 15_000 });
 }

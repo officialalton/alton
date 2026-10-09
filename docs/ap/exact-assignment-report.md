@@ -117,3 +117,6 @@
 ## 9. 재현·검증
 - 정확 배정: `npx tsx scripts/ap-generation/exact-assign.ts --sets BC1,AB2[,BC2,AB3,BC3] [--strict-families] [--min-pending] [--no-pending] [--write-report <새 경로>]`(게시본 경로 쓰기 거부), 필수 칸 분석 `exact-assign-cells.ts`. 해는 항상 독립 검증기(`verifyAssignment`)로 재계산한다.
 - 테스트: `lib/ap-exam/ilp.test.ts`(솔버), `lib/ap-exam/exact-assign.test.ts`(BC#1·AB#2 가 가상 0·단독도 0·검증기가 위반을 잡음), `lib/ap-generation/screen-evidence-file.test.ts`.
+
+## 10. 보강 이후 (2026-10-09, `supplement-report.md`)
+보강 49건(MC 39 + FRQ 10)의 화면 증거(`evidence-supp.json`)를 포함해 다시 계산: **5세트(AB#2·AB#3·BC#1·BC#2·BC#3) 가상 MC 0·FRQ 0**(`exact-assign-5sets-supp-strict.json`, 독립 검증기 위반 0), BC#1+AB#2 도 가상 0(`exact-assign-bc1-ab2-supp-strict.json`, 검증 대기 의존 최소 16건·보강 0). 계산상 가능이며 **비프로덕션 DB 검증 완료 항목만으로는** 5세트 가상 MC 43·FRQ 3, BC#1+AB#2 가상 MC 16 그대로다(오너 적재 전). 5세트 전부에 필요한 검증 대기 항목은 최소 59건(그래프 배치 44 + 형제 3 + 보강 12).

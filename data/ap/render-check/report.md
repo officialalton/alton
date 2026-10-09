@@ -1,11 +1,11 @@
 # AP 그림 렌더링 게이트 결과
 
-생성: 2026-10-09T17:45:11.239Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json (1061행)
+생성: 2026-10-09T17:55:55.557Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json (1065행)
 
 ## 전체
 
-- 전체 1061행: 통과 675 / 실패 1 / 해당 없음(그림·표 없음) 385
-- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 592행: 통과 326 / 실패 0 / 해당 없음 266
+- 전체 1065행: 통과 675 / 실패 1 / 해당 없음(그림·표 없음) 389
+- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 595행: 통과 326 / 실패 0 / 해당 없음 269
 
 ## 유형별(렌더 유형)
 
@@ -26,13 +26,13 @@
 | ap_table:payoff_matrix | 8 | 8 | 0 | 0 |
 | none | 298 | 0 | 0 | 298 |
 | none(diagram_text_only) | 1 | 0 | 0 | 1 |
-| text | 86 | 0 | 0 | 86 |
+| text | 90 | 0 | 0 | 90 |
 
 ## 과목별
 
 | 과목 | 전체 | 통과 | 실패 | 해당 없음 |
 |---|---:|---:|---:|---:|
-| ap_calculus_ab | 553 | 286 | 1 | 266 |
+| ap_calculus_ab | 557 | 286 | 1 | 270 |
 | ap_biology | 200 | 199 | 0 | 1 |
 | ap_microeconomics | 172 | 162 | 0 | 10 |
 | ap_calculus_bc | 136 | 28 | 0 | 108 |
@@ -41,7 +41,7 @@
 
 - required(그림·표가 있어야 풀림): 624
 - supporting(보조 자료, 본문에도 정보 있음): 52
-- text_only(본문만으로 충분): 385
+- text_only(본문만으로 충분): 389
 
 ## 실패 사유 코드
 

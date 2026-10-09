@@ -144,3 +144,9 @@ done
 - **`ALLOW_SHARED_TEST_DB` 우회는 조정 세션이 공유 스택 회귀를 의도적으로 돌릴 때만 쓴다.** 형식: `ALLOW_SHARED_TEST_DB=1 SHARED_TEST_DB_NOTE="coordinator-approved: <사유 8자 이상>"`(접두어 없으면 가드가 거부). **에이전트·자동화·기능 세션은 이 변수를 설정하지 않는다** — 통과가 안 되면 우회하지 말고 격리 스택을 띄우거나 조정 세션에 요청한다. 시퀀스·통계를 "되돌리려" 만지지도 않는다.
 - 적용 범위: `*.integration.test.ts` 전부(165개; 공유 포트 폴백 파일 약 150개)는 `vitest run`·`vitest run <파일>`·`npm test`·`npm run test:integration:universities` 어느 경로로든 가드된 프로젝트/설정에서만 실행된다(unit 프로젝트는 제외). 증명 테스트: `lib/dev/integration-guard-coverage.test.ts`. Playwright e2e 는 vitest 가 아니므로 별도(`e2e/fixtures.ts` 가 54421/54422 를 쓰므로 공유 스택 대상 실행은 조정 세션만). `npm run test:fresh` 는 `supabase db reset` 을 포함하므로 조정 세션 전용.
 - 단위 테스트(`--project unit`)는 영향 없음. 테스트: `lib/dev/integration-db-guard.test.ts`.
+
+## DB·API 대상 동일 스택 검증 (2026-10-09, `lib/dev/stack-identity.ts`)
+사고: `local-demo-seed.ts` 가 `.env.local` 을 상수 계산보다 늦게 읽어 **DB 쪽만 공유 54422** 로 접속했다(API 는 격리). 포트 관계(API+1=DB)만 검사하던 가드로는 못 막았다. 규칙:
+- DB·API 에 쓰는 스크립트·시드·통합 테스트는 **모든 env 파일(`.env.local`, `.env`)과 process env 를 다 읽은 뒤** 대상을 정하고, 첫 쓰기 전에 `docker ps` 로 그 포트를 게시하는 `supabase_db_<id>`·`supabase_kong_<id>` 컨테이너를 조회해 **DB 와 API 가 같은 격리 project(`ALTON_<이름>`)** 인지 확인한다. 공유 `ALTON`·서로 다른 project·형식 위반·컨테이너 없음/중복이면 쓰기 전에 종료한다(포트 관계는 보조일 뿐).
+- 적용: `local-demo-seed.ts`, `screen-evidence.ts`, `graph-load-rehearsal.ts`, `supp-load-rehearsal.ts`, 통합 테스트 globalSetup(`vitest.integration-guard.ts`). 새 스크립트가 DB 를 쓰면 `assertIsolatedTargetOrExit`(DB+API) 또는 `assertIsolatedApiOrExit`(API 만)을 진입부에서 호출한다.
+- 테스트: `lib/dev/stack-identity.test.ts`(가짜 docker 출력, 사고 재현 포함), `lib/dev/integration-db-guard.test.ts`.

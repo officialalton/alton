@@ -65,3 +65,43 @@ dry-run: 이력 37행, 실제 쓰기 없음(--execute 로 위 계획 적용)
 
 ## 화면 증거를 다시 만들어야 할 때(격리 스택, 오너 또는 후속 세션)
 `scripts/dev/isolated-stack.sh start ALTON_<이름>` → `.env.local` 에 **격리 스택 값**(API 545xx, DB `SUPABASE_TEST_DB_URL`=API 포트+1, 로컬 키)을 둔다 → `local-demo-seed.ts seed --keys-file <통과 키 파일> --practice-sets`(신규 `--practice-sets`: 공식 풀 레이아웃 대신 MC 20·FRQ 6 연습 세트로 쪼개 구성 게이트를 피함) → `npm run dev -- -p 3011` → `screen-evidence.ts --shots-dir … --out …` → `isolated-stack.sh stop`. 시드·증거 스크립트는 이제 `SUPABASE_TEST_DB_URL` 이 없거나 544xx(공유 스택)이거나 API 포트와 한 스택(API+1=DB)이 아니면 즉시 중단한다(2026-10-09 사고 재발 방지: 시드가 DB 기본값 54422 로 공유 스택에 후보 1건을 쓴 사고가 있었다 — `exact-assignment-report.md` §0).
+
+
+---
+
+## 추가 절차: 보강(supplement) 배치 8개 — 통과 49건(MC 39 + FRQ 10) (2026-10-09, 예행 연습 완료)
+
+오너 승인(2026-10-09)으로 만든 부족분 보강이다. 위 10개 그래프 배치(+선택 21건)와 **독립**이라 순서는 자유지만, 5세트 조립(`exact-assignment-report.md` §4)에는 위 70건·21건과 이 49건이 모두 필요하다. 에이전트는 키를 취득할 수 없어 실행하지 않았고 **격리 스택에서 같은 명령 전부를 예행 연습**했다(표의 건수는 실측). 이 문서·채팅·로그에 키를 적지 않는다.
+
+### 준비된 파일(에이전트가 만들어 커밋함)
+| 파일 | 내용 |
+|---|---|
+| `data/ap/screen-evidence/evidence-supp.json` | 통과 49건의 화면 증거 — 390×844·1280×800 모두 98항목, `checker_kind=automated`, content-hash 결속, 점검 실패 0. 스크린샷 `docs/ap/screen-evidence/supp/` |
+| `data/ap/render-check/report.json` | 렌더 보고서(재생성, 보강 포함): 보강 통과 49건 중 표 4건 pass, 나머지 not_applicable(그림 없음) |
+| `data/ap/stock/supp-b*-items.json` | 배치별 재고(행) — 아래 표 |
+| `data/ap/stock/supp-b*-pass-keys.json` | 배치별 통과 키 목록(JSON 배열), 합쳐 `supp-all-pass-keys.json`(49) |
+| `data/ap/stock/supp-load-summary.json` | 배치별 행·통과 건수(`npx tsx scripts/ap-generation/supp-pass-keys.ts` 재현) |
+
+### 배치 표와 단계별 기대 건수 (격리 스택 예행 연습 실측, 새 키만 insert)
+| 재고 파일 | 배치 이름 | 행 | ① 적재 dry-run | ③ 렌더 기록 | ④ 화면 기록 | ⑤ 사후 |
+|---|---|---|---|---|---|---|
+| supp-b1-items | supp-b1-2026-10-09 | 14 (통과 10) | 새 키 14, 갱신 0 | 10 | 10 | 새 키 0 / 이미 10·10 |
+| supp-b2ab-items | supp-b2ab-2026-10-09 | 6 (통과 3, FRQ) | 새 키 6, 갱신 0 | 3 | 3 | 새 키 0 / 이미 3·3 |
+| supp-b2bc-items | supp-b2bc-2026-10-09 | 4 (통과 3, FRQ) | 새 키 4, 갱신 0 | 3 | 3 | 새 키 0 / 이미 3·3 |
+| supp-b3ab-items | supp-b3ab-2026-10-09 | 14 (통과 11) | 새 키 14, 갱신 0 | 11 | 11 | 새 키 0 / 이미 11·11 |
+| supp-b3bc-items | supp-b3bc-2026-10-09 | 9 (통과 9) | 새 키 9, 갱신 0 | 9 | 9 | 새 키 0 / 이미 9·9 |
+| supp-b4ab-items | supp-b4ab-2026-10-09 | 11 (통과 9) | 새 키 11, 갱신 0 | 9 | 9 | 새 키 0 / 이미 9·9 |
+| supp-b5bc-items | supp-b5bc-2026-10-09 | 3 (통과 1, FRQ) | 새 키 3, 갱신 0 | 1 | 1 | 새 키 0 / 이미 1·1 |
+| supp-b6ab-items | supp-b6ab-2026-10-09 | 4 (통과 3, FRQ) | 새 키 4, 갱신 0 | 3 | 3 | 새 키 0 / 이미 3·3 |
+| 합계 | | 65 | 새 키 65 | 49 | 49 | |
+- `supp-b3fa-items.json`(2행, 통과 0: 기출 유사로 반려된 FRQ 이력)은 위 표에서 뺐다. 반려 이력까지 적재하려면 같은 명령으로 `새 키 2` 이며 검증 단계는 없다(선택).
+- 명령은 위 10개 배치와 같다. **증거 파일만 `evidence-supp.json` 이고, 통과 키 파일은 배치마다 `supp-bN…-pass-keys.json`**:
+  1. `npx tsx scripts/ap-generation/import-candidates.ts --items data/ap/stock/<파일>.json --batch <배치 이름> --supplement --report` → 새 키가 표 ① 과 다르거나 갱신 > 0 이면 중단 → 같은 명령의 `--report` 를 `--execute` 로.
+  2. `npx tsx scripts/ap-generation/mark-verified.ts --render --report data/ap/render-check/report.json --keys-file data/ap/stock/<통과 키 파일> $T`(dry-run, 표 ③) → `--execute`.
+  3. `npx tsx scripts/ap-generation/mark-verified.ts --screen --evidence data/ap/screen-evidence/evidence-supp.json --keys-file data/ap/stock/<통과 키 파일> $T`(dry-run, 표 ④) → `--execute`.
+  4. 사후 확인(읽기 전용): 1·2·3 을 `--execute` 없이 다시 — 새 키 0, `이미 검증됨 N`, `이미 같은 증거 N`.
+- 8개를 한 번에: `npx tsx scripts/ap-generation/supp-load-rehearsal.ts [--execute]`(**로컬 격리 스택 전용** — 시작 전에 docker 로 API 가 격리 project(`ALTON_<이름>`)의 kong 인지 확인하고, 공유 ALTON·불일치면 쓰기 전에 종료하므로 비프로덕션에는 쓰지 않는다).
+
+### 전체 실행 순서(권장)
+1. 위 "배치 표"의 10개 그래프 배치(70건) → 2. 선택 21건(형제) → 3. 이 절의 보강 8개(49건) → 4. 조립 가능성 확인: `npx tsx scripts/ap-generation/exact-assign.ts --sets BC1,AB2,BC2,AB3,BC3 --strict-families --no-pending`(DB 검증된 항목만으로 계산했을 때 가상 문항이 0 이어야 한다. 3 단계까지 끝나면 `exact-assign-5sets-supp-strict.json` 과 같은 결과) — 단, 이 명령의 "검증 대기" 판정은 증거 파일 기준이라 오너 DB 에서 직접 확인하려면 `mark-verified.ts --screen` dry-run 의 "이미 같은 증거"가 전부 나오는지를 본다.
+- BC#1·AB#2 만 먼저 필요하면 1 의 일부 16건(보강 불필요)으로 충분하다(`exact-assignment-report.md` §2). 5세트 전부는 보강 포함 59건(최소) 이상의 검증 대기 항목이 필요하다.

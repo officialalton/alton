@@ -4,11 +4,10 @@
 // 각 단계 기대 건수를 파싱해 표로 낸다. 키는 출력하지 않는다.
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
-import { loadEnvLocal } from "../keywords/db";
+import { assertIsolatedApiOrExit } from "../../lib/dev/stack-identity";
 
-loadEnvLocal();
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-if (!/^http:\/\/(127\.0\.0\.1|localhost):(\d+)/.test(url) || /:544\d\d\b/.test(url)) { console.error("로컬 격리 스택(545xx 등)이 아닙니다. 중단."); process.exit(1); }
+// 모든 env 파일을 읽은 뒤 대상을 정하고 docker 로 API 가 격리 스택(ALTON_<이름>)의 kong 컨테이너인지 확인한다(공유 ALTON·불일치면 쓰기 전에 종료).
+assertIsolatedApiOrExit(["NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_URL"]);
 const execute = process.argv.includes("--execute");
 const EVIDENCE = "data/ap/screen-evidence/evidence-graph-s1s3.json";
 export const BATCHES: [string, string, string][] = [
