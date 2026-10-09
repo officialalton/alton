@@ -230,4 +230,22 @@ describe("loadKanbanBoard — 계정 생성 유입 통합", () => {
 
     expect(cards).toHaveLength(0);
   });
+
+  it("2026-10-09 — 칸반은 일정 미정(starts_at null) 상담도 읽도록 includeUnscheduled로 조회한다", async () => {
+    listConsultationsMock.mockResolvedValue([]);
+    const admin = makeAdminMock({ trial_onboarding_links: [] });
+    const { loadKanbanBoard } = await import("./consultation-kanban-data");
+    await loadKanbanBoard(admin as never);
+    expect(listConsultationsMock).toHaveBeenLastCalledWith(expect.anything(), expect.objectContaining({ includeUnscheduled: true }));
+  });
+
+  it("2026-10-09 — outcome='closed'(closure_type 없음)는 체험 신청이 아니라 상담 일정 확정에 남는다", async () => {
+    listConsultationsMock.mockResolvedValue([
+      { id: "c9", contact_name: "종료", contact_email: "x@example.com", status: "completed", outcome: "closed", child_id: null, is_child_onboarding_card: false },
+    ]);
+    const admin = makeAdminMock({ trial_onboarding_links: [] });
+    const { loadKanbanBoard } = await import("./consultation-kanban-data");
+    const cards = await loadKanbanBoard(admin as never);
+    expect(cards[0].stage).toBe("scheduled");
+  });
 });
