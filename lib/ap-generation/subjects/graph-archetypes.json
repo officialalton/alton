@@ -26,7 +26,8 @@
   ],
   "misconceptions": [
    "chooses the + to - crossing of f",
-   "picks a vertex without a sign change"
+   "picks a vertex without a sign change",
+   "chooses a vertex because f is large or small there"
   ],
   "bc": false
  },
@@ -108,8 +109,8 @@
   ],
   "misconceptions": [
    "forgets to divide",
-   "ignores g",
-   "ignores f",
+   "ignores the graphed function g",
+   "ignores the formula function f",
    "averages twice"
   ],
   "bc": false
@@ -158,7 +159,7 @@
   ],
   "misconceptions": [
    "drops the added constant",
-   "uses ln 2",
+   "uses ln 2 instead of ln 3",
    "treats ln 3 as 3",
    "matches slopes"
   ],
@@ -177,6 +178,22 @@
    "limit does not exist at a jump",
    "a corner is continuous",
    "a regular interior point is continuous"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_context_roc_meaning",
+  "topic": "4.1",
+  "skill": "3.F",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "difference quotient of the interpolated graph at t = a +/- 1e-6 (independent of the vertex list)"
+  ],
+  "misconceptions": [
+   "reverses increasing and decreasing",
+   "uses T(a) as a rate",
+   "uses the average rate over the whole interval"
   ],
   "bc": false
  },
@@ -214,6 +231,22 @@
   "bc": false
  },
  {
+  "id": "g_euler_graph",
+  "topic": "7.5",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "two Euler steps recomputed with floating-point arithmetic on the interpolated graph (independent of the exact rationals)"
+  ],
+  "misconceptions": [
+   "uses right-endpoint slopes",
+   "ignores the -y term",
+   "uses the wrong step size"
+  ],
+  "bc": true
+ },
+ {
   "id": "g_exp_growth_constant",
   "topic": "7.8",
   "skill": "1.E",
@@ -244,6 +277,23 @@
    "applies the ratio per year",
    "uses ln m without dividing by T",
    "starts from P(T)"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_extreme_mixed_calc",
+  "topic": "5.5",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "maximum of h over a 6001-point grid on [0, 6] (independent of the candidate list)"
+  ],
+  "misconceptions": [
+   "ignores corners and endpoints",
+   "reports the x-coordinate",
+   "maximizes f alone",
+   "reports h(6)"
   ],
   "bc": false
  },
@@ -289,10 +339,10 @@
    "central difference (step 1e-6) of F computed by numerical quadrature of the interpolated graph (independent of the Fundamental Theorem)"
   ],
   "misconceptions": [
-   "omits 2x",
+   "omits the factor 2x",
    "uses f(x) not f(x^2)",
    "reports the integral",
-   "uses f'"
+   "differentiates the integrand"
   ],
   "bc": false
  },
@@ -307,7 +357,7 @@
   ],
   "misconceptions": [
    "ignores the integral term",
-   "drops f'",
+   "drops the derivative of f",
    "adds the area",
    "uses f instead of f'"
   ],
@@ -341,9 +391,9 @@
   ],
   "misconceptions": [
    "forgets the constant",
-   "subtracts",
-   "ignores g",
-   "ignores f"
+   "subtracts instead of adding",
+   "ignores the graphed function g",
+   "ignores the formula function f"
   ],
   "bc": false
  },
@@ -359,7 +409,7 @@
   "misconceptions": [
    "counts the area below the axis as positive",
    "uses pi r squared",
-   "uses pi r",
+   "uses half the circumference",
    "omits the semicircle"
   ],
   "bc": false
@@ -379,6 +429,23 @@
    "reports g(b)"
   ],
   "bc": false
+ },
+ {
+  "id": "g_lagrange_decimal_calc",
+  "topic": "10.12",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "maximum absolute value from a 2000-point grid on [0, a] (independent of vertex reading)"
+  ],
+  "misconceptions": [
+   "uses the signed maximum",
+   "uses a maximum from outside [0, a]",
+   "uses 3! instead of 4!",
+   "uses x cubed"
+  ],
+  "bc": true
  },
  {
   "id": "g_lhopital_graph",
@@ -406,7 +473,7 @@
    "numerical evaluation of the two linear pieces at c -/+ 1e-9 (independent of the endpoints read from the figure)"
   ],
   "misconceptions": [
-   "uses f(c)",
+   "uses the plotted value f(c)",
    "multiplies the limits",
    "subtracts the limits"
   ],
@@ -427,6 +494,40 @@
    "solves f(x) = slope"
   ],
   "bc": false
+ },
+ {
+  "id": "g_param_dydx_graphs",
+  "topic": "9.1",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "difference quotient of y over difference quotient of x with step 1e-6 on the interpolated graphs (independent of reading slopes)"
+  ],
+  "misconceptions": [
+   "reports dx/dy",
+   "multiplies",
+   "subtracts the derivatives",
+   "divides the positions"
+  ],
+  "bc": true
+ },
+ {
+  "id": "g_param_speed_graphs",
+  "topic": "9.6",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "math.hypot of the numerically interpolated components at t = a (independent of the Pythagorean triple used to build the graphs)"
+  ],
+  "misconceptions": [
+   "adds components",
+   "reports dy/dx",
+   "reports one component",
+   "omits the square root"
+  ],
+  "bc": true
  },
  {
   "id": "g_prod_deriv_mixed_calc",
@@ -458,6 +559,23 @@
    "multiplies f' and g'",
    "drops one product rule term",
    "evaluates the product only"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_quotient_mixed_calc",
+  "topic": "2.9",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the lambdified formula divided by the interpolated graph (independent of the quotient rule)"
+  ],
+  "misconceptions": [
+   "divides f' by g'",
+   "adds the numerator terms",
+   "divides by g instead of g squared",
+   "swaps the numerator terms"
   ],
   "bc": false
  },
@@ -512,6 +630,40 @@
   "bc": false
  },
  {
+  "id": "g_second_deriv_mixed_calc",
+  "topic": "3.6",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "second central difference (step 1e-4) of the product of the lambdified formula and the interpolated graph (independent of the product rule)"
+  ],
+  "misconceptions": [
+   "drops 2 f' g'",
+   "uses coefficient 1",
+   "reports h'",
+   "puts the derivatives in the wrong places"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_separable_graph_calc",
+  "topic": "7.7",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "Runge-Kutta numerical integration of the differential equation with the interpolated g (independent of separation of variables)"
+  ],
+  "misconceptions": [
+   "adds the integral",
+   "drops y(0)",
+   "uses the value g(b)",
+   "multiplies by the area"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_speed_increasing",
   "topic": "4.2",
   "skill": "2.D",
@@ -544,6 +696,23 @@
   "bc": false
  },
  {
+  "id": "g_taylor_deriv_graph",
+  "topic": "10.11",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "polynomial evaluated numerically from numerically interpolated heights and finite-difference slope of f' (independent of the exact vertices)"
+  ],
+  "misconceptions": [
+   "omits the factorial",
+   "reads f' at the wrong point",
+   "drops the quadratic term",
+   "uses x instead of x squared"
+  ],
+  "bc": true
+ },
+ {
   "id": "g_total_distance_graph",
   "topic": "8.2",
   "skill": "1.D",
@@ -558,6 +727,38 @@
    "counts only positive area"
   ],
   "bc": false
+ },
+ {
+  "id": "g_trapezoid_unequal_graph",
+  "topic": "6.2",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "direct sum of the numerically interpolated heights times widths (independent of exact rationals)"
+  ],
+  "misconceptions": [
+   "uses the exact area",
+   "uses left endpoints",
+   "treats the widths as equal"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_vector_displacement_graph",
+  "topic": "9.5",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical quadrature of each interpolated velocity component plus the initial position (independent of trapezoid areas)"
+  ],
+  "misconceptions": [
+   "reverses the coordinates",
+   "forgets the initial position",
+   "adds velocity values"
+  ],
+  "bc": true
  },
  {
   "id": "g_volume_base_graph",
@@ -604,7 +805,7 @@
   ],
   "misconceptions": [
    "squares the difference of radii",
-   "omits pi",
+   "omits the factor pi",
    "ignores the inner radius"
   ],
   "bc": false

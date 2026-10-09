@@ -7,4 +7,6 @@ STAGES = {
         "g_prod_deriv_mixed_calc", "g_chain_mixed_calc", "g_integral_mixed_calc", "g_ftc_mixed_calc", "g_avg_value_mixed_calc", "g_area_curve_line_calc", "g_volume_curve_line_calc", "g_washer_curve_line_calc",
         "g_parallel_tangent_calc", "g_exp_value_calc", "g_cont_k_mixed_calc", "g_critical_point_mixed_calc",
     ],
+    "graph_s2_bc": ["g_lagrange_decimal_calc", "g_taylor_deriv_graph", "g_param_speed_graphs", "g_param_dydx_graphs", "g_euler_graph", "g_vector_displacement_graph"],
+    "graph_s2_ab": ["g_quotient_mixed_calc", "g_second_deriv_mixed_calc", "g_extreme_mixed_calc", "g_trapezoid_unequal_graph", "g_separable_graph_calc", "g_context_roc_meaning"],
 }

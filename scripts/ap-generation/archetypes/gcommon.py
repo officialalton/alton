@@ -153,8 +153,8 @@ def opts(pairs, key_val, textfn):
     return out
 
 
-def bp(arch, topic, skill, calc, concept, thinking, cond, mis, path, material, method="exact rational arithmetic + numeric cross-check"):
-    return mc_blueprint(arch, SUB, topic, skill, calc, concept, thinking, cond, mis, path, material=material, method=method)
+def bp(arch, topic, skill, calc, concept, thinking, cond, mis, path, material, method="exact rational arithmetic + numeric cross-check", subject=SUB):
+    return mc_blueprint(arch, subject, topic, skill, calc, concept, thinking, cond, mis, path, material=material, method=method)
 
 
 def gpack(arch, topic, skill, calc, stem, key, ds, rng, stim, blueprint, est=85, facts=None):
