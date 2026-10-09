@@ -1,5 +1,6 @@
-import type { SubjectGuide } from "./types";
+import type { ArchetypeSpec, SubjectGuide } from "./types";
 import { calcAbGuide } from "./calc-ab";
+import graphArchetypes from "./graph-archetypes.json";
 
 // AP Calculus BC = 공통 코어 + AB 공유분 + BC 델타(docs/ap/generation-guides/calc-bc.md). 공유 토픽 문항은 AB 에서 한 번 생성해 content_key 로 태깅한다.
 export const BC_ONLY_TOPICS = ["6.11", "6.12", "6.13", "7.5", "7.9", "8.13", "9.1", "9.2", "9.3", "9.4", "9.5", "9.6", "9.7", "9.8", "9.9", "10.1", "10.2", "10.3", "10.4", "10.5", "10.6", "10.7", "10.8", "10.9", "10.10", "10.11", "10.12", "10.13", "10.14", "10.15"];
@@ -44,6 +45,8 @@ export const calcBcGuide: SubjectGuide = {
     { id: "polar_table_distance", topic: "9.7", skill: "2.D", calculator: "not_allowed", stimulus: "table", verifiedBy: ["sign of r*r' per row"], misconceptions: ["r' alone", "negative r", "positive r'"] },
     { id: "param_speed_table", topic: "9.6", skill: "2.B", calculator: "not_allowed", stimulus: "table", verifiedBy: ["math.hypot"], misconceptions: ["component sum", "slope", "single component"] },
     { id: "lagrange_error", topic: "10.12", skill: "3.D", calculator: "not_allowed", stimulus: "none", verifiedBy: ["formula recompute"], misconceptions: ["wrong power/factorial"] },
+    // BC 전용 그래프 필수 MC 원형(2026-10-09, six-set-plan S1~S3): 원천은 scripts/ap-generation/archetypes/registry.py guide (AB 그래프 원형은 calcAbGuide 에서 상속)
+    ...(graphArchetypes as (ArchetypeSpec & { bc: boolean })[]).filter((a) => a.bc).map(({ bc: _bc, ...a }) => a as ArchetypeSpec),
   ],
   frqTemplates: [
     ...calcAbGuide.frqTemplates,

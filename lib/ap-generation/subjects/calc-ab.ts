@@ -1,4 +1,5 @@
-import type { SubjectGuide } from "./types";
+import type { ArchetypeSpec, SubjectGuide } from "./types";
+import graphArchetypes from "./graph-archetypes.json";
 
 // AP Calculus AB 생성 가이드 설정 — 본문: docs/ap/generation-guides/calc-ab.md. 수치·키·표·루브릭 구조는 Python 원형(scripts/ap-generation/archetypes/calc_ab_*.py)이 계산한다.
 export const calcAbGuide: SubjectGuide = {
@@ -71,6 +72,8 @@ export const calcAbGuide: SubjectGuide = {
     { id: "area_setup", topic: "8.4", skill: "1.D", calculator: "not_allowed", stimulus: "two curves", verifiedBy: ["each option integral evaluated numerically"], misconceptions: ["reversed order", "added functions", "wrong limit"] },
     { id: "volume_calc", topic: "8.7", skill: "1.D", calculator: "required", stimulus: "two curves, square cross sections", verifiedBy: ["scipy quad, intersection by brentq"], misconceptions: ["side not squared", "disks", "difference of squares"] },
     { id: "accum_context_calc", topic: "8.3", skill: "1.D", calculator: "required", stimulus: "rate function in context", verifiedBy: ["scipy quad"], misconceptions: ["initial amount forgotten", "rate times time", "sine term ignored"] },
+    // 그래프 필수 MC 신규 원형(2026-10-09, six-set-plan S1~S3): 원천은 scripts/ap-generation/archetypes/registry.py guide
+    ...(graphArchetypes as (ArchetypeSpec & { bc: boolean })[]).filter((a) => !a.bc).map(({ bc: _bc, ...a }) => a as ArchetypeSpec),
   ],
   frqTemplates: [
     { id: "frq_table_rate", template: "table_rate_context_calc", topic: "6.2", extraTopics: ["8.1"], skill: "2.B", calculator: "required", parts: "a trapezoidal sum + units interpretation (3) / b left sum over/underestimate with reason (2) / c average value of a model (2) / d IVT justification with continuity (2)", points: 9, verifiedBy: ["arithmetic recompute", "scipy quad vs Simpson"] },

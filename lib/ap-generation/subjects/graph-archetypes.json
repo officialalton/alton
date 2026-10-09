@@ -1,0 +1,612 @@
+[
+ {
+  "id": "g_abs_max_fprime",
+  "topic": "5.5",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical integration of f' to every grid point and maximum of f over a 0.25 grid (independent of the candidate comparison)"
+  ],
+  "misconceptions": [
+   "stops at the relative maximum",
+   "reports x instead of f(x)",
+   "uses a different candidate value"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_accum_reverse_extremum",
+  "topic": "6.5",
+  "skill": "2.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "g computed by numerical quadrature on a fine grid and its relative maximum located by comparing neighbouring values (independent of the sign analysis)"
+  ],
+  "misconceptions": [
+   "chooses the + to - crossing of f",
+   "picks a vertex without a sign change"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_area_between_graph",
+  "topic": "8.4",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical quadrature of |f - g| with breakpoints at the vertices (independent of the exact crossing computation)"
+  ],
+  "misconceptions": [
+   "lets areas cancel",
+   "area under f only",
+   "area under g only",
+   "takes the absolute value of the net"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_area_curve_line_calc",
+  "topic": "8.4",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "composite Simpson rule on f - L between roots recomputed by Brent's method (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "integrates over the wrong interval",
+   "area under the curve only",
+   "area under the line only",
+   "wrong order of subtraction"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_avg_roc_graph",
+  "topic": "2.1",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "quadrature of the piecewise slope function over [a, b] divided by b - a (independent of f(b) - f(a))"
+  ],
+  "misconceptions": [
+   "uses only the final segment slope",
+   "reports change without dividing",
+   "averages endpoint values"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_avg_value_graph",
+  "topic": "8.1",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical quadrature of the interpolated graph divided by 8 (independent of trapezoid areas)"
+  ],
+  "misconceptions": [
+   "forgets to divide",
+   "averages vertex values",
+   "averages endpoints",
+   "divides by the number of segments"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_avg_value_mixed_calc",
+  "topic": "8.1",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "composite Simpson rule (20001 nodes) on f + g with g interpolated, divided by 8 (independent of the split into two integrals)"
+  ],
+  "misconceptions": [
+   "forgets to divide",
+   "ignores g",
+   "ignores f",
+   "averages twice"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_chain_mixed_calc",
+  "topic": "3.1",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of f(g(x)) with f lambdified and g interpolated (independent of the chain rule)"
+  ],
+  "misconceptions": [
+   "evaluates f' at a",
+   "omits g'(a)",
+   "uses f(g(a))",
+   "adds instead of multiplies"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_chain_two_graphs",
+  "topic": "3.1",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the numerically composed interpolants (independent of the chain rule)"
+  ],
+  "misconceptions": [
+   "evaluates f' at a instead of g(a)",
+   "omits g'(a)",
+   "adds instead of multiplies"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_cont_k_mixed_calc",
+  "topic": "1.11",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "k substituted back into the right-hand piece and compared with the plotted value f(2) (independent of the algebra for k)"
+  ],
+  "misconceptions": [
+   "drops the added constant",
+   "uses ln 2",
+   "treats ln 3 as 3",
+   "matches slopes"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_cont_removable",
+  "topic": "1.10",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "side limits and function values compared numerically from the plotted piece endpoints (independent of how the picture types were assigned)"
+  ],
+  "misconceptions": [
+   "limit does not exist at a jump",
+   "a corner is continuous",
+   "a regular interior point is continuous"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_count_nondiff",
+  "topic": "2.4",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical one-sided difference slopes and one-sided values around each interior vertex on the plotted pieces (independent of the vertex slope list)"
+  ],
+  "misconceptions": [
+   "counts corners only",
+   "counts a smooth vertex",
+   "counts only the break"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_critical_point_mixed_calc",
+  "topic": "5.2",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "bisection with 80 halvings on f'(x) - g'(x) using numerically interpolated f' and sympy g' (independent of Brent's method)"
+  ],
+  "misconceptions": [
+   "uses the zero of f'",
+   "uses g in place of g'",
+   "adds the derivatives",
+   "guesses the midpoint"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_exp_growth_constant",
+  "topic": "7.8",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "k recomputed as ln(P(T)/P(0))/T from the dense numerical curve samples (independent of the exact exponents)"
+  ],
+  "misconceptions": [
+   "ln of the ratio without dividing by t",
+   "uses the average rate of change",
+   "ln of the value instead of the ratio",
+   "divides ratio by time"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_exp_value_calc",
+  "topic": "7.8",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "P(t1) recomputed as P(0) (P(T)/P(0))^(t1/T) (independent of the exponent k)"
+  ],
+  "misconceptions": [
+   "extends the chord linearly",
+   "applies the ratio per year",
+   "uses ln m without dividing by T",
+   "starts from P(T)"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_fprime_inc_concave",
+  "topic": "5.9",
+  "skill": "2.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical value and finite-difference slope of f' at each segment midpoint (independent of the sign table)"
+  ],
+  "misconceptions": [
+   "f' positive but increasing",
+   "f' negative and increasing",
+   "f' negative and decreasing"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_fprime_inflection",
+  "topic": "5.6",
+  "skill": "2.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "dense sampling of the finite-difference slope of f' and counting its sign changes (independent of comparing segment slopes)"
+  ],
+  "misconceptions": [
+   "counts zeros of f'",
+   "counts sign changes of f'",
+   "counts every vertex"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_ftc_chain_graph",
+  "topic": "6.4",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of F computed by numerical quadrature of the interpolated graph (independent of the Fundamental Theorem)"
+  ],
+  "misconceptions": [
+   "omits 2x",
+   "uses f(x) not f(x^2)",
+   "reports the integral",
+   "uses f'"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_ftc_mixed_calc",
+  "topic": "6.4",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of H built from the lambdified f and a quadrature of the interpolated g (independent of the Fundamental Theorem)"
+  ],
+  "misconceptions": [
+   "ignores the integral term",
+   "drops f'",
+   "adds the area",
+   "uses f instead of f'"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_inflow_outflow_graph",
+  "topic": "8.3",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical quadrature of the two interpolated rate graphs (independent of the trapezoid formula)"
+  ],
+  "misconceptions": [
+   "reports only the net change",
+   "adds outflow",
+   "ignores outflow",
+   "outflow minus inflow"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_integral_mixed_calc",
+  "topic": "6.6",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "composite Simpson rule (20001 nodes) on f + c g with g interpolated (independent of the split into two integrals)"
+  ],
+  "misconceptions": [
+   "forgets the constant",
+   "subtracts",
+   "ignores g",
+   "ignores f"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_integral_semicircle",
+  "topic": "6.6",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical quadrature of the explicit piecewise formula with the sqrt semicircle (independent of the geometric area formulas)"
+  ],
+  "misconceptions": [
+   "counts the area below the axis as positive",
+   "uses pi r squared",
+   "uses pi r",
+   "omits the semicircle"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_inverse_deriv_graph",
+  "topic": "3.3",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical inverse by Brent's method on the interpolated graph, then a central difference of that inverse (independent of the reciprocal rule)"
+  ],
+  "misconceptions": [
+   "reports f'(a)",
+   "reciprocal of the function value",
+   "reports g(b)"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_lhopital_graph",
+  "topic": "4.7",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "evaluating the interpolated quotient f/g at x = a +/- 1e-7 (independent of the slope ratio)"
+  ],
+  "misconceptions": [
+   "inverts the slope ratio",
+   "treats 0/0 as 0",
+   "multiplies the slopes"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_lim_jump_sum",
+  "topic": "1.3",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical evaluation of the two linear pieces at c -/+ 1e-9 (independent of the endpoints read from the figure)"
+  ],
+  "misconceptions": [
+   "uses f(c)",
+   "multiplies the limits",
+   "subtracts the limits"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_parallel_tangent_calc",
+  "topic": "2.2",
+  "skill": "2.B",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "bisection on the central-difference derivative with 100 halvings (independent of the symbolic derivative and Brent's method)"
+  ],
+  "misconceptions": [
+   "solves f(x) = L(x)",
+   "uses the intercept as the slope",
+   "solves f(x) = slope"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_prod_deriv_mixed_calc",
+  "topic": "2.8",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the product of the lambdified formula and the interpolated graph (independent of the product rule)"
+  ],
+  "misconceptions": [
+   "multiplies derivatives",
+   "drops the second term",
+   "drops the first term",
+   "evaluates the product"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_product_two_graphs",
+  "topic": "2.8",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the product of the numerically interpolated graphs (independent of the product rule)"
+  ],
+  "misconceptions": [
+   "multiplies f' and g'",
+   "drops one product rule term",
+   "evaluates the product only"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_quotient_two_graphs",
+  "topic": "2.9",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the numerically interpolated quotient (independent of the quotient rule)"
+  ],
+  "misconceptions": [
+   "divides f' by g'",
+   "adds the numerator terms",
+   "divides by g instead of g squared"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_related_rates_two_graphs",
+  "topic": "4.5",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of V(t) built from the numerically interpolated r and h (independent of the product rule)"
+  ],
+  "misconceptions": [
+   "drops the h' term",
+   "drops the r' term",
+   "forgets 1/3",
+   "evaluates V"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_riemann_left_graph",
+  "topic": "6.2",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "direct sum of the numerically interpolated function at the left endpoints times 2 (independent of exact vertex arithmetic)"
+  ],
+  "misconceptions": [
+   "uses right endpoints",
+   "uses the trapezoidal sum",
+   "adds an extra endpoint value",
+   "forgets the width"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_speed_increasing",
+  "topic": "4.2",
+  "skill": "2.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical |v| at t = midpoint +/- 0.01 on every segment (independent of the sign table)"
+  ],
+  "misconceptions": [
+   "positive velocity with negative slope",
+   "negative velocity with positive slope",
+   "constant velocity segment"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_tangent_approx_fprime_graph",
+  "topic": "4.6",
+  "skill": "1.F",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical integral of f' over [a, a+1] gives the true f(a+1); the sign of true - tangent value is compared with the claim"
+  ],
+  "misconceptions": [
+   "reverses over/under",
+   "uses the slope at x = a + 1",
+   "wrong slope and wrong claim"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_total_distance_graph",
+  "topic": "8.2",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical quadrature of |v| with breakpoints at the vertices (independent of the exact piecewise formula)"
+  ],
+  "misconceptions": [
+   "net signed area",
+   "adds x(0) to the displacement",
+   "counts only positive area"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_volume_base_graph",
+  "topic": "8.7",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical quadrature of the interpolated f squared (independent of the exact quadratic piece formula)"
+  ],
+  "misconceptions": [
+   "squares the integral",
+   "reports the area",
+   "halves the integral of f squared",
+   "multiplies by pi"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_volume_curve_line_calc",
+  "topic": "8.7",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "composite Simpson rule on (f - L)^2 between Brent-found roots (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "squares the area",
+   "reports the area",
+   "integrates f^2 - L^2",
+   "multiplies by pi"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_washer_curve_line_calc",
+  "topic": "8.11",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "composite Simpson rule on pi (f^2 - L^2) between Brent-found roots (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "squares the difference of radii",
+   "omits pi",
+   "ignores the inner radius"
+  ],
+  "bc": false
+ }
+]
