@@ -88,3 +88,12 @@
 - 56. 대량 Bio/Micro 원형 확장은 계속 보류. 검증 라운드 결과(Bio FRQ 원형은 아직 게시 품질 아님)를 보고한 뒤에만 확장 범위를 정한다.
 
 - 51 보충(병합 정리): **겹침 정책은 하나** — `OVERLAP_DEFAULT = { full: 0, partialFraction: 0.2 }`(`lib/ap-exam/assemble.ts`). 풀 세트·MC/FRQ 전체 세트(`planApSet`)는 기본 0, 부분 연습(`planPartialSet`)은 문항 수의 20%를 기본으로 하되 둘 다 `--overlap-max N`(`assemble-ap-set.ts`) 하나의 플래그로 조정한다(중복 플래그 없음). 부분 연습 허용 목록·라벨은 통합 브랜치의 `planPartialSet`/`partialLabelAllowed` 를 그대로 쓴다.
+
+## 57~63. 2026-10-09 (3차) 결정 반영
+- 57. **재고 목표 승인(초기)**: AB MC 100 + FRQ 12 번들, 수업 용도 목표 없음. **칸 단위**(단원 × 계산기 사용 × 표현 × 스킬 범주 × 문항군 × FRQ 유형)로 `stock-targets.json` 확정(마이그레이션 404, 뷰 `ap_stock_cell_shortfall_v`, 합계 뷰 `ap_stock_total_v`). 합계와 칸별 부족을 따로 보고. MC 계산기는 required / not_allowed / allowed(허용만) 구분. FRQ 6유형은 **내부 구성 기준**.
+- 58. 라벨: "AP Calculus AB — Non-Calculator Practice" / "— Calculator Practice" / "— Free-Response Practice". 제목·배지·시작 안내가 같은 의미를 전달, FRQ 세트도 계산기 사용 표시, 공식 구성 충족 전에는 "Full Practice Exam" 금지(`layouts.ts` 상수; UI 는 검증 담당).
+- 59. 세트 정책 통합본 `docs/ap/set-policy.md`: 부분 연습 겹침 최대 20%, 완성 모의고사는 원칙적 중복 회피, 복습·재응시 재사용 허용, 첫 노출과 재노출 구분, 고유 재고 이중 계산 금지.
+- 60. 최종 콘텐츠 목표: **10과목 × 완성 모의고사 10세트**(구축 순서 1 → 3 → 10세트, 지금은 AB 1세트). 대량 생성 예산 승인이 아니며 중단선 $27 초과 지출 없음. `docs/ap/ten-set-plan.md`.
+- 61. Bio FRQ: 추가 생성·반복 수선 중지, 무료 결정적 검사(존재하지 않는 토픽·모호한 대조군·자료↔허용 답 모순·표시 문구 중복·열 이름)와 의미 기반 루브릭으로 설계 수정, **완성 풀이 예시+채점 가이드 검토 선행**(`docs/ap/bio-frq-worked-example.md`). 유료 재검증 계획은 별도 보고(실행 안 함).
+- 62. Micro FRQ 확장 보류: 남은 오류 목록과 무료 검사(`micro-frq-checks.ts`) 수정 완료(`docs/ap/experiment-plan.md` §10).
+- 63. AB 보강: 그래프 MC 2원형 + FRQ 3유형(입자 운동·관련 변화율·음함수) 검증 완료(예산 $1.5 이내), 통과 원형만 확장 대상.

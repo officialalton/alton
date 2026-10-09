@@ -10,7 +10,8 @@ case "${1:-}" in
   start)
     ID="${2:-}"; [[ "$ID" =~ ^ALTON_[A-Za-z0-9]+$ ]] || { echo "project id 는 ALTON_<이름> 형식(예: ALTON_apverify)" >&2; exit 1; }
     [[ -e "$LOCK" ]] && { echo "락이 이미 있습니다($LOCK). 먼저 stop." >&2; exit 1; }
-    git diff --quiet -- supabase/config.toml || { echo "config.toml 에 미커밋 변경이 있어 중단" >&2; exit 1; }
+    git diff --quiet HEAD -- supabase/config.toml || { echo "config.toml 이 HEAD 와 다릅니다(미커밋·스테이징 변경 포함) — 중단" >&2; exit 1; }
+    grep -q '^project_id = "ALTON"$' supabase/config.toml || { echo "HEAD 의 config.toml project_id 가 ALTON 이 아닙니다(이미 격리 값이 커밋됨?) — 중단" >&2; exit 1; }
     python3 - "$ID" <<'PY'
 import re,sys
 p='supabase/config.toml'; s=open(p).read()
@@ -19,12 +20,12 @@ s=re.sub(r'^(\s*(?:port|shadow_port|smtp_port|pop3_port)\s*=\s*)(54\d{3})\b', la
 s=re.sub(r'^(inspector_port\s*=\s*)8083', r'\g<1>8583', s, flags=re.M)
 open(p,'w').write(s)
 PY
-    if ! npx tsx scripts/dev/isolated-guard-cli.ts config; then git checkout -- supabase/config.toml; exit 1; fi
+    if ! npx tsx scripts/dev/isolated-guard-cli.ts config; then git checkout HEAD -- supabase/config.toml; exit 1; fi
     mkdir -p tmp; printf '{"projectId":"%s","createdAt":"%s"}\n' "$ID" "$(date -u +%FT%TZ)" > "$LOCK"
     npx supabase start ;;
   stop)
     ID="$(npx tsx scripts/dev/isolated-guard-cli.ts teardown)" || exit 1
     npx supabase stop --project-id "$ID" --no-backup
-    git checkout -- supabase/config.toml; rm -f "$LOCK"; echo "정리 완료: $ID" ;;
+    git checkout HEAD -- supabase/config.toml; rm -f "$LOCK"; echo "정리 완료: $ID" ;;
   *) echo "usage: $0 start ALTON_<name> | stop" >&2; exit 1 ;;
 esac

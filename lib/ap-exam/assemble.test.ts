@@ -114,3 +114,28 @@ describe("부분 연습 세트", () => {
     expect(ok.ok).toBe(true); expect(ok.items).toHaveLength(6);
   });
 });
+
+import { OVERLAP_DEFAULT, exposureKindOf, partialOverlapMax } from "./assemble";
+import { readFileSync } from "node:fs";
+describe("겹침 정책 상수 ↔ 문서", () => {
+  it("풀 0 · 부분 20%(내림) · 재노출 구분", () => {
+    expect(OVERLAP_DEFAULT).toEqual({ full: 0, partialFraction: 0.2 });
+    expect([29, 13, 6].map(partialOverlapMax)).toEqual([5, 2, 1]);
+    expect(exposureKindOf(0)).toBe("first"); expect(exposureKindOf(2)).toBe("re_exposure");
+  });
+  it("기준 문서가 같은 값을 말한다", () => {
+    const doc = readFileSync("docs/ap/publication-flow.md", "utf-8");
+    const sec = doc.slice(doc.indexOf("## 문항 겹침(재노출) 정책"));
+    expect(sec).toMatch(/풀 모의고사[^\n]*0/); expect(sec).toMatch(/부분 연습[^\n]*20%/); expect(sec).toMatch(/최초 노출/); expect(sec).toMatch(/재노출/);
+  });
+});
+
+import { AP_PARTIAL_CALCULATOR_NOTE, fullPracticeLabelAllowed, partialBadge, partialStartGuidance } from "./layouts";
+describe("부분 세트 표시 정책", () => {
+  it("제목·배지·시작 안내가 같은 의미(계산기 사용)를 전달하고 FRQ 도 계산기 표시", () => {
+    expect(partialSetName("ap_calculus_ab", "noncalc_mc")).toBe("AP Calculus AB — Non-Calculator Practice"); expect(partialSetName("ap_calculus_ab", "calc_mc")).toBe("AP Calculus AB — Calculator Practice"); expect(partialSetName("ap_calculus_ab", "frq")).toBe("AP Calculus AB — Free-Response Practice");
+    expect(partialBadge("noncalc_mc")).toMatch(/No calculator/); expect(partialBadge("calc_mc")).toMatch(/Graphing calculator required/); expect(AP_PARTIAL_CALCULATOR_NOTE.frq).toMatch(/Part A.*calculator.*Part B.*no calculator/);
+    expect(partialStartGuidance("ap_calculus_ab", "frq")).toMatch(/not a full practice exam/); expect(partialStartGuidance("ap_calculus_ab", "noncalc_mc")).toMatch(/29 multiple-choice questions/);
+  });
+  it("Full Practice Exam 은 공식 구성 충족 전에는 불가", () => { expect(fullPracticeLabelAllowed(false)).toBe(false); expect(fullPracticeLabelAllowed(true)).toBe(true); });
+});

@@ -1,0 +1,1081 @@
+[
+ {
+  "key": "ap_calculus_ab-m01-k0",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f' goes from negative to positive at x=2, so f has a relative minimum there. At x=6, f' touches 0 but does not change sign, so there is no extremum.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "x=2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Graph of f' to relative extremum via sign change: fits 5.4 and 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x=2 is the only sign change from negative to positive in the interior. x=6 is a touch with no sign change. x=0 is an endpoint where f' is negative, so it is not a relative minimum."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The vertices, axes and domain are complete, and the stem states that f' is continuous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions (endpoint, touch zero, maximum of f'). The x=0 rationale is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculator, short options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unique key (x=2). The stimulus is complete and the distractors are plausible. Only the x=0 rationale wording is slightly loose."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read the graph of f' and apply the first derivative test. The only critical points are x=2 (sign change - to +) and x=6 (f'=0 with no sign change). Distractors target common misconceptions: x=4 is a peak of f', x=0 is an endpoint, and x=6 has f'=0 without a sign change. It takes few steps and no computation, and the graph is easy to read. This fits the direct skill of topic 5.4 rather than a full-mock level challenge.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m01-k1",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "x=2",
+     "brief_reasoning": "f' changes from negative to positive at x=2. At x=6, f' touches 0 but stays nonnegative on both sides, so there is no extremum there. At x=4, f' is positive, so f is still increasing.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard first derivative test from graph of f'; fits 5.4/2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x=2 is the unique sign change from negative to positive; x=6 is a touch point; x=0 is an endpoint where f is decreasing (would be a max, not min); x=4 is a max of f'."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices, axes and domain are fully specified; the stem states continuity and differentiability."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; the x=0 rationale is slightly generic (f' is negative at 0, and it is an endpoint) but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-75 seconds, no calculator needed, short numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous first derivative test item from the graph of f'; the key x=2 is unique and the distractors reflect realistic misconceptions."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application of the first derivative test: read the sign of f' from a piecewise-linear graph and find the one place it changes from negative to positive (x=2). Distractors target common misconceptions: x=6 is a zero of f' without a sign change, x=4 is a peak of f' rather than an extremum of f, and x=0 is an endpoint. Minimal reading, no computation, and only one representation (graph to conclusion about f). This is a core skill check rather than a multi-step mock-exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m01-k2",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f' changes from negative to positive at x=2, so f has a relative minimum there. At x=6, f' touches 0 but stays nonnegative, so there is no extremum. At x=0, f is decreasing to the right, so it is not a minimum.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "x=2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly tests the first derivative test from the graph of f'; the skill is connecting representations."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x=2 is the only sign change from negative to positive. x=6 is a touch with no sign change, and x=0 is an endpoint where f is decreasing, so it is not a minimum."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The vertices, axes, and domain are fully specified. The stem states the continuity and differentiability conditions."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct and realistic, and the explanation covers each wrong option. The x=0 rationale is slightly weak but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculator needed, and the load is typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean and correct first derivative test question from the graph of f'. The key x=2 is unique, the distractors are plausible, and the stimulus data is complete."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: locate where f' changes from negative to positive on a graph of f'. Distractors include an endpoint (x=0), a zero of f' without sign change (x=6), and a local max of f' (x=4). No computation, minimal reading, one representation (graph to conclusion). Fair, but straightforward for the first derivative test.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m01-k3",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "x=6",
+     "brief_reasoning": "f' changes from negative to positive only at x=6; at x=2 f' touches 0 but stays nonpositive.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-75 seconds and needs no calculator.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct first-derivative-test item with a unique key at x=6 and a complete stimulus."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application of the first derivative test from a graph of f'. Student must find where f' = 0, check sign change, and reject x=2 (touches zero with no sign change), x=4 (not critical), and x=0 (endpoint). No computation; minimal reading. The x=2 distractor adds some misconception value, but overall it is a direct, standard 5.4 item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k0",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integral over [0,8] using trapezoids = -2+4+6+8 = 16; g(8) = 4+16 = 20.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "20"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "It takes about 80 seconds, uses small integers, and is non-calculator.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, the stimulus is complete, the distractors are realistic, and the time and arithmetic load are appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing g(8)=4+integral, computing signed areas from a piecewise linear graph (triangle below axis, triangle, two trapezoids), and adding the initial value. Small clean numbers, clear wording, in-scope content. Distractors reflect common errors (omitting the constant, sign error on negative area). Typical AP-style multi-step accumulation item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k1",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integral from 0 to 8: -4 (triangle) - 6 (trapezoid) - 8 (rectangle) = -18. So g(8) = 5 - 18 = -13.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-13"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Accumulation function value from a graph of the integrand; fits 6.4 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Integral = -4-6-4-4 = -18; g(8) = -13. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices, axes and domain fully specified; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "-9 (stops at x=6), -18 (omits g(0)) and -4 (width 1) each match a distinct misconception, and the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, simple arithmetic, appropriate for the non-calculator section."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed. It tests an accumulation function with an initial value from a piecewise-linear graph, and each distractor reflects a distinct misconception."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read a piecewise-linear graph, compute signed areas (triangle, trapezoid, rectangle) for the integral from 0 to 8, and add the constant 5 from the accumulation function definition. The distractor -18 catches those who forget the constant. The arithmetic is simple and the wording is clear, so the difficulty comes from legitimate sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k2",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "∫0^2 f = -2, ∫2^4 f = 6, sum 4; g(4)=5+4=9",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "9"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Accumulation function from graph with initial value; fits 6.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "g(4)=5+(-2+6)=9, unique correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices fully specify the piecewise linear graph; stem clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "3 = g(2), 4 = integral only, 11 = ignores negative area; each distinct and explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, simple integer arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item. The key 9 is verified and the distractors map to distinct misconceptions. It meets scope and exam-suitability criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: evaluate an accumulation function from a piecewise-linear graph using two triangle areas (one signed negative) plus the constant 5. Few steps, small integers, minimal reading. Distractors target sign and constant errors, but the overall depth is introductory.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k3",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integral 0 to 8 = -6-4+6+12 = 8; g(8)=3+8=11",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "11"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The task takes about 80 seconds, uses simple arithmetic, and is appropriate for a non-calculator item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct item on evaluating an accumulation function from a graph. The key is unique and the distractors are distinct and plausible."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Evaluate an accumulation function at x=8 by reading a piecewise-linear graph and computing four signed trapezoid/rectangle areas, then adding the initial value 3. Requires FTC understanding (g(0)=3, g(8)=3+integral), a graph-to-area representation change, and sign handling. Numbers are small and wording is clear. Distractors target forgetting the constant (8) and sign errors (-1).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f01-k0",
+  "cellId": "ap_calculus_ab-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "a(t)=3cos t+0.5; a(1)=3cos1+0.5",
+     "final_answer": "a(1) ≈ 2.121 m/s^2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "v(1)≈1.024>0 and a(1)≈2.121>0, same sign",
+     "final_answer": "Increasing, since v(1) and a(1) are both positive",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "v=0 at t≈0.6020, 2.9689; integrate |v|: 0.586+2.807+3.822",
+     "final_answer": "≈ 7.215 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "x(5)=3+∫0^5 v dt = 3+3(1-cos5)+6.25-10 ≈ 3-1.601",
+     "final_answer": "x(5) ≈ 1.399 m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part a (acceleration), part b (justification of speed change with the signs of v and a) and parts c and d (distance and position from velocity) all fall within topics 4.2 and 8.2. The target skill 3.E is assessed in part b, and the other parts carry their own skills. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The independent solver matches every key: a(1)=2.121, v(1)=1.024, so speed is increasing, distance 7.215, position 1.399. Part d has a minor rubric inconsistency: the rubric gives no point for stating the position setup in terms of net change beyond d1, and d3 has no units row. Part c's points are split 1/1/1, with a separate units point, which is a little unusual but acceptable. Rubric rows chain consistently."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus text gives the velocity, initial position, interval and units, so the data is complete. The expression \"3 sin(1 t)\" is an awkward rendering with a stray coefficient 1. It should be written sin t. The empty data object is acceptable for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors are not applicable. The rubric covers the common sign-comparison reasoning. The common_errors fields are empty, which is a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Nine points in about 15 minutes, with a calculator needed for the integrals of |v| and v. The structure is typical of an AP particle-motion FRQ. The part point split 1/2/3/3 is within the official grain."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound particle-motion FRQ: the keys are verified, and the parts are in scope with appropriate rubrics. Minor issues are the \"sin(1 t)\" rendering and the units point in part c versus no units row in part d."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AB calculator-active particle motion FRQ. It needs a=v', the speed sign test with justification, total distance via |v| (roots of v found on the calculator), and position via x(0) plus a definite integral. All of this is in scope, the numbers are clean and the reading load is minimal. Difficulty comes from the number of reasoning steps and the justification demand, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f01-k1",
+  "cellId": "ap_calculus_ab-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "a(t)=3cos t+0.5; a(1)=3cos1+0.5",
+     "final_answer": "a(1) ≈ 2.121 m/s^2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "v(1)≈1.024>0 and a(1)≈2.121>0; same sign",
+     "final_answer": "Increasing, since v(1) and a(1) are both positive",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "v=0 at t≈0.6020 and 2.9689; distance = integral of |v| from 0 to 4 = 0.586+2.807+1.260",
+     "final_answer": "≈ 4.653 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "x(4)=3+∫0^4 v dt = 3+0.961",
+     "final_answer": "x(4) ≈ 3.961 m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Values are correct, but the item has presentation and scoring flaws. The stem contains the awkward \"3 sin(1 t)\". The rubric splits one result into redundant points: c2 and c3 both require 4.653, and d2 and d3 both require the same final value. Part (d) is a one-step computation worth 3 points, which inflates the point load. Part (d) says nothing about units, yet the model answer has none. Row b2 requires the literal words \"increasing\" and \"signs\", which is rigid. Overall the item fails on scoring consistency and exam suitability.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts match 4.2/8.2 and are in AB scope. Part (b) targets 3.E appropriately."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Numeric answers are correct. Rubric rows c2/c3 and d2/d3 award separate points for the same value (c3 only adds units), so the scoring is padded. Row b2 demands specific words."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "\"3 sin(1 t)\" is a malformed template artifact with a missing multiplication sign and a pointless coefficient. The data object is empty, which is acceptable for a text stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to the FRQ; common_errors lists are empty."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Part (d) is worth 3 points but requires only x(0) plus one calculator integral. Part (c) similarly earns 3 points for one integral setup plus a value and units. The point distribution does not reflect the actual task load."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP FRQ-style particle motion with four parts. (a) is a calculator derivative with units. (b) needs the signs of v(1) and a(1) compared and justified (skill 3.E). (c) requires finding sign changes of v and integrating |v|. (d) is x(0) plus the integral of v. The concepts are in scope and the numbers are clean with a calculator, so the difficulty comes from multi-step reasoning and justification rather than unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f01-k2",
+  "cellId": "ap_calculus_ab-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "a(t)=4.5cos(1.5t)+0.5; a(1)=4.5cos1.5+0.5",
+     "final_answer": "a(1) ≈ 0.818 m/s^2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "v(1)=3sin1.5-1≈1.992>0 and a(1)≈0.818>0; same sign",
+     "final_answer": "Increasing, because v(1)≈1.992>0 and a(1)≈0.818>0 have the same sign",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "v=0 at t≈0.3100 and 1.9806; sum of |displacements| 0.2286+2.2094+3.9011",
+     "final_answer": "≈ 6.339 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "x(4)=5+∫0^4 v dt = 5+(2-2cos6)+4-6 ≈ 5-1.920",
+     "final_answer": "x(4) ≈ 3.080 m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts fit 4.2 and 8.2. Part b is a genuine 3.E justification. Integration in c and d is an allowed related topic."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Answers are unique and the independent solver agrees. The rubric rows are consistent with the model answers. The c3 and d3 rows are slightly padded but valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the velocity, the initial position, the interval, and the units. Nothing is missing."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options, so the criterion is not applicable. The empty common_errors lists are a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The point split of 1/2/3/3 totals 9 points and is typical of an AP FRQ. The calculator is used for the integrals. The workload is reasonable for about 15 minutes."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean particle-motion FRQ with a 3.E speed-justification part, correct keys, a complete stimulus, and a reasonable point and time grain. No instant-reject conditions apply."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ particle-motion item. Part a is a direct derivative evaluation. Part b requires comparing the signs of v and a with a justification. Part c needs the zeros of v found on the calculator, then an integral of |v| (a split integral or a calculator integral of |v|). Part d is a definite integral plus the initial position. The concepts are in scope for AB, and the numbers are calculator-friendly with no ugly arithmetic. The difficulty comes from multi-step reasoning and the justification, not from reading load or computation.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f02-k0",
+  "cellId": "ap_calculus_ab-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Pythagorean theorem, then implicit differentiation with respect to t",
+     "final_answer": "x^2 + y^2 = 100; 2x dx/dt + 2y dy/dt = 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "2(8)(4) + 2(6)dy/dt = 0, so 64 + 12 dy/dt = 0",
+     "final_answer": "dy/dt = -16/3 ft/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "dy/dt < 0, so the height is decreasing",
+     "final_answer": "Down, because dy/dt = -16/3 < 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "dA/dt = (1/2)(x' y + x y') = (1/2)(4*6 + 8*(-16/3)) = (1/2)(-56/3)",
+     "final_answer": "dA/dt = -28/3 ft^2/s",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard AB related rates; parts map to 4.5/4.4 with 1.E demand in b and d. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys -16/3 and -28/3 verified by hand. Minor rubric nits: d lacks a units row though the model answer gives ft^2/s; d1 element 'product rule' is a phrase, not an expression; b1 omits dx/dt=4 as a required element."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stimulus complete and unambiguous; no figure needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; no distractors. Model answers are clear."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points, 2/3/1/3, no calculator, exact values, about 15 minutes."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and suitable for the exam. The only issues are minor rubric nits: no units row in (d), the \"product rule\" element in d1 is a phrase rather than an expression, and b1 does not list dx/dt = 4 as a required element."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Classic AP-style related rates FRQ with clean 6-8-10 numbers. It requires setting up the Pythagorean relation, implicit differentiation in t, substitution and solving with units, interpreting the sign, and a second related rate using the product rule that reuses the earlier result. The multi-step chain and reuse of dy/dt make it more than basic learning, but there is no unusual concept depth, so it is not advanced. Arithmetic is light (fractions with denominator 3) and the reading load is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f02-k1",
+  "cellId": "ap_calculus_ab-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Pythagorean theorem, implicit differentiation",
+     "final_answer": "x^2+y^2=625; 2x dx/dt + 2y dy/dt = 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "48+7y'=0",
+     "final_answer": "dy/dt = -48/7 ft/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "dy/dt<0",
+     "final_answer": "Down, since dy/dt = -48/7 < 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "A' = 1/2(x'y + xy') = 1/2(14 - 1152/7)",
+     "final_answer": "dA/dt = -527/7 ft^2/s (about -75.3)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.5 with legitimate 4.4/3.2 parts; AB scope; each part fits its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Answers -48/7 and -527/7 are correct and unique. Minor: row d1 requires the literal phrase 'product rule'; the rubric could accept the correct expression instead."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stimulus is self-contained and clear; the empty data object is fine for a text-only item."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so distractors do not apply; the rubric rows are structured acceptably."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points in 2/3/1/3 split, clean numbers (7-24-25 triple), no calculator needed, typical load for about 15 minutes."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound related-rates ladder FRQ with correct keys and clean numbers, and it fits the 9-point grain. The only issues are minor rubric rigidity (literal 'product rule' wording) and no units row in part (d). It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Classic AP FRQ-style related rates. Needs a Pythagorean model, implicit differentiation w.r.t. t, substitution of clean values (7-24-25 triple), sign interpretation, and a second related rate (area) requiring the product rule and reuse of the part (b) result. Multi-step but all in scope for AB; arithmetic in (d) (-527/7) involves fractions but is manageable by hand and not the source of difficulty. Reading load is low and wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f02-k2",
+  "cellId": "ap_calculus_ab-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Pythagorean theorem, implicit differentiation",
+     "final_answer": "x^2+y^2=169; 2x dx/dt + 2y dy/dt = 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "2(5)(3)+2(12)y'=0",
+     "final_answer": "dy/dt = -5/4 ft/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "dy/dt<0",
+     "final_answer": "Moving down, since dy/dt = -5/4 < 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "dA/dt=1/2(3*12+5*(-5/4))=119/8",
+     "final_answer": "119/8 ft^2/s (increasing)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Related rates sliding ladder; parts each fit their own skills (1.D/3.B, 1.E/4.B, 3.F, 1.E/3.B). In scope for AB Unit 4."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys unique and correct (-5/4 ft/s, down, 119/8 ft^2/s). Rubric rows are consistent, though d1 keyed on the phrase 'product rule' and d lacks a units row; minor."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stimulus fully specifies ladder length, rate, and instant values; empty data is fine for a text-only stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; no distractors needed. Model answers give a clear solution path."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points, 2/3/1/3 split, clean numbers, no calculator needed, about 15 minutes."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, standard related-rates FRQ with a correct unique key and clean numbers. Only small rubric wording weaknesses (d1 keyed on the phrase \"product rule\", no units row in part d), none of which are disqualifying."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style related rates: set up the Pythagorean relation, differentiate implicitly, substitute to solve for dy/dt, interpret the sign, then apply the product rule in time to a second related quantity (area). Multiple procedural steps and a modest representation change (geometry to equation to interpretation), with clean numbers (5-12-13) and short, unambiguous wording. The difficulty comes from legitimate concept and step count, not from arithmetic or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f03-k0",
+  "cellId": "ap_calculus_ab-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Differentiate implicitly: 2x + 2y + 2x y' + 4y y' = 0. Solve for y': y' = -(2x+2y)/(2x+4y).",
+     "final_answer": "dy/dx = -(2x+2y)/(2x+4y) = -(x+y)/(x+2y)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "(3,-3) is on the curve because 9 - 18 + 18 = 9. At this point the numerator 2(3) + 2(-3) = 0 and the denominator 2(3) + 4(-3) = -6, so the slope is 0.",
+     "final_answer": "y = -3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "The tangent is horizontal when x + y = 0, so y = -x, provided x + 2y ≠ 0. Substituting gives x^2 - 2x^2 + 2x^2 = x^2 = 9, so x = ±3. At both points x + 2y = y ≠ 0.",
+     "final_answer": "(3,-3) and (-3,3)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Differentiate y' = -(x+y)/(x+2y) to get y'' = -[(1+y')(x+2y) - (x+y)(1+2y')]/(x+2y)^2. At (3,-3), y' = 0 and x + y = 0, so y'' = -1/(x+2y) = -1/(-3) = 1/3. Since y'' > 0, the curve is concave up.",
+     "final_answer": "d²y/dx² = 1/3 > 0, so the curve is concave up at (3,-3)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Implicit differentiation dominates. Part d uses second derivative and concavity (5.7), which is an allowed related topic for the FRQ bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are correct and unique: slope 0, tangent y=-3, points (3,-3) and (-3,3), y''=1/3 so concave up. Minor rubric issues: b2 requires the literal string 'y - -3' with no alt form y=-3 listed, and the c model answer contains the garbled phrase 'y = -2x/2'. These are not fatal."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The curve equation is given in the stimulus text and the data object is empty, which is fine for a text-only stimulus. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The common_errors lists are empty, which is a weakness but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Point split is 3/2/2/2 for 9 points, with no calculator needed and clean numbers. The load is reasonable for about 15 minutes."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and suitable for the exam. Its rubric has minor weaknesses: sloppy model-answer wording in part c, no alternative form y=-3 for part b, and empty common_errors lists. I passed it."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style implicit differentiation. Part a needs a product rule and a chain rule. Parts b and c involve evaluation, solving for a horizontal tangent, substituting back into the curve, and checking that the denominator is nonzero. Part d requires a second implicit derivative, with y' = 0 simplifying the work, and a concavity conclusion. The numbers are clean and the reading load is low. The second derivative is out of scope for MC but acceptable in an FRQ. The depth is appropriate for a full mock exam and is not purely introductory.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f03-k1",
+  "cellId": "ap_calculus_ab-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_out_of_scope_knowledge",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Differentiate implicitly: 2x + y + x y' + 2y y' = 0, so y'(x+2y) = -(2x+y), which gives y' = -(2x+y)/(x+2y).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "dy/dx = -(2x+y)/(x+2y)"
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Check the point: 1 - 2 + 4 = 3, so (-1,2) is on the curve. Slope = -(-2+2)/(-1+4) = 0.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "y = 2"
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Set 2x + y = 0, so y = -2x. Substitute: x^2 - 2x^2 + 4x^2 = 3x^2 = 3, so x = ±1. At these points x + 2y = -3x ≠ 0, so the slope is defined.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(1,-2) and (-1,2)"
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Differentiate again: 2 + 2y' + x y'' + 2(y')^2 + 2y y'' = 0. At (-1,2), y' = 0, so 2 + 3y'' = 0 and y'' = -2/3 < 0.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "d2y/dx2 = -2/3 < 0, so the curve is concave down at (-1,2)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Part (d) requires the second derivative of an implicit relation. The unit scope says second derivatives of implicit relations are out of scope for MC, and the item also tags it as topic 5.7, which is a later-unit topic. The scope note allows only first derivatives for implicit differentiation, and the item's own part (d) skill code, 3.E, is in the later unit. Parts a-c are in scope."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The answers are correct. The rubric has problems, though. Part (a) is a \"show that\" part with required elements that are weak: row a3 only requires the string \"dy/dx\". Part (b) row b1 requires only \"0\", and row b2 requires only \"y - 2\". Part (d) row d2's criterion says \"positive means concave up\" while the required element is \"concave down\". Part (d) also has no justification row that cites the sign of d²y/dx². The point split on part (d) is thin for the work required."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The wording has template artifacts: \"1xy\", \"1y^2\", \"2x + 1y\", \"y = -2x/1\", and \"y - 2 = 0(x - -1)\". These are unnatural for US exam wording. The stimulus data object is empty, but the equation is in the description, so that is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors lists are empty."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The load is reasonable for 15 minutes, but part (d) is the second derivative of an implicit relation. The item's own unit scope excludes it, and part (d) is mapped to topic 5.7. The template coefficient artifacts also hurt exam realism. The part (b) answer (slope 0) and the part (c) answer reuse the same point, which is redundant."
+   },
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The math is correct, but part (d) requires the second derivative of an implicit relation, which the unit scope excludes, and the item maps it to topic 5.7. The rubric rows are weak, and the wording contains template artifacts such as \"1xy\" and \"-2x/1\". The item is rejected for scope."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style implicit differentiation sequence. (a) product and chain rule and algebra to solve for dy/dx; (b) verify the point, compute slope 0, write tangent line; (c) set numerator to zero, substitute into the curve, check denominator nonzero; (d) second derivative via quotient rule with implicit substitution, simplified because y'=0 at the point. Clean numbers, minimal reading, unambiguous wording. Part (d) is beyond MC scope but acceptable in FRQ format. Difficulty comes from multi-step reasoning and procedure choice, not unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 10,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f03-k2",
+  "cellId": "ap_calculus_ab-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Implicit diff: 2x+2y+2xy'+4yy'=0, so y'=-(2x+2y)/(2x+4y).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "dy/dx = -(2x+2y)/(2x+4y)"
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Slope at (-3,0) = -(-6)/(-6) = -1.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "y = -(x+3)"
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "y=-x, so x^2=9; the denominator is nonzero at both points.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(3,-3) and (-3,3)"
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Quotient rule with y'=-1 at (-3,0) gives y''=1/3>0.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Concave up; d2y/dx2 = 1/3 > 0"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts match their own skills; part d uses 5.7 (second derivative), which the bundle explicitly allows."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys verified: slope -1, points (3,-3) and (-3,3), y''=1/3 at (-3,0) so concave up. The rubric is consistent, though the row d1 evaluation is thin and the model answer for (b) has awkward '- -3' wording."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Curve equation in the description is complete; no figure is needed. Point (-3,0) lies on the curve and the denominator is nonzero there."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so no distractors. Rubric rows are split into setup and answer, with dependencies."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 9-point, ~15 minute load with a non-calculator algebra level typical of AP."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The multi-part implicit differentiation FRQ is correct and consistent, with a sound rubric and a standard AP load. Only minor wording blemishes, so it passes."
+  },
+  "difficulty": null
+ }
+]

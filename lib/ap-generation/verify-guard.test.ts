@@ -75,4 +75,13 @@ describe("screen evidence", () => {
     expect(r.ok).toBe(false); expect(!r.ok && r.reason).toMatch(/content_hash/);
     expect(judgeScreenEntries([mk("390x844"), mk("1280x800", { checks: { ...checks, no_clipping: { result: "fail" } } })], payload, dir).ok).toBe(false);
   });
+  it("결과 화면 점검(v2): 실패·na 는 거부, 없으면 requireResult 일 때만 거부", () => {
+    const withRc = (rc: unknown) => mk("390x844", { checks: { ...checks, result_no_raw_tex: rc as never } });
+    expect(validateScreenEntry(withRc({ result: "pass" }), dir)).toBeNull();
+    expect(validateScreenEntry(withRc({ result: "fail", note: "\\frac" }), dir)).toMatch(/결과 화면 점검 실패/);
+    expect(validateScreenEntry(withRc({ result: "na" }), dir)).toMatch(/na 불가/);
+    expect(validateScreenEntry(mk("390x844"), dir)).toBeNull();
+    expect(validateScreenEntry(mk("390x844"), dir, Date.now(), { requireResult: true })).toMatch(/결과 화면 점검 미실시/);
+    expect(judgeScreenEntries([withRc({ result: "pass" }), { ...withRc({ result: "pass" }), viewport: "1280x800" }], payload, dir, { requireResult: true })).toEqual({ ok: true });
+  });
 });

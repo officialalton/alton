@@ -83,3 +83,8 @@ BC 전용 용어(series/converge/Taylor/Maclaurin/parametric/polar/vector/Euler/
 - `deriv_calc_chain` (3.1, 스킬 1.E): 곱과 합성함수의 한 점 도함수를 계산기로 평가. 생성=기호 미분, 독립 검증=중심 차분. 오답: 안쪽 도함수 누락 / 곱의 법칙 한 항 누락 / 지수의 계수 c 누락.
 - `ivt_solve_calc` (1.16, 스킬 1.E): f(c)=k 의 해를 계산기로. 생성=brentq, 독립 검증=직접 이분법. 오답: 구간 중점 / 선형 보간 / 목표값 오설정.
 - `diffeq_value_calc` (7.7, 스킬 1.E): 분리 가능한 미분방정식 특수해를 점에서 평가. 생성=닫힌 형태, 독립 검증=적응형 룽게-쿠타 수치 적분. 오답: 1/2 인수 누락 / x 를 상수로 취급 / 지수화 대신 덧셈.
+
+## 부록 2: 2026-10-09 보강 원형(그래프 MC 2종 + 미구현 FRQ 3유형, 설계도 포함)
+- `graph_fprime_extremum` (5.4, 2.D, 계산기 불가, 그래프): f′ 그래프에서 상대 극값 — 오답: 부호가 안 바뀌는 영점, f′ 의 최댓값·최솟값 혼동. 독립 검증: 조각 선형 f′ 를 촘촘히 표본한 부호 변화 탐색.
+- `graph_accum_value` (6.4, 2.B, 계산기 불가, 그래프): g(b)=g(0)+∫f 의 값 — 오답: g(0) 누락, 음의 넓이 무시, 폭 오류. 독립 검증: 적응형 수치 적분.
+- FRQ `frq_particle_motion` (particle_motion_calc, 4.2, 계산기 필수): 가속도(1)·속력 증감+이유(2)·총 이동 거리(3)·위치(3). `frq_related_rates` (related_rates_setup, 4.5, 계산기 불가): 관계식·시간 미분(2)·순간 변화율+단위(3)·부호 해석(1)·파생 넓이 변화율(3). `frq_implicit_diff` (implicit_differentiation, 3.2, 계산기 불가): dy/dx 유도(3)·접선(2)·수평 접선(2)·법선(2, 음함수의 2계도함수는 AB 범위 밖).

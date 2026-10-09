@@ -38,6 +38,17 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
 
   // AP 모의고사: 같은 엔진, AP 전용 응시·결과 화면(영어 UI).
   if (attempt.examProgram === "ap") {
+    // 결과 화면 "Topics to review"에 코드와 함께 보일 토픽 이름(과목 키워드). 못 읽으면 코드만 보인다.
+    let topicNames: Record<string, string> | undefined;
+    if (isGraded && attempt.apSubject) {
+      try {
+        const { data: subj } = await supabase.from("subjects").select("id").eq("ap_subject_code", attempt.apSubject).maybeSingle();
+        if (subj) {
+          const { data: kws } = await supabase.from("subject_keywords").select("content_code, name").eq("subject_id", subj.id).not("content_code", "is", null).not("content_code", "like", "%#%");
+          topicNames = Object.fromEntries((kws ?? []).map((k) => [k.content_code as string, k.name as string]));
+        }
+      } catch { /* 이름 없이 코드만 */ }
+    }
     // w-full: body 가 flex-col 이라 mx-auto 만 있으면 main 이 내용 최소폭(문항 번호 줄 796px)까지 늘어나 모바일에서 가로 스크롤·번호 버튼 클릭 불가가 됐다(2026-10-09 화면 점검에서 발견). *
     return (
       <main className={`mx-auto w-full px-4 py-6 ${isGraded ? "max-w-4xl" : "max-w-5xl"}`}>
@@ -48,7 +59,7 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
           {attempt.examSetName}
           {attempt.attemptNo && (attempt.attemptTotal ?? 1) > 1 ? <span className="ml-2 text-[13px] font-semibold text-grey-500">Attempt {attempt.attemptNo}</span> : null}
         </h1>
-        {isGraded ? <ApExamResultView attempt={attempt} /> : <ApExamTakeClient attempt={attempt} />}
+        {isGraded ? <ApExamResultView attempt={attempt} attempts={attempts} topicNames={topicNames} /> : <ApExamTakeClient attempt={attempt} />}
       </main>
     );
   }

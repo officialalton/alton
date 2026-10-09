@@ -1,8 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam/attempt-data";
-import { AP_LABEL_TEXT, AP_SUBJECT_NAME } from "@/lib/ap-exam/layouts";
+import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
+import { AP_SUBJECT_NAME, apBadgeText, apGuidanceLines } from "@/lib/ap-exam/layouts";
+import AttemptSwitcher from "./AttemptSwitcher";
+import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
 import { parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
 import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
@@ -19,7 +21,7 @@ export function topicOf(i: MockExamAttemptItem): string {
   return (i.satDomain ?? "").replace(/^ap:/, "") || "—";
 }
 
-export default function ApExamResultView({ attempt }: { attempt: MockExamAttemptDetail }) {
+export default function ApExamResultView({ attempt, attempts, topicNames }: { attempt: MockExamAttemptDetail; attempts?: MockExamAttemptSummary[]; topicNames?: Record<string, string> }) {
   const [filter, setFilter] = useState<Filter>("all");
   const layout = attempt.sectionLayout ?? [];
   const mc = attempt.items.filter((i) => i.format === "mc");
@@ -40,7 +42,9 @@ export default function ApExamResultView({ attempt }: { attempt: MockExamAttempt
   return (
     <div className="flex flex-col gap-4" data-testid="ap-exam-result">
       <section className="rounded-lg border border-grey-200 bg-white p-4">
-        <p className="text-[12px] font-bold text-grey-500">{subject} · {AP_LABEL_TEXT[attempt.apLabel ?? "mc_practice"]}</p>
+        <AttemptSwitcher attempt={attempt} attempts={attempts} attemptHrefBase="/student/mock-exam/" />
+        <p className="text-[12px] font-bold text-grey-500">{subject} · <span data-testid="ap-badge">{apBadgeText({ subject: attempt.apSubject, label: attempt.apLabel, layout: attempt.sectionLayout })}</span></p>
+        {apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout }).map((l) => <p key={l} className="mt-1 text-[11.5px] text-grey-500" data-testid="ap-set-guidance">{l}</p>)}
         {mc.length > 0 && (
           <p className="mt-1 text-[20px] font-extrabold" data-testid="ap-mc-score">{correct} / {mc.length} <span className="text-[13px] font-semibold text-grey-500">multiple-choice correct ({Math.round((100 * correct) / mc.length)}%)</span></p>
         )}
@@ -54,12 +58,12 @@ export default function ApExamResultView({ attempt }: { attempt: MockExamAttempt
       {byTopic.length > 0 && (
         <section className="rounded-lg border border-grey-200 bg-white p-4" aria-label="Topics to review">
           <h3 className="mb-2 text-[13px] font-bold">Topics to review</h3>
-          <ul className="flex flex-col gap-1 text-[12.5px]">{byTopic.map((t) => <li key={t.topic} className="flex justify-between"><span>Topic {t.topic}</span><span className={t.correct === t.total ? "text-green" : "text-red"}>{t.correct}/{t.total}</span></li>)}</ul>
+          <ul className="flex flex-col gap-1 text-[12.5px]">{byTopic.map((t) => <li key={t.topic} className="flex justify-between"><span>Topic {t.topic}{topicNames?.[t.topic] ? ` · ${topicNames[t.topic]}` : ""}</span><span className={t.correct === t.total ? "text-green" : "text-red"}>{t.correct}/{t.total}</span></li>)}</ul>
         </section>
       )}
 
       <div className="flex gap-2" role="tablist" aria-label="Question filter">
-        {([["all", "All questions"], ["wrong", "Missed"], ["frq", "Free response"]] as const).map(([k, l]) => (
+        {([["all", "All questions"], ["wrong", "Missed"], ["frq", "Free response"]] as const).filter(([k]) => (k === "frq" ? frq.length > 0 : k === "wrong" ? mc.length > 0 : true)).map(([k, l]) => (
           <button key={k} type="button" role="tab" aria-selected={filter === k} onClick={() => setFilter(k)} className={`rounded-full px-3 py-1.5 text-[12px] font-bold ${filter === k ? "bg-ink text-white" : "bg-grey-100 text-grey-600"}`}>{l}</button>
         ))}
       </div>
@@ -68,7 +72,7 @@ export default function ApExamResultView({ attempt }: { attempt: MockExamAttempt
         {shown.map((it) => {
           const n = attempt.items.indexOf(it) + 1;
           return (
-            <li key={it.setItemId} className="rounded-lg border border-grey-200 bg-white p-4" data-testid="ap-review-item">
+            <li key={it.setItemId} className="rounded-lg border border-grey-200 bg-white p-4" data-testid="ap-review-item" data-set-item-id={it.setItemId}>
               <p className="mb-2 text-[12px] font-bold text-grey-500">Question {n}{it.format === "mc" ? (it.correct === true ? " · Correct" : it.response ? " · Incorrect" : " · Not answered") : " · Free response"}</p>
               {it.passage && <LearningText text={it.passage} className="mb-2 text-[13.5px]" />}
               {it.figure ? <ProblemFigure spec={it.figure} text={problemText(it.passage, it.question, it.options)} className="mb-3" /> : null}
@@ -97,9 +101,9 @@ export default function ApExamResultView({ attempt }: { attempt: MockExamAttempt
                 </div>
               )}
               {(it.explanationEn ?? it.explanation) && (
-                <div className="mt-3 rounded-lg bg-grey-50 p-3">
+                <div className="mt-3 rounded-lg bg-grey-50 p-3" data-testid="ap-explanation">
                   <p className="mb-1 text-[11.5px] font-bold text-grey-500">{it.format === "essay" ? "Reference answer (not official scoring)" : "Explanation"}</p>
-                  <LearningText text={(it.explanationEn ?? it.explanation) as string} className="whitespace-pre-wrap text-[13px]" />
+                  <LearningText text={autoMathExplanation((it.explanationEn ?? it.explanation) as string)} className="whitespace-pre-wrap text-[13px]" />
                 </div>
               )}
               <ProblemErrorReportButton className="mt-3" role="student" context={{ source: "mock_exam", attemptId: attempt.id, setItemId: it.setItemId, problemId: it.problemId }} />

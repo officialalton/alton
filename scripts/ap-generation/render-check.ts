@@ -2,17 +2,19 @@
 // data/ap/render-check/ 에 스냅샷(SVG·HTML)과 report.json/report.md, 유형별 갤러리 HTML 을 쓴다.
 //   npx tsx scripts/ap-generation/render-check.ts            # 스냅샷 + 보고서
 //   npx tsx scripts/ap-generation/render-check.ts --png      # 갤러리를 PNG 로도 저장(Playwright chromium)
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { gateCandidate, type GateResult } from "../../lib/ap-figures/gate";
 import { itemContentHash } from "../../lib/ap-generation/verify-guard";
 
 const OUT = path.resolve(process.cwd(), "data/ap/render-check");
-const items = JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/items.json"), "utf-8")) as Parameters<typeof gateCandidate>[0][];
+// 재고(items.json) + 보조 배치(s1a-items.json, 있으면). 보조 후보도 렌더 보고서(contentHash 포함)에 들어가야 화면 검증·기록 대상이 된다.
+const SUPP = "data/ap/stock/s1a-items.json";
+const items = [...(JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/items.json"), "utf-8")) as Parameters<typeof gateCandidate>[0][]), ...(existsSync(path.resolve(process.cwd(), SUPP)) ? (JSON.parse(readFileSync(path.resolve(process.cwd(), SUPP), "utf-8")) as Parameters<typeof gateCandidate>[0][]) : [])];
 const safe = (s: string) => s.replace(/[^A-Za-z0-9_.-]+/g, "_");
 
-rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
+for (const f of readdirSync(OUT)) if (!f.endsWith(".png")) rmSync(path.join(OUT, f), { recursive: true, force: true }); // 갤러리 PNG(--png 로 만든 것)는 보존한다
 const results: GateResult[] = items.map((c) => gateCandidate(c));
 // 렌더한 문항 버전의 내용 해시(자료+선지+정답). mark-verified.ts 가 DB 후보와 대조한다.
 const hashByKey = new Map(items.map((c) => { const k = (c as { stockKey?: string; candidateKey: string }).stockKey ?? (c as { candidateKey: string }).candidateKey; return [k, itemContentHash((c as { payload: Record<string, unknown> }).payload)] as const; }));
@@ -48,7 +50,7 @@ for (const s of [...new Set(results.map((r) => r.subject))]) bySubject[s] = summ
 
 const report = {
   generatedAt: new Date().toISOString(),
-  universe: "data/ap/stock/items.json (현재 재고 783행)",
+  universe: `data/ap/stock/items.json${existsSync(path.resolve(process.cwd(), SUPP)) ? " + s1a-items.json" : ""} (${items.length}행)`,
   all: summarize(results),
   liveStates: summarize(results.filter(live)),
   byType: [...byType.values()].sort((a, b) => a.type.localeCompare(b.type)),

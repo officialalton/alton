@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "ap-screen-evidence/v1",
+  "title": "ap-screen-evidence/v1 | v2",
   "description": "AP 학생 화면 검증 증거. 항목은 (후보, 뷰포트) 한 건. 후보마다 모바일(<=430px)과 데스크톱(>=1024px) 항목이 모두 있어야 하고, 필수 점검이 전부 pass(허용된 na 는 사유 필요)여야 mark-verified --screen 이 기록한다. 스크린샷 존재만으로는 증거가 아니다. 한계: checker_kind=automated(Playwright 자동 점검)는 표시·입력·정답/해설 노출·잘림만 확인한다. 그래프의 의미·그림의 정확성·문장의 자연스러움은 확인하지 않으며 사람의 검토(checker_kind=human)가 별도로 필요하다. 자동 점검을 사람 검토로 기록할 수 없다.",
   "type": "object",
   "required": ["schema", "entries"],
   "properties": {
-    "schema": { "const": "ap-screen-evidence/v1" },
+    "schema": { "enum": ["ap-screen-evidence/v1", "ap-screen-evidence/v2"], "description": "v2 는 제출 후 결과 화면 점검 result_no_raw_tex 가 모든 항목에 필수(해설·참고 답안에 원문 TeX 가 보이면 실패)." },
     "limitations": { "type": "string", "description": "자동 점검 범위 한계 문구(그대로 DB screen_evidence 에 기록)" },
     "generator": { "type": "string", "description": "playwright(scripts/ap-generation/screen-evidence.ts) 또는 manual" },
     "generatedAt": { "type": "string", "format": "date-time" },
@@ -27,6 +27,7 @@
           "checks": {
             "type": "object",
             "required": ["options_visible", "figure_rendered", "no_clipping", "no_answer_before_submit", "frq_input_works"],
+            "properties": { "result_no_raw_tex": { "type": "object", "required": ["result"], "properties": { "result": { "enum": ["pass", "fail"] }, "note": { "type": "string" } } } },
             "additionalProperties": { "type": "object", "required": ["result"], "properties": { "result": { "enum": ["pass", "fail", "na"] }, "note": { "type": "string" } } },
             "description": "options_visible·no_clipping·no_answer_before_submit 은 na 불가. figure_rendered na 는 note 필수(그림 없는 문항). frq_input_works 는 mc 에서만 na, frq_bundle 은 pass 필수."
           }

@@ -56,6 +56,8 @@ export function checkRenderedMatchesDb(row: RenderReportRow | undefined, dbPaylo
 // 스크린샷 파일의 존재는 증거가 아니다 — 필수 점검 항목의 실제 결과(pass/fail/na + 메모)가 있어야 한다.
 export const SCREEN_CHECKS = ["options_visible", "figure_rendered", "no_clipping", "no_answer_before_submit", "frq_input_works"] as const;
 export type ScreenCheckName = (typeof SCREEN_CHECKS)[number];
+/** 제출 후 결과 화면 점검(v2 증거에서 필수): 해설·참고 답안에 원문 TeX 토큰(\\frac, \\pi, \\int, \\displaystyle, ^{ …)이 보이면 실패. */
+export const RESULT_CHECK = "result_no_raw_tex" as const;
 export type ScreenCheck = { result: "pass" | "fail" | "na"; note?: string };
 export const CHECKER_KINDS = ["automated", "human"] as const;
 export type CheckerKind = (typeof CHECKER_KINDS)[number];
@@ -64,14 +66,14 @@ export const AUTOMATED_LIMITATION = "Automated screen check (Playwright): covers
 export const AUTOMATED_LIMITATION_KO = "자동 화면 점검(Playwright): 표시·입력·정답/해설 노출·잘림만 확인한다. 그래프의 의미·그림의 정확성·문장의 자연스러움은 확인하지 않으며 사람의 검토가 별도로 필요하다.";
 export type ScreenEntry = {
   candidate_key: string; checker_kind: CheckerKind; content_hash: string; problem_version_id?: string; kind: "mc" | "frq_bundle";
-  viewport: string; screenshot: string; timestamp: string; checker: string; checks: Partial<Record<ScreenCheckName, ScreenCheck>>;
+  viewport: string; screenshot: string; timestamp: string; checker: string; checks: Partial<Record<ScreenCheckName | typeof RESULT_CHECK, ScreenCheck>>;
 };
 export type ScreenEvidence = { schema?: string; limitations?: string; checker?: string; generator?: string; generatedAt?: string; entries: ScreenEntry[] };
 
 export function viewportWidth(v: string): number { const m = /^(\d+)x(\d+)$/.exec(v); return m ? Number(m[1]) : 0; }
 
 /** 항목 검증: 필수 필드·해시 형식·스크린샷 실존·시각·필수 점검 결과(실패·미점검·사유 없는 na 는 거부). */
-export function validateScreenEntry(e: Partial<ScreenEntry>, baseDir: string, now = Date.now()): string | null {
+export function validateScreenEntry(e: Partial<ScreenEntry>, baseDir: string, now = Date.now(), opts: { requireResult?: boolean } = {}): string | null {
   for (const f of ["candidate_key", "content_hash", "viewport", "screenshot", "timestamp", "checker"] as const) if (!e[f] || typeof e[f] !== "string" || !String(e[f]).trim()) return `증거 필드 누락: ${f}`;
   if (!CHECKER_KINDS.includes(e.checker_kind as CheckerKind)) return "checker_kind 누락 또는 값 오류(automated|human)";
   if (e.checker_kind === "automated" && !e.checker!.startsWith("automated-")) return "automated 점검자 이름은 automated-<도구> 형식(예: automated-playwright)";
@@ -97,16 +99,19 @@ export function validateScreenEntry(e: Partial<ScreenEntry>, baseDir: string, no
     }
   }
   if (e.kind === "frq_bundle" && c.frq_input_works?.result !== "pass") return "FRQ 입력 점검 미통과";
+  const rc = c[RESULT_CHECK];
+  if (rc && rc.result !== "pass") return `결과 화면 점검 ${rc.result === "fail" ? "실패" : "na 불가"}: ${RESULT_CHECK}${rc.note ? ` (${rc.note})` : ""}`;
+  if (opts.requireResult && !rc) return `결과 화면 점검 미실시: ${RESULT_CHECK}`;
   return null;
 }
 
 export type ScreenCandidateVerdict = { ok: true } | { ok: false; reason: string };
 /** 후보 하나의 항목들(여러 뷰포트)과 DB 후보 payload 대조: 해시 일치 + 모바일·데스크톱 모두 통과. */
-export function judgeScreenEntries(entries: ScreenEntry[], dbPayload: Record<string, unknown>, baseDir: string): ScreenCandidateVerdict {
+export function judgeScreenEntries(entries: ScreenEntry[], dbPayload: Record<string, unknown>, baseDir: string, opts: { requireResult?: boolean } = {}): ScreenCandidateVerdict {
   const hash = itemContentHash(dbPayload);
   const stale = entries.find((e) => e.content_hash !== hash);
   if (stale) return { ok: false, reason: "증거의 content_hash 가 현재 DB 후보 내용과 다름(검증 후 문항 변경 — 재검증 필요)" };
-  for (const e of entries) { const bad = validateScreenEntry(e, baseDir); if (bad) return { ok: false, reason: bad }; }
+  for (const e of entries) { const bad = validateScreenEntry(e, baseDir, Date.now(), opts); if (bad) return { ok: false, reason: bad }; }
   if (!entries.some((e) => viewportWidth(e.viewport) <= 430)) return { ok: false, reason: "모바일(<=430px) 점검 항목 없음" };
   if (!entries.some((e) => viewportWidth(e.viewport) >= 1024)) return { ok: false, reason: "데스크톱(>=1024px) 점검 항목 없음" };
   return { ok: true };

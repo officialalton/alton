@@ -3,7 +3,7 @@
 import Link from "next/link";
 import type { MockExamListRow, MockExamListState } from "@/lib/mock-exam/open-list";
 import { attemptLabel, listStateOf as listStateOfStatus } from "@/lib/mock-exam/open-list";
-import { AP_LABEL_TEXT, AP_SUBJECT_NAME } from "@/lib/ap-exam/layouts";
+import { AP_SUBJECT_NAME, apBadgeText, apGuidanceLines } from "@/lib/ap-exam/layouts";
 
 // 공개 모의고사 목록(학생·학부모 공용). 학생은 시작·이어서·결과 보기, 학부모는 읽기 전용(시작 불가).
 // 2026-10-01 — 배정 없음: 공개된 세트는 모든 활성 학생에게 보이고 학생이 직접 시작한다.
@@ -23,7 +23,8 @@ export default function MockExamOpenList({
   busyKey,
   onStart,
   onOpenResult,
-  resultHref,
+  resultHref: resultHrefProp,
+  resultHrefBase,
   emptyText = "No practice tests are available yet.",
 }: {
   rows: MockExamListRow[];
@@ -35,8 +36,11 @@ export default function MockExamOpenList({
   onOpenResult?: (attemptId: string) => void;
   /** 학부모: 완료 결과 상세 링크 */
   resultHref?: (attemptId: string) => string;
+  /** 서버 페이지에서 쓰는 직렬화 가능한 형태: 링크 = `${resultHrefBase}${attemptId}` (함수 prop 은 서버→클라이언트 경계를 못 넘는다). */
+  resultHrefBase?: string;
   emptyText?: string;
 }) {
+  const resultHref = resultHrefProp ?? (resultHrefBase ? (id: string) => `${resultHrefBase}${id}` : undefined);
   if (rows.length === 0) return <p className="text-[13px] text-grey-500">{emptyText}</p>;
   return (
     <ul className="flex flex-col gap-2">
@@ -47,13 +51,14 @@ export default function MockExamOpenList({
             {r.examProgram === "ap" ? (
               <>
                 <span className="rounded-full bg-grey-100 px-2 py-0.5 text-[10.5px] font-bold text-grey-600">{AP_SUBJECT_NAME[r.apSubject ?? ""] ?? "AP"}</span>
-                {r.apLabel && <span className="rounded-full bg-ink px-2 py-0.5 text-[10.5px] font-bold text-white" data-testid="ap-label">{AP_LABEL_TEXT[r.apLabel]}</span>}
+                {r.apLabel && <span className="rounded-full bg-ink px-2 py-0.5 text-[10.5px] font-bold text-white" data-testid="ap-label">{apBadgeText({ subject: r.apSubject, label: r.apLabel, layout: r.apSections })}</span>}
               </>
             ) : (
               <span className="rounded-full bg-grey-100 px-2 py-0.5 text-[10.5px] font-bold text-grey-600">{TIER_LABEL[r.difficultyTier] ?? r.difficultyTier}</span>
             )}
             {r.archived && <span className="text-[10.5px] text-grey-400">Past exam</span>}
           </div>
+          {r.examProgram === "ap" && apGuidanceLines({ subject: r.apSubject, layout: r.apSections }).map((l) => <p key={l} className="mt-1 text-[12px] text-grey-600" data-testid="ap-guidance">{l}</p>)}
           {r.description && <p className="mt-1 text-[12px] text-grey-500">{r.description}</p>}
           <p className="mt-1 text-[12.5px] text-grey-500">
             {r.attempts.length > 1 && r.attempt?.attemptNo ? `${attemptLabel(r.attempt.attemptNo)} · ` : ""}

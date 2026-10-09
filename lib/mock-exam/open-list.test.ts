@@ -95,3 +95,11 @@ describe("재응시 — 회차별 행(2026-10-08)", () => {
     expect(attemptLabel(undefined)).toBe("");
   });
 });
+
+describe("카탈로그 상태 폴백(응시 요약에 없는 진행 중 응시)", () => {
+  it("요약에 응시가 없어도 카탈로그 attemptStatus=in_progress 이면 In progress + Continue 대상", () => {
+    const rows = buildMockExamListRows([{ examSetId: "s9", setGroupId: "g9", name: "AP Calculus AB — Non-Calculator Practice", description: null, difficultyTier: "standard", format: "ap_fixed" as never, publishedAt: null, attemptId: "att9", attemptStatus: "in_progress", examProgram: "ap", apSubject: "ap_calculus_ab", apLabel: "mc_practice" }], []);
+    expect(rows[0].state).toBe("in_progress");
+    expect(rows[0].attempt?.id).toBe("att9");
+  });
+});

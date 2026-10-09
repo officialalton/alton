@@ -11,7 +11,7 @@ import {
   toggleMockExamSavedToPracticeAction,
   recordMockExamEntryAction,
 } from "@/lib/mock-exam/attempt-actions";
-import { AP_LABEL_TEXT, AP_SUBJECT_NAME, CALCULATOR_TEXT } from "@/lib/ap-exam/layouts";
+import { AP_SUBJECT_NAME, CALCULATOR_TEXT, apBadgeText, apGuidanceLines } from "@/lib/ap-exam/layouts";
 import { frqAnswerToJson, parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
 import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
@@ -84,6 +84,18 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
     const persist = setInterval(() => { for (const s of layout) void saveMockExamSectionTimeAction(attempt.id, s.key as "rw", tickRef.current[s.key] ?? s.minutes * 60); }, 15000);
     return () => clearInterval(persist);
   }, [attempt.id, isSubmitted, layout]);
+
+  // 마지막 섹션(단일 섹션 포함)의 시간이 끝나면 자동 제출한다 — 더 풀 문항이 없는데 제출 버튼까지 번호를 눌러 가게 하지 않는다.
+  // 중간 섹션이 끝나면 잠금 안내와 함께 "다음 섹션" 버튼이 보인다(SAT 도 시간 소진 시 해당 섹션만 잠그고 직접 제출 또는 모든 섹션 잠금 시 마감).
+  const submitRef = useRef<() => Promise<void>>(async () => {});
+  const autoSubmitted = useRef(false);
+  const finalKey = layout[layout.length - 1]?.key;
+  const finalExpired = !!finalKey && !!locked[finalKey];
+  useEffect(() => {
+    if (isSubmitted || !finalExpired || autoSubmitted.current) return;
+    autoSubmitted.current = true;
+    void submitRef.current();
+  }, [finalExpired, isSubmitted]);
 
   // 답 저장(MC 는 즉시, FRQ 는 디바운스 자동 저장 + 문항 이동·제출 전 flush)
   const pending = useRef<{ setItemId: string; value: string; timer: ReturnType<typeof setTimeout> | null } | null>(null);
@@ -158,6 +170,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
     router.refresh();
   }
 
+  submitRef.current = handleSubmit;
   const partsOf = current?.parts ?? [];
   const frqValues = current?.format === "essay" ? parseFrqAnswer(responses[current.setItemId] ?? "") : {};
   const nextSection = layout[layout.findIndex((s) => s.key === section.key) + 1];
@@ -178,12 +191,13 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
       <div className="min-w-0 flex-1">
         <div className="mb-3 rounded-lg border border-grey-200 bg-white px-4 py-3">
           <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-            <p className="text-[13px] font-extrabold">{subjectName} · {AP_LABEL_TEXT[attempt.apLabel ?? "mc_practice"]}</p>
+            <p className="text-[13px] font-extrabold">{subjectName} · <span data-testid="ap-badge">{apBadgeText({ subject: attempt.apSubject, label: attempt.apLabel, layout: attempt.sectionLayout })}</span></p>
             <div className="flex items-center gap-3">
               {calcOk && <MockExamToolButtons calculatorAllowed referenceSheetAllowed={false} open={toolsOpen} onToggle={(w) => setToolsOpen((c) => (c === w ? null : w))} />}
               <div className="font-mono text-[15px] font-bold" data-testid="ap-exam-timer" aria-label="Time remaining in this section">{formatClock(remaining[section.key] ?? 0)}</div>
             </div>
           </div>
+          {apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout }).map((l) => <p key={l} className="mb-2 text-[12px] text-grey-600" data-testid="ap-set-guidance">{l}</p>)}
           <div className="flex flex-wrap gap-2">
             {layout.map((s) => (
               <button key={s.key} type="button" onClick={() => void switchSection(s.key)} data-testid={`ap-section-${s.key}`}
@@ -200,7 +214,14 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
         {error && <p role="alert" className="mb-2 text-[12.5px] text-red">{error}</p>}
 
         {sectionLocked ? (
-          <div className="rounded-lg border border-red/40 bg-red/5 p-6 text-center text-[13.5px] text-red">Time is up for this section. Answers can no longer be changed.</div>
+          <div className="rounded-lg border border-red/40 bg-red/5 p-6 text-center text-[13.5px] text-red" data-testid="ap-section-expired">
+            <p>Time is up for this section. Answers can no longer be changed.</p>
+            {section.key === finalKey ? (
+              <button type="button" disabled={submitting} onClick={() => void handleSubmit()} data-testid="ap-expired-submit" className="mt-3 rounded-lg bg-red px-4 py-2 text-[13px] font-bold text-white disabled:opacity-50">{submitting ? "Submitting…" : "Submit now"}</button>
+            ) : nextSection ? (
+              <button type="button" onClick={() => void switchSection(nextSection.key)} className="mt-3 rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white">Go to next section</button>
+            ) : null}
+          </div>
         ) : current ? (
           <div className="min-w-0 rounded-lg border border-grey-200 bg-white p-4 lg:max-w-[720px]">
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
