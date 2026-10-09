@@ -186,6 +186,8 @@ export default function ConsultantShell({
           <span>New Assignments</span>
           {contactRequiredCount > 0 && (
             <span
+              title="Awaiting your first contact"
+              aria-label={`${contactRequiredCount} awaiting your first contact`}
               className={
                 "text-[11px] font-bold px-1.5 py-0.5 rounded-full " +
                 (nav === "assignments" ? "bg-white/25" : "bg-red text-white")
