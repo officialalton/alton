@@ -1,5 +1,5 @@
 import sys, json, random, hashlib
-import calc_ab_reinforce as rf, calc_ab_calc as cc, micro_frq as mf, calc_ab_1 as c1, calc_ab_2 as c2, calc_ab_3 as c3, calc_ab_frq as cf, bio_frq as bf, calc_bc as bc
+import calc_ab_reinforce as rf, calc_ab_calc as cc, micro_frq as mf, calc_ab_1 as c1, calc_ab_2 as c2, calc_ab_3 as c3, calc_ab_frq as cf, bio_frq as bf, calc_bc as bc, calc_bc_topup as tu, calc_bc_topup_frq as tf
 
 MC = {
  "lim_table": (c1.lim_table, "1"), "lim_alg": (c1.lim_alg, "1"), "cont_piece": (c1.cont_piece, "1"), "ivt": (c1.ivt, "1"),
@@ -16,7 +16,9 @@ MC.update(BCMC)
 NEWMC = {"deriv_calc_chain": (cc.deriv_calc_chain, "3"), "ivt_solve_calc": (cc.ivt_solve_calc, "1"), "diffeq_value_calc": (cc.diffeq_value_calc, "7")}
 NEWMC.update({"graph_fprime_extremum": (rf.graph_fprime_extremum, "5"), "graph_accum_value": (rf.graph_accum_value, "6")})
 MC.update(NEWMC)
-FRQ = {"frq_series": bc.frq_series, "frq_parametric": bc.frq_parametric, "frq_table_rate": cf.frq_table_rate, "frq_fprime_graph": cf.frq_fprime_graph, "frq_diffeq": cf.frq_diffeq, "frq_area_volume": cf.frq_area_volume, "frq_bio_investigation": bf.frq_bio_investigation, "frq_bio_data_short": bf.frq_bio_data_short, "frq_particle_motion": rf.frq_particle_motion, "frq_related_rates": rf.frq_related_rates, "frq_implicit_diff": rf.frq_implicit_diff, "frq_micro_monopoly": mf.frq_micro_monopoly, "frq_micro_game": mf.frq_micro_game}
+TOPUP = {n: (getattr(tu, n), u) for n, u in [("param_xvel_graph","9"),("polar_area_graph","9"),("polar_rprime_graph","9"),("lagrange_graph","10"),("alt_series_table","10"),("taylor_table","10"),("polar_table_distance","9"),("param_speed_table","9")]}
+MC.update(TOPUP)
+FRQ = {"frq_series": bc.frq_series, "frq_parametric": bc.frq_parametric, "frq_euler_logistic": tf.frq_euler_logistic, "frq_table_rate": cf.frq_table_rate, "frq_fprime_graph": cf.frq_fprime_graph, "frq_diffeq": cf.frq_diffeq, "frq_area_volume": cf.frq_area_volume, "frq_bio_investigation": bf.frq_bio_investigation, "frq_bio_data_short": bf.frq_bio_data_short, "frq_particle_motion": rf.frq_particle_motion, "frq_related_rates": rf.frq_related_rates, "frq_implicit_diff": rf.frq_implicit_diff, "frq_micro_monopoly": mf.frq_micro_monopoly, "frq_micro_game": mf.frq_micro_game}
 
 def sig(p):
     return hashlib.sha1(json.dumps([p.get("stem"), [o["text"] for o in p.get("options", [])], p.get("stimulus")], sort_keys=True).encode()).hexdigest()[:12]
@@ -40,12 +42,13 @@ if __name__ == "__main__":
     if cmd == "list":
         which = sys.argv[2] if len(sys.argv) > 2 else "ab"
         if which == "bc": print(json.dumps({"mc": list(BCMC), "frq": ["frq_series", "frq_parametric"]}))
+        elif which == "bctopup": print(json.dumps({"mc": list(TOPUP), "frq": ["frq_euler_logistic"]}))
         elif which == "new": print(json.dumps({"mc": list(NEWMC), "frq": []}))
         elif which == "reinforce": print(json.dumps({"mc": ["graph_fprime_extremum", "graph_accum_value"], "frq": ["frq_particle_motion", "frq_related_rates", "frq_implicit_diff"]}))
         elif which == "reinforce2": print(json.dumps({"mc": [], "frq": ["frq_particle_motion", "frq_implicit_diff"]}))
         elif which == "biodata": print(json.dumps({"mc": [], "frq": ["frq_bio_data_short"]}))
         elif which == "bio": print(json.dumps({"mc": [], "frq": ["frq_bio_investigation", "frq_bio_data_short"]}))
         elif which == "micro": print(json.dumps({"mc": [], "frq": ["frq_micro_monopoly", "frq_micro_game"]}))
-        else: print(json.dumps({"mc": [k for k in MC if k not in BCMC and k not in NEWMC], "frq": [k for k in FRQ if k in ("frq_table_rate","frq_fprime_graph","frq_diffeq","frq_area_volume")]}))
+        else: print(json.dumps({"mc": [k for k in MC if k not in BCMC and k not in NEWMC and k not in TOPUP], "frq": [k for k in FRQ if k in ("frq_table_rate","frq_fprime_graph","frq_diffeq","frq_area_volume")]}))
     elif cmd == "all": print(json.dumps({n: batch(n, int(sys.argv[2]), 0) for n in list(MC) + list(FRQ)}))
     elif cmd == "batch": print(json.dumps(batch(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 0)))
