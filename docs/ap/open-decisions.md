@@ -78,3 +78,13 @@
 - 48. 결정 필요: AP 모의고사의 "문항은 한 세트에만"을 AP 에도 확정할지(SAT 는 확정; AP 는 준용 관행) — `docs/ap/inventory-proposal.md`.
 - 49. 결정 필요: 근사 중복(duplicate_gate_near_duplicate)을 재고 정책대로 반려가 아닌 문항군 변형으로 일괄 처리할지(현재 run2 일부가 반려로 남음, 6건).
 - 50. Bio/Micro 대량 원형 확장 보류, `docs/ap/next-archetype-plan.md` 의 소규모 검증(약 $3.7)부터.
+
+## 51~56. 2026-10-09 후속 결정 (오너 확정·반영 / 대기)
+- 51. **"문항 하나는 한 세트에만"은 AP 의 영구 규칙이 아니다**(오너 확정). 전체 길이 모의고사는 기본적으로 세트 간 중복을 피하되(조립 옵션 기본값 `OVERLAP_DEFAULT.full` = 0), 단원 연습·오답 복습은 재사용 가능. 세트 유형별 겹침 허용은 매개변수화(`maxOverlap`, `assemble-ap-set.ts --overlap-max N`). 학생의 **첫 응시와 재노출은 구분**하고(재노출은 별도 기록), **같은 문항을 고유 재고에 두 번 세지 않는다**. SAT 모의고사의 세트 간 중복 0(확정 정책)은 변경 없음. 코드: `lib/ap-exam/assemble.ts`.
+- 52. **풀 세트는 개수만으로 완성 판정하지 않는다**: 공식 단원 비중·스킬·표현·계산기 파트 구성을 만족해야 하고, **문항군 다양성 하한**(FRQ 는 문항군당 1개 = 서로 다른 유형)을 적용한다. 그래프 MC 부족·FRQ 원형 편중은 보강 목표. 결정 필요: 부분 연습 세트 라벨(예: "AP Calculus AB Part A Practice (No Calculator)").
+- 53. 재고 목표는 (a) 무료 AB 부분 연습 → (b) 풀 AB 세트 1개 칸 순서로만 설정한다. 수업 용도 재고 목표는 실제 수요가 확인된 뒤에 정한다. 제안 파일 `data/ap/stock/stock-targets.proposed.json`(오너 합의 후 `stock-targets.ts --load`, 적재 후 `--verify`). **`ap_stock_targets` 가 비어 있으면 부족분 검증은 미완료**이며, "행 집계 8/8 일치"와 "부족분 검증 완료"는 별도 상태다.
+- 54. 재검증 통과 143건은 결정적 검사 전부 통과 후 `auto_passed`(라벨 `v2-legacy-revalidated-2026-10-09`, 이력에 방법·버전). 게시는 렌더+학생 화면 검증 후에만. 상세 `docs/ap/revalidation-apply.md`.
+- 55. 설계도(blueprint)는 원형 위의 필수 층(오너 승인). 과목별 접근과 Bio 실험 설계 타당성 규칙(+한계: 생물학적 사실 정확성은 코드로 증명 불가, 게시 후 신고 흐름) `docs/ap/generation-blueprints.md`.
+- 56. 대량 Bio/Micro 원형 확장은 계속 보류. 검증 라운드 결과(Bio FRQ 원형은 아직 게시 품질 아님)를 보고한 뒤에만 확장 범위를 정한다.
+
+- 51 보충(병합 정리): **겹침 정책은 하나** — `OVERLAP_DEFAULT = { full: 0, partialFraction: 0.2 }`(`lib/ap-exam/assemble.ts`). 풀 세트·MC/FRQ 전체 세트(`planApSet`)는 기본 0, 부분 연습(`planPartialSet`)은 문항 수의 20%를 기본으로 하되 둘 다 `--overlap-max N`(`assemble-ap-set.ts`) 하나의 플래그로 조정한다(중복 플래그 없음). 부분 연습 허용 목록·라벨은 통합 브랜치의 `planPartialSet`/`partialLabelAllowed` 를 그대로 쓴다.

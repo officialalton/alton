@@ -1,29 +1,49 @@
 [
  {
-  "label": "usable_now(auto_passed)",
-  "disjointFullSets": 1,
-  "firstShortAfter": [
-   {
-    "sectionKey": "ap_mc_b",
-    "need": 13,
-    "have": 7
-   }
-  ],
-  "items": 159,
+  "label": "screen_verified_now(게시 가능: 화면 검증 증거 있음)",
+  "partialDisjointSets": {
+   "MC Part A (계산기 불가 29)": 0,
+   "MC Part B (계산기 필수 13)": 0,
+   "FRQ Part A (2)": 1,
+   "FRQ Part B (4)": 0
+  },
+  "disjointFullSets": 0,
+  "firstShortAfter": {
+   "shortfall": [
+    {
+     "sectionKey": "ap_mc_b",
+     "need": 13,
+     "have": 10
+    },
+    {
+     "sectionKey": "ap_frq_b",
+     "need": 4,
+     "have": 2
+    }
+   ],
+   "composition": [
+    "unit_1_below_min_4/5",
+    "unit_2_below_min_4/5",
+    "unit_3_below_min_2/3",
+    "unit_7_below_min_2/3"
+   ],
+   "diversity": []
+  },
+  "items": 102,
   "mc": {
-   "n": 139,
+   "n": 90,
    "byCalc": {
-    "not_allowed": 119,
-    "required": 20
+    "not_allowed": 76,
+    "required": 14
    },
-   "families": 36,
-   "effective": 70
+   "families": 30,
+   "effective": 57
   },
   "frq": {
-   "n": 20,
+   "n": 12,
    "byCalc": {
-    "required": 9,
-    "not_allowed": 11
+    "required": 5,
+    "not_allowed": 7
    },
    "families": 4
   },
@@ -33,7 +53,7 @@
     "weight": "10-15%",
     "needMin": 5,
     "needMax": 6,
-    "have": 22,
+    "have": 14,
     "families": 4,
     "effective": 8,
     "shortfallVsMin": 0
@@ -43,9 +63,9 @@
     "weight": "10-15%",
     "needMin": 5,
     "needMax": 6,
-    "have": 21,
-    "families": 6,
-    "effective": 12,
+    "have": 14,
+    "families": 4,
+    "effective": 8,
     "shortfallVsMin": 0
    },
    {
@@ -53,7 +73,7 @@
     "weight": "5-10%",
     "needMin": 3,
     "needMax": 4,
-    "have": 11,
+    "have": 7,
     "families": 2,
     "effective": 4,
     "shortfallVsMin": 0
@@ -63,9 +83,9 @@
     "weight": "10-15%",
     "needMin": 5,
     "needMax": 6,
-    "have": 19,
-    "families": 5,
-    "effective": 10,
+    "have": 11,
+    "families": 4,
+    "effective": 8,
     "shortfallVsMin": 0
    },
    {
@@ -73,9 +93,9 @@
     "weight": "15-20%",
     "needMin": 7,
     "needMax": 8,
-    "have": 23,
-    "families": 6,
-    "effective": 12,
+    "have": 14,
+    "families": 5,
+    "effective": 10,
     "shortfallVsMin": 0
    },
    {
@@ -83,9 +103,9 @@
     "weight": "15-20%",
     "needMin": 7,
     "needMax": 8,
-    "have": 20,
-    "families": 6,
-    "effective": 10,
+    "have": 14,
+    "families": 5,
+    "effective": 8,
     "shortfallVsMin": 0
    },
    {
@@ -93,9 +113,9 @@
     "weight": "5-10%",
     "needMin": 3,
     "needMax": 4,
-    "have": 9,
-    "families": 3,
-    "effective": 6,
+    "have": 6,
+    "families": 2,
+    "effective": 4,
     "shortfallVsMin": 0
    },
    {
@@ -103,48 +123,82 @@
     "weight": "10-15%",
     "needMin": 5,
     "needMax": 6,
-    "have": 14,
+    "have": 10,
     "families": 4,
-    "effective": 8,
+    "effective": 7,
     "shortfallVsMin": 0
    }
   ],
   "plan": {
-   "ok": true,
-   "shortfall": []
+   "ok": false,
+   "shortfall": [
+    {
+     "sectionKey": "ap_mc_b",
+     "need": 13,
+     "have": 10
+    },
+    {
+     "sectionKey": "ap_frq_b",
+     "need": 4,
+     "have": 2
+    }
+   ],
+   "compositionIssues": [
+    "unit_1_below_min_4/5",
+    "unit_2_below_min_4/5",
+    "unit_3_below_min_2/3",
+    "unit_7_below_min_2/3"
+   ],
+   "diversityIssues": []
   }
  },
  {
-  "label": "after_revalidation_pass(auto_passed+re-validated needs_revalidation)",
-  "disjointFullSets": 2,
-  "firstShortAfter": [
-   {
-    "sectionKey": "ap_mc_b",
-    "need": 13,
-    "have": 3
-   },
-   {
-    "sectionKey": "ap_frq_b",
-    "need": 4,
-    "have": 3
-   }
-  ],
-  "items": 204,
+  "label": "usable_now(auto_passed)",
+  "partialDisjointSets": {
+   "MC Part A (계산기 불가 29)": 2,
+   "MC Part B (계산기 필수 13)": 0,
+   "FRQ Part A (2)": 6,
+   "FRQ Part B (4)": 0
+  },
+  "disjointFullSets": 0,
+  "firstShortAfter": {
+   "shortfall": [
+    {
+     "sectionKey": "ap_mc_b",
+     "need": 13,
+     "have": 8
+    },
+    {
+     "sectionKey": "ap_frq_b",
+     "need": 4,
+     "have": 2
+    }
+   ],
+   "composition": [
+    "unit_1_below_min_4/5",
+    "unit_2_below_min_4/5",
+    "unit_3_below_min_2/3",
+    "unit_6_below_min_6/7",
+    "unit_7_below_min_1/3"
+   ],
+   "diversity": []
+  },
+  "items": 206,
   "mc": {
-   "n": 177,
+   "n": 178,
    "byCalc": {
     "not_allowed": 148,
-    "required": 29
+    "required": 30
    },
-   "families": 74,
-   "effective": 108
+   "families": 68,
+   "effective": 96
   },
   "frq": {
-   "n": 27,
+   "n": 28,
    "byCalc": {
     "required": 10,
     "na": 6,
-    "not_allowed": 11
+    "not_allowed": 12
    },
    "families": 11
   },
@@ -165,8 +219,8 @@
     "needMin": 5,
     "needMax": 6,
     "have": 26,
-    "families": 11,
-    "effective": 17,
+    "families": 9,
+    "effective": 13,
     "shortfallVsMin": 0
    },
    {
@@ -185,8 +239,8 @@
     "needMin": 5,
     "needMax": 6,
     "have": 22,
-    "families": 8,
-    "effective": 13,
+    "families": 7,
+    "effective": 11,
     "shortfallVsMin": 0
    },
    {
@@ -194,9 +248,9 @@
     "weight": "15-20%",
     "needMin": 7,
     "needMax": 8,
-    "have": 29,
-    "families": 12,
-    "effective": 18,
+    "have": 30,
+    "families": 11,
+    "effective": 16,
     "shortfallVsMin": 0
    },
    {
@@ -205,8 +259,8 @@
     "needMin": 7,
     "needMax": 8,
     "have": 29,
-    "families": 15,
-    "effective": 19,
+    "families": 14,
+    "effective": 17,
     "shortfallVsMin": 0
    },
    {
@@ -215,8 +269,8 @@
     "needMin": 3,
     "needMax": 4,
     "have": 13,
-    "families": 7,
-    "effective": 10,
+    "families": 6,
+    "effective": 8,
     "shortfallVsMin": 0
    },
    {
@@ -231,41 +285,232 @@
    }
   ],
   "plan": {
-   "ok": true,
-   "shortfall": []
+   "ok": false,
+   "shortfall": [
+    {
+     "sectionKey": "ap_mc_b",
+     "need": 13,
+     "have": 8
+    },
+    {
+     "sectionKey": "ap_frq_b",
+     "need": 4,
+     "have": 2
+    }
+   ],
+   "compositionIssues": [
+    "unit_1_below_min_4/5",
+    "unit_2_below_min_4/5",
+    "unit_3_below_min_2/3",
+    "unit_6_below_min_6/7",
+    "unit_7_below_min_1/3"
+   ],
+   "diversityIssues": []
+  }
+ },
+ {
+  "label": "after_revalidation_pass(auto_passed+re-validated needs_revalidation)",
+  "partialDisjointSets": {
+   "MC Part A (계산기 불가 29)": 2,
+   "MC Part B (계산기 필수 13)": 0,
+   "FRQ Part A (2)": 6,
+   "FRQ Part B (4)": 0
+  },
+  "disjointFullSets": 0,
+  "firstShortAfter": {
+   "shortfall": [
+    {
+     "sectionKey": "ap_mc_b",
+     "need": 13,
+     "have": 8
+    },
+    {
+     "sectionKey": "ap_frq_b",
+     "need": 4,
+     "have": 2
+    }
+   ],
+   "composition": [
+    "unit_1_below_min_4/5",
+    "unit_2_below_min_4/5",
+    "unit_3_below_min_2/3",
+    "unit_6_below_min_6/7",
+    "unit_7_below_min_1/3"
+   ],
+   "diversity": []
+  },
+  "items": 206,
+  "mc": {
+   "n": 178,
+   "byCalc": {
+    "not_allowed": 148,
+    "required": 30
+   },
+   "families": 68,
+   "effective": 96
+  },
+  "frq": {
+   "n": 28,
+   "byCalc": {
+    "required": 10,
+    "na": 6,
+    "not_allowed": 12
+   },
+   "families": 11
+  },
+  "unitRows": [
+   {
+    "unit": "1",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 25,
+    "families": 7,
+    "effective": 11,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "2",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 26,
+    "families": 9,
+    "effective": 13,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "3",
+    "weight": "5-10%",
+    "needMin": 3,
+    "needMax": 4,
+    "have": 15,
+    "families": 6,
+    "effective": 8,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "4",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 22,
+    "families": 7,
+    "effective": 11,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "5",
+    "weight": "15-20%",
+    "needMin": 7,
+    "needMax": 8,
+    "have": 30,
+    "families": 11,
+    "effective": 16,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "6",
+    "weight": "15-20%",
+    "needMin": 7,
+    "needMax": 8,
+    "have": 29,
+    "families": 14,
+    "effective": 17,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "7",
+    "weight": "5-10%",
+    "needMin": 3,
+    "needMax": 4,
+    "have": 13,
+    "families": 6,
+    "effective": 8,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "8",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 18,
+    "families": 8,
+    "effective": 12,
+    "shortfallVsMin": 0
+   }
+  ],
+  "plan": {
+   "ok": false,
+   "shortfall": [
+    {
+     "sectionKey": "ap_mc_b",
+     "need": 13,
+     "have": 8
+    },
+    {
+     "sectionKey": "ap_frq_b",
+     "need": 4,
+     "have": 2
+    }
+   ],
+   "compositionIssues": [
+    "unit_1_below_min_4/5",
+    "unit_2_below_min_4/5",
+    "unit_3_below_min_2/3",
+    "unit_6_below_min_6/7",
+    "unit_7_below_min_1/3"
+   ],
+   "diversityIssues": []
   }
  },
  {
   "label": "potential_if_revalidated(auto_passed+needs_revalidation)",
-  "disjointFullSets": 2,
-  "firstShortAfter": [
-   {
-    "sectionKey": "ap_mc_b",
-    "need": 13,
-    "have": 11
-   },
-   {
-    "sectionKey": "ap_frq_b",
-    "need": 4,
-    "have": 3
-   }
-  ],
-  "items": 230,
+  "partialDisjointSets": {
+   "MC Part A (계산기 불가 29)": 3,
+   "MC Part B (계산기 필수 13)": 0,
+   "FRQ Part A (2)": 6,
+   "FRQ Part B (4)": 0
+  },
+  "disjointFullSets": 0,
+  "firstShortAfter": {
+   "shortfall": [
+    {
+     "sectionKey": "ap_mc_b",
+     "need": 13,
+     "have": 8
+    },
+    {
+     "sectionKey": "ap_frq_b",
+     "need": 4,
+     "have": 2
+    }
+   ],
+   "composition": [
+    "unit_1_below_min_4/5",
+    "unit_2_below_min_4/5",
+    "unit_3_below_min_2/3",
+    "unit_6_below_min_6/7",
+    "unit_7_below_min_1/3"
+   ],
+   "diversity": []
+  },
+  "items": 232,
   "mc": {
-   "n": 203,
+   "n": 204,
    "byCalc": {
     "not_allowed": 166,
-    "required": 37
+    "required": 38
    },
-   "families": 100,
-   "effective": 134
+   "families": 94,
+   "effective": 122
   },
   "frq": {
-   "n": 27,
+   "n": 28,
    "byCalc": {
     "required": 10,
     "na": 6,
-    "not_allowed": 11
+    "not_allowed": 12
    },
    "families": 11
   },
@@ -286,8 +531,8 @@
     "needMin": 5,
     "needMax": 6,
     "have": 31,
-    "families": 16,
-    "effective": 22,
+    "families": 14,
+    "effective": 18,
     "shortfallVsMin": 0
    },
    {
@@ -306,8 +551,8 @@
     "needMin": 5,
     "needMax": 6,
     "have": 23,
-    "families": 9,
-    "effective": 14,
+    "families": 8,
+    "effective": 12,
     "shortfallVsMin": 0
    },
    {
@@ -315,9 +560,9 @@
     "weight": "15-20%",
     "needMin": 7,
     "needMax": 8,
-    "have": 36,
-    "families": 19,
-    "effective": 25,
+    "have": 37,
+    "families": 18,
+    "effective": 23,
     "shortfallVsMin": 0
    },
    {
@@ -326,8 +571,8 @@
     "needMin": 7,
     "needMax": 8,
     "have": 35,
-    "families": 21,
-    "effective": 25,
+    "families": 20,
+    "effective": 23,
     "shortfallVsMin": 0
    },
    {
@@ -336,8 +581,8 @@
     "needMin": 3,
     "needMax": 4,
     "have": 16,
-    "families": 10,
-    "effective": 13,
+    "families": 9,
+    "effective": 11,
     "shortfallVsMin": 0
    },
    {
@@ -352,8 +597,27 @@
    }
   ],
   "plan": {
-   "ok": true,
-   "shortfall": []
+   "ok": false,
+   "shortfall": [
+    {
+     "sectionKey": "ap_mc_b",
+     "need": 13,
+     "have": 8
+    },
+    {
+     "sectionKey": "ap_frq_b",
+     "need": 4,
+     "have": 2
+    }
+   ],
+   "compositionIssues": [
+    "unit_1_below_min_4/5",
+    "unit_2_below_min_4/5",
+    "unit_3_below_min_2/3",
+    "unit_6_below_min_6/7",
+    "unit_7_below_min_1/3"
+   ],
+   "diversityIssues": []
   }
  }
 ]

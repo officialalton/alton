@@ -37,6 +37,28 @@ describe("planApSet", () => {
   });
 });
 
+describe("planApSet 겹침·다양성·구성 옵션", () => {
+  it("전체 길이 세트는 기본 겹침 0, 겹침 상한을 주면 그만큼만 재사용한다", () => {
+    const pool = Array.from({ length: 62 }, (_, i) => c(i));
+    const used = new Set(Array.from({ length: 5 }, (_, i) => `p${i}`));
+    expect(planApSet("ap_microeconomics", "mc_practice", pool, used).reused).toBe(0);
+    const p2 = planApSet("ap_microeconomics", "mc_practice", pool.slice(0, 62), used, { maxOverlap: 2 });
+    expect(p2.reused).toBeLessThanOrEqual(2);
+  });
+  it("FRQ 는 문항군당 1개: 소수 원형의 수치 변형으로 6개를 채우지 못한다", () => {
+    const frq = Array.from({ length: 12 }, (_, i) => c(i, { kind: "frq_bundle", calculator: i % 2 ? "required" : "not_allowed", itemFamilyId: `fam${i % 4}` }));
+    const plan = planApSet("ap_calculus_ab", "frq_practice", frq);
+    expect(plan.ok).toBe(false);
+    expect(plan.shortfall.length).toBeGreaterThan(0); // 문항군 4개뿐이라 6개를 서로 다른 문항군으로 못 채움
+  });
+  it("공식 단원 비중 구성이 만족돼야 ok", () => {
+    const pool = Array.from({ length: 20 }, (_, i) => c(i, { keywordCode: "1.1" }));
+    const plan = planApSet("ap_microeconomics", "mc_practice", pool, new Set(), { unitBounds: { "1": { min: 1, max: 100 }, "2": { min: 5, max: 20 } }, minDistinctFamilies: { mc: 1 } });
+    expect(plan.compositionIssues.some((x) => x.startsWith("unit_2_below_min"))).toBe(true);
+    expect(plan.ok).toBe(false);
+  });
+});
+
 import { planPartialSet } from "./assemble";
 import { AP_PARTIALS, partialLabelAllowed, partialSetName, sectionsForPartial } from "./layouts";
 

@@ -77,3 +77,9 @@ MC 스킬 비중(30문항): P1 63% / P2 20% / P3 17%(공식 범위: 50–70/15�
 
 ## 6. 금지어·범위 게이트
 BC 전용 용어(series/converge/Taylor/Maclaurin/parametric/polar/vector/Euler/logistic/integration by parts/partial fractions/arc length/improper/Lagrange error)와 `Rolle`, `Newton's method`, `Simpson`, "AP 3/4/5 수준" 표현은 문항·해설에 나오면 반려(`gateGuideMc/Frq`).
+
+## 부록: 계산기 필수 MC 신규 원형 3종(2026-10-09 소규모 검증, 설계도 포함)
+단원 1·3·7 에 계산기 필수 문항이 없던 칸을 채우는 원형. 각 원형은 문장·보기 전에 설계도(`blueprint`)를 만들고 `lib/ap-generation/blueprint.ts` 로 검증한다. 상세: `docs/ap/generation-blueprints.md`.
+- `deriv_calc_chain` (3.1, 스킬 1.E): 곱과 합성함수의 한 점 도함수를 계산기로 평가. 생성=기호 미분, 독립 검증=중심 차분. 오답: 안쪽 도함수 누락 / 곱의 법칙 한 항 누락 / 지수의 계수 c 누락.
+- `ivt_solve_calc` (1.16, 스킬 1.E): f(c)=k 의 해를 계산기로. 생성=brentq, 독립 검증=직접 이분법. 오답: 구간 중점 / 선형 보간 / 목표값 오설정.
+- `diffeq_value_calc` (7.7, 스킬 1.E): 분리 가능한 미분방정식 특수해를 점에서 평가. 생성=닫힌 형태, 독립 검증=적응형 룽게-쿠타 수치 적분. 오답: 1/2 인수 누락 / x 를 상수로 취급 / 지수화 대신 덧셈.

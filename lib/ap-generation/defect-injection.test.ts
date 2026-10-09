@@ -4,7 +4,7 @@ import { runInjection, summarizeInjection } from "./defect-injection";
 import type { McPack } from "./gates";
 
 const items = (JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")) as { stockKey: string; apSubjectCode: string; kind: string; validation: string; payload: McPack }[])
-  .filter((i) => i.kind === "mc" && i.validation === "auto_passed" && i.payload.explanation_en)
+  .filter((i) => i.kind === "mc" && i.validation === "auto_passed" && i.payload.explanation_en && i.payload.archetype)
   .map((i) => ({ key: i.stockKey, subject: i.apSubjectCode, pack: i.payload }));
 
 describe("주입 결함 탐지(무료 계층)", () => {

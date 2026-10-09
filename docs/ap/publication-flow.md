@@ -79,6 +79,9 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 
 **검증 기록 실행 범위(2026-10-08 오너 결정)**: `mark-verified.ts` 는 기본 dry-run, 대상은 로컬(기본) 또는 비프로덕션 `worpsqwqgnspddnrtnvq` 뿐이며 후자는 `--target worpsqwqgnspddnrtnvq --i-know-nonprod worpsqwqgnspddnrtnvq` 가 모두 있어야 한다(그 외 호스트·프로덕션 거부, 키는 환경변수에서만 읽고 출력하지 않음). `--render` 는 렌더 보고서(`data/ap/render-check/report.json`)의 `contentHash`(자료+선지+정답)가 DB 후보 payload 해시와 같은 후보만 기록하고 불일치는 건너뛴다. `--screen` 증거 파일은 `entries[{candidate_key, viewport, screenshot(저장소 기준 경로, 실존 필수), timestamp, checker}]` 를 갖춰야 하며 없으면 기록하지 않는다. 증거 스크린샷: `docs/ap/screen-evidence/`.
 
+## 7. S1a 중복 불일치 해소(2026-10-09)
+보고는 "S1a 완전 중복 3건"이었고 DB 에는 4건이 적재됐다. 원인: **S1a 내보내기 이후 run2 m25-k0 가 파서 오류 재판정으로 rejected → auto_passed 가 되면서**, 같은 내용인 S1a m25-k0 이 완전 중복으로 바뀌었다(items.json 과 s1a-items.json 을 서로 다른 시점에 계산한 탓). 후보 ID: `s1a-final:ap_calculus_ab-m25-k0`(정본 `run2:ap_calculus_ab-m25-k0`, 재판정 반영 후), `s1a-final:ap_calculus_ab-m27-k1`(정본 run2 m27-k3), `…m29-k1`(정본 m29-k3), `…m30-k1`(정본 m30-k2). 수정: `stock.ts` 가 한 번의 계산으로 두 파일을 함께 쓰도록 바꿔 **단일 재고 표**를 유지한다(보조 배치 포함 파일 합계 = DB 합계, `stock-consistency.ts` 가 두 파일을 합쳐 비교). 최신 S1a: 68행 = auto_passed 56 / rejected 8 / exact_duplicate 4.
+
 
 ## 화면 검증은 자동 점검이다 (2026-10-09 오너 결정)
 - 증거 항목에는 `checker_kind`(`automated`|`human`)가 필수이고 자동 도구의 점검자 이름은 `automated-<도구>`(예: `automated-playwright/<버전>`)다. 자동 점검을 사람 검토로 기록할 수 없다. DB `screen_evidence` 에는 `checkerKind`·`limitations` 가 함께 남는다(이미 검증된 후보를 다시 `--screen --execute` 하면 해시는 그대로 두고 라벨만 갱신, 변환 전 후보에 한함).
@@ -89,3 +92,6 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 - 공식 파트의 문항 수와 시간을 모두 채운 세트만 이 이름을 쓴다(DB 공개 게이트가 섹션별 문항 수를 강제). 현재 재고를 완전한 모의고사로 부르지 않는다(`full_practice` 는 모든 섹션 충족 때만).
 - 조립 규칙: 모의고사 용도(`mock_exam`) 변환 문항만. 세트 안 중복 없음. 문항군당 MC 2개·FRQ 1개, FRQ 는 유형(archetype)당 2개까지·6문항이면 서로 다른 유형 4개 이상. 다른 세트와의 겹침은 풀 모의고사 0, 부분 연습은 기본 문항 수의 20% 이내(`--overlap-max`). 못 채우면 패딩 없이 부족 칸(문항 수·문항군·유형·단원 비중)을 보고한다.
 - 가능성 점검: `npx tsx scripts/ap-generation/partial-feasibility.ts`(결과 `data/ap/stock/partial-feasibility.json`). 비프로덕션 실행 명령은 `scripts/ap-generation/assemble-ap-set.ts`·`publish-to-bank.ts` 머리 주석(둘 다 `--target <ref> --i-know-nonprod <ref>` 허용 목록, 기본 dry-run).
+
+## 8. import 재적재 안전(2026-10-09)
+`import-candidates.ts` 는 이미 DB 에 있는 키의 `render_verified`·`screen_verified`·`render/screen_evidence`·`release_tier`·`problem_id`·`purpose`·`converted_*`·`expert_status` 를 **절대 덮어쓰지 않는다**. 기존 행은 검증 판정 필드(review_state, rejection_reason, gate_version, 문항군·중복·defect_flags, is_current/load_batch_id 등)만 갱신하고, 변환된 행은 판정 **승격**(예: needs_revalidation→auto_passed)에 딸린 3필드(review_state, gate_version, rejection_reason)만 갱신한다. 검증·변환된 행의 판정은 강등하지 않는다. payload 는 내용(stimulus·stem·options·key_index·key_index_final·parts)이 바뀌고 검증·변환되지 않은 행에서만 쓴다(402 트리거가 검증을 푸는 것을 피함). 새 키만 전체 행 insert. 규칙은 순수 함수 `lib/ap-generation/import-merge.ts`(테스트 8건). `--report` 는 dry-run 에서도 보존/갱신 건수와 키 목록을 `data/ap/stock/import-merge-report.json` 에 쓴다. 시뮬레이션(증거 153개 키가 검증·변환된 상태로 있다고 가정): 새 키 68(S1a), 기존 갱신 633, 검증·변환 보존 153(보호 필드 patch 0건), 판정 승격 143(그중 검증·변환 행 3건 — 실제 DB 에서 이 3건이 이미 auto_passed 면 승격 0). 승격 143건은 미검증·미변환 행에 적용되고, 검증·변환 행에 걸리는 키는 `--report` 의 `upgradeOnVerifiedKeys` 로 확인한다.

@@ -8,7 +8,7 @@
 //   비프로덕션: 위 명령에 --target worpsqwqgnspddnrtnvq --i-know-nonprod worpsqwqgnspddnrtnvq 를 붙인다(프로덕션·그 외 거부).
 import { readFileSync } from "node:fs";
 import { connectAllowlisted } from "./target";
-import { planApSet, planPartialSet, type AssembleCandidate, type UnitWeight } from "../../lib/ap-exam/assemble";
+import { OVERLAP_DEFAULT, planApSet, planPartialSet, type AssembleCandidate, type AssembleOptions, type UnitWeight } from "../../lib/ap-exam/assemble";
 import { AP_PARTIALS, apSectionLayout, partialSetName, sectionsForPartial, type ApPartialId, type ApSetLabel } from "../../lib/ap-exam/layouts";
 
 const arg = (n: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : undefined; };
@@ -44,7 +44,13 @@ async function main() {
     if (!plan.ok) { for (const s of plan.shortage) console.log(`  모자람 ${s.sectionKey} ${s.have}/${s.need}: ${s.reasons.join("; ")}`); console.log("공식 파트의 문항 수·다양성 하한을 채우지 못해 세트를 만들지 않습니다(패딩 없음)."); return; }
     items = plan.items; sectionKeys = sectionsForPartial(subject, partial).map((s) => s.key);
   } else {
-    const plan = planApSet(subject, label, pool, used);
+    // 겹침 정책은 하나: --overlap-max N(기본 풀 세트·MC/FRQ 전체 세트 = OVERLAP_DEFAULT.full = 0, 부분 연습은 문항 수의 partialFraction). 공식 단원 비중·문항군 다양성은 자동 적용(--no-composition 로 끔).
+    const mcTotal = apSectionLayout(subject).filter((x) => x.kind === "mc").reduce((a, x) => a + x.count, 0);
+    const cur2 = JSON.parse(readFileSync(`data/ap/curriculum-2027/${subject}.json`, "utf-8")) as { weights: { axis: string; section: string; code: string; min?: number; max?: number }[] };
+    const unitBounds = Object.fromEntries(cur2.weights.filter((w) => w.axis === "unit" && w.section === "mc").map((w) => [w.code, { min: Math.ceil(((w.min ?? 0) / 100) * mcTotal), max: Math.floor(((w.max ?? 100) / 100) * mcTotal) }]));
+    const opts: AssembleOptions = { maxOverlap: arg("overlap-max") !== undefined ? Number(arg("overlap-max")) : OVERLAP_DEFAULT.full, ...(process.argv.includes("--no-composition") ? {} : { unitBounds }) };
+    const plan = planApSet(subject, label, pool, used, opts);
+    if (plan.compositionIssues.length || plan.diversityIssues.length) console.log(`구성/다양성 미충족: ${[...plan.compositionIssues, ...plan.diversityIssues].join(", ")}`);
     console.log(`풀 ${pool.length}건 → 선택 ${plan.items.length}건, 부족: ${plan.shortfall.map((s) => `${s.sectionKey} ${s.have}/${s.need}`).join(", ") || "없음"}`);
     if (!plan.ok) { console.log("공식 구조를 채우지 못해 세트를 만들지 않습니다(라벨 규칙)."); return; }
     items = plan.items; sectionKeys = [...new Set(plan.items.map((i) => i.sectionKey))];
