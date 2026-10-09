@@ -712,12 +712,12 @@ export default function ParentShell({
             <ParentHomeworkTab childrenHomework={homeworkByChild} />
           ) : activeTab === "consult" ? (
             consultSubTab === "request" ? (
+              <ConsultationRequestTab />
+            ) : consultSubTab === "history" ? (
               <>
                 {freeMemberStatus && <FreeMemberConsultBanner consults={freeMemberStatus.consults} />}
-                <ConsultationRequestTab />
+                <ConsultationHistoryTab />
               </>
-            ) : consultSubTab === "history" ? (
-              <ConsultationHistoryTab />
             ) : (
               <MessengerTab />
             )

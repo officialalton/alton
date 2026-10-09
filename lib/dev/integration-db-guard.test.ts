@@ -22,6 +22,7 @@ describe("통합 테스트 대상 DB 가드", () => {
     expect(checkIntegrationTarget({ ALLOW_SHARED_TEST_DB: "1" }).ok).toBe(false);
     expect(checkIntegrationTarget({ ALLOW_SHARED_TEST_DB: "1", SHARED_TEST_DB_NOTE: "short" }).ok).toBe(false);
     expect(checkIntegrationTarget({ SHARED_TEST_DB_NOTE: "조정 세션 전체 회귀 실행" }).ok).toBe(false);
-    expect(checkIntegrationTarget({ ALLOW_SHARED_TEST_DB: "1", SHARED_TEST_DB_NOTE: "조정 세션 전체 회귀 실행" }).ok).toBe(true);
+    expect(checkIntegrationTarget({ ALLOW_SHARED_TEST_DB: "1", SHARED_TEST_DB_NOTE: "coordinator-approved: 전체 회귀 실행" }).ok).toBe(true);
+    expect(checkIntegrationTarget({ ALLOW_SHARED_TEST_DB: "1", SHARED_TEST_DB_NOTE: "조정 세션 전체 회귀 실행" }).ok).toBe(false); // 접두어 없는 임의 사유는 불가;
   });
 });

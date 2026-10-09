@@ -6,7 +6,7 @@
 // 상태는 stock.ts 가 계산한 값 그대로: review_state(rejected|needs_revalidation|auto_passed|exact_duplicate), expert_status, used_in_sample, legacy_reserve, 문항군.
 // **재적재 안전**: 이미 DB 에 있는 키는 render_verified·screen_verified·*_evidence·release_tier·problem_id·purpose·converted_*·expert_status 를 절대 덮어쓰지 않고
 //   검증 판정 필드만 갱신한다(변환된 행의 review_state 는 유지, 검증된 행은 강등 금지, payload 는 내용이 바뀌고 미검증일 때만). 새 키만 전체 행 insert. 규칙: lib/ap-generation/import-merge.ts.
-//   --report: dry-run 에서도 기존 행의 보존/갱신 건수와 목록을 출력(data/ap/stock/import-merge-report.json).
+//   --report: dry-run 에서도 기존 행의 보존/갱신 건수와 목록을 출력(출력만, 디스크 무변경). 저장은 --write-report <경로> 를 별도로 명시.
 // problems/problem_versions 는 건드리지 않는다(학생 비노출). 완전 중복·반려 행도 이력 보존을 위해 적재한다.
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -59,7 +59,8 @@ async function main() {
   if (process.argv.includes("--report")) {
     const list = (f: (x: (typeof results)[number]) => boolean) => results.filter(f).map((x) => x.key);
     const rep = { summary: sum, verifiedPreservedKeys: list((x) => x.m.flags.verified), convertedKeys: list((x) => x.m.flags.converted), payloadSkippedKeys: list((x) => x.m.flags.payloadSkipped), stateConflictKeptKeys: list((x) => x.m.flags.stateConflictKept), stateUpgradeKeys: list((x) => x.m.flags.stateUpgrade), upgradeOnVerifiedKeys: list((x) => x.m.flags.stateUpgrade && x.m.flags.verified) };
-    writeFileSync("data/ap/stock/import-merge-report.json", JSON.stringify(rep, null, 1)); console.log("보고서: data/ap/stock/import-merge-report.json");
+    console.log(`보고(요약): ${JSON.stringify(rep.summary)}`);
+    const wi = process.argv.indexOf("--write-report"); if (wi > 0 && process.argv[wi + 1] && !process.argv[wi + 1].startsWith("--")) { writeFileSync(process.argv[wi + 1], JSON.stringify(rep, null, 1)); console.log(`보고서 저장: ${process.argv[wi + 1]}`); }
   }
   if (!execute) { console.log(`dry-run: 이력 ${hist.length}행, 실제 쓰기 없음(--execute 로 위 계획 적용)`); return; }
   const inserts = results.filter((x) => x.m.action === "insert").map((x) => x.m.row!);

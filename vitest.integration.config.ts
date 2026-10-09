@@ -20,6 +20,8 @@ export default defineConfig({
     include: ["lib/universities/**/*.integration.test.ts"],
     exclude: ["**/node_modules/**", "**/.next/**", "**/e2e/**", "**/.claude/worktrees/**"],
     fileParallelism: false,
+    // 2026-10-09 — 메인 integration 프로젝트와 같은 대상 DB 가드(미지정/공유 스택이면 시작 전 중단). 이 설정도 같은 로컬 스택 폴백을 쓴다.
+    globalSetup: ["./vitest.integration-guard.ts"],
   },
   resolve: {
     alias: {

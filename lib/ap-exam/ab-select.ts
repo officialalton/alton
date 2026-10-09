@@ -26,10 +26,13 @@ export function verify(s: Sel, o = { ...INTERNAL }): Constraint[] {
 }
 const cost = (s: Sel, o = INTERNAL) => verify(s, o).filter((c) => !c.ok).length * 1000 + (() => { const mc = [...s.mcA, ...s.mcB]; const u = count(mc, (c) => c.unit); let v = 0; for (const [kk, [a, b]] of Object.entries(OFFICIAL.unitBounds)) v += Math.max(0, a - (u.get(Number(kk)) ?? 0)) + Math.max(0, (u.get(Number(kk)) ?? 0) - b); const kc = count(mc, (c) => c.skillCat); for (const [kk, [a, b]] of Object.entries(OFFICIAL.skillBounds)) v += Math.max(0, a - (kc.get(Number(kk)) ?? 0)) + Math.max(0, (kc.get(Number(kk)) ?? 0) - b); const f = count(mc, (c) => c.family); v += [...f.values()].reduce((a, n) => a + Math.max(0, n - o.familyCap), 0) + Math.max(0, o.minFamilies - f.size) + Math.max(0, o.graphRequiredMin - mc.filter((c) => c.graphRequired).length); return v * 20; })();
 const soft = (s: Sel) => [...s.mcA, ...s.mcB, ...s.frqA, ...s.frqB].reduce((a, c) => a + (c.screenVerified ? 0 : 2) + (c.renderOk ? 0 : 3) + c.practiceUses, 0);
+/** 키 기준 안정 정렬 사본(원본 불변). */
+export const stableByKey = (xs: Cand[]): Cand[] => [...xs].sort((x, y) => (x.key < y.key ? -1 : x.key > y.key ? 1 : 0));
 function rng(seed: number) { let x = seed >>> 0 || 1; return () => ((x = (Math.imul(x, 1664525) + 1013904223) >>> 0) / 4294967296); }
 
 /** FRQ: 서로 다른 유형 6개를 전수 탐색(Part A 필수 2 × Part B 4), 검증·렌더 우선. */
-export function selectFrq(pool: Cand[], exclude = new Set<string>()): { a: Cand[]; b: Cand[] } | null {
+export function selectFrq(poolIn: Cand[], exclude = new Set<string>()): { a: Cand[]; b: Cand[] } | null {
+  const pool = stableByKey(poolIn); // 입력 순서와 무관하게 동일 결과(결정성)
   const A = pool.filter((c) => c.kind === "frq" && c.calc === "required" && !exclude.has(c.key) && c.fullMockUses === 0), B = pool.filter((c) => c.kind === "frq" && c.calc !== "required" && !exclude.has(c.key) && c.fullMockUses === 0);
   let best = null as { a: Cand[]; b: Cand[]; s: number } | null; const sc = (xs: Cand[]) => xs.reduce((a, c) => a + (c.screenVerified ? 0 : 2) + (c.renderOk ? 0 : 3) + c.practiceUses, 0);
   for (let i = 0; i < A.length; i++) for (let j = i + 1; j < A.length; j++) { const a = [A[i], A[j]]; if (a[0].type === a[1].type || a[0].family === a[1].family) continue;
@@ -37,7 +40,8 @@ export function selectFrq(pool: Cand[], exclude = new Set<string>()): { a: Cand[
   const bb = best as { a: Cand[]; b: Cand[] } | null; return bb ? { a: bb.a, b: bb.b } : null;
 }
 /** MC: 고정 시드 탐색. exclude 는 후보에서 뺄 키, lock 은 가능하면 유지할 이전 선택(교체 슬롯만 움직임). */
-export function selectMc(pool: Cand[], opts: { exclude?: Set<string>; prev?: { mcA: Cand[]; mcB: Cand[] }; seed?: number; iters?: number } = {}): { mcA: Cand[]; mcB: Cand[] } | null {
+export function selectMc(poolIn: Cand[], opts: { exclude?: Set<string>; prev?: { mcA: Cand[]; mcB: Cand[] }; seed?: number; iters?: number } = {}): { mcA: Cand[]; mcB: Cand[] } | null {
+  const pool = stableByKey(poolIn); // 입력 순서와 무관하게 동일 결과(결정성)
   const ex = opts.exclude ?? new Set<string>(); const A = pool.filter((c) => c.kind === "mc" && c.calc === "not_allowed" && !ex.has(c.key) && c.fullMockUses === 0), B = pool.filter((c) => c.kind === "mc" && c.calc === "required" && !ex.has(c.key) && c.fullMockUses === 0);
   const empty = { mcA: [] as Cand[], mcB: [] as Cand[] }; const dummy = { frqA: [] as Cand[], frqB: [] as Cand[] };
   const cst = (a: Cand[], b: Cand[]) => cost({ mcA: a, mcB: b, ...dummy }) - 2000 /* FRQ 제약 2개 항상 실패 */ + soft({ mcA: a, mcB: b, ...dummy }) * 0.01;
