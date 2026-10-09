@@ -233,7 +233,7 @@ describe("학생 응시 흐름(무료 회원)", () => {
   });
   it("시작 → 문항 상세: 선택지 수·섹션 레이아웃, 정답·해설 비노출", () => {
     attemptA = asUser(freeA, `select mock_exam_open_start('${setId}');`);
-    // 마이그레이션 404: 답 없이 AP 타이머만 돌아도(섹션 시간 저장) 응시가 in_progress 가 된다(SAT 섹션은 그대로).
+    // 마이그레이션 405: 답 없이 AP 타이머만 돌아도(섹션 시간 저장) 응시가 in_progress 가 된다(SAT 섹션은 그대로).
     expect(psql(`select status from mock_exam_attempts where id = '${attemptA}';`)).toBe("assigned");
     asUser(freeA, `select mock_exam_save_section_time('${attemptA}', 'ap_mc', 1700);`);
     expect(psql(`select status || '|' || (started_at is not null) from mock_exam_attempts where id = '${attemptA}';`)).toBe("in_progress|true");

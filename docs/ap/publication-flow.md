@@ -119,4 +119,4 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 - 해설 수식: 해설(explanation_en)이 `$...$` 없이 TeX·평문 수식을 섞어 쓴 경우를 렌더 직전에 `$...$` 로 감싸 본문처럼 KaTeX 로 그린다(`lib/ap-exam/explanation-math.ts`; 저장 데이터는 불변). 생성 프롬프트는 이후 해설도 `$...$` 를 요구한다. 자동 화면 점검(증거 v2)에 제출 후 결과 화면 점검 `result_no_raw_tex` 가 필수로 들어가, 해설에 `\\frac`·`\\pi`·`\\int`·`\\displaystyle`·`^{` 가 보이면 실패한다.
 - My Notebook 목록 미리보기도 수식을 그린다. Topics to review 는 코드와 토픽 이름(`Topic 1.4 · …`). MC 전용 세트에는 Free response 탭이 없다. 재응시 뒤 결과 화면에 `Attempt 1 | Attempt 2` 전환이 있다.
 - 시간 소진: 마지막(단일) 섹션이 끝나면 자동 제출, 중간 섹션은 "Go to next section" 버튼(SAT 고정형은 해당 섹션만 잠그고 모든 섹션이 잠기거나 직접 제출할 때 마감 — 단일 섹션인 AP 부분 세트는 자동 제출로 맞춘다).
-- 목록 상태: 카탈로그의 진행 상태를 신뢰해 `In progress — Continue` 로 보인다. AP 는 화면을 여는 순간 타이머가 돌므로 섹션 시간 저장이 'assigned' 응시를 'in_progress' 로 올린다(마이그레이션 `20262100000404`, AP 섹션만, SAT 불변).
+- 목록 상태: 카탈로그의 진행 상태를 신뢰해 `In progress — Continue` 로 보인다. AP 는 화면을 여는 순간 타이머가 돌므로 섹션 시간 저장이 'assigned' 응시를 'in_progress' 로 올린다(마이그레이션 `20262100000405`, AP 섹션만, SAT 불변).
