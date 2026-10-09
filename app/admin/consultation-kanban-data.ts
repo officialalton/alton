@@ -224,6 +224,11 @@ function classifyStage(row: ConsultationListItem, trialProgressByChild: Map<stri
   if (row.status !== "completed") return "scheduled"; // 예외적 상태는 안전하게 2단계로
 
   if (!row.outcome || row.outcome === "on_hold") return "scheduled";
+  // 2026-10-09 — outcome='closed'(상담 결과 드롭다운의 "종료")는 closure_type(지난 상담
+  // 종료 유형)과 다른 "결과 메모"일 뿐이라 closure_type이 비어 있으면 보드에 남는다.
+  // 예전엔 아래 체험 분기로 빠져 "체험 신청"에 잘못 표시됐다 — 종료 유형 확정(상담 종료
+  // 버튼) 대기 상태이므로 "상담 일정 확정"에 둔다.
+  if (row.outcome === "closed") return "scheduled";
   if (row.outcome === "regular_recommended") return "contract_sent";
 
   // outcome === 'trial_recommended' — 파이프라인 단계로 세분화한다.
@@ -252,7 +257,7 @@ export async function loadKanbanBoard(admin: ReturnType<typeof createAdminClient
   // 별도 배치로 분리.)
   const [rows, { data: closedIdsData }, { data: rootIdsData }, accountCreationRows, archivedProfileIds] =
     await Promise.all([
-      queryConsultationsInRange(admin, { from: "2020-01-01T00:00:00.000Z", to: "2035-01-01T00:00:00.000Z" }),
+      queryConsultationsInRange(admin, { from: "2020-01-01T00:00:00.000Z", to: "2035-01-01T00:00:00.000Z", includeUnscheduled: true }),
       admin.from("consultations").select("id").not("closure_type", "is", null),
       admin.from("consultations").select("family_root_consultation_id").not("family_root_consultation_id", "is", null),
       loadAccountCreationCards(admin),

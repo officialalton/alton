@@ -112,16 +112,21 @@ async function attachTrialGrantExpiry(
 // 책임진다.
 export async function queryConsultationsInRange(
   admin: ReturnType<typeof createAdminClient>,
-  params: { from: string; to: string }
+  params: { from: string; to: string; includeUnscheduled?: boolean }
 ): Promise<ConsultationListItem[]> {
-  const { data, error } = await admin
+  const base = admin
     .from("consultations")
     .select(
       "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_intent_confirmed_at, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error, family_root_consultation_id, is_child_onboarding_card, source_link_child_id, requested_children, admissions_consultant_id"
     )
-    .gte("starts_at", params.from)
-    .lt("starts_at", params.to)
-    .order("starts_at", { ascending: true });
+    ;
+  // 2026-10-09 — 일정이 아직 없는 상담(starts_at null: 컨설턴트 배정 직후·스케줄링
+  // 링크 발송 전)은 범위 조건(gte/lt)이 NULL을 걸러 칸반에서 통째로 누락됐다.
+  // 칸반만 includeUnscheduled로 이 행들을 함께 읽는다(캘린더 호출자는 기존 그대로).
+  const { data, error } = await (params.includeUnscheduled
+    ? base.or(`and(starts_at.gte.${params.from},starts_at.lt.${params.to}),starts_at.is.null`)
+    : base.gte("starts_at", params.from).lt("starts_at", params.to)
+  ).order("starts_at", { ascending: true });
   if (error) throw new Error(friendlyDbMessage(error));
   const rows = (data ?? []) as Array<Omit<ConsultationListItem, "consultReadiness" | "completionReadiness" | "trial_entitlement_grant_expires_at">>;
   const expiryByGrantId = await attachTrialGrantExpiry(admin, rows);
