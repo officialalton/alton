@@ -25,3 +25,14 @@ describe("ab-select", () => {
     const r = selectFrq(f); expect(r?.a).toHaveLength(2); expect(r?.b).toHaveLength(4); expect(selectFrq(f.slice(0, 5))).toBeNull();
   });
 });
+describe("ab-select 결정성", () => {
+  const keys = (s: { mcA: Cand[]; mcB: Cand[] }) => [...s.mcA, ...s.mcB].map((c) => c.key).join(",");
+  it("같은 재고·시드는 두 번 돌려도, 입력 순서를 섞어도 같은 결과", () => {
+    const a = selectMc(pool, { seed: 7 })!, b = selectMc(pool, { seed: 7 })!, c = selectMc([...pool].reverse(), { seed: 7 })!;
+    expect(keys(a)).toBe(keys(b)); expect(keys(a)).toBe(keys(c));
+  });
+  it("FRQ 도 입력 순서와 무관", () => {
+    const f = ["6.2", "6.5", "8.4", "5.9", "7.7", "4.5", "3.2", "2.8", "1.5"].map((t, i) => mk(950 + i, { kind: "frq", calc: i < 3 ? "required" : "not_allowed", type: t }));
+    expect(JSON.stringify(selectFrq(f))).toBe(JSON.stringify(selectFrq([...f].reverse())));
+  });
+});

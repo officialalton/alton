@@ -141,4 +141,6 @@ done
 ## 통합 테스트 대상 DB 가드 (2026-10-09)
 사고: `vitest run lib/ap-exam` 이 `SUPABASE_TEST_DB_URL` 없이 실행돼 코드의 기본값(공유 54422)에 실제로 연결해 쓰기를 했다(실행 ID `apxmv0l3bejc2rc` 등, 로컬 시각 10-08 23:28). 테스트가 자기 행을 지워 잔여 행은 없었지만, 공유 스택에 쓰기·시퀀스 소모가 있었고 다른 세션과 충돌할 수 있었다.
 - `*.integration.test.ts` 는 이제 vitest `integration` 프로젝트의 globalSetup(`vitest.integration-guard.ts`)이 **테스트 시작 전에** `SUPABASE_TEST_DB_URL`·`SUPABASE_TEST_API_URL` 을 검사해, 미지정이거나 공유 포트(54420~54429·54320~54329 계열)면 중단한다. 격리 스택(`scripts/dev/isolated-stack.sh`)을 띄우고 두 변수를 그 포트로 지정한다.
-- 조정 세션이 공유 스택에서 의도적으로 돌릴 때만 `ALLOW_SHARED_TEST_DB=1 SHARED_TEST_DB_NOTE="<사유 8자 이상>"`. 단위 테스트(`--project unit`)는 영향 없음. 테스트: `lib/dev/integration-db-guard.test.ts`.
+- **`ALLOW_SHARED_TEST_DB` 우회는 조정 세션이 공유 스택 회귀를 의도적으로 돌릴 때만 쓴다.** 형식: `ALLOW_SHARED_TEST_DB=1 SHARED_TEST_DB_NOTE="coordinator-approved: <사유 8자 이상>"`(접두어 없으면 가드가 거부). **에이전트·자동화·기능 세션은 이 변수를 설정하지 않는다** — 통과가 안 되면 우회하지 말고 격리 스택을 띄우거나 조정 세션에 요청한다. 시퀀스·통계를 "되돌리려" 만지지도 않는다.
+- 적용 범위: `*.integration.test.ts` 전부(165개; 공유 포트 폴백 파일 약 150개)는 `vitest run`·`vitest run <파일>`·`npm test`·`npm run test:integration:universities` 어느 경로로든 가드된 프로젝트/설정에서만 실행된다(unit 프로젝트는 제외). 증명 테스트: `lib/dev/integration-guard-coverage.test.ts`. Playwright e2e 는 vitest 가 아니므로 별도(`e2e/fixtures.ts` 가 54421/54422 를 쓰므로 공유 스택 대상 실행은 조정 세션만). `npm run test:fresh` 는 `supabase db reset` 을 포함하므로 조정 세션 전용.
+- 단위 테스트(`--project unit`)는 영향 없음. 테스트: `lib/dev/integration-db-guard.test.ts`.
