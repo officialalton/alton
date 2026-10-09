@@ -83,9 +83,41 @@ describe("컨설턴트 Settlement — 기한 경과 표기", () => {
       { id: "p-paid", periodStart: "2020-02-01", periodEnd: "2020-02-15", amountMinor: 100000, currency: "KRW", status: "paid", note: null, confirmedAt: null, paidAt: null },
     ]);
     render(<SettlementPanel />);
+    fireEvent.click(screen.getByRole("button", { name: "Payout History" }));
     expect(await screen.findByText(/Was due Jan 24, 2020 — processing/)).toBeInTheDocument();
     expect(screen.getByText("Overdue — processing")).toBeInTheDocument();
     expect(screen.getByText("Paid")).toBeInTheDocument();
     expect(screen.queryByText("Upcoming payout")).not.toBeInTheDocument();
+  });
+});
+
+describe("컨설턴트 Settlement — 서브탭·첫 화면 깜빡임 방지", () => {
+  it("계좌 조회가 끝나기 전에는 등록 폼을 그리지 않고 스켈레톤만 보인다(저장된 계좌가 있는 경우 폼이 한 번도 나오지 않는다)", async () => {
+    let resolve!: (v: typeof SAVED) => void;
+    m.getAccount.mockReturnValue(new Promise((r) => { resolve = r; }));
+    render(<SettlementPanel />);
+    expect(screen.getByTestId("account-skeleton")).toBeInTheDocument();
+    expect(screen.queryByTestId("account-setup")).not.toBeInTheDocument();
+    resolve(SAVED);
+    expect(await screen.findByTestId("account-readonly")).toBeInTheDocument();
+    expect(screen.queryByTestId("account-setup")).not.toBeInTheDocument();
+  });
+
+  it("서버가 계좌 없음을 알려 주면(initialHasAccount=false) 재조회 없이 바로 폼을 보인다", () => {
+    render(<SettlementPanel initialHasAccount={false} />);
+    expect(screen.getByTestId("account-setup")).toBeInTheDocument();
+    expect(m.getAccount).not.toHaveBeenCalled();
+  });
+
+  it("Payout History는 별도 탭이고, 처음 열 때만 지급 내역을 불러온다", async () => {
+    m.getAccount.mockResolvedValue(SAVED);
+    render(<SettlementPanel initialHasAccount />);
+    await screen.findByTestId("account-readonly");
+    expect(m.periods).not.toHaveBeenCalled();
+    expect(screen.queryByText(/No confirmed payouts yet/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Payout History" }));
+    expect(await screen.findByText(/No confirmed payouts yet/)).toBeInTheDocument();
+    expect(screen.queryByTestId("account-readonly")).not.toBeInTheDocument();
+    expect(m.periods).toHaveBeenCalledTimes(1);
   });
 });

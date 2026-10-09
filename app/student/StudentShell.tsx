@@ -1,5 +1,6 @@
 "use client";
 
+import { useAccountMenuDismiss } from "@/app/components/useAccountMenuDismiss";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
@@ -177,6 +178,7 @@ export default function StudentShell({
     validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home"
   );
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  useAccountMenuDismiss(accountMenuOpen, setAccountMenuOpen, String(activeTab));
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
   // 2026-09-22(사용자 지시) — Credits는 별도 탭 대신 계정 메뉴 팝업으로 옮긴다.
   const [creditsModalOpen, setCreditsModalOpen] = useState(false);
@@ -274,6 +276,9 @@ export default function StudentShell({
         <div className="mt-auto pt-2 relative">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}
+            data-account-menu-trigger
+            aria-haspopup="menu"
+            aria-expanded={accountMenuOpen}
             className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-white hover:bg-white/10"
           >
             <div className="w-7 h-7 rounded-full bg-white/10 text-white font-extrabold text-[12px] flex items-center justify-center shrink-0">
@@ -283,7 +288,7 @@ export default function StudentShell({
             <NavIcon name="settings" className="w-4 h-4 shrink-0 text-[#97A9C8]" />
           </button>
           {accountMenuOpen && (
-            <div className="absolute bottom-full left-0 mb-1 w-full bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
+            <div data-account-menu role="menu" className="absolute bottom-full left-0 mb-1 w-full bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
               <button
                 onClick={() => {
                   setCreditsModalOpen(true);
@@ -357,12 +362,15 @@ export default function StudentShell({
         <div className="md:hidden flex items-center justify-end gap-4 border-b border-brand-border bg-white px-4 py-2.5 relative">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}
+            data-account-menu-trigger
+            aria-haspopup="menu"
+            aria-expanded={accountMenuOpen}
             className="text-[13px] font-semibold text-navy"
           >
             {studentName} ▾
           </button>
           {accountMenuOpen && (
-            <div className="absolute top-full right-4 mt-1 w-40 bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
+            <div data-account-menu role="menu" className="absolute top-full right-4 mt-1 w-40 bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
               <button
                 onClick={() => {
                   setCreditsModalOpen(true);

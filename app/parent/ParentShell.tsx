@@ -1,5 +1,6 @@
 "use client";
 
+import { useAccountMenuDismiss } from "@/app/components/useAccountMenuDismiss";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
@@ -156,6 +157,7 @@ export default function ParentShell({
     validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home"
   );
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  useAccountMenuDismiss(accountMenuOpen, setAccountMenuOpen, String(activeTab));
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
   const [messengerUnread, setMessengerUnread] = useState(0);
   // 상담 탭 산하 서브탭(신청/내역/메신저) — 메인 내비 항목 수를 늘리지 않고
@@ -331,6 +333,9 @@ export default function ParentShell({
         <div className="mt-auto pt-2 relative">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}
+            data-account-menu-trigger
+            aria-haspopup="menu"
+            aria-expanded={accountMenuOpen}
             className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-white hover:bg-white/10"
           >
             <div className="w-7 h-7 rounded-full bg-white/10 text-white font-extrabold text-[12px] flex items-center justify-center shrink-0">
@@ -340,7 +345,7 @@ export default function ParentShell({
             <NavIcon name="settings" className="w-4 h-4 shrink-0 text-[#97A9C8]" />
           </button>
           {accountMenuOpen && (
-            <div className="absolute bottom-full left-0 mb-1 w-full bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
+            <div data-account-menu role="menu" className="absolute bottom-full left-0 mb-1 w-full bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
               <button
                 onClick={() => {
                   setAccountMenuOpen(false);
@@ -444,12 +449,15 @@ export default function ParentShell({
           <div className="relative">
             <button
               onClick={() => setAccountMenuOpen((v) => !v)}
+            data-account-menu-trigger
+            aria-haspopup="menu"
+            aria-expanded={accountMenuOpen}
               className="text-[13px] font-semibold text-navy"
             >
               {parentName} ▾
             </button>
             {accountMenuOpen && (
-              <div className="absolute top-full right-0 mt-1 w-48 bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
+              <div data-account-menu role="menu" className="absolute top-full right-0 mt-1 w-48 bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
                 <button
                   onClick={() => {
                     setAccountMenuOpen(false);

@@ -207,3 +207,36 @@ describe("TeacherShell", () => {
     ).not.toHaveAttribute("aria-current");
   });
 });
+
+describe("TeacherShell — 계정 메뉴 닫힘", () => {
+  function trigger() {
+    return screen.getAllByRole("button").find((b) => b.hasAttribute("data-account-menu-trigger"))!;
+  }
+  it("두 번째 클릭·바깥 클릭·Escape(포커스 복귀)로 닫히고 aria-expanded가 따라간다", () => {
+    render(<TeacherShell {...baseProps} />);
+    const t = trigger();
+    fireEvent.click(t);
+    expect(screen.getAllByText("Log out").length).toBeGreaterThan(0);
+    expect(t).toHaveAttribute("aria-expanded", "true");
+    fireEvent.click(t);
+    expect(screen.queryAllByText("Log out").length).toBe(0);
+    expect(t).toHaveAttribute("aria-expanded", "false");
+
+    fireEvent.click(t);
+    fireEvent.mouseDown(document.body);
+    expect(screen.queryAllByText("Log out").length).toBe(0);
+
+    fireEvent.click(t);
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(screen.queryAllByText("Log out").length).toBe(0);
+    expect(document.activeElement?.hasAttribute("data-account-menu-trigger")).toBe(true);
+  });
+  it("메뉴 안쪽 누름은 바깥 클릭으로 치지 않고, 탭을 바꾸면 닫힌다", () => {
+    render(<TeacherShell {...baseProps} />);
+    fireEvent.click(trigger());
+    fireEvent.mouseDown(screen.getAllByText("Time zone settings")[0]);
+    expect(screen.getAllByText("Log out").length).toBeGreaterThan(0);
+    fireEvent.click(screen.getAllByRole("button", { name: /My Students/ })[0]);
+    expect(screen.queryAllByText("Log out").length).toBe(0);
+  });
+});
