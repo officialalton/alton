@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { selectFrq, selectMc, verify, type Cand } from "./ab-select";
+import { FULL_EXAM_FAMILY_CAP, selectFrq, selectMc, verify, type Cand } from "./ab-select";
 const mk = (i: number, o: Partial<Cand>): Cand => ({ key: `k${i}`, kind: "mc", unit: 1, skillCat: 1, calc: "not_allowed", family: `f${i}`, type: `t${i}`, graphRequired: false, screenVerified: true, renderOk: true, fullMockUses: 0, practiceUses: 0, ...o });
 // 합성 재고: 단원마다 A/B 충분, 그래프 필수 12, 스킬 범주 2·3 충분
 const pool: Cand[] = []; let n = 0;
@@ -34,5 +34,19 @@ describe("ab-select 결정성", () => {
   it("FRQ 도 입력 순서와 무관", () => {
     const f = ["6.2", "6.5", "8.4", "5.9", "7.7", "4.5", "3.2", "2.8", "1.5"].map((t, i) => mk(950 + i, { kind: "frq", calc: i < 3 ? "required" : "not_allowed", type: t }));
     expect(JSON.stringify(selectFrq(f))).toBe(JSON.stringify(selectFrq([...f].reverse())));
+  });
+});
+
+describe("풀 모의고사 문항군 상한 1(2026-10-09 오너 B안)", () => {
+  it("기본 상한은 1이고 같은 문항군 2개는 검증기가 실패시킨다", () => {
+    expect(FULL_EXAM_FAMILY_CAP).toBe(1);
+    const s = selectMc(pool)!; expect(new Set([...s.mcA, ...s.mcB].map((c) => c.family)).size).toBe(42);
+    const dup = { ...s, mcA: [{ ...s.mcA[1], family: s.mcA[0].family }, ...s.mcA.filter((_, i) => i !== 1)], frqA: [], frqB: [] };
+    expect(verify(dup).find((c) => c.id === "family_cap")!.ok).toBe(false);
+    expect(verify(dup, { familyCap: 2, minFamilies: 21, graphRequiredMin: 10 }).find((c) => c.id === "family_cap")!.ok).toBe(true);
+  });
+  it("문항군이 겹치는 재고에서는 상한 1이면 해가 없고 2이면 있다(부분 세트 규칙은 유지)", () => {
+    const p2 = pool.map((c, i) => ({ ...c, family: `g${Math.floor(i / 2)}` }));
+    expect(selectMc(p2)).toBeNull(); expect(selectMc(p2, { fullExamFamilyCap: 2 })).not.toBeNull();
   });
 });
