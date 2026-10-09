@@ -9,6 +9,7 @@ import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { chromium, type Page } from "@playwright/test";
+import { loadEnvLocal } from "../keywords/db";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { STOCK_FILES } from "./keys-file";
 import { scanRawMath, type RawMathHit } from "../../lib/ap-exam/raw-math-scan";
@@ -17,7 +18,9 @@ const SCAN = `(${scanRawMath.toString()})`;
 import { AUTOMATED_LIMITATION, itemContentHash, RESULT_CHECK, SCREEN_CHECKS, STIMULUS_CHECK, type ScreenCheck, type ScreenCheckName, type ScreenEntry } from "../../lib/ap-generation/verify-guard";
 
 const arg = (n: string, d: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : d; };
+loadEnvLocal();
 const DB_URL = process.env.SUPABASE_TEST_DB_URL ?? "";
+if (/:544\d\d\//.test(DB_URL)) { console.error("공유 스택(544xx)은 사용하지 않습니다. 격리 스택만. 중단."); process.exit(1); }
 if (!/^postgres(ql)?:\/\/[^@]*@(127\.0\.0\.1|localhost)[:/]/.test(DB_URL)) { console.error("SUPABASE_TEST_DB_URL 이 로컬 DB 가 아닙니다. 중단."); process.exit(1); }
 const BASE = arg("base-url", "http://localhost:3011");
 if (!/^http:\/\/(localhost|127\.0\.0\.1)[:/]/.test(BASE)) { console.error("--base-url 은 로컬이어야 합니다."); process.exit(1); }

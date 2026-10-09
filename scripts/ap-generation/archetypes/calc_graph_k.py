@@ -213,7 +213,7 @@ def c_bc_euler_calc(rng):
     ds = [("Uses the x-value at the right end of each step in the slope instead of the left end.", right), ("Takes only two steps instead of three.", two),
           ("Does not update y between steps: every step uses sin(y0).", noupd), ("Uses y instead of sin y in the differential equation.", nosin)]
     stem = f"The function $y=f(x)$ satisfies $f(0)={y0}$ and $\\dfrac{{dy}}{{dx}}=x+\\sin y$. Euler's method with step size ${h}$ and 3 steps starting at $x=0$ is used to approximate $f({3*h:g})$. What is the approximation?"
-    key = Opt(dec(key_v), True, "Update (x, y) three times: y_{k+1} = y_k + h (x_k + sin y_k) using the slope at the left end, with a calculator.", key_v)
+    key = Opt(dec(key_v), True, "Update (x, y) three times: $y_{k+1} = y_k + h\\,(x_k + \\sin y_k)$ using the slope at the left end, with a calculator.", key_v)
     bpr = _nb("c_bc_euler_calc", "7.5", "1.E", "Apply Euler's method with a nonlinear slope function using a calculator",
               ["Compute the slope at the current point from the differential equation", "Update y with y + h times the slope and advance x by h", "Repeat for the required number of steps using the updated y"],
               [("Euler's method uses the slope at the left end of each step", "definition of Euler's method")],

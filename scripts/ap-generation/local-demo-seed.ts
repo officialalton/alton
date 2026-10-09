@@ -5,19 +5,26 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
-import { connect } from "../keywords/db";
+import { connect, loadEnvLocal } from "../keywords/db";
 import { convertCandidate, type CandidateRow } from "../../lib/ap-exam/convert-run";
 import { AP_LAYOUTS, AP_SUBJECT_NAME } from "../../lib/ap-exam/layouts";
 import { readKeysFile, STOCK_FILES } from "./keys-file";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 
 const STATE = path.resolve(process.cwd(), "tmp/ap-demo-state.json");
-const DB_URL = process.env.SUPABASE_TEST_DB_URL ?? "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
+loadEnvLocal(); // SUPABASE_TEST_DB_URL 을 .env.local 에서도 읽는다(connect() 와 같은 순서 — 먼저 읽지 않으면 DB 쪽만 다른 스택을 향하는 사고가 난다).
+// 공유 스택(544xx)으로 가는 기본값을 두지 않는다: 대상 DB 는 격리 스택(545xx 등)을 명시해야 하고 API URL 과 같은 스택이어야 한다.
+const DB_URL = process.env.SUPABASE_TEST_DB_URL ?? "";
+{ const dbPort = /@(?:127\.0\.0\.1|localhost):(\d+)\//.exec(DB_URL)?.[1]; const api = /^http:\/\/(?:127\.0\.0\.1|localhost):(\d+)/.exec(process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL ?? "")?.[1];
+  if (!dbPort || !api) { console.error("SUPABASE_TEST_DB_URL(로컬 격리 DB)과 로컬 NEXT_PUBLIC_SUPABASE_URL 이 필요합니다. 중단."); process.exit(1); }
+  if (/^544\d\d$/.test(dbPort) || /^544\d\d$/.test(api)) { console.error("공유 스택(544xx)은 사용하지 않습니다. 격리 스택(scripts/dev/isolated-stack.sh)만. 중단."); process.exit(1); }
+  if (Number(dbPort) - Number(api) !== 1) { console.error(`DB 포트(${dbPort})와 API 포트(${api})가 같은 격리 스택이 아닙니다(API+1 = DB). 중단.`); process.exit(1); } }
 const psql = (sql: string) => execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], { encoding: "utf-8" }).trim();
 const q = (t: string) => `'${t.replace(/'/g, "''")}'`;
 
 const SUBJECTS: Record<string, string> = { ap_calculus_ab: "AP Calculus AB", ap_calculus_bc: "AP Calculus BC", ap_biology: "AP Biology", ap_microeconomics: "AP Microeconomics" };
 const KEYS_FILE = process.argv.includes("--keys-file") ? process.argv[process.argv.indexOf("--keys-file") + 1] : ""; // 선택 목록(JSON 배열 또는 줄 단위 stockKey) → 공식 풀 레이아웃 세트 하나
+const PRACTICE = process.argv.includes("--practice-sets"); // 선택 목록을 공식 풀 레이아웃 대신 연습 세트(MC 20개·FRQ 6개 묶음)로 쪼갠다 — 구성 게이트에 걸리지 않고 신규 항목 화면 증거만 만든다.
 const ALL = process.argv.includes("--all-eligible") || !!KEYS_FILE; // 화면 검증용: 검증 기록 대상(auto_passed·결함 없음·게이트 통과) 전부 + 5지선다 UI 점검용 미세경제 몇 문항
 
 async function seed() {
@@ -76,7 +83,7 @@ async function seed() {
     state.sets.push(id);
     console.log("세트", name, id);
   };
-  if (KEYS_FILE) {
+  if (KEYS_FILE && !PRACTICE) {
     // 선택 목록으로 공식 풀 레이아웃(AB: MC Part A 29 계산기 불가 + Part B 13 필수, FRQ A 2 + B 4)을 채운다. 구성이 안 맞으면 공개 게이트가 거절한다(보고용).
     const sub = chosen[0].apSubjectCode; const layout = AP_LAYOUTS[sub];
     const keyMap = new Map(chosen.map((c) => [`${RUN}-${c.stockKey.replace(/[^A-Za-z0-9_.-]/g, "_")}`, c.stockKey]));
@@ -92,7 +99,7 @@ async function seed() {
     await mk("ap_calculus_ab", "mc_practice", "AP Calculus AB MC Practice (demo)", "free");
     await mk("ap_biology", "full_practice", "AP Biology Full Practice (demo)", "free");
     await mk("ap_microeconomics", "mc_practice", "AP Microeconomics MC Practice (demo)", "tutoring");
-  } else if (!KEYS_FILE) {
+  } else {
     // 과목별로 객관식 20문항씩, FRQ 는 6개씩 끊어 세트를 만든다(전부 free 등급: 한 학생 계정으로 모두 응시).
     for (const code of Object.keys(SUBJECTS)) {
       const cnt = (k: string) => Number(psql(`select count(*) from ap_candidate_items where run_id = ${q(RUN)} and ap_subject_code = ${q(code)} and purpose = 'mock_exam' and kind = ${q(k)};`));
