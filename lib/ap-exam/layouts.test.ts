@@ -48,3 +48,22 @@ describe("단원 안내", () => {
     expect(apCoverageLines({ subject: "ap_calculus_ab", units: [], label: "mc_practice" })).toEqual([]);
   });
 });
+
+import { apSectionDisplayLabel, isShortFrqLayout } from "./layouts";
+describe("짧은 FRQ 연습 세트 표기(공식 Part A/B 로 보이지 않게)", () => {
+  const off = AP_LAYOUTS.ap_calculus_ab.filter((x) => x.kind === "frq");
+  const one = [{ ...off[0], count: 4, minutes: 60 }];
+  it("공식 6문항 구성은 공식 라벨 그대로, 그 외는 Practice Section", () => {
+    expect(isShortFrqLayout(off)).toBe(false); expect(isShortFrqLayout(one)).toBe(true);
+    expect(apSectionDisplayLabel(off[0], off)).toBe(off[0].label);
+    expect(apSectionDisplayLabel(one[0], one)).toBe("Practice Section: Free Response (calculator allowed)");
+    const two = [{ ...off[0], count: 1, minutes: 15 }, { ...off[1], count: 2, minutes: 30 }];
+    expect(apSectionDisplayLabel(two[1], two)).toBe("Practice Section 2: Free Response (no calculator)");
+  });
+  it("안내: 4문항·60분 단일 구간 → Practice Section (…): calculator allowed.", () => {
+    const g = apGuidanceLines({ subject: "ap_calculus_ab", layout: one });
+    expect(g[1]).toBe("Practice Section (4 questions, 60 min): calculator allowed.");
+    expect(g.join(" ")).not.toMatch(/Part [AB]/);
+    expect(apGuidanceLines({ subject: "ap_calculus_ab", layout: off })[1]).toBe("Part A (2 questions, 30 min): calculator allowed. Part B (4 questions, 60 min): no calculator.");
+  });
+});

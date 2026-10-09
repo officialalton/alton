@@ -7,6 +7,8 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { connect } from "../keywords/db";
 import { convertCandidate, type CandidateRow } from "../../lib/ap-exam/convert-run";
+import { AP_LAYOUTS, AP_SUBJECT_NAME } from "../../lib/ap-exam/layouts";
+import { readKeysFile, STOCK_FILES } from "./keys-file";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 
 const STATE = path.resolve(process.cwd(), "tmp/ap-demo-state.json");
@@ -15,13 +17,14 @@ const psql = (sql: string) => execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP
 const q = (t: string) => `'${t.replace(/'/g, "''")}'`;
 
 const SUBJECTS: Record<string, string> = { ap_calculus_ab: "AP Calculus AB", ap_calculus_bc: "AP Calculus BC", ap_biology: "AP Biology", ap_microeconomics: "AP Microeconomics" };
-const ALL = process.argv.includes("--all-eligible"); // 화면 검증용: 검증 기록 대상(auto_passed·결함 없음·게이트 통과) 전부 + 5지선다 UI 점검용 미세경제 몇 문항
+const KEYS_FILE = process.argv.includes("--keys-file") ? process.argv[process.argv.indexOf("--keys-file") + 1] : ""; // 선택 목록(JSON 배열 또는 줄 단위 stockKey) → 공식 풀 레이아웃 세트 하나
+const ALL = process.argv.includes("--all-eligible") || !!KEYS_FILE; // 화면 검증용: 검증 기록 대상(auto_passed·결함 없음·게이트 통과) 전부 + 5지선다 UI 점검용 미세경제 몇 문항
 
 async function seed() {
   const conn = await connect(); if (!conn || conn.target !== "local") throw new Error("로컬 DB 에서만 실행합니다.");
   const RUN = `apdemo${Date.now().toString(36)}`;
   const readItems = (f: string) => JSON.parse(readFileSync(path.resolve(process.cwd(), f), "utf-8"));
-  const items = [...readItems("data/ap/stock/items.json"), ...(ALL ? readItems("data/ap/stock/s1a-items.json") : [])] as (CandidateRow & { validation: string; keywordCode: string; difficultyProvisional: string; run: string; stockKey: string; calculator: string })[];
+  const items = [...readItems("data/ap/stock/items.json"), ...(ALL ? STOCK_FILES.slice(1).flatMap((f) => { try { return readItems(`data/ap/stock/${f}.json`); } catch { return []; } }) : [])] as (CandidateRow & { validation: string; keywordCode: string; difficultyProvisional: string; run: string; stockKey: string; calculator: string })[];
   const state: { run: string; students: Record<string, string>; sets: string[] } = { run: RUN, students: {}, sets: [] };
   const admin = psql(`select id from profiles where role = 'admin' limit 1;`);
   const subj: Record<string, string> = {};
@@ -39,6 +42,13 @@ async function seed() {
     chosen.length = 0;
     chosen.push(...items.filter((c) => c.validation === "auto_passed" && !scan.get(c.stockKey) && gateCandidate(c).status !== "fail"));
   }
+  let SEL_SECTION = new Map<string, string>(); // 선택 목록이 정한 섹션(없으면 계산기 필드로 배정)
+  if (KEYS_FILE) {
+    const { keys, sectionOf: selSection } = readKeysFile(KEYS_FILE); SEL_SECTION = selSection;
+    const by = new Map(items.map((c) => [c.stockKey, c]));
+    const missing = keys.filter((k) => !by.has(k)); if (missing.length) throw new Error(`재고에 없는 키: ${missing.join(", ")}`);
+    chosen.length = 0; chosen.push(...keys.map((k) => by.get(k)!));
+  }
   const lessonOne = ALL ? [] : pick("ap_calculus_ab", "mc", (c) => gateCandidate(c).need === "text_only", 3).slice(1, 2);
   const byKey = new Map<string, string>(); // stockKey -> problem ids
   for (const [c, purpose] of [...chosen.map((x) => [x, "mock_exam"] as const), ...lessonOne.map((x) => [x, "lesson"] as const)]) {
@@ -53,6 +63,7 @@ async function seed() {
   }
   // 세트: 과목별(데모용 소형 구조 — 공식 문항 수 아님)
   const mk = async (code: string, label: "mc_practice" | "full_practice", name: string, tier: "free" | "tutoring", slice?: { mc: [number, number]; frq: [number, number] }) => {
+    const keyMap = new Map(chosen.map((c) => [`${RUN}-${c.stockKey.replace(/[^A-Za-z0-9_.-]/g, "_")}`, c.stockKey]));
     const rows = psql(`select i.candidate_key || '|' || cp.problem_id || '|' || cp.problem_version_id || '|' || i.kind || '|' || i.keyword_code from ap_candidate_items i join ap_candidate_problems cp on cp.candidate_key = i.candidate_key where i.run_id = ${q(RUN)} and i.ap_subject_code = ${q(code)} and i.purpose = 'mock_exam' order by i.candidate_key;`).split("\n").filter(Boolean).map((l) => l.split("|"));
     const mc = rows.filter((r) => r[3] === "mc").slice(...(slice?.mc ?? [0, 1e9])), frq = rows.filter((r) => r[3] === "frq_bundle").slice(...(slice?.frq ?? [0, 1e9]));
     const sections = [...(mc.length ? [{ key: "ap_mc", kind: "mc", label: "Section I: Multiple Choice", minutes: 25, count: mc.length, calculator: code === "ap_calculus_ab" ? "not_allowed" : "allowed", options: code === "ap_microeconomics" ? 5 : 4 }] : []), ...(label === "full_practice" && frq.length ? [{ key: "ap_frq", kind: "frq", label: "Section II: Free Response", minutes: 20, count: frq.length, calculator: "allowed" }] : [])];
@@ -65,11 +76,23 @@ async function seed() {
     state.sets.push(id);
     console.log("세트", name, id);
   };
-  if (!ALL) {
+  if (KEYS_FILE) {
+    // 선택 목록으로 공식 풀 레이아웃(AB: MC Part A 29 계산기 불가 + Part B 13 필수, FRQ A 2 + B 4)을 채운다. 구성이 안 맞으면 공개 게이트가 거절한다(보고용).
+    const sub = chosen[0].apSubjectCode; const layout = AP_LAYOUTS[sub];
+    const keyMap = new Map(chosen.map((c) => [`${RUN}-${c.stockKey.replace(/[^A-Za-z0-9_.-]/g, "_")}`, c.stockKey]));
+    const rows = psql(`select i.candidate_key || '|' || cp.problem_id || '|' || cp.problem_version_id || '|' || i.kind || '|' || i.keyword_code || '|' || i.calculator from ap_candidate_items i join ap_candidate_problems cp on cp.candidate_key = i.candidate_key where i.run_id = ${q(RUN)} and i.purpose = 'mock_exam' order by i.candidate_key;`).split("\n").filter(Boolean).map((l) => l.split("|"));
+    const sectionOf = (r: string[]) => SEL_SECTION.get(keyMap.get(r[0]) ?? "") ?? (r[3] === "mc" ? (r[5] === "required" ? "ap_mc_b" : "ap_mc_a") : (r[5] === "not_allowed" ? "ap_frq_b" : "ap_frq_a"));
+    const id = psql(`insert into mock_exam_sets (name, difficulty_tier, status, format, readiness_status, exam_program, ap_subject, ap_label, section_layout) values (${q(`${RUN}-${AP_SUBJECT_NAME[sub]} Full Practice Exam (selection)`)}, 'standard', 'draft', 'ap_fixed', 'not_applicable', 'ap', ${q(sub)}, 'full_practice', ${q(JSON.stringify({ sections: layout }))}::jsonb) returning id;`);
+    const pos: Record<string, number> = {};
+    for (const r of rows) { const sec = sectionOf(r); pos[sec] = (pos[sec] ?? 0) + 1; psql(`insert into mock_exam_set_items (exam_set_id, section, position, problem_id, problem_version_id, sat_domain, difficulty) values ('${id}', ${q(sec)}, ${pos[sec]}, '${r[1]}', '${r[2]}', ${q(`ap:${r[4]}`)}, 'medium');`); }
+    console.log("선택 구성:", JSON.stringify(pos), "공식:", JSON.stringify(Object.fromEntries(layout.map((x) => [x.key, x.count]))));
+    try { psql(`update mock_exam_sets set status = 'published', published_at = now(), access_tier = 'free' where id = '${id}';`); console.log("세트 공개(공식 풀 구성 충족)", id); } catch (e) { console.log("공개 게이트 거절(구성 불충족):", String((e as { stderr?: string }).stderr ?? e).split("\n")[0]); }
+    state.sets.push(id);
+  } else if (!ALL) {
     await mk("ap_calculus_ab", "mc_practice", "AP Calculus AB MC Practice (demo)", "free");
     await mk("ap_biology", "full_practice", "AP Biology Full Practice (demo)", "free");
     await mk("ap_microeconomics", "mc_practice", "AP Microeconomics MC Practice (demo)", "tutoring");
-  } else {
+  } else if (!KEYS_FILE) {
     // 과목별로 객관식 20문항씩, FRQ 는 6개씩 끊어 세트를 만든다(전부 free 등급: 한 학생 계정으로 모두 응시).
     for (const code of Object.keys(SUBJECTS)) {
       const cnt = (k: string) => Number(psql(`select count(*) from ap_candidate_items where run_id = ${q(RUN)} and ap_subject_code = ${q(code)} and purpose = 'mock_exam' and kind = ${q(k)};`));

@@ -200,3 +200,13 @@ describe("결과 화면 보강", () => {
     expect(screen.getByRole("link", { name: "Attempt 1" })).toHaveAttribute("href", "/student/mock-exam/att1");
   });
 });
+
+describe("짧은 FRQ 연습 세트의 섹션 탭", () => {
+  it("공식 Part A 처럼 보이지 않는다: Practice Section: Free Response (calculator allowed)", () => {
+    const one = [{ ...AP_LAYOUTS.ap_calculus_ab.find((x) => x.key === "ap_frq_a")!, count: 4, minutes: 60, label: "Section II, Part A: Free Response (calculator)" }];
+    render(<ApExamTakeClient attempt={base([item("f1", "ap_frq_a", { format: "essay", options: null, parts: frqParts })], { sectionLayout: one, apLabel: "frq_practice", examSetName: "AP Calculus AB — Free-Response Practice" })} />);
+    expect(screen.getByTestId("ap-section-ap_frq_a")).toHaveTextContent("Practice Section: Free Response (calculator allowed)");
+    expect(screen.getByTestId("ap-section-ap_frq_a").textContent).not.toMatch(/Part A/);
+    expect(screen.getAllByTestId("ap-set-guidance").map((e) => e.textContent).join(" ")).toContain("Practice Section (4 questions, 60 min): calculator allowed.");
+  });
+});

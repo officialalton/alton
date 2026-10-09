@@ -143,12 +143,17 @@ export function apGuidanceLines(o: { subject?: string | null; layout?: (LayoutLi
     const a = secOf("ap_frq_a"), b = secOf("ap_frq_b");
     const n = (a?.count ?? 0) + (b?.count ?? 0), mins = (a?.minutes ?? 0) + (b?.minutes ?? 0);
     const official = a?.count === 2 && b?.count === 4;
-    const part = (x: typeof a, name: string) => (x ? `${name} (${x.count} question${x.count === 1 ? "" : "s"}, ${x.minutes} min): ${x.calculator === "not_allowed" ? "no calculator" : "calculator allowed"}.` : "");
+    const calc = (x: { calculator?: ApCalculator }) => (x.calculator === "not_allowed" ? "no calculator" : "calculator allowed");
+    const q = (x: { count: number }) => `${x.count} question${x.count === 1 ? "" : "s"}`;
+    if (official) return [
+      `Practice for ${exam} Section II: ${n} free-response questions in ${mins} minutes.`,
+      `Part A (${q(a!)}, ${a!.minutes} min): ${calc(a!)}. Part B (${q(b!)}, ${b!.minutes} min): ${calc(b!)}.`,
+    ];
+    // 짧은 연습 세트: 공식 Part A/B 로 보이지 않게 "Practice Section" 으로 부른다.
+    const secs = [a, b].filter(Boolean) as { count: number; minutes: number; calculator?: ApCalculator }[];
     return [
-      official
-        ? `Practice for ${exam} Section II: ${n} free-response questions in ${mins} minutes.`
-        : `Free-response practice: ${n} question${n === 1 ? "" : "s"} in ${mins} minutes. This is a shorter set, not the official ${exam} Section II (6 questions, 90 minutes).`,
-      [part(a, "Part A"), part(b, "Part B")].filter(Boolean).join(" "),
+      `Free-response practice: ${n} question${n === 1 ? "" : "s"} in ${mins} minutes. This is a shorter set, not the official ${exam} Section II (6 questions, 90 minutes).`,
+      secs.map((x, i) => `Practice Section${secs.length > 1 ? ` ${i + 1}` : ""} (${q(x)}, ${x.minutes} min): ${calc(x)}.`).join(" "),
     ];
   }
   return layout.map((s) => `${(s as { label?: string }).label ?? s.key}: ${s.count} questions · ${s.minutes} min${CALC_RULE[s.calculator ?? "na"] ? ` · ${CALC_RULE[s.calculator ?? "na"].replace(/\.$/, "")}` : ""}`);
@@ -171,4 +176,18 @@ export function apCoverageLines(o: { subject?: string | null; units?: string[] |
       ? `Your result reflects only ${units.length === 1 ? "this unit" : "these units"}. It is not a measure of your achievement across the whole ${exam} course.`
       : `This practice set covers only ${units.length === 1 ? "this unit" : "these units"}, so a result on it should not be read as achievement across the whole ${exam} course.`,
   ];
+}
+
+/** 짧은 FRQ 연습 세트(공식 6문항·Part A 2 + Part B 4 가 아닌 구성)인가. */
+export function isShortFrqLayout(layout: LayoutLike | null | undefined): boolean {
+  if (apPartialOfLayout(layout) !== "frq") return false;
+  const a = layout!.find((x) => x.key === "ap_frq_a"), b = layout!.find((x) => x.key === "ap_frq_b");
+  return !(a?.count === 2 && b?.count === 4);
+}
+/** 응시 화면 섹션 탭 이름. 짧은 FRQ 연습 세트는 공식 "Part A/B" 로 보이지 않게 "Practice Section: Free Response (…)" 로 보인다(공식 풀 시험은 DB 라벨 그대로). */
+export function apSectionDisplayLabel(sec: { key: string; label: string; calculator?: ApCalculator }, layout: LayoutLike | null | undefined): string {
+  if (!isShortFrqLayout(layout)) return sec.label;
+  const idx = layout!.findIndex((x) => x.key === sec.key);
+  const calc = sec.calculator === "not_allowed" ? "no calculator" : "calculator allowed";
+  return `Practice Section${layout!.length > 1 ? ` ${idx + 1}` : ""}: Free Response (${calc})`;
 }

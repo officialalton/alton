@@ -9,8 +9,9 @@ import { itemContentHash } from "../../lib/ap-generation/verify-guard";
 
 const OUT = path.resolve(process.cwd(), "data/ap/render-check");
 // 재고(items.json) + 보조 배치(s1a-items.json, 있으면). 보조 후보도 렌더 보고서(contentHash 포함)에 들어가야 화면 검증·기록 대상이 된다.
-const SUPP = "data/ap/stock/s1a-items.json";
-const items = [...(JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/items.json"), "utf-8")) as Parameters<typeof gateCandidate>[0][]), ...(existsSync(path.resolve(process.cwd(), SUPP)) ? (JSON.parse(readFileSync(path.resolve(process.cwd(), SUPP), "utf-8")) as Parameters<typeof gateCandidate>[0][]) : [])];
+const SUPP_FILES = ["s1a-items", "v1ab-items", "v45ab-items"].map((f) => `data/ap/stock/${f}.json`).filter((f) => existsSync(path.resolve(process.cwd(), f))); // 보조·후속 배치(없으면 건너뜀)
+const SUPP = SUPP_FILES[0] ?? "";
+const items = [...(JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/items.json"), "utf-8")) as Parameters<typeof gateCandidate>[0][]), ...SUPP_FILES.flatMap((f) => JSON.parse(readFileSync(path.resolve(process.cwd(), f), "utf-8")) as Parameters<typeof gateCandidate>[0][])];
 const safe = (s: string) => s.replace(/[^A-Za-z0-9_.-]+/g, "_");
 
 mkdirSync(OUT, { recursive: true });
@@ -50,7 +51,7 @@ for (const s of [...new Set(results.map((r) => r.subject))]) bySubject[s] = summ
 
 const report = {
   generatedAt: new Date().toISOString(),
-  universe: `data/ap/stock/items.json${existsSync(path.resolve(process.cwd(), SUPP)) ? " + s1a-items.json" : ""} (${items.length}행)`,
+  universe: `data/ap/stock/items.json${SUPP_FILES.length ? " + " + SUPP_FILES.map((f) => path.basename(f)).join(" + ") : ""} (${items.length}행)`,
   all: summarize(results),
   liveStates: summarize(results.filter(live)),
   byType: [...byType.values()].sort((a, b) => a.type.localeCompare(b.type)),

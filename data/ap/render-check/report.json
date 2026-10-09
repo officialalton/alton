@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-09T01:13:35.316Z",
- "universe": "data/ap/stock/items.json + s1a-items.json (851행)",
+ "generatedAt": "2026-10-09T05:30:56.544Z",
+ "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json (884행)",
  "all": {
-  "total": 851,
-  "pass": 571,
+  "total": 884,
+  "pass": 579,
   "fail": 1,
-  "notApplicable": 279
+  "notApplicable": 304
  },
  "liveStates": {
-  "total": 429,
-  "pass": 241,
+  "total": 460,
+  "pass": 249,
   "fail": 0,
-  "notApplicable": 188
+  "notApplicable": 211
  },
  "byType": [
   {
@@ -44,8 +44,8 @@
   },
   {
    "type": "ap_graph:calc_function_or_derivative",
-   "total": 30,
-   "pass": 30,
+   "total": 38,
+   "pass": 38,
    "fail": 0,
    "notApplicable": 0
   },
@@ -107,10 +107,10 @@
   },
   {
    "type": "none",
-   "total": 214,
+   "total": 232,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 214
+   "notApplicable": 232
   },
   {
    "type": "none(diagram_text_only)",
@@ -121,18 +121,18 @@
   },
   {
    "type": "text",
-   "total": 64,
+   "total": 71,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 64
+   "notApplicable": 71
   }
  ],
  "bySubject": {
   "ap_calculus_ab": {
-   "total": 408,
-   "pass": 210,
+   "total": 441,
+   "pass": 218,
    "fail": 1,
-   "notApplicable": 197
+   "notApplicable": 222
   },
   "ap_biology": {
    "total": 200,
@@ -154,8 +154,8 @@
   }
  },
  "figureNeed": {
-  "required": 520,
-  "text_only": 279,
+  "required": 528,
+  "text_only": 304,
   "supporting": 52
  },
  "errorCodes": {
@@ -173,7 +173,7 @@
   "table_no_title": 107,
   "axis_units_missing": 15,
   "text_data_not_in_stem": 1,
-  "axis_range_derived": 12
+  "axis_range_derived": 20
  },
  "results": [
   {
@@ -15108,6 +15108,516 @@
     }
    ],
    "alt": "Graph of f, g. Horizontal axis: x, 0 to 2.75. Vertical axis: y, -1 to 4."
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m01-k0",
+   "contentHash": "ac5b76982cb5c109cf27d60ee7e25714e48f27776b0edf69d6ed777ae951efd8",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m01-k1",
+   "contentHash": "53125c2d39dbb4fa03699e313af36f239f7fe3ac843c7c1b20217d565afe5fe4",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m01-k2",
+   "contentHash": "55249d9985cb77c8b72f345d3a91e99737a7904a6221621f689e3a4eb0422c87",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m01-k3",
+   "contentHash": "454ad5183a1fac97b02222b06b89b2624da77aaf8ec8f73bb78ea73af97dc6e1",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m01-k4",
+   "contentHash": "4e4ac7c59db869509fa5989fdc4f07c23240bc99b63f84ec100ec445b9abb28a",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m01-k5",
+   "contentHash": "bbfb9a814d16a08cdf31b9fda3d15b740250fd738739d230fa2a483665ae369b",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m02-k0",
+   "contentHash": "b86c89985c7a4fcdf62ce83d6506de4cdbf8c9714d37c541c81f8df3cb6b310f",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m02-k1",
+   "contentHash": "b0db16f3c9555982c9769b7ee92cea5aa6545cc02df5cd205f8ac031be921c02",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m02-k2",
+   "contentHash": "db6b007922f950bc5122f40c3c6edfa991be8b59c8b5c802ebf58111794b702c",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m02-k3",
+   "contentHash": "bced5f794192cff4f867356dd28bb2b1c481761410f85c52c2fff314fb0a973e",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m02-k4",
+   "contentHash": "df57d67c1ccd555a1365d6879e529f3e3659017a88977b8cf2eb66ca26b5e1b5",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m02-k5",
+   "contentHash": "1fbbdb9c6cc97991a327fb158c6f7d93526d5390000987f8be50834b9ca86343",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m03-k0",
+   "contentHash": "4f4e5d57ff34f7918e32291df0eb5f4a157069c34290a573c4ee940ca7de2e6e",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m03-k1",
+   "contentHash": "831c3b88278db8b0de73adc8e56850d5c5325279a3ed7cf9547176ca78da6c89",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m03-k2",
+   "contentHash": "314ba726c9738b8bcbceb4fa7f00107eec344dfc16f5e207ed25eda89f63be3d",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m03-k3",
+   "contentHash": "c226bebc3d0a4a45b20e39a623bcfac5cc2eeb8345ac5a743af0f668ec824aed",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m03-k4",
+   "contentHash": "1dc7faa97d86c4f911c43915a23e1c8e7e9389315d69ed00618328f7e8297927",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v1ab-final:ap_calculus_ab-m03-k5",
+   "contentHash": "3a3954e6f0e0b90d9b7d9798473eea39722c54bbe67f6be10bfd08d79a8fb5b2",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v45ab-final:v4-ab:ap_calculus_ab-m01-k0",
+   "contentHash": "532c3529e409c3a90ab908da33eeaae7c40254bb26a0549b4403659b796acce1",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: f'(x), -5 to 5."
+  },
+  {
+   "key": "v45ab-final:v4-ab:ap_calculus_ab-m01-k1",
+   "contentHash": "162a64bcbe625941d617fb7552b53df0d056b4958ee7c8dc49c5773623edfc20",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: f'(x), -3 to 5."
+  },
+  {
+   "key": "v45ab-final:v4-ab:ap_calculus_ab-m01-k2",
+   "contentHash": "d3519fd113b056e567a77246b225b4a97c851306236908a3fd76a97ad3ed8bc8",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: f'(x), -3 to 3."
+  },
+  {
+   "key": "v45ab-final:v4-ab:ap_calculus_ab-m01-k3",
+   "contentHash": "279baa50202eade955cb199d41eeb3172dab2e4bd719854cc2b68daa047ad70f",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: f'(x), -5 to 3."
+  },
+  {
+   "key": "v45ab-final:v4-ab:ap_calculus_ab-m02-k0",
+   "contentHash": "7abc0c96b8d60ece7dae66d4348e6d0e0ae4cbaf5cb36c2832e604396f4464e8",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: f(x), -3 to 7."
+  },
+  {
+   "key": "v45ab-final:v4-ab:ap_calculus_ab-m02-k1",
+   "contentHash": "b44f627174132613975e41b859be5cd3414fdca119ee35bf323706c9bf8adc64",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: f(x), -5 to 1."
+  },
+  {
+   "key": "v45ab-final:v4-ab:ap_calculus_ab-m02-k2",
+   "contentHash": "b5b82e023506b06719db6a325fea7009809f0b4479097777e458e31922d0fa95",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: f(x), -3 to 7."
+  },
+  {
+   "key": "v45ab-final:v4-ab:ap_calculus_ab-m02-k3",
+   "contentHash": "6a4a47992523a05910bc104a37049827964f6bbd83e293041b7a0ca858621dcf",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: f(x), -5 to 7."
+  },
+  {
+   "key": "v45ab-final:v4-ab:ap_calculus_ab-f02-k0",
+   "contentHash": "2dfd9135083ccfe3de0376fcc2caa96b21b735e2bb7a0111e2b664fa28eba087",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v45ab-final:v4-ab:ap_calculus_ab-f02-k1",
+   "contentHash": "c1fd9d3441e33103b4a24e269dd9c2d30af9eecb8431730044e2318bf45c58b6",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v45ab-final:v4-ab:ap_calculus_ab-f02-k2",
+   "contentHash": "3730200c4d9d0064daeee391c031f49cfe6c9fcf3ac65fc6c1b2561113daf3d1",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v45ab-final:v5-ab:ap_calculus_ab-f01-k0",
+   "contentHash": "4171f29738b3ea14ffdc2a513be6f4e4717ed618efd658e9dcab05a68e628df9",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v45ab-final:v5-ab:ap_calculus_ab-f01-k1",
+   "contentHash": "7911f24c80660a7d4c8952c675a1e9c4c63cf69adaa4dbec1e49009d36137537",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v45ab-final:v5-ab:ap_calculus_ab-f02-k0",
+   "contentHash": "12a4ebd843e91dd5d001dc426354a16ef14f4e2341d238a4a35258e7481bf2bb",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "v45ab-final:v5-ab:ap_calculus_ab-f02-k1",
+   "contentHash": "4b1687f2e2304f3cea1506057bd3a3ea2c5946bbed4ce935d3debd638e3a1996",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
   }
  ]
 }

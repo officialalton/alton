@@ -26,6 +26,11 @@ export function bioDataShortDesignChecks(p: Json): ArchIssue[] {
   if (!wa || JSON.stringify([...(wa.concept_level_parts ?? [])].sort()) !== JSON.stringify([...conceptParts].sort())) add("concept_attribution_mismatch", "weakness_attribution.concept_level_parts 가 개념 파트와 다르다");
   for (const x of parts) { if (!x.concept_needed && (x.topic_role !== "context" || x.evidence_role !== "data_skill")) add("data_part_not_marked_context", `파트 ${x.label}: 데이터 스킬 파트는 topic_role=context, evidence_role=data_skill 이어야 한다`); if (wa && wa.skill_level && JSON.stringify(wa.skill_level[x.label]) !== JSON.stringify((x.skill_codes ?? [])[0])) add("skill_level_attribution_mismatch", `파트 ${x.label}: 스킬 귀속 ${wa.skill_level[x.label]} ≠ 파트 스킬 ${(x.skill_codes ?? []).join("/")}`); }
   if (!/only in part|only part/i.test(p.blueprint?.concept ?? "")) add("bundle_overclaims_topic", "설계도 개념 설명이 토픽 개념을 D 에서만 평가한다고 밝히지 않는다(번들이 토픽 3.2 를 넓게 평가한다고 표기 금지)");
+  // 온도 방향 일치(v10): D 모범 답·허용 표현의 기제가 조건의 방향과 맞아야 한다(최적보다 뜨거운 수준 -> 변성, 차가운 수준 -> 충돌 감소). 방향이 섞이면 결함.
+  const Dp = parts.find((x) => x.concept_needed); const mm = /lower at (-?[\d.]+) °C than at (-?[\d.]+) °C/.exec(Dp?.prompt ?? "");
+  if (Dp && mm) { const ans = [Dp.model_answer, ...(Dp.rubric_rows ?? []).flatMap((r: Json) => r.alt_solutions ?? [])].join(" "); const hot = parseFloat(mm[1]) > parseFloat(mm[2]);
+    if (hot && /too cold|fewer (effective )?(enzyme-substrate )?collisions|slows molecular/i.test(ans)) add("temp_direction_mismatch", "D: 최적보다 뜨거운 수준인데 차가운 쪽 기제(충돌 감소)가 섞여 있다");
+    if (!hot && /denatur/i.test(ans)) add("temp_direction_mismatch", "D: 최적보다 차가운 수준인데 변성 기제가 섞여 있다"); }
   return out;
 }
 /** 약점 분석 훅: 이 번들에서 개념 수준(토픽) 증거에 기여하는 파트. 데이터 파트 점수를 개념 숙달로 합산하지 않는다. */

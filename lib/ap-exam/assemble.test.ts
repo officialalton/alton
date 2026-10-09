@@ -149,6 +149,7 @@ describe("짧은 Free-Response 연습 세트(2~4 묶음)", () => {
     const p = planFrqShortSet("ap_calculus_ab", pool);
     expect(p.ok).toBe(true); expect(p.composition.bundles).toBe(3); expect(p.composition.families).toBe(3);
     expect(p.layoutSections.map((s) => [s.key, s.count, s.minutes])).toEqual([["ap_frq_a", 1, 15], ["ap_frq_b", 2, 30]]);
+    expect(p.layoutSections.map((s) => s.label)).toEqual(["Practice Section 1: Free Response (calculator allowed)", "Practice Section 2: Free Response (no calculator)"]);
     expect(p.totalMinutes).toBe(45); expect(p.name).toBe("AP Calculus AB — Free-Response Practice");
     expect(new Set(p.items.map((i) => i.c.itemFamilyId)).size).toBe(3);
   });
@@ -169,7 +170,7 @@ describe("짧은 Free-Response 연습 세트(2~4 묶음)", () => {
     const layout = [{ ...AP_LAYOUTS.ap_calculus_ab.find((x) => x.key === "ap_frq_a")!, count: 1, minutes: 15 }, { ...AP_LAYOUTS.ap_calculus_ab.find((x) => x.key === "ap_frq_b")!, count: 2, minutes: 30 }];
     const g = apGuidanceLines({ subject: "ap_calculus_ab", layout }).join(" ");
     expect(g).toContain("3 questions in 45 minutes"); expect(g).toContain("not the official AP Calculus AB Section II (6 questions, 90 minutes)");
-    expect(g).toContain("Part A (1 question, 15 min): calculator allowed."); expect(g).toContain("Part B (2 questions, 30 min): no calculator.");
+    expect(g).toContain("Practice Section 1 (1 question, 15 min): calculator allowed."); expect(g).toContain("Practice Section 2 (2 questions, 30 min): no calculator."); expect(g).not.toMatch(/Part [AB]/);
     expect(apBadgeText({ subject: "ap_calculus_ab", label: "frq_practice", layout })).toBe("Free-Response Practice");
     expect(apBadgeText({ subject: "ap_calculus_ab", label: "frq_practice", layout: layout.slice(1) })).toBe("Free-Response Practice");
   });

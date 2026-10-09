@@ -5,10 +5,13 @@
 //       세트 이름은 고정: "AP Calculus AB — Non-Calculator Practice" / "— Calculator Practice" / "— Free-Response Practice"(--seq 2 이상이면 뒤에 번호)
 //   짧은 Free-Response 연습(서로 다른 문항군의 검증된 FRQ 묶음 2~4개, 문항당 15분. 공식 6문항 시험이 아님을 화면이 말한다):
 //     npx tsx scripts/ap-generation/assemble-ap-set.ts --subject ap_calculus_ab --partial frq --short [--max-bundles 4] [--overlap-max N] [--tier free] [--execute]
+//   선택 목록으로 풀 세트(ab-select 결과 객체·배열·줄 단위): --keys-file <목록> [--name "AP Calculus AB — Practice Exam"] [--draft]
+//     목록의 섹션(mcA/mcB/frqA/frqB)과 순서를 그대로 쓰고, 공식 문항 수를 못 채우면 만들지 않는다. --draft 면 공개하지 않고 초안으로만 둔다(검수용).
 //   기존 방식(MC/FRQ/풀 라벨):
 //     npx tsx scripts/ap-generation/assemble-ap-set.ts --subject ap_calculus_ab --label mc_practice --name "..." [--tier ...] [--execute]
 //   비프로덕션: 위 명령에 --target worpsqwqgnspddnrtnvq --i-know-nonprod worpsqwqgnspddnrtnvq 를 붙인다(프로덕션·그 외 거부).
 import { readFileSync } from "node:fs";
+import { readKeysFile } from "./keys-file";
 import { connectAllowlisted } from "./target";
 import { OVERLAP_DEFAULT, planApSet, planFrqShortSet, planPartialSet, type AssembleCandidate, type AssembleOptions, type UnitWeight } from "../../lib/ap-exam/assemble";
 import { AP_PARTIALS, apSectionLayout, partialSetName, sectionsForPartial, type ApPartialId, type ApSetLabel } from "../../lib/ap-exam/layouts";
@@ -20,6 +23,7 @@ async function main() {
   if (!subject) throw new Error("--subject 는 필수입니다.");
   if (partial && !(partial in AP_PARTIALS)) throw new Error("--partial noncalc_mc|calc_mc|frq");
   let label = arg("label") as ApSetLabel | undefined, name = arg("name");
+  if (arg("keys-file")) label = "full_practice"; // 선택 목록 세트는 공식 풀 구성일 때만 만들어지므로 풀 라벨
   if (partial) { label = AP_PARTIALS[partial].label; name = partialSetName(subject, partial, arg("seq") ? Number(arg("seq")) : undefined); }
   if (!label || !name) throw new Error("--partial 또는 (--label 과 --name) 이 필요합니다.");
   const tier = (arg("tier") ?? "tutoring") as "free" | "tutoring";
@@ -36,7 +40,17 @@ async function main() {
     archetype: ((r.payload as { archetype?: string; template?: string } | null)?.archetype ?? (r.payload as { template?: string } | null)?.template) ?? null, skill: r.skill_primary,
   })));
   let items: { sectionKey: string; position: number; c: AssembleCandidate }[]; let sectionKeys: string[]; let customLayout: { sections: unknown[] } | null = null;
-  if (partial === "frq" && process.argv.includes("--short")) {
+  if (arg("keys-file")) {
+    const { keys, sectionOf } = readKeysFile(arg("keys-file")!);
+    const bySk = new Map(pool.map((c) => [c.candidateKey, c]));
+    const missing = keys.filter((k) => !bySk.has(k));
+    if (missing.length) { console.log(`변환(문제은행)·모의고사 용도 변환이 안 된 후보 ${missing.length}건: ${missing.join(", ")}`); return; }
+    const need = Object.fromEntries(apSectionLayout(subject).map((x) => [x.key, x.count])); const pos: Record<string, number> = {}; items = [];
+    for (const k of keys) { const sec = sectionOf.get(k); if (!sec) throw new Error(`섹션 지정 없는 키: ${k} (ab-select 결과 객체 형식 필요)`); pos[sec] = (pos[sec] ?? 0) + 1; items.push({ sectionKey: sec, position: pos[sec], c: bySk.get(k)! }); }
+    console.log(`선택 구성 ${JSON.stringify(pos)} / 공식 ${JSON.stringify(need)}`);
+    if (Object.entries(need).some(([k, n]) => pos[k] !== n)) { console.log("공식 풀 구성을 채우지 못해 세트를 만들지 않습니다."); return; }
+    sectionKeys = Object.keys(need);
+  } else if (partial === "frq" && process.argv.includes("--short")) {
     const plan = planFrqShortSet(subject, pool, { used, overlapMax: arg("overlap-max") ? Number(arg("overlap-max")) : undefined, maxBundles: arg("max-bundles") ? Number(arg("max-bundles")) : undefined });
     const c = plan.composition;
     console.log(`풀 ${pool.length}건 → FRQ 묶음 ${c.bundles}개(문항군 ${c.families}, 유형 ${c.archetypes}, 계산기 허용 ${c.calculatorAllowed} · 불가 ${c.calculatorNotAllowed}, 겹침 ${c.overlapUsed}), 연습 시간 ${plan.totalMinutes}분, 단원 ${JSON.stringify(c.units)}`);
@@ -74,6 +88,7 @@ async function main() {
     const { error: ie } = await db.from("mock_exam_set_items").insert({ exam_set_id: set.id, section: it.sectionKey, position: it.position, problem_id: it.c.problemId, problem_version_id: it.c.versionId, sat_domain: `ap:${it.c.keywordCode}`, difficulty: it.c.difficulty });
     if (ie) throw new Error(ie.message);
   }
+  if (process.argv.includes("--draft")) { console.log(`세트 ${set.id} 초안으로 저장(공개 안 함, ${label})`); return; }
   const { error: pe } = await db.from("mock_exam_sets").update({ status: "published", published_at: new Date().toISOString(), access_tier: tier }).eq("id", set.id);
   if (pe) throw new Error(pe.message);
   console.log(`세트 ${set.id} 공개(${label}, ${tier})`);

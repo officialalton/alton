@@ -10,6 +10,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { chromium, type Page } from "@playwright/test";
 import { gateCandidate } from "../../lib/ap-figures/gate";
+import { STOCK_FILES } from "./keys-file";
 import { scanRawMath, type RawMathHit } from "../../lib/ap-exam/raw-math-scan";
 // 토큰 단위 점검(lib/ap-exam/raw-math-scan.ts): KaTeX 수식·코드·이스케이프 달러는 제외하고 텍스트 노드의 원문 수식만 센다.
 const SCAN = `(${scanRawMath.toString()})`;
@@ -77,7 +78,9 @@ async function checkItem(page: Page, r: Row, shot: string): Promise<Record<Scree
 }
 
 /** 응시를 제출하고 결과 화면에서 문항별 해설·참고 답안의 원문 TeX 노출 여부를 점검한다. */
-async function resultPass(page: Page, rows: Row[]): Promise<Map<string, ScreenCheck>> {
+async function resultPass(page: Page, rows: Row[], lastSection?: string): Promise<Map<string, ScreenCheck>> {
+  if (lastSection) { const tab = page.locator(`[data-testid="ap-section-${lastSection}"]`); if (await tab.count()) await tab.click(); }
+  for (let k = 0; k < 40 && !(await page.getByTestId("ap-review-submit").count()); k++) { await page.getByRole("button", { name: /^Next/ }).first().click(); await page.waitForTimeout(120); } // 마지막 섹션의 마지막 문항까지
   await page.locator('[data-testid="ap-review-submit"]').click();
   await page.locator('[data-testid="ap-exam-submit"]').click();
   await page.locator('[data-testid="ap-exam-result"]').waitFor({ state: "visible", timeout: 30_000 });
@@ -99,7 +102,7 @@ async function resultPass(page: Page, rows: Row[]): Promise<Map<string, ScreenCh
 async function main() {
   const wd = Number(arg("watchdog-sec", "0")); if (wd) setTimeout(() => { console.error(`watchdog ${wd}s 초과 — 중단`); process.exit(2); }, wd * 1000).unref(); // 개발 서버가 멈추면 세트 단위로 끊고 다시 돌린다
   const state = JSON.parse(readFileSync("tmp/ap-demo-state.json", "utf-8")) as { run: string; students: Record<string, string>; sets: string[] };
-  const stock = [...JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")), ...JSON.parse(readFileSync("data/ap/stock/s1a-items.json", "utf-8"))] as { stockKey: string; payload: Record<string, unknown> }[];
+  const stock = STOCK_FILES.flatMap((f) => { try { return JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")); } catch { return []; } }) as { stockKey: string; payload: Record<string, unknown> }[];
   const keysByHash = new Map<string, string[]>();
   for (const s of stock) { const h = itemContentHash(s.payload); (keysByHash.get(h) ?? keysByHash.set(h, []).get(h)!).push(s.stockKey); }
   const shotDir = arg("shots-dir", `tmp/ap-screen-evidence/${state.run}`); mkdirSync(shotDir, { recursive: true });
@@ -122,7 +125,8 @@ async function main() {
       await login(page, email);
       await page.goto(`${BASE}/student/mock-exam/${attempt}`);
       const pending: { setItemId: string; entry: ScreenEntry }[] = [];
-      const sections = [...new Set(rows.map((r) => r.section))];
+      const layoutKeys = (JSON.parse(psql(`select section_layout->'sections' from mock_exam_sets where id = ${q(setId)};`)) as { key: string }[]).map((x) => x.key); // 공식 레이아웃 순서(마지막 섹션에서 제출)
+      const sections = [...new Set(rows.map((r) => r.section))].sort((a, b) => layoutKeys.indexOf(a) - layoutKeys.indexOf(b));
       for (const sec of sections) {
         const tab = page.locator(`[data-testid="ap-section-${sec}"]`);
         if (await tab.count()) await tab.click();
@@ -143,7 +147,7 @@ async function main() {
         }
       }
       // 제출 후 결과 화면 점검: 해설·참고 답안에 원문 TeX 가 보이면 실패(KaTeX 로 그려진 수식은 통과).
-      const resultChecks = await resultPass(page, rows).catch((e) => new Map<string, ScreenCheck>(rows.map((r) => [r.set_item_id, { result: "fail", note: `result screen error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 100)}` }])));
+      const resultChecks = await resultPass(page, rows, sections[sections.length - 1]).catch((e) => new Map<string, ScreenCheck>(rows.map((r) => [r.set_item_id, { result: "fail", note: `result screen error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 100)}` }])));
       for (const p of pending) {
         const rc = resultChecks.get(p.setItemId) ?? { result: "fail" as const, note: "result item not found" };
         p.entry.checks[RESULT_CHECK] = rc;

@@ -169,3 +169,12 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 - **활성화 차단 가드(410)**: 비 AP 고정형 세트는 **공개 불가**(`mock_exam_sets` 트리거)이고 이미 공개돼 있어도 **새 응시 시작 불가**(`mock_exam_attempts` 트리거). 관리자 화면에 보이는 오류는 한·영 병기. MST·AP 는 영향 없음. 레거시 테스트 픽스처만 세션 설정 `alton.allow_fixed_sat_without_time_limit=on`(vitest 통합 설정)으로 우회한다.
 - **해제 조건**: 고정형에 서버 기준 섹션 시계(406 과 같은 방식)와 만료 뒤 저장 거절·마감 settle 을 구현하고 테스트한 뒤, 410 의 트리거 2개·함수 2개를 제거한다(되돌리기 SQL 은 파일 머리 주석). 그 전까지 어떤 화면·문서도 클라이언트 타이머를 "강제되는 시간 제한"으로 표현하지 않는다.
 - 회귀 테스트: `lib/mock-exam/fixed-sat-guard.integration.test.ts`.
+
+## AB 풀 모의고사 선택 목록 검증 절차 (2026-10-09)
+선택 목록(JSON 배열 또는 줄 단위 `stockKey`, 예: 설계 에이전트의 `docs/ap/ab-full-set-selection.md` 목록)이 임의로 주어져도 같은 도구로 검증한다.
+1. 로컬 격리 DB 에 풀 레이아웃 세트 만들기: `local-demo-seed.ts seed --keys-file <목록>` — 목록으로 공식 풀 구성(AB: MC Part A 29 계산기 불가 + Part B 13 필수, FRQ A 2 계산기 + B 4 불가)을 채우고 공개 게이트가 구성 불충족을 보고한다.
+2. 화면 증거: `screen-evidence.ts --shots-dir … --out …`(390x844·1280x800, 공식 레이아웃 순서, 마지막 섹션에서 제출해 결과 화면 점검) → 증거 v3(`checker_kind=automated`). 요약: `screen-evidence-summary.ts <증거.json>`.
+3. 흐름: `full-flow-check.ts` — 파트별 계산기 조건 안내·타이머·계산기 도구, FRQ 다문항 저장·복원, 섹션별 만료(서버), 제출·결과, 노트북 저장, 재응시(15단계).
+4. 탈락 항목(증거에 fail)은 리드에게 보고해 재고에서 교체한다.
+5. 비프로덕션 기록(목록 한정): `mark-verified.ts --render --keys-file <목록> $T`, `mark-verified.ts --screen --evidence <증거.json> --keys-file <목록> $T` (둘 다 dry-run 기본, `$T` = `--target worpsqwqgnspddnrtnvq --i-know-nonprod worpsqwqgnspddnrtnvq`).
+- 짧은 FRQ 연습 세트의 구간 이름은 공식 Part A/B 로 보이지 않게 `Practice Section (N questions, M min): …`, 탭은 `Practice Section: Free Response (calculator allowed|no calculator)`(공식 6문항 세트는 `Section II, Part A/B` 그대로). 단원 표기 `Covers Units 5, 6, 7` 의 번호는 재고 키워드 코드의 앞자리이고 CED 단원 번호와 일치함을 `lib/ap-exam/unit-codes.test.ts` 가 전수 확인한다.
