@@ -970,6 +970,12 @@
    "at": "2026-10-09T03:13:51.330245+00:00",
    "usd": 0,
    "note": "NOTE: v8-bio-r repair run (cost $0.115, counted) executed WITHOUT the frozen Bio reviewer config (shell env not carried over: no AP_SUBJECT_NOTES/AP_FLAT_REVIEW) and its wording rewrite was not adopted -> its pass is NOT a valid post-repair result. Round v8 total $0.358 (<= $0.4 cap)."
+  },
+  {
+   "at": "2026-10-09T03:26:06.749447+00:00",
+   "usd": 0,
+   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) \u2014 invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
+   "excludedRun": "v8-bio-r"
   }
  ]
 }
