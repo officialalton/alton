@@ -2,14 +2,14 @@
 // 문항마다 필수 점검(보기·그림/표 렌더·가림 없음·제출 전 정답/해설 비노출·FRQ 입력)을 실제로 실행하고 그 결과를 증거 JSON 으로 쓴다.
 //   1) 격리 스택 + 마이그레이션 + 시드:   SEED_TEST_PASSWORD=<로컬값> npx tsx scripts/ap-generation/local-demo-seed.ts seed
 //   2) 대상 DB 를 가리키는 dev 서버:       NEXT_PUBLIC_SUPABASE_URL=… NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=… SUPABASE_SECRET_KEY=… npm run dev -- -p 3011
-//   3) 생성:                              SEED_TEST_PASSWORD=<로컬값> SUPABASE_TEST_DB_URL=postgresql://postgres:postgres@127.0.0.1:<DB포트>/postgres npx tsx scripts/ap-generation/screen-evidence.ts [--base-url http://localhost:3011] [--out tmp/ap-screen-evidence.json]
+//   3) 생성:                              SEED_TEST_PASSWORD=<로컬값> NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:<API포트> SUPABASE_TEST_DB_URL=postgresql://postgres:postgres@127.0.0.1:<DB포트>/postgres npx tsx scripts/ap-generation/screen-evidence.ts [--base-url http://localhost:3011] [--out tmp/ap-screen-evidence.json]
 // 증거의 content_hash 는 화면에 띄운 문제 버전의 후보 payload 해시(render 보고서와 같은 sha256)이며, 같은 payload 를 가진 재고 후보 키(stockKey)마다 항목을 만든다.
 // 비밀번호·키는 출력하지 않는다. DB URL 이 로컬이 아니면 중단.
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { chromium, type Page } from "@playwright/test";
-import { loadEnvLocal } from "../keywords/db";
+import { assertIsolatedTargetOrExit } from "../../lib/dev/stack-identity";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { STOCK_FILES } from "./keys-file";
 import { scanRawMath, type RawMathHit } from "../../lib/ap-exam/raw-math-scan";
@@ -18,10 +18,9 @@ const SCAN = `(${scanRawMath.toString()})`;
 import { AUTOMATED_LIMITATION, itemContentHash, RESULT_CHECK, SCREEN_CHECKS, STIMULUS_CHECK, type ScreenCheck, type ScreenCheckName, type ScreenEntry } from "../../lib/ap-generation/verify-guard";
 
 const arg = (n: string, d: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : d; };
-loadEnvLocal();
-const DB_URL = process.env.SUPABASE_TEST_DB_URL ?? "";
-if (/:544\d\d\//.test(DB_URL)) { console.error("공유 스택(544xx)은 사용하지 않습니다. 격리 스택만. 중단."); process.exit(1); }
-if (!/^postgres(ql)?:\/\/[^@]*@(127\.0\.0\.1|localhost)[:/]/.test(DB_URL)) { console.error("SUPABASE_TEST_DB_URL 이 로컬 DB 가 아닙니다. 중단."); process.exit(1); }
+// 모든 env 파일과 process env 를 다 읽은 뒤 대상 결정 + docker 로 DB·API 동일 격리 스택 확인(불일치·공유면 쓰기 전에 종료).
+const TARGET = assertIsolatedTargetOrExit({ apiVars: ["NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_URL"] });
+const DB_URL = TARGET.dbUrl;
 const BASE = arg("base-url", "http://localhost:3011");
 if (!/^http:\/\/(localhost|127\.0\.0\.1)[:/]/.test(BASE)) { console.error("--base-url 은 로컬이어야 합니다."); process.exit(1); }
 const PW = process.env.SEED_TEST_PASSWORD; if (!PW) { console.error("SEED_TEST_PASSWORD 가 필요합니다."); process.exit(1); }

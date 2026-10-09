@@ -1,5 +1,6 @@
 // DB 통합 테스트 실행 전 대상 검사(순수 함수). 통합 테스트(*.integration.test.ts)는 SUPABASE_TEST_DB_URL/API_URL 이 없으면
 // 공유 로컬 스택(54422/54421)으로 폴백해 실제로 쓰기를 한다(2026-10-08 사고). 지정이 없거나 공유 스택을 가리키면 테스트 시작 전에 중단한다.
+import { verifySameIsolatedStack } from "./stack-identity";
 // 공유 스택에서 의도적으로 돌릴 때(조정 세션 전용)만 ALLOW_SHARED_TEST_DB=1 + SHARED_TEST_DB_NOTE="coordinator-approved: <사유>"로 통과.
 const SHARED_PORTS = new Set([54320, 54321, 54322, 54323, 54324, 54325, 54327, 54329, ...Array.from({ length: 10 }, (_, i) => 54420 + i)]);
 
@@ -25,6 +26,17 @@ export function checkIntegrationTarget(env: Record<string, string | undefined>):
     else if (isSharedStackUrl(v)) reasons.push(`${k}=${v} 은 공유 스택(544xx 계열)을 가리킨다.`);
   }
   return reasons.length ? { ok: false, reasons } : { ok: true };
+}
+
+/** 포트 검사에 더해 docker 로 DB·API 컨테이너가 같은 격리 project 인지 확인한다(조정 세션 우회 표식이 있으면 건너뜀). dockerPs: `docker ps --format '{{.Names}}|{{.Ports}}'`. */
+export function checkIntegrationTargetWithDocker(env: Record<string, string | undefined>, dockerPs: string | (() => string)): GuardResult {
+  const base = checkIntegrationTarget(env);
+  if (!base.ok) return base;
+  if (env.ALLOW_SHARED_TEST_DB === "1" && NOTE_RX.test((env.SHARED_TEST_DB_NOTE ?? "").trim())) return base;
+  let ps: string;
+  try { ps = typeof dockerPs === "function" ? dockerPs() : dockerPs; } catch (e) { return { ok: false, reasons: [`docker 로 대상 스택을 확인하지 못했다(${(e as Error).message}).`] }; }
+  const r = verifySameIsolatedStack({ dbUrl: env.SUPABASE_TEST_DB_URL, apiUrls: [env.SUPABASE_TEST_API_URL ?? ""], dockerPs: ps });
+  return r.ok ? { ok: true } : { ok: false, reasons: r.reasons };
 }
 
 export function integrationGuardMessage(reasons: string[]): string {

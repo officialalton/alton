@@ -26,3 +26,22 @@ describe("통합 테스트 대상 DB 가드", () => {
     expect(checkIntegrationTarget({ ALLOW_SHARED_TEST_DB: "1", SHARED_TEST_DB_NOTE: "조정 세션 전체 회귀 실행" }).ok).toBe(false); // 접두어 없는 임의 사유는 불가;
   });
 });
+
+import { checkIntegrationTargetWithDocker } from "./integration-db-guard";
+describe("통합 테스트 가드 — docker 동일성(가짜 docker 출력)", () => {
+  const ps = "supabase_db_ALTON_apev1|0.0.0.0:54522->5432/tcp\nsupabase_kong_ALTON_apev1|0.0.0.0:54521->8000/tcp\nsupabase_db_ALTON|0.0.0.0:54422->5432/tcp\nsupabase_kong_ALTON|0.0.0.0:54421->8000/tcp";
+  it("같은 격리 project 면 통과", () => { expect(checkIntegrationTargetWithDocker(iso, ps)).toEqual({ ok: true }); });
+  it("다른 project 의 컨테이너(포트는 격리 대역이지만 db 가 other)면 차단", () => {
+    const other = "supabase_db_ALTON_b|0.0.0.0:54522->5432/tcp\nsupabase_kong_ALTON_a|0.0.0.0:54521->8000/tcp";
+    expect(checkIntegrationTargetWithDocker(iso, other).ok).toBe(false);
+  });
+  it("docker 실패·스택 없음이면 차단", () => {
+    expect(checkIntegrationTargetWithDocker(iso, "").ok).toBe(false);
+    expect(checkIntegrationTargetWithDocker(iso, () => { throw new Error("no docker"); }).ok).toBe(false);
+  });
+  it("포트 검사에서 이미 막히면 docker 를 부르지 않는다", () => {
+    let called = false;
+    expect(checkIntegrationTargetWithDocker({}, () => { called = true; return ps; }).ok).toBe(false);
+    expect(called).toBe(false);
+  });
+});
