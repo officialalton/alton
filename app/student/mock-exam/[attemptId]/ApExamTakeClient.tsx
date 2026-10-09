@@ -315,7 +315,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
             <h3 className="mb-2 text-[15px] font-bold">Before you submit</h3>
             <p className="mb-4 text-[13px] text-grey-600">
               You answered {answeredCount} of {attempt.items.length} questions.{answeredCount < attempt.items.length && " Some questions are unanswered."} Once submitted, answers cannot be changed.
-              Multiple-choice questions are scored right away; free-response answers are kept with a reference answer for self-review.
+              Multiple-choice questions are scored right away; free-response answers are kept, and a reference answer and scoring guide (reference feedback, not official scoring) is shown after you submit.
             </p>
             <div className="flex justify-end gap-2">
               <button type="button" onClick={() => setShowReview(false)} className="rounded-lg border border-grey-300 px-4 py-2 text-[13px] font-bold">Keep working</button>

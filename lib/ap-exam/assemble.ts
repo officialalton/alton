@@ -1,6 +1,6 @@
 // AP 모의고사 세트 조립 계획(순수 함수). **모의고사 용도(purpose=mock_exam)로 변환된 문항만** 후보가 된다 —
 // 수업용(lesson) 문항은 입력에 있어도 버린다(DB 트리거가 한 번 더 막는다). 한 문항은 한 세트에만 쓴다(오너 정책: 세트 간 중복 없음).
-import { AP_PARTIALS, partialLabelAllowed, partialSetName, sectionsForLabel, sectionsForPartial, type ApPartialId, type ApSetLabel, type ApSection } from "./layouts";
+import { AP_PARTIALS, apSectionLayout as apSectionLayout0, partialLabelAllowed, partialSetName, sectionsForLabel, sectionsForPartial, type ApPartialId, type ApSetLabel, type ApSection } from "./layouts";
 
 export type AssembleCandidate = {
   candidateKey: string; problemId: string; versionId: string; kind: "mc" | "frq_bundle"; purpose: "mock_exam" | "lesson" | null;
@@ -179,4 +179,53 @@ export function planPartialSet(subject: string, partial: ApPartialId, pool: Asse
   const filled = Object.fromEntries(sections.map((x) => [x.key, composition[x.key]?.count ?? 0]));
   const ok = shortage.length === 0;
   return { ok, partial, subject, name: partialSetName(subject, partial), label: AP_PARTIALS[partial].label, labelAllowed: ok && partialLabelAllowed(subject, partial, filled), items, shortage, composition, coverageGaps };
+}
+
+// ── 짧은 Free-Response 연습 세트(2~4 묶음) ────────────────────────────────────────────
+// 공식 6문항을 못 채워도, 서로 다른 문항군의 검증된 FRQ 묶음 2~4개로 연습 세트를 만들 수 있다. 공식 6문항 시험이라고 부르지 않고(안내 문구가 실제 문항 수·시간을 말함),
+// 시간은 공식 환산 문항당 15분(공식: A 2문항 30분, B 4문항 60분). 계산기 허용 묶음은 Part A, 계산기 불가 묶음은 Part B 에 둔다.
+export const FRQ_MINUTES_PER_BUNDLE = 15;
+export const FRQ_SHORT_LIMITS = { min: 2, max: 4 } as const;
+export type FrqShortPlan = {
+  ok: boolean; subject: string; name: string; items: AssemblePlan["items"];
+  layoutSections: ApSection[]; totalMinutes: number; shortage: string[];
+  composition: { bundles: number; families: number; archetypes: number; calculatorAllowed: number; calculatorNotAllowed: number; units: Record<string, number>; overlapUsed: number };
+};
+export function planFrqShortSet(subject: string, pool: AssembleCandidate[], opts: { used?: Set<string>; overlapMax?: number; maxBundles?: number } = {}): FrqShortPlan {
+  const max = Math.min(opts.maxBundles ?? FRQ_SHORT_LIMITS.max, FRQ_SHORT_LIMITS.max);
+  const used = opts.used ?? new Set<string>();
+  const overlapMax = opts.overlapMax ?? partialOverlapMax(max);
+  const eligible = pool.filter((c) => c.kind === "frq_bundle" && c.purpose === "mock_exam" && (c.releaseTier === "review_env" || c.releaseTier === "launch"))
+    .sort((a, b) => a.candidateKey.localeCompare(b.candidateKey));
+  const taken: AssembleCandidate[] = []; const fam = new Set<string>(); const arch = new Set<string>(); let overlapUsed = 0;
+  // 서로 다른 문항군(그리고 가능하면 서로 다른 유형)부터, 새 문항 먼저·겹침은 한도까지.
+  for (const pass of ["fresh-new-arch", "fresh-any", "reuse"] as const) {
+    for (const c of eligible) {
+      if (taken.length >= max) break;
+      if (taken.includes(c)) continue;
+      const f = c.itemFamilyId ?? c.candidateKey, a = c.archetype ?? f, isUsed = used.has(c.problemId);
+      if (fam.has(f)) continue; // 같은 문항군은 한 세트에 하나
+      if (pass === "fresh-new-arch" && (isUsed || arch.has(a))) continue;
+      if (pass === "fresh-any" && isUsed) continue;
+      if (pass === "reuse" && (!isUsed || overlapUsed >= overlapMax || arch.has(a))) continue;
+      if (isUsed) overlapUsed++;
+      taken.push(c); fam.add(f); arch.add(a);
+    }
+  }
+  const allowed = taken.filter((c) => c.calculator !== "not_allowed"), notAllowed = taken.filter((c) => c.calculator === "not_allowed");
+  const ordered = [...allowed, ...notAllowed];
+  const base = apSectionLayout0(subject);
+  const secA = base.find((x) => x.key === "ap_frq_a"), secB = base.find((x) => x.key === "ap_frq_b");
+  const layoutSections: ApSection[] = [];
+  if (allowed.length && secA) layoutSections.push({ ...secA, count: allowed.length, minutes: allowed.length * FRQ_MINUTES_PER_BUNDLE });
+  if (notAllowed.length && secB) layoutSections.push({ ...secB, count: notAllowed.length, minutes: notAllowed.length * FRQ_MINUTES_PER_BUNDLE });
+  const items: AssemblePlan["items"] = [];
+  allowed.forEach((c, i) => items.push({ sectionKey: "ap_frq_a", position: i + 1, c }));
+  notAllowed.forEach((c, i) => items.push({ sectionKey: "ap_frq_b", position: i + 1, c }));
+  const shortage: string[] = [];
+  if (taken.length < FRQ_SHORT_LIMITS.min) shortage.push(`검증된 FRQ 묶음이 서로 다른 문항군으로 ${FRQ_SHORT_LIMITS.min}개 이상 필요합니다(현재 ${taken.length}개, 후보 ${eligible.length}건·문항군 ${new Set(eligible.map((c) => c.itemFamilyId ?? c.candidateKey)).size}개).`);
+  const units: Record<string, number> = {};
+  for (const c of ordered) units[c.keywordCode.split(".")[0]] = (units[c.keywordCode.split(".")[0]] ?? 0) + 1;
+  return { ok: shortage.length === 0, subject, name: partialSetName(subject, "frq"), items, layoutSections, totalMinutes: ordered.length * FRQ_MINUTES_PER_BUNDLE, shortage,
+    composition: { bundles: taken.length, families: fam.size, archetypes: arch.size, calculatorAllowed: allowed.length, calculatorNotAllowed: notAllowed.length, units, overlapUsed } };
 }

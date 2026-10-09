@@ -49,8 +49,8 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
       try {
         const { data: subj } = await supabase.from("subjects").select("id").eq("ap_subject_code", attempt.apSubject).maybeSingle();
         if (subj) {
-          const { data: kws } = await supabase.from("subject_keywords").select("content_code, name").eq("subject_id", subj.id).not("content_code", "is", null).not("content_code", "like", "%#%");
-          topicNames = Object.fromEntries((kws ?? []).map((k) => [k.content_code as string, k.name as string]));
+          const { data: kws } = await supabase.from("subject_keywords").select("content_code, label").eq("subject_id", subj.id).not("content_code", "is", null).not("content_code", "like", "%#%");
+          topicNames = Object.fromEntries((kws ?? []).map((k) => [k.content_code as string, k.label as string]));
         }
       } catch { /* 이름 없이 코드만 */ }
     }

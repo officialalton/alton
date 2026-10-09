@@ -53,7 +53,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
         {bySection.length > 1 && (
           <ul className="mt-2 text-[12.5px] text-grey-600">{bySection.map((s) => <li key={s.key}>{s.label}: {s.correct}/{s.total}</li>)}</ul>
         )}
-        {frq.length > 0 && <p className="mt-2 text-[12.5px] text-grey-600">Free-response answers are shown with a reference answer for self-review. They are not scored.</p>}
+        {frq.length > 0 && <p className="mt-2 text-[12.5px] text-grey-600">Free-response answers are shown next to a reference answer and scoring guide for self-review. This is reference feedback, not official scoring, and no score is given.</p>}
         <p className="mt-2 text-[11.5px] text-grey-500">AP scores (1–5) are not estimated for practice tests.</p>
       </section>
 
@@ -104,7 +104,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
               )}
               {(it.explanationEn ?? it.explanation) && (
                 <div className="mt-3 rounded-lg bg-grey-50 p-3" data-testid="ap-explanation">
-                  <p className="mb-1 text-[11.5px] font-bold text-grey-500">{it.format === "essay" ? "Reference answer (not official scoring)" : "Explanation"}</p>
+                  <p className="mb-1 text-[11.5px] font-bold text-grey-500">{it.format === "essay" ? "Reference answer and scoring guide (reference feedback, not official scoring)" : "Explanation"}</p>
                   <LearningText text={autoMathExplanation((it.explanationEn ?? it.explanation) as string)} className="whitespace-pre-wrap text-[13px]" />
                 </div>
               )}

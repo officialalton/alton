@@ -102,7 +102,7 @@ describe("ApExamResultView", () => {
     expect(screen.getByText(/AP scores \(1–5\) are not estimated/)).toBeInTheDocument();
     expect(screen.getByText("Topic 2.3")).toBeInTheDocument();
     expect(screen.getByTestId("frq-answer-a")).toHaveTextContent("My explanation");
-    expect(screen.getByText("Reference answer (not official scoring)")).toBeInTheDocument();
+    expect(screen.getByText("Reference answer and scoring guide (reference feedback, not official scoring)")).toBeInTheDocument();
     expect(screen.getAllByRole("button", { name: "Report a problem" }).length).toBeGreaterThan(0);
     // 이 테스트의 레이아웃은 공식 구성이 아니므로 label 이 full_practice 여도 "Full Practice Exam" 을 보이지 않는다.
     expect(screen.getByTestId("ap-badge")).toHaveTextContent("Practice Set");

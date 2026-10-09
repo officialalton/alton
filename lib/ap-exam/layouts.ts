@@ -104,7 +104,11 @@ const sameKeys = (a: string[], b: string[]) => a.length === b.length && a.every(
 export function apPartialOfLayout(layout: LayoutLike | null | undefined): ApPartialId | null {
   if (!layout?.length) return null;
   const keys = layout.map((s) => s.key);
-  return (Object.keys(AP_PARTIALS) as ApPartialId[]).find((id) => sameKeys(keys, AP_PARTIALS[id].sectionKeys)) ?? null;
+  const exact = (Object.keys(AP_PARTIALS) as ApPartialId[]).find((id) => sameKeys(keys, AP_PARTIALS[id].sectionKeys));
+  if (exact) return exact;
+  // 짧은 FRQ 연습 세트(2~4 묶음): FRQ 섹션 키의 부분집합이면 Free-Response 부분 세트
+  if (keys.every((k) => AP_PARTIALS.frq.sectionKeys.includes(k))) return "frq";
+  return null;
 }
 /** 공식 풀 구성(모든 공식 섹션이 공식 문항 수·시간으로 존재)일 때만 true. */
 export function isOfficialFullLayout(subject: string | null | undefined, layout: LayoutLike | null | undefined): boolean {
@@ -136,10 +140,15 @@ export function apGuidanceLines(o: { subject?: string | null; layout?: (LayoutLi
     return [`Practice for ${exam} Section I, ${part}: ${s.count} multiple-choice questions in ${s.minutes} minutes. ${CALC_RULE[s.calculator ?? "na"]}`.trim()];
   }
   if (partial === "frq") {
-    const a = secOf("ap_frq_a")!, b = secOf("ap_frq_b")!;
+    const a = secOf("ap_frq_a"), b = secOf("ap_frq_b");
+    const n = (a?.count ?? 0) + (b?.count ?? 0), mins = (a?.minutes ?? 0) + (b?.minutes ?? 0);
+    const official = a?.count === 2 && b?.count === 4;
+    const part = (x: typeof a, name: string) => (x ? `${name} (${x.count} question${x.count === 1 ? "" : "s"}, ${x.minutes} min): ${x.calculator === "not_allowed" ? "no calculator" : "calculator allowed"}.` : "");
     return [
-      `Practice for ${exam} Section II: ${a.count + b.count} free-response questions in ${a.minutes + b.minutes} minutes.`,
-      `Part A (${a.count} questions, ${a.minutes} min): ${a.calculator === "not_allowed" ? "no calculator" : "calculator allowed"}. Part B (${b.count} questions, ${b.minutes} min): ${b.calculator === "not_allowed" ? "no calculator" : "calculator allowed"}.`,
+      official
+        ? `Practice for ${exam} Section II: ${n} free-response questions in ${mins} minutes.`
+        : `Free-response practice: ${n} question${n === 1 ? "" : "s"} in ${mins} minutes. This is a shorter set, not the official ${exam} Section II (6 questions, 90 minutes).`,
+      [part(a, "Part A"), part(b, "Part B")].filter(Boolean).join(" "),
     ];
   }
   return layout.map((s) => `${(s as { label?: string }).label ?? s.key}: ${s.count} questions · ${s.minutes} min${CALC_RULE[s.calculator ?? "na"] ? ` · ${CALC_RULE[s.calculator ?? "na"].replace(/\.$/, "")}` : ""}`);
