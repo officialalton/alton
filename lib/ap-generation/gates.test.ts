@@ -133,7 +133,7 @@ import { calibrateFrq } from "./gates";
 d("Biology FRQ: per-part skill/topic/rubric, representative skill vs part skills, official grain", () => {
   const out = run("registry.py", undefined, ["batch", "frq_bio_investigation", "6", "0"]); const out2 = run("registry.py", undefined, ["batch", "frq_bio_data_short", "6", "0"]);
   const packs = [...(JSON.parse(out.stdout) as FrqPack[]), ...(JSON.parse(out2.stdout) as FrqPack[])];
-  const bioSkills = new Set(["1.A", "3.B", "3.C", "4.A", "4.B", "5.A", "5.B", "6.B"]); const topics = new Set(["8.1", "3.2", "3.5", "3.7"]);
+  const bioSkills = new Set(["1.A", "3.B", "3.C", "4.A", "4.B", "5.A", "5.B", "6.B", "6.C"]); const topics = new Set(["8.1", "3.2", "3.5", "3.7"]);
   it("code-first short FRQs have four 1-point parts with own skill, topic and rubric row, and pass the gates", () => {
     expect(packs.length).toBe(12);
     for (const p of packs) { expect(p.parts).toHaveLength(4); expect(p.parts.every((x) => x.points === 1 && x.skill_codes.length && x.topic_codes?.length && x.rubric_rows.length === 1)).toBe(true);

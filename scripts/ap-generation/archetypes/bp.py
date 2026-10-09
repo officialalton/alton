@@ -24,5 +24,5 @@ def meaning(pk, mapping):
             a = mapping.get(r["row_id"])
             if not a: continue
             if "elements" in a: r["required_elements"] = a["elements"] + ([e for e in r["required_elements"] if any(c.isdigit() for c in str(e))] if a.get("keep_nums") else [])
-            r["alt_solutions"] = a["alt"]; r["common_errors"] = a["err"]; r["meaning_based"] = True; r["uses_concept"] = bool(a.get("uses_concept")); r["grading_note"] = a.get("note", "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase.")
+            r["alt_solutions"] = a["alt"]; r["common_errors"] = a["err"]; r["meaning_based"] = True; r["uses_concept"] = bool(a.get("uses_concept")); r["single_explanation"] = bool(a.get("single_explanation")); r["grading_note"] = a.get("note", "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase.")
 
