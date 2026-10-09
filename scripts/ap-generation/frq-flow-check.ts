@@ -1,4 +1,5 @@
 // AP Free-Response 흐름 점검(로컬 전용): 입력·자동 저장·새로고침 복원·제출 전 비노출·제출·답안+채점 가이드(참고 피드백) 열람·재응시를 실제 학생 화면에서 실행해 pass/fail 표로 낸다.
+//   (--set "<세트 이름>" 으로 조립한 실제 FRQ 세트를 지정, 없으면 데모 FRQ 세트)
 //   SEED_TEST_PASSWORD=… SUPABASE_TEST_DB_URL=postgresql://postgres:postgres@127.0.0.1:<DB포트>/postgres npx tsx scripts/ap-generation/frq-flow-check.ts [--base-url http://localhost:3011]
 // 전제: local-demo-seed.ts seed 로 FRQ 세트가 있고(상태 파일 tmp/ap-demo-state.json), 대상 DB 를 가리키는 dev 서버가 떠 있다. 로컬 DB·로컬 주소가 아니면 중단.
 import { execFileSync } from "node:child_process";
@@ -14,7 +15,8 @@ const check = (step: string, ok: boolean, note = "") => { results.push({ step, o
 
 async function main() {
   const st = JSON.parse(readFileSync("tmp/ap-demo-state.json", "utf-8")) as { sets: string[]; students: Record<string, string> };
-  const setId = st.sets.find((id) => /FRQ/.test(psql(`select name from mock_exam_sets where id = '${id}'`)));
+  const named = arg("set", "");
+  const setId = named ? psql(`select id from mock_exam_sets where name = '${named.replace(/'/g, "''")}' and status = 'published'`) : st.sets.find((id) => /FRQ/.test(psql(`select name from mock_exam_sets where id = '${id}'`)));
   if (!setId) throw new Error("FRQ 데모 세트가 없습니다(local-demo-seed seed --all-eligible).");
   const email = st.students.free; const sid = psql(`select id from auth.users where email = '${email}'`);
   const start = () => psql(`set role authenticated; do $$ begin perform set_config('request.jwt.claim.sub', '${sid}', false); end $$; select mock_exam_open_start('${setId}'); reset role;`).split("\n").filter((l) => /^[0-9a-f-]{36}$/.test(l)).pop()!;
