@@ -76,3 +76,15 @@ describe("MockExamOpenList — resultHrefBase(서버 페이지용 문자열)", (
     expect(screen.getByRole("link", { name: "View detailed results" })).toHaveAttribute("href", "/parent/mock-exam/st1/a2");
   });
 });
+
+import { completedScoreText } from "@/lib/mock-exam/open-list";
+describe("completedScoreText — AP 객관식만 센다", () => {
+  const base = { status: "graded" as const, correctCount: 0, totalCount: 48, examProgram: "ap" as const, apSubject: "ap_calculus_ab", apLabel: "full_practice" as const };
+  it("AB Full: 48 중 FRQ 6 제외 → 0/42", () => expect(completedScoreText(base)).toBe(" · 0/42 multiple-choice correct"));
+  it("MC 부분 세트는 totalCount 그대로", () => expect(completedScoreText({ ...base, apLabel: "mc_practice", totalCount: 29 })).toBe(" · 0/29 multiple-choice correct"));
+  it("FRQ 만의 세트는 Free-response practice", () => expect(completedScoreText({ ...base, apLabel: "frq_practice", totalCount: 6, correctCount: null })).toBe(" · Free-response practice"));
+  it("SAT 는 기존 문구, 미채점은 빈 문자열", () => {
+    expect(completedScoreText({ ...base, examProgram: "sat", apSubject: null, apLabel: null, correctCount: 70, totalCount: 98 })).toBe(" · 70/98 correct");
+    expect(completedScoreText({ ...base, status: "submitted" })).toBe("");
+  });
+});
