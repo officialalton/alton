@@ -120,3 +120,34 @@
 
 ## 10. 보강 이후 (2026-10-09, `supplement-report.md`)
 보강 49건(MC 39 + FRQ 10)의 화면 증거(`evidence-supp.json`)를 포함해 다시 계산: **5세트(AB#2·AB#3·BC#1·BC#2·BC#3) 가상 MC 0·FRQ 0**(`exact-assign-5sets-supp-strict.json`, 독립 검증기 위반 0), BC#1+AB#2 도 가상 0(`exact-assign-bc1-ab2-supp-strict.json`, 검증 대기 의존 최소 16건·보강 0). 계산상 가능이며 **비프로덕션 DB 검증 완료 항목만으로는** 5세트 가상 MC 43·FRQ 3, BC#1+AB#2 가상 MC 16 그대로다(오너 적재 전). 5세트 전부에 필요한 검증 대기 항목은 최소 59건(그래프 배치 44 + 형제 3 + 보강 12).
+
+## 11. 문항군 두 시나리오 재계산 + 실조립 준비 (2026-10-09 오너 요청 A·C, 무료·DB 없음)
+**동일 하드 조건**: 게시 AB#1 포함 어떤 풀 세트와도 동일 문항 0, 문항군(구조) 세트 안 상한 1, 공식 단원·스킬 비중, 계산기 29/13, 그래프 필수 ≥10, FRQ 6 서로 다른 유형·BC 세트 BC 전용 ≥2. 코드 아키타입·숫자만 다른 변형은 별도 군으로 세지 않음(`--strict-families`). 재고 = 화면 증거 보유 전부(검증 대기 포함, 오너 적재 완료 가정).
+| 시나리오 | 묶음 파일 | 보강 MC 독립 문항군 | 재고 MC 문항군 | BC#1+AB#2 | 5세트(AB#2·AB#3·BC#1·BC#2·BC#3) |
+|---|---|---|---|---|---|
+| (i) 독립 28 | `structure-groups.json`(커밋됨) | 28 | 150 | 가상 MC 0·FRQ 0, 위반 0 | 가상 MC 0·FRQ 0, 위반 0 |
+| (ii) 보수(경계 8종 병합) | `structure-groups.conservative.json`(새 파일, 커밋 묶음에 8묶음 추가) | **21**(문서의 20과 1 차이: `c_ftc_second_derivative_calc` 는 이미 `ftc_accum` 군집에 합쳐져 있어 실제 줄어든 것은 7) | 143 | 가상 0·FRQ 0, 위반 0 | 가상 0·FRQ 0, 위반 0 |
+- **(ii)는 불가능하지 않다 → 부족 칸·증명 없음**(정수계획 최적 = 가상 0, 분기한정 끝). 최종 조립은 (ii) 기준(보수 구조 판정)으로 하고 커밋된 `structure-groups.json` 은 건드리지 않았다(조립 시 `STRUCTURE_GROUPS_FILE=data/ap/stock/structure-groups.conservative.json` 환경변수로 선택; `assign-pool.ts` 에 추가).
+- 검증 대기 의존 최소(보수, 가상 0 유지): BC#1+AB#2 = **16건**(BC#1 6 + AB#2 10, 신규70 15 + 형제 1) — 보강 불필요. 이어서 AB#3·BC#2·BC#3 를 BC#1/AB#2 를 고정(`--exclude-keys`)한 뒤 풀어도 **가상 0**, 추가 검증 대기 최소 43건(AB#3 15·BC#2 15·BC#3 13). 즉 BC#1·AB#2 를 먼저 조립해도 뒤 세트가 막히지 않는다.
+- 산출(새 파일, 계획용 — 실조립은 오너 적재 뒤 DB 검증 재고로 다시 계산): `exact-assign-5sets-cons.json`, `exact-assign-bc1-ab2-cons-minpending.json`, `exact-assign-ab3-bc2-bc3-cons-after-bc1ab2.json`.
+
+### 실조립 절차 (오너 적재·DB 검증 완료 후, 조정 세션이 비프로덕션 키로 실행)
+전제: `owner-run-graph-load.md` 맨 위 표의 ①②③ 완료, 통과 140건이 `review_env_ready=true`. 모든 산출은 **새 경로 `data/ap/stock/assembled/`**(게시 AB#1 기록·`ab-full-set-selection.*` 불변; `exact-assign.ts`는 그 경로 쓰기를 거부, `assembly-keys.ts export` 는 기존 파일 덮어쓰기를 거부).
+1. DB 검증 키 목록 내보내기(읽기 전용): `ap_item_review_status_v` 에서 `review_env_ready` 인 `candidate_key` 를 JSON 배열로(`/tmp` 아닌 스크래치). 재고가 이 목록과 다르면 중단.
+2. BC#1+AB#2 먼저: `STRUCTURE_GROUPS_FILE=data/ap/stock/structure-groups.conservative.json npx tsx scripts/ap-generation/exact-assign.ts --sets BC1,AB2 --strict-families --min-pending --write-report data/ap/stock/assembled/plan-bc1-ab2.json` → 가상 0·위반 0 이어야 진행.
+3. 나머지: 같은 환경변수로 `--sets AB3,BC2,BC3 --strict-families --exclude-keys data/ap/stock/assembled/plan-bc1-ab2.json --write-report data/ap/stock/assembled/plan-rest.json`(BC#1·AB#2 문항을 고정 제외).
+4. 세트별 선택 파일: `npx tsx scripts/ap-generation/assembly-keys.ts export --report data/ap/stock/assembled/plan-bc1-ab2.json --out-dir data/ap/stock/assembled/sets` 와 `plan-rest.json` 도 같은 out-dir 로 → `BC1.keys.json`·`AB2.keys.json`·`AB3.keys.json`·`BC2.keys.json`·`BC3.keys.json`(`{set, keys:{mcA,mcB,frqA,frqB}}` = `assemble-ap-set.ts --keys-file` 형식, 섹션 지정 포함).
+5. **독립 검증**(배정기와 별개 재계산): `npx tsx scripts/ap-generation/assembly-keys.ts verify --files data/ap/stock/assembled/sets/BC1.keys.json,…/AB2.keys.json,…/AB3.keys.json,…/BC2.keys.json,…/BC3.keys.json --verified-keys <1 의 목록>` — 위반 0 이어야 한다(게시 AB#1·세트 간 중복 0·문항군·단원·스킬·계산기·그래프·FRQ·DB 검증 목록 포함).
+6. 문제은행 변환(검수 환경 게시, 후보당 용도 `mock_exam` 고정): `npx tsx scripts/ap-generation/publish-to-bank.ts --purpose mock_exam --keys <선택 키> --target worpsqwqgnspddnrtnvq --i-know-nonprod worpsqwqgnspddnrtnvq` dry-run → 대상 건수 확인 → `--execute`. 이미 변환된 후보는 대상에서 빠진다(AB#1 의 기존 변환·응시 기록 무변경).
+7. **초안으로만 저장(공개 안 함)**: 세트마다 `npx tsx scripts/ap-generation/assemble-ap-set.ts --subject ap_calculus_bc --keys-file data/ap/stock/assembled/sets/BC1.keys.json --name "AP Calculus BC — Practice Exam 1" --draft --target worpsqwqgnspddnrtnvq --i-know-nonprod worpsqwqgnspddnrtnvq` 를 dry-run 후 `--execute`(AB 는 `--subject ap_calculus_ab`, 이름은 AB#2·#3, BC#2·#3). 스크립트는 공식 구성(MC 42·FRQ 6)을 못 채우면 세트를 만들지 않고, 같은 이름의 비보관 세트가 있으면 중단하며, `status='draft'`(공개 안 함)로 `mock_exam_sets`·`mock_exam_set_items` 에 새 행만 INSERT 한다. **`publish` 단계(상태 변경·공개)는 이 라운드에서 하지 않는다.**
+8. 기존 응시 기록 무변경: 위 과정은 INSERT 전용이다(기존 `mock_exam_sets`·`mock_exam_set_items`·응시·점수 행 UPDATE/DELETE 없음, 게시 AB#1 의 문제 버전·후보 `is_current` 불변). 진행 전후에 `mock_exam_attempts` 행 수와 AB#1 세트·항목 행 수를 읽기 전용으로 세어 같은지 확인.
+- 실제 DB 쓰기(6·7)는 오너 승인 뒤 조정 세션이 한다. 이 문서·스크립트는 어디에도 키를 담지 않는다.
+
+### 최종 DB 기준 보고에 필요한 항목 체크리스트
+1. 조립된 세트 5개(이름·id·초안 상태·MC 42/FRQ 6 구성·각 문항 `candidate_key`)와 AB#1 변경 없음 확인.
+2. 게시 상태: AB#1 게시, 나머지 5개 모두 `status='draft'`(공개 0) — `mock_exam_sets` 조회.
+3. 고유 문항 수와 구조 문항군 수(세트 6개 합계, 세트 간 동일 문항 0, 세트 안 문항군 1 — `assembly-keys.ts verify` 출력과 DB 조회 일치).
+4. 예비 부족: 5세트 사용 후 미사용 재고(`ap_item_review_status_v` 에서 `review_env_ready` 이면서 세트 미배정)를 묶음별로 세어 1.5배 목표 대비(그래프 필수 4·단원 6 계산기 4·단원 2 1 등 `supplement-report.md` §4 표와 같은 기준) 부족 수.
+5. launch 차단 미해결 결함: `ap_launch_ready_v`(= 최신 게이트 통과 + 렌더·화면 검증 + `open_defect_reports=0` + `open_blockers=0`)에 배정된 모든 후보가 있는지, 빠진 후보는 `ap_launch_blockers`(`resolved_at is null`)·`ap_item_review_status_v.open_defect_reports` 로 사유 확인. 배정 문항 중 `ap_launch_ready_v` 밖이 하나라도 있으면 보고서에 명시.
+6. 누적 비용: `npx tsx scripts/ap-generation/ledger-total.ts`(현재 $31.2912 = 27.9992 + 3.2920, 중단선 $45·상한 $50) — 이후 추가 유료 호출이 없었음을 원장으로 확인.
+7. 외부 변경 내역(어느 DB에 몇 행 INSERT) 과 UAT/자동 테스트 실행 ID, 정리 결과.

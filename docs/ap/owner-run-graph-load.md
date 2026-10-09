@@ -1,5 +1,21 @@
 # 오너 실행 절차: 그래프·일반 신규 배치 10개 비프로덕션 적재·검증 기록 (2026-10-09, 예행 연습 완료)
 
+## 한눈에 보는 오너 적재 표 (고정 순서: ① 그래프 10파일 → ② 형제 21 → ③ 보강 8파일, 2026-10-09 요청 B)
+키는 어디에도 적지 않는다. 모든 단계: 먼저 dry-run → 표의 기대와 같을 때만 `--execute`. 출력 첫 줄 `대상:` 이 `worpsqwqgnspddnrtnvq.supabase.co` 가 아니면 즉시 중단. `$T` = `--target worpsqwqgnspddnrtnvq --i-know-nonprod worpsqwqgnspddnrtnvq`.
+| 단계 | 파일 수·내용 | 적재 행(총) | 최종 통과(검증 대상) | 렌더 기록 | 화면 기록 | 적재 dry-run 기대 | 렌더·화면 dry-run 기대 | execute 명령 형태 | 사후 확인(읽기 전용) |
+|---|---|---|---|---|---|---|---|---|---|
+| ① 그래프·일반 | 10파일(`graph-s1…s3g-items`) | **96** (통과 70 + 반려 26 이력) | **70** (MC 69 + FRQ 1) | 70 | 70 | `새 키 96·갱신 0` (파일별 표 아래) | 렌더 `대상 70(파일별 합)·건너뜀 0` / 화면 `신규 70·라벨 0·건너뜀 0` | 파일마다 `import-candidates.ts --items data/ap/stock/<파일>.json --batch <배치> --supplement --execute` → `mark-verified.ts --render --report data/ap/render-check/report.json --keys-file <통과 키 파일> $T --execute` → `mark-verified.ts --screen --evidence data/ap/screen-evidence/evidence-graph-s1s3.json --keys-file <통과 키 파일> $T --execute` | 3개 명령을 `--execute` 없이 재실행: `새 키 0`, `이미 검증됨 70`, `이미 같은 증거 70`, 신규 0 |
+| ② 기존 형제 | 키 목록 1개(`v1v45-siblings-keys.json`, 이미 적재돼 있다고 가정 — 적재 생략) | 0 (신규 적재 없음) | **21** (MC 15 + FRQ 6) | ≤21 (이미 검증된 것은 `이미 검증됨`) | 21 | 적재 없음 | 렌더 `대상 ≤21` / 화면 `신규 21·라벨 0` | `mark-verified.ts --render …` 와 `mark-verified.ts --screen --evidence data/ap/screen-evidence/evidence-v1v45-siblings.json --keys-file data/ap/stock/v1v45-siblings-keys.json $T` 각각 dry-run 뒤 `--execute` | 두 명령 재실행: `이미 검증됨 21`, `이미 같은 증거 21` |
+| ③ 보강 | 8파일(`supp-b1·b2ab·b2bc·b3ab·b3bc·b4ab·b5bc·b6ab-items`) | **65** (통과 49 + 반려 16 이력) | **49** (MC 39 + FRQ 10) | 49 | 49 | `새 키 65·갱신 0` | 렌더 `대상 49` / 화면 `신규 49·라벨 0·건너뜀 0` | 파일마다 `import-candidates.ts --items data/ap/stock/<파일>.json --batch <supp-bN-…> --supplement --execute` → 렌더(`--report data/ap/render-check/report.json --keys-file data/ap/stock/<supp-bN…-pass-keys.json>`) → 화면(`--evidence data/ap/screen-evidence/evidence-supp.json`, 같은 키 파일) 각각 `--execute` | 3개 재실행: `새 키 0`, `이미 검증됨 49`, `이미 같은 증거 49` |
+| **합계** | 18파일 + 키 목록 1 | **161** (96 + 65 = 통과 119 + 반려 이력 42; 아래 주 참고) | **140** | 140 (②의 이미 검증분 제외 가능) | 140 | | | | DB 에서 통과 140건이 `review_env_ready` 인지 확인(아래 "조립 직전 점검") |
+- 반려 행 수 정정: ①의 반려 26 + ③의 반려 **16**(= 67행 중 b3fa 2행 제외한 65행에서 통과 49 뺀 값) = 42 이력 행(합계 적재 161 = 통과 119 + 반려 42, ②의 21건은 이미 적재돼 있어 합계 행에 포함하지 않는다. 통과 140 = 70 + 21 + 49 는 검증 대상 건수).
+- **`supp-b3fa`(2행, 통과 0, 기출 유사 반려한 `frq_rate_in_out`)는 적재 표에서 제외**(새 키 2 로 적재하려면 선택 사항이며 검증 단계가 없다). 위 ③ 의 65행 안에는 **검수는 통과했으나 근접 중복 게이트(3-gram 유사도 > 0.8)로 최종 반려된 3건**(`supp-b2-ab-final:…f02-k1`, `supp-b2-bc-final:…f02-k1`, `supp-b5-bc-final:…f01-k2`)이 `rejected` 행으로 들어 있다 — 재고·검증 대상에서는 빠져 있고 통과 키 파일에도 없다.
+- 렌더 기록 수가 통과 수와 같은 것은 그림이 없는 문항이 `not_applicable` 로도 기록되기 때문(예행 연습 실측). 오너 dry-run 출력의 건수가 이 표와 다르면 중단하고 보고.
+- 순서를 지키는 이유: ① 이 BC#1·AB#2 의 전제(검증 대기 최소 16건 중 대부분), ② 는 AB#2·AB#3 일부 보강 재고, ③ 은 BC 단원 10 등 5세트 전체의 전제. 순서 자체는 서로 독립이라 어느 단계에서 멈춰도 데이터는 일관(추가만 하는 적재).
+
+### 조립 직전 점검(읽기 전용, 오너 또는 조정 세션)
+적재·검증 후 DB 에서 통과 140건이 모두 `ap_candidate_items.review_env_ready = true` 인지 확인하고(`ap_item_review_status_v`), 키 목록을 JSON 배열 파일로 내보내 `assembly-keys.ts verify --verified-keys <파일>` 에 넘긴다(`exact-assignment-report.md` §11).
+
 `owner-run-bc-topup-load.md` 와 같은 방식이다(오너가 bc-topup 을 같은 절차로 성공 실행). 에이전트는 서비스 키를 취득할 수 없어 이 단계는 **오너 본인 터미널**에서 실행한다. 이 문서·채팅·로그에 키를 적지 않는다. 대상은 공유 비프로덕션 `worpsqwqgnspddnrtnvq` 뿐이다(스크립트가 호스트가 다르면 `--execute` 를 거부).
 
 ## 준비된 증거(에이전트가 격리 스택에서 만들어 커밋함)

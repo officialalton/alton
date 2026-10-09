@@ -4,7 +4,7 @@
 // 세트 이름: BC1..BC3, AB2..AB3(AB1 은 게시본 고정 = 항목 제외). --ab1 free 는 게시본 AB#1 도 다시 배정에 포함(게시본 변경 가정, 별도 표시).
 // 조건: 세트 간 같은 문항 0, 세트 안 문항군(구조 look-alike 군집) 1, 단원·스킬 공식 범위, 계산기 29/13, 그래프 필수 ≥ floor(AB#1 제외 5세트 10),
 //   FRQ 6(A 계산기 2 + B 불가 4) 서로 다른 유형·문항군, BC 세트 BC 전용 FRQ ≥ 2. 재고 = 화면 증거 보유(신규 70 건 증거 포함) 항목.
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { solveMip, type Cons } from "../../lib/ap-exam/ilp";
 import { AB_B, BC_B, SK, loadPool, published, type Item } from "./assign-pool";
 
@@ -101,6 +101,8 @@ export function verifyAssignment(sets: Spec[], res: SetResult[], blocked: Set<st
 async function main() {
   const ids = arg("--sets", "BC1,AB2").split(",").map((x) => x.replace(/^(AB|BC)#?/, "$1")); const sets = ids.map(specOf);
   const pub = published(); const pubKeys = new Set([...pub.mcA, ...pub.mcB, ...pub.frqA, ...pub.frqB]);
+  // --exclude-keys a.json,b.json: 이미 조립(초안)한 세트의 선택 파일({keys:{mcA..}} 또는 exact-assign 보고서 {sets:[...]}) 문항을 고정 = 재고에서 제외(게시본과 같은 취급). 이 파일들은 읽기만 한다.
+  for (const f of arg("--exclude-keys").split(",").filter(Boolean)) { const o = JSON.parse(readFileSync(f, "utf-8")) as { keys?: Record<string, string[]>; sets?: { mcA: string[]; mcB: string[]; frqA: string[]; frqB: string[] }[] }; for (const g of o.keys ? [o.keys] : (o.sets ?? [])) for (const k of [...(g.mcA ?? []), ...(g.mcB ?? []), ...(g.frqA ?? []), ...(g.frqB ?? [])]) pubKeys.add(k); }
   const ab1Free = arg("--ab1", "published") === "free";
   const { all, pool } = loadPool({ strictFamilies: has("--strict-families") }); let items = (has("--screen-all") ? all : pool).filter((c) => (ab1Free ? true : !pubKeys.has(c.key)) && (!has("--no-pending") || !c.pending));
   const setsRun = ab1Free ? [specOf("AB1"), ...sets] : sets;

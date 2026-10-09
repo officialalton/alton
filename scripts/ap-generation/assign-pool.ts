@@ -37,7 +37,7 @@ export function loadPool(opts: { requireScreen?: boolean; strictFamilies?: boole
     rep: g.renderType, archetype: String(P(i).archetype ?? i.archetype ?? ""), screen: ev.has(i.stockKey), isNew: /^(graph-s|supp-)/.test(batchOf.get(i.stockKey) ?? ""), pending: pendingOf(i.stockKey), batch: batchOf.get(i.stockKey) ?? "", renderType: g.renderType,
   }));
   if (opts.strictFamilies) { // 구조 검토 묶음(data/ap/stock/structure-groups.json): 묶음 안 아키타입의 문항군 군집을 합친다.
-    const groups = (JSON.parse(readFileSync("data/ap/stock/structure-groups.json", "utf-8")) as { groups: { archetypes: string[] }[] }).groups.map((g) => g.archetypes);
+    const groups = (JSON.parse(readFileSync(process.env.STRUCTURE_GROUPS_FILE ?? "data/ap/stock/structure-groups.json", "utf-8")) as { groups: { archetypes: string[] }[] }).groups.map((g) => g.archetypes);
     const p = new Map<string, string>(); const find = (x: string): string => ((p.get(x) ?? x) === x ? x : (p.set(x, find(p.get(x)!)), p.get(x)!));
     const union = (a: string, b: string) => { const ra = find(a), rb = find(b); if (ra !== rb) p.set(rb, ra); };
     for (const g of groups) { const fams = [...new Set(all.filter((c) => c.kind === "mc" && g.includes(c.archetype)).map((c) => c.fam))]; for (let i = 1; i < fams.length; i++) union(fams[0], fams[i]); }
