@@ -1,5 +1,5 @@
 {
- "spent": 82.704,
+ "spent": 82.916,
  "entries": [
   {
    "at": "2026-10-08T09:13:14.616Z",
@@ -974,8 +974,28 @@
   {
    "at": "2026-10-09T03:26:06.749447+00:00",
    "usd": 0,
-   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) \u2014 invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
+   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) — invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
    "excludedRun": "v8-bio-r"
+  },
+  {
+   "at": "2026-10-09T03:29:41.301Z",
+   "usd": 0.0228172,
+   "note": "gen sync"
+  },
+  {
+   "at": "2026-10-09T03:29:51.554Z",
+   "usd": 0.07284480000000002,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-09T03:30:03.024Z",
+   "usd": 0.0845464,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-09T03:30:14.524Z",
+   "usd": 0.03189,
+   "note": "difficulty sync"
   }
  ]
 }
