@@ -18,7 +18,16 @@ NEWMC.update({"graph_fprime_extremum": (rf.graph_fprime_extremum, "5"), "graph_a
 MC.update(NEWMC)
 TOPUP = {n: (getattr(tu, n), u) for n, u in [("param_xvel_graph","9"),("polar_area_graph","9"),("polar_rprime_graph","9"),("lagrange_graph","10"),("alt_series_table","10"),("taylor_table","10"),("polar_table_distance","9"),("param_speed_table","9")]}
 MC.update(TOPUP)
-FRQ = {"frq_series": bc.frq_series, "frq_parametric": bc.frq_parametric, "frq_euler_logistic": tf.frq_euler_logistic, "frq_table_rate": cf.frq_table_rate, "frq_fprime_graph": cf.frq_fprime_graph, "frq_diffeq": cf.frq_diffeq, "frq_area_volume": cf.frq_area_volume, "frq_bio_investigation": bf.frq_bio_investigation, "frq_bio_data_short": bf.frq_bio_data_short, "frq_particle_motion": rf.frq_particle_motion, "frq_related_rates": rf.frq_related_rates, "frq_implicit_diff": rf.frq_implicit_diff, "frq_micro_monopoly": mf.frq_micro_monopoly, "frq_micro_game": mf.frq_micro_game}
+import calc_graph_a as _ga, calc_graph_b as _gb, calc_graph_c as _gc, calc_graph_d as _gd, calc_graph_e as _ge, calc_graph_f as _gf, calc_graph_g as _gg, calc_graph_h as _gh, calc_general_i as _gi, calc_graph_j as _gj, calc_graph_k as _gk, calc_frq_polar as _gfp
+GRAPH_MODS = [_ga, _gb, _gc, _gd, _ge, _gf, _gg, _gh, _gi, _gj, _gk]
+GRAPH = {n: (getattr(m, n), "0") for m in GRAPH_MODS for n in dir(m) if n.startswith(("g_", "c_")) and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
+MC.update(GRAPH)
+GRAPH_STAGES = {}  # 단계별 목록(graph_s1_ab, graph_s1_bc …): calc_graph_stages.py 가 채운다
+try:
+    from calc_graph_stages import STAGES as GRAPH_STAGES
+except ImportError:
+    pass
+FRQ ={"frq_series": bc.frq_series, "frq_parametric": bc.frq_parametric, "frq_euler_logistic": tf.frq_euler_logistic, "frq_polar_region": _gfp.frq_polar_region, "frq_table_rate": cf.frq_table_rate, "frq_fprime_graph": cf.frq_fprime_graph, "frq_diffeq": cf.frq_diffeq, "frq_area_volume": cf.frq_area_volume, "frq_bio_investigation": bf.frq_bio_investigation, "frq_bio_data_short": bf.frq_bio_data_short, "frq_particle_motion": rf.frq_particle_motion, "frq_related_rates": rf.frq_related_rates, "frq_implicit_diff": rf.frq_implicit_diff, "frq_micro_monopoly": mf.frq_micro_monopoly, "frq_micro_game": mf.frq_micro_game}
 
 def sig(p):
     return hashlib.sha1(json.dumps([p.get("stem"), [o["text"] for o in p.get("options", [])], p.get("stimulus")], sort_keys=True).encode()).hexdigest()[:12]
@@ -44,11 +53,23 @@ if __name__ == "__main__":
         if which == "bc": print(json.dumps({"mc": list(BCMC), "frq": ["frq_series", "frq_parametric"]}))
         elif which == "bctopup": print(json.dumps({"mc": list(TOPUP), "frq": ["frq_euler_logistic"]}))
         elif which == "new": print(json.dumps({"mc": list(NEWMC), "frq": []}))
+        elif which.startswith("graph"): print(json.dumps({"mc": sorted(GRAPH if which == "graph" else [n for n in GRAPH if n in GRAPH_STAGES.get(which, [])]), "frq": [n for n in FRQ if n in GRAPH_STAGES.get(which, [])]}))
         elif which == "reinforce": print(json.dumps({"mc": ["graph_fprime_extremum", "graph_accum_value"], "frq": ["frq_particle_motion", "frq_related_rates", "frq_implicit_diff"]}))
         elif which == "reinforce2": print(json.dumps({"mc": [], "frq": ["frq_particle_motion", "frq_implicit_diff"]}))
         elif which == "biodata": print(json.dumps({"mc": [], "frq": ["frq_bio_data_short"]}))
         elif which == "bio": print(json.dumps({"mc": [], "frq": ["frq_bio_investigation", "frq_bio_data_short"]}))
         elif which == "micro": print(json.dumps({"mc": [], "frq": ["frq_micro_monopoly", "frq_micro_game"]}))
         else: print(json.dumps({"mc": [k for k in MC if k not in BCMC and k not in NEWMC and k not in TOPUP], "frq": [k for k in FRQ if k in ("frq_table_rate","frq_fprime_graph","frq_diffeq","frq_area_volume")]}))
-    elif cmd == "all": print(json.dumps({n: batch(n, int(sys.argv[2]), 0) for n in list(MC) + list(FRQ)}))
+    elif cmd == "guide":  # 그래프 원형의 가이드 항목(JSON): lib/ap-generation/subjects/graph-archetypes.json 의 원천
+        out = []
+        for n in sorted(GRAPH):
+            p = (batch(n, 1, 0) or [None])[0]
+            if not p: raise SystemExit(f"no pack for {n}")
+            b = p["blueprint"]
+            out.append({"id": n, "topic": p["topic"], "skill": p["skill"], "calculator": p["calculator"], "stimulus": "graph", "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]], "bc": b["subject"] == "ap_calculus_bc"})
+        print(json.dumps(out, indent=1))
+    elif cmd == "all":print(json.dumps({n: batch(n, int(sys.argv[2]), 0) for n in list(MC) + list(FRQ)}))
     elif cmd == "batch": print(json.dumps(batch(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 0)))
+
+# 가이드 일관성 테스트(gates.test.ts)가 읽는 원형 id 목록(동적 등록과 별개로 문자열 존재를 확인한다)
+GRAPH_ARCHETYPE_IDS = ["c_abs_extreme_calc", "c_accum_interval_calc", "c_area_between_calc", "c_bc_alt_terms_calc", "c_bc_euler_calc", "c_bc_improper_calc", "c_decay_model_calc", "c_disc_volume_calc", "c_ftc_chain_calc", "c_implicit_slope_calc", "c_inflection_calc", "c_linear_approx_overunder_calc", "c_midpoint_sum_calc", "c_motion_turn_calc", "c_quotient_deriv_calc", "c_related_rates_cone_calc", "c_second_deriv_test_calc", "c_trig_deriv_calc", "g_abs_max_fprime", "g_accum_justify_graph", "g_accum_reverse_extremum", "g_accum_two_values", "g_alt_series_graph", "g_arcsin_deriv_mixed_calc", "g_area_between_graph", "g_area_curve_line_calc", "g_area_y_graph", "g_avg_roc_graph", "g_avg_roc_mixed_calc", "g_avg_value_graph", "g_avg_value_mixed_calc", "g_chain_mixed_calc", "g_chain_two_graphs", "g_cont_k_mixed_calc", "g_cont_removable", "g_context_roc_meaning", "g_count_nondiff", "g_critical_point_mixed_calc", "g_euler_graph", "g_exp_deriv_mixed_calc", "g_exp_growth_constant", "g_exp_value_calc", "g_extrema_count_fprime", "g_extreme_mixed_calc", "g_fprime_inc_concave", "g_fprime_inflection", "g_ftc_chain_graph", "g_ftc_mixed_calc", "g_geometric_series_graph", "g_inflow_outflow_graph", "g_integral_mixed_calc", "g_integral_properties_graph", "g_integral_semicircle", "g_inverse_deriv_graph", "g_ivt_graph", "g_lagrange_decimal_calc", "g_lagrange_p2_calc", "g_lhopital_graph", "g_lim_jump_sum", "g_linearization_composite_calc", "g_logistic_fastest_graph", "g_mvt_fprime_graph", "g_parallel_tangent_calc", "g_param_arclength_graphs_calc", "g_param_dydx_graphs", "g_param_rest_graph", "g_param_speed_graphs", "g_position_graph_speed", "g_prod_deriv_mixed_calc", "g_product_two_graphs", "g_quotient_mixed_calc", "g_quotient_two_graphs", "g_rate_mixed_calc", "g_related_rates_two_graphs", "g_riemann_left_graph", "g_riemann_mixed_calc", "g_second_deriv_mixed_calc", "g_separable_graph_calc", "g_speed_increasing", "g_squeeze_graph", "g_tangent_approx_fprime_graph", "g_tangent_line_value_graph", "g_taylor_deriv_graph", "g_total_distance_graph", "g_trapezoid_unequal_graph", "g_usub_graph", "g_vector_displacement_graph", "g_volume_axis_shift_calc", "g_volume_base_graph", "g_volume_curve_line_calc", "g_volume_semicircle_graph", "g_volume_triangle_graph", "g_volume_washer_graph", "g_washer_curve_line_calc"]

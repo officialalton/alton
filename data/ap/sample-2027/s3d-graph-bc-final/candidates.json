@@ -1,0 +1,486 @@
+[
+ {
+  "candidateKey": "ap_calculus_bc-f01-k0",
+  "cellId": "ap_calculus_bc-f01",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "frq_bundle",
+  "keywordCode": "9.8",
+  "unitCode": "9",
+  "skillPrimary": "1.E",
+  "structure": "frq_multipart",
+  "calculator": "required",
+  "archetype": "frq_polar_region",
+  "wording": "mixed",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Four-part polar FRQ covering area, dr/dtheta with interpretation, tangent slope via dy/dx, and maximizing y = r sin(theta) with justification. Each part is a standard procedure, but together they need several reasoning steps and a calculator solve with a max justification. Numbers are clean and the wording is unambiguous, which fits a full-mock item.",
+  "payload": {
+   "archetype": "frq_polar_region",
+   "template": "polar_region_calc",
+   "topic": "9.8",
+   "extra_topics": [
+    "9.7"
+   ],
+   "skill": "1.E",
+   "representative_skill": "1.E",
+   "calculator": "required",
+   "title": "A polar curve: area, rate of change of distance, tangent slope, and highest point",
+   "stimulus": {
+    "kind": "text",
+    "description": "Polar curve",
+    "data": {
+     "curve": "r = 3 + 1 cos(theta), 0 <= theta <= pi/2"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Let $R$ be the region in the first quadrant bounded by the polar curve $r=3+1\\cos\\theta$ for $0\\le\\theta\\le\\frac{\\pi}{2}$ and the coordinate axes. Write an integral expression for the area of $R$, and find the area of $R$.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.D",
+      "1.E"
+     ],
+     "model_answer": "Area = (1/2) ∫_0^(π/2) (3 + 1 cos θ)^2 dθ = 10.461.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Area integrand (1/2) r^2 (setup)",
+       "required_elements": [
+        "(1/2)(3+1cos θ)^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Limits of integration 0 and π/2 (setup)",
+       "required_elements": [
+        "0 to π/2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a3",
+       "points": 1,
+       "criterion": "Answer (value)",
+       "required_elements": [
+        "10.461"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "9.8"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find $\\dfrac{dr}{d\\theta}$ at $\\theta=\\frac{\\pi}{3}$. Interpret the meaning of your answer in the context of the distance from the origin to the point on the curve.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.E",
+      "3.F"
+     ],
+     "model_answer": "dr/dθ = -1 sin θ = -0.866 at θ = π/3: the distance from the origin to the point is decreasing as theta increases.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Value of dr/dθ at π/3 (value)",
+       "required_elements": [
+        "-0.866"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Interpretation: the distance from the origin is decreasing as theta increases (meaning)",
+       "required_elements": [
+        "distance from the origin",
+        "decreasing"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "9.7"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Find the slope of the line tangent to the curve $r=3+1\\cos\\theta$ at $\\theta=\\frac{\\pi}{3}$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "dy/dx = (r' sin θ + r cos θ)/(r' cos θ - r sin θ) = -0.289 at θ = π/3.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Uses dy/dx = (dy/dθ)/(dx/dθ) with x = r cos θ and y = r sin θ (setup)",
+       "required_elements": [
+        "dy/dθ over dx/dθ"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Answer (slope value)",
+       "required_elements": [
+        "-0.289"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "9.7"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Find the $y$-coordinate of the highest point of the curve $r=3+1\\cos\\theta$ for $0\\le\\theta\\le\\frac{\\pi}{2}$. Justify your answer.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "3.D"
+     ],
+     "model_answer": "y = r sin θ is greatest where dy/dθ = r' sin θ + r cos θ = 0, at θ = 1.286, giving y = 3.149.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Sets dy/dθ = r' sin θ + r cos θ equal to zero (setup)",
+       "required_elements": [
+        "dy/dθ = 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Answer: the greatest y-coordinate (value)",
+       "required_elements": [
+        "3.149"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "9.7"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "a=3",
+    "b=1",
+    "area=10.461283",
+    "rprime=-0.866025",
+    "slope=-0.288675",
+    "ymax=3.148801"
+   ],
+   "blueprint": {
+    "id": "frq_polar_region",
+    "subject": "ap_calculus_bc",
+    "kind": "frq_bundle",
+    "concept": "Use polar area, the derivative of r, and the polar tangent slope, and find the highest point, for a first-quadrant limacon arc",
+    "topic": "9.8",
+    "skill": "1.E",
+    "student_thinking": [
+     "Set up (1/2) r^2 and integrate over the given angles",
+     "Differentiate r and interpret it as the rate of change of the distance from the origin",
+     "Compute dy/dx from x = r cos theta and y = r sin theta",
+     "Maximize y = r sin theta by solving dy/dtheta = 0 numerically"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "r is positive and differentiable on [0, pi/2], so the polar area and length formulas apply",
+      "evidence": "a + b cos theta >= a - 0 > 0 on the interval"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "polar equation",
+      "interval of theta"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "area by closed-form sympy integration and Simpson rule; slope by central difference of x(theta), y(theta); highest point by a 20001-point grid search (independent of Brent's method)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.D",
+       "1.E"
+      ],
+      "topics": [
+       "9.8"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Area = (1/2) ∫_0^(π/2) (3 + 1 cos θ)^2 dθ = 10.461."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Area integrand (1/2) r^2 (setup)",
+        "elements": [
+         "(1/2)(3+1cos θ)^2"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Limits of integration 0 and π/2 (setup)",
+        "elements": [
+         "0 to π/2"
+        ]
+       },
+       {
+        "row_id": "a3",
+        "points": 1,
+        "criterion": "Answer (value)",
+        "elements": [
+         "10.461"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "1.E",
+       "3.F"
+      ],
+      "topics": [
+       "9.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "dr/dθ = -1 sin θ = -0.866 at θ = π/3: the distance from the origin to the point is decreasing as theta increases."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Value of dr/dθ at π/3 (value)",
+        "elements": [
+         "-0.866"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Interpretation: the distance from the origin is decreasing as theta increases (meaning)",
+        "elements": [
+         "distance from the origin",
+         "decreasing"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "9.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "dy/dx = (r' sin θ + r cos θ)/(r' cos θ - r sin θ) = -0.289 at θ = π/3."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Uses dy/dx = (dy/dθ)/(dx/dθ) with x = r cos θ and y = r sin θ (setup)",
+        "elements": [
+         "dy/dθ over dx/dθ"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Answer (slope value)",
+        "elements": [
+         "-0.289"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.E",
+       "3.D"
+      ],
+      "topics": [
+       "9.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "y = r sin θ is greatest where dy/dθ = r' sin θ + r cos θ = 0, at θ = 1.286, giving y = 3.149."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Sets dy/dθ = r' sin θ + r cos θ equal to zero (setup)",
+        "elements": [
+         "dy/dθ = 0"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Answer: the greatest y-coordinate (value)",
+        "elements": [
+         "3.149"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 4100,
+   "pack_id": "frq_polar_region-s4100"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_polar_region",
+   "facts": [
+    "a=3",
+    "b=1",
+    "area=10.461283",
+    "rprime=-0.866025",
+    "slope=-0.288675",
+    "ymax=3.148801"
+   ],
+   "seed": 4100
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. The values are correct and unique, the parts fit topics 9.8 and 9.7, and the load suits the AP exam. The one weakness is that part d says \"Justify your answer\" but the rubric has no row for comparing the critical value with the endpoints.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part a is 9.8; parts b to d are 9.7, which is allowed for this bundle. The skills are consistent with the part labels."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys were confirmed by the solver. In part d the critical value 3.149 exceeds the endpoint values 0 and 3, so the answer is unique. The rubric does not award a point for the justification that part d requests."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The curve and interval are fully specified. The \"1 cos\" coefficient is stylistically awkward but not ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The common_errors lists are empty, which is a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "There are 9 points over four parts in about 15 minutes, and a calculator is needed for the area and the numerical solve. The load is typical of the AP exam."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part polar FRQ covering area, dr/dtheta with interpretation, tangent slope via dy/dx, and maximizing y = r sin(theta) with justification. Each part is a standard procedure, but together they need several reasoning steps and a calculator solve with a max justification. Numbers are clean and the wording is unambiguous, which fits a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ }
+]

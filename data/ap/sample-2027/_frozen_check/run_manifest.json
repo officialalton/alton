@@ -1,9 +1,9 @@
 {
  "run": "_frozen_check",
- "subject": "ap_biology",
- "generatorCommit": "198b9480+dirty",
+ "subject": "ap_calculus_bc",
+ "generatorCommit": "dbfe6a5d",
  "gateVersion": "v2-code-first-final-2026-10-08",
- "reviewerPromptHash": "e2cfc88eb330",
+ "reviewerPromptHash": "fd3b454c2bfb",
  "difficultyPromptHash": "9bda2250d42c",
  "flags": {
   "flatReview": true,
@@ -12,7 +12,7 @@
   "legacyItems": false,
   "repair": false
  },
- "arm": "frozen v9-bio-data-short",
+ "arm": "frozen v1-s3d-graph-bc",
  "parserHash": "7528bbe8cdfc",
  "models": {
   "gen": "claude-sonnet-5-5",
@@ -35,9 +35,9 @@
  },
  "seeds": {
   "first": [
-   2000
+   4100
   ],
   "note": "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED"
  },
- "frozenAt": "2026-10-09T04:47:59.173Z"
+ "frozenAt": "2026-10-09T08:46:42.475Z"
 }

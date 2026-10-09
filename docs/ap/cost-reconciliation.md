@@ -34,3 +34,6 @@
 - 낭비(통과하지 못한 슬롯의 비용)는 `ledger_breakdown.py` 출력의 cost_by_category(rejected_never_passed 등)에서 확인한다. 예: AB MC 반려 $1.93 + 초기 통과 후 최종 반려 $0.64.
 - **재검토(Fable 표본)** 는 FRQ에서 비용 34%를 차지 — 표본 규모(통과의 10%)를 FRQ에는 줄이는 안을 실험에서 비교한다.
 - 구(런1) 대비는 `production-structure.md` §1. 구 방식의 사용 가능 고유 MC 189·FRQ 25 는 최신 게이트 재검증 전이라 단순 비교 불가.
+
+## 6. 6세트 단계 생성 S1~S3 지출 (2026-10-09 오너 승인: 총 상한 $50, 중단선 $45)
+누적 $23.8634 -> $27.9992(신규 $4.1358: S1 $1.6970, S2 $0.5139, S3 $1.9249). 상세·통과·부족 갱신은 `graph-stages-report.md`. 원장 상수 STOP_LINE=45, TOTAL_CAP=50(`ledger-total.ts`).

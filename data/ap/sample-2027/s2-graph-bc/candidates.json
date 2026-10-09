@@ -1,0 +1,1256 @@
+[
+ {
+  "candidateKey": "ap_calculus_bc-m01-k0",
+  "cellId": "ap_calculus_bc-m01",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "mc",
+  "keywordCode": "7.5",
+  "unitCode": "7",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "g_euler_graph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Two-step Euler's method requiring reading g(0)=5 and g(2)=1 from a graph, then iterating with slope depending on x and y. Small integer arithmetic gives -7. Distractors reflect plausible slips (one step, sign errors, using the wrong g value). A moderate multi-step item with one representation change, suitable for a full mock.",
+  "payload": {
+   "archetype": "g_euler_graph",
+   "topic": "7.5",
+   "skill": "1.E",
+   "calculator": "not_allowed",
+   "stem": "Let $y=f(x)$ be the solution of $\\dfrac{dy}{dx}=g(x)-y$ with $f(0)=1$, where the graph of $g$, consisting of line segments, is shown. Euler's method with two steps of equal size $h=2$ starting at $x=0$ is used to approximate $f(4)$. What is the approximation?",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Graph of g, consisting of line segments connecting the plotted vertices.",
+    "data": {
+     "x_axis": {
+      "label": "x",
+      "min": 0,
+      "max": 8,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "g(x)",
+      "min": -1,
+      "max": 6,
+      "step": 1
+     },
+     "vertices": [
+      [
+       0,
+       5
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       8,
+       3
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$-1$",
+     "why": "Uses the slope at the right endpoint of each step, g(x + h) - y, instead of the left endpoint.",
+     "value": "-1.0000000"
+    },
+    {
+     "text": "$3$",
+     "why": "Uses step size 1 for two steps and ends at x = 2 instead of x = 4.",
+     "value": "3.0000000"
+    },
+    {
+     "text": "$-7$",
+     "why": "Step 1: y1 = y0 + 2(g(0) - y0). Step 2: y2 = y1 + 2(g(2) - y1), with g read from the graph.",
+     "value": "-7.0000000"
+    },
+    {
+     "text": "$13$",
+     "why": "Leaves out the -y term and adds only the values of g.",
+     "value": "13.000000"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "v=[5, 1, 0, 2, 3]",
+    "y0=1",
+    "y2=-7"
+   ],
+   "blueprint": {
+    "id": "g_euler_graph",
+    "subject": "ap_calculus_bc",
+    "kind": "mc",
+    "concept": "Apply Euler's method when the slope depends on x through a graph and on y through the equation",
+    "topic": "7.5",
+    "skill": "1.E",
+    "student_thinking": [
+     "Read g(0) and g(2) from the graph",
+     "Compute the first Euler step using the slope g(0) - y0",
+     "Use the new y value in the second step with the slope g(2) - y1"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "Euler's method uses the slope at the left endpoint of each step",
+      "evidence": "definition of Euler's method with step size h"
+     }
+    ],
+    "material": {
+     "type": "graph",
+     "must_include": [
+      "vertices of g at x = 0, 2, 4, 6, 8"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "right_endpoint_slope",
+      "description": "uses right-endpoint slopes"
+     },
+     {
+      "id": "missing_y_term",
+      "description": "ignores the -y term"
+     },
+     {
+      "id": "wrong_step",
+      "description": "uses the wrong step size"
+     }
+    ],
+    "verification": {
+     "independent_path": "two Euler steps recomputed with floating-point arithmetic on the interpolated graph (independent of the exact rationals)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3300,
+   "pack_id": "g_euler_graph-s3300",
+   "explanation_en": "The correct answer is -7. Step 1: y1 = y0 + 2(g(0) - y0). Step 2: y2 = y1 + 2(g(2) - y1), with g read from the graph.\n-1 is incorrect: Uses the slope at the right endpoint of each step, g(x + h) - y, instead of the left endpoint.\n3 is incorrect: Uses step size 1 for two steps and ends at x = 2 instead of x = 4.\n13 is incorrect: Leaves out the -y term and adds only the values of g."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "g_euler_graph",
+   "facts": [
+    "v=[5, 1, 0, 2, 3]",
+    "y0=1",
+    "y2=-7"
+   ],
+   "seed": 3300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Euler's method with two steps; graph read-off is a modest added representation. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "y1=9, y2=-7; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices complete; g(0)=5, g(2)=1 are read at vertices. Axes cover the data."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reproduces from its stated misconception (-1, 3, 13 verified). Explanation covers all wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, small integer arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear, and in scope, with distinct, realistic distractors and a suitable time and arithmetic load. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-step Euler's method requiring reading g(0)=5 and g(2)=1 from a graph, then iterating with slope depending on x and y. Small integer arithmetic gives -7. Distractors reflect plausible slips (one step, sign errors, using the wrong g value). A moderate multi-step item with one representation change, suitable for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_bc-m02-k0",
+  "cellId": "ap_calculus_bc-m02",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "mc",
+  "keywordCode": "10.12",
+  "unitCode": "10",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "g_lagrange_decimal_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must read the graph of f^(4), restrict to [0,1.4], recognize that the max of |f^(4)| is 3 (at the vertex x=1, a negative value), and apply the Lagrange bound M/4!*(1.4)^4 = 0.480. Distractors reflect real misconceptions: using the whole-graph max of 6, using the wrong interval, or using the signed maximum. Numbers are simple, and the calculator is needed only for 1.4^4.",
+  "payload": {
+   "archetype": "g_lagrange_decimal_calc",
+   "topic": "10.12",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "The third-degree Maclaurin polynomial $P_3$ of a function $f$ with derivatives of all orders is used to estimate $f(1.4)$. The fourth derivative of $f$ is graphed on $0\\le x\\le 3$ and consists of line segments, as shown. Use the Lagrange error bound to find the least upper bound for the error $|f(1.4)-P_3(1.4)|$ that the graph supports.",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Graph of f^(4)(x), consisting of line segments connecting the plotted vertices.",
+    "data": {
+     "x_axis": {
+      "label": "x",
+      "min": 0,
+      "max": 3,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "y",
+      "min": -7,
+      "max": 7,
+      "step": 1
+     },
+     "vertices": [
+      [
+       0,
+       -1
+      ],
+      [
+       1,
+       -3
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       -6
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$1.921$",
+     "why": "Divides by 3! instead of 4!.",
+     "value": "1.9208000"
+    },
+    {
+     "text": "$0.096$",
+     "why": "Uses the largest signed value of the graph on [0, 1.4] instead of the largest absolute value.",
+     "value": "0.096040000"
+    },
+    {
+     "text": "$0.480$",
+     "why": "M x^4/4! with M = the maximum of |f^(4)| on [0, a] read from the graph, evaluated with a calculator.",
+     "value": "0.48020000"
+    },
+    {
+     "text": "$0.960$",
+     "why": "Takes the maximum over the whole graph, not only over [0, 1.4].",
+     "value": "0.96040000"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "v=[-1, -3, 6, -6]",
+    "a=1.4",
+    "key=0.480200"
+   ],
+   "blueprint": {
+    "id": "g_lagrange_decimal_calc",
+    "subject": "ap_calculus_bc",
+    "kind": "mc",
+    "concept": "Apply the Lagrange error bound with a bound read from a graph at a non-integer point",
+    "topic": "10.12",
+    "skill": "1.E",
+    "student_thinking": [
+     "Read the largest absolute value of f^(4) on [0, a] from the graph",
+     "Apply M |x|^(n+1)/(n+1)! with n = 3",
+     "Evaluate with a calculator"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "|f^(4)| <= M on [0, a] for the maximum absolute value read from the graph",
+      "evidence": "the graph is piecewise linear so the maximum occurs at a vertex or at the endpoint a"
+     }
+    ],
+    "material": {
+     "type": "graph",
+     "must_include": [
+      "vertices of f^(4) at x = 0, 1, 2, 3"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "signed_max",
+      "description": "uses the signed maximum"
+     },
+     {
+      "id": "wrong_interval",
+      "description": "uses a maximum from outside [0, a]"
+     },
+     {
+      "id": "wrong_factorial",
+      "description": "uses 3! instead of 4!"
+     },
+     {
+      "id": "wrong_power",
+      "description": "uses x cubed"
+     }
+    ],
+    "verification": {
+     "independent_path": "maximum absolute value from a 2000-point grid on [0, a] (independent of vertex reading)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3300,
+   "pack_id": "g_lagrange_decimal_calc-s3300",
+   "explanation_en": "The correct answer is 0.480. M x^4/4! with M = the maximum of |f^(4)| on [0, a] read from the graph, evaluated with a calculator.\n1.921 is incorrect: Divides by 3! instead of 4!.\n0.096 is incorrect: Uses the largest signed value of the graph on [0, 1.4] instead of the largest absolute value.\n0.960 is incorrect: Takes the maximum over the whole graph, not only over [0, 1.4]."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "g_lagrange_decimal_calc",
+   "facts": [
+    "v=[-1, -3, 6, -6]",
+    "a=1.4",
+    "key=0.480200"
+   ],
+   "seed": 3300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 100 seconds, light calculator use, and decimal options are appropriate.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key 0.480 is unique and the distractors are distinct and explained. No instant-reject conditions apply."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the graph of f^(4), restrict to [0,1.4], recognize that the max of |f^(4)| is 3 (at the vertex x=1, a negative value), and apply the Lagrange bound M/4!*(1.4)^4 = 0.480. Distractors reflect real misconceptions: using the whole-graph max of 6, using the wrong interval, or using the signed maximum. Numbers are simple, and the calculator is needed only for 1.4^4.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_bc-m03-k0",
+  "cellId": "ap_calculus_bc-m03",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "mc",
+  "keywordCode": "9.1",
+  "unitCode": "9",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "g_param_dydx_graphs",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Identify the segment containing t=5 (t from 4 to 6), read the slopes of x (3/2) and y (-5/2) from the graphs, and divide to get dy/dx = -5/3. This is a single procedure with one representation change (graph to slope to derivative) and trivial arithmetic. The distractors target common errors such as multiplying slopes or inverting the ratio. Concept depth is shallow and there are no hypotheses to check.",
+  "payload": {
+   "archetype": "g_param_dydx_graphs",
+   "topic": "9.1",
+   "skill": "1.E",
+   "calculator": "not_allowed",
+   "stem": "A curve in the $xy$-plane is given by $x=x(t)$ and $y=y(t)$ for $0\\le t\\le 8$. The graphs of $x$ and $y$ as functions of $t$ are shown and each consists of line segments. What is the value of $\\dfrac{dy}{dx}$ at $t=5$?",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Graphs of x(t) and y(t), each consisting of line segments connecting the plotted vertices.",
+    "data": {
+     "x_axis": {
+      "label": "t",
+      "min": 0,
+      "max": 8,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "position",
+      "min": -1,
+      "max": 9,
+      "step": 1
+     },
+     "curves": [
+      {
+       "label": "x",
+       "type": "piecewise linear",
+       "vertices": [
+        [
+         0,
+         6
+        ],
+        [
+         2,
+         1
+        ],
+        [
+         4,
+         5
+        ],
+        [
+         6,
+         8
+        ],
+        [
+         8,
+         1
+        ]
+       ]
+      },
+      {
+       "label": "y",
+       "type": "piecewise linear",
+       "vertices": [
+        [
+         0,
+         5
+        ],
+        [
+         2,
+         6
+        ],
+        [
+         4,
+         6
+        ],
+        [
+         6,
+         1
+        ],
+        [
+         8,
+         2
+        ]
+       ]
+      }
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$-4$",
+     "why": "Subtracts the derivatives, y' - x'.",
+     "value": "-4.0000000"
+    },
+    {
+     "text": "$- \\frac{15}{4}$",
+     "why": "Multiplies the two derivatives, x' y', instead of dividing.",
+     "value": "-3.7500000"
+    },
+    {
+     "text": "$- \\frac{5}{3}$",
+     "why": "dy/dx = (dy/dt)/(dx/dt); the slopes of the two graphs at t = 5 are y' = -5/2 and x' = 3/2.",
+     "value": "-1.6666667"
+    },
+    {
+     "text": "$\\frac{7}{13}$",
+     "why": "Divides the positions y(t)/x(t) instead of the rates of change.",
+     "value": "0.53846154"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 85,
+   "facts": [
+    "vx=[6, 1, 5, 8, 1]",
+    "vy=[5, 6, 6, 1, 2]",
+    "a=5",
+    "key=-5/3"
+   ],
+   "blueprint": {
+    "id": "g_param_dydx_graphs",
+    "subject": "ap_calculus_bc",
+    "kind": "mc",
+    "concept": "Compute dy/dx for parametric equations from the graphs of x(t) and y(t)",
+    "topic": "9.1",
+    "skill": "1.E",
+    "student_thinking": [
+     "Read the slope of the graph of x and of the graph of y at the given t",
+     "Apply dy/dx = (dy/dt)/(dx/dt)"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "dx/dt is not zero at the given time, so dy/dx exists",
+      "evidence": "the slope of the graph of x is nonzero on the segment containing t"
+     }
+    ],
+    "material": {
+     "type": "graph",
+     "must_include": [
+      "vertices of x(t)",
+      "vertices of y(t)"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "inverted_ratio",
+      "description": "reports dx/dy"
+     },
+     {
+      "id": "product",
+      "description": "multiplies"
+     },
+     {
+      "id": "difference",
+      "description": "subtracts the derivatives"
+     },
+     {
+      "id": "ratio_of_positions",
+      "description": "divides the positions"
+     }
+    ],
+    "verification": {
+     "independent_path": "difference quotient of y over difference quotient of x with step 1e-6 on the interpolated graphs (independent of reading slopes)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3300,
+   "pack_id": "g_param_dydx_graphs-s3300",
+   "explanation_en": "The correct answer is - \\frac{5}{3}. dy/dx = (dy/dt)/(dx/dt); the slopes of the two graphs at t = 5 are y' = -5/2 and x' = 3/2.\n-4 is incorrect: Subtracts the derivatives, y' - x'.\n- \\frac{15}{4} is incorrect: Multiplies the two derivatives, x' y', instead of dividing.\n\\frac{7}{13} is incorrect: Divides the positions y(t)/x(t) instead of the rates of change."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "g_param_dydx_graphs",
+   "facts": [
+    "vx=[6, 1, 5, 8, 1]",
+    "vy=[5, 6, 6, 1, 2]",
+    "a=5",
+    "key=-5/3"
+   ],
+   "seed": 3300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.1 dy/dx from graphs of x(t), y(t); applies the rule; in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x'(5)=3/2, y'(5)=-5/2, dy/dx=-5/3; unique, t=5 interior to a segment."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices fully specified, axes cover range, wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors match difference, product and position-ratio misconceptions; each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no calculator needed, exact-form options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item: the key -5/3 is unique, the stimulus data are complete, the distractors encode distinct misconceptions, and it is suitable for a non-calculator exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Identify the segment containing t=5 (t from 4 to 6), read the slopes of x (3/2) and y (-5/2) from the graphs, and divide to get dy/dx = -5/3. This is a single procedure with one representation change (graph to slope to derivative) and trivial arithmetic. The distractors target common errors such as multiplying slopes or inverting the ratio. Concept depth is shallow and there are no hypotheses to check.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_bc-m04-k0",
+  "cellId": "ap_calculus_bc-m04",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "mc",
+  "keywordCode": "9.6",
+  "unitCode": "9",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "g_param_speed_graphs",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Read x'(4)=6 and y'(4)=8 from two graphs, then compute sqrt(36+64)=10. One concept (speed = magnitude of velocity), minimal computation, clean 6-8-10 numbers. Distractors reflect common misconceptions (sum of components, omitting square root, using only x'). Straightforward single-step extraction, below typical full-mock difficulty.",
+  "payload": {
+   "archetype": "g_param_speed_graphs",
+   "topic": "9.6",
+   "skill": "2.B",
+   "calculator": "not_allowed",
+   "stem": "A particle moves in the $xy$-plane. The graphs of $x'(t)$ and $y'(t)$ for $0\\le t\\le 8$ are shown and each consists of line segments. What is the speed of the particle at $t=4$?",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Graphs of x'(t) and y'(t), each consisting of line segments connecting the plotted vertices.",
+    "data": {
+     "x_axis": {
+      "label": "t",
+      "min": 0,
+      "max": 8,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "velocity",
+      "min": -7,
+      "max": 9,
+      "step": 1
+     },
+     "curves": [
+      {
+       "label": "x'",
+       "type": "piecewise linear",
+       "vertices": [
+        [
+         0,
+         5
+        ],
+        [
+         2,
+         -1
+        ],
+        [
+         4,
+         6
+        ],
+        [
+         6,
+         6
+        ],
+        [
+         8,
+         4
+        ]
+       ]
+      },
+      {
+       "label": "y'",
+       "type": "piecewise linear",
+       "vertices": [
+        [
+         0,
+         -1
+        ],
+        [
+         2,
+         -1
+        ],
+        [
+         4,
+         8
+        ],
+        [
+         6,
+         6
+        ],
+        [
+         8,
+         -6
+        ]
+       ]
+      }
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$14$",
+     "why": "Adds the absolute values of the components instead of using the Pythagorean combination.",
+     "value": "14.000000"
+    },
+    {
+     "text": "$100$",
+     "why": "Does not take the square root: (x')^2 + (y')^2.",
+     "value": "100.00000"
+    },
+    {
+     "text": "$6$",
+     "why": "Reports x'(t) alone.",
+     "value": "6.0000000"
+    },
+    {
+     "text": "$10$",
+     "why": "Speed = sqrt((x')^2 + (y')^2) with x'(4) and y'(4) read from the graphs.",
+     "value": "10.000000"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 80,
+   "facts": [
+    "vx=[5, -1, 6, 6, 4]",
+    "vy=[-1, -1, 8, 6, -6]",
+    "a=4"
+   ],
+   "blueprint": {
+    "id": "g_param_speed_graphs",
+    "subject": "ap_calculus_bc",
+    "kind": "mc",
+    "concept": "Find speed from the graphs of the two velocity components",
+    "topic": "9.6",
+    "skill": "2.B",
+    "student_thinking": [
+     "Read x'(a) from the first graph and y'(a) from the second",
+     "Combine them as sqrt((x')^2 + (y')^2)"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "speed equals the magnitude of the velocity vector",
+      "evidence": "definition of speed for planar motion"
+     }
+    ],
+    "material": {
+     "type": "graph",
+     "must_include": [
+      "vertices of x'",
+      "vertices of y'"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "component_sum",
+      "description": "adds components"
+     },
+     {
+      "id": "slope",
+      "description": "reports dy/dx"
+     },
+     {
+      "id": "single_component",
+      "description": "reports one component"
+     },
+     {
+      "id": "no_root",
+      "description": "omits the square root"
+     }
+    ],
+    "verification": {
+     "independent_path": "math.hypot of the numerically interpolated components at t = a (independent of the Pythagorean triple used to build the graphs)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3300,
+   "pack_id": "g_param_speed_graphs-s3300",
+   "explanation_en": "The correct answer is 10. Speed = sqrt((x')^2 + (y')^2) with x'(4) and y'(4) read from the graphs.\n14 is incorrect: Adds the absolute values of the components instead of using the Pythagorean combination.\n100 is incorrect: Does not take the square root: (x')^2 + (y')^2.\n6 is incorrect: Reports x'(t) alone."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "g_param_speed_graphs",
+   "facts": [
+    "vx=[5, -1, 6, 6, 4]",
+    "vy=[-1, -1, 8, 6, -6]",
+    "a=4"
+   ],
+   "seed": 3300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading x' and y' from graphs and computing speed fits 9.6 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x'(4)=6, y'(4)=8, speed=10. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices fully specified, axes cover the range, wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions: component sum, no square root, single component. Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, no calculator needed, clean numbers, realistic AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, in-scope item; all five criteria pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read x'(4)=6 and y'(4)=8 from two graphs, then compute sqrt(36+64)=10. One concept (speed = magnitude of velocity), minimal computation, clean 6-8-10 numbers. Distractors reflect common misconceptions (sum of components, omitting square root, using only x'). Straightforward single-step extraction, below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_bc-m05-k0",
+  "cellId": "ap_calculus_bc-m05",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "mc",
+  "keywordCode": "10.11",
+  "unitCode": "10",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "g_taylor_deriv_graph",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "solver_disagrees:The stem says f has derivatives of all orders, but the piecewise-linear graph of f' has a corner at x=2, so f''(2) does not exist. The stem contradicts the stimulus, though the answer is unaffected.; criterion_failed_stimulus_expression",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must read f'(0)=3 from the graph, compute f''(0) as the slope of the first segment (-2), build P_2(x)=1+3x-x^2 using the 1/2! factor, and evaluate at x=3. Requires a graph-to-derivative-to-polynomial representation change and a few steps; the arithmetic is light and the wording is clear. Distractors target misconceptions such as omitting the factorial and confusing P_2(3) with f(3).",
+  "payload": {
+   "archetype": "g_taylor_deriv_graph",
+   "topic": "10.11",
+   "skill": "2.B",
+   "calculator": "not_allowed",
+   "stem": "The function $f$ has derivatives of all orders and $f(0)=1$. The graph of $f'$, consisting of line segments, is shown for $0\\le x\\le 4$. Let $P_2$ be the second-degree Maclaurin polynomial for $f$. What is $P_2(3)$?",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Graph of f', consisting of line segments connecting the plotted vertices.",
+    "data": {
+     "x_axis": {
+      "label": "x",
+      "min": 0,
+      "max": 4,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "f'(x)",
+      "min": -3,
+      "max": 4,
+      "step": 1
+     },
+     "vertices": [
+      [
+       0,
+       3
+      ],
+      [
+       2,
+       -1
+      ],
+      [
+       4,
+       -2
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$7$",
+     "why": "Uses f''(0) x/2 instead of f''(0) x^2/2.",
+     "value": "7.0000000"
+    },
+    {
+     "text": "$-8$",
+     "why": "Leaves out the factorial: f''(0) x^2 instead of f''(0) x^2/2!.",
+     "value": "-8.0000000"
+    },
+    {
+     "text": "$1$",
+     "why": "P2(x) = f(0) + f'(0) x + f''(0) x^2/2!; f'(0) is the height of the graph at 0 and f''(0) is the slope of the first segment.",
+     "value": "1.0000000"
+    },
+    {
+     "text": "$- \\frac{25}{2}$",
+     "why": "Uses f'(3) from the graph instead of f'(0) for the linear term.",
+     "value": "-12.500000"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 90,
+   "facts": [
+    "v=[3, -1, -2]",
+    "k0=1",
+    "c=3",
+    "key=1"
+   ],
+   "blueprint": {
+    "id": "g_taylor_deriv_graph",
+    "subject": "ap_calculus_bc",
+    "kind": "mc",
+    "concept": "Build a Maclaurin polynomial using f'(0) and f''(0) read from the graph of f'",
+    "topic": "10.11",
+    "skill": "2.B",
+    "student_thinking": [
+     "Read f'(0) from the graph and f''(0) as the slope of the graph of f' at 0",
+     "Form P2(x) = f(0) + f'(0)x + f''(0)x^2/2",
+     "Evaluate at the given x"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "f''(0) is the slope of f' on the first segment because f' is linear near 0",
+      "evidence": "the graph consists of line segments"
+     }
+    ],
+    "material": {
+     "type": "graph",
+     "must_include": [
+      "vertices of f' at x = 0, 2, 4"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "no_factorial",
+      "description": "omits the factorial"
+     },
+     {
+      "id": "wrong_value_of_fprime",
+      "description": "reads f' at the wrong point"
+     },
+     {
+      "id": "missing_quadratic",
+      "description": "drops the quadratic term"
+     },
+     {
+      "id": "wrong_power",
+      "description": "uses x instead of x squared"
+     }
+    ],
+    "verification": {
+     "independent_path": "polynomial evaluated numerically from numerically interpolated heights and finite-difference slope of f' (independent of the exact vertices)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3300,
+   "pack_id": "g_taylor_deriv_graph-s3300",
+   "explanation_en": "The correct answer is 1. P2(x) = f(0) + f'(0) x + f''(0) x^2/2!; f'(0) is the height of the graph at 0 and f''(0) is the slope of the first segment.\n7 is incorrect: Uses f''(0) x/2 instead of f''(0) x^2/2.\n-8 is incorrect: Leaves out the factorial: f''(0) x^2 instead of f''(0) x^2/2!.\n- \\frac{25}{2} is incorrect: Uses f'(3) from the graph instead of f'(0) for the linear term."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "g_taylor_deriv_graph",
+   "facts": [
+    "v=[3, -1, -2]",
+    "k0=1",
+    "c=3",
+    "key=1"
+   ],
+   "seed": 3300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading f'(0) and f''(0) from the graph of f' and forming P2 fits 10.11 / 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "P2=1+3x-x^2, P2(3)=1. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem says f has derivatives of all orders, but f' is piecewise linear with a corner at x=2, so f'' does not exist there. The premise contradicts the stimulus. The graph data is otherwise complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor value matches its stated misconception. The explanation covers all three wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculator needed, clean numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the skill fit is good. The stem's claim of derivatives of all orders contradicts the corner of f' at x=2 in the graph. This is a stem/stimulus inconsistency, so the item should be revised, for example by saying f is twice differentiable at 0 or by using a smooth f'."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read f'(0)=3 from the graph, compute f''(0) as the slope of the first segment (-2), build P_2(x)=1+3x-x^2 using the 1/2! factor, and evaluate at x=3. Requires a graph-to-derivative-to-polynomial representation change and a few steps; the arithmetic is light and the wording is clear. Distractors target misconceptions such as omitting the factorial and confusing P_2(3) with f(3).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_bc-m06-k0",
+  "cellId": "ap_calculus_bc-m06",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "mc",
+  "keywordCode": "9.5",
+  "unitCode": "9",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "g_vector_displacement_graph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must interpret two piecewise-linear velocity graphs, compute signed areas (triangle and trapezoids) for each component over [0,4], and add the initial position. Concept is standard (position = initial + integral of velocity), numbers are small, and distractors target common errors (omitting initial position, swapping components, sign errors). Moderate multi-step, appropriate for full mocks.",
+  "payload": {
+   "archetype": "g_vector_displacement_graph",
+   "topic": "9.5",
+   "skill": "1.D",
+   "calculator": "not_allowed",
+   "stem": "A particle moves in the $xy$-plane. Its position at $t=0$ is $(5,5)$. The graphs of the velocity components $x'(t)$ and $y'(t)$ are shown for $0\\le t\\le 8$, each consisting of line segments. What is the position of the particle at $t=4$?",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Graphs of x'(t) and y'(t), each consisting of line segments connecting the plotted vertices.",
+    "data": {
+     "x_axis": {
+      "label": "t",
+      "min": 0,
+      "max": 8,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "velocity",
+      "min": -4,
+      "max": 5,
+      "step": 1
+     },
+     "curves": [
+      {
+       "label": "x'",
+       "type": "piecewise linear",
+       "vertices": [
+        [
+         0,
+         4
+        ],
+        [
+         2,
+         0
+        ],
+        [
+         4,
+         -1
+        ],
+        [
+         6,
+         1
+        ],
+        [
+         8,
+         2
+        ]
+       ]
+      },
+      {
+       "label": "y'",
+       "type": "piecewise linear",
+       "vertices": [
+        [
+         0,
+         -1
+        ],
+        [
+         2,
+         2
+        ],
+        [
+         4,
+         2
+        ],
+        [
+         6,
+         0
+        ],
+        [
+         8,
+         -3
+        ]
+       ]
+      }
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$(3,5)$",
+     "why": "Reports the displacement only and forgets the initial position.",
+     "value": null
+    },
+    {
+     "text": "$(10,8)$",
+     "why": "Swaps the coordinates: the x-coordinate and the y-coordinate are reversed.",
+     "value": null
+    },
+    {
+     "text": "$(8,10)$",
+     "why": "Position = initial position + the integral of velocity: x(b) = x(0) + area under x', y(b) = y(0) + area under y'.",
+     "value": null
+    },
+    {
+     "text": "$(4,7)$",
+     "why": "Adds the velocity components at t = 4 to the initial position instead of integrating.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 110,
+   "facts": [
+    "vx=[4, 0, -1, 1, 2]",
+    "vy=[-1, 2, 2, 0, -3]",
+    "b=4",
+    "key=(Fraction(8, 1), Fraction(10, 1))"
+   ],
+   "blueprint": {
+    "id": "g_vector_displacement_graph",
+    "subject": "ap_calculus_bc",
+    "kind": "mc",
+    "concept": "Find a position vector from initial position and the graphs of both velocity components",
+    "topic": "9.5",
+    "skill": "1.D",
+    "student_thinking": [
+     "Recognize that each coordinate equals its initial value plus the signed area under its velocity graph",
+     "Compute the signed area under each graph from 0 to the given time",
+     "Combine the coordinates as an ordered pair"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "position equals initial position plus the integral of velocity for each component",
+      "evidence": "Fundamental Theorem of Calculus applied to each coordinate"
+     }
+    ],
+    "material": {
+     "type": "graph",
+     "must_include": [
+      "vertices of x'",
+      "vertices of y'"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "swapped_coordinates",
+      "description": "reverses the coordinates"
+     },
+     {
+      "id": "displacement_only",
+      "description": "forgets the initial position"
+     },
+     {
+      "id": "velocity_not_integrated",
+      "description": "adds velocity values"
+     }
+    ],
+    "verification": {
+     "independent_path": "numerical quadrature of each interpolated velocity component plus the initial position (independent of trapezoid areas)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3300,
+   "pack_id": "g_vector_displacement_graph-s3300",
+   "explanation_en": "The correct answer is (8,10). Position = initial position + the integral of velocity: x(b) = x(0) + area under x', y(b) = y(0) + area under y'.\n(3,5) is incorrect: Reports the displacement only and forgets the initial position.\n(10,8) is incorrect: Swaps the coordinates: the x-coordinate and the y-coordinate are reversed.\n(4,7) is incorrect: Adds the velocity components at t = 4 to the initial position instead of integrating."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "g_vector_displacement_graph",
+   "facts": [
+    "vx=[4, 0, -1, 1, 2]",
+    "vy=[-1, 2, 2, 0, -3]",
+    "b=4",
+    "key=(Fraction(8, 1), Fraction(10, 1))"
+   ],
+   "seed": 3300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.5, integrating velocity components from a graph to get position; the skill 1.D is satisfied by choosing position = initial + integral."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: Δx=3 and Δy=5, so the position is (8,10). The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The vertices for both curves and the axes are complete. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors map to distinct misconceptions and each is explained. (4,7) matches adding the velocities at t=4. (10,8) is a coordinate swap of the correct answer."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The arithmetic is simple, it is doable without a calculator, and the time load is typical."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. The key (8,10) is verified, the stimulus is complete, and the distractors are meaningful. It passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must interpret two piecewise-linear velocity graphs, compute signed areas (triangle and trapezoids) for each component over [0,4], and add the initial position. Concept is standard (position = initial + integral of velocity), numbers are small, and distractors target common errors (omitting initial position, swapping components, sign errors). Moderate multi-step, appropriate for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ }
+]
