@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import { formatPeriodStatusEn } from "@/lib/payout/payout-schedule";
 import {
   getMyPayoutAccountAction,
@@ -20,8 +21,19 @@ import {
 
 const STATUS_LABEL: Record<string, string> = { confirmed: "Upcoming payout", paid: "Paid" };
 
-export default function SettlementPanel({ onAccountSaved }: { onAccountSaved?: () => void } = {}) {
-  const [account, setAccount] = useState<MaskedPayoutAccount | null>(null);
+type SettlementSubTab = "account" | "history";
+
+// initialHasAccount: 서버 페이지가 이미 알고 있는 등록 여부(추가 쿼리 없음). 계좌 상태가
+// 확정되기 전(undefined)에는 등록 폼을 그리지 않는다 — 저장된 계좌가 있는 사람에게
+// 빈 폼이 번쩍였다가 카드로 바뀌는 깜빡임을 막는다.
+export default function SettlementPanel({
+  onAccountSaved,
+  initialHasAccount,
+}: { onAccountSaved?: () => void; initialHasAccount?: boolean } = {}) {
+  const [subTab, setSubTab] = useState<SettlementSubTab>("account");
+  const [account, setAccount] = useState<MaskedPayoutAccount | null | undefined>(
+    initialHasAccount === false ? null : undefined
+  );
   const [periods, setPeriods] = useState<ConsultantPayoutPeriod[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
@@ -34,17 +46,23 @@ export default function SettlementPanel({ onAccountSaved }: { onAccountSaved?: (
   const [currency, setCurrency] = useState("KRW");
   const [country, setCountry] = useState("KR");
 
-  function reload() {
-    getMyPayoutAccountAction().then(setAccount).catch(() => setAccount(null));
+  useEffect(() => {
+    // 서버가 "계좌 없음"을 이미 알려 줬으면 계좌 재조회는 필요 없다(폼을 바로 보여 준다).
+    if (initialHasAccount !== false) {
+      getMyPayoutAccountAction().then(setAccount).catch(() => setAccount(null));
+    }
     listMyPayoutNoticesAction().then(setNotices).catch(() => setNotices([]));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // 지급 내역은 Payout History 탭을 처음 열 때만 불러온다.
+  useEffect(() => {
+    if (subTab !== "history" || periods !== null) return;
     listMyPayoutPeriodsAction()
       .then(setPeriods)
       .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load."));
-  }
-
-  useEffect(() => {
-    reload();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subTab]);
 
   async function handleSaveAccount() {
     setBusy(true);
@@ -111,7 +129,22 @@ export default function SettlementPanel({ onAccountSaved }: { onAccountSaved?: (
         </div>
       )}
 
-      {account ? (
+      <UnderlineSubTabs
+        className="mb-5"
+        items={[
+          { id: "account", label: "Payout Account" },
+          { id: "history", label: "Payout History" },
+        ]}
+        activeId={subTab}
+        onSelect={setSubTab}
+      />
+
+      {subTab === "account" && (account === undefined ? (
+        <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-6" aria-busy="true" data-testid="account-skeleton">
+          <div className="h-3 w-28 bg-grey-200 rounded animate-pulse mb-3" />
+          <div className="h-4 w-64 max-w-full bg-grey-200 rounded animate-pulse" />
+        </div>
+      ) : account ? (
         <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-6" data-testid="account-readonly">
           <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">Payout Account</div>
           <div className="text-[13px] text-ink">
@@ -145,9 +178,9 @@ export default function SettlementPanel({ onAccountSaved }: { onAccountSaved?: (
             </button>
           </div>
         </div>
-      )}
+      ))}
 
-      <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">Payout History</div>
+      {subTab === "history" && (<>
       <p className="text-[12px] text-grey-500 mb-2">Payouts are made twice a month: the 1st–15th is paid no later than the 26th, and the 16th–end of month no later than the 10th of the next month (Pacific Time).</p>
       {periods === null ? (
         <p className="text-[13px] text-grey-500">Loading…</p>
@@ -167,6 +200,7 @@ export default function SettlementPanel({ onAccountSaved }: { onAccountSaved?: (
           </div>
         ))
       )}
+      </>)}
     </div>
   );
 }

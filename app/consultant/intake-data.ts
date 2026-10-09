@@ -16,10 +16,12 @@ export type IntakeConsultation = {
   startsAt: string | null;
   intakeOwnerId: string | null;
   admissionsConsultantId: string | null;
+  /** 종료(closure_type) 건은 칸반에서 빠진다 — 사이드바 배지도 세지 않는다. */
+  closureType?: string | null;
 };
 
 const SELECT_COLUMNS =
-  "id, contact_name, contact_email, student_grade, concerns, status, requested_at, contacted_at, starts_at, intake_owner_id, admissions_consultant_id";
+  "id, contact_name, contact_email, student_grade, concerns, status, requested_at, contacted_at, starts_at, intake_owner_id, admissions_consultant_id, closure_type";
 
 function mapRow(row: Record<string, unknown>): IntakeConsultation {
   return {
@@ -34,6 +36,7 @@ function mapRow(row: Record<string, unknown>): IntakeConsultation {
     startsAt: (row.starts_at as string | null) ?? null,
     intakeOwnerId: (row.intake_owner_id as string | null) ?? null,
     admissionsConsultantId: (row.admissions_consultant_id as string | null) ?? null,
+    closureType: (row.closure_type as string | null) ?? null,
   };
 }
 
