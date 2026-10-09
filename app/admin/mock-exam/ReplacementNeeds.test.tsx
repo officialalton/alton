@@ -50,6 +50,50 @@ describe("ReplacementNeedsBlock", () => {
     expect(screen.getByRole("button", { name: "자동 교체 다시 시도" })).toBeDisabled();
   });
 
+  it("남은 칸마다 세트·버전·막힌 이유를 보여준다", async () => {
+    summary.mockResolvedValue({
+      ...data,
+      sets: [{ examSetId: "s1", name: "모의 A", versionNo: 2, status: "published", openCount: 2, startedCount: 1, noSpareCount: 1 }],
+      items: [
+        { id: "n1", problemId: "aaaaaaaa-1", moduleKey: "rw_m2", route: "higher", difficulty: "medium", satDomain: "rw_craft_structure", skillCode: "words_in_context", usageScope: "both", inMockSet: true, openReason: "set_started", createdAt: "2026-10-01T00:00:00Z", examSetId: "s1", setName: "모의 A", setVersionNo: 2, setStatus: "published" },
+        { id: "n2", problemId: "cccccccc-3", moduleKey: "rw_m1", route: null, difficulty: "easy", satDomain: "rw_craft_structure", skillCode: "words_in_context", usageScope: "both", inMockSet: true, openReason: "no_spare", createdAt: "2026-10-01T00:00:00Z", examSetId: "s1", setName: "모의 A", setVersionNo: 2, setStatus: "published" },
+      ],
+    });
+    render(<ReplacementNeedsBlock poolRest={{}} />);
+    await waitFor(() => screen.getByTestId("replacement-items"));
+    expect(screen.getByTestId("replacement-sets")).toHaveTextContent("모의 A v2 (공개) — 문항 교체 필요 2칸");
+    const items = screen.getAllByTestId("replacement-item");
+    expect(items[0]).toHaveTextContent("모의 A v2 (공개)");
+    expect(items[0]).toHaveTextContent("응시가 시작된 세트라 문항을 바꿀 수 없습니다");
+    expect(items[1]).toHaveTextContent("미배정 공개 문항이 풀에 없어");
+  });
+
+  it("세트에 없는 일반 문항 필요는 경보(건수·붉은 카드)에서 빠지고 별도 접이식으로만 보인다", async () => {
+    summary.mockResolvedValue({
+      ...data, openTotal: 0, openInMockSet: 0, openBankLevel: 1, cells: [], sets: [], items: [], replacements: [],
+      bankCells: [{ satDomain: "geometry_trig", skillCode: "lines_angles_triangles", difficulty: "medium", usageScope: "mock_exam", openCount: 1, stock: 113 }],
+    });
+    render(<ReplacementNeedsBlock poolRest={{}} />);
+    await waitFor(() => expect(screen.getByTestId("replacement-needs-header")).toHaveTextContent("대체 문항 필요 0건"));
+    expect(screen.getByTestId("replacement-needs").className).not.toContain("border-red");
+    expect(screen.getByTestId("replacement-bank")).toHaveTextContent("일반 문항 대체 필요 1건 (세트에 없음 — 경보 아님)");
+    expect(screen.getByTestId("replacement-bank")).toHaveTextContent("보통 · 모의고사용 · 1건 · 같은 조건 미배정 공개 문항 113개");
+    expect(screen.getByRole("button", { name: "자동 교체 다시 시도" })).toBeDisabled();
+  });
+
+  it("보관·교체된 세트의 오래된 항목이 남아 있으면 안내하고 다시 시도로 정리한다", async () => {
+    summary.mockResolvedValueOnce({ ...data, openTotal: 0, openInMockSet: 0, staleOpen: 2, cells: [], sets: [], items: [], replacements: [] });
+    summary.mockResolvedValue({ ...data, openTotal: 0, openInMockSet: 0, staleOpen: 0, cells: [], sets: [], items: [], replacements: [] });
+    retry.mockResolvedValue({ replaced: 0, noSpare: 0, setStarted: 0, closedStale: 2 });
+    render(<ReplacementNeedsBlock poolRest={{}} />);
+    await waitFor(() => expect(screen.getByTestId("replacement-stale")).toHaveTextContent("오래된 항목 2건은 경보에서 제외"));
+    const btn = screen.getByRole("button", { name: "자동 교체 다시 시도" });
+    expect(btn).not.toBeDisabled();
+    fireEvent.click(btn);
+    await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("오래된 항목 2건 정리"));
+    await waitFor(() => expect(screen.queryByTestId("replacement-stale")).toBeNull());
+  });
+
   it("불러오기 실패를 표시한다", async () => {
     summary.mockRejectedValue(new Error("x"));
     render(<ReplacementNeedsBlock poolRest={{}} />);
