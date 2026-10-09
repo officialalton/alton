@@ -19,6 +19,13 @@ describe("LandingView", () => {
     expect(screen.getByText("New tests are added regularly.")).toBeInTheDocument();
   });
 
+  it("AP 세트가 있으면 SAT 숫자와 별도로 알린다(SAT 제목에 AP 를 섞지 않는다)", () => {
+    render(<LandingView dest={resolveLandingDestinations({ kind: "anonymous" })} practiceTestCount={13} apPracticeSetCount={4} />);
+    expect(screen.getByRole("heading", { level: 1 }).textContent).toContain("13 Free SAT Practice Tests.");
+    expect(screen.getByRole("heading", { level: 1 }).textContent).not.toContain("17");
+    expect(screen.getByText("Plus 4 AP practice sets. New tests are added regularly.")).toBeInTheDocument();
+  });
+
   it("헤드라인·CTA·푸터 링크 렌더(계속)", () => {
     render(<LandingView dest={resolveLandingDestinations({ kind: "anonymous" })} />);
     expect(screen.getAllByText("Start Practicing for Free")[0].closest("a")).toHaveAttribute("href", "/signup/student");

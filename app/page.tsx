@@ -17,6 +17,6 @@ export const metadata: Metadata = {
 
 export default async function LandingPage() {
   const dest = resolveLandingDestinations(await loadLandingViewer());
-  const practiceTestCount = await getPublishedPracticeTestCount();
-  return <LandingView dest={dest} practiceTestCount={practiceTestCount} />;
+  const counts = await getPublishedPracticeTestCount();
+  return <LandingView dest={dest} practiceTestCount={counts.sat} apPracticeSetCount={counts.ap} />;
 }

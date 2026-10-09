@@ -48,8 +48,8 @@ function ProductPreview() {
   );
 }
 
-export default function LandingView({ dest, practiceTestCount = 0 }: { dest: LandingDestinations; practiceTestCount?: number }) {
-  const headline = heroHeadline(practiceTestCount);
+export default function LandingView({ dest, practiceTestCount = 0, apPracticeSetCount = 0 }: { dest: LandingDestinations; practiceTestCount?: number; apPracticeSetCount?: number }) {
+  const headline = heroHeadline(practiceTestCount, apPracticeSetCount);
   return (
     <div id="top" className={publicFontClass}>
       <PublicHeader dest={dest} />
