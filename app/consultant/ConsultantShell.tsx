@@ -1,5 +1,6 @@
 "use client";
 
+import { useAccountMenuDismiss } from "@/app/components/useAccountMenuDismiss";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
@@ -132,8 +133,9 @@ export default function ConsultantShell({
   // 스크롤되던 문제. md 미만에서는 사이드바를 숨기고 햄버거로 여는 드로어로 전환.
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  useAccountMenuDismiss(accountMenuOpen, setAccountMenuOpen, String(nav));
 
-  const contactRequiredCount = assignedConsultations.filter((c) => c.status === "requested").length;
+  const contactRequiredCount = assignedConsultations.filter((c) => c.status === "requested" && !c.closureType).length;
 
   return (
     <div className="min-h-screen bg-white flex md:flex-row flex-col">
@@ -184,6 +186,8 @@ export default function ConsultantShell({
           <span>New Assignments</span>
           {contactRequiredCount > 0 && (
             <span
+              title="Awaiting your first contact"
+              aria-label={`${contactRequiredCount} awaiting your first contact`}
               className={
                 "text-[11px] font-bold px-1.5 py-0.5 rounded-full " +
                 (nav === "assignments" ? "bg-white/25" : "bg-red text-white")
@@ -278,6 +282,9 @@ export default function ConsultantShell({
         <div className="relative">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}
+            data-account-menu-trigger
+            aria-haspopup="menu"
+            aria-expanded={accountMenuOpen}
             className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-ink hover:bg-grey-100"
           >
             <div className="w-7 h-7 rounded-full bg-grey-100 text-ink font-extrabold text-[12px] flex items-center justify-center shrink-0">
@@ -286,7 +293,7 @@ export default function ConsultantShell({
             <span className="flex-1 text-left truncate">{consultantName}</span>
           </button>
           {accountMenuOpen && (
-            <div className="absolute bottom-full left-0 mb-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+            <div data-account-menu role="menu" className="absolute bottom-full left-0 mb-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
               <button
                 onClick={() => {
                   setAccountMenuOpen(false);
@@ -329,7 +336,7 @@ export default function ConsultantShell({
         ) : nav === "profile" ? (
           <ProfilePanel />
         ) : nav === "settlement" ? (
-          <SettlementPanel onAccountSaved={() => setPayoutAccountNeeded(false)} />
+          <SettlementPanel onAccountSaved={() => setPayoutAccountNeeded(false)} initialHasAccount={!payoutAccountMissing} />
         ) : nav === "staff-messages" ? (
           <StaffMessagesPanel />
         ) : nav === "college-explore" ? (
@@ -514,9 +521,9 @@ function formatMeetingDateTime(iso: string | null, tz: string): string {
 // 나눈다(사용자 지시). Time Off는 신규 — 월간 캘린더 대신(1차 범위는 목록+폼)
 // 종일/부분 시간 등록을 지원하고, 등록 전 기존 확정 일정과 겹치면 서버가
 // 막고 어떤 일정과 겹치는지 알려준다.
-type ScheduleSubTab = "upcoming" | "availability" | "time-off";
+type ScheduleSubTab = "upcoming" | "past" | "availability" | "time-off";
 
-function SchedulePanel({ assignedConsultations }: { assignedConsultations: IntakeConsultation[] }) {
+export function SchedulePanel({ assignedConsultations }: { assignedConsultations: IntakeConsultation[] }) {
   const [subTab, setSubTab] = useState<ScheduleSubTab>("upcoming");
   return (
     <div className="max-w-[640px] px-8 py-8">
@@ -525,6 +532,7 @@ function SchedulePanel({ assignedConsultations }: { assignedConsultations: Intak
         {(
           [
             { id: "upcoming", label: "Upcoming" },
+            { id: "past", label: "Past" },
             { id: "availability", label: "Availability" },
             { id: "time-off", label: "Time Off" },
           ] as const
@@ -541,8 +549,8 @@ function SchedulePanel({ assignedConsultations }: { assignedConsultations: Intak
           </button>
         ))}
       </div>
-      {subTab === "upcoming" ? (
-        <UpcomingSchedulePanel assignedConsultations={assignedConsultations} />
+      {subTab === "upcoming" || subTab === "past" ? (
+        <UpcomingSchedulePanel key={subTab} view={subTab} assignedConsultations={assignedConsultations} />
       ) : subTab === "availability" ? (
         <AvailabilityPanel />
       ) : (
@@ -570,9 +578,13 @@ function sessionTimingLabel(startsAtIso: string): { label: string; canStart: boo
   return { label: "In progress", canStart: true };
 }
 
-function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultations: IntakeConsultation[] }) {
+// 종료된 요청(완료·거절/취소)은 Past 탭으로 분리한다. Upcoming에는 진행 중인 요청만 남긴다.
+const PAST_MEETING_STATUSES = new Set(["completed", "cancelled"]);
+
+function UpcomingSchedulePanel({ assignedConsultations, view = "upcoming" }: { assignedConsultations: IntakeConsultation[]; view?: "upcoming" | "past" }) {
   const tz = useViewerTimezone();
-  const confirmedConsultations = assignedConsultations
+  const isPast = view === "past";
+  const confirmedConsultations = isPast ? [] : assignedConsultations
     .filter((c) => c.status === "scheduled" && c.startsAt)
     .sort((a, b) => (a.startsAt ?? "").localeCompare(b.startsAt ?? ""));
 
@@ -645,6 +657,8 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
     }
   }
 
+  const visibleMeetings = meetings?.filter((m) => PAST_MEETING_STATUSES.has(m.status) === isPast) ?? null;
+
   if (session) {
     return <ConsultationSessionView session={session} onExit={() => setSession(null)} />;
   }
@@ -680,17 +694,17 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
           </div>
         </div>
       )}
-      <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">Student Meeting Requests</div>
+      <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">{isPast ? "Past Meeting Requests" : "Student Meeting Requests"}</div>
       {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
-      {meetings === null ? (
+      {visibleMeetings === null ? (
         <p className="text-[13px] text-grey-500">Loading...</p>
-      ) : meetings.length === 0 ? (
+      ) : visibleMeetings.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          No meeting requests yet.
+          {isPast ? "No past meeting requests yet." : "No upcoming meeting requests."}
         </div>
       ) : (
         <div className="space-y-2.5">
-          {meetings.map((m) => (
+          {visibleMeetings.map((m) => (
             <div key={m.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
               <div className="flex items-center justify-between">
                 <span className="text-[13px] font-bold text-ink">{m.studentName ?? "Student"}</span>
