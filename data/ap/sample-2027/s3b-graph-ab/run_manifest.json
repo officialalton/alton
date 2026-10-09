@@ -1,6 +1,6 @@
 {
- "run": "_frozen_check",
- "subject": "ap_calculus_bc",
+ "run": "s3b-graph-ab",
+ "subject": "ap_calculus_ab",
  "generatorCommit": "5d97fdcb",
  "gateVersion": "v2-code-first-final-2026-10-08",
  "reviewerPromptHash": "fd3b454c2bfb",
@@ -12,7 +12,7 @@
   "legacyItems": false,
   "repair": false
  },
- "arm": "frozen v1-s3b-graph-bc",
+ "arm": "frozen v1-s3b-graph-ab",
  "parserHash": "7528bbe8cdfc",
  "models": {
   "gen": "claude-sonnet-5-5",
@@ -39,5 +39,9 @@
   ],
   "note": "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED"
  },
- "frozenAt": "2026-10-09T08:36:20.297Z"
+ "frozenAt": "2026-10-09T08:35:17.019Z",
+ "generatorHash": "f8080824a76a",
+ "frozenConfig": "config/ap-frozen/s3b-graph-ab.v1.json@v1-s3b-graph-ab",
+ "validity": "valid",
+ "repairDefinition": "none (repair not run in this round)"
 }

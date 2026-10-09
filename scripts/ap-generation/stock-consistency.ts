@@ -10,7 +10,7 @@ import { connect } from "../keywords/db";
 
 // DB 현재 집계에는 보조 배치(S1a, import-candidates --supplement)의 후보 행도 is_current=true 로 들어 있으므로 파일 쪽도 s1a-items.json 을 합쳐 비교한다(--no-supplement 로 끌 수 있음).
 const read = (f: string) => JSON.parse(readFileSync(path.resolve(process.cwd(), f), "utf-8")) as StockItem[];
-const SUPP = ["data/ap/stock/s1a-items.json", "data/ap/stock/v1ab-items.json", "data/ap/stock/v45ab-items.json", "data/ap/stock/bc-topup-items.json", "data/ap/stock/graph-s1-items.json", "data/ap/stock/graph-s2a-items.json", "data/ap/stock/graph-s2b-items.json", "data/ap/stock/graph-s3a-items.json", "data/ap/stock/graph-s3b-items.json"]; // 보조 배치 파일(있는 것만)
+const SUPP = ["data/ap/stock/s1a-items.json", "data/ap/stock/v1ab-items.json", "data/ap/stock/v45ab-items.json", "data/ap/stock/bc-topup-items.json", "data/ap/stock/graph-s1-items.json", "data/ap/stock/graph-s2a-items.json", "data/ap/stock/graph-s2b-items.json", "data/ap/stock/graph-s3a-items.json", "data/ap/stock/graph-s3b-items.json", "data/ap/stock/graph-s3c-items.json", "data/ap/stock/graph-s3d-items.json"]; // 보조 배치 파일(있는 것만)
 const items = [...read("data/ap/stock/items.json"), ...(!process.argv.includes("--no-supplement") ? SUPP.filter((f) => existsSync(f)).flatMap(read) : [])];
 const file = summarize(items);
 const q = (v: string | null | undefined) => (v == null ? "null" : `'${String(v).replace(/'/g, "''")}'`);

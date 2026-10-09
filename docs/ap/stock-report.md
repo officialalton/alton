@@ -18,20 +18,20 @@
 | ap_biology | FRQ | 76 | 73 | 0 | 3 | 3 | **0** | 0 | **0** | 3 | 0 |  |
 | ap_biology | MC | 124 | 70 | 0 | 54 | 10 | **44** | 0 | **0** | 24 | 30 |  |
 | ap_calculus_ab | FRQ | 99 | 61 | 0 | 17 | 3 | **35** | 0 | **0** | 19 | 19 |  |
-| ap_calculus_ab | MC | 408 | 112 | 11 | 156 | 32 | **253** | 0 | **0** | 160 | 125 |  |
+| ap_calculus_ab | MC | 414 | 113 | 11 | 161 | 32 | **258** | 0 | **0** | 165 | 125 |  |
 | ap_calculus_bc | FRQ | 9 | 4 | 0 | 3 | 0 | **5** | 0 | **0** | 3 | 2 | 38 |
-| ap_calculus_bc | MC | 89 | 21 | 3 | 30 | 0 | **65** | 0 | **0** | 36 | 29 | 285 |
+| ap_calculus_bc | MC | 92 | 23 | 3 | 31 | 0 | **66** | 0 | **0** | 37 | 29 | 290 |
 | ap_microeconomics | FRQ | 28 | 16 | 0 | 12 | 11 | **1** | 0 | **0** | 3 | 9 |  |
 | ap_microeconomics | MC | 144 | 73 | 0 | 71 | 18 | **53** | 0 | **0** | 27 | 44 |  |
 
-- 전체 고유 재고(완전 중복 제외, AB/BC 한 번만): MC 475, FRQ 58 — 이 중 최신 게이트 자동 통과 MC 415, FRQ 41, 재검증 필요(런1) MC 60, FRQ 17.
+- 전체 고유 재고(완전 중복 제외, AB/BC 한 번만): MC 481, FRQ 58 — 이 중 최신 게이트 자동 통과 MC 421, FRQ 41, 재검증 필요(런1) MC 60, FRQ 17.
 - 이력: 중간 런(run2a/run2b/run2bc_a/run2bc_b)은 재고에서 제외하고 최종 항목의 history 로만 보존(같은 원형·시드 기준). 파일럿 런은 제외.
 
 ## 2. 칸 부족분(최신 게이트 + 문항군 다양성 기준)
 
 목표(기준선): 과목당 MC 50, FRQ 5(오너 기준선). 토픽 목표는 공식 단원 MC 비중으로 단원에 나눈 뒤 단원 내 토픽에 균등 배분. 채움 = 위 정의의 effective. BC 는 BC 전용 + AB 공유 사용분을 합산해 계산.
 
-### ap_calculus_ab (MC, 토픽 목표 합 50, 부족 합 17, 목표가 있는 토픽 중 채움 0 = 17/50, 부족한 토픽 = 17)
+### ap_calculus_ab (MC, 토픽 목표 합 50, 부족 합 16, 목표가 있는 토픽 중 채움 0 = 16/50, 부족한 토픽 = 16)
 
 | 단원 | 토픽 | 목표 | 최신 통과(문항) | 문항군 | 칸 채움(effective) | 재검증 필요 | 부족 |
 |---|---|---|---|---|---|---|---|
@@ -41,7 +41,6 @@
 | 1 | 1.6 Determining Limits Using Algebraic Manip | 1 | 0 | 0 | 0 | 0 | 1 |
 | 2 | 2.5 Applying the Power Rule | 1 | 0 | 0 | 0 | 0 | 1 |
 | 2 | 2.6 Derivative Rules: Constant, Sum, Differe | 1 | 0 | 0 | 0 | 0 | 1 |
-| 3 | 3.4 Differentiating Inverse Trigonometric Fu | 1 | 0 | 0 | 0 | 0 | 1 |
 | 4 | 4.3 Rates of Change in Applied Contexts Othe | 1 | 0 | 0 | 0 | 1 | 1 |
 | 5 | 5.2 Extreme Value Theorem, Global Versus Loc | 1 | 0 | 0 | 0 | 3 | 1 |
 | 5 | 5.3 Determining Intervals on Which a Functio | 1 | 0 | 0 | 0 | 0 | 1 |
@@ -53,13 +52,12 @@
 | 7 | 7.4 Reasoning Using Slope Fields | 1 | 0 | 0 | 0 | 0 | 1 |
 | 8 | 8.6 Finding the Area Between Curves That Int | 1 | 0 | 0 | 0 | 0 | 1 |
 
-### ap_calculus_bc (MC, 토픽 목표 합 50, 부족 합 18, 목표가 있는 토픽 중 채움 0 = 18/50, 부족한 토픽 = 18)
+### ap_calculus_bc (MC, 토픽 목표 합 50, 부족 합 17, 목표가 있는 토픽 중 채움 0 = 17/50, 부족한 토픽 = 17)
 
 | 단원 | 토픽 | 목표 | 최신 통과(문항) | 문항군 | 칸 채움(effective) | 재검증 필요 | 부족 |
 |---|---|---|---|---|---|---|---|
 | 1 | 1.1 Introducing Calculus: Can Change Occur a | 1 | 0 | 0 | 0 | 0 | 1 |
 | 1 | 1.2 Defining Limits and Using Limit Notation | 1 | 0 | 0 | 0 | 0 | 1 |
-| 3 | 3.4 Differentiating Inverse Trigonometric Fu | 1 | 0 | 0 | 0 | 0 | 1 |
 | 4 | 4.3 Rates of Change in Applied Contexts Othe | 1 | 0 | 0 | 0 | 1 | 1 |
 | 5 | 5.2 Extreme Value Theorem, Global Versus Loc | 1 | 0 | 0 | 0 | 3 | 1 |
 | 5 | 5.3 Determining Intervals on Which a Functio | 1 | 0 | 0 | 0 | 0 | 1 |
@@ -95,8 +93,8 @@
 
 ## 4. 칸 분포(어느 칸이 0 또는 적은가)
 
-- ap_calculus_ab: 관측된 칸 100개(토픽×스킬×구조×계산기) — 채움 1: 41, 2: 30, 3 이상: 23. 한 문항군이 3개 이상 문항을 가진 칸: 38(변형이 많아도 채움은 문항군당 2개까지만 인정).
-- ap_calculus_bc: 관측된 칸 130개(토픽×스킬×구조×계산기) — 채움 1: 47, 2: 51, 3 이상: 26. 한 문항군이 3개 이상 문항을 가진 칸: 47(변형이 많아도 채움은 문항군당 2개까지만 인정).
+- ap_calculus_ab: 관측된 칸 104개(토픽×스킬×구조×계산기) — 채움 1: 44, 2: 31, 3 이상: 23. 한 문항군이 3개 이상 문항을 가진 칸: 38(변형이 많아도 채움은 문항군당 2개까지만 인정).
+- ap_calculus_bc: 관측된 칸 135개(토픽×스킬×구조×계산기) — 채움 1: 51, 2: 52, 3 이상: 26. 한 문항군이 3개 이상 문항을 가진 칸: 47(변형이 많아도 채움은 문항군당 2개까지만 인정).
 - 위 '부족' 표의 토픽만 다음 생성 대상(칸 단위 1개 후보 → 실패한 칸에만 추가). 구조(FRQ 유형·세트)는 템플릿이 없는 유형이 먼저 부족(입자 운동·음함수 관련 변화율 FRQ, Bio·Micro 전부).
 
 
