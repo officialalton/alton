@@ -11,5 +11,13 @@ export const AVAILABILITY_COPY = {
   comingSoon: "Coming soon",
   roadmap: "We're building toward 10+ full practice exams per AP subject.",
   regularly: "New tests are added regularly.",
+  visionLabel: "Where we're headed",
+  visionHeadline: "Every AP subject. The largest question bank in the world.",
+  vision: [
+    { t: "Every AP subject", d: "Our goal is complete practice exams for all of AP, built one subject at a time." },
+    { t: "Sharpened by teachers and students", d: "Their feedback keeps improving question quality, continuously." },
+    { t: "The biggest question bank, by design", d: "We are building toward the largest collection of practice questions anywhere." },
+    { t: "Study what you missed, right away", d: "We are producing study guides and video lessons that target your weak spots." },
+  ],
   updated: "Updated automatically",
 } as const;
