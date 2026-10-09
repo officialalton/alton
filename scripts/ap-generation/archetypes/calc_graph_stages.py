@@ -45,4 +45,9 @@ STAGES = {
         "c_critical_count_calc", "c_ftc_second_derivative_calc", "c_integral_equation_solve_calc", "c_accum_max_value_calc", "c_limit_def_derivative_calc",
         "c_implicit_second_calc",
     ],
+    # 배치 5: FRQ Part A(계산기) + BC 전용 — 새 유형 frq_rate_in_out 은 2회 연속 반려(기출 유사·스킬 불일치)로 중단.
+    # 청사진이 있는 기존 계산기 유형 frq_polar_region(BC 전용)의 새 수치 묶음(형제, 독립 유형 아님)으로 대체. (frq_table_rate·frq_area_volume·frq_particle_motion 은 구형 원형이라 청사진이 없어 현 게이트 불통과)
+    "supp_b5_frq_bc": ["frq_polar_region"],
+    # 배치 6: FRQ 새 유형(배치 2 에서 같은 유형의 두 번째 묶음이 근접 중복 게이트로 반려됐으므로 유형 자체를 늘린다): AB 계산기 모형 분석, AB 계산기 불가 조각 함수
+    "supp_b6_frq_ab": ["frq_model_analysis_calc", "frq_piecewise_diff"],
 }

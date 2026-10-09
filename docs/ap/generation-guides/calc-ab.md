@@ -207,3 +207,6 @@ BC 전용 용어(series/converge/Taylor/Maclaurin/parametric/polar/vector/Euler/
 | id | topic | skill | calculator | verified by |
 |---|---|---|---|---|
 | c_implicit_second_calc | 3.6 | 1.E | required | the curve is solved for y(x) near the point with Brent's method and the second central difference (step 1e-3)  |
+
+| `frq_model_analysis_calc` | 8.1(+4.1, 5.5) / 1.E / 계산기 | a 모형의 평균값(2) / b C' 의 의미와 단위(2) / c 최댓값과 정당화(2) / d 기준 이상인 시간 구간(3) | sympy 기호 적분, 중심차분, 격자 교점·최댓값 |
+| `frq_piecewise_diff` | 2.4(+1.11, 2.7, 6.7) / 3.B / 불가 | a 꺾이는 점의 연속(2) / b 편측 도함수로 미분 가능 정당화(3) / c 접선(2) / d 도함수의 평균값(2) | 편측 차분 몫, 중심차분 도함수의 수치 평균 |

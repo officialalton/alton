@@ -18,7 +18,7 @@ NEWMC.update({"graph_fprime_extremum": (rf.graph_fprime_extremum, "5"), "graph_a
 MC.update(NEWMC)
 TOPUP = {n: (getattr(tu, n), u) for n, u in [("param_xvel_graph","9"),("polar_area_graph","9"),("polar_rprime_graph","9"),("lagrange_graph","10"),("alt_series_table","10"),("taylor_table","10"),("polar_table_distance","9"),("param_speed_table","9")]}
 MC.update(TOPUP)
-import calc_graph_a as _ga, calc_graph_b as _gb, calc_graph_c as _gc, calc_graph_d as _gd, calc_graph_e as _ge, calc_graph_f as _gf, calc_graph_g as _gg, calc_graph_h as _gh, calc_general_i as _gi, calc_graph_j as _gj, calc_graph_k as _gk, calc_frq_polar as _gfp, calc_supp_a as _sa, calc_supp_b as _sb, calc_supp_frq as _sf
+import calc_graph_a as _ga, calc_graph_b as _gb, calc_graph_c as _gc, calc_graph_d as _gd, calc_graph_e as _ge, calc_graph_f as _gf, calc_graph_g as _gg, calc_graph_h as _gh, calc_general_i as _gi, calc_graph_j as _gj, calc_graph_k as _gk, calc_frq_polar as _gfp, calc_supp_a as _sa, calc_supp_b as _sb, calc_supp_frq as _sf, calc_supp_frq2 as _sf2
 GRAPH_MODS = [_ga, _gb, _gc, _gd, _ge, _gf, _gg, _gh, _gi, _gj, _gk, _sa, _sb]
 GRAPH = {n: (getattr(m, n), "0") for m in GRAPH_MODS for n in dir(m) if n.startswith(("g_", "c_")) and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
 MC.update(GRAPH)
@@ -27,7 +27,7 @@ try:
     from calc_graph_stages import STAGES as GRAPH_STAGES
 except ImportError:
     pass
-FRQ ={"frq_table_values": _sf.frq_table_values, "frq_function_analysis": _sf.frq_function_analysis, "frq_rate_in_out": _sf.frq_rate_in_out, "frq_bc_taylor_diffeq": _sf.frq_bc_taylor_diffeq, "frq_bc_improper_parts": _sf.frq_bc_improper_parts, "frq_series": bc.frq_series, "frq_parametric": bc.frq_parametric, "frq_euler_logistic": tf.frq_euler_logistic, "frq_polar_region": _gfp.frq_polar_region, "frq_table_rate": cf.frq_table_rate, "frq_fprime_graph": cf.frq_fprime_graph, "frq_diffeq": cf.frq_diffeq, "frq_area_volume": cf.frq_area_volume, "frq_bio_investigation": bf.frq_bio_investigation, "frq_bio_data_short": bf.frq_bio_data_short, "frq_particle_motion": rf.frq_particle_motion, "frq_related_rates": rf.frq_related_rates, "frq_implicit_diff": rf.frq_implicit_diff, "frq_micro_monopoly": mf.frq_micro_monopoly, "frq_micro_game": mf.frq_micro_game}
+FRQ ={"frq_table_values": _sf.frq_table_values, "frq_function_analysis": _sf.frq_function_analysis, "frq_rate_in_out": _sf.frq_rate_in_out, "frq_model_analysis_calc": _sf2.frq_model_analysis_calc, "frq_piecewise_diff": _sf2.frq_piecewise_diff, "frq_bc_taylor_diffeq": _sf.frq_bc_taylor_diffeq, "frq_bc_improper_parts": _sf.frq_bc_improper_parts, "frq_series": bc.frq_series, "frq_parametric": bc.frq_parametric, "frq_euler_logistic": tf.frq_euler_logistic, "frq_polar_region": _gfp.frq_polar_region, "frq_table_rate": cf.frq_table_rate, "frq_fprime_graph": cf.frq_fprime_graph, "frq_diffeq": cf.frq_diffeq, "frq_area_volume": cf.frq_area_volume, "frq_bio_investigation": bf.frq_bio_investigation, "frq_bio_data_short": bf.frq_bio_data_short, "frq_particle_motion": rf.frq_particle_motion, "frq_related_rates": rf.frq_related_rates, "frq_implicit_diff": rf.frq_implicit_diff, "frq_micro_monopoly": mf.frq_micro_monopoly, "frq_micro_game": mf.frq_micro_game}
 
 def sig(p):
     return hashlib.sha1(json.dumps([p.get("stem"), [o["text"] for o in p.get("options", [])], p.get("stimulus")], sort_keys=True).encode()).hexdigest()[:12]
