@@ -10,6 +10,33 @@
 // 아래 ANCHORS/너비 규칙만 교체하면 된다.
 
 export const SCORE_MODEL_VERSION = "v1-adaptive";
+/** 초기 운영 임계값(2026-10-09 오너 결정): 각 섹션(R&W·Math)에서 실제로 출제된 문항의 80% 이상에 유효한 응답(null·공백 제외, 정답 여부와 무관)을 낸 응시에만 범위를 보인다.
+ *  점수 정확도를 보장하는 값이 아니라 응답이 너무 적은 응시에서 추정이 나가는 것을 막기 위한 초기 운영 기준이다. 보정(Phase 5) 때 조정한다. */
+export const MIN_RESPONSE_RATIO = 0.8;
+/** 응답이 임계값에 못 미칠 때 범위 자리에 그대로 보이는 문구(결과·정오 분석은 그대로 보인다). */
+/** 관리자 화면 안내(한국어): 임계값의 성격을 밝힌다. */
+export const SCORE_THRESHOLD_NOTE_KO = "예상 점수 범위는 각 섹션(R&W·Math)에서 출제 문항의 80% 이상에 응답한 응시에만 표시됩니다. 80%는 응답이 너무 적은 응시에서 추정이 나가는 것을 막는 초기 운영 기준이며 점수 정확도를 보장하는 값이 아닙니다(정확도 미검증).";
+export const INSUFFICIENT_RESPONSES_TEXT = "Not enough responses to estimate a score range.";
+/** answered/total >= 80% (정수 연산: 부동소수 오차 없음). answered 를 모르면(undefined/null) 충분하다고 보지 않는다. */
+export function hasEnoughResponses(answered: number | null | undefined, total: number): boolean {
+  return typeof answered === "number" && total > 0 && answered >= 0 && answered * 100 >= total * Math.round(MIN_RESPONSE_RATIO * 100);
+}
+export type EstimateOutcome = { estimate: ScoreEstimate | null; reason: null | "insufficient_responses" | "incomplete" };
+/** 정책이 적용된 추정: 두 섹션 모두 응답 비율이 임계값 이상이어야 범위를 만든다. */
+export function estimateScoreWithPolicy(
+  bySection: { section: "rw" | "math"; total: number; correct: number | null; answered?: number | null }[],
+  routes: { rw: ScoreRoute | null; math: ScoreRoute | null },
+): EstimateOutcome {
+  const rw = bySection.find((x) => x.section === "rw"), math = bySection.find((x) => x.section === "math");
+  if (!rw || !math || rw.correct === null || math.correct === null || !routes.rw || !routes.math) {
+    // 채점된 문항이 한 섹션에 하나도 없으면 = 그 섹션 응답 0 → 응답 부족으로 본다(경로가 없는 경우만 incomplete).
+    return { estimate: null, reason: routes.rw && routes.math ? "insufficient_responses" : "incomplete" };
+  }
+  if (!hasEnoughResponses(rw.answered, rw.total) || !hasEnoughResponses(math.answered, math.total)) return { estimate: null, reason: "insufficient_responses" };
+  const estimate = estimateScore(bySection, routes);
+  return estimate ? { estimate, reason: null } : { estimate: null, reason: "incomplete" };
+}
+
 /** 검증 상태 표기(문서·내부 화면용): 표시 조건은 검증했지만 점수 모델의 정확도는 검증하지 않았다. 표시 규칙: lib/mock-exam/score-display-rule.test.ts · score-display-rule.integration.test.ts. */
 export const SCORE_VALIDATION_STATUS = "display verified, accuracy NOT verified" as const;
 export const SCORE_DISCLAIMER = "These results are a learning diagnostic and are not equivalent to an official SAT / College Board score. Score ranges are internal estimates.";

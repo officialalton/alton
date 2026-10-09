@@ -255,7 +255,7 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
     expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("assigned");
   }, 180_000); // 문항 100여 개를 psql로 하나씩 심는 시딩이 기본 5초를 넘긴다
 
-  it("draft 세트를 공개하면 status가 published로 바뀐다", async () => {
+  it("고정형(비 MST·비 AP) 세트는 서버 시간 제한이 구현될 때까지 앱 액션으로 공개할 수 없다(활성화 차단 가드, 마이그레이션 410)", async () => {
     const { assembleMockExamSet, publishMockExamSet, listMockExamSets } = await import("./mock-exam-actions");
     const result = await assembleMockExamSet({
       name: `공개 테스트 세트 ${Date.now()}`,
@@ -263,17 +263,17 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
       rwCount: 5,
       mathCount: 5,
     });
-    await publishMockExamSet(result.examSetId);
+    await expect(publishMockExamSet(result.examSetId)).rejects.toThrow(/cannot be published yet|공개할 수 없습니다/);
     const sets = await listMockExamSets();
-    const published = sets.find((s) => s.id === result.examSetId);
-    expect(published?.status).toBe("published");
+    expect(sets.find((s) => s.id === result.examSetId)?.status).toBe("draft");
   });
 
-  it("같은 계열에 새 버전을 공개하면 이전 공개본은 archived로 내려간다(공개는 계열당 하나)", async () => {
-    const { assembleMockExamSet, publishMockExamSet, listMockExamSets } = await import("./mock-exam-actions");
+  it("같은 계열에는 공개본이 하나뿐이다 — 이전 공개본을 보관해야 새 버전을 공개할 수 있다(DB 제약; 고정형 공개는 앱 액션이 막혀 있어 psql 로 검증)", async () => {
+    const { assembleMockExamSet, listMockExamSets } = await import("./mock-exam-actions");
     const groupName = `버전 교체 세트 ${Date.now()}`;
     const first = await assembleMockExamSet({ name: groupName, difficultyTier: "advanced", rwCount: 5, mathCount: 5 });
-    await publishMockExamSet(first.examSetId);
+    // 고정형 공개는 앱 액션으로 막혀 있다(410) — 이 테스트는 "계열당 하나 공개" DB 제약만 보므로 우회 설정이 켜진 psql 로 공개한다(레거시 픽스처).
+    psql(`update mock_exam_sets set status = 'published', published_at = now() where id = '${first.examSetId}';`);
 
     // 같은 set_group_id로 새 버전 행을 만든 뒤(관리자 "새 버전 만들기" 흐름의 단순화 — 실제로는
     // 전용 액션이 별도로 필요하지만 이 테스트는 DB 제약(공개는 계열당 하나)만 검증한다) 공개한다.
@@ -293,7 +293,9 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
       `);
     }
 
-    await publishMockExamSet(secondSetId);
+    expect(() => psql(`update mock_exam_sets set status = 'published', published_at = now() where id = '${secondSetId}';`)).toThrow(/mock_exam_sets_one_published_per_group/);
+    psql(`update mock_exam_sets set status = 'archived', archived_at = now() where id = '${first.examSetId}';`);
+    psql(`update mock_exam_sets set status = 'published', published_at = now() where id = '${secondSetId}';`);
     const sets = await listMockExamSets();
     const firstAfter = sets.find((s) => s.id === first.examSetId);
     const secondAfter = sets.find((s) => s.id === secondSetId);

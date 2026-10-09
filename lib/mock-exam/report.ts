@@ -16,7 +16,7 @@ export type MockExamReport = {
   answeredCount: number;
   correctCount: number | null;
   totalTimeSpentSeconds: number;
-  bySection: { section: "rw" | "math"; total: number; correct: number | null; timeSpentSeconds: number }[];
+  bySection: { section: "rw" | "math"; total: number; correct: number | null; answered: number; timeSpentSeconds: number }[];
   byDomain: BreakdownRow[];
   bySkill: BreakdownRow[];
   missedItems: { setItemId: string; section: "rw" | "math"; position: number; satDomain: string; skillCode: string | null }[];
@@ -39,9 +39,9 @@ export function computeMockExamReport(
 ): MockExamReport {
   const domainMap = new Map<string, BreakdownRow>();
   const skillMap = new Map<string, BreakdownRow>();
-  const sectionAgg: Record<"rw" | "math", { total: number; correct: number; hasGrading: boolean; timeSpentSeconds: number }> = {
-    rw: { total: 0, correct: 0, hasGrading: false, timeSpentSeconds: 0 },
-    math: { total: 0, correct: 0, hasGrading: false, timeSpentSeconds: 0 },
+  const sectionAgg: Record<"rw" | "math", { total: number; correct: number; answered: number; hasGrading: boolean; timeSpentSeconds: number }> = {
+    rw: { total: 0, correct: 0, answered: 0, hasGrading: false, timeSpentSeconds: 0 },
+    math: { total: 0, correct: 0, answered: 0, hasGrading: false, timeSpentSeconds: 0 },
   };
   let answeredCount = 0;
   let totalTimeSpentSeconds = 0;
@@ -51,6 +51,7 @@ export function computeMockExamReport(
 
   for (const item of items) {
     if (item.response) answeredCount += 1;
+    if (typeof item.response === "string" && item.response.trim() !== "") sectionAgg[item.section].answered += 1; // 유효 응답(null·공백 제외, 정답 여부 무관)
     if (item.timeSpentSeconds) {
       totalTimeSpentSeconds += item.timeSpentSeconds;
       sectionAgg[item.section].timeSpentSeconds += item.timeSpentSeconds;
@@ -88,6 +89,7 @@ export function computeMockExamReport(
       section,
       total: sectionAgg[section].total,
       correct: sectionAgg[section].hasGrading ? sectionAgg[section].correct : null,
+      answered: sectionAgg[section].answered,
       timeSpentSeconds: sectionAgg[section].timeSpentSeconds,
     })),
     byDomain: [...domainMap.values()].sort((a, b) => a.key.localeCompare(b.key)),

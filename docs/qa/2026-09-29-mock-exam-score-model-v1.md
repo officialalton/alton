@@ -29,3 +29,11 @@
 - **검증**: 표시 조건은 `lib/mock-exam/score-display-rule.test.ts`(단위)·`score-display-rule.integration.test.ts`(실제 DB 응답)로 검증했다. 점수 **정확도는 검증하지 않았다**(College Board 변환표와 비교한 적 없음). 모델 샘플(98문항 = R&W 54 + Math 44, lower 경로): R&W 7·Math 7 정답 → 총점 450-570, R&W 5·Math 9 → R&W 210-270 / Math 250-310 — 현업 응시에서 보고된 `210-270 / 240-300 / 450-570` 형태와 모델 출력 모양이 일치한다(저장소에는 1/98·8/98·14/98 응시 기록 자체가 없어 그 기록과의 1:1 대조는 하지 못했다).
 - 상태 표기 상수: `SCORE_VALIDATION_STATUS = "display verified, accuracy NOT verified"`(`score-estimate.ts`). 문서·내부 화면에서 이 문구로 표기한다.
 - 미결정: "응답이 너무 적은 응시에는 범위를 숨긴다"(예: 전체 응답 비율 하한)는 정책이 없다. 현재 동작은 위와 같다.
+
+
+## 응답 비율 정책 — 초기 운영 임계값 80% (2026-10-09 오너 결정, 위 "표시 규칙" 보다 우선)
+- **규칙**: 각 섹션(R&W·Math)에서 **실제로 출제된 문항(경로 반영)의 80% 이상에 유효 응답**(null·공백 제외, **정답 여부와 무관**, 응답 수를 센다)이 있을 때만 예상 점수 범위를 보인다. 한 섹션이라도 미달이면 범위 자리에 정확히 `Not enough responses to estimate a score range.` 를 보이고, 결과·정오 분석은 그대로 연다. 정수 비교 `answered*100 >= total*80`(R&W 54문항: 43개 79.6% 부족, 44개 81.5% 충분).
+- **성격**: 80% 는 **초기 운영 임계값**이다 — 응답이 너무 적은 응시에서 추정이 나가는 것을 막기 위한 값이지 점수 **정확도를 보장하지 않는다**(정확도 미검증은 그대로). 상수 `MIN_RESPONSE_RATIO`, 문구 `INSUFFICIENT_RESPONSES_TEXT`(`lib/mock-exam/score-estimate.ts`), 관리자 안내 `SCORE_THRESHOLD_NOTE_KO`(Free Accounts 점수 통계 카드). 보정(Phase 5) 때 조정한다.
+- **적용 범위**: 결과 화면(학생·학부모 읽기 전용 같은 컴포넌트 `MockExamResultView`), 통계 추이(`student_stats_aggregate` → `computeMockStats`), 관리자 점수 원자료(`admin_student_mock_attempt_facts` → `estimateAttempt`/`AttemptHistoryTable`). 고정형·AP·미채점은 영향 없음(기존 사유 그대로: 범위 없음). 섹션별 유효 응답 수는 마이그레이션 `20262100000409`(`_mock_exam_section_answered`)가 준다. 알 수 없는 값(answered 없음)은 충분하다고 보지 않는다.
+- **표기**: 결과 화면 소제목 "Internal estimate — accuracy not verified; not an official College Board score". 이전 절의 "응답 총수 하한 없음·섹션당 1개" 서술은 이 정책으로 대체됐다.
+- **테스트**: 단위 `lib/mock-exam/score-response-threshold.test.ts`(40/54 vs 44/54, 경계 43/54, 한 섹션만 미달, 정답이 아니라 응답 수, 고정형·AP 불변), 통합 `lib/mock-exam/score-display-rule.integration.test.ts`(실제 DB 응답, 공백 응답 제외, 통계·관리자 RPC answered), 컴포넌트 `MockExamResultView.tabs.test.tsx`(학생·학부모 문구).

@@ -62,7 +62,7 @@ export function computeMockStats(raw: RawStatsAggregate["mock"], tier: StatsTier
     // 점수 추정은 공유 집계 모듈(lib/mock-exam/score-aggregate.ts)만 거친다 — 관리자 화면과 숫자가 일치해야 한다.
     const sec = (k: "rw" | "math") => {
       const x = a.sections.find((y) => y.section === k);
-      return { total: x ? num(x.total) : 0, correct: x ? num(x.correct) : null, complete: !!x, route: k === "rw" ? a.rwRoute : a.mathRoute };
+      return { total: x ? num(x.total) : 0, correct: x ? num(x.correct) : null, complete: !!x, route: k === "rw" ? a.rwRoute : a.mathRoute, answered: x && x.answered !== undefined ? num(x.answered) : undefined };
     };
     const est = estimateAttempt({
       attemptId: a.attemptId, examName: "", track: "sat", apSubject: null, format: a.format === "mst" ? "mst" : "fixed",

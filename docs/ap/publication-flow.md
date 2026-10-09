@@ -162,3 +162,10 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 | 학생 단위(학습 요약·약점·통계·학부모/상담사 보기: `student_stats_aggregate`, `mock_exam_weakness_summary`, `free_member_learning_summary`, `admin_student_mock_attempt_facts` …) | 한 학생만 읽는 경로라 교차 집계 아님 — 해당 없음 |
 | 상담 전환(`register_consult_interest`·상담 요청) | 쓰기 경로, 집계는 Free Accounts 분석 scope 안에서만 — 제외됨 |
 교차 학생으로 응시를 세는 다른 경로는 찾지 못했다(DB 함수 전수 + 앱 코드 `mock_exam_attempts` 조회 전수 확인).
+
+## 결함·활성화 차단: SAT 고정형(비 MST·비 AP) 서버 시간 제한 미구현 (2026-10-09, 마이그레이션 `20262100000410`)
+- **결함**: 고정형 SAT 응시(`format='fixed'`)는 시간 제한이 **클라이언트 타이머뿐**이다. 서버(`mock_exam_save_answer`·`mock_exam_submit`)는 만료 뒤 저장·제출을 막지 않는다(MST 는 모듈 시계, AP 는 406 서버 시계가 있음). "Time is up… Answers can no longer be changed." 문구는 이 경로에서 서버 강제가 아니다.
+- **현재 영향 없음**: 비프로덕션 점검(2026-10-09)에서 공개된 고정형 SAT 세트는 0개(`Test Set 1` draft 만), MST 13개·ap_fixed 2개 공개. 비활성 경로다.
+- **활성화 차단 가드(410)**: 비 AP 고정형 세트는 **공개 불가**(`mock_exam_sets` 트리거)이고 이미 공개돼 있어도 **새 응시 시작 불가**(`mock_exam_attempts` 트리거). 관리자 화면에 보이는 오류는 한·영 병기. MST·AP 는 영향 없음. 레거시 테스트 픽스처만 세션 설정 `alton.allow_fixed_sat_without_time_limit=on`(vitest 통합 설정)으로 우회한다.
+- **해제 조건**: 고정형에 서버 기준 섹션 시계(406 과 같은 방식)와 만료 뒤 저장 거절·마감 settle 을 구현하고 테스트한 뒤, 410 의 트리거 2개·함수 2개를 제거한다(되돌리기 SQL 은 파일 머리 주석). 그 전까지 어떤 화면·문서도 클라이언트 타이머를 "강제되는 시간 제한"으로 표현하지 않는다.
+- 회귀 테스트: `lib/mock-exam/fixed-sat-guard.integration.test.ts`.

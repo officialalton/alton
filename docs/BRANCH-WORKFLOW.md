@@ -130,3 +130,10 @@ done
 - 차단 조건: id 없음, 락 없음/불일치, id 가 `ALTON`(또는 `ALTON_<영숫자>` 형식이 아님), 대상 컨테이너에 `supabase_*_ALTON` 포함, 컨테이너가 대상 id 접미사가 아님, 포트가 54320~54329·54420~54429·54325 계열.
 - **금지**: 인자 없는 `npx supabase stop`, `supabase stop --project-id ALTON`, 이름만으로 `docker rm`/`docker volume rm`. 컨테이너·볼륨을 직접 지울 때도 `docker ps -a` 로 이름 접미사(`_ALTON_<이름>`)를 확인한 것만 지운다.
 - 공유 DB의 마이그레이션 적용 상태(예: 556 vs 566)는 이 절차에서 맞추지 않는다. 적용은 조정 세션 몫이다.
+
+## config.toml 커밋 가드 (2026-10-09)
+격리 스택 래퍼가 임시로 바꾼 `supabase/config.toml`(project_id `ALTON_*`, 545xx·546xx 포트)이 스택이 떠 있는 동안 `git add -A` 로 커밋되는 사고가 3번 있었다. 그래서:
+- **훅**: `scripts/dev/isolated-stack.sh start` 가 **그 워크트리에만** `core.hooksPath`(워크트리 로컬 설정)를 `scripts/dev/hooks` 로 지정한다. pre-commit 이 `scripts/dev/check-config-toml.ts` 를 호출해 스테이징된 `supabase/config.toml` 의 project_id 가 `ALTON` 이 아니거나 포트가 공유 544xx 계열(54420~54429, smtp 54325) 밖이면 **커밋을 막는다**. `stop` 이 원래 `core.hooksPath` 를 복원한다.
+- **의도된 수정만 예외**: 실제 repo config 를 일부러 고칠 때는 `ALLOW_CONFIG_TOML=1 CONFIG_TOML_NOTE="<작업 메모 8자 이상>" git commit …`. 표식만 있고 메모가 없으면 차단.
+- **테스트**: `lib/dev/config-toml-guard.test.ts` 가 순수 함수(양성·음성)와 HEAD 의 `supabase/config.toml` 을 검사한다(격리 값이 커밋되면 vitest 가 실패).
+- **스테이징 규칙(재확인)**: 스택이 떠 있는 동안에는 `git add -A`/`git commit -a` 금지 — 경로를 지정해 스테이징한다.

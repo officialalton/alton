@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { accuracySummary, buildScorePoints, estimateAttempt, excludedCounts, groupFacts, summarize, type AttemptFacts } from "./score-aggregate";
 
-const sec = (correct: number | null, total = 54, route: "higher" | "lower" | null = "higher", complete = true) => ({ total, correct, complete, route });
+const sec = (correct: number | null, total = 54, route: "higher" | "lower" | null = "higher", complete = true) => ({ total, correct, complete, route, answered: total });
 const mk = (id: string, day: number, o: Partial<AttemptFacts> & { rw?: number; math?: number } = {}): AttemptFacts => ({
   attemptId: id, examName: "T", track: "sat", apSubject: null, format: "mst", status: "graded", startedAt: null,
   gradedAt: `2026-09-${String(day).padStart(2, "0")}T00:00:00Z`, attemptSeq: 1,

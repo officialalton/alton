@@ -131,11 +131,27 @@ describe("MockExamResultView — 서브탭·영어 UI", () => {
     expect(screen.getByRole("tab", { name: "Results by Domain" })).toHaveAttribute("aria-selected", "true");
   });
 
+  it("응답이 임계값(80%) 미만이면 범위 자리에 정해진 문구만 보이고 결과·정오 분석은 그대로다(학생·학부모 읽기 전용 동일)", () => {
+    for (const readOnly of [false, true]) {
+      const { unmount } = render(<MockExamResultView attempt={attempt(items, { scoreEstimate: null, scoreEstimateNote: "insufficient_responses" })} readOnly={readOnly} />);
+      const box = screen.getByTestId("mock-exam-score-estimate-insufficient");
+      expect(box).toHaveTextContent("Not enough responses to estimate a score range.");
+      expect(box).toHaveTextContent("Internal estimate — accuracy not verified");
+      expect(screen.queryByTestId("mock-exam-score-estimate")).toBeNull();
+      expect(screen.getByTestId("mock-exam-donut")).toBeInTheDocument(); // 결과·분석은 그대로
+      unmount();
+    }
+  });
+  it("고정형은 임계값 문구가 나오지 않는다(범위 자체가 없음)", () => {
+    render(<MockExamResultView attempt={attempt(items, { format: "fixed", scoreEstimate: null, scoreEstimateNote: "insufficient_responses" })} readOnly={false} />);
+    expect(screen.queryByTestId("mock-exam-score-estimate-insufficient")).toBeNull();
+  });
+
   it("예상 점수: 내부 추정·비공식 문구, R&W/Math/Total 막대", () => {
     const scoreEstimate = { rw: { low: 500, high: 560 }, math: { low: 600, high: 660 }, total: { low: 1100, high: 1220 }, modelVersion: "v1-adaptive" };
     render(<MockExamResultView attempt={attempt(items, { scoreEstimate })} readOnly={false} />);
     const box = screen.getByTestId("mock-exam-score-estimate");
-    expect(box).toHaveTextContent("Internal estimate — not an official College Board score");
+    expect(box).toHaveTextContent("Internal estimate — accuracy not verified; not an official College Board score");
     expect(within(box).getByTestId("mock-exam-score-total")).toHaveTextContent("1100-1220");
     expect(within(box).getByTestId("mock-exam-score-rw")).toHaveTextContent("500-560");
   });
