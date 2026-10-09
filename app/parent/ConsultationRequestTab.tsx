@@ -84,7 +84,7 @@ export default function ConsultationRequestTab() {
         ) : (
           "Tell us what you'd like to discuss. ALTON EDUCATION will assign a consultant and follow up with scheduling."
         )}{" "}
-        Track progress under &quot;History&quot; and continue the conversation under &quot;Messages&quot;.
+        Track progress and status under &quot;History&quot; and continue the conversation under &quot;Messages&quot;.
       </p>
 
       {hasAssignedConsultant && consultants.length > 1 && (
