@@ -7,7 +7,7 @@ SCEN = [
      "behavior": "kinesis or taxis"},
     {"org": "bean seedlings", "iv": "wavelength of light shone on one side of the shoot", "levels": ["white light (control)", "red light", "blue light"], "ctrl": 0, "ctrl_why": "unfiltered white light is the reference condition containing all wavelengths", "dv": "angle of stem curvature toward the light source after 24 hours", "unit": "degrees", "m0": 4.0, "eff": [0.0, 6.0, 38.0], "sd": 6.0,
      "behavior": "phototropism"},
-    {"org": "zebrafish larvae", "iv": "water temperature", "levels": ["18 °C", "26 °C", "34 °C"], "ctrl": 1, "ctrl_why": "26 °C is the standard rearing temperature used as the reference condition", "dv": "mean swimming speed during a 1-minute observation", "unit": "mm per second", "m0": 11.0, "eff": [-5.0, 0.0, 4.5], "sd": 2.4, "behavior": "response to temperature"},
+    {"org": "zebrafish larvae", "iv": "water temperature", "levels": ["18 °C", "26 °C", "34 °C"], "ctrl": 1, "ctrl_why": "26 °C is the standard rearing temperature used as the reference condition", "dv": "swimming speed during a 1-minute observation", "unit": "mm per second", "m0": 11.0, "eff": [-5.0, 0.0, 4.5], "sd": 2.4, "behavior": "response to temperature"},
 ]
 
 from bp import meaning as _meaning
