@@ -60,3 +60,4 @@
 - DB·API 실행 대상 검증(2026-10-09 오너): 시드·화면 증거·통합 테스트 가드는 env 파일을 모두 읽은 뒤 대상을 정하고 docker 컨테이너·프로젝트 정보로 DB·API가 같은 격리 스택인지 확인, 공유(ALTON)·불일치면 쓰기 전 중단 — 포트 관계만으로 판단하지 않음 — guard: lib/dev/stack-identity.ts (+test)
 - AP 문항군은 구조 기준으로 관리(2026-10-09 오너): 숫자·표현·코드 원형만 다른 변형은 새 독립 문항군으로 세지 않고 애매하면 보수적으로 같은 군 — docs/ap/family-structure-review.md, docs/ap/supplement-structure-review.md
 - AP 보강 생성 총상한 $13.20(2026-10-09 오너 승인, 상한은 지출 목표 아님) 중 실지출 $3.2920, 누적 $31.2912(중단선 $45·총상한 $50)
+- AP 최종 편성 문항군 기준 = 보수적 구조 판정(2026-10-09 오너): `data/ap/stock/structure-groups.json`을 보수 묶음으로 승격(경계 8묶음을 기존 군에 병합, 측정상 보강 MC 독립 군 28→21). 코드 원형·숫자 차이는 별도 군으로 세지 않음 — docs/ap/exact-assignment-report.md §11
