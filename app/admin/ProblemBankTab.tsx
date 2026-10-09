@@ -1,5 +1,6 @@
 "use client";
 
+import { mathToPlain } from "@/lib/math-plain";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
@@ -116,6 +117,10 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   const [bucket, setBucket] = useState<Bucket>("working");
   const [filter, setFilter] = useState<ProblemBankFilter>({});
   const [problems, setProblems] = useState<BankProblem[] | null>(null);
+  // 서버 페이지네이션(2026-10-08) — total 은 필터·버킷에 맞는 정확한 전체 건수. 한 페이지(10개)만 불러온다.
+  const PAGE_SIZE = 10;
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
   const [audit, setAudit] = useState<{ withQuestion: number; draftWithout: number; publishedWithout: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -148,19 +153,20 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
     const seq = ++reloadSeqRef.current;
     setError(null);
     try {
-      const [rows, a] = await Promise.all([
-        listBankProblemsAction({ ...filter, archived: archived || undefined }),
+      const [res, a] = await Promise.all([
+        listBankProblemsAction({ ...filter, archived: archived || undefined }, { bucket: bucket === "create" ? undefined : bucket, page, pageSize: PAGE_SIZE }),
         problemQuestionAuditAction(filter.subjectId),
       ]);
       if (seq !== reloadSeqRef.current) return; // 그 사이 더 최신 요청이 나갔다 — 이 응답은 버린다.
-      setProblems(rows);
+      setProblems(res.rows);
+      setTotal(res.total);
       setAudit(a.ok ? a.value : null);
     } catch {
       if (seq !== reloadSeqRef.current) return;
       setProblems(null);
       setError("문제 목록을 불러오지 못했습니다.");
     }
-  }, [filter, archived]);
+  }, [filter, archived, bucket, page]);
 
   useEffect(() => {
     // 마운트·필터 변경 시 목록을 서버에서 읽어오는 정상적인 데이터 로딩 effect다 —
@@ -205,11 +211,9 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   });
   const publishableDrafts = visible.filter((p) => p.draft?.versionId);
 
-  const PAGE_SIZE = 10;
-  const [page, setPage] = useState(1);
-  const pageCount = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+  const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
   const pageSafe = Math.min(page, pageCount);
-  const pageItems = visible.slice((pageSafe - 1) * PAGE_SIZE, pageSafe * PAGE_SIZE);
+  const pageItems = visible; // 서버가 이미 한 페이지만 준다.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setPage(1);
@@ -357,7 +361,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
     const targets = visible.filter((p) => !p.archived);
     if (targets.length === 0) return;
     setPendingConfirm({
-      message: `지금 보이는 문제 ${targets.length}개를 모두 보관할까요? 과거 기록은 그대로 남습니다.`,
+      message: `이 페이지에 보이는 문제 ${targets.length}개를 보관할까요? (필터 전체 ${total}개 중 이 페이지분만 — 나머지는 바뀌지 않습니다.) 과거 기록은 그대로 남습니다.`,
       onConfirm: () => void archiveAllVisibleImpl(),
     });
   }
@@ -384,7 +388,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   function publishAllVisible() {
     if (publishableDrafts.length === 0) return;
     setPendingConfirm({
-      message: `지금 보이는 초안 ${publishableDrafts.length}개를 모두 공개할까요? 공개된 문제는 회차 구성 후보가 됩니다.`,
+      message: `이 페이지에 보이는 초안 ${publishableDrafts.length}개를 공개할까요? (필터 전체 ${total}개 중 이 페이지분만 — 나머지는 바뀌지 않습니다.) 공개된 문제는 회차 구성 후보가 됩니다.`,
       onConfirm: () => void publishAllVisibleImpl(),
     });
   }
@@ -449,6 +453,12 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
         />
       )}
 
+      {bucket !== "create" && problems !== null && (
+        <p className="text-[12px] text-grey-500 mb-2" data-testid="bank-total">
+          필터 결과 <b className="text-ink">{total}</b>개 중 {total === 0 ? 0 : (pageSafe - 1) * PAGE_SIZE + 1}–{(pageSafe - 1) * PAGE_SIZE + visible.length}번째 표시
+        </p>
+      )}
+
       {bucket !== "create" && audit && (
         <p className="text-[12px] text-grey-500 mb-3" data-testid="question-audit">
           질문 집계{filter.subjectId ? "(이 과목)" : ""}: 질문 있음 <b className="text-ink">{audit.withQuestion}</b> · 질문 없는 초안 <b className="text-ink">{audit.draftWithout}</b> · 질문 없는 공개본{" "}
@@ -505,9 +515,9 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
 
       {bucket === "working" && publishableDrafts.length > 0 && (
         <div className="flex flex-wrap items-center gap-3 mb-3 border-[1.5px] border-grey-200 rounded-xl px-4 py-2.5">
-          <span className="text-[12.5px] text-ink">지금 보이는 초안 <b>{publishableDrafts.length}</b>개</span>
+          <span className="text-[12.5px] text-ink">이 페이지 초안 <b>{publishableDrafts.length}</b>개 (필터 전체 <b>{total}</b>개)</span>
           <button type="button" disabled={busy || publishingAll} onClick={() => void publishAllVisible()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50">
-            {publishingAll ? "공개 중…" : `전체 공개 (${publishableDrafts.length})`}
+            {publishingAll ? "공개 중…" : `이 페이지 공개 (${publishableDrafts.length})`}
           </button>
           <span className="text-[11.5px] text-grey-500">내용을 확인한 초안만 공개하세요 — 공개된 문제는 회차 구성 후보가 됩니다.</span>
         </div>
@@ -515,9 +525,9 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
 
       {bucket !== "archived" && visible.length > 0 && (
         <div className="flex flex-wrap items-center gap-3 mb-3 border-[1.5px] border-grey-200 rounded-xl px-4 py-2.5">
-          <span className="text-[12.5px] text-ink">지금 보이는 문제 <b>{visible.length}</b>개</span>
+          <span className="text-[12.5px] text-ink">이 페이지 <b>{visible.length}</b>개 · 필터 전체 <b>{total}</b>개</span>
           <button type="button" disabled={busy || archivingAll} onClick={() => void archiveAllVisible()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-grey-500 disabled:opacity-50">
-            {archivingAll ? "보관 중…" : "전체 보관"}
+            {archivingAll ? "보관 중…" : `이 페이지 보관 (${visible.filter((p) => !p.archived).length})`}
           </button>
         </div>
       )}
@@ -525,7 +535,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
       {/* 2026-09-29 — 기존(미분류) 문제 일괄 재분류. 같은 문제가 수업·과제와 모의고사에 함께 나오지 않게 나눈다. */}
       {bucket !== "create" && visibleLegacy.length > 0 && (
         <div className="flex flex-wrap items-center gap-3 mb-3 border-[1.5px] border-grey-200 rounded-xl px-4 py-2.5" data-testid="legacy-scope-bar">
-          <span className="text-[12.5px] text-ink">용도 미분류(기존) <b>{visibleLegacy.length}</b>개</span>
+          <span className="text-[12.5px] text-ink">이 페이지의 용도 미분류(기존) <b>{visibleLegacy.length}</b>개 — 아래 버튼은 필터 전체(서버 집계)에 적용됩니다</span>
           <button type="button" disabled={busy || bulkBusy} onClick={() => void retagLegacyByFilter("general")} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50">
             필터 전체를 일반용으로
           </button>
@@ -609,7 +619,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
         ))
       )}
 
-      {bucket !== "create" && visible.length > PAGE_SIZE && (
+      {bucket !== "create" && total > PAGE_SIZE && (
         <div className="flex items-center justify-center gap-3 mt-4">
           <button
             type="button"
@@ -619,7 +629,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
           >
             이전
           </button>
-          <span className="text-[12.5px] text-grey-500">{pageSafe} / {pageCount} 페이지 (총 {visible.length}개)</span>
+          <span className="text-[12.5px] text-grey-500">{pageSafe} / {pageCount} 페이지 · 이 페이지 {visible.length}개 / 전체 {total}개</span>
           <button
             type="button"
             disabled={pageSafe >= pageCount}
@@ -1074,7 +1084,7 @@ function ProblemRow({
   onNotice: (text: string) => void;
 }) {
   const content = problem.published ?? problem.draft;
-  const title = [content?.passage?.trim(), content?.question?.trim()].filter(Boolean).join(" ") || "(아직 내용이 없는 문제)";
+  const title = mathToPlain([content?.passage?.trim(), content?.question?.trim()].filter(Boolean).join(" ")) || "(아직 내용이 없는 문제)";
   const readinessNote = READINESS_NOTE[problem.readiness];
   // 2026-09-17(제품 오너 지시) — manual(관리자 직접 작성)만 검수 화면에서 내용
   // 편집이 가능하다. AI/계산형 컴파일러 생성분은 자동 검사를 이미 통과한 완성

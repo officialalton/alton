@@ -10,8 +10,13 @@ export default async function AdminApItemsPage({ searchParams }: { searchParams:
   const sp = await searchParams;
   const f: ApFilters = { subject: sp.subject, purpose: sp.purpose, tier: sp.tier, expert: sp.expert, ready: sp.ready };
   const admin = createAdminClient();
-  const { data } = await admin.from("ap_item_conversion_v").select("*").eq("is_current", true).order("candidate_key").limit(2000);
-  const all = (data ?? []) as ApItemRow[];
+  // PostgREST max_rows(1000)에 잘리지 않게 range 로 끝까지 읽는다(건수·용도별 재고가 전체 기준이어야 한다).
+  const all: ApItemRow[] = [];
+  for (let from = 0; from < 50000; from += 1000) {
+    const { data } = await admin.from("ap_item_conversion_v").select("*").eq("is_current", true).order("candidate_key").range(from, from + 999);
+    all.push(...((data ?? []) as ApItemRow[]));
+    if ((data ?? []).length < 1000) break;
+  }
   const rows = filterApItems(all, f);
   const subjects = [...new Set(all.map((r) => r.subject))].sort();
   const sel = (name: keyof ApFilters, label: string, opts: [string, string][]) => (

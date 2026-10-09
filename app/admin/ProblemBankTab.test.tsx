@@ -10,7 +10,12 @@ import type { AdminSubject } from "./subject-data";
 // 내용을 보지 않고 공개되는 길은 여전히 없다.
 
 vi.mock("./problem-bank-actions", () => ({
-  listBankProblemsAction: (...a: unknown[]) => listBankProblemsAction(...a),
+  // 서버 페이지네이션 응답 { rows, total } — 기존 테스트의 배열 목은 어댑터로 감싼다(total 은 { total } 가 따로 주어지면 그 값).
+  listBankProblemsAction: async (...a: unknown[]) => {
+    listBankOpts(a[1]);
+    const r = await listBankProblemsAction(a[0]);
+    return Array.isArray(r) ? { rows: r, total: r.length, page: 1, pageSize: 10 } : r;
+  },
   createBankProblemAction: (...a: unknown[]) => createBankProblemAction(...a),
   createDraftVersionAction: (...a: unknown[]) => createDraftVersionAction(...a),
   createDraftFromPublishedAction: (...a: unknown[]) => createDraftFromPublishedAction(...a),
@@ -30,6 +35,7 @@ vi.mock("./problem-bank-actions", () => ({
 }));
 
 const listBankProblemsAction = vi.fn();
+const listBankOpts = vi.fn();
 const createBankProblemAction = vi.fn();
 const createDraftVersionAction = vi.fn();
 const createDraftFromPublishedAction = vi.fn();
@@ -580,7 +586,7 @@ describe("보관은 삭제가 아니다", () => {
   it("검수 탭에서 '전체 공개'는 보이는 초안을 모두 공개하고 결과를 알린다(2026-09-14)", async () => {
     publishDraftAction.mockResolvedValue({ ok: true });
     render(<ProblemBankTab subjects={subjects} />);
-    const button = await screen.findByRole("button", { name: /전체 공개 \(1\)/ });
+    const button = await screen.findByRole("button", { name: /이 페이지 공개 \(1\)/ });
     fireEvent.click(button);
     fireEvent.click(await screen.findByRole("button", { name: "확인" }));
     await waitFor(() => expect(publishDraftAction).toHaveBeenCalledWith("v1"));
@@ -589,7 +595,7 @@ describe("보관은 삭제가 아니다", () => {
 
   it("전체 공개 확인을 취소하면 아무것도 공개하지 않는다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
-    fireEvent.click(await screen.findByRole("button", { name: /전체 공개/ }));
+    fireEvent.click(await screen.findByRole("button", { name: /이 페이지 공개/ }));
     fireEvent.click(await screen.findByRole("button", { name: "취소" }));
     expect(publishDraftAction).not.toHaveBeenCalled();
   });
@@ -841,5 +847,31 @@ describe("ProblemBankTab — 키워드 도메인 그룹", () => {
     await waitFor(() => expect(screen.getByLabelText("키워드")).not.toBeDisabled());
     const select = screen.getByLabelText("키워드") as HTMLSelectElement;
     expect([...select.querySelectorAll("optgroup")].map((g) => g.label)).toEqual(["Algebra", "기타"]);
+  });
+});
+
+describe("문제은행 목록 — 정확한 전체 건수와 페이지 단위 일괄 작업", () => {
+  it("전체 건수·표시 범위를 보여주고, 일괄 보관은 이 페이지분임을 확인창에 밝힌다", async () => {
+    listBankProblemsAction.mockResolvedValue({ rows: [draftProblem], total: 6123, page: 1, pageSize: 10 });
+    render(<ProblemBankTab subjects={[]} />);
+    await waitFor(() => expect(screen.getByTestId("bank-total")).toHaveTextContent("필터 결과 6123개 중 1–1번째 표시"));
+    expect(listBankOpts).toHaveBeenCalledWith(expect.objectContaining({ bucket: "working", page: 1, pageSize: 10 }));
+    expect(screen.getByText(/페이지 · 이 페이지 1개 \/ 전체 6123개/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "이 페이지 보관 (1)" }));
+    expect(screen.getByText(/이 페이지에 보이는 문제 1개를 보관할까요\? \(필터 전체 6123개 중 이 페이지분만/)).toBeInTheDocument();
+  });
+
+  it("다음 페이지는 서버에 page=2 로 다시 요청한다", async () => {
+    listBankProblemsAction.mockResolvedValue({ rows: [draftProblem], total: 25, page: 1, pageSize: 10 });
+    render(<ProblemBankTab subjects={[]} />);
+    await waitFor(() => screen.getByRole("button", { name: "다음" }));
+    fireEvent.click(screen.getByRole("button", { name: "다음" }));
+    await waitFor(() => expect(listBankOpts).toHaveBeenLastCalledWith(expect.objectContaining({ page: 2 })));
+  });
+
+  it("목록 제목의 TeX 는 읽기 쉬운 글로 보인다", async () => {
+    listBankProblemsAction.mockResolvedValue([{ ...draftProblem, draft: { ...draftProblem.draft!, passage: "Let $f$ be \\ln\\left(4x^{2}+4\\right)e^{0.5x}.", question: null } }]);
+    render(<ProblemBankTab subjects={[]} />);
+    await waitFor(() => expect(screen.getByTestId("bank-row-title").textContent).toContain("Let f be ln(4x^2+4)e^(0.5x)."));
   });
 });

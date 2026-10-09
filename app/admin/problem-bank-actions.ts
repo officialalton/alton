@@ -153,36 +153,51 @@ export type ProblemBankFilter = {
   repairStatus?: "none" | "needs_distractor_repair";
 };
 
+export type BankListBucket = "published" | "working" | "archived";
+export type BankListPage = { rows: BankProblem[]; total: number; page: number; pageSize: number };
+const BANK_PAGE_SIZE = 10;
+
+/** 서버에서 필터·버킷을 적용한 정확한 전체 건수(total)와 한 페이지(rows). 예전의 .limit(200) 절단은 없다. */
 export async function listBankProblemsAction(
-  filter: ProblemBankFilter = {}
-): Promise<BankProblem[]> {
+  filter: ProblemBankFilter = {},
+  opts: { bucket?: BankListBucket; page?: number; pageSize?: number } = {}
+): Promise<BankListPage> {
   await requireAdmin();
   const admin = createAdminClient();
-
-  let q = admin
+  const pageSize = Math.min(Math.max(opts.pageSize ?? BANK_PAGE_SIZE, 1), 100);
+  const page = Math.max(opts.page ?? 1, 1);
+  const { data: pg, error: pgErr } = await admin.rpc("problem_bank_list_page", {
+    p_filter: bankFilterJson(filter), p_bucket: opts.bucket ?? null, p_offset: (page - 1) * pageSize, p_limit: pageSize,
+  });
+  if (pgErr) throw new Error(pgErr.message);
+  const { total, ids: pageIds } = pg as { total: number; ids: string[] };
+  const empty = { rows: [] as BankProblem[], total: Number(total ?? 0), page, pageSize };
+  if (!pageIds?.length) return empty;
+  const { data: rawRows, error } = await admin
     .from("problems")
     .select(
       "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at, sat_domain, skill_code, exam_system, ap_subject, created_via, subpattern, usage_scope, similarity_group, similarity_group_manual, error_review_needed"
     )
-    .order("created_at", { ascending: false })
-    .limit(200);
+    .in("id", pageIds);
+  if (error || !rawRows?.length) return empty;
+  const order = new Map(pageIds.map((id, i) => [id, i]));
+  const rows = [...rawRows].sort((a, b) => (order.get(a.id as string) ?? 0) - (order.get(b.id as string) ?? 0));
+  return { ...empty, rows: await buildBankProblems(admin, rows) };
+}
 
-  // 보관됨과 현재는 **한 목록에 섞지 않는다.** 기본 진입은 현재다.
-  q = filter.archived ? q.not("archived_at", "is", null) : q.is("archived_at", null);
-  if (filter.subjectId) q = q.eq("subject_id", filter.subjectId);
-  if (filter.format) q = q.eq("format", filter.format);
-  if (filter.satDomain) q = q.eq("sat_domain", filter.satDomain);
-  if (filter.skillCode) q = q.eq("skill_code", filter.skillCode);
-  if (filter.examSystem) q = q.eq("exam_system", filter.examSystem);
-  if (filter.usageScope) q = q.eq("usage_scope", filter.usageScope);
-  if (filter.difficulty) q = q.eq("difficulty", filter.difficulty);
-  if (filter.query?.trim()) {
-    const term = filter.query.trim().replace(/[%,]/g, "");
-    q = q.or(`passage.ilike.%${term}%,topic.ilike.%${term}%`);
+function bankFilterJson(filter: ProblemBankFilter & { onlyLegacy?: boolean }): Record<string, unknown> {
+  const o: Record<string, unknown> = { archived: Boolean(filter.archived) };
+  for (const k of ["subjectId", "format", "satDomain", "skillCode", "examSystem", "usageScope", "difficulty", "keywordId", "workState", "repairStatus"] as const) {
+    if (filter[k]) o[k] = filter[k];
   }
+  if (filter.query?.trim()) o.query = filter.query.trim();
+  return o;
+}
 
-  const { data: rows, error } = await q;
-  if (error || !rows?.length) return [];
+async function buildBankProblems(
+  admin: ReturnType<typeof createAdminClient>,
+  rows: Record<string, unknown>[]
+): Promise<BankProblem[]> {
 
   const ids = rows.map((r) => r.id as string);
   const subjectIds = Array.from(
@@ -315,15 +330,7 @@ export async function listBankProblemsAction(
     createdVia: ((r as { created_via?: string }).created_via as BankProblem["createdVia"] | undefined) ?? "manual",
   }));
 
-  return mapped.filter((p) => {
-    if (filter.workState && p.workState !== filter.workState) return false;
-    if (filter.keywordId && !p.keywords.some((k) => k.id === filter.keywordId)) return false;
-    // 2026-09-15: 오답 보강 대기 초안은 명시적으로 요청했을 때만 보인다 — 기본 화면·자동 구성에서 숨긴다.
-    const currentRepairStatus = p.draft?.repairStatus ?? "none";
-    if (filter.repairStatus) { if (currentRepairStatus !== filter.repairStatus) return false; }
-    else if (currentRepairStatus !== "none") return false;
-    return true;
-  });
+  return mapped;
 }
 
 export type ProblemVersionRow = {
@@ -773,7 +780,8 @@ export async function retagProblemsUsageScopeAction(params: {
   if (params.filter && ids.length === 0) {
     const resolved = await resolveRetagTargets(params.filter);
     if (!resolved.ok) return resolved;
-    ids = resolved.value;
+    if (resolved.value.total > 2000) return { ok: false, error: `대상이 ${resolved.value.total}개입니다. 한 번에 2000개까지만 바꿀 수 있으니 필터를 좁혀 주세요.` };
+    ids = resolved.value.ids;
   }
   if (ids.length === 0) return { ok: false, error: "바꿀 문제가 없습니다." };
   if (ids.length > 2000) return { ok: false, error: "한 번에 2000개까지만 바꿀 수 있습니다. 필터를 좁혀 주세요." };
@@ -787,21 +795,15 @@ export async function retagProblemsUsageScopeAction(params: {
   return { ok: true, value: { changed: Number(data ?? 0) } };
 }
 
-async function resolveRetagTargets(filter: ProblemBankFilter & { onlyLegacy?: boolean }): Promise<BankResult<string[]>> {
+/** 재분류 대상 id. total 은 정확한 전체 건수 — 상한(2001)을 넘으면 ids 는 잘리지만 total 로 알 수 있다. */
+async function resolveRetagTargets(filter: ProblemBankFilter & { onlyLegacy?: boolean }): Promise<BankResult<{ ids: string[]; total: number }>> {
   const admin = createAdminClient();
-  let q = admin.from("problems").select("id").limit(2001);
-  q = filter.archived ? q.not("archived_at", "is", null) : q.is("archived_at", null);
-  if (filter.onlyLegacy !== false) q = q.eq("usage_scope", "both");
-  else if (filter.usageScope) q = q.eq("usage_scope", filter.usageScope);
-  if (filter.subjectId) q = q.eq("subject_id", filter.subjectId);
-  if (filter.format) q = q.eq("format", filter.format);
-  if (filter.satDomain) q = q.eq("sat_domain", filter.satDomain);
-  if (filter.skillCode) q = q.eq("skill_code", filter.skillCode);
-  if (filter.examSystem) q = q.eq("exam_system", filter.examSystem);
-  if (filter.difficulty) q = q.eq("difficulty", filter.difficulty);
-  const { data, error } = await q;
+  const f = { ...filter };
+  if (filter.onlyLegacy !== false) f.usageScope = "both";
+  const { data, error } = await admin.rpc("problem_bank_list_page", { p_filter: bankFilterJson({ ...f, repairStatus: undefined }), p_bucket: null, p_offset: 0, p_limit: 2001 });
   if (error) return { ok: false, error: "대상 문제를 읽지 못했습니다." };
-  return { ok: true, value: (data ?? []).map((r) => r.id as string) };
+  const d = data as { total: number; ids: string[] };
+  return { ok: true, value: { ids: d.ids ?? [], total: Number(d.total ?? 0) } };
 }
 
 /** 재분류 확인창용 — 필터에 맞는 기존(both) 문제 수. */
@@ -809,7 +811,7 @@ export async function countRetagCandidatesAction(filter: ProblemBankFilter = {})
   await requireAdmin();
   const resolved = await resolveRetagTargets({ ...filter, onlyLegacy: true });
   if (!resolved.ok) return resolved;
-  return { ok: true, value: { count: resolved.value.length, ids: resolved.value.slice(0, 2000) } };
+  return { ok: true, value: { count: resolved.value.total, ids: resolved.value.ids.slice(0, 2000) } };
 }
 
 /**
@@ -1057,34 +1059,10 @@ export async function generateBankProblemsAction(params: {
  */
 export async function problemQuestionAuditAction(subjectId?: string): Promise<BankResult<{ withQuestion: number; draftWithout: number; publishedWithout: number }>> {
   await requireAdmin();
-  const admin = createAdminClient();
-  let q = admin.from("problems").select("id").is("archived_at", null).limit(2000);
-  if (subjectId) q = q.eq("subject_id", subjectId);
-  const { data: rows, error } = await q;
+  const { data, error } = await createAdminClient().rpc("problem_question_audit", { p_subject: subjectId ?? null });
   if (error) return { ok: false, error: "문제 목록을 읽지 못했습니다." };
-  const ids = (rows ?? []).map((r) => r.id as string);
-  if (!ids.length) return { ok: true, value: { withQuestion: 0, draftWithout: 0, publishedWithout: 0 } };
-  const { data: versions } = await selectInChunks(ids, (chunk) => admin
-    .from("problem_versions")
-    .select("problem_id, status, version_no, passage, question")
-    .in("problem_id", chunk)
-    .in("status", ["published", "draft", "in_review"])
-    .order("version_no", { ascending: false }), { sort: orderComparator(["version_no", false]) });
-  const latest = new Map<string, { status: string; has: boolean }>();
-  for (const v of versions ?? []) {
-    const pid = v.problem_id as string;
-    const has = hasQuestion(v.passage as string | null, v.question as string | null);
-    const cur = latest.get(pid);
-    // 공개본 우선, 없으면 최신 작업본.
-    if (!cur || (cur.status !== "published" && v.status === "published")) latest.set(pid, { status: v.status as string, has });
-  }
-  let withQuestion = 0, draftWithout = 0, publishedWithout = 0;
-  for (const { status, has } of latest.values()) {
-    if (has) withQuestion += 1;
-    else if (status === "published") publishedWithout += 1;
-    else draftWithout += 1;
-  }
-  return { ok: true, value: { withQuestion, draftWithout, publishedWithout } };
+  const d = data as { withQuestion: number; draftWithout: number; publishedWithout: number };
+  return { ok: true, value: { withQuestion: Number(d.withQuestion), draftWithout: Number(d.draftWithout), publishedWithout: Number(d.publishedWithout) } };
 }
 
 /** 옛 지문에서 질문을 갈라 초안에 넣을 때 쓴다(관리자가 '질문 보완' 을 눌렀을 때 — 자동 적용 없음). */
