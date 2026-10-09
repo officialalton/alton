@@ -472,7 +472,8 @@ export default function ConsultationSchedulingPanel() {
                       className="block mt-1 px-2 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12px]"
                     >
                       <option value="">선택하세요</option>
-                      {Object.entries(OUTCOME_LABEL).map(([value, label]) => (
+                      {/* 2026-10-09 — "종료"(closed)는 선택지에서 제외: 종료는 상세의 "상담 종료"(종료 유형 선택)로만 한다. 기존 기록 표시는 OUTCOME_LABEL 유지. */}
+                      {Object.entries(OUTCOME_LABEL).filter(([value]) => value !== "closed").map(([value, label]) => (
                         <option key={value} value={value}>{label}</option>
                       ))}
                     </select>
