@@ -2,7 +2,7 @@
 // 방식: 고정 시드 담금질 탐색 + 독립 검증기(verify). 해를 찾으면 verify 가 모든 제약을 다시 계산한 증거(witness)다. 못 찾은 것은 불가능의 증명이 아니다.
 export type Cand = { key: string; kind: "mc" | "frq"; unit: number; skillCat: number; calc: "required" | "not_allowed" | "na"; family: string; type: string; graphRequired: boolean; screenVerified: boolean; renderOk: boolean; fullMockUses: number; practiceUses: number };
 export type Constraint = { id: string; label: "official" | "internal"; text: string; ok: boolean; detail: string };
-export const OFFICIAL = { mcA: 29, mcB: 13, frqA: 2, frqB: 4, unitBounds: { 1: [5, 6], 2: [5, 6], 3: [3, 4], 4: [5, 6], 5: [7, 8], 6: [7, 8], 7: [3, 4], 8: [5, 6] } as Record<number, [number, number]>, skillBounds: { 1: [21, 29], 2: [7, 12], 3: [5, 9] } as Record<number, [number, number]> };
+export const OFFICIAL = { mcA: 29, mcB: 13, frqA: 2, frqB: 4, unitBounds: { 1: [5, 6], 2: [5, 6], 3: [3, 4], 4: [5, 6], 5: [7, 8], 6: [7, 8], 7: [3, 4], 8: [5, 6] } as Record<number, [number, number]>, skillBounds: { 1: [21, 29], 2: [7, 12], 3: [5, 8] } as Record<number, [number, number]> };
 export const INTERNAL = { familyCap: 2, minFamilies: 21, graphRequiredMin: 10 };
 export type Sel = { mcA: Cand[]; mcB: Cand[]; frqA: Cand[]; frqB: Cand[] };
 const count = <T,>(xs: T[], f: (x: T) => string | number) => xs.reduce<Map<string | number, number>>((m, x) => (m.set(f(x), (m.get(f(x)) ?? 0) + 1), m), new Map());
