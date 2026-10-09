@@ -86,7 +86,7 @@ export function partialStartGuidance(subject: string, id: ApPartialId): string {
   const secs = sectionsForPartial(subject, id); const q = secs.reduce((a, x) => a + x.count, 0); const min = secs.reduce((a, x) => a + x.minutes, 0);
   return `${partialSetName(subject, id)}: ${q} ${id === "frq" ? "free-response questions" : "multiple-choice questions"}, ${min} minutes. ${AP_PARTIAL_CALCULATOR_NOTE[id]}. This is a practice section, not a full practice exam.`;
 }
-/** "Full Practice Exam" 라벨은 공식 구성(문항 수·시간·계산기 파트·단원 비중·다양성)을 만족한 세트에만 붙인다. 만족하지 않으면 항상 false. */
+/** "Full Practice Exam" 라벨은 공식 구성(문항 수·시간·계산기 파트·단원·스킬 비중 범위 + 내부 다양성 조건; 공식은 단원별 고정 문항 수를 정하지 않는다)을 만족한 세트에만 붙인다. 만족하지 않으면 항상 false. */
 export const fullPracticeLabelAllowed = (officialCompositionSatisfied: boolean) => officialCompositionSatisfied === true;
 export function sectionsForPartial(subject: string, id: ApPartialId): ApSection[] {
   if (!AP_PARTIAL_SUBJECTS.includes(subject)) throw new Error(`No partial practice sets for ${subject}`);
