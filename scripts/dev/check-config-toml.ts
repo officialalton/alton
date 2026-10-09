@@ -13,7 +13,7 @@ else {
   if (!staged.includes("supabase/config.toml")) process.exit(0); // 이번 커밋에 포함되지 않음
   text = execFileSync("git", ["show", ":supabase/config.toml"], { encoding: "utf-8" });
 }
-const r = checkConfigToml(text, process.env);
+const r = checkConfigToml(text, { ALLOW_CONFIG_TOML: process.env.ALLOW_CONFIG_TOML, CONFIG_TOML_NOTE: process.env.CONFIG_TOML_NOTE });
 if (!r.ok) {
   console.error("커밋 차단: supabase/config.toml 이 공유 스택 값이 아닙니다.\n - " + r.reasons.join("\n - "));
   console.error("격리 스택 값이 섞여 들어간 것이면: git restore --staged supabase/config.toml && git checkout origin/preview/m4-integration-verification -- supabase/config.toml");
