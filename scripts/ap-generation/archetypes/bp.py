@@ -15,3 +15,14 @@ def frq_blueprint(arch, subject, pack, concept, thinking, key_conditions, materi
           "material": material, "misconceptions": [], "verification": {"independent_path": independent_path, "method": method}, "parts": parts, "total_points": pack["total_points"]}
     if extra: bp.update(extra)
     return bp
+
+
+def meaning(pk, mapping):
+    """루브릭을 '답의 의미·과학적 추론'으로 채점하게 만든다(문구 일치 아님): required_elements 는 문구가 아니라 개념 서술, alt_solutions 는 허용 표현 예시(전부가 아님), common_errors 는 감점 오류."""
+    for pt in pk["parts"]:
+        for r in pt["rubric_rows"]:
+            a = mapping.get(r["row_id"])
+            if not a: continue
+            if "elements" in a: r["required_elements"] = a["elements"] + ([e for e in r["required_elements"] if any(c.isdigit() for c in str(e))] if a.get("keep_nums") else [])
+            r["alt_solutions"] = a["alt"]; r["common_errors"] = a["err"]; r["meaning_based"] = True; r["grading_note"] = a.get("note", "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase.")
+

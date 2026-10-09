@@ -12,7 +12,8 @@ const MC_TARGET = Number(arg("--mc-target", "50")); const FRQ_TARGET = Number(ar
 const ROOT = path.resolve(process.cwd(), "data/ap/sample-2027"); const OUT = path.resolve(process.cwd(), "data/ap/stock"); mkdirSync(OUT, { recursive: true });
 const load = (run: string) => (existsSync(path.join(ROOT, run, "candidates.json")) ? (JSON.parse(readFileSync(path.join(ROOT, run, "candidates.json"), "utf-8")) as RawCand[]) : []);
 const WITH_S1A = existsSync(path.join(ROOT, "s1a-final", "candidates.json")); // S1a 는 항상 같은 계산에 포함(중복·문항군을 한 번에 계산해 단일 재고 표를 유지) // S1a 후보를 별도 보조 배치로 내보낼 때(items.json 의 783행 기준선은 바꾸지 않는다)
-const runs: Record<string, RawCand[]> = { run1: load("run1"), run2: load("run2"), run2bc: load("run2bc"), ...(WITH_S1A ? { "s1a-final": load("s1a-final") } : {}) };
+const SUPP: { run: string; file: string }[] = [{ run: "s1a-final", file: "s1a-items.json" }, { run: "v1ab-final", file: "v1ab-items.json" }]; // 보조 적재 배치(파일=배치). 기준 배치는 items.json
+const runs: Record<string, RawCand[]> = { run1: load("run1"), run2: load("run2"), run2bc: load("run2bc"), ...Object.fromEntries(SUPP.filter((x) => existsSync(path.join(ROOT, x.run, "candidates.json"))).map((x) => [x.run, load(x.run)])) };
 // 이력: 중간 런에서 같은 원형·시드(pack_id)로 평가된 결과를 최종 항목의 history 에 붙인다.
 const history: Record<string, HistoryEntry[]> = {};
 const hk = (c: RawCand) => `${c.apSubjectCode}|${(c.payload as { pack_id?: string }).pack_id ?? c.candidateKey}`;
@@ -31,8 +32,8 @@ const items = buildStock(runs, { history, historyKey: hk });
 const subjects = ["ap_calculus_ab", "ap_calculus_bc", "ap_biology", "ap_microeconomics"];
 const summary = summarize(items); const cells = cellCounts(items);
 // 한 번의 계산으로 두 파일을 쓴다: items.json = 기본 배치(783행), s1a-items.json = 보조 배치(S1a). 합친 표가 단일 재고(요약·보고·DB 비교 기준).
-if (WITH_S1A) writeFileSync(path.join(OUT, "s1a-items.json"), JSON.stringify(items.filter((i) => i.run === "s1a-final").map((i) => ({ ...i })), null, 0));
-writeFileSync(path.join(OUT, "items.json"), JSON.stringify(items.filter((i) => i.run !== "s1a-final").map((i) => ({ ...i })), null, 0));
+for (const x of SUPP) if (runs[x.run]) writeFileSync(path.join(OUT, x.file), JSON.stringify(items.filter((i) => i.run === x.run).map((i) => ({ ...i })), null, 0));
+writeFileSync(path.join(OUT, "items.json"), JSON.stringify(items.filter((i) => !SUPP.some((x) => x.run === i.run)).map((i) => ({ ...i })), null, 0));
 writeFileSync(path.join(OUT, "summary.json"), JSON.stringify({ latestGate: LATEST_GATE, variantCap: VARIANT_CAP, summary, cells }, null, 1));
 
 const cur = (s: string) => JSON.parse(readFileSync(path.resolve(process.cwd(), `data/ap/curriculum-2027/${s}.json`), "utf-8")) as ApCurriculumFile;
