@@ -36,3 +36,16 @@ d("Bio FRQ 무료 검사 추가(2026-10-09)", () => {
     const codes = gateBioFrq(p, { topics }).map((x) => x.code); expect(codes).toEqual(expect.arrayContaining(["prompt_mentions_graph_for_table", "topic_concept_anchor_missing"]));
   });
 });
+
+d("Bio 데이터형: ±2SE 표기 일치·개념 필수(2026-10-09)", () => {
+  it("정상 번들은 통과", () => { for (const sd of [1700, 1701, 1702, 1703, 1704, 1705]) expect(gateBioFrq(gen("frq_bio_data_short", sd), { topics }).map((x) => x.code)).toEqual([]); });
+  it("머리글 ±2SE 누락·단위 불일치·표시값 불일치를 잡는다", () => {
+    const a = gen("frq_bio_data_short", 1700); a.stimulus.data.columns[1] = "Mean (units)"; expect(gateBioFrq(a, { topics }).map((x) => x.code)).toContain("se_header_missing");
+    const b = gen("frq_bio_data_short", 1700); b.stimulus.data.columns[1] = "Mean (liters) ± 2SE"; expect(gateBioFrq(b, { topics }).map((x) => x.code)).toContain("se_header_unit_mismatch");
+    const c = gen("frq_bio_data_short", 1700); c.stimulus.data.rows[0][1] = c.stimulus.data.rows[0][1].replace(/± .*/, "± 9.99"); expect(gateBioFrq(c, { topics }).map((x) => x.code)).toContain("se_value_mismatch");
+  });
+  it("표만 읽어도 풀리는 번들(개념 요구 없음)은 걸린다", () => {
+    const p = gen("frq_bio_data_short", 1700); p.parts.forEach((x: { prompt: string; rubric_rows: { uses_concept: boolean; required_elements: string[] }[] }) => { x.prompt = x.prompt.replace(/enzyme|structure|shape/gi, "value"); x.rubric_rows.forEach((r) => { r.uses_concept = false; }); });
+    expect(gateBioFrq(p, { topics }).map((x) => x.code)).toEqual(expect.arrayContaining(["concept_not_required", "concept_explanation_part_missing"]));
+  });
+});

@@ -30,3 +30,17 @@ export function recoverFromBlocks(blocks: unknown[]): Record<string, unknown> | 
   const m = bool(b[6]), r = bool(b[7]); if (m === null || r === null) return null; out.matches_reference_pattern = m; out.resembles_known_exam_item = r;
   const sm = b[8].summary ?? b[8].value; if (typeof sm !== "string") return null; out.summary = sm; return out;
 }
+
+/** 검토 결과 한 건 → 정규 입력 객체. 평탄 도구(scope_skill_pass …), 정상 객체, 쪼개진 블록 복원 순서. 읽을 수 없으면 첫 블록을 그대로 돌려줘 normalizeReview 가 malformed 로 표시한다. */
+export function reviewFromToolBlocks(blocks: Record<string, unknown>[]): Record<string, unknown> | null {
+  const first = blocks[0] ?? null; if (!first) return null;
+  if (first.scope_skill_pass !== undefined) {
+    const o: Record<string, unknown> = { instant_reject: first.instant_reject ?? [], matches_reference_pattern: first.matches_reference_pattern, resembles_known_exam_item: first.resembles_known_exam_item, summary: first.summary };
+    for (const k of ["scope_skill", "key_scoring", "stimulus_expression", "distractor_explanation", "exam_suitability"]) o[k] = { pass: first[`${k}_pass`], notes: first[`${k}_notes`] ?? "" };
+    return o;
+  }
+  if (first.key_scoring !== undefined) return first;
+  return recoverFromBlocks(blocks) ?? first;
+}
+/** 문자열에서 수를 추출한다: 유니코드 마이너스(−, –)는 음수로, "3,025" 의 쉼표는 자릿수 구분자로 처리한다. */
+export const numsIn = (s: string): number[] => (s.replace(/[−–]/g, "-").replace(/(\d),(?=\d{3}(?!\d))/g, "$1").match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number);

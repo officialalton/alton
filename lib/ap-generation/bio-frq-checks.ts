@@ -47,6 +47,23 @@ export function gateBioFrq(p: Json, ctx: { topics: Set<string> }): BioIssue[] {
   const ANCHOR: Record<string, RegExp> = { "3.2": /enzyme|substrate|active site|denatur/i, "3.5": /respiration|fermentation|ATP/i, "8.1": /respon|behavior|stimulus|taxis|kinesis|tropism/i };
   const text = [p.title, p.stimulus?.description, ...(p.parts ?? []).map((x: Json) => x.prompt)].join(" ");
   if (ANCHOR[p.topic] && !ANCHOR[p.topic].test(text)) add("topic_concept_anchor_missing", `토픽 ${p.topic} 의 핵심 개념이 번들에 없다`);
+  // 9) ±2SE 표기와 실제 표 자료 일치(머리글·값·단위): 문구가 ±2SE 를 말하면 표 머리글에 2SE 와 ±, 모든 칸에 ±, 단위가 설계도 측정 단위와 같고 표시값이 사실(means, se×2)과 일치해야 한다
+  if (/2SE/.test(text)) {
+    const cols: string[] = p.stimulus?.data?.columns ?? []; const rows: string[][] = p.stimulus?.data?.rows ?? []; const unit = p.blueprint?.experiment?.measurement?.unit;
+    const mi = cols.findIndex((c) => /2SE/.test(c)); if (mi < 0 || !/±/.test(cols[mi] ?? "")) add("se_header_missing", "문구는 ±2SE 를 말하는데 표 머리글에 ± 2SE 가 없다");
+    else {
+      if (unit && !cols[mi].includes(unit)) add("se_header_unit_mismatch", `머리글 단위가 설계도 측정 단위(${unit})와 다르다: ${cols[mi]}`);
+      const get = (k: string) => { const m = (p.facts ?? []).map(String).find((f: string) => f.startsWith(k + "=")); return m ? (JSON.parse(m.slice(k.length + 1)) as number[]) : null; }; const fm = get("means"), fs = get("se");
+      rows.forEach((r, i) => { const m = String(r[mi]).match(/(-?\d+(?:\.\d+)?)\s*±\s*(\d+(?:\.\d+)?)/); if (!m) { add("se_cell_format", `행 ${i + 1}: "평균 ± 2SE" 형식이 아니다`); return; } if (fm && Math.abs(Number(m[1]) - fm[i]) > 0.051) add("se_value_mismatch", `행 ${i + 1}: 표 평균 ${m[1]} ≠ 사실 ${fm[i]}`); if (fs && Math.abs(Number(m[2]) - 2 * fs[i]) > 0.011) add("se_value_mismatch", `행 ${i + 1}: 표 ±값 ${m[2]} ≠ 2×SE ${(2 * fs[i]).toFixed(2)}`); });
+    }
+  }
+  // 10) 개념 필수(토픽 3.2): 키워드 존재만으로 보지 않는다 — 과반(4파트 중 3) 파트가 개념을 써야 풀리도록 프롬프트가 개념을 묻고 루브릭 행이 개념 요소를 갖는다
+  if (p.topic === "3.2") {
+    const CONCEPT = /enzyme|active site|shape|structure|denatur|optimum|substrate/i; const need = Math.ceil(((p.parts ?? []).length * 3) / 4);
+    const ok = (p.parts ?? []).filter((x: Json) => CONCEPT.test(x.prompt ?? "") && (x.rubric_rows ?? []).some((r: Json) => r.uses_concept && (r.required_elements ?? []).some((e: string) => CONCEPT.test(String(e))))).length;
+    if (ok < need) add("concept_not_required", `토픽 3.2 개념(효소 구조·활성)을 써야 풀리는 파트가 ${ok}/${(p.parts ?? []).length} (최소 ${need})`);
+    const lastPart = (p.parts ?? [])[(p.parts ?? []).length - 1]; if (lastPart && !(lastPart.rubric_rows ?? []).some((r: Json) => r.uses_concept && (r.required_elements ?? []).some((e: string) => /structure|shape|active site|denatur/i.test(String(e))))) add("concept_explanation_part_missing", "마지막 파트가 구조·활성 개념의 설명을 채점하지 않는다");
+  }
   out.push(...meaningRubricIssues(p));
   return out;
 }

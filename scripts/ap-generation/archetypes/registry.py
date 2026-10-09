@@ -43,6 +43,7 @@ if __name__ == "__main__":
         elif which == "new": print(json.dumps({"mc": list(NEWMC), "frq": []}))
         elif which == "reinforce": print(json.dumps({"mc": ["graph_fprime_extremum", "graph_accum_value"], "frq": ["frq_particle_motion", "frq_related_rates", "frq_implicit_diff"]}))
         elif which == "reinforce2": print(json.dumps({"mc": [], "frq": ["frq_particle_motion", "frq_implicit_diff"]}))
+        elif which == "biodata": print(json.dumps({"mc": [], "frq": ["frq_bio_data_short"]}))
         elif which == "bio": print(json.dumps({"mc": [], "frq": ["frq_bio_investigation", "frq_bio_data_short"]}))
         elif which == "micro": print(json.dumps({"mc": [], "frq": ["frq_micro_monopoly", "frq_micro_game"]}))
         else: print(json.dumps({"mc": [k for k in MC if k not in BCMC and k not in NEWMC], "frq": [k for k in FRQ if k in ("frq_table_rate","frq_fprime_graph","frq_diffeq","frq_area_volume")]}))
