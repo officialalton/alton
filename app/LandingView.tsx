@@ -100,15 +100,6 @@ export default function LandingView({ dest, availability = EMPTY_AVAILABILITY }:
               <h2 className="p-h2"><SplitTitle text={EXPERT.title} /></h2>
               <p className="p-lede">{EXPERT.body}</p>
               <p className="p-body">{EXPERT.experience}</p>
-              <a href={`#${DIRECTOR.anchor}`} className="p-advisor">
-                <DirectorPortrait />
-                <span className="flex flex-col gap-1">
-                  <span className="p-label">{DIRECTOR.advisorLabel}</span>
-                  <strong className="text-[16px]">{DIRECTOR.name}</strong>
-                  <span className="text-[14px] leading-[1.5] text-[var(--p-slate)]">{DIRECTOR.advisorLine}</span>
-                  <span className="p-link text-[14px]">{DIRECTOR.advisorLink} <span aria-hidden="true">→</span></span>
-                </span>
-              </a>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {EXPERT.cards.map((c, i) => (
