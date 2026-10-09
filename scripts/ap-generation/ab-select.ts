@@ -6,6 +6,7 @@ import { PUBLISHED_JSON, PUBLISHED_MD, planOutputs } from "../../lib/ap-exam/ab-
 const plan = planOutputs(process.argv); if (plan.error) { console.error(plan.error); process.exit(2); }
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { selectFrq, selectMc, verify, type Cand, type Sel } from "../../lib/ap-exam/ab-select";
+import { clusterLookAlikes } from "../../lib/ap-exam/look-alike";
 import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
 const SUBJECT = "ap_calculus_ab"; const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : ""; };
 type It = { stockKey: string; apSubjectCode: string; kind: "mc" | "frq_bundle"; validation: string; keywordCode: string; calculator: string; itemFamilyId: string; payload: Record<string, unknown>; skillPrimary?: string; duplicateOf?: string | null };
@@ -16,6 +17,10 @@ const usageFile = "data/ap/stock/published-usage.json"; const usage = new Map((e
 const cur = JSON.parse(readFileSync(`data/ap/curriculum-2027/${SUBJECT}.json`, "utf-8")) as ApCurriculumFile; const unitName = new Map(cur.units.map((u) => [u.code, (u as unknown as { title: string }).title]));
 const pool: Cand[] = all.map((i) => { const g = gateCandidate({ stockKey: i.stockKey, candidateKey: i.stockKey, apSubjectCode: i.apSubjectCode, kind: i.kind, payload: i.payload }); const u = usage.get(i.stockKey);
   return { key: i.stockKey, kind: (i.kind === "mc" ? "mc" : "frq") as Cand["kind"], unit: Number(i.keywordCode.split(".")[0]), skillCat: Number((i.skillPrimary ?? "0")[0]), calc: i.calculator as Cand["calc"], family: i.itemFamilyId, type: i.keywordCode, graphRequired: g.need === "required" && g.stimKind === "graph", screenVerified: ev.has(i.stockKey), renderOk: g.status !== "fail", fullMockUses: Number(u?.fullMock ? 1 : 0), practiceUses: Array.isArray(u?.practice) ? u.practice.length : Number(u?.practice ?? 0) }; }).filter((c) => c.renderOk);
+// 구조적 look-alike(2026-10-09): 문항군 ID 가 달라도 같은 틀이면 같은 문항군으로 센다(풀 세트 문항군 상한 1).
+{ const P = (i: It) => i.payload as { archetype?: string; topic?: string; stem?: string; stimulus?: { kind?: string }; blueprint?: { student_thinking?: string[] } };
+  const byK = new Map(all.map((i) => [i.stockKey, i])); const cl = clusterLookAlikes(pool.filter((c) => c.kind === "mc").map((c) => { const i = byK.get(c.key)!; const p = P(i); return { key: c.key, family: c.family, archetype: p.archetype, topic: c.type, stimKind: p.stimulus?.kind ?? "none", stem: p.stem ?? "", thinking: p.blueprint?.student_thinking }; }));
+  for (const c of pool) if (c.kind === "mc") c.family = cl.effectiveFamily.get(c.key) ?? c.family; }
 const exclude = new Set((arg("--exclude") || "").split(",").filter(Boolean)); const prevSel = arg("--prev") && existsSync(arg("--prev")) ? (JSON.parse(readFileSync(arg("--prev"), "utf-8")) as { keys: Record<string, string[]> }).keys : null;
 const byKey = new Map(pool.map((c) => [c.key, c])); const fromKeys = (k: string[] = []) => k.map((x) => byKey.get(x)).filter((c): c is Cand => !!c);
 const seedArg = arg("--seed"); const seed = seedArg ? Number(seedArg) : undefined; if (seedArg && !Number.isInteger(seed)) { console.error("--seed 는 정수"); process.exit(2); }
