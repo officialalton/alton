@@ -146,6 +146,8 @@ describe("부분 연습 세트: 제목·배지·시작 안내가 같은 뜻", ()
     render(<ApExamResultView attempt={part(["ap_mc_a"], "AP Calculus AB — Non-Calculator Practice", "mc_practice", [item("a1", "ap_mc_a", { response: "1", correct: true, correctIndex: 1 })])} />);
     expect(screen.getByTestId("ap-badge")).toHaveTextContent("Non-Calculator Practice");
     expect(screen.getByTestId("ap-set-guidance")).toHaveTextContent("29 multiple-choice questions in 62 minutes");
+    expect(screen.getAllByTestId("ap-coverage")[0]).toHaveTextContent("Covers Unit 1.");
+    expect(screen.getAllByTestId("ap-coverage")[1]).toHaveTextContent("Your result reflects only this unit");
   });
 });
 

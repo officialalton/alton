@@ -3,7 +3,7 @@
 import Link from "next/link";
 import type { MockExamListRow, MockExamListState } from "@/lib/mock-exam/open-list";
 import { attemptLabel, listStateOf as listStateOfStatus } from "@/lib/mock-exam/open-list";
-import { AP_SUBJECT_NAME, apBadgeText, apGuidanceLines } from "@/lib/ap-exam/layouts";
+import { AP_SUBJECT_NAME, apBadgeText, apCoverageLines, apGuidanceLines } from "@/lib/ap-exam/layouts";
 
 // 공개 모의고사 목록(학생·학부모 공용). 학생은 시작·이어서·결과 보기, 학부모는 읽기 전용(시작 불가).
 // 2026-10-01 — 배정 없음: 공개된 세트는 모든 활성 학생에게 보이고 학생이 직접 시작한다.
@@ -59,6 +59,7 @@ export default function MockExamOpenList({
             {r.archived && <span className="text-[10.5px] text-grey-400">Past exam</span>}
           </div>
           {r.examProgram === "ap" && apGuidanceLines({ subject: r.apSubject, layout: r.apSections, name: r.name }).map((l) => <p key={l} className="mt-1 text-[12px] text-grey-600" data-testid="ap-guidance">{l}</p>)}
+          {r.examProgram === "ap" && apCoverageLines({ subject: r.apSubject, units: r.apUnits, layout: r.apSections, name: r.name, label: r.apLabel }).map((l, i) => <p key={l} className={`${i === 0 ? "mt-1 font-semibold" : ""} text-[12px] text-grey-600`} data-testid="ap-coverage">{l}</p>)}
           {r.description && <p className="mt-1 text-[12px] text-grey-500">{r.description}</p>}
           <p className="mt-1 text-[12.5px] text-grey-500">
             {r.attempts.length > 1 && r.attempt?.attemptNo ? `${attemptLabel(r.attempt.attemptNo)} · ` : ""}

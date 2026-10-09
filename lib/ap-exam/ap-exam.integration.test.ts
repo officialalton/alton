@@ -314,6 +314,7 @@ describe("부분 연습 세트: 실제 RPC 출력 → 배지·안내", () => {
     const cat = JSON.parse(asUser(freeA, `select x::text from jsonb_array_elements(mock_exam_open_catalog('${freeA}')) x where x->>'examSetId' = '${set}';`));
     const row = buildMockExamListRows([cat], [])[0];
     expect(Array.isArray(cat.apSections)).toBe(true);
+    expect(cat.apUnits).toEqual(["1"]); // 408: 세트가 다루는 단원(문항 sat_domain ap:1.1)
     expect(apBadgeText({ subject: SUBJ, label: row.apLabel, layout: row.apSections, name: row.name })).toBe("Non-Calculator Practice");
     expect(apGuidanceLines({ subject: SUBJ, layout: row.apSections, name: row.name })[0]).toContain("Part A: 2 multiple-choice questions in 62 minutes. No calculator is allowed.");
     const att = asUser(freeA, `select mock_exam_open_start('${set}');`);

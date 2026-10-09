@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
-import { AP_SUBJECT_NAME, apBadgeText, apGuidanceLines } from "@/lib/ap-exam/layouts";
+import { AP_SUBJECT_NAME, apBadgeText, apCoverageLines, apGuidanceLines, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
 import AttemptSwitcher from "./AttemptSwitcher";
 import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
@@ -46,6 +46,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
         <AttemptSwitcher attempt={attempt} attempts={attempts} attemptHrefBase="/student/mock-exam/" />
         <p className="text-[12px] font-bold text-grey-500">{subject} · <span data-testid="ap-badge">{apBadgeText({ subject: attempt.apSubject, label: attempt.apLabel, layout: attempt.sectionLayout, name: attempt.examSetName })}</span></p>
         {apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout, name: attempt.examSetName }).map((l) => <p key={l} className="mt-1 text-[11.5px] text-grey-500" data-testid="ap-set-guidance">{l}</p>)}
+          {apCoverageLines({ subject: attempt.apSubject, units: apUnitsFromDomains(attempt.items.map((i) => i.satDomain)), layout: attempt.sectionLayout, name: attempt.examSetName, label: attempt.apLabel, result: true }).map((l, i) => <p key={l} className={`${i === 0 ? "font-semibold " : ""}mt-1 text-[11.5px] text-grey-600`} data-testid="ap-coverage">{l}</p>)}
         {mc.length > 0 && (
           <p className="mt-1 text-[20px] font-extrabold" data-testid="ap-mc-score">{correct} / {mc.length} <span className="text-[13px] font-semibold text-grey-500">multiple-choice correct ({Math.round((100 * correct) / mc.length)}%)</span></p>
         )}

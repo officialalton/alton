@@ -10,9 +10,9 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { chromium, type Page } from "@playwright/test";
 import { gateCandidate } from "../../lib/ap-figures/gate";
-import { RAW_TEX_TOKENS } from "../../lib/ap-exam/explanation-math";
-// 제출 전 문제 영역의 원문 TeX·평문 수식 흔적: TeX 명령, ^{, 부등호 <= >=, 평문 거듭제곱 x^2(수식 밖).
-const RAW_MATH_VISIBLE = new RegExp(`${RAW_TEX_TOKENS.source}|<=|>=|[A-Za-z0-9)]\\^[{(A-Za-z0-9-]`);
+import { scanRawMath, type RawMathHit } from "../../lib/ap-exam/raw-math-scan";
+// 토큰 단위 점검(lib/ap-exam/raw-math-scan.ts): KaTeX 수식·코드·이스케이프 달러는 제외하고 텍스트 노드의 원문 수식만 센다.
+const SCAN = `(${scanRawMath.toString()})`;
 import { AUTOMATED_LIMITATION, itemContentHash, RESULT_CHECK, SCREEN_CHECKS, STIMULUS_CHECK, type ScreenCheck, type ScreenCheckName, type ScreenEntry } from "../../lib/ap-generation/verify-guard";
 
 const arg = (n: string, d: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : d; };
@@ -69,10 +69,9 @@ async function checkItem(page: Page, r: Row, shot: string): Promise<Record<Scree
     for (let i = 0; i < await areas.count(); i++) { const a = areas.nth(i); await a.fill("screen check"); if ((await a.inputValue()) !== "screen check") ok = false; await a.fill(""); }
     out.frq_input_works = ok ? { result: "pass", note: `typed into ${m.inputCount} part input(s), value retained` } : { result: "fail", note: "input did not retain text" };
   }
-  // 문제 영역(자료 텍스트·본문·선지) 원문 TeX 점검 — KaTeX 가 그린 수식의 숨은 MathML/annotation 은 제외하고 보이는 글자만 본다.
-  const qtext = await page.evaluate(() => { const c = document.querySelector('[data-testid="ap-question-card"]'); if (!c) return null; const k = c.cloneNode(true) as Element; k.querySelectorAll(".katex-mathml, annotation").forEach((n) => n.remove()); return k.textContent ?? ""; });
-  const qhit = qtext === null ? null : RAW_MATH_VISIBLE.exec(qtext);
-  (out as Record<string, ScreenCheck>)[STIMULUS_CHECK] = qtext === null ? { result: "fail", note: "question card not found" } : qhit ? { result: "fail", note: `raw math visible before submit: ${qhit[0]} …${qtext.slice(Math.max(0, qhit.index - 25), qhit.index + 30).replace(/\s+/g, " ")}` } : { result: "pass", note: "no raw TeX / plain-text math tokens in stimulus, stem or options" };
+  // 문제 영역(자료 텍스트·본문·선지)의 렌더되지 않은 원문 수식 점검(제출 전).
+  const qhits = (await page.evaluate(`(() => { const c = document.querySelector('[data-testid="ap-question-card"]'); return c ? ${SCAN}(c) : null; })()`)) as RawMathHit[] | null;
+  (out as Record<string, ScreenCheck>)[STIMULUS_CHECK] = qhits === null ? { result: "fail", note: "question card not found" } : qhits.length ? { result: "fail", note: `raw math visible before submit: ${qhits.slice(0, 2).map((h) => `${h.kind} "${h.token}" …${h.context}`).join(" | ")}` } : { result: "pass", note: "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)" };
   await root.screenshot({ path: shot, type: "jpeg", quality: 55 });
   return out;
 }
@@ -85,18 +84,14 @@ async function resultPass(page: Page, rows: Row[]): Promise<Map<string, ScreenCh
   // 서버 렌더 스모크: 채점 완료 응시 URL 을 새로 열어도(서버 컴포넌트가 결과 화면을 렌더) 결과가 보여야 한다. 서버→클라이언트 함수 prop 같은 경계 오류는 여기서 500 으로 드러난다.
   await page.goto(page.url().includes("/student/mock-exam/") ? page.url() : page.url());
   await page.locator('[data-testid="ap-exam-result"]').waitFor({ state: "visible", timeout: 30_000 });
-  const found = await page.evaluate(() => [...document.querySelectorAll('[data-testid="ap-review-item"]')].map((li) => {
-    const ex = li.querySelector('[data-testid="ap-explanation"]');
-    let text = ""; if (ex) { const c = ex.cloneNode(true) as Element; c.querySelectorAll(".katex-mathml, annotation").forEach((n) => n.remove()); text = c.textContent ?? ""; }
-    return { id: li.getAttribute("data-set-item-id") ?? "", hasExplanation: !!ex, text };
-  }));
+  const found = (await page.evaluate(`[...document.querySelectorAll('[data-testid="ap-review-item"]')].map((li) => { const ex = li.querySelector('[data-testid="ap-explanation"]'); return { id: li.getAttribute("data-set-item-id") || "", hasExplanation: !!ex, hits: ex ? ${SCAN}(ex) : [] }; })`)) as { id: string; hasExplanation: boolean; hits: RawMathHit[] }[];
   const byId = new Map(found.map((f) => [f.id, f]));
   const out = new Map<string, ScreenCheck>();
   for (const r of rows) {
     const f = byId.get(r.set_item_id);
     if (!f) { out.set(r.set_item_id, { result: "fail", note: "result item not found" }); continue; }
-    const hit = RAW_TEX_TOKENS.exec(f.text);
-    out.set(r.set_item_id, hit ? { result: "fail", note: `raw TeX visible in explanation: ${hit[0]}` } : { result: "pass", note: f.hasExplanation ? "explanation math rendered (no raw TeX tokens)" : "no explanation text on result screen" });
+    const hit = f.hits[0];
+    out.set(r.set_item_id, hit ? { result: "fail", note: `raw math visible in explanation: ${hit.kind} "${hit.token}" …${hit.context}` } : { result: "pass", note: f.hasExplanation ? "explanation math rendered (no raw TeX tokens)" : "no explanation text on result screen" });
   }
   return out;
 }

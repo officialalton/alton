@@ -12,7 +12,7 @@ import {
   toggleMockExamSavedToPracticeAction,
   recordMockExamEntryAction,
 } from "@/lib/mock-exam/attempt-actions";
-import { AP_SUBJECT_NAME, CALCULATOR_TEXT, apBadgeText, apGuidanceLines } from "@/lib/ap-exam/layouts";
+import { AP_SUBJECT_NAME, CALCULATOR_TEXT, apBadgeText, apCoverageLines, apGuidanceLines, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
 import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 import { frqAnswerToJson, parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
 import LearningText from "@/app/session/[id]/LearningText";
@@ -209,6 +209,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
             </div>
           </div>
           {apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout, name: attempt.examSetName }).map((l) => <p key={l} className="mb-2 text-[12px] text-grey-600" data-testid="ap-set-guidance">{l}</p>)}
+          {apCoverageLines({ subject: attempt.apSubject, units: apUnitsFromDomains(attempt.items.map((i) => i.satDomain)), layout: attempt.sectionLayout, name: attempt.examSetName, label: attempt.apLabel }).map((l, i) => <p key={l} className={`${i === 0 ? "font-semibold " : ""}mb-2 text-[12px] text-grey-600`} data-testid="ap-coverage">{l}</p>)}
           <div className="flex flex-wrap gap-2">
             {layout.map((s) => (
               <button key={s.key} type="button" onClick={() => void switchSection(s.key)} data-testid={`ap-section-${s.key}`}
