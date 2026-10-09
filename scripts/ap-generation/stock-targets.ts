@@ -10,7 +10,7 @@ import { connect } from "../keywords/db";
 const SUBJECT = "ap_calculus_ab";
 type It = ItemAttrs & { apSubjectCode: string; stockKey: string; validation: string };
 const read = (f: string) => JSON.parse(readFileSync(f, "utf-8")) as It[];
-const files = ["data/ap/stock/items.json", "data/ap/stock/s1a-items.json", "data/ap/stock/v1ab-items.json"].filter(existsSync);
+const files = ["data/ap/stock/items.json", "data/ap/stock/s1a-items.json", "data/ap/stock/v1ab-items.json", "data/ap/stock/v45ab-items.json"].filter(existsSync);
 const defect = new Set((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string }[]).map((r) => r.key));
 const items = files.flatMap(read).filter((i) => i.apSubjectCode === SUBJECT && i.validation === "auto_passed" && !defect.has(i.stockKey)).map((i) => ({ ...i, candidateKey: i.stockKey }));
 const cur = JSON.parse(readFileSync(`data/ap/curriculum-2027/${SUBJECT}.json`, "utf-8")) as ApCurriculumFile;

@@ -114,3 +114,13 @@ describe("부분 연습 세트", () => {
     expect(ok.ok).toBe(true); expect(ok.items).toHaveLength(6);
   });
 });
+
+import { AP_PARTIAL_CALCULATOR_NOTE, fullPracticeLabelAllowed, partialBadge, partialStartGuidance } from "./layouts";
+describe("부분 세트 표시 정책", () => {
+  it("제목·배지·시작 안내가 같은 의미(계산기 사용)를 전달하고 FRQ 도 계산기 표시", () => {
+    expect(partialSetName("ap_calculus_ab", "noncalc_mc")).toBe("AP Calculus AB — Non-Calculator Practice"); expect(partialSetName("ap_calculus_ab", "calc_mc")).toBe("AP Calculus AB — Calculator Practice"); expect(partialSetName("ap_calculus_ab", "frq")).toBe("AP Calculus AB — Free-Response Practice");
+    expect(partialBadge("noncalc_mc")).toMatch(/No calculator/); expect(partialBadge("calc_mc")).toMatch(/Graphing calculator required/); expect(AP_PARTIAL_CALCULATOR_NOTE.frq).toMatch(/Part A.*calculator.*Part B.*no calculator/);
+    expect(partialStartGuidance("ap_calculus_ab", "frq")).toMatch(/not a full practice exam/); expect(partialStartGuidance("ap_calculus_ab", "noncalc_mc")).toMatch(/29 multiple-choice questions/);
+  });
+  it("Full Practice Exam 은 공식 구성 충족 전에는 불가", () => { expect(fullPracticeLabelAllowed(false)).toBe(false); expect(fullPracticeLabelAllowed(true)).toBe(true); });
+});
