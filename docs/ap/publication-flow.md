@@ -178,3 +178,8 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 4. 탈락 항목(증거에 fail)은 리드에게 보고해 재고에서 교체한다.
 5. 비프로덕션 기록(목록 한정): `mark-verified.ts --render --keys-file <목록> $T`, `mark-verified.ts --screen --evidence <증거.json> --keys-file <목록> $T` (둘 다 dry-run 기본, `$T` = `--target worpsqwqgnspddnrtnvq --i-know-nonprod worpsqwqgnspddnrtnvq`).
 - 짧은 FRQ 연습 세트의 구간 이름은 공식 Part A/B 로 보이지 않게 `Practice Section (N questions, M min): …`, 탭은 `Practice Section: Free Response (calculator allowed|no calculator)`(공식 6문항 세트는 `Section II, Part A/B` 그대로). 단원 표기 `Covers Units 5, 6, 7` 의 번호는 재고 키워드 코드의 앞자리이고 CED 단원 번호와 일치함을 `lib/ap-exam/unit-codes.test.ts` 가 전수 확인한다.
+
+## 응시 화면 통일과 결과 시각화 (2026-10-09)
+- **AP 응시 화면 = SAT 응시 화면 구조**: 위 막대(제목·가운데 큰 타이머·Submit) / 왼쪽 번호판(`x/N answered`) / 번호 막대(Eliminate·Whiteboard 아이콘, 오류 신고, ★ My Notebook 저장) / 지문(자료·그림·문제)|선택지 두 칸(좁은 화면은 위아래) / 아래 막대(← · Solve Later · Guessed · →/Next section/Review & submit). 공용 조각은 `take-ui.tsx`(`ScrollPanes`·`ToolIconButton`·`NAV_BTN`)로 뽑아 SAT 4모듈 화면과 같이 쓴다. AP 고유: 섹션 탭·섹션별 타이머·계산기 규칙·계산기 도구·"About this set"(안내·Covers Units)·FRQ 다파트 입력(자동 저장)·4/5지선다. 서버 동작·RPC 변경 없음. 하이라이트(주석) 도구는 AP 에 넣지 않았다.
+- **Results by Domain·AP 토픽 시각화**: `app/components/AccuracyBars.tsx` — 막대 + 색 눈금(빨강 <40%, 노랑 40~70%, 초록 >70%, 회색 0문항) + 상태 글자 + `n/m (p%)` 글자(색만으로 구분하지 않음), 표본 n<3 은 흐리게 "few questions", 영역은 큰 막대, "Skills to Focus On" 은 약한 순·첫 행 강조 + "Review mistakes" 이동. SAT 결과(학부모 읽기 전용 포함)와 AP 결과 토픽이 같은 컴포넌트를 쓴다. 새 쿼리 없음.
+- 증거: `data/ap/screen-evidence/evidence-ui-unify.json`(풀 세트 48 + 연습 세트 3개, 후보 78, 390x844·1280x800, automated, 해시 결속), 전후 스크린샷 `docs/ap/screen-evidence/ui-unify/`.
