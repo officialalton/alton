@@ -16,6 +16,90 @@
   "bc": false
  },
  {
+  "id": "c_accum_interval_calc",
+  "topic": "6.5",
+  "skill": "3.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "sign of the integrand on a fine grid and Brent roots (independent of the Fundamental Theorem argument)"
+  ],
+  "misconceptions": [
+   "uses where f decreases",
+   "picks the interval after the second zero",
+   "starts at 0"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_area_between_calc",
+  "topic": "8.4",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "composite Simpson rule on f - g between the Brent root (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "integrates past the intersection",
+   "reverses the order",
+   "area under the curve only",
+   "area under the line only"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_bc_alt_terms_calc",
+  "topic": "10.10",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "terms computed in floating point and the first index with b_(N+1) below the tolerance found by direct search (independent of solving the inequality)"
+  ],
+  "misconceptions": [
+   "uses the bound b_N",
+   "uses b_(N+2)",
+   "indexes from zero",
+   "squares the tolerance"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_bc_euler_calc",
+  "topic": "7.5",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the iteration recomputed as a table of floating-point values (independent of the loop implementation)"
+  ],
+  "misconceptions": [
+   "uses right-end x-values",
+   "stops early",
+   "does not update y",
+   "uses y instead of sin y"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_bc_improper_calc",
+  "topic": "6.14",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "scipy quad to a finite upper bound of 40 compared with the infinite-range quad (independent of the infinite-range algorithm)"
+  ],
+  "misconceptions": [
+   "stops early",
+   "starts at zero",
+   "claims divergence",
+   "changes the integrand"
+  ],
+  "bc": true
+ },
+ {
   "id": "c_decay_model_calc",
   "topic": "7.8",
   "skill": "1.E",
@@ -29,6 +113,23 @@
    "applies the ratio per hour",
    "grows instead of decays",
    "starts from the wrong amount"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_disc_volume_calc",
+  "topic": "8.9",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "composite Simpson rule on pi f^2 (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "omits the factor pi",
+   "squares the integral",
+   "uses pi times f only",
+   "uses the y-axis"
   ],
   "bc": false
  },
@@ -84,6 +185,22 @@
   "bc": false
  },
  {
+  "id": "c_linear_approx_overunder_calc",
+  "topic": "4.6",
+  "skill": "1.F",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the exact f(a + dx) is compared with the tangent line value (independent of the sign of f'')"
+  ],
+  "misconceptions": [
+   "wrong over/under claim",
+   "ignores the slope",
+   "wrong step size"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_midpoint_sum_calc",
   "topic": "6.2",
   "skill": "1.E",
@@ -97,6 +214,23 @@
    "right endpoints",
    "trapezoids",
    "exact value"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_motion_turn_calc",
+  "topic": "4.2",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "bisection on v over a fine grid (independent of Brent's method)"
+  ],
+  "misconceptions": [
+   "solves v' = 0",
+   "drops the linear term",
+   "reports a position",
+   "guesses the midpoint"
   ],
   "bc": false
  },
@@ -298,6 +432,22 @@
    "area under the curve only",
    "area under the line only",
    "wrong order of subtraction"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_area_y_graph",
+  "topic": "8.5",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical quadrature of the interpolated x(y) over y in [0, 8] (independent of trapezoid areas)"
+  ],
+  "misconceptions": [
+   "uses the average x-value",
+   "halves the area",
+   "integrates x squared"
   ],
   "bc": false
  },
@@ -1362,6 +1512,23 @@
    "uses the diameter as the radius",
    "uses a full circle",
    "omits pi/8",
+   "squares the area"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_volume_triangle_graph",
+  "topic": "8.8",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical quadrature of (sqrt(3)/4) f^2 on the interpolated graph (independent of exact quadratic pieces)"
+  ],
+  "misconceptions": [
+   "uses the factor 1/2",
+   "uses sqrt(3)/2",
+   "omits the coefficient",
    "squares the area"
   ],
   "bc": false

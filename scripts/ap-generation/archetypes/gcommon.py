@@ -22,6 +22,8 @@ def anyfmt(z):
     """Fraction 은 정확한 유리수 표기, 그 밖의 값(sympy 등)은 fmt."""
     if isinstance(z, (Fr, int)):
         return fx(z)
+    if isinstance(z, sp.Basic) and not z.is_Float:
+        return "$" + sp.latex(z).replace("\\log", "\\ln") + "$"
     return fmt(z)
 
 
