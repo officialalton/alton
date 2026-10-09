@@ -50,3 +50,27 @@ BC 샘플(MC 30): 공유 AB 14 + BC 전용 16(U6 3, U7 2, U8 1, U9 5, U10 5).
 - 공유 토픽(AB 81개)의 AB 채택 문항은 `content_key`가 같으면 BC 문항 풀에도 **태깅**한다(복제 생성 안 함). 단 BC 범위 규칙: 같은 BC 세트·시험에는 한 번만(중복 0).
 - AB 문항 중 BC 비중상 낮은 단원(U1–U4 각 5–10%)은 공유분에서 최소만 사용하고 BC 전용 단원(U9·U10)을 충분히 채운다.
 - BC에서 AB 문항을 재사용해도 난이도 라벨(잠정)과 검수 상태는 그대로 이월한다.
+
+
+## BC 전용 그래프 신규 원형 (2026-10-09, six-set-plan S1~S3)
+그래프 필수(또는 계산기 필수 일반) MC 신규 원형. 정답·자료는 코드가 계산하고 별도 수치 경로로 재확인한다. 원천: `scripts/ap-generation/archetypes/calc_graph_*.py`, 가이드 항목 `lib/ap-generation/subjects/graph-archetypes.json`.
+
+| id | 토픽 | 스킬 | 계산기 | 독립 검증 |
+|---|---|---|---|---|
+| c_bc_alt_terms_calc | 10.10 | 1.E | required | terms computed in floating point and the first index with b_(N+1) below the tolerance found by direct search ( |
+| c_bc_euler_calc | 7.5 | 1.E | required | the iteration recomputed as a table of floating-point values (independent of the loop implementation) |
+| c_bc_improper_calc | 6.14 | 1.E | required | scipy quad to a finite upper bound of 40 compared with the infinite-range quad (independent of the infinite-ra |
+| g_alt_series_graph | 10.10 | 2.B | not_allowed | exact rational recomputation of the terms at integers and of the partial sum (independent of option constructi |
+| g_euler_graph | 7.5 | 1.E | not_allowed | two Euler steps recomputed with floating-point arithmetic on the interpolated graph (independent of the exact  |
+| g_geometric_series_graph | 10.2 | 1.E | not_allowed | partial sum of 400 terms computed in floating point (independent of the closed form) |
+| g_lagrange_decimal_calc | 10.12 | 1.E | required | maximum absolute value from a 2000-point grid on [0, a] (independent of vertex reading) |
+| g_lagrange_p2_calc | 10.12 | 3.D | required | maximum absolute value from a 2000-point grid on [0, a] (independent of vertex reading) |
+| g_logistic_fastest_graph | 7.9 | 2.E | not_allowed | finite-difference growth rate of the plotted curve is largest near P = K/2 (independent of the logistic formul |
+| g_param_arclength_graphs_calc | 9.4 | 1.E | required | composite Simpson rule on each segment of the speed function (independent of scipy quad) |
+| g_param_dydx_graphs | 9.1 | 1.E | not_allowed | difference quotient of y over difference quotient of x with step 1e-6 on the interpolated graphs (independent  |
+| g_param_rest_graph | 9.5 | 2.E | not_allowed | numerical speed from central differences of both interpolated graphs at each interval midpoint (independent of |
+| g_param_speed_graphs | 9.6 | 2.B | not_allowed | math.hypot of the numerically interpolated components at t = a (independent of the Pythagorean triple used to  |
+| g_taylor_deriv_graph | 10.11 | 2.B | not_allowed | polynomial evaluated numerically from numerically interpolated heights and finite-difference slope of f' (inde |
+| g_vector_displacement_graph | 9.5 | 1.D | not_allowed | numerical quadrature of each interpolated velocity component plus the initial position (independent of trapezo |
+
+보강(bc-topup) 원형: param_xvel_graph, polar_area_graph, polar_rprime_graph, lagrange_graph, alt_series_table, taylor_table, polar_table_distance, param_speed_table (`calc_bc_topup.py`). FRQ: frq_polar_region(극좌표 영역, 계산기, 9.8/9.7), frq_euler_logistic.
