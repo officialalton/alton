@@ -1,0 +1,133 @@
+{
+ "ok": true,
+ "constraints": [
+  {
+   "id": "mc_counts",
+   "label": "official",
+   "text": "MC Part A 29(계산기 불가) + Part B 13(계산기 필수)",
+   "ok": true,
+   "detail": "29+13"
+  },
+  {
+   "id": "frq_counts",
+   "label": "official",
+   "text": "FRQ Part A 2(계산기) + Part B 4(계산기 불가)",
+   "ok": true,
+   "detail": "2+4"
+  },
+  {
+   "id": "unit_weights",
+   "label": "official",
+   "text": "MC 단원 비중(공식 범위)",
+   "ok": true,
+   "detail": "1:5 2:5 3:3 4:5 5:8 6:7 7:4 8:5"
+  },
+  {
+   "id": "skill_weights",
+   "label": "official",
+   "text": "MC 스킬 범주 비중(공식 범위)",
+   "ok": true,
+   "detail": "1:27 2:10 3:5"
+  },
+  {
+   "id": "family_cap",
+   "label": "internal",
+   "text": "MC 문항군당 2개 이하",
+   "ok": true,
+   "detail": "최대 2"
+  },
+  {
+   "id": "family_diversity",
+   "label": "internal",
+   "text": "MC 서로 다른 문항군 >= 21",
+   "ok": true,
+   "detail": "33"
+  },
+  {
+   "id": "graph_required",
+   "label": "internal",
+   "text": "그래프가 풀이에 필수인 MC >= 10(장식·보조 그래프 제외, 공식 기준 아님)",
+   "ok": true,
+   "detail": "10"
+  },
+  {
+   "id": "frq_types",
+   "label": "internal",
+   "text": "FRQ 6개 모두 다른 유형·문항군",
+   "ok": true,
+   "detail": "6유형"
+  },
+  {
+   "id": "no_dup",
+   "label": "internal",
+   "text": "항목 중복 없음",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "id": "full_mock_overlap",
+   "label": "internal",
+   "text": "다른 풀 모의고사와 겹침 0(기본 정책)",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "keys": {
+  "mcA": [
+   "run1:ap_calculus_ab-c029-k2",
+   "run1:ap_calculus_ab-c007-k2",
+   "run1:ap_calculus_ab-c008-k3",
+   "run2:ap_calculus_ab-m04-k1",
+   "run2:ap_calculus_ab-m13-k1",
+   "v45ab-final:v4-ab:ap_calculus_ab-m02-k2",
+   "v45ab-final:v4-ab:ap_calculus_ab-m01-k2",
+   "run2:ap_calculus_ab-m10-k0",
+   "run2:ap_calculus_ab-m16-k0",
+   "run2:ap_calculus_ab-m08-k2",
+   "v45ab-final:v4-ab:ap_calculus_ab-m02-k1",
+   "run2:ap_calculus_ab-m08-k1",
+   "run1:ap_calculus_ab-c022-k2",
+   "s1a-final:ap_calculus_ab-m19-k0",
+   "run2:ap_calculus_ab-m25-k1",
+   "run1:ap_calculus_ab-c020-k0",
+   "run1:ap_calculus_ab-c010-k0",
+   "v45ab-final:v4-ab:ap_calculus_ab-m01-k3",
+   "run2:ap_calculus_ab-m22-k2",
+   "run1:ap_calculus_ab-c004-k2",
+   "run1:ap_calculus_ab-c027-k3",
+   "s1a-final:ap_calculus_ab-m14-k1",
+   "run2:ap_calculus_ab-m19-k1",
+   "run2:ap_calculus_ab-m26-k1",
+   "run1:ap_calculus_ab-c001-k2",
+   "run2:ap_calculus_ab-m06-k1",
+   "run2:ap_calculus_ab-m20-k1",
+   "run1:ap_calculus_ab-c026-k2",
+   "run2:ap_calculus_ab-m10-k2"
+  ],
+  "mcB": [
+   "v1ab-final:ap_calculus_ab-m02-k5",
+   "v1ab-final:ap_calculus_ab-m03-k0",
+   "run1:ap_calculus_ab-c011-k2",
+   "run2:ap_calculus_ab-m11-k0",
+   "run1:ap_calculus_ab-c018-k1",
+   "run2:ap_calculus_ab-m15-k3",
+   "run2:ap_calculus_ab-m29-k3",
+   "v1ab-final:ap_calculus_ab-m02-k0",
+   "run2:ap_calculus_ab-m23-k1",
+   "run2:ap_calculus_ab-m30-k1",
+   "s1a-final:ap_calculus_ab-m15-k0",
+   "run2:ap_calculus_ab-m29-k0",
+   "s1a-final:ap_calculus_ab-m11-k1"
+  ],
+  "frqA": [
+   "run1:ap_calculus_ab-f01-k6",
+   "run2:ap_calculus_ab-f04-k0"
+  ],
+  "frqB": [
+   "run1:ap_calculus_ab-f02-k5",
+   "run1:ap_calculus_ab-f03-k1",
+   "run2:ap_calculus_ab-f03-k0",
+   "v45ab-final:v4-ab:ap_calculus_ab-f02-k0"
+  ]
+ }
+}
