@@ -6,7 +6,7 @@ import { buildScorePoints, estimateAttempt } from "@/lib/mock-exam/score-aggrega
 const row = (o: Partial<FactsRpcRow> = {}): FactsRpcRow => ({
   attempt_id: "a1", exam_name: "Set", exam_track: "sat", ap_subject: null, difficulty_tier: "standard", format: "mst",
   status: "graded", started_at: "2026-10-01T00:00:00Z", submitted_at: null, graded_at: "2026-10-01T02:00:00Z", attempt_seq: 1, score_adjusted: false,
-  rw_total: 6, rw_correct: 5, rw_complete: true, rw_route: "higher", math_total: 4, math_correct: 4, math_complete: true, math_route: "higher", ...o,
+  rw_total: 6, rw_correct: 5, rw_complete: true, rw_route: "higher", rw_answered: 6, math_total: 4, math_correct: 4, math_complete: true, math_route: "higher", math_answered: 4, ...o,
 });
 
 describe("factsFromRpcRows", () => {

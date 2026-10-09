@@ -37,17 +37,17 @@ describe("computeMockExamReport", () => {
 
   it("섹션·영역·세부기술별로 정답 수를 집계한다", () => {
     const items = [
-      item({ setItemId: "i1", section: "rw", satDomain: "rw_craft_structure", skillCode: "skill_a", correct: true, timeSpentSeconds: 30 }),
+      item({ setItemId: "i1", section: "rw", satDomain: "rw_craft_structure", skillCode: "skill_a", correct: true, response: "0", timeSpentSeconds: 30 }),
       item({ setItemId: "i2", section: "rw", satDomain: "rw_craft_structure", skillCode: "skill_a", correct: false, timeSpentSeconds: 40 }),
-      item({ setItemId: "i3", section: "math", satDomain: "algebra", skillCode: "skill_b", correct: true, timeSpentSeconds: 50 }),
+      item({ setItemId: "i3", section: "math", satDomain: "algebra", skillCode: "skill_b", correct: true, response: "0", timeSpentSeconds: 50 }),
     ];
     const report = computeMockExamReport(items);
     expect(report.correctCount).toBe(2);
     expect(report.totalCount).toBe(3);
     expect(report.totalTimeSpentSeconds).toBe(120);
     expect(report.bySection).toEqual([
-      { section: "rw", total: 2, correct: 1, timeSpentSeconds: 70 },
-      { section: "math", total: 1, correct: 1, timeSpentSeconds: 50 },
+      { section: "rw", total: 2, correct: 1, answered: 2, timeSpentSeconds: 70 },
+      { section: "math", total: 1, correct: 1, answered: 1, timeSpentSeconds: 50 },
     ]);
     expect(report.byDomain.find((d) => d.key === "rw_craft_structure")).toEqual({ key: "rw_craft_structure", label: "Craft and Structure", section: "rw", total: 2, correct: 1 });
     expect(report.bySkill.find((s) => s.key === "skill_a")).toEqual({ key: "skill_a", label: "Skill a", section: "rw", total: 2, correct: 1 });

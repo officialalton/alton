@@ -61,7 +61,9 @@ export default function AttemptHistoryTable({ rows }: { rows: AttemptHistoryRow[
                         {graded
                           ? e.reason === "no_estimate_fixed"
                             ? `Score estimate not available (fixed-format test) · ${(r.sections.rw.correct ?? 0) + (r.sections.math.correct ?? 0)}/${r.sections.rw.total + r.sections.math.total} correct`
-                            : "Score estimate not available"
+                            : e.reason === "insufficient_responses"
+                              ? "Not enough responses to estimate a score range."
+                              : "Score estimate not available"
                           : "—"}
                       </td>
                     )}

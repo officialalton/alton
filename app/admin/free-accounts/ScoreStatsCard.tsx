@@ -2,6 +2,7 @@
 
 // SAT 점수 통계 카드 — Free Accounts 상세와 일반 학생 상세(StudentMockScoresCard)가 같은 공유 집계 모듈
 // (lib/mock-exam/score-aggregate.ts)만 거쳐 숫자가 학생 화면과 일치한다. 점수는 범위(내부 추정)로만 표기한다.
+import { SCORE_THRESHOLD_NOTE_KO } from "@/lib/mock-exam/score-estimate";
 import { useMemo, useState } from "react";
 import { SCORE_DISCLAIMER_EN, type ScoreRange } from "@/lib/mock-exam/score-estimate";
 import { accuracySummary, buildScorePoints, excludedCounts, groupFacts, summarize, type AttemptFacts, type Metric } from "@/lib/mock-exam/score-aggregate";
@@ -32,6 +33,7 @@ export default function ScoreStatsCard({ facts }: { facts: AttemptFacts[] }) {
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4" data-testid="score-stats-card">
       <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">Score stats</div>
+      <p className="text-[11px] text-grey-500 mb-2" data-testid="score-threshold-note">{SCORE_THRESHOLD_NOTE_KO}</p>
       <div role="tablist" aria-label="Score metric" className="inline-flex gap-1 mb-3">
         {METRICS.map((m) => (
           <button key={m.id} role="tab" aria-selected={metric === m.id} onClick={() => setMetric(m.id)}

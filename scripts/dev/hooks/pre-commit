@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# 격리 스택 래퍼(scripts/dev/isolated-stack.sh start)가 이 워크트리에만 설치하는 pre-commit 훅 — stop 에서 제거된다.
+cd "$(git rev-parse --show-toplevel)" || exit 0
+exec npx --no-install tsx scripts/dev/check-config-toml.ts
