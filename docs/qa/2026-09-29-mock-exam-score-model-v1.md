@@ -22,3 +22,10 @@
 - 앵커는 실측 캘리브레이션 없이 설계한 값이다. 문항별 난이도 가중(IRT)을 쓰지 않아 같은 경로·정답 수면 점수가 같다.
 - 섹션 문항 수 차이(RW 54, Math 44)는 정답률로 정규화한다.
 - Phase 5(`docs/briefs/2026-09-29-mock-exam-mst-phase5-calibration-brief.md`)에서 실응시 데이터로 `ANCHORS`/너비를 교체하고 `SCORE_MODEL_VERSION`을 올린다.
+
+## 표시 규칙과 검증 상태 (2026-10-09) — display verified, accuracy NOT verified
+- **언제 보이나(코드 근거 `lib/mock-exam/attempt-data.ts computeScoreEstimate` + `MockExamResultView`)**: ① MST 응시(고정형·AP 는 범위 없음) ② 채점 완료 결과 화면 ③ R&W·Math **두 섹션 모두에 채점된 문항(correct ≠ null)이 1개 이상** ④ 두 섹션의 Module 2 경로 확정. 넷 중 하나라도 없으면 범위 블록 자체가 없다.
+- **"거의 안 푼" 응시와 "정상" 응시의 구분**: 응답한 문항 수 하한은 **없다**. 미응답 문항은 `correct = null`(채점 안 됨)이라, 한 섹션에 응답이 하나도 없으면 그 섹션 점수가 없어 범위가 나오지 않는다(예: R&W 에만 응답 1개 → 범위 없음). 두 섹션에 응답이 하나씩만 있어도(총 2문항) 범위가 표시된다 — 즉 구분 기준은 "섹션별 응답 유무"이지 "충분히 풀었는가"가 아니다. 모듈을 끝내지 못한 응시는 graded 가 안 되어 결과 화면(과 범위)이 없다. (제품 판단 필요: 응답 수 하한이 필요하면 별도 결정 — 아래 "미결정".)
+- **검증**: 표시 조건은 `lib/mock-exam/score-display-rule.test.ts`(단위)·`score-display-rule.integration.test.ts`(실제 DB 응답)로 검증했다. 점수 **정확도는 검증하지 않았다**(College Board 변환표와 비교한 적 없음). 모델 샘플(98문항 = R&W 54 + Math 44, lower 경로): R&W 7·Math 7 정답 → 총점 450-570, R&W 5·Math 9 → R&W 210-270 / Math 250-310 — 현업 응시에서 보고된 `210-270 / 240-300 / 450-570` 형태와 모델 출력 모양이 일치한다(저장소에는 1/98·8/98·14/98 응시 기록 자체가 없어 그 기록과의 1:1 대조는 하지 못했다).
+- 상태 표기 상수: `SCORE_VALIDATION_STATUS = "display verified, accuracy NOT verified"`(`score-estimate.ts`). 문서·내부 화면에서 이 문구로 표기한다.
+- 미결정: "응답이 너무 적은 응시에는 범위를 숨긴다"(예: 전체 응답 비율 하한)는 정책이 없다. 현재 동작은 위와 같다.

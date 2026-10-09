@@ -10,6 +10,8 @@
 // 아래 ANCHORS/너비 규칙만 교체하면 된다.
 
 export const SCORE_MODEL_VERSION = "v1-adaptive";
+/** 검증 상태 표기(문서·내부 화면용): 표시 조건은 검증했지만 점수 모델의 정확도는 검증하지 않았다. 표시 규칙: lib/mock-exam/score-display-rule.test.ts · score-display-rule.integration.test.ts. */
+export const SCORE_VALIDATION_STATUS = "display verified, accuracy NOT verified" as const;
 export const SCORE_DISCLAIMER = "These results are a learning diagnostic and are not equivalent to an official SAT / College Board score. Score ranges are internal estimates.";
 
 /** 학생 결과 화면(영어 UI)용 — 2026-10-02 UAT B1. */

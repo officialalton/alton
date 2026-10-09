@@ -385,13 +385,28 @@ describe("AP 시간 제한은 서버가 정한다", () => {
     // 다른 학생의 응시는 건드릴 수 없다
     expect(fails(() => rpc(`select mock_exam_ap_settle('${att2}');`))).toMatch(/only continue your own/);
   });
+  it("[두 탭·더블클릭] 같은 응시에 제출을 동시에 8번 호출해도 응시 행 1개·graded 1회·시각 불변, 같은 학생의 동시 시작도 응시 1개", async () => {
+    const { execFile } = await import("node:child_process");
+    const run = (uid: string, sql: string) => new Promise<string>((res, rej) => execFile("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", `set role authenticated; do $$ begin perform set_config('request.jwt.claim.sub', '${uid}', false); end $$; ${sql} reset role;`], { encoding: "utf-8" }, (e, out, err) => (e ? rej(new Error(String(err))) : res(out.trim()))));
+    const tab = await run(freeB, `select mock_exam_open_start('${tset}');`).then((x) => x.split("\n").pop() as string);
+    expect(tab).not.toBe(tAttempt); // 채점된 응시 뒤 다시 시작하면 새 회차(2)
+    const starts = await Promise.all(Array.from({ length: 8 }, () => run(freeB, `select mock_exam_open_start('${tset}');`)));
+    expect(new Set(starts.map((x) => x.split("\n").filter((l) => /^[0-9a-f-]{36}$/.test(l)).pop()))).toEqual(new Set([tab])); // 동시 8번 시작 → 모두 같은 새 응시
+    const att = tab;
+    expect(psql(`select count(*) from mock_exam_attempts where student_id = (select student_id from mock_exam_attempts where id = '${att}') and exam_set_id = '${tset}';`)).toBe("2");
+    await run(freeB, `select mock_exam_save_answer('${att}', '${itemIds[0]}', '1', 2);`);
+    const rs = await Promise.allSettled(Array.from({ length: 8 }, () => run(freeB, `select mock_exam_submit('${att}');`)));
+    expect(rs.every((r) => r.status === "fulfilled")).toBe(true); // AP 제출은 멱등 — 어느 탭도 오류를 받지 않는다
+    expect(psql(`select status || '|' || (select count(*) from mock_exam_attempts where student_id = a.student_id and exam_set_id = '${tset}') from mock_exam_attempts a where id = '${att}';`)).toBe("graded|2");
+    expect(psql(`select count(*) from mock_exam_answers where attempt_id = '${att}';`)).toBe("1");
+  });
   it("407: 테스트 계정 응시는 문항 노출 집계에서 빠지고, 테스트 표식을 풀면 센다", () => {
     const cnt = () => Number(psql(`select coalesce(sum(attempt_count), 0) from mock_exam_problem_exposure_counts() where problem_id = '${a1}';`));
     const fb = psql(`select student_id from mock_exam_attempts where id = '${tAttempt}';`);
     expect(psql(`select is_test_account from students where id = '${fb}';`)).toBe("t"); // @example.com 패턴으로 자동 표식
     expect(cnt()).toBe(0);
     psql(`update students set is_test_account = false where id = '${fb}';`);
-    expect(cnt()).toBe(1);
+    expect(cnt()).toBe(2); // 앞 테스트의 두 회차(회차 1·2)가 같은 문항에 답했다
     psql(`update students set is_test_account = true where id = '${fb}';`);
     expect(cnt()).toBe(0);
   });

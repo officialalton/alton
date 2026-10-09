@@ -149,3 +149,16 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 ## 원문 수식 점검은 토큰 단위다 (2026-10-09)
 - `lib/ap-exam/raw-math-scan.ts`: 렌더된 DOM 의 텍스트 노드에서 TeX 명령·`^{`·산문 부등호 `<=`·평문 거듭제곱·렌더 안 된 `$…$`·`\uXXXX` 를 찾는다. KaTeX 출력, `<code>`/`<pre>`/`<kbd>`, 이스케이프된 달러(`\$`), 통화 표기, `[data-raw-math-ok]` 영역은 제외(양성·음성 픽스처 테스트). 자동 화면 점검 증거 v3 는 제출 전 문제 영역(`stimulus_no_raw_tex`)과 제출 후 해설(`result_no_raw_tex`) 모두 필수.
 - 표 칸의 평문 수식(`m^2`, `t>=0`, `e^(-0.3 t)`)은 표 렌더가 위첨자·≤≥ 로 그린다. 본문과 겹치는 자료 텍스트는 숨긴다(`stimulus-display.ts`).
+
+## 테스트 계정 제외 감사 (2026-10-09)
+교차 학생 집계 경로별 상태(테스트 계정 = `students.is_test_account`):
+| 경로 | 상태 |
+|---|---|
+| Free Accounts 목록·분석·전환 퍼널(`admin_free_accounts_list/analytics`) | 제외(기본 `p_include_test=false`, 제외 건수 `testAccountsExcluded` 별도 표기) — `app/admin/free-accounts.integration.test.ts` |
+| 문항 노출 횟수 `mock_exam_problem_exposure_counts` | 제외(407) |
+| 난이도 변경 영향 `problem_difficulty_set_impact`(시작된 응시 수) | 제외(407) |
+| 관리자 응시 내역(목록) | 포함하되 "테스트" 배지 |
+| 오류 신고 영향 `problem_error_report_detail`(채점/진행 응시 수) | **전체 포함 — 의도**: 재채점 영향 범위는 테스트 계정 응시도 재채점되므로 전부 세야 한다(학습 통계 아님) |
+| 학생 단위(학습 요약·약점·통계·학부모/상담사 보기: `student_stats_aggregate`, `mock_exam_weakness_summary`, `free_member_learning_summary`, `admin_student_mock_attempt_facts` …) | 한 학생만 읽는 경로라 교차 집계 아님 — 해당 없음 |
+| 상담 전환(`register_consult_interest`·상담 요청) | 쓰기 경로, 집계는 Free Accounts 분석 scope 안에서만 — 제외됨 |
+교차 학생으로 응시를 세는 다른 경로는 찾지 못했다(DB 함수 전수 + 앱 코드 `mock_exam_attempts` 조회 전수 확인).
