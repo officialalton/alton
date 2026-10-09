@@ -19,10 +19,10 @@ describe("고정형 SAT 서버 시간 제한 미구현 → 공개·시작 차단
     expect(guarded(`select status from mock_exam_sets where id = '${id}';`)).toBe("draft");
     expect(fails(() => guarded(`insert into mock_exam_sets (name, difficulty_tier, status, format, readiness_status, published_at, created_by) values ('${run}-fixed2', 'standard', 'published', 'fixed', 'not_applicable', now(), '${ADMIN_ID}');`))).toMatch(/cannot be published yet/);
   });
-  it("이미 공개돼 있던 고정형 세트라도 새 응시는 시작할 수 없다(기존 응시는 건드리지 않음)", () => {
+  it("이미 공개돼 있던 고정형 세트라도 새 응시는 시작할 수 없다(학생 시작 RPC; 이미 진행 중인 응시의 이어하기는 건드리지 않음)", () => {
     const stu = createStudent("fg", run);
     const id = psql(`insert into mock_exam_sets (name, difficulty_tier, status, format, readiness_status, published_at, access_tier, created_by) values ('${run}-legacy', 'standard', 'published', 'fixed', 'not_applicable', now(), 'free', '${ADMIN_ID}') returning id;`); // 우회 설정이 켜진 세션 = 레거시 상태 재현
-    expect(fails(() => guarded(`insert into mock_exam_attempts (student_id, exam_set_id, status) values ('${stu}', '${id}', 'assigned');`))).toMatch(/cannot be started yet/);
+    expect(fails(() => guarded(`set role authenticated; do $$ begin perform set_config('request.jwt.claim.sub', '${stu}', false); end $$; select mock_exam_open_start('${id}');`))).toMatch(/cannot be started yet/);
   });
   it("MST·AP 는 영향이 없다", () => {
     const mst = guarded(`insert into mock_exam_sets (name, difficulty_tier, status, format, module_item_counts, created_by) values ('${run}-mst', 'standard', 'draft', 'mst', '{"rw_m1":1,"rw_m2":1,"math_m1":1,"math_m2":1}', '${ADMIN_ID}') returning id;`);
