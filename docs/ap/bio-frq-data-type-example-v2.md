@@ -29,8 +29,8 @@
 
 **채점(의미·추론으로 채점, 특정 문구 요구 없음)**
 
-- 행 A1 (1점): Describes the direction of change across all three levels, identifies the level with the greatest value, and cites table values
-  - 인정해야 하는 의미: Describes the direction of change of the mean across the three levels consistent with the data / Identifies the level with the greatest mean and cites at least one table value
+- 행 A1 (1점): One description of the pattern across the levels, supported by table values (the level with the greatest value is part of the description)
+  - 인정해야 하는 의미: A description of how the mean changes across the three levels, supported by table values and naming the level with the greatest mean
   - 허용 표현 예(전부가 아님): rises then falls; highest at the middle level
   - 흔한 오류: describes only one pair of levels; describes a trend the data do not show; names a level that is not the greatest
   - 채점 메모: Table interpretation (skill 4.B): no biology concept is required for this point.
