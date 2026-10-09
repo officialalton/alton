@@ -39,4 +39,10 @@ STAGES = {
         "c_series_recognize_sum", "c_term_diff_sum", "c_taylor_actual_error_calc", "c_integral_test_choice",
     ],
     "supp_b3_frq_ab": ["frq_rate_in_out"],
+    # 배치 4: 단원 5·6·2 부족 칸 — 통과한 구조의 두 번째 수치 묶음(형제, 독립 문항군 아님)과 배치 3 반려 원형의 수정본
+    "supp_b4_ab": [
+        "c_increasing_interval_calc", "c_optimization_rect_calc", "c_closest_point_calc", "c_fastest_increase_calc", "c_implicit_horizontal_tangent_calc",
+        "c_critical_count_calc", "c_ftc_second_derivative_calc", "c_integral_equation_solve_calc", "c_accum_max_value_calc", "c_limit_def_derivative_calc",
+        "c_implicit_second_calc",
+    ],
 }

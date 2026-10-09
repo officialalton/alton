@@ -82,15 +82,15 @@ def c_critical_count_calc(rng):
     fpp = lambda u: 2 * k * math.cos(k * u) - k * k * u * math.sin(k * u)
     zeros_fpp = len(_roots(fpp, 1e-6, L))
     ds = [("Counts the zeros of f on the interval instead of the zeros of f'.", zeros_f), ("Counts the zeros of f'', which are the possible points of inflection, instead of the critical points.", zeros_fpp),
-          ("Misses one critical point, because the sign changes of f' are not all visible on a rough sketch.", key_v - 1), ("Counts the two endpoints as additional solutions although f' is not zero there.", key_v + 2),
-          ("Counts one extra solution at an endpoint where f' is not zero.", key_v + 1)]
+          ("Misses the last solution of f'(x) = 0 near the right end of the interval.", key_v - 1), ("Counts x = 0, where f'(0) = 0, although 0 is not in the open interval.", key_v + 1),
+          ("Counts x = 0 and also the right endpoint, although neither belongs to the open interval.", key_v + 2)]
     pool = numopts(ds, key_v, lambda v: fmt(int(v)))
     stem = f"How many critical points does $f(x)=x\\sin({'' if k == 1 else k}x)$ have on the open interval $0<x<{L}$?"
     key = Opt(fmt(key_v), True, f"f'(x) = sin({'' if k == 1 else k}x) + {'' if k == 1 else k}x cos({'' if k == 1 else k}x) is defined everywhere, so the critical points are its zeros; solving f'(x) = 0 on (0, {L}) with a calculator gives {key_v} solutions.", key_v)
     bpr = _bpa("c_critical_count_calc", "5.2", "1.E", "Count the critical points of a function by counting the solutions of f'(x) = 0 on an interval with a calculator",
                ["Differentiate f with the product rule", "Find all solutions of f'(x) = 0 on the interval from a calculator graph or table of f'", "Count them, excluding the endpoints"],
                [("critical points occur where f' = 0 or f' is undefined, and f' is defined for all x", "f is differentiable everywhere")],
-               [("zeros_of_f", "counts zeros of f"), ("maxima_only", "counts only relative maxima"), ("missed_one", "misses a solution"), ("extra_endpoint", "counts an endpoint")],
+               [("zeros_of_f", "counts zeros of f instead of f'"), ("zeros_of_fpp", "counts zeros of f'' instead of f'"), ("missed_one", "misses the last solution of f' = 0"), ("endpoint_included", "counts x = 0 or an endpoint of the open interval")],
                "sign changes of a central-difference derivative on a 30001-point grid are counted (independent of the closed-form f' and Brent's method)")
     return build("c_critical_count_calc", "5.2", "1.E", "required", stem, key, pool, rng, bpr, 100, [f"k={k}", f"L={L}", f"count={key_v}"])
 
@@ -231,17 +231,17 @@ def c_accum_max_value_calc(rng):
         best = max(best, acc)
     if abs(best - key_v) > 1e-6:
         raise ValueError("independent_check_failed")
-    ds = [("Reports G at the right endpoint of the interval, which is smaller than the maximum.", G(b)), ("Reports the x-value where f changes sign, not the value of G.", r), ("Reports the integral of f from 0 to r, but integrates |f| over the whole interval.", _I.quad(lambda t_: abs(f(t_)), 0, b)[0]),
-          ("Reports f(0), the initial rate, as the value of the accumulation function.", float(a0))]
+    ds = [("Reports G at the right endpoint of the interval, which is smaller than the maximum because f is negative after the zero.", G(b)), ("Reports the x-value where f changes sign, not the value of G there.", r),
+          ("Reports the integral of f from the zero to the right endpoint, which is the negative part of the accumulation.", _I.quad(f, r, b)[0]), ("Reports the total area between the graph of f and the x-axis over the whole interval.", _I.quad(lambda t_: abs(f(t_)), 0, b)[0])]
     pool = numopts(ds, key_v, dec3)
     stem = f"Let $G(x)=\\int_0^x\\left({a0}-te^{{t/{c:g}}}\\right)dt$ for $0\\le x\\le {b}$. What is the maximum value of $G$ on this interval?"
     key = Opt(dec3(key_v), True, f"G'(x) = {a0} - x e^(x/{c:g}) changes from positive to negative at x = {r:.3f} (found with a calculator), and G(0) = 0, so the maximum is G({r:.3f}) = the integral of the integrand from 0 to {r:.3f}.", key_v)
-    bpr = _bpa("c_accum_max_value_calc", "6.5", "3.E", "Find the maximum value of an accumulation function by locating where its integrand changes sign and then integrating",
+    bpr = _bpa("c_accum_max_value_calc", "6.5", "1.E", "Find the maximum value of an accumulation function by locating where its integrand changes sign and then integrating",
                ["Use G' = the integrand to locate where G changes from increasing to decreasing", "Compute the integral from 0 to that x with a calculator", "Compare with the value at the endpoints"],
                [("G is continuous and G' changes sign from positive to negative exactly once", "the integrand is decreasing with a single zero on the interval")],
-               [("endpoint_value", "reports G at the right endpoint"), ("location_not_value", "reports the x-value"), ("absolute_value_integral", "integrates |f|"), ("initial_rate", "reports f(0)")],
+               [("endpoint_value", "reports G at the right endpoint"), ("location_not_value", "reports the x-value where G is greatest"), ("negative_part", "reports the integral over the part where f is negative"), ("total_area", "reports the area between the graph and the axis")],
                "G is accumulated with a cumulative trapezoid rule on 40000 steps and its maximum is read from the running values (independent of scipy quad and Brent's method)")
-    return build("c_accum_max_value_calc", "6.5", "3.E", "required", stem, key, pool, rng, bpr, 105, [f"a={a0}", f"c={c}", f"r={r:.6f}", f"Gmax={key_v:.6f}"])
+    return build("c_accum_max_value_calc", "6.5", "1.E", "required", stem, key, pool, rng, bpr, 105, [f"a={a0}", f"c={c}", f"r={r:.6f}", f"Gmax={key_v:.6f}"])
 
 
 # 6.4 누적함수의 2계 도함수 값
@@ -302,30 +302,65 @@ def c_integral_equation_solve_calc(rng):
     return build("c_integral_equation_solve_calc", "6.7", "1.E", "required", stem, key, pool, rng, bpr, 95, [f"c={c}", f"m={m}", f"k={kv:.6f}"])
 
 
+# ============================ 단원 3 ============================
+# 3.6 음함수 곡선의 2계 도함수 d2y/dx2 (한 점에서)
+def c_implicit_second_calc(rng):
+    x0, y0 = rng.choice([(1, 1), (2, 1), (1, 0), (2, 0), (3, 1)])
+    ysym = sp.Symbol("y")
+    F = x ** 2 * ysym + sp.exp(ysym)
+    cst = float(F.subs({x: x0, ysym: y0}))
+    yp = -sp.diff(F, x) / sp.diff(F, ysym)
+    ypp = sp.diff(yp, x) + sp.diff(yp, ysym) * yp
+    m1 = float(yp.subs({x: x0, ysym: y0}))
+    key_v = float(ypp.subs({x: x0, ysym: y0}))
+    # 독립 경로: 곡선을 y(x) 로 수치 계산(브렌트)하고 2계 중심차분
+    yf = lambda xx: _O.brentq(lambda yy: xx * xx * yy + math.exp(yy) - cst, y0 - 2.5, y0 + 2.5, xtol=1e-14)
+    hh = 1e-3
+    num2 = (yf(x0 + hh) - 2 * yf(x0) + yf(x0 - hh)) / hh ** 2
+    if abs(num2 - key_v) > 1e-4 or abs(key_v) < 0.05:
+        raise ValueError("independent_check_failed")
+    no_chain = float(sp.diff(yp, x).subs({x: x0, ysym: y0}))
+    wrong_sign = float((sp.diff(-yp, x) + sp.diff(-yp, ysym) * (-yp)).subs({x: x0, ysym: y0}))
+    ds = [("Reports the first derivative dy/dx at the point instead of the second derivative.", m1), ("Differentiates dy/dx with respect to x but treats y as a constant, leaving out the dy/dx factor from the chain rule.", no_chain),
+          ("Starts from dy/dx = F_x/F_y with the wrong sign, so the second derivative has the wrong sign structure.", wrong_sign), ("Reports the negative of the correct value after a sign slip in the quotient.", -key_v)]
+    pool = numopts(ds, key_v, dec3)
+    cst_tex = f"{x0 * x0}+e" if y0 == 1 else "1"
+    stem = f"A curve is defined by $x^{{2}}y+e^{{y}}={cst_tex}$. The point $({x0},{y0})$ lies on the curve. What is the value of $\\dfrac{{d^{{2}}y}}{{dx^{{2}}}}$ at this point?"
+    key = Opt(dec3(key_v), True, "Differentiate implicitly to get dy/dx = -2xy/(x^2 + e^y); differentiate again, replacing dy/dx wherever y is differentiated, and evaluate at the point with a calculator.", key_v)
+    bpr = _bpa("c_implicit_second_calc", "3.6", "1.E", "Find a second derivative of an implicitly defined curve at a point",
+               ["Differentiate implicitly once to express dy/dx in terms of x and y", "Differentiate dy/dx again with the quotient and chain rules, substituting dy/dx for the derivative of y", "Evaluate at the given point with a calculator"],
+               [("the denominator x^2 + e^y is positive so y is a differentiable function of x near the point", "x^2 + e^y > 0 for all points")],
+               [("first_derivative", "reports dy/dx instead of the second derivative"), ("missing_chain_factor", "treats y as a constant when differentiating again"), ("wrong_sign_start", "starts from the wrong sign of dy/dx"), ("sign_slip", "reports the opposite sign")],
+               "the curve is solved for y(x) near the point with Brent's method and the second central difference (step 1e-3) is compared with the formula (independent of implicit differentiation)")
+    return build("c_implicit_second_calc", "3.6", "1.E", "required", stem, key, pool, rng, bpr, 110, [f"x0={x0}", f"y0={y0}", f"ypp={key_v:.6f}"])
+
+
 # ============================ 단원 2 ============================
 # 2.2 도함수의 극한 정의를 알아보고 값 구하기
 def c_limit_def_derivative_calc(rng):
-    form = rng.choice(["esin", "lnsq", "cossq", "xroot"])
-    a_ = rng.choice([1, 2, 3])
-    fsym = {"esin": sp.exp(sp.sin(x)), "lnsq": sp.log(1 + x ** 2), "cossq": sp.cos(x ** 2), "xroot": sp.sqrt(x) * sp.exp(x / 4)}[form]
+    form = rng.choice(["xln", "xe", "xsin", "lnx_over_x", "ecos"])
+    a_ = rng.choice([1, 2, 3]) if form != "ecos" else rng.choice([1, 2])
+    fsym = {"xln": x * sp.log(x), "xe": x * sp.exp(x), "xsin": x * sp.sin(x), "lnx_over_x": sp.log(x) / x, "ecos": sp.exp(x) * sp.cos(x)}[form]
+    # 곱·몫의 법칙만 쓰는 함수(2.8, 2.9)라 연쇄법칙(3 단원) 없이 도함수를 구한다
     ff = sp.lambdify(x, fsym, "math")
     key_v = float(sp.diff(fsym, x).subs(x, a_))
-    # 독립 경로: h = 1e-6 의 차분 몫(대칭)과 h 를 줄여 가는 우측 차분이 같은 값으로 수렴
+    if abs(key_v) < 0.05:
+        raise ValueError("flat")
     q = lambda hh: (ff(a_ + hh) - ff(a_)) / hh
     if abs((ff(a_ + 1e-6) - ff(a_ - 1e-6)) / 2e-6 - key_v) > 1e-6 or abs(q(1e-7) - key_v) > 1e-4:
         raise ValueError("independent_check_failed")
     ltex = sp.latex(fsym).replace("\\log", "\\ln")
-    num_tex = f"{sp.latex(fsym.subs(x, a_ + sp.Symbol('h')))}-{sp.latex(fsym.subs(x, a_))}".replace("\\log", "\\ln")
-    ds = [("Reports the value of the function f(a), the first term of the difference quotient, instead of the limit.", ff(a_)), ("Reports f(a)/a, treating the limit as a slope from the origin.", ff(a_) / a_),
-          ("Differentiates only part of the expression (a single factor or the outer function) and ignores the rest.", float({"esin": sp.exp(sp.sin(x)), "lnsq": 1 / (1 + x ** 2), "cossq": -sp.sin(x ** 2), "xroot": sp.exp(x / 4) / (2 * sp.sqrt(x))}[form].subs(x, a_))),
-          ("Reports the second derivative at the point instead of the first.", float(sp.diff(fsym, x, 2).subs(x, a_)))]
+    fa = float(fsym.subs(x, a_))
+    d1 = {"xln": sp.log(x), "xe": sp.exp(x), "xsin": sp.sin(x), "lnx_over_x": 1 / x, "ecos": sp.exp(x)}[form]
+    ds = [("Reports the value of the function f(a), the first term of the difference quotient, instead of the limit.", fa), ("Reports f(a)/a, treating the limit as a slope from the origin.", fa / a_),
+          ("Differentiates only one factor (or only the numerator) and ignores the product or quotient rule.", float(d1.subs(x, a_))), ("Reports the second derivative at the point instead of the first.", float(sp.diff(fsym, x, 2).subs(x, a_)))]
     pool = numopts(ds, key_v, dec3)
     stem = f"Let $f(x)={ltex}$. What is the value of $\\displaystyle\\lim_{{h\\to 0}}\\dfrac{{f({a_}+h)-f({a_})}}{{h}}$?"
-    key = Opt(dec3(key_v), True, f"The limit is the definition of f'({a_}) for f(x) = {ltex}; differentiate and evaluate with a calculator.", key_v)
+    key = Opt(dec3(key_v), True, f"The limit is the definition of f'({a_}); differentiate with the product or quotient rule and evaluate at x = {a_} with a calculator.", key_v)
     bpr = _bpa("c_limit_def_derivative_calc", "2.2", "1.E", "Recognize a limit of a difference quotient as a derivative at a point and evaluate it",
-               ["Identify f(x) and the point a from the difference quotient", "Differentiate f using the chain or product rule", "Evaluate f'(a) with a calculator"],
+               ["Identify the limit as the derivative f'(a) from the definition", "Differentiate f with the product or quotient rule", "Evaluate f'(a) with a calculator"],
                [("the limit of the difference quotient defines f'(a) when f is differentiable at a", "f is differentiable at a")],
-               [("function_value", "reports f(a)"), ("slope_from_origin", "reports f(a)/a"), ("outer_derivative_only", "forgets the chain rule factor"), ("second_derivative", "reports f''(a)")],
+               [("function_value", "reports f(a) itself"), ("slope_from_origin", "reports f(a)/a"), ("one_factor_only", "differentiates only one factor"), ("second_derivative", "reports f''(a)")],
                "the difference quotient is evaluated numerically with h = 10^-6 (symmetric) and h = 10^-7 (one-sided) and compared with the symbolic derivative")
     return build("c_limit_def_derivative_calc", "2.2", "1.E", "required", stem, key, pool, rng, bpr, 95, [f"form={form}", f"a={a_}", f"fprime={key_v:.6f}"])
 
@@ -333,9 +368,9 @@ def c_limit_def_derivative_calc(rng):
 # 2.7 접선의 x 절편
 def c_tangent_x_intercept_calc(rng):
     form = rng.choice(["xln", "xe", "sinexp"])
-    a_ = rng.choice([2.0, 3.0, 1.5]) if form != "sinexp" else rng.choice([0.5, 1.0])
-    f = {"xln": lambda u: u * math.log(u), "xe": lambda u: u * math.exp(-u / 2), "sinexp": lambda u: math.exp(u) * math.sin(u)}[form]
-    fp = {"xln": lambda u: math.log(u) + 1, "xe": lambda u: math.exp(-u / 2) * (1 - u / 2), "sinexp": lambda u: math.exp(u) * (math.sin(u) + math.cos(u))}[form]
+    a_ = rng.choice([2.0, 3.0, 1.5]) if form == "xln" else rng.choice([0.5, 1.0, 1.5])
+    f = {"xln": lambda u: u * math.log(u), "xe": lambda u: u * math.exp(u), "sinexp": lambda u: math.exp(u) * math.sin(u)}[form]
+    fp = {"xln": lambda u: math.log(u) + 1, "xe": lambda u: math.exp(u) * (1 + u), "sinexp": lambda u: math.exp(u) * (math.sin(u) + math.cos(u))}[form]
     if abs(fp(a_)) < 0.05:
         raise ValueError("flat")
     key_v = a_ - f(a_) / fp(a_)
@@ -347,7 +382,7 @@ def c_tangent_x_intercept_calc(rng):
     ds = [("Adds instead of subtracts: x = a + f(a)/f'(a).", a_ + f(a_) / fp(a_)), ("Uses the reciprocal slope: x = a - f'(a)/f(a).", a_ - fp(a_) / f(a_)), ("Reports the y-intercept of the tangent line instead of the x-intercept.", f(a_) - fp(a_) * a_),
           ("Reports the x-intercept of the normal line instead of the tangent line.", a_ + f(a_) * fp(a_))]
     pool = numopts(ds, key_v, dec3)
-    ftex = {"xln": "x\\ln x", "xe": "xe^{-x/2}", "sinexp": "e^{x}\\sin x"}[form]
+    ftex = {"xln": "x\\ln x", "xe": "xe^{x}", "sinexp": "e^{x}\\sin x"}[form]
     stem = f"The line tangent to the graph of $f(x)={ftex}$ at $x={a_:g}$ crosses the $x$-axis at $x=c$. What is the value of $c$?"
     key = Opt(dec3(key_v), True, "The tangent line is y = f(a) + f'(a)(x - a); setting y = 0 gives x = a - f(a)/f'(a), evaluated with a calculator.", key_v)
     bpr = _bpa("c_tangent_x_intercept_calc", "2.7", "1.E", "Find where a tangent line crosses the x-axis using f(a) and f'(a)",

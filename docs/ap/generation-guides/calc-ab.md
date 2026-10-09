@@ -201,3 +201,9 @@ BC 전용 용어(series/converge/Taylor/Maclaurin/parametric/polar/vector/Euler/
 | c_related_rates_angle_calc | 4.5 | 1.D | required | theta(t) = arctan((h0 + v t)/d) is differentiated by central difference at t = 0 (independent of the implicit  |
 | c_tangent_x_intercept_calc | 2.7 | 1.E | required | the slope is recomputed by central difference (step 1e-6) and the intersection of the numerical tangent line w |
 | c_total_distance_calc | 8.2 | 1.D | required | /v/ is integrated with a composite Simpson rule on 400000 subintervals (independent of the sign-change splitti |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_implicit_second_calc | 3.6 | 1.E | required | the curve is solved for y(x) near the point with Brent's method and the second central difference (step 1e-3)  |

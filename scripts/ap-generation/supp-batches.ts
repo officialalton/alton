@@ -10,6 +10,7 @@ export const SUPP_BATCHES: { run: string; file: string }[] = [
   { run: "supp-b3-ab-final", file: "supp-b3ab-items.json" },
   { run: "supp-b3-bc-final", file: "supp-b3bc-items.json" },
   { run: "supp-b3-fa-final", file: "supp-b3fa-items.json" },
+  { run: "supp-b4-ab-final", file: "supp-b4ab-items.json" },
 ];
 
 /** 디스크에 실제로 있는 보강 배치 파일 이름(확장자 없음). */

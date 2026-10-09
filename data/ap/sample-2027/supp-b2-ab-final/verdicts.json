@@ -1,0 +1,432 @@
+[
+ {
+  "key": "ap_calculus_ab-f01-k0",
+  "cellId": "ap_calculus_ab-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "h'(2)=f'(g(2))·g'(2)=f'(4)·5=(-4)(5)",
+     "final_answer": "-20",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "k'(4)=[f'(4)g(4)-f(4)g'(4)]/g(4)^2=(-16-16)/16",
+     "final_answer": "-2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "(g(7)-g(1))/(7-1)=(3-2)/6=1/6. g is twice differentiable, so it is differentiable and continuous on [1,7]. By the MVT, some c in (1,7) has g'(c)=1/6.",
+     "final_answer": "1/6; yes, by the Mean Value Theorem",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "1·(-1+2)/2 + 2·(2-4)/2 + 3·(-4+4)/2 = 0.5 - 2 + 0 = -1.5",
+     "final_answer": "-3/2",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The table-values FRQ is correct, well scoped and consistent with its rubric. Parts a-d (chain rule, quotient rule, MVT, trapezoidal sum) are keyed correctly and match the solver. The 2/2/3/2 point split fits the official 9-point grain. No instant-reject conditions apply.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short table-based parts: chain rule with an inner-function lookup, quotient rule, an MVT hypothesis check (differentiability and continuity from \"twice-differentiable\"), and an unequal-width trapezoidal sum. Each part is standard AP-level and needs only 2-3 steps. Arithmetic is small and clean. The table is the only representation, and the reading load is light. The difficulty comes from the number of distinct procedures and the need to justify the MVT conditions, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f01-k1",
+  "cellId": "ap_calculus_ab-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Chain rule: h'(2)=f'(g(2))·g'(2)=f'(7)·4=5·4",
+     "final_answer": "20",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Quotient rule: (f'(1)g(1)-f(1)g'(1))/g(1)^2=(0·7-4·(-3))/49",
+     "final_answer": "12/49",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "(g(7)-g(1))/(7-1)=(4-7)/6. g is twice differentiable, so it is differentiable and therefore continuous on [1,7]. The Mean Value Theorem then guarantees such a c.",
+     "final_answer": "-1/2; yes, by the Mean Value Theorem, since g is continuous on [1,7] and differentiable on (1,7)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "1·(0+(-3))/2 + 2·(-3+(-3))/2 + 3·(-3+5)/2 = -1.5 - 6 + 3",
+     "final_answer": "-4.5",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard 9-point table-based FRQ covering the chain rule, the quotient rule, the Mean Value Theorem and a trapezoidal sum. Keys are consistent, the conditions are stated (twice differentiable), and the rubric rows are coherent. The load is typical of the AP exam and needs no calculator.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts, each applying a standard AP procedure. (a) is a chain rule evaluation read from the table, with f' taken at g(2)=7. (b) is the quotient rule with table values. (c) computes an average rate of change and requires checking the MVT hypotheses (differentiable, hence continuous) before concluding. (d) is a trapezoidal sum with unequal subinterval widths. The arithmetic is small and clean, and no concept goes beyond the AB scope. The difficulty comes from the number of procedures and the table-to-expression representation changes, which suits a full mock.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f02-k0",
+  "cellId": "ap_calculus_ab-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "f'(x)=e^(-x/3)(1-x/3); f(6)=6e^-2, f'(6)=-e^-2",
+     "final_answer": "y = 6e^(-2) - e^(-2)(x-6)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "f'=0 at x=3; f' changes + to - there",
+     "final_answer": "x=3, relative maximum",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "f''=(1/9)e^(-x/3)(x-6) changes sign at 6",
+     "final_answer": "x=6",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Candidates: f(0)=0, f(3)=3/e, f(12)=12e^-4>0",
+     "final_answer": "Absolute min 0 (at x=0); absolute max 3/e (at x=3)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard 9-point function analysis of f(x)=x e^(-x/3): tangent line, relative max, inflection point, absolute extrema. Keys are correct and match the independent solver. Parts split 2/3/2/2, which is a valid grain. Justification parts are tied to sign changes and the candidates test. Minor wording issue: the model answer's f'' is written as \"x/3^2 - 2/3\", which is correct but awkward. Part d does not require explicitly stating that the endpoint and critical-point values are compared, but that is implied. Overall acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts map to 2.7, 5.4, 5.6, and 5.5, which the bundle legitimately spans. Justification (3.E) is assessed in parts b, c, and d."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are correct and unique. Rubric rows are consistent and have sensible dependencies."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The formula is complete. Part c's displayed f'' form is slightly awkward but correct."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; no distractors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Exact-form values, no calculator needed, and the load is typical for about 15 minutes."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AB FRQ-style multi-part item. It requires the product and chain rule for f' and f'', a tangent line, first-derivative sign analysis with justification, a second-derivative sign change for the inflection point, and a candidates test on a closed interval. The numbers are clean (critical point at x=3, inflection at x=6) and the wording is unambiguous. All content is in AB scope, and the difficulty comes from the number of steps and the justification required, not from heavy arithmetic.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f02-k1",
+  "cellId": "ap_calculus_ab-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "f(4)=4e^-2, f'(x)=e^(-x/2)(1-x/2), f'(4)=-e^-2",
+     "final_answer": "y = 4e^(-2) - e^(-2)(x-4)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "f'=0 at x=2; f'>0 for 0<x<2, f'<0 for x>2",
+     "final_answer": "x=2, relative maximum",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "f''=e^(-x/2)(x/4-1) changes sign at x=4",
+     "final_answer": "x=4",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Candidates: f(0)=0, f(2)=2/e, f(8)=8e^-4>0",
+     "final_answer": "Absolute minimum 0 (at x=0); absolute maximum 2/e (at x=2)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The math is correct and every part has a unique answer. Parts map to topics 2.7, 5.4, 5.6 and 5.5 with justification in b, c and d. It is a 9-point non-calculator bundle with a 2/3/2/2 split and exact answers. Minor points: row b3 overlaps row b2, and part d does not require citing the Extreme Value Theorem. Neither is serious enough to fail the item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ-style item on f(x)=x e^(-x/2): tangent line, first-derivative-test classification with justification, inflection via f'' sign change, and absolute extrema via the candidates test. Requires product/chain rule, sign analysis, and justification across several Unit 5 topics. Numbers are clean (e^-2, 2/e) and no calculator is needed. This matches the typical AP exam free-response level and is neither a single-skill drill nor beyond scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f03-k0",
+  "cellId": "ap_calculus_ab-f03",
+  "passed": false,
+  "reasons": [
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "∫0^8 F dt = 480+60(1-cos4) ≈ 579.219",
+     "final_answer": "≈579 gallons",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "F(4)=60+30sin2≈87.279, D(4)=45; net ≈42.279 gal/hr >0",
+     "final_answer": "Increasing, since F(4)-D(4)≈42.279 gal/hr > 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "100+579.219-360",
+     "final_answer": "≈319.219 gallons",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "F-D=0 at t≈6.820; F-D>0 before, <0 after; candidates test: A(0)=100, A(8)≈319.2, A(6.820) larger",
+     "final_answer": "t ≈ 6.820 hours",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The bundle is a standard inflow/outflow FRQ worth 9 points (2/2/2/3), and the key is consistent and matches the independent solver. Part (d) requires a candidates or sign-change justification, which fits skill 3.E. The calculator is used appropriately, and the data object is complete. Minor weaknesses: part (a) asks for the nearest gallon while the rubric lists 579.219, though the tolerance covers this, and the common_errors lists are empty.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applied accumulation and net change dominate, which fits topic 8.3 with the related topics 4.1 and 5.5. Part (d) requires a justification, matching 3.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique and consistent. The solver's answers agree, and the d2 alternatives (sign change or candidates test) are both valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data object contains the F and D formulas and the initial amount. The wording is clear US English, and the formulas are repeated in the part (a) prompt, which is harmless redundancy."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric rows are explicit, though common_errors are empty."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 9-point, 2/2/2/3 structure is typical of AP FRQs, the calculator load is reasonable, and the numbers are not ugly."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Classic AP FRQ-style rate in/out problem. Requires setting up definite integrals on a calculator, interpreting the sign of net rate with units, applying the net change theorem with an initial value, and a candidate-test justification for the maximum (sign change of F-D, with endpoint check). Multiple routine steps and justification; the concepts are standard AB Unit 8/5 content with no ugly arithmetic or ambiguity.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f03-k1",
+  "cellId": "ap_calculus_ab-f03",
+  "passed": false,
+  "reasons": [
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "∫0^8 F dt = 400+75(1-cos3.2) ≈ 549.87",
+     "final_answer": "≈550 gallons (549.872)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "F(4)≈79.99, D(4)=47; F(4)-D(4)≈32.99 gal/hr >0",
+     "final_answer": "Increasing, since F(4)-D(4)≈32.99 gallons per hour > 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "150+549.872-376",
+     "final_answer": "≈323.872 gallons",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "F-D=0 at t≈7.278 only; F-D>0 before, <0 after. Candidates test: A(0)=150, A(8)≈323.87 < A(7.278).",
+     "final_answer": "t ≈ 7.278 hours",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "Standard rate in/out FRQ with 2/2/2/3 points. The key is consistent with the independent solver; the 7.278 vs 7.279 difference is within the ±0.001 tolerance. It is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts fit 8.3, 4.1, and 5.5, and part d includes justification, which matches skill 3.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys agree with the solver. The rubric rows are consistent and the tolerances are stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data are complete: F, D, the initial amount, and the interval 0 ≤ t ≤ 8 (given in the part prompts)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item has the typical AP structure, 9 points, and a calculator is required, consistent with the designation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP FRQ structure with four parts building from a calculator integral to a justified global maximum. Parts a-c are routine: definite integral, sign of the net rate, and initial value plus net change. Part d needs the solution of F(t)=D(t), a sign analysis of the net rate, and a comparison of candidate values including endpoints. Wording is short and unambiguous, numbers are calculator-friendly, and all content is in AB scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

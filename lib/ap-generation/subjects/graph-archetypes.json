@@ -34,7 +34,7 @@
  {
   "id": "c_accum_max_value_calc",
   "topic": "6.5",
-  "skill": "3.E",
+  "skill": "1.E",
   "calculator": "required",
   "stimulus": "none",
   "verifiedBy": [
@@ -42,9 +42,9 @@
   ],
   "misconceptions": [
    "reports G at the right endpoint",
-   "reports the x-value",
-   "integrates |f|",
-   "reports f(0)"
+   "reports the x-value where G is greatest",
+   "reports the integral over the part where f is negative",
+   "reports the area between the graph and the axis"
   ],
   "bc": false
  },
@@ -245,10 +245,10 @@
    "sign changes of a central-difference derivative on a 30001-point grid are counted (independent of the closed-form f' and Brent's method)"
   ],
   "misconceptions": [
-   "counts zeros of f",
-   "counts only relative maxima",
-   "misses a solution",
-   "counts an endpoint"
+   "counts zeros of f instead of f'",
+   "counts zeros of f'' instead of f'",
+   "misses the last solution of f' = 0",
+   "counts x = 0 or an endpoint of the open interval"
   ],
   "bc": false
  },
@@ -368,6 +368,23 @@
    "reports the x-coordinate",
    "uses y = -x",
    "uses the denominator"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_implicit_second_calc",
+  "topic": "3.6",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the curve is solved for y(x) near the point with Brent's method and the second central difference (step 1e-3) is compared with the formula (independent of implicit differentiation)"
+  ],
+  "misconceptions": [
+   "reports dy/dx instead of the second derivative",
+   "treats y as a constant when differentiating again",
+   "starts from the wrong sign of dy/dx",
+   "reports the opposite sign"
   ],
   "bc": false
  },
@@ -500,9 +517,9 @@
    "the difference quotient is evaluated numerically with h = 10^-6 (symmetric) and h = 10^-7 (one-sided) and compared with the symbolic derivative"
   ],
   "misconceptions": [
-   "reports f(a)",
+   "reports f(a) itself",
    "reports f(a)/a",
-   "forgets the chain rule factor",
+   "differentiates only one factor",
    "reports f''(a)"
   ],
   "bc": false

@@ -1,0 +1,2227 @@
+[
+ {
+  "candidateKey": "ap_calculus_ab-m01-k0",
+  "cellId": "ap_calculus_ab-m01",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "6.5",
+  "unitCode": "6",
+  "skillPrimary": "3.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_accum_max_value_calc",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_distractor_explanation",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires applying FTC to get G'(x), solving G'(x)=0 with a calculator, justifying a maximum via sign change and endpoint comparison, then evaluating the definite integral numerically. This is a standard multi-step AB accumulation-function item. The distractors reflect real misconceptions: using G'(0), or evaluating the endpoint G(4). Calculator use is expected and the numbers are not ugly. The item is in AB scope, since a calculator integral avoids integration by parts.",
+  "payload": {
+   "archetype": "c_accum_max_value_calc",
+   "topic": "6.5",
+   "skill": "3.E",
+   "calculator": "required",
+   "stem": "Let $G(x)=\\int_0^x\\left(5-te^{t/3}\\right)dt$ for $0\\le x\\le 4$. What is the maximum value of $G$ on this interval?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$5.000$",
+     "why": "Reports f(0), the initial rate, as the value of the accumulation function.",
+     "value": "5.0000000"
+    },
+    {
+     "text": "$7.021$",
+     "why": "G'(x) = 5 - x e^(x/3) changes from positive to negative at x = 2.313 (found with a calculator), and G(0) = 0, so the maximum is G(2.313) = the integral of the integrand from 0 to 2.313.",
+     "value": "7.0207318"
+    },
+    {
+     "text": "$14.422$",
+     "why": "Reports the integral of f from 0 to r, but integrates |f| over the whole interval.",
+     "value": "14.422467"
+    },
+    {
+     "text": "$-0.381$",
+     "why": "Reports G at the right endpoint of the interval, which is smaller than the maximum.",
+     "value": "-0.38100368"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 105,
+   "facts": [
+    "a=5",
+    "c=3",
+    "r=2.312860",
+    "Gmax=7.020732"
+   ],
+   "blueprint": {
+    "id": "c_accum_max_value_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Find the maximum value of an accumulation function by locating where its integrand changes sign and then integrating",
+    "topic": "6.5",
+    "skill": "3.E",
+    "student_thinking": [
+     "Use G' = the integrand to locate where G changes from increasing to decreasing",
+     "Compute the integral from 0 to that x with a calculator",
+     "Compare with the value at the endpoints"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "G is continuous and G' changes sign from positive to negative exactly once",
+      "evidence": "the integrand is decreasing with a single zero on the interval"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "endpoint_value",
+      "description": "reports G at the right endpoint"
+     },
+     {
+      "id": "location_not_value",
+      "description": "reports the x-value"
+     },
+     {
+      "id": "absolute_value_integral",
+      "description": "integrates |f|"
+     },
+     {
+      "id": "initial_rate",
+      "description": "reports f(0)"
+     }
+    ],
+    "verification": {
+     "independent_path": "G is accumulated with a cumulative trapezoid rule on 40000 steps and its maximum is read from the running values (independent of scipy quad and Brent's method)",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5500,
+   "pack_id": "c_accum_max_value_calc-s5500",
+   "explanation_en": "The correct answer is 7.021. G'(x) = 5 - x e^(x/3) changes from positive to negative at x = 2.313 (found with a calculator), and G(0) = 0, so the maximum is G(2.313) = the integral of the integrand from 0 to 2.313.\n5.000 is incorrect: Reports f(0), the initial rate, as the value of the accumulation function.\n14.422 is incorrect: Reports the integral of f from 0 to r, but integrates |f| over the whole interval.\n-0.381 is incorrect: Reports G at the right endpoint of the interval, which is smaller than the maximum."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_accum_max_value_calc",
+   "facts": [
+    "a=5",
+    "c=3",
+    "r=2.312860",
+    "Gmax=7.020732"
+   ],
+   "seed": 5500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The time is typical at about 105 seconds. The calculator is genuinely needed for the zero and the integral, and the designation is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the stem is clean. The item is weak on skill 3.E because it is a computation with no justification demand, and two distractors are weak or poorly explained. Failing on skill fit and distractor quality."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires applying FTC to get G'(x), solving G'(x)=0 with a calculator, justifying a maximum via sign change and endpoint comparison, then evaluating the definite integral numerically. This is a standard multi-step AB accumulation-function item. The distractors reflect real misconceptions: using G'(0), or evaluating the endpoint G(4). Calculator use is expected and the numbers are not ugly. The item is in AB scope, since a calculator integral avoids integration by parts.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m02-k0",
+  "cellId": "ap_calculus_ab-m02",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "5.11",
+  "unitCode": "5",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_closest_point_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must build the distance (or squared distance) objective from a verbal setup, differentiate with the chain rule, solve D'(x)=0 numerically with a calculator, and evaluate the minimum distance. That is a standard multi-step optimization item for a calculator-active AB section. The concept is in scope. Reading is minimal and the numbers are clean, so the calculator work is just solving and evaluating. The distractors likely reflect common errors such as reporting the squared distance or the x-value.",
+  "payload": {
+   "archetype": "c_closest_point_calc",
+   "topic": "5.11",
+   "skill": "1.D",
+   "calculator": "required",
+   "stem": "What is the minimum distance from the point $(1,5)$ to the graph of $y=e^{0.5x}$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$3.351$",
+     "why": "Uses the vertical gap between the point and the curve directly above it.",
+     "value": "3.3512787"
+    },
+    {
+     "text": "$4.123$",
+     "why": "Uses the distance from the point to the point of the curve at x = 0.",
+     "value": "4.1231056"
+    },
+    {
+     "text": "$2.032$",
+     "why": "Minimize the squared distance (x - p)^2 + (e^(kx) - q)^2 by solving its derivative equal to zero with a calculator, then take the square root of the minimum.",
+     "value": "2.0321086"
+    },
+    {
+     "text": "$2.827$",
+     "why": "Reports the x-coordinate of the closest point instead of the distance.",
+     "value": "2.8273342"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 105,
+   "facts": [
+    "k=0.5",
+    "p=(1.0,5.0)",
+    "d=2.032109"
+   ],
+   "blueprint": {
+    "id": "c_closest_point_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Find the minimum distance from a point to an exponential curve by minimizing the squared distance numerically",
+    "topic": "5.11",
+    "skill": "1.D",
+    "student_thinking": [
+     "Write the squared distance from the point to a general point of the curve",
+     "Solve the derivative of the squared distance equal to zero with a calculator",
+     "Evaluate the distance at the solution"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "minimizing the squared distance gives the same location as minimizing the distance",
+      "evidence": "the square root is increasing"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "squared_distance",
+      "description": "reports the squared distance"
+     },
+     {
+      "id": "location_not_value",
+      "description": "reports the x-coordinate"
+     },
+     {
+      "id": "vertical_gap",
+      "description": "uses the vertical gap"
+     },
+     {
+      "id": "fixed_point",
+      "description": "uses a fixed point of the curve"
+     }
+    ],
+    "verification": {
+     "independent_path": "the minimum of the distance over a 300001-point grid on [-1, 5] (independent of Brent's method on the derivative)",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5500,
+   "pack_id": "c_closest_point_calc-s5500",
+   "explanation_en": "The correct answer is 2.032. Minimize the squared distance (x - p)^2 + (e^(kx) - q)^2 by solving its derivative equal to zero with a calculator, then take the square root of the minimum.\n3.351 is incorrect: Uses the vertical gap between the point and the curve directly above it.\n4.123 is incorrect: Uses the distance from the point to the point of the curve at x = 0.\n2.827 is incorrect: Reports the x-coordinate of the closest point instead of the distance."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_closest_point_calc",
+   "facts": [
+    "k=0.5",
+    "p=(1.0,5.0)",
+    "d=2.032109"
+   ],
+   "seed": 5500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Closest-point optimization with calculator fits 5.11 and skill 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answer 2.032; distractor values correspond to stated errors."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions, parallel numeric options, each wrong option explained. The explanation uses generic placeholders (p, q, k), a minor clarity issue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 seconds, calculator appropriate, three-decimal answers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean calculator-active closest-point optimization question with a unique key and realistic distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must build the distance (or squared distance) objective from a verbal setup, differentiate with the chain rule, solve D'(x)=0 numerically with a calculator, and evaluate the minimum distance. That is a standard multi-step optimization item for a calculator-active AB section. The concept is in scope. Reading is minimal and the numbers are clean, so the calculator work is just solving and evaluating. The distractors likely reflect common errors such as reporting the squared distance or the x-value.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m03-k0",
+  "cellId": "ap_calculus_ab-m03",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_critical_count_calc",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires f' via product rule, setting it to zero, and counting roots of tan x = -x on an interval using a calculator/graph, including checking sign near the endpoint 12. Moderate steps, no unfair sources.",
+  "payload": {
+   "archetype": "c_critical_count_calc",
+   "topic": "5.2",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "How many critical points does $f(x)=x\\sin(x)$ have on the open interval $0<x<12$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$4$",
+     "why": "f'(x) = sin(x) + x cos(x) is defined everywhere, so the critical points are its zeros; solving f'(x) = 0 on (0, 12) with a calculator gives 4 solutions.",
+     "value": "4.0000000"
+    },
+    {
+     "text": "$6$",
+     "why": "Counts the two endpoints as additional solutions although f' is not zero there.",
+     "value": "6.0000000"
+    },
+    {
+     "text": "$3$",
+     "why": "Counts the zeros of f on the interval instead of the zeros of f'.",
+     "value": "3.0000000"
+    },
+    {
+     "text": "$5$",
+     "why": "Counts one extra solution at an endpoint where f' is not zero.",
+     "value": "5.0000000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 100,
+   "facts": [
+    "k=1",
+    "L=12",
+    "count=4"
+   ],
+   "blueprint": {
+    "id": "c_critical_count_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Count the critical points of a function by counting the solutions of f'(x) = 0 on an interval with a calculator",
+    "topic": "5.2",
+    "skill": "1.E",
+    "student_thinking": [
+     "Differentiate f with the product rule",
+     "Find all solutions of f'(x) = 0 on the interval from a calculator graph or table of f'",
+     "Count them, excluding the endpoints"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "critical points occur where f' = 0 or f' is undefined, and f' is defined for all x",
+      "evidence": "f is differentiable everywhere"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "zeros_of_f",
+      "description": "counts zeros of f"
+     },
+     {
+      "id": "maxima_only",
+      "description": "counts only relative maxima"
+     },
+     {
+      "id": "missed_one",
+      "description": "misses a solution"
+     },
+     {
+      "id": "extra_endpoint",
+      "description": "counts an endpoint"
+     }
+    ],
+    "verification": {
+     "independent_path": "sign changes of a central-difference derivative on a 30001-point grid are counted (independent of the closed-form f' and Brent's method)",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5500,
+   "pack_id": "c_critical_count_calc-s5500",
+   "explanation_en": "The correct answer is 4. f'(x) = sin(x) + x cos(x) is defined everywhere, so the critical points are its zeros; solving f'(x) = 0 on (0, 12) with a calculator gives 4 solutions.\n6 is incorrect: Counts the two endpoints as additional solutions although f' is not zero there.\n3 is incorrect: Counts the zeros of f on the interval instead of the zeros of f'.\n5 is incorrect: Counts one extra solution at an endpoint where f' is not zero."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_critical_count_calc",
+   "facts": [
+    "k=1",
+    "L=12",
+    "count=4"
+   ],
+   "seed": 5500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Counting critical points via f'=0 with a calculator fits 5.2 and procedure skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Roots of tan x = -x at about 2.03, 4.91, 7.98, 11.09 are all in (0,12); the next is about 14.2. The key 4 is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is clear, the interval is open, and f is defined everywhere."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanations for 5 and 6 claim f' is not zero at the endpoints, but f'(0)=0 exactly. Endpoints are also excluded by the open interval, so the claim that counting 'two endpoints' gives 6 is incoherent. The 5 and 6 options are weakly motivated, and the blueprint misconceptions maxima_only and missed_one are not used. The explanation text is inaccurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A typical calculator-active item of about 100 seconds with no ugly arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key 4 is correct and the item is well scoped. The distractor rationales for 5 and 6 are inaccurate, since f'(0)=0 and the interval is open, so the item fails the distractor/explanation criterion and needs those explanations and options revised."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires f' via product rule, setting it to zero, and counting roots of tan x = -x on an interval using a calculator/graph, including checking sign near the endpoint 12. Moderate steps, no unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m04-k0",
+  "cellId": "ap_calculus_ab-m04",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "3.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_fastest_increase_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Solver must recognize that 'increasing most rapidly' means maximizing M', differentiate twice (product and chain rules), find the critical points of M', and compare M' at the critical points and endpoints (candidates test). The distractors reflect real misconceptions: the maximum value instead of the time, and the maximizer of M instead of M'. The computation is calculator-friendly, and the wording is clear with no extra context.",
+  "payload": {
+   "archetype": "c_fastest_increase_calc",
+   "topic": "5.5",
+   "skill": "3.E",
+   "calculator": "required",
+   "stem": "The amount of a chemical in a tank, in grams, is modeled by $M(t)=40t^{2}e^{-t/2}$ for $0\\le t\\le 20$, where $t$ is measured in hours. At what time $t$ is the amount of the chemical increasing most rapidly?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$36.893$",
+     "why": "Reports the largest rate M'(t) rather than the time at which it occurs.",
+     "value": "36.892703"
+    },
+    {
+     "text": "$1.172$",
+     "why": "The rate M'(t) is largest where M''(t) = 0 and M'' changes from positive to negative; solve M''(t) = 0 with a calculator and take the smaller root.",
+     "value": "1.1715729"
+    },
+    {
+     "text": "$2.000$",
+     "why": "Maximizes only the factor 2t - t^2/c of M'(t) and ignores the factor e^(-t/c), which gives t = c.",
+     "value": "2.0000000"
+    },
+    {
+     "text": "$4.000$",
+     "why": "Gives the time at which M' = 0, when the amount itself is greatest, not when it is increasing fastest.",
+     "value": "4.0000000"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 105,
+   "facts": [
+    "A=40",
+    "c=2",
+    "t=1.171573"
+   ],
+   "blueprint": {
+    "id": "c_fastest_increase_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Find when a quantity is increasing most rapidly by maximizing its rate of change, using the second derivative",
+    "topic": "5.5",
+    "skill": "3.E",
+    "student_thinking": [
+     "Recognize that the rate of change M' must be maximized",
+     "Solve M''(t) = 0 with a calculator and choose the root where M' has its maximum",
+     "Compare with the endpoints if necessary"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "the greatest rate occurs where M'' changes sign from positive to negative or at an endpoint",
+      "evidence": "M'' is positive then negative at the smaller root"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "time_of_max_amount",
+      "description": "reports where M' = 0"
+     },
+     {
+      "id": "steepest_decrease",
+      "description": "reports the other root of M''"
+     },
+     {
+      "id": "vertex_of_rate",
+      "description": "uses the vertex of a factor"
+     },
+     {
+      "id": "rate_value",
+      "description": "reports the rate, not the time"
+     }
+    ],
+    "verification": {
+     "independent_path": "the maximum of M' over a 200001-point grid on [0, 10c] (independent of Brent's method on M'')",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5500,
+   "pack_id": "c_fastest_increase_calc-s5500",
+   "explanation_en": "The correct answer is 1.172. The rate M'(t) is largest where M''(t) = 0 and M'' changes from positive to negative; solve M''(t) = 0 with a calculator and take the smaller root.\n36.893 is incorrect: Reports the largest rate M'(t) rather than the time at which it occurs.\n2.000 is incorrect: Maximizes only the factor 2t - t^2/c of M'(t) and ignores the factor e^(-t/c), which gives t = c.\n4.000 is incorrect: Gives the time at which M' = 0, when the amount itself is greatest, not when it is increasing fastest."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_fastest_increase_calc",
+   "facts": [
+    "A=40",
+    "c=2",
+    "t=1.171573"
+   ],
+   "seed": 5500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 105 seconds, calculator required for solving M''=0, with clean numbers.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, with a unique key at 1.172, and it is in scope and suitable. The only flaw is the placeholder 'c' in the explanation for the 2.000 distractor."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Solver must recognize that 'increasing most rapidly' means maximizing M', differentiate twice (product and chain rules), find the critical points of M', and compare M' at the critical points and endpoints (candidates test). The distractors reflect real misconceptions: the maximum value instead of the time, and the maximizer of M instead of M'. The computation is calculator-friendly, and the wording is clear with no extra context.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m05-k0",
+  "cellId": "ap_calculus_ab-m05",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "6.4",
+  "unitCode": "6",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_ftc_second_derivative_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires FTC Part 1 to get F'(x)=sqrt(x^3+2), then a second differentiation with chain rule, then a calculator evaluation at x=1.5. Two to three reasoning steps, clean numbers, misconception-rich distractors (e.g., 2.318 is F'(1.5)). Typical of a standard AP exam item rather than a basic or advanced supplement item.",
+  "payload": {
+   "archetype": "c_ftc_second_derivative_calc",
+   "topic": "6.4",
+   "skill": "1.D",
+   "calculator": "required",
+   "stem": "Let $F(x)=\\int_0^x \\sqrt{t^{3}+2}\\,dt$. What is the value of $F''(1.5)$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$2.497$",
+     "why": "Reports F(p), the value of the accumulation function.",
+     "value": "2.4974803"
+    },
+    {
+     "text": "$2.318$",
+     "why": "Reports F'(p) = g(p), the first derivative, instead of the second derivative.",
+     "value": "2.3184046"
+    },
+    {
+     "text": "$1.456$",
+     "why": "By the Fundamental Theorem, F'(x) is the integrand, so F''(x) is the derivative of the integrand; evaluate it at the given x with a calculator.",
+     "value": "1.4557424"
+    },
+    {
+     "text": "$0.628$",
+     "why": "Reports g'(p)/g(p), the logarithmic derivative of the integrand, instead of g'(p).",
+     "value": "0.62790698"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 90,
+   "facts": [
+    "form=sqrt",
+    "k=2",
+    "p=1.5",
+    "key=1.455742"
+   ],
+   "blueprint": {
+    "id": "c_ftc_second_derivative_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Find the second derivative of an accumulation function by differentiating its integrand",
+    "topic": "6.4",
+    "skill": "1.D",
+    "student_thinking": [
+     "Use the Fundamental Theorem: F' is the integrand",
+     "Differentiate the integrand to get F''",
+     "Evaluate at the given x with a calculator"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "the integrand is continuous and differentiable on the interval, so F is twice differentiable",
+      "evidence": "the integrand is a composition of differentiable functions"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "first_derivative",
+      "description": "reports the first derivative F'"
+     },
+     {
+      "id": "function_value",
+      "description": "reports the value of F itself"
+     },
+     {
+      "id": "wrong_point",
+      "description": "evaluates at the wrong point"
+     },
+     {
+      "id": "log_derivative",
+      "description": "reports the logarithmic derivative of the integrand"
+     }
+    ],
+    "verification": {
+     "independent_path": "F is computed by scipy quad and its second central difference with step 1e-3 is compared with the derivative of the integrand (independent of symbolic differentiation)",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5500,
+   "pack_id": "c_ftc_second_derivative_calc-s5500",
+   "explanation_en": "The correct answer is 1.456. By the Fundamental Theorem, F'(x) is the integrand, so F''(x) is the derivative of the integrand; evaluate it at the given x with a calculator.\n2.497 is incorrect: Reports F(p), the value of the accumulation function.\n2.318 is incorrect: Reports F'(p) = g(p), the first derivative, instead of the second derivative.\n0.628 is incorrect: Reports g'(p)/g(p), the logarithmic derivative of the integrand, instead of g'(p)."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_ftc_second_derivative_calc",
+   "facts": [
+    "form=sqrt",
+    "k=2",
+    "p=1.5",
+    "key=1.455742"
+   ],
+   "seed": 5500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "FTC Part 2 then differentiate the integrand; fits 6.4 and the choose-a-rule skill; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key 1.456 = g'(1.5) is unique. The integrand is smooth on the interval, so F'' exists."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is complete and clear. No stimulus is needed, and none is given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are F, F', and g'/g, each a distinct realistic error. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds. A calculator is used to evaluate decimals, and the F(1.5) distractor needs numerical integration, so the designation is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, the scope fits 6.4 with skill 1.D, and the distractors are distinct and each explained. The calculator requirement is mild, but the designation is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires FTC Part 1 to get F'(x)=sqrt(x^3+2), then a second differentiation with chain rule, then a calculator evaluation at x=1.5. Two to three reasoning steps, clean numbers, misconception-rich distractors (e.g., 2.318 is F'(1.5)). Typical of a standard AP exam item rather than a basic or advanced supplement item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m06-k0",
+  "cellId": "ap_calculus_ab-m06",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "5.12",
+  "unitCode": "5",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_implicit_horizontal_tangent_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires implicit differentiation, recognizing horizontal tangent means numerator 2x+y=0, substituting into the curve to solve for x, then using the quadrant condition to select the correct sign and coordinate. Several reasoning steps with a misconception-rich option set (x-value vs y-value, sign errors), but modest computation and minimal reading.",
+  "payload": {
+   "archetype": "c_implicit_horizontal_tangent_calc",
+   "topic": "5.12",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "The curve $x^{2}+xy+y^{2}=10$ has a horizontal tangent at two points. What is the $y$-coordinate of the one that lies in the fourth quadrant?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$-1.826$",
+     "why": "Sets the denominator x + 2y equal to zero, which gives the vertical tangent condition.",
+     "value": "-1.8257419"
+    },
+    {
+     "text": "$-3.651$",
+     "why": "dy/dx = -(2x + y)/(x + 2y) = 0 requires y = -2x; substituting into the equation gives 3x^2 = c, so x = sqrt(c/3) and y = -2 sqrt(c/3), evaluated with a calculator.",
+     "value": "-3.6514837"
+    },
+    {
+     "text": "$-3.162$",
+     "why": "Sets the numerator 2x + y equal to zero but substitutes y = -x, so it solves 1 x^2 = c.",
+     "value": "-3.1622777"
+    },
+    {
+     "text": "$3.651$",
+     "why": "Reports the positive y-coordinate of the symmetric point in the second quadrant.",
+     "value": "3.6514837"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "c=10",
+    "y=-3.651484"
+   ],
+   "blueprint": {
+    "id": "c_implicit_horizontal_tangent_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Locate the points of an implicit curve with a horizontal tangent from dy/dx = 0",
+    "topic": "5.12",
+    "skill": "1.E",
+    "student_thinking": [
+     "Differentiate implicitly to find dy/dx",
+     "Set the numerator equal to zero to get a relation between x and y",
+     "Substitute into the curve equation and choose the point in the stated quadrant"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "a horizontal tangent needs dy/dx = 0 with a nonzero denominator",
+      "evidence": "at y = -2x the denominator x + 2y = -3x is not zero"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_quadrant",
+      "description": "reports the other point"
+     },
+     {
+      "id": "x_not_y",
+      "description": "reports the x-coordinate"
+     },
+     {
+      "id": "wrong_relation",
+      "description": "uses y = -x"
+     },
+     {
+      "id": "vertical_tangent_condition",
+      "description": "uses the denominator"
+     }
+    ],
+    "verification": {
+     "independent_path": "the curve is solved for y(x) on a 200000-point grid and the point with the smallest slope magnitude is located (independent of the algebraic substitution)",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5500,
+   "pack_id": "c_implicit_horizontal_tangent_calc-s5500",
+   "explanation_en": "The correct answer is -3.651. dy/dx = -(2x + y)/(x + 2y) = 0 requires y = -2x; substituting into the equation gives 3x^2 = c, so x = sqrt(c/3) and y = -2 sqrt(c/3), evaluated with a calculator.\n-1.826 is incorrect: Sets the denominator x + 2y equal to zero, which gives the vertical tangent condition.\n-3.162 is incorrect: Sets the numerator 2x + y equal to zero but substitutes y = -x, so it solves 1 x^2 = c.\n3.651 is incorrect: Reports the positive y-coordinate of the symmetric point in the second quadrant."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_implicit_horizontal_tangent_calc",
+   "facts": [
+    "c=10",
+    "y=-3.651484"
+   ],
+   "seed": 5500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Implicit differentiation to find horizontal tangents, 5.12 / 1.E. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "y=-2x, 3x^2=10, fourth quadrant gives y=-3.651. Unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct: vertical-tangent condition, y=-x, wrong quadrant. The explanation covers each. The blueprint's x_not_y misconception is not used by any option, but that does not matter."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, light calculator use, options are parallel decimals."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, has a unique key, fits topic 5.12 and skill 1.E, and its distractors are distinct and realistic. It is suitable for the calculator section."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires implicit differentiation, recognizing horizontal tangent means numerator 2x+y=0, substituting into the curve to solve for x, then using the quadrant condition to select the correct sign and coordinate. Several reasoning steps with a misconception-rich option set (x-value vs y-value, sign errors), but modest computation and minimal reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m07-k0",
+  "cellId": "ap_calculus_ab-m07",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "3.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_increasing_interval_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: differentiate, solve f'(x)=0 with the calculator (root ~2.153), then test the sign of f' on each side. The distractors reflect common misconceptions (swapped increasing/decreasing, whole interval, ln 4 from dropping x). There are no theorem hypotheses to check and only one representation (an algebraic expression). Reading and computation loads are low.",
+  "payload": {
+   "archetype": "c_increasing_interval_calc",
+   "topic": "5.3",
+   "skill": "3.E",
+   "calculator": "required",
+   "stem": "Let $f(x)=e^{x}-2x^{2}$ for $1\\le x\\le 5$. On which of the following intervals is $f$ increasing?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$(1, 2.153)$",
+     "why": "Reverses the sign analysis: f' is negative on this interval, so f is decreasing there.",
+     "value": null
+    },
+    {
+     "text": "$(1, 5)$",
+     "why": "Treats f as increasing on the whole interval because f' is positive at the right endpoint.",
+     "value": null
+    },
+    {
+     "text": "$(1.386, 5)$",
+     "why": "Uses the zero of the second derivative, where the graph changes concavity, instead of the zero of f'.",
+     "value": null
+    },
+    {
+     "text": "$(2.153, 5)$",
+     "why": "f'(x) = e^(x) - 4x is negative on (1, 2.153) and positive on (2.153, 5), where f' = 0 at x = 2.153 (found with a calculator), so f is increasing on (2.153, 5).",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 100,
+   "facts": [
+    "a=1.0",
+    "b=2",
+    "r=2.153292"
+   ],
+   "blueprint": {
+    "id": "c_increasing_interval_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Determine the interval of increase of a function by solving f'(x) = 0 numerically and reading the sign of f'",
+    "topic": "5.3",
+    "skill": "3.E",
+    "student_thinking": [
+     "Compute f' and find its zero on the interval with a calculator",
+     "Check the sign of f' on each side of the zero",
+     "Name the interval where f' is positive"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "f is increasing where f' > 0",
+      "evidence": "f' changes sign once on the interval, from negative to positive"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "reversed_signs",
+      "description": "uses the interval where f' is negative"
+     },
+     {
+      "id": "whole_interval",
+      "description": "assumes f increases on the whole interval"
+     },
+     {
+      "id": "second_derivative_zero",
+      "description": "uses the zero of f''"
+     },
+     {
+      "id": "zero_of_f",
+      "description": "uses the zero of f"
+     }
+    ],
+    "verification": {
+     "independent_path": "the sign of a central-difference derivative is checked at 401 points of [1, 5], with the single sign change located at the reported zero (independent of Brent's method)",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5501,
+   "pack_id": "c_increasing_interval_calc-s5501",
+   "explanation_en": "The correct answer is (2.153, 5). f'(x) = e^(x) - 4x is negative on (1, 2.153) and positive on (2.153, 5), where f' = 0 at x = 2.153 (found with a calculator), so f is increasing on (2.153, 5).\n(1, 2.153) is incorrect: Reverses the sign analysis: f' is negative on this interval, so f is decreasing there.\n(1, 5) is incorrect: Treats f as increasing on the whole interval because f' is positive at the right endpoint.\n(1.386, 5) is incorrect: Uses the zero of the second derivative, where the graph changes concavity, instead of the zero of f'."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_increasing_interval_calc",
+   "facts": [
+    "a=1.0",
+    "b=2",
+    "r=2.153292"
+   ],
+   "seed": 5501
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.3 with a calculator-solved zero of f'. Skill 3.E is only weakly assessed because the item asks for the interval and no written justification, but the options encode sign-of-f' reasoning."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f'=e^x-4x is negative at 1 and positive at 5, with a single zero at 2.153 on [1,5]. The key (2.153,5) is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The domain is stated and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (reversed signs, whole interval, zero of f''), each explained. The 1.386 option matches ln 4, the zero of f''."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, calculator use is appropriate, and the numbers are clean."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, with a unique key and well-motivated distractors. The only mild concern is that it assesses the justification skill 3.E only implicitly."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: differentiate, solve f'(x)=0 with the calculator (root ~2.153), then test the sign of f' on each side. The distractors reflect common misconceptions (swapped increasing/decreasing, whole interval, ln 4 from dropping x). There are no theorem hypotheses to check and only one representation (an algebraic expression). Reading and computation loads are low.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m08-k0",
+  "cellId": "ap_calculus_ab-m08",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "6.7",
+  "unitCode": "6",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_integral_equation_solve_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The integrand has no elementary antiderivative, so the student must use the calculator's numerical integration, either solving the equation or testing the options. Conceptual depth is low, with a single procedure and clean numbers. The distractors are plausible but not tied to specific misconceptions. This fits an early-practice skill 1.E item rather than a full-mock item.",
+  "payload": {
+   "archetype": "c_integral_equation_solve_calc",
+   "topic": "6.7",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "For $k>0$, let $I(k)=\\int_0^{k} e^{-t^{2}/2}\\,dt$. For what value of $k$ is $I(k)=0.69$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$1.816$",
+     "why": "Uses the full area under the curve divided by the target.",
+     "value": "1.8163973"
+    },
+    {
+     "text": "$0.756$",
+     "why": "I(k) is increasing in k, so solve I(k) = m with a calculator (numerical integration and a solver).",
+     "value": "0.75631617"
+    },
+    {
+     "text": "$0.378$",
+     "why": "Solves for the k that makes the integral from -k to k equal to m, which is half the needed upper limit.",
+     "value": "0.37815809"
+    },
+    {
+     "text": "$0.861$",
+     "why": "Solves e^(-k^2/c) = m, setting the integrand instead of the integral equal to the target.",
+     "value": "0.86146814"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 95,
+   "facts": [
+    "c=2",
+    "m=0.69",
+    "k=0.756316"
+   ],
+   "blueprint": {
+    "id": "c_integral_equation_solve_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Solve for the upper limit of an integral that equals a given value, using a calculator",
+    "topic": "6.7",
+    "skill": "1.E",
+    "student_thinking": [
+     "Recognize that I(k) is increasing in k so the equation has one solution",
+     "Set up the equation I(k) = m with a numerical integral",
+     "Solve numerically for k"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "I is continuous and increasing with I(0) = 0 and a limit larger than m",
+      "evidence": "the integrand is positive"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "integrand_equals_target",
+      "description": "sets the integrand equal to the target"
+     },
+     {
+      "id": "constant_integrand",
+      "description": "treats the integrand as 1"
+     },
+     {
+      "id": "symmetric_interval",
+      "description": "uses -k to k"
+     },
+     {
+      "id": "total_over_target",
+      "description": "divides the total area by the target"
+     }
+    ],
+    "verification": {
+     "independent_path": "bisection on the numerically integrated I(k) (independent of the inverse error function used to build the key)",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5500,
+   "pack_id": "c_integral_equation_solve_calc-s5500",
+   "explanation_en": "The correct answer is 0.756. I(k) is increasing in k, so solve I(k) = m with a calculator (numerical integration and a solver).\n1.816 is incorrect: Uses the full area under the curve divided by the target.\n0.378 is incorrect: Solves for the k that makes the integral from -k to k equal to m, which is half the needed upper limit.\n0.861 is incorrect: Solves e^(-k^2/c) = m, setting the integrand instead of the integral equal to the target."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_integral_equation_solve_calc",
+   "facts": [
+    "c=2",
+    "m=0.69",
+    "k=0.756316"
+   ],
+   "seed": 5500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Solving I(k)=m for the upper limit with a calculator fits 6.7 and 1.E; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "I is increasing with total area about 1.2533, so the solution is unique. I(0.756) is about 0.69, and the independent solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, and the options are given to three decimals."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are numerically distinct: -k to k gives 0.378, the integrand set equal to the target gives 0.861, and total/target gives 1.816. The explanations are slightly sloppy: a stray 'c' appears in one, and the correct-option rationale is generic. They are acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task takes about 90 seconds on a calculator, which is typical, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique and correct, the scope fits, and the load is typical of the exam. The distractor explanations have minor wording flaws (a stray 'c', a generic correct-option rationale) but are acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The integrand has no elementary antiderivative, so the student must use the calculator's numerical integration, either solving the equation or testing the options. Conceptual depth is low, with a single procedure and clean numbers. The distractors are plausible but not tied to specific misconceptions. This fits an early-practice skill 1.E item rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m09-k0",
+  "cellId": "ap_calculus_ab-m09",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "2.2",
+  "unitCode": "2",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_limit_def_derivative_calc",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_exam_suitability; instant_reject_out_of_scope_knowledge; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Recognize the limit as f'(3) and evaluate it with the calculator's numerical derivative (the chain rule would also work but is out of Unit 2 scope). Short stem, easy numbers, distractors map to plausible slips such as 1/(x^2+1), f(3)=ln10. Single concept, few steps.",
+  "payload": {
+   "archetype": "c_limit_def_derivative_calc",
+   "topic": "2.2",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "Let $f(x)=\\ln{\\left(x^{2} + 1 \\right)}$. What is the value of $\\displaystyle\\lim_{h\\to 0}\\dfrac{f(3+h)-f(3)}{h}$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$-0.160$",
+     "why": "Reports the second derivative at the point instead of the first.",
+     "value": "-0.16000000"
+    },
+    {
+     "text": "$0.600$",
+     "why": "The limit is the definition of f'(3) for f(x) = \\ln{\\left(x^{2} + 1 \\right)}; differentiate and evaluate with a calculator.",
+     "value": "0.60000000"
+    },
+    {
+     "text": "$0.100$",
+     "why": "Differentiates only part of the expression (a single factor or the outer function) and ignores the rest.",
+     "value": "0.10000000"
+    },
+    {
+     "text": "$2.303$",
+     "why": "Reports the value of the function f(a), the first term of the difference quotient, instead of the limit.",
+     "value": "2.3025851"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 95,
+   "facts": [
+    "form=lnsq",
+    "a=3",
+    "fprime=0.600000"
+   ],
+   "blueprint": {
+    "id": "c_limit_def_derivative_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Recognize a limit of a difference quotient as a derivative at a point and evaluate it",
+    "topic": "2.2",
+    "skill": "1.E",
+    "student_thinking": [
+     "Identify f(x) and the point a from the difference quotient",
+     "Differentiate f using the chain or product rule",
+     "Evaluate f'(a) with a calculator"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "the limit of the difference quotient defines f'(a) when f is differentiable at a",
+      "evidence": "f is differentiable at a"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "function_value",
+      "description": "reports f(a)"
+     },
+     {
+      "id": "slope_from_origin",
+      "description": "reports f(a)/a"
+     },
+     {
+      "id": "outer_derivative_only",
+      "description": "forgets the chain rule factor"
+     },
+     {
+      "id": "second_derivative",
+      "description": "reports f''(a)"
+     }
+    ],
+    "verification": {
+     "independent_path": "the difference quotient is evaluated numerically with h = 10^-6 (symmetric) and h = 10^-7 (one-sided) and compared with the symbolic derivative",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5500,
+   "pack_id": "c_limit_def_derivative_calc-s5500",
+   "explanation_en": "The correct answer is 0.600. The limit is the definition of f'(3) for f(x) = \\ln{\\left(x^{2} + 1 \\right)}; differentiate and evaluate with a calculator.\n-0.160 is incorrect: Reports the second derivative at the point instead of the first.\n0.100 is incorrect: Differentiates only part of the expression (a single factor or the outer function) and ignores the rest.\n2.303 is incorrect: Reports the value of the function f(a), the first term of the difference quotient, instead of the limit."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_limit_def_derivative_calc",
+   "facts": [
+    "form=lnsq",
+    "a=3",
+    "fprime=0.600000"
+   ],
+   "seed": 5500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Evaluating the limit as f'(3) for ln(x^2+1) requires the chain rule, which is Unit 3 and explicitly out of scope for Unit 2. The blueprint's own student thinking says 'chain or product rule'."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f'(3)=6/10=0.600 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Clear stem; no stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors f''(3), f(3), and outer-derivative-only 0.1 are plausible. The 0.100 rationale is vague, though."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The calculator designation is artificial: the work is differentiating by the chain rule and then plugging in, which is not a Unit 2 task."
+   },
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item requires the chain rule to differentiate ln(x^2+1), which is Unit 3 content and out of scope for Unit 2 topic 2.2. Reject."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Recognize the limit as f'(3) and evaluate it with the calculator's numerical derivative (the chain rule would also work but is out of Unit 2 scope). Short stem, easy numbers, distractors map to plausible slips such as 1/(x^2+1), f(3)=ln10. Single concept, few steps.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m10-k0",
+  "cellId": "ap_calculus_ab-m10",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_max_speed_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must differentiate position to get velocity, differentiate again and solve a(t)=0 with a calculator, then compare |v| at the critical points and both endpoints. The distractors (the endpoint value 9.845, v(0)=2) reward skipping the interior critical-point check. The skills are all in scope for AB, with a moderate number of steps and no unfair sources of difficulty.",
+  "payload": {
+   "archetype": "c_max_speed_calc",
+   "topic": "4.2",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "A particle moves along the $x$-axis so that its position at time $t$ is $x(t)=e^{t/3}\\sin(2t)$ for $0\\le t\\le 5$. What is the greatest speed of the particle on this interval?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$2.000$",
+     "why": "Reports the speed at time t = 0 only.",
+     "value": "2.0000000"
+    },
+    {
+     "text": "$10.165$",
+     "why": "Speed is |x'(t)|; find where the acceleration is zero (and the endpoints) with a calculator and compare |x'| at those times; the largest value is the greatest speed.",
+     "value": "10.165433"
+    },
+    {
+     "text": "$3.754$",
+     "why": "Reports the greatest distance from the origin, the maximum of |x(t)|.",
+     "value": "3.7540011"
+    },
+    {
+     "text": "$9.845$",
+     "why": "Reports the speed at the final time t = T only.",
+     "value": "9.8450165"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 110,
+   "facts": [
+    "k=3",
+    "w=2",
+    "T=5",
+    "speed=10.165433"
+   ],
+   "blueprint": {
+    "id": "c_max_speed_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Find the greatest speed of a particle by the candidates test applied to |v|",
+    "topic": "4.2",
+    "skill": "1.E",
+    "student_thinking": [
+     "Differentiate the position to get the velocity",
+     "Find the critical points of the speed from the zeros of the acceleration with a calculator",
+     "Compare |v| at the critical points and the endpoints"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "speed is |v| and its maximum on a closed interval occurs at an endpoint or where the acceleration is zero",
+      "evidence": "|v| is continuous on the interval"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "velocity_not_speed",
+      "description": "reports the greatest velocity"
+     },
+     {
+      "id": "final_time_only",
+      "description": "uses t = T"
+     },
+     {
+      "id": "initial_time_only",
+      "description": "uses t = 0"
+     },
+     {
+      "id": "max_position",
+      "description": "reports the greatest position"
+     }
+    ],
+    "verification": {
+     "independent_path": "the maximum of |x'(t)| over a 200001-point grid on [0, T] (independent of Brent's method on the acceleration)",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5504,
+   "pack_id": "c_max_speed_calc-s5504",
+   "explanation_en": "The correct answer is 10.165. Speed is |x'(t)|; find where the acceleration is zero (and the endpoints) with a calculator and compare |x'| at those times; the largest value is the greatest speed.\n2.000 is incorrect: Reports the speed at time t = 0 only.\n3.754 is incorrect: Reports the greatest distance from the origin, the maximum of |x(t)|.\n9.845 is incorrect: Reports the speed at the final time t = T only."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_max_speed_calc",
+   "facts": [
+    "k=3",
+    "w=2",
+    "T=5",
+    "speed=10.165433"
+   ],
+   "seed": 5504
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Straight-line motion, greatest speed via candidates test with calculator; fits 4.2/1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answer 10.165, consistent with independent solver and amplitude check."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem is complete; no stimulus needed; interval and position function stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect distinct errors (t=0 only, t=5 only, max |x|); explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 s, calculator required, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound calculator-active MC item on maximum speed; key unique and distractors meaningful."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must differentiate position to get velocity, differentiate again and solve a(t)=0 with a calculator, then compare |v| at the critical points and both endpoints. The distractors (the endpoint value 9.845, v(0)=2) reward skipping the interior critical-point check. The skills are all in scope for AB, with a moderate number of steps and no unfair sources of difficulty.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m11-k0",
+  "cellId": "ap_calculus_ab-m11",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "5.11",
+  "unitCode": "5",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_optimization_rect_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AB optimization: build A(x)=6x cos(x/2) from a geometric description, differentiate with the product and chain rules, solve a transcendental equation with the calculator, and evaluate the area. It takes several steps and a representation change (geometry to function), with distractors for the common half-width error. The numbers are clean and the wording is unambiguous; the calculator use is intended.",
+  "payload": {
+   "archetype": "c_optimization_rect_calc",
+   "topic": "5.11",
+   "skill": "1.D",
+   "calculator": "required",
+   "stem": "A rectangle has its base on the $x$-axis and is symmetric about the $y$-axis, and its upper two vertices lie on the graph of $y=3\\cos\\!\\left(\\dfrac{x}{2}\\right)$ for $-2\\dfrac{\\pi}{2}<x<2\\dfrac{\\pi}{2}$. What is the maximum possible area of such a rectangle?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$18.850$",
+     "why": "Reports the maximum height a of the curve times the full width of the interval.",
+     "value": "18.849556"
+    },
+    {
+     "text": "$6.733$",
+     "why": "The area is A(x) = 2x a cos(x/b) for the right vertex at (x, a cos(x/b)); solve A'(x) = 0 with a calculator and evaluate A there.",
+     "value": "6.7331561"
+    },
+    {
+     "text": "$3.367$",
+     "why": "Uses the half-width x as the whole base, so the area is x a cos(x/b) rather than 2 x a cos(x/b).",
+     "value": "3.3665780"
+    },
+    {
+     "text": "$6.664$",
+     "why": "Takes the rectangle with half-width x = b pi/4, the middle of the interval, without optimizing.",
+     "value": "6.6643244"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 105,
+   "facts": [
+    "a=3",
+    "b=2",
+    "xstar=1.720667",
+    "Amax=6.733156"
+   ],
+   "blueprint": {
+    "id": "c_optimization_rect_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Maximize the area of a rectangle inscribed under a cosine curve by solving A'(x) = 0 numerically",
+    "topic": "5.11",
+    "skill": "1.D",
+    "student_thinking": [
+     "Write the area of the symmetric rectangle in terms of the x-coordinate of a vertex",
+     "Differentiate and solve A'(x) = 0 on the allowed interval with a calculator",
+     "Evaluate A at the solution (the area vanishes at both ends)"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "A is continuous and zero at both ends of the interval, so an interior solution of A' = 0 gives the maximum",
+      "evidence": "A(0) = 0 and A at the right end is 0"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "no_optimization",
+      "description": "uses a convenient x without optimizing"
+     },
+     {
+      "id": "location_not_value",
+      "description": "reports the x-coordinate"
+     },
+     {
+      "id": "half_width",
+      "description": "uses half the base"
+     },
+     {
+      "id": "rough_bound",
+      "description": "uses a crude bound"
+     }
+    ],
+    "verification": {
+     "independent_path": "the maximum of A over a 200001-point grid on the allowed interval (independent of Brent's method on A')",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5500,
+   "pack_id": "c_optimization_rect_calc-s5500",
+   "explanation_en": "The correct answer is 6.733. The area is A(x) = 2x a cos(x/b) for the right vertex at (x, a cos(x/b)); solve A'(x) = 0 with a calculator and evaluate A there.\n18.850 is incorrect: Reports the maximum height a of the curve times the full width of the interval.\n3.367 is incorrect: Uses the half-width x as the whole base, so the area is x a cos(x/b) rather than 2 x a cos(x/b).\n6.664 is incorrect: Takes the rectangle with half-width x = b pi/4, the middle of the interval, without optimizing."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_optimization_rect_calc",
+   "facts": [
+    "a=3",
+    "b=2",
+    "xstar=1.720667",
+    "Amax=6.733156"
+   ],
+   "seed": 5500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard 5.11 optimization with calculator solve of A'=0; fits topic and skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "6.733 is the unique correct value; the area is zero at both ends so the interior critical point gives the maximum; the solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The domain written as -2π/2 < x < 2π/2 is odd but unambiguous, equal to (-π, π)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct: no optimization, half-width, and a crude bound. The explanation covers every wrong option, though it uses placeholders 'a' and 'b' in the text and the key rationale is thin."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 seconds, calculator required and appropriate, options are short numeric values."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound calculator optimization question with a unique key and distinct distractors. Minor wording issues: the domain is written -2π/2 < x < 2π/2, and the explanations use placeholders 'a' and 'b' instead of numbers. I found no instant-reject conditions."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AB optimization: build A(x)=6x cos(x/2) from a geometric description, differentiate with the product and chain rules, solve a transcendental equation with the calculator, and evaluate the area. It takes several steps and a representation change (geometry to function), with distractors for the common half-width error. The numbers are clean and the wording is unambiguous; the calculator use is intended.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m12-k0",
+  "cellId": "ap_calculus_ab-m12",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "4.5",
+  "unitCode": "4",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_related_rates_angle_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AB related-rates item. The student must choose tan(theta)=h/800, differentiate implicitly with respect to time, and evaluate sec^2(theta) at h=650 (1+(13/16)^2). About 3-4 reasoning steps with moderate computation. The options include a misconception distractor (35/800, which omits the sec^2 factor). The wording is clear, the numbers are manageable, and the content is in scope for Unit 4 AB.",
+  "payload": {
+   "archetype": "c_related_rates_angle_calc",
+   "topic": "4.5",
+   "skill": "1.D",
+   "calculator": "required",
+   "stem": "A camera on the ground is $800$ feet from the base of a vertical launch tower. A rocket rises straight up from the base at a constant $35$ feet per second. Let $\\theta$ be the angle of elevation of the camera, in radians, to the rocket. At the instant the rocket is $650$ feet high, what is the rate of change of $\\theta$, in radians per second?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$0.04375$",
+     "why": "Omits the sec^2 factor and uses d(theta)/dt = v/d.",
+     "value": "0.043750000"
+    },
+    {
+     "text": "$0.02141$",
+     "why": "Uses the height instead of the horizontal distance in the numerator: v h/(d^2 + h^2).",
+     "value": "0.021411765"
+    },
+    {
+     "text": "$0.02635$",
+     "why": "tan(theta) = h/d gives sec^2(theta) d(theta)/dt = (1/d) dh/dt, and sec^2(theta) = (d^2 + h^2)/d^2, so d(theta)/dt = v d/(d^2 + h^2).",
+     "value": "0.026352941"
+    },
+    {
+     "text": "$1.50991$",
+     "why": "Reports the rate in degrees per second.",
+     "value": "1.5099123"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 105,
+   "facts": [
+    "d=800",
+    "h0=650",
+    "v=35",
+    "rate=0.0263529"
+   ],
+   "blueprint": {
+    "id": "c_related_rates_angle_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Solve a related rates problem for an angle of elevation using tan(theta) = h/d",
+    "topic": "4.5",
+    "skill": "1.D",
+    "student_thinking": [
+     "Relate the angle, the fixed distance, and the height with tan(theta) = h/d",
+     "Differentiate implicitly with respect to time",
+     "Substitute the instant's height and rate and evaluate with a calculator"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "the camera distance is constant while the height changes at a known rate",
+      "evidence": "stated in the problem"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "height_in_numerator",
+      "description": "uses h instead of d"
+     },
+     {
+      "id": "missing_secant_squared",
+      "description": "omits the sec^2 factor"
+     },
+     {
+      "id": "missing_distance",
+      "description": "drops the distance factor"
+     },
+     {
+      "id": "degrees",
+      "description": "reports degrees"
+     }
+    ],
+    "verification": {
+     "independent_path": "theta(t) = arctan((h0 + v t)/d) is differentiated by central difference at t = 0 (independent of the implicit differentiation)",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5500,
+   "pack_id": "c_related_rates_angle_calc-s5500",
+   "explanation_en": "The correct answer is 0.02635. tan(theta) = h/d gives sec^2(theta) d(theta)/dt = (1/d) dh/dt, and sec^2(theta) = (d^2 + h^2)/d^2, so d(theta)/dt = v d/(d^2 + h^2).\n0.04375 is incorrect: Omits the sec^2 factor and uses d(theta)/dt = v/d.\n0.02141 is incorrect: Uses the height instead of the horizontal distance in the numerator: v h/(d^2 + h^2).\n1.50991 is incorrect: Reports the rate in degrees per second."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_related_rates_angle_calc",
+   "facts": [
+    "d=800",
+    "h0=650",
+    "v=35",
+    "rate=0.0263529"
+   ],
+   "seed": 5500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 105 seconds, four short numeric options, and light calculator use.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, and its distractors are sound. It is suitable for the AP exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AB related-rates item. The student must choose tan(theta)=h/800, differentiate implicitly with respect to time, and evaluate sec^2(theta) at h=650 (1+(13/16)^2). About 3-4 reasoning steps with moderate computation. The options include a misconception distractor (35/800, which omits the sec^2 factor). The wording is clear, the numbers are manageable, and the content is in scope for Unit 4 AB.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m13-k0",
+  "cellId": "ap_calculus_ab-m13",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_tangent_x_intercept_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires product rule with ln x, evaluating f and f' at 1.5 with a calculator, building the tangent line, and solving for the x-intercept. Multi-step but within Unit 2 scope; distractors reflect sign and procedure errors (e.g., 1.933 from adding instead of subtracting). Numbers are manageable and wording is clear.",
+  "payload": {
+   "archetype": "c_tangent_x_intercept_calc",
+   "topic": "2.7",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "The line tangent to the graph of $f(x)=x\\ln x$ at $x=1.5$ crosses the $x$-axis at $x=c$. What is the value of $c$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$2.355$",
+     "why": "Reports the x-intercept of the normal line instead of the tangent line.",
+     "value": "2.3548006"
+    },
+    {
+     "text": "$1.067$",
+     "why": "The tangent line is y = f(a) + f'(a)(x - a); setting y = 0 gives x = a - f(a)/f'(a), evaluated with a calculator.",
+     "value": "1.0672624"
+    },
+    {
+     "text": "$-1.500$",
+     "why": "Reports the y-intercept of the tangent line instead of the x-intercept.",
+     "value": "-1.5000000"
+    },
+    {
+     "text": "$1.933$",
+     "why": "Adds instead of subtracts: x = a + f(a)/f'(a).",
+     "value": "1.9327376"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 95,
+   "facts": [
+    "form=xln",
+    "a=1.5",
+    "c=1.067262"
+   ],
+   "blueprint": {
+    "id": "c_tangent_x_intercept_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Find where a tangent line crosses the x-axis using f(a) and f'(a)",
+    "topic": "2.7",
+    "skill": "1.E",
+    "student_thinking": [
+     "Compute f(a) and f'(a) with the product rule and a calculator",
+     "Write the tangent line at x = a",
+     "Solve for the x-value where the line equals zero"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "the tangent line has slope f'(a) and passes through (a, f(a)), and f'(a) is not zero",
+      "evidence": "the slope at the point is nonzero"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "sign_error",
+      "description": "adds instead of subtracts"
+     },
+     {
+      "id": "reciprocal_slope",
+      "description": "uses the reciprocal slope"
+     },
+     {
+      "id": "y_intercept",
+      "description": "reports the y-intercept"
+     },
+     {
+      "id": "normal_line",
+      "description": "uses the normal line"
+     }
+    ],
+    "verification": {
+     "independent_path": "the slope is recomputed by central difference (step 1e-6) and the intersection of the numerical tangent line with the x-axis is compared (independent of the symbolic derivative)",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5500,
+   "pack_id": "c_tangent_x_intercept_calc-s5500",
+   "explanation_en": "The correct answer is 1.067. The tangent line is y = f(a) + f'(a)(x - a); setting y = 0 gives x = a - f(a)/f'(a), evaluated with a calculator.\n2.355 is incorrect: Reports the x-intercept of the normal line instead of the tangent line.\n-1.500 is incorrect: Reports the y-intercept of the tangent line instead of the x-intercept.\n1.933 is incorrect: Adds instead of subtracts: x = a + f(a)/f'(a)."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_tangent_x_intercept_calc",
+   "facts": [
+    "form=xln",
+    "a=1.5",
+    "c=1.067262"
+   ],
+   "seed": 5500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Product rule with ln x, tangent line; Unit 2 content, skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "c = 1.5 - 0.6082/1.4055 = 1.067; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (normal line, y-intercept, sign error); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds; calculator use is justified; options are numeric and parallel."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, with distinct distractors and a suitable load, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires product rule with ln x, evaluating f and f' at 1.5 with a calculator, building the tangent line, and solving for the x-intercept. Multi-step but within Unit 2 scope; distractors reflect sign and procedure errors (e.g., 1.933 from adding instead of subtracting). Numbers are manageable and wording is clear.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m14-k0",
+  "cellId": "ap_calculus_ab-m14",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "8.2",
+  "unitCode": "8",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_total_distance_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Total distance requires integrating |v|. The student must find the sign changes of t cos t on [0,5] (t=π/2 and 3π/2), then use the calculator on |v| or split the integral. Distractors reflect the displacement-vs-distance misconception (5.511 as magnitude, -5.511 as signed displacement). Concept depth and steps are typical of a mock-exam item, and the arithmetic is calculator-handled with no ugly numbers or heavy reading.",
+  "payload": {
+   "archetype": "c_total_distance_calc",
+   "topic": "8.2",
+   "skill": "1.D",
+   "calculator": "required",
+   "stem": "A particle moves along a line with velocity $v(t)=t\\cos(t)$ for $0\\le t\\le 5$. What is the total distance traveled by the particle during this time interval?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$5.511$",
+     "why": "Takes the absolute value of the displacement instead of integrating |v|.",
+     "value": "5.5109592"
+    },
+    {
+     "text": "$7.055$",
+     "why": "Total distance is the integral of |v|; find where v changes sign with a calculator and add the absolute values of the integrals on the intervals between sign changes.",
+     "value": "7.0554114"
+    },
+    {
+     "text": "$1.418$",
+     "why": "Reports the final speed |v(T)| instead of a distance.",
+     "value": "1.4183109"
+    },
+    {
+     "text": "$-5.511$",
+     "why": "Reports the displacement, the integral of v, which lets the negative part cancel.",
+     "value": "-5.5109592"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "a=1.0",
+    "T=5.0",
+    "dist=7.055411"
+   ],
+   "blueprint": {
+    "id": "c_total_distance_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Find total distance traveled when the velocity changes sign, using the integral of |v|",
+    "topic": "8.2",
+    "skill": "1.D",
+    "student_thinking": [
+     "Find where v(t) = 0 and check the sign of v on each subinterval",
+     "Integrate |v| piece by piece with a calculator",
+     "Add the distances"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "distance traveled is the integral of speed |v|, not the integral of v",
+      "evidence": "v changes sign inside the interval"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "displacement",
+      "description": "reports the integral of v"
+     },
+     {
+      "id": "first_piece_only",
+      "description": "stops at the first turn"
+     },
+     {
+      "id": "speed_not_distance",
+      "description": "reports a speed"
+     },
+     {
+      "id": "doubled_displacement",
+      "description": "doubles the displacement"
+     }
+    ],
+    "verification": {
+     "independent_path": "|v| is integrated with a composite Simpson rule on 400000 subintervals (independent of the sign-change splitting and scipy quad)",
+     "method": "exact arithmetic + independent numeric cross-check"
+    }
+   },
+   "seed": 5500,
+   "pack_id": "c_total_distance_calc-s5500",
+   "explanation_en": "The correct answer is 7.055. Total distance is the integral of |v|; find where v changes sign with a calculator and add the absolute values of the integrals on the intervals between sign changes.\n5.511 is incorrect: Takes the absolute value of the displacement instead of integrating |v|.\n1.418 is incorrect: Reports the final speed |v(T)| instead of a distance.\n-5.511 is incorrect: Reports the displacement, the integral of v, which lets the negative part cancel."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_total_distance_calc",
+   "facts": [
+    "a=1.0",
+    "T=5.0",
+    "dist=7.055411"
+   ],
+   "seed": 5500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Total distance via the integral of |v| fits topic 8.2 and the skill of choosing the correct procedure."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "7.055 is unique and correct. Verified via F(t)=t sin t+cos t, with sign changes at pi/2 and 3pi/2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is complete and clear, and no stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are displacement, the absolute value of displacement, and v(5)=1.418, which is a valid value. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 100 seconds, requires a calculator, and has short numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well-formed, with plausible distractors and a calculator-appropriate total-distance task. It passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Total distance requires integrating |v|. The student must find the sign changes of t cos t on [0,5] (t=π/2 and 3π/2), then use the calculator on |v| or split the integral. Distractors reflect the displacement-vs-distance misconception (5.511 as magnitude, -5.511 as signed displacement). Concept depth and steps are typical of a mock-exam item, and the arithmetic is calculator-handled with no ugly numbers or heavy reading.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ }
+]
