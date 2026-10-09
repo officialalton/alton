@@ -45,3 +45,9 @@
 - 렌더 검사(로컬, `render-check.ts`): 신규 96건 중 그래프 76 pass(fail 0), 일반·FRQ 20 not_applicable. 보고서 `data/ap/render-check/report.json`.
 - 화면 검증(격리 스택 `scripts/dev/isolated-stack.sh`, Playwright)은 **이번 세션에 실행하지 않았다**(공유 스택이 떠 있는 상태에서 격리 스택·dev 서버·시드를 추가로 띄우는 큰 작업이라 범위 밖으로 두었다). 증거 생성 명령과 오너 적재 절차는 `owner-run-graph-load.md`.
 - 레거시/중복 정리: `graph-stock-survey.ts`(재고 그래프 군집 조사), `graph-precheck.ts`·`graph-gallery.ts`·`graph-lookalike-report.ts`·`graph-batch-summary.ts`·`graph-verdicts.ts`·`graph-finalize.ts`·`frq-precheck.ts`(전부 무료·읽기 전용).
+
+## 정정 (2026-10-09 후속, `exact-assignment-report.md`)
+- §1 표의 S3 후보 수는 MC 42 가 아니라 **MC 45(통과 30·반려 15) + FRQ 2(통과 1·반려 1)** 이다(BC S3c 배치의 MC 3행 누락, 통과도 "MC 28"이 아니라 30). 행 합 37 + 12 + 47 = 96, 통과 MC 69 + FRQ 1, 반려 26, 완전 중복 0.
+- §3·§4 의 부족 수(단계 0 = 1, 단계 3 = 19 등)는 **담금질 휴리스틱의 상한**이어서 폐기한다. 정수계획 정확 해법(게시 AB#1 고정)으로: BC#1 단독 0, AB#2 단독 0, BC#1 + AB#2 0, + BC#2 0, 5세트 동시 MC 2·FRQ 0(형제 21건 증거 포함, 검증 대기 91건이 통과한다는 전제). "단독 1·합동 0"은 합동이 가능하면 단독도 가능하므로 휴리스틱 오류였다.
+- §5 화면 검증은 격리 스택에서 실행돼 신규 70건 전부 통과(`evidence-graph-s1s3.json`, 실패 1건은 오일러 해설 원문 TeX 수정 후 통과).
+- 문항군: 아키타입 코드 기준 69 → 구조 기준 독립 30(`family-structure-review.md`).

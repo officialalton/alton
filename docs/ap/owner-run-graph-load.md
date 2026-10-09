@@ -35,6 +35,15 @@
 - 렌더 dry-run 줄: `렌더 검증 대상 N건, 건너뜀 0건, 이미 검증됨 0건 (후보 N건)`; 화면 dry-run 줄: `화면 검증(대상) 신규 N건, 라벨 갱신 0건, 이미 같은 증거 0건` + `건너뜀 0건`. 렌더·화면 dry-run 은 **적재(②) 뒤에** 의미가 있다(적재 전에는 DB 대상 0건으로 나온다).
 - ⑤ 사후(읽기 전용, 멱등 확인): 적재 dry-run 은 **새 키 0**(이게 멱등 기준)이며 `기존 행 update N, payload 갱신 건너뜀 N` 은 상태 필드 재기록·jsonb 키 순서 차이로 나오는 정상 값이다(검증된 행의 payload·검증 필드는 건드리지 않는다, `lib/ap-generation/import-merge.ts`). 렌더·화면 dry-run 은 `이미 검증됨 N건` / `이미 같은 증거 N건` · 신규 0.
 
+예: `graph-s1-items` 적재 dry-run(예행 연습 출력과 같은 형식, 대상 줄만 다르다):
+```
+재고 행 37건 { auto_passed: 29, rejected: 8 }
+대상: worpsqwqgnspddnrtnvq.supabase.co / dry-run
+병합 계획: 새 키 insert 37, 기존 행 update 0, 변경 없음 0, 검증·변환 보존만 0
+dry-run: 이력 37행, 실제 쓰기 없음(--execute 로 위 계획 적용)
+```
+렌더/화면 dry-run(적재 후): `렌더 검증 대상 29건, 건너뜀 0건, 이미 검증됨 0건 (후보 29건)` / `화면 검증(대상) 신규 29건, 라벨 갱신 0건, 이미 같은 증거 0건` + `건너뜀 0건`. 선택 목록 줄: `선택 목록 29건 중 DB 대상 29건`(반려 8행은 목록에 없다).
+
 ## 파일마다 순서 (각각 dry-run → 건수 확인 → `--execute`)
 1. 적재 dry-run: `npx tsx scripts/ap-generation/import-candidates.ts --items data/ap/stock/<파일>.json --batch <배치 이름> --supplement --report` — 위 표 ① 과 같아야 한다. **갱신 > 0 이거나 새 키가 행 수와 다르면 중단.**
 2. 적재: `--report` 를 `--execute` 로 바꿔 실행 → 출력 `적재 완료: insert <행 수>, update 0`.
