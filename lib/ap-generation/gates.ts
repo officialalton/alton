@@ -9,8 +9,10 @@ export type McPack = {
 };
 export type Row = { row_id: string; points: number; criterion: string; required_elements: string[]; requires_row_id?: string | null; requires_both?: boolean; requires_numbers?: boolean; units_row?: boolean };
 /** 파트마다 평가 스킬(skill_codes)·토픽(topic_codes)·루브릭 행을 가진다. 번들의 대표 스킬(representative_skill)은 라벨일 뿐 파트 스킬과 별개다. */
-export type FrqPart = { label: string; prompt: string; points: number; response_mode: string; skill_codes: string[]; topic_codes?: string[]; model_answer: string; rubric_rows: Row[] };
-export type FrqPack = { archetype: string; template: string; topic: string; skill: string; representative_skill?: string; extra_topics?: string[]; calculator: string; title: string; stimulus: { kind: string; description: string; data: unknown }; parts: FrqPart[]; total_points: number; est_minutes: number; facts: string[] };
+export type FrqPart = { purpose?: string; concept_needed?: boolean; label: string; prompt: string; points: number; response_mode: string; skill_codes: string[]; topic_codes?: string[]; model_answer: string; rubric_rows: Row[] };
+export type ExpectedValue = { part: string; quantity: string; value: number; unit: string; tolerance: number };
+/** expected_values: 기대 수치는 루브릭 문장이 아니라 이 구조화 필드에서만 읽는다(설명 문장 속 숫자는 수치 비교에서 제외). */
+export type FrqPack = { expected_values?: ExpectedValue[]; archetype: string; template: string; topic: string; skill: string; representative_skill?: string; extra_topics?: string[]; calculator: string; title: string; stimulus: { kind: string; description: string; data: unknown }; parts: FrqPart[]; total_points: number; est_minutes: number; facts: string[] };
 
 /** MC 에서 평가되지 않는 공식 스킬(과목별). */
 export const NOT_ASSESSED_MC: Record<string, string[]> = {

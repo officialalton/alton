@@ -155,10 +155,11 @@ d("Biology FRQ: per-part skill/topic/rubric, representative skill vs part skills
     const bio = (o: unknown) => JSON.parse(run("bio_checks.py", JSON.stringify(o)).stdout) as { ok: boolean };
     for (const p of packs.filter((x) => x.archetype === "frq_bio_data_short")) {
       const rows = (p.stimulus.data as { rows: string[][] }).rows; const means = rows.map((r) => Number(r[1].split(" ± ")[0])); const se2 = rows.map((r) => Number(r[1].split(" ± ")[1]));
-      const pct = Number(p.parts[1].model_answer.match(/= (-?[\d.]+)%/)![1]);
-      expect(bio({ kind: "percent_change", params: { old: means[0], new: means[1] }, claim: { pct }, tol: 0.06 }).ok).toBe(true);
-      const ov = bio({ kind: "overlap_claim", params: { m1: means[0], se1: se2[0] / 2, m2: means[1], se2: se2[1] / 2 }, claim: {} });
-      expect(ov).toBeTruthy();
+      const m = p.parts[1].model_answer.match(/\(\((-?[\d.]+) - (-?[\d.]+)\) \/ -?[\d.]+\) x 100 = (-?[\d.]+)%/)!; const pct = Number(m[3]);
+      expect(bio({ kind: "percent_change", params: { old: Number(m[2]), new: Number(m[1]) }, claim: { pct }, tol: 0.06 }).ok).toBe(true);
+      const f = (k: string) => Number((p.facts as string[]).find((x) => x.startsWith(k + "="))!.split("=")[1]); const top = f("top"), second = f("second"); const supported = (p.facts as string[]).includes("supported=True");
+      const ov = bio({ kind: "overlap_claim", params: { m1: means[top], se1: se2[top] / 2, m2: means[second], se2: se2[second] / 2 }, claim: { overlap: !supported } });
+      expect(ov.ok).toBe(true);
     }
   });
 });

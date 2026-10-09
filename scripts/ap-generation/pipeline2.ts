@@ -6,6 +6,7 @@ import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { runBatch, toolInput, estimate, ledger, type BatchReq } from "../mock-exam-generation/batch-lib";
 import { validateBlueprint, type Blueprint } from "../../lib/ap-generation/blueprint";
+import { bioDataShortDesignChecks } from "../../lib/ap-generation/archetype-checks/bio-data-short";
 import { gateBioFrq } from "../../lib/ap-generation/bio-frq-checks";
 import { gateMicroFrq } from "../../lib/ap-generation/micro-frq-checks";
 import { generatorDefects } from "../../lib/ap-generation/generator-defects";
@@ -179,7 +180,8 @@ function checkStage() {
     const cell = cm.get(c.cellId)!;
     let reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...(calcAbGuide ? gateGuideMc(calcAbGuide, c.item as McPack) : []), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet, { requirePartTopics: SUBJECT === "ap_biology" && !process.env.AP_LEGACY_ITEMS, topics: new Set(topicTitle.keys()) }), ...calibrateFrq(c.item as FrqPack, SUBJECT), ...(calcAbGuide ? gateGuideFrq(calcAbGuide, c.item as FrqPack) : [])];
     for (const code of bpCheck()[c.key] ?? []) reasons.push(`blueprint:${code}`); // 설계도 실패는 LLM 단계 전에 차단
-    if (c.item && c.kind === "frq_bundle" && SUBJECT === "ap_biology" && !process.env.AP_LEGACY_ITEMS) reasons.push(...gateBioFrq(c.item as unknown as Record<string, unknown>, { topics: new Set(topicTitle.keys()) }).map((x) => `bio_free:${x.code}`)); // Bio FRQ 무료 결정적 설계 검사
+    if (c.item && c.kind === "frq_bundle" && SUBJECT === "ap_biology" && !process.env.AP_LEGACY_ITEMS) reasons.push(...gateBioFrq(c.item as unknown as Record<string, unknown>, { topics: new Set(topicTitle.keys()) }).map((x) => `bio_free:${x.code}`)); // Bio FRQ 무료 결정적 검사 (공통 (a)(c) 규칙)
+    if (c.item && c.kind === "frq_bundle" && (c.item as unknown as { archetype?: string }).archetype === "frq_bio_data_short") reasons.push(...bioDataShortDesignChecks(c.item as unknown as Record<string, unknown>).map((x) => x.code)); // 원형 내부 설계 조건 (b): 전역 게이트 아님
     if (c.item && c.kind === "frq_bundle" && SUBJECT === "ap_microeconomics" && !process.env.AP_LEGACY_ITEMS) reasons.push(...gateMicroFrq(c.item as unknown as Record<string, unknown>, { topics: new Set(topicTitle.keys()), skills: skillSet }).map((x) => `micro_free:${x.code}`)); // Micro FRQ 무료 결정적 설계 검사
     if (c.item) reasons.push(...generatorDefects(c.item as unknown as Record<string, unknown>).map((d) => `generator_defect:${d.code}`)); // 생성기 결함(중괄호 미닫힘·표 본문 누락 등)은 LLM 단계 전에 차단
     if (process.env.AP_EVAL_BYPASS) reasons = reasons.filter((r) => r.startsWith("generator_defect")); // 결함 주입 평가: 주입과 무관한 구형식 품질 게이트로 평가에서 빠지지 않게 한다
@@ -231,10 +233,11 @@ function solverAgrees(c: Cand, sol: Json | null): { ok: boolean | null; note: st
   for (const pt of f.parts) {
     const a = ans.find((x) => String(x.item).toLowerCase() === pt.label.toLowerCase()); if (!a) { bad.push(`${pt.label}:missing`); continue; }
     if (a.ambiguous_or_flawed) { bad.push(`${pt.label}:flagged`); continue; }
-    const exp = pt.rubric_rows.filter((r) => r.requires_numbers && r.points >= 1).flatMap((r) => r.required_elements.filter((e) => /^\s*[-−]?\d[\d.,]*\s*%?\s*$/.test(e)).flatMap((e) => numsIn(e))).filter((n) => Math.abs(n) > 0); // 순수 수치 요소만(개념 문장 속 "±2SE" 의 2 를 기대값으로 읽지 않는다)
+    const ev = (f.expected_values ?? []).filter((e) => e.part.toLowerCase() === pt.label.toLowerCase()); if (f.expected_values && !ev.length) continue; // 구조화 기대값이 있는 번들: 해당 파트에 기대값이 없으면 수치 비교를 하지 않는다
+    const exp = f.expected_values ? ev.map((e) => e.value).filter((n) => Math.abs(n) > 0) : pt.rubric_rows.filter((r) => r.requires_numbers && r.points >= 1).flatMap((r) => r.required_elements.filter((e) => /^\s*[-−]?\d[\d.,]*\s*%?\s*$/.test(e)).flatMap((e) => numsIn(e))).filter((n) => Math.abs(n) > 0); // 구형 번들만 루브릭의 순수 수치 요소(설명 문장 제외)
     if (!exp.length) continue;
     const got = numsIn(String(a.final_answer ?? "") + " " + String(a.brief_reasoning ?? ""));
-    const hit = exp.filter((e) => got.some((g) => Math.abs(g - e) <= Math.max(0.0015, Math.abs(e) * 0.0015))).length;
+    const tolOf = (e: number) => ev.find((x) => x.value === e)?.tolerance ?? 0; const hit = exp.filter((e) => got.some((g) => Math.abs(g - e) <= Math.max(0.0015, Math.abs(e) * 0.0015, tolOf(e)))).length;
     if (hit / exp.length < 0.5) bad.push(`${pt.label}:numeric`);
   }
   return { ok: bad.length === 0, note: bad.join(",") };
@@ -246,7 +249,7 @@ REFERENCE PATTERN (derived from the official CED sample items): MC ~60-100 secon
 Agreement of an independent solver is supporting evidence only. Fail when unsure.`;
 // 재검증(S2): 코드가 키를 검증하지 않은 기존(LLM 직접 생성) 문항용. 코드 우선 전제 문장을 바꾸고 과목별 공식 기준 메모를 덧붙인다. S1a/S1b(칼큘러스 동결 검토기)에는 영향 없음.
 const SUBJECT_NOTES: Record<string, string> = {
-  ap_biology: "SUBJECT NOTES (AP Biology): four options; items must test data/experiment interpretation, prediction or argumentation, not rote recall, and reject conclusions the data do not support. Every number the item uses must appear in the stimulus data. Free response: judge each PART against its own skill and its own rubric rows (the bundle skill is only a label); long FRQ = 9 points, short FRQ = four 1-point parts. Per-point time estimates are an internal reference only: never reject for estimated minutes. The bundle's representative skill is only a label: NEVER fail scope_skill because the parts assess different official skills. Alternative accepted phrasings listed in a rubric row (alt_solutions) count as accepted answers; do not call a rubric rigid when equivalent wordings are listed. TOPIC FIT is not keyword presence: judge whether answering the parts actually REQUIRES applying the topic concept (for topic 3.2: how pH or temperature changes enzyme structure and activity) rather than only reading numbers from the table; fail scope_skill if most parts can be answered from the table alone.",
+  ap_biology: "SUBJECT NOTES (AP Biology): four options; items must test data/experiment interpretation, prediction or argumentation, not rote recall, and reject conclusions the data do not support. Every number the item uses must appear in the stimulus data. Free response: judge each PART against its own skill and its own rubric rows (the bundle skill is only a label); long FRQ = 9 points, short FRQ = four 1-point parts. Per-point time estimates are an internal reference only: never reject for estimated minutes. The bundle's representative skill is only a label: NEVER fail scope_skill because the parts assess different official skills. Alternative accepted phrasings listed in a rubric row (alt_solutions) count as accepted answers; do not call a rubric rigid when equivalent wordings are listed. TOPIC FIT is judged at the level of the whole bundle, not per part: data-analysis parts that assess the official data skills (describing a table, calculating, statistical reasoning) are legitimate even when they can be answered from the table; do NOT fail scope_skill because some parts do not require the topic concept. Fail scope_skill only if the bundle as a whole never requires the topic concept or the content belongs to another topic.",
   ap_microeconomics: "SUBJECT NOTES (AP Microeconomics): FIVE options (A-E), options may be short sentences; graphs must be fully specified as data (curves or labeled points with prices and quantities); calculations (elasticity, surplus, profit, MR=MC, payoff matrices) must be unambiguous. The bundle's representative skill is only a label: never fail scope_skill because the parts assess different official skills. Rubric rows are judged on meaning; listed alternative wordings count as accepted. Free response: long FRQ = 10 points, short FRQ = 5 points with parts of 1-2 points mixing calculation and explanation (setup and answer rows are normal); judge each part against its own rubric rows, and do not reject for low per-part demand when the grain matches the official short-FRQ format.",
   ap_calculus_ab: "",
 };
