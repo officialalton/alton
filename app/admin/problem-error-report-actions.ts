@@ -68,10 +68,15 @@ export type ApplyVerdictResult = {
 export type ReplacementNeedSummary = {
   openTotal: number;
   openInMockSet: number;
+  /** 활성 세트에 속하지 않은 일반 문항 need(경보에서 분리). 마이그레이션 420 이전 응답에는 없다. */
+  openBankLevel?: number;
+  /** 활성 세트에 더는 없는데 아직 열린 세트 칸 need — '다시 시도'로 정리된다. */
+  staleOpen?: number;
+  bankCells?: { satDomain: string | null; skillCode: string | null; difficulty: string | null; usageScope: string; openCount: number; stock?: number }[];
   autoReplacedTotal: number;
   cells: { satDomain: string | null; skillCode: string | null; difficulty: string | null; moduleKey: string | null; usageScope: string; inMockSet: boolean; openCount: number }[];
-  sets: { examSetId: string; name: string; openCount: number; startedCount: number; noSpareCount: number }[];
-  items: { id: string; problemId: string; moduleKey: string | null; route: string | null; difficulty: string | null; satDomain: string | null; skillCode: string | null; usageScope: string; inMockSet: boolean; openReason: string | null; createdAt: string }[];
+  sets: { examSetId: string; name: string; versionNo?: number; status?: string; openCount: number; startedCount: number; noSpareCount: number }[];
+  items: { id: string; problemId: string; moduleKey: string | null; route: string | null; difficulty: string | null; satDomain: string | null; skillCode: string | null; usageScope: string; inMockSet: boolean; openReason: string | null; createdAt: string; examSetId?: string | null; setName?: string | null; setVersionNo?: number | null; setStatus?: string | null }[];
   replacements: { id: string; examSetId: string; examSetName: string | null; oldProblemId: string; newProblemId: string; moduleKey: string | null; route: string | null; difficulty: string | null; satDomain: string | null; skillCode: string | null; createdAt: string }[];
 };
 
@@ -125,12 +130,12 @@ export async function getReplacementNeedSummaryAction(): Promise<ReplacementNeed
   return data as ReplacementNeedSummary;
 }
 
-export async function retryReplacementAction(): Promise<{ replaced: number; noSpare: number; setStarted: number }> {
+export async function retryReplacementAction(): Promise<{ replaced: number; noSpare: number; setStarted: number; closedStale?: number }> {
   const { supabase } = await requireAdmin();
   const { data, error } = await supabase.rpc("problem_replacement_retry_open");
   if (error) throw new Error(error.message);
   revalidatePath("/admin");
-  return data as { replaced: number; noSpare: number; setStarted: number };
+  return data as { replaced: number; noSpare: number; setStarted: number; closedStale?: number };
 }
 
 export type StatItem = { key: string; reports: number; reportedProblems: number; active: number | null; rate: number | null };
