@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-09T05:30:56.544Z",
- "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json (884행)",
+ "generatedAt": "2026-10-09T06:50:43.939Z",
+ "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json (902행)",
  "all": {
-  "total": 884,
-  "pass": 579,
+  "total": 902,
+  "pass": 595,
   "fail": 1,
-  "notApplicable": 304
+  "notApplicable": 306
  },
  "liveStates": {
-  "total": 460,
-  "pass": 249,
+  "total": 476,
+  "pass": 264,
   "fail": 0,
-  "notApplicable": 211
+  "notApplicable": 212
  },
  "byType": [
   {
@@ -44,8 +44,8 @@
   },
   {
    "type": "ap_graph:calc_function_or_derivative",
-   "total": 38,
-   "pass": 38,
+   "total": 46,
+   "pass": 46,
    "fail": 0,
    "notApplicable": 0
   },
@@ -79,8 +79,8 @@
   },
   {
    "type": "ap_table",
-   "total": 399,
-   "pass": 399,
+   "total": 407,
+   "pass": 407,
    "fail": 0,
    "notApplicable": 0
   },
@@ -121,10 +121,10 @@
   },
   {
    "type": "text",
-   "total": 71,
+   "total": 73,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 71
+   "notApplicable": 73
   }
  ],
  "bySubject": {
@@ -147,15 +147,15 @@
    "notApplicable": 10
   },
   "ap_calculus_bc": {
-   "total": 71,
-   "pass": 0,
+   "total": 89,
+   "pass": 16,
    "fail": 0,
-   "notApplicable": 71
+   "notApplicable": 73
   }
  },
  "figureNeed": {
-  "required": 528,
-  "text_only": 304,
+  "required": 544,
+  "text_only": 306,
   "supporting": 52
  },
  "errorCodes": {
@@ -166,14 +166,14 @@
   "points_only_curve": 24,
   "table_units_missing": 135,
   "data_not_rendered": 128,
-  "derivative_label": 1,
+  "derivative_label": 3,
   "shade_unparsed": 10,
   "axis_label_long": 3,
   "axis_label_defaulted": 6,
   "table_no_title": 107,
   "axis_units_missing": 15,
   "text_data_not_in_stem": 1,
-  "axis_range_derived": 20
+  "axis_range_derived": 28
  },
  "results": [
   {
@@ -15611,6 +15611,316 @@
    "subject": "ap_calculus_ab",
    "kind": "frq_bundle",
    "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m01-k0",
+   "contentHash": "349b794d905e29a28c31030e2c61208ec85284a216cf4cf48461b89c36aeee7e",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: t, 0 to 8. Vertical axis: x'(t), -3 to 7."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m01-k1",
+   "contentHash": "238ccc48dd84e6355209a63e1e818eade522c60ce4a25845dd882ff7b5f267d3",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: t, 0 to 8. Vertical axis: x'(t), -5 to 7."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m02-k0",
+   "contentHash": "1e5c10a9f96114a897cb9dd779a7f3069fdf2feb5595b598cc798f2552b158be",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: θ, 0 to 3. Vertical axis: r, 0 to 4."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m02-k1",
+   "contentHash": "cc498d0b56d9d40198a1941206fa554695a1f482d51ef4af4df36e72f10089b6",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: θ, 0 to 3. Vertical axis: r, 1 to 5."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m03-k0",
+   "contentHash": "4ce812a117fa764911edf9d079d024f038d05b45ec1e2f698f338f2621ce9b7d",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: θ, 0 to 8. Vertical axis: r'(θ), -3 to 3."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m03-k1",
+   "contentHash": "c7d3de2d1c2d0babea16fdea4393c7fad9f4a76292b7ebc51226af67c0206cb3",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: θ, 0 to 8. Vertical axis: r'(θ), -5 to 3."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m04-k0",
+   "contentHash": "8799fc3581d17b0e6c9df2e49877dc78e126d438880f48fc958dbd43938403df",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    },
+    {
+     "level": "warn",
+     "code": "derivative_label",
+     "message": "도함수 그래프인데 y 축 라벨에 f′ 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 4. Vertical axis: f⁽⁴⁾(x), -7 to 4."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m04-k1",
+   "contentHash": "f17a981a778950c85521f19e29b9e42e8e7e7cfed63f35ec93ab5428ca420027",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    },
+    {
+     "level": "warn",
+     "code": "derivative_label",
+     "message": "도함수 그래프인데 y 축 라벨에 f′ 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 4. Vertical axis: f⁽⁴⁾(x), -3 to 5."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m05-k0",
+   "contentHash": "44e278e77835e585484d2685658b1faab0b5fbcc276ea0f1ee9524d522264620",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 6개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Table with columns n, b_n and 6 rows."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m05-k1",
+   "contentHash": "877d5b3dbc077a1fc1787393bb819e2715836d83c9bc07ba7e8cbefe9cb23ffb",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 7개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Table with columns n, b_n and 6 rows."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m06-k0",
+   "contentHash": "cbb76e75e9f3b361093e1621e017fb74d245782a4193af74f8615fe96718b271",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 2개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Table with columns n, f^(n)(0) and 4 rows."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m06-k1",
+   "contentHash": "d5cf1f121fdc7a284e29024e1747a289480949f858f1f72894c5832966666781",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Table with columns n, f^(n)(0) and 4 rows."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m07-k0",
+   "contentHash": "a39550a7d6bccda59a6634efb052c605c097429703d577b239b8025d506c1afc",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 7개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Table with columns θ, r(θ), r'(θ) and 4 rows."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m07-k1",
+   "contentHash": "bafbc2568bb9787c1acb94e73e285690aaedeaac3b1d9f69b5c78b6c099e12a3",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 7개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Table with columns θ, r(θ), r'(θ) and 4 rows."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m08-k0",
+   "contentHash": "749f685e4d53981d1c1e2e38fa5ae43bcb2384f13e95dd50f9824af5228836b5",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 6개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Table with columns t, x'(t), y'(t) and 4 rows."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-m08-k1",
+   "contentHash": "4ab052a13eff7c493ad521db72580bb3a8f837d1c852746b0a424bca6cbd86af",
+   "subject": "ap_calculus_bc",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 9개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Table with columns t, x'(t), y'(t) and 4 rows."
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-f01-k0",
+   "contentHash": "d8363750c1a348c4d89c27418bc9130f9d3c990cebcce94a33f8c76931640e43",
+   "subject": "ap_calculus_bc",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bc-topup-final:ap_calculus_bc-f01-k1",
+   "contentHash": "63834dc67bfa7daaca486d8762c1bdae4750d7344aac6584501c60552692b8bd",
+   "subject": "ap_calculus_bc",
+   "kind": "frq_bundle",
+   "validation": "rejected",
    "stimKind": "text",
    "renderType": "text",
    "need": "text_only",
