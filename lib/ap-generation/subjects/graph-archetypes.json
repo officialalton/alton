@@ -251,6 +251,23 @@
   "bc": true
  },
  {
+  "id": "g_arcsin_deriv_mixed_calc",
+  "topic": "3.4",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of arcsin(g/10) with g interpolated (independent of the derivative formula)"
+  ],
+  "misconceptions": [
+   "omits the inner derivative",
+   "uses the arctan derivative",
+   "omits 1/10",
+   "forgets the root"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_area_between_graph",
   "topic": "8.4",
   "skill": "1.D",
@@ -483,6 +500,23 @@
   "bc": true
  },
  {
+  "id": "g_exp_deriv_mixed_calc",
+  "topic": "2.7",
+  "skill": "1.C",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of exp(g/2) with g interpolated (independent of the chain rule)"
+  ],
+  "misconceptions": [
+   "omits g'/2",
+   "omits the factor 1/2",
+   "differentiates only the exponent",
+   "drops the 1/2 in the exponent"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_exp_growth_constant",
   "topic": "7.8",
   "skill": "1.E",
@@ -615,6 +649,23 @@
    "uses f instead of f'"
   ],
   "bc": false
+ },
+ {
+  "id": "g_geometric_series_graph",
+  "topic": "10.2",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "partial sum of 400 terms computed in floating point (independent of the closed form)"
+  ],
+  "misconceptions": [
+   "inverts the ratio",
+   "adds the four shown terms",
+   "starts at a2",
+   "uses 1 + r"
+  ],
+  "bc": true
  },
  {
   "id": "g_inflow_outflow_graph",
@@ -800,6 +851,23 @@
   "bc": false
  },
  {
+  "id": "g_logistic_fastest_graph",
+  "topic": "7.9",
+  "skill": "2.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "finite-difference growth rate of the plotted curve is largest near P = K/2 (independent of the logistic formula)"
+  ],
+  "misconceptions": [
+   "reports the carrying capacity K",
+   "reports P(0)",
+   "reports K/4",
+   "reports 3K/4"
+  ],
+  "bc": true
+ },
+ {
   "id": "g_mvt_fprime_graph",
   "topic": "5.1",
   "skill": "3.D",
@@ -866,6 +934,22 @@
   "bc": true
  },
  {
+  "id": "g_param_rest_graph",
+  "topic": "9.5",
+  "skill": "2.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical speed from central differences of both interpolated graphs at each interval midpoint (independent of the slope comparison)"
+  ],
+  "misconceptions": [
+   "x constant but y changing",
+   "y constant but x changing",
+   "both coordinates changing"
+  ],
+  "bc": true
+ },
+ {
   "id": "g_param_speed_graphs",
   "topic": "9.6",
   "skill": "2.B",
@@ -881,6 +965,22 @@
    "omits the square root"
   ],
   "bc": true
+ },
+ {
+  "id": "g_position_graph_speed",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference of the interpolated position graph at t = a (independent of the vertex list)"
+  ],
+  "misconceptions": [
+   "reports the negative velocity",
+   "reports the position",
+   "reports average velocity"
+  ],
+  "bc": false
  },
  {
   "id": "g_prod_deriv_mixed_calc",
@@ -1068,6 +1168,22 @@
   "bc": false
  },
  {
+  "id": "g_squeeze_graph",
+  "topic": "1.8",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical limits of g and h at x = a from both sides (independent of the vertex values)"
+  ],
+  "misconceptions": [
+   "reads g elsewhere",
+   "reads h elsewhere",
+   "reads the right end"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_tangent_approx_fprime_graph",
   "topic": "4.6",
   "skill": "1.F",
@@ -1150,6 +1266,23 @@
   "bc": false
  },
  {
+  "id": "g_usub_graph",
+  "topic": "6.9",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical quadrature of x f(x^2) on [0, 2] with the interpolated graph (independent of the substitution)"
+  ],
+  "misconceptions": [
+   "forgets the factor 1/2",
+   "keeps the old limits",
+   "both slips",
+   "uses the wrong du"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_vector_displacement_graph",
   "topic": "9.5",
   "skill": "1.D",
@@ -1164,6 +1297,23 @@
    "adds velocity values"
   ],
   "bc": true
+ },
+ {
+  "id": "g_volume_axis_shift_calc",
+  "topic": "8.10",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "composite Simpson rule on pi((f + s)^2 - (L + s)^2) between the roots (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "uses y = 0",
+   "squares the difference",
+   "subtracts s",
+   "omits the factor pi"
+  ],
+  "bc": false
  },
  {
   "id": "g_volume_base_graph",
