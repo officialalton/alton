@@ -29,4 +29,5 @@
 ## 공유 로컬 DB 쓰기 사고 2 (2026-10-09, 화면 증거 시드)
 - 격리 스택(`ALTON_apev1`, 54521/54522)에서 화면 증거를 만들던 중 `local-demo-seed.ts` 첫 실행 1회가 **DB 쪽만 공유 스택 54422**로 접속(기본값 상수가 `.env.local` 읽기보다 먼저 계산됨). 원인 수정: `local-demo-seed.ts`·`screen-evidence.ts`가 `SUPABASE_TEST_DB_URL` 필수, 544xx 거부, API 포트+1=DB 포트 검사.
 - 감사 조회(읽기 전용, 공유 54422): `ap_candidate_items` run_id `apdemo%` **1행**, `subjects` name `apdemo%` **4행** 잔여(2026-10-09 약 15:40~15:50 UTC). 상태 파일 부재로 시드 `cleanup`으로 못 지움. **삭제·복구는 하지 않음 — 오너 판단 대기.** 비프로덕션·프로덕션은 무관.
+- **정리(2026-10-09, 오너 승인):** 접두어 전체 삭제가 아니라 확인한 정확한 행 ID만 삭제. 사전 점검: 두 테이블을 가리키는 FK 23개 전부 참조 0(과목 AB 1행을 가리키는 `ap_candidate_items` 본 행 제외), `candidate_key` 컬럼이 있는 다른 테이블은 뷰(파생)만 1행씩이고 실테이블 참조 0. 한 트랜잭션에서 `ap_candidate_items` 1행(`apdemomv155sy4-s1-graph-ab-final_ap_calculus_ab-m01-k0`)과 `subjects` 4행(ID `0282b369…`·`b2642f7b…`·`b83b5c70…`·`e3aef5da…`)을 삭제, 삭제 건수 1·4 일치 확인 후 커밋. 사후 `apdemo%` 잔여 0·0. 시퀀스·통계는 원복하지 않음(의도).
 
