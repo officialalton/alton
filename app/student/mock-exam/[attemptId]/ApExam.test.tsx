@@ -10,6 +10,7 @@ vi.mock("@/lib/mock-exam/attempt-actions", () => ({
   saveMockExamSectionTimeAction: vi.fn(async () => ({ ok: true, value: undefined })),
   submitMockExamAttemptAction: (...a: unknown[]) => submit(...a),
   toggleMockExamFlagAction: vi.fn(async () => ({ ok: true, value: undefined })),
+  toggleMockExamGuessedAction: vi.fn(async () => ({ ok: true, value: undefined })),
   toggleMockExamSavedToPracticeAction: vi.fn(async () => ({ ok: true, value: undefined })),
   recordMockExamEntryAction: vi.fn(async () => ({ ok: true, value: undefined })),
   enterApSectionAction: vi.fn(async () => ({ ok: true, value: { remaining: {} } })),
@@ -17,7 +18,7 @@ vi.mock("@/lib/mock-exam/attempt-actions", () => ({
 }));
 vi.mock("@/app/session/[id]/MockExamMathTools", () => ({ default: () => null, MockExamToolButtons: () => <span data-testid="calc-buttons" /> }));
 vi.mock("@/app/components/ProblemErrorReportButton", () => ({ default: () => <button type="button">Report a problem</button> }));
-vi.mock("@/app/components/ProblemNoteCanvas", () => ({ default: () => null }));
+vi.mock("./MockExamWhiteboard", () => ({ default: () => <div data-testid="whiteboard-open" /> }));
 vi.mock("@/lib/problem-error-reports/actions", () => ({ loadMyProblemErrorReportsAction: vi.fn(async () => ({ ok: true, value: {} })), submitProblemErrorReportAction: vi.fn() }));
 
 import ApExamTakeClient from "./ApExamTakeClient";
@@ -190,6 +191,13 @@ describe("결과 화면 보강", () => {
     render(<ApExamResultView attempt={mcOnly()} topicNames={{ "1.4": "Estimating Limit Values from Tables" }} />);
     expect(screen.getByText("Topic 1.4 · Estimating Limit Values from Tables")).toBeInTheDocument();
   });
+  it("Topics to review 는 막대(색 눈금·n/m 글자·약한 순)", () => {
+    const att = base([item("m1", "ap_mc_a", { response: "1", correct: true, satDomain: "ap:1.4" }), item("m2", "ap_mc_a", { response: "0", correct: false, satDomain: "ap:2.3" }), item("m3", "ap_mc_a", { response: "0", correct: false, satDomain: "ap:2.3" })], { status: "graded" });
+    render(<ApExamResultView attempt={att} />);
+    const bars = screen.getByTestId("ap-topic-bars"); expect(bars).toBeInTheDocument();
+    const rows = screen.getAllByText(/^Topic /).map((e) => e.textContent); expect(rows[0]).toBe("Topic 2.3"); // 가장 약한 토픽 먼저
+    expect(screen.getByText("0/2 (0%)")).toBeInTheDocument(); expect(screen.getByText("1/1 (100%)")).toBeInTheDocument();
+  });
   it("재응시 후 Attempt 1 | Attempt 2 전환", () => {
     const att = { ...mcOnly(), id: "att2", attemptNo: 2, attemptTotal: 2 };
     const sum = (id: string, no: number) => ({ id, status: "graded", attemptNo: no }) as never;
@@ -208,5 +216,33 @@ describe("짧은 FRQ 연습 세트의 섹션 탭", () => {
     expect(screen.getByTestId("ap-section-ap_frq_a")).toHaveTextContent("Practice Section: Free Response (calculator allowed)");
     expect(screen.getByTestId("ap-section-ap_frq_a").textContent).not.toMatch(/Part A/);
     expect(screen.getAllByTestId("ap-set-guidance").map((e) => e.textContent).join(" ")).toContain("Practice Section (4 questions, 60 min): calculator allowed.");
+  });
+});
+
+describe("AP 응시 화면 = SAT 응시 화면과 같은 구조(2026-10-09 통일)", () => {
+  it("위 막대(제목·큰 타이머·Submit), 번호판 'x/N answered', 번호 막대 도구, 아래 막대 Solve Later·Guessed·화살표", async () => {
+    render(<ApExamTakeClient attempt={base([item("a1", "ap_mc_a"), item("a2", "ap_mc_a")], { sectionLayout: AP_LAYOUTS.ap_calculus_ab.filter((x) => x.key === "ap_mc_a"), examSetName: "AP Calculus AB — Non-Calculator Practice" })} />);
+    expect(screen.getByTestId("ap-title")).toHaveTextContent("AP Calculus AB — Non-Calculator Practice");
+    expect(screen.getByTestId("ap-exam-timer")).toHaveTextContent(/\d\d:\d\d/);
+    expect(screen.getByTestId("ap-header-submit")).toHaveTextContent("Submit");
+    expect(screen.getByTestId("ap-answered-count")).toHaveTextContent("0/2 answered");
+    await act(async () => { fireEvent.click(screen.getByTestId("ap-option-1")); });
+    expect(screen.getByTestId("ap-answered-count")).toHaveTextContent("1/2 answered");
+    expect(screen.getByTestId("ap-qnum")).toHaveTextContent("1");
+    expect(screen.getByTestId("ap-eliminate-toggle")).toBeInTheDocument();
+    expect(screen.getByTestId("ap-whiteboard-toggle")).toBeInTheDocument();
+    expect(screen.getByTestId("toggle-saved-to-practice")).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByTestId("mock-exam-solve-later-toggle")).toHaveTextContent("Solve Later");
+    expect(screen.getByTestId("mock-exam-guess-toggle")).toHaveTextContent("Guessed");
+    expect(screen.getByRole("button", { name: "Previous question" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Next question" })).toBeEnabled();
+    fireEvent.click(screen.getByTestId("ap-whiteboard-toggle")); expect(screen.getByTestId("whiteboard-open")).toBeInTheDocument();
+  });
+  it("Solve Later 는 번호판에 표시되고, 헤더 Submit 은 제출 확인창을 연다", async () => {
+    render(<ApExamTakeClient attempt={base([item("a1", "ap_mc_a")], { sectionLayout: AP_LAYOUTS.ap_calculus_ab.filter((x) => x.key === "ap_mc_a") })} />);
+    await act(async () => { fireEvent.click(screen.getByTestId("mock-exam-solve-later-toggle")); });
+    expect(screen.getByRole("button", { name: /Question 1.*marked for review/ })).toBeInTheDocument();
+    await act(async () => { fireEvent.click(screen.getByTestId("ap-header-submit")); });
+    expect(screen.getByTestId("ap-exam-submit")).toBeInTheDocument();
   });
 });

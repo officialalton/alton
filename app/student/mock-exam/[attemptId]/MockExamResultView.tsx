@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics/track";
 import { dedupeStem } from "@/lib/problem-text-guards";
 import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
+import { AccuracyBarList } from "@/app/components/AccuracyBars";
 import { computeMockExamReport, weakSkills, type BreakdownRow } from "@/lib/mock-exam/report";
 import { INSUFFICIENT_RESPONSES_TEXT, SCORE_DISCLAIMER_EN, type ScoreRange } from "@/lib/mock-exam/score-estimate";
 import { buildKeyInsights } from "@/lib/mock-exam/insights";
@@ -326,28 +327,10 @@ function InfoDialog({ title, body, onClose }: { title: string; body: string; onC
 
 type Info = { title: string; body: string };
 
-function BreakdownList({ rows, kind, onInfo }: { rows: BreakdownRow[]; kind: "domain" | "skill"; onInfo: (i: Info) => void }) {
+function BreakdownList({ rows, kind, onInfo, size = "sm", highlightFirst = false }: { rows: BreakdownRow[]; kind: "domain" | "skill"; onInfo: (i: Info) => void; size?: "sm" | "lg"; highlightFirst?: boolean }) {
   return (
-    <ul className="flex flex-col gap-1.5">
-      {rows.map((r) => {
-        const body = (kind === "domain" ? satDomainDescription(r.key) : satSkillDescription(r.key)) ?? "No description is available yet.";
-        return (
-          <li key={r.key} className="flex items-center justify-between gap-2 text-[13px]">
-            <button
-              type="button"
-              onClick={() => onInfo({ title: r.label, body })}
-              className="text-left text-grey-700 underline decoration-dotted underline-offset-2 hover:text-ink"
-              aria-haspopup="dialog"
-            >
-              {r.label}
-            </button>
-            <span className="shrink-0 font-bold">
-              {r.correct}/{r.total} ({pct(r.correct, r.total)})
-            </span>
-          </li>
-        );
-      })}
-    </ul>
+    <AccuracyBarList rows={rows} size={size} highlightFirst={highlightFirst}
+      onInfo={(r) => onInfo({ title: r.label, body: (kind === "domain" ? satDomainDescription(r.key) : satSkillDescription(r.key)) ?? "No description is available yet." })} />
   );
 }
 
@@ -638,12 +621,16 @@ export default function MockExamResultView({
                   <>
                     <div>
                       <h4 className="mb-1.5 text-[12px] font-bold uppercase tracking-wide text-grey-500">Domains</h4>
-                      <BreakdownList rows={domains} kind="domain" onInfo={setInfo} />
+                      <BreakdownList rows={domains} kind="domain" onInfo={setInfo} size="lg" />
                     </div>
                     {weak.length > 0 && (
                       <div data-testid="mock-exam-weak-skills">
                         <h4 className="mb-1.5 text-[12px] font-bold uppercase tracking-wide text-grey-500">Skills to Focus On</h4>
-                        <BreakdownList rows={weak} kind="skill" onInfo={setInfo} />
+                        <BreakdownList rows={weak} kind="skill" onInfo={setInfo} highlightFirst />
+                        <p className="mt-2 text-[12px] text-grey-600" data-testid="mock-exam-weak-next-step">
+                          Weakest first. Next step: review the questions you missed in these skills{" "}
+                          <button type="button" onClick={() => setTab("review")} className="font-semibold text-ink underline">Review mistakes</button>.
+                        </p>
                       </div>
                     )}
                     {skills.length > 0 && (

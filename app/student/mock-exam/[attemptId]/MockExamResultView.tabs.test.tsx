@@ -73,6 +73,17 @@ describe("MockExamResultView — 서브탭·영어 UI", () => {
     expect(screen.queryByRole("dialog")).toBeNull();
   });
 
+  it("Results by Domain(시각화): 영역마다 막대·상태 글자·n/m(p%) 글자, 약한 스킬은 약한 순으로 첫 행 강조 + 다음 행동 안내", () => {
+    render(<MockExamResultView attempt={attempt(items)} readOnly={false} />);
+    fireEvent.click(screen.getByRole("tab", { name: "Results by Domain" }));
+    const rw = screen.getByTestId("mock-exam-domain-rw");
+    expect(within(rw).getAllByRole("meter").length).toBeGreaterThan(0);
+    expect(within(rw).getAllByText(/\d+\/\d+ \(\d+%\)/).length).toBeGreaterThan(0);
+    expect(within(rw).getAllByText(/Needs work|Fair|Strong|No data/).length).toBeGreaterThan(0);
+    const weak = screen.queryAllByTestId("mock-exam-weak-skills");
+    for (const w of weak) { expect(within(w).getByTestId("mock-exam-weak-next-step")).toHaveTextContent("Next step: review the questions you missed"); const first = w.querySelector("li")!; expect(first.className).toMatch(/border-red/); }
+  });
+
   it("Review Mistakes: 필터 없이 R&W 먼저 나열하고, 번호·Guessed·정오 칸이 있다", () => {
     render(<MockExamResultView attempt={attempt(items)} readOnly={false} />);
     fireEvent.click(screen.getByRole("tab", { name: "Review Mistakes" }));
