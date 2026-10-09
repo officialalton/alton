@@ -217,8 +217,8 @@ export function planFrqShortSet(subject: string, pool: AssembleCandidate[], opts
   const base = apSectionLayout0(subject);
   const secA = base.find((x) => x.key === "ap_frq_a"), secB = base.find((x) => x.key === "ap_frq_b");
   const layoutSections: ApSection[] = [];
-  if (allowed.length && secA) layoutSections.push({ ...secA, count: allowed.length, minutes: allowed.length * FRQ_MINUTES_PER_BUNDLE });
-  if (notAllowed.length && secB) layoutSections.push({ ...secB, count: notAllowed.length, minutes: notAllowed.length * FRQ_MINUTES_PER_BUNDLE });
+  if (allowed.length && secA) layoutSections.push({ ...secA, label: `Practice Section${notAllowed.length ? " 1" : ""}: Free Response (calculator allowed)`, count: allowed.length, minutes: allowed.length * FRQ_MINUTES_PER_BUNDLE });
+  if (notAllowed.length && secB) layoutSections.push({ ...secB, label: `Practice Section${allowed.length ? " 2" : ""}: Free Response (no calculator)`, count: notAllowed.length, minutes: notAllowed.length * FRQ_MINUTES_PER_BUNDLE });
   const items: AssemblePlan["items"] = [];
   allowed.forEach((c, i) => items.push({ sectionKey: "ap_frq_a", position: i + 1, c }));
   notAllowed.forEach((c, i) => items.push({ sectionKey: "ap_frq_b", position: i + 1, c }));

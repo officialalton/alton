@@ -12,7 +12,7 @@ import {
   toggleMockExamSavedToPracticeAction,
   recordMockExamEntryAction,
 } from "@/lib/mock-exam/attempt-actions";
-import { AP_SUBJECT_NAME, CALCULATOR_TEXT, apBadgeText, apCoverageLines, apGuidanceLines, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
+import { AP_SUBJECT_NAME, CALCULATOR_TEXT, apBadgeText, apCoverageLines, apGuidanceLines, apSectionDisplayLabel, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
 import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
 import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 import { frqAnswerToJson, parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
@@ -215,7 +215,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
             {layout.map((s) => (
               <button key={s.key} type="button" onClick={() => void switchSection(s.key)} data-testid={`ap-section-${s.key}`}
                 className={`rounded-full px-3 py-1.5 text-[12px] font-bold ${section.key === s.key ? "bg-ink text-white" : "bg-grey-100 text-grey-600"}`}>
-                {s.label}{locked[s.key] ? " (Time's up)" : ""}
+                {apSectionDisplayLabel(s, attempt.sectionLayout)}{locked[s.key] ? " (Time's up)" : ""}
               </button>
             ))}
           </div>
