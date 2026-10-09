@@ -9,7 +9,7 @@ const PY = process.env.AP_PY ?? "python3";
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 const n = Number(process.argv[2] ?? 100), seed = Number(process.argv[3] ?? 3000);
 const cur = JSON.parse(readFileSync("data/ap/curriculum-2027/ap_biology.json", "utf-8")) as ApCurriculumFile; const topics = new Set(cur.units.flatMap((u) => u.topics.map((t) => t.code)));
-const check = (p: Json) => [...gateBioFrq(p, { topics }), ...bioDataShortDesignChecks(p), ...bundleReferenceChecks(p as never)].map((x: Json) => x.code);
+const check = (p: Json) => [...gateBioFrq(p, { topics }), ...bioDataShortDesignChecks(p), ...bundleReferenceChecks(p as never)].map((x) => (typeof x === "string" ? x : x.code));
 const many = JSON.parse(execFileSync(PY, ["-B", "registry.py", "batch", "frq_bio_data_short", String(n), String(seed)], { cwd: "scripts/ap-generation/archetypes", encoding: "utf-8", maxBuffer: 1 << 29 })) as Json[];
 const bad = many.map((p, i) => [seed + i, check(p)] as const).filter(([, c]) => c.length);
 console.log(`신규 시드 ${n}개(${seed}~): 실패 ${bad.length}`, JSON.stringify(bad.slice(0, 5)));
