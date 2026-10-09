@@ -86,8 +86,15 @@ export function policyFor(kind: "mc" | "frq", count: number): SectionPolicy {
     ? { maxPerFamily: 2, maxPerArchetype: 99, minDistinctFamilies: Math.ceil(count / 2), minDistinctArchetypes: 0 }
     : { maxPerFamily: 1, maxPerArchetype: 2, minDistinctFamilies: count, minDistinctArchetypes: Math.ceil((count * 2) / 3) };
 }
-/** 겹침 허용: 풀 모의고사는 0(다른 세트와 문항 공유 없음), 부분 연습은 제한적 허용(기본 문항 수의 20%). 한 세트 안의 중복은 어느 경우에도 없다. */
+/** 겹침(재노출) 정책의 코드 상수 — 기준 문서: docs/ap/publication-flow.md "문항 겹침(재노출) 정책". 문서와 값이 같아야 한다(테스트가 확인).
+ *  - 풀 모의고사: 다른 세트와 문항 공유 0(원칙). 한 세트 안 중복은 어느 경우에도 없다.
+ *  - 부분 연습 세트: 세트당 문항 수의 20%(내림)까지 다른 세트와 겹칠 수 있다. 새 문항을 먼저 쓰고 부족할 때만 겹침 문항을 쓴다.
+ *  - 복습(오답 복습·재응시)의 재사용은 허용 — 조립 규칙이 아니라 노출 구분(최초 노출 vs 재노출)으로 다룬다. */
 export const OVERLAP_DEFAULT = { full: 0, partialFraction: 0.2 } as const;
+export type ExposureKind = "first" | "re_exposure";
+/** 학생이 같은 문항을 이전에 본 횟수(응시 기록)로 노출 종류를 가른다. 약점·난이도 통계는 최초 노출만 새 근거로 센다. */
+export const exposureKindOf = (priorExposures: number): ExposureKind => (priorExposures > 0 ? "re_exposure" : "first");
+export const partialOverlapMax = (totalCount: number): number => Math.floor(totalCount * OVERLAP_DEFAULT.partialFraction);
 export type PartialShortage = { sectionKey: string; need: number; have: number; reasons: string[] };
 export type PartialPlan = {
   ok: boolean; partial: ApPartialId; subject: string; name: string; label: ApSetLabel; labelAllowed: boolean;
@@ -102,7 +109,7 @@ export function planPartialSet(subject: string, partial: ApPartialId, pool: Asse
   const used = opts.used ?? new Set<string>();
   const sections = sectionsForPartial(subject, partial);
   const totalCount = sections.reduce((a, x) => a + x.count, 0);
-  const overlapMax = opts.overlapMax ?? Math.floor(totalCount * OVERLAP_DEFAULT.partialFraction);
+  const overlapMax = opts.overlapMax ?? partialOverlapMax(totalCount);
   const eligible = pool.filter((c) => c.purpose === "mock_exam" && (c.releaseTier === "review_env" || c.releaseTier === "launch"));
   const taken = new Set<string>(); const fam = new Map<string, number>(); const arch = new Map<string, number>();
   let overlapUsed = 0;

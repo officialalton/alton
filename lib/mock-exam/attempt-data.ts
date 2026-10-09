@@ -225,6 +225,8 @@ export type MockExamCatalogRow = {
   examProgram?: "sat" | "ap";
   apSubject?: string | null;
   apLabel?: "full_practice" | "mc_practice" | "frq_practice" | null;
+  /** AP 세트의 공식 섹션 구성(문항 수·시간·계산기) — 목록의 배지·시작 안내에 쓴다. */
+  apSections?: { key: string; kind: "mc" | "frq"; label: string; minutes: number; count: number; calculator: "allowed" | "not_allowed" | "required" | "na" }[] | null;
 };
 
 /** 공개된 모의고사 세트 전체 + 그 학생의 응시 상태 — RPC 한 번(N+1 없음). 학생 본인·학부모·교사·컨설턴트·관리자 열람용. */

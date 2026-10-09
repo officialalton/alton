@@ -10,12 +10,13 @@ vi.mock("./mock-exam/[attemptId]/ApExamResultView", () => ({ default: () => <div
 import StudentMockExamTab from "./StudentMockExamTab";
 import { buildMockExamListRows, pickNextPracticeTest } from "@/lib/mock-exam/open-list";
 import type { MockExamOverview } from "@/lib/mock-exam/attempt-data";
+import { AP_LAYOUTS } from "@/lib/ap-exam/layouts";
 
 const overview: MockExamOverview = {
   catalog: [
     { examSetId: "sat1", setGroupId: "g1", name: "SAT Practice Test 1", description: null, difficultyTier: "standard", format: "fixed", publishedAt: null, attemptId: null, attemptStatus: null },
-    { examSetId: "ap1", setGroupId: "g2", name: "AP Calculus AB Full Practice 1", description: null, difficultyTier: "standard", format: "ap_fixed" as never, publishedAt: null, attemptId: null, attemptStatus: null, examProgram: "ap", apSubject: "ap_calculus_ab", apLabel: "full_practice" },
-    { examSetId: "ap2", setGroupId: "g3", name: "AP Biology MC Practice 1", description: null, difficultyTier: "standard", format: "ap_fixed" as never, publishedAt: null, attemptId: null, attemptStatus: null, examProgram: "ap", apSubject: "ap_biology", apLabel: "mc_practice" },
+    { examSetId: "ap1", setGroupId: "g2", name: "AP Calculus AB Full Practice 1", description: null, difficultyTier: "standard", format: "ap_fixed" as never, publishedAt: null, attemptId: null, attemptStatus: null, examProgram: "ap", apSubject: "ap_calculus_ab", apLabel: "full_practice", apSections: AP_LAYOUTS.ap_calculus_ab },
+    { examSetId: "ap2", setGroupId: "g3", name: "AP Biology MC Practice 1", description: null, difficultyTier: "standard", format: "ap_fixed" as never, publishedAt: null, attemptId: null, attemptStatus: null, examProgram: "ap", apSubject: "ap_biology", apLabel: "mc_practice", apSections: AP_LAYOUTS.ap_biology.filter((x) => x.kind === "mc") },
   ],
   attempts: [],
 };

@@ -90,8 +90,33 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 ## 부분 연습 세트(첫 제품 형태, AB·BC) (2026-10-09)
 - 세트 이름: `AP Calculus AB — Non-Calculator Practice`(Part A MC 29문항·62분) / `AP Calculus AB — Calculator Practice`(Part B MC 13문항·38분) / `AP Calculus AB — Free-Response Practice`(FRQ 6문항·90분: A 2·30분 + B 4·60분). BC 도 같은 구조.
 - 공식 파트의 문항 수와 시간을 모두 채운 세트만 이 이름을 쓴다(DB 공개 게이트가 섹션별 문항 수를 강제). 현재 재고를 완전한 모의고사로 부르지 않는다(`full_practice` 는 모든 섹션 충족 때만).
-- 조립 규칙: 모의고사 용도(`mock_exam`) 변환 문항만. 세트 안 중복 없음. 문항군당 MC 2개·FRQ 1개, FRQ 는 유형(archetype)당 2개까지·6문항이면 서로 다른 유형 4개 이상. 다른 세트와의 겹침은 풀 모의고사 0, 부분 연습은 기본 문항 수의 20% 이내(`--overlap-max`). 못 채우면 패딩 없이 부족 칸(문항 수·문항군·유형·단원 비중)을 보고한다.
+- 조립 규칙: 모의고사 용도(`mock_exam`) 변환 문항만. 세트 안 중복 없음. 문항군당 MC 2개·FRQ 1개, FRQ 는 유형(archetype)당 2개까지·6문항이면 서로 다른 유형 4개 이상. 세트 간 겹침은 아래 "문항 겹침(재노출) 정책"이 단일 기준. 못 채우면 패딩 없이 부족 칸(문항 수·문항군·유형·단원 비중)을 보고한다.
 - 가능성 점검: `npx tsx scripts/ap-generation/partial-feasibility.ts`(결과 `data/ap/stock/partial-feasibility.json`). 비프로덕션 실행 명령은 `scripts/ap-generation/assemble-ap-set.ts`·`publish-to-bank.ts` 머리 주석(둘 다 `--target <ref> --i-know-nonprod <ref>` 허용 목록, 기본 dry-run).
 
 ## 8. import 재적재 안전(2026-10-09)
 `import-candidates.ts` 는 이미 DB 에 있는 키의 `render_verified`·`screen_verified`·`render/screen_evidence`·`release_tier`·`problem_id`·`purpose`·`converted_*`·`expert_status` 를 **절대 덮어쓰지 않는다**. 기존 행은 검증 판정 필드(review_state, rejection_reason, gate_version, 문항군·중복·defect_flags, is_current/load_batch_id 등)만 갱신하고, 변환된 행은 판정 **승격**(예: needs_revalidation→auto_passed)에 딸린 3필드(review_state, gate_version, rejection_reason)만 갱신한다. 검증·변환된 행의 판정은 강등하지 않는다. payload 는 내용(stimulus·stem·options·key_index·key_index_final·parts)이 바뀌고 검증·변환되지 않은 행에서만 쓴다(402 트리거가 검증을 푸는 것을 피함). 새 키만 전체 행 insert. 규칙은 순수 함수 `lib/ap-generation/import-merge.ts`(테스트 8건). `--report` 는 dry-run 에서도 보존/갱신 건수와 키 목록을 `data/ap/stock/import-merge-report.json` 에 쓴다. 시뮬레이션(증거 153개 키가 검증·변환된 상태로 있다고 가정): 새 키 68(S1a), 기존 갱신 633, 검증·변환 보존 153(보호 필드 patch 0건), 판정 승격 143(그중 검증·변환 행 3건 — 실제 DB 에서 이 3건이 이미 auto_passed 면 승격 0). 승격 143건은 미검증·미변환 행에 적용되고, 검증·변환 행에 걸리는 키는 `--report` 의 `upgradeOnVerifiedKeys` 로 확인한다.
+
+
+## 문항 겹침(재노출) 정책 — 단일 기준 (2026-10-09 오너 결정)
+이 절이 AP 의 겹침 정책 기준이다(다른 문서의 겹침 언급은 이 절을 따른다). 코드 상수는 `lib/ap-exam/assemble.ts` 의 `OVERLAP_DEFAULT`·`partialOverlapMax`·`exposureKindOf` 이고 테스트가 값을 대조한다.
+
+| 구분 | 다른 세트와의 겹침 | 비고 |
+|---|---|---|
+| **풀 모의고사**(공식 구성 전체) | 원칙적으로 **0**(기본값). 문항 하나는 한 세트에만 | 재고 부족 시 세트 수를 줄이거나 문항을 추가 생성. 겹침을 허용하려면 오너 결정으로 `--overlap-max` 를 명시 |
+| **부분 연습 세트**(Non-Calculator / Calculator / Free-Response) | 세트당 문항 수의 **20%(내림)까지**: Non-Calculator 29문항 → 5, Calculator 13 → 2, FRQ 6 → 1 | 새 문항을 먼저 쓰고 부족할 때만 겹침 문항을 쓴다. `--overlap-max N` 으로 조정 |
+| **복습·재응시** | 재사용 **허용** | 오답 복습·같은 시험 재응시는 같은 문항을 다시 본다 |
+| 한 세트 안 | 어떤 경우에도 **중복 없음** | |
+
+- **최초 노출 vs 재노출**: 학생이 어떤 문항을 처음 보는 것이 최초 노출, 이전에 본 문항을 다시 보는 것(재응시·복습·부분 세트 간 겹침으로 다시 만남)이 재노출이다. 약점·난이도 통계와 "새 문제 풀이" 지표는 **최초 노출만** 새 근거로 센다(`exposureKindOf`). 재노출 결과는 복습 성과로만 본다.
+- SAT 모의고사의 "세트 간 문항 중복 0"(`docs/POLICY-DECISIONS.md`)은 그대로이며, 이 표의 풀 모의고사 기본값 0 과 같은 방향이다.
+
+## 부분 연습 세트의 화면 문구 (2026-10-09)
+- 제목은 세트 이름 그대로(`AP Calculus AB — Non-Calculator Practice` / `— Calculator Practice` / `— Free-Response Practice`). 배지는 세트의 섹션 구성에서 읽어 `Non-Calculator Practice` / `Calculator Practice` / `Free-Response Practice`(`lib/ap-exam/layouts.ts` `apBadgeText`). DB `ap_label` 은 그대로(`mc_practice`/`frq_practice`)라 마이그레이션 없음.
+- 시작 안내(목록·응시·결과 화면): 파트·계산기 규칙·문항 수·시간(`apGuidanceLines`). Non-Calculator = Section I Part A 29문항·62분·계산기 불가, Calculator = Part B 13문항·38분·그래핑 계산기 필수, FRQ = 6문항·90분이며 Part A(2문항·30분) 계산기 허용 / Part B(4문항·60분) 계산기 불가를 각각 표시.
+- `Full Practice Exam` 배지는 세트 구성이 공식 섹션·문항 수·시간과 정확히 같을 때만(`isOfficialFullLayout`). 구성을 알 수 없으면(보관된 지난 응시 행 등) 풀 시험이라고 말하지 않는다(`Practice Set`).
+
+## 결과 화면·응시 흐름 보강 (2026-10-09, 실제 리뷰 환경 점검 반영)
+- 해설 수식: 해설(explanation_en)이 `$...$` 없이 TeX·평문 수식을 섞어 쓴 경우를 렌더 직전에 `$...$` 로 감싸 본문처럼 KaTeX 로 그린다(`lib/ap-exam/explanation-math.ts`; 저장 데이터는 불변). 생성 프롬프트는 이후 해설도 `$...$` 를 요구한다. 자동 화면 점검(증거 v2)에 제출 후 결과 화면 점검 `result_no_raw_tex` 가 필수로 들어가, 해설에 `\\frac`·`\\pi`·`\\int`·`\\displaystyle`·`^{` 가 보이면 실패한다.
+- My Notebook 목록 미리보기도 수식을 그린다. Topics to review 는 코드와 토픽 이름(`Topic 1.4 · …`). MC 전용 세트에는 Free response 탭이 없다. 재응시 뒤 결과 화면에 `Attempt 1 | Attempt 2` 전환이 있다.
+- 시간 소진: 마지막(단일) 섹션이 끝나면 자동 제출, 중간 섹션은 "Go to next section" 버튼(SAT 고정형은 해당 섹션만 잠그고 모든 섹션이 잠기거나 직접 제출할 때 마감 — 단일 섹션인 AP 부분 세트는 자동 제출로 맞춘다).
+- 목록 상태: 카탈로그의 진행 상태를 신뢰해 `In progress — Continue` 로 보인다. AP 는 화면을 여는 순간 타이머가 돌므로 섹션 시간 저장이 'assigned' 응시를 'in_progress' 로 올린다(마이그레이션 `20262100000404`, AP 섹션만, SAT 불변).

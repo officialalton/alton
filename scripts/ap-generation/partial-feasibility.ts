@@ -1,8 +1,8 @@
 // 부분 연습 세트(AB·BC: Non-Calculator / Calculator / Free-Response) 조립 가능성 — 무료·DB 없음.
-// 입력 풀 = 렌더 보고서 통과 + 화면 검증 증거(해시 일치) + 결함 없음 + auto_passed 재고(data/ap/stock/items.json). s1a-items.json 은 렌더되지 않아 제외한다.
-//   npx tsx scripts/ap-generation/partial-feasibility.ts [--evidence data/ap/screen-evidence/evidence-2026-10-09.json] [--overlap-max N]
+// 입력 풀 = 렌더 보고서 통과 + 화면 검증 증거(해시 일치) + 결함 없음 + auto_passed 재고(data/ap/stock/items.json). s1a 보조 후보는 렌더 보고서·화면 증거가 있는 것만 들어온다.
+//   npx tsx scripts/ap-generation/partial-feasibility.ts [--evidence <json>,<json>] [--overlap-max N]   # 기본: data/ap/screen-evidence/evidence-*.json 전부
 // 결과: 콘솔 + data/ap/stock/partial-feasibility.json. 세트를 만들 수 없으면 무엇이 모자란지(문항 수·문항군·유형·단원)를 그대로 보고한다.
-import { readFileSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { planPartialSet, type AssembleCandidate } from "../../lib/ap-exam/assemble";
 import { AP_PARTIALS, AP_PARTIAL_SUBJECTS, sectionsForPartial, type ApPartialId } from "../../lib/ap-exam/layouts";
@@ -11,9 +11,11 @@ import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
 
 const arg = (n: string, d: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : d; };
 type It = { stockKey: string; apSubjectCode: string; kind: "mc" | "frq_bundle"; validation: string; keywordCode: string; calculator: string; itemFamilyId: string; difficultyProvisional: string | null; skillPrimary: string; archetype?: string | null; payload: Record<string, unknown> };
-const items = JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")) as It[];
+// s1a(보조 배치)도 렌더 보고서·화면 증거에 들어오면 풀에 포함된다(해시 일치 조건은 동일).
+const items = [...(JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")) as It[]), ...(JSON.parse(readFileSync("data/ap/stock/s1a-items.json", "utf-8")) as It[])];
 const scan = new Map((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string; flags: unknown[] }[]).map((r) => [r.key, r.flags.length]));
-const ev = JSON.parse(readFileSync(arg("evidence", "data/ap/screen-evidence/evidence-2026-10-09.json"), "utf-8")) as { entries: ScreenEntry[] };
+const evFiles = arg("evidence", "") ? arg("evidence", "").split(",") : readdirSync("data/ap/screen-evidence").filter((f) => /^evidence-.*\.json$/.test(f)).map((f) => `data/ap/screen-evidence/${f}`);
+const ev = { entries: evFiles.flatMap((f) => (JSON.parse(readFileSync(f, "utf-8")) as { entries: ScreenEntry[] }).entries) };
 const evBy = new Map<string, ScreenEntry[]>(); for (const e of ev.entries) (evBy.get(e.candidate_key) ?? evBy.set(e.candidate_key, []).get(e.candidate_key)!).push(e);
 const report = new Map((JSON.parse(readFileSync("data/ap/render-check/report.json", "utf-8")) as { results: { key: string; status: string; contentHash?: string }[] }).results.map((r) => [r.key, r]));
 const DIFF: Record<string, "easy" | "medium" | "hard"> = { basic_learning: "easy", exam_prep: "medium", advanced_supplement: "hard" };

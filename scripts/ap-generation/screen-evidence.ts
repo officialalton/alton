@@ -10,7 +10,8 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { chromium, type Page } from "@playwright/test";
 import { gateCandidate } from "../../lib/ap-figures/gate";
-import { AUTOMATED_LIMITATION, itemContentHash, SCREEN_CHECKS, type ScreenCheck, type ScreenCheckName, type ScreenEntry } from "../../lib/ap-generation/verify-guard";
+import { RAW_TEX_TOKENS } from "../../lib/ap-exam/explanation-math";
+import { AUTOMATED_LIMITATION, itemContentHash, RESULT_CHECK, SCREEN_CHECKS, type ScreenCheck, type ScreenCheckName, type ScreenEntry } from "../../lib/ap-generation/verify-guard";
 
 const arg = (n: string, d: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : d; };
 const DB_URL = process.env.SUPABASE_TEST_DB_URL ?? "";
@@ -22,7 +23,7 @@ const psql = (sql: string) => execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP
 const q = (t: string) => `'${t.replace(/'/g, "''")}'`;
 const VIEWPORTS = [{ w: 390, h: 844, mobile: true }, { w: 1280, h: 800, mobile: false }];
 
-type Row = { section: string; position: number; problem_version_id: string; candidate_key: string; kind: "mc" | "frq_bundle"; ap_subject_code: string; payload: Record<string, unknown> };
+type Row = { set_item_id: string; section: string; position: number; problem_version_id: string; candidate_key: string; kind: "mc" | "frq_bundle"; ap_subject_code: string; payload: Record<string, unknown> };
 
 async function login(page: Page, email: string) {
   await page.goto(`${BASE}/login`);
@@ -49,7 +50,8 @@ async function checkItem(page: Page, r: Row, shot: string): Promise<Record<Scree
     const figs = [...root.querySelectorAll("svg, table, img")].filter((e) => !e.closest("nav") && !e.closest("button") && (e.tagName === "TABLE" ? e.getBoundingClientRect().width >= 60 && e.getBoundingClientRect().height >= 40 : e.getBoundingClientRect().width >= 120 && e.getBoundingClientRect().height >= 60));
     const clip = [...opts, ...inputs, ...figs].filter((e) => !inside(e) && !scrollable(e)).length;
     const text = (document.body.innerText || "").toLowerCase();
-    return { optCount: opts.length, optVisible: opts.filter(vis).length, optTextEmpty: opts.filter((o) => !(o.textContent ?? "").trim()).length, inputCount: inputs.length, inputVisible: inputs.filter(vis).length, figCount: figs.length, figVisible: figs.filter(vis).length, hScroll: document.documentElement.scrollWidth > vw + 1, clip, leaked: /\b(correct answer|explanation|rationale)\b/.test(text), expectFig, text };
+    // leaked: 문제 문장에 쓰인 단어 "explanation"(예: Which explanation best…)은 노출이 아니다 — 해설 블록·정답 라벨·해설 앞부분만 본다.
+    return { optCount: opts.length, optVisible: opts.filter(vis).length, optTextEmpty: opts.filter((o) => !(o.textContent ?? "").trim()).length, inputCount: inputs.length, inputVisible: inputs.filter(vis).length, figCount: figs.length, figVisible: figs.filter(vis).length, hScroll: document.documentElement.scrollWidth > vw + 1, clip, leaked: /\bcorrect answer\b/.test(text) || !!document.querySelector('[data-testid="ap-explanation"], [data-testid="ap-review-item"]'), expectFig, text };
   }, { expectFig: !!g.spec });
   const mc = r.kind === "mc";
   const wantOpts = mc ? (p.options?.length ?? 0) : (p.parts?.length ?? 0);
@@ -69,28 +71,53 @@ async function checkItem(page: Page, r: Row, shot: string): Promise<Record<Scree
   return out;
 }
 
+/** 응시를 제출하고 결과 화면에서 문항별 해설·참고 답안의 원문 TeX 노출 여부를 점검한다. */
+async function resultPass(page: Page, rows: Row[]): Promise<Map<string, ScreenCheck>> {
+  await page.locator('[data-testid="ap-review-submit"]').click();
+  await page.locator('[data-testid="ap-exam-submit"]').click();
+  await page.locator('[data-testid="ap-exam-result"]').waitFor({ state: "visible", timeout: 30_000 });
+  const found = await page.evaluate(() => [...document.querySelectorAll('[data-testid="ap-review-item"]')].map((li) => {
+    const ex = li.querySelector('[data-testid="ap-explanation"]');
+    let text = ""; if (ex) { const c = ex.cloneNode(true) as Element; c.querySelectorAll(".katex-mathml, annotation").forEach((n) => n.remove()); text = c.textContent ?? ""; }
+    return { id: li.getAttribute("data-set-item-id") ?? "", hasExplanation: !!ex, text };
+  }));
+  const byId = new Map(found.map((f) => [f.id, f]));
+  const out = new Map<string, ScreenCheck>();
+  for (const r of rows) {
+    const f = byId.get(r.set_item_id);
+    if (!f) { out.set(r.set_item_id, { result: "fail", note: "result item not found" }); continue; }
+    const hit = RAW_TEX_TOKENS.exec(f.text);
+    out.set(r.set_item_id, hit ? { result: "fail", note: `raw TeX visible in explanation: ${hit[0]}` } : { result: "pass", note: f.hasExplanation ? "explanation math rendered (no raw TeX tokens)" : "no explanation text on result screen" });
+  }
+  return out;
+}
+
 async function main() {
+  const wd = Number(arg("watchdog-sec", "0")); if (wd) setTimeout(() => { console.error(`watchdog ${wd}s 초과 — 중단`); process.exit(2); }, wd * 1000).unref(); // 개발 서버가 멈추면 세트 단위로 끊고 다시 돌린다
   const state = JSON.parse(readFileSync("tmp/ap-demo-state.json", "utf-8")) as { run: string; students: Record<string, string>; sets: string[] };
-  const stock = JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")) as { stockKey: string; payload: Record<string, unknown> }[];
+  const stock = [...JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")), ...JSON.parse(readFileSync("data/ap/stock/s1a-items.json", "utf-8"))] as { stockKey: string; payload: Record<string, unknown> }[];
   const keysByHash = new Map<string, string[]>();
   for (const s of stock) { const h = itemContentHash(s.payload); (keysByHash.get(h) ?? keysByHash.set(h, []).get(h)!).push(s.stockKey); }
   const shotDir = arg("shots-dir", `tmp/ap-screen-evidence/${state.run}`); mkdirSync(shotDir, { recursive: true });
   const browser = await chromium.launch();
   const entries: ScreenEntry[] = []; const failures: string[] = [];
   const ver = browser.version();
-  for (const setId of state.sets) {
-    const rows = JSON.parse(psql(`select coalesce(json_agg(x order by x.ord), '[]') from (select i.section || ':' || i.position as ord, i.section, i.position, i.problem_version_id, c.candidate_key, c.kind, c.ap_subject_code, c.payload from mock_exam_set_items i join problems p on p.id = i.problem_id join ap_candidate_items c on c.candidate_key = p.ap_candidate_key where i.exam_set_id = ${q(setId)}) x;`)) as Row[];
+  const only = arg("only-sets", ""); // 디버그: 앞에서 N개 세트만
+  const idx = arg("set-index", "");
+  for (const setId of idx ? [state.sets[Number(idx)]] : only ? state.sets.slice(0, Number(only)) : state.sets) {
+    const rows = JSON.parse(psql(`select coalesce(json_agg(x order by x.ord), '[]') from (select i.section || ':' || i.position as ord, i.section, i.position, i.id as set_item_id, i.problem_version_id, c.candidate_key, c.kind, c.ap_subject_code, c.payload from mock_exam_set_items i join problems p on p.id = i.problem_id join ap_candidate_items c on c.candidate_key = p.ap_candidate_key where i.exam_set_id = ${q(setId)}) x;`)) as Row[];
     const tier = psql(`select access_tier from mock_exam_sets where id = ${q(setId)};`);
     const email = state.students[tier === "tutoring" ? "tutoring" : "free"];
     const sid = psql(`select id from auth.users where email = ${q(email)};`);
+    for (const vp of VIEWPORTS) {
     const attempt = psql(`set role authenticated; do $$ begin perform set_config('request.jwt.claim.sub', ${q(sid)}, false); end $$; select mock_exam_open_start(${q(setId)}); reset role;`).split("\n").filter((l) => /^[0-9a-f-]{36}$/.test(l)).pop();
     if (!attempt) { failures.push(`${setId}: 응시 시작 실패`); continue; }
-    for (const vp of VIEWPORTS) {
       const ctx = await browser.newContext({ viewport: { width: vp.w, height: vp.h }, hasTouch: vp.mobile, isMobile: vp.mobile });
       await ctx.addInitScript("window.__name = (f) => f;"); // tsx(esbuild) 가 넣는 헬퍼가 page.evaluate 안에서 없어 실패하는 것 방지
       const page = await ctx.newPage();
       await login(page, email);
       await page.goto(`${BASE}/student/mock-exam/${attempt}`);
+      const pending: { setItemId: string; entry: ScreenEntry }[] = [];
       const sections = [...new Set(rows.map((r) => r.section))];
       for (const sec of sections) {
         const tab = page.locator(`[data-testid="ap-section-${sec}"]`);
@@ -98,7 +125,7 @@ async function main() {
         const secRows = rows.filter((r) => r.section === sec).sort((a, b) => a.position - b.position);
         const nav = page.locator('nav[aria-label="Go to question"] button');
         for (let i = 0; i < secRows.length; i++) {
-          const r = secRows[i];
+          const r = secRows[i]; if (process.env.AP_DEBUG) console.log("  item", vp.w, sec, i, r.candidate_key);
           let navErr = "";
           try { await nav.nth(i).click({ timeout: 8000 }); await page.waitForTimeout(300); } catch (e) { navErr = (e as Error).message.replace(/\s+/g, " ").slice(0, 100); } // 학생이 문항 번호를 누를 수 없으면 그 자체가 실패
           const hash = itemContentHash(r.payload);
@@ -108,15 +135,24 @@ async function main() {
           try { if (navErr) throw new Error(`cannot open question ${i + 1}: ${navErr}`); checks = await checkItem(page, r, shot); } catch (e) { checks = Object.fromEntries(SCREEN_CHECKS.map((c) => [c, { result: "fail", note: `screen run error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 120)}` }])) as Record<ScreenCheckName, ScreenCheck>; }
           const bad = SCREEN_CHECKS.filter((c) => checks[c].result === "fail");
           if (bad.length) failures.push(`${key0} @${vp.w}: ${bad.map((c) => `${c}(${checks[c].note})`).join("; ")}`);
-          for (const k of keysByHash.get(hash) ?? []) entries.push({ candidate_key: k, checker_kind: "automated", content_hash: hash, problem_version_id: r.problem_version_id, kind: r.kind, viewport: `${vp.w}x${vp.h}`, screenshot: shot, timestamp: new Date().toISOString(), checker: `automated-playwright/${ver} local student exam screen`, checks });
+          for (const k of keysByHash.get(hash) ?? []) pending.push({ setItemId: r.set_item_id, entry: { candidate_key: k, checker_kind: "automated", content_hash: hash, problem_version_id: r.problem_version_id, kind: r.kind, viewport: `${vp.w}x${vp.h}`, screenshot: shot, timestamp: new Date().toISOString(), checker: `automated-playwright/${ver} local student exam screen`, checks } });
         }
       }
+      // 제출 후 결과 화면 점검: 해설·참고 답안에 원문 TeX 가 보이면 실패(KaTeX 로 그려진 수식은 통과).
+      const resultChecks = await resultPass(page, rows).catch((e) => new Map<string, ScreenCheck>(rows.map((r) => [r.set_item_id, { result: "fail", note: `result screen error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 100)}` }])));
+      for (const p of pending) {
+        const rc = resultChecks.get(p.setItemId) ?? { result: "fail" as const, note: "result item not found" };
+        p.entry.checks[RESULT_CHECK] = rc;
+        if (rc.result === "fail") failures.push(`${p.entry.candidate_key} @${vp.w}: ${RESULT_CHECK}(${rc.note})`);
+        entries.push(p.entry);
+      }
       await ctx.close();
+      console.log(`세트 ${setId.slice(0, 8)} @${vp.w} 완료 (항목 ${rows.length}, ${new Date().toISOString().slice(11, 19)})`);
     }
   }
   await browser.close();
   const out = arg("out", "tmp/ap-screen-evidence.json");
-  writeFileSync(out, JSON.stringify({ schema: "ap-screen-evidence/v1", generator: "playwright", limitations: AUTOMATED_LIMITATION, generatedAt: new Date().toISOString(), entries }, null, 1));
+  writeFileSync(out, JSON.stringify({ schema: "ap-screen-evidence/v2", generator: "playwright", limitations: AUTOMATED_LIMITATION, generatedAt: new Date().toISOString(), entries }, null, 1));
   console.log(`증거 항목 ${entries.length}건(후보 ${new Set(entries.map((e) => e.candidate_key)).size}개) → ${out}`);
   if (failures.length) { console.log(`점검 실패 ${failures.length}건(해당 후보는 mark-verified 가 거부):`); for (const f of failures) console.log(`- ${f}`); }
 }

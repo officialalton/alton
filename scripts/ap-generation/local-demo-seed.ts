@@ -20,7 +20,8 @@ const ALL = process.argv.includes("--all-eligible"); // 화면 검증용: 검증
 async function seed() {
   const conn = await connect(); if (!conn || conn.target !== "local") throw new Error("로컬 DB 에서만 실행합니다.");
   const RUN = `apdemo${Date.now().toString(36)}`;
-  const items = JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/items.json"), "utf-8")) as (CandidateRow & { validation: string; keywordCode: string; difficultyProvisional: string; run: string; stockKey: string; calculator: string })[];
+  const readItems = (f: string) => JSON.parse(readFileSync(path.resolve(process.cwd(), f), "utf-8"));
+  const items = [...readItems("data/ap/stock/items.json"), ...(ALL ? readItems("data/ap/stock/s1a-items.json") : [])] as (CandidateRow & { validation: string; keywordCode: string; difficultyProvisional: string; run: string; stockKey: string; calculator: string })[];
   const state: { run: string; students: Record<string, string>; sets: string[] } = { run: RUN, students: {}, sets: [] };
   const admin = psql(`select id from profiles where role = 'admin' limit 1;`);
   const subj: Record<string, string> = {};
@@ -37,7 +38,6 @@ async function seed() {
     const scan = new Map((JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/defect-scan.json"), "utf-8")) as { key: string; flags: unknown[] }[]).map((r) => [r.key, r.flags.length]));
     chosen.length = 0;
     chosen.push(...items.filter((c) => c.validation === "auto_passed" && !scan.get(c.stockKey) && gateCandidate(c).status !== "fail"));
-    chosen.push(...pick("ap_microeconomics", "mc", hasFig(/ap_graph/), 2), ...pick("ap_microeconomics", "mc", hasFig(/^ap_table/), 1));
   }
   const lessonOne = ALL ? [] : pick("ap_calculus_ab", "mc", (c) => gateCandidate(c).need === "text_only", 3).slice(1, 2);
   const byKey = new Map<string, string>(); // stockKey -> problem ids

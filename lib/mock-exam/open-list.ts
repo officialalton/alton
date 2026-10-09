@@ -19,6 +19,8 @@ export type MockExamListRow = {
   examProgram: "sat" | "ap";
   apSubject: string | null;
   apLabel: "full_practice" | "mc_practice" | "frq_practice" | null;
+  /** 카탈로그가 주는 섹션 구성(보관된 지난 응시 행에는 없다). */
+  apSections?: MockExamCatalogRow["apSections"];
   /** 세트가 지금은 공개 목록에 없고 응시 기록만 남은 경우(보관된 세트의 지난 응시). */
   archived: boolean;
 };
@@ -71,13 +73,14 @@ export function buildMockExamListRows(catalog: MockExamCatalogRow[], attempts: M
       name: c.name,
       difficultyTier: c.difficultyTier,
       description: c.description,
-      state: listStateOf(attempt?.status ?? null),
-      attempt,
+      state: listStateOf(attempt?.status ?? c.attemptStatus ?? null), // 요약에 없는 응시(예: AP)도 카탈로그의 상태로 "In progress" 를 보인다
+      attempt: attempt ?? (c.attemptId && c.attemptStatus === "in_progress" ? ({ id: c.attemptId, status: c.attemptStatus, attemptNo: c.attemptNo ?? undefined } as MockExamAttemptSummary) : null),
       attempts: all,
       archived: false,
       examProgram: c.examProgram === "ap" ? "ap" : "sat",
       apSubject: c.apSubject ?? null,
       apLabel: c.apLabel ?? null,
+      apSections: c.apSections ?? null,
     };
   });
   for (const a of [...attempts].sort(byAttemptNoDesc)) {

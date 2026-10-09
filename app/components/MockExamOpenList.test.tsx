@@ -42,3 +42,27 @@ describe("MockExamOpenList — 재응시", () => {
     expect(screen.getByRole("link", { name: "Continue Attempt 2" })).toHaveAttribute("href", "/student/mock-exam/a2");
   });
 });
+
+import { AP_LAYOUTS } from "@/lib/ap-exam/layouts";
+describe("MockExamOpenList — AB 부분 연습 세트 제목·배지·안내", () => {
+  const ap = (id: string, name: string, label: "mc_practice" | "frq_practice", keys: string[]): MockExamCatalogRow => ({
+    examSetId: id, setGroupId: `g-${id}`, name, description: null, difficultyTier: "standard", format: "ap_fixed" as never, publishedAt: null, attemptId: null, attemptStatus: null,
+    examProgram: "ap", apSubject: "ap_calculus_ab", apLabel: label, apSections: AP_LAYOUTS.ap_calculus_ab.filter((x) => keys.includes(x.key)),
+  });
+  const rows = buildMockExamListRows([
+    ap("n", "AP Calculus AB — Non-Calculator Practice", "mc_practice", ["ap_mc_a"]),
+    ap("c", "AP Calculus AB — Calculator Practice", "mc_practice", ["ap_mc_b"]),
+    ap("f", "AP Calculus AB — Free-Response Practice", "frq_practice", ["ap_frq_a", "ap_frq_b"]),
+  ], []);
+  it("제목 그대로, 배지는 파트 배지, 시작 전 안내에 파트·계산기·문항 수·시간이 있다", () => {
+    render(<MockExamOpenList rows={rows} readOnly={false} onStart={vi.fn()} onOpenResult={vi.fn()} />);
+    for (const t of ["AP Calculus AB — Non-Calculator Practice", "AP Calculus AB — Calculator Practice", "AP Calculus AB — Free-Response Practice"]) expect(screen.getByText(t)).toBeInTheDocument();
+    expect(screen.getAllByTestId("ap-label").map((e) => e.textContent).sort()).toEqual(["Calculator Practice", "Free-Response Practice", "Non-Calculator Practice"]);
+    const g = screen.getAllByTestId("ap-guidance").map((e) => e.textContent).join("\n");
+    expect(g).toContain("Section I, Part A: 29 multiple-choice questions in 62 minutes. No calculator is allowed.");
+    expect(g).toContain("Section I, Part B: 13 multiple-choice questions in 38 minutes. A graphing calculator is required.");
+    expect(g).toContain("Part A (2 questions, 30 min): calculator allowed. Part B (4 questions, 60 min): no calculator.");
+    expect(screen.queryByText("Full Practice Exam")).toBeNull();
+    expect(screen.queryByText("AP Multiple-Choice Practice")).toBeNull();
+  });
+});

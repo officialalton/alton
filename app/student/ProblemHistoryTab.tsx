@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { logLearningEventAction } from "./activity-tracking";
-import LearningText from "@/app/session/[id]/LearningText";
+import LearningText, { InlineLearningText } from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import { stripInlineOptions } from "@/lib/problem-text";
@@ -236,7 +236,7 @@ export default function ProblemHistoryTab({ entries, isFreeMember = false }: { e
                     </span>
                   )}
                   {folder && <span className="text-[10.5px] font-bold text-navy bg-grey-100 rounded-full px-1.5 py-0.5">{folder.name}</span>}
-                  <span className="text-[13px] text-ink flex-1 min-w-[200px] truncate">{snippet || "(No text)"}</span>
+                  <span className="text-[13px] text-ink flex-1 min-w-[200px] truncate">{snippet ? <InlineLearningText text={snippet} /> : "(No text)"}</span>
                   <span className="text-[11.5px] text-grey-500 shrink-0">
                     {isFreeMember
                       ? ["Practice Test", e.unitTitle, e.attemptNo ? `Attempt ${e.attemptNo}` : null, e.startsAt ? fmtDate(e.startsAt, { month: "short", day: "numeric", year: "numeric" }, tz) : null].filter(Boolean).join(" · ")

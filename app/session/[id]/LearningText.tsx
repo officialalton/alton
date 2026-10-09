@@ -65,6 +65,11 @@ export default function LearningText({ text, className }: { text: string; classN
   );
 }
 
+/** 한 줄 미리보기용: 블록(표·목록) 없이 글+수식만 그린다(truncate 안에서 수식이 원문 `$...$` 로 보이지 않게). */
+export function InlineLearningText({ text }: { text: string }) {
+  return <Inline parts={splitLearningContent(text)} />;
+}
+
 function Inline({ parts }: { parts: ContentPart[] }) {
   return (
     <>

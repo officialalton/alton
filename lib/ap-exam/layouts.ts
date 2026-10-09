@@ -81,3 +81,45 @@ export function sectionsForPartial(subject: string, id: ApPartialId): ApSection[
 export function partialLabelAllowed(subject: string, id: ApPartialId, filled: Record<string, number>): boolean {
   return sectionsForPartial(subject, id).every((sec) => filled[sec.key] === sec.count);
 }
+
+// ── 표시 문구(제목·배지·시작 안내가 같은 뜻을 전한다) ────────────────────────────────
+export type LayoutLike = { key: string; kind?: "mc" | "frq"; count: number; minutes: number; calculator?: ApCalculator }[];
+const sameKeys = (a: string[], b: string[]) => a.length === b.length && a.every((k) => b.includes(k));
+/** 세트 레이아웃이 부분 연습 정의(파트 A MC / 파트 B MC / FRQ)와 정확히 같은 섹션 구성이면 그 부분 id, 아니면 null. */
+export function apPartialOfLayout(layout: LayoutLike | null | undefined): ApPartialId | null {
+  if (!layout?.length) return null;
+  const keys = layout.map((s) => s.key);
+  return (Object.keys(AP_PARTIALS) as ApPartialId[]).find((id) => sameKeys(keys, AP_PARTIALS[id].sectionKeys)) ?? null;
+}
+/** 공식 풀 구성(모든 공식 섹션이 공식 문항 수·시간으로 존재)일 때만 true. */
+export function isOfficialFullLayout(subject: string | null | undefined, layout: LayoutLike | null | undefined): boolean {
+  if (!subject || !layout?.length || !AP_LAYOUTS[subject]) return false;
+  const off = AP_LAYOUTS[subject];
+  return layout.length === off.length && off.every((o) => layout.some((s) => s.key === o.key && s.count === o.count && s.minutes === o.minutes));
+}
+/** 목록·응시·결과 화면의 배지. 부분 연습이면 파트 배지, 풀 구성이 확인될 때만 "Full Practice Exam". 레이아웃을 모르면 풀 시험이라고 말하지 않는다. */
+export function apBadgeText(o: { subject?: string | null; label?: ApSetLabel | null; layout?: LayoutLike | null }): string {
+  const partial = apPartialOfLayout(o.layout);
+  if (partial && AP_PARTIAL_SUBJECTS.includes(o.subject ?? "")) return AP_PARTIALS[partial].nameSuffix;
+  if (o.label === "full_practice") return isOfficialFullLayout(o.subject, o.layout) ? AP_LABEL_TEXT.full_practice : "Practice Set";
+  return o.label ? AP_LABEL_TEXT[o.label] : "Practice Set";
+}
+const CALC_RULE: Record<ApCalculator, string> = { allowed: "Calculator allowed.", not_allowed: "No calculator is allowed.", required: "A graphing calculator is required.", na: "" };
+/** 시작 안내(영어): 파트·계산기 규칙·문항 수·시간. 값은 세트 레이아웃(공식 복사본)에서 읽는다. */
+export function apGuidanceLines(o: { subject?: string | null; layout?: (LayoutLike[number] & { label?: string })[] | null }): string[] {
+  const layout = o.layout ?? []; if (!layout.length) return [];
+  const partial = apPartialOfLayout(layout); const exam = AP_SUBJECT_NAME[o.subject ?? ""] ?? "AP";
+  const secOf = (k: string) => layout.find((s) => s.key === k);
+  if (partial === "noncalc_mc" || partial === "calc_mc") {
+    const s = layout[0]; const part = partial === "noncalc_mc" ? "Part A" : "Part B";
+    return [`Practice for ${exam} Section I, ${part}: ${s.count} multiple-choice questions in ${s.minutes} minutes. ${CALC_RULE[s.calculator ?? "na"]}`.trim()];
+  }
+  if (partial === "frq") {
+    const a = secOf("ap_frq_a")!, b = secOf("ap_frq_b")!;
+    return [
+      `Practice for ${exam} Section II: ${a.count + b.count} free-response questions in ${a.minutes + b.minutes} minutes.`,
+      `Part A (${a.count} questions, ${a.minutes} min): ${a.calculator === "not_allowed" ? "no calculator" : "calculator allowed"}. Part B (${b.count} questions, ${b.minutes} min): ${b.calculator === "not_allowed" ? "no calculator" : "calculator allowed"}.`,
+    ];
+  }
+  return layout.map((s) => `${(s as { label?: string }).label ?? s.key}: ${s.count} questions · ${s.minutes} min${CALC_RULE[s.calculator ?? "na"] ? ` · ${CALC_RULE[s.calculator ?? "na"].replace(/\.$/, "")}` : ""}`);
+}

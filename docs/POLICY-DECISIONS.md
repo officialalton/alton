@@ -50,3 +50,5 @@
 - 학생 포털 "Mistake Notebook"은 "My Notebook"으로 개명: 서브탭 All / My Notebook(직접 저장한 비오답) / Mistake Notebook(오답·부분 정답), Grade 필터 폐지, Section→Main category→Sub-category 필터, 개인 폴더(삭제해도 문제는 Unfiled로 복귀) — 10-08 오너 결정 — guard: app/student/ProblemHistoryTab.test.tsx, app/student/notebook.integration.test.ts
 - Practice Tests 목록은 번호 오름차순(자연 정렬)·5개씩 페이지·To do/Completed 서브탭, 홈 'Next Practice Test'는 끝내지 않은 가장 낮은 번호 — 10-08 오너 결정 — guard: lib/mock-exam/open-list.test.ts, app/student/StudentMockExamTab.test.tsx
 - AP 문항 용도는 변환 때 mock_exam(모의고사) 또는 lesson(수업·과제) 하나로 고정되며 변경·공유·예외 없음(세트 조립은 모의 용도만, 선생님 선택기는 수업 용도만, 무료 회원은 수업 용도 비노출, 용도별 재고 별도 집계) — 10-09 오너 결정 — guard: lib/ap-exam/ap-exam.integration.test.ts
+- AP 문항 겹침(2026-10-09): 풀 모의고사 기본 0, 부분 연습 세트 문항 수의 20%까지, 복습·재응시 재사용 허용, 최초 노출/재노출 구분 — 단일 기준 `docs/ap/publication-flow.md`.
+- AP 부분 연습 세트(2026-10-09): Non-Calculator / Calculator / Free-Response 는 공식 파트의 문항 수·시간을 전부 채운 때만 그 이름·배지를 쓴다. 화면 검증은 자동 점검(표시·입력·노출·잘림)이며 그래프 의미·문장 자연스러움 검토가 아니다.

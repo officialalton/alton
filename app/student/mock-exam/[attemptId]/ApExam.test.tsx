@@ -20,6 +20,8 @@ vi.mock("@/lib/problem-error-reports/actions", () => ({ loadMyProblemErrorReport
 
 import ApExamTakeClient from "./ApExamTakeClient";
 import ApExamResultView from "./ApExamResultView";
+import { RAW_TEX_TOKENS } from "@/lib/ap-exam/explanation-math";
+import { AP_LAYOUTS } from "@/lib/ap-exam/layouts";
 
 const item = (id: string, section: string, over: Partial<MockExamAttemptItem> = {}): MockExamAttemptItem => ({
   setItemId: id, section: section as "rw", position: 1, problemId: `p-${id}`, satDomain: "ap:1.1", skillCode: null, difficulty: "medium", format: "mc", passage: null,
@@ -100,11 +102,97 @@ describe("ApExamResultView", () => {
     expect(screen.getByTestId("frq-answer-a")).toHaveTextContent("My explanation");
     expect(screen.getByText("Reference answer (not official scoring)")).toBeInTheDocument();
     expect(screen.getAllByRole("button", { name: "Report a problem" }).length).toBeGreaterThan(0);
-    expect(screen.getByText(/Full Practice Exam/)).toBeInTheDocument();
+    // 이 테스트의 레이아웃은 공식 구성이 아니므로 label 이 full_practice 여도 "Full Practice Exam" 을 보이지 않는다.
+    expect(screen.getByTestId("ap-badge")).toHaveTextContent("Practice Set");
+    expect(screen.queryByText(/Full Practice Exam/)).toBeNull();
   });
   it("Missed 필터는 틀린 MC 만 보인다", () => {
     render(<ApExamResultView attempt={graded} />);
     fireEvent.click(screen.getByRole("tab", { name: "Missed" }));
     expect(screen.getAllByTestId("ap-review-item")).toHaveLength(1);
+  });
+});
+
+describe("부분 연습 세트: 제목·배지·시작 안내가 같은 뜻", () => {
+  const off = (keys: string[]) => AP_LAYOUTS.ap_calculus_ab.filter((x) => keys.includes(x.key));
+  const part = (keys: string[], name: string, label: "mc_practice" | "frq_practice", items: MockExamAttemptItem[]) => base(items, { examSetName: name, apLabel: label, sectionLayout: off(keys) });
+  it("Non-Calculator: 배지·안내(Part A, 29문항, 62분, 계산기 없음)", () => {
+    render(<ApExamTakeClient attempt={part(["ap_mc_a"], "AP Calculus AB — Non-Calculator Practice", "mc_practice", [item("a1", "ap_mc_a")])} />);
+    expect(screen.getByTestId("ap-badge")).toHaveTextContent("Non-Calculator Practice");
+    expect(screen.getByTestId("ap-set-guidance")).toHaveTextContent("Section I, Part A: 29 multiple-choice questions in 62 minutes. No calculator is allowed.");
+    expect(screen.queryByText(/Full Practice Exam/)).toBeNull();
+  });
+  it("Calculator: Part B, 13문항, 38분, 그래핑 계산기 필수", () => {
+    render(<ApExamTakeClient attempt={part(["ap_mc_b"], "AP Calculus AB — Calculator Practice", "mc_practice", [item("b1", "ap_mc_b")])} />);
+    expect(screen.getByTestId("ap-badge")).toHaveTextContent("Calculator Practice");
+    expect(screen.getByTestId("ap-set-guidance")).toHaveTextContent("Section I, Part B: 13 multiple-choice questions in 38 minutes. A graphing calculator is required.");
+  });
+  it("Free-Response: 파트별 계산기 허용 여부와 문항 수·시간", () => {
+    const frq = item("f1", "ap_frq_a", { format: "essay", options: null, parts: frqParts });
+    render(<ApExamTakeClient attempt={part(["ap_frq_a", "ap_frq_b"], "AP Calculus AB — Free-Response Practice", "frq_practice", [frq])} />);
+    expect(screen.getByTestId("ap-badge")).toHaveTextContent("Free-Response Practice");
+    const g = screen.getAllByTestId("ap-set-guidance").map((e) => e.textContent).join(" ");
+    expect(g).toContain("6 free-response questions in 90 minutes");
+    expect(g).toContain("Part A (2 questions, 30 min): calculator allowed");
+    expect(g).toContain("Part B (4 questions, 60 min): no calculator");
+  });
+  it("공식 풀 구성이 확인될 때만 Full Practice Exam", () => {
+    render(<ApExamTakeClient attempt={base([item("a1", "ap_mc_a")], { sectionLayout: AP_LAYOUTS.ap_calculus_ab })} />);
+    expect(screen.getByTestId("ap-badge")).toHaveTextContent("Full Practice Exam");
+  });
+  it("결과 화면도 같은 배지·안내", () => {
+    render(<ApExamResultView attempt={part(["ap_mc_a"], "AP Calculus AB — Non-Calculator Practice", "mc_practice", [item("a1", "ap_mc_a", { response: "1", correct: true, correctIndex: 1 })])} />);
+    expect(screen.getByTestId("ap-badge")).toHaveTextContent("Non-Calculator Practice");
+    expect(screen.getByTestId("ap-set-guidance")).toHaveTextContent("29 multiple-choice questions in 62 minutes");
+  });
+});
+
+describe("시간 소진: 마지막(단일) 섹션은 자동 제출", () => {
+  it("단일 섹션이 끝나면 자동 제출 호출, 중간 섹션은 다음 섹션 버튼", async () => {
+    const single = AP_LAYOUTS.ap_calculus_ab.filter((x) => x.key === "ap_mc_a");
+    const att = base([item("a1", "ap_mc_a")], { sectionLayout: single, timeRemainingSeconds: { ap_mc_a: 2 } as never });
+    submit.mockResolvedValue({ ok: true, value: { attempt: null } });
+    render(<ApExamTakeClient attempt={att} />);
+    await act(async () => { await vi.advanceTimersByTimeAsync(3500); });
+    expect(screen.getByTestId("ap-section-expired")).toBeInTheDocument();
+    expect(submit).toHaveBeenCalledTimes(1);
+  });
+  it("중간 섹션 소진은 자동 제출하지 않고 다음 섹션으로 가는 버튼을 보인다", async () => {
+    const two = AP_LAYOUTS.ap_calculus_ab.filter((x) => x.key === "ap_mc_a" || x.key === "ap_mc_b");
+    const att = base([item("a1", "ap_mc_a"), item("b1", "ap_mc_b")], { sectionLayout: two, timeRemainingSeconds: { ap_mc_a: 1, ap_mc_b: 100 } as never });
+    render(<ApExamTakeClient attempt={att} />);
+    await act(async () => { await vi.advanceTimersByTimeAsync(2500); });
+    expect(submit).not.toHaveBeenCalled();
+    expect(screen.getByRole("button", { name: "Go to next section" })).toBeInTheDocument();
+  });
+});
+
+describe("결과 화면 보강", () => {
+  const mcOnly = (extra: Partial<MockExamAttemptItem> = {}) => base([item("m1", "ap_mc_a", { response: "1", correct: true, correctIndex: 1, satDomain: "ap:1.4", explanation: "The correct answer is 100 \\pi. \\frac{500 \\pi}{3} is incorrect, and (4/3) pi (5)^3.", ...extra })], { status: "graded", sectionLayout: AP_LAYOUTS.ap_calculus_ab });
+  it("해설의 TeX 가 본문처럼 수식으로 그려진다(원문 TeX 토큰이 화면에 없다)", () => {
+    const { container } = render(<ApExamResultView attempt={mcOnly()} />);
+    expect(container.querySelectorAll(".katex").length).toBeGreaterThan(0);
+    expect(container.textContent ?? "").not.toMatch(RAW_TEX_TOKENS);
+  });
+  it("FRQ 가 없으면 Free response 탭이 없다, 있으면 보인다", () => {
+    const { unmount } = render(<ApExamResultView attempt={mcOnly()} />);
+    expect(screen.queryByRole("tab", { name: "Free response" })).toBeNull();
+    expect(screen.getByRole("tab", { name: "Missed" })).toBeInTheDocument();
+    unmount();
+    render(<ApExamResultView attempt={base([item("f1", "ap_frq", { format: "essay", options: null, parts: frqParts })], { status: "graded" })} />);
+    expect(screen.getByRole("tab", { name: "Free response" })).toBeInTheDocument();
+  });
+  it("Topics to review 에 코드와 토픽 이름", () => {
+    render(<ApExamResultView attempt={mcOnly()} topicNames={{ "1.4": "Estimating Limit Values from Tables" }} />);
+    expect(screen.getByText("Topic 1.4 · Estimating Limit Values from Tables")).toBeInTheDocument();
+  });
+  it("재응시 후 Attempt 1 | Attempt 2 전환", () => {
+    const att = { ...mcOnly(), id: "att2", attemptNo: 2, attemptTotal: 2 };
+    const sum = (id: string, no: number) => ({ id, status: "graded", attemptNo: no }) as never;
+    render(<ApExamResultView attempt={att} attempts={[sum("att1", 1), sum("att2", 2)]} />);
+    const sw = screen.getByTestId("attempt-switcher");
+    expect(sw).toHaveTextContent("Attempt 1");
+    expect(sw).toHaveTextContent("Attempt 2 (latest)");
+    expect(screen.getByRole("link", { name: "Attempt 1" })).toHaveAttribute("href", "/student/mock-exam/att1");
   });
 });
