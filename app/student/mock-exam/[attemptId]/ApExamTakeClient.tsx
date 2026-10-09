@@ -12,6 +12,7 @@ import {
   recordMockExamEntryAction,
 } from "@/lib/mock-exam/attempt-actions";
 import { AP_SUBJECT_NAME, CALCULATOR_TEXT, apBadgeText, apGuidanceLines } from "@/lib/ap-exam/layouts";
+import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 import { frqAnswerToJson, parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
 import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
@@ -191,13 +192,13 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
       <div className="min-w-0 flex-1">
         <div className="mb-3 rounded-lg border border-grey-200 bg-white px-4 py-3">
           <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-            <p className="text-[13px] font-extrabold">{subjectName} · <span data-testid="ap-badge">{apBadgeText({ subject: attempt.apSubject, label: attempt.apLabel, layout: attempt.sectionLayout })}</span></p>
+            <p className="text-[13px] font-extrabold">{subjectName} · <span data-testid="ap-badge">{apBadgeText({ subject: attempt.apSubject, label: attempt.apLabel, layout: attempt.sectionLayout, name: attempt.examSetName })}</span></p>
             <div className="flex items-center gap-3">
               {calcOk && <MockExamToolButtons calculatorAllowed referenceSheetAllowed={false} open={toolsOpen} onToggle={(w) => setToolsOpen((c) => (c === w ? null : w))} />}
               <div className="font-mono text-[15px] font-bold" data-testid="ap-exam-timer" aria-label="Time remaining in this section">{formatClock(remaining[section.key] ?? 0)}</div>
             </div>
           </div>
-          {apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout }).map((l) => <p key={l} className="mb-2 text-[12px] text-grey-600" data-testid="ap-set-guidance">{l}</p>)}
+          {apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout, name: attempt.examSetName }).map((l) => <p key={l} className="mb-2 text-[12px] text-grey-600" data-testid="ap-set-guidance">{l}</p>)}
           <div className="flex flex-wrap gap-2">
             {layout.map((s) => (
               <button key={s.key} type="button" onClick={() => void switchSection(s.key)} data-testid={`ap-section-${s.key}`}
@@ -223,7 +224,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
             ) : null}
           </div>
         ) : current ? (
-          <div className="min-w-0 rounded-lg border border-grey-200 bg-white p-4 lg:max-w-[720px]">
+          <div className="min-w-0 rounded-lg border border-grey-200 bg-white p-4 lg:max-w-[720px]" data-testid="ap-question-card">
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-1.5">
                 <p className="text-[12px] font-bold text-grey-500">Question {index + 1} / {items.length}{current.format === "essay" ? ` · ${partsOf.reduce((a, p) => a + p.points, 0)} pts` : ""}</p>
@@ -240,7 +241,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
                   className={`rounded border px-2 py-1 text-[11px] font-bold ${eliminateMode ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"}`}>Eliminator</button>
               )}
             </div>
-            {current.passage && <LearningText text={current.passage} className="mb-3 text-[13.5px]" />}
+            {apPassageForDisplay(current.passage, current.question) && <LearningText text={apPassageForDisplay(current.passage, current.question) as string} className="mb-3 text-[13.5px]" />}
             {current.figure ? <ProblemFigure spec={current.figure} text={problemText(current.passage, current.question, current.options)} className="mb-4" /> : null}
             {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[14px]" />}
 

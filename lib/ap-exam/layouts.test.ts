@@ -25,3 +25,13 @@ describe("AP 표시 문구", () => {
     expect(apGuidanceLines({ subject: "ap_calculus_ab", layout: null })).toEqual([]);
   });
 });
+
+describe("이름 기반 보조 판별", () => {
+  it("레이아웃이 없을 때만 정확한 세트 이름으로 파트 배지·안내", () => {
+    expect(apBadgeText({ subject: "ap_calculus_ab", label: "mc_practice", layout: null, name: "AP Calculus AB — Non-Calculator Practice" })).toBe("Non-Calculator Practice");
+    expect(apBadgeText({ subject: "ap_calculus_ab", label: "frq_practice", layout: undefined, name: "AP Calculus AB — Free-Response Practice 2" })).toBe("Free-Response Practice");
+    expect(apBadgeText({ subject: "ap_calculus_ab", label: "mc_practice", layout: null, name: "Some other name" })).toBe("AP Multiple-Choice Practice");
+    expect(apBadgeText({ subject: "ap_biology", label: "mc_practice", layout: null, name: "AP Biology — Non-Calculator Practice" })).toBe("AP Multiple-Choice Practice");
+    expect(apGuidanceLines({ subject: "ap_calculus_ab", layout: null, name: "AP Calculus AB — Calculator Practice" })[0]).toContain("Part B: 13 multiple-choice questions in 38 minutes");
+  });
+});

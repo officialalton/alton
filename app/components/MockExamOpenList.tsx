@@ -51,14 +51,14 @@ export default function MockExamOpenList({
             {r.examProgram === "ap" ? (
               <>
                 <span className="rounded-full bg-grey-100 px-2 py-0.5 text-[10.5px] font-bold text-grey-600">{AP_SUBJECT_NAME[r.apSubject ?? ""] ?? "AP"}</span>
-                {r.apLabel && <span className="rounded-full bg-ink px-2 py-0.5 text-[10.5px] font-bold text-white" data-testid="ap-label">{apBadgeText({ subject: r.apSubject, label: r.apLabel, layout: r.apSections })}</span>}
+                {r.apLabel && <span className="rounded-full bg-ink px-2 py-0.5 text-[10.5px] font-bold text-white" data-testid="ap-label">{apBadgeText({ subject: r.apSubject, label: r.apLabel, layout: r.apSections, name: r.name })}</span>}
               </>
             ) : (
               <span className="rounded-full bg-grey-100 px-2 py-0.5 text-[10.5px] font-bold text-grey-600">{TIER_LABEL[r.difficultyTier] ?? r.difficultyTier}</span>
             )}
             {r.archived && <span className="text-[10.5px] text-grey-400">Past exam</span>}
           </div>
-          {r.examProgram === "ap" && apGuidanceLines({ subject: r.apSubject, layout: r.apSections }).map((l) => <p key={l} className="mt-1 text-[12px] text-grey-600" data-testid="ap-guidance">{l}</p>)}
+          {r.examProgram === "ap" && apGuidanceLines({ subject: r.apSubject, layout: r.apSections, name: r.name }).map((l) => <p key={l} className="mt-1 text-[12px] text-grey-600" data-testid="ap-guidance">{l}</p>)}
           {r.description && <p className="mt-1 text-[12px] text-grey-500">{r.description}</p>}
           <p className="mt-1 text-[12.5px] text-grey-500">
             {r.attempts.length > 1 && r.attempt?.attemptNo ? `${attemptLabel(r.attempt.attemptNo)} · ` : ""}

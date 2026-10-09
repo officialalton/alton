@@ -297,3 +297,29 @@ describe("학생 응시 흐름(무료 회원)", () => {
     expect(r).toBe("sat|null");
   });
 });
+
+// 부분 연습 세트의 배지·시작 안내는 화면이 받는 "실제 RPC 출력"(mock_exam_open_catalog·mock_exam_attempt_detail)에서 만들어져야 한다(손으로 만든 객체가 아니라).
+import { buildMockExamListRows } from "../mock-exam/open-list";
+import { apBadgeText, apGuidanceLines } from "./layouts";
+describe("부분 연습 세트: 실제 RPC 출력 → 배지·안내", () => {
+  // 세트 항목 가드가 과목 일치를 요구해 테스트 전용 과목 코드로 세트를 만든다. 표시 함수에는 실제 과목 코드(AB)를 준다 — 섹션 구성·라벨·이름은 RPC 출력 그대로.
+  const SUBJ = "ap_calculus_ab";
+  it("catalog 행의 apSections 와 attempt_detail 의 sectionLayout 으로 파트 배지·안내가 나온다", () => {
+    addCandidate("partA1"); addCandidate("partA2");
+    const p1 = convert("partA1", "mock_exam"), p2 = convert("partA2", "mock_exam");
+    const layout = { sections: [{ key: "ap_mc_a", kind: "mc", label: "Section I, Part A: Multiple Choice (no calculator)", minutes: 62, count: 2, calculator: "not_allowed", options: 4 }] };
+    const set = psql(`insert into mock_exam_sets (name, difficulty_tier, status, format, readiness_status, access_tier, exam_program, ap_subject, ap_label, section_layout)
+      values (${q(`${RUN}-AP Calculus AB — Non-Calculator Practice`)}, 'standard', 'draft', 'ap_fixed', 'not_applicable', 'tutoring', 'ap', ${q(AP_CODE)}, 'mc_practice', ${json(layout)}) returning id;`);
+    addItem(set, p1, "ap_mc_a", 1); addItem(set, p2, "ap_mc_a", 2); publishSet(set, "free");
+    const cat = JSON.parse(asUser(freeA, `select x::text from jsonb_array_elements(mock_exam_open_catalog('${freeA}')) x where x->>'examSetId' = '${set}';`));
+    const row = buildMockExamListRows([cat], [])[0];
+    expect(Array.isArray(cat.apSections)).toBe(true);
+    expect(apBadgeText({ subject: SUBJ, label: row.apLabel, layout: row.apSections, name: row.name })).toBe("Non-Calculator Practice");
+    expect(apGuidanceLines({ subject: SUBJ, layout: row.apSections, name: row.name })[0]).toContain("Part A: 2 multiple-choice questions in 62 minutes. No calculator is allowed.");
+    const att = asUser(freeA, `select mock_exam_open_start('${set}');`);
+    const d = JSON.parse(asUser(freeA, `select mock_exam_attempt_detail('${att}')::text;`)) as { apSubject: string; apLabel: "mc_practice"; sectionLayout: { key: string; count: number; minutes: number }[]; examSetName: string };
+    expect(apBadgeText({ subject: SUBJ, label: d.apLabel, layout: d.sectionLayout, name: d.examSetName })).toBe("Non-Calculator Practice");
+    // 섹션 구성을 못 받아도(구버전 응답) 세트 이름으로 같은 배지
+    expect(apBadgeText({ subject: "ap_calculus_ab", label: "mc_practice", layout: null, name: "AP Calculus AB — Calculator Practice" })).toBe("Calculator Practice");
+  });
+});

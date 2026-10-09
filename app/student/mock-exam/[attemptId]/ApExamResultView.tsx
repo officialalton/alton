@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 import { AP_SUBJECT_NAME, apBadgeText, apGuidanceLines } from "@/lib/ap-exam/layouts";
 import AttemptSwitcher from "./AttemptSwitcher";
+import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
 import { parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
 import LearningText from "@/app/session/[id]/LearningText";
@@ -43,8 +44,8 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
     <div className="flex flex-col gap-4" data-testid="ap-exam-result">
       <section className="rounded-lg border border-grey-200 bg-white p-4">
         <AttemptSwitcher attempt={attempt} attempts={attempts} attemptHrefBase="/student/mock-exam/" />
-        <p className="text-[12px] font-bold text-grey-500">{subject} · <span data-testid="ap-badge">{apBadgeText({ subject: attempt.apSubject, label: attempt.apLabel, layout: attempt.sectionLayout })}</span></p>
-        {apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout }).map((l) => <p key={l} className="mt-1 text-[11.5px] text-grey-500" data-testid="ap-set-guidance">{l}</p>)}
+        <p className="text-[12px] font-bold text-grey-500">{subject} · <span data-testid="ap-badge">{apBadgeText({ subject: attempt.apSubject, label: attempt.apLabel, layout: attempt.sectionLayout, name: attempt.examSetName })}</span></p>
+        {apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout, name: attempt.examSetName }).map((l) => <p key={l} className="mt-1 text-[11.5px] text-grey-500" data-testid="ap-set-guidance">{l}</p>)}
         {mc.length > 0 && (
           <p className="mt-1 text-[20px] font-extrabold" data-testid="ap-mc-score">{correct} / {mc.length} <span className="text-[13px] font-semibold text-grey-500">multiple-choice correct ({Math.round((100 * correct) / mc.length)}%)</span></p>
         )}
@@ -74,7 +75,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
           return (
             <li key={it.setItemId} className="rounded-lg border border-grey-200 bg-white p-4" data-testid="ap-review-item" data-set-item-id={it.setItemId}>
               <p className="mb-2 text-[12px] font-bold text-grey-500">Question {n}{it.format === "mc" ? (it.correct === true ? " · Correct" : it.response ? " · Incorrect" : " · Not answered") : " · Free response"}</p>
-              {it.passage && <LearningText text={it.passage} className="mb-2 text-[13.5px]" />}
+              {apPassageForDisplay(it.passage, it.question) && <LearningText text={apPassageForDisplay(it.passage, it.question) as string} className="mb-2 text-[13.5px]" />}
               {it.figure ? <ProblemFigure spec={it.figure} text={problemText(it.passage, it.question, it.options)} className="mb-3" /> : null}
               {it.question && <LearningText text={it.question} className="mb-2 font-semibold text-[14px]" />}
               {it.format === "mc" && it.options ? (

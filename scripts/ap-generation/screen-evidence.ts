@@ -11,7 +11,9 @@ import path from "node:path";
 import { chromium, type Page } from "@playwright/test";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { RAW_TEX_TOKENS } from "../../lib/ap-exam/explanation-math";
-import { AUTOMATED_LIMITATION, itemContentHash, RESULT_CHECK, SCREEN_CHECKS, type ScreenCheck, type ScreenCheckName, type ScreenEntry } from "../../lib/ap-generation/verify-guard";
+// 제출 전 문제 영역의 원문 TeX·평문 수식 흔적: TeX 명령, ^{, 부등호 <= >=, 평문 거듭제곱 x^2(수식 밖).
+const RAW_MATH_VISIBLE = new RegExp(`${RAW_TEX_TOKENS.source}|<=|>=|[A-Za-z0-9)]\\^[{(A-Za-z0-9-]`);
+import { AUTOMATED_LIMITATION, itemContentHash, RESULT_CHECK, SCREEN_CHECKS, STIMULUS_CHECK, type ScreenCheck, type ScreenCheckName, type ScreenEntry } from "../../lib/ap-generation/verify-guard";
 
 const arg = (n: string, d: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : d; };
 const DB_URL = process.env.SUPABASE_TEST_DB_URL ?? "";
@@ -67,6 +69,10 @@ async function checkItem(page: Page, r: Row, shot: string): Promise<Record<Scree
     for (let i = 0; i < await areas.count(); i++) { const a = areas.nth(i); await a.fill("screen check"); if ((await a.inputValue()) !== "screen check") ok = false; await a.fill(""); }
     out.frq_input_works = ok ? { result: "pass", note: `typed into ${m.inputCount} part input(s), value retained` } : { result: "fail", note: "input did not retain text" };
   }
+  // 문제 영역(자료 텍스트·본문·선지) 원문 TeX 점검 — KaTeX 가 그린 수식의 숨은 MathML/annotation 은 제외하고 보이는 글자만 본다.
+  const qtext = await page.evaluate(() => { const c = document.querySelector('[data-testid="ap-question-card"]'); if (!c) return null; const k = c.cloneNode(true) as Element; k.querySelectorAll(".katex-mathml, annotation").forEach((n) => n.remove()); return k.textContent ?? ""; });
+  const qhit = qtext === null ? null : RAW_MATH_VISIBLE.exec(qtext);
+  (out as Record<string, ScreenCheck>)[STIMULUS_CHECK] = qtext === null ? { result: "fail", note: "question card not found" } : qhit ? { result: "fail", note: `raw math visible before submit: ${qhit[0]} …${qtext.slice(Math.max(0, qhit.index - 25), qhit.index + 30).replace(/\s+/g, " ")}` } : { result: "pass", note: "no raw TeX / plain-text math tokens in stimulus, stem or options" };
   await root.screenshot({ path: shot, type: "jpeg", quality: 55 });
   return out;
 }
@@ -135,9 +141,9 @@ async function main() {
           const key0 = keysByHash.get(hash)?.[0] ?? r.candidate_key;
           const shot = `${shotDir}/${key0.replace(/[^A-Za-z0-9_.-]/g, "_")}-${vp.w}x${vp.h}.jpg`;
           let checks: Record<ScreenCheckName, ScreenCheck>;
-          try { if (navErr) throw new Error(`cannot open question ${i + 1}: ${navErr}`); checks = await checkItem(page, r, shot); } catch (e) { checks = Object.fromEntries(SCREEN_CHECKS.map((c) => [c, { result: "fail", note: `screen run error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 120)}` }])) as Record<ScreenCheckName, ScreenCheck>; }
-          const bad = SCREEN_CHECKS.filter((c) => checks[c].result === "fail");
-          if (bad.length) failures.push(`${key0} @${vp.w}: ${bad.map((c) => `${c}(${checks[c].note})`).join("; ")}`);
+          try { if (navErr) throw new Error(`cannot open question ${i + 1}: ${navErr}`); checks = await checkItem(page, r, shot); } catch (e) { checks = Object.fromEntries([...SCREEN_CHECKS, STIMULUS_CHECK].map((c) => [c, { result: "fail", note: `screen run error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 120)}` }])) as Record<ScreenCheckName, ScreenCheck>; }
+          const bad = ([...SCREEN_CHECKS, STIMULUS_CHECK] as const).filter((c) => (checks as Record<string, ScreenCheck>)[c]?.result === "fail");
+          if (bad.length) failures.push(`${key0} @${vp.w}: ${bad.map((c) => `${c}(${(checks as Record<string, ScreenCheck>)[c].note})`).join("; ")}`);
           for (const k of keysByHash.get(hash) ?? []) pending.push({ setItemId: r.set_item_id, entry: { candidate_key: k, checker_kind: "automated", content_hash: hash, problem_version_id: r.problem_version_id, kind: r.kind, viewport: `${vp.w}x${vp.h}`, screenshot: shot, timestamp: new Date().toISOString(), checker: `automated-playwright/${ver} local student exam screen`, checks } });
         }
       }
@@ -155,7 +161,7 @@ async function main() {
   }
   await browser.close();
   const out = arg("out", "tmp/ap-screen-evidence.json");
-  writeFileSync(out, JSON.stringify({ schema: "ap-screen-evidence/v2", generator: "playwright", limitations: AUTOMATED_LIMITATION, generatedAt: new Date().toISOString(), entries }, null, 1));
+  writeFileSync(out, JSON.stringify({ schema: "ap-screen-evidence/v3", generator: "playwright", limitations: AUTOMATED_LIMITATION, generatedAt: new Date().toISOString(), entries }, null, 1));
   console.log(`증거 항목 ${entries.length}건(후보 ${new Set(entries.map((e) => e.candidate_key)).size}개) → ${out}`);
   if (failures.length) { console.log(`점검 실패 ${failures.length}건(해당 후보는 mark-verified 가 거부):`); for (const f of failures) console.log(`- ${f}`); }
 }

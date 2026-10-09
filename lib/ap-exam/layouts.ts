@@ -113,16 +113,22 @@ export function isOfficialFullLayout(subject: string | null | undefined, layout:
   return layout.length === off.length && off.every((o) => layout.some((s) => s.key === o.key && s.count === o.count && s.minutes === o.minutes));
 }
 /** 목록·응시·결과 화면의 배지. 부분 연습이면 파트 배지, 풀 구성이 확인될 때만 "Full Practice Exam". 레이아웃을 모르면 풀 시험이라고 말하지 않는다. */
-export function apBadgeText(o: { subject?: string | null; label?: ApSetLabel | null; layout?: LayoutLike | null }): string {
-  const partial = apPartialOfLayout(o.layout);
+/** 세트 이름이 정확히 "<과목> — <부분 연습 이름>" 이면 그 부분 id. 섹션 구성을 못 받은 경우(요약 행·구버전 응답)의 보조 판별이다. */
+export function apPartialOfName(subject: string | null | undefined, name: string | null | undefined): ApPartialId | null {
+  if (!subject || !name || !AP_PARTIAL_SUBJECTS.includes(subject)) return null;
+  return (Object.keys(AP_PARTIALS) as ApPartialId[]).find((id) => name.replace(/\s+\d+$/, "") === partialSetName(subject, id)) ?? null;
+}
+export function apBadgeText(o: { subject?: string | null; label?: ApSetLabel | null; layout?: LayoutLike | null; name?: string | null }): string {
+  const partial = apPartialOfLayout(o.layout) ?? (o.layout?.length ? null : apPartialOfName(o.subject, o.name));
   if (partial && AP_PARTIAL_SUBJECTS.includes(o.subject ?? "")) return AP_PARTIALS[partial].nameSuffix;
   if (o.label === "full_practice") return isOfficialFullLayout(o.subject, o.layout) ? AP_LABEL_TEXT.full_practice : "Practice Set";
   return o.label ? AP_LABEL_TEXT[o.label] : "Practice Set";
 }
 const CALC_RULE: Record<ApCalculator, string> = { allowed: "Calculator allowed.", not_allowed: "No calculator is allowed.", required: "A graphing calculator is required.", na: "" };
 /** 시작 안내(영어): 파트·계산기 규칙·문항 수·시간. 값은 세트 레이아웃(공식 복사본)에서 읽는다. */
-export function apGuidanceLines(o: { subject?: string | null; layout?: (LayoutLike[number] & { label?: string })[] | null }): string[] {
-  const layout = o.layout ?? []; if (!layout.length) return [];
+export function apGuidanceLines(o: { subject?: string | null; layout?: (LayoutLike[number] & { label?: string })[] | null; name?: string | null }): string[] {
+  const byName = o.layout?.length ? null : apPartialOfName(o.subject, o.name);
+  const layout = o.layout?.length ? o.layout : byName ? sectionsForPartial(o.subject as string, byName) : []; if (!layout.length) return [];
   const partial = apPartialOfLayout(layout); const exam = AP_SUBJECT_NAME[o.subject ?? ""] ?? "AP";
   const secOf = (k: string) => layout.find((s) => s.key === k);
   if (partial === "noncalc_mc" || partial === "calc_mc") {
