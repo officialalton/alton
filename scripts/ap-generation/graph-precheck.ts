@@ -43,7 +43,7 @@ for (const n of names) {
   const g = gateCandidate({ stockKey: `new:${n}`, candidateKey: `new:${n}`, apSubjectCode: SUBJECT, kind: "mc", payload: { ...p, stimulus: p.stimulus } as Record<string, unknown> });
   for (const i of g.issues) if (i.level === "error") reasons.push(`figure:${i.code}`);
   if (g.status === "fail") reasons.push("figure_status_fail");
-  if (g.need !== "required") reasons.push(`figure_need_${g.need}`);
+  if (!n.startsWith("c_") && g.need !== "required") reasons.push(`figure_need_${g.need}`); // c_ = 그래프 없는 일반 계산기 문항
   rows.push({ name: n, reasons: [...new Set(reasons)], fig: `${g.status}/${g.stimKind}${g.issues.filter((i) => i.level === "warn").length ? "+" + g.issues.filter((i) => i.level === "warn").map((i) => i.code).join(",") : ""}`, need: g.need, pack: p });
 }
 // look-alike: 신규(첫 팩) 각각을 기존 재고 전체와 신규끼리 비교

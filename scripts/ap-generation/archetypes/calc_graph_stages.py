@@ -7,6 +7,12 @@ STAGES = {
         "g_prod_deriv_mixed_calc", "g_chain_mixed_calc", "g_integral_mixed_calc", "g_ftc_mixed_calc", "g_avg_value_mixed_calc", "g_area_curve_line_calc", "g_volume_curve_line_calc", "g_washer_curve_line_calc",
         "g_parallel_tangent_calc", "g_exp_value_calc", "g_cont_k_mixed_calc", "g_critical_point_mixed_calc",
     ],
+    "graph_s3a_ab": [
+        "g_mvt_fprime_graph", "g_extrema_count_fprime", "g_integral_properties_graph", "g_accum_two_values", "g_volume_washer_graph", "g_volume_semicircle_graph", "g_ivt_graph", "g_tangent_line_value_graph",
+        "g_rate_mixed_calc", "g_riemann_mixed_calc", "g_avg_roc_mixed_calc", "g_linearization_composite_calc", "g_accum_justify_graph",
+        "c_quotient_deriv_calc", "c_trig_deriv_calc", "c_implicit_slope_calc", "c_related_rates_cone_calc", "c_inflection_calc", "c_second_deriv_test_calc", "c_abs_extreme_calc", "c_midpoint_sum_calc", "c_ftc_chain_calc", "c_decay_model_calc",
+    ],
+    "graph_s3a_bc": ["g_alt_series_graph", "g_param_arclength_graphs_calc", "g_lagrange_p2_calc"],
     "graph_s2_bc": ["g_lagrange_decimal_calc", "g_taylor_deriv_graph", "g_param_speed_graphs", "g_param_dydx_graphs", "g_euler_graph", "g_vector_displacement_graph"],
     "graph_s2_ab": ["g_quotient_mixed_calc", "g_second_deriv_mixed_calc", "g_extreme_mixed_calc", "g_trapezoid_unequal_graph", "g_separable_graph_calc", "g_context_roc_meaning"],
 }
