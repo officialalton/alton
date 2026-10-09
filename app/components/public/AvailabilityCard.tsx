@@ -52,6 +52,18 @@ export default function AvailabilityCard({ data }: { data: LandingAvailability }
           {coming.length > 0 && <p className="m-0 text-[13px] leading-[1.7] text-[var(--p-mute)]">{coming.join(" · ")}</p>}
           <p className="m-0 text-[13px] italic text-[var(--p-slate)]">{C.roadmap}</p>
         </div>
+        <div className="flex flex-col gap-3 border-t border-[var(--p-line)] pt-5">
+          <span className="p-label">{C.visionLabel}</span>
+          <p className="m-0 p-serif text-[20px] leading-[1.25]">{C.visionHeadline}</p>
+          <ul className="list-none m-0 p-0 flex flex-col gap-2.5">
+            {C.vision.map((v) => (
+              <li key={v.t} className="flex gap-2.5 text-[13px] leading-[1.6]">
+                <span aria-hidden="true" className="p-live-dot mt-[7px] shrink-0" />
+                <span><strong className="font-semibold">{v.t}.</strong> <span className="text-[var(--p-slate)]">{v.d}</span></span>
+              </li>
+            ))}
+          </ul>
+        </div>
         <p className="m-0 p-mono text-[11.5px] text-[var(--p-mute)]">{C.regularly}</p>
       </div>
     </section>
