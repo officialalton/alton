@@ -28,4 +28,15 @@ STAGES = {
     # 배치 2: FRQ 새 유형(AB 3, BC 전용 2) — 후보는 유형마다 여러 시드(같은 유형의 다른 수치 묶음은 독립 문항군이 아니라 형제로 센다)
     "supp_b2_ab": ["frq_table_values", "frq_function_analysis", "frq_rate_in_out"],
     "supp_b2_bc": ["frq_bc_taylor_diffeq", "frq_bc_improper_parts"],
+    # 배치 3: 계산기 필수 일반 MC(AB 단원 5·6·2·4·8, BC 단원 7·9·10) + 배치 1 반려 원형 4종 수정 후 재시도
+    "supp_b3_ab": [
+        "c_increasing_interval_calc", "c_critical_count_calc", "c_optimization_rect_calc", "c_closest_point_calc", "c_fastest_increase_calc", "c_implicit_horizontal_tangent_calc",
+        "c_accum_max_value_calc", "c_ftc_second_derivative_calc", "c_integral_equation_solve_calc", "c_limit_def_derivative_calc", "c_tangent_x_intercept_calc",
+        "c_related_rates_angle_calc", "c_max_speed_calc", "c_total_distance_calc",
+    ],
+    "supp_b3_bc": [
+        "c_bc_logistic_time_calc", "c_bc_vector_speed_max_calc", "c_bc_polar_between_calc", "c_bc_polar_slope_calc", "c_series_limit_eval",
+        "c_series_recognize_sum", "c_term_diff_sum", "c_taylor_actual_error_calc", "c_integral_test_choice",
+    ],
+    "supp_b3_frq_ab": ["frq_rate_in_out"],
 }

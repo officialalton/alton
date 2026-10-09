@@ -5,6 +5,11 @@ import path from "node:path";
 
 export const SUPP_BATCHES: { run: string; file: string }[] = [
   { run: "supp-b1-bc-final", file: "supp-b1-items.json" },
+  { run: "supp-b2-ab-final", file: "supp-b2ab-items.json" },
+  { run: "supp-b2-bc-final", file: "supp-b2bc-items.json" },
+  { run: "supp-b3-ab-final", file: "supp-b3ab-items.json" },
+  { run: "supp-b3-bc-final", file: "supp-b3bc-items.json" },
+  { run: "supp-b3-fa-final", file: "supp-b3fa-items.json" },
 ];
 
 /** 디스크에 실제로 있는 보강 배치 파일 이름(확장자 없음). */

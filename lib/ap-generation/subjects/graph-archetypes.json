@@ -32,6 +32,23 @@
   "bc": false
  },
  {
+  "id": "c_accum_max_value_calc",
+  "topic": "6.5",
+  "skill": "3.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "G is accumulated with a cumulative trapezoid rule on 40000 steps and its maximum is read from the running values (independent of scipy quad and Brent's method)"
+  ],
+  "misconceptions": [
+   "reports G at the right endpoint",
+   "reports the x-value",
+   "integrates |f|",
+   "reports f(0)"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_alt_test_choice",
   "topic": "10.7",
   "skill": "3.D",
@@ -117,6 +134,91 @@
   "bc": true
  },
  {
+  "id": "c_bc_logistic_time_calc",
+  "topic": "7.9",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the differential equation is integrated numerically (Runge-Kutta, tolerance 1e-11) and the crossing time of the target is located with an event (independent of the closed-form solution)"
+  ],
+  "misconceptions": [
+   "ignores the carrying capacity",
+   "reports when P = K/2",
+   "wrong sign in the logarithm",
+   "forgets to divide by k"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_bc_polar_between_calc",
+  "topic": "9.9",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the area is summed from 400000 polar sectors between the intersection angles (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "omits the factor 1/2 of the polar area formula",
+   "squares the difference of radii",
+   "uses only the upper half",
+   "integrates over the whole circle"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_bc_polar_slope_calc",
+  "topic": "9.7",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "x(theta) and y(theta) are evaluated and differenced numerically with step 1e-6, and the ratio of the differences is compared with the formula (independent of the product rule)"
+  ],
+  "misconceptions": [
+   "uses r'/r, the slope in the (theta, r) plane",
+   "inverts the quotient dy/dx",
+   "uses tan(theta), the slope of the radial line",
+   "drops a product rule term"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_bc_vector_speed_max_calc",
+  "topic": "9.6",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the maximum speed over a 300001-point grid on [0, T] (independent of Brent's method on the derivative of the speed)"
+  ],
+  "misconceptions": [
+   "uses one component",
+   "uses the other component",
+   "adds components",
+   "uses t = 0"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_closest_point_calc",
+  "topic": "5.11",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the minimum of the distance over a 300001-point grid on [-1, 5] (independent of Brent's method on the derivative)"
+  ],
+  "misconceptions": [
+   "reports the squared distance",
+   "reports the x-coordinate",
+   "uses the vertical gap",
+   "uses a fixed point of the curve"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_comparison_benchmark",
   "topic": "10.6",
   "skill": "3.D",
@@ -132,6 +234,23 @@
    "uses only the denominator degree"
   ],
   "bc": true
+ },
+ {
+  "id": "c_critical_count_calc",
+  "topic": "5.2",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sign changes of a central-difference derivative on a 30001-point grid are counted (independent of the closed-form f' and Brent's method)"
+  ],
+  "misconceptions": [
+   "counts zeros of f",
+   "counts only relative maxima",
+   "misses a solution",
+   "counts an endpoint"
+  ],
+  "bc": false
  },
  {
   "id": "c_decay_model_calc",
@@ -168,6 +287,23 @@
   "bc": false
  },
  {
+  "id": "c_fastest_increase_calc",
+  "topic": "5.5",
+  "skill": "3.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the maximum of M' over a 200001-point grid on [0, 10c] (independent of Brent's method on M'')"
+  ],
+  "misconceptions": [
+   "reports where M' = 0",
+   "reports the other root of M''",
+   "uses the vertex of a factor",
+   "reports the rate, not the time"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_ftc_chain_calc",
   "topic": "6.4",
   "skill": "1.D",
@@ -181,6 +317,23 @@
    "uses x instead of x squared",
    "reports the integral F",
    "differentiates the integrand"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_ftc_second_derivative_calc",
+  "topic": "6.4",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "F is computed by scipy quad and its second central difference with step 1e-3 is compared with the derivative of the integrand (independent of symbolic differentiation)"
+  ],
+  "misconceptions": [
+   "reports the first derivative F'",
+   "reports the value of F itself",
+   "evaluates at the wrong point",
+   "reports the logarithmic derivative of the integrand"
   ],
   "bc": false
  },
@@ -202,6 +355,23 @@
   "bc": true
  },
  {
+  "id": "c_implicit_horizontal_tangent_calc",
+  "topic": "5.12",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the curve is solved for y(x) on a 200000-point grid and the point with the smallest slope magnitude is located (independent of the algebraic substitution)"
+  ],
+  "misconceptions": [
+   "reports the other point",
+   "reports the x-coordinate",
+   "uses y = -x",
+   "uses the denominator"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_implicit_slope_calc",
   "topic": "3.2",
   "skill": "1.E",
@@ -219,6 +389,23 @@
   "bc": false
  },
  {
+  "id": "c_increasing_interval_calc",
+  "topic": "5.3",
+  "skill": "3.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the sign of a central-difference derivative is checked at 401 points of [1, 5], with the single sign change located at the reported zero (independent of Brent's method)"
+  ],
+  "misconceptions": [
+   "uses the interval where f' is negative",
+   "assumes f increases on the whole interval",
+   "uses the zero of f''",
+   "uses the zero of f"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_inflection_calc",
   "topic": "5.6",
   "skill": "2.E",
@@ -232,6 +419,23 @@
    "reports the smaller root",
    "guesses a value",
    "reports the midpoint of the roots"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_integral_equation_solve_calc",
+  "topic": "6.7",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "bisection on the numerically integrated I(k) (independent of the inverse error function used to build the key)"
+  ],
+  "misconceptions": [
+   "sets the integrand equal to the target",
+   "treats the integrand as 1",
+   "uses -k to k",
+   "divides the total area by the target"
   ],
   "bc": false
  },
@@ -259,7 +463,7 @@
   "calculator": "not_allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "for the convergent series the tail sum over n from 10^5 to 2*10^5 is checked to be small, and each integral is evaluated with sympy"
+   "every listed term is checked numerically to be decreasing from its starting index, and the convergent series has a small tail sum over n from 10^5 to 2*10^5; each integral is evaluated with sympy"
   ],
   "misconceptions": [
    "treats 1/(n ln n) like a convergent p-series",
@@ -287,6 +491,23 @@
   "bc": true
  },
  {
+  "id": "c_limit_def_derivative_calc",
+  "topic": "2.2",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the difference quotient is evaluated numerically with h = 10^-6 (symmetric) and h = 10^-7 (one-sided) and compared with the symbolic derivative"
+  ],
+  "misconceptions": [
+   "reports f(a)",
+   "reports f(a)/a",
+   "forgets the chain rule factor",
+   "reports f''(a)"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_linear_approx_overunder_calc",
   "topic": "4.6",
   "skill": "1.F",
@@ -299,6 +520,23 @@
    "wrong over/under claim",
    "ignores the slope",
    "wrong step size"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_max_speed_calc",
+  "topic": "4.2",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the maximum of |x'(t)| over a 200001-point grid on [0, T] (independent of Brent's method on the acceleration)"
+  ],
+  "misconceptions": [
+   "reports the greatest velocity",
+   "uses t = T",
+   "uses t = 0",
+   "reports the greatest position"
   ],
   "bc": false
  },
@@ -333,6 +571,23 @@
    "drops the linear term",
    "reports a position",
    "guesses the midpoint"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_optimization_rect_calc",
+  "topic": "5.11",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the maximum of A over a 200001-point grid on the allowed interval (independent of Brent's method on A')"
+  ],
+  "misconceptions": [
+   "uses a convenient x without optimizing",
+   "reports the x-coordinate",
+   "uses half the base",
+   "uses a crude bound"
   ],
   "bc": false
  },
@@ -388,6 +643,23 @@
   "bc": true
  },
  {
+  "id": "c_related_rates_angle_calc",
+  "topic": "4.5",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "theta(t) = arctan((h0 + v t)/d) is differentiated by central difference at t = 0 (independent of the implicit differentiation)"
+  ],
+  "misconceptions": [
+   "uses h instead of d",
+   "omits the sec^2 factor",
+   "drops the distance factor",
+   "reports degrees"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_related_rates_cone_calc",
   "topic": "4.5",
   "skill": "1.D",
@@ -439,6 +711,23 @@
   "bc": true
  },
  {
+  "id": "c_series_limit_eval",
+  "topic": "10.14",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the quotient is evaluated at x = +/-10^-3 in floating point and averaged (independent of the series expansion)"
+  ],
+  "misconceptions": [
+   "uses the wrong sign of a series term",
+   "uses the wrong factorial",
+   "uses the wrong term",
+   "assumes the limit is 0"
+  ],
+  "bc": true
+ },
+ {
   "id": "c_series_recognize_sum",
   "topic": "10.15",
   "skill": "1.E",
@@ -454,6 +743,23 @@
    "drops the constant factor"
   ],
   "bc": true
+ },
+ {
+  "id": "c_tangent_x_intercept_calc",
+  "topic": "2.7",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the slope is recomputed by central difference (step 1e-6) and the intersection of the numerical tangent line with the x-axis is compared (independent of the symbolic derivative)"
+  ],
+  "misconceptions": [
+   "adds instead of subtracts",
+   "uses the reciprocal slope",
+   "reports the y-intercept",
+   "uses the normal line"
+  ],
+  "bc": false
  },
  {
   "id": "c_taylor_actual_error_calc",
@@ -522,6 +828,23 @@
    "differentiates again"
   ],
   "bc": true
+ },
+ {
+  "id": "c_total_distance_calc",
+  "topic": "8.2",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "|v| is integrated with a composite Simpson rule on 400000 subintervals (independent of the sign-change splitting and scipy quad)"
+  ],
+  "misconceptions": [
+   "reports the integral of v",
+   "stops at the first turn",
+   "reports a speed",
+   "doubles the displacement"
+  ],
+  "bc": false
  },
  {
   "id": "c_trig_deriv_calc",

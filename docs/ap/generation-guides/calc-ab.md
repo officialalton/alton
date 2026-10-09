@@ -182,3 +182,22 @@ BC 전용 용어(series/converge/Taylor/Maclaurin/parametric/polar/vector/Euler/
 | `frq_table_values` | 3.1(+2.9, 5.1, 6.2) / 1.E / 불가 | a 표에서 합성함수 미분(2) / b 몫의 법칙(2) / c 평균변화율 + 평균값 정리 정당화(3) / d 폭이 다른 사다리꼴 합(2) | 로그 미분으로 몫 미분 재계산, 부동소수점 사다리꼴 |
 | `frq_function_analysis` | 5.4(+5.5, 5.6, 2.7) / 3.E / 불가 | a 접선(2) / b 상대극값 f' 부호(3) / c 변곡점 f'' 부호(2) / d 닫힌 구간 절대 최대·최소(2) | 중심차분 기울기, 수치 도함수 Brent, 격자 최댓값 |
 | `frq_rate_in_out` | 8.3(+4.1, 5.5) / 3.E / 계산기 | a 총 유입량(2) / b 순변화율 부호·단위(2) / c 시각의 양(2) / d 최대량 시각 정당화(3) | sympy 기호 적분, 순변화 함수 격자 최댓값 |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_accum_max_value_calc | 6.5 | 3.E | required | G is accumulated with a cumulative trapezoid rule on 40000 steps and its maximum is read from the running valu |
+| c_closest_point_calc | 5.11 | 1.D | required | the minimum of the distance over a 300001-point grid on [-1, 5] (independent of Brent's method on the derivati |
+| c_critical_count_calc | 5.2 | 1.E | required | sign changes of a central-difference derivative on a 30001-point grid are counted (independent of the closed-f |
+| c_fastest_increase_calc | 5.5 | 3.E | required | the maximum of M' over a 200001-point grid on [0, 10c] (independent of Brent's method on M'') |
+| c_ftc_second_derivative_calc | 6.4 | 1.D | required | F is computed by scipy quad and its second central difference with step 1e-3 is compared with the derivative o |
+| c_implicit_horizontal_tangent_calc | 5.12 | 1.E | required | the curve is solved for y(x) on a 200000-point grid and the point with the smallest slope magnitude is located |
+| c_increasing_interval_calc | 5.3 | 3.E | required | the sign of a central-difference derivative is checked at 401 points of [1, 5], with the single sign change lo |
+| c_integral_equation_solve_calc | 6.7 | 1.E | required | bisection on the numerically integrated I(k) (independent of the inverse error function used to build the key) |
+| c_limit_def_derivative_calc | 2.2 | 1.E | required | the difference quotient is evaluated numerically with h = 10^-6 (symmetric) and h = 10^-7 (one-sided) and comp |
+| c_max_speed_calc | 4.2 | 1.E | required | the maximum of /x'(t)/ over a 200001-point grid on [0, T] (independent of Brent's method on the acceleration) |
+| c_optimization_rect_calc | 5.11 | 1.D | required | the maximum of A over a 200001-point grid on the allowed interval (independent of Brent's method on A') |
+| c_related_rates_angle_calc | 4.5 | 1.D | required | theta(t) = arctan((h0 + v t)/d) is differentiated by central difference at t = 0 (independent of the implicit  |
+| c_tangent_x_intercept_calc | 2.7 | 1.E | required | the slope is recomputed by central difference (step 1e-6) and the intersection of the numerical tangent line w |
+| c_total_distance_calc | 8.2 | 1.D | required | /v/ is integrated with a composite Simpson rule on 400000 subintervals (independent of the sign-change splitti |

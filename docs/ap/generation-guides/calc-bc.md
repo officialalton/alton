@@ -100,3 +100,13 @@ BC 샘플(MC 30): 공유 AB 14 + BC 전용 16(U6 3, U7 2, U8 1, U9 5, U10 5).
 |---|---|---|---|
 | `frq_bc_taylor_diffeq` | 10.11(+10.12, 5.7) / 1.E / 불가 | a 미분방정식에서 f'(0)·f''(0)·f'''(0)과 3차 테일러 다항식(3) / b 근삿값(2) / c 라그랑주 오차 한계(2) / d 2계 도함수 판정(2) | sympy dsolve 해의 매클로린 계수 |
 | `frq_bc_improper_parts` | 6.13(+6.11, 5.4) / 1.E / 불가 | a 이상적분(부분적분)(3) / b 유한 구간 정확값(2) / c 최대 속도 시각(2) / d 목표 총량에 맞는 상수(2) | scipy quad 무한 구간·유한 구간, 격자 최댓값 |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_bc_logistic_time_calc | 7.9 | 1.E | required | the differential equation is integrated numerically (Runge-Kutta, tolerance 1e-11) and the crossing time of th |
+| c_bc_polar_between_calc | 9.9 | 1.D | required | the area is summed from 400000 polar sectors between the intersection angles (independent of scipy quad) |
+| c_bc_polar_slope_calc | 9.7 | 1.E | required | x(theta) and y(theta) are evaluated and differenced numerically with step 1e-6, and the ratio of the differenc |
+| c_bc_vector_speed_max_calc | 9.6 | 1.E | required | the maximum speed over a 300001-point grid on [0, T] (independent of Brent's method on the derivative of the s |
+| c_series_limit_eval | 10.14 | 1.E | not_allowed | the quotient is evaluated at x = +/-10^-3 in floating point and averaged (independent of the series expansion) |

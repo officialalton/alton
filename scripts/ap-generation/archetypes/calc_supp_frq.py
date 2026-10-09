@@ -125,58 +125,62 @@ def frq_function_analysis(rng):
     return pk
 
 
-# ------------------------------------------------------------------ AB 계산기: 유입·유출 순변화와 최대량
+# ------------------------------------------------------------------ AB 계산기: 감소하는 유입률과 일정한 유출률(양이 처음 양으로 돌아오는 시각)
 def frq_rate_in_out(rng):
     for _ in range(4000):
-        a0, b0, s = rng.choice([40, 50, 60]), rng.choice([20, 25, 30]), rng.choice([2.0, 2.5, 3.0])
-        d0, e0 = rng.choice([30, 35, 40]), rng.choice([2.0, 2.5, 3.0])
-        W0 = rng.choice([100, 150, 200])
-        T = 8
-        t1 = rng.choice([2, 3, 4])
-        Fin = lambda u: a0 + b0 * math.sin(u / s)
-        Dout = lambda u: d0 + e0 * u
-        h_ = lambda u: Fin(u) - Dout(u)
-        grid = [T * i / 8000 for i in range(8001)]
-        sc = [i for i in range(8000) if h_(grid[i]) * h_(grid[i + 1]) < 0]
-        if len(sc) != 1 or h_(grid[sc[0]]) <= 0 or abs(h_(t1)) < 1:
+        a0, s, d0 = rng.choice([60, 80, 100]), rng.choice([4, 5]), rng.choice([15, 20, 25])
+        W0, T, t1 = rng.choice([200, 300, 400, 500]), rng.choice([20, 24]), rng.choice([2, 3])
+        if a0 <= d0 * 2:
+            continue
+        cross = s * math.log(a0 / d0)
+        G = lambda u: a0 * s * (1 - math.exp(-u / s)) - d0 * u
+        if not (1.5 < cross < T / 2) or G(T) >= -1 or W0 + G(T) < 30:
             continue
         break
     else:
         raise ValueError("no_sample")
-    tstar = _O.brentq(h_, grid[sc[0]], grid[sc[0] + 1], xtol=1e-13)
+    Fin = lambda u: a0 * math.exp(-u / s)
+    h_ = lambda u: Fin(u) - d0
+    root = _O.brentq(G, cross, T, xtol=1e-13)
     inA = _I.quad(Fin, 0, T)[0]
-    net = lambda u0: W0 + _I.quad(h_, 0, u0)[0]
-    WT, Wstar = net(T), net(tstar)
-    if not (Wstar > WT and Wstar > W0):
-        raise ValueError("max_not_interior")
-    # 독립 경로: sympy 정적분과 격자 최댓값
+    avg = inA / T
+    dF = -(a0 / s) * math.exp(-t1 / s)
+    WT = W0 + _I.quad(h_, 0, T)[0]
+    # 독립 경로: 닫힌 형태와 구적법의 일치, 이분법·격자로 다시 찾은 근, 도함수는 중심차분
     tt = sp.Symbol("tt")
-    inA_s = float(sp.N(sp.integrate(a0 + b0 * sp.sin(tt / sp.Float(s)), (tt, 0, T))))
-    gridmax = max(net(T * i / 400) for i in range(401))
-    if abs(inA_s - inA) > 1e-6 or abs(gridmax - Wstar) > 0.5 or abs(Wstar - gridmax) > 0.5:
+    inA_s = float(sp.N(sp.integrate(a0 * sp.exp(-tt / sp.Integer(s)), (tt, 0, T))))
+    lo, hi = cross, float(T)
+    for _ in range(80):
+        mid = (lo + hi) / 2
+        if G(mid) > 0:
+            lo = mid
+        else:
+            hi = mid
+    grid_root = next(i * T / 20000 for i in range(1, 20001) if i * T / 20000 > cross and G(i * T / 20000) <= 0)
+    cd = (Fin(t1 + 1e-6) - Fin(t1 - 1e-6)) / 2e-6
+    if abs(inA_s - inA) > 1e-6 or abs(lo - root) > 1e-9 or abs(grid_root - root) > T / 20000 * 2 or abs(cd - dF) > 1e-6 or abs(_I.quad(h_, 0, root)[0]) > 1e-8:
         raise ValueError("independent_check_failed")
-    rate1 = h_(t1)
-    stim = {"kind": "text", "description": "Rates of water flowing into and out of a tank", "data": {"inflow": f"F(t) = {a0} + {b0} sin(t/{s:g}) gallons per hour", "outflow": f"D(t) = {d0} + {e0:g}t gallons per hour", "initial": f"{W0} gallons at t = 0"}}
+    stim = {"kind": "text", "description": "Rates of water flowing into and out of a reservoir", "data": {"inflow": f"F(t) = {a0}e^(-t/{s}) gallons per hour", "outflow": f"D(t) = {d0} gallons per hour", "initial": f"{W0} gallons at t = 0"}}
     parts = [
-        part("a", f"Water flows into a tank at the rate $F(t)={a0}+{b0}\\sin\\!\\left(\\dfrac{{t}}{{{s:g}}}\\right)$ gallons per hour and flows out at the rate $D(t)={d0}+{e0:g}t$ gallons per hour, for $0\\le t\\le {T}$, where $t$ is measured in hours. To the nearest gallon, how much water flows into the tank during the first ${T}$ hours?", 2, "calculate", ["1.D", "1.E"],
-             f"∫₀^{T} F(t) dt = {f3(inA)} gallons, about {round(inA)} gallons.", [row("a1", 1, f"Integral of F from 0 to {T}", [f"∫_0^{T} F(t) dt"]), row("a2", 1, "Answer", [f3(inA)], requires="a1", nums=True, tol="±0.5 gallon (rounding)")]),
-        part("b", f"At time $t={t1}$ hours, is the amount of water in the tank increasing or decreasing? Give a reason for your answer, using correct units.", 2, "explain", ["3.E", "3.F"],
-             f"F({t1}) - D({t1}) = {f3(rate1)} gallons per hour, so the amount in the tank is {'increasing' if rate1 > 0 else 'decreasing'} at t = {t1}.",
-             [row("b1", 1, "Rate of change of the amount F(t) - D(t) at the given time, with units", [f"F({t1}) - D({t1}) = {f3(rate1)} gallons per hour"], nums=True, units=True), row("b2", 1, f"Reason and conclusion: {'increasing' if rate1 > 0 else 'decreasing'} since the rate of change is {'positive' if rate1 > 0 else 'negative'}", [f"{'increasing' if rate1 > 0 else 'decreasing'}", "the rate of change has that sign"], both=True, requires="b1")]),
-        part("c", f"There are ${W0}$ gallons of water in the tank at time $t=0$. Find the amount of water in the tank at time $t={T}$.", 2, "calculate", ["1.D", "1.E"],
-             f"W({T}) = {W0} + ∫₀^{T} (F(t) - D(t)) dt = {f3(WT)} gallons.", [row("c1", 1, "Initial amount plus the integral of F - D from 0 to the given time", [f"{W0} + ∫_0^{T} (F(t) - D(t)) dt"]), row("c2", 1, "Answer", [f3(WT)], requires="c1", nums=True, tol="±0.001")]),
-        part("d", f"For $0\\le t\\le {T}$, at what time $t$ is the amount of water in the tank greatest? Justify your answer.", 3, "explain", ["3.B", "3.E"],
-             f"W'(t) = F(t) - D(t) = 0 at t = {f3(tstar)}; W' > 0 before and W' < 0 after, and W({f3(tstar)}) = {f3(Wstar)} exceeds W(0) = {W0} and W({T}) = {f3(WT)}.",
-             [row("d1", 1, "Sets F(t) - D(t) = 0 and solves", [f"t = {f3(tstar)}"], nums=True, tol="±0.001"), row("d2", 1, "Justification: W' changes from positive to negative there, or compares the amount at the candidates", ["W' changes sign from positive to negative", "compares W at the critical point and the endpoints"], requires="d1"),
-              row("d3", 1, "Answer: the time of the greatest amount", [f"t = {f3(tstar)}"], requires="d2", nums=True, tol="±0.001")])]
-    for p_, tc in zip(parts, [["8.3"], ["4.1"], ["8.3"], ["5.5"]]):
+        part("a", f"Water flows into a reservoir at the rate $F(t)={a0}e^{{-t/{s}}}$ gallons per hour and flows out at the constant rate of ${d0}$ gallons per hour, for $0\\le t\\le {T}$, where $t$ is measured in hours. Find the average rate, in gallons per hour, at which water flows into the reservoir during the first ${T}$ hours.", 2, "calculate", ["1.D", "1.E"],
+             f"(1/{T}) ∫₀^{T} F(t) dt = {f3(avg)} gallons per hour.", [row("a1", 1, f"Integral of F over [0, {T}] divided by {T}", [f"(1/{T}) ∫_0^{T} F(t) dt"]), row("a2", 1, "Answer", [f3(avg)], requires="a1", nums=True, tol="±0.001")]),
+        part("b", f"Find $F'({t1})$. Using correct units, explain the meaning of $F'({t1})$ in the context of the problem.", 2, "explain", ["1.E", "3.F"],
+             f"F'({t1}) = {f3(dF)}: at t = {t1} hours the rate of inflow is decreasing by about {f3(-dF)} gallons per hour each hour.",
+             [row("b1", 1, "Value of F'(t) at the given time", [f3(dF)], nums=True, tol="±0.001"), row("b2", 1, "Interpretation with units: the rate of inflow is changing (decreasing) at that time, in gallons per hour per hour", ["the rate of inflow is decreasing", "gallons per hour per hour"], both=True, units=True, requires="b1")]),
+        part("c", f"There are ${W0}$ gallons of water in the reservoir at time $t=0$. Find the amount of water in the reservoir at time $t={T}$.", 2, "calculate", ["1.D", "1.E"],
+             f"{W0} + ∫₀^{T} (F(t) - {d0}) dt = {f3(WT)} gallons.", [row("c1", 1, "Initial amount plus the integral of the net rate", [f"{W0} + ∫_0^{T} (F(t) - {d0}) dt"]), row("c2", 1, "Answer", [f3(WT)], requires="c1", nums=True, tol="±0.001")]),
+        part("d", f"For $0<t\\le {T}$, there is exactly one time $t$ at which the amount of water in the reservoir is again equal to ${W0}$ gallons. Write an equation involving an integral that this time satisfies, and find that time.", 3, "calculate", ["1.D", "1.E", "3.E"],
+             f"∫₀^t (F(s) - {d0}) ds = 0 gives t = {f3(root)} hours (the amount rises while F > {d0}, then falls back to {W0}).",
+             [row("d1", 1, "Equation: the integral of the net rate from 0 to t equals 0", [f"∫_0^t (F(s) - {d0}) ds = 0"]), row("d2", 1, "Solves the equation (calculator)", [f"t = {f3(root)}"], requires="d1", nums=True, tol="±0.001"),
+              row("d3", 1, "Answer with units: the time in hours", [f"{f3(root)} hours"], requires="d2", nums=True, units=True, tol="±0.001")])]
+    for p_, tc in zip(parts, [["8.1"], ["4.1"], ["8.3"], ["8.3"]]):
         p_["topic_codes"] = tc
-    pk = {"archetype": "frq_rate_in_out", "template": "rate_in_out_net_change_calc", "topic": "8.3", "extra_topics": ["4.1", "5.5"], "skill": "3.E", "representative_skill": "3.E", "calculator": "required", "title": "Inflow and outflow rates: total inflow, sign of the net rate, amount at a time, time of the greatest amount",
-          "stimulus": stim, "parts": parts, "total_points": 9, "est_minutes": 15, "facts": [f"inA={inA:.6f}", f"rate1={rate1:.6f}", f"WT={WT:.6f}", f"tstar={tstar:.6f}", f"Wstar={Wstar:.6f}"]}
-    pk["blueprint"] = frq_blueprint("frq_rate_in_out", AB, pk, "Use inflow and outflow rate functions to find total inflow, the sign of the net rate, the amount at a time, and the time of the maximum amount",
-        ["Integrate the inflow rate", "Use F - D as the rate of change of the amount and read its sign", "Add the net change to the initial amount", "Locate the interior maximum with the sign change of F - D and compare with the endpoints"],
-        [("F - D is continuous and changes sign from positive to negative exactly once on (0, T)", "checked numerically on a fine grid")], {"type": "text", "must_include": ["formula for F", "formula for D", "initial amount"]},
-        "the inflow integral is checked with sympy's symbolic integral, and the time and value of the maximum with a 401-point grid on the net-change function (independent of Brent's method and scipy quad)")
+    pk = {"archetype": "frq_rate_in_out", "template": "rate_in_out_net_change_calc", "topic": "8.3", "extra_topics": ["4.1", "8.1"], "skill": "3.E", "representative_skill": "3.E", "calculator": "required", "title": "Decaying inflow and constant outflow: average inflow, meaning of F', amount at a time, time the amount returns to its initial value",
+          "stimulus": stim, "parts": parts, "total_points": 9, "est_minutes": 15, "facts": [f"avg={avg:.6f}", f"dF={dF:.6f}", f"WT={WT:.6f}", f"root={root:.6f}"]}
+    pk["blueprint"] = frq_blueprint("frq_rate_in_out", AB, pk, "Use a decaying inflow rate and a constant outflow rate to find the average inflow, interpret the derivative of a rate, find the amount at a time, and solve for the time the amount returns to its initial value",
+        ["Average the inflow rate with an integral divided by the length", "Differentiate the rate function and read the units of the derivative of a rate", "Add the net change to the initial amount", "Set the integral of the net rate equal to zero and solve numerically"],
+        [("the net rate F - D is positive then negative once, so the amount rises then falls through its initial value exactly once", "F decreases from a value above D to 0 while D is constant")], {"type": "text", "must_include": ["formula for F", "formula for D", "initial amount"]},
+        "the inflow integral is checked with sympy's symbolic integral, the root by 80 bisection steps and a 20000-point scan, and F' by central difference (independent of Brent's method, scipy quad and the closed-form derivative)")
     return pk
 
 
