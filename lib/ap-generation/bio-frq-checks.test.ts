@@ -46,10 +46,23 @@ d("Bio 데이터형: ±2SE 표기 일치·개념 필수(2026-10-09)", () => {
   });
 });
 
-import { bioDataShortDesignChecks } from "./archetype-checks/bio-data-short";
+import { bioDataShortDesignChecks, conceptEvidenceParts, dataSkillParts } from "./archetype-checks/bio-data-short";
 d("(b) 원형 내부 설계 조건: 데이터형 평가 목적 분리", () => {
   it("정상 번들은 통과하고 전역 게이트(공통 규칙)도 통과한다", () => { for (const sd of [1800, 1801, 1802, 1803, 1804]) { const p = gen("frq_bio_data_short", sd); expect(bioDataShortDesignChecks(p).map((x) => x.code)).toEqual([]); expect(gateBioFrq(p, { topics }).map((x) => x.code)).toEqual([]); } });
   it("개념 키워드를 개념이 필요 없는 파트에 넣으면 걸린다(키워드 채우기 금지)", () => { const p = gen("frq_bio_data_short", 1800); p.parts[1].prompt += " Consider the enzyme structure."; expect(bioDataShortDesignChecks(p).map((x) => x.code)).toContain("archetype_design:data_short:concept_keyword_stuffing"); });
   it("개념 파트가 기제를 채점하지 않거나 목적이 겹치면 걸린다", () => { const p = gen("frq_bio_data_short", 1800); p.parts[3].rubric_rows[0].required_elements = ["a short answer here"]; p.parts[2].purpose = "table_interpretation"; const c = bioDataShortDesignChecks(p).map((x) => x.code); expect(c).toEqual(expect.arrayContaining(["archetype_design:data_short:concept_part_not_scored", "archetype_design:data_short:purpose_not_distinct"])); });
   it("expected_values 는 구조화 필드이고 루브릭 문장은 수치 출처가 아니다", () => { const p = gen("frq_bio_data_short", 1800); expect(p.expected_values.length).toBeGreaterThan(0); for (const e of p.expected_values) expect(typeof e.value).toBe("number"); expect(JSON.stringify(p.parts.flatMap((x: { rubric_rows: { required_elements: string[] }[] }) => x.rubric_rows.flatMap((r) => r.required_elements)))).not.toMatch(/\d\.\d/); });
+});
+
+d("데이터형 D: 하나의 설명, 개념 증거는 D 만(2026-10-09 오너 결정)", () => {
+  it("개념 수준 증거는 D 뿐이고 A-C 는 정확한 데이터 스킬로 기록된다", () => { const p = gen("frq_bio_data_short", 1900); expect(conceptEvidenceParts(p)).toEqual(["D"]); expect(dataSkillParts(p)).toEqual([{ part: "A", skill: "4.B" }, { part: "B", skill: "5.A" }, { part: "C", skill: "5.B" }]); expect(p.parts[3].skill_codes).toEqual(["6.C"]); expect(p.blueprint.concept).toMatch(/only in part D/); });
+  it("D 의 1점은 하나의 설명(필수 요소 1개)이다 — 두 독립 요구를 묶으면 걸린다", () => {
+    const p = gen("frq_bio_data_short", 1900); expect(p.parts[3].rubric_rows).toHaveLength(1); expect(p.parts[3].rubric_rows[0].required_elements).toHaveLength(1); expect(bioDataShortDesignChecks(p)).toEqual([]);
+    p.parts[3].rubric_rows[0].required_elements.push("a second independent requirement stated here"); p.parts[3].rubric_rows[0].requires_both = true;
+    expect(bioDataShortDesignChecks(p).map((x) => x.code)).toContain("archetype_design:data_short:concept_part_two_independent_requirements");
+  });
+  it("A-C 를 개념 증거로 표기하거나 번들이 토픽을 넓게 평가한다고 쓰면 걸린다", () => {
+    const p = gen("frq_bio_data_short", 1900); p.parts[1].evidence_role = "concept"; p.blueprint.concept = "Assesses topic 3.2 broadly";
+    const c = bioDataShortDesignChecks(p).map((x) => x.code); expect(c).toEqual(expect.arrayContaining(["archetype_design:data_short:data_part_not_marked_context", "archetype_design:data_short:bundle_overclaims_topic"]));
+  });
 });
