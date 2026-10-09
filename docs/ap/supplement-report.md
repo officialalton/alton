@@ -101,3 +101,6 @@
 
 ## 8. 재현
 `python3 scripts/ap-generation/archetypes/sync_guide_docs.py`(가이드·id 목록) · `npx tsx scripts/ap-generation/run-frozen.ts --config config/ap-frozen/supp-bN-….v1.json [--check-only]` · `graph-verdicts.ts <run>` · `graph-finalize.ts <run> <subject> <seed0>` · `stock.ts` · `supp-pass-keys.ts` · `render-check.ts` · 증거: `local-demo-seed.ts seed --keys-file data/ap/stock/supp-all-pass-keys.json --practice-sets` → `npm run dev -- -p 3011` → `screen-evidence.ts --out data/ap/screen-evidence/evidence-supp.json --shots-dir docs/ap/screen-evidence/supp`(격리 스택에서만) · 배정: `exact-assign.ts --sets BC1,AB2,BC2,AB3,BC3 --strict-families --min-pending [--no-pending]` · `reserve-plan.ts --strict-families` · `supplement-status.ts`.
+
+## 9. 커밋(로컬, 명시 경로)
+`cea6321c` 하드닝 · `12167619` b1 원형·구성 · `493a1cad` b1 결과·재고 배선(`supp-batches.ts`)·b2 FRQ 원형 · `6be3312b` b3 원형·b1 반려 수정 · `9139d989` b2·b3 결과 · `4b82a4e0` b4~b6 결과·통과 키 · 마지막 커밋: 화면 증거·오너 절차·5세트 배정·구조 판정·보고서.
