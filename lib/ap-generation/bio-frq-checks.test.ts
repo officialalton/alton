@@ -29,3 +29,10 @@ d("Micro FRQ 무료 결정적 검사", () => {
     const codes = gateMicroFrq(p, { topics: mt, skills: ms }).map((x) => x.code); expect(codes).toEqual(expect.arrayContaining(["explain_prompt_without_reasoning_row", "calculator_allowed_without_calculation", "rubric_element_is_phrase"]));
   });
 });
+
+d("Bio FRQ 무료 검사 추가(2026-10-09)", () => {
+  it("표 자료에 그래프/오차 막대 표현, 토픽 개념 앵커 누락을 잡는다", () => {
+    const p = gen("frq_bio_data_short", 1300); p.parts[2].prompt = "Using the error bars, identify the pair."; p.stimulus.description = "Mean rate for three levels"; p.title = "Data analysis"; p.parts.forEach((x: { prompt: string }) => (x.prompt = x.prompt.replace(/enzyme/gi, "")));
+    const codes = gateBioFrq(p, { topics }).map((x) => x.code); expect(codes).toEqual(expect.arrayContaining(["prompt_mentions_graph_for_table", "topic_concept_anchor_missing"]));
+  });
+});

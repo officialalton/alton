@@ -223,7 +223,7 @@ async function solveStage() {
 const reviewInput = (r: Json | undefined): Json | null => { if (!r) return null; const first = toolInput(r as never) as Json | null; if (first && first.scope_skill_pass !== undefined) { const o: Json = { instant_reject: first.instant_reject ?? [], matches_reference_pattern: first.matches_reference_pattern, resembles_known_exam_item: first.resembles_known_exam_item, summary: first.summary }; for (const k of ["scope_skill", "key_scoring", "stimulus_expression", "distractor_explanation", "exam_suitability"]) o[k] = { pass: first[`${k}_pass`], notes: first[`${k}_notes`] ?? "" }; return o; } if (first && first.key_scoring !== undefined) return first; const content = ((r.message as Json | undefined)?.content as Json[] | undefined) ?? []; const blocks = content.filter((c) => c.type === "tool_use").map((c) => c.input); return (recoverFromBlocks(blocks) as Json | null) ?? first; };
 const reviewMap = () => { const m = resultMap("review"); for (const [k, v] of resultMap("review3")) m.set(k, v); for (const [k, v] of resultMap("review2")) m.set(k, v); for (const [k, v] of resultMap("review4")) m.set(k, v); return m; }; // review2 = 불완전 출력 재요청분(원 결과 보존)
 const solved = (c: Cand) => { const r = resultMap("solve").get(`s-${c.key}`) ?? resultMap("solve2").get(`s-${c.key}`); return r ? (toolInput(r as never) as Json | null) : null; };
-const numsIn = (s: string) => (s.replace(/(\d),(?=\d{3}(?!\d))/g, "$1").match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number); // "$3,025" 의 쉼표를 자릿수 구분자로 처리(이전에는 3 과 025 로 쪼개 오탐)
+const numsIn = (s: string) => (s.replace(/[−–]/g, "-").replace(/(\d),(?=\d{3}(?!\d))/g, "$1").match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number); // "$3,025" 의 쉼표를 자릿수 구분자로 처리(이전에는 3 과 025 로 쪼개 오탐)
 function solverAgrees(c: Cand, sol: Json | null): { ok: boolean | null; note: string } {
   if (!sol) return { ok: null, note: "no_solution" };
   const ans = (sol.answers as Json[]) ?? [];
@@ -265,7 +265,7 @@ const DIFF_SYS = "You tag provisional internal difficulty for AP practice items:
 const full = (c: Cand) => JSON.stringify(c.kind === "mc" ? { ...(c.item as McPack), stimulus: stimFor(c, (c.item as McPack).stimulus), facts: undefined } : { ...(c.item as FrqPack), facts: undefined });
 async function reviewStage() {
   const cs = alive().filter((c) => solved(c));
-  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), c.kind === "mc" ? 3000 : 6000));
+  const reqs = cs.map((c) => { const q = mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), c.kind === "mc" ? 3000 : 6000); if (c.kind !== "mc" && process.env.AP_FLAT_REVIEW) (q.params as Json).tools = [flatReviewTool]; return q; }); // 다음 라운드부터: FRQ 검토는 평탄 도구로 처음부터 받아 재요청 비용을 줄인다(AP_FLAT_REVIEW=1)
   const est = estimate(MODELS.review, reqs.length, 2800, 1100);
   console.log(`review: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "review", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });

@@ -41,6 +41,12 @@ export function gateBioFrq(p: Json, ctx: { topics: Set<string> }): BioIssue[] {
   // 5) 열 이름: 빈 이름·중복·pH 오기(Ph)·단위 누락
   const cols: string[] = p.stimulus?.data?.columns ?? []; if (cols.some((c) => !String(c).trim())) add("empty_column_name", "빈 열 이름"); if (new Set(cols.map((c) => String(c).toLowerCase())).size !== cols.length) add("duplicate_column_name", "열 이름 중복");
   for (const t of [...cols, ...texts]) if (/\bPh\b/.test(t)) add("ph_miscased", `"Ph" 는 "pH" 여야 한다: ${t}`);
+  // 7) 프롬프트가 자료 형식과 어긋나는 표현: 표 자료인데 "graph"/"error bars"(그래프의 오차 막대)를 말하지 않는다
+  if (p.stimulus?.kind === "table") for (const part of p.parts ?? []) if (/\b(graph|error bars?)\b/i.test(part.prompt ?? "")) add("prompt_mentions_graph_for_table", `파트 ${part.label}: 표 자료인데 그래프/오차 막대를 언급`);
+  // 8) 토픽 개념 앵커: 토픽의 핵심 개념이 자료 설명 또는 프롬프트에 드러나야 한다(토픽과 약하게만 연결된 번들 방지)
+  const ANCHOR: Record<string, RegExp> = { "3.2": /enzyme|substrate|active site|denatur/i, "3.5": /respiration|fermentation|ATP/i, "8.1": /respon|behavior|stimulus|taxis|kinesis|tropism/i };
+  const text = [p.title, p.stimulus?.description, ...(p.parts ?? []).map((x: Json) => x.prompt)].join(" ");
+  if (ANCHOR[p.topic] && !ANCHOR[p.topic].test(text)) add("topic_concept_anchor_missing", `토픽 ${p.topic} 의 핵심 개념이 번들에 없다`);
   out.push(...meaningRubricIssues(p));
   return out;
 }

@@ -4,7 +4,7 @@ import path from "node:path";
 import { gateDuplicate } from "../../lib/ap-generation/gates";
 const root = path.resolve("data/ap/sample-2027"); type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 const jl = (f: string) => (existsSync(f) ? readFileSync(f, "utf-8").split("\n").filter(Boolean).map((l) => JSON.parse(l) as Json) : []);
-const runs: [string, string][] = [["v1-ab", "AB"], ["v1-bio", "Bio v1"], ["v2-bio", "Bio v2(설계 수정 1)"], ["v3-bio", "Bio v3(설계 수정 2)"], ["v1-micro", "Micro v1"], ["v2-micro", "Micro v2(설계 수정)"]];
+const runs: [string, string][] = [["v1-ab", "AB"], ["v1-bio", "Bio v1"], ["v2-bio", "Bio v2(설계 수정 1)"], ["v3-bio", "Bio v3(설계 수정 2)"], ["v6-bio", "Bio v6(승인 재검증 1회)"], ["v1-micro", "Micro v1"], ["v2-micro", "Micro v2(설계 수정)"]];
 const out: Json[] = [];
 for (const [run, label] of runs) {
   const d = path.join(root, run); const v = JSON.parse(readFileSync(path.join(d, "verdicts.json"), "utf-8")) as Json[]; const cells = JSON.parse(readFileSync(path.join(d, "cells.json"), "utf-8")) as Json[]; const packs = JSON.parse(readFileSync(path.join(d, "packs.json"), "utf-8")) as Record<string, Json[]>;
