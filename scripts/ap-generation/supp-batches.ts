@@ -13,6 +13,9 @@ export const SUPP_BATCHES: { run: string; file: string }[] = [
   { run: "supp-b4-ab-final", file: "supp-b4ab-items.json" },
   { run: "supp-b5-bc-final", file: "supp-b5bc-items.json" },
   { run: "supp-b6-ab-final", file: "supp-b6ab-items.json" },
+  // 2026-10-12 예비 보충 2차(docs/ap/reserve-topup-2.md)
+  { run: "supp-t2a-ab-final", file: "supp-t2a-items.json" },
+  { run: "supp-t2b-ab-final", file: "supp-t2b-items.json" },
 ];
 
 /** 디스크에 실제로 있는 보강 배치 파일 이름(확장자 없음). */

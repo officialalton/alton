@@ -210,3 +210,26 @@ BC 전용 용어(series/converge/Taylor/Maclaurin/parametric/polar/vector/Euler/
 
 | `frq_model_analysis_calc` | 8.1(+4.1, 5.5) / 1.E / 계산기 | a 모형의 평균값(2) / b C' 의 의미와 단위(2) / c 최댓값과 정당화(2) / d 기준 이상인 시간 구간(3) | sympy 기호 적분, 중심차분, 격자 교점·최댓값 |
 | `frq_piecewise_diff` | 2.4(+1.11, 2.7, 6.7) / 3.B / 불가 | a 꺾이는 점의 연속(2) / b 편측 도함수로 미분 가능 정당화(3) / c 접선(2) / d 도함수의 평균값(2) | 편측 차분 몫, 중심차분 도함수의 수치 평균 |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_ftc_initial_value_calc | 6.7 | 1.E | required | composite Simpson rule (20001 nodes) added to the initial value (independent of scipy quad) |
+| c_limit_numeric_e_calc | 1.4 | 1.E | required | direct evaluation at x = 1e-7 (independent of the closed form e^k) |
+| c_normal_line_calc | 2.7 | 1.D | required | slope from a central difference (step 1e-6) of the lambdified function, then the point-slope equation (indepen |
+| c_related_rates_distance_calc | 4.5 | 1.E | required | central difference (step 1e-7) of s(t) = sqrt((x0 + v t)^2 + H^2) (independent of implicit differentiation) |
+| c_riemann_error_calc | 6.2 | 1.F | required | composite Simpson rule (20001 nodes) for the exact value minus a direct left sum (independent of scipy quad) |
+| g_accum_concave_down_graph | 6.5 | 2.E | not_allowed | second difference of F computed by numerical quadrature at the midpoint of each segment (independent of the sl |
+| g_accum_intersect_formula_calc | 6.4 | 1.E | required | bisection on the exact rational area of the graph minus the formula (independent of the quadrature + Brent roo |
+| g_avg_value_intersection_graph | 8.1 | 2.D | not_allowed | sign changes of f - c counted on an 8001-point grid of the interpolated graph with c from numerical quadrature |
+| g_direction_changes_count_graph | 4.2 | 2.D | not_allowed | sign changes of v counted on a 5001-point grid of the interpolated graph, skipping zeros (independent of the e |
+| g_integral_even_function_graph | 6.6 | 1.D | not_allowed | numerical quadrature of f(/x/) + c x over [-4, 4] (independent of the symmetry argument) |
+| g_integral_piecewise_graph_formula_calc | 6.6 | 1.D | required | composite Simpson rule on the piecewise function with the graph interpolated (independent of the split into ex |
+| g_linear_combo_two_graphs | 2.6 | 1.E | not_allowed | central difference (step 1e-6) of the numerically interpolated combination (independent of the term-by-term ru |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_avg_vs_instant_rate_calc | 2.1 | 1.D | required | difference quotient from the lambdified function and a central difference (step 1e-6) for the instantaneous ra |
