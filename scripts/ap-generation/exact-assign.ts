@@ -88,6 +88,9 @@ export function verifyAssignment(sets: Spec[], res: SetResult[], blocked: Set<st
     if (all.filter((c) => c.graph).length + r.virtual.filter((v) => v.graph).length < s.floor) bad.push(`${s.id}: 그래프 필수 < ${s.floor}`);
     if (new Set(all.map((c) => c.fam)).size !== all.length) bad.push(`${s.id}: 문항군 중복`);
     if (s.subj === "ab" && all.some((c) => c.subj !== "ab")) bad.push(`${s.id}: AB 세트에 BC 문항`);
+    // 공통 범위(AB·BC 둘 다 scope='both') 문항만 두 과목 세트에서 재사용 가능 — DB 가드 _ap_shared_scope_ok(마이그레이션 500)와 같은 규칙. BC 전용 주제 문항은 AB 과목 문항이어도 BC 세트에 넣지 않는다.
+    if (s.subj === "bc" && all.some((c) => c.subj === "ab" && c.bcOnly)) bad.push(`${s.id}: BC 세트에 공통 범위가 아닌 AB 문항`);
+    if (s.subj === "ab" && all.some((c) => c.bcOnly)) bad.push(`${s.id}: AB 세트에 BC 전용 주제 문항`);
     const fr = [...r.frqA, ...r.frqB]; if (r.frqA.length + r.frqVirtual.filter((v) => v.part === "A").length !== 2 || r.frqB.length + r.frqVirtual.filter((v) => v.part === "B").length !== 4) bad.push(`${s.id}: FRQ 수`);
     if (r.frqA.some((c) => c.calc !== "required") || r.frqB.some((c) => c.calc === "required")) bad.push(`${s.id}: FRQ 계산기`);
     if (new Set(fr.map((c) => c.type)).size !== fr.length || new Set(fr.map((c) => c.fam)).size !== fr.length) bad.push(`${s.id}: FRQ 유형·문항군 중복`);

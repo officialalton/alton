@@ -183,3 +183,12 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 - **AP 응시 화면 = SAT 응시 화면 구조**: 위 막대(제목·가운데 큰 타이머·Submit) / 왼쪽 번호판(`x/N answered`) / 번호 막대(Eliminate·Whiteboard 아이콘, 오류 신고, ★ My Notebook 저장) / 지문(자료·그림·문제)|선택지 두 칸(좁은 화면은 위아래) / 아래 막대(← · Solve Later · Guessed · →/Next section/Review & submit). 공용 조각은 `take-ui.tsx`(`ScrollPanes`·`ToolIconButton`·`NAV_BTN`)로 뽑아 SAT 4모듈 화면과 같이 쓴다. AP 고유: 섹션 탭·섹션별 타이머·계산기 규칙·계산기 도구·"About this set"(안내·Covers Units)·FRQ 다파트 입력(자동 저장)·4/5지선다. 서버 동작·RPC 변경 없음. 하이라이트(주석) 도구는 AP 에 넣지 않았다.
 - **Results by Domain·AP 토픽 시각화**: `app/components/AccuracyBars.tsx` — 막대 + 색 눈금(빨강 <40%, 노랑 40~70%, 초록 >70%, 회색 0문항) + 상태 글자 + `n/m (p%)` 글자(색만으로 구분하지 않음), 표본 n<3 은 흐리게 "few questions", 영역은 큰 막대, "Skills to Focus On" 은 약한 순·첫 행 강조 + "Review mistakes" 이동. SAT 결과(학부모 읽기 전용 포함)와 AP 결과 토픽이 같은 컴포넌트를 쓴다. 새 쿼리 없음.
 - 증거: `data/ap/screen-evidence/evidence-ui-unify.json`(풀 세트 48 + 연습 세트 3개, 후보 78, 390x844·1280x800, automated, 해시 결속), 전후 스크린샷 `docs/ap/screen-evidence/ui-unify/`.
+
+## AB·BC 공통 범위 문항과 세트 가드 (2026-10-12, 마이그레이션 `20262100000500`)
+
+- 공통 범위 문항은 `ap_calculus_ab` 문제로 저장된다. 세트 가드(`_mock_exam_ap_set_item_guard`)가 `problems.ap_subject = 세트 ap_subject` 만 허용해 BC 초안 세트(BC1~BC3) 저장이 "Only ap_calculus_bc AP problems…" 로 실패했다.
+- 새 판정 함수 `_ap_shared_scope_ok(후보 키, 세트 과목)`: 문항 과목과 세트 과목이 AB↔BC 짝이고, 후보 주제 코드(`keyword_code` 의 `#` 앞)가 **양쪽 과목의 `subject_keywords`(level 1)에서 모두 scope='both'** 일 때만 참. 행이 없거나 ab_only·bc_only 면 거절. 그 밖의 과목 조합은 그대로 거부.
+- AB 세트에는 BC 과목 문항을 항상 거부(앱 `verifyAssignment` 의 "AB 세트에 BC 문항"과 동일). BC 세트에는 공통 범위 AB 문항만 허용.
+- 같은 규칙이 `mock_exam_create_new_version`(481)의 교체 문항 검사에도 적용된다. `ap_admin_create_draft_set`(491)는 변경 없음 — 풀 세트끼리 같은 문항 금지는 과목과 무관하게 problem_id 기준으로 계속 유지된다.
+- 응시·결과·토픽 이름·단원 안내는 세트의 `ap_subject`·문항의 `sat_domain`(`ap:<토픽>`)으로 동작하고 BC 과목에도 공통 토픽이 모두 있어 문항의 과목이 AB 여도 변경이 필요 없다.
+- 관리자 화면 미리보기(`verifyAssignment`)에 같은 이유의 검사를 추가: BC 세트에 BC 전용 주제 AB 문항, AB 세트에 BC 전용 주제 문항 거부.
