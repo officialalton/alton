@@ -15,7 +15,7 @@ import { decideRender, decideScreen, type VerifyDbRow } from "./verify-plan";
 import { planDraftSet, stockItems, type FullSetUsage, type PoolRow, type SetKeys } from "./assemble-draft";
 import { published } from "../../scripts/ap-generation/assign-pool";
 
-export type AuditAction = "load_check" | "import" | "render_verify" | "screen_verify" | "convert" | "assemble_draft";
+export type AuditAction = "load_check" | "import" | "render_verify" | "screen_verify" | "convert" | "assemble_draft" | "new_version_preview" | "new_version_draft" | "new_version_publish" | "set_access_tier";
 export type StepResult = {
   action: AuditAction; mode: "dry_run" | "execute"; executed: boolean; target: { ref: string; kind: string; canWrite: boolean; reason: string | null };
   scope: Record<string, unknown>; counts: Record<string, number>; lines: string[]; planHash: string | null; blocked: string | null; ok: boolean;
@@ -24,8 +24,8 @@ export type Ctx = { db: SupabaseClient; target: StockTarget; actorId: string; no
 
 const MAX_LINES = 60;
 const chunk = <T,>(a: T[], n: number) => Array.from({ length: Math.ceil(a.length / n) }, (_, i) => a.slice(i * n, i * n + n));
-const base = (c: Ctx, action: AuditAction, mode: "dry_run" | "execute", scope: Record<string, unknown>): StepResult => ({ action, mode, executed: false, target: { ref: c.target.ref, kind: c.target.kind, canWrite: c.target.canWrite, reason: c.target.reason }, scope, counts: {}, lines: [], planHash: null, blocked: null, ok: true });
-const cap = (lines: string[]) => (lines.length > MAX_LINES ? [...lines.slice(0, MAX_LINES), `… 외 ${lines.length - MAX_LINES}건`] : lines);
+export const base = (c: Ctx, action: AuditAction, mode: "dry_run" | "execute", scope: Record<string, unknown>): StepResult => ({ action, mode, executed: false, target: { ref: c.target.ref, kind: c.target.kind, canWrite: c.target.canWrite, reason: c.target.reason }, scope, counts: {}, lines: [], planHash: null, blocked: null, ok: true });
+export const cap = (lines: string[]) => (lines.length > MAX_LINES ? [...lines.slice(0, MAX_LINES), `… 외 ${lines.length - MAX_LINES}건`] : lines);
 
 /** 감사 로그 기록(append-only). 실패해도 이미 끝난 작업을 되돌리지 않고 호출자에게 경고를 돌려준다. */
 export async function recordRun(c: Ctx, r: StepResult, status: "ok" | "refused" | "error", note?: string): Promise<string | null> {
@@ -33,17 +33,17 @@ export async function recordRun(c: Ctx, r: StepResult, status: "ok" | "refused" 
   return error ? error.message : null;
 }
 /** execute 전에 감사 테이블이 쓸 수 있는지 확인(읽을 수 없으면 쓰기 시작 전에 중단). */
-async function auditReady(c: Ctx) {
+export async function auditReady(c: Ctx) {
   const { error } = await c.db.from("ap_stock_admin_runs").select("id", { head: true, count: "exact" }).limit(1);
   if (error) throw new Error(`감사 로그 테이블(ap_stock_admin_runs)에 접근할 수 없어 쓰기를 시작하지 않습니다: ${error.message}`);
 }
-function gate(c: Ctx, r: StepResult, execute: boolean, expected?: string | null) {
+export function gate(c: Ctx, r: StepResult, execute: boolean, expected?: string | null) {
   if (!execute) return true;
   try { assertCanWrite(c.target); } catch (e) { r.blocked = (e as Error).message; r.ok = false; return false; }
   if (!expected) { r.blocked = "미리보기(dry-run)를 먼저 실행하고 같은 계획을 확인한 뒤 실행하세요."; r.ok = false; return false; }
   return true;
 }
-function checkHash(r: StepResult, expected: string | null | undefined, execute: boolean) {
+export function checkHash(r: StepResult, expected: string | null | undefined, execute: boolean) {
   if (execute && expected !== r.planHash) { r.blocked = "미리보기 이후 계획이 달라졌습니다(DB 상태 변경). 미리보기를 다시 실행하세요."; r.ok = false; return false; }
   return true;
 }
@@ -201,8 +201,10 @@ export async function fetchFullSetUsage(db: SupabaseClient): Promise<FullSetUsag
   for (const ps of chunk(pids, 150)) { const { data, error: e } = await db.from("ap_candidate_problems").select("problem_id, candidate_key").in("problem_id", ps); if (e) throw new Error(e.message); for (const x of data ?? []) keyOf.set(x.problem_id as string, x.candidate_key as string); }
   return sets.map((s) => { const mine = (items ?? []).filter((i) => i.exam_set_id === s.id).map((i) => i.problem_id as string); return { id: s.id as string, name: s.name as string, status: s.status as string, problemIds: mine, candidateKeys: mine.map((p) => keyOf.get(p)).filter((k): k is string => !!k) }; });
 }
-export async function runAssemble(c: Ctx, reportFile: string, setId: string, name: string | undefined, execute: boolean, expectedHash?: string | null): Promise<StepResult> {
-  const r = base(c, "assemble_draft", execute ? "execute" : "dry_run", { reportFile, setId, name: name ?? null });
+export type AccessTier = "free" | "tutoring";
+export async function runAssemble(c: Ctx, reportFile: string, setId: string, name: string | undefined, execute: boolean, expectedHash?: string | null, tier: AccessTier = "free"): Promise<StepResult> {
+  if (tier !== "free" && tier !== "tutoring") throw new Error("공개 범위는 무료 또는 튜터링이어야 합니다.");
+  const r = base(c, "assemble_draft", execute ? "execute" : "dry_run", { reportFile, setId, name: name ?? null, tier });
   if (!gate(c, r, execute, expectedHash)) return r;
   const rep = readAssignReport(reportFile); const s = rep.sets.find((x) => x.id === setId);
   if (!s) { r.ok = false; r.blocked = `보고서에 세트 ${setId} 가 없습니다.`; return r; }
@@ -214,7 +216,7 @@ export async function runAssemble(c: Ctx, reportFile: string, setId: string, nam
   const plan = planDraftSet({ setId, keys, hasVirtual: (s.virtual?.length ?? 0) + (s.frqVirtual?.length ?? 0) > 0, name, pool, existingFullSets: existing, publishedKeys: new Set([...pub.mcA, ...pub.mcB, ...pub.frqA, ...pub.frqB]), stock: stockItems() });
   r.counts = { mc: plan.composition.mcTotal, frq: plan.composition.frqTotal, items: plan.items.length, problems: plan.problems.length };
   r.scope = { ...r.scope, name: plan.name, subject: plan.subject };
-  r.lines = cap(plan.ok ? [`저장할 초안: ${plan.name} (${plan.subject}) — MC ${plan.composition.mcTotal} (A ${plan.composition.mcA} + B ${plan.composition.mcB}) / FRQ ${plan.composition.frqTotal} (A ${plan.composition.frqA} + B ${plan.composition.frqB}). 상태 draft, 공개 안 함.`] : plan.problems);
+  r.lines = cap(plan.ok ? [`저장할 초안: ${plan.name} (${plan.subject}) — MC ${plan.composition.mcTotal} (A ${plan.composition.mcA} + B ${plan.composition.mcB}) / FRQ ${plan.composition.frqTotal} (A ${plan.composition.frqA} + B ${plan.composition.frqB}). 상태 draft, 공개 안 함. 공개 때 적용할 범위: ${tier === "free" ? "무료" : "튜터링"}.`] : plan.problems);
   r.ok = plan.ok; if (!plan.ok) r.blocked = "검증 위반이 있어 저장할 수 없습니다.";
   r.planHash = plan.ok ? planHash("assemble_draft", r.scope, plan.items.map((i) => `${i.sectionKey}:${i.position}:${i.problemId}`)) : null;
   if (!plan.ok || !checkHash(r, expectedHash, execute)) return r;
@@ -222,6 +224,9 @@ export async function runAssemble(c: Ctx, reportFile: string, setId: string, nam
   await auditReady(c);
   const { data: id, error } = await c.db.rpc("ap_admin_create_draft_set", { p_name: plan.name, p_subject: plan.subject, p_label: "full_practice", p_layout: plan.layout, p_items: plan.items.map((i) => ({ section: i.sectionKey, position: i.position, problem_id: i.problemId, problem_version_id: i.versionId, sat_domain: i.satDomain, difficulty: i.difficulty })) });
   if (error) throw new Error(error.message);
-  r.executed = true; r.lines.push(`초안 세트 ${id as string} 저장(공개 안 함).`);
+  // 초안은 DB 가드 때문에 free 로 저장할 수 없다 → 공개 때 적용할 범위를 planned_access_tier 에 적어 둔다(공개 RPC 가 사용).
+  const { error: te } = await c.db.rpc("ap_admin_set_access_tier", { p_set_id: id, p_tier: tier, p_actor_id: c.actorId });
+  if (te) { r.executed = true; r.ok = false; r.blocked = `초안은 저장했지만 공개 범위 지정에 실패했습니다: ${te.message}`; return r; }
+  r.executed = true; r.lines.push(`초안 세트 ${id as string} 저장(공개 안 함, 공개 범위 ${tier === "free" ? "무료" : "튜터링"}).`);
   return r;
 }
