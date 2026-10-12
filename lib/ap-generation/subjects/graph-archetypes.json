@@ -321,6 +321,23 @@
   "bc": false
  },
  {
+  "id": "c_ftc_initial_value_calc",
+  "topic": "6.7",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "composite Simpson rule (20001 nodes) added to the initial value (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "reports the integral only",
+   "subtracts",
+   "uses f(b)",
+   "integrates from 0"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_ftc_second_derivative_calc",
   "topic": "6.4",
   "skill": "1.D",
@@ -525,6 +542,23 @@
   "bc": false
  },
  {
+  "id": "c_limit_numeric_e_calc",
+  "topic": "1.4",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct evaluation at x = 1e-7 (independent of the closed form e^k)"
+  ],
+  "misconceptions": [
+   "gives 1",
+   "gives k",
+   "gives e",
+   "gives e^(1/k)"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_linear_approx_overunder_calc",
   "topic": "4.6",
   "skill": "1.F",
@@ -588,6 +622,23 @@
    "drops the linear term",
    "reports a position",
    "guesses the midpoint"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_normal_line_calc",
+  "topic": "2.7",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "slope from a central difference (step 1e-6) of the lambdified function, then the point-slope equation (independent of the symbolic derivative)"
+  ],
+  "misconceptions": [
+   "uses the tangent line",
+   "uses f'(a)",
+   "uses -f'(a)",
+   "uses 1/f'(a)"
   ],
   "bc": false
  },
@@ -690,6 +741,40 @@
    "forgets 1/3",
    "mixes r and h",
    "wrong power of h"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_related_rates_distance_calc",
+  "topic": "4.5",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-7) of s(t) = sqrt((x0 + v t)^2 + H^2) (independent of implicit differentiation)"
+  ],
+  "misconceptions": [
+   "uses v",
+   "uses H",
+   "uses s/x",
+   "uses H instead of x"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_riemann_error_calc",
+  "topic": "6.2",
+  "skill": "1.F",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "composite Simpson rule (20001 nodes) for the exact value minus a direct left sum (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "reports the sum",
+   "reports the integral",
+   "uses the right sum",
+   "uses R - L"
   ],
   "bc": false
  },
@@ -897,6 +982,40 @@
   "bc": false
  },
  {
+  "id": "g_accum_concave_down_graph",
+  "topic": "6.5",
+  "skill": "2.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "second difference of F computed by numerical quadrature at the midpoint of each segment (independent of the slope analysis of f)"
+  ],
+  "misconceptions": [
+   "uses where f is increasing",
+   "uses where f is negative",
+   "uses where f is positive",
+   "assumes concavity on the whole interval"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_accum_intersect_formula_calc",
+  "topic": "6.4",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "bisection on the exact rational area of the graph minus the formula (independent of the quadrature + Brent root used to generate the key)"
+  ],
+  "misconceptions": [
+   "solves g = h",
+   "solves g = h'",
+   "solves F = h'",
+   "guesses the midpoint"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_accum_justify_graph",
   "topic": "6.5",
   "skill": "3.E",
@@ -1080,6 +1199,23 @@
   "bc": false
  },
  {
+  "id": "g_avg_value_intersection_graph",
+  "topic": "8.1",
+  "skill": "2.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "sign changes of f - c counted on an 8001-point grid of the interpolated graph with c from numerical quadrature (independent of the exact segment test)"
+  ],
+  "misconceptions": [
+   "assumes the theorem gives exactly one",
+   "adds one",
+   "subtracts one",
+   "counts segments"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_avg_value_mixed_calc",
   "topic": "8.1",
   "skill": "1.E",
@@ -1208,6 +1344,23 @@
    "uses g in place of g'",
    "adds the derivatives",
    "guesses the midpoint"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_direction_changes_count_graph",
+  "topic": "4.2",
+  "skill": "2.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "sign changes of v counted on a 5001-point grid of the interpolated graph, skipping zeros (independent of the exact segment analysis)"
+  ],
+  "misconceptions": [
+   "counts every zero of v",
+   "counts vertices",
+   "adds one",
+   "subtracts one"
   ],
   "bc": false
  },
@@ -1413,6 +1566,23 @@
   "bc": false
  },
  {
+  "id": "g_integral_even_function_graph",
+  "topic": "6.6",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical quadrature of f(|x|) + c x over [-4, 4] (independent of the symmetry argument)"
+  ],
+  "misconceptions": [
+   "uses only [0, 4]",
+   "gives 0",
+   "adds 16c",
+   "adds 8c"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_integral_mixed_calc",
   "topic": "6.6",
   "skill": "1.E",
@@ -1426,6 +1596,23 @@
    "subtracts instead of adding",
    "ignores the graphed function g",
    "ignores the formula function f"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_integral_piecewise_graph_formula_calc",
+  "topic": "6.6",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "composite Simpson rule on the piecewise function with the graph interpolated (independent of the split into exact area + quad)"
+  ],
+  "misconceptions": [
+   "integrates the formula over the whole interval",
+   "drops the graph",
+   "drops the formula",
+   "adds a change of the formula"
   ],
   "bc": false
  },
@@ -1558,6 +1745,23 @@
    "uses the plotted value f(c)",
    "multiplies the limits",
    "subtracts the limits"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_linear_combo_two_graphs",
+  "topic": "2.6",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the numerically interpolated combination (independent of the term-by-term rules)"
+  ],
+  "misconceptions": [
+   "uses f(a), g(a)",
+   "ignores x^2",
+   "uses a^2",
+   "ignores multiples"
   ],
   "bc": false
  },
