@@ -1,0 +1,110 @@
+[
+ {
+  "key": "ap_calculus_ab-m01-k0",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "AROC=5ln5/4≈2.012; f'(1)=ln1+1=1; difference≈1.012",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1.012"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key 1.012 is unique and correct. The item is in scope for topic 2.1, the wording is clear, and the options are parallel values with distinct misconceptions. The 1.D skill fit is modest but acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Two standard procedures: the average rate of change by the difference quotient, and the instantaneous rate via the product rule for x ln x evaluated at 1, followed by a subtraction. Each step is routine. The distractors reflect common errors (omitting the subtraction, reversing the order, using only f'(1)). Reading and arithmetic loads are minimal, and the only calculator use is evaluating 5 ln 5.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k0",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v changes sign at t=4/3 (from + to −) and at t=50/7 (from − to +). At t=4, v touches 0 but stays negative on both sides, so the particle does not change direction there. That gives 2 changes.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direction change from the sign of v; fits 4.2 and 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Sign changes at t=4/3 and t=50/7; t=4 is a touching zero. Unique answer 2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices fully specified; axes and ranges clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; the rationale for option 1 is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key of 2 is correct and unique, the graph data is complete, and the distractors are plausible."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must locate zeros of v from a piecewise-linear graph and check whether v actually changes sign at each. The zero at t=4 is a trap, since v stays negative on both sides, so there is no direction change. Real zero crossings occur on (0,2) and (6,8), giving 2. Concept depth is moderate (v=0 is not the same as a direction change), with little computation and light reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]

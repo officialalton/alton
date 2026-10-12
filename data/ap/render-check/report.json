@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-09T17:55:55.557Z",
- "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json (1065행)",
+ "generatedAt": "2026-10-12T22:54:32.841Z",
+ "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json (1079행)",
  "all": {
-  "total": 1065,
-  "pass": 675,
+  "total": 1079,
+  "pass": 683,
   "fail": 1,
-  "notApplicable": 389
+  "notApplicable": 395
  },
  "liveStates": {
-  "total": 595,
-  "pass": 326,
+  "total": 607,
+  "pass": 333,
   "fail": 0,
-  "notApplicable": 269
+  "notApplicable": 274
  },
  "byType": [
   {
@@ -44,15 +44,15 @@
   },
   {
    "type": "ap_graph:calc_function_or_derivative",
-   "total": 100,
-   "pass": 100,
+   "total": 107,
+   "pass": 107,
    "fail": 0,
    "notApplicable": 0
   },
   {
    "type": "ap_graph:calc_multi_curve",
-   "total": 34,
-   "pass": 33,
+   "total": 35,
+   "pass": 34,
    "fail": 1,
    "notApplicable": 0
   },
@@ -107,10 +107,10 @@
   },
   {
    "type": "none",
-   "total": 298,
+   "total": 304,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 298
+   "notApplicable": 304
   },
   {
    "type": "none(diagram_text_only)",
@@ -129,10 +129,10 @@
  ],
  "bySubject": {
   "ap_calculus_ab": {
-   "total": 557,
-   "pass": 286,
+   "total": 571,
+   "pass": 294,
    "fail": 1,
-   "notApplicable": 270
+   "notApplicable": 276
   },
   "ap_biology": {
    "total": 200,
@@ -154,8 +154,8 @@
   }
  },
  "figureNeed": {
-  "required": 624,
-  "text_only": 389,
+  "required": 632,
+  "text_only": 395,
   "supporting": 52
  },
  "errorCodes": {
@@ -18234,6 +18234,202 @@
    "status": "not_applicable",
    "issues": [],
    "alt": null
+  },
+  {
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m01-k0",
+   "contentHash": "597e679ec0463e9c5a13662a9b63b888729ac8f2e5d8633fc7fdd3a14f16a48a",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m02-k0",
+   "contentHash": "35c01819765655f45eda87823440db93c416b7df037204aad4afbcee8fb76f5e",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m03-k0",
+   "contentHash": "95fb554a3248a0476457379576e5ee5e3f1189f85dc677d52f47024591e1af31",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m04-k0",
+   "contentHash": "246244d0dfc26cf36aba0ad035398cf6d8f363ff48e0910e0e500bf96b23371d",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m05-k0",
+   "contentHash": "fdd0bfcf611777407fa4a04697c213069569bc0fc227ec5928dc49eaf106938d",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m06-k0",
+   "contentHash": "7ef926204ed24eee1ae208336beeb2363e06d4eb53a9fe9bff9a81460fa73eb0",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 10. Vertical axis: y, -5 to 6."
+  },
+  {
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m07-k0",
+   "contentHash": "d407d972bfa4cb9f486cd640fcbab3bd482e527e9582674643f2ac76045e8927",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: g(x), -1 to 7."
+  },
+  {
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m08-k0",
+   "contentHash": "336b174f6bf3f8f7dc7087ae09161d3ff108af1d8c918ee720a652e0fc44d81a",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: y, -1 to 6."
+  },
+  {
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m09-k0",
+   "contentHash": "f43c153958cccb95782252751c40e5e93d325e3060cddbe715d00e55e731b5de",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: t, 0 to 10. Vertical axis: v(t), -5 to 5."
+  },
+  {
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m10-k0",
+   "contentHash": "661a9afa5254b859735d7bfaf783ea5ffa306cac2eeb9f5fc27aa1e85752affb",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 4. Vertical axis: f(x), -3 to 6."
+  },
+  {
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m11-k0",
+   "contentHash": "c27f76425124f6e2db0fb4b091707386d58ed4a7997b02582d24733093484e90",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: f(x), 0 to 7."
+  },
+  {
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m12-k0",
+   "contentHash": "c3430e78ad897c68bfa6b555593aeb5ec28298ad40b5933f3f6fb53a79d0cde1",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_multi_curve",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of f, g. Horizontal axis: x, 0 to 8. Vertical axis: y, -5 to 6."
+  },
+  {
+   "key": "supp-t2b-ab-final:ap_calculus_ab-m01-k0",
+   "contentHash": "28023c39ce18baaa0151733f5ae3c0d54680f7b5bdbb7986eb7379558807128e",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-t2b-ab-final:ap_calculus_ab-m02-k0",
+   "contentHash": "2ad04c8be6017a2901ba8024721b0d80b52fac9163fb6b4856f877e78e6d0837",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: t, 0 to 10. Vertical axis: v(t), -5 to 5."
   }
  ]
 }
