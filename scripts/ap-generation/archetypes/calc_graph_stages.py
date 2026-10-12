@@ -50,4 +50,11 @@ STAGES = {
     "supp_b5_frq_bc": ["frq_polar_region"],
     # 배치 6: FRQ 새 유형(배치 2 에서 같은 유형의 두 번째 묶음이 근접 중복 게이트로 반려됐으므로 유형 자체를 늘린다): AB 계산기 모형 분석, AB 계산기 불가 조각 함수
     "supp_b6_frq_ab": ["frq_model_analysis_calc", "frq_piecewise_diff"],
+    # 2026-10-12 오너 승인 예비 보충 2차(docs/ap/reserve-topup-2.md): 교체안 반영 후 남은 1.5배 예비 부족 칸만. 시험 1회 = 원형 1 시드.
+    "supp_t2_ab": [
+        "g_accum_concave_down_graph", "g_accum_intersect_formula_calc", "g_integral_piecewise_graph_formula_calc", "g_integral_even_function_graph", "g_linear_combo_two_graphs", "g_direction_changes_count_graph",
+        "g_avg_value_intersection_graph", "c_ftc_initial_value_calc", "c_riemann_error_calc", "c_normal_line_calc", "c_related_rates_distance_calc", "c_limit_numeric_e_calc",
+    ],
+    # 보충 2차 두 번째 배치: 첫 배치에서 반려된 구조 둘을 고쳐 새 후보로(같은 후보 수선 아님) — 단원 4 그래프 필수 1·단원 2 계산기 1
+    "supp_t2b_ab": ["g_direction_changes_count_graph", "c_avg_vs_instant_rate_calc"],
 }

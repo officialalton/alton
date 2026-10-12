@@ -1,0 +1,662 @@
+[
+ {
+  "key": "ap_calculus_ab-m01-k0",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "F(3)=5+∫_1^3(sin x+2)dx=5+(cos1−cos3)+4=10.530",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "10.530"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "FTC with initial value, F(b)=F(a)+integral of F'; apply procedure, fits 6.7/1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "10.530 is unique and correct: 5+cos1-cos3+4=10.5303."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem is complete and unambiguous; no stimulus needed. F' continuous (sin x + 2)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions (sign error, derivative value, forgetting F(1)); explanations given. Minor notation slip: explanations use 'f' for F'."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 s, simple numbers, calculator designation consistent with decimal options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean FTC initial-value item with a unique key and distinct distractors. It passes all five criteria; the only blemish is a minor f vs F' notation slip in the explanation."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of FTC Part 2: F(3) = F(1) + integral from 1 to 3 of F'(x) dx. Only one core concept, a short procedure (set up the net change and evaluate it by antiderivative or calculator), and no representation changes. The distractors reflect plausible errors such as dropping F(1) or making a sign mistake. It is a routine skill 1.E item suited to initial learning, not a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k0",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Rewrite as ((1+5x)^{1/(5x)})^5. As x→0+, the inner part goes to e, so the limit is e^5 ≈ 148.413.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "148.413"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound calculator-based limit-estimation item. The key is unique and correct, the distractors are plausible, and the load is typical for the exam.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Numerical estimation of a limit with a calculator fits topic 1.4. The skill is applying a procedure (evaluating at x-values approaching 0 from the right). The limit is the 1^infinity form, whose closed form e^5 is not required, so no later-unit content is needed."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The limit is e^5 ≈ 148.413. The key is unique, and the four options are clearly distinct values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and well-formed, and it tells students to use a calculator."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct misconception: 5 (exponent cancels the factor), e (forgets the 5), and e^(1/5) (wrong exponent). The explanation covers every wrong option. The options are parallel in format and show no length giveaway. The blueprint lists a base_only misconception (answer 1) that has no matching option, which is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, with light calculator use and no ugly arithmetic. A calculator is appropriate and consistent with the designation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: evaluate the expression at a few x values near 0 from the right with a calculator and see the values approach about 148. Distractors reflect common misconceptions (e from the standard form, the coefficient 5, e^(1/5)). Few reasoning steps, no representation change, calculator use is simple, and the options are well separated so no precision issues. The difficulty is not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m03-k0",
+  "cellId": "ap_calculus_ab-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "instant_reject_out_of_scope_knowledge",
+   "reference_pattern_mismatch",
+   "difficulty_from_unfair_sources"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f(3)=e^1.5+3≈7.4817, f'(3)=0.5e^1.5+1≈3.2408, normal slope≈-0.30856; intercept=7.4817+3(0.30856)≈8.407",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "8.407"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item needs the chain rule for e^(x/2), which is Unit 3 content. It is out of scope for topic 2.7, so it is rejected.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "f(x)=e^(x/2)+x requires the chain rule to differentiate e^(x/2), which is Unit 3 content and explicitly out of scope for Unit 2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key 8.407 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Standalone stem, clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors map to distinct misconceptions and the explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is reasonable for a calculator item."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-step: evaluate f(3), differentiate, take the negative reciprocal for the normal slope, build the line, and find the y-intercept. Numbers are calculator-friendly. However, differentiating e^{x/2} requires the chain rule (Unit 3), which is outside Unit 2 scope, so some of the difficulty comes from out-of-scope knowledge. The item should be revised to use e^x + x or similar.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": true,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m04-k0",
+  "cellId": "ap_calculus_ab-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "s^2=x^2+9, ds/dt = x(dx/dt)/s = 6*300/sqrt(45) = 268.328",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "268.328 mph"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard related rates with Pythagorean relation, topic 4.5 / skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 268.328 is unique and correct; moving away so dx/dt=+300."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; variables clearly defined; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct realistic error and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, calculator used only to evaluate the square root; options are consistently formatted."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean standard related-rates MC item with distinct distractors and typical exam load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard related-rates item: set up s^2 = x^2 + 9, differentiate implicitly, find s at x=6, and substitute dx/dt=300 to get about 268.328. It takes a few reasoning steps and has plausible misconception-based distractors. The arithmetic is light and the wording is clear, so the difficulty comes from the concept rather than from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m05-k0",
+  "cellId": "ap_calculus_ab-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "1.841",
+     "brief_reasoning": "Exact = 3(e^{5/3}-e^{1/3}) ≈ 11.697. Left sum (x = 1, 2, 3, 4) ≈ 9.855. Difference ≈ 1.841.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Left sum vs integral error for increasing function; fits 6.2/1.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: I=11.697, L=9.855, diff=1.841; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors I, R-L, R-I are distinct and explained. Minor: blueprint sum_only misconception not represented."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator required, reasonable load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item; key 1.841 verified; distractors reasonable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires computing the exact integral via antiderivative with a u-substitution factor, building a 4-term left Riemann sum, and subtracting to relate the approximation to the exact value (skill 1.F). Several steps but each is routine and calculator-friendly; distractors reflect plausible misconceptions (reporting the exact value, forgetting the factor of 3). Typical of a full-mock AP item, not overly deep or long.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m06-k0",
+  "cellId": "ap_calculus_ab-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "F''=f'. f decreases only on (8,10), so F is concave down on (8,10).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "(8,10)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.5 concavity of an accumulation function via F''=f', connecting the graph of f to F. Fits skill 2.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The slopes of f are 0.5, 1, 0.5, 2.5, -2.5, so f decreases only on (8,10). The key is unique, and no other option is a subset of (8,10)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The vertices, axes, and line-segment description are complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (f positive, f increasing, f negative), and the explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds with no arithmetic. It is consistent with non-calculator use and short parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean item: F''=f' is read off the graph, the key (8,10) is unique, the stimulus is complete, and the distractors are distinct and explained."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single conceptual step: F'' = f', so F is concave down where f is decreasing, which is read directly from the graph as (8,10). Distractors target sign-of-f vs. slope-of-f confusion. No computation, and the wording is clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m07-k0",
+  "cellId": "ap_calculus_ab-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "2.688",
+     "brief_reasoning": "On [2,4], F=2+(x-2)+1.25(x-2)^2; at x=2.688 F≈3.280 and 2√x≈3.279. There is no solution on (0,2] and none after x=4.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Accumulation function from a graph, solved with a calculator; fits 6.4 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified F=x on [0,2] (F<2√x there), F=2+(x-2)+1.25(x-2)^2 on [2,4], a single crossing at 2.688, and F grows faster after 4. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph vertices and axes are complete. The stem defines F and the formula 2√x directly. h appears only in the rationales."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors 1 (g=h'), 0.25 (g=h) and 4 (midpoint) are distinct, realistic misconceptions and I checked each. The explanation uses h without defining it, which is a minor wording flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 seconds with a calculator, which is reasonable. The options are numeric and well separated."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: unique key 2.688, a complete graph, and distinct distractors. The only flaw is that the rationales mention an undefined h, which does not affect the stem."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must build F piecewise from the graph (areas of rectangle and trapezoid), write a quadratic expression for F on [2,4], and solve F(x)=2sqrt(x) with a calculator, while ruling out the spurious root x=4 from the first piece and values beyond x=4. This takes several steps and a representation change (graph to expression to equation). The numbers are clean and the wording is unambiguous. The distractor x=4 is misconception-rich.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m08-k0",
+  "cellId": "ap_calculus_ab-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integral=5+0+2+5=12, c=1.5. f=1.5 once on (0,2) and once at x=5.5. Total 2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 90 seconds, simple geometric areas, no calculator needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear and suitable. The key of 2 is unique, the stimulus is complete, and the distractors map to real misconceptions."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the graph, compute the integral from geometric areas (triangle, triangle, trapezoid), find the average c = 12/8 = 1.5, then return to the graph and count the solutions of f(x)=c across the piecewise segments, including the zero segment and the segment that stays above c. This takes several reasoning steps and a switch between representations (graph, area, average value, intersection count), with light arithmetic and clear wording. The distractors are misconception-based (counting the flat segment, miscounting crossings).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m09-k0",
+  "cellId": "ap_calculus_ab-m09",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v touches 0 at t=4 without changing sign; sign changes only once between t=6 and t=8 (at t=6+6/7).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direction change via sign of v from graph; fits 4.2/2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Zero at t=4 is a touch; one sign change between 6 and 8. Key 1 unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices and axes fully specify the graph; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Rationale for 0 ('counts intervals on which v is positive, forgetting start') is incoherent. Rationale for 3 ('counts vertices where slope changes') does not match: there are 4 interior vertices, not 3. Only option 2 is a coherent misconception."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, no calculator, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct key and good stimulus, but two distractor rationales (0 and 3) are inaccurate or incoherent, so the distractor and explanation criterion fails."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires reading a piecewise-linear velocity graph and recognizing that direction changes occur only where v changes sign. The zero at t=4 is a touch-without-crossing trap, and the one real sign change lies inside a segment, between t=6 and t=8, rather than at a vertex. Concept depth is moderate, there is no heavy computation or reading, and the distractor options are misconception-based. This is standard AP-level difficulty, not a basic recall item and not an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m10-k0",
+  "cellId": "ap_calculus_ab-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "7",
+     "brief_reasoning": "∫0^4 f = 1 - 1.5 + 0.5 + 3.5 = 3.5; f is even, so ∫-4^4 f = 7; 3x is odd, so its integral is 0.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Even/odd symmetry property of definite integrals, with a rule choice that matches 6.6 and 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The area from 0 to 4 is 1 - 1.5 + 0.5 + 3.5 = 3.5, which doubles to 7. The odd term integrates to 0. The key of 7 is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The vertex data are complete, the axes cover the range, and the evenness of f is stated in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "55 (adds 48 from integrating 3x twice over [0, 4]), 0 (treats f as odd), and 7/2 (uses only half the interval) are distinct misconceptions. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Integer vertices, simple arithmetic, about 85 seconds, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of 7 is correct and unique, the distractors encode distinct misconceptions, and the stimulus is complete and appropriate for a non-calculator 6.6 item."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing the even symmetry of f and the odd symmetry of 3x, splitting the integral by linearity, and computing the signed area from the graph using trapezoids. There are several reasoning steps and a graph-to-symmetry-to-value representation change. The numbers are small, and the distractors (3.5 from not doubling, 0 from treating f as odd) are misconception-based. It stays within Unit 6 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m11-k0",
+  "cellId": "ap_calculus_ab-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Trapezoids 0-4: 11+12=23. The integral of xe^{-x/4} from 4 to 8 is 32/e - 48/e^2 ≈ 5.276. Total 28.276.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "28.276"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The task takes about 100 seconds, and a calculator is needed for the integral of the formula part.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and the key is correct. The only flaw is the undefined notation h in the explanation of one distractor."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must split the integral over [0,4] and [4,8] using additivity, find the first part geometrically from a piecewise-linear graph (trapezoid + rectangle = 23), and evaluate the second part numerically with a calculator (5.276). Two representations (graph and expression), a few reasoning steps, and a distractor set built from common partial-answer errors. Numbers are clean and the calculator handles the integral, so the load is fair and typical of a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m12-k0",
+  "cellId": "ap_calculus_ab-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f'(3)=-9/2, g'(3)=1, h'(3)=2(-4.5)-2(1)+2(3)=-5",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-5"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 85 seconds, light arithmetic, no calculator needed. The options are exact values.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well-formed, with a unique key of -5 and distinct distractors tied to real misconceptions. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the correct linear segment at x=3 for each graph, compute slopes, then apply the constant multiple, difference, and power rules to get h'(3) = 2(-4.5) - 2(1) + 6 = -5. Requires a graph-to-slope-to-expression representation change and several steps, but the numbers are small and clean, and the wording is unambiguous. Distractors target plausible errors (omitting 2x gives -11, etc.).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]
