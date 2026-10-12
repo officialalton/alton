@@ -119,6 +119,8 @@ export type MockExamAttemptDetail = {
   sectionLayout?: { key: string; kind: "mc" | "frq"; label: string; minutes: number; count: number; calculator: "allowed" | "not_allowed" | "required" | "na"; options?: number }[];
   /** 문항 오류 판정으로 점수가 조정된 응시(학생·학부모 안내용). 원채점은 DB 에 보존된다. */
   scoreAdjusted?: boolean;
+  /** 같은 시험의 이전 버전을 응시한 뒤 새 버전으로 다시 푼 응시 — 결과 화면에 'Updated version' 안내를 낸다(없으면 null·undefined). */
+  versionNote?: { versionNo: number; itemTotal: number; sharedAnswered: number } | null;
   /** 직원(관리자·담당 교사·컨설턴트) 응답에만 있다. 학생·보호자 응답에는 이 키 자체가 없다(경로 비노출). */
   /** 예상 점수 범위(내부 추정). 서버가 경로로 계산해 범위만 싣는다 — 경로·난이도는 없다. MST 채점 완료 시에만. */
   scoreEstimate?: ScoreEstimate | null;
@@ -174,9 +176,17 @@ export async function loadMockExamAttemptDetail(supabase: SupabaseClient, attemp
   if (!data) return null;
   const d = data as MockExamAttemptDetail & { items: MockExamAttemptItem[] | null };
   const detail = { ...d, items: Array.isArray(d.items) ? d.items : [] };
-  if (detail.format !== "mst") return detail;
+  if (detail.format !== "mst") return { ...detail, versionNote: await loadAttemptVersionNote(supabase, attemptId) };
   const [est, sectionTimeSeconds] = await Promise.all([computeScoreEstimate(detail), loadMstSectionTime(detail.id)]);
   return { ...detail, scoreEstimate: est.estimate, scoreEstimateNote: est.reason === "insufficient_responses" ? "insufficient_responses" : null, sectionTimeSeconds };
+}
+
+/** 결과 화면용 'Updated version' 안내 — 새 버전 재응시일 때만 값이 있다(마이그레이션 482). 실패해도 결과 화면을 막지 않는다. */
+async function loadAttemptVersionNote(supabase: SupabaseClient, attemptId: string): Promise<MockExamAttemptDetail["versionNote"]> {
+  const { data, error } = await supabase.rpc("mock_exam_attempt_version_note", { p_attempt_id: attemptId });
+  const n = data as { updatedVersion?: boolean; versionNo?: number; itemTotal?: number; sharedAnswered?: number } | null;
+  if (error || !n?.updatedVersion) return null;
+  return { versionNo: Number(n.versionNo ?? 0), itemTotal: Number(n.itemTotal ?? 0), sharedAnswered: Number(n.sharedAnswered ?? 0) };
 }
 
 /** MST 섹션 소요 시간 — RPC 가 접근 권한을 확인한 뒤, 모듈 시각(경로 정보 없음)만 서비스 롤로 읽는다. */
@@ -230,6 +240,8 @@ export type MockExamCatalogRow = {
   apSections?: { key: string; kind: "mc" | "frq"; label: string; minutes: number; count: number; calculator: "allowed" | "not_allowed" | "required" | "na" }[] | null;
   /** AP 세트가 다루는 단원 번호(마이그레이션 408). */
   apUnits?: string[] | null;
+  /** 이 학생이 같은 시험 계열의 이전 버전을 이미 응시했을 때만(마이그레이션 482). 새 버전은 재응시로 세며 독립된 새 시험이 아니다. */
+  updatedVersion?: { versionNo: number; itemTotal: number; sharedAnswered: number; priorVersionNo?: number | null } | null;
 };
 
 /** 공개된 모의고사 세트 전체 + 그 학생의 응시 상태 — RPC 한 번(N+1 없음). 학생 본인·학부모·교사·컨설턴트·관리자 열람용. */
@@ -252,10 +264,29 @@ export async function loadPublishedMockExamSets(
   return (data ?? []).map((r) => ({ id: r.id, setGroupId: r.set_group_id, name: r.name, difficultyTier: r.difficulty_tier }));
 }
 
+type UpdatedVersionRow = { examSetId: string; versionNo: number | string; itemTotal: number | string; sharedAnswered: number | string; priorVersionNo?: number | string | null };
+
+/** 같은 시험 계열의 이전 버전을 이미 응시한 공개 세트 → 'Updated version' 정보(examSetId 키). 응시 기록이 없으면 빈 Map. */
+export async function loadUpdatedVersionInfo(supabase: SupabaseClient, studentId: string): Promise<Map<string, NonNullable<MockExamCatalogRow["updatedVersion"]>>> {
+  const { data, error } = await supabase.rpc("mock_exam_updated_version_overview", { p_student_id: studentId });
+  const out = new Map<string, NonNullable<MockExamCatalogRow["updatedVersion"]>>();
+  if (error || !Array.isArray(data)) return out;
+  for (const r of data as UpdatedVersionRow[]) {
+    out.set(r.examSetId, { versionNo: Number(r.versionNo), itemTotal: Number(r.itemTotal), sharedAnswered: Number(r.sharedAnswered), priorVersionNo: r.priorVersionNo == null ? null : Number(r.priorVersionNo) });
+  }
+  return out;
+}
+
 /** 학생·학부모 모의고사 탭 데이터 — 공개 세트 목록 + 응시 요약(RPC 2회, 병렬). */
 export type MockExamOverview = { catalog: MockExamCatalogRow[]; attempts: MockExamAttemptSummary[] };
 
 export async function loadMockExamOverview(supabase: SupabaseClient, studentId: string): Promise<MockExamOverview> {
-  const [catalog, attempts] = await Promise.all([loadMockExamOpenCatalog(supabase, studentId), loadSummaries(supabase, studentId)]);
-  return { catalog, attempts };
+  // RPC 3회 병렬(카탈로그·응시 요약·Updated version 정보). 새 버전 정보는 실패해도 목록 자체를 막지 않는다.
+  const [catalog, attempts, updated] = await Promise.all([
+    loadMockExamOpenCatalog(supabase, studentId),
+    loadSummaries(supabase, studentId),
+    loadUpdatedVersionInfo(supabase, studentId),
+  ]);
+  if (updated.size === 0) return { catalog, attempts };
+  return { catalog: catalog.map((c) => (updated.has(c.examSetId) ? { ...c, updatedVersion: updated.get(c.examSetId)! } : c)), attempts };
 }

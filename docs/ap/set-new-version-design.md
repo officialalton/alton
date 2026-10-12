@@ -19,3 +19,12 @@
 | 응시가 독립 시험으로 집계되는지(`score-aggregate`/`insights`가 attempt_no·`exam_set_group_id` 를 구분) | 확인 필요(grep 상 해당 파일에 그룹/회차 구분 없음 → 같은 계열 재응시를 독립 응시로 셀 수 있음) |
 - 필요한 코드(만들지 않음): (1) 새 버전 초안 생성 RPC/액션(그룹 복제 + 교체 항목 적용 + 게이트 재검증), (2) 학생 목록·시작 화면 배지와 겹침 수 조회(응시 답안의 `problem_version_id` ∩ 새 세트 항목, 쿼리 1개), (3) 집계·인사이트의 재응시/새 버전 취급 확인·보정, (4) 진행 중 응시가 새 버전 공개 뒤에도 옛 버전으로 완료되는 통합 테스트.
 - 오너 결정 필요(이미 보고된 것): 이미 응시한 학생의 새 버전 점수를 새 시험 점수로 볼지(위 설계는 재응시 회차). 지금 응시자가 없으면(테스트 계정 제외) 부담 없음.
+
+## 구현(2026-10-12, 로컬 격리 스택에서만 검증 — 원격 미적용) — 새 기능 착수 전 1장 정리
+1. **흐름**: 관리자가 공개 중인 세트에서 `createMockExamNewVersionAction(sourceSetId, swaps)` → 조립 규칙 점검(`lib/mock-exam/new-version.ts`: 문항군 상한·단원 비중(AB 풀)·계산기·중복·풀 모의고사 겹침 0) → RPC `mock_exam_create_new_version`(슬롯 유형·공개/review_env_ready·묶음 반쪽 교체 금지, 계열당 초안 1개) → 초안 검토 → 기존 `publishMockExamSet`(이제 RPC `mock_exam_publish_set` 한 트랜잭션: 이전 공개본 보관 + 공개, 공개 범위 `access_tier` 승계). 실패·취소: 초안은 `archiveMockExamSetAction` 으로 보관. 학생: 목록 카드에 `Updated version` 배지 + `You already answered N of these questions.` + 재응시 안내, 새 응시 결과 화면에 같은 안내.
+2. **데이터·권한**: 새 RPC 는 service_role 전용 + actor 관리자 검증. 응시는 `exam_set_id` 로 옛 버전 고정(진행 중 응시는 `mock_exam_open_start` 이어하기로 옛 버전 유지). `mock_exam_attempts.is_updated_version_retake`(시작 시 같은 계열 다른 버전 응시가 있으면 true, 트리거), `mock_exam_item_exposures`(학생×문항 최초 노출, 고정형·AP 고정형 응시 시작 때 적재; 문항별 first/re_exposure 는 `mock_exam_attempt_item_exposure_kinds`). 조회 RPC `mock_exam_updated_version_overview`·`mock_exam_attempt_version_note` 는 `_mock_exam_can_view`(학생·보호자·담당 직원).
+3. **UAT 데이터**: 실행 ID 접두 전용 학생(무료 회원 3명)·전용 세트/문항. 실제 공개 세트(AP Calculus AB — Practice Exam)에는 적용하지 않았다(오너 적용 전까지 대기). 통합 테스트는 격리 스택 전용(`SUPABASE_TEST_DB_URL`·`SUPABASE_TEST_API_URL` 명시 + `lib/dev/stack-identity.ts` 검증).
+4. **UI 상태**: 카드(배지·N 문구; N=0 이면 N 문구 숨김, 재응시 안내만), 이력 없는 학생은 배지 없음, 학부모 읽기 전용에도 배지, 결과 화면 상단 안내(SAT·AP 결과 둘 다). 정보 조회 실패는 목록·결과를 막지 않는다.
+5. **검증·성능**: 목록 로드 RPC 2→3회(병렬, 쿼리 증가 1개·세트별 추가 조회 없음), 결과 상세 RPC +1회(비-MST). 집계 취급: 목록·다음 시험·약점은 이미 계열(set_group_id) 단위라 새 버전을 새 시험으로 세지 않음; 분석 `testsStarted/Completed/startedCohort*/satStarted` 는 `is_updated_version_retake` 제외(마이그레이션 483). 점수 추이(`score-aggregate`)는 재응시를 별개 응시로 세는 기존 규칙을 유지(AP·고정형은 추정 점수 없음).
+- 마이그레이션(오너 적용 대기): `20262100000480_mock_exam_version_exposure.sql`, `…481_mock_exam_new_version_rpcs.sql`, `…482_mock_exam_updated_version_info.sql`, `…483_analytics_exclude_updated_version_retakes.sql`.
+- 남은 일: 실제 교체 10문항 목록(`docs/ap/exact-assignment-report.md`)으로 액션 실행·검토·공개는 오너 승인 뒤. 관리자 화면 버튼은 아직 없다(서버 액션만).
