@@ -23,6 +23,8 @@ export type MockExamListRow = {
   /** 카탈로그가 주는 섹션 구성(보관된 지난 응시 행에는 없다). */
   apSections?: MockExamCatalogRow["apSections"];
   apUnits?: string[] | null;
+  /** 이 학생이 같은 시험의 이전 버전을 이미 응시한 새 버전(재응시로 센다 — 새 모의고사가 아니다). */
+  updatedVersion?: MockExamCatalogRow["updatedVersion"];
   /** 세트가 지금은 공개 목록에 없고 응시 기록만 남은 경우(보관된 세트의 지난 응시). */
   archived: boolean;
 };
@@ -84,6 +86,7 @@ export function buildMockExamListRows(catalog: MockExamCatalogRow[], attempts: M
       apLabel: c.apLabel ?? null,
       apSections: c.apSections ?? null,
       apUnits: c.apUnits ?? null,
+      updatedVersion: c.updatedVersion ?? null,
     };
   });
   for (const a of [...attempts].sort(byAttemptNoDesc)) {

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { MockExamListRow, MockExamListState } from "@/lib/mock-exam/open-list";
 import { attemptLabel, completedScoreText, listStateOf as listStateOfStatus } from "@/lib/mock-exam/open-list";
+import UpdatedVersionNote, { UpdatedVersionBadge } from "@/app/components/UpdatedVersionNote";
 import { AP_SUBJECT_NAME, apBadgeText, apCoverageLines, apGuidanceLines } from "@/lib/ap-exam/layouts";
 
 // 공개 모의고사 목록(학생·학부모 공용). 학생은 시작·이어서·결과 보기, 학부모는 읽기 전용(시작 불가).
@@ -56,8 +57,10 @@ export default function MockExamOpenList({
             ) : (
               <span className="rounded-full bg-grey-100 px-2 py-0.5 text-[10.5px] font-bold text-grey-600">{TIER_LABEL[r.difficultyTier] ?? r.difficultyTier}</span>
             )}
+            {r.updatedVersion && <UpdatedVersionBadge />}
             {r.archived && <span className="text-[10.5px] text-grey-400">Past exam</span>}
           </div>
+          {r.updatedVersion && <UpdatedVersionNote info={r.updatedVersion} />}
           {r.examProgram === "ap" && apGuidanceLines({ subject: r.apSubject, layout: r.apSections, name: r.name }).map((l) => <p key={l} className="mt-1 text-[12px] text-grey-600" data-testid="ap-guidance">{l}</p>)}
           {r.examProgram === "ap" && apCoverageLines({ subject: r.apSubject, units: r.apUnits, layout: r.apSections, name: r.name, label: r.apLabel }).map((l, i) => <p key={l} className={`${i === 0 ? "mt-1 font-semibold" : ""} text-[12px] text-grey-600`} data-testid="ap-coverage">{l}</p>)}
           {r.description && <p className="mt-1 text-[12px] text-grey-500">{r.description}</p>}

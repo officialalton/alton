@@ -5,6 +5,7 @@ import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary
 import { AP_SUBJECT_NAME, apBadgeText, apCoverageLines, apGuidanceLines, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
 import { AccuracyBarList } from "@/app/components/AccuracyBars";
 import AttemptSwitcher from "./AttemptSwitcher";
+import UpdatedVersionNote, { UpdatedVersionBadge } from "@/app/components/UpdatedVersionNote";
 import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
 import { parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
@@ -45,6 +46,12 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
     <div className="flex flex-col gap-4" data-testid="ap-exam-result">
       <section className="rounded-lg border border-grey-200 bg-white p-4">
         <AttemptSwitcher attempt={attempt} attempts={attempts} attemptHrefBase="/student/mock-exam/" />
+        {attempt.versionNote && (
+          <div className="mb-2" data-testid="result-updated-version">
+            <UpdatedVersionBadge />
+            <UpdatedVersionNote info={attempt.versionNote} />
+          </div>
+        )}
         <p className="text-[12px] font-bold text-grey-500">{subject} · <span data-testid="ap-badge">{apBadgeText({ subject: attempt.apSubject, label: attempt.apLabel, layout: attempt.sectionLayout, name: attempt.examSetName })}</span></p>
         {apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout, name: attempt.examSetName }).map((l) => <p key={l} className="mt-1 text-[11.5px] text-grey-500" data-testid="ap-set-guidance">{l}</p>)}
           {apCoverageLines({ subject: attempt.apSubject, units: apUnitsFromDomains(attempt.items.map((i) => i.satDomain)), layout: attempt.sectionLayout, name: attempt.examSetName, label: attempt.apLabel, result: true }).map((l, i) => <p key={l} className={`${i === 0 ? "font-semibold " : ""}mt-1 text-[11.5px] text-grey-600`} data-testid="ap-coverage">{l}</p>)}
