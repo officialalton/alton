@@ -11,6 +11,10 @@ vi.mock("../ap-stock-actions", () => ({
   apStockLoadCheckAction: () => check(),
   apStockAssembleAction: vi.fn(),
 }));
+vi.mock("../ap-new-version-actions", () => ({
+  getApNewVersionOverviewAction: () => Promise.resolve({ target: { ref: "x", kind: "remote", canWrite: true, reason: null }, sets: [], plans: [] }),
+  apNewVersionPreviewAction: vi.fn(), apNewVersionDraftAction: vi.fn(), apNewVersionPublishAction: vi.fn(), apSetAccessTierAction: vi.fn(),
+}));
 import ApStockPanel from "./ApStockPanel";
 
 const ov = (canWrite: boolean) => ({

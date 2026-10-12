@@ -9,6 +9,7 @@ import {
   type ApStockOverview,
 } from "../ap-stock-actions";
 import type { BatchCheck } from "@/lib/ap-admin/load-check";
+import ApNewVersionPanel from "./ApNewVersionPanel";
 
 // 'AP 재고 관리'(2026-10-12). 터미널 스크립트를 대체하는 관리자 화면: 점검 → (적재 · 렌더 기록 · 화면 기록 · 문제은행 변환) → 초안 세트.
 // 모든 쓰기는 "미리보기 → 확인 체크 → 실행" 순서이고, 실행은 미리보기와 같은 계획일 때만 된다. 공개(게시)는 이 화면에 없다.
@@ -21,7 +22,7 @@ const STEP_HELP: Record<Step, string> = {
   screen: "화면 증거(모바일·데스크톱 전 항목 통과, 해시 일치)가 있는 후보만 화면 검증으로 기록합니다. 자동 점검은 그래프 의미·문장 자연스러움을 확인하지 않습니다.",
   convert: "렌더·화면 검증이 끝난 후보를 모의고사용 문제로 변환합니다(용도는 변환 때 고정, 한 번에 최대 20건).",
 };
-const ACTION_LABEL: Record<string, string> = { load_check: "적재 점검", import: "적재", render_verify: "렌더 기록", screen_verify: "화면 기록", convert: "변환", assemble_draft: "초안 세트" };
+const ACTION_LABEL: Record<string, string> = { load_check: "적재 점검", import: "적재", render_verify: "렌더 기록", screen_verify: "화면 기록", convert: "변환", assemble_draft: "초안 세트", new_version_preview: "새 버전 미리보기", new_version_draft: "새 버전 초안", new_version_publish: "새 버전 공개", set_access_tier: "공개 범위 변경" };
 
 type StepResult = Awaited<ReturnType<typeof apStockStepAction>>;
 
@@ -80,6 +81,7 @@ function AssemblePanel({ ov, canWrite, onDone }: { ov: ApStockOverview; canWrite
   const sets = ov.assignments.find((a) => a.file === file)?.sets ?? [];
   const [setId, setSetId] = useState("");
   const [name, setName] = useState("");
+  const [tier, setTier] = useState<"free" | "tutoring">("free");
   const [preview, setPreview] = useState<StepResult | null>(null);
   const [result, setResult] = useState<StepResult | null>(null);
   const [confirm, setConfirm] = useState(false);
@@ -90,7 +92,7 @@ function AssemblePanel({ ov, canWrite, onDone }: { ov: ApStockOverview; canWrite
     if (!file || !setId) return;
     setBusy(true); setError(null);
     try {
-      const r = await apStockAssembleAction({ reportFile: file, setId, name: name || undefined, execute, planHash: execute ? preview?.planHash ?? null : null });
+      const r = await apStockAssembleAction({ reportFile: file, setId, name: name || undefined, tier, execute, planHash: execute ? preview?.planHash ?? null : null });
       if (execute) { setResult(r); setPreview(null); setConfirm(false); onDone(); } else { setPreview(r); setResult(null); }
     } catch (e) { setError(e instanceof Error ? e.message : "실패했습니다."); }
     finally { setBusy(false); }
@@ -114,6 +116,11 @@ function AssemblePanel({ ov, canWrite, onDone }: { ov: ApStockOverview; canWrite
         </label>
         <label className="flex flex-col gap-0.5">이름(비우면 기본값)
           <input className="min-h-9 rounded border border-grey-300 px-2" value={name} onChange={(e) => { setName(e.target.value); reset(); }} placeholder="AP Calculus BC — Practice Exam 1" />
+        </label>
+        <label className="flex flex-col gap-0.5">공개 범위(공개할 때 적용)
+          <select aria-label="공개 범위" className="min-h-9 rounded border border-grey-300 px-2" value={tier} onChange={(e) => { setTier(e.target.value as "free" | "tutoring"); reset(); }}>
+            <option value="free">무료 공개(기본)</option><option value="tutoring">튜터링 전용</option>
+          </select>
         </label>
       </div>
       <div className="mt-2 flex flex-wrap items-center gap-2">
@@ -198,6 +205,7 @@ export default function ApStockPanel() {
         </div>
         {ov.batches.length === 0 ? <p className="text-sm text-grey-400">등록된 배치가 없습니다.</p> : steps.map((s) => <StepCard key={`${batchId}-${s}`} step={s} batchId={batchId} canWrite={ov.target.canWrite} onDone={load} />)}
         <AssemblePanel ov={ov} canWrite={ov.target.canWrite} onDone={load} />
+        <ApNewVersionPanel canWrite={ov.target.canWrite} />
       </section>
 
       <section>

@@ -18,7 +18,7 @@ export type ApStockOverview = {
   history: { id: string; createdAt: string; actor: string; action: string; mode: string; status: string; targetRef: string; scope: Record<string, unknown>; counts: Record<string, number>; note: string | null }[];
 };
 export type ApStockStepInput = { step: "import" | "render" | "screen" | "convert"; batchId: string; execute: boolean; planHash?: string | null };
-export type ApStockAssembleInput = { reportFile: string; setId: string; name?: string; execute: boolean; planHash?: string | null };
+export type ApStockAssembleInput = { reportFile: string; setId: string; name?: string; execute: boolean; planHash?: string | null; tier?: "free" | "tutoring" };
 
 const target = () => resolveStockTarget({ NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL, AP_STOCK_ADMIN_ALLOWED_REFS: process.env.AP_STOCK_ADMIN_ALLOWED_REFS, AP_STOCK_ADMIN_BLOCKED_REFS: process.env.AP_STOCK_ADMIN_BLOCKED_REFS, VERCEL_ENV: process.env.VERCEL_ENV });
 
@@ -78,5 +78,5 @@ export async function apStockStepAction(input: ApStockStepInput): Promise<StepRe
 export async function apStockAssembleAction(input: ApStockAssembleInput): Promise<StepResult & { auditWarning?: string }> {
   const { adminUserId } = await requireAdmin();
   const c: Ctx = { db: createAdminClient(), target: target(), actorId: adminUserId };
-  return guarded(c, { action: "assemble_draft", mode: input.execute ? "execute" : "dry_run", scope: { reportFile: input.reportFile, setId: input.setId } }, () => runAssemble(c, input.reportFile, input.setId, input.name, input.execute, input.planHash));
+  return guarded(c, { action: "assemble_draft", mode: input.execute ? "execute" : "dry_run", scope: { reportFile: input.reportFile, setId: input.setId, tier: input.tier ?? "free" } }, () => runAssemble(c, input.reportFile, input.setId, input.name, input.execute, input.planHash, input.tier ?? "free"));
 }
