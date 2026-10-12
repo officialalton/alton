@@ -9,8 +9,8 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { readKeysFile } from "./keys-file";
 import { loadEnvLocal } from "../keywords/db";
-import { gateCandidate } from "../../lib/ap-figures/gate";
-import { checkRenderedMatchesDb, AUTOMATED_LIMITATION, judgeScreenEntries, resolveVerifyTarget, type RenderReportRow, type ScreenEntry, type ScreenEvidence } from "../../lib/ap-generation/verify-guard";
+import { decideRender, decideScreen } from "../../lib/ap-admin/verify-plan";
+import { resolveVerifyTarget, type RenderReportRow, type ScreenEntry, type ScreenEvidence } from "../../lib/ap-generation/verify-guard";
 
 const has = (n: string) => process.argv.includes(`--${n}`);
 const arg = (n: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : undefined; };
@@ -39,14 +39,11 @@ async function main() {
     const byKey = new Map(report.results.map((r) => [r.key, r]));
     let ok = 0, already = 0; const skipped: string[] = [];
     for (const r of rows) {
-      if (r.render_verified) { already++; continue; }
-      if (Array.isArray(r.defect_flags) && r.defect_flags.length) { skipped.push(`${r.candidate_key}: 생성기 결함 플래그(${r.defect_flags.join(", ")}) — 렌더 검증 대상 아님`); continue; }
-      const g = gateCandidate({ candidateKey: r.candidate_key, apSubjectCode: r.ap_subject_code, kind: r.kind, payload: r.payload });
-      if (g.status === "fail") { skipped.push(`${r.candidate_key}: 렌더 게이트 실패(${g.issues.filter((i) => i.level === "error").map((i) => i.code).join(", ")})`); continue; }
-      const m = checkRenderedMatchesDb(byKey.get(r.candidate_key), r.payload);
-      if (!m.ok) { skipped.push(`${r.candidate_key}: ${m.reason}`); continue; }
+      const d = decideRender(r, byKey.get(r.candidate_key), path.relative(process.cwd(), reportPath)); // 판정 규칙은 lib/ap-admin/verify-plan.ts(관리자 화면과 공유)
+      if (d.action === "already") { already++; continue; }
+      if (d.action === "skip") { skipped.push(`${r.candidate_key}: ${d.reason}`); continue; }
       ok++;
-      if (execute) { const { error: e } = await db.rpc("ap_set_verification", { p_candidate_key: r.candidate_key, p_render: true, p_screen: null, p_evidence: { gate: "ap-figures/gate", status: g.status, renderType: g.renderType, need: g.need, contentHash: byKey.get(r.candidate_key)!.contentHash, report: path.relative(process.cwd(), reportPath), at: new Date().toISOString() }, p_actor: admin?.id }); if (e) throw new Error(e.message); }
+      if (execute) { const { error: e } = await db.rpc("ap_set_verification", { p_candidate_key: r.candidate_key, p_render: true, p_screen: null, p_evidence: d.evidence, p_actor: admin?.id }); if (e) throw new Error(e.message); }
     }
     for (const s of skipped) console.log(`- 건너뜀 ${s}`);
     console.log(`렌더 검증 ${execute ? "기록" : "대상"} ${ok}건, 건너뜀 ${skipped.length}건, 이미 검증됨 ${already}건 (후보 ${rows.length}건)`);
@@ -65,15 +62,11 @@ async function main() {
     for (const r of rows) {
       const es = byCand.get(r.candidate_key);
       if (!es) continue;
-      if (!r.render_verified) { skipped.push(`${r.candidate_key}: 렌더 검증이 먼저입니다.`); continue; }
-      const v = judgeScreenEntries(es, r.payload, process.cwd(), { requireResult: ev.schema === "ap-screen-evidence/v2" || ev.schema === "ap-screen-evidence/v3", requireStimulus: ev.schema === "ap-screen-evidence/v3" }); // screenshot 은 저장소 루트 기준 상대경로
-      if (!v.ok) { skipped.push(`${r.candidate_key}: ${v.reason}`); continue; }
-      const kind = es.every((e) => e.checker_kind === "automated") ? "automated" : es.every((e) => e.checker_kind === "human") ? "human" : "mixed";
-      const prev = r.screen_evidence as { checkerKind?: string; contentHash?: string; evidenceSchema?: string } | null;
-      if (r.screen_verified && prev?.checkerKind === kind && prev?.contentHash === es[0].content_hash && prev?.evidenceSchema === (ev.schema ?? null)) { already++; continue; }
-      if (r.screen_verified) relabeled++; else n++; // 이미 검증된 후보는 해시를 바꾸지 않고 증거 라벨만 갱신한다(멱등)
-      const evidence = { evidenceSchema: ev.schema ?? null, checkerKind: kind, contentHash: es[0].content_hash, limitations: kind === "human" ? null : AUTOMATED_LIMITATION, entries: es.map((e) => ({ checker_kind: e.checker_kind, viewport: e.viewport, screenshot: e.screenshot, timestamp: e.timestamp, checker: e.checker, checks: e.checks })), generator: ev.generator ?? null, at: new Date().toISOString() };
-      if (execute) { const { error: x } = await db.rpc("ap_set_verification", { p_candidate_key: r.candidate_key, p_render: null, p_screen: true, p_evidence: evidence, p_actor: admin?.id }); if (x) throw new Error(x.message); }
+      const d = decideScreen(r, es, ev, process.cwd()); // screenshot 은 저장소 루트 기준 상대경로
+      if (d.action === "skip") { skipped.push(`${r.candidate_key}: ${d.reason}`); continue; }
+      if (d.action === "already") { already++; continue; }
+      if (d.action === "relabel") relabeled++; else n++; // 이미 검증된 후보는 해시를 바꾸지 않고 증거 라벨만 갱신한다(멱등)
+      if (execute) { const { error: x } = await db.rpc("ap_set_verification", { p_candidate_key: r.candidate_key, p_render: null, p_screen: true, p_evidence: d.evidence, p_actor: admin?.id }); if (x) throw new Error(x.message); }
     }
     console.log(`화면 검증(${execute ? "기록" : "대상"}) 신규 ${n}건, 라벨 갱신 ${relabeled}건, 이미 같은 증거 ${already}건`);
     for (const s of skipped) console.log(`- 건너뜀 ${s}`);

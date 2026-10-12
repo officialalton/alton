@@ -61,3 +61,4 @@
 - AP 문항군은 구조 기준으로 관리(2026-10-09 오너): 숫자·표현·코드 원형만 다른 변형은 새 독립 문항군으로 세지 않고 애매하면 보수적으로 같은 군 — docs/ap/family-structure-review.md, docs/ap/supplement-structure-review.md
 - AP 보강 생성 총상한 $13.20(2026-10-09 오너 승인, 상한은 지출 목표 아님) 중 실지출 $3.2920, 누적 $31.2912(중단선 $45·총상한 $50)
 - AP 최종 편성 문항군 기준 = 보수적 구조 판정(2026-10-09 오너): `data/ap/stock/structure-groups.json`을 보수 묶음으로 승격(경계 8묶음을 기존 군에 병합, 측정상 보강 MC 독립 군 28→21). 코드 원형·숫자 차이는 별도 군으로 세지 않음 — docs/ap/exact-assignment-report.md §11
+- 관리자 AP 재고 관리 화면(2026-10-12 오너): 재고 점검·적재·렌더/화면 검증 기록·모의고사용 변환·초안 세트 저장은 터미널 스크립트 대신 관리자 화면에서, 미리보기→확인→실행·멱등·INSERT/표식만, 게시 세트·응시·답안·결과 불변. 쓰기는 AP_STOCK_ADMIN_ALLOWED_REFS 허용 목록의 비프로덕션 ref 에서만(기본 전부 거부, 프로덕션 배포·차단 목록은 항상 거부, 프로덕션 변경은 별도 승인). 작업 이력 감사 로그 필수 — docs/ap/admin-stock-screen.md — guard: lib/ap-admin/env-guard.test.ts, lib/ap-admin/service.test.ts
