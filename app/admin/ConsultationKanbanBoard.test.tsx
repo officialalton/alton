@@ -61,6 +61,10 @@ vi.mock("./consultation-actions", () => ({
   findDuplicateConsultationCandidates: (params: unknown) => findDuplicateConsultationCandidatesMock(params),
 }));
 
+vi.mock("./direct-account-actions", () => ({
+  reissueDirectOnboardingLinkAction: vi.fn(),
+}));
+
 vi.mock("./LessonReviewAdminEditor", () => ({
   default: () => null,
 }));

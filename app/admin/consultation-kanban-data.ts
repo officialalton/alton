@@ -30,6 +30,18 @@ export type KanbanCard = ConsultationListItem & {
   stage: KanbanStage;
   is_family_root_with_children: boolean;
   intakeSource: "consultation" | "account_creation";
+  // 2026-10-12 — "계정 생성 대기" 카드(발송됐지만 보호자가 아직 열지 않은 직접
+  // 계정 생성 링크). 파이프라인 단계가 없으므로 보드 5개 컬럼에는 그리지 않고
+  // 컬럼 위 별도 구역에만 그린다(stage 값은 자리표시일 뿐).
+  pendingAccountLink?: PendingAccountLink;
+};
+
+export type PendingAccountLink = {
+  linkId: string;
+  createdAt: string;
+  noticeSentAt: string | null;
+  noticeDeliveryStatus: "sent" | "failed";
+  studentCount: number;
 };
 
 // contractStageReached — 2026-09-29(6단계): 예전의 "보호자 정규 진행 희망" 클릭 대신
@@ -203,6 +215,65 @@ async function loadAccountCreationCards(admin: ReturnType<typeof createAdminClie
     });
 }
 
+const PENDING_LINK_CARD_LIMIT = 100;
+
+/** 발송됐지만 아직 보호자가 열지 않은(학생 계정 0건) 직접 계정 생성·자녀 추가 링크.
+ * 만료·폐기(재발급으로 대체 포함)·사용 완료 링크, 이미 계정이 생성된 학생이 하나라도
+ * 있는 링크(이후는 "link:" 계정 생성 카드가 맡는다)는 제외한다 — 중복 없음. */
+async function loadPendingAccountLinkCards(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<KanbanCard[]> {
+  const { data: links } = await admin
+    .from("trial_onboarding_links")
+    .select("id, guardian_name, guardian_email, notice_delivery_status, notice_sent_at, created_at")
+    .is("consultation_id", null)
+    .is("redeemed_at", null)
+    .eq("status", "pending")
+    .gt("expires_at", new Date().toISOString())
+    .in("notice_delivery_status", ["sent", "failed"])
+    .order("created_at", { ascending: false })
+    .limit(PENDING_LINK_CARD_LIMIT);
+  if (!links || links.length === 0) return [];
+
+  const { data: students } = await selectInChunks(links.map((l) => l.id as string), (chunk) => admin
+    .from("trial_onboarding_link_students")
+    .select("link_id, student_name, student_grade, status")
+    .in("link_id", chunk));
+  const byLink = new Map<string, { name: string; grade: string | null; status: string }[]>();
+  for (const s of students ?? []) {
+    const arr = byLink.get(s.link_id as string) ?? [];
+    arr.push({ name: s.student_name as string, grade: (s.student_grade as string | null) ?? null, status: s.status as string });
+    byLink.set(s.link_id as string, arr);
+  }
+
+  return links
+    .filter((l) => !(byLink.get(l.id as string) ?? []).some((s) => s.status === "created"))
+    .map((l) => {
+      const kids = (byLink.get(l.id as string) ?? []).filter((s) => s.status !== "cancelled");
+      const base = buildAccountCreationCard(
+        { id: l.id as string, student_name: "", student_grade: null, child_auth_user_id: "", created_at: l.created_at as string },
+        { guardian_name: l.guardian_name as string, guardian_email: l.guardian_email as string }
+      );
+      return {
+        ...base,
+        id: `pending-link:${l.id}`,
+        child_id: null,
+        trial_intent_confirmed_at: null,
+        requested_children: kids.map((k) => ({ name: k.name, grade: k.grade ?? undefined })),
+        stage: "requested" as KanbanStage,
+        is_family_root_with_children: false,
+        intakeSource: "account_creation" as const,
+        pendingAccountLink: {
+          linkId: l.id as string,
+          createdAt: l.created_at as string,
+          noticeSentAt: (l.notice_sent_at as string | null) ?? null,
+          noticeDeliveryStatus: l.notice_delivery_status as "sent" | "failed",
+          studentCount: kids.length,
+        },
+      };
+    });
+}
+
 /** 계정 생성 카드의 "등록 완료" 판정 — child_id별로 active 계약이 있는지.
  * 실제 상담 경로의 완료 기준(contract active)과 동일한 정본을 그대로 재사용한다
  * (별도 상태 컬럼을 새로 만들지 않는다 — contracts.status가 이미 정본). */
@@ -255,7 +326,7 @@ export async function loadKanbanBoard(admin: ReturnType<typeof createAdminClient
   // 범위 자체를 DB 쪽에서 좁히는 것은 listConsultationsForAdmin()이 다른
   // 화면과 공유하는 함수라 이번 배치에서는 건드리지 않는다 — 범위 조정은
   // 별도 배치로 분리.)
-  const [rows, { data: closedIdsData }, { data: rootIdsData }, accountCreationRows, archivedProfileIds] =
+  const [rows, { data: closedIdsData }, { data: rootIdsData }, accountCreationRows, archivedProfileIds, pendingLinkCards] =
     await Promise.all([
       queryConsultationsInRange(admin, { from: "2020-01-01T00:00:00.000Z", to: "2035-01-01T00:00:00.000Z", includeUnscheduled: true }),
       admin.from("consultations").select("id").not("closure_type", "is", null),
@@ -265,6 +336,7 @@ export async function loadKanbanBoard(admin: ReturnType<typeof createAdminClient
       // 계정 생성 카드 둘 다 child_id를 자녀 profile id로 채우므로(계정 생성
       // 카드는 child_auth_user_id) 합친 뒤 한 번만 걸러도 양쪽이 모두 처리된다.
       archivedHouseholdProfileIds(admin),
+      loadPendingAccountLinkCards(admin),
     ]);
   const closedIds = new Set((closedIdsData ?? []).map((r) => r.id as string));
   const activeConsultations = rows.filter((r) => !closedIds.has(r.id) && r.status !== "cancelled" && r.status !== "no_show");
@@ -289,12 +361,13 @@ export async function loadKanbanBoard(admin: ReturnType<typeof createAdminClient
 
   const rootIdsWithChildren = new Set((rootIdsData ?? []).map((r) => r.family_root_consultation_id as string));
 
-  return active.map((r, i) => ({
+  const board: KanbanCard[] = active.map((r, i) => ({
     ...r,
     stage: stages[i],
     is_family_root_with_children: !r.is_child_onboarding_card && rootIdsWithChildren.has(r.id),
     intakeSource: r.id.startsWith("link:") ? "account_creation" : "consultation",
   }));
+  return [...board, ...pendingLinkCards];
 }
 
 /** R15-A(2/3) — 신규 칸반 분리: 컨설턴트 본인 배정 건만. 카드 데이터·단계
@@ -311,6 +384,6 @@ export async function loadMyKanbanBoard(
   ]);
   const myStudentIds = new Set((assignments ?? []).map((a) => a.student_id as string));
   return all.filter(
-    (c) => c.admissions_consultant_id === consultantId || (c.child_id !== null && myStudentIds.has(c.child_id))
+    (c) => !c.pendingAccountLink && (c.admissions_consultant_id === consultantId || (c.child_id !== null && myStudentIds.has(c.child_id)))
   );
 }
