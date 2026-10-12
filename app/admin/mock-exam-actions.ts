@@ -22,6 +22,8 @@ import { findHangulInStem } from "@/lib/problem-text-guards";
 import { loadMockExamSetContentForStaff, type MockExamSetContentItem } from "@/lib/mock-exam/set-content";
 import { selectInChunks } from "@/lib/select-in-chunks";
 import { fetchAlreadyUsedProblemIds } from "@/lib/mock-exam/used-problem-ids";
+import { OFFICIAL } from "@/lib/ap-exam/ab-select";
+import { checkNewVersionComposition } from "@/lib/mock-exam/new-version";
 
 const RW_DOMAINS = ["rw_information_ideas", "rw_craft_structure", "rw_expression_ideas", "rw_standard_english"];
 const MATH_DOMAINS = ["algebra", "advanced_math", "problem_solving_data", "geometry_trig"];
@@ -581,20 +583,79 @@ export async function publishMockExamSet(examSetId: string): Promise<void> {
   if (countErr) throw new Error(countErr.message);
   if (!itemCount) throw new Error("문항이 없는 세트는 공개할 수 없습니다.");
 
-  const { error: archiveErr } = await db
-    .from("mock_exam_sets")
-    .update({ status: "archived", archived_at: new Date().toISOString() })
-    .eq("set_group_id", target.set_group_id)
-    .eq("status", "published");
-  if (archiveErr) throw new Error(archiveErr.message);
-
-  const { error: publishErr } = await db
-    .from("mock_exam_sets")
-    .update({ status: "published", published_at: new Date().toISOString(), published_by: adminUserId })
-    .eq("id", examSetId);
+  // 이전 공개본 보관 + 공개를 한 트랜잭션(RPC)으로 — 두 UPDATE 사이에 실패해도 공개본이 없는 상태가 남지 않는다.
+  const { error: publishErr } = await db.rpc("mock_exam_publish_set", { p_set_id: examSetId, p_actor_id: adminUserId });
   if (publishErr) throw new Error(publishErr.message);
 
   revalidatePath("/admin");
+}
+
+export type NewVersionSwapInput = { section: string; position: number; problemId: string };
+export type NewVersionResult = { newSetId: string; versionNo: number; swapped: number };
+
+type CandMeta = { ap_candidate_key: string | null; keyword_code: string | null; calculator: string | null; item_family_id: string | null; kind: string | null };
+
+/**
+ * 새 버전 초안 만들기(2026-10-12, docs/ap/set-new-version-design.md): 공개 중인 세트의 같은 set_group_id 에 version_no+1 초안을
+ * 만들고 swaps(슬롯=section+position) 만 바꾼다. 공개 버전·응시·답안·결과는 건드리지 않는다. 공개는 기존 publishMockExamSet(원자적 교체).
+ * 점검 2단: (1) 여기서 조립 규칙(문항군 상한·단원 비중·계산기·중복·풀 모의고사 겹침 0)을 먼저 보고, (2) DB RPC 가 슬롯 유형·공개 상태·AP 묶음을 최종 검증한다.
+ */
+export async function createMockExamNewVersionAction(sourceSetId: string, swaps: NewVersionSwapInput[]): Promise<NewVersionResult> {
+  const { adminUserId } = await requireAdmin();
+  const db = createAdminClient();
+  const { data: set, error: setErr } = await db
+    .from("mock_exam_sets").select("id, set_group_id, status, exam_program, ap_subject, ap_label, section_layout").eq("id", sourceSetId).single();
+  if (setErr) throw new Error(setErr.message);
+  if (set.status !== "published") throw new Error("새 버전은 현재 공개 중인 버전에서만 만들 수 있습니다.");
+  if (!swaps.length) throw new Error("교체할 문항을 하나 이상 지정하세요.");
+
+  if (set.exam_program === "ap") {
+    const [{ data: srcItems, error: e1 }, { data: reps, error: e2 }] = await Promise.all([
+      db.from("mock_exam_set_items").select("section, position, problem_id, problems(ap_candidate_key)").eq("exam_set_id", sourceSetId),
+      db.from("problems").select("id, ap_candidate_key").in("id", swaps.map((x) => x.problemId)),
+    ]);
+    if (e1 || e2) throw new Error((e1 ?? e2)!.message);
+    const keyOf = (r: { ap_candidate_key: string | null } | { ap_candidate_key: string | null }[] | null) => (Array.isArray(r) ? r[0] : r)?.ap_candidate_key ?? null;
+    const keys = [...new Set([...(srcItems ?? []).map((i) => keyOf(i.problems as never)), ...(reps ?? []).map((r) => r.ap_candidate_key)].filter((k): k is string => !!k))];
+    const { data: cands, error: e3 } = await db.from("ap_candidate_items").select("candidate_key, keyword_code, calculator, item_family_id, kind").in("candidate_key", keys);
+    if (e3) throw new Error(e3.message);
+    const meta = new Map((cands ?? []).map((c) => [c.candidate_key as string, c as unknown as CandMeta & { candidate_key: string }]));
+    const toMeta = (key: string | null) => {
+      const c = key ? meta.get(key) : undefined;
+      return { candidateKey: key, kind: (c?.kind === "mc" ? "mc" : c?.kind ? "frq" : null) as "mc" | "frq" | null, unit: c?.keyword_code?.split(".")[0] ?? null, family: c?.item_family_id ?? null, calculator: c?.calculator ?? null };
+    };
+    const { data: used, error: e4 } = await db
+      .from("mock_exam_set_items").select("problem_id, mock_exam_sets!inner(set_group_id, status)")
+      .in("problem_id", swaps.map((x) => x.problemId)).neq("mock_exam_sets.set_group_id", set.set_group_id).in("mock_exam_sets.status", ["draft", "published"]);
+    if (e4) throw new Error(e4.message);
+    const sections = ((set.section_layout as { sections?: { key: string; calculator?: string }[] } | null)?.sections ?? []);
+    const unitBounds = set.ap_subject === "ap_calculus_ab" && set.ap_label === "full_practice"
+      ? Object.fromEntries(Object.entries(OFFICIAL.unitBounds).map(([u, [min, max]]) => [u, { min, max }])) : undefined;
+    const { issues } = checkNewVersionComposition(
+      (srcItems ?? []).map((i) => ({ section: i.section as string, position: i.position as number, problemId: i.problem_id as string, ...toMeta(keyOf(i.problems as never)) })),
+      swaps,
+      {
+        apLabel: set.ap_label as "full_practice" | "mc_practice" | "frq_practice" | null,
+        sectionCalculator: Object.fromEntries(sections.map((x) => [x.key, x.calculator ?? "na"])),
+        unitBounds,
+        usedByOtherExams: new Set((used ?? []).map((u) => u.problem_id as string)),
+        replacements: new Map((reps ?? []).map((r) => [r.id as string, { problemId: r.id as string, ...toMeta(r.ap_candidate_key as string | null) }])),
+      },
+    );
+    if (issues.length) throw new Error(`새 버전 구성이 조립 규칙을 어깁니다: ${issues.slice(0, 8).join(", ")}`);
+  }
+
+  const { data, error } = await db.rpc("mock_exam_create_new_version", {
+    p_source_set_id: sourceSetId,
+    p_swaps: swaps.map((x) => ({ section: x.section, position: x.position, problem_id: x.problemId })),
+    p_actor_id: adminUserId,
+  });
+  if (error) throw new Error(error.message);
+  const r = data as { newSetId: string; versionNo: number; swapped: number };
+  // 초안 문항을 DB 준비도 함수로 한 번 더 확인한다(공개 게이트와 같은 기준) — 문제가 있으면 초안을 보관 처리하고 알린다.
+  await assertSetItemsReady(db, r.newSetId, true);
+  revalidatePath("/admin");
+  return { newSetId: r.newSetId, versionNo: r.versionNo, swapped: r.swapped };
 }
 
 /** 관리자 흐름 "보관" — 초안·공개 어느 상태든 더 이상 쓰지 않을 세트를 보관 처리한다.

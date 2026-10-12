@@ -61,3 +61,4 @@
 - AP 문항군은 구조 기준으로 관리(2026-10-09 오너): 숫자·표현·코드 원형만 다른 변형은 새 독립 문항군으로 세지 않고 애매하면 보수적으로 같은 군 — docs/ap/family-structure-review.md, docs/ap/supplement-structure-review.md
 - AP 보강 생성 총상한 $13.20(2026-10-09 오너 승인, 상한은 지출 목표 아님) 중 실지출 $3.2920, 누적 $31.2912(중단선 $45·총상한 $50)
 - AP 최종 편성 문항군 기준 = 보수적 구조 판정(2026-10-09 오너): `data/ap/stock/structure-groups.json`을 보수 묶음으로 승격(경계 8묶음을 기존 군에 병합, 측정상 보강 MC 독립 군 28→21). 코드 원형·숫자 차이는 별도 군으로 세지 않음 — docs/ap/exact-assignment-report.md §11
+- 모의고사 세트 새 버전 적용(2026-10-12 오너 설계 승인): 같은 set_group_id version_no+1 초안(슬롯 교체)→원자적 공개로 이전 공개본 보관, 진행 중 응시는 옛 버전으로 완료, 이미 응시한 학생의 새 버전은 'Updated version' 배지+겹친 문항 수 표시 후 재응시 회차로 취급(독립된 새 시험으로 세지 않음) — docs/ap/set-new-version-design.md — guard: lib/mock-exam/mock-exam-new-version.integration.test.ts, lib/mock-exam/open-list-updated-version.test.tsx

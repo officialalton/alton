@@ -4,6 +4,7 @@ import AttemptSwitcher from "./AttemptSwitcher";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics/track";
 import { dedupeStem } from "@/lib/problem-text-guards";
+import UpdatedVersionNote, { UpdatedVersionBadge } from "@/app/components/UpdatedVersionNote";
 import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 import { AccuracyBarList } from "@/app/components/AccuracyBars";
 import { computeMockExamReport, weakSkills, type BreakdownRow } from "@/lib/mock-exam/report";
@@ -463,6 +464,12 @@ export default function MockExamResultView({
   return (
     <div>
       <AttemptSwitcher attempt={attempt} attempts={attempts} attemptHrefBase={attemptHrefBase} onSelect={onSelectAttempt} />
+      {attempt.versionNote && (
+        <div className="mb-3" data-testid="result-updated-version">
+          <UpdatedVersionBadge />
+          <UpdatedVersionNote info={attempt.versionNote} />
+        </div>
+      )}
       <div role="tablist" aria-label="Result sections" className="mb-4 flex gap-1 overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-grey-200">
         {TABS.map((t) => (
           <button
