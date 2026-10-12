@@ -1,0 +1,332 @@
+[
+ {
+  "key": "ap_calculus_ab-m01-k0",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "T'(7) is the slope of the segment from (6,7) to (8,5): (5-7)/2 = -1. So the temperature is decreasing at 1 °C/min.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpreting the derivative in context with units; fits topic 4.1 and skill 3.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope of the segment through t=7 is -1, so the temperature is decreasing at 1 degree C per minute. The key D is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes and vertices are fully specified. Minor grammar slip: '1 degrees'."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (sign, value as rate, average rate), each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short task, no calculator needed, about 85 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean item with a unique key, a complete graph specification, and distinct misconception-based distractors. Only a minor grammar slip ('1 degrees')."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read the slope of the linear segment on [6,8] from the graph (-1), then interpret the sign and units in context. The distractors target a sign error, confusing T(7) with T'(7), and average versus instantaneous rate. The concept depth is shallow, the arithmetic is trivial, and the wording is clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k0",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "h increases on [2,4] and decreases on [4,6], so the maximum is at x=4. h(4)=3sin2-1≈1.728. Other candidates are lower: h(0)=-1, h(6)≈-3.577, and the critical point x≈1.68 gives h≈-0.45.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1.728"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Candidates test on h=f-g with corners and endpoints; fits 5.5 and 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Max at x=4, h=3sin2-1≈1.728; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices fully specified; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct. The 1.140 rationale is vague and does not clearly match the value, but this is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 2 minutes with a calculator, which is reasonable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, with key 1.728 and a complete stimulus. The only weakness is the vague rationale for the 1.140 distractor."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must build h' from a piecewise-linear graph and a trig function, find where h'=0 on each segment, and recognize that the corner at x=4 is a candidate where h' changes sign. They then apply the candidates test over endpoints, the critical point, and the corners. The numbers are clean enough for a calculator, and the distractors reflect real misconceptions: the endpoint value, the max of g, and a wrong critical value.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m03-k0",
+  "cellId": "ap_calculus_ab-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "instant_reject_out_of_scope_knowledge",
+   "difficulty_from_unfair_sources"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f(1)=e^-0.25≈0.7788, f'(1)=0.75e^-0.25≈0.5841, g(1)=4, g'(1)=1; q'=(0.5841*4-0.7788)/16≈0.097",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "0.097"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "f(x)=x e^{-x/4} requires the chain rule to differentiate e^{-x/4}; chain rule is Unit 3, out of scope for Unit 2 topic 2.9."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 0.097 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph vertices and axes complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions, each explained; 0.584 coincides with f'(1) but is fine."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load; calculator use is minimal but acceptable."
+   },
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Computation and key are correct, but f(x)=x e^{-x/4} needs the chain rule (Unit 3), which is outside Unit 2 scope. Reject for out-of-scope knowledge; replace the exponent with a plain e^x or similar."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item needs a graph-to-value/slope reading (g(1)=4, g'(1)=1), a derivative of f, and then the quotient rule, with a calculator for the final value. The reasoning load is appropriate for a mock exam. However, f(x)=x e^{-x/4} requires the chain rule, which is Unit 3 and out of scope. A calculator numeric derivative could bypass it, but the item implicitly depends on out-of-scope knowledge. The arithmetic is light and the distractors are sensible (f'(1), a sign error).",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": true,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m04-k0",
+  "cellId": "ap_calculus_ab-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "-0.195",
+     "brief_reasoning": "h''=f''g+2f'g' (g''=0). g(1)=4,g'(1)=1; f'(1)=0.5841, f''(1)=-0.3407 → -0.195",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Higher-order derivative of a product with a graph-based factor; fits 3.6 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified h''(1) = -0.195 with g(1)=4, g'(1)=1, g''=0 at x=1; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices fully specify the graph, axes are given, x=1 is interior to a segment, and the stem asks for h''(1)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct misconception (misplaced factors, first derivative, dropped middle term); the explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 seconds, a calculator is reasonable for evaluating e^{-1/4} terms, and the numeric options are well separated."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, well specified, and has good distractors. It is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires second-derivative product rule, f'' via product and chain rule, reading g(1) and g'(1) from the graph, and recognizing g''=0 on a segment interior. Computation is modest (one exponential evaluated). Answer verified as -0.195. Distractors reflect real misconceptions such as dropping the 2f'g' term. No out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m05-k0",
+  "cellId": "ap_calculus_ab-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separable equation: f(8) = 2·exp(∫₀⁸ g dx). The segment areas are 1 − 1 − 1 + 2 = 1, so f(8) = 2e ≈ 5.437.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "5.437"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Separation of variables with initial condition, integral read from a graph; in scope for AB 7.7."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Integral of g = 1, f(8)=2e≈5.437 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete: axes and vertices given, line segments stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (3, 2e^2, 2) and the explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds; the calculator need is minimal (e^1) but the designation is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key 5.437 is correct and unique, the graph is fully specified, and the distractors encode distinct misconceptions. The only weakness is that the calculator is barely needed."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires separating variables, recognizing that ln|y| change equals the integral of g, computing signed areas from a piecewise-linear graph (graph to integral to exponential), then applying the initial condition. Multi-step with a representation change, but the numbers are simple and the wording is clear. Typical of a full-mock AB item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m06-k0",
+  "cellId": "ap_calculus_ab-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "6+1+6=13",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "13"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Trapezoidal sum with unequal subintervals from a graph; fits 6.2 / 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "6+1+6=13, unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices fully specified; the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 14, 40/3 and 12 each match a distinct misconception and are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, simple arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key of 13 is verified, the distractors are distinct and explained, and the stimulus is complete."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student reads vertex values from a graph and applies the trapezoidal rule to unequal subintervals (widths 2, 2, 4), summing three trapezoids to get 13. Small integer arithmetic. The unequal widths and the graph-to-computation change are legitimate, in-scope difficulty levers. Distractors reflect plausible errors such as using equal widths or averaging incorrectly. This is a standard AP-level procedure item, more than basic recall but not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

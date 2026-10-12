@@ -1,0 +1,33 @@
+{
+ "run": "s2-graph-bc",
+ "subject": "ap_calculus_bc",
+ "generatedAt": "2026-10-09T08:16:30.230Z",
+ "totalCostUsd": 0.25,
+ "newSpendSinceBaseline": 0.51,
+ "cap": 50,
+ "calls": 24,
+ "candidates": 6,
+ "mcCandidates": 6,
+ "frqCandidates": 0,
+ "passedAll": 5,
+ "adopted": 5,
+ "mcAdopted": 5,
+ "frqAdopted": 0,
+ "reserve": 0,
+ "yield": 0.833,
+ "costPerAdopted": 0.049,
+ "callsPerAdopted": 4.8,
+ "duplicateRejected": 0,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 6
+ },
+ "rejectionReasons": {
+  "solver_disagrees": 1,
+  "criterion_failed_stimulus_expression": 1
+ },
+ "unfilledCells": [
+  "ap_calculus_bc-m05"
+ ]
+}

@@ -1,0 +1,963 @@
+[
+ {
+  "candidateKey": "ap_calculus_bc-m01-k0",
+  "cellId": "ap_calculus_bc-m01",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "mc",
+  "keywordCode": "10.10",
+  "unitCode": "10",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_bc_alt_terms_calc",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires applying the alternating series error bound a_{N+1} < 0.0005, solving (N+1)(N+2) > 2000, and handling the off-by-one index. The distractors target common misconceptions (using a_N, boundary check). The arithmetic is light and the wording is clear; the series hypotheses (decreasing, terms tending to 0) are easy to verify.",
+  "payload": {
+   "archetype": "c_bc_alt_terms_calc",
+   "topic": "10.10",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "The alternating series $\\sum_{n=1}^{\\infty}(-1)^{n+1}\\dfrac{1}{n^{2}+n}$ converges. What is the least number of terms $N$ for which the alternating series error bound guarantees $|S-S_N|<0.0005$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$43$",
+     "why": "Requires only b_(N+2) < tolerance, which allows one term too few.",
+     "value": "43.000000"
+    },
+    {
+     "text": "$44$",
+     "why": "The error is at most b_(N+1) = 1/((N+1)^2 + N + 1); find the smallest N with this less than 0.0005 using a calculator.",
+     "value": "44.000000"
+    },
+    {
+     "text": "$1999$",
+     "why": "Uses the tolerance squared when solving b_(N+1) < tolerance.",
+     "value": "1999.0000"
+    },
+    {
+     "text": "$45$",
+     "why": "Chooses the smallest N with b_N < tolerance instead of b_(N+1), which is one term too many.",
+     "value": "45.000000"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "p=2",
+    "tol=0.0005",
+    "N=44"
+   ],
+   "blueprint": {
+    "id": "c_bc_alt_terms_calc",
+    "subject": "ap_calculus_bc",
+    "kind": "mc",
+    "concept": "Use the alternating series error bound to find how many terms are needed, with a calculator",
+    "topic": "10.10",
+    "skill": "1.E",
+    "student_thinking": [
+     "Identify the terms b_n and check that they decrease to 0",
+     "State the error bound |S - S_N| <= b_(N+1)",
+     "Find the least N with b_(N+1) below the tolerance using a calculator"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "b_n is positive, decreasing and tends to 0 so the alternating series error bound applies",
+      "evidence": "1/(n^p + n) decreases to 0"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "off_by_one_low",
+      "description": "uses the bound b_N"
+     },
+     {
+      "id": "one_term_too_few",
+      "description": "uses b_(N+2)"
+     },
+     {
+      "id": "counts_from_zero",
+      "description": "indexes from zero"
+     },
+     {
+      "id": "squared_tolerance",
+      "description": "squares the tolerance"
+     }
+    ],
+    "verification": {
+     "independent_path": "terms computed in floating point and the first index with b_(N+1) below the tolerance found by direct search (independent of solving the inequality)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3900,
+   "pack_id": "c_bc_alt_terms_calc-s3900",
+   "explanation_en": "The correct answer is 44. The error is at most b_(N+1) = 1/((N+1)^2 + N + 1); find the smallest N with this less than 0.0005 using a calculator.\n43 is incorrect: Requires only b_(N+2) < tolerance, which allows one term too few.\n1999 is incorrect: Uses the tolerance squared when solving b_(N+1) < tolerance.\n45 is incorrect: Chooses the smallest N with b_N < tolerance instead of b_(N+1), which is one term too many."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_bc_alt_terms_calc",
+   "facts": [
+    "p=2",
+    "tol=0.0005",
+    "N=44"
+   ],
+   "seed": 3900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Alternating series error bound, topic 10.10, applied procedurally."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "44 is unique: 44*45=1980 fails, 45*46=2070 works."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rationale for 1999 (squared tolerance) is incorrect: squaring the tolerance would give a far larger N, not 1999. It is also an outlier in magnitude and so is not a distinct realistic misconception. The explanation for 44 is thin and does not show the computation."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short task, and a calculator is reasonable for solving the inequality."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a unique key of 44, but the 1999 distractor's stated misconception does not produce 1999, so the distractor explanation is inaccurate and needs revision."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires applying the alternating series error bound a_{N+1} < 0.0005, solving (N+1)(N+2) > 2000, and handling the off-by-one index. The distractors target common misconceptions (using a_N, boundary check). The arithmetic is light and the wording is clear; the series hypotheses (decreasing, terms tending to 0) are easy to verify.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_bc-m02-k0",
+  "cellId": "ap_calculus_bc-m02",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "mc",
+  "keywordCode": "7.5",
+  "unitCode": "7",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_bc_euler_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Direct three-step Euler's method application with a simple differential equation. The only difficulty is carrying values through repeated calculator evaluations of sin y (radian mode). No conceptual depth beyond the procedure, and no representation changes are needed.",
+  "payload": {
+   "archetype": "c_bc_euler_calc",
+   "topic": "7.5",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "The function $y=f(x)$ satisfies $f(0)=1$ and $\\dfrac{dy}{dx}=x+\\sin y$. Euler's method with step size $0.25$ and 3 steps starting at $x=0$ is used to approximate $f(0.75)$. What is the approximation?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$1.881$",
+     "why": "Update (x, y) three times: $y_{k+1} = y_k + h\\,(x_k + \\sin y_k)$ using the slope at the left end, with a calculator.",
+     "value": "1.8812925"
+    },
+    {
+     "text": "$2.156$",
+     "why": "Uses y instead of sin y in the differential equation.",
+     "value": "2.1562500"
+    },
+    {
+     "text": "$2.074$",
+     "why": "Uses the x-value at the right end of each step in the slope instead of the left end.",
+     "value": "2.0738091"
+    },
+    {
+     "text": "$1.819$",
+     "why": "Does not update y between steps: every step uses sin(y0).",
+     "value": "1.8186032"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 110,
+   "facts": [
+    "y0=1",
+    "h=0.25",
+    "key=1.881292"
+   ],
+   "blueprint": {
+    "id": "c_bc_euler_calc",
+    "subject": "ap_calculus_bc",
+    "kind": "mc",
+    "concept": "Apply Euler's method with a nonlinear slope function using a calculator",
+    "topic": "7.5",
+    "skill": "1.E",
+    "student_thinking": [
+     "Compute the slope at the current point from the differential equation",
+     "Update y with y + h times the slope and advance x by h",
+     "Repeat for the required number of steps using the updated y"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "Euler's method uses the slope at the left end of each step",
+      "evidence": "definition of Euler's method"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "right_endpoint_slope",
+      "description": "uses right-end x-values"
+     },
+     {
+      "id": "wrong_step_count",
+      "description": "stops early"
+     },
+     {
+      "id": "no_update",
+      "description": "does not update y"
+     },
+     {
+      "id": "wrong_function",
+      "description": "uses y instead of sin y"
+     }
+    ],
+    "verification": {
+     "independent_path": "the iteration recomputed as a table of floating-point values (independent of the loop implementation)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3900,
+   "pack_id": "c_bc_euler_calc-s3900",
+   "explanation_en": "The correct answer is 1.881. Update (x, y) three times: $y_{k+1} = y_k + h\\,(x_k + \\sin y_k)$ using the slope at the left end, with a calculator.\n2.156 is incorrect: Uses y instead of sin y in the differential equation.\n2.074 is incorrect: Uses the x-value at the right end of each step in the slope instead of the left end.\n1.819 is incorrect: Does not update y between steps: every step uses sin(y0)."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_bc_euler_calc",
+   "facts": [
+    "y0=1",
+    "h=0.25",
+    "key=1.881292"
+   ],
+   "seed": 3900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Euler's method with a nonlinear slope, calculator required; fits topic 7.5 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 1.881 verified and unique; the left-endpoint convention is standard."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; values consistent with descriptions; each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, calculator use is necessary and consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean Euler's method item with a unique key and realistic distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct three-step Euler's method application with a simple differential equation. The only difficulty is carrying values through repeated calculator evaluations of sin y (radian mode). No conceptual depth beyond the procedure, and no representation changes are needed.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_bc-m03-k0",
+  "cellId": "ap_calculus_bc-m03",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "mc",
+  "keywordCode": "6.14",
+  "unitCode": "6",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_bc_improper_calc",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The integrand has no elementary antiderivative, so the student must recognize that a calculator is needed and evaluate the improper integral numerically (for example, with a large upper limit). This is one procedural step with no representation changes. The close distractors 0.636 and 0.634 require careful calculator entry but not extra reasoning. The correct value is about 0.636.",
+  "payload": {
+   "archetype": "c_bc_improper_calc",
+   "topic": "6.14",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "What is the value of $\\int_{1}^{\\infty}e^{-x^{2}/3}\\,dx$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$0.636$",
+     "why": "The improper integral converges; evaluate the limit of the integral from 1 to b with a calculator for large b.",
+     "value": "0.63581772"
+    },
+    {
+     "text": "$0.368$",
+     "why": "Uses e^(-x) in place of e^(-x^2/3) as the integrand.",
+     "value": "0.36787944"
+    },
+    {
+     "text": "$0.634$",
+     "why": "Stops at x = 4 instead of taking the limit to infinity.",
+     "value": "0.63414330"
+    },
+    {
+     "text": "$0.717$",
+     "why": "Concludes the integral diverges, so reports the integrand's value at the lower limit.",
+     "value": "0.71653131"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 80,
+   "facts": [
+    "a=1",
+    "c=3",
+    "key=0.635818"
+   ],
+   "blueprint": {
+    "id": "c_bc_improper_calc",
+    "subject": "ap_calculus_bc",
+    "kind": "mc",
+    "concept": "Evaluate a convergent improper integral of a non-elementary integrand numerically",
+    "topic": "6.14",
+    "skill": "1.E",
+    "student_thinking": [
+     "Recognize an improper integral with an infinite upper limit",
+     "Replace infinity by a large bound or use the calculator's improper integral",
+     "Evaluate numerically"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "the integrand decays faster than 1/x^2 so the improper integral converges",
+      "evidence": "e^(-x^2/c) is bounded by e^(-x/c) for x >= 1 and integrable"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "truncated_limit",
+      "description": "stops early"
+     },
+     {
+      "id": "wrong_lower_limit",
+      "description": "starts at zero"
+     },
+     {
+      "id": "divergence_claim",
+      "description": "claims divergence"
+     },
+     {
+      "id": "wrong_integrand",
+      "description": "changes the integrand"
+     }
+    ],
+    "verification": {
+     "independent_path": "scipy quad to a finite upper bound of 40 compared with the infinite-range quad (independent of the infinite-range algorithm)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3900,
+   "pack_id": "c_bc_improper_calc-s3900",
+   "explanation_en": "The correct answer is 0.636. The improper integral converges; evaluate the limit of the integral from 1 to b with a calculator for large b.\n0.368 is incorrect: Uses e^(-x) in place of e^(-x^2/3) as the integrand.\n0.634 is incorrect: Stops at x = 4 instead of taking the limit to infinity.\n0.717 is incorrect: Concludes the integral diverges, so reports the integrand's value at the lower limit."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_bc_improper_calc",
+   "facts": [
+    "a=1",
+    "c=3",
+    "key=0.635818"
+   ],
+   "seed": 3900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Convergent improper integral evaluated with calculator; BC Unit 6 in scope, skill 1.E fits. Technique selection is minimal, but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.636 is the unique correct value; options distinct at 3 decimals."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "0.634 (stop at x=4) is a near-duplicate of the key, serving as a precision trap rather than a distinct misconception. 0.717 'concludes divergence but reports the integrand value' is an unrealistic rationale, since a student concluding divergence would not report a number. Explanation covers all options but two rationales are weak."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Single calculator evaluation, about 80 seconds, typical of AP calculator MC."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope, suitable calculator item, but the distractor set is weak: 0.634 is nearly indistinguishable from the key, and 0.717 has an unrealistic misconception rationale. Failing on distractor quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The integrand has no elementary antiderivative, so the student must recognize that a calculator is needed and evaluate the improper integral numerically (for example, with a large upper limit). This is one procedural step with no representation changes. The close distractors 0.636 and 0.634 require careful calculator entry but not extra reasoning. The correct value is about 0.636.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_bc-f01-k0",
+  "cellId": "ap_calculus_bc-f01",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "frq_bundle",
+  "keywordCode": "9.8",
+  "unitCode": "9",
+  "skillPrimary": "1.E",
+  "structure": "frq_multipart",
+  "calculator": "required",
+  "archetype": "frq_polar_region",
+  "wording": "mixed",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_key_scoring; instant_reject_out_of_scope_knowledge; reference_pattern_mismatch; difficulty_from_unfair_sources",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Four-part FRQ-style item with standard procedures: polar area integral with calculator, dr/dtheta with units interpretation, polar tangent slope via dy/dx (product rule, several steps), and arc length. Numbers are clean and the reading load is moderate. Part d (polar arc length) conflicts with the stated scope that polar arc length is not required, so it should be removed or reframed. Otherwise the difficulty is fair and comes from the number of steps and representation changes.",
+  "payload": {
+   "archetype": "frq_polar_region",
+   "template": "polar_region_calc",
+   "topic": "9.8",
+   "extra_topics": [
+    "9.7",
+    "9.9"
+   ],
+   "skill": "1.E",
+   "representative_skill": "1.E",
+   "calculator": "required",
+   "title": "A polar curve: area, rate of change of distance, slope, and length",
+   "stimulus": {
+    "kind": "text",
+    "description": "Polar curve",
+    "data": {
+     "curve": "r = 2 + 2 cos(theta), 0 <= theta <= pi/2"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Let $R$ be the region in the first quadrant bounded by the polar curve $r=2+2\\cos\\theta$ for $0\\le\\theta\\le\\frac{\\pi}{2}$ and the coordinate axes. Write an integral expression for the area of $R$, and then find the area of $R$.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.D",
+      "1.E"
+     ],
+     "model_answer": "Area = (1/2) ∫_0^(π/2) (2 + 2 cos θ)^2 dθ = 8.712.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Area integrand (1/2) r^2 (setup)",
+       "required_elements": [
+        "(1/2)(2+2cos θ)^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Limits of integration 0 and π/2 (setup)",
+       "required_elements": [
+        "0 to π/2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a3",
+       "points": 1,
+       "criterion": "Answer (value)",
+       "required_elements": [
+        "8.712"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "9.8"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find $\\dfrac{dr}{d\\theta}$ at $\\theta=\\frac{\\pi}{3}$. Using correct units, interpret the meaning of your answer in the context of the distance from the origin to the point on the curve.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.E",
+      "3.F"
+     ],
+     "model_answer": "dr/dθ = -2 sin θ = -1.732 at θ = π/3: the distance from the origin to the point is decreasing at 1.732 units per radian.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Value of dr/dθ at π/3 (value)",
+       "required_elements": [
+        "-1.732"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Interpretation: the distance from the origin is decreasing, at that rate per radian (meaning)",
+       "required_elements": [
+        "distance from the origin",
+        "decreasing"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "9.7",
+      "4.1"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Find the slope of the line tangent to the curve $r=2+2\\cos\\theta$ at $\\theta=\\frac{\\pi}{3}$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "dy/dx = (r' sin θ + r cos θ)/(r' cos θ - r sin θ) = -0.000 at θ = π/3.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Uses dy/dx = (dy/dθ)/(dx/dθ) with x = r cos θ and y = r sin θ (setup)",
+       "required_elements": [
+        "dy/dθ over dx/dθ"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Answer (slope value)",
+       "required_elements": [
+        "-0.000"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "9.7"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Find the length of the curve $r=2+2\\cos\\theta$ for $0\\le\\theta\\le\\frac{\\pi}{2}$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "Length = ∫_0^(π/2) sqrt(r^2 + (dr/dθ)^2) dθ = 5.657.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Arc length integral with integrand sqrt(r^2 + (dr/dθ)^2) (setup)",
+       "required_elements": [
+        "∫ sqrt(r^2+(dr/dθ)^2) dθ from 0 to π/2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Answer (value)",
+       "required_elements": [
+        "5.657"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "9.9"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "a=2",
+    "b=2",
+    "area=8.712389",
+    "rprime=-1.732051",
+    "slope=-0.000000",
+    "L=5.656854"
+   ],
+   "blueprint": {
+    "id": "frq_polar_region",
+    "subject": "ap_calculus_bc",
+    "kind": "frq_bundle",
+    "concept": "Use polar area, the derivative of r, the polar tangent slope and polar arc length for a first-quadrant limacon arc",
+    "topic": "9.8",
+    "skill": "1.E",
+    "student_thinking": [
+     "Set up (1/2) r^2 and integrate over the given angles",
+     "Differentiate r and interpret it as the rate of change of the distance from the origin",
+     "Compute dy/dx from x = r cos theta and y = r sin theta",
+     "Set up and evaluate the arc length integral numerically"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "r is positive and differentiable on [0, pi/2], so the polar area and length formulas apply",
+      "evidence": "a + b cos theta >= a - 0 > 0 on the interval"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "polar equation",
+      "interval of theta"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "area by closed-form sympy integration and Simpson rule; slope by central difference of x(theta), y(theta); length by Simpson rule (independent of scipy quad)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.D",
+       "1.E"
+      ],
+      "topics": [
+       "9.8"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Area = (1/2) ∫_0^(π/2) (2 + 2 cos θ)^2 dθ = 8.712."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Area integrand (1/2) r^2 (setup)",
+        "elements": [
+         "(1/2)(2+2cos θ)^2"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Limits of integration 0 and π/2 (setup)",
+        "elements": [
+         "0 to π/2"
+        ]
+       },
+       {
+        "row_id": "a3",
+        "points": 1,
+        "criterion": "Answer (value)",
+        "elements": [
+         "8.712"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "1.E",
+       "3.F"
+      ],
+      "topics": [
+       "9.7",
+       "4.1"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "dr/dθ = -2 sin θ = -1.732 at θ = π/3: the distance from the origin to the point is decreasing at 1.732 units per radian."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Value of dr/dθ at π/3 (value)",
+        "elements": [
+         "-1.732"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Interpretation: the distance from the origin is decreasing, at that rate per radian (meaning)",
+        "elements": [
+         "distance from the origin",
+         "decreasing"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "9.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "dy/dx = (r' sin θ + r cos θ)/(r' cos θ - r sin θ) = -0.000 at θ = π/3."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Uses dy/dx = (dy/dθ)/(dx/dθ) with x = r cos θ and y = r sin θ (setup)",
+        "elements": [
+         "dy/dθ over dx/dθ"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Answer (slope value)",
+        "elements": [
+         "-0.000"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "9.9"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Length = ∫_0^(π/2) sqrt(r^2 + (dr/dθ)^2) dθ = 5.657."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Arc length integral with integrand sqrt(r^2 + (dr/dθ)^2) (setup)",
+        "elements": [
+         "∫ sqrt(r^2+(dr/dθ)^2) dθ from 0 to π/2"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Answer (value)",
+        "elements": [
+         "5.657"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 3900,
+   "pack_id": "frq_polar_region-s3900"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_polar_region",
+   "facts": [
+    "a=2",
+    "b=2",
+    "area=8.712389",
+    "rprime=-1.732051",
+    "slope=-0.000000",
+    "L=5.656854"
+   ],
+   "seed": 3900
+  },
+  "review": {
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Part (d) requires polar arc length, which the stated unit scope excludes (not required in the BC CED). Part (c) keys \"-0.000\", a signed-zero artifact of an exact 0 slope. Part (b) rubric does not score the units the prompt asks for. Parts (a)-(c) are otherwise correct and solver-confirmed.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Polar arc length in (d) is out of scope; part (b) is tagged to topic 4.1 and skill 3.F, outside the unit."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Values are correct, but \"-0.000\" is a malformed key for an exact 0, and the units asked for in (b) are not scored."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ-style item with standard procedures: polar area integral with calculator, dr/dtheta with units interpretation, polar tangent slope via dy/dx (product rule, several steps), and arc length. Numbers are clean and the reading load is moderate. Part d (polar arc length) conflicts with the stated scope that polar arc length is not required, so it should be removed or reframed. Otherwise the difficulty is fair and comes from the number of steps and representation changes.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": true,
+   "est_seconds": 540
+  }
+ }
+]

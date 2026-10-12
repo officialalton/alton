@@ -1,0 +1,978 @@
+[
+ {
+  "candidateKey": "ap_calculus_ab-f01-k0",
+  "cellId": "ap_calculus_ab-f01",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "8.3",
+  "unitCode": "8",
+  "skillPrimary": "3.E",
+  "structure": "frq_multipart",
+  "calculator": "required",
+  "archetype": "frq_rate_in_out",
+  "wording": "llm",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; resembles_known_exam_item",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "This is a standard AP FRQ-style multi-part item. It covers average value of a rate, the derivative of a rate with units and interpretation, net change giving the amount at a time, and an integral equation solved on a calculator. The reasoning is moderate: part d requires setting the integral of inflow minus outflow equal to 0 and solving numerically. Representation changes are modest (expression to context to equation). The numbers are clean and the wording is unambiguous. Part c is a calculator-based integral, and the arithmetic stays light. The justification demand is met by the interpretation in b and the integral equation in d. It is a good fit for full mock exams.",
+  "payload": {
+   "archetype": "frq_rate_in_out",
+   "template": "rate_in_out_net_change_calc",
+   "topic": "8.3",
+   "extra_topics": [
+    "4.1",
+    "8.1"
+   ],
+   "skill": "3.E",
+   "representative_skill": "3.E",
+   "calculator": "required",
+   "title": "Decaying inflow and constant outflow: average inflow, meaning of F', amount at a time, time the amount returns to its initial value",
+   "stimulus": {
+    "kind": "text",
+    "description": "Rates of water flowing into and out of a reservoir",
+    "data": {
+     "inflow": "F(t) = 80e^(-t/4) gallons per hour",
+     "outflow": "D(t) = 20 gallons per hour",
+     "initial": "200 gallons at t = 0"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Water flows into a reservoir at the rate $F(t)=80e^{-t/4}$ gallons per hour and flows out at the constant rate of $20$ gallons per hour, for $0\\le t\\le 24$, where $t$ is measured in hours. Find the average rate, in gallons per hour, at which water flows into the reservoir during the first $24$ hours.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.D",
+      "1.E"
+     ],
+     "model_answer": "(1/24) ∫₀^24 F(t) dt = 13.300 gallons per hour.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Integral of F over [0, 24] divided by 24",
+       "required_elements": [
+        "(1/24) ∫_0^24 F(t) dt"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "13.300"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "8.1"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find $F'(2)$. Using correct units, explain the meaning of $F'(2)$ in the context of the problem.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.E",
+      "3.F"
+     ],
+     "model_answer": "F'(2) = -12.131: at t = 2 hours the rate of inflow is decreasing by about 12.131 gallons per hour each hour.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Value of F'(t) at the given time",
+       "required_elements": [
+        "-12.131"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Interpretation with units: the rate of inflow is changing (decreasing) at that time, in gallons per hour per hour",
+       "required_elements": [
+        "the rate of inflow is decreasing",
+        "gallons per hour per hour"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": true
+      }
+     ],
+     "topic_codes": [
+      "4.1"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "There are $200$ gallons of water in the reservoir at time $t=0$. Find the amount of water, in gallons, in the reservoir at time $t=24$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.D",
+      "1.E"
+     ],
+     "model_answer": "200 + ∫₀^24 (F(t) - 20) dt = 39.207 gallons.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Initial amount plus the integral of the net rate",
+       "required_elements": [
+        "200 + ∫_0^24 (F(t) - 20) dt"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "39.207"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "8.3"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "For $0<t\\le 24$, there is exactly one time $t$ at which the amount of water in the reservoir is again equal to $200$ gallons. Write an equation involving an integral that this time satisfies, and find that time.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.D",
+      "1.E",
+      "3.E"
+     ],
+     "model_answer": "∫₀^t (F(s) - 20) ds = 0 gives t = 15.683 hours (the amount rises while F > 20, then falls back to 200).",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Equation: the integral of the net rate from 0 to t equals 0",
+       "required_elements": [
+        "∫_0^t (F(s) - 20) ds = 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Solves the equation (calculator)",
+       "required_elements": [
+        "t = 15.683"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "d3",
+       "points": 1,
+       "criterion": "Answer with units: the time in hours",
+       "required_elements": [
+        "15.683 hours"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": true
+      }
+     ],
+     "topic_codes": [
+      "8.3"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "avg=13.300283",
+    "dF=-12.130613",
+    "WT=39.206799",
+    "root=15.682762"
+   ],
+   "blueprint": {
+    "id": "frq_rate_in_out",
+    "subject": "ap_calculus_ab",
+    "kind": "frq_bundle",
+    "concept": "Use a decaying inflow rate and a constant outflow rate to find the average inflow, interpret the derivative of a rate, find the amount at a time, and solve for the time the amount returns to its initial value",
+    "topic": "8.3",
+    "skill": "3.E",
+    "student_thinking": [
+     "Average the inflow rate with an integral divided by the length",
+     "Differentiate the rate function and read the units of the derivative of a rate",
+     "Add the net change to the initial amount",
+     "Set the integral of the net rate equal to zero and solve numerically"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "the net rate F - D is positive then negative once, so the amount rises then falls through its initial value exactly once",
+      "evidence": "F decreases from a value above D to 0 while D is constant"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "formula for F",
+      "formula for D",
+      "initial amount"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the inflow integral is checked with sympy's symbolic integral, the root by 80 bisection steps and a 20000-point scan, and F' by central difference (independent of Brent's method, scipy quad and the closed-form derivative)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.D",
+       "1.E"
+      ],
+      "topics": [
+       "8.1"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(1/24) ∫₀^24 F(t) dt = 13.300 gallons per hour."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Integral of F over [0, 24] divided by 24",
+        "elements": [
+         "(1/24) ∫_0^24 F(t) dt"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Answer",
+        "elements": [
+         "13.300"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "1.E",
+       "3.F"
+      ],
+      "topics": [
+       "4.1"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "F'(2) = -12.131: at t = 2 hours the rate of inflow is decreasing by about 12.131 gallons per hour each hour."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Value of F'(t) at the given time",
+        "elements": [
+         "-12.131"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Interpretation with units: the rate of inflow is changing (decreasing) at that time, in gallons per hour per hour",
+        "elements": [
+         "the rate of inflow is decreasing",
+         "gallons per hour per hour"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "1.D",
+       "1.E"
+      ],
+      "topics": [
+       "8.3"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "200 + ∫₀^24 (F(t) - 20) dt = 39.207 gallons."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Initial amount plus the integral of the net rate",
+        "elements": [
+         "200 + ∫_0^24 (F(t) - 20) dt"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Answer",
+        "elements": [
+         "39.207"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.D",
+       "1.E",
+       "3.E"
+      ],
+      "topics": [
+       "8.3"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "∫₀^t (F(s) - 20) ds = 0 gives t = 15.683 hours (the amount rises while F > 20, then falls back to 200)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Equation: the integral of the net rate from 0 to t equals 0",
+        "elements": [
+         "∫_0^t (F(s) - 20) ds = 0"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Solves the equation (calculator)",
+        "elements": [
+         "t = 15.683"
+        ]
+       },
+       {
+        "row_id": "d3",
+        "points": 1,
+        "criterion": "Answer with units: the time in hours",
+        "elements": [
+         "15.683 hours"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 5700,
+   "pack_id": "frq_rate_in_out-s5700"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_rate_in_out",
+   "facts": [
+    "avg=13.300283",
+    "dF=-12.130613",
+    "WT=39.206799",
+    "root=15.682762"
+   ],
+   "seed": 5700
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The computations, rubric and format are sound and AP-like. The item fails on skill fit: the target skill is 3.E (justification), yet no part requires a scored written justification. Part b assesses 3.F, and part d only asks for an equation and a solution, with uniqueness given in the prompt. The structure also closely resembles released AP FRQs on rate in and rate out.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The target skill is 3.E (justification), but the bundle assesses it weakly. Parts a and c are pure calculation (1.D/1.E). Part b is an interpretation with units, which is 3.F, not 3.E. Only part d lists 3.E, and its rubric awards points for the equation, the solution and the units, with no scored reason. The model answer's parenthetical about the amount rising while F > 20 and then falling is not scored. The uniqueness of the time is stated in the prompt rather than justified by the student, so the dominant demand is calculation and not justification. The topics themselves (8.1, 4.1, 8.3) are in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All numeric keys are consistent with the solver's independent results. The rubric rows are consistent, and each answer row depends on its setup row. In part b, the requirement \"the rate of inflow is decreasing\" is a reasonable parallel to the official wording."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data object has the inflow, the outflow and the initial amount. The stem restates the context in part a, which is acceptable. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric rows are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP calculator FRQ: 9 points, about 15 minutes, with clean numbers and a calculator needed for the integrals and the root. The structure closely mirrors released AP rate-in/rate-out FRQs, such as the 2018 and 2019 questions with a similar decaying inflow and a 'find the time' part."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard AP FRQ-style multi-part item. It covers average value of a rate, the derivative of a rate with units and interpretation, net change giving the amount at a time, and an integral equation solved on a calculator. The reasoning is moderate: part d requires setting the integral of inflow minus outflow equal to 0 and solving numerically. Representation changes are modest (expression to context to equation). The numbers are clean and the wording is unambiguous. Part c is a calculator-based integral, and the arithmetic stays light. The justification demand is met by the interpretation in b and the integral equation in d. It is a good fit for full mock exams.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f01-k1",
+  "cellId": "ap_calculus_ab-f01",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "8.3",
+  "unitCode": "8",
+  "skillPrimary": "3.E",
+  "structure": "frq_multipart",
+  "calculator": "required",
+  "archetype": "frq_rate_in_out",
+  "wording": "llm",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_key_scoring; resembles_known_exam_item",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP FRQ-style multi-part item covering average value, derivative interpretation with units, net change with an initial value, and setting up and solving an integral equation on the calculator. Each part is 1-3 steps with clean numbers. Representation changes are modest (rate to accumulated amount to equation). Appropriate for full mocks.",
+  "payload": {
+   "archetype": "frq_rate_in_out",
+   "template": "rate_in_out_net_change_calc",
+   "topic": "8.3",
+   "extra_topics": [
+    "4.1",
+    "8.1"
+   ],
+   "skill": "3.E",
+   "representative_skill": "3.E",
+   "calculator": "required",
+   "title": "Decaying inflow and constant outflow: average inflow, meaning of F', amount at a time, time the amount returns to its initial value",
+   "stimulus": {
+    "kind": "text",
+    "description": "Rates of water flowing into and out of a reservoir",
+    "data": {
+     "inflow": "F(t) = 100e^(-t/5) gallons per hour",
+     "outflow": "D(t) = 25 gallons per hour",
+     "initial": "300 gallons at t = 0"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Water flows into a reservoir at the rate $F(t)=100e^{-t/5}$ gallons per hour and flows out at the constant rate of $25$ gallons per hour, for $0\\le t\\le 20$, where $t$ is measured in hours. Find the average rate, in gallons per hour, at which water flows into the reservoir during the first $20$ hours.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.D",
+      "1.E"
+     ],
+     "model_answer": "(1/20) ∫₀^20 F(t) dt = 24.542 gallons per hour.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Integral of F over [0, 20] divided by 20",
+       "required_elements": [
+        "(1/20) ∫_0^20 F(t) dt"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "24.542"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "8.1"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find $F'(3)$. Using correct units, explain the meaning of $F'(3)$ in the context of the problem.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.E",
+      "3.F"
+     ],
+     "model_answer": "F'(3) = -10.976: at t = 3 hours the rate of inflow is decreasing by about 10.976 gallons per hour each hour.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Value of F'(t) at the given time",
+       "required_elements": [
+        "-10.976"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Interpretation with units: the rate of inflow is changing (decreasing) at that time, in gallons per hour per hour",
+       "required_elements": [
+        "the rate of inflow is decreasing",
+        "gallons per hour per hour"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": true
+      }
+     ],
+     "topic_codes": [
+      "4.1"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "There are $300$ gallons of water in the reservoir at time $t=0$. Find the amount of water, in gallons, in the reservoir at time $t=20$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.D",
+      "1.E"
+     ],
+     "model_answer": "300 + ∫₀^20 (F(t) - 25) dt = 290.842 gallons.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Initial amount plus the integral of the net rate",
+       "required_elements": [
+        "300 + ∫_0^20 (F(t) - 25) dt"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "290.842"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "8.3"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "For $0<t\\le 20$, there is exactly one time $t$ at which the amount of water in the reservoir is again equal to $300$ gallons. Write an equation involving an integral that this time satisfies, and find that time.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.D",
+      "1.E",
+      "3.E"
+     ],
+     "model_answer": "∫₀^t (F(s) - 25) ds = 0 gives t = 19.603 hours (the amount rises while F > 25, then falls back to 300).",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Equation: the integral of the net rate from 0 to t equals 0",
+       "required_elements": [
+        "∫_0^t (F(s) - 25) ds = 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Solves the equation (calculator)",
+       "required_elements": [
+        "t = 19.603"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "d3",
+       "points": 1,
+       "criterion": "Answer with units: the time in hours",
+       "required_elements": [
+        "19.603 hours"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.001",
+       "units_row": true
+      }
+     ],
+     "topic_codes": [
+      "8.3"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "avg=24.542109",
+    "dF=-10.976233",
+    "WT=290.842181",
+    "root=19.603452"
+   ],
+   "blueprint": {
+    "id": "frq_rate_in_out",
+    "subject": "ap_calculus_ab",
+    "kind": "frq_bundle",
+    "concept": "Use a decaying inflow rate and a constant outflow rate to find the average inflow, interpret the derivative of a rate, find the amount at a time, and solve for the time the amount returns to its initial value",
+    "topic": "8.3",
+    "skill": "3.E",
+    "student_thinking": [
+     "Average the inflow rate with an integral divided by the length",
+     "Differentiate the rate function and read the units of the derivative of a rate",
+     "Add the net change to the initial amount",
+     "Set the integral of the net rate equal to zero and solve numerically"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "the net rate F - D is positive then negative once, so the amount rises then falls through its initial value exactly once",
+      "evidence": "F decreases from a value above D to 0 while D is constant"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "formula for F",
+      "formula for D",
+      "initial amount"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the inflow integral is checked with sympy's symbolic integral, the root by 80 bisection steps and a 20000-point scan, and F' by central difference (independent of Brent's method, scipy quad and the closed-form derivative)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.D",
+       "1.E"
+      ],
+      "topics": [
+       "8.1"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(1/20) ∫₀^20 F(t) dt = 24.542 gallons per hour."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Integral of F over [0, 20] divided by 20",
+        "elements": [
+         "(1/20) ∫_0^20 F(t) dt"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Answer",
+        "elements": [
+         "24.542"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "1.E",
+       "3.F"
+      ],
+      "topics": [
+       "4.1"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "F'(3) = -10.976: at t = 3 hours the rate of inflow is decreasing by about 10.976 gallons per hour each hour."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Value of F'(t) at the given time",
+        "elements": [
+         "-10.976"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Interpretation with units: the rate of inflow is changing (decreasing) at that time, in gallons per hour per hour",
+        "elements": [
+         "the rate of inflow is decreasing",
+         "gallons per hour per hour"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "1.D",
+       "1.E"
+      ],
+      "topics": [
+       "8.3"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "300 + ∫₀^20 (F(t) - 25) dt = 290.842 gallons."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Initial amount plus the integral of the net rate",
+        "elements": [
+         "300 + ∫_0^20 (F(t) - 25) dt"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Answer",
+        "elements": [
+         "290.842"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.D",
+       "1.E",
+       "3.E"
+      ],
+      "topics": [
+       "8.3"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "∫₀^t (F(s) - 25) ds = 0 gives t = 19.603 hours (the amount rises while F > 25, then falls back to 300)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Equation: the integral of the net rate from 0 to t equals 0",
+        "elements": [
+         "∫_0^t (F(s) - 25) ds = 0"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Solves the equation (calculator)",
+        "elements": [
+         "t = 19.603"
+        ]
+       },
+       {
+        "row_id": "d3",
+        "points": 1,
+        "criterion": "Answer with units: the time in hours",
+        "elements": [
+         "19.603 hours"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 5701,
+   "pack_id": "frq_rate_in_out-s5701"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_rate_in_out",
+   "facts": [
+    "avg=24.542109",
+    "dF=-10.976233",
+    "WT=290.842181",
+    "root=19.603452"
+   ],
+   "seed": 5701
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The key values are correct, but the item fails on scope/skill and on key/scoring. No part truly assesses 3.E justification. The part b rubric depends on exact phrases, and row d3 is a weak point award.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill is 3.E, but no part requires real justification. Parts a and c are calculations, and part d asks for an equation and a numerical solve with no written reasoning. Only the part b interpretation is explanatory, and the part b skill is labeled 3.F rather than 3.E."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Key values are correct. Row b2 requires the exact phrases \"the rate of inflow is decreasing\" and \"gallons per hour per hour\" (requires_both), so equivalent correct wording such as gal/hr² could be marked wrong. Row d3 awards a point only for restating the same value with units, which is weakly justified."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus data are complete. The stem repeats the stimulus content in part a, which is slightly redundant but acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free-response item, so distractors do not apply."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 9 points in about 15 minutes with a calculator matches the AP Calculus FRQ grain."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style multi-part item covering average value, derivative interpretation with units, net change with an initial value, and setting up and solving an integral equation on the calculator. Each part is 1-3 steps with clean numbers. Representation changes are modest (rate to accumulated amount to equation). Appropriate for full mocks.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

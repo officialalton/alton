@@ -29,6 +29,7 @@ function makeAdminMock(tables: Record<string, Row[]>) {
       not: () => builder,
       is: () => builder,
       in: () => builder,
+      gt: () => builder,
       eq: () => builder,
       order: () => builder,
       limit: () => builder,
@@ -58,6 +59,17 @@ function makeAdminMock(tables: Record<string, Row[]>) {
             insertCalls.push({ table: "consultations", payload });
             throw new Error("가짜 상담 레코드 생성 금지 — consultations.insert가 호출됨");
           },
+        };
+      }
+      if (table === "trial_onboarding_links") {
+        // 2026-10-12 — 같은 테이블을 두 로더가 읽는다: 계정 생성 카드(notice 컬럼 없음)와
+        // "계정 생성 대기"(notice_delivery_status 포함). select 컬럼으로 구분해 각자 행을 돌려준다.
+        const result = (rows: Row[]) => chain(rows);
+        return {
+          select: (cols: string) =>
+            cols.includes("notice_delivery_status")
+              ? result(tables.pending_links ?? [])
+              : result(tables.trial_onboarding_links ?? []),
         };
       }
       return chain(tables[table] ?? []);
@@ -171,7 +183,8 @@ describe("loadKanbanBoard — 계정 생성 유입 통합", () => {
     const cards = await loadKanbanBoard(admin as never);
 
     expect(cards).toHaveLength(50);
-    expect(admin.callCounts.trial_onboarding_links).toBe(1);
+    // 계정 생성 카드 1회 + 계정 생성 대기 카드 1회(2026-10-12). 대기 링크가 없으면 학생 조회는 추가되지 않는다.
+    expect(admin.callCounts.trial_onboarding_links).toBe(2);
     expect(admin.callCounts.trial_onboarding_link_students).toBe(1);
   });
 
@@ -247,5 +260,35 @@ describe("loadKanbanBoard — 계정 생성 유입 통합", () => {
     const { loadKanbanBoard } = await import("./consultation-kanban-data");
     const cards = await loadKanbanBoard(admin as never);
     expect(cards[0].stage).toBe("scheduled");
+  });
+
+  it("2026-10-12 — 발송됐지만 열지 않은 링크는 계정 생성 대기 카드(보드 컬럼 밖)로 붙고, 학생이 이미 생성된 링크는 제외된다", async () => {
+    listConsultationsMock.mockResolvedValue([]);
+    const admin = makeAdminMock({
+      trial_onboarding_links: [],
+      pending_links: [
+        { id: "pl1", guardian_name: "대기보호자", guardian_email: "w@example.com", notice_delivery_status: "sent", notice_sent_at: "2026-10-01T00:00:00Z", created_at: "2026-10-01T00:00:00Z" },
+        { id: "pl2", guardian_name: "생성됨", guardian_email: "c@example.com", notice_delivery_status: "sent", notice_sent_at: "2026-10-01T00:00:00Z", created_at: "2026-10-01T00:00:00Z" },
+      ],
+      trial_onboarding_link_students: [
+        { id: "s1", link_id: "pl1", student_name: "자녀A", student_grade: "9학년", status: "pending" },
+        { id: "s2", link_id: "pl1", student_name: "취소됨", status: "cancelled" },
+        { id: "s3", link_id: "pl2", student_name: "자녀B", status: "created" },
+      ],
+    });
+
+    const { loadKanbanBoard, loadMyKanbanBoard } = await import("./consultation-kanban-data");
+    const cards = await loadKanbanBoard(admin as never);
+
+    expect(cards).toHaveLength(1);
+    expect(cards[0].id).toBe("pending-link:pl1");
+    expect(cards[0].pendingAccountLink).toMatchObject({ linkId: "pl1", noticeDeliveryStatus: "sent", studentCount: 1 });
+    expect(cards[0].requested_children?.map((c) => c.name)).toEqual(["자녀A"]);
+    expect(cards[0].child_id).toBeNull();
+    expect(admin.insertCalls).toHaveLength(0);
+
+    // 컨설턴트 보드에는 나오지 않는다.
+    const mine = await loadMyKanbanBoard(admin as never, "consultant-1");
+    expect(mine.find((c) => c.pendingAccountLink)).toBeUndefined();
   });
 });

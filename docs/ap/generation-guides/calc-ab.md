@@ -88,3 +88,125 @@ BC 전용 용어(series/converge/Taylor/Maclaurin/parametric/polar/vector/Euler/
 - `graph_fprime_extremum` (5.4, 2.D, 계산기 불가, 그래프): f′ 그래프에서 상대 극값 — 오답: 부호가 안 바뀌는 영점, f′ 의 최댓값·최솟값 혼동. 독립 검증: 조각 선형 f′ 를 촘촘히 표본한 부호 변화 탐색.
 - `graph_accum_value` (6.4, 2.B, 계산기 불가, 그래프): g(b)=g(0)+∫f 의 값 — 오답: g(0) 누락, 음의 넓이 무시, 폭 오류. 독립 검증: 적응형 수치 적분.
 - FRQ `frq_particle_motion` (particle_motion_calc, 4.2, 계산기 필수): 가속도(1)·속력 증감+이유(2)·총 이동 거리(3)·위치(3). `frq_related_rates` (related_rates_setup, 4.5, 계산기 불가): 관계식·시간 미분(2)·순간 변화율+단위(3)·부호 해석(1)·파생 넓이 변화율(3). `frq_implicit_diff` (implicit_differentiation, 3.2, 계산기 불가): dy/dx 유도(3)·접선(2)·수평 접선(2)·법선(2, 음함수의 2계도함수는 AB 범위 밖).
+
+
+## AB 그래프·일반 계산기 신규 원형 (2026-10-09, six-set-plan S1~S3)
+그래프 필수(또는 계산기 필수 일반) MC 신규 원형. 정답·자료는 코드가 계산하고 별도 수치 경로로 재확인한다. 원천: `scripts/ap-generation/archetypes/calc_graph_*.py`, 가이드 항목 `lib/ap-generation/subjects/graph-archetypes.json`.
+
+| id | 토픽 | 스킬 | 계산기 | 독립 검증 |
+|---|---|---|---|---|
+| c_abs_extreme_calc | 5.5 | 1.E | required | maximum of f over a 6001-point grid on [0, 6] (independent of the candidate comparison) |
+| c_accum_interval_calc | 6.5 | 3.E | required | sign of the integrand on a fine grid and Brent roots (independent of the Fundamental Theorem argument) |
+| c_area_between_calc | 8.4 | 1.D | required | composite Simpson rule on f - g between the Brent root (independent of scipy quad) |
+| c_decay_model_calc | 7.8 | 1.E | required | Runge-Kutta numerical integration of dy/dt = -ky with k recomputed from the two data points (independent of th |
+| c_disc_volume_calc | 8.9 | 1.D | required | composite Simpson rule on pi f^2 (independent of scipy quad) |
+| c_ftc_chain_calc | 6.4 | 1.D | required | central difference (step 1e-6) of F computed by scipy quad (independent of the Fundamental Theorem) |
+| c_implicit_slope_calc | 3.2 | 1.E | required | the curve is solved for y(x) with Brent's method near the point and differentiated by central difference (inde |
+| c_inflection_calc | 5.6 | 2.E | required | Brent's method on the lambdified f'' near the reported root and a sign-change check (independent of the polyno |
+| c_linear_approx_overunder_calc | 4.6 | 1.F | required | the exact f(a + dx) is compared with the tangent line value (independent of the sign of f'') |
+| c_midpoint_sum_calc | 6.2 | 1.E | required | direct sum of the lambdified integrand at the midpoints (independent of the closed form of the points) |
+| c_motion_turn_calc | 4.2 | 1.E | required | bisection on v over a fine grid (independent of Brent's method) |
+| c_quotient_deriv_calc | 2.9 | 1.E | required | central difference (step 1e-6) of the original function (independent of the quotient rule) |
+| c_related_rates_cone_calc | 4.5 | 1.D | required | V(h) inverted numerically by Brent's method and differentiated by central difference in time (independent of t |
+| c_second_deriv_test_calc | 5.7 | 3.D | required | maximum of f over a fine grid on [0, 20] compared with f at the critical number (independent of the Second Der |
+| c_trig_deriv_calc | 2.10 | 1.C | required | central difference (step 1e-6) of the original function (independent of the symbolic derivative) |
+| g_abs_max_fprime | 5.5 | 1.D | not_allowed | numerical integration of f' to every grid point and maximum of f over a 0.25 grid (independent of the candidat |
+| g_accum_justify_graph | 6.5 | 3.E | not_allowed | numerical quadrature of g with first and second difference tests at each segment midpoint (independent of the  |
+| g_accum_reverse_extremum | 6.5 | 2.E | not_allowed | g computed by numerical quadrature on a fine grid and its relative maximum located by comparing neighbouring v |
+| g_accum_two_values | 6.4 | 2.B | not_allowed | numerical quadrature of the interpolated graph between 2 and b (independent of trapezoid areas) |
+| g_arcsin_deriv_mixed_calc | 3.4 | 1.E | required | central difference (step 1e-6) of arcsin(g/10) with g interpolated (independent of the derivative formula) |
+| g_area_between_graph | 8.4 | 1.D | not_allowed | numerical quadrature of |f - g| with breakpoints at the vertices (independent of the exact crossing computatio |
+| g_area_curve_line_calc | 8.4 | 1.D | required | composite Simpson rule on f - L between roots recomputed by Brent's method (independent of scipy quad) |
+| g_area_y_graph | 8.5 | 1.D | not_allowed | numerical quadrature of the interpolated x(y) over y in [0, 8] (independent of trapezoid areas) |
+| g_avg_roc_graph | 2.1 | 2.B | not_allowed | quadrature of the piecewise slope function over [a, b] divided by b - a (independent of f(b) - f(a)) |
+| g_avg_roc_mixed_calc | 2.1 | 2.B | required | difference quotient from the lambdified f and interpolated g (independent of splitting into f and g rates) |
+| g_avg_value_graph | 8.1 | 1.E | not_allowed | numerical quadrature of the interpolated graph divided by 8 (independent of trapezoid areas) |
+| g_avg_value_mixed_calc | 8.1 | 1.E | required | composite Simpson rule (20001 nodes) on f + g with g interpolated, divided by 8 (independent of the split into |
+| g_chain_mixed_calc | 3.1 | 1.E | required | central difference (step 1e-6) of f(g(x)) with f lambdified and g interpolated (independent of the chain rule) |
+| g_chain_two_graphs | 3.1 | 1.E | not_allowed | central difference (step 1e-6) of the numerically composed interpolants (independent of the chain rule) |
+| g_cont_k_mixed_calc | 1.11 | 1.E | required | k substituted back into the right-hand piece and compared with the plotted value f(2) (independent of the alge |
+| g_cont_removable | 1.10 | 3.D | not_allowed | side limits and function values compared numerically from the plotted piece endpoints (independent of how the  |
+| g_context_roc_meaning | 4.1 | 3.F | not_allowed | difference quotient of the interpolated graph at t = a +/- 1e-6 (independent of the vertex list) |
+| g_count_nondiff | 2.4 | 3.D | not_allowed | numerical one-sided difference slopes and one-sided values around each interior vertex on the plotted pieces ( |
+| g_critical_point_mixed_calc | 5.2 | 1.E | required | bisection with 80 halvings on f'(x) - g'(x) using numerically interpolated f' and sympy g' (independent of Bre |
+| g_exp_deriv_mixed_calc | 2.7 | 1.C | required | central difference (step 1e-6) of exp(g/2) with g interpolated (independent of the chain rule) |
+| g_exp_growth_constant | 7.8 | 1.E | not_allowed | k recomputed as ln(P(T)/P(0))/T from the dense numerical curve samples (independent of the exact exponents) |
+| g_exp_value_calc | 7.8 | 1.E | required | P(t1) recomputed as P(0) (P(T)/P(0))^(t1/T) (independent of the exponent k) |
+| g_extrema_count_fprime | 5.4 | 2.D | not_allowed | dense sampling of the sign of f' and counting sign alternations (independent of listing the zeros) |
+| g_extreme_mixed_calc | 5.5 | 1.D | required | maximum of h over a 6001-point grid on [0, 6] (independent of the candidate list) |
+| g_fprime_inc_concave | 5.9 | 2.E | not_allowed | numerical value and finite-difference slope of f' at each segment midpoint (independent of the sign table) |
+| g_fprime_inflection | 5.6 | 2.E | not_allowed | dense sampling of the finite-difference slope of f' and counting its sign changes (independent of comparing se |
+| g_ftc_chain_graph | 6.4 | 1.D | not_allowed | central difference (step 1e-6) of F computed by numerical quadrature of the interpolated graph (independent of |
+| g_ftc_mixed_calc | 6.4 | 1.D | required | central difference (step 1e-6) of H built from the lambdified f and a quadrature of the interpolated g (indepe |
+| g_inflow_outflow_graph | 8.3 | 1.D | not_allowed | numerical quadrature of the two interpolated rate graphs (independent of the trapezoid formula) |
+| g_integral_mixed_calc | 6.6 | 1.E | required | composite Simpson rule (20001 nodes) on f + c g with g interpolated (independent of the split into two integra |
+| g_integral_properties_graph | 6.6 | 1.E | not_allowed | numerical quadrature of c f + d on the interpolated graph (independent of linearity) |
+| g_integral_semicircle | 6.6 | 2.B | not_allowed | numerical quadrature of the explicit piecewise formula with the sqrt semicircle (independent of the geometric  |
+| g_inverse_deriv_graph | 3.3 | 1.E | not_allowed | numerical inverse by Brent's method on the interpolated graph, then a central difference of that inverse (inde |
+| g_ivt_graph | 1.16 | 3.D | not_allowed | numerical scan of the interpolated graph for a sign change of f - k (independent of comparing k with the endpo |
+| g_lhopital_graph | 4.7 | 1.D | not_allowed | evaluating the interpolated quotient f/g at x = a +/- 1e-7 (independent of the slope ratio) |
+| g_lim_jump_sum | 1.3 | 2.B | not_allowed | numerical evaluation of the two linear pieces at c -/+ 1e-9 (independent of the endpoints read from the figure |
+| g_linearization_composite_calc | 4.6 | 1.F | required | the exact value ln(g(a + dx) + 2) from the interpolated graph is within 0.2 of the approximation (a sanity bou |
+| g_mvt_fprime_graph | 5.1 | 3.D | not_allowed | dense sampling of f'(x) minus the average value and counting sign changes (independent of exact crossing arith |
+| g_parallel_tangent_calc | 2.2 | 2.B | required | bisection on the central-difference derivative with 100 halvings (independent of the symbolic derivative and B |
+| g_position_graph_speed | 4.2 | 2.B | not_allowed | central difference of the interpolated position graph at t = a (independent of the vertex list) |
+| g_prod_deriv_mixed_calc | 2.8 | 1.E | required | central difference (step 1e-6) of the product of the lambdified formula and the interpolated graph (independen |
+| g_product_two_graphs | 2.8 | 1.E | not_allowed | central difference (step 1e-6) of the product of the numerically interpolated graphs (independent of the produ |
+| g_quotient_mixed_calc | 2.9 | 1.E | required | central difference (step 1e-6) of the lambdified formula divided by the interpolated graph (independent of the |
+| g_quotient_two_graphs | 2.9 | 1.E | not_allowed | central difference (step 1e-6) of the numerically interpolated quotient (independent of the quotient rule) |
+| g_rate_mixed_calc | 8.3 | 1.D | required | composite Simpson rule (20001 nodes) on R - L with L interpolated (independent of splitting into two integrals |
+| g_related_rates_two_graphs | 4.5 | 1.D | not_allowed | central difference (step 1e-6) of V(t) built from the numerically interpolated r and h (independent of the pro |
+| g_riemann_left_graph | 6.2 | 1.E | not_allowed | direct sum of the numerically interpolated function at the left endpoints times 2 (independent of exact vertex |
+| g_riemann_mixed_calc | 6.2 | 1.E | required | direct floating-point sum of f + g (g interpolated) at the right endpoints times 2 (independent of exact verte |
+| g_second_deriv_mixed_calc | 3.6 | 1.E | required | second central difference (step 1e-4) of the product of the lambdified formula and the interpolated graph (ind |
+| g_separable_graph_calc | 7.7 | 1.E | required | Runge-Kutta numerical integration of the differential equation with the interpolated g (independent of separat |
+| g_speed_increasing | 4.2 | 2.D | not_allowed | numerical |v| at t = midpoint +/- 0.01 on every segment (independent of the sign table) |
+| g_squeeze_graph | 1.8 | 3.D | not_allowed | numerical limits of g and h at x = a from both sides (independent of the vertex values) |
+| g_tangent_approx_fprime_graph | 4.6 | 1.F | not_allowed | numerical integral of f' over [a, a+1] gives the true f(a+1); the sign of true - tangent value is compared wit |
+| g_tangent_line_value_graph | 4.6 | 1.E | not_allowed | the tangent line value recomputed from numerically interpolated f(a) and a difference quotient at a (independe |
+| g_total_distance_graph | 8.2 | 1.D | not_allowed | numerical quadrature of |v| with breakpoints at the vertices (independent of the exact piecewise formula) |
+| g_trapezoid_unequal_graph | 6.2 | 1.E | not_allowed | direct sum of the numerically interpolated heights times widths (independent of exact rationals) |
+| g_usub_graph | 6.9 | 1.E | not_allowed | numerical quadrature of x f(x^2) on [0, 2] with the interpolated graph (independent of the substitution) |
+| g_volume_axis_shift_calc | 8.10 | 1.D | required | composite Simpson rule on pi((f + s)^2 - (L + s)^2) between the roots (independent of scipy quad) |
+| g_volume_base_graph | 8.7 | 1.D | not_allowed | numerical quadrature of the interpolated f squared (independent of the exact quadratic piece formula) |
+| g_volume_curve_line_calc | 8.7 | 1.D | required | composite Simpson rule on (f - L)^2 between Brent-found roots (independent of scipy quad) |
+| g_volume_semicircle_graph | 8.8 | 1.D | not_allowed | numerical quadrature of (pi/8) f^2 on the interpolated graph (independent of exact quadratic pieces) |
+| g_volume_triangle_graph | 8.8 | 1.D | not_allowed | numerical quadrature of (sqrt(3)/4) f^2 on the interpolated graph (independent of exact quadratic pieces) |
+| g_volume_washer_graph | 8.11 | 1.D | not_allowed | numerical quadrature of f^2 - g^2 with breakpoints at the vertices times pi (independent of exact quadratic pi |
+| g_washer_curve_line_calc | 8.11 | 1.D | required | composite Simpson rule on pi (f^2 - L^2) between Brent-found roots (independent of scipy quad) |
+
+보강(supplement, 2026-10-09 오너 승인) FRQ 새 유형(기존 유형과 풀이 구조가 다른 것만):
+
+| id | 대표 토픽 / 스킬 / 계산기 | 파트 | 독립 검증 |
+|---|---|---|---|
+| `frq_table_values` | 3.1(+2.9, 5.1, 6.2) / 1.E / 불가 | a 표에서 합성함수 미분(2) / b 몫의 법칙(2) / c 평균변화율 + 평균값 정리 정당화(3) / d 폭이 다른 사다리꼴 합(2) | 로그 미분으로 몫 미분 재계산, 부동소수점 사다리꼴 |
+| `frq_function_analysis` | 5.4(+5.5, 5.6, 2.7) / 3.E / 불가 | a 접선(2) / b 상대극값 f' 부호(3) / c 변곡점 f'' 부호(2) / d 닫힌 구간 절대 최대·최소(2) | 중심차분 기울기, 수치 도함수 Brent, 격자 최댓값 |
+| `frq_rate_in_out` | 8.3(+4.1, 5.5) / 3.E / 계산기 | a 총 유입량(2) / b 순변화율 부호·단위(2) / c 시각의 양(2) / d 최대량 시각 정당화(3) | sympy 기호 적분, 순변화 함수 격자 최댓값 |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_accum_max_value_calc | 6.5 | 3.E | required | G is accumulated with a cumulative trapezoid rule on 40000 steps and its maximum is read from the running valu |
+| c_closest_point_calc | 5.11 | 1.D | required | the minimum of the distance over a 300001-point grid on [-1, 5] (independent of Brent's method on the derivati |
+| c_critical_count_calc | 5.2 | 1.E | required | sign changes of a central-difference derivative on a 30001-point grid are counted (independent of the closed-f |
+| c_fastest_increase_calc | 5.5 | 3.E | required | the maximum of M' over a 200001-point grid on [0, 10c] (independent of Brent's method on M'') |
+| c_ftc_second_derivative_calc | 6.4 | 1.D | required | F is computed by scipy quad and its second central difference with step 1e-3 is compared with the derivative o |
+| c_implicit_horizontal_tangent_calc | 5.12 | 1.E | required | the curve is solved for y(x) on a 200000-point grid and the point with the smallest slope magnitude is located |
+| c_increasing_interval_calc | 5.3 | 3.E | required | the sign of a central-difference derivative is checked at 401 points of [1, 5], with the single sign change lo |
+| c_integral_equation_solve_calc | 6.7 | 1.E | required | bisection on the numerically integrated I(k) (independent of the inverse error function used to build the key) |
+| c_limit_def_derivative_calc | 2.2 | 1.E | required | the difference quotient is evaluated numerically with h = 10^-6 (symmetric) and h = 10^-7 (one-sided) and comp |
+| c_max_speed_calc | 4.2 | 1.E | required | the maximum of /x'(t)/ over a 200001-point grid on [0, T] (independent of Brent's method on the acceleration) |
+| c_optimization_rect_calc | 5.11 | 1.D | required | the maximum of A over a 200001-point grid on the allowed interval (independent of Brent's method on A') |
+| c_related_rates_angle_calc | 4.5 | 1.D | required | theta(t) = arctan((h0 + v t)/d) is differentiated by central difference at t = 0 (independent of the implicit  |
+| c_tangent_x_intercept_calc | 2.7 | 1.E | required | the slope is recomputed by central difference (step 1e-6) and the intersection of the numerical tangent line w |
+| c_total_distance_calc | 8.2 | 1.D | required | /v/ is integrated with a composite Simpson rule on 400000 subintervals (independent of the sign-change splitti |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_implicit_second_calc | 3.6 | 1.E | required | the curve is solved for y(x) near the point with Brent's method and the second central difference (step 1e-3)  |
+
+| `frq_model_analysis_calc` | 8.1(+4.1, 5.5) / 1.E / 계산기 | a 모형의 평균값(2) / b C' 의 의미와 단위(2) / c 최댓값과 정당화(2) / d 기준 이상인 시간 구간(3) | sympy 기호 적분, 중심차분, 격자 교점·최댓값 |
+| `frq_piecewise_diff` | 2.4(+1.11, 2.7, 6.7) / 3.B / 불가 | a 꺾이는 점의 연속(2) / b 편측 도함수로 미분 가능 정당화(3) / c 접선(2) / d 도함수의 평균값(2) | 편측 차분 몫, 중심차분 도함수의 수치 평균 |

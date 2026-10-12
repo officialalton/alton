@@ -10,7 +10,7 @@ export type ReleaseTier = "candidate" | "review_env" | "launch";
 export const LATEST_GATE = "v2-code-first-final-2026-10-08";
 /** 기존(LLM 직접 생성) 후보가 재검증(독립 풀이 + 과목별 검토 + 최신 결정적 검사 + 생성기 결함 검사)을 통과했을 때의 게이트 라벨. auto_passed 로 인정하되 코드 원형 검증이 아니라는 점을 라벨로 구분한다. */
 export const REVALIDATED_GATE = "v2-legacy-revalidated-2026-10-09";
-export const GATE_OF_RUN: Record<string, string> = { run1: "v1-llm-generated-2026-10-07", run2: LATEST_GATE, run2bc: LATEST_GATE, "s1a-final": LATEST_GATE, "v1ab-final": LATEST_GATE, "v45ab-final": LATEST_GATE, "bc-topup-final": LATEST_GATE };
+export const GATE_OF_RUN: Record<string, string> = { run1: "v1-llm-generated-2026-10-07", run2: LATEST_GATE, run2bc: LATEST_GATE, "s1a-final": LATEST_GATE, "v1ab-final": LATEST_GATE, "v45ab-final": LATEST_GATE, "bc-topup-final": LATEST_GATE, "s1-graph-ab-final": LATEST_GATE, "s2-graph-ab-final": LATEST_GATE, "s2-graph-bc-final": LATEST_GATE, "s3a-graph-ab-final": LATEST_GATE, "s3a-graph-bc-final": LATEST_GATE, "s3b-graph-ab-final": LATEST_GATE, "s3b-graph-bc-final": LATEST_GATE, "s3c-graph-ab-final": LATEST_GATE, "s3c-graph-bc-final": LATEST_GATE, "s3d-graph-bc-final": LATEST_GATE };
 export const VARIANT_CAP = 2; // 한 문항군이 칸 채움에 기여하는 최대 문항 수(원본 + 변형 1)
 export type RawCand = {
   candidateKey: string; cellId: string; apSubjectCode: string; kind: "mc" | "frq_bundle"; keywordCode: string; unitCode: string; skillPrimary: string; structure: string; calculator: string;
@@ -53,7 +53,7 @@ export type BuildOpts = { history?: Record<string, HistoryEntry[]>; expert?: Rec
 export function buildStock(runs: Record<string, RawCand[]>, opts: BuildOpts = {}): StockItem[] {
   const items: StockItem[] = [];
   for (const [run, list] of Object.entries(runs)) for (const c of list) {
-    const gate = (c as { gateOverride?: string }).gateOverride ?? GATE_OF_RUN[run] ?? run; const passedOwn = !c.rejectionReason;
+    const gate = (c as { gateOverride?: string }).gateOverride ?? GATE_OF_RUN[run] ?? (run.startsWith("supp-") ? LATEST_GATE : run); const passedOwn = !c.rejectionReason;
     const validation: Validation = !passedOwn ? "rejected" : gate === LATEST_GATE || gate === REVALIDATED_GATE ? "auto_passed" : "needs_revalidation";
     const sampled = passedOwn && !c.reserve;
     items.push({ ...c, run, stockKey: `${run}:${c.candidateKey}`, pipeline: pipelineOf(c), validation, gateVersion: gate, expertStatus: opts.expert?.[`${run}:${c.candidateKey}`] ?? "unreviewed", releaseTier: "candidate", renderVerified: Boolean(opts.rendered?.has(`${run}:${c.candidateKey}`)), screenVerified: Boolean(opts.screened?.has(`${run}:${c.candidateKey}`)), reviewEnvReady: false,

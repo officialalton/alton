@@ -94,6 +94,7 @@ export default function ConsultationTab({
           subjects={subjects}
           teacherCandidatesBySubject={teacherCandidatesBySubject}
           initialCards={initialKanbanCards}
+          onOpenAccountCreation={() => setSub("accounts")}
         />
       )}
       {sub === "contracts" && <RegularContractTab />}

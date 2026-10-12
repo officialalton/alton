@@ -2,7 +2,7 @@
 // 누적 = ledger.spent − 승인 범위 시작 기준(61.21) + 시작 전 별도 집행(1.26). 무효로 표시된 측정(validity.json)의 비용도 합계에 포함된다(원장에는 이미 들어 있음) — 아래에 명시.
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-export const APPROVED_RANGE_BASELINE = 61.21; export const PRE_RANGE_SPEND = 1.26; export const STOP_LINE = 27; export const TOTAL_CAP = 30;
+export const APPROVED_RANGE_BASELINE = 61.21; export const PRE_RANGE_SPEND = 1.26; export const STOP_LINE = 45; export const TOTAL_CAP = 50;
 const root = path.resolve("data/ap/sample-2027");
 const runCost = (dir: string) => { let c = 0; for (const f of readdirSync(dir)) if (/\.results\.jsonl$/.test(f)) for (const l of readFileSync(path.join(dir, f), "utf-8").split("\n").filter(Boolean)) { try { c += Number(JSON.parse(l).cost ?? 0); } catch { /* skip */ } } return c; };
 export function ledgerTotal() {

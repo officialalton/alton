@@ -1,0 +1,247 @@
+[
+ {
+  "key": "ap_calculus_bc-m01-k0",
+  "cellId": "ap_calculus_bc-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Need a_{N+1}=1/((N+1)(N+2))<0.0005 → (N+1)(N+2)>2000; 44·45=1980 fails, 45·46=2070 works → N=44.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "44"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Alternating series error bound, topic 10.10, applied procedurally."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "44 is unique: 44*45=1980 fails, 45*46=2070 works."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rationale for 1999 (squared tolerance) is incorrect: squaring the tolerance would give a far larger N, not 1999. It is also an outlier in magnitude and so is not a distinct realistic misconception. The explanation for 44 is thin and does not show the computation."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short task, and a calculator is reasonable for solving the inequality."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a unique key of 44, but the 1999 distractor's stated misconception does not produce 1999, so the distractor explanation is inaccurate and needs revision."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires applying the alternating series error bound a_{N+1} < 0.0005, solving (N+1)(N+2) > 2000, and handling the off-by-one index. The distractors target common misconceptions (using a_N, boundary check). The arithmetic is light and the wording is clear; the series hypotheses (decreasing, terms tending to 0) are easy to verify.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m02-k0",
+  "cellId": "ap_calculus_bc-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "y1=1+0.25 sin1=1.21037; y2=1.21037+0.25(0.25+sin1.21037)=1.50681; y3=1.50681+0.25(0.5+sin1.50681)=1.8813",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1.881"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Euler's method with a nonlinear slope, calculator required; fits topic 7.5 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 1.881 verified and unique; the left-endpoint convention is standard."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; values consistent with descriptions; each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, calculator use is necessary and consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean Euler's method item with a unique key and realistic distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct three-step Euler's method application with a simple differential equation. The only difficulty is carrying values through repeated calculator evaluations of sin y (radian mode). No conceptual depth beyond the procedure, and no representation changes are needed.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m03-k0",
+  "cellId": "ap_calculus_bc-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "0.636",
+     "brief_reasoning": "Integral = sqrt(3)*(sqrt(pi)/2)*erfc(1/sqrt3) ≈ 1.535*0.4145 ≈ 0.636",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Convergent improper integral evaluated with calculator; BC Unit 6 in scope, skill 1.E fits. Technique selection is minimal, but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.636 is the unique correct value; options distinct at 3 decimals."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "0.634 (stop at x=4) is a near-duplicate of the key, serving as a precision trap rather than a distinct misconception. 0.717 'concludes divergence but reports the integrand value' is an unrealistic rationale, since a student concluding divergence would not report a number. Explanation covers all options but two rationales are weak."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Single calculator evaluation, about 80 seconds, typical of AP calculator MC."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope, suitable calculator item, but the distractor set is weak: 0.634 is nearly indistinguishable from the key, and 0.717 has an unrealistic misconception rationale. Failing on distractor quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The integrand has no elementary antiderivative, so the student must recognize that a calculator is needed and evaluate the improper integral numerically (for example, with a large upper limit). This is one procedural step with no representation changes. The close distractors 0.636 and 0.634 require careful calculator entry but not extra reasoning. The correct value is about 0.636.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f01-k0",
+  "cellId": "ap_calculus_bc-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "instant_reject_out_of_scope_knowledge",
+   "reference_pattern_mismatch",
+   "difficulty_from_unfair_sources"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Area = (1/2)∫_0^{π/2}(2+2cosθ)^2 dθ = (1/2)(2π+8+π) = 3π/2+4",
+     "final_answer": "(1/2)∫_0^{π/2}(2+2cosθ)^2 dθ = 3π/2 + 4 ≈ 8.712",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "dr/dθ = -2sinθ = -√3 at π/3",
+     "final_answer": "dr/dθ = -√3 ≈ -1.732. At θ = π/3, the distance from the origin to the point on the curve is decreasing at about 1.732 length units per radian.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "dy/dθ = r'sinθ + rcosθ = -3/2 + 3/2 = 0; dx/dθ = -2√3 ≠ 0",
+     "final_answer": "0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "L = ∫_0^{π/2} √(r^2 + r'^2) dθ = ∫_0^{π/2} 4cos(θ/2) dθ = 8sin(π/4)",
+     "final_answer": "4√2 ≈ 5.657",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Part (d) requires polar arc length, which the stated unit scope excludes (not required in the BC CED). Part (c) keys \"-0.000\", a signed-zero artifact of an exact 0 slope. Part (b) rubric does not score the units the prompt asks for. Parts (a)-(c) are otherwise correct and solver-confirmed.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Polar arc length in (d) is out of scope; part (b) is tagged to topic 4.1 and skill 3.F, outside the unit."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Values are correct, but \"-0.000\" is a malformed key for an exact 0, and the units asked for in (b) are not scored."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ-style item with standard procedures: polar area integral with calculator, dr/dtheta with units interpretation, polar tangent slope via dy/dx (product rule, several steps), and arc length. Numbers are clean and the reading load is moderate. Part d (polar arc length) conflicts with the stated scope that polar arc length is not required, so it should be removed or reframed. Otherwise the difficulty is fair and comes from the number of steps and representation changes.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": true,
+   "est_seconds": 540
+  }
+ }
+]

@@ -1,0 +1,286 @@
+[
+ {
+  "key": "ap_calculus_bc-f01-k0",
+  "cellId": "ap_calculus_bc-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "f'=2x+y→0; f''=2+y'→2; f'''=y''→2",
+     "final_answer": "f'(0)=0, f''(0)=2, f'''(0)=2; P3(x)=x^2 + x^3/3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "1/16+1/192",
+     "final_answer": "13/192 ≈ 0.0677",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "5*(1/4)^4/4!",
+     "final_answer": "5/6144 ≈ 0.000814",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "f'(0)=0 and f''(0)=2>0, second derivative test",
+     "final_answer": "Relative minimum",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts check out (P3 = x^2 + x^3/3, 13/192, 5/6144, relative minimum). The item fits the 10.11/10.12/5.7 span and the 3/2/2/2 point split, and it is suitable for a no-calculator FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP FRQ chain: differentiate the DE to get f'', f''' at 0, build P3, evaluate at 1/4, apply the Lagrange bound, and use the second derivative test. Concepts are standard and in scope. The multiple connected steps and the shifts between DE, polynomial, error bound, and calculus-based classification make it more than basic learning. Numbers are small and the wording is unambiguous, so the difficulty is not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f01-k1",
+  "cellId": "ap_calculus_bc-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "f'(0)=0; f''=2+3y' gives 2; f'''=3y'' gives 6",
+     "final_answer": "f'(0)=0, f''(0)=2, f'''(0)=6; P3(x)=x^2+x^3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "1/16+1/64",
+     "final_answer": "5/64",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "39/4! *(1/4)^4",
+     "final_answer": "13/2048 ≈ 0.00635",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "f'(0)=0 and f''(0)=2>0, second derivative test",
+     "final_answer": "Relative minimum",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and coherent 9-point BC Taylor FRQ with parts of 3, 2, 2 and 2 points. The key values (0, 2, 6; P3 = x^2 + x^3; 5/64; 13/2048; relative minimum) are consistent and exact. Rubric rows are properly dependency-chained, and no calculator is needed. Parts (c) and (d) span the legitimately related topics 10.12 and 5.7.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is building the Taylor polynomial from the differential equation (10.11). Parts (c) and (d) cover the related topics 10.12 and 5.7, which the bundle spans legitimately."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All values are correct and unique. Equivalent forms such as x^2 + x^3 should be accepted for row a3, which is a minor point."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The equation and initial condition are complete and unambiguous. Part (a) repeats the equation in its prompt, which is harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric rows are clear and consistent."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits about 15 minutes with no calculator, simple fractions, and a standard AP structure."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part BC FRQ. Derivatives come from implicit differentiation of the DE: f'(0)=0, f''(0)=2, f'''(0)=6, so P3 = x^2 + x^3. Then evaluate P3(1/4)=5/64, apply the Lagrange bound 39/4! * (1/4)^4 = 13/2048, and use the second derivative test (f'=0, f''>0 gives a relative minimum). It combines several procedures and needs the DE-to-derivatives step, but the numbers are small and the wording is clear. This matches full-mock difficulty rather than basic skill practice or an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f02-k0",
+  "cellId": "ap_calculus_bc-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "By parts, the antiderivative is -(2t+4)e^{-t/2}. As b→∞ the limit is 0+4=4.",
+     "final_answer": "4 mg",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "[-(2t+4)e^{-t/2}] from 0 to 4 = 4-12e^{-2}.",
+     "final_answer": "4 - 12e^{-2} mg",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "r'(t)=e^{-t/2}(1-t/2) is zero at t=2. r' changes from positive to negative there, and since it is the only critical point, t=2 is the absolute maximum.",
+     "final_answer": "t = 2 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "k·4=10.",
+     "final_answer": "k = 5/2",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts have verified keys, and the rubric rows are consistent. Scope fits 6.13, 6.11 and 5.4 as allowed by the bundle. The 3/2/2/2 point split and non-calculator exact-form answers suit the exam. Pass.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item on 6.13 with parts on 6.11 and 5.4. (a) requires integration by parts and a limit, with L'Hopital on t e^(-t/2), giving 4. (b) is a definite integral of the same antiderivative, giving 4 - 12e^(-2). (c) is a first-derivative max justification, with the critical point at t=2. (d) scales the result from (a), so k = 10/4 = 5/2. Concepts are standard for BC, the numbers are clean, and the reading load is light. It needs a few procedures across the parts and one limit evaluation, which is typical of a full mock. The difficulty comes from the math itself, not from the arithmetic or the wording.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f02-k1",
+  "cellId": "ap_calculus_bc-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "By parts: antiderivative -3te^{-t/3}-9e^{-t/3}; limit as b->inf gives 0, minus (-9) = 9.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "9 mg"
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "[-3te^{-t/3}-9e^{-t/3}] from 0 to 3 = -18/e + 9.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "9 - 18/e mg"
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "r'(t)=e^{-t/3}(1-t/3); positive for t<3, negative for t>3, so absolute max at t=3.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "t = 3 hours"
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "k*9 = 10.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "k = 10/9"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts have correct, unique answers (9; 9 - 18/e; t = 3; k = 10/9). The item is in scope for 6.13, 6.11 and 5.4, the rubric is consistent, and the load fits a 9-point non-calculator FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant demand is the improper integral by parts (6.13), with related parts from 6.11 and 5.4. Non-calculator and within BC unit scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and correct. Rubric rows are consistent and their dependencies are reasonable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 9 points fit the official grain, the arithmetic is light, and the load is about 15 minutes."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard BC FRQ-style multipart item. Part a needs integration by parts plus an improper-integral limit (with L'Hopital). Part b reuses the antiderivative. Part c is a first-derivative-test justification. Part d is a simple scaling step. Numbers are clean and the reading is short. Difficulty comes from procedure selection and multi-step reasoning, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 12,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

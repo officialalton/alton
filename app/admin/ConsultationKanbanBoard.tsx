@@ -7,6 +7,7 @@
 // 지난 상담 탭으로 이동시킨다.
 
 import OnboardingAttentionPanel from "./OnboardingAttentionPanel";
+import PendingAccountLinkCards from "./PendingAccountLinkCards";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -79,7 +80,10 @@ export default function ConsultationKanbanBoard({
   teacherCandidatesBySubject,
   initialCards,
   viewerRole = "admin",
+  onOpenAccountCreation,
 }: {
+  // 2026-10-12 — "계정 생성 대기" 카드의 "발송 내역에서 보기" — 상위 서브탭을 계정 생성으로 전환.
+  onOpenAccountCreation?: () => void;
   subjects: AdminSubject[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
   // 2026-09-10(P1-3) — admin/page.tsx가 상담 탭 SSR 시 loadKanbanBoard()를
@@ -207,9 +211,12 @@ export default function ConsultationKanbanBoard({
     <div>
       {headerBar}
       {viewerRole === "admin" && <OnboardingAttentionPanel onOpenConsultation={setOpenId} />}
+      {viewerRole === "admin" && (
+        <PendingAccountLinkCards cards={cards} onChanged={load} onOpenAccountCreation={onOpenAccountCreation} />
+      )}
       <div className="grid grid-cols-5 gap-3" data-testid="consultation-kanban-board">
         {KANBAN_STAGE_ORDER.map((stage) => {
-          const inStage = cards.filter((c) => c.stage === stage);
+          const inStage = cards.filter((c) => c.stage === stage && !c.pendingAccountLink);
           return (
             <div key={stage} className="min-w-0" data-testid={`kanban-column-${stage}`}>
               <div className="text-[12.5px] font-bold text-ink mb-2 flex items-center justify-between">
