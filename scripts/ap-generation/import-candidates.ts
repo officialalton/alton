@@ -12,14 +12,15 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { connect } from "../keywords/db";
 import type { StockItem } from "../../lib/ap-generation/stock";
-import { mergeRow, summarizeMerge, type ExistingRow, type NewRow } from "../../lib/ap-generation/import-merge";
+import type { ExistingRow } from "../../lib/ap-generation/import-merge";
+import { buildCandidateRows, buildHistoryRows, EXISTING_COLUMNS, parseDefectScan, planImport } from "../../lib/ap-admin/import-plan";
 
 const execute = process.argv.includes("--execute");
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 // 보조 적재(S1a): npx tsx scripts/ap-generation/import-candidates.ts --items data/ap/stock/s1a-items.json --batch s1a-ab-2026-10-09 --supplement [--execute]
 //   --supplement: 배치 행은 is_current=false(기본 현재 배치 유지)로 두고, 이 배치의 후보 행은 is_current=true 로 적재해 현재 재고 뷰에 포함한다. 게시·확정 재고 승격이 아니다(관리자 후보 표 한정).
 const SUPPLEMENT = process.argv.includes("--supplement");
-const scan = existsSync("data/ap/stock/defect-scan.json") ? new Map((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string; flags: { code: string }[] }[]).map((r) => [r.key, [...new Set(r.flags.map((f) => f.code))]])) : new Map<string, string[]>();
+const scan = existsSync("data/ap/stock/defect-scan.json") ? parseDefectScan(JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8"))) : new Map<string, string[]>();
 async function main() {
   const items = JSON.parse(readFileSync(path.resolve(process.cwd(), arg("--items", "data/ap/stock/items.json")), "utf-8")) as StockItem[];
   const by = items.reduce<Record<string, number>>((m, c) => ((m[c.validation] = (m[c.validation] ?? 0) + 1), m), {});
@@ -40,20 +41,12 @@ async function main() {
     const { error: be } = await db.from("ap_load_batches").upsert(SUPPLEMENT ? { label: BATCH, is_current: false, note: "supplement batch (S1a code-first AB candidates; loading is not publication)" } : { label: BATCH, note: "current stock load (stock.ts)" }, { onConflict: "label" }); if (be) throw new Error(be.message);
     const { data: b } = await db.from("ap_load_batches").select("id").eq("label", BATCH).single(); batchId = b?.id ?? null;
   }
-  const rows = items.map((c) => ({
-    candidate_key: c.stockKey, run_id: c.run, subject_id: sid.get(c.apSubjectCode), ap_subject_code: c.apSubjectCode, kind: c.kind, keyword_code: c.keywordCode, skill_primary: c.skillPrimary, structure: c.structure,
-    response_mode: c.kind === "mc" ? "select" : "explain", scoring_mode: c.kind === "mc" ? "exact" : "partial", difficulty_provisional: c.difficultyProvisional,
-    payload: { ...c.payload, cellId: c.cellId, unitCode: c.unitCode, archetype: c.archetype ?? null, legacyReserveFlag: c.legacyReserve }, verification: {}, review: {},
-    review_state: c.validation, rejection_reason: c.validation === "rejected" ? c.rejectionReason : null, gate_version: c.gateVersion, expert_status: c.expertStatus, release_tier: c.releaseTier, render_verified: c.renderVerified, screen_verified: c.screenVerified, load_batch_id: batchId, is_current: true, defect_flags: scan.get(c.stockKey) ?? [], defect_scanned_at: new Date().toISOString(),
-    used_in_sample: c.selectedForSample, legacy_reserve: c.legacyReserve, item_family_id: c.itemFamilyId || null, duplicate_of: c.duplicateOf, duplicate_reason: c.duplicateReason,
-    content_key: c.contentKey, shared_with: c.sharedWith, calculator: c.calculator === "required" || c.calculator === "not_allowed" ? c.calculator : "na", stock_cell: c.stockCell,
-  }));
-  const hist = items.flatMap((c) => c.history.map((h) => ({ candidate_key: c.stockKey, run_label: h.run, gate_version: h.gateVersion, outcome: h.outcome, reasons: h.reasons })));
+  const rows = buildCandidateRows(items, { subjectIds: sid, batchId, scan }); // 행 구성·병합은 lib/ap-admin/import-plan.ts(관리자 화면과 공유)
+  const hist = buildHistoryRows(items);
   // 기존 행 조회(병합 규칙에 필요한 열만)
   const existing = new Map<string, ExistingRow>(); const keys = rows.map((r) => r.candidate_key);
-  for (let i = 0; i < keys.length; i += 150) { const { data, error: e } = await db.from("ap_candidate_items").select("candidate_key, payload, review_state, render_verified, screen_verified, release_tier, problem_id, purpose, converted_at, expert_status").in("candidate_key", keys.slice(i, i + 150)); if (e) throw new Error(e.message); for (const r of data ?? []) existing.set(r.candidate_key as string, r as ExistingRow); }
-  const results = rows.map((r) => ({ key: r.candidate_key, m: mergeRow(r as unknown as NewRow, existing.get(r.candidate_key) ?? null) }));
-  const sum = summarizeMerge(results.map((x) => x.m));
+  for (let i = 0; i < keys.length; i += 150) { const { data, error: e } = await db.from("ap_candidate_items").select(EXISTING_COLUMNS).in("candidate_key", keys.slice(i, i + 150)); if (e) throw new Error(e.message); for (const r of data ?? []) existing.set(r.candidate_key as string, r as ExistingRow); }
+  const { results, summary: sum } = planImport(rows, existing);
   console.log(`병합 계획: 새 키 insert ${sum.insert}, 기존 행 update ${sum.update}, 변경 없음 ${sum.unchanged}, 검증·변환 보존만 ${sum.preserveOnly}`);
   console.log(`  보존: 검증/변환된 기존 행 ${sum.verifiedPreserved}(변환 ${sum.convertedPreserved}), payload 갱신 건너뜀 ${sum.payloadSkipped}, 판정 충돌로 기존 판정 유지 ${sum.stateConflictsKept}, 판정 승격 ${sum.stateUpgrades}(그중 검증·변환 행 ${sum.upgradesOnVerifiedOrConverted})`);
   if (process.argv.includes("--report")) {

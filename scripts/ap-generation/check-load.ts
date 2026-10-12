@@ -4,6 +4,7 @@
 // --write-verified: review_env_ready 인 현재(is_current) 후보 키를 JSON 배열 파일로 저장(조립 입력, 스크래치 경로 권장).
 import { readFileSync, readdirSync, writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
+import { computeLoadCheck } from "../../lib/ap-admin/load-check";
 
 const EXPECT = "worpsqwqgnspddnrtnvq";
 const SD = "data/ap/stock";
@@ -24,22 +25,14 @@ async function main() {
     rows.push(...(data ?? []));
     if (!data || data.length < 1000) break;
   }
-  const byKey = new Map(rows.map((r) => [r.candidate_key, r]));
   console.log(`DB 후보 행(뷰) ${rows.length}건`);
 
   const files = readdirSync(SD).filter((f) => /^(graph-s.*|supp-b.*)-pass-keys\.json$/.test(f) || f === "v1v45-siblings-keys.json").sort();
-  let totalKeys = 0, totalReady = 0, bad = 0;
+  const batches = files.map((f) => { const raw = JSON.parse(readFileSync(path.join(SD, f), "utf-8")); return { id: f, label: f, keys: (Array.isArray(raw) ? raw : raw.keys ?? []) as string[] }; });
+  const chk = computeLoadCheck(batches, rows); // 계산은 lib/ap-admin/load-check.ts(관리자 화면과 공유)
   console.log("\n파일 | 통과 키 | DB 적재 | 렌더 | 화면 | review_env_ready");
-  for (const f of files) {
-    const raw = JSON.parse(readFileSync(path.join(SD, f), "utf-8"));
-    const keys: string[] = Array.isArray(raw) ? raw : raw.keys ?? [];
-    const got = keys.map((k) => byKey.get(k)).filter(Boolean) as typeof rows;
-    const n = (p: (r: (typeof rows)[number]) => boolean) => got.filter(p).length;
-    const ready = n((r) => r.review_env_ready);
-    totalKeys += keys.length; totalReady += ready; if (ready !== keys.length) bad++;
-    console.log(`${f.padEnd(34)} | ${String(keys.length).padStart(3)} | ${String(got.length).padStart(3)} | ${String(n((r) => r.render_verified)).padStart(3)} | ${String(n((r) => r.screen_verified)).padStart(3)} | ${String(ready).padStart(3)}${ready === keys.length ? "" : "  ← 부족"}`);
-  }
-  console.log(`\n합계: 통과 키 ${totalKeys} 중 review_env_ready ${totalReady} (기대 140 + 보강 중 겹침 없음). 부족한 파일 ${bad}개.`);
+  for (const b of chk.batches) console.log(`${b.label.padEnd(34)} | ${String(b.keys).padStart(3)} | ${String(b.loaded).padStart(3)} | ${String(b.render).padStart(3)} | ${String(b.screen).padStart(3)} | ${String(b.ready).padStart(3)}${b.short ? "  ← 부족" : ""}`);
+  console.log(`\n합계: 통과 키 ${chk.totals.keys} 중 review_env_ready ${chk.totals.ready} (기대 140 + 보강 중 겹침 없음). 부족한 파일 ${chk.totals.shortBatches}개.`);
   const out = arg("write-verified");
   if (out) {
     const ready = rows.filter((r) => r.review_env_ready).map((r) => r.candidate_key).sort();

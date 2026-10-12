@@ -47,6 +47,9 @@ const EMPTY_DASHBOARD: AdminDashboardData = {
   qcWarnings: [],
 };
 
+// AP 재고 관리 서버 액션(적재·검증 기록·변환)은 건수가 많으면 수십 초가 걸린다 — 서버 액션은 이 라우트의 제한을 따른다.
+export const maxDuration = 60;
+
 export default async function AdminHomePage({
   searchParams,
 }: {
