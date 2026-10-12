@@ -23,6 +23,7 @@ function convert(name: string) {
   const vid = psql(`select save_problem_draft_version(p_problem_id => '${pid}', p_passage => null, p_options => ${json(["A1", "B2", "C3", "D4"])}, p_correct_index => 1, p_explanation => 'Because B2 is correct. Detailed English explanation.', p_difficulty => 'medium', p_actor_id => '${ADMIN_ID}', p_question => ${q(`Stem ${name}`)}, p_explanation_en => 'Because B2 is correct. Detailed English explanation.');`);
   psql(`select set_problem_render_check('${vid}', ${json({ ok: true, renderer: "std-1", issues: [] })});`);
   psql(`select confirm_and_publish_problem_version('${vid}', '${ADMIN_ID}');`);
+  psql(`select ap_finalize_conversion(${q(K(name))}, '${ADMIN_ID}');`);
   pids.push(pid); vids.push(vid);
 }
 const items = (i: number[]) => i.map((n, pos) => ({ section: "ap_mc", position: pos + 1, problem_id: pids[n], problem_version_id: vids[n], sat_domain: "ap:1.1", difficulty: "medium" }));
