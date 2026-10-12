@@ -143,7 +143,7 @@ def g_integral_piecewise_graph_formula_calc(rng):
         if abs(simp - key_v) > 1e-4:
             raise ValueError("independent_check_failed")
         ds = [("Ignores the graph and integrates the formula over the whole interval from 0 to 8.", I08), ("Leaves out the graph and integrates the formula only from 4 to 8.", I48),
-              ("Uses only the area under the graph from 0 to 4.", A), ("Adds the area under the graph and the change h(8) - h(4) of the formula instead of its integral.", A + hf(8) - hf(4))]
+              ("Uses only the area under the graph from 0 to 4.", A), ("Adds the area under the graph and the change in the values of the formula between x = 4 and x = 8 instead of its integral.", A + hf(8) - hf(4))]
         try:
             pool = dopts(ds, key_v)
         except ValueError:
@@ -250,9 +250,12 @@ def g_direction_changes_count_graph(rng):
     chg = sum(1 for i in range(len(nzg) - 1) if nzg[i] != nzg[i + 1])
     if chg != changes:
         raise ValueError("independent_check_failed")
-    ds = [("Counts every time v = 0, including the times when the graph only touches the t-axis without changing sign.", zeros), ("Counts the vertices of the graph at which the slope changes.", sum(1 for i in range(1, 5) if (v[i] - v[i - 1]) * (v[i + 1] - v[i]) <= 0 or (v[i] - v[i - 1] > 0) != (v[i + 1] - v[i] > 0))),
-          ("Counts the intervals on which v is negative as the number of direction changes, one too many.", changes + 1), ("Counts the intervals on which v is positive, forgetting the start of the motion.", max(changes - 1, 0)),
-          ("Counts the sign changes and also one touching point.", changes + 2), ("Counts every zero of v and one more for the endpoint t = 10.", zeros + 1)]
+    turning = sum(1 for i in range(1, 5) if (v[i] - v[i - 1]) * (v[i + 1] - v[i]) < 0)
+    zero_vertices = sum(1 for i in range(1, 5) if v[i] == 0)
+    ds = [("Counts every time v = 0, including the times when the graph only touches the t-axis without changing sign.", zeros),
+          ("Counts the number of time intervals on which v keeps one sign, which is one more than the number of sign changes.", changes + 1),
+          ("Counts the peaks and valleys of the graph of v, which are the times the acceleration changes sign, not the times the direction changes.", turning),
+          ("Counts only the vertices of the graph that lie on the t-axis and misses the zeros between vertices.", zero_vertices)]
     pool = opts(ds, changes, lambda z: "$%d$" % z)
     stem = "A particle moves along a horizontal line with velocity $v(t)$ meters per second for $0\\le t\\le 10$. The graph of $v$ is shown and consists of line segments. How many times does the particle change direction during $0<t<10$?"
     key = Opt("$%d$" % changes, True, "The particle changes direction exactly when v(t) changes sign, which happens %d time(s); where the graph only touches the t-axis, v does not change sign and the direction does not change." % changes, changes)
@@ -443,3 +446,40 @@ def c_limit_numeric_e_calc(rng):
              [("base_only", "takes the limit of the base only and gives 1"), ("exponent_cancels", "assumes the exponent cancels the factor and gives k"), ("forgets_k", "forgets the factor k and gives e"), ("wrong_exponent", "uses x/k instead of kx and gives e^(1/k)")],
              "direct evaluation at x = 1e-7 (independent of the closed form e^k)", AB_)
     return build("c_limit_numeric_e_calc", "1.4", "1.E", "required", stem, key, pool, rng, bpr, 75, [f"k={k}", f"key={key_v:.6f}"])
+
+
+_F_CONVEX = [(sp.exp(x / 2), "e^{x/2}"), (x * sp.log(x), "x\\ln x"), (x ** sp.Rational(3, 2), "x^{3/2}"), (sp.exp(x / 3) + x, "e^{x/3}+x")]
+
+
+# 2.1 평균변화율과 순간변화율의 차이: 볼록한 증가함수에서 [a, b] 의 평균변화율이 x = a 의 순간변화율보다 얼마나 큰가
+def c_avg_vs_instant_rate_calc(rng):
+    for _ in forever():
+        fexpr, ftex = rng.choice(_F_CONVEX)
+        a, b = rng.choice([(1, 4), (1, 3), (2, 5), (1, 5)])
+        ff = sp.lambdify(x, fexpr, "math")
+        fp = sp.lambdify(x, sp.diff(fexpr, x), "math")
+        fpp = sp.lambdify(x, sp.diff(fexpr, x, 2), "math")
+        if any(fpp(a + (b - a) * i / 50) <= 0 for i in range(51)):
+            continue
+        avg = (ff(b) - ff(a)) / (b - a)
+        key_v = avg - fp(a)
+        # 독립 경로: 중심차분으로 f'(a) 를 다시 구해 차를 계산
+        hh = 1e-6
+        if abs(avg - (ff(a + hh) - ff(a - hh)) / (2 * hh) - key_v) > 1e-5 or key_v <= 0.05:
+            raise ValueError("independent_check_failed")
+        ds = [("Reports the average rate of change on the interval without subtracting the instantaneous rate.", avg), ("Reports the instantaneous rate of change f'(%d) without comparing it with the average rate." % a, fp(a)),
+              ("Subtracts in the wrong order, f'(%d) minus the average rate." % a, fp(a) - avg), ("Compares the average rate with the instantaneous rate at the right endpoint x = %d instead of x = %d." % (b, a), avg - fp(b))]
+        ds = [(w, z) for w, z in ds if abs(z) > 0.05]
+        try:
+            pool = numopts(ds, key_v, dec3)
+        except ValueError:
+            continue
+        break
+    stem = f"Let $f(x)={ftex}$. How much greater is the average rate of change of $f$ on the interval $[{a},{b}]$ than the instantaneous rate of change of $f$ at $x={a}$?"
+    key = Opt(dec3(key_v), True, "The average rate of change is (f(%d) - f(%d))/%d = %.3f and the instantaneous rate at x = %d is f'(%d) = %.3f, both found with a calculator, so the difference is %.3f." % (b, a, b - a, avg, a, a, fp(a), key_v), key_v)
+    bpr = nb("c_avg_vs_instant_rate_calc", "2.1", "1.D", "required", "Compare an average rate of change over an interval with an instantaneous rate of change at a point",
+             ["Compute the average rate of change as the difference quotient over the interval", "Compute the instantaneous rate of change at the left endpoint as the derivative value", "Subtract the instantaneous rate from the average rate"],
+             [("f is convex and increasing on the interval, so the average rate exceeds the instantaneous rate at the left endpoint", "f''(x) > 0 on the interval")],
+             [("average_only", "reports the average rate of change only"), ("instantaneous_only", "reports the instantaneous rate only"), ("reversed_order", "subtracts in the wrong order"), ("wrong_endpoint", "uses the instantaneous rate at the right endpoint")],
+             "difference quotient from the lambdified function and a central difference (step 1e-6) for the instantaneous rate (independent of the symbolic derivative)", AB_)
+    return build("c_avg_vs_instant_rate_calc", "2.1", "1.D", "required", stem, key, pool, rng, bpr, 85, [f"f={fexpr}", f"a={a}", f"b={b}", f"key={key_v:.6f}"])

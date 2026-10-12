@@ -227,3 +227,9 @@ BC 전용 용어(series/converge/Taylor/Maclaurin/parametric/polar/vector/Euler/
 | g_integral_even_function_graph | 6.6 | 1.D | not_allowed | numerical quadrature of f(/x/) + c x over [-4, 4] (independent of the symmetry argument) |
 | g_integral_piecewise_graph_formula_calc | 6.6 | 1.D | required | composite Simpson rule on the piecewise function with the graph interpolated (independent of the split into ex |
 | g_linear_combo_two_graphs | 2.6 | 1.E | not_allowed | central difference (step 1e-6) of the numerically interpolated combination (independent of the term-by-term ru |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_avg_vs_instant_rate_calc | 2.1 | 1.D | required | difference quotient from the lambdified function and a central difference (step 1e-6) for the instantaneous ra |

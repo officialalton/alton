@@ -55,4 +55,6 @@ STAGES = {
         "g_accum_concave_down_graph", "g_accum_intersect_formula_calc", "g_integral_piecewise_graph_formula_calc", "g_integral_even_function_graph", "g_linear_combo_two_graphs", "g_direction_changes_count_graph",
         "g_avg_value_intersection_graph", "c_ftc_initial_value_calc", "c_riemann_error_calc", "c_normal_line_calc", "c_related_rates_distance_calc", "c_limit_numeric_e_calc",
     ],
+    # 보충 2차 두 번째 배치: 첫 배치에서 반려된 구조 둘을 고쳐 새 후보로(같은 후보 수선 아님) — 단원 4 그래프 필수 1·단원 2 계산기 1
+    "supp_t2b_ab": ["g_direction_changes_count_graph", "c_avg_vs_instant_rate_calc"],
 }
