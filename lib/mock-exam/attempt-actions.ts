@@ -134,6 +134,19 @@ export async function enterApSectionAction(attemptId: string, section: string): 
   }
 }
 
+/** AP: "Start section" — 서버 시계를 시작하고(멱등), 이제 열린 섹션의 문항 내용이 담긴 최신 상세를 함께 돌려준다(560). */
+export async function startApSectionAction(attemptId: string, section: string): Promise<ActionResult<{ remaining: Record<string, number>; attempt: MockExamAttemptDetail | null }>> {
+  try {
+    const { supabase } = await requireStudentFeature("mock_exam");
+    const { data, error } = await supabase.rpc("mock_exam_ap_enter_section", { p_attempt_id: attemptId, p_section: section });
+    if (error) return { ok: false, error: toErr(error, "Could not start the section.") };
+    const attempt = await loadMockExamAttemptDetail(supabase, attemptId);
+    return { ok: true, value: { remaining: (data ?? {}) as Record<string, number>, attempt } };
+  } catch (e) {
+    return { ok: false, error: toErr(e, "Could not start the section.") };
+  }
+}
+
 /** AP: 마지막 섹션이 서버 시계로 만료됐으면 마감(채점 완료)한다. 멱등 — 반환은 응시 상태. */
 export async function settleApAttemptAction(attemptId: string): Promise<ActionResult<{ status: string; attempt: MockExamAttemptDetail | null }>> {
   try {

@@ -6,6 +6,7 @@ import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam
 import {
   saveMockExamAnswerAction,
   enterApSectionAction,
+  startApSectionAction,
   settleApAttemptAction,
   submitMockExamAttemptAction,
   toggleMockExamFlagAction,
@@ -45,9 +46,15 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
   const router = useRouter();
   const layout = useMemo(() => (attempt.sectionLayout ?? []).filter((s) => attempt.items.some((i) => sectionOf(i) === s.key)), [attempt]);
   const [submittedAttempt, setSubmittedAttempt] = useState<MockExamAttemptDetail | null>(null);
+  // 560: 섹션 탭을 눌러 보기만 해서는 시계가 시작되지 않는다. 시작 안 한 섹션은 문항 내용 없이 안내 패널만 보이고 "Start section" 을 눌러야 시작한다.
+  // apSectionStarted 가 없는 구버전 응답은 전부 시작된 것으로 본다(기존 동작).
+  const [allItems, setAllItems] = useState<MockExamAttemptItem[]>(attempt.items);
+  const [started, setStarted] = useState<Record<string, boolean>>(() => Object.fromEntries((attempt.sectionLayout ?? []).map((s) => [s.key, attempt.apSectionStarted?.[s.key] ?? true])));
+  const [starting, setStarting] = useState(false);
+  const startingRef = useRef(false);
   const [sectionKey, setSectionKey] = useState(layout[0]?.key ?? "");
   const section = layout.find((s) => s.key === sectionKey) ?? layout[0];
-  const items = useMemo(() => attempt.items.filter((i) => sectionOf(i) === section?.key), [attempt.items, section]);
+  const items = useMemo(() => allItems.filter((i) => sectionOf(i) === section?.key), [allItems, section]);
   const [index, setIndex] = useState(0);
   const current = items[index];
   const [responses, setResponses] = useState<Record<string, string>>(Object.fromEntries(attempt.items.map((i) => [i.setItemId, i.response ?? ""])));
@@ -79,7 +86,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
   useEffect(() => { tickRef.current = remaining; }, [remaining]);
   const currentItemId = current?.setItemId;
   useEffect(() => {
-    if (isSubmitted || !section) return;
+    if (isSubmitted || !section || started[section.key] === false) return;
     const timer = setInterval(() => {
       setRemaining((prev) => {
         const left = Math.max(0, (prev[section.key] ?? 0) - 1);
@@ -89,13 +96,28 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
       if (currentItemId) itemSecondsRef.current[currentItemId] = (itemSecondsRef.current[currentItemId] ?? 0) + 1;
     }, 1000);
     return () => clearInterval(timer);
-  }, [section, isSubmitted, currentItemId]);
+  }, [section, isSubmitted, currentItemId, started]);
   // 서버 시계(마이그레이션 406): 섹션에 들어갈 때마다 서버에 알리고, 서버가 계산한 남은 시간으로 맞춘다. 클라이언트 값은 저장하지 않는다.
   const enterSection = useCallback(async (key: string) => {
     const r = await enterApSectionAction(attempt.id, key);
     if (r.ok) setRemaining((prev) => ({ ...prev, ...r.value.remaining }));
   }, [attempt.id]);
-  useEffect(() => { if (!isSubmitted && sectionKey) void enterSection(sectionKey); }, [isSubmitted, sectionKey, enterSection]);
+  // 이미 시작된 섹션(첫 섹션 포함)만 진입 호출로 시계를 다시 맞춘다. 시작 안 한 섹션은 아무것도 호출하지 않는다.
+  const sectionStarted = started[sectionKey] !== false;
+  useEffect(() => { if (!isSubmitted && sectionKey && sectionStarted) void enterSection(sectionKey); }, [isSubmitted, sectionKey, sectionStarted, enterSection]);
+  async function startSection(key: string) {
+    if (startingRef.current) return;
+    startingRef.current = true; setStarting(true); setError(null);
+    const r = await startApSectionAction(attempt.id, key);
+    startingRef.current = false; setStarting(false);
+    if (!r.ok) { setError(r.error); return; }
+    setRemaining((prev) => ({ ...prev, ...r.value.remaining }));
+    if (r.value.attempt) {
+      const fresh = r.value.attempt.items.filter((i) => sectionOf(i) === key);
+      setAllItems((prev) => prev.map((i) => fresh.find((f) => f.setItemId === i.setItemId) ?? i));
+    }
+    setStarted((st) => ({ ...st, [key]: true }));
+  }
 
   // 마지막 섹션(단일 섹션 포함)의 시간이 끝나면 자동 제출한다 — 더 풀 문항이 없는데 제출 버튼까지 번호를 눌러 가게 하지 않는다.
   // 중간 섹션이 끝나면 잠금 안내와 함께 "다음 섹션" 버튼이 보인다(SAT 도 시간 소진 시 해당 섹션만 잠그고 직접 제출 또는 모든 섹션 잠금 시 마감).
@@ -136,14 +158,15 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
   }
   useEffect(() => () => { if (pending.current?.timer) clearTimeout(pending.current.timer); }, []);
 
-  if (attempt.items.length === 0 || !section) return <p className="text-[13px] text-grey-500">This exam has no questions.</p>;
+  if (allItems.length === 0 || !section) return <p className="text-[13px] text-grey-500">This exam has no questions.</p>;
   if (submittedAttempt) return <main className="mx-auto w-full max-w-4xl px-4 py-6"><h1 className="mb-4 text-[18px] font-extrabold">{submittedAttempt.examSetName}</h1><ApExamResultView attempt={submittedAttempt} /></main>;
   if (isSubmitted) return <p className="text-[13px] text-grey-500">Submitted. Open the Practice Tests tab to see your results.</p>;
 
   const subjectName = AP_SUBJECT_NAME[attempt.apSubject ?? ""] ?? "AP";
   const sectionLocked = !!locked[section.key];
   const answered = (i: MockExamAttemptItem) => (i.format === "essay" ? Object.values(parseFrqAnswer(responses[i.setItemId] ?? "")).some((v) => v.trim() !== "") : (responses[i.setItemId] ?? "") !== "");
-  const answeredCount = attempt.items.filter(answered).length;
+  const answeredCount = allItems.filter(answered).length;
+  const notStartedCount = layout.filter((s) => started[s.key] === false).length;
   const calcOk = section.calculator === "allowed" || section.calculator === "required";
 
   async function go(n: number) {
@@ -198,7 +221,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
   const nextSection = layout[layout.findIndex((s) => s.key === section.key) + 1];
 
   const guidance = apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout, name: attempt.examSetName });
-  const coverage = apCoverageLines({ subject: attempt.apSubject, units: apUnitsFromDomains(attempt.items.map((i) => i.satDomain)), layout: attempt.sectionLayout, name: attempt.examSetName, label: attempt.apLabel });
+  const coverage = apCoverageLines({ subject: attempt.apSubject, units: apUnitsFromDomains(allItems.map((i) => i.satDomain)), layout: attempt.sectionLayout, name: attempt.examSetName, label: attempt.apLabel });
   const secAnswered = items.filter(answered).length;
   const secLeft = remaining[section.key] ?? 0;
   const warning = secLeft > 0 && secLeft <= 300;
@@ -213,7 +236,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
           <p className="truncate text-[11px] font-semibold text-grey-500">{subjectName} · <span data-testid="ap-badge">{apBadgeText({ subject: attempt.apSubject, label: attempt.apLabel, layout: attempt.sectionLayout, name: attempt.examSetName })}</span></p>
         </div>
         <div className={`text-[18px] font-extrabold tabular-nums ${warning ? "text-red" : "text-ink"}`} data-testid="ap-exam-timer" aria-label="Time remaining in this section" aria-live={warning ? "polite" : "off"}>
-          {formatClock(secLeft)}{warning && <span className="ml-2 text-[11px] font-semibold">5 min left</span>}
+          {formatClock(secLeft)}{!sectionStarted && <span className="ml-2 text-[11px] font-semibold text-grey-500">Not started</span>}{warning && <span className="ml-2 text-[11px] font-semibold">5 min left</span>}
         </div>
         <div className="flex items-center gap-2">
           {calcOk && <MockExamToolButtons calculatorAllowed referenceSheetAllowed={false} open={toolsOpen} onToggle={(w) => setToolsOpen((c) => (c === w ? null : w))} />}
@@ -227,7 +250,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
           {layout.map((s) => (
             <button key={s.key} type="button" onClick={() => void switchSection(s.key)} data-testid={`ap-section-${s.key}`}
               className={`${tab} ${section.key === s.key ? "bg-ink text-white" : "bg-grey-100 text-grey-600"}`}>
-              {apSectionDisplayLabel(s, attempt.sectionLayout)}{locked[s.key] ? " (Time's up)" : ""}
+              {apSectionDisplayLabel(s, attempt.sectionLayout)}{locked[s.key] ? " (Time's up)" : started[s.key] === false ? " (Not started)" : ""}
             </button>
           ))}
         </div>
@@ -246,7 +269,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
       <div className="flex min-h-0 flex-1 flex-col md:flex-row">
         <nav aria-label="Go to question" className="shrink-0 overflow-x-auto border-b border-grey-200 px-3 py-2 md:w-[96px] md:overflow-y-auto md:overflow-x-visible md:border-b-0 md:border-r">
           <div className="flex gap-1.5 md:grid md:grid-cols-3">
-            {items.map((it, i) => {
+            {sectionStarted && items.map((it, i) => {
               const ans = answered(it), fl = flags[it.setItemId], gs = (guessedMap[it.setItemId] ?? false) && ans;
               return (
                 <button key={it.setItemId} type="button" onClick={() => void go(i)} aria-current={i === index ? "true" : undefined}
@@ -259,12 +282,20 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
               );
             })}
           </div>
-          <div className="hidden text-[10.5px] text-grey-500 md:mt-3 md:block" data-testid="ap-answered-count">{secAnswered}/{items.length} answered</div>
+          <div className="hidden text-[10.5px] text-grey-500 md:mt-3 md:block" data-testid="ap-answered-count">{sectionStarted ? `${secAnswered}/${items.length} answered` : "Not started"}</div>
         </nav>
 
         <main className="flex min-h-0 min-w-0 flex-1 flex-col">
           {error && <p role="alert" className="px-4 pt-2 text-[12.5px] text-red">{error}</p>}
-          {sectionLocked ? (
+          {!sectionStarted ? (
+            <div className="m-4 mx-auto flex max-w-lg flex-col items-center rounded-lg border border-grey-200 bg-grey-50 p-6 text-center" data-testid="ap-section-not-started">
+              <h2 className="text-[16px] font-extrabold text-ink">{apSectionDisplayLabel(section, attempt.sectionLayout)}</h2>
+              <p className="mt-2 text-[13px] text-grey-600">{section.count} questions · {section.minutes} min{CALCULATOR_TEXT[section.calculator] ? ` · ${CALCULATOR_TEXT[section.calculator]}` : ""}</p>
+              <p className="mt-2 text-[13px] text-grey-600">The timer starts when you press Start section and cannot be paused.</p>
+              <button type="button" autoFocus disabled={starting} onClick={() => void startSection(section.key)} data-testid="ap-start-section"
+                className="mt-4 min-h-[44px] rounded-lg bg-ink px-5 py-2 text-[13.5px] font-bold text-white disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40">{starting ? "Starting…" : "Start section"}</button>
+            </div>
+          ) : sectionLocked ? (
             <div className="m-4 rounded-lg border border-red/40 bg-red/5 p-6 text-center text-[13.5px] text-red" data-testid="ap-section-expired">
               <p>Time is up for this section. Answers can no longer be changed.</p>
               {section.key === finalKey ? (
@@ -373,7 +404,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
           <div className="w-full max-w-md rounded-lg bg-white p-5">
             <h3 className="mb-2 text-[15px] font-bold">Before you submit</h3>
             <p className="mb-4 text-[13px] text-grey-600">
-              You answered {answeredCount} of {attempt.items.length} questions.{answeredCount < attempt.items.length && " Some questions are unanswered."} Once submitted, answers cannot be changed.
+              You answered {answeredCount} of {allItems.length} questions.{answeredCount < allItems.length && " Some questions are unanswered."}{notStartedCount > 0 && <span data-testid="ap-not-started-warning"> {notStartedCount} section{notStartedCount > 1 ? "s were" : " was"} not started; {notStartedCount > 1 ? "their" : "its"} questions count as unanswered.</span>} Once submitted, answers cannot be changed.
               Multiple-choice questions are scored right away; free-response answers are kept, and a reference answer and scoring guide (reference feedback, not official scoring) is shown after you submit.
             </p>
             <div className="flex justify-end gap-2">

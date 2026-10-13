@@ -250,7 +250,10 @@ describe("학생 응시 흐름(무료 회원)", () => {
     const frq = d.items.find((i) => i.section === "ap_frq")!;
     expect(frq.format).toBe("essay");
     expect(frq.explanation).toBeNull();
-    expect(JSON.stringify(frq.parts)).toContain("Explain the result.");
+    expect(frq.parts).toBeNull(); // 560: 시작 안 한 섹션의 문항 내용은 내려오지 않는다
+    asUser(freeA, `select mock_exam_ap_enter_section('${attemptA}', 'ap_frq');`);
+    const d2 = JSON.parse(asUser(freeA, `select mock_exam_attempt_detail('${attemptA}');`)) as typeof d;
+    expect(JSON.stringify(d2.items.find((i) => i.section === "ap_frq")!.parts)).toContain("Explain the result.");
   });
   it("학생이 문제·버전·세트 항목 원본을 직접 읽을 수 없다(수업용 포함)", () => {
     for (const t of ["problems", "problem_versions", "mock_exam_set_items"]) {
@@ -261,6 +264,7 @@ describe("학생 응시 흐름(무료 회원)", () => {
   it("답 저장·FRQ 자동 저장·시간 저장, 타 사용자 격리", () => {
     const items = JSON.parse(asUser(freeA, `select mock_exam_attempt_detail('${attemptA}');`)).items as { setItemId: string; section: string }[];
     const mcItem = items.find((i) => i.section === "ap_mc")!, frqItem = items.find((i) => i.section === "ap_frq")!;
+    asUser(freeA, `select mock_exam_ap_enter_section('${attemptA}', 'ap_frq');`);
     asUser(freeA, `select mock_exam_save_answer('${attemptA}', '${mcItem.setItemId}', '1', 12);`);
     asUser(freeA, `select mock_exam_save_answer('${attemptA}', '${frqItem.setItemId}', ${q(JSON.stringify({ a: "My partial answer", b: "" }))}, 40);`);
     asUser(freeA, `select mock_exam_save_answer('${attemptA}', '${frqItem.setItemId}', ${q(JSON.stringify({ a: "My longer answer", b: "42" }))}, 55);`);
@@ -415,5 +419,79 @@ describe("AP 시간 제한은 서버가 정한다", () => {
     const att = asUser(freeA, `select mock_exam_open_start('${sat}');`);
     asUser(freeA, `select mock_exam_submit('${att}');`);
     expect(fails(() => asUser(freeA, `select mock_exam_submit('${att}');`))).toMatch(/already been submitted/);
+  });
+});
+
+// ── 섹션은 "Start section" 을 눌러야 시작한다(마이그레이션 560) ─────────────────────────
+describe("AP 섹션 명시적 시작", () => {
+  let set: string, att: string, ids: string[];
+  const rpc = (sql: string) => asUser(freeB, sql);
+  const entered = () => psql(`select ap_section_entered::text from mock_exam_attempts where id = '${att}';`);
+  const detail = () => JSON.parse(rpc(`select mock_exam_attempt_detail('${att}')::text;`)) as { apSectionStarted: Record<string, boolean>; timeRemainingSeconds: Record<string, number>; items: { setItemId: string; section: string; question: string | null; passage: string | null; options: string[] | null; parts: unknown; response: string | null }[] };
+  it("준비: 2섹션 세트 + 응시 시작(첫 섹션만 시작 가능)", () => {
+    addCandidate("ex1"); addCandidate("ex2");
+    const p1 = convert("ex1", "mock_exam"), p2 = convert("ex2", "mock_exam");
+    const layout = { sections: [
+      { key: "ap_mc", kind: "mc", label: "Section I", minutes: 30, count: 1, calculator: "allowed", options: 4 },
+      { key: "ap_mc_b", kind: "mc", label: "Section I, Part B", minutes: 20, count: 1, calculator: "required", options: 4 },
+    ] };
+    set = createApSet("explicit", "mc_practice", "free", layout);
+    addItem(set, p1, "ap_mc", 1); addItem(set, p2, "ap_mc_b", 1); publishSet(set, "free");
+    att = rpc(`select mock_exam_open_start('${set}');`);
+    ids = psql(`select string_agg(id::text, ',' order by section) from mock_exam_set_items where exam_set_id = '${set}';`).split(",");
+  });
+  it("탭 선택(= 상세 조회)은 아무것도 시작하지 않고, 시작 안 한 섹션 내용은 페이로드에 없다", () => {
+    const d = detail();
+    expect(d.apSectionStarted).toEqual({ ap_mc: true, ap_mc_b: false });
+    const b = d.items.find((i) => i.section === "ap_mc_b")!;
+    expect(b.question).toBeNull(); expect(b.passage).toBeNull(); expect(b.options).toBeNull(); expect(b.parts).toBeNull();
+    expect(d.items.find((i) => i.section === "ap_mc")!.question).toContain("Stem ex");
+    for (let i = 0; i < 3; i++) detail();
+    expect(entered()).toBe("{}");
+    expect(d.timeRemainingSeconds.ap_mc_b).toBe(1200);
+  });
+  it("시작 안 한 섹션에는 답을 저장할 수 없다", () => {
+    expect(fails(() => rpc(`select mock_exam_save_answer('${att}', '${ids[1]}', '1', 3);`))).toMatch(/has not started yet/);
+    expect(psql(`select count(*) from mock_exam_answers where attempt_id = '${att}';`)).toBe("0");
+    expect(entered()).toBe("{}");
+  });
+  it("첫 섹션은 응시 시작과 함께 시작(진입·첫 저장 모두 가능)", () => {
+    rpc(`select mock_exam_save_answer('${att}', '${ids[0]}', '1', 3);`);
+    expect(JSON.parse(entered())).toHaveProperty("ap_mc");
+  });
+  it("Start section 은 시계를 한 번만 시작하고 더블클릭에도 시각이 안 바뀐다; 이후 내용·저장 가능", () => {
+    rpc(`select mock_exam_ap_enter_section('${att}', 'ap_mc_b');`);
+    const t1 = JSON.parse(entered()).ap_mc_b as string;
+    expect(t1).toBeTruthy();
+    rpc(`select mock_exam_ap_enter_section('${att}', 'ap_mc_b');`);
+    rpc(`select mock_exam_ap_enter_section('${att}', 'ap_mc_b');`);
+    expect(JSON.parse(entered()).ap_mc_b).toBe(t1);
+    const d = detail();
+    expect(d.apSectionStarted.ap_mc_b).toBe(true);
+    expect(d.items.find((i) => i.section === "ap_mc_b")!.question).toContain("Stem ex");
+    rpc(`select mock_exam_save_answer('${att}', '${ids[1]}', '2', 3);`);
+    expect(psql(`select count(*) from mock_exam_answers where attempt_id = '${att}';`)).toBe("2");
+  });
+  it("만료·마감(settle)은 그대로: 마지막 섹션 만료 뒤 저장 거절 + settle 로 graded", () => {
+    psql(`update mock_exam_attempts set ap_section_entered = jsonb_set(ap_section_entered, '{ap_mc_b}', to_jsonb(to_char((now() - interval '25 minutes') at time zone 'utc', 'YYYY-MM-DD"T"HH24:MI:SS.US"Z"'))) where id = '${att}';`);
+    expect(fails(() => rpc(`select mock_exam_save_answer('${att}', '${ids[1]}', '3', 3);`))).toMatch(/Time is up for this section/);
+    expect(rpc(`select mock_exam_ap_settle('${att}');`)).toBe("graded");
+    expect(detail().items.every((i) => i.question !== null)).toBe(true); // 마감 뒤엔 전부 공개
+  });
+  it("미시작 섹션이 있는 채로 제출: 오류 없이 graded, 그 섹션 답 0개, 전부 공개", () => {
+    const a2 = asUser(freeA, `select mock_exam_open_start('${set}');`);
+    asUser(freeA, `select mock_exam_save_answer('${a2}', '${ids[0]}', '1', 2);`);
+    asUser(freeA, `select mock_exam_submit('${a2}');`);
+    expect(psql(`select status || '|' || (ap_section_entered ? 'ap_mc_b') from mock_exam_attempts where id = '${a2}';`)).toBe("graded|false");
+    expect(psql(`select count(*) from mock_exam_answers where attempt_id = '${a2}' and set_item_id = '${ids[1]}';`)).toBe("0");
+  });
+  it("이미 진행 중이던 응시(두 섹션 모두 진입함)는 그대로: 마스킹 없음·시계 불변", () => {
+    const a3 = asUser(freeA, `select mock_exam_open_start('${set}');`);
+    const old = `{"ap_mc":"2026-10-12T00:00:00.000000Z","ap_mc_b":"2026-10-12T00:10:00.000000Z"}`;
+    psql(`update mock_exam_attempts set status = 'in_progress', started_at = now(), ap_section_entered = '${old}'::jsonb where id = '${a3}';`);
+    const d = JSON.parse(asUser(freeA, `select mock_exam_attempt_detail('${a3}')::text;`)) as ReturnType<typeof detail>;
+    expect(d.apSectionStarted).toEqual({ ap_mc: true, ap_mc_b: true });
+    expect(d.items.every((i) => i.question !== null)).toBe(true);
+    expect(JSON.parse(psql(`select ap_section_entered::text from mock_exam_attempts where id = '${a3}';`))).toEqual(JSON.parse(old));
   });
 });

@@ -116,6 +116,8 @@ export type MockExamAttemptDetail = {
   examProgram?: "sat" | "ap";
   apSubject?: string | null;
   apLabel?: "full_practice" | "mc_practice" | "frq_practice" | null;
+  /** AP(560): 섹션별 시작 여부. 학생 본인의 진행 중 응시에서 시작 안 한 섹션은 문항 내용이 비어 온다. 없으면(구버전 응답) 전부 시작됨. */
+  apSectionStarted?: Record<string, boolean>;
   sectionLayout?: { key: string; kind: "mc" | "frq"; label: string; minutes: number; count: number; calculator: "allowed" | "not_allowed" | "required" | "na"; options?: number }[];
   /** 문항 오류 판정으로 점수가 조정된 응시(학생·학부모 안내용). 원채점은 DB 에 보존된다. */
   scoreAdjusted?: boolean;
