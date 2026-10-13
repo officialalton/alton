@@ -1,0 +1,62 @@
+[
+ {
+  "cellId": "ap_physics_1-f01",
+  "archetype": "phf_mr_table_block",
+  "kind": "frq_bundle",
+  "unitCode": "2",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": [
+   "2.2",
+   "2.7"
+  ],
+  "template": "mr"
+ },
+ {
+  "cellId": "ap_physics_1-f02",
+  "archetype": "phf_tbr_spring_shm",
+  "kind": "frq_bundle",
+  "unitCode": "7",
+  "topic": "7.3",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": [
+   "7.2",
+   "7.4",
+   "3.4"
+  ],
+  "template": "tbr"
+ },
+ {
+  "cellId": "ap_physics_1-f03",
+  "archetype": "phf_lab_spring_k",
+  "kind": "frq_bundle",
+  "unitCode": "7",
+  "topic": "7.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": [
+   "7.3"
+  ],
+  "template": "lab"
+ },
+ {
+  "cellId": "ap_physics_1-f04",
+  "archetype": "phf_qqt_collision",
+  "kind": "frq_bundle",
+  "unitCode": "4",
+  "topic": "4.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": [
+   "4.3",
+   "3.1"
+  ],
+  "template": "qqt"
+ }
+]

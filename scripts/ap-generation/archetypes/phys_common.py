@@ -5,6 +5,7 @@
 - g = 9.8 m/s^2 (CED 참조 정보 본문은 UNVERIFIED — physics1-facts.md §3 #2; 원형은 G 상수 하나만 쓰므로 한 곳에서 바꾼다).
 - 모형 가정: 별도 언급 없으면 공기저항 무시, 줄·도르래·용수철 이상적(질량 없음, 늘어나지 않음)."""
 import math
+import re
 import random  # noqa: F401
 from fractions import Fraction as Fr
 import numpy as np
@@ -116,6 +117,44 @@ def num_opts(key_val, pairs, unit="", n=3, fmt=None):
     return key, ds
 
 
+def signed_opts(key_val, pairs, unit="", n=3, fmt=None):
+    """num_opts 와 같지만 음수 값도 허용(부호 판단 문항). 0 은 제외, 서로 MIN_REL_SEP 이상 떨어진 3개."""
+    f = fmt or (lambda v: Q(v, unit, n))
+    key = Opt(f(key_val), True, "", key_val)
+    chosen = [key_val]
+    ds = []
+    for why, v in pairs:
+        if v is None or not math.isfinite(v) or v == 0:
+            continue
+        if any(abs(v - c) <= MIN_REL_SEP * max(abs(c), abs(v)) for c in chosen):
+            continue
+        if f(v) == key.text or f(v) in [d.text for d in ds]:
+            continue
+        chosen.append(v)
+        ds.append(Opt(f(v), False, why, v))
+    if len(ds) < 3:
+        raise ValueError("not_enough_separated_distractors")
+    return key, ds
+
+
+def retry_sep(fn):
+    """선택지 간격 부족(not_enough_separated_distractors) 이면 같은 rng 로 다시 뽑는다(결정적: 같은 시드 → 같은 결과). 시드 낭비를 줄이는 장식자."""
+    import functools
+
+    @functools.wraps(fn)
+    def w(rng):
+        last = None
+        for _ in range(40):
+            try:
+                return fn(rng)
+            except ValueError as e:
+                if "not_enough_separated" not in str(e):
+                    raise
+                last = e
+        raise last
+    return w
+
+
 def sentence_options(key_text, key_why, wrongs):
     """고정 문장 선택지: 정답 1 + 이름 붙은 오개념. wrongs: [(문장, 오개념 설명)]."""
     return Opt(key_text, True, key_why, None), [Opt(t, False, w, None) for t, w in wrongs]
@@ -136,12 +175,30 @@ def ppack(arch, topic, skill, stem, key, ds, rng, bpr, stim=None, est=120, facts
 
 
 def mk(arch, topic, skill, stem, key, ds, rng, *, concept, thinking, cond, path, material, judgment, stim=None, est=120, facts=None, option_scenes=None, kwhy=None):
-    """원형 한 문항 팩. 설계도의 오개념 목록은 오답 선택지의 why 에서 자동 생성(오답별 오개념 3개)."""
+    """원형 한 문항 팩. 설계도의 오개념 목록은 **실제로 화면에 나온** 오답 선택지의 why 에서 만든다(2026-10-13: 오답 후보가 4개 이상이면 pack 이 3개만 뽑는데,
+    예전에는 뽑히지 않은 오개념까지 설계도에 남아 검토기가 '설계도의 m4 가 어떤 선택지에도 없다'며 반려했다)."""
     if kwhy and not key.why:
         key.why = kwhy
-    mis = [(f"m{i + 1}", d.why) for i, d in enumerate(ds)]
-    bpr = pbp(arch, topic, skill, concept, thinking, cond, mis, path, material, judgment)
-    return ppack(arch, topic, skill, stem, key, ds, rng, bpr, stim, est, facts, option_scenes)
+    p = pack(arch, topic, skill, "allowed", stem, key, ds, rng, stimulus=stim, est=est, facts=facts or [])
+    shown = [o for i, o in enumerate(p["options"]) if i != p["key_index"]]
+    mis = [(f"m{i + 1}", o["why"]) for i, o in enumerate(shown)]
+    p["blueprint"] = pbp(arch, topic, skill, concept, thinking, cond, mis, path, material, judgment)
+    if option_scenes:  # 선택지가 그림인 문항: 임시 태그(text) -> 보기 순서대로 scene 재배열 후 "Diagram A~D" 으로 라벨(정답 암시 요소 없음은 phys_figs.choice_checks 가 검증)
+        p["option_scenes"] = [option_scenes[o["text"]] for o in p["options"]]
+        for i, o in enumerate(p["options"]):
+            o["text"] = f"Diagram {chr(65 + i)}"
+    return p
+
+
+def seg_text(xs, ys, unit):
+    """구간별 사다리꼴 부호 있는 넓이를 '8.00, -10.0 and 6.00 m' 꼴 문장으로(정답 해설에 계산 과정을 넣기 위해; 정확 분수 계산)."""
+    parts = [sig(float((Fr(ys[i]) + Fr(ys[i + 1])) / 2 * (Fr(xs[i + 1]) - Fr(xs[i])))) for i in range(len(xs) - 1)]
+    return ", ".join(parts[:-1]) + (" and " if len(parts) > 1 else "") + parts[-1] + f" {unit}"
+
+
+def sym_axis(label, A):
+    """진동 그래프의 위치축: 눈금 간격 A/2, 범위 ±1.5A(눈금이 0 과 ±A 에 정확히 놓인다; 예전 ±1.2A 는 눈금이 -0.096, -0.056 … 처럼 어긋나 반려)."""
+    return gaxis(label, -1.5 * A, 1.5 * A, A / 2)
 
 
 def sci(v, unit="", n=3):

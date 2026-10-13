@@ -16,7 +16,7 @@ def ph_ke_scaling(rng):
     wrong = [("Scales the kinetic energy linearly with the speed change instead of with its square.", a * b), ("Squares the mass factor and the speed factor, instead of only the speed factor.", a * a * b * b),
              ("Applies the speed factor squared but ignores the mass change.", b * b), ("Adds the two factors rather than multiplying.", a + b * b)]
     fm = lambda f: f"${f}$ times" if f != 1 else "the same"  # noqa: E731
-    key = Opt(fm(a * b * b), True, "Kinetic energy is proportional to mass and to the square of speed, so the factors multiply as $m\\cdot v^2$.", a * b * b)
+    key = Opt(fm(a * b * b), True, f"Kinetic energy is proportional to the mass and to the square of the speed, so the factor is ${a}\\times{b}^2={a * b * b}$.", a * b * b)
     ds, seen = [], {fm(a * b * b)}
     for why, f in wrong:
         if fm(f) in seen:
@@ -48,7 +48,7 @@ def ph_fx_work(rng):
     stem = "A variable force acts on an object along a straight line. The graph shows the component of the force along the line of motion as a function of position. How much work does the force do on the object as it moves from $x=0$ to $x=" + str(xs[-1]) + "\\text{ m}$?"
     return mk("ph_fx_work", "3.2", "2.B", stem, key, ds, rng, concept="Work as the area under a force-position graph", thinking=["Recognize the area under the force-position graph as the work", "Add the areas of the trapezoids between the plotted points"],
               cond=[("the plotted force is along the direction of motion", "the stem gives the component along the line of motion")], path="exact fractions for segment areas versus numpy integration of the interpolated force over the interval", material=MAT_GRAPH("axis labels with units"),
-              judgment=["representation_reading", "law_selection"], stim=stim, est=95, facts=[f"xs={xs}", f"F={F}"], kwhy="Work equals the area under the force-position graph.")
+              judgment=["representation_reading", "law_selection"], stim=stim, est=95, facts=[f"xs={xs}", f"F={F}"], kwhy=f"Work is the area under the graph: the segment areas {seg_text(xs, F, 'J')} add to ${sig(float(W))}\\text{{ J}}$.")
 
 
 def ph_track_energy(rng):
@@ -77,7 +77,7 @@ def ph_track_energy(rng):
     stem = f"A ${m:g}\\text{{ kg}}$ block is released from rest at the right end of the frictionless track whose height is graphed. What is its speed at the lowest point of the track?"
     return mk("ph_track_energy", "3.4", "2.B", stem, key, ds, rng, concept="Conservation of mechanical energy on a curved frictionless track", thinking=["Identify that only gravity does work on the block so mechanical energy is conserved", "Convert the lost gravitational potential energy to kinetic energy and solve for the speed"],
               cond=[("the track is frictionless so mechanical energy is conserved", "the stem states a frictionless track")], path="the Lagrangian equation of motion for a block on a parabolic track is integrated with RK4 and the speed at the bottom matches the energy result",
-              material=MAT_GRAPH("axis labels with units"), judgment=["law_selection", "symbolic_reasoning"], stim=stim, est=90, facts=[f"c={c}", f"x0={x0}", f"m={m}"], kwhy="Energy conservation $mgh=\\tfrac12 mv^2$ gives $v=\\sqrt{2gh}$ independent of mass and track shape.")
+              material=MAT_GRAPH("axis labels with units"), judgment=["law_selection", "symbolic_reasoning"], stim=stim, est=90, facts=[f"c={c}", f"x0={x0}", f"m={m}"], kwhy=f"Energy conservation $mgh=\\tfrac12 mv^2$ gives $v=\\sqrt{{2gh}}=\\sqrt{{2(9.8)({sig(h)})}}={sig(v)}\\text{{ m/s}}$, independent of the mass and the track shape.")
 
 
 def ph_spring_launch(rng):
@@ -98,7 +98,7 @@ def ph_spring_launch(rng):
     stem = f"A spring of constant ${k:g}\\text{{ N/m}}$ is compressed ${x * 100:g}\\text{{ cm}}$ against a ${m:g}\\text{{ kg}}$ block on a frictionless surface. The block is released and the surface curves smoothly upward. What maximum height above the starting level does the block reach?"
     return mk("ph_spring_launch", "3.4", "2.B", stem, key, ds, rng, concept="Conversion of spring potential energy into gravitational potential energy", thinking=["Express the energy stored in the compressed spring", "Set the stored energy equal to the gain in gravitational potential energy at the top"],
               cond=[("the surface is frictionless so all spring energy becomes gravitational energy", "the stem states a frictionless surface")], path="RK4 integration of the spring-mass motion gives the speed at the natural length, whose kinetic energy is converted with $v^2/2g$", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=110, facts=[f"k={k}", f"m={m}", f"x={x}"], kwhy="The compressed spring stores $\\tfrac12kx^2$, and at the top all of it is gravitational energy $mgh$, so $h=kx^2/(2mg)$.")
+              judgment=["law_selection", "symbolic_reasoning"], est=110, facts=[f"k={k}", f"m={m}", f"x={x}"], kwhy=f"The spring stores $\\tfrac12kx^2$ and at the top all of it is gravitational energy, so $h=kx^2/(2mg)={k:g}({x:g})^2/(2({m:g})(9.8))={sig(hmax)}\\text{{ m}}$.")
 
 
 def ph_power_fv(rng):
@@ -114,7 +114,7 @@ def ph_power_fv(rng):
     stem = f"A worker pulls a ${m:g}\\text{{ kg}}$ crate across a level floor at a constant speed of ${v:g}\\text{{ m/s}}$ with a horizontal rope. The coefficient of kinetic friction is ${mu:g}$. What is the power the worker delivers to the crate?"
     return mk("ph_power_fv", "3.5", "2.B", stem, key, ds, rng, concept="Power as force times velocity at constant speed", thinking=["Use constant speed to set the pulling force equal to the kinetic friction force", "Multiply that force by the speed to find the power"],
               cond=[("the crate moves at constant speed so the net force is zero", "the stem states constant speed on a level floor")], path="the work done in ten seconds is computed as force times distance and divided by the time to recover the power", material=MAT_NONE,
-              judgment=["law_selection"], est=95, facts=[f"m={m}", f"mu={mu}", f"v={v}"], kwhy="At constant speed the pull equals the friction force $\\mu mg$, so $P=Fv=\\mu mgv$.")
+              judgment=["law_selection"], est=95, facts=[f"m={m}", f"mu={mu}", f"v={v}"], kwhy=f"At constant speed the pull equals the friction force $\\mu mg={sig(mu * m * G)}\\text{{ N}}$, so $P=Fv={sig(P)}\\text{{ W}}$.")
 
 
 def ph_friction_slide(rng):
@@ -135,7 +135,7 @@ def ph_friction_slide(rng):
     stem = f"A block slides at ${v0:g}\\text{{ m/s}}$ onto a rough horizontal patch of length ${d:g}\\text{{ m}}$ with a kinetic friction coefficient of ${mu:g}$. What is its speed when it leaves the patch?"
     return mk("ph_friction_slide", "3.4", "2.B", stem, key, ds, rng, concept="Work done by friction changes the mechanical energy", thinking=["Compute the work done by kinetic friction over the rough patch", "Subtract it from the initial kinetic energy and solve for the final speed"],
               cond=[("the block keeps moving across the whole patch", "the generated values keep the speed positive at the end of the patch")], path="RK4 integration of a constant deceleration over the patch gives the exit speed", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=105, facts=[f"v0={v0}", f"mu={mu}", f"d={d}"], kwhy="$\\tfrac12mv_0^2-\\mu mgd=\\tfrac12mv^2$ gives $v=\\sqrt{v_0^2-2\\mu gd}$.")
+              judgment=["law_selection", "symbolic_reasoning"], est=105, facts=[f"v0={v0}", f"mu={mu}", f"d={d}"], kwhy=f"$\\tfrac12mv_0^2-\\mu mgd=\\tfrac12mv^2$ gives $v=\\sqrt{{{v0:g}^2-2({mu:g})(9.8)({d:g})}}={sig(v)}\\text{{ m/s}}$.")
 
 
 def ph_energy_bar_choice(rng):
@@ -163,21 +163,21 @@ def ph_energy_bar_choice(rng):
 # ======================= U4 =======================
 def ph_ft_impulse(rng):
     for _ in forever():
-        t1 = rng.choice([0.2, 0.4, 0.5]); t2 = t1 + rng.choice([0.2, 0.3, 0.4]); t3 = t2 + rng.choice([0.2, 0.3]); Fp = rng.choice([20, 30, 40, 60])
+        t1 = rng.choice([1.0, 1.5, 2.0]); t2 = t1 + rng.choice([1.0, 1.5, 2.0]); t3 = t2 + rng.choice([1.0, 1.5]); Fp = rng.choice([3, 4, 5, 6])  # 2026-10-13: 현실적 크기(v1 은 0.5 kg 에 60 N 으로 72 m/s 가 나와 반려)
         xs = [0, t1, t2, t3]; F = [0, Fp, Fp, 0]
         J = float(trapz_exact([Fr(str(x)) for x in xs], F))
-        m = rng.choice([0.5, 1.0, 2.0]); dv = J / m
+        m = rng.choice([2.0, 3.0, 4.0]); dv = J / m
         tt = np.linspace(0, t3, 40001)
         agree(J, float(np.trapezoid(np.interp(tt, xs, F), tt)), 1e-6, "J")
         break
     pairs = [("Divides the peak force by the mass, which gives an acceleration and ignores the duration.", Fp / m), ("Multiplies the peak force by the total time, overestimating the area of the trapezoid.", Fp * t3 / m),
              ("Uses the impulse as the change in velocity without dividing by the mass.", J), ("Uses half the peak force times the total time, treating the graph as a triangle.", 0.5 * Fp * t3 / m)]
     key, ds = num_opts(dv, pairs, "m/s")
-    stim = graph_stim("Force versus time for a collision", [("F", [[x, f] for x, f in zip(xs, F)])], gaxis("Time (s)", 0, round(t3, 2), 0.1), gaxis("Force (N)", 0, Fp + 10, 10))
+    stim = graph_stim("Net force versus time", [("F", [[x, f] for x, f in zip(xs, F)])], gaxis("Time (s)", 0, round(t3, 2), 0.5), gaxis("Force (N)", 0, Fp + 1, 1))
     stem = f"The graph shows the net force on a ${m:g}\\text{{ kg}}$ cart as a function of time while the cart is pushed. The cart starts at rest. What is the speed of the cart at $t={t3:g}\\text{{ s}}$?"
     return mk("ph_ft_impulse", "4.2", "2.B", stem, key, ds, rng, concept="Impulse as the area under a force-time graph equals the change in momentum", thinking=["Find the area under the force-time graph as the impulse", "Divide the impulse by the mass to find the change in velocity"],
               cond=[("the cart starts at rest and the plotted force is the net force", "the stem states the cart starts at rest and the graph is the net force")], path="exact trapezoid area versus numpy integration of the interpolated force over the interval", material=MAT_GRAPH("axis labels with units"),
-              judgment=["representation_reading", "law_selection"], stim=stim, est=100, facts=[f"xs={xs}", f"F={F}", f"m={m}"], kwhy="The impulse is the area under the graph and equals $m\\Delta v$.")
+              judgment=["representation_reading", "law_selection"], stim=stim, est=100, facts=[f"xs={xs}", f"F={F}", f"m={m}"], kwhy=f"The area under the graph is the impulse, $J={sig(J)}\\text{{ N·s}}$, and $J=m\\Delta v$ gives $\\Delta v={sig(J)}/{m:g}={sig(dv)}\\text{{ m/s}}$.")
 
 
 def ph_inelastic_collision(rng):
@@ -197,7 +197,7 @@ def ph_inelastic_collision(rng):
             + ("to the left" if v2 < 0 else "to the right" if v2 > 0 else "(initially at rest)") + ". The carts stick together. What is their velocity after the collision? Take right as positive.")
     return mk("ph_inelastic_collision", "4.3", "2.B", stem, key, ds, rng, concept="Conservation of linear momentum in a perfectly inelastic collision", thinking=["Choose a positive direction and write each initial momentum with its sign", "Set the total momentum equal to the combined mass times the common final velocity"],
               cond=[("no external horizontal force acts on the two-cart system", "the stem states a frictionless track")], path="sympy solves the conservation equation symbolically and the result matches the direct numeric ratio", material=MAT_DIAGRAM("two carts with masses and velocities"),
-              judgment=["law_selection", "symbolic_reasoning"], stim=diagram_stim("Two carts before the collision", sc), est=100, facts=[f"m1={m1}", f"m2={m2}", f"v1={v1}", f"v2={v2}"], kwhy="Momentum is conserved: $m_1v_1+m_2v_2=(m_1+m_2)v$.")
+              judgment=["law_selection", "symbolic_reasoning"], stim=diagram_stim("Two carts before the collision", sc), est=100, facts=[f"m1={m1}", f"m2={m2}", f"v1={v1}", f"v2={v2}"], kwhy=f"Momentum is conserved: $v=(m_1v_1+m_2v_2)/(m_1+m_2)=({m1:g}\\cdot{v1:g}+{m2:g}\\cdot({v2:g}))/{m1 + m2:g}={sig(v)}\\text{{ m/s}}$.")
 
 
 def ph_recoil(rng):
@@ -212,7 +212,7 @@ def ph_recoil(rng):
     stem = f"Two skaters, one of mass ${m1:g}\\text{{ kg}}$ and one of mass ${m2:g}\\text{{ kg}}$, stand at rest facing each other on frictionless ice and push apart. The ${m2:g}\\text{{ kg}}$ skater moves away at ${v2:g}\\text{{ m/s}}$. What is the speed of the ${m1:g}\\text{{ kg}}$ skater?"
     return mk("ph_recoil", "4.3", "2.B", stem, key, ds, rng, concept="Conservation of momentum for an explosion or push-off from rest", thinking=["Recognize that the total momentum of the system stays zero", "Set the magnitudes of the two momenta equal and solve for the unknown speed"],
               cond=[("the ice is frictionless and the system starts at rest", "the stem states both")], path="the momentum sum is recomputed with numpy and checked to vanish for the returned speed", material=MAT_NONE,
-              judgment=["law_selection"], est=75, facts=[f"m1={m1}", f"m2={m2}", f"v2={v2}"], kwhy="Total momentum is zero, so $m_1v_1=m_2v_2$.")
+              judgment=["law_selection"], est=75, facts=[f"m1={m1}", f"m2={m2}", f"v2={v2}"], kwhy=f"Total momentum is zero, so $m_1v_1=m_2v_2$ and $v_1={m2:g}({v2:g})/{m1:g}={sig(v1)}\\text{{ m/s}}$.")
 
 
 def ph_collision_type(rng):
@@ -254,11 +254,11 @@ def ph_torque_angle(rng):
         break
     pairs = [("Uses $rF\\cos\\theta$, which pairs the angle with the wrong component.", r * F * math.cos(math.radians(th))), ("Ignores the angle and uses $rF$.", r * F), ("Uses $F\\sin\\theta$ with no lever arm.", F * math.sin(math.radians(th))),
              ("Uses $rF\\tan\\theta$.", r * F * math.tan(math.radians(th)))]
-    key, ds = num_opts(tau, pairs, "N\\cdot m")
+    key, ds = num_opts(tau, pairs, "N·m")
     stem = f"A wrench is used with a force of ${F:g}\\text{{ N}}$ applied at a point ${r:g}\\text{{ m}}$ from the bolt. The angle between the force and the line from the bolt to the point of application is ${th}^\\circ$. What is the magnitude of the torque about the bolt?"
     return mk("ph_torque_angle", "5.3", "2.B", stem, key, ds, rng, concept="Torque from a force applied at an angle", thinking=["Identify the angle between the force and the position vector", "Use torque equals $rF\\sin\\theta$ with this angle"],
               cond=[("the angle is measured between the force and the line from the pivot", "the stem states this angle explicitly")], path="numpy cross product of the position and force vectors gives the torque magnitude", material=MAT_NONE,
-              judgment=["law_selection"], est=80, facts=[f"r={r}", f"F={F}", f"th={th}"], kwhy="The torque magnitude is $rF\\sin\\theta$ with $\\theta$ between the force and the lever arm.")
+              judgment=["law_selection"], est=80, facts=[f"r={r}", f"F={F}", f"th={th}"], kwhy=f"The torque magnitude is $rF\\sin\\theta={r:g}({F:g})\\sin{th}^\\circ={sig(tau)}\\text{{ N·m}}$ with $\\theta$ between the force and the lever arm.")
 
 
 def ph_beam_balance(rng):
@@ -278,7 +278,7 @@ def ph_beam_balance(rng):
     stem = f"A uniform beam of length ${L:g}\\text{{ m}}$ and mass ${M:g}\\text{{ kg}}$ rests on a pivot located ${xp:g}\\text{{ m}}$ from its left end. An object is hung from the left end. What mass must the object have for the beam to stay in rotational equilibrium?"
     return mk("ph_beam_balance", "5.5", "2.B", stem, key, ds, rng, concept="Rotational equilibrium of a uniform beam about a pivot", thinking=["Locate the beam's weight at its center and find each lever arm about the pivot", "Set the net torque about the pivot equal to zero and solve for the unknown mass"],
               cond=[("the beam is uniform so its weight acts at the center", "the stem states a uniform beam")], path="a bisection root finder on the net torque as a function of the hanging mass recomputes the balancing mass", material=MAT_DIAGRAM("beam, pivot position and hanging object"),
-              judgment=["law_selection", "symbolic_reasoning"], stim=diagram_stim("Uniform beam on a pivot", sc), est=110, facts=[f"L={L}", f"M={M}", f"xp={xp}"], kwhy="Setting the net torque about the pivot to zero gives $mg\\,x_p=Mg(L/2-x_p)$, so $m=M(L/2-x_p)/x_p$.")
+              judgment=["law_selection", "symbolic_reasoning"], stim=diagram_stim("Uniform beam on a pivot", sc), est=110, facts=[f"L={L}", f"M={M}", f"xp={xp}"], kwhy=f"Setting the net torque about the pivot to zero gives $mg\\,x_p=Mg(L/2-x_p)$, so $m=M(L/2-x_p)/x_p={M:g}({L / 2:g}-{xp:g})/{xp:g}={sig(m)}\\text{{ kg}}$.")
 
 
 def ph_wire_tension(rng):
@@ -295,7 +295,7 @@ def ph_wire_tension(rng):
     stem = f"A uniform horizontal sign of mass ${M:g}\\text{{ kg}}$ and length ${L:g}\\text{{ m}}$ is attached to a wall by a hinge at one end and held by a light cable attached to its other end. The cable makes an angle of ${th}^\\circ$ with the sign. What is the tension in the cable?"
     return mk("ph_wire_tension", "5.5", "2.B", stem, key, ds, rng, concept="Torque balance with an angled support cable", thinking=["Take torques about the hinge so the hinge force drops out", "Use only the component of the cable tension perpendicular to the sign"],
               cond=[("the sign is in equilibrium and its weight acts at its center", "the stem states a uniform horizontal sign held in place")], path="a bisection root finder on the net torque about the hinge recomputes the tension", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=115, facts=[f"M={M}", f"th={th}", f"L={L}"], kwhy="Torque about the hinge: $T L\\sin\\theta=Mg\\,L/2$, so $T=Mg/(2\\sin\\theta)$.")
+              judgment=["law_selection", "symbolic_reasoning"], est=115, facts=[f"M={M}", f"th={th}", f"L={L}"], kwhy=f"Torque about the hinge: $T L\\sin\\theta=Mg\\,L/2$, so $T=Mg/(2\\sin\\theta)={M:g}(9.8)/(2\\sin{th}^\\circ)={sig(T)}\\text{{ N}}$.")
 
 
 def ph_inertia_points(rng):
@@ -316,7 +316,7 @@ def ph_inertia_points(rng):
             "Treat the spheres as point masses and the rod as massless. What is the rotational inertia of the system about the axis?")
     return mk("ph_inertia_points", "5.4", "2.B", stem, key, ds, rng, concept="Rotational inertia of a system of point masses", thinking=["Compute $mr^2$ for each object using its own distance from the axis", "Add the contributions"],
               cond=[("the rod is massless and the spheres are point masses", "the stem states both")], path="numpy sum of $m r^2$ over the list of masses and distances versus the explicit two-term expression", material=MAT_NONE,
-              judgment=["law_selection"], est=80, facts=[f"m1={m1}", f"m2={m2}", f"L={L}"], kwhy="Rotational inertia is $\\sum m r^2$ about the axis.")
+              judgment=["law_selection"], est=80, facts=[f"m1={m1}", f"m2={m2}", f"L={L}"], kwhy=f"Rotational inertia is $\\sum m r^2={m1:g}({L / 2:g})^2+{m2:g}({L:g})^2={sig(Ia)}\\text{{ kg·m}}^2$.")
 
 
 def ph_alpha_hanging(rng):
@@ -335,7 +335,7 @@ def ph_alpha_hanging(rng):
     stem = f"A wheel of radius ${R:g}\\text{{ m}}$ and rotational inertia ${I:g}\\text{{ kg}}\\cdot\\text{{m}}^2$ turns freely on a fixed horizontal axle. A light string wrapped around the rim supports a ${m:g}\\text{{ kg}}$ mass that is released from rest. What is the downward acceleration of the mass?"
     return mk("ph_alpha_hanging", "5.6", "2.B", stem, key, ds, rng, concept="Newton's second law for a hanging mass connected to a rotating wheel", thinking=["Write Newton's second law for the hanging mass and the rotational form for the wheel", "Relate the linear and angular accelerations through the radius and solve"],
               cond=[("the string does not slip and is massless", "the stem states a light string wrapped around the rim")], path="sympy solves the symbolic system; numpy linalg.solve on the same linear system recomputes the acceleration", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=125, facts=[f"m={m}", f"I={I}", f"R={R}"], kwhy="Combining $mg-T=ma$ and $TR=I a/R$ gives $a=mg/(m+I/R^2)$.")
+              judgment=["law_selection", "symbolic_reasoning"], est=125, facts=[f"m={m}", f"I={I}", f"R={R}"], kwhy=f"Combining $mg-T=ma$ and $TR=Ia/R$ gives $a=mg/(m+I/R^2)={m:g}(9.8)/({m:g}+{I:g}/{R:g}^2)={sig(av)}\\text{{ m/s}}^2$.")
 
 
 STAGE_U3 = ["ph_ke_scaling", "ph_fx_work", "ph_track_energy", "ph_spring_launch", "ph_power_fv", "ph_friction_slide", "ph_energy_bar_choice"]
