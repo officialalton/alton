@@ -25,7 +25,7 @@ export default async function StudentSignupPage({
     if (pending) redirect(pending);
     if (profile) redirect(await resolveAccountDestination(supabase, profile.role));
     // 프로필도 표식도 없는 세션: 폼은 그대로 보여주되 세션은 정리한다(fail-closed).
-    await supabase.auth.signOut();
+    await supabase.auth.signOut({ scope: "local" });
   }
 
   return (
