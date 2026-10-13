@@ -1,0 +1,99 @@
+{
+ "runs": [
+  "stats-s2b-a",
+  "stats-s2b-b",
+  "stats-s2b-c"
+ ],
+ "rows": 20,
+ "passed": 16,
+ "rejected": 4,
+ "exactDuplicates": 0,
+ "singles": {
+  "candidates": 12,
+  "passed": 11
+ },
+ "sets": {
+  "candidates": 2,
+  "passed": 2,
+  "questionsInPassedSets": 6
+ },
+ "frq": {
+  "candidates": 6,
+  "passed": 3
+ },
+ "uniquePassedItems": 20,
+ "structureFamilies": 15,
+ "itemFamilyIds": 15,
+ "perUnit": {
+  "1": 4,
+  "2": 7,
+  "3": 3,
+  "4": 3
+ },
+ "perSkillCategory": {
+  "1": 3,
+  "2": 7,
+  "3": 4,
+  "4": 3
+ },
+ "rejectionReasons": [
+  {
+   "key": "stats-s2b-a:ap_statistics-m05-k0",
+   "reason": "criterion_failed_stimulus_expression; criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-s2b-c:ap_statistics-f01-k0",
+   "reason": "solver_disagrees:A:flagged,B:flagged; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; instant_reject_wrong_stimulus; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-s2b-c:ap_statistics-f02-k1",
+   "reason": "solver_disagrees:A:flagged; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; instant_reject_wrong_key; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-s2b-c:ap_statistics-f03-k1",
+   "reason": "criterion_failed_key_scoring"
+  }
+ ],
+ "costs": {
+  "stats-s2b-a": {
+   "byStage": {
+    "difficulty": 0.0796,
+    "review": 0.2456,
+    "review2": 0.0497,
+    "solve": 0.0713
+   },
+   "total": 0.4462
+  },
+  "stats-s2b-b": {
+   "byStage": {
+    "difficulty": 0.0416,
+    "review": 0.0851,
+    "review2": 0.0453,
+    "solve": 0.039
+   },
+   "total": 0.211
+  },
+  "stats-s2b-c": {
+   "byStage": {
+    "difficulty": 0.0558,
+    "review": 0.1946,
+    "solve": 0.1474
+   },
+   "total": 0.3978
+  }
+ },
+ "totalUsd": 1.055,
+ "lookAlikeClustersContainingBatch": [
+  {
+   "id": "la:stats-s2b-b:ap_statistics-m01-k0",
+   "keys": [
+    "stats-s2b-b:ap_statistics-m01-k0",
+    "stats-s2b-b:ap_statistics-m01-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  }
+ ],
+ "lookAlikeComparedAgainst": "390 existing auto_passed MC (all subjects incl. the S1 pilot) + 13 S2-a items"
+}

@@ -1,0 +1,656 @@
+[
+ {
+  "key": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Typical number of visits is a center question about one quantitative variable (visits per month).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "A question about the distribution of one quantitative variable"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Classifying the variable structure of an investigative question fits topic 1.1 and skill 1.A; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Typical monthly visits is a single quantitative variable; only the distribution option fits. Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode wrong variable count and wrong variable type, and the explanation addresses each. The explanations are formulaic but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, quick to read, no calculation, about 60-70 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous item on identifying the variable structure of an investigative question, with a unique key and parallel options. It is somewhat easy, but it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conceptual classification: students identify that 'typical number of visits' refers to the center of the distribution of one quantitative variable. No computation, one short stimulus-free stem, distractors are standard variable-type confusions (categorical proportion, two-variable relationship, association). Directly targets the 1.1/1.A skill at introductory depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "What is the typical amount of time that bus riders in the city wait at their stops?",
+     "brief_reasoning": "This asks about how wait times vary across a whole population, so you need data to answer it. The other options are opinion-based (A), a single fact (B) or about one person (C).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is short, needs no calculation, and fits the 60-100 second reading load. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 1.A question with a unique key and three distinct, well-explained distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition: a valid statistical investigative question anticipates variability in data and asks about a summary of a distribution. The distractors are an opinion/value judgment, a fixed count that needs no statistics, and a single-individual question. No computation and one reasoning step; this fits foundational learning, not mock-exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The sample is random and drawn from this clinic's patients, so it only generalizes to that clinic's patient population. Because no treatment was assigned, it is an observational study and can't support causal claims.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets skill 1.A and topic 1.10: choosing the investigative question that the sampled population and study type can answer. It stays within Unit 1 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the only question about the sampled population (patients of the regional clinic) that can be answered without a causal claim. A is a different population, B is causal from observational data, and C is a larger population than the sampling frame."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states the sampling frame (all patients of one regional clinic), the random selection, and that no treatment was assigned. The wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: a different population, a causal claim from observational data, and generalizing to a larger population. The explanation addresses every wrong option. The options are similar in length and parallel in form."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading load is short and the item takes about 60 to 85 seconds. It requires no calculation, which is fine even though a calculator is allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and has a unique key. It tests which investigative question the data can answer, given the population sampled and the study type, and each distractor reflects a distinct named misconception. The one style point is that the stem says \"number of days waiting\" where \"number of days spent waiting\" would read more smoothly, which is not a reason to reject."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student matches the investigative question to the population actually sampled (random sample from one clinic's records). Distractors are extrapolation to another population, extrapolation to all adults, and a causal question with no treatment assigned. The item needs one conceptual idea, no computation, and short reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Students are being asked a sensitive question by an interviewer in uniform while the principal stands nearby, so they're likely to lie about cheating. That's response bias.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Response bias"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is a short recall-and-application question that takes about 60 seconds, which is typical for AP Statistics. It needs no calculator, and the allowed designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous identification of response bias with distinct distractors, and it meets all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept identification of response bias from a short scenario. The student picks among four named bias types, and the sample is stated to be random, which rules out undercoverage and voluntary response. There is no computation and only one reasoning step. The item is standard definitional recognition at the core level of topic 1.12.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_statistics-m05-k0",
+  "cellId": "ap_statistics-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Scores are expected to differ by class, so class works as a blocking variable. Randomizing within each class (a randomized block design) keeps the class difference from mixing with the treatment effect. That means 10 students per guide in each class.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Within each class, randomly assign half to new and half to old guide"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Blocking design justification fits 1.13 / 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique randomized block design."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Repeated typo 'classs' in stem and options; awkward phrasing; not publishable US English."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors are distinct and well explained, but the explanation text repeats the 'classs' typo."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The content is sound and the key is correct. The item fails on wording: 'classs' appears throughout the stem, options and explanation. Fix the typo and the phrasing before use."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Classic blocking recognition: the stem states that classes differ, so the best design randomizes within each class (block). Distractors are clearly flawed (expectation-based assignment, confounding treatment with class, ignoring the class difference). It requires one concept and one reasoning step, with no computation or representation changes. The item is short and direct, which suits foundational learning more than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m06-k0",
+  "cellId": "ap_statistics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Digits 0-2 give a probability of 0.3. Each trial needs 4 digits, one per seed, and should count whether at least 2 are germinations, repeated for many trials.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Simulation design with digit assignment, trial length and event counted fits topic 2.3 and identifying the needed information (2.A)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the only one matching all three components (0.3 share, 4 digits, at least 2). Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear, with the random digit table described in words."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option differs in exactly one component, with distinct misconceptions; explanation covers each. Options are parallel and similar in length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, with typical reading load and no arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean simulation-design item with a unique key and three single-component distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard simulation design item. The student must assign digits to match p=0.3 (3 of 10 digits), use 4 digits per trial, and count \"at least 2\". Each distractor fails one clear feature (wrong number of digits, \"exactly\" instead of \"at least\", wrong probability). There is no computation and little reading, and the item is a direct application of the simulation setup procedure.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m07-k0",
+  "cellId": "ap_statistics-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "H0: mu_d = 0, Ha: mu_d < 0",
+     "brief_reasoning": "Difference is before minus after, so higher scores after the session make the differences negative. Hypotheses must use the population parameter mu_d, and the alternative is one-sided: mu_d < 0.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets setting up hypotheses for a matched-pairs mean (4.4, skill 2.E)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Before minus after with a suspected increase in scores gives mu_d < 0. This is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The parameter and the order of subtraction are defined clearly in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: a statistic in the hypotheses, a two-sided alternative, and a reversed direction. The explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short item that fits within about 85 seconds, with no arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unique-key item on paired-difference hypotheses. The order-of-subtraction direction is explicit in the stem and the distractors are distinct. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Matched-pairs hypothesis setup where the difference is defined as before minus after, so the claimed increase translates to Ha: mu_d < 0. Requires one reasoning step (sign direction) plus avoiding the statistic-vs-parameter notation trap and the two-sided alternative. No computation, short reading, in scope for topic 4.4 and skill 2.E.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m08-k0",
+  "cellId": "ap_statistics-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Wider",
+     "brief_reasoning": "Original margin: 2.011·s/7 ≈ 0.287s. New margin: 1.753·s/4 ≈ 0.438s. The smaller sample size has a bigger effect than the lower confidence level, so the new interval is wider.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Relationship among CI components (confidence level, n, width) fits 2.D and Topic 4.2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Ratio of margins of error is about 1.53, so wider is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is complete and clear, and states equal s and that conditions are met."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception and every wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, calculator use is appropriate, and the format is typical of AP."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key (wider) is the unique correct answer, the distractors are distinct misconceptions with explanations, and the scope and skill fit. It is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires weighing two competing effects (a lower confidence level narrows the interval, a smaller sample size widens it) and concluding the net effect, with s cancelling in the comparison. The concept is standard for Unit 4 and there is one extra reasoning step. The reading and computation load are light, so this is a typical mock-exam item rather than a basic or advanced one.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_statistics-m09-k0",
+  "cellId": "ap_statistics-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Keeping α fixed holds the Type I error probability where it is. A larger sample size lowers the standard error, which raises power and so lowers the Type II error probability. The other options either raise α or reduce power.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Increase the sample size while keeping the significance level the same"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets Type I/II error and power relationships (3.8, 2.D)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Increasing n with fixed alpha is the unique choice that lowers beta without raising alpha."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, conceptual, about 80 seconds, no arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: it has a unique key, parallel options, distinct misconceptions, and fits topic 3.8 and skill 2.D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall: with alpha fixed, increasing sample size increases power and reduces Type II error probability. The other options either raise Type I error (increase alpha) or increase Type II error (decrease alpha or n). No computation, representation change, or multi-step reasoning. Minor scope note: stem uses a test for a mean (t procedure, Unit 4), but the reasoning is procedure-independent, so this does not add difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_statistics-m10-k0",
+  "cellId": "ap_statistics-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "There is one sample, the variable (time) is quantitative, and the population standard deviation is unknown, so the right procedure is a one-sample t-test for a mean.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "A one-sample t-test for a population mean"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 to 85 seconds, involves no arithmetic, and the calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard procedure-choice question with a unique key and distinct distractors. It passes all five criteria with no instant-reject conditions."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step procedure identification: one sample of quantitative data compared to a hypothesized mean points directly to a one-sample t-test. Distractors are standard, clearly distinguishable procedures (proportion, matched pairs, two-sample). No computation, no representation change, short and clear wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_statistics-m11-k0",
+  "cellId": "ap_statistics-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "One random sample classified by two categorical variables → chi-square test of independence.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "A chi-square test of independence"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets choosing the chi-square test of independence (3.14, 2.C). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer: one sample, two categorical variables with 4 categories each. Minor: explanation text says 'A' while key_index is 3 (D); likely a lettering artifact."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (one-proportion, means for categorical, two-proportion with many categories) and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 85 seconds, no arithmetic, typical of AP method-choice items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean procedure-choice item with a unique key and well-explained distractors. The only blemish is that the explanation names the correct option as 'A' while the key index points to D, probably a lettering artifact from shuffled options."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step procedure identification: one sample classified by two categorical variables with 4 categories each points directly to a chi-square test of independence. Distractors (one-proportion z, two-sample t, two-proportion z) are easily eliminated since the variables are categorical with more than two categories. No computation, a short stem, and no representation changes are needed.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_statistics-m12-k0",
+  "cellId": "ap_statistics-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "For a test, large counts uses p0: np0=30, n(1-p0)=90, both at least 10. 120 < 168.2 (10% of 1682). The sample is random. All three conditions are met.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Verifying random, 10%, and large counts conditions with p0 for a one-proportion z-test; matches topic 3.7 and skill 4.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer: all conditions hold (np0=30, n(1-p0)=90, 120<168.2, random sample). Other options are clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem gives N, n, count, null value, and sampling method clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, minimal arithmetic, no calculator needed; the key is slightly longer but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean conditions-check item with a correct unique key and well-targeted distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: verify the random, 10%, and large counts conditions for a one-proportion z-test. The key discriminator is using p0 rather than the sample count in the large counts check. The 10% check is one simple comparison (120 < 168.2). Distractors are standard misconceptions. It has no representation changes, minimal computation, and a short stem.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

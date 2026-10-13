@@ -110,6 +110,28 @@ d("AP Statistics S2-b FRQ archetypes (Q1 repaired, Q2 and Q4 first run)", () => 
       expect({ n, reasons }).toEqual({ n, reasons: [] });
     }
   });
+  it("post-run fixes (S2-b rejects): Q2 has positive responses and a curvature direction that matches the residual fit; Q1 has realistic values; D states that the conditions are met", () => {
+    const big = run(`import json,registry as R\nn=['stfrq_q1_design','stfrq_q2_regression','stfrq_q4_integrated']\nprint(json.dumps({'names':n,'packs':{k:R.batch(k,12,9500) for k in n}}))`) as { names: string[]; packs: Record<string, (FrqPack & { stimulus: { data?: { data?: { points?: number[][] } } } })[]> };
+    for (const p of big.packs.stfrq_q2_regression) {
+      const pts = p.stimulus.data!.data!.points!;
+      expect(Math.min(...pts.map((x) => x[1]))).toBeGreaterThan(2);
+      const t = p.parts[2].model_answer;
+      if (/curved/.test(String(t))) {
+        const xs = pts.map((x) => x[0]), ys = pts.map((x) => x[1]); const n = xs.length; const mx = xs.reduce((a, b) => a + b, 0) / n, my = ys.reduce((a, b) => a + b, 0) / n;
+        const b = xs.reduce((a, x, i) => a + (x - mx) * (ys[i] - my), 0) / xs.reduce((a, x) => a + (x - mx) ** 2, 0); const a = my - b * mx;
+        const res = xs.map((x, i) => ys[i] - (a + b * x)); const lo = Math.min(...xs), hi = Math.max(...xs);
+        const mean = (f: (x: number) => boolean) => { const r = res.filter((_, i) => f(xs[i])); return r.reduce((u, v) => u + v, 0) / r.length; };
+        const ends = mean((x) => x <= lo + (hi - lo) / 4 || x >= hi - (hi - lo) / 4), mid = mean((x) => x > lo + (hi - lo) / 4 && x < hi - (hi - lo) / 4);
+        expect(/above the line at both ends/.test(String(t))).toBe(ends > mid);
+      }
+    }
+    for (const p of big.packs.stfrq_q1_design) expect(JSON.stringify(p.stimulus)).not.toMatch(/hours of sleep/);
+    for (const p of big.packs.stfrq_q4_integrated) expect(p.parts.find((x) => x.label === "D")!.prompt).toContain("conditions for the interval are met");
+  });
+  it("blocking item never prints 'classs' (plural of class)", () => {
+    const b = fixed(["st_blocking_design"], 12, 7200).packs.st_blocking_design as McPack[];
+    for (const p of b) expect(JSON.stringify(p)).not.toContain("classs");
+  });
   it("Q1 ties the table to the part A study and no longer says 'chose to not'", () => {
     for (const p of out.packs.stfrq_q1_design) {
       const text = p.parts.map((x) => x.prompt).join(" ");
