@@ -67,6 +67,29 @@ describe("ap_admin_create_draft_set", () => {
   });
 });
 
+// 마이그레이션 520: 부분 연습 세트 초안은 비보관 AP 세트 전부(풀·부분)와 겹침 0.
+const createPartial = (name: string, label: string, idx: number[]) => `select ap_admin_create_partial_draft_set(${q(name)}, ${q(AP_CODE)}, ${q(label)}, ${json(LAYOUT)}, ${json(items(idx))});`;
+describe("ap_admin_create_partial_draft_set", () => {
+  // 앞선 테스트가 문항 0·1 을 풀 세트(set1)에, 0 을 부분 세트(set3)에 이미 썼다. 문항 2 만 비어 있다.
+  let pnew = "";
+  it("겹침이 없으면 초안으로 저장, 같은 문항·같은 이름은 거부하고 아무것도 남기지 않는다", () => {
+    pnew = psql(createPartial(`${RUN}-pnew`, "mc_practice", [2]));
+    expect(psql(`select status || ',' || (select count(*) from mock_exam_set_items where exam_set_id = s.id) from mock_exam_sets s where id = '${pnew}'`)).toBe("draft,1");
+    expect(tryPsql(createPartial(`${RUN}-pdup`, "mc_practice", [1]))).toMatch(/already used in another non-archived AP set/); // 풀 세트와 겹침
+    expect(tryPsql(createPartial(`${RUN}-pdup2`, "frq_practice", [2]))).toMatch(/already used in another non-archived AP set/); // 부분 세트끼리 겹침
+    expect(tryPsql(createPartial(`${RUN}-pnew`, "mc_practice", [2]))).toMatch(/duplicate set name/);
+    expect(psql(`select count(*) from mock_exam_sets where name in (${q(`${RUN}-pdup`)}, ${q(`${RUN}-pdup2`)})`)).toBe("0");
+  });
+  it("보관한 세트의 문항·이름은 다시 쓸 수 있다", () => {
+    psql(`update mock_exam_sets set status = 'archived', archived_at = now() where id = '${pnew}';`);
+    expect(tryPsql(createPartial(`${RUN}-pnew`, "mc_practice", [2]))).toBeNull();
+  });
+  it("풀 라벨·service_role 외 실행은 거부", () => {
+    expect(tryPsql(createPartial(`${RUN}-pbad`, "full_practice", [2]))).toMatch(/invalid partial ap_label/);
+    expect(tryPsql(`set role authenticated; ${createPartial(`${RUN}-pbad2`, "mc_practice", [2])}`)).toMatch(/permission denied/);
+  });
+});
+
 describe("ap_stock_admin_runs", () => {
   it("append-only: 관리자·일반 역할은 수정·삭제 권한이 없다", () => {
     psql(`insert into ap_stock_admin_runs (actor_id, action, mode, status, target_ref, note) values ('${ADMIN_ID}', 'load_check', 'dry_run', 'ok', 'local', ${q(RUN)});`);

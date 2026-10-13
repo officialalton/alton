@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   apStockAssembleAction,
+  apStockAssemblePartialAction,
   apStockLoadCheckAction,
   apStockStepAction,
   getApStockOverviewAction,
@@ -135,6 +136,62 @@ function AssemblePanel({ ov, canWrite, onDone }: { ov: ApStockOverview; canWrite
   );
 }
 
+function PartialPanel({ ov, canWrite, onDone }: { ov: ApStockOverview; canWrite: boolean; onDone: () => void }) {
+  const plans = ov.partialPlans ?? [];
+  const [file, setFile] = useState(plans[0]?.file ?? "");
+  const sets = plans.find((a) => a.file === file)?.sets ?? [];
+  const [setId, setSetId] = useState("");
+  const [tier, setTier] = useState<"free" | "tutoring">("free");
+  const [preview, setPreview] = useState<StepResult | null>(null);
+  const [result, setResult] = useState<StepResult | null>(null);
+  const [confirm, setConfirm] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const reset = () => { setPreview(null); setResult(null); setConfirm(false); };
+  const run = async (execute: boolean) => {
+    if (!file || !setId) return;
+    setBusy(true); setError(null);
+    try {
+      const r = await apStockAssemblePartialAction({ planFile: file, setId, tier, execute, planHash: execute ? preview?.planHash ?? null : null });
+      if (execute) { setResult(r); setPreview(null); setConfirm(false); onDone(); } else { setPreview(r); setResult(null); }
+    } catch (e) { setError(e instanceof Error ? e.message : "실패했습니다."); }
+    finally { setBusy(false); }
+  };
+  if (plans.length === 0) return <p className="text-sm text-grey-400" data-testid="ap-partial-empty">저장소에 부분 연습 세트 계획(data/ap/stock/assembled/partial-rebuild-*.json)이 없습니다.</p>;
+  return (
+    <div className="rounded border border-grey-200 p-3" data-testid="ap-partial">
+      <h4 className="text-[13px] font-bold">⑤-b 부분 연습 세트 초안 저장(공개 안 함)</h4>
+      <p className="mt-0.5 text-xs text-grey-500">Non-Calculator / Calculator / Free-Response 부분 세트를 계획 파일에서 골라 독립 검증(해당 이름의 공식 문항 수·계산기 파트·문항군 상한·AB 전용·다루는 단원, <b>풀 모의고사·다른 부분 세트(비보관 전부)와 동일 문항 0</b>)한 뒤 초안으로만 저장합니다. 같은 이름의 세트가 아직 보관되지 않았으면 거부하므로, 이전 부분 세트는 <b>먼저 '공개' 탭에서 보관</b>하세요.</p>
+      <div className="mt-2 flex flex-wrap items-end gap-2 text-xs">
+        <label className="flex flex-col gap-0.5">계획 파일
+          <select aria-label="부분 세트 계획 파일" className="min-h-9 rounded border border-grey-300 px-2" value={file} onChange={(e) => { setFile(e.target.value); setSetId(""); reset(); }}>
+            {plans.map((a) => <option key={a.file} value={a.file}>{a.file}</option>)}
+          </select>
+        </label>
+        <label className="flex flex-col gap-0.5">세트
+          <select aria-label="부분 세트 선택" className="min-h-9 rounded border border-grey-300 px-2" value={setId} onChange={(e) => { setSetId(e.target.value); reset(); }}>
+            <option value="">선택</option>
+            {sets.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
+          </select>
+        </label>
+        <label className="flex flex-col gap-0.5">공개 범위(공개할 때 적용)
+          <select aria-label="부분 세트 공개 범위" className="min-h-9 rounded border border-grey-300 px-2" value={tier} onChange={(e) => { setTier(e.target.value as "free" | "tutoring"); reset(); }}>
+            <option value="free">무료 공개(기본)</option><option value="tutoring">튜터링 전용</option>
+          </select>
+        </label>
+      </div>
+      <div className="mt-2 flex flex-wrap items-center gap-2">
+        <button type="button" disabled={busy || !setId} onClick={() => run(false)} className="min-h-9 rounded border border-grey-300 px-3 text-xs font-bold disabled:opacity-50">{busy ? "처리 중..." : "미리보기"}</button>
+        <label className="flex items-center gap-1 text-xs text-grey-600"><input type="checkbox" checked={confirm} disabled={!preview?.planHash || !!preview?.blocked} onChange={(e) => setConfirm(e.target.checked)} />미리보기 결과를 확인했습니다</label>
+        <button type="button" disabled={!canWrite || !confirm || !preview?.planHash || busy} onClick={() => run(true)} className="min-h-9 rounded bg-ink px-3 text-xs font-bold text-white disabled:opacity-40">초안으로 저장</button>
+      </div>
+      {error && <p className="mt-2 text-xs text-red" role="alert">{error}</p>}
+      {preview && <ResultView r={preview} />}
+      {result && <ResultView r={result} />}
+    </div>
+  );
+}
+
 export default function ApStockPanel() {
   const [ov, setOv] = useState<ApStockOverview | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -205,6 +262,7 @@ export default function ApStockPanel() {
         </div>
         {ov.batches.length === 0 ? <p className="text-sm text-grey-400">등록된 배치가 없습니다.</p> : steps.map((s) => <StepCard key={`${batchId}-${s}`} step={s} batchId={batchId} canWrite={ov.target.canWrite} onDone={load} />)}
         <AssemblePanel ov={ov} canWrite={ov.target.canWrite} onDone={load} />
+        <PartialPanel ov={ov} canWrite={ov.target.canWrite} onDone={load} />
         <ApNewVersionPanel canWrite={ov.target.canWrite} />
       </section>
 

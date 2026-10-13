@@ -5,6 +5,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import type { RenderReportRow, ScreenEvidence } from "../ap-generation/verify-guard";
 import type { StockItem } from "../ap-generation/stock";
+import { PARTIAL_PLAN_FILE_RE, type PartialPlanFile } from "./partial-draft";
 
 export type StockBatch = {
   id: string;
@@ -63,5 +64,18 @@ export function readAssignReport(file: string): AssignReport {
   if (!/^exact-assign-[A-Za-z0-9.-]+\.json$/.test(file)) throw new Error("배정 보고서 파일 이름이 올바르지 않습니다.");
   const r = readJson<AssignReport>(`data/ap/stock/${file}`);
   if (!Array.isArray(r.sets)) throw new Error("배정 보고서 형식 오류(sets 없음).");
+  return r;
+}
+
+/** 부분 연습 세트 재구성 계획(data/ap/stock/assembled/partial-rebuild-*.json, scripts/ap-generation/partial-rebuild-plan.ts 산출). 목록은 고정 접두어 파일만. */
+export function listPartialPlans(): { file: string; sets: { id: string; name: string; partial: string }[] }[] {
+  const dir = path.join(root(), "data/ap/stock/assembled");
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir).filter((f) => PARTIAL_PLAN_FILE_RE.test(f)).sort().map((f) => ({ file: f, sets: readPartialPlan(f).sets.map((s) => ({ id: s.id, name: s.name, partial: s.partial })) }));
+}
+export function readPartialPlan(file: string): PartialPlanFile {
+  if (!PARTIAL_PLAN_FILE_RE.test(file)) throw new Error("부분 세트 계획 파일 이름이 올바르지 않습니다.");
+  const r = readJson<PartialPlanFile>(`data/ap/stock/assembled/${file}`);
+  if (r.kind !== "ap_partial_rebuild_plan" || !Array.isArray(r.sets)) throw new Error("부분 세트 계획 형식 오류.");
   return r;
 }

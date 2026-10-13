@@ -5,11 +5,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 const overview = vi.fn();
 const step = vi.fn();
 const check = vi.fn();
+const partial = vi.fn();
 vi.mock("../ap-stock-actions", () => ({
   getApStockOverviewAction: () => overview(),
   apStockStepAction: (i: unknown) => step(i),
   apStockLoadCheckAction: () => check(),
   apStockAssembleAction: vi.fn(),
+  apStockAssemblePartialAction: (i: unknown) => partial(i),
 }));
 vi.mock("../ap-new-version-actions", () => ({
   getApNewVersionOverviewAction: () => Promise.resolve({ target: { ref: "x", kind: "remote", canWrite: true, reason: null }, sets: [], plans: [] }),
@@ -24,7 +26,7 @@ const ov = (canWrite: boolean) => ({
 });
 const res = (o: Record<string, unknown> = {}) => ({ action: "render_verify", mode: "dry_run", executed: false, target: { ref: "x", kind: "remote", canWrite: true, reason: null }, scope: {}, counts: { toRecord: 3 }, lines: ["건너뜀 k1: 해시 불일치"], planHash: "h1", blocked: null, ok: true, ...o });
 
-beforeEach(() => { overview.mockReset(); step.mockReset(); check.mockReset(); });
+beforeEach(() => { overview.mockReset(); step.mockReset(); check.mockReset(); partial.mockReset(); });
 afterEach(cleanup);
 
 describe("ApStockPanel", () => {
@@ -76,5 +78,26 @@ describe("ApStockPanel", () => {
     const t = await screen.findByTestId("ap-stock-check");
     expect(t.querySelectorAll("tr[data-short='1']")).toHaveLength(1);
     expect(t.textContent).toContain("← 부족");
+  });
+  it("부분 연습 세트 초안 저장: 계획이 없으면 빈 상태, 있으면 미리보기 → 확인 → 같은 해시로 저장(보관 안내 포함)", async () => {
+    overview.mockResolvedValue({ ...ov(true), partialPlans: [] });
+    const { unmount } = render(<ApStockPanel />);
+    expect(await screen.findByTestId("ap-partial-empty")).toBeTruthy();
+    unmount();
+    overview.mockResolvedValue({ ...ov(true), partialPlans: [{ file: "partial-rebuild-ab-plan.json", sets: [{ id: "PC", name: "AP Calculus AB — Calculator Practice", partial: "calc_mc" }] }] });
+    partial.mockImplementation(async (i: { execute: boolean }) => (i.execute ? res({ action: "assemble_draft", mode: "execute", executed: true, lines: ["초안 세트 abc 저장"] }) : res({ action: "assemble_draft", planHash: "ph1", lines: ["저장할 초안: AP Calculus AB — Calculator Practice ... 다루는 단원: Units 1, 2"] })));
+    render(<ApStockPanel />);
+    const card = await screen.findByTestId("ap-partial");
+    expect(card.textContent).toContain("보관");
+    fireEvent.change(screen.getByLabelText("부분 세트 선택"), { target: { value: "PC" } });
+    const [previewBtn, runBtn] = Array.from(card.querySelectorAll("button")) as HTMLButtonElement[];
+    expect(runBtn.disabled).toBe(true);
+    fireEvent.click(previewBtn);
+    await waitFor(() => expect(card.textContent).toContain("다루는 단원"));
+    fireEvent.click(card.querySelector("input[type=checkbox]")!);
+    expect(runBtn.disabled).toBe(false);
+    fireEvent.click(runBtn);
+    await waitFor(() => expect(partial).toHaveBeenCalledTimes(2));
+    expect(partial.mock.calls[1][0]).toMatchObject({ planFile: "partial-rebuild-ab-plan.json", setId: "PC", execute: true, planHash: "ph1", tier: "free" });
   });
 });

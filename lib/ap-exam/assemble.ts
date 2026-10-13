@@ -191,6 +191,15 @@ export type FrqShortPlan = {
   layoutSections: ApSection[]; totalMinutes: number; shortage: string[];
   composition: { bundles: number; families: number; archetypes: number; calculatorAllowed: number; calculatorNotAllowed: number; units: Record<string, number>; overlapUsed: number };
 };
+/** 짧은 FRQ 연습 세트의 섹션 구성(계산기 허용 묶음 nA 개 = Part A 칸, 계산기 불가 nB 개 = Part B 칸, 묶음당 15분). 화면·DB 레이아웃이 같은 함수를 쓴다. */
+export function shortFrqLayout(subject: string, nA: number, nB: number): ApSection[] {
+  const base = apSectionLayout0(subject);
+  const secA = base.find((x) => x.key === "ap_frq_a"), secB = base.find((x) => x.key === "ap_frq_b");
+  const out: ApSection[] = [];
+  if (nA && secA) out.push({ ...secA, label: `Practice Section${nB ? " 1" : ""}: Free Response (calculator allowed)`, count: nA, minutes: nA * FRQ_MINUTES_PER_BUNDLE });
+  if (nB && secB) out.push({ ...secB, label: `Practice Section${nA ? " 2" : ""}: Free Response (no calculator)`, count: nB, minutes: nB * FRQ_MINUTES_PER_BUNDLE });
+  return out;
+}
 export function planFrqShortSet(subject: string, pool: AssembleCandidate[], opts: { used?: Set<string>; overlapMax?: number; maxBundles?: number } = {}): FrqShortPlan {
   const max = Math.min(opts.maxBundles ?? FRQ_SHORT_LIMITS.max, FRQ_SHORT_LIMITS.max);
   const used = opts.used ?? new Set<string>();
@@ -214,11 +223,7 @@ export function planFrqShortSet(subject: string, pool: AssembleCandidate[], opts
   }
   const allowed = taken.filter((c) => c.calculator !== "not_allowed"), notAllowed = taken.filter((c) => c.calculator === "not_allowed");
   const ordered = [...allowed, ...notAllowed];
-  const base = apSectionLayout0(subject);
-  const secA = base.find((x) => x.key === "ap_frq_a"), secB = base.find((x) => x.key === "ap_frq_b");
-  const layoutSections: ApSection[] = [];
-  if (allowed.length && secA) layoutSections.push({ ...secA, label: `Practice Section${notAllowed.length ? " 1" : ""}: Free Response (calculator allowed)`, count: allowed.length, minutes: allowed.length * FRQ_MINUTES_PER_BUNDLE });
-  if (notAllowed.length && secB) layoutSections.push({ ...secB, label: `Practice Section${allowed.length ? " 2" : ""}: Free Response (no calculator)`, count: notAllowed.length, minutes: notAllowed.length * FRQ_MINUTES_PER_BUNDLE });
+  const layoutSections = shortFrqLayout(subject, allowed.length, notAllowed.length);
   const items: AssemblePlan["items"] = [];
   allowed.forEach((c, i) => items.push({ sectionKey: "ap_frq_a", position: i + 1, c }));
   notAllowed.forEach((c, i) => items.push({ sectionKey: "ap_frq_b", position: i + 1, c }));
