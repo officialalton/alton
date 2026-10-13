@@ -261,8 +261,10 @@ class FigureChecks(unittest.TestCase):
                     st = q.get("stimulus") or p["stimulus"]
                     self.assertEqual(st["kind"], "diagram", n)
                     data = st["data"]
+                    self.assertNotIn("z", data, n)  # 원자 번호는 화면 데이터(정답 누출)에 넣지 않는다
                     if data["variant"] == "chem_pes":
-                        self.assertEqual(F.check_pes(data), [], n)
+                        z = next((int(f.split("=")[1]) for f in p["facts"] if f.startswith("z=")), None)
+                        self.assertEqual(F.check_pes(F.scene_of("chem_pes", data), z), [], n)
                     else:
                         self.assertEqual(F.check_particles(data["scene"]), [], n)
                     ET.fromstring(F.render(data["variant"], data))  # 올바른 SVG

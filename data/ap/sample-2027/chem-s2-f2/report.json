@@ -1,0 +1,36 @@
+{
+ "run": "chem-s2-f2",
+ "subject": "ap_chemistry",
+ "generatedAt": "2026-10-13T12:19:56.543Z",
+ "totalCostUsd": 0.75,
+ "newSpendSinceBaseline": 0.75,
+ "cap": 50,
+ "calls": 42,
+ "candidates": 14,
+ "mcCandidates": 0,
+ "frqCandidates": 14,
+ "passedAll": 7,
+ "adopted": 5,
+ "mcAdopted": 0,
+ "frqAdopted": 5,
+ "reserve": 2,
+ "yield": 0.357,
+ "costPerAdopted": 0.15,
+ "callsPerAdopted": 8.4,
+ "duplicateRejected": 3,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 14
+ },
+ "rejectionReasons": {
+  "duplicate_gate_exact_duplicate": 2,
+  "duplicate_gate_near_duplicate": 1,
+  "criterion_failed_key_scoring": 4,
+  "criterion_failed_distractor_explanation": 1
+ },
+ "unfilledCells": [
+  "ap_chemistry-f06",
+  "ap_chemistry-f07"
+ ]
+}

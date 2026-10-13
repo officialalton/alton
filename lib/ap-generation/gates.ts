@@ -163,7 +163,7 @@ export function gateFrq(subject: string, p: FrqPack, skills: Set<string>, opts: 
 
 const shingles = (s: string) => { const t = norm(s).replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter(Boolean); const o = new Set<string>(); for (let i = 0; i + 2 < t.length; i++) o.add(t.slice(i, i + 3).join(" ")); return o; };
 export const jaccard = (a: Set<string>, b: Set<string>) => { let i = 0; a.forEach((x) => b.has(x) && i++); const u = a.size + b.size - i; return u ? i / u : 0; };
-export const textOf = (p: McPack | FrqPack) => ("options" in p ? `${p.stem} ${p.options.map((o) => o.text).join(" ")} ${JSON.stringify(p.stimulus.data)}` : `${p.title} ${p.parts.map((x) => x.prompt).join(" ")} ${JSON.stringify(p.stimulus.data)}`);
+export const textOf = (p: McPack | FrqPack) => ("options" in p ? `${p.stem} ${p.options.map((o) => o.text).join(" ")} ${JSON.stringify(p.stimulus.data)} ${p.stimulus.description ?? ""}` : `${p.title} ${p.parts.map((x) => x.prompt).join(" ")} ${JSON.stringify(p.stimulus.data)} ${p.stimulus.description ?? ""}`); // 설명(description)까지 비교한다: 글 자료 FRQ 는 data={} 라 수치가 설명에만 있다(2026-10-13 chem-s2 에서 서로 다른 번들이 exact 중복으로 반려됨)
 
 /** 근접 중복 게이트: 이미 채택된 문항들과 비교(같은 숫자 세트이거나 3-gram 유사도 > 0.8). */
 export function gateDuplicate(p: McPack | FrqPack, accepted: (McPack | FrqPack)[]): string[] {
@@ -206,7 +206,7 @@ export const PHYSICS_FRQ_PROFILE: Record<string, { points: number; parts: [numbe
 };
 /** Chemistry(2027): FRQ 는 긴 문항 3개(10점)와 짧은 문항 4개(4점)로 공식 고정(CED Exam Information p.205). 문항별 권장 시간은 공식 미공표 — 105분을 점수 비례로 나눈 내부 추정(긴 문항 약 23분, 짧은 문항 약 9분)이다. 채점 행은 1점 단위. */
 export const CHEMISTRY_FRQ_PROFILE: Record<string, { points: number; parts: [number, number]; rowsPerPart: [number, number]; minutes: [number, number] }> = {
-  long: { points: 10, parts: [4, 6], rowsPerPart: [1, 3], minutes: [18, 30] }, short: { points: 4, parts: [3, 4], rowsPerPart: [1, 1], minutes: [6, 12] },
+  long: { points: 10, parts: [4, 6], rowsPerPart: [1, 3], minutes: [18, 30] }, short: { points: 4, parts: [3, 4], rowsPerPart: [1, 2], minutes: [6, 12] },
 };
 export function calibrateFrq(p: FrqPack, subject = "ap_calculus_ab"): string[] {
   const r: string[] = [];

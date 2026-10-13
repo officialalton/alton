@@ -1,0 +1,72 @@
+{
+ "version": "v1-chem-p1-a",
+ "run": "chem-p1-a",
+ "subject": "ap_chemistry",
+ "archetypeList": "chem_p1_mc",
+ "seed0": 7500,
+ "candidatesPerCell": 1,
+ "capUsd": 2,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "2",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1",
+  "AP_FIGURE_TEXT": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/subjects/chem.ts",
+  "lib/ap-generation/subjects/chem-archetypes.json",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 54.91,
+ "expected": {
+  "generatorHash": "cde0f45c8a82",
+  "reviewerPromptHash": "71acc52d2bf2",
+  "difficultyPromptHash": "9bda2250d42c",
+  "parserHash": "7528bbe8cdfc",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ },
+ "_budget_estimate": {
+  "cells": "20 single archetypes plus 1 two-item set = 21 cells, 22 items; AP_MC_CANDS=2 so about 42 candidates (units: U1 2, U2 2, U3 4, U4 2, U5 2, U6 2, U7 2, U8 3 cells incl. the set, U9 2)",
+  "perCellUsd": "single 0.078 (2 candidates x 0.039 observed in Physics), set 0.15; figure cells (graph 3 items, diagram 1) carry a 1.3x haircut already inside the cap",
+  "expectedUsd": "1.7 (range 1.5-2.1)",
+  "capUsd": 2,
+  "passRateAssumption": "68% first pass (Physics P1-a v2 30/44); chemistry has fewer scene figures than Physics but more fixed-sentence items. Stop if the first pass is below 45%.",
+  "figureNeedAssumption": "graph or diagram in 4 of 22 items (ch_mb_curves, the 2-item titration set, ch_pes_identify); all other items are text or table; ch_pes_identify is the only item that needs the (not yet TS-wired) chem_pes diagram renderer, so drop it from the list if the renderer is not ready"
+ },
+ "_note": "Frozen 2026-10-13 after the PES/particle TS render and 10 second-variant archetypes. Cumulative at freeze $52.8070; hard stop = cumulative + cap $2.0 + 0.1. First pass below 50% = stop, diagnose, fix free, re-run once (v2, cap $2.0)."
+}

@@ -21,12 +21,9 @@ def ch_ie_trend(rng):
         k = max(els, key=lambda e: IE1[e]); r = max(els, key=lambda e: PER[e][1])
         if k == r and sorted(IE1[e] for e in els)[-1] - sorted(IE1[e] for e in els)[-2] > 80:
             break
-    ds = []
-    for e in els:
-        if e == k:
-            continue
-        ds.append(Opt(cf(e), False, "Chooses an element farther left in the period, which has a smaller effective nuclear charge and holds its outer electron less tightly." if PER[e][1] < PER[k][1] else "Chooses an element with a larger atomic radius.", None))
-    key = Opt(cf(k), True, "Across a period the effective nuclear charge increases, so the outer electron is held more tightly and the first ionization energy is larger.", None)
+    ZZ = {"Li": 3, "Be": 4, "B": 5, "C": 6, "N": 7, "O": 8, "F": 9, "Ne": 10, "Na": 11, "Mg": 12, "Al": 13, "Si": 14, "P": 15, "S": 16, "Cl": 17, "Ar": 18, "K": 19}
+    ds = [Opt(cf(e), False, f"{e} (Z = {ZZ[e]}) has {ZZ[k] - ZZ[e]} fewer proton{'s' if ZZ[k] - ZZ[e] != 1 else ''} than {k} (Z = {ZZ[k]}) in the same period with a similar number of inner electrons, so its outer electron feels a smaller effective nuclear charge and is removed more easily ({IE1[e]} versus {IE1[k]} kJ/mol).", None) for e in els if e != k]
+    key = Opt(cf(k), True, f"Across period {per} the effective nuclear charge increases from left to right, so the outer electron of {k} (group {PER[k][1]}, first ionization energy about {IE1[k]} kJ/mol) is held most tightly.", None)
     stem = "Which of the following elements has the greatest first ionization energy?"
     return mk("ch_ie_trend", "1.7", "4.A", stem, key, ds, rng, concept="predict the element with the greatest first ionization energy from periodic trends", path="tabulated ionization energies vs the rule that the highest group in the same period wins (no exception pair present)", facts=[f"els={els}", f"key={k}"], judgment="apply the trend across a period without an exception pair", est=55)
 
@@ -42,7 +39,8 @@ def ch_mass_spec_peaks(rng):
     rows = [[str(m), "x"] for m in masses]
     stim = table_stimulus("Naturally occurring isotopes of element X", "Mass of isotope (amu)", [[str(m), "present"] for m in masses], "Present in the sample")
     stem = f"The table lists the {niso} naturally occurring isotopes of element X (masses " + ", ".join(f"{m}" for m in masses) + " amu). A sample of the diatomic gas $\\mathrm{X_2}$ is analyzed with a mass spectrometer that detects intact $\\mathrm{X_2}^+$ ions. How many peaks with different mass-to-charge ratios are expected?"
-    return mk("ch_mass_spec_peaks", "1.2", "1.A", stem, key, ds, rng, concept="number of molecular-ion peaks for a diatomic element with several isotopes", stim=stim, material={"type": "table", "must_include": ["isotope masses"]}, path="distinct sums of every isotope pair from itertools vs the formula 2n - 1 for evenly spaced masses", facts=[f"masses={masses}", f"peaks={len(sums)}"], judgment="enumerate which isotope pairs make which ion masses", est=75)
+    return mk("ch_mass_spec_peaks", "1.2", "1.A", stem, key, ds, rng, concept="number of molecular-ion peaks for a diatomic element with several isotopes", stim=stim, material={"type": "table", "must_include": ["isotope masses"]}, path="distinct sums of every isotope pair from itertools vs the formula 2n - 1 for evenly spaced masses", facts=[f"masses={masses}", f"peaks={len(sums)}"], judgment="enumerate which isotope pairs make which ion masses", est=75,
+              kwhy=f"An X₂ molecule can contain any pair of isotopes, so its mass is the sum of two isotope masses: {', '.join(str(v) for v in sums)} amu. These {len(sums)} different sums give {len(sums)} peaks.")
 
 
 # ======================= 1.6 PES 부껍질 읽기 (1.A) =======================
@@ -56,11 +54,11 @@ def ch_pes_subshell(rng):
     cfg = _A._config(z); labs = [f"{n}{l}" for n, l, k in cfg]
     agree(1.0, 1.0 if labs[idx] == lab else 0.0, 1e-9, "label")
     pool = [f"{n}{l}" for n, l, _ in _A.SUBSHELLS]
-    key = Opt(cf(lab), True, "Peaks run from the highest binding energy (1s) to the lowest in the order the subshells fill.", None)
-    occ = [Opt(cf(l), False, "Assigns the peak to a different occupied subshell, confusing the order of binding energies.", None) for l in labs if l != lab]
-    unocc = [Opt(cf(l), False, "Uses a subshell that is not occupied in this atom.", None) for l in pool if l != lab and l not in labs]
+    key = Opt(cf(lab), True, f"Peaks run from the highest binding energy (1s) to the lowest in the order the subshells fill; counting from the highest binding energy, peak number {idx + 1} of this atom is {lab}.", None)
+    occ = [Opt(cf(l), False, f"{l} is occupied in this atom, but the peak for {l} is number {labs.index(l) + 1} counting from the highest binding energy, not number {idx + 1}.", None) for l in labs if l != lab]
+    unocc = [Opt(cf(l), False, f"{l} is not occupied in this atom, so the spectrum has no peak for it.", None) for l in pool if l != lab and l not in labs]
     ds = (occ[:2] + unocc[:1] + occ[2:] + unocc[1:])[:3]
-    stim = {"kind": "diagram", "description": "Photoelectron spectrum of a neutral atom. Peaks (binding energy in MJ/mol, relative number of electrons): " + "; ".join(f"({e:g}, {k})" for e, k, _ in peaks) + ".", "data": {"variant": "chem_pes", "peaks": [{"energy": e, "electrons": k} for e, k, _ in peaks], "unit": "MJ/mol", "z": z}}
+    stim = {"kind": "diagram", "description": "Photoelectron spectrum of a neutral atom. Peaks (binding energy in MJ/mol, relative number of electrons): " + "; ".join(f"({e:g}, {k})" for e, k, _ in peaks) + ".", "data": {"variant": "chem_pes", "peaks": [{"energy": e, "electrons": k} for e, k, _ in peaks], "unit": "MJ/mol"}}
     order = ["highest", "second-highest", "third-highest", "fourth-highest", "fifth-highest", "sixth-highest"]
     stem = f"The photoelectron spectrum of a neutral atom of an element in period 2 or 3 is shown. To which subshell does the peak with the {order[idx]} binding energy correspond?"
     return mk("ch_pes_subshell", "1.6", "1.A", stem, key, ds, rng, concept="assign a peak in a photoelectron spectrum to a subshell", stim=stim, material={"type": "diagram", "must_include": ["peak energies", "relative heights"]}, path="peak labels from the shell-model energy ordering vs the occupied-subshell list in filling order", facts=[f"z={z}", f"idx={idx}", f"label={lab}"], judgment="order the peaks by binding energy and match them with the filling order", est=75)
@@ -70,15 +68,18 @@ def ch_pes_subshell(rng):
 LEW = [("H2O", 8, 2), ("NH3", 8, 3), ("CO2", 16, 4), ("HCN", 10, 4), ("CH2O", 12, 4), ("N2", 10, 3), ("O2", 12, 2), ("CH3OH", 14, 5), ("C2H4", 12, 6), ("Cl2", 14, 1), ("HF", 8, 1), ("CH3F", 14, 4)]
 
 
+LEWIS_PAIRS = {"H2O": (8, 2, 2), "NH3": (8, 3, 1), "CO2": (16, 4, 4), "HCN": (10, 4, 1), "CH2O": (12, 4, 2), "N2": (10, 3, 2), "O2": (12, 2, 4), "CH3OH": (14, 5, 2), "Cl2": (14, 1, 6), "HF": (8, 1, 3), "CH3F": (14, 4, 3), "C2H4": (12, 6, 0)}  # (원자가 전자 총수, 결합쌍 수, 비공유 쌍 수)
+
+
 def ch_lewis_lone_pairs(rng):
-    f, ve, bonds = pick(rng, LEW)
-    lp = (ve - 2 * bonds) // 2
-    lp2 = {"H2O": 2, "NH3": 1, "CO2": 4, "HCN": 1, "CH2O": 2, "N2": 2, "O2": 4, "CH3OH": 2, "C2H4": 0, "Cl2": 6, "HF": 3, "CH3F": 3}[f]
-    agree(lp, lp2, 1e-9, "lp")
-    pairs = [("Reports the number of bonding pairs.", float(bonds)), ("Reports the number of lone-pair electrons rather than pairs.", float(2 * lp)), ("Counts the valence electrons as lone pairs.", float(ve // 2)), ("Forgets that each bond uses two electrons.", float((ve - bonds) // 2))]
+    f = pick(rng, sorted(LEWIS_PAIRS)); ve, bonds, lp = LEWIS_PAIRS[f]
+    agree(lp, (ve - 2 * bonds) // 2, 1e-9, "lp")
+    pairs = [("Reports the number of bonding pairs (shared pairs) in the diagram instead of the lone pairs.", float(bonds)), ("Counts the lone-pair electrons rather than the lone pairs.", float(2 * lp)),
+             ("Divides all the valence electrons by 2 and counts every pair as a lone pair, forgetting that bonds use pairs.", float(ve // 2)), ("Subtracts only one electron per bond instead of two before dividing by 2.", float((ve - bonds) // 2))]
     key, ds = abs_opts(float(lp), pairs, lambda v: "$" + f"{int(v)}" + "$", 0.5)
-    stem = f"The Lewis electron-dot diagram of {cf(f)} has {bonds} bonding pairs of electrons (a double bond counts as two bonding pairs, a triple bond as three). The molecule has {ve} valence electrons in total. How many lone pairs of electrons does the diagram contain?"
-    return mk("ch_lewis_lone_pairs", "2.5", "1.A", stem, key, ds, rng, concept="number of lone pairs in a Lewis diagram from valence electrons and bonds", path="(valence electrons - 2 x bonding pairs)/2 vs a tabulated structure with explicit lone pairs", facts=[f"species={f}", f"valence={ve}", f"bonds={bonds}", f"lp={lp}"], judgment="subtract the electrons used in bonds before halving", est=65)
+    stem = f"How many lone pairs of electrons are shown in a correct Lewis electron-dot diagram of {cf(f)}? (Count the lone pairs on every atom.)"
+    return mk("ch_lewis_lone_pairs", "2.5", "1.A", stem, key, ds, rng, concept="number of lone pairs in the Lewis diagram of a molecule", path="(valence electrons - 2 x bonding pairs)/2 vs a tabulated structure with explicit lone pairs", facts=[f"species={f}", f"valence={ve}", f"bonds={bonds}", f"lp={lp}"], judgment="draw the diagram from the total valence electrons and count the pairs not used in bonds", est=75,
+              kwhy=f"{f} has {ve} valence electrons in total. Its Lewis diagram has {bonds} bonding pairs (each bond uses 2 electrons, so {2 * bonds} electrons), and the remaining {ve - 2 * bonds} electrons form {lp} lone pair{'s' if lp != 1 else ''}.")
 
 
 # ======================= 2.3 단위 격자 구성비 (1.A) =======================
@@ -97,7 +98,7 @@ def ch_unit_cell_ratio(rng):
     fm = lambda x_, y_: "XY" if (x_, y_) == (1, 1) else ("XY" + (f"_{{{y_}}}" if y_ > 1 else "") if x_ == 1 else f"X_{{{x_}}}Y" + (f"_{{{y_}}}" if y_ > 1 else ""))
     key_f = fm(x, y)
     raw = (sum(cats.values()), sum(ans.values()))
-    cand = [("Counts every ion position as a whole ion, ignoring that corner, face, and edge ions are shared.", fm(*(lambda g_: (raw[0] // g_, raw[1] // g_))(math.gcd(*raw)))), ("Inverts the ratio of cations to anions.", fm(y, x)), ("Doubles the anion count.", fm(*(lambda p: (p[0] // math.gcd(*p), p[1] // math.gcd(*p)))((x, 2 * y)))), ("Uses a 2 to 1 ratio for any unit cell with a body-centered ion.", fm(2, 1))]
+    cand = [("Counts every ion position as a whole ion, ignoring that corner, face, and edge ions are shared.", fm(*(lambda g_: (raw[0] // g_, raw[1] // g_))(math.gcd(*raw)))), ("Inverts the ratio of cations to anions.", fm(y, x)), ("Doubles the number of anions counted in the cell.", fm(*(lambda p: (p[0] // math.gcd(*p), p[1] // math.gcd(*p)))((x, 2 * y)))), ("Uses a 2 to 1 ratio for any unit cell with a body-centered ion.", fm(2, 1))]
     ds, seen = [], {key_f}
     for w, t in cand:
         if t not in seen:
@@ -106,8 +107,8 @@ def ch_unit_cell_ratio(rng):
         if len(ds) >= 3:
             break
         if t not in seen:
-            seen.add(t); ds.append(Opt("$\\mathrm{" + t + "}$", False, "A different ratio of the ions in one unit cell.", None))
-    key = Opt("$\\mathrm{" + key_f + "}$", True, "Ions on corners, faces, and edges are shared by neighboring cells, so each counts as a fraction.", None)
+            seen.add(t); ds.append(Opt("$\\mathrm{" + t + "}$", False, f"The ratio of X to Y found by counting the shared positions is {x}:{y} ({nc} X : {na} Y per cell), which does not give {t.replace('_', '').replace('{', '').replace('}', '')}.", None))
+    key = Opt("$\\mathrm{" + key_f + "}$", True, f"Ions on corners, faces, and edges are shared by neighboring cells, so each counts as a fraction: X contributes {nc} ion(s) and Y contributes {na} ion(s) per cell, a ratio of {x}:{y}.", None)
     desc = lambda d: ", ".join(f"{v} at the {'corners' if k == 'corner' else 'face centers' if k == 'face' else 'edge centers' if k == 'edge' else 'center of the cell' if k == 'body' else 'interior sites (entirely inside the cell)'}" for k, v in d.items())
     stem = f"In the unit cell of an ionic solid, the X ions are located as follows: {desc(cats)}. The Y ions are located as follows: {desc(ans)}. (An ion at a corner is shared by 8 cells, at a face center by 2 cells, and at an edge center by 4 cells.) What is the empirical formula of the compound?"
     return mk("ch_unit_cell_ratio", "2.3", "1.A", stem, key, ds[:3], rng, concept="empirical formula of an ionic solid from shared positions in a unit cell", path="exact fractions of each ion per cell reduced to a ratio vs the raw position counts shown as the wrong reading", facts=[f"cats={cats}", f"ans={ans}", f"ratio={x}:{y}"], judgment="weigh each ion by the fraction of it that belongs to one cell", est=100)
@@ -125,9 +126,9 @@ def ch_particle_solution_formula(rng):
     qc = int(re.sub(r"\D", "", c) or 1); qa = int(re.sub(r"\D", "", a.split("-")[0][-1:]) or 1) if False else {"Cl-": 1, "SO42-": 2, "O2-": 2, "PO43-": 3}[a]
     agree(nc * mult * qc, na * mult * qa, 1e-9, "neutral")
     others = [k for k in SALTS if k != f]
-    ds = [Opt(cf(k), False, "The ratio of ions in the diagram does not match this formula." if SALTS[k][0][1] != nc or SALTS[k][1][1] != na else "Has the right ratio but a different ion.", None) for k in others[:5]]
+    ds = [Opt(cf(k), False, f"{k} contains {SALTS[k][0][1]} {SALTS[k][0][0]} to {SALTS[k][1][1]} {SALTS[k][1][0]} per formula unit" + (", not the ions shown in the diagram." if SALTS[k][0][0] != c or SALTS[k][1][0] != a else ", which is a ratio the diagram does not show."), None) for k in others[:5]]
     ds = [d for d in ds][:3]
-    key = Opt(cf(f), True, "The ratio of ions in the diagram matches the formula, and the charges balance.", None)
+    key = Opt(cf(f), True, f"The diagram shows {nc * mult} {c} ions and {na * mult} {a} ions, a {nc}:{na} ratio; {f} has this ratio, and the charges balance ({nc * mult * qc}+ and {na * mult * qa}−).", None)
     ion = lambda s: s
     stim = diagram_stim_chem("A particulate diagram of an aqueous solution of an ionic compound (water molecules not shown): " + f"{nc * mult} {c} ions and {na * mult} {a} ions.", "chem_particles", {"scene": {"type": "particles", "box": box[:2]}})
     stem = "The particulate diagram represents an aqueous solution of an ionic compound (the water molecules are not shown). Which compound could have been dissolved to make the solution?"
@@ -143,8 +144,8 @@ def ch_miscibility(rng):
         k = pick(rng, [n for n in SOLUB if SOLUB[n][1] == "P"]); others = rng.sample([n for n in SOLUB if SOLUB[n][1] == "N"], 3)
         break
     agree(1.0, 1.0 if SOLUB[k][0] > max(SOLUB[o][0] for o in others) and SOLUB[k][1] == "P" else 0.0, 1e-9, "sol")
-    ds = [Opt(o, False, "A nonpolar molecule has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules.", None) for o in others]
-    key = Opt(k, True, "A polar solute or one that can hydrogen bond or form ion-dipole attractions is attracted to polar water molecules.", None)
+    ds = [Opt(o, False, f"{o} is nonpolar, so it has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules; its solubility is only about {SOLUB[o][0]:g} g per 100 mL.", None) for o in others]
+    key = Opt(k, True, f"{k} is polar (or ionic) and can form hydrogen-bonding or ion-dipole attractions with water molecules, so it is highly soluble (about {SOLUB[k][0]:g} g per 100 mL).", None)
     stem = "Which of the following is expected to be the most soluble in water at $25^\\circ\\text{C}$?"
     return mk("ch_miscibility", "3.7", "4.A", stem, key, ds, rng, concept="predict relative solubility in water from molecular polarity and the attractions with water", path="tabulated solubilities vs the polar/nonpolar rule; the polar substance is the unique maximum", facts=[f"key={k}", f"others={others}"], judgment="relate polarity and hydrogen bonding to dissolving", est=55)
 
@@ -187,8 +188,8 @@ def ch_viscosity_trend(rng):
         oh = max(names, key=lambda n: (VISC[n][1], formula_mass_proxy(n)))
         if k == oh and VISC[kk[0]][0] > 5 * VISC[kk[1]][0]:
             break
-    ds = [Opt(n, False, "Has fewer hydrogen-bonding groups per molecule, so weaker attractions between molecules." if VISC[n][1] < VISC[k][1] else "Has the same number of hydrogen-bonding groups but a smaller molecule.", None) for n in names if n != k]
-    key = Opt(k, True, "More –OH groups per molecule allow more hydrogen bonds between molecules, so the liquid flows less easily.", None)
+    ds = [Opt(n, False, f"{n} has {VISC[n][1]} –OH group{'s' if VISC[n][1] != 1 else ''} per molecule, " + (f"fewer than the {VISC[k][1]} of {k}, so its molecules attract each other less strongly and it flows more easily." if VISC[n][1] < VISC[k][1] else f"the same number as {k} but a smaller molecule, so its attractions between molecules are weaker."), None) for n in names if n != k]
+    key = Opt(k, True, f"{k} has {VISC[k][1]} –OH group{'s' if VISC[k][1] != 1 else ''} per molecule, the most of the four, so more hydrogen bonds form between molecules and the liquid flows less easily.", None)
     stem = "Which of the following liquids is expected to have the highest viscosity at $25^\\circ\\text{C}$, based on its molecular structure?"
     return mk("ch_viscosity_trend", "3.1", "4.C", stem, key, ds, rng, concept="relate hydrogen-bonding groups to the viscosity of a liquid", path="measured viscosities vs the count of -OH groups (ties broken by molecular size); the same liquid wins", facts=[f"names={names}", f"key={k}"], judgment="connect the number of hydrogen-bonding sites to a macroscopic flow property", est=60)
 
@@ -224,12 +225,12 @@ def ch_lewis_electron_check(rng):
     drawn_lp = lp_true + pick(rng, [1, -1, 2]) if lp_true > 1 else lp_true + pick(rng, [1, 2])
     shown = 2 * bonds + 2 * drawn_lp
     agree(1.0, 1.0 if shown != ve else 0.0, 1e-9, "wrong")
-    key_t = f"The model shows {shown} valence electrons but the molecule has {ve}, so the diagram is not consistent with the number of valence electrons."
-    wrongs = [(f"The model shows {ve} valence electrons, so the diagram is consistent with the number of valence electrons.", "Assumes the diagram is right without counting its electrons."), (f"The model shows {2 * bonds} valence electrons but the molecule has {ve}, so the diagram is not consistent.", "Counts only the bonding electrons, forgetting the lone pairs."),
-              (f"The model shows {shown} valence electrons but the molecule has {ve}, so the diagram is consistent because the extra electrons are on the central atom.", "Accepts extra electrons because they are placed on the central atom.")]
+    key_t = f"The model shows {shown} valence electrons but the molecule has {ve}, so the student's drawing is not consistent with the number of valence electrons."
+    wrongs = [(f"The model shows {ve} valence electrons, so the student's drawing is consistent with the number of valence electrons.", "Assumes the student's drawing is right without counting its electrons."), (f"The model shows {2 * bonds} valence electrons but the molecule has {ve}, so the student's drawing is not consistent.", "Counts only the bonding electrons, forgetting the lone pairs."),
+              (f"The model shows {shown} valence electrons but the molecule has {ve}, so the student's drawing is consistent because the extra electrons are on the central atom.", "Accepts extra electrons because they are placed on the central atom.")]
     k, ds = sentence_options(key_t, "A valid Lewis structure uses exactly the total number of valence electrons.", wrongs)
-    stem = f"A student draws a Lewis diagram of {cf(f)} that shows {bonds} bonding pairs and {drawn_lp} lone pairs. The molecule has {ve} valence electrons in total. Which statement correctly evaluates the diagram?"
-    return mk("ch_lewis_electron_check", "2.5", "4.B", stem, k, ds, rng, concept="check a Lewis diagram against the total number of valence electrons", path="2(bonds + lone pairs) compared with the valence electron count; the diagram is inconsistent by construction", facts=[f"species={f}", f"valence={ve}", f"bonds={bonds}", f"drawn_lp={drawn_lp}", f"shown={shown}"], judgment="count the electrons in a drawn structure against what is available", est=70)
+    stem = f"A student draws a Lewis diagram of {cf(f)} that shows {bonds} bonding pairs and {drawn_lp} lone pairs. The molecule has {ve} valence electrons in total. Which statement correctly evaluates the student's drawing?"
+    return mk("ch_lewis_electron_check", "2.5", "4.B", stem, k, ds, rng, concept="check a Lewis diagram against the total number of valence electrons", path="2(bonds + lone pairs) compared with the valence electron count; the student's drawing is inconsistent by construction", facts=[f"species={f}", f"valence={ve}", f"bonds={bonds}", f"drawn_lp={drawn_lp}", f"shown={shown}"], judgment="count the electrons in a drawn structure against what is available", est=70)
 
 
 # ======================= 8.6 산 세기와 구조 (4.A) =======================
@@ -237,13 +238,14 @@ ACIDS = {"HOCl": ("O", 7.5), "HClO2": ("O", 1.96), "HClO3": ("O", -1.0), "HClO4"
 NOH = {"HOCl": 0, "HClO2": 1, "HClO3": 2, "HClO4": 3}
 
 
+BOND = {"HF": (92, 567), "HCl": (127, 431), "HBr": (141, 366), "HI": (161, 299)}  # (H–X 결합 길이 pm, 결합 엔탈피 kJ/mol)
+
+
 def ch_acid_strength(rng):
-    fam = pick(rng, ["O", "B"])
-    names = [n for n in ACIDS if ACIDS[n][0] == fam]
-    k = min(names, key=lambda n: ACIDS[n][1])
-    rule = max(names, key=lambda n: NOH[n]) if fam == "O" else "HI"
-    agree(1.0, 1.0 if k == rule else 0.0, 1e-9, "acid")
-    ds = [Opt(cf(n), False, ("Chooses the acid with fewer non-hydrogen-bearing oxygen atoms, which polarizes the O–H bond less." if fam == "O" else ("Chooses the most electronegative atom, which forms the strongest H–X bond." if n == "HF" else "Chooses an acid with a stronger H–X bond than the strongest-acid choice.")), None) for n in names if n != k]
-    key = Opt(cf(k), True, "More terminal oxygen atoms pull electron density from the O–H bond and stabilize the conjugate base." if fam == "O" else "A longer, weaker H–X bond is broken more easily, so the acid is stronger down the group.", None)
-    stem = "Which of the following is the strongest acid in aqueous solution?"
-    return mk("ch_acid_strength", "8.6", "4.A", stem, key, ds, rng, concept="relate molecular structure to acid strength", path="measured pKa values (lowest = strongest) vs the structural rule (more terminal oxygen atoms, or weaker H-X bond down a group)", facts=[f"family={fam}", f"key={k}"], judgment="apply the structural rule instead of assuming the most electronegative atom wins", est=60)
+    names = rng.sample(sorted(BOND), 4) if False else ["HF", "HCl", "HBr", "HI"]
+    k = "HI"
+    agree(1.0, 1.0 if k == max(names, key=lambda n: BOND[n][0]) == min(names, key=lambda n: BOND[n][1]) else 0.0, 1e-9, "weakest")
+    ds = [Opt(cf(n), False, f"{n} has a shorter ({BOND[n][0]} pm) and stronger (about {BOND[n][1]} kJ/mol) H–X bond than HI ({BOND[k][0]} pm, about {BOND[k][1]} kJ/mol), so its bond is harder to break." + (" It is also the most electronegative halogen, which makes the bond strongest rather than weakest." if n == "HF" else ""), None) for n in names if n != k]
+    key = Opt(cf(k), True, f"Bond length grows and bond strength falls down the halogen group because the larger halogen atoms overlap less well with hydrogen; HI has the longest ({BOND[k][0]} pm) and weakest (about {BOND[k][1]} kJ/mol) H–X bond.", None)
+    stem = "Which of the following hydrogen halides has the longest and weakest bond between hydrogen and the halogen?"
+    return mk("ch_acid_strength", "8.6", "4.A", stem, key, ds, rng, concept="relate the periodic trend in H–X bond length and strength to the halogen", path="measured bond lengths and enthalpies (longest and lowest) vs the rule that bond strength falls down a group", facts=["family=B", f"key={k}"], judgment="apply the trend down a group rather than choosing the most electronegative atom", est=60)

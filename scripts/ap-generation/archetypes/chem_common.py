@@ -53,6 +53,20 @@ def formula_mass_flat(formula):
     return sum(MASS[a] * int(n or 1) for a, n in re.findall(r"([A-Z][a-z]?)(\d*)", f))
 
 
+_SUP = str.maketrans("0123456789-+", "⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺")
+
+
+def sn(v, n=3):
+    """설명·표용 과학적 표기(평문): 2.90 × 10⁻⁵. 'e-05'·'8e+03' 같은 컴퓨터 표기를 쓰지 않는다."""
+    if v == 0:
+        return "0"
+    e = int(math.floor(math.log10(abs(v))))
+    if -2 <= e <= 3:
+        return sig(v, n)
+    m = v / 10 ** e
+    return f"{sig(m, n)} × 10{str(e).translate(_SUP)}"
+
+
 def ph_fmt(v):
     return f"{v:.2f}"
 
@@ -96,13 +110,18 @@ def mk(arch, topic, skill, stem, key, ds, rng, *, concept, path, thinking=None, 
         key.why = kwhy
     p = pack(arch, topic, skill, "allowed", stem, key, ds, rng, stimulus=stim, est=max(45, min(130, est)), facts=facts or [])
     shown = [o for i, o in enumerate(p["options"]) if i != p["key_index"]]
+    # 오답 설명(why)은 선택지마다 달라야 하고 이름 붙은 오개념이어야 한다. 예전에는 짧은 설명을 일반 문구로 늘리고 겹치는 설명에 선택지 일부를 덧붙였는데,
+    # 검토기가 그것을 '템플릿 누출·일반 문구'로 반려했다(2026-10-13 chem-p1-a). 이제는 원형이 직접 고유한 설명을 써야 하고, 아니면 이 시드를 건너뛴다.
     seen_why = set()
     for o in shown:
-        if len((o["why"] or "").strip()) < 15:  # 게이트 최소 길이(15자): 짧은 설명은 이유 문장으로 보강
-            o["why"] = (o["why"] or "Misreads the problem").rstrip(".") + ", which does not match what the question asks."  # 오답마다 설명이 달라야 한다(블루프린트 규칙): 같은 오개념이 여러 선택지에 걸리면 선택지 내용으로 구분해 덧붙인다
-        if o["why"] in seen_why:
-            o["why"] = o["why"].rstrip(".") + f" (this option: {_plain(o['text'])})."
-        seen_why.add(o["why"])
+        w = (o["why"] or "").strip()
+        if len(w) < 25:
+            raise ValueError("short_why")
+        if w in seen_why:
+            raise ValueError("duplicate_why")
+        seen_why.add(w)
+    if not (p["options"][p["key_index"]]["why"] or "").strip():
+        raise ValueError("empty_key_why")
     mis = [(f"m{i + 1}", o["why"]) for i, o in enumerate(shown)]
     mat = material or (MAT_GRAPH() if stim and stim["kind"] == "graph" else MAT_DIAGRAM() if stim and stim["kind"] == "diagram" else MAT_NONE)
     p["blueprint"] = pbp(arch, topic, skill, concept, thinking or [f"Decide which chemical relationship or representation applies: {concept}", "Carry out or interpret the result and match it against the four options"], [(c, e if len(e) >= 10 else f"stated in the {e}") for c, e in (cond or [("every quantity needed is given in the stem or stimulus", "stem and stimulus values")])], mis, path, mat, judgment)
