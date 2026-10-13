@@ -31,3 +31,6 @@ R3B = [
     "c_washer_about_line", "c_xsection_nonstandard", "c_position_from_velocity", "c_distance_minus_displacement", "c_area_exp_between", "c_area_crossing_setup", "c_volume_disc_y_axis",
 ]
 STAGE_LISTS["supp_r3b_ab"] = R3B
+
+# R3-B2: R3-B 에서 단원 3 이 1건 모자라 반려 원형(검토기의 계산 착오 가능·부호 표기 문제)을 고쳐 새 후보로 재시도(자동 수선 아님) + 미사용 단원 3 원형 1종.
+STAGE_LISTS["supp_r3b2_ab"] = ["c_chain_exp_cos_point", "c_inverse_deriv_formula", "c_log_trig_deriv_expr"]

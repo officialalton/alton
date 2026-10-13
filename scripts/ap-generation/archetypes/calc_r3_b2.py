@@ -220,7 +220,7 @@ def c_inverse_deriv_formula(rng):
     _chk(_cd(inv, float(b), 1e-5), float(key_v), 1e-5)
     ds = [("Evaluates the derivative at the wrong place: $\\frac{1}{f'(%s)}$ instead of $\\frac{1}{f'(%d)}$." % (tx(b), a), 1 / fpb),
           ("Takes $f'(%d)$ and forgets to use its reciprocal." % a, fpa),
-          ("Uses the negative reciprocal $-\\frac{1}{f'(%d)}$." % a, -1 / fpa),
+          ("Divides by $[f'(%d)]^{2}$ instead of by $f'(%d)$, giving $\\frac{1}{[f'(%d)]^{2}}$." % (a, a, a), 1 / fpa ** 2),
           ("Uses $\\frac{1}{f(%d)}=\\frac{1}{%s}$, the reciprocal of the function value instead of the derivative." % (a, tx(b)), 1 / b)]
     pool = opts(ds, key_v, fmt)
     stem = "Let $f(x)=%s$, which is one-to-one, and let $g$ be the inverse function of $f$. What is the value of $g'(%s)$?" % (ftex, tx(b))
@@ -229,7 +229,7 @@ def c_inverse_deriv_formula(rng):
               ("Find the derivative of an inverse function at a point when the function is given by a formula",
                ["Find $a$ with $f(a)=b$ by inspection", "Use $g'(b)=1/f'(g(b))=1/f'(a)$", "Compute $f'(a)$ and take the reciprocal"],
                [("$g'(b)=1/f'(g(b))$ for an inverse function", "$f$ is one-to-one and $f'(a)\\ne 0$")],
-               [("wrong_evaluation_point", "evaluates f' at b"), ("no_reciprocal", "uses f' without reciprocal"), ("negative_reciprocal", "negative reciprocal"), ("reciprocal_of_value", "reciprocal of f(a)")],
+               [("wrong_evaluation_point", "evaluates f' at b"), ("no_reciprocal", "uses f' without reciprocal"), ("squared_denominator", "squares the derivative in the denominator"), ("reciprocal_of_value", "reciprocal of f(a)")],
                "root-finding for $f(z)=b\\pm h$ and a central difference of the numerical inverse (independent of the formula $1/f'$)"),
               85, [f"f={f}", f"a={a}"])
 
