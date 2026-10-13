@@ -11,3 +11,23 @@ R3A = [
     "g_area_sin_line_calc", "g_net_amount_formula_graph_calc", "c_area_wrt_y_calc", "c_equilateral_cross_section_calc", "c_integral_meaning_calc",
 ]
 STAGE_LISTS = {"supp_r3a_ab": R3A}
+
+# R3-B: 계산기 불가 Part A MC. R3-A 이후 남은 부족(단원 1:6 2:8 3:6 4:4 5:8 6:6 8:6, 합 44)에 후보 약 20% 여유로 고른 53종(약한 것·R3-A 와 같은 골격은 제외).
+R3B = [
+    # 단원 1 (b1)
+    "c_horizontal_asymptotes_exp_ratio", "c_lim_neg_inf_radical", "c_one_sided_abs_quotient", "c_trig_limit_sine_ratio", "c_cont_three_pieces_two_unknowns", "c_ivt_root_interval_polynomial", "c_squeeze_polynomial_bounds", "c_limit_laws_from_given_limits",
+    # 단원 2 (b1)
+    "c_tangent_y_intercept_power_exp", "c_horizontal_tangent_poly_exp", "c_quotient_rule_trig_exp_value", "c_derivative_sec_csc_cot_exact", "c_limit_two_point_difference_quotient", "c_piecewise_differentiable_two_constants", "c_count_corners_abs_polynomial", "c_normal_slope_power_ln",
+    "c_product_power_times_unknown_function", "c_rewrite_then_differentiate_root_denominator",
+    # 단원 3 (b2)
+    "c_chain_exp_cos_point", "c_implicit_tangent_line_eq", "c_implicit_cubic_horizontal_x", "c_inverse_deriv_formula", "c_arc_trig_deriv_value", "c_second_deriv_product_exp", "c_product_sqrt_chain_value",
+    # 단원 4 (b2)
+    "c_speeding_up_intervals", "c_roc_meaning_polynomial", "c_related_rates_ladder", "c_tangent_x_intercept", "c_lhopital_twice_zero",
+    # 단원 5 (b2)
+    "c_mvt_must_be_true", "c_mvt_hypotheses", "c_decreasing_rational", "c_critical_points_cusp", "c_second_deriv_test_quartic", "c_concave_xnlnx", "c_abs_extremum_cubic", "c_box_min_surface", "c_first_deriv_test_trig",
+    # 단원 6 (b3)
+    "c_antideriv_power_rules", "c_usub_indef_trig", "c_usub_limits_transform", "c_usub_ln_definite", "c_sigma_to_integral", "c_trapezoid_table_initial", "c_complete_square_arctan",
+    # 단원 8 (b3)
+    "c_washer_about_line", "c_xsection_nonstandard", "c_position_from_velocity", "c_distance_minus_displacement", "c_area_exp_between", "c_area_crossing_setup", "c_volume_disc_y_axis",
+]
+STAGE_LISTS["supp_r3b_ab"] = R3B
