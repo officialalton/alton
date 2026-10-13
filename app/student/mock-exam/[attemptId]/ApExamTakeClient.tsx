@@ -17,6 +17,8 @@ import {
 import { AP_SUBJECT_NAME, CALCULATOR_TEXT, apBadgeText, apCoverageLines, apGuidanceLines, apSectionDisplayLabel, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
 import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
 import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
+import { sharedSetRange } from "@/lib/ap-exam/shared-set";
+import SharedStimulus from "./SharedStimulus";
 import { frqAnswerToJson, parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
 import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
@@ -369,7 +371,13 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
               <div className="contents" data-testid="ap-question-card">
                 <ScrollPanes resetKey={current.setItemId}>
                   <section aria-label="Passage and question" className="min-w-0 shrink-0 overflow-x-auto overflow-y-hidden px-4 py-4 md:w-1/2 md:shrink md:overflow-y-auto md:px-8 md:py-6 md:border-r md:border-grey-200">
-                    {apPassageForDisplay(current.passage, current.question) && <LearningText text={apPassageForDisplay(current.passage, current.question) as string} className="mb-3 text-[13.5px]" />}
+                    {(() => {
+                      const shown = apPassageForDisplay(current.passage, current.question);
+                      if (!shown) return null;
+                      const text = <LearningText text={shown} className="text-[13.5px]" />;
+                      const range = sharedSetRange(items, index);
+                      return range ? <SharedStimulus range={range}>{text}</SharedStimulus> : <div className="mb-3">{text}</div>;
+                    })()}
                     {current.figure ? <ProblemFigure spec={current.figure} text={problemText(current.passage, current.question, current.options)} className="mb-4" /> : null}
                     {current.question && <LearningText text={autoMathExplanation(current.question)} className="mb-3 text-[14px] font-semibold" />}
                   </section>

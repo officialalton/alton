@@ -21,6 +21,23 @@ export function BoardSizeButtons({ presets, height, step = 100, disabled, onSet,
   );
 }
 
+export type BoardTouchMode = "draw" | "scroll";
+/** 캔버스 touch-action: Draw 면 손가락이 그리기(touch-none), Scroll 이면 페이지 세로 스크롤(pan-y). 데스크톱은 영향 없음. */
+export const boardTouchClass = (mode: BoardTouchMode) => (mode === "scroll" ? "touch-pan-y" : "touch-none");
+/** Scroll 모드에서는 손가락(touch) 접촉으로 획이 생기지 않게 한다(펜·마우스는 그대로). */
+export const touchDrawBlocked = (mode: BoardTouchMode, pointerType: string) => mode === "scroll" && pointerType === "touch";
+
+/** 모바일 전용 Draw/Scroll 전환(명시적): 큰 보드 위에서 손가락 스크롤이 갇히지 않도록 한다. 터치 대상 44px. */
+export function BoardTouchModeToggle({ mode, onChange, testId }: { mode: BoardTouchMode; onChange: (m: BoardTouchMode) => void; testId: string }) {
+  const b = (active: boolean) => `min-h-[44px] flex-1 rounded border px-3 text-[12px] font-bold ${active ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"}`;
+  return (
+    <div role="group" aria-label="Touch mode" className="flex w-full items-center gap-1 md:hidden" data-testid={testId}>
+      <button type="button" className={b(mode === "draw")} aria-pressed={mode === "draw"} onClick={() => onChange("draw")}>Draw</button>
+      <button type="button" className={b(mode === "scroll")} aria-pressed={mode === "scroll"} onClick={() => onChange("scroll")}>Scroll page</button>
+    </div>
+  );
+}
+
 /** 캔버스 오른쪽 띠: 캔버스는 touch-action:none(그리기)이라 손가락 스크롤 통로로 pan-y 띠를 둔다(모바일만). */
 export function BoardScrollGutter({ testId }: { testId: string }) {
   return <div className="w-7 shrink-0 touch-pan-y bg-grey-50 md:hidden" aria-hidden data-testid={testId} />;

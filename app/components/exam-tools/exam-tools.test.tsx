@@ -167,3 +167,15 @@ describe("parseNum", () => {
     expect(() => parseNum("", "x")).toThrow("Enter a value for x.");
   });
 });
+
+describe("390px 모바일 사용성(코드 기준)", () => {
+  it("입력·선택·탭·닫기·계산 버튼은 모바일에서 44px 이상, 입력 글자 16px(iOS 확대 방지)", () => {
+    render(<SubjectToolPanels config={stats} calculatorAllowed open="calculator" onClose={() => {}} />);
+    expect(screen.getByTestId("close-calculator").className).toContain("min-h-[44px]");
+    expect(screen.getByTestId("calc-tab-statistics").className).toContain("min-h-[44px]");
+    expect(screen.getByTestId("stats-calculate").className).toContain("min-h-[44px]");
+    expect(screen.getByTestId("stats-mode").className).toContain("min-h-[44px]");
+    expect(screen.getByTestId("stats-mode").className).toContain("text-[16px]");
+    expect(screen.getByRole("tablist", { name: "Calculator type" }).className).toContain("flex-wrap");
+  });
+});

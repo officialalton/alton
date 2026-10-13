@@ -28,11 +28,11 @@ function Modal({ label, show, onClose, closeTestId, children, header }: { label:
   }, [show, onClose]);
   return (
     <div className={`fixed inset-0 z-50 items-center justify-center bg-black/40 p-2 sm:p-4 ${show ? "flex" : "hidden"}`} onClick={onClose}>
-      <div role="dialog" aria-modal="true" aria-label={label} className="flex h-[88vh] w-full max-w-4xl flex-col overflow-hidden rounded-lg bg-white" onClick={(e) => e.stopPropagation()}>
+      <div role="dialog" aria-modal="true" aria-label={label} className="flex h-[88vh] max-h-[88dvh] w-full max-w-4xl flex-col overflow-hidden rounded-lg bg-white" onClick={(e) => e.stopPropagation()}>
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-grey-200 px-3 py-2">
           <span className="text-[12px] font-extrabold text-grey-500">{label}</span>
           {header}
-          <button type="button" onClick={onClose} className="min-h-[36px] px-2 text-[12px] font-bold text-grey-500 underline" data-testid={closeTestId}>Close</button>
+          <button type="button" onClick={onClose} className="min-h-[44px] px-2 text-[12px] font-bold text-grey-500 underline md:min-h-[36px]" data-testid={closeTestId}>Close</button>
         </div>
         {children}
       </div>

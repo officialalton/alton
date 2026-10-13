@@ -11,7 +11,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { loadProblemNoteBoardAction, saveProblemNoteBoardAction, type StrokeSegment } from "@/lib/problem-notes-actions";
 import { drawAll } from "@/app/components/ProblemNoteCanvas";
 import { WB_H_PRESETS, WB_MAX_H, WB_MAX_SEGMENTS, WB_MIN_H, WB_TOO_LARGE, WB_WIDTH, clampWbHeight, wbSizeProblem } from "@/lib/mock-exam/whiteboard-size";
-import { BoardResizeHandle, BoardScrollGutter, BoardSizeButtons } from "./BoardSizeControls";
+import { BoardResizeHandle, BoardScrollGutter, BoardSizeButtons, BoardTouchModeToggle, boardTouchClass, touchDrawBlocked, type BoardTouchMode } from "./BoardSizeControls";
 
 export { WB_WIDTH };
 export const WB_HEIGHT = WB_MIN_H; // 기본(Small) 높이 — 기존 고정 크기
@@ -57,6 +57,7 @@ export default function MockExamWhiteboard({
   const [tool, setTool] = useState<"pen" | "eraser">("pen");
   const [color, setColor] = useState<string>(WB_COLORS[0].value);
   const [error, setError] = useState<string | null>(null);
+  const [touchMode, setTouchMode] = useState<BoardTouchMode>("draw");
 
   const redraw = useCallback(() => {
     const canvas = canvasRef.current;
@@ -132,7 +133,7 @@ export default function MockExamWhiteboard({
   }
 
   function down(e: React.PointerEvent<HTMLCanvasElement>) {
-    if (locked) return;
+    if (locked || touchDrawBlocked(touchMode, e.pointerType)) return;
     if (e.pointerType === "pen") penSeenRef.current = true;
     if (e.pointerType === "touch" && penSeenRef.current) return; // 스타일러스를 쓰는 중 손바닥 접촉 무시
     e.currentTarget.setPointerCapture?.(e.pointerId);
@@ -228,6 +229,7 @@ export default function MockExamWhiteboard({
             <button type="button" onClick={clearAll} className="ml-auto text-[11.5px] font-semibold text-grey-500 underline">
               Clear
             </button>
+            <BoardTouchModeToggle mode={touchMode} onChange={setTouchMode} testId="wb-touch-mode" />
           </>
         )}
         <button type="button" onClick={onClose} aria-label="Close whiteboard" className={`${locked ? "ml-auto" : ""} px-1 text-[16px] leading-none text-grey-500`}>
@@ -241,7 +243,7 @@ export default function MockExamWhiteboard({
               ref={canvasRef}
               width={WB_WIDTH}
               height={height}
-              className={`block h-fit w-full touch-none ${locked ? "" : "cursor-crosshair"}`}
+              className={`block h-fit w-full ${boardTouchClass(touchMode)} ${locked ? "" : "cursor-crosshair"}`}
               style={{ aspectRatio: `${WB_WIDTH} / ${height}` }}
               onPointerDown={down}
               onPointerMove={move}
