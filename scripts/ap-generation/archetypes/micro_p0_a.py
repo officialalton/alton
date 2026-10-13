@@ -33,7 +33,7 @@ SCARCE = [
      [("The ticket price and nothing else.", "Counts only the explicit money cost and ignores the value of the time that is given up."), ("The total value of every alternative the student could have chosen.", "Adds all alternatives instead of using only the next-best one."),
       ("Zero, because the student values the concert more than the alternatives.", "Mistakes the benefit of the chosen option for a lack of cost; choices always have a forgone alternative."), ("The enjoyment the student receives from the concert.", "Describes the benefit of the chosen option, not the cost of giving up the alternative."),
       ("The cost the concert organizers pay to produce the show.", "Confuses the buyer's opportunity cost with the seller's production cost.")]),
-    ("Which of the following statements about economic choices is correct?", "Because resources are scarce, producing more of one good requires producing less of another.", "With scarce resources, using more of them for one good leaves fewer for others, so a trade-off exists.",
+    ("Which of the following statements about economic choices is correct?", "On its production possibilities curve, producing more of one good requires giving up some of another.", "With scarce resources, using more of them for one good leaves fewer for others, so a trade-off exists.",
      [("A wealthy society can produce unlimited quantities of every good and does not face trade-offs.", "Believes wealth removes scarcity; even rich societies have limited resources and face trade-offs."), ("A good that is free to consumers has no opportunity cost to society.", "Treats a zero price as a zero cost; resources used to make the good have alternative uses."),
       ("Opportunity costs exist only when money is paid for a good.", "Ties opportunity cost to monetary payments; time and resources have opportunity costs without any payment."), ("Efficient resource allocation eliminates scarcity.", "Confuses efficiency with abundance; efficient allocation still leaves wants unsatisfied."),
       ("Scarcity affects only the production of goods and not the use of time.", "Limits scarcity to goods; time is also a limited resource that must be allocated.")]),
@@ -49,8 +49,8 @@ def mi_scarcity_concept(rng):
 # ======================= 1.2 경제 체제 =======================
 SYSTEMS = [
     ("A central planning agency decides what goods are produced, how many are produced, and who receives them, and firms follow its quotas.", "command economy"),
-    ("Households and firms decide what to buy and sell, prices signal scarcity, and the government plays only a minimal role in production decisions.", "market economy"),
-    ("Most resources are allocated through voluntary exchange at market prices, but the government also provides public goods and regulates some industries.", "mixed economy"),
+    ("Households and firms alone decide what to buy, sell, and produce, prices signal scarcity, and the government does not direct production or distribution.", "market economy"),
+    ("Most resources are allocated through voluntary exchange at market prices, but the government also directs part of the economy by providing public goods and regulating industries.", "mixed economy"),
     ("Production methods, jobs, and the distribution of goods are determined mainly by custom and the choices of previous generations.", "traditional economy"),
 ]
 
@@ -58,8 +58,8 @@ SYSTEMS = [
 def mi_economic_systems(rng):
     desc, ans = SYSTEMS[rng.randrange(len(SYSTEMS))]
     others = [s[1] for s in SYSTEMS if s[1] != ans] + ["laissez-faire monopoly"]
-    why = {"command economy": "Takes government direction of every decision as the defining feature, which the description does not contain.", "market economy": "Assumes prices and voluntary exchange alone drive decisions, ignoring the planning or custom the description names.",
-           "mixed economy": "Treats any government role as a mix; the description does not combine market exchange with a meaningful government role.", "traditional economy": "Treats habit and custom as the allocation method, which the description does not mention.",
+    why = {"command economy": "Takes government direction of every decision as the defining feature, which the description does not contain.", "market economy": "Assumes prices and voluntary exchange alone drive all decisions, although the description names central direction, a mixed role for government, or custom.",
+           "mixed economy": "Treats the economy as a mix of market exchange and government direction, but the description does not describe both.", "traditional economy": "Treats habit and custom as the allocation method, which the description does not mention.",
            "laissez-faire monopoly": "Confuses an economic system with a market structure; a monopoly is a market structure, not a way to answer the three basic economic questions."}
     k, ds = sent_opts(f"{ans[0].upper()}{ans[1:]}", f"The described allocation method is characteristic of a {ans}.", [(f"{o[0].upper()}{o[1:]}", why[o]) for o in others])
     stem = f"Which type of economic system is best described as follows? {desc}"

@@ -120,7 +120,7 @@ def mi_cost_curve_relation_graph(rng):
     falling = mc(q) < atc(q)
     agree(1 if d < 0 else 0, 1 if falling else 0, 1e-9, "atc_slope")
     qmax = 4 * k0; ymax = int(math.ceil((mc(qmax) + 10) / 20) * 20); q0 = max(k0 / 2, 4.0)
-    stim = econ_graph("Short-run cost curves for a firm: marginal cost MC, average total cost ATC, and average variable cost AVC. Points A, B, and C are marked on the MC curve.", [("MC", line_pts(a, 2, 0, qmax)), ("ATC", dense_pts(atc, q0, qmax, 45)), ("AVC", line_pts(a, 1, 0, qmax))], qmax, ymax, 10, 20,
+    stim = econ_graph("Short-run cost curves for a firm: marginal cost MC, average total cost ATC, and average variable cost AVC. Points A, B, and C are marked on the MC curve.", [("MC", line_pts(a, 2, 0, qmax)), ("ATC", dense_pts(atc, q0, qmax, 45)), ("AVC", line_pts(a, 1, 0, qmax))], qmax, ymax, 10, 20, ylabel="Cost (dollars per unit)",
                       points=[("A", qa, mc(qa)), ("B", qb, mc(qb)), ("C", qc, mc(qc))])
     rel = "below" if falling else "above"; dirw = "falling" if falling else "rising"
     stem = f"The graph shows a firm's short-run cost curves. Which of the following is true at point {which}?"
@@ -249,6 +249,8 @@ def mi_elasticity_graph(rng):
     Q0 = rng.choice([40, 50, 60]); P0 = rng.choice([40, 50, 60]); s_flat = rng.choice([Fr(1, 2), Fr(1)]); s_steep = rng.choice([Fr(2), Fr(3)])
     e_flat = Fr(P0, 1) / (s_flat * Q0); e_steep = Fr(P0, 1) / (s_steep * Q0)
     agree(float(e_flat / e_steep), float(s_steep / s_flat), 1e-9, "ratio")
+    if e_flat == 1 or e_steep == 1:
+        raise ValueError("not_enough_separated_distractors")
     flat_is_1 = rng.random() < 0.5
     sa, sb = (s_flat, s_steep) if flat_is_1 else (s_steep, s_flat)
     more = "D1" if flat_is_1 else "D2"; less = "D2" if flat_is_1 else "D1"

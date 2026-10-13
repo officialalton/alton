@@ -121,7 +121,7 @@ def mi_cost_graph_min(rng):
     stim = econ_graph("Short-run cost curves for a firm: marginal cost MC and average total cost ATC.", [("MC", line_pts(a, 2 * b, 0, qmax)), ("ATC", dense_pts(atc, q_start, qmax, 45))], qmax, ymax, 10, 20, ylabel="Cost (dollars per unit)")
     stem = "The graph shows a firm's marginal cost (MC) and average total cost (ATC) curves. At which quantity is average total cost at its minimum?"
     cand = [("Chooses the quantity where marginal cost is lowest, which is at zero output.", 0), ("Chooses a quantity where marginal cost is below average total cost, so the average is still falling.", k0 / 2), ("Chooses a quantity where marginal cost is above average total cost, so the average is already rising.", 2 * k0),
-            ("Chooses the right edge of the graph.", qmax), ("Chooses a quantity just beyond the crossing, where marginal cost only slightly exceeds average total cost and the average has begun to rise.", 1.5 * k0)]
+            ("Chooses the right edge of the graph.", qmax), ("Chooses a quantity beyond the crossing, where marginal cost is above average total cost and the average has begun to rise.", 1.5 * k0)]
     k, ds = val_opts(float(k0), cand, lambda v: nm(v, 0) + " units")
     return mk("mi_cost_graph_min", "3.2", "2.A", stem, k, ds, rng, concept="average total cost is minimized where marginal cost crosses it", path="grid search of the ATC curve vs analytic sqrt(F/b)", stim=stim, kwhy=f"MC crosses ATC at the minimum of ATC, at {k0} units.", facts=[f"F={F}", f"a={a}", f"b={b}", f"k0={k0}"], est=65)
 
@@ -254,16 +254,21 @@ def mi_shutdown_decision(rng):
 
 
 def mi_shutdown_rule(rng):
-    cases = [("The market price is below the firm's minimum average variable cost.", "shut down in the short run", "The firm cannot cover even its variable costs, so each unit adds to the loss beyond fixed cost."),
-             ("The market price is above average variable cost but below average total cost at the profit-maximizing output.", "continue producing in the short run, even though it is earning a loss", "Revenue covers all variable cost and part of fixed cost, so producing loses less than shutting down."),
-             ("The market price is above average total cost at the profit-maximizing output.", "continue producing and earn an economic profit", "Price exceeds the average total cost, so profit per unit is positive.")]
-    cond, ans, why = cases[rng.randrange(3)]
-    others = [c[1] for c in cases if c[1] != ans] + ["shut down because it is earning a loss", "produce where price equals average total cost regardless of marginal cost"]
-    whys = {cases[0][1]: "Applies the shutdown rule when price exceeds average variable cost.", cases[1][1]: "Treats a loss as a reason to continue, ignoring that price may be below average variable cost.", cases[2][1]: "Claims profit although price is not above average total cost.",
-            "shut down because it is earning a loss": "Treats any loss as a reason to shut down; the rule compares price with average variable cost, not with average total cost.", "produce where price equals average total cost regardless of marginal cost": "Uses price equals average total cost as the output rule; profit maximization requires marginal cost to equal price."}
-    k, ds = sent_opts(f"The firm should {ans}.", why, [(f"The firm should {o}.", whys[o]) for o in others])
+    cases = [
+        ("The market price is below the firm's minimum average variable cost.", "Shut down in the short run, because the price does not cover average variable cost.", "Revenue cannot cover even the variable costs, so each unit produced adds to the loss beyond the fixed cost.",
+         [("Continue producing in the short run, because price is above marginal cost.", "Price is below average variable cost, so producing loses more than the fixed cost that shutting down loses."), ("Continue producing in the short run, because the firm must still pay its fixed costs.", "Fixed costs are owed whether or not the firm produces, so they cannot justify an output that loses even more."),
+          ("Continue producing and earn zero economic profit, because price equals average total cost.", "Price is below average variable cost, so it cannot equal average total cost."), ("Produce the quantity at which price equals average total cost.", "Output is chosen where price equals marginal cost, and here price does not cover variable cost at any output.")]),
+        ("The market price is above average variable cost but below average total cost at the profit-maximizing output.", "Continue producing in the short run, because price covers average variable cost and part of fixed cost.", "Revenue covers all variable costs and part of fixed cost, so producing loses less than shutting down.",
+         [("Shut down in the short run, because the firm is earning an economic loss.", "A loss alone is not the shutdown rule; the firm shuts down only if price is below average variable cost."), ("Shut down in the short run, because price is below average total cost.", "Price below average total cost is a loss, but the shutdown rule compares price with average variable cost."),
+          ("Continue producing and earn a positive economic profit, because price exceeds average variable cost.", "Profit requires price above average total cost, which is not true here."), ("Expand output until price equals average total cost.", "A competitive firm produces where price equals marginal cost, not where price equals average total cost.")]),
+        ("The market price is above average total cost at the profit-maximizing output.", "Continue producing and earn a positive economic profit, because price exceeds average total cost.", "Price above average total cost means total revenue exceeds total cost.",
+         [("Shut down in the short run, because price is above the minimum of average variable cost.", "A price above average variable cost is a reason to keep producing, not to shut down."), ("Continue producing and earn zero economic profit, because competitive firms always earn zero profit.", "Competitive firms earn zero economic profit only in the long run, after entry."),
+          ("Continue producing at a loss, because price equals marginal cost.", "Price above average total cost means the firm earns a profit, not a loss."), ("Produce zero output until price falls to average total cost.", "A firm earning a profit at the current price should produce at the profit-maximizing output.")]),
+    ]
+    cond, key_t, key_why, wr = cases[rng.randrange(3)]
+    k, ds = sent_opts(key_t, key_why, wr)
     stem = f"A perfectly competitive firm faces the following condition: {cond} Which of the following is the best decision for the firm?"
-    return mk("mi_shutdown_rule", "3.6", "2.B", stem, k, ds, rng, concept="short-run produce-or-shut-down decision", path="fixed vetted price-versus-cost comparison table", facts=[f"cond={cond[:40]}"], est=60)
+    return mk("mi_shutdown_rule", "3.6", "2.A", stem, k, ds, rng, concept="short-run produce-or-shut-down decision", path="fixed vetted price-versus-cost comparison table; every wrong option contradicts the stated condition", facts=[f"cond={cond[:40]}"], est=60)
 
 
 ENTRY = [("economic profits", True), ("economic losses", False)]
@@ -315,8 +320,8 @@ def mi_pc_graph_profit(rng):
 def mi_pc_longrun(rng):
     stem = "Which of the following is true for a perfectly competitive firm in long-run equilibrium?"
     k, ds = sent_opts("Price equals marginal cost and equals the minimum of average total cost.", "Free entry and exit drive economic profit to zero (P = ATC) and profit maximization sets P = MC, so P = MC = minimum ATC.",
-                      [("Price exceeds marginal cost, and the firm earns positive economic profit.", "Positive profit would attract entry, so it cannot persist in the long run."), ("Price equals marginal cost, but price is above the minimum of average total cost.", "Price above average total cost would imply positive profit and entry."), ("Price is below average total cost, and the firm earns a normal profit.", "Price below average total cost means an economic loss, not a normal profit."),
-                       ("The firm produces where marginal revenue exceeds marginal cost.", "At the profit-maximizing output marginal revenue equals marginal cost."), ("Price equals average fixed cost and marginal cost equals average variable cost.", "Confuses the long-run conditions with relationships among other cost curves.")])
+                      [("Price exceeds marginal cost, and the firm earns positive economic profit.", "Positive profit would attract entry, so it cannot persist in the long run."), ("Price is below average total cost, and the firm earns a normal profit.", "Price below average total cost means an economic loss, not a normal profit."), ("The firm produces where marginal revenue exceeds marginal cost.", "At the profit-maximizing output marginal revenue equals marginal cost."),
+                       ("Price exceeds the minimum of average total cost, and the firm earns zero economic profit.", "If price were above the minimum of ATC the firm would earn profit at its output, which would attract entry."), ("Price equals marginal cost but is below average total cost.", "A price below average total cost is a loss, which would cause exit.")])
     return mk("mi_pc_longrun", "3.7", "1.A", stem, k, ds, rng, concept="long-run equilibrium of a perfectly competitive firm", path="fixed vetted long-run conditions", facts=["variant=1"], est=50)
 
 
@@ -343,7 +348,7 @@ def mi_efficiency_types(rng):
                     ("Which of the following conditions indicates allocative efficiency?", "Price equals marginal cost.", "At P = MC the value consumers place on the last unit equals its resource cost.",
                      [("Output is produced at the minimum of average total cost.", "That is productive efficiency, not allocative efficiency."), ("Price equals average total cost.", "That indicates zero economic profit, not allocative efficiency."), ("Marginal revenue exceeds marginal cost.", "Describes a firm that should expand output; it is not an efficiency condition."), ("Price is greater than marginal cost.", "Price above marginal cost implies underproduction relative to the efficient level.")])])
     qq, kt, kw, wr = q
-    wr = wr + [("Average fixed cost is at its minimum.", "Average fixed cost keeps falling and has no minimum, so it is not a standard efficiency criterion.")]
+    wr = wr + [("Marginal revenue is greater than marginal cost.", "That means the firm should expand output; it is not a statement of efficiency.")]
     k, ds = sent_opts(kt, kw, wr)
     return mk("mi_efficiency_types", "3.7", "1.B", qq, k, ds, rng, concept="productive versus allocative efficiency", path="fixed vetted efficiency definitions", facts=[f"q={qq[:30]}"], est=45)
 
@@ -367,7 +372,7 @@ def mi_fixed_variable(rng):
     wrong = [f"This is a {'variable' if kind == 'fixed' else 'fixed'} cost, because it {'changes' if kind == 'fixed' else 'does not change'} with the quantity of output in the short run.", f"This is an implicit cost, because no cash payment is made.", "This is a marginal cost, because it is paid each period.", "This is a sunk cost that should be ignored when deciding on output.", "This is an opportunity cost only if the firm is profitable."]
     whys = ["Reverses the classification of fixed and variable costs.", "Confuses fixed and variable with explicit and implicit costs; this cost is a cash payment.", "Confuses the timing of payment with the change in cost from one more unit.", "Treats a cost as sunk although it affects the cost curves; a sunk cost cannot be recovered but fixed costs still count in the short run.", "Ties opportunity cost to profitability, which is unrelated."]
     k, ds = sent_opts(ans, "Fixed costs do not vary with output in the short run; variable costs do.", list(zip(wrong, whys)))
-    return mk("mi_fixed_variable", "3.2", "1.B", f"{desc} is an example of which type of cost for a firm in the short run?", k, ds, rng, concept="classify costs as fixed or variable", path="fixed vetted cost classification table", facts=[f"cost={desc[:30]}", f"kind={kind}"], est=45)
+    return mk("mi_fixed_variable", "3.2", "1.B", f"For a firm in the short run, which type of cost is the following? {desc}.", k, ds, rng, concept="classify costs as fixed or variable", path="fixed vetted cost classification table", facts=[f"cost={desc[:30]}", f"kind={kind}"], est=45)
 
 
 @retry_sep

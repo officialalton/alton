@@ -37,7 +37,8 @@ def nm(v, d=2):
     v = float(v)
     if abs(v - round(v)) < 1e-9:
         return f"{int(round(v)):,}"
-    return f"{v:.{d}f}".rstrip("0").rstrip(".")
+    s = f"{v:.{d}f}"
+    return s.rstrip("0").rstrip(".") if "." in s else s
 
 
 def pct(v, d=1):

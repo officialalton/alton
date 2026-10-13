@@ -484,14 +484,19 @@ def mi_demand_determinant(rng):
     return mk("mi_demand_determinant", "2.1", "1.A", stem, k, ds, rng, concept="determinants that shift demand versus movement along the curve", path="fixed vetted determinants table with distractors from supply-side and own-price changes", facts=["variant=complement"], est=45)
 
 
-@retry_sep
 def mi_movement_vs_shift(rng):
     g = rng.choice(GOODS)
     case = rng.choice(["own_price", "income", "input"])
-    desc = {"own_price": f"The price of {g} falls, and consumers buy more of it.", "income": f"Consumers' incomes rise, and they buy more of {g}, a normal good, at every price.", "input": f"The price of an input falls, and sellers supply more {g} at every price."}[case]
-    ans = {"own_price": "A movement along the demand curve, which is an increase in the quantity demanded.", "income": "A rightward shift of the demand curve, which is an increase in demand.", "input": "A rightward shift of the supply curve, which is an increase in supply."}[case]
-    others = ["A movement along the demand curve, which is an increase in the quantity demanded.", "A rightward shift of the demand curve, which is an increase in demand.", "A rightward shift of the supply curve, which is an increase in supply.", "A movement along the supply curve, which is an increase in the quantity supplied.", "A leftward shift of the demand curve, which is a decrease in demand."]
-    why = {others[0]: "Treats a change caused by something other than the good's own price as a movement along the curve.", others[1]: "Treats a change in the good's own price as a shift of the demand curve.", others[2]: "Attributes a demand-side or own-price change to the supply curve.",
-           others[3]: "Mistakes a change caused by a supply determinant for a movement along the supply curve.", others[4]: "Reverses the direction of the demand shift."}
-    k, ds = sent_opts(ans, "A change in the good's own price moves along a curve, while a change in a determinant shifts the curve.", [(o, why[o]) for o in others if o != ans])
-    return mk("mi_movement_vs_shift", "2.1", "1.B", f"Consider the following situation: {desc} Which of the following correctly describes the change in the market?", k, ds, rng, concept="movement along versus shift of a curve", path="fixed vetted scenario-to-description table", facts=[f"case={case}"], est=50)
+    desc = {"own_price": f"The price of {g} falls, and consumers buy more of it.", "income": f"Consumers' incomes rise, and they buy more of {g}, a normal good, at every price.", "input": f"The price of an input used to make {g} falls, and sellers supply more {g} at every price."}[case]
+    mad = "A movement along the demand curve, which is an increase in the quantity demanded."; sd = "A rightward shift of the demand curve, which is an increase in demand."; ss = "A rightward shift of the supply curve, which is an increase in supply."
+    mas = "A movement along the supply curve, which is an increase in the quantity supplied."; ld = "A leftward shift of the demand curve, which is a decrease in demand."; ls = "A leftward shift of the supply curve, which is a decrease in supply."
+    table = {
+        "own_price": (mad, "The good's own price changed, which moves the market along the demand curve rather than shifting it.", [(sd, "Treats a change in the good's own price as a shift of the demand curve."), (ss, "Attributes a change caused by the good's own price to the supply curve."), (mas, "Confuses the demand-side response to a lower price with a movement along the supply curve."), (ld, "Reverses the direction of the change and treats it as a shift.")], "2.1"),
+        "income": (sd, "Income is a determinant of demand, so a change in income shifts the demand curve.", [(mad, "Treats a change in income as a movement along the demand curve, which only a change in the good's own price causes."), (ss, "Attributes a change in consumers' income to the supply curve."), (mas, "Confuses an income-driven change in demand with a movement along the supply curve."), (ld, "Reverses the direction of the demand shift for a normal good.")], "2.1"),
+        "input": (ss, "The price of an input is a determinant of supply, so a fall in it shifts the supply curve to the right.", [(mas, "Treats a change in an input price as a movement along the supply curve, which only a change in the good's own price causes."), (sd, "Attributes a change in production costs to the demand curve."), (mad, "Confuses a cost-driven change in supply with a movement along the demand curve."), (ls, "Reverses the direction of the supply shift when an input becomes cheaper.")], "2.2"),
+    }
+    ans, why, wr, topic = table[case]
+    k, ds = sent_opts(ans, why, wr)
+    return mk("mi_movement_vs_shift", topic, "1.B", f"Consider the following situation: {desc} Which of the following correctly describes the change in the market?", k, ds, rng, concept="movement along versus shift of a curve", path="fixed vetted scenario-to-description table", facts=[f"case={case}"], est=50)
+
+

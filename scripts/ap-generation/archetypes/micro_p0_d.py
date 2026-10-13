@@ -22,9 +22,9 @@ STRUCT = [
 
 def mi_structure_identify(rng):
     desc, ans = STRUCT[rng.randrange(4)]
-    others = [s[1] for s in STRUCT if s[1] != ans] + ["Natural monopoly"]
+    others = [s[1] for s in STRUCT if s[1] != ans] + ["Cartelized oligopoly"]
     why = {"Monopoly": "Mistakes any large market share or barriers for a single seller with no close substitutes.", "Monopolistic competition": "Mistakes product differentiation with free entry for a market with barriers or a single seller.", "Oligopoly": "Mistakes interdependent behavior among a few firms for a market with many sellers or one seller.",
-           "Perfect competition": "Mistakes many sellers for price-taking firms with identical products and free entry.", "Natural monopoly": "Treats a market with economies of scale over the whole demand range as the structure described, which the description does not mention."}
+           "Perfect competition": "Mistakes many sellers for price-taking firms with identical products and free entry.", "Cartelized oligopoly": "Describes firms that coordinate their output, which the description does not state."}
     k, ds = sent_opts(ans, f"The description (single/few/many sellers, product type, and entry) matches {ans.lower()}.", [(o, why[o]) for o in others])
     return mk("mi_structure_identify", "4.1", "1.B", f"A market has the following characteristics: {desc}. Which market structure does this describe?", k, ds, rng, concept="identify a market structure from its characteristics", path="fixed vetted structure descriptions", facts=[f"ans={ans}"], est=45)
 
@@ -149,10 +149,10 @@ def mi_monopoly_dwl(rng):
 
 
 def mi_monopoly_vs_pc(rng):
-    k, ds = sent_opts("The monopolist produces a smaller quantity and charges a higher price.", "With MR below demand, the monopolist restricts output below the competitive level and charges a price above marginal cost.",
-                      [("The monopolist produces a larger quantity and charges a lower price.", "Reverses the effect of market power on quantity and price."), ("The monopolist produces the same quantity and charges a higher price.", "Ignores that a monopolist restricts output to raise the price."), ("The monopolist produces a smaller quantity and charges the same price.", "Believes output restriction does not raise the price."),
-                       ("The monopolist produces a larger quantity and charges a higher price.", "Combines a higher price with higher output, which contradicts the downward-sloping demand curve."), ("The monopolist produces where price equals marginal cost and earns zero economic profit.", "Describes the perfectly competitive outcome.")])
-    return mk("mi_monopoly_vs_pc", "4.2", "2.B", "Compared with a perfectly competitive industry that has the same costs, a profit-maximizing single-price monopolist will", k, ds, rng, concept="monopoly versus perfect competition", path="fixed vetted comparison; verified by the exact MR = MC module showing Q_m < Q_c and P_m > MC", facts=["variant=1"], est=50)
+    k, ds = sent_opts("produce a smaller quantity and charge a higher price.", "With MR below demand, the monopolist restricts output below the competitive level and charges a price above marginal cost.",
+                      [("produce a larger quantity and charge a lower price.", "Reverses the effect of market power on quantity and price."), ("produce the same quantity and charge a higher price.", "Ignores that a monopolist restricts output to raise the price."), ("produce a smaller quantity and charge the same price.", "Believes output restriction does not raise the price."),
+                       ("produce a larger quantity and charge a higher price.", "Combines a higher price with higher output, which contradicts the downward-sloping demand curve."), ("produce where price equals marginal cost and earn zero economic profit.", "Describes the perfectly competitive outcome.")])
+    return mk("mi_monopoly_vs_pc", "4.2", "1.D", "Compared with a perfectly competitive industry that has the same costs, a profit-maximizing single-price monopolist will", k, ds, rng, concept="monopoly versus perfect competition", path="fixed vetted comparison; verified by the exact MR = MC module showing Q_m < Q_c and P_m > MC", facts=["variant=1"], est=50)
 
 
 # ======================= 4.3 가격 차별 =======================
@@ -171,7 +171,7 @@ def mi_pd_perfect(rng):
 
 
 def mi_pd_markets(rng):
-    e1 = rng.choice([0.5, 0.8]); e2 = rng.choice([2.0, 3.0])
+    e1 = rng.choice([1.5, 2.0]); e2 = rng.choice([3.0, 4.0])
     a_first = rng.random() < 0.5
     ea, eb = (e1, e2) if a_first else (e2, e1)
     hi = "A" if ea < eb else "B"; lo = "B" if hi == "A" else "A"
@@ -275,10 +275,10 @@ def mi_game_dominant(rng):
 
 
 def mi_cartel_cheat(rng):
-    k, ds = sent_opts("Each member can earn more by producing extra output while the others keep to their quotas, so the agreement tends to break down.", "Each cartel member has an incentive to cheat: producing more raises its own profit while the rest restrict output, which makes the cartel unstable.",
-                      [("The cartel earns less than a competitive industry, so members leave immediately.", "A cartel that holds together earns monopoly-like profit, more than competitive firms."), ("Demand for the cartel's product is perfectly elastic, so quotas have no effect.", "Cartel demand is downward sloping; quotas raise the price."), ("Each member earns the same profit whether or not it cheats, so cheating is irrelevant.", "Cheating raises the cheater's profit in the short run."),
-                       ("Cartels are stable because each firm's best response is to keep its quota.", "The dominant strategy in the underlying game is to cheat, not to cooperate."), ("The government requires cartels to price at marginal cost.", "Cartels are generally illegal, but they are not required to price at marginal cost.")])
-    return mk("mi_cartel_cheat", "4.5", "2.B", "Why are cartel agreements among oligopolists often unstable?", k, ds, rng, concept="incentive to cheat in a cartel", path="fixed vetted explanation tied to the prisoners'-dilemma payoff structure", facts=["variant=1"], est=50)
+    k, ds = sent_opts("Each member gains by producing extra output while the others keep their quotas.", "Each cartel member has an incentive to cheat: producing more raises its own profit while the rest restrict output, which makes the cartel unstable.",
+                      [("A cartel earns less than a competitive industry, so members leave it at once.", "A cartel that holds together earns monopoly-like profit, more than competitive firms."), ("The demand for the cartel's product is perfectly elastic, so quotas have no effect.", "Cartel demand is downward sloping; quotas raise the price."), ("Each member earns the same profit whether or not it cheats, so cheating does not matter.", "Cheating raises the cheater's profit in the short run."),
+                       ("Cartels are stable because every firm's best response is to keep its own quota.", "The dominant strategy in the underlying game is to cheat, not to cooperate."), ("The government requires every cartel to price at marginal cost, which ends the agreement.", "Cartels are generally illegal, but they are not required to price at marginal cost.")])
+    return mk("mi_cartel_cheat", "4.5", "2.A", "Why are cartel agreements among oligopolists often unstable?", k, ds, rng, concept="incentive to cheat in a cartel", path="fixed vetted explanation tied to the prisoners'-dilemma payoff structure", facts=["variant=1"], est=50)
 
 
 # ======================= 5 요소시장 =======================
@@ -332,7 +332,7 @@ def mi_factor_derived(rng):
 
 
 LABOR_EVENTS = [("The price of the product the workers help produce rises.", +1, "demand", "marginal revenue product rises"), ("A technological advance raises each worker's productivity.", +1, "demand", "marginal product and marginal revenue product rise"), ("The price of the product the workers help produce falls.", -1, "demand", "marginal revenue product falls"),
-                ("The number of qualified workers in the market increases because of immigration.", +1, "supply", "more workers are willing to work at each wage"), ("The wage in a similar occupation rises sharply.", -1, "supply", "some workers move to the other occupation"), ("Workers' training costs for this occupation rise.", -1, "supply", "fewer workers choose this occupation")]
+                ("The number of qualified workers in the market increases because of immigration.", +1, "supply", "more workers are willing to work at each wage"), ("The wage in a similar occupation rises sharply.", -1, "supply", "some workers move to the other occupation"), ("The cost that workers themselves must pay to train for this occupation rises.", -1, "supply", "fewer workers choose this occupation")]
 
 
 def mi_labor_market_shift(rng):
@@ -348,7 +348,7 @@ def mi_labor_market_shift(rng):
     for c, w in models:
         if c in seen: continue
         seen.add(c); wr.append((f"The equilibrium wage {dir_word(c[0])}, and equilibrium employment {dir_word(c[1])}.", w))
-    k, ds = sent_opts(f"The equilibrium wage {dir_word(key[0])}, and equilibrium employment {dir_word(key[1])}.", f"The event shifts labor {cn} ({why}); with labor {cx} unchanged, wage and employment move as the shift implies.", wr)
+    k, ds = sent_opts(f"The equilibrium wage {dir_word(key[0])}, and equilibrium employment {dir_word(key[1])}.", f"The event shifts labor {cn} to the {'right' if d > 0 else 'left'} ({why}); with labor {cx} unchanged, the wage {dir_word(key[0])} and employment {dir_word(key[1])}.", wr)
     stem = f"Consider a perfectly competitive labor market. The following event occurs: {ev} Which of the following describes the effect on the equilibrium wage and the equilibrium quantity of labor employed?"
     return mk("mi_labor_market_shift", "5.2", "3.A", stem, k, ds, rng, concept="labor demand and supply shifts", path="shift rule table vs numeric linear-market simulation", facts=[f"event={ev[:40]}", f"key={key}"], est=60)
 
@@ -382,16 +382,16 @@ def mi_monopsony_numeric(rng):
 
 
 def mi_monopsony_concept(rng):
-    k, ds = sent_opts("A monopsonist hires fewer workers and pays a lower wage than a competitive labor market would.", "The monopsonist's marginal factor cost exceeds the wage, so it hires where MRP = MFC, a smaller quantity at a lower wage than in competition.",
-                      [("A monopsonist hires more workers and pays a higher wage than a competitive labor market would.", "Reverses the effect of buyer power on employment and the wage."), ("A monopsonist hires fewer workers but pays a higher wage than a competitive labor market would.", "Buyer power lowers the wage; it does not raise it."), ("A monopsonist hires the same number of workers and pays the same wage as a competitive market.", "Ignores that marginal factor cost exceeds the wage for a monopsonist."),
-                       ("A monopsonist hires workers until marginal revenue product equals the wage.", "That is the competitive hiring rule; a monopsonist hires where MRP equals MFC."), ("A monopsonist pays workers their marginal revenue product.", "A monopsonist pays a wage below MRP.")])
+    k, ds = sent_opts("hire fewer workers and pay a lower wage.", "The monopsonist's marginal factor cost exceeds the wage, so it hires where MRP = MFC, a smaller quantity at a lower wage than in competition.",
+                      [("hire more workers and pay a higher wage.", "Reverses the effect of buyer power on employment and the wage."), ("hire fewer workers but pay a higher wage.", "Buyer power lowers the wage; it does not raise it."), ("hire the same number of workers and pay the same wage.", "Ignores that marginal factor cost exceeds the wage for a monopsonist."),
+                       ("hire workers until marginal revenue product equals the wage.", "That is the competitive hiring rule; a monopsonist hires where MRP equals MFC."), ("pay each worker the full marginal revenue product.", "A monopsonist pays a wage below MRP.")])
     return mk("mi_monopsony_concept", "5.4", "2.A", "Compared with a perfectly competitive labor market, a monopsonist in the labor market will", k, ds, rng, concept="monopsony employment and wage", path="fixed vetted outcomes verified by the numeric monopsony model (MFC above the supply curve)", facts=["variant=1"], est=50)
 
 
 def mi_min_wage_monopsony(rng):
-    k, ds = sent_opts("Employment could increase, because the minimum wage raises the wage and removes the monopsonist's incentive to hire fewer workers.", "A binding minimum wage between the monopsony wage and the competitive wage makes the marginal factor cost equal to the wage, so the firm hires more workers.",
-                      [("Employment must fall, because any minimum wage reduces the quantity of labor demanded.", "Applies the competitive-market result to a monopsony."), ("Employment is unchanged, because the monopsonist already pays the minimum wage.", "A binding minimum wage exceeds the monopsony wage."), ("Employment falls because the monopsonist's marginal factor cost increases.", "A minimum wage below the competitive wage lowers the marginal factor cost over the relevant range, so employment can rise."),
-                       ("Employment increases without limit, because the monopsonist's marginal revenue product is constant.", "Marginal revenue product eventually falls, so employment cannot rise without limit."), ("Employment increases only if the minimum wage exceeds the competitive wage.", "A minimum wage above the competitive wage would reduce employment.")])
+    k, ds = sent_opts("Employment will increase, because the wage floor stops the firm from lowering the wage to hire fewer workers.", "A binding minimum wage between the monopsony wage and the competitive wage makes the marginal factor cost equal to the wage up to the supply curve, so the firm hires more workers.",
+                      [("Employment will fall, because any minimum wage reduces the quantity of labor demanded.", "Applies the competitive-market result to a monopsony."), ("Employment will not change, because the monopsonist already pays at least the minimum wage.", "A binding minimum wage exceeds the monopsony wage, so it changes the firm's choices."), ("Employment will fall, because the monopsonist's marginal factor cost rises above its marginal revenue product.", "Over the range up to the supply curve the minimum wage makes MFC equal to the wage, which is below MRP, so hiring expands."),
+                       ("Employment will rise without limit, because the monopsonist's marginal revenue product stays constant.", "Marginal revenue product falls as more workers are hired, so employment cannot rise without limit."), ("Employment will rise only if the minimum wage exceeds the competitive wage.", "A minimum wage above the competitive wage would reduce employment, not raise it.")])
     return mk("mi_min_wage_monopsony", "5.4", "2.B", "In a labor market with a single large employer (a monopsonist), a binding minimum wage set above the monopsony wage but below the competitive wage will have which of the following effects?", k, ds, rng, concept="minimum wage in a monopsony", path="fixed vetted outcome verified by the numeric monopsony model with a wage floor", facts=["variant=1"], est=60)
 
 
@@ -430,7 +430,7 @@ def mi_hire_rule(rng):
     more = mrp > w
     ans = "Hire more workers, because the marginal revenue product of the next worker exceeds the wage." if more else "Hire fewer workers, because the wage exceeds the marginal revenue product of the last worker."
     other = "Hire fewer workers, because the wage exceeds the marginal revenue product of the last worker." if more else "Hire more workers, because the marginal revenue product of the next worker exceeds the wage."
-    k, ds = sent_opts(ans, f"A competitive firm hires labor until MRP equals the wage; here MRP is {usd(mrp)} and the wage is {usd(w)}, so it should adjust employment accordingly.", [(other, "Reverses the marginal hiring rule."), ("Keep employment unchanged, because both the wage and the marginal revenue product are positive.", "Positive values do not imply that profit is maximized; MRP must equal the wage."),
+    k, ds = sent_opts(ans, f"A competitive firm hires labor until MRP equals the wage; here MRP is {usd(mrp)} and the wage is {usd(w)}, so the firm should hire {'more' if more else 'fewer'} workers until MRP equals the wage.", [(other, "Reverses the marginal hiring rule."), ("Keep employment unchanged, because both the wage and the marginal revenue product are positive.", "Positive values do not imply that profit is maximized; MRP must equal the wage."),
                                                                                                                                              ("Hire more workers, because the average product of labor is above the wage.", "Compares average product, not marginal revenue product, with the wage."), ("Hire fewer workers, because total revenue exceeds total cost.", "Compares totals instead of the marginal hiring rule."), ("Shut down, because the wage and MRP differ.", "Confuses a hiring adjustment with a shutdown decision.")])
     stem = f"A firm in perfectly competitive output and labor markets pays a wage of {usd(w)}. The marginal revenue product of its last worker is {usd(mrp)}. To maximize profit, what should the firm do?"
     return mk("mi_hire_rule", "5.3", "2.A", stem, k, ds, rng, concept="hire where marginal revenue product equals the wage", path="direct comparison of MRP and the wage vs sympy inequality", facts=[f"mrp={mrp}", f"w={w}", f"more={more}"], est=50)
@@ -513,17 +513,23 @@ PG = [("a lighthouse that guides all ships passing through a harbor", "public go
 
 def mi_public_good(rng):
     desc, ans, feat = PG[rng.randrange(4)]
-    others = [p[1] for p in PG if p[1] != ans] + ["natural monopoly"]
-    why = {"public good": "Treats a good that is non-rival and non-excludable as one of the other categories.", "private good": "Treats a rival and excludable good as non-rival or non-excludable.", "common resource": "Treats a rival, non-excludable good as one that is non-rival.", "club good": "Treats a non-rival, excludable good as a good that is non-excludable or rival.", "natural monopoly": "Confuses a classification by rivalry and excludability with a market structure."}
-    k, ds = sent_opts(ans[0].upper() + ans[1:], f"The good is {feat}, which defines a {ans}.", [(o[0].upper() + o[1:], why[o]) for o in others])
-    return mk("mi_public_good", "6.3", "1.B", f"Consider {desc}. Which type of good is this?", k, ds, rng, concept="classify goods by rivalry and excludability", path="fixed vetted classification table", facts=[f"ans={ans}"], est=45)
+    lab = {"public good": "Public good", "private good": "Private good", "common resource": "Common resource", "club good": "Club good"}
+    pairs = {"public good": "non-rival and non-excludable", "private good": "rival and excludable", "common resource": "rival and non-excludable", "club good": "non-rival and excludable"}
+    key_t = f"{lab[ans]}: {pairs[ans]}"
+    wrongs = []
+    for o in pairs:
+        if o == ans: continue
+        wrongs.append((f"{lab[o]}: {pairs[o]}", f"The good described is {feat}, so it is not a {o} ({pairs[o]})."))
+    wrongs.append((f"{lab[ans]}: {pairs[[x for x in pairs if x != ans][0]]}", f"The label is right but the attributes are wrong; a {ans} is {feat}."))
+    k, ds = sent_opts(key_t, f"The good is {feat}, which defines a {ans}.", wrongs)
+    return mk("mi_public_good", "6.3", "1.B", f"Consider {desc}. Which of the following correctly classifies this good and gives its attributes?", k, ds, rng, concept="classify goods by rivalry and excludability", path="fixed vetted classification table", facts=[f"ans={ans}"], est=45)
 
 
 def mi_free_rider(rng):
     k, ds = sent_opts("People can use it without paying, so firms cannot earn enough revenue to supply it.", "Non-excludability creates a free-rider problem: people have no incentive to pay, so the market underprovides the public good.",
                       [("Public goods are rival, so private firms provide too much of them in practice.", "Public goods are non-rival, and the problem is underprovision."), ("Public goods have no social benefit, so no one wants them.", "Public goods usually have large social benefits."), ("The marginal cost of serving one more user is high, so firms avoid providing it.", "Public goods have near-zero marginal cost of serving another user."),
                        ("Governments always provide public goods at zero cost to taxpayers.", "Governments finance public goods through taxes; they are not costless."), ("Consumers value public goods less than they value private goods.", "Valuation is not the reason; the inability to exclude non-payers is the reason.")])
-    return mk("mi_free_rider", "6.3", "2.B", "Why does a competitive market tend to provide too little of a pure public good?", k, ds, rng, concept="free-rider problem", path="fixed vetted explanation", facts=["variant=1"], est=50)
+    return mk("mi_free_rider", "6.3", "2.A", "Why does a competitive market tend to provide too little of a pure public good?", k, ds, rng, concept="free-rider problem", path="fixed vetted explanation", facts=["variant=1"], est=50)
 
 
 @retry_sep

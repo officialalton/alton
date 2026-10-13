@@ -19,7 +19,7 @@
  {
   "id": "mi_cartel_cheat",
   "topic": "4.5",
-  "skill": "2.B",
+  "skill": "2.A",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
@@ -112,9 +112,9 @@
   ],
   "misconceptions": [
    "Chooses the quantity where marginal cost is lowest, which is at zero output.",
-   "Chooses the right edge of the graph where costs are highest.",
-   "Chooses the quantity where marginal cost reaches the price intercept.",
-   "Chooses a quantity where marginal cost is still below average total cost, so the average is still falling."
+   "Chooses the right edge of the graph.",
+   "Chooses a quantity beyond the crossing, where marginal cost is above average total cost and the average has begun to rise.",
+   "Chooses a quantity where marginal cost is below average total cost, so the average is still falling."
   ],
   "bc": false
  },
@@ -298,8 +298,8 @@
    "fixed vetted descriptions mapped to a system label"
   ],
   "misconceptions": [
-   "Assumes prices and voluntary exchange alone drive decisions, ignoring the planning or custom the description names.",
-   "Treats any government role as a mix; the description does not combine market exchange with a meaningful government role.",
+   "Assumes prices and voluntary exchange alone drive all decisions, although the description names central direction, a mixed role for government, or custom.",
+   "Treats the economy as a mix of market exchange and government direction, but the description does not describe both.",
    "Takes government direction of every decision as the defining feature, which the description does not contain.",
    "Confuses an economic system with a market structure; a monopoly is a market structure, not a way to answer the three basic economic questions."
   ],
@@ -316,7 +316,7 @@
   ],
   "misconceptions": [
    "That is productive efficiency, not allocative efficiency.",
-   "Average fixed cost keeps falling and has no minimum, so it is not a standard efficiency criterion.",
+   "That means the firm should expand output; it is not a statement of efficiency.",
    "Describes a firm that should expand output; it is not an efficiency condition.",
    "That indicates zero economic profit, not allocative efficiency."
   ],
@@ -384,7 +384,7 @@
   ],
   "misconceptions": [
    "Reports the market equilibrium quantity instead of the overproduction.",
-   "Reports the price at the market equilibrium.",
+   "Reports half of the overproduction.",
    "Reports the vertical distance between S and MSC (the external cost per unit).",
    "Reports the efficient quantity instead of the overproduction."
   ],
@@ -495,7 +495,7 @@
  {
   "id": "mi_free_rider",
   "topic": "6.3",
-  "skill": "2.B",
+  "skill": "2.A",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
@@ -825,10 +825,10 @@
    "fixed vetted outcome verified by the numeric monopsony model with a wage floor"
   ],
   "misconceptions": [
-   "A binding minimum wage exceeds the monopsony wage.",
-   "A minimum wage below the competitive wage lowers the marginal factor cost over the relevant range, so employment can rise.",
+   "A binding minimum wage exceeds the monopsony wage, so it changes the firm's choices.",
+   "Over the range up to the supply curve the minimum wage makes MFC equal to the wage, which is below MRP, so hiring expands.",
    "Applies the competitive-market result to a monopsony.",
-   "A minimum wage above the competitive wage would reduce employment."
+   "A minimum wage above the competitive wage would reduce employment, not raise it."
   ],
   "bc": false
  },
@@ -859,10 +859,10 @@
    "analytic MR = MC intersection vs grid search for the crossing of the plotted lines"
   ],
   "misconceptions": [
-   "Reports the demand intercept.",
+   "Reports the profit-maximizing quantity as the price.",
    "Reads the price from the marginal cost curve at the profit-maximizing quantity.",
-   "Reads the marginal revenue value at the competitive quantity as the price.",
-   "Reports the profit-maximizing quantity as the price."
+   "Reports the demand intercept.",
+   "Charges the price at the revenue-maximizing quantity (where marginal revenue is zero)."
   ],
   "bc": false
  },
@@ -876,17 +876,17 @@
    "exact-fraction MR = MC module vs sympy derivative of profit"
   ],
   "misconceptions": [
-   "Sets total revenue per unit equal to marginal cost using demand instead of marginal revenue.",
-   "Sets price equal to marginal cost, which gives the competitive quantity.",
-   "Reports the profit-maximizing price at the competitive quantity.",
-   "Reports the demand intercept as the quantity."
+   "Reports marginal cost as the price.",
+   "Charges the price at the revenue-maximizing quantity (where marginal revenue is zero).",
+   "Reports the quantity instead of the price.",
+   "Reports the demand intercept as the price."
   ],
   "bc": false
  },
  {
   "id": "mi_monopoly_vs_pc",
   "topic": "4.2",
-  "skill": "2.B",
+  "skill": "1.D",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
@@ -947,7 +947,7 @@
    "Pays the marginal factor cost instead of the wage on the supply curve.",
    "Hires where MRP equals the wage (the competitive rule) instead of where MRP equals MFC.",
    "Hires one worker fewer than the quantity where MRP equals MFC.",
-   "Adds an arbitrary markup to the supply-curve wage."
+   "Hires two workers more than the profit-maximizing quantity."
   ],
   "bc": false
  },
@@ -961,10 +961,10 @@
    "fixed vetted scenario-to-description table"
   ],
   "misconceptions": [
-   "Treats a change caused by something other than the good's own price as a movement along the curve.",
-   "Reverses the direction of the demand shift.",
-   "Mistakes a change caused by a supply determinant for a movement along the supply curve.",
-   "Attributes a demand-side or own-price change to the supply curve."
+   "Treats a change in income as a movement along the demand curve, which only a change in the good's own price causes.",
+   "Reverses the direction of the demand shift for a normal good.",
+   "Confuses an income-driven change in demand with a movement along the supply curve.",
+   "Attributes a change in consumers' income to the supply curve."
   ],
   "bc": false
  },
@@ -1182,10 +1182,10 @@
    "fixed vetted long-run conditions"
   ],
   "misconceptions": [
-   "Price above average total cost would imply positive profit and entry.",
    "Price below average total cost means an economic loss, not a normal profit.",
+   "At the profit-maximizing output marginal revenue equals marginal cost.",
    "Positive profit would attract entry, so it cannot persist in the long run.",
-   "Confuses the long-run conditions with relationships among other cost curves."
+   "A price below average total cost is a loss, which would cause exit."
   ],
   "bc": false
  },
@@ -1304,7 +1304,7 @@
    "Shifts the supply curve by the tax in the wrong direction.",
    "Keeps the pre-tax equilibrium quantity, ignoring the effect of the tax.",
    "Reports the price consumers pay instead of the quantity.",
-   "Shifts both curves by the tax."
+   "Assumes buyers pay the whole tax and reads the quantity demanded at the pre-tax price plus the tax."
   ],
   "bc": false
  },
@@ -1353,7 +1353,7 @@
   ],
   "misconceptions": [
    "Reports the vertical distance between D and MSB (the external benefit per unit).",
-   "Reports the equilibrium price.",
+   "Reports half of the shortfall.",
    "Reports twice the shortfall.",
    "Reports the market equilibrium quantity instead of the shortfall."
   ],
@@ -1472,9 +1472,9 @@
   ],
   "misconceptions": [
    "Chooses the quantity just after marginal cost exceeds the price.",
-   "Chooses the quantity where marginal cost first equals the fixed cost.",
-   "Chooses the quantity that minimizes average total cost instead of the quantity where price equals marginal cost.",
-   "Chooses the largest quantity in the table."
+   "Chooses zero output because total cost is lowest at zero output.",
+   "Chooses the quantity at which average total cost is lowest instead of equating price with marginal cost.",
+   "Chooses one unit fewer than the profit-maximizing quantity, stopping before the last unit whose marginal cost is at most the price."
   ],
   "bc": false
  },
@@ -1522,10 +1522,10 @@
    "fixed vetted classification table"
   ],
   "misconceptions": [
-   "Treats a rival and excludable good as non-rival or non-excludable.",
-   "Treats a rival, non-excludable good as one that is non-rival.",
-   "Treats a good that is non-rival and non-excludable as one of the other categories.",
-   "Confuses a classification by rivalry and excludability with a market structure."
+   "The good described is non-rival and excludable, so it is not a private good (rival and excludable).",
+   "The good described is non-rival and excludable, so it is not a common resource (rival and non-excludable).",
+   "The good described is non-rival and excludable, so it is not a public good (non-rival and non-excludable).",
+   "The label is right but the attributes are wrong; a club good is non-rival and excludable."
   ],
   "bc": false
  },
@@ -1641,27 +1641,27 @@
    "min of operating loss and fixed cost (exact) vs sympy minimum and P < AVC rule"
   ],
   "misconceptions": [
-   "Reaches the wrong decision and attaches the loss of the other scenario.",
-   "Reaches the wrong decision and reports total cost as the loss.",
-   "Reaches the wrong decision by comparing price with the wrong cost measure; the loss shown is the loss that goes with that wrong decision.",
-   "Chooses the right action but reports the loss from the other scenario."
+   "Shuts down because price is below average total cost, but price covers average variable cost, so producing loses less than the fixed cost that shutting down would lose.",
+   "Chooses the wrong action and reports total cost as the loss instead of the shortfall of revenue.",
+   "Chooses the right action but reports total cost as the loss instead of the shortfall of revenue.",
+   "Chooses the right action but reports the loss of the shut-down alternative instead of the loss that goes with the action chosen."
   ],
   "bc": false
  },
  {
   "id": "mi_shutdown_rule",
   "topic": "3.6",
-  "skill": "2.B",
+  "skill": "2.A",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "fixed vetted price-versus-cost comparison table"
+   "fixed vetted price-versus-cost comparison table; every wrong option contradicts the stated condition"
   ],
   "misconceptions": [
-   "Claims profit although price is not above average total cost.",
-   "Treats any loss as a reason to shut down; the rule compares price with average variable cost, not with average total cost.",
-   "Applies the shutdown rule when price exceeds average variable cost.",
-   "Uses price equals average total cost as the output rule; profit maximization requires marginal cost to equal price."
+   "Price below average total cost is a loss, but the shutdown rule compares price with average variable cost.",
+   "Profit requires price above average total cost, which is not true here.",
+   "A loss alone is not the shutdown rule; the firm shuts down only if price is below average variable cost.",
+   "A competitive firm produces where price equals marginal cost, not where price equals average total cost."
   ],
   "bc": false
  },
@@ -1678,7 +1678,7 @@
    "Mistakes product differentiation with free entry for a market with barriers or a single seller.",
    "Mistakes interdependent behavior among a few firms for a market with many sellers or one seller.",
    "Mistakes any large market share or barriers for a single seller with no close substitutes.",
-   "Treats a market with economies of scale over the whole demand range as the structure described, which the description does not mention."
+   "Describes firms that coordinate their output, which the description does not state."
   ],
   "bc": false
  },
@@ -1864,8 +1864,8 @@
   "misconceptions": [
    "Buys one more unit of X than the utility-maximizing quantity.",
    "Splits the budget equally between X and Y by spending.",
-   "Buys no X because Y has smaller marginal utility numbers.",
-   "Buys X until its marginal utility falls to the lowest marginal utility of Y, ignoring prices."
+   "Buys no X because X is the more expensive good and the cheaper good should be preferred.",
+   "Buys units of X until the next unit of X has less marginal utility than the lowest-valued unit of Y, ignoring prices."
   ],
   "bc": false
  }
