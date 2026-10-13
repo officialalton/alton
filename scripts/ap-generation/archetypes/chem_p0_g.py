@@ -102,16 +102,16 @@ def chf_long_thermo(rng):
              [R("A1", "expression", "Uses $\\Delta G^\\circ=\\Delta H^\\circ-T\\Delta S^\\circ$ with entropy converted to kJ", ["ΔG = ΔH − TΔS", "J to kJ"], err=["omits the unit conversion"]),
               R("A2", "numeric", f"Calculates $\\Delta G^\\circ$ (about {dG:.1f} kJ/mol) with units", [f"{dG:.1f}"], requires="A1", nums=True, units=True, err=["uses a Celsius temperature"])]),
         part("B", f"Determine the temperature at which the reaction changes between thermodynamically favorable and unfavorable, and state whether the reaction is favorable above or below that temperature. Justify your answer.", 3, "determine", ["5.B", "6.D"],
-             f"$\\Delta G^\\circ=0$ at $T=\\Delta H^\\circ/\\Delta S^\\circ={Tx:.0f}\\text{{ K}}$; the reaction is favorable {fav} this temperature because $\\Delta S^\\circ$ is {'positive' if dS > 0 else 'negative'}.",
+             f"$\\Delta G^\\circ=0$ at $T=\\Delta H^\\circ/\\Delta S^\\circ={Tx:.1f}\\text{{ K}}$; the reaction is favorable {fav} this temperature because $\\Delta S^\\circ$ is {'positive' if dS > 0 else 'negative'}.",
              [R("B1", "expression", "Sets $\\Delta G^\\circ=0$ and solves $T=\\Delta H^\\circ/\\Delta S^\\circ$", ["ΔG = 0", "T = ΔH/ΔS"], err=["divides ΔS by ΔH"]),
-              R("B2", "numeric", f"Calculates the temperature (about {Tx:.0f} K)", [f"{Tx:.0f}"], requires="B1", nums=True, units=True, err=["leaves ΔH in kJ"]),
+              R("B2", "numeric", f"Calculates the temperature (about {Tx:.1f} K)", [f"{Tx:.1f}"], requires="B1", nums=True, units=True, err=["leaves ΔH in kJ"]),
               R("B3", "justification", f"States the reaction is favorable {fav} that temperature, citing the sign of $\\Delta S^\\circ$ in $\\Delta G^\\circ=\\Delta H^\\circ-T\\Delta S^\\circ$", [fav, "sign of ΔS"], requires="B2", err=["links favorability to the sign of ΔH alone"])]),
-        part("C", f"Calculate the equilibrium constant, $K$, at ${T:g}\\text{{ K}}$.", 2, "calculate", ["5.B", "5.F"], f"$K=e^{{-\\Delta G^\\circ/RT}}\\approx {K:.2g}$.",
+        part("C", f"Calculate the equilibrium constant, $K$, at ${T:g}\\text{{ K}}$.", 2, "calculate", ["5.B", "5.F"], f"$K=e^{{-\\Delta G^\\circ/RT}}\\approx {sn(K, 2)}$.",
              [R("C1", "expression", "Uses $\\Delta G^\\circ=-RT\\ln K$ with R in J/(mol·K) and ΔG° in joules", ["ΔG = −RT ln K"], err=["uses kJ with R in J"]),
-              R("C2", "numeric", f"Calculates $K$ (about {K:.2g})", [f"{K:.2g}"], requires="C1", nums=True, err=["omits the negative sign"])]),
+              R("C2", "numeric", f"Calculates $K$ (about {sn(K, 2)})", [f"{sn(K, 2)}"], requires="C1", nums=True, err=["omits the negative sign"])]),
         part("D", "Sketch a diagram of the galvanic cell described in the stimulus. Label the anode, the cathode and the direction of electron flow in the external wire, and calculate the standard cell potential.", 2, "calculate", ["3.B", "5.F"], f"The anode is the half-cell with the less positive reduction potential ({a}); $E^\\circ_{{cell}}={E:.2f}\\text{{ V}}$.",
              [R("D1", "diagram", f"Draws the two half-cells with a wire and salt bridge, labels the {a} half-cell as the anode (more negative reduction potential, where oxidation occurs) and the other as the cathode, and shows electrons flowing from the anode through the wire to the cathode", [a, "anode", "cathode"], err=["identifies the more positive half-cell as the anode"]),
-              R("D2", "numeric", f"Calculates $E^\\circ_{{cell}}={E:.2f}\\text{{ V}}$ (cathode minus anode)", [f"{E:.2f}"], requires="D1", nums=True, units=True, err=["adds the potentials"])]),
+              R("D2", "numeric", f"Calculates $E^\\circ_{{cell}}={E:.2f}\\text{{ V}}$ (cathode minus anode)", [f"{E:.2f}"], nums=True, units=True, err=["adds the potentials"])]),
         part("E", f"Calculate $\\Delta G^\\circ$ for the cell reaction, if {n} moles of electrons are transferred per mole of reaction, and state what the sign of the result indicates.", 1, "calculate", ["5.F", "6.D"], f"$\\Delta G^\\circ=-nFE^\\circ={dGe:.0f}\\text{{ kJ/mol}}$; the negative value shows the cell reaction is thermodynamically favorable.",
              [R("E1", "numeric", f"Calculates $\\Delta G^\\circ$ (about {dGe:.0f} kJ/mol) and states that the negative sign means favorable", [f"{dGe:.0f}", "favorable"], nums=True, err=["omits the number of electrons"])]),
     ]
@@ -144,13 +144,13 @@ def chf_long_kinetics(rng):
     rows = [[str(t), f"{a:.4f}"] for t, a in zip(ts, As)]
     stim = {"kind": "table", "description": "Concentration of A in the reaction A → products at 310 K", "data": {"x_label": "Time (s)", "y_label": "[A] (M)", "rows": rows}}
     parts = [
-        part("A", "Determine the order of the reaction with respect to A. Describe the graph you would plot to test your answer and explain how the graph supports your conclusion.", 3, "determine", ["3.A", "6.B"],
-             f"The reaction is {nm} order. A graph of {plot} gives a straight line, while the graphs of the other two linearized forms curve.",
+        part("A", "Determine the order of the reaction with respect to A. Describe the linearized plot you would make to test your answer and explain how that plot supports your conclusion.", 3, "determine", ["3.A", "6.B"],
+             f"The reaction is {nm} order. A plot of {plot} gives a straight line, while the other two linearized plots curve.",
              [R("A1", "claim", f"States that the reaction is {nm} order in A", [f"{nm} order"], err=["picks the order whose plot is curved"]),
-              R("A2", "graph", f"Names the axes of the graph to plot: {plot}", [plot], err=["plots [A] versus t only"]),
-              R("A3", "justification", f"Explains that the points of this graph fall on a straight line, whereas the other linearized plots are curved", ["straight line", "curved"], requires="A2", err=["cites only that [A] decreases with time"])]),
-        part("B", f"Using the graph, determine the rate constant, $k$. Give the value as a decimal number (not in scientific notation) with units.", 3, "calculate", ["3.A", "5.F"], f"$k=|\\text{{slope}}|\\approx {slope:.4f}{kun}$.",
-             [R("B1", "numeric", f"Obtains the slope magnitude of the linear graph (about {slope:.4f} in the units of the graph)", [f"{slope:.4f}"], nums=True, err=["uses a slope from the curved graph"]),
+              R("A2", "graph", f"Names the axes of the linearized plot to make: {plot}", [plot], err=["plots [A] versus t only"]),
+              R("A3", "justification", f"Explains that the points of this plot fall on a straight line, whereas the other linearized plots are curved", ["straight line", "curved"], requires="A2", err=["cites only that [A] decreases with time"])]),
+        part("B", f"Using the linear plot from part A, determine the rate constant, $k$. Give the value as a decimal number (not in scientific notation) with units.", 3, "calculate", ["3.A", "5.F"], f"$k=|\\text{{slope}}|\\approx {slope:.4f}{kun}$.",
+             [R("B1", "numeric", f"Obtains the slope magnitude of the linear plot (about {slope:.4f} in the units of the plot)", [f"{slope:.4f}"], nums=True, err=["uses a slope from the curved plot"]),
               R("B2", "numeric", f"States $k\\approx {slope:.4f}$ as the magnitude of the slope", [f"{slope:.4f}"], requires="B1", nums=True, err=["gives the slope with the wrong sign"]),
               R("B3", "numeric", f"Gives the units of $k$ as {kun_txt}", ["units"], requires="B2", units=True, err=["gives units of a first-order constant for a second-order reaction" if order == 2 else "gives units of a second-order constant for a first-order reaction"])]),
         part("C", "Calculate the half-life of the reaction for the initial concentration in the table.", 2, "calculate", ["5.B", "5.F"], f"$t_{{1/2}}={t_half:.0f}\\text{{ s}}$ ({'$0.693/k$' if order == 1 else '$1/(k[\\mathrm{A}]_0)$'}).",
@@ -206,11 +206,11 @@ def chf_short_stoich(rng):
     agree(V, bisect(lambda v: P * v - nco2 * R_ATM * T, 1e-6, 1e5), 1e-6, "V")
     den = sp.denom(sp.nsimplify(b)); coefs = (int(den), int(b * den), int(x * den), int(y * den // 2))
     bal = f"{coefs[0] if coefs[0] > 1 else ''}{form} + {coefs[1]}O2 → {coefs[2]}CO2 + {coefs[3]}H2O"
-    stim = {"kind": "text", "description": f"A ${m:g}\\text{{ g}}$ sample of {cf(form)} is burned completely in excess oxygen, producing $\\mathrm{{CO_2}}(g)$ and $\\mathrm{{H_2O}}(g)$. The carbon dioxide is collected at ${Tc}\\,^{{\\circ}}\\text{{C}}$ and ${P:g}\\text{{ atm}}$.", "data": {}}
+    stim = {"kind": "text", "description": f"A ${m:.1f}\\text{{ g}}$ sample of {cf(form)} is burned completely in excess oxygen, producing $\\mathrm{{CO_2}}(g)$ and $\\mathrm{{H_2O}}(g)$. The carbon dioxide is collected at ${Tc}\\,^{{\\circ}}\\text{{C}}$ and ${P:g}\\text{{ atm}}$. Use the periodic table to find molar masses.", "data": {}}
     parts = [
         part("A", f"Write the balanced equation for the complete combustion of {cf(form)}, using the smallest whole-number coefficients.", 1, "write", ["5.E"], f"The balanced equation is {bal}.",
              [R("A1", "expression", f"Balanced equation with the smallest whole-number coefficients: {bal}", [bal], err=["leaves a fractional coefficient"])]),
-        part("B", f"Calculate the number of moles of {cf('CO2')} produced.", 2, "calculate", ["5.F"], f"$n({form})={m:g}\\text{{ g}}/{M:.2f}\\text{{ g/mol}}={n:.4g}\\text{{ mol}}$; with {x} mol of $\\mathrm{{CO_2}}$ per mole of fuel, $n(\\mathrm{{CO_2}})={nco2:.3g}\\text{{ mol}}$.",
+        part("B", f"Calculate the number of moles of {cf('CO2')} produced.", 2, "calculate", ["5.F"], f"$n({form})={m:.1f}\\text{{ g}}/{M:.2f}\\text{{ g/mol}}={n:.4g}\\text{{ mol}}$; with {x} mol of $\\mathrm{{CO_2}}$ per mole of fuel, $n(\\mathrm{{CO_2}})={nco2:.3g}\\text{{ mol}}$.",
              [R("B1", "numeric", f"Converts the mass of fuel to moles using its molar mass ({M:.2f} g/mol): {n:.3g} mol", [f"{n:.3g}"], nums=True, err=["uses the molar mass of CO2"]),
               R("B2", "numeric", f"Applies the {x}:1 mole ratio from the balanced equation to obtain {nco2:.3g} mol of CO2", [f"{nco2:.3g}"], requires="B1", nums=True, err=["omits the mole ratio"])]),
         part("C", f"Calculate the volume, in L, occupied by the {cf('CO2')} at the stated temperature and pressure.", 1, "calculate", ["5.B", "5.F"], f"$V=nRT/P=({nco2:.3g}\\text{{ mol}})(0.08206)({T:.2f}\\text{{ K}})/({P:g}\\text{{ atm}})={V:.1f}\\text{{ L}}$.",
