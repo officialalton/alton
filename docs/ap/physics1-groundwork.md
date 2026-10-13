@@ -1,5 +1,7 @@
 # AP Physics 1 사전 준비 (무료 groundwork, 2026-10-12)
 
+> 2026-10-13 갱신: P0 무료 엔지니어링이 구현됐다(원형 47+세트 2+FRQ 4, 동결 골격, 예산). 구현 결과는 아래 §10–12 에 있고 §1–9 는 계획 기록이다.
+
 오너 방향(2026-10-12): Statistics 다음 과목 = AP Physics 1(순서 Statistics → Physics 1 → Chemistry → CS A → Econ → Biology → English Lang). **계획 전용**: 유료 호출·DB·키·push·삭제·생성 없음. 공식 사실은 `docs/ap/physics1-facts.md`(CED·AP Central 직접 대조), 형식은 `statistics-groundwork.md`를 따른다.
 
 근거: `physics1-facts.md` · `docs/ap/2027-exam-spec-table.md` · `data/ap/curriculum-2027/ap_physics_1.json`(8단원·43토픽) · `lib/ap-exam/layouts.ts` · `ten-set-plan.md` · `stock-policy-1-5x.md` · `cost-reconciliation.md` · `subject-quality-standards.md` · `generation-blueprints.md` · `lib/ap-figures/*` · `lib/problem-figures/templates/{ap-figures,ap-diagrams,figure-choice}.ts` · `scripts/ap-generation/archetypes/{common,calc_supp_frq}.py`.
@@ -308,3 +310,88 @@ repo 불일치(코드 수정 없음): (1) 오너 브리프의 "paragraph argumen
 1. (무료) W1–W3·W9 → 가이드·게이트·설정.
 2. (무료) W4·W5(최소)·W8·W10 → 그림 생성기와 일치 검사, 원형 파일럿 20개 사전 점검(결정적 게이트·그림 게이트·look-alike 0건).
 3. (오너 승인 후) P1 파일럿 한도 $1.5 → 결과 보고.
+
+---
+
+## 10. P0 구현 결과 (2026-10-13, 무료 엔지니어링 — 유료 호출·DB·키·push 없음)
+
+오너 지시(2026-10-13): Physics 1 P0를 끝내 유료 파일럿을 바로 시작할 수 있게 한다. 아래는 **만들어진 것**이고, 위 §3–§6의 계획 중 이 범위가 W1·W2(일부)·W3(일부)·W4–W7(Python 쪽 기준 구현)·W9·W10(단순판)·W11(47+2+4)·W13(키 스키마)에 해당한다.
+
+### 10-1. 코드 구성(전부 `scripts/ap-generation/archetypes/`)
+| 파일 | 내용 |
+|---|---|
+| `phys_common.py` | 상수(`G=9.8`, 참조 시트 상수 한 곳), 유효숫자·단위 표기(`Q`, `sci`), 독립 수치 경로(`rk4`, `bisect`, `trapz_exact`), 선택지 빌더(`num_opts`: 서로 **8% 이상** 간격 3개, `sentence_options`), 설계도 `mk`(오답 why 에서 오개념 목록 자동 생성), 그래프·장면 stimulus 빌더 |
+| `phys_figs.py` | **장면 모델(JSON) + 결정적 SVG 렌더 10종**: `fbd`, `energy_bars`, `vector`, `motion_diagram`, `incline`, `atwood`, `collision`, `beam`, `utube`, `tank_hole`. 결정적 검사 `check_scene`(화살표 길이∝힘, 평형 합 0, 에너지 막대 보존, viewBox 안, 힘 라벨 중복·화살표 겹침 없음), 선택지 그림 검사 `choice_checks`(같은 type, 서로 구별, 정답만 보조 요소 없음), 본문↔장면 숫자 집합 `scene_numbers` |
+| `phys_p0_a.py` | U1 7개(v–t·a–t 그래프 넓이, 등가속 시간, 투사체 사거리, 상대 운동, 수평 발사 vs 낙하, 운동 도해) + U2 10개(Atwood, 마찰 경사, **FBD 선택지 그림**, 엘리베이터 저울(v–t), 용수철 F–x(cm 단위 변환), 수평 원, 수직 고리 꼭대기, 만유인력 비례, 질량중심, 제3법칙) |
+| `phys_p0_b.py` | U3 7개(KE 비례, F–x 일, 포물선 트랙 에너지(**라그랑주 ODE 독립 경로**), 용수철 발사, 일률, 마찰 구간, **에너지 막대 선택지**) + U4 4개(F–t 충격량, 완전 비탄성, 반동, 탄성·비탄성 분류) + U5 5개(토크 각도, 막대 평형, 케이블 장력, 점질량 관성, 매달린 질량-바퀴) |
+| `phys_p0_c.py` | U6 4개(구름 경사, 각운동량 플랫폼, 궤도 주기비, τ–t 넓이) + U7 3개(주기 비례(**RK4 주기 측정**), x–t 그래프 최대 속력, SHM 에너지) + U8 7개(뜸 비율, 절대 압력, 연속, 베르누이, Torricelli 사거리, 유압, 겉보기 무게) + **2문항 세트 2개**(v–t 그래프 하나로 변위·평균 가속도, 충돌 자료로 속도·손실 에너지) |
+| `phys_p0_frq.py` | FRQ 4유형 원형(**MR 10 / TBR 12 / LAB 10 / QQT 8**): 탁상 블록+매달린 질량, 블록-용수철 단진동(에너지 막대+x–t 그래프+예측), 용수철 상수 실험(T²–m 선형화, 노이즈 시드 자료·최소제곱), 완전 비탄성 충돌 주장 |
+| `phys_p0_stages.py` | 파일럿 단계 목록 `phys_p1_mc`(20 단독+세트 1=22문항, 위험 L→M 순) / `phys_p1_frq` |
+| `registry.py` | `phys_p0_*.py` 자동 등록: `ph_`(단독)·`phs_`(세트)·`phf_`(FRQ), 단계 `phys_u1…u8`, `phys_sets`, `phys_frq`, `phys_all`; `guide-physics` 명령이 가이드 JSON 생성 |
+| `phys_gallery.py` | 장면 SVG 갤러리(`data/ap/render-check/ap_physics_1/`, 15개) |
+| `test_phys_p0.py` | pytest/unittest 41개(§10-4) |
+
+TS 쪽: `lib/ap-generation/subjects/physics1.ts`(+`physics1-archetypes.json`, 51항목) 과목 가이드, `gates.ts`(`ap_physics_1`: 선지 4, MC 비평가 스킬 1.A·1.B·1.C·3.A, 수학 `$` 검사, FRQ 유형별 프로필 `PHYSICS_FRQ_PROFILE`·시간 상한 32분), `stats-set.ts`(`setSizeOf`: Physics 세트는 2문항), `pipeline2.ts`(Physics 지침·검토 노트·라벨), `run-frozen.ts`(`test_*.py` 는 동결 해시에서 제외), 테스트 `physics1-archetypes.test.ts`.
+
+### 10-2. 원형 라이브러리 설계 요약
+- **구성**: 단독 MC **47**(U1 7·U2 10·U3 7·U4 4·U5 5·U6 4·U7 3·U8 7) + 2문항 세트 **2** + FRQ **4** = 53. §4 목록(67+4)의 약 70%를 실제 구현했고, 나머지(x–t 판정, 용수철 수직·달 위 진자, p–t 기울기, U–x 그래프, 폭발 3체 등)는 **P2 전 추가 후보**다. 요구 ≥50 충족(MC+세트 49 + FRQ 4).
+- **정답 키**: 모든 원형이 sympy/정확 분수 경로와 numpy·RK4·이분법·정규방정식 독립 경로를 **둘 다** 계산하고 어긋나면 `ValueError`(시드 건너뜀). 선택지 값은 코드가 계산한 이름 붙은 오개념(지수 누락, 단위 미변환, 성분 뒤바뀜, 부호 반대, 질량 누락 등)이며 문항마다 오답 3개 모두 why ≥15자.
+- **오답 규칙**: 수치 선택지는 서로 8% 이상(반올림 오차의 10배 이상), 값 중복·정답과 같은 값 제거, 부족하면 시드를 버린다(시드 통과율 40–100%). 해석 문항은 고정 문장 4개(정답 1 + 이름 붙은 오개념 3). **선택지가 그림**인 문항은 `Diagram 1…4` 라벨 + `option_scenes`(보기 순서 재배열), 정답 암시 금지 검사.
+- **단위·유효숫자**: SI 만, 값은 `$12.3\text{ m/s}$`, 3자리, 주어진 자료 2–3자리, 1차원 벡터는 양의 방향 명시. 과학 표기는 `sci`. `g=9.8 m/s²` **한 상수**(공식 참조 정보 본문은 UNVERIFIED — §8-C, 바꿀 때 `phys_common.G` 한 곳과 가이드 notation 한 줄).
+- **참조 시트 상수**: `CONSTS`(G=6.67e-11, ρ물=1000, P기압=1.01e5)를 문항이 직접 쓰며 stem 에도 필요한 값은 명시(기압은 stem 에 있음). 공식 참조 정보 대조 전이므로 시험 패널 문구는 만들지 않았다.
+- **그림**: 그래프 10개 원형(세트 1 포함)은 기존 `ap_graph` 규약(`kind: graph`, `vertices`)을 그대로 쓰고 TS 그림 게이트를 통과한다. 장면 원형 10개(stimulus 장면 8 + 선택지 그림 2)는 `kind: diagram, data.variant: phys_scene` 장면 모델(선택지 그림은 `option_scenes`)을 담는다 — **TS `ap_diagram` 렌더러와 정규화(`normalize.ts`)는 아직 이 변형을 모른다**(W4–W8 TS 쪽 잔여, §11-3 #1).
+- **상한**: 같은 원형의 매개변수 공간이 작은 것(KE 비례 12조합, 만유인력 27, 에너지 막대 선택 18)은 고유 문항이 6–8개를 넘기기 어렵다 → 예비 8개 가정(§7-8)이 원형별로 낮다. `batch()` 400시드 기준 모든 원형이 ≥4 서로 다른 팩을 낸다(테스트로 보장).
+
+### 10-3. FRQ 계획(종이 손글씨 전달, 배점 10/12/10/8)
+- **유형·배점·시간(공식)**: MR 10점 20–25분, TBR 12점 25–30분, LAB 10점 25–30분, QQT 8점 15–20분. 세트당 4유형 1개씩, 같은 유형 문항군은 세트당 1개.
+- **파트 구조(원형 4개 기준)**: MR = 자유물체도 3 + 기호 유도 3 + 수치 2 + 변화 예측 정당화 2. TBR = 에너지 막대 3 + 유도 2 + x–t 그래프 4 + 예측 3. LAB = 설계 3 + 선형화 1 + 그래프 작성 3 + 기울기→물리량 3. QQT = 주장·정당화 3 + 유도 3 + 예측 2. **모든 행 1점**, 행 `kind` 7종(`expression/numeric/diagram/graph/claim/justification/design`), `requires_row_id`(오류 이월)·`units_row`.
+- **루브릭 접근**: 행 단위 체크리스트(라벨 허용 목록·방향·상대 길이·축·눈금·점·추세선)이며 공식 채점 문구·허용 목록·Example Response 는 복제하지 않는다. 모든 모범 답안에 `reference_note: "ALTON reference answer for self-review — not official AP scoring"`. AP 1–5 환산 없음.
+- **코드 계산 값**(`expected_values`): MR 가속도·장력(sympy/선형계), TBR 주기·최대 속력(RK4 검증), LAB 기울기·k(정규방정식, 생성 상수와 4% 이내인 시드만 채택), QQT 최종 속도·에너지 비. 서술 행은 `required_elements`.
+- **응답 방식(오너 결정 §8-B, 미결)**: 종이 시험이므로 ①텍스트+체크리스트 자기 채점 → ②사진 업로드 후 체크리스트 순서 권장. 그림·그래프 행(MR A, TBR A·C, LAB C)은 "직접 그려본 뒤 체크리스트 대조"로 처리하며 자동 채점하지 않는다.
+
+### 10-4. 테스트와 무료 점검 결과
+- `scripts/ap-generation/archetypes/test_phys_p0.py` **41개**(`python -m unittest test_phys_p0`, pytest 호환): 같은 시드 → 동일 팩, 400시드에서 ≥4 서로 다른 구조·원형 간 stem 틀 중복 없음, 선택지 4개·유일 정답·8% 간격·오답 why≥15자·허용 스킬(2.A 2.B 2.C 2.D 3.B 3.C)·토픽 단원 범위, **수치 진실 테스트 22개**(facts 에서 정답을 세 번째 경로로 재계산: 투사체·원운동·고리·Atwood·등가속·경사 마찰·용수철 발사·마찰 구간·완전 비탄성·막대·케이블·바퀴·각운동량·SHM·Torricelli·압력·연속·유압·그래프 넓이 등), 그림 장면 검사·유효 SVG(XML 파싱)·선택지 그림 무힌트·본문↔장면 숫자 일치, FRQ 배점 합 40·행 합·행 의존 순서·실험 적합 상수 회복. **전부 통과**.
+- `lib/ap-generation/physics1-archetypes.test.ts` **6개**(Vitest): 47+2 원형 등록·가이드 JSON 일치·8단원 전부, 모든 MC 팩이 `gateMc`·`calibrateMc`·`gateGuideMc`·TeX 위생·설계도·생성기 결함·**그래프 그림 게이트** 0건, FRQ 4유형 `gateFrq`·`calibrateFrq`·설계도·가이드 0건, MC 비평가 스킬 부재. **전부 통과**; 기존 `gates.test.ts` 등 영향 테스트 통과.
+- **파이프라인 무료 배선 점검**(`pipeline2.ts plan|blueprint|check --subject ap_physics_1`, `AP_FIXED_WORDING=1`, 호출 비용 0): MC 22문항 설계도 22/22·결정적 게이트 22/22, FRQ 4/4·게이트 4/4. 렌더 장면 SVG 15개를 브라우저로 육안 확인(FBD 화살표·라벨 정상).
+
+### 10-5. 남은 사전 작업(유료 호출 전)
+1. **TS 그림 경로(W4–W8 중 TS 쪽)**: `normalize.ts`·`gate.ts` 가 `diagram/phys_scene` 을 `ap_diagram` 렌더로 연결, `ap-diagrams.ts` 에 Python 렌더와 같은 결과를 내는 TS 렌더러, `figure_choice` AP 연결(선택지 그림)과 `classifyNeed`·`renderTypeOf`. 파일럿 21칸 중 장면·선택지 그림 9칸(약 10문항)이 여기에 걸린다 → **그래프 원형만으로 먼저 파일럿하는 안**(그림 없는 값 계산 + 그래프)도 가능하나 오너가 정한 "그림 유형 5종" 시험은 TS 렌더 후.
+2. 시험 응시 화면에서 `kind: diagram` 표시 확인 + 화면 증거(390×844, 1280×800)·render-check PNG 갤러리(`data/ap/render-check/ap_physics_1` 는 SVG 만).
+3. **공식 참조 정보 대조**(§8-C): `g` 값·수식 목록. 불일치 시 `G` 한 곳 수정 + 선택지 재생성(유료 전이므로 무비용).
+4. `cells.ts`(Physics 칸 계획: MC 42·FRQ 4 슬롯, 단원별 bounds), `stock.ts` `SUBJECT_FAMILY`, `assemble-draft.ts` `SET_PREFIX_SUBJECT`(PH)·`SUBJECT_TITLE` — **풀 세트 조립 때** 필요하며 파일럿에는 불필요(파일럿은 `AP_LIST` 원형 목록으로 실행).
+5. 난이도 라벨러(`stats-difficulty.ts` 의 구조 난이도 선언)는 Statistics 전용 — Physics 파일럿은 난이도 단계 결과를 참고용으로만 읽고 `exam_prep` 비율 해석은 하지 않는다(별도 정의 필요, 파일럿 후).
+
+## 11. 동결 구성 골격과 파일럿 예산
+
+### 11-1. 구성 파일(미동결·미실행)
+`config/ap-frozen/phys-p1-a.template.json`(MC 22문항), `config/ap-frozen/phys-p1-b.template.json`(FRQ 4). Statistics `stats-s3-a.template.json` 형식과 같고 `expected` 해시는 `UNFROZEN`(그대로는 `--check-only` 실패). 사용 절차: 복사 → `--freeze` → 커밋 → `--check-only` → 오너 예산 확인 후 유료. 하드 스톱 `hardStopCumulativeUsd` 는 누적 $40.3301(Statistics S3-a 보고 기준) + 상한 + 0.1 로 적었으며 **집행 직전 `ledger-total.ts` 로 재계산**한다. `AP_FIXED_WORDING=1`(원형 stem 그대로, LLM 문장 다듬기 생략)을 기본으로 두어 호출 수를 줄였다.
+
+### 11-2. 칸당 예산과 기대 통과율
+| 구분 | 칸 | 칸당 비용(예상) | 기대 통과율 | 예상 합 | 상한 |
+|---|---|---|---|---|---|
+| **P1-a MC 파일럿** | 단독 20 + 세트 1(2문항) = 22문항 | 단독 $0.060–0.080, 세트 $0.15 | **80%**(Stats 파일럿 20/20·S3-a 17/20 합 92.5%, AB 그래프형 평균 78%, 그림 문항 감점) | **$1.5**(1.2–2.0) | **$1.8** |
+| **P1-b FRQ 파일럿** | MR·TBR·LAB·QQT 각 1 | MR $0.80 · TBR $1.00 · LAB $0.85 · QQT $0.55 | **70%**(물리 FRQ 직접 자료 없음) | **$3.2**(2.2–5.2) | **$3.6** |
+| 파일럿 합 | 26 | | | **≈ $4.7 (3.4–7.2)** | 합산 $5.4 |
+- 단가 근거: Stats 후보당 $0.041–0.058 × (그림 검토·장면 설명 가중 1.35) ≈ $0.055–0.078, Stats FRQ 추정 $0.40–0.70 × 1.3(행·그림 많음). 중단 규칙: P1-a 첫 통과 **50% 미만이면 중단**, 그림 문항만 50% 미만이면 해당 생성기 수정 후 재시도(자동 수선 없음), 원장 자동 중단 유지.
+- 현 원장 여유: 누적 $40.3301 → 중단선 $45 까지 **$4.6699**, 총 상한 $50 까지 $9.67. **P1-a($1.8 상한)는 중단선 안**, P1-a + P1-b 상한 합 $5.4 는 중단선을 $0.73 넘는다(기대치 $4.7 는 간신히 안) → P1-b 는 P1-a 결과 후 별도 승인.
+
+### 11-3. 비용 추정 — 파일럿 + 풀 모의고사 2회 + 예비
+(통과 1건당: MC 낙관 $0.068 / 중간 $0.085 / 보수 $0.18, FRQ 낙관 $0.55 / 중간 $0.85 / 보수 $1.30. 중간은 통과율 80%·70% 반영. 보수는 AB 관측 상단 $0.134×1.35 와 통과율 70%.)
+| 단계 | 수량 | 낙관 | 중간 | 보수 |
+|---|---|---|---|---|
+| P1 파일럿(a+b) | MC 22 + FRQ 4 | $3.4 | **$4.9** | $7.2 |
+| 첫 세트 + 1.5배 예비 | MC 63 + FRQ 6 | $7.6 | **$10.5** | $19.1 |
+| **풀 모의고사 2회 + 1.5배 예비** | MC 126 + FRQ 12 | $15.2 | **$20.9** | $38.3 |
+| 위 + 파일럿(재사용 미반영) + 재작업 예비 20% | | **≈ $22** | **≈ $31** | **≈ $55** |
+- 파일럿 통과분(MC 약 18, FRQ 약 3)은 재고로 재사용되므로 위 합계에서 약 $1.5 + $3(중간)을 뺄 수 있다. **현 총 상한 $50 안 여유는 $9.67** 이므로 파일럿(상한 $5.4)까지만 현 예산으로 가능하고, 풀 모의고사 2회는 **오너의 예산 상향 결정(중간 +$25–30)** 이 필요하다. 3세트 1.5배(189+18)는 중간 $31 → 약 $44 로 더 높다(§5 추정 $21–55 와 정합).
+
+## 12. 위험(P0 구현 후 갱신)
+1. **그래프·그림 중심 문항(가장 큼)**: 그림 필수 비중은 구현 라이브러리 기준 49개 중 20개(그래프 10·장면 8·선택지 그림 2, 약 41%; §3 의 55–60% 가정보다 낮다). 그래프는 기존 `ap_graph` 게이트를 통과하지만 **장면 그림은 TS 렌더 연결 전**(§10-5 #1)이라 화면 검증이 없다. 완화: 장면 모델 단일 원본 + 결정적 검사 + 렌더 SVG 육안(파일럿 전수).
+2. **LaTeX**: 값 선택지가 `\text{ m/s}`·과학 표기·`^2` 를 쓴다. `gateMathWrapping`·`$` 균형 검사는 통과하지만 **화면 렌더(KaTeX) 표본 확인은 파일럿 때** 해야 한다(과거 `tex-audit.md` 사례). 선택지 `10^5` 표기는 `sci` 로만 만든다.
+3. **단위**: cm→m, kg·g, N/cm 변환 함정을 의도적으로 쓴다(`ph_spring_k_graph`, `ph_hydraulic_lift`). 단위가 stem 과 선택지에서 일관한지는 코드 규칙(`Q` 가 단위를 같은 문자열로 붙임)으로 보장하지만 **물리량 차원 검사기는 없다**.
+4. **물리 정확성**: 원형마다 이중 경로가 있으나 *개념 오류*(예: 문항 가정이 비물리적)는 코드가 못 잡는다 → Opus 독립 풀이와 표본 검토로 확인(파일럿 항목). 알려진 주의: 고리 꼭대기(접촉 유지 조건), 완전 비탄성 에너지 손실, 구름 마찰이 일하지 않는다는 가정.
+5. **선택지 그림 정답 암시**: `choice_checks` 가 type·구별·보조 요소·요소 수 단서를 보지만 화살표 길이 차이로 정답이 드러나는지는 코드가 판단하지 못한다 → 파일럿 화면 확인 대상.
+6. **기출 유사**: CED 샘플 소재(압력센서 밀도, 굴림 유도)는 피했다. 도르래·경사·충돌·용수철은 표준 소재라 look-alike 검사(`graph-lookalike-report` 계열)를 파일럿 전 한 번 돌려야 한다.
+7. **세트 크기**: 공식 세트 수·크기 미공표. 2문항 세트는 단원 1·4 에 하나씩 둔 우리 구성이며 "공식 구성" 주장을 하지 않는다(§8-D 권장 유지).
+8. **FRQ 키 신뢰**: 서술 행(claim/justification/design)은 `required_elements` 만이므로 독립 검증은 Opus 풀이 대조로만 가능. 그림·그래프 행은 자동 채점 불가(§8-B).
+9. **통과율 가정**: 80% 는 Statistics 와 AB 사이의 절충이며 Physics 직접 자료는 없다. 파일럿이 첫 실측이다.

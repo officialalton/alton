@@ -12,7 +12,7 @@ const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i
 const has = (n: string) => process.argv.includes(n);
 const cfgPath = path.resolve(arg("--config", "config/ap-frozen/bio-data-short.v9.json")); const outPath = path.resolve(arg("--out", cfgPath));
 const root = path.resolve("data/ap/sample-2027");
-const expandFiles = (list: string[]) => list.flatMap((p) => (p.endsWith("/") ? readdirSync(p).filter((f) => /\.(py|ts)$/.test(f) && !f.endsWith(".test.ts")).map((f) => path.join(p, f)) : [p]));
+const expandFiles = (list: string[]) => list.flatMap((p) => (p.endsWith("/") ? readdirSync(p).filter((f) => /\.(py|ts)$/.test(f) && !f.endsWith(".test.ts") && !f.startsWith("test_")).map((f) => path.join(p, f)) : [p]));
 
 /** 셸 환경을 상속하지 않는다: AP_* 는 모두 제거하고 구성의 값만 설정한다. */
 export function controlledEnv(cfg: FrozenConfig, base: NodeJS.ProcessEnv = process.env): NodeJS.ProcessEnv {
