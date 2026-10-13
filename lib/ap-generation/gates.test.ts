@@ -7,7 +7,7 @@ import { gateGuideFrq, gateGuideMc } from "./guide-gates";
 import { calcAbGuide } from "./subjects/calc-ab";
 import { calcBcGuide } from "./subjects/calc-bc";
 
-const PY = process.env.AP_PY ?? "/private/tmp/claude-501/-Users-jangjiman-Developer-ALTON/d05b2ffe-5d6e-4058-a909-5e3b8827cbe2/scratchpad/apvenv/bin/python";
+import { AP_PYTHON as PY } from "../../scripts/ap-generation/py";
 const ARCH = path.resolve(__dirname, "../../scripts/ap-generation/archetypes");
 const run = (script: string, input?: string, args: string[] = []) => spawnSync(PY, ["-B", script, ...args], { cwd: ARCH, input, encoding: "utf-8", maxBuffer: 64 * 1024 * 1024, timeout: 170000 });
 const havePy = spawnSync(PY, ["-c", "import sympy"], { encoding: "utf-8" }).status === 0;

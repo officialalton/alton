@@ -5,7 +5,7 @@ import { readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
-const PY = process.env.AP_PY ?? "/private/tmp/claude-501/-Users-jangjiman-Developer-ALTON/d05b2ffe-5d6e-4058-a909-5e3b8827cbe2/scratchpad/apvenv/bin/python";
+import { AP_PYTHON as PY } from "./py";
 const ARCH = path.resolve("scripts/ap-generation/archetypes");
 const regen = (arch: string, seed: number): Json | null => { const r = spawnSync(PY, ["-B", "registry.py", "batch", arch, "1", String(seed)], { cwd: ARCH, encoding: "utf-8", timeout: 60000, maxBuffer: 1 << 26 }); if (r.status !== 0) return null; try { return (JSON.parse(r.stdout) as Json[])[0]; } catch { return null; } };
 const canon = (v: unknown): unknown => (typeof v === "number" ? Math.round(v * 1e6) / 1e6 : Array.isArray(v) ? v.map(canon) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v as Json).sort(([a], [b]) => a.localeCompare(b)).map(([k, x]) => [k, canon(x)])) : v);

@@ -8,7 +8,7 @@ import path from "node:path";
 import { SAMPLE_PLAN } from "./cells";
 
 const root = path.resolve("data/ap/sample-2027");
-const PY = process.env.AP_PY ?? "/private/tmp/claude-501/-Users-jangjiman-Developer-ALTON/d05b2ffe-5d6e-4058-a909-5e3b8827cbe2/scratchpad/apvenv/bin/python";
+import { AP_PYTHON as PY } from "./py";
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 const items = JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")) as Json[]; const byKey = new Map(items.map((i) => [i.stockKey as string, i]));
 const nowFree = new Map((JSON.parse(readFileSync("data/ap/stock/revalidation-free.json", "utf-8")) as Json[]).map((r) => [r.stockKey as string, r]));

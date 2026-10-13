@@ -15,7 +15,7 @@ import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
 
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const LIST = arg("--list", "graph_s1_ab"); const SUBJECT = arg("--subject", "ap_calculus_ab"); const SEED0 = Number(arg("--seed0", "3100")); const N = Number(arg("--n", "1"));
-const PY = process.env.AP_PY ?? "/private/tmp/claude-501/-Users-jangjiman-Developer-ALTON/d05b2ffe-5d6e-4058-a909-5e3b8827cbe2/scratchpad/apvenv/bin/python";
+import { AP_PYTHON as PY } from "./py";
 const ARCH = path.resolve("scripts/ap-generation/archetypes");
 const py = (a: string[]): unknown => { const r = spawnSync(PY, ["-B", "registry.py", ...a], { cwd: ARCH, encoding: "utf-8", maxBuffer: 64 * 1024 * 1024 }); if (r.status !== 0) throw new Error(r.stderr.slice(-300)); return JSON.parse(r.stdout); };
 const curriculum = JSON.parse(readFileSync(`data/ap/curriculum-2027/${SUBJECT}.json`, "utf-8")) as ApCurriculumFile;

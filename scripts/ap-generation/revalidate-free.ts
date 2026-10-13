@@ -11,7 +11,7 @@ import { calcAbGuide } from "../../lib/ap-generation/subjects/calc-ab";
 import type { StockItem } from "../../lib/ap-generation/stock";
 import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
 
-const PY = process.env.AP_PY ?? "/private/tmp/claude-501/-Users-jangjiman-Developer-ALTON/d05b2ffe-5d6e-4058-a909-5e3b8827cbe2/scratchpad/apvenv/bin/python";
+import { AP_PYTHON as PY } from "./py";
 const items = (JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/items.json"), "utf-8")) as StockItem[]).filter((i) => i.validation === "needs_revalidation");
 const cur = new Map<string, ApCurriculumFile>(); const curr = (s: string) => cur.get(s) ?? (cur.set(s, JSON.parse(readFileSync(path.resolve(process.cwd(), `data/ap/curriculum-2027/${s}.json`), "utf-8"))), cur.get(s)!);
 const all = JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/items.json"), "utf-8")) as StockItem[];

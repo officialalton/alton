@@ -16,7 +16,7 @@ const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i
 const stage = process.argv[2]; const RUN = arg("--run"); const FROM = arg("--from"); const SYNC = process.argv.includes("--sync");
 const CAP = Number(process.env.AP_CAP_NEW ?? 11); const SUBJECT = "ap_calculus_ab";
 const ROOT = path.resolve("data/ap/sample-2027"); const DIR = path.join(ROOT, RUN); mkdirSync(DIR, { recursive: true });
-const PY = process.env.AP_PY ?? "/private/tmp/claude-501/-Users-jangjiman-Developer-ALTON/d05b2ffe-5d6e-4058-a909-5e3b8827cbe2/scratchpad/apvenv/bin/python";
+import { AP_PYTHON as PY } from "./py";
 type Json = Record<string, unknown>;
 const rj = <T,>(f: string): T => JSON.parse(readFileSync(f, "utf-8")) as T;
 const readJsonl = (f: string) => (existsSync(f) ? readFileSync(f, "utf-8").split("\n").filter(Boolean).map((l) => JSON.parse(l) as Json) : []);
