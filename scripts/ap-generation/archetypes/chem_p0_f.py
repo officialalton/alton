@@ -171,7 +171,7 @@ def _needed(rng, name):
     if len(uniq) < 3:
         raise ValueError("few")
     k, ds = sentence_options(key_text, "Every symbol in the working relationship must be measured or known.", uniq[:3])
-    stem = f"A student wants to {desc}. Assume that the gas constant, the specific heat capacity of the solution, and the molar masses of any compounds named are known and that no heat is lost to the surroundings. Which set of measurements is sufficient (and does not include an unneeded measurement)?"
+    stem = f"A student wants to {desc}. Assume that the specific heat capacity of the solution equals that of water, that the mass of the solution equals the mass of the water used, that the calorimeter absorbs a negligible amount of heat, and that the gas constant and molar masses are known. Which set of measurements is sufficient (and does not include an unneeded measurement)?"
     return mk(f"ch_needed_{name}", {"dumas": "3.4", "ka": "8.3", "dh": "6.4"}[name], "5.A", stem, k, ds, rng, concept="identify the quantities required to solve a problem from the governing relationship", path="free symbols of the working expression (sympy) vs nonzero numeric sensitivity of the expression to each symbol", facts=[f"scenario={name}", f"needed={sorted(needed)}"], judgment="work backward from the relationship to the measurements", est=80)
 
 
@@ -234,7 +234,7 @@ def ch_buret_data(rng):
         fin = [round(i + v, 2) for i, v in zip(init, vols)]
         pairs_ = sorted(((abs(vols[i] - vols[j]), (i, j)) for i in range(3) for j in range(i + 1, 3)))
         best = pairs_[0][1]
-        if pairs_[0][0] <= 0.15 and pairs_[1][0] > 0.8:
+        if pairs_[0][0] <= 0.15 and pairs_[1][0] > 0.8 and round((vols[best[0]] + vols[best[1]]) * 100) % 2 == 0:  # 평균이 소수 둘째 자리에서 정확히 떨어져야 키가 하나로 정해진다
             break
     avg = float((Fr(str(vols[best[0]])) + Fr(str(vols[best[1]]))) / 2)
     agree(avg, float(np.mean([vols[best[0]], vols[best[1]]])), 1e-9, "avg")
@@ -294,11 +294,12 @@ def ch_claim_from_data(rng):
     avg = float(np.mean(dT))
     agree(1.0, 1.0 if (avg > 0) == exo else 0.0, 1e-9, "sign")
     word = "exothermic" if exo else "endothermic"; opp = "endothermic" if exo else "exothermic"
-    key_t = f"The process is {word}: the average temperature change was ${avg:+.1f}\\,^{{\\circ}}\\text{{C}}$, so the solution {'gained' if exo else 'lost'} thermal energy from the dissolving process."
-    wrongs = [(f"The process is {opp}: the average temperature change was ${avg:+.1f}\\,^{{\\circ}}\\text{{C}}$, so the solution {'lost' if exo else 'gained'} thermal energy.", "Reverses the link between the sign of ΔT and the direction of energy flow."),
-              (f"The process is {word}: the average temperature change was ${abs(avg):.1f}\\,^{{\\circ}}\\text{{C}}$ in magnitude, but a single trial is not enough evidence.", "Dismisses consistent data from three trials."),
-              (f"The process is {opp}: the final temperatures differ between trials, so the system must absorb energy.", "Uses trial-to-trial variation rather than the sign of the temperature change.")]
-    k, ds = sentence_options(key_t, f"The temperature changes in the three trials are {', '.join(f'{x:+.1f}' for x in dT)} °C (mean {avg:+.1f} °C); a temperature {'increase' if exo else 'decrease'} of the solution means energy was {'released to' if exo else 'absorbed from'} the solution, so the process is {word}.", wrongs)
+    flow = "released energy to" if exo else "absorbed energy from"; flow_opp = "absorbed energy from" if exo else "released energy to"
+    key_t = f"The process is {word}: the temperature of the solution changed by an average of ${avg:+.1f}\\,^{{\\circ}}\\text{{C}}$, so the dissolving process {flow} the solution."
+    wrongs = [(f"The process is {opp}: the temperature of the solution changed by an average of ${avg:+.1f}\\,^{{\\circ}}\\text{{C}}$, so the dissolving process {flow_opp} the solution.", "Reverses the link between the direction of the temperature change and the direction of energy flow."),
+              (f"The process is {word}, but the data cannot support that claim because the final temperatures differ from trial to trial.", "Treats ordinary trial-to-trial scatter as a reason to ignore three trials that all show the same direction of change."),
+              ("The process is neither exothermic nor endothermic, because each mixture reached a steady final temperature.", "Confuses reaching a steady temperature with no energy transfer between the process and the solution.")]
+    k, ds = sentence_options(key_t, f"The temperature changes in the three trials are {', '.join(f'{x:+.1f}' for x in dT)} °C (mean {avg:+.1f} °C); a temperature {'increase' if exo else 'decrease'} of the solution means energy was {'released to' if exo else 'absorbed from'} the solution by the process, so the process is {word}.", wrongs)
     rows = [[f"Trial {i + 1}", f"{base:.1f}", f"{t:.1f}"] for i, t in enumerate(trials)]
     stim = {"kind": "table", "description": "Temperature of water before and after a solid is dissolved", "data": {"x_label": "Trial", "columns": ["Trial", "Initial temperature (°C)", "Final temperature (°C)"], "y_label": "Final temperature (°C)", "rows": rows}}
     stem = "A student dissolves a solid in water in a calorimeter in three trials and records the temperatures (table). Which claim about the dissolving process is best supported by the data?"

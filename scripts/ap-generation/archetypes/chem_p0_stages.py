@@ -98,3 +98,14 @@ STAGE_S2_MC_B = [
  "ch_viscosity_trend",
  "chs_rate_set"
 ]
+# 런 C: run B 이후 재배정에서 남은 가상 칸 원형 8개(고친 원형 포함), 칸당 후보 3.
+STAGE_S2_MC_C = [
+ "ch_buffer_choice",
+ "ch_claim_from_data",
+ "ch_le_chatelier",
+ "ch_le_chatelier_prediction",
+ "ch_mass_spec_peaks",
+ "ch_photon_energy",
+ "ch_unit_cell_ratio",
+ "ch_variable_coulomb"
+]

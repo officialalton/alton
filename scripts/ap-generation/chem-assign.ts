@@ -19,8 +19,8 @@ const SINGLES_PER_SET = CHEM_MC_COUNT - CHEM_SET_COUNT * CHEM_SET_SIZE;
 const unitOf = (topic: string) => Number(String(topic).split(".")[0]); const practiceOf = (skill: string) => Number(String(skill).split(".")[0]);
 const guideRows = chemGuide as { id: string; topic: string; skill: string }[];
 /** 라이브러리 단독 원형(원형 id + 토픽 = 문항군 키). 가상 단독 문항은 이 원형 중 하나를 시험당 최대 한 번 쓴다(같은 문항군은 한 시험에 한 번). */
-/** 2026-10-13 chem-s2-m-a 에서 두 후보 모두 반려되고 고치지 못한 원형(절차 선택 3·시험 가능한 질문·모형 평가): 가상 칸 계획에서 뺀다. */
-export const EXCLUDED_ARCHETYPES = new Set(["ch_procedure_calorimetry", "ch_procedure_titration", "ch_procedure_rate", "ch_testable_question", "ch_model_conductivity"]);
+/** 2026-10-13 chem-s2-m-a/b 에서 후보가 모두 반려되고 고치지 못한 원형(절차 선택 3·시험 가능한 질문·모형 평가·너무 쉬운 암기형 6): 가상 칸 계획에서 뺀다. */
+export const EXCLUDED_ARCHETYPES = new Set(["ch_procedure_calorimetry", "ch_procedure_titration", "ch_procedure_rate", "ch_testable_question", "ch_model_conductivity", "ch_acid_strength", "ch_ie_trend", "ch_gas_deviation", "ch_lattice_energy", "ch_indicator", "ch_particle_phase"]);
 export const LIB_SINGLES = guideRows.filter((g) => !g.id.startsWith("chs_") && !EXCLUDED_ARCHETYPES.has(g.id)).map((g) => ({ id: g.id, topic: g.topic, unit: unitOf(g.topic), practice: practiceOf(g.skill), key: `${g.id}|${g.topic}` }));
 /** 2문항 세트 원형(chs_*_q1/q2 를 합친 것): 가상 세트는 이 중 하나를 시험당 최대 한 번 쓴다. */
 export const LIB_SETS = [...new Set(guideRows.filter((g) => g.id.startsWith("chs_")).map((g) => g.id.replace(/_q\d+$/, "")))].map((id) => { const m = guideRows.filter((g) => g.id.startsWith(`${id}_q`)); return { id, unit: unitOf(m[0].topic), practices: m.map((g) => practiceOf(g.skill)), key: id }; });

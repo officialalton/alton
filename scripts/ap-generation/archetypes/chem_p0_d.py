@@ -274,7 +274,7 @@ def ch_le_chatelier(rng):
              "add_reactant": "adding A increases [A], the reactant in the denominator of Q, so Q falls below K", "remove_product": "removing B decreases [B], the product in the numerator of Q, so Q falls below K",
              "add_inert": "an inert gas added at constant volume leaves every concentration unchanged, so Q stays equal to K"}[stress]
     key_t = f"The system shifts {names[rule]}, because {reason_for[rule]}."
-    wrongs = [(f"The system shifts {names[w]}, because {reason_for[w]}.", f"For this disturbance {truth}, so Q is not {rel_of[w]} K and the system {claim_not[w]}.") for w in ("right", "left", "none") if w != rule][:2]
+    wrongs = [(f"The system shifts {names[w]}, because {reason_for[w]}.", f"After this disturbance Q is {rel_of[rule]} K, not {rel_of[w]} K, so the system {claim_not[w]}.") for w in ("right", "left", "none") if w != rule][:2]
     wrongs.append((f"The system shifts {names['right' if rule != 'right' else 'left']}, because the equilibrium constant changes.", "Believes that a change in concentration or volume changes the value of K, which depends only on temperature."))
     k, ds = sentence_options(key_t, f"For this disturbance {truth}; Q is therefore {rel_of[rule]} K, so the system " + ("does not shift." if rule == "none" else f"shifts {names[rule]} until Q equals K again."), wrongs)
     stem = f"The reaction ${a_c if a_c > 1 else ''}\\mathrm{{A}}(g) \\rightleftharpoons {b_c if b_c > 1 else ''}\\mathrm{{B}}(g)$ is at equilibrium. {desc} Which statement correctly describes the response of the system?"
