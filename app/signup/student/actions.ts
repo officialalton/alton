@@ -29,7 +29,7 @@ export async function provisionFreeMemberAction(): Promise<ProvisionResult> {
 
   const meta = readSignupMetadata(user);
   if (!meta) {
-    await supabase.auth.signOut();
+    await supabase.auth.signOut({ scope: "local" });
     return { ok: false, message: "We couldn't verify your sign-up details. Please sign up again from the start." };
   }
 

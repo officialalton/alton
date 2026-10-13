@@ -45,11 +45,11 @@ export async function resolveAccountDestination(
   ]);
 
   if (status === "closure_pending" || status === "closed") {
-    await supabase.auth.signOut();
+    await supabase.auth.signOut({ scope: "local" });
     return "/login?error=" + encodeURIComponent("This account is closed and cannot sign in.");
   }
   if (status === "unknown") {
-    await supabase.auth.signOut();
+    await supabase.auth.signOut({ scope: "local" });
     return (
       "/login?error=" +
       encodeURIComponent("We could not verify your account. Please contact support.")

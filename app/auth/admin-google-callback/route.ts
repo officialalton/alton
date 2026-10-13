@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
   const googleUserId = extractGoogleUserId(data.user);
 
   if (!email || !googleUserId) {
-    await supabase.auth.signOut();
+    await supabase.auth.signOut({ scope: "local" });
     return NextResponse.redirect(loginError(siteUrl, "We couldn't read your Google account details."));
   }
 
@@ -89,7 +89,7 @@ async function routeExistingProfile(params: {
       p_google_user_id: googleUserId,
     });
     if (!linked) {
-      await supabase.auth.signOut();
+      await supabase.auth.signOut({ scope: "local" });
       return NextResponse.redirect(
         loginError(
           siteUrl,
@@ -106,7 +106,7 @@ async function routeExistingProfile(params: {
 
   // 학생/학부모 등 스태프가 아닌 본인 계정 — 남의 계정이 아니므로 삭제하지
   // 않고 세션만 종료한다.
-  await supabase.auth.signOut();
+  await supabase.auth.signOut({ scope: "local" });
   return NextResponse.redirect(loginError(siteUrl, "This is not a staff (tutor, admin, or consultant) account."));
 }
 

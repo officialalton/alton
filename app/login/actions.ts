@@ -44,8 +44,9 @@ export async function login(formData: FormData) {
   redirect(await resolveAccountDestination(supabase, profile?.role));
 }
 
+// 2026-10-12 오너 결정: 로그아웃은 현재 기기만(scope: "local"). 기본값(global)은 다른 기기·창의 세션까지 모두 폐기했다.
 export async function logout() {
   const supabase = await createClient();
-  await supabase.auth.signOut();
+  await supabase.auth.signOut({ scope: "local" });
   redirect("/login");
 }
