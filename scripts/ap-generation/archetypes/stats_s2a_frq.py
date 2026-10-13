@@ -28,9 +28,9 @@ def _ev(part, quantity, value, tol):
 
 # ======================= Q1. 복합 초점: 조사 질문·자료 요약·실험 설계 (1.10 / 1.A) =======================
 Q1_CTX = [
-    dict(who="students at a large high school", expl="whether a student exercises before school", yes="exercise before school", no="not exercise before school", resp="number of hours of sleep the previous night", unit="hours", pop="all students at the school",
+    dict(who="students at a large high school", expl="whether a student exercises before school", yes="exercise before school", no="do not exercise before school", resp="number of hours of sleep the previous night", unit="hours", pop="all students at the school",
          follow="the amount of time students spend on homework each night", follow_q="What is the typical amount of time that students at the school spend on homework each night?"),
-    dict(who="adult members of a community center", expl="whether a member takes a weekly yoga class", yes="take a yoga class", no="not take a yoga class", resp="self-rated stress score", unit="points", pop="all adult members of the center",
+    dict(who="adult members of a community center", expl="whether a member takes a weekly yoga class", yes="take a yoga class", no="do not take a yoga class", resp="self-rated stress score", unit="points", pop="all adult members of the center",
          follow="the number of hours per week that members use the center", follow_q="What is the typical number of hours per week that adult members of the center use the center?"),
 ]
 
@@ -48,14 +48,14 @@ def stfrq_q1_design(rng):
     f_hi = Fr(3, 2) * (q3 - q1) + q3
     assert float(f_hi) == fence and (val > f_hi) == (val > fence)
     outlier = val > fence
-    stim = {"kind": "table", "description": f"Five-number summary of the {c['resp']} for a sample of {c['who']}.", "data": {"columns": ["Statistic", f"Value ({c['unit']})"], "rows": [["Minimum", str(lo)], ["First quartile", str(q1)], ["Median", str(med)], ["Third quartile", str(q3)], ["Maximum", str(hi)]], "notes": f"Summary of the {c['resp']} for a sample of {c['who']}."}}
+    stim = {"kind": "table", "description": f"Five-number summary of the {c['resp']} for the sample of {c['who']} in the study.", "data": {"columns": ["Statistic", f"Value ({c['unit']})"], "rows": [["Minimum", str(lo)], ["First quartile", str(q1)], ["Median", str(med)], ["Third quartile", str(q3)], ["Maximum", str(hi)]], "notes": f"Summary of the {c['resp']} for a sample of {c['who']}."}}
     nvol = 2 * rng.choice([20, 30, 40])
     parts = [
         part("A", f"A researcher plans a study of {c['who']}. For each person the researcher records {c['expl']} and the {c['resp']}. Identify the explanatory variable and the response variable in this study.", 2, "explain", ["2.A"],
              f"Explanatory variable: {c['expl']}. Response variable: the {c['resp']}.",
              [R("A1", f"Identifies the explanatory variable as {c['expl']}", [c["expl"]], err=["names the response as explanatory"]),
               R("A2", f"Identifies the response variable as the {c['resp']}", [c["resp"]], err=["names the group as the response"])]),
-        part("B", f"The table shown gives the five-number summary of the {c['resp']} for the sample. (i) Calculate the interquartile range. (ii) Is a value of ${val}$ {c['unit']} an outlier according to the $1.5\\times\\mathrm{{IQR}}$ rule? Justify your answer with a calculation.", 2, "calculate", ["3.B"],
+        part("B", f"The table shown gives the five-number summary of the {c['resp']} for the sample of {c['who']} in the study. (i) Calculate the interquartile range. (ii) Is a value of ${val}$ {c['unit']} an outlier according to the $1.5\\times\\mathrm{{IQR}}$ rule? Justify your answer with a calculation.", 2, "calculate", ["3.B"],
              f"(i) IQR = {q3} - {q1} = {iqr}. (ii) The upper boundary is {q3} + 1.5({iqr}) = {fence:g}; since {val} is {'greater' if outlier else 'not greater'} than {fence:g}, {val} {'is' if outlier else 'is not'} an outlier.",
              [R("B1", f"Calculates the interquartile range (answer {iqr})", [str(iqr)], nums=True, err=["uses the range instead of the IQR"]),
               R("B2", f"Compares {val} with the boundary Q3 + 1.5 IQR = {fence:g} and states that it {'is' if outlier else 'is not'} an outlier", [f"{fence:g}", "outlier" if outlier else "not an outlier"], requires="B1", nums=True, err=["adds IQR rather than 1.5 IQR", "uses the lower boundary"])]),
@@ -63,7 +63,7 @@ def stfrq_q1_design(rng):
              "(i) Number the volunteers, use a random number generator (or draw names from a hat) to choose half of them for the treatment group; the rest form the other group. (ii) Random assignment tends to balance other variables across the groups, so a difference in the response is attributable to the treatment.",
              [R("C1", "Describes a chance method (random numbers, names from a hat) that puts half of the volunteers in each group", ["random numbers or drawing names", "half in each group"], alt=["shuffle names and take the first half"], err=["lets volunteers choose", "assigns by order of arrival"]),
               R("C2", "Explains that random assignment balances other (lurking) variables between the groups so cause and effect can be concluded", ["balances other variables across groups", "supports a cause-and-effect conclusion"], err=["says random assignment makes the sample representative of the population"])]),
-        part("D", f"Suppose that instead the researcher simply compares {c['who']} who already chose to {c['yes']} with those who chose to {c['no']}. Can the researcher conclude that {c['expl']} causes a change in the {c['resp']}? Justify your answer.", 1, "explain", ["4.B"],
+        part("D", f"Suppose that instead the researcher simply compares the {c['who']} in the study who already {c['yes']} with those who {c['no']}. Can the researcher conclude that {c['expl']} causes a change in the {c['resp']}? Justify your answer.", 1, "explain", ["4.B"],
              "No. This is an observational study; the groups chose themselves, so other variables (confounders) may explain the difference and a cause-and-effect conclusion is not justified.",
              [R("D1", "States that a cause-and-effect conclusion is not justified because the individuals chose their own groups (observational study, confounding possible)", ["no cause-and-effect conclusion", "observational study or confounding"], err=["claims the difference proves cause because the result is significant"])]),
         part("E", f"The researcher also wants to study {c['follow']} among {c['pop']}. State a valid investigative question about this topic that requires a statistical investigation. Your question should name the population of interest, name the variable that would be measured, and be answerable by collecting and analyzing data that vary from individual to individual.", 3, "explain", ["1.A"],

@@ -356,12 +356,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "a feature table (variable type, sample count, pairing, goal) is matched against each procedure and exactly one procedure matches the scenario"
+   "each procedure is tied to a feature table (variable type, number of samples, pairing, number of variables) and exactly one procedure matches the scenario; each wrong option is rejected by a stated feature"
   ],
   "misconceptions": [
-   "mixes up proportions and means",
-   "uses the wrong number of samples or ignores pairing",
-   "uses a test when an interval is needed or the reverse"
+   "uses two independent samples where there is a pairing or only one sample",
+   "uses matched pairs when there are no pairs",
+   "uses a proportion procedure for measurements"
   ]
  },
  {
@@ -371,12 +371,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "a feature table (variable type, sample count, pairing, goal) is matched against each procedure and exactly one procedure matches the scenario"
+   "each procedure is tied to a feature table (variable type, number of samples, pairing, number of variables) and exactly one procedure matches the scenario; each wrong option is rejected by a stated feature"
   ],
   "misconceptions": [
-   "mixes up proportions and means",
-   "uses the wrong number of samples or ignores pairing",
-   "uses a test when an interval is needed or the reverse"
+   "uses a two-proportion procedure when a variable has more than two categories",
+   "uses a one-proportion procedure for two variables",
+   "uses a means procedure for categorical variables"
   ]
  },
  {
@@ -416,12 +416,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "each condition is evaluated separately in code and exactly one statement agrees with all three evaluations"
+   "each condition is evaluated separately in code from N, n, p0 and the sample count, and exactly one of the four verdicts agrees with all three evaluations; the verdict from the sample counts is checked to disagree with the verdict from p0"
   ],
   "misconceptions": [
-   "says conditions are met when one fails",
-   "claims random fails",
-   "claims large counts fails"
+   "checks large counts with the sample counts instead of the null value",
+   "claims the 10 percent condition fails when it holds",
+   "treats a small sampled fraction as a random-selection problem"
   ]
  },
  {
@@ -506,7 +506,7 @@
   "calculator": "allowed",
   "stimulus": "stat_chart",
   "verifiedBy": [
-   "each statement is evaluated against the plotted five-number summaries and exactly one of the four chosen statements is true"
+   "each statement is evaluated against the plotted five-number summaries, every compared statistic is required to differ by at least six units so the difference is visible, and exactly one of the four chosen statements is true"
   ],
   "misconceptions": [
    "reverses a comparison of medians",
@@ -541,12 +541,12 @@
   "misconceptions": [
    "uses n(1-p) instead of np",
    "reports p instead of the mean",
-   "reports the most likely value as the mean"
+   "reports n divided by two as the mean"
   ]
  },
  {
   "id": "st_set_binomial_q2",
-  "topic": "2.10",
+  "topic": "2.8",
   "skill": "3.C",
   "calculator": "allowed",
   "stimulus": "stat_chart",
@@ -617,6 +617,141 @@
    "reports r squared",
    "uses the wrong sign",
    "divides r by two"
+  ]
+ },
+ {
+  "id": "st_question_type",
+  "topic": "1.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the five question structures are generated from a table of (quantitative count, categorical count, groups compared) and exactly one row matches the question"
+  ],
+  "misconceptions": [
+   "names one variable when the question names two or the reverse",
+   "mixes up quantitative and categorical variables",
+   "mixes up comparing two groups with a relationship between two variables"
+  ]
+ },
+ {
+  "id": "st_question_revision",
+  "topic": "1.10",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each revision is generated from the property table (variability, population, answerable with data); the draft flaw is one row, and exactly one revision has all three properties"
+  ],
+  "misconceptions": [
+   "keeps the flaw of the draft in new words",
+   "fixes the draft but introduces a different flaw",
+   "asks about one individual instead of a population"
+  ]
+ },
+ {
+  "id": "st_question_scope",
+  "topic": "1.10",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the population of each question is compared with the sampling frame and the study type is checked against the claim; exactly one question matches both"
+  ],
+  "misconceptions": [
+   "applies the result to a larger population than the one sampled",
+   "applies the result to a population that was not sampled",
+   "asks a cause-and-effect question of observational data"
+  ]
+ },
+ {
+  "id": "st_sampling_bias",
+  "topic": "1.12",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each scenario is built from one defining clue of a four-row table of bias types, and exactly one type matches that clue"
+  ],
+  "misconceptions": [
+   "mixes up units that could not be selected with selected units that did not respond",
+   "mixes up self-selection with nonresponse",
+   "mixes up inaccurate answers with how units were selected"
+  ]
+ },
+ {
+  "id": "st_blocking_design",
+  "topic": "1.13",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each design is generated from a property table (random assignment, both treatments in every block, block effect separated) and exactly one design has every property"
+  ],
+  "misconceptions": [
+   "uses a different treatment in each block",
+   "lets the experimenter choose the treatments",
+   "randomizes without regard to the blocks"
+  ]
+ },
+ {
+  "id": "st_simulation_design",
+  "topic": "2.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each design is a triple (digits for the event, digits per trial, counting rule) and is accepted as correct only when all three equal the target triple; the three wrong designs each differ in exactly one component"
+  ],
+  "misconceptions": [
+   "assigns the wrong share of digits to the event",
+   "uses the wrong number of digits per trial",
+   "counts a different event than the one asked about"
+  ]
+ },
+ {
+  "id": "st_hypotheses_means",
+  "topic": "4.4",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option is generated from a table of direction, symbol and roles; the direction of a paired alternative is derived from the stated order of subtraction and the suspicion"
+  ],
+  "misconceptions": [
+   "uses the alternative in the wrong direction",
+   "writes hypotheses about a sample mean",
+   "uses a two-sided alternative for a directional suspicion"
+  ]
+ },
+ {
+  "id": "st_ci_width_effect",
+  "topic": "4.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the ratio of the margins of error is computed from t critical values found with scipy and again by bisection on the numerically integrated t cdf, and the ratio must differ from 1 by at least 15 percent"
+  ],
+  "misconceptions": [
+   "believes the two opposite effects cancel exactly",
+   "considers only the change in the sample size or only the confidence level",
+   "believes the standard deviation is needed although it cancels"
+  ]
+ },
+ {
+  "id": "st_power_effect",
+  "topic": "3.8",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each change is encoded as a pair (change in sample size, change in significance level) and the effects on both error probabilities are evaluated from a rule table; exactly one change meets both requirements"
+  ],
+  "misconceptions": [
+   "raises the significance level and ignores the Type I error",
+   "thinks a smaller significance level raises power",
+   "thinks a smaller sample size raises power"
   ]
  }
 ]

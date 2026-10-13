@@ -1,7 +1,7 @@
 // AP Statistics 원형 무료 사전 점검(LLM·DB·네트워크 없음, 디스크 무변경): 원형별 후보 팩 n 개에 결정적 게이트·설계도·그림 게이트·생성기 결함·look-alike(전체 재고 + 이번 배치)를 돌린다.
 //   npx tsx scripts/ap-generation/stats-precheck.ts --list stats_s1_all [--seed0 7000] [--n 3] [--svg-dir <경로>]
 // --svg-dir: 렌더한 그림(SVG/HTML)을 그 폴더에 쓴다(렌더 눈 검수용; 저장소 밖 경로 권장).
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { gateCandidate } from "../../lib/ap-figures/gate";
@@ -28,8 +28,8 @@ const expl = (p: McPack) => `The correct answer is ${answerTextForExplanation(p.
 // look-alike 기준: 기존 재고 전체(모든 과목 MC)
 type Raw = { stockKey: string; apSubjectCode: string; kind: string; validation: string; keywordCode: string; itemFamilyId: string; payload: Record<string, unknown>; duplicateOf?: string | null };
 const P = (r: { payload: Record<string, unknown> }) => r.payload as { archetype?: string; stem?: string; stimulus?: { kind?: string }; blueprint?: { student_thinking?: string[] } };
-const files = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "stats-s1-items"];
-const raws = files.flatMap((f) => JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as Raw[]).filter((i) => i.validation === "auto_passed" && !i.duplicateOf && i.kind === "mc");
+const files = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "stats-s1-items", "stats-s2a-items", "stats-s2b-items"];
+const raws = files.filter((f) => existsSync(`data/ap/stock/${f}.json`)).flatMap((f) => JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as Raw[]).filter((i) => i.validation === "auto_passed" && !i.duplicateOf && i.kind === "mc");
 const stockIn = raws.map((i) => ({ key: i.stockKey, family: i.itemFamilyId, archetype: P(i).archetype, topic: i.keywordCode, stimKind: P(i).stimulus?.kind ?? "none", stem: P(i).stem ?? "", thinking: P(i).blueprint?.student_thinking }));
 
 const names = (py(["list", LIST]) as { mc: string[] }).mc;
