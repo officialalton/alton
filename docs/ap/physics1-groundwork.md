@@ -395,3 +395,8 @@ TS 쪽: `lib/ap-generation/subjects/physics1.ts`(+`physics1-archetypes.json`, 51
 7. **세트 크기**: 공식 세트 수·크기 미공표. 2문항 세트는 단원 1·4 에 하나씩 둔 우리 구성이며 "공식 구성" 주장을 하지 않는다(§8-D 권장 유지).
 8. **FRQ 키 신뢰**: 서술 행(claim/justification/design)은 `required_elements` 만이므로 독립 검증은 Opus 풀이 대조로만 가능. 그림·그래프 행은 자동 채점 불가(§8-B).
 9. **통과율 가정**: 80% 는 Statistics 와 AB 사이의 절충이며 Physics 직접 자료는 없다. 파일럿이 첫 실측이다.
+
+## 13. P0 마무리와 P1-a 파일럿 결과 (2026-10-13)
+
+**엔지니어링(무료)**: TS `ap_diagram`/`phys_scene` 렌더·정규화(`lib/problem-figures/templates/ap-phys-scene.ts`, Python 기준 렌더와 숫자 단위 동일성 테스트), 선택지 그림 `figure_choice`(자식 `ap_diagram`·`ap_graph`, `gate.ts` 가 `payload.option_scenes` 를 연결), 시험 화면 Physics Reference 패널(자체 문구, "ALTON study reference — not the official College Board sheet")과 공학용 계산기(Desmos 비활성), FRQ 전달은 기존 `ap_physics_1: paper` 유지. 공식 참조 정보(© 2025, AP Central PDF)로 확인한 것: g = 9.8 m/s²(= 9.8 N/kg), G, 1 atm, 접두어, 삼각함수 대표값, 규약 4가지. 수식 목록 본문은 PDF 글리프 추출 불가로 UNVERIFIED(패널 수식은 교과 표준식).
+**P1-a 유료**: 후보 44(22칸 x 2), 통과 18(41%, 칸 단위 12/21=57%), 비용 $1.7329/$1.80, 누적 $44.3027. 그림 유형별 통과: 값 계산 8/14, 그래프 4/10, 장면 6/14, 선택지 그림 0/4, 세트 0/4. 원인: (1) 풀이기·검토기가 장면·선택지 그림을 못 봄 → `AP_FIGURE_TEXT`(결정적 장면 설명) 추가, (2) 원형의 오개념 문구와 값 불일치(투사체·용수철·중력압·진동·질량 없는 막대 등) 수정, (3) 세트 소개문이 "Questions 1 and 2 refer…" 라 단독 검토에서 반려 → 장면 소개문으로 변경, (4) `\text{ m/s^2}` KaTeX 오류와 FBD 라벨 클리핑을 화면 증거에서 발견·수정(`unit_tex`, 축별 viewBox 검사). 통과 50% 미만 규칙에 따라 P1-b 미실행, v2 구성 `config/ap-frozen/phys-p1-a.v2.json` 동결(미실행).

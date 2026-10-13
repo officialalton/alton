@@ -577,6 +577,11 @@ function normalizeDiagram(d: Json | null, stim: Json, ctx: StimCtx, issues: Norm
   void stim; void ctx;
   const fail = (code: string, message: string): NormResult => ({ stimKind: "diagram", spec: null, features, issues: [...issues, { level: "info", code, message }], hidden });
   if (!d) return fail("diagram_no_data", "도식 data 가 없습니다.");
+  // AP Physics 1 장면 모델(변형 phys_scene): 장면 JSON 이 단일 원본이며 렌더는 결정적이다.
+  if (d.variant === "phys_scene") {
+    if (!isObj(d.scene)) return fail("diagram_phys_scene", "phys_scene 의 scene 객체가 없습니다.");
+    return { stimKind: "diagram", spec: { type: "ap_diagram", variant: "phys_scene", scene: d.scene as never }, features, issues, hidden };
+  }
   const strand = (s: unknown) => (isObj(s) && Array.isArray(s.bases) ? { label: String(s.label ?? s.type ?? ""), leftEnd: String(s.left_end ?? ""), rightEnd: String(s.right_end ?? ""), bases: (s.bases as unknown[]).map(String) } : null);
   if (isObj(d.top_strand) && isObj(d.bottom_strand)) {
     const top = strand(d.top_strand), bottom = strand(d.bottom_strand);

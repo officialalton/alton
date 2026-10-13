@@ -1,0 +1,60 @@
+{
+ "runs": [
+  "phys-p1-a"
+ ],
+ "rows": 42,
+ "passed": 18,
+ "rejected": 24,
+ "passRate": 0.429,
+ "singles": {
+  "candidates": 42
+ },
+ "unitsPassed": {
+  "1": 4,
+  "2": 4,
+  "4": 4,
+  "5": 2,
+  "6": 2,
+  "7": 1,
+  "8": 1
+ },
+ "figPassed": {
+  "graph": 4,
+  "none": 8,
+  "scene": 6
+ },
+ "figAll": {
+  "graph": 10,
+  "none": 14,
+  "scene": 14,
+  "choice_scenes": 4
+ },
+ "figPassRate": {
+  "graph": "4/10",
+  "none": "8/14",
+  "scene": "6/14",
+  "choice_scenes": "0/4"
+ },
+ "renderTypesPassed": {
+  "ap_graph:phys_line": 4,
+  "none": 8,
+  "ap_diagram:phys_scene": 6
+ },
+ "archetypesPassed": {
+  "ph_vt_displacement": 2,
+  "ph_kinematics_time": 2,
+  "ph_atwood_tension": 1,
+  "ph_incline_friction": 1,
+  "ph_circular_tension": 2,
+  "ph_ft_impulse": 1,
+  "ph_inelastic_collision": 1,
+  "ph_alpha_hanging": 2,
+  "ph_rolling_incline": 2,
+  "ph_shm_vmax": 1,
+  "ph_torricelli_range": 1,
+  "ph_collision_type": 2
+ },
+ "costUsd": {
+  "phys-p1-a": 1.7329
+ }
+}

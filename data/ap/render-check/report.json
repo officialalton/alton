@@ -1,19 +1,26 @@
 {
- "generatedAt": "2026-10-13T07:14:23.299Z",
- "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1318행)",
+ "generatedAt": "2026-10-13T08:10:18.840Z",
+ "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1360행)",
  "all": {
-  "total": 1318,
-  "pass": 775,
-  "fail": 1,
-  "notApplicable": 542
+  "total": 1360,
+  "pass": 801,
+  "fail": 3,
+  "notApplicable": 556
  },
  "liveStates": {
-  "total": 811,
-  "pass": 409,
+  "total": 829,
+  "pass": 419,
   "fail": 0,
-  "notApplicable": 402
+  "notApplicable": 410
  },
  "byType": [
+  {
+   "type": "ap_diagram:phys_scene",
+   "total": 14,
+   "pass": 14,
+   "fail": 0,
+   "notApplicable": 0
+  },
   {
    "type": "ap_diagram:replication_bubble",
    "total": 1,
@@ -74,6 +81,13 @@
    "type": "ap_graph:econ_curves",
    "total": 25,
    "pass": 25,
+   "fail": 0,
+   "notApplicable": 0
+  },
+  {
+   "type": "ap_graph:phys_line",
+   "total": 10,
+   "pass": 10,
    "fail": 0,
    "notApplicable": 0
   },
@@ -169,11 +183,18 @@
    "notApplicable": 0
   },
   {
+   "type": "figure_choice:ap_diagram:phys_scene",
+   "total": 4,
+   "pass": 2,
+   "fail": 2,
+   "notApplicable": 0
+  },
+  {
    "type": "none",
-   "total": 433,
+   "total": 447,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 433
+   "notApplicable": 447
   },
   {
    "type": "none(diagram_text_only)",
@@ -220,15 +241,22 @@
    "pass": 74,
    "fail": 0,
    "notApplicable": 57
+  },
+  "ap_physics_1": {
+   "total": 42,
+   "pass": 26,
+   "fail": 2,
+   "notApplicable": 14
   }
  },
  "figureNeed": {
-  "required": 717,
-  "text_only": 542,
+  "required": 745,
+  "text_only": 556,
   "supporting": 59
  },
  "errorCodes": {
-  "declared_intersection_mismatch": 2
+  "declared_intersection_mismatch": 2,
+  "outside_viewbox": 8
  },
  "warnCodes": {
   "stimulus_json_repaired": 93,
@@ -242,7 +270,8 @@
   "table_no_title": 113,
   "axis_units_missing": 15,
   "text_data_not_in_stem": 1,
-  "axis_range_derived": 28
+  "axis_range_derived": 28,
+  "curve_clipped": 2
  },
  "results": [
   {
@@ -19235,6 +19264,648 @@
    "status": "pass",
    "issues": [],
    "alt": "Scatterplot of 28 points. Horizontal axis: Temperature (degrees Celsius). Vertical axis: Residual. Line: y = 0x + 0."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m01-k0",
+   "contentHash": "c9c546b7096aa4ea94d6c655ddb7309004d483734305c17de97d9906b2766e57",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:phys_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: Time (s), 0 to 9. Vertical axis: Velocity (m/s), -4 to 3."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m01-k1",
+   "contentHash": "20719ad78978fb226691842661573eab72abf3a9375a5bf5b30a3e60d3393b88",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:phys_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: Time (s), 0 to 8. Vertical axis: Velocity (m/s), -2 to 4."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m02-k0",
+   "contentHash": "72c101e86f0da927f22c6a75d9a4f074b68cbb50cdaefd4a7ca5e27cd17ed676",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m02-k1",
+   "contentHash": "6a2026ef36501df39029ccb718d241f6137979cdecb94f444d67254ccbf3e196",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m03-k0",
+   "contentHash": "b9425478c1cfd2f5cddab187e95a093823c3b24c035f71514c712a28190c9fad",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m03-k1",
+   "contentHash": "a6d1a42c620321c7f14b7d2f19da90e1661b70261e83d5468a8c06cfb2687b2e",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m04-k0",
+   "contentHash": "4da119713d84487e7b54f82ee3c2861104a7db65e12f0ee18ff75d424ef6165b",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "Two blocks of mass 2 kg and 6 kg hanging from the two sides of a pulley."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m04-k1",
+   "contentHash": "ad7fe2877bf32f0ba5c7d2cbd87801d80e22c38dc80ae1b79c50efa1064a08ad",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "Two blocks of mass 1 kg and 6 kg hanging from the two sides of a pulley."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m05-k0",
+   "contentHash": "6d3692c3e547d4fdde1f9b44a419c4805274d01c8e73b37e6c19bbbd22d1ce03",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "A 30 degree incline with a 5 kg block."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m05-k1",
+   "contentHash": "d04e1c5467f1a10bc86f886cee0ef62b4f92c3f2a46a56175ea415fe50e2a0d9",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "A 25 degree incline with a 5 kg block."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m06-k0",
+   "contentHash": "9675a288b0ed1441c0a14ea09cef5bf4fa3f14b1521e18637e0a73a7a7ab5988",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m06-k1",
+   "contentHash": "4ac6eca55171b48bbafa16278b26b4ece2e738b85b636dbdcf42e6bb6d1ab5fe",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m07-k0",
+   "contentHash": "cc577bca41b721e95b60e47f15a0eb5d5d45003d86c8745491c411607d8574c4",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:phys_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "curve_clipped",
+     "message": "\"곡선\" 일부가 축 범위 밖입니다."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: Horizontal position (m), -1.1 to 1.1. Vertical axis: Height (m), 0 to 0.96."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m07-k1",
+   "contentHash": "076a65663da2587a1c04640e6913bdb34b261abe3daf864abb20d34a9e5fab0b",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:phys_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "curve_clipped",
+     "message": "\"곡선\" 일부가 축 범위 밖입니다."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: Horizontal position (m), -2.2 to 2.2. Vertical axis: Height (m), 0 to 2.4."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m08-k0",
+   "contentHash": "ecb54ea23a2249a568bd978b0be8c629bb06ab9c81d7f1e78234c2329126909a",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m08-k1",
+   "contentHash": "c7223d418684fdac23d0d166ff0ea0c8a2f8d9343fbc4269b33f6789205750ac",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m09-k0",
+   "contentHash": "ad4f54933da5bf69e473e9d36c1801fe501114bac7cc0015d96e49cdd8902f78",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:phys_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: Time (s), 0 to 1. Vertical axis: Force (N), 0 to 70."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m09-k1",
+   "contentHash": "ac5455d23296cf5bb64f044e8ee9f41afecca3d61313f596cb5a30fafe441e7b",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:phys_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: Time (s), 0 to 1. Vertical axis: Force (N), 0 to 70."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m10-k0",
+   "contentHash": "d2b6d0ec60da318cf2b71600f92586b07e22b149d69632375c48da3e0a9de20c",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "Collision diagram. Before: 2 kg moving right at 4 m/s and 4 kg moving right at 2 m/s."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m10-k1",
+   "contentHash": "eda8b8ea59ff1f090c52998e7bd9e5f1272194eccb0785c89a3875623b517406",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "Collision diagram. Before: 3 kg moving right at 6 m/s and 2 kg moving left at 2 m/s."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m11-k0",
+   "contentHash": "a513054939f8240fdc091ec97ef4ed7daeaefd6b21c3d5f6faea0c639059d11c",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "A 4 m beam on a pivot at 1.6 m from its left end, with 2 forces: mg down at 0 m, Mg down at 2 m."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m11-k1",
+   "contentHash": "71a205fc2ed2fc21f360012612108907439ef91ccbc1ecf3ca232594cd3dc298",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "A 3 m beam on a pivot at 0.9 m from its left end, with 2 forces: mg down at 0 m, Mg down at 1.5 m."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m12-k0",
+   "contentHash": "931bb7e1696a5ce18db2a174760f5697f0cccbf67f7f4626befd8d0a66df5efb",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m12-k1",
+   "contentHash": "50a88147edc147b11a31dbed3379a568ebbec721f87f34354c379f66790f4a0d",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m13-k0",
+   "contentHash": "e86439489417fb5b5d2892bd46f934013fb286cbbcc52e6f70d26825fea2cc71",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m13-k1",
+   "contentHash": "0a3b69714129d685b741978faaa351235b3eeda3c8aee1497e97d3fe3932a12e",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m14-k0",
+   "contentHash": "57bea5c0472de07d1193ca639b306a3ba4a470e238635eb10eee47ccf9680143",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:phys_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: Time (s), 0 to 2. Vertical axis: Position (m), -0.1 to 0.1."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m14-k1",
+   "contentHash": "a7cf8d06917447d2779dbcb6046876fe52f9fe9a7fe086bc53b5b077fa0d2a9f",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:phys_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: Time (s), 0 to 4. Vertical axis: Position (m), -0.12 to 0.12."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m15-k0",
+   "contentHash": "cec91bf3486bfc977ec4c22cb08a6b005152d29481bd8da6a9594d96646e15fa",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m15-k1",
+   "contentHash": "6cde4c0b417cdbfef93cc72de5a99ff1e5b5c37b81f27a12360c97dfbbdcaf6a",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m16-k0",
+   "contentHash": "5a922e122d6ee1d2f0f8e5346244997033af992c44b5093f8fc825941d4c77d3",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "An open tank filled to a depth of 0.6 m above a small hole in its side, 1 m above the ground."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m16-k1",
+   "contentHash": "d6946680460ef009a7738d38d197864f3b9b624ec4583615edd534036667c64b",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "An open tank filled to a depth of 0.8 m above a small hole in its side, 0.5 m above the ground."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m17-k0",
+   "contentHash": "8db894eac93b5b4065cd44bb7a9e3b7f41c469753e02470ea2ec42f6a9ced640",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "Motion diagram: 5 dots at equal time intervals along a line, each with a velocity arrow whose length is proportional to the speed."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m17-k1",
+   "contentHash": "cc2532c8fb4b9072dc2ce3fd88d10b9ea168c917f92d140cca8fe636a6b87f90",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "Motion diagram: 5 dots at equal time intervals along a line, each with a velocity arrow whose length is proportional to the speed."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m18-k0",
+   "contentHash": "456b05329708c599c0ee70ae2242f34be6c550a402fdf44334b97b96d156f46a",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "figure_choice:ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "fail",
+   "issues": [
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 A: 장면 그림 검사 실패: outside_viewbox"
+    },
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 B: 장면 그림 검사 실패: outside_viewbox"
+    },
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 C: 장면 그림 검사 실패: outside_viewbox"
+    },
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 D: 장면 그림 검사 실패: outside_viewbox"
+    }
+   ],
+   "alt": "그래프/도형 선택지 4개(A, B, C, D) — 같은 축·크기로 나란히."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m18-k1",
+   "contentHash": "57a9f6c299b899b7c37fe841cb85d67899c7e8c7bebb6575c0dc4a6c16f582e4",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "figure_choice:ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "fail",
+   "issues": [
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 A: 장면 그림 검사 실패: outside_viewbox"
+    },
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 B: 장면 그림 검사 실패: outside_viewbox"
+    },
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 C: 장면 그림 검사 실패: outside_viewbox"
+    },
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 D: 장면 그림 검사 실패: outside_viewbox"
+    }
+   ],
+   "alt": "그래프/도형 선택지 4개(A, B, C, D) — 같은 축·크기로 나란히."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m19-k0",
+   "contentHash": "24cfe8340f85e6ca09f861fcf7705f30d63c1f5e342dc4696b0b989a2625ac50",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "figure_choice:ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "그래프/도형 선택지 4개(A, B, C, D) — 같은 축·크기로 나란히."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m19-k1",
+   "contentHash": "a68993e7e8424c040ff4501d855150f80ba8e6b085e602dc16e4d0b5109cf84d",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "figure_choice:ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "그래프/도형 선택지 4개(A, B, C, D) — 같은 축·크기로 나란히."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m20-k0",
+   "contentHash": "e1364104d61d6bea5a534482c25ff5e0ca22616d48c5d447b834d486e4e0a7f2",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "Collision diagram. Before: 1 kg moving right at 4 m/s and 3 kg at rest. After: 1 kg moving left at 2 m/s and 3 kg moving right at 2 m/s."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m20-k1",
+   "contentHash": "6d409e59dd3776ea6418949e1d0595361dde224af5004f5a923152718fe37ae4",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "Collision diagram. Before: 2 kg moving right at 4 m/s and 1 kg at rest. After: 2 kg moving right at 2 m/s and 1 kg moving right at 4 m/s."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m21-k0",
+   "contentHash": "e5d9481dd21b7121466acd7741d9d3c8b41125924cc7c2c4f2da08d96370d84f",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:phys_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: Time (s), 0 to 8. Vertical axis: Velocity (m/s), -4 to 1."
+  },
+  {
+   "key": "phys-p1-a:ap_physics_1-m21-k1",
+   "contentHash": "ffbd7fd64672fd88cbf19f7509b1287ec4da759fd2c3691ea01cb30f6e0a36e4",
+   "subject": "ap_physics_1",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:phys_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of curve. Horizontal axis: Time (s), 0 to 10. Vertical axis: Velocity (m/s), -4 to 7."
   },
   {
    "key": "supp-b1-bc-final:ap_calculus_bc-m01-k0",

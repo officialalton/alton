@@ -29,9 +29,19 @@ def sig(v, n=3):
     return s.lstrip("-") if float(s) == 0 else s
 
 
+def unit_tex(unit):
+    """단위 -> TeX. \\text{} 안의 ^ 는 KaTeX 가 거부하므로 지수는 text 밖으로 뺀다: m/s^2 -> \\text{ m/s}^{2}."""
+    if not unit:
+        return ""
+    if "^" in unit:
+        base, exp = unit.split("^", 1)
+        return f"\\text{{ {base}}}^{{{exp}}}"
+    return f"\\text{{ {unit}}}"
+
+
 def Q(v, unit="", n=3):
     """수치+단위 -> $...$"""
-    return "$" + sig(v, n) + (f"\\text{{ {unit}}}" if unit else "") + "$"
+    return "$" + sig(v, n) + unit_tex(unit) + "$"
 
 
 def TX(s):
@@ -118,10 +128,10 @@ def pbp(arch, topic, skill, concept, thinking, cond, mis, path, material, judgme
 
 def ppack(arch, topic, skill, stem, key, ds, rng, bpr, stim=None, est=120, facts=None, option_scenes=None):
     p = pack(arch, topic, skill, "allowed", stem, key, ds, rng, stimulus=stim, est=est, facts=facts or [], extra={"blueprint": bpr})
-    if option_scenes:  # 선택지가 그림인 문항: 임시 태그(text) -> 보기 순서대로 scene 재배열 후 "Diagram n" 으로 라벨(정답 암시 요소 없음은 phys_figs.choice_checks 가 검증)
+    if option_scenes:  # 선택지가 그림인 문항: 임시 태그(text) -> 보기 순서대로 scene 재배열 후 "Diagram A~D" 으로 라벨(정답 암시 요소 없음은 phys_figs.choice_checks 가 검증)
         p["option_scenes"] = [option_scenes[o["text"]] for o in p["options"]]
         for i, o in enumerate(p["options"]):
-            o["text"] = f"Diagram {i + 1}"
+            o["text"] = f"Diagram {chr(65 + i)}"
     return p
 
 
@@ -138,7 +148,7 @@ def sci(v, unit="", n=3):
     """과학적 표기: $1.30\\times10^{5}\\text{ Pa}$ (|v| >= 1e4 또는 < 1e-2 일 때)"""
     e = int(math.floor(math.log10(abs(v))))
     m = v / 10 ** e
-    return "$" + sig(m, n) + f"\\times10^{{{e}}}" + (f"\\text{{ {unit}}}" if unit else "") + "$"
+    return "$" + sig(m, n) + f"\\times10^{{{e}}}" + unit_tex(unit) + "$"
 
 
 MAT_NONE = {"type": "none", "must_include": []}

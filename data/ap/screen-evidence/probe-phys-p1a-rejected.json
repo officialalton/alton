@@ -1,0 +1,1320 @@
+{
+ "schema": "ap-screen-evidence/v3",
+ "generator": "playwright",
+ "limitations": "Automated screen check (Playwright): covers display, input, answer/explanation exposure and clipping only. It does NOT verify graph meaning, figure correctness, or naturalness of wording \u2014 that still needs human review.",
+ "generatedAt": "2026-10-13T08:09:20.678Z",
+ "entries": [
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m04-k1",
+   "checker_kind": "automated",
+   "content_hash": "ad7fe2877bf32f0ba5c7d2cbd87801d80e22c38dc80ae1b79c50efa1064a08ad",
+   "problem_version_id": "b653e674-ec77-4bfb-9f22-6064a231121c",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m04-k1-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:01.721Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m05-k0",
+   "checker_kind": "automated",
+   "content_hash": "6d3692c3e547d4fdde1f9b44a419c4805274d01c8e73b37e6c19bbbd22d1ce03",
+   "problem_version_id": "7b195cf9-559a-4880-8a23-20eb37083e65",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m05-k0-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:02.080Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m07-k0",
+   "checker_kind": "automated",
+   "content_hash": "cc577bca41b721e95b60e47f15a0eb5d5d45003d86c8745491c411607d8574c4",
+   "problem_version_id": "50faf0b1-2335-49dc-995e-e87a6fab6ad2",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m07-k0-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:02.450Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m07-k1",
+   "checker_kind": "automated",
+   "content_hash": "076a65663da2587a1c04640e6913bdb34b261abe3daf864abb20d34a9e5fab0b",
+   "problem_version_id": "4c07633b-08ef-4a08-81ee-37e0789b648f",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m07-k1-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:02.824Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m09-k0",
+   "checker_kind": "automated",
+   "content_hash": "ad4f54933da5bf69e473e9d36c1801fe501114bac7cc0015d96e49cdd8902f78",
+   "problem_version_id": "b4fca465-ca0e-487b-a0bc-2224da8bb977",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m09-k0-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:03.193Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m10-k0",
+   "checker_kind": "automated",
+   "content_hash": "d2b6d0ec60da318cf2b71600f92586b07e22b149d69632375c48da3e0a9de20c",
+   "problem_version_id": "1a34adb1-c02d-4aad-bfc6-23bed3709b0d",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m10-k0-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:03.575Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m11-k0",
+   "checker_kind": "automated",
+   "content_hash": "a513054939f8240fdc091ec97ef4ed7daeaefd6b21c3d5f6faea0c639059d11c",
+   "problem_version_id": "b8cf585e-451c-41d8-b8ee-df3ddc269f4c",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m11-k0-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:03.930Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m11-k1",
+   "checker_kind": "automated",
+   "content_hash": "71a205fc2ed2fc21f360012612108907439ef91ccbc1ecf3ca232594cd3dc298",
+   "problem_version_id": "fb86abf5-e04c-46e7-b7dd-282caf54d77d",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m11-k1-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:04.281Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m14-k0",
+   "checker_kind": "automated",
+   "content_hash": "57bea5c0472de07d1193ca639b306a3ba4a470e238635eb10eee47ccf9680143",
+   "problem_version_id": "dcc26b88-599e-4629-98e1-aef68af39735",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m14-k0-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:04.631Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m16-k0",
+   "checker_kind": "automated",
+   "content_hash": "5a922e122d6ee1d2f0f8e5346244997033af992c44b5093f8fc825941d4c77d3",
+   "problem_version_id": "3e12c9cc-606f-4084-aacc-a39937b32f09",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m16-k0-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:04.981Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m17-k0",
+   "checker_kind": "automated",
+   "content_hash": "8db894eac93b5b4065cd44bb7a9e3b7f41c469753e02470ea2ec42f6a9ced640",
+   "problem_version_id": "2c8ac099-415b-4784-b951-ebb848b5982d",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m17-k0-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:05.332Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m17-k1",
+   "checker_kind": "automated",
+   "content_hash": "cc2532c8fb4b9072dc2ce3fd88d10b9ea168c917f92d140cca8fe636a6b87f90",
+   "problem_version_id": "5c38791d-06bc-4635-9c7a-b4639f4ccf67",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m17-k1-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:05.690Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m18-k0",
+   "checker_kind": "automated",
+   "content_hash": "456b05329708c599c0ee70ae2242f34be6c550a402fdf44334b97b96d156f46a",
+   "problem_version_id": "30fd56d2-bcd1-495f-b309-8069f8516c24",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m18-k0-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:06.055Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "4 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m18-k1",
+   "checker_kind": "automated",
+   "content_hash": "57a9f6c299b899b7c37fe841cb85d67899c7e8c7bebb6575c0dc4a6c16f582e4",
+   "problem_version_id": "975a8803-55c7-49cf-a3e2-1d2dd9421d1d",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m18-k1-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:06.405Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "4 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m19-k0",
+   "checker_kind": "automated",
+   "content_hash": "24cfe8340f85e6ca09f861fcf7705f30d63c1f5e342dc4696b0b989a2625ac50",
+   "problem_version_id": "3f578c9c-a19a-4069-8af5-b71204f3ac1d",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m19-k0-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:06.756Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "4 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m19-k1",
+   "checker_kind": "automated",
+   "content_hash": "a68993e7e8424c040ff4501d855150f80ba8e6b085e602dc16e4d0b5109cf84d",
+   "problem_version_id": "a8e7425c-55f4-43fc-925c-fb855acbce5f",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m19-k1-390x844.jpg",
+   "timestamp": "2026-10-13T08:09:07.115Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "4 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m04-k1",
+   "checker_kind": "automated",
+   "content_hash": "ad7fe2877bf32f0ba5c7d2cbd87801d80e22c38dc80ae1b79c50efa1064a08ad",
+   "problem_version_id": "b653e674-ec77-4bfb-9f22-6064a231121c",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m04-k1-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:11.727Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m05-k0",
+   "checker_kind": "automated",
+   "content_hash": "6d3692c3e547d4fdde1f9b44a419c4805274d01c8e73b37e6c19bbbd22d1ce03",
+   "problem_version_id": "7b195cf9-559a-4880-8a23-20eb37083e65",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m05-k0-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:12.084Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m07-k0",
+   "checker_kind": "automated",
+   "content_hash": "cc577bca41b721e95b60e47f15a0eb5d5d45003d86c8745491c411607d8574c4",
+   "problem_version_id": "50faf0b1-2335-49dc-995e-e87a6fab6ad2",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m07-k0-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:12.454Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m07-k1",
+   "checker_kind": "automated",
+   "content_hash": "076a65663da2587a1c04640e6913bdb34b261abe3daf864abb20d34a9e5fab0b",
+   "problem_version_id": "4c07633b-08ef-4a08-81ee-37e0789b648f",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m07-k1-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:12.839Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m09-k0",
+   "checker_kind": "automated",
+   "content_hash": "ad4f54933da5bf69e473e9d36c1801fe501114bac7cc0015d96e49cdd8902f78",
+   "problem_version_id": "b4fca465-ca0e-487b-a0bc-2224da8bb977",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m09-k0-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:13.214Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m10-k0",
+   "checker_kind": "automated",
+   "content_hash": "d2b6d0ec60da318cf2b71600f92586b07e22b149d69632375c48da3e0a9de20c",
+   "problem_version_id": "1a34adb1-c02d-4aad-bfc6-23bed3709b0d",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m10-k0-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:13.576Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m11-k0",
+   "checker_kind": "automated",
+   "content_hash": "a513054939f8240fdc091ec97ef4ed7daeaefd6b21c3d5f6faea0c639059d11c",
+   "problem_version_id": "b8cf585e-451c-41d8-b8ee-df3ddc269f4c",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m11-k0-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:13.946Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m11-k1",
+   "checker_kind": "automated",
+   "content_hash": "71a205fc2ed2fc21f360012612108907439ef91ccbc1ecf3ca232594cd3dc298",
+   "problem_version_id": "fb86abf5-e04c-46e7-b7dd-282caf54d77d",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m11-k1-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:14.323Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m14-k0",
+   "checker_kind": "automated",
+   "content_hash": "57bea5c0472de07d1193ca639b306a3ba4a470e238635eb10eee47ccf9680143",
+   "problem_version_id": "dcc26b88-599e-4629-98e1-aef68af39735",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m14-k0-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:14.698Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m16-k0",
+   "checker_kind": "automated",
+   "content_hash": "5a922e122d6ee1d2f0f8e5346244997033af992c44b5093f8fc825941d4c77d3",
+   "problem_version_id": "3e12c9cc-606f-4084-aacc-a39937b32f09",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m16-k0-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:15.085Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m17-k0",
+   "checker_kind": "automated",
+   "content_hash": "8db894eac93b5b4065cd44bb7a9e3b7f41c469753e02470ea2ec42f6a9ced640",
+   "problem_version_id": "2c8ac099-415b-4784-b951-ebb848b5982d",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m17-k0-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:15.435Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m17-k1",
+   "checker_kind": "automated",
+   "content_hash": "cc2532c8fb4b9072dc2ce3fd88d10b9ea168c917f92d140cca8fe636a6b87f90",
+   "problem_version_id": "5c38791d-06bc-4635-9c7a-b4639f4ccf67",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m17-k1-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:15.797Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m18-k0",
+   "checker_kind": "automated",
+   "content_hash": "456b05329708c599c0ee70ae2242f34be6c550a402fdf44334b97b96d156f46a",
+   "problem_version_id": "30fd56d2-bcd1-495f-b309-8069f8516c24",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m18-k0-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:16.161Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "4 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m18-k1",
+   "checker_kind": "automated",
+   "content_hash": "57a9f6c299b899b7c37fe841cb85d67899c7e8c7bebb6575c0dc4a6c16f582e4",
+   "problem_version_id": "975a8803-55c7-49cf-a3e2-1d2dd9421d1d",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m18-k1-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:16.518Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "4 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m19-k0",
+   "checker_kind": "automated",
+   "content_hash": "24cfe8340f85e6ca09f861fcf7705f30d63c1f5e342dc4696b0b989a2625ac50",
+   "problem_version_id": "3f578c9c-a19a-4069-8af5-b71204f3ac1d",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m19-k0-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:16.877Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "4 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "phys-p1-a:ap_physics_1-m19-k1",
+   "checker_kind": "automated",
+   "content_hash": "a68993e7e8424c040ff4501d855150f80ba8e6b085e602dc16e4d0b5109cf84d",
+   "problem_version_id": "a8e7425c-55f4-43fc-925c-fb855acbce5f",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/phys-p1a-probe/phys-p1-a_ap_physics_1-m19-k1-1280x800.jpg",
+   "timestamp": "2026-10-13T08:09:17.243Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "4 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  }
+ ]
+}

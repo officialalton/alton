@@ -5,6 +5,8 @@ import { GraphingCalculator, type MathToolsOpen } from "@/app/session/[id]/MockE
 import type { CalculatorTab, ReferenceKind, SubjectToolsConfig } from "@/lib/exam-tools/subject-tools";
 import StatsCalculator from "./StatsCalculator";
 import StatsReference from "./StatsReference";
+import PhysicsCalculator from "./PhysicsCalculator";
+import PhysicsReference from "./PhysicsReference";
 import { TabBar } from "./Tabs";
 
 // 과목별 도구 패널(계산기 팝업 + 참조 팝업). 과목 구성은 lib/exam-tools/subject-tools.ts.
@@ -14,9 +16,11 @@ const DesmosTab = () => <div className="h-full p-2"><GraphingCalculator heightCl
 const CALCULATOR_TABS: Record<CalculatorTab, { label: string; Component: ComponentType }> = {
   statistics: { label: "Statistics", Component: StatsCalculator },
   desmos: { label: "Graphing (Desmos)", Component: DesmosTab },
+  scientific: { label: "Scientific", Component: PhysicsCalculator },
 };
 const REFERENCE_PANELS: Record<ReferenceKind, { title: string; Component: ComponentType }> = {
   statistics: { title: "Reference", Component: StatsReference },
+  physics: { title: "Reference", Component: PhysicsReference },
 };
 
 function Modal({ label, show, onClose, closeTestId, children, header }: { label: string; show: boolean; onClose: () => void; closeTestId: string; children: React.ReactNode; header?: React.ReactNode }) {

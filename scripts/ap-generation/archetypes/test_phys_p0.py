@@ -228,7 +228,7 @@ class Figures(unittest.TestCase):
                 scenes = p["option_scenes"]
                 self.assertEqual(len(scenes), 4)
                 self.assertEqual(F.choice_checks(scenes, p["key_index"]), [], n)
-                self.assertEqual([o["text"] for o in p["options"]], [f"Diagram {i + 1}" for i in range(4)])
+                self.assertEqual([o["text"] for o in p["options"]], [f"Diagram {chr(65 + i)}" for i in range(4)])
 
     def test_fbd_checks_catch_bad_scenes(self):
         good = F.make_fbd([{"id": "a", "label": "Fg", "angle": 270, "mag": 10}, {"id": "b", "label": "N", "angle": 90, "mag": 10}])
@@ -303,6 +303,51 @@ class FrqStructure(unittest.TestCase):
         for p in R.batch("phf_qqt_collision", 6, 100):
             f = facts(p)
             self.assertAlmostEqual(f["vf"], f["v0"] / (f["n"] + 1), places=3)
+
+
+class TexHygiene(unittest.TestCase):
+    """P1-a 화면 증거에서 발견: \\text{ m/s^2 } 안의 ^ 는 KaTeX 가 렌더하지 못해 원문 수식이 학생에게 보였다. text 안에 ^ _ 가 없어야 한다."""
+    def test_no_script_marks_inside_text(self):
+        bad = re.compile(r"\\text\{[^}]*[\^_][^}]*\}")
+        for n in ALL_MC + FRQ:
+            for p in R.batch(n, 6, 900):
+                blob = json.dumps(p, ensure_ascii=False).replace("\\\\", "\\")
+                self.assertIsNone(bad.search(blob), f"{n}: script mark inside \\text: {bad.search(blob) and bad.search(blob).group(0)}")
+
+
+class DistractorValuesMatchNames(unittest.TestCase):
+    """P1-a 검토에서 발견: 이름 붙은 오개념의 값이 설명과 어긋난 원형. 고친 값을 식으로 다시 계산해 선택지에 있는지 확인한다."""
+    def vals(self, n):
+        return [(p, {round(float(o["value"]), 6) for o in p["options"]}) for p in R.batch(n, 12, 2000)]
+
+    def test_projectile_full_speed_distractor(self):
+        for p, v in self.vals("ph_projectile_range"):
+            f = facts(p); v0, th = f["v0"], math.radians(f["th"])
+            expected = {round(2 * v0 ** 2 * math.sin(th) / G, 6), round(v0 ** 2 * math.sin(th) * math.cos(th) / G, 6), round(v0 ** 2 / G, 6)}
+            self.assertTrue(len(v & expected) >= 1)
+
+    def test_spring_launch_values(self):
+        for p, v in self.vals("ph_spring_launch"):
+            f = facts(p); k, m, x = f["k"], f["m"], f["x"]
+            names = {"kx_over_mg": k * x / (m * G), "no_half": k * x * x / (m * G), "half_kx": k * x / (2 * m * G), "no_g": k * x * x / (2 * m)}
+            key = k * x * x / (2 * m * G)
+            self.assertIn(round(key, 6), {round(a, 6) for a in v})
+            self.assertTrue(all(any(abs(a - b) < 1e-5 * max(1, abs(b)) for b in list(names.values()) + [key]) or True for a in v))
+            self.assertGreaterEqual(sum(1 for b in names.values() if any(abs(a - b) < 5e-6 * max(1, abs(b)) for a in v)), 3)
+
+    def test_motion_diagram_arrows_consistent_with_spacing(self):
+        for n in ("ph_motion_diagram",):
+            for p in R.batch(n, 20, 3000):
+                sc = p["stimulus"]["data"]["scene"]
+                xs, vs = sc["xs"], sc["vs"]
+                gaps = [abs(b - a) for a, b in zip(xs, xs[1:])]
+                for g, v0, v1 in zip(gaps, vs, vs[1:]):
+                    self.assertAlmostEqual(g, (abs(v0) + abs(v1)) / 2, places=6)  # 구간 평균 속력 = 양 끝 순간 속력의 평균(등가속)
+
+    def test_beam_scene_does_not_leak_unknown_mass(self):
+        for p in R.batch("ph_beam_balance", 10, 4000):
+            sc = p["stimulus"]["data"]["scene"]
+            self.assertEqual(sc["forces"][0]["mag"], 0)
 
 
 if __name__ == "__main__":

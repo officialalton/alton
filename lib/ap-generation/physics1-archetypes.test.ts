@@ -47,9 +47,13 @@ d("AP Physics 1 P0 archetypes (Python generators, 3 seeds each)", () => {
       expect({ n, reasons }).toEqual({ n, reasons: [] });
       expect(p.options).toHaveLength(OPTION_COUNT.ap_physics_1);
       expect(NOT_ASSESSED_MC.ap_physics_1).not.toContain(p.skill);
-      if (p.stimulus.kind === "graph") {
+      const optionScenes = (p as unknown as { option_scenes?: unknown[] }).option_scenes;
+      if (p.stimulus.kind === "graph" || p.stimulus.kind === "diagram" || optionScenes) {
         const g = gateCandidate({ candidateKey: n, apSubjectCode: "ap_physics_1", kind: "mc", payload: p as unknown as Record<string, unknown> });
         expect({ n, fig: g.issues.filter((i) => i.level === "error").map((i) => i.code) }).toEqual({ n, fig: [] });
+        expect({ n, status: g.status }).toEqual({ n, status: "pass" });
+        if (p.stimulus.kind === "diagram") expect(g.renderType).toBe("ap_diagram:phys_scene");
+        if (optionScenes) { expect(g.renderType).toBe("figure_choice:ap_diagram:phys_scene"); expect(g.output).toContain("figure-choice"); }
       }
     }
   });

@@ -42,6 +42,8 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "stats-s3a", title: "AP Statistics S3-a (다단계 단독 20)", itemsFile: "stats-s3a-items.json", loadLabel: "stats-s3a-2026-10-12", supplement: true, passKeysFile: "stats-s3a-pass-keys.json", evidenceFile: "evidence-stats-s3a.json" },
   // 2026-10-13 AP Statistics S3-b(docs/ap/statistics-s3b-report.md): ST2 부족분 — 단독 37 후보(통과 34) + 단원 5 회귀 공유 세트 3 + FRQ 12(통과 5).
   { id: "stats-s3b", title: "AP Statistics S3-b (ST2 부족분: 단독 34 + 회귀 세트 3 + FRQ 5)", itemsFile: "stats-s3b-items.json", loadLabel: "stats-s3b-2026-10-13", supplement: true, passKeysFile: "stats-s3b-pass-keys.json", evidenceFile: "evidence-stats-s3b.json" },
+  // 2026-10-13 AP Physics 1 P1-a(docs/ap/physics1-p1a-report.md): 단독 20 + 세트 1 원형 x 후보 2 = 44문항 후보, 통과 18(단독만; 세트 0, 선택지 그림 0). 한 증거 파일.
+  { id: "phys-p1a", title: "AP Physics 1 P1-a (MC 파일럿, 통과 18)", itemsFile: "phys-p1a-items.json", loadLabel: "phys-p1a-2026-10-13", supplement: true, passKeysFile: "phys-p1a-pass-keys.json", evidenceFile: "evidence-phys-p1a.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 

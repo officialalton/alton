@@ -122,8 +122,8 @@ def ph_shm_vmax(rng):
         tt = np.linspace(0, P, 20001); x = A * np.sin(2 * math.pi * tt / P)
         agree(vmax, float(np.max(np.abs(np.gradient(x, tt)))), 1e-4, "vmax")
         break
-    pairs = [("Takes the maximum speed to be the amplitude divided by the period, which is only the average speed over a quarter cycle without the factor $2\\pi/4$.", A / P), ("Uses $2\\pi A P$, multiplying by the period instead of dividing.", 2 * math.pi * A * P),
-             ("Reports the maximum acceleration $4\\pi^2A/P^2$ instead of the maximum speed.", 4 * math.pi ** 2 * A / P ** 2), ("Uses the circumference-like term $\\pi A/P$ without the factor of two.", math.pi * A / P)]
+    pairs = [("Takes the maximum speed to be the amplitude divided by the period, $A/P$, omitting the factor of $2\\pi$.", A / P), ("Uses $2\\pi A P$, multiplying by the period instead of dividing.", 2 * math.pi * A * P),
+             ("Reports the maximum acceleration $4\\pi^2A/P^2$ instead of the maximum speed.", 4 * math.pi ** 2 * A / P ** 2), ("Uses $\\pi A/P$, dropping one factor of two from $2\\pi A/P$.", math.pi * A / P)]
     key, ds = num_opts(vmax, pairs, "m/s")
     stim = dense_graph_stim("Position versus time of an oscillating block", lambda t: A * math.sin(2 * math.pi * t / P), 0, 2 * P, gaxis("Time (s)", 0, 2 * P, P / 4), gaxis("Position (m)", -A * 1.2, A * 1.2, A / 2), n=161)
     stem = "The graph shows the position of a block oscillating on a spring as a function of time. What is the maximum speed of the block?"
@@ -186,7 +186,7 @@ def ph_gauge_pressure(rng):
         agree(P, float(sp.Rational(str(P0)) + sp.Rational(str(rho)) * sp.Rational(str(G)) * sp.Rational(str(h))), 1e-9, "P")
         break
     pairs = [("Reports only the pressure due to the liquid, $\\rho g h$, forgetting the atmosphere above the surface.", rho * G * h), ("Reports only atmospheric pressure, ignoring the depth.", P0),
-             ("Multiplies atmospheric pressure by the depth in the pressure term.", P0 + rho * h), ("Uses $\\rho h$ instead of $\\rho g h$, forgetting the gravitational field strength.", P0 + rho * G * h * 2)]
+             ("Uses $\\rho h$ instead of $\\rho g h$, forgetting the gravitational field strength: $P_0+\\rho h$.", P0 + rho * h), ("Counts the liquid column twice, using $P_0+2\\rho g h$.", P0 + rho * G * h * 2)]
     key, ds = num_opts(P, pairs, "Pa", fmt=lambda v: sci(v, "Pa"))
     stem = f"An open tank holds a liquid of density ${rho:g}\\text{{ kg/m}}^3$. Atmospheric pressure is $1.01\\times10^{{5}}\\text{{ Pa}}$. What is the absolute pressure at a point ${h:g}\\text{{ m}}$ below the surface of the liquid?"
     return mk("ph_gauge_pressure", "8.2", "2.B", stem, key, ds, rng, concept="Absolute pressure at depth in a static fluid", thinking=["Compute the pressure added by the liquid column from $\\rho g h$", "Add the atmospheric pressure acting on the surface"],
@@ -229,7 +229,7 @@ def ph_bernoulli_dp(rng):
 
 def ph_torricelli_range(rng):
     for _ in forever():
-        d = pick(rng, [0.4, 0.6, 0.8, 1.0]); hh = pick(rng, [0.4, 0.5, 0.8, 1.0]); tankH = d + hh + 0.2
+        d = pick(rng, [0.4, 0.6, 0.8, 1.0]); hh = pick(rng, [0.4, 0.5, 0.8, 1.0]); tankH = d + hh + 0.4
         v = math.sqrt(2 * G * d); R = v * math.sqrt(2 * hh / G)
         f = lambda t, y: np.array([y[2], y[3], 0.0, -G])  # noqa: E731
         T = math.sqrt(2 * hh / G)
@@ -237,7 +237,7 @@ def ph_torricelli_range(rng):
         agree(R, y[0], 1e-6, "R"); agree(0.0, abs(y[1]), 1e-3, "land")
         break
     pairs = [("Uses $\\sqrt{dh}$ without the factor of two, halving the range.", math.sqrt(d * hh)), ("Uses $4\\sqrt{dh}$.", 4 * math.sqrt(d * hh)),
-             ("Uses the total height of the water as the hole depth rather than its depth below the surface.", 2 * math.sqrt((d + hh) * hh)), ("Uses the exit speed times the depth, as if the water fell for a time equal to $d/v$.", v * d / G)]
+             ("Uses the full height of the water surface above the ground, $d+h$, in place of the depth $d$, giving $2\\sqrt{(d+h)h}$.", 2 * math.sqrt((d + hh) * hh)), ("Uses the exit speed times the depth, as if the water fell for a time equal to $d/v$.", v * d / G)]
     key, ds = num_opts(R, pairs, "m")
     sc = make_tank_hole(d, hh, tankH); assert not check_scene(sc)
     stem = f"A large open tank stands on level ground. Water leaves a small hole ${d:g}\\text{{ m}}$ below the water surface and ${hh:g}\\text{{ m}}$ above the ground, moving horizontally. How far from the tank does the water stream land? Treat the water as ideal."
@@ -297,8 +297,8 @@ def phs_vt_set(rng):
                                  (f"What is the average acceleration of the cart during the last segment of the graph, from $t={xs[-2]}\\text{{ s}}$ to $t={T}\\text{{ s}}$?", k2, d2, "1.2", "q2")]:
         q.append(mk(f"phs_vt_set_{nm}", top, "2.B", st, key, ds, rng, concept="Two questions about a single velocity-time graph", thinking=["Read the graph to find the needed area or slope", "Apply the kinematic definition of displacement or average acceleration"],
                     cond=[("the graph is piecewise linear", "the shared stimulus is built from integer vertices")], path="exact fractions versus numpy integration or polyfit of the same graph", material=MAT_GRAPH("axis labels with units"),
-                    judgment=["representation_reading", "law_selection"], stim=None, est=95, facts=[f"xs={xs}", f"vs={vs}"], kwhy="Read from the shared velocity-time graph."))
-    return {"archetype": "phs_vt_set", "topic": "1.2", "skill": "2.B", "calculator": "allowed", "set_intro": "Questions 1 and 2 refer to the following graph, which shows the velocity of a cart that moves along a straight track.", "stimulus": stim, "items": q, "facts": q[0]["facts"], "blueprint": q[0]["blueprint"]}
+                    judgment=["representation_reading", "law_selection"], stim=None, est=95, facts=[f"xs={xs}", f"vs={vs}"], kwhy="Displacement is the signed area under the velocity-time graph, and average acceleration is the change in velocity divided by the elapsed time of the segment."))
+    return {"archetype": "phs_vt_set", "topic": "1.2", "skill": "2.B", "calculator": "allowed", "set_intro": "A cart moves along a straight horizontal track. The graph shows the velocity of the cart as a function of time, with right taken as positive.", "stimulus": stim, "items": q, "facts": q[0]["facts"], "blueprint": q[0]["blueprint"]}
 
 
 def phs_collision_set(rng):
@@ -321,7 +321,7 @@ def phs_collision_set(rng):
         q.append(mk(f"phs_collision_set_{nm}", top, "2.B", st, key, ds, rng, concept="Two questions about a perfectly inelastic collision", thinking=["Use conservation of momentum or energy accounting", "Compute the requested quantity from the shared data"],
                     cond=[("the carts stick together on a frictionless track", "the shared diagram states the carts stick together")], path="sympy conservation equations versus numpy arithmetic; the energy loss is also recomputed from the reduced mass formula", material=MAT_DIAGRAM("two carts with masses and velocities"),
                     judgment=["law_selection", "symbolic_reasoning"], est=95, facts=[f"m1={m1}", f"m2={m2}", f"v1={v1}", f"v2={v2}"], kwhy="Read from the shared collision data."))
-    intro = f"Questions 1 and 2 refer to the following situation. On a frictionless track, a ${m1:g}\\text{{ kg}}$ cart moving at ${v1:g}\\text{{ m/s}}$ collides with and sticks to a ${m2:g}\\text{{ kg}}$ cart with velocity ${v2:g}\\text{{ m/s}}$ (right is positive)."
+    intro = f"On a frictionless track, a ${m1:g}\\text{{ kg}}$ cart moving at ${v1:g}\\text{{ m/s}}$ collides with and sticks to a ${m2:g}\\text{{ kg}}$ cart with velocity ${v2:g}\\text{{ m/s}}$ (right is positive)."
     return {"archetype": "phs_collision_set", "topic": "4.3", "skill": "2.B", "calculator": "allowed", "set_intro": intro, "stimulus": stim, "items": q, "facts": q[0]["facts"], "blueprint": q[0]["blueprint"]}
 
 
