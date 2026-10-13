@@ -1,0 +1,430 @@
+[
+ {
+  "key": "ap_chemistry-f01-k0",
+  "cellId": "ap_chemistry-f01",
+  "passed": false,
+  "reasons": [
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "8 valence electrons: O is the central atom with single bonds to two H atoms and two lone pairs on O.",
+     "final_answer": "H–O–H with two lone pairs on O (8 valence electrons in total)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Four electron domains around O, two of which are lone pairs, so the shape is bent. The angle is a bit less than 109.5°.",
+     "final_answer": "Bent, about 104.5° (under 109.5°)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The O–H bonds are polar because O is more electronegative than H. In the bent shape the bond dipoles do not cancel, so there is a net dipole.",
+     "final_answer": "Polar",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Ethanol has an O–H group, so its molecules can hydrogen-bond to each other. Dimethyl ether has no H bonded to O, so it has only dipole-dipole and London dispersion forces. The London dispersion forces are similar because the molar masses are the same. Stronger IMFs in ethanol mean more energy is needed to boil it.",
+     "final_answer": "Ethanol hydrogen-bonds through its O–H group, but dimethyl ether cannot, so ethanol has stronger IMFs and a higher boiling point",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The item is sound. Each part has a unique, defensible answer and the rubric rows are clear, with one issue: the Part D criterion says hydrogen bonding is \"stronger than the attractions between CH3OCH3 molecules\" without naming dipole-dipole and dispersion forces, which is acceptable but thin. The ethanol vs. dimethyl ether boiling-point comparison resembles a standard College Board-style scenario, but it is a common textbook case. The stimulus is a text description and is complete. Part D is tagged 6.E, which falls under the related topic 3.1 and is acceptable in a mixed-skill bundle. The workload fits a 4-point short question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts are each judged against their own tagged skill. The topics (2.7, 2.5, 3.1) match the bundle's allowed related topics."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answers are unique and correct: bent at about 104.5°, polar, and hydrogen bonding in ethanol. The independent solver agreed on every part."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete. Part D states \"the data in the stimulus show\" for a given pair of boiling points, which is fine."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no distractors. The rubric rows list sensible common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a short FRQ: four 1-point parts in about 9 minutes, with no calculation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four short, scaffolded parts covering standard recall and single-step application: a Lewis diagram for H2O, VSEPR geometry and bond angle, polarity justified by the bent shape, and hydrogen bonding vs. dipole-dipole to explain the boiling point difference. No computation, minimal reading, and no ambiguity. Concept depth and reasoning chains are shallow, which suits foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 360
+  }
+ },
+ {
+  "key": "ap_chemistry-f01-k1",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "8 valence electrons: N with three single N–H bonds and one lone pair.",
+     "final_answer": "H–N(–H)–H with one lone pair on N (3 bonding pairs + 1 lone pair = 8 valence electrons)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "4 electron domains (3 bonding, 1 lone) -> tetrahedral electron geometry, trigonal pyramidal molecular.",
+     "final_answer": "Trigonal pyramidal, ~107° (slightly less than 109.5°)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "N–H bonds polar (N more electronegative); asymmetric pyramidal shape with lone pair so dipoles don't cancel.",
+     "final_answer": "Polar: polar N–H bond dipoles do not cancel in the asymmetric trigonal pyramidal shape, giving a net dipole.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Similar molar mass -> similar London forces; CH3OH has O–H giving hydrogen bonding (plus dipole-dipole), C2H6 nonpolar has only LDFs; more energy needed to separate CH3OH molecules.",
+     "final_answer": "CH3OH molecules hydrogen bond to each other through the O–H group. C2H6 is nonpolar and has only London dispersion forces, which are about the same strength as CH3OH's because the molar masses are similar. Hydrogen bonds are stronger, so it takes more energy to separate CH3OH molecules, which gives it the higher boiling point.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts have a unique defensible answer, and the 1/1/1/1 split matches the 4-point short-question format. Part-level skills are tagged separately (3.B, 4.A, 4.C, 6.E), so none is judged against the bundle label. Content stays within the bundle's related topics 2.5, 2.7 and 3.1. Minor note: the key for part D could name London dispersion forces as comparable, but the rubric still admits only one reading.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A (Lewis diagram, 2.5) and part B (VSEPR geometry and angle, 2.7) fit the stated topics. Part C (polarity) and part D (intermolecular forces, 3.1) are allowed by the bundle's related topics. Nothing is from a later unit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has one defensible answer, and the independent solver agreed on all four. The rubric rows are single 1-point rows with clear criteria. The 107-degree bond angle is accepted as \"slightly less than 109.5 degrees\"."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus names NH3 and the two compounds with molar masses and boiling points, which is complete for all parts. Part A is a drawing, so no figure data is needed. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors entries in the rubric rows name realistic misconceptions (omitted lone pairs, electron-domain geometry instead of molecular geometry, bond polarity alone, covalent bonds breaking at boiling)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and suits a 4-point short question of about 9 minutes. No calculation is needed, and the calculator designation is harmless."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four short, standard recall-and-apply parts: draw the NH3 Lewis structure, state trigonal pyramidal geometry with an angle of about 107 degrees, justify polarity from the lone pair and the asymmetric dipoles, and explain the boiling point difference through hydrogen bonding versus dispersion forces. Each part needs one or two reasoning steps, with no multi-step computation, no graph or table read, and no proportional reasoning. This is more suitable for topic-level practice than for the harder items in a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_chemistry-f01-k2",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "8 valence electrons: O central, two O–H single bonds, two lone pairs on O.",
+     "final_answer": "H–O–H with two lone pairs on O (8 valence electrons total)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "4 electron domains (2 bonding, 2 lone) give tetrahedral electron geometry and bent molecular shape. Lone pairs compress the angle.",
+     "final_answer": "Bent, about 104.5° (less than 109.5°)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "O–H bonds are polar. Because the shape is bent and asymmetric, the bond dipoles don't cancel, so there is a net dipole.",
+     "final_answer": "Polar",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "HF forms hydrogen bonds, since H is bonded to highly electronegative F. These are much stronger than the dipole–dipole and London forces in HCl, and they outweigh HCl's slightly larger dispersion forces. More energy is needed to separate HF molecules.",
+     "final_answer": "HF has hydrogen bonding; HCl has only weaker dipole-dipole/London forces",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The four 1-point parts each have a unique, correct key (Lewis diagram, bent at about 104.5°, polar, hydrogen bonding in HF). The stimulus gives the data needed for part D, and the load is appropriate for a 4-point short question. Parts C and D are tagged with other skills, which is fine because each part is judged against its own skill. The part B row requires both the shape and the angle, which is acceptable as a single claim.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts match topics 2.5, 2.7 and 3.1. Part B is the 4.A VSEPR prediction. The other parts carry their own tagged skills, so there is no mismatch."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Every answer is unique and defensible. The rubric rows are consistent with the model answers. The stimulus boiling-point values (HF 293 K, HCl 188 K) are realistic."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete for the comparison in part D. Part A is a drawing, so no figure data is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors listed on the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short, needs no calculation, and its load fits a 4-point short question."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four short, standard parts: Lewis structure of H2O, bent geometry with ~104.5 degree angle, polarity from shape and bond dipoles, and HF vs HCl boiling point via hydrogen bonding vs dispersion forces. Each needs one core concept and one or two reasoning steps, with no computation. The wording is clear and everything is in scope, so this is basic recall and application rather than full-mock exam-prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k0",
+  "cellId": "ap_chemistry-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Products over reactants, each raised to its coefficient.",
+     "final_answer": "Kc = [B]^2/[A]",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Q = (0.3)^2/0.5 = 0.18 < Kc = 0.5",
+     "final_answer": "Q = 0.18; Q < K so reaction proceeds forward (toward B)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Doubling volume halves concentrations; Q = (x/2)^2/(y/2) = Q/2 < K, so shifts toward more gas moles.",
+     "final_answer": "Shifts right (toward B), side with more moles of gas; Q drops to K/2 < K",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Endothermic (ΔH>0): raising T favors forward reaction, K increases.",
+     "final_answer": "Kc increases because ΔH > 0",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard four-part short question (four 1-point parts, 4 points total) on Q versus K, volume change and temperature dependence of K. The keys are correct and unambiguous. Part C: after the system re-equilibrates, doubling the volume gives Q = K/2, which is less than K, so the shift is toward products. Part D: K increases for an endothermic reaction. Rubric rows are consistent and accept alternative justifications. The stimulus is complete, since the text states K, the endothermic sign and the initial concentrations.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is judged against its own tagged skill (5.B, 5.F/6.D, 2.B, 2.B/6.F), and these are acceptable. The bundle legitimately spans topics 7.3, 7.2, 7.9 and 7.10."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: Q = 0.18 < 0.5, so the reaction proceeds forward. Part C: after the system re-equilibrates, doubling the volume gives Q = K/2, so the shift is toward products. Part D: K increases. Each part has a single defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clearly worded. It gives K, the endothermic sign, the initial concentrations and the piston setup."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The rubric rows list common errors such as omitting the exponent, reversing the Q/K comparison, and saying K changes with volume or does not depend on temperature."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, with minimal arithmetic. It fits the 4-point short-question grain."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts on 7.3, 7.2, 7.9 and 7.10, matching a typical AP FRQ. Part A is recall of the Kc expression. Part B is a one-step Q calculation (0.09/0.5 = 0.18) compared with K = 0.5, so the reaction shifts forward. Part C needs a volume-change argument using Q versus K or the mole-count change (1 to 2 gas moles), so the shift is toward products. Part D links endothermic sign to K increasing with temperature. Each part is a single reasoning step with a justification, within scope, with simple arithmetic and unambiguous wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k1",
+  "cellId": "ap_chemistry-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Products over reactants, each raised to its coefficient.",
+     "final_answer": "Kc = [B]^2/[A]",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Q = (0.1)^2/0.5 = 0.02, which is less than K = 0.5, so more B forms.",
+     "final_answer": "Q = 0.02 < K, so the reaction proceeds forward (toward B).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Doubling the volume halves every concentration. Q = (c_B/2)^2/(c_A/2) = Q/2, so Q < K. The system then shifts toward the side with more moles of gas, which is 2 mol B versus 1 mol A.",
+     "final_answer": "Shifts right (toward B), the side with more gas moles.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The reaction is endothermic (ΔH > 0), so heat acts like a reactant. Raising the temperature favors the forward reaction, and K increases (van 't Hoff).",
+     "final_answer": "Kc increases.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The four 1-point parts are consistent and the keys are unambiguous. Part A writes the Kc expression. Part B gives Q = 0.02 < K, so the reaction goes forward. Part C is a volume doubling after equilibrium, which shifts toward the side with more moles of gas, the products. Part D is an endothermic reaction, so Kc increases with temperature. The independent solver agreed on every part.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is tagged with its own skill and sits within topics 7.3, 7.2, 7.9 and 7.10. The dominant demand is justification with Q versus K and Le Chatelier reasoning, which fits the 6.D label."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has a single defensible answer. Part C accepts either the Q &lt; K argument or the moles-of-gas argument. Part B's numeric tolerance is adequate. The one-point rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem gives K, the endothermic sign, the initial concentrations and the piston condition. Nothing is missing. The empty data object is fine for a text stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is free response, so there are no distractors. The common errors listed in the rubric rows are realistic: omitting the exponent, reversing the Q/K comparison, saying K changes with volume, and saying K is independent of temperature."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, with simple arithmetic and short written answers, and the total of 4 points matches the short-question format. The est_minutes figure of 9 is only an internal estimate. The calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four scaffolded, single-concept parts: write K expression, compute Q=(0.1)^2/0.5=0.02 and compare to K=0.5 (forward), qualitative Le Chatelier volume change (shift toward more gas moles), and temperature effect on K for an endothermic reaction. Each part needs 1-2 reasoning steps with trivial arithmetic and clear wording. All content is in scope for 7.3/7.9/7.10. Straightforward and lower than typical full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k2",
+  "cellId": "ap_chemistry-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Each product concentration is raised to its coefficient and divided by the reactant concentration.",
+     "final_answer": "Kc = [B]^2/[A]",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Q = (0.3)^2/1 = 0.09. This is less than K = 0.2, so the reaction runs forward until Q = K.",
+     "final_answer": "Q = 0.09 < Kc = 0.2, so the reaction proceeds forward (toward B).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Doubling the volume halves every concentration. Q is then ([B]/2)^2/([A]/2) = Q/2, which is less than K. The system responds by shifting toward the side with more moles of gas (2 mol B vs 1 mol A).",
+     "final_answer": "The equilibrium shifts right, toward B.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "ΔH > 0, so heat acts like a reactant. Raising the temperature favors the forward reaction and increases K.",
+     "final_answer": "Kc increases.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Four 1-point parts on K expression, Q vs K, volume change and temperature dependence of K. All keys are chemically correct and within Unit 7 scope. The load is light and the format fits a short FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "A four-part item on core Unit 7 ideas. Part A writes the Kc expression. Part B computes Q = 0.09/1 = 0.09 and compares it to K = 0.2, a single-step calculation. Part C applies Le Chatelier's principle to a volume doubling, where more gas moles on the product side means a forward shift. Part D uses endothermic reasoning to conclude that K increases with temperature. Each part is one short, standard step with clean numbers and no long arithmetic. The wording is clear and everything is in scope. The only real linking is the one-sentence justification in parts C and D.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ }
+]

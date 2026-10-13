@@ -12,3 +12,5 @@ STAGE_P1_FRQ = ["chf_long_titration", "chf_long_thermo", "chf_long_kinetics", "c
 
 # S2 FRQ 보충 런(2026-10-13): 첫 두 런에서 통과하지 못한 두 유형만(수정 후)
 STAGE_S2_FRQ_B = ["chf_short_bonding", "chf_short_equilibrium"]
+# S2 FRQ 런 4: 7유형 전부(여유분·평형 둘째 문항)
+STAGE_S2_FRQ_C = ["chf_long_titration", "chf_long_thermo", "chf_long_kinetics", "chf_short_pes", "chf_short_stoich", "chf_short_bonding", "chf_short_equilibrium"]

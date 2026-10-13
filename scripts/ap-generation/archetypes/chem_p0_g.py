@@ -256,7 +256,7 @@ def chf_short_bonding(rng):
 # ======================= 짧은 문항 4 (4): 평형 =======================
 def chf_short_equilibrium(rng):
     for _ in forever():
-        K = pick(rng, [0.20, 0.50, 2.0]); A0 = pick(rng, [0.50, 1.0]); B0 = pick(rng, [0.10, 0.30])
+        K = pick(rng, [0.20, 0.25, 0.50, 2.0, 4.0]); A0 = pick(rng, [0.40, 0.50, 0.80, 1.0]); B0 = pick(rng, [0.10, 0.20, 0.30, 0.40])
         Q = B0 ** 2 / A0
         if abs(Q / K - 1) > 0.25:
             break
