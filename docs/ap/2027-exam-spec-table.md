@@ -15,6 +15,8 @@
 | Macroeconomics | 60 · 70분 | 3 · 60분(읽기 10분 포함; 긴 1 + 짧은 2) | 위와 동일 | 허용 | 하이브리드 | 구조 변화 없음 |
 | English Language | 45 · 60분 | 3 에세이 · 2시간 15분(+읽기 15분): Synthesis / Rhetorical Analysis / Argument | 45:55 | — | **완전 디지털** | 완전 디지털 |
 
+- Statistics 보주(2026-10-12 CED p.156 확인): 총 3시간, MC 3문항 세트 2개(합 6문항), 수식·표 양 섹션 제공(Bluebook+인쇄), Bluebook 내장 Desmos 허용, 별도 "investigative task" 문항 없음(investigative question은 스킬 1.A, FRQ1에서 출제). 상세 `docs/ap/statistics-facts.md`.
+
 ## 표시 요청 3과목 요약(Statistics·Calculus·Physics)
 - **Statistics: 가장 큰 변경.** 구 CED 기반 자료(문항·교재·유튜브 해설)와 호환 안 됨. 반드시 신 CED 기준으로 단원·태그 설계. 삭제 주제(기하분포·카이제곱 적합도·기울기 추론 등)는 생성 금지 목록으로 관리.
 - **Calculus AB/BC: 내용 불변, 시험 형식만 변경(확정).** AB·BC 모두 42문항·100분(파트 A 29/B 13, 62분/38분).

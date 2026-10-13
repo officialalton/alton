@@ -67,3 +67,11 @@ describe("짧은 FRQ 연습 세트 표기(공식 Part A/B 로 보이지 않게)"
     expect(apGuidanceLines({ subject: "ap_calculus_ab", layout: off })[1]).toBe("Part A (2 questions, 30 min): calculator allowed. Part B (4 questions, 60 min): no calculator.");
   });
 });
+
+describe("AP Statistics 공식 구조(CED 2027 p.156 확인, docs/ap/statistics-facts.md)", () => {
+  it("MC 42문항·90분·4지선다, FRQ 4문항·90분, 계산기 전 섹션 허용", () => {
+    const [mc, frq] = AP_LAYOUTS.ap_statistics;
+    expect([mc.count, mc.minutes, mc.options, mc.calculator]).toEqual([42, 90, 4, "allowed"]);
+    expect([frq.count, frq.minutes, frq.calculator]).toEqual([4, 90, "allowed"]);
+  });
+});

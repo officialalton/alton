@@ -39,3 +39,9 @@
 - 누적 생성 비용 **$32.0737**(중단선 $45·총상한 $50). 이번 구간 추가 지출 $0.7825(보강2).
 - 열린 항목: 서술형·MC 설명의 원문 TeX 노출 점검·수정(`docs/ap/tex-audit.md` 예정), 출시 차단 결함 점검 패널, 재구성 후 예비 재계산(`docs/ap/reserve-plan-3.md` 예정), Desmos 상용 키(오너 제공 대기), 프로덕션 공개는 별도 승인.
 
+## R3 적재 완료·Statistics 사실 확인 (2026-10-12)
+- R3 보강 생성 지출 $4.4320(상한 $10.50의 42%), 누적 **$36.5057**(중단선 $45·총상한 $50). 통과 MC 82·FRQ 14 — 배치 `supp-r3a`(32)·`r3b`(47)·`r3b2`(3)·`r3c`(6)·`r3c2`(8)를 관리자 화면으로 적재·렌더·화면 기록·문제은행 변환까지 완료. 통과 키 264건 전부 review_env_ready, DB 후보 행 1185. 출시 게이트 9/9 통과(미충족 0, 차단 결함 0, 열린 신고 0).
+- 남은 부족: 단원별 그래프 필수 26칸(기계적 채움 제외, 추정 $1.5~2.5).
+- 섹션 타이머: 탭 클릭으로 시계가 시작되지 않고 'Start section' 누를 때만 시작(마이그레이션 560, 배포본 확인).
+- Statistics(`docs/ap/statistics-facts.md`): 시험 3시간, MC 42(90분, 3문항 세트 2개), FRQ 4(90분, 각 10점), investigative question은 별도 FRQ가 아니라 Q1 파트 E(스킬 1.A·토픽 1.10), 수식·표 제공, 계산기 허용. 코드 공백은 생성·조립 계층(`gates.ts` OPTION_COUNT, `cells.ts`, `subjects/stats.ts`, `stock.ts` SUBJECT_FAMILY, `assemble-draft.ts` subjectOfSetId, unitBounds). 파일럿 사양: 20 원형(U1 5·U2 5·U3 4·U4 3·U5 3).
+
