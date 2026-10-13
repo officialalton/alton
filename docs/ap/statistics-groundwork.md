@@ -21,7 +21,9 @@
 
 **layouts.ts 판정: 섹션 수·문항 수·분·계산기·선지 수 모두 repo 사실과 일치. 수정 불필요.** (`AP_SUBJECT_NAME`도 `AP Statistics`로 존재.)
 
-**미확인(공식 사실로 쓰지 말 것 — 생성 착수 전 CED PDF로 확인):**
+**[2026-10-12 갱신] 아래 ①②④는 공개 CED로 해소됐다(§1-V 참조, `docs/ap/statistics-facts.md`). ③은 수식표·계산기는 해소, FRQ 문항별 시간·디지털 응답 세부는 UNVERIFIED. 아래 원문은 이력으로 남긴다 — 특히 ①의 "Q4가 investigative task일 가능성"은 틀렸다.**
+
+**(이력) 미확인 항목:**
 1. **"investigative task"가 FRQ 4문항 중 어느 문항(위치·배점·형식)인지** — repo는 "연구 질문 탐구 추가"(spec-table)와 Q1–Q4의 Practice 매핑만 갖고 있다. curriculum JSON의 Q4가 "Practice 2–4 복합"이라 Q4가 그것일 가능성이 높지만 **추정**이다. 또한 "투자 과제는 FRQ 1문항"인지 "다단계 한 문항"인지 미확인.
 2. MC 3문항 세트가 정확히 몇 개·몇 문항인지("3문항 세트 2개" = 6문항 vs "세트 2개 × 문항 3개"). spec-table 문구는 3문항 세트 2개로 읽는 것이 자연스러우나 `ten-set-plan.md`는 12문항으로 계산해 두 문서가 충돌한다 → CED 확인 후 정정.
 3. FRQ 문항별 시간 권장(90분 총량만 확인), 문항당 10점의 파트·행 구조, 디지털 응답 방식(`digital-response-guidelines`는 존재만 확인, 내용 미확인), **공식 수식표·분포표 제공 여부와 형태**(AP Statistics 시험지 쪽에 수식 목록·표가 제공된다고 알려져 있으나 repo에는 2027 디지털 형식에서의 제공 방식이 없음), 시험 중 내장 계산기 유무(자기 계산기 허용 vs 내장 도구).
@@ -29,6 +31,13 @@
 5. 샘플 MC 24개(정답표에 스킬·LO·EK 있음)는 `official-materials-availability.md`에 존재 확인만 — 참조 문항 분석(`reference-item-analysis.md` 방식)은 Stats에 대해 아직 안 했다.
 
 ---
+
+### 1-V. Verified facts (CED 2027, 2026-10-12)
+- 시험 3시간: MC 42(단독 36 + **3문항 세트 2개**; 확률·분포, 회귀)·90분·4지선다·50% / FRQ 4×10점·90분·50%(문항당 12.5%). FRQ 순서 Q1 P1·2, Q2 P3·4, Q3 추론(검정 또는 구간), Q4 P2·3·4 복합. (CED p.156–158)
+- **"investigative task"는 별도 문항이 아님**: 공식 용어는 investigative question(스킬 1.A, LO 1.1.B, 토픽 1.10), FRQ1(Practice 1) 파트에서 출제. Q4 원형은 "복합 추론"이며 investigative 라벨을 붙이지 않는다(§7-8 위험 해소). FRQ1 원형에 "질문의 3요소 서술" 행을 넣는다.
+- FRQ 10점은 **1점 행 10개**(파트 (i)(ii)와 구성요소 행)로 구성 — 채점 행 구조는 §4 FRQ 지침(setup/conditions/calculation/conclusion 행 분해)과 호환.
+- 공식 수식·표: 두 섹션 모두 제공(부록 p.226–237; Bluebook 내 + 인쇄본). 계산기: 통계 기능 그래핑 계산기 전제 + Bluebook 내장 Desmos. 완전 디지털(Bluebook).
+- UNVERIFIED: FRQ 문항별 권장 시간, Desmos의 통계 함수 유무, 부록 분포표 구성, 삭제 주제 5종의 CED 본문 대조. 상세·출처·정정 이력은 `docs/ap/statistics-facts.md`. `ten-set-plan.md`의 "12문항" 오기는 정정됨(세트 2×3 = 6문항).
 
 ## 2. 단원·토픽·스킬 비중 → MC 1세트 배분과 FRQ 유형
 
