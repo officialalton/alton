@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { calibrateFrq, gateFrq, type FrqPack } from "../../lib/ap-generation/gates";
+import { gateMathWrapping } from "../../lib/ap-generation/math-wrapping";
 import { gateGuideFrq } from "../../lib/ap-generation/guide-gates";
 import { bundleReferenceChecks } from "../../lib/ap-generation/part-refine";
 import { GUIDES } from "../../lib/ap-generation/subjects/calc-bc";
@@ -16,6 +17,6 @@ const r = spawnSync(PY, ["-B", "registry.py", "batch", NAME, "1", SEED0], { cwd:
 const p = (JSON.parse(r.stdout) as FrqPack[])[0];
 const cur = JSON.parse(readFileSync(`data/ap/curriculum-2027/${SUBJECT}.json`, "utf-8")) as ApCurriculumFile;
 const skills = new Set(cur.skills.map((s) => s.code)); const topics = new Map(cur.units.flatMap((u) => u.topics.map((t) => [t.code, u.code] as const)));
-const reasons = [...gateFrq(SUBJECT, p, skills, { topics: new Set(topics.keys()) }), ...calibrateFrq(p, SUBJECT), ...gateGuideFrq(GUIDES[SUBJECT as keyof typeof GUIDES] as never, p), ...bundleReferenceChecks(p),
+const reasons = [...gateMathWrapping(p), ...gateFrq(SUBJECT, p, skills, { topics: new Set(topics.keys()) }), ...calibrateFrq(p, SUBJECT), ...gateGuideFrq(GUIDES[SUBJECT as keyof typeof GUIDES] as never, p), ...bundleReferenceChecks(p),
   ...validateBlueprint((p as unknown as { blueprint: Partial<Blueprint> }).blueprint, { skills, topicUnit: topics as Map<string, string> }).map((x) => `blueprint:${x.code}`), ...generatorDefects(p as unknown as Record<string, unknown>).map((d) => `generator_defect:${d.code}`)];
 console.log(NAME, reasons.length ? "FAIL " + reasons.join(",") : "ok");

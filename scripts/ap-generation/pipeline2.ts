@@ -13,6 +13,7 @@ import { gateMicroFrq } from "../../lib/ap-generation/micro-frq-checks";
 import { generatorDefects } from "../../lib/ap-generation/generator-defects";
 import { normalizeReview, numsIn, recoverFromBlocks, reviewFromToolBlocks } from "../../lib/ap-generation/review-parse";
 import { calibrateFrq, calibrateMc, gateDuplicate, gateFrq, gateMc, gateNoCalcExact, wordingPreserves, type FrqPack, type McPack } from "../../lib/ap-generation/gates";
+import { answerTextForExplanation, gateMathWrapping } from "../../lib/ap-generation/math-wrapping";
 import { loadEnvLocal } from "../keywords/db";
 import { createHash } from "node:crypto";
 import { POLICY, manifestIssues, type RunManifest } from "../../lib/ap-generation/pipeline-policy";
@@ -141,7 +142,7 @@ async function genStage() {
 }
 
 // ---------- 후보 조립 ----------
-const plainTxt = (t: string) => t.replace(/\$/g, "");
+const plainTxt = answerTextForExplanation; // TeX 가 든 선택지는 `$` 유지(해설에 원문 \frac 이 남지 않게)
 /** 해설은 코드가 만든다(정답 근거 + 선택지별 오개념). LLM 은 stem 문장만 다듬는다 — 해설 속 파생 수치 환각을 막기 위해. */
 const structuredExplanation = (p: Json) => {
   const o = p.options as { text: string; why: string }[]; const k = p.key_index as number;
@@ -178,7 +179,7 @@ function checkStage() {
   const out: Record<string, { reasons: string[]; wording: string }> = {};
   for (const c of cs) {
     const cell = cm.get(c.cellId)!;
-    let reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...(calcAbGuide ? gateGuideMc(calcAbGuide, c.item as McPack) : []), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet, { requirePartTopics: SUBJECT === "ap_biology" && !process.env.AP_LEGACY_ITEMS, topics: new Set(topicTitle.keys()) }), ...calibrateFrq(c.item as FrqPack, SUBJECT), ...(calcAbGuide ? gateGuideFrq(calcAbGuide, c.item as FrqPack) : [])];
+    let reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...(calcAbGuide ? gateGuideMc(calcAbGuide, c.item as McPack) : []), ...gateNoCalcExact(c.item as McPack), ...gateMathWrapping(c.item as never)] : [...gateMathWrapping(c.item as never), ...gateFrq(SUBJECT, c.item as FrqPack, skillSet, { requirePartTopics: SUBJECT === "ap_biology" && !process.env.AP_LEGACY_ITEMS, topics: new Set(topicTitle.keys()) }), ...calibrateFrq(c.item as FrqPack, SUBJECT), ...(calcAbGuide ? gateGuideFrq(calcAbGuide, c.item as FrqPack) : [])];
     for (const code of bpCheck()[c.key] ?? []) reasons.push(`blueprint:${code}`); // 설계도 실패는 LLM 단계 전에 차단
     if (c.item && c.kind === "frq_bundle" && SUBJECT === "ap_biology" && !process.env.AP_LEGACY_ITEMS) reasons.push(...gateBioFrq(c.item as unknown as Record<string, unknown>, { topics: new Set(topicTitle.keys()) }).map((x) => `bio_free:${x.code}`)); // Bio FRQ 무료 결정적 검사 (공통 (a)(c) 규칙)
     if (c.item && c.kind === "frq_bundle" && (c.item as unknown as { archetype?: string }).archetype === "frq_bio_data_short") reasons.push(...bioDataShortDesignChecks(c.item as unknown as Record<string, unknown>).map((x) => x.code)); // 원형 내부 설계 조건 (b): 전역 게이트 아님

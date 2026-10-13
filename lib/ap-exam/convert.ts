@@ -4,6 +4,7 @@
 
 import { checkFigure } from "../problem-figures/check";
 import { gateCandidate, optionText, type ApCandidateLike, type GateResult } from "../ap-figures/gate";
+import { autoMathExplanation } from "./explanation-math";
 
 type Json = Record<string, unknown>;
 export type ApPurpose = "mock_exam" | "lesson";
@@ -50,7 +51,9 @@ function passageFor(c: ApCandidateLike, gate: GateResult): string | null {
   return null;
 }
 
-export function planConversion(c: ApCandidateLike): ConversionPlan {
+/** wrapMath(기본 true): 해설·참고 답안에 생성기가 `$...$` 없이 쓴 수식을 변환 시점에 구분자로 감싼다(화면 변환과 같은 규칙, 멱등). false 는 "변환 전 원문"(교정 계획의 before 해시 계산)용. */
+export function planConversion(c: ApCandidateLike, opts: { wrapMath?: boolean } = {}): ConversionPlan {
+  const wm = (t: string) => (opts.wrapMath === false ? t : autoMathExplanation(t));
   const gate = gateCandidate(c);
   if (gate.status === "fail") return { ok: false, reason: `render gate failed: ${gate.issues.filter((i) => i.level === "error").map((i) => i.code).join(", ")}`, gate };
   const p = c.payload;
@@ -61,7 +64,7 @@ export function planConversion(c: ApCandidateLike): ConversionPlan {
   const mk = (index: number, stem: string, options: string[], key: number, expl: string): ConvertedItem => {
     const text = [passage ?? "", stem, ...options].join("\n");
     const rc = checkFigure(figure, text, options, key);
-    return { index, format: "mc", passage, question: stem, options, correctIndex: key, explanation: expl, explanationEn: expl, figure, renderCheck: rc, statements: null, difficulty, skillCode: null, topic };
+    return { index, format: "mc", passage, question: stem, options, correctIndex: key, explanation: wm(expl), explanationEn: wm(expl), figure, renderCheck: rc, statements: null, difficulty, skillCode: null, topic };
   };
   if (c.kind === "mc") {
     const items = Array.isArray(p.items) ? (p.items as Json[]) : null;
@@ -81,7 +84,7 @@ export function planConversion(c: ApCandidateLike): ConversionPlan {
   if (!parts.length) return { ok: false, reason: "frq has no parts", gate };
   const statements = parts.map((x) => ({ label: String(x.label), points: Number(x.points), prompt: String(x.prompt), mode: String(x.response_mode ?? "explain") }));
   const question = `${String(p.title ?? "Free-response question")} — answer every part.`;
-  const ref = frqReference(p);
+  const ref = wm(frqReference(p));
   const text = [passage ?? "", question, ...statements.map((s) => s.prompt)].join("\n");
   const rc = checkFigure(figure, text, null, null);
   return finish([{ index: 0, format: "essay", passage, question, options: null, correctIndex: null, explanation: ref, explanationEn: ref, figure, renderCheck: rc, statements, difficulty, skillCode: null, topic }], gate);
