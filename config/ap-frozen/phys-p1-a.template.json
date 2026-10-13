@@ -1,0 +1,71 @@
+{
+ "version": "v1-phys-p1-a",
+ "run": "phys-p1-a",
+ "subject": "ap_physics_1",
+ "archetypeList": "phys_p1_mc",
+ "seed0": 7300,
+ "candidatesPerCell": 1,
+ "capUsd": 1.8,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "2",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/subjects/physics1.ts",
+  "lib/ap-generation/subjects/physics1-archetypes.json",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 42.2,
+ "expected": {
+  "generatorHash": "UNFROZEN",
+  "reviewerPromptHash": "UNFROZEN",
+  "difficultyPromptHash": "UNFROZEN",
+  "parserHash": "UNFROZEN",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ },
+ "_template": "TEMPLATE, NOT FROZEN (2026-10-13, docs/ap/physics1-groundwork.md section 11). Do not run as is: expected hashes are placeholders so --check-only fails on purpose. To use: copy to <name>.v1.json, run `npx tsx scripts/ap-generation/run-frozen.ts --config <copy> --freeze`, commit, then --check-only, and only then the paid run after the owner approves the budget. hardStopCumulativeUsd assumes cumulative $40.3301 (after Statistics S3-a) plus the cap plus a 0.1 margin; recompute from `ledger-total.ts` before freezing. Free pre-checks done 2026-10-13: pipeline2 plan, blueprint and check with --subject ap_physics_1 and AP_FIXED_WORDING=1 pass 22 of 22 MC items and 4 of 4 FRQ bundles.",
+ "_budget_estimate": {
+  "cells": "20 single archetypes plus 1 two-item set = 21 cells, 22 items (U1 5, U2 4, U3 3, U4 3, U5 2, U6 1, U7 1, U8 2 cells)",
+  "perCellUsd": "single 0.060-0.080, set 0.15 (stats observed 0.041-0.058 per candidate x 1.35 figure and review overhead)",
+  "expectedUsd": "1.5 (range 1.2-2.0)",
+  "capUsd": 1.8,
+  "passRateAssumption": "80% (stats pilot 20/20 and S3-a 17/20 pool to 92.5%; AB graph-heavy 71-100% mean 78%; figure items get a haircut). Stop if first pass is below 50%.",
+  "figureNeedAssumption": "14 of 22 items need a figure (graph 5 cells with the 2-item set counted once, diagram or scene 7, choice figure 2)"
+ }
+}

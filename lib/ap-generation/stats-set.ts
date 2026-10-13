@@ -5,6 +5,8 @@ import type { McPack } from "./gates";
 
 type Json = Record<string, unknown>;
 export const STATS_SET_SIZE = 3;
+/** 과목별 공유 자료 세트 크기: Statistics 3문항, Physics 1 은 2문항(CED 샘플의 유일한 세트 형태, 공식 세트 크기는 미공표). */
+export const setSizeOf = (subject: string) => (subject === "ap_physics_1" ? 2 : STATS_SET_SIZE);
 /** 세트 팩(Python 원형 출력): 문항은 각각 독립 MC 팩(자체 설계도·정답·오답 근거)이고 자료는 세트가 한 번만 갖는다. */
 export type SetPack = {
   archetype: string; topic: string; skill: string; calculator: string; set_intro: string; stimulus: McPack["stimulus"];
@@ -28,9 +30,10 @@ export function flattenSet(pack: SetPack, baseKey: string): SetMember[] {
 }
 
 /** 세트 수준 결정적 검사(문항 게이트와 별개): 크기·자료·소개·문항 독립성(한 문항의 정답이 다른 문항 본문에 드러나지 않음). */
-export function gateStatsSet(pack: SetPack, opts: { unit?: string } = {}): string[] {
+export function gateStatsSet(pack: SetPack, opts: { unit?: string; size?: number } = {}): string[] {
   const r: string[] = [];
-  if (!Array.isArray(pack.items) || pack.items.length !== STATS_SET_SIZE) return [`set_size_${pack.items?.length ?? 0}_not_${STATS_SET_SIZE}`];
+  const size = opts.size ?? STATS_SET_SIZE;
+  if (!Array.isArray(pack.items) || pack.items.length !== size) return [`set_size_${pack.items?.length ?? 0}_not_${size}`];
   if (!pack.set_intro || pack.set_intro.trim().length < 40) r.push("set_intro_missing");
   if (!pack.stimulus || pack.stimulus.kind === "none") r.push("set_without_shared_stimulus");
   const stems = pack.items.map((i) => i.stem.trim().toLowerCase());
