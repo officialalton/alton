@@ -7,17 +7,19 @@
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { resolveStockTarget } from "@/lib/ap-admin/env-guard";
-import { STOCK_BATCHES, batchArtifactsPresent } from "@/lib/ap-admin/batches";
-import { listAssignments, loadCheck, recordRun, runAssemble, runConvert, runImport, runVerify, type Ctx, type StepResult } from "@/lib/ap-admin/service";
+import { STOCK_BATCHES, batchArtifactsPresent, listPartialPlans } from "@/lib/ap-admin/batches";
+import { listAssignments, loadCheck, recordRun, runAssemble, runAssemblePartial, runConvert, runImport, runVerify, type Ctx, type StepResult } from "@/lib/ap-admin/service";
 import type { BatchCheck } from "@/lib/ap-admin/load-check";
 
 export type ApStockOverview = {
   target: { ref: string; kind: string; canWrite: boolean; reason: string | null };
   batches: { id: string; title: string; hasLoadStep: boolean; artifactsOk: boolean }[];
   assignments: { file: string; sets: { id: string; virtual: number; saveable: boolean }[] }[];
+  partialPlans?: { file: string; sets: { id: string; name: string; partial: string }[] }[];
   history: { id: string; createdAt: string; actor: string; action: string; mode: string; status: string; targetRef: string; scope: Record<string, unknown>; counts: Record<string, number>; note: string | null }[];
 };
 export type ApStockStepInput = { step: "import" | "render" | "screen" | "convert"; batchId: string; execute: boolean; planHash?: string | null };
+export type ApStockPartialInput = { planFile: string; setId: string; execute: boolean; planHash?: string | null; tier?: "free" | "tutoring" };
 export type ApStockAssembleInput = { reportFile: string; setId: string; name?: string; execute: boolean; planHash?: string | null; tier?: "free" | "tutoring" };
 
 const target = () => resolveStockTarget({ NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL, AP_STOCK_ADMIN_ALLOWED_REFS: process.env.AP_STOCK_ADMIN_ALLOWED_REFS, AP_STOCK_ADMIN_BLOCKED_REFS: process.env.AP_STOCK_ADMIN_BLOCKED_REFS, VERCEL_ENV: process.env.VERCEL_ENV });
@@ -50,6 +52,7 @@ export async function getApStockOverviewAction(): Promise<ApStockOverview> {
     target: { ref: t.ref, kind: t.kind, canWrite: t.canWrite, reason: t.reason },
     batches: STOCK_BATCHES.map((b) => { const a = batchArtifactsPresent(b); return { id: b.id, title: b.title, hasLoadStep: !!b.itemsFile, artifactsOk: a.items && a.passKeys && a.evidence }; }),
     assignments: listAssignments(),
+    partialPlans: listPartialPlans(),
     history: (runs ?? []).map((r) => ({ id: r.id as string, createdAt: r.created_at as string, actor: names.get(r.actor_id as string) || (r.actor_id ? String(r.actor_id).slice(0, 8) : "-"), action: r.action as string, mode: r.mode as string, status: r.status as string, targetRef: r.target_ref as string, scope: (r.scope ?? {}) as Record<string, unknown>, counts: (r.counts ?? {}) as Record<string, number>, note: (r.note as string | null) ?? null })),
   };
 }
@@ -79,4 +82,11 @@ export async function apStockAssembleAction(input: ApStockAssembleInput): Promis
   const { adminUserId } = await requireAdmin();
   const c: Ctx = { db: createAdminClient(), target: target(), actorId: adminUserId };
   return guarded(c, { action: "assemble_draft", mode: input.execute ? "execute" : "dry_run", scope: { reportFile: input.reportFile, setId: input.setId, tier: input.tier ?? "free" } }, () => runAssemble(c, input.reportFile, input.setId, input.name, input.execute, input.planHash, input.tier ?? "free"));
+}
+
+/** 부분 연습 세트(Non-Calculator / Calculator / Free-Response) 초안 저장 — 풀·부분 세트 전체와 겹침 0 검증. 공개·보관은 하지 않는다(보관은 기존 공개 탭). */
+export async function apStockAssemblePartialAction(input: ApStockPartialInput): Promise<StepResult & { auditWarning?: string }> {
+  const { adminUserId } = await requireAdmin();
+  const c: Ctx = { db: createAdminClient(), target: target(), actorId: adminUserId };
+  return guarded(c, { action: "assemble_draft", mode: input.execute ? "execute" : "dry_run", scope: { planFile: input.planFile, setId: input.setId, tier: input.tier ?? "free", partial: true } }, () => runAssemblePartial(c, input.planFile, input.setId, input.execute, input.planHash, input.tier ?? "free"));
 }

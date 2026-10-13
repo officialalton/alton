@@ -1,0 +1,251 @@
+{
+ "kind": "ap_partial_rebuild_plan",
+ "subject": "ap_calculus_ab",
+ "generatedBy": "scripts/ap-generation/partial-rebuild-plan.ts",
+ "reserveFree": 87,
+ "excludedFullExamKeys": 288,
+ "overlapMatrix": {
+  "PNC": {
+   "AB#1 v1(게시본)": 0,
+   "AB#1 v2(계획)": 0,
+   "BC#1 초안": 0,
+   "AB#2 초안": 0,
+   "AB#3 초안": 0,
+   "BC#2 초안": 0,
+   "BC#3 초안": 0,
+   "새 PNC": 0,
+   "새 PC": 0,
+   "새 PF": 0
+  },
+  "PC": {
+   "AB#1 v1(게시본)": 0,
+   "AB#1 v2(계획)": 0,
+   "BC#1 초안": 0,
+   "AB#2 초안": 0,
+   "AB#3 초안": 0,
+   "BC#2 초안": 0,
+   "BC#3 초안": 0,
+   "새 PNC": 0,
+   "새 PC": 0,
+   "새 PF": 0
+  },
+  "PF": {
+   "AB#1 v1(게시본)": 0,
+   "AB#1 v2(계획)": 0,
+   "BC#1 초안": 0,
+   "AB#2 초안": 0,
+   "AB#3 초안": 0,
+   "BC#2 초안": 0,
+   "BC#3 초안": 0,
+   "새 PNC": 0,
+   "새 PC": 0,
+   "새 PF": 0
+  }
+ },
+ "sets": [
+  {
+   "id": "PNC",
+   "partial": "noncalc_mc",
+   "name": "AP Calculus AB — Non-Calculator Practice",
+   "keys": {
+    "mcA": [
+     "run2:ap_calculus_ab-m02-k2",
+     "run2:ap_calculus_ab-m06-k1",
+     "run2:ap_calculus_ab-m07-k0",
+     "run2:ap_calculus_ab-m08-k1",
+     "run2:ap_calculus_ab-m10-k2",
+     "run2:ap_calculus_ab-m16-k3",
+     "run2:ap_calculus_ab-m18-k0",
+     "run2:ap_calculus_ab-m19-k1",
+     "run2:ap_calculus_ab-m20-k3",
+     "run2:ap_calculus_ab-m21-k3",
+     "run2:ap_calculus_ab-m26-k2",
+     "s1a-final:ap_calculus_ab-m01-k1",
+     "s1a-final:ap_calculus_ab-m03-k0",
+     "s1a-final:ap_calculus_ab-m04-k1",
+     "s1a-final:ap_calculus_ab-m05-k1",
+     "s1a-final:ap_calculus_ab-m09-k1",
+     "s1a-final:ap_calculus_ab-m12-k1",
+     "s1a-final:ap_calculus_ab-m13-k1",
+     "s1a-final:ap_calculus_ab-m14-k0",
+     "s1a-final:ap_calculus_ab-m22-k0",
+     "s1a-final:ap_calculus_ab-m28-k0",
+     "s1-graph-ab-final:ap_calculus_ab-m06-k0",
+     "s3a-graph-ab-final:ap_calculus_ab-m14-k0",
+     "s3a-graph-ab-final:ap_calculus_ab-m23-k0",
+     "s3c-graph-ab-final:ap_calculus_ab-m06-k0",
+     "s3c-graph-ab-final:ap_calculus_ab-m07-k0",
+     "supp-t2a-ab-final:ap_calculus_ab-m06-k0",
+     "supp-t2a-ab-final:ap_calculus_ab-m12-k0",
+     "supp-t2b-ab-final:ap_calculus_ab-m02-k0"
+    ],
+    "mcB": [],
+    "frqA": [],
+    "frqB": []
+   },
+   "meta": {
+    "status": "optimal",
+    "cap": 1,
+    "objective": 122,
+    "bestBound": 122,
+    "unitTarget": {
+     "1": 4,
+     "2": 4,
+     "3": 2,
+     "4": 4,
+     "5": 5,
+     "6": 5,
+     "7": 2,
+     "8": 3
+    },
+    "units": [
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "7",
+     "8"
+    ],
+    "graphMc": 8,
+    "doubledFamilies": 0,
+    "unitCounts": {
+     "1": 4,
+     "2": 5,
+     "3": 2,
+     "4": 4,
+     "5": 4,
+     "6": 4,
+     "7": 1,
+     "8": 5
+    },
+    "skillCounts": {
+     "1": 19,
+     "2": 7,
+     "3": 3
+    },
+    "oldPartialReused": 1,
+    "fromAb1V1Removed": 0
+   }
+  },
+  {
+   "id": "PC",
+   "partial": "calc_mc",
+   "name": "AP Calculus AB — Calculator Practice",
+   "keys": {
+    "mcA": [],
+    "mcB": [
+     "s1a-final:ap_calculus_ab-m29-k0",
+     "v1ab-final:ap_calculus_ab-m01-k1",
+     "v1ab-final:ap_calculus_ab-m02-k4",
+     "v1ab-final:ap_calculus_ab-m03-k3",
+     "s1-graph-ab-final:ap_calculus_ab-m08-k0",
+     "s3a-graph-ab-final:ap_calculus_ab-m17-k0",
+     "supp-b3-ab-final:ap_calculus_ab-m06-k0",
+     "supp-b3-ab-final:ap_calculus_ab-m10-k0",
+     "supp-b3-ab-final:ap_calculus_ab-m11-k0",
+     "supp-b3-ab-final:ap_calculus_ab-m12-k0",
+     "supp-b4-ab-final:ap_calculus_ab-m05-k0",
+     "supp-t2a-ab-final:ap_calculus_ab-m01-k0",
+     "supp-t2b-ab-final:ap_calculus_ab-m01-k0"
+    ],
+    "frqA": [],
+    "frqB": []
+   },
+   "meta": {
+    "status": "optimal",
+    "cap": 1,
+    "objective": 32,
+    "bestBound": 32,
+    "unitTarget": {
+     "1": 2,
+     "2": 2,
+     "3": 1,
+     "4": 2,
+     "5": 2,
+     "6": 2,
+     "7": 1,
+     "8": 1
+    },
+    "units": [
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "7",
+     "8"
+    ],
+    "graphMc": 2,
+    "doubledFamilies": 0,
+    "unitCounts": {
+     "1": 1,
+     "2": 1,
+     "3": 2,
+     "4": 3,
+     "5": 2,
+     "6": 2,
+     "7": 1,
+     "8": 1
+    },
+    "skillCounts": {
+     "1": 13,
+     "2": 0,
+     "3": 0
+    },
+    "oldPartialReused": 0,
+    "fromAb1V1Removed": 0
+   }
+  },
+  {
+   "id": "PF",
+   "partial": "frq",
+   "name": "AP Calculus AB — Free-Response Practice",
+   "keys": {
+    "mcA": [],
+    "mcB": [],
+    "frqA": [
+     "s1a-final:ap_calculus_ab-f04-k1",
+     "v45ab-final:v5-ab:ap_calculus_ab-f01-k0"
+    ],
+    "frqB": [
+     "s1a-final:ap_calculus_ab-f02-k1",
+     "s1a-final:ap_calculus_ab-f03-k1",
+     "v45ab-final:v5-ab:ap_calculus_ab-f02-k0",
+     "supp-b6-ab-final:ap_calculus_ab-f02-k0"
+    ]
+   },
+   "meta": {
+    "status": "optimal",
+    "objective": 0,
+    "units": [
+     "2",
+     "3",
+     "4",
+     "5",
+     "7",
+     "8"
+    ],
+    "graphMc": 0,
+    "doubledFamilies": 0,
+    "unitCounts": {
+     "2": 1,
+     "3": 1,
+     "4": 1,
+     "5": 1,
+     "7": 1,
+     "8": 1
+    },
+    "skillCounts": {
+     "1": 0,
+     "2": 0,
+     "3": 0
+    },
+    "oldPartialReused": 0,
+    "fromAb1V1Removed": 0
+   }
+  }
+ ]
+}

@@ -6,14 +6,14 @@ import { loadPool, type Item } from "../../scripts/ap-generation/assign-pool";
 import { apSectionLayout } from "../ap-exam/layouts";
 
 export type SetKeys = { mcA: string[]; mcB: string[]; frqA: string[]; frqB: string[] };
-const SECTION: Record<keyof SetKeys, string> = { mcA: "ap_mc_a", mcB: "ap_mc_b", frqA: "ap_frq_a", frqB: "ap_frq_b" };
-const DIFF: Record<string, "easy" | "medium" | "hard"> = { basic_learning: "easy", exam_prep: "medium", advanced_supplement: "hard" };
+export const SECTION: Record<keyof SetKeys, string> = { mcA: "ap_mc_a", mcB: "ap_mc_b", frqA: "ap_frq_a", frqB: "ap_frq_b" };
+export const DIFF: Record<string, "easy" | "medium" | "hard"> = { basic_learning: "easy", exam_prep: "medium", advanced_supplement: "hard" };
 
 export type PoolRow = {
   candidate_key: string; kind: string; keyword_code: string; difficulty_provisional: string | null; purpose: string | null; is_current: boolean; render_verified: boolean; screen_verified: boolean;
   ap_candidate_problems: { item_index: number; problem_id: string; problem_version_id: string }[] | null;
 };
-export type FullSetUsage = { id: string; name: string; status: string; problemIds: string[]; candidateKeys: string[] };
+export type FullSetUsage = { id: string; name: string; status: string; problemIds: string[]; candidateKeys: string[]; label?: string };
 
 export const subjectOfSetId = (id: string) => (id.startsWith("BC") ? "ap_calculus_bc" : "ap_calculus_ab");
 export const defaultDraftName = (setId: string) => `AP Calculus ${setId.startsWith("BC") ? "BC" : "AB"} — Practice Exam ${setId.slice(2)}`;

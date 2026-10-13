@@ -17,6 +17,7 @@
 | ②③ 렌더·화면 기록 | `mark-verified.ts` | `lib/ap-admin/verify-plan.ts` (+ `lib/ap-generation/verify-guard.ts`) |
 | ④ 문제은행 변환 | `publish-to-bank.ts` | `lib/ap-exam/convert-run.ts`·`convert.ts` (원래 공용) |
 | ⑤ 초안 세트 | `assemble-ap-set.ts --keys-file --draft`, `assembly-keys.ts verify` | `lib/ap-admin/assemble-draft.ts` + `verifyAssignment`(`scripts/ap-generation/exact-assign.ts`) |
+| ⑤-b 부분 연습 세트 초안(겹침 0) | `partial-rebuild-plan.ts`(계획 계산) | `lib/ap-admin/partial-draft.ts`, 마이그레이션 520 — `docs/ap/partial-rebuild.md` |
 
 ## 입력 산출물 메커니즘 (Vercel)
 - 저장소에 커밋된 산출물(`data/ap/stock/*.json`, `data/ap/render-check/report.json`, `data/ap/screen-evidence/*.json`, `data/ap/curriculum-2027/*.json`)을 **배포 번들에 포함**(`next.config.ts` `outputFileTracingIncludes["/admin"]`)해 서버가 파일로 읽는다. **업로드 경로는 만들지 않았다**(임의 파일로 DB 에 쓰는 통로 방지). 새 배치는 커밋 → 배포로만 들어온다. 배치 목록은 `lib/ap-admin/batches.ts` 의 레지스트리(owner-load.sh 와 동일 값).
