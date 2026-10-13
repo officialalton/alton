@@ -10,6 +10,7 @@ import { resolveStockTarget } from "@/lib/ap-admin/env-guard";
 import { STOCK_BATCHES, batchArtifactsPresent, listPartialPlans } from "@/lib/ap-admin/batches";
 import { listAssignments, loadCheck, recordRun, runAssemble, runAssemblePartial, runConvert, runImport, runVerify, type Ctx, type StepResult } from "@/lib/ap-admin/service";
 import type { BatchCheck } from "@/lib/ap-admin/load-check";
+import { fetchLaunchGateReport, type LaunchGateReport } from "@/lib/ap-admin/launch-gate";
 
 export type ApStockOverview = {
   target: { ref: string; kind: string; canWrite: boolean; reason: string | null };
@@ -89,4 +90,10 @@ export async function apStockAssemblePartialAction(input: ApStockPartialInput): 
   const { adminUserId } = await requireAdmin();
   const c: Ctx = { db: createAdminClient(), target: target(), actorId: adminUserId };
   return guarded(c, { action: "assemble_draft", mode: input.execute ? "execute" : "dry_run", scope: { planFile: input.planFile, setId: input.setId, tier: input.tier ?? "free", partial: true } }, () => runAssemblePartial(c, input.planFile, input.setId, input.execute, input.planHash, input.tier ?? "free"));
+}
+
+/** 출시 차단·검증 현황(읽기 전용): 비보관 AP 세트 문항 중 ap_launch_ready_v 에 없는 것과 사유, 세트별 출시 게이트 판정. 쓰기·감사 기록 없음. */
+export async function apLaunchGateStatusAction(): Promise<LaunchGateReport> {
+  await requireAdmin();
+  return fetchLaunchGateReport(createAdminClient());
 }
