@@ -30,7 +30,8 @@ def ch_mixture_mass_percent(rng):
             f"Each particle in the diagram is one molecule (or atom) of the gas it represents. What is the mass percent of {cf(x)} in the mixture?")
     return mk("ch_mixture_mass_percent", "1.4", "1.B", stem, key, ds, rng, concept="mass percent of a component of a mixture from the numbers of particles shown in a particulate diagram", stim=stim, material={"type": "diagram", "must_include": ["number of each kind of particle"]},
               path="exact fraction of particle counts times molar masses vs numpy mass from moles (particles / N_A)", facts=[f"x={x}", f"y={y}", f"nx={nx}", f"ny={ny}", f"mx={mx:.4f}", f"my={my:.4f}", f"pct={exact:.4f}"],
-              judgment="turn particle counts into masses before forming the mass fraction", est=85)
+              judgment="turn particle counts into masses before forming the mass fraction", est=85,
+              kwhy=f"The mass of each gas is (number of molecules) × (molar mass), in relative units: {x} = {nx} × {mx:.2f} = {nx * mx:.1f} and {y} = {ny} × {my:.2f} = {ny * my:.1f}. The mass percent of {x} is {nx * mx:.1f} / ({nx * mx:.1f} + {ny * my:.1f}) × 100 = {exact:.1f}%.")
 
 
 # ======================= 5.1 시험 가능한 질문 — 변수·통제 조건 (2.A) =======================
@@ -93,11 +94,11 @@ def ch_le_chatelier_prediction(rng):
         return f"The net reaction proceeds {d[dd]}, because immediately after the change $Q_c$ is {r_[rr]} $K_c$."
     key_t = sent(side, side)
     others = [s for s in (1, -1, 0) if s != side]
-    wrongs = [(sent(s, s), "States a comparison of Q and K that does not match the new concentrations.") for s in others]
-    wrongs.append((sent(side, -side if side else 1), "Gets the direction right but compares Q and K incorrectly." if side else "Claims Q differs from K even though the change leaves Q equal to K."))
+    wrongs = [(sent(s, s), f"This answer takes Q to be {r_[s]} K and the net reaction to go {d[s]}, but after the change Q = {Qv:.3g} and K = {K:.3g}, so Q is {r_[side]} K.") for s in others]
+    wrongs.append((sent(side, -side if side else 1), f"The direction is right, but Q is not {r_[-side if side else 1]} K here: Q = {Qv:.3g} and K = {K:.3g}."))
     if side == 0:
-        wrongs[-1] = (f"The net reaction proceeds toward the products, because the equilibrium constant increases when the volume changes.", "Believes K changes when the volume or concentrations change.")
-    k, ds = sentence_options(key_t, "Compare the new reaction quotient with the unchanged equilibrium constant.", wrongs)
+        wrongs[-1] = (f"The net reaction proceeds toward the products, because the equilibrium constant increases when the volume changes.", "Believes K changes when the volume or concentrations change, but K depends only on temperature.")
+    k, ds = sentence_options(key_t, f"After the change Q = {Qv:.3g}, compared with the unchanged K = {K:.3g}: Q is {r_[side]} K, so the net reaction proceeds {d[side]} until Q equals K again.", wrongs)
     rx = RX[rk][0]
     stem = (f"The gaseous reaction $\\mathrm{{{rx}}}$ is at equilibrium in a rigid, closed container at constant temperature with $[\\mathrm{{A}}]={a0:g}\\text{{ M}}$ and $[\\mathrm{{B}}]={b0:g}\\text{{ M}}$, so $K_c={K:.3g}$. "
             f"A student predicts what happens when {CHG[ch]}. Which prediction is correct?")
@@ -119,7 +120,8 @@ def ch_titrant_change(rng):
     stem = (f"A student titrates ${Va:.2f}\\text{{ mL}}$ of ${ca:g}\\text{{ M}}$ HCl with a standardized NaOH solution of concentration ${c1:g}\\text{{ M}}$ and finds that the equivalence point is reached after ${v1:.2f}\\text{{ mL}}$. "
             f"The student repeats the titration with a fresh sample of HCl, but this time uses NaOH of concentration ${c2:g}\\text{{ M}}$. What volume of the new NaOH solution is expected to reach the equivalence point?")
     return mk("ch_titrant_change", "4.6", "2.F", stem, key, ds, rng, concept="effect of changing the titrant concentration on the volume needed to reach the equivalence point", path="moles of base equal moles of acid solved symbolically (sympy) vs the ratio of the two titrant concentrations applied to the first volume", facts=[f"ca={ca}", f"Va={Va}", f"c1={c1}", f"c2={c2}", f"v1={v1:.5f}", f"v2={v2:.5f}"],
-              judgment="keep the moles of base equal to the moles of acid and solve for the new volume", est=80)
+              judgment="keep the moles of base equal to the moles of acid and solve for the new volume", est=80,
+              kwhy=f"Moles of HCl = ({ca:g} M)({Va:.2f} mL) = {ca * Va:.3f} mmol, and the equivalence point needs the same number of moles of NaOH, so V = n/c = {ca * Va:.3f} mmol / {c2:g} M = {v2:.2f} mL.")
 
 
 # ======================= 4.2 침전 관찰로 주장 (6.A) =======================
@@ -154,7 +156,7 @@ def ch_precipitate_claim(rng):
         # 이 후보가 관찰과 맞는 부분만 근거로 든다
         agree_idx = [i for i in range(3) if PPT[c][i] == obs[i]]
         ev = f"it {'formed a precipitate with' if obs[agree_idx[0]] else 'formed no precipitate with'} {ANIONS[agree_idx[0]][1]} ions" if agree_idx else "it behaved as expected"
-        wrongs.append((f"The unknown solution contains {tex(c)}, because {ev}.", f"This cation would {'form' if pred else 'not form'} a precipitate with {ANIONS[bad][1]} ions, which contradicts the observation."))
+        wrongs.append((f"The unknown solution contains {tex(c)}, because {ev}.", f"{c} would {'form' if pred else 'not form'} a precipitate with {ANIONS[bad][1]} ions, which contradicts the observation for {ANIONS[bad][0]}."))
     rows = [[f"{r.replace('Na2SO4', 'Na2SO4')}(aq)", "Precipitate formed" if p else "No precipitate"] for (r, _), p in zip(ANIONS, obs)]
     stim = table_stimulus("Observations when each solution was added to a sample of the unknown solution", "Solution added", rows, "Observation")
     k, ds = sentence_options(key_t, "Only this cation forms precipitates with exactly the anions that were observed to give one.", wrongs)
@@ -192,7 +194,8 @@ def ch_halflife_order_claim(rng):
           "halves": f"the time for $[\\mathrm{{A}}]$ to fall by half roughly halves each time (${iv[0]}$ s, ${iv[1]}$ s, and ${iv[2]}$ s)"}
     key_t = f"The reaction is {nm[n]} order in A, because {ev[kind]}."
     ev_by_order = {1: ev["constant"], 2: ev["doubles"], 0: ev["halves"]}
-    wrongs = [(f"The reaction is {nm[o]} order in A, because {ev_by_order[n]}.", "Matches the observed pattern of half-lives to the wrong order.") for o in (0, 1, 2) if o != n]
+    pat = {1: "stay constant", 2: "double each time", 0: "halve each time"}
+    wrongs = [(f"The reaction is {nm[o]} order in A, because {ev_by_order[n]}.", f"A {nm[o]}-order reaction would have half-lives that {pat[o]}, which is not the pattern in the table.") for o in (0, 1, 2) if o != n]
     wrongs.append(("The order of the reaction with respect to A cannot be determined, because the times at which the concentration was measured are not evenly spaced.", "Believes unevenly spaced times make the data unusable, when the pattern of intervals is the evidence."))
     rows = [[str(t), f"{A0 / 2 ** j:.3f}"] for j, t in enumerate(ts_r)]
     stim = table_stimulus("Concentration of A over time for a reaction in which only A is consumed", "Time (s)", rows, "[A] (M)")

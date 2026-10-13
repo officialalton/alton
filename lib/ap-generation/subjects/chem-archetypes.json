@@ -9,9 +9,9 @@
    "measured pKa values (lowest = strongest) vs the structural rule (more terminal oxygen atoms, or weaker H-X bond down a group)"
   ],
   "misconceptions": [
-   "Chooses an acid with a stronger H\u2013X bond than the strongest-acid choice.",
-   "Chooses an acid with a stronger H\u2013X bond than the strongest-acid choice.",
-   "Chooses the most electronegative atom, which forms the strongest H\u2013X bond."
+   "HBr has a shorter, stronger H\u2013X bond than HI, so it gives up its hydrogen ion less readily.",
+   "HCl has a shorter, stronger H\u2013X bond than HI, so it gives up its hydrogen ion less readily.",
+   "HF has the most electronegative halogen, but its H\u2013F bond is the strongest in the series and is the hardest to break, so it ionizes least."
   ]
  },
  {
@@ -41,7 +41,7 @@
   "misconceptions": [
    "Reports the mass of the more abundant isotope.",
    "Takes the simple average of the two isotope masses, ignoring abundance.",
-   "Weights by the lighter isotope's abundance only."
+   "Uses only the contribution of the lighter isotope (its mass times its abundance fraction) and forgets the other isotope."
   ]
  },
  {
@@ -69,9 +69,9 @@
    "least-squares line from numpy polyfit vs normal equations; the recovered concentration matches the generating value within rounding"
   ],
   "misconceptions": [
-   "Divides by the path length a second time.",
-   "Multiplies the absorbance by the slope instead of dividing.",
-   "Uses the unknown absorbance as the concentration."
+   "Divides by the path length a second time even though the slope already includes it.",
+   "Averages the concentrations of the four standards.",
+   "Multiplies by the path length instead of using the slope of the calibration line."
   ]
  },
  {
@@ -86,7 +86,7 @@
   "misconceptions": [
    "Leaves the absorbance unchanged.",
    "Adds the factor to the absorbance.",
-   "Squares the factor."
+   "Squares the change factor instead of applying it once."
   ]
  },
  {
@@ -109,14 +109,14 @@
   "topic": "2.1",
   "skill": "4.A",
   "calculator": "allowed",
-  "stimulus": "none",
+  "stimulus": "table",
   "verifiedBy": [
    "difference from a Pauling table vs argmax over the four bonds"
   ],
   "misconceptions": [
-   "Chooses a bond with a smaller electronegativity difference.",
-   "Chooses a bond with a smaller electronegativity difference.",
-   "Chooses a bond with a smaller electronegativity difference."
+   "The electronegativity difference of the S\u2013I bond is only 0.08, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly.",
+   "The electronegativity difference of the Br\u2013F bond is only 1.02, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly.",
+   "The electronegativity difference of the Br\u2013Si bond is only 1.06, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly."
   ]
  },
  {
@@ -129,9 +129,9 @@
    "argmin of |pKa - target| vs the |log ratio| <= 1 feasibility test"
   ],
   "misconceptions": [
-   "Chooses the pair with the strongest acid.",
-   "The pKa is more than one unit from the target pH, so the buffer would resist pH changes poorly.",
-   "The pKa is more than one unit from the target pH, so the buffer would resist pH changes poorly."
+   "This pair has the strongest acid shown (pKa = 3.75), but that is 6.6 units from the target pH of 10.3, so it would resist pH changes poorly.",
+   "Its pKa of 7.54 is 2.8 units from the target pH of 10.3, more than the one unit over which a buffer works well.",
+   "Its pKa of 4.76 is 5.5 units from the target pH of 10.3, more than the one unit over which a buffer works well."
   ]
  },
  {
@@ -204,9 +204,9 @@
    "the enthalpy formula recomputed with each altered recorded value shows which errors lower the magnitude"
   ],
   "misconceptions": [
-   "This error makes the calculated magnitude of the enthalpy change larger, not smaller.",
-   "This error makes the calculated magnitude of the enthalpy change larger, not smaller.",
-   "This error makes the calculated magnitude of the enthalpy change larger, not smaller."
+   "A final temperature read 1.0 \u00b0C too high makes \u0394T larger than the true change, so the calculated heat and the magnitude of \u0394H are too high.",
+   "Recording 110 g of water when only 100 g is present makes the calculated heat q = mc\u0394T larger, so the magnitude of \u0394H is too high.",
+   "Recording 4.50 g when 5.00 g dissolved makes the calculated moles of salt smaller, so the heat per mole, and the magnitude of \u0394H, is too high."
   ]
  },
  {
@@ -234,8 +234,8 @@
    "sympy rational subtraction of cathode minus anode vs a table sort that identifies the cathode as the more positive potential"
   ],
   "misconceptions": [
+   "Uses the magnitude of the anode's reduction potential as the cell potential.",
    "Subtracts in the wrong order (anode minus cathode).",
-   "Multiplies the potential by the number of electrons transferred.",
    "Adds the two reduction potentials."
   ]
  },
@@ -309,7 +309,7 @@
    "sympy solve of M1V1 = M2V2 vs exact fraction"
   ],
   "misconceptions": [
-   "Uses M2V2 as the volume.",
+   "Multiplies the final concentration by the final volume and treats the product as a volume.",
    "Divides the stock volume by the concentration ratio the wrong way (uses M1V2/M2).",
    "Reports the volume of stock instead of the volume of water."
   ]
@@ -399,7 +399,7 @@
    "explicit loop over products minus reactants vs a signed coefficient vector dot product"
   ],
   "misconceptions": [
-   "Uses only the products.",
+   "Uses only the enthalpies of formation of the products and ignores the reactants.",
    "Adds the enthalpies of formation of the reactants and the products.",
    "Subtracts products from reactants (reversed sign)."
   ]
@@ -414,9 +414,9 @@
    "Z from the van der Waals equation by root finding vs the first-order estimate (b - a/RT)P; both pick the same gas"
   ],
   "misconceptions": [
-   "Assumes the smallest molecule deviates most.",
-   "Does not account for the stronger intermolecular attractions of the other gas.",
-   "Does not account for the stronger intermolecular attractions of the other gas."
+   "CH4 has a van der Waals attraction constant of a = 2.25 L\u00b2\u00b7atm/mol\u00b2, smaller than the 3.59 of CO2, so it stays closer to ideal behavior.",
+   "Ne has a van der Waals attraction constant of a = 0.211 L\u00b2\u00b7atm/mol\u00b2, smaller than the 3.59 of CO2, so it stays closer to ideal behavior.",
+   "O2 has a van der Waals attraction constant of a = 1.38 L\u00b2\u00b7atm/mol\u00b2, smaller than the 3.59 of CO2, so it stays closer to ideal behavior."
   ]
  },
  {
@@ -429,7 +429,7 @@
    "sympy solve of PM = dRT vs recovery of the generating molar mass"
   ],
   "misconceptions": [
-   "Uses dP/(RT), the inverse relationship.",
+   "Uses the STP molar volume of 22.4 L/mol regardless of the given temperature and pressure.",
    "Uses the Celsius temperature in place of kelvins.",
    "Multiplies by the pressure instead of dividing."
   ]
@@ -486,12 +486,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "sign pattern table vs direct computation of \u0394G at the stated temperature"
+   "sign pattern table vs direct evaluation of the sign of \u0394G at a very low and a very high temperature"
   ],
   "misconceptions": [
-   "Misapplies the sign rules for \u0394H and \u0394S.",
-   "Misapplies the sign rules for \u0394H and \u0394S.",
-   "Misapplies the sign rules for \u0394H and \u0394S."
+   "This pattern requires \u0394H\u00b0 to be positive and \u0394S\u00b0 to be negative, but the reaction has \u0394H\u00b0 = +90 kJ/mol (positive) and \u0394S\u00b0 = +180 J/(mol\u00b7K) (positive).",
+   "This pattern requires \u0394H\u00b0 to be negative and \u0394S\u00b0 to be negative, but the reaction has \u0394H\u00b0 = +90 kJ/mol (positive) and \u0394S\u00b0 = +180 J/(mol\u00b7K) (positive).",
+   "This pattern requires \u0394H\u00b0 to be negative and \u0394S\u00b0 to be positive, but the reaction has \u0394H\u00b0 = +90 kJ/mol (positive) and \u0394S\u00b0 = +180 J/(mol\u00b7K) (positive)."
   ]
  },
  {
@@ -504,7 +504,7 @@
    "sympy solution of \u0394H - T\u0394S = 0 vs bisection on \u0394G(T)"
   ],
   "misconceptions": [
-   "Inverts the ratio.",
+   "Inverts the ratio, dividing \u0394S by \u0394H instead of \u0394H by \u0394S.",
    "Does not convert kilojoules to joules.",
    "Multiplies enthalpy and entropy."
   ]
@@ -519,8 +519,8 @@
    "analytic times at which [A] reaches successive halves vs an ODE integration of the rate law with an event at each halving, then a rule on the ratios of successive intervals"
   ],
   "misconceptions": [
-   "Matches the observed pattern of half-lives to the wrong order.",
-   "Matches the observed pattern of half-lives to the wrong order (this option: The reaction is zero order in A, because the time for [ A] t).",
+   "A second-order reaction would have half-lives that double each time, which is not the pattern in the table.",
+   "A zero-order reaction would have half-lives that halve each time, which is not the pattern in the table.",
    "Believes unevenly spaced times make the data unusable, when the pattern of intervals is the evidence."
   ]
  },
@@ -579,7 +579,7 @@
    "sympy solution of the quadratic vs bisection on the equilibrium expression"
   ],
   "misconceptions": [
-   "Does not square the 2x term.",
+   "Writes the expression with [B] instead of [B]\u00b2 (leaves out the square) and solves it exactly.",
    "Reports the equilibrium concentration of A.",
    "Applies the small-x approximation even though the change is not negligible compared with the initial concentration."
   ]
@@ -609,9 +609,9 @@
    "tabulated ionization energies vs the rule that the highest group in the same period wins (no exception pair present)"
   ],
   "misconceptions": [
-   "Chooses an element farther left in the period, which has a smaller effective nuclear charge and holds its outer electron less tightly.",
-   "Chooses an element farther left in the period, which has a smaller effective nuclear charge and holds its outer electron less tightly.",
-   "Chooses an element farther left in the period, which has a smaller effective nuclear charge and holds its outer electron less tightly."
+   "Al (group 13) is farther left in period 3 than Cl (group 17), so its effective nuclear charge is smaller and its outer electron is held less tightly.",
+   "Na (group 1) is farther left in period 3 than Cl (group 17), so its effective nuclear charge is smaller and its outer electron is held less tightly.",
+   "P (group 15) is farther left in period 3 than Cl (group 17), so its effective nuclear charge is smaller and its outer electron is held less tightly."
   ]
  },
  {
@@ -621,12 +621,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "tabulated boiling points vs a force-strength score (H-bond > dipole-dipole > dispersion, then polarizability)"
+   "tabulated boiling points vs a force-strength score (H-bond > dipole-dipole > dispersion), with the molar-mass argument checked against the table"
   ],
   "misconceptions": [
-   "Uses molar mass alone, ignoring the type of intermolecular force.",
-   "Confuses intramolecular bonds with intermolecular forces.",
-   "Applies the right reasoning to the wrong substance."
+   "Confuses kinetic energy, which depends only on temperature, with the strength of the attractions between particles.",
+   "Confuses the covalent bonds inside molecules, which stay intact when a liquid boils, with the intermolecular forces that are overcome.",
+   "NH3 actually has the smaller molar mass (17 g/mol versus 20.2 g/mol for Ne), so molar mass cannot explain its higher boiling point."
   ]
  },
  {
@@ -639,9 +639,9 @@
    "equivalence pH from the full charge balance (bisection) vs the analytic salt-hydrolysis formula; both fall in one indicator range"
   ],
   "misconceptions": [
-   "Chooses the indicator that changes near pH 7 although the equivalence point is not at pH 7.",
-   "The color-change range does not include the pH at the equivalence point.",
-   "Chooses the indicator whose range contains the pKa instead of the equivalence-point pH."
+   "bromothymol blue changes color between pH 6.0 and 7.6, near pH 7, but the equivalence point is at pH 8.3, outside that range.",
+   "alizarin yellow R changes color between pH 10.1 and 12.0, which does not include the equivalence-point pH of 8.3.",
+   "methyl orange (pH 3.1\u20134.4) has a range that contains the pKa-related value 3.5, but the equivalence point is at pH 8.3."
   ]
  },
  {
@@ -654,9 +654,9 @@
    "ion count from a table vs ions listed by splitting the formula"
   ],
   "misconceptions": [
-   "Chooses a solute that releases fewer ions per formula unit.",
-   "Chooses a molecular solute that dissolves without forming ions.",
-   "Chooses a solute that releases fewer ions per formula unit."
+   "CaCl2 releases 3 ions per formula unit, fewer than the 4 released by K3PO4, so its solution has fewer charge carriers.",
+   "C6H12O6 dissolves as neutral molecules and releases no ions, so its solution has far fewer charge carriers than K3PO4.",
+   "KNO3 releases 2 ions per formula unit, fewer than the 4 released by K3PO4, so its solution has fewer charge carriers."
   ]
  },
  {
@@ -699,7 +699,7 @@
    "algebra Ka = [H+]^2/(c - [H+]) vs forward bisection solve recovering the measured pH"
   ],
   "misconceptions": [
-   "Reports the pKa.",
+   "Reports the pKa (the negative logarithm of Ka) instead of Ka itself.",
    "Divides the hydronium concentration by the initial concentration.",
    "Uses the hydronium concentration as Ka."
   ]
@@ -729,9 +729,9 @@
    "exact rational q1q2/d ranking vs numpy argmax; sizes from a radius table"
   ],
   "misconceptions": [
-   "Looks only at the charge of one ion without comparing the separation.",
-   "Looks only at the charge of one ion without comparing the separation.",
-   "Looks only at the charge of one ion without comparing the separation."
+   "CaF2 has a charge product of 2 and an ionic separation of 233 pm, so its charge-to-separation ratio (0.0086) is smaller than that of MgO (0.0189).",
+   "NaF has a charge product of 1 and an ionic separation of 235 pm, so its charge-to-separation ratio (0.0043) is smaller than that of MgO (0.0189).",
+   "KBr has a charge product of 1 and an ionic separation of 334 pm, so its charge-to-separation ratio (0.0030) is smaller than that of MgO (0.0189)."
   ]
  },
  {
@@ -745,8 +745,8 @@
   ],
   "misconceptions": [
    "Believes a change in concentration or volume changes the value of K.",
-   "Applies the correct reasoning but names the wrong direction.",
-   "Applies the correct reasoning but names the wrong direction."
+   "Predicts a shift toward the products, which would only happen if Q were less than K after the change.",
+   "Predicts no shift, which would only be correct if Q still equaled K after the change."
   ]
  },
  {
@@ -759,9 +759,9 @@
    "exact fraction of Q versus K vs a numerically integrated rate-law trajectory started at the new concentrations"
   ],
   "misconceptions": [
-   "States a comparison of Q and K that does not match the new concentrations.",
-   "States a comparison of Q and K that does not match the new concentrations (this option: The net reaction proceeds toward the products, because immed).",
-   "Gets the direction right but compares Q and K incorrectly."
+   "This answer takes Q to be equal to K and the net reaction to go in neither direction (no net change), but after the change Q = 0.45 and K = 0.225, so Q is greater than K.",
+   "This answer takes Q to be less than K and the net reaction to go toward the products, but after the change Q = 0.45 and K = 0.225, so Q is greater than K.",
+   "The direction is right, but Q is not less than K here: Q = 0.45 and K = 0.225."
   ]
  },
  {
@@ -806,7 +806,7 @@
   "misconceptions": [
    "Adds the masses of the two reactants.",
    "Uses the excess reactant to find the product.",
-   "Uses the moles of the limiting reactant without the product coefficient."
+   "Forgets the product coefficient from the balanced equation (assumes 1 mol of product per mole of reaction)."
   ]
  },
  {
@@ -849,9 +849,9 @@
    "sympy substitution of the intermediate from the fast equilibrium vs a hand-built table of expected exponents"
   ],
   "misconceptions": [
-   "The rate law derived from this mechanism does not match the observed rate law.",
-   "The rate law derived from this mechanism does not match the observed rate law.",
-   "The rate law derived from this mechanism does not match the observed rate law."
+   "The slow step of this mechanism leads to rate = k [NO]^2 [O2], which does not match the observed rate = k [O2].",
+   "The slow step of this mechanism leads to rate = k [NO]^2, which does not match the observed rate = k [O2].",
+   "The slow step of this mechanism leads to rate = k [NO] [O2], which does not match the observed rate = k [O2]."
   ]
  },
  {
@@ -864,9 +864,9 @@
    "tabulated solubilities vs the polar/nonpolar rule; the polar substance is the unique maximum"
   ],
   "misconceptions": [
-   "A nonpolar molecule has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules.",
-   "A nonpolar molecule has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules.",
-   "A nonpolar molecule has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules."
+   "hexane is nonpolar, so it has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules; its solubility is only about 0.001 g per 100 mL.",
+   "cyclohexane is nonpolar, so it has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules; its solubility is only about 0.006 g per 100 mL.",
+   "carbon tetrachloride is nonpolar, so it has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules; its solubility is only about 0.08 g per 100 mL."
   ]
  },
  {
@@ -1044,9 +1044,9 @@
    "ion ratio compared with each formula vs charge neutrality of the counts shown"
   ],
   "misconceptions": [
-   "The ratio of ions in the diagram does not match this formula.",
-   "The ratio of ions in the diagram does not match this formula.",
-   "The ratio of ions in the diagram does not match this formula."
+   "CaCl2 contains 1 Ca2+ to 2 Cl- per formula unit, not the ions shown in the diagram.",
+   "Na2SO4 contains 2 Na+ to 1 SO42- per formula unit, not the ions shown in the diagram.",
+   "NaCl contains 1 Na+ to 1 Cl- per formula unit, not the ions shown in the diagram."
   ]
  },
  {
@@ -1119,9 +1119,9 @@
    "peak labels from the shell-model energy ordering vs the occupied-subshell list in filling order"
   ],
   "misconceptions": [
-   "Assigns the peak to a different occupied subshell, confusing the order of binding energies.",
-   "Uses a subshell that is not occupied in this atom.",
-   "Assigns the peak to a different occupied subshell, confusing the order of binding energies."
+   "2s is occupied in this atom, but the peak for 2s is number 2 counting from the highest binding energy, not number 5.",
+   "4s is not occupied in this atom, so the spectrum has no peak for it.",
+   "1s is occupied in this atom, but the peak for 1s is number 1 counting from the highest binding energy, not number 5."
   ]
  },
  {
@@ -1134,9 +1134,9 @@
    "pH of each solution from the exact charge balance vs ordering by Ka; the orders agree"
   ],
   "misconceptions": [
-   "Chooses an acid that is weaker than the strongest one shown.",
-   "Chooses the acid with the smallest Ka, which gives the highest pH.",
-   "Chooses an acid that is weaker than the strongest one shown."
+   "HCOOH has Ka = 1.8 \u00d7 10\u207b\u2074, smaller than the 4.5 \u00d7 10\u207b\u2074 of HNO2, so it dissociates less at the same concentration and gives a higher pH.",
+   "HOCl has Ka = 3.0 \u00d7 10\u207b\u2078, smaller than the 4.5 \u00d7 10\u207b\u2074 of HNO2, so it dissociates less at the same concentration and gives a higher pH (it is the weakest acid shown).",
+   "C6H5COOH has Ka = 6.3 \u00d7 10\u207b\u2075, smaller than the 4.5 \u00d7 10\u207b\u2074 of HNO2, so it dissociates less at the same concentration and gives a higher pH."
   ]
  },
  {
@@ -1164,9 +1164,9 @@
    "analytic Morse minimum position and depth vs numerical argmin of a dense sampled curve"
   ],
   "misconceptions": [
-   "Reads bond strength from the wrong curve.",
-   "Reverses both readings.",
-   "Reads bond length from the wrong curve."
+   "Assigns the stronger bond to the wrong molecule: the deeper minimum belongs to X.",
+   "Reverses both readings; bond length is the horizontal position of the minimum and bond energy is its depth below zero.",
+   "Assigns the longer bond to the wrong molecule: the minimum at the larger internuclear distance belongs to X."
   ]
  },
  {
@@ -1179,9 +1179,9 @@
    "match of the observation pattern against the solubility rule table vs a step-by-step elimination order"
   ],
   "misconceptions": [
-   "This cation would not form a precipitate with chloride ions, which contradicts the observation.",
-   "This cation would not form a precipitate with chloride ions, which contradicts the observation (this option: The unknown solution contains  K+, because it behaved as exp).",
-   "This cation would not form a precipitate with chloride ions, which contradicts the observation (this option: The unknown solution contains  Ba2+, because it formed a pre)."
+   "Mg2+ would not form a precipitate with chloride ions, which contradicts the observation for NaCl.",
+   "K+ would not form a precipitate with chloride ions, which contradicts the observation for NaCl.",
+   "Ba2+ would not form a precipitate with chloride ions, which contradicts the observation for NaCl."
   ]
  },
  {
@@ -1269,9 +1269,9 @@
    "least-squares fit of ln(rate) on ln[A], ln[B] vs exhaustive search of integer orders reproducing all rates"
   ],
   "misconceptions": [
-   "Assumes the rate is proportional only to A.",
-   "Assumes first order in each reactant regardless of the data.",
-   "Swaps the orders of the two reactants."
+   "Assumes the rate depends only on [A] (first order in A, zero order in B).",
+   "Assumes the reaction is first order in both A and B without comparing the experiments.",
+   "Swaps the orders of A and B."
   ]
  },
  {
@@ -1464,9 +1464,9 @@
    "ratio of the calculated value to the true value from the changed recorded volume (sympy) vs a numeric recomputation"
   ],
   "misconceptions": [
-   "Attributes the effect to a changed base molarity instead of the recorded volume.",
-   "Reverses the effect of the error on the recorded volume.",
-   "Believes water in the flask changes the moles of acid, or that errors never matter."
+   "Attributes the effect to a changed mole ratio, which is fixed by the balanced equation, instead of to the changed recorded value.",
+   "Reverses the effect of the error on the volume used in the calculation.",
+   "Believes the error leaves the moles of base and acid used in the calculation unchanged, ignoring the changed recorded value."
   ]
  },
  {
@@ -1494,7 +1494,7 @@
    "exact fractions of each ion per cell reduced to a ratio vs the raw position counts shown as the wrong reading"
   ],
   "misconceptions": [
-   "Doubles the anion count.",
+   "Doubles the number of anions counted in the cell.",
    "Inverts the ratio of cations to anions.",
    "Counts every ion position as a whole ion, ignoring that corner, face, and edge ions are shared."
   ]
@@ -1569,9 +1569,9 @@
    "measured viscosities vs the count of -OH groups (ties broken by molecular size); the same liquid wins"
   ],
   "misconceptions": [
-   "Has fewer hydrogen-bonding groups per molecule, so weaker attractions between molecules.",
-   "Has fewer hydrogen-bonding groups per molecule, so weaker attractions between molecules.",
-   "Has fewer hydrogen-bonding groups per molecule, so weaker attractions between molecules."
+   "acetone has 0 \u2013OH groups per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily.",
+   "water has 2 \u2013OH groups per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily.",
+   "methanol has 1 \u2013OH group per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily."
   ]
  },
  {
@@ -1584,9 +1584,9 @@
    "shape table keyed by (domains, lone pairs) vs rule-built geometry from the electron-domain geometry"
   ],
   "misconceptions": [
-   "Matches a different count of bonded atoms and lone pairs.",
-   "Counts one extra lone pair.",
-   "Removes one lone pair too many."
+   "This is the shape of a central atom with 3 bonded atoms and 0 lone pairs, not the 5 bonded atoms and 0 lone pairs of PCl5.",
+   "This is the shape of a central atom with 5 bonded atoms and 1 lone pair, not the 5 bonded atoms and 0 lone pairs of PCl5.",
+   "This is the shape of a central atom with 3 bonded atoms and 1 lone pair, not the 5 bonded atoms and 0 lone pairs of PCl5."
   ]
  },
  {
@@ -1599,9 +1599,9 @@
    "sympy solution of the quadratic x^2 + Ka x - Ka c = 0 vs bisection on the full charge balance including water"
   ],
   "misconceptions": [
-   "Takes the acid dissociation constant as the hydronium concentration.",
+   "Takes the square root of Ka as [H\u207a], leaving out the initial concentration.",
    "Reports the pOH of the solution.",
-   "Uses the pKa as the pH."
+   "Uses the pKa of the acid as the pH of the solution."
   ]
  },
  {
@@ -1629,7 +1629,7 @@
    "sympy quadratic for the shifted equilibrium vs bisection; Q computed directly"
   ],
   "misconceptions": [
-   "Uses x instead of 2x.",
+   "Reports B0 + x (the amount of A that reacted) instead of the equilibrium concentration of B.",
    "Reports the equilibrium concentration of A.",
    "Uses the initial concentration of B."
   ]
@@ -1644,9 +1644,9 @@
    "log-log least squares vs integer search of orders; k from experiment 1 with those orders"
   ],
   "misconceptions": [
-   "Misreads how the rate changes when [A] is doubled.",
-   "Misreads how the rate changes when [A] is doubled.",
-   "Believes three experiments are not enough to find an order."
+   "A second order dependence on A would change the rate by a factor of 4 when [A] doubles, but the data show a factor of 1.",
+   "A first order dependence on A would change the rate by a factor of 2 when [A] doubles, but the data show a factor of 1.",
+   "Believes three experiments are not enough to find an order, when two experiments that change only [A] are enough."
   ]
  },
  {
@@ -1674,9 +1674,9 @@
    "generating Ka and the analytic equivalence pH vs values read from the numerically computed curve"
   ],
   "misconceptions": [
-   "Uses the initial pH.",
-   "Uses the pH after excess base.",
-   "Uses the pH at the equivalence point."
+   "Uses the initial pH of the acid solution instead of the pH at the half-equivalence point.",
+   "Uses the pH after excess base was added instead of the pH at the half-equivalence point.",
+   "Uses the pH at the equivalence point instead of the pH at the half-equivalence point."
   ]
  },
  {
@@ -1690,7 +1690,7 @@
   ],
   "misconceptions": [
    "Reports 7.00 for the equivalence point of any neutralization.",
-   "Uses the pKa.",
+   "Reports the pKa, the pH at the half-equivalence point, instead of the equivalence-point pH.",
    "Uses the initial pH of the acid."
   ]
  }

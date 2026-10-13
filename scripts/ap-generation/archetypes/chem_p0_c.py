@@ -33,12 +33,13 @@ def ch_limiting_reagent(rng):
     agree(key_v, x * pc * formula_mass(fp), 5e-3, "mass")
     lim_other = float((eb if ea < eb else ea) * pc) * formula_mass(fp)
     pairs = [("Uses the excess reactant to find the product.", lim_other), ("Adds the masses of the two reactants.", ma + mb), ("Omits the mole ratio of the balanced equation (treats it as 1:1:1).", float(min(na, nb)) * formula_mass(fp)),
-             ("Uses the moles of the limiting reactant without the product coefficient.", float(ext) * formula_mass(fp))]
+             ("Forgets the product coefficient from the balanced equation (assumes 1 mol of product per mole of reaction).", float(ext) * formula_mass(fp))]
     key, ds = num_opts(key_v, pairs, "g")
     eq = rxn_tex([(c, f) for c, f in rx[0]], [rx[1]])
     stem = f"Consider the reaction {eq}. A mixture contains ${ma:g}\\text{{ g}}$ of {cf(fa)} and ${mb:g}\\text{{ g}}$ of {cf(fb)}. What is the maximum mass of {cf(fp)}, in g, that can form?"
     return mk("ch_limiting_reagent", "4.5", "5.F", stem, key, ds, rng, concept="theoretical yield from a limiting reactant using a balanced equation", path="exact fraction extent-of-reaction minimum vs numerical stepping of the reaction extent until one reactant runs out",
-              facts=[f"fa={fa}", f"fb={fb}", f"fp={fp}", f"ma={ma}", f"mb={mb}", f"coefs={a},{b},{pc}", f"key={key_v:.5f}"], judgment="identify the limiting reactant before converting to product mass", est=130)
+              facts=[f"fa={fa}", f"fb={fb}", f"fp={fp}", f"ma={ma}", f"mb={mb}", f"coefs={a},{b},{pc}", f"key={key_v:.5f}"], judgment="identify the limiting reactant before converting to product mass", est=130,
+              kwhy=f"Moles: {fa} = {float(na):.3f} mol and {fb} = {float(nb):.3f} mol. Dividing each by its coefficient gives {float(ea):.3f} for {fa} and {float(eb):.3f} for {fb}, so {fa if ea < eb else fb} is limiting. The product is {float(ext):.3f} × {pc} = {float(ext * pc):.3f} mol of {fp}, which is {float(ext * pc):.3f} mol × {formula_mass(fp):.2f} g/mol = {key_v:.3g} g.")
 
 
 @retry_sep
@@ -57,7 +58,8 @@ def ch_percent_yield(rng):
     eq = rxn_tex([(c, f) for c, f in rx[0]], [rx[1]])
     stem = f"For the reaction {eq}, ${ma:g}\\text{{ g}}$ of {cf(fa)} reacts with an excess of {cf(fb)}. The reaction produces ${actual:g}\\text{{ g}}$ of {cf(fp)}. What is the percent yield?"
     return mk("ch_percent_yield", "4.5", "5.F", stem, key, ds, rng, concept="percent yield from the actual mass and a stoichiometric theoretical yield", path="exact fractions for the theoretical yield vs recovery of the generating percent",
-              facts=[f"fa={fa}", f"fp={fp}", f"ma={ma}", f"coefs={a},{pc}", f"actual={actual}", f"pct={pct:.4f}"], judgment="compute the theoretical yield first, then compare with the measured mass", est=110)
+              facts=[f"fa={fa}", f"fp={fp}", f"ma={ma}", f"coefs={a},{pc}", f"actual={actual}", f"pct={pct:.4f}"], judgment="compute the theoretical yield first, then compare with the measured mass", est=110,
+              kwhy=f"Moles of {fa}: {float(na):.3f} mol. The theoretical yield of {fp} is {float(na):.3f} × ({pc}/{a}) × {formula_mass(fp):.2f} g/mol = {theo:.2f} g. Percent yield = actual / theoretical × 100 = {actual:g} g / {theo:.2f} g × 100 = {pct:.1f}%.")
 
 
 # ======================= 4.6 적정 (5.F) =======================
@@ -77,7 +79,8 @@ def ch_titration_conc(rng):
     key, ds = num_opts(Ma, pairs, "M")
     stem = f"A ${Va:g}\\text{{ mL}}$ sample of {cf(ac)} is titrated to the equivalence point with ${Mb:g}\\text{{ M}}$ {cf(bs)}. The titration requires ${Vb:g}\\text{{ mL}}$ of the base. What is the concentration of the acid, in M?"
     return mk("ch_titration_conc", "4.6", "5.F", stem, key, ds, rng, concept="concentration of an acid from an equivalence-point volume using the mole ratio in the neutralization", path="sympy solve of the mole-balance equation vs direct mole arithmetic",
-              facts=[f"acid={ac}", f"base={bs}", f"ratio={r}", f"Mb={Mb}", f"Vb={Vb}", f"Va={Va}", f"Ma={Ma:.6f}"], judgment="write the neutralization mole ratio from the formulas", est=100)
+              facts=[f"acid={ac}", f"base={bs}", f"ratio={r}", f"Mb={Mb}", f"Vb={Vb}", f"Va={Va}", f"Ma={Ma:.6f}"], judgment="write the neutralization mole ratio from the formulas", est=100,
+              kwhy=f"Moles of base = ({Mb:g} M)({Vb:g} mL) = {Mb * Vb:.3g} mmol. The neutralization uses {r:g} mol of base per mole of acid, so the acid contains {Mb * Vb:.3g} / {r:g} = {Mb * Vb / r:.3g} mmol, and [acid] = {Mb * Vb / r:.3g} mmol / {Va:g} mL = {Ma:.3g} M.")
 
 
 # ======================= 4.2 알짜 이온 반응식 (5.E) =======================
@@ -118,7 +121,7 @@ def ch_net_ionic(rng):
     for t, w in cands:
         if t not in seen:
             seen.add(t); ds.append(Opt(t, False, w, None))
-    key = Opt(key_t, True, "The net ionic equation shows the ions that combine and the solid they form, balanced in charge and atoms.", None)
+    key = Opt(key_t, True, f"{cat} ions (charge {qc}+) and {an} ions (charge {qa}−) combine in a {nc}:{nan} ratio so that the charges cancel ({nc * qc}+ and {nan * qa}−), forming solid {form}; the spectator ions are left out of the net ionic equation.", None)
     solcat = {"Pb": "Pb(NO3)2", "Ag": "AgNO3", "Ba": "Ba(NO3)2", "Ca": "Ca(NO3)2", "Cu": "Cu(NO3)2", "Fe": "Fe(NO3)3", "Mg": "Mg(NO3)2", "Al": "Al(NO3)3"}[cat]
     solan = {"I": "NaI", "Cl": "NaCl", "SO4": "Na2SO4", "CO3": "Na2CO3", "OH": "NaOH", "CrO4": "Na2CrO4", "PO4": "Na3PO4"}[an]
     stem = f"Aqueous {cf(solcat)} is mixed with aqueous {cf(solan)}, and a precipitate of {cf(form)} forms. Which of the following is the net ionic equation for the reaction?"
@@ -146,7 +149,7 @@ def ch_redox_agent(rng):
     for t, el, q in species:
         texts[t] = (el, q)
     tex_eq = "$" + sp_(a, qa0) + " + " + sp_(b, qb0) + " \\rightarrow " + sp_(a, qa1) + " + " + sp_(b, qb1) + "$ (coefficients omitted)"
-    key = Opt(species[1][0], True, "The oxidizing agent is the species that is reduced: it gains electrons and its oxidation number decreases.", None)
+    key = Opt(species[1][0], True, f"The oxidation number of {b} falls from {qb0} to {qb1}, so {b} is reduced: it gains electrons, which makes the reactant {b} the oxidizing agent.", None)
     ds = [Opt(species[0][0], False, "Chooses the species that is oxidized, which is the reducing agent.", None), Opt(species[2][0], False, "Chooses the product of the oxidation instead of a reactant that is reduced.", None), Opt(species[3][0], False, "Chooses the product of the reduction instead of the reactant.", None)]
     if len({o.text for o in [key] + ds}) < 4:
         raise ValueError("dup")
@@ -187,7 +190,8 @@ def ch_balance_combustion(rng):
     form = f"C{x if x > 1 else ''}H{y}"
     stem = f"The complete combustion of {cf(form)} produces carbon dioxide and water. When the equation is balanced with the smallest whole-number coefficients, what is the coefficient of {cf('O2')}?"
     return mk("ch_balance_combustion", "4.3", "5.E", stem, key, ds, rng, concept="coefficient of oxygen in a balanced combustion equation with whole-number coefficients", path="sympy linear system with scaling by the denominator vs brute-force search of small integers",
-              facts=[f"x={x}", f"y={y}", f"coef={coef}"], judgment="balance C, H and O in order and clear fractions", est=80)
+              facts=[f"x={x}", f"y={y}", f"coef={coef}"], judgment="balance C, H and O in order and clear fractions", est=80,
+              kwhy=f"Balance C first ({x} CO2), then H ({y // 2} H2O), then O: the products contain {2 * x} + {y // 2} = {2 * x + y // 2} O atoms, so {(2 * x + y // 2) / 2:g} O2 are needed. Clearing fractions gives the coefficients {coef[0]}, {coef[1]}, {coef[2]}, {coef[3]}, so the coefficient of O2 is {coef[1]}.")
 
 
 # ======================= 4.5 입자 모형 한계 반응물 (1.A) =======================
@@ -216,7 +220,8 @@ def ch_particulate_limiting(rng):
     stim = diagram_stim_chem(f"A particulate diagram of a mixture before the reaction: {na_} molecules of {fa} and {nb_} molecules of {fb}.", "chem_particles", {"scene": scene})
     stem = f"The particulate diagram shows a reaction mixture before the reaction {eq} takes place. What is the maximum number of {cf(fp)} molecules that can form?"
     return mk("ch_particulate_limiting", "4.5", "1.A", stem, key, ds, rng, concept="limiting reagent and product count from a particulate diagram", stim=stim, material={"type": "diagram", "must_include": ["number of each reactant molecule"]},
-              path="exact fraction extent minimum vs step-by-step molecule consumption", facts=[f"fa={fa}", f"fb={fb}", f"na={na_}", f"nb={nb_}", f"coefs={a},{b},{c}", f"prod={prod}"], judgment="count particles and apply the mole ratio of the balanced equation", est=90)
+              path="exact fraction extent minimum vs step-by-step molecule consumption", facts=[f"fa={fa}", f"fb={fb}", f"na={na_}", f"nb={nb_}", f"coefs={a},{b},{c}", f"prod={prod}"], judgment="count particles and apply the mole ratio of the balanced equation", est=90,
+              kwhy=f"The equation needs {a} {fa} for every {b} {fb}. The {na_} {fa} molecules can make {na_}/{a} = {na_ / a:.3g} sets and the {nb_} {fb} molecules can make {nb_}/{b} = {nb_ / b:.3g} sets, so {fa if ea < eb else fb} is limiting. {ext} complete sets form {ext} × {c} = {prod} {fp} molecules.")
 
 
 # ======================= 5.2 초기 속도법 (5.D) =======================
@@ -238,18 +243,19 @@ def ch_rate_law_initial(rng):
         hit = [(i, j) for i in range(3) for j in range(3) if all(abs(rates[0] / (exps[0][0] ** i * exps[0][1] ** j) * a ** i * b ** j - r) < 1e-9 * max(r, 1e-12) for (a, b), r in zip(exps, rates))]
         agree(1.0, 1.0 if hit == [(m, n)] else 0.0, 1e-9, "orders")
         key_v = k * An ** m * Bn ** n
-        pairs = [("Assumes first order in each reactant regardless of the data.", k * An * Bn if (m, n) != (1, 1) else None), ("Swaps the orders of the two reactants.", k * An ** n * Bn ** m if (m, n) not in [(1, 1)] else None),
-                 ("Assumes the rate is proportional only to A.", k * An), ("Assumes second order in each reactant.", k * An ** 2 * Bn ** 2)]
-        pairs = [(w, v * ((rates[0] / (k * A0 ** m * B0 ** n)))) if v else (w, None) for w, v in pairs]
+        wrong = lambda p_, q_: rates[0] * (An / A0) ** p_ * (Bn / B0) ** q_  # 첫 실험 속도에서 k 를 정한 학생이 잘못된 차수 (p, q) 를 쓸 때의 값
+        pairs = [("Assumes the reaction is first order in both A and B without comparing the experiments.", wrong(1, 1) if (m, n) != (1, 1) else None), ("Swaps the orders of A and B.", wrong(n, m) if m != n else None),
+                 ("Assumes the rate depends only on [A] (first order in A, zero order in B).", wrong(1, 0) if (m, n) != (1, 0) else None), ("Assumes the reaction is second order in both reactants.", wrong(2, 2) if (m, n) != (2, 2) else None)]
         if len({round(p[1], 12) for p in pairs if p[1]}) >= 3:
             break
     # 왜곡 방지: distractor 는 같은 k 를 쓰는 잘못된 차수
     key, ds = num_opts(key_v, pairs, "M/s", 3, fmt=lambda v: sci(v, "M/s"))
-    rows = [[str(i + 1), f"{a:g}", f"{b:g}", f"{r:.3e}"] for i, ((a, b), r) in enumerate(zip(exps, rates))]
+    rows = [[str(i + 1), f"{a:g}", f"{b:g}", f"{sn(r, 4)}"] for i, ((a, b), r) in enumerate(zip(exps, rates))]
     stim = {"kind": "table", "description": "Initial rates for the reaction A + B → products", "data": {"x_label": "Experiment", "columns": ["Experiment", "[A] (M)", "[B] (M)", "Initial rate (M/s)"], "y_label": "Initial rate (M/s)", "rows": [[r[0], r[1], r[2], r[3]] for r in rows]}}
     stem = f"The table gives initial rate data for the reaction A + B → products at constant temperature. What is the initial rate, in M/s, for a mixture with $[\\mathrm{{A}}]={An:g}\\text{{ M}}$ and $[\\mathrm{{B}}]={Bn:g}\\text{{ M}}$?"
     return mk("ch_rate_law_initial", "5.2", "5.D", stem, key, ds, rng, concept="determine reaction orders from initial-rate data and predict a new rate", stim=stim, material={"type": "table", "must_include": ["three experiments", "initial rates"]},
-              path="least-squares fit of ln(rate) on ln[A], ln[B] vs exhaustive search of integer orders reproducing all rates", facts=[f"k={k}", f"m={m}", f"n={n}", f"A0={A0}", f"B0={B0}", f"An={An}", f"Bn={Bn}", f"key={key_v:.6e}"], judgment="compare experiments that change one concentration at a time", est=120)
+              path="least-squares fit of ln(rate) on ln[A], ln[B] vs exhaustive search of integer orders reproducing all rates", facts=[f"k={k}", f"m={m}", f"n={n}", f"A0={A0}", f"B0={B0}", f"An={An}", f"Bn={Bn}", f"key={key_v:.6e}"], judgment="compare experiments that change one concentration at a time", est=120,
+              kwhy=f"Doubling [A] (experiment 1 to 2) multiplies the rate by {rates[1] / rates[0]:g}, so the order in A is {m}; doubling [B] (experiment 1 to 3) multiplies it by {rates[2] / rates[0]:g}, so the order in B is {n}. From experiment 1, k = {sn(rates[0], 4)} / ({A0:g}^{m} × {B0:g}^{n}) = {k:g}, so the new rate is {k:g} × ({An:g})^{m} × ({Bn:g})^{n} = {sn(key_v, 4)} M/s.")
 
 
 # ======================= 5.3 1차 반응 (5.F) =======================
@@ -267,7 +273,8 @@ def ch_first_order_decay(rng):
     key, ds = num_opts(At, pairs, "M")
     stem = f"The decomposition of a reactant A is first order with a rate constant $k={k:g}\\text{{ s}}^{{-1}}$. If the initial concentration is ${A0:g}\\text{{ M}}$, what is the concentration of A after ${t:g}\\text{{ s}}$?"
     return mk("ch_first_order_decay", "5.3", "5.F", stem, key, ds, rng, concept="first-order integrated rate law for the concentration after a given time", path="closed-form ln[A]t - ln[A]0 = -kt vs RK4 integration of d[A]/dt = -k[A]",
-              facts=[f"k={k}", f"A0={A0}", f"t={t}", f"At={At:.6f}"], judgment="select the first-order integrated law and apply the exponential form", est=80)
+              facts=[f"k={k}", f"A0={A0}", f"t={t}", f"At={At:.6f}"], judgment="select the first-order integrated law and apply the exponential form", est=80,
+              kwhy=f"For a first-order reaction [A]t = [A]0 e^(−kt) = ({A0:g} M) e^(−({k:g} s⁻¹)({t:g} s)) = ({A0:g} M)({math.exp(-k * t):.4f}) = {At:.3f} M.")
 
 
 # ======================= 5.3 선형 그래프와 차수 (5.D) =======================
@@ -292,7 +299,7 @@ def ch_order_plot(rng):
     name = {0: "zero", 1: "first", 2: "second"}
     fmt = lambda o: f"The reaction is {name[o]} order, with $k\\approx {kk[o]:.3g}\\text{{ }}{unit[o].replace('^{-1}', '^{-1}')}$." if o != 2 else f"The reaction is second order, with $k\\approx {kk[o]:.3g}\\text{{ M}}^{{-1}}\\text{{s}}^{{-1}}$."
     fmt = lambda o: ("The reaction is " + name[o] + " order, with $k\\approx " + f"{kk[o]:.3g}" + {0: "\\text{ M/s}", 1: "\\text{ s}^{-1}", 2: "\\text{ M}^{-1}\\text{s}^{-1}"}[o] + "$.")
-    key = Opt(fmt(order), True, "The linearized plot with the best straight line identifies the order, and its slope magnitude gives k.", None)
+    key = Opt(fmt(order), True, f"Plotting [A], ln[A], and 1/[A] against time, only the {name[order]}-order plot is a straight line (R² = {r2[order]:.4f}, compared with {', '.join(f'{r2[o]:.3f}' for o in (0, 1, 2) if o != order)} for the other two); the magnitude of its slope, {kk[order]:.3g}, is the rate constant.", None)
     ds = [Opt(fmt(o), False, f"Fits the {name[o]}-order plot, which is visibly curved for these data.", None) for o in (0, 1, 2) if o != order]
     # 네 번째 선지: 올바른 차수에 잘못된 k(기울기 부호/배수)
     ds.append(Opt("The reaction is " + name[order] + " order, with $k\\approx " + f"{kk[order] * 2:.3g}" + {0: "\\text{ M/s}", 1: "\\text{ s}^{-1}", 2: "\\text{ M}^{-1}\\text{s}^{-1}"}[order] + "$.", False, "Gives the right order but doubles the slope (confuses k with a rate-law coefficient).", None))
@@ -317,8 +324,8 @@ def ch_energy_profile(rng):
     agree(num_ea, ET - ER, 1e-6, "Ea"); agree(num_rev, ET - EP, 1e-6, "Ea_rev")
     ask = pick(rng, ["rev", "dh", "fwd"])
     key_v = {"rev": ET - EP, "dh": EP - ER, "fwd": ET - ER}[ask]
-    pairs = [("Reads the activation energy of the forward reaction.", ET - ER), ("Reads the activation energy of the reverse reaction.", ET - EP), ("Reverses the sign of the enthalpy change.", -(EP - ER)), ("Reads the height of the transition state above zero energy.", ET),
-             ("Reads the enthalpy change magnitude as the peak height above the products.", ET - EP + (EP - ER) if False else EP), ("Uses the difference between the product and zero.", EP)]
+    pairs = [("Reads the activation energy of the forward reaction.", ET - ER), ("Reads the activation energy of the reverse reaction.", ET - EP), ("Reverses the sign of the enthalpy change.", -(EP - ER)), ("Reads the height of the transition state above zero energy instead of above a reactant or product level.", ET),
+             ("Reads the energy level of the products above zero instead of a difference between two levels.", EP), ("Reads the energy level of the reactants above zero instead of a difference between two levels.", ER)]
     if ask == "dh":
         key, ds = signed_opts(float(key_v), pairs, fmt=lambda v: "$" + f"{v:+.0f}" + "\\text{ kJ/mol}$")
     else:
@@ -327,7 +334,8 @@ def ch_energy_profile(rng):
     q = {"rev": "the activation energy of the reverse reaction", "dh": "the enthalpy change, $\\Delta H$, of the forward reaction", "fwd": "the activation energy of the forward reaction"}[ask]
     stem = f"The potential energy diagram for a one-step reaction is shown. What is {q}, in kJ/mol?"
     return mk("ch_energy_profile", "5.6", "5.D", stem, key, ds, rng, concept="activation energies and enthalpy change read from a reaction energy diagram", stim=stim, material={"type": "graph", "must_include": ["reactant energy", "transition state", "product energy"]},
-              path="analytic heights from the generating energies vs numeric max and endpoints of the dense curve", facts=[f"ER={ER}", f"ET={ET}", f"EP={EP}", f"ask={ask}", f"key={key_v}"], judgment="read differences between levels rather than absolute heights", est=80)
+              path="analytic heights from the generating energies vs numeric max and endpoints of the dense curve", facts=[f"ER={ER}", f"ET={ET}", f"EP={EP}", f"ask={ask}", f"key={key_v}"], judgment="read differences between levels rather than absolute heights", est=80,
+              kwhy={"rev": f"The activation energy of the reverse reaction is the transition-state energy minus the product energy: {ET} − {EP} = {ET - EP} kJ/mol.", "dh": f"ΔH is the product energy minus the reactant energy: {EP} − {ER} = {EP - ER:+d} kJ/mol.", "fwd": f"The forward activation energy is the transition-state energy minus the reactant energy: {ET} − {ER} = {ET - ER} kJ/mol."}[ask])
 
 
 # ======================= 5.8 메커니즘과 속도식 (4.B) =======================
@@ -368,13 +376,19 @@ def ch_mechanism_consistent(rng):
     same = [n for n in MECH if MECH[n][1] == exps]
     key_n = rng.choice(same)
     others = [n for n in MECH if MECH[n][1] != exps]
-    shown = [key_n] + rng.sample(others, 3)
+    groups = {}
+    for n in others:
+        groups.setdefault(tuple(sorted(MECH[n][1].items())), []).append(n)
+    shown = [key_n] + [rng.choice(v) for v in rng.sample(list(groups.values()), 3)]  # 오답 기구는 서로 다른 속도식을 내야 오답 설명이 달라진다
     law = " ".join(f"[\\mathrm{{{s if s == 'NO' else 'O_2'}}}]" + (f"^{e}" if e > 1 else "") for s, e in sorted(exps.items()))
     def show(n):
         return "$" + ";\\ ".join(f"\\text{{Step {i + 1} ({sp_}): }}" + t for i, (t, sp_) in enumerate(MECH[n][0])) + "$"
     texts = {n: show(n) for n in shown}
-    key = Opt(texts[key_n], True, "A slow step (with any intermediate replaced through the fast equilibrium) gives a rate law that matches the observed one.", None)
-    ds = [Opt(texts[n], False, "The rate law derived from this mechanism does not match the observed rate law.", None) for n in shown if n != key_n]
+    plain = lambda n: " ".join(f"[{sp_ if sp_ == 'NO' else 'O2'}]" + (f"^{e}" if e > 1 else "") for sp_, e in sorted(MECH[n][1].items()))
+    pre = any(sp_ == "fast" and "rightleftharpoons" in t for t, sp_ in MECH[key_n][0])
+    key = Opt(texts[key_n], True, (f"The slow step is rate-determining and contains an intermediate, so the intermediate is replaced using the fast equilibrium (its concentration is proportional to the reactant concentrations); the result is rate = k {plain(key_n)}, which matches the observed rate law." if pre
+                                   else f"The slow step is an elementary step, so its rate law follows directly from its reactants: rate = k {plain(key_n)}, which matches the observed rate law."), None)
+    ds = [Opt(texts[n], False, f"The slow step of this mechanism leads to rate = k {plain(n)}, which does not match the observed rate = k {plain(key_n)}.", None) for n in shown if n != key_n]
     stem = f"The overall reaction $2\\,\\mathrm{{NO}} + \\mathrm{{O_2}} \\rightarrow 2\\,\\mathrm{{NO_2}}$ has the experimentally determined rate law $\\text{{rate}} = k{law}$. Which mechanism is consistent with the observed rate law?"
     return mk("ch_mechanism_consistent", "5.8", "4.B", stem, key, ds, rng, concept="rate law implied by a mechanism with a slow step or a fast pre-equilibrium compared with the observed rate law", path="sympy substitution of the intermediate from the fast equilibrium vs a hand-built table of expected exponents",
               facts=[f"obs={obs}", f"key={key_n}", f"shown={shown}"], judgment="derive a rate law from each mechanism and compare with experiment", est=140)

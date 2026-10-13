@@ -6,6 +6,16 @@ from math import gcd
 C_WATER = 4.18  # J/(g degC), 문항 본문에 항상 제시
 
 
+def _fmt_kj(v):
+    """kJ/mol 값을 유효숫자 3자리로(큰 값은 과학적 표기, 'e+04' 같은 컴퓨터 표기를 쓰지 않는다)."""
+    sgn = "+" if v > 0 else "-"
+    a = abs(v)
+    if a >= 1000:
+        e = int(math.floor(math.log10(a))); m = a / 10 ** e
+        return "$" + sgn + sig(m, 3) + "\\times10^{" + str(e) + "}\\text{ kJ/mol}$"
+    return "$" + sgn + sig(a, 3) + "\\text{ kJ/mol}$"
+
+
 # ======================= 6.4 열량 측정 (5.F) =======================
 SALTS = [("NH4NO3", +25.7), ("NaOH", -44.5), ("CaCl2", -82.8), ("KNO3", +34.9), ("LiCl", -37.0)]  # (식, 용해 엔탈피 kJ/mol) 일반 교재값 — 정답은 ΔT 에서 다시 계산
 
@@ -25,13 +35,14 @@ def ch_calorimetry(rng):
     agree(dH_calc, dH2, 1e-9, "dH")
     agree(dH_calc, dH, 0.08, "dH_generated")
     Ti = pick(rng, [20.0, 22.0, 25.0]); Tf = Ti + dT
-    pairs = [("Gives the sign of the heat gained by the water instead of the sign of the enthalpy change.", -dH_calc), ("Reports the heat in kJ without dividing by the moles of salt.", q / 1000), ("Uses joules per mole without converting to kilojoules.", dH_calc * 1000),
+    pairs = [("Gives the sign of the heat gained by the water instead of the sign of the enthalpy change.", -dH_calc), ("Reports the heat in kJ without dividing by the moles of salt.", q / 1000), ("Leaves the energy in joules per mole, which is a factor of 1000 too large when labeled kJ/mol.", dH_calc * 1000),
              ("Uses the mass of the salt in place of the mass of the water.", -ms * C_WATER * dT / n / 1000)]
-    key, ds = signed_opts(dH_calc, pairs, fmt=lambda v: "$" + (f"{v:+.1f}" if abs(v) < 1000 else f"{v:+.0f}") + "\\text{ kJ/mol}$" if abs(v) < 1e4 else "$" + f"{v:+.2e}" + "\\text{ kJ/mol}$")
+    key, ds = signed_opts(dH_calc, pairs, fmt=_fmt_kj)
     stem = (f"A student dissolves ${ms:g}\\text{{ g}}$ of {cf(salt)} in ${mw:g}\\text{{ g}}$ of water in a calorimeter. The temperature changes from ${Ti:g}\\,^{{\\circ}}\\text{{C}}$ to ${Tf:.1f}\\,^{{\\circ}}\\text{{C}}$. "
             f"Assume that the specific heat capacity of the solution is ${C_WATER}\\text{{ J/(g}}\\cdot^{{\\circ}}\\text{{C)}}$, that the solution mass equals the mass of the water, and that no heat is exchanged with the surroundings. What is the enthalpy change of dissolution, in kJ/mol?")
     return mk("ch_calorimetry", "6.4", "5.F", stem, key, ds, rng, concept="molar enthalpy of dissolution from calorimetry data with the correct sign", path="sympy solve of q = -nΔH vs the generating enthalpy recovered within temperature rounding",
-              facts=[f"salt={salt}", f"ms={ms}", f"mw={mw}", f"Ti={Ti}", f"Tf={Tf:.1f}", f"dH={dH_calc:.5f}"], judgment="relate the heat gained by the solution to the enthalpy change of the system and divide by moles", est=120)
+              facts=[f"salt={salt}", f"ms={ms}", f"mw={mw}", f"Ti={Ti}", f"Tf={Tf:.1f}", f"dH={dH_calc:.5f}"], judgment="relate the heat gained by the solution to the enthalpy change of the system and divide by moles", est=120,
+              kwhy=f"The solution gained q = mcΔT = ({mw:g} g)({C_WATER} J/(g·°C))({dT:+.1f} °C) = {q:+.0f} J, so the dissolving process gave up the opposite amount. Moles of salt = {ms:g} g / {formula_mass(salt):.2f} g/mol = {n:.4f} mol, so ΔH = −q/n = {dH_calc:+.1f} kJ/mol.")
 
 
 # ======================= 6.9 헤스의 법칙 (5.B) =======================
@@ -57,7 +68,7 @@ def ch_hess_law(rng):
             continue
         dH = sum(c * st[1] for c, st in zip(coef, steps))
         pairs = [("Adds the three enthalpy changes without reversing or scaling any step.", sum(st[1] for st in steps)), ("Reverses the wrong step's sign when combining.", dH - 2 * coef[0] * steps[0][1]),
-                 ("Multiplies by the coefficients but forgets to change signs for reversed steps.", sum(abs(c) * st[1] for c, st in zip(coef, steps))), ("Reverses all the steps.", -dH)]
+                 ("Multiplies by the coefficients but forgets to change signs for reversed steps.", sum(abs(c) * st[1] for c, st in zip(coef, steps))), ("Reverses every step, which gives the enthalpy change of the reverse of the target reaction.", -dH)]
         try:
             key, ds = signed_opts(dH, pairs, fmt=lambda v: "$" + f"{v:+.0f}" + "\\text{ kJ}$")
         except ValueError:
@@ -70,7 +81,8 @@ def ch_hess_law(rng):
     target = "$" + " + ".join((f"{c}\\," if c > 1 else "") + mt(s) for c, s in tl) + " \\rightarrow " + " + ".join((f"{c}\\," if c > 1 else "") + mt(s) for c, s in tr) + "$"
     stem = f"Given the reactions: {given}. What is $\\Delta H$, in kJ, for the reaction {target}?"
     return mk("ch_hess_law", "6.9", "5.B", stem, key, ds, rng, concept="combine reaction enthalpies by reversing and scaling steps (Hess's law)", path="vector sum of scaled step stoichiometries by exact integers vs least-squares solution of the linear system for the coefficients",
-              facts=[f"coef={coef}", f"dH={dH}", f"steps={[st[1] for st in steps]}"], judgment="decide which steps to reverse or multiply so the species cancel", est=140)
+              facts=[f"coef={coef}", f"dH={dH}", f"steps={[st[1] for st in steps]}"], judgment="decide which steps to reverse or multiply so the species cancel", est=140,
+              kwhy="Multiply each given reaction by the coefficient that makes the species cancel to the target reaction (a negative coefficient means the reaction is reversed, which changes the sign of its ΔH), then add: ΔH = " + " + ".join(f"({c})({st[1]:.0f})" for c, st in zip(coef, steps)) + f" = {dH:+.0f} kJ.")
 
 
 # ======================= 6.7 결합 엔탈피 (5.F) =======================
@@ -95,7 +107,8 @@ def ch_bond_enthalpy(rng):
     tab = "; ".join(f"{b.replace('#', '≡').replace('-', '–')}: ${BE[b]}\\text{{ kJ/mol}}$" for b in sorted(set(br) | set(fo)))
     stem = f"Use the average bond enthalpies ({tab}) to estimate $\\Delta H$ for the reaction {rxn_tex(L, Rr)}. What is the estimated $\\Delta H$ of the reaction, in kJ per mole of reaction as written?"
     return mk("ch_bond_enthalpy", "6.7", "5.F", stem, key, ds, rng, concept="reaction enthalpy from bond enthalpies (bonds broken minus bonds formed)", path="bond counts from a per-reaction table summed exactly vs a flattened list of every bond",
-              facts=[f"broken={broken}", f"formed={formed}", f"dH={dH}"], judgment="count every bond broken and formed using the coefficients", est=110)
+              facts=[f"broken={broken}", f"formed={formed}", f"dH={dH}"], judgment="count every bond broken and formed using the coefficients", est=110,
+              kwhy=f"ΔH = energy of bonds broken − energy of bonds formed = ({' + '.join(f'{n}({BE[b]})' for b, n in br.items())}) − ({' + '.join(f'{n}({BE[b]})' for b, n in fo.items())}) = {broken} kJ − {formed} kJ = {dH:+.0f} kJ per mole of reaction.")
 
 
 # ======================= 6.8 생성 엔탈피 (5.F) =======================
@@ -110,7 +123,7 @@ def ch_formation_enthalpy(rng):
     v = np.array([c for c, s in Rr] + [-c for c, s in L], dtype=float); h = np.array([HF[s] for c, s in Rr] + [HF[s] for c, s in L])
     agree(dH, float(v @ h), 1e-9, "dH")
     pairs = [("Subtracts products from reactants (reversed sign).", -dH), ("Omits the stoichiometric coefficients.", sum(HF[s] for c, s in Rr) - sum(HF[s] for c, s in L)),
-             ("Adds the enthalpies of formation of the reactants and the products.", sum(c * HF[s] for c, s in Rr) + sum(c * HF[s] for c, s in L)), ("Uses only the products.", sum(c * HF[s] for c, s in Rr))]
+             ("Adds the enthalpies of formation of the reactants and the products.", sum(c * HF[s] for c, s in Rr) + sum(c * HF[s] for c, s in L)), ("Uses only the enthalpies of formation of the products and ignores the reactants.", sum(c * HF[s] for c, s in Rr))]
     key, ds = signed_opts(dH, pairs, fmt=lambda v: "$" + f"{v:+.1f}" + "\\text{ kJ}$")
     species = sorted({s for c, s in L + Rr})
     tab = "; ".join(f"{s.replace('(l)', '(l)')}: ${HF[s]:g}\\text{{ kJ/mol}}$" for s in species)
@@ -118,7 +131,8 @@ def ch_formation_enthalpy(rng):
     eq = "$" + " + ".join((f"{c}\\," if c > 1 else "") + mt(s.split("(")[0]) + (f"({s.split('(')[1]}" if "(" in s else "") for c, s in L) + " \\rightarrow " + " + ".join((f"{c}\\," if c > 1 else "") + mt(s.split("(")[0]) + (f"({s.split('(')[1]}" if "(" in s else "") for c, s in Rr) + "$"
     stem = f"The standard enthalpies of formation are: {tab}. What is $\\Delta H^\\circ$ for the reaction {eq}, in kJ per mole of reaction as written?"
     return mk("ch_formation_enthalpy", "6.8", "5.F", stem, key, ds, rng, concept="reaction enthalpy from standard enthalpies of formation with stoichiometric coefficients", path="explicit loop over products minus reactants vs a signed coefficient vector dot product",
-              facts=[f"dH={dH:.4f}", f"L={L}", f"R={Rr}"], judgment="weight each enthalpy of formation by its coefficient and subtract reactants from products", est=110)
+              facts=[f"dH={dH:.4f}", f"L={L}", f"R={Rr}"], judgment="weight each enthalpy of formation by its coefficient and subtract reactants from products", est=110,
+              kwhy=f"ΔH° = Σ n ΔHf°(products) − Σ n ΔHf°(reactants) = ({' + '.join(f'({c})({HF[s]:g})' for c, s in Rr)}) − ({' + '.join(f'({c})({HF[s]:g})' for c, s in L)}) = {dH:+.1f} kJ.")
 
 
 # ======================= 6.5 가열 곡선 (5.F) =======================
@@ -138,7 +152,8 @@ def ch_heating_curve(rng):
     stem = (f"A ${m:g}\\text{{ g}}$ sample of ice at ${T0:g}\\,^{{\\circ}}\\text{{C}}$ is heated at constant pressure until it forms liquid water at ${T1:g}\\,^{{\\circ}}\\text{{C}}$, as shown in the heating curve. "
             f"The specific heat of ice is ${ci}\\text{{ J/(g}}\\cdot^{{\\circ}}\\text{{C)}}$, the specific heat of liquid water is ${cw}\\text{{ J/(g}}\\cdot^{{\\circ}}\\text{{C)}}$, and the enthalpy of fusion of ice is ${Lf:g}\\text{{ J/g}}$. How much heat, in kJ, is required?")
     return mk("ch_heating_curve", "6.5", "5.F", stem, key, ds, rng, concept="total heat for warming ice, melting it, and warming the liquid", stim=stim, material={"type": "graph", "must_include": ["warming segments", "melting plateau"]},
-              path="sum of the three heating steps vs the final heat coordinate of the generated curve vertices", facts=[f"m={m}", f"T0={T0}", f"T1={T1}", f"q={q/1000:.5f}"], judgment="add the sloped segments and the plateau, using the right specific heat for each phase", est=110)
+              path="sum of the three heating steps vs the final heat coordinate of the generated curve vertices", facts=[f"m={m}", f"T0={T0}", f"T1={T1}", f"q={q/1000:.5f}"], judgment="add the sloped segments and the plateau, using the right specific heat for each phase", est=110,
+              kwhy=f"Warming the ice: ({m:g} g)({ci} J/(g·°C))({-T0:g} °C) = {m * ci * (0 - T0):.0f} J; melting it: ({m:g} g)({Lf:g} J/g) = {m * Lf:.0f} J; warming the liquid: ({m:g} g)({cw} J/(g·°C))({T1:g} °C) = {m * cw * T1:.0f} J. The total is {q:.0f} J = {q / 1000:.3g} kJ.")
 
 
 # ======================= 7.4 K 식과 값 (5.F) =======================
@@ -164,7 +179,8 @@ def ch_k_expression(rng):
     stim = table_stimulus("Equilibrium concentrations at a given temperature", "Species", [[cf(r[0]) if False else r[0], r[1]] for r in rows], "Concentration (M)")
     stem = f"The reaction {rxn_tex(L, Rr, '\\rightleftharpoons')} reaches equilibrium at a certain temperature. The equilibrium concentrations are given in the table. What is the value of the equilibrium constant, $K_c$, at this temperature?"
     return mk("ch_k_expression", "7.4", "5.F", stem, key, ds, rng, concept="equilibrium constant from equilibrium concentrations using the balanced equation", stim=stim, material={"type": "table", "must_include": ["equilibrium concentrations"]},
-              path="sympy product with exponents vs numpy product", facts=[f"conc={conc}", f"coefs={[(c, s) for c, s in L + Rr]}", f"Kc={Kc:.6g}"], judgment="write the expression with products over reactants raised to their coefficients", est=100)
+              path="sympy product with exponents vs numpy product", facts=[f"conc={conc}", f"coefs={[(c, s) for c, s in L + Rr]}", f"Kc={Kc:.6g}"], judgment="write the expression with products over reactants raised to their coefficients", est=100,
+              kwhy=f"Kc = [products]^coefficients / [reactants]^coefficients = {' × '.join(f'({conc[s]:g})^{c}' for c, s in Rr)} / ({' × '.join(f'({conc[s]:g})^{c}' for c, s in L)}) = {Kc:.3g}.")
 
 
 # ======================= 7.3 Q 와 K (6.D) =======================
@@ -182,7 +198,7 @@ def ch_q_vs_k(rng):
     wrongs = [(f"The calculated value is $Q={Q:.3g}$, so {cmp[right]} and the reaction proceeds {d[not right]} to reach equilibrium.", "Gets the inequality right but the direction reversed."),
               (f"The calculated value is $Q={Q:.3g}$, so {cmp[not right]} and the reaction proceeds {d[not right]} to reach equilibrium.", "Reverses the comparison of Q and K and the direction accordingly."),
               (f"The calculated value is $Q={Q:.3g}$, so the system is already at equilibrium and no net change occurs.", "Believes any nonzero Q means the system is at equilibrium.")]
-    k, ds = sentence_options(key_t, "Comparing Q with K shows the direction the reaction must proceed.", wrongs)
+    k, ds = sentence_options(key_t, f"Q = [B]/[A]² = {B:g}/({A:g})² = {Q:.3g}, which is {'less' if right else 'greater'} than K = {K:g}, so the mixture must change {'toward the products' if right else 'toward the reactant'} until Q equals K.", wrongs)
     stem = f"For the reaction $2\\,\\mathrm{{A}}(g) \\rightleftharpoons \\mathrm{{B}}(g)$, the equilibrium constant is $K_c={K:g}$ at a certain temperature. A mixture contains $[\\mathrm{{A}}]={A:g}\\text{{ M}}$ and $[\\mathrm{{B}}]={B:g}\\text{{ M}}$. Which statement is correct?"
     return mk("ch_q_vs_k", "7.2", "6.D", stem, k, ds, rng, concept="predict the direction of a reversible reaction by comparing Q with K", path="Q computed from the mixture compared with K via ln(Q/K) sign vs the inequality test", facts=[f"K={K}", f"A={A}", f"B={B}", f"Q={Q:.6f}", f"right={right}"], judgment="compute Q with the correct exponent and compare it with K", est=90)
 
@@ -201,10 +217,11 @@ def ch_ice_table(rng):
             break
     B = 2 * xe
     approx = math.sqrt(K * A0) / 2 * 2
-    pairs = [("Uses x as the equilibrium concentration of B instead of 2x.", xe), ("Applies the small-x approximation even though the change is not negligible compared with the initial concentration.", math.sqrt(K * A0) / 2 * 2), ("Does not square the 2x term.", K * (A0 - xe) / 2 if False else (K * A0) / 2), ("Reports the equilibrium concentration of A.", A0 - xe)]
+    pairs = [("Uses x as the equilibrium concentration of B instead of 2x.", xe), ("Applies the small-x approximation even though the change is not negligible compared with the initial concentration.", math.sqrt(K * A0) / 2 * 2), ("Writes the expression with [B] instead of [B]² (leaves out the square) and solves it exactly.", 2 * K * A0 / (2 + K)), ("Reports the equilibrium concentration of A.", A0 - xe)]
     key, ds = num_opts(B, pairs, "M")
     stem = f"At a certain temperature the equilibrium constant for $\\mathrm{{A}}(g) \\rightleftharpoons 2\\,\\mathrm{{B}}(g)$ is $K_c={K:g}$. A flask initially contains only A at ${A0:g}\\text{{ M}}$. What is the equilibrium concentration of B, in M?"
-    return mk("ch_ice_table", "7.7", "5.F", stem, key, ds, rng, concept="equilibrium concentration from an ICE table when the approximation is not valid", path="sympy solution of the quadratic vs bisection on the equilibrium expression", facts=[f"K={K}", f"A0={A0}", f"x={xe:.6g}", f"B={B:.6g}"], judgment="set up the ICE table with the stoichiometric 2x and solve the resulting equation", est=140)
+    return mk("ch_ice_table", "7.7", "5.F", stem, key, ds, rng, concept="equilibrium concentration from an ICE table when the approximation is not valid", path="sympy solution of the quadratic vs bisection on the equilibrium expression", facts=[f"K={K}", f"A0={A0}", f"x={xe:.6g}", f"B={B:.6g}"], judgment="set up the ICE table with the stoichiometric 2x and solve the resulting equation", est=140,
+              kwhy=f"If x M of A reacts, [A] = {A0:g} − x and [B] = 2x, so Kc = (2x)²/({A0:g} − x) = {K:g}, which gives 4x² + {K:g}x − {K * A0:g} = 0 and x = {xe:.4g} M. Therefore [B] = 2x = {B:.3g} M.")
 
 
 # ======================= 7.9 르 샤틀리에 (4.A) =======================
@@ -250,9 +267,11 @@ def ch_le_chatelier(rng):
               "remove_product": "removing a product makes Q less than K", "add_inert": "the concentrations of A and B do not change, so Q still equals K"}[stress]
     key_t = f"The system shifts {names[rule]} because {reason}."
     wrong_names = [n for n in ("right", "left", "none") if n != rule]
-    wrongs = [(f"The system shifts {names[wrong_names[0]]} because {reason}.", "Applies the correct reasoning but names the wrong direction."), (f"The system shifts {names[wrong_names[1]]} because {reason}.", "Applies the correct reasoning but names the wrong direction."),
+    why_dir = {"right": "Predicts a shift toward the products, which would only happen if Q were less than K after the change.", "left": "Predicts a shift toward the reactant, which would only happen if Q were greater than K after the change.", "none": "Predicts no shift, which would only be correct if Q still equaled K after the change."}
+    wrongs = [(f"The system shifts {names[wrong_names[0]]} because {reason}.", why_dir[wrong_names[0]]), (f"The system shifts {names[wrong_names[1]]} because {reason}.", why_dir[wrong_names[1]]),
               (f"The system shifts {names['right' if rule != 'right' else 'left']} because the equilibrium constant changes.", "Believes a change in concentration or volume changes the value of K.")]
-    k, ds = sentence_options(key_t, "Compare Q with K after the change.", wrongs)
+    rel = "equal to" if shift_num == "none" else ("less than" if Q < K else "greater than")
+    k, ds = sentence_options(key_t, f"Right after the change Q = {Q:.3g}, which is {rel} K = {K:g}, so the system " + ("is still at equilibrium and does not shift." if shift_num == "none" else f"shifts {names[rule]} until Q equals K again."), wrongs)
     stem = f"The reaction ${a_c if a_c > 1 else ''}\\mathrm{{A}}(g) \\rightleftharpoons {b_c if b_c > 1 else ''}\\mathrm{{B}}(g)$ is at equilibrium. {desc} Which statement correctly describes the response of the system?"
     return mk("ch_le_chatelier", "7.9", "4.A", stem, k, ds, rng, concept="predict the shift of an equilibrium after a concentration, volume, or inert-gas change", path="numeric Q after the change vs K (direction from the sign of ln Q/K) agrees with the rule from moles of gas",
               facts=[f"a={a_c}", f"b={b_c}", f"K={K}", f"stress={stress}", f"shift={rule}"], judgment="decide how Q compares with K after the disturbance", est=90)
@@ -269,10 +288,11 @@ def ch_ksp_solubility(rng):
     sol = float(sp.solve(sp.Eq((a * s) ** a * (b * s) ** b, sp.nsimplify(ksp)), s)[0])
     sb = bisect(lambda v: (a * v) ** a * (b * v) ** b - ksp, 0.0, 1.0)
     agree(sol, sb, 1e-6, "s")
-    pairs = [("Takes the square root of Ksp regardless of the formula.", math.sqrt(ksp)), ("Omits the stoichiometric coefficients when writing the solubility product.", ksp ** (1 / (a + b))), ("Reports Ksp itself as the molar solubility.", ksp), ("Cubes the ion concentration but leaves out the coefficients before the exponent.", (ksp / (a ** a * b ** b)) ** (1 / (a + b)) * 2)]
+    pairs = [("Takes the square root of Ksp regardless of the formula.", math.sqrt(ksp)), ("Omits the stoichiometric coefficients when writing the solubility product.", ksp ** (1 / (a + b))), ("Reports Ksp itself as the molar solubility.", ksp), ("Divides Ksp by the total number of ions instead of solving the product expression.", ksp / (a + b))]
     key, ds = num_opts(sol, pairs, "M", 3, fmt=lambda v: sci(v, "M"))
     stem = f"The solubility product constant, $K_{{sp}}$, of {cf(f)} is " + sci(ksp, "").replace("$", "$") + f" at $25^\\circ\\text{{C}}$. What is the molar solubility of {cf(f)} in pure water, in M?"
-    return mk("ch_ksp_solubility", "7.11", "5.F", stem, key, ds, rng, concept="molar solubility from Ksp for salts with different ion ratios", path="sympy solution of the Ksp expression vs bisection on (as)^a (bs)^b - Ksp", facts=[f"f={f}", f"a={a}", f"b={b}", f"ksp={ksp}", f"s={sol:.6e}"], judgment="write the Ksp expression with the correct exponents and solve for s", est=100)
+    return mk("ch_ksp_solubility", "7.11", "5.F", stem, key, ds, rng, concept="molar solubility from Ksp for salts with different ion ratios", path="sympy solution of the Ksp expression vs bisection on (as)^a (bs)^b - Ksp", facts=[f"f={f}", f"a={a}", f"b={b}", f"ksp={ksp}", f"s={sol:.6e}"], judgment="write the Ksp expression with the correct exponents and solve for s", est=100,
+              kwhy=f"For {f}, Ksp = ({a}s)^{a}({b}s)^{b} = {a ** a * b ** b} s^{a + b}, so s = (Ksp / {a ** a * b ** b})^(1/{a + b}) = ({sn(ksp, 3)} / {a ** a * b ** b})^(1/{a + b}) = {sn(sol, 3)} M.")
 
 
 # ======================= 7.12 공통 이온 (5.F) =======================
@@ -290,7 +310,8 @@ def ch_common_ion(rng):
     key, ds = num_opts(sol, pairs, "M", 3, fmt=lambda v: sci(v, "M"))
     ion = {"AgCl": ("NaCl", "chloride"), "BaSO4": ("Na2SO4", "sulfate"), "AgBr": ("NaBr", "bromide")}[f]
     stem = f"The $K_{{sp}}$ of {cf(f)} is " + sci(ksp, "") + f" at $25^\\circ\\text{{C}}$. What is the molar solubility of {cf(f)} in a ${c:g}\\text{{ M}}$ solution of {cf(ion[0])}, in M?"
-    return mk("ch_common_ion", "7.12", "5.F", stem, key, ds, rng, concept="solubility in the presence of a common ion", path="sympy quadratic for s(s + c) = Ksp vs bisection", facts=[f"f={f}", f"ksp={ksp}", f"c={c}", f"s={sol:.6e}"], judgment="include the common ion's initial concentration in the Ksp expression", est=100)
+    return mk("ch_common_ion", "7.12", "5.F", stem, key, ds, rng, concept="solubility in the presence of a common ion", path="sympy quadratic for s(s + c) = Ksp vs bisection", facts=[f"f={f}", f"ksp={ksp}", f"c={c}", f"s={sol:.6e}"], judgment="include the common ion's initial concentration in the Ksp expression", est=100,
+              kwhy=f"The common ion is already present at {c:g} M, so Ksp = s(s + {c:g}) = {sn(ksp, 2)}. Because s is much smaller than {c:g}, s ≈ Ksp/{c:g}, and solving the quadratic exactly gives s = {sn(sol, 3)} M, far smaller than the solubility in pure water ({sn(pure, 2)} M).")
 
 
 # ======================= 7.6 K 조작 (5.B) =======================
@@ -312,4 +333,5 @@ def ch_k_manipulation(rng):
     r1 = ("reverse of reaction 1" if a < 0 else "reaction 1") + (f" multiplied by {abs(a)}" if abs(a) > 1 else "")
     r2 = ("reverse of reaction 2" if b < 0 else "reaction 2") + (f" multiplied by {abs(b)}" if abs(b) > 1 else "")
     stem = f"At a certain temperature, reaction 1 has an equilibrium constant $K_1={K1:g}$ and reaction 2 has an equilibrium constant $K_2={K2:g}$. A third reaction is obtained by adding the {r1} to the {r2}. What is the equilibrium constant of the third reaction at this temperature?"
-    return mk("ch_k_manipulation", "7.6", "5.B", stem, key, ds, rng, concept="equilibrium constant of a reaction made by reversing, scaling, and adding reactions", path="exact powers K1^a K2^b vs exponentiated sum of logarithms", facts=[f"K1={K1}", f"K2={K2}", f"a={a}", f"b={b}", f"K={K:.6g}"], judgment="reverse means reciprocal, multiplying a reaction means a power, adding means multiplying", est=100)
+    return mk("ch_k_manipulation", "7.6", "5.B", stem, key, ds, rng, concept="equilibrium constant of a reaction made by reversing, scaling, and adding reactions", path="exact powers K1^a K2^b vs exponentiated sum of logarithms", facts=[f"K1={K1}", f"K2={K2}", f"a={a}", f"b={b}", f"K={K:.6g}"], judgment="reverse means reciprocal, multiplying a reaction means a power, adding means multiplying", est=100,
+              kwhy=f"Reversing a reaction inverts its K, multiplying a reaction by n raises K to the nth power, and adding reactions multiplies their K values: K = K1^({a}) × K2^({b}) = ({K1:g})^({a}) × ({K2:g})^({b}) = {K:.3g}.")

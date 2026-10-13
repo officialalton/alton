@@ -25,7 +25,7 @@ def ch_solid_type_claim(rng):
         raise ValueError("ambiguous_type")
     rows = [["Melting point", f"{mp} °C"], ["Electrical conductivity as a solid", d["cs"]], ["Electrical conductivity as a liquid", d["cl"]], ["Solubility in water", sol]]
     stim = table_stimulus("Properties of solid X", "Property", rows, "Observation")
-    k, ds = sentence_options(f"Solid X is a(n) {t} solid.", "The combination of melting point and conductivity points to this bonding type.",
+    k, ds = sentence_options(f"Solid X is a(n) {t} solid.", f"The data (melting point {mp} °C; the solid {d['cs']}; the liquid {d['cl']}; {sol} in water) match a {t} solid, and no other type of solid fits all four observations.",
                              [(f"Solid X is a(n) {x} solid.", {"ionic": "Treats a high melting point as sufficient without checking conductivity.", "metallic": "Uses conductivity of the liquid only.", "molecular": "Ignores the melting point.", "network covalent": "Uses melting point alone."}[x]) for x in sorted(SOLID) if x != t])
     stem = "A student measures several properties of a solid X (table). Which claim about solid X is best supported by the data?"
     return mk("ch_solid_type_claim", "3.2", "6.A", stem, k, ds, rng, concept="claim about solid type from melting point, conductivity and solubility data", stim=stim, material={"type": "table", "must_include": ["melting point", "conductivity", "solubility"]},
@@ -38,22 +38,31 @@ def ch_titration_error(rng):
     true = Mb * Vb / (r * Va)
     sc = pick(rng, ["over", "bubble", "initial_high", "rinse_titrant_water", "flask_water", "extra_acid"])
     # 각 시나리오가 '계산에 쓰는 값'을 어떻게 바꾸는지(실제 → 기록)
-    rec = {"over": (Vb * 1.06, Va), "bubble": (Vb * 1.03, Va), "initial_high": (Vb - 1.0, Va), "rinse_titrant_water": (Vb * 1.10, Va), "flask_water": (Vb, Va), "extra_acid": (Vb * 1.04, Va)}[sc]
+    rec = {"over": (Vb * 1.06, Va), "bubble": (Vb * 1.03, Va), "initial_high": (Vb - 1.0, Va), "rinse_titrant_water": (Vb * 1.10, Va), "flask_water": (Vb, Va), "extra_acid": (Vb, Va / 1.04)}[sc]
     calc = Mb * rec[0] / (r * rec[1])
     ratio = calc / true
     eff = "increase" if ratio > 1.0005 else ("decrease" if ratio < 0.9995 else "none")
-    sym = sp.Symbol("Vrec"); agree(float(ratio), float(sp.nsimplify(rec[0]) / sp.nsimplify(Vb)), 1e-9, "ratio")
+    sym = sp.Symbol("Vrec"); agree(float(ratio), float(sp.nsimplify(rec[0]) / sp.nsimplify(Vb) * sp.nsimplify(Va) / sp.nsimplify(rec[1])), 1e-9, "ratio")
     desc = {"over": "adds NaOH well past the color change before recording the final buret reading", "bubble": "fills the buret so that an air bubble in the tip is displaced during the titration and is not allowed for",
             "initial_high": "reads the initial buret volume as 1.0 mL higher than the true volume and records the final volume correctly", "rinse_titrant_water": "rinses the buret with water, leaves the water in the buret, and then fills it with NaOH solution",
-            "flask_water": "rinses the Erlenmeyer flask with distilled water before adding the measured acid sample", "extra_acid": "uses a pipet that actually delivers slightly more than the recorded acid volume"}[sc]
-    reason = {"increase": "the recorded volume of NaOH is larger than the volume needed to react with the acid, so the calculated moles of acid are too high", "decrease": "the recorded volume of NaOH is smaller than the volume actually delivered, so the calculated moles of acid are too low",
-              "none": "the number of moles of acid in the flask does not change, so the volume of base needed does not change"}
+            "flask_water": "rinses the Erlenmeyer flask with distilled water before adding the measured acid sample", "extra_acid": "uses a pipet that actually delivers slightly more acid than the volume the student records"}[sc]
+    reason_sc = {"over": "the recorded volume of NaOH is larger than the volume needed to reach the equivalence point, so the calculated moles of base, and therefore of acid, are too large",
+                 "bubble": "the air bubble leaves the tip during the titration, so the volume read from the buret is larger than the volume of NaOH actually delivered, which makes the calculated moles of acid too large",
+                 "initial_high": "the initial reading is 1.0 mL too high, so the calculated volume of NaOH delivered is 1.0 mL smaller than the true volume, which makes the calculated moles of acid too small",
+                 "rinse_titrant_water": "the water left in the buret dilutes the NaOH, so a larger volume is needed to reach the equivalence point while the calculation still uses the original concentration, which makes the calculated moles of acid too large",
+                 "flask_water": "the number of moles of acid in the flask does not change when water is added, so the volume of NaOH needed does not change",
+                 "extra_acid": "the pipet delivers more moles of acid than the recorded volume suggests, so more NaOH is needed, but the calculation divides by the smaller recorded acid volume, which makes the concentration too large"}
     names = {"increase": "too high", "decrease": "too low", "none": "unaffected"}
-    key_t = f"The calculated concentration of the acid is {names[eff]} because {reason[eff]}."
-    wrongs = [(f"The calculated concentration of the acid is {names[e]} because {reason[e]}.", {"increase": "Assumes any experimental error raises the result.", "decrease": "Reverses the effect of the error on the recorded volume.", "none": "Believes water in the flask changes the moles of acid, or that errors never matter."}[e]) for e in ("increase", "decrease", "none") if e != eff]
-    wrongs.append((f"The calculated concentration of the acid is {names[eff]} because the concentration of the NaOH solution itself changes.", "Attributes the effect to a changed base molarity instead of the recorded volume."))
-    k, ds = sentence_options(key_t, "Track how the error changes the volume of base used in the calculation.", wrongs)
-    stem = f"In a titration of a ${Va:g}\\text{{ mL}}$ sample of a monoprotic acid with ${Mb:g}\\text{{ M}}$ NaOH, a student {desc}. How does this error affect the calculated concentration of the acid?"
+    key_t = f"The calculated concentration of the acid is {names[eff]} because {reason_sc[sc]}."
+    reason_gen = {"increase": "the recorded volume of NaOH is larger than the volume needed, so the calculated moles of acid are too high", "decrease": "the recorded volume of NaOH is smaller than the volume actually delivered, so the calculated moles of acid are too low",
+                  "none": "the number of moles of acid does not change, so the result is not affected by the error"}
+    why_gen = {"increase": "Assumes any experimental error raises the result without tracing the error through the volumes used in the calculation.", "decrease": "Reverses the effect of the error on the volume used in the calculation.",
+               "none": "Believes the error leaves the moles of base and acid used in the calculation unchanged, ignoring the changed recorded value."}
+    wrongs = [(f"The calculated concentration of the acid is {names[e]} because {reason_gen[e]}.", why_gen[e]) for e in ("increase", "decrease", "none") if e != eff]
+    wrongs.append((f"The calculated concentration of the acid is {names[eff]} because the mole ratio of acid to base in the neutralization changes.", "Attributes the effect to a changed mole ratio, which is fixed by the balanced equation, instead of to the changed recorded value."))
+    k, ds = sentence_options(key_t, f"Track the error to the quantity used in the calculation: the calculated concentration changes by a factor of {ratio:.3f} relative to the true value, so the result is {names[eff]}.", wrongs)
+    stem = (f"In a titration of a ${Va:g}\\text{{ mL}}$ sample of a monoprotic acid with ${Mb:g}\\text{{ M}}$ NaOH, a student {desc}. The student calculates the acid concentration from the stated NaOH concentration, the recorded volume of NaOH delivered, and the recorded acid volume. "
+            "How does this error affect the calculated concentration of the acid?")
     return mk("ch_titration_error", "4.6", "6.G", stem, k, ds, rng, concept="effect of a titration error on the calculated acid concentration", path="ratio of the calculated value to the true value from the changed recorded volume (sympy) vs a numeric recomputation", facts=[f"scenario={sc}", f"ratio={ratio:.5f}", f"effect={eff}"], judgment="trace the error to the volume used in the calculation", est=90)
 
 
@@ -76,8 +85,14 @@ def ch_calorimetry_error(rng):
     agree(1.0, 1.0 if all(eff[k] == "lower" for k in lower) and all(eff[k] == "higher" for k in higher) else 0.0, 1e-9, "effects")
     key_n = pick(rng, lower)
     ds_n = list(higher)
-    key = Opt(cands[key_n][0], True, "This error makes the calculated heat released smaller than the true value.", None)
-    ds = [Opt(cands[x][0], False, "This error makes the calculated magnitude of the enthalpy change larger, not smaller.", None) for x in ds_n]
+    why_by = {"heat_loss": "Heat escaping lowers the highest temperature reached, so ΔT and the calculated heat are smaller, and the calculated magnitude of ΔH is too low.",
+              "ti_high": "An initial temperature read too high makes ΔT smaller than the true change, so the calculated heat and the magnitude of ΔH are too low.",
+              "salt_high": "Recording 5.50 g when only 5.00 g dissolved makes the calculated moles of salt larger, so the heat per mole, and the magnitude of ΔH, is too low.",
+              "salt_low": "Recording 4.50 g when 5.00 g dissolved makes the calculated moles of salt smaller, so the heat per mole, and the magnitude of ΔH, is too high.",
+              "water_high": "Recording 110 g of water when only 100 g is present makes the calculated heat q = mcΔT larger, so the magnitude of ΔH is too high.",
+              "tf_high": "A final temperature read 1.0 °C too high makes ΔT larger than the true change, so the calculated heat and the magnitude of ΔH are too high."}
+    key = Opt(cands[key_n][0], True, why_by[key_n], None)
+    ds = [Opt(cands[x][0], False, why_by[x], None) for x in ds_n]
     stem = "A student measures the molar enthalpy of dissolution of an ionic compound that dissolves exothermically, using a foam-cup calorimeter. Which of the following errors would cause the calculated magnitude of the enthalpy change to be lower than the true value?"
     return mk("ch_calorimetry_error", "6.4", "2.E", stem, key, ds, rng, concept="sources of experimental error in a calorimetry experiment and their effect on the calculated enthalpy", path="the enthalpy formula recomputed with each altered recorded value shows which errors lower the magnitude", facts=[f"base={base}", f"key={key_n}"], judgment="decide how an error changes a measured temperature, mass, or moles", est=80)
 
@@ -109,11 +124,12 @@ def ch_beer_procedure(rng):
     A1 = A0 * f
     eps = A0 / (b0 * 1e-4)
     agree(A1, eps * ({"longer_cell": 2.0 * b0, "shorter_cell": 0.5 * b0}.get(ch, b0)) * 1e-4 * ({"dilute_half": 0.5, "double_conc": 2.0}.get(ch, 1.0)), 1e-9, "A1")
-    pairs = [("Halves the absorbance when it should double.", A0 / 2), ("Doubles the absorbance when it should halve.", A0 * 2), ("Squares the factor.", A0 * f * f), ("Leaves the absorbance unchanged.", A0), ("Adds the factor to the absorbance.", A0 + f)]
+    pairs = [("Halves the absorbance when it should double.", A0 / 2), ("Doubles the absorbance when it should halve.", A0 * 2), ("Squares the change factor instead of applying it once.", A0 * f * f), ("Leaves the absorbance unchanged.", A0), ("Adds the factor to the absorbance.", A0 + f)]
     key, ds = abs_opts(A1, pairs, lambda v: "$" + f"{v:.3f}" + "$", 0.04)
     cdesc = {"longer_cell": "replaces the $1.00\\text{ cm}$ cuvette with a $2.00\\text{ cm}$ cuvette", "dilute_half": "dilutes the sample by mixing equal volumes of the sample and water", "double_conc": "replaces the sample with one containing twice the dye concentration", "shorter_cell": "replaces the $1.00\\text{ cm}$ cuvette with a $0.50\\text{ cm}$ cuvette"}[ch]
     stem = f"A dye solution in a $1.00\\text{{ cm}}$ cuvette has an absorbance of ${A0:.3f}$ at its wavelength of maximum absorbance. The student {cdesc} and measures the absorbance again at the same wavelength. What absorbance is expected?"
-    return mk("ch_beer_procedure", "3.13", "2.F", stem, key, ds, rng, concept="effect of changing path length or concentration on absorbance (Beer-Lambert law)", path="proportional scaling from A = εbc with sympy vs numeric recomputation of ε and the new b and c", facts=[f"A0={A0}", f"change={ch}", f"A1={A1:.5f}"], judgment="decide which factor in A = εbc changed and by what factor", est=70)
+    return mk("ch_beer_procedure", "3.13", "2.F", stem, key, ds, rng, concept="effect of changing path length or concentration on absorbance (Beer-Lambert law)", path="proportional scaling from A = εbc with sympy vs numeric recomputation of ε and the new b and c", facts=[f"A0={A0}", f"change={ch}", f"A1={A1:.5f}"], judgment="decide which factor in A = εbc changed and by what factor", est=70,
+              kwhy=f"Absorbance A = εbc, so A is proportional to the path length and to the concentration. This change multiplies the product bc by {f:g}, so the new absorbance is {A0:.3f} × {f:g} = {A1:.3f}.")
 
 
 # ======================= 5.A 필요한 측정량 =======================
@@ -205,7 +221,8 @@ def ch_rate_prediction(rng):
     pairs = [("Swaps the orders of A and B.", fa ** n * fb ** m), ("Multiplies the concentration factors instead of raising them to the orders.", fa * fb), ("Uses only the effect of changing A.", fa ** m), ("Adds the exponent contributions.", fa + fb)]
     key, ds = num_opts(ratio, pairs, "", 3, fmt=lambda v: "$" + f"{v:.3g}" + "$")
     stem = f"The experimentally determined rate law for a reaction is $\\text{{rate}}=k[\\mathrm{{A}}]^{m}[\\mathrm{{B}}]^{n}$. A student predicts what will happen if the concentration of A is multiplied by {fa:g} and the concentration of B is multiplied by {fb:g} at constant temperature. By what factor is the initial rate predicted to change?"
-    return mk("ch_rate_prediction", "5.2", "2.B", stem, key, ds, rng, concept="predict the factor change in rate from reaction orders", path="power-law arithmetic exactly vs the exponent-sum of logs", facts=[f"m={m}", f"n={n}", f"fa={fa}", f"fb={fb}", f"ratio={ratio:.6g}"], judgment="apply each order to its own concentration factor", est=70)
+    return mk("ch_rate_prediction", "5.2", "2.B", stem, key, ds, rng, concept="predict the factor change in rate from reaction orders", path="power-law arithmetic exactly vs the exponent-sum of logs", facts=[f"m={m}", f"n={n}", f"fa={fa}", f"fb={fb}", f"ratio={ratio:.6g}"], judgment="apply each order to its own concentration factor", est=70,
+              kwhy=f"The rate is proportional to [A]^{m}[B]^{n}, so changing [A] by a factor of {fa:g} and [B] by a factor of {fb:g} changes the rate by ({fa:g})^{m} × ({fb:g})^{n} = {ratio:.3g}.")
 
 
 # ======================= 4.6 뷰렛 읽기 (2.D) =======================
@@ -229,7 +246,8 @@ def ch_buret_data(rng):
     stim = {"kind": "table", "description": "Buret readings in three titration trials", "data": {"x_label": "Trial", "columns": ["Trial", "Initial reading (mL)", "Final reading (mL)"], "y_label": "Final reading (mL)", "rows": rows}}
     stem = "A student titrates three identical samples of an acid with NaOH and records the buret readings (table). Which value is the best estimate of the volume of NaOH needed to reach the endpoint, in mL?"
     return mk("ch_buret_data", "4.6", "2.D", stem, key, ds, rng, concept="volume delivered from initial and final buret readings, excluding a discordant trial", stim=stim, material={"type": "table", "must_include": ["initial readings", "final readings"]},
-              path="exact fraction mean of the two closest delivered volumes vs numpy mean of the same pair; the discordant trial is the one outside the closest pair", facts=[f"vols={vols}", f"best={best}", f"avg={avg:.4f}"], judgment="compute delivered volumes first, then exclude the discordant trial", est=90)
+              path="exact fraction mean of the two closest delivered volumes vs numpy mean of the same pair; the discordant trial is the one outside the closest pair", facts=[f"vols={vols}", f"best={best}", f"avg={avg:.4f}"], judgment="compute delivered volumes first, then exclude the discordant trial", est=90,
+              kwhy=f"The volume delivered in each trial is final − initial: {', '.join(f'{v:.2f} mL' for v in vols)}. Trial {outl + 1} is far from the other two, so the best estimate is the average of the closest pair, ({vols[best[0]]:.2f} + {vols[best[1]]:.2f})/2 = {avg:.2f} mL.")
 
 
 # ======================= 3.3 입자 모형과 상 (1.B) =======================
@@ -242,7 +260,7 @@ def ch_particle_phase(rng):
     props = {"solid": "has a fixed shape and is essentially incompressible", "liquid": "takes the shape of its container, has a fixed volume, and is nearly incompressible", "gas": "takes the shape and volume of its container and is easily compressed"}
     scene = {"type": "particles", "phase": ph, "arrangement": order, "packing_fraction": pf}
     stim = diagram_stim_chem(f"A particulate diagram of one sample of a pure substance: the particles show a {order}.", "chem_particles", {"scene": scene})
-    k, ds = sentence_options(f"The sample is a {ph}, so it {props[ph]}.", "The spacing and order of the particles determine the macroscopic properties.",
+    k, ds = sentence_options(f"The sample is a {ph}, so it {props[ph]}.", f"The diagram shows a {order}, which is the arrangement of a {ph}; the spacing and order of the particles determine how the sample behaves as a whole.",
                              [(f"The sample is a {x}, so it {props[x]}.", {"solid": "Treats particles in contact as a rigid lattice regardless of order.", "liquid": "Confuses freely moving touching particles with widely spaced particles.", "gas": "Assumes particles that are far apart form a dense, incompressible phase."}[x]) for x in ("solid", "liquid", "gas") if x != ph] +
                              [(f"The sample is a {ph}, so it is expected to have the same properties as a {pick(rng, [x for x in ('solid', 'liquid', 'gas') if x != ph])}.", "Links a particulate arrangement to the wrong macroscopic behavior.")])
     stem = "The particulate representation of a pure substance is shown. Which statement correctly connects the particle arrangement to the macroscopic properties of the sample?"
@@ -281,7 +299,7 @@ def ch_claim_from_data(rng):
     wrongs = [(f"The process is {opp}: the average temperature change was ${avg:+.1f}\\,^{{\\circ}}\\text{{C}}$, so the solution {'lost' if exo else 'gained'} thermal energy.", "Reverses the link between the sign of ΔT and the direction of energy flow."),
               (f"The process is {word}: the average temperature change was ${abs(avg):.1f}\\,^{{\\circ}}\\text{{C}}$ in magnitude, but a single trial is not enough evidence.", "Dismisses consistent data from three trials."),
               (f"The process is {opp}: the final temperatures differ between trials, so the system must absorb energy.", "Uses trial-to-trial variation rather than the sign of the temperature change.")]
-    k, ds = sentence_options(key_t, "The sign and size of the temperature change in the solution show the direction of energy flow.", wrongs)
+    k, ds = sentence_options(key_t, f"The temperature changes in the three trials are {', '.join(f'{x:+.1f}' for x in dT)} °C (mean {avg:+.1f} °C); a temperature {'increase' if exo else 'decrease'} of the solution means energy was {'released to' if exo else 'absorbed from'} the solution, so the process is {word}.", wrongs)
     rows = [[f"Trial {i + 1}", f"{base:.1f}", f"{t:.1f}"] for i, t in enumerate(trials)]
     stim = {"kind": "table", "description": "Temperature of water before and after a solid is dissolved", "data": {"x_label": "Trial", "columns": ["Trial", "Initial temperature (°C)", "Final temperature (°C)"], "y_label": "Final temperature (°C)", "rows": rows}}
     stem = "A student dissolves a solid in water in a calorimeter in three trials and records the temperatures (table). Which claim about the dissolving process is best supported by the data?"
@@ -325,7 +343,7 @@ def ch_titration_conclusion(rng):
     wrongs = [(f"The acid is {other}: the initial pH of ${pH0:.2f}$ shows that the acid is {'completely' if weak else 'only partly'} dissociated in water, and the equivalence-point pH of ${pH_eq:.1f}$ is {'equal to' if weak else 'above'} 7.", "Misreads the initial pH relative to the strong-acid expectation."),
               (f"The acid is {other}: the equivalence point at pH ${pH_eq:.1f}$ shows that the salt formed is {'neutral' if weak else 'basic'}, and the initial pH of ${pH0:.2f}$ supports this.", "Misinterprets the pH at equivalence."),
               (f"The acid is {kind}, but the pH at the equivalence point of ${pH_eq:.1f}$ is not relevant to the strength of the acid, so the initial pH alone must be used.", "Ignores that the equivalence-point pH carries information about the conjugate base.")]
-    k, ds = sentence_options(key_t, "Compare the initial pH with the fully dissociated value and use the equivalence-point pH.", wrongs)
+    k, ds = sentence_options(key_t, f"A {c:g} M strong acid would have an initial pH of {strong_pred:.2f}; the measured initial pH of {pH0:.2f} is {'higher' if weak else 'equal'}, and the equivalence-point pH of {pH_eq:.1f} is {'above' if weak else 'equal to'} 7, which " + ("shows that A⁻ is a weak base, so HA is a weak acid." if weak else "is the pH of a salt of a strong acid and a strong base."), wrongs)
     stem = f"A ${c:g}\\text{{ M}}$ monoprotic acid is titrated with NaOH of the same concentration. The initial pH of the acid solution is ${pH0:.2f}$ and the pH at the equivalence point is ${pH_eq:.1f}$. Which conclusion about the acid is best supported by these results?"
     return mk("ch_titration_conclusion", "8.5", "6.F", stem, k, ds, rng, concept="connect titration pH data to the strength of an acid", path="initial pH compared with -log c from an exact charge balance vs the equivalence-point pH from salt hydrolysis", facts=[f"c={c}", f"weak={weak}", f"pH0={pH0:.4f}", f"pHeq={pH_eq:.4f}"], judgment="compare measured pH with what a strong acid would give", est=95)
 
@@ -345,11 +363,12 @@ def chs_titration_set(rng):
         agree(pH_eq, approx_eq, 0.06, "pH_eq")
         break
     stim = graph_stim("Titration of 25.0 mL of 0.100 M weak acid HA with 0.100 M NaOH", [("pH", [[v, round(p, 3)] for v, p in zip(Vs[::2], pHs[::2])])], gaxis("Volume of NaOH added (mL)", 0, 50, 10), gaxis("pH", 0, 14, 2))
-    k1, d1 = num_opts(10 ** -pH_half, [("Uses the pH at the equivalence point.", 10 ** -pH_eq), ("Uses the initial pH.", 10 ** -pHs[0]), ("Uses the pH after excess base.", 10 ** -pHs[-1]), ("Uses Kw divided by the correct value.", 1e-14 / 10 ** -pH_half)], "", 2, fmt=lambda v: sci(v, "") if v < 0.1 else "$" + f"{v:.2f}" + "$")
-    k2, d2 = pH_opts(pH_eq, [("Reports 7.00 for the equivalence point of any neutralization.", 7.0), ("Uses the pKa.", pH_half), ("Uses the initial pH of the acid.", pHs[0]), ("Uses the final pH after excess base.", pHs[-1])])
+    k1, d1 = num_opts(10 ** -pH_half, [("Uses the pH at the equivalence point instead of the pH at the half-equivalence point.", 10 ** -pH_eq), ("Uses the initial pH of the acid solution instead of the pH at the half-equivalence point.", 10 ** -pHs[0]), ("Uses the pH after excess base was added instead of the pH at the half-equivalence point.", 10 ** -pHs[-1]), ("Uses Kw divided by the correct value.", 1e-14 / 10 ** -pH_half)], "", 2, fmt=lambda v: sci(v, "") if v < 0.1 else "$" + f"{v:.2f}" + "$")
+    k2, d2 = pH_opts(pH_eq, [("Reports 7.00 for the equivalence point of any neutralization.", 7.0), ("Reports the pKa, the pH at the half-equivalence point, instead of the equivalence-point pH.", pH_half), ("Uses the initial pH of the acid.", pHs[0]), ("Uses the final pH after excess base.", pHs[-1])])
     qs = []
     for stm, key, ds, nm in [("Which of the following is the best estimate of the acid dissociation constant, $K_a$, of HA?", k1, d1, "q1"), ("What is the pH at the equivalence point of this titration?", k2, d2, "q2")]:
-        qs.append(mk(f"chs_titration_set_{nm}", "8.5", "5.D", stm, key, ds, rng, concept="questions about one weak-acid titration curve", cond=[("the curve is the exact charge-balance solution", "stimulus")], path="generating Ka and the analytic equivalence pH vs values read from the numerically computed curve", material=MAT_GRAPH("titration curve"), facts=[f"pKa={pKa}", f"pH_half={pH_half:.4f}", f"pH_eq={pH_eq:.4f}"], judgment="read the half-equivalence and equivalence points", est=95))
+        qs.append(mk(f"chs_titration_set_{nm}", "8.5", "5.D", stm, key, ds, rng, concept="questions about one weak-acid titration curve", cond=[("the curve is the exact charge-balance solution", "stimulus")], path="generating Ka and the analytic equivalence pH vs values read from the numerically computed curve", material=MAT_GRAPH("titration curve"), facts=[f"pKa={pKa}", f"pH_half={pH_half:.4f}", f"pH_eq={pH_eq:.4f}"], judgment="read the half-equivalence and equivalence points", est=95,
+                       kwhy=(f"The equivalence point is at 25.0 mL (the steep rise), so the half-equivalence point is at 12.5 mL, where pH = pKa. The curve shows pH ≈ {pH_half:.2f} there, so Ka = 10^−{pH_half:.2f} = {sn(10 ** -pH_half, 3)}." if nm == "q1" else f"At 25.0 mL all of the HA has been converted to its conjugate base A⁻, a weak base, so the equivalence-point pH is above 7; the curve reads pH ≈ {pH_eq:.2f} at that volume.")))
     return _set("chs_titration_set", "A $25.0\\text{ mL}$ sample of a weak monoprotic acid, HA, is titrated with $0.100\\text{ M}$ NaOH. The titration curve is shown.", stim, qs, "8.5", "5.D")
 
 
@@ -363,10 +382,10 @@ def chs_rate_set(rng):
         break
     unit = {1: "\\text{ s}^{-1}", 2: "\\text{ M}^{-1}\\text{s}^{-1}", 3: "\\text{ M}^{-2}\\text{s}^{-2}"}.get(m + n, "\\text{ M/s}") if m + n else "\\text{ M/s}"
     unit = {0: "\\text{ M/s}", 1: "\\text{ s}^{-1}", 2: "\\text{ M}^{-1}\\text{s}^{-1}", 3: "\\text{ M}^{-2}\\text{s}^{-1}"}[m + n]
-    rows = [[str(i + 1), f"{a:g}", f"{b:g}", f"{r:.3e}"] for i, ((a, b), r) in enumerate(zip(exps, rates))]
+    rows = [[str(i + 1), f"{a:g}", f"{b:g}", f"{sn(r, 4)}"] for i, ((a, b), r) in enumerate(zip(exps, rates))]
     stim = {"kind": "table", "description": "Initial rates for the reaction A + B → products", "data": {"x_label": "Experiment", "columns": ["Experiment", "[A] (M)", "[B] (M)", "Initial rate (M/s)"], "y_label": "Initial rate (M/s)", "rows": rows}}
     names = {0: "zero order", 1: "first order", 2: "second order"}
-    k1, d1 = sentence_options(f"The reaction is {names[m]} in A.", "Compare experiments 1 and 2, in which only [A] changes.", [(f"The reaction is {names[o]} in A.", "Misreads how the rate changes when [A] is doubled.") for o in (0, 1, 2) if o != m] + [("The order in A cannot be determined from these data.", "Believes three experiments are not enough to find an order.")])
+    k1, d1 = sentence_options(f"The reaction is {names[m]} in A.", f"Experiments 1 and 2 change only [A] (it doubles) and the rate changes by a factor of {rates[1] / rates[0]:g}, which gives the order in A.", [(f"The reaction is {names[o]} in A.", f"A {names[o]} dependence on A would change the rate by a factor of {2 ** o} when [A] doubles, but the data show a factor of {rates[1] / rates[0]:g}.") for o in (0, 1, 2) if o != m] + [("The order in A cannot be determined from these data.", "Believes three experiments are not enough to find an order, when two experiments that change only [A] are enough.")])
     key_k = Opt("$" + sig(k, 3) + unit + "$", True, "", k)
     wr = []
     for why, v, u in [("Uses the rate of experiment 1 as k.", rates[0], "\\text{ M/s}"), ("Divides the rate by only one concentration.", rates[0] / A0, unit), ("Uses the concentrations without their orders in the rate law.", rates[0] / (A0 * B0), unit), ("Gives k with the wrong rate-law order for the units.", k * 2.5, "\\text{ M/s}")]:
@@ -377,7 +396,8 @@ def chs_rate_set(rng):
         raise ValueError("few")
     qs = []
     for stm, key, ds, nm in [("What is the order of the reaction with respect to A?", k1, d1, "q1"), ("What is the value of the rate constant, $k$, for the reaction, including units?", key_k, wr, "q2")]:
-        qs.append(mk(f"chs_rate_set_{nm}", "5.2", "5.D", stm, key, ds, rng, concept="orders and rate constant from one table of initial rates", cond=[("one concentration changes at a time", "table")], path="log-log least squares vs integer search of orders; k from experiment 1 with those orders", material={"type": "table", "must_include": ["initial rates"]}, facts=[f"k={k}", f"m={m}", f"n={n}", f"A0={A0}", f"B0={B0}"], judgment="find orders by comparing experiments, then solve for k", est=105))
+        qs.append(mk(f"chs_rate_set_{nm}", "5.2", "5.D", stm, key, ds, rng, concept="orders and rate constant from one table of initial rates", cond=[("one concentration changes at a time", "table")], path="log-log least squares vs integer search of orders; k from experiment 1 with those orders", material={"type": "table", "must_include": ["initial rates"]}, facts=[f"k={k}", f"m={m}", f"n={n}", f"A0={A0}", f"B0={B0}"], judgment="find orders by comparing experiments, then solve for k", est=105,
+                       kwhy=(f"Experiments 1 and 2 differ only in [A], which doubles from {exps[0][0]:g} M to {exps[1][0]:g} M, while the rate changes by a factor of {rates[1] / rates[0]:g}, so the order in A is {m}." if nm == "q1" else f"With orders of {m} in A and {n} in B, k = rate/([A]^{m}[B]^{n}) = {sn(rates[0], 4)} M/s / (({A0:g} M)^{m} ({B0:g} M)^{n}) = {k:.3g}, and the units of k are chosen so that the rate comes out in M/s.")))
     return _set("chs_rate_set", "The table gives initial rate data for the reaction A + B → products at constant temperature.", stim, qs, "5.2", "5.D")
 
 
@@ -396,11 +416,12 @@ def chs_equilibrium_set(rng):
     Beq = B0 + 2 * xe
     fwd = Q < K
     dtxt = {True: "toward the products", False: "toward the reactant"}
-    k1, d1 = sentence_options(f"$Q={Q:.3g}$, which is {'less' if fwd else 'greater'} than $K_c$, so the reaction proceeds {dtxt[fwd]}.", "Compare Q with K.",
+    k1, d1 = sentence_options(f"$Q={Q:.3g}$, which is {'less' if fwd else 'greater'} than $K_c$, so the reaction proceeds {dtxt[fwd]}.", f"Q = [B]²/[A] = ({B0:g})²/{A0:g} = {Q:.3g}, compared with K = {K:g}: Q is {'less' if fwd else 'greater'} than K, so the reaction proceeds {dtxt[fwd]}.",
                               [(f"$Q={Q:.3g}$, which is {'less' if fwd else 'greater'} than $K_c$, so the reaction proceeds {dtxt[not fwd]}.", "Correct comparison, reversed direction."), (f"$Q={Q:.3g}$, which is {'greater' if fwd else 'less'} than $K_c$, so the reaction proceeds {dtxt[not fwd]}.", "Reverses the comparison of Q and K."),
                                (f"$Q={Q:.3g}$, so the mixture is at equilibrium.", "Treats any computed Q as an equilibrium state.")])
-    k2, d2 = num_opts(Beq, [("Uses x instead of 2x.", B0 + xe), ("Ignores the initial amount of B.", 2 * bisect(lambda v: (2 * v) ** 2 - K * (A0 - v), 0.0, A0)), ("Reports the equilibrium concentration of A.", A0 - xe), ("Uses the initial concentration of B.", B0)], "M")
+    k2, d2 = num_opts(Beq, [("Reports B0 + x (the amount of A that reacted) instead of the equilibrium concentration of B.", B0 + xe), ("Ignores the initial amount of B.", 2 * bisect(lambda v: (2 * v) ** 2 - K * (A0 - v), 0.0, A0)), ("Reports the equilibrium concentration of A.", A0 - xe), ("Uses the initial concentration of B.", B0)], "M")
     qs = []
     for stm, key, ds, nm in [(f"What is the value of the reaction quotient, $Q$, for the initial mixture, and in which direction does the reaction proceed?", k1, d1, "q1"), ("What is the equilibrium concentration of B, in M?", k2, d2, "q2")]:
-        qs.append(mk(f"chs_equilibrium_set_{nm}", "7.3", "5.F", stm, key, ds, rng, concept="Q versus K and an ICE table from one initial mixture", cond=[("K is given at one temperature", "stem")], path="sympy quadratic for the shifted equilibrium vs bisection; Q computed directly", facts=[f"K={K}", f"A0={A0}", f"B0={B0}", f"Q={Q:.6f}", f"Beq={Beq:.6f}"], judgment="compare Q with K first, then solve with a shifted ICE table", est=110))
+        qs.append(mk(f"chs_equilibrium_set_{nm}", "7.3", "5.F", stm, key, ds, rng, concept="Q versus K and an ICE table from one initial mixture", cond=[("K is given at one temperature", "stem")], path="sympy quadratic for the shifted equilibrium vs bisection; Q computed directly", facts=[f"K={K}", f"A0={A0}", f"B0={B0}", f"Q={Q:.6f}", f"Beq={Beq:.6f}"], judgment="compare Q with K first, then solve with a shifted ICE table", est=110,
+                       kwhy=(f"Q = [B]²/[A] = ({B0:g})²/{A0:g} = {Q:.3g}, which is {'less' if fwd else 'greater'} than K = {K:g}, so the reaction proceeds {dtxt[fwd]}." if nm == "q1" else f"If x M of A reacts, Kc = ({B0:g} + 2x)²/({A0:g} − x) = {K:g}; solving this quadratic gives x = {xe:.4g} M, so [B] = {B0:g} + 2x = {Beq:.3g} M.")))
     return _set("chs_equilibrium_set", f"At a certain temperature the equilibrium constant for $\\mathrm{{A}}(g) \\rightleftharpoons 2\\,\\mathrm{{B}}(g)$ is $K_c={K:g}$. A rigid flask initially contains $[\\mathrm{{A}}]={A0:g}\\text{{ M}}$ and $[\\mathrm{{B}}]={B0:g}\\text{{ M}}$.", {"kind": "none", "description": "", "data": {}}, qs, "7.3", "5.F")

@@ -27,7 +27,7 @@ def ch_moles_of_atoms(rng):
     stem = f"A sample of {cf(f)} has a mass of {Q(m, 'g', 3)}. How many moles of {el} atoms are in the sample?"
     return mk("ch_moles_of_atoms", "1.1", "5.F", stem, key, ds, rng, concept="moles of an element in a sample of a compound from its mass", path="formula mass by a recursive parser vs a flattened-regex parser; exact rational recomputation of the mole count",
               cond=[("the molar mass counts every atom including those inside parentheses", "formula parse"), ("the atom subscript multiplies the moles of formula units", "stoichiometric ratio")], facts=[f"mass={m}", f"M={M:.4f}", f"count={cnt[el]}", f"n={n:.6f}"],
-              judgment="parse the formula, convert mass to moles, then scale by atoms per formula unit")
+              judgment="parse the formula, convert mass to moles, then scale by atoms per formula unit", kwhy=f"The molar mass of {f} is {M:.2f} g/mol, counting every atom inside the parentheses. The sample contains {m:g} g / {M:.2f} g/mol = {m / M:.4f} mol of formula units, and each formula unit holds {cnt[el]} {el} atoms, so n({el}) = {m / M:.4f} mol × {cnt[el]} = {n:.3f} mol.")
 
 
 # ======================= 1.2 질량 스펙트럼 평균 원자량 (5.D) =======================
@@ -43,14 +43,14 @@ def ch_average_atomic_mass(rng):
             break
     major = m1 if a1 > a2 else m2
     pairs = [("Takes the simple average of the two isotope masses, ignoring abundance.", (m1 + m2) / 2), ("Reports the mass of the more abundant isotope.", float(major)),
-             ("Swaps the two abundances when weighting.", m1 * a2 / 100 + m2 * a1 / 100), ("Weights by the lighter isotope's abundance only.", m1 * a1 / 100)]
+             ("Swaps the two abundances when weighting.", m1 * a2 / 100 + m2 * a1 / 100), ("Uses only the contribution of the lighter isotope (its mass times its abundance fraction) and forgets the other isotope.", m1 * a1 / 100)]
     key, ds = abs_opts(float(avg), pairs, lambda v: "$" + f"{v:.2f}" + "\\text{ amu}$", 0.25)
     rows = [[f"{m1}", f"{a1}"], [f"{m2}", f"{a2}"]]
     stim = table_stimulus("Mass spectrum data for a sample of element X", "Mass of isotope (amu)", rows, "Relative abundance (%)")
     stem = f"The table shows the mass spectrum data for a sample of element X. What is the average atomic mass of X, in amu?"
     return mk("ch_average_atomic_mass", "1.2", "5.D", stem, key, ds, rng, concept="average atomic mass from isotope masses and abundances in mass-spectrum data", stim=stim,
               path="exact fraction weighted sum vs numpy weighted average", material={"type": "table", "must_include": ["isotope masses", "abundances"]},
-              cond=[("abundances are percentages that sum to 100", "table")], facts=[f"m1={m1}", f"m2={m2}", f"a1={a1}", f"a2={a2}", f"avg={float(avg):.5f}"], judgment="read a data table and weight each isotope by its abundance")
+              cond=[("abundances are percentages that sum to 100", "table")], facts=[f"m1={m1}", f"m2={m2}", f"a1={a1}", f"a2={a2}", f"avg={float(avg):.5f}"], judgment="read a data table and weight each isotope by its abundance", kwhy=f"Weight each isotope mass by its fractional abundance: ({m1} amu × {a1}/100) + ({m2} amu × {a2}/100) = {m1 * a1 / 100:.2f} + {m2 * a2 / 100:.2f} = {float(avg):.2f} amu.")
 
 
 # ======================= 1.3 질량 백분율 조성 (5.F) =======================
@@ -65,7 +65,7 @@ def ch_percent_composition(rng):
     key, ds = num_opts(pct, pairs, "%")
     stem = f"What is the mass percent of {el} in {cf(f)}?"
     return mk("ch_percent_composition", "1.3", "5.F", stem, key, ds, rng, concept="mass percent of an element in a pure compound", path="recursive formula parser vs flattened parser; percent from atom-count fraction cross-check",
-              facts=[f"M={M:.4f}", f"el_mass={MASS[el] * cnt[el]:.4f}", f"pct={pct:.4f}"], judgment="total the element's mass in one formula unit and divide by the molar mass")
+              facts=[f"M={M:.4f}", f"el_mass={MASS[el] * cnt[el]:.4f}", f"pct={pct:.4f}"], judgment="total the element's mass in one formula unit and divide by the molar mass", kwhy=f"The molar mass of {f} is {M:.2f} g/mol. The {cnt[el]} {el} atom(s) in one formula unit have a mass of {cnt[el]} × {MASS[el]:.3f} = {MASS[el] * cnt[el]:.2f} g, so the mass percent is {MASS[el] * cnt[el]:.2f} / {M:.2f} × 100 = {pct:.1f}%.")
 
 
 # ======================= 1.6 PES 원소 식별 (1.A) =======================
@@ -81,17 +81,21 @@ def _config(z):
     return out
 
 
+# 광전자 스펙트럼 결합 에너지(MJ/mol, 교과서·AP 준비 자료에서 널리 쓰는 값; 2026-10-13: 슬레이터 근사식은 O 의 1s 가 77.8(실제 약 52.6)처럼 비현실적이라 검토기가 반려했다)
+PES_E = {"1s": {3: 6.26, 4: 11.5, 5: 19.3, 6: 28.6, 7: 39.6, 8: 52.6, 9: 67.2, 10: 84.0, 11: 104.0, 12: 126.0, 13: 151.0, 14: 178.0, 15: 208.0, 16: 239.0, 17: 273.0, 18: 309.0},
+         "2s": {3: 0.52, 4: 0.90, 5: 1.36, 6: 1.72, 7: 2.45, 8: 3.12, 9: 3.88, 10: 4.68, 11: 6.84, 12: 9.07, 13: 12.1, 14: 15.1, 15: 18.7, 16: 22.7, 17: 26.8, 18: 31.5},
+         "2p": {5: 0.80, 6: 1.09, 7: 1.40, 8: 1.31, 9: 1.68, 10: 2.08, 11: 3.67, 12: 6.51, 13: 9.07, 14: 11.5, 15: 14.5, 16: 18.0, 17: 21.9, 18: 25.7},
+         "3s": {11: 0.50, 12: 0.74, 13: 1.09, 14: 1.46, 15: 1.95, 16: 2.05, 17: 2.82, 18: 3.22},
+         "3p": {13: 0.58, 14: 0.79, 15: 1.06, 16: 1.00, 17: 1.25, 18: 1.52}}
+
+
 def _pes_peaks(z):
-    """슬레이터 유사 유효 핵전하로 결합 에너지(MJ/mol) 계산, 엄격 단조 감소 확인."""
-    cfg = _config(z); peaks = []
-    for n, l, k in cfg:
-        core = sum(c for n2, l2, c in cfg if n2 < n)
-        same = sum(c for n2, l2, c in cfg if n2 == n) - 1
-        zeff = z - (0.30 * (k - 1) if n == 1 else 0.85 * core + 0.35 * same)
-        if l == "p":
-            zeff *= 0.96
-        peaks.append((round(1.312 * zeff ** 2 / n ** 2, 2), k, f"{n}{l}"))
-    return peaks
+    """[(결합 에너지 MJ/mol, 전자 수, 부껍질)] — 가장 안쪽 부껍질부터(에너지 엄격 감소). Z = 3–18."""
+    out = []
+    for n, l, k in _config(z):
+        lab = f"{n}{l}"
+        out.append((PES_E[lab][z], k, lab))
+    return out
 
 
 def ch_pes_identify(rng):
@@ -120,10 +124,10 @@ def ch_pes_identify(rng):
     key = Opt(cf(SYM[z]), True, "", None)
     rows = [[f"{e:g}", str(k)] for e, k, _ in peaks]
     stim = diagram_stim_chem("Photoelectron spectrum of a neutral atom of element X. Peaks (binding energy in MJ/mol, relative number of electrons): " + "; ".join(f"({e:g}, {k})" for e, k, _ in peaks) + ".", "chem_pes", {"peaks": [{"energy": e, "electrons": k} for e, k, _ in peaks], "unit": "MJ/mol"})
-    stem = "The photoelectron spectrum of a neutral atom of element X is shown. Which element is X?"
+    stem = "The photoelectron spectrum of a neutral atom of element X is shown. The height of each peak is proportional to the number of electrons in that subshell. Which element is X?"
     return mk("ch_pes_identify", "1.6", "1.A", stem, key, ds[:3], rng, concept="identify an element from the peak positions and relative heights in a photoelectron spectrum", stim=stim,
               path="electron configuration from a hand-coded subshell filling list vs Madelung (n+l) ordering; total relative electrons equals Z", material={"type": "diagram", "must_include": ["peak energies", "relative electron numbers"]},
-              cond=[("the relative height of each peak equals the number of electrons in that subshell", "stimulus")], facts=[f"z={z}", f"peaks={len(peaks)}"], est=100, judgment="read relative peak heights as electron counts and sum them")
+              cond=[("the relative height of each peak equals the number of electrons in that subshell", "stimulus")], facts=[f"z={z}", f"peaks={len(peaks)}"], est=100, judgment="read relative peak heights as electron counts and sum them", kwhy=f"The height of each peak is the number of electrons in that subshell, so the peaks hold {' + '.join(str(k) for _, k, _ in peaks)} = {total} electrons in the neutral atom. Therefore Z = {z}, which is {SYM[z]}.")
 
 
 # ======================= 1.7 연속 이온화 에너지 (5.D) =======================
@@ -139,13 +143,13 @@ def ch_successive_ie(rng):
     jump = next(i + 1 for i in range(len(shown) - 1) if shown[i + 1] / shown[i] > 2.4)
     agree(k, jump, 1e-9, "valence"); agree(k, true, 1e-9, "valence_true")
     grp = {1: 1, 2: 2, 3: 13, 4: 14, 5: 15}
-    pairs = [("Counts the first core electron removed after the large jump as a valence electron.", true + 1), ("Stops one electron before the jump.", true - 1), ("Counts the electrons needed to complete an octet instead.", 8 - true), ("Counts the number of ionization energies listed beyond the jump twice.", true + 2)]
+    pairs = [("Counts the first core electron removed after the large jump as a valence electron.", true + 1), ("Stops one electron before the jump.", true - 1), ("Counts the electrons needed to complete an octet instead.", 8 - true), ("Counts two of the core electrons removed after the jump as valence electrons.", true + 2)]
     key, ds = abs_opts(float(true), pairs, lambda v: "$" + f"{int(v)}" + "$", 0.5)
     rows = [[str(i + 1), f"{v:,}"] for i, v in enumerate(shown)]
     stim = table_stimulus("Successive ionization energies of element X", "Electron removed", rows, "Ionization energy (kJ/mol)")
-    stem = "The table lists the first ionization energies of element X in order. How many valence electrons does an atom of X have?"
+    stem = "The table lists the successive ionization energies of element X, from the first electron removed to the last one shown. How many valence electrons does an atom of X have?"
     return mk("ch_successive_ie", "1.7", "5.D", stem, key, ds, rng, concept="valence electron count from the large jump in successive ionization energies", stim=stim, material={"type": "table", "must_include": ["successive ionization energies"]},
-              path="argmax of consecutive ratios vs first ratio above a threshold; both equal the known group valence count", cond=[("a large jump marks the first removal from a core shell", "table")], facts=[f"el={el}", f"valence={true}"], judgment="locate the jump in a data table and connect it to core versus valence shells")
+              path="argmax of consecutive ratios vs first ratio above a threshold; both equal the known group valence count", cond=[("a large jump marks the first removal from a core shell", "table")], facts=[f"el={el}", f"valence={true}"], judgment="locate the jump in a data table and connect it to core versus valence shells", kwhy=f"The ionization energy jumps from {shown[true - 1]:,} to {shown[true]:,} kJ/mol (a factor of {shown[true] / shown[true - 1]:.1f}) after {true} electron{'s' if true > 1 else ''} are removed, because the next electron comes from an inner core shell. X therefore has {true} valence electron{'s' if true > 1 else ''}.")
 
 
 # ======================= 1.7 반지름 경향 (6.D) =======================
@@ -184,20 +188,20 @@ def ch_bond_polarity(rng):
         pairs_ = [tuple(rng.sample(["H", "C", "N", "O", "F", "Cl", "Br", "I", "S", "P", "Si"], 2)) for _ in range(4)]
         diffs = [abs(EN[a] - EN[b]) for a, b in pairs_]
         order = sorted(range(4), key=lambda i: -diffs[i])
-        if len({tuple(sorted(p)) for p in pairs_}) == 4 and diffs[order[0]] - diffs[order[1]] > 0.25:
+        if len({tuple(sorted(p)) for p in pairs_}) == 4 and diffs[order[0]] - diffs[order[1]] > 0.25 and len({round(d, 2) for d in diffs}) == 4:
             break
     key_i = order[0]
     ref = max(range(4), key=lambda i: (lambda a, b: abs(EN[a] - EN[b]))(*pairs_[i]))
     agree(key_i, ref, 1e-9, "polar")
     tex = lambda p: "$\\mathrm{" + p[0] + "{-}" + p[1] + "}$"
-    wr = []
-    for i in range(4):
-        if i != key_i:
-            wr.append(Opt(tex(pairs_[i]), False, "Chooses a bond with a smaller electronegativity difference." if diffs[i] < diffs[key_i] else "Compares atomic size instead of electronegativity.", None))
-    key = Opt(tex(pairs_[key_i]), True, "The largest electronegativity difference gives the most polar bond.", None)
-    stem = "Which of the following bonds is the most polar?"
-    return mk("ch_bond_polarity", "2.1", "4.A", stem, key, wr, rng, concept="rank bond polarity by electronegativity difference", path="difference from a Pauling table vs argmax over the four bonds",
-              facts=[f"pairs={pairs_}"], judgment="compare electronegativity differences rather than atomic size or group position", est=60)
+    wr = [Opt(tex(pairs_[i]), False, f"The electronegativity difference of the {pairs_[i][0]}–{pairs_[i][1]} bond is only {diffs[i]:.2f}, smaller than the {diffs[key_i]:.2f} of the most polar bond, so its electrons are shared more evenly.", None) for i in range(4) if i != key_i]
+    key = Opt(tex(pairs_[key_i]), True, "", None)
+    elems = sorted({e for p in pairs_ for e in p}, key=lambda e: EN[e])
+    stim = table_stimulus("Pauling electronegativity values", "Element", [[e, f"{EN[e]:.2f}"] for e in elems], "Electronegativity")
+    stem = "The table gives the electronegativity of several elements. Which of the following bonds is the most polar?"
+    return mk("ch_bond_polarity", "2.1", "4.A", stem, key, wr, rng, concept="rank bond polarity by electronegativity difference", stim=stim, material={"type": "table", "must_include": ["electronegativity of each element"]}, path="difference from a Pauling table vs argmax over the four bonds",
+              facts=[f"pairs={pairs_}"], judgment="compare electronegativity differences rather than atomic size or group position", est=60,
+              kwhy=f"Bond polarity grows with the electronegativity difference. The {pairs_[key_i][0]}–{pairs_[key_i][1]} bond has |{EN[pairs_[key_i][0]]:.2f} − {EN[pairs_[key_i][1]]:.2f}| = {diffs[key_i]:.2f}, the largest of the four differences ({', '.join(f'{d:.2f}' for d in sorted(diffs, reverse=True))}).")
 
 
 # ======================= 2.6 형식 전하 (5.F) =======================
@@ -218,7 +222,7 @@ def ch_formal_charge(rng):
         break
     stem = f"In a valid Lewis structure of $\\mathrm{{{sp_}}}$, the {el} atom has {L} nonbonding electrons and is part of a total of {b} bonds (a double bond counts as two bonds). What is the formal charge on the {el} atom?"
     return mk("ch_formal_charge", "2.6", "5.F", stem, key, ds, rng, concept="formal charge from valence electrons, nonbonding electrons, and bonds", path="valence minus nonbonding minus bonds vs electron bookkeeping (lone pair plus half the shared electrons)",
-              facts=[f"V={V}", f"L={L}", f"b={b}", f"fc={fc}"], judgment="use the formal charge formula with the correct electron bookkeeping", est=70)
+              facts=[f"V={V}", f"L={L}", f"b={b}", f"fc={fc}"], judgment="use the formal charge formula with the correct electron bookkeeping", est=70, kwhy=f"Formal charge = valence electrons − nonbonding electrons − number of bonds = {V} − {L} − {b} = {fc:+d} on the {el} atom.")
 
 
 # ======================= 2.7 VSEPR (4.A) =======================
@@ -241,22 +245,27 @@ def ch_vsepr_shape(rng):
     else:
         derived = VSEPR[(dom, lp)][0]
     agree(1.0, 1.0 if derived == shape else 0.0, 1e-9, "shape")
-    pairs = [("Reports the electron-domain geometry, ignoring the lone pairs.", ELEC_GEO[dom]), ("Treats the molecule as if every domain were a bonded atom (no lone pairs).", VSEPR[(dom, 0)][0] if (dom, 0) in VSEPR else None),
-             ("Removes one lone pair too many.", VSEPR.get((dom - 1, max(lp - 1, 0)), (None,))[0]), ("Counts one extra lone pair.", VSEPR.get((dom, lp + 1), (None,))[0])]
-    pool = [x for x in {s[0] for s in VSEPR.values()} if x != shape]
     ds, seen = [], {shape}
-    for why, s in pairs:
-        if s and s not in seen:
-            seen.add(s); ds.append(Opt(s, False, why, None))
-    for s in sorted(pool, key=lambda t: (abs(len(t) - len(shape)), t)):  # 길이 단서를 막기 위해 키와 길이가 비슷한 모양부터
+    if lp > 0:
+        seen.add(ELEC_GEO[dom])
+        ds.append(Opt(ELEC_GEO[dom], False, f"This is the electron-domain geometry of the {dom} domains; it counts the {lp} lone pair{'s' if lp != 1 else ''}, but the molecular geometry describes only where the atoms are.", None))
+        if (dom, 0) in VSEPR and VSEPR[(dom, 0)][0] not in seen:
+            seen.add(VSEPR[(dom, 0)][0])
+            ds.append(Opt(VSEPR[(dom, 0)][0], False, f"Treats all {dom} electron domains as bonded atoms and ignores the {lp} lone pair{'s' if lp != 1 else ''} on the central atom.", None))
+    shapes = {}
+    for (d_, l_), (nm_, _a) in VSEPR.items():
+        shapes.setdefault(nm_, (d_, l_))
+    for nm_, (d_, l_) in sorted(shapes.items(), key=lambda t: (len(t[0]) < 0.65 * len(shape), abs(t[1][0] - dom) + abs(t[1][1] - lp), abs(len(t[0]) - len(shape)), t[0])):  # 키와 비슷한 구성·길이의 모양부터(길이 단서 방지)
         if len(ds) >= 3:
             break
-        if s not in seen:
-            seen.add(s); ds.append(Opt(s, False, "Matches a different count of bonded atoms and lone pairs.", None))
-    key = Opt(shape, True, "The shape follows from the numbers of bonded atoms and lone pairs on the central atom.", None)
-    stem = f"What is the molecular geometry of {cf(f)}? (The central atom has {sig_} bonded atoms and {lp} lone pair{'s' if lp != 1 else ''}.)"
-    return mk("ch_vsepr_shape", "2.7", "4.A", stem, key, ds[:3], rng, concept="molecular geometry from bonded atoms and lone pairs on the central atom", path="shape table keyed by (domains, lone pairs) vs rule-built geometry from the electron-domain geometry",
-              facts=[f"species={f}", f"domains={dom}", f"lone_pairs={lp}", f"shape={shape}"], judgment="separate electron-domain geometry from molecular geometry", est=60)
+        if nm_ not in seen:
+            seen.add(nm_)
+            ds.append(Opt(nm_, False, f"This is the shape of a central atom with {d_ - l_} bonded atoms and {l_} lone pair{'s' if l_ != 1 else ''}, not the {sig_} bonded atoms and {lp} lone pair{'s' if lp != 1 else ''} of {f}.", None))
+    key = Opt(shape, True, "", None)
+    stem = f"What is the molecular geometry of {cf(f)}?"
+    return mk("ch_vsepr_shape", "2.7", "4.A", stem, key, ds[:3], rng, concept="molecular geometry from the Lewis structure of a molecule using VSEPR", path="shape table keyed by (domains, lone pairs) vs rule-built geometry from the electron-domain geometry",
+              facts=[f"species={f}", f"domains={dom}", f"lone_pairs={lp}", f"shape={shape}"], judgment="separate electron-domain geometry from molecular geometry", est=60,
+              kwhy=f"In {f} the central atom has {sig_} bonded atoms and {lp} lone pair{'s' if lp != 1 else ''}, so {dom} electron domains arranged {ELEC_GEO[dom]}. " + (f"The {lp} lone pair{'s' if lp != 1 else ''} occupy{'' if lp != 1 else 'ies'} positions but are not atoms, so the molecule is {shape}." if lp else f"With no lone pairs the atoms also form a {shape} shape."))
 
 
 # ======================= 2.2 포텐셜 에너지 곡선 (5.D) =======================
@@ -280,7 +289,8 @@ def ch_potential_curve(rng):
     key_t = f"{longer} has the longer bond and {stronger} has the stronger bond."
     key = Opt(key_t, True, "The minimum's horizontal position gives the bond length and its depth gives the bond energy.", None)
     ds = []
-    for l, s, why in [(other(longer), stronger, "Reads bond length from the wrong curve."), (longer, other(stronger), "Reads bond strength from the wrong curve."), (other(longer), other(stronger), "Reverses both readings.")]:
+    for l, s, why in [(other(longer), stronger, f"Assigns the longer bond to the wrong molecule: the minimum at the larger internuclear distance belongs to {longer}."), (longer, other(stronger), f"Assigns the stronger bond to the wrong molecule: the deeper minimum belongs to {stronger}."),
+                      (other(longer), other(stronger), "Reverses both readings; bond length is the horizontal position of the minimum and bond energy is its depth below zero.")]:
         ds.append(Opt(f"{l} has the longer bond and {s} has the stronger bond.", False, why, None))
     pts = lambda V: [[round(float(r), 3), round(float(v), 2)] for r, v in zip(rs[::25], V[::25]) if v <= 780]  # 축 범위 안의 점만(반발 벽의 가파른 부분은 잘라낸다)
     stim = graph_stim("Potential energy versus internuclear distance for diatomic molecules X and Y", [("X", pts(VA)), ("Y", pts(VB))], gaxis("Internuclear distance (arbitrary units)", 0.5, 3.0, 0.5), gaxis("Potential energy (kJ/mol)", -600, 800, 200))
@@ -307,11 +317,8 @@ def ch_lattice_energy(rng):
     for n in names:
         if n == k:
             continue
-        why = "Considers only the smaller ionic separation and neglects the smaller charges." if IONIC[n][2] < IONIC[k][2] else "Looks only at the charge of one ion without comparing the separation."
-        if IONIC[n][0] * IONIC[n][1] >= IONIC[k][0] * IONIC[k][1] and IONIC[n][2] > IONIC[k][2]:
-            why = "Considers only the larger charges and neglects the larger ionic separation."
-        ds.append(Opt(cf(n), False, why, None))
-    key = Opt(cf(k), True, "Lattice energy grows with the product of the ion charges and shrinks as the ions are farther apart (Coulomb's law).", None)
+        ds.append(Opt(cf(n), False, f"{n} has a charge product of {IONIC[n][0] * IONIC[n][1]} and an ionic separation of {IONIC[n][2]} pm, so its charge-to-separation ratio ({sc[n]:.4f}) is smaller than that of {k} ({sc[k]:.4f}).", None))
+    key = Opt(cf(k), True, f"Coulomb's law: lattice energy grows with the product of the ion charges and shrinks with the ionic separation. {k} has the largest charge-to-separation ratio (charge product {IONIC[k][0] * IONIC[k][1]}, separation {IONIC[k][2]} pm).", None)
     stem = "Which of the following ionic compounds is expected to have the greatest lattice energy (the largest magnitude)?"
     return mk("ch_lattice_energy", "2.3", "4.A", stem, key, ds, rng, concept="compare lattice energies using ion charges and ionic radii (Coulomb's law)", path="exact rational q1q2/d ranking vs numpy argmax; sizes from a radius table",
               facts=[f"names={names}", f"key={k}"], judgment="weigh charge product against interionic distance", est=70)

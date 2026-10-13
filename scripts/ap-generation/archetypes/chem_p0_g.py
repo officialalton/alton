@@ -154,8 +154,9 @@ def chf_long_kinetics(rng):
         part("D", "The experiment is repeated at a higher temperature. Predict whether $k$ increases, decreases, or is unchanged, and justify your answer using the collision model.", 2, "predict", ["2.B", "2.F", "6.E"], "$k$ increases: at the higher temperature a larger fraction of collisions has energy at least equal to the activation energy.",
              [R("D1", "claim", "States that $k$ increases", ["increases"], err=["states k decreases because particles collide more often"]),
               R("D2", "justification", "Justifies with a larger fraction of collisions exceeding the activation energy (and more frequent collisions)", ["fraction of collisions", "activation energy"], requires="D1", err=["says the activation energy decreases"])]),
-        part("E", "A student proposes that the reaction occurs in one elementary step. Is this consistent with the order you determined? Explain.", 1, "explain", ["4.B"], f"A one-step mechanism with one molecule of A would be first order; it is {'consistent' if order == 1 else 'not consistent'} with the data because the determined order is {order}.",
-             [R("E1", "justification", f"States the proposal is {'consistent' if order == 1 else 'not consistent'} and links the molecularity of the elementary step to the order of {order}", ["consistent" if order == 1 else "not consistent", "molecularity"], err=["ignores the order found in part A"])]),
+        part("E", "A student proposes that the reaction occurs in a single elementary step. Based on the order you determined, what molecularity (unimolecular or bimolecular) would that step need to have to be consistent with the data? Explain.", 1, "explain", ["4.B"],
+             f"For an elementary step the rate law follows from the reactants of the step. A {'unimolecular step, A → products, gives rate = k[A], a first-order law' if order == 1 else 'bimolecular step, 2A → products, gives rate = k[A]², a second-order law'}, so the step would need to be {'unimolecular' if order == 1 else 'bimolecular'}.",
+             [R("E1", "justification", f"States that the step would have to be {'unimolecular (one molecule of A)' if order == 1 else 'bimolecular (two molecules of A)'} and links the molecularity of an elementary step to the order of {order}", ["unimolecular" if order == 1 else "bimolecular", "molecularity", "order"], err=["ignores the order found in part A"])]),
     ]
     return _pack("chf_long_kinetics", "long", "5.3", ["5.2", "5.5", "5.7"], "5.D", "Concentration–time data and the order of a reaction", stim, parts, 10, 23, [f"order={order}", f"k={k}", f"A0={A0}", f"slope={slope:.6g}", f"t_half={t_half:.4f}"],
                  [_ev("B", "rate constant", slope, 0.03 * slope, "units"), _ev("C", "half-life", t_half, 0.04 * t_half, "s")],
@@ -167,13 +168,15 @@ def chf_long_kinetics(rng):
 # ======================= 짧은 문항 1 (4): PES =======================
 def chf_short_pes(rng):
     for _ in forever():
-        z = rng.randint(6, 16); peaks = _A._pes_peaks(z); es = [p[0] for p in peaks]
-        if all(es[i] > es[i + 1] * 1.08 for i in range(len(es) - 1)):
+        z = pick(rng, [5, 6, 8, 9, 11, 13, 14, 16]); peaks = _A._pes_peaks(z); es = [p[0] for p in peaks]
+        nxt_peaks = _A._pes_peaks(z + 1)
+        # 같은 부껍질에 전자가 하나 더 들어가고 쌍을 이루지 않는 경우만(원자가 봉우리가 반드시 더 높은 결합 에너지)
+        if all(es[i] > es[i + 1] * 1.08 for i in range(len(es) - 1)) and nxt_peaks[-1][2] == peaks[-1][2] and nxt_peaks[-1][0] > peaks[-1][0]:
             break
     sym = _A.SYM[z]; nxt = _A.SYM[z + 1]
     cfg = " ".join(f"{p[2]}$^{{{p[1]}}}$" for p in peaks)
     cfg_n = _A._config(z + 1); val_next = [p for p in _A._pes_peaks(z + 1)][-2:] if len(cfg_n) > 2 else _A._pes_peaks(z + 1)
-    stim = {"kind": "diagram", "description": "Photoelectron spectrum of a neutral atom of element X. Peaks (binding energy in MJ/mol, relative number of electrons): " + "; ".join(f"({e:g}, {k})" for e, k, _ in peaks) + ".", "data": {"variant": "chem_pes", "peaks": [{"energy": e, "electrons": k} for e, k, _ in peaks], "unit": "MJ/mol"}}
+    stim = {"kind": "diagram", "description": "Photoelectron spectrum of a neutral atom of element X. The height of each peak is proportional to the number of electrons in that subshell. Peaks (binding energy in MJ/mol, relative number of electrons): " + "; ".join(f"({e:g}, {k})" for e, k, _ in peaks) + ".", "data": {"variant": "chem_pes", "peaks": [{"energy": e, "electrons": k} for e, k, _ in peaks], "unit": "MJ/mol"}}
     ie1 = peaks[-1][0]
     parts = [
         part("A", "Identify element X and write its complete ground-state electron configuration.", 1, "identify", ["1.A", "5.D"], f"The total relative number of electrons is {z}, so X is {sym}: {cfg}.",
@@ -203,10 +206,12 @@ def chf_short_stoich(rng):
     V = nco2 * R_ATM * T / P
     b = x + y / 4
     agree(V, bisect(lambda v: P * v - nco2 * R_ATM * T, 1e-6, 1e5), 1e-6, "V")
+    den = sp.denom(sp.nsimplify(b)); coefs = (int(den), int(b * den), int(x * den), int(y * den // 2))
+    bal = f"{coefs[0] if coefs[0] > 1 else ''}{form} + {coefs[1]}O2 → {coefs[2]}CO2 + {coefs[3]}H2O"
     stim = {"kind": "text", "description": f"A ${m:g}\\text{{ g}}$ sample of {cf(form)} is burned completely in excess oxygen, producing $\\mathrm{{CO_2}}(g)$ and $\\mathrm{{H_2O}}(g)$.", "data": {}}
     parts = [
-        part("A", f"Write the balanced equation for the complete combustion of {cf(form)}, using the smallest whole-number coefficients.", 1, "write", ["5.E"], f"With whole numbers: coefficient of $\\mathrm{{O_2}}$ scales from ${b:g}$ (multiply by 2 if needed to clear fractions).",
-             [R("A1", "expression", f"Balanced equation for {form} + O2 → CO2 + H2O with whole numbers (CO2: {x}·k, H2O: {y // 2}·k, O2: {b:g}·k)", ["balanced", "whole numbers"], err=["leaves a fractional coefficient"])]),
+        part("A", f"Write the balanced equation for the complete combustion of {cf(form)}, using the smallest whole-number coefficients.", 1, "write", ["5.E"], f"The balanced equation is {bal}.",
+             [R("A1", "expression", f"Balanced equation with the smallest whole-number coefficients: {bal}", [bal], err=["leaves a fractional coefficient"])]),
         part("B", f"Calculate the number of moles of {cf('CO2')} produced.", 1, "calculate", ["5.F"], f"$n(\\mathrm{{CO_2}})={x}\\times{m:g}/{M:.2f}={nco2:.3g}\\text{{ mol}}$.",
              [R("B1", "numeric", f"Calculates {nco2:.3g} mol using the molar mass of the fuel and the {x}:1 mole ratio", [f"{nco2:.3g}"], nums=True, err=["omits the mole ratio"])]),
         part("C", f"Calculate the volume, in L, occupied by the {cf('CO2')} at ${Tc}\\,^{{\\circ}}\\text{{C}}$ and ${P:g}\\text{{ atm}}$.", 1, "calculate", ["5.B", "5.F"], f"$V=nRT/P={V:.1f}\\text{{ L}}$.",
@@ -227,12 +232,13 @@ def chf_short_bonding(rng):
     hi, lo = pick(rng, [("H2O", "H2S"), ("CH3OH", "C2H6"), ("HF", "HCl"), ("NH3", "PH3"), ("C2H5OH", "CH3OCH3")])
     agree(1.0, 1.0 if _B.BP[hi][1] > _B.BP[lo][1] else 0.0, 1e-9, "bp")
     polar = {"SO2": True, "NH3": True, "H2O": True, "ClF3": True, "SF4": True, "XeF4": False, "CH4": False}[f]
+    ang_txt = {"SF4": "about 90° and about 120° (the see-saw has two different angles)", "ClF3": "about 90°", "XeF4": "90°", "CH4": "109.5°", "NH3": "slightly less than 109.5° (about 107°)", "H2O": "slightly less than 109.5° (about 104.5°)", "SO2": "slightly less than 120° (about 118°)"}[f]
     stim = {"kind": "text", "description": f"Consider the molecule {cf(f)} and the two compounds {cf(hi)} and {cf(lo)}.", "data": {}}
     parts = [
         part("A", f"In the box provided, draw a Lewis electron-dot diagram of {cf(f)} that shows all valence electrons.", 1, "draw", ["3.B"], f"A valid diagram with {V} valence electrons on the central atom group and {sg} bonded atoms and {lp} lone pair(s) on the central atom.",
              [R("A1", "diagram", f"Draws a Lewis structure with the correct total valence electrons, {sg} bonds to the central atom and {lp} lone pair(s) on it", ["valence electrons", "lone pairs"], err=["omits the lone pairs on the central atom"])]),
-        part("B", f"Based on your diagram, identify the molecular geometry of {cf(f)} and the approximate bond angle.", 1, "identify", ["4.A", "1.A"], f"{shape}; about {ang}° ({'less than the ideal value because of lone pairs' if lp else 'the ideal value'}).",
-             [R("B1", "claim", f"States {shape} geometry and a bond angle close to {ang}°", [shape, f"{ang}"], err=["reports the electron-domain geometry"])]),
+        part("B", f"Based on your diagram, identify the molecular geometry of {cf(f)} and the approximate bond angle.", 1, "identify", ["4.A", "1.A"], f"{shape}; bond angle {ang_txt}.",
+             [R("B1", "claim", f"States {shape} geometry and a bond angle of {ang_txt}", [shape, "bond angle"], err=["reports the electron-domain geometry"])]),
         part("C", f"Is the {cf(f)} molecule polar or nonpolar? Justify your answer.", 1, "justify", ["6.C", "4.C"], f"{'Polar' if polar else 'Nonpolar'}: the bond dipoles {'do not cancel because of the lone pair or shape' if polar else 'cancel by symmetry'}.",
              [R("C1", "justification", f"States {'polar' if polar else 'nonpolar'} and links it to {'an asymmetric shape' if polar else 'symmetric cancellation of the bond dipoles'}", ["polar" if polar else "nonpolar", "symmetry"], err=["decides by bond polarity alone"])]),
         part("D", f"The boiling point of {cf(hi)} is higher than that of {cf(lo)}. Explain the difference in terms of intermolecular forces.", 1, "explain", ["6.E", "4.C"], "The compound with the higher boiling point has the stronger intermolecular forces (hydrogen bonding or stronger dispersion/dipole attractions), which need more energy to overcome.",

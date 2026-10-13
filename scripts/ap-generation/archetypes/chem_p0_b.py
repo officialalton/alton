@@ -16,26 +16,20 @@ def ch_imf_boiling(rng):
         th, tl = BP[hi][0], BP[lo][0]
         if BP[hi][1] < BP[lo][1]:
             hi, lo = lo, hi; th, tl = tl, th
-        if th == tl == "H":
-            continue
-        cmp = (STRENGTH[th], BP[hi][2]) > (STRENGTH[tl], BP[lo][2]) if th != tl else BP[hi][2] > BP[lo][2]
-        if th == tl == "P" or (th == tl == "N" and BP[hi][2] <= BP[lo][2]):
-            continue
-        if cmp and BP[hi][1] - BP[lo][1] > 40 and (th != tl or th == "N"):
+        # 힘의 종류가 달라 더 센 쪽이 끓는점이 높고, 몰질량 논증이 분명히 틀리도록 높은 쪽의 몰질량이 같거나 작은 쌍만 쓴다
+        if th != tl and STRENGTH[th] > STRENGTH[tl] and BP[hi][1] - BP[lo][1] > 40 and BP[hi][2] <= BP[lo][2]:
             break
-    if th != tl:
-        expl = {("H", "N"): "its molecules form hydrogen bonds, which are stronger than the dispersion forces between the nonpolar molecules of the other substance",
-                ("H", "P"): "its molecules form hydrogen bonds, which are stronger than the dipole-dipole attractions between the other substance's molecules",
-                ("P", "N"): "its polar molecules attract each other through dipole-dipole forces in addition to dispersion forces, so the attractions are stronger than the dispersion forces alone"}[(th, tl)]
-    else:
-        expl = "its larger, more polarizable electron cloud produces stronger London dispersion forces"
+    expl = {("H", "N"): "its molecules form hydrogen bonds, which are stronger than the dispersion forces between the nonpolar molecules of the other substance",
+            ("H", "P"): "its molecules form hydrogen bonds, which are stronger than the dipole-dipole attractions between the other substance's molecules",
+            ("P", "N"): "its polar molecules attract each other through dipole-dipole forces in addition to dispersion forces, so the attractions are stronger than the dispersion forces alone"}[(th, tl)]
+    kind = {"H": "hydrogen bonds", "P": "dipole-dipole attractions", "N": "London dispersion forces only"}
     key_t = f"The substance with the higher boiling point is {hi}, because {expl}."
-    wrongs = [(f"The substance with the higher boiling point is {hi}, because the covalent bonds within its molecules are stronger and break when it boils.", "Confuses intramolecular bonds with intermolecular forces."),
-              (f"The substance with the higher boiling point is {hi}, because it has the greater molar mass.", "Uses molar mass alone (the mass argument does not hold for this pair)." if BP[hi][2] <= BP[lo][2] else "Uses molar mass alone, ignoring the type of intermolecular force."),
-              (f"The substance with the higher boiling point is {lo}, because {expl}.", "Applies the right reasoning to the wrong substance.")]
-    k, ds = sentence_options(key_t, "A stronger set of intermolecular attractions needs more energy to separate the molecules.", wrongs)
+    wrongs = [(f"The substance with the higher boiling point is {hi}, because the covalent bonds within its molecules are stronger and break when it boils.", "Confuses the covalent bonds inside molecules, which stay intact when a liquid boils, with the intermolecular forces that are overcome."),
+              (f"The substance with the higher boiling point is {hi}, because it has the greater molar mass.", f"{hi} actually has the smaller molar mass ({BP[hi][2]:g} g/mol versus {BP[lo][2]:g} g/mol for {lo}), so molar mass cannot explain its higher boiling point."),
+              (f"The substance with the higher boiling point is {hi}, because its particles have a greater average kinetic energy at a given temperature, which keeps them together as a liquid.", "Confuses kinetic energy, which depends only on temperature, with the strength of the attractions between particles.")]
+    k, ds = sentence_options(key_t, f"{hi} has {kind[th]} between its particles while {lo} has {kind[tl]}; stronger attractions need more energy to separate the particles, which gives {hi} the higher boiling point ({BP[hi][1]} K versus {BP[lo][1]} K).", wrongs)
     stem = f"A student claims that {hi} has a higher boiling point than {lo}. Which statement best supports the claim at the particulate level?"
-    return mk("ch_imf_boiling", "3.1", "6.C", stem, k, ds, rng, concept="support a boiling-point claim with the type of intermolecular force", path="tabulated boiling points vs a force-strength score (H-bond > dipole-dipole > dispersion, then polarizability)",
+    return mk("ch_imf_boiling", "3.1", "6.C", stem, k, ds, rng, concept="support a boiling-point claim with the type of intermolecular force", path="tabulated boiling points vs a force-strength score (H-bond > dipole-dipole > dispersion), with the molar-mass argument checked against the table",
               facts=[f"hi={hi}", f"lo={lo}", f"bp_hi={BP[hi][1]}", f"bp_lo={BP[lo][1]}"], judgment="connect a macroscopic property to the particulate-level force", est=70)
 
 
@@ -56,25 +50,28 @@ def ch_ideal_gas(rng):
         agree(key_v, bisect(lambda v: P * v - n * R_ATM * T, 1e-6, 1e4), 1e-6, "V")
         stem = f"What is the volume, in L, of ${n:g}\\text{{ mol}}$ of an ideal gas at ${P:g}\\text{{ atm}}$ and ${Tc}\\,^{{\\circ}}\\text{{C}}$?"
         pairs = [("Uses the Celsius temperature in place of kelvins.", n * R_ATM * Tc / P if Tc else None), ("Multiplies by the pressure instead of dividing.", n * R_ATM * T * P), ("Uses the J/(mol K) gas constant with a pressure in atm.", n * R_J * T / P),
-                 ("Adds 273 to the pressure instead of the temperature.", n * R_ATM * Tc / (P + 273.15) if Tc else None), ("Divides by kelvin temperature rather than multiplying.", n * R_ATM / (P * T))]
+                 ("Uses the STP molar volume of 22.4 L/mol regardless of the given temperature and pressure.", n * 22.4), ("Uses 273 K for the temperature regardless of the given temperature.", n * R_ATM * 273.15 / P)]
         key, ds = num_opts(key_v, pairs, "L")
         facts = [f"n={n}", f"P={P}", f"Tc={Tc}", f"V={key_v:.5f}"]
+        kw = f"Convert to kelvins: T = {Tc} + 273.15 = {T:.2f} K. Then V = nRT/P = ({n:g} mol)(0.08206 L·atm/(mol·K))({T:.2f} K)/({P:g} atm) = {key_v:.3g} L."
     elif unk == "P":
         key_v = n * R_ATM * T / Vr
         stem = f"What is the pressure, in atm, of ${n:g}\\text{{ mol}}$ of an ideal gas in a ${Vr:g}\\text{{ L}}$ container at ${Tc}\\,^{{\\circ}}\\text{{C}}$?"
         agree(key_v, float(sp.solve(sp.Eq(Ps * sp.nsimplify(Vr), nsym * sp.Rational(str(R_ATM)) * Ts), Ps)[0].subs({nsym: sp.nsimplify(n), Ts: sp.nsimplify(T)})), 1e-9, "P")
-        pairs = [("Uses the Celsius temperature in place of kelvins.", n * R_ATM * Tc / Vr if Tc else None), ("Multiplies by the volume instead of dividing.", n * R_ATM * T * Vr), ("Uses R = 8.314 with a volume in L and a pressure in atm.", n * R_J * T / Vr), ("Divides by the temperature instead of multiplying.", n * R_ATM / (Vr * T))]
+        pairs = [("Uses the Celsius temperature in place of kelvins.", n * R_ATM * Tc / Vr if Tc else None), ("Multiplies by the volume instead of dividing.", n * R_ATM * T * Vr), ("Uses R = 8.314 with a volume in L and a pressure in atm.", n * R_J * T / Vr), ("Uses the STP molar volume of 22.4 L/mol regardless of the given temperature.", n * 22.4 / Vr)]
         key, ds = num_opts(key_v, pairs, "atm")
         facts = [f"n={n}", f"V={Vr}", f"Tc={Tc}", f"P={key_v:.5f}"]
+        kw = f"Convert to kelvins: T = {Tc} + 273.15 = {T:.2f} K. Then P = nRT/V = ({n:g} mol)(0.08206 L·atm/(mol·K))({T:.2f} K)/({Vr:g} L) = {key_v:.3g} atm."
     else:
         P_ = P; key_v = P_ * Vr / (R_ATM * T)
         stem = f"How many moles of an ideal gas are in a ${Vr:g}\\text{{ L}}$ container at ${P_:g}\\text{{ atm}}$ and ${Tc}\\,^{{\\circ}}\\text{{C}}$?"
         agree(key_v, float(sp.solve(sp.Eq(sp.nsimplify(P_) * sp.nsimplify(Vr), nsym * sp.Rational(str(R_ATM)) * sp.nsimplify(T)), nsym)[0]), 1e-9, "n")
-        pairs = [("Uses the Celsius temperature in place of kelvins.", P_ * Vr / (R_ATM * Tc) if Tc else None), ("Multiplies by the temperature instead of dividing.", P_ * Vr * T * R_ATM), ("Uses R = 8.314 with a volume in L and a pressure in atm.", P_ * Vr / (R_J * T)), ("Inverts the ratio.", R_ATM * T / (P_ * Vr))]
+        pairs = [("Uses the Celsius temperature in place of kelvins.", P_ * Vr / (R_ATM * Tc) if Tc else None), ("Multiplies by the temperature instead of dividing.", P_ * Vr * T * R_ATM), ("Uses R = 8.314 with a volume in L and a pressure in atm.", P_ * Vr / (R_J * T)), ("Uses the STP molar volume of 22.4 L/mol regardless of the given temperature and pressure.", Vr / 22.4)]
         key, ds = num_opts(key_v, pairs, "mol")
         facts = [f"P={P_}", f"V={Vr}", f"Tc={Tc}", f"n={key_v:.5f}"]
+        kw = f"Convert to kelvins: T = {Tc} + 273.15 = {T:.2f} K. Then n = PV/RT = ({P_:g} atm)({Vr:g} L)/((0.08206 L·atm/(mol·K))({T:.2f} K)) = {key_v:.3g} mol."
     return mk("ch_ideal_gas", "3.4", "5.F", stem, key, ds, rng, concept="solve the ideal gas law with a Celsius temperature and consistent units", path="sympy solve of PV = nRT vs bisection root find on the residual",
-              cond=[("temperature must be absolute", "unit conversion"), ("R and the pressure and volume units must be consistent", "constant choice")], facts=facts, judgment="convert units before substituting into PV = nRT", est=90)
+              cond=[("temperature must be absolute", "unit conversion"), ("R and the pressure and volume units must be consistent", "constant choice")], facts=facts, judgment="convert units before substituting into PV = nRT", est=90, kwhy=kw)
 
 
 # ======================= 3.4 기체 밀도와 몰질량 (5.B) =======================
@@ -90,11 +87,12 @@ def ch_gas_molar_mass(rng):
         agree(key_v, float(sp.solve(sp.Eq(sp.nsimplify(P) * sp.Symbol("M"), sp.nsimplify(d) * sp.Rational(str(R_ATM)) * sp.nsimplify(T)), sp.Symbol("M"))[0]), 1e-9, "M")
         if abs(key_v - M) / M < 0.01 and 1 < d < 6:
             break
-    pairs = [("Uses the Celsius temperature in place of kelvins.", d * R_ATM * Tc / P if Tc else None), ("Uses dP/(RT), the inverse relationship.", d * P / (R_ATM * T)), ("Uses R = 8.314 with a pressure in atm.", d * R_J * T / P), ("Multiplies by the pressure instead of dividing.", d * R_ATM * T * P)]
+    pairs = [("Uses the Celsius temperature in place of kelvins.", d * R_ATM * Tc / P if Tc else None), ("Uses the STP molar volume of 22.4 L/mol regardless of the given temperature and pressure.", d * 22.4), ("Uses R = 8.314 with a pressure in atm.", d * R_J * T / P), ("Multiplies by the pressure instead of dividing.", d * R_ATM * T * P)]
     key, ds = num_opts(key_v, pairs, "g/mol")
     stem = f"A gas has a density of ${d:g}\\text{{ g/L}}$ at ${P:g}\\text{{ atm}}$ and ${Tc}\\,^{{\\circ}}\\text{{C}}$. Assuming ideal behavior, what is the molar mass of the gas, in g/mol?"
     return mk("ch_gas_molar_mass", "3.4", "5.B", stem, key, ds, rng, concept="molar mass from gas density using PV = nRT with n = m/M", path="sympy solve of PM = dRT vs recovery of the generating molar mass",
-              facts=[f"d={d}", f"P={P}", f"Tc={Tc}", f"M={key_v:.4f}"], judgment="choose to rewrite the ideal gas law in terms of density", est=90)
+              facts=[f"d={d}", f"P={P}", f"Tc={Tc}", f"M={key_v:.4f}"], judgment="choose to rewrite the ideal gas law in terms of density", est=90,
+              kwhy=f"Writing n = m/M in PV = nRT gives PM = dRT, so M = dRT/P = ({d:g} g/L)(0.08206 L·atm/(mol·K))({T:.2f} K)/({P:g} atm) = {key_v:.1f} g/mol, with T = {Tc} + 273.15 = {T:.2f} K.")
 
 
 # ======================= 3.4 결합 기체 법칙 (5.F) =======================
@@ -113,7 +111,8 @@ def ch_combined_gas(rng):
     key, ds = num_opts(P2, pairs, "atm")
     stem = f"A sample of an ideal gas at ${P1:g}\\text{{ atm}}$ occupies ${V1:g}\\text{{ L}}$ at ${T1c}\\,^{{\\circ}}\\text{{C}}$. The gas is changed to ${V2:g}\\text{{ L}}$ at ${T2c}\\,^{{\\circ}}\\text{{C}}$. What is the final pressure, in atm?"
     return mk("ch_combined_gas", "3.4", "5.F", stem, key, ds, rng, concept="combined gas law with Celsius temperatures", path="closed-form rearrangement vs bisection on the invariant PV/T",
-              facts=[f"P1={P1}", f"V1={V1}", f"T1c={T1c}", f"V2={V2}", f"T2c={T2c}", f"P2={P2:.5f}"], judgment="decide that the amount of gas is fixed and temperatures must be absolute", est=90)
+              facts=[f"P1={P1}", f"V1={V1}", f"T1c={T1c}", f"V2={V2}", f"T2c={T2c}", f"P2={P2:.5f}"], judgment="decide that the amount of gas is fixed and temperatures must be absolute", est=90,
+              kwhy=f"The amount of gas is fixed, so P1V1/T1 = P2V2/T2 with kelvin temperatures T1 = {T1c} + 273.15 = {T1:.2f} K and T2 = {T2c} + 273.15 = {T2:.2f} K: P2 = ({P1:g})({V1:g})({T2:.2f})/(({T1:.2f})({V2:g})) = {P2:.3g} atm.")
 
 
 # ======================= 3.4 부분 압력 (5.F) =======================
@@ -138,7 +137,8 @@ def ch_partial_pressure(rng):
     rows = "; ".join(f"${m:g}\\text{{ g}}$ of {cf(g)}" for m, (g, _) in zip(ms, gases))
     stem = f"A rigid container holds {rows}. The total pressure is ${Pt:g}\\text{{ atm}}$. What is the partial pressure of {cf(name)}, in atm?"
     return mk("ch_partial_pressure", "3.4", "5.F", stem, key, ds, rng, concept="partial pressure from mole fractions computed from masses", path="exact fractions vs numpy normalized moles",
-              facts=[f"masses={ms}", f"gases={[g for g, _ in gases]}", f"Pt={Pt}", f"idx={idx}", f"Pk={Pk:.5f}"], judgment="convert masses to moles before forming mole fractions", est=100)
+              facts=[f"masses={ms}", f"gases={[g for g, _ in gases]}", f"Pt={Pt}", f"idx={idx}", f"Pk={Pk:.5f}"], judgment="convert masses to moles before forming mole fractions", est=100,
+              kwhy=f"Convert each mass to moles ({'; '.join(f'{g}: {float(n_):.3f} mol' for (g, _), n_ in zip(gases, ns))}). The mole fraction of {name} is {float(x):.3f}, so its partial pressure is {float(x):.3f} × {Pt:g} atm = {Pk:.3g} atm.")
 
 
 # ======================= 3.5 맥스웰-볼츠만 곡선 (5.D) =======================
@@ -204,9 +204,8 @@ def ch_gas_deviation(rng):
     for n in names:
         if n == k:
             continue
-        why = "Assumes the heaviest gas deviates most." if n == heavy else ("Assumes the smallest molecule deviates most." if n == min(names, key=lambda m: VDW[m][2]) else "Does not account for the stronger intermolecular attractions of the other gas.")
-        ds.append(Opt(cf(n), False, why, None))
-    key = Opt(cf(k), True, "Stronger attractions between molecules reduce the pressure and cause a greater departure from ideal behavior at high pressure and low temperature.", None)
+        ds.append(Opt(cf(n), False, f"{n} has a van der Waals attraction constant of a = {VDW[n][0]} L²·atm/mol², smaller than the {VDW[k][0]} of {k}, so it stays closer to ideal behavior" + (" even though it is the heaviest gas shown." if n == heavy else "."), None))
+    key = Opt(cf(k), True, f"Stronger attractions between molecules (a = {VDW[k][0]} L²·atm/mol² for {k}, the largest of the four) lower the pressure and cause the greatest departure from ideal behavior at high pressure and low temperature.", None)
     stem = f"Which of the following gases is expected to deviate most from ideal behavior at ${P:g}\\text{{ atm}}$ and ${T:g}\\text{{ K}}$?"
     return mk("ch_gas_deviation", "3.6", "4.B", stem, key, ds, rng, concept="which real gas deviates most from the ideal gas model", path="Z from the van der Waals equation by root finding vs the first-order estimate (b - a/RT)P; both pick the same gas",
               facts=[f"names={names}", f"P={P}", f"T={T}", f"key={k}"], judgment="judge when the ideal-gas assumptions of no attractions and no volume fail", est=70)
@@ -224,11 +223,12 @@ def ch_dilution(rng):
     ask = pick(rng, ["stock", "water"])
     key_v = V1 if ask == "stock" else V2 - V1
     pairs = [("Divides the stock volume by the concentration ratio the wrong way (uses M1V2/M2).", M1 * V2 / M2), ("Reports the volume of water to add instead of the stock volume." if ask == "stock" else "Reports the volume of stock instead of the volume of water.", V2 - V1 if ask == "stock" else V1),
-             ("Uses M2V2 as the volume.", M2 * V2), ("Uses the ratio M1/M2 without the final volume.", M1 / M2)]
+             ("Multiplies the final concentration by the final volume and treats the product as a volume.", M2 * V2), ("Uses the dilution factor M1/M2 itself as the volume instead of applying it to the final volume.", M1 / M2)]
     key, ds = num_opts(key_v, pairs, "mL")
     stem = (f"A chemist prepares ${V2:g}\\text{{ mL}}$ of a ${M2:g}\\text{{ M}}$ solution by diluting a ${M1:g}\\text{{ M}}$ stock solution with water. " + ("What volume of the stock solution, in mL, is required?" if ask == "stock" else "What volume of water, in mL, must be added to the stock solution? (Assume volumes are additive.)"))
     return mk("ch_dilution", "3.7", "5.F", stem, key, ds, rng, concept="dilution calculation with M1V1 = M2V2 and the volume of water added", path="sympy solve of M1V1 = M2V2 vs exact fraction",
-              facts=[f"M1={M1}", f"M2={M2}", f"V2={V2}", f"ask={ask}", f"key={key_v:.5f}"], judgment="recognize that moles of solute are conserved and distinguish stock volume from water volume", est=80)
+              facts=[f"M1={M1}", f"M2={M2}", f"V2={V2}", f"ask={ask}", f"key={key_v:.5f}"], judgment="recognize that moles of solute are conserved and distinguish stock volume from water volume", est=80,
+              kwhy=f"Moles of solute are conserved, so M1V1 = M2V2 and V1 = M2V2/M1 = ({M2:g} M)({V2:g} mL)/({M1:g} M) = {V1:.3g} mL of stock" + (f", and the water to add is {V2:g} mL − {V1:.3g} mL = {V2 - V1:.3g} mL." if ask == "water" else "."))
 
 
 # ======================= 3.8 이온 수와 전기 전도도 (4.C) =======================
@@ -249,8 +249,8 @@ def ch_ion_conductivity(rng):
     for n in names:
         if n == k:
             continue
-        ds.append(Opt(cf(n), False, "Chooses a solute that releases fewer ions per formula unit." if IONS[n] > 1 else "Chooses a molecular solute that dissolves without forming ions.", None))
-    key = Opt(cf(k), True, "At equal molarity, the solution with the most dissolved ions per formula unit has the highest conductivity.", None)
+        ds.append(Opt(cf(n), False, (f"{n} releases {IONS[n]} ions per formula unit, fewer than the {IONS[k]} released by {k}, so its solution has fewer charge carriers." if IONS[n] > 1 else f"{n} dissolves as neutral molecules and releases no ions, so its solution has far fewer charge carriers than {k}."), None))
+    key = Opt(cf(k), True, f"At equal molarity, {k} releases {IONS[k]} ions per formula unit ({' + '.join(ION_SPLIT[k])}), the most of the four solutes, so its solution has the most charge carriers.", None)
     stem = "Four aqueous solutions each have a concentration of $0.10\\text{ M}$ at the same temperature. Which solution is expected to have the highest electrical conductivity?"
     return mk("ch_ion_conductivity", "3.8", "4.C", stem, key, ds, rng, concept="connect the number of dissolved particles to the electrical conductivity of a solution", path="ion count from a table vs ions listed by splitting the formula",
               facts=[f"names={names}", f"key={k}"], judgment="count particles released per formula unit and link them to conductivity", est=60)
@@ -274,13 +274,15 @@ def ch_beer_lambert(rng):
     cx = (Au - icpt) / slope
     agree(cx, cu, 0.02, "cu")
     near = cs[int(np.argmin([abs(a - Au) for a in As]))]
-    pairs = [("Multiplies the absorbance by the slope instead of dividing.", Au * slope), ("Divides by the path length a second time.", cx / b), ("Takes the concentration of the standard with the closest absorbance.", near), ("Uses the unknown absorbance as the concentration.", Au)]
+    pairs = [("Takes the concentration of the standard with the closest absorbance instead of using the calibration line.", near), ("Averages the concentrations of the four standards.", float(np.mean(cs))), ("Divides by the path length a second time even though the slope already includes it.", cx / b),
+             ("Multiplies by the path length instead of using the slope of the calibration line.", cx * b), ("Scales from the most concentrated standard only (a one-point proportion).", Au / As[-1] * cs[-1] * 0.5)]
     key, ds = num_opts(cx, [(w, v) for w, v in pairs], "M", 3, fmt=lambda v: sci(v, "M"))
-    rows = [[f"{c:.2e}", f"{a:.3f}"] for c, a in zip(cs, As)]
+    rows = [[f"{sn(c, 3)}", f"{a:.3f}"] for c, a in zip(cs, As)]
     stim = table_stimulus(f"Absorbance of standard solutions measured in a cuvette of path length {b:g} cm", "Concentration (M)", rows, "Absorbance")
     stem = f"A student measures the absorbance of four standard solutions of a dye at its maximum wavelength in a ${b:g}\\text{{ cm}}$ cuvette (table). A sample of unknown concentration of the same dye in the same cuvette has an absorbance of ${Au:.3f}$. What is the concentration of the dye in the unknown, in M?"
     return mk("ch_beer_lambert", "3.13", "5.D", stem, key, ds, rng, concept="unknown concentration from a Beer-Lambert calibration table", stim=stim, material={"type": "table", "must_include": ["standard concentrations", "absorbances"]},
-              path="least-squares line from numpy polyfit vs normal equations; the recovered concentration matches the generating value within rounding", facts=[f"b={b}", f"Au={Au}", f"slope={slope:.5g}", f"cx={cx:.6g}"], judgment="use a calibration line, not a single point or a second factor of path length", est=100)
+              path="least-squares line from numpy polyfit vs normal equations; the recovered concentration matches the generating value within rounding", facts=[f"b={b}", f"Au={Au}", f"slope={slope:.5g}", f"cx={cx:.6g}"], judgment="use a calibration line, not a single point or a second factor of path length", est=100,
+              kwhy=f"The standards fall on a straight line A = mc with slope m = {sn(slope, 3)} M⁻¹ (the slope already equals ε times the path length). For the unknown, c = A/m = {Au:.3f} / {sn(slope, 3)} M⁻¹ = {sn(cx, 3)} M.")
 
 
 # ======================= 3.12 광자 에너지 (5.F) =======================
@@ -294,7 +296,8 @@ def ch_photon_energy(rng):
     key, ds = num_opts(E, pairs, "J", 3, fmt=lambda v: sci(v, "J") if v < 1e4 else sci(v, ""))
     stem = f"What is the energy, in J, of a single photon of light with a wavelength of ${lam}\\text{{ nm}}$?"
     return mk("ch_photon_energy", "3.12", "5.F", stem, key, ds, rng, concept="photon energy from wavelength using E = hc/λ", path="sympy rational arithmetic vs float evaluation",
-              facts=[f"lam={lam}", f"E={E:.5e}"], judgment="convert nanometers to meters and keep a single photon distinct from a mole of photons", est=70)
+              facts=[f"lam={lam}", f"E={E:.5e}"], judgment="convert nanometers to meters and keep a single photon distinct from a mole of photons", est=70,
+              kwhy=f"E = hc/λ = (6.626×10⁻³⁴ J·s)(2.998×10⁸ m/s)/({lam} × 10⁻⁹ m) = {sn(E, 4)} J for one photon; the wavelength must be converted from nm to m.")
 
 
 # ======================= 3.9 크로마토그래피 Rf (2.D) =======================
@@ -313,4 +316,5 @@ def ch_chromatography(rng):
     stim = table_stimulus("Distances traveled from the origin line on a chromatography plate", "Feature", rows, "Distance from origin (cm)")
     stem = f"A student separates a mixture by paper chromatography. The table gives the distance each feature moved from the origin line. What is the $R_f$ value of component {which + 1}?"
     return mk("ch_chromatography", "3.9", "2.D", stem, key, ds, rng, concept="retention factor from distances read off a chromatography result", stim=stim, material={"type": "table", "must_include": ["solvent front", "spot distances"]},
-              path="exact fraction vs numpy division", facts=[f"front={front}", f"d={ds_[which]}", f"rf={rf[which]:.5f}"], judgment="identify the solvent front as the reference distance", est=70)
+              path="exact fraction vs numpy division", facts=[f"front={front}", f"d={ds_[which]}", f"rf={rf[which]:.5f}"], judgment="identify the solvent front as the reference distance", est=70,
+              kwhy=f"Rf = distance moved by the component / distance moved by the solvent front = {ds_[which]:g} cm / {front:g} cm = {rf[which]:.2f}.")

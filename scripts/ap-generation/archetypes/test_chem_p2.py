@@ -139,5 +139,28 @@ class SecondVariants(unittest.TestCase):
             self.assertNotIn(" both ", kt)
 
 
+class ExplanationQuality(unittest.TestCase):
+    """2026-10-13 chem-p1-a 첫 통과 36%: 검토기가 정답 설명이 비어 있거나(대입 없음), 오답 설명이 템플릿·중복·값과 불일치라며 반려했다. 코드로 확인할 수 있는 부분을 강제한다."""
+
+    def test_every_item_has_a_reasoned_key_and_unique_distractor_explanations(self):
+        for n in R.CHEM_STAGES["chem_mc_all"] + R.CHEM_STAGES["chem_sets"]:
+            for p in R.batch(n, 4, 40):
+                for q in items(p):
+                    opts = q["options"]; k = q["key_index"]
+                    kw = (opts[k]["why"] or "").strip()
+                    self.assertGreaterEqual(len(kw), 40, f"{n}: key explanation too short")
+                    numeric = all(o["value"] is not None for o in opts)
+                    if numeric:
+                        self.assertRegex(kw, r"\d", f"{n}: numeric item without a worked substitution in the key explanation")
+                    whys = [o["why"].strip() for i, o in enumerate(opts) if i != k]
+                    self.assertEqual(len(set(whys)), 3, f"{n}: duplicate distractor explanations")
+                    self.assertNotIn(kw, whys, n)
+                    for w in whys + [kw]:
+                        self.assertNotIn("this option:", w, n)
+                        self.assertNotRegex(w, r"e\+\d\d", f"{n}: computer-style number in an explanation")
+                    for o in opts:
+                        self.assertNotRegex(o["text"], r"\de[+-]\d", f"{n}: computer-style number in an option")
+
+
 if __name__ == "__main__":
     unittest.main()
