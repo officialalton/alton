@@ -9,6 +9,8 @@ import { subjectToolsConfig } from "@/lib/exam-tools/subject-tools";
 import { evalScientific } from "./PhysicsCalculator";
 import { CHEMISTRY_REF_DISCLAIMER, CHEMISTRY_CONSTANTS, CHEMISTRY_ELEMENTS, elementPosition } from "@/lib/exam-tools/chemistry-reference";
 import { PHYSICS_REF_DISCLAIMER, PHYSICS_CONSTANTS } from "@/lib/exam-tools/physics-reference";
+import { MICRO_REF_DISCLAIMER, MICRO_GROUPS } from "@/lib/exam-tools/micro-reference";
+import { evalBasic } from "./BasicCalculator";
 import { parseNum, STATS_MODES } from "@/lib/stats-calc/modes";
 
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });
@@ -228,5 +230,27 @@ describe("AP Chemistry 도구", () => {
     expect(elementPosition(17)).toEqual({ period: 3, group: 17 });
     expect(elementPosition(79)).toEqual({ period: 6, group: 11 });
     expect(CHEMISTRY_ELEMENTS).toHaveLength(86);
+  });
+});
+
+describe("AP Microeconomics 도구", () => {
+  const micro = subjectToolsConfig("ap_microeconomics");
+  it("사칙 계산기 + Reference, Desmos·공학용 없음", () => {
+    expect(micro.calculatorTabs).toEqual(["basic"]);
+    expect(micro.reference).toBe("microeconomics");
+  });
+  it("Reference 는 자체 문구 고지와 식 묶음을 보인다(공식 시트라고 주장하지 않음)", () => {
+    render(<SubjectToolPanels config={micro} calculatorAllowed open="reference" onClose={() => {}} />);
+    expect(screen.getByTestId("micro-reference-disclaimer").textContent).toBe(MICRO_REF_DISCLAIMER);
+    expect(MICRO_REF_DISCLAIMER).toMatch(/not the official College Board sheet/);
+    expect(MICRO_GROUPS.length).toBeGreaterThanOrEqual(5);
+    expect(screen.getByText(MICRO_GROUPS[0].items[0].expr)).toBeInTheDocument();
+  });
+  it("사칙 계산기는 사칙·괄호·소수만 계산하고 함수·거듭제곱은 거부한다", () => {
+    expect(evalBasic("(60 - 40) / 2")).toEqual({ ok: true, value: "10" });
+    expect(evalBasic("0.5 * 80 * 20")).toEqual({ ok: true, value: "800" });
+    expect(evalBasic("sqrt(9)").ok).toBe(false);
+    expect(evalBasic("2^3").ok).toBe(false);
+    expect(evalBasic("1/0").ok).toBe(false);
   });
 });

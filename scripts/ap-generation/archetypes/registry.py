@@ -60,6 +60,19 @@ CHEM_STAGES["chem_mc_all"] = sorted(n for n in CHEM if n.startswith("ch_"))
 CHEM_STAGES["chem_sets"] = sorted(n for n in CHEM if n.startswith("chs_"))
 CHEM_STAGES["chem_frq"] = sorted(CHEM_FRQ)
 CHEM_STAGES["chem_all"] = CHEM_STAGES["chem_mc_all"] + CHEM_STAGES["chem_sets"] + CHEM_STAGES["chem_frq"]
+# 2026-10-13 AP Microeconomics(P0): micro_p0_*.py 모듈을 두면 mi_ 접두 MC 원형·mif_ 접두 FRQ 원형과 STAGE_<이름> 목록이 자동 등록된다(micro_p1_mc …). 단원·스킬 표는 micro_coverage.py.
+_MI = [_il.import_module(_os.path.basename(f)[:-3]) for f in sorted(_glob.glob(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "micro_p0_*.py")))]
+MICRO = {n: (getattr(m, n), "0") for m in _MI for n in dir(m) if n.startswith("mi_") and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
+MICRO_FRQ = {n: (getattr(m, n), "0") for m in _MI for n in dir(m) if n.startswith("mif_") and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
+MICRO_STAGES = {}
+for _m in _MI:
+    for _n in dir(_m):
+        if _n.startswith("STAGE_"):
+            _k = "micro_" + _n[6:].lower()
+            MICRO_STAGES[_k] = MICRO_STAGES.get(_k, []) + [x for x in getattr(_m, _n) if x not in MICRO_STAGES.get(_k, [])]
+MICRO_STAGES["micro_mc_all"] = sorted(MICRO)
+MICRO_STAGES["micro_frq"] = sorted(MICRO_FRQ)
+MICRO_STAGES["micro_all"] = MICRO_STAGES["micro_mc_all"] + MICRO_STAGES["micro_frq"]
 GRAPH = {n: (getattr(m, n), "0") for m in GRAPH_MODS for n in dir(m) if n.startswith(("g_", "c_")) and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
 MC.update(GRAPH)
 GRAPH_STAGES = {}  # 단계별 목록(graph_s1_ab, graph_s1_bc …): calc_graph_stages.py 가 채운다
@@ -80,7 +93,7 @@ def sig(p):
     return hashlib.sha1(json.dumps([p.get("stem"), [o["text"] for o in p.get("options", [])], p.get("stimulus")], sort_keys=True).encode()).hexdigest()[:12]
 
 def batch(name, n, seed0):
-    fn = (MC.get(name) or STATS.get(name) or STATS_FRQ.get(name) or PHYS.get(name) or PHYS_FRQ.get(name) or CHEM.get(name) or CHEM_FRQ.get(name) or (FRQ.get(name),))[0]  # 통계 원형은 MC 사전(칼큘러스 회귀 테스트 대상)에 넣지 않는다
+    fn = (MC.get(name) or STATS.get(name) or STATS_FRQ.get(name) or PHYS.get(name) or PHYS_FRQ.get(name) or CHEM.get(name) or CHEM_FRQ.get(name) or MICRO.get(name) or MICRO_FRQ.get(name) or (FRQ.get(name),))[0]  # 통계 원형은 MC 사전(칼큘러스 회귀 테스트 대상)에 넣지 않는다
     out, seen, seed = [], set(), seed0
     while len(out) < n and seed < seed0 + 400:
         try:
@@ -100,6 +113,7 @@ if __name__ == "__main__":
         if which == "bc": print(json.dumps({"mc": list(BCMC), "frq": ["frq_series", "frq_parametric"]}))
         elif which == "bctopup": print(json.dumps({"mc": list(TOPUP), "frq": ["frq_euler_logistic"]}))
         elif which == "new": print(json.dumps({"mc": list(NEWMC), "frq": []}))
+        elif which.startswith("micro_"): print(json.dumps({"mc": [n for n in MICRO_STAGES.get(which, list(MICRO)) if n in MICRO], "frq": [n for n in MICRO_STAGES.get(which, []) if n in MICRO_FRQ or n in FRQ]}))
         elif which.startswith("chem"): print(json.dumps({"mc": [n for n in CHEM_STAGES.get(which, list(CHEM)) if n in CHEM], "frq": [n for n in CHEM_STAGES.get(which, []) if n in CHEM_FRQ]}))
         elif which.startswith("phys"): print(json.dumps({"mc": [n for n in PHYS_STAGES.get(which, list(PHYS)) if n in PHYS], "frq": [n for n in PHYS_STAGES.get(which, []) if n in PHYS_FRQ]}))
         elif which.startswith("stats"): print(json.dumps({"mc": [n for n in STATS_STAGES.get(which, list(STATS)) if n in STATS], "frq": [n for n in STATS_STAGES.get(which, []) if n in STATS_FRQ]}))  # 목록 순서 보존(위험 L→M→H)
@@ -137,6 +151,14 @@ if __name__ == "__main__":
             for q in (p["items"] if "items" in p else [p]):
                 b = q["blueprint"]
                 out.append({"id": q["archetype"], "topic": q["topic"], "skill": q["skill"], "calculator": "allowed", "stimulus": (q.get("stimulus") or p["stimulus"])["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]]})
+        print(json.dumps(out, indent=1))
+    elif cmd == "guide-micro":  # Microeconomics 원형의 가이드 항목(JSON): lib/ap-generation/subjects/micro-archetypes.json 의 원천.
+        out = []
+        for n in MICRO_STAGES["micro_mc_all"]:
+            p = (batch(n, 1, 0) or [None])[0]
+            if not p: raise SystemExit(f"no pack for {n}")
+            b = p["blueprint"]
+            out.append({"id": p["archetype"], "topic": p["topic"], "skill": p["skill"], "calculator": "allowed", "stimulus": p["stimulus"]["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]], "bc": False})
         print(json.dumps(out, indent=1))
     elif cmd == "guide-chem":  # Chemistry 원형의 가이드 항목(JSON): lib/ap-generation/subjects/chem-archetypes.json 의 원천. 세트는 문항마다 한 항목.
         out = []

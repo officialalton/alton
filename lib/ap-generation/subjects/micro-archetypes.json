@@ -1,0 +1,1872 @@
+[
+ {
+  "id": "mi_barriers",
+  "topic": "4.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted examples of entry barriers"
+  ],
+  "misconceptions": [
+   "Many identical sellers indicate low barriers to entry and perfect competition.",
+   "Easy exit describes low barriers; fixed costs are unrelated to the definition of a barrier.",
+   "Describes price-taking behavior in competitive markets, not a barrier to entry.",
+   "Price equal to marginal cost is an efficiency outcome, not a barrier to entry."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_cartel_cheat",
+  "topic": "4.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted explanation tied to the prisoners'-dilemma payoff structure"
+  ],
+  "misconceptions": [
+   "Cartel demand is downward sloping; quotas raise the price.",
+   "Cheating raises the cheater's profit in the short run.",
+   "A cartel that holds together earns monopoly-like profit, more than competitive firms.",
+   "Cartels are generally illegal, but they are not required to price at marginal cost."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_comp_adv_table",
+  "topic": "1.4",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact ratios of outputs vs reciprocal opportunity cost of the other good"
+  ],
+  "misconceptions": [
+   "Reverses the opportunity-cost comparison.",
+   "Uses one output number to claim an advantage in both goods.",
+   "A country cannot have the comparative advantage in both goods because opportunity costs are reciprocal.",
+   "Confuses absolute advantage (larger output) with comparative advantage (lower opportunity cost)."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_consumer_rule",
+  "topic": "1.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact ratio comparison vs sympy rational comparison"
+  ],
+  "misconceptions": [
+   "Compares prices only and ignores marginal utility per dollar.",
+   "Ignores the budget constraint.",
+   "Reverses the role of price; a higher price lowers marginal utility per dollar.",
+   "Believes a lower marginal utility means the good should be bought more."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_cost_atc_avc",
+  "topic": "3.2",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "Fraction division of the table values vs sympy closed form"
+  ],
+  "misconceptions": [
+   "Reports fixed cost without dividing by quantity.",
+   "Reports total variable cost without dividing by quantity.",
+   "Uses average variable cost, the wrong cost measure for this question.",
+   "Reports the marginal cost of the last unit."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_cost_curve_relation_graph",
+  "topic": "3.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "comparison of MC and ATC at the marker vs the sign of the numerical derivative of ATC"
+  ],
+  "misconceptions": [
+   "Reverses the relationship between marginal cost and the average.",
+   "States the correct position of MC but the wrong effect on the average.",
+   "Average fixed cost falls continuously as output rises.",
+   "Marginal cost equals ATC only at the minimum of ATC, which is point B."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_cost_graph_min",
+  "topic": "3.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "grid search of the ATC curve vs analytic sqrt(F/b)"
+  ],
+  "misconceptions": [
+   "Chooses the quantity where marginal cost is lowest, which is at zero output.",
+   "Chooses the right edge of the graph where costs are highest.",
+   "Chooses the quantity where marginal cost reaches the price intercept.",
+   "Chooses a quantity where marginal cost is still below average total cost, so the average is still falling."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_cost_relationships",
+  "topic": "3.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted cost-curve relationships"
+  ],
+  "misconceptions": [
+   "Marginal cost reaches its minimum at a smaller output than the minimum of average total cost.",
+   "Total cost increases with output, so it is smallest at zero output.",
+   "The two differ by average fixed cost, which is positive.",
+   "If marginal cost exceeded the average, the average would still be rising."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_cost_table_mc",
+  "topic": "3.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "difference of consecutive totals vs closed form a + b(2n-1)"
+  ],
+  "misconceptions": [
+   "Subtracts fixed cost from total cost (total variable cost).",
+   "Reports the change in cost from two units earlier, averaged incorrectly.",
+   "Reports the total cost of the last unit's quantity.",
+   "Divides the total cost by the quantity, which gives average total cost."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_cr4",
+  "topic": "4.1",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sum of the four largest shares vs numpy sort and slice"
+  ],
+  "misconceptions": [
+   "Adds the four smallest firms instead of the four largest.",
+   "Averages the four largest shares.",
+   "Adds the three largest firms.",
+   "Adds the two largest firms only (a two-firm concentration ratio)."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_cross_price",
+  "topic": "2.5",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact ratio vs sympy rational and sign rule"
+  ],
+  "misconceptions": [
+   "Gets the magnitude right but reverses the interpretation of the sign.",
+   "Flips the sign of the elasticity but keeps the original relationship.",
+   "Believes the elasticity needs additional data, though percentage changes are given.",
+   "Inverts the ratio of the two percentage changes."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_demand_determinant",
+  "topic": "2.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted determinants table with distractors from supply-side and own-price changes"
+  ],
+  "misconceptions": [
+   "The number of sellers affects supply, not demand.",
+   "Input costs shift the supply curve, not the demand curve.",
+   "A change in the good's own price moves along the demand curve; it does not shift it.",
+   "A costlier complement lowers demand, shifting the curve left, not right."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_demand_shift_graph",
+  "topic": "2.7",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "intersection of the shifted line with supply (exact) vs sympy solve"
+  ],
+  "misconceptions": [
+   "Reads the horizontal shift of demand at the old price as the new quantity, ignoring that the price adjusts.",
+   "Reverses the direction of the price change while moving the quantity the right way.",
+   "Uses the full vertical distance between the demand curves as the price change.",
+   "Moves the price but leaves the quantity unchanged, ignoring the movement along the supply curve."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_diminishing_onset",
+  "topic": "3.1",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "first drop in the difference sequence vs closed-form construction index"
+  ],
+  "misconceptions": [
+   "Picks the first worker where total product increases rather than where marginal product starts to fall.",
+   "Picks the worker whose total product is greatest.",
+   "Picks the worker after which total product starts to fall, but total product never falls here.",
+   "Picks the last worker whose marginal product is at its maximum."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_double_shift",
+  "topic": "2.7",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "rule table with ambiguity logic vs simulation over three relative shift sizes"
+  ],
+  "misconceptions": [
+   "Considers only the demand event and ignores the supply event.",
+   "Reverses the direction of the determinate effect.",
+   "Assumes the ambiguous variable does not change, although it depends on which shift is larger.",
+   "Considers only the supply event and ignores the demand event."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_dwl_floor_graph",
+  "topic": "2.8",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "triangle from exact coordinates vs numerical integration of the gap between demand and supply"
+  ],
+  "misconceptions": [
+   "Omits the one-half in the triangle area.",
+   "Uses the lost quantity times the equilibrium price.",
+   "Uses the height from the equilibrium price to the floor only.",
+   "Uses the whole surplus triangle at the floor quantity."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_dwl_tax",
+  "topic": "2.8",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "one-half times tax times quantity reduction vs numerical integration of the wedge between demand and supply prices"
+  ],
+  "misconceptions": [
+   "Multiplies the lost quantity by the price rather than by the tax.",
+   "Uses the remaining quantity instead of the lost quantity.",
+   "Omits the one-half from the triangle area.",
+   "Uses the tax revenue instead of the deadweight loss."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_economic_systems",
+  "topic": "1.2",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted descriptions mapped to a system label"
+  ],
+  "misconceptions": [
+   "Assumes prices and voluntary exchange alone drive decisions, ignoring the planning or custom the description names.",
+   "Treats any government role as a mix; the description does not combine market exchange with a meaningful government role.",
+   "Takes government direction of every decision as the defining feature, which the description does not contain.",
+   "Confuses an economic system with a market structure; a monopoly is a market structure, not a way to answer the three basic economic questions."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_efficiency_types",
+  "topic": "3.7",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted efficiency definitions"
+  ],
+  "misconceptions": [
+   "That is productive efficiency, not allocative efficiency.",
+   "Average fixed cost keeps falling and has no minimum, so it is not a standard efficiency criterion.",
+   "Describes a firm that should expand output; it is not an efficiency condition.",
+   "That indicates zero economic profit, not allocative efficiency."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_elasticity_graph",
+  "topic": "2.3",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact elasticity P/(slope x Q) for each line vs slope ordering"
+  ],
+  "misconceptions": [
+   "Believes crossing at the same point implies equal elasticity; elasticity also depends on the slope.",
+   "Confuses the slope with the elasticity; elasticity also depends on the price-quantity ratio.",
+   "Equates a steeper demand curve with greater responsiveness; a steeper curve is less elastic at the same point.",
+   "A straight steeper line is still not vertical, so it is not perfectly inelastic."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_entry_exit",
+  "topic": "3.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted adjustment table checked against a supply-shift price simulation"
+  ],
+  "misconceptions": [
+   "Reverses the direction of entry and exit.",
+   "Confuses long-run adjustment with short-run fixed costs.",
+   "Moves the supply curve the wrong direction when firms exit.",
+   "Treats exit as a demand-side change."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_equilibrium_numeric",
+  "topic": "2.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solve for price then quantity vs exact fraction formula"
+  ],
+  "misconceptions": [
+   "Reports the equilibrium price instead of the equilibrium quantity.",
+   "Sets the two intercepts equal instead of the quantities and solves incorrectly.",
+   "Adds the intercepts of the two equations.",
+   "Uses the quantity demanded at a price of zero."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_ext_graph",
+  "topic": "6.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "analytic crossing of D and MSC vs numeric search for maximum social net benefit"
+  ],
+  "misconceptions": [
+   "Reports the market equilibrium quantity instead of the overproduction.",
+   "Reports the price at the market equilibrium.",
+   "Reports the vertical distance between S and MSC (the external cost per unit).",
+   "Reports the efficient quantity instead of the overproduction."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_factor_derived",
+  "topic": "5.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements; wrong sentences reverse the derivation or the slope"
+  ],
+  "misconceptions": [
+   "Firms hire labor only to produce output, so factor demand depends on output demand.",
+   "Reverses the direction of derivation.",
+   "Labor demand slopes downward because marginal revenue product falls as more labor is hired.",
+   "The marginal revenue product depends on the output price, so the output price matters."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_factor_substitutes",
+  "topic": "5.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "substitute/complement rule table"
+  ],
+  "misconceptions": [
+   "Applies the substitution effect to complementary inputs.",
+   "Reverses the output effect for complementary inputs.",
+   "A change in the price of another input shifts the demand curve; it is not a movement along it.",
+   "A change in another input's price shifts the demand for labor."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_factors_production",
+  "topic": "1.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted factor-payment table"
+  ],
+  "misconceptions": [
+   "Wages are the payment to labor, not to the other factor named.",
+   "Interest is the payment to capital, not to the other factor named.",
+   "Rent is the payment to land, not to the other factor named.",
+   "Taxes are a payment to the government, not a payment to a factor of production."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_firm_supply",
+  "topic": "3.6",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted supply-curve definition"
+  ],
+  "misconceptions": [
+   "At prices below minimum AVC the firm shuts down and supplies nothing.",
+   "The firm supplies where price equals marginal cost, not average variable cost.",
+   "Average total cost does not give the profit-maximizing quantity at each price.",
+   "Average fixed cost is unrelated to the quantity chosen at each price."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_fixed_cost_effect",
+  "topic": "3.2",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "cost-function derivation: d/dF of MC and AVC is zero while ATC and AFC rise"
+  ],
+  "misconceptions": [
+   "Believes fixed cost enters marginal cost; marginal cost reflects only the change in variable cost.",
+   "Marginal cost does not depend on fixed cost at any output.",
+   "Confuses spreading fixed cost with a change in variable costs.",
+   "Average total cost includes average fixed cost, so it rises too."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_fixed_variable",
+  "topic": "3.2",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted cost classification table"
+  ],
+  "misconceptions": [
+   "Reverses the classification of fixed and variable costs.",
+   "Ties opportunity cost to profitability, which is unrelated.",
+   "Confuses the timing of payment with the change in cost from one more unit.",
+   "Confuses fixed and variable with explicit and implicit costs; this cost is a cash payment."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_free_rider",
+  "topic": "6.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted explanation"
+  ],
+  "misconceptions": [
+   "Public goods usually have large social benefits.",
+   "Public goods have near-zero marginal cost of serving another user.",
+   "Public goods are non-rival, and the problem is underprovision.",
+   "Valuation is not the reason; the inability to exclude non-payers is the reason."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_game_dominant",
+  "topic": "4.5",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "payoff_matrix",
+  "verifiedBy": [
+   "comparison of payoffs against each rival strategy vs micro_checks.nash dominance lists"
+  ],
+  "misconceptions": [
+   "Compares payoffs for only one rival choice; for both choices the same strategy pays more.",
+   "Defines a dominant strategy by the best cell, not by the best response to every rival choice.",
+   "Names the other strategy, which is dominated.",
+   "A dominant strategy is defined for one player regardless of what the other has."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_game_nash",
+  "topic": "4.5",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "payoff_matrix",
+  "verifiedBy": [
+   "best-response enumeration vs the independent Nash module (micro_checks.nash)"
+  ],
+  "misconceptions": [
+   "Airline X could earn more by switching strategies, so this is not a best response.",
+   "Airline Y could earn more by switching strategies, so this is not a best response.",
+   "Believes a game must have a mixed outcome; this game has a pure-strategy equilibrium.",
+   "Chooses the outcome that gives both firms higher payoffs, but at least one firm can gain by switching, so it is not an equilibrium."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_game_pareto",
+  "topic": "4.5",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "payoff_matrix",
+  "verifiedBy": [
+   "enumeration of cells strictly better for both than the equilibrium cell vs the independent Nash module for the equilibrium"
+  ],
+  "misconceptions": [
+   "This is the Nash equilibrium itself, so it cannot give both firms more than the equilibrium.",
+   "Both firms earn no more than in the Nash equilibrium.",
+   "Only one firm earns more than in the Nash equilibrium, so the outcome is not better for both.",
+   "Believes the equilibrium is always the best outcome for both players."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_hhi",
+  "topic": "4.1",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sum of squared shares (exact integers) vs numpy sum of squares"
+  ],
+  "misconceptions": [
+   "Uses the average of the squared shares.",
+   "Squares only the largest firm's share.",
+   "Adds the market shares (always 100) instead of squaring them.",
+   "Squares the sum of the shares."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_hire_rule",
+  "topic": "5.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct comparison of MRP and the wage vs sympy inequality"
+  ],
+  "misconceptions": [
+   "Compares average product, not marginal revenue product, with the wage.",
+   "Confuses a hiring adjustment with a shutdown decision.",
+   "Positive values do not imply that profit is maximized; MRP must equal the wage.",
+   "Compares totals instead of the marginal hiring rule."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_hire_table",
+  "topic": "5.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "count of workers with MRP at least the wage vs argmax of profit (sum of MRP minus wage bill)"
+  ],
+  "misconceptions": [
+   "Hires one more worker than the profit-maximizing number, although that worker's marginal revenue product is below the wage.",
+   "Hires no workers because the wage exceeds the average product.",
+   "Hires the first worker only because the first worker has the highest marginal product.",
+   "Hires the number of workers that maximizes total product regardless of the wage."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_import_numeric",
+  "topic": "2.9",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "Qd minus Qs at the world price (exact) vs sympy evaluation"
+  ],
+  "misconceptions": [
+   "Reports the quantity supplied domestically at the world price instead of imports.",
+   "Reports the difference between quantity demanded at the world price and the domestic equilibrium quantity.",
+   "Reports the quantity demanded at the world price instead of imports.",
+   "Reports the domestic equilibrium quantity."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_income_elasticity",
+  "topic": "2.5",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact ratio vs sympy rational, classification by threshold on the value"
+  ],
+  "misconceptions": [
+   "Inverts the ratio of the percentage changes.",
+   "Flips the sign and misclassifies the good.",
+   "Gets the elasticity right but misapplies the classification thresholds of 0 and 1.",
+   "Flips the sign of the elasticity but keeps the same classification."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_labor_market_shift",
+  "topic": "5.2",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "shift rule table vs numeric linear-market simulation"
+  ],
+  "misconceptions": [
+   "Shifts the labor demand curve instead of the labor supply curve.",
+   "Predicts an employment change but no change in the wage.",
+   "Reads the wage change as a movement along the curve and predicts the opposite employment change.",
+   "Shifts the labor supply curve in the wrong direction."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_least_cost",
+  "topic": "5.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact ratio comparison vs sympy rational comparison"
+  ],
+  "misconceptions": [
+   "Ignores that the budget is fixed.",
+   "Reverses the least-cost rule.",
+   "The firm is at least cost only if the marginal product per dollar is equal across inputs.",
+   "Compares marginal products without adjusting for prices."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_lorenz_gini",
+  "topic": "6.5",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements"
+  ],
+  "misconceptions": [
+   "A Gini coefficient of 0 indicates perfect equality and 1 indicates perfect inequality.",
+   "The Lorenz curve never lies above the line of equality.",
+   "Reverses the interpretation; the line of equality represents perfect equality.",
+   "A Gini coefficient of 0 means perfect equality."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_lorenz_graph",
+  "topic": "6.5",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "curve exponents ordered by the Gini formula (p-1)/(p+1) vs numerical integration of the area under each curve"
+  ],
+  "misconceptions": [
+   "Reverses which curve is farther from the line of equality.",
+   "Believes a smaller share for the poorest households means a lower Gini coefficient.",
+   "Every Lorenz curve passes through the same endpoints; the Gini coefficient depends on the area in between.",
+   "Reverses the interpretation: a curve closer to the equality line means less inequality."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_lr_economies",
+  "topic": "3.3",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "slope sign of the plotted curve at A, B, C vs analytic derivative"
+  ],
+  "misconceptions": [
+   "Equates a larger output with economies of scale; at C average cost is rising.",
+   "Ignores the downward-sloping region.",
+   "Average cost is falling at A, which is economies of scale, not constant returns.",
+   "Economies of scale concern falling long-run average cost, not the slope of marginal cost."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_mb_mc_table",
+  "topic": "1.5",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "last hour with MB >= MC vs argmax of cumulative net benefit"
+  ],
+  "misconceptions": [
+   "Chooses the quantity just below the best one, stopping before the last hour with a positive net gain.",
+   "Chooses the hour where marginal cost first exceeds marginal benefit instead of the last hour that is worth doing.",
+   "Chooses the quantity where marginal benefit equals zero.",
+   "Chooses the first hour where marginal benefit exceeds marginal cost and stops there."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_mc_excess_capacity",
+  "topic": "4.4",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted comparison; tangency of demand with ATC implies P > MC and output below minimum ATC"
+  ],
+  "misconceptions": [
+   "Price below marginal cost would not maximize profit.",
+   "Free entry drives economic profit to zero in the long run.",
+   "Describes perfect competition in the long run.",
+   "Price equals ATC but is above marginal cost, so allocative efficiency is not achieved."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_mc_graph_longrun",
+  "topic": "4.4",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "tangency of demand and ATC found by numeric search vs the algebraic tangency condition F = B Q*^2"
+  ],
+  "misconceptions": [
+   "Takes the price to equal marginal cost, as in perfect competition; this firm charges the price on its demand curve at its output.",
+   "Treats the fixed cost as a loss even though revenue covers all costs.",
+   "Takes the price to be marginal cost and then reports a margin over marginal cost as profit.",
+   "Computes profit as (price minus marginal cost) times quantity, which ignores fixed cost; ATC at this output equals the price."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_mc_short_long",
+  "topic": "4.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted adjustment table; direction checked against the demand-shift mechanism"
+  ],
+  "misconceptions": [
+   "Reverses the direction of entry and exit.",
+   "In the long run firms can exit, which eliminates losses.",
+   "Applies the perfectly competitive long-run condition; with downward-sloping demand, price equals ATC above its minimum.",
+   "Exit leaves fewer firms, which raises the demand facing each remaining firm."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_mfc_numeric",
+  "topic": "5.4",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "difference of total labor cost vs closed form w0 + s(2n-1)"
+  ],
+  "misconceptions": [
+   "Reports the wage paid to the last worker rather than the extra cost of hiring that worker.",
+   "Reports the average cost of labor of the previous worker count.",
+   "Adds the wage of the previous worker to the wage of the last worker.",
+   "Reports the total labor cost rather than the marginal cost."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_min_wage_monopsony",
+  "topic": "5.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted outcome verified by the numeric monopsony model with a wage floor"
+  ],
+  "misconceptions": [
+   "A binding minimum wage exceeds the monopsony wage.",
+   "A minimum wage below the competitive wage lowers the marginal factor cost over the relevant range, so employment can rise.",
+   "Applies the competitive-market result to a monopsony.",
+   "A minimum wage above the competitive wage would reduce employment."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_monopoly_dwl",
+  "topic": "4.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact-fraction module (micro_checks.monopoly DWL) vs numeric integral of demand minus marginal cost over the lost quantity"
+  ],
+  "misconceptions": [
+   "Uses the whole demand triangle above marginal cost as the deadweight loss.",
+   "Reports the per-unit gap between price and marginal cost instead of an area.",
+   "Omits the one-half in the triangle area (this also equals the monopolist's profit rectangle, a different measure).",
+   "Uses the price instead of the price-cost gap as the height."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_monopoly_graph",
+  "topic": "4.2",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "analytic MR = MC intersection vs grid search for the crossing of the plotted lines"
+  ],
+  "misconceptions": [
+   "Reports the demand intercept.",
+   "Reads the price from the marginal cost curve at the profit-maximizing quantity.",
+   "Reads the marginal revenue value at the competitive quantity as the price.",
+   "Reports the profit-maximizing quantity as the price."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_monopoly_numeric",
+  "topic": "4.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact-fraction MR = MC module vs sympy derivative of profit"
+  ],
+  "misconceptions": [
+   "Sets total revenue per unit equal to marginal cost using demand instead of marginal revenue.",
+   "Sets price equal to marginal cost, which gives the competitive quantity.",
+   "Reports the profit-maximizing price at the competitive quantity.",
+   "Reports the demand intercept as the quantity."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_monopoly_vs_pc",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted comparison; verified by the exact MR = MC module showing Q_m < Q_c and P_m > MC"
+  ],
+  "misconceptions": [
+   "Ignores that a monopolist restricts output to raise the price.",
+   "Believes output restriction does not raise the price.",
+   "Reverses the effect of market power on quantity and price.",
+   "Describes the perfectly competitive outcome."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_monopsony_concept",
+  "topic": "5.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted outcomes verified by the numeric monopsony model (MFC above the supply curve)"
+  ],
+  "misconceptions": [
+   "Buyer power lowers the wage; it does not raise it.",
+   "Ignores that marginal factor cost exceeds the wage for a monopsonist.",
+   "Reverses the effect of buyer power on employment and the wage.",
+   "A monopsonist pays a wage below MRP."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_monopsony_graph",
+  "topic": "5.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "algebraic intersection of MRP and MFC (sympy) vs the construction of the lines and numeric evaluation of S at that quantity"
+  ],
+  "misconceptions": [
+   "Reports the marginal factor cost at point E as the wage; a monopsonist pays the wage on the supply curve.",
+   "Reports the vertical intercept of the MRP curve.",
+   "Reports the vertical intercept of the supply curve.",
+   "Reports the wage a competitive labor market would pay (where MRP equals S)."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_monopsony_numeric",
+  "topic": "5.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "algebraic intersection of MRP and MFC (sympy) vs row-by-row scan of the table"
+  ],
+  "misconceptions": [
+   "Pays the marginal factor cost instead of the wage on the supply curve.",
+   "Hires where MRP equals the wage (the competitive rule) instead of where MRP equals MFC.",
+   "Hires one worker fewer than the quantity where MRP equals MFC.",
+   "Adds an arbitrary markup to the supply-curve wage."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_movement_vs_shift",
+  "topic": "2.1",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario-to-description table"
+  ],
+  "misconceptions": [
+   "Treats a change caused by something other than the good's own price as a movement along the curve.",
+   "Reverses the direction of the demand shift.",
+   "Mistakes a change caused by a supply determinant for a movement along the supply curve.",
+   "Attributes a demand-side or own-price change to the supply curve."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_mp_numeric",
+  "topic": "3.1",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "difference of consecutive totals vs numpy diff and average-product contrast"
+  ],
+  "misconceptions": [
+   "Reports the extra output from the previous worker.",
+   "Reports the average product (total product divided by the number of workers).",
+   "Reports the extra output from the next worker.",
+   "Reports the total product with this many workers instead of the extra output from the last worker."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_mr_demand",
+  "topic": "4.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted explanation; wrong sentences contradict the single-price downward-sloping-demand assumption"
+  ],
+  "misconceptions": [
+   "A monopolist is a price maker, not a price taker.",
+   "Market power does not make marginal revenue exceed price.",
+   "Describes perfect price discrimination, not the single-price monopolist assumed here.",
+   "Marginal revenue is positive at low output and negative only at high output."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_mr_mc_rule",
+  "topic": "3.5",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct comparison of MR and MC vs sympy inequality"
+  ],
+  "misconceptions": [
+   "Reverses the marginal rule.",
+   "Treats positive values as equality; profit is maximized only where marginal revenue equals marginal cost.",
+   "Confuses a marginal adjustment with the shutdown decision.",
+   "Ignores the marginal comparison; positive total revenue does not mean profit is maximized."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_mrp_value",
+  "topic": "5.3",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "difference of totals times price vs numpy diff"
+  ],
+  "misconceptions": [
+   "Multiplies the total product, instead of the marginal product, by the output price.",
+   "Divides the marginal product by the price.",
+   "Reports the marginal product without multiplying by the output price.",
+   "Uses the average product times the price."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_msb_msc_table",
+  "topic": "6.1",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "last unit with MSB above MSC vs argmax of cumulative social net benefit"
+  ],
+  "misconceptions": [
+   "Chooses zero units because the total cost is larger than the first unit's benefit.",
+   "Chooses the first unit only.",
+   "Chooses one unit fewer than the efficient quantity.",
+   "Chooses the largest quantity shown."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_natural_monopoly",
+  "topic": "6.4",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted regulatory outcomes verified with the cost relationship ATC > MC for decreasing average cost"
+  ],
+  "misconceptions": [
+   "Believes marginal-cost pricing leaves the natural monopoly with zero profit; ATC exceeds MC, so it incurs a loss.",
+   "At P = ATC price exceeds marginal cost, so output is below the efficient quantity.",
+   "For a natural monopoly ATC exceeds MC, so P = MC causes a loss.",
+   "A higher price lowers quantity demanded."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_neg_externality",
+  "topic": "6.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements; direction verified by the numeric wedge model where MSC = MPC + external cost"
+  ],
+  "misconceptions": [
+   "Describes a positive externality, not a negative one.",
+   "A subsidy would increase output further; the efficient policy is a tax or regulation.",
+   "Reverses the relationship between private and social cost.",
+   "Voluntary trade is efficient only without externalities."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_normal_profit",
+  "topic": "3.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements about economic profit"
+  ],
+  "misconceptions": [
+   "Confuses zero economic profit with a loss.",
+   "Accounting profit can be positive when economic profit is zero because implicit costs are excluded.",
+   "Ignores implicit costs; zero economic profit still includes a normal return for the owners.",
+   "Entry occurs only when economic profit is positive."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_opp_cost_choice",
+  "topic": "1.1",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sort of the three pay values vs symbolic maximum over the unchosen options"
+  ],
+  "misconceptions": [
+   "Counts the pay from the chosen option as its cost; the opportunity cost is the value of the best alternative that is given up, not the benefit gained.",
+   "Treats opportunity cost as an out-of-pocket money expense; no money was paid, so the cost is taken to be zero.",
+   "Uses the least valuable unchosen option instead of the next-best one.",
+   "Adds the pay of both unchosen options; only the single next-best alternative is forgone."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pc_demand_shift",
+  "topic": "3.7",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted adjustment table verified by a supply-and-demand simulation with entry shifting supply until profit is zero"
+  ],
+  "misconceptions": [
+   "Confuses the firm's price-taking behavior with the market price, which moves with market demand.",
+   "Assumes a constant-cost industry has rising costs; the long-run supply curve is horizontal.",
+   "Reverses the short-run price direction and the direction of entry and exit.",
+   "Gets the direction of long-run adjustment wrong."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pc_graph_decision",
+  "topic": "3.6",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "price against minimum AVC and minimum ATC read from analytic curve values vs numeric curve minima"
+  ],
+  "misconceptions": [
+   "Uses price equals average total cost as the output rule; the firm produces where price equals marginal cost.",
+   "Judges a price between AVC and ATC as profit or shutdown instead of a loss-minimizing production decision.",
+   "Treats a price above ATC as a loss or shutdown.",
+   "Treats any price on the graph as a zero-profit price; zero profit occurs only at the minimum of ATC."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pc_graph_profit",
+  "topic": "3.7",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "(P - ATC) x Q read from the curve coordinates vs total revenue minus cost function TC=F+aQ+Q^2"
+  ],
+  "misconceptions": [
+   "Reports the same size with the opposite sign.",
+   "Uses price minus average variable cost times quantity (profit before fixed cost).",
+   "Reports the per-unit margin instead of multiplying by quantity.",
+   "Uses price minus marginal cost, which is zero at the profit-maximizing output."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pc_longrun",
+  "topic": "3.7",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted long-run conditions"
+  ],
+  "misconceptions": [
+   "Price above average total cost would imply positive profit and entry.",
+   "Price below average total cost means an economic loss, not a normal profit.",
+   "Positive profit would attract entry, so it cannot persist in the long run.",
+   "Confuses the long-run conditions with relationships among other cost curves."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pd_conditions",
+  "topic": "4.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted conditions"
+  ],
+  "misconceptions": [
+   "If elasticities are identical there is no gain from charging different prices.",
+   "Resale would let low-price buyers undercut the higher-price market.",
+   "A price taker cannot set different prices; it takes the market price.",
+   "Price discrimination refers to price differences not explained by cost differences."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pd_markets",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "elasticity comparison rule vs inverse-elasticity markup formula (P - MC)/P = 1/e"
+  ],
+  "misconceptions": [
+   "Reverses the rule: the more elastic market should get the lower price.",
+   "Uses total revenue rather than elasticity to set prices.",
+   "Reverses the implication of inelastic demand.",
+   "With different elasticities, equal prices do not maximize profit."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pd_perfect",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted outcomes verified by the identity MR = P under perfect discrimination"
+  ],
+  "misconceptions": [
+   "A perfect price discriminator charges each buyer their maximum willingness to pay, leaving no consumer surplus.",
+   "Output cannot exceed the efficient quantity where price equals marginal cost.",
+   "Describes the single-price monopolist, not a perfect price discriminator.",
+   "Buyers pay their willingness to pay, which exceeds marginal cost, so the firm earns profit."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pe_midpoint",
+  "topic": "2.3",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact Fraction midpoint ratio vs sympy symbolic expression"
+  ],
+  "misconceptions": [
+   "Uses the initial price and quantity as the base for both percentage changes instead of the midpoints.",
+   "Uses the new quantity and price as the base instead of the midpoints.",
+   "Reports the slope of the demand curve (change in quantity over change in price) instead of an elasticity.",
+   "Inverts the ratio, dividing the percentage change in price by the percentage change in quantity."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pe_pct",
+  "topic": "2.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "product rule vs sympy symbolic evaluation"
+  ],
+  "misconceptions": [
+   "Reports the right size with the wrong sign, ignoring the law of demand.",
+   "Multiplies the price change by the elasticity but with the elasticity inverted.",
+   "Adds the elasticity to the percentage price change.",
+   "Divides the price change by the elasticity instead of multiplying."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pe_revenue",
+  "topic": "2.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "rule sign(1-ed)*sign(dP) vs exact total revenue before and after a 10 percent change"
+  ],
+  "misconceptions": [
+   "Believes the initial price level is needed, but the elasticity alone determines the direction of the revenue change.",
+   "Judges total revenue from the price change alone and ignores the elasticity.",
+   "Confuses the offsetting direction of price and quantity with unit elasticity; they offset only when elasticity equals one.",
+   "Adds a condition about necessities that is unrelated to the elasticity rule."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_per_unit_tax",
+  "topic": "2.8",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact solution of the shifted supply equation vs sympy solve"
+  ],
+  "misconceptions": [
+   "Shifts the supply curve by the tax in the wrong direction.",
+   "Keeps the pre-tax equilibrium quantity, ignoring the effect of the tax.",
+   "Reports the price consumers pay instead of the quantity.",
+   "Shifts both curves by the tax."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pes_determinant",
+  "topic": "2.4",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted determinants table; wrong sentences are demand-side or inelastic determinants"
+  ],
+  "misconceptions": [
+   "Scarce, hard-to-expand inputs make supply less elastic.",
+   "Confuses the elasticity of supply with the elasticity of demand.",
+   "Confuses a determinant of the elasticity of demand with a determinant of the elasticity of supply.",
+   "A long adjustment lag is a reason supply is less elastic in the short run."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pigou_numeric",
+  "topic": "6.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "last unit with MPB >= MPC + MEC (exact) vs argmax of cumulative social net benefit"
+  ],
+  "misconceptions": [
+   "Uses the gap between marginal private benefit and cost at the market quantity.",
+   "Uses the marginal external cost of the first unit.",
+   "Uses the total external cost at the efficient quantity.",
+   "Uses the marginal external cost at the market quantity instead of the efficient quantity."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pos_ext_graph",
+  "topic": "6.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "analytic crossing of MSB and S vs numeric search for the maximum social net benefit"
+  ],
+  "misconceptions": [
+   "Reports the vertical distance between D and MSB (the external benefit per unit).",
+   "Reports the equilibrium price.",
+   "Reports twice the shortfall.",
+   "Reports the market equilibrium quantity instead of the shortfall."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pos_externality",
+  "topic": "6.2",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements; direction verified by the numeric wedge model where MSB = MPB + external benefit"
+  ],
+  "misconceptions": [
+   "Describes a negative externality.",
+   "A price ceiling would reduce quantity and does not capture the external benefit.",
+   "A tax would reduce output further when the market already underproduces.",
+   "Private and social benefits differ when there is a positive externality."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_ppc_graph_points",
+  "topic": "1.3",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "curve equation x^2/a^2+y^2/b^2=1 inequality test vs marker-to-curve vertical distance"
+  ],
+  "misconceptions": [
+   "Reverses efficient and inefficient points; points on the curve are efficient and points inside are not.",
+   "Reads points inside the curve as unattainable and outside as attainable.",
+   "Treats points outside the PPC as efficient, ignoring the resource constraint.",
+   "Treats any attainable point as efficient and thinks trade moves production outside the curve."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_ppc_opp_cost",
+  "topic": "1.3",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact ratio of changes vs numpy least-squares slope of the two points"
+  ],
+  "misconceptions": [
+   "Divides the capital goods gained by the consumer goods lost, which inverts the ratio.",
+   "Reports the number of capital goods gained instead of the ratio.",
+   "Uses the slope from the first row to the last row instead of the two named combinations.",
+   "Reports the total consumer goods given up instead of the amount per capital good."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_ppc_shift",
+  "topic": "1.3",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted event-effect table"
+  ],
+  "misconceptions": [
+   "Assumes any change to a single input removes capacity for both goods in this way.",
+   "Assumes any change makes the curve grow in both directions.",
+   "Assumes a technology that helps one good moves the other axis intercept as well.",
+   "Reverses which good the technology affects."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_price_control_graph",
+  "topic": "2.8",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "min-of-quantities rule with exact quantities vs unit-by-unit willingness counting"
+  ],
+  "misconceptions": [
+   "Treats the price control as nonbinding or as having no effect on the quantity traded.",
+   "Assumes trade equals the larger of quantity demanded and quantity supplied; the short side limits trade.",
+   "Reverses the shortage/surplus label for this type of price control.",
+   "Keeps the equilibrium quantity as the amount traded even though trade is limited by the short side."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_price_floor_surplus",
+  "topic": "2.8",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "Qs minus Qd at the floor (exact) vs sympy evaluation, and floor above the equilibrium price"
+  ],
+  "misconceptions": [
+   "Reports the quantity supplied at the price floor rather than the difference.",
+   "Reports the difference between the quantity supplied and the equilibrium quantity.",
+   "Reports the difference between the equilibrium quantity and the quantity demanded.",
+   "Reports the quantity demanded at the price floor rather than the difference."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_profit_max_table",
+  "topic": "3.5",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "last unit with price at least marginal cost vs argmax of total profit"
+  ],
+  "misconceptions": [
+   "Chooses the quantity just after marginal cost exceeds the price.",
+   "Chooses the quantity where marginal cost first equals the fixed cost.",
+   "Chooses the quantity that minimizes average total cost instead of the quantity where price equals marginal cost.",
+   "Chooses the largest quantity in the table."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_profit_numeric",
+  "topic": "3.5",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "(P - ATC) x Q vs total revenue minus total cost"
+  ],
+  "misconceptions": [
+   "Reports the same size with the opposite sign.",
+   "Reports the per-unit margin instead of multiplying by the quantity.",
+   "Uses marginal cost equal to price, which would imply zero profit per unit.",
+   "Uses price times quantity (total revenue) as the profit."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_profit_types",
+  "topic": "3.4",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "revenue minus explicit (and implicit) costs vs sympy arithmetic"
+  ],
+  "misconceptions": [
+   "Subtracts only the implicit costs from revenue.",
+   "Reports the total of explicit and implicit costs rather than the profit.",
+   "Reports total revenue without subtracting any costs.",
+   "Reports economic profit instead of accounting profit."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_public_good",
+  "topic": "6.3",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted classification table"
+  ],
+  "misconceptions": [
+   "Treats a rival and excludable good as non-rival or non-excludable.",
+   "Treats a rival, non-excludable good as one that is non-rival.",
+   "Treats a good that is non-rival and non-excludable as one of the other categories.",
+   "Confuses a classification by rivalry and excludability with a market structure."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_public_good_efficient",
+  "topic": "6.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "count of units whose summed benefit exceeds the cost vs argmax of cumulative net social benefit"
+  ],
+  "misconceptions": [
+   "Counts only the units for which Person A's benefit alone covers the marginal cost.",
+   "Chooses one fewer unit than the efficient quantity.",
+   "Chooses one more unit than the efficient quantity.",
+   "Chooses the largest quantity shown."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_related_market",
+  "topic": "2.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "substitute/complement rule table vs demand-shift simulation"
+  ],
+  "misconceptions": [
+   "Reads the price change as a movement along the curve and predicts the opposite quantity change.",
+   "Predicts a price change but no quantity change in the related market.",
+   "Shifts the supply of ink cartridges instead of its demand.",
+   "Predicts a quantity change but no price change."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_scarcity_concept",
+  "topic": "1.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted definitions; each wrong sentence encodes one named confusion"
+  ],
+  "misconceptions": [
+   "Counts only the explicit money cost and ignores the value of the time that is given up.",
+   "Confuses the buyer's opportunity cost with the seller's production cost.",
+   "Mistakes the benefit of the chosen option for a lack of cost; choices always have a forgone alternative.",
+   "Adds all alternatives instead of using only the next-best one."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_shift_demand",
+  "topic": "2.7",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "shift rule table vs numeric linear-market simulation of the new equilibrium"
+  ],
+  "misconceptions": [
+   "Reads the price change as a movement along one curve, so quantity is predicted to move opposite to the shift.",
+   "Predicts a quantity change but no price change, ignoring that a shift changes the equilibrium price.",
+   "Shifts the demand curve in the wrong direction.",
+   "Predicts a price change but no change in quantity, ignoring that a shifted curve moves along the other curve."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_shift_supply",
+  "topic": "2.7",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "shift rule table vs numeric linear-market simulation of the new equilibrium"
+  ],
+  "misconceptions": [
+   "Reads the price change as a movement along one curve, so quantity is predicted to move opposite to the shift.",
+   "Predicts a quantity change but no price change, ignoring that a shift changes the equilibrium price.",
+   "Shifts the supply curve in the wrong direction.",
+   "Predicts a price change but no change in quantity, ignoring that a shifted curve moves along the other curve."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_shortage_numeric",
+  "topic": "2.7",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "difference of exact quantities vs sympy evaluation and equilibrium-price comparison"
+  ],
+  "misconceptions": [
+   "Gets the size right but reverses the surplus/shortage label; when price is above equilibrium, the market has a surplus.",
+   "Reports the quantity demanded rather than the difference between demand and supply.",
+   "Adds the equilibrium quantity to the gap.",
+   "Compares one quantity with the equilibrium quantity instead of comparing quantity demanded with quantity supplied."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_shutdown_decision",
+  "topic": "3.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "min of operating loss and fixed cost (exact) vs sympy minimum and P < AVC rule"
+  ],
+  "misconceptions": [
+   "Reaches the wrong decision and attaches the loss of the other scenario.",
+   "Reaches the wrong decision and reports total cost as the loss.",
+   "Reaches the wrong decision by comparing price with the wrong cost measure; the loss shown is the loss that goes with that wrong decision.",
+   "Chooses the right action but reports the loss from the other scenario."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_shutdown_rule",
+  "topic": "3.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted price-versus-cost comparison table"
+  ],
+  "misconceptions": [
+   "Claims profit although price is not above average total cost.",
+   "Treats any loss as a reason to shut down; the rule compares price with average variable cost, not with average total cost.",
+   "Applies the shutdown rule when price exceeds average variable cost.",
+   "Uses price equals average total cost as the output rule; profit maximization requires marginal cost to equal price."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_structure_identify",
+  "topic": "4.1",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted structure descriptions"
+  ],
+  "misconceptions": [
+   "Mistakes product differentiation with free entry for a market with barriers or a single seller.",
+   "Mistakes interdependent behavior among a few firms for a market with many sellers or one seller.",
+   "Mistakes any large market share or barriers for a single seller with no close substitutes.",
+   "Treats a market with economies of scale over the whole demand range as the structure described, which the description does not mention."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_subsidy_effect",
+  "topic": "2.8",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "supply-shift rule vs linear-market simulation"
+  ],
+  "misconceptions": [
+   "Treats the subsidy as a boost to demand, which would raise the price buyers pay.",
+   "Predicts a price change without a quantity change.",
+   "Gets the price effect but applies the law of demand backward to quantity.",
+   "Treats the subsidy like a tax on sellers, which shifts supply left."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_sunk_cost",
+  "topic": "1.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct comparison of additional benefit and additional cost vs sympy inequality"
+  ],
+  "misconceptions": [
+   "Lets a sunk cost drive a forward-looking decision.",
+   "Assumes sunk costs can be recovered, which contradicts the non-refundable payment.",
+   "Treats an unrecoverable cost as zero while still counting its payment as a benefit.",
+   "Counts the sunk payment as a benefit of going."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_surplus_concept",
+  "topic": "2.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements about equilibrium"
+  ],
+  "misconceptions": [
+   "Surplus is equal only in special cases; the split depends on the slopes of the curves.",
+   "At equilibrium the marginal benefit of the last unit equals its marginal cost.",
+   "Consumer surplus is positive because many buyers are willing to pay more than the equilibrium price.",
+   "Deadweight loss is zero at the efficient equilibrium."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_surplus_numeric",
+  "topic": "2.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "triangle formula from exact intercepts vs numerical integration of the curves"
+  ],
+  "misconceptions": [
+   "Omits the one-half in the triangle area formula.",
+   "Uses the price times the quantity (total expenditure).",
+   "Computes total surplus (consumer plus producer).",
+   "Uses the other surplus triangle (producer instead of consumer, or the reverse)."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_tariff_effects",
+  "topic": "2.9",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted tariff-effect table"
+  ],
+  "misconceptions": [
+   "Describes the effect of removing a tariff, not imposing one.",
+   "Assumes a small importing country changes the world price.",
+   "Believes a tariff can reduce imports without changing the domestic price.",
+   "Believes a higher domestic price also benefits consumers."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_tax_graph_read",
+  "topic": "2.8",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "areas from exact marker coordinates vs sympy equilibrium solution with the tax"
+  ],
+  "misconceptions": [
+   "Uses the tax revenue rectangle instead of the deadweight-loss triangle.",
+   "Uses the new quantity instead of the lost quantity as the base.",
+   "Uses the price change of buyers instead of the whole tax as the height.",
+   "Omits the one-half in the triangle area."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_tax_incidence_elasticity",
+  "topic": "2.8",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "elasticity comparison rule vs numeric tax simulation in a linear market with matching slopes"
+  ],
+  "misconceptions": [
+   "Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more.",
+   "Assumes the price always rises by the full tax.",
+   "Ignores that elasticities determine how the burden is shared.",
+   "Believes the legal incidence determines the economic incidence."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_tax_incidence_numeric",
+  "topic": "2.8",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "difference of exact post-tax and pre-tax buyer prices vs closed form d*t/(b+d)"
+  ],
+  "misconceptions": [
+   "Assumes buyers pay the entire tax.",
+   "Reports the pre-tax equilibrium price.",
+   "Assumes the tax is split equally between buyers and sellers.",
+   "Reports the share paid by sellers instead of the share paid by buyers."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_tax_progressive",
+  "topic": "6.5",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact tax-rate fractions compared across incomes vs sympy ordering"
+  ],
+  "misconceptions": [
+   "Labels the tax progressive when the tax rate does not rise with income; the tax paid in dollars rises but the percentage does not.",
+   "Confuses dollars of tax paid with the share of income paid as tax.",
+   "Taxes paid differ across incomes, so this is not a lump-sum tax.",
+   "Labels the tax proportional although the percentage of income paid changes."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_trade_terms",
+  "topic": "1.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "interval test a < terms < b vs symbolic midpoint inside the interval"
+  ],
+  "misconceptions": [
+   "Sets the price equal to Country A's opportunity cost, so Country A gains nothing from trading.",
+   "Sets the price above Country B's opportunity cost, so Country B would lose by importing.",
+   "Multiplies the two opportunity costs instead of choosing a value between them.",
+   "Sets the price equal to Country B's opportunity cost, so Country B gains nothing from trading."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_utility_rule",
+  "topic": "1.6",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "greedy marginal-utility-per-dollar purchases vs brute-force search over all affordable bundles"
+  ],
+  "misconceptions": [
+   "Buys one more unit of X than the utility-maximizing quantity.",
+   "Splits the budget equally between X and Y by spending.",
+   "Buys no X because Y has smaller marginal utility numbers.",
+   "Buys X until its marginal utility falls to the lowest marginal utility of Y, ignoring prices."
+  ],
+  "bc": false
+ }
+]
