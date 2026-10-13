@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/**": ["./node_modules/pdfjs-dist/legacy/build/**"],
     // 관리자 'AP 재고 관리'(2026-10-12): 서버 액션이 저장소에 커밋된 재고 산출물을 파일로 읽는다(스크린샷 PNG 는 제외 — 화면 증거 JSON 만).
-    "/admin": ["./data/ap/stock/*.json", "./data/ap/render-check/report.json", "./data/ap/screen-evidence/*.json", "./data/ap/curriculum-2027/*.json"],
+    "/admin": ["./data/ap/stock/*.json", "./data/ap/stock/assembled/*.json","./data/ap/render-check/report.json", "./data/ap/screen-evidence/*.json", "./data/ap/curriculum-2027/*.json"],
   },
 };
 

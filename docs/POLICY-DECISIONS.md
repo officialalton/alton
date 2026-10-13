@@ -66,3 +66,4 @@
 - AP Calculus AB·BC 공통 범위 문항 재사용(2026-10-12 오너): 공통 범위(주제 scope='both', AB 과목으로 저장됨) 문항은 AB·BC 풀 시험에서 재사용 가능(풀 세트 간 동일 문항 중복 금지는 그대로). BC 전용 평가를 AB 전용 문항으로 채우지 않고, BC 전용·BC 과목 문항은 AB 세트에 넣지 않는다 — 마이그레이션 `20262100000500`(미적용 원격), docs/ap/publication-flow.md
 - 로그아웃은 현재 기기만(2026-10-12 오너): `supabase.auth.signOut({ scope: "local" })`. 기본값(global)은 오너의 다른 창까지 세션을 폐기했다. 비밀번호 변경·보안 이벤트의 전체 기기 로그아웃은 별도 기능으로 둔다 — guard: lib/auth-logout-scope.test.ts
 - 관리자 'AP 재고 관리' 서브탭은 supervisor(중간 관리자)에게도 열어 둔다(2026-10-12 오너): 서버 액션은 requireAdmin()(role=admin 전원) 뒤, 쓰기는 비프로덕션 허용 목록 가드와 감사 로그가 막는다. 별도 capability는 두지 않음.
+- AB 부분 연습 세트 3종 재구성(2026-10-12 오너): 게시된 Non-Calculator/Calculator/Free-Response 부분 세트는 풀 모의고사와 크게 겹쳐 보관하고, 남은 예비로 이름·공식 구성은 유지한 채 풀 모의고사 6세트(AB#1 v2 포함)·부분 세트끼리 동일 문항 0 으로 다시 만든다(BC 전용 문항은 AB 에 불가). 코드 기본(부분 세트 20% 겹침 허용)은 유지, 이번 재구성만 0 — docs/ap/partial-rebuild.md — guard: lib/ap-admin/partial-draft.test.ts

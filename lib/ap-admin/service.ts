@@ -13,6 +13,9 @@ import { buildCandidateRows, buildHistoryRows, EXISTING_COLUMNS, parseDefectScan
 import { planHash } from "./plan-hash";
 import { decideRender, decideScreen, type VerifyDbRow } from "./verify-plan";
 import { planDraftSet, stockItems, type FullSetUsage, type PoolRow, type SetKeys } from "./assemble-draft";
+import { planPartialDraftSet } from "./partial-draft";
+import { readPartialPlan } from "./batches";
+import { reservedKeyMap } from "./reserved-keys";
 import { published } from "../../scripts/ap-generation/assign-pool";
 
 export type AuditAction = "load_check" | "import" | "render_verify" | "screen_verify" | "convert" | "assemble_draft" | "new_version_preview" | "new_version_draft" | "new_version_publish" | "set_access_tier";
@@ -190,8 +193,11 @@ export async function runConvert(c: Ctx, batchId: string, execute: boolean, expe
 export function listAssignments() {
   return listAssignReports().map((f) => ({ file: f, sets: readAssignReport(f).sets.map((s) => ({ id: s.id, virtual: (s.virtual?.length ?? 0) + (s.frqVirtual?.length ?? 0), saveable: /^(AB|BC)\d$/.test(s.id) && s.id !== "AB1" })) }));
 }
-export async function fetchFullSetUsage(db: SupabaseClient): Promise<FullSetUsage[]> {
-  const { data: sets, error } = await db.from("mock_exam_sets").select("id, name, status").eq("exam_program", "ap").eq("ap_label", "full_practice").neq("status", "archived");
+/** 비보관 AP 세트의 문항 사용 현황. fullOnly 면 풀 모의고사(full_practice)만, 아니면 부분 연습 세트까지 전부. */
+export async function fetchApSetUsage(db: SupabaseClient, fullOnly: boolean): Promise<FullSetUsage[]> {
+  let q = db.from("mock_exam_sets").select("id, name, status, ap_label").eq("exam_program", "ap").neq("status", "archived");
+  if (fullOnly) q = q.eq("ap_label", "full_practice");
+  const { data: sets, error } = await q;
   if (error) throw new Error(error.message);
   if (!sets?.length) return [];
   const { data: items, error: ie } = await db.from("mock_exam_set_items").select("exam_set_id, problem_id").in("exam_set_id", sets.map((s) => s.id as string));
@@ -199,8 +205,9 @@ export async function fetchFullSetUsage(db: SupabaseClient): Promise<FullSetUsag
   const pids = [...new Set((items ?? []).map((i) => i.problem_id as string))];
   const keyOf = new Map<string, string>();
   for (const ps of chunk(pids, 150)) { const { data, error: e } = await db.from("ap_candidate_problems").select("problem_id, candidate_key").in("problem_id", ps); if (e) throw new Error(e.message); for (const x of data ?? []) keyOf.set(x.problem_id as string, x.candidate_key as string); }
-  return sets.map((s) => { const mine = (items ?? []).filter((i) => i.exam_set_id === s.id).map((i) => i.problem_id as string); return { id: s.id as string, name: s.name as string, status: s.status as string, problemIds: mine, candidateKeys: mine.map((p) => keyOf.get(p)).filter((k): k is string => !!k) }; });
+  return sets.map((s) => { const mine = (items ?? []).filter((i) => i.exam_set_id === s.id).map((i) => i.problem_id as string); return { id: s.id as string, name: s.name as string, status: s.status as string, label: (s.ap_label as string | null) ?? undefined, problemIds: mine, candidateKeys: mine.map((p) => keyOf.get(p)).filter((k): k is string => !!k) }; });
 }
+export const fetchFullSetUsage = (db: SupabaseClient) => fetchApSetUsage(db, true);
 export type AccessTier = "free" | "tutoring";
 export async function runAssemble(c: Ctx, reportFile: string, setId: string, name: string | undefined, execute: boolean, expectedHash?: string | null, tier: AccessTier = "free"): Promise<StepResult> {
   if (tier !== "free" && tier !== "tutoring") throw new Error("공개 범위는 무료 또는 튜터링이어야 합니다.");
@@ -225,6 +232,35 @@ export async function runAssemble(c: Ctx, reportFile: string, setId: string, nam
   const { data: id, error } = await c.db.rpc("ap_admin_create_draft_set", { p_name: plan.name, p_subject: plan.subject, p_label: "full_practice", p_layout: plan.layout, p_items: plan.items.map((i) => ({ section: i.sectionKey, position: i.position, problem_id: i.problemId, problem_version_id: i.versionId, sat_domain: i.satDomain, difficulty: i.difficulty })) });
   if (error) throw new Error(error.message);
   // 초안은 DB 가드 때문에 free 로 저장할 수 없다 → 공개 때 적용할 범위를 planned_access_tier 에 적어 둔다(공개 RPC 가 사용).
+  const { error: te } = await c.db.rpc("ap_admin_set_access_tier", { p_set_id: id, p_tier: tier, p_actor_id: c.actorId });
+  if (te) { r.executed = true; r.ok = false; r.blocked = `초안은 저장했지만 공개 범위 지정에 실패했습니다: ${te.message}`; return r; }
+  r.executed = true; r.lines.push(`초안 세트 ${id as string} 저장(공개 안 함, 공개 범위 ${tier === "free" ? "무료" : "튜터링"}).`);
+  return r;
+}
+
+// ── (5) 부분 연습 세트 초안 저장(풀·부분 세트 전체와 겹침 0) ────────────────────────────────
+export async function runAssemblePartial(c: Ctx, planFile: string, setId: string, execute: boolean, expectedHash?: string | null, tier: AccessTier = "free"): Promise<StepResult> {
+  if (tier !== "free" && tier !== "tutoring") throw new Error("공개 범위는 무료 또는 튜터링이어야 합니다.");
+  const r = base(c, "assemble_draft", execute ? "execute" : "dry_run", { planFile, setId, tier, partial: true });
+  if (!gate(c, r, execute, expectedHash)) return r;
+  const plan0 = readPartialPlan(planFile); const set = plan0.sets.find((x) => x.id === setId);
+  if (!set) { r.ok = false; r.blocked = `계획 파일에 세트 ${setId} 가 없습니다.`; return r; }
+  const all = [...set.keys.mcA, ...set.keys.mcB, ...set.keys.frqA, ...set.keys.frqB];
+  const pool: PoolRow[] = [];
+  for (const ks of chunk(all, 100)) { const { data, error } = await c.db.from("ap_candidate_items").select("candidate_key, kind, keyword_code, difficulty_provisional, purpose, is_current, render_verified, screen_verified, ap_candidate_problems(item_index, problem_id, problem_version_id)").in("candidate_key", ks); if (error) throw new Error(error.message); pool.push(...((data ?? []) as unknown as PoolRow[])); }
+  const existing = await fetchApSetUsage(c.db, false);
+  const plan = planPartialDraftSet({ set, subject: plan0.subject, pool, existingSets: existing, reservedKeys: reservedKeyMap(), stock: stockItems() });
+  r.counts = { mc: plan.composition.mcTotal, frq: plan.composition.frqTotal, items: plan.items.length, problems: plan.problems.length, units: plan.units.length, graphMc: plan.stats.graphMc };
+  r.scope = { ...r.scope, name: plan.name, subject: plan.subject, partial: plan.partial };
+  const units = plan.units.length === 1 ? `Unit ${plan.units[0]}` : `Units ${plan.units.join(", ")}`;
+  r.lines = cap(plan.ok ? [`저장할 초안: ${plan.name} (${plan.subject}) — MC ${plan.composition.mcTotal} / FRQ ${plan.composition.frqTotal}${plan.stats.short ? " (짧은 연습)" : ""}. 다루는 단원: ${units}. 비보관 AP 세트 ${existing.length}개·예약 문항과 겹침 0. 상태 draft, 공개 안 함. 공개 때 적용할 범위: ${tier === "free" ? "무료" : "튜터링"}.`] : plan.problems);
+  r.ok = plan.ok; if (!plan.ok) r.blocked = "검증 위반이 있어 저장할 수 없습니다.";
+  r.planHash = plan.ok ? planHash("assemble_draft", r.scope, plan.items.map((i) => `${i.sectionKey}:${i.position}:${i.problemId}`)) : null;
+  if (!plan.ok || !checkHash(r, expectedHash, execute)) return r;
+  if (!execute) return r;
+  await auditReady(c);
+  const { data: id, error } = await c.db.rpc("ap_admin_create_partial_draft_set", { p_name: plan.name, p_subject: plan.subject, p_label: plan.label, p_layout: plan.layout, p_items: plan.items.map((i) => ({ section: i.sectionKey, position: i.position, problem_id: i.problemId, problem_version_id: i.versionId, sat_domain: i.satDomain, difficulty: i.difficulty })) });
+  if (error) throw new Error(error.message);
   const { error: te } = await c.db.rpc("ap_admin_set_access_tier", { p_set_id: id, p_tier: tier, p_actor_id: c.actorId });
   if (te) { r.executed = true; r.ok = false; r.blocked = `초안은 저장했지만 공개 범위 지정에 실패했습니다: ${te.message}`; return r; }
   r.executed = true; r.lines.push(`초안 세트 ${id as string} 저장(공개 안 함, 공개 범위 ${tier === "free" ? "무료" : "튜터링"}).`);
