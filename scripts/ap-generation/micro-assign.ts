@@ -136,6 +136,7 @@ function main() {
       out.push(...one.out); res = { ...one.res, obj: (res.obj ?? 0) + one.res.obj, nodes: (res.nodes ?? 0) + one.res.nodes, status: one.res.status } as typeof res;
       for (const it of [...one.out[0].singles, ...one.out[0].frq]) bl.add(it.key);
       for (const a of [...one.out[0].singles.map((c) => c.archetype), ...one.out[0].virtual.map((v) => v.archetype)]) if (ONE_EXAM_ONLY.has(a)) blArch.add(a);
+      for (const c of one.out[0].frq) blArch.add(c.archetype); // FRQ 유형은 시험마다 다르게(같은 상황의 숫자만 바꾼 문항이 두 시험에 나오지 않게)
     }
     m = { res, out };
   }

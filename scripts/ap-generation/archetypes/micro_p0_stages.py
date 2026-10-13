@@ -18,3 +18,4 @@ STAGE_P2_B = ['mi_cost_curve_relation_graph', 'mi_cost_graph_min', 'mi_cost_rela
 STAGE_P2_F = ["mif_long_market_policy", "mif_short_trade", "mif_short_elasticity", "mif_short_mc", "frq_micro_game"]
 # P2 런 C(2026-10-13): P2-A/B 후 MI2 에 남은 가상 칸 7 원형(cartel_cheat·monopoly_vs_pc·movement_vs_shift·pd_markets·pos_externality·shutdown_rule·structure_identify)과, 검토기 지적(주제·키 유일성·그래프 축 라벨·오개념 설명)으로 고친 원형을 후보 3씩.
 STAGE_P2_C = ["mi_cartel_cheat", "mi_monopoly_vs_pc", "mi_movement_vs_shift", "mi_pd_markets", "mi_pos_externality", "mi_shutdown_rule", "mi_structure_identify", "mi_elasticity_graph", "mi_labor_market_shift", "mi_public_good", "mi_scarcity_concept", "mi_cost_curve_relation_graph", "mi_cost_graph_min"]
+STAGE_P2_D = ["mi_fixed_variable", "mi_free_rider", "mi_economic_systems"]  # 런 D: 마지막 가상 칸(mi_fixed_variable) + 문장을 고친 두 원형, 후보 3씩

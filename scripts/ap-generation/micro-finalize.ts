@@ -12,6 +12,9 @@ const root = path.resolve("data/ap/sample-2027"), out = path.resolve("data/ap/st
 const runs: Record<string, RawCand[]> = {};
 for (const r of RUNS) { const f = path.join(root, r, "candidates.json"); if (existsSync(f)) runs[r] = (JSON.parse(readFileSync(f, "utf-8")) as RawCand[]).map((c) => ({ ...c, gateOverride: LATEST_GATE } as RawCand)); }
 const items = buildStock(runs, {});
+// 2026-10-13 화면 증거가 잡은 표시 문제: 해설에서 "$66 is incorrect: …" 줄이 앞 줄의 달러 금액 뒤에 바로 이어지면 원문 달러 수식 쌍으로 읽힌다(result_no_raw_tex).
+// 금액 선택지 줄 앞에 "The option " 을 붙여 줄이 `$` 로 시작하지 않게 한다(의미 변경 없음). 화폐 금액이 들어간 마이크로 해설에만 해당한다.
+for (const i of items) { const e = (i.payload as { explanation_en?: unknown }).explanation_en; if (typeof e === "string") (i.payload as { explanation_en?: string }).explanation_en = e.replace(/\n(\$[^\n]*? is incorrect:)/g, "\nThe option $1"); }
 writeFileSync(path.join(out, `${BATCH}-items.json`), JSON.stringify(items.map((i) => ({ ...i })), null, 0));
 const pass = items.filter((i) => i.validation === "auto_passed" && !i.duplicateOf && generatorDefects(i.payload).length === 0);
 writeFileSync(path.join(out, `${BATCH}-pass-keys.json`), "[\n" + pass.map((r) => JSON.stringify(r.stockKey)).join(",\n") + "\n]\n");

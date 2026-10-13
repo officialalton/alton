@@ -1,0 +1,1593 @@
+[
+ {
+  "candidateKey": "ap_microeconomics-m01-k0",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_fixed_variable",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring; criterion_failed_distractor_explanation; instant_reject_multiple_correct",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step concept identification: recognizing that lease rent is a fixed cost in the short run. No stimulus, no computation, and no representation change. Distractors (sunk, implicit, marginal, conditional opportunity cost) test vocabulary distinctions but are clearly separable. Wording is clear and in scope for Unit 3 topic 3.2. This is a recall-level item for building basic cost-classification understanding, not full-mock depth.",
+  "payload": {
+   "archetype": "mi_fixed_variable",
+   "topic": "3.2",
+   "skill": "1.B",
+   "calculator": "allowed",
+   "stem": "For a firm in the short run, which type of cost is the following? The monthly rent on a factory building under a one-year lease.",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "This is a sunk cost that should be ignored when deciding on output.",
+     "why": "Treats a cost as sunk although it affects the cost curves; a sunk cost cannot be recovered but fixed costs still count in the short run.",
+     "value": null
+    },
+    {
+     "text": "This is a fixed cost, because it does not change with the quantity of output in the short run.",
+     "why": "Fixed costs do not vary with output in the short run; variable costs do.",
+     "value": null
+    },
+    {
+     "text": "This is an implicit cost, because no cash payment is made.",
+     "why": "Confuses fixed and variable with explicit and implicit costs; this cost is a cash payment.",
+     "value": null
+    },
+    {
+     "text": "This is a marginal cost, because it is paid each period.",
+     "why": "Confuses the timing of payment with the change in cost from one more unit.",
+     "value": null
+    },
+    {
+     "text": "This is an opportunity cost only if the firm is profitable.",
+     "why": "Ties opportunity cost to profitability, which is unrelated.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 45,
+   "facts": [
+    "cost=The monthly rent on a factory ",
+    "kind=fixed"
+   ],
+   "blueprint": {
+    "id": "mi_fixed_variable",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "classify costs as fixed or variable",
+    "topic": "3.2",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the economic model that applies: classify costs as fixed or variable",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Treats a cost as sunk although it affects the cost curves; a sunk cost cannot be recovered but fixed costs still count in the short run."
+     },
+     {
+      "id": "m2",
+      "description": "Confuses fixed and variable with explicit and implicit costs; this cost is a cash payment."
+     },
+     {
+      "id": "m3",
+      "description": "Confuses the timing of payment with the change in cost from one more unit."
+     },
+     {
+      "id": "m4",
+      "description": "Ties opportunity cost to profitability, which is unrelated."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted cost classification table",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: classify costs as fixed or variable",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_fixed_variable",
+     "explanation_assumptions_id": "mi_fixed_variable"
+    }
+   },
+   "seed": 9700,
+   "pack_id": "mi_fixed_variable-s9700",
+   "explanation_en": "The correct answer is This is a fixed cost, because it does not change with the quantity of output in the short run.. Fixed costs do not vary with output in the short run; variable costs do.\nThis is a sunk cost that should be ignored when deciding on output. is incorrect: Treats a cost as sunk although it affects the cost curves; a sunk cost cannot be recovered but fixed costs still count in the short run.\nThis is an implicit cost, because no cash payment is made. is incorrect: Confuses fixed and variable with explicit and implicit costs; this cost is a cash payment.\nThis is a marginal cost, because it is paid each period. is incorrect: Confuses the timing of payment with the change in cost from one more unit.\nThis is an opportunity cost only if the firm is profitable. is incorrect: Ties opportunity cost to profitability, which is unrelated."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_fixed_variable",
+   "facts": [
+    "cost=The monthly rent on a factory ",
+    "kind=fixed"
+   ],
+   "seed": 9700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fixed vs. variable cost classification fits 3.2 and skill 1.B."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "B is correct, but A is also defensible: rent under a one-year lease is a sunk cost once signed, and sunk costs are ignored in marginal decisions. The distractor's own rationale is muddled."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem wording is slightly awkward but clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation for A is inaccurate: it says fixed costs still count in the short run, which does not refute A's claim that the cost is sunk and ignorable for output decisions. B's option text is slightly longer than the others."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick conceptual item with no calculation load."
+   },
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Fails on a unique-key concern. Lease rent is a fixed cost, but it is also arguably sunk, so option A is defensible, and the rationale given for rejecting A is weak. The item needs a distractor that is clearly wrong, or a stem that rules out the sunk-cost reading."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification: recognizing that lease rent is a fixed cost in the short run. No stimulus, no computation, and no representation change. Distractors (sunk, implicit, marginal, conditional opportunity cost) test vocabulary distinctions but are clearly separable. Wording is clear and in scope for Unit 3 topic 3.2. This is a recall-level item for building basic cost-classification understanding, not full-mock depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k1",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_fixed_variable",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; instant_reject_multiple_correct; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step concept identification: classify an executive's contracted salary as a fixed cost in the short run. No calculation, graph, or table. Short, unambiguous wording. The distractors (variable, sunk, marginal, opportunity cost) test vocabulary at an introductory level. This fits skill 1.B at the foundational level of topic 3.2.",
+  "payload": {
+   "archetype": "mi_fixed_variable",
+   "topic": "3.2",
+   "skill": "1.B",
+   "calculator": "allowed",
+   "stem": "For a firm in the short run, which type of cost is the following? Salary of the firm's chief executive under a long-term contract.",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "This is a variable cost, because it changes with the quantity of output in the short run.",
+     "why": "Reverses the classification of fixed and variable costs.",
+     "value": null
+    },
+    {
+     "text": "This is a fixed cost, because it does not change with the quantity of output in the short run.",
+     "why": "Fixed costs do not vary with output in the short run; variable costs do.",
+     "value": null
+    },
+    {
+     "text": "This is a sunk cost that should be ignored when deciding on output.",
+     "why": "Treats a cost as sunk although it affects the cost curves; a sunk cost cannot be recovered but fixed costs still count in the short run.",
+     "value": null
+    },
+    {
+     "text": "This is a marginal cost, because it is paid each period.",
+     "why": "Confuses the timing of payment with the change in cost from one more unit.",
+     "value": null
+    },
+    {
+     "text": "This is an opportunity cost only if the firm is profitable.",
+     "why": "Ties opportunity cost to profitability, which is unrelated.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 45,
+   "facts": [
+    "cost=Salary of the firm's chief exe",
+    "kind=fixed"
+   ],
+   "blueprint": {
+    "id": "mi_fixed_variable",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "classify costs as fixed or variable",
+    "topic": "3.2",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the economic model that applies: classify costs as fixed or variable",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reverses the classification of fixed and variable costs."
+     },
+     {
+      "id": "m2",
+      "description": "Treats a cost as sunk although it affects the cost curves; a sunk cost cannot be recovered but fixed costs still count in the short run."
+     },
+     {
+      "id": "m3",
+      "description": "Confuses the timing of payment with the change in cost from one more unit."
+     },
+     {
+      "id": "m4",
+      "description": "Ties opportunity cost to profitability, which is unrelated."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted cost classification table",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: classify costs as fixed or variable",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_fixed_variable",
+     "explanation_assumptions_id": "mi_fixed_variable"
+    }
+   },
+   "seed": 9701,
+   "pack_id": "mi_fixed_variable-s9701",
+   "explanation_en": "The correct answer is This is a fixed cost, because it does not change with the quantity of output in the short run.. Fixed costs do not vary with output in the short run; variable costs do.\nThis is a variable cost, because it changes with the quantity of output in the short run. is incorrect: Reverses the classification of fixed and variable costs.\nThis is a sunk cost that should be ignored when deciding on output. is incorrect: Treats a cost as sunk although it affects the cost curves; a sunk cost cannot be recovered but fixed costs still count in the short run.\nThis is a marginal cost, because it is paid each period. is incorrect: Confuses the timing of payment with the change in cost from one more unit.\nThis is an opportunity cost only if the firm is profitable. is incorrect: Ties opportunity cost to profitability, which is unrelated."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_fixed_variable",
+   "facts": [
+    "cost=Salary of the firm's chief exe",
+    "kind=fixed"
+   ],
+   "seed": 9701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is very low-demand and recall-only. The \"because\" clauses make the options long, and the overlap between sunk and fixed costs makes it ambiguous. It does not match the typical AP stem style.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The topic and skill fit, but option C (sunk cost) is arguably also correct for a long-term-contract salary in the short run, so the key is not clearly unique. The correct option is also the only one with a coherent \"because\" clause, which gives it away, and the explanation of C is muddled. I recommend rejecting the item."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification: classify an executive's contracted salary as a fixed cost in the short run. No calculation, graph, or table. Short, unambiguous wording. The distractors (variable, sunk, marginal, opportunity cost) test vocabulary at an introductory level. This fits skill 1.B at the foundational level of topic 3.2.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k2",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_fixed_variable",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring; criterion_failed_distractor_explanation; instant_reject_multiple_correct",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step identification of a fixed cost from a short example. No calculation, graph, or table. Concept is foundational to 3.2, and the distractors are common but straightforward misconceptions (variable, sunk, implicit). Wording is unambiguous and reading load is minimal. This is better suited to basic concept checks than to full mock exam difficulty.",
+  "payload": {
+   "archetype": "mi_fixed_variable",
+   "topic": "3.2",
+   "skill": "1.B",
+   "calculator": "allowed",
+   "stem": "For a firm in the short run, which type of cost is the following? Salary of the firm's chief executive under a long-term contract.",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "This is a variable cost, because it changes with the quantity of output in the short run.",
+     "why": "Reverses the classification of fixed and variable costs.",
+     "value": null
+    },
+    {
+     "text": "This is a sunk cost that should be ignored when deciding on output.",
+     "why": "Treats a cost as sunk although it affects the cost curves; a sunk cost cannot be recovered but fixed costs still count in the short run.",
+     "value": null
+    },
+    {
+     "text": "This is an opportunity cost only if the firm is profitable.",
+     "why": "Ties opportunity cost to profitability, which is unrelated.",
+     "value": null
+    },
+    {
+     "text": "This is a fixed cost, because it does not change with the quantity of output in the short run.",
+     "why": "Fixed costs do not vary with output in the short run; variable costs do.",
+     "value": null
+    },
+    {
+     "text": "This is an implicit cost, because no cash payment is made.",
+     "why": "Confuses fixed and variable with explicit and implicit costs; this cost is a cash payment.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 45,
+   "facts": [
+    "cost=Salary of the firm's chief exe",
+    "kind=fixed"
+   ],
+   "blueprint": {
+    "id": "mi_fixed_variable",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "classify costs as fixed or variable",
+    "topic": "3.2",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the economic model that applies: classify costs as fixed or variable",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reverses the classification of fixed and variable costs."
+     },
+     {
+      "id": "m2",
+      "description": "Treats a cost as sunk although it affects the cost curves; a sunk cost cannot be recovered but fixed costs still count in the short run."
+     },
+     {
+      "id": "m3",
+      "description": "Ties opportunity cost to profitability, which is unrelated."
+     },
+     {
+      "id": "m4",
+      "description": "Confuses fixed and variable with explicit and implicit costs; this cost is a cash payment."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted cost classification table",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: classify costs as fixed or variable",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_fixed_variable",
+     "explanation_assumptions_id": "mi_fixed_variable"
+    }
+   },
+   "seed": 9702,
+   "pack_id": "mi_fixed_variable-s9702",
+   "explanation_en": "The correct answer is This is a fixed cost, because it does not change with the quantity of output in the short run.. Fixed costs do not vary with output in the short run; variable costs do.\nThis is a variable cost, because it changes with the quantity of output in the short run. is incorrect: Reverses the classification of fixed and variable costs.\nThis is a sunk cost that should be ignored when deciding on output. is incorrect: Treats a cost as sunk although it affects the cost curves; a sunk cost cannot be recovered but fixed costs still count in the short run.\nThis is an opportunity cost only if the firm is profitable. is incorrect: Ties opportunity cost to profitability, which is unrelated.\nThis is an implicit cost, because no cash payment is made. is incorrect: Confuses fixed and variable with explicit and implicit costs; this cost is a cash payment."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_fixed_variable",
+   "facts": [
+    "cost=Salary of the firm's chief exe",
+    "kind=fixed"
+   ],
+   "seed": 9702
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is quick to answer, has five options, and needs no calculator. The calculator designation of \"allowed\" is harmless.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is in scope and well formed, but option B (sunk cost) is arguably also correct for a salary under a long-term contract. The distractor's explanation is therefore flawed, and the key is not clearly unique. I recommend rejecting it or rewording, for example by using a cost such as rent on a lease with no sunk-cost framing, or by removing the \"long-term contract\" wording and reworking option B."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of a fixed cost from a short example. No calculation, graph, or table. Concept is foundational to 3.2, and the distractors are common but straightforward misconceptions (variable, sunk, implicit). Wording is unambiguous and reading load is minimal. This is better suited to basic concept checks than to full mock exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k0",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "6.3",
+  "unitCode": "6",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_free_rider",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall and explanation of the free-rider problem for pure public goods (non-excludability leads to insufficient revenue and under-provision). No stimulus, no calculation, and no representation changes. Distractors are clearly wrong (e.g., high marginal cost, no social benefit, government provides at zero cost). It matches skill 2.A at a foundational level and is below the multi-step reasoning expected of full mock exam items.",
+  "payload": {
+   "archetype": "mi_free_rider",
+   "topic": "6.3",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "Why does a competitive market tend to provide too little of a pure public good?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The marginal cost of serving one more user is high, so firms avoid providing it.",
+     "why": "Public goods have near-zero marginal cost of serving another user.",
+     "value": null
+    },
+    {
+     "text": "People can use it without paying, so firms cannot earn enough revenue to supply it.",
+     "why": "Non-excludability creates a free-rider problem: people have no incentive to pay, so the market underprovides the public good.",
+     "value": null
+    },
+    {
+     "text": "Public goods have no social benefit, so no one wants them.",
+     "why": "Public goods usually have large social benefits.",
+     "value": null
+    },
+    {
+     "text": "Governments always provide public goods at zero cost to taxpayers.",
+     "why": "Governments finance public goods through taxes; they are not costless.",
+     "value": null
+    },
+    {
+     "text": "Consumers value public goods less than they value private goods.",
+     "why": "Valuation is not the reason; the inability to exclude non-payers is the reason.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 50,
+   "facts": [
+    "variant=1"
+   ],
+   "blueprint": {
+    "id": "mi_free_rider",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "free-rider problem",
+    "topic": "6.3",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify the economic model that applies: free-rider problem",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Public goods have near-zero marginal cost of serving another user."
+     },
+     {
+      "id": "m2",
+      "description": "Public goods usually have large social benefits."
+     },
+     {
+      "id": "m3",
+      "description": "Governments finance public goods through taxes; they are not costless."
+     },
+     {
+      "id": "m4",
+      "description": "Valuation is not the reason; the inability to exclude non-payers is the reason."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted explanation",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: free-rider problem",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_free_rider",
+     "explanation_assumptions_id": "mi_free_rider"
+    }
+   },
+   "seed": 9700,
+   "pack_id": "mi_free_rider-s9700",
+   "explanation_en": "The correct answer is People can use it without paying, so firms cannot earn enough revenue to supply it.. Non-excludability creates a free-rider problem: people have no incentive to pay, so the market underprovides the public good.\nThe marginal cost of serving one more user is high, so firms avoid providing it. is incorrect: Public goods have near-zero marginal cost of serving another user.\nPublic goods have no social benefit, so no one wants them. is incorrect: Public goods usually have large social benefits.\nGovernments always provide public goods at zero cost to taxpayers. is incorrect: Governments finance public goods through taxes; they are not costless.\nConsumers value public goods less than they value private goods. is incorrect: Valuation is not the reason; the inability to exclude non-payers is the reason."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_free_rider",
+   "facts": [
+    "variant=1"
+   ],
+   "seed": 9700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is a quick conceptual question with five options and no calculation, so it takes about 50 seconds. The calculator designation does not matter here.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard conceptual question on the free-rider problem. The key is unique, the distractors are plausible and explained, and the item fits the topic and skill. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and explanation of the free-rider problem for pure public goods (non-excludability leads to insufficient revenue and under-provision). No stimulus, no calculation, and no representation changes. Distractors are clearly wrong (e.g., high marginal cost, no social benefit, government provides at zero cost). It matches skill 2.A at a foundational level and is below the multi-step reasoning expected of full mock exam items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k1",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "6.3",
+  "unitCode": "6",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_free_rider",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation; criterion_failed_exam_suitability; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall of the free-rider problem and non-excludability. One reasoning step: identify non-excludability, so firms cannot collect revenue. Distractors are plainly incorrect (D contradicts the non-rival definition). No graph, calculation, or representation change. Fits the 2.A skill at a foundational level and is too easy for a full-mock target.",
+  "payload": {
+   "archetype": "mi_free_rider",
+   "topic": "6.3",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "Why does a competitive market tend to provide too little of a pure public good?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Consumers value public goods less than they value private goods.",
+     "why": "Valuation is not the reason; the inability to exclude non-payers is the reason.",
+     "value": null
+    },
+    {
+     "text": "Governments always provide public goods at zero cost to taxpayers.",
+     "why": "Governments finance public goods through taxes; they are not costless.",
+     "value": null
+    },
+    {
+     "text": "Public goods have no social benefit, so no one wants them.",
+     "why": "Public goods usually have large social benefits.",
+     "value": null
+    },
+    {
+     "text": "Public goods are rival, so private firms provide too much of them in practice.",
+     "why": "Public goods are non-rival, and the problem is underprovision.",
+     "value": null
+    },
+    {
+     "text": "People can use it without paying, so firms cannot earn enough revenue to supply it.",
+     "why": "Non-excludability creates a free-rider problem: people have no incentive to pay, so the market underprovides the public good.",
+     "value": null
+    }
+   ],
+   "key_index": 4,
+   "est_seconds": 50,
+   "facts": [
+    "variant=1"
+   ],
+   "blueprint": {
+    "id": "mi_free_rider",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "free-rider problem",
+    "topic": "6.3",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify the economic model that applies: free-rider problem",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Valuation is not the reason; the inability to exclude non-payers is the reason."
+     },
+     {
+      "id": "m2",
+      "description": "Governments finance public goods through taxes; they are not costless."
+     },
+     {
+      "id": "m3",
+      "description": "Public goods usually have large social benefits."
+     },
+     {
+      "id": "m4",
+      "description": "Public goods are non-rival, and the problem is underprovision."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted explanation",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: free-rider problem",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_free_rider",
+     "explanation_assumptions_id": "mi_free_rider"
+    }
+   },
+   "seed": 9701,
+   "pack_id": "mi_free_rider-s9701",
+   "explanation_en": "The correct answer is People can use it without paying, so firms cannot earn enough revenue to supply it.. Non-excludability creates a free-rider problem: people have no incentive to pay, so the market underprovides the public good.\nConsumers value public goods less than they value private goods. is incorrect: Valuation is not the reason; the inability to exclude non-payers is the reason.\nGovernments always provide public goods at zero cost to taxpayers. is incorrect: Governments finance public goods through taxes; they are not costless.\nPublic goods have no social benefit, so no one wants them. is incorrect: Public goods usually have large social benefits.\nPublic goods are rival, so private firms provide too much of them in practice. is incorrect: Public goods are non-rival, and the problem is underprovision."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_free_rider",
+   "facts": [
+    "variant=1"
+   ],
+   "seed": 9701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Free-rider problem is squarely within topic 6.3. The skill is a plain explanation of why the market underprovides, which fits 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "E is the only correct statement. The other options are plainly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is clear and complete. The 'People can use it' option uses 'it' without an antecedent, which is a minor wording flaw."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are weak and not realistic misconceptions. 'Governments always provide at zero cost', 'public goods have no social benefit so no one wants them', and 'valuation is lower' are implausible straw men. Option D contradicts itself: it says public goods are rival and also that firms provide too much. The key is also the only option that mentions non-payment or revenue, which makes it a giveaway, and it is the longest option. The explanation does address every option."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is a bare recall question with trivial discrimination, so it is below AP rigor. Official items usually use a scenario, a graph, or a classification of goods. The calculator designation is irrelevant here but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and in scope, but the distractors are implausible straw men, one of them is internally contradictory, and the key is a length and content giveaway. The item is too easy for AP, so I fail it on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall of the free-rider problem and non-excludability. One reasoning step: identify non-excludability, so firms cannot collect revenue. Distractors are plainly incorrect (D contradicts the non-rival definition). No graph, calculation, or representation change. Fits the 2.A skill at a foundational level and is too easy for a full-mock target.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 25
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k2",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "6.3",
+  "unitCode": "6",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_free_rider",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall/explanation of the free-rider problem for non-excludable public goods. No stimulus, no calculation, no representation change. Distractors are clearly incorrect (zero cost, no social benefit, rival), so only one idea needs to be identified. Fits skill 2.A at a foundational level rather than full-mock exam depth.",
+  "payload": {
+   "archetype": "mi_free_rider",
+   "topic": "6.3",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "Why does a competitive market tend to provide too little of a pure public good?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Governments always provide public goods at zero cost to taxpayers.",
+     "why": "Governments finance public goods through taxes; they are not costless.",
+     "value": null
+    },
+    {
+     "text": "Consumers value public goods less than they value private goods.",
+     "why": "Valuation is not the reason; the inability to exclude non-payers is the reason.",
+     "value": null
+    },
+    {
+     "text": "Public goods have no social benefit, so no one wants them.",
+     "why": "Public goods usually have large social benefits.",
+     "value": null
+    },
+    {
+     "text": "People can use it without paying, so firms cannot earn enough revenue to supply it.",
+     "why": "Non-excludability creates a free-rider problem: people have no incentive to pay, so the market underprovides the public good.",
+     "value": null
+    },
+    {
+     "text": "Public goods are rival, so private firms provide too much of them in practice.",
+     "why": "Public goods are non-rival, and the problem is underprovision.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 50,
+   "facts": [
+    "variant=1"
+   ],
+   "blueprint": {
+    "id": "mi_free_rider",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "free-rider problem",
+    "topic": "6.3",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify the economic model that applies: free-rider problem",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Governments finance public goods through taxes; they are not costless."
+     },
+     {
+      "id": "m2",
+      "description": "Valuation is not the reason; the inability to exclude non-payers is the reason."
+     },
+     {
+      "id": "m3",
+      "description": "Public goods usually have large social benefits."
+     },
+     {
+      "id": "m4",
+      "description": "Public goods are non-rival, and the problem is underprovision."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted explanation",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: free-rider problem",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_free_rider",
+     "explanation_assumptions_id": "mi_free_rider"
+    }
+   },
+   "seed": 9702,
+   "pack_id": "mi_free_rider-s9702",
+   "explanation_en": "The correct answer is People can use it without paying, so firms cannot earn enough revenue to supply it.. Non-excludability creates a free-rider problem: people have no incentive to pay, so the market underprovides the public good.\nGovernments always provide public goods at zero cost to taxpayers. is incorrect: Governments finance public goods through taxes; they are not costless.\nConsumers value public goods less than they value private goods. is incorrect: Valuation is not the reason; the inability to exclude non-payers is the reason.\nPublic goods have no social benefit, so no one wants them. is incorrect: Public goods usually have large social benefits.\nPublic goods are rival, so private firms provide too much of them in practice. is incorrect: Public goods are non-rival, and the problem is underprovision."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_free_rider",
+   "facts": [
+    "variant=1"
+   ],
+   "seed": 9702
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 50 seconds, has five options, and has no calculation load. It is typical of an AP multiple-choice item. The calculator designation is irrelevant here.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable. This is a clean conceptual item on the free-rider problem, with a unique key and distinct distractors, and the explanation covers every wrong option."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall/explanation of the free-rider problem for non-excludable public goods. No stimulus, no calculation, no representation change. Distractors are clearly incorrect (zero cost, no social benefit, rival), so only one idea needs to be identified. Fits skill 2.A at a foundational level rather than full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m03-k0",
+  "cellId": "ap_microeconomics-m03",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "1.2",
+  "unitCode": "1",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_economic_systems",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step recall and classification: match a short description of central planning and quotas to 'command economy'. There is no computation, graph, or multi-step reasoning. The distractors (traditional, mixed, market, laissez-faire monopoly) are standard and distinguishable. This is foundational vocabulary for topic 1.2, below full-mock complexity.",
+  "payload": {
+   "archetype": "mi_economic_systems",
+   "topic": "1.2",
+   "skill": "1.B",
+   "calculator": "allowed",
+   "stem": "Which type of economic system is best described as follows? A central planning agency decides what goods are produced, how many are produced, and who receives them, and firms follow its quotas.",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Traditional economy",
+     "why": "Treats habit and custom as the allocation method, which the description does not mention.",
+     "value": null
+    },
+    {
+     "text": "Command economy",
+     "why": "The described allocation method is characteristic of a command economy.",
+     "value": null
+    },
+    {
+     "text": "Mixed economy",
+     "why": "Treats the economy as a mix of market exchange and government direction, but the description does not describe both.",
+     "value": null
+    },
+    {
+     "text": "Laissez-faire monopoly",
+     "why": "Confuses an economic system with a market structure; a monopoly is a market structure, not a way to answer the three basic economic questions.",
+     "value": null
+    },
+    {
+     "text": "Market economy",
+     "why": "Assumes prices and voluntary exchange alone drive all decisions, although the description names central direction, a mixed role for government, or custom.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 45,
+   "facts": [
+    "answer=command economy"
+   ],
+   "blueprint": {
+    "id": "mi_economic_systems",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "identify an economic system from how it answers what, how, and for whom",
+    "topic": "1.2",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the economic model that applies: identify an economic system from how it answers what, how, and for whom",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Treats habit and custom as the allocation method, which the description does not mention."
+     },
+     {
+      "id": "m2",
+      "description": "Treats the economy as a mix of market exchange and government direction, but the description does not describe both."
+     },
+     {
+      "id": "m3",
+      "description": "Confuses an economic system with a market structure; a monopoly is a market structure, not a way to answer the three basic economic questions."
+     },
+     {
+      "id": "m4",
+      "description": "Assumes prices and voluntary exchange alone drive all decisions, although the description names central direction, a mixed role for government, or custom."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted descriptions mapped to a system label",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: identify an economic system from how it answers what, how, and for whom",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_economic_systems",
+     "explanation_assumptions_id": "mi_economic_systems"
+    }
+   },
+   "seed": 9700,
+   "pack_id": "mi_economic_systems-s9700",
+   "explanation_en": "The correct answer is Command economy. The described allocation method is characteristic of a command economy.\nTraditional economy is incorrect: Treats habit and custom as the allocation method, which the description does not mention.\nMixed economy is incorrect: Treats the economy as a mix of market exchange and government direction, but the description does not describe both.\nLaissez-faire monopoly is incorrect: Confuses an economic system with a market structure; a monopoly is a market structure, not a way to answer the three basic economic questions.\nMarket economy is incorrect: Assumes prices and voluntary exchange alone drive all decisions, although the description names central direction, a mixed role for government, or custom."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_economic_systems",
+   "facts": [
+    "answer=command economy"
+   ],
+   "seed": 9700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.2 economic systems; skill 1.B identify a concept from an example. Dominant demand matches."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Command economy is the unique defensible answer. Central planning agency with quotas fits only a command economy. Mixed economy is a weak competitor because the description names no market component."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. Stem is complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are plausible and each is explained. The market economy 'why' is clumsy: it lists three possible reasons ('central direction, a mixed role for government, or custom') instead of a single misconception. 'Laissez-faire monopoly' is a somewhat odd mashup but is explained as confusing a system with a market structure. Mixed economy is explained adequately. These are minor weaknesses."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 45 seconds, five options, no calculation. Typical of an AP recall/identification item. The calculator designation is irrelevant here."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous identification item. The key is unique and the scope and skill fit. The only blemish is the generic wording of the market economy distractor explanation, which is minor. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recall and classification: match a short description of central planning and quotas to 'command economy'. There is no computation, graph, or multi-step reasoning. The distractors (traditional, mixed, market, laissez-faire monopoly) are standard and distinguishable. This is foundational vocabulary for topic 1.2, below full-mock complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 25
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m03-k1",
+  "cellId": "ap_microeconomics-m03",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "1.2",
+  "unitCode": "1",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_economic_systems",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step concept identification (skill 1.B). The description of market allocation plus government provision of public goods and regulation maps directly to a mixed economy. The only real distractor is 'market economy', and the other options are clearly mismatched. No calculation, graph, or multi-step reasoning is needed.",
+  "payload": {
+   "archetype": "mi_economic_systems",
+   "topic": "1.2",
+   "skill": "1.B",
+   "calculator": "allowed",
+   "stem": "Which type of economic system is best described as follows? Most resources are allocated through voluntary exchange at market prices, but the government also directs part of the economy by providing public goods and regulating industries.",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Traditional economy",
+     "why": "Treats habit and custom as the allocation method, which the description does not mention.",
+     "value": null
+    },
+    {
+     "text": "Laissez-faire monopoly",
+     "why": "Confuses an economic system with a market structure; a monopoly is a market structure, not a way to answer the three basic economic questions.",
+     "value": null
+    },
+    {
+     "text": "Market economy",
+     "why": "Assumes prices and voluntary exchange alone drive all decisions, although the description names central direction, a mixed role for government, or custom.",
+     "value": null
+    },
+    {
+     "text": "Command economy",
+     "why": "Takes government direction of every decision as the defining feature, which the description does not contain.",
+     "value": null
+    },
+    {
+     "text": "Mixed economy",
+     "why": "The described allocation method is characteristic of a mixed economy.",
+     "value": null
+    }
+   ],
+   "key_index": 4,
+   "est_seconds": 45,
+   "facts": [
+    "answer=mixed economy"
+   ],
+   "blueprint": {
+    "id": "mi_economic_systems",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "identify an economic system from how it answers what, how, and for whom",
+    "topic": "1.2",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the economic model that applies: identify an economic system from how it answers what, how, and for whom",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Treats habit and custom as the allocation method, which the description does not mention."
+     },
+     {
+      "id": "m2",
+      "description": "Confuses an economic system with a market structure; a monopoly is a market structure, not a way to answer the three basic economic questions."
+     },
+     {
+      "id": "m3",
+      "description": "Assumes prices and voluntary exchange alone drive all decisions, although the description names central direction, a mixed role for government, or custom."
+     },
+     {
+      "id": "m4",
+      "description": "Takes government direction of every decision as the defining feature, which the description does not contain."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted descriptions mapped to a system label",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: identify an economic system from how it answers what, how, and for whom",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_economic_systems",
+     "explanation_assumptions_id": "mi_economic_systems"
+    }
+   },
+   "seed": 9701,
+   "pack_id": "mi_economic_systems-s9701",
+   "explanation_en": "The correct answer is Mixed economy. The described allocation method is characteristic of a mixed economy.\nTraditional economy is incorrect: Treats habit and custom as the allocation method, which the description does not mention.\nLaissez-faire monopoly is incorrect: Confuses an economic system with a market structure; a monopoly is a market structure, not a way to answer the three basic economic questions.\nMarket economy is incorrect: Assumes prices and voluntary exchange alone drive all decisions, although the description names central direction, a mixed role for government, or custom.\nCommand economy is incorrect: Takes government direction of every decision as the defining feature, which the description does not contain."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_economic_systems",
+   "facts": [
+    "answer=mixed economy"
+   ],
+   "seed": 9701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying an economic system from a description fits 1.2/1.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mixed economy is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The Market economy explanation is a generic template that mentions 'central direction, a mixed role for government, or custom', which does not fit this stem and does not address why predominantly market allocation plus government provision is not purely a market economy. The key rationale is circular ('characteristic of a mixed economy'). The Command economy explanation is vague."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and appropriate load; the calculator designation is irrelevant but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in scope and key, but the distractor and key explanations are templated and partly inaccurate for this stem (the Market economy explanation refers to custom and central direction, and the key rationale is circular). It fails on the distractor explanation criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification (skill 1.B). The description of market allocation plus government provision of public goods and regulation maps directly to a mixed economy. The only real distractor is 'market economy', and the other options are clearly mismatched. No calculation, graph, or multi-step reasoning is needed.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m03-k2",
+  "cellId": "ap_microeconomics-m03",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "1.2",
+  "unitCode": "1",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_economic_systems",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "This is a single-step vocabulary-level classification. The stem describes a mixed economy directly (market allocation plus government provision of public goods and regulation), with no computation, graph, or table. It requires only recalling the definitions of the economic systems from topic 1.2. The distractors are clearly distinct, and \"Laissez-faire monopoly\" is not a standard system. The wording is unambiguous, and the item stays within Unit 1 scope without macro content or extra reading.",
+  "payload": {
+   "archetype": "mi_economic_systems",
+   "topic": "1.2",
+   "skill": "1.B",
+   "calculator": "allowed",
+   "stem": "Which type of economic system is best described as follows? Most resources are allocated through voluntary exchange at market prices, but the government also directs part of the economy by providing public goods and regulating industries.",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Laissez-faire monopoly",
+     "why": "Confuses an economic system with a market structure; a monopoly is a market structure, not a way to answer the three basic economic questions.",
+     "value": null
+    },
+    {
+     "text": "Traditional economy",
+     "why": "Treats habit and custom as the allocation method, which the description does not mention.",
+     "value": null
+    },
+    {
+     "text": "Market economy",
+     "why": "Assumes prices and voluntary exchange alone drive all decisions, although the description names central direction, a mixed role for government, or custom.",
+     "value": null
+    },
+    {
+     "text": "Mixed economy",
+     "why": "The described allocation method is characteristic of a mixed economy.",
+     "value": null
+    },
+    {
+     "text": "Command economy",
+     "why": "Takes government direction of every decision as the defining feature, which the description does not contain.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 45,
+   "facts": [
+    "answer=mixed economy"
+   ],
+   "blueprint": {
+    "id": "mi_economic_systems",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "identify an economic system from how it answers what, how, and for whom",
+    "topic": "1.2",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the economic model that applies: identify an economic system from how it answers what, how, and for whom",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Confuses an economic system with a market structure; a monopoly is a market structure, not a way to answer the three basic economic questions."
+     },
+     {
+      "id": "m2",
+      "description": "Treats habit and custom as the allocation method, which the description does not mention."
+     },
+     {
+      "id": "m3",
+      "description": "Assumes prices and voluntary exchange alone drive all decisions, although the description names central direction, a mixed role for government, or custom."
+     },
+     {
+      "id": "m4",
+      "description": "Takes government direction of every decision as the defining feature, which the description does not contain."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted descriptions mapped to a system label",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: identify an economic system from how it answers what, how, and for whom",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_economic_systems",
+     "explanation_assumptions_id": "mi_economic_systems"
+    }
+   },
+   "seed": 9702,
+   "pack_id": "mi_economic_systems-s9702",
+   "explanation_en": "The correct answer is Mixed economy. The described allocation method is characteristic of a mixed economy.\nLaissez-faire monopoly is incorrect: Confuses an economic system with a market structure; a monopoly is a market structure, not a way to answer the three basic economic questions.\nTraditional economy is incorrect: Treats habit and custom as the allocation method, which the description does not mention.\nMarket economy is incorrect: Assumes prices and voluntary exchange alone drive all decisions, although the description names central direction, a mixed role for government, or custom.\nCommand economy is incorrect: Takes government direction of every decision as the defining feature, which the description does not contain."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_economic_systems",
+   "facts": [
+    "answer=mixed economy"
+   ],
+   "seed": 9702
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 1.2 and skill 1.B; identifies an economic system from a description."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mixed economy is the unique defensible answer. Market economy is excluded by the explicit government role."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The market economy rationale uses boilerplate ('names central direction, a mixed role for government, or custom') that does not match this stem. 'Laissez-faire monopoly' is an unrealistic hybrid distractor rather than a distinct, plausible misconception. The correct-answer rationale is circular ('characteristic of a mixed economy')."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and simple, with low reading load. The calculator designation is irrelevant but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, with a unique key. It fails on distractor quality: the market economy rationale is generic template text that does not fit the stem, the laissez-faire monopoly option is an unrealistic hybrid, and the key rationale is circular. These should be revised before use."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a single-step vocabulary-level classification. The stem describes a mixed economy directly (market allocation plus government provision of public goods and regulation), with no computation, graph, or table. It requires only recalling the definitions of the economic systems from topic 1.2. The distractors are clearly distinct, and \"Laissez-faire monopoly\" is not a standard system. The wording is unambiguous, and the item stays within Unit 1 scope without macro content or extra reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 25
+  }
+ }
+]

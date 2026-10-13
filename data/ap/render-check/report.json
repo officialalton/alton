@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-13T13:20:02.076Z",
- "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + phys-p1a2-items.json + phys-p1b-items.json + phys-s2-items.json + phys-s3-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json + chem-p1a-items.json + chem-p1a2-items.json + chem-p1b-items.json + chem-s2f-items.json + chem-s2ma-items.json + chem-s2mb-items.json + chem-s2mc-items.json (2005행)",
+ "generatedAt": "2026-10-13T17:03:20.298Z",
+ "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + phys-p1a2-items.json + phys-p1b-items.json + phys-s2-items.json + phys-s3-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json + chem-p1a-items.json + chem-p1a2-items.json + chem-p1b-items.json + chem-s2f-items.json + chem-s2ma-items.json + chem-s2mb-items.json + chem-s2mc-items.json + micro-p1a-items.json + micro-p1b-items.json + micro-p2f-items.json + micro-p2a-items.json + micro-p2b-items.json + micro-p2c-items.json + micro-p2d-items.json (2291행)",
  "all": {
-  "total": 2005,
-  "pass": 996,
+  "total": 2291,
+  "pass": 1095,
   "fail": 3,
-  "notApplicable": 1006
+  "notApplicable": 1193
  },
  "liveStates": {
-  "total": 1235,
-  "pass": 540,
+  "total": 1430,
+  "pass": 617,
   "fail": 0,
-  "notApplicable": 695
+  "notApplicable": 813
  },
  "byType": [
   {
@@ -93,8 +93,8 @@
   },
   {
    "type": "ap_graph:econ_curves",
-   "total": 25,
-   "pass": 25,
+   "total": 74,
+   "pass": 74,
    "fail": 0,
    "notApplicable": 0
   },
@@ -170,8 +170,8 @@
   },
   {
    "type": "ap_table",
-   "total": 498,
-   "pass": 498,
+   "total": 538,
+   "pass": 538,
    "fail": 0,
    "notApplicable": 0
   },
@@ -191,8 +191,8 @@
   },
   {
    "type": "ap_table:payoff_matrix",
-   "total": 8,
-   "pass": 8,
+   "total": 18,
+   "pass": 18,
    "fail": 0,
    "notApplicable": 0
   },
@@ -205,10 +205,10 @@
   },
   {
    "type": "none",
-   "total": 835,
+   "total": 1022,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 835
+   "notApplicable": 1022
   },
   {
    "type": "none(diagram_text_only)",
@@ -239,10 +239,10 @@
    "notApplicable": 1
   },
   "ap_microeconomics": {
-   "total": 172,
-   "pass": 162,
+   "total": 458,
+   "pass": 261,
    "fail": 0,
-   "notApplicable": 10
+   "notApplicable": 197
   },
   "ap_calculus_bc": {
    "total": 136,
@@ -270,8 +270,8 @@
   }
  },
  "figureNeed": {
-  "required": 923,
-  "text_only": 1006,
+  "required": 1022,
+  "text_only": 1193,
   "supporting": 76
  },
  "errorCodes": {
@@ -281,17 +281,18 @@
  "warnCodes": {
   "stimulus_json_repaired": 93,
   "points_only_curve": 24,
-  "table_units_missing": 149,
+  "table_units_missing": 193,
   "data_not_rendered": 130,
   "derivative_label": 6,
   "shade_unparsed": 10,
   "axis_label_long": 4,
   "axis_label_defaulted": 6,
-  "table_no_title": 190,
-  "axis_units_missing": 23,
+  "table_no_title": 230,
+  "axis_units_missing": 72,
   "text_data_not_in_stem": 1,
   "axis_range_derived": 28,
-  "curve_clipped": 2
+  "curve_clipped": 2,
+  "labeled_marker_off_curve": 8
  },
  "results": [
   {
@@ -32185,6 +32186,4800 @@
    "subject": "ap_chemistry",
    "kind": "mc",
    "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m01-k0",
+   "contentHash": "91885a25822c39bdcf571cc43e5bfb59129fa879cbccfa61eb1c6a3f7d5286f9",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m01-k1",
+   "contentHash": "e442c2e3cb62339c22afb696dbf7853a2236eab7c23565a3e4499ff9b2fa7362",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m02-k0",
+   "contentHash": "326f9211705aafb65903eb898885712a75f830611b1c450e14ce4326ec49a40e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m02-k1",
+   "contentHash": "e35581b54aaa72b8039c6411cd0db78119c8a20bfe27a0891458ccd576d43870",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m03-k0",
+   "contentHash": "c2d8d7730f5705c82e5b19181f53b22dcff07aca07932463b2f0823418ce29a4",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m03-k1",
+   "contentHash": "d9530831ddd4ef72028661d929e98a745330e4119b37694b6e7931f6f9d520ed",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m04-k0",
+   "contentHash": "fcc61c5f3b6f7375264494e621e1a127b639072884da2d9e027d6af947ea4d9b",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 12개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Total cost\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Quantity, Total cost and 7 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m04-k1",
+   "contentHash": "f9ab541b70960a819924fab5a7cdd5744da8b75a72cf899f52b2974363f6a294",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 12개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Total cost\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Quantity, Total cost and 7 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m05-k0",
+   "contentHash": "c7376e8515864a18d359345ed265beed62fd83777160333ea2e4bb01ae0ec56c",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 11개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Total cost\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Quantity, Total cost and 8 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m05-k1",
+   "contentHash": "2d2579a9ba2fbf744db9ec9986c5ecb2a1c23398306b448fa5ba45356651fd66",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 11개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Total cost\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Quantity, Total cost and 8 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m06-k0",
+   "contentHash": "dcbf419735514bff9f19746093c78a4955bd3f6041b2afe8b28c97c201dced17",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 14개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal benefit\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal cost\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Hour, Marginal benefit, Marginal cost and 6 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m06-k1",
+   "contentHash": "ae9ed6b86c0289fe6e983fd663bf4ad4f28b8d7c3ed6c01348b521bb6ca00774",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 12개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal benefit\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal cost\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Hour, Marginal benefit, Marginal cost and 6 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m07-k0",
+   "contentHash": "75e05c539254f639cc3bdce4652fd34ba42918908214b188c59e9423a4a116f2",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m07-k1",
+   "contentHash": "fb6f44e735ecb52c36cbb6cab4952ad625188ba0271f6f8f6303ec45a002f794",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m08-k0",
+   "contentHash": "30ea0de1105d1e3a3419ad481570723eaaeb96c5dce5d150a486acf2ea35d06f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 6개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Total product\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Workers, Total product and 6 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m08-k1",
+   "contentHash": "5731eeefd5caef88731e24ea3c8f43cb780b4e457ed244a06e9fa4278abffbab",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 6개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Total product\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Workers, Total product and 6 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m09-k0",
+   "contentHash": "eb5b8b7e72c565e9f4a06862b98dc91e5ff0bad291d5fcb2fca1dd789e0557ee",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 20개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"MPB\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"MPC\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"MEC\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Unit, MPB, MPC, MEC and 7 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m09-k1",
+   "contentHash": "28ab95dba80f1b1f6849ee7f4cc6eb2de0ab14396180347deb008d856bbde738",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 23개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"MPB\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"MPC\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"MEC\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Unit, MPB, MPC, MEC and 7 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m10-k0",
+   "contentHash": "7a10a70eaa37cfa3d70c3420040a5678c2df2c0ee07527e22bad29f64ab6f380",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D, S. Horizontal axis: Quantity, 0 to 40. Vertical axis: Price (dollars), 0 to 80."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m10-k1",
+   "contentHash": "93425b200089d8c6eb99a5a4db6d248ad94b3c30268b5bfbfb25cbc60600c9e4",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D, S. Horizontal axis: Quantity, 0 to 60. Vertical axis: Price (dollars), 0 to 100."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m11-k0",
+   "contentHash": "db191930a856b0fdd1c409ae7d5b99446fce0d4174c986a6b642db0fe7013d27",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D, S, Price ceiling. Horizontal axis: Quantity, 0 to 60. Vertical axis: Price (dollars), 0 to 60."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m11-k1",
+   "contentHash": "65024633fba79de9cabc1cc05ae0d73872e66040ab57316934fe92253d0aa0b8",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D, S, Price ceiling. Horizontal axis: Quantity, 0 to 80. Vertical axis: Price (dollars), 0 to 70."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m12-k0",
+   "contentHash": "f389301fcc04f6c9f7ccbd11d4e40cd3e3fae1b813af75a6bb42eaa7d3290aa4",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Cost (dollars per unit), 0 to 180."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m12-k1",
+   "contentHash": "6faa1cdf281771aae0c2707f931997f2a34b7b4b644d046a0139acbc1d5bfee4",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC. Horizontal axis: Quantity, 0 to 40. Vertical axis: Cost (dollars per unit), 0 to 100."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m13-k0",
+   "contentHash": "296d77b1462a035dffff585759ab4bd54e044db787d784e6a31c3f1b5b7ba52d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of Price, MC, ATC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Price or cost (dollars per unit), 0 to 140."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m13-k1",
+   "contentHash": "be235e4f36efeec6ed30340095bf6d5b0401399085e21cc4ec386c15ff310f58",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of Price, MC, ATC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Price or cost (dollars per unit), 0 to 120."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m14-k0",
+   "contentHash": "cc1ae0ded31cfb45a7ae36132329f59f8ac9d51f9258fb691ffd8b976079aef7",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D, MR, MC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Price (dollars), 0 to 100."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m14-k1",
+   "contentHash": "5fc831c92fd14f97561b342b5c518d03badfd35491fb6a94fdf2dc2f5dc21da4",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D, MR, MC. Horizontal axis: Quantity, 0 to 120. Vertical axis: Price (dollars), 0 to 140."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m15-k0",
+   "contentHash": "167211d87d8269e12e9dbfed46a4b9f57b3893a20269a85b5d6a805e1a7d5953",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D, S, MSC. Horizontal axis: Quantity, 0 to 90. Vertical axis: Price (dollars), 0 to 100."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m15-k1",
+   "contentHash": "092a91e204271d3f7323674bdb4802d0a0d03fcf5fef103cd8386bcf58efa928",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D, S, MSC. Horizontal axis: Quantity, 0 to 100. Vertical axis: Price (dollars), 0 to 110."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m16-k0",
+   "contentHash": "d937f2be07cc6e2cf0a409a0e9ec884d51f314ab19bb9008637e0136522c6c0b",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Country, Laptops (units), Bicycles (units) and 2 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m16-k1",
+   "contentHash": "769427be558636d0aa70e56043ce617c572c8d77be38a2da83878cd977901d63",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Country, Wheat (units), Cloth (units) and 2 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m17-k0",
+   "contentHash": "4ac633949b805deb7e237802ff8fbb6e86e3548ee3355956fea56be1e313aae1",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m17-k1",
+   "contentHash": "e37f0b2946b881eb6f1623b18b8dc50b6e9c2a071e1c33bb2d2f00c5bbd12caa",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m18-k0",
+   "contentHash": "877d5242f43d69b56bfb3583d75c61ffd24999ff718b6178ac2705e6b78c6606",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m18-k1",
+   "contentHash": "5d43d9fecd6296adf4557fdd8f9d478a21e1f21a9e4522e5c4045fb02f4ec0e9",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m19-k0",
+   "contentHash": "30a7e2cd8b9be99fffdd41aa7df5c469440d2e2ce74674d590864f64d70cd1a0",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m19-k1",
+   "contentHash": "08c55ef769bc5fb6fd963d983c4ddb4cfa436a6fe84556312ca7e050453f5b28",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m20-k0",
+   "contentHash": "6f57888513772e1d5af5d626c7df4f4c749651cb246998f03e5db2bac02960a2",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m20-k1",
+   "contentHash": "25cf39f79626211d39a7103682e31b11bf7671c4b44b9eee722215e987f3e78d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m21-k0",
+   "contentHash": "44847718b4be9d0b8e7d5e6fc8e4c3b6276cc2ba9079682eb3a95f28e5b6b300",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "payoff_matrix",
+   "renderType": "ap_table:payoff_matrix",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Payoff matrix: Firm A (rows) and Firm B (columns). Table with columns Firm A \\ Firm B, keep the price, cut the price and 2 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m21-k1",
+   "contentHash": "485b27f166f7e872280a6434d604e62c87f252ce5ba2fb93886fc975bc321694",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "payoff_matrix",
+   "renderType": "ap_table:payoff_matrix",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Payoff matrix: Airline X (rows) and Airline Y (columns). Table with columns Airline X \\ Airline Y, high fare, low fare and 2 rows."
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m22-k0",
+   "contentHash": "7ae2104a26ef72e8bf6c54157d9a6cc91d78c1e9db31298ed868769715e41061",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-a:ap_microeconomics-m22-k1",
+   "contentHash": "975fe80ef7b86f1e9216225a4000ec46f54cc4092d85bcd159b951b650ecaac7",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p1-b:ap_microeconomics-f01-k0",
+   "contentHash": "98b9ce2642160b5169ca28717cbb9d05e735b4e412a52cc41d638ff3d0b12581",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 17개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Quantity (tons), Total cost (dollars) and 9 rows."
+  },
+  {
+   "key": "micro-p1-b:ap_microeconomics-f02-k0",
+   "contentHash": "443f445764f66f7a4e5543c61a5c1bdcc43b2baa339b5bf2e9611b91d3167409",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 16개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Quantity demanded\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Quantity supplied\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Price (dollars), Quantity demanded, Quantity supplied and 6 rows."
+  },
+  {
+   "key": "micro-p1-b:ap_microeconomics-f03-k0",
+   "contentHash": "59a40c0fe9b449f80744e3e919e7f2de53a619a9814fe6067a24b011fab33c70",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 14개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Quantity, Price (dollars) and 7 rows."
+  },
+  {
+   "key": "micro-p1-b:ap_microeconomics-f04-k0",
+   "contentHash": "afd570c4f23381432f2a17631ec9602ec39f8cc61f6fa0918aea90c25de71018",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 20개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Quantity, Marginal private benefit (demand), Marginal private cost (supply), Marginal external cost and 5 rows."
+  },
+  {
+   "key": "micro-p1-b:ap_microeconomics-f05-k0",
+   "contentHash": "93fc5f122a4304005bb8943694afff4fadbb3baabde1aa20c88173f8ff33e813",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 11개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Workers, Total product (chairs) and 6 rows."
+  },
+  {
+   "key": "micro-p1-b:ap_microeconomics-f06-k0",
+   "contentHash": "fb252f6ec35abd6e00bd7d3fe676526d6130e3d0b9d546ff178df4b86fd4ce68",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Wheat\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Cloth\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Country, Wheat, Cloth and 2 rows."
+  },
+  {
+   "key": "micro-p1-b:ap_microeconomics-f07-k0",
+   "contentHash": "fe31195c7920fcef48a3bdfa70cb406fbfb8a502f9b7cec36ac1cac11efbe89b",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Quantity demanded\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns –, Price (dollars), Quantity demanded and 2 rows."
+  },
+  {
+   "key": "micro-p1-b:ap_microeconomics-f08-k0",
+   "contentHash": "0397c0f52709263bb52641ba7b50d57a332bee566ceebd122f4e86f0a716e741",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 20개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal revenue\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal cost\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Average total cost\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Quantity, Price (demand), Marginal revenue, Marginal cost, Average total cost and 4 rows."
+  },
+  {
+   "key": "micro-p2-f:ap_microeconomics-f01-k0",
+   "contentHash": "1c43ba7cc4d25decb7dc156b50e22b726d9391956808a53a2df419616407354f",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 17개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Quantity demanded\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Quantity supplied\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Price (dollars), Quantity demanded, Quantity supplied and 6 rows."
+  },
+  {
+   "key": "micro-p2-f:ap_microeconomics-f01-k1",
+   "contentHash": "2dd0f0fa0ef5d699d9bfd63b5023ee76d90b9f0b6fb3e1377b5213522f15b8bf",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 16개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Quantity demanded\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Quantity supplied\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Price (dollars), Quantity demanded, Quantity supplied and 6 rows."
+  },
+  {
+   "key": "micro-p2-f:ap_microeconomics-f02-k0",
+   "contentHash": "f211d8c4ba54de08bbb6f59e004acf7b0bb88a3ff0d2bc0c4dd6bdca14ffc8ea",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Country, Laptops, Chairs and 2 rows."
+  },
+  {
+   "key": "micro-p2-f:ap_microeconomics-f02-k1",
+   "contentHash": "120e6c30635da8646b8dd52e43a96b42331ed231b4f7b9a98a3e7e0da933d471",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Country, Corn, Shirts and 2 rows."
+  },
+  {
+   "key": "micro-p2-f:ap_microeconomics-f03-k0",
+   "contentHash": "319875603f4a982bc51a995c347dfa508db30562e5958d92fb0ca0709c1097d6",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Quantity demanded\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns –, Price (dollars), Quantity demanded and 2 rows."
+  },
+  {
+   "key": "micro-p2-f:ap_microeconomics-f03-k1",
+   "contentHash": "499970e54541a3474d758d8f1739c032769efeff7384e9bda7d66492308023e0",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Quantity demanded\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns –, Price (dollars), Quantity demanded and 2 rows."
+  },
+  {
+   "key": "micro-p2-f:ap_microeconomics-f04-k0",
+   "contentHash": "93d2b81a33887897fcb89b0f6827b1b1248f99f4eb2952a6bf4f3116b2a09b1c",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 20개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal revenue\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal cost\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Average total cost\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Quantity, Price (demand), Marginal revenue, Marginal cost, Average total cost and 4 rows."
+  },
+  {
+   "key": "micro-p2-f:ap_microeconomics-f04-k1",
+   "contentHash": "b0adf0dab62c25490ba5e14f7cecf56404c0fb6885bd7bc3aac7eaf8e99e3c51",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 20개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal revenue\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal cost\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Average total cost\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Quantity, Price (demand), Marginal revenue, Marginal cost, Average total cost and 4 rows."
+  },
+  {
+   "key": "micro-p2-f:ap_microeconomics-f05-k0",
+   "contentHash": "bc968bf14a42536e7f881baba3a511ba1c4597240cec32d090ff1f38fe9f2a3a",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "payoff_matrix",
+   "renderType": "ap_table:payoff_matrix",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Payoff matrix: Airline X (rows) and Airline Y (columns). Table with columns Airline X \\ Airline Y, high fare, low fare and 2 rows."
+  },
+  {
+   "key": "micro-p2-f:ap_microeconomics-f05-k1",
+   "contentHash": "3837dc778d285aa425f4e1fc0113bbe4657a1f3c395dde0453aa5e1b77c5cda0",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "payoff_matrix",
+   "renderType": "ap_table:payoff_matrix",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Payoff matrix: Airline X (rows) and Airline Y (columns). Table with columns Airline X \\ Airline Y, high fare, low fare and 2 rows."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m01-k0",
+   "contentHash": "039c702278872e15d824e9f06f6a3be6e60a8a2cae586dd6bbd4a94a8e01a81d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m01-k1",
+   "contentHash": "ecf3841ce59bb21527134fb6bbbc6a53db891c01e87bccf723636696a2e7b9b4",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m02-k0",
+   "contentHash": "a72e2bfa89442542aff7f8751bcd78f4e43a4f6655b2f5a12b88656e71a3ec4f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m02-k1",
+   "contentHash": "dbc76ec60155f89c3ada55eb1fc011fd61322b7eacafd83c54e6953506255133",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m03-k0",
+   "contentHash": "3ba26d3c399281117648b4b7aca92b97b6ed472cc9ee6e9faaf965128aeedc3a",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m03-k1",
+   "contentHash": "393e182e85a58a2f56b33b8fd178f16042cef5db03a98c4bea8625090acad307",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m04-k0",
+   "contentHash": "581a9089860a49c9e1c676a13d814075cc19e1257ad2a63eca33900f04e1532b",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m04-k1",
+   "contentHash": "e322a7bb776056215c226ae853c7f2b301f171c0ef786565b3f1af6ec9c00e92",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m05-k0",
+   "contentHash": "11394923a2d7fcc54d014d85eff27ae8316b229b1c93d2ba8ebb8c5acd07167e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m05-k1",
+   "contentHash": "17c0b8088f7f1f0dc73a8f643add2c37d8a80c3478ab2522636a1069c1cdbf1f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m06-k0",
+   "contentHash": "44a43c3e80644e8b48e0b2a9ac925969eff986e6015323cab7424996ab0c5242",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m06-k1",
+   "contentHash": "6a3865e5cfbffb7d91c2bbbb29f6b344cd79c0543d94bcffdf0ccd1c60fd4814",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m07-k0",
+   "contentHash": "056d1b2fa7116679b9c84659767a879f9ab01e8db2046cfa11e7445ae886353a",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m07-k1",
+   "contentHash": "b27391efd401da0e3cb4b1e1b71b1b6b75742a09345b04f449d6422e6f558325",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m08-k0",
+   "contentHash": "81e93a4e2909a6fbbf4bf40a81c166ef34c77a2e8d4e9fa499d33ce90ca86928",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m08-k1",
+   "contentHash": "8e3b5b28a58787295192787a54ac905641bbad7087aafce27a3feedf24e5fac0",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m09-k0",
+   "contentHash": "9a803a254fda7e4cd9eab7006feb4772a115c509e2071507dd9c83b0c6eded53",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m09-k1",
+   "contentHash": "594e1ad4f82400cc84818d2dc90e904adb3038976d4beaa7ad73aac972bf9892",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m10-k0",
+   "contentHash": "4ef3cdac2e073ba3aa0d2f17d550666f0e5ff92436315a63a9acaf66031d7f85",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m10-k1",
+   "contentHash": "044d0a91ee38b1f51f05516a6bf943e5a4aaa09d8b0e33e154f9d1f4958d08bb",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m11-k0",
+   "contentHash": "6c0807a869d232399b16f07d4e801945235106528bf78f9cdffe6a35c0c49f79",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m11-k1",
+   "contentHash": "a4e2f8306a87328bdfdcf1166255f3488c6d7a35a05db01c2c6376d6692eb8a5",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m12-k0",
+   "contentHash": "5a1ad882172380959132d04a74ed15f3f7bfd4a0befd28b44ba2ad4fdb4e4c62",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "payoff_matrix",
+   "renderType": "ap_table:payoff_matrix",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Payoff matrix: Firm A (rows) and Firm B (columns). Table with columns Firm A \\ Firm B, advertise, not advertise and 2 rows."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m12-k1",
+   "contentHash": "6a9f7192b907577e5df1a88f479c081f7d59d7f2fa2066b6c58a8da9aead6c8b",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "payoff_matrix",
+   "renderType": "ap_table:payoff_matrix",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Payoff matrix: Store X (rows) and Store Y (columns). Table with columns Store X \\ Store Y, run a sale, no sale and 2 rows."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m13-k0",
+   "contentHash": "8886b2a5d07337eac478bcc426832ff79dfcfd3e195b009c58d86f2966a92149",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m13-k1",
+   "contentHash": "77ad8e3b9180eff50281d91118cf07b954f221700d5d8b1325e6793e5137f0a3",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m14-k0",
+   "contentHash": "4e3d97e4111f139b9ebe1b183b46a16f92b4862e4d1d513db07974080163921e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m14-k1",
+   "contentHash": "2a6ccab59ee8852c90c9c3faa98aead3ee886dd176e2ba2a7309dba1baafeea9",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m15-k0",
+   "contentHash": "edf26b24090bab4e9c0d236f95aaa4b79c2f6bee14de09336836a30975e9c9de",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: Quantity, 0 to 60. Vertical axis: Long-run average cost (dollars per unit), 0 to 80."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m15-k1",
+   "contentHash": "7edde5bc12f4bc014d94029274d38b77269b7fa288aaae4c31caac23c96631cf",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: Quantity, 0 to 90. Vertical axis: Long-run average cost (dollars per unit), 0 to 80."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m16-k0",
+   "contentHash": "59f7ba94027225bc03ecfaf3083adc2085451759997d0bc4d72c6c76c7009a9d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m16-k1",
+   "contentHash": "deb639ca6f23d0aa7eba9c9092ac5813c905e8272a1d60575b1ffb788fb2f466",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m17-k0",
+   "contentHash": "40ae4d7c43bca73b43a9b4f150836aed7a248a80c9074ccbea90213c074af753",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D, MR, MC, ATC. Horizontal axis: Quantity, 0 to 50. Vertical axis: Price (dollars), 0 to 110."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m17-k1",
+   "contentHash": "d55d7bb17624ee2103ca250f0e7dc3703ba4653611df9c29708c4099a488298c",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D, MR, MC, ATC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Price (dollars), 0 to 160."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m18-k0",
+   "contentHash": "2edeb17c96c98fea3cde1619668bac692e1d1ca85be3ab92b9790989cf0615d2",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m18-k1",
+   "contentHash": "e25a8bcef8f662f2cc5b7ed473d3ca4389bea7bbd1fe296185c32259b2c97a53",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m19-k0",
+   "contentHash": "6c5ebdc877fb9e391287f520ca523276fba04f6be333548288254686b98abf0a",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D, MR, MC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Price (dollars), 0 to 100."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m19-k1",
+   "contentHash": "348f0e56989a11d0be5c97effeb07f0c061c231c764e3cb9852cc0bf5b7ce814",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D, MR, MC. Horizontal axis: Quantity, 0 to 100. Vertical axis: Price (dollars), 0 to 120."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m20-k0",
+   "contentHash": "45434a83dab8c888debf8004d090ef6fb2201ded3d04cb09ab2c14314af31483",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m20-k1",
+   "contentHash": "a74709587a2c4b7ef5db6ec706a152e6e49f81279e88fad9f69ba70feff83075",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m21-k0",
+   "contentHash": "0016b82d908aaef3853df93294c6004d7bba0d72f306242ddbb6fe497c48db55",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m21-k1",
+   "contentHash": "503e8add95b5b6a42d5f7b6ee84b068bee880a5dd5cb689d01a4e9dc66b4862a",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m22-k0",
+   "contentHash": "cd904916f911acfee2b4e5f2caa3864938d9648d3147e75c408e8162259a1747",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m22-k1",
+   "contentHash": "084bf01a158d8efbfd039936b973c11885d55adc55200da6d07d209fc42f71dc",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m23-k0",
+   "contentHash": "cbe9fcf213d9b1da43c5694fb4ef836429d1ba4c36946c5ef6b2d05abb7be968",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m23-k1",
+   "contentHash": "cd2742fc0de6de2e920b32019da8b2fdb71e41a7531243ec84a86d909d1ff571",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m24-k0",
+   "contentHash": "09770a370db552e25874b65ad2607b095f89723806a63de68da356de0b16a3fc",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 9개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Total product\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Workers, Total product and 6 rows."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m24-k1",
+   "contentHash": "0035b914aff969eace5d8e5f367e4728eee506c894b8208d24d13654957da472",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Total product\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Workers, Total product and 6 rows."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m25-k0",
+   "contentHash": "ffb59f518f6da8a186f8d286df0815c95b6c533902048c208014dc0c83c0c301",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m25-k1",
+   "contentHash": "8a4b8f7fc730dcc3c10f4f6ba0624aff397e7828ace09d1b829ac97aec914595",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m26-k0",
+   "contentHash": "62b59a726a652a8b5c14ef11c16492477cdd9befb6d89cf95e67be58615cbe06",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC, AVC, P1, P2, P3. Horizontal axis: Quantity, 0 to 80. Vertical axis: Price or cost (dollars per unit), 0 to 120."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m26-k1",
+   "contentHash": "24fe746dc23f1f15c684ff891ffc5570f78cc509d7a33ab2424fa6fce239ff5e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC, AVC, P1, P2, P3. Horizontal axis: Quantity, 0 to 80. Vertical axis: Price or cost (dollars per unit), 0 to 120."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m27-k0",
+   "contentHash": "58d40f30163923b97a022ffe729f2234da8a832a963f1878473fcd95e2fc801b",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m27-k1",
+   "contentHash": "947eca08438a2df706ab6af6b9ddbcf956bd833143e1c520a387ae3e23863267",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m28-k0",
+   "contentHash": "85374cf48cb4f2cd0820d05b087afd24da7c01115d56cfc9f11de1abaf80016d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m28-k1",
+   "contentHash": "f9c95b0cc30ae35c0dbb4bcc0d30cb75c6b66e891cc6127aa117bb534cba63a8",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m29-k0",
+   "contentHash": "46f9aa6d6e5f04d36445ff15d9b435cdac3a6cf15f426d525e3c7fb4f5638839",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m29-k1",
+   "contentHash": "dea9bfbd917a17de08d83120fca9d4341f1cb01d3b40b6f444ed75ebe1bd4a07",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m30-k0",
+   "contentHash": "0b563c9490780db59cf5551fb65e1b3bbe20c479de0588a2a5249a2fb100f368",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m30-k1",
+   "contentHash": "1b25d881817287a4879aaba99c0c7b5dcca3df37ba488801e0e55c30636f7759",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m31-k0",
+   "contentHash": "fa13c52f5f96c3737378fe77e02e14eaf77c84eaf7f450cc7b1f248c7de47402",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 11개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Total cost\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Quantity, Total cost and 8 rows."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m31-k1",
+   "contentHash": "83d0e8e5c3bb763b8bd8c8982f4c0db1ac7f21d3db51cc8998f5a3d2e374d565",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 11개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Total cost\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Quantity, Total cost and 8 rows."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m32-k0",
+   "contentHash": "0fc66e63d511ec17cbe9496da8fbf95a250b43ea8d26186e233d977b8e7cdaa9",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 12개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Unit, Person A's marginal benefit, Person B's marginal benefit and 6 rows."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m32-k1",
+   "contentHash": "74671b52658a8684c9b86e577fd9348829e34c9fca996dad70c116cc8e9969ab",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 12개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Unit, Person A's marginal benefit, Person B's marginal benefit and 6 rows."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m33-k0",
+   "contentHash": "127d6c5fcbb910019a3d8b2f6e565b56bb8d6e7a2e4a046b3ee9ea62c725216a",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m33-k1",
+   "contentHash": "9e36b593f259a5489fd2e6345a5f7c95ca0f24af50df6f7ac7dc8e56fbf7bef3",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m34-k0",
+   "contentHash": "9a0ab4236aa63c8bbc74a3a7c789721f236bad4facf80d3b2a188f07d898c45f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m34-k1",
+   "contentHash": "40faf31665a10cef768ed1f0f7778237c4a50f9005cf994802c8117605cb8951",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m35-k0",
+   "contentHash": "3c30ffdfb74b0a0c492e67f13f7052dc02335830325fb5b81a2264040008e9e0",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m35-k1",
+   "contentHash": "efea3349a76eab3317190ae2f834d37ad2bcf2b45d904380111f9904edcdb4ad",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m36-k0",
+   "contentHash": "e1b206601341b195523b745dd605a04355beef98cc02b370176b7f2f5388fb8e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m36-k1",
+   "contentHash": "a2123d8c36d05a187c1584ac56489fe58f23cd122a081cd75e28d3d79171893b",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m37-k0",
+   "contentHash": "d854b7d18ad771972b539bd4e5d6e6b6de77b04cd981b6be864a6138c242703f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m37-k1",
+   "contentHash": "e1ccb8dc1d249f6b4fc64bd7f0425184a6171841456e4d6392c723c5df0124d8",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m38-k0",
+   "contentHash": "435aebb29acfd8e77aa5844b71006fc6ea7b9e7c2cdedf49cc98551943430e3b",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 6개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal utility of X\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal utility of Y\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Unit, Marginal utility of X, Marginal utility of Y and 4 rows."
+  },
+  {
+   "key": "micro-p2-a:ap_microeconomics-m38-k1",
+   "contentHash": "9f18d75a222f13fe8d68d9c4e65a098a56a8acfec37d246ba6a1cd814dc53e89",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal utility of X\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Marginal utility of Y\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Unit, Marginal utility of X, Marginal utility of Y and 4 rows."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m01-k0",
+   "contentHash": "c1fcb90f994c841e497f9e16b6b63c311df42f69773ea225e22f04455f8fc2aa",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC, AVC. Horizontal axis: Quantity, 0 to 120. Vertical axis: Price (dollars), 0 to 260."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m01-k1",
+   "contentHash": "8f5af9cf5a7a56fa5efac5492d3cb93e9fbe3c8ffc0cdd49f693822a1dd957e2",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC, AVC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Price (dollars), 0 to 200."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m01-k2",
+   "contentHash": "260adc2e84666ddbbe1fd4d3a32f0a5a10e39b1071bb42cf173768c00b4f9897",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC, AVC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Price (dollars), 0 to 180."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m01-k3",
+   "contentHash": "943bbdf425a666f5658ab3ddae0ee79d85d3cc22460e3312fb512df38398cb19",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC, AVC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Price (dollars), 0 to 200."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m02-k0",
+   "contentHash": "db9bf23b46c3b81450c71b538a0e3a6664fc2eeedb5a64ee15feb1734c934952",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC. Horizontal axis: Quantity, 0 to 40. Vertical axis: Cost (dollars per unit), 0 to 180."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m02-k1",
+   "contentHash": "54a5980c97f8d3babab05fe76417cf982161fb1d194ae13446ca9c334abc407f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Cost (dollars per unit), 0 to 200."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m02-k2",
+   "contentHash": "7ccdcab5e27f96e9cf674a91b4b1f115fc21f62abd963a42631149977295a367",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC. Horizontal axis: Quantity, 0 to 40. Vertical axis: Cost (dollars per unit), 0 to 120."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m02-k3",
+   "contentHash": "a1bdd508501aa28b651f03ce75beb392119e3aa3b7620134caae652c05ec2b0e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Cost (dollars per unit), 0 to 200."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m03-k0",
+   "contentHash": "1f6d803c19ffe34884d93483a78734e2488e59dd45acfe0f466c6ade4461c658",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m03-k1",
+   "contentHash": "c27faf11ae939ac7ba8a25f9c10d0c521b7c8c9dd8f1d4414fcf9406cfea3b23",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m03-k2",
+   "contentHash": "81c85924831f2bab1961c3fbb246c11f681ba947cee2f3f57932e6682c003d4d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m03-k3",
+   "contentHash": "f3fd7689c2051fd425ac32b62ae6c00123f6c0ae1be2d528221865922cf116c9",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m04-k0",
+   "contentHash": "8deff23d55f4d5eb0a2a9aec874a448dcba7690574f791f7a9f3eb98e610dbc6",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D1, D2. Horizontal axis: Quantity, 0 to 120. Vertical axis: Price (dollars), 0 to 190."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m04-k1",
+   "contentHash": "e3bc012c8560b7404d38e1d47ee7235b39718323d591b7d60a3f557968a2ad6b",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D1, D2. Horizontal axis: Quantity, 0 to 90. Vertical axis: Price (dollars), 0 to 140."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m04-k2",
+   "contentHash": "06f230e9bb1a61e8e0be5c50778ff547b4d9a49c8857bb16f53961a5e7387e2e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D1, D2. Horizontal axis: Quantity, 0 to 160. Vertical axis: Price (dollars), 0 to 150."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m04-k3",
+   "contentHash": "19cc09a1dfa804623ce4006005cea6bec87b841faa20f21982ee4a70a4d846cb",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D1, D2. Horizontal axis: Quantity, 0 to 100. Vertical axis: Price (dollars), 0 to 230."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m05-k0",
+   "contentHash": "7020095cb7e28753c9d2991e169007ed04d986e02bf3ddfc274e5fc215f2266f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m05-k1",
+   "contentHash": "988e651ce68641a1d4167a2c61bbd130233398dca4e329081f7ae77cea73e2d6",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m05-k2",
+   "contentHash": "b3fa92f7d1f6e14e9fbf52064f65c98cc4bbd0535209a99fbb467cda86bb418e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m05-k3",
+   "contentHash": "3f33f66a5d504db55a18bf08f8530ff343dc3f42749b5465e73344a6b5a62c10",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m06-k0",
+   "contentHash": "2ffd72a3c513c047dcd75f28c0f60f2810aeee16c5529f0dd9fe41b3ef0cefc2",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m06-k1",
+   "contentHash": "14819e32041f150740389abb19ac9284bf88fe5b232ad6decab0a5d7c47e9529",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m06-k2",
+   "contentHash": "c1082f6a57a4dc02e4c48410be6efc15d49c1b4c87b8f751304dc3952bd9083d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m06-k3",
+   "contentHash": "e8fa1df7f3089dadbab7be138a7e5881889b67b2ef6842691555b1f4093d4eb8",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m07-k0",
+   "contentHash": "15fe7ad43ffe4193a6ca078a1fd1b2d12effba5ca78a17e333f6215c971badda",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "payoff_matrix",
+   "renderType": "ap_table:payoff_matrix",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Payoff matrix: Firm A (rows) and Firm B (columns). Table with columns Firm A \\ Firm B, keep the price, cut the price and 2 rows."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m07-k1",
+   "contentHash": "c05e12e5dc5606e1b1c1d829114734283ef75dc5d5916852240561b14e9753e5",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "payoff_matrix",
+   "renderType": "ap_table:payoff_matrix",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Payoff matrix: Company X (rows) and Company Y (columns). Table with columns Company X \\ Company Y, low output, high output and 2 rows."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m07-k2",
+   "contentHash": "66c9953eba37660fc842f57318d2a2823bedb42951d00ba2945de11c66916a03",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "payoff_matrix",
+   "renderType": "ap_table:payoff_matrix",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Payoff matrix: Firm A (rows) and Firm B (columns). Table with columns Firm A \\ Firm B, keep the price, cut the price and 2 rows."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m07-k3",
+   "contentHash": "dca2f8ec38aa49b0c05fc766184861e736defd12ea2edc95fff821d8d2194ced",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "payoff_matrix",
+   "renderType": "ap_table:payoff_matrix",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Payoff matrix: Firm A (rows) and Firm B (columns). Table with columns Firm A \\ Firm B, keep the price, cut the price and 2 rows."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m08-k0",
+   "contentHash": "1dd0fd42390ab3d31a9748c8ce2862b5609ec61d338fbd2f9f9fc4b96cfb38dd",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m08-k1",
+   "contentHash": "957d63cfcd13a63f59776a1587fea113991c765ede27c19c5c2277f6ba3cae43",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m08-k2",
+   "contentHash": "8fb32c51f9377a133f8657e465cf9b0974d6c17b8813d18e3a8ea76cf73b9270",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m08-k3",
+   "contentHash": "1a524c0220f244a80adc21dbfa7d1d407f59390e78160b9d92520ad9b29cd5a7",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m09-k0",
+   "contentHash": "4ac238453e891996f333ba375f858367d4fb51c00465846a760306ebfe24bf87",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m09-k1",
+   "contentHash": "327f15a86f78687bebf2ebf7796e0814abdc6f10287b48de5e1d4aae786fa927",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m09-k2",
+   "contentHash": "c7b70baa622c7fec875ae7976ddaa8758a5fd844e149e4d4e2059115f049d725",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m09-k3",
+   "contentHash": "a414e97203910fdbeb868e795e8b9e4a8a58794cc8155024088e4d7b84afc54f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m10-k0",
+   "contentHash": "d7df8fa0adb66d0555ccd8f6ffe6d9497f416df23df4076b9d6507ff2ddea00f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of Line of equality, Lorenz curve X, Lorenz curve Y. Horizontal axis: Cumulative share of households (percent), 0 to 100. Vertical axis: Cumulative share of income (percent), 0 to 100."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m10-k1",
+   "contentHash": "9016d8640824d4aae69cfe183edd568a4c68984bf72b87ea073670ebe547cf1a",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of Line of equality, Lorenz curve X, Lorenz curve Y. Horizontal axis: Cumulative share of households (percent), 0 to 100. Vertical axis: Cumulative share of income (percent), 0 to 100."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m10-k2",
+   "contentHash": "af5af361227f2cd51129b7be0f585619f7e6922b8f6c339a13524d119e8e2af8",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of Line of equality, Lorenz curve X, Lorenz curve Y. Horizontal axis: Cumulative share of households (percent), 0 to 100. Vertical axis: Cumulative share of income (percent), 0 to 100."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m10-k3",
+   "contentHash": "2bc58f8bfdab3aa430fae8c1064dff3426a9cad07152f6d1ddb662f474010de4",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of Line of equality, Lorenz curve X, Lorenz curve Y. Horizontal axis: Cumulative share of households (percent), 0 to 100. Vertical axis: Cumulative share of income (percent), 0 to 100."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m11-k0",
+   "contentHash": "70118546aace078e1eceee42d714d543ae956953f8907231b042e6372b4b1b26",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m11-k1",
+   "contentHash": "1f2d31ec5027244244282e355b9d06c30d2bb9cbaf76f3a0daaedee3176bac4d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m11-k2",
+   "contentHash": "f300fe5a78fb01d702501a25fbbe2d1328a3f3f0ec34ca36c6be4b2f1357d5cd",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m11-k3",
+   "contentHash": "6d925a38c2e148114791775c4e89481a9c33b28ebb86c153cffc76f750bfa9c3",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m12-k0",
+   "contentHash": "1ef6c8a4075688e4d030c6510b82e7a12e1b9e972ef98a2912d002cae96f1f3d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m12-k1",
+   "contentHash": "909b656963cdb8f6ad8248529b77fb1a09f8dc77a05d0f43d222e6f36b678e10",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m12-k2",
+   "contentHash": "bc822ef77cb7db9e29c0cdf50130aa4a15c1a8b59813320cdb5ec157c219c055",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m12-k3",
+   "contentHash": "6c60a73040b617d358e5dfb9769cd9c331c0e5688fb1e46dd04b5a28401e7f9e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m13-k0",
+   "contentHash": "7cdd2f2cce507eeaaf205d461e266cbb89a4f305f69cfcf09ffadb0783f139a7",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 11개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Workers, Total product (fence panels) and 7 rows."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m13-k1",
+   "contentHash": "55b0c9fe2ecf5153598683ffc62474870dc6b081f3bad730384c0a461c5030b6",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 12개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Workers, Total product (fence panels) and 7 rows."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m13-k2",
+   "contentHash": "230fbc5ada0bcbdfef518487ac98ae9c4f329afcac4211abef83bfeebab80e65",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 11개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Workers, Total product (pairs of shoes) and 7 rows."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m13-k3",
+   "contentHash": "659d5eca8edbd58d864d373084789dabd9ad44b80475a23dd578820d7728860f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 12개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Workers, Total product (fence panels) and 7 rows."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m14-k0",
+   "contentHash": "5f7c5c8ec37dac9f4afb3f5be0e6e53369864194a0c717f38008856f92deab81",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m14-k1",
+   "contentHash": "811adfce82689ea129c6d3339b01b1a6aa0bb7f6467d0f37ec3ef650b0b2ace4",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m14-k2",
+   "contentHash": "3e1ec06f301d1ae54ef7f2400827d4fe8e17a0db170b553a499586f6120b38aa",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m14-k3",
+   "contentHash": "168b03ad52776485b02c694da0f86c6e75220141012808d757b2d30d5e5dce3b",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m15-k0",
+   "contentHash": "4c0f53b65dc5d07b0533480c8daf34017e6a14b3dd8531d6c78f589233783728",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m15-k1",
+   "contentHash": "f9d4fe6e9463f4cb6d286d04becb3765848bf22a1c89da391464401d25f977ee",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m15-k2",
+   "contentHash": "d0cf913927a85bfbcc7cc2fce2db2e6e5066a4d9fdf57debbd16cc5ed94a87e1",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m15-k3",
+   "contentHash": "bebc51e569828d28f53f73b995d9fdc20c33227219f1d4f3034d604157b67280",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m16-k0",
+   "contentHash": "93a9380a829b20bfca6c32b03340b5670b814f44aba803feb2aa82cf4cb07a9b",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m16-k1",
+   "contentHash": "fb55dec26baa148409bb1b3783b81a66cae7a2f65fa4e8e0fcf6f49dc3357c25",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m16-k2",
+   "contentHash": "0d27e2ef3de71815da37a632166968de335081f03e1c86aed89b8910772949f0",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m16-k3",
+   "contentHash": "bf8e8ed8826f7773834754a89014e7f13eccc99ec6dfeaf9d04987d92990df99",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m17-k0",
+   "contentHash": "cf40fb46ffcbe79295e02708e1212599ecd7bafcff1300aaa8a418e9ed14e72e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m17-k1",
+   "contentHash": "5ca31213fe93fce1cf57a379e176c709a808027644d575c273e5880eebd61579",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m17-k2",
+   "contentHash": "50b0e894317821d1e3d2ce944242ba7abd6085f2dd90b0d1543d8c1bf31680ce",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m17-k3",
+   "contentHash": "ba4b0750066f021f595ce435272bc98effd3471568345c647f1b57c3bb14b71f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m18-k0",
+   "contentHash": "462157c154ed4d65d944688f17b8e6e387c0188023d6c70dae739b5f896cfd03",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Capital goods\"에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "y 축 라벨 \"Consumer goods\"에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "labeled_marker_off_curve",
+     "message": "라벨 점 B (18, 42.9)이 곡선 위에 없습니다(곡선 밖 점일 수 있음)."
+    },
+    {
+     "level": "warn",
+     "code": "labeled_marker_off_curve",
+     "message": "라벨 점 C (48, 80)이 곡선 위에 없습니다(곡선 밖 점일 수 있음)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: Capital goods, 0 to 70. Vertical axis: Consumer goods, 0 to 120."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m18-k1",
+   "contentHash": "1f1a806c3263a9aed19680a0a7f196bf92d5c4025daf8b1ff3a7235f16cec990",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Capital goods\"에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "y 축 라벨 \"Consumer goods\"에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "labeled_marker_off_curve",
+     "message": "라벨 점 B (15, 25.8)이 곡선 위에 없습니다(곡선 밖 점일 수 있음)."
+    },
+    {
+     "level": "warn",
+     "code": "labeled_marker_off_curve",
+     "message": "라벨 점 C (40, 48)이 곡선 위에 없습니다(곡선 밖 점일 수 있음)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: Capital goods, 0 to 60. Vertical axis: Consumer goods, 0 to 80."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m18-k2",
+   "contentHash": "89f9fcc4d8ad6257d7c0dd3134a9a045b8691e088db4762f7192f917cbde44fb",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Capital goods\"에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "y 축 라벨 \"Consumer goods\"에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "labeled_marker_off_curve",
+     "message": "라벨 점 B (12, 26.5)이 곡선 위에 없습니다(곡선 밖 점일 수 있음)."
+    },
+    {
+     "level": "warn",
+     "code": "labeled_marker_off_curve",
+     "message": "라벨 점 C (48, 48)이 곡선 위에 없습니다(곡선 밖 점일 수 있음)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: Capital goods, 0 to 70. Vertical axis: Consumer goods, 0 to 80."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m18-k3",
+   "contentHash": "7da779d398e9ec6c74598285389eeec9b9ae6fcb6f6eb1d301294702b3855324",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Capital goods\"에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "y 축 라벨 \"Consumer goods\"에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "labeled_marker_off_curve",
+     "message": "라벨 점 B (12, 42.9)이 곡선 위에 없습니다(곡선 밖 점일 수 있음)."
+    },
+    {
+     "level": "warn",
+     "code": "labeled_marker_off_curve",
+     "message": "라벨 점 C (32, 80)이 곡선 위에 없습니다(곡선 밖 점일 수 있음)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: Capital goods, 0 to 50. Vertical axis: Consumer goods, 0 to 120."
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m19-k0",
+   "contentHash": "ed7bf38db131d0a9c337609dda70b2eded2db0dcdee7b2f595e7f811e46a142f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m19-k1",
+   "contentHash": "6642b85d7f5e3d588c97bbac342c70e9fa0f7eea6cbbc34375e365a46b8b14c0",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m19-k2",
+   "contentHash": "23510cd8345d0efca675339800c3741e7f872d3add653c9365fa26ba5ad7c4f8",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m19-k3",
+   "contentHash": "d58c30ee5882c1a9f739b7ade7523f9f4097b5904f61a3b5eab8ff316c53833f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m20-k0",
+   "contentHash": "42df7bbd9c2af771efcfdc59bf212fa697c68df9d2455155566cdcc18b31ce25",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m20-k1",
+   "contentHash": "81f405b0e2df5e8186d6df37a6f3470e2aef0bc78e2517f3395c3896b8c4a791",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m20-k2",
+   "contentHash": "ea3d6c7e9fe59eb3e7da847dee2da585e80f7556e571915d39f4cd9101e07f4b",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m20-k3",
+   "contentHash": "3b9d295c65b83fe267133c80b4273b0ce1037cc715edea941d23fdea1e71f655",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m21-k0",
+   "contentHash": "4be76e9838cb00d3b0a4bab5c7203cadf840d2acefa79eb95430879fb4b6e6f4",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m21-k1",
+   "contentHash": "903f01b1ad42253e4b6198f84dedb2d698b334a8b99b27c2cd73c1eeb8e15189",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m21-k2",
+   "contentHash": "37ccea18adbf357240c89cdc0756a6e452c7f5ca41924ed095ebbd372da5634e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m21-k3",
+   "contentHash": "235973a5d8857d41396b773b8b8dbe1b9cf6e4c9d3db924e9d26c1d7f248a796",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m22-k0",
+   "contentHash": "0a9c6296e955e8de314602a87c2dcc3cfe835cad7189e6b645db9e994b7b1f3f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m22-k1",
+   "contentHash": "d7bd1b8fef61026beb7c1a490587014e3de09be0df41eb7e9f4609f656beeb75",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m22-k2",
+   "contentHash": "e7e456db5b6151493ffef696b1865b6dbf18f2eace040684993bccfd2c2ceadd",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m22-k3",
+   "contentHash": "b78f0c41de1e0d40baaeb01465365ded376f9b55baa94ab542181b6170beb07b",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m23-k0",
+   "contentHash": "5adc92a7b2a47f3068ca47d22569782256f6951cf6f7090b47c0bb289cdf8545",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m23-k1",
+   "contentHash": "19343c43e6d08752d15941b0a051c51a5c884819cc07a857524c463c46400e07",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m23-k2",
+   "contentHash": "cc0e1ac81b65bda3d869237066c7b914f567561ae27bada61bf88e8bf37d5b35",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m23-k3",
+   "contentHash": "c018e113c703b138d6aadb195a2aa49ebf10a2270ffd176c1d85cfc4894f03cf",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m24-k0",
+   "contentHash": "961cd14e965cb1b7646e12f0139e862927251b4f66b33d6df67d8da9f0a3dfcf",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m24-k1",
+   "contentHash": "fc9d74672da9dea7719fd706b60b25709f6860422ef7df673eaa916eedcb3c1a",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m24-k2",
+   "contentHash": "6d1b83ed721fed1d12249e3fee3294bae63fd38490a9a14730c1aba5921e2caf",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m24-k3",
+   "contentHash": "86de3fe0b5347d9f90f100b86d6673ab88402eceb824da6b9fd3f9ba8a1345c2",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m25-k0",
+   "contentHash": "1e60a19cf4483a18f6319c073a39cf4b9f641822042a0c6415aca07b494ed5ad",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m25-k1",
+   "contentHash": "31d7ef4bdda49121e61b8f568bebafbdb06eb60896a3ad3276c6710142d6653c",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m25-k2",
+   "contentHash": "1c540b7cd34c44fdc370db856105cebd0541010e8e354076ab44a24cfa221a28",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-b:ap_microeconomics-m25-k3",
+   "contentHash": "6bce0fd70d337371efbba0e6b12c98f0b7e6350b8f7e546dba4b0212784ba088",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m01-k0",
+   "contentHash": "4a8e15d74d3410c373df03dbfa06eea02a5d9e418197e68e385b51aedca7046f",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m01-k1",
+   "contentHash": "5f64bf8ae859cfc63e52a0d393bed384eb14aa0216717218cbd6a65a20116ec8",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m01-k2",
+   "contentHash": "767415f5abd3ddc653d2ecad050d1131c3b77c25b2708debdb4726af6442a238",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m02-k0",
+   "contentHash": "e6f5aaf52a304493f6dbd1a510397c3e972b3b3f3cc7045018a2d4f81c75159e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m02-k1",
+   "contentHash": "30c6f8594ee98d392e9404f21516b70a3011f4914413b7dd56465fb158c53faf",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m02-k2",
+   "contentHash": "06798a0e67c12cb83a3465af369be09e294ea86a3d349627bbb2d238849ea6db",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m03-k0",
+   "contentHash": "7f33f487684aa995730f80e8a3905113fd8d907f758f80d3c306f5dd36b59f91",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m03-k1",
+   "contentHash": "c820e92f611d42699e16fa1481d03136d0f34dae84c1eac536cad2ddc9d79ae6",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m03-k2",
+   "contentHash": "30e4bb04987d5457b28d99975ca54882e779ae593ce2ca8468f03b03a4e8e50d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m04-k0",
+   "contentHash": "82f6d18d18739c6782219f16e046311bfb87bffb597ef1c62edd8f38caf1295d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m04-k1",
+   "contentHash": "0fabc41f029c206cc2d20cffcc894b74d430ea60ae4c5dac45c981ad0fc363cd",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m04-k2",
+   "contentHash": "0d7196e1782e887c7fe9bbe1d0b4bf583e8b13723aef248da4a4f8d6ea65f9a9",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m05-k0",
+   "contentHash": "fb3bdd63bde0a7da2f1779fb55bf18ffe0bfbdf34562f3e927a482c032d5df85",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m05-k1",
+   "contentHash": "bdddad494e4dd6e111cd209c34c8ff30445b6b00adb894939d3050e583f7dfe6",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m05-k2",
+   "contentHash": "49e50aba6881a4b04b1453b07b91650da3cca9bd7d1a7fad954e1c2b31490827",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m06-k0",
+   "contentHash": "9bb16083671aec5317e201a74fab5bd0af8c71503d46debe3f4bc04364c7fcb3",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m06-k1",
+   "contentHash": "134ccdda82ac2384f035e5c4c4832cb628799392e9012acbf1ca4850dba9feef",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m06-k2",
+   "contentHash": "1d03654c0391b77c6cf2db5f33df469372dded386bc8af589603e3701c5180f2",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m07-k0",
+   "contentHash": "9e193148946e747366b84d7b2e51166dffcf51b69d9ae36698348dc091b4f573",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m07-k1",
+   "contentHash": "da4e35bed360a032fd2d5256f1ea8fe061b962b92a98f6d0083476e693c32e53",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m07-k2",
+   "contentHash": "4f43fd07ec40eb12e585e39d0edef24c8d75a82f7f621a07eb2681e25839c44d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m08-k0",
+   "contentHash": "e053aa6fd4366e34a0c22c0c493016c808849e62232bb56cfa7bbe1ebe1dd94a",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D1, D2. Horizontal axis: Quantity, 0 to 110. Vertical axis: Price (dollars), 0 to 240."
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m08-k1",
+   "contentHash": "783e143c25c75a75f946efde8b0519b100c18390ba4edab2f0199e3a1b6ea9d4",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D1, D2. Horizontal axis: Quantity, 0 to 150. Vertical axis: Price (dollars), 0 to 160."
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m08-k2",
+   "contentHash": "9a9f9d4daf2e8d95b598dac3158dcebd209c15145652f38263846b3087182430",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of D1, D2. Horizontal axis: Quantity, 0 to 90. Vertical axis: Price (dollars), 0 to 150."
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m09-k0",
+   "contentHash": "fd47dd7c9225ab4c41ba445a6a0545714f2d0e7d2dd24403fc2bf6af2fefa1a9",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m09-k1",
+   "contentHash": "190c8dc0182aa7f1f1d73cca9f8793eacb95806217bdd8c04c35854d66687693",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m09-k2",
+   "contentHash": "df0e653831626edfea2872c71ccbe8b4fec2b89ddaafa3b0a4d95ca5f793681d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m10-k0",
+   "contentHash": "0d015e5e4ddf7295fd401e2d62164c4d4a61f3553498e9f2a10b88229284afd7",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m10-k1",
+   "contentHash": "96c3c52bc8ab9eefb28c859056bb7095085a7f39c35fbeeea044b893e9d9ebd3",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m10-k2",
+   "contentHash": "aa560cae6dce3201a79addbdc8ab5fbd767c0117ca6be0a025462dcfba7fa486",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m11-k0",
+   "contentHash": "8e05af58b7639245b506d29fa17bd661b21a29e9d30862aa41470f779a489ce7",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m11-k1",
+   "contentHash": "6f193d296756efdfa85adf1ce9e365f618ff87be5c291285de09925f6b4d944e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m11-k2",
+   "contentHash": "e3535c2ccf04a8b82dff71babb48ad777b623475dbdfd76f9d84d92a9b02cd3c",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m12-k0",
+   "contentHash": "0c6fa4b7cfb147f609a2d40688dae48bcc7841c712dcb2b5ad87e72422fab1e4",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC, AVC. Horizontal axis: Quantity, 0 to 120. Vertical axis: Cost (dollars per unit), 0 to 280."
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m12-k1",
+   "contentHash": "61535e84f646e2f632d3fc1b4fe36949fbed092842bda2a78c0466a0408ef8c9",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC, AVC. Horizontal axis: Quantity, 0 to 120. Vertical axis: Cost (dollars per unit), 0 to 280."
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m12-k2",
+   "contentHash": "01d927cf00c34cf859f846a2ad4b5e2e826693c02f2cfe0e7cd5a4d9fb04e982",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC, AVC. Horizontal axis: Quantity, 0 to 120. Vertical axis: Cost (dollars per unit), 0 to 260."
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m13-k0",
+   "contentHash": "d0fbec02b91142b6d4366730c93472fe84ef6f590feb9a49b64352beadd66cb6",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Cost (dollars per unit), 0 to 360."
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m13-k1",
+   "contentHash": "887ee857abf13de7c5886544ef739cacb27c97ca27b888f326076e8cd76c7cff",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC. Horizontal axis: Quantity, 0 to 80. Vertical axis: Cost (dollars per unit), 0 to 360."
+  },
+  {
+   "key": "micro-p2-c:ap_microeconomics-m13-k2",
+   "contentHash": "c3945d54a9e0a37c277491e16524660aa257b8f82b273c30db1ac186ca84e3b8",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:econ_curves",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "x 축 라벨 \"Quantity\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of MC, ATC. Horizontal axis: Quantity, 0 to 40. Vertical axis: Cost (dollars per unit), 0 to 200."
+  },
+  {
+   "key": "micro-p2-d:ap_microeconomics-m01-k0",
+   "contentHash": "345018a6a7f982c37a3c5b8b783bbd8522ebe00cbbf3e7eea08327b42336c54e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-d:ap_microeconomics-m01-k1",
+   "contentHash": "a6b0491f11c00c405ed90efffcfaf7d4a8034a83b384e89191f0491bb5a8fe14",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-d:ap_microeconomics-m01-k2",
+   "contentHash": "971356a30ae2c868cd8f783eefe3931bac6ca5e6164b830ba636609a859d364d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-d:ap_microeconomics-m02-k0",
+   "contentHash": "26375e04a8f5033dca8ba3bf6b9acfe9a4f29e9ef9d5627d2bdc1bb63376502c",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-d:ap_microeconomics-m02-k1",
+   "contentHash": "07bb7a5f3ccbfde86538d6155581b7ea703d3105ee83688616afb487b69c75b6",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-d:ap_microeconomics-m02-k2",
+   "contentHash": "af3fd8cae3e5a2a8878e411f6a6a9c5fa9acf43d9458db89aad56b51781fd22e",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-d:ap_microeconomics-m03-k0",
+   "contentHash": "fe04074c25aa335e819c68f4fe55f4f7fa26e5ac1592eec39fb1a7ae458f7b33",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-d:ap_microeconomics-m03-k1",
+   "contentHash": "4b9f46031b6e15b71bab1e0df885666617f75396486decae3007b2200ea9da8d",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "micro-p2-d:ap_microeconomics-m03-k2",
+   "contentHash": "0a332460e1e3870740a504cc7dc81b0b573e490e38351f6c25ecd2cc47065fc6",
+   "subject": "ap_microeconomics",
+   "kind": "mc",
+   "validation": "rejected",
    "stimKind": "none",
    "renderType": "none",
    "need": "text_only",

@@ -12,6 +12,7 @@ import { generatorDefects } from "./generator-defects";
 import { microGuide } from "./subjects/micro";
 import { subjectToolsConfig } from "../exam-tools/subject-tools";
 import { AP_FRQ_DELIVERY } from "../ap-exam/frq-delivery";
+import { MICRO_FRQ_PROFILES } from "../ap-exam/micro-rules";
 import type { ApCurriculumFile } from "../ap-curriculum/types";
 
 // AP Microeconomics P0 원형 테스트(무료: 네트워크·DB·LLM 없음). 수치 진실·결정성·단원/스킬 범위 정수계획·FRQ 과제 유형 비중은 Python unittest(test_micro_p0.py)가 하고, 여기서는 TS 게이트·가이드 일관성·도구 구성을 확인한다.
@@ -84,6 +85,15 @@ d("AP Microeconomics P0 archetypes (Python generators, 2 seeds each)", () => {
       for (const [what, codes] of Object.entries(chk)) if (codes.length) fails.push({ n, what, codes });
     }
     expect(fails).toEqual([]);
+  });
+
+  it("the task-type point profiles in micro-rules.ts equal the profiles computed from the generated FRQ packs", () => {
+    const type: Record<string, "graph" | "assertion" | "explain" | "numeric"> = { draw: "graph", identify: "assertion", select: "assertion", explain: "explain", calculate: "numeric" };
+    for (const n of out.frq) {
+      const p = out.frqPacks[n][0]; const tot = { points: 0, graph: 0, assertion: 0, explain: 0, numeric: 0 };
+      for (const pt of p.parts) { tot.points += pt.points; tot[type[pt.response_mode]] += pt.points; }
+      expect({ n, tot }).toEqual({ n, tot: MICRO_FRQ_PROFILES[n] });
+    }
   });
 
   it("the Python suite (determinism, no duplicate structures, numeric truth, graph checks, unit/skill/FRQ-task range checks) passes", () => {

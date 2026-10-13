@@ -150,6 +150,9 @@ def mi_fixed_cost_effect(rng):
 
 
 # ======================= 3.4 이윤의 종류 =======================
+SUF = ' The amount is therefore a different quantity from the profit measure the question asks for, so it does not answer the question.'
+
+
 @retry_sep
 def mi_profit_types(rng):
     rev = rng.choice([200000, 250000, 300000, 400000]); expl = int(rev * rng.choice([0.4, 0.5, 0.55])); impl = rng.choice([30000, 40000, 50000, 60000])
@@ -159,10 +162,10 @@ def mi_profit_types(rng):
     val = eco if which == "economic" else acc
     g = rng.choice(["a bakery", "a landscaping firm", "a tutoring business"])
     f = lambda v: usd(v)  # noqa: E731
-    k, ds = val_opts(val, [("Reports accounting profit instead of economic profit." if which == "economic" else "Reports economic profit instead of accounting profit.", acc if which == "economic" else eco), ("Subtracts only the implicit costs from revenue.", rev - impl), ("Reports the total of explicit and implicit costs rather than the profit.", expl + impl), ("Reports total revenue without subtracting any costs.", rev),
-                          ("Adds the implicit costs to revenue instead of subtracting them.", rev - expl + impl)], f)
+    k, ds = val_opts(val, [(("Reports accounting profit instead of economic profit." if which == "economic" else "Reports economic profit instead of accounting profit.") + SUF, acc if which == "economic" else eco), ("Subtracts only the implicit costs from revenue." + SUF, rev - impl), ("Reports the total of explicit and implicit costs rather than the profit." + SUF, expl + impl), ("Reports total revenue without subtracting any costs." + SUF, rev),
+                          ("Adds the implicit costs to revenue instead of subtracting them." + SUF, rev - expl + impl)], f)
     stem = f"The owner of {g} earns annual revenue of {usd(rev)}, pays explicit costs of {usd(expl)}, and gives up {usd(impl)} per year that the owner could earn by working elsewhere. What is the {which} profit?"
-    return mk("mi_profit_types", "3.4", "1.C", stem, k, ds, rng, concept="accounting versus economic profit", path="revenue minus explicit (and implicit) costs vs sympy arithmetic", kwhy=(f"Economic profit subtracts explicit and implicit costs: {usd(rev)} - {usd(expl)} - {usd(impl)} = {usd(eco)}." if which == "economic" else f"Accounting profit subtracts only explicit costs: {usd(rev)} - {usd(expl)} = {usd(acc)}."), facts=[f"rev={rev}", f"expl={expl}", f"impl={impl}", f"which={which}"], est=60)
+    return mk("mi_profit_types", "3.4", "1.C", stem, k, ds, rng, concept="accounting versus economic profit", path="revenue minus explicit (and implicit) costs vs sympy arithmetic", kwhy=(f"Economic profit is revenue minus both the explicit and the implicit costs, so it is lower than accounting profit by the value of the opportunities the owner gives up, which makes it the measure that includes every opportunity cost." if which == "economic" else f"Accounting profit is revenue minus the explicit costs only, so it ignores the implicit costs of the owner's time and capital, which makes it larger than economic profit whenever implicit costs are positive."), facts=[f"rev={rev}", f"expl={expl}", f"impl={impl}", f"which={which}"], est=60)
 
 
 def mi_normal_profit(rng):

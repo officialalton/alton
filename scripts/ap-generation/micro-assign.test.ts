@@ -41,6 +41,7 @@ describe("micro exact assignment (ILP + independent verifier)", () => {
       const one = solveMicroSets([id], st, { timeMs: 90000, blocked: bl, blockedArchetypes: blArch });
       expect(one.res.status).toBe("optimal"); out.push(...one.out); for (const it of [...one.out[0].singles, ...one.out[0].frq]) bl.add(it.key);
       for (const a of [...one.out[0].singles.map((c) => c.archetype), ...one.out[0].virtual.map((v) => v.archetype)]) if (ONE_EXAM_ONLY.has(a)) blArch.add(a);
+      for (const c of one.out[0].frq) blArch.add(c.archetype);
     }
     for (const r of out) { expect(r.virtual).toEqual([]); expect(r.frqVirtual).toEqual([]); expect(r.singles).toHaveLength(60); expect(r.frq).toHaveLength(3); }
     expect(verifyMicroAssignment(out)).toEqual([]);
