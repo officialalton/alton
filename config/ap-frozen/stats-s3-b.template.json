@@ -1,0 +1,64 @@
+{
+ "version": "v1-stats-s3-b",
+ "run": "stats-s3-b",
+ "subject": "ap_statistics",
+ "archetypeList": "stats_s3_extra",
+ "seed0": 9500,
+ "candidatesPerCell": 1,
+ "capUsd": 0.24,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "1",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/subjects/stats.ts",
+  "lib/ap-generation/subjects/stats-archetypes.json",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-frq-checks.ts",
+  "lib/ap-generation/stats-difficulty.ts"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 40.7,
+ "expected": {
+  "generatorHash": "UNFROZEN",
+  "reviewerPromptHash": "UNFROZEN",
+  "difficultyPromptHash": "UNFROZEN",
+  "parserHash": "UNFROZEN",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ },
+ "_template": "TEMPLATE, NOT FROZEN (2026-10-12, docs/ap/statistics-difficulty.md section 7). Do not run as is: the expected hashes are placeholders so --check-only fails on purpose. To use: copy to <name>.v1.json, run `npx tsx scripts/ap-generation/run-frozen.ts --config <copy> --freeze`, commit, then --check-only, and only then the paid run after the owner confirms the budget. hardStopCumulativeUsd 40.7 assumes cumulative 39.5118 + 1.2; recompute from the ledger before freezing."
+}
