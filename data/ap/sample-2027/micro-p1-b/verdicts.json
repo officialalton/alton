@@ -1,0 +1,629 @@
+[
+ {
+  "key": "ap_microeconomics-f01-k0",
+  "cellId": "ap_microeconomics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "MC = 12,16,20,24,28,32,36,40. ATC = 20,18,18.67,20,21.6,... Lowest ATC is $18 at Q=2, so P=$18 equals minimum ATC and economic profit is zero (TR 36 = TC 36).",
+     "final_answer": "Market graph: downward-sloping D and upward-sloping S cross at P=$18 and Q_M. Firm graph: horizontal line P=MR=D at $18. U-shaped ATC has its minimum at $18. MC crosses ATC at that minimum, which is Q_F = 2 tons.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Produce while MC ≤ P. MC from 3 to 4 tons is 24 ≤ 25. MC from 4 to 5 tons is 28 > 25. So produce 4 tons. Profit = 4×25 − 80 = 20.",
+     "final_answer": "Q = 4 tons; economic profit = $20",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Demand shifts right and price rises. The firm's MR line rises to $25 and output goes where MR = MC.",
+     "final_answer": "Market graph: D shifts right to D2, giving a new price of $25 and a larger quantity. Firm graph: new MR line at $25. Q_F2 = 4 is where MR2 meets MC. Shade the rectangle between $25 and ATC at Q_F2 ($20), out to Q_F2. This is the $20 profit.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Positive economic profit leads firms to enter.",
+     "final_answer": "The number of firms increases. Positive economic profits attract new firms, and there are no barriers to entry. As firms enter, market supply shifts right and price falls. This continues until price is back at minimum ATC of $18 and economic profit is zero.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "In a constant-cost industry, long-run supply is horizontal at $18.",
+     "final_answer": "Greater than Q_M. Demand is higher, and because this is a constant-cost industry, price returns to $18. More firms each producing 2 tons supply a larger total quantity at that price.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard long FRQ (10 points) on a perfectly competitive firm and its market. The table is consistent: minimum ATC is $18 at 2 tons, and at $25 the firm produces 4 tons for a $20 profit. The rubric rows are meaning-based with valid alternatives, and every part is in scope for Unit 3.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own skill and topic: graphing for A and C, a calculation for B, and explanation for D and E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and consistent with the table. The rubric rows are split sensibly, with B2 depending on B1 and D2 on D1."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and the notes state the long-run price. The stem calls the industry constant-cost."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric lists plausible common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10-point grain, reading load and calculator use are typical of a long microeconomics FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on perfect competition. Students must derive MC and ATC from a total cost table (small integer arithmetic), identify the long-run zero-profit quantity (Q=2 at P=18), apply P=MC at P=25 (Q=4, profit $20), draw and then modify paired market/firm graphs, and reason about entry and the new long-run equilibrium in a constant-cost industry. Concept depth and representation changes are typical of AP exam FRQs. Numbers are clean, wording is unambiguous, and the reading load is light, so the difficulty comes from legitimate sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_microeconomics-f02-k0",
+  "cellId": "ap_microeconomics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Draw a graph with price on the vertical axis and quantity on the horizontal axis. Demand slopes down and supply slopes up. They cross at P_E = $15 and Q_E = 60.",
+     "final_answer": "Graph with downward-sloping D and upward-sloping S crossing at P_E=$15, Q_E=60",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "At $15, quantity demanded equals quantity supplied (60 = 60).",
+     "final_answer": "60 units",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "A $12 ceiling is below the equilibrium price, so it is binding. Draw a horizontal line at $12. The quantity traded is set by supply: Q_C = 54. The shortage is the horizontal gap between 54 and 72.",
+     "final_answer": "Horizontal ceiling line at $12 below P_E; Q_C=54 on supply curve; shortage is the gap from 54 to 72",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "From the $12 row of the table: quantity demanded is 72 and quantity supplied is 54. Shortage = 72 − 54 = 18.",
+     "final_answer": "Qd=72, Qs=54, shortage=18 units",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Only 54 units are traded, down from 60, so producer surplus falls and some surplus is lost entirely. Also, with a shortage, the good must be rationed in other ways.",
+     "final_answer": "(1) Quantity traded falls from 60 to 54, creating deadweight loss (lost trades that were mutually beneficial), and producer surplus falls. (2) Non-price rationing appears: waiting lines, black markets, and search costs, and product quality may fall.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "$17 is above the equilibrium price of $15, so the ceiling does not bind.",
+     "final_answer": "Quantity traded stays at 60. The ceiling is above the equilibrium price, so the market can still reach $15 and 60 units, and the ceiling has no effect.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The table and numeric keys are consistent. Part E asks for any two effects other than the shortage, but the rubric accepts only deadweight loss and nonprice rationing. Valid answers such as lower producer surplus or lower quality would be denied credit, so the key is not unique. Part C is also labeled 4.B although it is a graph-drawing task.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The content is in scope for topics 2.8 and 2.6. Part C's skill label is 4.B but the task is drawing and labeling a graph, which is 4.A; this is a metadata inconsistency."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part E's rubric is too narrow for an open \"explain two effects\" prompt. It does not list producer surplus falling or quality declining as accepted alternatives, so correct student answers could lose credit. Other parts are fine."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent with the linear model."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "No multiple-choice options. The rubric common_errors are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a long FRQ at 10 points."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part AP FRQ on price ceilings. It requires converting a table to a labeled supply-demand graph, finding equilibrium, applying a binding ceiling (Qd=72, Qs=54, shortage=18), explaining two non-shortage effects (e.g., deadweight loss, black markets, lower quality, search costs), and recognizing a non-binding ceiling at $17 (above the $15 equilibrium, so no change in quantity traded). Concepts are core Unit 2 (2.6 and 2.8), the arithmetic is a single subtraction, and the reading load is light. The main demand is graphing accuracy and conceptual explanation, which fits the exam-prep tier for full mocks rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_microeconomics-f03-k0",
+  "cellId": "ap_microeconomics-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Demand P=120-Q starts at $120 on the price axis and hits zero at Q=120. MR=120-2Q has the same vertical intercept and twice the slope, so it reaches zero at Q=60. MC is a horizontal line at $10. Q_M is where MR=MC; P_M is read off the demand curve directly above Q_M.",
+     "final_answer": "Graph: price on the vertical axis, quantity on the horizontal. Downward demand from (0,120) to (120,0). MR from (0,120) to (60,0). Horizontal MC at $10. MR crosses MC at Q_M=55. Go up from Q_M to demand to get P_M=$65.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Set MR equal to MC: 120-2Q=10, so Q=55. Put Q=55 into demand: P=120-55=65. The table skips Q=55, but the stated demand equation gives it.",
+     "final_answer": "Q_M = 55 units, P_M = $65",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Profit = (P - MC) x Q - fixed cost = (65-10) x 55 - 100 = 3025 - 100.",
+     "final_answer": "$2,925",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The price ceiling at $10 is a horizontal line where MC is. The firm can't charge more than $10, so up to Q=110 its MR is $10, which equals MC. It produces where P=10 meets demand: 120-Q=10, so Q=110.",
+     "final_answer": "Regulated price is $10, the horizontal line at MC. Q_R = 110, where demand crosses P=MC.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Allocative efficiency needs P=MC. At Q_M=55, P=$65 is above MC=$10. That means consumers value extra units more than they cost to make, but those units are not produced.",
+     "final_answer": "At Q=55, price ($65) is greater than MC ($10). Output is restricted below the efficient 110 units. Units 55 to 110 are worth more to buyers than they cost to produce, so they would add surplus, and leaving them out creates deadweight loss.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "At P=10 and Q=110: TR = 1100 and variable cost = 1100. So profit = 1100 - 1100 - 100 = -100.",
+     "final_answer": "-$100 (a loss equal to the fixed cost)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The monopoly and price-cap FRQ is correct: Q_M = 55, P_M = $65, profit $2,925, Q_R = 110, and a loss of $100 under the cap. The independent solver agreed on every part. Weaknesses are minor: part D is tagged 4.C although it is a drawing task, there is no carry-forward language for part C, and the part F rubric accepts \"100\" without a sign. The 10-point grain with parts of 1-2 points matches the official long-FRQ format.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 4.2 and 6.4 fit. The parts mix skills, which is allowed. Part D's tag of 4.C is slightly off for a drawing task."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are correct and unique. The rubric rows are consistent and have valid alternative wordings. There is no carry-forward language, and part F's sign is only implied."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table plus notes give the demand equation, MC, and fixed cost. This is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors, so the criterion is not applicable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical for a 10-point long FRQ, the arithmetic is simple, and a calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style monopoly item: draw D, MR (twice as steep), and MC curves, and find MR = MC. The solution is Q = 55 and P = 65, with profit 2,925. A price cap at MC gives Q = 110 and a loss of 100 (the fixed cost). Concept depth is moderate (monopoly pricing, allocative efficiency, price ceiling at MC). Each part is one or two steps, the numbers are clean, and the demand formula is given so the non-tabulated Q = 55 is unambiguous. The graphing tasks align with skill 4.A. It is appropriate for a full mock exam, not so basic as to be only introductory and not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_microeconomics-f04-k0",
+  "cellId": "ap_microeconomics-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Demand: P=120−Q. Private supply: P=20+Q. MSC=40+Q. Setting demand equal to supply gives Q_M=50 at P=$70. Setting demand equal to MSC gives Q_E=40 at P=$80.",
+     "final_answer": "Graph: put price on the vertical axis and quantity on the horizontal axis. Draw downward-sloping demand (D=MPB) and upward-sloping supply (S=MPC). Draw MSC parallel to S and $20 above it. Q_M=50 is where D meets S, and Q_E=40 is where D meets MSC, so Q_E is to the left of Q_M.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Producers face only private costs and ignore the $20 external cost per unit. Private supply is therefore below MSC, so the market produces past the point where MSB=MSC. For units 40 to 50, MSC is greater than MSB.",
+     "final_answer": "Producers ignore the external cost, so supply (MPC) is below MSC. The market therefore produces units whose social cost is greater than their benefit.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The tax should equal the marginal external cost. This shifts supply up to MSC, which gives Q=40.",
+     "final_answer": "$20 per unit",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A subsidy shifts supply to the right, so quantity rises above Q_M. Output was already too high, so this moves it further from Q_E and adds to deadweight loss.",
+     "final_answer": "Farther from the efficient quantity. The subsidy lowers producers' costs, so quantity rises above 50 even though efficiency requires 40.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable short externality FRQ. The graph part is the dominant demand and is scored qualitatively. The tax and subsidy parts are unambiguous, and the 5-point grain matches the short-FRQ format.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A draws the externality graph (4.A). The other parts mix skills (2.A, 3.C, 3.A), all within topic 6.2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answers: Q_E < Q_M, a $20 tax, and a subsidy moves output farther from Q_E. The rubric is consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and gives the constant external cost in the notes. The table stops at Q=48, just short of the market intersection (Q=50), so students must extend the pattern. This is minor because part A only needs the qualitative placement."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "N/A for FRQ. The rubric lists common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light load (about 12 minutes for 5 points). The calculator is not needed but is harmless."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP externality FRQ. Students must infer linear demand and supply from the table (slopes of -1 and +1 per unit), find Q_M = 50 by extrapolating slightly past the table, build MSC = MPC + 20, and find Q_E = 40. They then draw a labeled graph, explain overproduction, give the corrective tax of $20, and reason that a subsidy worsens the overproduction. The arithmetic is simple and the concepts are in scope for Unit 6.2. The only mild demand is extrapolating beyond the table, which the linear pattern supports.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_microeconomics-f05-k0",
+  "cellId": "ap_microeconomics-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "MP of 3rd worker = 70-52 = 18 chairs; MRP = 18 × $3 = $54.",
+     "final_answer": "$54",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "MRP values are 90, 66, 54, 42, 30. Hire each worker while MRP ≥ wage ($55). Workers 1 and 2 pass; worker 3's MRP is $54, below $55.",
+     "final_answer": "2 workers",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Worker 3 brings in $54 of extra revenue but costs $55 (MRP < MRC = wage). Hiring him would cut profit by $1.",
+     "final_answer": "The third worker's MRP ($54) is less than the wage/MRC ($55), so hiring him would lower profit.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "MRP = MP × P. A higher price raises MRP at every quantity of labor, so the MRP (labor demand) curve shifts right.",
+     "final_answer": "Demand for labor increases (shifts right).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "A monopsonist faces an upward-sloping labor supply curve, so its MRC is above the wage. It hires where MRP = MRC, which is fewer workers than where MRP = wage.",
+     "final_answer": "Fewer workers, because MRC exceeds the wage for a monopsonist and it sets MRP = MRC.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The keys are correct and unambiguous: MRP of the third worker is $54, and hiring stops at 2 workers because the wage is $55. The part grain of 1/1/1/1/1 matches the short-FRQ format. Part C largely repeats part B, and part E gives no labor supply detail, but the standard monopsony result still holds.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style multi-part item. Requires computing MP from a total product table, converting to MRP using price, comparing to the wage (near-tie at worker 3: $54 vs $55), then a comparative-statics step (price rise shifts labor demand) and a monopsony contrast (MFC > wage, so fewer workers). Small, clean numbers; in scope for 5.2-5.4; no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_microeconomics-f06-k0",
+  "cellId": "ap_microeconomics-f06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Country A gives up 12 cloth to make 48 wheat, so 1 wheat costs 12/48 = 0.25 cloth. Country B gives up 24 cloth to make 12 wheat, so 1 wheat costs 24/12 = 2 cloth.",
+     "final_answer": "Country A: 0.25 unit of cloth per unit of wheat; Country B: 2 units of cloth per unit of wheat",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Country A gives up less cloth for each unit of wheat (0.25 < 2), so it has the lower opportunity cost.",
+     "final_answer": "Country A",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The price of 1.12 cloth per wheat is between the two opportunity costs (0.25 and 2). Country A gets 1.12 cloth for each unit of wheat, but making that wheat only costs it 0.25 cloth. Country B pays 1.12 cloth for each unit of wheat, which is less than the 2 cloth it would give up to make the wheat itself. So each country gets the good more cheaply than it could make it at home, and each can consume beyond its own PPC.",
+     "final_answer": "Both gain because 1.12 is between the opportunity costs. A gets more cloth per unit of wheat than its cost of 0.25, and B pays less than its own cost of 2 cloth.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Country A's opportunity cost is constant, so its PPC is a straight line from 48 wheat to 12 cloth. The slope is -0.25.",
+     "final_answer": "Draw a straight-line PPC with Wheat on the horizontal axis and Cloth on the vertical axis. It meets the cloth axis at 12 and the wheat axis at 48.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item never states that opportunity costs are constant or that the PPC is linear, even though the blueprint says this is stated in the table description. Parts A and D depend on that assumption, so the item is not exam-ready as written. The arithmetic and the key are otherwise correct.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts map to 1.4 and 1.3 with mixed skills, which is acceptable for the bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Values 0.25 and 2.00, Country A, and the 1.12 explanation are all correct."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table description omits the constant-cost / straight-line PPC assumption that parts A and D rely on."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable for an FRQ; common errors are listed in the rubric."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The load is typical of a short FRQ, but the unstated model assumption makes the item unsuitable until the stimulus is fixed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part comparative advantage item. Requires reading a table of maximum outputs, computing opportunity costs by simple division (12/48 = 0.25; 24/12 = 2), identifying comparative advantage, explaining why a price between the two opportunity costs (0.25 < 1.12 < 2) benefits both countries, and drawing a labeled linear PPC. Arithmetic is clean, reading load is low, and all content is in scope for Unit 1 (1.3/1.4). The multiple representations (table, numeric ratio, verbal explanation, graph) and the need to link the trade price to the opportunity-cost range make it appropriate for a full mock rather than basic learning, but it is not advanced. The constant-cost (linear PPC) assumption is implicit but conventional for this table format.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_microeconomics-f07-k0",
+  "cellId": "ap_microeconomics-f07",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:D:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "%ΔQ = -40/380 ≈ -10.53%; %ΔP = 1/12.5 = 8%; |E| ≈ 1.32",
+     "final_answer": "≈1.32",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "|E| > 1",
+     "final_answer": "Elastic",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Demand is elastic, so quantity falls by a larger percentage than price rises. TR goes from $4,800 to $4,680.",
+     "final_answer": "Total revenue decreases",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "5%/2% = 2.5 in magnitude, but the stimulus doesn't say whether salad quantity rose or fell, so the sign can't be determined.",
+     "final_answer": "Magnitude 2.5. If salad quantity rose, +2.5 means substitutes; if it fell, -2.5 means complements. The data can't tell which.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The note says salad quantity 'changes' by 5% without saying which way. The direction sets the sign of the cross-price elasticity, which decides substitutes vs complements."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition",
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Parts A-C are fine, but part D is missing the direction of the salad quantity change, so the key (2.50, substitutes) is not uniquely defensible. The 2 percent price change in the note also contradicts the table. Reject.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part D: the direction of the salad quantity change is not stated, so the sign (substitutes vs complements) is indeterminate. The key assumes an increase (+2.50, substitutes). The note's \"2 percent increase in price\" also contradicts the table's roughly 8 percent increase ($12 to $13), so the cross-price elasticity of 5/2 is inconsistent with part A's data."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The note says quantity \"changes\" by 5 percent, with no direction. The 2 percent price change conflicts with the table's price change. Cross-price data is awkwardly placed in a table note."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part elasticity item: midpoint method from a table (two short calculations), classify elasticity, link to total revenue, then compute cross-price elasticity and classify the goods. Concepts are core to topics 2.3/2.5 and chain together modestly (each part builds on the previous one). Arithmetic is short; the midpoint result is about 1.31, so it needs mild rounding. Minor wording weakness: the note does not state the direction of the salad quantity change (it is implied by the context), which could make part D slightly ambiguous, but this is not the main source of difficulty.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_microeconomics-f08-k0",
+  "cellId": "ap_microeconomics-f08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "MR=MC=$20 at Q=25; demand gives P=$70. Downward D, steeper MR, horizontal MC at $20, ATC above MC.",
+     "final_answer": "Q1=25, P1=$70",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "ATC at 25 = $24; profit rectangle between $70 and $24 up to Q=25.",
+     "final_answer": "Shaded area (70-24)x25 = $1,150 economic profit",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Positive profit draws entry, so this firm's demand shifts left until P=ATC.",
+     "final_answer": "Demand decreases (shifts left, more elastic) as new firms enter, until economic profit is zero (D tangent to ATC).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Downward-sloping demand means P>MR=MC.",
+     "final_answer": "Price is greater than marginal cost.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The rubric requires a U-shaped ATC, but the table shows ATC falling throughout (constant MC plus a fixed cost), so faithful plotting contradicts row A1. Part D says \"Identify\" in select mode with no options given. These are fixable flaws.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.4 and skill 4.A are fit well; each part carries its own skill."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Row A1 requires a U-shaped ATC, which conflicts with the table data (ATC declines monotonically with constant MC). A student who follows the data could be denied the point."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Part D is in select mode with no options. The table is only weakly needed since the graph is mostly generic."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are listed per rubric row; adequate for a free-response item."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical of a short FRQ: 5 points, no calculator needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part graphing FRQ. The student must identify MR = MC at Q=25 from the table, read P=$70 off the demand column, and compare it with ATC=$24 to place the profit rectangle. The student must then draw four curves with correct labels and shading, explain the long-run leftward shift of demand from entry, and state that P > MC in long-run equilibrium (tangency of demand and ATC, with excess capacity). Concepts are core to topic 4.4, with one table-to-graph representation change and no heavy arithmetic. Minor note: the MR values in the table are not perfectly consistent with linear demand, but the key row (MR = MC = $20 at Q=25) is unambiguous, so this does not make the item unfairly hard.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

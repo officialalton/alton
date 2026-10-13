@@ -91,3 +91,7 @@
 - 동결 골격(미동결·미실행): `config/ap-frozen/csa-p1-a.template.json`(MC 22 = 단독 20 + 세트 1, 상한 $2.2), `csa-p1-b.template.json`(FRQ 4, 상한 $1.0). 누적 약 $85·중단선 $90 가정.
 - **비용 추정**(Physics·Chemistry 실측 MC $0.039/후보·FRQ $0.05–0.06/후보, CS A FRQ 는 $0.07 가정; 첫 통과 MC 60%·FRQ 45%): 파일럿 **$2.28**, 풀 모의고사 1회 $4.78(예비 1.3배 $6.21), **2회 $9.56 → 예비 1.3배 $12.43**(낙관 $10.83·비관 $14.12). 여유 $5 → 파일럿만 안, 풀 1회부터 총 상한·중단선 상향 오너 결정 필요. 유료 CS A 단계는 오너 결정 대기.
 - 유료 호출 전 남은 일: 풀 세트 조립 배선(`cells.ts`·`stock.ts`·`assemble-draft.ts`·`full-set-rules.ts`), 두 번째 풀 모의고사용 새 구조 원형 약 30개(현재 52문항 구조로는 1회분만 겹침 없음), 비코드 스킬(1.A·1.B·5.A) 정책, FRQ 입력 방식 공식 확인, 학생 답안 자기 점검 실행(샌드박스 설계)·모바일 Tab 대체 버튼.
+
+## Microeconomics MI1·MI2 조립 완료 (2026-10-13, 누적 $78.1525 / 중단선 $90)
+- 원형 MC 110(5지선다)·FRQ 8유형, 공식 단원·스킬 범주·수치 분석·FRQ 과제 유형 범위 내장. 유료 합계 $9.72(P1 $2.03 + P2 $7.69), 통과 MC 184·FRQ 11, 화면 증거 195후보 × 2 뷰포트 fail 0(`evidence-micro-s2.json`).
+- 정확 배정 `data/ap/stock/exact-assign-micro-mi1-mi2.json`: 각 MC 60 + FRQ 3(긴 1 + 짧은 2), 가상 0, 위반 0, 겹침 0, FRQ 유형도 서로 다름. 적재 배치 `micro-p1a, p1b, p2f, p2a, p2b, p2c, p2d`. 상세 `docs/ap/microeconomics-groundwork.md`, 사실 `microeconomics-facts.md`.

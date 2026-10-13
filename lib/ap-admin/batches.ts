@@ -62,6 +62,14 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "chem-s2ma", title: "AP Chemistry chem-s2 MC-a (통과 54)", itemsFile: "chem-s2ma-items.json", loadLabel: "chem-s2ma-2026-10-13", supplement: true, passKeysFile: "chem-s2ma-pass-keys.json", evidenceFile: "evidence-chem-s2.json" },
   { id: "chem-s2mb", title: "AP Chemistry chem-s2 MC-b (통과 38)", itemsFile: "chem-s2mb-items.json", loadLabel: "chem-s2mb-2026-10-13", supplement: true, passKeysFile: "chem-s2mb-pass-keys.json", evidenceFile: "evidence-chem-s2.json" },
   { id: "chem-s2mc", title: "AP Chemistry chem-s2 MC-c (통과 17)", itemsFile: "chem-s2mc-items.json", loadLabel: "chem-s2mc-2026-10-13", supplement: true, passKeysFile: "chem-s2mc-pass-keys.json", evidenceFile: "evidence-chem-s2.json" },
+  // 2026-10-13 AP Microeconomics(docs/ap/microeconomics-groundwork.md): 파일럿 2 + P2 부족분 3배치. 한 증거 파일(evidence-micro-s2.json)을 공유한다.
+  { id: "micro-p1a", title: "AP Microeconomics P1-a (MC 파일럿)", itemsFile: "micro-p1a-items.json", loadLabel: "micro-p1a-2026-10-13", supplement: true, passKeysFile: "micro-p1a-pass-keys.json", evidenceFile: "evidence-micro-s2.json" },
+  { id: "micro-p1b", title: "AP Microeconomics P1-b (FRQ 파일럿)", itemsFile: "micro-p1b-items.json", loadLabel: "micro-p1b-2026-10-13", supplement: true, passKeysFile: "micro-p1b-pass-keys.json", evidenceFile: "evidence-micro-s2.json" },
+  { id: "micro-p2f", title: "AP Microeconomics P2 FRQ (MI1·MI2 부족분)", itemsFile: "micro-p2f-items.json", loadLabel: "micro-p2f-2026-10-13", supplement: true, passKeysFile: "micro-p2f-pass-keys.json", evidenceFile: "evidence-micro-s2.json" },
+  { id: "micro-p2a", title: "AP Microeconomics P2 MC-a (MI1·MI2 부족분)", itemsFile: "micro-p2a-items.json", loadLabel: "micro-p2a-2026-10-13", supplement: true, passKeysFile: "micro-p2a-pass-keys.json", evidenceFile: "evidence-micro-s2.json" },
+  { id: "micro-p2b", title: "AP Microeconomics P2 MC-b (MI1·MI2 부족분)", itemsFile: "micro-p2b-items.json", loadLabel: "micro-p2b-2026-10-13", supplement: true, passKeysFile: "micro-p2b-pass-keys.json", evidenceFile: "evidence-micro-s2.json" },
+  { id: "micro-p2c", title: "AP Microeconomics P2 MC-c (MI2 부족분·수정 원형)", itemsFile: "micro-p2c-items.json", loadLabel: "micro-p2c-2026-10-13", supplement: true, passKeysFile: "micro-p2c-pass-keys.json", evidenceFile: "evidence-micro-s2.json" },
+  { id: "micro-p2d", title: "AP Microeconomics P2 MC-d (마지막 부족 칸)", itemsFile: "micro-p2d-items.json", loadLabel: "micro-p2d-2026-10-13", supplement: true, passKeysFile: "micro-p2d-pass-keys.json", evidenceFile: "evidence-micro-s2.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 

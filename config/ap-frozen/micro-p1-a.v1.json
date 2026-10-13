@@ -1,0 +1,72 @@
+{
+ "version": "v1-micro-p1-a",
+ "run": "micro-p1-a",
+ "subject": "ap_microeconomics",
+ "archetypeList": "micro_p1_mc",
+ "seed0": 9100,
+ "candidatesPerCell": 1,
+ "capUsd": 1.9,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "2",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/subjects/micro.ts",
+  "lib/ap-generation/subjects/micro-archetypes.json",
+  "lib/ap-generation/micro-frq-checks.ts",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 70.44,
+ "_budget_estimate": {
+  "cells": "22 single MC archetypes (units U1 5, U2 6, U3 5, U4 3, U5 1, U6 2), AP_MC_CANDS=2 so 44 candidates; 8 of them carry graphs, 7 tables, 1 payoff matrix",
+  "perCellUsd": "0.078 (2 candidates x 0.039 observed in Physics/Chemistry); graph cells carry a 1.2x haircut inside the cap",
+  "expectedUsd": "1.7 (range 1.5-1.9)",
+  "capUsd": 1.9,
+  "pilotCombinedCap": "P1-a 1.9 + P1-b 0.6 = 2.5",
+  "passRateAssumption": "65% first pass (Physics 68%, Chemistry v2 76%); five options and graph reading add reviewer load. Stop if the first pass is below 45%."
+ },
+ "_note": "Frozen 2026-10-13 after the free engineering (26 Python tests, 7 TS tests, pipeline plan/blueprint/check 44/44). Cumulative at freeze $68.4316; hard stop = cumulative + cap $1.9 + 0.1.",
+ "expected": {
+  "generatorHash": "214aa745ef8d",
+  "reviewerPromptHash": "94005cf75a8f",
+  "difficultyPromptHash": "9bda2250d42c",
+  "parserHash": "7528bbe8cdfc",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ }
+}

@@ -1,0 +1,55 @@
+{
+ "runs": [
+  "micro-p2-f"
+ ],
+ "rows": 10,
+ "passed": 7,
+ "rejected": 3,
+ "passRate": 0.7,
+ "mc": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "frq": {
+  "rows": 10,
+  "passed": 7,
+  "passRate": 0.7
+ },
+ "unitsPassed": {},
+ "skillsPassed": {},
+ "figPassed": {
+  "table": 6,
+  "payoff_matrix": 1
+ },
+ "figAll": {
+  "table": 8,
+  "payoff_matrix": 2
+ },
+ "figPassRate": {
+  "table": "6/8",
+  "payoff_matrix": "1/2"
+ },
+ "renderTypesPassed": {
+  "ap_table": 6,
+  "ap_table:payoff_matrix": 1
+ },
+ "archetypesPassed": {
+  "mif_long_market_policy": 2,
+  "mif_short_trade": 2,
+  "mif_short_elasticity": 1,
+  "mif_short_mc": 1,
+  "frq_micro_game": 1
+ },
+ "archetypesAll": {
+  "mif_long_market_policy": 2,
+  "mif_short_trade": 2,
+  "mif_short_elasticity": 2,
+  "mif_short_mc": 2,
+  "frq_micro_game": 2
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "micro-p2-f": 0.4836
+ }
+}

@@ -1,0 +1,68 @@
+{
+ "version": "v1-micro-p2-d",
+ "run": "micro-p2-d",
+ "subject": "ap_microeconomics",
+ "archetypeList": "micro_p2_d",
+ "seed0": 9700,
+ "candidatesPerCell": 1,
+ "capUsd": 0.5,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "3",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/subjects/micro.ts",
+  "lib/ap-generation/subjects/micro-archetypes.json",
+  "lib/ap-generation/micro-frq-checks.ts",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 78.86,
+ "_budget_estimate": {
+  "cells": "3 archetypes x 3 candidates = 9 MC items (the last virtual cell mi_fixed_variable plus two archetypes whose wording was fixed). Expected 0.33.",
+  "p2TotalCap": "actual F+A+B+C = 7.46; this run caps at 0.5"
+ },
+ "_note": "Frozen 2026-10-13 after P2-C (cumulative 77.9192).",
+ "expected": {
+  "generatorHash": "b1128626010d",
+  "reviewerPromptHash": "94005cf75a8f",
+  "difficultyPromptHash": "9bda2250d42c",
+  "parserHash": "7528bbe8cdfc",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ }
+}
