@@ -3,7 +3,7 @@
  "version": 1,
  "generatedBy": "lib/ap-exam/tex-corrections-gen.test.ts (AP_TEX_CORR_WRITE=1)",
  "note": "변환 전 해설(explanation_en)의 sha256 에 묶인 교정 문안. 적용은 관리자 'AP 설명 수정 새 버전'(미리보기→확인→실행)만. before 해시가 DB 와 다르면 건드리지 않는다.",
- "count": 261,
+ "count": 265,
  "entries": [
   {
    "candidateKey": "bc-topup-final:ap_calculus_bc-f01-k0",
@@ -158,6 +158,38 @@
    "beforeSha256": "d8198a98277434c38aae8020ad26ca67ad37d5d2ba2db448089dfe4829621b0f",
    "afterSha256": "016516bd11e8d3e14daf03e61a16012ca0530df17201ce9c96663345b8fc0218",
    "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] Measure each hanging mass with a balance (or use slotted masses of known mass) and use a stopwatch to time 10 oscillations for each of several hanging masses added one at a time to the same spring, starting each trial from the same small displacement, then divide by 10; repeat each timing.\n   - 1 pt: Identifies the measured quantities and equipment: a balance or known masses and a timing device (both a way to know the mass and a way to time the motion are needed)\n   - 1 pt: Changes only the hanging mass while keeping the spring and the starting amplitude the same (both conditions are needed)\n   - 1 pt: Reduces timing uncertainty by timing many oscillations and dividing, or by repeating the trials and averaging (either earns the point)\n(B) [1 pt] Plot $T^2$ on the vertical axis against $m$ on the horizontal axis; the slope is $4\\pi^2/k$.\n   - 1 pt: Identifies $T^2$ (vertical) versus $m$ (horizontal)\n(C) [3 pt] Points $(m,T^2)$: (0.1, 0.195), (0.2, 0.399), (0.3, 0.588), (0.4, 0.796), (0.5, 0.996) with a best-fit line of slope about $2.00\\text{ s}^2/\\text{kg}$.\n   - 1 pt: Axes are labeled with quantities and units and the scale fills most of the grid\n   - 1 pt: Plots the five points $(m, T^2)$ accurately\n   - 1 pt: Draws a straight best-fit line through the trend of the points\n(D) [3 pt] Slope $\\approx 2.00\\text{ s}^2/\\text{kg}$, so $k=4\\pi^2/\\text{slope}\\approx 19.8\\text{ N/m}$.\n   - 1 pt: Calculates the slope of the best-fit line using two points on the line (about 2.00 $s^2$/kg; accept any value within 5 percent)\n   - 1 pt: Relates the slope to the spring constant: slope $=4\\pi^2/k$\n   - 1 pt: Calculates $k$ (about 20; accept any value within 8 percent) with units of newtons per meter"
+  },
+  {
+   "candidateKey": "phys-s3-a:ap_physics_1-m20-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "f3648a979bbb189cbfb3e76f01775062a20912eb2c1b92e41366d9f371a709e7",
+   "afterSha256": "1a2d84bf16d29a1351fc9422a47280dffe05cdb17658dd6baff079b45ed1b79d",
+   "after": "The correct answer is The ratio $F/a$ is nearly the same in every trial, about $0.8\\text{ kg}$, so the data support a cart of constant mass of about $0.8\\text{ kg}$.. The ratios $F/a$ range only from $0.787$ to $0.802$ kg, so $a$ is nearly proportional to $F$ with the slope $1/m$.\nThe ratio $a/F$ is nearly the same in every trial, about $1.3$, so the mass of the cart is about $1.3\\text{ kg}$. is incorrect: Reads the reciprocal ratio $a/F$ as if it were the mass; its units are m/($s^2$ N) = 1/kg.\nThe mass of the cart increases as the force increases, because the force column increases down the table. is incorrect: Treats an increasing force as if it were an increasing mass.\nThe product $Fa$ is nearly the same in every trial, so the force is inversely proportional to the acceleration. is incorrect: Tests the product instead of the ratio, although for these data the product changes by a large factor."
+  },
+  {
+   "candidateKey": "phys-s3-a:ap_physics_1-m20-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "7eb4bde1f62d5b576f8a26ed45161a36fb2521b79ee959b3cd87680e5f5b870d",
+   "afterSha256": "2a2f412bd94e93dee0d28dccc1539f32955a758f8ff0a881518bb5ed2aaf409c",
+   "after": "The correct answer is The ratio $F/a$ is nearly the same in every trial, about $0.4\\text{ kg}$, so the data support a cart of constant mass of about $0.4\\text{ kg}$.. The ratios $F/a$ range only from $0.394$ to $0.4$ kg, so $a$ is nearly proportional to $F$ with the slope $1/m$.\nThe ratio $a/F$ is nearly the same in every trial, about $2.5$, so the mass of the cart is about $2.5\\text{ kg}$. is incorrect: Reads the reciprocal ratio $a/F$ as if it were the mass; its units are m/($s^2$ N) = 1/kg.\nThe mass of the cart increases as the force increases, because the force column increases down the table. is incorrect: Treats an increasing force as if it were an increasing mass.\nThe product $Fa$ is nearly the same in every trial, so the force is inversely proportional to the acceleration. is incorrect: Tests the product instead of the ratio, although for these data the product changes by a large factor."
+  },
+  {
+   "candidateKey": "phys-s3-a:ap_physics_1-m28-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "cef0454e4a985524684191a3cc8926f21a96be95cad39d74216ff21797273bed",
+   "afterSha256": "1ba8ff8532c550ca61ce6f0a477d852250e3167a2996a11fc414c002784e4345",
+   "after": "The correct answer is The quantity $T^2/L$ is nearly constant, about $4.07\\text{ s}^2\\text{/m}$, so the data support $T$ proportional to $\\sqrt{L}$.. The values of $T^2/L$ range only from $4$ to $4.12$ $s^2$/m, which is consistent with $T=2\\pi\\sqrt{L/g}$.\nThe product $TL$ is nearly constant, so longer pendulums have shorter periods. is incorrect: Reads a decreasing quantity as an inverse relationship, but the period increases with the length in the table.\nWhen the length increases from $0.20\\text{ m}$ to $0.80\\text{ m}$, the period increases by the same factor of $4$. is incorrect: Assumes the period grows by the same factor as the length, whereas the data show a factor of only $2$.\nThe quantity $T/L$ is nearly constant, so the period is proportional to the length. is incorrect: Tests the ratio $T/L$ for a direct proportion, but for these data it falls from $4.51$ to $2.24$ s/m."
+  },
+  {
+   "candidateKey": "phys-s3-a:ap_physics_1-m28-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "0bdbceb6678752c07880fe28380ee72c3d7f1652a23cb83964df6e65a45897a6",
+   "afterSha256": "09c63bd94fd8cd74e76a9b4e91d37f913241b99bdf2ce068c827c533b3a1dca3",
+   "after": "The correct answer is The quantity $T^2/L$ is nearly constant, about $4.04\\text{ s}^2\\text{/m}$, so the data support $T$ proportional to $\\sqrt{L}$.. The values of $T^2/L$ range only from $3.96$ to $4.11$ $s^2$/m, which is consistent with $T=2\\pi\\sqrt{L/g}$.\nThe quantity $T/L$ is nearly constant, so the period is proportional to the length. is incorrect: Tests the ratio $T/L$ for a direct proportion, but for these data it falls from $4.51$ to $1.82$ s/m.\nWhen the length increases from $0.20\\text{ m}$ to $1.20\\text{ m}$, the period increases by the same factor of $6$. is incorrect: Assumes the period grows by the same factor as the length, whereas the data show a factor of only $2.4$.\nThe product $TL$ is nearly constant, so longer pendulums have shorter periods. is incorrect: Reads a decreasing quantity as an inverse relationship, but the period increases with the length in the table."
   },
   {
    "candidateKey": "run1:ap_biology-c004-k0",
