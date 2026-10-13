@@ -147,6 +147,30 @@ class Truth(unittest.TestCase):
             self.assertLess(f["f2"], f["f1"]); self.assertLess(f["f2"], 1.0)
 
 
+class StudentVisibleContext(unittest.TestCase):
+    """2026-10-13 화면 증거에서 발견: 표·그림 자료의 stimulus.description 은 학생 화면에 나오지 않는다(표는 data.notes 만, 그림은 아무것도). 풀이에 필요한 값은 notes 나 파트 문구에 있어야 한다."""
+    def test_table_stimuli_carry_the_setup_in_notes(self):
+        for n in ("phf_lab_pendulum_g", "phf_lab_sliding_friction"):
+            for p in packs(n, 4, 60):
+                self.assertEqual(p["stimulus"]["kind"], "table")
+                self.assertEqual(p["stimulus"]["data"]["notes"], [p["stimulus"]["description"]], n)
+
+    def test_diagram_stimulus_values_needed_for_the_calculation_are_in_the_prompts(self):
+        for p in packs("phf_mr_incline_slide", 6, 60):
+            f = facts(p)
+            prompts = " ".join(pt["prompt"] for pt in p["parts"])
+            self.assertIn(f"\\mu={f['mu']:g}", prompts); self.assertIn(f"d={f['d']:g}", prompts)
+            sc = p["stimulus"]["data"]["scene"]
+            self.assertEqual({"theta": f["th"], "m": f["m"]}, {"theta": sc["theta"], "m": sc["m"]})  # 각도·질량은 그림의 라벨로 나온다(파트 C 가 그림을 가리킨다)
+            self.assertIn("given in the figure", prompts)
+
+    def test_text_stimulus_description_is_shown_by_the_viewer(self):
+        for n in NEW:
+            for p in packs(n, 1, 7):
+                if p["stimulus"]["kind"] == "text":
+                    self.assertTrue(p["stimulus"]["description"].strip())
+
+
 class TexHygiene(unittest.TestCase):
     def test_no_script_marks_inside_text(self):
         bad = re.compile(r"\\text\{[^}]*(?:[\^_]|\\cdot)[^}]*\}")

@@ -25,7 +25,7 @@ def phf_mr_incline_slide(rng):
     sc = make_incline(th, m, mu); assert not check_scene(sc)
     stim = {"kind": "diagram", "description": f"A block of mass $m={m:g}\\text{{ kg}}$ is released from rest on a rough incline that makes an angle $\\theta={th}^\\circ$ with the horizontal. The coefficient of kinetic friction between the block and the incline is $\\mu={mu:g}$. The block slides a distance $d={d:g}\\text{{ m}}$ down the incline.", "data": {"variant": "phys_scene", "scene": sc}}
     parts = [
-        part("A", "On the dot below, which represents the block, draw and label the forces (not components) that act on the block while it slides down the incline. Each force must be represented by a distinct arrow starting on the dot.", 3, "diagram", ["1.A", "1.C"],
+        part("A", "A block is released from rest on the rough incline shown in the figure and slides down it. On the dot below, which represents the block, draw and label the forces (not components) that act on the block while it slides down the incline. Each force must be represented by a distinct arrow starting on the dot.", 3, "diagram", ["1.A", "1.C"],
              "Three arrows from the dot: weight straight down, normal force perpendicular to the incline surface and pointing away from it, and kinetic friction pointing up the incline. The weight arrow is the longest and the friction arrow is shorter than the normal-force arrow.",
              [R("A1", "diagram", "Draws and labels the three forces: weight, normal force, and kinetic friction (no extra force such as a force down the incline)", ["weight", "normal force", "friction"], err=["adds a force of motion down the incline"]),
               R("A2", "diagram", "Arrow directions are correct: weight straight down, normal force perpendicular to the incline, friction up the incline", ["directions"], err=["draws the normal force vertical", "draws friction down the incline"]),
@@ -35,11 +35,11 @@ def phf_mr_incline_slide(rng):
              [R("B1", "expression", "Applies Newton's second law perpendicular to the incline: $N=mg\\cos\\theta$", ["N = m g cos theta"], err=["uses N = m g"]),
               R("B2", "expression", "Applies Newton's second law along the incline: $mg\\sin\\theta-\\mu N=ma$", ["m g sin theta - mu N = m a"], err=["uses the cosine for the component along the incline", "adds the friction term"]),
               R("B3", "expression", "Combines the equations to the correct expression $a=g(\\sin\\theta-\\mu\\cos\\theta)$", ["g (sin theta - mu cos theta)"], requires="B2", err=["leaves the mass in the final expression"])]),
-        part("C", f"Calculate the speed of the block after it has slid the distance $d={d:g}\\text{{ m}}$ down the incline.", 2, "calculate", ["2.B"],
+        part("C", f"The angle of the incline and the mass of the block are given in the figure, and the coefficient of kinetic friction between the block and the incline is $\\mu={mu:g}$. Calculate the speed of the block after it has slid the distance $d={d:g}\\text{{ m}}$ down the incline.", 2, "calculate", ["2.B"],
              f"$a={a:.2f}\\text{{ m/s}}^2$ and $v=\\sqrt{{2ad}}=\\sqrt{{2({a:.2f})({d:g})}}\\approx {v:.2f}\\text{{ m/s}}$.",
              [R("C1", "numeric", f"Calculates the acceleration (about {a:.2f}) from the expression in part B", [f"{a:.2f}"], requires="B3", nums=True, err=["uses the sine for both terms"]),
               R("C2", "numeric", f"Uses $v^2=2ad$ (or an energy equation) to find a speed of about {v:.2f} with units of meters per second", [f"{v:.2f}", "m/s"], requires="C1", nums=True, units=True, err=["forgets the square root"])]),
-        part("D", f"The experiment is repeated on the same incline with a block of mass ${2 * m:g}\\text{{ kg}}$. Does the time for the block to slide the distance $d$ increase, decrease, or stay the same? Justify your answer.", 2, "explain", ["3.B", "3.C"],
+        part("D", f"The experiment is repeated on the same incline (same angle and same coefficient of kinetic friction) with a block of mass ${2 * m:g}\\text{{ kg}}$. Does the time for the block to slide the distance $d$ increase, decrease, or stay the same? Justify your answer.", 2, "explain", ["3.B", "3.C"],
              "The time stays the same. The mass cancels in $a=g(\\sin\\theta-\\mu\\cos\\theta)$, so the acceleration is unchanged and the time $t=\\sqrt{2d/a}$ is the same.",
              [R("D1", "claim", "States that the time stays the same", ["stays the same"], err=["states the heavier block takes less time"]),
               R("D2", "justification", "Justifies that the mass cancels, so the acceleration (and the time) does not depend on the mass", ["mass cancels", "same acceleration"], requires="D1", err=["argues only that heavier objects fall at the same rate without using the equation"])]),
@@ -196,6 +196,7 @@ def phf_lab_pendulum_g(rng):
         if abs(g_est - 9.8) / 9.8 < 0.04:
             break
     stim = {"kind": "table", "description": "A student measures the period $T$ of a small, dense bob hanging from a light string of length $L$ (measured from the pivot to the center of the bob), swinging through a small angle. The student wants to determine the gravitational field strength $g$ at the lab location.", "data": {"x_label": "Length L (m)", "y_label": "Period T (s)", "rows": [[L, t] for L, t in zip(Ls, Ts)]}}
+    stim["data"]["notes"] = [stim["description"]]  # 표 자료의 description 은 학생 화면에 나오지 않는다(ap_table 은 data.notes 만 싣는다): 실험 설명을 notes 로 함께 싣는다(phys-s4 화면 증거에서 발견)
     parts = [
         part("A", "Describe an experimental procedure to collect the data for the period as a function of length. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured period.", 3, "design", ["3.A", "2.B"],
              "Use a meterstick to measure the length from the pivot to the center of the bob for each trial and a stopwatch to time 10 swings, released from the same small angle each time; change only the string length, and divide the time by 10; repeat the timing and average.",
@@ -237,6 +238,7 @@ def phf_lab_sliding_friction(rng):
         if abs(mu_est - mu) / mu < 0.04:
             break
     stim = {"kind": "table", "description": "A student gives a block a range of initial speeds $v_0$ along a level, rough table, measures the initial speed with a photogate, and measures the distance $d$ the block slides before it stops. The block and the table surface are the same in every trial.", "data": {"x_label": "Initial speed v0 (m/s)", "y_label": "Stopping distance d (m)", "rows": [[v, d] for v, d in zip(v0s, ds)]}}
+    stim["data"]["notes"] = [stim["description"]]  # 표 자료의 description 은 학생 화면에 나오지 않는다 → notes 로 함께 싣는다
     parts = [
         part("A", "Describe an experimental procedure to collect the data for the stopping distance as a function of the initial speed. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured distance.", 3, "design", ["3.A", "2.B"],
              "Use a photogate (or motion sensor) to measure the initial speed and a meterstick to measure the sliding distance from the starting point to where the block stops; give the same block different initial speeds on the same table surface, and repeat each trial and average the distances.",
@@ -339,3 +341,5 @@ NEW_FRQ_TYPES = {"phf_mr_incline_slide": ("MR", 10), "phf_mr_energy_patch": ("MR
                  "phf_lab_pendulum_g": ("LAB", 10), "phf_lab_sliding_friction": ("LAB", 10), "phf_qqt_flat_curve": ("QQT", 8), "phf_qqt_floating_block": ("QQT", 8)}
 STAGE_FRQ2 = list(NEW_FRQ_TYPES)
 STAGE_S4_A = STAGE_FRQ2
+# phys-s4-b(재실행): 화면 증거에서 표·그림 자료의 설명이 학생에게 안 보이는 것을 발견해 세 원형(경사면·진자·마찰 계수)을 고친 뒤 이 세 개만 다시 생성한다. 런 a 의 이 세 원형 후보는 재고에서 제외한다(phys-finalize --exclude-archetypes).
+STAGE_S4_B = ["phf_mr_incline_slide", "phf_lab_pendulum_g", "phf_lab_sliding_friction"]
