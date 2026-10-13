@@ -708,3 +708,8 @@ def st_chisq_setup(rng):
 
 STAGE_SINGLES = ["st_t_procedure_conditions", "st_ci_test_consistency", "st_sampling_dist_xbar", "st_residual_r2_model", "st_outlier_effect", "st_power_table_change", "st_two_draw_conditional", "st_phat_normal_prob", "st_block_table", "st_chisq_setup"]
 STAGE_EXTRA = ["st_ci_test_consistency", "st_outlier_effect", "st_two_draw_conditional", "st_block_table", "st_t_procedure_conditions"]  # S3-b: 첫 통과율이 낮을 가능성이 큰 원형(그림·다중 판정)에 추가 후보
+
+# 2026-10-13 S3-b(ST2 부족분, docs/ap/statistics-s3b-report.md): stats-st2-shortfall.ts 가 계산한 최소 신규 단독 13개 원형(각 시드 2), 신규 단원 5 회귀 공유 세트, FRQ 4유형. 원형 함수는 기존 모듈에 있다(레지스트리가 이름으로 찾는다).
+STAGE_B_SINGLES = ["st_study_conclusion", "st_investigative_question", "st_question_data_match", "st_sampling_method", "st_boxplot_compare", "st_question_type", "st_cond_prob_table", "st_tree_bayes", "st_clt_describe", "st_hypotheses_setup", "st_power_table_change", "st_hypotheses_means", "st_influential_point"]
+STAGE_B_SETS = ["st_set_regression"]
+STAGE_B_FRQ = ["stfrq_q1_design", "stfrq_q2_regression", "stfrq_q3_prop_test", "stfrq_q4_integrated"]
