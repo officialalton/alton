@@ -1,0 +1,183 @@
+{
+ "kind": "sat_problem_extra_patch_list",
+ "generatedBy": "external audit 2026-10-13 (docs/audit/2026-10-13-external-audit-triage.md)",
+ "note": "Hand-written minimal edits (string replacement ops; each \"from\" must occur exactly once in the current DB text, so the patch is idempotent and position-independent). Matched by DB problem id + expected published version id.",
+ "count": 8,
+ "patches": [
+  {
+   "id": "E-P06a",
+   "problemId": "47056b8e-21e4-4e4c-ab4a-d4efb2276c16",
+   "expectVersionId": "b679e222-ad35-4559-84f5-8e09e9aedba9",
+   "why": "S-P06 ord 47: English explanation says the dates are \"a week ahead\"; the passage says every entry was dated a week BEFORE the coins came in.",
+   "changes": [
+    {
+     "field": "explanation_en",
+     "ops": [
+      {
+       "from": "are a week ahead of the real ones",
+       "to": "are a week earlier than the real ones"
+      }
+     ]
+    }
+   ],
+   "kind": "sat"
+  },
+  {
+   "id": "E-P06b",
+   "problemId": "457d567a-8ed3-4ca3-9e3d-989326420aa4",
+   "expectVersionId": "78e523ad-d682-4f41-9d7e-b257d990b6ac",
+   "why": "S-P06 ord 15: English explanation says \"his voice drops\" and \"the plane ticket of a brother\"; Mathis is the narrator's sister and the passage says \"her voice dropped\" / \"her plane ticket\".",
+   "changes": [
+    {
+     "field": "explanation_en",
+     "ops": [
+      {
+       "from": "his voice drops",
+       "to": "her voice drops"
+      },
+      {
+       "from": "the plane ticket of a brother who is ready to leave",
+       "to": "Mathis's plane ticket, a sign that she is ready to leave"
+      }
+     ]
+    }
+   ],
+   "kind": "sat"
+  },
+  {
+   "id": "E-P06c",
+   "problemId": "d07ca7d3-eec2-4221-bdd6-7fbca6489315",
+   "expectVersionId": "a3f5839d-ceda-49de-94b3-86760f55080f",
+   "why": "S-P06 ord 42: English explanation says Shanice calls the narrator a nephew; the passage says \"as if I were a niece\".",
+   "changes": [
+    {
+     "field": "explanation_en",
+     "ops": [
+      {
+       "from": "calls the narrator, her tenant, a nephew",
+       "to": "calls the narrator, her tenant, a niece"
+      }
+     ]
+    }
+   ],
+   "kind": "sat"
+  },
+  {
+   "id": "E-P06d",
+   "problemId": "b4af5fd9-678f-4f8c-82f4-45905d194cad",
+   "expectVersionId": "ffe513f9-3f56-4040-99d1-6ffbcc4fca9c",
+   "why": "S-P06 ord 52 + S-R14: English explanation says \"shortage of oysters\" (passage: shortage of suitable denning sites; Korean \"굴\" is ambiguous); the passage keeps a literal comma after the blank (\"______ , they maintain\") while every option already ends with a comma (double comma).",
+   "changes": [
+    {
+     "field": "passage",
+     "ops": [
+      {
+       "from": "______ , they maintain",
+       "to": "______ they maintain"
+      }
+     ]
+    },
+    {
+     "field": "explanation_en",
+     "ops": [
+      {
+       "from": "shortage of oysters",
+       "to": "shortage of suitable denning sites"
+      }
+     ]
+    },
+    {
+     "field": "explanation",
+     "ops": [
+      {
+       "from": "단지 굴 부족 때문일 수 있다는",
+       "to": "단지 적합한 은신처(굴)가 부족하기 때문일 수 있다는"
+      }
+     ]
+    }
+   ],
+   "kind": "sat"
+  },
+  {
+   "id": "E-M22",
+   "problemId": "515a7e74-99e6-4afd-bd7a-809ac05b58db",
+   "expectVersionId": "4a3c2460-6c52-4f70-95f0-a37a8409ac6c",
+   "why": "S-M22: the wrong-answer reasoning in the explanation does not produce the listed distractors (it cites 6.50 \"rather than 2.10/3.10\"). Replace the speculation with a check of each value against both conditions (answer key 2.50 is right).",
+   "changes": [
+    {
+     "field": "explanation_en",
+     "ops": [
+      {
+       "from": "\n\nAnalysis of wrong answers:\n- 1.50: A value that could result from not solving the two equations together and reflecting only part of the second condition (the doubled rate), for example finding r = 0.60 and then mistakenly subtracting 4r (=2.40) instead of 10r from 8.50 (8.50-2.40 is 6.10, not 1.50, so this arises through a calculation error), leading to a wrong per-mile rate.\n- 2.10: If the student ignores the doubled-rate condition and wrongly sets the second equation as b+4r=7.30, then solving with the first equation gives 6r=1.20, r=0.20, and b=8.50-2.00=6.50 rather than 2.10; this is an approximate wrong answer that could arise from a sign mistake, such as subtracting in the opposite order.\n- 3.10: The student considers only the difference in distance (6 miles) from the 10-mile and 4-mile conditions, does not reflect the doubled rate, and wrongly finds the per-mile rate as (8.50-7.30)/(10-4)=0.20, giving b=8.50-10(0.20)=6.50 rather than 3.10; it is a value that could arise similarly from using only partial information.",
+       "to": "\n\nWhy the other choices fail: check each value against both conditions. If b = 1.50, then r = (8.50 - 1.50)/10 = 0.70 and b + 8r = 7.10, not 7.30. If b = 2.10, then r = 0.64 and b + 8r = 7.22, not 7.30. If b = 3.10, then r = 0.54 and b + 8r = 7.42, not 7.30. Only b = 2.50 satisfies both conditions (r = 0.60 and b + 8r = 7.30)."
+      }
+     ]
+    },
+    {
+     "field": "explanation",
+     "ops": [
+      {
+       "from": "\n\n오답 분석:\n- 1.50: r=0.60을 구한 뒤 10r 대신 잘못하여 4r(=2.40)을 8.50에서 뺀 값(8.50-2.40=6.10이 아니라 계산 실수로 1.50이 나오는 경우)처럼, 두 식을 연립하지 않고 두 번째 조건(요율 2배)의 의미를 일부만 반영해 마일당 요금을 잘못 구한 경우 나올 수 있는 값이다.\n- 2.10: 요율이 2배가 된다는 조건을 무시하고 두 번째 식을 b+4r=7.30으로 잘못 세운 뒤 첫 식과 연립하면 6r=1.20, r=0.20이 되고 b=8.50-2.00=6.50이 아니라, 식을 반대로 빼는 등 부호 실수로 얻어질 수 있는 근사 오답이다.\n- 3.10: 10마일과 4마일 조건에서 거리 차(6마일)만 고려하고 요율이 2배라는 조건을 반영하지 않은 채 단순히 (8.50-7.30)/(10-4)=0.20을 마일당 요금으로 잘못 구해 b=8.50-10(0.20)=6.50이 아니라, 유사한 방식으로 부분 정보만 사용했을 때 나올 수 있는 값이다.",
+       "to": "\n\n오답 확인: 각 값을 두 조건에 모두 대입해 본다. b = 1.50이면 r = (8.50 - 1.50)/10 = 0.70이고 b + 8r = 7.10으로 7.30이 아니다. b = 2.10이면 r = 0.64이고 b + 8r = 7.22로 7.30이 아니다. b = 3.10이면 r = 0.54이고 b + 8r = 7.42로 7.30이 아니다. 두 조건을 모두 만족하는 값은 b = 2.50(r = 0.60, b + 8r = 7.30)뿐이다."
+      }
+     ]
+    }
+   ],
+   "kind": "sat"
+  },
+  {
+   "id": "E-M28a",
+   "problemId": "6df1d05b-4d1a-4905-860d-3cd5ad67b271",
+   "expectVersionId": "04a3d390-7882-432e-8296-cddc0419905f",
+   "why": "S-M28 class: English explanation says \"less than\" means \"adding (or subtracting)\" (same class as SAT10 results ord 76).",
+   "changes": [
+    {
+     "field": "explanation_en",
+     "ops": [
+      {
+       "from": "\"less than\" means adding (or subtracting) 5 relative to the base value 4x.",
+       "to": "\"less than\" means subtracting 5 from the base value 4x."
+      }
+     ]
+    }
+   ],
+   "kind": "sat"
+  },
+  {
+   "id": "E-M28b",
+   "problemId": "cbf756d3-7be4-473f-8a70-343541c6d8fe",
+   "expectVersionId": "77650779-89bc-448b-accf-0b00d97fbdd0",
+   "why": "S-M28 (SAT10 results ord 76): English explanation says \"less than\" means \"adding (or subtracting)\".",
+   "changes": [
+    {
+     "field": "explanation_en",
+     "ops": [
+      {
+       "from": "\"less than\" means adding (or subtracting) 2 relative to the base value 4x.",
+       "to": "\"less than\" means subtracting 2 from the base value 4x."
+      }
+     ]
+    }
+   ],
+   "kind": "sat"
+  },
+  {
+   "id": "E-M26",
+   "problemId": "aea66ace-7029-4d01-90dc-79b86e1797c9",
+   "expectVersionId": "a95c2467-57e9-4a61-981f-f7af43316241",
+   "why": "S-M26: \"radioactive substance\" modeled by 70000*1.15^t is growth, not decay. Re-theme to a bacteria culture; the question (A(t)=92575 -> t=2) and the explanation do not depend on the substance.",
+   "changes": [
+    {
+     "field": "passage",
+     "ops": [
+      {
+       "from": "The amount of a radioactive substance, in grams, after t days",
+       "to": "The mass of a bacteria culture, in grams, after t days"
+      }
+     ]
+    }
+   ],
+   "kind": "sat"
+  }
+ ]
+}

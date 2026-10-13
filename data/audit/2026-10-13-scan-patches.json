@@ -1,0 +1,36 @@
+{
+ "kind": "sat_problem_scan_patch_list",
+ "generatedBy": "scripts/audit/db-defect-scan.ts",
+ "note": "Mechanical patches found by scanning the CURRENT published DB versions (not in the triage patch list). Matched by DB problem id + expected published version id.",
+ "count": 2,
+ "patches": [
+  {
+   "id": "SCAN-R-d69b18fc",
+   "problemId": "d69b18fc-ecea-4f73-8aad-3a4589245ad4",
+   "expectVersionId": "6493d3f3-2ab3-4bfe-acd2-f72faf124b4e",
+   "why": "blank continuation repeats the options' final words (\"the\")",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "In her 1983 book The Managed Heart, sociologist Arlie Russell Hochschild examined how flight attendants were trained to produce warmth on demand, smiling through turbulence and rude passengers alike. Her central concept, emotional labor, describes the effort workers expend to display the feelings that their employers ______ the hidden cost of this effort, Hochschild argued, is often a growing sense of estrangement from one's own emotions.",
+     "new": "In her 1983 book The Managed Heart, sociologist Arlie Russell Hochschild examined how flight attendants were trained to produce warmth on demand, smiling through turbulence and rude passengers alike. Her central concept, emotional labor, describes the effort workers expend to display the feelings that their employers ______ hidden cost of this effort, Hochschild argued, is often a growing sense of estrangement from one's own emotions."
+    }
+   ],
+   "kind": "sat"
+  },
+  {
+   "id": "SCAN-R-784a7174",
+   "problemId": "784a7174-0f18-4c7a-ac4d-3615e79e19cb",
+   "expectVersionId": "737d2370-5a46-4fdb-8331-a9b6a84b9806",
+   "why": "blank continuation repeats the options' final words (\"it\")",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Taiwo read the letter twice beneath the awning while the noon heat pressed down on Balogun Market. The solicitor's words were crisp and generous: the letter promised her a berth on a steamer bound for Liverpool and a room in her late uncle's London house______ it said nothing about who would sit each morning behind her mother's indigo stall, folding cloth the way her mother had always assumed Taiwo one day would.",
+     "new": "Taiwo read the letter twice beneath the awning while the noon heat pressed down on Balogun Market. The solicitor's words were crisp and generous: the letter promised her a berth on a steamer bound for Liverpool and a room in her late uncle's London house______ said nothing about who would sit each morning behind her mother's indigo stall, folding cloth the way her mother had always assumed Taiwo one day would."
+    }
+   ],
+   "kind": "sat"
+  }
+ ]
+}

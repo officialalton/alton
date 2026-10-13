@@ -189,6 +189,16 @@ Q3 — 영어 해설 오류 후보 위치(`S-M28`, `S-M22`): `select p.id, pv.id
 Q4 — 위치 못 찾은 항목 본문 검색: `select pv.id, left(pv.passage,120) from problem_versions pv where pv.passage ilike any (array['%they maintain%','%radioactive substance%','%purchase price%'])`.
 Q5(AP) — AB1/AB2/BC1 현재 게시 버전의 해당 슬롯: `select s.name, s.version_no, i.section, i.position, p.ap_candidate_key from mock_exam_set_items i join mock_exam_sets s on s.id=i.exam_set_id join problems p on p.id=i.problem_id where p.ap_candidate_key in ('run2:ap_calculus_ab-m17-k2','s1a-final:ap_calculus_ab-m17-k1','run2:ap_calculus_ab-m17-k3','run1:ap_calculus_ab-f02-k5','run1:ap_calculus_ab-f02-k9','run1:ap_calculus_ab-f02-k10');`
 
+## 적용 계획(2026-10-13 저녁, 조정 세션이 SQL 파일을 실행)
+
+비프로덕션 DB(`worpsqwqgnspddnrtnvq`)의 **읽기 전용 SELECT** 로 현재 공개 버전을 읽어 만든 계획이다(쓰기는 하지 않았다). 읽은 결과는 `data/audit/2026-10-13-db-readout.json`(Q1=problems[]·Q2~Q5=triage, 패치별 상태 patchStatus[]), 상태 요약은 `data/audit/2026-10-13-apply-status.json`.
+
+- **SAT·AP 문항 새 버전 + 세트 새 버전 SQL**: `data/audit/apply/2026-10-13-apply.sql`(한 개의 DO 블록 = 한 트랜잭션). 문항마다 `save_problem_draft_version → set_problem_render_check → set_problem_quality → confirm_and_publish_problem_version`(AP 는 `ap_attach_new_version` 포함), 세트마다 같은 `set_group_id` 의 version_no+1 초안(문항 스냅샷 복사, 바뀐 문항만 새 버전) → `mock_exam_validate_mst_set`·`mock_exam_set_item_issues` 검증 → `mock_exam_publish_set`(이전 공개본 보관, 공개 범위 승계). 멱등(이미 반영된 문항·세트는 건너뜀), 기대한 옛 값과 다르면 `DRIFT` 로 전체 롤백.
+- 실행: `npx supabase db query --linked -f data/audit/apply/2026-10-13-apply.sql` → 검증 `-f data/audit/apply/2026-10-13-verify.sql` → 문제 시 `-f data/audit/apply/2026-10-13-rollback.sql`(문항은 옛 공개 버전으로, 세트는 이전 공개본으로).
+- 재생성(DB 가 바뀌어 DRIFT 가 나면): `npx tsx scripts/audit/apply-audit-fixes.ts --dry-run --readout-out data/audit/2026-10-13-db-readout.json --status-out data/audit/2026-10-13-apply-status.json --emit-sql … --emit-rollback … --emit-verify …`(`--print-sql`, `--only S-01,S-02`, `--readout-in <file>` 오프라인 재계획).
+- 패치 입력: `2026-10-13-sat-patch-list.json`(삼각검증 67건) + `2026-10-13-sat-extra-patches.json`(영어 해설 수동 8건, 문자열 치환) + `2026-10-13-scan-patches.json`(DB 스캔이 찾은 기계 패치) + `2026-10-13-apply-overrides.json`(DB 선택지 순서에 맞춘 해설 글자·정답 텍스트·S-07 그림) + AP 그래프 FRQ 3건(변환기 `graphStatedFacts` 지문).
+- AP 교체 계획: `scripts/audit/ap-swap-plan-check.ts`(읽기 전용, `data/audit/2026-10-13-ap-swap-readout.json`)로 `ab3-v2`·`bc1-v3-frq`(bc1-v2 에서 이미 적용된 MC 칸을 뺀 FRQ 2칸)·`bc2-v2` 가 현재 공개 버전(AB3 v1, BC1 v2, BC2 v1)에 맞고 후보가 전부 적재돼 있으며 6세트 검증기 위반 0 임을 확인했다. 패널 새 버전과 이 SQL 은 순서에 무관하다(둘 다 그 시점의 공개 버전에서 복사한다).
+
 ## 재현
 
 ```

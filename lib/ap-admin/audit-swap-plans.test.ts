@@ -20,7 +20,8 @@ const all = new Set(Object.values(comp).flatMap((k) => [...k.mcA, ...k.mcB, ...k
 const stock = new Set<string>();
 for (const f of readdirSync("data/ap/stock").filter((x) => /items\.json$/.test(x))) for (const r of rd<{ stockKey?: string }[]>(`data/ap/stock/${f}`)) if (r.stockKey) stock.add(r.stockKey);
 
-const planFiles = readdirSync("data/ap/stock").filter((f) => /-audit-swap-plan\.json$/.test(f));
+const DERIVED = "bc1-v3-frq-audit-swap-plan.json"; // bc1-v2 의 MC 칸은 이미 DB 에 적용됨 → FRQ 만 남긴 후속 계획(bc1-v2 와 추가 문항이 같다)
+const planFiles = readdirSync("data/ap/stock").filter((f) => /-audit-swap-plan\.json$/.test(f) && f !== DERIVED);
 
 describe("외부 감사 교체 계획 파일", () => {
   it("5개 계획(AB1 v3, AB2, AB3, BC1, BC2)이 있다", () => { expect(planFiles.sort()).toEqual(["ab1-v3-audit-swap-plan.json", "ab2-v2-audit-swap-plan.json", "ab3-v2-audit-swap-plan.json", "bc1-v2-audit-swap-plan.json", "bc2-v2-audit-swap-plan.json"]); });
@@ -43,6 +44,14 @@ describe("외부 감사 교체 계획 파일", () => {
   it("계획끼리 같은 문항을 추가하지 않는다", () => {
     const adds = planFiles.flatMap((f) => parseSwapPlan(rd(`data/ap/stock/${f}`)).swaps.map((s) => s.addKey));
     expect(new Set(adds).size).toBe(adds.length);
+  });
+  it("bc1-v3-frq 계획은 bc1-v2 계획에서 이미 적용된 MC 칸을 뺀 FRQ 2칸이고 sourceVersionNo 는 2", () => {
+    const v2 = parseSwapPlan(rd("data/ap/stock/bc1-v2-audit-swap-plan.json"));
+    const d = parseSwapPlan(rd(`data/ap/stock/${DERIVED}`));
+    expect(d.sourceVersionNo).toBe(2);
+    expect(d.swaps).toEqual(v2.swaps.filter((s) => !s.section.startsWith("ap_mc")));
+    expect(d.swaps.length).toBe(2);
+    expect(rd<{ verifierViolations: unknown[] }>(`data/ap/stock/${DERIVED}`).verifierViolations).toEqual([]);
   });
   it("MC 교체는 전제 모순 원형(fprime_graph_statements)을 제거하고 같은 원형을 넣지 않는다", () => {
     const items = new Map<string, { payload?: { archetype?: string } }>();
