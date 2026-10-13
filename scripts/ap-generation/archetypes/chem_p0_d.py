@@ -145,11 +145,11 @@ def ch_heating_curve(rng):
     xs = [v[0] for v in verts]; ys = [v[1] for v in verts]
     area = (sum(((xs[i + 1] - xs[i]) / 1.0) for i in range(3)))  # 마지막 x = 누적 열
     agree(q, xs[-1], 1e-9, "q")
-    pairs = [("Omits the energy needed to melt the ice.", m * ci * (0 - T0) + m * cw * T1), ("Uses the liquid-water specific heat for the solid and omits nothing else.", m * cw * (0 - T0) + m * Lf + m * cw * T1),
-             ("Treats the energy for the temperature changes as the heat of fusion for the whole sample and omits the warming of the liquid.", m * ci * (0 - T0) + m * Lf), ("Includes the heat of vaporization of water even though the water is not boiled.", q + m * 2260.0)]
-    key, ds = num_opts(q / 1000, pairs and [(w, v / 1000) for w, v in pairs], "kJ")
-    stim = graph_stim("Heating curve for a sample of water: temperature versus heat added", [("Temperature", [[round(x / 1000, 3), round(y, 2)] for x, y in verts])], gaxis("Heat added (kJ)", 0, round(q / 1000 * 1.1 / 5) * 5 + 5, 5 if q / 1000 > 15 else 2), gaxis("Temperature (°C)", T0 - 10, T1 + 10, 20))
-    stem = (f"A ${m:g}\\text{{ g}}$ sample of ice at ${T0:g}\\,^{{\\circ}}\\text{{C}}$ is heated at constant pressure until it forms liquid water at ${T1:g}\\,^{{\\circ}}\\text{{C}}$, as shown in the heating curve. "
+    pairs = [("Omits the energy needed to melt the ice.", m * ci * (0 - T0) + m * cw * T1), ("Uses the specific heat of liquid water for the ice as well as for the liquid.", m * cw * (0 - T0) + m * Lf + m * cw * T1),
+             ("Stops at 0 °C: adds the warming of the ice and the melting but forgets to warm the liquid water to its final temperature.", m * ci * (0 - T0) + m * Lf), ("Adds the three steps correctly but reports the sum in joules as if it were kilojoules.", q)]
+    key, ds = num_opts(q / 1000, [(w, v / 1000 if "joules" not in w else v) for w, v in pairs], "kJ")
+    stim = graph_stim("Heating curve for a sample of water heated at a constant rate: temperature versus time", [("Temperature", [[round(x / q * 10, 3), round(y, 2)] for x, y in verts])], gaxis("Time (arbitrary units)", 0, 10, 2), gaxis("Temperature (°C)", T0 - 10, T1 + 10, 20))
+    stem = (f"A ${m:g}\\text{{ g}}$ sample of ice at ${T0:g}\\,^{{\\circ}}\\text{{C}}$ is heated at constant pressure and at a constant rate until it forms liquid water at ${T1:g}\\,^{{\\circ}}\\text{{C}}$, as shown in the heating curve. "
             f"The specific heat of ice is ${ci}\\text{{ J/(g}}\\cdot^{{\\circ}}\\text{{C)}}$, the specific heat of liquid water is ${cw}\\text{{ J/(g}}\\cdot^{{\\circ}}\\text{{C)}}$, and the enthalpy of fusion of ice is ${Lf:g}\\text{{ J/g}}$. How much heat, in kJ, is required?")
     return mk("ch_heating_curve", "6.5", "5.F", stem, key, ds, rng, concept="total heat for warming ice, melting it, and warming the liquid", stim=stim, material={"type": "graph", "must_include": ["warming segments", "melting plateau"]},
               path="sum of the three heating steps vs the final heat coordinate of the generated curve vertices", facts=[f"m={m}", f"T0={T0}", f"T1={T1}", f"q={q/1000:.5f}"], judgment="add the sloped segments and the plateau, using the right specific heat for each phase", est=110,
@@ -265,13 +265,18 @@ def ch_le_chatelier(rng):
             "remove_product": "Some of B is removed at constant temperature and volume.", "add_inert": "An inert gas is added at constant temperature and volume."}[stress]
     reason = {"compress": "the total gas pressure rises, which favors the side with fewer moles of gas", "expand": "the total gas pressure falls, which favors the side with more moles of gas", "add_reactant": "adding a reactant makes Q less than K",
               "remove_product": "removing a product makes Q less than K", "add_inert": "the concentrations of A and B do not change, so Q still equals K"}[stress]
-    key_t = f"The system shifts {names[rule]} because {reason}."
-    wrong_names = [n for n in ("right", "left", "none") if n != rule]
-    why_dir = {"right": "Predicts a shift toward the products, which would only happen if Q were less than K after the change.", "left": "Predicts a shift toward the reactant, which would only happen if Q were greater than K after the change.", "none": "Predicts no shift, which would only be correct if Q still equaled K after the change."}
-    wrongs = [(f"The system shifts {names[wrong_names[0]]} because {reason}.", why_dir[wrong_names[0]]), (f"The system shifts {names[wrong_names[1]]} because {reason}.", why_dir[wrong_names[1]]),
-              (f"The system shifts {names['right' if rule != 'right' else 'left']} because the equilibrium constant changes.", "Believes a change in concentration or volume changes the value of K.")]
-    rel = "equal to" if shift_num == "none" else ("less than" if Q < K else "greater than")
-    k, ds = sentence_options(key_t, f"Right after the change Q = {Q:.3g}, which is {rel} K = {K:g}, so the system " + ("is still at equilibrium and does not shift." if shift_num == "none" else f"shifts {names[rule]} until Q equals K again."), wrongs)
+    reason_for = {"right": "the reaction quotient Q becomes smaller than K, so more products must form until Q equals K again", "left": "the reaction quotient Q becomes larger than K, so more reactant must form until Q equals K again", "none": "the concentrations of A and B do not change, so Q still equals K"}
+    rel_of = {"right": "smaller than", "left": "larger than", "none": "equal to"}
+    claim_not = {"right": "does not shift toward the products", "left": "does not shift toward the reactant", "none": "does not stay at equilibrium"}
+    dn = b_c - a_c
+    truth = {"compress": f"halving the volume doubles both concentrations, so Q = [B]^{b_c}/[A]^{a_c} is multiplied by 2^({b_c} − {a_c}) = {2.0 ** dn:g}",
+             "expand": f"doubling the volume halves both concentrations, so Q = [B]^{b_c}/[A]^{a_c} is multiplied by (1/2)^({b_c} − {a_c}) = {0.5 ** dn:g}",
+             "add_reactant": "adding A increases [A], the reactant in the denominator of Q, so Q falls below K", "remove_product": "removing B decreases [B], the product in the numerator of Q, so Q falls below K",
+             "add_inert": "an inert gas added at constant volume leaves every concentration unchanged, so Q stays equal to K"}[stress]
+    key_t = f"The system shifts {names[rule]}, because {reason_for[rule]}."
+    wrongs = [(f"The system shifts {names[w]}, because {reason_for[w]}.", f"For this disturbance {truth}, so Q is not {rel_of[w]} K and the system {claim_not[w]}.") for w in ("right", "left", "none") if w != rule][:2]
+    wrongs.append((f"The system shifts {names['right' if rule != 'right' else 'left']}, because the equilibrium constant changes.", "Believes that a change in concentration or volume changes the value of K, which depends only on temperature."))
+    k, ds = sentence_options(key_t, f"For this disturbance {truth}; Q is therefore {rel_of[rule]} K, so the system " + ("does not shift." if rule == "none" else f"shifts {names[rule]} until Q equals K again."), wrongs)
     stem = f"The reaction ${a_c if a_c > 1 else ''}\\mathrm{{A}}(g) \\rightleftharpoons {b_c if b_c > 1 else ''}\\mathrm{{B}}(g)$ is at equilibrium. {desc} Which statement correctly describes the response of the system?"
     return mk("ch_le_chatelier", "7.9", "4.A", stem, k, ds, rng, concept="predict the shift of an equilibrium after a concentration, volume, or inert-gas change", path="numeric Q after the change vs K (direction from the sign of ln Q/K) agrees with the rule from moles of gas",
               facts=[f"a={a_c}", f"b={b_c}", f"K={K}", f"stress={stress}", f"shift={rule}"], judgment="decide how Q compares with K after the disturbance", est=90)

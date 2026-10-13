@@ -63,7 +63,7 @@ def ch_percent_yield(rng):
 
 
 # ======================= 4.6 적정 (5.F) =======================
-TITR = [("HCl", "NaOH", 1), ("HNO3", "KOH", 1), ("H2SO4", "NaOH", 2), ("CH3COOH", "NaOH", 1), ("H3PO4", "NaOH", 3), ("HCl", "Ba(OH)2", 0.5)]  # base mol per acid mol
+TITR = [("HCl", "NaOH", 1), ("HNO3", "KOH", 1), ("H2SO4", "NaOH", 2), ("CH3COOH", "NaOH", 1), ("HCl", "Ba(OH)2", 0.5)]  # base mol per acid mol
 
 
 @retry_sep
@@ -204,7 +204,7 @@ def ch_particulate_limiting(rng):
     for _ in forever():
         na_, nb_ = rng.randint(2, 7), rng.randint(2, 11)
         ea, eb = Fr(na_, a), Fr(nb_, b)
-        if ea != eb:
+        if ea != eb and min(ea, eb).denominator == 1:  # 한계 반응물이 정수 세트만큼 소모되어야 입자 수로 답이 하나로 정해진다
             break
     ext = int(min(ea, eb))
     prod = c * ext

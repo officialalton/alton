@@ -65,7 +65,7 @@ class SecondVariants(unittest.TestCase):
             # 오답 후보 하나도 같은 관찰과 모두 일치하지 않는다
             for i, o in enumerate(p["options"]):
                 if i != p["key_index"]:
-                    self.assertIn("contradicts the observation", o["why"])
+                    self.assertIn("but the table shows", o["why"])
 
     def test_le_chatelier_direction(self):
         for p in R.batch("ch_le_chatelier_prediction", 10, 0):

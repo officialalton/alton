@@ -130,7 +130,7 @@ def ch_partial_pressure(rng):
         mass_frac = ms[idx] / sum(ms) * Pt
         if abs(Pk - mass_frac) / Pk > 0.12 and abs(Pk - Pt / 3) / Pk > 0.12 and 0.05 < Pk < Pt:
             break
-    pairs = [("Uses the mass fraction instead of the mole fraction.", mass_frac), ("Assumes each gas contributes an equal share of the total pressure.", Pt / 3), ("Uses the moles of the gas divided by the moles of the other gases only.", float(ns[idx] / (sum(ns) - ns[idx])) * Pt if float(ns[idx] / (sum(ns) - ns[idx])) * Pt < 20 else None),
+    pairs = [("Uses the mass fraction instead of the mole fraction.", mass_frac), ("Assumes each gas contributes an equal share of the total pressure.", Pt / 3), ("Divides the moles of the gas by the moles of the other gases only instead of by the total moles.", float(ns[idx] / (sum(ns) - ns[idx])) * Pt if float(ns[idx] / (sum(ns) - ns[idx])) * Pt < Pt else None),
              ("Reports the total pressure.", Pt)]
     key, ds = num_opts(Pk, pairs, "atm")
     name = gases[idx][0]
@@ -206,8 +206,9 @@ def ch_gas_deviation(rng):
             continue
         ds.append(Opt(cf(n), False, f"{n} has a van der Waals attraction constant of a = {VDW[n][0]} L²·atm/mol², smaller than the {VDW[k][0]} of {k}, so it stays closer to ideal behavior" + (" even though it is the heaviest gas shown." if n == heavy else "."), None))
     key = Opt(cf(k), True, f"Stronger attractions between molecules (a = {VDW[k][0]} L²·atm/mol² for {k}, the largest of the four) lower the pressure and cause the greatest departure from ideal behavior at high pressure and low temperature.", None)
-    stem = f"Which of the following gases is expected to deviate most from ideal behavior at ${P:g}\\text{{ atm}}$ and ${T:g}\\text{{ K}}$?"
-    return mk("ch_gas_deviation", "3.6", "4.B", stem, key, ds, rng, concept="which real gas deviates most from the ideal gas model", path="Z from the van der Waals equation by root finding vs the first-order estimate (b - a/RT)P; both pick the same gas",
+    stim = table_stimulus("van der Waals attraction constants of four gases", "Gas", [[n, f"{VDW[n][0]}"] for n in names], "a (L²·atm/mol²)")
+    stem = f"The table gives the van der Waals attraction constant, a, of four gases. Which of the gases is expected to deviate most from ideal behavior at ${P:g}\\text{{ atm}}$ and ${T:g}\\text{{ K}}$?"
+    return mk("ch_gas_deviation", "3.6", "4.B", stem, key, ds, rng, concept="which real gas deviates most from the ideal gas model", stim=stim, material={"type": "table", "must_include": ["van der Waals attraction constants"]}, path="Z from the van der Waals equation by root finding vs the first-order estimate (b - a/RT)P; both pick the same gas",
               facts=[f"names={names}", f"P={P}", f"T={T}", f"key={k}"], judgment="judge when the ideal-gas assumptions of no attractions and no volume fail", est=70)
 
 
@@ -251,7 +252,7 @@ def ch_ion_conductivity(rng):
             continue
         ds.append(Opt(cf(n), False, (f"{n} releases {IONS[n]} ions per formula unit, fewer than the {IONS[k]} released by {k}, so its solution has fewer charge carriers." if IONS[n] > 1 else f"{n} dissolves as neutral molecules and releases no ions, so its solution has far fewer charge carriers than {k}."), None))
     key = Opt(cf(k), True, f"At equal molarity, {k} releases {IONS[k]} ions per formula unit ({' + '.join(ION_SPLIT[k])}), the most of the four solutes, so its solution has the most charge carriers.", None)
-    stem = "Four aqueous solutions each have a concentration of $0.10\\text{ M}$ at the same temperature. Which solution is expected to have the highest electrical conductivity?"
+    stem = "Four aqueous solutions each have a concentration of $0.10\\text{ M}$ at the same temperature. Assume that every ionic compound dissociates completely and that every ion contributes equally to the conductivity. Which solution is expected to have the highest electrical conductivity?"
     return mk("ch_ion_conductivity", "3.8", "4.C", stem, key, ds, rng, concept="connect the number of dissolved particles to the electrical conductivity of a solution", path="ion count from a table vs ions listed by splitting the formula",
               facts=[f"names={names}", f"key={k}"], judgment="count particles released per formula unit and link them to conductivity", est=60)
 
@@ -293,7 +294,7 @@ def ch_photon_energy(rng):
     Es = sp.Rational(str(h)) * sp.Rational(str(c)) / (sp.Rational(lam) * sp.Rational("1e-9"))
     agree(E, float(Es), 1e-9, "E")
     pairs = [("Does not convert nanometers to meters.", h * c / lam), ("Computes the energy of a mole of photons.", E * CONSTS["NA"]), ("Reports the frequency c/λ instead of the energy.", c / (lam * 1e-9)), ("Omits Planck's constant (c/λ in wrong units).", c * 1e-9 / lam)]
-    key, ds = num_opts(E, pairs, "J", 3, fmt=lambda v: sci(v, "J") if v < 1e4 else sci(v, ""))
+    key, ds = num_opts(E, pairs, "J", 3, fmt=lambda v: sci(v, "J"))
     stem = f"What is the energy, in J, of a single photon of light with a wavelength of ${lam}\\text{{ nm}}$?"
     return mk("ch_photon_energy", "3.12", "5.F", stem, key, ds, rng, concept="photon energy from wavelength using E = hc/λ", path="sympy rational arithmetic vs float evaluation",
               facts=[f"lam={lam}", f"E={E:.5e}"], judgment="convert nanometers to meters and keep a single photon distinct from a mole of photons", est=70,

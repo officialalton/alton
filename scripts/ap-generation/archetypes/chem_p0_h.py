@@ -21,7 +21,8 @@ def ch_ie_trend(rng):
         k = max(els, key=lambda e: IE1[e]); r = max(els, key=lambda e: PER[e][1])
         if k == r and sorted(IE1[e] for e in els)[-1] - sorted(IE1[e] for e in els)[-2] > 80:
             break
-    ds = [Opt(cf(e), False, f"{e} (group {PER[e][1]}) is farther left in period {per} than {k} (group {PER[k][1]}), so its effective nuclear charge is smaller and its outer electron is held less tightly.", None) for e in els if e != k]
+    ZZ = {"Li": 3, "Be": 4, "B": 5, "C": 6, "N": 7, "O": 8, "F": 9, "Ne": 10, "Na": 11, "Mg": 12, "Al": 13, "Si": 14, "P": 15, "S": 16, "Cl": 17, "Ar": 18, "K": 19}
+    ds = [Opt(cf(e), False, f"{e} (Z = {ZZ[e]}) has {ZZ[k] - ZZ[e]} fewer proton{'s' if ZZ[k] - ZZ[e] != 1 else ''} than {k} (Z = {ZZ[k]}) in the same period with a similar number of inner electrons, so its outer electron feels a smaller effective nuclear charge and is removed more easily ({IE1[e]} versus {IE1[k]} kJ/mol).", None) for e in els if e != k]
     key = Opt(cf(k), True, f"Across period {per} the effective nuclear charge increases from left to right, so the outer electron of {k} (group {PER[k][1]}, first ionization energy about {IE1[k]} kJ/mol) is held most tightly.", None)
     stem = "Which of the following elements has the greatest first ionization energy?"
     return mk("ch_ie_trend", "1.7", "4.A", stem, key, ds, rng, concept="predict the element with the greatest first ionization energy from periodic trends", path="tabulated ionization energies vs the rule that the highest group in the same period wins (no exception pair present)", facts=[f"els={els}", f"key={k}"], judgment="apply the trend across a period without an exception pair", est=55)
@@ -67,16 +68,18 @@ def ch_pes_subshell(rng):
 LEW = [("H2O", 8, 2), ("NH3", 8, 3), ("CO2", 16, 4), ("HCN", 10, 4), ("CH2O", 12, 4), ("N2", 10, 3), ("O2", 12, 2), ("CH3OH", 14, 5), ("C2H4", 12, 6), ("Cl2", 14, 1), ("HF", 8, 1), ("CH3F", 14, 4)]
 
 
+LEWIS_PAIRS = {"H2O": (8, 2, 2), "NH3": (8, 3, 1), "CO2": (16, 4, 4), "HCN": (10, 4, 1), "CH2O": (12, 4, 2), "N2": (10, 3, 2), "O2": (12, 2, 4), "CH3OH": (14, 5, 2), "Cl2": (14, 1, 6), "HF": (8, 1, 3), "CH3F": (14, 4, 3), "C2H4": (12, 6, 0)}  # (원자가 전자 총수, 결합쌍 수, 비공유 쌍 수)
+
+
 def ch_lewis_lone_pairs(rng):
-    f, ve, bonds = pick(rng, LEW)
-    lp = (ve - 2 * bonds) // 2
-    lp2 = {"H2O": 2, "NH3": 1, "CO2": 4, "HCN": 1, "CH2O": 2, "N2": 2, "O2": 4, "CH3OH": 2, "C2H4": 0, "Cl2": 6, "HF": 3, "CH3F": 3}[f]
-    agree(lp, lp2, 1e-9, "lp")
-    pairs = [("Reports the number of bonding pairs.", float(bonds)), ("Reports the number of lone-pair electrons rather than pairs.", float(2 * lp)), ("Counts the valence electrons as lone pairs.", float(ve // 2)), ("Forgets that each bond uses two electrons.", float((ve - bonds) // 2))]
+    f = pick(rng, sorted(LEWIS_PAIRS)); ve, bonds, lp = LEWIS_PAIRS[f]
+    agree(lp, (ve - 2 * bonds) // 2, 1e-9, "lp")
+    pairs = [("Reports the number of bonding pairs (shared pairs) in the diagram instead of the lone pairs.", float(bonds)), ("Counts the lone-pair electrons rather than the lone pairs.", float(2 * lp)),
+             ("Divides all the valence electrons by 2 and counts every pair as a lone pair, forgetting that bonds use pairs.", float(ve // 2)), ("Subtracts only one electron per bond instead of two before dividing by 2.", float((ve - bonds) // 2))]
     key, ds = abs_opts(float(lp), pairs, lambda v: "$" + f"{int(v)}" + "$", 0.5)
-    stem = f"The Lewis electron-dot diagram of {cf(f)} has {bonds} bonding pairs of electrons (a double bond counts as two bonding pairs, a triple bond as three). The molecule has {ve} valence electrons in total. How many lone pairs of electrons does the diagram contain?"
-    return mk("ch_lewis_lone_pairs", "2.5", "1.A", stem, key, ds, rng, concept="number of lone pairs in a Lewis diagram from valence electrons and bonds", path="(valence electrons - 2 x bonding pairs)/2 vs a tabulated structure with explicit lone pairs", facts=[f"species={f}", f"valence={ve}", f"bonds={bonds}", f"lp={lp}"], judgment="subtract the electrons used in bonds before halving", est=65,
-              kwhy=f"The {bonds} bonding pairs use 2 × {bonds} = {2 * bonds} of the {ve} valence electrons. The remaining {ve - 2 * bonds} electrons form {lp} lone pair{'s' if lp != 1 else ''}.")
+    stem = f"How many lone pairs of electrons are shown in a correct Lewis electron-dot diagram of {cf(f)}? (Count the lone pairs on every atom.)"
+    return mk("ch_lewis_lone_pairs", "2.5", "1.A", stem, key, ds, rng, concept="number of lone pairs in the Lewis diagram of a molecule", path="(valence electrons - 2 x bonding pairs)/2 vs a tabulated structure with explicit lone pairs", facts=[f"species={f}", f"valence={ve}", f"bonds={bonds}", f"lp={lp}"], judgment="draw the diagram from the total valence electrons and count the pairs not used in bonds", est=75,
+              kwhy=f"{f} has {ve} valence electrons in total. Its Lewis diagram has {bonds} bonding pairs (each bond uses 2 electrons, so {2 * bonds} electrons), and the remaining {ve - 2 * bonds} electrons form {lp} lone pair{'s' if lp != 1 else ''}.")
 
 
 # ======================= 2.3 단위 격자 구성비 (1.A) =======================
@@ -235,13 +238,14 @@ ACIDS = {"HOCl": ("O", 7.5), "HClO2": ("O", 1.96), "HClO3": ("O", -1.0), "HClO4"
 NOH = {"HOCl": 0, "HClO2": 1, "HClO3": 2, "HClO4": 3}
 
 
+BOND = {"HF": (92, 567), "HCl": (127, 431), "HBr": (141, 366), "HI": (161, 299)}  # (H–X 결합 길이 pm, 결합 엔탈피 kJ/mol)
+
+
 def ch_acid_strength(rng):
-    fam = pick(rng, ["O", "B"])
-    names = [n for n in ACIDS if ACIDS[n][0] == fam]
-    k = min(names, key=lambda n: ACIDS[n][1])
-    rule = max(names, key=lambda n: NOH[n]) if fam == "O" else "HI"
-    agree(1.0, 1.0 if k == rule else 0.0, 1e-9, "acid")
-    ds = [Opt(cf(n), False, (f"{n} has {NOH[n]} terminal oxygen atom{'s' if NOH[n] != 1 else ''}, fewer than the {NOH[k]} of {k}, so its O–H bond is polarized less and its conjugate base is less stabilized." if fam == "O" else (f"{n} has the most electronegative halogen, but its H–F bond is the strongest in the series and is the hardest to break, so it ionizes least." if n == "HF" else f"{n} has a shorter, stronger H–X bond than {k}, so it gives up its hydrogen ion less readily.")), None) for n in names if n != k]
-    key = Opt(cf(k), True, (f"{k} has {NOH[k]} terminal oxygen atoms, the most of the acids shown; they pull electron density from the O–H bond and stabilize the conjugate base." if fam == "O" else f"{k} has the longest, weakest H–X bond of the acids shown, so it gives up its hydrogen ion most readily."), None)
-    stem = "Which of the following is the strongest acid in aqueous solution?"
-    return mk("ch_acid_strength", "8.6", "4.A", stem, key, ds, rng, concept="relate molecular structure to acid strength", path="measured pKa values (lowest = strongest) vs the structural rule (more terminal oxygen atoms, or weaker H-X bond down a group)", facts=[f"family={fam}", f"key={k}"], judgment="apply the structural rule instead of assuming the most electronegative atom wins", est=60)
+    names = rng.sample(sorted(BOND), 4) if False else ["HF", "HCl", "HBr", "HI"]
+    k = "HI"
+    agree(1.0, 1.0 if k == max(names, key=lambda n: BOND[n][0]) == min(names, key=lambda n: BOND[n][1]) else 0.0, 1e-9, "weakest")
+    ds = [Opt(cf(n), False, f"{n} has a shorter ({BOND[n][0]} pm) and stronger (about {BOND[n][1]} kJ/mol) H–X bond than HI ({BOND[k][0]} pm, about {BOND[k][1]} kJ/mol), so its bond is harder to break." + (" It is also the most electronegative halogen, which makes the bond strongest rather than weakest." if n == "HF" else ""), None) for n in names if n != k]
+    key = Opt(cf(k), True, f"Bond length grows and bond strength falls down the halogen group because the larger halogen atoms overlap less well with hydrogen; HI has the longest ({BOND[k][0]} pm) and weakest (about {BOND[k][1]} kJ/mol) H–X bond.", None)
+    stem = "Which of the following hydrogen halides has the longest and weakest bond between hydrogen and the halogen?"
+    return mk("ch_acid_strength", "8.6", "4.A", stem, key, ds, rng, concept="relate the periodic trend in H–X bond length and strength to the halogen", path="measured bond lengths and enthalpies (longest and lowest) vs the rule that bond strength falls down a group", facts=["family=B", f"key={k}"], judgment="apply the trend down a group rather than choosing the most electronegative atom", est=60)

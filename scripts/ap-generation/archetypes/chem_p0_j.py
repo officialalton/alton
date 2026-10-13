@@ -21,8 +21,8 @@ def ch_mixture_mass_percent(rng):
     moles = np.array([nx, ny]) / CONSTS["NA"]; mass = moles * np.array([mx, my])
     agree(exact, 100 * mass[0] / mass.sum(), 1e-9, "mass_pct")
     num_pct = 100 * nx / (nx + ny)
-    pairs = [("Reports the percent of molecules (number percent) instead of the mass percent.", num_pct), (f"Reports the mass percent of the other gas, {y}.", 100 - exact), ("Uses the ratio of the molar masses of the two gases instead of the masses of all the molecules.", 100 * mx / (mx + my)),
-             ("Divides the mass of X by the mass of Y instead of by the mass of the mixture.", 100 * nx * mx / (ny * my))]
+    pairs = [("Reports the percent of molecules (number percent) instead of the mass percent.", num_pct), (f"Reports the mass percent of the other gas, {y}, instead of {x}.", 100 - exact), (f"Uses only the molar masses of {x} and {y} (as if one molecule of each were present) and ignores the numbers of molecules shown.", 100 * mx / (mx + my)),
+             (f"Divides the mass of {x} by the mass of {y} instead of by the total mass of the mixture.", 100 * nx * mx / (ny * my))]
     key, ds = num_opts(exact, pairs, "", 3, fmt=lambda v: "$" + sig(v, 3) + "\\%$")
     scene = {"type": "particles", "box": [{"species": x, "count": nx}, {"species": y, "count": ny}]}
     stim = diagram_stim_chem(f"A particulate diagram of a gas mixture: {nx} molecules of {x} and {ny} molecules of {y}.", "chem_particles", {"scene": scene})
@@ -115,7 +115,7 @@ def ch_titrant_change(rng):
     V = sp.Symbol("V", positive=True)
     v2s = float(sp.solve(sp.Eq(sp.nsimplify(c2) * V, sp.nsimplify(ca) * sp.nsimplify(Va)), V)[0])
     agree(v2, v2s, 1e-9, "V2")
-    pairs = [("Assumes the same volume is needed even though the concentration of the base changed.", v1), ("Multiplies the original volume by the ratio of concentrations instead of dividing.", v1 * c2 / c1), ("Uses the volume of acid as the volume of base.", Va), ("Adds the two concentrations' effect, giving the average of the two volumes.", (v1 + v2) / 2)]
+    pairs = [("Assumes the same volume is needed even though the concentration of the base changed.", v1), ("Multiplies the original volume by the ratio of concentrations instead of dividing.", v1 * c2 / c1), ("Uses the volume of acid as the volume of base.", Va), ("Adds the volume of acid to the first titration volume, as if the two volumes were additive.", v1 + Va)]
     key, ds = num_opts(v2, pairs, "mL", 3, fmt=lambda v: "$" + sig(v, 3) + "\\text{ mL}$")
     stem = (f"A student titrates ${Va:.2f}\\text{{ mL}}$ of ${ca:g}\\text{{ M}}$ HCl with a standardized NaOH solution of concentration ${c1:g}\\text{{ M}}$ and finds that the equivalence point is reached after ${v1:.2f}\\text{{ mL}}$. "
             f"The student repeats the titration with a fresh sample of HCl, but this time uses NaOH of concentration ${c2:g}\\text{{ M}}$. What volume of the new NaOH solution is expected to reach the equivalence point?")
@@ -130,13 +130,9 @@ PPT = {"Pb2+": (True, True, True), "Ba2+": (False, True, True), "Mg2+": (False, 
 
 
 def _obs_phrase(pat):
-    pos = [n for (_, n), p in zip(ANIONS, pat) if p]; neg = [n for (_, n), p in zip(ANIONS, pat) if not p]
+    pos = [n for (_, n), p in zip(ANIONS, pat) if p]
     j = lambda L: " and ".join(L) if len(L) <= 2 else ", ".join(L[:-1]) + ", and " + L[-1]
-    if not pos:
-        return f"it formed no precipitate with {j(neg)} ions"
-    if not neg:
-        return f"it formed a precipitate with {j(pos)} ions"
-    return f"it formed a precipitate with {j(pos)} ions but not with {j(neg)} ions"
+    return f"forms a precipitate with {j(pos)} ions" + (" but not with the other anions in the table" if len(pos) < 3 else "") if pos else "forms no precipitate with any of the three anions in the table"
 
 
 def ch_precipitate_claim(rng):
@@ -146,24 +142,21 @@ def ch_precipitate_claim(rng):
     seq = "Pb2+" if obs[0] else ("Ba2+" if obs[1] else ("Mg2+" if obs[2] else "K+"))
     agree(1.0, 1.0 if match == [true] and seq == true else 0.0, 1e-9, "match")
     tex = lambda c: "$" + {"Pb2+": "\\mathrm{Pb^{2+}}", "Ba2+": "\\mathrm{Ba^{2+}}", "Mg2+": "\\mathrm{Mg^{2+}}", "K+": "\\mathrm{K^{+}}"}[c] + "$"
-    key_t = f"The unknown solution contains {tex(true)}, because {_obs_phrase(obs)}."
+    key_t = f"The cation in the unknown is {tex(true)}, which {_obs_phrase(obs)[0:0]}{_obs_phrase(PPT[true])}."
     wrongs = []
     for c in sorted(PPT):
         if c == true:
             continue
         bad = [i for i in range(3) if PPT[c][i] != obs[i]][0]
         pred = PPT[c][bad]
-        # 이 후보가 관찰과 맞는 부분만 근거로 든다
-        agree_idx = [i for i in range(3) if PPT[c][i] == obs[i]]
-        ev = f"it {'formed a precipitate with' if obs[agree_idx[0]] else 'formed no precipitate with'} {ANIONS[agree_idx[0]][1]} ions" if agree_idx else "it behaved as expected"
-        wrongs.append((f"The unknown solution contains {tex(c)}, because {ev}.", f"{c} would {'form' if pred else 'not form'} a precipitate with {ANIONS[bad][1]} ions, which contradicts the observation for {ANIONS[bad][0]}."))
-    rows = [[f"{r.replace('Na2SO4', 'Na2SO4')}(aq)", "Precipitate formed" if p else "No precipitate"] for (r, _), p in zip(ANIONS, obs)]
+        wrongs.append((f"The cation in the unknown is {tex(c)}, which {_obs_phrase(PPT[c])}.", f"{c} would {'form' if pred else 'not form'} a precipitate with {ANIONS[bad][1]} ions ({ANIONS[bad][0]}), but the table shows {'a precipitate' if obs[bad] else 'no precipitate'}."))
+    rows = [[f"{r}(aq)", "Precipitate formed" if p else "No precipitate"] for (r, _), p in zip(ANIONS, obs)]
     stim = table_stimulus("Observations when each solution was added to a sample of the unknown solution", "Solution added", rows, "Observation")
-    k, ds = sentence_options(key_t, "Only this cation forms precipitates with exactly the anions that were observed to give one.", wrongs)
+    k, ds = sentence_options(key_t, f"Only {true} behaves like the unknown: it {_obs_phrase(obs).replace('forms', 'forms')}, which is exactly what the table shows.", wrongs)
     stem = ("A student has an aqueous solution of an unknown salt whose cation is $\\mathrm{Pb^{2+}}$, $\\mathrm{Ba^{2+}}$, $\\mathrm{Mg^{2+}}$, or $\\mathrm{K^{+}}$. Equal volumes of three sodium salt solutions are added, one at a time, to separate samples of the unknown solution (table). "
             "Which claim about the cation in the unknown solution is best supported by the observations?")
     return mk("ch_precipitate_claim", "4.2", "6.A", stem, k, ds, rng, concept="claim about the identity of a cation from precipitation observations and solubility rules", stim=stim, material={"type": "table", "must_include": ["observation for each solution added"]},
-              path="match of the observation pattern against the solubility rule table vs a step-by-step elimination order", facts=[f"cation={true}", f"obs={obs}"], judgment="use all three observations, including the absence of a precipitate", est=90)
+              path="match of the observation pattern against the solubility rule table vs a step-by-step elimination order", facts=[f"cation={true}", f"obs={obs}"], judgment="compare every observation with the precipitates each cation forms, including the absence of a precipitate", est=90)
 
 
 # ======================= 5.3 반감기 자료로 차수 주장 (6.B) =======================

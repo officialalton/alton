@@ -6,12 +6,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "measured pKa values (lowest = strongest) vs the structural rule (more terminal oxygen atoms, or weaker H-X bond down a group)"
+   "measured bond lengths and enthalpies (longest and lowest) vs the rule that bond strength falls down a group"
   ],
   "misconceptions": [
-   "HBr has a shorter, stronger H\u2013X bond than HI, so it gives up its hydrogen ion less readily.",
-   "HCl has a shorter, stronger H\u2013X bond than HI, so it gives up its hydrogen ion less readily.",
-   "HF has the most electronegative halogen, but its H\u2013F bond is the strongest in the series and is the hardest to break, so it ionizes least."
+   "HCl has a shorter (127 pm) and stronger (about 431 kJ/mol) H\u2013X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break.",
+   "HBr has a shorter (141 pm) and stronger (about 366 kJ/mol) H\u2013X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break.",
+   "HF has a shorter (92 pm) and stronger (about 567 kJ/mol) H\u2013X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break. It is also the most electronegative halogen, which makes the bond strongest rather than weakest."
   ]
  },
  {
@@ -69,9 +69,9 @@
    "least-squares line from numpy polyfit vs normal equations; the recovered concentration matches the generating value within rounding"
   ],
   "misconceptions": [
-   "Divides by the path length a second time even though the slope already includes it.",
-   "Averages the concentrations of the four standards.",
-   "Multiplies by the path length instead of using the slope of the calibration line."
+   "Adds the path length in cm to the concentration found from the calibration line.",
+   "Multiplies by the path length instead of using the slope of the calibration line.",
+   "Averages the concentrations of the four standards."
   ]
  },
  {
@@ -84,9 +84,9 @@
    "proportional scaling from A = \u03b5bc with sympy vs numeric recomputation of \u03b5 and the new b and c"
   ],
   "misconceptions": [
+   "Squares the change factor instead of applying it once.",
    "Leaves the absorbance unchanged.",
-   "Adds the factor to the absorbance.",
-   "Squares the change factor instead of applying it once."
+   "Doubles the absorbance when it should halve."
   ]
  },
  {
@@ -129,9 +129,9 @@
    "argmin of |pKa - target| vs the |log ratio| <= 1 feasibility test"
   ],
   "misconceptions": [
-   "This pair has the strongest acid shown (pKa = 3.75), but that is 6.6 units from the target pH of 10.3, so it would resist pH changes poorly.",
-   "Its pKa of 7.54 is 2.8 units from the target pH of 10.3, more than the one unit over which a buffer works well.",
-   "Its pKa of 4.76 is 5.5 units from the target pH of 10.3, more than the one unit over which a buffer works well."
+   "This pair has the strongest acid shown (pKa = 3.75), but that is 6.55 units from the target pH of 10.3, so it would resist pH changes poorly.",
+   "Its pKa of 7.54 is 2.76 units from the target pH of 10.3, more than the one unit over which a buffer works well.",
+   "Its pKa of 4.76 is 5.54 units from the target pH of 10.3, more than the one unit over which a buffer works well."
   ]
  },
  {
@@ -409,7 +409,7 @@
   "topic": "3.6",
   "skill": "4.B",
   "calculator": "allowed",
-  "stimulus": "none",
+  "stimulus": "table",
   "verifiedBy": [
    "Z from the van der Waals equation by root finding vs the first-order estimate (b - a/RT)P; both pick the same gas"
   ],
@@ -504,9 +504,9 @@
    "sympy solution of \u0394H - T\u0394S = 0 vs bisection on \u0394G(T)"
   ],
   "misconceptions": [
-   "Inverts the ratio, dividing \u0394S by \u0394H instead of \u0394H by \u0394S.",
+   "Converts \u0394S to kJ as well as \u0394H, which makes the answer a factor of 10\u2076 too large.",
    "Does not convert kilojoules to joules.",
-   "Multiplies enthalpy and entropy."
+   "Inverts the ratio, dividing \u0394S by \u0394H instead of \u0394H by \u0394S."
   ]
  },
  {
@@ -534,9 +534,9 @@
    "sum of the three heating steps vs the final heat coordinate of the generated curve vertices"
   ],
   "misconceptions": [
-   "Uses the liquid-water specific heat for the solid and omits nothing else.",
+   "Uses the specific heat of liquid water for the ice as well as for the liquid.",
    "Omits the energy needed to melt the ice.",
-   "Includes the heat of vaporization of water even though the water is not boiled."
+   "Adds the three steps correctly but reports the sum in joules as if it were kilojoules."
   ]
  },
  {
@@ -609,9 +609,9 @@
    "tabulated ionization energies vs the rule that the highest group in the same period wins (no exception pair present)"
   ],
   "misconceptions": [
-   "Al (group 13) is farther left in period 3 than Cl (group 17), so its effective nuclear charge is smaller and its outer electron is held less tightly.",
-   "Na (group 1) is farther left in period 3 than Cl (group 17), so its effective nuclear charge is smaller and its outer electron is held less tightly.",
-   "P (group 15) is farther left in period 3 than Cl (group 17), so its effective nuclear charge is smaller and its outer electron is held less tightly."
+   "Al (Z = 13) has 4 fewer protons than Cl (Z = 17) in the same period with a similar number of inner electrons, so its outer electron feels a smaller effective nuclear charge and is removed more easily (578 versus 1251 kJ/mol).",
+   "Na (Z = 11) has 6 fewer protons than Cl (Z = 17) in the same period with a similar number of inner electrons, so its outer electron feels a smaller effective nuclear charge and is removed more easily (496 versus 1251 kJ/mol).",
+   "P (Z = 15) has 2 fewer protons than Cl (Z = 17) in the same period with a similar number of inner electrons, so its outer electron feels a smaller effective nuclear charge and is removed more easily (1012 versus 1251 kJ/mol)."
   ]
  },
  {
@@ -744,9 +744,9 @@
    "numeric Q after the change vs K (direction from the sign of ln Q/K) agrees with the rule from moles of gas"
   ],
   "misconceptions": [
-   "Believes a change in concentration or volume changes the value of K.",
-   "Predicts a shift toward the products, which would only happen if Q were less than K after the change.",
-   "Predicts no shift, which would only be correct if Q still equaled K after the change."
+   "Believes that a change in concentration or volume changes the value of K, which depends only on temperature.",
+   "For this disturbance halving the volume doubles both concentrations, so Q = [B]^2/[A]^1 is multiplied by 2^(2 \u2212 1) = 2, so Q is not smaller than K and the system does not shift toward the products.",
+   "For this disturbance halving the volume doubles both concentrations, so Q = [B]^2/[A]^1 is multiplied by 2^(2 \u2212 1) = 2, so Q is not equal to K and the system does not stay at equilibrium."
   ]
  },
  {
@@ -789,9 +789,9 @@
    "(valence electrons - 2 x bonding pairs)/2 vs a tabulated structure with explicit lone pairs"
   ],
   "misconceptions": [
-   "Reports the number of lone-pair electrons rather than pairs.",
-   "Counts the valence electrons as lone pairs.",
-   "Reports the number of bonding pairs."
+   "Subtracts only one electron per bond instead of two before dividing by 2.",
+   "Divides all the valence electrons by 2 and counts every pair as a lone pair, forgetting that bonds use pairs.",
+   "Counts the lone-pair electrons rather than the lone pairs."
   ]
  },
  {
@@ -879,9 +879,9 @@
    "exact fraction of particle counts times molar masses vs numpy mass from moles (particles / N_A)"
   ],
   "misconceptions": [
-   "Reports the mass percent of the other gas, CO2.",
+   "Reports the mass percent of the other gas, CO2, instead of Ne.",
    "Reports the percent of molecules (number percent) instead of the mass percent.",
-   "Divides the mass of X by the mass of Y instead of by the mass of the mixture."
+   "Divides the mass of Ne by the mass of CO2 instead of by the total mass of the mixture."
   ]
  },
  {
@@ -1134,9 +1134,9 @@
    "pH of each solution from the exact charge balance vs ordering by Ka; the orders agree"
   ],
   "misconceptions": [
-   "HCOOH has Ka = 1.8 \u00d7 10\u207b\u2074, smaller than the 4.5 \u00d7 10\u207b\u2074 of HNO2, so it dissociates less at the same concentration and gives a higher pH.",
-   "HOCl has Ka = 3.0 \u00d7 10\u207b\u2078, smaller than the 4.5 \u00d7 10\u207b\u2074 of HNO2, so it dissociates less at the same concentration and gives a higher pH (it is the weakest acid shown).",
-   "C6H5COOH has Ka = 6.3 \u00d7 10\u207b\u2075, smaller than the 4.5 \u00d7 10\u207b\u2074 of HNO2, so it dissociates less at the same concentration and gives a higher pH."
+   "HCOOH has the second-largest Ka (1.8 \u00d7 10\u207b\u2074), not the largest (4.5 \u00d7 10\u207b\u2074 for HNO2), so it dissociates less at the same concentration and its solution has a higher pH than that of HNO2.",
+   "HOCl has the smallest Ka (3.0 \u00d7 10\u207b\u2078), so its solution has the highest pH; choosing it reverses the relationship between Ka and pH.",
+   "C6H5COOH has the third-largest Ka (6.3 \u00d7 10\u207b\u2075), not the largest (4.5 \u00d7 10\u207b\u2074 for HNO2), so it dissociates less at the same concentration and its solution has a higher pH than that of HNO2."
   ]
  },
  {
@@ -1179,9 +1179,9 @@
    "match of the observation pattern against the solubility rule table vs a step-by-step elimination order"
   ],
   "misconceptions": [
-   "Mg2+ would not form a precipitate with chloride ions, which contradicts the observation for NaCl.",
-   "K+ would not form a precipitate with chloride ions, which contradicts the observation for NaCl.",
-   "Ba2+ would not form a precipitate with chloride ions, which contradicts the observation for NaCl."
+   "Mg2+ would not form a precipitate with chloride ions (NaCl), but the table shows a precipitate.",
+   "K+ would not form a precipitate with chloride ions (NaCl), but the table shows a precipitate.",
+   "Ba2+ would not form a precipitate with chloride ions (NaCl), but the table shows a precipitate."
   ]
  },
  {
@@ -1285,7 +1285,7 @@
   ],
   "misconceptions": [
    "Multiplies the concentration factors instead of raising them to the orders.",
-   "Adds the exponent contributions.",
+   "Adds the two concentration factors instead of applying the orders.",
    "Swaps the orders of A and B."
   ]
  },
@@ -1316,7 +1316,7 @@
   "misconceptions": [
    "Contradicts the table, which shows equal measured lengths.",
    "Misreads a length between the two reference values as a single bond.",
-   "Ignores that a single-double model predicts two different bond lengths."
+   "Ignores that a single structure with one double bond predicts two different bond lengths."
   ]
  },
  {
@@ -1421,7 +1421,7 @@
   "misconceptions": [
    "Multiplies the original volume by the ratio of concentrations instead of dividing.",
    "Assumes the same volume is needed even though the concentration of the base changed.",
-   "Adds the two concentrations' effect, giving the average of the two volumes."
+   "Adds the volume of acid to the first titration volume, as if the two volumes were additive."
   ]
  },
  {
@@ -1449,9 +1449,9 @@
    "initial pH compared with -log c from an exact charge balance vs the equivalence-point pH from salt hydrolysis"
   ],
   "misconceptions": [
-   "Ignores that the equivalence-point pH carries information about the conjugate base.",
-   "Misreads the initial pH relative to the strong-acid expectation.",
-   "Misinterprets the pH at equivalence."
+   "Believes pH data cannot show acid strength, although comparing the pH with the strong-acid value for the known concentration does.",
+   "Treats an initial pH below 7 as a sign of partial dissociation instead of comparing it with the strong-acid value.",
+   "Attributes a neutral equivalence point to a weak acid, although a weak acid gives a basic equivalence point."
   ]
  },
  {
@@ -1464,9 +1464,9 @@
    "ratio of the calculated value to the true value from the changed recorded volume (sympy) vs a numeric recomputation"
   ],
   "misconceptions": [
-   "Attributes the effect to a changed mole ratio, which is fixed by the balanced equation, instead of to the changed recorded value.",
-   "Reverses the effect of the error on the volume used in the calculation.",
-   "Believes the error leaves the moles of base and acid used in the calculation unchanged, ignoring the changed recorded value."
+   "Believes the direction of an error can only be found by comparing with the true value, when it can be traced through the recorded volumes.",
+   "For this error the calculated concentration is too high, not too low: tracing the error through the recorded volumes shows that the ratio of recorded NaOH volume to recorded acid volume becomes larger.",
+   "For this error the calculated concentration is too high, not unaffected: tracing the error through the recorded volumes shows that the ratio of recorded NaOH volume to recorded acid volume becomes larger."
   ]
  },
  {
@@ -1584,9 +1584,9 @@
    "shape table keyed by (domains, lone pairs) vs rule-built geometry from the electron-domain geometry"
   ],
   "misconceptions": [
-   "This is the shape of a central atom with 3 bonded atoms and 0 lone pairs, not the 5 bonded atoms and 0 lone pairs of PCl5.",
-   "This is the shape of a central atom with 5 bonded atoms and 1 lone pair, not the 5 bonded atoms and 0 lone pairs of PCl5.",
-   "This is the shape of a central atom with 3 bonded atoms and 1 lone pair, not the 5 bonded atoms and 0 lone pairs of PCl5."
+   "This is the shape of a central atom with 4 bonded atoms and 2 lone pairs, not the 3 bonded atoms and 2 lone pairs of ClF3.",
+   "This is the shape of a central atom with 4 bonded atoms and 1 lone pair, not the 3 bonded atoms and 2 lone pairs of ClF3.",
+   "This is the electron-domain geometry of the 5 domains; it counts the 2 lone pairs, but the molecular geometry describes only where the atoms are."
   ]
  },
  {

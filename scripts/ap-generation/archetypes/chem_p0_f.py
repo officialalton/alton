@@ -56,8 +56,7 @@ def ch_titration_error(rng):
     key_t = f"The calculated concentration of the acid is {names[eff]} because {reason_sc[sc]}."
     reason_gen = {"increase": "the recorded volume of NaOH is larger than the volume that reacted, so the calculated moles of acid are too large", "decrease": "the recorded volume of NaOH is smaller than the volume that was delivered, so the calculated moles of acid are too small",
                   "none": "the moles of acid and the moles of base used in the calculation do not change, so the result is not affected"}
-    why_gen = {"increase": "Assumes any experimental error raises the result without tracing the error through the volumes used in the calculation.", "decrease": "Reverses the effect of the error on the volume used in the calculation.",
-               "none": "Believes the error leaves the moles of base and acid used in the calculation unchanged, ignoring the changed recorded value."}
+    why_gen = {e: f"For this error the calculated concentration is {names[eff]}, not {names[e]}: tracing the error through the recorded volumes shows that the ratio of recorded NaOH volume to recorded acid volume " + ("becomes larger." if eff == "increase" else "becomes smaller." if eff == "decrease" else "stays the same.") for e in ("increase", "decrease", "none")}
     wrongs = [(f"The calculated concentration of the acid is {names[e]} because {reason_gen[e]}.", why_gen[e]) for e in ("increase", "decrease", "none") if e != eff]
     wrongs.append(("The effect on the calculated concentration cannot be decided without knowing the true concentration of the acid.", "Believes the direction of an error can only be found by comparing with the true value, when it can be traced through the recorded volumes."))
     k, ds = sentence_options(key_t, "The calculated concentration is proportional to the recorded NaOH volume divided by the recorded acid volume, so an error that makes this ratio " + ("larger gives a result that is too high." if eff == "increase" else "smaller gives a result that is too low." if eff == "decrease" else "no different leaves the result unchanged."), wrongs)
@@ -124,7 +123,7 @@ def ch_beer_procedure(rng):
     A1 = A0 * f
     eps = A0 / (b0 * 1e-4)
     agree(A1, eps * ({"longer_cell": 2.0 * b0, "shorter_cell": 0.5 * b0}.get(ch, b0)) * 1e-4 * ({"dilute_half": 0.5, "double_conc": 2.0}.get(ch, 1.0)), 1e-9, "A1")
-    pairs = [("Halves the absorbance when it should double.", A0 / 2), ("Doubles the absorbance when it should halve.", A0 * 2), ("Squares the change factor instead of applying it once.", A0 * f * f), ("Leaves the absorbance unchanged.", A0), ("Adds the factor to the absorbance.", A0 + f)]
+    pairs = [("Halves the absorbance when it should double.", A0 / 2), ("Doubles the absorbance when it should halve.", A0 * 2), ("Squares the change factor instead of applying it once.", A0 * f * f), ("Leaves the absorbance unchanged.", A0)]
     key, ds = abs_opts(A1, pairs, lambda v: "$" + f"{v:.3f}" + "$", 0.04)
     cdesc = {"longer_cell": "replaces the $1.00\\text{ cm}$ cuvette with a $2.00\\text{ cm}$ cuvette", "dilute_half": "dilutes the sample by mixing equal volumes of the sample and water", "double_conc": "replaces the sample with one containing twice the dye concentration", "shorter_cell": "replaces the $1.00\\text{ cm}$ cuvette with a $0.50\\text{ cm}$ cuvette"}[ch]
     stem = f"A dye solution in a $1.00\\text{{ cm}}$ cuvette has an absorbance of ${A0:.3f}$ at its wavelength of maximum absorbance. The student {cdesc} and measures the absorbance again at the same wavelength. What absorbance is expected?"
@@ -172,7 +171,7 @@ def _needed(rng, name):
     if len(uniq) < 3:
         raise ValueError("few")
     k, ds = sentence_options(key_text, "Every symbol in the working relationship must be measured or known.", uniq[:3])
-    stem = f"A student wants to {desc}. Which set of measurements is sufficient (and does not include an unneeded measurement)?"
+    stem = f"A student wants to {desc}. Assume that the gas constant, the specific heat capacity of the solution, and the molar masses of any compounds named are known and that no heat is lost to the surroundings. Which set of measurements is sufficient (and does not include an unneeded measurement)?"
     return mk(f"ch_needed_{name}", {"dumas": "3.4", "ka": "8.3", "dh": "6.4"}[name], "5.A", stem, k, ds, rng, concept="identify the quantities required to solve a problem from the governing relationship", path="free symbols of the working expression (sympy) vs nonzero numeric sensitivity of the expression to each symbol", facts=[f"scenario={name}", f"needed={sorted(needed)}"], judgment="work backward from the relationship to the measurements", est=80)
 
 
@@ -218,7 +217,7 @@ def ch_rate_prediction(rng):
         if ratio not in (1.0,) and abs(math.log(ratio)) > 0.5:
             break
     agree(ratio, math.exp(m * math.log(fa) + n * math.log(fb)), 1e-9, "ratio")
-    pairs = [("Swaps the orders of A and B.", fa ** n * fb ** m), ("Multiplies the concentration factors instead of raising them to the orders.", fa * fb), ("Uses only the effect of changing A.", fa ** m), ("Adds the exponent contributions.", fa + fb)]
+    pairs = [("Swaps the orders of A and B.", fa ** n * fb ** m), ("Multiplies the concentration factors instead of raising them to the orders.", fa * fb), ("Uses only the effect of changing A.", fa ** m), ("Adds the two concentration factors instead of applying the orders.", fa + fb)]
     key, ds = num_opts(ratio, pairs, "", 3, fmt=lambda v: "$" + f"{v:.3g}" + "$")
     stem = f"The experimentally determined rate law for a reaction is $\\text{{rate}}=k[\\mathrm{{A}}]^{m}[\\mathrm{{B}}]^{n}$. A student predicts what will happen if the concentration of A is multiplied by {fa:g} and the concentration of B is multiplied by {fb:g} at constant temperature. By what factor is the initial rate predicted to change?"
     return mk("ch_rate_prediction", "5.2", "2.B", stem, key, ds, rng, concept="predict the factor change in rate from reaction orders", path="power-law arithmetic exactly vs the exponent-sum of logs", facts=[f"m={m}", f"n={n}", f"fa={fa}", f"fb={fb}", f"ratio={ratio:.6g}"], judgment="apply each order to its own concentration factor", est=70,
@@ -276,10 +275,10 @@ def ch_resonance_lengths(rng):
     equal = len(set(meas)) == 1
     between = single > meas[0] > double
     agree(1.0, 1.0 if equal and between else 0.0, 1e-9, "resonance")
-    key_t = f"The measured bond lengths are all equal and between the single-bond and double-bond values, so a model with one double bond and the rest single bonds does not fit the data; resonance structures describe the {nm} better."
-    wrongs = [("The measured bond lengths are all equal, so the model with one double bond and the rest single bonds fits the data well and needs no change.", "Ignores that a single-double model predicts two different bond lengths."),
-              (f"The measured bond lengths are close to the single-bond value, so the {nm} contains only single bonds and the model needs no double bond.", "Misreads a length between the two reference values as a single bond."),
-              ("The measured bond lengths are all different from one another, so each bond must have a different order and the model should be kept as drawn.", "Contradicts the table, which shows equal measured lengths.")]
+    key_t = f"The equal bond lengths lie between the single and double values, so resonance structures describe the {nm} better than the student's single structure."
+    wrongs = [("The equal bond lengths show that the single structure with one double bond fits the data and needs no change.", "Ignores that a single structure with one double bond predicts two different bond lengths."),
+              (f"The bond lengths lie close to the single-bond value, so the {nm} has only single bonds and needs no double bond.", "Misreads a length between the two reference values as a single bond."),
+              ("The bond lengths differ from one another, so each bond has a different bond order and the student's structure is correct.", "Contradicts the table, which shows equal measured lengths.")]
     k, ds = sentence_options(key_t, "Equal intermediate bond lengths show delocalized bonding that no single Lewis structure shows.", wrongs)
     stim = table_stimulus(f"{bond} bond lengths in the {nm}", "Bond", [["Typical single bond", f"{single} pm"], ["Typical double bond", f"{double} pm"]] + [[f"Measured bond {i + 1} in the {nm}", f"{v} pm"] for i, v in enumerate(meas)], "Length")
     stem = f"A student draws a Lewis structure of the {nm} with one double bond and the other bonds single. The table compares typical {bond} bond lengths with those measured in the {nm}. Which statement best evaluates the student's model?"
@@ -338,11 +337,16 @@ def ch_titration_conclusion(rng):
     is_weak = pH0 > strong_pred + 0.3
     agree(1.0, 1.0 if is_weak == weak else 0.0, 1e-9, "weak")
     kind = "weak" if weak else "strong"
-    key_t = f"The acid is {kind}: the initial pH of ${pH0:.2f}$ is {'much higher than' if weak else 'consistent with'} the pH of ${strong_pred:.2f}$ expected for a fully dissociated acid of this concentration, and the equivalence-point pH of ${pH_eq:.1f}$ is {'above' if weak else 'equal to'} 7."
-    other = "strong" if weak else "weak"
-    wrongs = [(f"The acid is {other}: the initial pH of ${pH0:.2f}$ shows that the acid is {'completely' if weak else 'only partly'} dissociated in water, and the equivalence-point pH of ${pH_eq:.1f}$ is {'equal to' if weak else 'above'} 7.", "Misreads the initial pH relative to the strong-acid expectation."),
-              (f"The acid is {other}: the equivalence point at pH ${pH_eq:.1f}$ shows that the salt formed is {'neutral' if weak else 'basic'}, and the initial pH of ${pH0:.2f}$ supports this.", "Misinterprets the pH at equivalence."),
-              (f"The acid is {kind}, but the pH at the equivalence point of ${pH_eq:.1f}$ is not relevant to the strength of the acid, so the initial pH alone must be used.", "Ignores that the equivalence-point pH carries information about the conjugate base.")]
+    if weak:
+        key_t = f"The acid is weak: the initial pH of ${pH0:.2f}$ is higher than the ${strong_pred:.2f}$ expected for a strong acid, and the equivalence-point pH of ${pH_eq:.1f}$ is above 7."
+        wrongs = [(f"The acid is strong: the initial pH of ${pH0:.2f}$ is below 7, so the acid must be completely dissociated.", "Treats any pH below 7 as proof of complete dissociation instead of comparing it with the pH expected for a strong acid."),
+                  (f"The acid is strong: the equivalence-point pH of ${pH_eq:.1f}$ is above 7, which only happens when the acid is completely dissociated.", "Reverses the meaning of an equivalence-point pH above 7, which comes from the basic conjugate base of a weak acid."),
+                  ("The strength of the acid cannot be found from these pH values because they depend on its concentration.", "Believes pH data cannot show acid strength, although comparing the pH with the strong-acid value for the known concentration does.")]
+    else:
+        key_t = f"The acid is strong: the initial pH of ${pH0:.2f}$ equals the ${strong_pred:.2f}$ expected for a strong acid, and the equivalence-point pH is 7."
+        wrongs = [(f"The acid is weak: the initial pH of ${pH0:.2f}$ is below 7, so only part of the acid can be dissociated.", "Treats an initial pH below 7 as a sign of partial dissociation instead of comparing it with the strong-acid value."),
+                  ("The acid is weak: an equivalence-point pH of 7.0 shows that the salt formed is neutral because the acid is weak.", "Attributes a neutral equivalence point to a weak acid, although a weak acid gives a basic equivalence point."),
+                  ("The strength of the acid cannot be found from these pH values because they depend on its concentration.", "Believes pH data cannot show acid strength, although comparing the pH with the strong-acid value for the known concentration does.")]
     k, ds = sentence_options(key_t, f"A {c:g} M strong acid would have an initial pH of {strong_pred:.2f}; the measured initial pH of {pH0:.2f} is {'higher' if weak else 'equal'}, and the equivalence-point pH of {pH_eq:.1f} is {'above' if weak else 'equal to'} 7, which " + ("shows that A⁻ is a weak base, so HA is a weak acid." if weak else "is the pH of a salt of a strong acid and a strong base."), wrongs)
     stem = f"A ${c:g}\\text{{ M}}$ monoprotic acid is titrated with NaOH of the same concentration. The initial pH of the acid solution is ${pH0:.2f}$ and the pH at the equivalence point is ${pH_eq:.1f}$. Which conclusion about the acid is best supported by these results?"
     return mk("ch_titration_conclusion", "8.5", "6.F", stem, k, ds, rng, concept="connect titration pH data to the strength of an acid", path="initial pH compared with -log c from an exact charge balance vs the equivalence-point pH from salt hydrolysis", facts=[f"c={c}", f"weak={weak}", f"pH0={pH0:.4f}", f"pHeq={pH_eq:.4f}"], judgment="compare measured pH with what a strong acid would give", est=95)

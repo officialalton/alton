@@ -208,7 +208,7 @@ def ch_buffer_choice(rng):
     for _ in forever():
         pairs_ = rng.sample(BPAIRS, 4); target = round(rng.uniform(3.5, 10.5), 1)
         d = sorted(abs(p[1] - target) for p in pairs_)
-        if d[0] < 0.7 and d[1] - d[0] > 0.8:
+        if d[0] < 0.6 and d[1] > 1.2:
             break
     k = min(pairs_, key=lambda p: abs(p[1] - target))
     agree(1.0, 1.0 if abs(k[1] - target) <= 1.0 else 0.0, 1e-9, "within1")
@@ -217,10 +217,10 @@ def ch_buffer_choice(rng):
     for p in pairs_:
         if p[0] == k[0]:
             continue
-        why = f"This pair has the strongest acid shown (pKa = {p[1]}), but that is {abs(p[1] - target):.1f} units from the target pH of {target:g}, so it would resist pH changes poorly." if p[0] == low[0] else (
-            f"This pair has the weakest acid shown (pKa = {p[1]}), but that is {abs(p[1] - target):.1f} units from the target pH of {target:g}, so it would resist pH changes poorly." if p[0] == high[0] else f"Its pKa of {p[1]} is {abs(p[1] - target):.1f} units from the target pH of {target:g}, more than the one unit over which a buffer works well.")
+        why = f"This pair has the strongest acid shown (pKa = {p[1]}), but that is {abs(p[1] - target):.2f} units from the target pH of {target:g}, so it would resist pH changes poorly." if p[0] == low[0] else (
+            f"This pair has the weakest acid shown (pKa = {p[1]}), but that is {abs(p[1] - target):.2f} units from the target pH of {target:g}, so it would resist pH changes poorly." if p[0] == high[0] else f"Its pKa of {p[1]} is {abs(p[1] - target):.2f} units from the target pH of {target:g}, more than the one unit over which a buffer works well.")
         ds.append(Opt(p[0], False, why, None))
-    key = Opt(k[0], True, f"A buffer works best when the pH is within about one unit of the pKa; {k[0]} has pKa = {k[1]}, only {abs(k[1] - target):.1f} units from the target pH of {target:g}.", None)
+    key = Opt(k[0], True, f"A buffer works best when the pH is within about one unit of the pKa; {k[0]} has pKa = {k[1]}, only {abs(k[1] - target):.2f} units from the target pH of {target:g}.", None)
     tab = "; ".join(f"{p[0]} ($\\mathrm{{p}}K_a={p[1]}$)" for p in pairs_)
     stem = f"A chemist needs a buffer with a pH of ${target:g}$. Which conjugate acid-base pair ({tab}) would be most effective, assuming equal total concentrations are available for each?"
     return mk("ch_buffer_choice", "8.8", "4.B", stem, key, ds, rng, concept="choose a buffer whose pKa is closest to the target pH", path="argmin of |pKa - target| vs the |log ratio| <= 1 feasibility test", facts=[f"target={target}", f"pairs={[p[0] for p in pairs_]}", f"key={k[0]}"], judgment="match pKa to the target pH rather than picking the strongest acid", est=80)
@@ -236,7 +236,9 @@ def ch_ph_ranking(rng):
             break
     k = order_ph[0]
     Kd = dict(acs)
-    ds = [Opt(cf(n), False, f"{n} has Ka = {sn(Kd[n], 2)}, smaller than the {sn(Kd[k], 2)} of {k}, so it dissociates less at the same concentration and gives a higher pH" + (" (it is the weakest acid shown)." if n == order_ph[-1] else "."), None) for n in order_ph[1:]]
+    rank_word = {1: "second-largest", 2: "third-largest"}
+    ds = [Opt(cf(n), False, (f"{n} has the {rank_word[i]} Ka ({sn(Kd[n], 2)}), not the largest ({sn(Kd[k], 2)} for {k}), so it dissociates less at the same concentration and its solution has a higher pH than that of {k}." if i < len(order_ph) - 1 else
+                             f"{n} has the smallest Ka ({sn(Kd[n], 2)}), so its solution has the highest pH; choosing it reverses the relationship between Ka and pH."), None) for i, n in enumerate(order_ph[1:], start=1)]
     key = Opt(cf(k), True, f"At equal concentration the acid with the largest Ka dissociates most; {k} has the largest Ka ({sn(Kd[k], 2)}), so its solution has the lowest pH.", None)
     rows = [[cf(n), f"{sn(Ka, 2)}"] for n, Ka in acs]
     stim = table_stimulus("Acid dissociation constants at 25 °C", "Acid", [[n, f"{sn(Ka, 2)}"] for n, Ka in acs], "Ka")
@@ -284,7 +286,8 @@ def ch_gibbs_temperature(rng):
     Ts = sp.Symbol("T", positive=True)
     agree(T, float(sp.solve(sp.Eq(sp.nsimplify(dH) * 1000 - Ts * sp.nsimplify(dS), 0), Ts)[0]), 1e-9, "T")
     agree(T, bisect(lambda t: dH * 1000 - t * dS, 1.0, 1e6), 1e-6, "T2")
-    pairs = [("Does not convert kilojoules to joules.", dH / dS), ("Inverts the ratio, dividing ΔS by ΔH instead of ΔH by ΔS.", dS / (dH * 1000)), ("Converts the answer to degrees Celsius.", T - 273.15), ("Multiplies enthalpy and entropy.", dH * dS)]
+    pairs = [("Does not convert kilojoules to joules.", dH / dS), ("Inverts the ratio, dividing ΔS by ΔH instead of ΔH by ΔS.", dS / (dH * 1000)), ("Reports the answer in degrees Celsius instead of kelvins.", T - 273.15 if T > 273.15 else None), ("Multiplies enthalpy and entropy.", dH * dS),
+                 ("Converts ΔS to kJ as well as ΔH, which makes the answer a factor of 10⁶ too large.", dH * 1e6 / dS)]
     key, ds = num_opts(abs(T), pairs and [(w, abs(v)) for w, v in pairs], "K", 3, fmt=lambda v: "$" + f"{v:.0f}" + "\\text{ K}$" if v >= 10 else "$" + f"{v:.3f}" + "\\text{ K}$")
     side = "above" if dS > 0 else "below"
     stem = f"For a reaction, $\\Delta H^\\circ={dH:+g}\\text{{ kJ/mol}}$ and $\\Delta S^\\circ={dS:+g}\\text{{ J/(mol}}\\cdot\\text{{K)}}$, and both are assumed to be independent of temperature. The reaction is thermodynamically favorable {side} a certain temperature. What is that temperature, in K?"
