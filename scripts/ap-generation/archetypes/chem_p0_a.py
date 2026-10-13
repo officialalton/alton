@@ -119,7 +119,7 @@ def ch_pes_identify(rng):
         raise ValueError("few_distractors")
     key = Opt(cf(SYM[z]), True, "", None)
     rows = [[f"{e:g}", str(k)] for e, k, _ in peaks]
-    stim = diagram_stim_chem("Photoelectron spectrum of a neutral atom of element X. Peaks (binding energy in MJ/mol, relative number of electrons): " + "; ".join(f"({e:g}, {k})" for e, k, _ in peaks) + ".", "chem_pes", {"peaks": [{"energy": e, "electrons": k} for e, k, _ in peaks], "unit": "MJ/mol", "z": z})
+    stim = diagram_stim_chem("Photoelectron spectrum of a neutral atom of element X. Peaks (binding energy in MJ/mol, relative number of electrons): " + "; ".join(f"({e:g}, {k})" for e, k, _ in peaks) + ".", "chem_pes", {"peaks": [{"energy": e, "electrons": k} for e, k, _ in peaks], "unit": "MJ/mol"})
     stem = "The photoelectron spectrum of a neutral atom of element X is shown. Which element is X?"
     return mk("ch_pes_identify", "1.6", "1.A", stem, key, ds[:3], rng, concept="identify an element from the peak positions and relative heights in a photoelectron spectrum", stim=stim,
               path="electron configuration from a hand-coded subshell filling list vs Madelung (n+l) ordering; total relative electrons equals Z", material={"type": "diagram", "must_include": ["peak energies", "relative electron numbers"]},

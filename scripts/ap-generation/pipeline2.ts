@@ -2,6 +2,7 @@
 // LLM 은 문장(stem/context/해설)만 쓴다. 결정적 게이트(lib/ap-generation/gates.ts) → 독립 풀이(Opus, 정답 비공개) → 5기준 검토 + 참조 패턴 대조(Sonnet) → 난이도(별도) → 표본(Fable).
 //   npx tsx scripts/ap-generation/pipeline2.ts plan|gen|check|solve|review|difficulty|spot|report --run run2 [--sync]
 import { describePhysSceneForReview } from "../../lib/problem-figures/templates/ap-phys-scene";
+import { describeChemSceneForReview } from "../../lib/problem-figures/templates/ap-chem-scene";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
@@ -230,6 +231,8 @@ const figText = (m: McPack): Json | undefined => {
   if (!process.env.AP_FIGURE_TEXT) return undefined;
   const o: Json = {}; const sc = (m.stimulus as { data?: { variant?: string; scene?: unknown } } | undefined)?.data;
   if (sc?.variant === "phys_scene" && sc.scene) o.figure_shown_to_student = describePhysSceneForReview(sc.scene as never);
+  if (sc?.variant === "chem_pes" && Array.isArray((sc as { peaks?: unknown }).peaks)) o.figure_shown_to_student = describeChemSceneForReview("chem_pes", { type: "pes", peaks: (sc as { peaks: { energy: number; electrons: number }[] }).peaks, unit: (sc as { unit?: string }).unit });
+  if (sc?.variant === "chem_particles" && sc.scene) o.figure_shown_to_student = describeChemSceneForReview("chem_particles", sc.scene as never);
   const os = (m as unknown as { option_scenes?: unknown[] }).option_scenes;
   if (Array.isArray(os)) o.option_figures_shown_to_student = os.map((x, i) => `Diagram ${String.fromCharCode(65 + i)}: ${describePhysSceneForReview(x as never)}`);
   return Object.keys(o).length ? o : undefined;

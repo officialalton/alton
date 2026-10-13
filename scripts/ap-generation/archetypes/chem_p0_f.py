@@ -240,7 +240,7 @@ def ch_particle_phase(rng):
     cls = "gas" if pf < 0.2 else ("solid" if order.startswith("regular") else "liquid")
     agree(1.0, 1.0 if cls == ph else 0.0, 1e-9, "phase")
     props = {"solid": "has a fixed shape and is essentially incompressible", "liquid": "takes the shape of its container, has a fixed volume, and is nearly incompressible", "gas": "takes the shape and volume of its container and is easily compressed"}
-    scene = {"type": "particles", "arrangement": order, "packing_fraction": pf}
+    scene = {"type": "particles", "phase": ph, "arrangement": order, "packing_fraction": pf}
     stim = diagram_stim_chem(f"A particulate diagram of one sample of a pure substance: the particles show a {order}.", "chem_particles", {"scene": scene})
     k, ds = sentence_options(f"The sample is a {ph}, so it {props[ph]}.", "The spacing and order of the particles determine the macroscopic properties.",
                              [(f"The sample is a {x}, so it {props[x]}.", {"solid": "Treats particles in contact as a rigid lattice regardless of order.", "liquid": "Confuses freely moving touching particles with widely spaced particles.", "gas": "Assumes particles that are far apart form a dense, incompressible phase."}[x]) for x in ("solid", "liquid", "gas") if x != ph] +

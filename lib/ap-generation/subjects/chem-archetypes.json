@@ -15,6 +15,21 @@
   ]
  },
  {
+  "id": "ch_acid_strength_particles",
+  "topic": "8.3",
+  "skill": "6.C",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "fraction dissociated from the particle counts (exact fraction) vs the rule that a strong acid leaves no HA"
+  ],
+  "misconceptions": [
+   "Treats equal ion numbers as a sign of equilibrium rather than of 1:1 dissociation.",
+   "Mixes up the charge balance, which the ions satisfy on their own, with the need for intact HA.",
+   "Believes any ionic product means an equilibrium with HA still present."
+  ]
+ },
+ {
   "id": "ch_average_atomic_mass",
   "topic": "1.2",
   "skill": "5.D",
@@ -117,6 +132,21 @@
    "Chooses the pair with the strongest acid.",
    "The pKa is more than one unit from the target pH, so the buffer would resist pH changes poorly.",
    "The pKa is more than one unit from the target pH, so the buffer would resist pH changes poorly."
+  ]
+ },
+ {
+  "id": "ch_buffer_data_conclusion",
+  "topic": "8.10",
+  "skill": "6.F",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "Henderson\u2013Hasselbalch pH values vs an exact charge-balance equilibrium solved by bisection; the strong-acid pH from excess hydroxide"
+  ],
+  "misconceptions": [
+   "Assumes equal starting pH means equal resistance to added base.",
+   "Attributes buffering to a strong acid instead of a weak acid and its conjugate base.",
+   "Reads a larger pH change as stronger resistance to change."
   ]
  },
  {
@@ -480,6 +510,21 @@
   ]
  },
  {
+  "id": "ch_halflife_order_claim",
+  "topic": "5.3",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "analytic times at which [A] reaches successive halves vs an ODE integration of the rate law with an event at each halving, then a rule on the ratios of successive intervals"
+  ],
+  "misconceptions": [
+   "Matches the observed pattern of half-lives to the wrong order.",
+   "Matches the observed pattern of half-lives to the wrong order (this option: The reaction is zero order in A, because the time for [ A] t).",
+   "Believes unevenly spaced times make the data unusable, when the pattern of intervals is the evidence."
+  ]
+ },
+ {
   "id": "ch_heating_curve",
   "topic": "6.5",
   "skill": "5.F",
@@ -507,6 +552,21 @@
    "Adds the three enthalpy changes without reversing or scaling any step.",
    "Multiplies by the coefficients but forgets to change signs for reversed steps.",
    "Reverses the wrong step's sign when combining."
+  ]
+ },
+ {
+  "id": "ch_hydrate_error",
+  "topic": "1.3",
+  "skill": "6.G",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "percent water recomputed from the altered recorded masses (exact fractions) vs the same recomputation in floating point compared with the true value"
+  ],
+  "misconceptions": [
+   "Attributes the effect to a changed molar mass instead of the recorded masses.",
+   "Assumes any experimental error raises the calculated value.",
+   "Believes this error does not change the masses used in the calculation."
   ]
  },
  {
@@ -690,6 +750,21 @@
   ]
  },
  {
+  "id": "ch_le_chatelier_prediction",
+  "topic": "7.10",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction of Q versus K vs a numerically integrated rate-law trajectory started at the new concentrations"
+  ],
+  "misconceptions": [
+   "States a comparison of Q and K that does not match the new concentrations.",
+   "States a comparison of Q and K that does not match the new concentrations (this option: The net reaction proceeds toward the products, because immed).",
+   "Gets the direction right but compares Q and K incorrectly."
+  ]
+ },
+ {
   "id": "ch_lewis_electron_check",
   "topic": "2.5",
   "skill": "4.B",
@@ -792,6 +867,21 @@
    "A nonpolar molecule has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules.",
    "A nonpolar molecule has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules.",
    "A nonpolar molecule has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules."
+  ]
+ },
+ {
+  "id": "ch_mixture_mass_percent",
+  "topic": "1.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "exact fraction of particle counts times molar masses vs numpy mass from moles (particles / N_A)"
+  ],
+  "misconceptions": [
+   "Reports the mass percent of the other gas, CO2.",
+   "Reports the percent of molecules (number percent) instead of the mass percent.",
+   "Divides the mass of X by the mass of Y instead of by the mass of the mixture."
   ]
  },
  {
@@ -1080,6 +1170,21 @@
   ]
  },
  {
+  "id": "ch_precipitate_claim",
+  "topic": "4.2",
+  "skill": "6.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "match of the observation pattern against the solubility rule table vs a step-by-step elimination order"
+  ],
+  "misconceptions": [
+   "This cation would not form a precipitate with chloride ions, which contradicts the observation.",
+   "This cation would not form a precipitate with chloride ions, which contradicts the observation (this option: The unknown solution contains  K+, because it behaved as exp).",
+   "This cation would not form a precipitate with chloride ions, which contradicts the observation (this option: The unknown solution contains  Ba2+, because it formed a pre)."
+  ]
+ },
+ {
   "id": "ch_procedure_calorimetry",
   "topic": "6.4",
   "skill": "2.C",
@@ -1290,6 +1395,36 @@
   ]
  },
  {
+  "id": "ch_testable_variables",
+  "topic": "5.1",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "rule: exactly one manipulated variable, a named measured quantity and the controlled conditions; each distractor breaks one of these rules"
+  ],
+  "misconceptions": [
+   "No variable is deliberately changed, so the question cannot test a cause-and-effect relationship.",
+   "The outcome is a subjective impression, not a quantity that can be measured.",
+   "Changes two variables at once, so the effect of each cannot be separated."
+  ]
+ },
+ {
+  "id": "ch_titrant_change",
+  "topic": "4.6",
+  "skill": "2.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "moles of base equal moles of acid solved symbolically (sympy) vs the ratio of the two titrant concentrations applied to the first volume"
+  ],
+  "misconceptions": [
+   "Multiplies the original volume by the ratio of concentrations instead of dividing.",
+   "Assumes the same volume is needed even though the concentration of the base changed.",
+   "Adds the two concentrations' effect, giving the average of the two volumes."
+  ]
+ },
+ {
   "id": "ch_titration_conc",
   "topic": "4.6",
   "skill": "5.F",
@@ -1377,6 +1512,21 @@
    "Believes a higher vapor pressure means stronger attractions.",
    "Reads the curves in the wrong order.",
    "Treats a lower vapor pressure as weaker attractions."
+  ]
+ },
+ {
+  "id": "ch_vapor_pressure_justify",
+  "topic": "3.1",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "ranking of the liquids by the computed 25 \u00b0C vapor pressure vs the reverse ranking by boiling point (Trouton + Clausius\u2013Clapeyron)"
+  ],
+  "misconceptions": [
+   "Confuses intermolecular forces with the covalent bonds inside molecules.",
+   "Claims the particles of X move faster, although both liquids are at the same temperature.",
+   "Reverses the link between vapor pressure and the strength of attractions."
   ]
  },
  {

@@ -173,7 +173,7 @@ def chf_short_pes(rng):
     sym = _A.SYM[z]; nxt = _A.SYM[z + 1]
     cfg = " ".join(f"{p[2]}$^{{{p[1]}}}$" for p in peaks)
     cfg_n = _A._config(z + 1); val_next = [p for p in _A._pes_peaks(z + 1)][-2:] if len(cfg_n) > 2 else _A._pes_peaks(z + 1)
-    stim = {"kind": "diagram", "description": "Photoelectron spectrum of a neutral atom of element X. Peaks (binding energy in MJ/mol, relative number of electrons): " + "; ".join(f"({e:g}, {k})" for e, k, _ in peaks) + ".", "data": {"variant": "chem_pes", "peaks": [{"energy": e, "electrons": k} for e, k, _ in peaks], "unit": "MJ/mol", "z": z}}
+    stim = {"kind": "diagram", "description": "Photoelectron spectrum of a neutral atom of element X. Peaks (binding energy in MJ/mol, relative number of electrons): " + "; ".join(f"({e:g}, {k})" for e, k, _ in peaks) + ".", "data": {"variant": "chem_pes", "peaks": [{"energy": e, "electrons": k} for e, k, _ in peaks], "unit": "MJ/mol"}}
     ie1 = peaks[-1][0]
     parts = [
         part("A", "Identify element X and write its complete ground-state electron configuration.", 1, "identify", ["1.A", "5.D"], f"The total relative number of electrons is {z}, so X is {sym}: {cfg}.",
