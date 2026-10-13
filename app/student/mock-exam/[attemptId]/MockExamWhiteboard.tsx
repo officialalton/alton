@@ -3,13 +3,18 @@
 // 모의고사 풀이용 화이트보드(2026-10-02 오너 확정): 응시×문항 하나당 스크래치 캔버스. 펜·지우개·전체 지우기·색 3개,
 // 그리는 대로 디바운스 저장, 문항으로 돌아오면 복원. 저장소는 기존 problem_note_strokes('mock_exam') 그대로 —
 // 모듈·시험 제출 후에는 서버가 쓰기를 거부하고(결과 화면은 ProblemNoteSnapshot 으로 읽기 전용 표시) 여기서도 잠근다.
+// 2026-10-13: 보드를 키울 수 있다(Small/Medium/Large/Extra large, −/+, 드래그 핸들·키보드). 논리 폭 640 고정 × 높이 가변,
+// 선분 좌표는 크기와 무관(영역만 늘고 줄일 땐 그린 곳 아래까지만). 높이는 필기와 함께 서버(problem_note_strokes.board_height)에 저장.
+// 크기 조절 UI 는 FRQ 손글씨 패드와 같은 BoardSizeControls 를 쓴다.
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { loadProblemNoteStrokesAction, saveProblemNoteStrokesAction, type StrokeSegment } from "@/lib/problem-notes-actions";
+import { loadProblemNoteBoardAction, saveProblemNoteBoardAction, type StrokeSegment } from "@/lib/problem-notes-actions";
 import { drawAll } from "@/app/components/ProblemNoteCanvas";
+import { WB_H_PRESETS, WB_MAX_H, WB_MAX_SEGMENTS, WB_MIN_H, WB_TOO_LARGE, WB_WIDTH, clampWbHeight, wbSizeProblem } from "@/lib/mock-exam/whiteboard-size";
+import { BoardResizeHandle, BoardScrollGutter, BoardSizeButtons } from "./BoardSizeControls";
 
-export const WB_WIDTH = 640;
-export const WB_HEIGHT = 480;
+export { WB_WIDTH };
+export const WB_HEIGHT = WB_MIN_H; // 기본(Small) 높이 — 기존 고정 크기
 export const WB_COLORS = [
   { name: "Black", value: "#111111" },
   { name: "Red", value: "#e11d48" },
@@ -45,7 +50,10 @@ export default function MockExamWhiteboard({
   const dirtyRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const drawingRef = useRef<{ x: number; y: number } | null>(null);
+  const penSeenRef = useRef(false);
   const [ready, setReady] = useState(false);
+  const [height, setHeightState] = useState<number>(WB_MIN_H);
+  const heightRef = useRef<number>(WB_MIN_H);
   const [tool, setTool] = useState<"pen" | "eraser">("pen");
   const [color, setColor] = useState<string>(WB_COLORS[0].value);
   const [error, setError] = useState<string | null>(null);
@@ -62,8 +70,13 @@ export default function MockExamWhiteboard({
       timerRef.current = null;
     }
     if (locked || !dirtyRef.current) return;
+    const tooLarge = wbSizeProblem(strokesRef.current);
+    if (tooLarge) {
+      setError(tooLarge);
+      return;
+    }
     dirtyRef.current = false;
-    const r = await saveProblemNoteStrokesAction("mock_exam", attemptId, itemId, strokesRef.current);
+    const r = await saveProblemNoteBoardAction("mock_exam", attemptId, itemId, strokesRef.current, heightRef.current);
     if (!r.ok) {
       dirtyRef.current = true;
       setError(r.error);
@@ -72,10 +85,12 @@ export default function MockExamWhiteboard({
 
   useEffect(() => {
     let cancelled = false;
-    loadProblemNoteStrokesAction("mock_exam", attemptId, itemId)
-      .then((rows) => {
+    loadProblemNoteBoardAction("mock_exam", attemptId, itemId)
+      .then((board) => {
         if (cancelled) return;
-        strokesRef.current = rows;
+        strokesRef.current = board.strokes;
+        heightRef.current = clampWbHeight(board.boardHeight, board.strokes);
+        setHeightState(heightRef.current);
         setReady(true);
       })
       .catch(() => {
@@ -86,9 +101,10 @@ export default function MockExamWhiteboard({
     };
   }, [attemptId, itemId]);
 
+  // 높이가 바뀌면 canvas 속성이 비워지므로 다시 그린다(선분 좌표는 그대로).
   useEffect(() => {
     if (ready) redraw();
-  }, [ready, redraw]);
+  }, [ready, height, redraw]);
 
   // 문항이 바뀌거나(부모가 key 로 다시 마운트) 닫힐 때 남은 변경을 저장한다.
   useEffect(() => () => void flush(), [flush]);
@@ -99,15 +115,26 @@ export default function MockExamWhiteboard({
     timerRef.current = setTimeout(() => void flush(), SAVE_DEBOUNCE_MS);
   }
 
+  const setHeight = (h: number) => {
+    if (locked) return;
+    const next = clampWbHeight(h, strokesRef.current);
+    if (next === heightRef.current) return;
+    heightRef.current = next;
+    setHeightState(next);
+    schedule();
+  };
+
   function point(e: React.PointerEvent<HTMLCanvasElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
     const sx = rect.width ? WB_WIDTH / rect.width : 1;
-    const sy = rect.height ? WB_HEIGHT / rect.height : 1;
+    const sy = rect.height ? heightRef.current / rect.height : 1;
     return { x: (e.clientX - rect.left) * sx, y: (e.clientY - rect.top) * sy };
   }
 
   function down(e: React.PointerEvent<HTMLCanvasElement>) {
     if (locked) return;
+    if (e.pointerType === "pen") penSeenRef.current = true;
+    if (e.pointerType === "touch" && penSeenRef.current) return; // 스타일러스를 쓰는 중 손바닥 접촉 무시
     e.currentTarget.setPointerCapture?.(e.pointerId);
     drawingRef.current = point(e);
     if (tool === "eraser") move(e);
@@ -125,6 +152,10 @@ export default function MockExamWhiteboard({
         schedule();
       }
     } else {
+      if (strokesRef.current.length >= WB_MAX_SEGMENTS) {
+        setError(WB_TOO_LARGE);
+        return;
+      }
       const seg: StrokeSegment = { x0: last.x, y0: last.y, x1: p.x, y1: p.y, color, w: WB_WIDTH };
       strokesRef.current = [...strokesRef.current, seg];
       const ctx = canvasRef.current?.getContext?.("2d");
@@ -158,13 +189,18 @@ export default function MockExamWhiteboard({
   const btn = (active: boolean) =>
     `rounded border px-2 py-1 text-[11.5px] font-bold ${active ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"}`;
 
+  // 큰 보드는 패널도 넓힌다(Large 이상). 패널 높이는 화면에 맞추고 보드 영역만 세로 스크롤한다.
+  const wide = height >= 1000;
+
   return (
     <aside
       aria-label="Whiteboard"
       data-testid="mst-whiteboard"
-      className="fixed right-4 top-[72px] z-20 w-[min(540px,calc(100vw-2rem))] rounded-lg border border-grey-300 bg-white shadow-lg"
+      className={`fixed right-4 top-[72px] z-20 flex max-h-[calc(100vh-88px)] flex-col rounded-lg border border-grey-300 bg-white shadow-lg ${
+        wide ? "w-[min(720px,calc(100vw-2rem))]" : "w-[min(540px,calc(100vw-2rem))]"
+      }`}
     >
-      <div className="flex items-center gap-1.5 border-b border-grey-200 px-2.5 py-2">
+      <div className="flex flex-wrap items-center gap-1.5 border-b border-grey-200 px-2.5 py-2">
         <span className="mr-1 text-[12px] font-extrabold text-ink">Whiteboard</span>
         {!locked && (
           <>
@@ -188,6 +224,7 @@ export default function MockExamWhiteboard({
                 style={{ backgroundColor: c.value }}
               />
             ))}
+            <BoardSizeButtons presets={WB_H_PRESETS} height={height} onSet={setHeight} groupTestId="wb-size" presetTestId={(h) => `wb-size-${h}`} />
             <button type="button" onClick={clearAll} className="ml-auto text-[11.5px] font-semibold text-grey-500 underline">
               Clear
             </button>
@@ -198,18 +235,38 @@ export default function MockExamWhiteboard({
         </button>
       </div>
       {ready ? (
-        <canvas
-          ref={canvasRef}
-          width={WB_WIDTH}
-          height={WB_HEIGHT}
-          className={`w-full touch-none ${locked ? "" : "cursor-crosshair"}`}
-          style={{ aspectRatio: `${WB_WIDTH} / ${WB_HEIGHT}` }}
-          onPointerDown={down}
-          onPointerMove={move}
-          onPointerUp={up}
-          onPointerLeave={up}
-          aria-label="Scratch canvas"
-        />
+        <>
+          <div className="flex min-h-0 flex-1 overflow-y-auto">
+            <canvas
+              ref={canvasRef}
+              width={WB_WIDTH}
+              height={height}
+              className={`block h-fit w-full touch-none ${locked ? "" : "cursor-crosshair"}`}
+              style={{ aspectRatio: `${WB_WIDTH} / ${height}` }}
+              onPointerDown={down}
+              onPointerMove={move}
+              onPointerUp={up}
+              onPointerCancel={up}
+              onPointerLeave={up}
+              aria-label="Scratch canvas"
+              data-testid="wb-canvas"
+            />
+            {/* 모바일: 캔버스는 touch-action:none(그리기). 오른쪽 띠(pan-y)로 보드 영역을 스크롤한다. */}
+            <BoardScrollGutter testId="wb-scroll-gutter" />
+          </div>
+          {!locked && (
+            <BoardResizeHandle
+              height={height}
+              min={WB_MIN_H}
+              max={WB_MAX_H}
+              logicalWidth={WB_WIDTH}
+              getCanvasWidth={() => canvasRef.current?.getBoundingClientRect().width}
+              ariaLabel="Whiteboard height"
+              testId="wb-resize"
+              onSet={setHeight}
+            />
+          )}
+        </>
       ) : (
         <p className="p-3 text-[12px] text-grey-400">Loading…</p>
       )}

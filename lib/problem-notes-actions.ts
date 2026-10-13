@@ -43,3 +43,44 @@ export async function loadProblemNoteStrokesAction(
   if (error) throw new Error(error.message);
   return Array.isArray(data) ? (data as StrokeSegment[]) : [];
 }
+
+/** 시험 스크래치 화이트보드(2026-10-13): 필기와 보드 높이를 함께 저장·로드한다(높이는 problem_note_strokes.board_height, 마이그레이션 590). */
+export async function saveProblemNoteBoardAction(
+  context: ProblemNoteContext,
+  targetId: string,
+  itemId: string,
+  strokes: StrokeSegment[],
+  boardHeight: number,
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireStudentFeature("mock_exam");
+  const { error } = await supabase.rpc("save_problem_note_strokes", {
+    p_context: context,
+    p_target_id: targetId,
+    p_item_id: itemId,
+    p_strokes: strokes,
+    p_board_height: boardHeight,
+  });
+  if (error) return { ok: false, error: error.message };
+  return { ok: true };
+}
+
+export async function loadProblemNoteBoardAction(
+  context: ProblemNoteContext,
+  targetId: string,
+  itemId: string,
+  authorId?: string,
+): Promise<{ strokes: StrokeSegment[]; boardHeight: number }> {
+  const { supabase } = await requireStudentFeature("mock_exam");
+  const { data, error } = await supabase.rpc("load_problem_note_board", {
+    p_context: context,
+    p_target_id: targetId,
+    p_item_id: itemId,
+    p_author_id: authorId ?? null,
+  });
+  if (error) throw new Error(error.message);
+  const d = (data ?? {}) as { strokes?: unknown; boardHeight?: unknown };
+  return {
+    strokes: Array.isArray(d.strokes) ? (d.strokes as StrokeSegment[]) : [],
+    boardHeight: typeof d.boardHeight === "number" ? d.boardHeight : 480,
+  };
+}

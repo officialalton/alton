@@ -24,8 +24,8 @@ vi.mock("@/lib/mock-exam/attempt-actions", () => ({
   saveMockExamAnnotationsAction: (...a: unknown[]) => annotSaveMock(...a),
 }));
 vi.mock("@/lib/problem-notes-actions", () => ({
-  loadProblemNoteStrokesAction: (...a: unknown[]) => wbLoadMock(...a),
-  saveProblemNoteStrokesAction: (...a: unknown[]) => wbSaveMock(...a),
+  loadProblemNoteBoardAction: (...a: unknown[]) => wbLoadMock(...a),
+  saveProblemNoteBoardAction: (...a: unknown[]) => wbSaveMock(...a),
 }));
 vi.mock("@/lib/mock-exam/mst-actions", () => ({
   startMstAttemptAction: (a: unknown) => startMock(a),
@@ -69,7 +69,7 @@ beforeEach(() => {
   vi.clearAllMocks();
   annotLoadMock.mockResolvedValue({ highlights: [], eliminated: [] });
   annotSaveMock.mockResolvedValue({ ok: true });
-  wbLoadMock.mockResolvedValue([]);
+  wbLoadMock.mockResolvedValue({ strokes: [], boardHeight: 480 });
   wbSaveMock.mockResolvedValue({ ok: true });
   saveMock.mockResolvedValue({ ok: true });
   flagMock.mockResolvedValue({ ok: true });
