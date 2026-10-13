@@ -221,7 +221,7 @@ def _matrix(rng, structure):
 
 
 def _game_stim(M, ra, ca, labels, unit="millions of dollars of profit"):
-    return {"kind": "payoff_matrix", "description": f"Payoff matrix for two firms, {ra} (rows) and {ca} (columns), each choosing {labels[0]} or {labels[1]}. The firms choose simultaneously, once. Payoffs are profits in millions of dollars, listed as ({ra}, {ca}).",
+    return {"kind": "payoff_matrix", "description": f"Payoff matrix for two firms, {ra} (rows) and {ca} (columns), each choosing between “{labels[0]}” and “{labels[1]}”. The firms choose simultaneously, once. Payoffs are profits in millions of dollars, listed as ({ra}, {ca}).",
             "data": {"row_player": ra, "col_player": ca, "row_strategies": labels, "col_strategies": labels, "payoff_units": unit, "payoffs": {f"{labels[r]},{labels[c]}": M[r][c] for r in range(2) for c in range(2)}, "format": f"({ra} payoff, {ca} payoff)"}}
 
 
@@ -236,7 +236,7 @@ def mi_game_nash(rng):
         raise ValueError("not_enough_separated_distractors")
     r0, c0 = brute[0]
     cells = [(r, c) for r in range(2) for c in range(2)]
-    txt = lambda r, c: f"{ra} chooses to {labels[r]} and {ca} chooses to {labels[c]}."  # noqa: E731
+    txt = lambda r, c: f"{ra} plays \"{labels[r]}\" and {ca} plays \"{labels[c]}\"."  # noqa: E731
     why_other = {}
     for r, c in cells:
         if (r, c) == (r0, c0): continue
@@ -267,8 +267,8 @@ def mi_game_dominant(rng):
     d = dom[0]
     player = ra if who == "row" else ca
     other_dom = labels[1 - d]
-    k, ds = sent_opts(f"{player} has a dominant strategy: {labels[d]}.", f"{labels[d]} gives {player} a higher payoff than {labels[1 - d]} whatever the rival chooses.",
-                      [(f"{player} has a dominant strategy: {other_dom}.", "Names the other strategy, which is dominated."), (f"{player} has no dominant strategy, because the best choice depends on what the rival does.", "Compares payoffs for only one rival choice; for both choices the same strategy pays more."), (f"{player} has a dominant strategy only if the other firm also has one.", "A dominant strategy is defined for one player regardless of what the other has."),
+    k, ds = sent_opts(f"{player} has a dominant strategy: \"{labels[d]}\".", f"{labels[d]} gives {player} a higher payoff than {labels[1 - d]} whatever the rival chooses.",
+                      [(f"{player} has a dominant strategy: \"{other_dom}\".", "Names the other strategy, which is dominated."), (f"{player} has no dominant strategy, because the best choice depends on what the rival does.", "Compares payoffs for only one rival choice; for both choices the same strategy pays more."), (f"{player} has a dominant strategy only if the other firm also has one.", "A dominant strategy is defined for one player regardless of what the other has."),
                        (f"Neither firm has a dominant strategy, because the cooperative outcome gives both firms more.", "Confuses the cooperative outcome with the dominant strategy; one strategy pays more regardless of the rival's choice."), (f"{player}'s dominant strategy is the one that gives the highest payoff in any single cell.", "Defines a dominant strategy by the best cell, not by the best response to every rival choice.")])
     stem = f"The payoff matrix shows the profits of two firms choosing simultaneously. Which statement about {player} is correct?"
     return mk("mi_game_dominant", "4.5", "3.A", stem, k, ds, rng, concept="identify a dominant strategy", path="comparison of payoffs against each rival strategy vs micro_checks.nash dominance lists", stim=_game_stim(M, ra, ca, labels), facts=[f"payoffs={M}", f"who={who}", f"dom={d}"], est=70)

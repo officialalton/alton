@@ -225,7 +225,7 @@ def mi_game_pareto(rng):
     better = [(r, c) for r in range(2) for c in range(2) if M[r][c][0] > M[r0][c0][0] and M[r][c][1] > M[r0][c0][1]]
     if len(better) != 1: raise ValueError("not_enough_separated_distractors")
     rb, cb = better[0]
-    txt = lambda r, c: f"{ra} chooses to {labels[r]} and {ca} chooses to {labels[c]}."  # noqa: E731
+    txt = lambda r, c: f"{ra} plays \"{labels[r]}\" and {ca} plays \"{labels[c]}\"."  # noqa: E731
     whys = {}
     for r in range(2):
         for c in range(2):
