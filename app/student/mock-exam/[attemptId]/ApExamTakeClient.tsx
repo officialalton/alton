@@ -21,6 +21,8 @@ import { frqAnswerToJson, parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
 import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
+import SubjectToolPanels from "@/app/components/exam-tools/SubjectToolPanels";
+import { subjectToolsConfig } from "@/lib/exam-tools/subject-tools";
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import MockExamWhiteboard from "./MockExamWhiteboard";
 import FrqHandwritingPad from "./FrqHandwritingPad";
@@ -189,6 +191,9 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
   const answeredCount = allItems.filter(answered).length;
   const notStartedCount = layout.filter((s) => started[s.key] === false).length;
   const calcOk = section.calculator === "allowed" || section.calculator === "required";
+  const toolsCfg = subjectToolsConfig(attempt.apSubject);
+  const subjectPanels = toolsCfg.reference !== null || toolsCfg.calculatorTabs.length > 1;
+  const refOk = toolsCfg.reference !== null;
 
   async function go(n: number) {
     await flush();
@@ -260,7 +265,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
           {formatClock(secLeft)}{!sectionStarted && <span className="ml-2 text-[11px] font-semibold text-grey-500">Not started</span>}{warning && <span className="ml-2 text-[11px] font-semibold">5 min left</span>}
         </div>
         <div className="flex items-center gap-2">
-          {calcOk && <MockExamToolButtons calculatorAllowed referenceSheetAllowed={false} open={toolsOpen} onToggle={(w) => setToolsOpen((c) => (c === w ? null : w))} />}
+          {(calcOk || refOk) && <MockExamToolButtons calculatorAllowed={calcOk} referenceSheetAllowed={refOk} referenceLabel="Reference" open={toolsOpen} onToggle={(w) => setToolsOpen((c) => (c === w ? null : w))} />}
           <button type="button" onClick={async () => { await flush(); setShowReview(true); }} disabled={submitting} data-testid="ap-header-submit"
             className="min-h-[44px] rounded-md bg-ink px-3 py-1.5 text-[12.5px] font-bold text-white disabled:opacity-50 md:min-h-0 md:px-3.5">Submit</button>
         </div>
@@ -438,7 +443,9 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
       </div>
 
       {whiteboardOpen && current && <MockExamWhiteboard key={current.setItemId} attemptId={attempt.id} itemId={current.setItemId} onClose={() => setWhiteboardOpen(false)} />}
-      <MockExamMathTools calculatorAllowed referenceSheetAllowed={false} open={toolsOpen} onClose={() => setToolsOpen(null)} />
+      {subjectPanels
+        ? <SubjectToolPanels config={toolsCfg} calculatorAllowed={calcOk} open={toolsOpen} onClose={() => setToolsOpen(null)} />
+        : <MockExamMathTools calculatorAllowed referenceSheetAllowed={false} open={toolsOpen} onClose={() => setToolsOpen(null)} />}
 
       {showReview && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" role="dialog" aria-modal="true" aria-label="Before you submit">
