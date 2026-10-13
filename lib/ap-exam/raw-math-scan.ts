@@ -8,7 +8,9 @@ export function scanRawMath(root: Element, allow?: string[]): RawMathHit[] {
   const SKIP = ".katex, .katex-mathml, .katex-html, code, pre, kbd, samp, script, style, textarea, [data-raw-math-ok]";
   const detectors: { kind: string; re: RegExp }[] = [
     { kind: "tex-command", re: /\\(?:frac|dfrac|tfrac|sqrt|pi|theta|alpha|beta|gamma|Delta|delta|lambda|mu|sigma|omega|int|sum|prod|lim|infty|cdot|times|div|pm|left|right|le|ge|leq|geq|neq|approx|displaystyle|ln|log|sin|cos|tan|text|mathrm|mathbf|overline|vec|bar|hat|begin|end)\b/ },
+    { kind: "tex-command-any", re: /\\[A-Za-z]{2,}/ }, // 위 목록에 없는 명령(\sec, \csc, \arcsin, \ldots …)도 원문이면 잡는다
     { kind: "tex-script", re: /[\^_]\{/ },
+    { kind: "unicode-script-caret", re: /[₀-₉∀-⋿][₀-₉]?\^/ }, // "∫₀^2.746" 의 글자 그대로 캐럿
     { kind: "plain-exponent", re: /(?:^|[^A-Za-z0-9_])[A-Za-z0-9)\]][ ]?\^[ ]?[({A-Za-z0-9\u2212-]/ },
     { kind: "ascii-inequality", re: /\S[ ]?(?:<=|>=)[ ]?\S/ },
     { kind: "unicode-escape", re: /\\u[0-9a-fA-F]{4}/ },

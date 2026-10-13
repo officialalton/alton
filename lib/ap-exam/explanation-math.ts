@@ -19,6 +19,13 @@ export function autoMathExplanation(text: string): string {
   if (!text) return text;
   let t = decodeUnicodeEscapes(text);
   t = t.replace(/\^pi\b/g, "^\\pi"); // e^pi
+  // 유니코드 적분 한계 "∫₀^2.746", "∫₀^∞" → `$\int_0^{2.746}$`(글자 그대로 ^ 가 보이지 않게), 극한 "lim_{x->inf}" → `$\lim_{x\to\infty}$`
+  t = mapOutside(t, (s) => s.replace(/∫([₀-₉]+)\^(\{[^{}]*\}|-?[A-Za-z0-9.]+|∞)/g, (_m, sub: string, sup: string) => {
+    const low = [...sub].map((c) => String(c.charCodeAt(0) - 0x2080)).join("");
+    const up = sup.startsWith("{") ? sup.slice(1, -1) : sup === "∞" ? "\\infty" : sup;
+    return `$\\int_{${low}}^{${up}}$`;
+  }));
+  t = mapOutside(t, (s) => s.replace(/\blim_\{([^{}]+)\}/g, (_m, sub: string) => `$\\lim_{${sub.replace(/->|→/g, "\\to ").replace(/-?\binf(?:inity)?\b/g, (x) => (x.startsWith("-") ? "-\\infty" : "\\infty"))}}$`));
   t = mapOutside(t, (s) => s.replace(/\^\(((?:[^()]|\([^()]*\))*)\)/g, "^{$1}")); // 괄호 지수 → 중괄호(지수 전체가 올라가게)
   // TeX 명령이 든 지수(`e^{- \frac{1}{10} t}`)는 한 덩어리로 먼저 감싼다(그다음 단계가 안쪽 명령만 따로 감싸지 않게).
   t = mapOutside(t, (s) => s.replace(POWER, (m) => (/\^\{[\s\S]*\\/.test(m) && !/^\(|^\[/.test(m) ? `$${m}$` : m)));
