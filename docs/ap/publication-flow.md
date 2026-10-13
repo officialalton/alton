@@ -132,6 +132,7 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 ## 시간 제한은 서버가 정한다 (2026-10-09, 마이그레이션 `20262100000406`)
 - 섹션 시계는 그 섹션에 **처음 들어간 시각**(`mock_exam_attempts.ap_section_entered`)부터 공식 분이다. 들어가기는 `mock_exam_ap_enter_section`(응시 화면이 섹션 진입 때 호출) 또는 첫 답 저장이다. 화면의 남은 시간은 서버가 계산해 상세(`timeRemainingSeconds`)로 준다. 클라이언트가 보낸 남은 시간은 저장하지 않는다(`mock_exam_save_section_time` 은 AP 에서 무시).
 - 만료(+5초 유예) 뒤 그 섹션의 답 저장·변경은 거절된다(`Time is up for this section…`). 마지막 섹션이 만료되면 `mock_exam_ap_settle` 이 응시를 채점 완료로 마감한다(멱등). 화면을 닫은 채 만료돼도 서버 페이지가 다음에 열 때 settle 을 호출해 결과 화면을 연다. 클라이언트는 마지막 섹션 소진 때 제출(멱등)을 호출한다.
+- **섹션 명시적 시작(마이그레이션 560, 2026-10-12)**: 섹션 탭을 눌러 보기만 해서는 시계가 시작되지 않는다. 첫 섹션은 응시 시작과 함께 시작(화면이 진입 호출·첫 저장 모두 첫 섹션은 허용)하고, 그 밖의 섹션은 안내 패널(제목·문항 수·분·계산기 규칙·"The timer starts when you press Start section and cannot be paused.")의 **Start section** 을 눌러 `mock_exam_ap_enter_section`(멱등) 을 부를 때만 시작한다(`startApSectionAction` 이 시계 시작 뒤 열린 섹션 내용이 담긴 최신 상세를 돌려준다). 서버: 시작 안 한 비첫 섹션의 `mock_exam_save_answer` 는 `This section has not started yet…` 로 거절. `mock_exam_attempt_detail` 은 학생 본인의 진행 중 AP 응시에서 시작 안 한 섹션의 passage·question·options·figure·parts·optionCount 를 비워서 보내고 `apSectionStarted{섹션키:bool}` 를 더한다(제출·채점 뒤·직원 조회는 전부 공개). 미시작 섹션은 제출 시 무응답(MC 0점, FRQ '(no answer)'), 제출 확인창에 미시작 섹션 수를 알린다. 이미 들어간 섹션이 있는 진행 중 응시는 시계·상태 불변. 만료·settle·자동 제출·재응시·SAT MST 는 변경 없음.
 - `mock_exam_submit` 은 AP 에서 멱등이다(이미 제출·채점된 응시에 재시도·더블클릭·두 탭이 다시 불러도 오류·행 추가·시각 변경 없음). SAT 는 기존처럼 오류. 회귀 테스트: `lib/ap-exam/ap-exam.integration.test.ts` "AP 시간 제한은 서버가 정한다".
 - 되돌리기: 파일 머리 주석.
 

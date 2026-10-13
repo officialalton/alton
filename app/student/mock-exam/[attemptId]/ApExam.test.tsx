@@ -4,6 +4,8 @@ import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam
 
 const save = vi.fn();
 const submit = vi.fn();
+const enter = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: { remaining: {} } }));
+const startSec = vi.fn();
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn(), refresh: vi.fn() }) }));
 vi.mock("@/lib/mock-exam/attempt-actions", () => ({
   saveMockExamAnswerAction: (...a: unknown[]) => save(...a),
@@ -13,7 +15,8 @@ vi.mock("@/lib/mock-exam/attempt-actions", () => ({
   toggleMockExamGuessedAction: vi.fn(async () => ({ ok: true, value: undefined })),
   toggleMockExamSavedToPracticeAction: vi.fn(async () => ({ ok: true, value: undefined })),
   recordMockExamEntryAction: vi.fn(async () => ({ ok: true, value: undefined })),
-  enterApSectionAction: vi.fn(async () => ({ ok: true, value: { remaining: {} } })),
+  enterApSectionAction: (...a: unknown[]) => enter(...a),
+  startApSectionAction: (...a: unknown[]) => startSec(...a),
   settleApAttemptAction: vi.fn(async () => ({ ok: true, value: { status: "in_progress", attempt: null } })),
 }));
 vi.mock("@/app/session/[id]/MockExamMathTools", () => ({ default: () => null, MockExamToolButtons: () => <span data-testid="calc-buttons" /> }));
@@ -44,7 +47,7 @@ const base = (items: MockExamAttemptItem[], over: Partial<MockExamAttemptDetail>
   examProgram: "ap", apSubject: "ap_calculus_ab", apLabel: "full_practice", sectionLayout: layout, ...over,
 });
 
-beforeEach(() => { save.mockReset(); save.mockResolvedValue({ ok: true, value: undefined }); submit.mockReset(); vi.useFakeTimers({ shouldAdvanceTime: true }); });
+beforeEach(() => { save.mockReset(); save.mockResolvedValue({ ok: true, value: undefined }); submit.mockReset(); enter.mockClear(); startSec.mockReset(); vi.useFakeTimers({ shouldAdvanceTime: true }); });
 afterEach(() => { cleanup(); vi.useRealTimers(); });
 
 describe("ApExamTakeClient", () => {
@@ -244,5 +247,45 @@ describe("AP 응시 화면 = SAT 응시 화면과 같은 구조(2026-10-09 통�
     expect(screen.getByRole("button", { name: /Question 1.*marked for review/ })).toBeInTheDocument();
     await act(async () => { fireEvent.click(screen.getByTestId("ap-header-submit")); });
     expect(screen.getByTestId("ap-exam-submit")).toBeInTheDocument();
+  });
+});
+
+describe("섹션 명시적 시작(560)", () => {
+  const masked = (id: string, section: string) => item(id, section, { question: null, options: null, optionCount: null, parts: null });
+  const started = { ap_mc_a: true, ap_mc_b: false, ap_frq: false };
+  const mk = () => base([item("m1", "ap_mc_a"), item("m2", "ap_mc_a"), masked("m3", "ap_mc_b"), masked("f1", "ap_frq")], { apSectionStarted: started });
+  it("탭만 눌러서는 시작 호출이 없고, 내용 없이 안내 패널·Start section 만 보인다", async () => {
+    render(<ApExamTakeClient attempt={mk()} />);
+    await act(async () => { await Promise.resolve(); });
+    expect(enter).toHaveBeenCalledTimes(1); expect(enter).toHaveBeenCalledWith("att1", "ap_mc_a"); // 첫 섹션만
+    expect(screen.getByTestId("ap-section-ap_mc_b")).toHaveTextContent("Not started");
+    await act(async () => { fireEvent.click(screen.getByTestId("ap-section-ap_mc_b")); });
+    await act(async () => { fireEvent.click(screen.getByTestId("ap-section-ap_frq")); });
+    await act(async () => { fireEvent.click(screen.getByTestId("ap-section-ap_mc_b")); });
+    expect(enter).toHaveBeenCalledTimes(1); expect(startSec).not.toHaveBeenCalled();
+    const panel = screen.getByTestId("ap-section-not-started");
+    expect(panel).toHaveTextContent("13 questions".replace("13", "1")); // 레이아웃 count=1
+    expect(panel).toHaveTextContent("38 min");
+    expect(panel).toHaveTextContent("The timer starts when you press Start section and cannot be paused.");
+    expect(screen.queryByTestId("ap-qnum")).toBeNull();
+    expect(screen.queryByRole("radio")).toBeNull();
+    expect(screen.getByTestId("ap-answered-count")).toHaveTextContent("Not started");
+    expect(screen.getByTestId("ap-exam-timer")).toHaveTextContent("38:00");
+    await act(async () => { vi.advanceTimersByTime(5000); });
+    expect(screen.getByTestId("ap-exam-timer")).toHaveTextContent("38:00"); // 시계가 흐르지 않는다
+  });
+  it("Start section 을 누르면 한 번 시작하고 문항이 나타난다(더블클릭은 한 번)", async () => {
+    startSec.mockImplementation(async () => ({ ok: true, value: { remaining: { ap_mc_b: 2280 }, attempt: base([item("m1", "ap_mc_a"), item("m2", "ap_mc_a"), item("m3", "ap_mc_b"), masked("f1", "ap_frq")], { apSectionStarted: { ...started, ap_mc_b: true } }) } }));
+    render(<ApExamTakeClient attempt={mk()} />);
+    await act(async () => { fireEvent.click(screen.getByTestId("ap-section-ap_mc_b")); });
+    await act(async () => { fireEvent.click(screen.getByTestId("ap-start-section")); fireEvent.click(screen.getByTestId("ap-start-section")); });
+    expect(startSec).toHaveBeenCalledTimes(1); expect(startSec).toHaveBeenCalledWith("att1", "ap_mc_b");
+    expect(screen.queryByTestId("ap-section-not-started")).toBeNull();
+    expect(screen.getByText("Question text m3")).toBeInTheDocument();
+  });
+  it("제출 확인창이 시작 안 한 섹션 수를 알려 준다", async () => {
+    render(<ApExamTakeClient attempt={mk()} />);
+    await act(async () => { fireEvent.click(screen.getByTestId("ap-header-submit")); });
+    expect(screen.getByTestId("ap-not-started-warning")).toHaveTextContent("2 sections were not started");
   });
 });
