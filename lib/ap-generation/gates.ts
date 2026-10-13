@@ -48,7 +48,8 @@ export function distractorsMissing(p: McPack, e: string): number {
 }
 
 /** AP Statistics MC 전용 결정적 규칙. 계산기 허용 과목이라 "계산만 묻는 문항"은 설계도 judgment_demand(blueprint.ts)로 막고, 여기서는 표기 관례를 본다. */
-const DECIMAL_OPT = /\$-?\d*\.\d{2,}\$/;
+/** 값(소수·구간·쌍)만으로 이루어진 단일 수식 선택지 — 문장형 선택지 안의 자료 수치는 반올림 관례 대상이 아니다. */
+const DECIMAL_OPT = /^\$[^$]*\d*\.\d{2,}[^$]*\$$/;
 export function statsMcRules(p: McPack): string[] {
   const r: string[] = [];
   // 소수 선택지가 둘 이상이면 반올림 관례를 본문이 밝혀야 한다(중간값 반올림 때문에 답이 달라지지 않게)

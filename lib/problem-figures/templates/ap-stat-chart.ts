@@ -142,7 +142,7 @@ function renderCurve(spec: ApStatChartSpec): { svg: string; alt: string; issues:
     sheet.text(x0 - 2, zb - 8, c.z.label ?? "z", { size: 11, anchor: "start", italic: true, color: "#374151" });
   }
   for (const m of c.marks ?? []) {
-    sheet.raw(`<line x1="${f(sx(m.at))}" y1="${f(sy(interp(m.at)))}" x2="${f(sx(m.at))}" y2="${f(base)}" stroke="#C8102E" stroke-width="1.6" stroke-dasharray="4 3"/>`);
+    sheet.raw(`<line x1="${f(sx(m.at))}" y1="${f(top + 8)}" x2="${f(sx(m.at))}" y2="${f(base)}" stroke="#C8102E" stroke-width="1.6" stroke-dasharray="4 3"/>`);
     sheet.label(sx(m.at), top - 2, m.label, "표시 값", { size: 12 });
   }
   for (const sh of c.shades ?? []) if (sh.label) sheet.label(sx((sh.from + sh.to) / 2), sy(interp((sh.from + sh.to) / 2) * 0.45), sh.label, "음영 라벨", { size: 12 });

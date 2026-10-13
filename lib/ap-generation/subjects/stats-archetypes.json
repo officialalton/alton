@@ -1,1 +1,307 @@
-[]
+[
+ {
+  "id": "st_hist_median_interval",
+  "topic": "1.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the data are expanded into a sorted list using class midpoints and the median is taken with numpy, independent of the cumulative-count rule"
+  ],
+  "misconceptions": [
+   "picks the tallest bar as the median class",
+   "picks the middle class of the axis",
+   "reports the class of the first or third quartile"
+  ]
+ },
+ {
+  "id": "st_box_outlier_fence",
+  "topic": "1.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "candidate values at the boundary plus and minus 0.01 are tested against the rule with exact fractions, and the plotted whisker end and outlier are checked to lie below and above the boundary"
+  ],
+  "misconceptions": [
+   "adds IQR rather than 1.5 IQR",
+   "reports 1.5 IQR alone",
+   "uses the lower boundary",
+   "reads the whisker end"
+  ]
+ },
+ {
+  "id": "st_z_compare",
+  "topic": "1.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "normal percentile ranks from scipy.stats.norm.cdf are compared and must order the tests exactly as the z-scores do"
+  ],
+  "misconceptions": [
+   "compares raw scores",
+   "compares distance from the mean in points",
+   "says scores cannot be compared"
+  ]
+ },
+ {
+  "id": "st_cond_prob_table",
+  "topic": "2.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "every respondent is expanded into an individual record and the conditional proportion is found by enumeration, independent of the cell-count ratio"
+  ],
+  "misconceptions": [
+   "divides by the row total",
+   "divides by the grand total",
+   "ignores the given condition"
+  ]
+ },
+ {
+  "id": "st_tree_bayes",
+  "topic": "2.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "a population of 100000 items is built from the tree with integer counts per path and the conditional proportion is computed from the counts"
+  ],
+  "misconceptions": [
+   "gives P(outcome given source)",
+   "gives the joint probability",
+   "gives the overall outcome probability",
+   "gives the prior probability"
+  ]
+ },
+ {
+  "id": "st_binomial_exact",
+  "topic": "2.10",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the probability is recomputed with math.comb and powers directly, independent of scipy.stats.binom"
+  ],
+  "misconceptions": [
+   "finds P(X <= k)",
+   "finds P(X >= k)",
+   "omits the binomial coefficient",
+   "swaps p and 1 - p"
+  ]
+ },
+ {
+  "id": "st_normal_area",
+  "topic": "2.11",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the upper-tail area is computed from math.erf, independent of scipy.stats.norm.sf, and the plotted curve is a density with unit area"
+  ],
+  "misconceptions": [
+   "uses the lower tail",
+   "doubles the tail",
+   "divides by the variance"
+  ]
+ },
+ {
+  "id": "st_z_test_decision",
+  "topic": "3.7",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the P-value is recomputed from math.erf rather than scipy.stats.norm and every wrong option is checked to round to a different pair of values"
+  ],
+  "misconceptions": [
+   "puts p-hat in the standard error",
+   "uses the wrong number of tails",
+   "reports the complement area"
+  ]
+ },
+ {
+  "id": "st_t_test_stats",
+  "topic": "4.5",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the t tail area is obtained by numerically integrating the t density with scipy.integrate.quad, independent of scipy.stats.t"
+  ],
+  "misconceptions": [
+   "uses the normal distribution",
+   "divides by the square root of n - 1",
+   "uses the wrong number of tails"
+  ]
+ },
+ {
+  "id": "st_two_sample_t",
+  "topic": "4.7",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "scipy.stats.ttest_ind_from_stats confidence_interval reproduces the endpoints and the t critical value is found by inverting the numerically integrated t cdf"
+  ],
+  "misconceptions": [
+   "uses z star",
+   "adds standard errors",
+   "reverses the order of subtraction"
+  ]
+ },
+ {
+  "id": "st_study_conclusion",
+  "topic": "1.13",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a truth table over the two design features is enumerated, exactly one of the four claims is allowed, and the sentences are generated from the same table"
+  ],
+  "misconceptions": [
+   "concludes cause from self-selected groups",
+   "generalizes from volunteers",
+   "refuses a conclusion that the design justifies"
+  ]
+ },
+ {
+  "id": "st_clt_describe",
+  "topic": "2.12",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "4000 simulated samples from a gamma population with the same mean and standard deviation reproduce the stated mean and standard deviation, and the plotted means are checked against them"
+  ],
+  "misconceptions": [
+   "keeps the population shape",
+   "keeps sigma",
+   "divides sigma by n"
+  ]
+ },
+ {
+  "id": "st_chisq_output",
+  "topic": "3.15",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the chi-square statistic is recomputed from the expected counts, scipy.stats.chi2_contingency agrees and the tail area is also obtained by numerically integrating the chi-square density"
+  ],
+  "misconceptions": [
+   "reads association as cause",
+   "treats failing to reject as proof of independence",
+   "limits the conclusion to the sample",
+   "reverses the P-value rule"
+  ]
+ },
+ {
+  "id": "st_t_output_claim",
+  "topic": "4.10",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the Welch statistic, degrees of freedom, P-value (by numerical integration of the t density) and interval are recomputed from the summary statistics, and the interval and P-value must agree on the decision"
+  ],
+  "misconceptions": [
+   "draws the opposite conclusion from the interval",
+   "misstates the comparison of P with alpha",
+   "reverses the meaning of a small P-value"
+  ]
+ },
+ {
+  "id": "st_residual_plot",
+  "topic": "5.4",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "residuals are made exactly orthogonal to x like least-squares residuals and a quadratic fit R squared and the correlation of absolute residuals with x classify the pattern, which must match the intended pattern"
+  ],
+  "misconceptions": [
+   "overlooks the curve",
+   "sees a pattern in random scatter",
+   "judges by size of residuals",
+   "uses residuals adding to zero"
+  ]
+ },
+ {
+  "id": "st_influential_point",
+  "topic": "5.2",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "slope and correlation are recomputed with and without the point by closed-form sums and by numpy polyfit and corrcoef, and the changes must exceed fixed thresholds so the options are distinct"
+  ],
+  "misconceptions": [
+   "gets the correlation change backwards",
+   "gets the slope change backwards",
+   "gets both changes backwards"
+  ]
+ },
+ {
+  "id": "st_confounder",
+  "topic": "1.13",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each scenario is written with exactly one variable linked to both variables and three named non-confounders drawn from a fixed catalog that was checked by hand for uniqueness"
+  ],
+  "misconceptions": [
+   "names the response variable",
+   "names the sample size",
+   "names a variable unrelated to both"
+  ]
+ },
+ {
+  "id": "st_ci_interpretation",
+  "topic": "3.4",
+  "skill": "4.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the interval is recomputed with the z critical value from statistics.NormalDist (independent of scipy.stats.norm) and the large counts condition is verified"
+  ],
+  "misconceptions": [
+   "assigns a probability to the fixed parameter",
+   "describes other samples",
+   "describes the sample instead of the population"
+  ]
+ },
+ {
+  "id": "st_pvalue_interpretation",
+  "topic": "3.6",
+  "skill": "4.F",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the upper-tail area is computed from math.erf and the shaded region and marked value are generated from the same sample proportion and standard error as the P-value"
+  ],
+  "misconceptions": [
+   "reads the P-value as the probability that H0 is true",
+   "reads it as the probability that Ha is true",
+   "uses exactly the observed value instead of at least as extreme"
+  ]
+ },
+ {
+  "id": "st_slope_interp",
+  "topic": "5.5",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the least-squares slope is recomputed from the closed-form sums of deviations and compared with numpy polyfit; the coefficient shown in the output is the rounded fitted value"
+  ],
+  "misconceptions": [
+   "treats the prediction as exact",
+   "reverses x and y",
+   "confuses the slope with the intercept"
+  ]
+ }
+]
