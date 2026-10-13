@@ -1,11 +1,11 @@
 # AP 그림 렌더링 게이트 결과
 
-생성: 2026-10-12T22:54:32.841Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json (1079행)
+생성: 2026-10-13T02:03:21.294Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1187행)
 
 ## 전체
 
-- 전체 1079행: 통과 683 / 실패 1 / 해당 없음(그림·표 없음) 395
-- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 607행: 통과 333 / 실패 0 / 해당 없음 274
+- 전체 1187행: 통과 701 / 실패 1 / 해당 없음(그림·표 없음) 485
+- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 703행: 통과 350 / 실패 0 / 해당 없음 353
 
 ## 유형별(렌더 유형)
 
@@ -15,33 +15,33 @@
 | ap_diagram:ribosome | 1 | 1 | 0 | 0 |
 | ap_diagram:strand_pair | 1 | 1 | 0 | 0 |
 | ap_graph:bio_line | 8 | 8 | 0 | 0 |
-| ap_graph:calc_function_or_derivative | 107 | 107 | 0 | 0 |
-| ap_graph:calc_multi_curve | 35 | 34 | 1 | 0 |
+| ap_graph:calc_function_or_derivative | 118 | 118 | 0 | 0 |
+| ap_graph:calc_multi_curve | 37 | 36 | 1 | 0 |
 | ap_graph:calc_piecewise_limits | 7 | 7 | 0 | 0 |
 | ap_graph:calc_region_between_curves | 24 | 24 | 0 | 0 |
 | ap_graph:econ_curves | 25 | 25 | 0 | 0 |
-| ap_table | 409 | 409 | 0 | 0 |
-| ap_table:given_info | 29 | 29 | 0 | 0 |
+| ap_table | 412 | 412 | 0 | 0 |
+| ap_table:given_info | 31 | 31 | 0 | 0 |
 | ap_table:multi_panel | 29 | 29 | 0 | 0 |
 | ap_table:payoff_matrix | 8 | 8 | 0 | 0 |
-| none | 304 | 0 | 0 | 304 |
+| none | 380 | 0 | 0 | 380 |
 | none(diagram_text_only) | 1 | 0 | 0 | 1 |
-| text | 90 | 0 | 0 | 90 |
+| text | 104 | 0 | 0 | 104 |
 
 ## 과목별
 
 | 과목 | 전체 | 통과 | 실패 | 해당 없음 |
 |---|---:|---:|---:|---:|
-| ap_calculus_ab | 571 | 294 | 1 | 276 |
+| ap_calculus_ab | 679 | 312 | 1 | 366 |
 | ap_biology | 200 | 199 | 0 | 1 |
 | ap_microeconomics | 172 | 162 | 0 | 10 |
 | ap_calculus_bc | 136 | 28 | 0 | 108 |
 
 ## 그림 필요 분류(그림이 있어야 풀리는가)
 
-- required(그림·표가 있어야 풀림): 632
+- required(그림·표가 있어야 풀림): 650
 - supporting(보조 자료, 본문에도 정보 있음): 52
-- text_only(본문만으로 충분): 395
+- text_only(본문만으로 충분): 485
 
 ## 실패 사유 코드
 

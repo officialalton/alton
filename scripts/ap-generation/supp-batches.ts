@@ -16,6 +16,12 @@ export const SUPP_BATCHES: { run: string; file: string }[] = [
   // 2026-10-12 예비 보충 2차(docs/ap/reserve-topup-2.md)
   { run: "supp-t2a-ab-final", file: "supp-t2a-items.json" },
   { run: "supp-t2b-ab-final", file: "supp-t2b-items.json" },
+  // 2026-10-12 예비 3차(docs/ap/reserve-r3-report.md)
+  { run: "supp-r3a-ab-final", file: "supp-r3a-items.json" },
+  { run: "supp-r3b-ab-final", file: "supp-r3b-items.json" },
+  { run: "supp-r3b2-ab-final", file: "supp-r3b2-items.json" },
+  { run: "supp-r3c-ab-final", file: "supp-r3c-items.json" },
+  { run: "supp-r3c2-ab-final", file: "supp-r3c2-items.json" },
 ];
 
 /** 디스크에 실제로 있는 보강 배치 파일 이름(확장자 없음). */

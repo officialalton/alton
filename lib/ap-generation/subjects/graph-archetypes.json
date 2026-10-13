@@ -16,6 +16,88 @@
   "bc": false
  },
  {
+  "id": "c_abs_extremum_cubic",
+  "topic": "5.5",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "maximum or minimum of the lambdified function over a 20001-point grid (independent of the candidate test)"
+  ],
+  "misconceptions": [
+   "gives the interior relative extreme value",
+   "gives the other absolute extreme",
+   "reports the x-value",
+   "gives the other endpoint value"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_abs_max_candidates_calc",
+  "topic": "5.5",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "maximum of f over a 6001-point grid on [0, 6] compared with the candidate values (independent of the candidates test)"
+  ],
+  "misconceptions": [
+   "reports a smaller candidate value",
+   "reports the x-coordinate",
+   "evaluates f at x = a"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_accel_at_rest_calc",
+  "topic": "4.2",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "second central difference (step 1e-4) of the position at the root (independent of the symbolic derivatives)"
+  ],
+  "misconceptions": [
+   "reports the time",
+   "reports the position",
+   "wrong sign in the second derivative",
+   "uses cosine in the second derivative"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_accum_abs_max_x_calc",
+  "topic": "6.5",
+  "skill": "3.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "composite Simpson rule (20001 nodes) for F at the candidate point (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "picks the first zero of the integrand",
+   "picks the right endpoint without comparing",
+   "picks the wrong candidate"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_accum_increasing_interval_calc",
+  "topic": "6.5",
+  "skill": "3.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sign of the integrand sampled inside each of the three intervals (independent of the root-finding)"
+  ],
+  "misconceptions": [
+   "uses an interval where the integrand is negative",
+   "picks the interval after the second zero",
+   "starts at 0"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_accum_interval_calc",
   "topic": "6.5",
   "skill": "3.E",
@@ -49,6 +131,24 @@
   "bc": false
  },
  {
+  "id": "c_accum_two_limits",
+  "topic": "6.4",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-5) of F(x) computed by numerical quadrature (independent of the Fundamental Theorem)"
+  ],
+  "misconceptions": [
+   "drops the chain factor on the upper limit",
+   "drops both chain factors",
+   "ignores the lower limit",
+   "adds the lower-limit term",
+   "evaluates f at x"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_alt_test_choice",
   "topic": "10.7",
   "skill": "3.D",
@@ -66,6 +166,41 @@
   "bc": true
  },
  {
+  "id": "c_antideriv_power_rules",
+  "topic": "6.8",
+  "skill": "1.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "derivative of each option checked symbolically and by a central difference at x = 1.7 (independent of the term-by-term integration)"
+  ],
+  "misconceptions": [
+   "differentiates instead of integrating",
+   "adds 1 to each exponent without dividing",
+   "uses the ln rule for x to the -2",
+   "drops the minus sign from dividing by -1",
+   "integrates the constant as itself"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_arc_trig_deriv_value",
+  "topic": "3.4",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the lambdified function (independent of the inverse-trig formula)"
+  ],
+  "misconceptions": [
+   "omits the inner derivative u'",
+   "no square root",
+   "forgets to square u",
+   "uses arccos"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_area_between_calc",
   "topic": "8.4",
   "skill": "1.D",
@@ -79,6 +214,74 @@
    "reverses the order",
    "area under the curve only",
    "area under the line only"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_area_between_in_y",
+  "topic": "8.5",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of |line - y^2| over the interval between the roots (independent of the sign analysis and exact antiderivative)"
+  ],
+  "misconceptions": [
+   "leaves out part of the region",
+   "uses the x-values of the intersection points as limits for y",
+   "adds the functions",
+   "ignores the parabola"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_area_crossing_setup",
+  "topic": "8.4",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of |kx - x^3| over the full interval with a break point at 0 (independent of the split setup); each option's integral also evaluated exactly"
+  ],
+  "misconceptions": [
+   "uses one integral so the pieces cancel",
+   "includes only one of the two regions",
+   "subtracts in the wrong order",
+   "uses the y-value of the intersection as a limit"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_area_exp_between",
+  "topic": "8.4",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of e^x - e^-x on [0, ln b] (independent of the antiderivative)"
+  ],
+  "misconceptions": [
+   "forgets the minus sign when integrating e^-x",
+   "integrates only the upper curve",
+   "uses b instead of ln b",
+   "omits the lower limit"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_area_wrt_y_calc",
+  "topic": "8.5",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "composite Simpson rule on (right - left) with the limit from Brent's method (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "subtracts in the wrong order",
+   "uses only the right curve",
+   "uses the x-coordinate as a y-limit",
+   "uses y = 4 as the upper limit"
   ],
   "bc": false
  },
@@ -219,6 +422,56 @@
   "bc": true
  },
  {
+  "id": "c_box_min_surface",
+  "topic": "5.11",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "grid minimum of $S(x)=x^{2}+4V/x$ over a 60001-point grid (independent of the derivative)"
+  ],
+  "misconceptions": [
+   "reports the base side",
+   "reports the height",
+   "omits the base",
+   "adds a top"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_chain_exp_cos_point",
+  "topic": "3.1",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the lambdified function at the numeric point (independent of the symbolic chain rule)"
+  ],
+  "misconceptions": [
+   "forgets the factor k from the inner derivative",
+   "drops the minus sign of the cosine derivative",
+   "drops the exponential factor",
+   "evaluates cosine where sine belongs"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_choose_differentiable_at_point",
+  "topic": "2.4",
+  "skill": "2.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical one-sided difference quotients (step 1e-7) of all four functions at the point"
+  ],
+  "misconceptions": [
+   "treats a function with a corner (absolute value) as differentiable",
+   "treats a cusp as differentiable because the graph is continuous",
+   "treats a vertical tangent as having a derivative"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_closest_point_calc",
   "topic": "5.11",
   "skill": "1.D",
@@ -253,6 +506,105 @@
   "bc": true
  },
  {
+  "id": "c_complete_square_arctan",
+  "topic": "6.10",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of the integrand (independent of the completed-square antiderivative)"
+  ],
+  "misconceptions": [
+   "forgets 1 over a",
+   "uses the natural logarithm rule",
+   "forgets to divide u by a inside arctan",
+   "uses the factor 1 over a twice"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_concave_xnlnx",
+  "topic": "5.6",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sign change of a second central difference found with brentq (independent of the symbolic second derivative)"
+  ],
+  "misconceptions": [
+   "uses the opposite sign in the logarithm inequality",
+   "drops terms of f''",
+   "finds where f is increasing",
+   "gives the concave down interval"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_conditions_at_point",
+  "topic": "5.9",
+  "skill": "2.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference of $f'$ at the point to check the sign of $f''$ (independent of the symbolic derivative)"
+  ],
+  "misconceptions": [
+   "reverses the concavity",
+   "reverses the direction",
+   "reverses both"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_cont_three_pieces_two_unknowns",
+  "topic": "1.12",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "substitute the constants back and compare the piece values at x = 1 and x = 3 numerically"
+  ],
+  "misconceptions": [
+   "At $x=3$ evaluates the middle piece as $b\\cdot 3$ instead of $b\\cdot 3^{2}$, getting $b=12$ and then $a=9$, so $a+b=21$.",
+   "At $x=1$ writes $a=b+3$ instead of $a=b-3$, so $a+b=11$.",
+   "Finds the correct $a=1$ but reports it instead of $a+b$.",
+   "At $x=3$ matches $9b$ with $3$ only, forgetting the constant $33$ of the right piece, so $b=\\frac{1}{3}$, $a=b-3$ and $a+b=- \\frac{7}{3}$."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_count_corners_abs_polynomial",
+  "topic": "2.4",
+  "skill": "2.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "one-sided difference quotients of |P| (step 1e-6) at each zero"
+  ],
+  "misconceptions": [
+   "Counts both zeros, $x=-4$ and $x=2$, even though the squared factor $(x - 2)^{2}$ makes the graph touch the axis smoothly at $x=2$.",
+   "Counts the zeros with multiplicity, $1+2=3$.",
+   "Treats the absolute value as harmless and says the function is differentiable everywhere, because the polynomial inside it is differentiable."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_count_vertical_asymptotes",
+  "topic": "1.14",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of |f| just left and right of each denominator zero (independent of the factor cancellation)"
+  ],
+  "misconceptions": [
+   "Counts all three zeros of the denominator, $x=1$, $x=5$ and $x=-5$, including $x=1$ where the common factor $x - 1$ cancels and leaves a hole.",
+   "Counts every value that makes the numerator or the denominator zero: $x=1$, $x=-1$, $x=5$ and $x=-5$.",
+   "Counts the $x$-intercept at $x=-1$, the only zero of the numerator that is not cancelled, instead of the vertical asymptotes."
+  ],
+  "bc": false
+ },
+ {
   "id": "c_critical_count_calc",
   "topic": "5.2",
   "skill": "1.E",
@@ -266,6 +618,23 @@
    "counts zeros of f'' instead of f'",
    "misses the last solution of f' = 0",
    "counts x = 0 or an endpoint of the open interval"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_critical_points_cusp",
+  "topic": "5.2",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "root of the numerical derivative on a bracket and the size of the slope near $x=0$ (independent of the symbolic derivative)"
+  ],
+  "misconceptions": [
+   "forgets x=0",
+   "uses zeros of f",
+   "adds a zero of f",
+   "forgets f'=0"
   ],
   "bc": false
  },
@@ -287,6 +656,57 @@
   "bc": false
  },
  {
+  "id": "c_decay_two_points_calc",
+  "topic": "7.8",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "Runge-Kutta numerical integration of dy/dt = -ky with k from the two data points (independent of the exponential solution)"
+  ],
+  "misconceptions": [
+   "extends the loss linearly",
+   "applies the ratio per hour",
+   "grows instead of decays",
+   "starts from the wrong amount"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_decreasing_rational",
+  "topic": "5.3",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sign of a central-difference derivative at a point in each of the four intervals (independent of the factored derivative)"
+  ],
+  "misconceptions": [
+   "merges across the excluded point",
+   "gives the increasing intervals",
+   "keeps only the left piece",
+   "keeps only the right piece"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_derivative_sec_csc_cot_exact",
+  "topic": "2.10",
+  "skill": "1.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the lambdified function at the angle"
+  ],
+  "misconceptions": [
+   "Uses the derivative formula for $\\tan x$, namely $\\dfrac{d}{dx}\\left(\\tan x\\right)=\\sec^{2}x$, instead of the one for $\\csc x$: $2$.",
+   "Uses the derivative formula for $\\cot x$, namely $\\dfrac{d}{dx}\\left(\\cot x\\right)=-\\csc^{2}x$, instead of the one for $\\csc x$: $-2$.",
+   "Uses the derivative formula for $\\sec x$, namely $\\dfrac{d}{dx}\\left(\\sec x\\right)=\\sec x\\tan x$, instead of the one for $\\csc x$: $\\sqrt{2}$.",
+   "Uses the correct formula $-\\csc x\\cot x$ but with the opposite sign: $\\sqrt{2}$."
+  ],
+  "bc": false
+ },
+ {
   "id": "c_disc_volume_calc",
   "topic": "8.9",
   "skill": "1.D",
@@ -304,6 +724,40 @@
   "bc": false
  },
  {
+  "id": "c_distance_minus_displacement",
+  "topic": "8.2",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of |v| minus scipy quad of v over [0, T] with break points at the zeros (independent of the piece-by-piece exact integration)"
+  ],
+  "misconceptions": [
+   "reports the displacement",
+   "reports the total distance",
+   "reports only the negative-velocity distance",
+   "reports the signed integral over the negative part"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_equilateral_cross_section_calc",
+  "topic": "8.8",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "composite Simpson rule (20001 nodes) on the squared side (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "uses the semicircle area formula",
+   "uses a square",
+   "does not square the side",
+   "forgets the factor 1/2"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_fastest_increase_calc",
   "topic": "5.5",
   "skill": "3.E",
@@ -317,6 +771,22 @@
    "reports the other root of M''",
    "uses the vertex of a factor",
    "reports the rate, not the time"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_first_deriv_test_trig",
+  "topic": "5.4",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sign changes of $f'$ on a 40000-point grid of $(0,2\\pi)$ (independent of solving $f'=0$)"
+  ],
+  "misconceptions": [
+   "gives the relative minimum",
+   "gives a zero of f''",
+   "uses a wrong angle"
   ],
   "bc": false
  },
@@ -372,6 +842,23 @@
   "bc": false
  },
  {
+  "id": "c_ftc_two_limits_calc",
+  "topic": "6.4",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-5) of G computed by numerical quadrature (independent of the Fundamental Theorem)"
+  ],
+  "misconceptions": [
+   "forgets the factor 2",
+   "adds the lower-limit term",
+   "ignores the lower limit",
+   "evaluates G itself"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_geometric_terms_needed_calc",
   "topic": "10.2",
   "skill": "1.E",
@@ -387,6 +874,56 @@
    "one term too many"
   ],
   "bc": true
+ },
+ {
+  "id": "c_horizontal_asymptotes_exp_ratio",
+  "topic": "1.15",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct evaluation of f at x = 40 and x = -40 (independent of the dominant-term argument)"
+  ],
+  "misconceptions": [
+   "Finds only the asymptote as $x\\to\\infty$, $y=\\frac{7}{4}$, and forgets the one as $x\\to-\\infty$.",
+   "Finds only the asymptote as $x\\to-\\infty$, $y=\\frac{3}{2}$, and forgets the one as $x\\to\\infty$.",
+   "Subtracts the two asymptote values, $\\frac{7}{4}$ and $\\frac{3}{2}$, instead of adding them.",
+   "Substitutes $x=0$, where $e^{0}=1$, and reports $f(0)=\\dfrac{7+(6)}{4+4}=\\frac{13}{8}$, which is not an asymptote value."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_horizontal_tangent_poly_exp",
+  "topic": "2.8",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference of the lambdified f at the key x (zero slope) and at the other root"
+  ],
+  "misconceptions": [
+   "Differentiates only the polynomial factor and solves $2x+(-1)=0$, ignoring the product rule term from $e^{x}$: $x=\\frac{1}{2}$.",
+   "Factors $x^{2}+(1)x+(-6)$ with sign errors, taking the roots as the opposites of the true roots; the positive one is $x=3$.",
+   "Sets $f(x)=0$, that is $x^{2}+(-1)x+(-5)=0$, instead of $f'(x)=0$; its positive solution is $\\frac{1}{2} + \\frac{\\sqrt{21}}{2}$."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_implicit_cubic_horizontal_x",
+  "topic": "3.2",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "grid scan of the upper branch $Y(x)=\\sqrt{x^{3}-3ax^{2}+k}$ for interior local extrema (independent of the implicit derivative)"
+  ],
+  "misconceptions": [
+   "keeps the root with no point on the curve",
+   "uses the place where y = 0",
+   "drops an exponent factor when differentiating",
+   "drops the factor 3 when differentiating the cubic term"
+  ],
+  "bc": false
  },
  {
   "id": "c_implicit_horizontal_tangent_calc",
@@ -440,6 +977,23 @@
   "bc": false
  },
  {
+  "id": "c_implicit_tangent_line_eq",
+  "topic": "3.2",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "solve the curve numerically for $y(x)$ near the point and take a central difference (independent of implicit differentiation)"
+  ],
+  "misconceptions": [
+   "wrong sign of the slope",
+   "reciprocal of the slope",
+   "swaps the coordinates of the point",
+   "writes y = m x + q"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_increasing_interval_calc",
   "topic": "5.3",
   "skill": "3.E",
@@ -474,6 +1028,23 @@
   "bc": false
  },
  {
+  "id": "c_integral_abs_poly",
+  "topic": "6.7",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of abs(x^2 - kx) with the break point at x = k (independent of the manual split)"
+  ],
+  "misconceptions": [
+   "integrates without the absolute value",
+   "takes the absolute value of the net integral",
+   "keeps only the first piece",
+   "keeps only the second piece"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_integral_equation_solve_calc",
   "topic": "6.7",
   "skill": "1.E",
@@ -487,6 +1058,22 @@
    "treats the integrand as 1",
    "uses -k to k",
    "divides the total area by the target"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_integral_meaning_calc",
+  "topic": "8.3",
+  "skill": "3.F",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "composite Simpson rule (20001 nodes) for the integral and the average (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "reads the integral as a rate",
+   "gives the average rate with the total meaning",
+   "forgets the initial amount"
   ],
   "bc": false
  },
@@ -525,6 +1112,39 @@
   "bc": true
  },
  {
+  "id": "c_inverse_deriv_formula",
+  "topic": "3.3",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "root-finding for $f(z)=b\\pm h$ and a central difference of the numerical inverse (independent of the formula $1/f'$)"
+  ],
+  "misconceptions": [
+   "evaluates f' at b",
+   "uses f' without reciprocal",
+   "squares the derivative in the denominator",
+   "reciprocal of f(a)"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_ivt_root_interval_polynomial",
+  "topic": "1.16",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy.roots of the cubic: exactly one real root lies in the key interval"
+  ],
+  "misconceptions": [
+   "endpoint values are both positive, so the theorem gives no zero",
+   "endpoint values are both negative, so the theorem gives no zero",
+   "another interval with endpoint values of the same sign"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_lagrange_min_degree_calc",
   "topic": "10.12",
   "skill": "1.E",
@@ -542,6 +1162,91 @@
   "bc": true
  },
  {
+  "id": "c_lhopital_inf_inf",
+  "topic": "4.7",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct evaluation of the quotient at $x=40$ (independent of L’Hospital’s Rule)"
+  ],
+  "misconceptions": [
+   "inverts the ratio",
+   "ignores the coefficients and gets 1",
+   "claims infinity",
+   "drops the denominator coefficient q"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_lhopital_twice_zero",
+  "topic": "4.7",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct evaluation of the quotient at $x=10^{-3}$ (independent of L’Hospital’s Rule)"
+  ],
+  "misconceptions": [
+   "loses a factor p",
+   "treats (2x)' as 1",
+   "substitutes into the numerator only",
+   "moves the 2 to the numerator"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_lim_inf_difference_of_radicals",
+  "topic": "1.15",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct evaluation at x = 10^9 with 40-digit arithmetic (independent of the conjugate algebra)"
+  ],
+  "misconceptions": [
+   "Rationalizes correctly but forgets that the denominator tends to $2x$, so it reports the coefficient difference $4$.",
+   "Treats $\\infty-\\infty$ as $0$ because both radicals look like $x$.",
+   "Adds the $x$-coefficients instead of subtracting them, giving $\\dfrac{7+(3)}{2}=5$.",
+   "Uses the constant terms instead of the $x$-coefficients: $\\dfrac{-4-(4)}{2}=-4$."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_lim_inf_equal_degree",
+  "topic": "1.15",
+  "skill": "1.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct evaluation of the rational expression at x = 10^7 (independent of the leading coefficient rule)"
+  ],
+  "misconceptions": [
+   "Divides the constant terms, $6$ by $-5$, which is the value of the expression at $x=0$, not its end behavior.",
+   "Compares the coefficients of the $x$ terms, $-2$ and $-4$, instead of the leading coefficients.",
+   "Adds all the coefficients in the numerator and in the denominator, which evaluates the expression at $x=1$ instead of taking $x\\to\\infty$: $10$ over $-6$.",
+   "Reports the leading coefficient $6$ of the numerator and ignores the leading coefficient $3$ of the denominator."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_lim_neg_inf_radical",
+  "topic": "1.15",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct evaluation at x = -10^8 with 30-digit arithmetic (independent of the |x| algebra)"
+  ],
+  "misconceptions": [
+   "Uses $\\sqrt{x^{2}}=x$, but for $x<0$ we have $\\sqrt{x^{2}}=|x|=-x$, so the sign is lost and the result is $\\frac{5}{3}$.",
+   "Divides by $9$ instead of by $\\sqrt{9}=3$, forgetting to take the square root of the coefficient under the radical.",
+   "Treats $\\sqrt{9x^{2}+3}$ as $|x|$, ignoring the factor $\\sqrt{9}=3$, which gives $-5$.",
+   "Compares the power $1$ in the numerator with the power $2$ under the radical as if the denominator had degree $2$, which gives $0$."
+  ],
+  "bc": false
+ },
+ {
   "id": "c_limit_def_derivative_calc",
   "topic": "2.2",
   "skill": "1.E",
@@ -555,6 +1260,39 @@
    "reports f(a)/a",
    "differentiates only one factor",
    "reports f''(a)"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_limit_is_derivative_exact",
+  "topic": "2.2",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of g at the point"
+  ],
+  "misconceptions": [
+   "Reports the function value $g(9)=3$, not the derivative.",
+   "Differentiates with the wrong sign, giving $- \\frac{1}{6}$.",
+   "Differentiates twice, reporting $g''(9)=- \\frac{1}{108}$."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_limit_laws_from_given_limits",
+  "topic": "1.6",
+  "skill": "1.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "evaluate the expression for the concrete linear functions f(x) = p + (x - c) and g(x) = q - 2(x - c) at x = c + 1e-8"
+  ],
+  "misconceptions": [
+   "Replaces $\\lim f(x)^{2}$ by $2\\cdot 2=4$ instead of $(2)^{2}=4$: $-10$.",
+   "Adds $k\\lim g(x)$ instead of subtracting it: $\\dfrac{4-16}{-2}=6$.",
+   "Takes the limit of the numerator only, $4-4(-4)=20$, and forgets to divide by $\\lim(f(x)+g(x))=-2$.",
+   "Uses $\\lim(f(x)-g(x))=6$ in the denominator instead of $\\lim(f(x)+g(x))=-2$: $\\frac{10}{3}$."
   ],
   "bc": false
  },
@@ -576,6 +1314,23 @@
   "bc": false
  },
  {
+  "id": "c_limit_two_point_difference_quotient",
+  "topic": "2.2",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "linear model f(x) = d x evaluated directly in the difference quotient (independent of the splitting argument)"
+  ],
+  "misconceptions": [
+   "Counts only the term $f(5+3h)$ and treats the second as a constant, giving $3f'(5)=-3$.",
+   "Subtracts the factors, $(3-1)f'(5)=-2$, instead of adding them (the second term has $-1h$ inside and a minus in front).",
+   "Treats the limit as $f'(5)=-1$, ignoring the factors $3$ and $1$ multiplying $h$.",
+   "Multiplies the factors, $3\\cdot 1\\cdot f'(5)=-3$."
+  ],
+  "bc": false
+ },
+ {
   "id": "c_linear_approx_overunder_calc",
   "topic": "4.6",
   "skill": "1.F",
@@ -588,6 +1343,73 @@
    "wrong over/under claim",
    "ignores the slope",
    "wrong step size"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_linearization_error_calc",
+  "topic": "4.6",
+  "skill": "1.F",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "actual value recomputed with 30-digit sympy evaluation and compared with the floating-point value (independent of the tangent line formula)"
+  ],
+  "misconceptions": [
+   "reports the approximation",
+   "reports the actual value",
+   "reports f(a+dx) - f(a)",
+   "reports f'(a) dx"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_log_trig_deriv_expr",
+  "topic": "3.5",
+  "skill": "1.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference of the lambdified function compared with the key expression at a numeric point (independent of the option expressions)"
+  ],
+  "misconceptions": [
+   "uses 1/u only",
+   "multiplies u' by u",
+   "flips the sign of u'",
+   "divides by u squared"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_longdiv_integral",
+  "topic": "6.10",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of the original quotient (independent of the long division)"
+  ],
+  "misconceptions": [
+   "drops the remainder term",
+   "forgets the coefficient of the logarithm",
+   "forgets the lower limit",
+   "divides the integral of the numerator by the integral of the denominator"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_marginal_cost_meaning_calc",
+  "topic": "4.3",
+  "skill": "3.F",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-5) of C and the average cost C(q0)/q0 computed separately (independent of the product rule)"
+  ],
+  "misconceptions": [
+   "right value, average cost meaning",
+   "average cost value with marginal meaning",
+   "right value, total cost meaning"
   ],
   "bc": false
  },
@@ -626,6 +1448,23 @@
   "bc": false
  },
  {
+  "id": "c_motion_first_reversal_calc",
+  "topic": "4.2",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "bisection (separate implementation) on v and a sign check on both sides of the root (independent of Brent's method)"
+  ],
+  "misconceptions": [
+   "solves v' = 0",
+   "drops the factor t",
+   "sets cos t = 0",
+   "replaces cos t by 1"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_motion_turn_calc",
   "topic": "4.2",
   "skill": "1.E",
@@ -643,6 +1482,57 @@
   "bc": false
  },
  {
+  "id": "c_mvt_hypotheses",
+  "topic": "5.1",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical difference quotients and blow-up tests at the suspicious point of each choice (independent of the catalog flags)"
+  ],
+  "misconceptions": [
+   "corner inside the interval",
+   "vertical asymptote inside",
+   "vertical tangent inside",
+   "tan x has an asymptote"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_mvt_integral_value",
+  "topic": "8.1",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "root of f(c) minus the numerical average (scipy quad / Brent) (independent of the exact integral)"
+  ],
+  "misconceptions": [
+   "reports the average value instead of c",
+   "takes the midpoint",
+   "uses the average of the endpoint values",
+   "forgets to divide by the interval length"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_mvt_must_be_true",
+  "topic": "5.1",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "test the statements on a linear function and on a function with an added bump, on a 4000-point grid (independent of the theorem)"
+  ],
+  "misconceptions": [
+   "claims the derivative equals the average rate everywhere",
+   "equates f(c) with the average rate",
+   "claims a zero derivative",
+   "negative of the average rate"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_normal_line_calc",
   "topic": "2.7",
   "skill": "1.D",
@@ -656,6 +1546,40 @@
    "uses the tangent slope f'(a) for the normal line",
    "uses -f'(a) instead of the negative reciprocal",
    "uses 1/f'(a) without the negative sign"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_normal_slope_power_ln",
+  "topic": "2.7",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the lambdified function at x = e, then the negative reciprocal"
+  ],
+  "misconceptions": [
+   "Reports the slope of the tangent line, $f'(e)=4 e^{2}$, instead of the slope of the normal line.",
+   "Uses the opposite $-f'(e)=- 4 e^{2}$ instead of the negative reciprocal.",
+   "Differentiates only $x^{3}$ and multiplies by $\\ln x$, forgetting the term from $\\ln x$: $f'(e)=3 e^{2}$, so the normal slope is $- \\frac{1}{3 e^{2}}$.",
+   "Differentiates only $\\ln x$ in the product, giving $f'(e)=e^{3}\\cdot\\dfrac{1}{e}=e^{2}$ and normal slope $- \\frac{1}{e^{2}}$."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_one_sided_abs_quotient",
+  "topic": "1.3",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of the quotient at x = a minus or plus 1e-8 on the stated side (independent of the algebra)"
+  ],
+  "misconceptions": [
+   "Uses $|x-5|=x-5$ on the wrong side of $x=5$, so the sign of the answer is reversed: $- \\frac{1}{10}$.",
+   "Substitutes into the numerator only, where $|x-5|\\to 0$, and reports $0$ without cancelling the zero in the denominator.",
+   "Cancels correctly but replaces $x+5$ by $5$ instead of $10$, giving $\\frac{1}{5}$.",
+   "Cancels $|x-5|$ against $x-5$ to get only the sign $1$ and drops the factor $x+5$ of the denominator entirely, giving $1$."
   ],
   "bc": false
  },
@@ -694,6 +1618,74 @@
   "bc": true
  },
  {
+  "id": "c_piecewise_differentiable_two_constants",
+  "topic": "2.4",
+  "skill": "3.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "substitute the constants back and compare the values and the left and right difference quotients numerically at the break point"
+  ],
+  "misconceptions": [
+   "Differentiates $ax^{2}$ as $2a$ (dropping $x$), so the slope condition becomes $2a+b=1$; with continuity this gives $a+b=7$.",
+   "Sets the left slope $2a(3)+b$ equal to the value $-15$ of the right piece at $x=3$ instead of its slope $1$, which gives $a+b=\\frac{5}{3}$.",
+   "Writes the value of the right piece at $x=3$ as $3-(-18)$, with the wrong sign on the constant, which gives $a+b=11$.",
+   "Finds $a=2$ correctly but reports $a$ instead of $a+b$."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_position_from_velocity",
+  "topic": "8.2",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of the velocity over [0, T] added to the initial position (independent of the antiderivative evaluation)"
+  ],
+  "misconceptions": [
+   "adds the total distance",
+   "forgets the initial position",
+   "adds the velocity at the final time",
+   "subtracts the displacement"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_product_power_times_unknown_function",
+  "topic": "2.8",
+  "skill": "1.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "model g(x) = g(a) + g'(a)(x - a) and a central difference of x^n g(x) at a (independent of the product rule formula)"
+  ],
+  "misconceptions": [
+   "Multiplies the derivatives, $(x^{3})'\\cdot g'(x)$ at $x=2$: $12\\cdot(-3)=-36$.",
+   "Keeps only $x^{3}g'(x)$, which is $8\\cdot(-3)=-24$, and drops the term from differentiating the power.",
+   "Keeps only $(x^{3})'g(x)$, which is $12\\cdot(4)=48$, and drops the term from differentiating $g$.",
+   "Attaches the derivatives to the wrong factors: $x^{3}g(x)+(x^{3})'g'(x)$ at $x=2$ equals $-4$."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_product_sqrt_chain_value",
+  "topic": "3.5",
+  "skill": "1.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the lambdified function (independent of the symbolic rules)"
+  ],
+  "misconceptions": [
+   "multiplies the derivatives",
+   "forgets 2x",
+   "drops a product-rule term",
+   "drops the 1/2"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_quotient_deriv_calc",
   "topic": "2.9",
   "skill": "1.E",
@@ -707,6 +1699,23 @@
    "adds numerator terms",
    "does not square the denominator",
    "reverses the numerator"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_quotient_rule_trig_exp_value",
+  "topic": "2.9",
+  "skill": "1.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the lambdified quotient at the evaluation point"
+  ],
+  "misconceptions": [
+   "Divides the derivatives, $\\dfrac{N'}{D'}$ with $N=\\cos{\\left(x \\right)}$ and $D=x^{2}$, instead of using the quotient rule: $0$.",
+   "Reverses the numerator of the quotient rule, using $\\dfrac{ND'-N'D}{D^{2}}$ and so reversing the sign: $- \\frac{2}{\\pi^{3}}$.",
+   "Uses the correct numerator but divides by $D$ instead of $D^{2}$: $\\frac{2}{\\pi}$.",
+   "Adds the two products in the numerator, $\\dfrac{N'D+ND'}{D^{2}}$, which is the product rule rather than the quotient rule: $- \\frac{2}{\\pi^{3}}$."
   ],
   "bc": false
  },
@@ -762,6 +1771,23 @@
   "bc": false
  },
  {
+  "id": "c_related_rates_cylinder_calc",
+  "topic": "4.5",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of V(t) with r(t) and h(t) linear in t (independent of implicit differentiation)"
+  ],
+  "misconceptions": [
+   "omits the term from the changing height",
+   "omits the term from the changing radius",
+   "treats the decreasing height as increasing",
+   "differentiates r squared as r"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_related_rates_distance_calc",
   "topic": "4.5",
   "skill": "1.E",
@@ -775,6 +1801,107 @@
    "divides by the altitude H instead of the distance s",
    "inverts the ratio and uses s/x instead of x/s",
    "uses the altitude H instead of x in the numerator"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_related_rates_ladder",
+  "topic": "4.5",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical derivative of $y(t)=\\sqrt{L^{2}-(x_0+vt)^{2}}$ (independent of implicit differentiation)"
+  ],
+  "misconceptions": [
+   "reports the positive speed",
+   "inverts x and y",
+   "uses the ladder length",
+   "assumes equal rates"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_related_rates_shadow",
+  "topic": "4.5",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "coordinate geometry: the line through the lamp top and the person's head meets the ground at the shadow tip; numerical time derivative (independent of the similar-triangle algebra)"
+  ],
+  "misconceptions": [
+   "gives the speed of the tip",
+   "wrong similar triangles",
+   "assumes the walking speed",
+   "inverts the ratio"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_related_rates_shadow_calc",
+  "topic": "4.5",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the ground intercept of the line from the lamp top through the head, differentiated numerically with respect to the person's position (independent of the proportion for s)"
+  ],
+  "misconceptions": [
+   "finds the rate of the length of the shadow",
+   "uses the walking speed",
+   "inverts the ratio",
+   "uses the reciprocal factor"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_relative_min_justify_calc",
+  "topic": "5.4",
+  "skill": "3.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "signs of f' just left and right of the root and the sign of f'' evaluated numerically (independent of the argument)"
+  ],
+  "misconceptions": [
+   "f' = 0 alone",
+   "f'' < 0 for a minimum",
+   "positive to negative"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_removable_value_power_ratio",
+  "topic": "1.13",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical average of f(a - 1e-6) and f(a + 1e-6) (independent of factoring)"
+  ],
+  "misconceptions": [
+   "Substitutes $x=3$ and reads the $\\dfrac{0}{0}$ form as $0$.",
+   "Uses only the ratio of the exponents $4$ and $3$, forgetting the factor $3^{1}=3$ that comes from the powers of $x$ at $x=3$: $\\frac{4}{3}$.",
+   "Keeps the factor $3^{1}=3$ but drops the exponent ratio $\\dfrac{4}{3}$.",
+   "Inverts the exponent ratio, using $\\dfrac{3}{4}\\cdot 3^{-1}=\\frac{1}{4}$."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_rewrite_then_differentiate_root_denominator",
+  "topic": "2.5",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the lambdified original quotient"
+  ],
+  "misconceptions": [
+   "Divides the derivative of the numerator by the derivative of the denominator, $\\dfrac{N'}{(\\sqrt{x})'}$, instead of differentiating the simplified expression: $1434$.",
+   "Differentiates only the numerator and keeps the denominator $\\sqrt{x}$ unchanged: $\\frac{239}{3}$.",
+   "Treats division by $\\sqrt{x}$ as if it added $\\frac{1}{2}$ to each exponent instead of subtracting it, and differentiates the result: $\\frac{1665}{2}$.",
+   "Reports the function value $f(9)=231$ instead of the derivative."
   ],
   "bc": false
  },
@@ -796,6 +1923,40 @@
   "bc": false
  },
  {
+  "id": "c_roc_meaning_polynomial",
+  "topic": "4.1",
+  "skill": "3.F",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-4) of the quadratic model at $t_0$ (independent of the power rule)"
+  ],
+  "misconceptions": [
+   "reads Q' as Q",
+   "average rate",
+   "reverses the direction",
+   "treats rate as exact change over an interval"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_second_deriv_product_exp",
+  "topic": "3.6",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "second central difference (step 1e-3) of the lambdified function (independent of symbolic differentiation)"
+  ],
+  "misconceptions": [
+   "no factor k from e^{kx}",
+   "stops at f'",
+   "differentiates a product factor by factor",
+   "drops the exponential"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_second_deriv_test_calc",
   "topic": "5.7",
   "skill": "3.D",
@@ -809,6 +1970,56 @@
    "reports the minimum value",
    "reports the x-coordinate",
    "uses the wrong exponent"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_second_deriv_test_justify_calc",
+  "topic": "5.7",
+  "skill": "3.D",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference of f' at the critical point compared with the closed form of f'' (independent of the algebraic second derivative)"
+  ],
+  "misconceptions": [
+   "reads a positive f'' as a maximum",
+   "claims f'' is negative",
+   "claims f'' is zero"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_second_deriv_test_quartic",
+  "topic": "5.7",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical comparison of $f$ near $x=0$ and $x=3p$ (independent of the derivative tests)"
+  ],
+  "misconceptions": [
+   "calls x=0 a minimum",
+   "calls x=0 a maximum",
+   "calls 3p a maximum",
+   "reverses both"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_separable_general_solution",
+  "topic": "7.7",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "implicit differentiation of each relation (symbolic) evaluated at (x, y) = (1.3, 1.7): only the key satisfies dy/dx = k x^2 / y (independent of the separation)"
+  ],
+  "misconceptions": [
+   "integrates y dy as y squared",
+   "forgets to divide by 3",
+   "does not separate the variables",
+   "integrates y dy as ln y"
   ],
   "bc": false
  },
@@ -864,6 +2075,107 @@
   "bc": true
  },
  {
+  "id": "c_sigma_to_integral",
+  "topic": "6.3",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a right Riemann sum with 400000 subintervals compared with the exact integral value (independent of the symbolic recognition)"
+  ],
+  "misconceptions": [
+   "ignores the starting point",
+   "uses the interval length as the upper limit",
+   "multiplies by the width again",
+   "rescales to the unit interval and loses the factor"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_slope_sign_points",
+  "topic": "7.3",
+  "skill": "2.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "evaluation of the formula at every option point and at nearby points by brute force (independent of the factor-sign argument)"
+  ],
+  "misconceptions": [
+   "chooses a point on the line where the first factor is zero",
+   "chooses a point on the line where the second factor is zero",
+   "chooses a point where the factors have opposite signs",
+   "chooses another point with opposite signs"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_speed_change_justify_calc",
+  "topic": "4.2",
+  "skill": "3.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of v for the acceleration and a direct evaluation of v (independent of the symbolic derivative)"
+  ],
+  "misconceptions": [
+   "reverses the rule",
+   "wrong sign of a",
+   "wrong sign of v"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_speeding_up_intervals",
+  "topic": "4.2",
+  "skill": "2.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical derivative of $|v(t)|$ at one sample point inside each interval (independent of the sign chart)"
+  ],
+  "misconceptions": [
+   "uses v > 0",
+   "uses a > 0",
+   "uses opposite signs",
+   "uses v < 0"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_squeeze_polynomial_bounds",
+  "topic": "1.8",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of both bounds just beside the approach point (independent of the substitution)"
+  ],
+  "misconceptions": [
+   "Evaluates the lower bound at $x=0$ instead of $x=2$: $g(0)=-2$.",
+   "Adds the two limits of the bounds, $-14$ and $-14$, instead of using their common value.",
+   "Evaluates the upper bound at $x=0$ instead of $x=2$: $h(0)=6$.",
+   "Uses the slope $g'(2)=-8$ of the lower bound instead of its value."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_tangent_x_intercept",
+  "topic": "4.6",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference slope and the zero of the resulting line (independent of the symbolic derivative)"
+  ],
+  "misconceptions": [
+   "adds the quotient",
+   "inverts the quotient",
+   "forgets to subtract the quotient from a",
+   "finds the y-intercept"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_tangent_x_intercept_calc",
   "topic": "2.7",
   "skill": "1.E",
@@ -877,6 +2189,23 @@
    "uses the reciprocal slope",
    "reports the y-intercept",
    "uses the normal line"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_tangent_y_intercept_power_exp",
+  "topic": "2.8",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the lambdified function for the slope, then y-intercept f(a) - a * slope"
+  ],
+  "misconceptions": [
+   "Reports the slope $f'(2)=8 e^{2}$ of the tangent line instead of its $y$-intercept.",
+   "Reports $f(2)=4 e^{2}$, the $y$-value of the point of tangency, as the intercept.",
+   "Writes the tangent line as $y=f(2)+2f'(2)$ at $x=0$, adding instead of subtracting $x_0f'(x_0)$: $20 e^{2}$.",
+   "Differentiates only the power $x^{2}$ in the product, getting slope $4 e^{2}$ and intercept $- 4 e^{2}$."
   ],
   "bc": false
  },
@@ -932,6 +2261,23 @@
   "bc": true
  },
  {
+  "id": "c_temperature_rate_calc",
+  "topic": "4.3",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of T (independent of the chain rule)"
+  ],
+  "misconceptions": [
+   "reports T(t0)",
+   "uses the rate at t = 0",
+   "uses the average rate of change",
+   "omits the factor from the chain rule"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_term_diff_sum",
   "topic": "10.15",
   "skill": "1.E",
@@ -966,6 +2312,41 @@
   "bc": false
  },
  {
+  "id": "c_trapezoid_formula_calc",
+  "topic": "6.2",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "average of the left and right sums computed separately (independent of the trapezoid weights)"
+  ],
+  "misconceptions": [
+   "uses left endpoints",
+   "uses right endpoints",
+   "uses midpoints",
+   "gives the integral",
+   "gives full weight to the end values"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_trapezoid_table_initial",
+  "topic": "6.2",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "scipy.integrate.trapezoid applied to the table times and values plus the initial amount (independent of the hand sum)"
+  ],
+  "misconceptions": [
+   "omits the initial amount",
+   "uses a left sum",
+   "uses a right sum",
+   "uses equal widths"
+  ],
+  "bc": false
+ },
+ {
   "id": "c_trig_deriv_calc",
   "topic": "2.10",
   "skill": "1.C",
@@ -979,6 +2360,159 @@
    "drops a product rule term",
    "multiplies derivatives",
    "uses cosine for secant"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_trig_limit_sine_ratio",
+  "topic": "1.5",
+  "skill": "1.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct evaluation at x = 1e-5 (independent of the special limit)"
+  ],
+  "misconceptions": [
+   "Inverts the ratio and reports $2$, the reciprocal of $\\frac{1}{2}$.",
+   "Uses $\\lim_{x\\to 0}\\dfrac{\\sin x}{x}=1$ without accounting for the factor $2$ inside the sine, leaving $\\dfrac{1}{4}$.",
+   "Rewrites $\\dfrac{\\sin(2x)}{2x}\\to 1$ and multiplies by $2$, but forgets to divide by $4$, giving $2$.",
+   "Reads the form $\\dfrac{0}{0}$ as $0$ after substituting $x=0$."
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_usub_indef_trig",
+  "topic": "6.9",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference of each antiderivative at x = 0.9 compared with the integrand (independent of the substitution)"
+  ],
+  "misconceptions": [
+   "forgets to divide by the new exponent",
+   "integrates only the power and keeps the other factor",
+   "gets the sign of du wrong",
+   "chooses the wrong inner function"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_usub_limits_transform",
+  "topic": "6.9",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical quadrature of both sides with the concrete continuous function f(u) = 1/(1+u^2); every distractor differs numerically from the original integral (independent of the symbolic substitution)"
+  ],
+  "misconceptions": [
+   "keeps the x-limits",
+   "forgets the constant from du",
+   "forgets the added constant in u",
+   "changes only the integrand"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_usub_ln_definite",
+  "topic": "6.9",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical quadrature (scipy) of the integrand compared with the closed form (independent of the substitution)"
+  ],
+  "misconceptions": [
+   "forgets the factor 1/2 from du",
+   "forgets the lower limit",
+   "keeps the x-limits",
+   "drops the constant in the denominator"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_volume_disc_y_axis",
+  "topic": "8.9",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "cylindrical shells 2 pi times the integral of x (h - x^n) with scipy quad (independent of the disk setup)"
+  ],
+  "misconceptions": [
+   "uses the y-value as the radius",
+   "revolves about the x-axis",
+   "forgets pi",
+   "uses a cylinder"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_washer_about_line",
+  "topic": "8.10",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical quadrature of pi times (outer radius squared minus inner radius squared) with scipy (independent of the symbolic integration)"
+  ],
+  "misconceptions": [
+   "revolves about the x-axis",
+   "squares the difference of radii",
+   "subtracts the distance to the line",
+   "forgets pi"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_water_depth_rate_calc",
+  "topic": "4.3",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "bisection (separate implementation) for the time and a central difference for the rate (independent of Brent's method and the symbolic derivative)"
+  ],
+  "misconceptions": [
+   "reports the time",
+   "evaluates h' at t = depth",
+   "reports the average rate",
+   "differentiates only one term"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_x_sec_derivative_calc",
+  "topic": "2.10",
+  "skill": "1.C",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference (step 1e-6) of k x sec x (independent of the derivative formulas)"
+  ],
+  "misconceptions": [
+   "uses the derivative of tan for sec",
+   "omits the first product term",
+   "uses a negative sign as for csc",
+   "drops the constant in one term"
+  ],
+  "bc": false
+ },
+ {
+  "id": "c_xsection_nonstandard",
+  "topic": "8.7",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical quadrature of the cross-sectional area function with scipy (independent of the symbolic integration)"
+  ],
+  "misconceptions": [
+   "integrates d instead of the area",
+   "uses semicircular cross sections",
+   "uses the wrong side or the wrong area formula for the shape",
+   "makes a second mistake in the shape area"
   ],
   "bc": false
  },
@@ -1150,6 +2684,23 @@
   "bc": false
  },
  {
+  "id": "g_area_sin_line_calc",
+  "topic": "8.4",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "composite Simpson rule on f - L between Brent-found roots (independent of scipy quad)"
+  ],
+  "misconceptions": [
+   "integrates over the whole drawn interval",
+   "area under the curve only",
+   "area under the line only",
+   "wrong order of subtraction"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_area_y_graph",
   "topic": "8.5",
   "skill": "1.D",
@@ -1250,6 +2801,40 @@
   "bc": false
  },
  {
+  "id": "g_chain_exp_graph_calc",
+  "topic": "3.1",
+  "skill": "1.C",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of e^(g/2) with g interpolated (independent of the chain rule)"
+  ],
+  "misconceptions": [
+   "differentiates only the exponent",
+   "omits the inner derivative",
+   "uses e^g in place of e^(g/2)",
+   "forgets the factor 1/2"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_chain_graph_outer_calc",
+  "topic": "3.1",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of g(u(x)) with g interpolated (independent of the chain rule)"
+  ],
+  "misconceptions": [
+   "reads the slope of g at x = a",
+   "omits the inner derivative u prime",
+   "uses g(u(a)) instead of g'(u(a))",
+   "divides by the inner derivative"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_chain_mixed_calc",
   "topic": "3.1",
   "skill": "1.E",
@@ -1279,6 +2864,23 @@
    "evaluates f' at a instead of g(a)",
    "omits g'(a)",
    "adds instead of multiplies"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_cont_k_graph_log_calc",
+  "topic": "1.11",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the right-hand piece evaluated just to the right of x = 2 with the computed k and compared with the plotted f(2) (independent of the algebra for k)"
+  ],
+  "misconceptions": [
+   "drops the added constant c",
+   "uses ln 2 instead of ln 3",
+   "reads f(0) instead of f(2)",
+   "treats ln 3 as 3"
   ],
   "bc": false
  },
@@ -1344,6 +2946,22 @@
    "counts corners only",
    "counts a smooth vertex",
    "counts only the break"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_critical_point_graph_formula_calc",
+  "topic": "5.2",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "bisection with 100 halvings on f'(x) - g'(x) with f' interpolated (independent of Brent's method)"
+  ],
+  "misconceptions": [
+   "uses the zero of f'",
+   "uses g in place of g'",
+   "adds the derivatives"
   ],
   "bc": false
  },
@@ -1428,6 +3046,23 @@
    "uses the average rate of change",
    "ln of the value instead of the ratio",
    "divides ratio by time"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_exp_time_graph_calc",
+  "topic": "7.8",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the model value P(0) e^{k t} evaluated at the computed time and compared with the target (independent of the logarithm algebra)"
+  ],
+  "misconceptions": [
+   "extends the chord linearly",
+   "uses the average growth rate as k",
+   "uses ln of the value instead of the ratio",
+   "does not divide by ln m"
   ],
   "bc": false
  },
@@ -1700,6 +3335,23 @@
   "bc": false
  },
  {
+  "id": "g_ivt_sum_graph_calc",
+  "topic": "1.16",
+  "skill": "3.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "dense grid scan of h on the open interval: the key lies strictly between the endpoint values and every wrong value lies outside the attained range (independent of the endpoint arithmetic)"
+  ],
+  "misconceptions": [
+   "chooses an endpoint value, not strictly between",
+   "adds the endpoint values",
+   "uses only f halfway value",
+   "uses the difference of the endpoint values"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_lagrange_decimal_calc",
   "topic": "10.12",
   "skill": "1.E",
@@ -1834,6 +3486,40 @@
   "bc": false
  },
  {
+  "id": "g_mvt_sum_graph_formula_calc",
+  "topic": "5.1",
+  "skill": "3.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "bisection on f'(c) + p'(c) minus the average, with the signed area recomputed by numerical quadrature (independent of Brent's method and exact areas)"
+  ],
+  "misconceptions": [
+   "averages only f",
+   "drops the derivative of p",
+   "averages only p",
+   "does not divide by 6"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_net_amount_formula_graph_calc",
+  "topic": "8.3",
+  "skill": "1.D",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "composite Simpson rule (20001 nodes) on R - L with L interpolated (independent of splitting into two integrals)"
+  ],
+  "misconceptions": [
+   "omits the initial amount",
+   "adds the leak",
+   "counts only the inflow",
+   "counts only the leak"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_parallel_tangent_calc",
   "topic": "2.2",
   "skill": "2.B",
@@ -1846,6 +3532,23 @@
    "solves f(x) = L(x)",
    "uses the intercept as the slope",
    "solves f(x) = slope"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_parallel_tangent_formula_calc",
+  "topic": "2.7",
+  "skill": "2.B",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "bisection with 100 halvings on a central-difference slope minus m (independent of Brent's method and the symbolic derivative)"
+  ],
+  "misconceptions": [
+   "solves f = m",
+   "uses the y-intercept as the slope",
+   "uses the rise as the slope",
+   "solves f = L"
   ],
   "bc": false
  },
@@ -1949,6 +3652,23 @@
   "bc": false
  },
  {
+  "id": "g_product_formula_graph_calc",
+  "topic": "2.8",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the numerically interpolated product (independent of the product rule)"
+  ],
+  "misconceptions": [
+   "evaluates f(a)g(a)",
+   "keeps only the first product term",
+   "keeps only the second product term",
+   "multiplies f' and g'"
+  ],
+  "bc": false
+ },
+ {
   "id": "g_product_two_graphs",
   "topic": "2.8",
   "skill": "1.E",
@@ -1961,6 +3681,23 @@
    "multiplies f' and g'",
    "drops one product rule term",
    "evaluates the product only"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_quotient_formula_graph_calc",
+  "topic": "2.9",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference (step 1e-6) of the numerically interpolated quotient (independent of the quotient rule)"
+  ],
+  "misconceptions": [
+   "subtracts in the wrong order",
+   "divides f' by g'",
+   "divides by g instead of g squared",
+   "adds the product terms"
   ],
   "bc": false
  },
@@ -2028,6 +3765,22 @@
    "drops the r' term",
    "forgets 1/3",
    "evaluates V"
+  ],
+  "bc": false
+ },
+ {
+  "id": "g_relative_max_graph_formula_calc",
+  "topic": "5.4",
+  "skill": "3.E",
+  "calculator": "required",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "bisection on the first zero of f' - g' and a count of sign changes on a 2401-point grid (independent of Brent's method)"
+  ],
+  "misconceptions": [
+   "chooses the zero where h' goes negative to positive",
+   "uses the zero of f' only",
+   "uses where h' is greatest"
   ],
   "bc": false
  },

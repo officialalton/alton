@@ -233,3 +233,164 @@ BC 전용 용어(series/converge/Taylor/Maclaurin/parametric/polar/vector/Euler/
 | id | topic | skill | calculator | verified by |
 |---|---|---|---|---|
 | c_avg_vs_instant_rate_calc | 2.1 | 1.D | required | difference quotient from the lambdified function and a central difference (step 1e-6) for the instantaneous ra |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_x_sec_derivative_calc | 2.10 | 1.C | required | central difference (step 1e-6) of k x sec x (independent of the derivative formulas) |
+| g_chain_exp_graph_calc | 3.1 | 1.C | required | central difference (step 1e-6) of e^(g/2) with g interpolated (independent of the chain rule) |
+| g_chain_graph_outer_calc | 3.1 | 1.E | required | central difference (step 1e-6) of g(u(x)) with g interpolated (independent of the chain rule) |
+| g_cont_k_graph_log_calc | 1.11 | 1.E | required | the right-hand piece evaluated just to the right of x = 2 with the computed k and compared with the plotted f( |
+| g_ivt_sum_graph_calc | 1.16 | 3.D | required | dense grid scan of h on the open interval: the key lies strictly between the endpoint values and every wrong v |
+| g_parallel_tangent_formula_calc | 2.7 | 2.B | required | bisection with 100 halvings on a central-difference slope minus m (independent of Brent's method and the symbo |
+| g_product_formula_graph_calc | 2.8 | 1.E | required | central difference (step 1e-6) of the numerically interpolated product (independent of the product rule) |
+| g_quotient_formula_graph_calc | 2.9 | 1.E | required | central difference (step 1e-6) of the numerically interpolated quotient (independent of the quotient rule) |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_choose_differentiable_at_point | 2.4 | 2.D | not_allowed | numerical one-sided difference quotients (step 1e-7) of all four functions at the point |
+| c_cont_three_pieces_two_unknowns | 1.12 | 1.E | not_allowed | substitute the constants back and compare the piece values at x = 1 and x = 3 numerically |
+| c_count_corners_abs_polynomial | 2.4 | 2.D | not_allowed | one-sided difference quotients of /P/ (step 1e-6) at each zero |
+| c_count_vertical_asymptotes | 1.14 | 1.D | not_allowed | numerical evaluation of /f/ just left and right of each denominator zero (independent of the factor cancellati |
+| c_derivative_sec_csc_cot_exact | 2.10 | 1.C | not_allowed | central difference (step 1e-6) of the lambdified function at the angle |
+| c_horizontal_tangent_poly_exp | 2.8 | 1.E | not_allowed | central difference of the lambdified f at the key x (zero slope) and at the other root |
+| c_ivt_root_interval_polynomial | 1.16 | 3.D | not_allowed | numpy.roots of the cubic: exactly one real root lies in the key interval |
+| c_lim_inf_difference_of_radicals | 1.7 | 1.E | not_allowed | direct evaluation at x = 10^9 with 40-digit arithmetic (independent of the conjugate algebra) |
+| c_lim_inf_equal_degree | 1.15 | 1.C | not_allowed | direct evaluation of the rational expression at x = 10^7 (independent of the leading coefficient rule) |
+| c_lim_neg_inf_radical | 1.15 | 1.E | not_allowed | direct evaluation at x = -10^8 with 30-digit arithmetic (independent of the /x/ algebra) |
+| c_limit_is_derivative_exact | 2.2 | 2.C | not_allowed | central difference (step 1e-6) of g at the point |
+| c_limit_two_point_difference_quotient | 2.2 | 2.C | not_allowed | linear model f(x) = d x evaluated directly in the difference quotient (independent of the splitting argument) |
+| c_normal_slope_power_ln | 2.7 | 1.D | not_allowed | central difference (step 1e-6) of the lambdified function at x = e, then the negative reciprocal |
+| c_one_sided_abs_quotient | 1.3 | 1.E | not_allowed | numerical evaluation of the quotient at x = a minus or plus 1e-8 on the stated side (independent of the algebr |
+| c_piecewise_differentiable_two_constants | 2.4 | 3.E | not_allowed | substitute the constants back and compare the values and the left and right difference quotients numerically a |
+| c_product_power_times_unknown_function | 2.8 | 1.C | not_allowed | model g(x) = g(a) + g'(a)(x - a) and a central difference of x^n g(x) at a (independent of the product rule fo |
+| c_quotient_rule_trig_exp_value | 2.9 | 1.C | not_allowed | central difference (step 1e-6) of the lambdified quotient at the evaluation point |
+| c_removable_value_power_ratio | 1.13 | 1.E | not_allowed | numerical average of f(a - 1e-6) and f(a + 1e-6) (independent of factoring) |
+| c_rewrite_then_differentiate_root_denominator | 2.5 | 2.C | not_allowed | central difference (step 1e-6) of the lambdified original quotient |
+| c_squeeze_polynomial_bounds | 1.8 | 3.D | not_allowed | numerical evaluation of both bounds just beside the approach point (independent of the substitution) |
+| c_tangent_y_intercept_power_exp | 2.8 | 1.D | not_allowed | central difference (step 1e-6) of the lambdified function for the slope, then y-intercept f(a) - a * slope |
+| c_trig_limit_sine_ratio | 1.5 | 1.C | not_allowed | direct evaluation at x = 1e-5 (independent of the special limit) |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_accum_two_limits | 6.4 | 1.E | not_allowed | central difference (step 1e-5) of F(x) computed by numerical quadrature (independent of the Fundamental Theore |
+| c_antideriv_power_rules | 6.8 | 1.C | not_allowed | derivative of each option checked symbolically and by a central difference at x = 1.7 (independent of the term |
+| c_area_between_in_y | 8.5 | 1.D | not_allowed | scipy quad of /line - y^2/ over the interval between the roots (independent of the sign analysis and exact ant |
+| c_area_crossing_setup | 8.4 | 1.D | not_allowed | scipy quad of /kx - x^3/ over the full interval with a break point at 0 (independent of the split setup); each |
+| c_area_exp_between | 8.4 | 1.D | not_allowed | scipy quad of e^x - e^-x on [0, ln b] (independent of the antiderivative) |
+| c_complete_square_arctan | 6.10 | 1.E | not_allowed | scipy quad of the integrand (independent of the completed-square antiderivative) |
+| c_distance_minus_displacement | 8.2 | 1.E | not_allowed | scipy quad of /v/ minus scipy quad of v over [0, T] with break points at the zeros (independent of the piece-b |
+| c_integral_abs_poly | 6.7 | 1.E | not_allowed | scipy quad of abs(x^2 - kx) with the break point at x = k (independent of the manual split) |
+| c_longdiv_integral | 6.10 | 1.E | not_allowed | scipy quad of the original quotient (independent of the long division) |
+| c_mvt_integral_value | 8.1 | 3.D | not_allowed | root of f(c) minus the numerical average (scipy quad / Brent) (independent of the exact integral) |
+| c_position_from_velocity | 8.2 | 1.D | not_allowed | scipy quad of the velocity over [0, T] added to the initial position (independent of the antiderivative evalua |
+| c_separable_general_solution | 7.7 | 1.E | not_allowed | implicit differentiation of each relation (symbolic) evaluated at (x, y) = (1.3, 1.7): only the key satisfies  |
+| c_sigma_to_integral | 6.3 | 2.C | not_allowed | a right Riemann sum with 400000 subintervals compared with the exact integral value (independent of the symbol |
+| c_slope_sign_points | 7.3 | 2.D | not_allowed | evaluation of the formula at every option point and at nearby points by brute force (independent of the factor |
+| c_trapezoid_table_initial | 6.2 | 1.E | not_allowed | scipy.integrate.trapezoid applied to the table times and values plus the initial amount (independent of the ha |
+| c_usub_indef_trig | 6.9 | 1.E | not_allowed | central difference of each antiderivative at x = 0.9 compared with the integrand (independent of the substitut |
+| c_usub_limits_transform | 6.9 | 2.C | not_allowed | numerical quadrature of both sides with the concrete continuous function f(u) = 1/(1+u^2); every distractor di |
+| c_usub_ln_definite | 6.9 | 1.E | not_allowed | numerical quadrature (scipy) of the integrand compared with the closed form (independent of the substitution) |
+| c_volume_disc_y_axis | 8.9 | 1.D | not_allowed | cylindrical shells 2 pi times the integral of x (h - x^n) with scipy quad (independent of the disk setup) |
+| c_washer_about_line | 8.10 | 1.D | not_allowed | numerical quadrature of pi times (outer radius squared minus inner radius squared) with scipy (independent of  |
+| c_xsection_nonstandard | 8.7 | 1.D | not_allowed | numerical quadrature of the cross-sectional area function with scipy (independent of the symbolic integration) |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_accel_at_rest_calc | 4.2 | 1.E | required | second central difference (step 1e-4) of the position at the root (independent of the symbolic derivatives) |
+| c_linearization_error_calc | 4.6 | 1.F | required | actual value recomputed with 30-digit sympy evaluation and compared with the floating-point value (independent |
+| c_marginal_cost_meaning_calc | 4.3 | 3.F | required | central difference (step 1e-5) of C and the average cost C(q0)/q0 computed separately (independent of the prod |
+| c_motion_first_reversal_calc | 4.2 | 1.E | required | bisection (separate implementation) on v and a sign check on both sides of the root (independent of Brent's me |
+| c_related_rates_cylinder_calc | 4.5 | 1.E | required | central difference (step 1e-6) of V(t) with r(t) and h(t) linear in t (independent of implicit differentiation |
+| c_related_rates_shadow_calc | 4.5 | 1.D | required | the ground intercept of the line from the lamp top through the head, differentiated numerically with respect t |
+| c_temperature_rate_calc | 4.3 | 1.E | required | central difference (step 1e-6) of T (independent of the chain rule) |
+| c_water_depth_rate_calc | 4.3 | 1.E | required | bisection (separate implementation) for the time and a central difference for the rate (independent of Brent's |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_abs_extremum_cubic | 5.5 | 1.E | not_allowed | maximum or minimum of the lambdified function over a 20001-point grid (independent of the candidate test) |
+| c_abs_max_candidates_calc | 5.5 | 1.E | required | maximum of f over a 6001-point grid on [0, 6] compared with the candidate values (independent of the candidate |
+| c_arc_trig_deriv_value | 3.4 | 1.E | not_allowed | central difference (step 1e-6) of the lambdified function (independent of the inverse-trig formula) |
+| c_box_min_surface | 5.11 | 1.E | not_allowed | grid minimum of $S(x)=x^{2}+4V/x$ over a 60001-point grid (independent of the derivative) |
+| c_chain_exp_cos_point | 3.1 | 1.E | not_allowed | central difference (step 1e-6) of the lambdified function at the numeric point (independent of the symbolic ch |
+| c_concave_xnlnx | 5.6 | 1.E | not_allowed | sign change of a second central difference found with brentq (independent of the symbolic second derivative) |
+| c_conditions_at_point | 5.9 | 2.E | not_allowed | central difference of $f'$ at the point to check the sign of $f''$ (independent of the symbolic derivative) |
+| c_critical_points_cusp | 5.2 | 1.D | not_allowed | root of the numerical derivative on a bracket and the size of the slope near $x=0$ (independent of the symboli |
+| c_decreasing_rational | 5.3 | 1.E | not_allowed | sign of a central-difference derivative at a point in each of the four intervals (independent of the factored  |
+| c_first_deriv_test_trig | 5.4 | 3.D | not_allowed | sign changes of $f'$ on a 40000-point grid of $(0,2\pi)$ (independent of solving $f'=0$) |
+| c_implicit_cubic_horizontal_x | 3.2 | 1.E | not_allowed | grid scan of the upper branch $Y(x)=\sqrt{x^{3}-3ax^{2}+k}$ for interior local extrema (independent of the imp |
+| c_implicit_tangent_line_eq | 3.2 | 1.E | not_allowed | solve the curve numerically for $y(x)$ near the point and take a central difference (independent of implicit d |
+| c_inverse_deriv_formula | 3.3 | 1.E | not_allowed | root-finding for $f(z)=b\pm h$ and a central difference of the numerical inverse (independent of the formula $ |
+| c_lhopital_inf_inf | 4.7 | 1.E | not_allowed | direct evaluation of the quotient at $x=40$ (independent of L'Hospital's Rule) |
+| c_lhopital_twice_zero | 4.7 | 1.E | not_allowed | direct evaluation of the quotient at $x=10^{-3}$ (independent of L'Hospital's Rule) |
+| c_log_trig_deriv_expr | 3.5 | 1.C | not_allowed | central difference of the lambdified function compared with the key expression at a numeric point (independent |
+| c_mvt_hypotheses | 5.1 | 3.C | not_allowed | numerical difference quotients and blow-up tests at the suspicious point of each choice (independent of the ca |
+| c_mvt_must_be_true | 5.1 | 3.D | not_allowed | test the statements on a linear function and on a function with an added bump, on a 4000-point grid (independe |
+| c_product_sqrt_chain_value | 3.5 | 1.C | not_allowed | central difference (step 1e-6) of the lambdified function (independent of the symbolic rules) |
+| c_related_rates_ladder | 4.5 | 1.E | not_allowed | numerical derivative of $y(t)=\sqrt{L^{2}-(x_0+vt)^{2}}$ (independent of implicit differentiation) |
+| c_relative_min_justify_calc | 5.4 | 3.E | required | signs of f' just left and right of the root and the sign of f'' evaluated numerically (independent of the argu |
+| c_roc_meaning_polynomial | 4.1 | 3.F | not_allowed | central difference (step 1e-4) of the quadratic model at $t_0$ (independent of the power rule) |
+| c_second_deriv_product_exp | 3.6 | 1.E | not_allowed | second central difference (step 1e-3) of the lambdified function (independent of symbolic differentiation) |
+| c_second_deriv_test_justify_calc | 5.7 | 3.D | required | central difference of f' at the critical point compared with the closed form of f'' (independent of the algebr |
+| c_second_deriv_test_quartic | 5.7 | 3.D | not_allowed | numerical comparison of $f$ near $x=0$ and $x=3p$ (independent of the derivative tests) |
+| c_speeding_up_intervals | 4.2 | 2.D | not_allowed | numerical derivative of $/v(t)/$ at one sample point inside each interval (independent of the sign chart) |
+| g_critical_point_graph_formula_calc | 5.2 | 1.E | required | bisection with 100 halvings on f'(x) - g'(x) with f' interpolated (independent of Brent's method) |
+| g_mvt_sum_graph_formula_calc | 5.1 | 3.D | required | bisection on f'(c) + p'(c) minus the average, with the signed area recomputed by numerical quadrature (indepen |
+| g_relative_max_graph_formula_calc | 5.4 | 3.E | required | bisection on the first zero of f' - g' and a count of sign changes on a 2401-point grid (independent of Brent' |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_accum_abs_max_x_calc | 6.5 | 3.E | required | composite Simpson rule (20001 nodes) for F at the candidate point (independent of scipy quad) |
+| c_accum_increasing_interval_calc | 6.5 | 3.E | required | sign of the integrand sampled inside each of the three intervals (independent of the root-finding) |
+| c_area_wrt_y_calc | 8.5 | 1.D | required | composite Simpson rule on (right - left) with the limit from Brent's method (independent of scipy quad) |
+| c_decay_two_points_calc | 7.8 | 1.E | required | Runge-Kutta numerical integration of dy/dt = -ky with k from the two data points (independent of the exponenti |
+| c_equilateral_cross_section_calc | 8.8 | 1.D | required | composite Simpson rule (20001 nodes) on the squared side (independent of scipy quad) |
+| c_ftc_two_limits_calc | 6.4 | 1.D | required | central difference (step 1e-5) of G computed by numerical quadrature (independent of the Fundamental Theorem) |
+| c_horizontal_asymptotes_exp_ratio | 1.15 | 1.D | not_allowed | direct evaluation of f at x = 40 and x = -40 (independent of the dominant-term argument) |
+| c_integral_meaning_calc | 8.3 | 3.F | required | composite Simpson rule (20001 nodes) for the integral and the average (independent of scipy quad) |
+| c_speed_change_justify_calc | 4.2 | 3.E | required | central difference (step 1e-6) of v for the acceleration and a direct evaluation of v (independent of the symb |
+| c_trapezoid_formula_calc | 6.2 | 1.E | required | average of the left and right sums computed separately (independent of the trapezoid weights) |
+| g_area_sin_line_calc | 8.4 | 1.D | required | composite Simpson rule on f - L between Brent-found roots (independent of scipy quad) |
+| g_exp_time_graph_calc | 7.8 | 1.E | required | the model value P(0) e^{k t} evaluated at the computed time and compared with the target (independent of the l |
+| g_net_amount_formula_graph_calc | 8.3 | 1.D | required | composite Simpson rule (20001 nodes) on R - L with L interpolated (independent of splitting into two integrals |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_limit_laws_from_given_limits | 1.6 | 1.C | not_allowed | evaluate the expression for the concrete linear functions f(x) = p + (x - c) and g(x) = q - 2(x - c) at x = c  |
+
+예비 3차(R3, 2026-10-12) FRQ 템플릿:
+
+| id | template | topic | skill | calculator | parts |
+|---|---|---|---|---|---|
+| frq_accum_charge | accumulation_function_analysis_calc | 6.5 | 3.E | required | a During a charging test, the current into a small battery is (2) / b Find the average rate of change of $Q$ over the interval $2\ (2) / c For $0\le x |
+| frq_cooling_check | cooling_model_check_tangent_calc | 7.3 | 1.E | required | a A cast-iron pan is taken out of an oven and left in a kitche (2) / b Write an equation for the line tangent to the curve $y=T(t)$ (2) / c Is the app |
+| frq_exp_decay_de | exponential_decay_model_de | 7.8 | 1.E | not_allowed | a A sealed capsule holds $80$ grams of a radioactive tracer. L (3) / b The half-life of the tracer is $4$ years, that is, $M(4)=\fr (1) / c At what ti |
+| frq_inverse_table | inverse_function_table_derivatives | 3.3 | 1.E | not_allowed | a The function $f$ is differentiable and increasing on $1\le x (2) / b Let $h(x)=x\cdot f^{-1}(x)$. Find $h'(13)$. (2) / c Find the value of $\int_{1} |
+| frq_ivp_antiderivative | derivative_formula_initial_value | 4.6 | 1.E | not_allowed | a A function $f$ satisfies $f'(x)=-2xe^{-x^2}$ for all real $x (2) / b Is the approximation from part (a) an overestimate or an und (2) / c Find $f(x) |
+| frq_limits_continuity | limits_lhopital_continuity | 4.7 | 1.E | not_allowed | a Find $\lim_{x\to 2}\frac{x^2-4}{\ln x-\ln 2}$. Show the work (3) / b Let $g$ be the function defined by $g(x)=\frac{x^2-4}{\ln x- (1) / c Find $\lim |
+| frq_marginal_profit | marginal_profit_calc | 5.10 | 3.E | required | a A workshop makes and sells $q$ hundred custom phone cases pe (2) / b The profit is $P(q)=R(q)-C(q)$, where $R$ and $C$ are the re (3) / c Find the i |
+| frq_pen_cost | optimization_cost_divided_pen | 5.11 | 3.E | not_allowed | a A farmer builds a rectangular pen against a long stone wall, (2) / b Find the value of $x$ for which $C'(x)=0$. (2) / c Use the second derivative to |
+| frq_rational_param | parametric_rational_global_extrema | 5.2 | 3.E | not_allowed | a Let $f$ be the function given by $f(x)=\frac{Ax}{x^2+B}$, wh (3) / b For the values of $A$ and $B$ found in part (a), find $\lim_ (1) / c Show that  |
+| frq_trench_volume | cross_section_table_model_calc | 8.2 | 1.E | required | a A drainage trench is dug along a straight line for $20$ mete (3) / b The area function is modeled by $A(x)=14+4\sin\left(\dfrac{x (2) / c Find $A'(8 |
+
+예비 3차(R3, 2026-10-12) FRQ 템플릿:
+
+| id | template | topic | skill | calculator | parts |
+|---|---|---|---|---|---|
+| frq_arctan_zeros | inverse_tangent_function_analysis | 3.4 | 3.E | not_allowed | a Let $f$ be the function defined by $f(x)=8\arctan x-2x$ for (2) / b Show that $f$ has a relative maximum at $x=\sqrt{3}$, and fi (2) / c Find $\lim_ |
+| frq_closest_point | closest_point_to_curve_calc | 5.10 | 3.E | required | a A drone flies along the path $y=\ln x$ for $0.5\le x\le 8$, (2) / b Find the value of $x$ for which the drone is closest to the (3) / c At the point |
+| frq_ftc_chain_limit | accumulation_function_variable_limit | 6.4 | 1.E | not_allowed | a Let $H$ be the function defined by $H(x)=\int_0^{x^2}\left(e (2) / b Write an equation for the line tangent to the curve $y=H(x)$ (2) / c Find the $ |
+| frq_region_bisect | region_bisecting_line_calc | 8.4 | 1.E | required | a Let $R$ be the region in the first quadrant enclosed by the (2) / b Find the area of $R$. Show the setup for your calculation. (2) / c The vertical  |

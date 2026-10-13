@@ -20,7 +20,8 @@ const partial = rd<{ sets: { id: string; keys: K; meta: { unitCounts: Record<str
 const part = new Set(partial.sets.flatMap((s) => flat(s.keys)));
 const overlap = [...v2].filter((k) => five.has(k));
 const used = new Set([...v2, ...five, ...part]);
-const { pool } = loadPool({ strictFamilies: strict });
+const noScreen = process.argv.includes("--no-screen"); // 화면 증거 없는 새 통과분도 재고로 센다(R3 단계 중 남은 부족 계산용)
+const { pool } = loadPool({ strictFamilies: strict, requireScreen: !noScreen });
 const up = (x: number) => Math.ceil(x - 1e-9);
 const inPool = new Set(pool.map((c) => c.key));
 const isUsed = (c: Item) => used.has(c.key);
