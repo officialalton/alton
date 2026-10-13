@@ -108,7 +108,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames, handwr
                   {(it.parts ?? []).map((p) => (
                     <div key={p.label}>
                       <div className="text-[12.5px] font-semibold"><span>({p.label}) [{p.points} pt]</span> <LearningText text={autoMathExplanation(p.prompt)} className="inline" /></div>
-                      <p className="mt-1 whitespace-pre-wrap rounded border border-grey-200 bg-grey-50 px-3 py-2 text-[13px]" data-testid={`frq-answer-${p.label}`}>{parseFrqAnswer(it.response ?? "")[p.label] || "(no answer)"}</p>
+                      <p className={`mt-1 whitespace-pre-wrap rounded border border-grey-200 bg-grey-50 px-3 py-2 text-[13px] ${p.mode === "code" ? "overflow-x-auto font-mono text-[12.5px] [tab-size:4]" : ""}`} data-testid={`frq-answer-${p.label}`}>{parseFrqAnswer(it.response ?? "")[p.label] || "(no answer)"}</p>
                       {inkByPart.get(inkKey(it.setItemId, p.label)) && (
                         <figure className="mt-1.5" data-testid={`frq-handwriting-${p.label}`}>
                           <figcaption className="mb-1 text-[11.5px] font-bold text-grey-500">Your handwritten answer</figcaption>

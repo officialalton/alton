@@ -15,6 +15,6 @@ export function passageDuplicatesStem(passage: string, stem: string): boolean {
 /** 화면에 그릴 자료 텍스트(없으면 null). */
 export function apPassageForDisplay(passage: string | null | undefined, stem: string | null | undefined): string | null {
   const p = (passage ?? "").trim(); if (!p) return null;
-  if (passageDuplicatesStem(p, stem ?? "")) return null;
+  if (!p.includes("```") && passageDuplicatesStem(p, stem ?? "")) return null; // 코드 자료는 본문과 단어가 겹쳐도 숨기지 않는다(코드가 곧 문제)
   return autoMathExplanation(p);
 }

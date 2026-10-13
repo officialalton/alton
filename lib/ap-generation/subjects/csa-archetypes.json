@@ -1,0 +1,782 @@
+[
+ {
+  "id": "cs_2d_completion",
+  "topic": "4.13",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "candidates compiled and run on a 3 by 4 array and a 1 by 2 array"
+  ],
+  "misconceptions": [
+   "Swaps the row and column indexes.",
+   "Stops before the last row.",
+   "Sums row col instead of column col."
+  ]
+ },
+ {
+  "id": "cs_2d_count_completion",
+  "topic": "4.13",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on non-square arrays with zeros"
+  ],
+  "misconceptions": [
+   "Swaps the row and column indexes, which fails on a non-square array.",
+   "Adds the negative values instead of counting them.",
+   "Also counts the zeros."
+  ]
+ },
+ {
+  "id": "cs_2d_traverse",
+  "topic": "4.12",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python nested indexing"
+  ],
+  "misconceptions": [
+   "Swaps the row and column indexes, so a column index is used past the end of a row.",
+   "Uses the number of columns as the row bound, so a row index past the end is accessed.",
+   "Adds the elements in odd-numbered columns."
+  ]
+ },
+ {
+  "id": "cs_array_completion",
+  "topic": "4.5",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "candidates compiled and run on boundary arrays (all negative, single element, ties)"
+  ],
+  "misconceptions": [
+   "Stops one position early.",
+   "Also counts equal neighbors.",
+   "Starts at index 0, so arr[-1] is accessed."
+  ]
+ },
+ {
+  "id": "cs_array_swap_completion",
+  "topic": "4.5",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on arrays of length 1, 2 and more"
+  ],
+  "misconceptions": [
+   "Uses arr.length as an index, which is one past the last element.",
+   "Swaps the first two elements instead of the first and last.",
+   "Overwrites the first element before saving it, so both ends hold the old last value."
+  ]
+ },
+ {
+  "id": "cs_array_traverse",
+  "topic": "4.4",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python list manipulation"
+  ],
+  "misconceptions": [
+   "Believes the loop also runs for the last index, which has no next element.",
+   "Believes the elements shift right, copying each element into the next position.",
+   "Believes the last element is cleared after the shift."
+  ]
+ },
+ {
+  "id": "cs_arraylist_completion",
+  "topic": "4.10",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on lists with zeros, runs of negatives and an empty list"
+  ],
+  "misconceptions": [
+   "Replaces negative values with 0 instead of removing them.",
+   "Decrements i again after a removal, which skips the next element to the left.",
+   "Also removes the value 0."
+  ]
+ },
+ {
+  "id": "cs_arraylist_ops",
+  "topic": "4.8",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python list insert/pop/assignment"
+  ],
+  "misconceptions": [
+   "Believes set(index, value) inserts the value and shifts the others right.",
+   "Believes add(index, value) replaces the element at that index.",
+   "Believes remove(0) removes the element whose value is 0."
+  ]
+ },
+ {
+  "id": "cs_arraylist_remove_loop",
+  "topic": "4.9",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python list pop simulation"
+  ],
+  "misconceptions": [
+   "Believes the loop visits every element after a removal, so all even values are removed.",
+   "Believes only the first even value is removed.",
+   "Uses the original size as the loop bound, so an index past the end is accessed."
+  ]
+ },
+ {
+  "id": "cs_binary_search",
+  "topic": "4.14",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs a recursive Python binary search"
+  ],
+  "misconceptions": [
+   "Moves the wrong bound: searches the left half when the middle value is too small.",
+   "Believes the search never counts the comparison that finds the target.",
+   "Rounds the midpoint up instead of down."
+  ]
+ },
+ {
+  "id": "cs_bug_find",
+  "topic": "2.8",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "the shown buggy method fails a test; each candidate fix compiled and run on the tests, only one passes all"
+  ],
+  "misconceptions": [
+   "Starts at index 1, so a target at index 0 is missed.",
+   "Returns the first occurrence instead of the last.",
+   "Lets i reach arr.length, which causes an ArrayIndexOutOfBoundsException."
+  ]
+ },
+ {
+  "id": "cs_casting_range",
+  "topic": "1.5",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python int()/floor division"
+  ],
+  "misconceptions": [
+   "Believes a cast to int rounds to the nearest integer instead of truncating.",
+   "Believes p / 2 is exact because the result is stored in a double.",
+   "Believes adding 0.5 before the cast has no effect."
+  ]
+ },
+ {
+  "id": "cs_class_completion",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled into the class and run on getWidth/area tests"
+  ],
+  "misconceptions": [
+   "Stores the arguments in the wrong order.",
+   "Uses the width argument for both instance variables.",
+   "Assigns each parameter to itself, so the instance variables keep their default values."
+  ]
+ },
+ {
+  "id": "cs_class_state_completion",
+  "topic": "3.5",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled into the class and run on boundary purchases (exact balance, too much, repeated)"
+  ],
+  "misconceptions": [
+   "Reduces the balance before checking, so a purchase that is too large still changes the balance.",
+   "Assigns the amount to the balance instead of subtracting it.",
+   "Refuses a purchase that uses exactly the whole balance (uses < instead of <=)."
+  ]
+ },
+ {
+  "id": "cs_class_trace",
+  "topic": "3.5",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python class simulation"
+  ],
+  "misconceptions": [
+   "Believes a failed withdraw still reduces the balance.",
+   "Believes a deposit of a negative amount is applied (the guard on deposit is ignored).",
+   "Believes withdraw succeeds even when the amount exceeds the balance."
+  ]
+ },
+ {
+  "id": "cs_compile_error",
+  "topic": "1.2",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "javac compiles each candidate statement inside a main method"
+  ],
+  "misconceptions": [
+   "This statement compiles: An int value can be widened to a double.",
+   "This statement compiles: An int can be assigned to a long.",
+   "This statement compiles: String concatenation accepts an int operand."
+  ]
+ },
+ {
+  "id": "cs_compound_assign",
+  "topic": "1.6",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python sequential assignment"
+  ],
+  "misconceptions": [
+   "Forgets that y-- also decrements y after the subtraction.",
+   "Reads x += y as x = y.",
+   "Reads y *= 2 as y += 2."
+  ]
+ },
+ {
+  "id": "cs_demorgan",
+  "topic": "2.6",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "javac+java evaluation of all four (a, b) combinations vs a Python eval truth table"
+  ],
+  "misconceptions": [
+   "Negates both operands and keeps ||.",
+   "Changes the operator to || without negating correctly.",
+   "Negates a again and keeps b."
+  ]
+ },
+ {
+  "id": "cs_describe_2d",
+  "topic": "4.12",
+  "skill": "4.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
+  ],
+  "misconceptions": [
+   "Believes s is a running total over the whole array.",
+   "Believes the outer index selects columns.",
+   "Believes the comparison is made on each element instead of on the row sum."
+  ]
+ },
+ {
+  "id": "cs_describe_array",
+  "topic": "4.5",
+  "skill": "4.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
+  ],
+  "misconceptions": [
+   "Believes a counter that is incremented on a comparison returns the compared value.",
+   "Reverses the direction of the comparison.",
+   "Compares each element with the last element instead of the first."
+  ]
+ },
+ {
+  "id": "cs_describe_int",
+  "topic": "2.9",
+  "skill": "4.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
+  ],
+  "misconceptions": [
+   "Believes the accumulated value keeps only the biggest digit.",
+   "Believes n % 10 appends digits to build a reversed number.",
+   "Believes the loop counts how many times it runs instead of adding the digits."
+  ]
+ },
+ {
+  "id": "cs_describe_list",
+  "topic": "4.9",
+  "skill": "4.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
+  ],
+  "misconceptions": [
+   "Believes a tie replaces the stored position.",
+   "Believes best counts the larger values.",
+   "Believes the variable tracks the value rather than the position."
+  ]
+ },
+ {
+  "id": "cs_describe_string",
+  "topic": "2.10",
+  "skill": "4.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
+  ],
+  "misconceptions": [
+   "Believes returning false on a mismatch means all characters must match.",
+   "Believes the comparison looks at neighboring characters.",
+   "Checks only the outermost pair of characters."
+  ]
+ },
+ {
+  "id": "cs_helper_completion",
+  "topic": "3.5",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled with both methods and run on boundary score arrays"
+  ],
+  "misconceptions": [
+   "Passes the running count to the helper method instead of the score.",
+   "Stores the score instead of counting it.",
+   "Counts the failing scores."
+  ]
+ },
+ {
+  "id": "cs_if_nesting",
+  "topic": "2.4",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python nested conditional"
+  ],
+  "misconceptions": [
+   "Believes each assignment adds to the starting value of result instead of replacing it.",
+   "Pairs the else with the outer if, ignoring that an else belongs to the nearest unmatched if.",
+   "Reads the else branch as running when the inner condition is true."
+  ]
+ },
+ {
+  "id": "cs_initial_conditions",
+  "topic": "4.5",
+  "skill": "4.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java runs every option; a Python specification (median or membership) must agree with the three good options and disagree with the key"
+  ],
+  "misconceptions": [
+   "The array in { 5, 6, 7, 8, 9, 10 }, 5 is sorted, so the binary search returns the correct value true.",
+   "The array in { 2, 4, 6, 8, 10 }, 8 is sorted, so the binary search returns the correct value true.",
+   "The array in { 1, 3, 5, 7 }, 4 is sorted, so the binary search returns the correct value false."
+  ]
+ },
+ {
+  "id": "cs_int_division_expr",
+  "topic": "1.3",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python integer arithmetic (// and %)"
+  ],
+  "misconceptions": [
+   "Groups the operations from left to right, ignoring that * / % bind tighter than +.",
+   "Uses exact (floating-point) division for a / b instead of integer division.",
+   "Reads d % b as the quotient d / b instead of the remainder."
+  ]
+ },
+ {
+  "id": "cs_loop_completion",
+  "topic": "2.9",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled with the surrounding method and run on boundary tests; expected values from a Python reference"
+  ],
+  "misconceptions": [
+   "Uses integer division instead of the remainder operator.",
+   "Stores the multiple instead of counting it.",
+   "Counts the numbers that are not multiples."
+  ]
+ },
+ {
+  "id": "cs_math_class",
+  "topic": "1.11",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python math.pow/sqrt/abs"
+  ],
+  "misconceptions": [
+   "Reads Math.pow(base, 2) as base * 2.",
+   "Treats Math.sqrt as returning the square.",
+   "Ignores Math.abs and adds the negative number."
+  ]
+ },
+ {
+  "id": "cs_method_params",
+  "topic": "1.9",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python pass-by-object-reference model"
+  ],
+  "misconceptions": [
+   "Believes reassigning the array parameter also changes the caller's array.",
+   "Believes an array element cannot be changed by a method because arrays are copied when passed.",
+   "Believes the int argument is passed by reference so x++ changes n."
+  ]
+ },
+ {
+  "id": "cs_nested_loops_count",
+  "topic": "2.11",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python double comprehension"
+  ],
+  "misconceptions": [
+   "Starts the inner loop at i + 1, skipping the diagonal.",
+   "Counts only the passes of the outer loop.",
+   "Assumes the inner loop always runs the full number of times, giving rows times columns."
+  ]
+ },
+ {
+  "id": "cs_object_alias",
+  "topic": "1.13",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python object model (list of mutable dicts)"
+  ],
+  "misconceptions": [
+   "Believes grow replaces the size instead of adding to it.",
+   "Believes Box b = a makes a separate copy, so growing b leaves a unchanged.",
+   "Believes c shares the same object as a because it was built from a value of a."
+  ]
+ },
+ {
+  "id": "cs_precondition",
+  "topic": "1.9",
+  "skill": "4.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java runs every option call and records which throw an exception"
+  ],
+  "misconceptions": [
+   "The index -1 + 1 is 0, which is valid.",
+   "Index 2 is valid.",
+   "Index 1 is valid."
+  ]
+ },
+ {
+  "id": "cs_recursion_completion",
+  "topic": "4.16",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on exponents 0, 1 and larger (non-terminating candidates end in StackOverflowError)"
+  ],
+  "misconceptions": [
+   "Adds instead of multiplying.",
+   "Never reduces exp, so the recursion never reaches the base case.",
+   "Uses the wrong base case, so power(base, 1) returns 1 and power(base, 0) never ends."
+  ]
+ },
+ {
+  "id": "cs_recursion_string",
+  "topic": "4.17",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java return value vs Python slicing"
+  ],
+  "misconceptions": [
+   "Believes the base case returns an empty string, which drops a trailing single character.",
+   "Keeps the second character of each pair instead of the first.",
+   "Appends each kept character after the recursive result, reversing the kept characters."
+  ]
+ },
+ {
+  "id": "cs_recursion_trace",
+  "topic": "4.16",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java return value vs a Python closed-form or iterative reference"
+  ],
+  "misconceptions": [
+   "Adds instead of multiplying.",
+   "Believes the base case returns 0, which makes every product 0.",
+   "Skips every other factor."
+  ]
+ },
+ {
+  "id": "cs_return_reference",
+  "topic": "3.6",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python list aliasing"
+  ],
+  "misconceptions": [
+   "Believes getIds returns a copy, so changes to got are not seen.",
+   "Believes the constructor stores a copy of the array, so changes to data are not seen.",
+   "Believes the Roster is unaffected by changes made outside the class."
+  ]
+ },
+ {
+  "id": "cs_search_completion",
+  "topic": "4.14",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run with the target first, last, middle, absent and with an empty array"
+  ],
+  "misconceptions": [
+   "Never examines the last element.",
+   "Returns the value found instead of its index.",
+   "Returns -1 after the first non-matching element instead of continuing the search."
+  ]
+ },
+ {
+  "id": "cs_selection_sort_pass",
+  "topic": "4.15",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python selection sort passes"
+  ],
+  "misconceptions": [
+   "Believes the minimum is copied to the front without moving the displaced element, losing it.",
+   "Believes each pass selects the largest element instead of the smallest.",
+   "Believes each pass swaps the element with its right neighbor, like one pass of bubble sort."
+  ]
+ },
+ {
+  "id": "cs_short_circuit",
+  "topic": "2.5",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python or/and with an explicit evaluation log"
+  ],
+  "misconceptions": [
+   "Gives || higher precedence than &&, grouping (A || B) && C.",
+   "Evaluates the right operand of || even when the left operand is true but skips && operands.",
+   "Evaluates every operand because it ignores short-circuit evaluation."
+  ]
+ },
+ {
+  "id": "cs_static_completion",
+  "topic": "3.7",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled into a fresh class and run creating one, two and three objects (separate class copies keep the counters independent)"
+  ],
+  "misconceptions": [
+   "Gives every student the id 1.",
+   "Never advances the shared counter, so every student gets the same id.",
+   "Increments before assigning, so the first id is 2."
+  ]
+ },
+ {
+  "id": "cs_static_counter",
+  "topic": "3.7",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python class-attribute counter"
+  ],
+  "misconceptions": [
+   "Assigns the number before the shared counter is incremented.",
+   "Believes the static counter is reset by every constructor call.",
+   "Believes each Ticket has its own copy of issued, so every number is 1."
+  ]
+ },
+ {
+  "id": "cs_string_algorithm",
+  "topic": "2.10",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java return value vs Python adjacent-pair scan"
+  ],
+  "misconceptions": [
+   "Collects the characters that differ from the next one.",
+   "Appends the neighbor instead of the repeated letter's first copy, adding every second occurrence of the pair.",
+   "Compares each character with the character two positions ahead."
+  ]
+ },
+ {
+  "id": "cs_string_completion",
+  "topic": "2.10",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled into the method and run on a set of Strings including the empty string"
+  ],
+  "misconceptions": [
+   "Appends the whole suffix starting at i instead of one character.",
+   "Prepends each character while moving backward, which rebuilds the original order.",
+   "Replaces the result on every pass instead of appending."
+  ]
+ },
+ {
+  "id": "cs_string_methods",
+  "topic": "1.15",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python slicing, str.index and len"
+  ],
+  "misconceptions": [
+   "Uses the last valid index instead of the length of the string.",
+   "Treats the second argument of substring as an inclusive index.",
+   "Counts indexOf positions from 1 instead of 0."
+  ]
+ },
+ {
+  "id": "cs_this_shadow",
+  "topic": "3.9",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python (field defaults to 0 when only the parameter is assigned)"
+  ],
+  "misconceptions": [
+   "Believes neither field is set because both names are also parameters.",
+   "Believes only the last constructor statement takes effect.",
+   "Believes second = second assigns the parameter to the instance variable."
+  ]
+ },
+ {
+  "id": "cs_while_completion",
+  "topic": "2.7",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on numbers with trailing zeros and several digits"
+  ],
+  "misconceptions": [
+   "Takes the leading part of n instead of its last digit.",
+   "Reduces n by 1 instead of removing its last digit.",
+   "Adds the digits instead of shifting the result one decimal place each time."
+  ]
+ },
+ {
+  "id": "cs_while_trace",
+  "topic": "2.7",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python while loop"
+  ],
+  "misconceptions": [
+   "Reads n * 2 + step as n * (2 + step).",
+   "Adds the step before doubling.",
+   "Stops one pass early, as soon as the next value would reach the limit."
+  ]
+ },
+ {
+  "id": "css_array_set_q1",
+  "topic": "4.5",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "javac+java return value vs Python count"
+  ],
+  "misconceptions": [
+   "Returns the largest value instead of a count.",
+   "Includes the first element in the count by starting the loop at index 0 (it is never greater than itself, so the count is the same) and then adds 1 for the comparison it makes.",
+   "Counts the elements that are greater than the last element instead of the first."
+  ]
+ },
+ {
+  "id": "css_array_set_q2",
+  "topic": "4.5",
+  "skill": "4.A",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
+  ],
+  "misconceptions": [
+   "Reverses the direction of the comparison.",
+   "Believes a counter that is incremented on a comparison returns the compared value.",
+   "Compares each element with the last element instead of the first."
+  ]
+ },
+ {
+  "id": "css_class_set_q1",
+  "topic": "3.5",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "javac+java output vs Python counters"
+  ],
+  "misconceptions": [
+   "Believes size reports the number of plays.",
+   "Believes the constructor starts the play count at 1.",
+   "Believes each added song is also counted as a play."
+  ]
+ },
+ {
+  "id": "css_class_set_q2",
+  "topic": "3.5",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each candidate compiled into the class and run on empty and non-empty playlists"
+  ],
+  "misconceptions": [
+   "Divides without checking for an empty playlist, which throws an ArithmeticException.",
+   "Divides the number of songs by the number of plays, in the wrong order.",
+   "Multiplies instead of dividing."
+  ]
+ }
+]

@@ -60,6 +60,20 @@ CHEM_STAGES["chem_mc_all"] = sorted(n for n in CHEM if n.startswith("ch_"))
 CHEM_STAGES["chem_sets"] = sorted(n for n in CHEM if n.startswith("chs_"))
 CHEM_STAGES["chem_frq"] = sorted(CHEM_FRQ)
 CHEM_STAGES["chem_all"] = CHEM_STAGES["chem_mc_all"] + CHEM_STAGES["chem_sets"] + CHEM_STAGES["chem_frq"]
+# 2026-10-13 AP Computer Science A(P0): csa_p0_*.py 모듈을 두면 cs_ 접두 MC 원형·css_ 세트 원형·csf_ FRQ 원형과 STAGE_<이름> 목록이 자동 등록된다(csa_p1_mc …). 정답은 javac/java 실행 결과(csa_java.py), 범위 표는 csa_coverage.py.
+_CS = [_il.import_module(_os.path.basename(f)[:-3]) for f in sorted(_glob.glob(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "csa_p0_*.py")))]
+CSA = {n: (getattr(m, n), "0") for m in _CS for n in dir(m) if n.startswith(("cs_", "css_")) and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
+CSA_FRQ = {n: (getattr(m, n), "0") for m in _CS for n in dir(m) if n.startswith("csf_") and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
+CSA_STAGES = {}
+for _m in _CS:
+    for _n in dir(_m):
+        if _n.startswith("STAGE_"):
+            _k = "csa_" + _n[6:].lower()
+            CSA_STAGES[_k] = CSA_STAGES.get(_k, []) + [x for x in getattr(_m, _n) if x not in CSA_STAGES.get(_k, [])]
+CSA_STAGES["csa_mc_all"] = sorted(n for n in CSA if n.startswith("cs_"))
+CSA_STAGES["csa_sets"] = sorted(n for n in CSA if n.startswith("css_"))
+CSA_STAGES["csa_frq"] = sorted(CSA_FRQ)
+CSA_STAGES["csa_all"] = CSA_STAGES["csa_mc_all"] + CSA_STAGES["csa_sets"] + CSA_STAGES["csa_frq"]
 GRAPH = {n: (getattr(m, n), "0") for m in GRAPH_MODS for n in dir(m) if n.startswith(("g_", "c_")) and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
 MC.update(GRAPH)
 GRAPH_STAGES = {}  # 단계별 목록(graph_s1_ab, graph_s1_bc …): calc_graph_stages.py 가 채운다
@@ -80,7 +94,7 @@ def sig(p):
     return hashlib.sha1(json.dumps([p.get("stem"), [o["text"] for o in p.get("options", [])], p.get("stimulus")], sort_keys=True).encode()).hexdigest()[:12]
 
 def batch(name, n, seed0):
-    fn = (MC.get(name) or STATS.get(name) or STATS_FRQ.get(name) or PHYS.get(name) or PHYS_FRQ.get(name) or CHEM.get(name) or CHEM_FRQ.get(name) or (FRQ.get(name),))[0]  # 통계 원형은 MC 사전(칼큘러스 회귀 테스트 대상)에 넣지 않는다
+    fn = (MC.get(name) or STATS.get(name) or STATS_FRQ.get(name) or PHYS.get(name) or PHYS_FRQ.get(name) or CHEM.get(name) or CHEM_FRQ.get(name) or CSA.get(name) or CSA_FRQ.get(name) or (FRQ.get(name),))[0]  # 통계 원형은 MC 사전(칼큘러스 회귀 테스트 대상)에 넣지 않는다
     out, seen, seed = [], set(), seed0
     while len(out) < n and seed < seed0 + 400:
         try:
@@ -100,6 +114,7 @@ if __name__ == "__main__":
         if which == "bc": print(json.dumps({"mc": list(BCMC), "frq": ["frq_series", "frq_parametric"]}))
         elif which == "bctopup": print(json.dumps({"mc": list(TOPUP), "frq": ["frq_euler_logistic"]}))
         elif which == "new": print(json.dumps({"mc": list(NEWMC), "frq": []}))
+        elif which.startswith("csa"): print(json.dumps({"mc": [n for n in CSA_STAGES.get(which, list(CSA)) if n in CSA], "frq": [n for n in CSA_STAGES.get(which, []) if n in CSA_FRQ]}))
         elif which.startswith("chem"): print(json.dumps({"mc": [n for n in CHEM_STAGES.get(which, list(CHEM)) if n in CHEM], "frq": [n for n in CHEM_STAGES.get(which, []) if n in CHEM_FRQ]}))
         elif which.startswith("phys"): print(json.dumps({"mc": [n for n in PHYS_STAGES.get(which, list(PHYS)) if n in PHYS], "frq": [n for n in PHYS_STAGES.get(which, []) if n in PHYS_FRQ]}))
         elif which.startswith("stats"): print(json.dumps({"mc": [n for n in STATS_STAGES.get(which, list(STATS)) if n in STATS], "frq": [n for n in STATS_STAGES.get(which, []) if n in STATS_FRQ]}))  # 목록 순서 보존(위험 L→M→H)
@@ -146,6 +161,15 @@ if __name__ == "__main__":
             for q in (p["items"] if "items" in p else [p]):
                 b = q["blueprint"]
                 out.append({"id": q["archetype"], "topic": q["topic"], "skill": q["skill"], "calculator": "allowed", "stimulus": (q.get("stimulus") or p["stimulus"])["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]]})
+        print(json.dumps(out, indent=1))
+    elif cmd == "guide-csa":  # CS A 원형의 가이드 항목(JSON): lib/ap-generation/subjects/csa-archetypes.json 의 원천. 세트는 문항마다 한 항목.
+        out = []
+        for n in CSA_STAGES["csa_mc_all"] + CSA_STAGES["csa_sets"]:
+            p = (batch(n, 1, 0) or [None])[0]
+            if not p: raise SystemExit(f"no pack for {n}")
+            for q in (p["items"] if "items" in p else [p]):
+                b = q["blueprint"]
+                out.append({"id": q["archetype"], "topic": q["topic"], "skill": q["skill"], "calculator": "not_allowed", "stimulus": (q.get("stimulus") or p["stimulus"])["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]]})
         print(json.dumps(out, indent=1))
     elif cmd == "all":print(json.dumps({n: batch(n, int(sys.argv[2]), 0) for n in list(MC) + list(FRQ)}))
     elif cmd == "batch": print(json.dumps(batch(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 0)))

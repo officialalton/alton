@@ -117,7 +117,7 @@ export function parseRwStimulus(passage: string): RwStimulus {
     for (const b of splitLearningBlocks(text) as ContentBlock[]) {
       if (b.kind === "table") { hasTable = true; blocks.push(b); }
       else if (b.kind === "list") blocks.push(b);
-      else blocks.push({ kind: "paragraph", text: b.text });
+      else blocks.push({ kind: "paragraph", text: b.kind === "code" ? b.lines.join("\n") : b.text }); // 코드 블록은 SAT RW 자료에 없다(AP CS A 전용) — 있으면 글로 둔다
     }
   };
 

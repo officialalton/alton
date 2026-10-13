@@ -31,9 +31,12 @@ function mapInsideMath(text: string, fn: (tex: string) => string): string {
   }).join("");
 }
 
+// 코드 블록(```…```)과 한 줄 코드(`…`)는 수식이 아니다 — `x ^ y`, `i <= n`, `a_b` 같은 Java 글자를 TeX 로 바꾸지 않는다(2026-10-13, AP Computer Science A).
+const CODE_SEG = /(```[\s\S]*?```|`[^`\n]+`)/;
 export function autoMathExplanation(text: string): string {
   if (!text) return text;
-  return mapInsideMath(wrapMathSegments(text), braceNumericScripts);
+  if (!text.includes("`")) return mapInsideMath(wrapMathSegments(text), braceNumericScripts);
+  return text.split(CODE_SEG).map((seg, i) => (i % 2 === 1 ? seg : mapInsideMath(wrapMathSegments(seg), braceNumericScripts))).join("");
 }
 
 function wrapMathSegments(text: string): string {

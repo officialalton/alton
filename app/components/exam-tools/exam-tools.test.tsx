@@ -9,6 +9,7 @@ import { subjectToolsConfig } from "@/lib/exam-tools/subject-tools";
 import { evalScientific } from "./PhysicsCalculator";
 import { CHEMISTRY_REF_DISCLAIMER, CHEMISTRY_CONSTANTS, CHEMISTRY_ELEMENTS, elementPosition } from "@/lib/exam-tools/chemistry-reference";
 import { PHYSICS_REF_DISCLAIMER, PHYSICS_CONSTANTS } from "@/lib/exam-tools/physics-reference";
+import { JAVA_REF_DISCLAIMER, JAVA_GROUPS } from "@/lib/exam-tools/java-reference";
 import { parseNum, STATS_MODES } from "@/lib/stats-calc/modes";
 
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });
@@ -228,5 +229,25 @@ describe("AP Chemistry 도구", () => {
     expect(elementPosition(17)).toEqual({ period: 3, group: 17 });
     expect(elementPosition(79)).toEqual({ period: 6, group: 11 });
     expect(CHEMISTRY_ELEMENTS).toHaveLength(86);
+  });
+});
+
+describe("AP Computer Science A 도구", () => {
+  const cs = subjectToolsConfig("ap_computer_science_a");
+  it("계산기 탭 없음 + Java Reference", () => {
+    expect(cs.calculatorTabs).toEqual([]);
+    expect(cs.reference).toBe("java");
+  });
+  it("Reference 는 자체 문구 고지와 String·ArrayList 항목을 보인다", () => {
+    render(<SubjectToolPanels config={cs} calculatorAllowed={false} open="reference" onClose={() => {}} />);
+    expect(screen.getByTestId("java-reference-disclaimer").textContent).toBe(JAVA_REF_DISCLAIMER);
+    expect(JAVA_REF_DISCLAIMER).toMatch(/not the official College Board sheet/);
+    expect(screen.getByText("int length()")).toBeInTheDocument();
+    expect(screen.getByText("E remove(int index)")).toBeInTheDocument();
+    expect(JAVA_GROUPS.map((g) => g.id)).toEqual(["string", "math", "integer", "arraylist", "array", "note"]);
+  });
+  it("계산기를 열어도 아무것도 그리지 않는다(계산기 없음)", () => {
+    render(<SubjectToolPanels config={cs} calculatorAllowed open="calculator" onClose={() => {}} />);
+    expect(screen.queryByRole("dialog")).toBeNull();
   });
 });

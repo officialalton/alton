@@ -36,6 +36,7 @@ import ExitExamButton from "./ExitExamButton";
 import { NAV_BTN, ScrollPanes, ToolIconButton } from "./take-ui";
 import { problemText } from "@/lib/problem-figures/label-rule";
 import ApExamResultView from "./ApExamResultView";
+import CodeAnswerField from "./CodeAnswerField";
 
 // AP 모의고사 응시 화면(영어 UI). SAT 응시 화면(MockExamTakeClient)과 같은 엔진·RPC·재응시 모델을 쓰고, 다음만 AP 규칙이다:
 //   · 섹션은 공식 레이아웃(attempt.sectionLayout)에서 온다: 섹션별 시간·계산기 규칙·문항 수, 일시정지 없음.
@@ -404,16 +405,18 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
                       <div className="flex flex-col gap-3" data-testid="ap-frq-parts">
                         {paperFrq
                           ? <p className="rounded-lg bg-grey-50 px-3 py-2 text-[12px] text-grey-600" data-testid="frq-paper-notice">{PAPER_FRQ_NOTICE} Your work is saved automatically.</p>
-                          : <p className="text-[11.5px] text-grey-500">Type your answers below. For graphs or diagrams, describe the key features in words (you may sketch on paper). Your work is saved automatically.</p>}
+                          : <p className="text-[11.5px] text-grey-500">{partsOf.some((x) => x.mode === "code") ? "Type your Java code below. Your work is saved automatically." : "Type your answers below. For graphs or diagrams, describe the key features in words (you may sketch on paper). Your work is saved automatically."}</p>}
                         {partsOf.map((p) => (
                           <div key={p.label}>
                             <label htmlFor={`frq-${current.setItemId}-${p.label}`} className="mb-1 block text-[13px] font-semibold">
                               ({p.label}) <span className="font-normal text-grey-500">[{p.points} {p.points === 1 ? "point" : "points"}]</span>
                             </label>
                             <LearningText text={autoMathExplanation(p.prompt)} className="mb-1.5 text-[13.5px]" />
-                            <textarea id={`frq-${current.setItemId}-${p.label}`} data-testid={`frq-input-${p.label}`} rows={p.mode === "calculate" ? 4 : 6}
-                              value={frqValues[p.label] ?? ""} onChange={(e) => editPart(current, p.label, e.target.value)} onBlur={() => void flush()}
-                              className={`w-full rounded-lg border-[1.5px] border-grey-200 px-3 py-2 text-[14px] ${p.mode === "code" ? "font-mono" : ""}`} placeholder="Type your answer" />
+                            {p.mode === "code"
+                              ? <CodeAnswerField id={`frq-${current.setItemId}-${p.label}`} testId={`frq-input-${p.label}`} label={`Code for part (${p.label})`} value={frqValues[p.label] ?? ""} onChange={(v) => editPart(current, p.label, v)} onBlur={() => void flush()} />
+                              : <textarea id={`frq-${current.setItemId}-${p.label}`} data-testid={`frq-input-${p.label}`} rows={p.mode === "calculate" ? 4 : 6}
+                                  value={frqValues[p.label] ?? ""} onChange={(e) => editPart(current, p.label, e.target.value)} onBlur={() => void flush()}
+                                  className="w-full rounded-lg border-[1.5px] border-grey-200 px-3 py-2 text-[14px]" placeholder="Type your answer" />}
                             {paperFrq && (() => {
                               const k = inkKey(current.setItemId, p.label);
                               const has = (ink[k]?.length ?? 0) > 0;

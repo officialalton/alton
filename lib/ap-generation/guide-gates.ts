@@ -10,7 +10,7 @@ export function gateGuideMc(g: SubjectGuide, p: McPack): string[] {
   if (a.calculator !== p.calculator) r.push("calculator_flag_differs_from_guide");
   const text = `${p.stem} ${p.options.map((o) => o.text).join(" ")} ${p.explanation_en ?? ""}`;
   for (const b of g.bannedTerms) if (new RegExp(b.pattern, "i").test(text)) r.push(`banned_term:${b.why}`);
-  if (!/\$/.test(p.stem) && /[=^]|\\frac|\\int|\\lim/.test(p.stem)) r.push("math_not_in_latex_delimiters");
+  if (g.subject !== "ap_computer_science_a" && !/\$/.test(p.stem) && /[=^]|\\frac|\\int|\\lim/.test(p.stem)) r.push("math_not_in_latex_delimiters"); // 코드 과목은 수식이 아니라 코드 기호
   if (p.calculator === "required") { if (!p.options.every((o) => /\$-?\d+\.\d{2,3}\$|\$-?\d+\.\d+\$|\$[^$]*\d[^$]*\$/.test(o.text))) r.push("calculator_item_options_not_numeric"); }
   const unit = p.topic.split(".")[0];
   if (!g.units.some((u) => u.unit === unit)) r.push("unit_not_in_ab_scope");
@@ -27,6 +27,6 @@ export function gateGuideFrq(g: SubjectGuide, p: FrqPack): string[] {
   const rows = p.parts.flatMap((x) => x.rubric_rows);
   if (!rows.some((x) => x.units_row) && p.calculator === "required" && p.template === "table_rate_context_calc") r.push("rate_context_without_units_row");
   const numericRows = rows.filter((x) => x.requires_numbers);
-  if (numericRows.length < 2) r.push("too_few_numeric_rows");
+  if (numericRows.length < 2 && g.subject !== "ap_computer_science_a") r.push("too_few_numeric_rows"); // 코드 FRQ 는 수치 행이 없다(채점은 동작 행)
   return r;
 }
