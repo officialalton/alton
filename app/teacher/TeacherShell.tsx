@@ -3,7 +3,6 @@
 import { useAccountMenuDismiss } from "@/app/components/useAccountMenuDismiss";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { logout } from "@/app/login/actions";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import { TEACHER_TIMEZONE_BANNER_TEXT } from "@/lib/teacher-timezone";
@@ -228,7 +227,7 @@ export default function TeacherShell({
                 Time zone settings
               </button>
               <div className="h-px bg-brand-border my-1" />
-              <form action={logout}>
+              <form action="/logout" method="post">
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
                   Log out
                 </button>
@@ -277,7 +276,7 @@ export default function TeacherShell({
                 Time zone settings
               </button>
               <div className="h-px bg-brand-border my-1" />
-              <form action={logout}>
+              <form action="/logout" method="post">
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
                   Log out
                 </button>

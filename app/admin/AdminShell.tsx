@@ -3,7 +3,6 @@
 import { useAccountMenuDismiss } from "@/app/components/useAccountMenuDismiss";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileDrawerNav from "@/app/components/MobileDrawerNav";
 import { linkAdminGoogleAccount } from "./google-link-actions";
@@ -353,7 +352,7 @@ export default function AdminShell({
                 시간대 설정
               </button>
               <div className="h-px bg-brand-border my-1" />
-              <form action={logout} onSubmit={() => clearAdminTabCache()}>
+              <form action="/logout" method="post" onSubmit={() => clearAdminTabCache()}>
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
                   로그아웃
                 </button>
@@ -414,7 +413,7 @@ export default function AdminShell({
                 시간대 설정
               </button>
               <div className="h-px bg-brand-border my-1" />
-              <form action={logout} onSubmit={() => clearAdminTabCache()}>
+              <form action="/logout" method="post" onSubmit={() => clearAdminTabCache()}>
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
                   로그아웃
                 </button>

@@ -3,7 +3,6 @@
 import { useAccountMenuDismiss } from "@/app/components/useAccountMenuDismiss";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
@@ -380,7 +379,7 @@ export default function ParentShell({
                 Time Zone
               </button>
               <div className="h-px bg-brand-border my-1" />
-              <form action={logout}>
+              <form action="/logout" method="post">
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
                   Log Out
                 </button>
@@ -492,7 +491,7 @@ export default function ParentShell({
                   Time Zone
                 </button>
                 <div className="h-px bg-brand-border my-1" />
-                <form action={logout}>
+                <form action="/logout" method="post">
                   <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
                     Log Out
                   </button>

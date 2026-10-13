@@ -3,7 +3,6 @@
 import { useAccountMenuDismiss } from "@/app/components/useAccountMenuDismiss";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { logout } from "@/app/login/actions";
 import { getRoadmapForStudent } from "@/lib/roadmap/actions";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import RoadmapView from "@/app/components/RoadmapView";
@@ -305,7 +304,7 @@ export default function ConsultantShell({
                 Profile
               </button>
               <div className="h-px bg-grey-200 my-1" />
-              <form action={logout}>
+              <form action="/logout" method="post">
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
                   Log out
                 </button>

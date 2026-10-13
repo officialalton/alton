@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import { logout } from "@/app/login/actions";
 import CompleteProfileForm from "./CompleteProfileForm";
 
 /**
@@ -88,7 +87,7 @@ export default async function CompleteProfilePage() {
           initialActivities={activities ?? []}
         />
 
-        <form action={logout} className="mt-6">
+        <form action="/logout" method="post" className="mt-6">
           <button
             type="submit"
             className="block w-full text-center text-grey-500 text-[12.5px] py-2 hover:underline"

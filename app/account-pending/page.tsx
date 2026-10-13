@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import { logout } from "@/app/login/actions";
 
 /**
  * R2 §5.7 + 정책 확인 1: pending 계정(관리자 승인 전 온보딩 상태)은 일반
@@ -32,7 +31,7 @@ export default async function AccountPendingPage() {
           are assigned, you&apos;ll move to the next step automatically and
           we&apos;ll let you know.
         </p>
-        <form action={logout}>
+        <form action="/logout" method="post">
           <button
             type="submit"
             className="block w-full text-center bg-grey-200 text-ink font-bold text-[15px] py-3.5 rounded-lg hover:bg-grey-300"

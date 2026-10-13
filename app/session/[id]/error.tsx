@@ -10,6 +10,7 @@ export default function SessionError({ reset }: { error: Error & { digest?: stri
       <div className="flex gap-2">
         <button type="button" onClick={reset} className="rounded border px-3 py-1.5 text-sm">Try again</button>
         <Link href="/" className="rounded border px-3 py-1.5 text-sm">Back to schedule</Link>
+        <a href="/login" className="rounded border px-3 py-1.5 text-sm">Back to sign in</a>
       </div>
     </div>
   );
