@@ -1,0 +1,333 @@
+[
+ {
+  "key": "ap_statistics-m01-k0-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "X is binomial with n=5 and p=0.4, so the mean is np=2. The sum of x·P(x) from the table is 1.9998, which rounds to 2.00.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2.00"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mean of a discrete/binomial random variable from a table; fits 2.9 / 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2.00 is unique; table expectation is 1.9998, which rounds to 2.00. Rounding is stated."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Table data are complete, but the stem opens with the stray 'Questions refer to the following information' line, which is odd for a standalone item."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 3.00 explanation says 'non-defective outcomes', context that does not match the clinic/missed-appointment scenario. The 2.50 and 0.40 distractors are weak but distinct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, low reading and calculation load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope. It fails on wording and explanation: the stem has a stray multi-question lead-in, and the 3.00 explanation uses 'non-defective' language that doesn't fit the missed-appointment context. These are minor and fixable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of the expected value formula to a given table of a discrete random variable; the alternative shortcut np = 5(0.4) = 2 also works. Single procedure, no interpretation or condition checking. Distractors reflect common errors (unweighted mean of x-values, using p). Arithmetic is brief with 6 products and values given to 4 decimals.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(X≥2)=0.3456+0.2304+0.0768+0.0102=0.6630",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.663"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Labeled 2.10 Binomial Distribution, but the full probability table is provided; the task is just summing or complementing table entries (discrete random variable skill). No binomial setup, conditions, or calculator binomial function is needed, so the dominant demand is not the target topic."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.3456+0.2304+0.0768+0.0102=0.663; the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and sum to 1; rounding is stated. The stem opening 'Questions refer to the following information' is a leftover from a set format for a single item, which is minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors (1-P(1), P(X>2), P(X=2)) are distinct, realistic errors, and the explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with a low reading load; the calculator is not really needed, but this is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key and distractors are sound, but the item does not assess the binomial distribution: the table is given, so it reduces to reading a discrete probability distribution. It fails scope/skill fit for topic 2.10 and should be revised so the student must use binomial structure (identify n and p, use binompdf/binomcdf)."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step table lookup: P(X>=2) = 1 - P(X<=1) = 1 - 0.3370 = 0.663, or sum the upper four entries. Distractors reflect common errors (P(X=2), wrong complement). Minimal reading and arithmetic; no binomial computation required since the distribution is given.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "P(X=0)=0.0778 is the long-run proportion of samples of 5 in which no patient missed an appointment. The table matches Binomial(5, 0.4).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-85 seconds, needs no calculation, and has a light reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean interpretation item with a unique key and three distinct misinterpretation distractors. It is in scope and suitable for the exam. Only minor wording nits (the preamble, \"a 8%\")."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step interpretation of one table value as a long-run relative frequency, choosing among clearly distinct misinterpretations (any one patient, exact percent in every sample, all missed). No computation, minimal reading, one representation (table). Core concept check for 2.8 rather than a multi-step mock-level item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0-q1",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slope is -1.76, and the units are thousand dollars per year. So for each extra year of age, the predicted price drops by about 1.76 thousand dollars.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Slope interpretation from computer output fits 5.3 / 4.D. T and P columns are present but unused."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct interpretation: predicted change, units in thousand dollars, correct roles."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Output data is complete and the units are stated in the stem. The 'Questions refer to the following information' preamble is odd for a single item but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions (exact change, reversed roles, percent) and each is explained. Option A differs from the key only by 'exactly' and 'predicted', a mild cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no calculation needed, typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean slope-interpretation question with a unique key, distinct misconception distractors and a complete output stimulus. Only minor cosmetic issues were found (unused inference columns, stem preamble), so it passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a standard slope interpretation read directly from computer output. The student only has to find the Age coefficient and pick the option that says \"predicted\" and \"about\" rather than \"exactly\". The distractors are the usual named misinterpretations: a deterministic claim, reversed variables, and percent versus units. It takes one reasoning step, with no calculation and little reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0-q2",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Predicted price = 24.30 - 1.76(7) = 11.98 ≈ 12.0 thousand dollars",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "12.0"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicting a response from regression output is the target of 5.3 / 3.B. The slope t-test columns are present in the output but are not used."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "24.30 - 1.76(7) = 11.98, which rounds to 12.0. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The output data is complete: it has a title, a Coef column, and the Constant and Age rows. The stem gives units and the rounding rule. The wording \"Questions refer to\" is slightly odd for a single question."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct named misconception (omitted intercept, added slope, swapped coefficients), and each computes to its stated value. The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds with minimal arithmetic. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard prediction-from-computer-output item. The key is correct and unique, the distractors encode distinct misconceptions, and the stimulus is complete. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read the intercept (24.30) and slope (-1.76) from the computer output, form the line, and substitute x=7 to get 11.98, which rounds to 12.0. Distractors reflect common errors (slope term only, using x=1, wrong operation). Little concept depth and trivial arithmetic; no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0-q3",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "r = -sqrt(R-Sq) = -sqrt(0.81) = -0.90; negative because slope is negative.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-0.90"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. The key is -0.90, since r is the negative square root of 0.81 and the slope is negative. The output data is complete, the rounding is stated, and each distractor encodes a distinct misconception: reporting r-squared, using the wrong sign, or halving r. The task is short and typical of the AP exam.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Finding r from R-Sq and the sign of the slope is topic 5.2 and skill 3.B. No later-unit or deleted content is involved."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique: -0.90. The slope Coef is -1.76 and R-Sq is 81.0%, so r = -sqrt(0.81) = -0.90."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The output has a title, Coef and R-Sq columns, and a stated rounding convention. The T and P columns are inference-for-slope output but are not used in the task. The stem begins with \"Questions refer to the following information,\" which is a minor oddity for a single question."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has its own explanation. The 0.81 option reports r-squared as r, the 0.90 option uses the wrong sign, and the -0.45 option halves r. The three misconceptions are distinct and the options are parallel in form."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task takes about 85 seconds, with low reading load and a calculator allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read R-Sq from computer output, take the square root (0.81 -> 0.90), and use the sign of the slope to assign the sign of r. Distractors target common errors (r vs r^2, ignoring the sign). Concept depth is moderate, with minimal computation and reading. A typical AP exam-style item at the easier end of exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

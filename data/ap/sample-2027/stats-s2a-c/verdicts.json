@@ -1,0 +1,154 @@
+[
+ {
+  "key": "ap_statistics-f01-k0",
+  "cellId": "ap_statistics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "p is the true proportion of all students in the district who ride the bus to school.",
+     "final_answer": "H0: p = 0.50; Ha: p > 0.50, where p = true proportion of all district students who ride the bus to school",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Random: the problem says it was a random sample. 10%: 200 ≤ 0.10(20000) = 2000. Large counts: np0 = 100 ≥ 10 and n(1−p0) = 100 ≥ 10.",
+     "final_answer": "Conditions met: the sample is random, 200 ≤ 2000 (10% condition), and np0 = n(1−p0) = 100 ≥ 10 (large counts)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Procedure: one-sample z-test for a proportion. p̂ = 116/200 = 0.58. Standard error = sqrt(0.5·0.5/200) ≈ 0.03536. z = (0.58 − 0.50)/0.03536 ≈ 2.26. P-value = P(Z ≥ 2.26) ≈ 0.012.",
+     "final_answer": "One-sample z-test for p; z ≈ 2.26; P-value ≈ 0.012",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The P-value is about 0.012, which is less than α = 0.05, so we reject H0.",
+     "final_answer": "Because the P-value (≈ 0.012) is less than α = 0.05, we reject H0. There is convincing evidence that the true proportion of district students who ride the bus to school is greater than 0.50.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean four-part one-proportion z-test bundle (2/2/3/3 points) covering topics 3.5, 3.7 and the conclusion step. All parts stay within Unit 3 scope, and the independent solver matched every answer.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own skill and topic. Part C, the calculation, is the dominant 3.E demand. Parts A, B and D use hypotheses, conditions and conclusion skills that belong to the same test. No deleted or later-unit content appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique and consistent: z ≈ 2.26 and P ≈ 0.0118 for the one-sided test, so H0 is rejected at α = 0.05. The rubric rows are consistent and their dependency chains are sensible. The 10 total points and the 2/2/3/3 split deviate slightly from the 9-point standard, but this is acceptable for a bundle."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem gives the claim, the sample size, the count, α and the population size (in Part B). The wording is clear. The stimulus data object is empty, which is fine for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The common_errors lists in the rubric rows are realistic, such as using p̂ in the standard error or doubling the P-value."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload is typical of an AP Statistics FRQ. The numbers are simple and the calculator use is appropriate and limited to the test statistic and P-value."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard four-step one-proportion z-test with clean numbers (p-hat = 0.58, z ≈ 2.26, one-sided P ≈ 0.012). Each part is a routine template step: define parameter and hypotheses, check random/10%/success-failure conditions, compute z and P-value, state a conclusion in context. No procedure choice ambiguity, no misinterpretation options, no representation changes. This is a core-skill item for topic 3.7 rather than a full-mock stretch item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k0",
+  "cellId": "ap_statistics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Explanatory: whether the member takes a weekly yoga class (categorical). Response: self-rated stress score (quantitative).",
+     "final_answer": "Explanatory: yoga class (yes/no); Response: self-rated stress score",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "IQR = 73-60 = 13. Upper fence = 73+1.5(13) = 92.5. 90 < 92.5, so 90 is not an outlier.",
+     "final_answer": "(i) 13 points (ii) No, because 90 < 92.5 (the upper fence)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Write the 40 names on identical slips, mix them in a container, and draw 20. The 20 drawn take the weekly yoga class; the other 20 do not (control). Or label the volunteers 1-40 and use a random number generator to pick 20 different labels. Random assignment tends to balance other variables (lifestyle, baseline stress, and so on) between the groups. So the groups should be alike except for the treatment, and a difference too large to be due to chance can be credited to the treatment.",
+     "final_answer": "Random slips/RNG choose 20 of the 40 for yoga, the other 20 are control; randomization balances confounders, so a significant difference can be credited to the treatment",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "This is an observational study with self-selection. Confounding variables such as health consciousness, free time, or income may affect both the choice to do yoga and the stress score. So no cause-and-effect conclusion can be drawn.",
+     "final_answer": "No: observational study, so possible confounding; no causation",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The question names the population (all adult members of the center) and the variable (hours per week using the center). The answer varies from person to person, so data must be collected and analyzed.",
+     "final_answer": "What is the typical (mean) number of hours per week that adult members of this community center spend using the center?",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Content is correct, but the item is 10 points rather than 9 and has loosely related parts. The 1.A skill gets only 3 of 10 points, and the stimulus table is disconnected from the yoga study in part A. This deviates from the reference pattern, so I am failing it on the stimulus and exam-suitability criteria.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part E targets 1.A/1.10 and fits well. The other parts (variables, IQR rule, random assignment, observational vs. experimental) are Unit 1 topics and are listed as legitimate extra topics. Part C includes an experiment design method that is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys for A, B, D and E are correct and the solver agreed. The only issue is internal consistency in C and D. Part C's volunteers are not a random sample, so the 'all adult members' wording is slightly loose. The rubric rows for E (the 1.A part) are generic, and E1 requires the literal phrase 'all adult members of the center', which may reject valid questions that name the population differently. E3 ('anticipates variability') is somewhat subjective."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The five-number summary table is complete. However, it is not tied to the study in the stem. Part A describes yoga vs. stress, but the table gives only a single group's stress scores with no yoga grouping, so the stimulus is used only in part B. Part D also says 'who chose to not take', which is awkward wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item totals 10 points, but the official statistics FRQ grain is 9 points. The estimated 22 minutes is heavy for a single question. The five parts are only loosely connected, and the target skill 1.A holds only 3 of the 10 points, so the dominant demand is not the target skill."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ spanning topics 1.10, 1.2, 1.7 and 1.13. It covers explanatory vs. response variables, IQR and the 1.5 IQR outlier check (IQR=13, upper fence 92.5, so 90 is not an outlier), random assignment and why it supports causal conclusions, confounding in an observational study, and writing a valid investigative question. Arithmetic is trivial and the context is brief. Each part needs only one to three reasoning steps, with a single table to read. The load comes from the number of parts and the written justifications, which fits a full mock exam FRQ rather than basic recall or advanced extension.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

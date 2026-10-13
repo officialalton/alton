@@ -13,6 +13,8 @@ const root = path.resolve("data/ap/sample-2027"), out = path.resolve("data/ap/st
 const runs: Record<string, RawCand[]> = {};
 for (const r of STATS_S2A_RUNS) { const f = path.join(root, r, "candidates.json"); if (existsSync(f)) runs[r] = (JSON.parse(readFileSync(f, "utf-8")) as RawCand[]).map((c) => ({ ...c, gateOverride: LATEST_GATE } as RawCand)); }
 const items = buildStock(runs, {});
+// DB 제약(ap_candidate_items.structure ∈ standalone / shared_stimulus_set / frq_multipart): 파이프라인 내보내기는 'shared_set' 으로 적었으므로 재고 행에서 정식 값으로 바꾼다(동결된 pipeline2.ts 는 건드리지 않는다).
+for (const i of items) if (Array.isArray(i.payload.items)) { i.structure = "shared_stimulus_set"; i.stockCell = i.stockCell.replace("|shared_set|", "|shared_stimulus_set|"); }
 writeFileSync(path.join(out, "stats-s2a-items.json"), JSON.stringify(items.map((i) => ({ ...i })), null, 0));
 const pass = items.filter((i) => i.validation === "auto_passed" && !i.duplicateOf && generatorDefects(i.payload).length === 0);
 writeFileSync(path.join(out, "stats-s2a-pass-keys.json"), "[\n" + pass.map((r) => JSON.stringify(r.stockKey)).join(",\n") + "\n]\n");
