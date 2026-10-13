@@ -1,0 +1,546 @@
+[
+ {
+  "key": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "n=54, so the median is the average of the 27th and 28th values. Cumulative counts are 11, 24, 36, so both values are in the 15-20 class.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "15 ≤ x < 20"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Locating the median class from a histogram is a Unit 1 summary-statistics task and matches 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Counts sum to 54; cumulative 11, 24, 36 puts the 27th and 28th values in 15-20. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axis titles and all bins with counts are given. The stem is clear and uses US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode three distinct misconceptions (quartile class, middle of axis, modal class) and each is explained. The 'middle class' wording is slightly loose but harmless."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds, short parallel interval options, little reading, no heavy arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and correct, the stimulus data are complete, the distractors are distinct and explained, and the timing fits the AP reference pattern."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: find the median class from histogram frequencies by locating the 27th/28th values via cumulative counts (11, 24, 36). Minimal reasoning, small integer arithmetic, one representation read, and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "IQR=25-15=10; upper fence = Q3+1.5*IQR = 25+15 = 40. This fits the chart: the maximum of 34 is inside the fence and 45 is an outlier.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "40"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. Q3 + 1.5×IQR = 25 + 15 = 40 is the unique correct boundary. The boxplot data is consistent with it: the whisker ends at 34, below 40, and the outlier at 45 is above it. The distractors each encode a distinct error: the lower fence (0), 1.5×IQR alone (15), and one IQR added to Q3 (35). The task is a quick, single-step Unit 1 problem that fits topic 1.7 and skill 3.B.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The 1.5×IQR rule applied to summary statistics is squarely within topic 1.7 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key of 40 is unique. The chart is consistent with it: the whisker ends at 34, which is below 40, and the outlier at 45 is above 40."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The boxplot data includes the axis title, the five-number summary, and the outlier. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct, realistic error, and the explanation addresses every wrong option. The options are plain numbers of similar length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 75 seconds, involves minimal arithmetic, and has no calculator inconsistency."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of the 1.5xIQR rule: IQR = 10, upper fence = 25 + 15 = 40. Quartiles are given in the stem, arithmetic is trivial, and the distractors map to common slips. There is no interpretation or multi-step linking, so it fits an introductory skill check rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "zA=(81-76)/4=1.25, zB=(85-79)/8=0.75; A is better relative to other test takers.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Test A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Z-score comparison of relative standing fits 1.7/3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "zA=1.25 > zB=0.75; key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; all wrong options are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, minimal arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct z-score comparison item with distinct distractors and no flaws found."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single core concept: compare relative position using z-scores. Requires two simple z-score computations with small integers and a comparison. Distractors reflect common misconceptions (raw score, raw distance from mean, incomparability) but need no extra linking steps. Straightforward direct application of the topic 1.7 skill, below full-mock exam complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "49/(49+57)=49/106≈0.462",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "0.462"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conditional probability from a two-way table; matches 2.6 and 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "49/106 = 0.462 is the unique correct answer; the grand total of 230 matches the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data is complete, with row header, row labels, column labels and cells. Rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode the joint probability (49/230), the reversed condition (49/116) and the marginal probability (116/230). The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "One step, about 60-85 seconds, calculator use is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clean and in scope. The key is 49/106 = 0.462, and the distractors are distinct, realistic misconceptions. No defects were found."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conditional probability from a 2x2 table. The student must pick the correct denominator (the Improved column total, 106) and compute 49/106 ≈ 0.462. Distractors reflect the joint probability and the reversed conditional. Concept depth is shallow, there is little reading, and the arithmetic is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m05-k0",
+  "cellId": "ap_statistics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(A and F)=0.5*0.09=0.045; P(F)=0.045+0.5*0.06=0.075; ratio=0.600",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.600"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The arithmetic load is light, the time of about 100 seconds is typical, and a calculator is allowed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean Bayes-via-tree item with a unique key, a complete stimulus, and distinct distractors, so it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Reverse conditional probability from a tree diagram: compute two joint probabilities, sum for P(faulty), then divide. Short arithmetic with clean numbers, and the distractors match common errors (the total, a joint probability, the forward conditional). Typical AP Unit 2 mock-exam item with one representation change and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_statistics-m06-k0",
+  "cellId": "ap_statistics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "0.177",
+     "brief_reasoning": "C(15,7)(0.4^7)(0.6^8)=6435*0.0016384*0.01679616≈0.1771",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct binomial probability of exactly k successes; matches topic 2.10 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer 0.177; the other options are distinct wrong values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is complete, states the binomial conditions and gives the rounding convention."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode at-most, swapped p and fewer-than errors; the explanation covers each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, calculator allowed, low reading load, typical of AP Statistics."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, standard binomial exact-probability item. The key is unique, the distractors are distinct misconceptions, and the stem states the rounding convention and the binomial conditions. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step direct binomial probability (binompdf) with the setting fully stated; no condition checking, no representation change, minimal reading and calculator-based computation. Distractors include the cumulative probability, which tests pdf vs cdf, but the item remains a routine application.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m07-k0",
+  "cellId": "ap_statistics-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "z=(46.55-43.75)/3.5=0.8; P(Z>0.8)=0.2119≈0.212",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.212"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 90 seconds, calculator allowed, light reading load. The stimulus is redundant but harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear and suitable. Its key and distractors check out, and its stimulus data is complete."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-procedure normal-area item: compute z = 0.8, find the right-tail area = 0.212. The chart only confirms which tail is shaded. The distractors target the left-tail area and doubling the tail, but there is no extra reasoning layer.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m08-k0",
+  "cellId": "ap_statistics-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "z≈1.73, P≈0.083",
+     "brief_reasoning": "p̂=0.66, SE=sqrt(.6*.4/200)=0.03464, z=1.732, two-sided P≈0.083",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Rounding z to 1.73 before finding P gives 0.084; the unrounded z gives 0.083. Either way D is the only reasonable choice."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 110 seconds, calculator allowed, and typical AP length.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct one-proportion z test calculation. It has a unique key, distinct realistic distractors, and an appropriate load for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct one-proportion z-test computation: p-hat=0.66, SE from p0 = 0.03464, z≈1.73, two-sided P≈0.083. The only extra step is doubling the tail for the two-sided alternative. Distractors reflect common errors (one-sided P, complement, SE using p-hat). Conditions are given, the numbers are simple, and the rounding is stated.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_statistics-m09-k0",
+  "cellId": "ap_statistics-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "t ≈ 1.71, P ≈ 0.125",
+     "brief_reasoning": "t=(51.2-50)/(2.1/3)=1.714; df=8 two-sided P=2(0.0624)≈0.125",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "One-sample t test statistic and P-value; fits 4.5/3.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "t=1.714, df=8, two-sided P≈0.125; unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "t curve with df=8, labeled axis, two-tail shading at ±1.714; rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (sqrt(n-1), normal, one tail), and values are consistent; all are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load; calculator allowed and consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean one-sample t test with a unique key and distinct, consistent distractors. The stimulus is complete and the load is typical for the exam, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-sample t test: compute t = 1.2/(2.1/3) = 1.714 with clean numbers, then find the two-tailed P-value for df=8 using a calculator, with the shaded two-tail graph indicating a two-sided test. Distractors target the one-tailed P-value and a wrong t. Few steps, simple arithmetic, a direct application of the procedure.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_statistics-m10-k0",
+  "cellId": "ap_statistics-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "(-23.014, -15.786)",
+     "brief_reasoning": "diff -19.4, SE=1.7517, Welch df≈24.2, t*≈2.063, ME≈3.614",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Unpooled two-sample t interval from summary statistics; matches 4.7/3.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct interval; the solver agrees; order of subtraction stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete; rounding stated; conditions assumed in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "z*, added SEs and reversed order are distinct misconceptions; the margins are consistent with each; every wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A calculator task of typical length; the 120 s estimate is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: a clean two-sample t interval with a unique key and plausible distractors that each encode a distinct misconception."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-procedure item: apply the two-sample t interval to given summary statistics with a calculator. Needs the difference, the SE, and a t* from calculator df, plus a sign check against distractors (a positive interval, a z-like margin, an overly wide margin). Little reading, no representation changes, and a short reasoning chain. The arithmetic is calculator-friendly. Options are separated enough that df rounding does not decide the answer, though the three-decimal endpoints depend on calculator df.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ }
+]

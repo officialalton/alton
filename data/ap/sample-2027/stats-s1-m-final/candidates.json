@@ -1,0 +1,1256 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.13",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_study_conclusion",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must recognize that self-selected treatment (no random assignment) blocks causal inference and that volunteers (no random sampling) block generalization, then pick the option that denies both claims among combinations of the two. Concept depth is moderate, with no computation and minimal reading. It is a typical AP multiple-choice item on scope of conclusions.",
+  "payload": {
+   "archetype": "st_study_conclusion",
+   "topic": "1.13",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "In a mid-sized city, $240$ adults volunteer to participate in a study, and each chooses whether to follow the exercise plan or to not follow it. After the study period, the mean weight loss is higher in the group that used the exercise plan, and the difference is statistically significant. Which conclusion is justified by the design of this study?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The exercise plan caused the higher mean weight loss, but the result cannot be generalized beyond the adults in the study",
+     "why": "Claims cause even though the participants chose their own group.",
+     "value": null
+    },
+    {
+     "text": "The exercise plan caused the higher mean weight loss, and the result can be generalized to all adults",
+     "why": "Claims cause and generalization even though the participants were not randomly selected.",
+     "value": null
+    },
+    {
+     "text": "The result can be generalized to all adults, but it does not show that the exercise plan caused the higher mean weight loss",
+     "why": "Refuses to conclude cause and generalizes even though the participants volunteered.",
+     "value": null
+    },
+    {
+     "text": "The result does not show that the exercise plan caused the higher mean weight loss and cannot be generalized to all adults",
+     "why": "Without random assignment cause cannot be concluded, and without random selection the result cannot be generalized.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 110,
+   "facts": [
+    "sel=False",
+    "asg=False"
+   ],
+   "blueprint": {
+    "id": "st_study_conclusion",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Decide which conclusions a study design justifies",
+    "topic": "1.13",
+    "skill": "2.B",
+    "student_thinking": [
+     "Check whether treatments were assigned at random, which decides whether a cause-and-effect conclusion is justified",
+     "Check whether participants were randomly selected, which decides whether results can be generalized to the population"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "random assignment allows a causal conclusion and random selection allows generalization",
+      "evidence": "the stem states how participants were selected and how they were assigned to groups"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "cause_without_random_assignment",
+      "description": "concludes cause from self-selected groups"
+     },
+     {
+      "id": "generalize_from_volunteers",
+      "description": "generalizes from volunteers"
+     },
+     {
+      "id": "refuse_valid_conclusion",
+      "description": "refuses a conclusion that the design justifies"
+     }
+    ],
+    "verification": {
+     "independent_path": "a truth table over the two design features is enumerated, exactly one of the four claims is allowed, and the sentences are generated from the same table",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "seed": 7200,
+   "pack_id": "st_study_conclusion-s7200",
+   "explanation_en": "The correct answer is The result does not show that the exercise plan caused the higher mean weight loss and cannot be generalized to all adults. Without random assignment cause cannot be concluded, and without random selection the result cannot be generalized.\nThe exercise plan caused the higher mean weight loss, but the result cannot be generalized beyond the adults in the study is incorrect: Claims cause even though the participants chose their own group.\nThe exercise plan caused the higher mean weight loss, and the result can be generalized to all adults is incorrect: Claims cause and generalization even though the participants were not randomly selected.\nThe result can be generalized to all adults, but it does not show that the exercise plan caused the higher mean weight loss is incorrect: Refuses to conclude cause and generalizes even though the participants volunteered."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_study_conclusion",
+   "facts": [
+    "sel=False",
+    "asg=False"
+   ],
+   "seed": 7200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean standalone check of what the design justifies. Volunteers who chose their own groups mean no random selection and no random assignment, so neither causation nor generalization is justified. Option D is the unique key, and the independent solver agreed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item targets topic 1.13 (experimental design) and skill 2.B. The dominant demand is deciding which conclusions a design justifies, using random assignment for cause and random selection for generalization."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The stem states that adults volunteered and chose their own group. That removes both random selection and random assignment, so only option D is defensible. The other three options each make at least one unjustified claim."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is complete and clearly worded in US English. The options are parallel full sentences of similar length."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception: causation from self-selected groups, causation plus generalization from volunteers, and generalizing while denying causation. The explanation addresses each one. One small flaw is that the \"why\" for option C says it \"refuses to conclude cause\", which describes the sentence rather than a misconception. The option still reads as a plausible mistake, so this is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading load is light and the item fits a time of about 60-110 seconds. No calculator is needed, and the calculator-allowed designation is harmless."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that self-selected treatment (no random assignment) blocks causal inference and that volunteers (no random sampling) block generalization, then pick the option that denies both claims among combinations of the two. Concept depth is moderate, with no computation and minimal reading. It is a typical AP multiple-choice item on scope of conclusions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.12",
+  "unitCode": "2",
+  "skillPrimary": "4.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_clt_describe",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires applying the CLT to justify approximate normality for n=100 despite a right-skewed population, computing the SD of the sample mean as 25/sqrt(100)=2.5, and rejecting distractors based on common misconceptions (shape retained, SD unchanged, SD miscomputed). The dotplot is a supporting representation to check the center and spread. Arithmetic is trivial and the reading load is light, so the difficulty comes from fair conceptual sources.",
+  "payload": {
+   "archetype": "st_clt_describe",
+   "topic": "2.12",
+   "skill": "4.C",
+   "calculator": "allowed",
+   "stem": "The lengths of phone calls, in minutes, for calls to a help line are skewed to the right with mean $50$ and standard deviation $25$. The dotplot shown displays the means of $40$ simulated random samples of $100$ values from this population. Which describes the sampling distribution of the sample mean for samples of size $100$?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Dotplot of 40 simulated sample means",
+    "data": {
+     "chart": "dot_plot",
+     "data": {
+      "xTitle": "Sample mean (minutes)",
+      "dots": [
+       {
+        "value": 44,
+        "count": 1
+       },
+       {
+        "value": 46,
+        "count": 1
+       },
+       {
+        "value": 47,
+        "count": 7
+       },
+       {
+        "value": 48,
+        "count": 5
+       },
+       {
+        "value": 49,
+        "count": 2
+       },
+       {
+        "value": 50,
+        "count": 8
+       },
+       {
+        "value": 51,
+        "count": 4
+       },
+       {
+        "value": 52,
+        "count": 4
+       },
+       {
+        "value": 53,
+        "count": 3
+       },
+       {
+        "value": 54,
+        "count": 5
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "Skewed to the right like the population, with mean $50$ and standard deviation $2.5$",
+     "why": "Believes the sampling distribution keeps the shape of the skewed population even with a large sample size.",
+     "value": null
+    },
+    {
+     "text": "Approximately normal, with mean $50$ and standard deviation $25$",
+     "why": "Keeps the population standard deviation instead of dividing it by the square root of the sample size.",
+     "value": null
+    },
+    {
+     "text": "Approximately normal, with mean $50$ and standard deviation $0.25$",
+     "why": "Divides the population standard deviation by $n$ instead of by the square root of $n$.",
+     "value": null
+    },
+    {
+     "text": "Approximately normal, with mean $50$ and standard deviation $2.5$",
+     "why": "The mean of the sampling distribution is $\\mu=50$ and its standard deviation is $\\sigma/\\sqrt{n}=25/\\sqrt{100}=2.5$; with $100$ observations the Central Limit Theorem makes it approximately normal.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 100,
+   "facts": [
+    "n=100",
+    "mu=50",
+    "sd=25"
+   ],
+   "blueprint": {
+    "id": "st_clt_describe",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Describe the sampling distribution of a sample mean using the Central Limit Theorem",
+    "topic": "2.12",
+    "skill": "4.C",
+    "student_thinking": [
+     "Find the mean and the standard deviation of the sampling distribution from the population values and the sample size",
+     "Decide the shape of the sampling distribution from the sample size even though the population is skewed"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the sampling distribution of the mean has mean mu, standard deviation sigma over root n and is approximately normal for large n",
+      "evidence": "the sample size is large (at least 30) and the population standard deviation is given"
+     }
+    ],
+    "material": {
+     "type": "dot_plot",
+     "must_include": [
+      "simulated sample means"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "shape_of_population",
+      "description": "keeps the population shape"
+     },
+     {
+      "id": "population_standard_deviation",
+      "description": "keeps sigma"
+     },
+     {
+      "id": "divides_by_n",
+      "description": "divides sigma by n"
+     }
+    ],
+    "verification": {
+     "independent_path": "4000 simulated samples from a gamma population with the same mean and standard deviation reproduce the stated mean and standard deviation, and the plotted means are checked against them",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "seed": 7200,
+   "pack_id": "st_clt_describe-s7200",
+   "explanation_en": "The correct answer is Approximately normal, with mean $50$ and standard deviation $2.5$. The mean of the sampling distribution is $\\mu=50$ and its standard deviation is $\\sigma/\\sqrt{n}=25/\\sqrt{100}=2.5$; with $100$ observations the Central Limit Theorem makes it approximately normal.\nSkewed to the right like the population, with mean $50$ and standard deviation $2.5$ is incorrect: Believes the sampling distribution keeps the shape of the skewed population even with a large sample size.\nApproximately normal, with mean $50$ and standard deviation $25$ is incorrect: Keeps the population standard deviation instead of dividing it by the square root of the sample size.\nApproximately normal, with mean $50$ and standard deviation $0.25$ is incorrect: Divides the population standard deviation by $n$ instead of by the square root of $n$."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_clt_describe",
+   "facts": [
+    "n=100",
+    "mu=50",
+    "sd=25"
+   ],
+   "seed": 7200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets the CLT and the mean and SD of the sampling distribution of the sample mean (topic 2.12). The description task fits skill 4.C well enough."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique: approximately normal, mean 50, SD 2.5. The other three options each fail on shape or SD."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The dotplot data is complete (axis title, values, counts summing to 40) and consistent with the stated parameters. The title of the chart is not given, but the stem describes it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (keeps population shape, keeps sigma, divides by n). The explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-100 seconds, has minimal arithmetic, and the options are short and parallel. The dotplot is somewhat decorative but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard CLT description item with a unique key, distinct distractors, and a complete stimulus. The only weakness is that the dotplot is not strictly needed to answer."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires applying the CLT to justify approximate normality for n=100 despite a right-skewed population, computing the SD of the sample mean as 25/sqrt(100)=2.5, and rejecting distractors based on common misconceptions (shape retained, SD unchanged, SD miscomputed). The dotplot is a supporting representation to check the center and spread. Arithmetic is trivial and the reading load is light, so the difficulty comes from fair conceptual sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.15",
+  "unitCode": "3",
+  "skillPrimary": "4.G",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_chisq_output",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Student compares the given p-value (0.0090) to alpha (0.05), rejects H0, and picks the correct population-level association claim over distractors (sample-only, causation, independence). Conditions are stated as met and no computation is needed. The only demands are reading the output and recognizing the standard conclusion wording, which is a core skill for this topic.",
+  "payload": {
+   "archetype": "st_chisq_output",
+   "topic": "3.15",
+   "skill": "4.G",
+   "calculator": "allowed",
+   "stem": "A random sample of $336$ shoppers was classified by age group and by preferred payment method. A chi-square test of independence was carried out at the $\\alpha=0.05$ significance level, and the conditions for inference were met. Computer output for the test is shown. Which conclusion is justified by the output?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Computer output for a chi-square test of independence",
+    "data": {
+     "chart": "output",
+     "output": {
+      "title": "Chi-Square Test of Independence: age group by preferred payment method",
+      "sections": [
+       {
+        "columns": [
+         "Statistic",
+         "Value"
+        ],
+        "rows": [
+         [
+          "Chi-Square",
+          "13.517"
+         ],
+         [
+          "DF",
+          4
+         ],
+         [
+          "P-Value",
+          "0.0090"
+         ]
+        ]
+       }
+      ],
+      "notes": [
+       "Smallest expected count: 23.27"
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "There is convincing evidence of an association between age group and preferred payment method only for the shoppers in the sample",
+     "why": "Limits the conclusion to the sample even though the test is about the population.",
+     "value": null
+    },
+    {
+     "text": "There is convincing evidence that age group causes a difference in preferred payment method among all shoppers",
+     "why": "Reads an association found by a test in an observational setting as cause and effect.",
+     "value": null
+    },
+    {
+     "text": "There is convincing evidence that age group and preferred payment method are independent among all shoppers",
+     "why": "Reverses the conclusion: a small P-value is evidence against independence, not for it.",
+     "value": null
+    },
+    {
+     "text": "There is convincing evidence of an association between age group and preferred payment method among all shoppers",
+     "why": "The P-value $0.0090$ is less than $0.05$, so the null hypothesis of independence is rejected and the conclusion is about the population.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 100,
+   "facts": [
+    "P=0.0090"
+   ],
+   "blueprint": {
+    "id": "st_chisq_output",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Draw a conclusion from computer output for a chi-square test of independence",
+    "topic": "3.15",
+    "skill": "4.G",
+    "student_thinking": [
+     "Compare the P-value in the output with the stated significance level to make a decision about the null hypothesis",
+     "State the conclusion in context about an association in the population without claiming cause or proving independence"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a P-value below alpha is evidence of an association in the population and a P-value above alpha is not",
+      "evidence": "the output gives the statistic, degrees of freedom, P-value and the smallest expected count which shows the conditions hold"
+     }
+    ],
+    "material": {
+     "type": "computer_output",
+     "must_include": [
+      "chi-square",
+      "df",
+      "P-value"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "cause_and_effect",
+      "description": "reads association as cause"
+     },
+     {
+      "id": "accepts_null",
+      "description": "treats failing to reject as proof of independence"
+     },
+     {
+      "id": "sample_only",
+      "description": "limits the conclusion to the sample"
+     },
+     {
+      "id": "reversed_rule",
+      "description": "reverses the P-value rule"
+     }
+    ],
+    "verification": {
+     "independent_path": "the chi-square statistic is recomputed from the expected counts, scipy.stats.chi2_contingency agrees and the tail area is also obtained by numerically integrating the chi-square density",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 7200,
+   "pack_id": "st_chisq_output-s7200",
+   "explanation_en": "The correct answer is There is convincing evidence of an association between age group and preferred payment method among all shoppers. The P-value $0.0090$ is less than $0.05$, so the null hypothesis of independence is rejected and the conclusion is about the population.\nThere is convincing evidence of an association between age group and preferred payment method only for the shoppers in the sample is incorrect: Limits the conclusion to the sample even though the test is about the population.\nThere is convincing evidence that age group causes a difference in preferred payment method among all shoppers is incorrect: Reads an association found by a test in an observational setting as cause and effect.\nThere is convincing evidence that age group and preferred payment method are independent among all shoppers is incorrect: Reverses the conclusion: a small P-value is evidence against independence, not for it."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_chisq_output",
+   "facts": [
+    "P=0.0090"
+   ],
+   "seed": 7200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a clean, standard conclusion-from-output item on a chi-square test of independence. The P-value of 0.0090 is below alpha = 0.05, so the key is the only defensible choice: evidence of an association among all shoppers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item targets 3.15 and skill 4.G: it asks for a justified conclusion from chi-square output, and it does not use goodness-of-fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key (index 3) is unique. The sample is random, so the population-level conclusion is justified. The setting is observational, so the causal option is wrong. The smallest expected count of 23.27 is above 5, so the large-counts condition holds."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The output includes the chi-square statistic, df, P-value and smallest expected count. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct named misconception: sample-only, causal reading, and reversed rule. The explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is about 100 seconds, needs no arithmetic, and its options are parallel in length and format."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student compares the given p-value (0.0090) to alpha (0.05), rejects H0, and picks the correct population-level association claim over distractors (sample-only, causation, independence). Conditions are stated as met and no computation is needed. The only demands are reading the output and recognizing the standard conclusion wording, which is a core skill for this topic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.10",
+  "unitCode": "4",
+  "skillPrimary": "4.G",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_t_output_claim",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Student reads P-value (0.0199) and the CI (0.868, 9.332) from output and picks the conclusion with the correct justification. There is one decision step (P < alpha, or CI excludes 0), no computation, and the conditions are given. Distractors are standard mismatched conclusion/reason pairs. This is direct recognition of the two-sample t test decision rule.",
+  "payload": {
+   "archetype": "st_t_output_claim",
+   "topic": "4.10",
+   "skill": "4.G",
+   "calculator": "allowed",
+   "stem": "A researcher compares reaction time, in milliseconds, for a new training method using independent random samples, and the conditions for inference are met. Computer output for a two-sample t procedure is shown, where $\\mu_1$ is the mean for the New method group and $\\mu_2$ is the mean for the Standard method group. At the $\\alpha=0.05$ significance level, which conclusion is correct?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Computer output for a two-sample t test and confidence interval",
+    "data": {
+     "chart": "output",
+     "output": {
+      "title": "Two-Sample t Test and Confidence Interval",
+      "sections": [
+       {
+        "columns": [
+         "Group",
+         "N",
+         "Mean",
+         "StDev"
+        ],
+        "rows": [
+         [
+          "New method",
+          17,
+          47.6,
+          6.9
+         ],
+         [
+          "Standard method",
+          15,
+          42.5,
+          4.7
+         ]
+        ]
+       },
+       {
+        "columns": [
+         "Result",
+         "Value"
+        ],
+        "rows": [
+         [
+          "Difference (mu1 - mu2)",
+          "5.100"
+         ],
+         [
+          "95% CI for difference",
+          "(0.868, 9.332)"
+         ],
+         [
+          "T-Value",
+          "2.467"
+         ],
+         [
+          "DF",
+          "28.3"
+         ],
+         [
+          "P-Value (two-sided)",
+          "0.0199"
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "There is not convincing evidence that the population means differ, because the interval does not contain $0$",
+     "why": "Draws the opposite conclusion from the interval: whether $0$ is inside the interval decides whether a difference of $0$ is plausible.",
+     "value": null
+    },
+    {
+     "text": "There is convincing evidence that the population means differ, because the interval does not contain $0$",
+     "why": "The $95\\%$ interval $(0.87, 9.33)$ does not contain $0$, which matches the P-value $0.0199$ being less than $0.05$ for a two-sided test.",
+     "value": null
+    },
+    {
+     "text": "There is convincing evidence that the population means differ, because the P-value is greater than $0.05$",
+     "why": "Misstates how the P-value compares with the significance level when deciding the conclusion.",
+     "value": null
+    },
+    {
+     "text": "There is not convincing evidence that the population means differ, because the P-value is less than $0.05$",
+     "why": "Reverses the meaning of the P-value: a small P-value is evidence against the null hypothesis, not for it.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 110,
+   "facts": [
+    "P=0.0199",
+    "contains0=False"
+   ],
+   "blueprint": {
+    "id": "st_t_output_claim",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Draw a conclusion from two-sample t output using the interval and the P-value",
+    "topic": "4.10",
+    "skill": "4.G",
+    "student_thinking": [
+     "Check whether the confidence interval for the difference contains zero and compare the two-sided P-value with the significance level",
+     "State a conclusion about the population means that is consistent with both and give the right reason"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a 95 percent interval that excludes 0 goes with a two-sided P-value below 0.05",
+      "evidence": "the output gives the interval, the P-value and the significance level is stated"
+     }
+    ],
+    "material": {
+     "type": "computer_output",
+     "must_include": [
+      "interval",
+      "P-value"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "opposite_conclusion",
+      "description": "draws the opposite conclusion from the interval"
+     },
+     {
+      "id": "p_value_misstated",
+      "description": "misstates the comparison of P with alpha"
+     },
+     {
+      "id": "p_value_reversed",
+      "description": "reverses the meaning of a small P-value"
+     }
+    ],
+    "verification": {
+     "independent_path": "the Welch statistic, degrees of freedom, P-value (by numerical integration of the t density) and interval are recomputed from the summary statistics, and the interval and P-value must agree on the decision",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 7200,
+   "pack_id": "st_t_output_claim-s7200",
+   "explanation_en": "The correct answer is There is convincing evidence that the population means differ, because the interval does not contain $0$. The $95\\%$ interval $(0.87, 9.33)$ does not contain $0$, which matches the P-value $0.0199$ being less than $0.05$ for a two-sided test.\nThere is not convincing evidence that the population means differ, because the interval does not contain $0$ is incorrect: Draws the opposite conclusion from the interval: whether $0$ is inside the interval decides whether a difference of $0$ is plausible.\nThere is convincing evidence that the population means differ, because the P-value is greater than $0.05$ is incorrect: Misstates how the P-value compares with the significance level when deciding the conclusion.\nThere is not convincing evidence that the population means differ, because the P-value is less than $0.05$ is incorrect: Reverses the meaning of the P-value: a small P-value is evidence against the null hypothesis, not for it."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_t_output_claim",
+   "facts": [
+    "P=0.0199",
+    "contains0=False"
+   ],
+   "seed": 7200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpreting two-sample t output to justify a claim; fits 4.10/4.G."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option 2 is uniquely correct: the CI excludes 0 and P=0.0199<0.05. The other options contain false reasoning."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Output data is complete and consistent; conditions and mu definitions are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct reversals (interval misread, P-value misstated, P-value meaning reversed), and the explanation addresses each. They are somewhat transparent but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, no arithmetic, calculator designation fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous item on drawing a conclusion from two-sample t output. The key is unique and the stimulus is complete. The distractors are a bit easy but each encodes a distinct misconception. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads P-value (0.0199) and the CI (0.868, 9.332) from output and picks the conclusion with the correct justification. There is one decision step (P < alpha, or CI excludes 0), no computation, and the conditions are given. Distractors are standard mismatched conclusion/reason pairs. This is direct recognition of the two-sample t test decision rule.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m05-k0",
+  "cellId": "ap_statistics-m05",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_residual_plot",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-skill item: read a residual plot, recognize a curved (U-shaped) pattern, and conclude that a linear model is inappropriate. Distractors are standard misconceptions (residuals sum to 0, large residuals imply a poor fit). No computation, a short stem, and one representation. It checks one condition, which is core Unit 5 content and aligned with skill 4.D.",
+  "payload": {
+   "archetype": "st_residual_plot",
+   "topic": "5.4",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "A least-squares regression line is used to predict an exam score (in points) from the number of hours studied. The residual plot shown displays the residuals for the $24$ observations. Which statement is the most appropriate conclusion about the linear model?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Residual plot with a horizontal line at zero",
+    "data": {
+     "chart": "scatter",
+     "data": {
+      "xTitle": "Hours studied",
+      "yTitle": "Residual",
+      "points": [
+       [
+        7,
+        3.68
+       ],
+       [
+        8,
+        3.02
+       ],
+       [
+        9,
+        2.86
+       ],
+       [
+        10,
+        2.1
+       ],
+       [
+        15,
+        0.25
+       ],
+       [
+        21,
+        -1.59
+       ],
+       [
+        22,
+        -1.49
+       ],
+       [
+        24,
+        -0.72
+       ],
+       [
+        28,
+        -0.86
+       ],
+       [
+        29,
+        -1.99
+       ],
+       [
+        30,
+        -2.9
+       ],
+       [
+        32,
+        -2.35
+       ],
+       [
+        34,
+        -2.58
+       ],
+       [
+        38,
+        -2.58
+       ],
+       [
+        42,
+        -2.37
+       ],
+       [
+        43,
+        -2.9
+       ],
+       [
+        46,
+        -1.02
+       ],
+       [
+        47,
+        -1.43
+       ],
+       [
+        50,
+        -0.01
+       ],
+       [
+        55,
+        0.42
+       ],
+       [
+        56,
+        2.16
+       ],
+       [
+        58,
+        3.97
+       ],
+       [
+        59,
+        2.32
+       ],
+       [
+        60,
+        4
+       ]
+      ],
+      "fitLine": {
+       "slope": 0,
+       "intercept": 0
+      }
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "A linear model is appropriate because the residuals show no clear pattern",
+     "why": "Overlooks the clear curved pattern in the residuals.",
+     "value": null
+    },
+    {
+     "text": "A linear model is appropriate because the residuals add up to $0$",
+     "why": "Uses the fact that least-squares residuals always add up to $0$, which is true for every model and says nothing about fit.",
+     "value": null
+    },
+    {
+     "text": "A linear model is not appropriate because some of the residuals are far from $0$",
+     "why": "Judges the model by how large individual residuals are rather than by the curved pattern they form.",
+     "value": null
+    },
+    {
+     "text": "A linear model is not appropriate because the residuals show a curved pattern",
+     "why": "The residuals are positive at the ends and negative in the middle, a curved pattern that shows the linear model does not capture the relationship.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 90,
+   "facts": [
+    "pattern=curved",
+    "n=24"
+   ],
+   "blueprint": {
+    "id": "st_residual_plot",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Judge whether a linear model is appropriate from a residual plot",
+    "topic": "5.4",
+    "skill": "4.D",
+    "student_thinking": [
+     "Look at the residual plot for any systematic pattern such as a curve rather than random scatter around zero",
+     "Decide whether a linear model is appropriate and name the reason that the plot supports"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a residual plot with no pattern supports a linear model and a curved pattern does not",
+      "evidence": "the plot shows residuals against the explanatory variable with a reference line at zero"
+     }
+    ],
+    "material": {
+     "type": "scatter",
+     "must_include": [
+      "residuals",
+      "zero line"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "pattern_not_seen",
+      "description": "overlooks the curve"
+     },
+     {
+      "id": "pattern_imagined",
+      "description": "sees a pattern in random scatter"
+     },
+     {
+      "id": "large_residuals",
+      "description": "judges by size of residuals"
+     },
+     {
+      "id": "residual_sum",
+      "description": "uses residuals adding to zero"
+     }
+    ],
+    "verification": {
+     "independent_path": "residuals are made exactly orthogonal to x like least-squares residuals and a quadratic fit R squared and the correlation of absolute residuals with x classify the pattern, which must match the intended pattern",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "seed": 7200,
+   "pack_id": "st_residual_plot-s7200",
+   "explanation_en": "The correct answer is A linear model is not appropriate because the residuals show a curved pattern. The residuals are positive at the ends and negative in the middle, a curved pattern that shows the linear model does not capture the relationship.\nA linear model is appropriate because the residuals show no clear pattern is incorrect: Overlooks the clear curved pattern in the residuals.\nA linear model is appropriate because the residuals add up to $0$ is incorrect: Uses the fact that least-squares residuals always add up to $0$, which is true for every model and says nothing about fit.\nA linear model is not appropriate because some of the residuals are far from $0$ is incorrect: Judges the model by how large individual residuals are rather than by the curved pattern they form."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_residual_plot",
+   "facts": [
+    "pattern=curved",
+    "n=24"
+   ],
+   "seed": 7200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual plot interpretation, squarely topic 5.4 and skill 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Residuals are positive at the ends and negative in the middle, so D is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes titled, 24 points listed, zero reference line given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception, and the explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, light reading, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean residual-plot interpretation question with a unique key, a complete stimulus, and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-skill item: read a residual plot, recognize a curved (U-shaped) pattern, and conclude that a linear model is inappropriate. Distractors are standard misconceptions (residuals sum to 0, large residuals imply a poor fit). No computation, a short stem, and one representation. It checks one condition, which is core Unit 5 content and aligned with skill 4.D.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m06-k0",
+  "cellId": "ap_statistics-m06",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_influential_point",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Students must recognize a high-leverage point at x=32.3 that lies below the trend of the other ten points, so removing it makes the slope steeper. They must also judge that r changes in a separate direction (the remaining points are more tightly linear, so r gets stronger). This requires separate reasoning about slope and r from a scatterplot, with no heavy computation or reading. It fits the allowed levers of reading a representation and linking a result to a claim.",
+  "payload": {
+   "archetype": "st_influential_point",
+   "topic": "5.2",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "The scatterplot shown displays $11$ observations of the engine size (in liters) and the fuel efficiency (in miles per gallon). The point circled in red is removed, and the least-squares line and the correlation coefficient are recomputed. Which statement describes the effect of removing the point?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Scatterplot with one highlighted point",
+    "data": {
+     "chart": "scatter",
+     "data": {
+      "xTitle": "Engine size (liters)",
+      "yTitle": "Fuel efficiency (mpg)",
+      "xMin": 0,
+      "xMax": 40,
+      "xStep": 5,
+      "points": [
+       [
+        2,
+        19.3
+       ],
+       [
+        2.1,
+        28
+       ],
+       [
+        3.5,
+        25.9
+       ],
+       [
+        3.7,
+        21.6
+       ],
+       [
+        8.3,
+        43.2
+       ],
+       [
+        9.3,
+        48.1
+       ],
+       [
+        10.3,
+        48.8
+       ],
+       [
+        11.8,
+        56.3
+       ],
+       [
+        13.3,
+        59.7
+       ],
+       [
+        13.8,
+        61
+       ],
+       [
+        32.3,
+        76.3
+       ]
+      ],
+      "highlights": [
+       {
+        "index": 10
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "The correlation becomes stronger and the slope becomes less steep",
+     "why": "Gets the effect on the slope backwards: the circled point was pulling the line flatter, so the slope gets steeper without it.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes weaker and the slope becomes steeper",
+     "why": "Gets the effect on the correlation backwards: the remaining points lie closer to a line, so the correlation gets stronger.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes weaker and the slope becomes less steep",
+     "why": "Treats the effects on the correlation and on the slope as opposite to what they are.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes stronger and the slope becomes steeper",
+     "why": "Without the circled point $|r|$ changes from $0.90$ to $0.98$ and the slope magnitude from $1.95$ to $3.43$.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 100,
+   "facts": [
+    "r_with=0.902",
+    "r_without=0.982"
+   ],
+   "blueprint": {
+    "id": "st_influential_point",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Describe how removing an influential point changes the correlation and the slope",
+    "topic": "5.2",
+    "skill": "4.D",
+    "student_thinking": [
+     "Notice that the circled point has an extreme x-value and does not follow the pattern of the other points",
+     "Decide how removing it changes the strength of the correlation and the steepness of the least-squares line"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a high-leverage point far from the pattern weakens the correlation and changes the slope",
+      "evidence": "the plot shows the circled point far to the right of the other observations"
+     }
+    ],
+    "material": {
+     "type": "scatter",
+     "must_include": [
+      "highlighted point"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "correlation_backwards",
+      "description": "gets the correlation change backwards"
+     },
+     {
+      "id": "slope_backwards",
+      "description": "gets the slope change backwards"
+     },
+     {
+      "id": "both_backwards",
+      "description": "gets both changes backwards"
+     }
+    ],
+    "verification": {
+     "independent_path": "slope and correlation are recomputed with and without the point by closed-form sums and by numpy polyfit and corrcoef, and the changes must exceed fixed thresholds so the options are distinct",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "seed": 7200,
+   "pack_id": "st_influential_point-s7200",
+   "explanation_en": "The correct answer is The correlation becomes stronger and the slope becomes steeper. Without the circled point $|r|$ changes from $0.90$ to $0.98$ and the slope magnitude from $1.95$ to $3.43$.\nThe correlation becomes stronger and the slope becomes less steep is incorrect: Gets the effect on the slope backwards: the circled point was pulling the line flatter, so the slope gets steeper without it.\nThe correlation becomes weaker and the slope becomes steeper is incorrect: Gets the effect on the correlation backwards: the remaining points lie closer to a line, so the correlation gets stronger.\nThe correlation becomes weaker and the slope becomes less steep is incorrect: Treats the effects on the correlation and on the slope as opposite to what they are."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_influential_point",
+   "facts": [
+    "r_with=0.902",
+    "r_without=0.982"
+   ],
+   "seed": 7200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Influential point effect on r and slope; interpretation skill fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct: stronger r, steeper slope. Verified by trend of cluster vs. outlier."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data complete with titles, points, highlight; y-axis range unspecified but auto-scalable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Options cover the 3 reversal combos; explanation for option 3 is slightly vague but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, no heavy arithmetic, calculator not needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: removing the high-leverage point strengthens r and steepens the slope; distinct distractors and a complete stimulus. Minor vagueness in the option 3 explanation."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Students must recognize a high-leverage point at x=32.3 that lies below the trend of the other ten points, so removing it makes the slope steeper. They must also judge that r changes in a separate direction (the remaining points are more tightly linear, so r gets stronger). This requires separate reasoning about slope and r from a scatterplot, with no heavy computation or reading. It fits the allowed levers of reading a representation and linking a result to a claim.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

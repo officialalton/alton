@@ -4,7 +4,7 @@
 
 import { validateData, renderData, type DataSpec } from "./data";
 import { validateVennTree, renderVennTree, type VennTreeSpec } from "./venn-tree";
-import { esc, f, FONT, labelWidth, Sheet, type FigureIssue, type Pt } from "./_layout";
+import { esc, f, Sheet, type FigureIssue, type Pt } from "./_layout";
 
 export const STAT_CHART_KINDS = ["histogram", "dot_plot", "boxplot", "scatter", "two_way", "bar", "table", "tree", "curve", "output"] as const;
 export type StatChartKind = (typeof STAT_CHART_KINDS)[number];
@@ -188,4 +188,3 @@ export function renderApStatChart(spec: ApStatChartSpec): { svg: string; alt: st
   return { svg: r.markup, alt: dataAlt(spec, ds), issues: [...r.issues, ...checks] };
 }
 
-export { labelWidth };
