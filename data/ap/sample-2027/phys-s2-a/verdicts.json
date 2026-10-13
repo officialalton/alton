@@ -1,0 +1,2710 @@
+[
+ {
+  "key": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "W = F d cos(theta) = 60*4*cos40 ≈ 184 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "184 J"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous work-at-an-angle item. The key of 184 J is unique, the distractors encode distinct errors, the explanation covers every wrong option, and the load is appropriate for about 85 seconds with a calculator.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of W = F d cos(theta) with a calculator. The only decision is using the cosine component rather than sine or ignoring the angle. There is no graph, no multi-step linkage, and the arithmetic is short. This is typical introductory work-concept practice rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "W = F d cos(theta) = 60*8*cos65 ≈ 203 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "203 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work by an angled force (W = Fd cos θ) is core topic 3.2. The dominant demand is selecting the law and computing a quantity with units, which matches skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "60*8*cos65° = 202.9 J, so 203 J is the unique correct option. The other three values are distinct and cannot be defended. key_index 1 points to the 203 J option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete: angle above horizontal, tension, distance and a level floor. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode three distinct misconceptions: ignoring the angle, dividing by cos, and giving the force component without multiplying by distance. The explanation addresses each wrong option. The correct option's 'why' says 'Only the horizontal component does work', which is slightly loose but acceptable. The options are parallel in format and length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 85 s and needs one calculation. The calculator designation is consistent. The options are parallel numeric values with units."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard work-at-an-angle item. The key is unique and correct, and the distractors map to distinct misconceptions. The scope, wording and time load are all appropriate for AP Physics 1."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of W = F d cos(theta) with one trig evaluation. The only conceptual demand is recognizing that just the force component along the displacement does work. One representation, clear wording, short arithmetic, and no multi-step linking, so it suits foundational practice rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k0",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "8.54 m/s",
+     "brief_reasoning": "Net force 100-39.2=60.8 N; work 364.8 J = 5v^2 → v≈8.54 m/s",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work-energy theorem with friction; fits 3.1 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "8.54 m/s is the unique correct answer; the distractors are distinct and wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete: rest, level floor, constant force, and coefficient of kinetic friction."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a named misconception, and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 115 seconds, calculator allowed, one dominant skill, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key (8.54 m/s) is verified, the distractors are distinct, and the scope and load are appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept work-energy problem: compute friction (mu*m*g), net work, set equal to KE, solve for v. Three short steps, no representation change, short stem, simple arithmetic. Distractors correspond to plausible errors (ignoring friction gives sqrt(120)=10.95, not listed; 6.86 and 6.04 are other slips; 36.5 is the unsquare-rooted value of KE/10). Appropriate for core learning of 3.1 and the work-energy theorem rather than a full mock's multi-representation demand. Minor note: g=9.8 is assumed implicitly, which is standard on the AP exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k1",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Net work (60-19.6)*3=121.2 J = 1/2*10*v^2 → v≈4.92 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "4.92 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Net work-KE theorem with friction, Topic 3.1, skill 2.B fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique key 4.92 m/s; conditions (rest, level, constant kinetic friction, g=9.8) are given or standard."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; explanation covers each wrong option. The 12.1 m/s option (omitted square root) is a plausible slip."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 115 s, calculator allowed, short parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a clean work-energy problem with a unique key and distinct distractors, and its time and calculator load are suitable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the work-energy theorem, computing friction from mu*N, finding net work, then solving for speed. Four short steps, no representation change, and in-scope Unit 3 content. Distractors reflect plausible errors (ignoring friction, dropping the factor of 2). It is standard mock-exam difficulty, above pure plug-in learning but not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k0",
+  "cellId": "ap_physics_1-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "0.327 m",
+     "brief_reasoning": "mg(h+x)=½kx² → 100x²−14.7x−5.88=0 → x≈0.327 m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy conservation with gravitational and spring PE; derive and solve the energy balance. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x=0.327 m verified; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and the assumptions (light spring, no air resistance) are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions, each explained; the values check out."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator allowed; one quadratic; reasonable load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed: the key 0.327 m is the unique answer, and the distractors encode distinct misconceptions. It is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires selecting conservation of energy across two stages (free fall plus spring compression), recognizing that gravitational PE continues to drop during compression (mg(h+x)=1/2 kx^2), and solving a quadratic. Distractors reflect plausible errors, such as omitting x from the height drop. Short stem, no graph, and arithmetic is moderate with a calculator. Concept depth and steps are typical of a mock exam multi-step item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k1",
+  "cellId": "ap_physics_1-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "0.296 m",
+     "brief_reasoning": "mg(h+x)=½kx² → 150x²−14.7x−8.82=0 → x≈0.296 m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conservation of energy with gravitational and spring PE; requires setting up and solving the quadratic. Within Unit 3."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "mg(h+x)=1/2 k x^2 gives x=0.296 m; unique answer. The stem states the spring is light and ignores air resistance."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The wording is clear and the model assumptions are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct, realistic misconceptions (mg/k, 2mg/k, sqrt(2mgh/k)), each explained. The numeric values match."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator allowed and the quadratic is manageable. The load is reasonable for an AP Physics 1 item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous energy-conservation item with a quadratic solve. The distractors are distinct and well explained. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires selecting energy conservation, including gravitational PE during compression (h + x), setting up and solving a quadratic for x. Distractor 0.242 m arises from omitting the x term. Concept depth is moderate, arithmetic is light, wording is clear, and content is in scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m04-k0",
+  "cellId": "ap_physics_1-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "h=L(1-cos30°)=0.268 m; v=sqrt(2gh)=sqrt(2·9.8·0.268)≈2.29 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "2.29 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy conservation for a pendulum with geometry for height; fits 3.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer 2.29 m/s; assumptions stated (ignore air resistance, light string)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 s, light arithmetic, calculator allowed, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, well-formed pendulum energy-conservation MC item with a unique key and distinct distractors; it passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing conservation of energy and a geometric step to find the height drop h = L(1 - cos θ) from the angle. Then v = sqrt(2gh) with short arithmetic. The mass is a distractor. Distractors map to common errors (h = L, h = L sin θ). Moderate depth, fully in scope, with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "ap_physics_1-m04-k1",
+  "cellId": "ap_physics_1-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "h=L(1-cos40°)=0.468 m; v=sqrt(2gh)=sqrt(2*9.8*0.468)≈3.03 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "3.03 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Pendulum energy conservation with geometry; fits 3.4 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "h=0.468 m, v=3.03 m/s; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording clear, assumptions stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct geometric misconceptions; explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load, calculator allowed, consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope, well-constructed pendulum energy item with distinct distractors."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing conservation of energy, translating the angle and string length into a height drop via h = L(1 - cos θ) (a geometric representation change), then solving for v with a calculator. The mass is an irrelevant quantity. The wording is unambiguous, the arithmetic is short, and all content is in Unit 3 scope. Distractors reflect plausible errors (h = L, sin vs cos).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "ap_physics_1-m05-k0",
+  "cellId": "ap_physics_1-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "F = -dU/dx = -(12-0)/(2-0) = -6 N",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-6.00 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic fits: force from the slope of a U(x) graph is a potential energy topic. Skill 3.C is only weakly assessed, since the item is computation plus law selection with no explicit claim to justify, but it requires applying a principle to a representation. Borderline, accepted."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope on 0 to 2 m is 6 J/m, so F = -6.00 N. The key is unique. The stem states that the force is conservative."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The vertices, axes, labels and units are complete. The interval is clearly stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The sign error, the missing division by distance and the neighboring-segment slope (+1.5 N) are distinct misconceptions. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 s, minimal arithmetic, one dominant skill."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The only concern is that the 3.C justification skill is weakly assessed, because this is a standard slope-to-force calculation, but the item is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read a linear segment of a U vs x graph, compute slope (6 J/m), and apply F = -dU/dx to get -6.00 N. Requires one graph read and one sign decision, with trivial arithmetic. Distractors target sign error, misreading U as F, and a wrong ratio. Minor caveat: the force-as-negative-slope relation is only borderline within AP Physics 1 Unit 3 scope, and the item does not elicit a justification, so it matches skill 3.C only weakly. The difficulty is low and does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m05-k1",
+  "cellId": "ap_physics_1-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "F = -dU/dx; the slope from 0 to 2 m is 1 J/m, so F = -1.00 N",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-1.00 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Force as negative slope of U(x) is in Unit 3 scope; skill 3.C is only loosely engaged (law selection supports an answer), but acceptable for an MC item."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope on 0-2 m is 1 J/m, F = -1.00 N; unique answer. Neighbor slope 4.5 matches distractor."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices and labeled axes with units fully specify the piecewise-linear graph; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions (sign, no division, wrong segment); explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one representation read, minimal arithmetic, about 60-100 s."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous item on force as the negative slope of a U-x graph. The key is unique, the distractors are distinct, and the stimulus is complete. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step application of F = -dU/dx: read slope of the first linear segment (2 J over 2 m = 1 J/m) and apply the negative sign to get -1.00 N. Minimal arithmetic and reading, single graph-to-force representation change. The sign is the only trap. The force-from-U-graph relation is borderline for Physics 1 scope, and the stem asks for a value rather than a justification, so it is weakly aligned to skill 3.C.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m06-k0",
+  "cellId": "ap_physics_1-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "W = ΔKE = 0.5*3*(64-25) = 58.5 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "58.5 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Net work = change in KE read from a speed-time graph; fits topic 3.1 and skill 2.B (select law, compute with units). In scope for Unit 3."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Speeds are 5 m/s at t=2 and 8 m/s at t=6, both at graph vertices, so reading is unambiguous. W=0.5*3*(64-25)=58.5 J. Unique correct option; the distractors (37.5, 96, 9) are all different from the key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data gives axes with labels and ranges plus the vertices. Straight-line motion in one direction is stated, so speed equals velocity magnitude. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are initial KE (37.5 J), final KE (96 J) and m*dv (9). Each encodes a distinct misconception and the explanation addresses every wrong option. Option formats are parallel with no length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Takes about 60-90 seconds, needs a single graph reading and a simple calculation. Calculator use is consistent with the allowed designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique key (58.5 J), a complete graph specification, distinct distractor misconceptions, and a typical AP load, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read two speeds from a speed-time graph, recognize that net work equals the change in kinetic energy (work-energy theorem), and compute 1/2 m (v2^2 - v1^2). Distractors reflect common errors (single KE value, squaring the speed difference). Arithmetic is short and clean; the difficulty is conceptual and legitimate.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m06-k1",
+  "cellId": "ap_physics_1-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "W = ΔKE = 0.5*5*(8^2-6^2) = 70 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "70.0 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work-energy theorem with KE from a v-t graph read; fits 3.1 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v(4)=6, v(7)=8, ΔK=70 J; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with axis labels, units and vertices; stem clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions (final KE, initial KE, squared speed difference); explanation covers each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one-step plus graph reading; appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the net work from a speed-time graph equals ΔK = 70 J; the key is unique and the distractors are distinct."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads two speeds from the graph (6 m/s at t=4 s, 8 m/s at t=7 s), recognizes the work-energy theorem, and computes W = 1/2 m (vf^2 - vi^2) = 70 J. Single concept with short integer arithmetic. The distractors target common errors: using only final KE, only initial KE, or squaring the speed change. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m07-k0",
+  "cellId": "ap_physics_1-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "T=m(g+a)=400(10.3)=4120 N; P=Tv=4120*1.5=6180 W",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "6180 W"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Instantaneous power P=Fv with Newton's second law to find tension; topic 3.5, skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer 6180 W with g=9.8; distractors are distinct and wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear. The standard g assumption is allowed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions (forgets mass, wrong sign on a, uses net force only), each explained. No length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, calculator allowed, light arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound item: the key is unique and correct, and the distractors encode distinct, realistic errors. It fits topic 3.5 and skill 2.B, and no issues were found."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must choose P = Fv, recognize the cable force is not mg but T = m(g+a) via Newton's second law, then multiply by the speed. The distractors target the common errors of using mg or the net force. The concept is moderately deep with 3 steps, short reading and easy arithmetic. This suits a full mock exam rather than basic learning, and it is not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m07-k1",
+  "cellId": "ap_physics_1-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "T = m(g+a) = 400(10.8) = 4320 N; P = Tv = 8640 W",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "8640 W"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Instantaneous power P=Fv with Newton's 2nd law to get tension; fits 3.5 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "T=m(g+a)=4320 N, P=8640 W; unique correct answer with g=9.8."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear. The standard g=9.8 assumption is allowed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors (mav, m(g-a)v, mgv) are distinct, realistic misconceptions, and the explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light on arithmetic, calculator allowed, typical load for an AP MC item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key 8640 W is unique and correct, the distractors encode distinct misconceptions, and the scope and load are appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that the cable force is not just mg, apply Newton's second law to get T = m(g+a), then use instantaneous power P = Fv. Distractors target common errors (ma only, mg only, g-a). Arithmetic is short and wording is unambiguous, so the difficulty comes from concept linking, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m08-k0",
+  "cellId": "ap_physics_1-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Work = area under the F–x graph = 13.5 + 18 + 7 = 38.5 J. Final KE = 9 + 38.5 = 47.5 J, so v = sqrt(47.5) ≈ 6.89 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "6.89 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work as area under F-x graph plus the work-energy theorem, which is in Unit 3 and fits topic 3.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "W=38.5 J, v=sqrt(47.5)=6.89 m/s. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, labels and vertices are complete. The y-axis step of 2 puts vertex values 5 and 7 between ticks, but they are still readable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reproduces a distinct named misconception, which I verified numerically, and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load: trapezoid areas and one square root, with a calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is correct, the distractors map to distinct misconceptions, the graph data is complete, and the load is appropriate for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the work-energy theorem, computing work as area under a piecewise-linear F-x graph (two trapezoids and a rectangle), adding the initial KE, and solving for speed. The concept is in scope, the arithmetic is short (13.5 + 18 + 7 = 38.5 J; v = sqrt(47.5) = 6.89 m/s), and the wording is unambiguous. The distractors map to plausible errors, such as omitting the initial KE (sqrt(38.5) = 6.20 m/s). Odd values on a 2-step axis require mild interpolation.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_physics_1-m08-k1",
+  "cellId": "ap_physics_1-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Work = area under F-x = 4.5+21+16.5 = 42 J; KE_f = 0.5+42 = 42.5 J; v = sqrt(85) ≈ 9.22 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "9.22 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Area under F-x graph plus work-energy theorem; in Unit 3 scope, fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "W=42 J, KE_f=42.5 J, v=9.22 m/s; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, labels, units, vertices complete; the net force is stated. The y-axis max of 11 with step 2 is slightly odd but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is verified to match its stated misconception (63 J, v0+sqrt(2W/m), dropped factor of 2); the explanation covers all wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 2 minutes, calculator allowed, reasonable load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique and correct, the graph data is complete, the distractors encode distinct misconceptions, and the load is appropriate for AP Physics 1."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the work-energy theorem, computing the area under a piecewise force-position graph (triangle plus two trapezoids), adding initial KE, and solving for speed. Concept depth and steps are typical of a full-mock item. Arithmetic is short with clean numbers, the wording is unambiguous, and all content is in Unit 3 scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_physics_1-m09-k0",
+  "cellId": "ap_physics_1-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Energy lost = mg(h1-h2)=0.5*9.8*0.3=1.47 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "1.47 J"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and unique key (1.47 J). The distractors encode distinct misconceptions and each is explained. The item is within scope (Topic 3.4, energy dissipated in a bounce), has no stimulus, and has a light calculation load, so it suits the AP exam.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy dissipation via the change in gravitational potential energy; fits 3.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "mg(h1-h2) = 1.47 J; the stem states that air resistance is ignored, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (dropped g, total energy, summed heights), each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds; calculator use is trivial."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of energy dissipation: delta E = mg(h1 - h2) = 0.5*9.8*0.3 = 1.47 J. No representation change, minimal reading, trivial arithmetic. The only decision is to take the difference in gravitational PE between the drop height and the rebound height. Appropriate as an introductory item for topic 3.4, not at full-mock depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m09-k1",
+  "cellId": "ap_physics_1-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "ΔE = mg(h1-h2) = 0.5*9.8*0.5 = 2.45 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "2.45 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy conservation with dissipation, single computational pathway; fits 3.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 2.45 J = mg(h1-h2) is unique; distractors give 9.8, 17.15, 7.35 J, all distinct and wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear, with air resistance ignored."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, a calculator is allowed and the arithmetic is minimal. It is somewhat easy but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct, single-step energy-dissipation item with a unique key and well-differentiated distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of gravitational PE difference to find dissipated energy: mg(h1-h2) = 0.5*9.8*0.5 = 2.45 J. Simple arithmetic, no representation change, short clear wording. Distractors are initial PE, final PE, and their sum. Suitable for introductory practice rather than full-mock exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m10-k0",
+  "cellId": "ap_physics_1-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Work-energy: v^2 = 2gh(1 - μ cotθ) = 2(9.8)(1.5)(1 - 0.2·2.1445) = 29.4·0.5711 ≈ 16.8, so v ≈ 4.10 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "4.10 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work-energy with friction on an incline; Unit 3 topic 3.4, skill 2.B mathematical routine."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v^2=2gh(1-mu cot theta) gives 4.10 m/s; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem is complete with h, angle, mass and mu. The figure shows the angle and mass. mu is null in the figure data, but the stem supplies it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. The 16.8 option is easy to eliminate by magnitude, but it is still a named error."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 2 minutes, calculator allowed, light arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of 4.10 m/s is unique and the distractors map to distinct errors. The only weakness is the implausible 16.8 m/s option, which is minor."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-step energy problem with dissipation. The student must choose conservation of energy with friction work, convert height to incline length via trig, compute the normal force and friction work, then solve for speed. The distractors reflect plausible errors: no friction (5.42), forgetting to take the square root (16.8), and a partial friction treatment (4.91). The scenario is clearly worded and in scope, with moderate calculator arithmetic and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_physics_1-m10-k1",
+  "cellId": "ap_physics_1-m10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "L=1.5/sin35=2.615 m; a=9.8(sin35-0.25cos35)=3.61 m/s^2; v=sqrt(2aL)=4.35 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "4.35 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy conservation with friction work on an incline; fits topic 3.4 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 4.35 m/s is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Diagram data has mu null while the stem gives 0.25. The figure omits the 1.5 m height. The stimulus is inconsistent with the stem and not needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 18.9 m/s distractor (v^2 reported as the speed) is an implausible misconception for a student to hold. The other distractors are fine."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load; calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The physics and key are correct, but the diagram data is incomplete and inconsistent (mu null versus 0.25 in the stem, no height shown), and one distractor (18.9 m/s, v^2 reported as speed) is implausible. Fail on stimulus and distractor quality."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing energy conservation with friction dissipation, getting the incline length from h and theta, computing friction work using the normal force, then solving for v. Multi-step but standard, with clear wording and light arithmetic. Distractors include the frictionless speed and v squared. The figure adds little beyond the stem.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m11-k0",
+  "cellId": "ap_physics_1-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "W = -mg·d·sin40° = -5(9.8)(3)(0.643) ≈ -94.5 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-94.5 J"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, standalone work-by-gravity item with a unique key of -94.5 J. The distractors encode distinct, realistic misconceptions, and the load is appropriate for AP Physics 1.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.2 work, skill 2.B. The dominant demand is law selection plus a short computation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique under standard assumptions (g = 9.8 m/s²)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, calculator allowed, no needless arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept work calculation: choose W = mg d sin(40°) (or F d cosθ with 130°) and compute -94.5 J. Only one real decision, the angle selection. Distractors map to the usual errors (no angle, cos instead of sin). Short arithmetic, minimal reading, no representation change.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m11-k1",
+  "cellId": "ap_physics_1-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "W = -mg d sin50 = -(5)(9.8)(4)(0.766) ≈ -150 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-150 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work by gravity on an incline, a single computational pathway (rise from the ramp length, then the sign convention), fits topic 3.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "-150 J is unique and correct. The other options are -mgL, -mgLcosθ, and the wrong sign."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and the frictionless ramp, mass, distance, and angle are all given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors reflect distinct, realistic errors, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, with a calculator allowed, and the options are parallel values with units."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well matched to topic 3.2 and skill 2.B. It has a unique key, plausible distinct distractors, and a typical exam load, so it passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept work calculation: identify the angle between gravity and displacement (or use -mg*d*sin50), apply W = Fd cos(theta), and get the sign right. Short arithmetic, no graph or representation translation, and the distractors target common errors (omitting sin, using cos, sign). This is a foundational item, not mock-exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m12-k0",
+  "cellId": "ap_physics_1-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Area under P-t = 200+800+1600=2600 J; v=sqrt(2*2600/50)=10.2 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "10.2 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Area under P-t graph gives energy, then work-energy theorem. This fits topic 3.5 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The area is 2600 J and v = 10.2 m/s. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data has labeled axes with units and complete vertices. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "All three distractors map to distinct misconceptions that I verified numerically. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical (about 110 s), a calculator is allowed, and the arithmetic is light."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well-scoped. The key is verified (2600 J gives 10.2 m/s). The distractors are distinct and each is explained, and the stimulus is complete. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that the area under the P-t graph equals work, compute three segment areas (rectangle and two trapezoids) to get 2600 J, then apply the work-energy theorem from rest to find v = sqrt(104) = 10.2 m/s. It requires a graph-to-energy translation and a choice of governing law, with light arithmetic and a short stem. The distractors correspond to plausible errors, such as dropping the factor of 1/2 (7.21 m/s). Everything is in Unit 3 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m12-k1",
+  "cellId": "ap_physics_1-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Work = area under P-t = 400+1200+1000 = 2600 J; v = sqrt(2W/m) = sqrt(104) ≈ 10.2 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "10.2 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Area under P-t graph to energy to KE; fits 3.5 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Area is 2600 J, v is 10.2 m/s; unique answer. Frictionless ice makes all energy kinetic."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph vertices and axes complete; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each verified numerically; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Appropriate time and calculator load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the key is correct and unique, and the distractors match their stated misconceptions. No issues found."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that the area under a P-t graph gives work, summing a triangle and two trapezoids (400+1200+1000 = 2600 J), then applying the work-energy theorem to find speed (v = sqrt(104) ≈ 10.2 m/s). Multi-step with a graph representation read, but arithmetic is light and the scope is within Unit 3. The distractors correspond to plausible errors, such as omitting the 1/2 in KE or mis-summing the areas.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_physics_1-m13-k0",
+  "cellId": "ap_physics_1-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "k=50/0.5=100 N/m; ΔU=½k(0.4²−0.1²)=50(0.15)=7.5 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "7.50 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Spring PE via area under F-x graph; the calculation matches topic 3.3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "7.50 J is unique and correct; the Hooke's law condition is evident from the linear graph through the origin."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes are labeled with units and the line endpoints are given. The y-axis max of 55 with step 10 is slightly odd but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (initial force x displacement, final force x displacement, squared change in stretch); each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 s; light calculator load; four-option format typical of AP."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the key is unique and correct, the distractors are distinct, and the stimulus is complete and in scope."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the force-stretch graph to get k (or the trapezoid area) and recognize that energy between two stretches is a difference of ½kx² values, not ½k(Δx)². One graph-to-equation translation, short clean arithmetic, and distractors target the common Δx-squared misconception. Standard exam-level item within Unit 3 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m13-k1",
+  "cellId": "ap_physics_1-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "k=100 N/m; ΔU=½k(0.09-0.04)=2.5 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "2.50 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Spring PE from F-x graph, in scope for 3.3; calculation routine."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "k=100 N/m, ΔU=2.50 J unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Line from origin to (0.6,60) is sufficient; the 0.12 m tick step is unusual, and 0.2 and 0.3 m fall between gridlines, but k is readable from the endpoint."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 s, light calculation, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the key of 2.50 J is unique, the distractors map to distinct misconceptions, and the scope and load fit the exam. The only quibble is the odd 0.12 m axis tick spacing."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read the slope of a linear F-x graph to get k = 100 N/m, then compute the change in spring PE, ½k(0.3² - 0.2²) = 2.50 J. The graph-to-equation translation is the main lever. Arithmetic is short and clean, and the wording is unambiguous. Distractors correspond to common errors (using only the 0.3 m energy, using F·Δx at the final force, using Δx alone). No multi-step linking or proportional reasoning is needed, so this is closer to basic learning than to full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m14-k0",
+  "cellId": "ap_physics_1-m14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Total stays 1.0: half of Ug turns into K and half into Eint, and friction is what produces Eint. That makes D correct. A, B and C contradict the charts.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy bar interpretation with internal energy is Topic 3.4. Using conservation of energy to evaluate claims fits skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique correct statement. Totals are conserved (12 J initial, 6+6 J final). A, B and C are each contradicted by the chart."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data specifies both states, all bars, units and ymax. The student view uses relative heights (tallest = 1.0) rather than joules, a minor mismatch with the J-unit data that does not affect answerability."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions: KE gain implies no friction, energy destroyed, and mechanical energy conserved. The explanation covers each wrong option. The key is slightly longer than the others, but this is not a strong giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds, no arithmetic, a typical bar-chart statement item. Calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Valid, quick energy-bar interpretation item with a unique key and distinct misconception distractors. The only minor issue is the student view showing relative bar heights while the data uses joules."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item. The student reads an energy bar chart, sees that the total energy is conserved (Ug = K + Eint), and chooses the statement that describes friction converting PE into internal energy. Distractors target common misconceptions (energy destroyed, K = initial Ug, KE gain implies no friction). There is no calculation, minimal reading, and one representation to interpret, so it fits foundational learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m14-k1",
+  "cellId": "ap_physics_1-m14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Initial Ug = 1 unit. Final K = 0.5 and Eint = 0.5, which adds up to 1, so the total energy is conserved. Friction turned half of the gravitational potential energy into internal energy of the block and ramp.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy bar chart interpretation with internal energy; applies conservation of energy to make a claim. In scope for 3.4/3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct statement; A, C, D are each clearly false given the bars (K=6, Eint=6, total conserved)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Bar data complete for both states with unit and scale; student-facing description gives relative bar heights. Wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception and the explanation addresses each wrong option. Option B is slightly longer, a minor cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds, no arithmetic, single representation, calculator designation harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, concise MC item on interpreting an energy bar chart with an internal energy bar. The key is unique and the distractors are distinct misconceptions. It is on the easy side but acceptable for the skill."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read one energy bar chart pair and identify that the missing mechanical energy appears as internal energy due to friction. Needs about two reasoning steps and no calculation. Distractors target standard misconceptions (K equals Ug, energy destroyed, no friction because K increased). The wording is clear and the figure is consistent with the data. It is suitable for concept learning but too easy for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m15-k0",
+  "cellId": "ap_physics_1-m15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v^2 = 2^2 + 2(9.8)(18) = 356.8, so v ≈ 18.9 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "18.9 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conservation of energy with initial speed; the dominant demand is selecting and applying the law, matching topic 3.4 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key of 18.9 m/s is the unique correct answer. The distractor values are all distinct from it."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states the negligible-friction assumption, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (wrong height, adding speeds, dropped factor of two), each explained. No length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short, typical load for a calculator-allowed MC item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, with a unique key, distinct distractors and typical exam load. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of conservation of mechanical energy with no friction: v = sqrt(v0^2 + 2g*dh) = sqrt(4 + 352.8) ≈ 18.9 m/s. There is no representation change, no multi-part reasoning, and the arithmetic is short. It is a routine direct-substitution item suited to introductory learning rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m15-k1",
+  "cellId": "ap_physics_1-m15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v^2 = v0^2 + 2gΔh = 4 + 2(9.8)(15) = 298, so v ≈ 17.3 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "17.3 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard energy conservation with initial speed; matches 3.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "sqrt(298)=17.26; unique answer; model assumptions stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; no format giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, calculator allowed, short arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean energy-conservation item with distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single application of conservation of mechanical energy (no dissipation): v = sqrt(v0^2 + 2g*dh) = sqrt(4 + 294) ≈ 17.3 m/s. One governing law, one equation, short calculator-friendly arithmetic, no representation changes, and a clear, unambiguous setup. Distractors reflect common errors (ignoring the initial speed, using the wrong height), but the item is a straightforward routine calculation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m16-k0",
+  "cellId": "ap_physics_1-m16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Energy conservation: v^2 = 625 - 2*9.8*5 = 527, so v ≈ 23.0 m/s. The max height is about 13.2 m, so the ball does reach 5 m.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "23.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy conservation applied to a projectile; fits 3.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v=sqrt(527)=22.96≈23.0 m/s; unique; the ball reaches 5 m (max height ~13.2 m); the negligible-air-resistance condition is stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (subtracting speeds, horizontal component only, launch speed); all are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short single-step calculator item; the load is typical of the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique and correct, the distractors are distinct and explained, and the scope and load are appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-law energy conservation problem: KE_i = KE_f + mgh gives v = sqrt(625 - 98) ≈ 23.0 m/s. The only conceptual hurdle is recognizing the launch angle is irrelevant to speed at a given height. About 3 short steps, no representation change, light arithmetic, and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m16-k1",
+  "cellId": "ap_physics_1-m16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "20.7 m/s",
+     "brief_reasoning": "v^2 = 25^2 - 2(9.8)(10) = 429, v ≈ 20.7 m/s; max height 23.9 m > 10 m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conservation of energy for a projectile, using the energy law to find speed at a given height. This is Unit 3 content, and the dominant demand matches 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = sqrt(625 - 196) = 20.7 m/s. The height is reachable (max height about 23.9 m). The key is unique and the independent solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear, air resistance is stated as negligible, and the launch angle is given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct errors: ignoring the energy lost to the rise, subtracting speeds, and dropping the factor of 2. The explanation covers every wrong option. The values are not given away by length or format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator allowed, light arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean energy-conservation question with a unique, verified key, distinct distractors, and a complete explanation. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing conservation of energy over projectile components and recognizing the launch angle is irrelevant to speed at a given height. Then one substitution: v = sqrt(25^2 - 2*9.8*10) = sqrt(429) ≈ 20.7 m/s. Short computation, minimal reading, no representation change. Straightforward for a mock exam; the main lever is selecting the governing law and ignoring the distractor angle.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m17-k0",
+  "cellId": "ap_physics_1-m17",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "a=(m2-m1)g/(m1+m2)=2.45 m/s^2; v=sqrt(2ad)=sqrt(2.45)=1.57 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1.57 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy conservation for a two-block system, with a multi-step calculation. Fits topic 3.4 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key 1.57 m/s is unique and correct. The stem states the ideal pulley and string and the release from rest."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The atwood scene data (m1 = 3, m2 = 5) is complete and consistent with the stem. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each checked numerically (1.11, 1.98, 3.13 m/s). The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, calculator allowed, a typical AP MC load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, well distracted, and suitable for the exam. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing conservation of energy for a two-block system, computing the net gravitational PE change (loss of the heavy block minus gain of the light block), and equating it to the KE of the combined 8 kg mass. Roughly 4 steps with one diagram read and light, clean arithmetic. In scope for Unit 3 and typical of a full-mock item; the distractors map to plausible conceptual errors. The stem is clear and the arithmetic short. The figure and stem are redundant but concise.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m17-k1",
+  "cellId": "ap_physics_1-m17",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "a=(m2-m1)g/(m1+m2)=g/3; v=sqrt(2*a*1)=sqrt(6.53)=2.56 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2.56 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy conservation for a two-block system, in Unit 3 scope; the dominant demand is choosing the law and computing a quantity with units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key 2.56 m/s is unique and correct. The stem states an ideal pulley and string, and g = 9.8 m/s^2 is the standard assumption."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The atwood scene carries m1 = 3 and m2 = 6, which matches the stem. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct named misconceptions: free fall, a dropped factor of two, and ignoring the lighter block's gravitational energy gain. The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical, a short one-step energy setup, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, in-scope Atwood energy-conservation question with a unique key and well-targeted distractors, so it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the energy-conservation approach for a two-mass system, recognizing the shared speed and net PE change (m2-m1)gh, and solving for v with a short calculation. Standard Atwood setup, minimal reading, no unfair difficulty sources. Distractors map to plausible errors such as ignoring the mass ratio (sqrt(2gh)=4.43).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m18-k0",
+  "cellId": "ap_physics_1-m18",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At the top, v^2 = gR. Energy conservation: gh = 2gR + gR/2, so h = 2.5R = 6.25 m.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "6.25 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy conservation plus the top-of-loop contact condition; a symbolic derivation fits 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "h=2.5R=6.25 m is unique and correct under the point-mass model."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is clear and complete. The 'rolls' wording is a minor point, but a small cart is the standard model."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP load; short stem, simple arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and well formed. The key 6.25 m is unique and the distractors are distinct and realistic. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires combining the circular-motion condition at the top of the loop (N = 0, so v^2 = gR) with conservation of energy (mgh = 2mgR + 1/2 mv^2) to derive h = 2.5R = 6.25 m. This is a two-concept symbolic derivation with a mild conceptual trap, since the minimum speed at the top is not zero. Distractors correspond to plausible errors (h = 2R, h = 3R, h = R/2). Reading and arithmetic loads are minimal and the wording is unambiguous, so the difficulty comes from concept linkage rather than unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_physics_1-m18-k1",
+  "cellId": "ap_physics_1-m18",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At the top, the minimum speed is v²=gR. Energy conservation gives mgh = mg(2R) + ½mgR, so h = 2.5R = 6.25 m.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "6.25 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy conservation combined with the contact condition at the top of the loop; the dominant skill is deriving the symbolic expression h=2.5R. Within Unit 3 and the in-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "6.25 m is unique and correct. 'Small cart' and 'without friction' justify the point-mass, frictionless model. The minimum speed at the top is the standard condition."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete. Adding 'treat the cart as a point mass' would be a slight improvement but is not required."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (height above the top of the loop, missing the factor of one half, zero speed at the top), and the explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Two-step reasoning in about 2 minutes, with no heavy arithmetic. Calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, with a unique key of 6.25 m. The distractors are distinct and realistic. It fits topic 3.4 and skill 2.A, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing two governing laws: the N=0 condition at the top of the loop (mg = mv^2/R) and then conservation of energy (mgh = 2mgR + 1/2 mv^2), giving h = 2.5R = 6.25 m. The concept is standard for AP Physics 1 and needs a multi-step symbolic pathway with a 'minimum' condition to interpret. Arithmetic is trivial, the wording is clear, the frictionless assumption is stated, and the distractors (R/2, 2R, 3R) correspond to plausible errors. It is appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m19-k0",
+  "cellId": "ap_physics_1-m19",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Useful output power = mgv = 300*9.8*0.4 = 1176 W. Input power = 1176/0.8 = 1470 W.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1470 W"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.5 power with efficiency; the dominant demand is selecting P = Fv and dividing by efficiency, which fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key of 1470 W is unique. Constant speed gives lifting force equal to weight, so useful power is 1176 W and input power is 1470 W."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear, and g = 9.8 m/s^2 is the standard assumption."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions: omitting g, multiplying by the efficiency instead of dividing, and ignoring the efficiency. The explanation addresses each one. Options are short, parallel values of similar length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-95 seconds and has a light calculation load. Calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct power-efficiency question with a unique key and distinct distractors, and it passes all criteria. The only blemish is a trivial rounding display of 1176 W as 1180 W in option D and the explanation."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing P = Fv, recognizing constant speed implies F = mg, and correctly applying efficiency (dividing output by 0.8 to get input power). Distractors target the common error of multiplying by efficiency. Short arithmetic, minimal reading, no representation changes; appropriate for a full mock as a standard multi-step calculation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m19-k1",
+  "cellId": "ap_physics_1-m19",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Pout = mgv = 300*9.8*0.5 = 1470 W; Pin = 1470/0.8 ≈ 1840 W",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1840 W"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Power with efficiency, constant speed; fits 3.5 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answer 1840 W; constant speed stated; g=9.8 standard."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, light calculation, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous efficiency/power item with a correct key and distinct distractors. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing P = Fv with F = mg for constant-speed lift, then accounting for efficiency (input = output / 0.8). Three short reasoning steps, simple arithmetic, clear wording, and distractors that match common errors (skipping efficiency, multiplying by 0.8). In scope for Unit 3 power; typical of a full-mock calculation item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m20-k0",
+  "cellId": "ap_physics_1-m20",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Ramp is stationary, so the normal force stays perpendicular to the block's displacement along the surface and does zero work.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds to answer and needs no calculation. Its calculator designation is consistent with the other items.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean conceptual item on zero work by the normal force. It has a unique key, distinct distractors and a suitable load, so I recommend acceptance."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize that work by a force perpendicular to displacement is zero (W = Fd cos90°). No calculation needed; the given numbers are distractors. Distractors target common misconceptions (normal force 'does the accelerating' or 'balances weight'). One reasoning step, no representation change, short wording, no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m20-k1",
+  "cellId": "ap_physics_1-m20",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "The ramp is fixed and frictionless, so the normal force always points perpendicular to the surface, and the block's displacement runs along the surface. Work = F·d·cos 90° = 0.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. The normal force on a fixed, frictionless ramp is perpendicular to the block's displacement, so it does zero work. Option B is the only correct statement.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item targets the definition of work (force component along the displacement) in topic 3.2, and the student must apply that definition to make a claim, which fits skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is B. The ramp is fixed, so the normal force is perpendicular to the displacement and does zero work. The other three options are each clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is clear. The numbers (5 kg, 3 m, 4 m/s) are distractor context only and add little reading load."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception: the normal force causes the acceleration, balancing a force is confused with doing work, and opposing gravity is confused with doing work. The explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 70 seconds with no arithmetic, which is typical for an AP Physics 1 multiple-choice item."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: the normal force on a frictionless ramp is perpendicular to the displacement, so W = Fd cos(90°) = 0. No computation is needed; the numeric values (5 kg, 3 m, 4 m/s) are distractors. Distractors reflect common misconceptions (normal force accelerates the block, or balances the weight). Reading is minimal and the wording is unambiguous, with no representation changes. It needs one law selection (the definition of work) and one reasoning step to connect the perpendicular direction to zero work.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m21-k0",
+  "cellId": "ap_physics_1-m21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Speeds equal; 4 kg block has twice the KE",
+     "brief_reasoning": "v = sqrt(2gh), which doesn't depend on mass. KE = mgh, so it is proportional to mass: 39.2 J vs 19.6 J.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy conservation on frictionless incline; claim via law application fits 3.4/3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is uniquely correct: equal speeds, KE proportional to mass (ratio 2)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem states all conditions (frictionless, rest, same height)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. Minor: option C 'why' wording is slightly muddled."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 s, low reading load, calculator irrelevant. Correct option slightly longer but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, in-scope conceptual item with a unique key and distinct distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: apply conservation of energy (mgh = 1/2 mv^2), notice mass cancels so speeds are equal, and KE is proportional to mass. No calculation, no representation change, minimal reading, and distractors are common misconceptions. Appropriate for introductory practice rather than full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m21-k1",
+  "cellId": "ap_physics_1-m21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "With no friction, v = sqrt(2gh), so the speed doesn't depend on mass and both blocks reach the bottom at the same speed. Kinetic energy is mgh, which is proportional to mass, so the 6 kg block has 3 times the kinetic energy.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conservation of energy on a frictionless incline with a proportional comparison of kinetic energies; fits topic 3.4 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique correct answer: v = sqrt(2gh) is independent of mass, and KE = mgh scales with mass, so the 6 kg block has 3 times the KE. The frictionless condition is stated in the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation covers all wrong options. The rationale for B is slightly mismatched with its text, but it is still acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick conceptual item of about 60-80 seconds with no arithmetic burden; calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, in-scope conceptual item. The key is unique and correct, the distractors are distinct, and the explanation covers every option. Passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: apply conservation of energy (mgh = 1/2 mv^2) to see that speed is independent of mass, then note KE scales with mass (3x). No calculation needed, no representation change, minimal reading. Distractors target common misconceptions (heavier is faster or lighter is faster, equal speed implies equal KE). Fits introductory understanding of topic 3.4 rather than full-mock exam-level complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m22-k0",
+  "cellId": "ap_physics_1-m22",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "KE = ½mv², so the factor is 3 × 2² = 12.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "12 times"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60 seconds, a short standalone proportional-reasoning item that is typical of AP Physics 1. The calculator is not needed but is allowed, which is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous KE scaling item with a unique key and distinct misconception distractors. It fits topic 3.1 and skill 2.D and is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept proportional reasoning with KE = 1/2 m v^2: factor = 3 x 2^2 = 12. One governing law, one squared dependence, trivial arithmetic, no representation change, minimal reading. Distractors map to common errors (adding, squaring mass too, not squaring speed). Appropriate for initial learning of topic 3.1, not for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_physics_1-m22-k1",
+  "cellId": "ap_physics_1-m22",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "KE=1/2 mv^2; factor = 3*2^2 = 12",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "12 times"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 45-60 seconds, minimal reading, no arithmetic burden, with short parallel numeric options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous KE scaling item with a unique key and distinct distractors, suited to the AP Physics 1 pattern. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: apply KE = 1/2 m v^2 and compute the factor 3 x 2^2 = 12. One proportional-reasoning step, no representation change, minimal reading and arithmetic. Distractors map to common errors (ignoring mass, squaring mass, not squaring speed). Fits the skill 2.D functional-dependence prediction at an introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_physics_1-m23-k0",
+  "cellId": "ap_physics_1-m23",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Area under F-x graph via trapezoids: 4.5+19.5+21+10=55 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "55.0 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work as area under F-x graph; computational pathway fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trapezoid areas 4.5+19.5+21+10=55 J; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes with labels, units, ranges and vertices fully specified; stem states force component along motion."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (27 = sum of forces, 72 = Fmax*9, 4.5 = first segment); explanation covers all."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, calculator allowed, modest arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, correct item: the work equals the area under a piecewise-linear F-x graph (55 J), with complete stimulus data and distinct misconception-based distractors."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Work as area under a piecewise-linear F-x graph. The student must read the vertices, split the area into four trapezoids, compute each with small integer arithmetic, and sum to 55 J. There is one representation read, no unit conversion and little reading. The distractors reflect plausible errors (first segment only, max force times width). This is a standard mock-exam level item that is above pure recall but not advanced.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m23-k1",
+  "cellId": "ap_physics_1-m23",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Area under F-x graph by trapezoids: 4.5+27+21+3=55.5 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "55.5 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work as area under F-x graph, Unit 3 topic 3.2, skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trapezoid areas 4.5+27+21+3=55.5 J; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with labeled axes and vertices; y max 13 with step 2 is slightly odd but harmless. Student must be able to read vertex values from the rendered graph."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct computed misconception (4.5, 23, 9); explanation covers all."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, modest arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: correct unique key of 55.5 J, clear graph, distinct distractors, appropriate load. Minor note: the y-axis max of 13 with step 2 is slightly unusual but does not affect validity."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Work as area under an F-x graph with a piecewise-linear curve. The solver reads vertices from the graph, splits the area into four trapezoids, and sums them (4.5+27+21+3=55.5 J). The concept is standard and in scope, the arithmetic is short with simple numbers, and the wording is unambiguous. This is moderate multi-step graph interpretation, appropriate for a full mock and not advanced. The distractors are plausible partial-area errors.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m24-k0",
+  "cellId": "ap_physics_1-m24",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At constant speed the pull equals friction: F = μmg = 0.2·60·9.8 = 117.6 N. Power P = Fv = 117.6 N × 2 m/s ≈ 235 W.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "235 W"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.5 power as Fv, with constant-speed reasoning. Skill 2.B fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is 235.2 W, so option D. It is unique, and the constant-speed condition is stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear, with a horizontal rope and a level floor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions: dropping the mass, dropping g, and using KE. The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator allowed, parallel options, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of 235 W is unique, the distractors are distinct, and it is appropriately scoped and timed."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Constant speed implies net force is zero, so the rope force equals kinetic friction (mu*m*g, about 118 N). Then P = Fv gives about 235 W. This takes about four steps and combines Newton's second law, friction and power. Arithmetic is short and the wording is clear. The distractors are plausible slips such as dropping mass, dropping g, or using g = 10. The level is typical of a standard multi-step exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m24-k1",
+  "cellId": "ap_physics_1-m24",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Constant speed means the rope's pull equals friction: F = μmg = 0.3·60·9.8 = 176.4 N. Power P = Fv = 176.4·3 ≈ 529 W.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "529 W"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound power item: constant speed gives F = μmg and P = Fv ≈ 529 W. The key is unique and the distractors are distinct and explained. The load is typical and no stimulus is needed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept routine: constant speed implies rope force equals kinetic friction (mu*m*g ~ 176 N), then P = Fv ~ 529 W. No representation change, minimal reading, short arithmetic with clean numbers. Three linked steps but each is standard and direct; sits at the easier end of the exam range.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m25-k0",
+  "cellId": "ap_physics_1-m25",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v^2 = v0^2 - 2μgd = 36 - 7.84 = 28.16, v ≈ 5.31 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "5.31 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard work-energy with friction, topic 3.4, skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = sqrt(36-7.84)=5.31 m/s, unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 2.80 m/s distractor does not follow from its stated misconception: mu*g*d is 3.92 and its square root is 1.98, neither of which is 2.80. The explanation does not describe how a student would reach this value. The 2.08 and 6.00 distractors are fine."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator-friendly, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in scope, key and stem. The 2.80 m/s distractor's explanation does not reproduce its value, so the item fails on distractor quality and needs a corrected distractor or explanation."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: apply the work-energy theorem with friction dissipation (1/2 m v_f^2 = 1/2 m v_i^2 - mu m g d). The mass cancels, and there are about 3 steps with short arithmetic (36 - 7.84 = 28.16, sqrt = 5.31). No representation change is needed. The wording is clear and the model is stated (rough horizontal patch, kinetic friction). The distractors reflect common errors (forgetting to take the square root, ignoring friction), but the item does not demand multi-step synthesis.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m25-k1",
+  "cellId": "ap_physics_1-m25",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v^2 = v0^2 - 2μgd = 36 - 2(0.2)(9.8)(3) = 24.24, v ≈ 4.92 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "4.92 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy conservation with friction dissipation, Topic 3.4, multi-step calculation (2.B)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = sqrt(v0^2 - 2μgd) ≈ 4.92 m/s is unique; g = 9.8 standard assumption."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are plausible and distinct (missing factor of two, ignoring friction, subtracting from speed). The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, light arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct friction-patch energy item with a unique key and realistic distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept work-energy application: friction work equals the change in KE, then v_f = sqrt(v_i^2 - 2*mu*g*d) = 4.92 m/s. There is no representation change, the reading load is minimal, and the arithmetic is short. The only lever is choosing the governing law. The distractors target conceptual slips such as ignoring friction or omitting the factor of 2 in the KE term.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]

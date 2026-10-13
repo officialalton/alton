@@ -51,7 +51,7 @@ def ph_vt_displacement(rng):
     stem = f"The graph shows the velocity of {ctx} as a function of time. What is the displacement of the object from $t=0$ to $t={T}\\text{{ s}}$? Positive is to the right."
     return mk("ph_vt_displacement", "1.2", "2.B", stem, key, ds, rng, concept="Displacement is the signed area under a velocity-time graph", thinking=["Read the velocity at each vertex of the graph", "Add signed areas of the segments, with area below the axis counted as negative displacement"],
               cond=[("the velocity is piecewise linear between the plotted vertices", "the graph is built from integer vertices joined by straight segments")], path="exact fractions for trapezoid areas versus numpy trapezoid integration of a dense resampling of the same graph",
-              material=MAT_GRAPH("axis labels with units", "vertices"), judgment=["representation_reading", "quantitative_comparison"], stim=stim, est=100, facts=[f"xs={xs}", f"vs={vs}"], kwhy="Displacement is the signed area under the velocity-time graph; area below the axis subtracts.")
+              material=MAT_GRAPH("axis labels with units", "vertices"), judgment=["representation_reading", "quantitative_comparison"], stim=stim, est=100, facts=[f"xs={xs}", f"vs={vs}"], kwhy=f"The signed areas of the segments are {seg_text(xs, vs, 'm')}; area below the axis subtracts, so the displacement is ${sig(float(disp))}\\text{{ m}}$.")
 
 
 # ======================= 2. a–t 그래프 → 속도 변화 (1.2 / 2.B, 그림: G) =======================
@@ -75,7 +75,7 @@ def ph_at_velocity_change(rng):
     stem = f"The graph shows the acceleration of an object moving along a straight line. At $t=0$ the velocity is ${v0}\\text{{ m/s}}$. What is the velocity at $t={T}\\text{{ s}}$?"
     return mk("ph_at_velocity_change", "1.2", "2.B", stem, key, ds, rng, concept="The area under an acceleration-time graph is the change in velocity", thinking=["Recognize that the area under a-t is the change in velocity", "Add the signed area to the initial velocity"],
               cond=[("the acceleration is piecewise linear in time", "the graph is built from integer vertices")], path="exact fractions for segment areas versus numpy integration of a dense resampling", material=MAT_GRAPH("axis labels with units"),
-              judgment=["representation_reading", "law_selection"], stim=stim, est=100, facts=[f"xs={xs}", f"a={a}", f"v0={v0}"], kwhy="The final velocity is the initial velocity plus the signed area under the a-t graph.")
+              judgment=["representation_reading", "law_selection"], stim=stim, est=100, facts=[f"xs={xs}", f"a={a}", f"v0={v0}"], kwhy=f"The areas under the a-t graph are {seg_text(xs, a, 'm/s')}, so $\\Delta v={sig(float(dv))}\\text{{ m/s}}$ and $v=v_0+\\Delta v={v0}+{sig(float(dv))}={sig(vf)}\\text{{ m/s}}$.")
 
 
 # ======================= 3. 등가속 직선 운동 시간 (1.2 / 2.B) =======================
@@ -97,7 +97,7 @@ def ph_kinematics_time(rng):
     stem = f"A skater moving at ${v0:g}\\text{{ m/s}}$ along a straight line speeds up uniformly at ${a:g}\\text{{ m/s}}^2$. How long does the skater take to travel ${d}\\text{{ m}}$ while speeding up?"
     return mk("ph_kinematics_time", "1.2", "2.B", stem, key, ds, rng, concept="Choose the kinematic equation that links displacement, initial velocity, acceleration and time", thinking=["Identify which quantities are known and unknown", "Solve the quadratic from the displacement equation and keep the physically meaningful root"],
               cond=[("the acceleration is constant", "the problem states the skater speeds up uniformly")], path="sympy solves the quadratic symbolically; a bisection root finder on the displacement function recomputes the time", material=MAT_NONE,
-              judgment=["law_selection"], est=110, facts=[f"v0={v0}", f"a={a}", f"d={d}"], kwhy="The displacement equation gives a quadratic in time; its positive root is the travel time.")
+              judgment=["law_selection"], est=110, facts=[f"v0={v0}", f"a={a}", f"d={d}"], kwhy=f"$d=v_0t+\\tfrac12at^2$ with $v_0={v0:g}$, $a={a:g}$ and $d={d}$ gives a quadratic whose positive root is $t={sig(ts)}\\text{{ s}}$.")
 
 
 # ======================= 4. 경사 던지기 사거리 (1.5 / 2.B) =======================
@@ -121,7 +121,7 @@ def ph_projectile_range(rng):
     stem = f"A ball is launched from level ground with speed ${v0:g}\\text{{ m/s}}$ at ${th}^\\circ$ above the horizontal. Air resistance is negligible. How far from the launch point does the ball land?"
     return mk("ph_projectile_range", "1.5", "2.B", stem, key, ds, rng, concept="Horizontal range of a projectile launched from level ground", thinking=["Split the launch velocity into horizontal and vertical components", "Use the vertical motion to find the flight time, then the horizontal motion for the distance"],
               cond=[("the landing height equals the launch height and air resistance is ignored", "the stem states level ground and negligible air resistance")], path="closed form range versus an RK4 integration of the equations of motion until the ball returns to the ground", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=120, facts=[f"v0={v0}", f"th={th}"], kwhy="The flight time is $2v_0\\sin\\theta/g$ and the horizontal velocity $v_0\\cos\\theta$ is constant, so the range is $v_0^2\\sin 2\\theta/g$.")
+              judgment=["law_selection", "symbolic_reasoning"], est=120, facts=[f"v0={v0}", f"th={th}"], kwhy=f"The flight time is $2v_0\\sin\\theta/g$ and the horizontal velocity $v_0\\cos\\theta$ is constant, so $R=v_0^2\\sin 2\\theta/g={v0:g}^2\\sin {2 * th}^\\circ/9.8={sig(R)}\\text{{ m}}$.")
 
 
 # ======================= 5. 상대 운동: 강 건너기 (1.4 / 2.B, 그림: V) =======================
@@ -141,7 +141,7 @@ def ph_relative_velocity(rng):
     stem = f"A boat heads straight across a river, pointing perpendicular to the banks, at ${vb:g}\\text{{ m/s}}$ relative to the water. The current flows parallel to the banks at ${vr:g}\\text{{ m/s}}$. What is the speed of the boat relative to the ground?"
     return mk("ph_relative_velocity", "1.4", "2.B", stem, key, ds, rng, concept="Combining perpendicular velocities in a moving reference frame", thinking=["Identify the two velocities as perpendicular vectors", "Add them as vectors and find the magnitude of the resultant"],
               cond=[("the boat velocity relative to the water and the current are perpendicular", "the stem states the boat points perpendicular to the banks")], path="exact symbolic square root versus numpy hypot of the component vector sum", material=MAT_NONE,
-              judgment=["law_selection"], est=90, facts=[f"vb={vb}", f"vr={vr}"], kwhy="The ground velocity is the vector sum of the boat velocity and the current, so its magnitude is the hypotenuse.")
+              judgment=["law_selection"], est=90, facts=[f"vb={vb}", f"vr={vr}"], kwhy=f"The ground velocity is the vector sum of the two perpendicular velocities, so the speed is $\\sqrt{{{vb:g}^2+{vr:g}^2}}={sig(s)}\\text{{ m/s}}$.")
 
 
 # ======================= 6. 수평 발사 vs 낙하: 시간 비교 (1.5 / 3.B) =======================
@@ -213,7 +213,7 @@ def ph_atwood_tension(rng):
     stem = f"Two blocks of masses ${m1:g}\\text{{ kg}}$ and ${m2:g}\\text{{ kg}}$ hang from a light string over a frictionless, massless pulley and are released from rest. What is the tension in the string while the blocks move?"
     return mk("ph_atwood_tension", "2.5", "2.B", stem, key, ds, rng, concept="Newton's second law for two connected masses", thinking=["Write Newton's second law separately for each block", "Solve the two equations together for the tension"],
               cond=[("the string and pulley are ideal so one tension acts on both blocks", "the stem states a light string and a massless frictionless pulley")], path="sympy solves the two equations; numpy linalg.solve on the same linear system recomputes the tension", material=MAT_DIAGRAM("two hanging masses", "pulley"),
-              judgment=["law_selection", "symbolic_reasoning"], stim=diagram_stim("Two blocks over a pulley", sc), est=120, facts=[f"m1={m1}", f"m2={m2}"], kwhy="Applying Newton's second law to each block and eliminating the acceleration gives the tension $2m_1m_2g/(m_1+m_2)$.")
+              judgment=["law_selection", "symbolic_reasoning"], stim=diagram_stim("Two blocks over a pulley", sc), est=120, facts=[f"m1={m1}", f"m2={m2}"], kwhy=f"Newton's second law for each block gives $T=2m_1m_2g/(m_1+m_2)=2({m1:g})({m2:g})(9.8)/{m1 + m2:g}={sig(Tv)}\\text{{ N}}$.")
 
 
 # ======================= 9. 경사면 마찰 가속도 (2.7 / 2.B, 그림: S) =======================
@@ -235,7 +235,7 @@ def ph_incline_friction(rng):
     stem = f"A ${m:g}\\text{{ kg}}$ block slides down a ${th}^\\circ$ incline. The coefficient of kinetic friction between the block and the incline is ${mu:g}$. What is the magnitude of the block's acceleration?"
     return mk("ph_incline_friction", "2.7", "2.B", stem, key, ds, rng, concept="Newton's second law along an incline with kinetic friction", thinking=["Resolve the weight into components parallel and perpendicular to the incline", "Use the perpendicular balance for the normal force, then Newton's second law along the incline"],
               cond=[("the block slides down so kinetic friction acts up the incline", "the stem states the block slides and gives the kinetic friction coefficient")], path="closed form acceleration versus an RK4 integration of the motion for one second whose displacement equals half the acceleration", material=MAT_DIAGRAM("incline angle", "block"),
-              judgment=["law_selection", "symbolic_reasoning"], stim=diagram_stim("Block on a rough incline", sc), est=120, facts=[f"th={th}", f"mu={mu}", f"m={m}"], kwhy="Along the incline $ma=mg\\sin\\theta-\\mu mg\\cos\\theta$, and the mass cancels.")
+              judgment=["law_selection", "symbolic_reasoning"], stim=diagram_stim("Block on a rough incline", sc), est=120, facts=[f"th={th}", f"mu={mu}", f"m={m}"], kwhy=f"Along the incline $a=g(\\sin\\theta-\\mu\\cos\\theta)=9.8(\\sin{th}^\\circ-{mu:g}\\cos{th}^\\circ)={sig(a)}\\text{{ m/s}}^2$, and the mass cancels.")
 
 
 # ======================= 10. 자유물체도 선택 (2.2 / 3.B, 선택지 그림: F) =======================
@@ -286,7 +286,7 @@ def ph_elevator_scale(rng):
     stem = f"A ${m:g}\\text{{ kg}}$ person stands on a scale in an elevator. The graph shows the velocity of the elevator, with upward positive. What does the scale read between $t=0$ and $t={t1}\\text{{ s}}$?"
     return mk("ph_elevator_scale", "2.5", "2.B", stem, key, ds, rng, concept="Apparent weight from the acceleration read off a velocity-time graph", thinking=["Find the acceleration as the slope of the velocity-time graph", "Apply Newton's second law to the person: the scale force minus the weight equals ma"],
               cond=[("the scale reading equals the normal force on the person", "the person stands on the scale inside the accelerating elevator")], path="the slope is recomputed with numpy polyfit through the two vertices and the force from Newton's second law", material=MAT_GRAPH("axis labels with units"),
-              judgment=["representation_reading", "law_selection"], stim=stim, est=110, facts=[f"m={m}", f"xs={xs}", f"vs={vs}"], kwhy="The slope gives the acceleration and $N-mg=ma$, so the scale reads $m(g+a)$.")
+              judgment=["representation_reading", "law_selection"], stim=stim, est=110, facts=[f"m={m}", f"xs={xs}", f"vs={vs}"], kwhy=f"The slope gives $a={sig(slope)}\\text{{ m/s}}^2$ and $N-mg=ma$, so the scale reads $N=m(g+a)={m:g}(9.8+{sig(slope)})={sig(N)}\\text{{ N}}$.")
 
 
 # ======================= 12. 용수철 상수: F–x 그래프, cm 단위 (2.8 / 2.B, 그림: G) =======================
@@ -306,7 +306,7 @@ def ph_spring_k_graph(rng):
     stem = "A student measures the force needed to stretch a spring and plots the data shown. The stretch is in centimeters. What is the spring constant of the spring?"
     return mk("ph_spring_k_graph", "2.8", "2.B", stem, key, ds, rng, concept="Spring constant as the slope of a force versus stretch graph, with a unit conversion", thinking=["Identify the slope of the line as the spring constant", "Convert centimeters to meters before reporting a value in N/m"],
               cond=[("the spring obeys Hooke's law so the graph is a straight line through the origin", "the plotted points lie on a line through the origin")], path="numpy polyfit of force against stretch in meters gives the slope that is compared with the generating constant", material=MAT_GRAPH("axis labels with units"),
-              judgment=["representation_reading", "quantitative_comparison"], stim=stim, est=90, facts=[f"k={k}", f"x1={x1}"], kwhy="The slope of force against stretch in meters is the spring constant.")
+              judgment=["representation_reading", "quantitative_comparison"], stim=stim, est=90, facts=[f"k={k}", f"x1={x1}"], kwhy=f"The slope of force against stretch in meters is $k={sig(F1)}\\text{{ N}}/{sig(x1 / 100)}\\text{{ m}}={sig(float(k))}\\text{{ N/m}}$.")
 
 
 # ======================= 13. 수평 원운동 장력 (2.9 / 2.B) =======================
@@ -324,7 +324,7 @@ def ph_circular_tension(rng):
     stem = f"A ${m:g}\\text{{ kg}}$ ball on a light string moves in a horizontal circle of radius ${r:g}\\text{{ m}}$ at constant speed on a frictionless table, completing one revolution every ${P:g}\\text{{ s}}$. What is the tension in the string?"
     return mk("ph_circular_tension", "2.9", "2.B", stem, key, ds, rng, concept="Centripetal force from the period of uniform circular motion", thinking=["Find the speed from the circumference and the period", "Set the tension equal to the net centripetal force $mv^2/r$"],
               cond=[("the table is frictionless and horizontal so the tension is the only horizontal force", "the stem states a frictionless horizontal table")], path="the force is recomputed directly from the angular speed as $m\\omega^2 r$ and compared with $mv^2/r$", material=MAT_NONE,
-              judgment=["law_selection"], est=100, facts=[f"m={m}", f"r={r}", f"P={P}"], kwhy="The tension supplies the centripetal force $mv^2/r$ with $v=2\\pi r/P$.")
+              judgment=["law_selection"], est=100, facts=[f"m={m}", f"r={r}", f"P={P}"], kwhy=f"The tension supplies the centripetal force: $v=2\\pi r/P={sig(2 * math.pi * r / P)}\\text{{ m/s}}$ and $T=mv^2/r={sig(T)}\\text{{ N}}$.")
 
 
 # ======================= 14. 수직 원(고리) 꼭대기 수직항력 (2.9 / 2.B) =======================
@@ -342,7 +342,7 @@ def ph_vertical_circle_top(rng):
     stem = f"A ${m:g}\\text{{ kg}}$ car travels on the inside of a vertical circular loop of radius ${r:g}\\text{{ m}}$ and passes the top of the loop at ${v:g}\\text{{ m/s}}$ while staying in contact with the track. What is the magnitude of the normal force from the track on the car at the top?"
     return mk("ph_vertical_circle_top", "2.9", "2.B", stem, key, ds, rng, concept="Net centripetal force at the top of a vertical loop", thinking=["Identify that at the top both the weight and the normal force point toward the center", "Write $N+mg=mv^2/r$ and solve for the normal force"],
               cond=[("the car stays in contact with the track at the top", "the stem states it stays in contact and the generated values keep $v^2/r$ above $g$")], path="sympy rational arithmetic versus the float evaluation of $m(v^2/r-g)$ with an assertion that contact is maintained", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=110, facts=[f"m={m}", f"r={r}", f"v={v}"], kwhy="At the top both the weight and the normal force point toward the center, so $N+mg=mv^2/r$.")
+              judgment=["law_selection", "symbolic_reasoning"], est=110, facts=[f"m={m}", f"r={r}", f"v={v}"], kwhy=f"At the top both the weight and the normal force point toward the center, so $N=m(v^2/r-g)={m:g}({v:g}^2/{r:g}-9.8)={sig(N)}\\text{{ N}}$.")
 
 
 # ======================= 15. 만유인력 거리·질량 비례 (2.6 / 2.D) =======================
@@ -358,7 +358,7 @@ def ph_gravity_scaling(rng):
     wrong = [("Applies the distance change as a factor of $r$ instead of $r^2$.", Fr(ma * mb, rf)), ("Multiplies by the distance change, treating gravity as increasing with separation.", Fr(ma * mb * rf)),
              ("Ignores the mass changes and applies only the inverse-square distance factor.", Fr(1, rf * rf)), ("Squares the mass factors as well as the distance factor.", Fr(ma * ma * mb * mb, rf * rf))]
     fmt = lambda f: "$" + (f"{f.numerator}" if f.denominator == 1 else f"\\frac{{{f.numerator}}}{{{f.denominator}}}") + "F$"  # noqa: E731
-    key = Opt(fmt(fac), True, "Gravitational force is proportional to the product of the masses and inversely proportional to the square of the distance.", float(fac))
+    key = Opt(fmt(fac), True, f"The force is proportional to the product of the masses and inversely proportional to the square of the distance, so the factor is $({ma})({mb})/{rf}^2$, which is ${fac.numerator}/{fac.denominator}$ of the original force.", float(fac))
     ds, seen = [], {fmt(fac)}
     for why, f in wrong:
         if fmt(f) in seen or f == fac:
@@ -390,7 +390,7 @@ def ph_center_of_mass(rng):
     stem = f"Three small objects lie on the $x$-axis: {rows}. What is the $x$-coordinate of the center of mass of the system?"
     return mk("ph_center_of_mass", "2.1", "2.B", stem, key, ds, rng, concept="Center of mass of a system of point masses", thinking=["Weight each position by its mass", "Divide the sum by the total mass"],
               cond=[("the objects are point masses on one axis", "the stem lists masses and positions on the x-axis")], path="numpy average with weights versus the explicit mass-weighted sum divided by total mass", material=MAT_NONE,
-              judgment=["law_selection"], est=80, facts=[f"ms={ms}", f"xs={xs}"], kwhy="The center of mass is the mass-weighted average of the positions.")
+              judgment=["law_selection"], est=80, facts=[f"ms={ms}", f"xs={xs}"], kwhy=f"$x_{{cm}}=\\sum m_ix_i/\\sum m_i={sig(sum(a_ * b_ for a_, b_ in zip(ms, xs)))}/{sum(ms):g}={sig(cm)}\\text{{ m}}$.")
 
 
 # ======================= 17. 뉴턴 제3법칙 (2.3 / 3.B) =======================

@@ -1,0 +1,42 @@
+{
+ "run": "phys-s2-b",
+ "subject": "ap_physics_1",
+ "generatedAt": "2026-10-13T09:30:10.488Z",
+ "totalCostUsd": 2.54,
+ "newSpendSinceBaseline": 4.44,
+ "cap": 3.7,
+ "calls": 258,
+ "candidates": 86,
+ "mcCandidates": 86,
+ "frqCandidates": 0,
+ "passedAll": 67,
+ "adopted": 39,
+ "mcAdopted": 39,
+ "frqAdopted": 0,
+ "reserve": 28,
+ "yield": 0.453,
+ "costPerAdopted": 0.065,
+ "callsPerAdopted": 6.6,
+ "duplicateRejected": 3,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 86
+ },
+ "rejectionReasons": {
+  "criterion_failed_distractor_explanation": 11,
+  "duplicate_gate_near_duplicate": 3,
+  "solver_disagrees": 4,
+  "criterion_failed_stimulus_expression": 4,
+  "criterion_failed_key_scoring": 3,
+  "instant_reject_wrong_key": 1,
+  "criterion_failed_exam_suitability": 2,
+  "instant_reject_missing_condition": 2
+ },
+ "unfilledCells": [
+  "ap_physics_1-m01",
+  "ap_physics_1-m21",
+  "ap_physics_1-m26",
+  "ap_physics_1-m31"
+ ]
+}

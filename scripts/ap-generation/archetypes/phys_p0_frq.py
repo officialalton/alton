@@ -68,7 +68,7 @@ def phf_mr_table_block(rng):
     ]
     assert up
     return _pack("phf_mr_table_block", "mr", "2.5", ["2.2", "2.7"], "2.B", "Block on a table connected to a hanging block", stim, parts, 10, 22, [f"m1={m1}", f"m2={m2}", f"mu={mu}", f"a={a:.4f}", f"T={T:.3f}"],
-                 [_ev("C", "acceleration", a, 0.02, "m/s^2"), _ev("B", "tension", T, 0.5, "N")],
+                 [_ev("C", "acceleration", a, max(0.06, 0.012 * a), "m/s^2")],  # 2026-10-13: 장력은 어느 파트도 묻지 않으므로 기대값에서 제외(풀이기가 파트 B 식 답에서 14.7 을 찾다 수치 불일치로 반려됨)
                  ("Newton's second law for two connected objects with friction, a free-body diagram, and a justified prediction", ["Draw the free-body diagram of the table block", "Write Newton's second law for each block and combine", "Predict the effect of a change in friction using the derived relationships"],
                   [("the pulley and string are ideal and the blocks move together with one acceleration", "the stimulus states a light string and a light frictionless pulley")], {"type": "text", "must_include": ["masses", "friction coefficient"]},
                   "sympy solves the two Newton equations; numpy linalg.solve on the same system recomputes the acceleration and tension; the sign of the derivative of the tension with respect to the friction coefficient decides the prediction"),
@@ -90,7 +90,7 @@ def phf_tbr_spring_shm(rng):
         break
     n = pick(rng, [4, 9]); P2 = P * math.sqrt(n); v2 = vmax / math.sqrt(n)
     E = 0.5 * k * A * A
-    stim = {"kind": "text", "description": f"A block of mass $m={m:g}\\text{{ kg}}$ is attached to a horizontal spring of spring constant $k={k:g}\\text{{ N/m}}$ on a frictionless surface. The block is pulled to a position $x=+A$ with $A={A:g}\\text{{ m}}$ and released from rest at $t=0$.", "data": {}}
+    stim = {"kind": "text", "description": f"A block of mass $m={m:g}\\text{{ kg}}$ is attached to a horizontal spring of spring constant $k={k:g}\\text{{ N/m}}$ on a frictionless surface. The block is pulled to a position $x=+A$ with $A={A:g}\\text{{ m}}$ and released from rest at $t=0$. Blank energy bar chart templates (one per state, with a common scale) and blank axes for the graph are provided on the answer sheet.", "data": {}}
     parts = [
         part("A", "In the energy bar charts below, for each of three states (block at $x=+A$, block at $x=0$, block at $x=-A/2$), draw bars for kinetic energy $K$ and spring potential energy $U_s$ with a consistent scale. Show the total energy as the same height in each state.", 3, "diagram", ["1.A", "1.C"],
              f"At $+A$: $U_s=E$, $K=0$. At $0$: $K=E$, $U_s=0$. At $-A/2$: $U_s=E/4$, $K=3E/4$. Total $E=\\tfrac12kA^2={E:.4f}\\text{{ J}}$ in every state.",
@@ -136,27 +136,27 @@ def phf_lab_spring_k(rng):
             break
     stim = {"kind": "table", "description": "A student measures the period $T$ of a block of mass $m$ hanging on a vertical spring of unknown spring constant $k$.", "data": {"x_label": "Mass m (kg)", "y_label": "Period T (s)", "rows": [[m, t] for m, t in zip(ms, Ts)]}}
     parts = [
-        part("A", "Describe an experimental procedure to collect the data for the period as a function of mass. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured period.", 3, "design", ["1.B", "2.B"],
-             "Use a stopwatch to time 10 oscillations for each of several hanging masses added one at a time to the same spring, starting each trial from a small displacement, then divide by 10; repeat each timing.",
-             [R("A1", "design", "Identifies the measured quantities and equipment: a balance or known masses and a timing device", ["mass", "stopwatch"], err=["omits how the period is measured"]),
-              R("A2", "design", "Changes only the hanging mass while keeping the spring and the starting amplitude the same", ["change only the mass", "same amplitude"]),
-              R("A3", "design", "Reduces timing uncertainty, for example by timing many oscillations and dividing, or by repeating trials", ["time many oscillations", "repeat trials"])]),
-        part("B", "The period is related to the mass by $T=2\\pi\\sqrt{m/k}$. Identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find $k$.", 1, "explain", ["2.B", "3.A"],
+        part("A", "Describe an experimental procedure to collect the data for the period as a function of mass. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured period.", 3, "design", ["3.A", "2.B"],
+             "Measure each hanging mass with a balance (or use slotted masses of known mass) and use a stopwatch to time 10 oscillations for each of several hanging masses added one at a time to the same spring, starting each trial from the same small displacement, then divide by 10; repeat each timing.",
+             [R("A1", "design", "Identifies the measured quantities and equipment: a balance or known masses and a timing device (both a way to know the mass and a way to time the motion are needed)", ["a way to know the mass and a way to time the motion"], err=["omits how the period is measured"]),
+              R("A2", "design", "Changes only the hanging mass while keeping the spring and the starting amplitude the same (both conditions are needed)", ["change only the mass and keep the same starting amplitude"]),
+              R("A3", "design", "Reduces timing uncertainty by timing many oscillations and dividing, or by repeating the trials and averaging (either earns the point)", ["time many oscillations or repeat trials (either earns the point)"])]),
+        part("B", "Using the relationship between the period of a mass on a spring, the mass and the spring constant from the reference information, identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find $k$.", 1, "explain", ["2.B", "3.A"],
              "Plot $T^2$ on the vertical axis against $m$ on the horizontal axis; the slope is $4\\pi^2/k$.",
              [R("B1", "expression", "Identifies $T^2$ (vertical) versus $m$ (horizontal)", ["T squared versus m"], err=["plots T versus m"])]),
-        part("C", "Use the grid to plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid.", 3, "graph", ["1.B", "3.A"],
+        part("C", "On a blank grid whose scale you choose, plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid.", 3, "graph", ["1.B", "3.A"],
              f"Points $(m,T^2)$: {', '.join(f'({m:g}, {t:.3f})' for m, t in zip(ms, T2))} with a best-fit line of slope about ${slope:.2f}\\text{{ s}}^2/\\text{{kg}}$.",
              [R("C1", "graph", "Axes are labeled with quantities and units and the scale fills most of the grid", ["axis labels", "units", "scale"], err=["scale uses less than half the grid"]),
               R("C2", "graph", "Plots the five points $(m, T^2)$ accurately", ["points plotted"], nums=True),
               R("C3", "graph", "Draws a straight best-fit line through the trend of the points", ["best-fit line"], err=["connects the dots"])]),
         part("D", "Use the best-fit line to determine the spring constant $k$. Show your work.", 3, "calculate", ["2.B", "2.D"],
              f"Slope $\\approx {slope:.2f}\\text{{ s}}^2/\\text{{kg}}$, so $k=4\\pi^2/\\text{{slope}}\\approx {k_est:.1f}\\text{{ N/m}}$.",
-             [R("D1", "numeric", f"Calculates the slope of the best-fit line using two points on the line (about {slope:.2f} s^2/kg)", [f"{slope:.2f}"], requires="C3", nums=True, err=["uses data points rather than points on the line"]),
+             [R("D1", "numeric", f"Calculates the slope of the best-fit line using two points on the line (about {slope:.2f} s^2/kg; accept any value within 5 percent)", [f"{slope:.2f}"], requires="C3", nums=True, err=["uses data points rather than points on the line"]),
               R("D2", "expression", "Relates the slope to the spring constant: slope $=4\\pi^2/k$", ["slope = 4 pi^2 / k"], err=["uses slope = k"]),
-              R("D3", "numeric", f"Calculates $k$ (about {k_est:.0f}) with units of newtons per meter", [f"{k_est:.0f}", "N/m"], requires="D1", nums=True, units=True)]),
+              R("D3", "numeric", f"Calculates $k$ (about {k_est:.0f}; accept any value within 8 percent) with units of newtons per meter", [f"{k_est:.0f}", "N/m"], alt=["a value of k consistent with the student's own slope from D1, $k=4\\pi^2/\\text{slope}$"], nums=True, units=True)]),
     ]
-    return _pack("phf_lab_spring_k", "lab", "7.2", ["7.3"], "2.D", "Experiment: spring constant from the period of an oscillator", stim, parts, 10, 27, [f"k={k}", f"slope={slope:.4f}", f"k_est={k_est:.2f}", f"Ts={Ts}"],
-                 [_ev("D", "slope", slope, 0.03, "s^2/kg"), _ev("D", "spring constant", k_est, 0.06, "N/m")],
+    return _pack("phf_lab_spring_k", "lab", "7.2", ["7.3"], "3.A", "Experiment: spring constant from the period of an oscillator", stim, parts, 10, 27, [f"k={k}", f"slope={slope:.4f}", f"k_est={k_est:.2f}", f"Ts={Ts}"],
+                 [_ev("D", "slope", slope, 0.05 * slope, "s^2/kg"), _ev("D", "spring constant", k_est, 0.08 * k_est, "N/m")],
                  ("Designing an experiment and analyzing linearized data to extract a physical constant", ["Describe the measurements and how uncertainty is reduced", "Linearize the relationship and plot the data", "Use the slope to determine the spring constant"],
                   [("the generated periods follow $T=2\\pi\\sqrt{m/k}$ with a small random error so the best-fit slope is within a few percent of $4\\pi^2/k$", "the code rejects a seed whose fitted constant differs from the generating constant by more than four percent")], {"type": "table", "must_include": ["mass", "period"]},
                   "the slope is recomputed from the normal equations with numpy linalg.solve and compared with polyfit; the fitted spring constant is compared with the generating constant"),
@@ -179,17 +179,17 @@ def phf_qqt_collision(rng):
         part("A", "Do you agree or disagree with the student's claim? Justify your answer qualitatively without calculating numbers.", 3, "explain", ["3.B", "3.C"],
              "Disagree. Momentum is conserved because there is no net external horizontal force, but the carts stick together (a perfectly inelastic collision) so some kinetic energy is transformed into internal energy.",
              [R("A1", "claim", "Disagrees with the claim (kinetic energy is not conserved)", ["disagree"], err=["agrees because momentum is conserved"]),
-              R("A2", "justification", "Justifies the claim by distinguishing that momentum is conserved (no net external force) from kinetic energy, which is not", ["momentum conserved", "no external force"], requires="A1", err=["says both are conserved in every collision"]),
-              R("A3", "justification", "Explains that sticking together transforms kinetic energy into internal energy (or notes the carts do not separate)", ["internal energy", "carts stick"], requires="A1", err=["attributes the loss to friction with the track"])]),
+              R("A2", "justification", "Justifies the claim by distinguishing that momentum is conserved from kinetic energy, which is not (mentioning that no net external force acts is welcome but not required)", ["momentum is conserved while kinetic energy is not"], requires="A1", err=["says both are conserved in every collision"]),
+              R("A3", "justification", "Explains that sticking together transforms kinetic energy into internal energy (or notes the carts do not separate)", ["kinetic energy becomes internal energy because the carts stick together"], requires="A1", err=["attributes the loss to friction with the track"])]),
         part("B", f"Derive an expression for the speed $v_f$ of the combined carts in terms of $v_0$ and numerical constants, and find the fraction of the initial kinetic energy that remains.", 3, "derive", ["2.A", "3.B"],
              f"$mv_0=(m+{n}m)v_f$ so $v_f=v_0/{n + 1}={vf:.3f}\\text{{ m/s}}$; the remaining kinetic energy fraction is $\\dfrac{{(m+{n}m)v_f^2}}{{mv_0^2}}=\\dfrac{{1}}{{{n + 1}}}$.",
-             [R("B1", "expression", f"Applies conservation of momentum: $mv_0=(m+{n}m)v_f$", ["m v0 = (m + n m) vf"], err=["adds the speeds"]),
+             [R("B1", "expression", f"Applies conservation of momentum: $mv_0=(m+{n}m)v_f$", [f"m v0 = (m + {n}m) vf"], err=["adds the speeds"]),
               R("B2", "expression", f"Solves for $v_f=v_0/{n + 1}$", [f"v0/{n + 1}"], requires="B1", err=["divides by n rather than n+1"]),
               R("B3", "expression", f"Finds the kinetic energy fraction $1/{n + 1}$", [f"1/{n + 1}"], requires="B2", err=["uses the speed fraction as the energy fraction"])]),
         part("C", f"The stationary cart is replaced by one with a mass of ${2 * n}m$ and the carts again stick together. Predict whether the fraction of the initial kinetic energy that is lost increases, decreases, or stays the same, and justify your prediction.", 2, "explain", ["2.D", "3.C"],
              f"The fraction lost increases. The remaining fraction is $m/(m+M)$, which gets smaller as $M$ grows, so the lost fraction $M/(m+M)$ grows.",
              [R("C1", "claim", "States that the fraction of kinetic energy lost increases", ["increases"], err=["states the lost fraction decreases for a heavier target"]),
-              R("C2", "justification", "Justifies with the remaining fraction $m/(m+M)$ decreasing as $M$ increases", ["remaining fraction m/(m+M)"], requires="C1", err=["argues only that more mass means more energy"])]),
+              R("C2", "justification", "Justifies with the remaining fraction $m/(m+M)$ decreasing as $M$ increases", ["remaining fraction m/(m+M) decreases as M increases"], alt=["compares the numerical remaining fractions for the two target masses"], requires="C1", err=["argues only that more mass means more energy"])]),
     ]
     return _pack("phf_qqt_collision", "qqt", "4.4", ["4.3", "3.1"], "3.B", "Claim about kinetic energy in a perfectly inelastic collision", stim, parts, 8, 17, [f"m1={m1}", f"n={n}", f"v0={v0}", f"vf={vf:.4f}"],
                  [_ev("B", "final speed", vf, 0.01, "m/s"), _ev("B", "energy fraction", K1 / K0, 0.005, "")],

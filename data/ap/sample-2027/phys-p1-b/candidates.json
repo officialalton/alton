@@ -1,0 +1,2213 @@
+[
+ {
+  "candidateKey": "ap_physics_1-f01-k0",
+  "cellId": "ap_physics_1-f01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "2.5",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_mr_table_block",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "solver_disagrees:B:numeric",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part AP-style FRQ on a two-block system with friction. It requires a free-body diagram, applying Newton's second law to two coupled objects and solving algebraically, a simple numerical substitution, and a qualitative justification linking a change in friction to tension via a = (m2 - μm1)g/(m1+m2) and T = m2(g - a). Concept depth and reasoning steps are moderate. Arithmetic is light, wording is clear, and everything is in scope, so the difficulty comes from legitimate physics reasoning and not from unfair sources.",
+  "payload": {
+   "archetype": "phf_mr_table_block",
+   "template": "mr",
+   "topic": "2.5",
+   "extra_topics": [
+    "2.2",
+    "2.7"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "allowed",
+   "title": "Block on a table connected to a hanging block",
+   "stimulus": {
+    "kind": "text",
+    "description": "A block of mass $m_1=3\\text{ kg}$ rests on a horizontal table. A light string attached to the block passes over a light, frictionless pulley at the edge of the table and supports a hanging block of mass $m_2=2\\text{ kg}$. The coefficient of kinetic friction between the block and the table is $\\mu=0.25$. The system is released from rest and the blocks accelerate.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "On the dot below, which represents the block of mass $m_1$, draw and label the forces (not components) that act on it while it slides. Each force must be represented by a distinct arrow starting on the dot.",
+     "points": 3,
+     "response_mode": "diagram",
+     "skill_codes": [
+      "1.A",
+      "1.C"
+     ],
+     "model_answer": "Four arrows from the dot: weight down, normal up (equal length to the weight), tension toward the pulley (longer than friction), and kinetic friction opposite to the motion.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Draws and labels the four forces: weight, normal force, tension, and kinetic friction (no extra force such as a force of motion)",
+       "required_elements": [
+        "weight",
+        "normal force",
+        "tension",
+        "friction"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds a forward force of motion"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Arrow directions are correct: weight down, normal up, tension toward the pulley, friction opposite to the motion",
+       "required_elements": [
+        "directions"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "friction drawn in the direction of motion"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Relative lengths are consistent with the motion: the vertical arrows are equal and the tension arrow is longer than the friction arrow",
+       "required_elements": [
+        "equal vertical arrows",
+        "tension longer than friction"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "unequal vertical arrows"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Derive an expression for the magnitude of the acceleration of the blocks in terms of $m_1$, $m_2$, $\\mu$, and fundamental constants.",
+     "points": 3,
+     "response_mode": "derive",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "$m_2g-T=m_2a$ and $T-\\mu m_1g=m_1a$, so $a=\\dfrac{(m_2-\\mu m_1)g}{m_1+m_2}$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Applies Newton's second law to the hanging block: $m_2g-T=m_2a$",
+       "required_elements": [
+        "m2 g - T = m2 a"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses T = m2 g"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Applies Newton's second law to the table block with friction $\\mu m_1 g$: $T-\\mu m_1g=m_1a$",
+       "required_elements": [
+        "T - mu m1 g = m1 a"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits friction",
+        "uses mu m2 g"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Combines the equations to the correct expression $a=(m_2-\\mu m_1)g/(m_1+m_2)$",
+       "required_elements": [
+        "(m2 - mu m1) g/(m1+m2)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "algebra error in eliminating T"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the numerical value of the acceleration for $m_1=3\\text{ kg}$, $m_2=2\\text{ kg}$, $\\mu=0.25$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "$a\\approx 2.45\\text{ m/s}^2$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the acceleration (about 2.45)",
+       "required_elements": [
+        "2.45"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses a wrong mass"
+       ],
+       "requires_row_id": "B3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Reports the value with correct units of meters per second squared",
+       "required_elements": [
+        "m/s^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The tabletop is replaced by a surface with a larger coefficient of kinetic friction. Does the tension in the string increase, decrease, or stay the same? Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.C"
+     ],
+     "model_answer": "The tension increases. A larger friction force reduces the acceleration, so the hanging block needs a smaller net downward force and the string must support more of its weight: $T=m_2(g-a)$ with a smaller $a$.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the tension increases",
+       "required_elements": [
+        "increases"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states the tension decreases because friction opposes motion"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies with Newton's second law for the hanging block: a smaller acceleration means a larger tension $T=m_2(g-a)$",
+       "required_elements": [
+        "smaller acceleration",
+        "T = m2 (g - a)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "argues only that friction is larger"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "m1=3.0",
+    "m2=2.0",
+    "mu=0.25",
+    "a=2.4500",
+    "T=14.700"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "acceleration",
+     "value": 2.45,
+     "unit": "m/s^2",
+     "tolerance": 0.02
+    },
+    {
+     "part": "B",
+     "quantity": "tension",
+     "value": 14.7,
+     "unit": "N",
+     "tolerance": 0.5
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_mr_table_block",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Newton's second law for two connected objects with friction, a free-body diagram, and a justified prediction",
+    "topic": "2.5",
+    "skill": "2.B",
+    "student_thinking": [
+     "Draw the free-body diagram of the table block",
+     "Write Newton's second law for each block and combine",
+     "Predict the effect of a change in friction using the derived relationships"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the pulley and string are ideal and the blocks move together with one acceleration",
+      "evidence": "the stimulus states a light string and a light frictionless pulley"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "masses",
+      "friction coefficient"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "sympy solves the two Newton equations; numpy linalg.solve on the same system recomputes the acceleration and tension; the sign of the derivative of the tension with respect to the friction coefficient decides the prediction",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "1.C"
+      ],
+      "topics": [
+       "2.5"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Four arrows from the dot: weight down, normal up (equal length to the weight), tension toward the pulley (longer than friction), and kinetic friction opposite to the motion."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Draws and labels the four forces: weight, normal force, tension, and kinetic friction (no extra force such as a force of motion)",
+        "elements": [
+         "weight",
+         "normal force",
+         "tension",
+         "friction"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Arrow directions are correct: weight down, normal up, tension toward the pulley, friction opposite to the motion",
+        "elements": [
+         "directions"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Relative lengths are consistent with the motion: the vertical arrows are equal and the tension arrow is longer than the friction arrow",
+        "elements": [
+         "equal vertical arrows",
+         "tension longer than friction"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.5"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "$m_2g-T=m_2a$ and $T-\\mu m_1g=m_1a$, so $a=\\dfrac{(m_2-\\mu m_1)g}{m_1+m_2}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Applies Newton's second law to the hanging block: $m_2g-T=m_2a$",
+        "elements": [
+         "m2 g - T = m2 a"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Applies Newton's second law to the table block with friction $\\mu m_1 g$: $T-\\mu m_1g=m_1a$",
+        "elements": [
+         "T - mu m1 g = m1 a"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Combines the equations to the correct expression $a=(m_2-\\mu m_1)g/(m_1+m_2)$",
+        "elements": [
+         "(m2 - mu m1) g/(m1+m2)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "2.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "$a\\approx 2.45\\text{ m/s}^2$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the acceleration (about 2.45)",
+        "elements": [
+         "2.45"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Reports the value with correct units of meters per second squared",
+        "elements": [
+         "m/s^2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.B",
+       "3.C"
+      ],
+      "topics": [
+       "2.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The tension increases. A larger friction force reduces the acceleration, so the hanging block needs a smaller net downward force and the string must support more of its weight: $T=m_2(g-a)$ with a smaller $a$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the tension increases",
+        "elements": [
+         "increases"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies with Newton's second law for the hanging block: a smaller acceleration means a larger tension $T=m_2(g-a)$",
+        "elements": [
+         "smaller acceleration",
+         "T = m2 (g - a)"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "law_selection",
+     "justification"
+    ]
+   },
+   "seed": 7400,
+   "pack_id": "phf_mr_table_block-s7400"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_mr_table_block",
+   "facts": [
+    "m1=3.0",
+    "m2=2.0",
+    "mu=0.25",
+    "a=2.4500",
+    "T=14.700"
+   ],
+   "seed": 7400
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard connected-blocks-with-friction FRQ. The physics and the key are correct (a = 2.45 m/s², T increases with μ). The rubric is consistent, with 1-point rows and the right dependencies, and the 10-point total fits the Mathematical Routines weight. The only flaw is minor metadata: expected_values labels the tension under part B, though no part asks for a numeric tension.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Newton's second law with kinetic friction and a free-body diagram (topics 2.5, 2.2, 2.7); no out-of-scope content. Part C is the 2.B calculation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Part B expression and part C value (2.45) are correct. Part D \"increases\" is valid even if the blocks stop accelerating, since T tends to m2g, which is still larger than before. Metadata quirk: expected_values lists tension under part B."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and unambiguous (masses, μ, ideal pulley and string, release from rest)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric rows list sensible common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable for a 10-point item. Calculator use is trivial and allowed, and the g = 9.8 m/s² assumption is standard."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part AP-style FRQ on a two-block system with friction. It requires a free-body diagram, applying Newton's second law to two coupled objects and solving algebraically, a simple numerical substitution, and a qualitative justification linking a change in friction to tension via a = (m2 - μm1)g/(m1+m2) and T = m2(g - a). Concept depth and reasoning steps are moderate. Arithmetic is light, wording is clear, and everything is in scope, so the difficulty comes from legitimate physics reasoning and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f02-k0",
+  "cellId": "ap_physics_1-f02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "7.3",
+  "unitCode": "7",
+  "skillPrimary": "2.D",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_tbr_spring_shm",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part FRQ on mass-spring SHM. It requires choosing energy conservation and the period law, translating among energy bars, algebra and an x-t graph, and making a proportional-reasoning prediction (T doubles, v_max halves) with justification. Each step is core course content, the arithmetic is minimal, and the reading load is low, so it is suitable for full mocks.",
+  "payload": {
+   "archetype": "phf_tbr_spring_shm",
+   "template": "tbr",
+   "topic": "7.3",
+   "extra_topics": [
+    "7.2",
+    "7.4",
+    "3.4"
+   ],
+   "skill": "2.D",
+   "representative_skill": "2.D",
+   "calculator": "allowed",
+   "title": "Block-spring oscillator: energy, graph and prediction",
+   "stimulus": {
+    "kind": "text",
+    "description": "A block of mass $m=1\\text{ kg}$ is attached to a horizontal spring of spring constant $k=50\\text{ N/m}$ on a frictionless surface. The block is pulled to a position $x=+A$ with $A=0.2\\text{ m}$ and released from rest at $t=0$.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "In the energy bar charts below, for each of three states (block at $x=+A$, block at $x=0$, block at $x=-A/2$), draw bars for kinetic energy $K$ and spring potential energy $U_s$ with a consistent scale. Show the total energy as the same height in each state.",
+     "points": 3,
+     "response_mode": "diagram",
+     "skill_codes": [
+      "1.A",
+      "1.C"
+     ],
+     "model_answer": "At $+A$: $U_s=E$, $K=0$. At $0$: $K=E$, $U_s=0$. At $-A/2$: $U_s=E/4$, $K=3E/4$. Total $E=\\tfrac12kA^2=1.0000\\text{ J}$ in every state.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Shows $K=0$ and $U_s$ at its maximum at $x=+A$",
+       "required_elements": [
+        "K = 0",
+        "Us maximum"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "shows kinetic energy at the turning point"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Shows $U_s=0$ and $K$ at its maximum at $x=0$ with the same total bar height",
+       "required_elements": [
+        "Us = 0",
+        "K = total"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "total energy changes between states"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Shows $U_s$ equal to one quarter and $K$ three quarters of the total at $x=-A/2$",
+       "required_elements": [
+        "Us = E/4",
+        "K = 3E/4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "splits the energy equally"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Derive an expression for the speed of the block as it passes $x=0$ in terms of $m$, $k$, and $A$.",
+     "points": 2,
+     "response_mode": "derive",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "$\\tfrac12kA^2=\\tfrac12mv^2$ so $v=A\\sqrt{k/m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Sets the initial spring energy equal to the kinetic energy at the equilibrium position: $\\tfrac12kA^2=\\tfrac12mv^2$",
+       "required_elements": [
+        "1/2 k A^2 = 1/2 m v^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses kA = mv"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Solves for $v=A\\sqrt{k/m}$",
+       "required_elements": [
+        "A sqrt(k/m)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the square root"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "On the axes provided, sketch the position $x$ as a function of time $t$ for two full oscillations. Label the amplitude and the period (use the values for $k=50\\text{ N/m}$, $m=1\\text{ kg}$, $A=0.2\\text{ m}$).",
+     "points": 4,
+     "response_mode": "graph",
+     "skill_codes": [
+      "1.A",
+      "1.C"
+     ],
+     "model_answer": "A cosine curve starting at $+A=0.2\\text{ m}$ with period $P=2\\pi\\sqrt{m/k}\\approx 0.89\\text{ s}$, repeated twice.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "The curve is sinusoidal and starts at its maximum $x=+A$ at $t=0$ (cosine shape)",
+       "required_elements": [
+        "cosine",
+        "starts at +A"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "starts at zero like a sine"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "The amplitude is labeled or scaled as $0.2\\text{ m}$ (symmetric about $x=0$)",
+       "required_elements": [
+        "0.2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C3",
+       "points": 1,
+       "criterion": "The period is marked as about $0.89\\text{ s}$ and two full cycles are shown",
+       "required_elements": [
+        "0.89"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "marks half the period"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C4",
+       "points": 1,
+       "criterion": "Both axes are labeled with quantities and units",
+       "required_elements": [
+        "axis labels",
+        "units"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The block is replaced by one with 4 times the mass and released from the same position $x=+A$. Predict how the period and the maximum speed change, and justify your prediction.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.D",
+      "3.B",
+      "3.C"
+     ],
+     "model_answer": "The period increases by a factor of $\\sqrt{4}=2$ and the maximum speed decreases by the same factor, because $P=2\\pi\\sqrt{m/k}$ and $v_{max}=A\\sqrt{k/m}$ with the same energy $\\tfrac12kA^2$ shared with a larger mass.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the period increases by a factor of $2$",
+       "required_elements": [
+        "2",
+        "increases"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states the period is unchanged"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "States that the maximum speed decreases by a factor of $2$",
+       "required_elements": [
+        "2",
+        "decreases"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states the maximum speed is unchanged"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D3",
+       "points": 1,
+       "criterion": "Justifies with the energy or the equations of motion: the same stored energy $\\tfrac12kA^2$ with a larger mass, or $P\\propto\\sqrt{m}$",
+       "required_elements": [
+        "same energy larger mass",
+        "P proportional to sqrt m"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "argues only that heavier things are slower"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 12,
+   "est_minutes": 27,
+   "facts": [
+    "k=50.0",
+    "m=1.0",
+    "A=0.2",
+    "P=0.8886",
+    "vmax=1.4142",
+    "n=4"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "period",
+     "value": 0.8885765876316732,
+     "unit": "s",
+     "tolerance": 0.01
+    },
+    {
+     "part": "B",
+     "quantity": "max speed",
+     "value": 1.4142135623730951,
+     "unit": "m/s",
+     "tolerance": 0.01
+    },
+    {
+     "part": "D",
+     "quantity": "new period",
+     "value": 1.7771531752633465,
+     "unit": "s",
+     "tolerance": 0.02
+    },
+    {
+     "part": "D",
+     "quantity": "new max speed",
+     "value": 0.7071067811865476,
+     "unit": "m/s",
+     "tolerance": 0.01
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_tbr_spring_shm",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Representing a simple harmonic oscillator with energy bars and a position-time graph, deriving the maximum speed and predicting a change",
+    "topic": "7.3",
+    "skill": "2.D",
+    "student_thinking": [
+     "Represent the energy of the oscillator in three states",
+     "Derive the speed at equilibrium and sketch the position-time graph",
+     "Predict how the period and speed change for a larger mass with justification"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the surface is frictionless and the spring is ideal so energy is conserved",
+      "evidence": "the stimulus states a frictionless surface"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "spring constant",
+      "mass",
+      "amplitude"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "an RK4 simulation of the equation of motion recomputes the period and the maximum speed; the energy bar values are recomputed from the closed forms",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "1.C"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "At $+A$: $U_s=E$, $K=0$. At $0$: $K=E$, $U_s=0$. At $-A/2$: $U_s=E/4$, $K=3E/4$. Total $E=\\tfrac12kA^2=1.0000\\text{ J}$ in every state."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Shows $K=0$ and $U_s$ at its maximum at $x=+A$",
+        "elements": [
+         "K = 0",
+         "Us maximum"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Shows $U_s=0$ and $K$ at its maximum at $x=0$ with the same total bar height",
+        "elements": [
+         "Us = 0",
+         "K = total"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Shows $U_s$ equal to one quarter and $K$ three quarters of the total at $x=-A/2$",
+        "elements": [
+         "Us = E/4",
+         "K = 3E/4"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "$\\tfrac12kA^2=\\tfrac12mv^2$ so $v=A\\sqrt{k/m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Sets the initial spring energy equal to the kinetic energy at the equilibrium position: $\\tfrac12kA^2=\\tfrac12mv^2$",
+        "elements": [
+         "1/2 k A^2 = 1/2 m v^2"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Solves for $v=A\\sqrt{k/m}$",
+        "elements": [
+         "A sqrt(k/m)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "1.A",
+       "1.C"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 4,
+      "accepted_answers": [
+       "A cosine curve starting at $+A=0.2\\text{ m}$ with period $P=2\\pi\\sqrt{m/k}\\approx 0.89\\text{ s}$, repeated twice."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "The curve is sinusoidal and starts at its maximum $x=+A$ at $t=0$ (cosine shape)",
+        "elements": [
+         "cosine",
+         "starts at +A"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "The amplitude is labeled or scaled as $0.2\\text{ m}$ (symmetric about $x=0$)",
+        "elements": [
+         "0.2"
+        ]
+       },
+       {
+        "row_id": "C3",
+        "points": 1,
+        "criterion": "The period is marked as about $0.89\\text{ s}$ and two full cycles are shown",
+        "elements": [
+         "0.89"
+        ]
+       },
+       {
+        "row_id": "C4",
+        "points": 1,
+        "criterion": "Both axes are labeled with quantities and units",
+        "elements": [
+         "axis labels",
+         "units"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.D",
+       "3.B",
+       "3.C"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "The period increases by a factor of $\\sqrt{4}=2$ and the maximum speed decreases by the same factor, because $P=2\\pi\\sqrt{m/k}$ and $v_{max}=A\\sqrt{k/m}$ with the same energy $\\tfrac12kA^2$ shared with a larger mass."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the period increases by a factor of $2$",
+        "elements": [
+         "2",
+         "increases"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "States that the maximum speed decreases by a factor of $2$",
+        "elements": [
+         "2",
+         "decreases"
+        ]
+       },
+       {
+        "row_id": "D3",
+        "points": 1,
+        "criterion": "Justifies with the energy or the equations of motion: the same stored energy $\\tfrac12kA^2$ with a larger mass, or $P\\propto\\sqrt{m}$",
+        "elements": [
+         "same energy larger mass",
+         "P proportional to sqrt m"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 12,
+    "judgment_demand": [
+     "representation_reading",
+     "symbolic_reasoning",
+     "justification"
+    ]
+   },
+   "seed": 7400,
+   "pack_id": "phf_tbr_spring_shm-s7400"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_tbr_spring_shm",
+   "facts": [
+    "k=50.0",
+    "m=1.0",
+    "A=0.2",
+    "P=0.8886",
+    "vmax=1.4142",
+    "n=4"
+   ],
+   "seed": 7400
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Passes on all five criteria; no instant-reject conditions. The bundle is a correct, in-scope spring-SHM translation task with a verified key. Minor notes on scope and load follow.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts stay within Unit 7 (spring SHM, energy, x-t graph, mass scaling). Part D is the 2.D proportional-reasoning part. Parts A to C use representation and derivation skills (1.A, 1.C, 2.A), which the item labels as such. The dominant 2.D demand is only in D, but the item type is a mixed-skill translation task, so this is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The values are consistent: E = 1 J, v = A√(k/m) ≈ 1.41 m/s, P ≈ 0.89 s, with the doubled period and halved speed for 4m. The independent solver agrees. The frictionless surface and ideal spring are stated. The rubric rows are clear, and D3 depends on D1 as expected. Part D's period and max-speed claims are fully determined."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem gives m, k, A, the release condition and the frictionless surface. Parts A and C refer to bar charts and axes that students would be given. Those templates are not in the data, but the prompts describe them adequately. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors entries on the rubric rows (kinetic energy at the turning point, kA = mv, a sine start) are realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is modest, with no heavy arithmetic. The estimated 27 minutes for 12 points is long but is only an internal reference. The calculator is used only for the period, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on mass-spring SHM. It requires choosing energy conservation and the period law, translating among energy bars, algebra and an x-t graph, and making a proportional-reasoning prediction (T doubles, v_max halves) with justification. Each step is core course content, the arithmetic is minimal, and the reading load is low, so it is suitable for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 720
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f03-k0",
+  "cellId": "ap_physics_1-f03",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "7.2",
+  "unitCode": "7",
+  "skillPrimary": "2.D",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_lab_spring_k",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; instant_reject_missing_condition; reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "This is a standard AP Physics 1 experimental-design and linearization free-response item. It has four parts and 10 points, and it targets the mass-spring period relation T = 2π√(m/k). The student must design a procedure, choose linearizing axes (T² vs m, slope 4π²/k), plot the data with a scale and best-fit line, and compute k from the slope. This is typical for a full mock. The concept depth is moderate: the governing law is given, and the one non-trivial step is linearization, which involves a translation between table, graph and equation. The arithmetic is light (squaring five values, one slope calculation, one division). The reading load is modest, and there are no out-of-scope topics or ambiguous wording. The difficulty comes from legitimate sources: the multi-part structure, the graphing skill and the slope-to-k reasoning. The stated target skill 2.D (predicting factors of change from functional dependence) fits only partly, since the item is more about linearization and data analysis, but the content is valid for topic 7.2.",
+  "payload": {
+   "archetype": "phf_lab_spring_k",
+   "template": "lab",
+   "topic": "7.2",
+   "extra_topics": [
+    "7.3"
+   ],
+   "skill": "2.D",
+   "representative_skill": "2.D",
+   "calculator": "allowed",
+   "title": "Experiment: spring constant from the period of an oscillator",
+   "stimulus": {
+    "kind": "table",
+    "description": "A student measures the period $T$ of a block of mass $m$ hanging on a vertical spring of unknown spring constant $k$.",
+    "data": {
+     "x_label": "Mass m (kg)",
+     "y_label": "Period T (s)",
+     "rows": [
+      [
+       0.1,
+       0.4
+      ],
+      [
+       0.2,
+       0.57
+      ],
+      [
+       0.3,
+       0.688
+      ],
+      [
+       0.4,
+       0.804
+      ],
+      [
+       0.5,
+       0.875
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Describe an experimental procedure to collect the data for the period as a function of mass. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured period.",
+     "points": 3,
+     "response_mode": "design",
+     "skill_codes": [
+      "1.B",
+      "2.B"
+     ],
+     "model_answer": "Use a stopwatch to time 10 oscillations for each of several hanging masses added one at a time to the same spring, starting each trial from a small displacement, then divide by 10; repeat each timing.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Identifies the measured quantities and equipment: a balance or known masses and a timing device",
+       "required_elements": [
+        "mass",
+        "stopwatch"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits how the period is measured"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Changes only the hanging mass while keeping the spring and the starting amplitude the same",
+       "required_elements": [
+        "change only the mass",
+        "same amplitude"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Reduces timing uncertainty, for example by timing many oscillations and dividing, or by repeating trials",
+       "required_elements": [
+        "time many oscillations",
+        "repeat trials"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "The period is related to the mass by $T=2\\pi\\sqrt{m/k}$. Identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find $k$.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B",
+      "3.A"
+     ],
+     "model_answer": "Plot $T^2$ on the vertical axis against $m$ on the horizontal axis; the slope is $4\\pi^2/k$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Identifies $T^2$ (vertical) versus $m$ (horizontal)",
+       "required_elements": [
+        "T squared versus m"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "plots T versus m"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Use the grid to plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid.",
+     "points": 3,
+     "response_mode": "graph",
+     "skill_codes": [
+      "1.B",
+      "3.A"
+     ],
+     "model_answer": "Points $(m,T^2)$: (0.1, 0.160), (0.2, 0.325), (0.3, 0.473), (0.4, 0.646), (0.5, 0.766) with a best-fit line of slope about $1.53\\text{ s}^2/\\text{kg}$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+       "required_elements": [
+        "axis labels",
+        "units",
+        "scale"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "scale uses less than half the grid"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Plots the five points $(m, T^2)$ accurately",
+       "required_elements": [
+        "points plotted"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C3",
+       "points": 1,
+       "criterion": "Draws a straight best-fit line through the trend of the points",
+       "required_elements": [
+        "best-fit line"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "connects the dots"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Use the best-fit line to determine the spring constant $k$. Show your work.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B",
+      "2.D"
+     ],
+     "model_answer": "Slope $\\approx 1.53\\text{ s}^2/\\text{kg}$, so $k=4\\pi^2/\\text{slope}\\approx 25.8\\text{ N/m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Calculates the slope of the best-fit line using two points on the line (about 1.53 s^2/kg)",
+       "required_elements": [
+        "1.53"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses data points rather than points on the line"
+       ],
+       "requires_row_id": "C3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Relates the slope to the spring constant: slope $=4\\pi^2/k$",
+       "required_elements": [
+        "slope = 4 pi^2 / k"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses slope = k"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "D3",
+       "points": 1,
+       "criterion": "Calculates $k$ (about 26) with units of newtons per meter",
+       "required_elements": [
+        "26",
+        "N/m"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 27,
+   "facts": [
+    "k=25.0",
+    "slope=1.5327",
+    "k_est=25.76",
+    "Ts=[0.4, 0.57, 0.688, 0.804, 0.875]"
+   ],
+   "expected_values": [
+    {
+     "part": "D",
+     "quantity": "slope",
+     "value": 1.5326999999999997,
+     "unit": "s^2/kg",
+     "tolerance": 0.03
+    },
+    {
+     "part": "D",
+     "quantity": "spring constant",
+     "value": 25.757433029527917,
+     "unit": "N/m",
+     "tolerance": 0.06
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_lab_spring_k",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Designing an experiment and analyzing linearized data to extract a physical constant",
+    "topic": "7.2",
+    "skill": "2.D",
+    "student_thinking": [
+     "Describe the measurements and how uncertainty is reduced",
+     "Linearize the relationship and plot the data",
+     "Use the slope to determine the spring constant"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the generated periods follow $T=2\\pi\\sqrt{m/k}$ with a small random error so the best-fit slope is within a few percent of $4\\pi^2/k$",
+      "evidence": "the code rejects a seed whose fitted constant differs from the generating constant by more than four percent"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "mass",
+      "period"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the slope is recomputed from the normal equations with numpy linalg.solve and compared with polyfit; the fitted spring constant is compared with the generating constant",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.B",
+       "2.B"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Use a stopwatch to time 10 oscillations for each of several hanging masses added one at a time to the same spring, starting each trial from a small displacement, then divide by 10; repeat each timing."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Identifies the measured quantities and equipment: a balance or known masses and a timing device",
+        "elements": [
+         "mass",
+         "stopwatch"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Changes only the hanging mass while keeping the spring and the starting amplitude the same",
+        "elements": [
+         "change only the mass",
+         "same amplitude"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Reduces timing uncertainty, for example by timing many oscillations and dividing, or by repeating trials",
+        "elements": [
+         "time many oscillations",
+         "repeat trials"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B",
+       "3.A"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Plot $T^2$ on the vertical axis against $m$ on the horizontal axis; the slope is $4\\pi^2/k$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Identifies $T^2$ (vertical) versus $m$ (horizontal)",
+        "elements": [
+         "T squared versus m"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "1.B",
+       "3.A"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Points $(m,T^2)$: (0.1, 0.160), (0.2, 0.325), (0.3, 0.473), (0.4, 0.646), (0.5, 0.766) with a best-fit line of slope about $1.53\\text{ s}^2/\\text{kg}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+        "elements": [
+         "axis labels",
+         "units",
+         "scale"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Plots the five points $(m, T^2)$ accurately",
+        "elements": [
+         "points plotted"
+        ]
+       },
+       {
+        "row_id": "C3",
+        "points": 1,
+        "criterion": "Draws a straight best-fit line through the trend of the points",
+        "elements": [
+         "best-fit line"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.B",
+       "2.D"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Slope $\\approx 1.53\\text{ s}^2/\\text{kg}$, so $k=4\\pi^2/\\text{slope}\\approx 25.8\\text{ N/m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Calculates the slope of the best-fit line using two points on the line (about 1.53 s^2/kg)",
+        "elements": [
+         "1.53"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Relates the slope to the spring constant: slope $=4\\pi^2/k$",
+        "elements": [
+         "slope = 4 pi^2 / k"
+        ]
+       },
+       {
+        "row_id": "D3",
+        "points": 1,
+        "criterion": "Calculates $k$ (about 26) with units of newtons per meter",
+        "elements": [
+         "26",
+         "N/m"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "quantitative_comparison",
+     "design"
+    ]
+   },
+   "seed": 7400,
+   "pack_id": "phf_lab_spring_k-s7400"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_lab_spring_k",
+   "facts": [
+    "k=25.0",
+    "slope=1.5327",
+    "k_est=25.76",
+    "Ts=[0.4, 0.57, 0.688, 0.804, 0.875]"
+   ],
+   "seed": 7400
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle fails on completeness: part C refers to a grid that the stimulus data never specify, so the graph cannot be rendered or scored consistently. The rubric also has tolerance and element-logic ambiguities in rows D1, A2 and A3, and the target skill 2.D is only weakly assessed.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Content is in scope, but the dominant demand is experimental design and linearized analysis (1.B, 2.B, 3.A) rather than the target skill 2.D. Only the final slope-to-k step touches it, and that step is a slope relation rather than a proportional prediction."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Row D1 requires \"1.53\" with no tolerance stated on the row, while student best-fit slopes vary. The row also depends on C3, which makes scoring brittle. Rows A2 and A3 list multiple required elements while the criteria say \"for example\", so it is unclear whether all elements are required."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Part C says \"Use the grid,\" but the stimulus data contain only a table and no grid specification (axes ranges, divisions). The graph response cannot be rendered from the data as given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. Common errors are listed on the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Part B is largely given away by the formula supplied in the prompt. The graph part depends on an unspecified grid. The overall load is otherwise plausible for a lab FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard AP Physics 1 experimental-design and linearization free-response item. It has four parts and 10 points, and it targets the mass-spring period relation T = 2π√(m/k). The student must design a procedure, choose linearizing axes (T² vs m, slope 4π²/k), plot the data with a scale and best-fit line, and compute k from the slope. This is typical for a full mock. The concept depth is moderate: the governing law is given, and the one non-trivial step is linearization, which involves a translation between table, graph and equation. The arithmetic is light (squaring five values, one slope calculation, one division). The reading load is modest, and there are no out-of-scope topics or ambiguous wording. The difficulty comes from legitimate sources: the multi-part structure, the graphing skill and the slope-to-k reasoning. The stated target skill 2.D (predicting factors of change from functional dependence) fits only partly, since the item is more about linearization and data analysis, but the content is valid for topic 7.2.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f04-k0",
+  "cellId": "ap_physics_1-f04",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "4.4",
+  "unitCode": "4",
+  "skillPrimary": "3.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_qqt_collision",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Three-part FRQ-style item within Unit 4 scope. It requires choosing momentum conservation over energy conservation for a perfectly inelastic collision, a short symbolic derivation (v_f = v0/4 and KE fraction 1/4), and a proportional-reasoning prediction (the fraction of KE lost rises from 3/4 to 6/7 as the target mass increases). Arithmetic is minimal, the wording is unambiguous, and the context is brief, so the difficulty comes only from concept application and argumentation, as is typical for a full mock exam.",
+  "payload": {
+   "archetype": "phf_qqt_collision",
+   "template": "qqt",
+   "topic": "4.4",
+   "extra_topics": [
+    "4.3",
+    "3.1"
+   ],
+   "skill": "3.B",
+   "representative_skill": "3.B",
+   "calculator": "allowed",
+   "title": "Claim about kinetic energy in a perfectly inelastic collision",
+   "stimulus": {
+    "kind": "text",
+    "description": "A cart of mass $m$ moving at speed $v_0=4\\text{ m/s}$ on a frictionless track collides with a stationary cart of mass $3m$. The carts stick together. A student claims that the kinetic energy of the two-cart system is the same before and after the collision.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Do you agree or disagree with the student's claim? Justify your answer qualitatively without calculating numbers.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.C"
+     ],
+     "model_answer": "Disagree. Momentum is conserved because there is no net external horizontal force, but the carts stick together (a perfectly inelastic collision) so some kinetic energy is transformed into internal energy.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Disagrees with the claim (kinetic energy is not conserved)",
+       "required_elements": [
+        "disagree"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "agrees because momentum is conserved"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Justifies the claim by distinguishing that momentum is conserved (no net external force) from kinetic energy, which is not",
+       "required_elements": [
+        "momentum conserved",
+        "no external force"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says both are conserved in every collision"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Explains that sticking together transforms kinetic energy into internal energy (or notes the carts do not separate)",
+       "required_elements": [
+        "internal energy",
+        "carts stick"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "attributes the loss to friction with the track"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Derive an expression for the speed $v_f$ of the combined carts in terms of $v_0$ and numerical constants, and find the fraction of the initial kinetic energy that remains.",
+     "points": 3,
+     "response_mode": "derive",
+     "skill_codes": [
+      "2.A",
+      "3.B"
+     ],
+     "model_answer": "$mv_0=(m+3m)v_f$ so $v_f=v_0/4=1.000\\text{ m/s}$; the remaining kinetic energy fraction is $\\dfrac{(m+3m)v_f^2}{mv_0^2}=\\dfrac{1}{4}$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Applies conservation of momentum: $mv_0=(m+3m)v_f$",
+       "required_elements": [
+        "m v0 = (m + n m) vf"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds the speeds"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Solves for $v_f=v_0/4$",
+       "required_elements": [
+        "v0/4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "divides by n rather than n+1"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Finds the kinetic energy fraction $1/4$",
+       "required_elements": [
+        "1/4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the speed fraction as the energy fraction"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The stationary cart is replaced by one with a mass of $6m$ and the carts again stick together. Predict whether the fraction of the initial kinetic energy that is lost increases, decreases, or stays the same, and justify your prediction.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.D",
+      "3.C"
+     ],
+     "model_answer": "The fraction lost increases. The remaining fraction is $m/(m+M)$, which gets smaller as $M$ grows, so the lost fraction $M/(m+M)$ grows.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "States that the fraction of kinetic energy lost increases",
+       "required_elements": [
+        "increases"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states the lost fraction decreases for a heavier target"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Justifies with the remaining fraction $m/(m+M)$ decreasing as $M$ increases",
+       "required_elements": [
+        "remaining fraction m/(m+M)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "argues only that more mass means more energy"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 8,
+   "est_minutes": 17,
+   "facts": [
+    "m1=1.0",
+    "n=3",
+    "v0=4.0",
+    "vf=1.0000"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "final speed",
+     "value": 1,
+     "unit": "m/s",
+     "tolerance": 0.01
+    },
+    {
+     "part": "B",
+     "quantity": "energy fraction",
+     "value": 0.25,
+     "unit": "",
+     "tolerance": 0.005
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_qqt_collision",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Evaluating a claim about conservation laws in a perfectly inelastic collision with a derivation and a prediction",
+    "topic": "4.4",
+    "skill": "3.B",
+    "student_thinking": [
+     "Decide which quantity is conserved in the collision and justify",
+     "Derive the final speed and the kinetic energy fraction",
+     "Predict the effect of a heavier target"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "no net external horizontal force acts on the two-cart system",
+      "evidence": "the stimulus states a frictionless track"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "masses",
+      "initial speed"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "sympy solves the momentum equation; the kinetic energy fraction is recomputed numerically from the two kinetic energies",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "3.B",
+       "3.C"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Disagree. Momentum is conserved because there is no net external horizontal force, but the carts stick together (a perfectly inelastic collision) so some kinetic energy is transformed into internal energy."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Disagrees with the claim (kinetic energy is not conserved)",
+        "elements": [
+         "disagree"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Justifies the claim by distinguishing that momentum is conserved (no net external force) from kinetic energy, which is not",
+        "elements": [
+         "momentum conserved",
+         "no external force"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Explains that sticking together transforms kinetic energy into internal energy (or notes the carts do not separate)",
+        "elements": [
+         "internal energy",
+         "carts stick"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A",
+       "3.B"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "$mv_0=(m+3m)v_f$ so $v_f=v_0/4=1.000\\text{ m/s}$; the remaining kinetic energy fraction is $\\dfrac{(m+3m)v_f^2}{mv_0^2}=\\dfrac{1}{4}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Applies conservation of momentum: $mv_0=(m+3m)v_f$",
+        "elements": [
+         "m v0 = (m + n m) vf"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Solves for $v_f=v_0/4$",
+        "elements": [
+         "v0/4"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Finds the kinetic energy fraction $1/4$",
+        "elements": [
+         "1/4"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.D",
+       "3.C"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The fraction lost increases. The remaining fraction is $m/(m+M)$, which gets smaller as $M$ grows, so the lost fraction $M/(m+M)$ grows."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "States that the fraction of kinetic energy lost increases",
+        "elements": [
+         "increases"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Justifies with the remaining fraction $m/(m+M)$ decreasing as $M$ increases",
+        "elements": [
+         "remaining fraction m/(m+M)"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 8,
+    "judgment_demand": [
+     "justification",
+     "symbolic_reasoning"
+    ]
+   },
+   "seed": 7400,
+   "pack_id": "phf_qqt_collision-s7400"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_qqt_collision",
+   "facts": [
+    "m1=1.0",
+    "n=3",
+    "v0=4.0",
+    "vf=1.0000"
+   ],
+   "seed": 7400
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct 1D perfectly inelastic collision bundle. The key and rubric are consistent and the solver agreed on all parts. The only blemish is that the part B prompt asks for an expression in v0 while the model answer also gives a numeric value, which is minor.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item stays within 4.4, with 4.3 and 3.1 as related topics. It is 1D only and the dominant demand is applying conservation laws to evaluate a claim."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is correct and the rubric rows are consistent and appropriately dependent. The expected values 1 m/s and 0.25 are right."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the masses, the initial speed and the frictionless track, which is all that is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. The common_errors entries are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is moderate and the 8 points match the Qualitative/Quantitative Translation weight. No heavy arithmetic is involved."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three-part FRQ-style item within Unit 4 scope. It requires choosing momentum conservation over energy conservation for a perfectly inelastic collision, a short symbolic derivation (v_f = v0/4 and KE fraction 1/4), and a proportional-reasoning prediction (the fraction of KE lost rises from 3/4 to 6/7 as the target mass increases). Arithmetic is minimal, the wording is unambiguous, and the context is brief, so the difficulty comes only from concept application and argumentation, as is typical for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

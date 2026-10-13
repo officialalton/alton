@@ -44,6 +44,12 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "stats-s3b", title: "AP Statistics S3-b (ST2 부족분: 단독 34 + 회귀 세트 3 + FRQ 5)", itemsFile: "stats-s3b-items.json", loadLabel: "stats-s3b-2026-10-13", supplement: true, passKeysFile: "stats-s3b-pass-keys.json", evidenceFile: "evidence-stats-s3b.json" },
   // 2026-10-13 AP Physics 1 P1-a(docs/ap/physics1-p1a-report.md): 단독 20 + 세트 1 원형 x 후보 2 = 44문항 후보, 통과 18(단독만; 세트 0, 선택지 그림 0). 한 증거 파일.
   { id: "phys-p1a", title: "AP Physics 1 P1-a (MC 파일럿, 통과 18)", itemsFile: "phys-p1a-items.json", loadLabel: "phys-p1a-2026-10-13", supplement: true, passKeysFile: "phys-p1a-pass-keys.json", evidenceFile: "evidence-phys-p1a.json" },
+  // 2026-10-13 AP Physics 1 P1-a v2 재검증(docs/ap/physics1-groundwork.md §14): 같은 22칸 x 후보 2(수정된 원형·해설·그림 설명 포함), 첫 통과 30/44(68%). 세 배치(p1a2·p1b·s2)가 한 증거 파일을 공유한다.
+  { id: "phys-p1a2", title: "AP Physics 1 P1-a v2 (MC 재검증, 통과 30)", itemsFile: "phys-p1a2-items.json", loadLabel: "phys-p1a2-2026-10-13", supplement: true, passKeysFile: "phys-p1a2-pass-keys.json", evidenceFile: "evidence-phys-s2.json" },
+  // P1-b FRQ 파일럿: MR·TBR·LAB·QQT 각 1건, 통과 2(TBR·QQT).
+  { id: "phys-p1b", title: "AP Physics 1 P1-b (FRQ 파일럿, 통과 2)", itemsFile: "phys-p1b-items.json", loadLabel: "phys-p1b-2026-10-13", supplement: true, passKeysFile: "phys-p1b-pass-keys.json", evidenceFile: "evidence-phys-s2.json" },
+  // phys-s2: 풀 모의고사 2회(PH1·PH2) 부족분 — 신규 원형 48 + 세트 3 + 단독 136 후보·세트 10 후보·FRQ 28 후보(런 a–e, 비용 $6.6967).
+  { id: "phys-s2", title: "AP Physics 1 phys-s2 (PH1·PH2 부족분: 단독·세트·FRQ)", itemsFile: "phys-s2-items.json", loadLabel: "phys-s2-2026-10-13", supplement: true, passKeysFile: "phys-s2-pass-keys.json", evidenceFile: "evidence-phys-s2.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 

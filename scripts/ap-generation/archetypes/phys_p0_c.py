@@ -19,13 +19,13 @@ def ph_rolling_incline(rng):
         fr = (s_len - prev[0]) / (s[0] - prev[0]); vn = prev[1] + (s[1] - prev[1]) * fr
         agree(v, vn, 2e-3, "v")
         break
-    pairs = [("Treats the object as sliding without friction and uses $\\sqrt{2gh}$, ignoring the rotational kinetic energy.", math.sqrt(2 * G * h)), ("Gives all of the lost potential energy to rotation only, using $\\sqrt{gh}$.", math.sqrt(G * h)),
+    pairs = [("Treats the object as sliding without friction and uses $\\sqrt{2gh}$, ignoring the rotational kinetic energy.", math.sqrt(2 * G * h)), ("Drops the factor of two in the kinetic energy and ignores the rotational part, using $\\sqrt{gh}$.", math.sqrt(G * h)),
              ("Puts the rotational term in the numerator, using $\\sqrt{2gh(1+k)}$.", math.sqrt(2 * G * h * (1 + kk))), ("Drops the factor of two and keeps the rotational term, using $\\sqrt{gh/(1+k)}$.", math.sqrt(G * h / (1 + kk)))]
     key, ds = num_opts(v, pairs, "m/s")
     stem = f"A {name} rolls without slipping from rest down an incline of ${th}^\\circ$, starting at a vertical height of ${h:g}\\text{{ m}}$ above the bottom. Its rotational inertia about its center is ${kk:g}MR^2$. What is the speed of its center of mass at the bottom?"
     return mk("ph_rolling_incline", "6.5", "2.B", stem, key, ds, rng, concept="Energy conservation for rolling without slipping", thinking=["Write the final kinetic energy as translational plus rotational parts and relate $\\omega$ to $v$", "Equate it to the lost gravitational potential energy and solve for $v$"],
               cond=[("the object rolls without slipping so friction does no work", "the stem states rolling without slipping")], path="RK4 integration of the constant center-of-mass acceleration $g\\sin\\theta/(1+k)$ along the incline gives the speed at the bottom", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=115, facts=[f"h={h}", f"th={th}", f"k={kk}"], kwhy="$mgh=\\tfrac12mv^2(1+k)$ so $v=\\sqrt{2gh/(1+k)}$.")
+              judgment=["law_selection", "symbolic_reasoning"], est=115, facts=[f"h={h}", f"th={th}", f"k={kk}"], kwhy=f"$mgh=\\tfrac12mv^2(1+k)$ so $v=\\sqrt{{2gh/(1+k)}}=\\sqrt{{2(9.8)({h:g})/(1+{kk:g})}}={sig(v)}\\text{{ m/s}}$.")
 
 
 def ph_ang_mom_platform(rng):
@@ -40,7 +40,7 @@ def ph_ang_mom_platform(rng):
     stem = f"A horizontal platform with rotational inertia ${I0:g}\\text{{ kg}}\\cdot\\text{{m}}^2$ spins freely about its vertical axis at ${w0:g}\\text{{ rad/s}}$. A ${m:g}\\text{{ kg}}$ clay ball is dropped onto the platform and sticks at a distance of ${r:g}\\text{{ m}}$ from the axis. What is the angular speed of the platform right afterward? Treat the ball as a point mass."
     return mk("ph_ang_mom_platform", "6.4", "2.B", stem, key, ds, rng, concept="Conservation of angular momentum when rotational inertia changes", thinking=["Identify that no external torque acts about the axis so angular momentum is conserved", "Add the point mass contribution $mr^2$ to the rotational inertia and solve for the final angular speed"],
               cond=[("the ball lands without applying an external torque about the axis", "the stem states the platform spins freely and the ball is dropped vertically")], path="the final angular speed is checked by recomputing $L_i$ and $L_f$ with numpy and asserting equality", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=100, facts=[f"I0={I0}", f"w0={w0}", f"m={m}", f"r={r}"], kwhy="Angular momentum is conserved: $I_0\\omega_0=(I_0+mr^2)\\omega$.")
+              judgment=["law_selection", "symbolic_reasoning"], est=100, facts=[f"I0={I0}", f"w0={w0}", f"m={m}", f"r={r}"], kwhy=f"Angular momentum is conserved: $\\omega={I0:g}({w0:g})/({I0:g}+{m:g}({r:g})^2)={sig(w1)}\\text{{ rad/s}}$.")
 
 
 def ph_orbit_period_ratio(rng):
@@ -56,7 +56,7 @@ def ph_orbit_period_ratio(rng):
     stem = f"Satellite 2 orbits Earth in a circular orbit with a radius ${n}$ times the orbital radius of satellite 1. How many times as long is the orbital period of satellite 2 as the period of satellite 1?"
     return mk("ph_orbit_period_ratio", "6.6", "2.D", stem, key, ds, rng, concept="Orbital period scaling for circular orbits", thinking=["Use gravity as the centripetal force to relate speed and orbital radius", "Combine with the circumference to find how the period scales with the radius"],
               cond=[("both satellites move in circular orbits about the same planet", "the stem states circular orbits about Earth")], path="the periods are computed from the real gravitational parameter of Earth and an actual radius, and their ratio is compared with the exponent $3/2$ result", material=MAT_NONE,
-              judgment=["scaling_prediction"], est=80, facts=[f"n={n}"], kwhy="The period scales as $r^{3/2}$, so multiplying the radius by $n$ multiplies the period by $n^{3/2}$.")
+              judgment=["scaling_prediction"], est=80, facts=[f"n={n}"], kwhy=f"The period scales as $r^{{3/2}}$, so multiplying the radius by ${n}$ multiplies the period by ${n}^{{3/2}}={sig(ratio)}$.")
 
 
 def ph_torque_time_area(rng):
@@ -79,7 +79,7 @@ def ph_torque_time_area(rng):
     stem = f"A wheel with rotational inertia ${I:g}\\text{{ kg}}\\cdot\\text{{m}}^2$ is at rest when a net torque that varies as shown is applied about its axle. What is the angular speed of the wheel at $t={xs[-1]}\\text{{ s}}$?"
     return mk("ph_torque_time_area", "6.3", "2.B", stem, key, ds, rng, concept="Angular impulse as the area under a torque-time graph", thinking=["Find the area under the torque-time graph as the angular impulse", "Divide by the rotational inertia to get the change in angular speed"],
               cond=[("the wheel starts at rest and the plotted torque is the net torque", "the stem states both")], path="exact trapezoid area versus numpy integration of the interpolated torque", material=MAT_GRAPH("axis labels with units"),
-              judgment=["representation_reading", "law_selection"], stim=stim, est=100, facts=[f"xs={xs}", f"tq={tq}", f"I={I}"], kwhy="The area under the torque-time graph is the change in angular momentum $I\\Delta\\omega$.")
+              judgment=["representation_reading", "law_selection"], stim=stim, est=100, facts=[f"xs={xs}", f"tq={tq}", f"I={I}"], kwhy=f"The areas under the torque-time graph are {seg_text(xs, tq, 'N·m·s')}, so $I\\Delta\\omega={sig(float(dL))}$ and $\\omega={sig(float(dL))}/{I:g}={sig(w)}\\text{{ rad/s}}$.")
 
 
 # ======================= U7 =======================
@@ -112,7 +112,7 @@ def ph_period_scaling(rng):
     stem = f"A block on a spring oscillates with period $P$ on a frictionless horizontal surface. The block is replaced by one with ${a}$ times the mass and the spring is replaced by one with ${b}$ times the spring constant. The amplitude is unchanged. How many times as long as $P$ is the new period?"
     return mk("ph_period_scaling", "7.2", "2.D", stem, key, ds, rng, concept="Period of a mass-spring oscillator depends on $\\sqrt{m/k}$", thinking=["Recall that the period is proportional to the square root of mass over spring constant", "Combine the factors for both changes"],
               cond=[("the oscillator is an ideal mass-spring system", "the stem states a frictionless horizontal surface and an ideal spring")], path="the period of each system is measured from an RK4 simulation of the equation of motion and the ratio is compared with the closed form", material=MAT_NONE,
-              judgment=["scaling_prediction"], est=80, facts=[f"a={a}", f"b={b}"], kwhy="The period scales as $\\sqrt{m/k}$.")
+              judgment=["scaling_prediction"], est=80, facts=[f"a={a}", f"b={b}"], kwhy=f"The period scales as $\\sqrt{{m/k}}$, so the factor is $\\sqrt{{{a}/{b}}}={sig(exact)}$.")
 
 
 def ph_shm_vmax(rng):
@@ -125,11 +125,11 @@ def ph_shm_vmax(rng):
     pairs = [("Takes the maximum speed to be the amplitude divided by the period, $A/P$, omitting the factor of $2\\pi$.", A / P), ("Uses $2\\pi A P$, multiplying by the period instead of dividing.", 2 * math.pi * A * P),
              ("Reports the maximum acceleration $4\\pi^2A/P^2$ instead of the maximum speed.", 4 * math.pi ** 2 * A / P ** 2), ("Uses $\\pi A/P$, dropping one factor of two from $2\\pi A/P$.", math.pi * A / P)]
     key, ds = num_opts(vmax, pairs, "m/s")
-    stim = dense_graph_stim("Position versus time of an oscillating block", lambda t: A * math.sin(2 * math.pi * t / P), 0, 2 * P, gaxis("Time (s)", 0, 2 * P, P / 4), gaxis("Position (m)", -A * 1.2, A * 1.2, A / 2), n=161)
+    stim = dense_graph_stim("Position versus time of an oscillating block", lambda t: A * math.sin(2 * math.pi * t / P), 0, 2 * P, gaxis("Time (s)", 0, 2 * P, P / 4), sym_axis("Position (m)", A), n=161)
     stem = "The graph shows the position of a block oscillating on a spring as a function of time. What is the maximum speed of the block?"
     return mk("ph_shm_vmax", "7.3", "2.B", stem, key, ds, rng, concept="Maximum speed of a simple harmonic oscillator from a position-time graph", thinking=["Read the amplitude and the period from the graph", "Use $v_{max}=\\omega A$ with $\\omega=2\\pi/P$"],
               cond=[("the motion is simple harmonic so the position is sinusoidal in time", "the plotted points follow a sine curve")], path="numpy gradient of the sampled position function gives the maximum speed that is compared with $2\\pi A/P$", material=MAT_GRAPH("axis labels with units", "one or more full periods"),
-              judgment=["representation_reading", "symbolic_reasoning"], stim=stim, est=105, facts=[f"A={A}", f"P={P}"], kwhy="The maximum speed is $\\omega A=2\\pi A/P$.")
+              judgment=["representation_reading", "symbolic_reasoning"], stim=stim, est=105, facts=[f"A={A}", f"P={P}"], kwhy=f"The graph gives $A={A:g}\\text{{ m}}$ and $P={P:g}\\text{{ s}}$, so the maximum speed is $\\omega A=2\\pi A/P={sig(vmax)}\\text{{ m/s}}$.")
 
 
 def ph_shm_energy(rng):
@@ -150,7 +150,7 @@ def ph_shm_energy(rng):
     stem = f"A block attached to an ideal horizontal spring of spring constant ${k:g}\\text{{ N/m}}$ oscillates on a frictionless surface with amplitude ${A:g}\\text{{ m}}$. What is the kinetic energy of the block when its displacement from equilibrium is ${x:g}\\text{{ m}}$?"
     return mk("ph_shm_energy", "7.4", "2.B", stem, key, ds, rng, concept="Energy of a simple harmonic oscillator at an intermediate position", thinking=["Find the total mechanical energy from the amplitude", "Subtract the elastic potential energy at the given displacement"],
               cond=[("the surface is frictionless so the total mechanical energy is constant", "the stem states a frictionless surface and an ideal spring")], path="RK4 integration of the equation of motion gives the speed at the displacement whose kinetic energy matches the energy result", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=100, facts=[f"k={k}", f"A={A}", f"x={x}"], kwhy="Total energy $\\tfrac12kA^2$ minus elastic potential energy $\\tfrac12kx^2$ is the kinetic energy.")
+              judgment=["law_selection", "symbolic_reasoning"], est=100, facts=[f"k={k}", f"A={A}", f"x={x}"], kwhy=f"$K=\\tfrac12k(A^2-x^2)=\\tfrac12({k:g})({A:g}^2-{x:g}^2)={sig(K)}\\text{{ J}}$.")
 
 
 # ======================= U8 =======================
@@ -165,7 +165,7 @@ def ph_float_fraction(rng):
     fm = lambda v: "$" + sig(v, 2) + "$ of its volume"  # noqa: E731
     pairs = [("Reports the fraction of the fluid density that the block has relative to the block density, inverting the ratio.", min(rw / rho, 9.9) if rw / rho < 10 else 9.9), ("Reports one minus the correct fraction, the fraction above the surface.", 1 - frac),
              ("Takes half the volume to be submerged for any floating object.", 0.5), ("Squares the density ratio.", frac ** 2), ("Uses the square root of the density ratio.", frac ** 0.5)]
-    key = Opt(fm(frac), True, "A floating object displaces its own weight of fluid, so the submerged fraction equals the density ratio.", frac)
+    key = Opt(fm(frac), True, f"A floating object displaces its own weight of fluid, so the submerged fraction equals the density ratio ${rho:g}/{rw:g}={sig(frac, 2)}$.", frac)
     ds, seen = [], [frac]
     for why, v in pairs:
         if v > 1.0 or any(abs(v - c) < 0.08 for c in seen):
@@ -191,7 +191,7 @@ def ph_gauge_pressure(rng):
     stem = f"An open tank holds a liquid of density ${rho:g}\\text{{ kg/m}}^3$. Atmospheric pressure is $1.01\\times10^{{5}}\\text{{ Pa}}$. What is the absolute pressure at a point ${h:g}\\text{{ m}}$ below the surface of the liquid?"
     return mk("ph_gauge_pressure", "8.2", "2.B", stem, key, ds, rng, concept="Absolute pressure at depth in a static fluid", thinking=["Compute the pressure added by the liquid column from $\\rho g h$", "Add the atmospheric pressure acting on the surface"],
               cond=[("the liquid is incompressible and open to the atmosphere", "the stem states an open tank and gives a single density")], path="exact rational arithmetic on the three terms versus the float evaluation of the pressure", material=MAT_NONE,
-              judgment=["law_selection"], est=80, facts=[f"rho={rho}", f"h={h}"], kwhy="$P=P_0+\\rho gh$.")
+              judgment=["law_selection"], est=80, facts=[f"rho={rho}", f"h={h}"], kwhy=f"$P=P_0+\\rho gh=1.01\\times10^{{5}}+({rho:g})(9.8)({h:g})={sig(P)}\\text{{ Pa}}$.")
 
 
 def ph_continuity(rng):
@@ -209,7 +209,7 @@ def ph_continuity(rng):
     stem = f"Water flows steadily through a horizontal pipe whose diameter narrows from ${d1:g}\\text{{ cm}}$ to ${d2:g}\\text{{ cm}}$. The water speed in the wide section is ${v1:g}\\text{{ m/s}}$. What is the water speed in the narrow section?"
     return mk("ph_continuity", "8.4", "2.B", stem, key, ds, rng, concept="Continuity equation for an incompressible fluid in a pipe", thinking=["Recognize that the volume flow rate is constant for an incompressible fluid", "Relate the speeds through the cross-sectional areas, which scale with the square of the diameter"],
               cond=[("the flow is steady and the fluid is incompressible", "the stem states steady flow of water")], path="the cross-sectional areas are computed numerically from $\\pi r^2$ and the speeds from the flow rate; the result matches the squared diameter ratio", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=90, facts=[f"d1={d1}", f"d2={d2}", f"v1={v1}"], kwhy="$A_1v_1=A_2v_2$ with $A\\propto d^2$.")
+              judgment=["law_selection", "symbolic_reasoning"], est=90, facts=[f"d1={d1}", f"d2={d2}", f"v1={v1}"], kwhy=f"$A_1v_1=A_2v_2$ with $A\\propto d^2$ gives $v_2=v_1(d_1/d_2)^2={v1:g}({d1:g}/{d2:g})^2={sig(v2)}\\text{{ m/s}}$.")
 
 
 def ph_bernoulli_dp(rng):
@@ -224,7 +224,7 @@ def ph_bernoulli_dp(rng):
     stem = f"Water of density ${rho:g}\\text{{ kg/m}}^3$ flows through a horizontal pipe. The speed is ${v1:g}\\text{{ m/s}}$ in a wide section and ${v2:g}\\text{{ m/s}}$ in a narrow section. By how much is the pressure in the wide section greater than the pressure in the narrow section?"
     return mk("ph_bernoulli_dp", "8.4", "2.B", stem, key, ds, rng, concept="Bernoulli's equation for a horizontal pipe", thinking=["Apply Bernoulli's equation between the two sections at the same height", "Express the pressure difference as one half the density times the difference of the squared speeds"],
               cond=[("the pipe is horizontal so the height terms cancel", "the stem states a horizontal pipe")], path="sympy rational arithmetic on the Bernoulli expression versus its float evaluation", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=95, facts=[f"v1={v1}", f"v2={v2}"], kwhy="Bernoulli gives $P_1-P_2=\\tfrac12\\rho(v_2^2-v_1^2)$.")
+              judgment=["law_selection", "symbolic_reasoning"], est=95, facts=[f"v1={v1}", f"v2={v2}"], kwhy=f"Bernoulli gives $P_1-P_2=\\tfrac12\\rho(v_2^2-v_1^2)=\\tfrac12(1000)({v2:g}^2-{v1:g}^2)={sig(dP)}\\text{{ Pa}}$.")
 
 
 def ph_torricelli_range(rng):
@@ -237,13 +237,13 @@ def ph_torricelli_range(rng):
         agree(R, y[0], 1e-6, "R"); agree(0.0, abs(y[1]), 1e-3, "land")
         break
     pairs = [("Uses $\\sqrt{dh}$ without the factor of two, halving the range.", math.sqrt(d * hh)), ("Uses $4\\sqrt{dh}$.", 4 * math.sqrt(d * hh)),
-             ("Uses the full height of the water surface above the ground, $d+h$, in place of the depth $d$, giving $2\\sqrt{(d+h)h}$.", 2 * math.sqrt((d + hh) * hh)), ("Uses the exit speed times the depth, as if the water fell for a time equal to $d/v$.", v * d / G)]
+             ("Uses the full height of the water surface above the ground, $d+h$, in place of the depth $d$, giving $2\\sqrt{(d+h)h}$.", 2 * math.sqrt((d + hh) * hh)), ("Uses the depth below the surface, $d$, as the height of the fall, giving a range of $2d$.", 2 * d)]
     key, ds = num_opts(R, pairs, "m")
     sc = make_tank_hole(d, hh, tankH); assert not check_scene(sc)
     stem = f"A large open tank stands on level ground. Water leaves a small hole ${d:g}\\text{{ m}}$ below the water surface and ${hh:g}\\text{{ m}}$ above the ground, moving horizontally. How far from the tank does the water stream land? Treat the water as ideal."
     return mk("ph_torricelli_range", "8.4", "2.B", stem, key, ds, rng, concept="Exit speed from a hole (Torricelli) and projectile motion of the stream", thinking=["Find the exit speed from Bernoulli's equation with the depth of the hole", "Treat the stream as a horizontal projectile falling from the hole height to the ground"],
               cond=[("the tank is large so the surface speed is negligible and the fluid is ideal", "the stem states a large open tank and an ideal fluid")], path="RK4 integration of the horizontal projectile from the hole height with the Bernoulli exit speed lands at the closed-form range", material=MAT_DIAGRAM("tank, hole depth and hole height"),
-              judgment=["law_selection", "symbolic_reasoning"], stim=diagram_stim("Water leaving a hole in a tank", sc), est=120, facts=[f"d={d}", f"hh={hh}"], kwhy="The exit speed is $\\sqrt{2gd}$ and the fall time is $\\sqrt{2h/g}$, so the range is $2\\sqrt{dh}$.")
+              judgment=["law_selection", "symbolic_reasoning"], stim=diagram_stim("Water leaving a hole in a tank", sc), est=120, facts=[f"d={d}", f"hh={hh}"], kwhy=f"The exit speed is $\\sqrt{{2gd}}={sig(v)}\\text{{ m/s}}$ and the fall time is $\\sqrt{{2h/g}}={sig(math.sqrt(2 * hh / G))}\\text{{ s}}$, so the range is $2\\sqrt{{dh}}={sig(R)}\\text{{ m}}$.")
 
 
 def ph_hydraulic_lift(rng):
@@ -258,7 +258,7 @@ def ph_hydraulic_lift(rng):
     stem = f"In a hydraulic lift, a small piston of diameter ${d1:g}\\text{{ cm}}$ is pushed with a force of ${F1:g}\\text{{ N}}$. The large piston has a diameter of ${d2:g}\\text{{ cm}}$. What is the maximum force the large piston can exert? The pistons are at the same height."
     return mk("ph_hydraulic_lift", "8.2", "2.B", stem, key, ds, rng, concept="Pascal's principle in a hydraulic lift", thinking=["Recognize that the pressure is the same under both pistons", "Relate the forces through the piston areas, which scale with the square of the diameter"],
               cond=[("the fluid is incompressible and the pistons are at the same height", "the stem states pistons at the same height")], path="the piston areas are computed numerically from $\\pi r^2$ and the force from equal pressures; the result matches the squared diameter ratio", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=85, facts=[f"d1={d1}", f"d2={d2}", f"F1={F1}"], kwhy="Equal pressures give $F_2=F_1(A_2/A_1)$ with $A\\propto d^2$.")
+              judgment=["law_selection", "symbolic_reasoning"], est=85, facts=[f"d1={d1}", f"d2={d2}", f"F1={F1}"], kwhy=f"Equal pressures give $F_2=F_1(A_2/A_1)=F_1(d_2/d_1)^2={F1:g}({d2:g}/{d1:g})^2={sig(F2)}\\text{{ N}}$.")
 
 
 def ph_apparent_weight(rng):
@@ -273,7 +273,7 @@ def ph_apparent_weight(rng):
     stem = f"A solid metal object of density ${rho:g}\\text{{ kg/m}}^3$ and volume ${Vcm:g}\\text{{ cm}}^3$ hangs from a scale and is fully submerged in water of density $1000\\text{{ kg/m}}^3$ without touching the container. What does the scale read?"
     return mk("ph_apparent_weight", "8.3", "2.B", stem, key, ds, rng, concept="Apparent weight of a submerged object", thinking=["Compute the weight of the object and the buoyant force from the displaced water", "Subtract the buoyant force from the weight to find the scale reading"],
               cond=[("the object is fully submerged and in equilibrium", "the stem states the object hangs fully submerged on a scale")], path="exact arithmetic on $(\\rho-\\rho_w)Vg$ versus the separately computed weight minus buoyant force", material=MAT_NONE,
-              judgment=["law_selection"], est=95, facts=[f"rho={rho}", f"V={Vcm}"], kwhy="The scale reads the weight minus the buoyant force.")
+              judgment=["law_selection"], est=95, facts=[f"rho={rho}", f"V={Vcm}"], kwhy=f"The scale reads the weight minus the buoyant force, $(\\rho-\\rho_w)Vg=({rho:g}-1000)({sig(V)})(9.8)={sig(Wapp)}\\text{{ N}}$.")
 
 
 # ======================= 2문항 세트 =======================
@@ -297,7 +297,8 @@ def phs_vt_set(rng):
                                  (f"What is the average acceleration of the cart during the last segment of the graph, from $t={xs[-2]}\\text{{ s}}$ to $t={T}\\text{{ s}}$?", k2, d2, "1.2", "q2")]:
         q.append(mk(f"phs_vt_set_{nm}", top, "2.B", st, key, ds, rng, concept="Two questions about a single velocity-time graph", thinking=["Read the graph to find the needed area or slope", "Apply the kinematic definition of displacement or average acceleration"],
                     cond=[("the graph is piecewise linear", "the shared stimulus is built from integer vertices")], path="exact fractions versus numpy integration or polyfit of the same graph", material=MAT_GRAPH("axis labels with units"),
-                    judgment=["representation_reading", "law_selection"], stim=None, est=95, facts=[f"xs={xs}", f"vs={vs}"], kwhy="Displacement is the signed area under the velocity-time graph, and average acceleration is the change in velocity divided by the elapsed time of the segment."))
+                    judgment=["representation_reading", "law_selection"], stim=None, est=95, facts=[f"xs={xs}", f"vs={vs}"], kwhy=(f"The signed areas of the segments are {seg_text(xs, vs, 'm')}; area below the axis subtracts, so the displacement is ${sig(float(disp))}\\text{{ m}}$." if nm == "q1"
+                          else f"The average acceleration is the slope of the last segment, $({vs[-1]}-({vs[-2]}))/{dt}={sig(acc)}\\text{{ m/s}}^2$.")))
     return {"archetype": "phs_vt_set", "topic": "1.2", "skill": "2.B", "calculator": "allowed", "set_intro": "A cart moves along a straight horizontal track. The graph shows the velocity of the cart as a function of time, with right taken as positive.", "stimulus": stim, "items": q, "facts": q[0]["facts"], "blueprint": q[0]["blueprint"]}
 
 
@@ -320,7 +321,8 @@ def phs_collision_set(rng):
     for st, key, ds, top, nm in [("What is the velocity of the combined carts after the collision? Take right as positive.", k1, d1, "4.3", "q1"), ("How much kinetic energy is lost in the collision?", k2, d2, "4.4", "q2")]:
         q.append(mk(f"phs_collision_set_{nm}", top, "2.B", st, key, ds, rng, concept="Two questions about a perfectly inelastic collision", thinking=["Use conservation of momentum or energy accounting", "Compute the requested quantity from the shared data"],
                     cond=[("the carts stick together on a frictionless track", "the shared diagram states the carts stick together")], path="sympy conservation equations versus numpy arithmetic; the energy loss is also recomputed from the reduced mass formula", material=MAT_DIAGRAM("two carts with masses and velocities"),
-                    judgment=["law_selection", "symbolic_reasoning"], est=95, facts=[f"m1={m1}", f"m2={m2}", f"v1={v1}", f"v2={v2}"], kwhy="Read from the shared collision data."))
+                    judgment=["law_selection", "symbolic_reasoning"], est=95, facts=[f"m1={m1}", f"m2={m2}", f"v1={v1}", f"v2={v2}"], kwhy=(f"Momentum is conserved, so $v=({m1:g}\\cdot{v1:g}+{m2:g}\\cdot({v2:g}))/{m1 + m2:g}={sig(v)}\\text{{ m/s}}$." if nm == "q1"
+                          else f"Before the collision $K_0=\\tfrac12({m1:g})({v1:g})^2+\\tfrac12({m2:g})({v2:g})^2={sig(K0)}\\text{{ J}}$ and after it $K_1=\\tfrac12({m1 + m2:g})({sig(v)})^2={sig(K1)}\\text{{ J}}$, so ${sig(loss)}\\text{{ J}}$ is lost.")))
     intro = f"On a frictionless track, a ${m1:g}\\text{{ kg}}$ cart moving at ${v1:g}\\text{{ m/s}}$ collides with and sticks to a ${m2:g}\\text{{ kg}}$ cart with velocity ${v2:g}\\text{{ m/s}}$ (right is positive)."
     return {"archetype": "phs_collision_set", "topic": "4.3", "skill": "2.B", "calculator": "allowed", "set_intro": intro, "stimulus": stim, "items": q, "facts": q[0]["facts"], "blueprint": q[0]["blueprint"]}
 

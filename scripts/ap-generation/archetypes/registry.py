@@ -42,7 +42,8 @@ PHYS_STAGES = {}
 for _m in _PH:
     for _n in dir(_m):
         if _n.startswith("STAGE_"):
-            PHYS_STAGES["phys_" + _n[6:].lower()] = list(getattr(_m, _n))  # STAGE_U1 -> phys_u1, STAGE_SETS -> phys_sets, STAGE_FRQ -> phys_frq
+            _k = "phys_" + _n[6:].lower()  # STAGE_U1 -> phys_u1, STAGE_SETS -> phys_sets, STAGE_FRQ -> phys_frq (여러 모듈의 같은 이름 목록은 이어 붙인다)
+            PHYS_STAGES[_k] = PHYS_STAGES.get(_k, []) + [x for x in getattr(_m, _n) if x not in PHYS_STAGES.get(_k, [])]
 PHYS_STAGES["phys_mc_all"] = [n for k in ("phys_u1", "phys_u2", "phys_u3", "phys_u4", "phys_u5", "phys_u6", "phys_u7", "phys_u8") for n in PHYS_STAGES.get(k, [])]
 PHYS_STAGES["phys_all"] = PHYS_STAGES["phys_mc_all"] + PHYS_STAGES.get("phys_sets", []) + PHYS_STAGES.get("phys_frq", [])
 GRAPH = {n: (getattr(m, n), "0") for m in GRAPH_MODS for n in dir(m) if n.startswith(("g_", "c_")) and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}

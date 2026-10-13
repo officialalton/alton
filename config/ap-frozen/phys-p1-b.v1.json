@@ -1,0 +1,76 @@
+{
+ "version": "v1-phys-p1-b",
+ "run": "phys-p1-b",
+ "subject": "ap_physics_1",
+ "archetypeList": "phys_p1_frq",
+ "seed0": 7400,
+ "candidatesPerCell": 1,
+ "capUsd": 3.6,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "2",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1",
+  "AP_FIGURE_TEXT": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/subjects/physics1.ts",
+  "lib/ap-generation/subjects/physics1-archetypes.json",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts",
+  "lib/ap-figures/gate.ts",
+  "lib/ap-figures/normalize.ts",
+  "lib/problem-figures/templates/ap-phys-scene.ts",
+  "lib/problem-figures/templates/figure-choice.ts"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 49.6,
+ "expected": {
+  "generatorHash": "03bc8e245722",
+  "reviewerPromptHash": "4ed6ae71bd6d",
+  "difficultyPromptHash": "9bda2250d42c",
+  "parserHash": "7528bbe8cdfc",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ },
+ "_template": "TEMPLATE, NOT FROZEN (2026-10-13, docs/ap/physics1-groundwork.md section 11). Do not run as is: expected hashes are placeholders so --check-only fails on purpose. To use: copy to <name>.v1.json, run `npx tsx scripts/ap-generation/run-frozen.ts --config <copy> --freeze`, commit, then --check-only, and only then the paid run after the owner approves the budget. hardStopCumulativeUsd assumes cumulative $40.3301 (after Statistics S3-a) plus the cap plus a 0.1 margin; recompute from `ledger-total.ts` before freezing. Free pre-checks done 2026-10-13: pipeline2 plan, blueprint and check with --subject ap_physics_1 and AP_FIXED_WORDING=1 pass 22 of 22 MC items and 4 of 4 FRQ bundles.",
+ "_budget_estimate": {
+  "cells": "4 FRQ slots x 1 candidate: MR 10 points, TBR 12, LAB 10, QQT 8",
+  "perCellUsd": "MR 0.80, TBR 1.00, LAB 0.85, QQT 0.55 (stats FRQ estimate 0.40-0.70 x 1.3 for diagram and graph rows and 8-12 rubric rows)",
+  "expectedUsd": "3.2 (range 2.2-5.2)",
+  "capUsd": 3.6,
+  "passRateAssumption": "70% (no direct physics FRQ data; stats S2-a FRQ templates passed first time)",
+  "runAfter": "P1-a, only if its first pass is at least 50% and the owner accepts the combined cap (1.8 + 3.6 = 5.4 exceeds the 4.67 headroom to the 45 stop line by 0.73)"
+ }
+}
