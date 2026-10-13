@@ -29,5 +29,24 @@
   "lib/ap-generation/frozen-config.ts",
   "scripts/ap-generation/pipeline2.ts"
  ],
- "expected": {}
+ "expected": {
+  "generatorHash": "11d427799a70",
+  "reviewerPromptHash": "fd3b454c2bfb",
+  "difficultyPromptHash": "9bda2250d42c",
+  "parserHash": "7528bbe8cdfc",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ }
 }
