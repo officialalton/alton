@@ -7,6 +7,7 @@ import SubjectToolPanels from "./SubjectToolPanels";
 import StatsCalculator from "./StatsCalculator";
 import { subjectToolsConfig } from "@/lib/exam-tools/subject-tools";
 import { evalScientific } from "./PhysicsCalculator";
+import { CHEMISTRY_REF_DISCLAIMER, CHEMISTRY_CONSTANTS, CHEMISTRY_ELEMENTS, elementPosition } from "@/lib/exam-tools/chemistry-reference";
 import { PHYSICS_REF_DISCLAIMER, PHYSICS_CONSTANTS } from "@/lib/exam-tools/physics-reference";
 import { parseNum, STATS_MODES } from "@/lib/stats-calc/modes";
 
@@ -204,5 +205,28 @@ describe("AP Physics 1 도구", () => {
     expect(evalScientific("sin(30*deg)")).toEqual({ ok: true, value: "0.5" });
     expect(evalScientific("1/0").ok).toBe(false);
     expect(evalScientific("2+").ok).toBe(false);
+  });
+});
+
+describe("AP Chemistry 도구", () => {
+  const chem = subjectToolsConfig("ap_chemistry");
+  it("공학용 계산기 + Reference, Desmos 없음", () => {
+    expect(chem.calculatorTabs).toEqual(["scientific"]);
+    expect(chem.reference).toBe("chemistry");
+  });
+  it("Reference 는 자체 문구 고지·상수·주기율표를 보인다", () => {
+    render(<SubjectToolPanels config={chem} calculatorAllowed open="reference" onClose={() => {}} />);
+    expect(screen.getByTestId("chemistry-reference-disclaimer").textContent).toBe(CHEMISTRY_REF_DISCLAIMER);
+    expect(CHEMISTRY_REF_DISCLAIMER).toMatch(/not the official College Board sheet/);
+    expect(screen.getByText(CHEMISTRY_CONSTANTS[0].value)).toBeInTheDocument();
+    expect(screen.getByTestId("periodic-table").children.length).toBe(CHEMISTRY_ELEMENTS.filter(([z]) => elementPosition(z).group !== 0).length);
+  });
+  it("주기율표 위치: 원소마다 (주기, 족) 한 칸, 겹침 없음", () => {
+    const seen = new Set<string>();
+    for (const [z] of CHEMISTRY_ELEMENTS) { const p = elementPosition(z); if (p.group === 0) continue; const k = `${p.period}-${p.group}`; expect(seen.has(k)).toBe(false); seen.add(k); }
+    expect(elementPosition(26)).toEqual({ period: 4, group: 8 });
+    expect(elementPosition(17)).toEqual({ period: 3, group: 17 });
+    expect(elementPosition(79)).toEqual({ period: 6, group: 11 });
+    expect(CHEMISTRY_ELEMENTS).toHaveLength(86);
   });
 });

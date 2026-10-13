@@ -7,6 +7,7 @@ import StatsCalculator from "./StatsCalculator";
 import StatsReference from "./StatsReference";
 import PhysicsCalculator from "./PhysicsCalculator";
 import PhysicsReference from "./PhysicsReference";
+import ChemistryReference from "./ChemistryReference";
 import { TabBar } from "./Tabs";
 
 // 과목별 도구 패널(계산기 팝업 + 참조 팝업). 과목 구성은 lib/exam-tools/subject-tools.ts.
@@ -21,6 +22,7 @@ const CALCULATOR_TABS: Record<CalculatorTab, { label: string; Component: Compone
 const REFERENCE_PANELS: Record<ReferenceKind, { title: string; Component: ComponentType }> = {
   statistics: { title: "Reference", Component: StatsReference },
   physics: { title: "Reference", Component: PhysicsReference },
+  chemistry: { title: "Reference", Component: ChemistryReference },
 };
 
 function Modal({ label, show, onClose, closeTestId, children, header }: { label: string; show: boolean; onClose: () => void; closeTestId: string; children: React.ReactNode; header?: React.ReactNode }) {
