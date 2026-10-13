@@ -1,0 +1,1354 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_regression_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-step interpretation of the slope from computer output. The student locates the Hours coefficient and picks the correct wording over three common misinterpretations: a percent, 'exactly' rather than predicted, and reversed variables. No computation is needed and the concept is foundational. The extra output columns are a minor distractor, and the item does not require inference on the slope.",
+  "payload": {
+   "archetype": "st_set_regression",
+   "topic": "5.3",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "set_intro": "The relationship between the number of hours a student spent studying and the exam score, in points, is described by a least-squares regression line. Computer output for the regression is shown.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Computer output for a least-squares regression",
+    "data": {
+     "chart": "output",
+     "output": {
+      "title": "Regression Analysis: Score versus Hours",
+      "sections": [
+       {
+        "columns": [
+         "Predictor",
+         "Coef",
+         "SE Coef",
+         "T",
+         "P"
+        ],
+        "rows": [
+         [
+          "Constant",
+          "46.40",
+          "1.478",
+          "31.39",
+          "0.000"
+         ],
+         [
+          "Hours",
+          "5.53",
+          "0.751",
+          "7.36",
+          "0.000"
+         ]
+        ]
+       },
+       {
+        "columns": [
+         "S",
+         "R-Sq"
+        ],
+        "rows": [
+         [
+          "2.15",
+          "49.0%"
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_regression_q1",
+     "topic": "5.3",
+     "skill": "4.D",
+     "stem": "Which of the following is the correct interpretation of the slope of the regression line?",
+     "options": [
+      {
+       "text": "For each additional hour of study time, the predicted exam score increases by about $5.53\\%$",
+       "why": "Treats the slope as a percent change instead of a change in the units of the response.",
+       "value": null
+      },
+      {
+       "text": "For each additional hour of study time, the exam score increases by exactly $5.53$ points",
+       "why": "Claims an exact change for every individual, but the slope describes the predicted change on average.",
+       "value": null
+      },
+      {
+       "text": "For each additional hour of study time, the predicted exam score increases by about $5.53$ points",
+       "why": "The slope is $5.53$, so each one-hour increase in study time goes with a predicted change of $5.53$ points in exam score.",
+       "value": null
+      },
+      {
+       "text": "For each additional $5.53$ points of exam score, the predicted study time increases by about $1$ hour",
+       "why": "Reverses the roles of the explanatory and the response variables.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is For each additional hour of study time, the predicted exam score increases by about $5.53$ points. The slope is $5.53$, so each one-hour increase in study time goes with a predicted change of $5.53$ points in exam score.\nFor each additional hour of study time, the predicted exam score increases by about $5.53\\%$ is incorrect: Treats the slope as a percent change instead of a change in the units of the response.\nFor each additional hour of study time, the exam score increases by exactly $5.53$ points is incorrect: Claims an exact change for every individual, but the slope describes the predicted change on average.\nFor each additional $5.53$ points of exam score, the predicted study time increases by about $1$ hour is incorrect: Reverses the roles of the explanatory and the response variables.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_regression_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Interpret the slope of a least-squares line in context",
+      "topic": "5.3",
+      "skill": "4.D",
+      "student_thinking": [
+       "Read the slope from the Coef column next to the explanatory variable",
+       "Describe the predicted change in the response for a one-unit increase in the explanatory variable, in context and with units"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the slope is the predicted change in y for a one-unit increase in x",
+        "evidence": "the output gives the slope in the Coef column and the stem names both variables and their units"
+       }
+      ],
+      "material": {
+       "type": "computer_output",
+       "must_include": [
+        "Coef column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "exact_change",
+        "description": "claims an exact change"
+       },
+       {
+        "id": "roles_reversed",
+        "description": "reverses the variables"
+       },
+       {
+        "id": "percent_change",
+        "description": "uses percent"
+       }
+      ],
+      "verification": {
+       "independent_path": "the interpretation sentences are generated from the slope sign and units, and the slope is checked against the sign implied by the correlation",
+       "method": "template and sign check"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_regression_q2",
+     "topic": "5.3",
+     "skill": "3.B",
+     "stem": "What is the predicted exam score when study time is $6$? Round to one decimal place.",
+     "options": [
+      {
+       "text": "$283.9$",
+       "why": "Uses the slope as the intercept and the intercept as the slope.",
+       "value": "283.90000"
+      },
+      {
+       "text": "$33.2$",
+       "why": "Leaves out the intercept and predicts with the slope times $x$ alone.",
+       "value": "33.200000"
+      },
+      {
+       "text": "$79.6$",
+       "why": "The predicted value is $\\hat y = 46.4 + (5.53)(6) \\approx 79.6$.",
+       "value": "79.600000"
+      },
+      {
+       "text": "$51.9$",
+       "why": "Adds the slope to the intercept instead of multiplying the slope by $x$.",
+       "value": "51.900000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $79.6$. The predicted value is $\\hat y = 46.4 + (5.53)(6) \\approx 79.6$.\n$283.9$ is incorrect: Uses the slope as the intercept and the intercept as the slope.\n$33.2$ is incorrect: Leaves out the intercept and predicts with the slope times $x$ alone.\n$51.9$ is incorrect: Adds the slope to the intercept instead of multiplying the slope by $x$.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_regression_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Predict a response value from regression output",
+      "topic": "5.3",
+      "skill": "3.B",
+      "student_thinking": [
+       "Read the intercept and the slope from the Coef column",
+       "Substitute the x value into the line and round as stated"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the predicted value is intercept plus slope times x",
+        "evidence": "the output gives both coefficients and the stem gives x"
+       }
+      ],
+      "material": {
+       "type": "computer_output",
+       "must_include": [
+        "Coef column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "intercept_omitted",
+        "description": "leaves out the intercept"
+       },
+       {
+        "id": "coefficients_swapped",
+        "description": "swaps slope and intercept"
+       },
+       {
+        "id": "slope_added",
+        "description": "adds instead of multiplies"
+       }
+      ],
+      "verification": {
+       "independent_path": "the prediction is recomputed from the printed coefficients and compared with the generating line",
+       "method": "recomputation"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "calculated_value_decision"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_regression_q3",
+     "topic": "5.2",
+     "skill": "3.B",
+     "stem": "What is the correlation coefficient between the two variables? Round to two decimal places.",
+     "options": [
+      {
+       "text": "$0.70$",
+       "why": "The correlation has the same sign as the slope, so $r = \\sqrt{0.49} = 0.70$.",
+       "value": "0.70000000"
+      },
+      {
+       "text": "$0.35$",
+       "why": "Divides $r$ by $2$, which has no basis in the output.",
+       "value": "0.35000000"
+      },
+      {
+       "text": "$0.49$",
+       "why": "Reports $r^2$ as if it were the correlation $r$.",
+       "value": "0.49000000"
+      },
+      {
+       "text": "$-0.70$",
+       "why": "Uses the wrong sign: the sign of $r$ must match the sign of the slope.",
+       "value": "-0.70000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $0.70$. The correlation has the same sign as the slope, so $r = \\sqrt{0.49} = 0.70$.\n$0.35$ is incorrect: Divides $r$ by $2$, which has no basis in the output.\n$0.49$ is incorrect: Reports $r^2$ as if it were the correlation $r$.\n$-0.70$ is incorrect: Uses the wrong sign: the sign of $r$ must match the sign of the slope.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_regression_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the correlation coefficient from R-squared and the sign of the slope",
+      "topic": "5.2",
+      "skill": "3.B",
+      "student_thinking": [
+       "Take the square root of the R-Sq value written as a proportion",
+       "Give r the same sign as the slope"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "r is the square root of r squared with the sign of the slope",
+        "evidence": "the output shows R-Sq and the slope"
+       }
+      ],
+      "material": {
+       "type": "computer_output",
+       "must_include": [
+        "R-Sq",
+        "Coef column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "r_squared_as_r",
+        "description": "reports r squared"
+       },
+       {
+        "id": "wrong_sign",
+        "description": "uses the wrong sign"
+       },
+       {
+        "id": "halved_r",
+        "description": "divides r by two"
+       }
+      ],
+      "verification": {
+       "independent_path": "r is recomputed as the square root of the printed R-Sq with the slope's sign and rounded to two decimals; options are at least 0.04 apart",
+       "method": "recomputation"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "calculated_value_decision"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 255,
+   "facts": [
+    "a=46.4",
+    "b=5.53",
+    "r2=0.49",
+    "x0=6"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_regression_q1",
+   "facts": [
+    "a=46.4",
+    "b=5.53",
+    "r2=0.49",
+    "x0=6"
+   ],
+   "seed": 9700
+  },
+  "review": [
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Standard slope-interpretation item reading computer output. The key is unique, the distractors each encode a named misinterpretation, and the stimulus is complete. Within scope for 5.3 and skill 4.D, with a suitable load.",
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    }
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 80 seconds, has low reading load and four parallel numeric options, and is consistent with a calculator-allowed exam.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean prediction-from-computer-output question with a correct key (79.6), well-motivated distractors and complete stimulus data. It passes all five criteria."
+   },
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item asks for r from R-Sq (49.0%) and the positive slope (5.53), so r = 0.70. This is a standard Topic 5.2 computer-output task. The key is unique. The distractors are r², the wrong sign, and half of r, each a distinct error. The stimulus data is complete and the rounding is stated. The task is short and fits the exam's time and calculator expectations.",
+    "scope_skill": {
+     "pass": true,
+     "notes": "The item targets correlation from computer output, which is within Topic 5.2 and skill 3.B. It does not use inference for a slope; the T and P columns appear in the output but are not needed."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "r = +sqrt(0.49) = 0.70, with the sign taken from the positive slope. No other option is defensible."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The output table has the Coef and R-Sq entries the item needs. The stem states two-decimal rounding. The wording is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each wrong option encodes a distinct misconception (r², wrong sign, halved r), and the explanation addresses each one. The \"halved r\" distractor is weak but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The task takes about 60 to 85 seconds with a light reading load. The calculator is allowed but barely needed, which is acceptable."
+    }
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step interpretation of the slope from computer output. The student locates the Hours coefficient and picks the correct wording over three common misinterpretations: a percent, 'exactly' rather than predicted, and reversed variables. No computation is needed and the concept is foundational. The extra output columns are a minor distractor, and the item does not require inference on the slope.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Read intercept and slope from computer output and substitute x=6 into the regression equation: 46.40 + 5.53(6) = 79.58 ≈ 79.6. Single step, minimal arithmetic, no interpretation or condition checking. The only mild demand is identifying the right coefficients in the output; distractors are swapped or sign-error results.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read R-Sq from computer output, take the square root to get |r| = 0.70, and use the positive slope to choose the sign. This requires one representation change and a few reasoning steps with trivial arithmetic. Distractors target common errors (r² reported as r, wrong sign). It is a typical AP-level item with no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_regression_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: identify the slope from computer output and choose the correct interpretation among standard misinterpretations (reversed variables, percent vs units, exact vs predicted). No computation, minimal reading, one representation (output table). Lower difficulty than a full-mock exam_prep item.",
+  "payload": {
+   "archetype": "st_set_regression",
+   "topic": "5.3",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "set_intro": "The relationship between the age of a used car, in years, and its selling price, in thousands of dollars, is described by a least-squares regression line. Computer output for the regression is shown.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Computer output for a least-squares regression",
+    "data": {
+     "chart": "output",
+     "output": {
+      "title": "Regression Analysis: Price versus Age",
+      "sections": [
+       {
+        "columns": [
+         "Predictor",
+         "Coef",
+         "SE Coef",
+         "T",
+         "P"
+        ],
+        "rows": [
+         [
+          "Constant",
+          "26.90",
+          "1.420",
+          "18.94",
+          "0.000"
+         ],
+         [
+          "Age",
+          "-2.35",
+          "0.308",
+          "-7.63",
+          "0.000"
+         ]
+        ]
+       },
+       {
+        "columns": [
+         "S",
+         "R-Sq"
+        ],
+        "rows": [
+         [
+          "2.15",
+          "81.0%"
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_regression_q1",
+     "topic": "5.3",
+     "skill": "4.D",
+     "stem": "Which of the following is the correct interpretation of the slope of the regression line?",
+     "options": [
+      {
+       "text": "For each additional $2.35$ thousand dollars of selling price, the predicted age decreases by about $1$ year",
+       "why": "Reverses the roles of the explanatory and the response variables.",
+       "value": null
+      },
+      {
+       "text": "For each additional year of age, the predicted selling price decreases by about $2.35$ thousand dollars",
+       "why": "The slope is $-2.35$, so each one-year increase in age goes with a predicted change of $-2.35$ thousand dollars in selling price.",
+       "value": null
+      },
+      {
+       "text": "For each additional year of age, the predicted selling price decreases by about $2.35\\%$",
+       "why": "Treats the slope as a percent change instead of a change in the units of the response.",
+       "value": null
+      },
+      {
+       "text": "For each additional year of age, the selling price decreases by exactly $2.35$ thousand dollars",
+       "why": "Claims an exact change for every individual, but the slope describes the predicted change on average.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is For each additional year of age, the predicted selling price decreases by about $2.35$ thousand dollars. The slope is $-2.35$, so each one-year increase in age goes with a predicted change of $-2.35$ thousand dollars in selling price.\nFor each additional $2.35$ thousand dollars of selling price, the predicted age decreases by about $1$ year is incorrect: Reverses the roles of the explanatory and the response variables.\nFor each additional year of age, the predicted selling price decreases by about $2.35\\%$ is incorrect: Treats the slope as a percent change instead of a change in the units of the response.\nFor each additional year of age, the selling price decreases by exactly $2.35$ thousand dollars is incorrect: Claims an exact change for every individual, but the slope describes the predicted change on average.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_regression_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Interpret the slope of a least-squares line in context",
+      "topic": "5.3",
+      "skill": "4.D",
+      "student_thinking": [
+       "Read the slope from the Coef column next to the explanatory variable",
+       "Describe the predicted change in the response for a one-unit increase in the explanatory variable, in context and with units"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the slope is the predicted change in y for a one-unit increase in x",
+        "evidence": "the output gives the slope in the Coef column and the stem names both variables and their units"
+       }
+      ],
+      "material": {
+       "type": "computer_output",
+       "must_include": [
+        "Coef column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "exact_change",
+        "description": "claims an exact change"
+       },
+       {
+        "id": "roles_reversed",
+        "description": "reverses the variables"
+       },
+       {
+        "id": "percent_change",
+        "description": "uses percent"
+       }
+      ],
+      "verification": {
+       "independent_path": "the interpretation sentences are generated from the slope sign and units, and the slope is checked against the sign implied by the correlation",
+       "method": "template and sign check"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_regression_q2",
+     "topic": "5.3",
+     "skill": "3.B",
+     "stem": "What is the predicted selling price when age is $2$? Round to one decimal place.",
+     "options": [
+      {
+       "text": "$22.2$",
+       "why": "The predicted value is $\\hat y = 26.9 + (-2.35)(2) \\approx 22.2$.",
+       "value": "22.200000"
+      },
+      {
+       "text": "$51.4$",
+       "why": "Uses the slope as the intercept and the intercept as the slope.",
+       "value": "51.400000"
+      },
+      {
+       "text": "$24.5$",
+       "why": "Adds the slope to the intercept instead of multiplying the slope by $x$.",
+       "value": "24.500000"
+      },
+      {
+       "text": "$-4.7$",
+       "why": "Leaves out the intercept and predicts with the slope times $x$ alone.",
+       "value": "-4.7000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $22.2$. The predicted value is $\\hat y = 26.9 + (-2.35)(2) \\approx 22.2$.\n$51.4$ is incorrect: Uses the slope as the intercept and the intercept as the slope.\n$24.5$ is incorrect: Adds the slope to the intercept instead of multiplying the slope by $x$.\n$-4.7$ is incorrect: Leaves out the intercept and predicts with the slope times $x$ alone.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_regression_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Predict a response value from regression output",
+      "topic": "5.3",
+      "skill": "3.B",
+      "student_thinking": [
+       "Read the intercept and the slope from the Coef column",
+       "Substitute the x value into the line and round as stated"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the predicted value is intercept plus slope times x",
+        "evidence": "the output gives both coefficients and the stem gives x"
+       }
+      ],
+      "material": {
+       "type": "computer_output",
+       "must_include": [
+        "Coef column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "intercept_omitted",
+        "description": "leaves out the intercept"
+       },
+       {
+        "id": "coefficients_swapped",
+        "description": "swaps slope and intercept"
+       },
+       {
+        "id": "slope_added",
+        "description": "adds instead of multiplies"
+       }
+      ],
+      "verification": {
+       "independent_path": "the prediction is recomputed from the printed coefficients and compared with the generating line",
+       "method": "recomputation"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "calculated_value_decision"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_regression_q3",
+     "topic": "5.2",
+     "skill": "3.B",
+     "stem": "What is the correlation coefficient between the two variables? Round to two decimal places.",
+     "options": [
+      {
+       "text": "$-0.45$",
+       "why": "Divides $r$ by $2$, which has no basis in the output.",
+       "value": "-0.45000000"
+      },
+      {
+       "text": "$0.90$",
+       "why": "Uses the wrong sign: the sign of $r$ must match the sign of the slope.",
+       "value": "0.90000000"
+      },
+      {
+       "text": "$-0.90$",
+       "why": "The correlation has the same sign as the slope, so $r = -\\sqrt{0.81} = -0.90$.",
+       "value": "-0.90000000"
+      },
+      {
+       "text": "$0.81$",
+       "why": "Reports $r^2$ as if it were the correlation $r$.",
+       "value": "0.81000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $-0.90$. The correlation has the same sign as the slope, so $r = -\\sqrt{0.81} = -0.90$.\n$-0.45$ is incorrect: Divides $r$ by $2$, which has no basis in the output.\n$0.90$ is incorrect: Uses the wrong sign: the sign of $r$ must match the sign of the slope.\n$0.81$ is incorrect: Reports $r^2$ as if it were the correlation $r$.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_regression_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the correlation coefficient from R-squared and the sign of the slope",
+      "topic": "5.2",
+      "skill": "3.B",
+      "student_thinking": [
+       "Take the square root of the R-Sq value written as a proportion",
+       "Give r the same sign as the slope"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "r is the square root of r squared with the sign of the slope",
+        "evidence": "the output shows R-Sq and the slope"
+       }
+      ],
+      "material": {
+       "type": "computer_output",
+       "must_include": [
+        "R-Sq",
+        "Coef column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "r_squared_as_r",
+        "description": "reports r squared"
+       },
+       {
+        "id": "wrong_sign",
+        "description": "uses the wrong sign"
+       },
+       {
+        "id": "halved_r",
+        "description": "divides r by two"
+       }
+      ],
+      "verification": {
+       "independent_path": "r is recomputed as the square root of the printed R-Sq with the slope's sign and rounded to two decimals; options are at least 0.04 apart",
+       "method": "recomputation"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "calculated_value_decision"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 255,
+   "facts": [
+    "a=26.9",
+    "b=-2.35",
+    "r2=0.81",
+    "x0=2"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_regression_q1",
+   "facts": [
+    "a=26.9",
+    "b=-2.35",
+    "r2=0.81",
+    "x0=2"
+   ],
+   "seed": 9701
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Slope interpretation from computer output; fits 5.3 and 4.D. T and P columns are incidental and not needed."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option 2 (index 1) is the unique correct interpretation: predicted, per year, in thousands of dollars, negative."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Output table complete with title, columns, and rows. Variables match the stem and units are stated in the stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions (roles reversed, percent, exact change); each wrong option is explained. No length giveaway."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-90 seconds, no arithmetic, typical of official items."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean, standard slope-interpretation item with a unique key, distinct misconception distractors, and a complete output stimulus. It passes all criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Prediction from regression output fits 5.3/3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "22.2 is unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Output table complete with Coef column; rounding stated; units in stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distinct misconceptions. Minor: swapped-coefficient result is 51.45 and added result is 24.55, so options 51.4 and 24.5 reflect truncation rather than the stated rounding; not enough to change the key."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 80 seconds, light calculation, calculator allowed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound with a unique key and a clear stimulus. The only flaw is minor: two distractor values are truncated rather than rounded from the misconception computations."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 60 to 85 seconds and has a light reading load. The calculator is allowed but not needed. This is a typical AP item.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean, standard question on finding r from computer output. It has a unique key, a complete stimulus and distinct distractors, and it passes every criterion."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: identify the slope from computer output and choose the correct interpretation among standard misinterpretations (reversed variables, percent vs units, exact vs predicted). No computation, minimal reading, one representation (output table). Lower difficulty than a full-mock exam_prep item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step prediction: read intercept and slope from the Coef column of computer output and substitute x=2 (26.90 - 2.35*2 = 22.2). Trivial arithmetic, no interpretation, condition checking, or extra reasoning link. Distractors are common misreads (sign error, using slope only, using the wrong coefficient). The only demand beyond substitution is knowing which output row is the intercept and which is the slope.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Student reads R-Sq from the computer output, takes the square root (0.81 -> 0.90), and assigns the negative sign from the slope. One concept, a short chain of steps, and a simple calculation. Distractors target common errors (wrong sign, reporting r^2 as r). Reading load is minimal and there are no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k2",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_regression_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: identify the slope in the computer output and choose the correct interpretation among named misinterpretations (percent vs. units, \"exactly\" vs. predicted, reversed variables). No computation, short reading, and one representation (computer output). It is a foundational slope-interpretation skill, below the multi-step reasoning expected of full-mock exam items.",
+  "payload": {
+   "archetype": "st_set_regression",
+   "topic": "5.3",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "set_intro": "The relationship between the age of a used car, in years, and its selling price, in thousands of dollars, is described by a least-squares regression line. Computer output for the regression is shown.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Computer output for a least-squares regression",
+    "data": {
+     "chart": "output",
+     "output": {
+      "title": "Regression Analysis: Price versus Age",
+      "sections": [
+       {
+        "columns": [
+         "Predictor",
+         "Coef",
+         "SE Coef",
+         "T",
+         "P"
+        ],
+        "rows": [
+         [
+          "Constant",
+          "26.90",
+          "1.410",
+          "19.08",
+          "0.000"
+         ],
+         [
+          "Age",
+          "-1.75",
+          "0.299",
+          "-5.85",
+          "0.000"
+         ]
+        ]
+       },
+       {
+        "columns": [
+         "S",
+         "R-Sq"
+        ],
+        "rows": [
+         [
+          "2.15",
+          "81.0%"
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_regression_q1",
+     "topic": "5.3",
+     "skill": "4.D",
+     "stem": "Which of the following is the correct interpretation of the slope of the regression line?",
+     "options": [
+      {
+       "text": "For each additional year of age, the predicted selling price decreases by about $1.75\\%$",
+       "why": "Treats the slope as a percent change instead of a change in the units of the response.",
+       "value": null
+      },
+      {
+       "text": "For each additional year of age, the selling price decreases by exactly $1.75$ thousand dollars",
+       "why": "Claims an exact change for every individual, but the slope describes the predicted change on average.",
+       "value": null
+      },
+      {
+       "text": "For each additional year of age, the predicted selling price decreases by about $1.75$ thousand dollars",
+       "why": "The slope is $-1.75$, so each one-year increase in age goes with a predicted change of $-1.75$ thousand dollars in selling price.",
+       "value": null
+      },
+      {
+       "text": "For each additional $1.75$ thousand dollars of selling price, the predicted age decreases by about $1$ year",
+       "why": "Reverses the roles of the explanatory and the response variables.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is For each additional year of age, the predicted selling price decreases by about $1.75$ thousand dollars. The slope is $-1.75$, so each one-year increase in age goes with a predicted change of $-1.75$ thousand dollars in selling price.\nFor each additional year of age, the predicted selling price decreases by about $1.75\\%$ is incorrect: Treats the slope as a percent change instead of a change in the units of the response.\nFor each additional year of age, the selling price decreases by exactly $1.75$ thousand dollars is incorrect: Claims an exact change for every individual, but the slope describes the predicted change on average.\nFor each additional $1.75$ thousand dollars of selling price, the predicted age decreases by about $1$ year is incorrect: Reverses the roles of the explanatory and the response variables.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_regression_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Interpret the slope of a least-squares line in context",
+      "topic": "5.3",
+      "skill": "4.D",
+      "student_thinking": [
+       "Read the slope from the Coef column next to the explanatory variable",
+       "Describe the predicted change in the response for a one-unit increase in the explanatory variable, in context and with units"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the slope is the predicted change in y for a one-unit increase in x",
+        "evidence": "the output gives the slope in the Coef column and the stem names both variables and their units"
+       }
+      ],
+      "material": {
+       "type": "computer_output",
+       "must_include": [
+        "Coef column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "exact_change",
+        "description": "claims an exact change"
+       },
+       {
+        "id": "roles_reversed",
+        "description": "reverses the variables"
+       },
+       {
+        "id": "percent_change",
+        "description": "uses percent"
+       }
+      ],
+      "verification": {
+       "independent_path": "the interpretation sentences are generated from the slope sign and units, and the slope is checked against the sign implied by the correlation",
+       "method": "template and sign check"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_regression_q2",
+     "topic": "5.3",
+     "skill": "3.B",
+     "stem": "What is the predicted selling price when age is $4$? Round to one decimal place.",
+     "options": [
+      {
+       "text": "$-7.0$",
+       "why": "Leaves out the intercept and predicts with the slope times $x$ alone.",
+       "value": "-7.0000000"
+      },
+      {
+       "text": "$25.1$",
+       "why": "Adds the slope to the intercept instead of multiplying the slope by $x$.",
+       "value": "25.100000"
+      },
+      {
+       "text": "$105.8$",
+       "why": "Uses the slope as the intercept and the intercept as the slope.",
+       "value": "105.80000"
+      },
+      {
+       "text": "$19.9$",
+       "why": "The predicted value is $\\hat y = 26.9 + (-1.75)(4) \\approx 19.9$.",
+       "value": "19.900000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $19.9$. The predicted value is $\\hat y = 26.9 + (-1.75)(4) \\approx 19.9$.\n$-7.0$ is incorrect: Leaves out the intercept and predicts with the slope times $x$ alone.\n$25.1$ is incorrect: Adds the slope to the intercept instead of multiplying the slope by $x$.\n$105.8$ is incorrect: Uses the slope as the intercept and the intercept as the slope.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_regression_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Predict a response value from regression output",
+      "topic": "5.3",
+      "skill": "3.B",
+      "student_thinking": [
+       "Read the intercept and the slope from the Coef column",
+       "Substitute the x value into the line and round as stated"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the predicted value is intercept plus slope times x",
+        "evidence": "the output gives both coefficients and the stem gives x"
+       }
+      ],
+      "material": {
+       "type": "computer_output",
+       "must_include": [
+        "Coef column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "intercept_omitted",
+        "description": "leaves out the intercept"
+       },
+       {
+        "id": "coefficients_swapped",
+        "description": "swaps slope and intercept"
+       },
+       {
+        "id": "slope_added",
+        "description": "adds instead of multiplies"
+       }
+      ],
+      "verification": {
+       "independent_path": "the prediction is recomputed from the printed coefficients and compared with the generating line",
+       "method": "recomputation"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "calculated_value_decision"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_regression_q3",
+     "topic": "5.2",
+     "skill": "3.B",
+     "stem": "What is the correlation coefficient between the two variables? Round to two decimal places.",
+     "options": [
+      {
+       "text": "$-0.45$",
+       "why": "Divides $r$ by $2$, which has no basis in the output.",
+       "value": "-0.45000000"
+      },
+      {
+       "text": "$0.90$",
+       "why": "Uses the wrong sign: the sign of $r$ must match the sign of the slope.",
+       "value": "0.90000000"
+      },
+      {
+       "text": "$0.81$",
+       "why": "Reports $r^2$ as if it were the correlation $r$.",
+       "value": "0.81000000"
+      },
+      {
+       "text": "$-0.90$",
+       "why": "The correlation has the same sign as the slope, so $r = -\\sqrt{0.81} = -0.90$.",
+       "value": "-0.90000000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $-0.90$. The correlation has the same sign as the slope, so $r = -\\sqrt{0.81} = -0.90$.\n$-0.45$ is incorrect: Divides $r$ by $2$, which has no basis in the output.\n$0.90$ is incorrect: Uses the wrong sign: the sign of $r$ must match the sign of the slope.\n$0.81$ is incorrect: Reports $r^2$ as if it were the correlation $r$.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_regression_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the correlation coefficient from R-squared and the sign of the slope",
+      "topic": "5.2",
+      "skill": "3.B",
+      "student_thinking": [
+       "Take the square root of the R-Sq value written as a proportion",
+       "Give r the same sign as the slope"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "r is the square root of r squared with the sign of the slope",
+        "evidence": "the output shows R-Sq and the slope"
+       }
+      ],
+      "material": {
+       "type": "computer_output",
+       "must_include": [
+        "R-Sq",
+        "Coef column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "r_squared_as_r",
+        "description": "reports r squared"
+       },
+       {
+        "id": "wrong_sign",
+        "description": "uses the wrong sign"
+       },
+       {
+        "id": "halved_r",
+        "description": "divides r by two"
+       }
+      ],
+      "verification": {
+       "independent_path": "r is recomputed as the square root of the printed R-Sq with the slope's sign and rounded to two decimals; options are at least 0.04 apart",
+       "method": "recomputation"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "calculated_value_decision"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 255,
+   "facts": [
+    "a=26.9",
+    "b=-1.75",
+    "r2=0.81",
+    "x0=4"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_regression_q1",
+   "facts": [
+    "a=26.9",
+    "b=-1.75",
+    "r2=0.81",
+    "x0=4"
+   ],
+   "seed": 9702
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Slope interpretation from regression output; topic 5.3, skill 4.D. SE/T/P columns are present but not used for inference."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option 3 is the unique correct interpretation; the others are percent, exact, or reversed."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Output table is complete with Coef column; the stem gives variables and units."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct named misconceptions, each explained; options are parallel in length and form."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-90 seconds, no arithmetic, typical AP style."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean, standard slope interpretation from computer output with a unique key and distinct distractors. It passes all five criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Prediction from regression output, topic 5.3 / skill 3.B. The T and P columns are unused extras but are not inference."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "19.9 is unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The output data is complete with the Coef column, and the rounding is stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors are distinct misconceptions and all are explained. The 25.1 value is 25.15 and its rounding is slightly loose, but it is acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 80 seconds, a standard task."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean, correct prediction from regression output with distinct distractors. The only flaw is minor rounding looseness in the 25.1 distractor, so I passed it."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Finding r from R-Sq and the sign of the slope is squarely Topic 5.2 and skill 3.B (calculating a summary statistic from computer output)."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "r = -sqrt(0.81) = -0.90, with the sign taken from the slope of -1.75. Exactly one option matches."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The output has a title, a Predictor/Coef table, and S and R-Sq. Units and context are given in the stem and the rounding is stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors are the r-squared-as-r error, the wrong sign, and halving. The halved option is weak but acceptable. The explanation covers every wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "A short reading-and-interpretation task with no needless arithmetic. The options are parallel decimals."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound and passes all five criteria. It has a unique key and a complete output stimulus, and it is typical of the AP Statistics multiple-choice format."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: identify the slope in the computer output and choose the correct interpretation among named misinterpretations (percent vs. units, \"exactly\" vs. predicted, reversed variables). No computation, short reading, and one representation (computer output). It is a foundational slope-interpretation skill, below the multi-step reasoning expected of full-mock exam items.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Read intercept and slope from computer output, then substitute x=4 into the line: 26.90 - 1.75(4) = 19.9. One simple calculation, one representation change (output to equation). Distractors reflect common slips (sign errors, omitting the multiplication). Direct application of the concept with no interpretation or condition-checking.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single standard procedure: read R-Sq from the output, take the square root (sqrt(0.81)=0.90), and use the negative slope to assign the sign, giving r = -0.90. The only levers are reading computer output and one sign-reasoning step. The distractors (0.81, 0.90, -0.45) correspond to common errors, but the concept depth is shallow and the arithmetic is trivial.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   }
+  ]
+ }
+]
