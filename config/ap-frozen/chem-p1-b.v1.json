@@ -1,0 +1,71 @@
+{
+ "version": "v1-chem-p1-b",
+ "run": "chem-p1-b",
+ "subject": "ap_chemistry",
+ "archetypeList": "chem_p1_frq",
+ "seed0": 7600,
+ "candidatesPerCell": 1,
+ "capUsd": 1.0,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "2",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/subjects/chem.ts",
+  "lib/ap-generation/subjects/chem-archetypes.json",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 57.2,
+ "expected": {
+  "generatorHash": "UNFROZEN",
+  "reviewerPromptHash": "UNFROZEN",
+  "difficultyPromptHash": "UNFROZEN",
+  "parserHash": "UNFROZEN",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ },
+ "_budget_estimate": {
+  "cells": "7 FRQ slots x 1 candidate: 3 long (10 points: weak-acid titration, free energy and cell, kinetics data) and 4 short (4 points: PES, combustion stoichiometry and gas volume, bonding and IMF, equilibrium); 46 points in total",
+  "perCellUsd": "long 0.08 (5 parts, 9-10 rubric rows), short 0.045; Physics observed 0.05-0.06 per FRQ candidate with 4 parts",
+  "expectedUsd": "0.45 (range 0.35-0.8)",
+  "capUsd": 1.0,
+  "passRateAssumption": "53% first pass (Physics P1-b 2/4 and phys-s2 FRQ). Stop if fewer than 2 of 7 pass.",
+  "runAfter": "P1-a, only if its first pass is at least 45%"
+ },
+ "_note": "Frozen 2026-10-13 after P1-a v2 (32/42 first pass, 76%). Cumulative at freeze $56.0985; hard stop = cumulative + cap $1.0 + 0.1. Stop if fewer than 2 of 7 pass."
+}

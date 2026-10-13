@@ -341,9 +341,9 @@ def ch_cell_potential(rng):
     E = Ec - Ea
     agree(E, float(sp.nsimplify(Ec) - sp.nsimplify(Ea)), 1e-9, "E")
     pairs = [("Adds the two reduction potentials.", Ec + Ea), ("Subtracts in the wrong order (anode minus cathode).", Ea - Ec), ("Averages the two reduction potentials.", (Ea + Ec) / 2), ("Uses the magnitude of the anode's reduction potential as the cell potential.", abs(Ea))]
-    key, ds = abs_opts(E, pairs, lambda v: E_fmt(v), 0.1)
+    key, ds = abs_opts(E, pairs, lambda v: "$" + f"{v:+.2f}" + "\\text{ V}$; the cell reaction as written is " + ("favorable" if v > 0 else "not favorable"), 0.1)
     tab = "; ".join("$" + mt(k.split("/")[0].replace("2+", "").replace("+", ""), "2+" if "2+" in k else "+") + "/" + mt(k.split("/")[1]) + ":\\ " + f"{REDP[k][0]:+.2f}" + "\\text{ V}$" for k in (a, c))
-    stem = f"A galvanic cell is constructed with a {k_fmt(a)} half-cell and a {k_fmt(c)} half-cell under standard conditions. The standard reduction potentials are {tab}. What is the standard cell potential, $E^\\circ_{{cell}}$, of this cell?"
+    stem = f"A cell is constructed with a {k_fmt(a)} half-cell and a {k_fmt(c)} half-cell under standard conditions. The standard reduction potentials are {tab}. What is the standard cell potential, $E^\\circ_{{cell}}$, for the cell reaction in which the metal with the more positive reduction potential is reduced, and what does its sign indicate about the thermodynamic favorability of that reaction?"
     return mk("ch_cell_potential", "9.9", "5.F", stem, key, ds, rng, concept="standard cell potential from two standard reduction potentials", path="sympy rational subtraction of cathode minus anode vs a table sort that identifies the cathode as the more positive potential", facts=[f"anode={a}", f"cathode={c}", f"E={E:.4f}"], judgment="identify the cathode as the larger reduction potential and subtract", est=90,
               kwhy=f"The cathode is the half-cell with the more positive reduction potential ({c}, {Ec:+.2f} V) and the anode is the other ({a}, {Ea:+.2f} V). E°cell = E°cathode − E°anode = ({Ec:+.2f}) − ({Ea:+.2f}) = {E:.2f} V.")
 

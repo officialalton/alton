@@ -260,7 +260,7 @@ def ch_ion_conductivity(rng):
 @retry_sep
 def ch_beer_lambert(rng):
     for _ in forever():
-        eps = pick(rng, [1200, 2500, 4000, 5400, 8000]); b = pick(rng, [1.00, 2.00])
+        eps = pick(rng, [1200, 2500, 4000, 5400, 8000]); b = pick(rng, [0.50, 2.00, 5.00])
         cs = [pick(rng, [1, 2, 3, 4, 5]) * 1e-5 * s for s in (1, 2, 3, 4)]
         cs = [round(1e-5 * i * pick(rng, [1]), 8) for i in (1, 2, 3, 4)]
         As = [round(eps * b * c, 3) for c in cs]
@@ -275,7 +275,7 @@ def ch_beer_lambert(rng):
     agree(cx, cu, 0.02, "cu")
     near = cs[int(np.argmin([abs(a - Au) for a in As]))]
     pairs = [("Takes the concentration of the standard with the closest absorbance instead of using the calibration line.", near), ("Averages the concentrations of the four standards.", float(np.mean(cs))), ("Divides by the path length a second time even though the slope already includes it.", cx / b),
-             ("Multiplies by the path length instead of using the slope of the calibration line.", cx * b), ("Scales from the most concentrated standard only (a one-point proportion).", Au / As[-1] * cs[-1] * 0.5)]
+             ("Multiplies by the path length instead of using the slope of the calibration line.", cx * b), ("Adds the path length in cm to the concentration found from the calibration line.", cx + b * 1e-5)]
     key, ds = num_opts(cx, [(w, v) for w, v in pairs], "M", 3, fmt=lambda v: sci(v, "M"))
     rows = [[f"{sn(c, 3)}", f"{a:.3f}"] for c, a in zip(cs, As)]
     stim = table_stimulus(f"Absorbance of standard solutions measured in a cuvette of path length {b:g} cm", "Concentration (M)", rows, "Absorbance")

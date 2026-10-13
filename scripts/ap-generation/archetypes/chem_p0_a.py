@@ -233,7 +233,7 @@ SPECIES = [("CH4", 4, 4, 0), ("NH3", 5, 3, 1), ("H2O", 6, 2, 2), ("CO2", 4, 2, 0
 
 
 def ch_vsepr_shape(rng):
-    f, V, sig_, lp = pick(rng, SPECIES)
+    f, V, sig_, lp = pick(rng, [s for s in SPECIES if s[3] > 0 or s[2] + s[3] >= 5])  # 전자 영역 기하와 분자 기하가 다르거나 5-6 영역인 종(CO2·CH4·BF3 은 암기 문항이라 제외)
     dom = sig_ + lp
     shape = VSEPR[(dom, lp)][0]
     lp_calc = {"CO2": 0, "SO2": 1}.get(f)  # 다중 결합 때문에 시그마 수 ≠ 전자 수 → 표에서 직접
