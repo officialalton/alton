@@ -753,5 +753,155 @@
    "thinks a smaller significance level raises power",
    "thinks a smaller sample size raises power"
   ]
+ },
+ {
+  "id": "st_t_procedure_conditions",
+  "topic": "4.4",
+  "skill": "4.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the verdict is recomputed from a table of (shape, size) pairs for each sample; exactly one option has the correct procedure, the correct data and the correct verdict"
+  ],
+  "misconceptions": [
+   "combines the samples or uses a one-sample or matched-pairs procedure for independent samples",
+   "checks only one sample or the combined sample",
+   "uses equal sample sizes or the sample-size rule alone as the criterion"
+  ]
+ },
+ {
+  "id": "st_ci_test_consistency",
+  "topic": "4.3",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the decision is found from the position of the null value in the rounded interval and again from the t statistic and P-value (scipy and a numerically integrated t cdf), and the two must agree with a margin from the significance level"
+  ],
+  "misconceptions": [
+   "believes an interval cannot give a test decision",
+   "misplaces the null value or ignores the direction of the alternative",
+   "treats failing to reject as evidence that the null hypothesis is true"
+  ]
+ },
+ {
+  "id": "st_sampling_dist_xbar",
+  "topic": "4.1",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the standard deviation of a mean of n independent observations is recomputed from the variance of a weighted sum with numpy and compared with the closed form; the shape follows from a table of (population shape, sample size)"
+  ],
+  "misconceptions": [
+   "centers the distribution at the one observed sample mean",
+   "forgets to divide by the square root of the sample size",
+   "applies or withholds the Central Limit Theorem incorrectly"
+  ]
+ },
+ {
+  "id": "st_residual_r2_model",
+  "topic": "5.4",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "residuals are made orthogonal to x like least-squares residuals; a quadratic fit R squared and the correlation of absolute residuals with x classify the pattern, which must match the intended pattern"
+  ],
+  "misconceptions": [
+   "sees random scatter in a curve or a curve in random scatter",
+   "uses the size of r squared as proof or disproof of linearity",
+   "gives the right decision with a reason that is true of every model"
+  ]
+ },
+ {
+  "id": "st_outlier_effect",
+  "topic": "5.2",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "slope and correlation are recomputed with and without the point by closed-form sums and by numpy polyfit and corrcoef; the point type is enforced by thresholds on the change in |r| and on the relative change in the slope"
+  ],
+  "misconceptions": [
+   "treats the circled point as a different type of unusual point",
+   "gets the effect on the correlation backwards",
+   "gets the effect on the slope wrong"
+  ]
+ },
+ {
+  "id": "st_power_table_change",
+  "topic": "3.8",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "each power is computed with scipy's normal distribution and again from a bisection on math.erf; the compared powers must differ by at least 0.04 in the table"
+  ],
+  "misconceptions": [
+   "thinks the Type I error probability changes with the sample size",
+   "reads both effects in the wrong direction",
+   "lets only one of the two changes decide the direction of the power"
+  ]
+ },
+ {
+  "id": "st_two_draw_conditional",
+  "topic": "2.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "all ordered pairs of distinguishable objects are enumerated and the conditional proportion is counted directly, independent of the tree arithmetic"
+  ],
+  "misconceptions": [
+   "reads the conditional branch probability for the reversed condition",
+   "reports the joint probability of the two draws",
+   "reports the probability of the given event"
+  ]
+ },
+ {
+  "id": "st_phat_normal_prob",
+  "topic": "3.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the normal probability is computed with math.erf and again with scipy; an exact binomial probability must be within 0.03 of the normal value so the approximation is sound"
+  ],
+  "misconceptions": [
+   "omits the square root of n",
+   "uses the wrong tail",
+   "rejects the normal model with a rule that does not apply"
+  ]
+ },
+ {
+  "id": "st_block_table",
+  "topic": "1.13",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the cell means and standard deviations are recomputed from the raw simulated data with numpy and with the statistics module; the within-block differences, the block gap and the standard deviations must satisfy fixed thresholds"
+  ],
+  "misconceptions": [
+   "reads the table as a treatment effect that depends on the block",
+   "credits the block difference to the treatments",
+   "believes blocking makes random assignment unnecessary"
+  ]
+ },
+ {
+  "id": "st_chisq_setup",
+  "topic": "3.14",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the degrees of freedom and the expected counts are recomputed with scipy's chi-square contingency routine, and every expected count must be at least 5"
+  ],
+  "misconceptions": [
+   "uses the null hypothesis of the other kind of test",
+   "states the hypothesis about the sample",
+   "uses the number of cells minus one"
+  ]
  }
 ]

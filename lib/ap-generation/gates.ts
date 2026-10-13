@@ -1,7 +1,9 @@
 // AP 문항 결정적 게이트(순수 함수, 2026-10-08). LLM 없이 코드로 판정한다. 5가지 채택 기준(docs/ap/acceptance-criteria-and-review-pipeline.md)의 기계 검증 부분.
 // 반환: 사유 코드 배열(비어 있으면 통과). 모델 검토·독립 풀이는 보조이며 이 게이트를 대체하지 않는다.
 
-export type McOption = { text: string; why: string | null; value: string | null };
+import { gateDifficultySignals } from "./stats-difficulty";
+
+export type McOption ={ text: string; why: string | null; value: string | null };
 export type McPack = {
   archetype: string; topic: string; skill: string; calculator: "required" | "not_allowed" | "allowed" | "na";
   stem: string; stimulus: { kind: string; description: string; data: unknown }; options: McOption[]; key_index: number; est_seconds: number; facts: string[];
@@ -186,6 +188,7 @@ export function calibrateMc(subject: string, p: McPack): string[] {
   if (words < 3 || words > P.stemWords[1]) r.push("reference_stem_length_out_of_range");
   const whys = new Set(p.options.filter((_, i) => i !== p.key_index).map((o) => norm(o.why ?? "")));
   if (whys.size < Math.min(P.minDistinctMisconceptions, p.options.length - 1)) r.push("reference_distractor_misconceptions_not_distinct");
+  if (subject === "ap_statistics") r.push(...gateDifficultySignals(p as Parameters<typeof gateDifficultySignals>[0])); // 구조 난이도 선언 검증(선언이 있는 원형만)
   return r;
 }
 /** Biology: 섹션 II 90분 / 34점(긴 9×2 + 짧은 4×4) = 점당 약 2.65분 → 9점 약 24분, 4점 약 10.6분(점수 비례 추정; 공식은 총 시간만 공시). 짧은 문항은 정확히 4개의 1점 파트. */

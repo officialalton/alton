@@ -13,6 +13,7 @@ import { gateMicroFrq } from "../../lib/ap-generation/micro-frq-checks";
 import { gateStatsFrq } from "../../lib/ap-generation/stats-frq-checks";
 import { generatorDefects } from "../../lib/ap-generation/generator-defects";
 import { normalizeReview, numsIn, recoverFromBlocks, reviewFromToolBlocks } from "../../lib/ap-generation/review-parse";
+import { difficultyContext } from "../../lib/ap-generation/stats-difficulty";
 import { calibrateFrq, calibrateMc, gateDuplicate, gateFrq, gateMc, gateNoCalcExact, wordingPreserves, type FrqPack, type McPack } from "../../lib/ap-generation/gates";
 import { gateMathWrapping } from "../../lib/ap-generation/math-wrapping";
 import { flattenSet, gateStatsSet, isSetPack, mergeSet, setVerdict, type SetMember, type SetMeta } from "../../lib/ap-generation/stats-set";
@@ -312,9 +313,11 @@ async function reviewRetry2Stage() { // 2차 재요청: 여전히 읽을 수 없
   console.log(`review-retry2: ${reqs.length}건`); if (!reqs.length) return;
   await runBatch({ dir: DIR, name: "review4", requests: reqs, budgetUsd: BUDGET(), estimateUsd: estimate(MODELS.review, reqs.length, 2800, 1100), sync: SYNC, syncConcurrency: 10 });
 }
+/** Statistics: 원형이 선언한 구조 사실(단계·개념·자료 수)을 판정 입력에 덧붙인다(docs/ap/statistics-difficulty.md). 선언이 없거나 다른 과목이면 빈 문자열. */
+const diffBrief = (c: Cand): string => difficultyContext(SUBJECT, c.kind, c.item);
 async function difficultyStage() {
   const rev = reviewMap(); const cs = alive().filter((c) => rev.has(`r-${c.key}`));
-  const reqs = cs.map((c) => mk(`d-${c.key}`, MODELS.difficulty, DIFF_SYS, diffTool, `${ctx(c)}\n\n${JSON.stringify(blind(c))}`, 1500));
+  const reqs = cs.map((c) => mk(`d-${c.key}`, MODELS.difficulty, DIFF_SYS, diffTool, `${ctx(c)}\n\n${JSON.stringify(blind(c))}${diffBrief(c)}`, 1500));
   const est = estimate(MODELS.difficulty, reqs.length, 1400, 600);
   console.log(`difficulty: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "difficulty", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });

@@ -6,9 +6,9 @@ import { clusterLookAlikes } from "../../lib/ap-exam/look-alike";
 import { STOCK_FILES } from "./keys-file";
 
 type Json = Record<string, unknown>;
-type Raw = { stockKey: string; apSubjectCode: string; kind: "mc" | "frq_bundle"; validation: string; keywordCode: string; skillPrimary?: string; itemFamilyId: string; payload: Json; duplicateOf?: string | null; archetype?: string; structure?: string };
+type Raw = { stockKey: string; apSubjectCode: string; kind: "mc" | "frq_bundle"; validation: string; keywordCode: string; skillPrimary?: string; itemFamilyId: string; payload: Json; duplicateOf?: string | null; archetype?: string; structure?: string; difficultyProvisional?: string | null; difficulty?: unknown };
 export type StatsMember = { unit: number; skill: number; topic: string; skillCode: string };
-export type StatsItem = { key: string; kind: "mc" | "frq"; shared: boolean; members: StatsMember[]; fam: string; frqType: string; archetype: string; screen: boolean; batch: string; renderType: string; stimKind: string };
+export type StatsItem = { key: string; kind: "mc" | "frq"; shared: boolean; members: StatsMember[]; fam: string; frqType: string; archetype: string; screen: boolean; batch: string; renderType: string; stimKind: string; /** 이 후보가 기여하는 exam_prep MC 문항 수(단독 0/1, 세트는 문항별 판정 합). 난이도 우선 배정용(없으면 0). */ exam?: number };
 
 const num = (s: string | undefined) => Number(String(s ?? "0").charAt(0));
 export function statsMembers(r: Pick<Raw, "kind" | "keywordCode" | "skillPrimary" | "payload">): StatsMember[] {
@@ -18,6 +18,12 @@ export function statsMembers(r: Pick<Raw, "kind" | "keywordCode" | "skillPrimary
   return []; // FRQ 번들은 문항 단위 단원·스킬 배분 대상이 아니다(유형 4개 각 1개)
 }
 
+/** exam_prep 로 판정된 MC 문항 수: 세트는 문항별 판정(difficulty 배열), 단독은 행 라벨. FRQ 는 세지 않는다. */
+export function examCount(r: { kind: string; difficultyProvisional?: string | null; difficulty?: unknown }): number {
+  if (r.kind !== "mc") return 0;
+  if (Array.isArray(r.difficulty)) return (r.difficulty as ({ label?: string } | null)[]).filter((d) => d?.label === "exam_prep").length;
+  return r.difficultyProvisional === "exam_prep" ? 1 : 0;
+}
 export function loadStatsPool(opts: { requireScreen?: boolean; files?: string[] } = {}) {
   const scan = new Set((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string }[]).map((r) => r.key));
   const ev = new Set<string>();
@@ -32,7 +38,7 @@ export function loadStatsPool(opts: { requireScreen?: boolean; files?: string[] 
   const all: StatsItem[] = gated.map(({ i, g }) => ({
     key: i.stockKey, kind: i.kind === "mc" ? "mc" : "frq", shared: i.kind === "mc" && Array.isArray(i.payload.items), members: statsMembers(i),
     fam: i.kind === "mc" ? (cl.effectiveFamily.get(i.stockKey) ?? i.itemFamilyId) : i.itemFamilyId, frqType: i.kind === "frq_bundle" ? String(i.payload.template ?? i.archetype ?? i.keywordCode) : "",
-    archetype: String(i.payload.archetype ?? i.archetype ?? ""), screen: ev.has(i.stockKey), batch: batchOf.get(i.stockKey) ?? "", renderType: g.renderType, stimKind: g.stimKind,
+    archetype: String(i.payload.archetype ?? i.archetype ?? ""), screen: ev.has(i.stockKey), batch: batchOf.get(i.stockKey) ?? "", renderType: g.renderType, stimKind: g.stimKind, exam: examCount(i),
   }));
   const pool = opts.requireScreen === false ? all : all.filter((c) => c.screen);
   return { all, pool };
