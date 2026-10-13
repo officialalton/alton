@@ -34,3 +34,6 @@ STAGE_LISTS["supp_r3b_ab"] = R3B
 
 # R3-B2: R3-B 에서 단원 3 이 1건 모자라 반려 원형(검토기의 계산 착오 가능·부호 표기 문제)을 고쳐 새 후보로 재시도(자동 수선 아님) + 미사용 단원 3 원형 1종.
 STAGE_LISTS["supp_r3b2_ab"] = ["c_chain_exp_cos_point", "c_inverse_deriv_formula", "c_log_trig_deriv_expr"]
+
+# R3-C: FRQ. 계산기 허용(Part A) 4종 + 계산기 불가(Part B) 6종(각 새 유형 1 시드).
+STAGE_LISTS["supp_r3c_ab"] = ["frq_accum_charge", "frq_marginal_profit", "frq_trench_volume", "frq_cooling_check", "frq_ivp_antiderivative", "frq_rational_param", "frq_exp_decay_de", "frq_pen_cost", "frq_limits_continuity", "frq_inverse_table"]
