@@ -3,7 +3,6 @@
 import { useAccountMenuDismiss } from "@/app/components/useAccountMenuDismiss";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { logout } from "@/app/login/actions";
 import { touchActivityAction } from "./activity-tracking";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
@@ -308,7 +307,7 @@ export default function StudentShell({
                 Time zone
               </button>
               <div className="h-px bg-brand-border my-1" />
-              <form action={logout}>
+              <form action="/logout" method="post">
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
                   Log out
                 </button>
@@ -390,7 +389,7 @@ export default function StudentShell({
                 Time zone
               </button>
               <div className="h-px bg-brand-border my-1" />
-              <form action={logout}>
+              <form action="/logout" method="post">
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
                   Log out
                 </button>

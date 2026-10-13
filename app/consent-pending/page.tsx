@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import { logout } from "@/app/login/actions";
 
 /**
  * R2 Task 6 §5: 13세 미만 미동의 학생이 로그인 시 도달하는 제한 화면.
@@ -90,7 +89,7 @@ export default async function ConsentPendingPage() {
           consent step. Once it&apos;s done, you can use the service right away.
         </p>
 
-        <form action={logout}>
+        <form action="/logout" method="post">
           <button
             type="submit"
             className="block w-full text-center bg-grey-200 text-ink font-bold text-[15px] py-3.5 rounded-lg hover:bg-grey-300"

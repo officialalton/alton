@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import { logout } from "@/app/login/actions";
 
 /**
  * R2 §5.7: suspended 계정 전용 안내 화면. requireUser()를 쓰지 않는다 —
@@ -36,7 +35,7 @@ export default async function AccountSuspendedPage() {
           <br />
           Once an administrator reactivates your account, you can log in as usual.
         </p>
-        <form action={logout}>
+        <form action="/logout" method="post">
           <button
             type="submit"
             className="block w-full text-center bg-grey-200 text-ink font-bold text-[15px] py-3.5 rounded-lg hover:bg-grey-300"
