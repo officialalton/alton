@@ -46,3 +46,12 @@
 - Statistics(`docs/ap/statistics-facts.md`): 시험 3시간, MC 42(90분, 3문항 세트 2개), FRQ 4(90분, 각 10점), investigative question은 별도 FRQ가 아니라 Q1 파트 E(스킬 1.A·토픽 1.10), 수식·표 제공, 계산기 허용. 코드 공백은 생성·조립 계층(`gates.ts` OPTION_COUNT, `cells.ts`, `subjects/stats.ts`, `stock.ts` SUBJECT_FAMILY, `assemble-draft.ts` subjectOfSetId, unitBounds). 파일럿 사양: 20 원형(U1 5·U2 5·U3 4·U4 3·U5 3).
 
 - 2026-10-12 ST1 새 버전(v2) 교체 계획: `scripts/ap-generation/st1-new-version-plan.ts` → `data/ap/stock/st1-v2-swap-plan.json`(v1 `stats-st1-s2b` → `stats-st1-s3a-prefer-ep`, 단독 MC 10칸 위치 교체, 검증기 위반 0, exam_prep 10→17/42). 섹션 ap_mc(1–42, 세트 13–15·31–33 불변)/ap_frq. 패널·서버·RPC 는 과목 비의존이라 코드 변경 없이 목록에 나타남(안내 문구만 보강). 테스트 `lib/ap-admin/new-version-stats.test.ts`. 미리보기·초안 생성은 조정 세션이 비프로덕션에서 실행.
+
+## Physics 1 P0 무료 엔지니어링 완료 (2026-10-13)
+- 범위: 유료 호출·DB·키·push·삭제 없음. 본문: `docs/ap/physics1-groundwork.md` §10–12(이 문서가 §1–9 계획 위에 구현 결과·동결 골격·예산·위험을 덧붙임).
+- 구현: Python 원형 **47 단독 MC + 2문항 세트 2 + FRQ 4유형**(MR 10 / TBR 12 / LAB 10 / QQT 8, 합 40) — `scripts/ap-generation/archetypes/phys_*.py`. 모든 정답은 sympy·정확 분수 경로와 numpy·RK4·이분법 독립 경로로 이중 계산. 장면 모델 + 결정적 SVG 렌더 10종(`phys_figs.py`: FBD·에너지 막대·벡터·운동 도해·경사·Atwood·충돌·막대·U자관·탱크), 선택지 그림 문항 2(FBD·에너지 막대).
+- TS: `subjects/physics1.ts`(+JSON 51항목), `gates.ts`(`ap_physics_1`: 선지 4, MC 비평가 스킬 1.A·1.B·1.C·3.A, FRQ 유형별 프로필), `stats-set.ts` `setSizeOf`(Physics 세트 2문항), `pipeline2.ts` Physics 지침, `run-frozen.ts`(`test_*.py` 해시 제외).
+- 테스트: pytest/unittest **41**(결정성·구조 중복 없음·선택지 간격·수치 진실 22·그림 검사·FRQ 구조) + Vitest **6**(TS 게이트·가이드 일치·FRQ 게이트) 전부 통과. 파이프라인 무료 배선 점검(`plan|blueprint|check --subject ap_physics_1`, `AP_FIXED_WORDING=1`): MC 22/22, FRQ 4/4 통과(호출 비용 0).
+- 동결 구성 골격(미동결·미실행): `config/ap-frozen/phys-p1-a.template.json`(MC 22문항, 상한 $1.8, 기대 $1.5, 통과율 가정 80%), `phys-p1-b.template.json`(FRQ 4, 상한 $3.6, 기대 $3.2, 통과율 가정 70%). 누적 $40.3301 기준 중단선($45) 여유 $4.6699 — P1-a 는 안, P1-a+b 상한 합 $5.4 는 $0.73 초과.
+- 비용(중간): 파일럿 $4.9, 첫 세트+예비 $10.5, 풀 모의고사 2회+예비 $20.9, 위 합+파일럿+재작업 20% **≈ $31**(낙관 $22 / 보수 $55). 현 총 상한 $50 안 여유 $9.67 → 풀 2회는 예산 상향 결정 필요.
+- 유료 호출 전 남은 일: TS `ap_diagram` 렌더·정규화 연결(`diagram/phys_scene`, `figure_choice` AP 연결), 공식 참조 정보 대조(`g=9.8` UNVERIFIED), FRQ 응답 방식(오너 §8-B), 풀 세트용 `cells.ts`·`stock.ts`·`assemble-draft.ts` 배선.
