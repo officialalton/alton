@@ -152,4 +152,17 @@ describe("MockExamWhiteboard", () => {
     await act(async () => {});
     expect(saveMock).not.toHaveBeenCalled();
   });
+  it("Scroll page 모드: 캔버스 pan-y, 손가락 획 무시, Draw 로 복귀", async () => {
+    const c = await mount({ strokes: [], boardHeight: 480 });
+    expect(screen.getByTestId("wb-touch-mode").className).toContain("md:hidden");
+    fireEvent.click(screen.getByRole("button", { name: "Scroll page" }));
+    expect(c.className).toContain("touch-pan-y");
+    fireEvent.pointerDown(c, { clientX: 50, clientY: 50, pointerId: 3, pointerType: "touch" });
+    fireEvent.pointerMove(c, { clientX: 90, clientY: 90, pointerId: 3 });
+    fireEvent.pointerUp(c, { pointerId: 3 });
+    await act(async () => {});
+    expect(saveMock).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole("button", { name: "Draw" }));
+    expect(c.className).toContain("touch-none");
+  });
 });

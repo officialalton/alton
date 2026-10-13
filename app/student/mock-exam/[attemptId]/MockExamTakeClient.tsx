@@ -22,7 +22,7 @@ import MockExamResultView from "./MockExamResultView";
 import ExitExamButton from "./ExitExamButton";
 import GuessButton from "./GuessButton";
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
-import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
+import MockExamWhiteboard from "./MockExamWhiteboard";
 import { problemText } from "@/lib/problem-figures/label-rule";
 
 // 고정형 SAT 모의고사 V1 — 학생 응시 화면(사양 3절 학생 흐름, 4절 수업 탭/독립 진입 공용).
@@ -128,6 +128,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
   const [locked, setLocked] = useState<Record<"rw" | "math", boolean>>({ rw: false, math: false });
   const [submitting, setSubmitting] = useState(false);
   const [showReview, setShowReview] = useState(false);
+  const [whiteboardOpen, setWhiteboardOpen] = useState(false);
   const isSubmitted = attempt.status === "submitted" || attempt.status === "graded";
 
   const limitSeconds = { rw: attempt.rwTimeLimitMinutes * 60, math: attempt.mathTimeLimitMinutes * 60 };
@@ -513,7 +514,12 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
               role="student"
               context={{ source: "mock_exam", attemptId: attempt.id, setItemId: current.setItemId, problemId: current.problemId }}
             />
-            <ProblemNoteCanvas context="mock_exam" targetId={attempt.id} itemId={current.setItemId} />
+            {/* 공유 화이트보드(MockExamWhiteboard) — 같은 problem_note_strokes('mock_exam') 에 같은 선분 형식으로 저장하므로 기존 필기도 그대로 복원된다. */}
+            <button type="button" onClick={() => setWhiteboardOpen((v) => !v)} aria-pressed={whiteboardOpen} data-testid="mock-exam-whiteboard-toggle"
+              className={`mt-3 min-h-[44px] rounded border px-3 py-1 text-[12px] font-bold md:min-h-0 md:px-2.5 ${whiteboardOpen ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"}`}>
+              {whiteboardOpen ? "Close whiteboard" : "Whiteboard"}
+            </button>
+            {whiteboardOpen && <MockExamWhiteboard key={current.setItemId} attemptId={attempt.id} itemId={current.setItemId} locked={locked[current.section]} onClose={() => setWhiteboardOpen(false)} />}
           </div>
         ) : null}
 

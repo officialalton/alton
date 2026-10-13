@@ -11,7 +11,7 @@ const GROUPS = ["Distributions", "Data", "Tests and intervals"] as const;
 const initial = (m: ModeDef) => Object.fromEntries(m.fields.map((f) => [f.key, f.def ?? ""]));
 
 function Field({ f, id, value, onChange }: { f: FieldDef; id: string; value: string; onChange: (v: string) => void }) {
-  const base = "w-full rounded-md border border-grey-300 bg-white px-2.5 py-2 text-[14px] text-ink";
+  const base = "w-full rounded-md border border-grey-300 bg-white px-2.5 py-2 text-[16px] text-ink min-h-[44px] md:min-h-0 md:text-[14px]";
   return (
     <div>
       <label htmlFor={id} className="mb-1 block text-[12px] font-bold text-grey-700">{f.label}</label>
@@ -50,7 +50,7 @@ export default function StatsCalculator() {
       <div>
         <label htmlFor="stats-mode" className="mb-1 block text-[12px] font-bold text-grey-700">Function</label>
         <select id="stats-mode" value={modeId} onChange={(e) => { setModeId(e.target.value); setResult(null); setCopied(null); }} data-testid="stats-mode"
-          className="w-full rounded-md border border-grey-300 bg-white px-2.5 py-2 text-[14px] font-semibold text-ink">
+          className="w-full rounded-md border border-grey-300 bg-white px-2.5 py-2 text-[16px] font-semibold text-ink min-h-[44px] md:min-h-0 md:text-[14px]">
           {GROUPS.map((g) => (
             <optgroup key={g} label={g}>
               {STATS_MODES.filter((m) => m.group === g).map((m) => <option key={m.id} value={m.id}>{m.label}{m.outside2027 ? " *" : ""}</option>)}
@@ -81,17 +81,17 @@ export default function StatsCalculator() {
           <section className="rounded-lg border border-grey-200 bg-grey-50 p-3" data-testid="stats-result" aria-label="Result">
             <div className="mb-2 flex items-center justify-between gap-2">
               <h3 className="text-[13px] font-extrabold text-ink">{result.title}</h3>
-              <button type="button" onClick={copy} data-testid="stats-copy" className="min-h-[36px] rounded-md border border-grey-300 bg-white px-3 py-1 text-[12px] font-bold text-grey-700">
+              <button type="button" onClick={copy} data-testid="stats-copy" className="min-h-[44px] rounded-md border border-grey-300 bg-white px-3 py-1 text-[12px] md:min-h-[36px] font-bold text-grey-700">
                 {copied === "ok" ? "Copied" : copied === "fail" ? "Copy failed — select the text" : "Copy results"}
               </button>
             </div>
             <dl className="grid grid-cols-[minmax(0,auto)_minmax(0,1fr)] gap-x-3 gap-y-1 select-text">
-              {result.rows.map(([k, val]) => (<div key={k} className="contents"><dt className="font-semibold text-grey-600">{k}</dt><dd className="break-words font-mono text-ink">{val}</dd></div>))}
+              {result.rows.map(([k, val]) => (<div key={k} className="contents"><dt className="break-words font-semibold text-grey-600">{k}</dt><dd className="break-words font-mono text-ink">{val}</dd></div>))}
             </dl>
             {result.tables.map((t) => (
               <div key={t.title} className="mt-3 overflow-x-auto">
                 <p className="mb-1 text-[11.5px] font-bold text-grey-600">{t.title}</p>
-                <table className="border-collapse text-[12px]"><tbody>
+                <table className="border-collapse whitespace-nowrap text-[12px]"><tbody>
                   {t.rows.map((row, i) => (<tr key={i}>{row.map((c, j) => (i === 0 || j === 0 ? <th key={j} scope={i === 0 ? "col" : "row"} className="border border-grey-200 px-2 py-0.5 text-left font-bold">{c}</th> : <td key={j} className="border border-grey-200 px-2 py-0.5 font-mono">{c}</td>))}</tr>))}
                 </tbody></table>
               </div>

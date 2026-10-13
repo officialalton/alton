@@ -38,7 +38,7 @@ function TableView({ table, query }: { table: RefTable; query: string }) {
     <div>
       <p className="mb-2 text-[12px] font-bold text-ink">{table.title}</p>
       <div className="max-h-[48vh] overflow-auto rounded-md border border-grey-200" tabIndex={0} aria-label={`${table.title} (scrollable)`}>
-        <table className="w-full border-collapse text-right font-mono text-[12px]" data-testid={`stats-table-${table.id}`}>
+        <table className="w-full border-collapse text-right font-mono text-[12px] whitespace-nowrap" data-testid={`stats-table-${table.id}`}>
           <thead className="sticky top-0 bg-ink text-white"><tr><th scope="col" className="px-2 py-1 text-left">{table.id === "z" ? "z" : "df"}</th>{table.columns.map((c) => <th key={c} scope="col" className="px-2 py-1">{c}</th>)}</tr></thead>
           <tbody>
             {rows.map((r) => (<tr key={r.label} className="odd:bg-grey-50"><th scope="row" className="px-2 py-0.5 text-left font-bold">{r.label}</th>{r.cells.map((c, i) => <td key={i} className="px-2 py-0.5">{c}</td>)}</tr>))}
@@ -61,7 +61,7 @@ function Tables() {
         <TabBar tabs={TABLE_TABS.map((t) => ({ id: t.id, label: t.label }))} value={which} onChange={(id) => { setWhich(id); setQuery(""); }} label="Distribution table" idPrefix="stats-tbl" />
         <div className="min-w-[8rem] flex-1">
           <label htmlFor="stats-table-search" className="mb-0.5 block text-[11.5px] font-bold text-grey-700">Find row ({which === "z" ? "e.g. 1.9 or -0.3" : "df, e.g. 12"})</label>
-          <input id="stats-table-search" value={query} onChange={(e) => setQuery(e.target.value)} inputMode="decimal" autoComplete="off" className="w-full rounded-md border border-grey-300 px-2.5 py-1.5 text-[13px]" />
+          <input id="stats-table-search" value={query} onChange={(e) => setQuery(e.target.value)} inputMode="decimal" autoComplete="off" className="w-full rounded-md border border-grey-300 min-h-[44px] px-2.5 py-1.5 text-[16px] md:min-h-0 md:text-[13px]" />
         </div>
       </div>
       <TableView table={table} query={query} />

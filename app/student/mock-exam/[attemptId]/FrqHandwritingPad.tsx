@@ -4,7 +4,7 @@
 // 저장은 부모가 한다: 획이 끝날 때마다 onChange(새 획 배열)만 호출한다(디바운스·flush·서버 시계 오류 처리는 ApExamTakeClient 의 useFrqInk).
 import { useCallback, useEffect, useRef, useState } from "react";
 import { INK_COLORS, INK_H_PRESETS, INK_MAX_H, INK_W, clampBoardHeight, eraseStrokesNear, simplifyPoints, type InkStroke } from "@/lib/ap-exam/frq-ink";
-import { BoardResizeHandle, BoardScrollGutter, BoardSizeButtons, boardBtn } from "./BoardSizeControls";
+import { BoardResizeHandle, BoardScrollGutter, BoardTouchModeToggle, boardTouchClass, touchDrawBlocked, type BoardTouchMode, BoardSizeButtons, boardBtn } from "./BoardSizeControls";
 
 const HISTORY_MAX = 30;
 
@@ -29,6 +29,7 @@ export default function FrqHandwritingPad({ label, strokes, height, disabled = f
   const [tool, setTool] = useState<"pen" | "eraser">("pen");
   const [color, setColor] = useState(0);
   const [, force] = useState(0);
+  const [touchMode, setTouchMode] = useState<BoardTouchMode>("draw");
   const heightRef = useRef(height);
   heightRef.current = height;
 
@@ -51,7 +52,7 @@ export default function FrqHandwritingPad({ label, strokes, height, disabled = f
     return [(e.clientX - r.left) * (r.width ? INK_W / r.width : 1), (e.clientY - r.top) * (r.height ? heightRef.current / r.height : 1)];
   }
   function down(e: React.PointerEvent<HTMLCanvasElement>) {
-    if (disabled) return;
+    if (disabled || touchDrawBlocked(touchMode, e.pointerType)) return;
     if (e.pointerType === "pen") penSeenRef.current = true;
     if (e.pointerType === "touch" && penSeenRef.current) return; // 스타일러스를 쓰는 중 손바닥 접촉 무시
     e.currentTarget.setPointerCapture?.(e.pointerId);
@@ -115,10 +116,11 @@ export default function FrqHandwritingPad({ label, strokes, height, disabled = f
         <BoardSizeButtons presets={INK_H_PRESETS} height={height} disabled={disabled} onSet={setHeight} groupTestId={`frq-size-${label}`} presetTestId={(h) => `frq-size-${label}-${h}`} />
         <button type="button" className={`${btn(false)} ml-auto`} onClick={undo} disabled={disabled || historyRef.current.length === 0} data-testid={`frq-undo-${label}`}>Undo</button>
         <button type="button" className={btn(false)} onClick={clearAll} disabled={disabled || strokesRef.current.length === 0} data-testid={`frq-clear-${label}`}>Clear</button>
+        <BoardTouchModeToggle mode={touchMode} onChange={setTouchMode} testId={`frq-touch-mode-${label}`} />
       </div>
       <div className="flex">
       <canvas ref={canvasRef} width={INK_W} height={height} aria-label={`Handwriting area for part (${label})`} data-testid={`frq-canvas-${label}`}
-        className={`block w-full touch-none ${disabled ? "" : "cursor-crosshair"}`} style={{ aspectRatio: `${INK_W} / ${height}` }}
+        className={`block w-full ${boardTouchClass(touchMode)} ${disabled ? "" : "cursor-crosshair"}`} style={{ aspectRatio: `${INK_W} / ${height}` }}
         onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onPointerLeave={up} />
       {/* 모바일: 캔버스는 touch-action:none 이라 손가락 접촉은 그리기용. 오른쪽 띠는 페이지 스크롤용(touch-action: pan-y). */}
       <BoardScrollGutter testId={`frq-scroll-gutter-${label}`} />
