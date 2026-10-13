@@ -1,0 +1,72 @@
+{
+ "version": "v1-csa-p1-a",
+ "run": "csa-p1-a",
+ "subject": "ap_computer_science_a",
+ "archetypeList": "csa_p1_a",
+ "seed0": 8100,
+ "candidatesPerCell": 1,
+ "capUsd": 2.2,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "2",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts",
+  "lib/ap-generation/subjects/csa.ts",
+  "lib/ap-generation/subjects/csa-archetypes.json"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 87.3,
+ "expected": {
+  "generatorHash": "UNFROZEN",
+  "reviewerPromptHash": "UNFROZEN",
+  "difficultyPromptHash": "UNFROZEN",
+  "parserHash": "UNFROZEN",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ },
+ "_template": "TEMPLATE, NOT FROZEN (2026-10-13, docs/ap/csa-groundwork.md section 8). Do not run as is: expected hashes are placeholders so --check-only fails on purpose. To use: copy to <name>.v1.json, run `npx tsx scripts/ap-generation/run-frozen.ts --config <copy> --freeze`, commit, then --check-only, and only then the paid run after the owner approves the budget. hardStopCumulativeUsd assumes cumulative 85.0 plus the P1-a cap 2.2 plus a 0.1 margin; recompute from `ledger-total.ts` before freezing. Paid CS A steps need the owner's decision (stop line 90 USD).",
+ "_budget_estimate": {
+  "cells": "22 MC items = 20 single archetypes + 1 two-question set (css_class_set), 1 candidate per archetype seed; AP_MC_CANDS=2 candidates per cell. Coverage: units 4/6/4/8 (official windows 3-5/6-8/2-4/7-9 of 22), practices P2 8 / P3 11 / P4 3 (windows 5-8 / 8-12 / 2-3)",
+  "perCellUsd": "0.039 per MC candidate (Physics and Chemistry observed); code stimuli add roughly 150-250 input tokens per item, assumed inside the observed range",
+  "expectedUsd": "1.72 (range 1.3-2.2) = 22 cells x 2 candidates x 0.039",
+  "capUsd": 2.2,
+  "passRateAssumption": "52-76% first pass (Physics 52%, Chemistry 76%); code-verified keys should sit at the upper half. Stop if fewer than 11 of 22 pass.",
+  "runAfter": "owner decision on the budget: cumulative about 85 USD, stop line 90 USD"
+ },
+ "_java": "The generator executes every item with a real JDK (scripts/ap-generation/archetypes/csa_java.py). Record `java -version` (OpenJDK 21.0.x, /opt/homebrew/opt/openjdk@21) in the freeze commit message; a different JDK major version is a different generator. Results are content-addressed and deterministic."
+}

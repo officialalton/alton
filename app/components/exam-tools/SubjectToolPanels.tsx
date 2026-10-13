@@ -8,6 +8,7 @@ import StatsReference from "./StatsReference";
 import PhysicsCalculator from "./PhysicsCalculator";
 import PhysicsReference from "./PhysicsReference";
 import ChemistryReference from "./ChemistryReference";
+import JavaReference from "./JavaReference";
 import { TabBar } from "./Tabs";
 
 // 과목별 도구 패널(계산기 팝업 + 참조 팝업). 과목 구성은 lib/exam-tools/subject-tools.ts.
@@ -23,6 +24,7 @@ const REFERENCE_PANELS: Record<ReferenceKind, { title: string; Component: Compon
   statistics: { title: "Reference", Component: StatsReference },
   physics: { title: "Reference", Component: PhysicsReference },
   chemistry: { title: "Reference", Component: ChemistryReference },
+  java: { title: "Reference", Component: JavaReference },
 };
 
 function Modal({ label, show, onClose, closeTestId, children, header }: { label: string; show: boolean; onClose: () => void; closeTestId: string; children: React.ReactNode; header?: React.ReactNode }) {
@@ -65,7 +67,7 @@ export default function SubjectToolPanels({ config, calculatorAllowed, open, onC
   const Ref = config.reference ? REFERENCE_PANELS[config.reference] : null;
   return (
     <>
-      {calculatorAllowed && calcMounted && (
+      {calculatorAllowed && tabs.length > 0 && calcMounted && (
         <Modal label="Calculator" show={open === "calculator"} onClose={onClose} closeTestId="close-calculator"
           header={tabs.length > 1 ? <TabBar tabs={tabs.map((t) => ({ id: t, label: CALCULATOR_TABS[t].label }))} value={tab} onChange={setTab} label="Calculator type" idPrefix="calc" /> : undefined}>
           <div className="min-h-0 flex-1">

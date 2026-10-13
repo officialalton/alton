@@ -49,6 +49,8 @@ export default function LearningText({ text, className }: { text: string; classN
               </tbody>
             </table>
           </div>
+        ) : block.kind === "code" ? (
+          <CodeBlock key={b} language={block.language} lines={block.lines} />
         ) : block.kind === "list" ? (
           <ul key={b} className="my-2 pl-5 list-disc">
             {block.items.map((item, i) => (
@@ -62,6 +64,25 @@ export default function LearningText({ text, className }: { text: string; classN
         )
       )}
     </div>
+  );
+}
+
+/**
+ * 코드 블록(2026-10-13, AP Computer Science A): 고정폭·줄 번호·가로 스크롤. 줄 번호는 선택·복사에 섞이지 않도록 `select-none`·aria-hidden 으로 두고,
+ * 코드 글자는 이스케이프된 텍스트로만 그린다(dangerouslySetInnerHTML 없음 — `$`·`_`·`<` 가 수식·HTML 로 해석되지 않는다). 공백·들여쓰기는 그대로 보존한다.
+ */
+export function CodeBlock({ language, lines }: { language: string; lines: string[] }) {
+  return (
+    <pre data-testid="code-block" data-language={language} aria-label={`${language} code`} tabIndex={0} className="my-3 max-w-full overflow-x-auto rounded-lg border border-grey-200 bg-grey-50 py-2 text-[12.5px] leading-[1.55] text-ink">
+      <code className="block min-w-max font-mono">
+        {lines.map((ln, i) => (
+          <span key={i} data-testid="code-line" className="flex whitespace-pre">
+            <span aria-hidden="true" className="inline-block w-9 shrink-0 select-none pr-3 text-right text-grey-400">{i + 1}</span>
+            <span className="pr-3">{ln === "" ? " " : ln}</span>
+          </span>
+        ))}
+      </code>
+    </pre>
   );
 }
 
@@ -98,6 +119,13 @@ function Inline({ parts }: { parts: ContentPart[] }) {
             <span key={i} className="underline decoration-ink underline-offset-4 whitespace-pre-wrap">
               {part.value}
             </span>
+          );
+        }
+        if (part.kind === "code") {
+          return (
+            <code key={i} data-testid="code-inline" className="whitespace-pre-wrap rounded bg-grey-100 px-1 py-px font-mono text-[0.92em] text-ink">
+              {part.value}
+            </code>
           );
         }
         if (part.kind === "math-error") {
