@@ -1,0 +1,231 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "AB1",
+ "sourceSetName": "AP Calculus AB — Practice Exam",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/ap-generation/ab1-new-version-plan.ts",
+ "swapCount": 10,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc_a",
+   "position": 5,
+   "removeKey": "v45ab-final:v4-ab:ap_calculus_ab-m02-k2",
+   "addKey": "s1a-final:ap_calculus_ab-m04-k0",
+   "remove": {
+    "unit": 6,
+    "skill": 2,
+    "calculator": "not_allowed",
+    "graph": true,
+    "family": "la:v45ab-final:v4-ab:ap_calculus_ab-m02-k0",
+    "type": "6.4"
+   },
+   "add": {
+    "unit": 1,
+    "skill": 3,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m04-k0",
+    "type": "1.16"
+   }
+  },
+  {
+   "section": "ap_mc_a",
+   "position": 12,
+   "removeKey": "s1a-final:ap_calculus_ab-m13-k0",
+   "addKey": "run2:ap_calculus_ab-m10-k1",
+   "remove": {
+    "unit": 4,
+    "skill": 1,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m13-k0",
+    "type": "4.6"
+   },
+   "add": {
+    "unit": 3,
+    "skill": 1,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m10-k0",
+    "type": "3.2"
+   }
+  },
+  {
+   "section": "ap_mc_a",
+   "position": 14,
+   "removeKey": "s1a-final:ap_calculus_ab-m21-k0",
+   "addKey": "supp-t2a-ab-final:ap_calculus_ab-m10-k0",
+   "remove": {
+    "unit": 6,
+    "skill": 1,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m21-k0",
+    "type": "6.4"
+   },
+   "add": {
+    "unit": 6,
+    "skill": 1,
+    "calculator": "not_allowed",
+    "graph": true,
+    "family": "la:supp-t2a-ab-final:ap_calculus_ab-m10-k0",
+    "type": "6.6"
+   }
+  },
+  {
+   "section": "ap_mc_a",
+   "position": 20,
+   "removeKey": "run2:ap_calculus_ab-m12-k3",
+   "addKey": "run2:ap_calculus_ab-m14-k3",
+   "remove": {
+    "unit": 4,
+    "skill": 1,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m12-k0",
+    "type": "4.4"
+   },
+   "add": {
+    "unit": 4,
+    "skill": 1,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m14-k0",
+    "type": "4.7"
+   }
+  },
+  {
+   "section": "ap_mc_a",
+   "position": 26,
+   "removeKey": "run2:ap_calculus_ab-m07-k3",
+   "addKey": "run2:ap_calculus_ab-m08-k0",
+   "remove": {
+    "unit": 2,
+    "skill": 1,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m07-k0",
+    "type": "2.8"
+   },
+   "add": {
+    "unit": 2,
+    "skill": 1,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m08-k0",
+    "type": "2.9"
+   }
+  },
+  {
+   "section": "ap_mc_b",
+   "position": 1,
+   "removeKey": "run2:ap_calculus_ab-m15-k3",
+   "addKey": "s1a-final:ap_calculus_ab-m11-k1",
+   "remove": {
+    "unit": 5,
+    "skill": 3,
+    "calculator": "required",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m15-k0",
+    "type": "5.1"
+   },
+   "add": {
+    "unit": 4,
+    "skill": 1,
+    "calculator": "required",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m11-k0",
+    "type": "4.2"
+   }
+  },
+  {
+   "section": "ap_mc_b",
+   "position": 5,
+   "removeKey": "v1ab-final:ap_calculus_ab-m03-k2",
+   "addKey": "supp-t2a-ab-final:ap_calculus_ab-m04-k0",
+   "remove": {
+    "unit": 7,
+    "skill": 1,
+    "calculator": "required",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m26-k0",
+    "type": "7.7"
+   },
+   "add": {
+    "unit": 4,
+    "skill": 1,
+    "calculator": "required",
+    "graph": false,
+    "family": "la:supp-t2a-ab-final:ap_calculus_ab-m04-k0",
+    "type": "4.5"
+   }
+  },
+  {
+   "section": "ap_mc_b",
+   "position": 6,
+   "removeKey": "v1ab-final:ap_calculus_ab-m01-k5",
+   "addKey": "supp-t2a-ab-final:ap_calculus_ab-m07-k0",
+   "remove": {
+    "unit": 3,
+    "skill": 1,
+    "calculator": "required",
+    "graph": false,
+    "family": "la:v1ab-final:ap_calculus_ab-m01-k0",
+    "type": "3.1"
+   },
+   "add": {
+    "unit": 6,
+    "skill": 1,
+    "calculator": "required",
+    "graph": true,
+    "family": "la:supp-b3-ab-final:ap_calculus_ab-m08-k0",
+    "type": "6.4"
+   }
+  },
+  {
+   "section": "ap_mc_b",
+   "position": 9,
+   "removeKey": "v1ab-final:ap_calculus_ab-m02-k1",
+   "addKey": "supp-t2a-ab-final:ap_calculus_ab-m02-k0",
+   "remove": {
+    "unit": 1,
+    "skill": 1,
+    "calculator": "required",
+    "graph": false,
+    "family": "la:v1ab-final:ap_calculus_ab-m02-k0",
+    "type": "1.16"
+   },
+   "add": {
+    "unit": 1,
+    "skill": 1,
+    "calculator": "required",
+    "graph": false,
+    "family": "la:supp-t2a-ab-final:ap_calculus_ab-m02-k0",
+    "type": "1.4"
+   }
+  },
+  {
+   "section": "ap_mc_b",
+   "position": 11,
+   "removeKey": "run2:ap_calculus_ab-m29-k3",
+   "addKey": "run2:ap_calculus_ab-m30-k2",
+   "remove": {
+    "unit": 8,
+    "skill": 1,
+    "calculator": "required",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m29-k0",
+    "type": "8.7"
+   },
+   "add": {
+    "unit": 8,
+    "skill": 1,
+    "calculator": "required",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m30-k0",
+    "type": "8.3"
+   }
+  }
+ ]
+}
