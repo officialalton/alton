@@ -1,0 +1,219 @@
+[
+ {
+  "key": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "The type of job the employee has",
+     "brief_reasoning": "The type of job could affect both whether someone is allowed to work from home and how productive they are rated, so it is linked to both variables. The productivity rating is the response variable, the number who responded is not a variable for each employee, and wall color has no clear link to working from home.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.13 confounding in an observational study. It fits skill 2.A reasonably. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Job type is the only variable plausibly associated with both working from home and productivity rating. The other three options are the response, a sample-size feature, and an unrelated variable. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear. The stem says 'tended to have higher productivity ratings', which is fine for an observational study."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors each encode a distinct misconception: response variable, sample size, unrelated variable. The explanation addresses each wrong option. The option lengths are similar, though the key is slightly longer."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "This is a quick recall item of about 60-80 seconds with no calculator load. It is a little easy, but typical of this kind of item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and has a unique key. Its distractors are distinct and each is explained. It fits the topic and the AP time load, so it passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition of a confounding variable. The distractors are clearly non-confounders (the response variable itself, sample size, an irrelevant variable), so one step of linking job type to both working from home and productivity suffices. There is no computation, no representation change, and minimal reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "I checked the interval first. The sample proportion is 74/150 ≈ 0.493, and the 95% margin of error is about 0.080, so the interval (0.413, 0.573) is correct. A confidence interval estimates the population proportion, so the correct interpretation is that we are 95% confident it lies between 0.413 and 0.573. Choice A describes sample proportions, not the population proportion. Choice B calls 95% a probability that this one fixed interval contains the true value, which is not what the confidence level means. Choice D is about the sample proportion, which is already known.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpreting a one-proportion confidence interval in context is the core of topic 3.4 and skill 4.F, and the item stays within Unit 3."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only standard correct interpretation: 95% confident about the population proportion. Option B uses 'probability', which is a standard misinterpretation of a fixed parameter. Options A and D describe other samples and the sample, respectively. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states the sample counts, the interval, and that conditions are met. The wording is clear. The phrase 'all customers of a grocery chain' is slightly awkward but unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception (sampling distribution confusion, probability for a fixed parameter, sample instead of population). The explanation addresses each one. Option lengths are comparable, so there is no length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-100 seconds and needs no calculation. Its format matches the typical AP interpretation multiple-choice item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard interpretation question with a unique key and distinct, realistic distractors. It passes all five criteria, and no instant-reject condition applies."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall: select the correct wording of a 95% confidence interval interpretation among named misinterpretations (probability statement, percent of samples, sample proportion vs population parameter). No computation, no condition checking, minimal reading, no representation changes. The distractors are standard, so this is foundational skill 4.F practice rather than full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "If the true proportion were 0.4, the probability of getting a sample proportion of 0.459 or larger by chance alone is 0.044",
+     "brief_reasoning": "A P-value is the probability, assuming H0 is true, of getting a result at least as extreme as the one observed. Here z = 1.70, so P ≈ 0.044, which matches the stated value.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpreting a P-value in a one-proportion z test (Unit 3, topic 3.6, skill 4.F). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct interpretation: conditional on H0, the probability of a result at least as large as 0.459. The curve and P-value are consistent (z about 1.70, tail about 0.044)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The curve data has axis label, range, ticks, points, shaded region and marked value. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct named misconceptions (P(H0 true), exactly the observed value, P(Ha true)). Options are parallel in format, and the explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A quick interpretation item with no calculation load. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean: the key is correct and unique, the distractors map to distinct misconceptions, and the stimulus data is complete and consistent with the stated P-value. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard definitional interpretation of a P-value, chosen from named misinterpretations. The shaded tail on the chart directly shows \"0.459 or larger under H0\". There is no computation, the reading load is minimal, and only one concept is tested.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "The slope is the predicted change in drinks for each 1 degree increase: a decrease of about 3.24 cups. A swaps the variables, B says 'exactly', and D confuses slope with intercept.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Minor typo 'Celsiuss' in option A; doesn't affect the answer."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Slope interpretation from computer output is squarely Topic 5.5 and skill 4.D; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct interpretation: predicted change per unit increase in x. The other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The output has the constant, the slope, variable names, R-Sq and N. Slope shows -3.24 while the options say 3.240, and the constant has three decimals, so the rounding presentation is slightly inconsistent. Option A has the typo 'Celsiuss'. These are minor issues that should be fixed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct named misconceptions (reversed roles, exact change, slope confused with intercept), and the explanation addresses each. The correct option is the longest, a slight length cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP load of about 60-100 seconds, with no arithmetic and a short stem."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and in scope, with a unique key and distinct distractors. It needs minor polish: fix the 'Celsiuss' typo in option A and make the slope's displayed decimals consistent (-3.24 vs 3.240)."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step slope interpretation from computer output; the student identifies the Temp coefficient and picks the wording that is correct about the predicted change in y per unit x. Distractors are standard misinterpretations (reversed variables, 'exactly' rather than 'predicted', slope/intercept confusion). There is no computation, little reading, and no multi-step linking to a claim, so this is foundational rather than full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]

@@ -133,6 +133,7 @@ function classifyNeed(stimKind: string, spec: ApSpec | null, text: { stem: strin
   const refs = /\b(graph|figure|table|diagram|shown|plotted|curve|matrix|chart|data below|data above|the data|illustrated)\b/i.test(text.stem);
   if (stimKind === "none" || (stimKind === "text" && !spec)) return { need: "text_only", reason: stimKind === "none" ? "자료 없음" : "텍스트 자료(식·조건)가 본문에 모두 있음" };
   if (stimKind === "diagram" && !spec) return { need: "text_only", reason: "도식이지만 본문이 모든 정보를 담음(그리지 않음)" };
+  if (stimKind === "stat_chart") return refs ? { need: "required", reason: "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)" } : { need: "supporting", reason: "본문이 통계 차트를 직접 가리키지 않음 — 보조 그림" };
   if (stimKind === "graph") {
     if (refs) return { need: "required", reason: "본문이 그래프를 가리키고 값은 그림에서 읽어야 함" };
     return { need: "supporting", reason: "본문이 그래프를 직접 가리키지 않음 — 보조 그림" };
@@ -156,6 +157,7 @@ export function renderTypeOf(stimKind: string, spec: ApSpec | null, subject: str
   if (spec.type === "ap_table_set") return "ap_table:multi_panel";
   if (spec.type === "ap_table") return stimKind === "payoff_matrix" ? "ap_table:payoff_matrix" : stimKind === "text" ? "ap_table:given_info" : spec.columns.length === 2 && spec.columns[0] === "Item" ? "ap_table:given_info" : "ap_table";
   if (spec.type === "ap_diagram") return `ap_diagram:${spec.variant}`;
+  if (spec.type === "ap_stat_chart") return `ap_stat_chart:${spec.chart}`;
   // 그래프 하위 유형
   if (subject === "ap_biology") return "ap_graph:bio_line";
   if (subject === "ap_microeconomics") return "ap_graph:econ_curves";

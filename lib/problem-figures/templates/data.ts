@@ -33,7 +33,13 @@ export type DataSpec = {
   points?: Pt[];
   fitLine?: { slope: number; intercept: number };
   /** boxplot */
-  boxes?: { name: string; min: number; q1: number; median: number; q3: number; max: number }[];
+  /** outliers(AP Statistics): 수염 끝(min·max) 밖의 관측값 — 점으로 표시한다. min/max 는 수염 끝(이상치 제외). */
+  boxes?: { name: string; min: number; q1: number; median: number; q3: number; max: number; outliers?: number[] }[];
+  /** scatter(AP Statistics): 강조할 점(points 의 인덱스) — 큰 빨간 고리와 라벨. xMin/xMax/xStep 은 가로축 범위 지정(기본은 0 포함 자동). */
+  highlights?: { index: number; label?: string }[];
+  xMin?: number;
+  xMax?: number;
+  xStep?: number;
   /** dot_plot — 값과 개수. 값은 정수·소수. */
   dots?: { value: number; count: number }[];
   /** two_way — 행·열 범주와 칸 값. 합계 행·열은 렌더러가 계산해 붙인다(totals !== false). */
@@ -116,6 +122,11 @@ export function validateData(input: unknown): { ok: true; spec: DataSpec } | { o
     case "scatter": {
       if (!Array.isArray(s.points) || s.points.length < 3 || s.points.length > 60 || !s.points.every((p) => Array.isArray(p) && p.length === 2 && p.every(isNum))) return { ok: false, error: "scatter 는 points(3~60개 [x,y]) 가 필요합니다." };
       if (s.fitLine !== undefined) { const fl = s.fitLine as Record<string, unknown>; if (!fl || !isNum(fl.slope) || !isNum(fl.intercept)) return { ok: false, error: "fitLine 은 slope/intercept 가 필요합니다." }; }
+      if (s.highlights !== undefined) {
+        if (!Array.isArray(s.highlights) || s.highlights.length > 3 || !(s.highlights as Record<string, unknown>[]).every((h) => h && Number.isInteger(h.index) && (h.index as number) >= 0 && (h.index as number) < (s.points as unknown[]).length && (h.label === undefined || isText(h.label, 20)))) return { ok: false, error: "highlights 는 points 인덱스와 20자 이내 label 의 목록(최대 3개)입니다." };
+      }
+      for (const k of ["xMin", "xMax", "xStep"] as const) if (s[k] !== undefined && !isNum(s[k])) return { ok: false, error: `${k} 는 숫자입니다.` };
+      if (isNum(s.xMin) && isNum(s.xMax) && s.xMin >= s.xMax) return { ok: false, error: "xMin < xMax 여야 합니다." };
       break;
     }
     case "dot_plot": {
@@ -143,6 +154,10 @@ export function validateData(input: unknown): { ok: true; spec: DataSpec } | { o
         if (!b || !isName(b.name) || ![b.min, b.q1, b.median, b.q3, b.max].every(isNum)) return { ok: false, error: "boxes[] 는 name 과 min, q1, median, q3, max 숫자가 필요합니다." };
         const v = [b.min, b.q1, b.median, b.q3, b.max] as number[];
         for (let i = 1; i < 5; i++) if (v[i] < v[i - 1]) return { ok: false, error: `상자그림 '${String(b.name)}' 의 값은 min ≤ q1 ≤ median ≤ q3 ≤ max 여야 합니다.` };
+        if (b.outliers !== undefined) {
+          if (!Array.isArray(b.outliers) || b.outliers.length > 6 || !b.outliers.every(isNum)) return { ok: false, error: "outliers 는 숫자 목록(최대 6개)입니다." };
+          if ((b.outliers as number[]).some((o) => o >= (b.min as number) && o <= (b.max as number))) return { ok: false, error: "outliers 는 수염 끝(min·max) 밖의 값이어야 합니다." };
+        }
       }
       break;
     }
@@ -314,7 +329,8 @@ function renderScatter(spec: DataSpec): { svg: string; alt: string; issues: Figu
   const fr: Frame = { x0: 64 + (spec.yTitle ? 14 : 0), y0: 20 + (spec.title ? 22 : 0), x1: W - 24, y1: H - 40 - (spec.xTitle ? 16 : 0) };
   if (spec.title) sheet.text(W / 2, 14, spec.title, { size: spec.title.length > 40 ? 11 : 14, anchor: "middle" });
   const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
-  const xStep = niceStep((Math.max(...xs) - Math.min(0, ...xs)) || 1), xMin = Math.floor(Math.min(0, ...xs) / xStep) * xStep, xMax = Math.ceil(Math.max(...xs) / xStep) * xStep + (Math.max(...xs) % xStep === 0 ? xStep : 0);
+  const autoStep = niceStep((Math.max(...xs) - Math.min(0, ...xs)) || 1);
+  const xStep = spec.xStep ?? autoStep, xMin = spec.xMin ?? Math.floor(Math.min(0, ...xs) / autoStep) * autoStep, xMax = spec.xMax ?? Math.ceil(Math.max(...xs) / autoStep) * autoStep + (Math.max(...xs) % autoStep === 0 ? autoStep : 0);
   const dom = yDomain(ys, spec);
   const sy = drawYAxis(sheet, fr, dom.min, dom.max, dom.step, spec.yTitle);
   const sx = (v: number) => fr.x0 + ((v - xMin) / (xMax - xMin)) * (fr.x1 - fr.x0);
@@ -324,6 +340,11 @@ function renderScatter(spec: DataSpec): { svg: string; alt: string; issues: Figu
     sheet.raw(`<text x="${f(sx(v))}" y="${f(fr.y1 + 15)}" font-family="${FONT}" font-size="12" text-anchor="middle" fill="#111">${fmtNum(Math.round(v * 1e6) / 1e6)}</text>`);
   }
   for (const [x, y] of pts) sheet.raw(`<circle cx="${f(sx(x))}" cy="${f(sy(y))}" r="3.5" fill="#111"/>`);
+  for (const h of spec.highlights ?? []) {
+    const [hx, hy] = pts[h.index];
+    sheet.raw(`<circle cx="${f(sx(hx))}" cy="${f(sy(hy))}" r="8" fill="none" stroke="#C8102E" stroke-width="2"/>`);
+    if (h.label) sheet.label(sx(hx) + 12 + labelWidth(h.label, 12) / 2, sy(hy) - 10, h.label, "강조 점", { size: 12 });
+  }
   if (spec.fitLine) {
     const { slope: m, intercept: b } = spec.fitLine;
     const cands: Pt[] = [[xMin, m * xMin + b], [xMax, m * xMax + b]];
@@ -346,7 +367,7 @@ function renderBoxplot(spec: DataSpec): { svg: string; alt: string; issues: Figu
   const nameW = Math.max(...boxes.map((b) => labelWidth(b.name, 12))) + 12;
   const fr: Frame = { x0: 24 + nameW, y0: 16 + (spec.title ? 22 : 0), x1: W - 24, y1: H - 36 - (spec.xTitle ? 16 : 0) };
   if (spec.title) sheet.text(W / 2, 14, spec.title, { size: spec.title.length > 40 ? 11 : 14, anchor: "middle" });
-  const lo = Math.min(...boxes.map((b) => b.min)), hi = Math.max(...boxes.map((b) => b.max));
+  const lo = Math.min(...boxes.flatMap((b) => [b.min, ...(b.outliers ?? [])])), hi = Math.max(...boxes.flatMap((b) => [b.max, ...(b.outliers ?? [])]));
   const step = niceStep((hi - lo) || 1, 8), min = Math.floor(lo / step) * step, max = Math.ceil(hi / step) * step + (hi === Math.ceil(hi / step) * step ? 0 : 0);
   const sx = (v: number) => fr.x0 + ((v - min) / ((max - min) || 1)) * (fr.x1 - fr.x0);
   for (let v = min; v <= max + 1e-9; v += step) {
@@ -362,6 +383,7 @@ function renderBoxplot(spec: DataSpec): { svg: string; alt: string; issues: Figu
     for (const v of [b.min, b.max]) sheet.raw(`<line x1="${f(sx(v))}" y1="${f(cy - h / 3)}" x2="${f(sx(v))}" y2="${f(cy + h / 3)}" stroke="#111" stroke-width="1.6"/>`);
     sheet.raw(`<rect x="${f(sx(b.q1))}" y="${f(cy - h / 2)}" width="${f(Math.max(1, sx(b.q3) - sx(b.q1)))}" height="${h}" fill="#fff" stroke="#111" stroke-width="1.6"/>`);
     sheet.raw(`<line x1="${f(sx(b.median))}" y1="${f(cy - h / 2)}" x2="${f(sx(b.median))}" y2="${f(cy + h / 2)}" stroke="#111" stroke-width="2.2"/>`);
+    for (const o of b.outliers ?? []) sheet.raw(`<circle cx="${f(sx(o))}" cy="${f(cy)}" r="3.6" fill="#111"/>`);
   });
   if (spec.xTitle) sheet.raw(`<text x="${f((fr.x0 + fr.x1) / 2)}" y="${f(xTitleY(fr, H))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" data-axis-title="x" fill="#111">${esc(spec.xTitle)}</text>`);
   const alt = `${spec.title ? spec.title + " — " : ""}상자그림. ${boxes.map((b) => `${b.name}: 최소 ${fmtNum(b.min)}, Q1 ${fmtNum(b.q1)}, 중앙값 ${fmtNum(b.median)}, Q3 ${fmtNum(b.q3)}, 최대 ${fmtNum(b.max)}`).join("; ")}.`;

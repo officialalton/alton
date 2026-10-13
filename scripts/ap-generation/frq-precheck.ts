@@ -12,7 +12,7 @@ import { generatorDefects } from "../../lib/ap-generation/generator-defects";
 import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const NAME = arg("--name"); const SUBJECT = arg("--subject", "ap_calculus_bc"); const SEED0 = arg("--seed0", "3900");
-const PY = process.env.AP_PY ?? "/private/tmp/claude-501/-Users-jangjiman-Developer-ALTON/d05b2ffe-5d6e-4058-a909-5e3b8827cbe2/scratchpad/apvenv/bin/python";
+import { AP_PYTHON as PY } from "./py";
 const r = spawnSync(PY, ["-B", "registry.py", "batch", NAME, "1", SEED0], { cwd: path.resolve("scripts/ap-generation/archetypes"), encoding: "utf-8" });
 const p = (JSON.parse(r.stdout) as FrqPack[])[0];
 const cur = JSON.parse(readFileSync(`data/ap/curriculum-2027/${SUBJECT}.json`, "utf-8")) as ApCurriculumFile;

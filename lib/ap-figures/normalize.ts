@@ -3,6 +3,7 @@
 // (2) 식은 안전 파서로 표본점을 만들고, 점 목록만 있으면 꺾은선(구간선형)으로 이어 그린다(경고).
 // (3) 해석 못 한 모양은 조용히 넘기지 않고 issues 로 남긴다(게이트가 실패로 센다).
 
+import { validateApStatChart } from "../problem-figures/templates/ap-stat-chart";
 import type { ApGraphSpec, ApMarker, ApSeries, ApShade, ApGuide, ApSpec, ApTableSpec } from "../problem-figures/templates/ap-figures";
 import { compileExpr, freeIdentifiers, splitEquation } from "../problem-figures/templates/ap-expr";
 import { labelMentioned } from "../problem-figures/label-rule";
@@ -213,6 +214,7 @@ export function normalizeStimulus(stimIn: unknown, ctx: StimCtx): NormResult {
   if (stimKind === "diagram") return normalizeDiagram(data, stim, ctx, issues, features, hidden);
   if (stimKind === "payoff_matrix" && data) return normalizePayoff(data, stim, issues, features, hidden);
   if (!data) return { stimKind, spec: null, features, issues: [{ level: "error", code: "no_data", message: "그림/표 종류인데 data 가 없습니다." }], hidden };
+  if (stimKind === "stat_chart") return normalizeStatChart(data, issues, features, hidden);
   if (stimKind === "table") return normalizeTable(data, ctx, issues, features, hidden);
   if (stimKind === "graph") return normalizeGraph(data, stim, ctx, issues, features, hidden);
   return { stimKind, spec: null, features, issues: [{ level: "error", code: "unknown_kind", message: `알 수 없는 stimulus.kind: ${stimKind}` }], hidden };
@@ -680,4 +682,16 @@ function normalizeTable(d: Json, ctx: StimCtx, issues: NormIssue[], features: Fe
   if (g.spec) { issues.push({ level: "info", code: "table_generic_panel", message: `표 형식이 표준 형태가 아니라 자료 패널(표 ${g.spec.type === "ap_table_set" ? g.spec.tables.length : 1}개 + 조건 목록)로 그렸습니다.` }); return { stimKind: "table", spec: g.spec, features, issues, hidden }; }
   issues.push(...trial);
   return single;
+}
+
+// ── 통계 차트(AP Statistics) ─────────────────────────────────────────
+const STAT_KEYS = new Set(["chart", "title", "data", "tree", "curve", "output"]);
+function normalizeStatChart(d: Json, issues: NormIssue[], features: Feature[], hidden: string[]): NormResult {
+  const extra = Object.keys(d).filter((k) => !STAT_KEYS.has(k));
+  if (extra.length) hidden.push(...extra.map((k) => `stat_chart.${k}`));
+  const cand: Record<string, unknown> = { type: "ap_stat_chart" };
+  for (const k of STAT_KEYS) if (d[k] !== undefined) cand[k] = d[k];
+  const v = validateApStatChart(cand);
+  if (!v.ok) { issues.push({ level: "error", code: "stat_chart_invalid", message: v.error }); return { stimKind: "stat_chart", spec: null, features, issues, hidden }; }
+  return { stimKind: "stat_chart", spec: v.spec, features, issues, hidden };
 }

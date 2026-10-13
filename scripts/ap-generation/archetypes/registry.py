@@ -23,6 +23,15 @@ GRAPH_MODS = [_ga, _gb, _gc, _gd, _ge, _gf, _gg, _gh, _gi, _gj, _gk, _sa, _sb, _
 import glob as _glob, importlib as _il, os as _os
 _R3 = [_il.import_module(_os.path.basename(f)[:-3]) for f in sorted(_glob.glob(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "calc_r3_*.py")))]  # 2026-10-12 예비 3차(docs/ap/reserve-r3-report.md): 모듈 파일을 두면 자동 등록
 GRAPH_MODS = GRAPH_MODS + _R3
+# 2026-10-12 AP Statistics(S1 파일럿): stats_s*.py 모듈을 두면 st_ 접두 MC 원형과 STAGE_<이름> 목록(stats_s1_l …)이 자동 등록된다.
+_ST = [_il.import_module(_os.path.basename(f)[:-3]) for f in sorted(_glob.glob(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "stats_s*.py")))]
+STATS = {n: (getattr(m, n), "0") for m in _ST for n in dir(m) if n.startswith("st_") and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
+STATS_STAGES = {}
+for _m in _ST:
+    for _n in dir(_m):
+        if _n.startswith("STAGE_"):
+            STATS_STAGES[_m.__name__.rsplit("_", 1)[0] + "_" + _n[6:].lower()] = list(getattr(_m, _n))  # stats_s1_l.STAGE_L -> stats_s1_l
+STATS_STAGES["stats_s1_all"] = STATS_STAGES.get("stats_s1_l", []) + STATS_STAGES.get("stats_s1_m", []) + STATS_STAGES.get("stats_s1_h", [])  # 위험 L→M→H 순서
 GRAPH = {n: (getattr(m, n), "0") for m in GRAPH_MODS for n in dir(m) if n.startswith(("g_", "c_")) and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
 MC.update(GRAPH)
 GRAPH_STAGES = {}  # 단계별 목록(graph_s1_ab, graph_s1_bc …): calc_graph_stages.py 가 채운다
@@ -42,7 +51,7 @@ def sig(p):
     return hashlib.sha1(json.dumps([p.get("stem"), [o["text"] for o in p.get("options", [])], p.get("stimulus")], sort_keys=True).encode()).hexdigest()[:12]
 
 def batch(name, n, seed0):
-    fn = MC.get(name, (FRQ.get(name),))[0]
+    fn = (MC.get(name) or STATS.get(name) or (FRQ.get(name),))[0]  # 통계 원형은 MC 사전(칼큘러스 회귀 테스트 대상)에 넣지 않는다
     out, seen, seed = [], set(), seed0
     while len(out) < n and seed < seed0 + 400:
         try:
@@ -62,6 +71,7 @@ if __name__ == "__main__":
         if which == "bc": print(json.dumps({"mc": list(BCMC), "frq": ["frq_series", "frq_parametric"]}))
         elif which == "bctopup": print(json.dumps({"mc": list(TOPUP), "frq": ["frq_euler_logistic"]}))
         elif which == "new": print(json.dumps({"mc": list(NEWMC), "frq": []}))
+        elif which.startswith("stats"): print(json.dumps({"mc": [n for n in STATS_STAGES.get(which, list(STATS)) if n in STATS], "frq": []}))  # 목록 순서 보존(위험 L→M→H)
         elif which.startswith(("graph", "supp")): print(json.dumps({"mc": sorted(GRAPH if which == "graph" else [n for n in GRAPH if n in GRAPH_STAGES.get(which, [])]), "frq": [n for n in FRQ if n in GRAPH_STAGES.get(which, [])]}))
         elif which == "reinforce": print(json.dumps({"mc": ["graph_fprime_extremum", "graph_accum_value"], "frq": ["frq_particle_motion", "frq_related_rates", "frq_implicit_diff"]}))
         elif which == "reinforce2": print(json.dumps({"mc": [], "frq": ["frq_particle_motion", "frq_implicit_diff"]}))
@@ -76,6 +86,14 @@ if __name__ == "__main__":
             if not p: raise SystemExit(f"no pack for {n}")
             b = p["blueprint"]
             out.append({"id": n, "topic": p["topic"], "skill": p["skill"], "calculator": p["calculator"], "stimulus": p["stimulus"]["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]], "bc": b["subject"] == "ap_calculus_bc"})
+        print(json.dumps(out, indent=1))
+    elif cmd == "guide-stats":  # 통계 원형의 가이드 항목(JSON): lib/ap-generation/subjects/stats-archetypes.json 의 원천
+        out = []
+        for n in STATS_STAGES.get("stats_s1_all", [k for k in STATS]):
+            p = (batch(n, 1, 0) or [None])[0]
+            if not p: raise SystemExit(f"no pack for {n}")
+            b = p["blueprint"]
+            out.append({"id": n, "topic": p["topic"], "skill": p["skill"], "calculator": p["calculator"], "stimulus": p["stimulus"]["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]]})
         print(json.dumps(out, indent=1))
     elif cmd == "all":print(json.dumps({n: batch(n, int(sys.argv[2]), 0) for n in list(MC) + list(FRQ)}))
     elif cmd == "batch": print(json.dumps(batch(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 0)))

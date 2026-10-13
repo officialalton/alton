@@ -2,6 +2,8 @@
 
 오너 방향(2026-10-12): Calculus AB/BC 다음 과목 = AP Statistics(권장 순서 Statistics → Physics 1 → Chemistry → CS A → Econ → Biology → English Lang). 이 문서는 **계획 전용**이다. 유료 호출·원격/DB 접근·키·push·삭제·생성은 없다. 근거 파일은 모두 repo 안이며, repo에 없는 공식 사실은 "미확인"으로 표시했다(공식 사실을 지어내지 않음).
 
+**[2026-10-12 진행 상태]** E1–E4·조립 계층 정정과 S1 파일럿(20 원형, 첫 통과 20/20, $1.0109)이 끝났다 — 결과·개정 비용·남은 일은 `docs/ap/statistics-pilot-report.md`, 가이드는 `docs/ap/generation-guides/stats.md`. 아래 본문은 계획 이력이며 §5 비용 추정은 파일럿 실측으로 대체됐다.
+
 근거: `docs/ap/2027-exam-spec-table.md`(조사 2026-10-08, AP Central 페이지 기준) · `data/ap/curriculum-2027/ap_statistics.json` · `lib/ap-exam/layouts.ts` · `docs/ap/subject-skill-structure-matrix.md` §3 · `docs/ap/subject-quality-standards.md` · `docs/ap/official-materials-availability.md` · `docs/ap/ten-set-plan.md` · `docs/ap/stock-policy-1-5x.md` · `docs/ap/cost-reconciliation.md`·`supplement-report.md`·`graph-stages-report.md` · `docs/ap/generation-guides/calc-core.md` · `scripts/ap-generation/archetypes/common.py`(+`calc_*.py`) · `lib/ap-figures/{gate,normalize}.ts` · `lib/problem-figures/templates/*`.
 
 ---

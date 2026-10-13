@@ -22,7 +22,7 @@ import { findHangulInStem } from "@/lib/problem-text-guards";
 import { loadMockExamSetContentForStaff, type MockExamSetContentItem } from "@/lib/mock-exam/set-content";
 import { selectInChunks } from "@/lib/select-in-chunks";
 import { fetchAlreadyUsedProblemIds } from "@/lib/mock-exam/used-problem-ids";
-import { OFFICIAL } from "@/lib/ap-exam/ab-select";
+import { fullPracticeUnitBounds } from "@/lib/ap-exam/full-set-rules";
 import { checkNewVersionComposition } from "@/lib/mock-exam/new-version";
 
 const RW_DOMAINS = ["rw_information_ideas", "rw_craft_structure", "rw_expression_ideas", "rw_standard_english"];
@@ -629,8 +629,12 @@ export async function createMockExamNewVersionAction(sourceSetId: string, swaps:
       .in("problem_id", swaps.map((x) => x.problemId)).neq("mock_exam_sets.set_group_id", set.set_group_id).in("mock_exam_sets.status", ["draft", "published"]).eq("mock_exam_sets.ap_label", "full_practice"); // 풀 모의고사끼리만 겹침 금지(부분 연습 세트와의 겹침은 별도 정책)
     if (e4) throw new Error(e4.message);
     const sections = ((set.section_layout as { sections?: { key: string; calculator?: string }[] } | null)?.sections ?? []);
-    const unitBounds = set.ap_subject === "ap_calculus_ab" && set.ap_label === "full_practice"
-      ? Object.fromEntries(Object.entries(OFFICIAL.unitBounds).map(([u, [min, max]]) => [u, { min, max }])) : undefined;
+    // 교체 후보가 공유 자료 세트(문항 3)이면 세트 전체를 함께 바꿔야 한다 — 후보별 변환 문제 수를 센다.
+    const repKeys = [...new Set((reps ?? []).map((r) => r.ap_candidate_key as string | null).filter((k): k is string => !!k))];
+    const { data: repProblems, error: e5 } = repKeys.length ? await db.from("problems").select("ap_candidate_key").in("ap_candidate_key", repKeys) : { data: [] as { ap_candidate_key: string }[], error: null };
+    if (e5) throw new Error(e5.message);
+    const setSizes = new Map<string, number>(); for (const p of repProblems ?? []) setSizes.set(p.ap_candidate_key as string, (setSizes.get(p.ap_candidate_key as string) ?? 0) + 1);
+    const unitBounds = fullPracticeUnitBounds(set.ap_subject as string | null, set.ap_label as string | null);
     const { issues } = checkNewVersionComposition(
       (srcItems ?? []).map((i) => ({ section: i.section as string, position: i.position as number, problemId: i.problem_id as string, ...toMeta(keyOf(i.problems as never)) })),
       swaps,
@@ -639,6 +643,7 @@ export async function createMockExamNewVersionAction(sourceSetId: string, swaps:
         sectionCalculator: Object.fromEntries(sections.map((x) => [x.key, x.calculator ?? "na"])),
         unitBounds,
         usedByOtherExams: new Set((used ?? []).map((u) => u.problem_id as string)),
+        setSizes,
         replacements: new Map((reps ?? []).map((r) => [r.id as string, { problemId: r.id as string, ...toMeta(r.ap_candidate_key as string | null) }])),
       },
     );

@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-13T02:03:21.294Z",
- "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1187행)",
+ "generatedAt": "2026-10-13T03:36:42.197Z",
+ "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1207행)",
  "all": {
-  "total": 1187,
-  "pass": 701,
+  "total": 1207,
+  "pass": 715,
   "fail": 1,
-  "notApplicable": 485
+  "notApplicable": 491
  },
  "liveStates": {
-  "total": 703,
-  "pass": 350,
+  "total": 723,
+  "pass": 364,
   "fail": 0,
-  "notApplicable": 353
+  "notApplicable": 359
  },
  "byType": [
   {
@@ -78,6 +78,69 @@
    "notApplicable": 0
   },
   {
+   "type": "ap_stat_chart:boxplot",
+   "total": 1,
+   "pass": 1,
+   "fail": 0,
+   "notApplicable": 0
+  },
+  {
+   "type": "ap_stat_chart:curve",
+   "total": 3,
+   "pass": 3,
+   "fail": 0,
+   "notApplicable": 0
+  },
+  {
+   "type": "ap_stat_chart:dot_plot",
+   "total": 1,
+   "pass": 1,
+   "fail": 0,
+   "notApplicable": 0
+  },
+  {
+   "type": "ap_stat_chart:histogram",
+   "total": 1,
+   "pass": 1,
+   "fail": 0,
+   "notApplicable": 0
+  },
+  {
+   "type": "ap_stat_chart:output",
+   "total": 3,
+   "pass": 3,
+   "fail": 0,
+   "notApplicable": 0
+  },
+  {
+   "type": "ap_stat_chart:scatter",
+   "total": 2,
+   "pass": 2,
+   "fail": 0,
+   "notApplicable": 0
+  },
+  {
+   "type": "ap_stat_chart:table",
+   "total": 1,
+   "pass": 1,
+   "fail": 0,
+   "notApplicable": 0
+  },
+  {
+   "type": "ap_stat_chart:tree",
+   "total": 1,
+   "pass": 1,
+   "fail": 0,
+   "notApplicable": 0
+  },
+  {
+   "type": "ap_stat_chart:two_way",
+   "total": 1,
+   "pass": 1,
+   "fail": 0,
+   "notApplicable": 0
+  },
+  {
    "type": "ap_table",
    "total": 412,
    "pass": 412,
@@ -107,10 +170,10 @@
   },
   {
    "type": "none",
-   "total": 380,
+   "total": 386,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 380
+   "notApplicable": 386
   },
   {
    "type": "none(diagram_text_only)",
@@ -151,11 +214,17 @@
    "pass": 28,
    "fail": 0,
    "notApplicable": 108
+  },
+  "ap_statistics": {
+   "total": 20,
+   "pass": 14,
+   "fail": 0,
+   "notApplicable": 6
   }
  },
  "figureNeed": {
-  "required": 650,
-  "text_only": 485,
+  "required": 664,
+  "text_only": 491,
   "supporting": 52
  },
  "errorCodes": {
@@ -17296,6 +17365,286 @@
    "status": "not_applicable",
    "issues": [],
    "alt": null
+  },
+  {
+   "key": "stats-s1-l-final:ap_statistics-m01-k0",
+   "contentHash": "1dec3fd057450a55703d33150fbd695c01ea44210d3f3373dadcca9756a73c3b",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:histogram",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Histogram. Horizontal axis: Time (minutes). Vertical axis: Frequency. Classes: 5 to 10: 11, 10 to 15: 13, 15 to 20: 12, 20 to 25: 3, 25 to 30: 5, 30 to 35: 10."
+  },
+  {
+   "key": "stats-s1-l-final:ap_statistics-m02-k0",
+   "contentHash": "97f62795475b9c0f3ef7a7ab777a6d41370db5250780c02b01effafbd9f48116",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:boxplot",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Boxplot. Horizontal axis: Time (minutes). Times: minimum 9, Q1 15, median 17, Q3 25, maximum 34, outliers at 45."
+  },
+  {
+   "key": "stats-s1-l-final:ap_statistics-m03-k0",
+   "contentHash": "0eac11b0fc7ee8a78ff0edd363c6a23264b3b3410ec6db7d5ef45da0e1c270f6",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s1-l-final:ap_statistics-m04-k0",
+   "contentHash": "78c5edf761f6a17f2e1121bcae370ba40774c3679a55a39bf1c6ba5e21bbd0ae",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:two_way",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Two-way table with row variable Clinic. North: Improved 49, Did not improve 67; South: Improved 57, Did not improve 57."
+  },
+  {
+   "key": "stats-s1-l-final:ap_statistics-m05-k0",
+   "contentHash": "8a559e46a6c4ba9d09014a065ba80b51e948afa38f2a1f88bd6985939b24dc6a",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:tree",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "수형도: Supplier A(0.50) → Faulty(0.09), Working(0.91); Supplier B(0.50) → Faulty(0.06), Working(0.94)."
+  },
+  {
+   "key": "stats-s1-l-final:ap_statistics-m06-k0",
+   "contentHash": "56eeca107b1ec23e59890bcfe18a1d8d2e3b5b9013b169bb0754bdc3044052d5",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s1-l-final:ap_statistics-m07-k0",
+   "contentHash": "9177ec6a802d45cf297b5486383bfdfcf3842e80346a0d547a289d81b72bf4b1",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:curve",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "normal density curve. Horizontal axis: Lengths (centimeters), from 29.75 to 57.75, with a second z-score scale (z = -3, -2, -1, 0, 1, 2, 3). Shaded area: 46.55 to 57.75. Marked values: 46.55 at 46.55."
+  },
+  {
+   "key": "stats-s1-l-final:ap_statistics-m08-k0",
+   "contentHash": "4ead9acf837b458a6bcb6c261a1cd3c2ba497280460d2bca756a77855dc31670",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s1-l-final:ap_statistics-m09-k0",
+   "contentHash": "5f6fc425118af80c67dd3c7d721503a6f73480c182dc2662b047ba22f9da93d7",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:curve",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "t distribution, df = 8. t density curve. Horizontal axis: t, from -4.5 to 4.5. Shaded area: -4.5 to -1.714; 1.714 to 4.5."
+  },
+  {
+   "key": "stats-s1-l-final:ap_statistics-m10-k0",
+   "contentHash": "ffe8af983ef225d7692667fef5ddd4922ba7021ac8f8b88a87970eaebbde0132",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:table",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Table with columns Group, n, Mean, Standard deviation."
+  },
+  {
+   "key": "stats-s1-m-final:ap_statistics-m01-k0",
+   "contentHash": "e095b3c9f74d6ab8208e92e39a6b9b8d4320a8e66cc76d1ed87532bc6da14f43",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s1-m-final:ap_statistics-m02-k0",
+   "contentHash": "0c1b478395ffbfafa97c689f1bddbc6add8671ffb89467d2841c85baaef474c9",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:dot_plot",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Dotplot. Horizontal axis: Sample mean (minutes). Counts: 44: 1, 46: 1, 47: 7, 48: 5, 49: 2, 50: 8, 51: 4, 52: 4, 53: 3, 54: 5."
+  },
+  {
+   "key": "stats-s1-m-final:ap_statistics-m03-k0",
+   "contentHash": "7c0798be3d5643b143055ce9227712065adeec3a8a3045c79baaf9bd35ad7ff2",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:output",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Computer output: Chi-Square Test of Independence: age group by preferred payment method. Chi-Square 13.517; DF 4; P-Value 0.0090. Smallest expected count: 23.27"
+  },
+  {
+   "key": "stats-s1-m-final:ap_statistics-m04-k0",
+   "contentHash": "8d9e71dee0b8ac3442da2ec3e8617e70581d26003b6883edbb387fea8d822f90",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:output",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Computer output: Two-Sample t Test and Confidence Interval. New method 17 47.6 6.9; Standard method 15 42.5 4.7. Difference (mu1 - mu2) 5.100; 95% CI for difference (0.868, 9.332); T-Value 2.467; DF 28.3; P-Value (two-sided) 0.0199."
+  },
+  {
+   "key": "stats-s1-m-final:ap_statistics-m05-k0",
+   "contentHash": "ccf2f7816e1afe887212430ac2583c5a60356e76362c87ddf51a2e2c83cabd66",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:scatter",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Scatterplot of 24 points. Horizontal axis: Hours studied. Vertical axis: Residual. Line: y = 0x + 0."
+  },
+  {
+   "key": "stats-s1-m-final:ap_statistics-m06-k0",
+   "contentHash": "804e2932af1a8e7be396a270707cdfa47fdd254780c9fb6262bacc0e2687f5cb",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:scatter",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Scatterplot of 11 points. Horizontal axis: Engine size (liters). Vertical axis: Fuel efficiency (mpg). Highlighted point: (32.3, 76.3)."
+  },
+  {
+   "key": "stats-s1-h-final:ap_statistics-m01-k0",
+   "contentHash": "4feddbdc6dd0eedb5d261f6d7b307d5c151a751971dcbf67456801cd16b023cb",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s1-h-final:ap_statistics-m02-k0",
+   "contentHash": "38920f5951463f543fe4c08d8067fa2a10a2ff8de2e783b5becdc57f000f16aa",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s1-h-final:ap_statistics-m03-k0",
+   "contentHash": "84aa65b4d554d520a321fd9581d02e51e9d9e1885c49127b90416e7dd546d07a",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:curve",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "normal density curve. Horizontal axis: Sample proportion, from 0.261 to 0.539, with a second z-score scale (z = -3, -2, -1, 0, 1, 2, 3). Shaded area: 0.459 to 0.539. Marked values: 0.459 at 0.459."
+  },
+  {
+   "key": "stats-s1-h-final:ap_statistics-m04-k0",
+   "contentHash": "67ce28111cd06c26f594a2cea8c198ff44848ba2f021c1e016eb2348f1b97c51",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:output",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Computer output: Regression Analysis: Drinks versus Temp. Constant 91.683; Temp -3.24. R-Sq 97.7%; N 13."
   },
   {
    "key": "supp-b1-bc-final:ap_calculus_bc-m01-k0",

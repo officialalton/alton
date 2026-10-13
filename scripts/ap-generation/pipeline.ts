@@ -22,7 +22,7 @@ const BUDGET = 80; // 총괄 승인 상한(USD) — 누적이 넘으면 중단
 const ROOT = path.resolve(process.cwd(), "data/ap/sample-2027");
 const DIR = path.join(ROOT, RUN);
 mkdirSync(DIR, { recursive: true });
-const PY = process.env.AP_PY ?? "/private/tmp/claude-501/-Users-jangjiman-Developer-ALTON/d05b2ffe-5d6e-4058-a909-5e3b8827cbe2/scratchpad/apvenv/bin/python";
+import { AP_PYTHON as PY } from "./py";
 const SYS_CACHE = { type: "ephemeral", ttl: "1h" };
 
 type Json = Record<string, unknown>;
