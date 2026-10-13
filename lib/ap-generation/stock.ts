@@ -22,7 +22,7 @@ export type StockItem = RawCand & {
   selectedForSample: boolean; legacyReserve: boolean; family: string; itemFamilyId: string; canonicalKey: string | null; duplicateOf: string | null; duplicateReason: string | null;
   contentKey: string; sharedWith: string[]; stockCell: string; history: HistoryEntry[];
 };
-export const SUBJECT_FAMILY: Record<string, string> = { ap_calculus_ab: "calculus", ap_calculus_bc: "calculus" };
+export const SUBJECT_FAMILY: Record<string, string> = { ap_calculus_ab: "calculus", ap_calculus_bc: "calculus", ap_statistics: "statistics" };
 export const familyOf = (subject: string) => SUBJECT_FAMILY[subject] ?? subject;
 const norm = (s: string) => s.replace(/\s+/g, " ").trim().toLowerCase();
 const optText = (o: unknown) => (typeof o === "string" ? o : (o as { text?: string })?.text ?? "");

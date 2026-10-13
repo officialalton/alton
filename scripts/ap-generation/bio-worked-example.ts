@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { gateBioFrq } from "../../lib/ap-generation/bio-frq-checks";
 import { validateBlueprint } from "../../lib/ap-generation/blueprint";
 import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
-const PY = process.env.AP_PY ?? "/private/tmp/claude-501/-Users-jangjiman-Developer-ALTON/d05b2ffe-5d6e-4058-a909-5e3b8827cbe2/scratchpad/apvenv/bin/python";
+import { AP_PYTHON as PY } from "./py";
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 const gen = (a: string, seed: number): Json => JSON.parse(execFileSync(PY, ["-B", "registry.py", "batch", a, "1", String(seed)], { cwd: "scripts/ap-generation/archetypes", encoding: "utf-8" }))[0];
 const cur = JSON.parse(readFileSync("data/ap/curriculum-2027/ap_biology.json", "utf-8")) as ApCurriculumFile; const topics = new Map(cur.units.flatMap((u) => u.topics.map((t) => [t.code, u.code] as const))); const skills = new Set(cur.skills.map((s) => s.code));

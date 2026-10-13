@@ -20,6 +20,7 @@ import { POLICY, manifestIssues, type RunManifest } from "../../lib/ap-generatio
 import { gateGuideFrq, gateGuideMc } from "../../lib/ap-generation/guide-gates";
 import { guideReviewRules as _grr, guideWordingRules as _gwr } from "../../lib/ap-generation/subjects/calc-ab";
 import { GUIDES } from "../../lib/ap-generation/subjects/calc-bc";
+import { statsReviewRules, statsWordingRules } from "../../lib/ap-generation/subjects/stats";
 import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
 
 loadEnvLocal();
@@ -32,7 +33,7 @@ const SEED0 = Number(arg("--seed0") ?? process.env.AP_SEED0 ?? 0); // 새 시드
 const ROOT = path.resolve(process.cwd(), "data/ap/sample-2027");
 const DIR = path.join(ROOT, RUN);
 mkdirSync(DIR, { recursive: true });
-const PY = process.env.AP_PY ?? "/private/tmp/claude-501/-Users-jangjiman-Developer-ALTON/d05b2ffe-5d6e-4058-a909-5e3b8827cbe2/scratchpad/apvenv/bin/python";
+import { AP_PYTHON as PY } from "./py";
 const ARCH = path.resolve(process.cwd(), "scripts/ap-generation/archetypes");
 const CAP_NEW = Number(process.env.AP_CAP_NEW ?? 50); // 이번 라운드 신규 지출 상한(USD) — 도달 시 중단
 const BASE_F = path.join(DIR, "baseline.json");
@@ -47,8 +48,8 @@ const readJsonl = (f: string) => (existsSync(f) ? readFileSync(f, "utf-8").split
 const resultMap = (name: string) => { const m = new Map<string, Json>(); for (const r of readJsonl(path.join(DIR, `${name}.results.jsonl`))) if (r.ok) m.set(r.custom_id as string, r); return m; };
 
 const GUIDE = GUIDES[SUBJECT as keyof typeof GUIDES]; // Bio/Micro 는 과목 가이드가 아직 없다(S2 재검증은 가이드 없이 공식 과목 기준으로 평가)
-const guideWordingRules = () => !GUIDE ? "" : _gwr().replace(/ap_calculus_ab|AP Calculus AB/g, GUIDE.subject).replace(/for AB/g, SUBJECT === "ap_calculus_bc" ? "for BC" : "for AB");
-const guideReviewRules = (u: string) => { if (!GUIDE) return ""; const un = GUIDE.units.find((x) => x.unit === u); return un ? `UNIT ${un.unit} SCOPE for ${SUBJECT === "ap_calculus_bc" ? "BC" : "AB"} — in scope: ${un.inScope.join("; ")}. OUT of scope: ${un.outOfScope.join("; ")}. Difficulty levers allowed: ${GUIDE.difficultyAllowed.join("; ")}. Banned difficulty sources: ${GUIDE.difficultyBanned.join("; ")}.` : _grr(u); };
+const guideWordingRules = () => SUBJECT === "ap_statistics" ? statsWordingRules() : !GUIDE ? "" : _gwr().replace(/ap_calculus_ab|AP Calculus AB/g, GUIDE.subject).replace(/for AB/g, SUBJECT === "ap_calculus_bc" ? "for BC" : "for AB");
+const guideReviewRules = (u: string) => { if (SUBJECT === "ap_statistics") return statsReviewRules(u); if (!GUIDE) return ""; const un = GUIDE.units.find((x) => x.unit === u); return un ? `UNIT ${un.unit} SCOPE for ${SUBJECT === "ap_calculus_bc" ? "BC" : "AB"} — in scope: ${un.inScope.join("; ")}. OUT of scope: ${un.outOfScope.join("; ")}. Difficulty levers allowed: ${GUIDE.difficultyAllowed.join("; ")}. Banned difficulty sources: ${GUIDE.difficultyBanned.join("; ")}.` : _grr(u); };
 const calcAbGuide = GUIDE;
 const curriculum = readJson<ApCurriculumFile>(path.resolve(process.cwd(), `data/ap/curriculum-2027/${SUBJECT}.json`));
 const skillSet = new Set(curriculum.skills.map((s) => s.code));
@@ -107,7 +108,7 @@ function genPacks() {
 }
 
 // ---------- LLM 문장 다듬기 ----------
-const SUBJ_LABEL: Record<string, string> = { ap_calculus_ab: "AP Calculus", ap_calculus_bc: "AP Calculus", ap_biology: "AP Biology", ap_microeconomics: "AP Microeconomics" };
+const SUBJ_LABEL: Record<string, string> = { ap_calculus_ab: "AP Calculus", ap_calculus_bc: "AP Calculus", ap_biology: "AP Biology", ap_microeconomics: "AP Microeconomics", ap_statistics: "AP Statistics" };
 const WORD_SYS = `You are a careful ${SUBJ_LABEL[SUBJECT] ?? "AP"} item writer. A CODE generator has already computed and verified every number, table value, option and misconception. Your job is only the WORDING:
 - polish the stem so it reads like a clean AP exam stem (US English). You MUST keep every number, symbol and every $...$ math block of the base stem exactly as given; you may rephrase the plain words and may add a short realistic context ONLY if no numbers/quantities change. Never mention a table that the base stem does not mention. Never reveal the answer.
 - do NOT write an explanation (the code writes it); submit only the stem.
@@ -254,6 +255,7 @@ const SUBJECT_NOTES: Record<string, string> = {
   ap_biology: "SUBJECT NOTES (AP Biology): four options; items must test data/experiment interpretation, prediction or argumentation, not rote recall, and reject conclusions the data do not support. Every number the item uses must appear in the stimulus data. Free response: judge each PART against its own skill and its own rubric rows (the bundle skill is only a label); long FRQ = 9 points, short FRQ = four 1-point parts. Per-point time estimates are an internal reference only: never reject for estimated minutes. The bundle's representative skill is only a label: NEVER fail scope_skill because the parts assess different official skills. Alternative accepted phrasings listed in a rubric row (alt_solutions) count as accepted answers; do not call a rubric rigid when equivalent wordings are listed. TOPIC FIT is judged at the level of the whole bundle, not per part: data-analysis parts that assess the official data skills (describing a table, calculating, statistical reasoning) are legitimate even when they can be answered from the table; do NOT fail scope_skill because some parts do not require the topic concept. Fail scope_skill only if the bundle as a whole never requires the topic concept or the content belongs to another topic.",
   ap_microeconomics: "SUBJECT NOTES (AP Microeconomics): FIVE options (A-E), options may be short sentences; graphs must be fully specified as data (curves or labeled points with prices and quantities); calculations (elasticity, surplus, profit, MR=MC, payoff matrices) must be unambiguous. The bundle's representative skill is only a label: never fail scope_skill because the parts assess different official skills. Rubric rows are judged on meaning; listed alternative wordings count as accepted. Free response: long FRQ = 10 points, short FRQ = 5 points with parts of 1-2 points mixing calculation and explanation (setup and answer rows are normal); judge each part against its own rubric rows, and do not reject for low per-part demand when the grain matches the official short-FRQ format.",
   ap_calculus_ab: "",
+  ap_statistics: "SUBJECT NOTES (AP Statistics, 2027 CED): four options; a graphing calculator with statistics functions is allowed and the formula sheet and tables are provided, so judge the statistical decision, not arithmetic. Interpretation items use fixed sentences: exactly one is correct in context and each wrong sentence encodes a distinct named misinterpretation. Conditions (random, 10%, large counts, normality) must follow the CED wording. Rounding convention must be stated when options are decimals. Deleted topics (geometric distribution, chi-square goodness-of-fit, inference for a slope, nonlinear transformations, combining random variables) must not appear. Reject observational-study items whose key draws a causal conclusion. Figures are specified as data and rendered by the platform; judge the completeness of the data (axes, units, labels).",
 };
 const REVIEW_SYS = !process.env.AP_LEGACY_ITEMS && process.env.AP_SUBJECT_NOTES ? REVIEW_SYS_BASE + "\n" + (SUBJECT_NOTES[SUBJECT] ?? "") : process.env.AP_LEGACY_ITEMS
   ? REVIEW_SYS_BASE.replace("NOTE: numeric keys, table values and rubric structure were computed and independently verified by code, so do not re-derive arithmetic; judge", "NOTE: this item was written by an LLM and its key was NOT verified by code. An independent solver output is provided; check the key, the arithmetic and the stimulus data yourself. Judge") + "\n" + (SUBJECT_NOTES[SUBJECT] ?? "")

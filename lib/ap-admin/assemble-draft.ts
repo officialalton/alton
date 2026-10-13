@@ -15,8 +15,13 @@ export type PoolRow = {
 };
 export type FullSetUsage = { id: string; name: string; status: string; problemIds: string[]; candidateKeys: string[]; label?: string };
 
-export const subjectOfSetId = (id: string) => (id.startsWith("BC") ? "ap_calculus_bc" : "ap_calculus_ab");
-export const defaultDraftName = (setId: string) => `AP Calculus ${setId.startsWith("BC") ? "BC" : "AB"} — Practice Exam ${setId.slice(2)}`;
+/** 세트 ID 접두 → AP 과목. 모르는 접두는 AB 로 가정하지 않고 거부한다(2026-10-12: 통계 등 새 과목이 AB 로 오판되던 문제). */
+export const SET_PREFIX_SUBJECT: Record<string, string> = { AB: "ap_calculus_ab", BC: "ap_calculus_bc", ST: "ap_statistics" };
+export const SET_ID_RE = /^(AB|BC|ST)\d$/;
+export const subjectOfSetIdOrNull = (id: string): string | null => SET_PREFIX_SUBJECT[id.slice(0, 2)] ?? null;
+export function subjectOfSetId(id: string): string { const s = subjectOfSetIdOrNull(id); if (!s) throw new Error(`알 수 없는 세트 ID 접두: ${id}`); return s; }
+const SUBJECT_TITLE: Record<string, string> = { ap_calculus_ab: "AP Calculus AB", ap_calculus_bc: "AP Calculus BC", ap_statistics: "AP Statistics" };
+export const defaultDraftName = (setId: string) => `${SUBJECT_TITLE[subjectOfSetId(setId)]} — Practice Exam ${setId.slice(2)}`;
 
 let poolCache: Item[] | null = null;
 /** 구조 묶음(structure-groups.json) 기준 문항군까지 반영한 화면 증거 보유 재고. 프로세스당 한 번만 계산한다. */
@@ -37,12 +42,14 @@ export function planDraftSet(o: {
   setId: string; keys: SetKeys; hasVirtual: boolean; name?: string; pool: PoolRow[]; existingFullSets: FullSetUsage[]; publishedKeys: Set<string>; stock: Item[]; floor?: number;
 }): DraftPlan {
   const problems: string[] = [];
-  const subject = subjectOfSetId(o.setId); const name = o.name?.trim() || defaultDraftName(o.setId);
-  const need = Object.fromEntries(apSectionLayout(subject).map((s) => [s.key, s.count]));
+  const subjectKnown = subjectOfSetIdOrNull(o.setId); const subject = subjectKnown ?? "unknown";
+  const name = o.name?.trim() || (subjectKnown ? defaultDraftName(o.setId) : o.setId);
+  const need = Object.fromEntries((subjectKnown ? apSectionLayout(subject) : []).map((s) => [s.key, s.count]));
   const g = (k: keyof SetKeys) => o.keys[k] ?? [];
   const composition = { mcA: g("mcA").length, mcB: g("mcB").length, frqA: g("frqA").length, frqB: g("frqB").length, mcTotal: g("mcA").length + g("mcB").length, frqTotal: g("frqA").length + g("frqB").length };
-  if (!/^(AB|BC)\d$/.test(o.setId)) problems.push(`세트 이름 형식 오류: ${o.setId}`);
+  if (!SET_ID_RE.test(o.setId)) problems.push(`세트 이름 형식 오류: ${o.setId}`);
   else if (o.setId === "AB1") problems.push("AB#1 은 게시 고정 세트라 저장하지 않습니다.");
+  if (subjectKnown === "ap_statistics") problems.push("통계 풀 세트 초안 조립은 아직 지원하지 않습니다(MC 42 = 단독 36 + 3문항 공유 세트 2개; 후속 작업 — 구성 규칙은 lib/ap-exam/full-set-rules.ts).");
   if (o.hasVirtual) problems.push("이 배정에는 가상 문항(재고에 없는 칸)이 있어 저장하지 않습니다.");
   for (const k of Object.keys(SECTION) as (keyof SetKeys)[]) if (g(k).length !== need[SECTION[k]]) problems.push(`공식 구성 불일치 ${SECTION[k]}: ${g(k).length}/${need[SECTION[k]]}`);
   const all = (Object.keys(SECTION) as (keyof SetKeys)[]).flatMap((k) => g(k).map((key) => ({ key, sec: k })));
@@ -63,7 +70,7 @@ export function planDraftSet(o: {
   const stockByKey = new Map(o.stock.map((c) => [c.key, c]));
   const blocked = new Set([...o.publishedKeys, ...o.existingFullSets.flatMap((s) => s.candidateKeys)]);
   const pick = (ks: string[]) => ks.map((k) => { const c = stockByKey.get(k); if (!c) problems.push(`재고(화면 증거 보유)에 없는 키 ${k}`); return c; }).filter((c): c is Item => !!c);
-  const spec: Spec = { id: o.setId, subj: o.setId.startsWith("BC") ? "bc" : "ab", floor: o.floor ?? 10 };
+  const spec: Spec = { id: o.setId, subj: subjectKnown === "ap_calculus_bc" ? "bc" : "ab", floor: o.floor ?? 10 };
   const res: SetResult = { id: o.setId, mcA: pick(g("mcA")), mcB: pick(g("mcB")), frqA: pick(g("frqA")), frqB: pick(g("frqB")), virtual: [], frqVirtual: [] };
   problems.push(...verifyAssignment([spec], [res], blocked).map((v) => `독립 검증: ${v}`));
 
@@ -82,5 +89,5 @@ export function planDraftSet(o: {
     const sk = SECTION[sec]; pos[sk] = (pos[sk] ?? 0) + 1;
     items.push({ sectionKey: sk, position: pos[sk], problemId: p.problem_id, versionId: p.problem_version_id, satDomain: `ap:${r.keyword_code}`, difficulty: DIFF[r.difficulty_provisional ?? ""] ?? "medium", candidateKey: key });
   }
-  return { ok: problems.length === 0, setId: o.setId, subject, name, problems, composition, items, layout: { sections: apSectionLayout(subject) } };
+  return { ok: problems.length === 0, setId: o.setId, subject, name, problems, composition, items, layout: { sections: subjectKnown ? apSectionLayout(subject) : [] } };
 }

@@ -2,7 +2,7 @@
 // docs/ap/generation-guides/<과목>.md 가 사람이 읽는 본문이고, 이 설정이 파이프라인(프롬프트·범위·검증)의 단일 출처다.
 export type UnitScope = { unit: string; title: string; inScope: string[]; outOfScope: string[]; mcWeight: [number, number] };
 export type SkillRule = { code: string; name: string; mc: boolean; frq: boolean; designRules: string[]; banned: string[] };
-export type ArchetypeSpec = { id: string; topic: string; skill: string; calculator: "required" | "not_allowed"; stimulus: string; verifiedBy: string[]; misconceptions: string[] };
+export type ArchetypeSpec = { id: string; topic: string; skill: string; calculator: "required" | "not_allowed" | "allowed"; stimulus: string; verifiedBy: string[]; misconceptions: string[] };
 export type FrqTemplateSpec = { id: string; template: string; topic: string; extraTopics: string[]; skill: string; calculator: "required" | "not_allowed"; parts: string; points: number; verifiedBy: string[] };
 export type SubjectGuide = {
   subject: string; guideDoc: string; examStructure: string;

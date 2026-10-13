@@ -1,0 +1,112 @@
+[
+ {
+  "cellId": "ap_statistics-m01",
+  "archetype": "st_hist_median_interval",
+  "kind": "mc",
+  "unitCode": "1",
+  "topic": "1.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_statistics-m02",
+  "archetype": "st_box_outlier_fence",
+  "kind": "mc",
+  "unitCode": "1",
+  "topic": "1.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_statistics-m03",
+  "archetype": "st_z_compare",
+  "kind": "mc",
+  "unitCode": "1",
+  "topic": "1.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_statistics-m04",
+  "archetype": "st_cond_prob_table",
+  "kind": "mc",
+  "unitCode": "2",
+  "topic": "2.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_statistics-m05",
+  "archetype": "st_tree_bayes",
+  "kind": "mc",
+  "unitCode": "2",
+  "topic": "2.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_statistics-m06",
+  "archetype": "st_binomial_exact",
+  "kind": "mc",
+  "unitCode": "2",
+  "topic": "2.10",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_statistics-m07",
+  "archetype": "st_normal_area",
+  "kind": "mc",
+  "unitCode": "2",
+  "topic": "2.11",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_statistics-m08",
+  "archetype": "st_z_test_decision",
+  "kind": "mc",
+  "unitCode": "3",
+  "topic": "3.7",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_statistics-m09",
+  "archetype": "st_t_test_stats",
+  "kind": "mc",
+  "unitCode": "4",
+  "topic": "4.5",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_statistics-m10",
+  "archetype": "st_two_sample_t",
+  "kind": "mc",
+  "unitCode": "4",
+  "topic": "4.7",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "candidates": 1,
+  "extraTopics": []
+ }
+]

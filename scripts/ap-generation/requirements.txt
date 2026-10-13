@@ -1,0 +1,5 @@
+# AP 생성 스크립트용 Python 환경(2026-10-12). 설정: python3 -m venv .venv-ap && .venv-ap/bin/pip install -r scripts/ap-generation/requirements.txt (Python 3.12 이상 필수: 원형 코드가 f-string 안 역슬래시 사용; 검증 3.14.7)
+numpy==2.5.4
+scipy==1.18.1
+sympy==1.14.0
+mpmath==1.3.0

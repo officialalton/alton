@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { execFileSync } from "node:child_process";
 import { gateBioFrq } from "./bio-frq-checks";
-const PY = process.env.AP_PY ?? "/private/tmp/claude-501/-Users-jangjiman-Developer-ALTON/d05b2ffe-5d6e-4058-a909-5e3b8827cbe2/scratchpad/apvenv/bin/python";
+import { AP_PYTHON as PY } from "../../scripts/ap-generation/py";
 const gen = (a: string, seed: number) => JSON.parse(execFileSync(PY, ["-B", "registry.py", "batch", a, "1", String(seed)], { cwd: "scripts/ap-generation/archetypes", encoding: "utf-8" }))[0];
 const topics = new Set(["8.1", "3.2", "3.5"]);
 const ok = (() => { try { execFileSync(PY, ["--version"]); return true; } catch { return false; } })(); const d = ok ? describe : describe.skip;

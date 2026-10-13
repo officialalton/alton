@@ -19,7 +19,9 @@ export const NOT_ASSESSED_MC: Record<string, string[]> = {
   ap_calculus_ab: ["1.A", "1.B", "3.A", "4.A", "4.B", "4.C", "4.D", "4.E"],
   ap_microeconomics: ["4.A", "4.B", "4.C"],
 };
-export const OPTION_COUNT: Record<string, number> = { ap_calculus_ab: 4, ap_biology: 4, ap_microeconomics: 5 };
+export const OPTION_COUNT: Record<string, number> = { ap_calculus_ab: 4, ap_biology: 4, ap_microeconomics: 5, ap_statistics: 4 };
+/** 수식 구분자 규칙이 적용되는 수학·통계 과목(달러 기호가 통화인 Micro 는 제외). 통계는 정수·확률·통계량을 모두 $...$ 안에 쓴다. */
+const MATH_SUBJECT = /^ap_(calculus|statistics)/;
 
 const NARRATED = /\b(because|incorrectly|mistake|forgets|forgot|ignores|assumes|wrongly|error)\b/i;
 const LETTER_REF = /\b(?:[Oo]ption|[Cc]hoice|[Aa]nswer)s?\s+\(?[A-E]\)?(?![a-z])|(?:^|\s)\([A-E]\)(?=\s|$|[.,;])/;
@@ -45,6 +47,24 @@ export function distractorsMissing(p: McPack, e: string): number {
   return dis.length - Math.max(anchored, bySentence);
 }
 
+/** AP Statistics MC 전용 결정적 규칙. 계산기 허용 과목이라 "계산만 묻는 문항"은 설계도 judgment_demand(blueprint.ts)로 막고, 여기서는 표기 관례를 본다. */
+/** 값(소수·구간·쌍)만으로 이루어진 단일 수식 선택지 — 문장형 선택지 안의 자료 수치는 반올림 관례 대상이 아니다. */
+const DECIMAL_OPT = /^\$[^$]*\d*\.\d{2,}[^$]*\$$/;
+export function statsMcRules(p: McPack): string[] {
+  const r: string[] = [];
+  // 소수 선택지가 둘 이상이면 반올림 관례를 본문이 밝혀야 한다(중간값 반올림 때문에 답이 달라지지 않게)
+  if (p.options.filter((o) => DECIMAL_OPT.test(o.text)).length >= 2 && !/\b(round(ed|ing)?|decimal places?|nearest (tenth|hundredth|thousandth)|three decimal)\b/i.test(p.stem)) r.push("rounding_convention_not_stated");
+  // 값으로 구별하는 문항: 선택지 값 간격이 마지막 자릿수 단위의 2배 미만이면 반올림 차이로 정답과 오답이 구별되지 않는다
+  const vals = p.options.map((o) => (o.value === null ? null : Number(o.value)));
+  if (vals.every((v) => v !== null && Number.isFinite(v))) {
+    const decs = Math.max(...p.options.map((o) => (o.text.replace(/\$/g, "").split(".")[1] ?? "").replace(/[^0-9].*$/, "").length));
+    const step = Math.pow(10, -decs);
+    const s = (vals as number[]).slice().sort((a, b) => a - b);
+    if (decs > 0) for (let i = 1; i < s.length; i++) if (s[i] - s[i - 1] < step * 2 - 1e-12) { r.push("options_too_close_for_rounding"); break; }
+  }
+  return r;
+}
+
 export function gateMc(subject: string, p: McPack): string[] {
   const r: string[] = [];
   const want = OPTION_COUNT[subject] ?? 4;
@@ -65,11 +85,13 @@ export function gateMc(subject: string, p: McPack): string[] {
   if (lens[p.key_index] === Math.max(...lens) && lens[p.key_index] > mean * 1.6 && lens[p.key_index] > 18) r.push("key_much_longer");
   if (Math.min(...lens) > 0 && Math.max(...lens) / Math.min(...lens) > 6 && Math.max(...lens) > 30) r.push("options_not_parallel");
   if (p.stimulus.kind === "table" && !/\b(table|data|values|shown|results?|above|below|given|presented|following|information|trial|measurements?)\b/i.test(p.stem)) r.push("stem_does_not_reference_table");
+  if (p.stimulus.kind === "stat_chart" && !/\b(table|data|shown|above|below|given|presented|following|histogram|boxplot|dotplot|dot plot|scatterplot|plot|graph|output|curve|diagram|tree|chart|display|figure|summar\w+)\b/i.test(p.stem)) r.push("stem_does_not_reference_figure");
   if (p.explanation_en && LETTER_REF.test(p.explanation_en)) r.push("explanation_references_option_letter");
   if ((NOT_ASSESSED_MC[subject] ?? []).includes(p.skill)) r.push("skill_not_assessed_in_mc");
   if (!(p.est_seconds >= 30 && p.est_seconds <= 150)) r.push("est_seconds_out_of_range");
   if (p.stem.split(/\s+/).length > 120) r.push("stem_too_long");
-  if (/^ap_calculus/.test(subject)) { // 달러 기호가 통화인 과목(Micro)에는 적용하지 않는다
+  if (subject === "ap_statistics") r.push(...statsMcRules(p)); // 통계 전용: 반올림 관례·구별 가능한 수치 선택지
+  if (MATH_SUBJECT.test(subject)) { // 달러 기호가 통화인 과목(Micro)에는 적용하지 않는다
     if (p.stem.replace(/\\\$/g, "").split("$").length % 2 === 0) r.push("unbalanced_math_delimiters");
     if (p.options.some((o) => o.text.replace(/\\\$/g, "").split("$").length % 2 === 0)) r.push("unbalanced_math_delimiters");
   }

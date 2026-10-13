@@ -6,6 +6,7 @@
 
 import { esc, f, FONT, labelWidth, type FigureIssue, type Pt } from "./_layout";
 import { renderApDiagram, validateApDiagram, type ApDiagramSpec } from "./ap-diagrams";
+import { renderApStatChart, validateApStatChart, type ApStatChartSpec } from "./ap-stat-chart";
 
 export type ApAxis = { label: string; min: number; max: number; step?: number };
 export type ApSeries = {
@@ -49,8 +50,8 @@ export type ApTableSpec = {
 };
 /** 같은 문항의 표가 둘 이상(Bio 유전 자료 등) — 위에서 아래로 쌓는다. facts=true 이면 "Given information" 값 목록(표가 아닌 조건·식). */
 export type ApTableSetSpec = { type: "ap_table_set"; title?: string; tables: ApTableSpec[]; notes?: string[] };
-export type ApSpec = ApGraphSpec | ApTableSpec | ApDiagramSpec | ApTableSetSpec;
-export const AP_FIGURE_TYPES: readonly string[] = ["ap_graph", "ap_table", "ap_diagram", "ap_table_set"];
+export type ApSpec = ApGraphSpec | ApTableSpec | ApDiagramSpec | ApTableSetSpec | ApStatChartSpec;
+export const AP_FIGURE_TYPES: readonly string[] = ["ap_graph", "ap_table", "ap_diagram", "ap_table_set", "ap_stat_chart"];
 export const isApSpec = (s: { type: string }): s is ApSpec => AP_FIGURE_TYPES.includes(s.type);
 
 const isNum = (n: unknown): n is number => typeof n === "number" && Number.isFinite(n);
@@ -58,6 +59,7 @@ const isPt = (p: unknown): p is Pt => Array.isArray(p) && p.length === 2 && isNu
 
 export function validateAp(s: Record<string, unknown>): { ok: true; spec: ApSpec } | { ok: false; error: string } {
   if (s.type === "ap_diagram") return validateApDiagram(s);
+  if (s.type === "ap_stat_chart") return validateApStatChart(s);
   if (s.type === "ap_table_set") {
     if (!Array.isArray(s.tables) || s.tables.length < 2 || s.tables.length > 6) return { ok: false, error: "ap_table_set 은 tables 2~6개가 필요합니다." };
     for (const t of s.tables as Record<string, unknown>[]) { const v = validateAp({ ...t, type: "ap_table" }); if (!v.ok) return v; }
@@ -264,6 +266,7 @@ export function renderApTableSet(spec: ApTableSetSpec): { markup: string; alt: s
 export function renderAp(spec: ApSpec): { svg: string; alt: string; issues: FigureIssue[] } {
   if (spec.type === "ap_table_set") { const r = renderApTableSet(spec); return { svg: r.markup, alt: r.alt, issues: r.issues }; }
   if (spec.type === "ap_diagram") return renderApDiagram(spec);
+  if (spec.type === "ap_stat_chart") return renderApStatChart(spec);
   if (spec.type === "ap_table") { const r = renderApTable(spec); return { svg: r.markup, alt: r.alt, issues: r.issues }; }
   return renderApGraph(spec);
 }
@@ -272,7 +275,7 @@ export function renderAp(spec: ApSpec): { svg: string; alt: string; issues: Figu
 export function lintAp(spec: ApSpec, _passage: string): FigureIssue[] {
   void _passage;
   const out: FigureIssue[] = [];
-  if (spec.type === "ap_diagram") return out;
+  if (spec.type === "ap_diagram" || spec.type === "ap_stat_chart") return out;
   if (spec.type === "ap_table_set") return spec.tables.flatMap((t) => lintAp(t, _passage));
   if (spec.type === "ap_graph") {
     if (spec.series.length > 1) {

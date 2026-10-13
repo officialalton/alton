@@ -20,6 +20,8 @@ export type NewVersionContext = {
   usedByOtherExams: Set<string>;
   /** 교체 후보의 메타(problemId → SlotItem 메타). */
   replacements: Map<string, Omit<SlotItem, "section" | "position">>;
+  /** 후보 키 → 그 후보의 문항 수(공유 자료 세트는 3). 없으면 모두 1 로 본다. */
+  setSizes?: Map<string, number>;
 };
 
 /** 교체를 적용한 최종 문항 목록과 조립 규칙 위반 목록. 위반이 없으면 issues 는 빈 배열. */
@@ -42,6 +44,21 @@ export function checkNewVersionComposition(source: SlotItem[], swaps: SwapReques
     }
     if (ctx.apLabel === "full_practice" && ctx.usedByOtherExams.has(s.problemId)) issues.push(`overlap_${s.problemId}`);
   }
+  // 공유 자료 세트(같은 후보 키가 둘 이상의 MC 슬롯에 있음 — 통계 3문항 세트): 세트는 통째로, 같은 교체 후보 하나로만 바꾼다.
+  const setSlots = new Map<string, SlotItem[]>();
+  for (const i of source) if (i.kind === "mc" && i.candidateKey) setSlots.set(i.candidateKey, [...(setSlots.get(i.candidateKey) ?? []), i]);
+  for (const [k, slots] of setSlots) {
+    if (slots.length < 2) continue;
+    const swapped = slots.filter((x) => next.get(`${x.section}:${x.position}`) !== x);
+    if (!swapped.length) continue;
+    if (swapped.length !== slots.length) { issues.push(`set_partial_swap_${k}_${swapped.length}/${slots.length}`); continue; }
+    const reps = new Set(slots.map((x) => next.get(`${x.section}:${x.position}`)!.candidateKey));
+    if (reps.size !== 1 || reps.has(null)) issues.push(`set_replacement_split_${k}`);
+  }
+  // 반대로 세트 후보(문항 수 > 1)를 일부 슬롯에만 넣으면 세트가 깨진다.
+  const addedKeys = new Map<string, number>();
+  for (const s of swaps) { const rep = ctx.replacements.get(s.problemId); if (rep?.kind === "mc" && rep.candidateKey) addedKeys.set(rep.candidateKey, (addedKeys.get(rep.candidateKey) ?? 0) + 1); }
+  for (const [k, n] of addedKeys) { const size = ctx.setSizes?.get(k) ?? 1; if (n !== size) issues.push(`set_replacement_incomplete_${k}_${n}/${size}`); }
   const items = [...next.values()];
   const ids = items.map((i) => i.problemId);
   if (new Set(ids).size !== ids.length) issues.push("duplicate_problem");
@@ -51,9 +68,10 @@ export function checkNewVersionComposition(source: SlotItem[], swaps: SwapReques
     const its = items.filter((i) => i.kind === kind);
     if (!its.length) continue;
     const cap = kind === "mc" && ctx.apLabel === "full_practice" ? FULL_EXAM_FAMILY_CAP : policyFor(kind, its.length).maxPerFamily;
-    const fam = new Map<string, number>();
-    for (const i of its) { const f = i.family ?? i.candidateKey ?? i.problemId; fam.set(f, (fam.get(f) ?? 0) + 1); }
-    for (const [f, n] of fam) if (n > cap) issues.push(`family_cap_${kind}_${f}_${n}/${cap}`);
+    // 공유 자료 세트는 후보 키가 같은 문항들을 한 묶음(한 문항군 기여 1)으로 센다.
+    const fam = new Map<string, Set<string>>();
+    for (const i of its) { const f = i.family ?? i.candidateKey ?? i.problemId; (fam.get(f) ?? fam.set(f, new Set()).get(f)!).add(i.candidateKey ?? i.problemId); }
+    for (const [f, units] of fam) if (units.size > cap) issues.push(`family_cap_${kind}_${f}_${units.size}/${cap}`);
   }
   // 단원 비중(MC).
   if (ctx.unitBounds) {

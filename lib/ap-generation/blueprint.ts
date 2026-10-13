@@ -16,6 +16,8 @@ export type Blueprint = {
   structure: string; response_mode: string; calculator: "required" | "not_allowed" | "allowed" | "na";
   key_conditions: KeyCondition[]; material: { type: string; must_include: string[] }; misconceptions: Misconception[];
   verification: { independent_path: string; method: string }; parts?: BlueprintPart[]; total_points?: number; experiment?: BioExperiment; model?: MicroModel;
+  /** AP Statistics: 문항이 요구하는 판단(계산기 허용 과목이므로 계산만 묻는 문항을 막는다). */
+  judgment_demand?: string[];
 };
 export type BlueprintContext = { skills: Set<string>; topicUnit: Map<string, string> }; // 공식 CED 스킬 코드, 토픽 코드 → 단원
 export type BlueprintIssue = { code: string; message: string };
@@ -56,6 +58,7 @@ export function validateBlueprint(bp: Partial<Blueprint> | null | undefined, ctx
     }
     if (bp.total_points !== undefined && bp.total_points !== total) add("total_points_mismatch", `총점 ${bp.total_points} ≠ 파트 합 ${total}`);
   }
+  if (bp.subject === "ap_statistics") statsRules(bp, add);
   if (bp.subject === "ap_biology") bioExperimentRules(bp, ctx, add);
   if (bp.subject === "ap_microeconomics") microModelRules(bp, add);
   return out;
@@ -86,4 +89,13 @@ function microModelRules(bp: Partial<Blueprint>, add: (c: string, m: string) => 
   if (!(m.held_constant ?? []).length) add("micro_held_constant", "고정한 조건 필요");
   if (!(m.checks ?? []).length) add("micro_checks", "검증 항목(균형·곡선·계산) 필요");
   if (!m.key_assumptions_id || m.key_assumptions_id !== m.explanation_assumptions_id) add("micro_assumptions_mismatch", "키와 해설이 같은 가정(assumptions_id)을 써야 한다");
+}
+
+/** AP Statistics(계산기 전 섹션 허용): 문항은 절차 선택·조건 확인·해석·주장 정당화·표현 읽기 중 하나 이상의 판단을 요구해야 한다. 계산값 판정은 다른 판단과 함께일 때만 인정한다. */
+export const STATS_JUDGMENTS = ["procedure_choice", "condition_check", "interpretation", "claim_justification", "representation_reading", "calculated_value_decision"] as const;
+function statsRules(bp: Partial<Blueprint>, add: (c: string, m: string) => void) {
+  const j = bp.judgment_demand;
+  if (!Array.isArray(j) || !j.length) return add("judgment_demand_missing", "Statistics 설계도에는 judgment_demand(요구 판단) 필요");
+  if (j.some((x) => !(STATS_JUDGMENTS as readonly string[]).includes(x))) return add("bad_judgment_demand", `judgment_demand 값은 ${STATS_JUDGMENTS.join("/")} 중에서`);
+  if (j.every((x) => x === "calculated_value_decision")) add("calculation_only_item", "계산값만 묻는 문항(계산기 허용 과목) — 절차 선택·조건 확인·해석·표현 읽기 중 하나가 더 필요");
 }
