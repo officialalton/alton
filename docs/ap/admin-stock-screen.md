@@ -37,6 +37,13 @@
 ## 작업 이력
 `ap_stock_admin_runs`(마이그레이션 490): 누가·언제·무엇을·대상 ref·dry-run/execute·건수·계획 해시·결과(ok/refused/error). 서버(service role)만 INSERT, 관리자 SELECT, UPDATE/DELETE 없음. 미리보기·점검·거부·오류도 기록한다.
 
+## 출시 차단·검증 현황 패널 (2026-10-12, 읽기 전용)
+적재 점검 아래의 `ApLaunchGatePanel`. 서버 액션 `apLaunchGateStatusAction`(`requireAdmin`, 쓰기·감사 기록 없음) → `lib/ap-admin/launch-gate.ts`.
+- **표시**: 비보관 AP 세트(풀·부분, 초안 포함) 전부에 대해 세트별 문항 수·`ap_launch_ready_v` 통과 수·차단 결함(미해결 `ap_launch_blockers` + 미해결 `wrong_key`/`flawed_problem` 신고)·열린 오류 신고 수, **출시 게이트 판정**(문항 전부가 `ap_launch_ready_v` 에 있고 문항이 1개 이상이면 "통과 가능", 아니면 "차단 — 문항 N건 미충족"). 판정은 게이트 충족 여부일 뿐 launch 승격·공개는 하지 않는다. 세트마다 미충족 문항을 펼쳐 섹션·번호·후보 키·사유(검수 환경 미게시 / 자동 게이트 미통과 / 렌더·화면 검증 없음 / 생성기 결함 플래그 / 오답·문항 결함 신고 / launch 차단 결함 분류 / 후보 연결 없음 / 일반 신고는 "차단 아님"으로 표기)를 보여 준다. 상단 합계: 통과 가능 세트 수·미충족 문항·차단 결함·열린 신고·전체 대장 미해결 수.
+- **쿼리(읽기 6회, 각 1000행 초과 시만 쪽 나눔)**: ① `mock_exam_sets`(AP·비보관) ② `mock_exam_set_items`(해당 세트) ③ `ap_candidate_problems` ④ `ap_item_review_status_v` ⑤ `ap_launch_ready_v` ⑥ `ap_launch_blockers`(resolved_at null). ③~⑥ 은 키 목록으로 쪼개지 않고 전체를 한 번에 읽어(수백 행) 요청 수를 일정하게 둔다. 클라이언트 추가 요청은 화면 진입·새로고침 때 액션 1회뿐. 준비 여부는 뷰 정의를 복제하지 않고 `ap_launch_ready_v` 포함 여부로 판정한다.
+- **상태**: 로딩·빈("비보관 AP 세트가 없습니다.")·오류(`role=alert`)·세트별 접이식 목록(키보드 조작 가능), 표는 가로 스크롤.
+- **테스트**: `lib/ap-admin/launch-gate.test.ts`(사유·판정·합계, 가짜 클라이언트로 읽기 전용·쿼리 6회 증명 — insert/update/upsert/delete/rpc 호출 시 실패), `ApLaunchGatePanel.test.tsx`, `admin-action-auth-guard.test.ts`(가드 누락 자동 검사).
+
 ## 아직 하지 않은 것
 - 격리 스택 DB 통합 테스트 실행(작성만, 다른 세션의 격리 스택과 포트 충돌로 미실행 — 아래 보고 참고), Preview UAT, 마이그레이션 490·491 원격 적용.
 - 서버 ILP 실행, 파일 업로드, 게시(공개) 기능, lesson 용도 변환, 프로덕션 지원.
