@@ -38,6 +38,8 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "stats-s2a", title: "AP Statistics S2-a (단독 15 + 공유 세트 2 + FRQ 2)", itemsFile: "stats-s2a-items.json", loadLabel: "stats-s2a-2026-10-12", supplement: true, passKeysFile: "stats-s2a-pass-keys.json", evidenceFile: "evidence-stats-s2a.json" },
   // 2026-10-12 AP Statistics S2-b(docs/ap/statistics-s2b-report.md): 첫 풀 세트 마무리 — 단독 12 + 공유 세트 2(이항, 같은 원형 예비 1) + FRQ 6 후보(Q1·Q2·Q4 각 2), 세 런(stats-s2b-a/b/c)이 한 증거 파일을 공유한다.
   { id: "stats-s2b", title: "AP Statistics S2-b (단독 12 + 공유 세트 2 + FRQ 6)", itemsFile: "stats-s2b-items.json", loadLabel: "stats-s2b-2026-10-12", supplement: true, passKeysFile: "stats-s2b-pass-keys.json", evidenceFile: "evidence-stats-s2b.json" },
+  // 2026-10-12 AP Statistics S3-a(docs/ap/statistics-s3a-report.md): 다단계 신규 MC 원형 10개 x 시드 2 = 단독 20 후보.
+  { id: "stats-s3a", title: "AP Statistics S3-a (다단계 단독 20)", itemsFile: "stats-s3a-items.json", loadLabel: "stats-s3a-2026-10-12", supplement: true, passKeysFile: "stats-s3a-pass-keys.json", evidenceFile: "evidence-stats-s3a.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 

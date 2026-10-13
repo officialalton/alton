@@ -1,11 +1,11 @@
 # AP 그림 렌더링 게이트 결과
 
-생성: 2026-10-13T05:21:40.937Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1246행)
+생성: 2026-10-13T06:15:23.320Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1266행)
 
 ## 전체
 
-- 전체 1246행: 통과 732 / 실패 1 / 해당 없음(그림·표 없음) 513
-- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 752행: 통과 375 / 실패 0 / 해당 없음 377
+- 전체 1266행: 통과 744 / 실패 1 / 해당 없음(그림·표 없음) 521
+- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 769행: 통과 384 / 실패 0 / 해당 없음 385
 
 ## 유형별(렌더 유형)
 
@@ -25,15 +25,15 @@
 | ap_stat_chart:dot_plot | 2 | 2 | 0 | 0 |
 | ap_stat_chart:histogram | 1 | 1 | 0 | 0 |
 | ap_stat_chart:output | 5 | 5 | 0 | 0 |
-| ap_stat_chart:scatter | 4 | 4 | 0 | 0 |
-| ap_stat_chart:table | 4 | 4 | 0 | 0 |
-| ap_stat_chart:tree | 1 | 1 | 0 | 0 |
-| ap_stat_chart:two_way | 4 | 4 | 0 | 0 |
+| ap_stat_chart:scatter | 8 | 8 | 0 | 0 |
+| ap_stat_chart:table | 8 | 8 | 0 | 0 |
+| ap_stat_chart:tree | 3 | 3 | 0 | 0 |
+| ap_stat_chart:two_way | 6 | 6 | 0 | 0 |
 | ap_table | 416 | 416 | 0 | 0 |
 | ap_table:given_info | 31 | 31 | 0 | 0 |
 | ap_table:multi_panel | 29 | 29 | 0 | 0 |
 | ap_table:payoff_matrix | 8 | 8 | 0 | 0 |
-| none | 407 | 0 | 0 | 407 |
+| none | 415 | 0 | 0 | 415 |
 | none(diagram_text_only) | 1 | 0 | 0 | 1 |
 | text | 105 | 0 | 0 | 105 |
 
@@ -45,13 +45,13 @@
 | ap_biology | 200 | 199 | 0 | 1 |
 | ap_microeconomics | 172 | 162 | 0 | 10 |
 | ap_calculus_bc | 136 | 28 | 0 | 108 |
-| ap_statistics | 59 | 31 | 0 | 28 |
+| ap_statistics | 79 | 43 | 0 | 36 |
 
 ## 그림 필요 분류(그림이 있어야 풀리는가)
 
-- required(그림·표가 있어야 풀림): 679
+- required(그림·표가 있어야 풀림): 691
 - supporting(보조 자료, 본문에도 정보 있음): 54
-- text_only(본문만으로 충분): 513
+- text_only(본문만으로 충분): 521
 
 ## 실패 사유 코드
 
