@@ -1,0 +1,490 @@
+[
+ {
+  "key": "ap_statistics-m01-k0-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The slope is 5.53 points per hour, and it describes the predicted score, not the actual score.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard slope-interpretation item reading computer output. The key is unique, the distractors each encode a named misinterpretation, and the stimulus is complete. Within scope for 5.3 and skill 4.D, with a suitable load.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step interpretation of the slope from computer output. The student locates the Hours coefficient and picks the correct wording over three common misinterpretations: a percent, 'exactly' rather than predicted, and reversed variables. No computation is needed and the concept is foundational. The extra output columns are a minor distractor, and the item does not require inference on the slope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Predicted score = 46.40 + 5.53(6) = 79.58, which rounds to 79.6.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "79.6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 80 seconds, has low reading load and four parallel numeric options, and is consistent with a calculator-allowed exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean prediction-from-computer-output question with a correct key (79.6), well-motivated distractors and complete stimulus data. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read intercept and slope from computer output and substitute x=6 into the regression equation: 46.40 + 5.53(6) = 79.58 ≈ 79.6. Single step, minimal arithmetic, no interpretation or condition checking. The only mild demand is identifying the right coefficients in the output; distractors are swapped or sign-error results.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "r = sqrt(R-sq) = sqrt(0.49) = 0.70, sign positive since slope 5.53 > 0.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.70"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item asks for r from R-Sq (49.0%) and the positive slope (5.53), so r = 0.70. This is a standard Topic 5.2 computer-output task. The key is unique. The distractors are r², the wrong sign, and half of r, each a distinct error. The stimulus data is complete and the rounding is stated. The task is short and fits the exam's time and calculator expectations.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item targets correlation from computer output, which is within Topic 5.2 and skill 3.B. It does not use inference for a slope; the T and P columns appear in the output but are not needed."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "r = +sqrt(0.49) = 0.70, with the sign taken from the positive slope. No other option is defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The output table has the Coef and R-Sq entries the item needs. The stem states two-decimal rounding. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception (r², wrong sign, halved r), and the explanation addresses each one. The \"halved r\" distractor is weak but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task takes about 60 to 85 seconds with a light reading load. The calculator is allowed but barely needed, which is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read R-Sq from computer output, take the square root to get |r| = 0.70, and use the positive slope to choose the sign. This requires one representation change and a few reasoning steps with trivial arithmetic. Distractors target common errors (r² reported as r, wrong sign). It is a typical AP-level item with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "For each additional year of age, the predicted selling price decreases by about 2.35 thousand dollars",
+     "brief_reasoning": "The slope is -2.35, measured in thousands of dollars per year, and it describes the predicted value, not an exact one.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Slope interpretation from computer output; fits 5.3 and 4.D. T and P columns are incidental and not needed."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option 2 (index 1) is the unique correct interpretation: predicted, per year, in thousands of dollars, negative."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Output table complete with title, columns, and rows. Variables match the stem and units are stated in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (roles reversed, percent, exact change); each wrong option is explained. No length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no arithmetic, typical of official items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard slope-interpretation item with a unique key, distinct misconception distractors, and a complete output stimulus. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the slope from computer output and choose the correct interpretation among standard misinterpretations (reversed variables, percent vs units, exact vs predicted). No computation, minimal reading, one representation (output table). Lower difficulty than a full-mock exam_prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Predicted price = 26.90 - 2.35(2) = 22.2 thousand dollars",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "22.2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Prediction from regression output fits 5.3/3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "22.2 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Output table complete with Coef column; rounding stated; units in stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions. Minor: swapped-coefficient result is 51.45 and added result is 24.55, so options 51.4 and 24.5 reflect truncation rather than the stated rounding; not enough to change the key."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, light calculation, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound with a unique key and a clear stimulus. The only flaw is minor: two distractor values are truncated rather than rounded from the misconception computations."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step prediction: read intercept and slope from the Coef column of computer output and substitute x=2 (26.90 - 2.35*2 = 22.2). Trivial arithmetic, no interpretation, condition checking, or extra reasoning link. Distractors are common misreads (sign error, using slope only, using the wrong coefficient). The only demand beyond substitution is knowing which output row is the intercept and which is the slope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "r = -sqrt(R^2) = -sqrt(0.81) = -0.90; negative because slope is negative.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-0.90"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 to 85 seconds and has a light reading load. The calculator is allowed but not needed. This is a typical AP item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard question on finding r from computer output. It has a unique key, a complete stimulus and distinct distractors, and it passes every criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads R-Sq from the computer output, takes the square root (0.81 -> 0.90), and assigns the negative sign from the slope. One concept, a short chain of steps, and a simple calculation. Distractors target common errors (wrong sign, reporting r^2 as r). Reading load is minimal and there are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "For each additional year of age, the predicted selling price decreases by about 1.75 thousand dollars",
+     "brief_reasoning": "The slope is -1.75, in thousands of dollars per year of age, and it describes a change in the predicted price.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Slope interpretation from regression output; topic 5.3, skill 4.D. SE/T/P columns are present but not used for inference."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option 3 is the unique correct interpretation; the others are percent, exact, or reversed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Output table is complete with Coef column; the stem gives variables and units."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions, each explained; options are parallel in length and form."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no arithmetic, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard slope interpretation from computer output with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the slope in the computer output and choose the correct interpretation among named misinterpretations (percent vs. units, \"exactly\" vs. predicted, reversed variables). No computation, short reading, and one representation (computer output). It is a foundational slope-interpretation skill, below the multi-step reasoning expected of full-mock exam items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Predicted price = 26.90 - 1.75(4) = 19.9 thousand dollars",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "19.9"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Prediction from regression output, topic 5.3 / skill 3.B. The T and P columns are unused extras but are not inference."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "19.9 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The output data is complete with the Coef column, and the rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct misconceptions and all are explained. The 25.1 value is 25.15 and its rounding is slightly loose, but it is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, a standard task."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct prediction from regression output with distinct distractors. The only flaw is minor rounding looseness in the 25.1 distractor, so I passed it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read intercept and slope from computer output, then substitute x=4 into the line: 26.90 - 1.75(4) = 19.9. One simple calculation, one representation change (output to equation). Distractors reflect common slips (sign errors, omitting the multiplication). Direct application of the concept with no interpretation or condition-checking.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "r = -sqrt(R^2) = -sqrt(0.81) = -0.90; negative because slope is negative.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-0.90"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Finding r from R-Sq and the sign of the slope is squarely Topic 5.2 and skill 3.B (calculating a summary statistic from computer output)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "r = -sqrt(0.81) = -0.90, with the sign taken from the slope of -1.75. Exactly one option matches."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The output has a title, a Predictor/Coef table, and S and R-Sq. Units and context are given in the stem and the rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are the r-squared-as-r error, the wrong sign, and halving. The halved option is weak but acceptable. The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short reading-and-interpretation task with no needless arithmetic. The options are parallel decimals."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and passes all five criteria. It has a unique key and a complete output stimulus, and it is typical of the AP Statistics multiple-choice format."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single standard procedure: read R-Sq from the output, take the square root (sqrt(0.81)=0.90), and use the negative slope to assign the sign, giving r = -0.90. The only levers are reading computer output and one sign-reasoning step. The distractors (0.81, 0.90, -0.45) correspond to common errors, but the concept depth is shallow and the arithmetic is trivial.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]
