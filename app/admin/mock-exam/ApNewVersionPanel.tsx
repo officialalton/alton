@@ -81,7 +81,7 @@ function NewVersionSection({ ov, onDone }: { ov: ApNewVersionOverview; onDone: (
             </label>
           </div>
           {!planFile && (
-            <label className="mt-2 flex flex-col gap-0.5 text-xs">직접 교체 입력(한 줄에 "섹션 위치 새 후보키", 예: ap_mc_a 12 s1-graph-ab-final:ap_calculus_ab-m01-k0)
+            <label className="mt-2 flex flex-col gap-0.5 text-xs">직접 교체 입력(한 줄에 "섹션 위치 새 후보키", 예: ap_mc_a 12 s1-graph-ab-final:ap_calculus_ab-m01-k0. 통계는 섹션 ap_mc(1–42, 3문항 세트는 13–15·31–33 중 한 칸만 적어도 세트 전체 교체) / ap_frq(1–4))
               <textarea className="min-h-20 rounded border border-grey-300 p-2 font-mono" value={manual} onChange={(e) => { setManual(e.target.value); reset(); }} />
             </label>
           )}
