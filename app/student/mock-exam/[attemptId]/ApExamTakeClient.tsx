@@ -23,6 +23,10 @@ import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import MockExamWhiteboard from "./MockExamWhiteboard";
+import FrqHandwritingPad from "./FrqHandwritingPad";
+import { useFrqInk } from "./useFrqInk";
+import { apFrqIsPaper, PAPER_FRQ_NOTICE } from "@/lib/ap-exam/frq-delivery";
+import { INK_H, inkKey, strokesToSvg, type FrqInkRow } from "@/lib/ap-exam/frq-ink";
 import GuessButton from "./GuessButton";
 import { NAV_BTN, ScrollPanes, ToolIconButton } from "./take-ui";
 import { problemText } from "@/lib/problem-figures/label-rule";
@@ -145,13 +149,27 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
       }
     }
   }, [attempt.id]);
-  const flush = useCallback(async () => {
+  const flushText = useCallback(async () => {
     const p = pending.current;
     if (!p) return;
     if (p.timer) clearTimeout(p.timer);
     pending.current = null;
     await persist(p.setItemId, p.value);
   }, [persist]);
+  // 종이 FRQ 과목(2026-10-13): 파트별 손글씨. 저장 실패 처리(서버 시계 만료 → 섹션 잠금)는 타이핑 저장과 같다.
+  const paperFrq = apFrqIsPaper(attempt.apSubject);
+  const onInkStatus = useCallback((s: "saving" | "saved" | "error", err?: string) => {
+    setStatus(s);
+    if (s !== "error") { setError(null); return; }
+    setError(err ?? "Could not save your handwriting.");
+    if (err && /Time is up/i.test(err)) {
+      setLocked((l) => ({ ...l, [sectionRef.current]: true }));
+      if (sectionRef.current === finalKeyRef.current) void settleApAttemptAction(attempt.id).then((x) => { if (x.ok && x.value.attempt) setSubmittedAttempt(x.value.attempt); });
+    }
+  }, [attempt.id]);
+  const { ink, heights: inkHeights, loadState: inkLoad, commit: commitInk, resize: resizeInk, flush: flushInk, hasInk } = useFrqInk(attempt.id, paperFrq && !isSubmitted, onInkStatus);
+  const flush = useCallback(async () => { await flushText(); await flushInk(); }, [flushText, flushInk]);
+  const [padOpen, setPadOpen] = useState<Record<string, boolean>>({});
   function scheduleSave(setItemId: string, value: string) {
     if (pending.current?.timer) clearTimeout(pending.current.timer);
     pending.current = { setItemId, value, timer: setTimeout(() => { void flush(); }, AUTOSAVE_MS) };
@@ -159,12 +177,15 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
   useEffect(() => () => { if (pending.current?.timer) clearTimeout(pending.current.timer); }, []);
 
   if (allItems.length === 0 || !section) return <p className="text-[13px] text-grey-500">This exam has no questions.</p>;
-  if (submittedAttempt) return <main className="mx-auto w-full max-w-4xl px-4 py-6"><h1 className="mb-4 text-[18px] font-extrabold">{submittedAttempt.examSetName}</h1><ApExamResultView attempt={submittedAttempt} /></main>;
+  if (submittedAttempt) {
+    const rows: FrqInkRow[] = Object.entries(ink).filter(([, v]) => v.length > 0).map(([k, v]) => { const i = k.lastIndexOf(":"); return { setItemId: k.slice(0, i), partLabel: k.slice(i + 1), strokeCount: v.length, previewSvg: strokesToSvg(v, inkHeights[k] ?? INK_H), boardHeight: inkHeights[k] ?? INK_H }; });
+    return <main className="mx-auto w-full max-w-4xl px-4 py-6"><h1 className="mb-4 text-[18px] font-extrabold">{submittedAttempt.examSetName}</h1><ApExamResultView attempt={submittedAttempt} handwriting={rows} /></main>;
+  }
   if (isSubmitted) return <p className="text-[13px] text-grey-500">Submitted. Open the Practice Tests tab to see your results.</p>;
 
   const subjectName = AP_SUBJECT_NAME[attempt.apSubject ?? ""] ?? "AP";
   const sectionLocked = !!locked[section.key];
-  const answered = (i: MockExamAttemptItem) => (i.format === "essay" ? Object.values(parseFrqAnswer(responses[i.setItemId] ?? "")).some((v) => v.trim() !== "") : (responses[i.setItemId] ?? "") !== "");
+  const answered = (i: MockExamAttemptItem) => (i.format === "essay" ? Object.values(parseFrqAnswer(responses[i.setItemId] ?? "")).some((v) => v.trim() !== "") || hasInk(i.setItemId) : (responses[i.setItemId] ?? "") !== "");
   const answeredCount = allItems.filter(answered).length;
   const notStartedCount = layout.filter((s) => started[s.key] === false).length;
   const calcOk = section.calculator === "allowed" || section.calculator === "required";
@@ -357,7 +378,9 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
                       </div>
                     ) : (
                       <div className="flex flex-col gap-3" data-testid="ap-frq-parts">
-                        <p className="text-[11.5px] text-grey-500">Type your answers below. For graphs or diagrams, describe the key features in words (you may sketch on paper). Your work is saved automatically.</p>
+                        {paperFrq
+                          ? <p className="rounded-lg bg-grey-50 px-3 py-2 text-[12px] text-grey-600" data-testid="frq-paper-notice">{PAPER_FRQ_NOTICE} Your work is saved automatically.</p>
+                          : <p className="text-[11.5px] text-grey-500">Type your answers below. For graphs or diagrams, describe the key features in words (you may sketch on paper). Your work is saved automatically.</p>}
                         {partsOf.map((p) => (
                           <div key={p.label}>
                             <label htmlFor={`frq-${current.setItemId}-${p.label}`} className="mb-1 block text-[13px] font-semibold">
@@ -367,6 +390,24 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
                             <textarea id={`frq-${current.setItemId}-${p.label}`} data-testid={`frq-input-${p.label}`} rows={p.mode === "calculate" ? 4 : 6}
                               value={frqValues[p.label] ?? ""} onChange={(e) => editPart(current, p.label, e.target.value)} onBlur={() => void flush()}
                               className={`w-full rounded-lg border-[1.5px] border-grey-200 px-3 py-2 text-[14px] ${p.mode === "code" ? "font-mono" : ""}`} placeholder="Type your answer" />
+                            {paperFrq && (() => {
+                              const k = inkKey(current.setItemId, p.label);
+                              const has = (ink[k]?.length ?? 0) > 0;
+                              const open = padOpen[k] ?? has;
+                              return (
+                                <div className="mt-1.5">
+                                  <button type="button" onClick={() => setPadOpen((o) => ({ ...o, [k]: !open }))} aria-expanded={open} data-testid={`frq-handwrite-${p.label}`}
+                                    className="min-h-[40px] rounded-lg border-[1.5px] border-grey-300 px-3 py-1.5 text-[12.5px] font-bold text-grey-600 md:min-h-0">
+                                    {open ? "Hide handwriting" : has ? "Show handwriting" : "Handwrite"}{has && !open ? " ✓" : ""}
+                                  </button>
+                                  {open && (inkLoad === "loading" ? <p className="mt-2 text-[12px] text-grey-500" data-testid="frq-ink-loading">Loading your handwriting…</p>
+                                    : <>
+                                        {inkLoad === "error" && <p role="alert" className="mt-2 text-[12px] text-red">Could not load earlier handwriting. You can still write; new strokes are saved.</p>}
+                                        <FrqHandwritingPad label={p.label} strokes={ink[k] ?? []} height={inkHeights[k] ?? INK_H} onChange={(next) => commitInk(current.setItemId, p.label, next)} onHeightChange={(h) => resizeInk(current.setItemId, p.label, h)} />
+                                      </>)}
+                                </div>
+                              );
+                            })()}
                           </div>
                         ))}
                       </div>

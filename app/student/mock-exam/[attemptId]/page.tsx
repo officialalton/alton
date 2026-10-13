@@ -9,6 +9,8 @@ import MockExamMstTakeClient from "./MockExamMstTakeClient";
 import MockExamResultView from "./MockExamResultView";
 import ApExamTakeClient from "./ApExamTakeClient";
 import ApExamResultView from "./ApExamResultView";
+import { apFrqIsPaper } from "@/lib/ap-exam/frq-delivery";
+import type { FrqInkRow } from "@/lib/ap-exam/frq-ink";
 
 // 고정형 SAT 모의고사 V1 — 독립 진입점(사양 4절 "학생 포털의 독립 모의고사 탭에서도 재개").
 // 수업 화면 안 진입(세션 탭)은 이번 패스에서 배선하지 않았다(최종 보고 "미완료" 참고) — 이
@@ -54,6 +56,12 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
         }
       } catch { /* 이름 없이 코드만 */ }
     }
+    // 종이 FRQ 과목의 손글씨 미리보기(RPC 1회, 획 제외). 재응시·지난 응시도 attemptId 별로 그대로 읽는다.
+    let handwriting: FrqInkRow[] = [];
+    if (isGraded && apFrqIsPaper(attempt.apSubject)) {
+      const { data } = await supabase.rpc("load_mock_exam_frq_handwriting", { p_attempt_id: attemptId, p_with_strokes: false });
+      if (Array.isArray(data)) handwriting = data as FrqInkRow[];
+    }
     // w-full: body 가 flex-col 이라 mx-auto 만 있으면 main 이 내용 최소폭(문항 번호 줄 796px)까지 늘어나 모바일에서 가로 스크롤·번호 버튼 클릭 불가가 됐다(2026-10-09 화면 점검에서 발견). *
     // 응시 중에는 SAT 응시 화면처럼 전체 화면 레이아웃(자체 위 막대에 제목·타이머가 있다). 결과는 기존 카드형 페이지.
     if (!isGraded) return <ApExamTakeClient attempt={attempt} />;
@@ -66,7 +74,7 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
           {attempt.examSetName}
           {attempt.attemptNo && (attempt.attemptTotal ?? 1) > 1 ? <span className="ml-2 text-[13px] font-semibold text-grey-500">Attempt {attempt.attemptNo}</span> : null}
         </h1>
-        <ApExamResultView attempt={attempt} attempts={attempts} topicNames={topicNames} />
+        <ApExamResultView attempt={attempt} attempts={attempts} topicNames={topicNames} handwriting={handwriting} />
       </main>
     );
   }

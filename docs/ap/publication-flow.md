@@ -193,3 +193,7 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 - 같은 규칙이 `mock_exam_create_new_version`(481)의 교체 문항 검사에도 적용된다. `ap_admin_create_draft_set`(491)는 변경 없음 — 풀 세트끼리 같은 문항 금지는 과목과 무관하게 problem_id 기준으로 계속 유지된다.
 - 응시·결과·토픽 이름·단원 안내는 세트의 `ap_subject`·문항의 `sat_domain`(`ap:<토픽>`)으로 동작하고 BC 과목에도 공통 토픽이 모두 있어 문항의 과목이 AB 여도 변경이 필요 없다.
 - 관리자 화면 미리보기(`verifyAssignment`)에 같은 이유의 검사를 추가: BC 세트에 BC 전용 주제 AB 문항, AB 세트에 BC 전용 주제 문항 거부.
+
+## FRQ 손글씨(종이 FRQ 과목, 2026-10-13, 마이그레이션 `20262100000570`)
+- 종이 FRQ 과목(AB·BC·Physics 1·Biology·Chemistry·Micro·Macro) 응시 화면은 FRQ 파트마다 "Handwrite" 패드를 제공한다(타이핑과 병행 가능). 디지털 과목(Statistics·CS A·English Language)은 UI·안내 문구 없음. 결과 화면(학생)은 내 손글씨 이미지를 내 타이핑 답 아래·참고 답안/채점 노트 위에 보여 준다.
+- 게시 흐름 영향 없음: 문항·세트·검수 단계는 바뀌지 않는다. 새 테이블 `mock_exam_frq_handwriting`(응시×문항×파트)과 RPC 2개만 추가(추가형). 상세·크기 상한·테스트는 `docs/ap/frq-handwriting.md`.

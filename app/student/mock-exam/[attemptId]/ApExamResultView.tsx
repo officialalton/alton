@@ -13,6 +13,7 @@ import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import { problemText } from "@/lib/problem-figures/label-rule";
+import { inkKey, svgDataUrl, type FrqInkRow } from "@/lib/ap-exam/frq-ink";
 
 // AP 모의고사 결과(영어 UI). MC: 정답률·섹션별·토픽별. FRQ: 내 답 + "참고 답안/채점 노트(공식 채점 아님)".
 // AP 1~5 환산 점수·FRQ 점수는 표시하지 않는다(검증 계획 승인 전). 학부모 읽기 전용 화면은 이번 범위 밖.
@@ -24,7 +25,8 @@ export function topicOf(i: MockExamAttemptItem): string {
   return (i.satDomain ?? "").replace(/^ap:/, "") || "—";
 }
 
-export default function ApExamResultView({ attempt, attempts, topicNames }: { attempt: MockExamAttemptDetail; attempts?: MockExamAttemptSummary[]; topicNames?: Record<string, string> }) {
+export default function ApExamResultView({ attempt, attempts, topicNames, handwriting }: { attempt: MockExamAttemptDetail; attempts?: MockExamAttemptSummary[]; topicNames?: Record<string, string>; handwriting?: FrqInkRow[] }) {
+  const inkByPart = useMemo(() => new Map((handwriting ?? []).filter((r) => r.previewSvg).map((r) => [inkKey(r.setItemId, r.partLabel), r.previewSvg])), [handwriting]);
   const [filter, setFilter] = useState<Filter>("all");
   const layout = attempt.sectionLayout ?? [];
   const mc = attempt.items.filter((i) => i.format === "mc");
@@ -107,6 +109,13 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
                     <div key={p.label}>
                       <div className="text-[12.5px] font-semibold"><span>({p.label}) [{p.points} pt]</span> <LearningText text={autoMathExplanation(p.prompt)} className="inline" /></div>
                       <p className="mt-1 whitespace-pre-wrap rounded border border-grey-200 bg-grey-50 px-3 py-2 text-[13px]" data-testid={`frq-answer-${p.label}`}>{parseFrqAnswer(it.response ?? "")[p.label] || "(no answer)"}</p>
+                      {inkByPart.get(inkKey(it.setItemId, p.label)) && (
+                        <figure className="mt-1.5" data-testid={`frq-handwriting-${p.label}`}>
+                          <figcaption className="mb-1 text-[11.5px] font-bold text-grey-500">Your handwritten answer</figcaption>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={svgDataUrl(inkByPart.get(inkKey(it.setItemId, p.label)) as string)} alt={`Your handwritten answer for part (${p.label})`} className="w-full max-w-xl rounded border border-grey-200 bg-white" />
+                        </figure>
+                      )}
                     </div>
                   ))}
                 </div>
