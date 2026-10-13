@@ -1,5 +1,6 @@
-import type { ArchetypeSpec, SubjectGuide } from "./types";
+import type { ArchetypeSpec, FrqTemplateSpec, SubjectGuide } from "./types";
 import graphArchetypes from "./graph-archetypes.json";
+import frqR3 from "./frq-r3.json";
 
 // AP Calculus AB 생성 가이드 설정 — 본문: docs/ap/generation-guides/calc-ab.md. 수치·키·표·루브릭 구조는 Python 원형(scripts/ap-generation/archetypes/calc_ab_*.py)이 계산한다.
 export const calcAbGuide: SubjectGuide = {
@@ -89,6 +90,8 @@ export const calcAbGuide: SubjectGuide = {
     { id: "frq_model_analysis_calc", template: "model_analysis_calc", topic: "8.1", extraTopics: ["4.1", "5.5"], skill: "1.E", calculator: "required", parts: "a average value of a model (2) / b meaning of the derivative with units (2) / c greatest value with justification (2) / d time interval above a threshold (3)", points: 9, verifiedBy: ["sympy symbolic integral", "central difference", "grid crossings and maximum"] },
     { id: "frq_piecewise_diff", template: "piecewise_function_differentiability", topic: "2.4", extraTopics: ["1.11", "2.7", "6.7"], skill: "3.B", calculator: "not_allowed", parts: "a continuity at the break point (2) / b differentiability with one-sided derivatives (3) / c tangent line (2) / d average value of the derivative by the Fundamental Theorem (2)", points: 9, verifiedBy: ["one-sided difference quotients", "numerical mean of a central-difference derivative"] },
     { id: "frq_rate_in_out", template: "rate_in_out_net_change_calc", topic: "8.3", extraTopics: ["4.1", "5.5"], skill: "3.E", calculator: "required", parts: "a total inflow (2) / b sign of the net rate with units (2) / c amount at a time (2) / d time of the greatest amount with justification (3)", points: 9, verifiedBy: ["sympy symbolic integral", "grid maximum of the net-change function"] },
+    // 예비 3차(R3, 2026-10-12): scripts/ap-generation/archetypes/r3_sync.py 가 calc_r3_*.py 의 FRQ 원형에서 생성
+    ...(frqR3 as FrqTemplateSpec[]),
   ],
   notation: ["Math in $...$ LaTeX; derivatives f'(x), dy/dx; integrals with differential dx", "decimals to three places for calculator answers; exact values for non-calculator", "use 'ln' for natural log; angles in radians", "units written in words (feet per second)", "functions named f, g, h, R, v, etc.; no calculator syntax (fnInt)"],
   calculatorRules: ["Part A style (no calculator): every value hand-computable; exact answers (fractions, multiples of pi, e powers kept symbolic)", "Part B style (calculator required): the problem is not solvable by hand in reasonable time (numerical integral, solving transcendental equation, derivative of an unfriendly function at a point)", "never mark calculator required for hand-trivial items", "calculator is used only for four things: graph, solve equation, numerical derivative, numerical integral — setup must be shown in FRQ"],

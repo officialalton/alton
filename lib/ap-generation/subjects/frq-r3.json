@@ -1,0 +1,169 @@
+[
+ {
+  "id": "frq_accum_charge",
+  "template": "accumulation_function_analysis_calc",
+  "topic": "6.5",
+  "extraTopics": [
+   "6.4",
+   "5.5"
+  ],
+  "skill": "3.E",
+  "calculator": "required",
+  "parts": "a During a charging test, the current into a small battery is (2) / b Find the average rate of change of $Q$ over the interval $2\\ (2) / c For $0\\le x\\le 9$, at what value of $x$ does $Q$ attain its (3) / d On which open intervals within $0<x<9$ is $Q$ concave up? Gi (2)",
+  "points": 9,
+  "verifiedBy": [
+   "Q values are checked with sympy's symbolic antiderivative, the maximum with a 160001-point cumulative trapezoid scan, the zeros of I with a grid sign scan, and "
+  ]
+ },
+ {
+  "id": "frq_cooling_check",
+  "template": "cooling_model_check_tangent_calc",
+  "topic": "7.3",
+  "extraTopics": [
+   "4.6",
+   "5.6",
+   "4.1"
+  ],
+  "skill": "1.E",
+  "calculator": "required",
+  "parts": "a A cast-iron pan is taken out of an oven and left in a kitche (2) / b Write an equation for the line tangent to the curve $y=T(t)$ (2) / c Is the approximation in part (b) less than or greater than t (2) / d The pan can be handled safely once its temperature reaches $ (3)",
+  "points": 9,
+  "verifiedBy": [
+   "the tangent slope is checked by central difference, the target time by bisection on T(t) - target (independent of the logarithm formula), the rate at that time "
+  ]
+ },
+ {
+  "id": "frq_exp_decay_de",
+  "template": "exponential_decay_model_de",
+  "topic": "7.8",
+  "extraTopics": [
+   "7.6",
+   "7.7",
+   "8.1"
+  ],
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "parts": "a A sealed capsule holds $80$ grams of a radioactive tracer. L (3) / b The half-life of the tracer is $4$ years, that is, $M(4)=\\fr (1) / c At what time $t$ will $16$ grams of the tracer remain? Expre (2) / d Find the average mass of the tracer in the capsule over the (3)",
+  "points": 9,
+  "verifiedBy": [
+   "numerical quadrature for the average, Brent's root finder for the time, the half-life checked from the closed form with k = ln 2 / h, and the differential equat"
+  ]
+ },
+ {
+  "id": "frq_inverse_table",
+  "template": "inverse_function_table_derivatives",
+  "topic": "3.3",
+  "extraTopics": [
+   "3.5",
+   "6.9",
+   "4.6"
+  ],
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "parts": "a The function $f$ is differentiable and increasing on $1\\le x (2) / b Let $h(x)=x\\cdot f^{-1}(x)$. Find $h'(13)$. (2) / c Find the value of $\\int_{1}^{5}f'(x)\\left(f(x)\\right)^2\\,dx$ (3) / d Write an equation for the line tangent to the curve $y=f^{-1 (2)",
+  "points": 9,
+  "verifiedBy": [
+   "a cubic Hermite function that reproduces every table value and slope: the inverse by Brent's method with a central difference for the two derivative values, and"
+  ]
+ },
+ {
+  "id": "frq_ivp_antiderivative",
+  "template": "derivative_formula_initial_value",
+  "topic": "4.6",
+  "extraTopics": [
+   "5.6",
+   "6.9",
+   "5.5"
+  ],
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "parts": "a A function $f$ satisfies $f'(x)=-2xe^{-x^2}$ for all real $x (2) / b Is the approximation from part (a) an overestimate or an und (2) / c Find $f(x)$. (3) / d On the closed interval $-1\\le x\\le 2$, find the $x$-coordina (2)",
+  "points": 9,
+  "verifiedBy": [
+   "f is rebuilt by numerical quadrature of f' from 1 and compared at x = -1, 0, 2; the extremes by a 30001-point grid scan; the sign of f'' by sampling; f'' by cen"
+  ]
+ },
+ {
+  "id": "frq_limits_continuity",
+  "template": "limits_lhopital_continuity",
+  "topic": "4.7",
+  "extraTopics": [
+   "1.15",
+   "1.13",
+   "1.11"
+  ],
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "parts": "a Find $\\lim_{x\\to 2}\\frac{x^2-4}{\\ln x-\\ln 2}$. Show the work (3) / b Let $g$ be the function defined by $g(x)=\\frac{x^2-4}{\\ln x- (1) / c Find $\\lim_{x\\to 0}\\frac{e^x-1-x}{3x^2}$. Show the work that (3) / d Let $h(x)=\\frac{3x^2+5\\ln x}{2x^2}$ for $x>0$. Find $\\lim_{x (2)",
+  "points": 9,
+  "verifiedBy": [
+   "80-digit mpmath evaluation of each quotient very near the limit point (or at 10^60), and sympy's symbolic limit"
+  ]
+ },
+ {
+  "id": "frq_marginal_profit",
+  "template": "marginal_profit_calc",
+  "topic": "5.10",
+  "extraTopics": [
+   "4.1",
+   "6.4"
+  ],
+  "skill": "3.E",
+  "calculator": "required",
+  "parts": "a A workshop makes and sells $q$ hundred custom phone cases pe (2) / b The profit is $P(q)=R(q)-C(q)$, where $R$ and $C$ are the re (3) / c Find the increase in total revenue when production is raised (2) / d The weekly fixed cost is $6$ thousand dollars, so $P(0)=-6$. (2)",
+  "points": 9,
+  "verifiedBy": [
+   "the root of MR - MC is found by a 100001-point grid sign scan (independent of Brent's method), the integrals by sympy's symbolic antiderivative, and the maximum"
+  ]
+ },
+ {
+  "id": "frq_pen_cost",
+  "template": "optimization_cost_divided_pen",
+  "topic": "5.11",
+  "extraTopics": [
+   "5.10",
+   "5.7"
+  ],
+  "skill": "3.E",
+  "calculator": "not_allowed",
+  "parts": "a A farmer builds a rectangular pen against a long stone wall, (2) / b Find the value of $x$ for which $C'(x)=0$. (2) / c Use the second derivative to justify that the value of $x$ f (3) / d Find the minimum total cost, in dollars, and the length, in (2)",
+  "points": 9,
+  "verifiedBy": [
+   "a 200001-point grid minimum of the cost computed directly from the side lengths, a central second difference at the critical value, and the closed-form cost 6as"
+  ]
+ },
+ {
+  "id": "frq_rational_param",
+  "template": "parametric_rational_global_extrema",
+  "topic": "5.2",
+  "extraTopics": [
+   "1.15",
+   "5.4",
+   "5.5"
+  ],
+  "skill": "3.E",
+  "calculator": "not_allowed",
+  "parts": "a Let $f$ be the function given by $f(x)=\\frac{Ax}{x^2+B}$, wh (3) / b For the values of $A$ and $B$ found in part (a), find $\\lim_ (1) / c Show that $f$ has an absolute maximum value of $4$ and an ab (3) / d For which values of the constant $k$ does the equation $f(x) (2)",
+  "points": 9,
+  "verifiedBy": [
+   "a 400001-point grid scan of f on [-400, 400] for the extreme values and their locations, the number of solutions of f(x) = k by counting sign changes, a central"
+  ]
+ },
+ {
+  "id": "frq_trench_volume",
+  "template": "cross_section_table_model_calc",
+  "topic": "8.2",
+  "extraTopics": [
+   "6.2",
+   "8.1",
+   "4.1"
+  ],
+  "skill": "1.E",
+  "calculator": "required",
+  "parts": "a A drainage trench is dug along a straight line for $20$ mete (3) / b The area function is modeled by $A(x)=14+4\\sin\\left(\\dfrac{x (2) / c Find $A'(8)$. Using correct units, explain the meaning of $A (2) / d Find the average cross-sectional area of the trench accordin (2)",
+  "points": 9,
+  "verifiedBy": [
+   "the model volume is checked against the closed form of the integral, the derivative by central difference, and the two locations by a 100001-point grid sign sca"
+  ]
+ }
+]
