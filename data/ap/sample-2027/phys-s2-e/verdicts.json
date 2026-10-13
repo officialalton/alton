@@ -1,0 +1,865 @@
+[
+ {
+  "key": "ap_physics_1-f01-k0",
+  "cellId": "ap_physics_1-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Four forces act on m1: weight m1g pointing down, normal force N pointing up, tension T pointing horizontally toward the pulley, and kinetic friction f_k pointing horizontally away from the pulley, opposite the motion.",
+     "final_answer": "Weight m1g (down), normal force N (up), tension T (horizontal, toward the pulley), kinetic friction f_k = μN (horizontal, away from the pulley).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "For m2: m2g − T = m2a. For m1: T − μm1g = m1a, since N = m1g. Adding the two equations eliminates T: m2g − μm1g = (m1 + m2)a.",
+     "final_answer": "a = (m2 − μm1)g / (m1 + m2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = (2 − 0.15×3)(9.8)/5 = (1.55)(9.8)/5 ≈ 3.04 m/s². Using g = 10 m/s² gives 3.1 m/s².",
+     "final_answer": "≈ 3.0 m/s² (3.04 m/s² with g = 9.8 m/s²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T = m2(g − a). A larger μ makes the acceleration a smaller, so T gets larger. Equivalently, T = m1m2g(1 + μ)/(m1 + m2), which increases as μ increases. If μ becomes so large that the blocks don't move at all, then T = m2g, which is still larger than before.",
+     "final_answer": "The tension increases. More friction gives a smaller acceleration, and T = m2(g − a) grows as a shrinks.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The physics, key and rubric are sound. The only flaw is that part A requires a dot to draw on, but the stimulus data object is empty and does not specify that figure.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits topic 2.5 with related topics 2.2 and 2.7. Each part is assessed against its own skill. Nothing outside the course is used."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique, the solver agrees with every part, and the rubric dependencies are consistent. The answer to part D holds even if the blocks stop accelerating."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Part A asks the student to draw on a dot, but the stimulus data object is empty and no figure or dot is specified. The wording of the stem is otherwise clear. Because the dot the student must see is not specified in the data, this fails."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item. The rubric lists common errors for each row, and these are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10-point weight matches the fixed value for Mathematical Routines. The calculator is allowed and the load is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard two-body Newton's second law FRQ. Requires drawing an FBD, applying F=ma to two coupled objects and combining the equations algebraically, a short numerical substitution, and a qualitative argument linking a friction change to acceleration and then to tension. Concept depth is moderate (the tension is not simply m2*g), there are several linked steps, but arithmetic is short and the wording is clear. All content is in scope for Unit 2, so it suits full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k1",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Forces on m1: weight m1g pointing down, normal force N pointing up, tension T pointing horizontally toward the pulley, and kinetic friction f = μN pointing horizontally away from the pulley.",
+     "final_answer": "Four arrows: gravity (down), normal (up), tension (toward pulley), kinetic friction (opposite motion, away from pulley)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Newton's second law for each block: for m2, m2g − T = m2a; for m1, T − μm1g = m1a. Adding the two equations eliminates T.",
+     "final_answer": "a = (m2 − μm1)g/(m1 + m2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = (3 − 0.15)(9.8)/4 = 2.85(9.8)/4 ≈ 6.98 m/s².",
+     "final_answer": "a ≈ 7.0 m/s² (6.98 m/s² with g = 9.8 m/s²; 7.1 m/s² with g = 10 m/s²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T = m2(g − a). A larger μ gives a smaller a, so T gets larger. Equivalently, T = m1m2g(1 + μ)/(m1 + m2), which increases as μ increases. This assumes the system still moves, which it does as long as μ < 3.",
+     "final_answer": "Tension increases: more friction means less acceleration, so the hanging block's tension is closer to its weight (T = m2(g − a)).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound two-block-with-friction FRQ. Keys are correct and unique, the rubric is consistent, the scope is within Unit 2, and the 10-point weighting is correct. No instant-reject conditions apply.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own skill and topics 2.5, 2.2 and 2.7."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are verified. The tension increases with μ, and the rubric dependencies are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete, with ideal string and pulley assumptions stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free-response item, so there are no distractors. The common errors listed are appropriate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical, with light arithmetic, and a calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style item: FBD for block on table (weight, normal, tension, friction), two-body Newton's second law setup with friction, symbolic derivation, a short numeric evaluation with clean numbers, and a qualitative claim about tension requiring a link from the changed friction to a lower acceleration and then to tension via the hanging block. Moderate depth and multiple steps, but all in scope, with unambiguous wording and light arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 660
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k2",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Forces on m1: gravity m1g pointing down, normal force N pointing up, tension T pointing horizontally toward the pulley, and kinetic friction f = μN pointing horizontally away from the pulley (opposite the motion).",
+     "final_answer": "Four arrows starting on the dot: weight m1g (down), normal force N (up), tension T (horizontal, toward the pulley), kinetic friction f_k (horizontal, away from the pulley).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Hanging block: m2g − T = m2a. Table block: T − μm1g = m1a. Add the two equations to eliminate T.",
+     "final_answer": "a = (m2 − μm1)g / (m1 + m2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = (4 − 0.2·3)(9.8)/7 = 3.4·9.8/7 = 4.76 m/s².",
+     "final_answer": "a ≈ 4.8 m/s² (4.76 m/s² with g = 9.8 m/s²; 4.86 m/s² with g = 10 m/s²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T = m2(g − a). A larger μ makes the acceleration smaller, so T gets bigger. Written out, T = m1m2g(1+μ)/(m1+m2), which grows as μ grows. This holds as long as the blocks still slide (μ < m2/m1).",
+     "final_answer": "Tension increases. Larger μ means more friction, so the acceleration a goes down. Since T = m2(g − a), a smaller a gives a larger T.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard two-block Newton's second law FRQ with correct keys (a = 4.76 m/s^2, tension increases with μ), consistent rubric rows, and in-scope content. Minor point: part D implicitly assumes the blocks still slide. Passes.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part matches its own skill and topic 2.5. Part C carries the target skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are verified and the rubric rows are consistent. The part D claim holds even if the blocks stop sliding (T = m2 g, which is still larger)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete: masses, μ, light string, and frictionless pulley are all stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ. The common errors listed per row are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a 10-point FRQ, and the calculator use is minimal."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Classic two-block pulley with kinetic friction. Requires a free-body diagram, applying Newton's second law to two coupled objects, algebraic combination, a simple numeric evaluation, and a qualitative tension argument via T = m2(g - a). Multi-step but within Unit 2 scope, with clear wording and light arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k3",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Draw four separate arrows starting on the dot: weight m1g pointing down, normal force N pointing up (same length as the weight, since there is no vertical acceleration), tension T pointing horizontally toward the pulley, and kinetic friction f = μN pointing horizontally away from the pulley. The tension arrow should be longer than the friction arrow because the block speeds up toward the pulley.",
+     "final_answer": "Weight (down), normal force (up), tension (toward the pulley), kinetic friction (away from the pulley)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "For block 1: T − μm1g = m1a. For block 2: m2g − T = m2a. Adding the two equations cancels T and gives the result.",
+     "final_answer": "a = (m2 − μm1)g/(m1 + m2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = (4 − 0.15·3)(9.8)/7 = 3.55 × 1.4 ≈ 4.97 m/s². Using g = 10 m/s² gives about 5.1 m/s².",
+     "final_answer": "≈ 4.97 m/s² (about 5.0 m/s²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "From the hanging block, T = m2(g − a). A larger μ makes a smaller, so T gets bigger. Equivalently, T = m1m2g(1+μ)/(m1+m2), which increases as μ increases. If friction became large enough to stop the motion, T would equal m2g, which is still larger than before.",
+     "final_answer": "Increases",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope Atwood-with-friction bundle. The key (a = 4.97 m/s²) and the tension-increases prediction are verified. Rubric rows are consistent and dependencies are sensible. The stimulus is complete for a text scenario. The load is typical for a 10-point bundle.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Newton's second law with friction for connected objects is squarely topic 2.5 (with 2.2 and 2.7). Part C is the 2.B calculation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answers. The C tolerance assumes g = 9.8 m/s², the standard model assumption. Part D is robust even in the limiting case of stopped motion."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives masses, μ, and an ideal string and pulley. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ. Rubric common_errors list realistic misconceptions (T = m2g, a forward force of motion, tension decreasing because friction opposes motion)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Appropriate length and calculator use. The arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on a two-block system with friction. It requires an FBD, applying Newton's second law to each block and combining the equations algebraically, a simple numeric substitution, and a qualitative justification for the tension change when friction increases. Concept depth is moderate and all content is in scope. Arithmetic is light and the wording is unambiguous. This fits full-mock exam-prep difficulty rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k4",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Forces on m1: weight m1g downward, normal force N upward, tension T horizontal toward pulley, kinetic friction f opposite motion (away from pulley).",
+     "final_answer": "Four arrows: gravity (down), normal (up), tension (toward pulley), kinetic friction (away from pulley)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "m2g - T = m2a; T - μm1g = m1a; add the two equations.",
+     "final_answer": "a = (m2 - μ m1) g / (m1 + m2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(2-0.15)(9.8)/3",
+     "final_answer": "a ≈ 6.0 m/s² (6.04 m/s² with g=9.8; 6.2 m/s² with g=10)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T = m2(g - a) = m1 m2 g(1+μ)/(m1+m2). Larger μ gives smaller a, so less net force is needed on m2 and T gets closer to m2g.",
+     "final_answer": "Tension increases",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard connected-blocks problem with friction. The keys are correct (a = 6.04 m/s^2; tension increases with friction). Parts A to D cover a free-body diagram, a derivation, a calculation and a justified prediction, with 1-point rubric rows. The scope is correct (Unit 2), the weights are consistent with the 10-point Mathematical Routines type, and the wording is clear.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style FRQ on a two-block pulley system with friction. It requires an FBD (representation), applying Newton's 2nd law to each block and solving algebraically for a, a clean numerical substitution, and a qualitative claim linking reduced acceleration to increased tension via T = m2(g - a). Concept depth is moderate, reading and arithmetic loads are low, and the scope stays within Unit 2 (2.5, 2.2, 2.7). Nothing makes it hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k5",
+  "cellId": "ap_physics_1-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Forces on m1: gravity (mg) downward, normal force upward (equal length to weight), tension horizontally toward pulley, kinetic friction horizontally opposite (shorter than tension since block accelerates toward pulley).",
+     "final_answer": "Four arrows: weight m1g down, normal force N up, tension T toward pulley, kinetic friction f_k = μN away from pulley",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "For m2: m2g − T = m2a. For m1: T − μm1g = m1a. Adding the two gives a.",
+     "final_answer": "a = (m2 − μm1)g/(m1 + m2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(2 − 0.3)(9.8)/3 = 5.55 m/s²",
+     "final_answer": "≈5.6 m/s² (5.55 m/s² with g = 9.8 m/s²; 5.67 m/s² with g = 10 m/s²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T = m2(g − a). A larger μ means a smaller acceleration, so T gets bigger. Equivalently, T = m1m2g(1+μ)/(m1+m2), which increases with μ, as long as the blocks still slide.",
+     "final_answer": "Increases: the larger friction lowers the acceleration, so the hanging block is closer to equilibrium and the tension approaches m2g",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The physics and key are correct and the stimulus is complete. The one concern is exam suitability: the bundle totals 10 points, but the stated Mathematical Routines weight is 10, so the point total is fine, while the load of about 22 minutes with a diagram, a derivation, a calculation and a justification is heavy. Even so, part D adds a qualitative justification, which is off-target for a Mathematical Routines bundle.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The topic fits Newton's second law for connected objects with friction. Each part is judged against its own skill: A is a free-body diagram, B a derivation, C a calculation (2.B), and D a justification. Content stays within Unit 2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique. The acceleration is 5.55 m/s^2 with g = 9.8 m/s^2, and the independent solver agrees. Part D (tension increases) is correct as long as the blocks still slide. Part C's key is 5.55 with a tolerance of about 0.067, so a student using g = 10 (5.67) would fall outside it. The stem does not state g, but the subject notes set g = 9.8 m/s^2, so this is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and unambiguous. It gives the masses, the coefficient of kinetic friction, an ideal pulley and string, and release from rest."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item. The rubric rows list common errors (for example a force of motion, T = m2 g, and friction in the direction of motion), which serve as the distractor analysis."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The task load is typical of a multi-part AP FRQ, and the calculator use is minimal and consistent with the allowed designation. The part weights (3/3/2/2) follow the reference pattern. Part A's diagram rubric, which awards credit for correct relative arrow lengths, is slightly demanding but acceptable. The 22-minute estimate is only an internal reference and is not penalized. I failed this criterion narrowly, because the dominant demand is split across diagram, derivation, and qualitative reasoning rather than the stated skill 2.B, and only 2 of 10 points assess 2.B directly."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard two-body Newton's second law with kinetic friction. It requires choosing the governing law, drawing an FBD, setting up two coupled equations, a symbolic derivation, a simple numeric substitution, and a qualitative claim about tension (T = m2(g - a)) with justification. Every step is in Unit 2 scope, the arithmetic is short, and the wording is clear. This matches typical full-mock free-response difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k0",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Hang the spring from a fixed clamp on a ring stand. Attach a known mass, measured on a balance or taken from a labeled slotted mass. Pull it down a small distance, release it, and use a stopwatch to time several oscillations. Repeat for masses from 0.1 to 0.5 kg in 0.1 kg steps by adding slotted masses. To reduce uncertainty, time 10 oscillations and divide by 10, repeat several trials and average, and start timing at the equilibrium position.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Equipment: spring, ring stand and clamp, slotted masses, balance, stopwatch. Change m by adding masses. Measure the time for 10 oscillations and divide by 10, using several averaged trials."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "T = 2π√(m/k), so T² = (4π²/k)m. A graph of T² against m is a straight line through the origin.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Vertical axis: T² (s²). Horizontal axis: m (kg). Slope = 4π²/k."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The T² values are 0.195, 0.399, 0.588, 0.796 and 0.996 s². Plot these against m = 0.1 to 0.5 kg. The points are linear and pass close to the origin.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Plot T² (s²), from 0 to 1.0, against m (kg), from 0 to 0.5. The points are (0.1, 0.195), (0.2, 0.399), (0.3, 0.588), (0.4, 0.796), (0.5, 0.996). The best-fit line has slope ≈ 2.0 s²/kg."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Slope = (0.996 − 0.195)/(0.5 − 0.1) ≈ 2.0 s²/kg. Then k = 4π²/slope = 39.48/2.0 ≈ 19.7 N/m.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "k ≈ 20 N/m (19.7 N/m)"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The experimental design and analysis bundle on the spring-mass period is in scope for 7.2, has a consistent key and rubric, a complete table stimulus, and the 10-point weight expected for this type. I found no instant-reject condition.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part lab-design and linearization item. Requires choosing T=2π√(m/k), designing a procedure, linearizing to T² vs m, plotting, and extracting k from the slope (4π²/slope). The concept and skill match typical AP Physics 1 free-response lab questions. Computation is modest (squaring 5 values, one slope), the wording is clear, and nothing is out of scope.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 8,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k1",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Clamp the spring to a stand and hang known masses on it. Pull the block down a small fixed distance and release it. Time 10 oscillations with a stopwatch and divide by 10 to get T. Change the mass from 0.1 to 0.5 kg in steps of 0.1 kg. To reduce uncertainty in T, time many oscillations and repeat each trial 3 times, then average.",
+     "final_answer": "Hang masses 0.1–0.5 kg on the spring; time 10 oscillations with a stopwatch, divide by 10, repeat and average.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Squaring T = 2π√(m/k) gives T² = (4π²/k)m, so T² versus m is a straight line with slope 4π²/k.",
+     "final_answer": "Vertical: T² (s²); horizontal: m (kg); slope = 4π²/k",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Squared periods: 0.197, 0.405, 0.602, 0.769, 0.972 s² for m = 0.1 to 0.5 kg. The points lie on a line close to the origin.",
+     "final_answer": "Plot T² (0 to 1.0 s²) against m (0 to 0.5 kg). The best-fit line has slope ≈ 1.91 s²/kg and intercept ≈ 0.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The least-squares slope is 0.191/0.100 ≈ 1.91 s²/kg. Then k = 4π²/slope = 39.48/1.91 ≈ 20.6 N/m.",
+     "final_answer": "k ≈ 21 N/m (≈20.6 N/m)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 10-point experimental design and analysis bundle on a mass-spring period is in scope for 7.2 and 3.A. Its rubric is consistent, the table data are complete, and the independent solver agrees. Accepted.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics 1 lab-style FRQ. Students must design a procedure (including timing multiple oscillations), choose the governing law T=2π√(m/k) and linearize it as T² vs m, plot squared data with a chosen scale and best-fit line, and extract k from the slope (k=4π²/slope). Difficulty comes from the linearization, the table-to-graph-to-slope representation changes, and the experimental design, all within Unit 7 scope. Arithmetic is modest (five squares and one slope) and the wording is unambiguous, so no unfair difficulty sources.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 1080
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k2",
+  "cellId": "ap_physics_1-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: a ring stand with a clamp holding the spring, a set of known masses (or a balance to measure them), and a stopwatch. Hang a mass, pull it down a small distance and release it so it oscillates vertically. Time 10 full oscillations and divide by 10 to get T. To reduce uncertainty, timing many oscillations spreads the reaction-time error over all of them. You can also repeat each trial and average, and start timing at a reference point such as the equilibrium position. Change the independent variable (mass) by adding masses in 0.1 kg steps from 0.1 kg to 0.5 kg, keeping the same spring and a similar small amplitude.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Hang known masses on the spring from a clamp and stand. Displace slightly and time 10 oscillations with a stopwatch, then T = time/10. Repeat and average. Vary the mass from 0.1 kg to 0.5 kg using the same spring."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "From T = 2π√(m/k), squaring gives T² = (4π²/k)m. So T² is linear in m with slope 4π²/k.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Vertical axis: T² (s²). Horizontal axis: m (kg). Slope = 4π²/k."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The T² values are 0.158, 0.313, 0.483, 0.619 and 0.778 s² for m = 0.1 to 0.5 kg. Plot these with T² on the vertical axis from 0 to 0.8 s² and m on the horizontal axis from 0 to 0.5 kg. The best-fit line has slope ≈ 1.55 s²/kg and passes close to the origin.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Points (0.1, 0.158), (0.2, 0.313), (0.3, 0.483), (0.4, 0.619), (0.5, 0.778). Best-fit line T² ≈ 1.55m + 0.006, slope ≈ 1.55 s²/kg."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A least-squares fit gives slope = 1.55 s²/kg. Since slope = 4π²/k, k = 4π²/slope = 39.48/1.55 ≈ 25.5 N/m. Points for the slope should be taken from the drawn line, not from the data.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "k ≈ 25 N/m (about 25.5 N/m)"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is sound in key and data, but parts C and D mostly assess graphing and calculation skills rather than 3.A. The part A rubric also requires a same-amplitude condition the prompt does not request. I fail it on scope and skill fit.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Topic 7.2 is in scope. Parts C and D (plotting, slope calculation) are graphing/analysis demands rather than 3.A. Part B is a one-step linearization from the reference sheet, a light task for 3.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is consistent with the data. The slope of about 1.55 s^2/kg and k of about 25.5 N/m are confirmed by the solver. Tolerances agree with the rubric."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and labeled. Row A2 requires keeping the amplitude the same, but the prompt never asks for that explicitly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free response, so no distractors apply. Common-error entries are sparse but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10-point weight matches the Experimental Design and Analysis type. Calculator use is appropriate and the reading load is modest."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style experimental design/analysis item. It requires choosing the governing law (T = 2π√(m/k)), linearizing to T² vs m, translating a table into a plotted graph, and using the slope to find k (k = 4π²/slope). Arithmetic is short and uses rounded values, so there is no long computation. Reading load is modest and the wording is unambiguous. Multiple parts and several representation changes make it appropriate for full mocks rather than basic learning, but it does not go beyond the Unit 7 scope.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 8,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k3",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Spring on stand, known masses, stopwatch; time 10 oscillations and divide by 10; vary mass by adding slotted masses; repeat trials and average.",
+     "final_answer": "Hang masses 0.1–0.5 kg; time 10 oscillations with a stopwatch, T = t/10; repeat and average to reduce uncertainty.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "T^2 = (4π^2/k) m",
+     "final_answer": "Vertical: T^2 (s^2); horizontal: m (kg); slope = 4π^2/k",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "T^2 values: 0.197, 0.384, 0.604, 0.797, 0.984 s^2; linear through about the origin",
+     "final_answer": "Plot T^2 (s^2) vs m (kg); best-fit line slope ≈ 1.99 s^2/kg, intercept ≈ 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "slope ≈ 1.99 s^2/kg; k = 4π^2/slope = 39.48/1.99",
+     "final_answer": "k ≈ 20 N/m (≈19.9 N/m)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard linearization lab for a mass-spring system: design, T^2 vs m, graph, slope to k. Data and keys are consistent, the rubric is clear with explicit conditions, and the point total of 10 matches the Experimental Design and Analysis type. In scope for 7.2.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Spring-period lab; design and linearization are the dominant demands, within Unit 7 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope 1.99 and k about 19.9 N/m are consistent with the table. Tolerances are sensible, and the alternative for D3 follows the student's own slope."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labeled columns and five rows, which is complete. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to this FRQ. The rubric lists common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable for a 10-point design and analysis FRQ, and a calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part lab-design FRQ on T = 2π√(m/k). Students must (A) design a procedure (stopwatch, mass set, spring, timing multiple oscillations), (B) linearize the relationship (T^2 vs m, slope = 4π²/k), (C) square the periods and plot with a sensible scale, and (D) extract k from the slope. The concept depth is moderate and the reasoning is a short chain. Representation changes are table to linearized graph to slope to k. All difficulty levers used are permitted. The data are 3-digit values, and the squared periods give clean numbers (~0.197, 0.384, 0.604, 0.797, 0.984). Scope stays inside Unit 7 (mass-spring period only). Wording is unambiguous and there is no heavy reading.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k4",
+  "cellId": "ap_physics_1-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Standard procedure.",
+     "final_answer": "Equipment: a spring hung from a ring stand clamp, a set of known masses (or masses checked on a balance), and a stopwatch. Hang a mass m, pull it down a small distance and release it so it oscillates vertically. Time several complete oscillations (for example, 10) and divide by that number to get T. Repeat with m = 0.1, 0.2, 0.3, 0.4 and 0.5 kg, changing the independent variable by adding known masses. To reduce uncertainty in T, time many oscillations rather than one, repeat each trial several times and average, and start timing as the block passes through equilibrium.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Squaring T = 2π√(m/k) gives T² = (4π²/k)m, so T² against m is a straight line through the origin.",
+     "final_answer": "Plot T² (s²) on the vertical axis and m (kg) on the horizontal axis. The slope equals 4π²/k.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Squared each measured period.",
+     "final_answer": "T² values (s²): 0.203, 0.389, 0.605, 0.805 and 0.968 at m = 0.1, 0.2, 0.3, 0.4 and 0.5 kg. Use a horizontal axis 'Mass m (kg)' from 0 to 0.5 and a vertical axis 'T² (s²)' from 0 to 1.0. Draw a straight best-fit line close to the origin with slope of about 1.95 s²/kg.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Least-squares slope = 0.1947 / 0.1 = 1.947 s²/kg. Then k = 4π²/slope = 39.48 / 1.947 ≈ 20.3 N/m.",
+     "final_answer": "k ≈ 20 N/m (slope ≈ 1.95 s²/kg)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": true,
+   "summary": "The physics is correct and the data are consistent. The item closely reproduces the standard CED spring-constant lab (T² versus m), which is a known scenario. It is also over-scaffolded and long, with a rubric tolerance of 5% on a hand-drawn slope that is hard to defend. I fail it on key/scoring and exam suitability, with no instant-reject condition triggered.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.2 and the experimental-design skill fit well. Parts C and D are mostly graphing and analysis (skills 1.B and 2.D), but a lab bundle may mix skills across parts. This is acceptable."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The point total is wrong. The Experimental Design and Analysis type is fixed at 10 points, and the listed parts sum to 3+1+3+3 = 10, so the total itself matches. The rubric rows have problems, though. Row D1 uses requires_row_id C3 (a dependency on the best-fit line), which is fine, but its statement that slope is 'about 1.95' with a 5% tolerance is not justified by a hand-drawn line, so the tolerance is not credible. Row D3 accepts k within 8% of 20, while the model answer is 20.3. Row C2 'plots accurately' has no tolerance. Row A2 bundles two conditions (changing only the mass and keeping the same amplitude) into one point. The table has a noisy first point (T = 0.45, so T² = 0.2025), which is fine. A free-response part with 'blank grid whose scale you choose' cannot be machine-rendered, but it is gradable by hand."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with labels and units. The prompt for Part B says 'from the reference information', which is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no distractors. The rubric lists common errors only sparsely."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The estimated 27 minutes is heavy for 10 points. The parts are largely sequential and heavily scaffolded. The item closely mirrors the standard AP Physics 1 lab FRQ for spring constant from T² versus m, which is a known sample-style scenario that the banned-difficulty list says not to reproduce. Part B largely gives away the linearization, which Part A could otherwise have assessed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics 1 lab-style FRQ: design a procedure, linearize T = 2π√(m/k) as T² vs m, plot, and use the slope to find k. Concepts are in scope (mass-spring period), with moderate reasoning chain and several representation changes (table to T² values to graph to slope to k). Arithmetic is short and calculator-friendly; reading load is low. Difficulty comes from legitimate levers (choosing the governing law, linearization, translating representations), not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 720
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k5",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Standard procedure for timing a mass on a spring.",
+     "final_answer": "Equipment: a stand with a clamp, the spring, a set of known masses (or a balance to measure them), a stopwatch, and a metre stick.\n1. Hang a known mass m from the spring and let it come to rest.\n2. Pull it down a small distance and release it so it oscillates vertically.\n3. Time 10 complete oscillations with the stopwatch and divide by 10 to get the period T.\n4. Change the independent variable by adding masses in 0.1 kg steps from 0.1 kg to 0.5 kg. Repeat the timing for each mass.\nTo reduce the uncertainty in T: time many oscillations and divide, repeat each trial 3 times and average, and start timing at a fixed reference point (for example, the equilibrium position, marked with a fiducial marker). This reduces the effect of reaction time.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "T = 2π√(m/k), so T² = (4π²/k)m, which is a straight line through the origin.",
+     "final_answer": "Vertical axis: T² (s²). Horizontal axis: m (kg). The slope equals 4π²/k, so k = 4π²/slope.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Square each period and plot T² against m.",
+     "final_answer": "Points to plot (m in kg, T² in s²): (0.1, 0.154), (0.2, 0.313), (0.3, 0.479), (0.4, 0.618), (0.5, 0.801).\nAxes and scale: horizontal axis 'Mass m (kg)' from 0 to 0.5. Vertical axis 'T² (s²)' from 0 to 0.9.\nBest-fit line: a straight line passing close to the origin, with slope ≈ 1.6 s²/kg.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A least-squares fit gives a slope of about 1.60 s²/kg. Then k = 4π²/slope = 39.48/1.60 ≈ 24.7 N/m.",
+     "final_answer": "1. Slope from two points on the best-fit line: about (0.80 − 0.16)/(0.5 − 0.1) ≈ 1.60 s²/kg.\n2. Slope = 4π²/k, so k = 4π²/1.60 ≈ 24.7 N/m.\nAnswer: k ≈ 25 N/m.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard linearized spring-period lab (T^2 vs m, slope = 4pi^2/k). The data are consistent with the rubric: the T^2 values and slope of about 1.60 s^2/kg both check out, giving k of about 24.7 N/m. Rubric rows are mostly 1-point, with explicit conditions and tolerances (5% on slope, 8% on k) that are workable. Scope is 7.2/7.3, with no out-of-scope content. Total is 10 points, matching the fixed weight for Experimental Design and Analysis. Minor: part C requires squaring five values, which is light arithmetic, and a calculator is allowed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own skill (design, linearization, graphing, slope analysis) within topics 7.2/7.3."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Model answers are consistent with the data. Independent solver agrees (k of about 24.7 N/m). The rubric tolerances are consistent with expected_values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labeled columns and five rows, which is sufficient. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not an MC item. Rubric common_errors list plausible mistakes (plotting T vs m, slope = k)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for an experimental design FRQ and a calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part lab FRQ on the mass-spring period. The student must choose the governing law T = 2π√(m/k), linearize it (T² vs m, slope = 4π²/k), square the table values, plot and fit a line, and extract k from the slope. It has several representation changes (table, T² values, graph, slope, k) and a modest number of reasoning steps. The computation is light (five squares and one slope) and the context is concise and unambiguous. It is in scope for 7.2 and 7.3 and is typical of a full-mock FRQ rather than a basic single-concept item or an advanced extension.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ }
+]

@@ -3,37 +3,38 @@
   "phys-s2-a",
   "phys-s2-b",
   "phys-s2-c",
-  "phys-s2-d"
+  "phys-s2-d",
+  "phys-s2-e"
  ],
- "rows": 162,
- "passed": 122,
- "rejected": 40,
- "passRate": 0.753,
+ "rows": 174,
+ "passed": 124,
+ "rejected": 50,
+ "passRate": 0.713,
  "singles": {
-  "candidates": 162
+  "candidates": 174
  },
  "unitsPassed": {
   "1": 7,
-  "2": 16,
+  "2": 17,
   "3": 44,
   "4": 10,
   "5": 15,
   "6": 7,
-  "7": 13,
+  "7": 14,
   "8": 10
  },
  "figPassed": {
-  "none": 90,
+  "none": 92,
   "graph": 25,
   "scene": 7
  },
  "figAll": {
-  "none": 118,
+  "none": 130,
   "graph": 34,
   "scene": 10
  },
  "figPassRate": {
-  "none": "90/118",
+  "none": "92/130",
   "graph": "25/34",
   "scene": "7/10"
  },
@@ -41,8 +42,8 @@
   "none": 86,
   "ap_graph:phys_line": 25,
   "ap_diagram:phys_scene": 7,
-  "text": 3,
-  "ap_table": 1
+  "text": 4,
+  "ap_table": 2
  },
  "archetypesPassed": {
   "ph_w_angle_force": 2,
@@ -113,15 +114,16 @@
   "phs_collision_set_q1": 2,
   "phs_wt_set_q1": 2,
   "phs_spring_set_q1": 2,
-  "phf_mr_table_block": 1,
+  "phf_mr_table_block": 2,
   "phf_tbr_spring_shm": 1,
-  "phf_lab_spring_k": 1,
+  "phf_lab_spring_k": 2,
   "phf_qqt_collision": 1
  },
  "costUsd": {
   "phys-s2-a": 1.583,
   "phys-s2-b": 2.906,
   "phys-s2-c": 0.6781,
-  "phys-s2-d": 0.8577
+  "phys-s2-d": 0.8577,
+  "phys-s2-e": 0.6719
  }
 }

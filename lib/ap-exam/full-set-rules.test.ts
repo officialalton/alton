@@ -20,6 +20,8 @@ describe("통계 풀 세트 구성 규칙(공식 비중 → 42문항 정수 범�
     expect(fullPracticeUnitBounds("ap_calculus_ab", "full_practice")?.["1"]).toEqual({ min: 5, max: 6 });
     expect(fullPracticeUnitBounds("ap_statistics", "full_practice")?.["5"]).toEqual({ min: 5, max: 8 });
     expect(fullPracticeUnitBounds("ap_statistics", "mc_practice")).toBeUndefined();
+    expect(fullPracticeUnitBounds("ap_physics_1", "full_practice")).toEqual({ "1": { min: 5, max: 6 }, "2": { min: 8, max: 9 }, "3": { min: 8, max: 9 }, "4": { min: 5, max: 6 }, "5": { min: 5, max: 6 }, "6": { min: 3, max: 3 }, "7": { min: 3, max: 3 }, "8": { min: 5, max: 6 } });
+    expect(fullPracticeUnitBounds("ap_physics_1", "mc_practice")).toBeUndefined();
     expect(fullPracticeUnitBounds("ap_biology", "full_practice")).toBeUndefined();
     expect(fullPracticeUnitBounds("ap_calculus_bc", "full_practice")).toBeUndefined();
   });

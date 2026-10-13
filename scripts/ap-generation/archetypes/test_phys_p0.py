@@ -308,7 +308,7 @@ class FrqStructure(unittest.TestCase):
 class TexHygiene(unittest.TestCase):
     """P1-a 화면 증거에서 발견: \\text{ m/s^2 } 안의 ^ 는 KaTeX 가 렌더하지 못해 원문 수식이 학생에게 보였다. text 안에 ^ _ 가 없어야 한다."""
     def test_no_script_marks_inside_text(self):
-        bad = re.compile(r"\\text\{[^}]*[\^_][^}]*\}")
+        bad = re.compile(r"\\text\{[^}]*(?:[\^_]|\\cdot)[^}]*\}")  # text 안의 ^ _ \cdot 는 KaTeX 가 렌더하지 못한다
         for n in ALL_MC + FRQ:
             for p in R.batch(n, 6, 900):
                 blob = json.dumps(p, ensure_ascii=False).replace("\\\\", "\\")

@@ -254,7 +254,7 @@ def ph_torque_angle(rng):
         break
     pairs = [("Uses $rF\\cos\\theta$, which pairs the angle with the wrong component.", r * F * math.cos(math.radians(th))), ("Ignores the angle and uses $rF$.", r * F), ("Uses $F\\sin\\theta$ with no lever arm.", F * math.sin(math.radians(th))),
              ("Uses $rF\\tan\\theta$.", r * F * math.tan(math.radians(th)))]
-    key, ds = num_opts(tau, pairs, "N\\cdot m")
+    key, ds = num_opts(tau, pairs, "N·m")
     stem = f"A wrench is used with a force of ${F:g}\\text{{ N}}$ applied at a point ${r:g}\\text{{ m}}$ from the bolt. The angle between the force and the line from the bolt to the point of application is ${th}^\\circ$. What is the magnitude of the torque about the bolt?"
     return mk("ph_torque_angle", "5.3", "2.B", stem, key, ds, rng, concept="Torque from a force applied at an angle", thinking=["Identify the angle between the force and the position vector", "Use torque equals $rF\\sin\\theta$ with this angle"],
               cond=[("the angle is measured between the force and the line from the pivot", "the stem states this angle explicitly")], path="numpy cross product of the position and force vectors gives the torque magnitude", material=MAT_NONE,
