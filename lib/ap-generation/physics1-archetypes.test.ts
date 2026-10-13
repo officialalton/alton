@@ -9,6 +9,7 @@ import { calibrateFrq, calibrateMc, gateMc, gateFrq, NOT_ASSESSED_MC, OPTION_COU
 import { gateGuideMc, gateGuideFrq } from "./guide-gates";
 import { gateMathWrapping, answerTextForExplanation } from "./math-wrapping";
 import { generatorDefects } from "./generator-defects";
+import { bundleReferenceChecks } from "./part-refine";
 import { physicsGuide } from "./subjects/physics1";
 import type { ApCurriculumFile } from "../ap-curriculum/types";
 
@@ -24,9 +25,9 @@ type Pk = McPack & { blueprint: Partial<Blueprint>; items?: (McPack & { blueprin
 const expl = (p: McPack) => `The correct answer is ${answerTextForExplanation(p.options[p.key_index].text)}. ${p.options[p.key_index].why}\n` + p.options.filter((_, i) => i !== p.key_index).map((x) => `${answerTextForExplanation(x.text)} is incorrect: ${x.why}`).join("\n");
 
 d("AP Physics 1 P0 archetypes (Python generators, 3 seeds each)", () => {
-  const code = "import json,registry as R\nn=R.PHYS_STAGES['phys_mc_all']+R.PHYS_STAGES['phys_sets']\nf=R.PHYS_STAGES['phys_frq']\nprint(json.dumps({'names':n,'frq':f,'packs':{k:R.batch(k,3,500) for k in n},'frqPacks':{k:R.batch(k,2,500) for k in f}}))";
+  const code = "import json,registry as R\nn=R.PHYS_STAGES['phys_mc_all']+R.PHYS_STAGES['phys_sets']\nf=R.PHYS_STAGES['phys_frq']\nprint(json.dumps({'names':n,'frq':f,'packs':{k:R.batch(k,3,500) for k in n},'frqPacks':{k:R.batch(k,2,500) for k in f},'frq2':R.PHYS_STAGES['phys_frq2'],'frq2Packs':{k:R.batch(k,3,500) for k in R.PHYS_STAGES['phys_frq2']}}))";
   const r = spawnSync(PY, ["-B", "-c", code], { cwd: ARCH, encoding: "utf-8", maxBuffer: 128 * 1024 * 1024, timeout: 170000 });
-  const out = (r.status === 0 ? JSON.parse(r.stdout) : { names: [], frq: [], packs: {}, frqPacks: {} }) as { names: string[]; frq: string[]; packs: Record<string, Pk[]>; frqPacks: Record<string, FrqPack[]> };
+  const out = (r.status === 0 ? JSON.parse(r.stdout) : { names: [], frq: [], packs: {}, frqPacks: {}, frq2: [], frq2Packs: {} }) as { names: string[]; frq: string[]; packs: Record<string, Pk[]>; frqPacks: Record<string, FrqPack[]>; frq2: string[]; frq2Packs: Record<string, FrqPack[]> };
   const flat = (n: string) => out.packs[n].flatMap((p) => (p.items ?? [p]).map((q) => ({ ...q, stimulus: q.stimulus ?? p.stimulus })));
 
   it("registers 135 single archetypes + 5 sets covering all 8 units, and the guide JSON lists the same ids", () => {
@@ -70,6 +71,26 @@ d("AP Physics 1 P0 archetypes (Python generators, 3 seeds each)", () => {
     }
     for (const n of out.frq) total += out.frqPacks[n][0].total_points;
     expect(total).toBe(40);
+  });
+
+  it("registers a second scenario per FRQ type (8 new archetypes, two per type) that passes the same FRQ gates with a distinct archetype", () => {
+    expect(out.frq2).toHaveLength(8);
+    const w: Record<string, number> = { mr: 10, tbr: 12, lab: 10, qqt: 8 };
+    const perType: Record<string, Set<string>> = {};
+    for (const n of out.frq2) for (const p of out.frq2Packs[n]) {
+      (perType[p.template] ??= new Set()).add(n);
+      expect(p.total_points).toBe(w[p.template]);
+      expect(validateBlueprint((p as unknown as { blueprint: Partial<Blueprint> }).blueprint, { skills, topicUnit: topicUnit as Map<string, string> }).map((x) => x.code)).toEqual([]);
+      expect(gateGuideFrq(physicsGuide, p).filter((c) => c !== "too_few_numeric_rows")).toEqual([]);
+      expect({ n, reasons: [...gateFrq("ap_physics_1", p, skills, { requirePartTopics: false }), ...calibrateFrq(p, "ap_physics_1")] }).toEqual({ n, reasons: [] });
+      expect({ n, refs: bundleReferenceChecks(p) }).toEqual({ n, refs: [] });
+      if ((p.stimulus as { kind?: string }).kind === "diagram") {
+        const g = gateCandidate({ candidateKey: n, apSubjectCode: "ap_physics_1", kind: "frq_bundle", payload: p as unknown as Record<string, unknown> });
+        expect({ n, status: g.status, errors: g.issues.filter((i) => i.level === "error").map((i) => i.code) }).toEqual({ n, status: "pass", errors: [] });
+      }
+    }
+    expect(Object.fromEntries(Object.entries(perType).map(([t, a]) => [t, a.size]))).toEqual({ mr: 2, tbr: 2, lab: 2, qqt: 2 });
+    for (const n of out.frq2) expect(out.frq).not.toContain(n);
   });
 
   it("MC never carries the skills the CED does not assess in MC, and interpretation items use fixed sentences", () => {
