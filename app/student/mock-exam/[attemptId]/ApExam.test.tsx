@@ -8,7 +8,8 @@ const enter = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: { remaining:
 const startSec = vi.fn();
 const inkLoad = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: [] }));
 const inkSave = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: undefined }));
-vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn(), refresh: vi.fn() }) }));
+const push = vi.fn();
+vi.mock("next/navigation", () => ({ useRouter: () => ({ push, refresh: vi.fn() }) }));
 vi.mock("@/lib/mock-exam/attempt-actions", () => ({
   saveMockExamAnswerAction: (...a: unknown[]) => save(...a),
   saveMockExamSectionTimeAction: vi.fn(async () => ({ ok: true, value: undefined })),
@@ -51,7 +52,7 @@ const base = (items: MockExamAttemptItem[], over: Partial<MockExamAttemptDetail>
   examProgram: "ap", apSubject: "ap_calculus_ab", apLabel: "full_practice", sectionLayout: layout, ...over,
 });
 
-beforeEach(() => { save.mockReset(); save.mockResolvedValue({ ok: true, value: undefined }); submit.mockReset(); enter.mockClear(); startSec.mockReset(); vi.useFakeTimers({ shouldAdvanceTime: true }); });
+beforeEach(() => { save.mockReset(); save.mockResolvedValue({ ok: true, value: undefined }); submit.mockReset(); push.mockReset(); enter.mockClear(); startSec.mockReset(); vi.useFakeTimers({ shouldAdvanceTime: true }); });
 afterEach(() => { cleanup(); vi.useRealTimers(); });
 
 describe("ApExamTakeClient", () => {
@@ -291,5 +292,34 @@ describe("섹션 명시적 시작(560)", () => {
     render(<ApExamTakeClient attempt={mk()} />);
     await act(async () => { fireEvent.click(screen.getByTestId("ap-header-submit")); });
     expect(screen.getByTestId("ap-not-started-warning")).toHaveTextContent("2 sections were not started");
+  });
+
+  it("Exit: 경고 → Stay 는 그대로, 확인하면 대기 중인 FRQ 입력을 저장하고 목록으로 이동한다(제출·서버 시계 호출 없음)", async () => {
+    const exitItems = [item("m1", "ap_mc_a"), item("f1", "ap_frq", { format: "essay", options: null, optionCount: null, parts: frqParts })];
+    render(<ApExamTakeClient attempt={base(exitItems)} />);
+    await act(async () => { fireEvent.click(screen.getByTestId("ap-section-ap_frq")); });
+    fireEvent.change(screen.getByTestId("frq-input-a"), { target: { value: "Pending text" } });
+    fireEvent.click(screen.getByTestId("ap-exit-open"));
+    expect(screen.getByRole("alertdialog")).toHaveTextContent("The clock does not pause");
+    fireEvent.click(screen.getByTestId("ap-exit-stay"));
+    expect(push).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByTestId("ap-exit-open"));
+    await act(async () => { fireEvent.click(screen.getByTestId("ap-exit-confirm")); });
+    expect(save).toHaveBeenCalledTimes(1);
+    expect(JSON.parse(save.mock.calls[0][2] as string)).toEqual({ a: "Pending text" });
+    expect(push).toHaveBeenCalledWith("/student?tab=mock-exam");
+    expect(submit).not.toHaveBeenCalled();
+  });
+  it("제출 뒤에는 Exit 버튼과 beforeunload 경고가 없다", async () => {
+    const graded = base([item("m1", "ap_mc_a", { response: "1", correct: true, correctIndex: 1, explanation: "x" })], { status: "graded" });
+    submit.mockResolvedValue({ ok: true, value: { attempt: graded } });
+    render(<ApExamTakeClient attempt={base([item("m1", "ap_mc_a")])} />);
+    const unload = () => { const e = new Event("beforeunload", { cancelable: true }); window.dispatchEvent(e); return e.defaultPrevented; };
+    expect(unload()).toBe(true);
+    await act(async () => { fireEvent.click(screen.getByTestId("ap-review-submit")); });
+    await act(async () => { fireEvent.click(screen.getByTestId("ap-exam-submit")); });
+    await waitFor(() => expect(screen.getByTestId("ap-exam-result")).toBeInTheDocument());
+    expect(screen.queryByTestId("ap-exit-open")).toBeNull();
+    expect(unload()).toBe(false);
   });
 });

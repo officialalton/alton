@@ -30,6 +30,7 @@ import { useFrqInk } from "./useFrqInk";
 import { apFrqIsPaper, PAPER_FRQ_NOTICE } from "@/lib/ap-exam/frq-delivery";
 import { INK_H, inkKey, strokesToSvg, type FrqInkRow } from "@/lib/ap-exam/frq-ink";
 import GuessButton from "./GuessButton";
+import ExitExamButton from "./ExitExamButton";
 import { NAV_BTN, ScrollPanes, ToolIconButton } from "./take-ui";
 import { problemText } from "@/lib/problem-figures/label-rule";
 import ApExamResultView from "./ApExamResultView";
@@ -266,6 +267,16 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
         </div>
         <div className="flex items-center gap-2">
           {(calcOk || refOk) && <MockExamToolButtons calculatorAllowed={calcOk} referenceSheetAllowed={refOk} referenceLabel="Reference" open={toolsOpen} onToggle={(w) => setToolsOpen((c) => (c === w ? null : w))} />}
+          <ExitExamButton
+            testIdPrefix="ap-exit"
+            consequences={
+              <>
+                <p>Your answers are saved.</p>
+                <p>The clock does not pause. A section you have started keeps counting down on the server while you are away, so you can resume from Practice Tests only until its time runs out. Sections you have not started yet are not timed.</p>
+              </>
+            }
+            onBeforeExit={flush}
+          />
           <button type="button" onClick={async () => { await flush(); setShowReview(true); }} disabled={submitting} data-testid="ap-header-submit"
             className="min-h-[44px] rounded-md bg-ink px-3 py-1.5 text-[12.5px] font-bold text-white disabled:opacity-50 md:min-h-0 md:px-3.5">Submit</button>
         </div>

@@ -7,6 +7,7 @@
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import { dedupeStem } from "@/lib/problem-text-guards";
 import GuessButton from "./GuessButton";
+import ExitExamButton from "./ExitExamButton";
 import { NAV_BTN, ScrollPanes, ToolIconButton } from "./take-ui";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -345,6 +346,15 @@ export default function MockExamMstTakeClient({
               onToggle={(which) => setMathToolsOpen((cur) => (cur === which ? null : which))}
             />
           )}
+          <ExitExamButton
+            testIdPrefix="mst-exit"
+            consequences={
+              <>
+                <p>Your answers are already saved.</p>
+                <p>The module timer keeps running on the server while you are away. You can resume from Practice Tests until the time runs out. After that you cannot return to the module.</p>
+              </>
+            }
+          />
           <button
             type="button"
             onClick={() => setConfirmOpen(true)}

@@ -19,6 +19,7 @@ import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
 import MockExamResultView from "./MockExamResultView";
+import ExitExamButton from "./ExitExamButton";
 import GuessButton from "./GuessButton";
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
@@ -335,6 +336,22 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
             <div className="font-mono text-[15px] font-bold" data-testid="mock-exam-timer">
               {formatClock(remaining[section])}
             </div>
+            <ExitExamButton
+              testIdPrefix="mock-exam-exit"
+              consequences={
+                <>
+                  <p>Your answers and the time you have left are saved.</p>
+                  <p>The timer stops while you are away. You can pick this test up again from Practice Tests and continue where you left off.</p>
+                </>
+              }
+              onBeforeExit={async () => {
+                if (current) flushItemTime(current.setItemId);
+                await Promise.all([
+                  saveMockExamSectionTimeAction(attempt.id, "rw", tickRef.current.rw),
+                  saveMockExamSectionTimeAction(attempt.id, "math", tickRef.current.math),
+                ]);
+              }}
+            />
           </div>
         </div>
 
