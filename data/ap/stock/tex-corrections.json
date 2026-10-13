@@ -3,7 +3,7 @@
  "version": 1,
  "generatedBy": "lib/ap-exam/tex-corrections-gen.test.ts (AP_TEX_CORR_WRITE=1)",
  "note": "변환 전 해설(explanation_en)의 sha256 에 묶인 교정 문안. 적용은 관리자 'AP 설명 수정 새 버전'(미리보기→확인→실행)만. before 해시가 DB 와 다르면 건드리지 않는다.",
- "count": 265,
+ "count": 281,
  "entries": [
   {
    "candidateKey": "bc-topup-final:ap_calculus_bc-f01-k0",
@@ -144,6 +144,118 @@
    "after": "The correct answer is 13. Speed = sqrt($(x')^2$ + $(y')^2$) with the table values at that time.\n17 is incorrect: Adds the absolute values of the components instead of using the Pythagorean combination.\n- $\\frac{12}{5}$ is incorrect: Reports the slope dy/dx = y'/x' instead of the speed.\n-5 is incorrect: Reports x'(t) alone."
   },
   {
+   "candidateKey": "chem-p1-a2:ap_chemistry-m05-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "1a6248a314ccb463179bf3a0667015c3839a5e2cda5faa37eef393217695f6e5",
+   "afterSha256": "ebd265991d459f38ab2fac6fe5380fdc6bb54359d19d7226fc5022631a5755ce",
+   "after": "The correct answer is $7.20\\times10^{-2}\\text{ M/s}$. Doubling [A] (experiment 1 to 2) multiplies the rate by 4, so the order in A is 2; doubling [B] (experiment 1 to 3) multiplies it by 2, so the order in B is 1. From experiment 1, k = 3.750 × 10⁻⁴ / (0.$05^2$ × 0.$1^1$) = 1.5, so the new rate is 1.5 × $(0.4)^2$ × $(0.3)^1$ = 0.07200 M/s.\n$2.16\\times10^{-1}\\text{ M/s}$ is incorrect: Assumes the reaction is second order in both reactants.\n$9.00\\times10^{-3}\\text{ M/s}$ is incorrect: Assumes the reaction is first order in both A and B without comparing the experiments.\n$3.00\\times10^{-3}\\text{ M/s}$ is incorrect: Assumes the rate depends only on [A] (first order in A, zero order in B)."
+  },
+  {
+   "candidateKey": "chem-p1-a2:ap_chemistry-m05-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "58d34ef31bd9bd87cd50abb0ac18ae91d5c9755cfc154171314c80de23b113e0",
+   "afterSha256": "5db738d57a27d1fa490e2fd42b694f638cccff041821378ae12d61386bec2b50",
+   "after": "The correct answer is $1.44\\times10^{-3}\\text{ M/s}$. Doubling [A] (experiment 1 to 2) multiplies the rate by 4, so the order in A is 2; doubling [B] (experiment 1 to 3) multiplies it by 2, so the order in B is 1. From experiment 1, k = 1.000 × 10⁻⁵ / (0.$05^2$ × 0.$1^1$) = 0.04, so the new rate is 0.04 × $(0.3)^2$ × $(0.4)^1$ = 1.440 × 10⁻³ M/s.\n$9.60\\times10^{-4}\\text{ M/s}$ is incorrect: Swaps the orders of A and B.\n$2.40\\times10^{-4}\\text{ M/s}$ is incorrect: Assumes the reaction is first order in both A and B without comparing the experiments.\n$6.00\\times10^{-5}\\text{ M/s}$ is incorrect: Assumes the rate depends only on [A] (first order in A, zero order in B)."
+  },
+  {
+   "candidateKey": "chem-p1-a2:ap_chemistry-m17-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "5fc1990f0d1e3b014e4108ce1f91ffa6191c09f89c76fad2f63979a1a6d22b5d",
+   "afterSha256": "f460810e8f2265e93f35f9c089e591630e02e7640c76d9f9b722e2f2126158ef",
+   "after": "The correct answer is $\\text{Step 1 (slow): }2NO \\rightarrow N_2O_2;\\ \\text{Step 2 (fast): }N_2O_2 + O_2 \\rightarrow 2NO_2$. The slow step is an elementary step, so its rate law follows directly from its reactants: rate = k $[NO]^2$, which matches the observed rate law.\n$\\text{Step 1 (slow): }NO + O_2 \\rightarrow NO_3;\\ \\text{Step 2 (fast): }NO_3 + NO \\rightarrow 2NO_2$ is incorrect: The slow step of this mechanism leads to rate = k [NO] [O2], which does not match the observed rate = k $[NO]^2.$\n$\\text{Step 1 (slow): }O_2 \\rightarrow 2O;\\ \\text{Step 2 (fast): }2O + 2NO \\rightarrow 2NO_2$ is incorrect: The slow step of this mechanism leads to rate = k [O2], which does not match the observed rate = k $[NO]^2.$\n$\\text{Step 1 (fast): }2NO \\rightleftharpoons N_2O_2;\\ \\text{Step 2 (slow): }N_2O_2 + O_2 \\rightarrow 2NO_2$ is incorrect: The slow step of this mechanism leads to rate = k $[NO]^2$ [O2], which does not match the observed rate = k $[NO]^2.$"
+  },
+  {
+   "candidateKey": "chem-s2-m-a:ap_chemistry-m15-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "4e46b3bee4c3a43605cbc14c2d4110187f693c2cc4e6f7eb9795d779dc1986dd",
+   "afterSha256": "4dc608e5c3c6481202c7ee542e5866f44efba562b109a63aaa81d44674f596c5",
+   "after": "The correct answer is $0.0025$. Reversing a reaction inverts its K, multiplying a reaction by n raises K to the nth power, and adding reactions multiplies their K values: K = $K1^{-2}$ × $K2^{2}$ = $(10)^{-2}$ × $(0.5)^{2}$ = 0.0025.\n$400$ is incorrect: Uses the reciprocal of the correct combined constant.\n$25$ is incorrect: Multiplies the constants but ignores that a reversed reaction has the reciprocal K.\n$20$ is incorrect: Multiplies each K by the coefficient instead of raising it to that power."
+  },
+  {
+   "candidateKey": "chem-s2-m-a:ap_chemistry-m15-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "d9d006d807a415da6dbb7bd4922afa33c964a73fe46fd9197e9de724797160de",
+   "afterSha256": "beebe53ff8746c17e3145a7c7b9ec00a04c9e3371440fd60959f3025cf4f97c5",
+   "after": "The correct answer is $0.09$. Reversing a reaction inverts its K, multiplying a reaction by n raises K to the nth power, and adding reactions multiplies their K values: K = $K1^{-2}$ × $K2^{2}$ = $(10)^{-2}$ × $(3)^{2}$ = 0.09.\n$900$ is incorrect: Multiplies the constants but ignores that a reversed reaction has the reciprocal K.\n$11.1$ is incorrect: Uses the reciprocal of the correct combined constant.\n$120$ is incorrect: Multiplies each K by the coefficient instead of raising it to that power."
+  },
+  {
+   "candidateKey": "chem-s2-m-a:ap_chemistry-m16-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "0a36631e19f07cf67c118b2b81bfc8198830820f4e5a92ecd769f303a2a1ce83",
+   "afterSha256": "b2b9d026349d3bbef4b7dd068420e5bb430606ffbf29375e7c0ee95e620bd185",
+   "after": "The correct answer is $2.06\\times10^{-4}\\text{ M}$. For CaF2, Ksp = $(1s)^1$$(2s)^2$ = 4 $s^3$, so s = $(Ksp / 4)^{1/3}$ = $(3.50 × 10⁻¹¹ / 4)^{1/3}$ = 2.06 × 10⁻⁴ M.\n$3.27\\times10^{-4}\\text{ M}$ is incorrect: Omits the stoichiometric coefficients when writing the solubility product.\n$5.92\\times10^{-6}\\text{ M}$ is incorrect: Takes the square root of Ksp regardless of the formula.\n$3.50\\times10^{-11}\\text{ M}$ is incorrect: Reports Ksp itself as the molar solubility."
+  },
+  {
+   "candidateKey": "chem-s2-m-a:ap_chemistry-m16-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "8af928c146e95f74b18cafcb6f800bd13dd8d18662d7f3e41eee43207255fb40",
+   "afterSha256": "6f0900b354c123aa892a3b87e3b6b3db79d4cbf57730f3fd8a74a548d0b3ae57",
+   "after": "The correct answer is $1.35\\times10^{-3}\\text{ M}$. For PbI2, Ksp = $(1s)^1$$(2s)^2$ = 4 $s^3$, so s = $(Ksp / 4)^{1/3}$ = $(9.80 × 10⁻⁹ / 4)^{1/3}$ = 1.35 × 10⁻³ M.\n$9.80\\times10^{-9}\\text{ M}$ is incorrect: Reports Ksp itself as the molar solubility.\n$3.27\\times10^{-9}\\text{ M}$ is incorrect: Divides Ksp by the total number of ions instead of solving the product expression.\n$9.90\\times10^{-5}\\text{ M}$ is incorrect: Takes the square root of Ksp regardless of the formula."
+  },
+  {
+   "candidateKey": "chem-s2-m-a:ap_chemistry-m20-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "a5457169028e30286afaa6b8c7d187285fcaaa3bdc4a42d27711157f361a3247",
+   "afterSha256": "7af387812a95abfada5ccb016b4a2b3cb3fc49aaad9973321a1135c815296acb",
+   "after": "The correct answer is $\\text{Step 1 (slow): }O_2 \\rightarrow 2O;\\ \\text{Step 2 (fast): }2O + 2NO \\rightarrow 2NO_2$. The slow step is an elementary step, so its rate law follows directly from its reactants: rate = k [O2], which matches the observed rate law.\n$\\text{Step 1 (fast): }NO + O_2 \\rightleftharpoons NO_3;\\ \\text{Step 2 (slow): }NO_3 + NO \\rightarrow 2NO_2$ is incorrect: The slow step of this mechanism leads to rate = k $[NO]^2$ [O2], which does not match the observed rate = k [O2].\n$\\text{Step 1 (slow): }2NO \\rightarrow N_2O_2;\\ \\text{Step 2 (fast): }N_2O_2 + O_2 \\rightarrow 2NO_2$ is incorrect: The slow step of this mechanism leads to rate = k $[NO]^2$, which does not match the observed rate = k [O2].\n$\\text{Step 1 (slow): }NO + O_2 \\rightarrow NO_3;\\ \\text{Step 2 (fast): }NO_3 + NO \\rightarrow 2NO_2$ is incorrect: The slow step of this mechanism leads to rate = k [NO] [O2], which does not match the observed rate = k [O2]."
+  },
+  {
+   "candidateKey": "chem-s2-m-a:ap_chemistry-m37-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "289c547515ad7a5e5711a0411e8b8242a11d234f024e430b540a3272198a96cc",
+   "afterSha256": "4a2955ad5036fc24d9a2b96daec455779f81c0cc858755508817b08e28d32b54",
+   "after": "The correct answer is $12$. The rate is proportional to $[A]^1$$[B]^2$, so changing [A] by a factor of 3 and [B] by a factor of 2 changes the rate by $(3)^1$ × $(2)^2$ = 12.\n$18$ is incorrect: Swaps the orders of A and B.\n$5$ is incorrect: Adds the exponent contributions.\n$3$ is incorrect: Uses only the effect of changing A."
+  },
+  {
+   "candidateKey": "chem-s2-m-a:ap_chemistry-m40-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "0d2050cd33e856eba4f9f24d6119ae9cdfc2723d81b6a0320e5b483e2e78fdf5",
+   "afterSha256": "8de3b5e13605db87220d0addacd1db677db0d78b49bfdd35d11d07b7ad0f66f4",
+   "after": "The correct answer is At pH $9.21$, the conjugate base, A⁻ predominates, with a ratio of about $100$ to 1, because the pH is greater than the pKa.. pH = pKa + log([A⁻]/[HA]), so [A⁻]/[HA] = $10^{pH − pKa}$ = $10^{9.21 − 7.21}$ = 100; the base form is more abundant.\nAt pH $9.21$, the conjugate base, A⁻ predominates, with a ratio of about $2.0$ to 1, because the difference between pH and pKa gives the ratio directly. is incorrect: Treats the pH - pKa difference as the ratio instead of a power of ten.\nAt pH $9.21$, the acid, HA predominates, with a ratio of about $100$ to 1, because the pH is greater than the pKa. is incorrect: Reverses which species predominates when pH and pKa are compared.\nAt pH $9.21$, the acid and its conjugate base are present in equal amounts because both are weak. is incorrect: Believes pH alone sets a 1:1 ratio."
+  },
+  {
+   "candidateKey": "chem-s2-m-a:ap_chemistry-m40-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "e487de893f10e3a2e2961bbdab807ae22afc52ea6d15d3a38c89e478db285d4d",
+   "afterSha256": "9b503fad64fea32c229a9362747d3f7896fc76a711dfc5a2fc032d3b3f05441f",
+   "after": "The correct answer is At pH $8.35$, the conjugate base, A⁻ predominates, with a ratio of about $100$ to 1, because the pH is greater than the pKa.. pH = pKa + log([A⁻]/[HA]), so [A⁻]/[HA] = $10^{pH − pKa}$ = $10^{8.35 − 6.35}$ = 100; the base form is more abundant.\nAt pH $8.35$, the conjugate base, A⁻ predominates, with a ratio of about $2.0$ to 1, because the difference between pH and pKa gives the ratio directly. is incorrect: Treats the pH - pKa difference as the ratio instead of a power of ten.\nAt pH $8.35$, the acid and its conjugate base are present in equal amounts because both are weak. is incorrect: Believes pH alone sets a 1:1 ratio.\nAt pH $8.35$, the acid, HA predominates, with a ratio of about $100$ to 1, because the pH is greater than the pKa. is incorrect: Reverses which species predominates when pH and pKa are compared."
+  },
+  {
+   "candidateKey": "chem-s2-m-b:ap_chemistry-m26-k0",
+   "itemIndex": 1,
+   "sets": [],
+   "beforeSha256": "16a5cc9d39a498ff2f987f042b5d2a9234e662788e3d03819c99d27834423107",
+   "afterSha256": "2a42f8984729574172cc2851eeb9d259c0ac6fe3c78f5a63838e0e23b5aad971",
+   "after": "The correct answer is $0.0150\\text{ M}^{-1}\\text{s}^{-1}$. With orders of 2 in A and 0 in B, k = rate/($[A]^2$$[B]^0$) = 1.500 × 10⁻⁴ M/s / ($(0.1 M)^2$ $(0.2 M)^0$) = 0.015, and the units of k are chosen so that the rate comes out in M/s.\n$0.00150\\text{ M}^{-1}\\text{s}^{-1}$ is incorrect: Divides the rate by only one concentration.\n$0.000150\\text{ M/s}$ is incorrect: Uses the rate of experiment 1 as k.\n$0.00750\\text{ M}^{-1}\\text{s}^{-1}$ is incorrect: Uses the concentrations without their orders in the rate law."
+  },
+  {
+   "candidateKey": "chem-s2-m-b:ap_chemistry-m26-k2",
+   "itemIndex": 1,
+   "sets": [],
+   "beforeSha256": "621193008ebf8893519f0b66b427a39755a828f7dd330625be97779dece1788a",
+   "afterSha256": "2bef67620a6144f256eb445b5ae72439a09fd09231ed19f52963dbf2eda3dfc3",
+   "after": "The correct answer is $0.0400\\text{ M}^{-2}\\text{s}^{-1}$. With orders of 2 in A and 1 in B, k = rate/($[A]^2$$[B]^1$) = 4.000 × 10⁻⁵ M/s / ($(0.1 M)^2$ $(0.1 M)^1$) = 0.04, and the units of k are chosen so that the rate comes out in M/s.\n$0.00400\\text{ M}^{-2}\\text{s}^{-1}$ is incorrect: Uses the concentrations without their orders in the rate law.\n$0.0000400\\text{ M/s}$ is incorrect: Uses the rate of experiment 1 as k.\n$0.000400\\text{ M}^{-2}\\text{s}^{-1}$ is incorrect: Divides the rate by only one concentration."
+  },
+  {
+   "candidateKey": "chem-s2-m-c:ap_chemistry-m03-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "af494a869fe38a6ec7b88f69a82d2cbf647f8e41b0e8a616d8bdf3eb2fa93f3b",
+   "afterSha256": "9e1657096f0ec03c0cbcd4d880f2f210b330c3815aeed3fa4790706f866137d8",
+   "after": "The correct answer is The system shifts toward the products, because the reaction quotient Q becomes smaller than K, so more products must form until Q equals K again.. For this disturbance halving the volume doubles both concentrations, so Q = $[B]^1$/$[A]^2$ is multiplied by $2^{1 − 2}$ = 0.5; Q is therefore smaller than K, so the system shifts toward the products until Q equals K again.\nThe system shifts in neither direction, because the concentrations of A and B do not change, so Q still equals K. is incorrect: After this disturbance Q is smaller than K, not equal to K, so the system does not stay at equilibrium.\nThe system shifts toward the reactant, because the reaction quotient Q becomes larger than K, so more reactant must form until Q equals K again. is incorrect: After this disturbance Q is smaller than K, not larger than K, so the system does not shift toward the reactant.\nThe system shifts toward the reactant, because the equilibrium constant changes. is incorrect: Believes that a change in concentration or volume changes the value of K, which depends only on temperature."
+  },
+  {
    "candidateKey": "phys-s2-d:ap_physics_1-f03-k0",
    "itemIndex": 0,
    "sets": [],
@@ -190,6 +302,22 @@
    "beforeSha256": "0bdbceb6678752c07880fe28380ee72c3d7f1652a23cb83964df6e65a45897a6",
    "afterSha256": "09c63bd94fd8cd74e76a9b4e91d37f913241b99bdf2ce068c827c533b3a1dca3",
    "after": "The correct answer is The quantity $T^2/L$ is nearly constant, about $4.04\\text{ s}^2\\text{/m}$, so the data support $T$ proportional to $\\sqrt{L}$.. The values of $T^2/L$ range only from $3.96$ to $4.11$ $s^2$/m, which is consistent with $T=2\\pi\\sqrt{L/g}$.\nThe quantity $T/L$ is nearly constant, so the period is proportional to the length. is incorrect: Tests the ratio $T/L$ for a direct proportion, but for these data it falls from $4.51$ to $1.82$ s/m.\nWhen the length increases from $0.20\\text{ m}$ to $1.20\\text{ m}$, the period increases by the same factor of $6$. is incorrect: Assumes the period grows by the same factor as the length, whereas the data show a factor of only $2.4$.\nThe product $TL$ is nearly constant, so longer pendulums have shorter periods. is incorrect: Reads a decreasing quantity as an inverse relationship, but the period increases with the length in the table."
+  },
+  {
+   "candidateKey": "phys-s4-b:ap_physics_1-f02-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "25db30e6ad2c4ba4ebc387082e71c9e494af329b057446c8240afa5379b6d52c",
+   "afterSha256": "115c60e5bfdec31248dde3bbfda75d49f0fd5549fb4e00083b70d4be58208609",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] Use a meterstick to measure the length from the pivot to the center of the bob for each trial and a stopwatch to time 10 swings, released from the same small angle each time; change only the string length, and divide the time by 10; repeat the timing and average.\n   - 1 pt: Identifies the measured quantities and equipment: a meterstick or ruler for the length and a timing device for the period (both are needed)\n   - 1 pt: Changes only the length of the string while keeping the same bob and the same small release angle (both conditions are needed)\n   - 1 pt: Reduces timing uncertainty by timing many swings and dividing, or by repeating the trials and averaging (either earns the point)\n(B) [1 pt] Plot $T^2$ on the vertical axis against $L$ on the horizontal axis; the slope is $4\\pi^2/g$.\n   - 1 pt: Identifies $T^2$ (vertical) versus $L$ (horizontal)\n(C) [3 pt] Points $(L,T^2)$: (0.2, 0.814), (0.4, 1.643), (0.6, 2.490), (0.8, 3.143), (1, 4.068) with a best-fit line of slope about $4.00\\text{ s}^2/\\text{m}$.\n   - 1 pt: Axes are labeled with quantities and units and the scale fills most of the grid\n   - 1 pt: Plots the five points $(L, T^2)$ accurately\n   - 1 pt: Draws a straight best-fit line through the trend of the points\n(D) [3 pt] Slope $\\approx 4.00\\text{ s}^2/\\text{m}$, so $g=4\\pi^2/\\text{slope}\\approx 9.9\\text{ N/kg}$.\n   - 1 pt: Calculates the slope of the best-fit line using two points on the line (about 4.00 $s^2$/m; accept any value within 5 percent)\n   - 1 pt: Relates the slope to the gravitational field strength: slope $=4\\pi^2/g$\n   - 1 pt: Calculates $g$ (about 9.9; accept any value within 8 percent) with units of newtons per kilogram or meters per second squared"
+  },
+  {
+   "candidateKey": "phys-s4-b:ap_physics_1-f03-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "7f09c0c00e876722e761627102bfce993a508fdab0c94ea3bf45171d03f62754",
+   "afterSha256": "52ae6cf28083a5676950267ecd43473a6aef0ba8b973fbd479d6c6788e9332fd",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] Use a photogate (or motion sensor) to measure the initial speed and a meterstick to measure the sliding distance from the starting point to where the block stops; give the same block different initial speeds on the same table surface, and repeat each trial and average the distances.\n   - 1 pt: Identifies a way to measure the initial speed (photogate or motion sensor, or distance and time over a short interval) and a way to measure the stopping distance (meterstick or tape)\n   - 1 pt: Changes only the initial speed while using the same block and the same table surface (both conditions are needed)\n   - 1 pt: Reduces the uncertainty in the distance by repeating each trial and averaging, or by marking the stopping point with a method that reduces the reading error (either earns the point)\n(B) [1 pt] From $\\mu mgd=\\tfrac12mv_0^2$ we get $d=\\dfrac{1}{2\\mu g}v_0^2$: plot $d$ on the vertical axis against $v_0^2$ on the horizontal axis; the slope is $1/(2\\mu g)$.\n   - 1 pt: Identifies $d$ (vertical) versus $v_0^2$ (horizontal)\n(C) [3 pt] Points $(v_0^2,d)$: (1, 0.205), (2.25, 0.464), (4, 0.828), (6.25, 1.259), (9, 1.846) with a best-fit line of slope about $0.204\\text{ s}^2/\\text{m}$.\n   - 1 pt: Axes are labeled with quantities and units and the scale fills most of the grid\n   - 1 pt: Plots the five points $(v_0^2, d)$ accurately\n   - 1 pt: Draws a straight best-fit line through the trend of the points\n(D) [3 pt] Slope $\\approx 0.204\\text{ s}^2/\\text{m}$, so $\\mu=\\dfrac{1}{2g\\,\\text{slope}}\\approx 0.25$.\n   - 1 pt: Calculates the slope of the best-fit line using two points on the line (about 0.204 $s^2$/m; accept any value within 5 percent)\n   - 1 pt: Relates the slope to the friction coefficient: slope $=1/(2\\mu g)$\n   - 1 pt: Calculates $\\mu$ (about 0.25; accept any value within 8 percent); the coefficient has no units"
   },
   {
    "candidateKey": "run1:ap_biology-c004-k0",

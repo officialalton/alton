@@ -1,0 +1,67 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "PH4",
+ "sourceSetName": "AP Physics 1 — Practice Exam 2",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/ap-generation/ph2-new-version-plan.ts",
+ "swapCount": 4,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "position": 1,
+   "removeKey": "phys-s2-d:ap_physics_1-f01-k0",
+   "addKey": "phys-s4-a:ap_physics_1-f02-k1",
+   "remove": {
+    "type": "mr",
+    "archetype": "phf_mr_table_block"
+   },
+   "add": {
+    "type": "mr",
+    "archetype": "phf_mr_energy_patch"
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 2,
+   "removeKey": "phys-p1-b:ap_physics_1-f02-k0",
+   "addKey": "phys-s4-a:ap_physics_1-f03-k0",
+   "remove": {
+    "type": "tbr",
+    "archetype": "phf_tbr_spring_shm"
+   },
+   "add": {
+    "type": "tbr",
+    "archetype": "phf_tbr_cart_vt"
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 3,
+   "removeKey": "phys-s2-d:ap_physics_1-f03-k0",
+   "addKey": "phys-s4-b:ap_physics_1-f02-k0",
+   "remove": {
+    "type": "lab",
+    "archetype": "phf_lab_spring_k"
+   },
+   "add": {
+    "type": "lab",
+    "archetype": "phf_lab_pendulum_g"
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 4,
+   "removeKey": "phys-p1-b:ap_physics_1-f04-k0",
+   "addKey": "phys-s4-a:ap_physics_1-f07-k0",
+   "remove": {
+    "type": "qqt",
+    "archetype": "phf_qqt_collision"
+   },
+   "add": {
+    "type": "qqt",
+    "archetype": "phf_qqt_flat_curve"
+   }
+  }
+ ]
+}

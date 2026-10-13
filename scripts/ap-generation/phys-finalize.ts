@@ -9,8 +9,10 @@ import { gateCandidate } from "../../lib/ap-figures/gate";
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const RUNS = arg("--runs", "phys-p1-a").split(","), BATCH = arg("--batch", "phys-p1a");
 const root = path.resolve("data/ap/sample-2027"), out = path.resolve("data/ap/stock");
+// --exclude <run>:<archetype>[,..] (2026-10-13, phys-s4): 그 런의 그 원형 후보를 재고에서 뺀다(원형을 고쳐 다시 생성한 경우 이전 런의 낡은 후보가 재고에 남지 않게).
+const EXCLUDE = arg("--exclude", "").split(",").filter(Boolean).map((x) => x.split(":") as [string, string]);
 const runs: Record<string, RawCand[]> = {};
-for (const r of RUNS) { const f = path.join(root, r, "candidates.json"); if (existsSync(f)) runs[r] = (JSON.parse(readFileSync(f, "utf-8")) as RawCand[]).map((c) => ({ ...c, gateOverride: LATEST_GATE } as RawCand)); }
+for (const r of RUNS) { const f = path.join(root, r, "candidates.json"); if (existsSync(f)) runs[r] = (JSON.parse(readFileSync(f, "utf-8")) as RawCand[]).filter((c) => !EXCLUDE.some(([er, ea]) => er === r && String((c as { archetype?: string }).archetype ?? (c.payload as { archetype?: string }).archetype ?? "") === ea)).map((c) => ({ ...c, gateOverride: LATEST_GATE } as RawCand)); }
 const items = buildStock(runs, {});
 // 결정적 TeX 위생(의미 변경 없음; 2026-10-13: \text{ N\cdot m} 의 \cdot 도 KaTeX 가 text 안에서 렌더하지 못해 가운뎃점으로 바꾼다): 유료 런 시점의 생성기가 \text{ m/s^2} 처럼 text 안에 ^ 를 넣었다(KaTeX 가 거부 → 화면 증거에서 원문 수식 노출). 지수를 text 밖으로 옮긴다. 생성기는 같은 커밋에서 고쳤다(phys_common.unit_tex).
 const fixTex = (v: unknown): unknown => typeof v === "string" ? v.replace(/\\text\{([^}^_]*?)\^(\{?-?\d+\}?)\}/g, (_m, a: string, e: string) => `\\text{${a}}^{${e.replace(/[{}]/g, "")}}`).replace(/\\text\{([^}]*?)\\cdot ?([^}]*)\}/g, (_m, a: string, b: string) => `\\text{${a}·${b}}`) : Array.isArray(v) ? v.map(fixTex) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, fixTex(x)])) : v;
