@@ -3,7 +3,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 export type FrozenExpected = { generatorHash: string; reviewerPromptHash: string; difficultyPromptHash: string; parserHash: string; models: Record<string, string>; flags: Record<string, unknown> };
-export type FrozenConfig = { version: string; run: string; subject: string; archetypeList: string; seed0: number; candidatesPerCell: number; capUsd: number; repair: boolean; env: Record<string, string>; generatorFiles: string[]; expected: FrozenExpected };
+export type FrozenConfig = { version: string; run: string; subject: string; archetypeList: string; seed0: number; candidatesPerCell: number; capUsd: number; repair: boolean; env: Record<string, string>; generatorFiles: string[]; expected: FrozenExpected; /** 건너뛸 단계(예: 문장 다듬기 gen). 구성 해시 대상이므로 커밋된 구성에 적는다. */ skipStages?: string[]; /** 누적 원장이 이 값에 닿으면 어떤 단계 전이든 중단(이 작업의 하드 스톱). */ hardStopCumulativeUsd?: number };
 export const sha12 = (t: string | Buffer) => createHash("sha1").update(t).digest("hex").slice(0, 12);
 /** 파일 집합 해시: 경로 정렬 + 각 파일 내용 해시(없는 파일은 'missing'). 경로가 달라지면 해시도 달라진다. */
 export function fileSetHash(paths: string[], read: (p: string) => Buffer | null = (p) => (existsSync(p) ? readFileSync(p) : null)): string {

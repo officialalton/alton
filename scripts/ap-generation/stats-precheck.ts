@@ -10,6 +10,7 @@ import { calibrateMc, gateMc, gateNoCalcExact, wordingPreserves, type McPack } f
 import { answerTextForExplanation, gateMathWrapping } from "../../lib/ap-generation/math-wrapping";
 import { gateGuideMc } from "../../lib/ap-generation/guide-gates";
 import { statsGuide } from "../../lib/ap-generation/subjects/stats";
+import { flattenSet, gateStatsSet, isSetPack } from "../../lib/ap-generation/stats-set";
 import { validateBlueprint, type Blueprint } from "../../lib/ap-generation/blueprint";
 import { generatorDefects } from "../../lib/ap-generation/generator-defects";
 import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
@@ -27,7 +28,7 @@ const expl = (p: McPack) => `The correct answer is ${answerTextForExplanation(p.
 // look-alike 기준: 기존 재고 전체(모든 과목 MC)
 type Raw = { stockKey: string; apSubjectCode: string; kind: string; validation: string; keywordCode: string; itemFamilyId: string; payload: Record<string, unknown>; duplicateOf?: string | null };
 const P = (r: { payload: Record<string, unknown> }) => r.payload as { archetype?: string; stem?: string; stimulus?: { kind?: string }; blueprint?: { student_thinking?: string[] } };
-const files = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items"];
+const files = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "stats-s1-items"];
 const raws = files.flatMap((f) => JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as Raw[]).filter((i) => i.validation === "auto_passed" && !i.duplicateOf && i.kind === "mc");
 const stockIn = raws.map((i) => ({ key: i.stockKey, family: i.itemFamilyId, archetype: P(i).archetype, topic: i.keywordCode, stimKind: P(i).stimulus?.kind ?? "none", stem: P(i).stem ?? "", thinking: P(i).blueprint?.student_thinking }));
 
@@ -37,22 +38,25 @@ if (SVG) mkdirSync(SVG, { recursive: true });
 for (const n of names) {
   const packs = py(["batch", n, String(N), String(SEED0)]) as Record<string, unknown>[];
   if (!packs.length) { rows.push({ name: n, seed: -1, reasons: ["no_pack"], fig: "-", need: "-", pack: {}, lens: "" }); continue; }
-  for (const p of packs) {
-    const mp = { ...(p as unknown as McPack) }; mp.explanation_en = expl(mp);
-    const reasons = [...gateMc(SUBJECT, mp), ...calibrateMc(SUBJECT, mp), ...gateGuideMc(statsGuide, mp), ...gateNoCalcExact(mp), ...gateMathWrapping(mp)];
-    reasons.push(...validateBlueprint(p.blueprint as Partial<Blueprint>, { skills: skillSet, topicUnit: topicUnit as Map<string, string> }).map((x) => `blueprint:${x.code}`));
-    reasons.push(...generatorDefects(mp as unknown as Record<string, unknown>).map((d) => `generator_defect:${d.code}`));
-    // 문장 다듬기 계약: 기본 stem 은 자기 자신을 보존한다(자명) + 선택지 길이 비율
-    reasons.push(...wordingPreserves(mp.stem, mp.stem));
-    const g = gateCandidate({ stockKey: `new:${n}:${p.seed}`, candidateKey: `new:${n}:${p.seed}`, apSubjectCode: SUBJECT, kind: "mc", payload: { ...p, stimulus: p.stimulus } as Record<string, unknown> });
-    for (const i of g.issues) if (i.level === "error") reasons.push(`figure:${i.code}`);
-    if (g.status === "fail") reasons.push("figure_status_fail");
-    if (SVG && g.output) writeFileSync(path.join(SVG, `${n}-s${p.seed}.${g.output.startsWith("<svg") ? "svg" : "html"}`), g.output.startsWith("<svg") ? g.output : `<!doctype html><meta charset="utf-8"><body style="font-family:Georgia;margin:16px">${g.output}`);
-    const lens = mp.options.map((o) => o.text.replace(/\$/g, "").length);
-    rows.push({ name: n, seed: Number(p.seed), reasons: [...new Set(reasons)], fig: `${g.status}/${g.stimKind}${g.issues.filter((i) => i.level === "warn").length ? "+" + g.issues.filter((i) => i.level === "warn").map((i) => i.code).join(",") : ""}`, need: g.need, pack: p, lens: lens.join("/") });
+  for (const sp of packs) {
+    const setReasons = isSetPack(sp) ? gateStatsSet(sp) : [];
+    const members = isSetPack(sp) ? flattenSet(sp, `${n}-s${sp.seed}`).map((m) => ({ ...(m as unknown as Record<string, unknown>), seed: sp.seed, set_reasons: setReasons, member_key: `${n}-s${sp.seed}-q${m.set.index + 1}` })) : [{ ...sp, set_reasons: [] as string[], member_key: `${n}-s${sp.seed}` }];
+    for (const p of members as Record<string, unknown>[]) {
+      const mp = { ...(p as unknown as McPack) }; mp.explanation_en = expl(mp);
+      const reasons = [...gateMc(SUBJECT, mp), ...calibrateMc(SUBJECT, mp), ...gateGuideMc(statsGuide, mp), ...gateNoCalcExact(mp), ...gateMathWrapping(mp), ...(p.set_reasons as string[])];
+      reasons.push(...validateBlueprint(p.blueprint as Partial<Blueprint>, { skills: skillSet, topicUnit: topicUnit as Map<string, string> }).map((x) => `blueprint:${x.code}`));
+      reasons.push(...generatorDefects(mp as unknown as Record<string, unknown>).map((d) => `generator_defect:${d.code}`));
+      reasons.push(...wordingPreserves(mp.stem, mp.stem));
+      const g = gateCandidate({ stockKey: `new:${p.member_key}`, candidateKey: `new:${p.member_key}`, apSubjectCode: SUBJECT, kind: "mc", payload: { ...p, stimulus: p.stimulus } as Record<string, unknown> });
+      for (const i of g.issues) if (i.level === "error") reasons.push(`figure:${i.code}`);
+      if (g.status === "fail") reasons.push("figure_status_fail");
+      if (SVG && g.output) writeFileSync(path.join(SVG, `${p.member_key}.${g.output.startsWith("<svg") ? "svg" : "html"}`), g.output.startsWith("<svg") ? g.output : `<!doctype html><meta charset="utf-8"><body style="font-family:Georgia;margin:16px">${g.output}`);
+      const lens = mp.options.map((o) => o.text.replace(/\$/g, "").length);
+      rows.push({ name: String(p.member_key), seed: Number(p.seed), reasons: [...new Set(reasons)], fig: `${g.status}/${g.stimKind}${g.issues.filter((i) => i.level === "warn").length ? "+" + g.issues.filter((i) => i.level === "warn").map((i) => i.code).join(",") : ""}`, need: g.need, pack: p, lens: lens.join("/") });
+    }
   }
 }
-const newIn = rows.filter((r) => r.pack.stem).map((r) => ({ key: `new:${r.name}:${r.seed}`, family: `new:${r.name}`, archetype: r.name, topic: String(r.pack.topic), stimKind: String((r.pack.stimulus as { kind?: string })?.kind ?? "none"), stem: String(r.pack.stem), thinking: ((r.pack.blueprint as Blueprint | undefined)?.student_thinking) }));
+const newIn = rows.filter((r) => r.pack.stem).map((r) => ({ key: `new:${r.name}:${r.seed}`, family: `new:${(r.pack.set as { base?: string } | undefined)?.base ?? String(r.pack.archetype)}`, archetype: String(r.pack.archetype), topic: String(r.pack.topic), stimKind: String((r.pack.stimulus as { kind?: string })?.kind ?? "none"), stem: String(r.pack.stem), thinking: ((r.pack.blueprint as Blueprint | undefined)?.student_thinking) }));
 const hits: string[] = [];
 for (const a of newIn) for (const b of [...stockIn, ...newIn]) { if (a.key === b.key || (b.key.startsWith("new:") && b.key < a.key) || (a.family === b.family)) continue; const r = lookAlikeReason(a, b); if (r) hits.push(`${a.key} ~ ${b.key} (${r})`); }
 let ok = 0;

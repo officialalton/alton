@@ -10,10 +10,12 @@ import { bundleReferenceChecks, refineParts } from "../../lib/ap-generation/part
 import { bioDataShortDesignChecks } from "../../lib/ap-generation/archetype-checks/bio-data-short";
 import { gateBioFrq } from "../../lib/ap-generation/bio-frq-checks";
 import { gateMicroFrq } from "../../lib/ap-generation/micro-frq-checks";
+import { gateStatsFrq } from "../../lib/ap-generation/stats-frq-checks";
 import { generatorDefects } from "../../lib/ap-generation/generator-defects";
 import { normalizeReview, numsIn, recoverFromBlocks, reviewFromToolBlocks } from "../../lib/ap-generation/review-parse";
 import { calibrateFrq, calibrateMc, gateDuplicate, gateFrq, gateMc, gateNoCalcExact, wordingPreserves, type FrqPack, type McPack } from "../../lib/ap-generation/gates";
 import { gateMathWrapping } from "../../lib/ap-generation/math-wrapping";
+import { flattenSet, gateStatsSet, isSetPack, mergeSet, setVerdict, type SetMember, type SetMeta } from "../../lib/ap-generation/stats-set";
 import { loadEnvLocal } from "../keywords/db";
 import { createHash } from "node:crypto";
 import { POLICY, manifestIssues, type RunManifest } from "../../lib/ap-generation/pipeline-policy";
@@ -64,7 +66,7 @@ function py(args: string[]): unknown {
 }
 
 type Cell = { cellId: string; archetype: string; kind: "mc" | "frq_bundle"; unitCode: string; topic: string; skill: string; calculator: string; candidates: number; extraTopics: string[]; template?: string };
-type Cand = { key: string; cellId: string; archetype: string; kind: "mc" | "frq_bundle"; pack: Json; polished?: Json; item: McPack | FrqPack | null; wording: "llm" | "mixed" | "template" };
+type Cand = { set?: SetMeta; key: string; cellId: string; archetype: string; kind: "mc" | "frq_bundle"; pack: Json; polished?: Json; item: McPack | FrqPack | null; wording: "llm" | "mixed" | "template" };
 
 const SEEDS_PER_CELL = Number(process.env.AP_MC_CANDS ?? 4);
 const FRQ_CANDS = Number(process.env.AP_FRQ_CANDS ?? 4);
@@ -129,14 +131,18 @@ const bpCheck = (): Record<string, string[]> => (existsSync(bpFile()) ? readJson
 /** 설계도 검증(생성 전, LLM 호출 없음). AP_REQUIRE_BLUEPRINT=1 이면 설계도 없는 팩도 실패. 실패한 팩은 문장 생성·검토에 가지 않는다(비용 0). */
 function blueprintStage() {
   const packs = genPacks(); const ctx = { skills: skillSet, topicUnit: unitOf as Map<string, string> }; const out: Record<string, string[]> = {};
-  for (const c of cells()) packs[c.cellId].forEach((p, i) => { const bp = (p as Json).blueprint as Partial<Blueprint> | undefined; const iss = bp ? validateBlueprint(bp, ctx).map((x) => x.code) : (process.env.AP_REQUIRE_BLUEPRINT ? ["missing_blueprint"] : []); out[`${c.cellId}-k${i}`] = iss; });
+  const issuesOf = (p: Json): string[] => { const bp = p.blueprint as Partial<Blueprint> | undefined; return bp ? validateBlueprint(bp, ctx).map((x) => x.code) : (process.env.AP_REQUIRE_BLUEPRINT ? ["missing_blueprint"] : []); };
+  for (const c of cells()) packs[c.cellId].forEach((p, i) => {
+    if (isSetPack(p)) { const set = gateStatsSet(p).map((x) => `set:${x}`); p.items.forEach((m, j) => { out[`${c.cellId}-k${i}-q${j + 1}`] = [...issuesOf(m as unknown as Json), ...set]; }); return; } // 공유 세트: 문항마다 설계도 + 세트 수준 검사(무료)
+    out[`${c.cellId}-k${i}`] = issuesOf(p as Json);
+  });
   writeFileSync(bpFile(), JSON.stringify(out, null, 1)); const bad = Object.entries(out).filter(([, v]) => v.length);
   console.log(`blueprint: ${Object.keys(out).length}건 중 실패 ${bad.length}건(호출 비용 0)`, bad.slice(0, 6));
 }
 async function genStage() {
   const packs = genPacks(); const bp = bpCheck();
   const reqs: BatchReq[] = [];
-  for (const c of cells()) packs[c.cellId].forEach((p, i) => { if ((bp[`${c.cellId}-k${i}`] ?? []).length) return; reqs.push(wordReq(c, p, `${c.cellId}-k${i}`)); });
+  for (const c of cells()) packs[c.cellId].forEach((p, i) => { if (isSetPack(p)) return; if ((bp[`${c.cellId}-k${i}`] ?? []).length) return; reqs.push(wordReq(c, p, `${c.cellId}-k${i}`)); });
   const est = estimate(MODELS.gen, reqs.length, 1800, 1100);
   console.log(`gen(문장): ${reqs.length}건 추정 $${est.toFixed(2)} (동기 2배), 누적 $${ledger(DIR).spent().toFixed(2)}, 신규 상한 $${BUDGET().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "gen", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
@@ -152,6 +158,10 @@ const structuredExplanation = (p: Json) => {
 function buildCands(): Cand[] {
   const packs = genPacks(); const gen = resultMap("gen"); const out: Cand[] = [];
   for (const c of cells()) packs[c.cellId].forEach((pack, i) => {
+    if (isSetPack(pack)) { // 공유 세트: 문항 3개로 펼쳐 같은 단계(풀이·검토·난이도)를 통과시키고, 보고 단계에서 세트로 합친다
+      flattenSet(pack, `${c.cellId}-k${i}`).forEach((m, j) => { const mp = m as unknown as McPack & { seed?: number }; mp.seed = (pack as unknown as Json).seed as number; out.push({ key: `${c.cellId}-k${i}-q${j + 1}`, set: m.set, cellId: c.cellId, archetype: m.archetype, kind: "mc", pack: { ...(m as unknown as Json), seed: (pack as unknown as Json).seed }, item: { ...mp, explanation_en: structuredExplanation(m as unknown as Json) } as McPack, wording: "template" }); });
+      return;
+    }
     const key = `${c.cellId}-k${i}`; const r = gen.get(key); const polished = r ? (toolInput(r as never) as Json | null) : null;
     let item: McPack | FrqPack | null = null; let wording: "llm" | "mixed" | "template" = "template";
     if (c.kind === "mc") {
@@ -185,6 +195,7 @@ function checkStage() {
     if (c.item && c.kind === "frq_bundle" && SUBJECT === "ap_biology" && !process.env.AP_LEGACY_ITEMS) reasons.push(...gateBioFrq(c.item as unknown as Record<string, unknown>, { topics: new Set(topicTitle.keys()) }).map((x) => `bio_free:${x.code}`)); // Bio FRQ 무료 결정적 검사 (공통 (a)(c) 규칙)
     if (c.item && c.kind === "frq_bundle" && (c.item as unknown as { archetype?: string }).archetype === "frq_bio_data_short") reasons.push(...bioDataShortDesignChecks(c.item as unknown as Record<string, unknown>).map((x) => x.code)); // 원형 내부 설계 조건 (b): 전역 게이트 아님
     if (c.item && c.kind === "frq_bundle" && SUBJECT === "ap_microeconomics" && !process.env.AP_LEGACY_ITEMS) reasons.push(...gateMicroFrq(c.item as unknown as Record<string, unknown>, { topics: new Set(topicTitle.keys()), skills: skillSet }).map((x) => `micro_free:${x.code}`)); // Micro FRQ 무료 결정적 설계 검사
+    if (c.item && c.kind === "frq_bundle" && SUBJECT === "ap_statistics") reasons.push(...gateStatsFrq(c.item as unknown as FrqPack).map((x) => `stats_free:${x}`)); // Statistics FRQ 무료 결정적 설계 검사(10점·1점 행 10개·유형별 필수 요소·키보드 입력)
     if (c.item && c.kind === "frq_bundle" && !process.env.AP_LEGACY_ITEMS) reasons.push(...bundleReferenceChecks(c.item as unknown as FrqPack).map((x) => `bundle_ref:${x}`)); // 번들 수준 참조·조건 일관성
     if (c.item) reasons.push(...generatorDefects(c.item as unknown as Record<string, unknown>).map((d) => `generator_defect:${d.code}`)); // 생성기 결함(중괄호 미닫힘·표 본문 누락 등)은 LLM 단계 전에 차단
     if (process.env.AP_EVAL_BYPASS) reasons = reasons.filter((r) => r.startsWith("generator_defect")); // 결함 주입 평가: 주입과 무관한 구형식 품질 게이트로 평가에서 빠지지 않게 한다
@@ -216,7 +227,7 @@ const blind = (c: Cand): Json => {
 };
 const solveTool = { name: "submit_solution", description: "Submit your independent solution.", input_schema: { type: "object", properties: { answers: { type: "array", items: { type: "object", properties: { item: { type: "string" }, choice_index: { type: ["integer", "null"] }, final_answer: { type: "string" }, brief_reasoning: { type: "string" }, ambiguous_or_flawed: { type: "boolean" }, flaw_note: { type: "string" } }, required: ["item", "brief_reasoning", "ambiguous_or_flawed"] } } }, required: ["answers"] } };
 const SOLVE_SYS = "You are an AP course expert solving a practice item as a student would. Solve independently from the stated data only. For multiple choice give choice_index (0-based). For free response give the final answer per part (numbers with units where asked). If the item is ambiguous, has two defensible answers, lacks a needed condition or contradicts its stimulus, set ambiguous_or_flawed true and say why.";
-const ctx = (c: Cand) => { const cell = cells().find((x) => x.cellId === c.cellId)!; return `Subject ${SUBJECT}. Unit ${cell.unitCode}; topic ${cell.topic} "${topicTitle.get(cell.topic)}"; target skill ${cell.skill} (${skillLabel.get(cell.skill)}); calculator ${cell.calculator}. ${guideReviewRules(cell.unitCode)}${cell.extraTopics.length ? ` The bundle legitimately spans related topics ${[cell.topic, ...cell.extraTopics].join(", ")}.` : ""}`; };
+const ctx = (c: Cand) => { const cell0 = cells().find((x) => x.cellId === c.cellId)!; const cell = c.set ? { ...cell0, topic: (c.item as McPack).topic, skill: (c.item as McPack).skill, unitCode: unitOf.get((c.item as McPack).topic) ?? cell0.unitCode } : cell0; return `Subject ${SUBJECT}. Unit ${cell.unitCode}; topic ${cell.topic} "${topicTitle.get(cell.topic)}"; target skill ${cell.skill} (${skillLabel.get(cell.skill)}); calculator ${cell.calculator}. ${guideReviewRules(cell.unitCode)}${cell.extraTopics.length ? ` The bundle legitimately spans related topics ${[cell.topic, ...cell.extraTopics].join(", ")}.` : ""}`; };
 const mk = (id: string, model: string, sys: string, tool: Json, user: string | unknown[], max: number): BatchReq => ({ custom_id: id, params: { model, ...think(model), max_tokens: max, system: [{ type: "text", text: sys, cache_control: SYS_CACHE }], tools: [tool], tool_choice: { type: "auto" }, messages: [{ role: "user", content: user }] } });
 async function solveStage() {
   const cs = alive(); const reqs = cs.map((c) => mk(`s-${c.key}`, MODELS.solve, SOLVE_SYS, solveTool, withImg(c, `${JSON.stringify(blind(c))}\n\nSolve every item/part and submit via submit_solution (answers[].item = "1" for MC or the part label).`), c.kind === "mc" ? 3000 : 5000));
@@ -268,7 +279,7 @@ const reviewTool = { name: "submit_review", description: "Submit the review.", i
   matches_reference_pattern: { type: "boolean" }, resembles_known_exam_item: { type: "boolean", description: "true ONLY if the item reproduces a specific recognizable released AP item (same numbers, context and wording). Generic textbook forms (product rule from a table, Riemann sums) are NOT a resemblance." }, summary: { type: "string" } }, required: ["scope_skill", "key_scoring", "stimulus_expression", "distractor_explanation", "exam_suitability", "instant_reject", "matches_reference_pattern", "resembles_known_exam_item", "summary"] } };
 const diffTool = { name: "submit_difficulty", description: "Submit provisional difficulty.", input_schema: { type: "object", properties: { label: { type: "string", enum: ["basic_learning", "exam_prep", "advanced_supplement"] }, rationale: { type: "string" }, reading_load: { type: "string", enum: ["low", "medium", "high"] }, computation_load: { type: "string", enum: ["low", "medium", "high"] }, reasoning_steps: { type: "integer" }, representation_changes: { type: "integer" }, difficulty_from_unfair_sources: { type: "boolean" }, est_seconds: { type: "integer" } }, required: ["label", "rationale", "reading_load", "computation_load", "reasoning_steps", "representation_changes", "difficulty_from_unfair_sources", "est_seconds"] } };
 const DIFF_SYS = "You tag provisional internal difficulty for AP practice items: basic_learning, exam_prep (target for full mocks) or advanced_supplement. Judge only from concept depth, reasoning steps, representation changes, reading and computation load. Do NOT infer difficulty from any claim of AP score level or from model agreement. Flag difficulty_from_unfair_sources if the item is hard only because of long arithmetic, vagueness, heavy reading or out-of-scope knowledge.";
-const full = (c: Cand) => JSON.stringify(c.kind === "mc" ? { ...(c.item as McPack), stimulus: stimFor(c, (c.item as McPack).stimulus), facts: undefined } : { ...(c.item as FrqPack), facts: undefined });
+const full = (c: Cand) => JSON.stringify(c.kind === "mc" ? { ...(c.item as McPack), set: undefined, stimulus: stimFor(c, (c.item as McPack).stimulus), facts: undefined } : { ...(c.item as FrqPack), facts: undefined });
 async function reviewStage() {
   const cs = alive().filter((c) => solved(c));
   const reqs = cs.map((c) => { const q = mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), c.kind === "mc" ? 3000 : 6000); if (c.kind !== "mc" && process.env.AP_FLAT_REVIEW) (q.params as Json).tools = [flatReviewTool]; return q; }); // 다음 라운드부터: FRQ 검토는 평탄 도구로 처음부터 받아 재요청 비용을 줄인다(AP_FLAT_REVIEW=1)
@@ -342,9 +353,12 @@ async function spotStage() {
 function reportStage() {
   const by = new Map(buildCands().map((c) => [c.key, c])); const spot = resultMap("spot");
   const verd = decide().map((v) => { const r = spot.get(`x-${v.key}`); if (r && v.passed) { const ag = solverAgrees(by.get(v.key)!, toolInput(r as never) as Json | null); if (ag.ok === false) { v.passed = false; v.reasons.push("fable_spot_check_disagrees"); } } return v; });
+  // 공유 세트: 세 문항이 모두 통과해야 세트 통과. 한 문항이라도 반려면 문항 전부에 같은 반려를 적는다(부분 통과 세트는 재고에 들어가지 않는다).
+  const setIds = [...new Set([...by.values()].filter((c) => c.set).map((c) => c.set!.id))];
+  for (const sid of setIds) { const mem = verd.filter((v) => by.get(v.key)?.set?.id === sid); const sv = setVerdict(mem.map((v) => ({ passed: v.passed, reasons: v.reasons }))); if (!sv.passed) for (const v of mem) { v.passed = false; for (const r of sv.reasons) if (!v.reasons.includes(r)) v.reasons.push(r); } }
   const cs = cells(); const adopted: string[] = []; const reserve: string[] = []; const acceptedItems: (McPack | FrqPack)[] = []; const dupRejected: string[] = [];
   for (const cell of cs) {
-    const pass = verd.filter((v) => v.cellId === cell.cellId && v.passed).sort((a, b) => Number(b.difficulty?.label === "exam_prep") - Number(a.difficulty?.label === "exam_prep") || a.key.localeCompare(b.key));
+    const pass = verd.filter((v) => v.cellId === cell.cellId && v.passed && (!by.get(v.key)?.set || by.get(v.key)!.set!.index === 0)).sort((a, b) => Number(b.difficulty?.label === "exam_prep") - Number(a.difficulty?.label === "exam_prep") || a.key.localeCompare(b.key));
     let got = false;
     for (const v of pass) {
       const it = by.get(v.key)!.item as McPack | FrqPack; const d = gateDuplicate(it, acceptedItems);
@@ -361,7 +375,8 @@ function reportStage() {
   const unfilled = cs.filter((c) => !adopted.some((k) => by.get(k)!.cellId === c.cellId)).map((c) => c.cellId);
   const report = { run: RUN, subject: SUBJECT, generatedAt: new Date().toISOString(), totalCostUsd: Number(total.toFixed(2)), newSpendSinceBaseline: Number((ledger(DIR).spent() - baseline()).toFixed(2)), cap: CAP_NEW, calls: calls.length, candidates: verd.length, mcCandidates: mcC, frqCandidates: frqC, passedAll: verd.filter((v) => v.passed).length, adopted: adopted.length, mcAdopted: mcAd, frqAdopted: frqAd, reserve: reserve.length, yield: Number((adopted.length / Math.max(1, verd.length)).toFixed(3)), costPerAdopted: Number((total / Math.max(1, adopted.length)).toFixed(3)), callsPerAdopted: Number((calls.length / Math.max(1, adopted.length)).toFixed(1)), duplicateRejected: dupRejected.length, spotChecked: spot.size, wording, rejectionReasons: rej, unfilledCells: unfilled };
   writeFileSync(path.join(DIR, "report.json"), JSON.stringify(report, null, 1));
-  const exported = verd.map((v) => { const c = by.get(v.key)!; const cell = cs.find((x) => x.cellId === c.cellId)!; return { candidateKey: v.key, cellId: v.cellId, apSubjectCode: SUBJECT, kind: c.kind, keywordCode: cell.topic, unitCode: cell.unitCode, skillPrimary: cell.skill, structure: c.kind === "mc" ? "standalone" : "frq_multipart", calculator: cell.calculator, archetype: c.archetype, wording: c.wording, reviewState: v.passed ? "auto_passed" : v.reasons.length ? "rejected" : "candidate", gateVersion: "v2-code-first-final-2026-10-08", selectedForSample: adopted.includes(v.key), reserve: reserve.includes(v.key), rejectionReason: v.passed ? null : v.reasons.join("; "), difficultyProvisional: v.difficulty?.label ?? null, difficultyRationale: v.difficulty?.rationale ?? null, payload: c.item, verification: { generatedByCode: true, archetype: c.archetype, facts: (c.pack as Json).facts, seed: (c.pack as Json).seed }, review: v.review ?? null, difficulty: v.difficulty ?? null }; });
+  const hardest = (xs: Verdict[]) => { const o = ["advanced_supplement", "exam_prep", "basic_learning"]; return xs.map((x) => x.difficulty?.label as string | undefined).filter((l): l is string => !!l).sort((a, b) => o.indexOf(a) - o.indexOf(b))[0] ?? null; };
+  const exported = verd.filter((v) => !by.get(v.key)?.set || by.get(v.key)!.set!.index === 0).map((v) => { const c = by.get(v.key)!; const mem = c.set ? verd.filter((x) => by.get(x.key)?.set?.id === c.set!.id) : [v]; const cell = cs.find((x) => x.cellId === c.cellId)!; return { candidateKey: c.set ? c.set.id : v.key, cellId: v.cellId, apSubjectCode: SUBJECT, kind: c.kind, keywordCode: cell.topic, unitCode: cell.unitCode, skillPrimary: cell.skill, structure: c.set ? "shared_set" : c.kind === "mc" ? "standalone" : "frq_multipart", calculator: cell.calculator, archetype: c.archetype, wording: c.wording, reviewState: v.passed ? "auto_passed" : v.reasons.length ? "rejected" : "candidate", gateVersion: "v2-code-first-final-2026-10-08", selectedForSample: adopted.includes(v.key), reserve: reserve.includes(v.key), rejectionReason: v.passed ? null : (c.set ? [...new Set(mem.flatMap((x) => x.reasons))] : v.reasons).join("; "), difficultyProvisional: c.set ? hardest(mem) : v.difficulty?.label ?? null, difficultyRationale: v.difficulty?.rationale ?? null, payload: c.set ? mergeSet(mem.map((x) => by.get(x.key)!.item as unknown as SetMember)) : c.item, verification: { generatedByCode: true, archetype: c.archetype, facts: (c.pack as Json).facts, seed: (c.pack as Json).seed }, review: c.set ? mem.map((x) => x.review ?? null) : v.review ?? null, difficulty: c.set ? mem.map((x) => x.difficulty ?? null) : v.difficulty ?? null }; });
   writeFileSync(path.join(DIR, "candidates.json"), JSON.stringify(exported, null, 1));
   console.log(JSON.stringify(report, null, 1));
 }

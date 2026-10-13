@@ -152,7 +152,7 @@ export function gateFrq(subject: string, p: FrqPack, skills: Set<string>, opts: 
   if (total !== p.total_points) r.push(`total_points_${total}_vs_${p.total_points}`);
   // 번들 대표 스킬은 어떤 파트의 평가 스킬이어야 하지만, 모든 파트가 같을 필요는 없다(공식 FRQ 는 파트별 스킬이 다르다).
   if (p.representative_skill && !p.parts.some((x) => x.skill_codes.includes(p.representative_skill!))) r.push("representative_skill_not_assessed_by_any_part");
-  if (subject !== "ap_biology" && p.est_minutes > (subject === "ap_microeconomics" ? 32 : 20)) r.push("est_minutes_too_long"); // Bio 의 시간은 점수 비례 내부 추정(참고용)이라 반려 사유로 쓰지 않는다
+  if (subject !== "ap_biology" && p.est_minutes > (subject === "ap_microeconomics" ? 32 : subject === "ap_statistics" ? 25 : 20)) r.push("est_minutes_too_long"); // Bio 의 시간은 점수 비례 내부 추정(참고용)이라 반려 사유로 쓰지 않는다
   if (!(p.stimulus.kind && p.stimulus.description)) r.push("missing_stimulus");
   return [...new Set(r)];
 }
@@ -192,9 +192,11 @@ export function calibrateMc(subject: string, p: McPack): string[] {
 export const BIO_PROFILE = { long: { points: 9, parts: [3, 6] as [number, number], rowsPerPart: [1, 5] as [number, number], minutes: [18, 26] as [number, number] }, short: { points: 4, parts: [4, 4] as [number, number], rowsPerPart: [1, 1] as [number, number], minutes: [7, 13] as [number, number] } };
 /** Microeconomics: 섹션 60분(읽기 10분 포함) 중 쓰기 50분 / 20점(긴 10 + 짧은 5×2) = 점당 2.5분 → 10점 약 25분, 5점 약 12.5분. */
 export const MICRO_PROFILE = { long: { points: 10, parts: [4, 8] as [number, number], rowsPerPart: [1, 5] as [number, number], minutes: [20, 30] as [number, number] }, short: { points: 5, parts: [3, 6] as [number, number], rowsPerPart: [1, 3] as [number, number], minutes: [10, 16] as [number, number] } };
+/** Statistics: 섹션 90분 / 4문항 = 문항당 평균 22.5분(공식은 문항별 시간 미공표 — 내부 추정). 10점, 파트 3~6, 파트당 채점 행 1~3(모두 1점). */
+export const STATS_PROFILE = { points: 10, parts: [3, 6] as [number, number], rowsPerPart: [1, 3] as [number, number], minutes: [15, 25] as [number, number] };
 export function calibrateFrq(p: FrqPack, subject = "ap_calculus_ab"): string[] {
   const r: string[] = [];
-  const prof = subject === "ap_microeconomics" ? (p.total_points >= 10 ? MICRO_PROFILE.long : MICRO_PROFILE.short) : subject === "ap_biology" ? (p.total_points >= 9 ? BIO_PROFILE.long : BIO_PROFILE.short) : p.total_points >= 9 ? REFERENCE_PROFILE.frq9 : REFERENCE_PROFILE.frq4;
+  const prof = subject === "ap_statistics" ? STATS_PROFILE : subject === "ap_microeconomics" ? (p.total_points >= 10 ? MICRO_PROFILE.long : MICRO_PROFILE.short) : subject === "ap_biology" ? (p.total_points >= 9 ? BIO_PROFILE.long : BIO_PROFILE.short) : p.total_points >= 9 ? REFERENCE_PROFILE.frq9 : REFERENCE_PROFILE.frq4;
   if (p.total_points !== prof.points) r.push("reference_points_mismatch");
   if (p.parts.length < prof.parts[0] || p.parts.length > prof.parts[1]) r.push("reference_part_count_out_of_range");
   if (subject !== "ap_biology" && (p.est_minutes < prof.minutes[0] || p.est_minutes > prof.minutes[1])) r.push("reference_time_out_of_range");
