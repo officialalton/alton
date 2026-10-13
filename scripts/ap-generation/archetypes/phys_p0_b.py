@@ -53,8 +53,10 @@ def ph_fx_work(rng):
 
 def ph_track_energy(rng):
     for _ in forever():
-        c = pick(rng, [0.4, 0.5, 0.8]); x0 = pick(rng, [1.0, 1.5, 2.0]); m = pick(rng, [0.5, 1.0, 2.0])
+        c = pick(rng, [0.4, 0.5, 0.8]); x0 = pick(rng, [1.0, 1.5, 2.0]); m = pick(rng, [0.5, 2.0])
         h = c * x0 * x0
+        if abs(h * 10 - round(h * 10)) > 1e-9:
+            continue  # 높이를 그래프 눈금에서 읽을 수 있게 0.1 m 단위만
         v = math.sqrt(2 * G * h)
         # 독립 경로: 포물선 궤도 y=c x^2 위의 라그랑주 운동방정식을 RK4 로 적분해 x 가 0 을 지날 때의 속력
         def f(t, s):
@@ -69,10 +71,10 @@ def ph_track_energy(rng):
         agree(v, vn, 2e-3, "v")
         break
     pairs = [("Uses $v=\\sqrt{gh}$, forgetting the factor of two from the kinetic energy.", math.sqrt(G * h)), ("Takes $v=gh$ with no square root.", G * h),
-             ("Uses the horizontal starting distance instead of the height in the energy equation.", math.sqrt(2 * G * x0)), ("Includes the mass in the speed, reporting $\\sqrt{2gh}\\,m$.", v * m if m != 1 else v * 1.7)]
+             ("Uses the horizontal starting distance instead of the height in the energy equation.", math.sqrt(2 * G * x0)), ("Reports the kinetic energy-like product $mgh$ as the speed.", m * G * h)]
     key, ds = num_opts(v, pairs, "m/s")
-    stim = dense_graph_stim("Height of the frictionless track versus horizontal position", lambda x: c * x * x, -x0 * 1.1, x0 * 1.1, gaxis("Horizontal position (m)", -round(x0 * 1.1, 2), round(x0 * 1.1, 2), 0.5), gaxis("Height (m)", 0, round(h * 1.2, 2), 0.5))
-    stem = f"A ${m:g}\\text{{ kg}}$ block is released from rest at the point on the frictionless track shown where the height is ${h:.2f}\\text{{ m}}$ above the lowest point. What is its speed at the lowest point of the track?"
+    stim = dense_graph_stim("Height of the frictionless track versus horizontal position", lambda x: c * x * x, -x0, x0, gaxis("Horizontal position (m)", -x0, x0, 0.5), gaxis("Height (m)", 0, math.ceil(h * 5) / 5, 0.2 if h > 1 else 0.1))
+    stem = f"A ${m:g}\\text{{ kg}}$ block is released from rest at the right end of the frictionless track whose height is graphed. What is its speed at the lowest point of the track?"
     return mk("ph_track_energy", "3.4", "2.B", stem, key, ds, rng, concept="Conservation of mechanical energy on a curved frictionless track", thinking=["Identify that only gravity does work on the block so mechanical energy is conserved", "Convert the lost gravitational potential energy to kinetic energy and solve for the speed"],
               cond=[("the track is frictionless so mechanical energy is conserved", "the stem states a frictionless track")], path="the Lagrangian equation of motion for a block on a parabolic track is integrated with RK4 and the speed at the bottom matches the energy result",
               material=MAT_GRAPH("axis labels with units"), judgment=["law_selection", "symbolic_reasoning"], stim=stim, est=90, facts=[f"c={c}", f"x0={x0}", f"m={m}"], kwhy="Energy conservation $mgh=\\tfrac12 mv^2$ gives $v=\\sqrt{2gh}$ independent of mass and track shape.")
@@ -91,12 +93,12 @@ def ph_spring_launch(rng):
         if 0.2 < hmax < 6:
             break
     pairs = [("Equates the spring energy to $mgh$ using $kx$ instead of $\\tfrac12kx^2$.", k * x / (m * G)), ("Uses $\\tfrac12kx^2/(mg)$ without the half in the spring energy, giving double the height.", k * x * x / (m * G)),
-             ("Uses the spring force $kx$ as the energy and divides by the weight.", k * x / (2 * m * G)), ("Treats the spring energy as $\\tfrac12 kx$ with the compression to the first power.", k * x / (2 * m * G) * 2 / 2 * 0.5)]
+             ("Treats the spring energy as $\\tfrac12 kx$ with the compression to the first power.", k * x / (2 * m * G)), ("Divides the spring energy by the mass only and forgets the factor of $g$, using $\\tfrac12kx^2/m$.", k * x * x / (2 * m))]
     key, ds = num_opts(hmax, pairs, "m", fmt=lambda v: Q(v, "m", 3))
     stem = f"A spring of constant ${k:g}\\text{{ N/m}}$ is compressed ${x * 100:g}\\text{{ cm}}$ against a ${m:g}\\text{{ kg}}$ block on a frictionless surface. The block is released and the surface curves smoothly upward. What maximum height above the starting level does the block reach?"
     return mk("ph_spring_launch", "3.4", "2.B", stem, key, ds, rng, concept="Conversion of spring potential energy into gravitational potential energy", thinking=["Express the energy stored in the compressed spring", "Set the stored energy equal to the gain in gravitational potential energy at the top"],
               cond=[("the surface is frictionless so all spring energy becomes gravitational energy", "the stem states a frictionless surface")], path="RK4 integration of the spring-mass motion gives the speed at the natural length, whose kinetic energy is converted with $v^2/2g$", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=110, facts=[f"k={k}", f"m={m}", f"x={x}"], kwhy="Energy conservation $\\tfrac12kx^2=mgh$ gives the maximum height.")
+              judgment=["law_selection", "symbolic_reasoning"], est=110, facts=[f"k={k}", f"m={m}", f"x={x}"], kwhy="The compressed spring stores $\\tfrac12kx^2$, and at the top all of it is gravitational energy $mgh$, so $h=kx^2/(2mg)$.")
 
 
 def ph_power_fv(rng):
@@ -269,14 +271,14 @@ def ph_beam_balance(rng):
         net = lambda mm: mm * G * xp - M * G * (L / 2 - xp)  # noqa: E731
         agree(m, bisect(net, 0.0, 1000.0), 1e-6, "m")
         break
-    pairs = [("Ignores the weight of the beam and balances only the hanging object, so the mass must be zero or arbitrary; here uses $M(L/2)/xp$ with the wrong lever arm.", M * (L / 2) / xp), ("Places the beam's weight at the pivot, so it produces no torque.", M * xp / (L / 2)),
-             ("Sets the hanging mass equal to the mass of the beam.", M), ("Uses the full length as the lever arm of the beam's weight.", M * (L - xp) / xp)]
+    pairs = [("Uses $L/2$ instead of $L/2-x_p$ as the lever arm of the beam's weight, giving $M(L/2)/x_p$.", M * (L / 2) / xp), ("Swaps the two lever arms, using $Mx_p/(L/2)$.", M * xp / (L / 2)),
+             ("Sets the hanging mass equal to the mass of the beam.", M), ("Uses the distance from the pivot to the far end, $L-x_p$, as the lever arm of the beam's weight.", M * (L - xp) / xp)]
     key, ds = num_opts(m, pairs, "kg")
-    sc = make_beam(L, xp, [{"x": 0.0, "mag": m * G, "dir": "down", "label": "mg"}, {"x": L / 2, "mag": M * G, "dir": "down", "label": "Mg"}]); assert not check_scene(sc)
+    sc = make_beam(L, xp, [{"x": 0.0, "mag": 0, "dir": "down", "label": "m"}, {"x": L / 2, "mag": M * G, "dir": "down", "label": "Mg"}]); assert not check_scene(sc)
     stem = f"A uniform beam of length ${L:g}\\text{{ m}}$ and mass ${M:g}\\text{{ kg}}$ rests on a pivot located ${xp:g}\\text{{ m}}$ from its left end. An object is hung from the left end. What mass must the object have for the beam to stay in rotational equilibrium?"
     return mk("ph_beam_balance", "5.5", "2.B", stem, key, ds, rng, concept="Rotational equilibrium of a uniform beam about a pivot", thinking=["Locate the beam's weight at its center and find each lever arm about the pivot", "Set the net torque about the pivot equal to zero and solve for the unknown mass"],
               cond=[("the beam is uniform so its weight acts at the center", "the stem states a uniform beam")], path="a bisection root finder on the net torque as a function of the hanging mass recomputes the balancing mass", material=MAT_DIAGRAM("beam, pivot position and hanging object"),
-              judgment=["law_selection", "symbolic_reasoning"], stim=diagram_stim("Uniform beam on a pivot", sc), est=110, facts=[f"L={L}", f"M={M}", f"xp={xp}"], kwhy="Torque balance about the pivot gives $mg\\,x_p=Mg(L/2-x_p)$.")
+              judgment=["law_selection", "symbolic_reasoning"], stim=diagram_stim("Uniform beam on a pivot", sc), est=110, facts=[f"L={L}", f"M={M}", f"xp={xp}"], kwhy="Setting the net torque about the pivot to zero gives $mg\\,x_p=Mg(L/2-x_p)$, so $m=M(L/2-x_p)/x_p$.")
 
 
 def ph_wire_tension(rng):

@@ -1,16 +1,17 @@
 # AP 그림 렌더링 게이트 결과
 
-생성: 2026-10-13T07:14:23.299Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1318행)
+생성: 2026-10-13T08:03:12.370Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1360행)
 
 ## 전체
 
-- 전체 1318행: 통과 775 / 실패 1 / 해당 없음(그림·표 없음) 542
-- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 811행: 통과 409 / 실패 0 / 해당 없음 402
+- 전체 1360행: 통과 803 / 실패 1 / 해당 없음(그림·표 없음) 556
+- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 829행: 통과 419 / 실패 0 / 해당 없음 410
 
 ## 유형별(렌더 유형)
 
 | 유형 | 전체 | 통과 | 실패 | 해당 없음 |
 |---|---:|---:|---:|---:|
+| ap_diagram:phys_scene | 14 | 14 | 0 | 0 |
 | ap_diagram:replication_bubble | 1 | 1 | 0 | 0 |
 | ap_diagram:ribosome | 1 | 1 | 0 | 0 |
 | ap_diagram:strand_pair | 1 | 1 | 0 | 0 |
@@ -20,6 +21,7 @@
 | ap_graph:calc_piecewise_limits | 7 | 7 | 0 | 0 |
 | ap_graph:calc_region_between_curves | 24 | 24 | 0 | 0 |
 | ap_graph:econ_curves | 25 | 25 | 0 | 0 |
+| ap_graph:phys_line | 10 | 10 | 0 | 0 |
 | ap_stat_chart:boxplot | 5 | 5 | 0 | 0 |
 | ap_stat_chart:curve | 3 | 3 | 0 | 0 |
 | ap_stat_chart:dot_plot | 5 | 5 | 0 | 0 |
@@ -33,7 +35,8 @@
 | ap_table:given_info | 31 | 31 | 0 | 0 |
 | ap_table:multi_panel | 29 | 29 | 0 | 0 |
 | ap_table:payoff_matrix | 8 | 8 | 0 | 0 |
-| none | 433 | 0 | 0 | 433 |
+| figure_choice:ap_diagram:phys_scene | 4 | 4 | 0 | 0 |
+| none | 447 | 0 | 0 | 447 |
 | none(diagram_text_only) | 1 | 0 | 0 | 1 |
 | text | 108 | 0 | 0 | 108 |
 
@@ -46,12 +49,13 @@
 | ap_microeconomics | 172 | 162 | 0 | 10 |
 | ap_calculus_bc | 136 | 28 | 0 | 108 |
 | ap_statistics | 131 | 74 | 0 | 57 |
+| ap_physics_1 | 42 | 28 | 0 | 14 |
 
 ## 그림 필요 분류(그림이 있어야 풀리는가)
 
-- required(그림·표가 있어야 풀림): 717
+- required(그림·표가 있어야 풀림): 745
 - supporting(보조 자료, 본문에도 정보 있음): 59
-- text_only(본문만으로 충분): 542
+- text_only(본문만으로 충분): 556
 
 ## 실패 사유 코드
 
@@ -74,6 +78,7 @@
 | derivative_label | 6 |
 | axis_label_defaulted | 6 |
 | axis_label_long | 4 |
+| curve_clipped | 2 |
 | text_data_not_in_stem | 1 |
 
 ## 실패 목록(상위 60)

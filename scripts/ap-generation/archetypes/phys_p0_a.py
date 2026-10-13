@@ -116,12 +116,12 @@ def ph_projectile_range(rng):
     pairs = [("Assumes the maximum-range launch angle and uses $v_0^2/g$, ignoring the stated angle.", v0 ** 2 / G),
              ("Omits the factor of two from $\\sin 2\\theta$, using $v_0^2\\sin\\theta\\cos\\theta/g$.", v0 ** 2 * math.sin(th_r) * math.cos(th_r) / G),
              ("Uses the vertical velocity component for the horizontal motion, giving $v_0^2\\sin^2\\theta\\cdot 2/g$.", 2 * (v0 * math.sin(th_r)) ** 2 / G),
-             ("Uses cosine for the vertical component and sine for the horizontal component.", 2 * v0 ** 2 * math.sin(th_r) * math.cos(th_r) / G * (math.tan(th_r) if th > 45 else 1 / math.tan(th_r)))]
+             ("Uses the full launch speed as the horizontal velocity, giving $2v_0^2\\sin\\theta/g$.", 2 * v0 ** 2 * math.sin(th_r) / G)]
     key, ds = num_opts(R, pairs, "m")
     stem = f"A ball is launched from level ground with speed ${v0:g}\\text{{ m/s}}$ at ${th}^\\circ$ above the horizontal. Air resistance is negligible. How far from the launch point does the ball land?"
     return mk("ph_projectile_range", "1.5", "2.B", stem, key, ds, rng, concept="Horizontal range of a projectile launched from level ground", thinking=["Split the launch velocity into horizontal and vertical components", "Use the vertical motion to find the flight time, then the horizontal motion for the distance"],
               cond=[("the landing height equals the launch height and air resistance is ignored", "the stem states level ground and negligible air resistance")], path="closed form range versus an RK4 integration of the equations of motion until the ball returns to the ground", material=MAT_NONE,
-              judgment=["law_selection", "symbolic_reasoning"], est=120, facts=[f"v0={v0}", f"th={th}"], kwhy="The vertical motion fixes the time of flight and the constant horizontal velocity then gives the range.")
+              judgment=["law_selection", "symbolic_reasoning"], est=120, facts=[f"v0={v0}", f"th={th}"], kwhy="The flight time is $2v_0\\sin\\theta/g$ and the horizontal velocity $v_0\\cos\\theta$ is constant, so the range is $v_0^2\\sin 2\\theta/g$.")
 
 
 # ======================= 5. 상대 운동: 강 건너기 (1.4 / 2.B, 그림: V) =======================
@@ -172,7 +172,8 @@ def ph_motion_diagram(rng):
         for g in gaps:
             xs.append(xs[-1] + g)
         sign = 1 if right else -1
-        vs = [sign * (x2 - x1) for x1, x2 in zip(xs, xs[1:])] + [sign * gaps[-1]]
+        a_c = (gaps[-1] - gaps[0]) / (len(gaps) - 1.0)  # 등가속: 간격이 1씩 변하므로 순간 속도는 간격의 중점 값 ±1/2
+        vs = [sign * (gaps[0] - a_c / 2 + a_c * k) for k in range(len(gaps) + 1)]
         dv = vs[-1] - vs[0] if False else sign * (gaps[-1] - gaps[0])
         break
     pts = [sign * x for x in xs] if not right else xs
@@ -227,7 +228,7 @@ def ph_incline_friction(rng):
         if a > 0.8:
             break
     thr = math.radians(th)
-    pairs = [("Ignores friction and uses $g\\sin\\theta$.", G * math.sin(thr)), ("Subtracts the friction force without dividing by the mass correctly, using $g\\sin\\theta-\\mu\\sin\\theta$.", G * math.sin(thr) * (1 - mu)),
+    pairs = [("Ignores friction and uses $g\\sin\\theta$.", G * math.sin(thr)), ("Multiplies the friction term by the sine instead of the cosine, using $g\\sin\\theta(1-\\mu)$.", G * math.sin(thr) * (1 - mu)),
              ("Uses the cosine for the component along the incline and the sine for the normal force, swapping the components.", G * (math.cos(thr) - mu * math.sin(thr))), ("Adds the friction term instead of subtracting it while the block slides down.", G * (math.sin(thr) + mu * math.cos(thr)))]
     key, ds = num_opts(a, pairs, "m/s^2")
     sc = make_incline(th, m, mu); assert not check_scene(sc)

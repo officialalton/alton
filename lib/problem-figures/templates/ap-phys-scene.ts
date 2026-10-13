@@ -243,3 +243,22 @@ export function renderPhysSceneSpec(spec: PhysSceneSpec): { svg: string; alt: st
   const issues: FigureIssue[] = checkPhysScene(spec.scene).map((code) => ({ code, message: `장면 그림 검사 실패: ${code}` }));
   return { ...r, issues };
 }
+
+/** LLM 풀이자·검토자에게 주는 "학생이 보는 그림" 텍스트 설명(결정적, 장면 모델에서만 파생). 화면에 보이지 않는 값(예: 미지 질량의 크기)은 쓰지 않는다. */
+export function describePhysSceneForReview(scene: PhysScene): string {
+  const sc = scene as R, t = scene.type;
+  if (t === "fbd") {
+    const vec = fbdVectors(sc), mx = Math.max(...vec.map((v) => Math.hypot(v.dx, v.dy)));
+    const dirName = (a: number) => { const d = ((a % 360) + 360) % 360; return d === 0 ? "right" : d === 90 ? "up" : d === 180 ? "left" : d === 270 ? "down" : `${gfmt(d)} degrees counterclockwise from right`; };
+    return `Free-body diagram of a ${sc.body === "box" ? "box" : "point object"}. Arrows (label, direction, length relative to the longest arrow): ${vec.map(({ f, dx, dy }) => `${String(f.label)}: ${dirName(f.angle as number)}, ${gfmt(Math.round((Math.hypot(dx, dy) / mx) * 100) / 100)}`).join("; ")}. Arrow lengths are proportional to the force magnitudes.`;
+  }
+  if (t === "energy_bars") {
+    const ymax = sc.ymax as number;
+    return `Energy bar charts on one common scale (tallest possible bar = 1.0). ${arr(sc.states).map((s) => `${String(s.name)}: ${BAR_KEYS.map((k) => `${k}=${gfmt(Math.round(((isNum((s.bars as R)[k]) ? ((s.bars as R)[k] as number) : 0) / ymax) * 100) / 100)}`).join(", ")}`).join("; ")}.`;
+  }
+  if (t === "motion_diagram") {
+    const vs = sc.vs as number[], xs = sc.xs as number[], vm = Math.max(...vs.map(Math.abs)) || 1;
+    return `Motion diagram at equal time intervals along a line. Positions (relative spacing): ${xs.map((x) => gfmt(x)).join(", ")}. Velocity arrow at each position (negative = pointing left), relative to the longest arrow: ${vs.map((v) => gfmt(Math.round((v / vm) * 100) / 100)).join(", ")}.`;
+  }
+  return renderPhysScene(scene).alt;
+}
