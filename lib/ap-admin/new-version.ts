@@ -131,7 +131,7 @@ export async function buildNewVersionPreview(db: SupabaseClient, sourceSetId: st
   const pids = addKeys.map((k) => probByKey.get(k)).filter((x): x is string => !!x);
   let used = new Set<string>();
   if (pids.length) {
-    const { data, error: e } = await db.from("mock_exam_set_items").select("problem_id, mock_exam_sets!inner(set_group_id, status)").in("problem_id", pids).neq("mock_exam_sets.set_group_id", set.set_group_id).in("mock_exam_sets.status", ["draft", "published"]);
+    const { data, error: e } = await db.from("mock_exam_set_items").select("problem_id, mock_exam_sets!inner(set_group_id, status, ap_label)").in("problem_id", pids).neq("mock_exam_sets.set_group_id", set.set_group_id).in("mock_exam_sets.status", ["draft", "published"]).eq("mock_exam_sets.ap_label", "full_practice");
     if (e) throw new Error(e.message);
     used = new Set((data ?? []).map((u) => u.problem_id as string));
   }
