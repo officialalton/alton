@@ -74,9 +74,9 @@ describe("세트 ID → 과목(AB 로 가정하지 않는다)", () => {
     expect(subjectOfSetIdOrNull("XX1")).toBeNull(); expect(() => subjectOfSetId("XX1")).toThrow();
     expect(defaultDraftName("ST1")).toBe("AP Statistics — Practice Exam 1");
   });
-  it("통계 세트 초안 조립은 AB 로 오판하지 않고 '미지원'으로 거절한다", () => {
+  it("통계 세트 초안 조립은 AB 로 오판하지 않고 통계 전용 계획기(공식 구조 검증)가 빈 구성을 거절한다", () => {
     const r = planDraftSet({ setId: "ST1", keys: { mcA: [], mcB: [], frqA: [], frqB: [] }, hasVirtual: false, pool: [], existingFullSets: [], publishedKeys: new Set(), stock: [] });
-    expect(r.subject).toBe("ap_statistics"); expect(r.ok).toBe(false); expect(r.problems.join()).toMatch(/통계 풀 세트 초안 조립은 아직 지원하지 않습니다/);
+    expect(r.subject).toBe("ap_statistics"); expect(r.ok).toBe(false); expect(r.problems.join()).toMatch(/mc_count_0\/42/); expect(r.problems.join()).toMatch(/shared_sets_0\/2/);
     const x = planDraftSet({ setId: "ZZ9", keys: { mcA: [], mcB: [], frqA: [], frqB: [] }, hasVirtual: false, pool: [], existingFullSets: [], publishedKeys: new Set(), stock: [] });
     expect(x.subject).toBe("unknown"); expect(x.problems.join()).toMatch(/세트 이름 형식 오류/);
   });

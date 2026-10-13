@@ -44,6 +44,9 @@ function frqReference(payload: Json): string {
 }
 
 function passageFor(c: ApCandidateLike, gate: GateResult): string | null {
+  // 공유 자료 세트(통계 3문항 세트): 세트 소개 문장은 세 문제에 같은 지문으로 붙는다(자료 그림은 문제마다 같은 figure 로 붙는다).
+  const intro = c.payload.set_intro;
+  if (typeof intro === "string" && intro.trim()) return intro.trim();
   const st = c.payload.stimulus;
   const s = typeof st === "string" ? null : isObj(st) ? st : null;
   const desc = s && typeof s.description === "string" ? s.description : "";
@@ -61,10 +64,10 @@ export function planConversion(c: ApCandidateLike, opts: { wrapMath?: boolean } 
   const topic = String((c as unknown as { keywordCode?: string }).keywordCode ?? "");
   const figure = gate.spec;
   const passage = passageFor(c, gate);
-  const mk = (index: number, stem: string, options: string[], key: number, expl: string): ConvertedItem => {
+  const mk = (index: number, stem: string, options: string[], key: number, expl: string, itemTopic?: string): ConvertedItem => {
     const text = [passage ?? "", stem, ...options].join("\n");
     const rc = checkFigure(figure, text, options, key);
-    return { index, format: "mc", passage, question: stem, options, correctIndex: key, explanation: wm(expl), explanationEn: wm(expl), figure, renderCheck: rc, statements: null, difficulty, skillCode: null, topic };
+    return { index, format: "mc", passage, question: stem, options, correctIndex: key, explanation: wm(expl), explanationEn: wm(expl), figure, renderCheck: rc, statements: null, difficulty, skillCode: null, topic: itemTopic || topic };
   };
   if (c.kind === "mc") {
     const items = Array.isArray(p.items) ? (p.items as Json[]) : null;
@@ -72,7 +75,7 @@ export function planConversion(c: ApCandidateLike, opts: { wrapMath?: boolean } 
       const out: ConvertedItem[] = [];
       for (const [i, it] of items.entries()) {
         if (typeof it.stem !== "string" || !Array.isArray(it.options) || typeof it.key_index !== "number") return { ok: false, reason: `set item ${i} is incomplete`, gate };
-        out.push(mk(i, it.stem, (it.options as unknown[]).map(optionText), it.key_index as number, String(it.explanation_en ?? p.explanation_en ?? "")));
+        out.push(mk(i, it.stem, (it.options as unknown[]).map(optionText), it.key_index as number, String(it.explanation_en ?? p.explanation_en ?? ""), typeof it.topic === "string" ? it.topic : undefined));
       }
       return finish(out, gate);
     }

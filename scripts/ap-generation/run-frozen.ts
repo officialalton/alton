@@ -42,6 +42,8 @@ function main() {
   console.log("동결 구성 일치(생성기·검토기·난이도·파서·모델·플래그)"); if (has("--check-only")) return 0;
   const before = ledgerTotal(); console.log(`시작 누적 $${before.cumulativeUsd} (무효 측정 포함: ${before.includesInvalidMeasurements.map((x) => `${x.run} $${x.usd}`).join(", ")})`);
   for (const st of ["plan", "blueprint", "gen", "check", "solve", "review", "review-retry", "review-retry2", "difficulty", "verdicts"]) {
+    if (cfg.skipStages?.includes(st)) { console.log(`[${st}] 구성에 따라 건너뜀(skipStages)`); continue; }
+    if (cfg.hardStopCumulativeUsd !== undefined && ledgerTotal().cumulativeUsd >= cfg.hardStopCumulativeUsd) { console.log(`HARD STOP: 누적 $${ledgerTotal().cumulativeUsd} >= $${cfg.hardStopCumulativeUsd} — ${st} 전에 중단`); break; }
     if (!["plan", "blueprint", "check", "verdicts"].includes(st) && spentSince(cfg) >= cfg.capUsd * 0.98) { console.log(`상한 근접(${spentSince(cfg).toFixed(3)} / ${cfg.capUsd}) — ${st} 전에 중단`); break; }
     stage(cfg, env, st);
     if (st === "plan") { const mp = path.join(root, cfg.run, "run_manifest.json"); const m = JSON.parse(readFileSync(mp, "utf-8")); writeFileSync(mp, JSON.stringify({ ...m, generatorHash: actual.generatorHash, frozenConfig: `${path.relative(process.cwd(), cfgPath)}@${cfg.version}`, validity: "valid", repairDefinition: "none (repair not run in this round)" }, null, 1)); }

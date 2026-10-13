@@ -3,7 +3,7 @@
 export type UnitScope = { unit: string; title: string; inScope: string[]; outOfScope: string[]; mcWeight: [number, number] };
 export type SkillRule = { code: string; name: string; mc: boolean; frq: boolean; designRules: string[]; banned: string[] };
 export type ArchetypeSpec = { id: string; topic: string; skill: string; calculator: "required" | "not_allowed" | "allowed"; stimulus: string; verifiedBy: string[]; misconceptions: string[] };
-export type FrqTemplateSpec = { id: string; template: string; topic: string; extraTopics: string[]; skill: string; calculator: "required" | "not_allowed"; parts: string; points: number; verifiedBy: string[] };
+export type FrqTemplateSpec = { id: string; template: string; topic: string; extraTopics: string[]; skill: string; calculator: "required" | "not_allowed" | "allowed"; parts: string; points: number; verifiedBy: string[] };
 export type SubjectGuide = {
   subject: string; guideDoc: string; examStructure: string;
   units: UnitScope[]; skills: SkillRule[]; archetypes: ArchetypeSpec[]; frqTemplates: FrqTemplateSpec[];
