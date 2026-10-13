@@ -52,6 +52,8 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "phys-s2", title: "AP Physics 1 phys-s2 (PH1·PH2 부족분: 단독·세트·FRQ)", itemsFile: "phys-s2-items.json", loadLabel: "phys-s2-2026-10-13", supplement: true, passKeysFile: "phys-s2-pass-keys.json", evidenceFile: "evidence-phys-s2.json" },
   // phys-s3: 스킬 범위 보강(2026-10-13) — 신규 원형 40(2.A 기호식 11·2.C 순위 10·2.D 예측 7·3.B 주장 7·3.C 자료 근거 5) x 후보 2 = 80, 런 phys-s3-a, 비용 $2.6406.
   { id: "phys-s3", title: "AP Physics 1 phys-s3 (스킬 범위 보강: 2.A·2.C·2.D·3.B·3.C 단독)", itemsFile: "phys-s3-items.json", loadLabel: "phys-s3-2026-10-13", supplement: true, passKeysFile: "phys-s3-pass-keys.json", evidenceFile: "evidence-phys-s3.json" },
+  // phys-s4: FRQ 두 번째 시나리오(2026-10-13, 오너 결정) — 신규 원형 8(MR 2·TBR 2·LAB 2·QQT 2) x 후보 3 = 24(런 phys-s4-a, $1.3766) + 표·그림 설명 누락을 고친 3원형 재생성 9(런 phys-s4-b, $0.5157). 재고 고유 8(원형당 1), 합계 $1.8923.
+  { id: "phys-s4", title: "AP Physics 1 phys-s4 (FRQ 두 번째 시나리오: MR·TBR·LAB·QQT 각 2)", itemsFile: "phys-s4-items.json", loadLabel: "phys-s4-2026-10-13", supplement: true, passKeysFile: "phys-s4-pass-keys.json", evidenceFile: "evidence-phys-s4.json" },
   // 2026-10-13 AP Chemistry(docs/ap/chemistry-groundwork.md): 파일럿 3 + chem-s2 부족분 4배치. 한 증거 파일(evidence-chem-s2.json)을 공유한다.
   { id: "chem-p1a", title: "AP Chemistry P1-a v1 (MC 파일럿) (통과 15)", itemsFile: "chem-p1a-items.json", loadLabel: "chem-p1a-2026-10-13", supplement: true, passKeysFile: "chem-p1a-pass-keys.json", evidenceFile: "evidence-chem-s2.json" },
   { id: "chem-p1a2", title: "AP Chemistry P1-a v2 (MC 재검증) (통과 32)", itemsFile: "chem-p1a2-items.json", loadLabel: "chem-p1a2-2026-10-13", supplement: true, passKeysFile: "chem-p1a2-pass-keys.json", evidenceFile: "evidence-chem-s2.json" },

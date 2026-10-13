@@ -1,0 +1,51 @@
+{
+ "runs": [
+  "phys-s4-a",
+  "phys-s4-b"
+ ],
+ "rows": 24,
+ "passed": 8,
+ "rejected": 16,
+ "passRate": 0.333,
+ "singles": {
+  "candidates": 24
+ },
+ "unitsPassed": {
+  "1": 1,
+  "2": 2,
+  "3": 3,
+  "7": 1,
+  "8": 1
+ },
+ "figPassed": {
+  "none": 7,
+  "scene": 1
+ },
+ "figAll": {
+  "none": 21,
+  "scene": 3
+ },
+ "figPassRate": {
+  "none": "7/21",
+  "scene": "1/3"
+ },
+ "renderTypesPassed": {
+  "text": 5,
+  "ap_diagram:phys_scene": 1,
+  "ap_table": 2
+ },
+ "archetypesPassed": {
+  "phf_mr_energy_patch": 1,
+  "phf_tbr_cart_vt": 1,
+  "phf_tbr_vertical_toss": 1,
+  "phf_qqt_flat_curve": 1,
+  "phf_qqt_floating_block": 1,
+  "phf_mr_incline_slide": 1,
+  "phf_lab_pendulum_g": 1,
+  "phf_lab_sliding_friction": 1
+ },
+ "costUsd": {
+  "phys-s4-a": 1.3766,
+  "phys-s4-b": 0.5157
+ }
+}

@@ -1,0 +1,646 @@
+[
+ {
+  "key": "ap_physics_1-f01-k0",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Three forces: gravitational force mg pointing straight down; normal force F_N perpendicular to the incline surface, away from it; kinetic friction f_k parallel to the incline, pointing up the slope (opposite the motion).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Weight mg (down), normal force (perpendicular to the incline, away from it), kinetic friction (up the incline)"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Perpendicular to incline: N = mg cosθ. Along incline: mg sinθ − μmg cosθ = ma, so the mass cancels.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "a = g(sinθ − μcosθ)"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = 9.8(0.5 − 0.15·0.866) ≈ 3.63 m/s². Starting from rest, v² = 2ad, so v = √(2·3.63·2) ≈ 3.8 m/s.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "v ≈ 3.8 m/s"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The acceleration a = g(sinθ − μcosθ) does not depend on mass, and the block starts from rest, so d = ½at² gives the same time t.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Stays the same"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle passes all five criteria. It is a standard incline-with-kinetic-friction multipart item, stays in Unit 2 scope, and is worth 10 points, matching the Mathematical Routines weight (3+3+2+2). The target skill 2.B is carried by part C, a short calculation. Parts A, B and D carry their own skills (1.A/1.C, 2.A, 3.B/3.C), which is acceptable under the per-part rule.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part C assesses 2.B with a two-step calculation. The other parts are prerequisite or related skills within topics 2.7, 2.5 and 2.2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and consistent: a = g(sinθ − μcosθ) gives 3.63 m/s², v = √(2ad) gives 3.81 m/s, and the time is unchanged because mass cancels. The independent solver agrees. The rubric rows are consistent and their dependencies are sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scene data (angle, mass, μ, block on incline) match the stem. The wording is clear. Part C restates the given values, which is slightly redundant but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common errors are listed per row (vertical normal force, friction down the incline, mass left in the final expression)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an AP FRQ and the calculator load is modest. The 22-minute estimate is only an internal reference and was not penalized."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on an incline with kinetic friction: draw the FBD, derive a = g(sinθ - μcosθ), compute the speed with kinematics, then argue that mass cancels so the time is unchanged. It requires choosing Newton's 2nd law, translating between FBD, symbolic and numeric forms, and a proportional-reasoning justification. Numbers are simple and the wording is unambiguous, with no out-of-scope content. Difficulty comes from legitimate concept integration, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 10,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k1",
+  "cellId": "ap_physics_1-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Three forces: gravity mg pointing straight down, the normal force F_N perpendicular to the incline surface pointing away from it, and kinetic friction f_k parallel to the incline pointing up the slope (opposite the motion).",
+     "final_answer": "Gravity (mg) straight down; normal force perpendicular to the surface, away from it; kinetic friction along the incline, pointing up the slope.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Perpendicular to the incline: N = mg cosθ. Along the incline: ma = mg sinθ − μN = mg sinθ − μmg cosθ. Divide by m.",
+     "final_answer": "a = g(sinθ − μ cosθ)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = 9.8(0.5 − 0.1·0.866) ≈ 4.05 m/s². Starting from rest, v² = 2ad = 2(4.05)(4) ≈ 32.4, so v ≈ 5.7 m/s (5.75 m/s if g = 10 m/s²).",
+     "final_answer": "≈5.7 m/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The acceleration a = g(sinθ − μcosθ) does not depend on mass. Starting from rest, d = ½at², so t = sqrt(2d/a) is the same for the heavier block.",
+     "final_answer": "The time stays the same.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The physics and arithmetic are correct, but the target skill 2.B carries only 2 of 10 points. Rubric rows A3, C1 and C2 also have scoring ambiguities (relative arrow lengths, no numeric tolerance, g not stated). I fail it on scope/skill fit and key/scoring.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The physics is in scope. But the representative skill 2.B is assessed only in part C, which is 2 of 10 points. Most of the bundle assesses 1.A/1.C, 2.A and 3.B/3.C, so the dominant demand is not the target skill."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Physics values are correct. Rubric weaknesses: row A3 requires the friction arrow to be shorter than the normal-force arrow, which depends on the unstated-in-figure μ = 0.1 and is hard to score from a hand drawing. Numeric rows C1 and C2 give \"about\" values with null tolerance and no stated g, so g = 10 answers (4.13 m/s², 5.75 m/s) are ambiguous. C2 chains from C1, so an upstream error is penalized twice."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus data (θ, m, μ, d) is complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no distractors. The common-error lists are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a 10-point FRQ, the calculator use is appropriate and the arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style incline FRQ: free-body diagram, symbolic derivation of a = g(sin(theta) - mu cos(theta)), a short numeric kinematics calculation (a ≈ 4.1 m/s^2, v ≈ 5.7 m/s), and a mass-independence justification. It needs choosing Newton's second law, resolving components, and linking dynamics to kinematics, with light reading and simple arithmetic. All content is in scope and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k2",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Three forces: weight mg (Fg) straight down; normal force N perpendicular to the incline surface, pointing away from it; kinetic friction f parallel to the incline, pointing up the slope (opposite the motion).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Gravity mg pointing down, normal force perpendicular to the incline, and kinetic friction pointing up the incline"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Perpendicular to the incline: N = mg cosθ. Along the incline: ma = mg sinθ − μN = mg sinθ − μmg cosθ. The mass cancels.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "a = g(sinθ − μcosθ)"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = 9.8(0.5 − 0.1·0.866) ≈ 4.05 m/s². Using v² = 2ad: v = √(2·4.05·4) ≈ 5.7 m/s (5.75 m/s if g = 10 m/s²).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "v ≈ 5.7 m/s"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The acceleration g(sinθ − μcosθ) does not depend on mass. Starting from rest, d = ½at², so t = √(2d/a) is the same for the 4 kg block.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Stays the same"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard incline-with-friction bundle. Keys are unique and consistent with the independent solver (a ≈ 4.05 m/s², v ≈ 5.69 m/s, time unchanged). Rubric rows are well split and the weighting matches the 10-point Mathematical Routines type. The scope is within Unit 2.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Within Unit 2 (kinetic friction, Newton's second law, free-body diagram). Part C targets 2.B, and the other parts carry their own skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique. Row A3's length conditions hold for these numbers (mg > N > 0.1N). Part C's rows chain correctly from part B."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem and diagram data include the angle, mass, mu, and distance. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. Common errors are listed per rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator load is light. The time and point grain are reasonable for the type."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ: draw FBD (gravity, normal, kinetic friction), derive a = g(sinθ − μcosθ) from Newton's second law with components, compute a ≈ 4.04 m/s² and v = sqrt(2ad) ≈ 5.7 m/s, then argue qualitatively that mass cancels so time is unchanged. Requires choosing the governing law, component resolution, symbolic derivation, and a proportional-reasoning justification. Arithmetic is light and wording is unambiguous. Appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k0",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Standard procedure",
+     "final_answer": "Equipment: a stand with a clamp, a light string, a dense bob, a meter stick and a stopwatch (or a photogate). Measure L with the meter stick from the pivot to the center of the bob. Pull the bob aside by a small angle (less than about 10°) and release it from rest. Time 10 or more complete oscillations and divide the total time by the number of oscillations to get T. Repeat each timing several times and average. Change the independent variable by adjusting the string length in steps (0.2, 0.4, ... 1.0 m), and keep the bob and the release angle the same. Timing many cycles, starting and stopping the timer as the bob passes the lowest point, reduces the uncertainty from reaction time.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "T=2π√(L/g), so T²=(4π²/g)L",
+     "final_answer": "Plot T² (s²) on the vertical axis and L (m) on the horizontal axis. The slope equals 4π²/g, so g = 4π²/slope.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Square the periods",
+     "final_answer": "Points (L in m, T² in s²): (0.2, 0.814), (0.4, 1.64), (0.6, 2.49), (0.8, 3.14), (1.0, 4.07). Axes: L (m) from 0 to 1.0 and T² (s²) from 0 to about 4.5. The best-fit line passes close to the origin with slope ≈ 4.0 s²/m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Least-squares slope 4.005 s²/m",
+     "final_answer": "Slope ≈ (4.02 − 0.80)/(1.0 − 0.2) ≈ 4.0 s²/m. Then g = 4π²/slope ≈ 39.48/4.0 ≈ 9.9 m/s² (a least-squares fit gives 9.86 m/s²).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The pendulum g-from-slope experimental design bundle passes all five criteria. It totals 10 points across parts of 3, 1, 3 and 3, and the independent solver reproduced the model answers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part lab-design and analysis item. The student must choose T = 2π√(L/g), linearize it as T² vs. L, plot a best-fit line from a table, and get g from the slope (4π²/slope). It involves one law, one linearization step, and a table-to-graph-to-slope translation. The arithmetic is modest (five squares, one slope, one division), and the wording and model assumptions are clear. This matches the full-mock free-response level and is not basic recall or advanced beyond scope.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 8,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k1",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: a stand with a clamp as the pivot, light string, dense bob, meter stick and stopwatch. Measure L from the pivot to the center of the bob. Set L to 0.20, 0.40, 0.60, 0.80 and 1.00 m by changing how much string hangs below the clamp. Pull the bob to a small angle (under about 10°) and release it from rest. Time 10 or more full oscillations, starting the timer as the bob passes the lowest point, then divide by the number of oscillations to get T. Repeat each trial and average.",
+     "final_answer": "Change L with a meter stick (pivot to center of bob). Release from a small angle and time 10+ full swings with a stopwatch. T = total time ÷ number of swings. Repeat and average to reduce uncertainty in T.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Start from T = 2π√(L/g). Squaring gives T² = (4π²/g)L, which is a straight line through the origin.",
+     "final_answer": "Plot T² (s²) on the vertical axis and L (m) on the horizontal axis. The slope equals 4π²/g.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Square each period: T² = 0.792, 1.626, 2.481, 3.276 and 3.980 s² for L = 0.2, 0.4, 0.6, 0.8 and 1.0 m.",
+     "final_answer": "Plot T² (s²) from 0 to 4.0 against L (m) from 0 to 1.0. The points lie nearly on a straight line through about the origin. The best-fit line has slope about 4.0 s²/m and intercept about 0.02 s².",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A least-squares fit gives slope ≈ 4.01 s²/m. Then g = 4π²/slope = 39.48/4.01 ≈ 9.84 m/s².",
+     "final_answer": "g ≈ 9.8 m/s² (about 9.84 m/s²)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Pendulum-g lab bundle (10 points) fits topic 7.2 and skill 3.A. The data table is complete, the rubric rows are consistent and sum to 10, and the solver matched the key. Minor: row A2 mentions \"same bob\" but the model answer does not.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Design, linearization, graphing and slope analysis all fit the pendulum topic. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key values are consistent: slope 4.01 and g about 9.8. The tolerances are reasonable, and D3 allows a value consistent with the student's own slope."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels, units and five rows. The wording is clear and the small-angle assumption is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response bundle with no options. The rubric lists common errors such as plotting T versus L and using slope = g."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is heavy but typical of an AP lab free response. A calculator is appropriate for the slope calculation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard AP Physics 1 lab-design free-response item with four parts, worth 10 points in total. Students must design a procedure, choose the linearizing variables (T^2 versus L), plot the data and a best-fit line, and use the slope to find g, using g = 4π²/slope. The concepts are in scope (pendulum period). The arithmetic is short and uses rounded values: squaring five periods, then one slope calculation. The reasoning is multi-step but routine for a full mock. The wording is clear, and the stimulus is a simple table. No out-of-scope content is needed. The data are consistent with g ≈ 9.8 m/s², so the item has no hidden traps. It is somewhat reading-heavy because of the four parts, but that load is typical of AP experimental-design questions.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k2",
+  "cellId": "ap_physics_1-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: a stand and clamp for the pivot, light string, dense bob, meter stick and stopwatch. Measure L from the pivot to the center of the bob. Pull the bob back to a small angle (under about 10°) and let it go without pushing. Time 10 or more full swings and divide by the number of swings to get T; repeat a few times and average. Change L by moving the string through the clamp, use about 5 lengths from 0.2 to 1.0 m, and keep the angle and bob the same. To cut timing error, start and stop the stopwatch as the bob passes its lowest point.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Time many swings (e.g. 10) for each of several lengths measured to the bob's center, keeping the angle small; divide by the number of swings and average repeated trials."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "T = 2π√(L/g), so T² = (4π²/g)L. A graph of T² against L is a straight line through the origin with slope 4π²/g.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Vertical axis: T² (s²). Horizontal axis: L (m). Slope = 4π²/g."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Squared periods: 0.790, 1.615, 2.347, 3.168, 4.080 s². Plot these against L = 0.2–1.0 m, with the vertical axis running 0–4.5 s² and the horizontal axis 0–1.0 m. The best-fit line passes close to the origin and has a slope of about 4.07 s²/m.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Plot T² (s²) against L (m) at (0.2, 0.79), (0.4, 1.62), (0.6, 2.35), (0.8, 3.17), (1.0, 4.08). The best-fit straight line has slope ≈ 4.07 s²/m."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Least-squares slope = 1.627/0.4 ≈ 4.07 s²/m. Then g = 4π²/slope = 39.48/4.07 ≈ 9.7 m/s².",
+     "ambiguous_or_flawed": false,
+     "final_answer": "g ≈ 9.7 m/s²"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mostly sound, but D1 depends on C3, so a correct slope can lose its point because of a poorly drawn line. This is a scoring inconsistency. The key and scoring criterion fails on that basis.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B target 3.A; C and D are plotting and analysis (1.B, 2.D). This is acceptable for a mixed-skill experimental design bundle. Weights total 10 as required. Content is in scope (pendulum period)."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Row D1 (slope) has requires_row_id=C3 (best-fit line drawn), so a correct slope calculation is penalized if the line was poorly drawn. This is a rubric inconsistency. A2 requires controlling the release angle even though the prompt does not explicitly ask for controlled variables."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent with T=2π√(L/g). Description text is duplicated in the notes (minor redundancy)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ with no distractors. Common-error lists are sparse but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is long but is typical of a multi-part lab FRQ, and the calculator is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard AP Physics 1 multi-part lab free-response item on a pendulum, with an experimental design part, a linearization part, a graphing part and a slope-analysis part. It is in scope (7.2 and 7.1) and relies on the allowed levers. The student chooses T = 2π√(L/g), linearizes to T² vs L, translates a table into a graph, and interprets the slope as 4π²/g. No unfair sources: the data are rounded, the wording is unambiguous, there is no calculus, and no out-of-scope content. The task is typical of an exam-prep full-mock FRQ rather than a basic recall question, and is not beyond exam level.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k0",
+  "cellId": "ap_physics_1-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: block, level rough table, photogate with timer (and a flag of known width on the block), meter stick or tape measure. Mark a fixed position just past the photogate. Push the block by hand or with a compressed spring launcher so it moves through the photogate; the speed is v0 = flag width / gate time. Measure the distance d from the photogate to where the block stops. Change v0 by compressing the spring by different amounts or pushing harder. To reduce uncertainty in d, do several trials at about the same speed and average them, and read the stopping point at eye level against a fixed reference edge on the block.",
+     "final_answer": "Launch the block through a photogate at different speeds (using different spring compressions), find v0 from flag width / gate time, measure d with a meter stick, and repeat and average the trials.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Work-energy: friction does work −μmg·d, which removes all the kinetic energy ½mv0², so μmgd = ½mv0². This gives d = v0²/(2μg), a straight line through the origin when d is plotted against v0².",
+     "final_answer": "Plot d on the vertical axis and v0² on the horizontal axis. The slope equals 1/(2μg).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Values of v0² are 1, 2.25, 4, 6.25 and 9 m²/s². Plot them against d = 0.205, 0.464, 0.828, 1.259 and 1.846 m. Use a horizontal scale of 0–10 m²/s² and a vertical scale of 0–2.0 m. The points lie on a straight line through the origin, and the best-fit line has slope ≈ 0.204 s²/m.",
+     "final_answer": "Graph of d (m) against v0² (m²/s²): the points are linear, and the best-fit line passes through the origin with slope ≈ 0.204 s²/m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The best-fit slope is 0.204 s²/m (least-squares fit through the origin). Since slope = 1/(2μg), μ = 1/(2 × 9.8 × 0.204) ≈ 0.25.",
+     "final_answer": "μ ≈ 0.25",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a coherent experimental design and analysis bundle on work-energy with friction. The key is consistent with d = v0²/(2μg), the rubric rows are 1 point each and total 10, the stimulus table is complete, and the independent solver agreed on every part.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Within Unit 3 and topic 3.2, with parts spanning design, linearization, graphing and analysis. There is no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rubric is consistent, and the model answers and expected values agree. The accepted designs in part A are valid alternatives."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels and five data rows, and the wording is clear. The student draws their own graph."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so no options apply. The common_errors fields are present."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP Physics 1 lab FRQ, with a calculator allowed and no heavy arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part lab FRQ-style item. Requires choosing the work-energy relation (mu*m*g*d = 1/2 m v0^2), linearizing it as d versus v0^2, plotting the data, and extracting mu from the slope (1/(2*mu*g)). It involves a table-to-graph-to-equation representation change and a design-a-procedure part. Concepts are core Unit 3 and the arithmetic is light (five squared values, one slope). Wording is clear and in scope. Difficulty comes from legitimate sources: choosing the law, linearizing, and linking the slope to mu.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k1",
+  "cellId": "ap_physics_1-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: block, level rough table, photogate with timer (or computer), meterstick or measuring tape, and a launcher such as a compressed spring or a ramp at different release heights. Put the photogate right where the block leaves the launcher. The photogate times the block's flag, of known width w, so v0 = w/Δt. Measure d from the photogate to where the block stops. To change v0, compress the spring by different amounts. To reduce uncertainty in d, do several trials at each setting and average d, and read the stopping point at eye level using a fixed mark on the block.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Launch the block at different speeds with a spring compressed by different amounts. Measure v0 with the photogate (flag width ÷ gate time) and measure d with a meterstick, from the photogate to the stopping point. Repeat each speed several times and average d to reduce its uncertainty."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Friction does work equal to the lost kinetic energy: μmg·d = ½mv0². So d = v0²/(2μg), which is a straight line through the origin when d is plotted against v0².",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Plot d (m) on the vertical axis and v0² (m²/s²) on the horizontal axis. The slope equals 1/(2μg)."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Points to plot (v0², d): (1.00, 0.253), (2.25, 0.576), (4.00, 1.033), (6.25, 1.608), (9.00, 2.283). Choose axes of 0–10 m²/s² horizontally and 0–2.5 m vertically. The points fall on a straight line through the origin. The least-squares best fit is d = 0.254·v0² + 0.007.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Plot d (m) against v0² (m²/s²). The points are linear, and the best-fit line is d ≈ 0.254 s²/m × v0², essentially through the origin."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The slope is about 0.254 s²/m. For example, using two points on the line, (0, 0) and (9.0, 2.29): slope = 2.29/9.0 ≈ 0.254 s²/m. Then μ = 1/(2g·slope) = 1/(2 × 9.8 × 0.254) ≈ 0.20.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "μ ≈ 0.20"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound experimental-design and analysis bundle on work-energy with friction. The rubric rows are consistent, the tolerances in D1 and D3 line up, and the workload is typical of an AP experimental-design FRQ. Minor gaps: the stimulus does not say how initial speeds are produced, and the common-errors lists are thin.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own skill: A is procedure design, B is linearization, C and D are graphing and analysis of work-energy data."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The model answers are consistent with the data. The slope tolerance (5 percent) and the μ tolerance (8 percent) are compatible. C2 has no numeric tolerance."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with labels, units, and conditions. The method of launching the block at different speeds is not stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common-error entries are sparse but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 27 estimated minutes for 10 points is heavy but acceptable for an experimental-design FRQ. Arithmetic is light and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics 1 experimental-design and linearization FRQ. The governing law is the work-energy theorem with constant kinetic friction: mu*m*g*d = (1/2)m*v0^2, so d = v0^2/(2*mu*g). Students must (1) write an experimental procedure, (2) choose d vs v0^2 as the linearizing axes, (3) plot and fit a line, and (4) get mu from the slope, mu = 1/(2*g*slope). The data are clean (slope about 0.254 s^2/m, mu about 0.20) and the arithmetic is light. The only representation changes are table to squared quantity to graph to slope to mu. All content is within Unit 3 scope, and the wording is unambiguous: the level surface, same block and constant friction are stated. The multi-part length is typical of a full-mock FRQ rather than a source of unfair difficulty.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k2",
+  "cellId": "ap_physics_1-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Launch the block from a spring launcher or by hand. Put a photogate (with a flag of known width) just past the launch point to measure v0. Mark where the block passes the gate and use a meter stick or tape measure to find the distance d to where the block stops. Change v0 by changing the spring compression or launch strength. Repeat each trial several times and average d. Read the stopping position at eye level against a fixed reference edge to reduce error.",
+     "final_answer": "Photogate measures v0; meter stick measures d from the gate to the stopping point. Vary v0 with launcher compression. Do several trials per speed and average d.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "From μmg·d = ½mv0², d = v0²/(2μg).",
+     "final_answer": "Vertical axis: d (m). Horizontal axis: v0² (m²/s²). Slope = 1/(2μg).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Points (v0², d): (1, 0.253), (2.25, 0.575), (4, 1.005), (6.25, 1.581), (9, 2.31). They lie on a straight line through about the origin.",
+     "final_answer": "Plot d (m) against v0² (m²/s²) with axes from 0 to 10 m²/s² and 0 to 2.5 m. The best-fit line passes near the origin with slope about 0.256 s²/m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The best-fit slope is about 0.256 s²/m. μ = 1/(2g·slope) = 1/(2·9.8·0.256) ≈ 0.20.",
+     "final_answer": "μ ≈ 0.20",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The friction-coefficient lab bundle is valid. The data follow d = v0^2/(2*mu*g), the rubric is consistent with the model answers, and the 3+1+3+3 split totals 10 points. Each part fits its own skill. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work-energy with kinetic friction (3.2). Part A is design (3.A) and part B is linearization. Parts C and D use graphing and calculation skills, which is acceptable for a mixed-skill bundle. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The slope of about 0.256 s^2/m and mu of about 0.20 are consistent with the table. The rubric rows are single-criterion with sensible tolerances. The alternative for D3 is valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels, units and five rows, and the same-block, same-surface condition is stated. The notes field repeats the description, which is harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item. The common-error entries are brief but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an AP Physics 1 experimental design and analysis question. The calculator is allowed and the arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style experimental design/data analysis FRQ. Students must choose the work-energy relation (mu*m*g*d = 1/2 m v0^2), see that d vs v0^2 is linear with slope 1/(2*mu*g), design a procedure, plot, and extract mu. Moderate reasoning chain, a few representation changes, light arithmetic (5 squares, one slope), clear wording, in-scope content only.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ }
+]
