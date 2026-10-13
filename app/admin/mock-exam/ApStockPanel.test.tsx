@@ -12,6 +12,7 @@ vi.mock("../ap-stock-actions", () => ({
   apStockLoadCheckAction: () => check(),
   apStockAssembleAction: vi.fn(),
   apStockAssemblePartialAction: (i: unknown) => partial(i),
+  apLaunchGateStatusAction: () => Promise.resolve({ sets: [], totals: { sets: 0, readySets: 0, blockedItems: 0, openBlockers: 0, openDefectReports: 0, openErrorReports: 0, globalOpenBlockers: 0 } }),
 }));
 vi.mock("../ap-new-version-actions", () => ({
   getApNewVersionOverviewAction: () => Promise.resolve({ target: { ref: "x", kind: "remote", canWrite: true, reason: null }, sets: [], plans: [] }),
