@@ -24,3 +24,5 @@ STAGE_S2_B = ["ph_at_velocity_change", "ph_relative_velocity", "ph_launch_vs_dro
               "ph_shm_energy", "ph_pendulum_moon", "ph_shm_signs", "ph_t2_m_graph", "ph_vertical_spring_period", "ph_xt_max_accel",  # 7
               "ph_torricelli_range", "ph_hydraulic_lift", "ph_density_weighing", "ph_hatch_force", "ph_buoyant_tension", "ph_bernoulli_height"]  # 8
 STAGE_S2_C = ["phs_vt_set", "phs_collision_set", "phs_fx_set", "phs_wt_set", "phs_spring_set"]
+# 2026-10-13 FRQ 보충: PH2 에 MR·LAB 가 없다(s2-d 는 유형당 1건만 채택, 같은 칸의 다른 시드는 near-duplicate 로 제외). 같은 두 유형을 새 런에서 시드 6개씩.
+STAGE_S2_E = ["phf_mr_table_block", "phf_lab_spring_k"]

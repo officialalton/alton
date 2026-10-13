@@ -1,0 +1,1134 @@
+[
+ {
+  "key": "ap_physics_1-f01-k0",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Four forces act on m1: its weight, the normal force from the table, the string tension, and kinetic friction opposing the motion.",
+     "final_answer": "Weight m1g pointing down; normal force N pointing up; tension T pointing horizontally toward the pulley; kinetic friction f_k = μN pointing horizontally away from the pulley.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "For m2: m2g − T = m2a. For m1: T − μm1g = m1a. Adding the two equations eliminates T.",
+     "final_answer": "a = (m2 − μm1)g / (m1 + m2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = (2 − 0.2·1)(9.8)/3 = 1.8(9.8)/3.",
+     "final_answer": "a ≈ 5.9 m/s² (5.88 m/s² with g = 9.8 m/s²; 6.0 m/s² with g = 10 m/s²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T = m2(g − a) = m1m2g(1 + μ)/(m1 + m2). A larger μ means more friction, so the acceleration is smaller. The hanging block then needs more upward tension to balance its weight. If friction becomes large enough to stop the motion, T = m2g, which is still larger.",
+     "final_answer": "The tension increases. Greater friction reduces the acceleration, so from m2g − T = m2a, T = m2(g − a) gets bigger.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard connected-blocks-with-friction bundle. The physics and key are correct (a = 5.88 m/s^2, and the tension increases with a larger friction coefficient). The parts mix skills legitimately, and the 10-point weight matches Mathematical Routines. Minor issues: g = 9.8 m/s^2 is not stated in the stem, and the Part C tolerance sits only in expected_values. Neither warrants rejection.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 2.5, 2.2 and 2.7 are in scope. Part C is the 2.B calculation; the other parts have their own skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Derivation, number, and the tension prediction are all correct and unique. The rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and the wording is clear. The data object is empty, but no figure is needed beyond the dot for Part A."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. Common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable for 10 points, and the calculator use is minimal."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part FRQ: draw FBD for a block with friction, apply Newton's second law to two connected objects, derive a = g(m2 - mu*m1)/(m1+m2), substitute clean numbers, then reason qualitatively about how tension changes when friction increases (a decreases, so T = m2(g-a) increases). Concept depth is moderate, involves a representation translation (FBD to equations to numbers to claim), and all content is in Unit 2 scope. Arithmetic is short and wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k1",
+  "cellId": "ap_physics_1-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:C:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Four forces on m1: weight mg pointing down, normal force N pointing up, tension T pointing horizontally toward the pulley, and kinetic friction f pointing horizontally away from the pulley.",
+     "final_answer": "Arrows from the dot: Fg (down), FN (up), T (horizontal, toward the pulley), fk (horizontal, opposite to T).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Newton's second law for each block: m2g − T = m2a and T − μm1g = m1a. Adding the two equations eliminates T.",
+     "final_answer": "a = (m2 − μ m1)g/(m1 + m2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = (4 − 0.15)(9.8)/5",
+     "final_answer": "a ≈ 7.5 m/s² (7.7 m/s² if g = 10 m/s²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T = m2(g − a). A larger μ gives a smaller acceleration, so T increases. Equivalently, T = m1m2g(1+μ)/(m1+m2), which grows as μ grows.",
+     "final_answer": "Tension increases. Larger friction reduces the acceleration, so less of the hanging block's weight is unbalanced, and T = m2(g − a) = m1m2g(1+μ)/(m1+m2) gets bigger.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is correct and in scope: the acceleration is 7.546 m/s^2 and the tension increases with a larger friction coefficient. Weights total 10 points, and each part is consistent with its own skill and topic.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Newton's second law for connected objects with friction (topics 2.5, 2.2, 2.7). The parts' skills (1.A/1.C, 2.A, 2.B, 3.B/3.C) are consistent with the bundle spanning related topics."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key values verified. The rubric rows are consistent and tied together through requires_row_id, and the claim and justification rows in D are sound."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives all of the masses, the friction coefficient and the ideal string and pulley assumptions. The data object is empty, but the stimulus is text only and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common errors listed in the rubric are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a 10-point Physics 1 FRQ, calculator use is trivial, and the wording is clear."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on connected blocks with kinetic friction. Requires drawing an FBD, writing N2L for two objects, solving algebraically, computing a clean number, and a qualitative tension argument (more friction means smaller acceleration, so tension increases, since T = m2(g - a)). All concepts are in Unit 2 scope. Reading and arithmetic are light, and the difficulty comes from legitimate levers: choosing the governing law, translating between FBD and equations, and one extra reasoning step linking a result to a claim.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k2",
+  "cellId": "ap_physics_1-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:C:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Forces on m1: weight m1g down, normal force up from table, tension horizontal toward pulley, kinetic friction horizontal opposite motion (away from pulley).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Four arrows: gravity (down), normal (up), tension (toward pulley), kinetic friction (opposite tension)"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "m2: m2g − T = m2a; m1: T − μm1g = m1a. Adding gives the acceleration.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "a = (m2 − μ m1) g / (m1 + m2)"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(4 − 0.9)(9.8)/7",
+     "ambiguous_or_flawed": false,
+     "final_answer": "a ≈ 4.3 m/s² (4.4 m/s² if g = 10 m/s²)"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T = m2(g − a). A larger μ gives a smaller a, so T is larger. Equivalently, T = m1 m2 g(1+μ)/(m1+m2), which increases with μ.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Increases: a larger μ makes the acceleration smaller, so T = m2(g − a) gets larger"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, in-scope two-block Newton's second law problem with friction. Weights total 10 points, the part C key (4.34 m/s²) is right, and each part is judged against its own skill. No instant-reject condition applies. The one small point is that the key assumes g = 9.8, which the stem does not state, but this is the standard model assumption.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard two-body Newton's second law FRQ. It requires drawing a free-body diagram, writing and combining two equations for connected objects, symbolic derivation, a simple numeric substitution, and a qualitative argument linking friction to acceleration and tension. The concepts are in scope (Unit 2) and the arithmetic is short with no ambiguity. This is typical full-mock difficulty, not basic one-step practice and not beyond the course.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k3",
+  "cellId": "ap_physics_1-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:C:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Four forces act on m1: weight m1g pointing down, normal force N pointing up, tension T pointing horizontally toward the pulley, and kinetic friction f_k pointing horizontally away from the pulley, opposite the motion.",
+     "final_answer": "Four arrows: weight (Fg = m1g, down), normal force (N, up), tension (T, horizontal toward the pulley), kinetic friction (f_k = μm1g, horizontal away from the pulley).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "For m2: m2g − T = m2a. For m1: T − μm1g = m1a. Adding the two equations eliminates T.",
+     "final_answer": "a = (m2 − μm1)g / (m1 + m2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = (4 − 0.2·1)(9.8)/5 = 3.8 × 9.8 / 5",
+     "final_answer": "a ≈ 7.4 m/s² (7.6 m/s² if g = 10 m/s²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Substituting a into m2g − T = m2a gives T = m2(g − a) = m1m2g(1 + μ)/(m1 + m2), which grows as μ grows. Physically, more friction means a smaller acceleration. The hanging block then speeds up more slowly, so the net downward force on it (m2g − T) must be smaller. Its weight hasn't changed, so T must be larger. This assumes the blocks still slide (μ < m2/m1).",
+     "final_answer": "Tension increases.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound two-block-with-friction Mathematical Routines bundle worth 10 points. The key values are verified, and part D's tension prediction is correct. Minor nits: C1 has no stated numeric tolerance, and the stem does not state that the blocks keep sliding for the larger friction coefficient. Neither is disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.5 with related topics 2.2 and 2.7. Each part matches its own skill, and part C carries the target skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "a = 7.448 m/s^2 is correct, and T increases with μ. The rubric rows are consistent and the dependencies are valid. C1 could specify a tolerance to cover g = 10 m/s^2 answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete, with masses, μ, and an ideal pulley and string. The part A diagram dot is described in the prompt."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. Common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load and the use of a calculator are typical of AP Physics 1. The point weights follow the Mathematical Routines type (10 points)."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard two-body Newton's second law problem with kinetic friction. It requires an FBD, a symbolic derivation from two coupled equations, a simple numeric substitution (a = 7.6 m/s^2 with g = 10), and a qualitative tension argument. Part D needs one extra reasoning step: more friction lowers a, so T = m2(g - a) increases. Arithmetic is light, wording is clear, and everything is in Unit 2 scope. This matches typical full-mock FRQ difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k0",
+  "cellId": "ap_physics_1-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Total energy E = ½kA² = 0.2 J. At x = +A: K = 0, U = 0.2 J. At x = 0: K = 0.2 J, U = 0. At x = −A/2: U = ½k(A/2)² = E/4 = 0.05 J, so K = 0.15 J (ratio K:U = 3:1).",
+     "final_answer": "x=+A: K=0, U=E (0.2 J). x=0: K=E, U=0. x=−A/2: U=E/4 (0.05 J), K=3E/4 (0.15 J). The total bar has the same height in each state.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Energy conservation: ½kA² = ½mv², so v = A√(k/m). With the given values, v = 0.1 × 10 = 1.0 m/s.",
+     "final_answer": "v = A√(k/m) (= 1.0 m/s)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Released from rest at +A, so x = A cos(ωt) with ω = √(k/m) = 10 rad/s and T = 2π√(m/k) ≈ 0.63 s.",
+     "final_answer": "Cosine curve x = 0.1cos(10t) m that starts at +0.1 m. Amplitude labeled 0.1 m, period labeled T ≈ 0.63 s. Two cycles run from t = 0 to about 1.26 s, with zero crossings at T/4, 3T/4, and so on.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T = 2π√(m/k), so 4 times the mass doubles the period. The energy ½kA² stays the same, and v_max = A√(k/m), so the maximum speed is halved.",
+     "final_answer": "The period doubles (≈1.26 s). The maximum speed halves (0.5 m/s), because the same spring energy is shared by 4 times the mass.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The physics is correct and in scope (energy of an SHM oscillator, period and maximum speed, and a mass-change prediction). The solver agrees on every part. The bundle does not meet the fixed format, however. It is worth 12 points, which is the Translation Between Representations weight, but rubric rows within parts are not all 1 point and the bundle is dominated by representation drawing rather than the target skill 2.D. The stimulus and prompts also reference diagrams and axes that are not specified in the data, so the figures cannot be rendered. The workload is also heavy (est. 27 min) for the content.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Content is in scope for Unit 7 (spring-block SHM, energy, period). Part D carries skill 2.D. Parts A and C are mostly representation (1.A/1.C) and part B is 2.A derivation. The dominant demand is representation rather than the target 2.D. This is acceptable for a TBR bundle, since each part is judged against its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct and unique: E = 0.2 J, v = A√(k/m) = 1 m/s, T ≈ 0.63 s, and period doubling with maximum speed halving. The rubric rows are consistent. Some rows are weak: D3 offers two alternative justifications within one row, and C3 'about 0.63 s' has no tolerance. The row C4 for axis labels is generic."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus data object is empty, and parts A and C refer to 'energy bar charts below' and 'axes provided', but no chart or axes specification is given. There is no description of the three bar-chart templates or the axis ranges and scales. A student-facing figure cannot be rendered from this data, so the stimulus is incomplete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. Common errors are listed per row (e.g., equal energy split, sine start, period unchanged), which is adequate. There are no explanations for the wrong answers beyond these brief tags."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The load is heavy: three drawing parts and a derivation plus a prediction for 12 points. The estimated 27 minutes exceeds a typical AP free-response task. Part C devotes 4 points to graph sketching with trivial axis-label credit. The calculator is allowed but needed only for the 0.63 s period."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part free-response on a single mass-spring SHM scenario, all within Unit 7 scope. It requires energy conservation across three bar-chart states, a short derivation of v_max = A*sqrt(k/m), a sketch of x(t) with the period T = 2*pi*sqrt(m/k) ≈ 0.63 s computed from clean given values, and a proportional-reasoning prediction (4x mass gives 2x period and half the max speed, with amplitude fixed). The difficulty levers are the allowed ones: choosing the governing laws, translating between energy bars, equation and graph, and one proportional prediction with justification. Reading load is light, arithmetic is minimal and clean, and there is no calculus, out-of-scope content or ambiguity. This is typical full-mock FRQ difficulty, not a basic single-concept check and not an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k1",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "E=½kA²=0.25 J. x=+A: U=0.25 J, K=0. x=0: K=0.25 J, U=0. x=−A/2: U=¼E=0.0625 J, K=¾E=0.1875 J. Total is the same in every state.",
+     "final_answer": "+A: Us=4 units, K=0. 0: K=4 units, Us=0. −A/2: Us=1 unit, K=3 units (1 unit=0.0625 J, total 0.25 J).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "½kA²=½mv² gives v=A√(k/m).",
+     "final_answer": "v = A√(k/m) ≈ 1.12 m/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "x=A cos(2πt/T), with T=2π√(m/k)=0.562 s.",
+     "final_answer": "Cosine curve that starts at +0.1 m, has amplitude 0.1 m and period ≈0.56 s, and runs two cycles to t≈1.12 s.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T∝√m, so T is 3 times larger. Same A and k means the same energy, and ½(9m)v²=½kA² makes vmax 1/3 as large.",
+     "final_answer": "Period is 3 times larger (≈1.69 s). Max speed is 1/3 as large (≈0.37 m/s).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard block-spring SHM bundle. The key values are consistent with the solver (T=0.562 s, vmax=1.118 m/s, and factors of 3 and 1/3 for the 9x mass). The scope, rubric and wording are fine. No instant-reject conditions apply.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part free-response on a block-spring oscillator, all within Unit 7 scope. Part A uses energy bar charts at three positions. Part B is a short algebraic derivation of max speed from energy conservation. Part C asks for an x(t) sketch with period T = 2π√(m/k) ≈ 0.56 s, which takes one substitution and light arithmetic. Part D is a proportional-reasoning prediction: 9x mass gives 3x period and 1/3 the max speed, with justification. Concept depth is moderate and the reasoning is multi-step but routine. The representation changes (bar chart, equation, graph) are within the allowed levers. Reading load is small and the numbers are simple. The arithmetic is not long and the wording is unambiguous, so the difficulty comes from legitimate sources. This is a typical full-mock FRQ.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k2",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "E=½kA²=2 J total. At +A: U=2 J, K=0. At 0: K=2 J, U=0. At -A/2: U=½k(A/2)²=0.5 J (1/4 of total), K=1.5 J (3/4).",
+     "final_answer": "x=+A: U=2 J, K=0; x=0: K=2 J, U=0; x=-A/2: U=0.5 J, K=1.5 J; total 2 J each",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "½kA²=½mv² gives v=A√(k/m) ≈ 1.41 m/s",
+     "final_answer": "v = A√(k/m) ≈ 1.41 m/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "x=A cos(ωt), ω=√(k/m)=7.07 rad/s, T=2π√(m/k)≈0.89 s. Cosine curve starting at +0.2 m, two cycles to t≈1.78 s.",
+     "final_answer": "x(t)=0.2cos(7.07t) m; amplitude 0.2 m; period ≈0.89 s; two cycles end at ≈1.78 s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T∝√m, so the period becomes 3 times longer (≈2.67 s). Same A and k means the same energy, and vmax=A√(k/m)∝1/√m, so vmax is 1/3 as large (≈0.47 m/s).",
+     "final_answer": "Period triples (~2.67 s); max speed becomes 1/3 (~0.47 m/s)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The physics and rubric are correct and consistent. The item is in scope for 7.3 and uses an appropriate 12-point Translation Between Representations structure. It is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item covers spring-block SHM only. Each part has its own skill, and 2.D sits in Part D as the proportional prediction."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All values are consistent (E = 2 J, v = 1.41 m/s, T = 0.89 s, factor of 3 in period and in v_max). The rubric rows match the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives m, k, A, the frictionless surface and the release from rest, so the setup is complete. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The listed common errors are plausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is long but fits a 12-point TBR bundle. The calculator use is light and consistent with the \"allowed\" designation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item on a single mass-spring system: energy bar charts at three positions, deriving v_max from energy conservation, sketching x(t) with a computed period (T = 2π√(m/k) ≈ 0.89 s) and amplitude, and a proportional prediction (9x mass gives T x3, v_max /3). It requires choosing the governing laws, moving between bar chart, algebra, graph and verbal justification, and doing proportional reasoning. Concepts are core to the course, the numbers are clean, and the reading is short, so the difficulty comes from legitimate sources and suits a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 10,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k3",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "E=½kA²=0.5625 J. At +A: U=E, K=0. At 0: K=E, U=0. At −A/2: U=¼E≈0.14 J, K=¾E≈0.42 J.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "+A: U=0.5625 J, K=0; x=0: K=0.5625 J, U=0; x=−A/2: U≈0.14 J (1/4), K≈0.42 J (3/4); total is the same in every state"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "½kA²=½mv² gives v=A√(k/m)=1.5 m/s",
+     "ambiguous_or_flawed": false,
+     "final_answer": "v = A√(k/m) (=1.5 m/s)"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "x=A cos(ωt), ω=10 rad/s, T=2π√(m/k)=0.628 s",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Cosine curve starting at +0.15 m, amplitude 0.15 m, period ≈0.63 s, two cycles to ≈1.26 s"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T∝√m so T doubles; same energy ½kA², v_max=A√(k/m) halves",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Period doubles to ≈1.26 s; max speed halves to 0.75 m/s"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is in scope for Unit 7, has a unique and consistent key, and its 12 points match the Translation Between Representations weight. One minor concern is that row C3 requires \"0.63\", so a period given as 0.628 s or as an unevaluated expression might be scored inconsistently. Otherwise the stimulus is complete, the rubric rows are mostly 1 point each, and the task load is reasonable. I passed all five criteria.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and C are representation tasks and part B is an energy derivation. Part D is the 2.D proportional prediction. This mix is allowed for a bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys agree with the independent solver. Row C3 should explicitly accept 0.628 s and the unevaluated 2π√(m/k) with the stated values, but this is a minor issue."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives m, k, A, a frictionless surface and release from rest. The prompts are clear. The empty data object is acceptable for a text stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. Common errors are listed per rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator allowed and consistent. The arithmetic is light and the load is reasonable for a 12-point bundle."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item covering energy bar charts, an energy-conservation derivation, a position-time sketch using the period formula, and a proportional-reasoning prediction (4x mass gives 2x period and half the max speed). Each part needs one governing law and one representation or scaling step. Arithmetic is minimal (T = 2π√(0.5/50) ≈ 0.63 s), reading is short, and the content is in scope. This matches typical full-mock difficulty, with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k0",
+  "cellId": "ap_physics_1-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "This is a standard procedure for timing a mass on a spring.",
+     "final_answer": "Equipment: a spring hung from a clamp stand, a set of known masses (or a mass hanger), a balance and a stopwatch. Procedure: (1) Hang a known mass m (measured on the balance) on the spring. (2) Pull it down a small distance and release it so it oscillates vertically. (3) Time 10 full oscillations and divide by 10 to get T. (4) Repeat with masses 0.1, 0.2, 0.3, 0.4 and 0.5 kg, adding masses to change the independent variable. To reduce uncertainty in T: time many oscillations and divide, repeat each trial several times and average, and start timing at the equilibrium position using a fiducial marker.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "From T = 2π√(m/k), squaring gives T² = (4π²/k)m, so T² is directly proportional to m.",
+     "final_answer": "Plot T² (s²) on the vertical axis and m (kg) on the horizontal axis. The slope is 4π²/k, so k = 4π²/slope.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The T² values are 0.198, 0.384, 0.599, 0.812 and 1.008 s². They fall on a straight line close to the origin.",
+     "final_answer": "Plot the points (0.1, 0.198), (0.2, 0.384), (0.3, 0.599), (0.4, 0.812) and (0.5, 1.008). Label the vertical axis T² (s²) with a scale from 0 to 1.1, and the horizontal axis m (kg) with a scale from 0 to 0.55. Draw a best-fit straight line through the points; its slope is about 2.05 s²/kg and it passes close to the origin.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A least-squares fit gives a slope of 2.05 s²/kg. Then k = 4π²/slope = 39.48/2.05 ≈ 19.3 N/m.",
+     "final_answer": "k ≈ 19 N/m (about 19 to 20 N/m)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard spring-period lab covering design, linearization, graphing and slope analysis. The key is consistent with the data, the stimulus is complete, and the 10-point weight matches the Experimental Design and Analysis type. Minor note: the A3 required_elements list should be marked as either/or.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part lab FRQ on mass-spring SHM. It requires choosing T = 2π√(m/k), linearizing to T² vs m, plotting with a self-chosen scale, and using the slope (4π²/k) to find k. The procedure design in part A is standard (timing multiple oscillations, varying the hung mass). Concepts stay within the Unit 7 scope (7.2/7.3). The arithmetic is light: five squared values and one slope calculation. Reading load is modest. The main levers are the governing law, one representation change (table to linearized graph), and a slope-to-k link. There are no out-of-scope topics or ambiguity. Depth and the number of parts fit a full-mock FRQ rather than basic learning.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k1",
+  "cellId": "ap_physics_1-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Hang the spring from a clamp on a stand and add known slotted masses (checked on a balance). Displace the block slightly and use a stopwatch to time 10 oscillations, starting at equilibrium, then divide by 10. Increase the mass in 0.1 kg steps from 0.1 to 0.5 kg. Reduce uncertainty by timing many cycles and averaging repeated trials.",
+     "final_answer": "Spring on a stand, slotted masses, balance, stopwatch. Time 10 oscillations and divide by 10. Change m in 0.1 kg steps. Repeat trials and average to reduce uncertainty.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Squaring T = 2π√(m/k) gives T² = (4π²/k)m, so the slope is 4π²/k.",
+     "final_answer": "Vertical axis: T² (s²). Horizontal axis: m (kg).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "T² values are 0.153, 0.315, 0.478, 0.623, 0.776 s² for m = 0.1 to 0.5 kg. The points are close to linear and the best-fit line passes near the origin.",
+     "final_answer": "Plot T² (0 to 0.8 s²) against m (0 to 0.5 kg). The best-fit line has slope ≈ 1.55 s²/kg and intercept ≈ 0.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The least-squares slope is 1.554 s²/kg, so k = 4π²/slope = 39.48/1.554.",
+     "final_answer": "k ≈ 25 N/m (25.4 N/m)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Part A's rubric is inconsistent with its own prompt and criteria. Row A2 requires \"same amplitude\", which the prompt never asks for. Row A1's criterion requires a mass measurement and a timing device but is not clearly matched to its elements. Row A3's elements list both options although the criterion accepts either one. The rest of the item (scope, stimulus, parts B to D, rubric values) is sound.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits topic 7.2 and skill 3.A. Each part is aligned with its own skill."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part A rubric rows are ambiguous. Row A2 penalizes omission of amplitude control that the prompt did not request. Row A3 lists both elements as required although the criterion says either one earns the point. Parts B to D are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data table is complete with labels and values, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Task load is reasonable for a 10-point design and analysis item. The calculator is allowed and is consistent with the task."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part AP Physics 1 experimental design and linearization item. It requires choosing T=2π√(m/k), linearizing to T² vs m, plotting, finding the slope, and solving for k. Concept depth is moderate and arithmetic is modest (five squarings, one slope, one division by 4π²). Everything is in scope, the wording is clear, and the reading load is light. This fits a full-mock free-response lab question rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k2",
+  "cellId": "ap_physics_1-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: spring, clamp stand, slotted masses (balance to check them), stopwatch. Hang a known mass, pull it down a little, and let it go. Time 10 full oscillations and divide by 10 to get T. Change the independent variable by adding 0.1 kg each time, from 0.1 to 0.5 kg. To reduce uncertainty, time many cycles, repeat each trial and average, and start timing at the equilibrium position, possibly with a fiducial marker.",
+     "final_answer": "Measure m with a balance. Time 10 oscillations with a stopwatch and divide by 10, repeating and averaging. Increase the mass in 0.1 kg steps.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Squaring T = 2π√(m/k) gives T² = (4π²/k)m, so T² against m is a straight line through the origin.",
+     "final_answer": "Plot T² (s²) on the vertical axis and m (kg) on the horizontal axis. The slope equals 4π²/k.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "T² values (s²): 0.077, 0.154, 0.235, 0.307, 0.392 for m = 0.1 to 0.5 kg. Use a vertical axis from 0 to 0.4 s² and a horizontal axis from 0 to 0.5 kg. The points lie close to a line through about the origin.",
+     "final_answer": "Plot T² (s²) against m (kg) using the points (0.1, 0.077), (0.2, 0.154), (0.3, 0.235), (0.4, 0.307), (0.5, 0.392). The best-fit line has slope ≈ 0.78 s²/kg.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Least-squares slope ≈ 0.783 s²/kg. Then k = 4π²/slope = 39.48/0.783 ≈ 50 N/m.",
+     "final_answer": "k ≈ 50 N/m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The content is on topic and the data are sound. Scoring is not clean: the A1 rubric does not match the model answer, A3 is internally ambiguous, and the tolerances conflict between the rubric text and expected_values. The chained D rows add double penalties. Fail on key and scoring.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Spring-mass period and linearization are in scope for 7.2, and skill 3.A is fit for the design and plot parts. Parts C and D draw on 1.B and 2.D, which is acceptable per part."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "A1 requires a balance or known masses, but the model answer never states how mass is known. A3 required_elements lists both items while the criterion says either earns the point, which is ambiguous. Tolerances conflict: the rubric text says 5% and 8%, while expected_values give 0.03 and 0.06. D1 and D3 are chained to C3 and D1, so one error is penalized twice."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent with T = 2π√(m/k), and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. Common-error coverage is thin but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10-point weight and the 3/1/3/3 split are acceptable. The task load is typical of an AP lab FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style lab design and analysis item. The student must choose the governing law (T = 2π√(m/k)), linearize it (T² vs. m, slope = 4π²/k), design a procedure with a way to reduce period uncertainty (time many oscillations), compute T² values, plot and fit a line, and extract k from the slope. Concept depth is moderate; the multi-step structure and representation changes (table, equation, graph, slope, k) make it appropriate for a full mock. The arithmetic is limited to squaring five 3-digit values and one slope calculation, and the wording is unambiguous and in scope for Unit 7 (mass-spring period). No banned difficulty sources are present.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k3",
+  "cellId": "ap_physics_1-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Hang the spring from a clamp on a ring stand. Attach a known mass, which you measure on a balance. Pull the mass down a small distance and let it go. Use a stopwatch to time 10 full oscillations, then divide by 10 to get T. Change the mass by adding slotted masses in 0.1 kg steps from 0.1 to 0.5 kg. To reduce uncertainty, time many oscillations and repeat each trial several times, then average. Keep the amplitude small.",
+     "final_answer": "Ring stand, spring, slotted masses, balance and stopwatch. For each mass from 0.1 to 0.5 kg, time 10 oscillations, divide by 10 to get T, and average repeated trials.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Squaring T = 2π√(m/k) gives T² = (4π²/k)m, which is a straight line through the origin.",
+     "final_answer": "Put T² (s²) on the vertical axis and m (kg) on the horizontal axis. The slope is 4π²/k.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The T² values are 0.156, 0.315, 0.469, 0.650 and 0.785 s². These are plotted against m from 0.1 to 0.5 kg. Use a horizontal axis from 0 to 0.5 kg and a vertical axis from 0 to 0.8 s². The best-fit line passes close to the origin.",
+     "final_answer": "Plot T² (s²) against m (kg) using the points (0.1, 0.156), (0.2, 0.315), (0.3, 0.469), (0.4, 0.650) and (0.5, 0.785). Draw a straight best-fit line with slope about 1.59 s²/kg.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The least-squares slope is 1.59 s²/kg. Since slope = 4π²/k, k = 4π²/1.59 ≈ 24.8 N/m.",
+     "final_answer": "k ≈ 25 N/m (24.8 N/m)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is in scope, has a clean table stimulus and a reasonable load. It fails key/scoring on rubric consistency: A3 lists both elements as required although the criterion says either earns the point, and D3 says 8 percent while expected_values uses a 0.06 tolerance.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is experimental design and analysis for the spring period, which fits 7.2 and 3.A. Parts C and D use 1.B and 2.D as allowed mixed skills. Part B is only loosely a design question."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "A3 required_elements list both \"time many oscillations\" and \"repeat trials\" while the criterion says either earns the point. D3 criterion says 8 percent tolerance but expected_values uses 0.06. A1 requires \"mass\" and \"stopwatch\", but the model answer never mentions a balance."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has axis labels and five rows, enough to generate the data. The row values carry no units, which is acceptable because the labels give them."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The common_errors entries are sensible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 27 minutes for 10 points is reasonable. The calculator use is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style lab free-response: design a procedure, linearize T = 2π√(m/k) by plotting T² vs m, graph the data with a best-fit line, and use the slope (4π²/k) to find k. Requires choosing the governing law, translating a table into a linearized graph, and one extra step linking slope to k. Arithmetic is light (five squares, one slope) and the scenario is in scope for Unit 7 with no ambiguity or out-of-scope content. Reading load is moderate because there are four parts, but the demands are standard for a full mock.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_1-f04-k0",
+  "cellId": "ap_physics_1-f04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Disagree. When the carts stick together, the collision is perfectly inelastic. Momentum is conserved, but some kinetic energy turns into internal energy (deformation, heat and sound). The combined mass moves more slowly, and because KE = p²/2m, the same momentum shared by a larger mass gives less kinetic energy.",
+     "final_answer": "Disagree; kinetic energy decreases.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Momentum conservation gives m·v0 = 3m·vf, so vf = v0/3 = 2/3 m/s. The fraction of kinetic energy remaining is (3m·(v0/3)²)/(m·v0²) = 1/3.",
+     "final_answer": "vf = v0/3 (≈0.67 m/s); 1/3 of the initial kinetic energy remains.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The fraction remaining is m/(m+M). With M = 4m this gives 1/5, so the fraction lost rises from 2/3 to 4/5. A heavier stationary cart makes the final speed lower, so more kinetic energy is converted.",
+     "final_answer": "Increases (from 2/3 to 4/5).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Physics and answers are correct, but the rubric has defects. B1 and a common error contain an unreplaced template variable \"n\" (m + n m; \"divides by n\"). A2 demands a momentum-conservation statement that the Part A prompt (is KE conserved?) does not ask for. C2 requires the exact expression m/(m+M) with no alternative accepted (e.g., smaller final speed or a numeric 1/5 comparison), which is too narrow for a prompt that only asks for a justification. Rubric rows need cleanup before use.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.4 and skill 3.B are fit. Part B is more of a 2.A routine, but it is fine as a part."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Answers are correct. The rubric leaks the template variable n in B1's required element and in a common error. A2 requires content the prompt does not elicit. C2 has no alt_solutions, so valid equivalent justifications would lose the point."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Clear text stimulus. A frictionless track and sticking are stated; the stimulus data object is empty, which is acceptable for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; common errors are listed."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is reasonable. The total of 8 points is correct for the QQT type."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three-part FRQ on a perfectly inelastic 1D collision: qualitative argument that KE is not conserved when carts stick, momentum-conservation derivation (v_f = v0/3, KE fraction 1/3), and a proportional-reasoning prediction for a 4m target (fraction remaining 1/5, so fraction lost rises from 2/3 to 4/5). Typical full-mock difficulty; the arithmetic is minimal, the wording is clear, and everything is in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_physics_1-f04-k1",
+  "cellId": "ap_physics_1-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "I disagree. When the carts stick together the collision is perfectly inelastic, so some kinetic energy becomes internal energy. The momentum stays the same but is shared by a larger mass, so KE = p²/2M is smaller.",
+     "final_answer": "Disagree: kinetic energy decreases.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Momentum conservation gives m·v0 = 5m·vf, so vf = v0/5. The KE ratio is 5m(v0/5)²/(m·v0²) = 1/5.",
+     "final_answer": "vf = v0/5 = 0.4 m/s; 1/5 (20%) of the initial KE remains.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The fraction lost is M/(m+M). That is 4/5 for M = 4m and 8/9 for M = 8m, so a heavier target cart means a larger fraction is lost.",
+     "final_answer": "The fraction lost increases (from 4/5 to 8/9).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound 8-point QQT bundle on a perfectly inelastic collision. Momentum is conserved and kinetic energy is not. The keys are correct and unique (vf = v0/5, 1/5 of the energy remains, and the lost fraction rises from 4/5 to 8/9). The stimulus is complete, the rubric rows are consistent, and the load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.4, applying conservation laws to a claim; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and correct; rubric dependencies are consistent. B1 required_elements use a generic template string, a minor mismatch."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the masses, speed, frictionless track and sticking carts. The empty data object is fine for a text stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The common_errors per row are realistic misconceptions, such as attributing the loss to friction or dividing by n rather than n+1."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The calculator is allowed and the arithmetic is minimal. The parts are 3/3/2 points, and the reading and writing load is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three-part FRQ-style item on a perfectly inelastic collision. Part A requires choosing the governing idea (sticking collision means inelastic, so KE is not conserved). Part B requires momentum conservation followed by a KE ratio (v_f = v0/5, KE fraction 1/5). Part C requires one proportional-reasoning prediction (remaining fraction m/(m+M) goes from 1/5 to 1/9, so the fraction lost increases). Concept depth is moderate, arithmetic is trivial, reading load is low, and wording and assumptions are clear. This fits the lever list and is appropriate for full mock exams.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_physics_1-f04-k2",
+  "cellId": "ap_physics_1-f04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Disagree. The carts stick together, so the collision is perfectly inelastic. Momentum is conserved because there is no net external horizontal force. However, the carts deform and some kinetic energy becomes internal energy (thermal energy, sound). The combined carts have more mass than the first cart alone, so the same momentum means a lower speed. Because KE = p²/2M, a larger mass with the same momentum gives less kinetic energy. So the system's kinetic energy goes down.",
+     "final_answer": "Disagree: kinetic energy decreases. Momentum is conserved, but some KE is converted to internal energy in the perfectly inelastic collision (KE = p²/2M, and M increases while p stays the same).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Conservation of momentum: m·v0 = (m + 3m)·vf, so vf = v0/4 = 1 m/s. Ratio of final to initial KE: [(1/2)(4m)(v0/4)²] / [(1/2)m·v0²] = 4/16 = 1/4.",
+     "final_answer": "vf = v0/4 (1 m/s); fraction of KE remaining = 1/4 (3/4 is lost).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The fraction remaining is m/(m + M). With M = 6m, this is 1/7, so the fraction lost is 6/7, which is greater than 3/4. A heavier target cart means the combined carts move more slowly, so more of the kinetic energy is lost.",
+     "final_answer": "The fraction lost increases (from 3/4 to 6/7).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The physics is correct, but the rubric is too rigid. A3 and C2 do not accept valid alternative justifications (e.g., computing 6/7 > 3/4, or noting the carts do not separate), and A2 demands specific phrases the prompt does not ask for. B3 is a bare numeric answer with no support required. Fails on key/scoring.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 4.4 and skill 3.B; one-dimensional collision only."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Rubric rows are over-specific. A3 says \"or notes carts do not separate\" but requires both elements. C2 requires the m/(m+M) form and has no alt_solutions for numeric comparison (3/4 vs 6/7). A2 requires \"no external force\", which the prompt does not ask for."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clear; the empty data object is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to the FRQ; common_errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable for an 8-point FRQ and no heavy arithmetic is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing conservation of momentum vs. energy for a perfectly inelastic collision, a short algebraic derivation (v_f = v0/4, KE fraction 1/4), and a proportional-reasoning extension (remaining fraction m/(m+M) goes from 1/4 to 1/7, so lost fraction increases). Low reading load, simple arithmetic, unambiguous wording, all in scope for 1D collisions. Typical multi-part free-response difficulty, suitable for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_physics_1-f04-k3",
+  "cellId": "ap_physics_1-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Disagree. No external horizontal force acts, so momentum is conserved. The carts stick together, so the collision is perfectly inelastic. Some kinetic energy turns into internal energy (deformation and heat). Since KE = p²/2M, the same momentum shared by a larger moving mass gives less kinetic energy.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Disagree. Momentum is conserved but kinetic energy is not: some becomes internal energy, and the same momentum spread over 3m gives KE = p²/(2·3m), which is less than p²/(2m)."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "m·v0 = 3m·vf, so vf = v0/3. KE_f/KE_i = (3m·v0²/9)/(m·v0²) = 1/3.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "vf = v0/3 ≈ 1.33 m/s. One third (1/3) of the initial KE remains, so 2/3 is lost."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The fraction remaining is m/(m+M) = 1/5 when M = 4m, so the fraction lost is 4/5, which is more than 2/3. A heavier target cart makes the final speed lower, so less KE is left.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "It increases: the fraction lost goes from 2/3 to 4/5."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound perfectly inelastic collision bundle. Keys are correct and the solver agrees. Minor blemishes: the B1 element has a template leftover (\"n m\"), the M symbol in the C rubric is not defined in the stem, and the C2 row is rigid about the exact expression. None of these change the key or the scoring.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies momentum conservation and the inelastic-collision model to evaluate a claim; fits 4.4 with 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are correct and unique. The B1 required element contains the template leftover \"n m\"; the C2 row is rigid about the exact expression m/(m+M)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is adequate and the frictionless track is stated. M in part C is not defined in the stem, though the model answer defines it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response; common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is reasonable for 8 points, with no heavy arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three-part FRQ-style item on a perfectly inelastic collision. Part A requires choosing the governing principles (momentum conserved, KE not conserved when carts stick) to evaluate a claim. Part B is a one-step momentum derivation (v_f = v0/3) followed by a KE ratio (1/3). Part C requires proportional reasoning with a changed mass ratio (fraction of KE remaining = m/(m+M), so the fraction lost rises from 2/3 to 4/5). It is on-scope, with clean numbers, unambiguous wording, and low reading load. Difficulty comes from legitimate levers (law selection, a claim-justification step, a proportional prediction), so it suits a full mock rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ }
+]
