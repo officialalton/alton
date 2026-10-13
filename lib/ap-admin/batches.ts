@@ -40,6 +40,8 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "stats-s2b", title: "AP Statistics S2-b (단독 12 + 공유 세트 2 + FRQ 6)", itemsFile: "stats-s2b-items.json", loadLabel: "stats-s2b-2026-10-12", supplement: true, passKeysFile: "stats-s2b-pass-keys.json", evidenceFile: "evidence-stats-s2b.json" },
   // 2026-10-12 AP Statistics S3-a(docs/ap/statistics-s3a-report.md): 다단계 신규 MC 원형 10개 x 시드 2 = 단독 20 후보.
   { id: "stats-s3a", title: "AP Statistics S3-a (다단계 단독 20)", itemsFile: "stats-s3a-items.json", loadLabel: "stats-s3a-2026-10-12", supplement: true, passKeysFile: "stats-s3a-pass-keys.json", evidenceFile: "evidence-stats-s3a.json" },
+  // 2026-10-13 AP Statistics S3-b(docs/ap/statistics-s3b-report.md): ST2 부족분 — 단독 37 후보(통과 34) + 단원 5 회귀 공유 세트 3 + FRQ 12(통과 5).
+  { id: "stats-s3b", title: "AP Statistics S3-b (ST2 부족분: 단독 34 + 회귀 세트 3 + FRQ 5)", itemsFile: "stats-s3b-items.json", loadLabel: "stats-s3b-2026-10-13", supplement: true, passKeysFile: "stats-s3b-pass-keys.json", evidenceFile: "evidence-stats-s3b.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 

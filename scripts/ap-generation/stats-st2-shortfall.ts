@@ -30,5 +30,5 @@ for (const c of used.sort((a, b) => a.members[0].unit - b.members[0].unit)) cons
 console.log(`가상 MC(단독) ${r.virtual.filter((v) => !v.fromSet).length}, 가상 세트 ${r.virtualSets.join(",")}, 세트 문항 가상 ${r.virtual.filter((v) => v.fromSet).length}, 가상 FRQ ${r.frqVirtual.map((v) => v.type).join(",")}`);
 const ex = [...r.singles, ...r.sets].reduce((a, c) => a + (c.exam ?? 0), 0);
 console.log(`기존 재고 단독 ${r.singles.length - used.length}, 세트 ${r.sets.length}, MC exam_prep(신규 포함) ${ex}/42`);
-const u: Record<string, number> = {}; for (const it of buildStatsOrder(r)) u[it.unit] = (u[it.unit] ?? 0) + 1; console.log("단원", JSON.stringify(u));
+const u: Record<string, number> = {}; for (const it of buildStatsOrder(r)) u[String(it.unit)] = (u[String(it.unit)] ?? 0) + 1; console.log("단원", JSON.stringify(u));
 const kk: Record<string, number> = {}; for (const c of r.virtual) { const k = `U${c.unit}S${c.skill}${c.fromSet ? "set" : ""}`; kk[k] = (kk[k] ?? 0) + 1; } console.log("가상 칸", JSON.stringify(kk));
