@@ -1,0 +1,165 @@
+[
+ {
+  "key": "ap_calculus_ab-m01-k0",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f'=-6sin(2x)e^{cos2x}; at pi/6: -6(√3/2)e^{1/2}=-3√3e^{1/2}",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "-3√3 e^{1/2}"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Chain rule on e^{cos 2x} evaluated at an exact point; dominant skill is applying the chain rule (1.E), nothing out of scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key A is the unique correct answer: -6 sin(2x) e^{cos 2x} at pi/6 equals -3√3 e^{1/2}."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (omitted inner factor, dropped exponential, sign error), and the explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, exact-form options, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean chain-rule MC with the correct key, distinct misconception-based distractors, and exact-form options. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires a triple-nested chain rule (e^u, cos, 2x) followed by evaluation at a special angle. Distractors target a missed inner factor of 2, a dropped exponential, and a sign error. Numbers are clean and the wording is unambiguous, so the difficulty comes from the concept and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k0",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f(1)=2, so g(2)=1. f'(x)=5x^4+1 gives f'(1)=6. Then g'(2)=1/f'(1)=1/6.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1/6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets the derivative of an inverse function at a point (topic 3.3), applying the formula as a procedure (skill 1.E)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f is strictly increasing and f(1)=2, so g'(2)=1/f'(1)=1/6. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and one-to-one is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are wrong evaluation point (1/81), squared denominator (1/36) and missing reciprocal (6). Each is distinct and explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no calculator needed, exact-form options, minimal arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard inverse-derivative question with a unique key and three distinct misconception distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application of the inverse derivative formula g'(b)=1/f'(g(b)). Requires finding g(2)=1 by simple inspection of x^5+x=2, computing f'(1)=6, and taking the reciprocal. Distractors target common misconceptions (using f'(2)=81, forgetting reciprocal, squaring), but there is no representation change, no hypothesis checking, and minimal computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m03-k0",
+  "cellId": "ap_calculus_ab-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Chain rule: f'(x) = (1/(cos x + 4)) · (-sin x) = -sin x/(cos x + 4).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-sin(x)/(cos(x)+4)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short item, about 60-80 seconds, with no calculator needed. It is typical of an AP multiple-choice question.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct chain-rule item with a unique key and distinct distractors, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single chain-rule application to ln(u) with u = cos x + 4. The distractors cover omitting the inner derivative, a sign error, and multiplying instead of dividing. There is no representation change, no computation, and no multi-step reasoning, so it is a routine procedure-selection item suited to early learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]

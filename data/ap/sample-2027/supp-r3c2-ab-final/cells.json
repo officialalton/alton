@@ -1,0 +1,127 @@
+[
+ {
+  "cellId": "ap_calculus_ab-f01",
+  "archetype": "frq_closest_point",
+  "kind": "frq_bundle",
+  "unitCode": "5",
+  "topic": "5.10",
+  "skill": "3.E",
+  "calculator": "required",
+  "candidates": 1,
+  "extraTopics": [
+   "3.1",
+   "4.4"
+  ],
+  "template": "closest_point_to_curve_calc"
+ },
+ {
+  "cellId": "ap_calculus_ab-f02",
+  "archetype": "frq_cooling_check",
+  "kind": "frq_bundle",
+  "unitCode": "7",
+  "topic": "7.2",
+  "skill": "1.E",
+  "calculator": "required",
+  "candidates": 1,
+  "extraTopics": [
+   "4.6",
+   "5.6",
+   "4.1"
+  ],
+  "template": "cooling_model_check_tangent_calc"
+ },
+ {
+  "cellId": "ap_calculus_ab-f03",
+  "archetype": "frq_region_bisect",
+  "kind": "frq_bundle",
+  "unitCode": "8",
+  "topic": "8.4",
+  "skill": "1.E",
+  "calculator": "required",
+  "candidates": 1,
+  "extraTopics": [
+   "5.10"
+  ],
+  "template": "region_bisecting_line_calc"
+ },
+ {
+  "cellId": "ap_calculus_ab-f04",
+  "archetype": "frq_arctan_zeros",
+  "kind": "frq_bundle",
+  "unitCode": "3",
+  "topic": "3.4",
+  "skill": "3.E",
+  "calculator": "not_allowed",
+  "candidates": 1,
+  "extraTopics": [
+   "5.4",
+   "1.15",
+   "1.16"
+  ],
+  "template": "inverse_tangent_function_analysis"
+ },
+ {
+  "cellId": "ap_calculus_ab-f05",
+  "archetype": "frq_exp_decay_de",
+  "kind": "frq_bundle",
+  "unitCode": "7",
+  "topic": "7.8",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "candidates": 1,
+  "extraTopics": [
+   "7.6",
+   "7.7",
+   "8.1"
+  ],
+  "template": "exponential_decay_model_de"
+ },
+ {
+  "cellId": "ap_calculus_ab-f06",
+  "archetype": "frq_ftc_chain_limit",
+  "kind": "frq_bundle",
+  "unitCode": "6",
+  "topic": "6.4",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "candidates": 1,
+  "extraTopics": [
+   "3.1",
+   "5.4",
+   "4.7"
+  ],
+  "template": "accumulation_function_variable_limit"
+ },
+ {
+  "cellId": "ap_calculus_ab-f07",
+  "archetype": "frq_limits_continuity",
+  "kind": "frq_bundle",
+  "unitCode": "4",
+  "topic": "4.7",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "candidates": 1,
+  "extraTopics": [
+   "1.15",
+   "1.13",
+   "1.11"
+  ],
+  "template": "limits_lhopital_continuity"
+ },
+ {
+  "cellId": "ap_calculus_ab-f08",
+  "archetype": "frq_rational_param",
+  "kind": "frq_bundle",
+  "unitCode": "5",
+  "topic": "5.2",
+  "skill": "3.E",
+  "calculator": "not_allowed",
+  "candidates": 1,
+  "extraTopics": [
+   "1.15",
+   "5.4",
+   "5.5"
+  ],
+  "template": "parametric_rational_global_extrema"
+ }
+]

@@ -1,0 +1,570 @@
+[
+ {
+  "key": "ap_calculus_ab-f01-k0",
+  "cellId": "ap_calculus_ab-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "D=sqrt((x-3)^2+ln^2x); D'=((x-3)+lnx/x)/D",
+     "final_answer": "D(2)≈1.217 km; D'(2)≈-0.537",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "D'=0 when x-3+lnx/x=0, x≈2.632; sign change -/+; endpoints D(0.5)≈2.594, D(8)≈5.411 larger",
+     "final_answer": "x≈2.632, minimum distance ≈1.035 km",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Segment slope lnx/(x-3), tangent slope 1/x; at critical point x-3=-lnx/x so product = -1",
+     "final_answer": "Product of slopes = -1, so perpendicular",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "dD/dt=D'(2)*4",
+     "final_answer": "≈-2.148 km/min; distance decreasing",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Coherent 9-point FRQ (2/3/2/2) with a consistent key. The sign-change justification in (b) is valid given a single critical point, though an endpoint comparison would be more complete. The perpendicularity check in (c) uses rounded slopes (-0.999 is accepted as -1), which is a minor weakness. Part (d) uses the chain rule from 4.4, an allowed related topic.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 5.10, 3.1 and 4.4. Parts b and c assess 3.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Values are consistent. The b2 row accepts the sign change alone, which is valid with a single critical point. The c2 row requires a product of -1 although the rounded value is -0.999."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete and clear. The domain appears only in the prompt of part a."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ; the rubric rows are distinct and consistent."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator use is appropriate and the task load is typical for about 15 minutes."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part optimization on a curve. It requires building a distance function, finding a critical point with the calculator, and justifying a minimum (candidates test on a closed interval or sign of D'). It then connects the optimum to a geometric perpendicularity condition and applies the chain rule for a rate. The reasoning is standard AP AB free-response depth. Numbers are calculator-friendly, the reading load is modest, and the context is minimal. The related-rates step in part d is a light extension of the chain rule, not out of scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 720
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f02-k0",
+  "cellId": "ap_calculus_ab-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "dT/dt = 176(-0.04)e^{-0.04t} = -0.04(176e^{-0.04t}), and 176e^{-0.04t} = T - 24, so dT/dt = -0.04(T-24).",
+     "final_answer": "Shown: dT/dt = -0.04·176e^{-0.04t} = -0.04(T-24)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "T(10)=24+176e^{-0.4}≈141.976; T'(10)=-0.04(117.976)≈-4.719.",
+     "final_answer": "y = 141.976 - 4.719(t-10); T(15) ≈ 118.381 °C",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "T''=-0.04 dT/dt = 0.0016(T-24) = 0.2816e^{-0.04t} > 0, so the graph is concave up and the tangent line lies below the curve.",
+     "final_answer": "Less than (underestimate), because T''>0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "176e^{-0.04t}=76, so t=25 ln(176/76)≈20.994. T'=-0.04(100-24)=-3.04.",
+     "final_answer": "t ≈ 20.994 min; dT/dt = -3.04 °C per minute",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Valid 9-point cooling-model FRQ. Part (a) verifies the differential equation (topic 7.2); the other parts use allowed related topics (4.6, 5.6, 4.1). The independent solver agrees with every answer. Rubric rows are consistent and the calculator use is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part (a) is the target topic 7.2; parts (b)-(d) use the allowed related topics 4.6, 5.6 and 4.1, each against its own skill. No content from BC or later units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rubric rows match the model answers. Tolerances are suitable and the dependencies between rows are sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The model and the differential equation are given, and the wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no distractors. The model answers explain each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The part points are 2/2/2/3, a typical AP grain, and the task fits about 15 minutes. A calculator is needed for (b) and (d), which is consistent with the designation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ: verify a DE by differentiation and substitution, tangent-line approximation, concavity justification via the second derivative, solving an exponential equation with a logarithm, and reporting a rate with units. Each step uses a routine procedure with clean numbers. The difficulty comes from chaining the parts and giving a correct justification, not from heavy computation or reading.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 10,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f03-k0",
+  "cellId": "ap_calculus_ab-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "I set 6 sin(x/3) = 0.8x and solved it numerically. The nonzero root is x ≈ 6.376.",
+     "final_answer": "x ≈ 6.376",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Area = ∫₀^6.376 (6 sin(x/3) − 0.8x) dx = [−18cos(x/3) − 0.4x²]₀^6.376 ≈ 11.214.",
+     "final_answer": "Area ≈ 11.214",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "The equation is ∫₀^k (6 sin(x/3) − 0.8x) dx = (1/2)∫₀^6.376 (6 sin(x/3) − 0.8x) dx ≈ 5.607. Evaluating the left side gives 18(1 − cos(k/3)) − 0.4k² = 5.607, so k ≈ 3.347.",
+     "final_answer": "k ≈ 3.347",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Let D(x) = 6 sin(x/3) − 0.8x. Then D'(x) = 2cos(x/3) − 0.8, which is 0 when x = 3 arccos(0.4) ≈ 3.478. D(3.478) ≈ 2.717, while D(0) = 0 and D(6.376) = 0. By the candidates test, the greatest vertical distance is 2.717.",
+     "final_answer": "≈ 2.717 (at x ≈ 3.478)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable: area between curves, a bisecting vertical line, and a maximum-gap argument. The points split 2/2/3/2 and the calculator use is appropriate. The key values check out. The solver's 11.214/3.347 differ from the keyed 11.217/3.348 only through rounding of intermediate values.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style FRQ. (a) numeric solve, (b) area integral between curves, (c) set up and solve an equal-area equation for k, (d) maximize the vertical distance with a justification (topic 5.10). Difficulty comes from multi-step reasoning and from reusing results across parts. Numbers are clean, reading is short, and all content is in AB scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f04-k0",
+  "cellId": "ap_calculus_ab-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "f'(x)=2/(1+x^2)-1=(1-x^2)/(1+x^2), which is 0 when x^2=1",
+     "final_answer": "f'(x)=(1-x^2)/(1+x^2); f'(x)=0 at x=1 and x=-1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "The denominator 1+x^2 is always positive, so the sign of f' is the sign of 1-x^2. f'>0 on (-1,1) and f'<0 for x>1, so f' changes from positive to negative at x=1, which makes it a relative maximum. f(1)=2(π/4)-1",
+     "final_answer": "Relative maximum value f(1)=π/2-1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "f(x)/x = 2arctan(x)/x - 1. arctan x stays between -π/2 and π/2, so 2arctan(x)/x → 0 as x→∞. The limit is 0-1",
+     "final_answer": "-1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "f is odd and f(0)=0. On (0,1] f is increasing from 0, so f>0 there and has no zero. On (1,∞) f is decreasing from f(1)=π/2-1>0 toward -∞, because f(x)/x→-1. By the Intermediate Value Theorem plus strict decrease, there is exactly one zero there. By odd symmetry there is exactly one zero for x<0. So the zeros are 0, one positive, and one negative",
+     "final_answer": "3 solutions",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The four parts cover topics 3.4, 5.4, 1.15 and 1.16 with a consistent key and rubric. The independent solver agrees on every part. The 9-point, 15-minute load fits the AP grain, and no calculator is needed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item on 2arctan(x) - x. Part a is a direct inverse-trig derivative. Part b needs a sign analysis and a justified relative maximum with an exact value. Part c is a limit at infinity using boundedness of arctan. Part d needs combining oddness, monotonicity, the limit from c, and the IVT with its hypotheses checked to count 3 zeros. The arithmetic is exact and light, the wording is unambiguous, and the content stays within Unit 3, 5.4 and 1.15 scope. The difficulty comes from the justification chain, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f05-k0",
+  "cellId": "ap_calculus_ab-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "dM/M=-k dt, ln|M|=-kt+C, M(0)=18",
+     "final_answer": "M(t)=18e^{-kt}",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "e^{-4k}=1/2",
+     "final_answer": "k=ln2/4",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "e^{-kt}=1/3, t=ln3/k",
+     "final_answer": "t=4ln3/ln2 years",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "(1/8)∫0^8 18e^{-kt}dt=(18/(8k))(1-1/4)=27/(16k)",
+     "final_answer": "27/(4 ln 2) grams",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean 9-point FRQ on exponential decay (separation of variables, half-life, time to a given mass, average value). The keys are consistent, the rubric rows are coherent, and the answers are in exact form for a non-calculator item. The scope is acceptable because 8.1 is a listed related topic.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item in AB scope: separation of variables with an initial condition, solving for k from half-life, solving for time using logarithms, and an average-value integral simplified to exact form using e^{-8k}=1/4. Difficulty comes from chaining several standard procedures and exact-form simplification, not from ugly numbers, heavy reading, or ambiguity.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f06-k0",
+  "cellId": "ap_calculus_ab-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "FTC + chain rule",
+     "final_answer": "H'(x)=2x(e^{x^2}-2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "H(1)=e-3, H'(1)=2(e-2)",
+     "final_answer": "y=(e-3)+2(e-2)(x-1)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "H'=0 at x=0, ±sqrt(ln2); sign changes - + - +",
+     "final_answer": "Relative minima at x=±sqrt(ln 2) (H' goes - to +); relative maximum at x=0 (H' goes + to -)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "0/0 since H(0)=0 and H continuous; L'Hospital: (e^{x^2}-2)->-1",
+     "final_answer": "-1",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound 9-point FRQ (2/2/3/2) on FTC with the chain rule. It covers a tangent line, relative extrema by sign analysis, and a 0/0 limit by L'Hospital's Rule. The keys are correct and the independent solver agreed. The rubric rows are consistent, no calculator is needed, and the scope fits AB.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item combining FTC Part 2 with the chain rule, a tangent line that needs a definite integral evaluation, a first-derivative sign analysis with justification, and a 0/0 limit that requires checking L'Hopital's hypotheses. The concepts are standard for AB, the numbers are clean (e, ln 2), the wording is unambiguous, and nothing is out of scope. The difficulty comes from the number of reasoning steps and the connections between topics, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f07-k0",
+  "cellId": "ap_calculus_ab-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "0/0 form; L'Hospital: 2x/(1/x)=2x^2 -> 2",
+     "final_answer": "2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Continuity requires g(1)=lim g = 2",
+     "final_answer": "c = 2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "0/0 -> (e^x-1)/(2x), still 0/0 -> e^x/2 -> 1/2",
+     "final_answer": "1/2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "h=2+5ln x/(3x^2); ln x/x^2 ->0 by L'Hospital (1/x)/(2x)=1/(2x^2)->0. Limit 2",
+     "final_answer": "limit 2; horizontal asymptote y = 2",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is a 9-point FRQ split 3/1/3/2, which fits the official grain. Parts a, c, and d each have a unique correct answer, and part b follows from part a. The rubric rows are consistent and chained. The parts draw on 4.7, 1.11, and 1.15, which the bundle is allowed to span. The load is light and fits a non-calculator exam. The stimulus is minimal but sufficient, since each part defines its own function. Two small points remain. Part a's required element \"2x^1\" is an odd form, though it is harmless. Part d's rubric row d1 does not explicitly require the ∞/∞ justification as a required element, even though the prompt asks for justification.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts a, c, and d apply L'Hospital's Rule (skill 1.E). Part b is continuity (1.11), which the bundle allows. All content is in scope for AB."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All four answers (2, c=2, 1/2, and limit 2 with asymptote y=2) are correct and unique. The independent solver agrees. The rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The wording is clear. Each function is defined in the part that uses it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric rows are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a roughly 15-minute AP Calculus FRQ, there is no calculator need, and the arithmetic is simple."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AB L'Hospital item. It requires verifying indeterminate form hypotheses, one repeated application, linking a limit to continuity, and linking a limit at infinity to a horizontal asymptote. The computations are light and the scope is appropriate. Difficulty comes only from the concept and from several short parts, not from heavy arithmetic or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f08-k0",
+  "cellId": "ap_calculus_ab-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "By the quotient rule, f'(x) = A(B − x²)/(x² + B)². Setting f'(1) = 0 gives B = 1. Then f(1) = A/2 = 1, so A = 2.",
+     "final_answer": "A = 2, B = 1, so f(x) = 2x/(x² + 1)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "The denominator has a higher degree than the numerator, so f(x) goes to 0 as x goes to positive or negative infinity.",
+     "final_answer": "Both limits equal 0. The horizontal asymptote is y = 0.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "f'(x) = 2(1 − x²)/(x² + 1)². So f' < 0 for x < −1, f' > 0 for −1 < x < 1, and f' < 0 for x > 1. This gives a relative minimum f(−1) = −1 and a relative maximum f(1) = 1. f is continuous everywhere, these are its only critical points, and f(x) goes to 0 at both ends. So 1 is the absolute maximum and −1 is the absolute minimum. A direct check: 1 − f(x) = (x − 1)²/(x² + 1) ≥ 0 and f(x) + 1 = (x + 1)²/(x² + 1) ≥ 0.",
+     "final_answer": "The absolute maximum is 1, at x = 1. The absolute minimum is −1, at x = −1.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "f(x) = k is the same as kx² − 2x + k = 0. If k = 0, the only solution is x = 0. If k ≠ 0, the equation is quadratic with discriminant 4 − 4k². It has two distinct real roots exactly when |k| < 1. When |k| = 1 there is one root, and when |k| > 1 there are none. This matches the shape of f: it rises from 0 down to −1, climbs to 1, then falls back toward 0.",
+     "final_answer": "−1 < k < 0 or 0 < k < 1",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. The key is correct and unique, and the independent solver matched it on all parts. The scope and the 9-point grain are appropriate. The only weakness is that part (d) row d1 checks only the two extreme values, not the full interval behavior its criterion describes.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Clean algebra (B=1, A=2). Requires quotient-rule derivative, critical-point condition, limits at infinity, and a justified global-extrema argument on an unbounded interval (sign analysis of f', limits, so EVT cannot be applied directly). Part (d) needs monotonic intervals, the limit behavior, and IVT-style counting of solutions, including the k=0 and |k|=1 edge cases. Several reasoning steps and a few representation changes (expression, limits, graph behavior), but no ugly arithmetic or out-of-scope content; typical full-mock FRQ level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ }
+]
