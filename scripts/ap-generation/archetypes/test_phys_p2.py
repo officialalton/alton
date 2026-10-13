@@ -6,8 +6,10 @@ import phys_figs as F
 from phys_common import G, MIN_REL_SEP
 import test_phys_p0 as P0
 
-NEW_U3 = R.PHYS_STAGES["phys_u3"][7:]
-NEW = NEW_U3 + R.PHYS_STAGES["phys_u1"][7:] + R.PHYS_STAGES["phys_u2"][10:] + R.PHYS_STAGES["phys_u4"][4:] + R.PHYS_STAGES["phys_u5"][5:] + R.PHYS_STAGES["phys_u6"][4:] + R.PHYS_STAGES["phys_u7"][3:] + R.PHYS_STAGES["phys_u8"][7:]
+S3_NAMES = set(R.PHYS_STAGES["phys_s3"])  # phys-s3 신규 30개는 test_phys_s3 가 따로 본다
+_st = lambda k: [n for n in R.PHYS_STAGES[k] if n not in S3_NAMES]  # noqa: E731
+NEW_U3 = _st("phys_u3")[7:]
+NEW = NEW_U3 + _st("phys_u1")[7:] + _st("phys_u2")[10:] + _st("phys_u4")[4:] + _st("phys_u5")[5:] + _st("phys_u6")[4:] + _st("phys_u7")[3:] + _st("phys_u8")[7:]
 NEW_SETS = R.PHYS_STAGES["phys_sets"][2:]
 facts, key_value, items = P0.facts, P0.key_value, P0.items
 

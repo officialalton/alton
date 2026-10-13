@@ -2,7 +2,9 @@
 //   npx tsx scripts/ap-generation/phys-assign.ts --sets PH1[,PH2] [--time-ms 120000] [--write-report <경로 .json>] [--files phys-p1a-items,...] [--no-screen] [--prefer-exam-prep] [--block-file <보고서.json[,..]>]
 // 조건(공식 구조, docs/ap/physics1-facts.md): MC 42 = 단독 38 + 2문항 공유 세트 2(세트 단원은 자유), 단원 비중 10-15/18-23/18-23/10-15/10-15/5-8/5-8/10-15 % → 단원별 5/8/8/5/5/3/3/5 (하한 합 = 42),
 //   FRQ 4(MR/TBR/LAB/QQT 각 1), 세트 안 문항군 1(look-alike 포함), 세트 간 같은 문항 0. 재고에 없는 칸은 가상 문항으로 세어 부족분을 정확히 보고한다.
-//   스킬(2.A…3.C) 공식 범위는 차단 조건이 아니라 목표다(현재 원형이 2.B 편중): 목적함수가 범위 중앙값에서 벗어난 만큼 벌점을 주고 보고서가 이탈을 밝힌다.
+//   스킬(2.A…3.C) 공식 범위는 기본으로는 차단 조건이 아니라 목표다(P0 원형이 2.B 편중이었음): 목적함수가 범위 중앙값에서 벗어난 만큼 벌점을 주고 보고서가 이탈을 밝힌다.
+//   --hard-skills(2026-10-13, phys-s3 이후): 스킬 범위(2.A 7–8, 2.B 9–10, 2.C 5–6, 2.D 5–6, 3.B 9–10, 3.C 3–4)를 차단 조건으로 둔다. --balance: 항목이 속한 (단원·스킬) 칸의 재고가 적을수록 비용을 줘 순차 풀이에서 뒤 세트가 굶지 않게 한다.
+//   --prefer-keys <보고서.json,..>: 그 보고서의 문항을 재사용하면 보너스(기존 PH1/PH2 초안과 겹침을 늘려 변경량 최소화).
 import { readFileSync, writeFileSync } from "node:fs";
 import { solveMip, type Cons } from "../../lib/ap-exam/ilp";
 import { PHYS_FRQ_TEMPLATES, PHYS_MC_COUNT, PHYS_SET_COUNT, PHYS_SET_SIZE, physSkillBounds, physSkillWarnings, physUnitBounds, verifyPhysFullComposition, PHYS_FULL_TARGET, type PhysSetItem } from "../../lib/ap-exam/full-set-rules";
@@ -15,7 +17,7 @@ export type PhysResult = { id: string; singles: PhysItem[]; sets: PhysItem[]; fr
 const UNITS = [1, 2, 3, 4, 5, 6, 7, 8]; const SKILLS = Object.keys(physSkillBounds());
 const SINGLES_PER_SET = PHYS_MC_COUNT - PHYS_SET_COUNT * PHYS_SET_SIZE;
 
-export function solvePhysSets(ids: string[], items: PhysItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; preferExamPrep?: boolean; skillWeight?: number; cost?: (c: PhysItem) => number }) {
+export function solvePhysSets(ids: string[], items: PhysItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; preferExamPrep?: boolean; skillWeight?: number; hardSkills?: boolean; cost?: (c: PhysItem) => number }) {
   const blocked = o.blocked ?? new Set<string>();
   const usable = items.filter((c) => !blocked.has(c.key) && (c.kind === "frq" ? (PHYS_FRQ_TEMPLATES as readonly string[]).includes(c.frqType) : c.shared ? c.members.length === PHYS_SET_SIZE : c.members.length === 1));
   const mcSingles = usable.filter((c) => c.kind === "mc" && !c.shared), mcSets = usable.filter((c) => c.kind === "mc" && c.shared), frqs = usable.filter((c) => c.kind === "frq");
@@ -48,6 +50,7 @@ export function solvePhysSets(ids: string[], items: PhysItem[], o: { timeMs: num
     }
     for (const k of SKILLS) { // 스킬: 실제 문항만 센다(가상 문항의 스킬은 정해지지 않음). 범위 중앙값에서의 이탈 벌점(차단 아님)
       const co: [number, number][] = [...mcSingles.filter((c) => c.members[0].skill === k).map((c) => [x(c, s), 1] as [number, number]), ...mcSets.map((c) => [x(c, s), c.members.filter((m) => m.skill === k).length] as [number, number]).filter(([, v]) => v > 0)];
+      if (o.hardSkills) { cons.push({ coef: co, sense: ">=", rhs: kB[k].min }); cons.push({ coef: co, sense: "<=", rhs: kB[k].max }); continue; } // 스킬 범위 차단(가상 문항은 스킬이 없으므로 실제 문항만으로 범위를 채워야 한다)
       const t = (kB[k].min + kB[k].max) / 2; const d = dk.get(`${s}|${k}`)!;
       cons.push({ coef: [...co, [d, -1]], sense: "<=", rhs: t }); cons.push({ coef: [...co.map(([j, v]) => [j, -v] as [number, number]), [d, -1]], sense: "<=", rhs: -t });
     }
@@ -122,14 +125,18 @@ function main() {
   const files = arg("--files") ? arg("--files").split(",") : undefined;
   const { all, pool } = loadPhysPool({ requireScreen: !has("--no-screen"), files }); void all;
   const log = (s: string) => console.error(s);
+  const hardSkills = has("--hard-skills");
+  const prefer = new Set<string>(); for (const f of arg("--prefer-keys").split(",").filter(Boolean)) for (const st of (JSON.parse(readFileSync(f, "utf-8")) as { sets: { mcA?: string[]; frqA?: string[] }[] }).sets) for (const k of [...(st.mcA ?? []), ...(st.frqA ?? [])]) prefer.add(k);
+  const supply = new Map<string, number>(); for (const c of pool) if (c.kind === "mc") for (const mm of c.members) supply.set(`${mm.unit}|${mm.skill}`, (supply.get(`${mm.unit}|${mm.skill}`) ?? 0) + 1);
+  const cost = (c: PhysItem) => { let v = prefer.has(c.key) ? -0.05 : 0; if (has("--balance") && c.kind === "mc") v += (c.members.reduce((a, mm) => a + 1 / (supply.get(`${mm.unit}|${mm.skill}`) ?? 1), 0) / c.members.length) * 0.5; return v; };
   const blocked = new Set<string>(); for (const f of arg("--block-file").split(",").filter(Boolean)) for (const st of (JSON.parse(readFileSync(f, "utf-8")) as { sets: { mcA?: string[]; frqA?: string[] }[] }).sets) for (const k of [...(st.mcA ?? []), ...(st.frqA ?? [])]) blocked.add(k);
   // --joint: 두 세트를 한 번에 푼다(변수가 많아 분기한정이 해를 못 찾는 경우가 있다). 기본은 순차: PH1 을 최적으로 푼 뒤 그 문항을 막고 PH2 를 푼다(세트 간 겹침 0 보장, stats ST2 와 같은 방식).
   let m: ReturnType<typeof solvePhysSets>;
-  if (has("--joint")) m = solvePhysSets(ids, pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), blocked });
+  if (has("--joint")) m = solvePhysSets(ids, pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), blocked, hardSkills, cost });
   else {
     const out: PhysResult[] = []; let res = { status: "optimal", obj: 0, nodes: 0, x: [0] } as unknown as ReturnType<typeof solvePhysSets>["res"]; const bl = new Set(blocked);
     for (const id of ids) {
-      const one = solvePhysSets([id], pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), blocked: bl });
+      const one = solvePhysSets([id], pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), blocked: bl, hardSkills, cost });
       out.push(...one.out); res = { ...one.res, obj: (res.obj ?? 0) + one.res.obj, nodes: (res.nodes ?? 0) + one.res.nodes, status: one.res.status } as typeof res;
       for (const it of [...one.out[0].singles, ...one.out[0].sets, ...one.out[0].frq]) bl.add(it.key);
     }
@@ -137,6 +144,7 @@ function main() {
   }
   const results = m.out;
   const bad = m.res.x.length ? verifyPhysAssignment(results) : ["해 없음"];
+  if (hardSkills && m.res.x.length) for (const r of results) { for (const w of skillSummary(r).warnings) bad.push(`${r.id}: ${w}`); if (r.virtual.length + r.virtualSets.length + r.frqVirtual.length) bad.push(`${r.id}: 가상 칸 ${r.virtual.length + r.virtualSets.length + r.frqVirtual.length}개`); }
   const cnt = (f: (c: PhysItem) => boolean) => pool.filter(f).length;
   console.log(`# phys-assign sets=${ids.join(",")} 재고 단독 ${cnt((c) => c.kind === "mc" && !c.shared)} 세트 ${cnt((c) => c.shared)} FRQ ${cnt((c) => c.kind === "frq")}`);
   console.log(`status=${m.res.status} 목적값(가상×1000 + 단원 이탈 + 스킬 이탈×0.5)=${m.res.obj} 노드 ${m.res.nodes} 가상 문항=${results.reduce((a, r) => a + r.virtual.length + r.virtualSets.length * PHYS_SET_SIZE + r.frqVirtual.length, 0)}`);

@@ -92,6 +92,30 @@ describe("physics exact assignment (ILP + independent verifier)", () => {
   });
 });
 
+describe("hard skill ranges (--hard-skills)", () => {
+  /** 단원별 2.B 대신 스킬을 섞은 재고: 한 세트가 스킬 범위(2.A 7–8, 2.B 9–10, 2.C 5–6, 2.D 5–6, 3.B 9–10, 3.C 3–4)를 정확히 만족하도록 단원마다 스킬을 돌려 쓴다. */
+  function skilled(copies: number): PhysItem[] {
+    n = 0; const items: PhysItem[] = []; const cycle = ["2.B", "2.B", "3.B", "3.B", "2.A", "2.A", "2.C", "2.D", "3.C", "2.B"];
+    const unitSingles: Record<number, number> = { 1: 3, 2: 8, 3: 8, 4: 5, 5: 5, 6: 1, 7: 3, 8: 5 }; let k = 0;
+    for (let c = 0; c < copies; c++) {
+      for (const [u, cnt] of Object.entries(unitSingles)) for (let q = 0; q < cnt; q++) items.push(single(Number(u), cycle[k++ % cycle.length], `c${c}-u${u}-${q}`));
+      items.push(set(1, ["2.A", "2.C"]), set(6, ["2.D", "3.B"]));
+      for (const t of PHYS_FRQ_TEMPLATES) items.push(frq(t));
+    }
+    return items;
+  }
+  it("with hardSkills a stock that cannot meet the ranges has no solution instead of a warning", () => {
+    const { res } = solvePhysSets(["PH1"], fullStock(), { timeMs: 30000, hardSkills: true });
+    expect(res.x.length === 0 || res.status === "infeasible").toBe(true);
+  });
+  it("with hardSkills a mixed-skill stock is assembled inside every official skill range and the verifier agrees", () => {
+    const stock = skilled(2); const { res, out } = solvePhysSets(["PH1"], stock, { timeMs: 60000, hardSkills: true });
+    expect(res.x.length).toBeGreaterThan(0);
+    expect(skillSummary(out[0]).warnings).toEqual([]);
+    expect(verifyPhysAssignment(out)).toEqual([]);
+  });
+});
+
 describe("physics full-set composition rules (pure)", () => {
   const order = (units: number[], setAt?: number[]) => units.map((u, i) => ({ kind: "mc" as const, unit: String(u), skill: "2.B", candidateKey: setAt?.includes(i) ? `set${setAt.indexOf(i) < 2 ? "A" : "B"}` : null, position: i + 1 }));
   const base = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 8, 8];

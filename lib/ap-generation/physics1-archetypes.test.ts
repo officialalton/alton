@@ -29,9 +29,9 @@ d("AP Physics 1 P0 archetypes (Python generators, 3 seeds each)", () => {
   const out = (r.status === 0 ? JSON.parse(r.stdout) : { names: [], frq: [], packs: {}, frqPacks: {} }) as { names: string[]; frq: string[]; packs: Record<string, Pk[]>; frqPacks: Record<string, FrqPack[]> };
   const flat = (n: string) => out.packs[n].flatMap((p) => (p.items ?? [p]).map((q) => ({ ...q, stimulus: q.stimulus ?? p.stimulus })));
 
-  it("registers 95 single archetypes + 5 sets covering all 8 units, and the guide JSON lists the same ids", () => {
+  it("registers 135 single archetypes + 5 sets covering all 8 units, and the guide JSON lists the same ids", () => {
     expect(r.status).toBe(0);
-    expect(out.names).toHaveLength(100);
+    expect(out.names).toHaveLength(140);
     const ids = physicsGuide.archetypes.map((a) => a.id);
     const expected = out.names.flatMap((n) => flat(n).slice(0, out.packs[n][0].items ? 2 : 1).map((q) => q.archetype));
     expect(ids).toEqual(expected);
