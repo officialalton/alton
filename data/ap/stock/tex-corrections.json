@@ -148,8 +148,8 @@
    "itemIndex": 0,
    "sets": [],
    "beforeSha256": "076548d1d942aac155919c02a073179a19130ad9269a82bf807dcf7014b4c931",
-   "afterSha256": "63ce74740ce9dd3296c5f3810e69bccf2981ac43f55ec2e7aa7f7b4445aac7fe",
-   "after": "The ratio equals 6/side length: 6, 3, 1.5, 0.75 $mm^-1$ for sides of 1, 2, 4, 8 mm. Each doubling of side length halves the ratio, so a graph would be a decreasing curve that is steep at small sizes and flattens at larger sizes. The straight-line option is wrong because the decreases are not constant per mm and the ratio never reaches zero. The rising-curve option confuses total surface area, which does increase, with the ratio, which decreases because volume grows faster than surface area. The horizontal-line option is wrong because volume scales with the cube of side length while surface area scales with its square, so the ratio is not constant."
+   "afterSha256": "e9f45229481236915b3d06152c46d80794b4ad9f0c8af71894acc1d3c3214605",
+   "after": "The ratio equals 6/side length: 6, 3, 1.5, 0.75 $mm^{-1}$ for sides of 1, 2, 4, 8 mm. Each doubling of side length halves the ratio, so a graph would be a decreasing curve that is steep at small sizes and flattens at larger sizes. The straight-line option is wrong because the decreases are not constant per mm and the ratio never reaches zero. The rising-curve option confuses total surface area, which does increase, with the ratio, which decreases because volume grows faster than surface area. The horizontal-line option is wrong because volume scales with the cube of side length while surface area scales with its square, so the ratio is not constant."
   },
   {
    "candidateKey": "run1:ap_biology-c016-k0",
@@ -481,8 +481,8 @@
     "AB1 v2(계획 적용)"
    ],
    "beforeSha256": "1d09df138afb8ad7ad52a036efd6655144c83198acd8041055668f9b8d8d68a1",
-   "afterSha256": "99abb7ba5e40f1b736c5059eaee04500081807dc03433bf3d81b8272f9037cc0",
-   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] Area = $\\int_{0}^{3.154}$ (f(x) − g(x)) dx = 7.270\n   - 1 pt: Integral with upper curve minus lower curve and limits 0 and the intersection\n   - 1 pt: Answer\n(b) [2 pt] V = $\\int_{0}^{3.154}$ (f(x) − g(x))² dx = 19.177\n   - 1 pt: Integrand is the square of the cross-section side $(f-g)^2$ with correct limits\n   - 1 pt: Answer\n(c) [3 pt] V = $\\pi\\int_0^3.154\\left[(\\sin x+3.5+2)^2-(x^2/4+1+2)^2\\right]dx$ (≈ 223.064)\n   - 1 pt: Form: $\\pi$ times integral of $(outer radius)^2$ - $(inner radius)^2$\n   - 1 pt: Outer radius f(x)+2 and inner radius g(x)+2\n   - 1 pt: Limits 0 and the intersection, constant $\\pi$\n(d) [2 pt] (1/3.154) $\\int_{0}^{3.154}$ (f−g) dx = 2.305\n   - 1 pt: Integral of f - g divided by the interval length\n   - 1 pt: Answer"
+   "afterSha256": "04e2bd9b72de189fbc301ed4026f6f15214d3ba3f126a44bd0f1b8df232dcd45",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] Area = $\\int_{0}^{3.154}$ (f(x) − g(x)) dx = 7.270\n   - 1 pt: Integral with upper curve minus lower curve and limits 0 and the intersection\n   - 1 pt: Answer\n(b) [2 pt] V = $\\int_{0}^{3.154}$ (f(x) − g(x))² dx = 19.177\n   - 1 pt: Integrand is the square of the cross-section side $(f-g)^2$ with correct limits\n   - 1 pt: Answer\n(c) [3 pt] V = $\\pi\\int_0^{3.154}\\left[(\\sin x+3.5+2)^2-(x^2/4+1+2)^2\\right]dx$ (≈ 223.064)\n   - 1 pt: Form: $\\pi$ times integral of $(outer radius)^2$ - $(inner radius)^2$\n   - 1 pt: Outer radius f(x)+2 and inner radius g(x)+2\n   - 1 pt: Limits 0 and the intersection, constant $\\pi$\n(d) [2 pt] (1/3.154) $\\int_{0}^{3.154}$ (f−g) dx = 2.305\n   - 1 pt: Integral of f - g divided by the interval length\n   - 1 pt: Answer"
   },
   {
    "candidateKey": "run2:ap_calculus_ab-f04-k1",
@@ -491,8 +491,8 @@
     "BC2(5세트 계획)"
    ],
    "beforeSha256": "32723e940e9bed2266e04d780fa6f0e4b8f7baca6b1cc0a5008cae60726dd18f",
-   "afterSha256": "6e363647245a302f043b8de5b1aeeac72ecd55d43f8ca8f3077030d90a6940a2",
-   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] Area = $\\int_{0}^{2.517}$ (f(x) − g(x)) dx = 2.999\n   - 1 pt: Integral with upper curve minus lower curve and limits 0 and the intersection\n   - 1 pt: Answer\n(b) [2 pt] V = $\\int_{0}^{2.517}$ (f(x) − g(x))² dx = 4.010\n   - 1 pt: Integrand is the square of the cross-section side $(f-g)^2$ with correct limits\n   - 1 pt: Answer\n(c) [3 pt] V = $\\pi\\int_0^2.517\\left[(\\sin x+2.5+2)^2-(x^2/4+1.5+2)^2\\right]dx$ (≈ 85.979)\n   - 1 pt: Form: $\\pi$ times integral of $(outer radius)^2$ - $(inner radius)^2$\n   - 1 pt: Outer radius f(x)+2 and inner radius g(x)+2\n   - 1 pt: Limits 0 and the intersection, constant $\\pi$\n(d) [2 pt] (1/2.517) $\\int_{0}^{2.517}$ (f−g) dx = 1.191\n   - 1 pt: Integral of f - g divided by the interval length\n   - 1 pt: Answer"
+   "afterSha256": "1b722a64a49f4c4d15e5d112f8a01ab1c324a9a4398e3d82dc9d95243108c15e",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] Area = $\\int_{0}^{2.517}$ (f(x) − g(x)) dx = 2.999\n   - 1 pt: Integral with upper curve minus lower curve and limits 0 and the intersection\n   - 1 pt: Answer\n(b) [2 pt] V = $\\int_{0}^{2.517}$ (f(x) − g(x))² dx = 4.010\n   - 1 pt: Integrand is the square of the cross-section side $(f-g)^2$ with correct limits\n   - 1 pt: Answer\n(c) [3 pt] V = $\\pi\\int_0^{2.517}\\left[(\\sin x+2.5+2)^2-(x^2/4+1.5+2)^2\\right]dx$ (≈ 85.979)\n   - 1 pt: Form: $\\pi$ times integral of $(outer radius)^2$ - $(inner radius)^2$\n   - 1 pt: Outer radius f(x)+2 and inner radius g(x)+2\n   - 1 pt: Limits 0 and the intersection, constant $\\pi$\n(d) [2 pt] (1/2.517) $\\int_{0}^{2.517}$ (f−g) dx = 1.191\n   - 1 pt: Integral of f - g divided by the interval length\n   - 1 pt: Answer"
   },
   {
    "candidateKey": "run2:ap_calculus_ab-f04-k2",
@@ -501,8 +501,8 @@
     "AB3(5세트 계획)"
    ],
    "beforeSha256": "92d987c73f5489ef4c2119e82ad0e3cce3183f51c0406ea634cf9d08f089ff78",
-   "afterSha256": "26c44ee0b0294b59a9ba6bfe4af3cabe5eb8e56538268c6f534790407f93c625",
-   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] Area = $\\int_{0}^{2.746}$ (f(x) − g(x)) dx = 4.316\n   - 1 pt: Integral with upper curve minus lower curve and limits 0 and the intersection\n   - 1 pt: Answer\n(b) [2 pt] V = $\\int_{0}^{2.746}$ (f(x) − g(x))² dx = 7.658\n   - 1 pt: Integrand is the square of the cross-section side $(f-g)^2$ with correct limits\n   - 1 pt: Answer\n(c) [3 pt] V = $\\pi\\int_0^2.746\\left[(\\sin x+2+2)^2-(x^2/4+0.5+2)^2\\right]dx$ (≈ 104.072)\n   - 1 pt: Form: $\\pi$ times integral of $(outer radius)^2$ - $(inner radius)^2$\n   - 1 pt: Outer radius f(x)+2 and inner radius g(x)+2\n   - 1 pt: Limits 0 and the intersection, constant $\\pi$\n(d) [2 pt] (1/2.746) $\\int_{0}^{2.746}$ (f−g) dx = 1.572\n   - 1 pt: Integral of f - g divided by the interval length\n   - 1 pt: Answer"
+   "afterSha256": "6363496f1641ca61057a63730a9bfdab8fc378a27feccee42f3525b8fe5ccbd3",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] Area = $\\int_{0}^{2.746}$ (f(x) − g(x)) dx = 4.316\n   - 1 pt: Integral with upper curve minus lower curve and limits 0 and the intersection\n   - 1 pt: Answer\n(b) [2 pt] V = $\\int_{0}^{2.746}$ (f(x) − g(x))² dx = 7.658\n   - 1 pt: Integrand is the square of the cross-section side $(f-g)^2$ with correct limits\n   - 1 pt: Answer\n(c) [3 pt] V = $\\pi\\int_0^{2.746}\\left[(\\sin x+2+2)^2-(x^2/4+0.5+2)^2\\right]dx$ (≈ 104.072)\n   - 1 pt: Form: $\\pi$ times integral of $(outer radius)^2$ - $(inner radius)^2$\n   - 1 pt: Outer radius f(x)+2 and inner radius g(x)+2\n   - 1 pt: Limits 0 and the intersection, constant $\\pi$\n(d) [2 pt] (1/2.746) $\\int_{0}^{2.746}$ (f−g) dx = 1.572\n   - 1 pt: Integral of f - g divided by the interval length\n   - 1 pt: Answer"
   },
   {
    "candidateKey": "run2:ap_calculus_ab-f04-k3",
@@ -511,8 +511,8 @@
     "AB2(5세트 계획)"
    ],
    "beforeSha256": "fff63ea774da6c85e34c2d792b18f246b6e3e95cbfb724fa3a156ecded878687",
-   "afterSha256": "3eaa883393079a691145ea86d928595039b2517f59c93e169671ab3b66a527ec",
-   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] Area = $\\int_{0}^{2.746}$ (f(x) − g(x)) dx = 4.316\n   - 1 pt: Integral with upper curve minus lower curve and limits 0 and the intersection\n   - 1 pt: Answer\n(b) [2 pt] V = $\\int_{0}^{2.746}$ (f(x) − g(x))² dx = 7.658\n   - 1 pt: Integrand is the square of the cross-section side $(f-g)^2$ with correct limits\n   - 1 pt: Answer\n(c) [3 pt] V = $\\pi\\int_0^2.746\\left[(\\sin x+2.5+2)^2-(x^2/4+1+2)^2\\right]dx$ (≈ 117.632)\n   - 1 pt: Form: $\\pi$ times integral of $(outer radius)^2$ - $(inner radius)^2$\n   - 1 pt: Outer radius f(x)+2 and inner radius g(x)+2\n   - 1 pt: Limits 0 and the intersection, constant $\\pi$\n(d) [2 pt] (1/2.746) $\\int_{0}^{2.746}$ (f−g) dx = 1.572\n   - 1 pt: Integral of f - g divided by the interval length\n   - 1 pt: Answer"
+   "afterSha256": "351f3bb1e3741100b4a9ef6b748c21167561a97ed6870ec154b8564ff47b3e1e",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] Area = $\\int_{0}^{2.746}$ (f(x) − g(x)) dx = 4.316\n   - 1 pt: Integral with upper curve minus lower curve and limits 0 and the intersection\n   - 1 pt: Answer\n(b) [2 pt] V = $\\int_{0}^{2.746}$ (f(x) − g(x))² dx = 7.658\n   - 1 pt: Integrand is the square of the cross-section side $(f-g)^2$ with correct limits\n   - 1 pt: Answer\n(c) [3 pt] V = $\\pi\\int_0^{2.746}\\left[(\\sin x+2.5+2)^2-(x^2/4+1+2)^2\\right]dx$ (≈ 117.632)\n   - 1 pt: Form: $\\pi$ times integral of $(outer radius)^2$ - $(inner radius)^2$\n   - 1 pt: Outer radius f(x)+2 and inner radius g(x)+2\n   - 1 pt: Limits 0 and the intersection, constant $\\pi$\n(d) [2 pt] (1/2.746) $\\int_{0}^{2.746}$ (f−g) dx = 1.572\n   - 1 pt: Integral of f - g divided by the interval length\n   - 1 pt: Answer"
   },
   {
    "candidateKey": "run2:ap_calculus_ab-m01-k0",
@@ -1493,8 +1493,8 @@
     "BC1(5세트 계획)"
    ],
    "beforeSha256": "e5a129648c7ed74649d282f534a0b0356ef7654c88e31171fe8c82aa49c69f4e",
-   "afterSha256": "7b10654e3d76d23b996bd5f81382162ccd2324200f08d1cdc0a8ab0698315613",
-   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] Area = $\\int_{0}^{2.956}$ (f(x) − g(x)) dx = 5.742\n   - 1 pt: Integral with upper curve minus lower curve and limits 0 and the intersection\n   - 1 pt: Answer\n(b) [2 pt] V = $\\int_{0}^{2.956}$ (f(x) − g(x))² dx = 12.679\n   - 1 pt: Integrand is the square of the cross-section side $(f-g)^2$ with correct limits\n   - 1 pt: Answer\n(c) [3 pt] V = $\\pi\\int_0^2.956\\left[(\\sin x+3.5+2)^2-(x^2/4+1.5+2)^2\\right]dx$ (≈ 184.410)\n   - 1 pt: Form: $\\pi$ times integral of $(outer radius)^2$ - $(inner radius)^2$\n   - 1 pt: Outer radius f(x)+2 and inner radius g(x)+2\n   - 1 pt: Limits 0 and the intersection, constant $\\pi$\n(d) [2 pt] (1/2.956) $\\int_{0}^{2.956}$ (f−g) dx = 1.943\n   - 1 pt: Integral of f - g divided by the interval length\n   - 1 pt: Answer"
+   "afterSha256": "65e0f76915c9382d8b12bb3406726cdce0f6c7161c50541548df4b3c21f5346e",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] Area = $\\int_{0}^{2.956}$ (f(x) − g(x)) dx = 5.742\n   - 1 pt: Integral with upper curve minus lower curve and limits 0 and the intersection\n   - 1 pt: Answer\n(b) [2 pt] V = $\\int_{0}^{2.956}$ (f(x) − g(x))² dx = 12.679\n   - 1 pt: Integrand is the square of the cross-section side $(f-g)^2$ with correct limits\n   - 1 pt: Answer\n(c) [3 pt] V = $\\pi\\int_0^{2.956}\\left[(\\sin x+3.5+2)^2-(x^2/4+1.5+2)^2\\right]dx$ (≈ 184.410)\n   - 1 pt: Form: $\\pi$ times integral of $(outer radius)^2$ - $(inner radius)^2$\n   - 1 pt: Outer radius f(x)+2 and inner radius g(x)+2\n   - 1 pt: Limits 0 and the intersection, constant $\\pi$\n(d) [2 pt] (1/2.956) $\\int_{0}^{2.956}$ (f−g) dx = 1.943\n   - 1 pt: Integral of f - g divided by the interval length\n   - 1 pt: Answer"
   },
   {
    "candidateKey": "s1a-final:ap_calculus_ab-f04-k1",
@@ -1503,8 +1503,8 @@
     "부분 연습 PF"
    ],
    "beforeSha256": "92d987c73f5489ef4c2119e82ad0e3cce3183f51c0406ea634cf9d08f089ff78",
-   "afterSha256": "26c44ee0b0294b59a9ba6bfe4af3cabe5eb8e56538268c6f534790407f93c625",
-   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] Area = $\\int_{0}^{2.746}$ (f(x) − g(x)) dx = 4.316\n   - 1 pt: Integral with upper curve minus lower curve and limits 0 and the intersection\n   - 1 pt: Answer\n(b) [2 pt] V = $\\int_{0}^{2.746}$ (f(x) − g(x))² dx = 7.658\n   - 1 pt: Integrand is the square of the cross-section side $(f-g)^2$ with correct limits\n   - 1 pt: Answer\n(c) [3 pt] V = $\\pi\\int_0^2.746\\left[(\\sin x+2+2)^2-(x^2/4+0.5+2)^2\\right]dx$ (≈ 104.072)\n   - 1 pt: Form: $\\pi$ times integral of $(outer radius)^2$ - $(inner radius)^2$\n   - 1 pt: Outer radius f(x)+2 and inner radius g(x)+2\n   - 1 pt: Limits 0 and the intersection, constant $\\pi$\n(d) [2 pt] (1/2.746) $\\int_{0}^{2.746}$ (f−g) dx = 1.572\n   - 1 pt: Integral of f - g divided by the interval length\n   - 1 pt: Answer"
+   "afterSha256": "6363496f1641ca61057a63730a9bfdab8fc378a27feccee42f3525b8fe5ccbd3",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] Area = $\\int_{0}^{2.746}$ (f(x) − g(x)) dx = 4.316\n   - 1 pt: Integral with upper curve minus lower curve and limits 0 and the intersection\n   - 1 pt: Answer\n(b) [2 pt] V = $\\int_{0}^{2.746}$ (f(x) − g(x))² dx = 7.658\n   - 1 pt: Integrand is the square of the cross-section side $(f-g)^2$ with correct limits\n   - 1 pt: Answer\n(c) [3 pt] V = $\\pi\\int_0^{2.746}\\left[(\\sin x+2+2)^2-(x^2/4+0.5+2)^2\\right]dx$ (≈ 104.072)\n   - 1 pt: Form: $\\pi$ times integral of $(outer radius)^2$ - $(inner radius)^2$\n   - 1 pt: Outer radius f(x)+2 and inner radius g(x)+2\n   - 1 pt: Limits 0 and the intersection, constant $\\pi$\n(d) [2 pt] (1/2.746) $\\int_{0}^{2.746}$ (f−g) dx = 1.572\n   - 1 pt: Integral of f - g divided by the interval length\n   - 1 pt: Answer"
   },
   {
    "candidateKey": "s1a-final:ap_calculus_ab-m01-k0",

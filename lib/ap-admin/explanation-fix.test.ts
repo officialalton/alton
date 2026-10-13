@@ -60,9 +60,9 @@ describe("교정 파일(저장소)", () => {
   });
   it("보고된 FRQ 참고 답안 사례(\\pi\\int … \\left[ … )가 교정 대상에 있고 $ 로 감싸졌다", () => {
     const f = readCorrectionFile();
-    const e = f.entries.find((x) => x.after.includes("\\pi\\int_0^2.746\\left[(\\sin x+2.5+2)^2"));
+    const e = f.entries.find((x) => x.after.includes("\\pi\\int_0^{2.746}\\left[(\\sin x+2.5+2)^2"));
     expect(e).toBeTruthy();
-    expect(e!.after).toMatch(/\$\\pi\\int_0\^2\.746/);
+    expect(e!.after).toMatch(/\$\\pi\\int_0\^\{2\.746\}/); // 상한 소수는 중괄호로 한 덩어리(외부 감사 2026-10-08: 3 + .154 로 갈라져 보임)
   });
   it("correctionsForStock: 이미 감싸진 해설은 교정 대상이 아니다", () => {
     const it0 = { stockKey: "x", apSubjectCode: "ap_calculus_ab", kind: "mc" as const, payload: {} };

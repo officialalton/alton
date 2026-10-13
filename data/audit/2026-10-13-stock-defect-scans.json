@@ -1,0 +1,1089 @@
+{
+ "kind": "stock_defect_scans",
+ "note": "candidates only; see docs/audit/2026-10-13-external-audit-triage.md",
+ "summary": {
+  "completion_duplicate": {
+   "candidates": 62,
+   "imported": 47
+  },
+  "question_in_stimulus": {
+   "candidates": 26,
+   "imported": 21
+  },
+  "vertical_line_encoded_flat": {
+   "candidates": 1,
+   "imported": 1
+  },
+  "intersection_off_axes": {
+   "candidates": 4,
+   "imported": 4
+  }
+ },
+ "results": {
+  "completion_duplicate": {
+   "rwstock4:med-se-1:medium-boundaries-319": {
+    "gid": "rwstock4:med-se-1:medium-boundaries-319",
+    "files": [
+     "mock-exam-generation/rw-stock-20261008/passed.json",
+     "mock-exam-generation/rw-stock-20261008/passed.clean.json"
+    ],
+    "key_option": "; welders",
+    "pre": " winds than its designers had calculated",
+    "post": " welders spent the following weeks worki",
+    "literal_punct": false,
+    "imported": true
+   },
+   "rwstock4:med-se-2:medium-boundaries-419": {
+    "gid": "rwstock4:med-se-2:medium-boundaries-419",
+    "files": [
+     "mock-exam-generation/rw-stock-20261008/passed.json",
+     "mock-exam-generation/rw-stock-20261008/passed.clean.json"
+    ],
+    "key_option": "striking: treated",
+    "pre": "tion on identical shipping routes, were ",
+    "post": " treated vessels burned roughly 6 percen",
+    "literal_punct": false,
+    "imported": true
+   },
+   "medium-boundaries-319": {
+    "gid": "medium-boundaries-319",
+    "files": [
+     "mock-exam-generation/rw-stock-20261008/med-se-1/adopted.json",
+     "mock-exam-generation/rw-stock-20261008/med-se-1/adopted-hard.json"
+    ],
+    "key_option": "; welders",
+    "pre": " winds than its designers had calculated",
+    "post": " welders spent the following weeks worki",
+    "literal_punct": false,
+    "imported": true
+   },
+   "PATH:mock-exam-generation/rw-stock-20261008/med-se-1/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/rw-stock-20261008/med-se-1/gens.json",
+     "mock-exam-generation/rw-stock-20261008/med-se-1/gens.json",
+     "mock-exam-generation/rw-stock-20261008/med-se-1/gens.json",
+     "mock-exam-generation/rw-stock-20261008/med-se-1/gens.json"
+    ],
+    "key_option": null,
+    "pre": "f recommendation, rarely spoke at dinner",
+    "post": " when she did, the master of the house s",
+    "literal_punct": false,
+    "imported": true
+   },
+   "PATH:mock-exam-generation/rw-stock-20261008/easy-se2/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/rw-stock-20261008/easy-se2/gens.json",
+     "mock-exam-generation/rw-stock-20261008/easy-se2/gens.json",
+     "mock-exam-generation/rw-stock-20261008/easy-se2/gens.json"
+    ],
+    "key_option": null,
+    "pre": "ave recorded almost no rain for decades ",
+    "post": " scientists use the region to test equip",
+    "literal_punct": false,
+    "imported": true
+   },
+   "medium-boundaries-419": {
+    "gid": "medium-boundaries-419",
+    "files": [
+     "mock-exam-generation/rw-stock-20261008/med-se-2/adopted.json",
+     "mock-exam-generation/rw-stock-20261008/med-se-2/adopted-hard.json"
+    ],
+    "key_option": "striking: treated",
+    "pre": "tion on identical shipping routes, were ",
+    "post": " treated vessels burned roughly 6 percen",
+    "literal_punct": false,
+    "imported": true
+   },
+   "PATH:mock-exam-generation/rw-stock-20261008/med-se-2/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/rw-stock-20261008/med-se-2/gens.json",
+     "mock-exam-generation/rw-stock-20261008/med-se-2/gens.json",
+     "mock-exam-generation/rw-stock-20261008/med-se-2/gens.json",
+     "mock-exam-generation/rw-stock-20261008/med-se-2/gens.json"
+    ],
+    "key_option": null,
+    "pre": "ause the surface to reflect very little ",
+    "post": " this property may help the butterfly es",
+    "literal_punct": false,
+    "imported": true
+   },
+   "PATH:mock-exam-generation/rw-stock-20261008/easy-se/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/rw-stock-20261008/easy-se/gens.json",
+     "mock-exam-generation/rw-stock-20261008/easy-se/gens.json"
+    ],
+    "key_option": null,
+    "pre": "oved a small piece of an axolotl's tail ",
+    "post": " within a few weeks, the missing tissue ",
+    "literal_punct": false,
+    "imported": true
+   },
+   "rwstock:easy-1:easy-boundaries-100": {
+    "gid": "rwstock:easy-1:easy-boundaries-100",
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/passed.json",
+     "mock-exam-generation/rw-stock-20261007/passed.clean.json"
+    ],
+    "key_option": "; many",
+    "pre": " through private subscription libraries ",
+    "post": " many factory workers could not afford t",
+    "literal_punct": false,
+    "imported": true
+   },
+   "rwstock:easy-1:easy-boundaries-104": {
+    "gid": "rwstock:easy-1:easy-boundaries-104",
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/passed.json",
+     "mock-exam-generation/rw-stock-20261007/passed.clean.json"
+    ],
+    "key_option": "; drought",
+    "pre": "has shrunk dramatically since the 1960s ",
+    "post": " drought and heavy use of its water for ",
+    "literal_punct": false,
+    "imported": true
+   },
+   "rwstock:med-se-1:medium-boundaries-302": {
+    "gid": "rwstock:med-se-1:medium-boundaries-302",
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/passed.json",
+     "mock-exam-generation/rw-stock-20261007/passed.clean.json"
+    ],
+    "key_option": "; the floodwaters",
+    "pre": "though the region's rains fall in summer",
+    "post": " the floodwaters must travel slowly for ",
+    "literal_punct": false,
+    "imported": true
+   },
+   "rwstock:med-se-1:medium-boundaries-311": {
+    "gid": "rwstock:med-se-1:medium-boundaries-311",
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/passed.json",
+     "mock-exam-generation/rw-stock-20261007/passed.clean.json"
+    ],
+    "key_option": "; readers",
+    "pre": "e decade in which her stories take place",
+    "post": " readers instead infer the period from s",
+    "literal_punct": false,
+    "imported": true
+   },
+   "rwstock:med-se-2:medium-boundaries-609": {
+    "gid": "rwstock:med-se-2:medium-boundaries-609",
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/passed.json",
+     "mock-exam-generation/rw-stock-20261007/passed.clean.json"
+    ],
+    "key_option": "; the data",
+    "pre": "ecord strain, vibration, and temperature",
+    "post": " the data feed a \"digital twin,\" a compu",
+    "literal_punct": false,
+    "imported": true
+   },
+   "medium-boundaries-302": {
+    "gid": "medium-boundaries-302",
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/med-se-1/adopted.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-1/adopted-hard.json"
+    ],
+    "key_option": "; the floodwaters",
+    "pre": "though the region's rains fall in summer",
+    "post": " the floodwaters must travel slowly for ",
+    "literal_punct": false,
+    "imported": true
+   },
+   "medium-boundaries-311": {
+    "gid": "medium-boundaries-311",
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/med-se-1/adopted.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-1/adopted-hard.json"
+    ],
+    "key_option": "; readers",
+    "pre": "e decade in which her stories take place",
+    "post": " readers instead infer the period from s",
+    "literal_punct": false,
+    "imported": true
+   },
+   "PATH:mock-exam-generation/rw-stock-20261007/med-se-1/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/med-se-1/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-1/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-1/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-1/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-1/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-1/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-1/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-1/gens.json"
+    ],
+    "key_option": null,
+    "pre": "though the region's rains fall in summer",
+    "post": " the floodwaters must travel slowly for ",
+    "literal_punct": false,
+    "imported": true
+   },
+   "medium-boundaries-609": {
+    "gid": "medium-boundaries-609",
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/med-se-2/adopted.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-2/adopted-hard.json"
+    ],
+    "key_option": "; the data",
+    "pre": "ecord strain, vibration, and temperature",
+    "post": " the data feed a \"digital twin,\" a compu",
+    "literal_punct": false,
+    "imported": true
+   },
+   "PATH:mock-exam-generation/rw-stock-20261007/med-se-2/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/med-se-2/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-2/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-2/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-2/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-2/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-2/gens.json",
+     "mock-exam-generation/rw-stock-20261007/med-se-2/gens.json"
+    ],
+    "key_option": null,
+    "pre": "ars, survives droughts in an unusual way",
+    "post": " expelling nearly all the water from its",
+    "literal_punct": false,
+    "imported": true
+   },
+   "easy-boundaries-100": {
+    "gid": "easy-boundaries-100",
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/easy-1/adopted.json",
+     "mock-exam-generation/rw-stock-20261007/easy-1/adopted-hard.json"
+    ],
+    "key_option": "; many",
+    "pre": " through private subscription libraries ",
+    "post": " many factory workers could not afford t",
+    "literal_punct": false,
+    "imported": true
+   },
+   "easy-boundaries-104": {
+    "gid": "easy-boundaries-104",
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/easy-1/adopted.json",
+     "mock-exam-generation/rw-stock-20261007/easy-1/adopted-hard.json"
+    ],
+    "key_option": "; drought",
+    "pre": "has shrunk dramatically since the 1960s ",
+    "post": " drought and heavy use of its water for ",
+    "literal_punct": false,
+    "imported": true
+   },
+   "PATH:mock-exam-generation/rw-stock-20261007/easy-1/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/rw-stock-20261007/easy-1/gens.json",
+     "mock-exam-generation/rw-stock-20261007/easy-1/gens.json"
+    ],
+    "key_option": null,
+    "pre": " through private subscription libraries ",
+    "post": " many factory workers could not afford t",
+    "literal_punct": false,
+    "imported": true
+   },
+   "sesup-medium-boundaries-42": {
+    "gid": "sesup-medium-boundaries-42",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/se-topup/adopted-se-medium-topup.json"
+    ],
+    "key_option": "mornings—condenses",
+    "pre": "inland from the Pacific Ocean on winter ",
+    "post": " condenses on the leaves of cacti and sh",
+    "literal_punct": false,
+    "imported": true
+   },
+   "sesup-medium-boundaries-43": {
+    "gid": "sesup-medium-boundaries-43",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/se-topup/adopted-se-medium-topup.json"
+    ],
+    "key_option": "; each",
+    "pre": "ly by the very farmers who supplied them",
+    "post": " each member, regardless of how many cow",
+    "literal_punct": false,
+    "imported": true
+   },
+   "medium-boundaries-42": {
+    "gid": "medium-boundaries-42",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/se-topup/run/adopted.json",
+     "mock-exam-generation/mockgen-20260929/se-topup/run/adopted-hard.json"
+    ],
+    "key_option": "mornings—condenses",
+    "pre": "inland from the Pacific Ocean on winter ",
+    "post": " condenses on the leaves of cacti and sh",
+    "literal_punct": false,
+    "imported": true
+   },
+   "medium-boundaries-43": {
+    "gid": "medium-boundaries-43",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/se-topup/run/adopted.json",
+     "mock-exam-generation/mockgen-20260929/se-topup/run/adopted-hard.json"
+    ],
+    "key_option": "; each",
+    "pre": "ly by the very farmers who supplied them",
+    "post": " each member, regardless of how many cow",
+    "literal_punct": false,
+    "imported": true
+   },
+   "PATH:mock-exam-generation/mockgen-20260929/se-topup/run/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/mockgen-20260929/se-topup/run/gens.json",
+     "mock-exam-generation/mockgen-20260929/se-topup/run/gens.json",
+     "mock-exam-generation/mockgen-20260929/se-topup/run/gens.json"
+    ],
+    "key_option": null,
+    "pre": "inland from the Pacific Ocean on winter ",
+    "post": " condenses on the leaves of cacti and sh",
+    "literal_punct": false,
+    "imported": true
+   },
+   "PATH:mock-exam-generation/mockgen-20260929/batch2/D-cross/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/mockgen-20260929/batch2/D-cross/gens.json"
+    ],
+    "key_option": null,
+    "pre": "hrough which a viewer could look inside ",
+    "post": " she frequently dropped a small ball of ",
+    "literal_punct": false,
+    "imported": false
+   },
+   "recipe-boundaries-02": {
+    "gid": "recipe-boundaries-02",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/batch2/D-cross/adopted-hard.json"
+    ],
+    "key_option": "; however, she",
+    "pre": "hrough which a viewer could look inside ",
+    "post": " she frequently dropped a small ball of ",
+    "literal_punct": false,
+    "imported": true
+   },
+   "PATH:mock-exam-generation/mockgen-20260929/batch5/se-hard-2/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/mockgen-20260929/batch5/se-hard-2/gens.json"
+    ],
+    "key_option": null,
+    "pre": "dating from the 1600s through the 1800s ",
+    "post": " local farmers evidently kept cultivatin",
+    "literal_punct": false,
+    "imported": false
+   },
+   "e5a18ded-27f1-4874-b132-b405069b8b50": {
+    "gid": "e5a18ded-27f1-4874-b132-b405069b8b50",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+     "mock-exam-generation/mockgen-20260929/final/passed.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__easy__mc__r2__e5a18ded-27f1-4874-b132-b405069b8b50.json"
+    ],
+    "key_option": "; she rendered",
+    "pre": " for her attention to fabric and jewelry",
+    "post": "she rendered these details with far more",
+    "literal_punct": false,
+    "imported": true
+   },
+   "d61e2d5e-4967-4995-bb5d-e6b76c7f9c7f": {
+    "gid": "d61e2d5e-4967-4995-bb5d-e6b76c7f9c7f",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+     "mock-exam-generation/mockgen-20260929/final/passed.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__hard__mc__d61e2d5e-4967-4995-bb5d-e6b76c7f9c7f.json"
+    ],
+    "key_option": "surface; some conservators now argue",
+    "pre": " artwork through that altered, yellowed ",
+    "post": " some conservators now argue that stripp",
+    "literal_punct": false,
+    "imported": true
+   },
+   "45bc6500-05da-4836-866c-7a5994191c88": {
+    "gid": "45bc6500-05da-4836-866c-7a5994191c88",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+     "mock-exam-generation/mockgen-20260929/final/passed.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__hard__mc__r2__45bc6500-05da-4836-866c-7a5994191c88.json"
+    ],
+    "key_option": "; however, infrared reflectography conducted decades later revealed",
+    "pre": "e original composition to be unfinished ",
+    "post": " infrared reflectography conducted decad",
+    "literal_punct": false,
+    "imported": true
+   },
+   "0a3372d9-a0d6-4d65-83d1-7d3a2ef10a64": {
+    "gid": "0a3372d9-a0d6-4d65-83d1-7d3a2ef10a64",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+     "mock-exam-generation/mockgen-20260929/final/passed.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__medium__mc__0a3372d9-a0d6-4d65-83d1-7d3a2ef10a64.json"
+    ],
+    "key_option": "of animals: lions, horses, and deer",
+    "pre": " that she maintained a private menagerie",
+    "post": "lions, horses, and deer she sketched obs",
+    "literal_punct": false,
+    "imported": true
+   },
+   "6e8e14d6-bcfb-44b3-a4b8-554d7a2b037b": {
+    "gid": "6e8e14d6-bcfb-44b3-a4b8-554d7a2b037b",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+     "mock-exam-generation/mockgen-20260929/final/passed.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__medium__mc__6e8e14d6-bcfb-44b3-a4b8-554d7a2b037b.json"
+    ],
+    "key_option": "reveal",
+    "pre": "s attributed solely to a single painter ",
+    "post": " reveal underdrawings and brushwork inco",
+    "literal_punct": false,
+    "imported": true
+   },
+   "a5895ddf-0728-4328-a9c3-063bdce6363f": {
+    "gid": "a5895ddf-0728-4328-a9c3-063bdce6363f",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+     "mock-exam-generation/mockgen-20260929/final/passed.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__medium__mc__a5895ddf-0728-4328-a9c3-063bdce6363f.json"
+    ],
+    "key_option": "allows",
+    "pre": "n occur several times in a single year, ",
+    "post": " allows the plant to photosynthesize whe",
+    "literal_punct": false,
+    "imported": true
+   },
+   "f4dcff2e-6c99-4dad-bef6-8af843033ac9": {
+    "gid": "f4dcff2e-6c99-4dad-bef6-8af843033ac9",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+     "mock-exam-generation/mockgen-20260929/final/passed.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__medium__mc__f4dcff2e-6c99-4dad-bef6-8af843033ac9.json"
+    ],
+    "key_option": "frequent routes cross",
+    "pre": " downtown terminal; in the newer model, ",
+    "post": " frequent routes cross one another at mu",
+    "literal_punct": false,
+    "imported": true
+   },
+   "04f6acc4-4938-437e-bf33-bcb857df8185": {
+    "gid": "04f6acc4-4938-437e-bf33-bcb857df8185",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+     "mock-exam-generation/mockgen-20260929/final/passed.json",
+     "mock-exam-generation/mockgen-20260929/raw/transitions__hard__mc__r3__04f6acc4-4938-437e-bf33-bcb857df8185.json"
+    ],
+    "key_option": "Consequently,",
+    "pre": "renowned for their botanical precision. ",
+    "post": " , some scholars now read these still li",
+    "literal_punct": true,
+    "imported": true
+   },
+   "51fc09b3-4755-4fab-99e1-9633bcf8d8a5": {
+    "gid": "51fc09b3-4755-4fab-99e1-9633bcf8d8a5",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+     "mock-exam-generation/mockgen-20260929/final/passed.json",
+     "mock-exam-generation/mockgen-20260929/raw/transitions__hard__mc__r3__51fc09b3-4755-4fab-99e1-9633bcf8d8a5.json"
+    ],
+    "key_option": "By contrast,",
+    "pre": "orted thriving foot traffic and retail. ",
+    "post": " , a handful of cities that built simila",
+    "literal_punct": true,
+    "imported": true
+   },
+   "ef96f2f7-8419-4ac7-95c4-9188ff97ae3b": {
+    "gid": "ef96f2f7-8419-4ac7-95c4-9188ff97ae3b",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+     "mock-exam-generation/mockgen-20260929/final/passed.json",
+     "mock-exam-generation/mockgen-20260929/raw/transitions__hard__mc__r3__ef96f2f7-8419-4ac7-95c4-9188ff97ae3b.json"
+    ],
+    "key_option": "Consequently,",
+    "pre": "ond female after the first female dies. ",
+    "post": " , researchers now argue that permanent ",
+    "literal_punct": true,
+    "imported": true
+   },
+   "b4cdabde-f747-4dc9-80d3-c5565cbb3bac": {
+    "gid": "b4cdabde-f747-4dc9-80d3-c5565cbb3bac",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+     "mock-exam-generation/mockgen-20260929/final/passed.json",
+     "mock-exam-generation/mockgen-20260929/raw/transitions__hard__mc__r4__b4cdabde-f747-4dc9-80d3-c5565cbb3bac.json"
+    ],
+    "key_option": "As a result,",
+    "pre": "material display and spiritual warning. ",
+    "post": ", the paintings may reflect not simply n",
+    "literal_punct": true,
+    "imported": true
+   },
+   "be9e745f-1fc6-4071-b448-96a1927213dd": {
+    "gid": "be9e745f-1fc6-4071-b448-96a1927213dd",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+     "mock-exam-generation/mockgen-20260929/final/passed.json",
+     "mock-exam-generation/mockgen-20260929/raw/transitions__hard__mc__r4__be9e745f-1fc6-4071-b448-96a1927213dd.json"
+    ],
+    "key_option": "As a result,",
+    "pre": "stations rather than compete with them. ",
+    "post": ", ridership on Portland's system grew st",
+    "literal_punct": true,
+    "imported": true
+   },
+   "PATH:mock-exam-generation/mockgen-20260929/batch/A-recipe/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/mockgen-20260929/batch/A-recipe/gens.json",
+     "mock-exam-generation/mockgen-20260929/batch/A-recipe/gens.json"
+    ],
+    "key_option": null,
+    "pre": "arsh swings in temperature and salinity ",
+    "post": " they appear to be using brief exposure ",
+    "literal_punct": false,
+    "imported": false
+   },
+   "PATH:mock-exam-generation/mockgen-20260929/rw-supplement/medium-1/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/mockgen-20260929/rw-supplement/medium-1/gens.json"
+    ],
+    "key_option": null,
+    "pre": "sands instead of ever reaching the ocean",
+    "post": " floods at the height of the dry season,",
+    "literal_punct": false,
+    "imported": false
+   },
+   "PATH:mock-exam-generation/mockgen-20260929/rw-supplement/easy-1/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/mockgen-20260929/rw-supplement/easy-1/gens.json",
+     "mock-exam-generation/mockgen-20260929/rw-supplement/easy-1/gens.json"
+    ],
+    "key_option": null,
+    "pre": "les flicker against the frosted windows ",
+    "post": " the old clock in the hallway strikes mi",
+    "literal_punct": false,
+    "imported": false
+   },
+   "batch2-D-cross:recipe-boundaries-02": {
+    "gid": "batch2-D-cross:recipe-boundaries-02",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/final/adopted-hard-all.json",
+     "mock-exam-generation/mockgen-20260929/final/adopted-hard-all.shuffled.json"
+    ],
+    "key_option": "; however, she",
+    "pre": "hrough which a viewer could look inside ",
+    "post": " she frequently dropped a small ball of ",
+    "literal_punct": false,
+    "imported": true
+   },
+   "eb4dfd54-a594-4211-bd98-836dc6e8fd0e": {
+    "gid": "eb4dfd54-a594-4211-bd98-836dc6e8fd0e",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/final/archive-candidates.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__easy__mc__eb4dfd54-a594-4211-bd98-836dc6e8fd0e.json"
+    ],
+    "key_option": "because",
+    "pre": "s sent portions of their earnings home, ",
+    "post": " their families depended on this income ",
+    "literal_punct": false,
+    "imported": false
+   },
+   "57c6c7e9-3be0-48cb-b953-cf9ab6c9a1c2": {
+    "gid": "57c6c7e9-3be0-48cb-b953-cf9ab6c9a1c2",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/final/archive-candidates.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__hard__mc__r2__57c6c7e9-3be0-48cb-b953-cf9ab6c9a1c2.json"
+    ],
+    "key_option": "neighborhoods' results",
+    "pre": "ith different housing density, reported ",
+    "post": " results after the lanes were narrowed.",
+    "literal_punct": false,
+    "imported": false
+   },
+   "208ff3ff-b2e5-4f9f-8435-0abb44c79029": {
+    "gid": "208ff3ff-b2e5-4f9f-8435-0abb44c79029",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/final/archive-candidates.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__hard__mc__r4__208ff3ff-b2e5-4f9f-8435-0abb44c79029.json"
+    ],
+    "key_option": ", a change",
+    "pre": " passengers to pay fares before boarding",
+    "post": "a change that cut loading times dramatic",
+    "literal_punct": false,
+    "imported": false
+   },
+   "5a4d2965-0e1f-40df-8eff-9db074f8aa0f": {
+    "gid": "5a4d2965-0e1f-40df-8eff-9db074f8aa0f",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/final/archive-candidates.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__hard__mc__r5__5a4d2965-0e1f-40df-8eff-9db074f8aa0f.json"
+    ],
+    "key_option": "produce it; this",
+    "pre": "of stored energy required to produce it ",
+    "post": " the flower's brief window forces the pl",
+    "literal_punct": false,
+    "imported": false
+   },
+   "2737d87a-9a5b-418f-96fd-cb43fab747fe": {
+    "gid": "2737d87a-9a5b-418f-96fd-cb43fab747fe",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/final/archive-candidates.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__medium__mc__2737d87a-9a5b-418f-96fd-cb43fab747fe.json"
+    ],
+    "key_option": ",",
+    "pre": "is technique is evident in his portraits",
+    "post": " where subtle transitions in shading giv",
+    "literal_punct": false,
+    "imported": false
+   },
+   "839f0389-6177-43b7-9c06-0d1db1db689d": {
+    "gid": "839f0389-6177-43b7-9c06-0d1db1db689d",
+    "files": [
+     "mock-exam-generation/mockgen-20260929/final/archive-candidates.json",
+     "mock-exam-generation/mockgen-20260929/raw/boundaries__medium__mc__839f0389-6177-43b7-9c06-0d1db1db689d.json"
+    ],
+    "key_option": "the quotas' market value",
+    "pre": "that originally held them. As a result, ",
+    "post": " market value rose sharply even as the f",
+    "literal_punct": false,
+    "imported": false
+   },
+   "w1-boundaries-m-042": {
+    "gid": "w1-boundaries-m-042",
+    "files": [
+     "mock-exam-generation/rebalance-20261008/gen/merged.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/adopted.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/adopted-hard.json"
+    ],
+    "key_option": ": some",
+    "pre": "n roughly a third of the critical trials",
+    "post": " some later reported that they had begun",
+    "literal_punct": false,
+    "imported": true
+   },
+   "w1-boundaries-m-254": {
+    "gid": "w1-boundaries-m-254",
+    "files": [
+     "mock-exam-generation/rebalance-20261008/gen/merged.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/adopted.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/adopted-hard.json"
+    ],
+    "key_option": "; such",
+    "pre": "re prized by the tea master Sen no Rikyū",
+    "post": " such flaws were not regarded as mistake",
+    "literal_punct": false,
+    "imported": true
+   },
+   "w1-boundaries-m-259": {
+    "gid": "w1-boundaries-m-259",
+    "files": [
+     "mock-exam-generation/rebalance-20261008/gen/merged.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/adopted.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/adopted-hard.json"
+    ],
+    "key_option": "; Iranian",
+    "pre": "red by roughly a quarter of a whole step",
+    "post": " Iranian composer Alireza Mashayekhi has",
+    "literal_punct": false,
+    "imported": true
+   },
+   "rebal13:w1-boundaries-m-042": {
+    "gid": "rebal13:w1-boundaries-m-042",
+    "files": [
+     "mock-exam-generation/rebalance-20261008/gen/passed.json",
+     "mock-exam-generation/rebalance-20261008/gen/all.passed.json",
+     "mock-exam-generation/rebalance-20261008/gen/passed.nolit.json",
+     "mock-exam-generation/rebalance-20261008/gen/all.clean.json",
+     "mock-exam-generation/rebalance-20261008/gen/w12.passed.json",
+     "mock-exam-generation/rebalance-20261008/gen/passed.clean.json"
+    ],
+    "key_option": ": some",
+    "pre": "n roughly a third of the critical trials",
+    "post": " some later reported that they had begun",
+    "literal_punct": false,
+    "imported": true
+   },
+   "rebal13:w1-boundaries-m-254": {
+    "gid": "rebal13:w1-boundaries-m-254",
+    "files": [
+     "mock-exam-generation/rebalance-20261008/gen/passed.json",
+     "mock-exam-generation/rebalance-20261008/gen/all.passed.json",
+     "mock-exam-generation/rebalance-20261008/gen/passed.nolit.json",
+     "mock-exam-generation/rebalance-20261008/gen/all.clean.json",
+     "mock-exam-generation/rebalance-20261008/gen/w12.passed.json",
+     "mock-exam-generation/rebalance-20261008/gen/passed.clean.json"
+    ],
+    "key_option": "; such",
+    "pre": "re prized by the tea master Sen no Rikyū",
+    "post": " such flaws were not regarded as mistake",
+    "literal_punct": false,
+    "imported": true
+   },
+   "rebal13:w1-boundaries-m-259": {
+    "gid": "rebal13:w1-boundaries-m-259",
+    "files": [
+     "mock-exam-generation/rebalance-20261008/gen/passed.json",
+     "mock-exam-generation/rebalance-20261008/gen/all.passed.json",
+     "mock-exam-generation/rebalance-20261008/gen/passed.nolit.json",
+     "mock-exam-generation/rebalance-20261008/gen/all.clean.json",
+     "mock-exam-generation/rebalance-20261008/gen/w12.passed.json",
+     "mock-exam-generation/rebalance-20261008/gen/passed.clean.json"
+    ],
+    "key_option": "; Iranian",
+    "pre": "red by roughly a quarter of a whole step",
+    "post": " Iranian composer Alireza Mashayekhi has",
+    "literal_punct": false,
+    "imported": true
+   },
+   "rebal13:w3-boundaries-m-038": {
+    "gid": "rebal13:w3-boundaries-m-038",
+    "files": [
+     "mock-exam-generation/rebalance-20261008/gen/all.passed.json",
+     "mock-exam-generation/rebalance-20261008/gen/w3.passed.json",
+     "mock-exam-generation/rebalance-20261008/gen/all.clean.json",
+     "mock-exam-generation/rebalance-20261008/gen/w3.dedup.json"
+    ],
+    "key_option": "broke apart: neighbors",
+    "pre": " singing together only moments earlier, ",
+    "post": " neighbors shoved past neighbors, and no",
+    "literal_punct": false,
+    "imported": true
+   },
+   "w3-boundaries-m-038": {
+    "gid": "w3-boundaries-m-038",
+    "files": [
+     "mock-exam-generation/rebalance-20261008/gen/w3/run/adopted.json",
+     "mock-exam-generation/rebalance-20261008/gen/w3/run/adopted-hard.json"
+    ],
+    "key_option": "broke apart: neighbors",
+    "pre": " singing together only moments earlier, ",
+    "post": " neighbors shoved past neighbors, and no",
+    "literal_punct": false,
+    "imported": false
+   },
+   "PATH:mock-exam-generation/rebalance-20261008/gen/w3/run/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/rebalance-20261008/gen/w3/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w3/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w3/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w3/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w3/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w3/run/gens.json"
+    ],
+    "key_option": null,
+    "pre": " of the family's Sackett Street tenement",
+    "post": " healed slowly on a nest of rags beside ",
+    "literal_punct": false,
+    "imported": false
+   },
+   "PATH:mock-exam-generation/rebalance-20261008/gen/w2/run/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/rebalance-20261008/gen/w2/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w2/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w2/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w2/run/gens.json"
+    ],
+    "key_option": null,
+    "pre": "ve, had once followed the water exactly ",
+    "post": " now it bent sharply east, swallowing a ",
+    "literal_punct": false,
+    "imported": false
+   },
+   "PATH:mock-exam-generation/rebalance-20261008/gen/w1/run/gens.json": {
+    "gid": null,
+    "files": [
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/gens.json",
+     "mock-exam-generation/rebalance-20261008/gen/w1/run/gens.json"
+    ],
+    "key_option": null,
+    "pre": "n roughly a third of the critical trials",
+    "post": " some later reported that they had begun",
+    "literal_punct": false,
+    "imported": false
+   }
+  },
+  "question_in_stimulus": {
+   "309f9901-7065-4914-93c3-63855e5e805c": {
+    "gid": "309f9901-7065-4914-93c3-63855e5e805c",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "Based on the texts, how would the author of Text 2 most likely respond to the claim in Tex",
+    "imported": true
+   },
+   "d69794f8-ad2d-4e47-9641-ec64ca12dc87": {
+    "gid": "d69794f8-ad2d-4e47-9641-ec64ca12dc87",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "Based on the texts, how would the author of Text 2 most likely respond to the claim in Tex",
+    "imported": true
+   },
+   "27b1412f-7d83-431e-b8f6-657e5334d1cf": {
+    "gid": "27b1412f-7d83-431e-b8f6-657e5334d1cf",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "Which expression is equivalent to $2^{3x} \\cdot 2^{5}$?",
+    "imported": true
+   },
+   "857ec2cb-41e3-4e1d-967c-ba5b391991ce": {
+    "gid": "857ec2cb-41e3-4e1d-967c-ba5b391991ce",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "Which expression is equivalent to $(x + 5)(x - 3)$?",
+    "imported": true
+   },
+   "d98001a1-ee77-4c1b-ab4a-08c459b150a2": {
+    "gid": "d98001a1-ee77-4c1b-ab4a-08c459b150a2",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "Which expression is equivalent to $\\frac{x^2 - 9}{x + 3}$, for $x \\neq -3$?",
+    "imported": true
+   },
+   "1a82abfa-8e6f-4583-8d4e-430881b8c53e": {
+    "gid": "1a82abfa-8e6f-4583-8d4e-430881b8c53e",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "For all values of $x$ for which the expression is defined, $\\dfrac{x^2 - 9}{x + 3}$ is equ",
+    "imported": true
+   },
+   "81c11ea9-b43a-400f-9ce2-0b4f016c9c3a": {
+    "gid": "81c11ea9-b43a-400f-9ce2-0b4f016c9c3a",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "Which expression is equivalent to $(2x - 3)(x + 5)$?",
+    "imported": true
+   },
+   "da372ae7-a711-470d-bf41-5905a5a59b61": {
+    "gid": "da372ae7-a711-470d-bf41-5905a5a59b61",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "Which of the following is equivalent to $\\dfrac{4x^2 - 9}{2x^2 - x - 3}$, for $x \\neq \\dfr",
+    "imported": true
+   },
+   "7f41e7d2-63f8-446d-bb48-450c5f3aca24": {
+    "gid": "7f41e7d2-63f8-446d-bb48-450c5f3aca24",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "Which expression is equivalent to $(2x^2 - 5x + 3)(x + 4) - (x^2 - 6x)$?",
+    "imported": true
+   },
+   "d7850c4f-c8b6-4869-b808-4f6d8878768b": {
+    "gid": "d7850c4f-c8b6-4869-b808-4f6d8878768b",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "For all values of $x$ for which the expression is defined, $\\dfrac{6x^3 - 12x^2}{2x^2 - 4x",
+    "imported": true
+   },
+   "18ec5fbb-2079-4d2f-8317-4c39af5a7500": {
+    "gid": "18ec5fbb-2079-4d2f-8317-4c39af5a7500",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "Based on the line of best fit, what is the whales' average speed, in miles per day, rounde",
+    "imported": true
+   },
+   "5b9b865b-09e9-435d-b138-7710f25187f7": {
+    "gid": "5b9b865b-09e9-435d-b138-7710f25187f7",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "The student wants to explain why metal coins were introduced as an advance over barter. Wh",
+    "imported": true
+   },
+   "fcde57e1-5271-4194-8dae-5c2bef3423e1": {
+    "gid": "fcde57e1-5271-4194-8dae-5c2bef3423e1",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "The student wants to emphasize how long it takes for a saguaro cactus to reach physical ma",
+    "imported": true
+   },
+   "b43f2d6a-15dc-420d-a460-88be79a5b9c4": {
+    "gid": "b43f2d6a-15dc-420d-a460-88be79a5b9c4",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "The student wants to explain why silphium's medicinal reputation, rather than its culinary",
+    "imported": true
+   },
+   "3b4169b4-bd54-4fa1-bc01-eef69ef8ba9f": {
+    "gid": "3b4169b4-bd54-4fa1-bc01-eef69ef8ba9f",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "The student wants to explain why real estate developers might prefer investing near rail l",
+    "imported": true
+   },
+   "896b1d19-9734-425c-887d-ca61860501fc": {
+    "gid": "896b1d19-9734-425c-887d-ca61860501fc",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "The student wants to explain why coral bleaching does not always result in the death of a ",
+    "imported": true
+   },
+   "eec841e6-8154-4d0a-8d8c-d32c3f87bc46": {
+    "gid": "eec841e6-8154-4d0a-8d8c-d32c3f87bc46",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "The student wants to explain why Vermeer completed so few paintings during his career. Whi",
+    "imported": true
+   },
+   "ef704d02-d963-4fc9-a9b9-7b2523e33205": {
+    "gid": "ef704d02-d963-4fc9-a9b9-7b2523e33205",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "The student wants to explain how monarch butterflies are able to navigate accurately even ",
+    "imported": true
+   },
+   "f6ad8197-06ca-4bf3-9c40-d425bb696d7d": {
+    "gid": "f6ad8197-06ca-4bf3-9c40-d425bb696d7d",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "The student wants to explain why buyers were willing to pay extremely high prices for tuli",
+    "imported": true
+   },
+   "0debec47-4e39-48d7-9bed-10af938bcdf3": {
+    "gid": "0debec47-4e39-48d7-9bed-10af938bcdf3",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "If the fencing cost equation is $y = -\\frac{1}{2}x + 40$ and line $m$ passes through the p",
+    "imported": true
+   },
+   "a23c99ae-7a01-4eb1-84b7-e2c3c67fb585": {
+    "gid": "a23c99ae-7a01-4eb1-84b7-e2c3c67fb585",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "question": "지문에서 밑줄 친 문장 \"Many of these paintings combine flowers that bloom in different seasons, an ",
+    "imported": true
+   },
+   "e7c74702-c590-4b77-bab6-c371478f2f93": {
+    "gid": "e7c74702-c590-4b77-bab6-c371478f2f93",
+    "file": "mock-exam-generation/mockgen-20260929/final/archive-candidates.json",
+    "question": "Which expression is equivalent to $3x(x - 4) + 2(x - 4)$?",
+    "imported": false
+   },
+   "18c193cd-6978-4fca-8b59-24fb75a316ef": {
+    "gid": "18c193cd-6978-4fca-8b59-24fb75a316ef",
+    "file": "mock-exam-generation/mockgen-20260929/final/archive-candidates.json",
+    "question": "The expression $\\dfrac{9x^2 - 4}{3x^2 + 5x - 2}$ is equivalent to which of the following, ",
+    "imported": false
+   },
+   "e185538e-7b03-4d51-963f-d4a587cb51a1": {
+    "gid": "e185538e-7b03-4d51-963f-d4a587cb51a1",
+    "file": "mock-exam-generation/mockgen-20260929/final/archive-candidates.json",
+    "question": "밑줄 친 문장 \"Each of these accounts, taken alone, struggles to explain why other cities with c",
+    "imported": false
+   },
+   "7e5b6810-f7c9-44c7-88e7-f82856f06120": {
+    "gid": "7e5b6810-f7c9-44c7-88e7-f82856f06120",
+    "file": "mock-exam-generation/mockgen-20260929/final/archive-candidates.json",
+    "question": "다음 중 밑줄 친 문장(Her bouquets frequently combined flowers that bloom in different seasons...)이",
+    "imported": false
+   },
+   "3e1f43d9-a803-4c17-9379-5d6b1c6aabd3": {
+    "gid": "3e1f43d9-a803-4c17-9379-5d6b1c6aabd3",
+    "file": "mock-exam-generation/mockgen-20260929/raw/rhetorical_synthesis__hard__mc__rc1__3e1f43d9-a803-4c17-9379-5d6b1c6aabd3.json",
+    "question": "The student wants to introduce a research paper by explaining why coral reefs are ecologic",
+    "imported": false
+   }
+  },
+  "vertical_line_encoded_flat": {
+   "6fe93dc4-6ef8-4930-99f1-bfafaf5e59b2": {
+    "gid": "6fe93dc4-6ef8-4930-99f1-bfafaf5e59b2",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "line": {
+     "id": "l2",
+     "kind": "line",
+     "slope": 0,
+     "intercept": 0,
+     "label": "x = 5"
+    },
+    "imported": true
+   }
+  },
+  "intersection_off_axes": {
+   "c27d0f37-985d-50aa-a9de-da4b37b244f2": {
+    "gid": "c27d0f37-985d-50aa-a9de-da4b37b244f2",
+    "file": "mock-exam-generation/gapfill-20261006/items4.clean.json",
+    "intersection": [
+     11.0,
+     -17.0
+    ],
+    "axes": {
+     "x": {
+      "min": -10,
+      "max": 10,
+      "step": 2,
+      "title": "x"
+     },
+     "y": {
+      "min": -10,
+      "max": 10,
+      "step": 2,
+      "title": "y"
+     }
+    },
+    "imported": true
+   },
+   "8329a1bd-0921-53c0-a7bb-dffbf69c9493": {
+    "gid": "8329a1bd-0921-53c0-a7bb-dffbf69c9493",
+    "file": "mock-exam-generation/gapfill-20261006/items4.clean.json",
+    "intersection": [
+     11.0,
+     17.0
+    ],
+    "axes": {
+     "x": {
+      "min": -10,
+      "max": 10,
+      "step": 2,
+      "title": "x"
+     },
+     "y": {
+      "min": -10,
+      "max": 10,
+      "step": 2,
+      "title": "y"
+     }
+    },
+    "imported": true
+   },
+   "f87e641a-c551-5b11-a25a-340d4aa53f30": {
+    "gid": "f87e641a-c551-5b11-a25a-340d4aa53f30",
+    "file": "mock-exam-generation/gapfill-20261006/items4.clean.json",
+    "intersection": [
+     11.0,
+     -17.0
+    ],
+    "axes": {
+     "x": {
+      "min": -10,
+      "max": 10,
+      "step": 2,
+      "title": "x"
+     },
+     "y": {
+      "min": -10,
+      "max": 10,
+      "step": 2,
+      "title": "y"
+     }
+    },
+    "imported": true
+   },
+   "6fe93dc4-6ef8-4930-99f1-bfafaf5e59b2": {
+    "gid": "6fe93dc4-6ef8-4930-99f1-bfafaf5e59b2",
+    "file": "mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+    "intersection": [
+     30.002,
+     0.0
+    ],
+    "axes": {
+     "x": {
+      "min": 0,
+      "max": 30,
+      "step": 5,
+      "title": "Number of paintings (x)"
+     },
+     "y": {
+      "min": 0,
+      "max": 25,
+      "step": 5,
+      "title": "Number of sculptures (y)"
+     }
+    },
+    "imported": true
+   }
+  }
+ }
+}

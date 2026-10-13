@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { RAW_TEX_TOKENS, autoMathExplanation } from "./explanation-math";
+import { RAW_TEX_TOKENS, autoMathExplanation, braceNumericScripts } from "./explanation-math";
 
 describe("autoMathExplanation", () => {
   it("TeX 명령·거듭제곱·pi 에 $...$ 를 입힌다", () => {
@@ -35,7 +35,7 @@ describe("autoMathExplanation", () => {
   it("\\left/\\right·대괄호·소수·삼각함수가 섞인 식도 한 수식으로", () => {
     expect(autoMathExplanation("\\displaystyle\\int_0^{3}\\left(3x+x^2\\right)dx is incorrect: Adds.")).toBe("$\\displaystyle\\int_0^{3}\\left(3x+x^2\\right)dx$ is incorrect: Adds.");
     const m = autoMathExplanation("V = \\pi\\int_0^3.154\\left[(\\sin x+3.5+2)^2-(x^2/4+1+2)^2\\right]dx (≈ 223.064)");
-    expect(m).toContain("$\\pi\\int_0^3.154\\left[(\\sin x+3.5+2)^2-(x^2/4+1+2)^2\\right]dx$");
+    expect(m).toContain("$\\pi\\int_0^{3.154}\\left[(\\sin x+3.5+2)^2-(x^2/4+1+2)^2\\right]dx$");
   });
 });
 
@@ -69,5 +69,31 @@ describe("재고 전수: 정규화 뒤 $...$ 밖에 원문 TeX 가 남지 않는
       }
     }
     expect(bad).toEqual([]);
+  });
+});
+
+// 외부 감사(2026-10-08): 참고 풀이의 `\\int_0^3.154` 가 KaTeX 에서 상한 "3" + 기준선 ".154" 로 갈라져 보였다.
+describe("여러 글자 숫자 첨자(소수 적분 상한) 중괄호", () => {
+  it("저장된 `$...$` 안의 `^3.154` 도 화면 변환에서 한 덩어리 상한이 된다", () => {
+    const stored = "V = $\\pi\\int_0^3.154\\left[(\\sin x+3.5+2)^2-(x^2/4+1+2)^2\\right]dx$ (≈ 223.064)";
+    const out = autoMathExplanation(stored);
+    expect(out).toContain("\\int_0^{3.154}");
+    expect(out).not.toContain("^3.154");
+    // 회귀 증명: 변환 전 TeX 는 소수점 이하가 첨자 밖(기준선)으로 떨어진다.
+    const before = katex.renderToString("\\int_0^3.154 x\\,dx", { throwOnError: true });
+    expect(before).toContain("<mn>3</mn></msubsup><mn>.154</mn>"); // 상한은 3 뿐, .154 는 적분 밖 본문
+    const after = katex.renderToString("\\int_0^{3.154} x\\,dx", { throwOnError: true });
+    expect(after).toContain("<mn>3.154</mn></msubsup>"); // 상한이 3.154 한 덩어리
+  });
+  it("평문 `\\int_0^2.746` 도, 유니코드 `∫₀^2.956` 도 한 덩어리 상한", () => {
+    expect(autoMathExplanation("Area = \\pi\\int_0^2.746 f(x)\\,dx.")).toContain("\\int_0^{2.746}");
+    expect(autoMathExplanation("Volume ∫₀^2.956 g")).toContain("\\int_{0}^{2.956}");
+  });
+  it("한 글자 숫자·이미 중괄호인 첨자·이스케이프 달러는 건드리지 않고 멱등", () => {
+    expect(braceNumericScripts("x^2+y_1+e^{-0.25t}+\\int_0^{3}")).toBe("x^2+y_1+e^{-0.25t}+\\int_0^{3}");
+    expect(braceNumericScripts("x^10 + a_12 + x^-2 + 2^0.5")).toBe("x^{10} + a_{12} + x^{-2} + 2^{0.5}");
+    const once = autoMathExplanation("$\\int_0^3.154 x\\,dx$ and Costs \\$5 each");
+    expect(autoMathExplanation(once)).toBe(once);
+    expect(once).toContain("Costs \\$5 each");
   });
 });

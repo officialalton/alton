@@ -51,7 +51,25 @@ function passageFor(c: ApCandidateLike, gate: GateResult): string | null {
   const s = typeof st === "string" ? null : isObj(st) ? st : null;
   const desc = s && typeof s.description === "string" ? s.description : "";
   if (gate.stimKind === "text" && !gate.spec && desc && !/^no (stimulus|figure)/i.test(desc)) return desc;
-  return null;
+  return graphStatedFacts(s, gate);
+}
+
+/**
+ * 그래프 자료의 `data.context`(함수가 무엇인지)·`data.given`(초기값 f(0)=40, 연속·미분가능 조건)은 그림 스펙에 들어가지 않아
+ * 학생 화면에 한 번도 나오지 않았다(외부 감사 2026-10-08: "초기 함수값 없이 절대 최솟값을 묻는다"). 그림과 함께 본문 지문으로 싣는다.
+ * 표 자료는 notes 가 ap_table 에 이미 실려 대상이 아니다. 문자열·{ "f(0)": 40 } 객체 둘 다 읽는다.
+ */
+function graphStatedFacts(stim: Json | null, gate: GateResult): string | null {
+  if (!stim || gate.stimKind !== "graph" || !isObj(stim.data)) return null;
+  const d = stim.data;
+  const sentence = (t: string) => { const x = t.trim(); return !x ? "" : /[.!?]$/.test(x) ? x : `${x}.`; };
+  const lines: string[] = [];
+  if (typeof d.context === "string") lines.push(sentence(d.context));
+  const g = d.given;
+  if (typeof g === "string") lines.push(sentence(g));
+  else if (isObj(g)) { const e = Object.entries(g).map(([k, v]) => `$${k} = ${String(v)}$`); if (e.length) lines.push(sentence(`Given: ${e.join(", ")}`)); }
+  const out = lines.filter(Boolean).join(" ");
+  return out || null;
 }
 
 /** wrapMath(기본 true): 해설·참고 답안에 생성기가 `$...$` 없이 쓴 수식을 변환 시점에 구분자로 감싼다(화면 변환과 같은 규칙, 멱등). false 는 "변환 전 원문"(교정 계획의 before 해시 계산)용. */
