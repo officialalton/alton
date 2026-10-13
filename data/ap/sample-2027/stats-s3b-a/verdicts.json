@@ -1,0 +1,1432 @@
+[
+ {
+  "key": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "The flexible schedule caused the higher mean score, and the result can be generalized to all employees",
+     "brief_reasoning": "Random assignment supports a causal conclusion, and random sampling from the company supports generalizing to its employees.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Core 1.13/2.B: random assignment gives causation, random selection gives generalization."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is unique. 'All employees' reads as all employees of the company given context; slight ambiguity but defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct combinations of wrongly refusing a conclusion. The key is the only option with no negation, a mild giveaway. The 'why' text for option A is awkwardly worded."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical AP reading load; calculator is not needed but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable standard design-conclusion item with a unique key. Minor issues are the 'all employees' scope wording, the mild negation giveaway in the distractors, and the awkward rationale text."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard conceptual check: random assignment supports causation, random sampling supports generalization to the population. The student only needs to match each design feature to the conclusion it supports. There is no computation or representation change, and the reading load is light. The four options are the full factorial of the two conclusions, which keeps the item straightforward.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:Because the adults were a random sample from the city, the result applies to that city's adult population. D says it cannot be generalized beyond the adults in the study, which is too narrow. B says it applies to all adults, which is too broad. No option is fully correct.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Random assignment means we can conclude cause and effect. Random sampling from one city means the result applies to that city's adults, not to all adults. D is the closest option.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Because the adults were a random sample from the city, the result applies to that city's adult population. D says it cannot be generalized beyond the adults in the study, which is too narrow. B says it applies to all adults, which is too broad. No option is fully correct."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The format is typical, but the flawed population wording makes the item unsuitable for the exam as written. The calculator designation is unnecessary but harmless.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Reject. The sample is randomly drawn from one mid-sized city, so generalization is justified only to that city's adults. The key claims generalization to all adults, which overreaches, and the other options are also not fully correct. The key is not defensible, and the explanation text is garbled."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard scope-of-inference item: random assignment supports causation, random sampling from a single city limits generalization to that city. It requires checking two design features and matching them to a conclusion, with no computation and minimal reading. A slight wording mismatch (options say 'all adults' vs. the city population) does not add real difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Answering B means comparing commute distances that vary from employee to employee, across two groups, so it needs data and a statistical investigation. A asks for a single count. C asks for an opinion. D asks for one person's value.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 1.A item. Option B is the only question that anticipates variability, refers to a population, and can be answered with data. Each distractor lacks exactly one property and encodes a distinct misconception (a single lookup count, an opinion, one individual). No stimulus is needed, the options are parallel in form, and the reading and calculator load is minimal.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly assesses recognizing a valid investigative question (skill 1.A, topic 1.10)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer. A is a lookup count, C is a value judgment, and D concerns one person."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and written in US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has its own explanation and names a distinct misconception. The option lengths are fairly balanced, though the key is the longest."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds to answer. It requires no calculation, so the calculator designation has no effect."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition of what makes a question statistical (variability, group comparison, data needed). The correct option (B) compares commute distances between groups. The distractors are a simple count, a value-judgment question, and a single-individual lookup. Each can be eliminated with one idea. The item has no computation, no representation changes, and minimal reading. It is a first-lesson skill, not a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k1",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "What proportion of the company's employees commute more than twenty miles one way?",
+     "brief_reasoning": "Only B involves variability in commute data across employees and is answerable with data; A is a single count, C is an opinion/policy question, D is about one individual.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "It takes about 60 seconds and involves no calculation. It is typical of the AP Statistics style for skill 1.A. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, single-skill item on identifying a valid investigative question. The key is unique and the distractors map to distinct misconceptions. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition of a statistical investigative question (anticipates variability across a population) versus a fixed-count, opinion/policy, or single-individual question. One or two reasoning steps, no computation, no representation changes, short clear wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Both variables are recorded, so an association between residents and bill can be studied. Income was not recorded (C). A causal claim needs an experiment (D). A just looks up individual values and is not a statistical investigative question.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Minor: the stem says 'each individual' but the units are households. Option A could technically be answered by reading the raw data, but it is not a statistical investigative question."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets 1.A: choosing a valid investigative question that the collected data can address. One dominant skill, within Unit 1."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B uses only recorded variables and asks about an association, which a survey can address. A asks for a listing of values, not a question about a population. C needs income, which was not recorded. D is causal and cannot be answered from survey data. B is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with a title, columns and three variables with types. Minor wording flaw: the stem says 'each individual' while the units are households, so it should say 'each household'. 'was the monthly electric bill' in A is also slightly odd in tense."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (individual listing, uncollected variable, causal claim from a survey), and the explanation addresses each. Option lengths are comparable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading, no calculation, about 80 seconds, typical of an AP Statistics multiple-choice item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and has a unique key with well-differentiated distractors. The only fix needed is changing 'each individual' to 'each household' in the stem."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student matches candidate investigative questions to the recorded variables. Option A is a non-statistical question (it only asks for a list of values), C uses an unrecorded variable (annual income), and D is a causal question that observational data cannot answer. B is an association question that uses two recorded variables. The item requires one table lookup and recognition of statistical versus non-statistical and causal versus associational questions, with no computation and little reading. This is foundational for skill 1.A.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m03-k1",
+  "cellId": "ap_statistics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Is there an association between a gym member's years of membership and visits last month?",
+     "brief_reasoning": "Both variables were recorded, so you can study how they're related. Resting heart rate was not recorded. Causation can't be concluded from a survey without random assignment. Option D just asks to list values, so it isn't a statistical investigative question, and it would refer to all gym members rather than the sample.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 80 seconds, minimal reading, no arithmetic. Matches the reference pattern for MC items.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean. It has a unique key, a complete stimulus, distinct distractors with explanations, and appropriate load. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify which question is statistical and answerable with the recorded variables. Distractors are clearly flawed (variable not collected, causal claim from observational data, non-statistical question about individual values). No computation, minimal reading, one small table. Suited to basic learning of skill 1.A rather than a full mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Choosing 50 distinct numbers at random from 1 to 800 means every possible group of 50 employees is equally likely to be picked. That is the definition of a simple random sample.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "A simple random sample"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.11 sampling method; justifying a method matching a stated goal fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Equal chance for every group of 50 plus random number selection defines an SRS; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct, covering convenience, stratified and cluster. Each is explained, though the stratified explanation is a little generic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short item of about 80 seconds with parallel options and no arithmetic. It is somewhat easy."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, easy item that asks the student to identify a simple random sample from its stated goal and plan. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recognition of a simple random sample. The stem gives the defining property (every group of 50 equally likely) and a standard numbering and random-number-generator procedure. The distractors (convenience, stratified, cluster) are clearly different methods, and no computation or representation change is needed. The item is clear, short, and in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_statistics-m04-k1",
+  "cellId": "ap_statistics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Buildings are randomly selected and every resident in each chosen building is surveyed, so this is a cluster sample.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "A cluster sample"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matches sampling-method identification (topic 1.11) and justifying a method for the stated goal (cost), skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Randomly selecting 5 of 40 buildings and surveying all residents is a cluster sample; unique and defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is complete: the goal (cost) and the plan are both stated, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Stratified, SRS and convenience each represent a distinct misconception and are explained. Minor flaw: the explanation says 'A cluster sample' although the key is option B, a letter mismatch. The stratified/SRS explanations are somewhat generic but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-80 seconds, no calculation, typical of AP items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It is a straightforward cluster-sample identification with a unique key and distinct distractors. The only fix needed is the explanation's 'A cluster sample' wording, which does not match the key position (option B)."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept vocabulary identification: randomly selecting whole buildings and surveying all residents is a cluster sample. The stem contains a direct cue, distractors are the standard sampling types, and there is no computation, interpretation of output, or multi-step reasoning. Appropriate for initial learning of topic 1.11.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_statistics-m05-k0",
+  "cellId": "ap_statistics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "The median of Store A is greater than the median of Store B",
+     "brief_reasoning": "Median A = 67 and median B = 57, so A's is greater. The other options are false: Q3 is 72 vs 79, max is 77 vs 92, and IQR is 16 vs 26.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 85 seconds with minimal reading and no needless arithmetic. The calculator is allowed but not needed, which is consistent with the designation.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique key, a complete boxplot specification, and explanations for each wrong option. Its demand is low and the distractors are repetitive, but it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step reading of five-number summaries from side-by-side boxplots; each option compares one statistic (Q3, max, IQR, median). Only trivial subtraction for IQR. No interpretation beyond reading values, so it fits basic learning of comparing distributions rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m05-k1",
+  "cellId": "ap_statistics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "The range of Store A is greater than the range of Store B",
+     "brief_reasoning": "Range A=42, B=36; other statements false.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Comparing boxplots, center/spread/extremes; fits 1.9/4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Range A=42 > B=36; other three statements false; unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Five-number summaries, axis title and group names complete. Stem mentions gridlines but the data give no tick values; the renderer picks the scale."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained with values. The key rationale does not show the range values, and the distractors are largely one 'reversed comparison' type."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, minimal arithmetic, typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is valid with a unique, correct key and a complete stimulus. Minor weaknesses are a bare key rationale and distractors that are mostly reversed comparisons."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads quartiles, medians and extremes from side-by-side boxplots and computes two ranges by simple subtraction. Only one statement is true, and the distractors are clearly false on a direct read. No multi-step reasoning, interpretation, or procedure choice is needed. Fits a foundational check on comparing distributions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m06-k0",
+  "cellId": "ap_statistics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Minutes spent and dollars spent are both quantitative, so the question asks about the relationship between two quantitative variables.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "A question about the relationship between two quantitative variables"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-70 seconds, has a light reading load, and needs no calculator use. The four options are short and parallel.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous check on recognizing the variable structure of an investigative question. It has a unique key, plausible distractors, and appropriate exam load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of variable types (both quantitative) in an investigative question. No computation, short reading, no representation changes. Distractors are straightforward alternatives (categorical-categorical, group comparison, single proportion). This is a foundational skill 1.A item for topic 1.1.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m06-k1",
+  "cellId": "ap_statistics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Both variables, years as a member and visits per month, are quantitative, and the question asks whether they are related.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "A question about the relationship between two quantitative variables"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60-70 seconds, light reading, no arithmetic. The calculator is allowed but not needed, which is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous item on identifying the structure of an investigative question, with a unique key and distinct distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student identifies two quantitative variables (years as a member, monthly visits) in a single investigative question and picks the matching description. This is one-step classification at the introductory level, with no computation, a short stem, and clearly distinct options. The difficulty comes from concept recognition only, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_statistics-m07-k0",
+  "cellId": "ap_statistics-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(North|Improved)=45/(45+42)=45/87≈0.517",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.517"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conditional probability from a two-way table, calculating a probability (3.C). Fits topic 2.6."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "45/87 = 0.517 is unique. Rounding is stated. The totals are consistent (156)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with row and column labels and all cell counts. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (marginal, reversed, joint) and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, minimal arithmetic, typical of an AP Statistics item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct conditional-probability item with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conditional probability from a two-way table: sum the Improved column (87) and divide 45 by it to get 0.517. Distractors reflect the reversed conditional (0.608), the marginal (0.474) and the joint (0.288). Light reading, trivial arithmetic, and one representation (table to probability). Core skill for topic 2.6 with no extra reasoning layers.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m07-k1",
+  "cellId": "ap_statistics-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(North | did not improve) = 46/(46+49) = 46/95 ≈ 0.484",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.484"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is short, has low reading load, and uses parallel decimal options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct conditional probability question from a two-way table, with well-motivated distractors and complete stimulus data. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conditional probability from a two-way table: sum the 'Did not improve' column (95) and divide the North cell (46) by it. Distractors capture common misreadings of the conditioning (row total, overall total, joint probability). Minimal reading, simple arithmetic, no representation change or additional reasoning link.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m08-k0",
+  "cellId": "ap_statistics-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(W|F)=0.6*0.1/(0.6*0.1+0.4*0.05)=0.06/0.08=0.750",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.750"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reversing a conditional probability from a tree is squarely topic 2.6 with a calculation skill (3.C)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.06/0.08 = 0.750 is unique and correct. Rounding to three decimals is stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The tree data is complete, with branch probabilities, outcomes and conditional labels. Minor inconsistency: the branch names are 'Inbox Work' and 'Personal' while the stem says 'Inbox Personal', and 'Flagged' is not defined beyond the tree. This is not a blocking flaw."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The blueprint lists a 'prior' misconception (0.600), but that option is not used. The set instead includes 0.080 (total flagged), 0.100 (reversed conditional) and 0.060 (joint), which are distinct and plausible. The explanation covers every wrong option. 0.750 is the largest value among the options, though this is a weak giveaway. 0.060 is a possible concern because it is only a partial calculation, but it is realistic. Passing on balance, but the numeric ordering is slightly suspect."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short one-step task, about 60-100 seconds. Calculator use is permitted and not needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: a correct unique key, a complete tree, and distinct distractors. Minor wording inconsistency in the branch names ('Inbox Work' vs 'Personal'). The distractor set also omits the 'prior' option (0.600) listed in the blueprint, and this is not blocking."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires reading a tree diagram, computing joint probabilities, the total probability of flagged, and a reversed conditional (Bayes-type) probability. About 4 reasoning steps with one representation change. Arithmetic is light and the wording is clear. Distractors map to named errors: P(Flagged), P(Flagged|Work), and P(Work and Flagged). Appropriate for full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_statistics-m08-k1",
+  "cellId": "ap_statistics-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(A|F)=0.6*0.1/(0.06+0.4*0.03)=0.06/0.072=0.833",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.833"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reverse conditional probability from a tree; matches topic 2.6 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.833 is the unique correct value; the distractors are clearly different."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Tree data is complete with branch names and probabilities. Stem wording is clear and rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Prior, total probability and reversed conditional are distinct misconceptions, and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP load of about 100 seconds, with no extra reading and calculator use consistent with the designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct Bayes-from-tree question that passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Reverse conditional probability from a tree diagram: compute two joint probabilities (0.06 and 0.012), sum to get P(faulty)=0.072, then divide to get 0.833. Distractors correspond to common errors (prior, total probability, reversed conditional). Concept depth is moderate (Bayes-style reasoning), arithmetic is short, and reading load is minimal. This is typical of a full-mock AP item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_statistics-m09-k0",
+  "cellId": "ap_statistics-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "By the CLT with n=100, the sampling distribution is approximately normal. Its mean is μ=60 and its standard deviation is σ/√n = 30/10 = 3. The simulated means agree: their mean is about 59.4 and their SD is about 3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Approximately normal, mean 60, SD 3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.12 CLT; describing the sampling distribution (center, spread, shape) fits skill 4.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is unique: normal, mean 60, SD 3. The dotplot (40 dots, mean about 59.4, SD about 3) is consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The dotplot data is complete (x title, counts sum to 40) and matches the stem. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (keeps sigma, keeps population shape, divides by n). All are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short item with no arithmetic burden and a standard AP style. The dotplot is mildly redundant but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound CLT description question. The key is unique, the stimulus is consistent and complete, and the distractors are distinct and explained. No issues were found."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires applying the CLT for shape, computing the SD of the sample mean as 30/sqrt(100)=3, and using the dotplot to confirm approximate normality and the center/spread. Distractors map to common misconceptions (population shape retained, SD not reduced, dividing by n instead of sqrt(n)). The arithmetic is trivial and the reading load is low, so the difficulty comes from the concepts and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m09-k1",
+  "cellId": "ap_statistics-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Approximately normal, mean 60, SD 3.75",
+     "brief_reasoning": "CLT with n=64 gives approx normal; mean 60; SD = 30/sqrt(64) = 3.75.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describes the sampling distribution of a sample mean using the CLT. This is topic 2.12 and skill 4.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique. Normal shape, mean 60 and SD 3.75 all follow from the CLT, and the dotplot is consistent with them."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The dot counts sum to 40 and the axis title is given. The data are complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions: population shape, sigma over n, and sigma unchanged. The explanation covers every option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, with minimal arithmetic and a calculator is not needed. The format is typical of AP items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a clean CLT description item with a consistent dotplot, a unique key and distinct distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of CLT: recognize n=64 gives approximately normal shape despite skewed population, compute SD = 30/sqrt(64) = 3.75 (simple arithmetic), and optionally check against the dotplot. Distractors target named misconceptions (skewness persists, dividing by n, SD unchanged). Few steps, short reading, one supporting representation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m10-k0",
+  "cellId": "ap_statistics-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The gardener only says the claim is \"not correct\" and doesn't say which way, so this calls for a two-sided alternative: H0: p=0.6, Ha: p≠0.6.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "H0: p = 0.6 and Ha: p ≠ 0.6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 70 seconds, requires no arithmetic and has a light reading load. The options are short, parallel expressions.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard hypothesis-setup question with a unique key and distinct distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of a two-sided alternative from the wording \"not correct\". There is no computation, no representation change, and very little reading. It tests the core skill directly, with the distractors being one-sided alternatives and a reversed null/alternative.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_statistics-m10-k1",
+  "cellId": "ap_statistics-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Hypotheses are about the parameter p. The null is the company's claim, p = 0.6, and the alternative is what the gardener suspects, p > 0.6.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "H0: p = 0.6, Ha: p > 0.6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 70 seconds, has minimal reading, and needs no calculator, although calculator use is permitted. This is typical of the AP exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard hypothesis-setup item. The key is unique, the distractors reflect distinct misconceptions, and the scope and load are appropriate. I recommend acceptance."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step recognition of the null and alternative hypotheses for a one-proportion test. The stem states the claimed value and the direction of the suspicion. Distractors cover standard errors: using p-hat in the hypotheses, swapping H0 and Ha, and the wrong inequality direction. No computation, minimal reading, and no representation changes. This is a foundational skill rather than full-mock exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_statistics-m11-k0",
+  "cellId": "ap_statistics-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Type I error probability increases (alpha 0.05 to 0.1) and power increases (0.47 to 0.53)",
+     "brief_reasoning": "P(Type I) = alpha, which rises from 0.05 to 0.1. From the table, power goes from 0.47 to 0.53. Both values check out with z-test calculations.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item asks for the net effect of changing both n and alpha on the Type I error probability and the power. The key is unique and consistent with the table, and the table is complete. Each distractor targets a distinct misconception. The item is a single table read with no heavy arithmetic. One minor flaw is that the first distractor's explanation is awkwardly worded.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must link alpha to Type I error probability (increases from 0.05 to 0.1). They then read two cells of the power table, at n=40 with alpha=0.05 (0.47) and at n=30 with alpha=0.1 (0.53), and see that power increases despite the smaller n. They must carry both results into the correct pairing of effects. This meets the rubric of at least 3 steps and 2 combined concepts or sources. The tempting wrong option (power decreases because n is smaller) survives the first step and fails only at the table lookup. There is no arithmetic and the stem is short, so none of the difficulty comes from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m11-k1",
+  "cellId": "ap_statistics-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Type I error probability increases (0.05→0.10); power decreases (0.55→0.49)",
+     "brief_reasoning": "α is the Type I error probability, so it rises from 0.05 to 0.10. The table gives power 0.55 at n=50, α=0.05 and 0.49 at n=25, α=0.10, so power falls. I checked both table values with the normal model (SE = 80/√n, true mean 520).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria with no instant-reject condition. Key: Type I error probability equals alpha, so it rises from 0.05 to 0.10, and the table shows power falling from 0.55 to 0.49. Only option C matches both effects.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item tests Type I error and power, which fits topic 3.8 and skill 2.D. The z-based setup with known sigma avoids Unit 4 t procedures, and the stem states the known standard deviation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique. Type I error probability equals alpha, which increases. The table gives power 0.55 at n=50, alpha=0.05 and 0.49 at n=25, alpha=0.10, so power decreases."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete, with columns, rows and a title, and the stem states the alternative value of 520. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors cover distinct misconceptions: one change dominates the power, both effects are reversed, and Type I error is thought to follow sample size. The explanation addresses each wrong option. The first distractor's explanation is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task is a short table read plus recall, about 60 to 90 seconds, with no arithmetic. The options are parallel in format."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must link Type I error probability to alpha (it increases from 0.05 to 0.1), then read two table cells (0.55 at n=50, alpha=0.05 vs 0.49 at n=25, alpha=0.1), then compare them to see that power decreases. The competing effects of a smaller n and a larger alpha make the power direction non-obvious without the table. This meets the rubric: at least 3 sequential steps and 2 combined concepts/sources. There is no arithmetic and the reading load is low, which is by design and not an unfair source.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m12-k0",
+  "cellId": "ap_statistics-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The teacher only suspects a change, with no direction given, so the test is two-sided. The hypotheses should be about the parameter mu_d, not the statistic.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "H0: mu_d = 0, Ha: mu_d ≠ 0"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets Topic 4.4 and skill 2.E: choosing hypotheses for a matched-pairs mean difference. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The stem says the teacher suspects only that the mean 'changes', so the test is two-sided. H0: mu_d = 0 vs Ha: mu_d != 0 is the unique correct option. Both one-sided options are wrong, and the sample-mean option is invalid notation for hypotheses."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The parameter is defined clearly, including the order of subtraction and the units. The wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: a lower-direction one-sided alternative, an upper-direction one-sided alternative, and hypotheses about a statistic. The explanation covers every wrong option. The two one-sided distractors are somewhat similar, but together they test the same two-sided-versus-directional misconception from two directions. The key is not distinguishable by length or format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-85 seconds, has a short stem, and needs no calculation. This is typical for the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean standalone item on setting up hypotheses for a matched-pairs mean difference. The key is unique and the distractors map to named misconceptions. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize matched-pairs context with a two-sided claim (\"changes\") and choose the hypotheses using the population parameter mu_d rather than a sample statistic. No computation, short reading, one reasoning step. Direction of subtraction does not matter for the two-sided alternative, so there is no hidden trap. Distractors are one-sided alternatives and a statistic-notation error, which are standard misconceptions at the basic level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m12-k1",
+  "cellId": "ap_statistics-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "H0: μd = 0, Ha: μd > 0",
+     "brief_reasoning": "Difference = before − after; if the session lowers scores, before > after, so the difference is positive and Ha is μd > 0.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Setting up hypotheses for a matched-pairs mean; the dominant skill is 2.E in topic 4.4, with direction set by the order of subtraction."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The difference is before minus after, so a session that lowers scores gives a positive mean difference. Ha: mu_d > 0 is the unique correct choice."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem defines the parameter, the order of subtraction, and the suspicion clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors are wrong direction, statistic instead of parameter, and two-sided alternative. Each is distinct, and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no arithmetic, four short parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous hypotheses-setup item. The key is correct and unique, the distractors map to distinct misconceptions, and the load is appropriate for an AP MC item. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on setting up hypotheses for a matched-pairs mean. The one extra step is translating \"lowers the mean score\" into a positive before-minus-after difference, so H_a: mu_d > 0. Distractors cover the wrong direction, a statistic in place of a parameter, and a two-sided alternative. There is no computation and the reading load is short and clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m13-k0",
+  "cellId": "ap_statistics-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The highlighted point has a high x value and falls well below the trend of the other points, so it is influential. It flattens the slope and weakens r. Removing it makes the correlation stronger and the slope steeper.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "Stronger correlation, steeper slope"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.2: effect of an influential point on r and slope, an interpretation of a visual. Skill 4.D is a reasonable fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The four options cover every combination of the two effects, so exactly one is correct. The key is stronger r and steeper slope, which agrees with the stated values (|r| 0.79 to 0.95, slope 1.42 to 2.54)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scatter data has axis titles, ranges and a highlighted point at index 10, which is the far-right point. The stem is clear. The temperature values (4 to 29 °F with a rising trend) are slightly odd for a park but not wrong."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct error: slope backwards, correlation backwards, or both backwards. The explanation for the fourth option is vague, since it never says it reverses both effects."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short and typical of the AP exam, with one stimulus and parallel options, and the calculator load is trivial."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable: the key is unique and consistent with the data, the stimulus is complete, and the distractors encode distinct misconceptions. Minor weaknesses are the vague explanation for the fourth option and the slightly unrealistic temperature range."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must read a scatterplot, identify the highlighted point as a high-leverage point in x that falls below the trend of the other points, and reason about how removing it changes r and slope. This is one concept (influential points) with a couple of reasoning steps and no heavy computation or reading. It is a typical AP exam-style item, neither basic recall nor advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m13-k1",
+  "cellId": "ap_statistics-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Correlation stronger, slope steeper",
+     "brief_reasoning": "The other points have a slope of about 3.6, which predicts about 140 mpg at x=33.4. The point is at 96.5, well below the trend, so it flattens the line and weakens r. Removing it makes the slope steeper and r stronger.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Unrealistic context: 33-liter engines, and mpg rising with engine size. This does not affect the answer."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Influential point effect on r and slope; in Unit 5 scope, interpretation of a result (4.D)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Point lies far below the trend of the others, so removing it strengthens r and steepens the slope. Unique key C."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data complete: titles, axis range, points, highlight index. Context is odd (mpg rising with engine size) but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Options are parallel and each is explained. Option A's explanation is vague (it is the both-backwards error), a minor flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, no arithmetic, single stimulus, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound influential-point item with a unique key and a complete stimulus. The only minor weakness is that option A's explanation is vague and does not name the both-backwards error."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must reason about a high-leverage point lying below the trend of the other points, and judge its joint effect on slope and correlation from the scatterplot. This takes two linked judgments (slope direction, r strength) and a representation read, with no heavy computation. It is a standard exam-style item and is appropriate for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

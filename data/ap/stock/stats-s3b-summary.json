@@ -1,0 +1,306 @@
+{
+ "difficultyAudit": {
+  "declared": 10,
+  "structuralExamPrep": 10,
+  "judgeExamPrep": 10,
+  "agreement": {
+   "agree": 10
+  },
+  "singlesExamPrepShare": 0.441,
+  "disagreements": []
+ },
+ "runs": [
+  "stats-s3b-a",
+  "stats-s3b-b",
+  "stats-s3b-c",
+  "stats-s3b-d"
+ ],
+ "rows": 52,
+ "passed": 42,
+ "rejected": 10,
+ "exactDuplicates": 0,
+ "singles": {
+  "candidates": 37,
+  "passed": 34
+ },
+ "sets": {
+  "candidates": 3,
+  "passed": 3,
+  "questionsInPassedSets": 9
+ },
+ "frq": {
+  "candidates": 12,
+  "passed": 5
+ },
+ "uniquePassedItems": 48,
+ "structureFamilies": 29,
+ "itemFamilyIds": 29,
+ "perUnit": {
+  "1": 12,
+  "2": 6,
+  "3": 7,
+  "4": 6,
+  "5": 12
+ },
+ "perSkillCategory": {
+  "1": 6,
+  "2": 11,
+  "3": 12,
+  "4": 14
+ },
+ "rejectionReasons": [
+  {
+   "key": "stats-s3b-a:ap_statistics-m01-k1",
+   "reason": "solver_disagrees:Because the adults were a random sample from the city, the result applies to that city's adult population. D says it cannot be generalized beyond the adults in the study, which is too narrow. B says it applies to all adults, which is too broad. No option is fully correct.; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; instant_reject_wrong_key; instant_reject_missing_condition; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-s3b-a:ap_statistics-m08-k0",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-s3b-a:ap_statistics-m12-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-s3b-c:ap_statistics-f01-k0",
+   "reason": "criterion_failed_key_scoring; criterion_failed_stimulus_expression; instant_reject_missing_condition"
+  },
+  {
+   "key": "stats-s3b-c:ap_statistics-f01-k2",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-s3b-c:ap_statistics-f02-k1",
+   "reason": "criterion_failed_key_scoring"
+  },
+  {
+   "key": "stats-s3b-c:ap_statistics-f03-k0",
+   "reason": "duplicate_gate_exact_duplicate"
+  },
+  {
+   "key": "stats-s3b-c:ap_statistics-f03-k2",
+   "reason": "duplicate_gate_exact_duplicate"
+  },
+  {
+   "key": "stats-s3b-c:ap_statistics-f04-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-s3b-c:ap_statistics-f04-k2",
+   "reason": "criterion_failed_scope_skill; criterion_failed_exam_suitability; instant_reject_out_of_scope_knowledge; reference_pattern_mismatch"
+  }
+ ],
+ "costs": {
+  "stats-s3b-a": {
+   "byStage": {
+    "difficulty": 0.1886,
+    "review": 0.3651,
+    "review2": 0.0785,
+    "review4": 0.0388,
+    "solve": 0.1977
+   },
+   "total": 0.8687
+  },
+  "stats-s3b-b": {
+   "byStage": {
+    "difficulty": 0.0626,
+    "review": 0.1237,
+    "review2": 0.0523,
+    "review4": 0.0226,
+    "solve": 0.0474
+   },
+   "total": 0.3086
+  },
+  "stats-s3b-c": {
+   "byStage": {
+    "difficulty": 0.1065,
+    "review": 0.2695,
+    "solve": 0.2908
+   },
+   "total": 0.6668
+  },
+  "stats-s3b-d": {
+   "byStage": {
+    "difficulty": 0.0889,
+    "review": 0.1626,
+    "review2": 0.0274,
+    "review4": 0.0258,
+    "solve": 0.091
+   },
+   "total": 0.3957
+  }
+ },
+ "totalUsd": 2.2398,
+ "lookAlikeClustersWithExistingStock": 11,
+ "lookAlikeClustersContainingBatch": [
+  {
+   "id": "la:stats-s1-l-final:ap_statistics-m04-k0",
+   "keys": [
+    "stats-s1-l-final:ap_statistics-m04-k0",
+    "stats-s3b-a:ap_statistics-m07-k0",
+    "stats-s3b-a:ap_statistics-m07-k1"
+   ],
+   "reasons": [
+    "template",
+    "archetype",
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s1-l-final:ap_statistics-m05-k0",
+   "keys": [
+    "stats-s1-l-final:ap_statistics-m05-k0",
+    "stats-s3b-a:ap_statistics-m08-k1"
+   ],
+   "reasons": [
+    "template"
+   ]
+  },
+  {
+   "id": "la:stats-s1-m-final:ap_statistics-m02-k0",
+   "keys": [
+    "stats-s1-m-final:ap_statistics-m02-k0",
+    "stats-s3b-a:ap_statistics-m09-k0",
+    "stats-s3b-a:ap_statistics-m09-k1"
+   ],
+   "reasons": [
+    "archetype",
+    "template",
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s3b-a:ap_statistics-m13-k0",
+   "keys": [
+    "stats-s1-m-final:ap_statistics-m06-k0",
+    "stats-s3b-a:ap_statistics-m13-k0",
+    "stats-s3b-a:ap_statistics-m13-k1"
+   ],
+   "reasons": [
+    "template",
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s2a-a:ap_statistics-m02-k0",
+   "keys": [
+    "stats-s2a-a:ap_statistics-m02-k0",
+    "stats-s3b-a:ap_statistics-m03-k0",
+    "stats-s3b-a:ap_statistics-m03-k1"
+   ],
+   "reasons": [
+    "template",
+    "archetype",
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s2a-a:ap_statistics-m07-k0",
+   "keys": [
+    "stats-s2a-a:ap_statistics-m07-k0",
+    "stats-s3b-a:ap_statistics-m04-k0",
+    "stats-s3b-a:ap_statistics-m04-k1"
+   ],
+   "reasons": [
+    "template",
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s2a-a:ap_statistics-m09-k0",
+   "keys": [
+    "stats-s2a-a:ap_statistics-m09-k0",
+    "stats-s3b-d:ap_statistics-m06-k0"
+   ],
+   "reasons": [
+    "template"
+   ]
+  },
+  {
+   "id": "la:stats-s2a-b:ap_statistics-m02-k0",
+   "keys": [
+    "stats-s2a-b:ap_statistics-m02-k0",
+    "stats-s3b-b:ap_statistics-m01-k0",
+    "stats-s3b-b:ap_statistics-m01-k1",
+    "stats-s3b-b:ap_statistics-m01-k2"
+   ],
+   "reasons": [
+    "template",
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s3b-a:ap_statistics-m06-k0",
+   "keys": [
+    "stats-s2b-a:ap_statistics-m01-k0",
+    "stats-s3b-a:ap_statistics-m06-k0",
+    "stats-s3b-a:ap_statistics-m06-k1"
+   ],
+   "reasons": [
+    "archetype",
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s2b-a:ap_statistics-m07-k0",
+   "keys": [
+    "stats-s2b-a:ap_statistics-m07-k0",
+    "stats-s3b-a:ap_statistics-m12-k0"
+   ],
+   "reasons": [
+    "archetype"
+   ]
+  },
+  {
+   "id": "la:stats-s2b-a:ap_statistics-m08-k0",
+   "keys": [
+    "stats-s2b-a:ap_statistics-m08-k0",
+    "stats-s3b-d:ap_statistics-m07-k0"
+   ],
+   "reasons": [
+    "archetype"
+   ]
+  },
+  {
+   "id": "la:stats-s3b-a:ap_statistics-m02-k0",
+   "keys": [
+    "stats-s3b-a:ap_statistics-m02-k0",
+    "stats-s3b-a:ap_statistics-m02-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s3b-a:ap_statistics-m05-k0",
+   "keys": [
+    "stats-s3b-a:ap_statistics-m05-k0",
+    "stats-s3b-a:ap_statistics-m05-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s3b-a:ap_statistics-m10-k0",
+   "keys": [
+    "stats-s3b-a:ap_statistics-m10-k0",
+    "stats-s3b-a:ap_statistics-m10-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s3b-a:ap_statistics-m11-k0",
+   "keys": [
+    "stats-s3b-a:ap_statistics-m11-k0",
+    "stats-s3b-a:ap_statistics-m11-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  }
+ ],
+ "lookAlikeComparedAgainst": "403 existing auto_passed MC (all subjects incl. the S1 pilot) + 37 S2-a items"
+}
