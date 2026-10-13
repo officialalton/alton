@@ -109,7 +109,7 @@
    },
    "seed": 9100,
    "pack_id": "c_abs_extremum_cubic-s9100",
-   "explanation_en": "The correct answer is 40. $f'(x)=6 \\left(x - 3\\right) \\left(x - 1\\right)$ is zero at $x=1$ and $x=3$. Comparing $f(0)=0$, $f(1)=8$, $f(3)=0$, $f(5)=40$, the absolute maximum is $40$ at $x=5$.\n0 is incorrect: Gives the absolute minimum instead of the absolute maximum.\n5 is incorrect: Gives the $x$-value $5$ where the absolute maximum occurs instead of the value of $f$.\n8 is incorrect: Gives the value of the relative maximum at the critical point inside the interval and forgets to compare the endpoint values."
+   "explanation_en": "The correct answer is $40$. $f'(x)=6 \\left(x - 3\\right) \\left(x - 1\\right)$ is zero at $x=1$ and $x=3$. Comparing $f(0)=0$, $f(1)=8$, $f(3)=0$, $f(5)=40$, the absolute maximum is $40$ at $x=5$.\n$0$ is incorrect: Gives the absolute minimum instead of the absolute maximum.\n$5$ is incorrect: Gives the $x$-value $5$ where the absolute maximum occurs instead of the value of $f$.\n$8$ is incorrect: Gives the value of the relative maximum at the critical point inside the interval and forgets to compare the endpoint values."
   },
   "verification": {
    "generatedByCode": true,
@@ -271,7 +271,7 @@
    },
    "seed": 9100,
    "pack_id": "c_antideriv_power_rules-s9100",
-   "explanation_en": "The correct answer is 3 x^{3} + 2 x - \\frac{2}{x}+C. Apply the power rule term by term: $\\int 9 x^{2}\\,dx=3 x^{3}$, $\\int \\frac{2}{x^{2}}\\,dx=- \\frac{2}{x}$ and $\\int 2\\,dx=2x$, then add $C$.\n3 x^{3} + 2 x + 2 \\ln{\\left(\\left|{x}\\right| \\right)}+C is incorrect: Uses the rule for $\\int \\frac{1}{x}\\,dx$ on $\\frac{2}{x^{2}}$ and writes $2\\ln|x|$.\n3 x^{3} + 2 - \\frac{2}{x}+C is incorrect: Integrates the constant term $2$ as $2$ instead of $2x$.\n9 x^{3} + 2 x + \\frac{2}{x}+C is incorrect: Adds 1 to each exponent but does not divide by the new exponent, which gives $9 x^{3} + 2 x + \\frac{2}{x}$."
+   "explanation_en": "The correct answer is $3 x^{3} + 2 x - \\frac{2}{x}+C$. Apply the power rule term by term: $\\int 9 x^{2}\\,dx=3 x^{3}$, $\\int \\frac{2}{x^{2}}\\,dx=- \\frac{2}{x}$ and $\\int 2\\,dx=2x$, then add $C$.\n$3 x^{3} + 2 x + 2 \\ln{\\left(\\left|{x}\\right| \\right)}+C$ is incorrect: Uses the rule for $\\int \\frac{1}{x}\\,dx$ on $\\frac{2}{x^{2}}$ and writes $2\\ln|x|$.\n$3 x^{3} + 2 - \\frac{2}{x}+C$ is incorrect: Integrates the constant term $2$ as $2$ instead of $2x$.\n$9 x^{3} + 2 x + \\frac{2}{x}+C$ is incorrect: Adds 1 to each exponent but does not divide by the new exponent, which gives $9 x^{3} + 2 x + \\frac{2}{x}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -427,7 +427,7 @@
    },
    "seed": 9100,
    "pack_id": "c_arc_trig_deriv_value-s9100",
-   "explanation_en": "The correct answer is \\frac{3}{5}. With $u=3x^{2}$, $h'(x)=\\frac{u'}{1+u^{2}}=\\frac{6x}{1+9x^{4}}$; at $x=1$ this is $\\frac{3}{5}$.\n6 is incorrect: Takes the derivative of $\\arctan u$ to be just $u'$.\n\\frac{3}{50} is incorrect: Squares the denominator: $\\frac{u'}{\\left(1+u^{2}\\right)^{2}}$.\n\\frac{1}{10} is incorrect: Omits the inner derivative: uses $\\frac{1}{1+u^{2}}$ with $u=3x^{2}$ and leaves out $u'=6x$."
+   "explanation_en": "The correct answer is $\\frac{3}{5}$. With $u=3x^{2}$, $h'(x)=\\frac{u'}{1+u^{2}}=\\frac{6x}{1+9x^{4}}$; at $x=1$ this is $\\frac{3}{5}$.\n$6$ is incorrect: Takes the derivative of $\\arctan u$ to be just $u'$.\n$\\frac{3}{50}$ is incorrect: Squares the denominator: $\\frac{u'}{\\left(1+u^{2}\\right)^{2}}$.\n$\\frac{1}{10}$ is incorrect: Omits the inner derivative: uses $\\frac{1}{1+u^{2}}$ with $u=3x^{2}$ and leaves out $u'=6x$."
   },
   "verification": {
    "generatedByCode": true,
@@ -582,7 +582,7 @@
    },
    "seed": 9100,
    "pack_id": "c_area_crossing_setup-s9100",
-   "explanation_en": "The correct answer is 2\\displaystyle\\int_{0}^{1}\\left(x-x^{3}\\right)dx. The graphs intersect at $x=-1$, $x=0$ and $x=1$. On $[-1,0]$ the cubic is above the line and on $[0,1]$ the line is above the cubic, so the area is the sum of the two integrals of top minus bottom; by symmetry the two equal pieces give twice the integral over $[0,1]$, which is $\\frac{1}{2}$.\n\\displaystyle\\int_{0}^{1}\\left(x-x^{3}\\right)dx is incorrect: Integrates over $[0,1]$ only, which is just the region in the first quadrant, with value $\\frac{1}{4}$.\n2\\displaystyle\\int_{0}^{1}\\left(x^{3}-x\\right)dx is incorrect: Takes top minus bottom in the wrong order on both halves, so the value is $- \\frac{1}{2}$.\n\\displaystyle\\int_{-1}^{1}\\left(x-x^{3}\\right)dx is incorrect: Uses a single integral of $x-x^{3}$ over $[-1,1]$; the two regions have opposite orientation, so they cancel and the value is $0$."
+   "explanation_en": "The correct answer is $2\\displaystyle\\int_{0}^{1}\\left(x-x^{3}\\right)dx$. The graphs intersect at $x=-1$, $x=0$ and $x=1$. On $[-1,0]$ the cubic is above the line and on $[0,1]$ the line is above the cubic, so the area is the sum of the two integrals of top minus bottom; by symmetry the two equal pieces give twice the integral over $[0,1]$, which is $\\frac{1}{2}$.\n$\\displaystyle\\int_{0}^{1}\\left(x-x^{3}\\right)dx$ is incorrect: Integrates over $[0,1]$ only, which is just the region in the first quadrant, with value $\\frac{1}{4}$.\n$2\\displaystyle\\int_{0}^{1}\\left(x^{3}-x\\right)dx$ is incorrect: Takes top minus bottom in the wrong order on both halves, so the value is $- \\frac{1}{2}$.\n$\\displaystyle\\int_{-1}^{1}\\left(x-x^{3}\\right)dx$ is incorrect: Uses a single integral of $x-x^{3}$ over $[-1,1]$; the two regions have opposite orientation, so they cancel and the value is $0$."
   },
   "verification": {
    "generatedByCode": true,
@@ -737,7 +737,7 @@
    },
    "seed": 9100,
    "pack_id": "c_area_exp_between-s9100",
-   "explanation_en": "The correct answer is \\frac{1}{2}. On $0\\le x\\le \\ln 2$ the graph of $e^{x}$ is above that of $e^{-x}$, so the area is $\\int_0^{\\ln 2}(e^{x}-e^{-x})\\,dx=\\left[e^{x}+e^{-x}\\right]_0^{\\ln 2}=\\left(2+\\frac{1}{2}\\right)-2=\\frac{1}{2}$.\n1 is incorrect: Integrates only the upper curve $y=e^{x}$ from $0$ to $\\ln 2$ and ignores the lower curve.\n\\frac{5}{2} is incorrect: Evaluates the antiderivative $e^{x}+e^{-x}$ only at the upper limit and does not subtract its value at $x=0$.\n\\frac{3}{2} is incorrect: Integrates $e^{x}-e^{-x}$ but takes the antiderivative of $e^{-x}$ to be $e^{-x}$, forgetting the factor $-1$, which gives $\\frac{3}{2}$."
+   "explanation_en": "The correct answer is $\\frac{1}{2}$. On $0\\le x\\le \\ln 2$ the graph of $e^{x}$ is above that of $e^{-x}$, so the area is $\\int_0^{\\ln 2}(e^{x}-e^{-x})\\,dx=\\left[e^{x}+e^{-x}\\right]_0^{\\ln 2}=\\left(2+\\frac{1}{2}\\right)-2=\\frac{1}{2}$.\n$1$ is incorrect: Integrates only the upper curve $y=e^{x}$ from $0$ to $\\ln 2$ and ignores the lower curve.\n$\\frac{5}{2}$ is incorrect: Evaluates the antiderivative $e^{x}+e^{-x}$ only at the upper limit and does not subtract its value at $x=0$.\n$\\frac{3}{2}$ is incorrect: Integrates $e^{x}-e^{-x}$ but takes the antiderivative of $e^{-x}$ to be $e^{-x}$, forgetting the factor $-1$, which gives $\\frac{3}{2}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -892,7 +892,7 @@
    },
    "seed": 9100,
    "pack_id": "c_box_min_surface-s9100",
-   "explanation_en": "The correct answer is 12. With base side $x$ and $h=\\frac{4}{x^{2}}$, $S(x)=x^{2}+\\frac{16}{x}$ and $S'(x)=2x-\\frac{16}{x^{2}}=0$ gives $x=2$; then $S(2)=4+8=12$, which is the minimum because $S'$ changes from negative to positive.\n1 is incorrect: Gives the height $h=\\frac{V}{x^{2}}=1$ instead of the surface area.\n16 is incorrect: Adds a top, using $2x^{2}+4xh=16$ for a closed box.\n2 is incorrect: Gives the side length $x=2$ of the base instead of the surface area."
+   "explanation_en": "The correct answer is $12$. With base side $x$ and $h=\\frac{4}{x^{2}}$, $S(x)=x^{2}+\\frac{16}{x}$ and $S'(x)=2x-\\frac{16}{x^{2}}=0$ gives $x=2$; then $S(2)=4+8=12$, which is the minimum because $S'$ changes from negative to positive.\n$1$ is incorrect: Gives the height $h=\\frac{V}{x^{2}}=1$ instead of the surface area.\n$16$ is incorrect: Adds a top, using $2x^{2}+4xh=16$ for a closed box.\n$2$ is incorrect: Gives the side length $x=2$ of the base instead of the surface area."
   },
   "verification": {
    "generatedByCode": true,
@@ -1049,7 +1049,7 @@
    },
    "seed": 9100,
    "pack_id": "c_chain_exp_cos_point-s9100",
-   "explanation_en": "The correct answer is - 4 \\sqrt{3} e^{\\frac{1}{2}}. By the chain rule $f'(x)=2\\cdot e^{\\cos(4x)}\\cdot(-4\\sin(4x))$; at $x=\\frac{\\pi}{12}$ we have $\\cos(4x)=\\frac{1}{2}$ and $\\sin(4x)=\\frac{\\sqrt{3}}{2}$, so $f'=- 4 \\sqrt{3} e^{\\frac{1}{2}}$.\n4 \\sqrt{3} e^{\\frac{1}{2}} is incorrect: Uses $\\sin(4x)$ instead of $-\\sin(4x)$ as the derivative of $\\cos(4x)$, so the sign is wrong.\n- 4 e^{\\frac{1}{2}} is incorrect: Evaluates $-4\\sin(4x)$ with $\\cos(4x)=\\frac{1}{2}$ in place of $\\sin(4x)$.\n- \\sqrt{3} e^{\\frac{1}{2}} is incorrect: Omits the inner derivative: it differentiates $\\cos(4x)$ as $-\\sin(4x)$ and leaves out the factor $4$."
+   "explanation_en": "The correct answer is $- 4 \\sqrt{3} e^{\\frac{1}{2}}$. By the chain rule $f'(x)=2\\cdot e^{\\cos(4x)}\\cdot(-4\\sin(4x))$; at $x=\\frac{\\pi}{12}$ we have $\\cos(4x)=\\frac{1}{2}$ and $\\sin(4x)=\\frac{\\sqrt{3}}{2}$, so $f'=- 4 \\sqrt{3} e^{\\frac{1}{2}}$.\n$4 \\sqrt{3} e^{\\frac{1}{2}}$ is incorrect: Uses $\\sin(4x)$ instead of $-\\sin(4x)$ as the derivative of $\\cos(4x)$, so the sign is wrong.\n$- 4 e^{\\frac{1}{2}}$ is incorrect: Evaluates $-4\\sin(4x)$ with $\\cos(4x)=\\frac{1}{2}$ in place of $\\sin(4x)$.\n$- \\sqrt{3} e^{\\frac{1}{2}}$ is incorrect: Omits the inner derivative: it differentiates $\\cos(4x)$ as $-\\sin(4x)$ and leaves out the factor $4$."
   },
   "verification": {
    "generatedByCode": true,
@@ -1206,7 +1206,7 @@
    },
    "seed": 9100,
    "pack_id": "c_complete_square_arctan-s9100",
-   "explanation_en": "The correct answer is \\frac{\\pi}{12}. Completing the square, $x^{2}+2x+10=(x+1)^{2}+9$. With $u=x+1$ the limits become $0$ and $3$, and $\\int_0^{3}\\frac{du}{u^{2}+9}=\\frac{1}{3}\\arctan\\frac{u}{3}\\Big|_0^{3}=\\frac{1}{3}\\cdot\\frac{\\pi}{4}$.\n\\dfrac{1}{3}\\arctan 3 is incorrect: Uses $\\arctan u$ instead of $\\arctan\\frac{u}{3}$, so the result is $\\frac{1}{3}\\arctan 3$.\n\\frac{\\pi}{36} is incorrect: Uses $\\frac{1}{3}$ twice and gets $\\frac{\\pi}{36}$.\n\\frac{\\pi}{4} is incorrect: Gets $\\frac{1}{x^{2}+2x+10}$ in the form $\\frac{1}{u^{2}+9}$ with $u=x+1$ but forgets the factor $\\frac{1}{3}$ in front of the arctangent, which gives $\\frac{\\pi}{4}$."
+   "explanation_en": "The correct answer is $\\frac{\\pi}{12}$. Completing the square, $x^{2}+2x+10=(x+1)^{2}+9$. With $u=x+1$ the limits become $0$ and $3$, and $\\int_0^{3}\\frac{du}{u^{2}+9}=\\frac{1}{3}\\arctan\\frac{u}{3}\\Big|_0^{3}=\\frac{1}{3}\\cdot\\frac{\\pi}{4}$.\n$\\dfrac{1}{3}\\arctan 3$ is incorrect: Uses $\\arctan u$ instead of $\\arctan\\frac{u}{3}$, so the result is $\\frac{1}{3}\\arctan 3$.\n$\\frac{\\pi}{36}$ is incorrect: Uses $\\frac{1}{3}$ twice and gets $\\frac{\\pi}{36}$.\n$\\frac{\\pi}{4}$ is incorrect: Gets $\\frac{1}{x^{2}+2x+10}$ in the form $\\frac{1}{u^{2}+9}$ with $u=x+1$ but forgets the factor $\\frac{1}{3}$ in front of the arctangent, which gives $\\frac{\\pi}{4}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -1361,7 +1361,7 @@
    },
    "seed": 9100,
    "pack_id": "c_concave_xnlnx-s9100",
-   "explanation_en": "The correct answer is (e^{- \\frac{3}{2}},\\infty). $f'(x)=2x\\ln x+x$ and $f''(x)=2\\ln x+3$; $f''>0$ when $\\ln x>- \\frac{3}{2}$, i.e. $x>e^{- \\frac{3}{2}}$.\n(1,\\infty) is incorrect: Keeps only the term of $f''$ containing $\\ln x$ and drops the other terms, so $f''>0$ when $\\ln x>0$.\n(0,e^{- \\frac{3}{2}}) is incorrect: Gives the set where $f''<0$, where the graph is concave down.\n(e^{\\frac{3}{2}},\\infty) is incorrect: Uses $\\ln x>\\frac{3}{2}$ (a sign slip), so the boundary is $x=e^{\\frac{3}{2}}$."
+   "explanation_en": "The correct answer is $(e^{- \\frac{3}{2}},\\infty)$. $f'(x)=2x\\ln x+x$ and $f''(x)=2\\ln x+3$; $f''>0$ when $\\ln x>- \\frac{3}{2}$, i.e. $x>e^{- \\frac{3}{2}}$.\n$(1,\\infty)$ is incorrect: Keeps only the term of $f''$ containing $\\ln x$ and drops the other terms, so $f''>0$ when $\\ln x>0$.\n$(0,e^{- \\frac{3}{2}})$ is incorrect: Gives the set where $f''<0$, where the graph is concave down.\n$(e^{\\frac{3}{2}},\\infty)$ is incorrect: Uses $\\ln x>\\frac{3}{2}$ (a sign slip), so the boundary is $x=e^{\\frac{3}{2}}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -1519,7 +1519,7 @@
    },
    "seed": 9100,
    "pack_id": "c_cont_three_pieces_two_unknowns-s9100",
-   "explanation_en": "The correct answer is 4. Continuity at $x=1$: $2+a=b$. Continuity at $x=3$: $9b=6+(21)=27$, so $b=3$ and $a=b-2=1$, giving $a+b=4$.\n- \\frac{2}{3} is incorrect: At $x=3$ matches $9b$ with $6$ only, forgetting the constant $21$ of the right piece, so $b=\\frac{2}{3}$, $a=b-2$ and $a+b=- \\frac{2}{3}$.\n8 is incorrect: At $x=1$ writes $a=b+2$ instead of $a=b-2$, so $a+b=8$.\n16 is incorrect: At $x=3$ evaluates the middle piece as $b\\cdot 3$ instead of $b\\cdot 3^{2}$, getting $b=9$ and then $a=7$, so $a+b=16$."
+   "explanation_en": "The correct answer is $4$. Continuity at $x=1$: $2+a=b$. Continuity at $x=3$: $9b=6+(21)=27$, so $b=3$ and $a=b-2=1$, giving $a+b=4$.\n$- \\frac{2}{3}$ is incorrect: At $x=3$ matches $9b$ with $6$ only, forgetting the constant $21$ of the right piece, so $b=\\frac{2}{3}$, $a=b-2$ and $a+b=- \\frac{2}{3}$.\n$8$ is incorrect: At $x=1$ writes $a=b+2$ instead of $a=b-2$, so $a+b=8$.\n$16$ is incorrect: At $x=3$ evaluates the middle piece as $b\\cdot 3$ instead of $b\\cdot 3^{2}$, getting $b=9$ and then $a=7$, so $a+b=16$."
   },
   "verification": {
    "generatedByCode": true,
@@ -1675,7 +1675,7 @@
    },
    "seed": 9100,
    "pack_id": "c_count_corners_abs_polynomial-s9100",
-   "explanation_en": "The correct answer is 2. The absolute value creates a corner where the polynomial inside crosses zero with a nonzero slope. It factors as $(x + 1)(x)$ with two simple zeros, $x=-1$ and $x=0$, so there are 2 corners.\n3 is incorrect: Counts both zeros, $x=-1$ and $x=0$, and also the vertex $x=- \\frac{1}{2}$.\n1 is incorrect: Marks only the vertex $x=- \\frac{1}{2}$ of the parabola, where the slope of the polynomial inside the absolute value is $0$, as the point where the graph is not smooth.\n0 is incorrect: Treats the absolute value as harmless and says the function is differentiable everywhere, because the polynomial inside it is differentiable."
+   "explanation_en": "The correct answer is $2$. The absolute value creates a corner where the polynomial inside crosses zero with a nonzero slope. It factors as $(x + 1)(x)$ with two simple zeros, $x=-1$ and $x=0$, so there are 2 corners.\n$3$ is incorrect: Counts both zeros, $x=-1$ and $x=0$, and also the vertex $x=- \\frac{1}{2}$.\n$1$ is incorrect: Marks only the vertex $x=- \\frac{1}{2}$ of the parabola, where the slope of the polynomial inside the absolute value is $0$, as the point where the graph is not smooth.\n$0$ is incorrect: Treats the absolute value as harmless and says the function is differentiable everywhere, because the polynomial inside it is differentiable."
   },
   "verification": {
    "generatedByCode": true,
@@ -1832,7 +1832,7 @@
    },
    "seed": 9100,
    "pack_id": "c_critical_points_cusp-s9100",
-   "explanation_en": "The correct answer is x=0 and x=2. $f'(x)=\\frac{2}{3}x^{-1/3}(x-5)+x^{2/3}=\\frac{5x-10}{3x^{1/3}}$; $f'(x)=0$ at $x=2$, and $f'$ is undefined at $x=0$, which is in the domain of $f$.\nx=0 and x=5 is incorrect: Lists $x=0$ and the zero $x=5$ of $f$ itself, instead of solving $f'(x)=0$.\nx=0 is incorrect: Finds only where $f'$ is undefined and does not solve $f'(x)=0$, which gives $x=2$.\nx=2 is incorrect: Solves $f'(x)=0$ but forgets that $f'$ is undefined at $x=0$, where $f$ is defined, so $x=0$ is also a critical point."
+   "explanation_en": "The correct answer is $x=0$ and $x=2$. $f'(x)=\\frac{2}{3}x^{-1/3}(x-5)+x^{2/3}=\\frac{5x-10}{3x^{1/3}}$; $f'(x)=0$ at $x=2$, and $f'$ is undefined at $x=0$, which is in the domain of $f$.\n$x=0$ and $x=5$ is incorrect: Lists $x=0$ and the zero $x=5$ of $f$ itself, instead of solving $f'(x)=0$.\n$x=0$ is incorrect: Finds only where $f'$ is undefined and does not solve $f'(x)=0$, which gives $x=2$.\n$x=2$ is incorrect: Solves $f'(x)=0$ but forgets that $f'$ is undefined at $x=0$, where $f$ is defined, so $x=0$ is also a critical point."
   },
   "verification": {
    "generatedByCode": true,
@@ -1986,7 +1986,7 @@
    },
    "seed": 9100,
    "pack_id": "c_decreasing_rational-s9100",
-   "explanation_en": "The correct answer is (0,2) and (2,4). $f'(x)=\\frac{x \\left(x - 4\\right)}{\\left(x - 2\\right)^{2}}$ has sign changes only at $x=0$ and $x=4$; $f'<0$ on both $(0,2)$ and $(2,4)$, and $f$ is not defined at $x=2$, so $f$ is decreasing on each of these two intervals separately.\n(0,2) is incorrect: Thinks $f'$ changes sign at the vertical asymptote $x=2$ and keeps only the part to its left.\n(2,4) is incorrect: Thinks $f'$ changes sign at the vertical asymptote $x=2$ and keeps only the part to its right.\n(0,4) is incorrect: Writes one interval across $x=2$, where $f$ is not defined, so $f$ cannot be decreasing on all of it."
+   "explanation_en": "The correct answer is $(0,2)$ and $(2,4)$. $f'(x)=\\frac{x \\left(x - 4\\right)}{\\left(x - 2\\right)^{2}}$ has sign changes only at $x=0$ and $x=4$; $f'<0$ on both $(0,2)$ and $(2,4)$, and $f$ is not defined at $x=2$, so $f$ is decreasing on each of these two intervals separately.\n$(0,2)$ is incorrect: Thinks $f'$ changes sign at the vertical asymptote $x=2$ and keeps only the part to its left.\n$(2,4)$ is incorrect: Thinks $f'$ changes sign at the vertical asymptote $x=2$ and keeps only the part to its right.\n$(0,4)$ is incorrect: Writes one interval across $x=2$, where $f$ is not defined, so $f$ cannot be decreasing on all of it."
   },
   "verification": {
    "generatedByCode": true,
@@ -2142,7 +2142,7 @@
    },
    "seed": 9100,
    "pack_id": "c_derivative_sec_csc_cot_exact-s9100",
-   "explanation_en": "The correct answer is 4. $f'(x)=\\sec^{2}x$, and at $x=\\frac{\\pi}{3}$ this equals $4$.\n2 \\sqrt{3} is incorrect: Uses the derivative formula for $\\sec x$, namely $\\dfrac{d}{dx}\\left(\\sec x\\right)=\\sec x\\tan x$, instead of the one for $\\tan x$: $2 \\sqrt{3}$.\n-4 is incorrect: Uses the correct formula $\\sec^{2}x$ but with the opposite sign: $-4$.\n- \\frac{4}{3} is incorrect: Uses the derivative formula for $\\cot x$, namely $\\dfrac{d}{dx}\\left(\\cot x\\right)=-\\csc^{2}x$, instead of the one for $\\tan x$: $- \\frac{4}{3}$."
+   "explanation_en": "The correct answer is $4$. $f'(x)=\\sec^{2}x$, and at $x=\\frac{\\pi}{3}$ this equals $4$.\n$2 \\sqrt{3}$ is incorrect: Uses the derivative formula for $\\sec x$, namely $\\dfrac{d}{dx}\\left(\\sec x\\right)=\\sec x\\tan x$, instead of the one for $\\tan x$: $2 \\sqrt{3}$.\n$-4$ is incorrect: Uses the correct formula $\\sec^{2}x$ but with the opposite sign: $-4$.\n$- \\frac{4}{3}$ is incorrect: Uses the derivative formula for $\\cot x$, namely $\\dfrac{d}{dx}\\left(\\cot x\\right)=-\\csc^{2}x$, instead of the one for $\\tan x$: $- \\frac{4}{3}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -2300,7 +2300,7 @@
    },
    "seed": 9100,
    "pack_id": "c_distance_minus_displacement-s9100",
-   "explanation_en": "The correct answer is \\frac{64}{3}. The velocity is negative only for $1<t<5$. There the distance counts $-v$ while the displacement counts $v$, so the difference is $2\\int_{1}^{5}\\left(-v(t)\\right)dt=\\frac{64}{3}$.\n\\frac{32}{3} is incorrect: Reports only $\\int_{1}^{5}|v(t)|\\,dt=\\frac{32}{3}$, the distance traveled while the velocity is negative, which is half of the difference.\n- \\frac{32}{3} is incorrect: Reports the signed integral $\\int_{1}^{5}v(t)\\,dt=- \\frac{32}{3}$ over the interval where the velocity is negative.\n\\frac{7}{3} is incorrect: Reports the net displacement $\\int_0^{7}v(t)\\,dt=\\frac{7}{3}$ instead of the difference."
+   "explanation_en": "The correct answer is $\\frac{64}{3}$. The velocity is negative only for $1<t<5$. There the distance counts $-v$ while the displacement counts $v$, so the difference is $2\\int_{1}^{5}\\left(-v(t)\\right)dt=\\frac{64}{3}$.\n$\\frac{32}{3}$ is incorrect: Reports only $\\int_{1}^{5}|v(t)|\\,dt=\\frac{32}{3}$, the distance traveled while the velocity is negative, which is half of the difference.\n$- \\frac{32}{3}$ is incorrect: Reports the signed integral $\\int_{1}^{5}v(t)\\,dt=- \\frac{32}{3}$ over the interval where the velocity is negative.\n$\\frac{7}{3}$ is incorrect: Reports the net displacement $\\int_0^{7}v(t)\\,dt=\\frac{7}{3}$ instead of the difference."
   },
   "verification": {
    "generatedByCode": true,
@@ -2452,7 +2452,7 @@
    },
    "seed": 9100,
    "pack_id": "c_first_deriv_test_trig-s9100",
-   "explanation_en": "The correct answer is \\frac{2 \\pi}{3}. $f'(x)=0$ when $\\sin x=\\frac{\\sqrt{3}}{2}$, i.e. $x=\\frac{\\pi}{3}$ and $x=\\frac{2 \\pi}{3}$; $f'$ changes from positive to negative at $x=\\frac{2 \\pi}{3}$, so $f$ has a relative maximum there.\n\\frac{\\pi}{2} is incorrect: Gives $x=\\frac{\\pi}{2}$, where $f''(x)=0$ (an extreme value of $f'$), which is not where $f'$ changes sign.\n\\frac{4 \\pi}{3} is incorrect: Takes the wrong angle for $\\sin x=\\frac{\\sqrt{3}}{2}$: uses $x=\\frac{4 \\pi}{3}$, where $\\sin x=- \\frac{\\sqrt{3}}{2}$.\n\\frac{\\pi}{3} is incorrect: Gives the other zero of $f'$, which is the relative minimum: $f'$ changes from negative to positive there."
+   "explanation_en": "The correct answer is $\\frac{2 \\pi}{3}$. $f'(x)=0$ when $\\sin x=\\frac{\\sqrt{3}}{2}$, i.e. $x=\\frac{\\pi}{3}$ and $x=\\frac{2 \\pi}{3}$; $f'$ changes from positive to negative at $x=\\frac{2 \\pi}{3}$, so $f$ has a relative maximum there.\n$\\frac{\\pi}{2}$ is incorrect: Gives $x=\\frac{\\pi}{2}$, where $f''(x)=0$ (an extreme value of $f'$), which is not where $f'$ changes sign.\n$\\frac{4 \\pi}{3}$ is incorrect: Takes the wrong angle for $\\sin x=\\frac{\\sqrt{3}}{2}$: uses $x=\\frac{4 \\pi}{3}$, where $\\sin x=- \\frac{\\sqrt{3}}{2}$.\n$\\frac{\\pi}{3}$ is incorrect: Gives the other zero of $f'$, which is the relative minimum: $f'$ changes from negative to positive there."
   },
   "verification": {
    "generatedByCode": true,
@@ -2610,7 +2610,7 @@
    },
    "seed": 9100,
    "pack_id": "c_horizontal_asymptotes_exp_ratio-s9100",
-   "explanation_en": "The correct answer is - \\frac{2}{3}. As $x\\to\\infty$, $e^{x}\\to\\infty$ and $f(x)\\to\\dfrac{1}{3}=\\frac{1}{3}$. As $x\\to-\\infty$, $e^{x}\\to 0$ and $f(x)\\to\\dfrac{-3}{3}=-1$. So $L_1+L_2=- \\frac{2}{3}$.\n\\frac{1}{3} is incorrect: Finds only the asymptote as $x\\to\\infty$, $y=\\frac{1}{3}$, and forgets the one as $x\\to-\\infty$.\n-1 is incorrect: Finds only the asymptote as $x\\to-\\infty$, $y=-1$, and forgets the one as $x\\to\\infty$.\n\\frac{4}{3} is incorrect: Subtracts the two asymptote values, $\\frac{1}{3}$ and $-1$, instead of adding them."
+   "explanation_en": "The correct answer is $- \\frac{2}{3}$. As $x\\to\\infty$, $e^{x}\\to\\infty$ and $f(x)\\to\\dfrac{1}{3}=\\frac{1}{3}$. As $x\\to-\\infty$, $e^{x}\\to 0$ and $f(x)\\to\\dfrac{-3}{3}=-1$. So $L_1+L_2=- \\frac{2}{3}$.\n$\\frac{1}{3}$ is incorrect: Finds only the asymptote as $x\\to\\infty$, $y=\\frac{1}{3}$, and forgets the one as $x\\to-\\infty$.\n$-1$ is incorrect: Finds only the asymptote as $x\\to-\\infty$, $y=-1$, and forgets the one as $x\\to\\infty$.\n$\\frac{4}{3}$ is incorrect: Subtracts the two asymptote values, $\\frac{1}{3}$ and $-1$, instead of adding them."
   },
   "verification": {
    "generatedByCode": true,
@@ -2767,7 +2767,7 @@
    },
    "seed": 9100,
    "pack_id": "c_horizontal_tangent_poly_exp-s9100",
-   "explanation_en": "The correct answer is 1. By the product rule, $f'(x)=e^{x}\\left(x^{2} + x - 2\\right)=e^{x}(x-(-2))(x-(1))$. Since $e^{x}>0$, $f'(x)=0$ at $x=-2$ and $x=1$, and the positive one is $x=1$.\n\\frac{1}{2} + \\frac{\\sqrt{5}}{2} is incorrect: Sets $f(x)=0$, that is $x^{2}+(-1)x+(-1)=0$, instead of $f'(x)=0$; its positive solution is $\\frac{1}{2} + \\frac{\\sqrt{5}}{2}$.\n2 is incorrect: Factors $x^{2}+(1)x+(-2)$ with sign errors, taking the roots as the opposites of the true roots; the positive one is $x=2$.\n\\frac{1}{2} is incorrect: Differentiates only the polynomial factor and solves $2x+(-1)=0$, ignoring the product rule term from $e^{x}$: $x=\\frac{1}{2}$."
+   "explanation_en": "The correct answer is $1$. By the product rule, $f'(x)=e^{x}\\left(x^{2} + x - 2\\right)=e^{x}(x-(-2))(x-(1))$. Since $e^{x}>0$, $f'(x)=0$ at $x=-2$ and $x=1$, and the positive one is $x=1$.\n$\\frac{1}{2} + \\frac{\\sqrt{5}}{2}$ is incorrect: Sets $f(x)=0$, that is $x^{2}+(-1)x+(-1)=0$, instead of $f'(x)=0$; its positive solution is $\\frac{1}{2} + \\frac{\\sqrt{5}}{2}$.\n$2$ is incorrect: Factors $x^{2}+(1)x+(-2)$ with sign errors, taking the roots as the opposites of the true roots; the positive one is $x=2$.\n$\\frac{1}{2}$ is incorrect: Differentiates only the polynomial factor and solves $2x+(-1)=0$, ignoring the product rule term from $e^{x}$: $x=\\frac{1}{2}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -2925,7 +2925,7 @@
    },
    "seed": 9100,
    "pack_id": "c_implicit_cubic_horizontal_x-s9100",
-   "explanation_en": "The correct answer is 0. Differentiating implicitly, $2y\\frac{dy}{dx}=3x^{2}-12x$, so $\\frac{dy}{dx}=0$ needs $3x(x-4)=0$; $x=4$ gives $y^{2}=-27<0$ (no point), so only $x=0$ works, where $y^{2}=5$.\n1 is incorrect: Finds where $y=0$: at $x=1$ the curve has a vertical tangent, not a horizontal one.\n12 is incorrect: Drops the exponent factor $3$ when differentiating $x^{3}$, so the numerator becomes $x^{2}-12x=x(x-12)$ and the root $x=12$ appears.\n4 is incorrect: Solves $3x^{2}-12x=0$ but keeps $x=4$ too, where $y^{2}=-27<0$ so there is no point on the curve."
+   "explanation_en": "The correct answer is $0$. Differentiating implicitly, $2y\\frac{dy}{dx}=3x^{2}-12x$, so $\\frac{dy}{dx}=0$ needs $3x(x-4)=0$; $x=4$ gives $y^{2}=-27<0$ (no point), so only $x=0$ works, where $y^{2}=5$.\n$1$ is incorrect: Finds where $y=0$: at $x=1$ the curve has a vertical tangent, not a horizontal one.\n$12$ is incorrect: Drops the exponent factor $3$ when differentiating $x^{3}$, so the numerator becomes $x^{2}-12x=x(x-12)$ and the root $x=12$ appears.\n$4$ is incorrect: Solves $3x^{2}-12x=0$ but keeps $x=4$ too, where $y^{2}=-27<0$ so there is no point on the curve."
   },
   "verification": {
    "generatedByCode": true,
@@ -3082,7 +3082,7 @@
    },
    "seed": 9100,
    "pack_id": "c_implicit_tangent_line_eq-s9100",
-   "explanation_en": "The correct answer is y=\\frac{35}{4} - \\frac{9 x}{4}. Differentiating implicitly, $\\frac{dy}{dx}=-\\frac{F_x}{F_y}$; at $(3,2)$ this is $- \\frac{9}{4}$, so $y-2=- \\frac{9}{4}(x-3)$.\ny=2 - \\frac{9 x}{4} is incorrect: Finds the correct slope but writes the line as $y=mx+q$ with $q=2$, forgetting to subtract $mx_0$.\ny=\\frac{10}{3} - \\frac{4 x}{9} is incorrect: Uses the reciprocal of the correct slope.\ny=\\frac{9 x}{4} - \\frac{19}{4} is incorrect: Uses the opposite sign for the slope: $+\\frac{F_x}{F_y}$ instead of $-\\frac{F_x}{F_y}$."
+   "explanation_en": "The correct answer is $y=\\frac{35}{4} - \\frac{9 x}{4}$. Differentiating implicitly, $\\frac{dy}{dx}=-\\frac{F_x}{F_y}$; at $(3,2)$ this is $- \\frac{9}{4}$, so $y-2=- \\frac{9}{4}(x-3)$.\n$y=2 - \\frac{9 x}{4}$ is incorrect: Finds the correct slope but writes the line as $y=mx+q$ with $q=2$, forgetting to subtract $mx_0$.\n$y=\\frac{10}{3} - \\frac{4 x}{9}$ is incorrect: Uses the reciprocal of the correct slope.\n$y=\\frac{9 x}{4} - \\frac{19}{4}$ is incorrect: Uses the opposite sign for the slope: $+\\frac{F_x}{F_y}$ instead of $-\\frac{F_x}{F_y}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -3240,7 +3240,7 @@
    },
    "seed": 9100,
    "pack_id": "c_inverse_deriv_formula-s9100",
-   "explanation_en": "The correct answer is \\frac{1}{13}. Since $f(2)=10$, $g(10)=2$, and $g'(10)=\\frac{1}{f'(g(10))}=\\frac{1}{f'(2)}=\\frac{1}{13}$.\n- \\frac{1}{13} is incorrect: Uses the negative reciprocal $-\\frac{1}{f'(2)}$.\n\\frac{1}{10} is incorrect: Uses $\\frac{1}{f(2)}=\\frac{1}{10}$, the reciprocal of the function value instead of the derivative.\n\\frac{1}{301} is incorrect: Evaluates the derivative at the wrong place: $\\frac{1}{f'(10)}$ instead of $\\frac{1}{f'(2)}$."
+   "explanation_en": "The correct answer is $\\frac{1}{13}$. Since $f(2)=10$, $g(10)=2$, and $g'(10)=\\frac{1}{f'(g(10))}=\\frac{1}{f'(2)}=\\frac{1}{13}$.\n$- \\frac{1}{13}$ is incorrect: Uses the negative reciprocal $-\\frac{1}{f'(2)}$.\n$\\frac{1}{10}$ is incorrect: Uses $\\frac{1}{f(2)}=\\frac{1}{10}$, the reciprocal of the function value instead of the derivative.\n$\\frac{1}{301}$ is incorrect: Evaluates the derivative at the wrong place: $\\frac{1}{f'(10)}$ instead of $\\frac{1}{f'(2)}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -3392,7 +3392,7 @@
    },
    "seed": 9100,
    "pack_id": "c_ivt_root_interval_polynomial-s9100",
-   "explanation_en": "The correct answer is [-2,-1]. $f(-2)=-5$ and $f(-1)=3$ have opposite signs, so $0$ is between them and, since $f$ is continuous, there is a zero in $(-2,-1)$.\n[-3,-2] is incorrect: $f(-3)=-27$ and $f(-2)=-5$ are both negative, so $0$ is not between them and the Intermediate Value Theorem guarantees no zero here.\n[-1,0] is incorrect: $f(-1)=3$ and $f(0)=3$ are both positive, so $0$ is not between them and the Intermediate Value Theorem guarantees no zero here.\n[2,3] is incorrect: $f(2)=3$ and $f(3)=15$ are both positive, so $0$ is not between them and the Intermediate Value Theorem guarantees no zero here."
+   "explanation_en": "The correct answer is $[-2,-1]$. $f(-2)=-5$ and $f(-1)=3$ have opposite signs, so $0$ is between them and, since $f$ is continuous, there is a zero in $(-2,-1)$.\n$[-3,-2]$ is incorrect: $f(-3)=-27$ and $f(-2)=-5$ are both negative, so $0$ is not between them and the Intermediate Value Theorem guarantees no zero here.\n$[-1,0]$ is incorrect: $f(-1)=3$ and $f(0)=3$ are both positive, so $0$ is not between them and the Intermediate Value Theorem guarantees no zero here.\n$[2,3]$ is incorrect: $f(2)=3$ and $f(3)=15$ are both positive, so $0$ is not between them and the Intermediate Value Theorem guarantees no zero here."
   },
   "verification": {
    "generatedByCode": true,
@@ -3549,7 +3549,7 @@
    },
    "seed": 9100,
    "pack_id": "c_lhopital_twice_zero-s9100",
-   "explanation_en": "The correct answer is 2. The limit has the form $\\frac{0}{0}$. One application of L’Hospital’s Rule gives $\\frac{2\\sin(2x)}{2x}$, still $\\frac{0}{0}$; a second application gives $\\frac{2^{2}\\cos(2x)}{2}$, so the limit is $2$.\n0 is incorrect: Substitutes $x=0$ into the numerator only, which is $0$, and concludes the limit is $0$.\n8 is incorrect: Treats the factor $2$ in the denominator as a factor of the numerator, giving $2\\cdot 2^{2}$.\n1 is incorrect: Omits one factor of $2$ when differentiating $2\\sin(2x)$ the second time, getting $\\frac{2\\cos(2x)}{2}$."
+   "explanation_en": "The correct answer is $2$. The limit has the form $\\frac{0}{0}$. One application of L’Hospital’s Rule gives $\\frac{2\\sin(2x)}{2x}$, still $\\frac{0}{0}$; a second application gives $\\frac{2^{2}\\cos(2x)}{2}$, so the limit is $2$.\n$0$ is incorrect: Substitutes $x=0$ into the numerator only, which is $0$, and concludes the limit is $0$.\n$8$ is incorrect: Treats the factor $2$ in the denominator as a factor of the numerator, giving $2\\cdot 2^{2}$.\n$1$ is incorrect: Omits one factor of $2$ when differentiating $2\\sin(2x)$ the second time, getting $\\frac{2\\cos(2x)}{2}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -3706,7 +3706,7 @@
    },
    "seed": 9100,
    "pack_id": "c_lim_neg_inf_radical-s9100",
-   "explanation_en": "The correct answer is - \\frac{7}{2}. For $x<0$, $\\sqrt{4x^{2}+2}\\approx 2|x|=-2x$, so the quotient behaves like $\\dfrac{7x}{-2x}=- \\frac{7}{2}$ as $x\\to-\\infty$.\n0 is incorrect: Compares the power $1$ in the numerator with the power $2$ under the radical as if the denominator had degree $2$, which gives $0$.\n- \\frac{7}{4} is incorrect: Divides by $4$ instead of by $\\sqrt{4}=2$, forgetting to take the square root of the coefficient under the radical.\n\\frac{7}{2} is incorrect: Uses $\\sqrt{x^{2}}=x$, but for $x<0$ we have $\\sqrt{x^{2}}=|x|=-x$, so the sign is lost and the result is $\\frac{7}{2}$."
+   "explanation_en": "The correct answer is $- \\frac{7}{2}$. For $x<0$, $\\sqrt{4x^{2}+2}\\approx 2|x|=-2x$, so the quotient behaves like $\\dfrac{7x}{-2x}=- \\frac{7}{2}$ as $x\\to-\\infty$.\n$0$ is incorrect: Compares the power $1$ in the numerator with the power $2$ under the radical as if the denominator had degree $2$, which gives $0$.\n$- \\frac{7}{4}$ is incorrect: Divides by $4$ instead of by $\\sqrt{4}=2$, forgetting to take the square root of the coefficient under the radical.\n$\\frac{7}{2}$ is incorrect: Uses $\\sqrt{x^{2}}=x$, but for $x<0$ we have $\\sqrt{x^{2}}=|x|=-x$, so the sign is lost and the result is $\\frac{7}{2}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -3866,7 +3866,7 @@
    },
    "seed": 9100,
    "pack_id": "c_limit_laws_from_given_limits-s9100",
-   "explanation_en": "The correct answer is -3. By the limit laws, the numerator tends to $(-1)^{2}-2(2)=-3$ and the denominator to $-1+(2)=1$, which is not zero, so the limit is $-3$.\n1 is incorrect: Uses $\\lim(f(x)-g(x))=-3$ in the denominator instead of $\\lim(f(x)+g(x))=1$: $1$.\n-6 is incorrect: Replaces $\\lim f(x)^{2}$ by $2\\cdot -1=-2$ instead of $(-1)^{2}=1$: $-6$.\n5 is incorrect: Adds $k\\lim g(x)$ instead of subtracting it: $\\dfrac{1+4}{1}=5$."
+   "explanation_en": "The correct answer is $-3$. By the limit laws, the numerator tends to $(-1)^{2}-2(2)=-3$ and the denominator to $-1+(2)=1$, which is not zero, so the limit is $-3$.\n$1$ is incorrect: Uses $\\lim(f(x)-g(x))=-3$ in the denominator instead of $\\lim(f(x)+g(x))=1$: $1$.\n$-6$ is incorrect: Replaces $\\lim f(x)^{2}$ by $2\\cdot -1=-2$ instead of $(-1)^{2}=1$: $-6$.\n$5$ is incorrect: Adds $k\\lim g(x)$ instead of subtracting it: $\\dfrac{1+4}{1}=5$."
   },
   "verification": {
    "generatedByCode": true,
@@ -4027,7 +4027,7 @@
    },
    "seed": 9100,
    "pack_id": "c_limit_two_point_difference_quotient-s9100",
-   "explanation_en": "The correct answer is -4. Write $f(2+3h)-f(2-1h)=[f(2+3h)-f(2)]+[f(2)-f(2-1h)]$. The first bracket over $h$ tends to $3f'(2)$ and the second to $1f'(2)$, so the limit is $(3+1)f'(2)=-4$.\n-1 is incorrect: Treats the limit as $f'(2)=-1$, ignoring the factors $3$ and $1$ multiplying $h$.\n-2 is incorrect: Subtracts the factors, $(3-1)f'(2)=-2$, instead of adding them (the second term has $-1h$ inside and a minus in front).\n-3 is incorrect: Counts only the term $f(2+3h)$ and treats the second as a constant, giving $3f'(2)=-3$."
+   "explanation_en": "The correct answer is $-4$. Write $f(2+3h)-f(2-1h)=[f(2+3h)-f(2)]+[f(2)-f(2-1h)]$. The first bracket over $h$ tends to $3f'(2)$ and the second to $1f'(2)$, so the limit is $(3+1)f'(2)=-4$.\n$-1$ is incorrect: Treats the limit as $f'(2)=-1$, ignoring the factors $3$ and $1$ multiplying $h$.\n$-2$ is incorrect: Subtracts the factors, $(3-1)f'(2)=-2$, instead of adding them (the second term has $-1h$ inside and a minus in front).\n$-3$ is incorrect: Counts only the term $f(2+3h)$ and treats the second as a constant, giving $3f'(2)=-3$."
   },
   "verification": {
    "generatedByCode": true,
@@ -4186,7 +4186,7 @@
    },
    "seed": 9100,
    "pack_id": "c_mvt_hypotheses-s9100",
-   "explanation_en": "The correct answer is f(x)=|x-1| on [1,4]. On $[1,4]$ the function equals $x-1$, which is continuous on the closed interval and differentiable on the open interval; the corner of the graph of $|x-1|$ at $x=1$ lies at an endpoint, so it does not matter.\nf(x)=(x-1)^{2/3} on [0,3] is incorrect: Is continuous but not differentiable at $x=1$, where the tangent line is vertical.\nf(x)=\\frac{1}{x-1} on [0,3] is incorrect: Is not continuous on the interval: it is undefined at $x=1$, where there is a vertical asymptote.\nf(x)=\\tan x on [0,\\pi] is incorrect: Is not continuous on $[0,\\pi]$: it has a vertical asymptote at $x=\\frac{\\pi}{2}$."
+   "explanation_en": "The correct answer is $f(x)=|x-1|$ on $[1,4]$. On $[1,4]$ the function equals $x-1$, which is continuous on the closed interval and differentiable on the open interval; the corner of the graph of $|x-1|$ at $x=1$ lies at an endpoint, so it does not matter.\n$f(x)=(x-1)^{2/3}$ on $[0,3]$ is incorrect: Is continuous but not differentiable at $x=1$, where the tangent line is vertical.\n$f(x)=\\frac{1}{x-1}$ on $[0,3]$ is incorrect: Is not continuous on the interval: it is undefined at $x=1$, where there is a vertical asymptote.\n$f(x)=\\tan x$ on $[0,\\pi]$ is incorrect: Is not continuous on $[0,\\pi]$: it has a vertical asymptote at $x=\\frac{\\pi}{2}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -4345,7 +4345,7 @@
    },
    "seed": 9100,
    "pack_id": "c_mvt_must_be_true-s9100",
-   "explanation_en": "The correct answer is There is a number c in (0,4) with f'(c)=\\frac{1}{2}.. $f$ is continuous on $[0,4]$ and differentiable on $(0,4)$, so by the Mean Value Theorem $f'(c)=\\frac{f(4)-f(0)}{4-0}=\\frac{3-1}{4}=\\frac{1}{2}$ for some $c$.\nThere is a number c in (0,4) with f'(c)=- \\frac{1}{2}. is incorrect: Subtracts in the wrong order: the average rate of change is $\\frac{f(4)-f(0)}{4-0}=\\frac{1}{2}$, not its opposite.\nThere is a number c in [0,4] with f(c)=\\frac{1}{2}. is incorrect: Confuses the average rate of change with a function value; $\\frac{1}{2}$ is not between $f(0)=1$ and $f(4)=3$, so nothing guarantees such a $c$.\nf'(x)=\\frac{1}{2} for every x in (0,4). is incorrect: The theorem gives at least one such point, not every point; for a function that is not linear, $f'$ varies."
+   "explanation_en": "The correct answer is There is a number $c$ in $(0,4)$ with $f'(c)=\\frac{1}{2}$.. $f$ is continuous on $[0,4]$ and differentiable on $(0,4)$, so by the Mean Value Theorem $f'(c)=\\frac{f(4)-f(0)}{4-0}=\\frac{3-1}{4}=\\frac{1}{2}$ for some $c$.\nThere is a number $c$ in $(0,4)$ with $f'(c)=- \\frac{1}{2}$. is incorrect: Subtracts in the wrong order: the average rate of change is $\\frac{f(4)-f(0)}{4-0}=\\frac{1}{2}$, not its opposite.\nThere is a number $c$ in $[0,4]$ with $f(c)=\\frac{1}{2}$. is incorrect: Confuses the average rate of change with a function value; $\\frac{1}{2}$ is not between $f(0)=1$ and $f(4)=3$, so nothing guarantees such a $c$.\n$f'(x)=\\frac{1}{2}$ for every $x$ in $(0,4)$. is incorrect: The theorem gives at least one such point, not every point; for a function that is not linear, $f'$ varies."
   },
   "verification": {
    "generatedByCode": true,
@@ -4503,7 +4503,7 @@
    },
    "seed": 9100,
    "pack_id": "c_normal_slope_power_ln-s9100",
-   "explanation_en": "The correct answer is - \\frac{1}{3 e}. By the product rule, $f'(x)=2x^{1}\\ln x+x^{1}$, so $f'(e)=3 e$. The normal line is perpendicular to the tangent, so its slope is the negative reciprocal, $- \\frac{1}{3 e}$.\n- 3 e is incorrect: Uses the opposite $-f'(e)=- 3 e$ instead of the negative reciprocal.\n- \\frac{1}{e} is incorrect: Differentiates only $\\ln x$ in the product, giving $f'(e)=e^{2}\\cdot\\dfrac{1}{e}=e$ and normal slope $- \\frac{1}{e}$.\n3 e is incorrect: Reports the slope of the tangent line, $f'(e)=3 e$, instead of the slope of the normal line."
+   "explanation_en": "The correct answer is $- \\frac{1}{3 e}$. By the product rule, $f'(x)=2x^{1}\\ln x+x^{1}$, so $f'(e)=3 e$. The normal line is perpendicular to the tangent, so its slope is the negative reciprocal, $- \\frac{1}{3 e}$.\n$- 3 e$ is incorrect: Uses the opposite $-f'(e)=- 3 e$ instead of the negative reciprocal.\n$- \\frac{1}{e}$ is incorrect: Differentiates only $\\ln x$ in the product, giving $f'(e)=e^{2}\\cdot\\dfrac{1}{e}=e$ and normal slope $- \\frac{1}{e}$.\n$3 e$ is incorrect: Reports the slope of the tangent line, $f'(e)=3 e$, instead of the slope of the normal line."
   },
   "verification": {
    "generatedByCode": true,
@@ -4660,7 +4660,7 @@
    },
    "seed": 9100,
    "pack_id": "c_one_sided_abs_quotient-s9100",
-   "explanation_en": "The correct answer is \\frac{1}{4}. For $x$ greater than $2$, $|x-2|=x-2$, so the quotient equals $\\dfrac{(x-2)}{(x-2)(x+2)}=\\dfrac{1}{x+2}$, which approaches $\\frac{1}{4}$.\n\\frac{1}{2} is incorrect: Cancels correctly but replaces $x+2$ by $2$ instead of $4$, giving $\\frac{1}{2}$.\n1 is incorrect: Cancels $|x-2|$ against $x-2$ to get only the sign $1$ and drops the factor $x+2$ of the denominator entirely, giving $1$.\n- \\frac{1}{4} is incorrect: Uses $|x-2|=x-2$ on the wrong side of $x=2$, so the sign of the answer is reversed: $- \\frac{1}{4}$."
+   "explanation_en": "The correct answer is $\\frac{1}{4}$. For $x$ greater than $2$, $|x-2|=x-2$, so the quotient equals $\\dfrac{(x-2)}{(x-2)(x+2)}=\\dfrac{1}{x+2}$, which approaches $\\frac{1}{4}$.\n$\\frac{1}{2}$ is incorrect: Cancels correctly but replaces $x+2$ by $2$ instead of $4$, giving $\\frac{1}{2}$.\n$1$ is incorrect: Cancels $|x-2|$ against $x-2$ to get only the sign $1$ and drops the factor $x+2$ of the denominator entirely, giving $1$.\n$- \\frac{1}{4}$ is incorrect: Uses $|x-2|=x-2$ on the wrong side of $x=2$, so the sign of the answer is reversed: $- \\frac{1}{4}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -4820,7 +4820,7 @@
    },
    "seed": 9100,
    "pack_id": "c_piecewise_differentiable_two_constants-s9100",
-   "explanation_en": "The correct answer is -9. Differentiable at $x=3$ requires continuity and equal slopes. Continuity: $9a+3b=-15$. Slopes: $6a+b=1$. Solving gives $a=2$ and $b=-11$, so $a+b=-9$.\n2 is incorrect: Finds $a=2$ correctly but reports $a$ instead of $a+b$.\n11 is incorrect: Writes the value of the right piece at $x=3$ as $3-(-18)$, with the wrong sign on the constant, which gives $a+b=11$.\n\\frac{5}{3} is incorrect: Sets the left slope $2a(3)+b$ equal to the value $-15$ of the right piece at $x=3$ instead of its slope $1$, which gives $a+b=\\frac{5}{3}$."
+   "explanation_en": "The correct answer is $-9$. Differentiable at $x=3$ requires continuity and equal slopes. Continuity: $9a+3b=-15$. Slopes: $6a+b=1$. Solving gives $a=2$ and $b=-11$, so $a+b=-9$.\n$2$ is incorrect: Finds $a=2$ correctly but reports $a$ instead of $a+b$.\n$11$ is incorrect: Writes the value of the right piece at $x=3$ as $3-(-18)$, with the wrong sign on the constant, which gives $a+b=11$.\n$\\frac{5}{3}$ is incorrect: Sets the left slope $2a(3)+b$ equal to the value $-15$ of the right piece at $x=3$ instead of its slope $1$, which gives $a+b=\\frac{5}{3}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -4981,7 +4981,7 @@
    },
    "seed": 9100,
    "pack_id": "c_position_from_velocity-s9100",
-   "explanation_en": "The correct answer is 4. The position is the initial position plus the net change: $2+\\int_0^{\\frac{5 \\pi}{2}}2 \\cos{\\left(t \\right)}\\,dt=2+2=4$.\n0 is incorrect: Subtracts the net displacement from the initial position instead of adding it.\n2 is incorrect: Reports the net displacement $2$ and forgets the initial position $2$.\n12 is incorrect: Uses the total distance traveled, $10$, in place of the net displacement, so the result is $2+10$."
+   "explanation_en": "The correct answer is $4$. The position is the initial position plus the net change: $2+\\int_0^{\\frac{5 \\pi}{2}}2 \\cos{\\left(t \\right)}\\,dt=2+2=4$.\n$0$ is incorrect: Subtracts the net displacement from the initial position instead of adding it.\n$2$ is incorrect: Reports the net displacement $2$ and forgets the initial position $2$.\n$12$ is incorrect: Uses the total distance traveled, $10$, in place of the net displacement, so the result is $2+10$."
   },
   "verification": {
    "generatedByCode": true,
@@ -5141,7 +5141,7 @@
    },
    "seed": 9100,
    "pack_id": "c_product_power_times_unknown_function-s9100",
-   "explanation_en": "The correct answer is 12. By the product rule, $f'(x)=2x^{1}g(x)+x^{2}g'(x)$. At $x=3$: $6\\cdot(-1)+9\\cdot(2)=12$.\n18 is incorrect: Keeps only $x^{2}g'(x)$, which is $9\\cdot(2)=18$, and drops the term from differentiating the power.\n-6 is incorrect: Keeps only $(x^{2})'g(x)$, which is $6\\cdot(-1)=-6$, and drops the term from differentiating $g$.\n3 is incorrect: Attaches the derivatives to the wrong factors: $x^{2}g(x)+(x^{2})'g'(x)$ at $x=3$ equals $3$."
+   "explanation_en": "The correct answer is $12$. By the product rule, $f'(x)=2x^{1}g(x)+x^{2}g'(x)$. At $x=3$: $6\\cdot(-1)+9\\cdot(2)=12$.\n$18$ is incorrect: Keeps only $x^{2}g'(x)$, which is $9\\cdot(2)=18$, and drops the term from differentiating the power.\n$-6$ is incorrect: Keeps only $(x^{2})'g(x)$, which is $6\\cdot(-1)=-6$, and drops the term from differentiating $g$.\n$3$ is incorrect: Attaches the derivatives to the wrong factors: $x^{2}g(x)+(x^{2})'g'(x)$ at $x=3$ equals $3$."
   },
   "verification": {
    "generatedByCode": true,
@@ -5300,7 +5300,7 @@
    },
    "seed": 9100,
    "pack_id": "c_product_sqrt_chain_value-s9100",
-   "explanation_en": "The correct answer is \\frac{34}{5}. By the product and chain rules, $f'(x)=\\sqrt{x^{2}+16}+\\frac{x^{2}}{\\sqrt{x^{2}+16}}$; at $x=3$ we have $\\sqrt{x^{2}+16}=5$, so $f'(3)=5+\\frac{9}{5}=\\frac{34}{5}$.\n\\frac{53}{10} is incorrect: Forgets the factor $2x$ from the chain rule: uses $\\frac{1}{2\\sqrt{x^{2}+16}}$ for the derivative of the square root.\n\\frac{43}{5} is incorrect: Drops the $\\frac{1}{2}$ from the derivative of the square root, using $\\frac{2x}{\\sqrt{x^{2}+16}}$.\n\\frac{3}{5} is incorrect: Differentiates the product factor by factor: $1\\cdot\\frac{x}{\\sqrt{x^{2}+16}}$."
+   "explanation_en": "The correct answer is $\\frac{34}{5}$. By the product and chain rules, $f'(x)=\\sqrt{x^{2}+16}+\\frac{x^{2}}{\\sqrt{x^{2}+16}}$; at $x=3$ we have $\\sqrt{x^{2}+16}=5$, so $f'(3)=5+\\frac{9}{5}=\\frac{34}{5}$.\n$\\frac{53}{10}$ is incorrect: Forgets the factor $2x$ from the chain rule: uses $\\frac{1}{2\\sqrt{x^{2}+16}}$ for the derivative of the square root.\n$\\frac{43}{5}$ is incorrect: Drops the $\\frac{1}{2}$ from the derivative of the square root, using $\\frac{2x}{\\sqrt{x^{2}+16}}$.\n$\\frac{3}{5}$ is incorrect: Differentiates the product factor by factor: $1\\cdot\\frac{x}{\\sqrt{x^{2}+16}}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -5458,7 +5458,7 @@
    },
    "seed": 9100,
    "pack_id": "c_quotient_rule_trig_exp_value-s9100",
-   "explanation_en": "The correct answer is - \\frac{4}{\\pi^{2}}. By the quotient rule, $f'(x)=\\dfrac{(\\cos{\\left(x \\right)})(x)-(\\sin{\\left(x \\right)})(1)}{(x)^{2}}$; evaluating at $x=\\frac{\\pi}{2}$ gives $- \\frac{4}{\\pi^{2}}$.\n\\frac{4}{\\pi^{2}} is incorrect: Reverses the numerator of the quotient rule, using $\\dfrac{ND'-N'D}{D^{2}}$ and so reversing the sign: $\\frac{4}{\\pi^{2}}$.\n- \\frac{2}{\\pi} is incorrect: Uses the correct numerator but divides by $D$ instead of $D^{2}$: $- \\frac{2}{\\pi}$.\n0 is incorrect: Divides the derivatives, $\\dfrac{N'}{D'}$ with $N=\\sin{\\left(x \\right)}$ and $D=x$, instead of using the quotient rule: $0$."
+   "explanation_en": "The correct answer is $- \\frac{4}{\\pi^{2}}$. By the quotient rule, $f'(x)=\\dfrac{(\\cos{\\left(x \\right)})(x)-(\\sin{\\left(x \\right)})(1)}{(x)^{2}}$; evaluating at $x=\\frac{\\pi}{2}$ gives $- \\frac{4}{\\pi^{2}}$.\n$\\frac{4}{\\pi^{2}}$ is incorrect: Reverses the numerator of the quotient rule, using $\\dfrac{ND'-N'D}{D^{2}}$ and so reversing the sign: $\\frac{4}{\\pi^{2}}$.\n$- \\frac{2}{\\pi}$ is incorrect: Uses the correct numerator but divides by $D$ instead of $D^{2}$: $- \\frac{2}{\\pi}$.\n$0$ is incorrect: Divides the derivatives, $\\dfrac{N'}{D'}$ with $N=\\sin{\\left(x \\right)}$ and $D=x$, instead of using the quotient rule: $0$."
   },
   "verification": {
    "generatedByCode": true,
@@ -5616,7 +5616,7 @@
    },
    "seed": 9100,
    "pack_id": "c_related_rates_ladder-s9100",
-   "explanation_en": "The correct answer is - \\frac{5}{3}. With $x^{2}+y^{2}=169$, $2x\\frac{dx}{dt}+2y\\frac{dy}{dt}=0$; at $x=5$ we have $y=12$, so $\\frac{dy}{dt}=-\\frac{5}{12}\\cdot 4=- \\frac{5}{3}$.\n- \\frac{48}{5} is incorrect: Inverts the ratio: $-\\frac{y}{x}\\cdot\\frac{dx}{dt}$.\n-4 is incorrect: Assumes the top slides down at the same rate as the bottom slides out.\n\\frac{5}{3} is incorrect: Gives the speed instead of the rate of change: the top moves down, so the rate is negative."
+   "explanation_en": "The correct answer is $- \\frac{5}{3}$. With $x^{2}+y^{2}=169$, $2x\\frac{dx}{dt}+2y\\frac{dy}{dt}=0$; at $x=5$ we have $y=12$, so $\\frac{dy}{dt}=-\\frac{5}{12}\\cdot 4=- \\frac{5}{3}$.\n$- \\frac{48}{5}$ is incorrect: Inverts the ratio: $-\\frac{y}{x}\\cdot\\frac{dx}{dt}$.\n$-4$ is incorrect: Assumes the top slides down at the same rate as the bottom slides out.\n$\\frac{5}{3}$ is incorrect: Gives the speed instead of the rate of change: the top moves down, so the rate is negative."
   },
   "verification": {
    "generatedByCode": true,
@@ -5777,7 +5777,7 @@
    },
    "seed": 9100,
    "pack_id": "c_rewrite_then_differentiate_root_denominator-s9100",
-   "explanation_en": "The correct answer is \\frac{13}{3}. Rewrite $f(x)=x^{\\frac{3}{2}} - \\sqrt{x}$ using exponents, then apply the power rule: $f'(x)=\\frac{3 \\sqrt{x}}{2} - \\frac{1}{2 \\sqrt{x}}$. At $x=9$ this equals $\\frac{13}{3}$.\n102 is incorrect: Divides the derivative of the numerator by the derivative of the denominator, $\\dfrac{N'}{(\\sqrt{x})'}$, instead of differentiating the simplified expression: $102$.\n\\frac{17}{3} is incorrect: Differentiates only the numerator and keeps the denominator $\\sqrt{x}$ unchanged: $\\frac{17}{3}$.\n63 is incorrect: Treats division by $\\sqrt{x}$ as if it added $\\frac{1}{2}$ to each exponent instead of subtracting it, and differentiates the result: $63$."
+   "explanation_en": "The correct answer is $\\frac{13}{3}$. Rewrite $f(x)=x^{\\frac{3}{2}} - \\sqrt{x}$ using exponents, then apply the power rule: $f'(x)=\\frac{3 \\sqrt{x}}{2} - \\frac{1}{2 \\sqrt{x}}$. At $x=9$ this equals $\\frac{13}{3}$.\n$102$ is incorrect: Divides the derivative of the numerator by the derivative of the denominator, $\\dfrac{N'}{(\\sqrt{x})'}$, instead of differentiating the simplified expression: $102$.\n$\\frac{17}{3}$ is incorrect: Differentiates only the numerator and keeps the denominator $\\sqrt{x}$ unchanged: $\\frac{17}{3}$.\n$63$ is incorrect: Treats division by $\\sqrt{x}$ as if it added $\\frac{1}{2}$ to each exponent instead of subtracting it, and differentiates the result: $63$."
   },
   "verification": {
    "generatedByCode": true,
@@ -5937,7 +5937,7 @@
    },
    "seed": 9100,
    "pack_id": "c_roc_meaning_polynomial-s9100",
-   "explanation_en": "The correct answer is At time t=4 hours, the amount of fuel in a tank is increasing at a rate of 12 gallons per hour.. $F'(t)=20-2t$, so $F'(4)=12$: the derivative gives the instantaneous rate of change, in gallons per hour, and its sign shows the amount is increasing.\nAt time t=4 hours, there are 214 gallons of fuel in a tank. is incorrect: Reads $F'(4)$ as the amount $F(4)=214$ itself, not as a rate.\nDuring the first 4 hours, the amount of fuel in a tank increased by an average of 16 gallons per hour. is incorrect: Gives the average rate over $[0,4]$, which is $\\frac{F(4)-F(0)}{4}=16$, not the instantaneous rate.\nAt time t=4 hours, the amount of fuel in a tank is decreasing at a rate of 12 gallons per hour. is incorrect: Reads the sign of $F'(4)=12$ backwards."
+   "explanation_en": "The correct answer is At time $t=4$ hours, the amount of fuel in a tank is increasing at a rate of $12$ gallons per hour.. $F'(t)=20-2t$, so $F'(4)=12$: the derivative gives the instantaneous rate of change, in gallons per hour, and its sign shows the amount is increasing.\nAt time $t=4$ hours, there are $214$ gallons of fuel in a tank. is incorrect: Reads $F'(4)$ as the amount $F(4)=214$ itself, not as a rate.\nDuring the first $4$ hours, the amount of fuel in a tank increased by an average of $16$ gallons per hour. is incorrect: Gives the average rate over $[0,4]$, which is $\\frac{F(4)-F(0)}{4}=16$, not the instantaneous rate.\nAt time $t=4$ hours, the amount of fuel in a tank is decreasing at a rate of $12$ gallons per hour. is incorrect: Reads the sign of $F'(4)=12$ backwards."
   },
   "verification": {
    "generatedByCode": true,
@@ -6094,7 +6094,7 @@
    },
    "seed": 9100,
    "pack_id": "c_second_deriv_product_exp-s9100",
-   "explanation_en": "The correct answer is 6 e. $f'(x)=(1+2x)e^{2x}$ and $f''(x)=(4+2^{2}x)e^{2x}$; at $x=\\frac{1}{2}$ this is $6 e$.\n2 e is incorrect: Stops after the first derivative and reports $f'\\left(\\frac{1}{2}\\right)$.\n6 is incorrect: Drops the exponential factor: evaluates $4+2^{2}x$ without the factor $e^{2x}$.\n\\frac{5 e}{2} is incorrect: Treats the derivative of $e^{2x}$ as $e^{2x}$ (no factor $2$) in both derivatives, which gives $(2+x)e^{2x}$."
+   "explanation_en": "The correct answer is $6 e$. $f'(x)=(1+2x)e^{2x}$ and $f''(x)=(4+2^{2}x)e^{2x}$; at $x=\\frac{1}{2}$ this is $6 e$.\n$2 e$ is incorrect: Stops after the first derivative and reports $f'\\left(\\frac{1}{2}\\right)$.\n$6$ is incorrect: Drops the exponential factor: evaluates $4+2^{2}x$ without the factor $e^{2x}$.\n$\\frac{5 e}{2}$ is incorrect: Treats the derivative of $e^{2x}$ as $e^{2x}$ (no factor $2$) in both derivatives, which gives $(2+x)e^{2x}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -6249,7 +6249,7 @@
    },
    "seed": 9100,
    "pack_id": "c_second_deriv_test_quartic-s9100",
-   "explanation_en": "The correct answer is f has no relative extremum at x=0 and a relative minimum at x=3.. $f'(x)=4x^{2}(x-3)$ and $f''(x)=12x(x-2)$. At $x=3$, $f''>0$ so $f$ has a relative minimum. At $x=0$, $f''(0)=0$ so the test fails, and $f'<0$ on both sides, so there is no extremum.\nf has a relative maximum at x=0 and a relative minimum at x=3. is incorrect: Calls $x=0$ a relative maximum because $f''<0$ on $(0,2)$, but $f'(x)<0$ on both sides of $0$, so there is no extremum there.\nf has a relative minimum at x=0 and a relative maximum at x=3. is incorrect: Reads $f''(0)=0$ as positive (a minimum) and $f''(3)=36>0$ as concave down (a maximum), reversing the conclusion at $x=3$.\nf has a relative minimum at x=0 and a relative minimum at x=3. is incorrect: Concludes from $f''(0)=0$ that $x=0$ is a relative minimum as well; the Second Derivative Test gives no information there, and $f'$ does not change sign at $0$."
+   "explanation_en": "The correct answer is $f$ has no relative extremum at $x=0$ and a relative minimum at $x=3$.. $f'(x)=4x^{2}(x-3)$ and $f''(x)=12x(x-2)$. At $x=3$, $f''>0$ so $f$ has a relative minimum. At $x=0$, $f''(0)=0$ so the test fails, and $f'<0$ on both sides, so there is no extremum.\n$f$ has a relative maximum at $x=0$ and a relative minimum at $x=3$. is incorrect: Calls $x=0$ a relative maximum because $f''<0$ on $(0,2)$, but $f'(x)<0$ on both sides of $0$, so there is no extremum there.\n$f$ has a relative minimum at $x=0$ and a relative maximum at $x=3$. is incorrect: Reads $f''(0)=0$ as positive (a minimum) and $f''(3)=36>0$ as concave down (a maximum), reversing the conclusion at $x=3$.\n$f$ has a relative minimum at $x=0$ and a relative minimum at $x=3$. is incorrect: Concludes from $f''(0)=0$ that $x=0$ is a relative minimum as well; the Second Derivative Test gives no information there, and $f'$ does not change sign at $0$."
   },
   "verification": {
    "generatedByCode": true,
@@ -6405,7 +6405,7 @@
    },
    "seed": 9100,
    "pack_id": "c_sigma_to_integral-s9100",
-   "explanation_en": "The correct answer is \\displaystyle\\int_{2}^{6} x^{2}\\,dx. The width of each subinterval is $\\frac{4}{n}$ and the sample points are $x_k=2+\\frac{4k}{n}$, so the sum is a right Riemann sum for $x^{2}$ on $[2,6]$.\n4\\displaystyle\\int_{2}^{6} x^{2}\\,dx is incorrect: Treats the width $\\frac{4}{n}$ as part of the function and multiplies the integrand by $4$ again.\n\\displaystyle\\int_{0}^{1} \\left(4 x + 2\\right)^{2}\\,dx is incorrect: Rescales to $[0,1]$ but forgets that the width $\\frac{4}{n}$ gives an extra factor $4$.\n\\displaystyle\\int_{0}^{4} x^{2}\\,dx is incorrect: Ignores the starting point $2$ and uses the interval $[0,4]$."
+   "explanation_en": "The correct answer is $\\displaystyle\\int_{2}^{6} x^{2}\\,dx$. The width of each subinterval is $\\frac{4}{n}$ and the sample points are $x_k=2+\\frac{4k}{n}$, so the sum is a right Riemann sum for $x^{2}$ on $[2,6]$.\n$4\\displaystyle\\int_{2}^{6} x^{2}\\,dx$ is incorrect: Treats the width $\\frac{4}{n}$ as part of the function and multiplies the integrand by $4$ again.\n$\\displaystyle\\int_{0}^{1} \\left(4 x + 2\\right)^{2}\\,dx$ is incorrect: Rescales to $[0,1]$ but forgets that the width $\\frac{4}{n}$ gives an extra factor $4$.\n$\\displaystyle\\int_{0}^{4} x^{2}\\,dx$ is incorrect: Ignores the starting point $2$ and uses the interval $[0,4]$."
   },
   "verification": {
    "generatedByCode": true,
@@ -6562,7 +6562,7 @@
    },
    "seed": 9100,
    "pack_id": "c_speeding_up_intervals-s9100",
-   "explanation_en": "The correct answer is (1,\\frac{3}{2})\\cup(2,\\infty). $v(t)=6 \\left(t - 2\\right) \\left(t - 1\\right)$ and $a(t)=6 \\left(2 t - 3\\right)$; the speed increases when $v$ and $a$ have the same sign: $v$ changes sign at $t=1$ and $t=2$, $a$ changes sign at $t=\\frac{3}{2}$.\n(\\frac{3}{2},\\infty) is incorrect: Uses only the sign of the acceleration: $a>0$ for $t>\\frac{3}{2}$, but the speed increases only when $v$ and $a$ have the same sign.\n(1,2) is incorrect: Finds where the particle moves in the negative direction ($v<0$).\n(0,1)\\cup(2,\\infty) is incorrect: Finds where the particle moves in the positive direction ($v>0$), which is not the same as the speed increasing."
+   "explanation_en": "The correct answer is $(1,\\frac{3}{2})\\cup(2,\\infty)$. $v(t)=6 \\left(t - 2\\right) \\left(t - 1\\right)$ and $a(t)=6 \\left(2 t - 3\\right)$; the speed increases when $v$ and $a$ have the same sign: $v$ changes sign at $t=1$ and $t=2$, $a$ changes sign at $t=\\frac{3}{2}$.\n$(\\frac{3}{2},\\infty)$ is incorrect: Uses only the sign of the acceleration: $a>0$ for $t>\\frac{3}{2}$, but the speed increases only when $v$ and $a$ have the same sign.\n$(1,2)$ is incorrect: Finds where the particle moves in the negative direction ($v<0$).\n$(0,1)\\cup(2,\\infty)$ is incorrect: Finds where the particle moves in the positive direction ($v>0$), which is not the same as the speed increasing."
   },
   "verification": {
    "generatedByCode": true,
@@ -6718,7 +6718,7 @@
    },
    "seed": 9100,
    "pack_id": "c_squeeze_polynomial_bounds-s9100",
-   "explanation_en": "The correct answer is -4. $\\lim_{x\\to 1}g(x)=g(1)=-4$ and $\\lim_{x\\to 1}h(x)=h(1)=-4$ are equal, so by the Squeeze Theorem $\\lim_{x\\to 1}f(x)=-4$.\n-2 is incorrect: Evaluates the lower bound at $x=0$ instead of $x=1$: $g(0)=-2$.\n-8 is incorrect: Adds the two limits of the bounds, $-4$ and $-4$, instead of using their common value.\n0 is incorrect: Evaluates the upper bound at $x=0$ instead of $x=1$: $h(0)=0$."
+   "explanation_en": "The correct answer is $-4$. $\\lim_{x\\to 1}g(x)=g(1)=-4$ and $\\lim_{x\\to 1}h(x)=h(1)=-4$ are equal, so by the Squeeze Theorem $\\lim_{x\\to 1}f(x)=-4$.\n$-2$ is incorrect: Evaluates the lower bound at $x=0$ instead of $x=1$: $g(0)=-2$.\n$-8$ is incorrect: Adds the two limits of the bounds, $-4$ and $-4$, instead of using their common value.\n$0$ is incorrect: Evaluates the upper bound at $x=0$ instead of $x=1$: $h(0)=0$."
   },
   "verification": {
    "generatedByCode": true,
@@ -6875,7 +6875,7 @@
    },
    "seed": 9100,
    "pack_id": "c_tangent_x_intercept-s9100",
-   "explanation_en": "The correct answer is \\frac{5}{3}. The tangent line is $y-4=12(x-2)$; setting $y=0$ gives $x=2-\\frac{4}{12}=\\frac{5}{3}$.\n- \\frac{1}{3} is incorrect: Reports $-\\frac{f(a)}{f'(a)}$, the horizontal distance to the intercept, without adding $a$.\n-20 is incorrect: Finds the $y$-intercept of the tangent line, $f(a)-af'(a)$, instead of the $x$-intercept.\n\\frac{7}{3} is incorrect: Adds instead of subtracts: $a+\\frac{f(a)}{f'(a)}$."
+   "explanation_en": "The correct answer is $\\frac{5}{3}$. The tangent line is $y-4=12(x-2)$; setting $y=0$ gives $x=2-\\frac{4}{12}=\\frac{5}{3}$.\n$- \\frac{1}{3}$ is incorrect: Reports $-\\frac{f(a)}{f'(a)}$, the horizontal distance to the intercept, without adding $a$.\n$-20$ is incorrect: Finds the $y$-intercept of the tangent line, $f(a)-af'(a)$, instead of the $x$-intercept.\n$\\frac{7}{3}$ is incorrect: Adds instead of subtracts: $a+\\frac{f(a)}{f'(a)}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -7032,7 +7032,7 @@
    },
    "seed": 9100,
    "pack_id": "c_tangent_y_intercept_power_exp-s9100",
-   "explanation_en": "The correct answer is - 4 e^{2}. By the product rule, $f'(x)=x e^{x} + e^{x}$, so $f(2)=2 e^{2}$ and $f'(2)=3 e^{2}$. The tangent line is $y-f(2)=f'(2)(x-2)$, and at $x=0$ it gives $k=f(2)-2f'(2)=- 4 e^{2}$.\n8 e^{2} is incorrect: Writes the tangent line as $y=f(2)+2f'(2)$ at $x=0$, adding instead of subtracting $x_0f'(x_0)$: $8 e^{2}$.\n0 is incorrect: Differentiates only the power $x^{1}$ in the product, getting slope $e^{2}$ and intercept $0$.\n3 e^{2} is incorrect: Reports the slope $f'(2)=3 e^{2}$ of the tangent line instead of its $y$-intercept."
+   "explanation_en": "The correct answer is $- 4 e^{2}$. By the product rule, $f'(x)=x e^{x} + e^{x}$, so $f(2)=2 e^{2}$ and $f'(2)=3 e^{2}$. The tangent line is $y-f(2)=f'(2)(x-2)$, and at $x=0$ it gives $k=f(2)-2f'(2)=- 4 e^{2}$.\n$8 e^{2}$ is incorrect: Writes the tangent line as $y=f(2)+2f'(2)$ at $x=0$, adding instead of subtracting $x_0f'(x_0)$: $8 e^{2}$.\n$0$ is incorrect: Differentiates only the power $x^{1}$ in the product, getting slope $e^{2}$ and intercept $0$.\n$3 e^{2}$ is incorrect: Reports the slope $f'(2)=3 e^{2}$ of the tangent line instead of its $y$-intercept."
   },
   "verification": {
    "generatedByCode": true,
@@ -7218,7 +7218,7 @@
    },
    "seed": 9100,
    "pack_id": "c_trapezoid_table_initial-s9100",
-   "explanation_en": "The correct answer is 144. The trapezoids have widths $4$, $1$, $3$, $4$; the estimate of the water added is $104$, so the tank holds about $40+104$ liters.\n148 is incorrect: Uses the same width $3$ for all four trapezoids even though the table times are not equally spaced.\n104 is incorrect: Reports the trapezoidal estimate of the water that flows in, $104$, and leaves out the 40 liters already in the tank.\n184 is incorrect: Uses a left Riemann sum instead of trapezoids and adds the initial 40 liters."
+   "explanation_en": "The correct answer is $144$. The trapezoids have widths $4$, $1$, $3$, $4$; the estimate of the water added is $104$, so the tank holds about $40+104$ liters.\n$148$ is incorrect: Uses the same width $3$ for all four trapezoids even though the table times are not equally spaced.\n$104$ is incorrect: Reports the trapezoidal estimate of the water that flows in, $104$, and leaves out the 40 liters already in the tank.\n$184$ is incorrect: Uses a left Riemann sum instead of trapezoids and adds the initial 40 liters."
   },
   "verification": {
    "generatedByCode": true,
@@ -7376,7 +7376,7 @@
    },
    "seed": 9100,
    "pack_id": "c_trig_limit_sine_ratio-s9100",
-   "explanation_en": "The correct answer is \\frac{2}{7}. Write $\\dfrac{\\sin(2x)}{7x}=\\dfrac{2}{7}\\cdot\\dfrac{\\sin(2x)}{2x}$; since $\\dfrac{\\sin u}{u}\\to 1$ as $u\\to 0$, the limit is $\\frac{2}{7}$.\n\\frac{1}{7} is incorrect: Uses $\\lim_{x\\to 0}\\dfrac{\\sin x}{x}=1$ without accounting for the factor $2$ inside the sine, leaving $\\dfrac{1}{7}$.\n0 is incorrect: Reads the form $\\dfrac{0}{0}$ as $0$ after substituting $x=0$.\n\\frac{7}{2} is incorrect: Inverts the ratio and reports $\\frac{7}{2}$, the reciprocal of $\\frac{2}{7}$."
+   "explanation_en": "The correct answer is $\\frac{2}{7}$. Write $\\dfrac{\\sin(2x)}{7x}=\\dfrac{2}{7}\\cdot\\dfrac{\\sin(2x)}{2x}$; since $\\dfrac{\\sin u}{u}\\to 1$ as $u\\to 0$, the limit is $\\frac{2}{7}$.\n$\\frac{1}{7}$ is incorrect: Uses $\\lim_{x\\to 0}\\dfrac{\\sin x}{x}=1$ without accounting for the factor $2$ inside the sine, leaving $\\dfrac{1}{7}$.\n$0$ is incorrect: Reads the form $\\dfrac{0}{0}$ as $0$ after substituting $x=0$.\n$\\frac{7}{2}$ is incorrect: Inverts the ratio and reports $\\frac{7}{2}$, the reciprocal of $\\frac{2}{7}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -7532,7 +7532,7 @@
    },
    "seed": 9100,
    "pack_id": "c_usub_indef_trig-s9100",
-   "explanation_en": "The correct answer is - 3 \\cos^{3}{\\left(x \\right)}+C. Let $u=\\cos x$, so $du=-\\sin x\\,dx$ and the integral becomes $-\\int 9 u^{2}\\,du=- 3 \\cos^{3}{\\left(x \\right)}+C$.\n3 \\cos^{3}{\\left(x \\right)}+C is incorrect: Forgets the minus sign in $du=-\\sin x\\,dx$ when $u=\\cos x$, which gives $3 \\cos^{3}{\\left(x \\right)}$.\n3 \\sin^{3}{\\left(x \\right)}+C is incorrect: Substitutes $u=\\sin x$ instead of $u=\\cos x$, which gives $3 \\sin^{3}{\\left(x \\right)}$.\n- 9 \\cos^{3}{\\left(x \\right)}+C is incorrect: Raises the exponent of $\\cos x$ to $3$ but forgets to divide by $3$, which gives $- 9 \\cos^{3}{\\left(x \\right)}$."
+   "explanation_en": "The correct answer is $- 3 \\cos^{3}{\\left(x \\right)}+C$. Let $u=\\cos x$, so $du=-\\sin x\\,dx$ and the integral becomes $-\\int 9 u^{2}\\,du=- 3 \\cos^{3}{\\left(x \\right)}+C$.\n$3 \\cos^{3}{\\left(x \\right)}+C$ is incorrect: Forgets the minus sign in $du=-\\sin x\\,dx$ when $u=\\cos x$, which gives $3 \\cos^{3}{\\left(x \\right)}$.\n$3 \\sin^{3}{\\left(x \\right)}+C$ is incorrect: Substitutes $u=\\sin x$ instead of $u=\\cos x$, which gives $3 \\sin^{3}{\\left(x \\right)}$.\n$- 9 \\cos^{3}{\\left(x \\right)}+C$ is incorrect: Raises the exponent of $\\cos x$ to $3$ but forgets to divide by $3$, which gives $- 9 \\cos^{3}{\\left(x \\right)}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -7692,7 +7692,7 @@
    },
    "seed": 9100,
    "pack_id": "c_usub_limits_transform-s9100",
-   "explanation_en": "The correct answer is \\frac{1}{2}\\displaystyle\\int_{3}^{11} f(u)\\,du. With $u=x^{2}+2$ we have $du=2 x^{1}\\,dx$, so $x\\,dx=\\frac{1}{2}\\,du$; the limits become $u=3$ and $u=11$.\n\\frac{1}{2}\\displaystyle\\int_{1}^{9} f(u)\\,du is incorrect: Converts the limits with $u=x^{2}$ and forgets to add $2$, so the limits are $1$ and $9$.\n\\displaystyle\\int_{1}^{3} f(u)\\,du is incorrect: Replaces the integrand by $f(u)$ but keeps both the $x$-limits and the coefficient $1$.\n\\displaystyle\\int_{3}^{11} f(u)\\,du is incorrect: Converts the limits correctly but forgets the factor $\\frac{1}{2}$ that comes from $du=2 x^{1}\\,dx$, so the coefficient stays $1$."
+   "explanation_en": "The correct answer is $\\frac{1}{2}\\displaystyle\\int_{3}^{11} f(u)\\,du$. With $u=x^{2}+2$ we have $du=2 x^{1}\\,dx$, so $x\\,dx=\\frac{1}{2}\\,du$; the limits become $u=3$ and $u=11$.\n$\\frac{1}{2}\\displaystyle\\int_{1}^{9} f(u)\\,du$ is incorrect: Converts the limits with $u=x^{2}$ and forgets to add $2$, so the limits are $1$ and $9$.\n$\\displaystyle\\int_{1}^{3} f(u)\\,du$ is incorrect: Replaces the integrand by $f(u)$ but keeps both the $x$-limits and the coefficient $1$.\n$\\displaystyle\\int_{3}^{11} f(u)\\,du$ is incorrect: Converts the limits correctly but forgets the factor $\\frac{1}{2}$ that comes from $du=2 x^{1}\\,dx$, so the coefficient stays $1$."
   },
   "verification": {
    "generatedByCode": true,
@@ -7852,7 +7852,7 @@
    },
    "seed": 9100,
    "pack_id": "c_usub_ln_definite-s9100",
-   "explanation_en": "The correct answer is 3 \\ln{\\left(\\frac{7}{4} \\right)}. Let $u=x^{2}+3$, so $du=2x\\,dx$ and the limits become $4$ and $7$; then $\\int \\frac{6}{2}\\cdot\\frac{1}{u}\\,du=3\\left(\\ln 7-\\ln 4\\right)$.\n3 \\ln{\\left(7 \\right)} is incorrect: Evaluates $\\ln u$ only at the upper limit $u=7$ and does not subtract its value at the lower limit.\n6 \\ln{\\left(2 \\right)} is incorrect: Substitutes $u=x^{2}$ and drops the constant $3$ in the denominator, which gives $6\\ln 2$.\n6 \\ln{\\left(\\frac{7}{4} \\right)} is incorrect: Forgets the factor $\\frac{1}{2}$ from $du=2x\\,dx$ and gets $6 \\ln{\\left(\\frac{7}{4} \\right)}$."
+   "explanation_en": "The correct answer is $3 \\ln{\\left(\\frac{7}{4} \\right)}$. Let $u=x^{2}+3$, so $du=2x\\,dx$ and the limits become $4$ and $7$; then $\\int \\frac{6}{2}\\cdot\\frac{1}{u}\\,du=3\\left(\\ln 7-\\ln 4\\right)$.\n$3 \\ln{\\left(7 \\right)}$ is incorrect: Evaluates $\\ln u$ only at the upper limit $u=7$ and does not subtract its value at the lower limit.\n$6 \\ln{\\left(2 \\right)}$ is incorrect: Substitutes $u=x^{2}$ and drops the constant $3$ in the denominator, which gives $6\\ln 2$.\n$6 \\ln{\\left(\\frac{7}{4} \\right)}$ is incorrect: Forgets the factor $\\frac{1}{2}$ from $du=2x\\,dx$ and gets $6 \\ln{\\left(\\frac{7}{4} \\right)}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -8009,7 +8009,7 @@
    },
    "seed": 9100,
    "pack_id": "c_volume_disc_y_axis-s9100",
-   "explanation_en": "The correct answer is 8 \\pi. Each cross section perpendicular to the $y$-axis is a disk of radius $x=\\sqrt{y}$, so $V=\\pi\\int_0^{4}y\\,dy=8 \\pi$.\n\\frac{128 \\pi}{5} is incorrect: Revolves the region about the $x$-axis instead of the $y$-axis: $\\pi\\int_0^{2}\\left(4^{2}-x^{4}\\right)dx=\\frac{128 \\pi}{5}$.\n16 \\pi is incorrect: Treats the solid as a cylinder of radius $2$ and height $4$, $\\pi\\cdot2^{2}\\cdot4$.\n\\frac{64 \\pi}{3} is incorrect: Uses the radius $y$ instead of $x=\\sqrt{y}$, so the integrand is $\\pi y^{2}$ and the volume is $\\frac{64 \\pi}{3}$."
+   "explanation_en": "The correct answer is $8 \\pi$. Each cross section perpendicular to the $y$-axis is a disk of radius $x=\\sqrt{y}$, so $V=\\pi\\int_0^{4}y\\,dy=8 \\pi$.\n$\\frac{128 \\pi}{5}$ is incorrect: Revolves the region about the $x$-axis instead of the $y$-axis: $\\pi\\int_0^{2}\\left(4^{2}-x^{4}\\right)dx=\\frac{128 \\pi}{5}$.\n$16 \\pi$ is incorrect: Treats the solid as a cylinder of radius $2$ and height $4$, $\\pi\\cdot2^{2}\\cdot4$.\n$\\frac{64 \\pi}{3}$ is incorrect: Uses the radius $y$ instead of $x=\\sqrt{y}$, so the integrand is $\\pi y^{2}$ and the volume is $\\frac{64 \\pi}{3}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -8166,7 +8166,7 @@
    },
    "seed": 9100,
    "pack_id": "c_washer_about_line-s9100",
-   "explanation_en": "The correct answer is \\frac{4 \\pi}{5}. The outer radius is $x+2$ and the inner radius is $x^{2}+2$ on $0\\le x\\le 1$, so $V=\\pi\\int_0^1\\left[(x+2)^{2}-(x^{2}+2)^{2}\\right]dx=\\frac{4 \\pi}{5}$.\n\\frac{\\pi}{30} is incorrect: Squares the difference of the radii, $\\left(R-r\\right)^{2}$, instead of taking $R^{2}-r^{2}$.\n\\frac{4}{5} is incorrect: Evaluates the integral correctly but leaves out the factor $\\pi$.\n\\frac{2 \\pi}{15} is incorrect: Revolves about the $x$-axis instead of the line $y=-2$, so the radii are $x$ and $x^{2}$."
+   "explanation_en": "The correct answer is $\\frac{4 \\pi}{5}$. The outer radius is $x+2$ and the inner radius is $x^{2}+2$ on $0\\le x\\le 1$, so $V=\\pi\\int_0^1\\left[(x+2)^{2}-(x^{2}+2)^{2}\\right]dx=\\frac{4 \\pi}{5}$.\n$\\frac{\\pi}{30}$ is incorrect: Squares the difference of the radii, $\\left(R-r\\right)^{2}$, instead of taking $R^{2}-r^{2}$.\n$\\frac{4}{5}$ is incorrect: Evaluates the integral correctly but leaves out the factor $\\pi$.\n$\\frac{2 \\pi}{15}$ is incorrect: Revolves about the $x$-axis instead of the line $y=-2$, so the radii are $x$ and $x^{2}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -8324,7 +8324,7 @@
    },
    "seed": 9100,
    "pack_id": "c_xsection_nonstandard-s9100",
-   "explanation_en": "The correct answer is \\frac{\\sqrt{3}}{120}. The length of the base segment is $d=x-x^{2}$. An equilateral triangle with side $d$ has area $\\frac{\\sqrt{3}}{4}d^{2}$, so $V=\\int_0^1 \\frac{\\sqrt{3}}{4}d^{2}\\,dx=\\frac{\\sqrt{3}}{120}$.\n\\frac{1}{60} is incorrect: Uses the area $\\frac{d^{2}}{2}$ of a right isosceles triangle instead of that of an equilateral triangle.\n\\frac{\\sqrt{3}}{60} is incorrect: Forgets the factor $\\frac{1}{2}$ in $\\frac{1}{2}\\cdot d\\cdot\\frac{\\sqrt{3}}{2}d$ and integrates $\\frac{\\sqrt{3}}{2}d^{2}$.\n\\frac{1}{6} is incorrect: Integrates the length $d$ of the base segment instead of the cross-sectional area, which is the area of the region $R$."
+   "explanation_en": "The correct answer is $\\frac{\\sqrt{3}}{120}$. The length of the base segment is $d=x-x^{2}$. An equilateral triangle with side $d$ has area $\\frac{\\sqrt{3}}{4}d^{2}$, so $V=\\int_0^1 \\frac{\\sqrt{3}}{4}d^{2}\\,dx=\\frac{\\sqrt{3}}{120}$.\n$\\frac{1}{60}$ is incorrect: Uses the area $\\frac{d^{2}}{2}$ of a right isosceles triangle instead of that of an equilateral triangle.\n$\\frac{\\sqrt{3}}{60}$ is incorrect: Forgets the factor $\\frac{1}{2}$ in $\\frac{1}{2}\\cdot d\\cdot\\frac{\\sqrt{3}}{2}d$ and integrates $\\frac{\\sqrt{3}}{2}d^{2}$.\n$\\frac{1}{6}$ is incorrect: Integrates the length $d$ of the base segment instead of the cross-sectional area, which is the area of the region $R$."
   },
   "verification": {
    "generatedByCode": true,

@@ -141,11 +141,11 @@ async function genStage() {
 }
 
 // ---------- 후보 조립 ----------
-const plainTxt = (t: string) => t.replace(/\$/g, "");
+// 2026-10-12 TeX 위생(R3): 해설에서 선택지 텍스트의 $ 를 벗기지 않는다(수식이 $...$ 밖으로 노출되던 문제). 게이트는 비교 시 자체적으로 plain 처리한다.
 /** 해설은 코드가 만든다(정답 근거 + 선택지별 오개념). LLM 은 stem 문장만 다듬는다 — 해설 속 파생 수치 환각을 막기 위해. */
 const structuredExplanation = (p: Json) => {
   const o = p.options as { text: string; why: string }[]; const k = p.key_index as number;
-  return `The correct answer is ${plainTxt(o[k].text)}. ${o[k].why}\n` + o.filter((_, i) => i !== k).map((x) => `${plainTxt(x.text)} is incorrect: ${x.why}`).join("\n");
+  return `The correct answer is ${o[k].text}. ${o[k].why}\n` + o.filter((_, i) => i !== k).map((x) => `${x.text} is incorrect: ${x.why}`).join("\n");
 };
 function buildCands(): Cand[] {
   const packs = genPacks(); const gen = resultMap("gen"); const out: Cand[] = [];

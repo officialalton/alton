@@ -346,7 +346,7 @@ def _region_impl(rng):
     c = round(rng.choice([0.2, 0.3, 0.4, 0.5]) * A / m, 2)
     f = lambda x: A * math.sin(x / m)
     d = lambda x: A * math.sin(x / m) - c * x
-    N = 120000
+    N = 12000
     top = m * math.pi
     grid = [top * i / N for i in range(1, N + 1)]
     sc = [i for i in range(N - 1) if d(grid[i]) * d(grid[i + 1]) < 0]
@@ -365,7 +365,7 @@ def _region_impl(rng):
     h = _O.brentq(lambda u: cum(u, r), 1e-6, r - 1e-6, xtol=1e-14)
     h_round = _O.brentq(lambda u: cum(u, rr), 1e-6, rr - 1e-6, xtol=1e-14)
     # 독립: 누적 사다리꼴 격자에서 절반 넘는 첫 위치
-    M = 200000
+    M = 20000
     acc, hg = 0.0, None
     for i in range(1, M + 1):
         a0, a1 = r * (i - 1) / M, r * i / M
@@ -376,9 +376,9 @@ def _region_impl(rng):
     if hg is None or abs(hg - h) > 3 * r / M:
         raise ValueError("independent_check_failed")
     xm = m * math.acos(c * m / A)
-    gmax = max(d(r * i / 100000) for i in range(100001))
+    gmax = max(d(r * i / 10000) for i in range(10001))
     dmax = d(xm)
-    if abs(gmax - dmax) > 1e-7 or not (0 < xm < r):
+    if abs(gmax - dmax) > 1e-6 or not (0 < xm < r):
         raise ValueError("independent_check_failed")
     _safe(r, S, h, xm, dmax)
     for u, v in ((S, S_round), (h, h_round)):

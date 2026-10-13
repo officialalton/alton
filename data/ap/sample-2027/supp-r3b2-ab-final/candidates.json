@@ -108,7 +108,7 @@
    },
    "seed": 9300,
    "pack_id": "c_chain_exp_cos_point-s9300",
-   "explanation_en": "The correct answer is - 3 \\sqrt{3} e^{\\frac{1}{2}}. By the chain rule $f'(x)=3\\cdot e^{\\cos(2x)}\\cdot(-2\\sin(2x))$; at $x=\\frac{\\pi}{6}$ we have $\\cos(2x)=\\frac{1}{2}$ and $\\sin(2x)=\\frac{\\sqrt{3}}{2}$, so $f'=- 3 \\sqrt{3} e^{\\frac{1}{2}}$.\n- \\frac{3 \\sqrt{3} e^{\\frac{1}{2}}}{2} is incorrect: Omits the inner derivative: it differentiates $\\cos(2x)$ as $-\\sin(2x)$ and leaves out the factor $2$.\n- 3 \\sqrt{3} is incorrect: Treats the derivative of $e^{u}$ as just $u'$ and drops the factor $e^{\\cos(2x)}$.\n3 \\sqrt{3} e^{\\frac{1}{2}} is incorrect: Uses $\\sin(2x)$ instead of $-\\sin(2x)$ as the derivative of $\\cos(2x)$, so the sign is wrong."
+   "explanation_en": "The correct answer is $- 3 \\sqrt{3} e^{\\frac{1}{2}}$. By the chain rule $f'(x)=3\\cdot e^{\\cos(2x)}\\cdot(-2\\sin(2x))$; at $x=\\frac{\\pi}{6}$ we have $\\cos(2x)=\\frac{1}{2}$ and $\\sin(2x)=\\frac{\\sqrt{3}}{2}$, so $f'=- 3 \\sqrt{3} e^{\\frac{1}{2}}$.\n$- \\frac{3 \\sqrt{3} e^{\\frac{1}{2}}}{2}$ is incorrect: Omits the inner derivative: it differentiates $\\cos(2x)$ as $-\\sin(2x)$ and leaves out the factor $2$.\n$- 3 \\sqrt{3}$ is incorrect: Treats the derivative of $e^{u}$ as just $u'$ and drops the factor $e^{\\cos(2x)}$.\n$3 \\sqrt{3} e^{\\frac{1}{2}}$ is incorrect: Uses $\\sin(2x)$ instead of $-\\sin(2x)$ as the derivative of $\\cos(2x)$, so the sign is wrong."
   },
   "verification": {
    "generatedByCode": true,
@@ -265,7 +265,7 @@
    },
    "seed": 9300,
    "pack_id": "c_inverse_deriv_formula-s9300",
-   "explanation_en": "The correct answer is \\frac{1}{6}. Since $f(1)=2$, $g(2)=1$, and $g'(2)=\\frac{1}{f'(g(2))}=\\frac{1}{f'(1)}=\\frac{1}{6}$.\n\\frac{1}{81} is incorrect: Evaluates the derivative at the wrong place: $\\frac{1}{f'(2)}$ instead of $\\frac{1}{f'(1)}$.\n\\frac{1}{36} is incorrect: Divides by $[f'(1)]^{2}$ instead of by $f'(1)$, giving $\\frac{1}{[f'(1)]^{2}}$.\n6 is incorrect: Takes $f'(1)$ and forgets to use its reciprocal."
+   "explanation_en": "The correct answer is $\\frac{1}{6}$. Since $f(1)=2$, $g(2)=1$, and $g'(2)=\\frac{1}{f'(g(2))}=\\frac{1}{f'(1)}=\\frac{1}{6}$.\n$\\frac{1}{81}$ is incorrect: Evaluates the derivative at the wrong place: $\\frac{1}{f'(2)}$ instead of $\\frac{1}{f'(1)}$.\n$\\frac{1}{36}$ is incorrect: Divides by $[f'(1)]^{2}$ instead of by $f'(1)$, giving $\\frac{1}{[f'(1)]^{2}}$.\n$6$ is incorrect: Takes $f'(1)$ and forgets to use its reciprocal."
   },
   "verification": {
    "generatedByCode": true,
@@ -420,7 +420,7 @@
    },
    "seed": 9300,
    "pack_id": "c_log_trig_deriv_expr-s9300",
-   "explanation_en": "The correct answer is - \\frac{\\sin{\\left(x \\right)}}{\\cos{\\left(x \\right)} + 4}. With $u=\\cos{\\left(x \\right)} + 4$ and $u'=- \\sin{\\left(x \\right)}$, the chain rule gives $f'(x)=\\frac{u'}{u}$.\n- \\left(\\cos{\\left(x \\right)} + 4\\right) \\sin{\\left(x \\right)} is incorrect: Multiplies $u'$ by $u$ instead of dividing by $u$.\n\\frac{1}{\\cos{\\left(x \\right)} + 4} is incorrect: Differentiates $\\ln u$ as $\\frac{1}{u}$ and forgets to multiply by $u'$.\n\\frac{\\sin{\\left(x \\right)}}{\\cos{\\left(x \\right)} + 4} is incorrect: Reverses the sign of the inner derivative $u'$."
+   "explanation_en": "The correct answer is $- \\frac{\\sin{\\left(x \\right)}}{\\cos{\\left(x \\right)} + 4}$. With $u=\\cos{\\left(x \\right)} + 4$ and $u'=- \\sin{\\left(x \\right)}$, the chain rule gives $f'(x)=\\frac{u'}{u}$.\n$- \\left(\\cos{\\left(x \\right)} + 4\\right) \\sin{\\left(x \\right)}$ is incorrect: Multiplies $u'$ by $u$ instead of dividing by $u$.\n$\\frac{1}{\\cos{\\left(x \\right)} + 4}$ is incorrect: Differentiates $\\ln u$ as $\\frac{1}{u}$ and forgets to multiply by $u'$.\n$\\frac{\\sin{\\left(x \\right)}}{\\cos{\\left(x \\right)} + 4}$ is incorrect: Reverses the sign of the inner derivative $u'$."
   },
   "verification": {
    "generatedByCode": true,

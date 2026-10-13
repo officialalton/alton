@@ -104,7 +104,7 @@
    },
    "seed": 8100,
    "pack_id": "c_abs_max_candidates_calc-s8100",
-   "explanation_en": "The correct answer is 3.000. Candidates test: solve $f'(x)=0$ on $(0,6)$ with a calculator and compare $f$ at the critical points and the endpoints: $f(0.000)=3.000$, $f(1.860)=0.797$, $f(6.000)=1.993$. The largest value is $3.000$.\n1.000 is incorrect: Evaluates $f$ at $x=3$, where the first factor is $0$, instead of at the candidates: $f(3)=1.000$.\n1.993 is incorrect: Reports $f$ at the right endpoint $x=6$, $1.993$, which is smaller than the largest candidate value.\n0.797 is incorrect: Reports $f$ at the critical point $x=1.860$, $0.797$, which is smaller than the largest candidate value."
+   "explanation_en": "The correct answer is $3.000$. Candidates test: solve $f'(x)=0$ on $(0,6)$ with a calculator and compare $f$ at the critical points and the endpoints: $f(0.000)=3.000$, $f(1.860)=0.797$, $f(6.000)=1.993$. The largest value is $3.000$.\n$1.000$ is incorrect: Evaluates $f$ at $x=3$, where the first factor is $0$, instead of at the candidates: $f(3)=1.000$.\n$1.993$ is incorrect: Reports $f$ at the right endpoint $x=6$, $1.993$, which is smaller than the largest candidate value.\n$0.797$ is incorrect: Reports $f$ at the critical point $x=1.860$, $0.797$, which is smaller than the largest candidate value."
   },
   "verification": {
    "generatedByCode": true,
@@ -262,7 +262,7 @@
    },
    "seed": 8100,
    "pack_id": "c_accel_at_rest_calc-s8100",
-   "explanation_en": "The correct answer is 5.429. $v(t)=x'(t)=2t-4\\cos t$ and $a(t)=v'(t)=2+4\\sin t$. The particle is at rest when $v(t)=0$; the first positive solution is $t=1.030$ (calculator), so $a(1.030)=5.429$.\n-2.368 is incorrect: Reports the position $x(1.030)$ at that time instead of the acceleration.\n1.030 is incorrect: Reports the time $t=1.030$ at which the particle is at rest instead of its acceleration.\n-1.429 is incorrect: Differentiates $-4\\sin t$ with the wrong sign, giving $2-4\\sin t$."
+   "explanation_en": "The correct answer is $5.429$. $v(t)=x'(t)=2t-4\\cos t$ and $a(t)=v'(t)=2+4\\sin t$. The particle is at rest when $v(t)=0$; the first positive solution is $t=1.030$ (calculator), so $a(1.030)=5.429$.\n$-2.368$ is incorrect: Reports the position $x(1.030)$ at that time instead of the acceleration.\n$1.030$ is incorrect: Reports the time $t=1.030$ at which the particle is at rest instead of its acceleration.\n$-1.429$ is incorrect: Differentiates $-4\\sin t$ with the wrong sign, giving $2-4\\sin t$."
   },
   "verification": {
    "generatedByCode": true,
@@ -416,7 +416,7 @@
    },
    "seed": 8100,
    "pack_id": "c_accum_abs_max_x_calc-s8100",
-   "explanation_en": "The correct answer is 4.686. The integrand $f$ is negative on $(0,0.611)$, positive on $(0.611,4.686)$ and negative on $(4.686,8)$. Candidates for the absolute maximum of $F$: $F(0)=0$, $F(4.686)=0.607$ and $F(8)=0.034$ (calculator), so the largest value is at $x=4.686$.\n8.000 is incorrect: $F(8)=0.034$ is less than $F(4.686)=0.607$ because $F$ is decreasing on $(4.686,8)$.\n0.611 is incorrect: $x=0.611$ is where $F$ has a relative minimum: $F'$ changes from negative to positive there and $F(0.611)=-0.122$.\n0.000 is incorrect: $F(0)=0$ is less than $F(4.686)=0.607$, so the maximum is not at $x=0$."
+   "explanation_en": "The correct answer is $4.686$. The integrand $f$ is negative on $(0,0.611)$, positive on $(0.611,4.686)$ and negative on $(4.686,8)$. Candidates for the absolute maximum of $F$: $F(0)=0$, $F(4.686)=0.607$ and $F(8)=0.034$ (calculator), so the largest value is at $x=4.686$.\n$8.000$ is incorrect: $F(8)=0.034$ is less than $F(4.686)=0.607$ because $F$ is decreasing on $(4.686,8)$.\n$0.611$ is incorrect: $x=0.611$ is where $F$ has a relative minimum: $F'$ changes from negative to positive there and $F(0.611)=-0.122$.\n$0.000$ is incorrect: $F(0)=0$ is less than $F(4.686)=0.607$, so the maximum is not at $x=0$."
   },
   "verification": {
    "generatedByCode": true,
@@ -570,7 +570,7 @@
    },
    "seed": 8101,
    "pack_id": "c_accum_increasing_interval_calc-s8101",
-   "explanation_en": "The correct answer is (0.715,4.307). $F'(x)=f(x)=xe^{-x/2}-0.5$ is positive between its two zeros $x=0.715$ and $x=4.307$ (calculator), so $F$ is increasing on $(0.715,4.307)$.\n(0.000,4.307) is incorrect: This interval includes $(0,0.715)$, where the integrand is negative and $F$ is decreasing.\n(4.307,8.000) is incorrect: After the second zero $x=4.307$ the integrand is negative, so $F$ is decreasing on $(4.307,8)$.\n(0.000,0.715) is incorrect: On $(0,0.715)$ the integrand is negative ($f(0)=-0.5$), so $F$ is decreasing there, not increasing."
+   "explanation_en": "The correct answer is $(0.715,4.307)$. $F'(x)=f(x)=xe^{-x/2}-0.5$ is positive between its two zeros $x=0.715$ and $x=4.307$ (calculator), so $F$ is increasing on $(0.715,4.307)$.\n$(0.000,4.307)$ is incorrect: This interval includes $(0,0.715)$, where the integrand is negative and $F$ is decreasing.\n$(4.307,8.000)$ is incorrect: After the second zero $x=4.307$ the integrand is negative, so $F$ is decreasing on $(4.307,8)$.\n$(0.000,0.715)$ is incorrect: On $(0,0.715)$ the integrand is negative ($f(0)=-0.5$), so $F$ is decreasing there, not increasing."
   },
   "verification": {
    "generatedByCode": true,
@@ -729,7 +729,7 @@
    },
    "seed": 8100,
    "pack_id": "c_area_wrt_y_calc-s8100",
-   "explanation_en": "The correct answer is 4.454. The curves meet where $4e^{-y/2}=\\dfrac{y^{2}}{4}$, at $y=2.269$ (calculator). For $0\\le y\\le 2.269$ the right curve is $x=4e^{-y/2}$ and the left curve is $x=\\dfrac{y^{2}}{4}$, so the area is $\\int_0^{2.269}\\left(4e^{-y/2}-\\dfrac{y^{2}}{4}\\right)dy=4.454$.\n1.584 is incorrect: Integrates $\\left(4e^{-y/2}-\\dfrac{y^{2}}{4}\\right)$ up to $y=4$ instead of up to the intersection.\n5.427 is incorrect: Finds only the area between the right curve and the $y$-axis, $\\int_0^{2.269}4e^{-y/2}\\,dy$.\n3.618 is incorrect: Uses the $x$-coordinate of the intersection, $1.287$, as the upper limit of the $y$-integral instead of the $y$-coordinate $2.269$."
+   "explanation_en": "The correct answer is $4.454$. The curves meet where $4e^{-y/2}=\\dfrac{y^{2}}{4}$, at $y=2.269$ (calculator). For $0\\le y\\le 2.269$ the right curve is $x=4e^{-y/2}$ and the left curve is $x=\\dfrac{y^{2}}{4}$, so the area is $\\int_0^{2.269}\\left(4e^{-y/2}-\\dfrac{y^{2}}{4}\\right)dy=4.454$.\n$1.584$ is incorrect: Integrates $\\left(4e^{-y/2}-\\dfrac{y^{2}}{4}\\right)$ up to $y=4$ instead of up to the intersection.\n$5.427$ is incorrect: Finds only the area between the right curve and the $y$-axis, $\\int_0^{2.269}4e^{-y/2}\\,dy$.\n$3.618$ is incorrect: Uses the $x$-coordinate of the intersection, $1.287$, as the upper limit of the $y$-integral instead of the $y$-coordinate $2.269$."
   },
   "verification": {
    "generatedByCode": true,
@@ -890,7 +890,7 @@
    },
    "seed": 8100,
    "pack_id": "c_decay_two_points_calc-s8100",
-   "explanation_en": "The correct answer is 32.797. $y=80e^{-kt}$ and $e^{-4k}=0.7$, so $y(10)=80(0.7)^{10/4}=32.797$ grams (calculator).\n2.260 is incorrect: Applies the factor $0.7$ once per hour instead of once per $4$ hours, giving $80(0.7)^{10}$.\n195.139 is incorrect: Uses $k=\\dfrac{\\ln 0.7}{4}$ with the wrong sign, so the amount grows to $80e^{10k}$.\n22.958 is incorrect: Starts from the amount at $4$ hours, $56$ grams, but applies the factor for the full $10$ hours."
+   "explanation_en": "The correct answer is $32.797$. $y=80e^{-kt}$ and $e^{-4k}=0.7$, so $y(10)=80(0.7)^{10/4}=32.797$ grams (calculator).\n$2.260$ is incorrect: Applies the factor $0.7$ once per hour instead of once per $4$ hours, giving $80(0.7)^{10}$.\n$195.139$ is incorrect: Uses $k=\\dfrac{\\ln 0.7}{4}$ with the wrong sign, so the amount grows to $80e^{10k}$.\n$22.958$ is incorrect: Starts from the amount at $4$ hours, $56$ grams, but applies the factor for the full $10$ hours."
   },
   "verification": {
    "generatedByCode": true,
@@ -1050,7 +1050,7 @@
    },
    "seed": 8100,
    "pack_id": "c_equilateral_cross_section_calc-s8100",
-   "explanation_en": "The correct answer is 1.892. The side of each triangle is $s=f(x)$ and its area is $\\dfrac{\\sqrt{3}}{4}s^{2}$, so $V=\\dfrac{\\sqrt{3}}{4}\\int_0^{5}\\left(xe^{-x/3}\\right)^{2}dx=1.892$ (calculator).\n3.783 is incorrect: Forgets the factor $\\frac{1}{2}$ in the area of the triangle, using base times height $s\\cdot\\dfrac{\\sqrt{3}}{2}s$.\n1.716 is incorrect: Uses the area formula for a semicircle, $\\dfrac{\\pi}{8}s^{2}$, instead of the area of an equilateral triangle.\n4.369 is incorrect: Uses the area of a square, $s^{2}$, for each cross section."
+   "explanation_en": "The correct answer is $1.892$. The side of each triangle is $s=f(x)$ and its area is $\\dfrac{\\sqrt{3}}{4}s^{2}$, so $V=\\dfrac{\\sqrt{3}}{4}\\int_0^{5}\\left(xe^{-x/3}\\right)^{2}dx=1.892$ (calculator).\n$3.783$ is incorrect: Forgets the factor $\\frac{1}{2}$ in the area of the triangle, using base times height $s\\cdot\\dfrac{\\sqrt{3}}{2}s$.\n$1.716$ is incorrect: Uses the area formula for a semicircle, $\\dfrac{\\pi}{8}s^{2}$, instead of the area of an equilateral triangle.\n$4.369$ is incorrect: Uses the area of a square, $s^{2}$, for each cross section."
   },
   "verification": {
    "generatedByCode": true,
@@ -1208,7 +1208,7 @@
    },
    "seed": 8100,
    "pack_id": "c_ftc_two_limits_calc-s8100",
-   "explanation_en": "The correct answer is -0.423. By the Fundamental Theorem and the chain rule, $G'(x)=2f(2x)-f(x)$. At $x=2$ this is $2f(4)-f(2)=-0.423$ (calculator).\n4.237 is incorrect: Evaluates $G(2)$, the value of the integral, instead of its derivative.\n-1.666 is incorrect: Forgets the chain-rule factor $2$ for the upper limit, giving $f(2a)-f(a)$ at $a=2$.\n5.396 is incorrect: Adds the lower-limit term instead of subtracting it, giving $2f(2a)+f(a)$ at $a=2$."
+   "explanation_en": "The correct answer is $-0.423$. By the Fundamental Theorem and the chain rule, $G'(x)=2f(2x)-f(x)$. At $x=2$ this is $2f(4)-f(2)=-0.423$ (calculator).\n$4.237$ is incorrect: Evaluates $G(2)$, the value of the integral, instead of its derivative.\n$-1.666$ is incorrect: Forgets the chain-rule factor $2$ for the upper limit, giving $f(2a)-f(a)$ at $a=2$.\n$5.396$ is incorrect: Adds the lower-limit term instead of subtracting it, giving $2f(2a)+f(a)$ at $a=2$."
   },
   "verification": {
    "generatedByCode": true,
@@ -1364,7 +1364,7 @@
    },
    "seed": 8100,
    "pack_id": "c_integral_meaning_calc-s8100",
-   "explanation_en": "The correct answer is \\int_0^{12}R(t)\\,dt\\approx 144.48; the total number of gallons of water that enter the tank from t=0 to t=12.. $\\int_0^{12}R(t)\\,dt=144.48$ (calculator) is the accumulated change of the amount, in gallons, over the first $12$ minutes: the total water that enters the tank in that time.\n\\int_0^{12}R(t)\\,dt\\approx 12.04; the total number of gallons of water that enter the tank from t=0 to t=12. is incorrect: $12.04$ is the average rate $\\dfrac{1}{12}\\int_0^{12}R(t)\\,dt$ in gallons per minute; the integral itself is $144.48$.\n\\int_0^{12}R(t)\\,dt\\approx 144.48; the rate, in gallons per minute, at which water enters the tank at t=12. is incorrect: The integral has units of gallons, not gallons per minute; the rate at $t=12$ is $R(12)=10.32$ gallons per minute.\n\\int_0^{12}R(t)\\,dt\\approx 144.48; the number of gallons of water in the tank at t=12. is incorrect: The tank holds $20$ gallons at $t=0$, so the amount at $t=12$ is $20+144.48=164.48$ gallons, not $144.48$."
+   "explanation_en": "The correct answer is $\\int_0^{12}R(t)\\,dt\\approx 144.48$; the total number of gallons of water that enter the tank from $t=0$ to $t=12$.. $\\int_0^{12}R(t)\\,dt=144.48$ (calculator) is the accumulated change of the amount, in gallons, over the first $12$ minutes: the total water that enters the tank in that time.\n$\\int_0^{12}R(t)\\,dt\\approx 12.04$; the total number of gallons of water that enter the tank from $t=0$ to $t=12$. is incorrect: $12.04$ is the average rate $\\dfrac{1}{12}\\int_0^{12}R(t)\\,dt$ in gallons per minute; the integral itself is $144.48$.\n$\\int_0^{12}R(t)\\,dt\\approx 144.48$; the rate, in gallons per minute, at which water enters the tank at $t=12$. is incorrect: The integral has units of gallons, not gallons per minute; the rate at $t=12$ is $R(12)=10.32$ gallons per minute.\n$\\int_0^{12}R(t)\\,dt\\approx 144.48$; the number of gallons of water in the tank at $t=12$. is incorrect: The tank holds $20$ gallons at $t=0$, so the amount at $t=12$ is $20+144.48=164.48$ gallons, not $144.48$."
   },
   "verification": {
    "generatedByCode": true,
@@ -1525,7 +1525,7 @@
    },
    "seed": 8100,
    "pack_id": "c_linearization_error_calc-s8100",
-   "explanation_en": "The correct answer is 0.182. The tangent line gives $f(3)+f'(3)(0.3)=8.034$, and with a calculator $f(3.3)=8.216$. The absolute difference is $|8.216-8.034|=0.182$.\n8.216 is incorrect: Reports the actual value $f(3.3)=8.216$ instead of the error.\n8.034 is incorrect: Reports the tangent line approximation itself, $8.034$, instead of its error.\n1.521 is incorrect: Reports the actual change $f(3.3)-f(3)$ instead of the error."
+   "explanation_en": "The correct answer is $0.182$. The tangent line gives $f(3)+f'(3)(0.3)=8.034$, and with a calculator $f(3.3)=8.216$. The absolute difference is $|8.216-8.034|=0.182$.\n$8.216$ is incorrect: Reports the actual value $f(3.3)=8.216$ instead of the error.\n$8.034$ is incorrect: Reports the tangent line approximation itself, $8.034$, instead of its error.\n$1.521$ is incorrect: Reports the actual change $f(3.3)-f(3)$ instead of the error."
   },
   "verification": {
    "generatedByCode": true,
@@ -1682,7 +1682,7 @@
    },
    "seed": 8100,
    "pack_id": "c_marginal_cost_meaning_calc-s8100",
-   "explanation_en": "The correct answer is C'(80)\\approx 215.28; the approximate cost, in dollars, of producing one more item after 80 items have been produced.. $C'(80)=c\\ln(80+1)+\\dfrac{c\\,80}{80+1}=215.28$ with $c=40$. The derivative is the rate at which total cost changes with the number of items, in dollars per item, so it approximates the cost of one more item.\nC'(80)\\approx 200.78; the approximate cost, in dollars, of producing one more item after 80 items have been produced. is incorrect: $200.78$ is the average cost per item $C(80)/80$, not $C'(80)=215.28$.\nC'(80)\\approx 215.28; the average cost, in dollars, per item of the first 80 items. is incorrect: The value of $C'(80)$ is right, but the average cost per item is $C(80)/80=200.78$; $C'$ is a rate of change, not an average.\nC'(80)\\approx 215.28; the total cost, in dollars, of producing 80 items. is incorrect: The value of $C'(80)$ is right, but the total cost is $C(80)=16062.24$ dollars; $C'$ has units of dollars per item."
+   "explanation_en": "The correct answer is $C'(80)\\approx 215.28$; the approximate cost, in dollars, of producing one more item after $80$ items have been produced.. $C'(80)=c\\ln(80+1)+\\dfrac{c\\,80}{80+1}=215.28$ with $c=40$. The derivative is the rate at which total cost changes with the number of items, in dollars per item, so it approximates the cost of one more item.\n$C'(80)\\approx 200.78$; the approximate cost, in dollars, of producing one more item after $80$ items have been produced. is incorrect: $200.78$ is the average cost per item $C(80)/80$, not $C'(80)=215.28$.\n$C'(80)\\approx 215.28$; the average cost, in dollars, per item of the first $80$ items. is incorrect: The value of $C'(80)$ is right, but the average cost per item is $C(80)/80=200.78$; $C'$ is a rate of change, not an average.\n$C'(80)\\approx 215.28$; the total cost, in dollars, of producing $80$ items. is incorrect: The value of $C'(80)$ is right, but the total cost is $C(80)=16062.24$ dollars; $C'$ has units of dollars per item."
   },
   "verification": {
    "generatedByCode": true,
@@ -1842,7 +1842,7 @@
    },
    "seed": 8100,
    "pack_id": "c_motion_first_reversal_calc-s8100",
-   "explanation_en": "The correct answer is 1.170. The particle changes direction when $v(t)=0$ and $v$ changes sign. Since $v(0)=3>0$, solve $3\\cos t-1t=0$ with a calculator; the first root is $t=1.170$, where $v$ changes from positive to negative.\n1.231 is incorrect: Solves $3\\cos t=1$, dropping the factor $t$ from the linear term.\n3.481 is incorrect: Solves $v'(t)=0$, the time the acceleration is zero, which is $t=\\pi+\\arcsin\\left(\\frac{1}{3}\\right)$.\n1.571 is incorrect: Sets only the cosine factor to zero, $\\cos t=0$."
+   "explanation_en": "The correct answer is $1.170$. The particle changes direction when $v(t)=0$ and $v$ changes sign. Since $v(0)=3>0$, solve $3\\cos t-1t=0$ with a calculator; the first root is $t=1.170$, where $v$ changes from positive to negative.\n$1.231$ is incorrect: Solves $3\\cos t=1$, dropping the factor $t$ from the linear term.\n$3.481$ is incorrect: Solves $v'(t)=0$, the time the acceleration is zero, which is $t=\\pi+\\arcsin\\left(\\frac{1}{3}\\right)$.\n$1.571$ is incorrect: Sets only the cosine factor to zero, $\\cos t=0$."
   },
   "verification": {
    "generatedByCode": true,
@@ -2002,7 +2002,7 @@
    },
    "seed": 8100,
    "pack_id": "c_related_rates_cylinder_calc-s8100",
-   "explanation_en": "The correct answer is 155.823. $V=\\pi r^{2}h$, so $\\dfrac{dV}{dt}=\\pi\\left(2rh\\,\\dfrac{dr}{dt}+r^{2}\\dfrac{dh}{dt}\\right)=\\pi\\left(2(4)(12)(0.6)+(4)^{2}(-0.5)\\right)=155.823$ cubic centimeters per second.\n65.345 is incorrect: Differentiates $r^{2}$ as $r$ instead of $2r$, giving $\\pi\\left(rh\\,\\dfrac{dr}{dt}+r^{2}\\dfrac{dh}{dt}\\right)$.\n180.956 is incorrect: Leaves out the term from the changing height, giving $2\\pi rh\\,\\dfrac{dr}{dt}=2\\pi(4)(12)(0.6)$.\n-25.133 is incorrect: Leaves out the term from the changing radius, giving $\\pi r^{2}\\dfrac{dh}{dt}=\\pi(4)^{2}(-0.5)$."
+   "explanation_en": "The correct answer is $155.823$. $V=\\pi r^{2}h$, so $\\dfrac{dV}{dt}=\\pi\\left(2rh\\,\\dfrac{dr}{dt}+r^{2}\\dfrac{dh}{dt}\\right)=\\pi\\left(2(4)(12)(0.6)+(4)^{2}(-0.5)\\right)=155.823$ cubic centimeters per second.\n$65.345$ is incorrect: Differentiates $r^{2}$ as $r$ instead of $2r$, giving $\\pi\\left(rh\\,\\dfrac{dr}{dt}+r^{2}\\dfrac{dh}{dt}\\right)$.\n$180.956$ is incorrect: Leaves out the term from the changing height, giving $2\\pi rh\\,\\dfrac{dr}{dt}=2\\pi(4)(12)(0.6)$.\n$-25.133$ is incorrect: Leaves out the term from the changing radius, giving $\\pi r^{2}\\dfrac{dh}{dt}=\\pi(4)^{2}(-0.5)$."
   },
   "verification": {
    "generatedByCode": true,
@@ -2163,7 +2163,7 @@
    },
    "seed": 8100,
    "pack_id": "c_related_rates_shadow_calc-s8100",
-   "explanation_en": "The correct answer is 2.240. If the person is $x$ meters from the base and the tip of the shadow is $s$ meters from the base, similar triangles give $\\dfrac{s}{6.3}=\\dfrac{s-x}{1.8}$, so $s=\\dfrac{6.3}{6.3-1.8}x$. Then $\\dfrac{ds}{dt}=\\dfrac{6.3}{4.5}(1.6)=2.240$ meters per second.\n1.600 is incorrect: Uses the walking speed $1.6$ for the tip of the shadow.\n0.640 is incorrect: Finds how fast the length of the shadow changes, $\\dfrac{1.8\\,(1.6)}{6.3-1.8}$, instead of the tip of the shadow.\n5.600 is incorrect: Inverts the ratio of similar triangles, using $\\dfrac{6.3}{1.8}(1.6)$."
+   "explanation_en": "The correct answer is $2.240$. If the person is $x$ meters from the base and the tip of the shadow is $s$ meters from the base, similar triangles give $\\dfrac{s}{6.3}=\\dfrac{s-x}{1.8}$, so $s=\\dfrac{6.3}{6.3-1.8}x$. Then $\\dfrac{ds}{dt}=\\dfrac{6.3}{4.5}(1.6)=2.240$ meters per second.\n$1.600$ is incorrect: Uses the walking speed $1.6$ for the tip of the shadow.\n$0.640$ is incorrect: Finds how fast the length of the shadow changes, $\\dfrac{1.8\\,(1.6)}{6.3-1.8}$, instead of the tip of the shadow.\n$5.600$ is incorrect: Inverts the ratio of similar triangles, using $\\dfrac{6.3}{1.8}(1.6)$."
   },
   "verification": {
    "generatedByCode": true,
@@ -2317,7 +2317,7 @@
    },
    "seed": 8100,
    "pack_id": "c_relative_min_justify_calc-s8100",
-   "explanation_en": "The correct answer is f' changes from negative to positive at x=1.111.. $f'(x)=2x-5\\cos x$ is negative just left of $x=1.111$ and positive just right of it (calculator), so by the First Derivative Test $f$ has a relative minimum at $x=1.111$.\nf' changes from positive to negative at x=1.111. is incorrect: $f'$ is negative to the left and positive to the right of $x=1.111$, so the sign change is from negative to positive, not positive to negative.\nf'(1.111)=0. is incorrect: $f'(1.111)=0$ is true, but a critical point alone does not show a relative minimum; $f'$ is also $0$ at relative maxima and at points with no extremum.\nf''(1.111)<0. is incorrect: $f''(x)=2+5\\sin x$, so $f''(1.111)=6.480>0$; the claim $f''<0$ is false and would indicate a relative maximum."
+   "explanation_en": "The correct answer is $f'$ changes from negative to positive at $x=1.111$.. $f'(x)=2x-5\\cos x$ is negative just left of $x=1.111$ and positive just right of it (calculator), so by the First Derivative Test $f$ has a relative minimum at $x=1.111$.\n$f'$ changes from positive to negative at $x=1.111$. is incorrect: $f'$ is negative to the left and positive to the right of $x=1.111$, so the sign change is from negative to positive, not positive to negative.\n$f'(1.111)=0$. is incorrect: $f'(1.111)=0$ is true, but a critical point alone does not show a relative minimum; $f'$ is also $0$ at relative maxima and at points with no extremum.\n$f''(1.111)<0$. is incorrect: $f''(x)=2+5\\sin x$, so $f''(1.111)=6.480>0$; the claim $f''<0$ is false and would indicate a relative maximum."
   },
   "verification": {
    "generatedByCode": true,
@@ -2469,7 +2469,7 @@
    },
    "seed": 8100,
    "pack_id": "c_second_deriv_test_justify_calc-s8100",
-   "explanation_en": "The correct answer is f'(0.618)=0 and f''(0.618)>0, so f has a relative minimum at x=0.618.. $f'(x)=(x+1)e^{x}-3$ is $0$ at $x=0.618$ (calculator), and $f''(x)=(x+2)e^{x}$ gives $f''(0.618)=4.855>0$, so the graph is concave up and by the Second Derivative Test $f$ has a relative minimum.\nf''(0.618)=0, so f has a relative minimum at x=0.618. is incorrect: $f''(0.618)=4.855\\ne 0$; the Second Derivative Test uses $f'=0$ together with the sign of $f''$, and $f''=0$ would be inconclusive.\nf'(0.618)=0 and f''(0.618)>0, so f has a relative maximum at x=0.618. is incorrect: $f''(0.618)=4.855>0$ is correct, but a positive second derivative means concave up, which gives a relative minimum, not a maximum.\nf'(0.618)=0 and f''(0.618)<0, so f has a relative minimum at x=0.618. is incorrect: $f''(0.618)=4.855$ is positive, not negative, and a negative second derivative would indicate a relative maximum."
+   "explanation_en": "The correct answer is $f'(0.618)=0$ and $f''(0.618)>0$, so $f$ has a relative minimum at $x=0.618$.. $f'(x)=(x+1)e^{x}-3$ is $0$ at $x=0.618$ (calculator), and $f''(x)=(x+2)e^{x}$ gives $f''(0.618)=4.855>0$, so the graph is concave up and by the Second Derivative Test $f$ has a relative minimum.\n$f''(0.618)=0$, so $f$ has a relative minimum at $x=0.618$. is incorrect: $f''(0.618)=4.855\\ne 0$; the Second Derivative Test uses $f'=0$ together with the sign of $f''$, and $f''=0$ would be inconclusive.\n$f'(0.618)=0$ and $f''(0.618)>0$, so $f$ has a relative maximum at $x=0.618$. is incorrect: $f''(0.618)=4.855>0$ is correct, but a positive second derivative means concave up, which gives a relative minimum, not a maximum.\n$f'(0.618)=0$ and $f''(0.618)<0$, so $f$ has a relative minimum at $x=0.618$. is incorrect: $f''(0.618)=4.855$ is positive, not negative, and a negative second derivative would indicate a relative maximum."
   },
   "verification": {
    "generatedByCode": true,
@@ -2624,7 +2624,7 @@
    },
    "seed": 8100,
    "pack_id": "c_speed_change_justify_calc-s8100",
-   "explanation_en": "The correct answer is v(2.5)=-1.356 and a(2.5)=-4.705; the speed is increasing.. $v(t)=4\\sin t-1.5t$ gives $v(2.5)=-1.356$ and $a(t)=v'(t)=4\\cos t-1.5$ gives $a(2.5)=-4.705$; $v$ and $a$ have the same sign, so the speed is increasing.\nv(2.5)=1.356 and a(2.5)=-4.705; the speed is decreasing. is incorrect: $v(2.5)=4\\sin(2.5)-1.5(2.5)=-1.356$, not $1.356$; the sign of the velocity is reversed, which reverses the conclusion.\nv(2.5)=-1.356 and a(2.5)=-4.705; the speed is decreasing. is incorrect: The values are right, but $v$ and $a$ have the same sign, so the speed is increasing, not decreasing.\nv(2.5)=-1.356 and a(2.5)=4.705; the speed is decreasing. is incorrect: $a(2.5)=4\\cos(2.5)-1.5=-4.705$, not $4.705$; the sign of the acceleration is reversed, which reverses the conclusion."
+   "explanation_en": "The correct answer is $v(2.5)=-1.356$ and $a(2.5)=-4.705$; the speed is increasing.. $v(t)=4\\sin t-1.5t$ gives $v(2.5)=-1.356$ and $a(t)=v'(t)=4\\cos t-1.5$ gives $a(2.5)=-4.705$; $v$ and $a$ have the same sign, so the speed is increasing.\n$v(2.5)=1.356$ and $a(2.5)=-4.705$; the speed is decreasing. is incorrect: $v(2.5)=4\\sin(2.5)-1.5(2.5)=-1.356$, not $1.356$; the sign of the velocity is reversed, which reverses the conclusion.\n$v(2.5)=-1.356$ and $a(2.5)=-4.705$; the speed is decreasing. is incorrect: The values are right, but $v$ and $a$ have the same sign, so the speed is increasing, not decreasing.\n$v(2.5)=-1.356$ and $a(2.5)=4.705$; the speed is decreasing. is incorrect: $a(2.5)=4\\cos(2.5)-1.5=-4.705$, not $4.705$; the sign of the acceleration is reversed, which reverses the conclusion."
   },
   "verification": {
    "generatedByCode": true,
@@ -2786,7 +2786,7 @@
    },
    "seed": 8100,
    "pack_id": "c_temperature_rate_calc-s8100",
-   "explanation_en": "The correct answer is -3.145. $T'(t)=-0.1\\cdot 70e^{-0.1t}$, so $T'(8)=-0.1(70)e^{-0.8}=-3.145$ degrees Celsius per minute; the negative sign means the temperature is decreasing.\n31.453 is incorrect: Leaves out the factor $-0.1$ from the chain rule, giving $70e^{-0.1(8)}$.\n53.453 is incorrect: Reports the temperature $T(8)=53.453$ instead of its rate of change.\n-7.000 is incorrect: Uses the rate at $t=0$, $T'(0)=-0.1(70)$."
+   "explanation_en": "The correct answer is $-3.145$. $T'(t)=-0.1\\cdot 70e^{-0.1t}$, so $T'(8)=-0.1(70)e^{-0.8}=-3.145$ degrees Celsius per minute; the negative sign means the temperature is decreasing.\n$31.453$ is incorrect: Leaves out the factor $-0.1$ from the chain rule, giving $70e^{-0.1(8)}$.\n$53.453$ is incorrect: Reports the temperature $T(8)=53.453$ instead of its rate of change.\n$-7.000$ is incorrect: Uses the rate at $t=0$, $T'(0)=-0.1(70)$."
   },
   "verification": {
    "generatedByCode": true,
@@ -2952,7 +2952,7 @@
    },
    "seed": 8100,
    "pack_id": "c_trapezoid_formula_calc-s8100",
-   "explanation_en": "The correct answer is 1.717. Each subinterval has width $0.75$, so the trapezoidal sum is $\\dfrac{0.75}{2}\\left[f(0)+2f(0.75)+2f(1.5)+2f(2.25)+f(3)\\right]=1.717$ (calculator).\n1.769 is incorrect: Gives the exact value of the integral, $1.769$, instead of the approximation.\n1.466 is incorrect: Uses the left Riemann sum $\\Delta x\\,[f(x_0)+f(x_1)+f(x_2)+f(x_3)]$ instead of the trapezoidal sum, giving $1.466$.\n1.968 is incorrect: Uses the right Riemann sum, giving $1.968$."
+   "explanation_en": "The correct answer is $1.717$. Each subinterval has width $0.75$, so the trapezoidal sum is $\\dfrac{0.75}{2}\\left[f(0)+2f(0.75)+2f(1.5)+2f(2.25)+f(3)\\right]=1.717$ (calculator).\n$1.769$ is incorrect: Gives the exact value of the integral, $1.769$, instead of the approximation.\n$1.466$ is incorrect: Uses the left Riemann sum $\\Delta x\\,[f(x_0)+f(x_1)+f(x_2)+f(x_3)]$ instead of the trapezoidal sum, giving $1.466$.\n$1.968$ is incorrect: Uses the right Riemann sum, giving $1.968$."
   },
   "verification": {
    "generatedByCode": true,
@@ -3113,7 +3113,7 @@
    },
    "seed": 8100,
    "pack_id": "c_water_depth_rate_calc-s8100",
-   "explanation_en": "The correct answer is 1.859. Solve $3\\sqrt{t}+2\\ln(t+1)=6$ with a calculator to get $t=1.754$. Then $h'(t)=\\dfrac{3}{2\\sqrt{t}}+\\dfrac{2}{t+1}$, so $h'(1.754)=1.859$ meters per day.\n0.898 is incorrect: Evaluates $h'$ at $t=6$, using the depth as if it were the time.\n1.754 is incorrect: Reports the time $t=1.754$ at which the depth is $6$ instead of the rate.\n3.420 is incorrect: Reports the average rate of change $\\dfrac{h(t)-h(0)}{t}=6/1.754$ over $[0,1.754]$."
+   "explanation_en": "The correct answer is $1.859$. Solve $3\\sqrt{t}+2\\ln(t+1)=6$ with a calculator to get $t=1.754$. Then $h'(t)=\\dfrac{3}{2\\sqrt{t}}+\\dfrac{2}{t+1}$, so $h'(1.754)=1.859$ meters per day.\n$0.898$ is incorrect: Evaluates $h'$ at $t=6$, using the depth as if it were the time.\n$1.754$ is incorrect: Reports the time $t=1.754$ at which the depth is $6$ instead of the rate.\n$3.420$ is incorrect: Reports the average rate of change $\\dfrac{h(t)-h(0)}{t}=6/1.754$ over $[0,1.754]$."
   },
   "verification": {
    "generatedByCode": true,
@@ -3273,7 +3273,7 @@
    },
    "seed": 8100,
    "pack_id": "c_x_sec_derivative_calc-s8100",
-   "explanation_en": "The correct answer is 7.853. By the product rule with $(\\sec x)'=\\sec x\\tan x$, $f'(x)=3\\sec x+3x\\sec x\\tan x$. At $x=0.8$ this is $3\\sec 0.8+3(0.8)\\sec 0.8\\tan 0.8=7.853$ (calculator in radian mode).\n3.547 is incorrect: Leaves out the product-rule term $3\\sec x$ and keeps only $3x\\sec x\\tan x$.\n9.250 is incorrect: Uses $(\\sec x)'=\\sec^2 x$, giving $3\\sec 0.8+3(0.8)\\sec^2 0.8$.\n0.759 is incorrect: Uses $(\\sec x)'=-\\sec x\\tan x$, giving $3\\sec 0.8-3(0.8)\\sec 0.8\\tan 0.8$."
+   "explanation_en": "The correct answer is $7.853$. By the product rule with $(\\sec x)'=\\sec x\\tan x$, $f'(x)=3\\sec x+3x\\sec x\\tan x$. At $x=0.8$ this is $3\\sec 0.8+3(0.8)\\sec 0.8\\tan 0.8=7.853$ (calculator in radian mode).\n$3.547$ is incorrect: Leaves out the product-rule term $3\\sec x$ and keeps only $3x\\sec x\\tan x$.\n$9.250$ is incorrect: Uses $(\\sec x)'=\\sec^2 x$, giving $3\\sec 0.8+3(0.8)\\sec^2 0.8$.\n$0.759$ is incorrect: Uses $(\\sec x)'=-\\sec x\\tan x$, giving $3\\sec 0.8-3(0.8)\\sec 0.8\\tan 0.8$."
   },
   "verification": {
    "generatedByCode": true,
@@ -3794,7 +3794,7 @@
    },
    "seed": 8100,
    "pack_id": "g_area_sin_line_calc-s8100",
-   "explanation_en": "The correct answer is 1.593. The line passes through $(0,3)$ and $(4,2)$, so $L(x)=3+-0.25x$. The graphs intersect at $x=0.777$ and $x=2.506$ (calculator), and $f\\ge L$ between them, so the area is $\\int_{0.777}^{2.506}(f(x)-L(x))\\,dx=1.593$.\n6.071 is incorrect: Computes the area under the curve alone between the intersection points, $\\int_{0.777}^{2.506}f(x)\\,dx$.\n-0.191 is incorrect: Integrates $f-L$ over the whole drawn interval $0\\le x\\le\\pi$ instead of between the two intersection points $x=0.777$ and $x=2.506$.\n4.477 is incorrect: Computes the area under the line alone between the intersection points, $\\int_{0.777}^{2.506}L(x)\\,dx$."
+   "explanation_en": "The correct answer is $1.593$. The line passes through $(0,3)$ and $(4,2)$, so $L(x)=3+-0.25x$. The graphs intersect at $x=0.777$ and $x=2.506$ (calculator), and $f\\ge L$ between them, so the area is $\\int_{0.777}^{2.506}(f(x)-L(x))\\,dx=1.593$.\n$6.071$ is incorrect: Computes the area under the curve alone between the intersection points, $\\int_{0.777}^{2.506}f(x)\\,dx$.\n$-0.191$ is incorrect: Integrates $f-L$ over the whole drawn interval $0\\le x\\le\\pi$ instead of between the two intersection points $x=0.777$ and $x=2.506$.\n$4.477$ is incorrect: Computes the area under the line alone between the intersection points, $\\int_{0.777}^{2.506}L(x)\\,dx$."
   },
   "verification": {
    "generatedByCode": true,
@@ -3990,7 +3990,7 @@
    },
    "seed": 8100,
    "pack_id": "g_chain_exp_graph_calc-s8100",
-   "explanation_en": "The correct answer is -6.723. By the chain rule $h'(x)=\\dfrac{g'(x)}{2}e^{g(x)/2}$. The graph gives $g(3)=3$ and $g'(3)=-3$, so $h'(3)=\\dfrac{-3}{2}e^{3/2}=-6.723$ (calculator).\n4.482 is incorrect: Leaves out the inner derivative, giving $e^{g(3)/2}$.\n-13.445 is incorrect: Forgets the factor $\\frac{1}{2}$ of the exponent, giving $g'(3)e^{g(3)/2}$.\n-1.500 is incorrect: Differentiates only the exponent, $\\dfrac{g'(3)}{2}=-1.5$."
+   "explanation_en": "The correct answer is $-6.723$. By the chain rule $h'(x)=\\dfrac{g'(x)}{2}e^{g(x)/2}$. The graph gives $g(3)=3$ and $g'(3)=-3$, so $h'(3)=\\dfrac{-3}{2}e^{3/2}=-6.723$ (calculator).\n$4.482$ is incorrect: Leaves out the inner derivative, giving $e^{g(3)/2}$.\n$-13.445$ is incorrect: Forgets the factor $\\frac{1}{2}$ of the exponent, giving $g'(3)e^{g(3)/2}$.\n$-1.500$ is incorrect: Differentiates only the exponent, $\\dfrac{g'(3)}{2}=-1.5$."
   },
   "verification": {
    "generatedByCode": true,
@@ -4187,7 +4187,7 @@
    },
    "seed": 8100,
    "pack_id": "g_chain_graph_outer_calc-s8100",
-   "explanation_en": "The correct answer is 0.500. By the chain rule $h'(x)=g'(u(x))\\,u'(x)$. With a calculator $u(3)=5.099$, which lies in the segment of the graph with slope $g'(u(3))=1.5$, and $u'(3)=0.333$. So $h'(3)=(1.5)(0.333)=0.500$.\n1.500 is incorrect: Leaves out the inner derivative $u'(3)$, giving $g'(u(3))$.\n1.549 is incorrect: Uses $g(u(3))$ in place of $g'(u(3))$, giving $g(u(3))u'(3)$.\n4.500 is incorrect: Divides by the inner derivative, $g'(u(3))/u'(3)$, instead of multiplying."
+   "explanation_en": "The correct answer is $0.500$. By the chain rule $h'(x)=g'(u(x))\\,u'(x)$. With a calculator $u(3)=5.099$, which lies in the segment of the graph with slope $g'(u(3))=1.5$, and $u'(3)=0.333$. So $h'(3)=(1.5)(0.333)=0.500$.\n$1.500$ is incorrect: Leaves out the inner derivative $u'(3)$, giving $g'(u(3))$.\n$1.549$ is incorrect: Uses $g(u(3))$ in place of $g'(u(3))$, giving $g(u(3))u'(3)$.\n$4.500$ is incorrect: Divides by the inner derivative, $g'(u(3))/u'(3)$, instead of multiplying."
   },
   "verification": {
    "generatedByCode": true,
@@ -4375,7 +4375,7 @@
    },
    "seed": 8100,
    "pack_id": "g_cont_k_graph_log_calc-s8100",
-   "explanation_en": "The correct answer is 2.731. The graph gives $f(2)=5$. Continuity at $x=2$ requires $\\lim_{x\\to 2^+}f(x)=k\\ln 3+2=5$, so $k=\\dfrac{5-2}{\\ln 3}\\approx 2.731$ (calculator).\n1.000 is incorrect: Treats $\\ln 3$ as $3$ when solving for $k$.\n4.551 is incorrect: Leaves out the added constant $2$ and solves $k\\ln 3=5$.\n4.328 is incorrect: Evaluates $\\ln(x+1)$ at $x=1$, using $\\ln 2$ in place of $\\ln 3$."
+   "explanation_en": "The correct answer is $2.731$. The graph gives $f(2)=5$. Continuity at $x=2$ requires $\\lim_{x\\to 2^+}f(x)=k\\ln 3+2=5$, so $k=\\dfrac{5-2}{\\ln 3}\\approx 2.731$ (calculator).\n$1.000$ is incorrect: Treats $\\ln 3$ as $3$ when solving for $k$.\n$4.551$ is incorrect: Leaves out the added constant $2$ and solves $k\\ln 3=5$.\n$4.328$ is incorrect: Evaluates $\\ln(x+1)$ at $x=1$, using $\\ln 2$ in place of $\\ln 3$."
   },
   "verification": {
    "generatedByCode": true,
@@ -4562,7 +4562,7 @@
    },
    "seed": 8100,
    "pack_id": "g_critical_point_graph_formula_calc-s8100",
-   "explanation_en": "The correct answer is 5.762. $h'(x)=f'(x)-g'(x)$. Read $f'$ from the graph (linear on each segment), take $g'$ from the formula, and solve $f'(x)-g'(x)=0$ with a calculator: $x=5.762$.\n1.923 is incorrect: Solves $f'(x)=g(x)$, using $g$ instead of $g'$: the solution is $x=1.923$.\n5.441 is incorrect: Solves $f'(x)+g'(x)=0$, adding the derivatives instead of subtracting: the solution is $x=5.441$.\n5.600 is incorrect: Finds where $f'(x)=0$ on the graph and ignores the term from $g$: $f'(x)=0$ at $x=5.600$."
+   "explanation_en": "The correct answer is $5.762$. $h'(x)=f'(x)-g'(x)$. Read $f'$ from the graph (linear on each segment), take $g'$ from the formula, and solve $f'(x)-g'(x)=0$ with a calculator: $x=5.762$.\n$1.923$ is incorrect: Solves $f'(x)=g(x)$, using $g$ instead of $g'$: the solution is $x=1.923$.\n$5.441$ is incorrect: Solves $f'(x)+g'(x)=0$, adding the derivatives instead of subtracting: the solution is $x=5.441$.\n$5.600$ is incorrect: Finds where $f'(x)=0$ on the graph and ignores the term from $g$: $f'(x)=0$ at $x=5.600$."
   },
   "verification": {
    "generatedByCode": true,
@@ -4853,7 +4853,7 @@
    },
    "seed": 8100,
    "pack_id": "g_exp_time_graph_calc-s8100",
-   "explanation_en": "The correct answer is 3.786. From the labeled points $P(2)/P(0)=3$, so $k=\\dfrac{\\ln 3}{2}$. Then $P(t)=P(0)e^{kt}=24$ gives $e^{kt}=8$ and $t=\\dfrac{\\ln 8}{k}=3.786$ (calculator).\n2.079 is incorrect: Uses the average growth rate $\\dfrac{P(2)-P(0)}{2P(0)}=1$ as $k$, so $t=\\dfrac{\\ln 8}{1}$.\n7.000 is incorrect: Extends the chord through $A$ and $B$ linearly: $t=2\\cdot\\dfrac{24-3}{9-3}$.\n5.786 is incorrect: Solves $e^{kt}=24$ instead of $e^{kt}=8$, using $\\ln 24$ in place of $\\ln\\dfrac{24}{3}$."
+   "explanation_en": "The correct answer is $3.786$. From the labeled points $P(2)/P(0)=3$, so $k=\\dfrac{\\ln 3}{2}$. Then $P(t)=P(0)e^{kt}=24$ gives $e^{kt}=8$ and $t=\\dfrac{\\ln 8}{k}=3.786$ (calculator).\n$2.079$ is incorrect: Uses the average growth rate $\\dfrac{P(2)-P(0)}{2P(0)}=1$ as $k$, so $t=\\dfrac{\\ln 8}{1}$.\n$7.000$ is incorrect: Extends the chord through $A$ and $B$ linearly: $t=2\\cdot\\dfrac{24-3}{9-3}$.\n$5.786$ is incorrect: Solves $e^{kt}=24$ instead of $e^{kt}=8$, using $\\ln 24$ in place of $\\ln\\dfrac{24}{3}$."
   },
   "verification": {
    "generatedByCode": true,
@@ -5050,7 +5050,7 @@
    },
    "seed": 8100,
    "pack_id": "g_ivt_sum_graph_calc-s8100",
-   "explanation_en": "The correct answer is 13.400. $h$ is continuous on $[2,6]$. From the graph $f(2)=7$ and $f(6)=4$, and with a calculator $h(2)=9.197$ and $h(6)=15.675$. Every value strictly between them, including $13.4$, is attained by the Intermediate Value Theorem.\n6.478 is incorrect: Uses the difference of the endpoint values, $|h(6)-h(2)|=6.478$.\n5.500 is incorrect: Takes the value halfway between $f(2)=7$ and $f(6)=4$ and ignores the formula term, giving $5.500$.\n24.873 is incorrect: Adds the two endpoint values, $h(2)+h(6)=24.873$, instead of choosing a value between them."
+   "explanation_en": "The correct answer is $13.400$. $h$ is continuous on $[2,6]$. From the graph $f(2)=7$ and $f(6)=4$, and with a calculator $h(2)=9.197$ and $h(6)=15.675$. Every value strictly between them, including $13.4$, is attained by the Intermediate Value Theorem.\n$6.478$ is incorrect: Uses the difference of the endpoint values, $|h(6)-h(2)|=6.478$.\n$5.500$ is incorrect: Takes the value halfway between $f(2)=7$ and $f(6)=4$ and ignores the formula term, giving $5.500$.\n$24.873$ is incorrect: Adds the two endpoint values, $h(2)+h(6)=24.873$, instead of choosing a value between them."
   },
   "verification": {
    "generatedByCode": true,
@@ -5242,7 +5242,7 @@
    },
    "seed": 8101,
    "pack_id": "g_mvt_sum_graph_formula_calc-s8101",
-   "explanation_en": "The correct answer is 4.400. $h(6)-h(0)=\\int_0^6 f'(x)\\,dx+p(6)-p(0)=4+6.000$, the first part being the signed area under the graph, so the average rate is $1.667$. Solve $f'(c)+p'(c)=1.667$ with a calculator on $(0,6)$ to get $c=4.400$.\n4.889 is incorrect: Solves $f'(c)=\\dfrac{h(6)-h(0)}{6}$, leaving out $p'(c)$: the solution is $c=4.889$.\n2.000 is incorrect: Averages only the change in $f$ over $[0,6]$, solving $f'(c)+p'(c)=\\dfrac{f(6)-f(0)}{6}$ and leaving out the change in $p$: the solution is $c=2.000$.\n4.200 is incorrect: Averages only the change in $p$, solving $f'(c)+p'(c)=\\dfrac{p(6)-p(0)}{6}$: the solution is $c=4.200$."
+   "explanation_en": "The correct answer is $4.400$. $h(6)-h(0)=\\int_0^6 f'(x)\\,dx+p(6)-p(0)=4+6.000$, the first part being the signed area under the graph, so the average rate is $1.667$. Solve $f'(c)+p'(c)=1.667$ with a calculator on $(0,6)$ to get $c=4.400$.\n$4.889$ is incorrect: Solves $f'(c)=\\dfrac{h(6)-h(0)}{6}$, leaving out $p'(c)$: the solution is $c=4.889$.\n$2.000$ is incorrect: Averages only the change in $f$ over $[0,6]$, solving $f'(c)+p'(c)=\\dfrac{f(6)-f(0)}{6}$ and leaving out the change in $p$: the solution is $c=2.000$.\n$4.200$ is incorrect: Averages only the change in $p$, solving $f'(c)+p'(c)=\\dfrac{p(6)-p(0)}{6}$: the solution is $c=4.200$."
   },
   "verification": {
    "generatedByCode": true,
@@ -5439,7 +5439,7 @@
    },
    "seed": 8100,
    "pack_id": "g_net_amount_formula_graph_calc-s8100",
-   "explanation_en": "The correct answer is 31.166. Amount $=30+\\int_0^{8}R(t)\\,dt-\\int_0^{8}L(t)\\,dt=30+27.166-26=31.166$ gallons; $\\int R$ uses a calculator and $\\int L$ is the area under the graph.\n83.166 is incorrect: Adds the leak instead of subtracting it: $30+\\int_0^{8}R+\\int_0^{8}L$.\n57.166 is incorrect: Ignores the leak and adds only the water pumped in: $30+\\int_0^{8}R(t)\\,dt$.\n4.000 is incorrect: Counts only the leak: $30-\\int_0^{8}L(t)\\,dt$."
+   "explanation_en": "The correct answer is $31.166$. Amount $=30+\\int_0^{8}R(t)\\,dt-\\int_0^{8}L(t)\\,dt=30+27.166-26=31.166$ gallons; $\\int R$ uses a calculator and $\\int L$ is the area under the graph.\n$83.166$ is incorrect: Adds the leak instead of subtracting it: $30+\\int_0^{8}R+\\int_0^{8}L$.\n$57.166$ is incorrect: Ignores the leak and adds only the water pumped in: $30+\\int_0^{8}R(t)\\,dt$.\n$4.000$ is incorrect: Counts only the leak: $30-\\int_0^{8}L(t)\\,dt$."
   },
   "verification": {
    "generatedByCode": true,
@@ -5962,7 +5962,7 @@
    },
    "seed": 8100,
    "pack_id": "g_parallel_tangent_formula_calc-s8100",
-   "explanation_en": "The correct answer is 1.059. The line $L$ passes through $(0,2)$ and $(2,12)$, so its slope is $5$. The tangent line is parallel to $L$ where $f'(x)=5$; solving with a calculator on $(0,2)$ gives $x=1.059$.\n1.843 is incorrect: Solves $f'(x)=10$, using the rise of $L$ from $x=0$ to $x=2$ as its slope.\n1.241 is incorrect: Solves $f(x)=5$, using the slope of $L$ as a value of $f$ instead of as a value of $f'$.\n0.315 is incorrect: Solves $f'(x)=2$, using the $y$-intercept of $L$ as its slope."
+   "explanation_en": "The correct answer is $1.059$. The line $L$ passes through $(0,2)$ and $(2,12)$, so its slope is $5$. The tangent line is parallel to $L$ where $f'(x)=5$; solving with a calculator on $(0,2)$ gives $x=1.059$.\n$1.843$ is incorrect: Solves $f'(x)=10$, using the rise of $L$ from $x=0$ to $x=2$ as its slope.\n$1.241$ is incorrect: Solves $f(x)=5$, using the slope of $L$ as a value of $f$ instead of as a value of $f'$.\n$0.315$ is incorrect: Solves $f'(x)=2$, using the $y$-intercept of $L$ as its slope."
   },
   "verification": {
    "generatedByCode": true,
@@ -6159,7 +6159,7 @@
    },
    "seed": 8100,
    "pack_id": "g_product_formula_graph_calc-s8100",
-   "explanation_en": "The correct answer is -5.997. $h'(x)=f'(x)g(x)+f(x)g'(x)$. The graph gives $g(5)=4$ and $g'(5)=-2$, and with a calculator $f(5)=3.846$ and $f'(5)=0.424$. So $h'(5)=(0.424)(4)+(3.846)(-2)=-5.997$.\n-0.847 is incorrect: Multiplies the derivatives, $f'(5)g'(5)$.\n-7.691 is incorrect: Keeps only the second product-rule term $f(5)g'(5)$.\n1.694 is incorrect: Keeps only the first product-rule term $f'(5)g(5)$."
+   "explanation_en": "The correct answer is $-5.997$. $h'(x)=f'(x)g(x)+f(x)g'(x)$. The graph gives $g(5)=4$ and $g'(5)=-2$, and with a calculator $f(5)=3.846$ and $f'(5)=0.424$. So $h'(5)=(0.424)(4)+(3.846)(-2)=-5.997$.\n$-0.847$ is incorrect: Multiplies the derivatives, $f'(5)g'(5)$.\n$-7.691$ is incorrect: Keeps only the second product-rule term $f(5)g'(5)$.\n$1.694$ is incorrect: Keeps only the first product-rule term $f'(5)g(5)$."
   },
   "verification": {
    "generatedByCode": true,
@@ -6357,7 +6357,7 @@
    },
    "seed": 8100,
    "pack_id": "g_quotient_formula_graph_calc-s8100",
-   "explanation_en": "The correct answer is 0.587. $q'(x)=\\dfrac{f'(x)g(x)-f(x)g'(x)}{[g(x)]^2}$. The graph gives $g(5)=4$ and $g'(5)=-2$, and with a calculator $f(5)=3.846$ and $f'(5)=0.424$. So $q'(5)=\\dfrac{(0.424)(4)-(3.846)(-2)}{4^2}=0.587$.\n-0.375 is incorrect: Adds in the numerator, $f'(5)g(5)+f(5)g'(5)$ over $g(5)^2$.\n2.346 is incorrect: Divides the numerator by $g(5)$ instead of $g(5)^2$.\n-0.212 is incorrect: Divides the derivatives, $f'(5)/g'(5)$, instead of using the quotient rule."
+   "explanation_en": "The correct answer is $0.587$. $q'(x)=\\dfrac{f'(x)g(x)-f(x)g'(x)}{[g(x)]^2}$. The graph gives $g(5)=4$ and $g'(5)=-2$, and with a calculator $f(5)=3.846$ and $f'(5)=0.424$. So $q'(5)=\\dfrac{(0.424)(4)-(3.846)(-2)}{4^2}=0.587$.\n$-0.375$ is incorrect: Adds in the numerator, $f'(5)g(5)+f(5)g'(5)$ over $g(5)^2$.\n$2.346$ is incorrect: Divides the numerator by $g(5)$ instead of $g(5)^2$.\n$-0.212$ is incorrect: Divides the derivatives, $f'(5)/g'(5)$, instead of using the quotient rule."
   },
   "verification": {
    "generatedByCode": true,
@@ -6545,7 +6545,7 @@
    },
    "seed": 8100,
    "pack_id": "g_relative_max_graph_formula_calc-s8100",
-   "explanation_en": "The correct answer is 5.068. $h'(x)=f'(x)-g'(x)$ is zero at $x=2.393$ and $x=5.068$ (calculator). $h'$ changes from positive to negative at $x=5.068$, so $h$ has a relative maximum there; at $x=2.393$ the sign change is from negative to positive.\n5.200 is incorrect: Finds where $f'(x)=0$ and changes from positive to negative on the graph, $x=5.200$, ignoring $g$; there $h'(5.200)=-g'(5.200)=-0.323\\ne 0$.\n4.000 is incorrect: Takes the place where $h'$ is greatest, $x=4.000$, but a relative extremum of $h$ needs $h'=0$ with a sign change.\n2.393 is incorrect: This is where $h'$ changes from negative to positive, which gives a relative minimum of $h$, not a relative maximum."
+   "explanation_en": "The correct answer is $5.068$. $h'(x)=f'(x)-g'(x)$ is zero at $x=2.393$ and $x=5.068$ (calculator). $h'$ changes from positive to negative at $x=5.068$, so $h$ has a relative maximum there; at $x=2.393$ the sign change is from negative to positive.\n$5.200$ is incorrect: Finds where $f'(x)=0$ and changes from positive to negative on the graph, $x=5.200$, ignoring $g$; there $h'(5.200)=-g'(5.200)=-0.323\\ne 0$.\n$4.000$ is incorrect: Takes the place where $h'$ is greatest, $x=4.000$, but a relative extremum of $h$ needs $h'=0$ with a sign change.\n$2.393$ is incorrect: This is where $h'$ changes from negative to positive, which gives a relative minimum of $h$, not a relative maximum."
   },
   "verification": {
    "generatedByCode": true,
