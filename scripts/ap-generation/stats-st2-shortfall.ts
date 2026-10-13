@@ -7,11 +7,11 @@ import { loadStatsPool, type StatsItem } from "./stats-pool";
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const block = new Set<string>();
 for (const f of arg("--block-file", "data/ap/stock/assembled/stats-st1-s3a-prefer-ep.json").split(",").filter(Boolean)) for (const st of (JSON.parse(readFileSync(f, "utf-8")) as { sets: { mcA?: string[]; frqA?: string[] }[] }).sets) for (const k of [...(st.mcA ?? []), ...(st.frqA ?? [])]) block.add(k);
-const { pool } = loadStatsPool({ requireScreen: true });
+const { pool } = loadStatsPool({ requireScreen: !process.argv.includes("--no-screen") });
 const excluded = new Set(arg("--exclude", "st_outlier_effect").split(",")); // 두 번 반려된 원형은 신규 후보에서 제외
 type Raw = { apSubjectCode: string; kind: string; keywordCode: string; skillPrimary?: string; itemFamilyId: string; difficultyProvisional?: string; payload: { archetype?: string; items?: unknown[] } };
 const obs = new Map<string, { unit: number; skill: number; exam: number; fam: string }>();
-for (const f of ["stats-s1-items", "stats-s2a-items", "stats-s2b-items", "stats-s3a-items"]) for (const r of JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as Raw[]) {
+for (const f of ["stats-s1-items", "stats-s2a-items", "stats-s2b-items", "stats-s3a-items", "stats-s3b-items"]) for (const r of JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as Raw[]) {
   if (r.apSubjectCode !== "ap_statistics" || r.kind !== "mc" || r.payload.items) continue;
   const a = String(r.payload.archetype ?? ""); if (!a || excluded.has(a)) continue;
   const o = obs.get(a); const exam = r.difficultyProvisional === "exam_prep" ? 1 : 0;
@@ -22,7 +22,7 @@ const hyp: StatsItem[] = [...obs.entries()].map(([a, o]) => ({ key: `HYP:${a}`, 
 // 신규 공유 세트(단원 5 회귀, 관측: 스킬 4·3·3, 문항 중 exam_prep 1)
 hyp.push({ key: "HYP:st_set_regression", kind: "mc", shared: true, members: [4, 3, 3].map((s) => ({ unit: 5, skill: s, topic: "5.3", skillCode: "" })), fam: famOf.get("st_set_regression") ?? "hyp-set-regression", frqType: "", archetype: "st_set_regression", screen: true, batch: "hyp", renderType: "", stimKind: "", exam: 1 });
 const bonus =Number(arg("--exam-bonus", "0")); const hypCost = Number(arg("--hyp-cost", "100"));
-const m = solveStatsSets(["ST2"], [...pool, ...hyp], { timeMs: 120000, preferExamPrep: true, blocked: block, cost: (c) => (c.batch === "hyp" ? hypCost - bonus * (c.exam ?? 0) : 0) });
+const m = solveStatsSets(["ST2"], [...pool, ...hyp], { timeMs: 120000, preferExamPrep: true, blocked: block, unitWeight: Number(arg("--unit-weight", "1")), cost: (c) => (c.batch === "hyp" ? hypCost - bonus * (c.exam ?? 0) : 0) });
 const r: StatsResult = m.out[0]; const used = r.singles.filter((c) => c.batch === "hyp");
 console.log(`status=${m.res.status} obj=${m.res.obj}`);
 console.log(`신규 단독 후보 ${used.length}`);

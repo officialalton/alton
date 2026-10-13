@@ -15,7 +15,7 @@ export type StatsVirtual = { set: string; part: "A"; unit: number; skill: number
 export type StatsResult = { id: string; singles: StatsItem[]; sets: StatsItem[]; frq: StatsItem[]; virtual: StatsVirtual[]; virtualSets: number[]; frqVirtual: { set: string; part: "A"; native: false; type: string }[] };
 const SET_UNITS = STATS_SETS.map((x) => Number(x.unit)); const UNITS = [1, 2, 3, 4, 5]; const SKILLS = [1, 2, 3, 4];
 
-export function solveStatsSets(ids: string[], items: StatsItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; /** exam_prep MC 문항을 더 많이 쓰는 해를 선호(동점 처리: 가상 1000 과 목표 이탈 1 보다 항상 작은 가중 0.01, 목적값은 음수가 될 수 있다). 기본 꺼짐 — 기존 배정·고정 테스트 불변. */ preferExamPrep?: boolean; /** 후보별 추가 비용(가상 문항 1000 보다 작게). 신규 생성 후보 최소화 계획(stats-st2-shortfall.ts)용. 기본 없음 — 기존 배정 불변. */ cost?: (c: StatsItem) => number }) {
+export function solveStatsSets(ids: string[], items: StatsItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; /** exam_prep MC 문항을 더 많이 쓰는 해를 선호(동점 처리: 가상 1000 과 목표 이탈 1 보다 항상 작은 가중 0.01, 목적값은 음수가 될 수 있다). 기본 꺼짐 — 기존 배정·고정 테스트 불변. */ preferExamPrep?: boolean; /** 후보별 추가 비용(가상 문항 1000 보다 작게). 신규 생성 후보 최소화 계획(stats-st2-shortfall.ts)용. 기본 없음 — 기존 배정 불변. */ cost?: (c: StatsItem) => number; /** 단원 목표 이탈 가중(기본 1, 스킬 이탈과 같다). */ unitWeight?: number }) {
   const blocked = o.blocked ?? new Set<string>();
   const usable = items.filter((c) => !blocked.has(c.key) && (c.kind === "frq" ? (STATS_FRQ_TEMPLATES as readonly string[]).includes(c.frqType) : c.shared ? SET_UNITS.includes(c.members[0]?.unit) && new Set(c.members.map((m) => m.unit)).size === 1 && c.members.length === 3 : c.members.length === 1));
   const mcSingles = usable.filter((c) => c.kind === "mc" && !c.shared), mcSets = usable.filter((c) => c.kind === "mc" && c.shared), frqs = usable.filter((c) => c.kind === "frq");
@@ -32,7 +32,7 @@ export function solveStatsSets(ids: string[], items: StatsItem[], o: { timeMs: n
   });
   const obj = new Array<number>(n).fill(0); const cons: Cons[] = [];
   for (const j of [...vs.values(), ...vsm.values(), ...vf.values()]) obj[j] = 1000;
-  for (const j of du.values()) obj[j] = 1; for (const j of dk.values()) obj[j] = 1;
+  for (const j of du.values()) obj[j] = o.unitWeight ?? 1; for (const j of dk.values()) obj[j] = 1;
   if (o.preferExamPrep) usable.forEach((c) => ids.forEach((_, s) => { obj[x(c, s)] = -0.01 * (c.exam ?? 0); }));
   if (o.cost) usable.forEach((c) => ids.forEach((_, s) => { obj[x(c, s)] += o.cost!(c); }));
   const uB = statsUnitBounds(), kB = statsSkillBounds();

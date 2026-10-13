@@ -713,3 +713,5 @@ STAGE_EXTRA = ["st_ci_test_consistency", "st_outlier_effect", "st_two_draw_condi
 STAGE_B_SINGLES = ["st_study_conclusion", "st_investigative_question", "st_question_data_match", "st_sampling_method", "st_boxplot_compare", "st_question_type", "st_cond_prob_table", "st_tree_bayes", "st_clt_describe", "st_hypotheses_setup", "st_power_table_change", "st_hypotheses_means", "st_influential_point"]
 STAGE_B_SETS = ["st_set_regression"]
 STAGE_B_FRQ = ["stfrq_q1_design", "stfrq_q2_regression", "stfrq_q3_prop_test", "stfrq_q4_integrated"]
+# S3-b 보강(d 런): a·b·c 결과 뒤 stats-st2-shortfall.ts 로 계산한 exam_prep·단원 목표(10/9/9/7/7) 보강 11개 원형(시드 1).
+STAGE_B2_SINGLES = ["st_block_table", "st_two_draw_conditional", "st_method_choice_cat", "st_phat_normal_prob", "st_chisq_setup", "st_conditions_t", "st_ci_width_effect", "st_t_procedure_conditions", "st_ci_test_consistency", "st_sampling_dist_xbar", "st_residual_r2_model"]
