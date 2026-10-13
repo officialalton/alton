@@ -49,8 +49,8 @@ class Determinism(unittest.TestCase):
                 self.fail(f"{n}: no seed produced a pack")
 
     def test_archetypes_registered(self):
-        self.assertEqual(len(MC), 47)
-        self.assertEqual(SETS, ["phys_vt_set".replace("phys_", "phs_"), "phs_collision_set"])
+        self.assertEqual(len(MC), 47 + 48)  # P0 47 + 2026-10-13 확장 48(U3 21, U1 2, U2 4, U4 3, U5 5, U6 4, U7 5, U8 4)
+        self.assertEqual(SETS, ["phs_vt_set", "phs_collision_set", "phs_fx_set", "phs_wt_set", "phs_spring_set"])
         self.assertEqual(sorted(FRQ), ["phf_lab_spring_k", "phf_mr_table_block", "phf_qqt_collision", "phf_tbr_spring_shm"])
 
 
@@ -59,7 +59,7 @@ class NoDuplicateStructures(unittest.TestCase):
         for n in ALL_MC:
             b = R.batch(n, 6, 900)
             self.assertGreaterEqual(len(b), 4, f"{n}: fewer than 4 distinct packs in 400 seeds")
-            self.assertEqual(len({R.sig(p) for p in b}), len(b), n)
+            self.assertEqual(len({R.sig(p) + str(p.get("set_intro")) for p in b}), len(b), n)  # 세트는 본문·선택지가 없어 소개문(질량 등)까지 서명에 넣는다
 
     def test_stems_are_not_shared_between_different_archetypes(self):
         seen = {}

@@ -163,21 +163,21 @@ def ph_energy_bar_choice(rng):
 # ======================= U4 =======================
 def ph_ft_impulse(rng):
     for _ in forever():
-        t1 = rng.choice([0.2, 0.4, 0.5]); t2 = t1 + rng.choice([0.2, 0.3, 0.4]); t3 = t2 + rng.choice([0.2, 0.3]); Fp = rng.choice([20, 30, 40, 60])
+        t1 = rng.choice([1.0, 1.5, 2.0]); t2 = t1 + rng.choice([1.0, 1.5, 2.0]); t3 = t2 + rng.choice([1.0, 1.5]); Fp = rng.choice([3, 4, 5, 6])  # 2026-10-13: 현실적 크기(v1 은 0.5 kg 에 60 N 으로 72 m/s 가 나와 반려)
         xs = [0, t1, t2, t3]; F = [0, Fp, Fp, 0]
         J = float(trapz_exact([Fr(str(x)) for x in xs], F))
-        m = rng.choice([0.5, 1.0, 2.0]); dv = J / m
+        m = rng.choice([2.0, 3.0, 4.0]); dv = J / m
         tt = np.linspace(0, t3, 40001)
         agree(J, float(np.trapezoid(np.interp(tt, xs, F), tt)), 1e-6, "J")
         break
     pairs = [("Divides the peak force by the mass, which gives an acceleration and ignores the duration.", Fp / m), ("Multiplies the peak force by the total time, overestimating the area of the trapezoid.", Fp * t3 / m),
              ("Uses the impulse as the change in velocity without dividing by the mass.", J), ("Uses half the peak force times the total time, treating the graph as a triangle.", 0.5 * Fp * t3 / m)]
     key, ds = num_opts(dv, pairs, "m/s")
-    stim = graph_stim("Force versus time for a collision", [("F", [[x, f] for x, f in zip(xs, F)])], gaxis("Time (s)", 0, round(t3, 2), 0.1), gaxis("Force (N)", 0, Fp + 10, 10))
+    stim = graph_stim("Net force versus time", [("F", [[x, f] for x, f in zip(xs, F)])], gaxis("Time (s)", 0, round(t3, 2), 0.5), gaxis("Force (N)", 0, Fp + 1, 1))
     stem = f"The graph shows the net force on a ${m:g}\\text{{ kg}}$ cart as a function of time while the cart is pushed. The cart starts at rest. What is the speed of the cart at $t={t3:g}\\text{{ s}}$?"
     return mk("ph_ft_impulse", "4.2", "2.B", stem, key, ds, rng, concept="Impulse as the area under a force-time graph equals the change in momentum", thinking=["Find the area under the force-time graph as the impulse", "Divide the impulse by the mass to find the change in velocity"],
               cond=[("the cart starts at rest and the plotted force is the net force", "the stem states the cart starts at rest and the graph is the net force")], path="exact trapezoid area versus numpy integration of the interpolated force over the interval", material=MAT_GRAPH("axis labels with units"),
-              judgment=["representation_reading", "law_selection"], stim=stim, est=100, facts=[f"xs={xs}", f"F={F}", f"m={m}"], kwhy="The impulse is the area under the graph and equals $m\\Delta v$.")
+              judgment=["representation_reading", "law_selection"], stim=stim, est=100, facts=[f"xs={xs}", f"F={F}", f"m={m}"], kwhy=f"The area under the graph is the impulse, $J={sig(J)}\\text{{ N·s}}$, and $J=m\\Delta v$ gives $\\Delta v={sig(J)}/{m:g}={sig(dv)}\\text{{ m/s}}$.")
 
 
 def ph_inelastic_collision(rng):
