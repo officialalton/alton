@@ -12,6 +12,9 @@ const root = path.resolve("data/ap/sample-2027"), out = path.resolve("data/ap/st
 const runs: Record<string, RawCand[]> = {};
 for (const r of RUNS) { const f = path.join(root, r, "candidates.json"); if (existsSync(f)) runs[r] = (JSON.parse(readFileSync(f, "utf-8")) as RawCand[]).map((c) => ({ ...c, gateOverride: LATEST_GATE } as RawCand)); }
 const items = buildStock(runs, {});
+// 결정적 TeX 위생(의미 변경 없음): 유료 런 시점의 생성기가 \text{ m/s^2} 처럼 text 안에 ^ 를 넣었다(KaTeX 가 거부 → 화면 증거에서 원문 수식 노출). 지수를 text 밖으로 옮긴다. 생성기는 같은 커밋에서 고쳤다(phys_common.unit_tex).
+const fixTex = (v: unknown): unknown => typeof v === "string" ? v.replace(/\\text\{([^}^_]*?)\^(\{?-?\d+\}?)\}/g, (_m, a: string, e: string) => `\\text{${a}}^{${e.replace(/[{}]/g, "")}}`) : Array.isArray(v) ? v.map(fixTex) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, fixTex(x)])) : v;
+for (const i of items) i.payload = fixTex(i.payload) as typeof i.payload;
 for (const i of items) if (Array.isArray(i.payload.items)) { i.structure = "shared_stimulus_set"; i.stockCell = i.stockCell.replace("|shared_set|", "|shared_stimulus_set|"); }
 writeFileSync(path.join(out, `${BATCH}-items.json`), JSON.stringify(items.map((i) => ({ ...i })), null, 0));
 const pass = items.filter((i) => i.validation === "auto_passed" && !i.duplicateOf && generatorDefects(i.payload).length === 0);

@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-13T08:03:12.370Z",
+ "generatedAt": "2026-10-13T08:10:18.840Z",
  "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1360행)",
  "all": {
   "total": 1360,
-  "pass": 803,
-  "fail": 1,
+  "pass": 801,
+  "fail": 3,
   "notApplicable": 556
  },
  "liveStates": {
@@ -185,8 +185,8 @@
   {
    "type": "figure_choice:ap_diagram:phys_scene",
    "total": 4,
-   "pass": 4,
-   "fail": 0,
+   "pass": 2,
+   "fail": 2,
    "notApplicable": 0
   },
   {
@@ -244,8 +244,8 @@
   },
   "ap_physics_1": {
    "total": 42,
-   "pass": 28,
-   "fail": 0,
+   "pass": 26,
+   "fail": 2,
    "notApplicable": 14
   }
  },
@@ -255,7 +255,8 @@
   "supporting": 59
  },
  "errorCodes": {
-  "declared_intersection_mismatch": 2
+  "declared_intersection_mismatch": 2,
+  "outside_viewbox": 8
  },
  "warnCodes": {
   "stimulus_json_repaired": 93,
@@ -19378,7 +19379,7 @@
   },
   {
    "key": "phys-p1-a:ap_physics_1-m05-k0",
-   "contentHash": "c34ab5b15f24d6d5f389f4212494315237300472e3291af3a982daa391cab634",
+   "contentHash": "6d3692c3e547d4fdde1f9b44a419c4805274d01c8e73b37e6c19bbbd22d1ce03",
    "subject": "ap_physics_1",
    "kind": "mc",
    "validation": "rejected",
@@ -19392,7 +19393,7 @@
   },
   {
    "key": "phys-p1-a:ap_physics_1-m05-k1",
-   "contentHash": "8e2f6a35c9ee7904522545776513b48a48e165dfca9303020be495facaf38adc",
+   "contentHash": "d04e1c5467f1a10bc86f886cee0ef62b4f92c3f2a46a56175ea415fe50e2a0d9",
    "subject": "ap_physics_1",
    "kind": "mc",
    "validation": "auto_passed",
@@ -19586,7 +19587,7 @@
   },
   {
    "key": "phys-p1-a:ap_physics_1-m12-k0",
-   "contentHash": "4ea199a1797d2234b05f09c085cabe8e6167e99289fd31aa997fc7cd0d5b3244",
+   "contentHash": "931bb7e1696a5ce18db2a174760f5697f0cccbf67f7f4626befd8d0a66df5efb",
    "subject": "ap_physics_1",
    "kind": "mc",
    "validation": "auto_passed",
@@ -19600,7 +19601,7 @@
   },
   {
    "key": "phys-p1-a:ap_physics_1-m12-k1",
-   "contentHash": "280594620e1ebaab0fc3032f7fd6db5a031a2251749e4a250bb54eb91384306a",
+   "contentHash": "50a88147edc147b11a31dbed3379a568ebbec721f87f34354c379f66790f4a0d",
    "subject": "ap_physics_1",
    "kind": "mc",
    "validation": "auto_passed",
@@ -19762,8 +19763,29 @@
    "renderType": "figure_choice:ap_diagram:phys_scene",
    "need": "required",
    "needReason": "도식/그림 자료",
-   "status": "pass",
-   "issues": [],
+   "status": "fail",
+   "issues": [
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 A: 장면 그림 검사 실패: outside_viewbox"
+    },
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 B: 장면 그림 검사 실패: outside_viewbox"
+    },
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 C: 장면 그림 검사 실패: outside_viewbox"
+    },
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 D: 장면 그림 검사 실패: outside_viewbox"
+    }
+   ],
    "alt": "그래프/도형 선택지 4개(A, B, C, D) — 같은 축·크기로 나란히."
   },
   {
@@ -19776,8 +19798,29 @@
    "renderType": "figure_choice:ap_diagram:phys_scene",
    "need": "required",
    "needReason": "도식/그림 자료",
-   "status": "pass",
-   "issues": [],
+   "status": "fail",
+   "issues": [
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 A: 장면 그림 검사 실패: outside_viewbox"
+    },
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 B: 장면 그림 검사 실패: outside_viewbox"
+    },
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 C: 장면 그림 검사 실패: outside_viewbox"
+    },
+    {
+     "level": "error",
+     "code": "outside_viewbox",
+     "message": "선택지 D: 장면 그림 검사 실패: outside_viewbox"
+    }
+   ],
    "alt": "그래프/도형 선택지 4개(A, B, C, D) — 같은 축·크기로 나란히."
   },
   {

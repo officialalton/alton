@@ -37,7 +37,7 @@ def fbd_vectors(scene):
     return out
 
 
-def fbd_scale_for(mags, max_px=95.0):
+def fbd_scale_for(mags, max_px=80.0):  # 95 에서 80 으로: 아래쪽 화살표 끝+라벨이 viewBox(240) 밖으로 잘렸다(P1-a 화면 증거 확인)
     return max_px / max(mags)
 
 
@@ -294,9 +294,12 @@ def check_scene(scene):
     if "NaN" in svg or "inf" in svg:
         issues.append("svg_nonfinite")
     import re
-    for m in re.finditer(r'(?:x|y|x1|x2|y1|y2|cx|cy)="(-?[0-9.]+)"', svg):
-        v = float(m.group(1))
-        if v < -1 or v > max(W, H) + 1:
+    # 축별 범위(2026-10-13 수정: 예전에는 max(W,H) 로만 비교해 y 가 H 를 넘어도 통과했다). 글자 기준선은 하단 3px 여유를 둔다.
+    for m in re.finditer(r'(x|x1|x2|cx)="(-?[0-9.]+)"', svg):
+        if float(m.group(2)) < -1 or float(m.group(2)) > W + 1:
+            issues.append("outside_viewbox"); break
+    for m in re.finditer(r'(y|y1|y2|cy)="(-?[0-9.]+)"', svg):
+        if float(m.group(2)) < -1 or float(m.group(2)) > H - 3:
             issues.append("outside_viewbox"); break
     return issues
 

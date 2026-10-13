@@ -1,10 +1,10 @@
 # AP 그림 렌더링 게이트 결과
 
-생성: 2026-10-13T08:03:12.370Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1360행)
+생성: 2026-10-13T08:10:18.840Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1360행)
 
 ## 전체
 
-- 전체 1360행: 통과 803 / 실패 1 / 해당 없음(그림·표 없음) 556
+- 전체 1360행: 통과 801 / 실패 3 / 해당 없음(그림·표 없음) 556
 - 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 829행: 통과 419 / 실패 0 / 해당 없음 410
 
 ## 유형별(렌더 유형)
@@ -35,7 +35,7 @@
 | ap_table:given_info | 31 | 31 | 0 | 0 |
 | ap_table:multi_panel | 29 | 29 | 0 | 0 |
 | ap_table:payoff_matrix | 8 | 8 | 0 | 0 |
-| figure_choice:ap_diagram:phys_scene | 4 | 4 | 0 | 0 |
+| figure_choice:ap_diagram:phys_scene | 4 | 2 | 2 | 0 |
 | none | 447 | 0 | 0 | 447 |
 | none(diagram_text_only) | 1 | 0 | 0 | 1 |
 | text | 108 | 0 | 0 | 108 |
@@ -49,7 +49,7 @@
 | ap_microeconomics | 172 | 162 | 0 | 10 |
 | ap_calculus_bc | 136 | 28 | 0 | 108 |
 | ap_statistics | 131 | 74 | 0 | 57 |
-| ap_physics_1 | 42 | 28 | 0 | 14 |
+| ap_physics_1 | 42 | 26 | 2 | 14 |
 
 ## 그림 필요 분류(그림이 있어야 풀리는가)
 
@@ -61,6 +61,7 @@
 
 | 코드 | 건수 |
 |---|---:|
+| outside_viewbox | 8 |
 | declared_intersection_mismatch | 2 |
 
 ## 경고 코드(실패 아님)
@@ -84,3 +85,5 @@
 ## 실패 목록(상위 60)
 
 - `run1:ap_calculus_ab-f04-k8` [ap_graph:calc_multi_curve] declared_intersection_mismatch, declared_intersection_mismatch
+- `phys-p1-a:ap_physics_1-m18-k0` [figure_choice:ap_diagram:phys_scene] outside_viewbox, outside_viewbox, outside_viewbox, outside_viewbox
+- `phys-p1-a:ap_physics_1-m18-k1` [figure_choice:ap_diagram:phys_scene] outside_viewbox, outside_viewbox, outside_viewbox, outside_viewbox

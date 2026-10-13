@@ -29,9 +29,19 @@ def sig(v, n=3):
     return s.lstrip("-") if float(s) == 0 else s
 
 
+def unit_tex(unit):
+    """단위 -> TeX. \\text{} 안의 ^ 는 KaTeX 가 거부하므로 지수는 text 밖으로 뺀다: m/s^2 -> \\text{ m/s}^{2}."""
+    if not unit:
+        return ""
+    if "^" in unit:
+        base, exp = unit.split("^", 1)
+        return f"\\text{{ {base}}}^{{{exp}}}"
+    return f"\\text{{ {unit}}}"
+
+
 def Q(v, unit="", n=3):
     """수치+단위 -> $...$"""
-    return "$" + sig(v, n) + (f"\\text{{ {unit}}}" if unit else "") + "$"
+    return "$" + sig(v, n) + unit_tex(unit) + "$"
 
 
 def TX(s):
@@ -138,7 +148,7 @@ def sci(v, unit="", n=3):
     """과학적 표기: $1.30\\times10^{5}\\text{ Pa}$ (|v| >= 1e4 또는 < 1e-2 일 때)"""
     e = int(math.floor(math.log10(abs(v))))
     m = v / 10 ** e
-    return "$" + sig(m, n) + f"\\times10^{{{e}}}" + (f"\\text{{ {unit}}}" if unit else "") + "$"
+    return "$" + sig(m, n) + f"\\times10^{{{e}}}" + unit_tex(unit) + "$"
 
 
 MAT_NONE = {"type": "none", "must_include": []}

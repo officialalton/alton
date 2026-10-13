@@ -186,7 +186,9 @@ const RENDER: Record<string, (sc: R) => { body: string; alt: string }> = { fbd: 
 function viewBoxIssues(svg: string): string[] {
   const out: string[] = [];
   if (/NaN|Infinity/.test(svg)) out.push("svg_nonfinite");
-  for (const m of svg.matchAll(/\b(?:x|y|x1|x2|y1|y2|cx|cy)="(-?[0-9.]+)"/g)) { const v = Number(m[1]); if (v < -1 || v > Math.max(PHYS_W, PHYS_H) + 1) { out.push("outside_viewbox"); break; } }
+  // 축별 범위: x 는 [−1, W+1], y 는 [−1, H−3](글자 기준선 하단 여유). Python check_scene 과 같은 규칙.
+  for (const m of svg.matchAll(/\b(x|x1|x2|cx)="(-?[0-9.]+)"/g)) { const v = Number(m[2]); if (v < -1 || v > PHYS_W + 1) { out.push("outside_viewbox"); break; } }
+  for (const m of svg.matchAll(/\b(y|y1|y2|cy)="(-?[0-9.]+)"/g)) { const v = Number(m[2]); if (v < -1 || v > PHYS_H - 3) { out.push("outside_viewbox"); break; } }
   return out;
 }
 

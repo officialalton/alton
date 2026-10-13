@@ -10,7 +10,7 @@ import { renderFigureSvg } from "../render";
 import { checkFigure } from "../check";
 import { figureAlt } from "../alt";
 
-const fbd = (forces: { label: string; angle: number; mag: number }[], extra: object = {}): PhysScene => ({ type: "fbd", body: "box", forces: forces.map((f) => ({ id: f.label, ...f })), scale: 95 / Math.max(...forces.map((f) => f.mag)), equilibrium: null, ...extra }) as PhysScene;
+const fbd = (forces: { label: string; angle: number; mag: number }[], extra: object = {}): PhysScene => ({ type: "fbd", body: "box", forces: forces.map((f) => ({ id: f.label, ...f })), scale: 80 / Math.max(...forces.map((f) => f.mag)), equilibrium: null, ...extra }) as PhysScene;
 const SAMPLE: PhysScene[] = [
   fbd([{ label: "Fg", angle: 270, mag: 20 }, { label: "N", angle: 90, mag: 20 }, { label: "Fp", angle: 0, mag: 10 }, { label: "Ff", angle: 180, mag: 10 }], { equilibrium: true }),
   { type: "energy_bars", states: [{ name: "Initial", bars: { K: 0, Ug: 10 } }, { name: "Final", bars: { K: 10, Ug: 0 } }], unit: "J", conserved: true, ymax: 10 },
@@ -49,6 +49,10 @@ describe("ap_diagram phys_scene (TS 렌더)", () => {
     expect(checkPhysScene(fbd([{ label: "Fg", angle: 270, mag: 20 }, { label: "N", angle: 90, mag: 10 }], { equilibrium: true }))).toContain("equilibrium_sum_not_zero");
     expect(checkPhysScene({ type: "energy_bars", states: [{ name: "a", bars: { K: 5 } }, { name: "b", bars: { K: 6 } }], unit: "J", conserved: true, ymax: 6 })).toContain("energy_not_conserved");
     expect(checkPhysScene(fbd([{ label: "A", angle: 0, mag: 10 }, { label: "B", angle: 0, mag: 10 }]))).toContain("arrow_overlap");
+  });
+  it("flags labels clipped by the viewBox (old 95px scale put the downward arrow label past y=240)", () => {
+    const clipped = { ...fbd([{ label: "Fg", angle: 270, mag: 20 }, { label: "N", angle: 90, mag: 20 }]), scale: 95 / 20 } as PhysScene;
+    expect(checkPhysScene(clipped)).toContain("outside_viewbox");
   });
   it("escapes label text", () => {
     const sc = fbd([{ label: "<b>", angle: 0, mag: 1 }, { label: "F&G", angle: 90, mag: 2 }]);
