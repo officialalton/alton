@@ -6,6 +6,8 @@ const save = vi.fn();
 const submit = vi.fn();
 const enter = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: { remaining: {} } }));
 const startSec = vi.fn();
+const inkLoad = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: [] }));
+const inkSave = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: undefined }));
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn(), refresh: vi.fn() }) }));
 vi.mock("@/lib/mock-exam/attempt-actions", () => ({
   saveMockExamAnswerAction: (...a: unknown[]) => save(...a),
@@ -17,6 +19,8 @@ vi.mock("@/lib/mock-exam/attempt-actions", () => ({
   recordMockExamEntryAction: vi.fn(async () => ({ ok: true, value: undefined })),
   enterApSectionAction: (...a: unknown[]) => enter(...a),
   startApSectionAction: (...a: unknown[]) => startSec(...a),
+  loadFrqHandwritingAction: (...a: unknown[]) => inkLoad(...a),
+  saveFrqHandwritingAction: (...a: unknown[]) => inkSave(...a),
   settleApAttemptAction: vi.fn(async () => ({ ok: true, value: { status: "in_progress", attempt: null } })),
 }));
 vi.mock("@/app/session/[id]/MockExamMathTools", () => ({ default: () => null, MockExamToolButtons: () => <span data-testid="calc-buttons" /> }));

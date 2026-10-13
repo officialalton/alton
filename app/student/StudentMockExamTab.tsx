@@ -7,7 +7,9 @@ import { buildMockExamListRows, isApRow, practiceTestTabOf, type MockExamListRow
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import Pager from "@/app/components/Pager";
 import { trackEvent } from "@/lib/analytics/track";
-import { startMockExamAction } from "@/lib/mock-exam/attempt-actions";
+import { startMockExamAction, loadFrqHandwritingAction } from "@/lib/mock-exam/attempt-actions";
+import { apFrqIsPaper } from "@/lib/ap-exam/frq-delivery";
+import type { FrqInkRow } from "@/lib/ap-exam/frq-ink";
 import MockExamOpenList from "@/app/components/MockExamOpenList";
 import { loadMyMockExamOverviewAction, loadMockExamAttemptDetailAction } from "./mock-exam-tab-actions";
 import MockExamResultView from "./mock-exam/[attemptId]/MockExamResultView";
@@ -28,6 +30,7 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
   const [openId, setOpenId] = useState<string | null>(null);
   const [detail, setDetail] = useState<MockExamAttemptDetail | null>(null);
   const [detailError, setDetailError] = useState<string | null>(null);
+  const [handwriting, setHandwriting] = useState<FrqInkRow[]>([]);
   const [listTab, setListTab] = useState<PracticeTestTab>("todo");
   // SAT / AP 는 서로 다른 시험 층 — 한 목록에 섞지 않는다. AP 세트가 하나도 없으면 전환 UI 를 보이지 않는다.
   const [program, setProgram] = useState<"sat" | "ap">("sat");
@@ -75,8 +78,13 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
     setOpenId(id);
     setDetail(null);
     setDetailError(null);
+    setHandwriting([]);
     loadMockExamAttemptDetailAction(id)
-      .then((d) => setDetail(d))
+      .then((d) => {
+        setDetail(d);
+        // 종이 FRQ 과목의 손글씨 미리보기(+1 호출, 획 제외). 못 읽어도 결과는 그대로 보인다.
+        if (d?.examProgram === "ap" && apFrqIsPaper(d.apSubject)) void loadFrqHandwritingAction(id, false).then((r) => { if (r.ok) setHandwriting(r.value); }).catch(() => {});
+      })
       .catch((e) => setDetailError(e instanceof Error ? e.message : "Couldn't load the results."));
   }
 
@@ -103,7 +111,7 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
           <p className="text-[13px] text-grey-500">Loading…</p>
         ) : (
           detail.examProgram === "ap" ? (
-            <ApExamResultView attempt={detail} />
+            <ApExamResultView attempt={detail} handwriting={handwriting} />
           ) : (
             <MockExamResultView
               attempt={detail}

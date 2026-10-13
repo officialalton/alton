@@ -195,3 +195,31 @@ export async function loadMockExamAnnotationsAction(attemptId: string, setItemId
     return { highlights: [], eliminated: [] };
   }
 }
+
+/** AP 종이 FRQ 과목: 파트별 손글씨 저장(빈 획 배열 = 지우기). 섹션 시계·제출 후 잠금은 서버가 강제한다(마이그레이션 570). */
+export async function saveFrqHandwritingAction(
+  attemptId: string,
+  setItemId: string,
+  partLabel: string,
+  strokes: { c: number; p: number[] }[],
+  previewSvg: string,
+  boardHeight = 500,
+): Promise<ActionResult> {
+  return callRpc(
+    "save_mock_exam_frq_handwriting",
+    { p_attempt_id: attemptId, p_set_item_id: setItemId, p_part_label: partLabel, p_strokes: strokes, p_preview_svg: previewSvg, p_board_height: boardHeight },
+    "Could not save your handwriting.",
+  );
+}
+
+/** 응시 하나의 모든 파트 손글씨(withStrokes=false 면 미리보기만). */
+export async function loadFrqHandwritingAction(attemptId: string, withStrokes: boolean): Promise<ActionResult<import("@/lib/ap-exam/frq-ink").FrqInkRow[]>> {
+  try {
+    const { supabase } = await requireStudentFeature("mock_exam");
+    const { data, error } = await supabase.rpc("load_mock_exam_frq_handwriting", { p_attempt_id: attemptId, p_with_strokes: withStrokes });
+    if (error) return { ok: false, error: toErr(error, "Could not load your handwriting.") };
+    return { ok: true, value: Array.isArray(data) ? data : [] };
+  } catch (e) {
+    return { ok: false, error: toErr(e, "Could not load your handwriting.") };
+  }
+}
