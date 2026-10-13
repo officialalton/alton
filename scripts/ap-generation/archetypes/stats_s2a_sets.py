@@ -18,12 +18,12 @@ def _set_pack(arch, intro, stim, members, facts, _unused=None):
 
 
 # ======================= 세트 1: 이항 확률분포 표 (단원 2) =======================
-BN_CTX = [("an inspector examines a random sample of ${n}$ items from a large shipment in which ${pp}\\%$ of the items are defective", "items", "defective", "defective items in the sample"),
-          ("a clinic phones a random sample of ${n}$ patients from a large list on which ${pp}\\%$ of the patients missed their last appointment", "patients", "missed an appointment", "patients in the sample who missed an appointment")]
+BN_CTX = [dict(sc="an inspector examines a random sample of ${n}$ items from a large shipment in which ${pp}\\%$ of the items are defective", units="items", what="defective items in the sample", pl="are defective", sg="is defective", would="be defective"),
+          dict(sc="a clinic phones a random sample of ${n}$ patients from a large list on which ${pp}\\%$ of the patients missed their last appointment", units="patients", what="patients in the sample who missed an appointment", pl="missed an appointment", sg="missed an appointment", would="have missed an appointment")]
 
 
 def st_set_binomial(rng):
-    sc, units, trait, what = pick(rng, BN_CTX)
+    cx = pick(rng, BN_CTX); sc, units, what = cx['sc'], cx['units'], cx['what']
     n = pick(rng, [5, 6, 7]); p = pick(rng, [0.2, 0.3, 0.4])
     pm = [math.comb(n, k) * p ** k * (1 - p) ** (n - k) for k in range(n + 1)]
     ref = [ss.binom.pmf(k, n, p) for k in range(n + 1)]
@@ -66,7 +66,7 @@ def st_set_binomial(rng):
     k2 = Opt(T(ge2, 3), True, f"$P(X \\ge 2) = 1 - P(X=0) - P(X=1) = 1 - {tbl[0]:.4f} - {tbl[1]:.4f} \\approx {ge2:.3f}$, which equals the sum of the table probabilities from $x=2$ on.", round(ge2, 3))
     w2 = {"gt": "Finds $P(X > 2)$, leaving out the probability that $X = 2$.", "eq": "Finds $P(X = 2)$ only, instead of the probability of $2$ or more.", "c1": "Subtracts only $P(X=1)$ from $1$, leaving out the probability that $X=0$ from the removed values."}
     ds2 = [Opt(T(r3[k], 3), False, w2[k], r3[k]) for k in ("gt", "eq", "c1")]
-    m2 = _member("st_set_binomial", 2, "2.10", "3.C", f"What is the probability that at least $2$ of the {units} in the sample are {trait}? Use the table and round to three decimal places.", k2, ds2, rng,
+    m2 = _member("st_set_binomial", 2, "2.10", "3.C", f"What is the probability that at least $2$ of the {units} in the sample {cx['pl']}? Use the table and round to three decimal places.", k2, ds2, rng,
                  sbp("st_set_binomial_q2", "2.10", "3.C", "Find an at-least probability from a probability distribution table",
                      ["Translate at least 2 into the values 2 and above of X", "Add those probabilities or subtract the probabilities of the values below 2 from 1"],
                      [("P(X at least 2) equals one minus the probabilities of 0 and 1", "the table lists the probability of every value of X")],
@@ -76,10 +76,10 @@ def st_set_binomial(rng):
     # Q3: 확률 해석(P(X=0))
     z = pm[0]
     pctz = int(round(z * 100))
-    k3 = Opt(f"In about ${pctz}\\%$ of all such random samples of ${n}$ {units}, none of the {units} would be {trait}", True, f"$P(X=0) \\approx {z:.4f}$ is the long-run proportion of random samples of ${n}$ {units} with no {trait} {units}.", None)
-    ds3 = [Opt(f"There is a ${pctz}\\%$ chance that any one of the {units} in a sample is {trait}", False, f"Confuses $P(X=0)$ with the probability for one individual item; the probability for one {units[:-1]} is given in the scenario.", None),
-           Opt(f"Exactly ${pctz}\\%$ of the {units} in every sample of ${n}$ are {trait}", False, "Reads a probability as a guaranteed percentage in every sample.", None),
-           Opt(f"In about ${pctz}\\%$ of all such samples, all of the {units} would be {trait}", False, "Reverses the event: $X=0$ means none are of the stated kind, not all.", None)]
+    k3 = Opt(f"In about ${pctz}\\%$ of all such random samples of ${n}$ {units}, none of the {units} would {cx['would']}", True, f"$P(X=0) \\approx {z:.4f}$ is the long-run proportion of random samples of ${n}$ {units} in which none of the {units} {cx['would'].replace('be ', 'are ').replace('have ', '')}.", None)
+    ds3 = [Opt(f"There is a ${pctz}\\%$ chance that any one of the {units} in a sample {cx['sg']}", False, f"Confuses $P(X=0)$ with the probability for one individual item; the probability for one {units[:-1]} is given in the scenario.", None),
+           Opt(f"Exactly ${pctz}\\%$ of the {units} in every sample of ${n}$ {cx['pl']}", False, "Reads a probability as a guaranteed percentage in every sample.", None),
+           Opt(f"In about ${pctz}\\%$ of all such samples, all of the {units} would {cx['would']}", False, "Reverses the event: $X=0$ means none are of the stated kind, not all.", None)]
     m3 = _member("st_set_binomial", 3, "2.8", "4.D", f"Which of the following is the correct interpretation of $P(X=0)$ in this context?", k3, ds3, rng,
                  sbp("st_set_binomial_q3", "2.8", "4.D", "Interpret a probability from a distribution in context",
                      ["Read P(X = 0) from the table and recall what the event X = 0 means in words", "Interpret a probability as a long-run proportion of repeated random samples"],
@@ -91,7 +91,7 @@ def st_set_binomial(rng):
 
 
 # ======================= 세트 2: 회귀 컴퓨터 출력 (단원 5) =======================
-RG_CTX = [("The relationship between the number of hours a student spent studying and the exam score, in points, is described by a least-squares regression line", "Hours", "Score", "hour", "point", (2, 8), (48, 5.5), "study time", "exam score"),
+RG_CTX = [("The relationship between the number of hours a student spent studying and the exam score, in points, is described by a least-squares regression line", "Hours", "Score", "hour", "points", (2, 8), (48, 5.5), "study time", "exam score"),
           ("The relationship between the age of a used car, in years, and its selling price, in thousands of dollars, is described by a least-squares regression line", "Age", "Price", "year", "thousand dollars", (2, 9), (26, -2.0), "age", "selling price")]
 
 
@@ -116,9 +116,9 @@ def st_set_regression(rng):
     stim = stat_stim("Computer output for a least-squares regression", "output", output=out)
     intro = f"Questions refer to the following information. {intro0}. Computer output for the regression is shown."
     # Q1 기울기 해석
-    key1 = Opt(f"For each additional {xu} of {xdesc}, the predicted {ydesc} {'increases' if b > 0 else 'decreases'} by about ${abs(b):.2f}$ {yu}s", True, f"The slope is ${b:.2f}$, so each one-{xu} increase in {xdesc} goes with a predicted change of ${b:.2f}$ {yu}s in {ydesc}.", None)
-    ds1 = [Opt(f"For each additional {xu} of {xdesc}, the {ydesc} {'increases' if b > 0 else 'decreases'} by exactly ${abs(b):.2f}$ {yu}s", False, "Claims an exact change for every individual, but the slope describes the predicted change on average.", None),
-           Opt(f"For each additional ${abs(b):.2f}$ {yu}s of {ydesc}, the predicted {xdesc} {'increases' if b > 0 else 'decreases'} by about $1$ {xu}", False, "Reverses the roles of the explanatory and the response variables.", None),
+    key1 = Opt(f"For each additional {xu} of {xdesc}, the predicted {ydesc} {'increases' if b > 0 else 'decreases'} by about ${abs(b):.2f}$ {yu}", True, f"The slope is ${b:.2f}$, so each one-{xu} increase in {xdesc} goes with a predicted change of ${b:.2f}$ {yu} in {ydesc}.", None)
+    ds1 = [Opt(f"For each additional {xu} of {xdesc}, the {ydesc} {'increases' if b > 0 else 'decreases'} by exactly ${abs(b):.2f}$ {yu}", False, "Claims an exact change for every individual, but the slope describes the predicted change on average.", None),
+           Opt(f"For each additional ${abs(b):.2f}$ {yu} of {ydesc}, the predicted {xdesc} {'increases' if b > 0 else 'decreases'} by about $1$ {xu}", False, "Reverses the roles of the explanatory and the response variables.", None),
            Opt(f"For each additional {xu} of {xdesc}, the predicted {ydesc} {'increases' if b > 0 else 'decreases'} by about ${abs(b):.2f}\\%$", False, "Treats the slope as a percent change instead of a change in the units of the response.", None)]
     m1 = _member("st_set_regression", 1, "5.3", "4.D", "Which of the following is the correct interpretation of the slope of the regression line?", key1, ds1, rng,
                  sbp("st_set_regression_q1", "5.3", "4.D", "Interpret the slope of a least-squares line in context",
