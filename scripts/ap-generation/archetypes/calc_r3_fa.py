@@ -270,6 +270,12 @@ def frq_cooling_check(rng):
     if abs(cd - slope) > 1e-5:
         raise ValueError("independent_check_failed")
     ts = math.log((T0 - Ta) / (Tg - Ta)) / k
+    # 반올림 경계 회피: 어떤 값도 소수 넷째 자리가 5 근처이면 안 되고, 반올림한 중간값으로 구한 추정치가 키와 0.0004 이내여야 한다(채점 일관성)
+    for v_ in (T(t0), slope, est, act, ts, -k * (Tg - Ta)):
+        if abs((abs(v_) * 1000) % 1 - 0.5) < 0.15:
+            raise ValueError("rounding_boundary")
+    if abs(round(T(t0), 3) + round(slope, 3) * h - est) > 0.0004:
+        raise ValueError("rounding_boundary")
     tb = _O.bisect(lambda u: T(u) - Tg, 0, 400, xtol=1e-13)
     if abs(tb - ts) > 1e-9:
         raise ValueError("independent_check_failed")
@@ -298,14 +304,178 @@ def frq_cooling_check(rng):
              [row("d1", 1, "Equation for the time", [_m(f"T(t)={Tg}")]),
               row("d2", 1, "Time (calculator)", [_m(f"t={f3(ts)}") + " minutes"], requires="d1", nums=True, units=True, tol="±0.001"),
               row("d3", 1, "Rate of change at that time with units: degrees Celsius per minute (negative: the pan is cooling)", [_m(f3(rate)) + " degrees Celsius per minute"], requires="d2", nums=True, units=True, tol="±0.001")])]
-    for p_, tc in zip(parts, [["7.3"], ["4.6"], ["5.6"], ["4.1"]]):
+    for p_, tc in zip(parts, [["7.2"], ["4.6"], ["5.6"], ["4.1"]]):
         p_["topic_codes"] = tc
-    return _pack("frq_cooling_check", "cooling_model_check_tangent_calc", "7.3", ["4.6", "5.6", "4.1"], "1.E", "Cooling model: verify the differential equation, tangent-line estimate, over or under by concavity, time to a target temperature and the rate then",
+    return _pack("frq_cooling_check", "cooling_model_check_tangent_calc", "7.2", ["4.6", "5.6", "4.1"], "1.E", "Cooling model: verify the differential equation, tangent-line estimate, over or under by concavity, time to a target temperature and the rate then",
                  stim, parts, [f"Ta={Ta}", f"T0={T0}", f"k={k}", f"t0={t0}", f"h={h}", f"Tg={Tg}", f"est={est:.6f}", f"act={act:.6f}", f"ts={ts:.6f}", f"rate={rate:.6f}"],
                  "Verify that a given exponential cooling model satisfies its differential equation, use the tangent line to estimate, decide over or under from the second derivative, and find the time to a target temperature and the rate of change then",
                  ["Differentiate the model and compare with the equation", "Tangent line from the value and slope at the starting time", "Positive second derivative means the tangent line is below the graph", "Solve T(t) = target and use the equation for the rate"],
                  [("T'' is positive for all t so the tangent estimate is always an underestimate", "T''(t) = k^2 (T0 - Ta) e^(-kt) > 0")], {"type": "text", "must_include": ["model formula", "differential equation"]},
                  "the tangent slope is checked by central difference, the target time by bisection on T(t) - target (independent of the logarithm formula), the rate at that time by central difference, and concavity by second differences of T")
+
+
+def _safe(*vals):
+    """3자리 반올림 경계에서 멀리 떨어진 값만 허용(풀이자가 반올림한 중간값으로 계산해도 같은 답이 나오게)."""
+    for v in vals:
+        fr = (abs(v) * 1000) % 1
+        if abs(fr - 0.5) < 0.03 or fr < 0.003 or fr > 0.997:
+            raise ValueError("rounding_boundary")
+
+
+# ------------------------------------------------------------------ 5) 곡선과 직선으로 둘러싸인 영역: 교점·넓이·넓이를 이등분하는 수직선·최대 수직 거리
+def _retry(fn, rng):
+    for _ in range(400):
+        try:
+            return fn(rng)
+        except ValueError:
+            continue
+    raise ValueError("no_sample")
+
+
+def frq_region_bisect(rng):
+    return _retry(_region_impl, rng)
+
+
+def frq_closest_point(rng):
+    return _retry(_closest_impl, rng)
+
+
+def _region_impl(rng):
+    m = rng.choice([2, 3])
+    A = m * rng.choice([1, 2])
+    c = round(rng.choice([0.2, 0.3, 0.4, 0.5]) * A / m, 2)
+    f = lambda x: A * math.sin(x / m)
+    d = lambda x: A * math.sin(x / m) - c * x
+    N = 120000
+    top = m * math.pi
+    grid = [top * i / N for i in range(1, N + 1)]
+    sc = [i for i in range(N - 1) if d(grid[i]) * d(grid[i + 1]) < 0]
+    if len(sc) != 1:
+        raise ValueError("bad_design")
+    r = _O.brentq(d, grid[sc[0]], grid[sc[0] + 1], xtol=1e-14)
+    if abs(grid[sc[0]] - r) > 2 * top / N:
+        raise ValueError("independent_check_failed")
+    rr = round(r, 3)
+    S = _I.quad(d, 0, r, epsabs=1e-13, epsrel=1e-13)[0]
+    S_closed = A * m * (1 - math.cos(r / m)) - c * r * r / 2
+    S_round = _I.quad(d, 0, rr)[0]
+    if abs(S - S_closed) > 1e-9:
+        raise ValueError("independent_check_failed")
+    cum = lambda h, rt: _I.quad(d, 0, h)[0] - _I.quad(d, 0, rt)[0] / 2
+    h = _O.brentq(lambda u: cum(u, r), 1e-6, r - 1e-6, xtol=1e-14)
+    h_round = _O.brentq(lambda u: cum(u, rr), 1e-6, rr - 1e-6, xtol=1e-14)
+    # 독립: 누적 사다리꼴 격자에서 절반 넘는 첫 위치
+    M = 200000
+    acc, hg = 0.0, None
+    for i in range(1, M + 1):
+        a0, a1 = r * (i - 1) / M, r * i / M
+        acc += (d(a0) + d(a1)) / 2 * (r / M)
+        if acc >= S / 2:
+            hg = a1
+            break
+    if hg is None or abs(hg - h) > 3 * r / M:
+        raise ValueError("independent_check_failed")
+    xm = m * math.acos(c * m / A)
+    gmax = max(d(r * i / 100000) for i in range(100001))
+    dmax = d(xm)
+    if abs(gmax - dmax) > 1e-7 or not (0 < xm < r):
+        raise ValueError("independent_check_failed")
+    _safe(r, S, h, xm, dmax)
+    for u, v in ((S, S_round), (h, h_round)):
+        if f3(u) != f3(v):
+            raise ValueError("rounding_boundary")
+    if abs(h - r / 2) < 0.15:
+        raise ValueError("bad_design")
+    mt = f"\\sin\\left(\\dfrac{{x}}{{{m}}}\\right)"
+    stim = {"kind": "text", "description": "A region between a sine curve and a line", "data": {"model": f"y = {A} sin(x/{m}) and y = {c:g}x, x >= 0"}}
+    parts = [
+        part("a", f"Let $R$ be the region in the first quadrant enclosed by the curve $y={A}{mt}$ and the line $y={c:g}x$. Find the $x$-coordinate of the point, other than the origin, where the curve and the line intersect.", 2, "calculate", ["1.D", "1.E"],
+             f"Solve ${A}\\sin(x/{m})={c:g}x$ on $x>0$: $x={f3(r)}$.",
+             [row("a1", 1, "Sets the two expressions equal to find the intersection", [_m(f"{A}\\sin(x/{m})={c:g}x")]),
+              row("a2", 1, "Solution with a calculator", [_m(f"x={f3(r)}")], requires="a1", nums=True, tol="±0.001")]),
+        part("b", "Find the area of $R$. Show the setup for your calculation.", 2, "calculate", ["1.D", "1.E"],
+             f"Area $=\\int_0^{{{f3(r)}}}\\left({A}\\sin(x/{m})-{c:g}x\\right)dx={f3(S)}$.",
+             [row("b1", 1, "Integral of the upper curve minus the lower curve between the limits found in part (a)", [_m(f"\\int_0^{{{f3(r)}}}({A}\\sin(x/{m})-{c:g}x)\\,dx")]),
+              row("b2", 1, "Value of the area", [_m(f3(S))], requires="b1", nums=True, tol="±0.001")]),
+        part("c", "The vertical line $x=k$, with $0<k<$ the $x$-coordinate found in part (a), divides $R$ into two regions of equal area. Write an equation involving an integral that gives $k$, and find the value of $k$.", 3, "calculate", ["1.D", "1.E"],
+             f"The area of the left piece must be half of the total: $\\int_0^{{k}}\\left({A}\\sin(x/{m})-{c:g}x\\right)dx={f3(S / 2)}$, which gives $k={f3(h)}$.",
+             [row("c1", 1, "Uses half of the total area from part (b) as the target", [_m(f3(S / 2))], nums=True, tol="±0.001"),
+              row("c2", 1, "Equation with an integral from zero to k of the difference of the curves equal to half of the area", [_m(f"\\int_0^{{k}}({A}\\sin(x/{m})-{c:g}x)\\,dx={f3(S / 2)}")], alt=[_m(f"\\int_k^{{{f3(r)}}}({A}\\sin(x/{m})-{c:g}x)\\,dx={f3(S / 2)}")]),
+              row("c3", 1, "Value of k", [_m(f"k={f3(h)}")], requires="c2", nums=True, tol="±0.001")]),
+        part("d", "For $0\\le x\\le$ the $x$-coordinate found in part (a), find the greatest vertical distance between the curve and the line. Justify your answer.", 2, "explain", ["3.B", "3.E"],
+             f"The vertical distance is $g(x)={A}\\sin(x/{m})-{c:g}x$, and $g'(x)={A / m:g}\\cos(x/{m})-{c:g}=0$ at $x={f3(xm)}$. $g'$ changes from positive to negative there and $g=0$ at both ends, so the greatest distance is $g({f3(xm)})={f3(dmax)}$.",
+             [row("d1", 1, "Sets the derivative of the vertical distance equal to zero and solves", [_m(f"g'(x)=0"), _m(f"x={f3(xm)}")], nums=True, both=True, tol="±0.001"),
+              row("d2", 1, "Justification: $g'$ changes from positive to negative (or the endpoint values are zero), and the greatest distance value", [_m("g'") + " changes sign from positive to negative", _m(f3(dmax))], requires="d1", nums=True, both=True, tol="±0.001")])]
+    for p_, tc in zip(parts, [["8.4"], ["8.4"], ["8.4"], ["5.10"]]):
+        p_["topic_codes"] = tc
+    return _pack("frq_region_bisect", "region_bisecting_line_calc", "8.4", ["5.10"], "1.E", "Region between a sine curve and a line: intersection, area, vertical line bisecting the area, greatest vertical distance",
+                 stim, parts, [f"A={A}", f"m={m}", f"c={c}", f"r={r:.6f}", f"S={S:.6f}", f"k={h:.6f}", f"xm={xm:.6f}", f"dmax={dmax:.6f}"],
+                 "Find the intersection of a sine curve and a line with a calculator, the enclosed area, the vertical line that splits the area in half (an integral equation solved numerically) and the greatest vertical gap with a derivative argument",
+                 ["Solve the equation of the curves for the right endpoint", "Integrate top minus bottom for the area", "Set the integral from 0 to k equal to half the area and solve for k", "Maximize the vertical gap with the derivative and sign change"],
+                 [("the line starts at the origin and meets the sine curve once more before the curve returns to zero", "the grid sign scan finds exactly one crossing in (0, m*pi)")], {"type": "text", "must_include": ["curve", "line"]},
+                 "the intersection by a 120000-point grid sign scan, the area by the closed-form antiderivative, the bisecting line by a 200000-step cumulative trapezoid scan (independent of Brent's method and quad), and the greatest gap by a grid maximum")
+
+
+# ------------------------------------------------------------------ 6) 점에서 곡선 y=ln x 까지 최단 거리: 거리 함수·최소화·수직 조건·거리 변화율
+def _closest_impl(rng):
+    p = rng.choice([3, 4, 5])
+    x1 = rng.choice([1, 2])
+    x2 = rng.choice([2, 4])
+    v = rng.choice([2, 3, 4])
+    D = lambda x: math.sqrt((x - p) ** 2 + math.log(x) ** 2)
+    Dp = lambda x: ((x - p) + math.log(x) / x) / D(x)
+    lo, hi, N = 0.5, 8.0, 150000
+    grid = [lo + (hi - lo) * i / N for i in range(N + 1)]
+    sc = [i for i in range(N) if Dp(grid[i]) * Dp(grid[i + 1]) < 0]
+    if len(sc) != 1 or Dp(lo) >= 0 or Dp(hi) <= 0:
+        raise ValueError("bad_design")
+    xs = _O.brentq(Dp, grid[sc[0]], grid[sc[0] + 1], xtol=1e-14)
+    gmin = min(grid, key=D)
+    if abs(gmin - xs) > 2 * (hi - lo) / N:
+        raise ValueError("independent_check_failed")
+    for x in (x1, x2, xs):
+        if abs((D(x + 1e-6) - D(x - 1e-6)) / 2e-6 - Dp(x)) > 1e-6:
+            raise ValueError("independent_check_failed")
+    xr = round(xs, 3)
+    dmin = D(xs)
+    d1v, d1p = D(x1), Dp(x1)
+    rate = Dp(x2) * v
+    ts = 1 / xr
+    ss = math.log(xr) / (xr - p)
+    prod = ts * ss
+    _safe(xs, dmin, d1v, d1p, rate, ts, ss)
+    if f3(D(xr)) != f3(dmin) or f3(Dp(x2) * v) != f3(round(Dp(x2), 3) * v) or abs(prod + 1) > 0.01:
+        raise ValueError("rounding_boundary")
+    if abs(ts - 1 / xs) > 1e-3 or abs(Dp(x2)) < 0.05:
+        raise ValueError("bad_design")
+    stim = {"kind": "text", "description": "A drone flying above a curved path, a ground station at a fixed point", "data": {"model": f"path y = ln(x), x > 0; station at ({p}, 0); distances in kilometers"}}
+    pathtext = "decreasing" if rate < 0 else "increasing"
+    parts = [
+        part("a", f"A drone flies along the path $y=\\ln x$ for $0.5\\le x\\le 8$, where $x$ and $y$ are in kilometers. A ground station is located at the point $({p},0)$. Let $D(x)$ be the distance, in kilometers, from the station to the drone when the drone is at the point $(x,\\ln x)$. Find $D({x1})$ and $D'({x1})$.", 2, "calculate", ["1.E", "2.C"],
+             f"$D(x)=\\sqrt{{(x-{p})^2+(\\ln x)^2}}$, so $D({x1})={f3(d1v)}$ kilometers and $D'({x1})={f3(d1p)}$.",
+             [row("a1", 1, "Value of the distance at the given position", [_m(f"D({x1})={f3(d1v)}")], nums=True, tol="±0.001"),
+              row("a2", 1, "Value of the derivative of the distance at the given position", [_m(f"D'({x1})={f3(d1p)}")], nums=True, tol="±0.001")]),
+        part("b", "Find the value of $x$ for which the drone is closest to the station. Find that least distance and justify your answer.", 3, "explain", ["3.B", "3.E"],
+             f"$D'(x)=0$ at $x={f3(xs)}$. $D'$ changes from negative to positive there, and it is the only critical point on the interval, so the least distance is $D({f3(xs)})={f3(dmin)}$ kilometers.",
+             [row("b1", 1, "Sets the derivative of the distance equal to zero and solves with a calculator", [_m("D'(x)=0"), _m(f"x={f3(xs)}")], nums=True, both=True, tol="±0.001"),
+              row("b2", 1, "Justification: $D'$ changes sign from negative to positive at this value, so the distance has a minimum", [_m("D'") + " changes from negative to positive"], requires="b1"),
+              row("b3", 1, "Least distance", [_m(f3(dmin)) + " kilometers"], requires="b2", nums=True, units=True, tol="±0.001")]),
+        part("c", "At the point of the path closest to the station, show that the line segment from the station to the drone is perpendicular to the line tangent to the path.", 2, "explain", ["1.E", "3.E"],
+             f"The tangent slope is $\\frac{{1}}{{x}}={f3(ts)}$ at $x={f3(xr)}$. The segment from $({p},0)$ to $({f3(xr)},\\ln {f3(xr)})$ has slope $\\frac{{\\ln x}}{{x-{p}}}={f3(ss)}$. The product of the slopes is {f3(prod)}, approximately $-1$, so the lines are perpendicular.",
+             [row("c1", 1, "Slope of the tangent line and slope of the segment at the closest point", [_m(f"\\frac{{1}}{{{f3(xr)}}}={f3(ts)}"), _m(f"{f3(ss)}")], nums=True, both=True, tol="±0.001"),
+              row("c2", 1, "Conclusion: the product of the slopes is negative one, so the lines are perpendicular", [_m("-1"), "perpendicular"], requires="c1", both=True)]),
+        part("d", f"The drone moves along the path so that $x$ is increasing at a constant rate of ${v}$ kilometers per minute. Find the rate at which the distance from the station to the drone is changing at the instant $x={x2}$. Using correct units, state whether the distance is increasing or decreasing.", 2, "calculate", ["1.E", "3.F"],
+             f"$\\frac{{dD}}{{dt}}=D'({x2})\\cdot\\frac{{dx}}{{dt}}={f3(Dp(x2))}\\cdot {v}={f3(rate)}$ kilometers per minute, so the distance is {pathtext}.",
+             [row("d1", 1, "Uses the chain rule: the rate of the distance is the derivative of D times the rate of x", [_m(f"\\frac{{dD}}{{dt}}=D'({x2})\\cdot\\frac{{dx}}{{dt}}")]),
+              row("d2", 1, "Value with units, and whether the distance is increasing or decreasing", [_m(f3(rate)) + " kilometers per minute", pathtext], requires="d1", nums=True, units=True, both=True, tol="±0.001")])]
+    for p_, tc in zip(parts, [["3.1"], ["5.10"], ["5.10"], ["4.4"]]):
+        p_["topic_codes"] = tc
+    return _pack("frq_closest_point", "closest_point_to_curve_calc", "5.10", ["3.1", "4.4"], "3.E", "Closest point on a curved path to a fixed station: distance and its derivative, minimum distance, perpendicular condition, rate of change of distance",
+                 stim, parts, [f"p={p}", f"x1={x1}", f"x2={x2}", f"v={v}", f"xs={xs:.6f}", f"dmin={dmin:.6f}", f"D1={d1v:.6f}", f"Dp1={d1p:.6f}", f"rate={rate:.6f}", f"prod={prod:.6f}"],
+                 "Minimize the distance from a fixed point to a logarithmic curve with a calculator, justify with the sign of the derivative, verify the perpendicular condition at the minimizer, and find the rate of change of distance as the point moves",
+                 ["Write the distance as a function of x and differentiate it", "Solve D' = 0 numerically and use the sign change", "Compare the tangent slope with the segment slope", "Multiply D' by the rate of x for the rate of the distance"],
+                 [("D' is negative at the left end and positive at the right end and changes sign exactly once", "the grid sign scan finds one crossing")], {"type": "text", "must_include": ["path formula", "station point"]},
+                 "the minimizer by a 150000-point grid minimum of D (independent of Brent's method on D'), the derivative by central difference, and the perpendicular condition by the numeric product of slopes")
 
 
 STAGE_LISTS = {"supp_r3fa_ab": ["frq_accum_charge", "frq_marginal_profit", "frq_trench_volume", "frq_cooling_check"]}

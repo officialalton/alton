@@ -37,3 +37,6 @@ STAGE_LISTS["supp_r3b2_ab"] = ["c_chain_exp_cos_point", "c_inverse_deriv_formula
 
 # R3-C: FRQ. 계산기 허용(Part A) 4종 + 계산기 불가(Part B) 6종(각 새 유형 1 시드).
 STAGE_LISTS["supp_r3c_ab"] = ["frq_accum_charge", "frq_marginal_profit", "frq_trench_volume", "frq_cooling_check", "frq_ivp_antiderivative", "frq_rational_param", "frq_exp_decay_de", "frq_pen_cost", "frq_limits_continuity", "frq_inverse_table"]
+
+# R3-C2: 반려 FRQ 4종을 고쳐 새 후보로 재시도(자동 수선 아님) + 새 FRQ 유형 4종.
+STAGE_LISTS["supp_r3c2_ab"] = ["frq_cooling_check", "frq_exp_decay_de", "frq_limits_continuity", "frq_rational_param", "frq_region_bisect", "frq_closest_point", "frq_ftc_chain_limit", "frq_arctan_zeros"]

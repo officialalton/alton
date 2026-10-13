@@ -34,7 +34,11 @@ def _pack(name, template, topic, extra, skill, title, stim, parts, topic_codes, 
     pk = {"archetype": name, "template": template, "topic": topic, "extra_topics": extra, "skill": skill, "representative_skill": skill, "calculator": "not_allowed", "title": title,
           "stimulus": stim, "parts": parts, "total_points": 9, "est_minutes": 15, "facts": facts}
     pk["blueprint"] = frq_blueprint(name, AB, pk, concept, thinking, conds, material, indep)
-    return pk
+    # sympy.latex 의 \log{\left(2 \right)} 를 \ln 2 로(학생·채점 문장의 표기 일관성)
+    import json as _json, re as _re
+    s = _json.dumps(pk)
+    s = _re.sub(r"\\\\log\{\\\\left\(([^{}]*?) \\\\right\)\}", lambda m: "\\\\ln " + m.group(1), s)
+    return _json.loads(s)
 
 
 # ------------------------------------------------------------------ 1. 도함수 공식 + 초깃값: 접선 근사, 오목성, 치환 적분, 닫힌 구간 극값
@@ -139,14 +143,14 @@ def frq_rational_param(rng):
              f"$f'(x)=\\frac{{{A}({B}-x^2)}}{{(x^2+{B})^2}}$ is negative for $x<-{p}$, positive for $-{p}<x<{p}$, and negative for $x>{p}$. So $f$ has a relative minimum at $x=-{p}$ with $f(-{p})=-{q}$ and a relative maximum at $x={p}$ with $f({p})={q}$. Since $f(x)\\to 0$ as $x\\to\\pm\\infty$ and $-{q}<0<{q}$, no value outside $[-{q},{q}]$ occurs, so these are the absolute extreme values.",
              [row("c1", 1, "Sign of $f'$ on the three intervals determined by the critical points", [f"$f'$ changes sign at $x=-{p}$ and $x={p}$"], nums=True),
               row("c2", 1, "Classifies the critical points and gives the values of $f$ there", [f"$f(-{p})=-{q}$", f"$f({p})={q}$"], requires="c1", nums=True),
-              row("c3", 1, "Reason that no other value is larger or smaller: the limits at infinity are $0$ and there are no other critical points", ["limits at $\\pm\\infty$ are $0$"], both=True, requires="c2", nums=True)]),
+              row("c3", 1, "Reason that no other value is larger or smaller: the limits at infinity are $0$ and there are no other critical points", ["limits at $\\pm\\infty$ are $0$", "there are no other critical points, so these extreme values are absolute"], both=True, requires="c2", nums=True)]),
         part("d", f"For which values of the constant $k$ does the equation $f(x)=k$ have exactly two solutions? Justify your answer.", 2, "explain", ["3.B", "3.C", "3.E"],
              f"On $(-\\infty,-{p}]$, $f$ decreases from values near $0$ to $-{q}$; on $[-{p},{p}]$, $f$ increases from $-{q}$ to ${q}$ and equals $0$ only at $x=0$; on $[{p},\\infty)$, $f$ decreases from ${q}$ toward $0$ without reaching it. By the Intermediate Value Theorem and monotonicity on each piece, each $k$ with $0<k<{q}$ is attained once on $(0,{p})$ and once on $({p},\\infty)$, and each $k$ with $-{q}<k<0$ is attained once on $(-\\infty,-{p})$ and once on $(-{p},0)$. The values $k=0$ and $k=\\pm {q}$ give exactly one solution, and $|k|>{q}$ gives none. So the answer is $0<|k|<{q}$.",
              [row("d1", 1, "Describes the behavior of $f$ on each of the intervals, including the values at the extremes", [f"$f(-{p})=-{q}$", f"$f({p})={q}$"], nums=True),
               row("d2", 1, "Conclusion with the Intermediate Value Theorem reason: exactly two solutions when $0<|k|<" + str(q) + "$", [f"$0<|k|<{q}$"], both=True, requires="d1", nums=True)])]
     stim = {"kind": "text", "description": "A rational function with unknown constants", "data": {"definition": "f(x) = A x / (x^2 + B), A > 0, B > 0", "conditions": f"critical point at x = {p}; f({p}) = {q}"}}
     return _pack("frq_rational_param", "parametric_rational_global_extrema", "5.2", ["1.15", "5.4", "5.5"], "3.E", "A rational function with unknown constants: critical-point conditions, limits at infinity, global extrema, number of solutions", stim, parts,
-                 [["5.2"], ["1.15"], ["5.5"], ["1.16"]], [f"p={p}", f"q={q}", f"A={A}", f"B={B}"],
+                 [["5.2"], ["1.15"], ["5.5"], ["5.5"]], [f"p={p}", f"q={q}", f"A={A}", f"B={B}"],
                  "Determine two constants of a rational function from a critical point and a value, then use the limit at infinity to justify global extrema and count solutions of f(x) = k",
                  ["Differentiate with the quotient rule and set f'(p) = 0", "Use the value to solve for the second constant", "Use the sign of f' and the limits at infinity for the absolute extrema", "Track the ranges on the monotone pieces to count solutions"],
                  [("f' = A(B - x^2)/(x^2 + B)^2 vanishes only at x = -p and x = p", "A = 2pq and B = p^2 by construction"), ("f tends to 0 at both ends", "the extremes are q and -q")], {"type": "text", "must_include": ["definition of f with constants", "critical point and value"]},
@@ -294,8 +298,8 @@ def frq_limits_continuity(rng):
               row("a3", 1, "Value of the limit", [f"${L1}$"], requires="a2", nums=True)]),
         part("b", f"Let $g$ be the function defined by $g(x)={hx}$ for $x>0$ with $x\\ne {p}$, and $g({p})=c$. For what value of $c$ is $g$ continuous at $x={p}$? Justify your answer.", 1, "explain", ["3.B", "3.C"],
              f"$g$ is continuous at $x={p}$ exactly when $\\lim_{{x\\to {p}}}g(x)=g({p})$, so $c={L1}$.",
-             [row("b1", 1, "Value of $c$ with the condition that the limit equals the function value", [f"$c={L1}$"], nums=True)]),
-        part("c", f"Find $\\lim_{{x\\to 0}}\\frac{{e^x-1-x}}{{{q}x^2}}$. Show the work that leads to your answer.", 3, "calculate", ["1.E", "3.C"],
+             [row("b1", 1, "Value of $c$ with the condition that the limit equals the function value", [f"$c={L1}$", "the limit equals the function value"], both=True, nums=True)]),
+        part("c", f"Find $\\lim_{{x\\to 0}}\\frac{{e^x-1-x}}{{{'' if q == 1 else q}x^2}}$. Show the work that leads to your answer.", 3, "calculate", ["1.E", "3.C"],
              f"The form is $\\frac{{0}}{{0}}$; L’Hospital’s Rule gives $\\lim_{{x\\to 0}}\\frac{{e^x-1}}{{{2 * q}x}}$, again $\\frac{{0}}{{0}}$; applying it once more gives $\\lim_{{x\\to 0}}\\frac{{e^x}}{{{2 * q}}}=\\frac{{1}}{{{2 * q}}}$.",
              [row("c1", 1, "Identifies the form $\\frac00$ and applies L’Hospital’s Rule once", [f"$\\frac{{e^x-1}}{{{2 * q}x}}$"], nums=True),
               row("c2", 1, "Recognizes that the new form is still $\\frac00$ and applies the rule again", [f"$\\frac{{e^x}}{{{2 * q}}}$"], requires="c1", nums=True),
@@ -304,7 +308,7 @@ def frq_limits_continuity(rng):
              f"$h(x)=\\frac{{{a_}}}{{{c_}}}+\\frac{{{b_}}}{{{c_}}}\\cdot\\frac{{\\ln x}}{{x^2}}$. The form $\\frac{{\\ln x}}{{x^2}}$ is $\\frac{{\\infty}}{{\\infty}}$ and L’Hospital’s Rule gives $\\lim_{{x\\to\\infty}}\\frac{{1/x}}{{2x}}=0$. So $\\lim_{{x\\to\\infty}}h(x)={sp.latex(L3)}$ and the horizontal asymptote is $y={sp.latex(L3)}$.",
              [row("d1", 1, "Shows $\\frac{\\ln x}{x^2}\\to 0$ with a valid reason such as the $\\frac{\\infty}{\\infty}$ form and the derivative ratio", ["$\\lim_{x\\to\\infty}\\frac{\\ln x}{x^2}=0$"], both=True),
               row("d2", 1, "Value of the limit and the equation of the asymptote", [f"$y={sp.latex(L3)}$"], requires="d1", nums=True)])]
-    stim = {"kind": "text", "description": "Three limit problems and a continuity condition", "data": {"functions": f"g(x) = (x^{n} - {p ** n}) / (ln x - ln {p}); h(x) = ({a_}x^2 + {b_}ln x) / ({c_}x^2)"}}
+    stim = {"kind": "text", "description": "Three limit problems and a continuity condition", "data": {"functions": "The functions g and h are defined in parts (b) and (d)."}}
     return _pack("frq_limits_continuity", "limits_lhopital_continuity", "4.7", ["1.15", "1.13", "1.11"], "1.E", "Limits with L’Hospital’s Rule: a removable value, a repeated application, and a limit at infinity with a horizontal asymptote", stim, parts,
                  [["4.7"], ["1.11"], ["4.7"], ["1.15"]], [f"n={n}", f"p={p}", f"q={q}", f"a={a_}", f"b={b_}", f"c={c_}", f"L1={L1}", f"L2={L2}", f"L3={L3}"],
                  "Evaluate indeterminate limits with L’Hospital’s Rule: a 0/0 limit that fixes the value making a function continuous, a limit needing two applications, and a limit at infinity giving a horizontal asymptote",
@@ -376,3 +380,116 @@ def frq_inverse_table(rng):
                [("f is increasing, so f has an inverse", "f' > 0 at the table points"), ("the integrand is f'(x) times f(x) squared", "u = f(x) turns it into u squared")], {"type": "table", "must_include": ["f values", "f' values"]},
                "a cubic Hermite function that reproduces every table value and slope: the inverse by Brent's method with a central difference for the two derivative values, and numerical quadrature of the integral")
     return pk
+
+
+# ------------------------------------------------------------------ 7. 변하는 위쪽 끝을 가진 누적 함수: 미적분의 기본정리(연쇄) → 접선 → 극값 정당화 → 로피탈 극한
+def frq_ftc_chain_limit(rng):
+    p = rng.choice([2, 3, 4, 5])
+    t = sp.Symbol("t")
+    H = sp.integrate(sp.exp(t) - p, (t, 0, X ** 2))
+    Hp = sp.diff(H, X)
+    if sp.simplify(Hp - 2 * X * (sp.exp(X ** 2) - p)) != 0:
+        raise ValueError("bad_design")
+    r = sp.sqrt(sp.log(p))
+    h1, hp1 = sp.simplify(H.subs(X, 1)), sp.simplify(Hp.subs(X, 1))
+    hr = sp.simplify(H.subs(X, r))
+    lim0 = 1 - p
+    tl = f"y=\\left({sp.latex(hp1)}\\right)(x-1)+\\left({sp.latex(h1)}\\right)"
+    # 독립 경로: 수치 적분으로 H, 중심차분 H', 격자 극값, 고정밀 mpmath 로 H(x)/x^2
+    Hn = lambda u: _I.quad(lambda s_: math.exp(s_) - p, 0, u * u)[0]
+    if abs(Hn(1) - float(h1)) > 1e-9 or abs(Hn(float(r)) - float(hr)) > 1e-9:
+        raise ValueError("independent_check_failed")
+    for u in (0.4, 1.0, 1.3, -0.8):
+        if abs((Hn(u + 1e-5) - Hn(u - 1e-5)) / 2e-5 - float(Hp.subs(X, u))) > 1e-5:
+            raise ValueError("independent_check_failed")
+    xs_ = [-2.5 + 5 * i / 2000 for i in range(2001)]
+    gv = [Hn(u) for u in xs_]
+    mins = [xs_[i] for i in range(1, 2000) if gv[i] < gv[i - 1] and gv[i] < gv[i + 1]]
+    maxs = [xs_[i] for i in range(1, 2000) if gv[i] > gv[i - 1] and gv[i] > gv[i + 1]]
+    if len(mins) != 2 or len(maxs) != 1 or abs(abs(mins[0]) - float(r)) > 0.01 or abs(abs(mins[1]) - float(r)) > 0.01 or abs(maxs[0]) > 0.01:
+        raise ValueError("independent_check_failed")
+    _mp.mp.dps = 40
+    q0 = _mp.quad(lambda s_: _mp.e ** s_ - p, [0, _mp.mpf(10) ** -12]) / _mp.mpf(10) ** -12
+    if abs(q0 - lim0) > 1e-9:
+        raise ValueError("independent_check_failed")
+    rtex = f"\\sqrt{{\\ln {p}}}"
+    stim = {"kind": "text", "description": "A function defined by an integral with a variable upper limit", "data": {"definition": f"H(x) = integral from 0 to x^2 of (e^t - {p}) dt"}}
+    parts = [
+        part("a", f"Let $H$ be the function defined by $H(x)=\\int_0^{{x^2}}\\left(e^t-{p}\\right)dt$. Find $H'(x)$.", 2, "calculate", ["1.E", "3.D"],
+             f"By the Fundamental Theorem of Calculus and the chain rule, $H'(x)=\\left(e^{{x^2}}-{p}\\right)\\cdot 2x$.",
+             [row("a1", 1, "Uses the Fundamental Theorem of Calculus: the integrand evaluated at the upper limit", [f"$e^{{x^2}}-{p}$"]),
+              row("a2", 1, "Chain rule factor from the upper limit; the final expression for the derivative", [f"$H'(x)=2x\\left(e^{{x^2}}-{p}\\right)$"], requires="a1")]),
+        part("b", "Write an equation for the line tangent to the curve $y=H(x)$ at $x=1$.", 2, "calculate", ["1.E"],
+             f"$H(1)=\\int_0^1\\left(e^t-{p}\\right)dt={sp.latex(h1)}$ and $H'(1)=2(e-{p})={sp.latex(hp1)}$, so the tangent line is ${tl}$.",
+             [row("b1", 1, "Value of $H(1)$ by evaluating the integral and the slope $H'(1)$", [f"$H(1)={sp.latex(h1)}$", f"$H'(1)={sp.latex(hp1)}$"], nums=True),
+              row("b2", 1, "Equation of the tangent line", [f"${tl}$"], requires="b1", nums=True)]),
+        part("c", "Find the $x$-coordinate of each relative extremum of $H$ and classify each as a relative maximum or a relative minimum. Justify your answers.", 3, "explain", ["3.B", "3.E"],
+             f"$H'(x)=2x\\left(e^{{x^2}}-{p}\\right)=0$ at $x=0$ and $x=\\pm{rtex}$. $H'<0$ for $x<-{rtex}$, $H'>0$ on $\\left(-{rtex},0\\right)$, $H'<0$ on $\\left(0,{rtex}\\right)$, and $H'>0$ for $x>{rtex}$. So $H$ has a relative maximum at $x=0$ and relative minima at $x=\\pm{rtex}$.",
+             [row("c1", 1, "Critical points from setting $H'(x)=0$", ["$x=0$", f"$x=\\pm{rtex}$"], nums=True),
+              row("c2", 1, "Justification: signs of $H'$ on the intervals determined by the critical points (sign changes of $H'$)", [f"$H'$ changes sign at $x=0$, $x=-{rtex}$ and $x={rtex}$"], nums=True, requires="c1"),
+              row("c3", 1, "Classification of all three critical points as the reason requires: a relative maximum at the middle one and relative minima at the other two", ["relative maximum at $x=0$", f"relative minima at $x=\\pm{rtex}$"], both=True, nums=True, requires="c2")]),
+        part("d", "Find $\\lim_{x\\to 0}\\frac{H(x)}{x^2}$. Show the work that leads to your answer, including why the method you use applies.", 2, "calculate", ["1.E", "3.C"],
+             f"$H(0)=0$ and $x^2\\to 0$, so the form is $\\frac00$ and L’Hospital’s Rule applies: $\\lim_{{x\\to 0}}\\frac{{H'(x)}}{{2x}}=\\lim_{{x\\to 0}}\\left(e^{{x^2}}-{p}\\right)=1-{p}={lim0}$.",
+             [row("d1", 1, "Identifies the indeterminate form $\\frac00$ (both numerator and denominator approach $0$) before differentiating", ["$\\frac{0}{0}$", "$H(0)=0$"], nums=True),
+              row("d2", 1, "Applies L’Hospital’s Rule with $H'(x)$ from part (a) and gives the value", [f"${lim0}$"], requires="d1", nums=True)])]
+    return _pack("frq_ftc_chain_limit", "accumulation_function_variable_limit", "6.4", ["3.1", "5.4", "4.7"], "1.E", "An accumulation function with upper limit x squared: derivative, tangent line, relative extrema, limit at zero", stim, parts,
+                 [["6.4", "3.1"], ["6.4"], ["5.4"], ["4.7"]], [f"p={p}", f"h1={h1}", f"hp1={hp1}", f"hr={hr}", f"lim0={lim0}"],
+                 "Differentiate an accumulation function whose upper limit is x^2 (Fundamental Theorem with the chain rule), write a tangent line, classify relative extrema by the sign of H', and evaluate a 0/0 limit with L’Hospital’s Rule",
+                 ["Evaluate the integrand at the upper limit and multiply by the derivative of the limit", "Compute H(1) from the integral for the tangent line", "Set H' = 0 and chart its sign", "Check H(0) = 0 and the denominator before using L’Hospital’s Rule"],
+                 [("H' = 2x(e^{x^2} - p) is zero at x = 0 and x = ± sqrt(ln p)", "H' changes sign at each of them"), ("H(0) = 0", "the quotient H(x)/x^2 has the form 0/0 at x = 0")], {"type": "text", "must_include": ["integral definition of H"]},
+                 "H computed by numerical quadrature of the integrand, H' by central difference at four points, relative extrema by a 2001-point scan, and the limit by a 40-digit quadrature of H(x)/x^2 at x = 1e-6")
+
+
+# ------------------------------------------------------------------ 8. 역삼각함수 항이 있는 함수: 도함수와 임계점, 극댓값, x→∞ 에서 f(x)/x 의 극한, 영점의 개수(IVT)
+def frq_arctan_zeros(rng):
+    s = rng.choice([1, sp.sqrt(3)])
+    b = rng.choice([1, 2, 3])
+    a = b * (1 + s ** 2)
+    f = a * sp.atan(X) - b * X
+    fp = sp.simplify(sp.diff(f, X))
+    if sp.simplify(fp - b * (s ** 2 - X ** 2) / (1 + X ** 2)) != 0:
+        raise ValueError("bad_design")
+    fs = sp.simplify(f.subs(X, s))
+    if not fs.is_positive:
+        raise ValueError("bad_design")
+    st = sp.latex(s)
+    # 독립 경로: 격자 극값, 영점 개수, 큰 x 에서 f(x)/x, 중심차분 f'
+    fl = lambda u: float(a) * math.atan(u) - b * u
+    import numpy as _np
+    g = _np.linspace(-1000.0, 1000.0, 2000001)
+    gv = float(a) * _np.arctan(g) - b * g
+    msk = (g > -3) & (g < 3)
+    gm, gvm = g[msk], gv[msk]
+    loc_max = [gm[i] for i in range(1, len(gm) - 1) if gvm[i] > gvm[i - 1] and gvm[i] > gvm[i + 1]]
+    nz = int(_np.sum(gv[:-1] * gv[1:] < 0)) + int(_np.sum(gv == 0))
+    z = _O.brentq(fl, float(s) + 1e-9, 50.0)
+    if len(loc_max) != 1 or abs(loc_max[0] - float(s)) > 1e-2 or abs(fl(float(s)) - float(fs)) > 1e-9 or nz != 3 or abs(fl(1e12) / 1e12 + b) > 1e-9 or z <= float(s) \
+            or abs((fl(0.7 + 1e-6) - fl(0.7 - 1e-6)) / 2e-6 - float(fp.subs(X, 0.7))) > 1e-6:
+        raise ValueError("independent_check_failed")
+    stim = {"kind": "text", "description": "A function containing an inverse tangent term", "data": {"definition": f"f(x) = {sp.latex(a)} arctan(x) - {'' if b == 1 else b}x"}}
+    bx = "" if b == 1 else str(b)
+    ftex = f"{sp.latex(a)}\\arctan x-{bx}x"
+    parts = [
+        part("a", f"Let $f$ be the function defined by $f(x)={ftex}$ for all real $x$. Find $f'(x)$ and find all values of $x$ for which $f'(x)=0$.", 2, "calculate", ["1.E", "3.D"],
+             f"$f'(x)=\\frac{{{sp.latex(a)}}}{{1+x^2}}-{b}=\\frac{{{bx}\\left({sp.latex(s ** 2)}-x^2\\right)}}{{1+x^2}}$, which is $0$ when $x^2={sp.latex(s ** 2)}$, that is, $x=\\pm{st}$.",
+             [row("a1", 1, "Derivative using the derivative of the inverse tangent", [f"$f'(x)=\\frac{{{sp.latex(a)}}}{{1+x^2}}-{b}$"]),
+              row("a2", 1, "Solves $f'(x)=0$ for both values", [f"$x=\\pm{st}$"], requires="a1", nums=True)]),
+        part("b", f"Show that $f$ has a relative maximum at $x={st}$, and find the value of this relative maximum. Justify your answer.", 2, "explain", ["3.B", "3.E"],
+             f"$f'(x)$ is positive for $-{st}<x<{st}$ and negative for $x>{st}$, so $f'$ changes from positive to negative at $x={st}$ and $f$ has a relative maximum there. $f({st})={sp.latex(a)}\\arctan({st})-{b}\\cdot {st}={sp.latex(fs)}$.",
+             [row("b1", 1, "Justification: $f'$ changes sign from positive to negative at $x=" + st + "$ (sign analysis on both sides)", [f"$f'$ changes from positive to negative at $x={st}$"], nums=True),
+              row("b2", 1, "Value of the relative maximum, using the exact value of the inverse tangent", [f"$f({st})={sp.latex(fs)}$"], requires="b1", nums=True)]),
+        part("c", "Find $\\lim_{x\\to\\infty}\\frac{f(x)}{x}$. Show the work that leads to your answer.", 3, "calculate", ["1.E", "2.B"],
+             f"$\\frac{{f(x)}}{{x}}={sp.latex(a)}\\cdot\\frac{{\\arctan x}}{{x}}-{b}$. Since $-\\frac{{\\pi}}{{2}}<\\arctan x<\\frac{{\\pi}}{{2}}$, $\\frac{{\\arctan x}}{{x}}\\to 0$ as $x\\to\\infty$, so the limit is $-{b}$.",
+             [row("c1", 1, "Rewrites the quotient as the inverse tangent term over $x$ minus a constant", [f"$\\frac{{f(x)}}{{x}}={sp.latex(a)}\\cdot\\frac{{\\arctan x}}{{x}}-{b}$"], nums=True),
+              row("c2", 1, "Reason that $\\frac{\\arctan x}{x}\\to 0$: the inverse tangent is bounded (or approaches $\\frac{\\pi}{2}$) while $x\\to\\infty$", ["$\\arctan x$ is bounded"], both=True, requires="c1"),
+              row("c3", 1, "Value of the limit", [f"$-{b}$"], requires="c2", nums=True)]),
+        part("d", "How many solutions does the equation $f(x)=0$ have? Justify your answer.", 2, "explain", ["3.B", "3.C", "3.E"],
+             f"$f(0)=0$. On $\\left[0,{st}\\right]$, $f$ is increasing from $0$ to $f({st})={sp.latex(fs)}>0$, and on $\\left[{st},\\infty\\right)$, $f$ is decreasing and continuous with $f(x)\\to-\\infty$, because $f(x)\\le {sp.latex(a)}\\cdot\\frac{{\\pi}}{{2}}-{bx}x$. By the Intermediate Value Theorem and monotonicity, there is exactly one solution with $x>{st}$. Since $f$ is odd, there is exactly one solution with $x<-{st}$. So $f(x)=0$ has $3$ solutions.",
+             [row("d1", 1, "Describes the behavior of $f$ on each interval using the sign of $f'$, including the positive value $f(" + st + ")$ and $f(0)=0$", [f"$f({st})={sp.latex(fs)}>0$", "$f(0)=0$"], nums=True),
+              row("d2", 1, "Justification by the Intermediate Value Theorem on each side, and the total of three solutions", ["$3$ solutions"], both=True, nums=True, requires="d1")])]
+    return _pack("frq_arctan_zeros", "inverse_tangent_function_analysis", "3.4", ["5.4", "1.15", "1.16"], "3.E", "A function with an inverse tangent term: derivative, relative maximum, a limit at infinity, number of zeros", stim, parts,
+                 [["3.4"], ["5.4"], ["1.15"], ["1.16"]], [f"s={s}", f"b={b}", f"a={a}", f"fs={fs}"],
+                 "Analyze f(x) = a arctan x - b x: derivative and critical points, relative maximum by the sign of f', the limit of f(x)/x at infinity from the boundedness of the inverse tangent, and the number of zeros by monotonicity and the Intermediate Value Theorem",
+                 ["Differentiate the inverse tangent term and combine fractions", "Chart the sign of f' around the critical points", "Divide by x and use that the inverse tangent is bounded", "Follow f on each monotone piece and use the Intermediate Value Theorem"],
+                 [("a = b(1 + s^2), so f'(x) = b(s^2 - x^2)/(1 + x^2) vanishes at x = ±s", "the relative maximum value f(s) is positive"), ("f is odd and decreases to minus infinity for x > s", "exactly one zero beyond s")], {"type": "text", "must_include": ["definition of f"]},
+                 "a 2000001-point grid on [-1000, 1000] for the local maximum and the sign changes (zero count), Brent's method for the zero beyond s, a central-difference derivative, and f(1e12)/1e12")

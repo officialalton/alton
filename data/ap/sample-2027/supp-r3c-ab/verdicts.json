@@ -1,0 +1,724 @@
+[
+ {
+  "key": "ap_calculus_ab-f01-k0",
+  "cellId": "ap_calculus_ab-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Closed-form antiderivative; FTC gives Q'(3)=I(3).",
+     "final_answer": "Q(3)≈5.688 C; Q'(3)=I(3)≈1.276 A",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "(Q(7)-Q(2))/5=(4.097-3.773)/5",
+     "final_answer": "≈0.0649 C/s; average current (rate charge delivered) over 2≤t≤7 seconds",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "I=0 at 5π/4 and 5π/2; I>0 on (0,5π/4), I<0 to 7.854, I>0 after. Candidates: Q(0)=0, Q(3.927)≈6.262, Q(8)≈4.1.",
+     "final_answer": "x=5π/4≈3.927, max Q≈6.262 C",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Q''=I'=e^{-x/4}(3.2cos0.8x - sin0.8x)>0 when tan(0.8x)<3.2; zeros at 1.585, 5.512.",
+     "final_answer": "(0,1.585) and (5.512,8), since Q''=I'>0 (I increasing) there",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Verified the closed-form antiderivative: Q(3)=5.688, I(3)=1.276, Q(8)=3.920, max 6.262 at 3.927 all check out. The solver's Q(8)≈4.1 was a rough estimate, and the key's 3.920 is correct. The item is a standard 9-point calculator FRQ with parts of 2/2/3/2 points, consistent rubric rows, and in-scope content.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style accumulation function FRQ. It combines FTC Part 2 (Q' = I), a calculator-evaluated integral, average rate of change with a units interpretation, a candidates-test absolute extremum argument (sign change of I plus endpoint comparison), and concavity via the sign of Q'' = I'. It has multiple parts, moderate reasoning depth, and a justification emphasis, with clean numbers, short reading, and in-scope content. This fits the full-mock target rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f02-k0",
+  "cellId": "ap_calculus_ab-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Differentiate: T'(t) = 196(−0.06)e^(−0.06t) = −0.06·196e^(−0.06t). Since T − 24 = 196e^(−0.06t), this equals −0.06(T − 24), so T satisfies the equation.",
+     "final_answer": "dT/dt = −0.06·196e^(−0.06t) = −0.06(T − 24), as required.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "At t = 15: T(15) = 24 + 196e^(−0.9) ≈ 103.688. The slope is T'(15) = −0.06(103.688 − 24) ≈ −4.781. So the tangent line is y = 103.688 − 4.781(t − 15). At t = 20 it gives 103.688 − 4.781(5) ≈ 79.782.",
+     "final_answer": "Tangent line: y = 103.688 − 4.781(t − 15). Estimate: T(20) ≈ 79.782 °C.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "The second derivative is d²T/dt² = −0.06·dT/dt = 0.0036·196e^(−0.06t) = 0.0036(T − 24). This is positive for all t, so the graph of T is concave up. A tangent line to a concave-up curve lies below the curve, so the estimate is too low. Check: actual T(20) ≈ 83.034, which is more than 79.782.",
+     "final_answer": "The estimate is less than the actual T(20), because d²T/dt² > 0 means the curve is concave up.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Set T(t) = 60, so 196e^(−0.06t) = 36. Then t = ln(196/36)/0.06 ≈ 28.244 minutes. At that time, T'(t) = −0.06(60 − 24) = −2.16.",
+     "final_answer": "t ≈ 28.244 minutes. The temperature is changing at −2.16 °C per minute (it is falling by 2.16 °C each minute).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is a competent cooling-model problem, but it does not match its declared topic 7.3 (slope fields). It has no slope-field content, and parts b, c and d are Unit 4/5 skills. The key's rounding is also off (79.781 vs 79.7815 → 79.782; 28.243 vs 28.2437 → 28.244), and the rubric's tight tolerance on these values is fragile. Fail on scope and key precision.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Declared topic is 7.3 (sketching slope fields), but no part involves a slope field, a graph, or a table. The bundle is a verify-solution, tangent-line, concavity and solve-for-t problem. Parts b, c and d are Unit 4/5 content (4.6, 5.6, 4.1). Only part a touches differential equations, and that is verifying a solution, which is closer to 7.4/7.2 than to 7.3. The topic label does not match the dominant demand. Part d's rate-of-change question is also not clearly 4.1; it is closer to 4.1/3.x."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The scoring rows are rigid and conflict with a valid solution. T(20) = 79.7815 (T(15) = 103.688 and slope -4.7813). The key and rubric give 79.781, while a student using unrounded values or the stated rounding gets 79.782. The independent solver got 79.782, and the tolerance is ±0.001 on a value that sits on the boundary. For part d, the exact t is 28.2437 (the key says 28.243, the solver 28.244). The rubric's ±0.001 tolerance probably covers this, but the key rounds incorrectly. The tangent line row requires the specific form with 103.688 and -4.781. Row b2 depends on b1, which penalizes a correct approximation that follows from a slightly different line. Row c2 requires only the phrase \"less than\". These issues weaken the scoring consistency."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete: it gives the model and the differential equation. The wording is clear. The differential equation is given in the stimulus and again in part a, which is redundant but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. No common_errors are listed in any rubric row, which is thin guidance for graders."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a 9-point AB FRQ (2/2/2/3 point grain), and the calculator use is plausible. However, part a needs no calculator, and the 4.6/5.6/4.1 parts do not match the target topic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style item. Each part applies a routine procedure: verifying a differential equation, tangent-line approximation, a concavity argument, and solving an exponential equation with a logarithm, then using the differential equation to find the rate. Numbers are friendly, wording is clear, and the context is brief. The difficulty comes from the number of parts, not from conceptual depth or unfair sources.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 10,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f03-k0",
+  "cellId": "ap_calculus_ab-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "MR(2)=18-2ln3≈15.806, MC(2)=2.8; difference = P'(2)",
+     "final_answer": "≈13.006 thousand dollars per hundred cases; at q=2, profit is increasing at about $13,006 per additional hundred cases (about $130 per extra case).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "P'=16-2ln(q+1)-0.2q^2=0 at q≈7.644 only; P' changes + to -, so this is the only critical point and the absolute max on [0,10]",
+     "final_answer": "q≈7.644 hundred cases",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "∫_2^6 (18-2ln(q+1))dq = 72-2[(7ln7-7)-(3ln3-3)]",
+     "final_answer": "≈59.349 thousand dollars",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "P(7.644)=-6+∫_0^7.644 (MR-MC)dq ≈ -6+70.528",
+     "final_answer": "≈64.53 thousand dollars; a profit, since P>0",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A coherent 9-point calculator FRQ with correct keys. MR(2)-MC(2)=13.00278, which rounds to 13.003, so the solver's 13.006 is a slip. P' is strictly decreasing, so the root is unique and the sign-change justification is valid. Rubric rows are consistent and each part fits its own skill and topic.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified (a) 13.003. The root in (b) is unique and P' changes from positive to negative. The integrals are consistent with the solver's results."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part calculator FRQ-style item on marginal analysis. It needs a marginal-profit interpretation with units, solving MR=MC numerically, a justified maximum (sign change of P' = MR-MC, and the endpoints), a definite integral of a rate for the revenue change, and using the Fundamental Theorem to get P(q*) = -6 + integral of (MR-MC). Difficulty comes from legitimate levers: justification, a rate-to-total representation change, and chaining parts. The numbers are calculator-friendly and nothing is ambiguous or out of scope.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f04-k0",
+  "cellId": "ap_calculus_ab-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "T = 3(34.4)/2 + 4(39)/2 + 5(41.1)/2 + 4(38.8)/2 + 4(33.3)/2 = 51.6+78+102.75+77.6+66.6",
+     "final_answer": "About 376.55 m^3. The integral is the volume of soil, in cubic meters, removed for the trench from x=0 to x=20 m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "∫0^20 (16+5sin(x/6))dx = 320+30(1−cos(10/3))",
+     "final_answer": "379.450 m^3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "A'(x)=(5/6)cos(x/6), so A'(8)=(5/6)cos(4/3)",
+     "final_answer": "A'(8) ≈ 0.196 m^2/m. At 8 m from the start, the cross-sectional area is increasing by about 0.196 square meters per meter along the trench.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "avg = 379.450/20 = 18.973; solving sin(x/6)=0.5945 gives x/6 = 0.6367 or π−0.6367",
+     "final_answer": "Average ≈ 18.973 m^2, which occurs at x ≈ 3.820 m and x ≈ 15.030 m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Well-formed 9-point calculator FRQ on a trench cross-section table. It covers a trapezoidal sum with unequal subintervals, a model integral, a derivative with units, and an average value with the points where it is attained. Parts fall within the allowed related topics 6.2, 8.1 and 4.1. Keys are verified and rubric rows are consistent. The load is typical of the AP exam. The only caveat is that no part assesses 8.2 position/velocity/acceleration directly, which the bundle's allowed topic span covers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts match their own topics (6.2, 8.1, 4.1) and skill 1.E; no later-unit content. The bundle label 8.2 is only loosely related, but the topic span is explicitly allowed."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The values 376.550, 379.450, 0.196, 18.973, 3.820 and 15.030 are verified by the solver. Rubric rows are consistent and conditions are explicit. Part (d) asks for all x, and both solutions are required."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete (x and A(x) for six points, five unequal subintervals). The wording is clear US English with units."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; the rubric rows are clear."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points in about 15 minutes, a calculator is used for the integral, derivative and equation solving, and the numbers are clean."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ-style item covering standard AB skills: trapezoidal sum from a table with unequal subintervals, interpreting the integral with units, model integral by calculator, derivative of a sine model with interpretation, and average value with an MVT-style solve. Each part is a routine procedure, and the multiple representations (table, model, context) with the average-value step make it appropriate for a full mock. Numbers are clean and the reading load is moderate. No out-of-scope content. Part (a)'s unequal-width trapezoids and part (d)'s two-step solve add modest depth beyond basic learning, but nothing is advanced.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f05-k0",
+  "cellId": "ap_calculus_ab-f05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "dM/M=-k dt, ln|M|=-kt+C, M(0)=120",
+     "final_answer": "M(t)=120e^{-kt}",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "e^{-5k}=1/2",
+     "final_answer": "k=(ln 2)/5",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "e^{-kt}=1/10, t=ln10/k",
+     "final_answer": "t=5 ln10 / ln2 years",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "(1/10)∫0^10 120e^{-kt}dt=(12/k)(1-1/4)=9/k=45/ln2",
+     "final_answer": "45/ln 2 grams (≈64.9 g)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The math is correct, but the part (d) model answer and rubric use the code artifact \\log{\\left(2 \\right)} instead of ln 2. This is ambiguous notation for AP and inconsistent with the ln used in the rest of the item. A required element in the rubric could mismatch a correct student answer of 45/ln 2. Fix the notation and the item is otherwise acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item covers separation of variables, half-life, and average value, all in AB scope and consistent with the part-level skills."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The value 45/ln 2 is correct, but the rubric element d3 is written as log(2) in sympy syntax, which risks mis-scoring correct student work."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The model answer and rubric in (d) contain the rendering artifact \\log{\\left(2 \\right)}. The stimulus is otherwise adequate."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 15 minutes, there are no calculator demands, and the numbers are clean."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ-style item that chains separation of variables, a half-life condition for k, solving an exponential equation with logarithms, and an average value integral (topic 8.1/7.x). The multiple connected steps and the representation shift from differential equation to explicit function to definite integral match full-mock AP AB level. Numbers are clean (e^{-10k}=1/4), the context is short, and all content is in AB scope, so the difficulty comes from legitimate concept chaining and not from computation or reading.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f06-k0",
+  "cellId": "ap_calculus_ab-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "f(2)=1, so (f^-1)'(1)=1/f'(2)=1/5",
+     "ambiguous_or_flawed": false,
+     "final_answer": "1/5"
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "h'=f^-1(x)+x/f'(f^-1(x)); f^-1(8)=3, f'(3)=5; 3+8/5",
+     "ambiguous_or_flawed": false,
+     "final_answer": "23/5"
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "u=f(x): [f^3/3] from 1 to 5 = (3375+1)/3",
+     "ambiguous_or_flawed": false,
+     "final_answer": "3376/3"
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Point (1,2), slope 1/5; at x=3 gives 2+2/5",
+     "ambiguous_or_flawed": false,
+     "final_answer": "y=2+(1/5)(x-1); f^-1(3)≈12/5"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts check out and match the independent solver. The 2/2/3/2 point split fits the official grain, and the table is complete and consistent with the stated increasing, differentiable f. The related topics 3.5, 6.9 and 4.6 are explicitly allowed for this bundle.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part bundle that applies standard procedures: inverse derivative from a table, product rule with an inverse, u-substitution with limits read from the table, and tangent line approximation. Each part needs 2-4 steps and a table-to-expression translation, which is typical AP exam level. Computation is light (the largest is 15^3 = 3375) and the wording is clear and in scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f07-k0",
+  "cellId": "ap_calculus_ab-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "f'(1)=-4/e",
+     "final_answer": "y = 4 - (4/e)(x-1); f(3/2) ≈ 4 - 2/e",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "f''=4e^{-x^2}(2x^2-1)>0 on [1,3/2], concave up so tangent lies below",
+     "final_answer": "Underestimate",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "u=-x^2 substitution, C from f(1)=4",
+     "final_answer": "f(x) = 2e^{-x^2} + 4 - 2/e",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "f' changes + to - at 0; compare endpoints f(-1)=4 > f(2)=2e^{-4}+4-2/e",
+     "final_answer": "Absolute max at x=0; absolute min at x=2",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The math is correct in all four parts. The bundle spans the allowed topics (4.6, 5.6, 6.9, 5.5), and the point split of 2/2/3/2 matches the official grain. The only weakness is that the rubric does not state the justification that f(2) < 4 = f(-1) for the absolute minimum, which is minor.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style multi-part item. It combines tangent-line approximation, a second-derivative concavity argument, u-substitution with an initial condition, and an absolute-extrema justification using a sign analysis and endpoint comparison. Each part uses a routine AP procedure, with moderate chaining across parts. Numbers stay symbolic and clean, and nothing is out of scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f08-k0",
+  "cellId": "ap_calculus_ab-f08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Numerator and denominator are both differentiable and both go to 0 as x→1, so L'Hospital's Rule applies: the limit equals lim 3x^2/(1/x) = lim 3x^3 = 3.",
+     "final_answer": "3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "g is continuous at x=1 exactly when g(1) equals the limit of g(x) as x→1. From part (a) that limit is 3, so c must be 3.",
+     "final_answer": "c = 3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "The form is 0/0, so apply L'Hospital's Rule: the limit becomes (e^x−1)/(2x). That is still 0/0, so apply it again to get e^x/2, which approaches 1/2. The '1x^2' in the prompt just means x^2.",
+     "final_answer": "1/2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "The form is ∞/∞, so apply L'Hospital's Rule: (12x+5/x)/(6x) = 2 + 5/(6x^2), which approaches 2. Another way: h(x) = 2 + (5/3)(ln x)/x^2, and (ln x)/x^2 → 0. Because the limit as x→∞ is 2, the curve has a horizontal asymptote at y = 2.",
+     "final_answer": "Limit = 2; horizontal asymptote y = 2",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics and keys are correct, but the item fails on expression. The part (c) prompt has the typo \"1x^2\", and the stimulus data has a malformed g(x) = (x^3-1)/(ln x - ln 1) that is inconsistent with part (b) and mentions a continuity condition that is absent from the data. These need fixing before use.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts a, c, d are L'Hospital applications (4.7, 1.E). Part b is a continuity part (1.11), which is legitimate for this bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys 3, 3, 1/2, 2 with y=2 are correct. Part b asks for justification but the rubric awards only for c=3. Part d rubric is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Part (c) prompt contains the typo \"1x^2\" (coefficient 1 written in front of x^2), which is unclear wording. The stimulus data defines g(x) = (x^3-1)/(ln x - ln 1), an odd, redundant form that does not match part (b)'s definition with g(1)=c. The description mentions \"a continuity condition\" that is not in the data. The data object is not a clean specification."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so no distractors. The rubric lists no common_errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a 9-point calculus FRQ without a calculator."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part L'Hospital set: verify indeterminate form, apply rule once or twice, connect limit to continuity and to a horizontal asymptote. Small numbers, in-scope AB content, modest representation changes and a required hypothesis check make it suitable for full-mock difficulty. The \"1x^2\" typo in part c is minor and readable as x^2.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 11,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f09-k0",
+  "cellId": "ap_calculus_ab-f09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "There are three perpendicular fences (two ends and the divider), each x m, at $6/m. The fence opposite the wall is 150/x m at $12/m.",
+     "final_answer": "C(x) = 18x + 1800/x, for x > 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "C'(x) = 18 - 1800/x^2 = 0 gives x^2 = 100, so x = 10 (taking the positive root).",
+     "final_answer": "x = 10 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "C''(x) = 3600/x^3 > 0 for all x > 0, so C is concave up on its whole domain. x = 10 is the only critical point, so the relative minimum there is also the absolute minimum.",
+     "final_answer": "C''(x) = 3600/x^3 > 0 for all x > 0. C is concave up everywhere and has only one critical point, so x = 10 gives the absolute minimum.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "C(10) = 180 + 180 = 360. The opposite side is 150/10 = 15 m.",
+     "final_answer": "Minimum cost is $360; the fence opposite the wall is 15 m long",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean 9-point optimization FRQ with a 2/2/3/2 point split. The key is unique and verified, the justification in part (c) uses concavity on the whole domain, the numbers are clean, and no calculator is needed. Acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Optimization (5.11) with a second-derivative justification (3.E) in part (c). In scope for Unit 5 AB."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answers C(x)=18x+1800/x, x=10, C''=3600/x^3, cost 360 and length 15 are all correct. The rubric rows are consistent and the domain condition is explicit."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text is clear and the data is complete. The three perpendicular fences are unambiguous from the wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors to review."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP FRQ, with clean numbers and no calculator needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AB optimization FRQ-style item. Students must build a two-variable cost model from a verbal description, including noticing three perpendicular fences and different prices. They then eliminate a variable using the area constraint, find the critical point, and justify the absolute minimum with C'' > 0 over the entire domain x > 0. The numbers are clean (x = 10, C = 360). The reading load is modest and unambiguous. Difficulty comes from modeling and justification, which are legitimate levers.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f10-k0",
+  "cellId": "ap_calculus_ab-f10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "f'=A(B-x^2)/(x^2+B)^2 => B=9; f(3)=A/6=3",
+     "final_answer": "A=18, B=9",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "degree numerator < denominator",
+     "final_answer": "Both limits 0; horizontal asymptote y=0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "f'=18(9-x^2)/(x^2+9)^2: negative for x<-3, positive on (-3,3), negative for x>3; f(-3)=-3, f(3)=3, f→0 at ±∞, so the only critical points give the global min and max; equivalently 3-f=3(x-3)^2/(x^2+9)≥0",
+     "final_answer": "Absolute max 3 at x=3, absolute min -3 at x=-3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "kx^2-18x+9k=0 has two distinct roots iff k≠0 and 324-36k^2>0",
+     "final_answer": "-3<k<0 or 0<k<3",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The math is correct in all four parts. The rubric does not require the justification the prompts ask for in parts (c) and (d), and part (d) is coded to an out-of-bundle topic (1.16, IVT). Fail on key/scoring and scope.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Part (d) is coded 1.16 (IVT), which is outside the declared bundle topics 5.2/1.15/5.4/5.5. Part (b) is a 1-point limit recall item and only weakly serves 3.E."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "All final answers are correct. The rubric is inconsistent with the \"Justify\" prompts. Row d2 claims IVT reasoning but requires only \"0<|k|<3\", and d1 requires only the extreme values. Row c3 mentions no other critical points but lists only the limits as required elements, and no row requires stating that the extremes are global."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The common_errors fields are empty."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is about 15 minutes for 9 points and the arithmetic is light. The point split of 3/1/3/2 is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item with clean numbers (A=18, B=9). It requires the quotient rule and solving for constants, limits at infinity, and a global-extrema justification on an unbounded interval (first derivative sign analysis plus end behavior, since the EVT does not apply directly). The last part counts solutions using monotonicity, the IVT and the limits. Reasoning depth is high but within AB Unit 5 scope, and the wording is unambiguous. Suitable for a full mock; the difficulty comes from concept depth and justification, not from arithmetic or reading load.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ }
+]

@@ -385,3 +385,12 @@ BC 전용 용어(series/converge/Taylor/Maclaurin/parametric/polar/vector/Euler/
 | frq_pen_cost | optimization_cost_divided_pen | 5.11 | 3.E | not_allowed | a A farmer builds a rectangular pen against a long stone wall, (2) / b Find the value of $x$ for which $C'(x)=0$. (2) / c Use the second derivative to |
 | frq_rational_param | parametric_rational_global_extrema | 5.2 | 3.E | not_allowed | a Let $f$ be the function given by $f(x)=\frac{Ax}{x^2+B}$, wh (3) / b For the values of $A$ and $B$ found in part (a), find $\lim_ (1) / c Show that  |
 | frq_trench_volume | cross_section_table_model_calc | 8.2 | 1.E | required | a A drainage trench is dug along a straight line for $20$ mete (3) / b The area function is modeled by $A(x)=14+4\sin\left(\dfrac{x (2) / c Find $A'(8 |
+
+예비 3차(R3, 2026-10-12) FRQ 템플릿:
+
+| id | template | topic | skill | calculator | parts |
+|---|---|---|---|---|---|
+| frq_arctan_zeros | inverse_tangent_function_analysis | 3.4 | 3.E | not_allowed | a Let $f$ be the function defined by $f(x)=8\arctan x-2x$ for (2) / b Show that $f$ has a relative maximum at $x=\sqrt{3}$, and fi (2) / c Find $\lim_ |
+| frq_closest_point | closest_point_to_curve_calc | 5.10 | 3.E | required | a A drone flies along the path $y=\ln x$ for $0.5\le x\le 8$, (2) / b Find the value of $x$ for which the drone is closest to the (3) / c At the point |
+| frq_ftc_chain_limit | accumulation_function_variable_limit | 6.4 | 1.E | not_allowed | a Let $H$ be the function defined by $H(x)=\int_0^{x^2}\left(e (2) / b Write an equation for the line tangent to the curve $y=H(x)$ (2) / c Find the $ |
+| frq_region_bisect | region_bisecting_line_calc | 8.4 | 1.E | required | a Let $R$ be the region in the first quadrant enclosed by the (2) / b Find the area of $R$. Show the setup for your calculation. (2) / c The vertical  |

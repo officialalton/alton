@@ -16,9 +16,42 @@
   ]
  },
  {
+  "id": "frq_arctan_zeros",
+  "template": "inverse_tangent_function_analysis",
+  "topic": "3.4",
+  "extraTopics": [
+   "5.4",
+   "1.15",
+   "1.16"
+  ],
+  "skill": "3.E",
+  "calculator": "not_allowed",
+  "parts": "a Let $f$ be the function defined by $f(x)=8\\arctan x-2x$ for (2) / b Show that $f$ has a relative maximum at $x=\\sqrt{3}$, and fi (2) / c Find $\\lim_{x\\to\\infty}\\frac{f(x)}{x}$. Show the work that l (3) / d How many solutions does the equation $f(x)=0$ have? Justify (2)",
+  "points": 9,
+  "verifiedBy": [
+   "a 2000001-point grid on [-1000, 1000] for the local maximum and the sign changes (zero count), Brent's method for the zero beyond s, a central-difference deriva"
+  ]
+ },
+ {
+  "id": "frq_closest_point",
+  "template": "closest_point_to_curve_calc",
+  "topic": "5.10",
+  "extraTopics": [
+   "3.1",
+   "4.4"
+  ],
+  "skill": "3.E",
+  "calculator": "required",
+  "parts": "a A drone flies along the path $y=\\ln x$ for $0.5\\le x\\le 8$, (2) / b Find the value of $x$ for which the drone is closest to the (3) / c At the point of the path closest to the station, show that t (2) / d The drone moves along the path so that $x$ is increasing at (2)",
+  "points": 9,
+  "verifiedBy": [
+   "the minimizer by a 150000-point grid minimum of D (independent of Brent's method on D'), the derivative by central difference, and the perpendicular condition b"
+  ]
+ },
+ {
   "id": "frq_cooling_check",
   "template": "cooling_model_check_tangent_calc",
-  "topic": "7.3",
+  "topic": "7.2",
   "extraTopics": [
    "4.6",
    "5.6",
@@ -47,6 +80,23 @@
   "points": 9,
   "verifiedBy": [
    "numerical quadrature for the average, Brent's root finder for the time, the half-life checked from the closed form with k = ln 2 / h, and the differential equat"
+  ]
+ },
+ {
+  "id": "frq_ftc_chain_limit",
+  "template": "accumulation_function_variable_limit",
+  "topic": "6.4",
+  "extraTopics": [
+   "3.1",
+   "5.4",
+   "4.7"
+  ],
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "parts": "a Let $H$ be the function defined by $H(x)=\\int_0^{x^2}\\left(e (2) / b Write an equation for the line tangent to the curve $y=H(x)$ (2) / c Find the $x$-coordinate of each relative extremum of $H$ and (3) / d Find $\\lim_{x\\to 0}\\frac{H(x)}{x^2}$. Show the work that lea (2)",
+  "points": 9,
+  "verifiedBy": [
+   "H computed by numerical quadrature of the integrand, H' by central difference at four points, relative extrema by a 2001-point scan, and the limit by a 40-digit"
   ]
  },
  {
@@ -147,6 +197,21 @@
   "points": 9,
   "verifiedBy": [
    "a 400001-point grid scan of f on [-400, 400] for the extreme values and their locations, the number of solutions of f(x) = k by counting sign changes, a central"
+  ]
+ },
+ {
+  "id": "frq_region_bisect",
+  "template": "region_bisecting_line_calc",
+  "topic": "8.4",
+  "extraTopics": [
+   "5.10"
+  ],
+  "skill": "1.E",
+  "calculator": "required",
+  "parts": "a Let $R$ be the region in the first quadrant enclosed by the (2) / b Find the area of $R$. Show the setup for your calculation. (2) / c The vertical line $x=k$, with $0<k<$ the $x$-coordinate foun (3) / d For $0\\le x\\le$ the $x$-coordinate found in part (a), find t (2)",
+  "points": 9,
+  "verifiedBy": [
+   "the intersection by a 120000-point grid sign scan, the area by the closed-form antiderivative, the bisecting line by a 200000-step cumulative trapezoid scan (in"
   ]
  },
  {

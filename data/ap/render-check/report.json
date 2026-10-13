@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-13T01:47:12.404Z",
- "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json (1166행)",
+ "generatedAt": "2026-10-13T01:51:39.446Z",
+ "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json (1179행)",
  "all": {
-  "total": 1166,
-  "pass": 697,
+  "total": 1179,
+  "pass": 700,
   "fail": 1,
-  "notApplicable": 468
+  "notApplicable": 478
  },
  "liveStates": {
-  "total": 686,
-  "pass": 347,
+  "total": 695,
+  "pass": 349,
   "fail": 0,
-  "notApplicable": 339
+  "notApplicable": 346
  },
  "byType": [
   {
@@ -79,15 +79,15 @@
   },
   {
    "type": "ap_table",
-   "total": 410,
-   "pass": 410,
+   "total": 412,
+   "pass": 412,
    "fail": 0,
    "notApplicable": 0
   },
   {
    "type": "ap_table:given_info",
-   "total": 29,
-   "pass": 29,
+   "total": 30,
+   "pass": 30,
    "fail": 0,
    "notApplicable": 0
   },
@@ -107,10 +107,10 @@
   },
   {
    "type": "none",
-   "total": 377,
+   "total": 380,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 377
+   "notApplicable": 380
   },
   {
    "type": "none(diagram_text_only)",
@@ -121,18 +121,18 @@
   },
   {
    "type": "text",
-   "total": 90,
+   "total": 97,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 90
+   "notApplicable": 97
   }
  ],
  "bySubject": {
   "ap_calculus_ab": {
-   "total": 658,
-   "pass": 308,
+   "total": 671,
+   "pass": 311,
    "fail": 1,
-   "notApplicable": 349
+   "notApplicable": 359
   },
   "ap_biology": {
    "total": 200,
@@ -154,8 +154,8 @@
   }
  },
  "figureNeed": {
-  "required": 646,
-  "text_only": 468,
+  "required": 649,
+  "text_only": 478,
   "supporting": 52
  },
  "errorCodes": {
@@ -19648,6 +19648,188 @@
    "status": "not_applicable",
    "issues": [],
    "alt": null
+  },
+  {
+   "key": "supp-r3b2-ab-final:ap_calculus_ab-m01-k0",
+   "contentHash": "875c4b9cfe8bcb35943d9caa5c792734b4245e3dd44a3a7e58c28aa9a32dc3c8",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3b2-ab-final:ap_calculus_ab-m02-k0",
+   "contentHash": "6b7bbf0990a379adcc85c328ed07fb02e592e6a4225686edcb3cf98a508e3fd6",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3b2-ab-final:ap_calculus_ab-m03-k0",
+   "contentHash": "5dad45207d4502b8739fbbca39e058b49a74c107d624d1a6c866df9344becba4",
+   "subject": "ap_calculus_ab",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c-ab-final:ap_calculus_ab-f01-k0",
+   "contentHash": "9709165984634742f4aeee621bf2d55a44971835a29ff26746e21517db697312",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c-ab-final:ap_calculus_ab-f02-k0",
+   "contentHash": "a5d3cade5b39757c48846a38b5490a463cf6da77a499dd90fae96aebb8e9cb02",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c-ab-final:ap_calculus_ab-f03-k0",
+   "contentHash": "08935c9f19636dfc8f15506f00ce11562858a11441fbd4c5c8f3cf5c4a924942",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c-ab-final:ap_calculus_ab-f04-k0",
+   "contentHash": "eb62617d544459db248ecd32b4c970bdf2234fdcf779e13b35eb1ed9fc1bd2bb",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 9개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Table with columns x (meters), A(x) (square meters) and 6 rows."
+  },
+  {
+   "key": "supp-r3c-ab-final:ap_calculus_ab-f05-k0",
+   "contentHash": "ada9b97736cfdfed8b0d3473a7859d8b4b356dfa340c5278bb71c4d9c7e5ade5",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c-ab-final:ap_calculus_ab-f06-k0",
+   "contentHash": "cf119ec80e2f522efe63f69dea3bb7a42e94c09510374eac81e3451fa86465da",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 3개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [],
+   "alt": "Table with columns x, f(x), f'(x) and 5 rows."
+  },
+  {
+   "key": "supp-r3c-ab-final:ap_calculus_ab-f07-k0",
+   "contentHash": "d3903727afbead49677d712067cee0d0a25628b53c7f986e3c494ce99d781de9",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c-ab-final:ap_calculus_ab-f08-k0",
+   "contentHash": "f089488072535bfc57c070625e8856bfbfaa5046542703303b7ef88feeafcb44",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c-ab-final:ap_calculus_ab-f09-k0",
+   "contentHash": "52dd45669c5540ad73d902b8964a7365c27831932f75a1ebef8715fae732eb7e",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c-ab-final:ap_calculus_ab-f10-k0",
+   "contentHash": "21d3f986dd03ae9baec2a465d542bc680ef2f5b8da9699310880159be907e5e7",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "ap_table:given_info",
+   "need": "required",
+   "needReason": "본문에 없는 조건·식·수치를 자료 패널이 담고 있음",
+   "status": "pass",
+   "issues": [],
+   "alt": "Given information. Table with columns Item, Value and 2 rows."
   }
  ]
 }
