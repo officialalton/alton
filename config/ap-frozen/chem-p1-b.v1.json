@@ -5,7 +5,7 @@
  "archetypeList": "chem_p1_frq",
  "seed0": 7600,
  "candidatesPerCell": 1,
- "capUsd": 1.0,
+ "capUsd": 1,
  "repair": false,
  "env": {
   "AP_REQUIRE_BLUEPRINT": "1",
@@ -40,10 +40,10 @@
  ],
  "hardStopCumulativeUsd": 57.2,
  "expected": {
-  "generatorHash": "UNFROZEN",
-  "reviewerPromptHash": "UNFROZEN",
-  "difficultyPromptHash": "UNFROZEN",
-  "parserHash": "UNFROZEN",
+  "generatorHash": "9d6efea9b877",
+  "reviewerPromptHash": "71acc52d2bf2",
+  "difficultyPromptHash": "9bda2250d42c",
+  "parserHash": "7528bbe8cdfc",
   "models": {
    "gen": "claude-sonnet-5-5",
    "solve": "claude-opus-5-5",
@@ -63,7 +63,7 @@
   "cells": "7 FRQ slots x 1 candidate: 3 long (10 points: weak-acid titration, free energy and cell, kinetics data) and 4 short (4 points: PES, combustion stoichiometry and gas volume, bonding and IMF, equilibrium); 46 points in total",
   "perCellUsd": "long 0.08 (5 parts, 9-10 rubric rows), short 0.045; Physics observed 0.05-0.06 per FRQ candidate with 4 parts",
   "expectedUsd": "0.45 (range 0.35-0.8)",
-  "capUsd": 1.0,
+  "capUsd": 1,
   "passRateAssumption": "53% first pass (Physics P1-b 2/4 and phys-s2 FRQ). Stop if fewer than 2 of 7 pass.",
   "runAfter": "P1-a, only if its first pass is at least 45%"
  },
