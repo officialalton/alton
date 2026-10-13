@@ -4,6 +4,7 @@
 // 저장은 부모가 한다: 획이 끝날 때마다 onChange(새 획 배열)만 호출한다(디바운스·flush·서버 시계 오류 처리는 ApExamTakeClient 의 useFrqInk).
 import { useCallback, useEffect, useRef, useState } from "react";
 import { INK_COLORS, INK_H_PRESETS, INK_MAX_H, INK_W, clampBoardHeight, eraseStrokesNear, simplifyPoints, type InkStroke } from "@/lib/ap-exam/frq-ink";
+import { BoardResizeHandle, BoardScrollGutter, BoardSizeButtons, boardBtn } from "./BoardSizeControls";
 
 const HISTORY_MAX = 30;
 
@@ -30,7 +31,6 @@ export default function FrqHandwritingPad({ label, strokes, height, disabled = f
   const [, force] = useState(0);
   const heightRef = useRef(height);
   heightRef.current = height;
-  const resizeRef = useRef<{ startY: number; startH: number } | null>(null);
 
   const redraw = useCallback(() => {
     const ctx = canvasRef.current?.getContext?.("2d");
@@ -96,23 +96,12 @@ export default function FrqHandwritingPad({ label, strokes, height, disabled = f
     const next = clampBoardHeight(h, strokesRef.current);
     if (next !== heightRef.current) onHeightChange(next);
   };
-  function resizeDown(e: React.PointerEvent<HTMLDivElement>) {
-    if (disabled) return;
-    e.currentTarget.setPointerCapture?.(e.pointerId);
-    resizeRef.current = { startY: e.clientY, startH: heightRef.current };
-  }
-  function resizeMove(e: React.PointerEvent<HTMLDivElement>) {
-    const r = resizeRef.current;
-    if (!r) return;
-    const cw = canvasRef.current?.getBoundingClientRect().width || INK_W;
-    setHeight(r.startH + (e.clientY - r.startY) * (INK_W / cw)); // 화면 픽셀 → 논리 좌표
-  }
   function clearAll() {
     if (disabled || strokesRef.current.length === 0) return;
     commit([]);
   }
 
-  const btn = (active: boolean) => `min-h-[36px] rounded border px-2.5 py-1 text-[12px] font-bold md:min-h-0 ${active ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"}`;
+  const btn = boardBtn;
   return (
     <div className="mt-2 rounded-lg border border-grey-300 bg-white" data-testid={`frq-pad-${label}`}>
       <div className="flex flex-wrap items-center gap-1.5 border-b border-grey-200 px-2 py-1.5">
@@ -123,13 +112,7 @@ export default function FrqHandwritingPad({ label, strokes, height, disabled = f
             className={`h-7 w-7 rounded-full border-2 md:h-5 md:w-5 ${tool === "pen" && color === i ? "border-ink" : "border-grey-200"}`} style={{ backgroundColor: c.value }} />
         ))}
         <span className="mx-1 hidden h-5 w-px bg-grey-200 md:inline-block" aria-hidden />
-        <div role="group" aria-label="Board size" className="flex items-center gap-1" data-testid={`frq-size-${label}`}>
-          <button type="button" className={btn(false)} aria-label="Smaller board" onClick={() => setHeight(height - 100)} disabled={disabled}>−</button>
-          {INK_H_PRESETS.map((pr) => (
-            <button key={pr.h} type="button" className={btn(height === pr.h)} aria-pressed={height === pr.h} onClick={() => setHeight(pr.h)} disabled={disabled} data-testid={`frq-size-${label}-${pr.h}`}>{pr.label}</button>
-          ))}
-          <button type="button" className={btn(false)} aria-label="Larger board" onClick={() => setHeight(height + 100)} disabled={disabled}>+</button>
-        </div>
+        <BoardSizeButtons presets={INK_H_PRESETS} height={height} disabled={disabled} onSet={setHeight} groupTestId={`frq-size-${label}`} presetTestId={(h) => `frq-size-${label}-${h}`} />
         <button type="button" className={`${btn(false)} ml-auto`} onClick={undo} disabled={disabled || historyRef.current.length === 0} data-testid={`frq-undo-${label}`}>Undo</button>
         <button type="button" className={btn(false)} onClick={clearAll} disabled={disabled || strokesRef.current.length === 0} data-testid={`frq-clear-${label}`}>Clear</button>
       </div>
@@ -138,20 +121,10 @@ export default function FrqHandwritingPad({ label, strokes, height, disabled = f
         className={`block w-full touch-none ${disabled ? "" : "cursor-crosshair"}`} style={{ aspectRatio: `${INK_W} / ${height}` }}
         onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onPointerLeave={up} />
       {/* 모바일: 캔버스는 touch-action:none 이라 손가락 접촉은 그리기용. 오른쪽 띠는 페이지 스크롤용(touch-action: pan-y). */}
-      <div className="w-7 shrink-0 touch-pan-y bg-grey-50 md:hidden" aria-hidden data-testid={`frq-scroll-gutter-${label}`} />
+      <BoardScrollGutter testId={`frq-scroll-gutter-${label}`} />
       </div>
-      <div role="slider" tabIndex={0} aria-label={`Board height for part (${label})`} aria-orientation="vertical" aria-valuemin={300} aria-valuemax={INK_MAX_H} aria-valuenow={height}
-        aria-valuetext={`${height} units tall`} data-testid={`frq-resize-${label}`}
-        onKeyDown={(e) => {
-          if (e.key === "ArrowDown" || e.key === "ArrowRight") { e.preventDefault(); setHeight(height + 50); }
-          else if (e.key === "ArrowUp" || e.key === "ArrowLeft") { e.preventDefault(); setHeight(height - 50); }
-          else if (e.key === "PageDown") { e.preventDefault(); setHeight(height + 200); }
-          else if (e.key === "PageUp") { e.preventDefault(); setHeight(height - 200); }
-        }}
-        onPointerDown={resizeDown} onPointerMove={resizeMove} onPointerUp={() => { resizeRef.current = null; }} onPointerCancel={() => { resizeRef.current = null; }}
-        className="flex h-6 cursor-ns-resize touch-none items-center justify-center border-t border-grey-200 bg-grey-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40">
-        <span className="h-1 w-10 rounded-full bg-grey-300" />
-      </div>
+      <BoardResizeHandle height={height} min={300} max={INK_MAX_H} logicalWidth={INK_W} getCanvasWidth={() => canvasRef.current?.getBoundingClientRect().width} disabled={disabled}
+        ariaLabel={`Board height for part (${label})`} testId={`frq-resize-${label}`} onSet={setHeight} />
     </div>
   );
 }
