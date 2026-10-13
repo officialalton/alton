@@ -625,8 +625,8 @@ export async function createMockExamNewVersionAction(sourceSetId: string, swaps:
       return { candidateKey: key, kind: (c?.kind === "mc" ? "mc" : c?.kind ? "frq" : null) as "mc" | "frq" | null, unit: c?.keyword_code?.split(".")[0] ?? null, family: c?.item_family_id ?? null, calculator: c?.calculator ?? null };
     };
     const { data: used, error: e4 } = await db
-      .from("mock_exam_set_items").select("problem_id, mock_exam_sets!inner(set_group_id, status)")
-      .in("problem_id", swaps.map((x) => x.problemId)).neq("mock_exam_sets.set_group_id", set.set_group_id).in("mock_exam_sets.status", ["draft", "published"]);
+      .from("mock_exam_set_items").select("problem_id, mock_exam_sets!inner(set_group_id, status, ap_label)")
+      .in("problem_id", swaps.map((x) => x.problemId)).neq("mock_exam_sets.set_group_id", set.set_group_id).in("mock_exam_sets.status", ["draft", "published"]).eq("mock_exam_sets.ap_label", "full_practice"); // 풀 모의고사끼리만 겹침 금지(부분 연습 세트와의 겹침은 별도 정책)
     if (e4) throw new Error(e4.message);
     const sections = ((set.section_layout as { sections?: { key: string; calculator?: string }[] } | null)?.sections ?? []);
     const unitBounds = set.ap_subject === "ap_calculus_ab" && set.ap_label === "full_practice"
