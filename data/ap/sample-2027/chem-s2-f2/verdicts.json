@@ -1,0 +1,1005 @@
+[
+ {
+  "key": "ap_chemistry-f01-k0",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Ka = [H3O+][HCOO-]/[HCOOH] = 1.80e-4. Setting x^2/0.200 = 1.80e-4 gives x = [H3O+] = 6.0e-3 M. That is 3% ionization, so the approximation holds. pH = 2.22; the exact quadratic gives 2.23.",
+     "final_answer": "Ka = [H3O+][HCOO-]/[HCOOH]; pH ≈ 2.22",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Moles of HCOOH = 0.0500 L × 0.200 M = 0.0100 mol. Volume of NaOH = 0.0100 mol / 0.200 M = 0.0500 L = 50.0 mL.",
+     "final_answer": "50.0 mL",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "At half-equivalence, [HCOOH] = [HCOO-], so the Henderson–Hasselbalch equation gives pH = pKa = -log(1.80e-4) = 3.74. This pH is the acid's pKa.",
+     "final_answer": "pH = 3.74 = pKa of HCOOH",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "At equivalence, [HCOO-] = 0.0100 mol / 0.100 L = 0.100 M. Kb = Kw/Ka = 5.56e-11, so [OH-] = √(5.56e-12) = 2.4e-6 M, pOH = 5.63 and pH ≈ 8.37. This is basic and falls within phenolphthalein's range (8.2–10.0).",
+     "final_answer": "Phenolphthalein",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Doubling the acid concentration doubles the moles of acid to 0.0200 mol. If the NaOH stays at 0.200 M, the volume needed doubles to 100 mL, because equivalence needs moles of OH- equal to moles of acid.",
+     "final_answer": "Yes, it doubles to 100 mL",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The five-part titration FRQ is correct and in scope for 8.5 with related topics 8.3, 8.9 and 4.6. Key values match: initial pH 2.23, equivalence volume 50.0 mL, half-equivalence pH 3.74, and phenolphthalein as the unique indicator. Part E would be clearer if it stated that the NaOH concentration stays at 0.2 M, but the intended reading is natural.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own tagged skill and topic; none uses out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are verified. The 2.22 vs 2.23 difference falls within the stated tolerance. Phenolphthalein is the unique indicator whose range contains the equivalence pH of about 8.4."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives Ka, concentrations, volumes and indicator ranges. Part E does not say the NaOH concentration is unchanged, which is a minor omission."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to FRQ. The common_errors fields name realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item has 10 points in about 23 minutes with calculator use, which matches the long-question format."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP FRQ-style multi-part item. A requires an ICE table and Ka expression with the small-x approximation. B is stoichiometry with an mL-to-L conversion. C applies Henderson-Hasselbalch at the half-equivalence point (pH = pKa) with a brief explanation. D requires computing the equivalence-point pH from the conjugate base (dilution, Kb, pOH) and matching it against an indicator range table. E is a proportional-reasoning prediction. The arithmetic is short and the numbers are clean, the reading load is modest, and the concepts are in scope. The only minor wording concern is the unstated assumption that the NaOH concentration stays the same in E, which is implied by \"repeats the titration\". The difficulty comes from the multi-step conceptual chain, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 780
+  }
+ },
+ {
+  "key": "ap_chemistry-f01-k1",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The equilibrium expression is Ka = [H3O+][HCOO−]/[HCOOH]. Let x = [H3O+], so x²/(0.1 − x) = 1.8×10⁻⁴. Solving the quadratic gives x ≈ 4.15×10⁻³ M, so pH ≈ 2.38. The approximation x ≈ √(KaC) gives pH ≈ 2.37.",
+     "final_answer": "Ka = [H3O+][HCOO−]/[HCOOH]; pH ≈ 2.38",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Moles of acid = 0.020 L × 0.1 M = 2.0×10⁻³ mol. NaOH reacts with the acid 1:1, so the volume of NaOH needed is 2.0×10⁻³ mol ÷ 0.15 M = 0.01333 L.",
+     "final_answer": "13.3 mL",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "At the half-equivalence point, [HCOOH] = [HCOO−]. The Henderson–Hasselbalch equation then gives pH = pKa = −log(1.8×10⁻⁴) = 3.74. This means the pH at this point equals the acid's pKa, so it can be used to find Ka from a titration curve.",
+     "final_answer": "pH ≈ 3.74 (= pKa)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "At equivalence, the 2.0 mmol of formate is in 33.3 mL, so [HCOO−] = 0.060 M. Kb = Kw/Ka = 5.56×10⁻¹¹, so [OH−] = √(Kb × 0.060) = 1.83×10⁻⁶ M. That gives pOH ≈ 5.74 and pH ≈ 8.3, which is basic. Phenolphthalein changes colour over pH 8.2–10.0, which includes the equivalence-point pH and lies within the steep part of the curve.",
+     "final_answer": "Phenolphthalein (pH at equivalence ≈ 8.3)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Yes. Doubling the concentration in the same volume doubles the moles of acid to 4.0 mmol. Because the reaction is 1:1, twice as many moles of NaOH are needed, so the volume of NaOH doubles to about 26.7 mL.",
+     "final_answer": "Yes, it doubles to about 26.7 mL",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard weak acid-strong base titration FRQ worth 10 points. Values are correct and verified by the solver, the indicator choice is unique, and the rubric rows are consistent. Scope fits topics 8.5, 8.3, 8.9 and 4.6.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item covering standard Unit 8 routines: weak-acid ICE pH with the small-x approximation, titration stoichiometry, half-equivalence pH = pKa, equivalence-point pH via conjugate base hydrolysis for indicator selection, and a proportional prediction. Each part is a single well-known routine, with moderate linking in part D (compute equivalence pH, then match it to the indicator table). Arithmetic is light and the numbers are rounded. Wording is clear and everything is in scope, so the difficulty comes from concept integration and not from unfair sources.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k0",
+  "cellId": "ap_chemistry-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "ΔG°=ΔH°−TΔS°=58−500(0.176)=−30 kJ/mol",
+     "final_answer": "−30 kJ/mol",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "ΔG°=0 at T=ΔH°/ΔS°=58000/176≈330 K; with ΔH>0 and ΔS>0 the −TΔS term dominates at high T, so ΔG<0 above",
+     "final_answer": "≈330 K (329.5 K); favorable above this temperature",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "K=exp(−ΔG°/RT)=exp(30000/(8.314×500))=e^7.22",
+     "final_answer": "K ≈ 1.4×10^3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Zn has the lower reduction potential so it is oxidized (anode); Ni is the cathode; electrons go from Zn to Ni through the wire. E°=−0.25−(−0.76)",
+     "final_answer": "Anode = Zn, cathode = Ni, electrons flow Zn→Ni in the wire; E°cell = +0.51 V",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "ΔG°=−nFE°=−2(96485)(0.51)",
+     "final_answer": "ΔG° ≈ −98 kJ/mol; negative sign means the reaction is thermodynamically favorable (spontaneous) under standard conditions",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. Parts A to E sit in topics 9.3, 9.5 and 9.9, the keys are correct and the independent solver agreed on every part. The stimulus is complete in its text description. Minor weaknesses: part D packs a whole diagram checklist into one point, and n = 2 for the cell reaction appears only in part E's prompt rather than in the stimulus.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are in unit 9 scope: ΔG° from ΔH° and ΔS°, K from ΔG°, and ΔG° = −nFE°. Each part's tagged skill matches its task."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct and the rubric rows are consistent: −30.0 kJ/mol, 329.5 K, K about 1400, E° = 0.51 V and ΔG° about −98 kJ/mol. The solver matched all of them."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus contains every needed value and assumption. The data object is empty, but nothing needs rendering because the description carries the content. Part B's wording on favorability is slightly loose but not ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "As an FRQ it has no distractors. The common_errors fields are realistic: omitting the J to kJ conversion, using the wrong sign, adding the potentials and omitting n."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is 10 points over five parts, which fits the long-question grain, and the calculator load is appropriate with no needless arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five-part FRQ-style item covering ΔG=ΔH−TΔS with a J-to-kJ conversion, the crossover temperature with a justification, K from ΔG° via an exponential, a galvanic cell sketch with E°cell, and ΔG°=−nFE°. Each part uses a single standard relationship with short arithmetic. Difficulty comes from choosing the right equation and moving between representations (equation, diagram, sign claim), all within stated Unit 9 scope. Wording is unambiguous and the reading load is modest.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k1",
+  "cellId": "ap_chemistry-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "ΔG°=ΔH°−TΔS° = −198 − 500(−0.090) = −153 kJ/mol",
+     "final_answer": "−153 kJ/mol_rxn",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "ΔG°=0 at T=ΔH°/ΔS°=198/0.090=2200 K. Both ΔH° and ΔS° are negative, so the −TΔS° term is positive and grows with T. Below 2200 K, ΔH° outweighs it and ΔG°<0.",
+     "final_answer": "2200 K; favorable below 2200 K (unfavorable above)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "K=exp(−ΔG°/RT)=exp(153000/(8.314×500))=e^36.8",
+     "final_answer": "K ≈ 1×10^16 (≈9.6×10^15)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Mg has the lower reduction potential, so it is oxidized and is the anode. Fe is the cathode. Electrons flow through the wire from Mg to Fe. E°=−0.44−(−2.37)=1.93 V",
+     "final_answer": "Anode: Mg; cathode: Fe; electrons flow Mg→Fe through the wire; E°cell = +1.93 V",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "ΔG°=−nFE°=−2(96485)(1.93)= −3.72×10^5 J",
+     "final_answer": "ΔG° ≈ −372 kJ/mol_rxn; the negative sign means the cell reaction is thermodynamically favorable",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle passes all five criteria. It is a 10-point long FRQ spanning topics 9.3, 9.5 and 9.9, with five parts worth 2/3/2/2/1 points, and the solver reproduced every key.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts sit in Unit 9: ΔG from ΔH and ΔS (9.3), K from ΔG (9.5), and cell potential with ΔG = -nFE (9.9). Each part is judged against its own tagged skill, and the mix of skills across parts is normal for a long FRQ."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The solver independently reproduced every answer: -153 kJ/mol, 2200 K with favorable below that temperature, K about 9.6e15, anode Mg with E = 1.93 V, and ΔG = -372 kJ/mol. Rubric rows are consistent with the model answers. In part E the stem supplies n = 2, so the key is unique. The reported K matches ΔG = -153 kJ/mol at 500 K."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives ΔH, ΔS, T, the temperature-independence assumption and both reduction potentials, so it is complete. Part D asks for a drawing, so no figure data are needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The rubric rows list realistic common errors, such as skipping the J-to-kJ conversion, using a Celsius temperature, adding the potentials, and mislabeling the anode."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The estimated 23 minutes is slightly long for a 10-point question, but the task load is reasonable and the arithmetic is light. The calculator is allowed and used appropriately."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ spanning 9.3, 9.5 and 9.9. Each part applies a single well-known relationship (dG=dH-TdS, T=dH/dS, K=exp(-dG/RT), E=Ecathode-Eanode, dG=-nFE) with kJ/J conversions and a short justification. Arithmetic is clean and short, with no ambiguity. Appropriate for full-mock level.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f03-k0",
+  "cellId": "ap_chemistry-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Over each 30 s interval, [A] drops by the same fraction (ratio about 0.6376), so the reaction is first order. A plot of ln[A] against time is a straight line with slope -k, which confirms first order. Plots of [A] or 1/[A] against time would be curved.",
+     "final_answer": "First order. Plot ln[A] vs t: it is linear with slope = -k.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Slope = (ln 0.1054 - ln 1)/150 = -2.25/150 = -0.0150 s^-1, so k = 0.0150 s^-1.",
+     "final_answer": "k = 0.0150 s^-1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "For a first-order reaction, t1/2 = 0.693/k = 0.693/0.0150, about 46.2 s. This does not depend on the starting concentration.",
+     "final_answer": "t1/2 ≈ 46.2 s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "At a higher temperature the molecules have more kinetic energy. More collisions happen, and a larger fraction of them have energy at or above Ea. So more collisions are effective, the rate goes up, and k increases.",
+     "final_answer": "k increases",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Passes on all five criteria. The data fit first order exactly with k = 0.0150 s^-1, so the key is unique. Part B's three rows (slope, k, units) are slightly redundant, and the stated decimal format avoids scientific-notation ambiguity. Part D mixes 2.B/2.F skills in a topic 5.5 context, which the bundle allows. There is no distractor field because this is an FRQ, and the common_errors on each row serve that purpose.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.3 with 5.2/5.5 links. Part B (slope to k) and part C (half-life from k) both assess 5.F. Part D is a collision-model prediction, which is in scope for the bundle. No Arrhenius calculation is required."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The ratio [A](t+30)/[A](t) is constant at about 0.6376, so the reaction is first order. k = 2.25/150 = 0.0150 s^-1 and t1/2 = 46.2 s. The solver agreed. The tolerances are reasonable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has complete labels, units and six data rows. The wording is clear. The 310 K temperature is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ. Each row lists a common error, which is adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a 10-point long question at about 23 minutes. A calculator is useful for ln values. There is no heavy arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item that uses standard in-scope skills: testing zero, first and second order by linearizing table data, getting k from the slope of ln[A] vs t, computing a first-order half-life, and giving a qualitative collision-model explanation of the temperature effect. It requires choosing the governing relationship, several ln computations (the values come out evenly spaced), a table-to-graph-to-slope-to-half-life chain, and a conceptual link. This is typical of full-mock free-response difficulty. The wording is clear, the numbers are clean, there is no calculus or Arrhenius calculation, and the reading load is modest.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_chemistry-f03-k1",
+  "cellId": "ap_chemistry-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "[A] falls by the same factor (about 0.698) in every 30 s interval, so it decays exponentially. A plot of ln[A] against time is a straight line (ln 0.8 = -0.223 down to ln 0.1322 = -1.80) with slope -k. Plots of [A] or 1/[A] against time would curve.",
+     "final_answer": "First order. Plot ln[A] vs time: it is linear with slope = -k, while the [A] vs t and 1/[A] vs t plots are not linear.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Slope = (ln 0.1322 - ln 0.8)/150 = (-2.023 - (-0.223))/150 = -1.800/150 = -0.0120 s^-1, so k = -slope.",
+     "final_answer": "k ≈ 0.0120 s^-1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "For a first-order reaction, t1/2 = 0.693/k = 0.693/0.0120. The half-life does not depend on the starting concentration.",
+     "final_answer": "t1/2 ≈ 57.8 s (about 58 s)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "At a higher temperature the particles have more kinetic energy. They collide more often, and a larger fraction of the collisions have energy at least equal to the activation energy. More collisions are effective, so the rate constant goes up.",
+     "final_answer": "k increases",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The data are exactly first order with k = 0.0120 per second. The half-life of about 58 s is consistent. Parts match their own skills and the rubric is coherent. The only minor weakness is that rows B1 and B2 duplicate the same value, which is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 5.3, 5.2 and 5.5 are in scope. No Arrhenius calculation is required."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique and verified against the data. B1 and B2 both award a point for 0.0120, which is a mild redundancy."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with a time column and a concentration column."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item. The rubric rows list the common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a 10-point long question with a calculator."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item in scope for 5.3, 5.2 and 5.5. The student must choose the integrated rate law relationship (testing 0, 1 and 2 order linearizations), compute ln[A] values from the table and find the slope (the ratio is constant, about 0.6977 per 30 s, so k is about 0.01200 per s), calculate the first-order half-life (about 57.8 s), and explain the effect of temperature on k with the collision model. Data are clean and the arithmetic is short; there is no calculus, Arrhenius calculation or extra context. Difficulty comes from concept selection, representation changes (table to ln data to plot to k to half-life to qualitative claim) and multi-step reasoning, which suits a full mock exam rather than basic learning. It is not so deep or heavy in computation that it should be an advanced supplement.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 8,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f04-k0",
+  "cellId": "ap_chemistry-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "final_answer": "Oxygen (O): 1s2 2s2 2p4",
+     "brief_reasoning": "There are 2+2+4 = 8 electrons, in three subshells, so the configuration is 1s2 2s2 2p4. That is oxygen, with Z = 8.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "final_answer": "The 1s electrons are closest to the nucleus and are not shielded by other electrons, so they feel nearly the full +8 charge. By Coulomb's law (F ∝ q1q2/r²), the smallest r and largest effective charge give the strongest attraction. So the 1s electrons need the most energy to remove.",
+     "brief_reasoning": "Coulomb's law: shortest distance plus least shielding gives the strongest attraction.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "final_answer": "Higher. F has 9 protons instead of 8. Its added electron goes into the same 2p subshell, about the same distance from the nucleus, and electrons in the same shell shield each other very little. So the effective nuclear charge is larger. A larger charge at about the same (or slightly smaller) distance means a stronger Coulombic attraction. That makes F's 2p binding energy higher than 1.31 MJ/mol (about 1.68 MJ/mol).",
+     "brief_reasoning": "Same shell, more protons: higher effective nuclear charge and stronger attraction.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Valid short PES FRQ. The spectrum is consistent with O, the key and rubric are consistent, and the load is appropriate for a 4-point short question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Reading a three-peak PES spectrum to get 1s2 2s2 2p4 (oxygen) is a direct, single-representation task. Part B applies Coulomb's law qualitatively: 1s electrons are closest to the nucleus, so the attraction is strongest. Part C is a one-step periodic-trend prediction: F has a greater nuclear charge with similar shielding, so the 2p binding energy is higher. No calculation is needed and the reading load is minimal. Concept depth is limited to the core PES, Coulomb's law and Zeff ideas, with no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f04-k1",
+  "cellId": "ap_chemistry-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Peaks hold 2, 2 and 5 electrons, so there are 9 electrons in total. The atom is neutral, so it has 9 protons: fluorine.",
+     "final_answer": "Fluorine (F): 1s2 2s2 2p5",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Coulomb's law says F is proportional to q1q2/r^2. The 1s electrons are closest to the nucleus (smallest r) and have almost no shielding, so they feel nearly the full +9 charge. That gives the strongest attraction, so the most energy is needed to remove them.",
+     "final_answer": "The 1s electrons are closest to the nucleus and least shielded, so they feel the strongest Coulombic attraction and have the highest binding energy (67.2 MJ/mol).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Ne has one more proton (10 vs 9). Its valence 2p electrons are in the same shell, with the same core shielding (1s2) and about the same distance from the nucleus. The higher effective nuclear charge gives a stronger attraction, so the binding energy is higher (about 2.08 vs 1.68 MJ/mol).",
+     "final_answer": "Higher. Ne has more protons, while its valence electrons are in the same n = 2 shell with the same shielding. Its effective nuclear charge is greater, so the attraction is stronger and the binding energy is higher.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound short FRQ. The F photoelectron spectrum data are realistic and complete, and parts A-C are consistent with the rubric rows. Each part fits its own tagged skill, and the load matches a 4-point short question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A reads the representation (1.A, topic 1.6). Parts B and C use Coulomb's law and the neighbor comparison (topics 1.5 and 1.7), judged against their own skill tags."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answers (F, 1s2 2s2 2p5; 1s has the highest binding energy; Ne valence peak higher) are unique and correct. The independent solver agreed. Rubric rows are 1 point each and consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Peak energies, electron counts and unit are all given and realistic for F. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not an MC item. The common_errors listed in the rubric are realistic (counting peaks, shielding, farther distance)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and typical of an AP short FRQ. No heavy arithmetic is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires reading a PES diagram and mapping peak heights (2, 2, 5) to subshell occupancy to identify F (1s2 2s2 2p5). It then asks for a Coulomb's law explanation of the 1s peak (closest to the nucleus, highest effective nuclear charge) and a comparison of the Ne and F valence peaks (more protons, same shell, similar shielding, so higher binding energy). This is typical AP free-response reasoning with a spectrum read, one proportional-reasoning prediction, and a claim-justification link. There is no heavy arithmetic, the wording is clear, and the content is in scope (subshell labels only).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_chemistry-f05-k0",
+  "cellId": "ap_chemistry-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Balance C, H, then O.",
+     "final_answer": "C2H4(g) + 3 O2(g) → 2 CO2(g) + 2 H2O(g)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "50.0 g / 28.05 g/mol = 1.782 mol C2H4; ×2 = 3.57 mol CO2",
+     "final_answer": "3.57 mol CO2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "V = nRT/P = 3.565(0.08206)(373.15)/1.00 atm",
+     "final_answer": "about 109 L",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard combustion stoichiometry plus ideal gas volume short question worth 4 points (1/2/1). The key is consistent, and the tolerances cover the 3.56/3.57 rounding difference. One small inconsistency: the model answer shows 3.56 mol giving 109.2 L, while 3.56 exactly gives about 109.0 L, though the tolerance covers it. Scope, skill tags, and load are appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is correct. The 3.56 versus 3.57 rounding is covered by tolerance. The 109.2 L in the model answer uses the unrounded n, which is a minor presentation inconsistency."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-step stoichiometry chain: balance the combustion equation, convert grams to moles, apply the 1:2 mole ratio, then use PV=nRT with a Celsius-to-kelvin conversion. The difficulty comes from choosing the right relationships and linking steps, not from heavy arithmetic or reading. This fits a typical exam-style free-response question, appropriate for full mocks.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_chemistry-f05-k1",
+  "cellId": "ap_chemistry-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Balance C, H, then O; double to clear fraction.",
+     "final_answer": "2C2H6(g) + 7O2(g) → 4CO2(g) + 6H2O(g)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "10.0 g / 30.07 g/mol = 0.3326 mol C2H6; ×2 = 0.665 mol CO2",
+     "final_answer": "0.665 mol CO2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "V = nRT/P = 0.665(0.08206)(298 K)/0.95 atm",
+     "final_answer": "17.1 L",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 4-point short FRQ (balanced equation, mass to moles to CO2, gas volume) fits topic 4.5 with related 4.3 and 3.4. Keys are correct and consistent, and the independent solver agrees. The stimulus is complete: it gives the mass, T, P and an excess-oxygen condition. Each part is scored against its own skill and rubric rows, and the 1/2/1 split is normal. The calculation load is light and calculator use is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A (5.E) is equation balancing, B is the stoichiometric calculation (5.F), and C uses the ideal gas law (5.B/5.F). All parts are within Unit 4 and the allowed related topics."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The values 0.333 mol, 0.665 mol and 17.1 L check out. The rubric rows are split cleanly and B2 correctly depends on B1. The tolerances are reasonable. Part C's units row is flagged but the single point covers value and units, which is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clear. The empty data object is fine for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. The rubric rows list plausible common errors (using the CO2 molar mass, omitting the mole ratio, using Celsius)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP short FRQ: minimal reading, no unrounded arithmetic, and a calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-step stoichiometry chain: balance combustion equation, convert grams to moles, apply the mole ratio, then use PV=nRT with a Celsius-to-kelvin conversion. Links topics 4.5, 4.3 and 3.4. Concepts are core, the arithmetic is short, the wording is clear, and there are no unfair difficulty sources. It is more than a one-step recall item, so it suits a full mock.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_chemistry-f06-k0",
+  "cellId": "ap_chemistry-f06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "8 valence electrons in total: O makes two single bonds, one to each H, and keeps two lone pairs.",
+     "final_answer": "H–Ö–H: O in the center, single-bonded to each H, with two lone pairs on O (8 valence electrons in total)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "O has four electron domains (2 bonding, 2 lone pairs), so the electron geometry is tetrahedral. The lone pairs push the bonds closer together.",
+     "final_answer": "Bent; bond angle about 104.5° (a bit less than 109.5°)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The O–H bonds are polar because O is more electronegative than H. In a bent shape the bond dipoles do not cancel.",
+     "final_answer": "Polar: the polar O–H bond dipoles do not cancel because the molecule is bent, so there is a net dipole.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Ethanol has an H bonded to O, so it can hydrogen bond. Dimethyl ether has no O–H, so it only has dipole–dipole and London forces. The two molecules have similar London forces because their molar masses are similar.",
+     "final_answer": "C2H5OH has an O–H group, so its molecules hold each other with hydrogen bonds. CH3OCH3 has no H bonded to O, so it cannot hydrogen bond with itself and has only weaker dipole–dipole and London forces. London forces are similar for both because the molar masses are the same. Ethanol's stronger attractions take more energy to overcome, so its boiling point is higher.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item fails on key/scoring and on the explanation requirement. The scope is acceptable. Parts A to D fit topics 2.5, 2.7 and 3.1 and the short-question grain of four 1-point parts.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The topics are in scope. Part B is the only part tagged 4.A, and it is basically a recall of the H2O shape. Part D is tagged 6.E, and part C is tagged 4.C."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part A's model answer is internally flawed. It says \"2 bonds from the central atom to the other atoms, 2 lone pairs on the central atom, and the remaining lone pairs on the outer atoms.\" In H2O the outer atoms are H, which have no lone pairs, so the 8 electrons are already fully accounted for. The rubric row therefore wrongly implies lone pairs on the outer atoms. The part-D rubric also accepts \"hydrogen bonding\" without requiring the reason (an O-H bond in ethanol versus none in dimethyl ether), so a vague answer could earn the point."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is a plain-text description with complete data (molar masses and boiling points). The Part A drawing is scored from a checklist, so no figure data is needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The item has no distractors. The rubric rows list one common error each, but the item has no explanation of wrong answers beyond that. In part D, the stimulus gives no structural information on ethanol (such as the O-H group), so the student must already know the structures. That is acceptable, but the rubric should require the O-H reason."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and reading load are fine for a short FRQ. The calculator designation is allowed although no calculation is needed, which is harmless."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four 1-point parts, each a direct application of a standard concept: drawing the H2O Lewis structure, naming bent geometry with a bond angle just under 109.5 degrees, justifying polarity from geometry and bond dipoles, and explaining the boiling-point difference by hydrogen bonding in ethanol (O-H present) versus dimethyl ether (no O-H, dipole-dipole only). There is no calculation, the stimulus is short and unambiguous, and the representation changes are minimal. The depth is typical of introductory VSEPR and IMF learning rather than full-mock multi-step reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_chemistry-f06-k1",
+  "cellId": "ap_chemistry-f06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "8 valence electrons: O central, two O–H single bonds, two lone pairs on O.",
+     "final_answer": "H–O–H with two lone pairs on O (8 valence electrons total)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "4 electron domains (2 bonding, 2 lone), so tetrahedral electron geometry; lone-pair repulsion squeezes the angle below 109.5°.",
+     "final_answer": "Bent; about 104.5° (less than 109.5°)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "O–H bonds are polar, and because the shape is bent the bond dipoles don't cancel, giving a net dipole.",
+     "final_answer": "Polar",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "HF forms hydrogen bonds because F is small and highly electronegative. HCl has only dipole–dipole and London forces. Hydrogen bonds are stronger, so more energy is needed to separate HF molecules, even though HCl's larger electron cloud gives it stronger London forces.",
+     "final_answer": "HF has hydrogen bonding between its molecules, which is stronger than HCl's dipole–dipole and London forces",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is well scoped, but the part A model answer wrongly places lone pairs on the outer atoms, which are H, so the reference answer is chemically incorrect and inconsistent with its own rubric row. It needs a correction before use.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts map to 3.B, 4.A, 4.C and 6.E within the bundle's related topics 2.7, 2.5 and 3.1. The dominant demand is VSEPR and Lewis structure."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The part A model answer says \"the remaining lone pairs on the outer atoms\", but the outer atoms of H2O are hydrogens and have no lone pairs. This is chemically wrong and contradicts the rubric row, which correctly places 2 lone pairs on the central atom. The model answer also never names O as the central atom. Parts B, C and D are correct. The part C justification is a bit thin, since the rubric does not require the O-H bonds to be named as polar."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete, and the boiling points given are realistic. The task wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common-error entries are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a short FRQ with four 1-point parts. The calculator is listed as allowed although none is needed, which is harmless."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four standard recall-and-apply parts: Lewis structure of H2O, bent geometry and approximate bond angle, polarity from shape and bond dipoles, and hydrogen bonding in HF versus dipole-dipole and dispersion in HCl. Each part needs one or two reasoning steps with no computation. The stimulus is short and in scope for topics 2.5, 2.7 and 3.1. The only representation change is from the diagram to the geometry and then to the polarity or force argument.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_chemistry-f07-k0",
+  "cellId": "ap_chemistry-f07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "final_answer": "Kc = [B]^2/[A]",
+     "brief_reasoning": "Products over reactants, raised to coefficients.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "final_answer": "Q = (0.3)^2/1 = 0.09 < Kc = 0.2, so reaction proceeds forward (toward B).",
+     "brief_reasoning": "Q<K means net forward reaction.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "final_answer": "Shifts right (toward B).",
+     "brief_reasoning": "Doubling volume halves all concentrations; Q = (x/2)^2/(y/2) = Q/2 < K, so net forward toward the side with more gas moles (2 mol B vs 1 mol A).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "final_answer": "Kc decreases.",
+     "brief_reasoning": "ΔH<0 (exothermic); raising T favors the endothermic reverse reaction, so Kc decreases.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Content is correct and in scope, but the Part C rubric row is internally inconsistent: the criterion accepts a Q-less-than-K justification, while required_elements demands \"more moles of gas\". A valid Q-based justification could lose the point. Fixing the required elements to match the \"or\" criterion would resolve it.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts fall within topics 7.3, 7.9 and 7.10. Part A is trivial but acceptable as a part of a short question."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The Part C rubric criterion says \"Q becoming less than K (or the favored side having more moles of gas)\", but required_elements lists \"toward the products\" and \"more moles of gas\". This is inconsistent, so a student who justifies with Q less than K could be penalized. Parts A, B and D are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is complete and the wording is clear. The numbers are consistent with Q = 0.09 and K = 0.2."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no options. The listed common errors are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, and four 1-point parts is a normal short-question structure."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four short, independent parts, each applying one core idea: writing the Kc expression, computing Q with a simple squared term and comparing it to K, predicting the shift for a volume change by comparing moles of gas, and the effect of temperature on K for an exothermic reaction. The arithmetic is trivial (0.3^2/1 = 0.09), reading is minimal, and there are no multi-step links or representation switches. This is typical first-pass practice for topics 7.3, 7.9 and 7.10 and is below the demand of a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f07-k1",
+  "cellId": "ap_chemistry-f07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Products over reactants, each raised to its coefficient.",
+     "final_answer": "Kc = [B]^2/[A]",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Q = (0.1)^2/1 = 0.01. Since Q < K = 0.2, the reaction moves forward.",
+     "final_answer": "Q = 0.01; Q < K, so the reaction proceeds to the right (forward), forming more B.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Doubling the volume halves every concentration. Q becomes (x/2)^2/(y/2) = K/2, which is less than K. The system therefore shifts toward the side with more moles of gas.",
+     "final_answer": "Shifts right (toward B, 2 mol gas). When the volume is doubled, Q drops to K/2, which is less than K.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The forward reaction is exothermic (ΔH < 0). Raising the temperature favors the endothermic reverse reaction, so K gets smaller.",
+     "final_answer": "Kc decreases. Because ΔH < 0, heat acts like a product, so raising T shifts the equilibrium left.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Chemistry is correct and the independent solver agrees, but the rubric rows are inconsistent with the model answers and with the part prompts. Fix the rubric rows (items 1 and 2) before use.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts match topics 7.3, 7.2, 7.9 and 7.10 and the skills tagged for each part."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The part answers are chemically correct. Rubric problems:\n1. Part C's criterion says \"Q becoming less than K (or more moles of gas)\", but required_elements demands both \"toward the products\" and \"more moles of gas\". This is internally inconsistent. A student who justifies the shift with Q < K alone would satisfy the criterion text but fail the required elements.\n2. Part D requires the phrase \"heat as product\", but the prompt asks students to justify using the sign of the enthalpy change. A justification such as \"ΔH < 0, so the reverse reaction is endothermic and is favored by added heat\" is valid but is not covered by alt_solutions.\n3. Part C's prompt says the volume is doubled \"after the system reaches equilibrium\", yet the model answer relies on the original equilibrium state. The reasoning is valid. Part B's initial Q computation is unrelated to Part C, which is fine."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives K, ΔH sign, and the initial concentrations. This is sufficient."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common errors are listed for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, with four 1-point parts, which is typical of a short FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard Unit 7 free-response style item with four short parts. A: write Kc = [B]^2/[A]. B: Q = (0.1)^2/1 = 0.01 < K = 0.2, so the reaction proceeds forward. C: doubling the volume lowers pressure, so the system shifts toward more moles of gas (toward B), justified by Q = [B]^2/[A] becoming less than K (Q = K/2) or by the fewer-moles-of-gas argument. D: for an exothermic reaction, raising T shifts the equilibrium toward reactants, so K decreases. Concepts are core and unambiguous, arithmetic is trivial, and reading is minimal. Argumentation is needed in parts C and D, with a modest mix of representations (expression, numeric Q vs K, qualitative disturbance). This is more than a basic recall check but not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ }
+]
