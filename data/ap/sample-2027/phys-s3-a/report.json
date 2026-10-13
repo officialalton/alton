@@ -1,0 +1,36 @@
+{
+ "run": "phys-s3-a",
+ "subject": "ap_physics_1",
+ "generatedAt": "2026-10-13T11:44:06.202Z",
+ "totalCostUsd": 2.31,
+ "newSpendSinceBaseline": 2.64,
+ "cap": 50,
+ "calls": 240,
+ "candidates": 80,
+ "mcCandidates": 80,
+ "frqCandidates": 0,
+ "passedAll": 71,
+ "adopted": 39,
+ "mcAdopted": 39,
+ "frqAdopted": 0,
+ "reserve": 32,
+ "yield": 0.487,
+ "costPerAdopted": 0.059,
+ "callsPerAdopted": 6.2,
+ "duplicateRejected": 1,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 80
+ },
+ "rejectionReasons": {
+  "criterion_failed_stimulus_expression": 2,
+  "criterion_failed_distractor_explanation": 7,
+  "duplicate_gate_near_duplicate": 1,
+  "criterion_failed_key_scoring": 1,
+  "instant_reject_multiple_correct": 1
+ },
+ "unfilledCells": [
+  "ap_physics_1-m23"
+ ]
+}

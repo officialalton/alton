@@ -50,6 +50,8 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "phys-p1b", title: "AP Physics 1 P1-b (FRQ 파일럿, 통과 2)", itemsFile: "phys-p1b-items.json", loadLabel: "phys-p1b-2026-10-13", supplement: true, passKeysFile: "phys-p1b-pass-keys.json", evidenceFile: "evidence-phys-s2.json" },
   // phys-s2: 풀 모의고사 2회(PH1·PH2) 부족분 — 신규 원형 48 + 세트 3 + 단독 136 후보·세트 10 후보·FRQ 28 후보(런 a–e, 비용 $6.6967).
   { id: "phys-s2", title: "AP Physics 1 phys-s2 (PH1·PH2 부족분: 단독·세트·FRQ)", itemsFile: "phys-s2-items.json", loadLabel: "phys-s2-2026-10-13", supplement: true, passKeysFile: "phys-s2-pass-keys.json", evidenceFile: "evidence-phys-s2.json" },
+  // phys-s3: 스킬 범위 보강(2026-10-13) — 신규 원형 40(2.A 기호식 11·2.C 순위 10·2.D 예측 7·3.B 주장 7·3.C 자료 근거 5) x 후보 2 = 80, 런 phys-s3-a, 비용 $2.6406.
+  { id: "phys-s3", title: "AP Physics 1 phys-s3 (스킬 범위 보강: 2.A·2.C·2.D·3.B·3.C 단독)", itemsFile: "phys-s3-items.json", loadLabel: "phys-s3-2026-10-13", supplement: true, passKeysFile: "phys-s3-pass-keys.json", evidenceFile: "evidence-phys-s3.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 
