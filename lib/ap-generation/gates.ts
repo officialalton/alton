@@ -163,7 +163,7 @@ export function gateFrq(subject: string, p: FrqPack, skills: Set<string>, opts: 
 
 const shingles = (s: string) => { const t = norm(s).replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter(Boolean); const o = new Set<string>(); for (let i = 0; i + 2 < t.length; i++) o.add(t.slice(i, i + 3).join(" ")); return o; };
 export const jaccard = (a: Set<string>, b: Set<string>) => { let i = 0; a.forEach((x) => b.has(x) && i++); const u = a.size + b.size - i; return u ? i / u : 0; };
-export const textOf = (p: McPack | FrqPack) => ("options" in p ? `${p.stem} ${p.options.map((o) => o.text).join(" ")} ${JSON.stringify(p.stimulus.data)}` : `${p.title} ${p.parts.map((x) => x.prompt).join(" ")} ${JSON.stringify(p.stimulus.data)}`);
+export const textOf = (p: McPack | FrqPack) => ("options" in p ? `${p.stem} ${p.options.map((o) => o.text).join(" ")} ${JSON.stringify(p.stimulus.data)} ${p.stimulus.description ?? ""}` : `${p.title} ${p.parts.map((x) => x.prompt).join(" ")} ${JSON.stringify(p.stimulus.data)} ${p.stimulus.description ?? ""}`); // 설명(description)까지 비교한다: 글 자료 FRQ 는 data={} 라 수치가 설명에만 있다(2026-10-13 chem-s2 에서 서로 다른 번들이 exact 중복으로 반려됨)
 
 /** 근접 중복 게이트: 이미 채택된 문항들과 비교(같은 숫자 세트이거나 3-gram 유사도 > 0.8). */
 export function gateDuplicate(p: McPack | FrqPack, accepted: (McPack | FrqPack)[]): string[] {
