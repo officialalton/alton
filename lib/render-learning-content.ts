@@ -15,9 +15,11 @@ export type ContentPart =
   /** ______ 빈칸 — RW 빈칸 문항의 대상(2026-09-14 RW 구조화 블록). 학생 화면에서 밑줄 칸으로 그린다. */
   | { kind: "blank" }
   | { kind: "math"; html: string; display: boolean }
-  | { kind: "math-error"; source: string };
+  | { kind: "math-error"; source: string }
+  /** `코드` — 한 줄 안의 코드 조각(AP Computer Science A 선택지·본문). 수식·밑줄 구문을 적용하지 않는다(2026-10-13). */
+  | { kind: "code"; value: string };
 
-const TOKEN = /\\\$|\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$|__([^_\n][^\n]*?)__|(_{3,})/g;
+const TOKEN = /\\\$|\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$|__([^_\n][^\n]*?)__|(_{3,})|`([^`\n]+)`/g;
 
 /**
  * 2026-10-02 UAT(C3) — 통화 기호 `$`가 수식 구분자로 오인되는 것을 막는다.
@@ -59,6 +61,11 @@ export function splitLearningContent(source: string): ContentPart[] {
       parts.push({ kind: "text", value: "$" });
       lastIndex = match.index + 1;
       TOKEN.lastIndex = lastIndex;
+      continue;
+    }
+    if (match[5] !== undefined) {
+      parts.push({ kind: "code", value: match[5] });
+      lastIndex = match.index + match[0].length;
       continue;
     }
     if (match[3] !== undefined) {
@@ -115,6 +122,8 @@ export function hasMath(source: string): boolean {
 
 export type ContentBlock =
   | { kind: "paragraph"; text: string }
+  /** ```java … ``` 코드 블록(2026-10-13, AP Computer Science A): 줄 번호·고정폭으로 그리고 KaTeX·밑줄·표 구문을 적용하지 않는다. */
+  | { kind: "code"; language: string; lines: string[] }
   | { kind: "table"; header: string[]; rows: string[][] }
   /** '- ' 로 시작하는 연속 줄 — Rhetorical Synthesis 의 메모 목록 등(2026-09-14 ⑤). */
   | { kind: "list"; items: string[] };
@@ -160,7 +169,43 @@ function unflattenTableLine(line: string): string[] | null {
   return rows.map((r) => `|${r.join("|")}|`);
 }
 
+const FENCE_OPEN = /^\s*```([A-Za-z0-9_+-]*)\s*$/;
+const FENCE_CLOSE = /^\s*```\s*$/;
+
+/** 코드 펜스 단위로 나눈 뒤, 펜스 밖 글은 기존 표·목록 규칙으로, 펜스 안은 코드 블록으로 돌려준다(닫히지 않은 펜스는 코드가 아니라 글로 둔다). */
 export function splitLearningBlocks(source: string): ContentBlock[] {
+  if (!source.includes("```")) return splitPlainBlocks(source);
+  const lines = source.replace(/\r\n/g, "\n").split("\n");
+  const out: ContentBlock[] = [];
+  let plain: string[] = [];
+  const flush = () => {
+    if (plain.length) {
+      const t = plain.join("\n");
+      if (t.trim()) out.push(...splitPlainBlocks(t));
+      plain = [];
+    }
+  };
+  let i = 0;
+  while (i < lines.length) {
+    const open = FENCE_OPEN.exec(lines[i]);
+    if (open) {
+      let j = i + 1;
+      while (j < lines.length && !FENCE_CLOSE.test(lines[j])) j += 1;
+      if (j < lines.length) {
+        flush();
+        out.push({ kind: "code", language: open[1] || "text", lines: lines.slice(i + 1, j) });
+        i = j + 1;
+        continue;
+      }
+    }
+    plain.push(lines[i]);
+    i += 1;
+  }
+  flush();
+  return out.length ? out : [{ kind: "paragraph", text: source }];
+}
+
+function splitPlainBlocks(source: string): ContentBlock[] {
   const rawLines = source.replace(/\r\n/g, "\n").split("\n");
   const lines = rawLines.flatMap((line) => unflattenTableLine(line) ?? [line]);
   const blocks: ContentBlock[] = [];
