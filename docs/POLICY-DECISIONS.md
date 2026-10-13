@@ -73,3 +73,4 @@
 - 응시 화면 Exit 버튼(2026-10-13 오너): AP·SAT 4모듈(MST)·구형 고정 SAT 응시 헤더에 Exit → 1회 경고(alertdialog, 기본 포커스 Stay in exam, Esc=머무름) → 확인 시 현재 입력 저장 후 /student?tab=mock-exam 이동. 문구는 실제 동작 그대로: AP·MST 는 서버 시계라 나가도 시간이 계속 흐르고, 구형 고정 SAT 는 남은 시간을 저장해 나가 있는 동안 멈춘다(기존 동작 유지, 정책 변경 아님). beforeunload 경고는 응시 중에만 — guard: app/student/mock-exam/[attemptId]/ExitExamButton.test.tsx
 - AP 생성 예산 상향(2026-10-13 오너): 누적 총 상한 $95, 중단선 $90(기존 $50/$45). 신규 과목(Physics 1·Chemistry·CS A·Econ·Biology·English Lang) 풀 시험 1회씩 + 예비를 위한 증액이며, 과목별 파일럿 비용은 P0 보고서의 추정을 기준으로 한다. 새 과목 공개는 학생 화면 점검 후 결정한다.
 - AP 생성 예산 재상향(2026-10-13 오너): 누적 총 상한 $100, 중단선 $95(직전 $95/$90). CS A(Java 실행 검증 도입)·Microeconomics 풀 시험 용도이며, 과목별 파일럿 비용은 P0 보고서 추정을 기준으로 한다.
+- 오류·시스템 화면 영어(2026-10-13 오너): 관리자 포털을 포함한 모든 오류 화면(error/global-error/not-found)은 영어로 표시한다. 관리자 일반 화면의 한국어 유지는 그대로.

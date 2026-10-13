@@ -37,8 +37,8 @@ describe("error boundaries", () => {
     expect(screen.getByRole("link", { name: "Back to sign in" })).toHaveAttribute("href", "/login");
   });
 
-  it("admin (Korean allowed by policy) still offers retry and a sign-in link", () => {
+  it("admin error screen is English and offers retry and a sign-in link", () => {
     render(<AdminError error={err} reset={vi.fn()} />);
-    expect(screen.getByRole("link", { name: "로그인으로 돌아가기" })).toHaveAttribute("href", "/login");
+    expect(screen.getByRole("link", { name: "Back to sign in" })).toHaveAttribute("href", "/login");
   });
 });
