@@ -1,0 +1,123 @@
+{
+ "generatedAt": "2026-10-13T15:55:32.237Z",
+ "publishedVersions": {
+  "AP Calculus AB — Practice Exam": 3,
+  "AP Calculus AB — Practice Exam 2": 2,
+  "AP Calculus AB — Practice Exam 3": 1,
+  "AP Calculus BC — Practice Exam 1": 2,
+  "AP Calculus BC — Practice Exam 2": 1,
+  "AP Calculus BC — Practice Exam 3": 1
+ },
+ "plans": [
+  {
+   "file": "ab3-v2-audit-swap-plan.json",
+   "set": "AB3",
+   "sourceVersionNo": 1,
+   "publishedVersion": 1,
+   "versionMatches": true,
+   "slotsResolve": true,
+   "adds": [
+    {
+     "addKey": "v45ab-final:v5-ab:ap_calculus_ab-f01-k0",
+     "section": "ap_frq_a",
+     "position": 1,
+     "loaded": true,
+     "candidate": {
+      "tier": "review_env",
+      "purpose": "mock_exam",
+      "reviewEnvReady": true
+     },
+     "problems": 1
+    },
+    {
+     "addKey": "supp-r3c-ab-final:ap_calculus_ab-f01-k0",
+     "section": "ap_frq_a",
+     "position": 2,
+     "loaded": true,
+     "candidate": {
+      "tier": "review_env",
+      "purpose": "mock_exam",
+      "reviewEnvReady": true
+     },
+     "problems": 1
+    },
+    {
+     "addKey": "supp-r3c2-ab-final:ap_calculus_ab-f05-k0",
+     "section": "ap_frq_b",
+     "position": 3,
+     "loaded": true,
+     "candidate": {
+      "tier": "review_env",
+      "purpose": "mock_exam",
+      "reviewEnvReady": true
+     },
+     "problems": 1
+    }
+   ],
+   "problems": []
+  },
+  {
+   "file": "bc1-v3-frq-audit-swap-plan.json",
+   "set": "BC1",
+   "sourceVersionNo": 2,
+   "publishedVersion": 2,
+   "versionMatches": true,
+   "slotsResolve": true,
+   "adds": [
+    {
+     "addKey": "supp-r3c-ab-final:ap_calculus_ab-f03-k0",
+     "section": "ap_frq_a",
+     "position": 2,
+     "loaded": true,
+     "candidate": {
+      "tier": "review_env",
+      "purpose": "mock_exam",
+      "reviewEnvReady": true
+     },
+     "problems": 1
+    },
+    {
+     "addKey": "supp-r3c-ab-final:ap_calculus_ab-f09-k0",
+     "section": "ap_frq_b",
+     "position": 2,
+     "loaded": true,
+     "candidate": {
+      "tier": "review_env",
+      "purpose": "mock_exam",
+      "reviewEnvReady": true
+     },
+     "problems": 1
+    }
+   ],
+   "problems": []
+  },
+  {
+   "file": "bc2-v2-audit-swap-plan.json",
+   "set": "BC2",
+   "sourceVersionNo": 1,
+   "publishedVersion": 1,
+   "versionMatches": true,
+   "slotsResolve": true,
+   "adds": [
+    {
+     "addKey": "supp-r3c-ab-final:ap_calculus_ab-f04-k0",
+     "section": "ap_frq_a",
+     "position": 2,
+     "loaded": true,
+     "candidate": {
+      "tier": "review_env",
+      "purpose": "mock_exam",
+      "reviewEnvReady": true
+     },
+     "problems": 1
+    }
+   ],
+   "problems": []
+  }
+ ],
+ "verifier": {
+  "baseViolations": [],
+  "afterViolations": []
+ },
+ "unloadedCandidates": []
+}

@@ -1,0 +1,1859 @@
+{
+ "generatedAt": "2026-10-13T15:54:00.505Z",
+ "tally": {
+  "apply": 69,
+  "not_in_db": 10,
+  "blocked": 1
+ },
+ "plans": [
+  {
+   "patchId": "S-01",
+   "gid": "a118bb1b-89a4-4b3a-9d85-81dffc83e575",
+   "problemId": "923bc69f-c8f4-4db2-b71b-222ca8808713",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "explanation_en: DB 해설이 패치 옛 값과 다름(해설 재작성·백필 반영됨) — 패치의 새 문안으로 전체 교체, 아래 diff 확인"
+   ],
+   "changed": [
+    "correct_index",
+    "explanation",
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 2 v2 math#39"
+   ]
+  },
+  {
+   "patchId": "S-02",
+   "gid": "f5124a1b-0ff4-4154-92ad-fea85f2b0dfe",
+   "problemId": "892046e9-bd40-4bb4-be75-874398db8483",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "explanation_en: DB 해설이 패치 옛 값과 다름(해설 재작성·백필 반영됨) — 패치의 새 문안으로 전체 교체, 아래 diff 확인"
+   ],
+   "changed": [
+    "options",
+    "explanation",
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 3 v2 math#6"
+   ]
+  },
+  {
+   "patchId": "S-03",
+   "gid": "1239c707-e34c-488c-9c14-156b58fa4159",
+   "problemId": "9bc4e574-ab2f-4144-8882-3974fc684976",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "explanation: DB 해설이 패치 옛 값과 다름(해설 재작성·백필 반영됨) — 패치의 새 문안으로 전체 교체, 아래 diff 확인",
+    "explanation_en: DB 해설이 패치 옛 값과 다름(해설 재작성·백필 반영됨) — 패치의 새 문안으로 전체 교체, 아래 diff 확인"
+   ],
+   "changed": [
+    "passage",
+    "explanation",
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 8 v2 math#66"
+   ]
+  },
+  {
+   "patchId": "S-04",
+   "gid": "bc9b4038-6141-594c-a3a7-249f26efac98",
+   "problemId": "6dd01c64-176b-4830-8337-4eae6faa8e50",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "options",
+    "passage",
+    "explanation",
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 11 v1 math#66"
+   ]
+  },
+  {
+   "patchId": "S-05",
+   "gid": "992e2718-a74d-47e6-9b24-bc5e0766ed3f",
+   "problemId": "0b94e63d-1d30-4fdb-ad23-2ea8895e0978",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "question"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 1 v2 math#12"
+   ]
+  },
+  {
+   "patchId": "S-06",
+   "gid": "6fe93dc4-6ef8-4930-99f1-bfafaf5e59b2",
+   "problemId": "7ddfae40-f506-48b2-a2c2-fd8dab606f30",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "그림이 바뀌어 figure_checked=false 로 저장됨(관리자 편집기에서 그림 확인 필요; 게시·세트 공개는 막지 않음)"
+   ],
+   "changed": [
+    "figure"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 2 v2 math#38"
+   ]
+  },
+  {
+   "patchId": "S-07",
+   "gid": "9e664468-12eb-406b-bc76-38c8d15ecd39",
+   "problemId": "3dfd2cba-99e0-4fd1-a6dc-7770c3637480",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "그림이 바뀌어 figure_checked=false 로 저장됨(관리자 편집기에서 그림 확인 필요; 게시·세트 공개는 막지 않음)"
+   ],
+   "changed": [
+    "options",
+    "figure"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 2 v2 math#64"
+   ]
+  },
+  {
+   "patchId": "S-08",
+   "gid": "18ef1549-7fdb-52bb-ab8f-ad5d9de5b6ca",
+   "problemId": "0196302d-ba73-42f5-971b-4dc66bdf1641",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "그림이 바뀌어 figure_checked=false 로 저장됨(관리자 편집기에서 그림 확인 필요; 게시·세트 공개는 막지 않음)"
+   ],
+   "changed": [
+    "figure"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 5 v2 math#1"
+   ]
+  },
+  {
+   "patchId": "S-09",
+   "gid": "bbfa0e1a-c6d4-4b6b-ac17-f3797636eda0",
+   "problemId": "dc8db05b-3584-4432-82f3-706133bdb691",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "options"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 2 v2 math#58"
+   ]
+  },
+  {
+   "patchId": "S-10",
+   "gid": "3c263c92-e14d-4312-8051-886f17996d79",
+   "problemId": "20a54859-dce7-4280-9786-f449da9b72d0",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "explanation_en: DB 해설이 패치 옛 값과 다름(해설 재작성·백필 반영됨) — 패치의 새 문안으로 전체 교체, 아래 diff 확인"
+   ],
+   "changed": [
+    "passage",
+    "explanation",
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 1 v2 rw#32"
+   ]
+  },
+  {
+   "patchId": "S-11",
+   "gid": "c9923475-95b4-4767-b881-325f5b34da25",
+   "problemId": "209a923d-d40a-4d2a-8c6d-4f291963952f",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "explanation_en: DB 해설이 패치 옛 값과 다름(해설 재작성·백필 반영됨) — 패치의 새 문안으로 전체 교체, 아래 diff 확인"
+   ],
+   "changed": [
+    "options",
+    "explanation",
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 1 v2 rw#26"
+   ]
+  },
+  {
+   "patchId": "S-12",
+   "gid": "07fdeecb-6540-4e55-a54e-f5f6ab39d0aa",
+   "problemId": "1a7c11c4-a457-435c-a599-6ff1c564868b",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "explanation_en: DB 해설이 패치 옛 값과 다름(해설 재작성·백필 반영됨) — 패치의 새 문안으로 전체 교체, 아래 diff 확인"
+   ],
+   "changed": [
+    "options",
+    "explanation",
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 1 v2 rw#25"
+   ]
+  },
+  {
+   "patchId": "S-13",
+   "gid": "410e5e7e-6c7e-4276-9b61-b7faa4c05c79",
+   "problemId": "0cf57c09-cb27-4166-9f90-10d260c961e5",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "explanation: DB 해설이 패치 옛 값과 다름(해설 재작성·백필 반영됨) — 패치의 새 문안으로 전체 교체, 아래 diff 확인",
+    "explanation_en: DB 해설이 패치 옛 값과 다름(해설 재작성·백필 반영됨) — 패치의 새 문안으로 전체 교체, 아래 diff 확인"
+   ],
+   "changed": [
+    "options",
+    "explanation",
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 1 v2 rw#17"
+   ]
+  },
+  {
+   "patchId": "S-14",
+   "gid": "88e31501-803a-489d-bb6e-9847846137e7",
+   "problemId": "2dcea9c9-aebc-40fc-9bd7-7df8b1dd2036",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "options"
+   ],
+   "fromVersionNo": 2,
+   "sets": [
+    "SAT Practice Test 1 v2 rw#33"
+   ]
+  },
+  {
+   "patchId": "S-15",
+   "gid": "3b5485c3-f437-4786-aeb6-14f5f97fecbc",
+   "problemId": "bbd15ed7-db08-496e-894e-ff3471603bbe",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "options"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 3 v2 rw#46"
+   ]
+  },
+  {
+   "patchId": "S-16",
+   "gid": "5ccf4804-9d89-4c6f-b4c2-de3a55e6b97b",
+   "problemId": "8a9ed576-2730-4661-9ce1-d4d7cbdfd3b7",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "options"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 2 v2 rw#65"
+   ]
+  },
+  {
+   "patchId": "S-17",
+   "gid": "d3db447d-6bc0-46b1-b14c-0e3b0597d7e0",
+   "problemId": "c907ef0f-9235-4f88-9ef5-7620634d88f1",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "options"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 3 v2 rw#47"
+   ]
+  },
+  {
+   "patchId": "S-18",
+   "gid": "rwstock4:med-se-2:medium-boundaries-408",
+   "problemId": "eef6e85a-c1d1-4829-9b80-df13fcf153dd",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "options"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 10 v1 rw#71"
+   ]
+  },
+  {
+   "patchId": "S-19",
+   "gid": "5b2b6b59-5c82-4c60-b93d-d3b36e9c48db",
+   "problemId": "10b609b4-a0e2-4d80-9f24-1bea3d2e4b36",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 1 v2 rw#76"
+   ]
+  },
+  {
+   "patchId": "F-f87e641a",
+   "gid": "f87e641a-c551-5b11-a25a-340d4aa53f30",
+   "problemId": "33948b00-c83f-4c44-ba5f-a0b80b2628e6",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "그림이 바뀌어 figure_checked=false 로 저장됨(관리자 편집기에서 그림 확인 필요; 게시·세트 공개는 막지 않음)"
+   ],
+   "changed": [
+    "figure"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 10 v1 math#65"
+   ]
+  },
+  {
+   "patchId": "F-c27d0f37",
+   "gid": "c27d0f37-985d-50aa-a9de-da4b37b244f2",
+   "problemId": "41d5c1e6-2298-4444-b712-85e2fbbafc11",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "그림이 바뀌어 figure_checked=false 로 저장됨(관리자 편집기에서 그림 확인 필요; 게시·세트 공개는 막지 않음)"
+   ],
+   "changed": [
+    "figure"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 12 v1 math#65"
+   ]
+  },
+  {
+   "patchId": "F-8329a1bd",
+   "gid": "8329a1bd-0921-53c0-a7bb-dffbf69c9493",
+   "problemId": "f55f24a7-3b0c-46e0-946f-b413556f68d3",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "그림이 바뀌어 figure_checked=false 로 저장됨(관리자 편집기에서 그림 확인 필요; 게시·세트 공개는 막지 않음)"
+   ],
+   "changed": [
+    "figure"
+   ],
+   "fromVersionNo": 1,
+   "sets": []
+  },
+  {
+   "patchId": "Q-838ef1c9",
+   "gid": "838ef1c9-3909-5cfa-af47-d789fb7dad50",
+   "problemId": "206853be-a863-41b3-b0dc-9cfb66a99a88",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "question"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 13 v1 math#14"
+   ]
+  },
+  {
+   "patchId": "Q-e222cbc8",
+   "gid": "e222cbc8-007f-59e5-a61d-a7f3a301e1d7",
+   "problemId": "0138ce1e-8fdc-4549-a34a-9f028837b9f3",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "question"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 10 v1 math#1"
+   ]
+  },
+  {
+   "patchId": "C-aaeb9945",
+   "gid": "aaeb9945-8b35-5351-af60-92e0f2734f3a",
+   "problemId": "796f7b8c-3716-4598-819c-6442893d53bb",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "그림이 바뀌어 figure_checked=false 로 저장됨(관리자 편집기에서 그림 확인 필요; 게시·세트 공개는 막지 않음)"
+   ],
+   "changed": [
+    "passage",
+    "question",
+    "figure"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 9 v2 math#16"
+   ]
+  },
+  {
+   "patchId": "C-445bab61",
+   "gid": "445bab61-b420-574d-a08c-abff7d043042",
+   "problemId": "3230b33d-491b-4f7f-8c8e-2b2745eb755a",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [
+    "그림이 바뀌어 figure_checked=false 로 저장됨(관리자 편집기에서 그림 확인 필요; 게시·세트 공개는 막지 않음)"
+   ],
+   "changed": [
+    "passage",
+    "question",
+    "figure"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 9 v2 math#66"
+   ]
+  },
+  {
+   "patchId": "C-9939657f",
+   "gid": "9939657f-174b-52fc-a0c0-cf1b88a5b242",
+   "problemId": "3c719b1e-0778-484d-80fe-774ad2ce99fc",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 12 v1 math#52"
+   ]
+  },
+  {
+   "patchId": "U-efdafa88",
+   "gid": "efdafa88-0b16-5ab0-a7a6-a46a602eb484",
+   "problemId": "43eaba97-8949-4b61-83ce-64c6d25395ce",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 7 v2 math#51"
+   ]
+  },
+  {
+   "patchId": "A-d4922e40",
+   "gid": "d4922e40-4840-4448-88e9-0061b738438b",
+   "problemId": "4e6f275d-beb6-4b96-a64e-781cd26e2413",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 2 v2 math#11"
+   ]
+  },
+  {
+   "patchId": "R-rwstock4:med-se-1:medium-boundaries-319",
+   "gid": "rwstock4:med-se-1:medium-boundaries-319",
+   "problemId": "b8349a1d-0b07-4d2b-92dd-32ba522ce5d5",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": []
+  },
+  {
+   "patchId": "R-rwstock4:med-se-2:medium-boundaries-419",
+   "gid": "rwstock4:med-se-2:medium-boundaries-419",
+   "problemId": "086d8b0a-95c9-4b3a-aaeb-9990006622b3",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 11 v1 rw#55"
+   ]
+  },
+  {
+   "patchId": "R-rwstock:easy-1:easy-boundaries-100",
+   "gid": "rwstock:easy-1:easy-boundaries-100",
+   "problemId": "dd5e23a9-37ae-48a4-a0bf-bf44c7ba9a97",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 4 v2 rw#36"
+   ]
+  },
+  {
+   "patchId": "R-rwstock:easy-1:easy-boundaries-104",
+   "gid": "rwstock:easy-1:easy-boundaries-104",
+   "problemId": "4536f546-3888-4602-8b88-1bb73a447b1e",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 5 v2 rw#4"
+   ]
+  },
+  {
+   "patchId": "R-rwstock:med-se-1:medium-boundaries-302",
+   "gid": "rwstock:med-se-1:medium-boundaries-302",
+   "problemId": "16f389c5-2490-4c3a-a231-846dbdf9643c",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 6 v2 rw#38"
+   ]
+  },
+  {
+   "patchId": "R-rwstock:med-se-1:medium-boundaries-311",
+   "gid": "rwstock:med-se-1:medium-boundaries-311",
+   "problemId": "149dfd4a-2f29-4465-bb69-7aa3a0ebc47d",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 4 v2 rw#57"
+   ]
+  },
+  {
+   "patchId": "R-rwstock:med-se-2:medium-boundaries-609",
+   "gid": "rwstock:med-se-2:medium-boundaries-609",
+   "problemId": "ad72af9a-fed9-46bd-a199-a899a89fa8e8",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 4 v2 rw#26"
+   ]
+  },
+  {
+   "patchId": "R-sesup-medium-boundaries-42",
+   "gid": "sesup-medium-boundaries-42",
+   "problemId": "76c3f670-adbf-47e6-8147-15967b559fa2",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 7 v2 rw#68"
+   ]
+  },
+  {
+   "patchId": "R-sesup-medium-boundaries-43",
+   "gid": "sesup-medium-boundaries-43",
+   "problemId": "b7e07f1a-8efa-458c-8abe-f13d83a5683a",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 6 v2 rw#51"
+   ]
+  },
+  {
+   "patchId": "R-recipe-boundaries-02",
+   "gid": "recipe-boundaries-02",
+   "problemId": "9bbea06c-0956-4c80-b73f-00e656318efb",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": []
+  },
+  {
+   "patchId": "R-e5a18ded-27f1-4874-b132-b405069b8b50",
+   "gid": "e5a18ded-27f1-4874-b132-b405069b8b50",
+   "problemId": "7e8e3065-8158-431c-93b8-84849f9bed36",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 3 v2 rw#33"
+   ]
+  },
+  {
+   "patchId": "R-d61e2d5e-4967-4995-bb5d-e6b76c7f9c7f",
+   "gid": "d61e2d5e-4967-4995-bb5d-e6b76c7f9c7f",
+   "problemId": null,
+   "status": "not_in_db",
+   "reasons": [
+    "문항이 DB 공개 버전으로 없음(문제은행에 임포트되지 않았거나 gid/본문이 다름)"
+   ],
+   "warnings": [],
+   "changed": [],
+   "fromVersionNo": null,
+   "sets": []
+  },
+  {
+   "patchId": "R-45bc6500-05da-4836-866c-7a5994191c88",
+   "gid": "45bc6500-05da-4836-866c-7a5994191c88",
+   "problemId": null,
+   "status": "not_in_db",
+   "reasons": [
+    "문항이 DB 공개 버전으로 없음(문제은행에 임포트되지 않았거나 gid/본문이 다름)"
+   ],
+   "warnings": [],
+   "changed": [],
+   "fromVersionNo": null,
+   "sets": []
+  },
+  {
+   "patchId": "R-0a3372d9-a0d6-4d65-83d1-7d3a2ef10a64",
+   "gid": "0a3372d9-a0d6-4d65-83d1-7d3a2ef10a64",
+   "problemId": "4577031c-7ce5-451a-92dc-4af35d2c744f",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 1 v2 rw#65"
+   ]
+  },
+  {
+   "patchId": "R-6e8e14d6-bcfb-44b3-a4b8-554d7a2b037b",
+   "gid": "6e8e14d6-bcfb-44b3-a4b8-554d7a2b037b",
+   "problemId": "31a90bc3-20b4-4818-90cc-40a10a117c26",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 1 v2 rw#49"
+   ]
+  },
+  {
+   "patchId": "R-a5895ddf-0728-4328-a9c3-063bdce6363f",
+   "gid": "a5895ddf-0728-4328-a9c3-063bdce6363f",
+   "problemId": "cbfc105a-3d9a-49a4-b2d1-28dd1731e077",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 3 v2 rw#48"
+   ]
+  },
+  {
+   "patchId": "R-f4dcff2e-6c99-4dad-bef6-8af843033ac9",
+   "gid": "f4dcff2e-6c99-4dad-bef6-8af843033ac9",
+   "problemId": null,
+   "status": "not_in_db",
+   "reasons": [
+    "문항이 DB 공개 버전으로 없음(문제은행에 임포트되지 않았거나 gid/본문이 다름)"
+   ],
+   "warnings": [],
+   "changed": [],
+   "fromVersionNo": null,
+   "sets": []
+  },
+  {
+   "patchId": "R-04f6acc4-4938-437e-bf33-bcb857df8185",
+   "gid": "04f6acc4-4938-437e-bf33-bcb857df8185",
+   "problemId": null,
+   "status": "not_in_db",
+   "reasons": [
+    "문항이 DB 공개 버전으로 없음(문제은행에 임포트되지 않았거나 gid/본문이 다름)"
+   ],
+   "warnings": [],
+   "changed": [],
+   "fromVersionNo": null,
+   "sets": []
+  },
+  {
+   "patchId": "R-51fc09b3-4755-4fab-99e1-9633bcf8d8a5",
+   "gid": "51fc09b3-4755-4fab-99e1-9633bcf8d8a5",
+   "problemId": null,
+   "status": "not_in_db",
+   "reasons": [
+    "문항이 DB 공개 버전으로 없음(문제은행에 임포트되지 않았거나 gid/본문이 다름)"
+   ],
+   "warnings": [],
+   "changed": [],
+   "fromVersionNo": null,
+   "sets": []
+  },
+  {
+   "patchId": "R-ef96f2f7-8419-4ac7-95c4-9188ff97ae3b",
+   "gid": "ef96f2f7-8419-4ac7-95c4-9188ff97ae3b",
+   "problemId": null,
+   "status": "not_in_db",
+   "reasons": [
+    "문항이 DB 공개 버전으로 없음(문제은행에 임포트되지 않았거나 gid/본문이 다름)"
+   ],
+   "warnings": [],
+   "changed": [],
+   "fromVersionNo": null,
+   "sets": []
+  },
+  {
+   "patchId": "R-b4cdabde-f747-4dc9-80d3-c5565cbb3bac",
+   "gid": "b4cdabde-f747-4dc9-80d3-c5565cbb3bac",
+   "problemId": "7249eebb-92c0-478b-bfbb-e4f067eb881e",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 3 v2 rw#80"
+   ]
+  },
+  {
+   "patchId": "R-be9e745f-1fc6-4071-b448-96a1927213dd",
+   "gid": "be9e745f-1fc6-4071-b448-96a1927213dd",
+   "problemId": null,
+   "status": "not_in_db",
+   "reasons": [
+    "문항이 DB 공개 버전으로 없음(문제은행에 임포트되지 않았거나 gid/본문이 다름)"
+   ],
+   "warnings": [],
+   "changed": [],
+   "fromVersionNo": null,
+   "sets": []
+  },
+  {
+   "patchId": "R-w1-boundaries-m-042",
+   "gid": "w1-boundaries-m-042",
+   "problemId": "b94c1469-5fa9-4ea1-a5f4-fba1da245127",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 13 v1 rw#23"
+   ]
+  },
+  {
+   "patchId": "R-w1-boundaries-m-254",
+   "gid": "w1-boundaries-m-254",
+   "problemId": "23f1c9ff-e1da-42dd-8b26-ab7d7fa84d99",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 13 v1 rw#13"
+   ]
+  },
+  {
+   "patchId": "R-w1-boundaries-m-259",
+   "gid": "w1-boundaries-m-259",
+   "problemId": "3fa06af6-a564-4909-ab48-53816e374822",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 13 v1 rw#58"
+   ]
+  },
+  {
+   "patchId": "R-rebal13:w3-boundaries-m-038",
+   "gid": "rebal13:w3-boundaries-m-038",
+   "problemId": "be1276fa-bb0b-4ccb-bb24-3a3d49a55e31",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": []
+  },
+  {
+   "patchId": "D-309f9901",
+   "gid": "309f9901-7065-4914-93c3-63855e5e805c",
+   "problemId": "69bf0b45-16ae-4663-9ece-1bd1971112a9",
+   "status": "blocked",
+   "reasons": [
+    "영어 해설 비어 있음"
+   ],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": []
+  },
+  {
+   "patchId": "D-d69794f8",
+   "gid": "d69794f8-ad2d-4e47-9641-ec64ca12dc87",
+   "problemId": null,
+   "status": "not_in_db",
+   "reasons": [
+    "문항이 DB 공개 버전으로 없음(문제은행에 임포트되지 않았거나 gid/본문이 다름)"
+   ],
+   "warnings": [],
+   "changed": [],
+   "fromVersionNo": null,
+   "sets": []
+  },
+  {
+   "patchId": "D-18ec5fbb",
+   "gid": "18ec5fbb-2079-4d2f-8317-4c39af5a7500",
+   "problemId": "a3676b4b-3fe9-4210-8ef5-91d32cbf7ac0",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": []
+  },
+  {
+   "patchId": "D-5b9b865b",
+   "gid": "5b9b865b-09e9-435d-b138-7710f25187f7",
+   "problemId": "683eb1d2-b4b0-47d3-a6fa-ceb69df37411",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 2 v2 rw#35"
+   ]
+  },
+  {
+   "patchId": "D-fcde57e1",
+   "gid": "fcde57e1-5271-4194-8dae-5c2bef3423e1",
+   "problemId": "c1af76c6-c1a7-4192-bc4c-ae685c5a45d0",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 4 v2 rw#9"
+   ]
+  },
+  {
+   "patchId": "D-b43f2d6a",
+   "gid": "b43f2d6a-15dc-420d-a460-88be79a5b9c4",
+   "problemId": null,
+   "status": "not_in_db",
+   "reasons": [
+    "문항이 DB 공개 버전으로 없음(문제은행에 임포트되지 않았거나 gid/본문이 다름)"
+   ],
+   "warnings": [],
+   "changed": [],
+   "fromVersionNo": null,
+   "sets": []
+  },
+  {
+   "patchId": "D-3b4169b4",
+   "gid": "3b4169b4-bd54-4fa1-bc01-eef69ef8ba9f",
+   "problemId": "f42d1cb6-1801-4905-b44f-7395e22b10b6",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 9 v2 rw#22"
+   ]
+  },
+  {
+   "patchId": "D-896b1d19",
+   "gid": "896b1d19-9734-425c-887d-ca61860501fc",
+   "problemId": "b8c8a807-9aed-4d9b-a946-a4ab161e63b6",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 3 v2 rw#63"
+   ]
+  },
+  {
+   "patchId": "D-eec841e6",
+   "gid": "eec841e6-8154-4d0a-8d8c-d32c3f87bc46",
+   "problemId": "699b7b32-ed03-4320-8d1b-fff4adbc3290",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": []
+  },
+  {
+   "patchId": "D-ef704d02",
+   "gid": "ef704d02-d963-4fc9-a9b9-7b2523e33205",
+   "problemId": "2644ce3e-8cf5-4f08-be68-1cf00a8ea2a1",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 1 v2 rw#44"
+   ]
+  },
+  {
+   "patchId": "D-f6ad8197",
+   "gid": "f6ad8197-06ca-4bf3-9c40-d425bb696d7d",
+   "problemId": "9818fe8b-4aa5-4a51-bd2c-ee99310afb22",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 3 v2 rw#18"
+   ]
+  },
+  {
+   "patchId": "D-0debec47",
+   "gid": "0debec47-4e39-48d7-9bed-10af938bcdf3",
+   "problemId": null,
+   "status": "not_in_db",
+   "reasons": [
+    "문항이 DB 공개 버전으로 없음(문제은행에 임포트되지 않았거나 gid/본문이 다름)"
+   ],
+   "warnings": [],
+   "changed": [],
+   "fromVersionNo": null,
+   "sets": []
+  },
+  {
+   "patchId": "E-P06a",
+   "gid": null,
+   "problemId": "47056b8e-21e4-4e4c-ab4a-d4efb2276c16",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 6 v2 rw#74"
+   ]
+  },
+  {
+   "patchId": "E-P06b",
+   "gid": null,
+   "problemId": "457d567a-8ed3-4ca3-9e3d-989326420aa4",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 9 v2 rw#15"
+   ]
+  },
+  {
+   "patchId": "E-P06c",
+   "gid": null,
+   "problemId": "d07ca7d3-eec2-4221-bdd6-7fbca6489315",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 9 v2 rw#69"
+   ]
+  },
+  {
+   "patchId": "E-P06d",
+   "gid": null,
+   "problemId": "b4af5fd9-678f-4f8c-82f4-45905d194cad",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage",
+    "explanation_en",
+    "explanation"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 6 v2 rw#79"
+   ]
+  },
+  {
+   "patchId": "E-M22",
+   "gid": null,
+   "problemId": "515a7e74-99e6-4afd-bd7a-809ac05b58db",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "explanation_en",
+    "explanation"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 2 v2 math#65"
+   ]
+  },
+  {
+   "patchId": "E-M28a",
+   "gid": null,
+   "problemId": "6df1d05b-4d1a-4905-860d-3cd5ad67b271",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 2 v2 math#35"
+   ]
+  },
+  {
+   "patchId": "E-M28b",
+   "gid": null,
+   "problemId": "cbf756d3-7be4-473f-8a70-343541c6d8fe",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "explanation_en"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 10 v1 math#22"
+   ]
+  },
+  {
+   "patchId": "E-M26",
+   "gid": null,
+   "problemId": "aea66ace-7029-4d01-90dc-79b86e1797c9",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 8 v2 math#20"
+   ]
+  },
+  {
+   "patchId": "SCAN-R-d69b18fc",
+   "gid": null,
+   "problemId": "d69b18fc-ecea-4f73-8aad-3a4589245ad4",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "SAT Practice Test 12 v1 rw#49"
+   ]
+  },
+  {
+   "patchId": "SCAN-R-784a7174",
+   "gid": null,
+   "problemId": "784a7174-0f18-4c7a-ac4d-3615e79e19cb",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": []
+  },
+  {
+   "patchId": "AP-f02-k5",
+   "gid": null,
+   "problemId": "cecede20-5818-424e-90b6-80e2a40a0f6b",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "AP Calculus AB — Practice Exam v3 ap_frq_b#1"
+   ]
+  },
+  {
+   "patchId": "AP-f02-k9",
+   "gid": null,
+   "problemId": "1554274a-a01d-4025-8c4e-20fe01289129",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "AP Calculus AB — Practice Exam 2 v2 ap_frq_b#1"
+   ]
+  },
+  {
+   "patchId": "AP-f02-k10",
+   "gid": null,
+   "problemId": "95291c5b-4250-49c2-8c28-df0871aa7722",
+   "status": "apply",
+   "reasons": [],
+   "warnings": [],
+   "changed": [
+    "passage"
+   ],
+   "fromVersionNo": 1,
+   "sets": [
+    "AP Calculus BC — Practice Exam 1 v2 ap_frq_b#1"
+   ]
+  }
+ ],
+ "sets": [
+  {
+   "name": "AP Calculus AB — Practice Exam",
+   "from": 3,
+   "patches": [
+    "AP-f02-k5"
+   ],
+   "slots": [
+    {
+     "section": "ap_frq_b",
+     "position": 1,
+     "module_key": null,
+     "route": null,
+     "problemId": "cecede20-5818-424e-90b6-80e2a40a0f6b"
+    }
+   ]
+  },
+  {
+   "name": "AP Calculus AB — Practice Exam 2",
+   "from": 2,
+   "patches": [
+    "AP-f02-k9"
+   ],
+   "slots": [
+    {
+     "section": "ap_frq_b",
+     "position": 1,
+     "module_key": null,
+     "route": null,
+     "problemId": "1554274a-a01d-4025-8c4e-20fe01289129"
+    }
+   ]
+  },
+  {
+   "name": "AP Calculus BC — Practice Exam 1",
+   "from": 2,
+   "patches": [
+    "AP-f02-k10"
+   ],
+   "slots": [
+    {
+     "section": "ap_frq_b",
+     "position": 1,
+     "module_key": null,
+     "route": null,
+     "problemId": "95291c5b-4250-49c2-8c28-df0871aa7722"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 1",
+   "from": 2,
+   "patches": [
+    "S-05",
+    "S-10",
+    "S-11",
+    "S-12",
+    "S-13",
+    "S-14",
+    "S-19",
+    "R-0a3372d9-a0d6-4d65-83d1-7d3a2ef10a64",
+    "R-6e8e14d6-bcfb-44b3-a4b8-554d7a2b037b",
+    "D-ef704d02"
+   ],
+   "slots": [
+    {
+     "section": "math",
+     "position": 12,
+     "module_key": "math_m1",
+     "route": null,
+     "problemId": "0b94e63d-1d30-4fdb-ad23-2ea8895e0978"
+    },
+    {
+     "section": "rw",
+     "position": 32,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "20a54859-dce7-4280-9786-f449da9b72d0"
+    },
+    {
+     "section": "rw",
+     "position": 26,
+     "module_key": "rw_m1",
+     "route": null,
+     "problemId": "209a923d-d40a-4d2a-8c6d-4f291963952f"
+    },
+    {
+     "section": "rw",
+     "position": 25,
+     "module_key": "rw_m1",
+     "route": null,
+     "problemId": "1a7c11c4-a457-435c-a599-6ff1c564868b"
+    },
+    {
+     "section": "rw",
+     "position": 17,
+     "module_key": "rw_m1",
+     "route": null,
+     "problemId": "0cf57c09-cb27-4166-9f90-10d260c961e5"
+    },
+    {
+     "section": "rw",
+     "position": 33,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "2dcea9c9-aebc-40fc-9bd7-7df8b1dd2036"
+    },
+    {
+     "section": "rw",
+     "position": 76,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "10b609b4-a0e2-4d80-9f24-1bea3d2e4b36"
+    },
+    {
+     "section": "rw",
+     "position": 65,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "4577031c-7ce5-451a-92dc-4af35d2c744f"
+    },
+    {
+     "section": "rw",
+     "position": 49,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "31a90bc3-20b4-4818-90cc-40a10a117c26"
+    },
+    {
+     "section": "rw",
+     "position": 44,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "2644ce3e-8cf5-4f08-be68-1cf00a8ea2a1"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 10",
+   "from": 1,
+   "patches": [
+    "S-18",
+    "F-f87e641a",
+    "Q-e222cbc8",
+    "E-M28b"
+   ],
+   "slots": [
+    {
+     "section": "rw",
+     "position": 71,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "eef6e85a-c1d1-4829-9b80-df13fcf153dd"
+    },
+    {
+     "section": "math",
+     "position": 65,
+     "module_key": "math_m2",
+     "route": "higher",
+     "problemId": "33948b00-c83f-4c44-ba5f-a0b80b2628e6"
+    },
+    {
+     "section": "math",
+     "position": 1,
+     "module_key": "math_m1",
+     "route": null,
+     "problemId": "0138ce1e-8fdc-4549-a34a-9f028837b9f3"
+    },
+    {
+     "section": "math",
+     "position": 22,
+     "module_key": "math_m1",
+     "route": null,
+     "problemId": "cbf756d3-7be4-473f-8a70-343541c6d8fe"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 11",
+   "from": 1,
+   "patches": [
+    "S-04",
+    "R-rwstock4:med-se-2:medium-boundaries-419"
+   ],
+   "slots": [
+    {
+     "section": "math",
+     "position": 66,
+     "module_key": "math_m2",
+     "route": "higher",
+     "problemId": "6dd01c64-176b-4830-8337-4eae6faa8e50"
+    },
+    {
+     "section": "rw",
+     "position": 55,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "086d8b0a-95c9-4b3a-aaeb-9990006622b3"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 12",
+   "from": 1,
+   "patches": [
+    "F-c27d0f37",
+    "C-9939657f",
+    "SCAN-R-d69b18fc"
+   ],
+   "slots": [
+    {
+     "section": "math",
+     "position": 65,
+     "module_key": "math_m2",
+     "route": "higher",
+     "problemId": "41d5c1e6-2298-4444-b712-85e2fbbafc11"
+    },
+    {
+     "section": "math",
+     "position": 52,
+     "module_key": "math_m2",
+     "route": "higher",
+     "problemId": "3c719b1e-0778-484d-80fe-774ad2ce99fc"
+    },
+    {
+     "section": "rw",
+     "position": 49,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "d69b18fc-ecea-4f73-8aad-3a4589245ad4"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 13",
+   "from": 1,
+   "patches": [
+    "Q-838ef1c9",
+    "R-w1-boundaries-m-042",
+    "R-w1-boundaries-m-254",
+    "R-w1-boundaries-m-259"
+   ],
+   "slots": [
+    {
+     "section": "math",
+     "position": 14,
+     "module_key": "math_m1",
+     "route": null,
+     "problemId": "206853be-a863-41b3-b0dc-9cfb66a99a88"
+    },
+    {
+     "section": "rw",
+     "position": 23,
+     "module_key": "rw_m1",
+     "route": null,
+     "problemId": "b94c1469-5fa9-4ea1-a5f4-fba1da245127"
+    },
+    {
+     "section": "rw",
+     "position": 13,
+     "module_key": "rw_m1",
+     "route": null,
+     "problemId": "23f1c9ff-e1da-42dd-8b26-ab7d7fa84d99"
+    },
+    {
+     "section": "rw",
+     "position": 58,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "3fa06af6-a564-4909-ab48-53816e374822"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 2",
+   "from": 2,
+   "patches": [
+    "S-01",
+    "S-06",
+    "S-07",
+    "S-09",
+    "S-16",
+    "A-d4922e40",
+    "D-5b9b865b",
+    "E-M22",
+    "E-M28a"
+   ],
+   "slots": [
+    {
+     "section": "math",
+     "position": 39,
+     "module_key": "math_m2",
+     "route": "lower",
+     "problemId": "923bc69f-c8f4-4db2-b71b-222ca8808713"
+    },
+    {
+     "section": "math",
+     "position": 38,
+     "module_key": "math_m2",
+     "route": "lower",
+     "problemId": "7ddfae40-f506-48b2-a2c2-fd8dab606f30"
+    },
+    {
+     "section": "math",
+     "position": 64,
+     "module_key": "math_m2",
+     "route": "higher",
+     "problemId": "3dfd2cba-99e0-4fd1-a6dc-7770c3637480"
+    },
+    {
+     "section": "math",
+     "position": 58,
+     "module_key": "math_m2",
+     "route": "higher",
+     "problemId": "dc8db05b-3584-4432-82f3-706133bdb691"
+    },
+    {
+     "section": "rw",
+     "position": 65,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "8a9ed576-2730-4661-9ce1-d4d7cbdfd3b7"
+    },
+    {
+     "section": "math",
+     "position": 11,
+     "module_key": "math_m1",
+     "route": null,
+     "problemId": "4e6f275d-beb6-4b96-a64e-781cd26e2413"
+    },
+    {
+     "section": "rw",
+     "position": 35,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "683eb1d2-b4b0-47d3-a6fa-ceb69df37411"
+    },
+    {
+     "section": "math",
+     "position": 65,
+     "module_key": "math_m2",
+     "route": "higher",
+     "problemId": "515a7e74-99e6-4afd-bd7a-809ac05b58db"
+    },
+    {
+     "section": "math",
+     "position": 35,
+     "module_key": "math_m2",
+     "route": "lower",
+     "problemId": "6df1d05b-4d1a-4905-860d-3cd5ad67b271"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 3",
+   "from": 2,
+   "patches": [
+    "S-02",
+    "S-15",
+    "S-17",
+    "R-e5a18ded-27f1-4874-b132-b405069b8b50",
+    "R-a5895ddf-0728-4328-a9c3-063bdce6363f",
+    "R-b4cdabde-f747-4dc9-80d3-c5565cbb3bac",
+    "D-896b1d19",
+    "D-f6ad8197"
+   ],
+   "slots": [
+    {
+     "section": "math",
+     "position": 6,
+     "module_key": "math_m1",
+     "route": null,
+     "problemId": "892046e9-bd40-4bb4-be75-874398db8483"
+    },
+    {
+     "section": "rw",
+     "position": 46,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "bbd15ed7-db08-496e-894e-ff3471603bbe"
+    },
+    {
+     "section": "rw",
+     "position": 47,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "c907ef0f-9235-4f88-9ef5-7620634d88f1"
+    },
+    {
+     "section": "rw",
+     "position": 33,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "7e8e3065-8158-431c-93b8-84849f9bed36"
+    },
+    {
+     "section": "rw",
+     "position": 48,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "cbfc105a-3d9a-49a4-b2d1-28dd1731e077"
+    },
+    {
+     "section": "rw",
+     "position": 80,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "7249eebb-92c0-478b-bfbb-e4f067eb881e"
+    },
+    {
+     "section": "rw",
+     "position": 63,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "b8c8a807-9aed-4d9b-a946-a4ab161e63b6"
+    },
+    {
+     "section": "rw",
+     "position": 18,
+     "module_key": "rw_m1",
+     "route": null,
+     "problemId": "9818fe8b-4aa5-4a51-bd2c-ee99310afb22"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 4",
+   "from": 2,
+   "patches": [
+    "R-rwstock:easy-1:easy-boundaries-100",
+    "R-rwstock:med-se-1:medium-boundaries-311",
+    "R-rwstock:med-se-2:medium-boundaries-609",
+    "D-fcde57e1"
+   ],
+   "slots": [
+    {
+     "section": "rw",
+     "position": 36,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "dd5e23a9-37ae-48a4-a0bf-bf44c7ba9a97"
+    },
+    {
+     "section": "rw",
+     "position": 57,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "149dfd4a-2f29-4465-bb69-7aa3a0ebc47d"
+    },
+    {
+     "section": "rw",
+     "position": 26,
+     "module_key": "rw_m1",
+     "route": null,
+     "problemId": "ad72af9a-fed9-46bd-a199-a899a89fa8e8"
+    },
+    {
+     "section": "rw",
+     "position": 9,
+     "module_key": "rw_m1",
+     "route": null,
+     "problemId": "c1af76c6-c1a7-4192-bc4c-ae685c5a45d0"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 5",
+   "from": 2,
+   "patches": [
+    "S-08",
+    "R-rwstock:easy-1:easy-boundaries-104"
+   ],
+   "slots": [
+    {
+     "section": "math",
+     "position": 1,
+     "module_key": "math_m1",
+     "route": null,
+     "problemId": "0196302d-ba73-42f5-971b-4dc66bdf1641"
+    },
+    {
+     "section": "rw",
+     "position": 4,
+     "module_key": "rw_m1",
+     "route": null,
+     "problemId": "4536f546-3888-4602-8b88-1bb73a447b1e"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 6",
+   "from": 2,
+   "patches": [
+    "R-rwstock:med-se-1:medium-boundaries-302",
+    "R-sesup-medium-boundaries-43",
+    "E-P06a",
+    "E-P06d"
+   ],
+   "slots": [
+    {
+     "section": "rw",
+     "position": 38,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "16f389c5-2490-4c3a-a231-846dbdf9643c"
+    },
+    {
+     "section": "rw",
+     "position": 51,
+     "module_key": "rw_m2",
+     "route": "lower",
+     "problemId": "b7e07f1a-8efa-458c-8abe-f13d83a5683a"
+    },
+    {
+     "section": "rw",
+     "position": 74,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "47056b8e-21e4-4e4c-ab4a-d4efb2276c16"
+    },
+    {
+     "section": "rw",
+     "position": 79,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "b4af5fd9-678f-4f8c-82f4-45905d194cad"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 7",
+   "from": 2,
+   "patches": [
+    "U-efdafa88",
+    "R-sesup-medium-boundaries-42"
+   ],
+   "slots": [
+    {
+     "section": "math",
+     "position": 51,
+     "module_key": "math_m2",
+     "route": "higher",
+     "problemId": "43eaba97-8949-4b61-83ce-64c6d25395ce"
+    },
+    {
+     "section": "rw",
+     "position": 68,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "76c3f670-adbf-47e6-8147-15967b559fa2"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 8",
+   "from": 2,
+   "patches": [
+    "S-03",
+    "E-M26"
+   ],
+   "slots": [
+    {
+     "section": "math",
+     "position": 66,
+     "module_key": "math_m2",
+     "route": "higher",
+     "problemId": "9bc4e574-ab2f-4144-8882-3974fc684976"
+    },
+    {
+     "section": "math",
+     "position": 20,
+     "module_key": "math_m1",
+     "route": null,
+     "problemId": "aea66ace-7029-4d01-90dc-79b86e1797c9"
+    }
+   ]
+  },
+  {
+   "name": "SAT Practice Test 9",
+   "from": 2,
+   "patches": [
+    "C-aaeb9945",
+    "C-445bab61",
+    "D-3b4169b4",
+    "E-P06b",
+    "E-P06c"
+   ],
+   "slots": [
+    {
+     "section": "math",
+     "position": 16,
+     "module_key": "math_m1",
+     "route": null,
+     "problemId": "796f7b8c-3716-4598-819c-6442893d53bb"
+    },
+    {
+     "section": "math",
+     "position": 66,
+     "module_key": "math_m2",
+     "route": "higher",
+     "problemId": "3230b33d-491b-4f7f-8c8e-2b2745eb755a"
+    },
+    {
+     "section": "rw",
+     "position": 22,
+     "module_key": "rw_m1",
+     "route": null,
+     "problemId": "f42d1cb6-1801-4905-b44f-7395e22b10b6"
+    },
+    {
+     "section": "rw",
+     "position": 15,
+     "module_key": "rw_m1",
+     "route": null,
+     "problemId": "457d567a-8ed3-4ca3-9e3d-989326420aa4"
+    },
+    {
+     "section": "rw",
+     "position": 69,
+     "module_key": "rw_m2",
+     "route": "higher",
+     "problemId": "d07ca7d3-eec2-4221-bdd6-7fbca6489315"
+    }
+   ]
+  }
+ ]
+}

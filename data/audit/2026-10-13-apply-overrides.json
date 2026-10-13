@@ -1,0 +1,73 @@
+{
+ "S-01": {
+  "keyText": "$x = 20$, altitude $= 2000$",
+  "note": "key by option text (x=20, altitude 2000)"
+ },
+ "S-03": {
+  "explanation": "각 다항식을 인수분해하면 다음과 같다.\n$6x^2-5x-6=(3x+2)(2x-3)$\n$2x^2-7x+3=(2x-1)(x-3)$\n$3x^2+8x+4=(3x+2)(x+2)$\n$x^2-9=(x+3)(x-3)$\n\n나눗셈을 역수의 곱셈으로 바꾸면\n$$\\frac{(3x+2)(2x-3)}{(2x-1)(x-3)}\\times\\frac{(x+3)(x-3)}{(3x+2)(x+2)}$$\n이다.\n\n분자·분모에서 $(3x+2)$가 약분되고, $(x-3)$도 분자·분모에서 약분된다. 남는 식은\n$$\\frac{(2x-3)(x+3)}{(2x-1)(x+2)}$$\n이므로 정답은 D이다.\n\nA는 $(2x-1)$을 $(x-1)$로 잘못 쓴 오류(즉 $2x^2-7x+3$의 인수분해를 틀리게 한 경우)이다.\nB는 $(x+3)$과 $(x+2)$가 서로 약분된다고 착각하여(실제로는 서로 다른 인수이므로 약분 불가) 과도하게 약분한 오류이다.\nC는 $6x^2-5x-6$의 인수분해에서 부호를 잘못 처리하여 $(3x+2)$ 대신 $(2x+3)$이 남는다고 착각한 오류이다.",
+  "explanation_en": "Factor each polynomial: $6x^2-5x-6=(3x+2)(2x-3)$, $2x^2-7x+3=(2x-1)(x-3)$, $3x^2+8x+4=(3x+2)(x+2)$ and $x^2-9=(x+3)(x-3)$. Dividing by a fraction is multiplying by its reciprocal: $$\\frac{(3x+2)(2x-3)}{(2x-1)(x-3)}\\times\\frac{(x+3)(x-3)}{(3x+2)(x+2)}.$$ The factors $(3x+2)$ and $(x-3)$ cancel, leaving $$\\frac{(2x-3)(x+3)}{(2x-1)(x+2)},$$ so the answer is D. Choice A changes $(2x-1)$ to $(x-1)$; B cancels $(x+3)$ against $(x+2)$, which are different factors; C uses $(2x+3)$ instead of $(2x-3)$.",
+  "note": "explanation letters re-mapped to the DB option order (repo A,B,C,D -> DB D,A,B,C)"
+ },
+ "S-13": {
+  "explanation": "빈칸 앞 절 전체가 새로운 학문 분야를 만들어냈다는 결과를 나타내야 하므로 정동사 없는 분사구 \"launching\"이 적절하다. \"and this launching\"은 등위접속사 뒤에 정동사가 없고, \"they launched\"는 콤마로 독립절을 이어 붙이며 대명사가 불분명하고, \"which had launched\"는 시제가 맞지 않고 \"the solar system\"을 수식하는 것으로 오독된다. 정답은 C.",
+  "explanation_en": "The clause before the blank as a whole needs to be shown as having resulted in a new field of study, so the participial phrase \"launching\" appropriately modifies the entire preceding clause. \"And this launching\" has no finite verb after a coordinating conjunction; \"they launched\" splices two independent clauses with a comma and has an unclear pronoun; \"which had launched\" has a mismatched tense and can be misread as modifying \"the solar system.\" Therefore, C is correct.",
+  "note": "explanation key letter re-mapped to the DB option order (repo B -> DB C)"
+ },
+ "S-07": {
+  "figure": {
+   "type": "plane",
+   "axes": {
+    "x": {
+     "min": -7,
+     "max": 7,
+     "step": 1,
+     "title": "x (feet)"
+    },
+    "y": {
+     "min": -1,
+     "max": 6,
+     "step": 1,
+     "title": "y (feet)"
+    }
+   },
+   "objects": [
+    {
+     "id": "arch",
+     "kind": "polygon",
+     "vertices": [
+      [
+       -5,
+       0.0
+      ],
+      [
+       -4,
+       2.4
+      ],
+      [
+       -2.5,
+       3.4641
+      ],
+      [
+       0,
+       4.0
+      ],
+      [
+       2.5,
+       3.4641
+      ],
+      [
+       4,
+       2.4
+      ],
+      [
+       5,
+       0.0
+      ]
+     ],
+     "label": "arch"
+    }
+   ]
+  },
+  "note": "figure: the triage patch used a 21-vertex polygon, but the plane template allows at most 8 vertices; replaced by a 7-vertex outline of the upper half of x^2/25+y^2/16=1 (beam y=4 removed so it no longer gives the answer away)"
+ }
+}
