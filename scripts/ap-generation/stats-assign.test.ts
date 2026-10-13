@@ -69,4 +69,16 @@ describe("stats exact assignment (ILP + independent verifier)", () => {
     expect(rep.frqA.map((k) => k.split("-")[1])).toEqual([...STATS_FRQ_TEMPLATES]);
     expect(rep.mcA.indexOf(rep.mcA.find((k) => k.startsWith("set"))!)).toBe(12); // 12개 단독 뒤에 첫 세트
   });
+  it("preferExamPrep chooses harder (exam_prep) items among equally valid ones without changing the exact unit and skill targets, and is off by default", () => {
+    const base = fullStock();
+    const stock = [...base, ...base.filter((c) => c.kind === "mc" && !c.shared).map((c) => ({ ...c, key: `${c.key}-hard`, fam: `${c.fam}-hard`, exam: 1 }))];
+    const off = solveStatsSets(["ST1"], stock, { timeMs: 60000 });
+    const on = solveStatsSets(["ST1"], stock, { timeMs: 60000, preferExamPrep: true });
+    expect(verifyStatsAssignment(on.out)).toEqual([]);
+    expect(on.out[0].virtual).toEqual([]); expect(on.out[0].singles).toHaveLength(36);
+    expect(on.out[0].singles.every((c) => (c.exam ?? 0) === 1)).toBe(true);
+    expect(Math.abs(off.res.obj)).toBe(0); // 기본 배정의 목적값은 그대로 0
+    const units = (r: typeof on.out[0]) => JSON.stringify(Object.entries(buildStatsOrder(r).reduce<Record<string, number>>((m, x) => ((m[x.unit ?? "?"] = (m[x.unit ?? "?"] ?? 0) + 1), m), {})));
+    expect(units(on.out[0])).toBe(units(off.out[0]));
+  });
 });
