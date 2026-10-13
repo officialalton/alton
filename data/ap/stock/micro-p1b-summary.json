@@ -1,0 +1,58 @@
+{
+ "runs": [
+  "micro-p1-b"
+ ],
+ "rows": 8,
+ "passed": 4,
+ "rejected": 4,
+ "passRate": 0.5,
+ "mc": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "frq": {
+  "rows": 8,
+  "passed": 4,
+  "passRate": 0.5
+ },
+ "unitsPassed": {},
+ "skillsPassed": {},
+ "figPassed": {
+  "table": 4
+ },
+ "figAll": {
+  "table": 8
+ },
+ "figPassRate": {
+  "table": "4/8"
+ },
+ "renderTypesPassed": {
+  "ap_table": 4
+ },
+ "archetypesPassed": {
+  "mif_long_pc_firm": 1,
+  "mif_long_monopoly": 1,
+  "mif_short_externality": 1,
+  "mif_short_labor": 1
+ },
+ "archetypesAll": {
+  "mif_long_pc_firm": 1,
+  "mif_long_market_policy": 1,
+  "mif_long_monopoly": 1,
+  "mif_short_externality": 1,
+  "mif_short_labor": 1,
+  "mif_short_trade": 1,
+  "mif_short_elasticity": 1,
+  "mif_short_mc": 1
+ },
+ "failedArchetypes": [
+  "mif_long_market_policy",
+  "mif_short_trade",
+  "mif_short_elasticity",
+  "mif_short_mc"
+ ],
+ "costUsd": {
+  "micro-p1-b": 0.4489
+ }
+}

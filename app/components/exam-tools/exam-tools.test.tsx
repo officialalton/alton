@@ -10,6 +10,8 @@ import { evalScientific } from "./PhysicsCalculator";
 import { CHEMISTRY_REF_DISCLAIMER, CHEMISTRY_CONSTANTS, CHEMISTRY_ELEMENTS, elementPosition } from "@/lib/exam-tools/chemistry-reference";
 import { PHYSICS_REF_DISCLAIMER, PHYSICS_CONSTANTS } from "@/lib/exam-tools/physics-reference";
 import { JAVA_REF_DISCLAIMER, JAVA_GROUPS } from "@/lib/exam-tools/java-reference";
+import { MICRO_REF_DISCLAIMER, MICRO_GROUPS } from "@/lib/exam-tools/micro-reference";
+import { evalBasic } from "./BasicCalculator";
 import { parseNum, STATS_MODES } from "@/lib/stats-calc/modes";
 
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });
@@ -249,5 +251,27 @@ describe("AP Computer Science A 도구", () => {
   it("계산기를 열어도 아무것도 그리지 않는다(계산기 없음)", () => {
     render(<SubjectToolPanels config={cs} calculatorAllowed open="calculator" onClose={() => {}} />);
     expect(screen.queryByRole("dialog")).toBeNull();
+  });
+});
+
+describe("AP Microeconomics 도구", () => {
+  const micro = subjectToolsConfig("ap_microeconomics");
+  it("사칙 계산기 + Reference, Desmos·공학용 없음", () => {
+    expect(micro.calculatorTabs).toEqual(["basic"]);
+    expect(micro.reference).toBe("microeconomics");
+  });
+  it("Reference 는 자체 문구 고지와 식 묶음을 보인다(공식 시트라고 주장하지 않음)", () => {
+    render(<SubjectToolPanels config={micro} calculatorAllowed open="reference" onClose={() => {}} />);
+    expect(screen.getByTestId("micro-reference-disclaimer").textContent).toBe(MICRO_REF_DISCLAIMER);
+    expect(MICRO_REF_DISCLAIMER).toMatch(/not the official College Board sheet/);
+    expect(MICRO_GROUPS.length).toBeGreaterThanOrEqual(5);
+    expect(screen.getByText(MICRO_GROUPS[0].items[0].expr)).toBeInTheDocument();
+  });
+  it("사칙 계산기는 사칙·괄호·소수만 계산하고 함수·거듭제곱은 거부한다", () => {
+    expect(evalBasic("(60 - 40) / 2")).toEqual({ ok: true, value: "10" });
+    expect(evalBasic("0.5 * 80 * 20")).toEqual({ ok: true, value: "800" });
+    expect(evalBasic("sqrt(9)").ok).toBe(false);
+    expect(evalBasic("2^3").ok).toBe(false);
+    expect(evalBasic("1/0").ok).toBe(false);
   });
 });

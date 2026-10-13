@@ -1,0 +1,85 @@
+{
+ "runs": [
+  "micro-p2-c"
+ ],
+ "rows": 39,
+ "passed": 24,
+ "rejected": 15,
+ "passRate": 0.615,
+ "mc": {
+  "rows": 39,
+  "passed": 24,
+  "passRate": 0.615
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 3,
+  "2": 4,
+  "3": 6,
+  "4": 5,
+  "5": 3,
+  "6": 3
+ },
+ "skillsPassed": {
+  "2.A": 7,
+  "1.D": 4,
+  "1.B": 3,
+  "2.B": 2,
+  "3.A": 5,
+  "1.A": 3
+ },
+ "figPassed": {
+  "none": 17,
+  "graph": 7
+ },
+ "figAll": {
+  "none": 30,
+  "graph": 9
+ },
+ "figPassRate": {
+  "none": "17/30",
+  "graph": "7/9"
+ },
+ "renderTypesPassed": {
+  "none": 17,
+  "ap_graph:econ_curves": 7
+ },
+ "archetypesPassed": {
+  "mi_cartel_cheat": 1,
+  "mi_monopoly_vs_pc": 1,
+  "mi_movement_vs_shift": 1,
+  "mi_pd_markets": 2,
+  "mi_pos_externality": 2,
+  "mi_shutdown_rule": 2,
+  "mi_structure_identify": 1,
+  "mi_elasticity_graph": 3,
+  "mi_labor_market_shift": 3,
+  "mi_public_good": 1,
+  "mi_scarcity_concept": 3,
+  "mi_cost_curve_relation_graph": 2,
+  "mi_cost_graph_min": 2
+ },
+ "archetypesAll": {
+  "mi_cartel_cheat": 3,
+  "mi_monopoly_vs_pc": 3,
+  "mi_movement_vs_shift": 3,
+  "mi_pd_markets": 3,
+  "mi_pos_externality": 3,
+  "mi_shutdown_rule": 3,
+  "mi_structure_identify": 3,
+  "mi_elasticity_graph": 3,
+  "mi_labor_market_shift": 3,
+  "mi_public_good": 3,
+  "mi_scarcity_concept": 3,
+  "mi_cost_curve_relation_graph": 3,
+  "mi_cost_graph_min": 3
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "micro-p2-c": 1.3061
+ }
+}

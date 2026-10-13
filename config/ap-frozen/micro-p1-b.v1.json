@@ -1,0 +1,72 @@
+{
+ "version": "v1-micro-p1-b",
+ "run": "micro-p1-b",
+ "subject": "ap_microeconomics",
+ "archetypeList": "micro_p1_frq",
+ "seed0": 9200,
+ "candidatesPerCell": 1,
+ "capUsd": 0.6,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "2",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/subjects/micro.ts",
+  "lib/ap-generation/subjects/micro-archetypes.json",
+  "lib/ap-generation/micro-frq-checks.ts",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 71.2,
+ "_budget_estimate": {
+  "cells": "8 FRQ slots x 1 candidate: 3 long (10 points: perfectly competitive firm and market with graphs, price ceiling with graphs, monopoly with price cap) and 5 short (5 points: externality, labor demand, comparative advantage, elasticity, monopolistic competition); 55 points in total",
+  "perCellUsd": "long 0.08-0.09 (5-6 parts, 9-10 rubric rows), short 0.045-0.05",
+  "expectedUsd": "0.5 (range 0.4-0.6)",
+  "capUsd": 0.6,
+  "passRateAssumption": "53% first pass (Physics P1-b 2/4, phys-s2 FRQ, Chemistry FRQ 22/48 after a fix). Stop if fewer than 2 of 8 pass.",
+  "runAfter": "P1-a, only if its first pass is at least 45%"
+ },
+ "_note": "Frozen 2026-10-13 together with P1-a. Cumulative at freeze $68.4316; hard stop = cumulative + P1-a cap 1.9 + cap 0.6 + 0.2.",
+ "expected": {
+  "generatorHash": "6f8840970920",
+  "reviewerPromptHash": "94005cf75a8f",
+  "difficultyPromptHash": "9bda2250d42c",
+  "parserHash": "7528bbe8cdfc",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "runs": [
+  "micro-p1-a"
+ ],
+ "rows": 44,
+ "passed": 32,
+ "rejected": 12,
+ "passRate": 0.727,
+ "mc": {
+  "rows": 44,
+  "passed": 32,
+  "passRate": 0.727
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 7,
+  "2": 11,
+  "3": 7,
+  "4": 2,
+  "5": 2,
+  "6": 3
+ },
+ "skillsPassed": {
+  "1.C": 6,
+  "3.C": 9,
+  "2.C": 8,
+  "3.A": 6,
+  "2.B": 2,
+  "1.B": 1
+ },
+ "figPassed": {
+  "none": 13,
+  "table": 9,
+  "graph": 8,
+  "payoff_matrix": 2
+ },
+ "figAll": {
+  "none": 18,
+  "table": 12,
+  "graph": 12,
+  "payoff_matrix": 2
+ },
+ "figPassRate": {
+  "none": "13/18",
+  "table": "9/12",
+  "graph": "8/12",
+  "payoff_matrix": "2/2"
+ },
+ "renderTypesPassed": {
+  "none": 13,
+  "ap_table": 9,
+  "ap_graph:econ_curves": 8,
+  "ap_table:payoff_matrix": 2
+ },
+ "archetypesPassed": {
+  "mi_opp_cost_choice": 2,
+  "mi_pe_midpoint": 2,
+  "mi_per_unit_tax": 1,
+  "mi_cost_table_mc": 2,
+  "mi_mb_mc_table": 2,
+  "mi_hire_table": 2,
+  "mi_pigou_numeric": 1,
+  "mi_surplus_numeric": 2,
+  "mi_price_control_graph": 2,
+  "mi_pc_graph_profit": 2,
+  "mi_ext_graph": 2,
+  "mi_comp_adv_table": 2,
+  "mi_shift_demand": 2,
+  "mi_double_shift": 2,
+  "mi_shutdown_decision": 1,
+  "mi_entry_exit": 2,
+  "mi_game_nash": 2,
+  "mi_economic_systems": 1
+ },
+ "archetypesAll": {
+  "mi_opp_cost_choice": 2,
+  "mi_pe_midpoint": 2,
+  "mi_per_unit_tax": 2,
+  "mi_cost_table_mc": 2,
+  "mi_profit_max_table": 2,
+  "mi_mb_mc_table": 2,
+  "mi_monopoly_numeric": 2,
+  "mi_hire_table": 2,
+  "mi_pigou_numeric": 2,
+  "mi_surplus_numeric": 2,
+  "mi_price_control_graph": 2,
+  "mi_cost_graph_min": 2,
+  "mi_pc_graph_profit": 2,
+  "mi_monopoly_graph": 2,
+  "mi_ext_graph": 2,
+  "mi_comp_adv_table": 2,
+  "mi_shift_demand": 2,
+  "mi_double_shift": 2,
+  "mi_shutdown_decision": 2,
+  "mi_entry_exit": 2,
+  "mi_game_nash": 2,
+  "mi_economic_systems": 2
+ },
+ "failedArchetypes": [
+  "mi_profit_max_table",
+  "mi_monopoly_numeric",
+  "mi_cost_graph_min",
+  "mi_monopoly_graph"
+ ],
+ "costUsd": {
+  "micro-p1-a": 1.5791
+ }
+}
