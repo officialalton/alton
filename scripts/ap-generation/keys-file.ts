@@ -14,4 +14,4 @@ export function readKeysFile(file: string): { keys: string[]; sectionOf: Map<str
   }
   return { keys: raw.split("\n").map((l) => l.trim()).filter(Boolean), sectionOf };
 }
-export const STOCK_FILES = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "graph-s1-items", "graph-s2a-items", "graph-s2b-items", "graph-s3a-items", "graph-s3b-items", "graph-s3c-items", "graph-s3d-items", "graph-s3e-items", "graph-s3f-items", "graph-s3g-items", "stats-s1-items", "stats-s2a-items", "stats-s2b-items", "stats-s3a-items", "stats-s3b-items", "phys-p1a-items", ...suppItemNames()];
+export const STOCK_FILES = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "graph-s1-items", "graph-s2a-items", "graph-s2b-items", "graph-s3a-items", "graph-s3b-items", "graph-s3c-items", "graph-s3d-items", "graph-s3e-items", "graph-s3f-items", "graph-s3g-items", "stats-s1-items", "stats-s2a-items", "stats-s2b-items", "stats-s3a-items", "stats-s3b-items", "phys-p1a-items", "phys-p1a2-items", "phys-p1b-items", ...suppItemNames()];

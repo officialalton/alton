@@ -5,10 +5,7 @@ from phys_figs import make_collision, check_scene, make_vectors  # noqa: F401
 from phys_p0_d import _rk_stop
 
 
-def _seg_text(xs, ys, unit):
-    """구간별 사다리꼴 넓이를 '8.00, 10.0 and 6.00 J' 꼴 문장으로(정답 해설에 계산 과정을 넣기 위해)."""
-    parts = [sig(float((Fr(ys[i]) + Fr(ys[i + 1])) / 2 * (xs[i + 1] - xs[i]))) for i in range(len(xs) - 1)]
-    return ", ".join(parts[:-1]) + (" and " if len(parts) > 1 else "") + parts[-1] + f" {unit}"
+_seg_text = seg_text  # phys_common.seg_text
 
 
 def _grid_range(vals, pad=0.1):
@@ -432,7 +429,7 @@ def ph_orbit_speed_ratio(rng):
     return mk("ph_orbit_speed_ratio", "6.6", "2.B", stem, key, ds, rng, concept="Angular momentum conservation for an orbiting satellite", thinking=["The gravitational force on the satellite exerts no torque about Earth's center, so angular momentum is conserved", "At the closest and farthest points the velocity is perpendicular to the radius, so $mvr$ is the same at both"],
               cond=[("the only force is gravity directed toward Earth's center", "the stem describes an orbit under Earth's gravity")], path="the energy conservation equation with $GM$ fixed by the orbit confirms the speed found from angular momentum conservation", material=MAT_NONE,
               judgment=["law_selection", "symbolic_reasoning"], est=100, facts=[f"rp={rp}", f"ra={ra}", f"vp={vp}"],
-              kwhy=f"$mv_pr_p=mv_ar_a$ gives $v_a=v_pr_p/r_a={sig(va)}\\text{{ m/s}}$.")
+              kwhy=f"$mv_pr_p=mv_ar_a$ gives $v_a=v_pr_p/r_a={vp:g}({rp / 1e6:g}\\times10^{{6}})/({ra / 1e6:g}\\times10^{{6}})={sig(va)}\\text{{ m/s}}$.")
 
 
 # ======================= U7 =======================
@@ -488,7 +485,7 @@ def ph_shm_signs(rng):
         v_s, a_s = sg[i]; xs_ = xf(ts[i])
         return f"At point {labs[i]} the position is {'positive' if xs_ > 0 else 'negative'}, so the acceleration, which points opposite to the position, is {'negative' if xs_ > 0 else 'positive'}; the slope is {'positive' if v_s > 0 else 'negative'}, so the velocity is {'positive' if v_s > 0 else 'negative'}."
     key, ds = sentence_options(f"Point {labs[ki]}", why(ki), [(f"Point {labs[i]}", why(i)) for i in range(4) if i != ki])
-    stim = dense_graph_stim("Position versus time of a block on a spring", xf, 0, 2 * T, gaxis("Time (s)", 0, 2 * T, T / 4), gaxis("Position (m)", -A * 1.2, A * 1.2, A / 2), n=161, extra={"labeled_points": [{"x": round(t, 6), "y": round(xf(t), 5), "label": L} for t, L in zip(ts, labs)]})
+    stim = dense_graph_stim("Position versus time of a block on a spring", xf, 0, 2 * T, gaxis("Time (s)", 0, 2 * T, T / 4), sym_axis("Position (m)", A), n=161, extra={"labeled_points": [{"x": round(t, 6), "y": round(xf(t), 5), "label": L} for t, L in zip(ts, labs)]})
     stem = f"The graph shows the position of a block oscillating on a spring as a function of time, with positive positions to the right. Which labeled point corresponds to a time when {phr[q]}?"
     return mk("ph_shm_signs", "7.3", "3.C", stem, key, ds, rng, concept="Signs of velocity and acceleration in simple harmonic motion from a position-time graph", thinking=["Find the sign of the velocity from the slope of the graph", "Find the sign of the acceleration from the sign of the position, since the restoring force points opposite to it"],
               cond=[("the motion is simple harmonic", "the plotted curve is a sinusoid")], path="numpy first and second differences of the sampled position function give the signs of velocity and acceleration at each labeled time", material=MAT_GRAPH("axis labels with units", "labeled points A to D"),
@@ -549,7 +546,7 @@ def ph_xt_max_accel(rng):
     pairs = [("Reports the maximum speed $2\\pi A/P$ instead of the maximum acceleration.", 2 * math.pi * A / P), ("Forgets to square the angular frequency, $2\\pi A/P$ times $\\pi$.", 4 * math.pi * A / P),
              ("Uses $A/P^2$, leaving out $4\\pi^2$.", A / P ** 2), ("Uses $4\\pi A/P^2$, with a single factor of $2\\pi$.", 4 * math.pi * A / P ** 2)]
     key, ds = num_opts(a, pairs, "m/s^2")
-    stim = dense_graph_stim("Position versus time of an oscillating block", lambda t: A * math.cos(2 * math.pi * t / P), 0, 2 * P, gaxis("Time (s)", 0, 2 * P, P / 4), gaxis("Position (m)", -A * 1.2, A * 1.2, A / 2), n=161)
+    stim = dense_graph_stim("Position versus time of an oscillating block", lambda t: A * math.cos(2 * math.pi * t / P), 0, 2 * P, gaxis("Time (s)", 0, 2 * P, P / 4), sym_axis("Position (m)", A), n=161)
     stem = "The graph shows the position of a block oscillating on a spring as a function of time. What is the maximum magnitude of the acceleration of the block?"
     return mk("ph_xt_max_accel", "7.3", "2.B", stem, key, ds, rng, concept="Maximum acceleration of a simple harmonic oscillator from a position-time graph", thinking=["Read the amplitude and the period from the graph", "Use $a_{max}=\\omega^2A$ with $\\omega=2\\pi/P$"],
               cond=[("the motion is simple harmonic", "the plotted curve is a cosine")], path="numpy second differences of the sampled position function give the maximum acceleration, compared with $4\\pi^2A/P^2$", material=MAT_GRAPH("axis labels with units", "one full period"),
@@ -712,7 +709,7 @@ def phs_spring_set(rng):
                           ("Inverts the relation, $T^2/(4\\pi^2m)$.", T ** 2 / (4 * math.pi ** 2 * m)), ("Uses $4\\pi^2m/T$ with the period to the first power.", 4 * math.pi ** 2 * m / T)], "N/m")
     k2, d2 = num_opts(vmax, [("Reports $A/T$, leaving out the factor of $2\\pi$.", A / T), ("Reports $\\pi A/T$, with one factor of two missing.", math.pi * A / T),
                              ("Reports the maximum acceleration $4\\pi^2A/T^2$ instead of the maximum speed.", 4 * math.pi ** 2 * A / T ** 2), ("Reports $2\\pi AT$, multiplying by the period instead of dividing.", 2 * math.pi * A * T)], "m/s")
-    stim = dense_graph_stim("Position versus time of the block", lambda t: A * math.cos(2 * math.pi * t / T), 0, 2 * T, gaxis("Time (s)", 0, 2 * T, T / 4), gaxis("Position (m)", -A * 1.2, A * 1.2, A / 2), n=161)
+    stim = dense_graph_stim("Position versus time of the block", lambda t: A * math.cos(2 * math.pi * t / T), 0, 2 * T, gaxis("Time (s)", 0, 2 * T, T / 4), sym_axis("Position (m)", A), n=161)
     q = []
     for st_, key, ds, nm, kw in [("What is the spring constant of the spring?", k1, d1, "q1", f"The period is read as $T={T:g}\\text{{ s}}$, so $k=4\\pi^2m/T^2={sig(k)}\\text{{ N/m}}$."),
                                  ("What is the maximum speed of the block?", k2, d2, "q2", f"$v_{{max}}=2\\pi A/T=2\\pi({A:g})/{T:g}={sig(vmax)}\\text{{ m/s}}$.")]:

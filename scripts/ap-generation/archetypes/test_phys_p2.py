@@ -51,14 +51,18 @@ class Registered(unittest.TestCase):
                     self.assertEqual(sorted(m["description"] for m in q["blueprint"]["misconceptions"]), shown, n)
 
     def test_key_explanation_has_working(self):
-        """P1-a: 정답 해설이 '문제 그대로 반복'이라 반려됐다. 새 원형의 숫자형 정답은 해설에 숫자 대입이 있어야 한다."""
-        for n in NEW:
+        """P1-a(v1·v2): 정답 해설이 '문제 그대로 반복'(또는 'values given... this gives')이라 반려됐다. 숫자형 정답은 해설에 숫자 대입(숫자 토큰 2개 이상)이 있어야 한다."""
+        num = re.compile(r"(?<![A-Za-z_\\{^])\d+(?:\.\d+)?")
+        bad = []
+        for n in R.PHYS_STAGES["phys_mc_all"] + R.PHYS_STAGES["phys_sets"]:
             for p in R.batch(n, 4, 7100):
                 for q in items(p):
-                    if q["options"][q["key_index"]]["value"] is None:
+                    k = q["options"][q["key_index"]]
+                    if k["value"] is None:
                         continue
-                    self.assertRegex(q["options"][q["key_index"]]["why"], r"\d", n)
-                    self.assertGreaterEqual(len(q["options"][q["key_index"]]["why"]), 30, n)
+                    if len(num.findall(k["why"])) < 2 or "values given in the question" in k["why"]:
+                        bad.append((n, k["why"][:90]))
+        self.assertEqual(bad, [])
 
     def test_set_stems_do_not_reference_other_questions(self):
         for n in R.PHYS_STAGES["phys_sets"]:

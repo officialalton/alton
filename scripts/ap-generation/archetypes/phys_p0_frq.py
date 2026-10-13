@@ -68,7 +68,7 @@ def phf_mr_table_block(rng):
     ]
     assert up
     return _pack("phf_mr_table_block", "mr", "2.5", ["2.2", "2.7"], "2.B", "Block on a table connected to a hanging block", stim, parts, 10, 22, [f"m1={m1}", f"m2={m2}", f"mu={mu}", f"a={a:.4f}", f"T={T:.3f}"],
-                 [_ev("C", "acceleration", a, 0.02, "m/s^2"), _ev("B", "tension", T, 0.5, "N")],
+                 [_ev("C", "acceleration", a, 0.02, "m/s^2")],  # 2026-10-13: 장력은 어느 파트도 묻지 않으므로 기대값에서 제외(풀이기가 파트 B 식 답에서 14.7 을 찾다 수치 불일치로 반려됨)
                  ("Newton's second law for two connected objects with friction, a free-body diagram, and a justified prediction", ["Draw the free-body diagram of the table block", "Write Newton's second law for each block and combine", "Predict the effect of a change in friction using the derived relationships"],
                   [("the pulley and string are ideal and the blocks move together with one acceleration", "the stimulus states a light string and a light frictionless pulley")], {"type": "text", "must_include": ["masses", "friction coefficient"]},
                   "sympy solves the two Newton equations; numpy linalg.solve on the same system recomputes the acceleration and tension; the sign of the derivative of the tension with respect to the friction coefficient decides the prediction"),
@@ -136,26 +136,26 @@ def phf_lab_spring_k(rng):
             break
     stim = {"kind": "table", "description": "A student measures the period $T$ of a block of mass $m$ hanging on a vertical spring of unknown spring constant $k$.", "data": {"x_label": "Mass m (kg)", "y_label": "Period T (s)", "rows": [[m, t] for m, t in zip(ms, Ts)]}}
     parts = [
-        part("A", "Describe an experimental procedure to collect the data for the period as a function of mass. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured period.", 3, "design", ["1.B", "2.B"],
+        part("A", "Describe an experimental procedure to collect the data for the period as a function of mass. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured period.", 3, "design", ["3.A", "2.B"],
              "Use a stopwatch to time 10 oscillations for each of several hanging masses added one at a time to the same spring, starting each trial from a small displacement, then divide by 10; repeat each timing.",
-             [R("A1", "design", "Identifies the measured quantities and equipment: a balance or known masses and a timing device", ["mass", "stopwatch"], err=["omits how the period is measured"]),
-              R("A2", "design", "Changes only the hanging mass while keeping the spring and the starting amplitude the same", ["change only the mass", "same amplitude"]),
-              R("A3", "design", "Reduces timing uncertainty, for example by timing many oscillations and dividing, or by repeating trials", ["time many oscillations", "repeat trials"])]),
-        part("B", "The period is related to the mass by $T=2\\pi\\sqrt{m/k}$. Identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find $k$.", 1, "explain", ["2.B", "3.A"],
+             [R("A1", "design", "Identifies the measured quantities and equipment: a balance or known masses and a timing device (both a way to know the mass and a way to time the motion are needed)", ["mass", "stopwatch"], err=["omits how the period is measured"]),
+              R("A2", "design", "Changes only the hanging mass while keeping the spring and the starting amplitude the same (both conditions are needed)", ["change only the mass", "same amplitude"]),
+              R("A3", "design", "Reduces timing uncertainty by timing many oscillations and dividing, or by repeating the trials and averaging (either earns the point)", ["time many oscillations", "repeat trials"])]),
+        part("B", "Using the relationship between the period of a mass on a spring, the mass and the spring constant from the reference information, identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find $k$.", 1, "explain", ["2.B", "3.A"],
              "Plot $T^2$ on the vertical axis against $m$ on the horizontal axis; the slope is $4\\pi^2/k$.",
              [R("B1", "expression", "Identifies $T^2$ (vertical) versus $m$ (horizontal)", ["T squared versus m"], err=["plots T versus m"])]),
-        part("C", "Use the grid to plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid.", 3, "graph", ["1.B", "3.A"],
+        part("C", "On a blank grid whose scale you choose, plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid.", 3, "graph", ["1.B", "3.A"],
              f"Points $(m,T^2)$: {', '.join(f'({m:g}, {t:.3f})' for m, t in zip(ms, T2))} with a best-fit line of slope about ${slope:.2f}\\text{{ s}}^2/\\text{{kg}}$.",
              [R("C1", "graph", "Axes are labeled with quantities and units and the scale fills most of the grid", ["axis labels", "units", "scale"], err=["scale uses less than half the grid"]),
               R("C2", "graph", "Plots the five points $(m, T^2)$ accurately", ["points plotted"], nums=True),
               R("C3", "graph", "Draws a straight best-fit line through the trend of the points", ["best-fit line"], err=["connects the dots"])]),
         part("D", "Use the best-fit line to determine the spring constant $k$. Show your work.", 3, "calculate", ["2.B", "2.D"],
              f"Slope $\\approx {slope:.2f}\\text{{ s}}^2/\\text{{kg}}$, so $k=4\\pi^2/\\text{{slope}}\\approx {k_est:.1f}\\text{{ N/m}}$.",
-             [R("D1", "numeric", f"Calculates the slope of the best-fit line using two points on the line (about {slope:.2f} s^2/kg)", [f"{slope:.2f}"], requires="C3", nums=True, err=["uses data points rather than points on the line"]),
+             [R("D1", "numeric", f"Calculates the slope of the best-fit line using two points on the line (about {slope:.2f} s^2/kg; accept any value within 5 percent)", [f"{slope:.2f}"], requires="C3", nums=True, err=["uses data points rather than points on the line"]),
               R("D2", "expression", "Relates the slope to the spring constant: slope $=4\\pi^2/k$", ["slope = 4 pi^2 / k"], err=["uses slope = k"]),
-              R("D3", "numeric", f"Calculates $k$ (about {k_est:.0f}) with units of newtons per meter", [f"{k_est:.0f}", "N/m"], requires="D1", nums=True, units=True)]),
+              R("D3", "numeric", f"Calculates $k$ (about {k_est:.0f}; accept any value within 8 percent) with units of newtons per meter", [f"{k_est:.0f}", "N/m"], requires="D1", nums=True, units=True)]),
     ]
-    return _pack("phf_lab_spring_k", "lab", "7.2", ["7.3"], "2.D", "Experiment: spring constant from the period of an oscillator", stim, parts, 10, 27, [f"k={k}", f"slope={slope:.4f}", f"k_est={k_est:.2f}", f"Ts={Ts}"],
+    return _pack("phf_lab_spring_k", "lab", "7.2", ["7.3"], "3.A", "Experiment: spring constant from the period of an oscillator", stim, parts, 10, 27, [f"k={k}", f"slope={slope:.4f}", f"k_est={k_est:.2f}", f"Ts={Ts}"],
                  [_ev("D", "slope", slope, 0.03, "s^2/kg"), _ev("D", "spring constant", k_est, 0.06, "N/m")],
                  ("Designing an experiment and analyzing linearized data to extract a physical constant", ["Describe the measurements and how uncertainty is reduced", "Linearize the relationship and plot the data", "Use the slope to determine the spring constant"],
                   [("the generated periods follow $T=2\\pi\\sqrt{m/k}$ with a small random error so the best-fit slope is within a few percent of $4\\pi^2/k$", "the code rejects a seed whose fitted constant differs from the generating constant by more than four percent")], {"type": "table", "must_include": ["mass", "period"]},

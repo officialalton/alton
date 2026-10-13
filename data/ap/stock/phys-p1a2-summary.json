@@ -1,0 +1,68 @@
+{
+ "runs": [
+  "phys-p1-a2"
+ ],
+ "rows": 42,
+ "passed": 30,
+ "rejected": 12,
+ "passRate": 0.714,
+ "singles": {
+  "candidates": 42
+ },
+ "unitsPassed": {
+  "1": 7,
+  "2": 6,
+  "3": 4,
+  "4": 6,
+  "5": 4,
+  "6": 1,
+  "8": 2
+ },
+ "figPassed": {
+  "graph": 5,
+  "none": 12,
+  "scene": 11,
+  "choice_scenes": 2
+ },
+ "figAll": {
+  "graph": 10,
+  "none": 14,
+  "scene": 14,
+  "choice_scenes": 4
+ },
+ "figPassRate": {
+  "graph": "5/10",
+  "none": "12/14",
+  "scene": "11/14",
+  "choice_scenes": "2/4"
+ },
+ "renderTypesPassed": {
+  "ap_graph:phys_line": 5,
+  "none": 12,
+  "ap_diagram:phys_scene": 11,
+  "figure_choice:ap_diagram:phys_scene": 2
+ },
+ "archetypesPassed": {
+  "ph_vt_displacement": 2,
+  "ph_kinematics_time": 2,
+  "ph_projectile_range": 2,
+  "ph_atwood_tension": 2,
+  "ph_incline_friction": 2,
+  "ph_circular_tension": 1,
+  "ph_track_energy": 1,
+  "ph_spring_launch": 2,
+  "ph_ft_impulse": 2,
+  "ph_inelastic_collision": 2,
+  "ph_beam_balance": 2,
+  "ph_alpha_hanging": 2,
+  "ph_rolling_incline": 1,
+  "ph_gauge_pressure": 2,
+  "ph_motion_diagram": 1,
+  "ph_fbd_choice": 1,
+  "ph_energy_bar_choice": 1,
+  "ph_collision_type": 2
+ },
+ "costUsd": {
+  "phys-p1-a2": 1.5932
+ }
+}

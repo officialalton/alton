@@ -24,6 +24,7 @@ export function fullPracticeUnitBounds(subject: string | null | undefined, label
   if (label !== "full_practice") return undefined;
   if (subject === "ap_calculus_ab") return Object.fromEntries(Object.entries(OFFICIAL.unitBounds).map(([u, [min, max]]) => [u, { min, max }]));
   if (subject === "ap_statistics") return statsUnitBounds();
+  if (subject === "ap_physics_1") return physUnitBounds();
   return undefined;
 }
 
@@ -48,4 +49,46 @@ export function verifyStatsFullComposition(items: StatsSetItem[]): string[] {
   const units = sets.map((s) => s[0].unit).sort();
   if (sets.length === STATS_SETS.length && units.join() !== STATS_SETS.map((x) => x.unit).sort().join()) out.push(`set_units_${units.join("+")}_not_${STATS_SETS.map((x) => x.unit).join("+")}`);
   return out;
+}
+
+// ---- AP Physics 1 (2027 CED p.170–172, docs/ap/physics1-facts.md) ----
+// MC 42 = 단독 + 2문항 공유 세트(공식 세트 수는 미공표 — 우리 구성은 2문항 세트 2개이며 "공식 구성"이라 주장하지 않는다), FRQ 4 = MR/TBR/LAB/QQT 각 1(순서 고정).
+// 단원 비중 10-15/18-23/18-23/10-15/10-15/5-8/5-8/10-15 % × 42 → [5,6]/[8,9]/[8,9]/[5,6]/[5,6]/[3,3]/[3,3]/[5,6] (하한 합 = 42 이므로 단원별 문항 수가 한 가지로 정해진다: 5/8/8/5/5/3/3/5).
+// 스킬 2.A 15-20 / 2.B 20-25 / 2.C 10-15 / 2.D 10-15 / 3.B 20-25 / 3.C 5-10 % → [7,8]/[9,10]/[5,6]/[5,6]/[9,10]/[3,4] (공식 범위). 현재 원형 재고는 2.B 편중이라 스킬 범위는 목표(비차단 경고)로만 다룬다.
+export const PHYS_MC_COUNT = 42;
+export const PHYS_MC_UNIT_PCT: Record<string, [number, number]> = { "1": [10, 15], "2": [18, 23], "3": [18, 23], "4": [10, 15], "5": [10, 15], "6": [5, 8], "7": [5, 8], "8": [10, 15] };
+export const PHYS_MC_SKILL_PCT: Record<string, [number, number]> = { "2.A": [15, 20], "2.B": [20, 25], "2.C": [10, 15], "2.D": [10, 15], "3.B": [20, 25], "3.C": [5, 10] };
+export const PHYS_SET_COUNT = 2;
+export const PHYS_SET_SIZE = 2;
+export const PHYS_FULL_TARGET = { units: { "1": 5, "2": 8, "3": 8, "4": 5, "5": 5, "6": 3, "7": 3, "8": 5 } as Record<string, number> };
+export const PHYS_FRQ_TEMPLATES = ["mr", "tbr", "lab", "qqt"] as const;
+export const PHYS_FRQ_COUNT = 4;
+export const physUnitBounds = (): UnitBounds => mapBounds(PHYS_MC_UNIT_PCT, PHYS_MC_COUNT);
+export const physSkillBounds = (): UnitBounds => mapBounds(PHYS_MC_SKILL_PCT, PHYS_MC_COUNT);
+
+export type PhysSetItem = { kind: "mc" | "frq"; unit: string | null; skill: string | null; candidateKey: string | null; position: number };
+/** 물리 풀 세트 구성 검증(순수, 차단 위반만): MC 42·FRQ 4, 단원 범위, 2문항 공유 세트 2개(연속 위치). 스킬 범위는 physSkillWarnings 로 따로 본다. */
+export function verifyPhysFullComposition(items: PhysSetItem[]): string[] {
+  const out: string[] = [];
+  const mc = items.filter((i) => i.kind === "mc"), frq = items.filter((i) => i.kind === "frq");
+  if (mc.length !== PHYS_MC_COUNT) out.push(`mc_count_${mc.length}/${PHYS_MC_COUNT}`);
+  if (frq.length !== PHYS_FRQ_COUNT) out.push(`frq_count_${frq.length}/${PHYS_FRQ_COUNT}`);
+  for (const [u, b] of Object.entries(physUnitBounds())) { const n = mc.filter((i) => i.unit === u).length; if (n < b.min || n > b.max) out.push(`unit_${u}_${n}_not_in_${b.min}-${b.max}`); }
+  const byKey = new Map<string, PhysSetItem[]>();
+  for (const i of mc) if (i.candidateKey) byKey.set(i.candidateKey, [...(byKey.get(i.candidateKey) ?? []), i]);
+  const sets = [...byKey.values()].filter((v) => v.length > 1);
+  if (sets.length !== PHYS_SET_COUNT) out.push(`shared_sets_${sets.length}/${PHYS_SET_COUNT}`);
+  for (const s of sets) {
+    if (s.length !== PHYS_SET_SIZE) out.push(`set_size_${s.length}_not_${PHYS_SET_SIZE}`);
+    const pos = s.map((x) => x.position).sort((a, b) => a - b);
+    if (pos.some((p, i) => i > 0 && p !== pos[i - 1] + 1)) out.push(`set_not_contiguous_${s[0].candidateKey}`);
+  }
+  const ft = frq.map((i) => i.candidateKey).filter(Boolean);
+  if (new Set(ft).size !== ft.length) out.push("frq_duplicate_key");
+  return out;
+}
+/** 스킬 범위 이탈(경고): 공식 MC 스킬 비중 범위를 벗어난 스킬과 실제 수. */
+export function physSkillWarnings(items: PhysSetItem[]): string[] {
+  const mc = items.filter((i) => i.kind === "mc");
+  return Object.entries(physSkillBounds()).flatMap(([k, b]) => { const n = mc.filter((i) => i.skill === k).length; return n < b.min || n > b.max ? [`skill_${k}_${n}_not_in_${b.min}-${b.max}`] : []; });
 }

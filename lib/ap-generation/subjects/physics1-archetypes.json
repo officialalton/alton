@@ -1029,7 +1029,7 @@
    "RK4 integration of the constant center-of-mass acceleration $g\\sin\\theta/(1+k)$ along the incline gives the speed at the bottom"
   ],
   "misconceptions": [
-   "Gives all of the lost potential energy to rotation only, using $\\sqrt{gh}$.",
+   "Drops the factor of two in the kinetic energy and ignores the rotational part, using $\\sqrt{gh}$.",
    "Treats the object as sliding without friction and uses $\\sqrt{2gh}$, ignoring the rotational kinetic energy.",
    "Drops the factor of two and keeps the rotational term, using $\\sqrt{gh/(1+k)}$."
   ]
@@ -1329,9 +1329,9 @@
    "RK4 integration of the horizontal projectile from the hole height with the Bernoulli exit speed lands at the closed-form range"
   ],
   "misconceptions": [
+   "Uses $4\\sqrt{dh}$.",
    "Uses the full height of the water surface above the ground, $d+h$, in place of the depth $d$, giving $2\\sqrt{(d+h)h}$.",
-   "Uses the exit speed times the depth, as if the water fell for a time equal to $d/v$.",
-   "Uses $4\\sqrt{dh}$."
+   "Uses $\\sqrt{dh}$ without the factor of two, halving the range."
   ]
  },
  {

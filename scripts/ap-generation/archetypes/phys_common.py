@@ -179,8 +179,6 @@ def mk(arch, topic, skill, stem, key, ds, rng, *, concept, thinking, cond, path,
     예전에는 뽑히지 않은 오개념까지 설계도에 남아 검토기가 '설계도의 m4 가 어떤 선택지에도 없다'며 반려했다)."""
     if kwhy and not key.why:
         key.why = kwhy
-    if key.why and key.value is not None and sig(float(key.value)) not in key.why:  # 정답 해설에 계산된 값이 없으면(P1-a: '문제 그대로 반복' 반려) 값을 덧붙인다
-        key.why += f" With the values given in the question, this gives {key.text}."
     p = pack(arch, topic, skill, "allowed", stem, key, ds, rng, stimulus=stim, est=est, facts=facts or [])
     shown = [o for i, o in enumerate(p["options"]) if i != p["key_index"]]
     mis = [(f"m{i + 1}", o["why"]) for i, o in enumerate(shown)]
@@ -190,6 +188,17 @@ def mk(arch, topic, skill, stem, key, ds, rng, *, concept, thinking, cond, path,
         for i, o in enumerate(p["options"]):
             o["text"] = f"Diagram {chr(65 + i)}"
     return p
+
+
+def seg_text(xs, ys, unit):
+    """구간별 사다리꼴 부호 있는 넓이를 '8.00, -10.0 and 6.00 m' 꼴 문장으로(정답 해설에 계산 과정을 넣기 위해; 정확 분수 계산)."""
+    parts = [sig(float((Fr(ys[i]) + Fr(ys[i + 1])) / 2 * (Fr(xs[i + 1]) - Fr(xs[i])))) for i in range(len(xs) - 1)]
+    return ", ".join(parts[:-1]) + (" and " if len(parts) > 1 else "") + parts[-1] + f" {unit}"
+
+
+def sym_axis(label, A):
+    """진동 그래프의 위치축: 눈금 간격 A/2, 범위 ±1.5A(눈금이 0 과 ±A 에 정확히 놓인다; 예전 ±1.2A 는 눈금이 -0.096, -0.056 … 처럼 어긋나 반려)."""
+    return gaxis(label, -1.5 * A, 1.5 * A, A / 2)
 
 
 def sci(v, unit="", n=3):
