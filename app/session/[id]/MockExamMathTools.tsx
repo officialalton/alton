@@ -203,11 +203,13 @@ export function MockExamToolButtons({
   referenceSheetAllowed,
   open,
   onToggle,
+  referenceLabel = "Reference Sheet",
 }: {
   calculatorAllowed: boolean;
   referenceSheetAllowed: boolean;
   open: MathToolsOpen;
   onToggle: (which: "calculator" | "reference") => void;
+  referenceLabel?: string;
 }) {
   if (!calculatorAllowed && !referenceSheetAllowed) return null;
   return (
@@ -235,7 +237,7 @@ export function MockExamToolButtons({
           }`}
           data-testid="toggle-reference"
         >
-          Reference Sheet
+          {referenceLabel}
         </button>
       )}
     </div>
