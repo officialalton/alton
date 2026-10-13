@@ -74,3 +74,6 @@
 - 동결 골격(미동결·미실행): `config/ap-frozen/chem-p1-a.template.json`(MC 22, 상한 $2.0), `chem-p1-b.template.json`(FRQ 7, 상한 $1.0). 누적 $52.8070 기준 중단선 $90 여유 $37.19.
 - **비용 추정**(Physics 실측 MC $0.039/후보·FRQ $0.05–0.06/후보, 첫 통과 68%/53%): 파일럿 ≈ **$2.1**(상한 $3.0), 풀 모의고사 2회 + 1.3배 예비 + 파일럿 ≈ **$13**(낙관 $9 / 보수 $20).
 - 유료 호출 전 남은 일: PES·입자 그림의 TS `ap_diagram` 렌더 연결(해당 원형 5종), 한 원형뿐인 스킬(1.B·2.A·2.B·2.F·6.A–6.C·6.E–6.G) 변형 추가, 풀 세트용 `cells.ts`·`stock.ts`·`assemble-draft.ts`·`full-set-rules.ts` 배선, 계산기·시트 UNVERIFIED 항목 확인, 오너 예산 승인.
+
+## Chemistry CH1·CH2 조립 완료 (2026-10-13, 누적 $65.7914 / 중단선 $90)
+- 정확 배정 `data/ap/stock/exact-assign-chem-ch1-ch2.json`: 가상 0, 위반 0, 각 MC 60(단독 56 + 세트 2)·FRQ 7. 적재 배치 `chem-p1a, chem-p1a2, chem-p1b, chem-s2f, chem-s2ma, chem-s2mb, chem-s2mc`(증거 `evidence-chem-s2.json`). 상세는 `docs/ap/chemistry-groundwork.md` 부록.

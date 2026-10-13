@@ -225,12 +225,12 @@ def ch_lewis_electron_check(rng):
     drawn_lp = lp_true + pick(rng, [1, -1, 2]) if lp_true > 1 else lp_true + pick(rng, [1, 2])
     shown = 2 * bonds + 2 * drawn_lp
     agree(1.0, 1.0 if shown != ve else 0.0, 1e-9, "wrong")
-    key_t = f"The model shows {shown} valence electrons but the molecule has {ve}, so the diagram is not consistent with the number of valence electrons."
-    wrongs = [(f"The model shows {ve} valence electrons, so the diagram is consistent with the number of valence electrons.", "Assumes the diagram is right without counting its electrons."), (f"The model shows {2 * bonds} valence electrons but the molecule has {ve}, so the diagram is not consistent.", "Counts only the bonding electrons, forgetting the lone pairs."),
-              (f"The model shows {shown} valence electrons but the molecule has {ve}, so the diagram is consistent because the extra electrons are on the central atom.", "Accepts extra electrons because they are placed on the central atom.")]
+    key_t = f"The model shows {shown} valence electrons but the molecule has {ve}, so the student's drawing is not consistent with the number of valence electrons."
+    wrongs = [(f"The model shows {ve} valence electrons, so the student's drawing is consistent with the number of valence electrons.", "Assumes the student's drawing is right without counting its electrons."), (f"The model shows {2 * bonds} valence electrons but the molecule has {ve}, so the student's drawing is not consistent.", "Counts only the bonding electrons, forgetting the lone pairs."),
+              (f"The model shows {shown} valence electrons but the molecule has {ve}, so the student's drawing is consistent because the extra electrons are on the central atom.", "Accepts extra electrons because they are placed on the central atom.")]
     k, ds = sentence_options(key_t, "A valid Lewis structure uses exactly the total number of valence electrons.", wrongs)
-    stem = f"A student draws a Lewis diagram of {cf(f)} that shows {bonds} bonding pairs and {drawn_lp} lone pairs. The molecule has {ve} valence electrons in total. Which statement correctly evaluates the diagram?"
-    return mk("ch_lewis_electron_check", "2.5", "4.B", stem, k, ds, rng, concept="check a Lewis diagram against the total number of valence electrons", path="2(bonds + lone pairs) compared with the valence electron count; the diagram is inconsistent by construction", facts=[f"species={f}", f"valence={ve}", f"bonds={bonds}", f"drawn_lp={drawn_lp}", f"shown={shown}"], judgment="count the electrons in a drawn structure against what is available", est=70)
+    stem = f"A student draws a Lewis diagram of {cf(f)} that shows {bonds} bonding pairs and {drawn_lp} lone pairs. The molecule has {ve} valence electrons in total. Which statement correctly evaluates the student's drawing?"
+    return mk("ch_lewis_electron_check", "2.5", "4.B", stem, k, ds, rng, concept="check a Lewis diagram against the total number of valence electrons", path="2(bonds + lone pairs) compared with the valence electron count; the student's drawing is inconsistent by construction", facts=[f"species={f}", f"valence={ve}", f"bonds={bonds}", f"drawn_lp={drawn_lp}", f"shown={shown}"], judgment="count the electrons in a drawn structure against what is available", est=70)
 
 
 # ======================= 8.6 산 세기와 구조 (4.A) =======================
