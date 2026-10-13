@@ -39,7 +39,7 @@ export function figureAlt(spec: FigureSpec): string | undefined {
     case "figure_bundle": return renderFigureBundle(spec, () => "", (c) => figureAlt(c as FigureSpec)).alt;
     case "image": return spec.alt;
     case "number_line": case "stem_leaf": case "pie": case "freq_chart": case "stacked_bar": return renderD(spec).alt;
-    case "ap_graph": case "ap_table": case "ap_diagram": return isApSpec(spec) ? renderAp(spec).alt : undefined;
+    case "ap_graph": case "ap_table": case "ap_diagram": case "ap_table_set": case "ap_stat_chart": return isApSpec(spec) ? renderAp(spec).alt : undefined;
     default: return undefined;
   }
 }

@@ -4,7 +4,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { OFFICIAL } from "../ap-exam/ab-select";
+import { fullPracticeUnitBounds } from "../ap-exam/full-set-rules";
 import { checkNewVersionComposition, type NewVersionContext, type SlotItem } from "../mock-exam/new-version";
 
 export type SwapSpec = { section: string; position: number; addKey: string };
@@ -97,6 +97,9 @@ export async function buildNewVersionPreview(db: SupabaseClient, sourceSetId: st
   const slots = (srcItems ?? []).map((i) => ({ section: i.section as string, position: i.position as number, problemId: i.problem_id as string, candidateKey: keyOf(i.problems as never) }));
   const res = resolveSwaps(inputs, slots); issues.push(...res.problems);
 
+  // 공유 자료 세트(같은 후보 키가 여러 슬롯 — 통계 3문항 세트)는 이 화면의 키 단위 미리보기로 바꿀 수 없다(교체는 세트 단위로 서버 액션에서만; 후속 작업).
+  const keyCount = new Map<string, number>(); for (const sl of slots) if (sl.candidateKey) keyCount.set(sl.candidateKey, (keyCount.get(sl.candidateKey) ?? 0) + 1);
+  for (const r of res.swaps) if (r.removeKey && (keyCount.get(r.removeKey) ?? 0) > 1) issues.push(`공유 자료 세트 문항(${r.removeKey})은 이 화면에서 교체할 수 없습니다 — 세트 단위 교체는 후속 지원.`);
   const addKeys = res.swaps.map((s) => s.addKey);
   const allKeys = [...new Set([...slots.map((s) => s.candidateKey), ...addKeys].filter((k): k is string => !!k))];
   const cands = new Map<string, CandRow>();
@@ -138,7 +141,7 @@ export async function buildNewVersionPreview(db: SupabaseClient, sourceSetId: st
   const toSlot = (s: { section: string; position: number; problemId: string; candidateKey: string | null }): SlotItem => { const b = brief(s.candidateKey); return { section: s.section, position: s.position, problemId: s.problemId, candidateKey: s.candidateKey, kind: b.kind as "mc" | "frq" | null, unit: b.unit, family: b.family, calculator: b.calculator }; };
   const ctx: NewVersionContext = {
     apLabel: set.ap_label as NewVersionContext["apLabel"], sectionCalculator: Object.fromEntries(sections.map((x) => [x.key, x.calculator ?? "na"])),
-    unitBounds: set.ap_subject === "ap_calculus_ab" && set.ap_label === "full_practice" ? Object.fromEntries(Object.entries(OFFICIAL.unitBounds).map(([u, [min, max]]) => [u, { min, max }])) : undefined,
+    unitBounds: fullPracticeUnitBounds(set.ap_subject as string | null, set.ap_label as string | null),
     usedByOtherExams: used,
     replacements: new Map(res.swaps.filter((s) => probByKey.has(s.addKey)).map((s) => { const sl = toSlot({ section: s.section, position: s.position, problemId: probByKey.get(s.addKey)!, candidateKey: s.addKey }); return [sl.problemId, { problemId: sl.problemId, candidateKey: sl.candidateKey, kind: sl.kind, unit: sl.unit, family: sl.family, calculator: sl.calculator }] as const; })),
   };

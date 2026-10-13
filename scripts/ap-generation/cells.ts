@@ -38,6 +38,13 @@ export const SAMPLE_PLAN = {
     { tpl: "short_game_theory", kw: "4.5", extra: [], skill: "2.C" },
     { tpl: "short_market_numeric", kw: "2.6", extra: ["2.3"], skill: "3.C" },
   ], sets: [{ unit: "2", items: 2 }, { unit: "3", items: 2 }, { unit: "4", items: 2 }], calcShare: 0 },
+  // AP Statistics(2027): MC 42(3문항 공유 세트 2개 = 단원 2 확률·분포, 단원 5 회귀), FRQ 4(문항당 10점, Q1 P1·2 / Q2 P3·4 / Q3 추론 / Q4 P2·3·4 복합). 계산기는 전 섹션 허용(calcShare 0, calculator "allowed"로 처리).
+  ap_statistics: { mc: 42, frq: [
+    { tpl: "investigative_question_design", kw: "1.10", extra: ["1.11", "1.13"], skill: "1.A" },
+    { tpl: "distribution_comparison_probability", kw: "1.9", extra: ["2.11", "1.7"], skill: "3.B" },
+    { tpl: "inference_procedure_full", kw: "3.7", extra: ["3.5", "3.6"], skill: "3.E" },
+    { tpl: "multi_focus_regression_inference", kw: "5.5", extra: ["5.4", "4.5"], skill: "4.D" },
+  ], sets: [{ unit: "2", items: 3 }, { unit: "5", items: 3 }], calcShare: 0 },
 } as const;
 
 function largestRemainder(weights: number[], total: number): number[] {
@@ -104,6 +111,7 @@ export function buildCells(f: ApCurriculumFile, plan: (typeof SAMPLE_PLAN)[keyof
 const NOT_ASSESSED_MC: Record<string, string[]> = {
   ap_calculus_ab: ["1.A", "1.B", "3.A", "4.A", "4.B", "4.C", "4.D", "4.E"],
   ap_microeconomics: ["4.A", "4.B", "4.C"],
+  ap_statistics: [], // 통계는 MC 에서 4개 실천(Practice) 모두 평가된다
 };
 /** MC 칸의 스킬: 토픽의 권장 스킬 중 MC에서 평가되는 것을 우선하고, 공식 스킬 범주 비중(MC)에 맞춰 범주별 할당량을 채운다. */
 function assignMcSkills(f: ApCurriculumFile, cells: Cell[]) {
@@ -113,8 +121,9 @@ function assignMcSkills(f: ApCurriculumFile, cells: Cell[]) {
   const topicSkills = new Map(f.units.flatMap((u) => u.topics.map((t) => [t.code, t.skills.filter((x) => !skip.has(x))] as const)));
   const catOf = (sk: string) => sk.split(".")[0];
   const calc = code === "ap_calculus_ab";
-  const defaults: Record<string, string> = calc ? { "1": "1.E", "2": "2.B", "3": "3.D" } : code === "ap_microeconomics" ? { "1": "1.A", "2": "2.A", "3": "3.A" } : {};
-  const needle: Record<string, string> = calc ? { "1": "implementing", "2": "connecting", "3": "justification" } : { "1": "principles", "2": "interpretation", "3": "manipulation" };
+  const stats = code === "ap_statistics";
+  const defaults: Record<string, string> = calc ? { "1": "1.E", "2": "2.B", "3": "3.D" } : stats ? { "1": "1.A", "2": "2.A", "3": "3.B", "4": "4.D" } : code === "ap_microeconomics" ? { "1": "1.A", "2": "2.A", "3": "3.A" } : {};
+  const needle: Record<string, string> = calc ? { "1": "implementing", "2": "connecting", "3": "justification" } : stats ? { "1": "formulate", "2": "collect", "3": "analyze", "4": "interpret" } : { "1": "principles", "2": "interpretation", "3": "manipulation" };
   const mid = (x: { min: number | null; max: number | null }) => ((x.min ?? 0) + (x.max ?? x.min ?? 0)) / 2;
   const quota: Record<string, number> = {};
   const cats = Object.keys(defaults);

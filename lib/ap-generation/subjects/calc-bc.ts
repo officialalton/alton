@@ -1,5 +1,6 @@
 import type { ArchetypeSpec, SubjectGuide } from "./types";
 import { calcAbGuide } from "./calc-ab";
+import { statsGuide } from "./stats";
 import graphArchetypes from "./graph-archetypes.json";
 
 // AP Calculus BC = 공통 코어 + AB 공유분 + BC 델타(docs/ap/generation-guides/calc-bc.md). 공유 토픽 문항은 AB 에서 한 번 생성해 content_key 로 태깅한다.
@@ -61,4 +62,4 @@ export const calcBcGuide: SubjectGuide = {
   bannedTerms: calcAbGuide.bannedTerms.filter((b) => b.why !== "BC-only content").concat([{ pattern: "\\b(Fourier|cross product|multivariable|3-D vector)\\b", why: "outside BC course framework" }]),
 };
 export const isBcOnlyTopic = (t: string) => BC_ONLY_TOPICS.includes(t);
-export const GUIDES = { ap_calculus_ab: calcAbGuide, ap_calculus_bc: calcBcGuide } as const;
+export const GUIDES = { ap_calculus_ab: calcAbGuide, ap_calculus_bc: calcBcGuide, ap_statistics: statsGuide } as const;
