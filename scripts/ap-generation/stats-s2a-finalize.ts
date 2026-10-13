@@ -1,6 +1,7 @@
 // AP Statistics S2-a 마무리(LLM·DB 없음): 세 런(<run>/candidates.json: 단독·공유 세트·FRQ)을 재고 행으로 만들어 data/ap/stock/stats-s2a-items.json 과 통과 키 파일을 쓰고,
 // 구조 look-alike(기존 전체 재고 + S1 파일럿 + 이번 배치)·문항군·비용(런·단계별)을 data/ap/stock/stats-s2a-summary.json 에 남긴다.
-//   npx tsx scripts/ap-generation/stats-s2a-finalize.ts [--runs stats-s2a-a,stats-s2a-b,stats-s2a-c]
+//   npx tsx scripts/ap-generation/stats-s2a-finalize.ts [--runs stats-s2a-a,stats-s2a-b,stats-s2a-c] [--batch stats-s2a]
+//   S2-b: --runs stats-s2b-a,stats-s2b-b,stats-s2b-c --batch stats-s2b (같은 스크립트, 출력 파일 접두만 다르고 look-alike 비교 대상에 S2-a 재고가 추가된다)
 import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { LATEST_GATE, buildStock, type RawCand } from "../../lib/ap-generation/stock";
@@ -9,20 +10,21 @@ import { clusterLookAlikes, type LookAlikeInput } from "../../lib/ap-exam/look-a
 
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 export const STATS_S2A_RUNS = arg("--runs", "stats-s2a-a,stats-s2a-b,stats-s2a-c").split(",");
+const BATCH = arg("--batch", "stats-s2a");
 const root = path.resolve("data/ap/sample-2027"), out = path.resolve("data/ap/stock");
 const runs: Record<string, RawCand[]> = {};
 for (const r of STATS_S2A_RUNS) { const f = path.join(root, r, "candidates.json"); if (existsSync(f)) runs[r] = (JSON.parse(readFileSync(f, "utf-8")) as RawCand[]).map((c) => ({ ...c, gateOverride: LATEST_GATE } as RawCand)); }
 const items = buildStock(runs, {});
 // DB 제약(ap_candidate_items.structure ∈ standalone / shared_stimulus_set / frq_multipart): 파이프라인 내보내기는 'shared_set' 으로 적었으므로 재고 행에서 정식 값으로 바꾼다(동결된 pipeline2.ts 는 건드리지 않는다).
 for (const i of items) if (Array.isArray(i.payload.items)) { i.structure = "shared_stimulus_set"; i.stockCell = i.stockCell.replace("|shared_set|", "|shared_stimulus_set|"); }
-writeFileSync(path.join(out, "stats-s2a-items.json"), JSON.stringify(items.map((i) => ({ ...i })), null, 0));
+writeFileSync(path.join(out, `${BATCH}-items.json`), JSON.stringify(items.map((i) => ({ ...i })), null, 0));
 const pass = items.filter((i) => i.validation === "auto_passed" && !i.duplicateOf && generatorDefects(i.payload).length === 0);
-writeFileSync(path.join(out, "stats-s2a-pass-keys.json"), "[\n" + pass.map((r) => JSON.stringify(r.stockKey)).join(",\n") + "\n]\n");
+writeFileSync(path.join(out, `${BATCH}-pass-keys.json`), "[\n" + pass.map((r) => JSON.stringify(r.stockKey)).join(",\n") + "\n]\n");
 
 type Raw = { stockKey: string; apSubjectCode: string; kind: string; validation: string; keywordCode: string; itemFamilyId: string; payload: Record<string, unknown>; duplicateOf?: string | null };
 const first = (r: { payload: Record<string, unknown> }) => (Array.isArray(r.payload.items) ? (r.payload.items as Record<string, unknown>[])[0] : r.payload) as { archetype?: string; stem?: string; blueprint?: { student_thinking?: string[] } };
 const P = (r: { payload: Record<string, unknown> }) => r.payload as { archetype?: string; stimulus?: { kind?: string } };
-const stockFiles = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "stats-s1-items"];
+const stockFiles = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "stats-s1-items", ...(BATCH === "stats-s2a" ? [] : ["stats-s2a-items"])];
 const stock = stockFiles.filter((f) => existsSync(path.join(out, `${f}.json`))).flatMap((f) => JSON.parse(readFileSync(path.join(out, `${f}.json`), "utf-8")) as Raw[]).filter((i) => i.validation === "auto_passed" && !i.duplicateOf && i.kind === "mc");
 const toIn = (i: Raw): LookAlikeInput => ({ key: i.stockKey, family: i.itemFamilyId, archetype: P(i).archetype, topic: i.keywordCode, stimKind: P(i).stimulus?.kind ?? "none", stem: String(first(i).stem ?? ""), thinking: first(i).blueprint?.student_thinking });
 const mcPass = pass.filter((i) => i.kind === "mc");
@@ -50,5 +52,5 @@ const summary = {
   costs, totalUsd: Number(Object.values(costs).reduce((a, c) => a + c.total, 0).toFixed(4)),
   lookAlikeClustersContainingBatch: withPilot, lookAlikeComparedAgainst: `${stock.length} existing auto_passed MC (all subjects incl. the S1 pilot) + ${pilotIn.length} S2-a items`,
 };
-writeFileSync(path.join(out, "stats-s2a-summary.json"), JSON.stringify(summary, null, 1));
+writeFileSync(path.join(out, `${BATCH}-summary.json`), JSON.stringify(summary, null, 1));
 console.log(JSON.stringify({ ...summary, lookAlikeClustersContainingBatch: withPilot.length, rejectionReasons: summary.rejectionReasons.length }, null, 1));

@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-13T04:47:32.066Z",
- "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1226행)",
+ "generatedAt": "2026-10-13T05:21:40.937Z",
+ "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1246행)",
  "all": {
-  "total": 1226,
-  "pass": 724,
+  "total": 1246,
+  "pass": 732,
   "fail": 1,
-  "notApplicable": 501
+  "notApplicable": 513
  },
  "liveStates": {
-  "total": 736,
-  "pass": 370,
+  "total": 752,
+  "pass": 375,
   "fail": 0,
-  "notApplicable": 366
+  "notApplicable": 377
  },
  "byType": [
   {
@@ -114,15 +114,15 @@
   },
   {
    "type": "ap_stat_chart:scatter",
-   "total": 2,
-   "pass": 2,
+   "total": 4,
+   "pass": 4,
    "fail": 0,
    "notApplicable": 0
   },
   {
    "type": "ap_stat_chart:table",
-   "total": 2,
-   "pass": 2,
+   "total": 4,
+   "pass": 4,
    "fail": 0,
    "notApplicable": 0
   },
@@ -135,15 +135,15 @@
   },
   {
    "type": "ap_stat_chart:two_way",
-   "total": 2,
-   "pass": 2,
+   "total": 4,
+   "pass": 4,
    "fail": 0,
    "notApplicable": 0
   },
   {
    "type": "ap_table",
-   "total": 414,
-   "pass": 414,
+   "total": 416,
+   "pass": 416,
    "fail": 0,
    "notApplicable": 0
   },
@@ -170,10 +170,10 @@
   },
   {
    "type": "none",
-   "total": 395,
+   "total": 407,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 395
+   "notApplicable": 407
   },
   {
    "type": "none(diagram_text_only)",
@@ -216,15 +216,15 @@
    "notApplicable": 108
   },
   "ap_statistics": {
-   "total": 39,
-   "pass": 23,
+   "total": 59,
+   "pass": 31,
    "fail": 0,
-   "notApplicable": 16
+   "notApplicable": 28
   }
  },
  "figureNeed": {
-  "required": 671,
-  "text_only": 501,
+  "required": 679,
+  "text_only": 513,
   "supporting": 54
  },
  "errorCodes": {
@@ -239,7 +239,7 @@
   "shade_unparsed": 10,
   "axis_label_long": 4,
   "axis_label_defaulted": 6,
-  "table_no_title": 108,
+  "table_no_title": 110,
   "axis_units_missing": 15,
   "text_data_not_in_stem": 1,
   "axis_range_derived": 28
@@ -17917,6 +17917,298 @@
     }
    ],
    "alt": "Table with columns Statistic, Value (points) and 5 rows."
+  },
+  {
+   "key": "stats-s2b-a:ap_statistics-m01-k0",
+   "contentHash": "d7f2b96863ef570e6bdc5dba9b69b78c27b11bdca3663409a98abf4bb871c096",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s2b-a:ap_statistics-m02-k0",
+   "contentHash": "09cdcfc703ef492464c0a43abc1802f336a768fa74ff3b121bc672eba4ef545b",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s2b-a:ap_statistics-m03-k0",
+   "contentHash": "0a455c880566a48fb56c8b3a4cade043df5cd2ba4780b2948753033e35060de4",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s2b-a:ap_statistics-m04-k0",
+   "contentHash": "7c4f5d577ca6363fb966a66ad434fc45a2a89ff50e76386f06021fce67e07d17",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s2b-a:ap_statistics-m05-k0",
+   "contentHash": "798f9df651c8c7844936366f69b939348c0d85551c0369a2d36fcdf3abf4d223",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s2b-a:ap_statistics-m06-k0",
+   "contentHash": "95fc7f2f48b1c68ad909dd2bf1c829fa338026459325a0e6af2d225d963419ac",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s2b-a:ap_statistics-m07-k0",
+   "contentHash": "b78d77fddca44562e3ec07bcdbb8ee37e6e9284cbecc6ab7a05681fa42616980",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s2b-a:ap_statistics-m08-k0",
+   "contentHash": "693c7f71e0eeb23c7d385a4d3ed057f68f03e7133171da39f07a4c4763341bf1",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s2b-a:ap_statistics-m09-k0",
+   "contentHash": "87c1f82bf43f7f876133ada23e3026ebb6c74a7b24f2e4df0514de5b150dc8b0",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s2b-a:ap_statistics-m10-k0",
+   "contentHash": "55bb61cf5b5d2804634b42bad891829d91125393e485c43aa2866ce53505ab7d",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s2b-a:ap_statistics-m11-k0",
+   "contentHash": "39b506ce0d8a43366a6c05237c276913ae5c91bef01ca0bb0448516905e7ee99",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s2b-a:ap_statistics-m12-k0",
+   "contentHash": "cea81aa522b8b53e6fd54d19072d205c1d5613c785789efcc067ab64743f6f45",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "stats-s2b-b:ap_statistics-m01-k0",
+   "contentHash": "893ea5b27b9aca1b7d7e053227e8c78f00a3ba8845fdde9f28d9d181931aa214",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:table",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Probability distribution of X. Table with columns x, P(X = x)."
+  },
+  {
+   "key": "stats-s2b-b:ap_statistics-m01-k1",
+   "contentHash": "0482d8ca8451c23f2d1ba1af02550e93121871dcab527555b606b7dde18ef844",
+   "subject": "ap_statistics",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:table",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Probability distribution of X. Table with columns x, P(X = x)."
+  },
+  {
+   "key": "stats-s2b-c:ap_statistics-f01-k0",
+   "contentHash": "7e1d959f35349572eb0f5ab3e7feb8c4de130bcf15bcb34bae67f26e26bd5d52",
+   "subject": "ap_statistics",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Statistic, Value (hours) and 5 rows."
+  },
+  {
+   "key": "stats-s2b-c:ap_statistics-f01-k1",
+   "contentHash": "51266676d849c1a237507066dcd5d1bafea858b8f17e32ce4dc721b53d6d4261",
+   "subject": "ap_statistics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 5개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Statistic, Value (points) and 5 rows."
+  },
+  {
+   "key": "stats-s2b-c:ap_statistics-f02-k0",
+   "contentHash": "76cc95aff951531c37da7cb961be988c25bb6856d8220aae07c19cff1152c4cf",
+   "subject": "ap_statistics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:scatter",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Exam score versus hours of study. Scatterplot of 18 points. Horizontal axis: Hours of study. Vertical axis: Exam score. Line: y = 4.81x + 46.47."
+  },
+  {
+   "key": "stats-s2b-c:ap_statistics-f02-k1",
+   "contentHash": "324a06e8a0046587174778d6c85875a8bed8b373926b2419e4e2d5381b0aeab4",
+   "subject": "ap_statistics",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:scatter",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Price (thousands of dollars) versus age (years). Scatterplot of 14 points. Horizontal axis: Age (years). Vertical axis: Price (thousands of dollars). Line: y = -5.21x + 42."
+  },
+  {
+   "key": "stats-s2b-c:ap_statistics-f03-k0",
+   "contentHash": "f21f50c560b69174bf26dc4d2771d9eb25f673b23ce60c91c4952953ed6cbdd9",
+   "subject": "ap_statistics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:two_way",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Survey results. Two-way table with row variable Group. Freshmen: Plays a sport 76, Does not play a sport 105; Seniors: Plays a sport 50, Does not play a sport 47."
+  },
+  {
+   "key": "stats-s2b-c:ap_statistics-f03-k1",
+   "contentHash": "5d4e241d8d19bb92a418e2f4b36f34363f96049bb3eae0347e347b4cb58b5582",
+   "subject": "ap_statistics",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:two_way",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Survey results. Two-way table with row variable Group. Under 40: Commutes by bus 36, Does not commute by bus 41; 40 or older: Commutes by bus 66, Does not commute by bus 91."
   },
   {
    "key": "supp-b1-bc-final:ap_calculus_bc-m01-k0",

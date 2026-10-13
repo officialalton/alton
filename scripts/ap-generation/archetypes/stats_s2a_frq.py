@@ -28,9 +28,9 @@ def _ev(part, quantity, value, tol):
 
 # ======================= Q1. 복합 초점: 조사 질문·자료 요약·실험 설계 (1.10 / 1.A) =======================
 Q1_CTX = [
-    dict(who="students at a large high school", expl="whether a student exercises before school", yes="exercise before school", no="not exercise before school", resp="number of hours of sleep the previous night", unit="hours", pop="all students at the school",
-         follow="the amount of time students spend on homework each night", follow_q="What is the typical amount of time that students at the school spend on homework each night?"),
-    dict(who="adult members of a community center", expl="whether a member takes a weekly yoga class", yes="take a yoga class", no="not take a yoga class", resp="self-rated stress score", unit="points", pop="all adult members of the center",
+    dict(who="students at a large high school", expl="whether a student exercises before school", yes="exercise before school", no="do not exercise before school", resp="number of minutes spent on homework the previous night", unit="minutes", pop="all students at the school",
+         follow="the number of hours of sleep that students get on a school night", follow_q="What is the typical number of hours of sleep that students at the school get on a school night?"),
+    dict(who="adult members of a community center", expl="whether a member takes a weekly yoga class", yes="take a yoga class", no="do not take a yoga class", resp="self-rated stress score", unit="points", pop="all adult members of the center",
          follow="the number of hours per week that members use the center", follow_q="What is the typical number of hours per week that adult members of the center use the center?"),
 ]
 
@@ -48,14 +48,14 @@ def stfrq_q1_design(rng):
     f_hi = Fr(3, 2) * (q3 - q1) + q3
     assert float(f_hi) == fence and (val > f_hi) == (val > fence)
     outlier = val > fence
-    stim = {"kind": "table", "description": f"Five-number summary of the {c['resp']} for a sample of {c['who']}.", "data": {"columns": ["Statistic", f"Value ({c['unit']})"], "rows": [["Minimum", str(lo)], ["First quartile", str(q1)], ["Median", str(med)], ["Third quartile", str(q3)], ["Maximum", str(hi)]], "notes": f"Summary of the {c['resp']} for a sample of {c['who']}."}}
+    stim = {"kind": "table", "description": f"Five-number summary of the {c['resp']} for the sample of {c['who']} in the study.", "data": {"columns": ["Statistic", f"Value ({c['unit']})"], "rows": [["Minimum", str(lo)], ["First quartile", str(q1)], ["Median", str(med)], ["Third quartile", str(q3)], ["Maximum", str(hi)]], "notes": f"Summary of the {c['resp']} for a sample of {c['who']}."}}
     nvol = 2 * rng.choice([20, 30, 40])
     parts = [
         part("A", f"A researcher plans a study of {c['who']}. For each person the researcher records {c['expl']} and the {c['resp']}. Identify the explanatory variable and the response variable in this study.", 2, "explain", ["2.A"],
              f"Explanatory variable: {c['expl']}. Response variable: the {c['resp']}.",
              [R("A1", f"Identifies the explanatory variable as {c['expl']}", [c["expl"]], err=["names the response as explanatory"]),
               R("A2", f"Identifies the response variable as the {c['resp']}", [c["resp"]], err=["names the group as the response"])]),
-        part("B", f"The table shown gives the five-number summary of the {c['resp']} for the sample. (i) Calculate the interquartile range. (ii) Is a value of ${val}$ {c['unit']} an outlier according to the $1.5\\times\\mathrm{{IQR}}$ rule? Justify your answer with a calculation.", 2, "calculate", ["3.B"],
+        part("B", f"The table shown gives the five-number summary of the {c['resp']} for the sample of {c['who']} in the study. (i) Calculate the interquartile range. (ii) Is a value of ${val}$ {c['unit']} an outlier according to the $1.5\\times\\mathrm{{IQR}}$ rule? Justify your answer with a calculation.", 2, "calculate", ["3.B"],
              f"(i) IQR = {q3} - {q1} = {iqr}. (ii) The upper boundary is {q3} + 1.5({iqr}) = {fence:g}; since {val} is {'greater' if outlier else 'not greater'} than {fence:g}, {val} {'is' if outlier else 'is not'} an outlier.",
              [R("B1", f"Calculates the interquartile range (answer {iqr})", [str(iqr)], nums=True, err=["uses the range instead of the IQR"]),
               R("B2", f"Compares {val} with the boundary Q3 + 1.5 IQR = {fence:g} and states that it {'is' if outlier else 'is not'} an outlier", [f"{fence:g}", "outlier" if outlier else "not an outlier"], requires="B1", nums=True, err=["adds IQR rather than 1.5 IQR", "uses the lower boundary"])]),
@@ -63,7 +63,7 @@ def stfrq_q1_design(rng):
              "(i) Number the volunteers, use a random number generator (or draw names from a hat) to choose half of them for the treatment group; the rest form the other group. (ii) Random assignment tends to balance other variables across the groups, so a difference in the response is attributable to the treatment.",
              [R("C1", "Describes a chance method (random numbers, names from a hat) that puts half of the volunteers in each group", ["random numbers or drawing names", "half in each group"], alt=["shuffle names and take the first half"], err=["lets volunteers choose", "assigns by order of arrival"]),
               R("C2", "Explains that random assignment balances other (lurking) variables between the groups so cause and effect can be concluded", ["balances other variables across groups", "supports a cause-and-effect conclusion"], err=["says random assignment makes the sample representative of the population"])]),
-        part("D", f"Suppose that instead the researcher simply compares {c['who']} who already chose to {c['yes']} with those who chose to {c['no']}. Can the researcher conclude that {c['expl']} causes a change in the {c['resp']}? Justify your answer.", 1, "explain", ["4.B"],
+        part("D", f"Suppose that instead the researcher simply compares the {c['who']} in the study who already {c['yes']} with those who {c['no']}. Can the researcher conclude that {c['expl']} causes a change in the {c['resp']}? Justify your answer.", 1, "explain", ["4.B"],
              "No. This is an observational study; the groups chose themselves, so other variables (confounders) may explain the difference and a cause-and-effect conclusion is not justified.",
              [R("D1", "States that a cause-and-effect conclusion is not justified because the individuals chose their own groups (observational study, confounding possible)", ["no cause-and-effect conclusion", "observational study or confounding"], err=["claims the difference proves cause because the result is significant"])]),
         part("E", f"The researcher also wants to study {c['follow']} among {c['pop']}. State a valid investigative question about this topic that requires a statistical investigation. Your question should name the population of interest, name the variable that would be measured, and be answerable by collecting and analyzing data that vary from individual to individual.", 3, "explain", ["1.A"],
@@ -111,6 +111,8 @@ def stfrq_q2_regression(rng):
         res = y - (a + b * x)
         xcn = (x - x.mean()) / x.std(); q = np.polyfit(xcn, res, 2); pred = np.polyval(q, xcn)
         rq = 1 - ((res - pred) ** 2).sum() / max(((res - res.mean()) ** 2).sum(), 1e-9)
+        if y.min() <= 2 or a + b * (c["xr"][1] + 2) <= 1:  # 가격·점수는 양수여야 하고 외삽 예측값도 비현실적 음수가 아니어야 한다(S2-b: 중고차 문맥의 음수 가격으로 반려)
+            continue
         if shape == "curved" and rq > 0.55 and 0.4 < r2 < 0.93:
             break
         if shape == "linear" and rq < 0.2 and 0.55 < r2 < 0.95:
@@ -118,7 +120,11 @@ def stfrq_q2_regression(rng):
     a_, b_ = round(a, 2), round(b, 2); r2_ = round(r2, 2)
     i = rng.randrange(3, n - 3); x0 = float(x[i]); y0 = float(y[i])
     yh = a_ + b_ * x0; resid = y0 - yh
-    xo = c["xr"][1] + rng.randint(4, 8); yo = a_ + b_ * xo
+    xo = c["xr"][1] + rng.randint(4, 8)
+    while a_ + b_ * xo <= 1 and xo > c["xr"][1] + 1:
+        xo -= 1
+    yo = a_ + b_ * xo
+    pat_ends = "above the line at both ends and below it in the middle" if q[0] > 0 else "below the line at both ends and above it in the middle"  # 이차항 계수의 부호(독립 경로: 잔차의 이차 적합)로 방향을 정한다
     stim = {"kind": "stat_chart", "description": f"Scatterplot of {c['y']} versus {c['x']} for {n} observations, with the least-squares regression line.", "data": {"chart": "scatter", "title": f"{c['yn']} versus {c['xn'].lower()}", "data": {"xTitle": c["xn"], "yTitle": c["yn"], "points": [[float(p), float(q_)] for p, q_ in zip(x, y)], "fitLine": {"slope": float(b_), "intercept": float(a_)}}}}
     lin = shape == "linear"
     parts = [
@@ -131,8 +137,8 @@ def stfrq_q2_regression(rng):
              [R("B1", f"Calculates the predicted value (answer {yh:.2f})", [f"{yh:.2f}"], nums=True, err=["uses the slope as the intercept"]),
               R("B2", f"Calculates the residual as actual minus predicted (answer {resid:.2f})", [f"{resid:.2f}"], requires="B1", nums=True, err=["subtracts in the wrong order"])]),
         part("C", "Does the scatterplot suggest that a linear model is appropriate for these data? Justify your answer by describing the pattern in the scatterplot relative to the line.", 3, "explain", ["4.D"],
-             ("Yes. The points are scattered fairly evenly above and below the line with no curve, so a linear model is appropriate." if lin else "No. The points show a curved pattern: they lie above the line at both ends and below it in the middle, so a linear model is not appropriate."),
-             [R("C1", "Describes the pattern of the points about the line (" + ("no curve, points scattered evenly above and below" if lin else "a curved pattern: above the line at the ends and below in the middle") + ")", ["describes the pattern about the line"], err=["describes only the direction of the association"]),
+             ("Yes. The points are scattered fairly evenly above and below the line with no curve, so a linear model is appropriate." if lin else f"No. The points show a curved pattern: they lie {pat_ends}, so a linear model is not appropriate."),
+             [R("C1", "Describes the pattern of the points about the line (" + ("no curve, points scattered evenly above and below" if lin else f"a curved pattern: {pat_ends}") + ")", ["describes the pattern about the line"], err=["describes only the direction of the association"]),
               R("C2", "States that a linear model " + ("is" if lin else "is not") + " appropriate", ["appropriate" if lin else "not appropriate"], requires="C1"),
               R("C3", "Links the conclusion to the pattern (" + ("no curvature in the scatterplot" if lin else "curvature means the line does not describe the relationship") + ")", ["conclusion is tied to the observed pattern"], requires="C2", err=["justifies with r squared alone"])]),
         part("D", f"Interpret the value $r^2 = {r2_}$ in the context of the data.", 2, "explain", ["4.D"],
@@ -261,7 +267,7 @@ def stfrq_q4_integrated(rng):
              f"$X$ is binomial with $n={k}$ and $p={p_b}$. $P(X \\ge 2) = 1 - P(0) - P(1) \\approx {ge2:.3f}$.",
              [R("C1", f"Identifies a binomial distribution with n = {k} and p = {p_b}", ["binomial", f"n = {k}", f"p = {p_b}"], err=["gives p as the conditional probability"]),
               R("C2", f"Calculates the probability of at least 2 (answer {ge2:.3f})", [f"{ge2:.3f}"], requires="C1", nums=True, err=["computes P(X > 2)", "computes P(X = 2)"])]),
-        part("D", f"Treat the survey data for the {c['gpl'][0]} as a random sample from all {c['gpl'][0]}. Calculate a $95\\%$ confidence interval for the proportion of all {c['gpl'][0]} who {base}. Round the endpoints to three decimal places.", 2, "calculate", ["3.E"],
+        part("D", f"Treat the survey data for the {c['gpl'][0]} as a random sample from all {c['gpl'][0]}, and assume that the conditions for the interval are met. Calculate a $95\\%$ confidence interval for the proportion of all {c['gpl'][0]} who {base}. Round the endpoints to three decimal places.", 2, "calculate", ["3.E"],
              f"$\\hat p = {g1[0]}/{r1} = {ph:.3f}$; interval: ${ph:.3f} \\pm 1.96\\sqrt{{{ph:.3f}(1-{ph:.3f})/{r1}}}$ = $({L:.3f}, {H:.3f})$.",
              [R("D1", "Identifies a one-sample z-interval for a proportion with the sample proportion in the center and the standard error with the sample proportion", ["one-sample z-interval for a proportion"], err=["uses a t-interval", "uses p0 in the standard error"]),
               R("D2", f"Calculates the interval (answer ({L:.3f}, {H:.3f}))", [f"{L:.3f}", f"{H:.3f}"], requires="D1", nums=True, err=["uses the wrong critical value"])]),

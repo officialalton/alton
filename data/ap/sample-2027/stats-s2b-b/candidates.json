@@ -1,0 +1,887 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.9",
+  "unitCode": "2",
+  "skillPrimary": "3.D",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_binomial_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-procedure item: compute the expected value from a given discrete probability table (or recognize binomial np = 1.5). There is no added condition check or interpretation step. The short table of four-decimal values gives a small sum of 5 products. The distractors are plausible misreadings: 0.30 is p, and 2.50 is n/2.",
+  "payload": {
+   "archetype": "st_set_binomial",
+   "topic": "2.9",
+   "skill": "3.D",
+   "calculator": "allowed",
+   "set_intro": "A clinic phones a random sample of $5$ patients from a large list on which $30\\%$ of the patients missed their last appointment. Let $X$ be the number of patients in the sample who missed an appointment. The probability distribution of $X$ is shown in the table.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Probability distribution of X, the number of patients in the sample who missed an appointment",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "x",
+       "P(X = x)"
+      ],
+      "rows": [
+       [
+        "0",
+        "0.1681"
+       ],
+       [
+        "1",
+        "0.3601"
+       ],
+       [
+        "2",
+        "0.3087"
+       ],
+       [
+        "3",
+        "0.1323"
+       ],
+       [
+        "4",
+        "0.0283"
+       ],
+       [
+        "5",
+        "0.0024"
+       ]
+      ]
+     },
+     "title": "Probability distribution of X"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_binomial_q1",
+     "topic": "2.9",
+     "skill": "3.D",
+     "stem": "What is the mean (expected value) of $X$? Round to two decimal places.",
+     "options": [
+      {
+       "text": "$0.30$",
+       "why": "Reports the probability of one outcome instead of the mean of $X$.",
+       "value": "0.30000000"
+      },
+      {
+       "text": "$1.50$",
+       "why": "The mean of a binomial random variable is $np = 5(0.3) = 1.5$; weighting each value of $X$ by its probability in the table gives the same value.",
+       "value": "1.5000000"
+      },
+      {
+       "text": "$3.50$",
+       "why": "Uses $n(1-p)$, the expected number of patients who did not miss an appointment, instead of $np$.",
+       "value": "3.5000000"
+      },
+      {
+       "text": "$2.50$",
+       "why": "Uses $n/2$, as if each outcome had probability $0.5$.",
+       "value": "2.5000000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $1.50$. The mean of a binomial random variable is $np = 5(0.3) = 1.5$; weighting each value of $X$ by its probability in the table gives the same value.\n$0.30$ is incorrect: Reports the probability of one outcome instead of the mean of $X$.\n$3.50$ is incorrect: Uses $n(1-p)$, the expected number of patients who did not miss an appointment, instead of $np$.\n$2.50$ is incorrect: Uses $n/2$, as if each outcome had probability $0.5$.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_binomial_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the mean of a random variable from its probability distribution",
+      "topic": "2.9",
+      "skill": "3.D",
+      "student_thinking": [
+       "Recognize that the mean of X weights each value by its probability, or equals np for a binomial random variable",
+       "Distinguish the mean from the other quantities that can be read from the table or the scenario"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the mean of a binomial random variable is n times p",
+        "evidence": "the table gives the distribution and the stem gives n and the percent of the outcome of interest"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "probability distribution"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "expected_failures",
+        "description": "uses n(1-p) instead of np"
+       },
+       {
+        "id": "probability_not_mean",
+        "description": "reports p instead of the mean"
+       },
+       {
+        "id": "midpoint_not_mean",
+        "description": "reports n divided by two as the mean"
+       }
+      ],
+      "verification": {
+       "independent_path": "the mean is recomputed as the sum of x times P(X = x) over the table and compared with n times p",
+       "method": "table expectation vs np"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_binomial_q2",
+     "topic": "2.8",
+     "skill": "3.C",
+     "stem": "What is the probability that at least $2$ of the patients in the sample missed an appointment? Use the table and round to three decimal places.",
+     "options": [
+      {
+       "text": "$0.309$",
+       "why": "Finds $P(X = 2)$ only, instead of the probability of $2$ or more.",
+       "value": "0.30900000"
+      },
+      {
+       "text": "$0.640$",
+       "why": "Subtracts only $P(X=1)$ from $1$, forgetting to subtract $P(X=0)$ as well.",
+       "value": "0.64000000"
+      },
+      {
+       "text": "$0.163$",
+       "why": "Finds $P(X > 2)$, leaving out the probability that $X = 2$.",
+       "value": "0.16300000"
+      },
+      {
+       "text": "$0.472$",
+       "why": "$P(X \\ge 2) = 1 - P(X=0) - P(X=1) = 1 - 0.1681 - 0.3601 \\approx 0.472$, which equals the sum of the table probabilities from $x=2$ on.",
+       "value": "0.47200000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $0.472$. $P(X \\ge 2) = 1 - P(X=0) - P(X=1) = 1 - 0.1681 - 0.3601 \\approx 0.472$, which equals the sum of the table probabilities from $x=2$ on.\n$0.309$ is incorrect: Finds $P(X = 2)$ only, instead of the probability of $2$ or more.\n$0.640$ is incorrect: Subtracts only $P(X=1)$ from $1$, forgetting to subtract $P(X=0)$ as well.\n$0.163$ is incorrect: Finds $P(X > 2)$, leaving out the probability that $X = 2$.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_binomial_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find an at-least probability from a probability distribution table",
+      "topic": "2.8",
+      "skill": "3.C",
+      "student_thinking": [
+       "Translate at least 2 into the values 2 and above of X",
+       "Add those probabilities or subtract the probabilities of the values below 2 from 1"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "P(X at least 2) equals one minus the probabilities of 0 and 1",
+        "evidence": "the table lists the probability of every value of X"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "probability distribution"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "excludes_boundary",
+        "description": "uses more than 2 instead of at least 2"
+       },
+       {
+        "id": "single_value",
+        "description": "uses exactly 2 instead of at least 2"
+       },
+       {
+        "id": "partial_complement",
+        "description": "subtracts only one value from 1"
+       }
+      ],
+      "verification": {
+       "independent_path": "the table probabilities are summed from x = 2 up and compared with the complement, using binomial probabilities computed from the combinations formula and scipy",
+       "method": "direct sum vs complement"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_binomial_q3",
+     "topic": "2.8",
+     "skill": "4.D",
+     "stem": "Which of the following is the correct interpretation of $P(X=0)$ in this context?",
+     "options": [
+      {
+       "text": "The chance that any one of the patients in a sample missed an appointment is $17\\%$",
+       "why": "Confuses $P(X=0)$ with the probability for one individual item; the probability for one patient is given in the scenario.",
+       "value": null
+      },
+      {
+       "text": "In about $17\\%$ of all such random samples of $5$ patients, none of the patients would have missed an appointment",
+       "why": "$P(X=0) \\approx 0.1681$ is the long-run proportion of random samples of $5$ patients in which none of the patients missed an appointment.",
+       "value": null
+      },
+      {
+       "text": "In about $17\\%$ of all such samples, all of the patients would have missed an appointment",
+       "why": "Reverses the event: $X=0$ means none are of the stated kind, not all.",
+       "value": null
+      },
+      {
+       "text": "Exactly $17\\%$ of the patients in every sample of $5$ missed an appointment",
+       "why": "Reads a probability as a guaranteed percentage in every sample.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is In about $17\\%$ of all such random samples of $5$ patients, none of the patients would have missed an appointment. $P(X=0) \\approx 0.1681$ is the long-run proportion of random samples of $5$ patients in which none of the patients missed an appointment.\nThe chance that any one of the patients in a sample missed an appointment is $17\\%$ is incorrect: Confuses $P(X=0)$ with the probability for one individual item; the probability for one patient is given in the scenario.\nIn about $17\\%$ of all such samples, all of the patients would have missed an appointment is incorrect: Reverses the event: $X=0$ means none are of the stated kind, not all.\nExactly $17\\%$ of the patients in every sample of $5$ missed an appointment is incorrect: Reads a probability as a guaranteed percentage in every sample.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_binomial_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Interpret a probability from a distribution in context",
+      "topic": "2.8",
+      "skill": "4.D",
+      "student_thinking": [
+       "Read P(X = 0) from the table and recall what the event X = 0 means in words",
+       "Interpret a probability as a long-run proportion of repeated random samples"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "a probability from a distribution describes the long-run proportion of samples with that outcome",
+        "evidence": "the table gives P(X = 0) and the scenario defines X"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "probability distribution"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "probability_for_one_item",
+        "description": "confuses with the probability for one item"
+       },
+       {
+        "id": "guaranteed_percentage",
+        "description": "reads it as a guaranteed percentage"
+       },
+       {
+        "id": "reversed_event",
+        "description": "reverses the event"
+       }
+      ],
+      "verification": {
+       "independent_path": "the sentences are generated from the definition of X and the table value; the event wording is checked against X = 0",
+       "method": "definition check"
+      },
+      "judgment_demand": [
+       "interpretation"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 250,
+   "facts": [
+    "n=5",
+    "p=0.3",
+    "X~Bin"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_binomial_q1",
+   "facts": [
+    "n=5",
+    "p=0.3",
+    "X~Bin"
+   ],
+   "seed": 9300
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Mean of a discrete random variable from a distribution table; fits 2.9 and skill 3.D. Binomial in scope."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "1.50 is unique; the table sum is 1.4996, which rounds to 1.50 and equals np."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete, with column labels, title, and probabilities consistent with Binomial(5, 0.3). Rounding is stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions (p, n(1-p), n/2), and the explanation covers each wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 80 seconds, short parallel numeric options, calculator allowed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Clean, correct MC on the mean of a discrete random variable, with a complete table and distinct distractors. Passes."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 60-85 seconds, requires little arithmetic, and has four parallel numeric options.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct and clean. The key 0.472 is verified, the distractors are distinct and realistic, and the stimulus is complete."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "About 85 seconds, with minimal reading and no arithmetic burden.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean interpretation question with a unique key, distinct distractors, and a complete stimulus. It passes all five criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-procedure item: compute the expected value from a given discrete probability table (or recognize binomial np = 1.5). There is no added condition check or interpretation step. The short table of four-decimal values gives a small sum of 5 products. The distractors are plausible misreadings: 0.30 is p, and 2.50 is n/2.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: read a discrete probability table and sum the probabilities for X ≥ 2 (or use the complement 1 − 0.5282). Short sums, no representation change, and distractors reflect common slips (P(X=2), P(X≥3), 1 − P(X=1)). Fits direct introductory practice rather than a full mock exam.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step interpretation of one probability from a small table as a long-run proportion of samples. The correct option is the only one consistent with the definition. The distractors are wrong in plain ways: per-patient probability, all instead of none, and exact percentage in every sample. No computation is needed, and the reading load is light, the table and the context being brief.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.9",
+  "unitCode": "2",
+  "skillPrimary": "3.D",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_binomial_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: compute the mean of a discrete random variable from a table (a weighted sum) or recognize it as binomial and use np = 1.80. Short stem, one representation, and a simple calculation. Distractors reflect common errors such as using n/2 or n(1-p).",
+  "payload": {
+   "archetype": "st_set_binomial",
+   "topic": "2.9",
+   "skill": "3.D",
+   "calculator": "allowed",
+   "set_intro": "A clinic phones a random sample of $6$ patients from a large list on which $30\\%$ of the patients missed their last appointment. Let $X$ be the number of patients in the sample who missed an appointment. The probability distribution of $X$ is shown in the table.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Probability distribution of X, the number of patients in the sample who missed an appointment",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "x",
+       "P(X = x)"
+      ],
+      "rows": [
+       [
+        "0",
+        "0.1176"
+       ],
+       [
+        "1",
+        "0.3025"
+       ],
+       [
+        "2",
+        "0.3241"
+       ],
+       [
+        "3",
+        "0.1852"
+       ],
+       [
+        "4",
+        "0.0595"
+       ],
+       [
+        "5",
+        "0.0102"
+       ],
+       [
+        "6",
+        "0.0007"
+       ]
+      ]
+     },
+     "title": "Probability distribution of X"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_binomial_q1",
+     "topic": "2.9",
+     "skill": "3.D",
+     "stem": "What is the mean (expected value) of $X$? Round to two decimal places.",
+     "options": [
+      {
+       "text": "$2.00$",
+       "why": "Reports the most likely value of $X$ (the mode) rather than the mean.",
+       "value": "2.0000000"
+      },
+      {
+       "text": "$3.00$",
+       "why": "Uses $n/2$, as if each outcome had probability $0.5$.",
+       "value": "3.0000000"
+      },
+      {
+       "text": "$1.80$",
+       "why": "The mean of a binomial random variable is $np = 6(0.3) = 1.8$; weighting each value of $X$ by its probability in the table gives the same value.",
+       "value": "1.8000000"
+      },
+      {
+       "text": "$4.20$",
+       "why": "Uses $n(1-p)$, the expected number of patients who did not miss an appointment, instead of $np$.",
+       "value": "4.2000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $1.80$. The mean of a binomial random variable is $np = 6(0.3) = 1.8$; weighting each value of $X$ by its probability in the table gives the same value.\n$2.00$ is incorrect: Reports the most likely value of $X$ (the mode) rather than the mean.\n$3.00$ is incorrect: Uses $n/2$, as if each outcome had probability $0.5$.\n$4.20$ is incorrect: Uses $n(1-p)$, the expected number of patients who did not miss an appointment, instead of $np$.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_binomial_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the mean of a random variable from its probability distribution",
+      "topic": "2.9",
+      "skill": "3.D",
+      "student_thinking": [
+       "Recognize that the mean of X weights each value by its probability, or equals np for a binomial random variable",
+       "Distinguish the mean from the other quantities that can be read from the table or the scenario"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the mean of a binomial random variable is n times p",
+        "evidence": "the table gives the distribution and the stem gives n and the percent of the outcome of interest"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "probability distribution"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "expected_failures",
+        "description": "uses n(1-p) instead of np"
+       },
+       {
+        "id": "probability_not_mean",
+        "description": "reports p instead of the mean"
+       },
+       {
+        "id": "midpoint_not_mean",
+        "description": "reports n divided by two as the mean"
+       }
+      ],
+      "verification": {
+       "independent_path": "the mean is recomputed as the sum of x times P(X = x) over the table and compared with n times p",
+       "method": "table expectation vs np"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_binomial_q2",
+     "topic": "2.8",
+     "skill": "3.C",
+     "stem": "What is the probability that at least $2$ of the patients in the sample missed an appointment? Use the table and round to three decimal places.",
+     "options": [
+      {
+       "text": "$0.580$",
+       "why": "$P(X \\ge 2) = 1 - P(X=0) - P(X=1) = 1 - 0.1176 - 0.3025 \\approx 0.580$, which equals the sum of the table probabilities from $x=2$ on.",
+       "value": "0.58000000"
+      },
+      {
+       "text": "$0.256$",
+       "why": "Finds $P(X > 2)$, leaving out the probability that $X = 2$.",
+       "value": "0.25600000"
+      },
+      {
+       "text": "$0.324$",
+       "why": "Finds $P(X = 2)$ only, instead of the probability of $2$ or more.",
+       "value": "0.32400000"
+      },
+      {
+       "text": "$0.697$",
+       "why": "Subtracts only $P(X=1)$ from $1$, forgetting to subtract $P(X=0)$ as well.",
+       "value": "0.69700000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $0.580$. $P(X \\ge 2) = 1 - P(X=0) - P(X=1) = 1 - 0.1176 - 0.3025 \\approx 0.580$, which equals the sum of the table probabilities from $x=2$ on.\n$0.256$ is incorrect: Finds $P(X > 2)$, leaving out the probability that $X = 2$.\n$0.324$ is incorrect: Finds $P(X = 2)$ only, instead of the probability of $2$ or more.\n$0.697$ is incorrect: Subtracts only $P(X=1)$ from $1$, forgetting to subtract $P(X=0)$ as well.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_binomial_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find an at-least probability from a probability distribution table",
+      "topic": "2.8",
+      "skill": "3.C",
+      "student_thinking": [
+       "Translate at least 2 into the values 2 and above of X",
+       "Add those probabilities or subtract the probabilities of the values below 2 from 1"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "P(X at least 2) equals one minus the probabilities of 0 and 1",
+        "evidence": "the table lists the probability of every value of X"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "probability distribution"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "excludes_boundary",
+        "description": "uses more than 2 instead of at least 2"
+       },
+       {
+        "id": "single_value",
+        "description": "uses exactly 2 instead of at least 2"
+       },
+       {
+        "id": "partial_complement",
+        "description": "subtracts only one value from 1"
+       }
+      ],
+      "verification": {
+       "independent_path": "the table probabilities are summed from x = 2 up and compared with the complement, using binomial probabilities computed from the combinations formula and scipy",
+       "method": "direct sum vs complement"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_binomial_q3",
+     "topic": "2.8",
+     "skill": "4.D",
+     "stem": "Which of the following is the correct interpretation of $P(X=0)$ in this context?",
+     "options": [
+      {
+       "text": "In about $12\\%$ of all such samples, all of the patients would have missed an appointment",
+       "why": "Reverses the event: $X=0$ means none are of the stated kind, not all.",
+       "value": null
+      },
+      {
+       "text": "The chance that any one of the patients in a sample missed an appointment is $12\\%$",
+       "why": "Confuses $P(X=0)$ with the probability for one individual item; the probability for one patient is given in the scenario.",
+       "value": null
+      },
+      {
+       "text": "Exactly $12\\%$ of the patients in every sample of $6$ missed an appointment",
+       "why": "Reads a probability as a guaranteed percentage in every sample.",
+       "value": null
+      },
+      {
+       "text": "In about $12\\%$ of all such random samples of $6$ patients, none of the patients would have missed an appointment",
+       "why": "$P(X=0) \\approx 0.1176$ is the long-run proportion of random samples of $6$ patients in which none of the patients missed an appointment.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is In about $12\\%$ of all such random samples of $6$ patients, none of the patients would have missed an appointment. $P(X=0) \\approx 0.1176$ is the long-run proportion of random samples of $6$ patients in which none of the patients missed an appointment.\nIn about $12\\%$ of all such samples, all of the patients would have missed an appointment is incorrect: Reverses the event: $X=0$ means none are of the stated kind, not all.\nThe chance that any one of the patients in a sample missed an appointment is $12\\%$ is incorrect: Confuses $P(X=0)$ with the probability for one individual item; the probability for one patient is given in the scenario.\nExactly $12\\%$ of the patients in every sample of $6$ missed an appointment is incorrect: Reads a probability as a guaranteed percentage in every sample.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_binomial_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Interpret a probability from a distribution in context",
+      "topic": "2.8",
+      "skill": "4.D",
+      "student_thinking": [
+       "Read P(X = 0) from the table and recall what the event X = 0 means in words",
+       "Interpret a probability as a long-run proportion of repeated random samples"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "a probability from a distribution describes the long-run proportion of samples with that outcome",
+        "evidence": "the table gives P(X = 0) and the scenario defines X"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "probability distribution"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "probability_for_one_item",
+        "description": "confuses with the probability for one item"
+       },
+       {
+        "id": "guaranteed_percentage",
+        "description": "reads it as a guaranteed percentage"
+       },
+       {
+        "id": "reversed_event",
+        "description": "reverses the event"
+       }
+      ],
+      "verification": {
+       "independent_path": "the sentences are generated from the definition of X and the table value; the event wording is checked against X = 0",
+       "method": "definition check"
+      },
+      "judgment_demand": [
+       "interpretation"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 250,
+   "facts": [
+    "n=6",
+    "p=0.3",
+    "X~Bin"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_binomial_q1",
+   "facts": [
+    "n=6",
+    "p=0.3",
+    "X~Bin"
+   ],
+   "seed": 9301
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Mean of a discrete random variable, binomial context; in scope for Unit 2 and skill 3.D."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "1.80 is unique; table sum is 1.7995, which rounds to 1.80; np = 1.8."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table data complete, with columns, rows and title; the table matches Binomial(6, 0.3). Rounding is stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors 2.00 (mode), 3.00 (n/2) and 4.20 (n(1-p)) are distinct; the explanation covers each wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 80 seconds, calculator allowed, short and clean. The table is redundant given n and p, which is a minor weakness."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean item with a unique key and distinct distractors. The only weakness is that the table is not strictly needed, because the stem gives n and p. Passes."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The task is short, takes about 85 seconds, and needs little calculation. Calculator use is allowed and not required.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key is unique, the table is complete, and the distractors map to distinct misconceptions. The only flaw is that the 0.697 distractor sits at a rounding boundary (0.6975), which is minor."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Interpreting a probability from a discrete distribution in context; fits 2.8 and 4.D."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option D is the only correct interpretation; the others are clearly wrong."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete with title and column labels; X is defined in the stem; probabilities sum to about 1."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct named misconceptions; every wrong option is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 85 seconds, low reading load, no arithmetic."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound interpretation item with a unique key and distinct distractors; passes all criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: compute the mean of a discrete random variable from a table (a weighted sum) or recognize it as binomial and use np = 1.80. Short stem, one representation, and a simple calculation. Distractors reflect common errors such as using n/2 or n(1-p).",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: read a discrete probability table and find P(X >= 2) via complement or summing. One or two reasoning steps, with the 'at least' wording as the only mild trap. Distractors correspond to P(X=2), P(X>=1)-type errors. Minimal reading and arithmetic.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single table lookup of P(X=0) and selection of the correct long-run relative frequency interpretation among plausible misinterpretations (all missed, individual chance, fixed percent per sample). No computation, short reading, one reasoning step; core introductory concept for topic 2.8.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   }
+  ]
+ }
+]

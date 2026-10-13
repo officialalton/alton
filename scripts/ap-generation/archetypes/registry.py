@@ -33,7 +33,7 @@ for _m in _ST:
             STATS_STAGES[_m.__name__.rsplit("_", 1)[0] + "_" + _n[6:].lower()] = list(getattr(_m, _n))  # stats_s1_l.STAGE_L -> stats_s1_l
 STATS_STAGES["stats_s1_all"] = STATS_STAGES.get("stats_s1_l", []) + STATS_STAGES.get("stats_s1_m", []) + STATS_STAGES.get("stats_s1_h", [])  # 위험 L→M→H 순서
 STATS_STAGES["stats_s2a_all"] = STATS_STAGES.get("stats_s2a_singles", []) + STATS_STAGES.get("stats_s2a_sets", [])
-STATS_STAGES["stats_all"] = STATS_STAGES["stats_s1_all"] + STATS_STAGES.get("stats_s2a_singles", []) + STATS_STAGES.get("stats_s2a_sets", [])  # 가이드 JSON(stats-archetypes.json)의 원천 순서
+STATS_STAGES["stats_all"] = list(dict.fromkeys(STATS_STAGES["stats_s1_all"] + STATS_STAGES.get("stats_s2a_singles", []) + STATS_STAGES.get("stats_s2a_sets", []) + STATS_STAGES.get("stats_s2b_singles", [])))  # S2-b 단독 목록에는 S2-a 에서 고친 원형 이름이 겹치므로 중복 제거  # 가이드 JSON(stats-archetypes.json)의 원천 순서
 GRAPH = {n: (getattr(m, n), "0") for m in GRAPH_MODS for n in dir(m) if n.startswith(("g_", "c_")) and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
 MC.update(GRAPH)
 GRAPH_STAGES = {}  # 단계별 목록(graph_s1_ab, graph_s1_bc …): calc_graph_stages.py 가 채운다

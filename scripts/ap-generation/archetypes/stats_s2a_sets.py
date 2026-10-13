@@ -18,8 +18,8 @@ def _set_pack(arch, intro, stim, members, facts, _unused=None):
 
 
 # ======================= 세트 1: 이항 확률분포 표 (단원 2) =======================
-BN_CTX = [dict(sc="an inspector examines a random sample of ${n}$ items from a large shipment in which ${pp}\\%$ of the items are defective", units="items", what="defective items in the sample", pl="are defective", sg="is defective", would="be defective"),
-          dict(sc="a clinic phones a random sample of ${n}$ patients from a large list on which ${pp}\\%$ of the patients missed their last appointment", units="patients", what="patients in the sample who missed an appointment", pl="missed an appointment", sg="missed an appointment", would="have missed an appointment")]
+BN_CTX = [dict(sc="An inspector examines a random sample of ${n}$ items from a large shipment in which ${pp}\\%$ of the items are defective", units="items", what="defective items in the sample", pl="are defective", sg="is defective", would="be defective", neg="items that are not defective"),
+          dict(sc="A clinic phones a random sample of ${n}$ patients from a large list on which ${pp}\\%$ of the patients missed their last appointment", units="patients", what="patients in the sample who missed an appointment", pl="missed an appointment", sg="missed an appointment", would="have missed an appointment", neg="patients who did not miss an appointment")]
 
 
 def st_set_binomial(rng):
@@ -33,7 +33,7 @@ def st_set_binomial(rng):
     tbl = [round(v, 4) for v in pm]
     EX_table = sum(k * v for k, v in enumerate(pm))
     agree(EX_table, n * p, tol=1e-9, name="expected")  # 독립 경로: 표의 합 vs np
-    intro = f"Questions refer to the following information. In a certain process, {sc.format(n=n, pp=int(round(p * 100)))}. Let $X$ be the number of {what}. The probability distribution of $X$ is shown in the table."
+    intro = f"{sc.format(n=n, pp=int(round(p * 100)))}. Let $X$ be the number of {what}. The probability distribution of $X$ is shown in the table."
     stim = stat_stim(f"Probability distribution of X, the number of {what}", "table", title="Probability distribution of X",
                      columns=["x", "P(X = x)"], rows=[[str(k), f"{v:.4f}"] for k, v in enumerate(tbl)])
     # Q1: 기댓값
@@ -46,13 +46,13 @@ def st_set_binomial(rng):
     if len(set(allv)) < 4:
         raise ValueError("expected_options_collide")
     k1 = Opt(T(ex, 2), True, f"The mean of a binomial random variable is $np = {n}({p}) = {clean(ex, 2)}$; weighting each value of $X$ by its probability in the table gives the same value.", round(ex, 2))
-    w1 = {"nq": "Uses $n(1-p)$, the expected number of non-defective outcomes, instead of $np$.", "p": "Reports the probability of one outcome instead of the mean of $X$.", "half": "Uses $n/2$, as if each outcome had probability $0.5$.", "k1": "Reports the most likely value of $X$ (the mode) rather than the mean."}
+    w1 = {"nq": f"Uses $n(1-p)$, the expected number of {cx['neg']}, instead of $np$.", "p": "Reports the probability of one outcome instead of the mean of $X$.", "half": "Uses $n/2$, as if each outcome had probability $0.5$.", "k1": "Reports the most likely value of $X$ (the mode) rather than the mean."}
     ds1 = [Opt(T(r2[k], 2), False, w1[k], r2[k]) for k in ("nq", "p", "half", "k1")]
     m1 = _member("st_set_binomial", 1, "2.9", "3.D", f"What is the mean (expected value) of $X$? Round to two decimal places.", k1, ds1, rng,
                  sbp("st_set_binomial_q1", "2.9", "3.D", "Find the mean of a random variable from its probability distribution",
-                     ["Recognize that the mean of X weights each value by its probability, or equals np for a binomial random variable", "Distinguish the mean from the most likely value and from the expected number of the other outcome"],
-                     [("the mean of a binomial random variable is n times p", "the table gives the distribution and the stem gives n and the percent of defective outcomes")],
-                     [("expected_failures", "uses n(1-p) instead of np"), ("probability_not_mean", "reports p instead of the mean"), ("mode_not_mean", "reports the most likely value as the mean")],
+                     ["Recognize that the mean of X weights each value by its probability, or equals np for a binomial random variable", "Distinguish the mean from the other quantities that can be read from the table or the scenario"],
+                     [("the mean of a binomial random variable is n times p", "the table gives the distribution and the stem gives n and the percent of the outcome of interest")],
+                     [("expected_failures", "uses n(1-p) instead of np"), ("probability_not_mean", "reports p instead of the mean"), ("midpoint_not_mean", "reports n divided by two as the mean")],
                      "the mean is recomputed as the sum of x times P(X = x) over the table and compared with n times p",
                      {"type": "table", "must_include": ["probability distribution"]}, ["procedure_choice", "calculated_value_decision", "representation_reading"], method="table expectation vs np"), 80, [f"n={n}", f"p={p}"])
     # Q2: P(X >= 2)
@@ -64,10 +64,10 @@ def st_set_binomial(rng):
     if len({round(ge2, 3), *r3.values()}) < 4 or min(abs(round(ge2, 3) - v) for v in r3.values()) < 0.01 or min(abs(a - b) for a in r3.values() for b in r3.values() if a != b) < 0.01:
         raise ValueError("ge2_collide")
     k2 = Opt(T(ge2, 3), True, f"$P(X \\ge 2) = 1 - P(X=0) - P(X=1) = 1 - {tbl[0]:.4f} - {tbl[1]:.4f} \\approx {ge2:.3f}$, which equals the sum of the table probabilities from $x=2$ on.", round(ge2, 3))
-    w2 = {"gt": "Finds $P(X > 2)$, leaving out the probability that $X = 2$.", "eq": "Finds $P(X = 2)$ only, instead of the probability of $2$ or more.", "c1": "Subtracts only $P(X=1)$ from $1$, leaving out the probability that $X=0$ from the removed values."}
+    w2 = {"gt": "Finds $P(X > 2)$, leaving out the probability that $X = 2$.", "eq": "Finds $P(X = 2)$ only, instead of the probability of $2$ or more.", "c1": "Subtracts only $P(X=1)$ from $1$, forgetting to subtract $P(X=0)$ as well."}
     ds2 = [Opt(T(r3[k], 3), False, w2[k], r3[k]) for k in ("gt", "eq", "c1")]
-    m2 = _member("st_set_binomial", 2, "2.10", "3.C", f"What is the probability that at least $2$ of the {units} in the sample {cx['pl']}? Use the table and round to three decimal places.", k2, ds2, rng,
-                 sbp("st_set_binomial_q2", "2.10", "3.C", "Find an at-least probability from a probability distribution table",
+    m2 = _member("st_set_binomial", 2, "2.8", "3.C", f"What is the probability that at least $2$ of the {units} in the sample {cx['pl']}? Use the table and round to three decimal places.", k2, ds2, rng,
+                 sbp("st_set_binomial_q2", "2.8", "3.C", "Find an at-least probability from a probability distribution table",
                      ["Translate at least 2 into the values 2 and above of X", "Add those probabilities or subtract the probabilities of the values below 2 from 1"],
                      [("P(X at least 2) equals one minus the probabilities of 0 and 1", "the table lists the probability of every value of X")],
                      [("excludes_boundary", "uses more than 2 instead of at least 2"), ("single_value", "uses exactly 2 instead of at least 2"), ("partial_complement", "subtracts only one value from 1")],
@@ -77,7 +77,7 @@ def st_set_binomial(rng):
     z = pm[0]
     pctz = int(round(z * 100))
     k3 = Opt(f"In about ${pctz}\\%$ of all such random samples of ${n}$ {units}, none of the {units} would {cx['would']}", True, f"$P(X=0) \\approx {z:.4f}$ is the long-run proportion of random samples of ${n}$ {units} in which none of the {units} {cx['would'].replace('be ', 'are ').replace('have ', '')}.", None)
-    ds3 = [Opt(f"There is a ${pctz}\\%$ chance that any one of the {units} in a sample {cx['sg']}", False, f"Confuses $P(X=0)$ with the probability for one individual item; the probability for one {units[:-1]} is given in the scenario.", None),
+    ds3 = [Opt(f"The chance that any one of the {units} in a sample {cx['sg']} is ${pctz}\\%$", False, f"Confuses $P(X=0)$ with the probability for one individual item; the probability for one {units[:-1]} is given in the scenario.", None),
            Opt(f"Exactly ${pctz}\\%$ of the {units} in every sample of ${n}$ {cx['pl']}", False, "Reads a probability as a guaranteed percentage in every sample.", None),
            Opt(f"In about ${pctz}\\%$ of all such samples, all of the {units} would {cx['would']}", False, "Reverses the event: $X=0$ means none are of the stated kind, not all.", None)]
     m3 = _member("st_set_binomial", 3, "2.8", "4.D", f"Which of the following is the correct interpretation of $P(X=0)$ in this context?", k3, ds3, rng,
@@ -114,7 +114,7 @@ def st_set_regression(rng):
         {"columns": ["Predictor", "Coef", "SE Coef", "T", "P"], "rows": [["Constant", f"{a:.2f}", f"{se_a:.3f}", f"{a / se_a:.2f}", "0.000"], [xn, f"{b:.2f}", f"{se_b:.3f}", f"{b / se_b:.2f}", "0.000"]]},
         {"columns": ["S", "R-Sq"], "rows": [["2.15", f"{r2 * 100:.1f}%"]]}]}
     stim = stat_stim("Computer output for a least-squares regression", "output", output=out)
-    intro = f"Questions refer to the following information. {intro0}. Computer output for the regression is shown."
+    intro = f"{intro0}. Computer output for the regression is shown."
     # Q1 기울기 해석
     key1 = Opt(f"For each additional {xu} of {xdesc}, the predicted {ydesc} {'increases' if b > 0 else 'decreases'} by about ${abs(b):.2f}$ {yu}", True, f"The slope is ${b:.2f}$, so each one-{xu} increase in {xdesc} goes with a predicted change of ${b:.2f}$ {yu} in {ydesc}.", None)
     ds1 = [Opt(f"For each additional {xu} of {xdesc}, the {ydesc} {'increases' if b > 0 else 'decreases'} by exactly ${abs(b):.2f}$ {yu}", False, "Claims an exact change for every individual, but the slope describes the predicted change on average.", None),

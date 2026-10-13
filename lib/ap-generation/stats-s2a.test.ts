@@ -80,7 +80,7 @@ d("AP Statistics shared sets (2 sets x 3 questions)", () => {
     expect(plan.ok).toBe(true);
     if (!plan.ok) return;
     expect(plan.items.map((i) => i.index)).toEqual([0, 1, 2]);
-    expect(new Set(plan.items.map((i) => i.passage)).size).toBe(1); expect(plan.items[0].passage).toContain("Questions refer to the following information");
+    expect(new Set(plan.items.map((i) => i.passage)).size).toBe(1); expect(plan.items[0].passage).toContain("least-squares regression line"); expect(plan.items[0].passage).not.toContain("Questions refer");
     expect(plan.items.every((i) => i.figure)).toBe(true);
     expect(plan.items.map((i) => i.topic)).toEqual(["5.3", "5.3", "5.2"]);
   });

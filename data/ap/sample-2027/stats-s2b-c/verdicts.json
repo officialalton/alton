@@ -1,0 +1,487 @@
+[
+ {
+  "key": "ap_statistics-f01-k0",
+  "cellId": "ap_statistics-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:flagged,B:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Exercise status is manipulated/compared to explain sleep.",
+     "final_answer": "Explanatory: whether the student exercises before school (categorical). Response: number of hours of sleep the previous night (quantitative).",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Stimulus values (64–90 hours of sleep in one night) are impossible; a night has at most 24 hours."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "IQR=87-73=14; upper fence=87+1.5(14)=108; lower fence=73-21=52.",
+     "final_answer": "(i) IQR = 14 hours. (ii) No: upper fence = 87 + 21 = 108; 105 < 108, so 105 is not an outlier (it is also above the stated maximum of 90, contradicting the data).",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Sleep values over 24 hours are impossible, and 105 is more than the listed maximum, so it would not be part of this sample anyway."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Completely randomized design with equal group sizes.",
+     "final_answer": "(i) Number the volunteers 1–80. Use a random number generator to pick 40 different numbers (ignoring repeats). Those 40 volunteers exercise before school and the other 40 do not (or write names on 80 identical slips, mix them, and draw 40). (ii) Random assignment tends to balance other variables (such as stress, workload, and health) between the two groups. So if the difference in sleep is too large to be explained by chance, it can be credited to the treatment.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Observational study; confounding.",
+     "final_answer": "No. This is an observational study with no random assignment. Students who choose to exercise may differ in other ways (for example health habits or schedules) that affect sleep, so confounding variables cannot be ruled out.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Needs a population, a variable, and variability.",
+     "final_answer": "\"What is the typical number of minutes per night that students at this high school spend on homework, and how much does it vary from student to student?\" Population: all students at the school. Variable: minutes spent on homework per night.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stimulus gives hours of sleep in one night as 64 to 90, which is impossible (a night has at most 24 hours). Part B tests 105 hours as a possible outlier, but 105 exceeds the stated sample maximum of 90, so the premise is incoherent. The data are unrealistic and the item is unsuitable for an exam without correction.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts match their stated topics (1.2, 1.7, 1.13, 1.10), and part E targets skill 1.A."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The arithmetic key (IQR 14, boundary 108) is consistent with the table, but the claim that 105 is not an outlier rests on an impossible context and a value beyond the sample maximum. Part E's rubric is lenient on skill 1.A."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table values (64-90 hours of sleep in one night) are impossible. The value 105 in part B is also above the stated maximum of 90."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. The rubric rows list sensible common errors."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Impossible sleep values would not appear on an AP exam."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ covering standard Unit 1 skills: identifying explanatory/response variables, computing IQR and applying the 1.5 IQR fence (upper fence 108, so 105 is not an outlier), describing random assignment and its causal rationale, recognizing confounding in an observational comparison, and writing a valid investigative question. Each part needs only one or two reasoning steps with small arithmetic. The overall breadth and written justification demands match full-mock exam practice. The unrealistic sleep values (64-90 hours) are a minor distraction but do not add real difficulty.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f01-k1",
+  "cellId": "ap_statistics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Yoga participation is the variable thought to influence stress.",
+     "final_answer": "Explanatory: whether the member takes a weekly yoga class (categorical). Response: self-rated stress score (quantitative).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "IQR=82-69=13; upper fence 82+19.5=101.5; lower fence 69-19.5=49.5.",
+     "final_answer": "(i) IQR = 13 points. (ii) No; upper fence = 82 + 1.5(13) = 101.5, and 99 < 101.5, so 99 is not an outlier.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Use a random procedure that fills groups of 40; randomization balances confounders.",
+     "final_answer": "(i) Write each of the 80 names on identical slips, mix in a container, and draw 40 without replacement; those 40 take the weekly yoga class, the remaining 40 do not (or number 1–80 and use a random number generator to select 40 distinct numbers). (ii) Random assignment tends to balance other variables (e.g., baseline stress, fitness, job, personality) between groups, so the groups are similar except for the treatment; a statistically significant difference in stress scores can then be attributed to the treatment rather than to confounding variables.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Observational study; no random assignment.",
+     "final_answer": "No. This is an observational study—members chose whether to take yoga, so confounding variables (e.g., free time, income, overall health habits) may differ between groups and could explain differences in stress. Without random assignment, causation cannot be concluded.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Needs population, variable, variability-based question.",
+     "final_answer": "\"What is the typical (mean) number of hours per week that adult members of the community center use the center, and how much does this vary among members?\" Population: all adult members of the center; variable: hours per week of center use (quantitative), which varies from member to member.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Ten 1-point rubric rows over five parts. Each part is judged against its own skill: variable roles, the 1.5 IQR rule, random assignment, observational-versus-experimental causation, and a valid investigative question (1.A). Keys are correct and unique. Minor wording weaknesses: Part C refers to \"the treatment\" without naming it as the yoga class, and Part E's prompt lists the required elements, which scaffolds the question-writing task. Neither is serious enough to fail the item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts fall in Unit 1 scope. Part E assesses 1.A directly, and the other parts assess the related topics 1.2, 1.7 and 1.13."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "IQR 13 and fence 101.5 are correct, so 99 is not an outlier. The rubric rows are consistent and each is worth 1 point. The alternative answers given for C1 and E are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The five-number summary table is complete, with labeled columns. The only weakness is that Part C does not name the treatment explicitly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors listed in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits a roughly 22-minute Question 1. The calculations are minimal and the typed responses are appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item bundles five routine Unit 1 skills: identifying explanatory and response variables, computing the IQR and applying the 1.5 IQR rule (IQR = 13, upper fence = 101.5, so 99 is not an outlier), describing random assignment, explaining causation from randomized experiments versus confounding in observational data, and writing a valid investigative question. Each part requires 1-3 reasoning steps with small integer arithmetic and a short, clear stimulus. The breadth of parts and the written justifications make it typical of a full-mock free-response question. No single part is conceptually deep enough for advanced_supplement, and the item is more than a single-skill basic_learning exercise.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k0",
+  "cellId": "ap_statistics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Slope = predicted change in y for each extra hour.",
+     "final_answer": "For each additional hour of study, the predicted exam score goes up by about 4.81 points.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "ŷ = 46.47 + 4.81(5) = 70.52; residual = 52.8 − 70.52.",
+     "final_answer": "(i) 70.52 points; (ii) residual = −17.72 points (the actual score is 17.72 points below the prediction)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Points form a U-shape. They sit above the line at x=1–2, below it at x=3–7, and above it at x=9, so the residuals follow a curved pattern.",
+     "final_answer": "No. The relationship is curved (U-shaped). The line overpredicts the scores for middle x values and underpredicts at the low and high ends, so the residuals show a clear pattern. A nonlinear model would fit better.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Standard r² interpretation.",
+     "final_answer": "About 47% of the variation in exam scores is explained by the linear relationship with hours of study.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "x=17 is far outside the observed range of 1–9 hours, so this is extrapolation; the curvature makes it even riskier.",
+     "final_answer": "No. This is extrapolation because x = 17 is well beyond the observed range of 1 to 9 hours, so the linear pattern may not hold there.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The five-part, 10-point regression FRQ is consistent. The data show the intended U-shaped pattern around the line, and the keys for the slope, r², residual and extrapolation parts are standard and unique. The stimulus is complete, with axes, titles, points and the fitted line. The rubric rows are one point each, and the independent solver agreed on every part.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts span topics 5.3, 5.4 and 5.5 and mostly assess interpretation (4.D); part B is a 3.B calculation, which is acceptable in a mixed-skill FRQ. Nothing from outside Unit 5 appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and correct. The prediction 70.52 and residual -17.72 are verified. The curved pattern in part C matches the plotted points. Some rubric required_elements are vague (\"in context\"), but they are workable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scatterplot data include axis titles, 18 points and the fit line. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors listed per row are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task is about 22 minutes, calculator use is minimal, and the load is typical of the AP exam."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item covering standard Unit 5 skills: slope interpretation, prediction and residual (one-step arithmetic, 46.47+4.81*5=70.52, residual -17.72), judging linearity from a scatterplot with a clear curved (U-shaped) pattern, r-squared interpretation, and extrapolation. Each part is routine and within scope, but the full set requires several distinct interpretation skills, and part C requires reading the plot against the line. No heavy arithmetic, reading load, or out-of-scope content, which fits a full-mock exam-prep item rather than a basic or advanced one.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k1",
+  "cellId": "ap_statistics-f02",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Slope interpretation",
+     "final_answer": "For each additional year of age, predicted selling price decreases by about 5.21 thousand dollars ($5,210).",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Data include negative selling prices (-5.2, -21.4), which are impossible."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "42-5.21*4=21.16; 27-21.16",
+     "final_answer": "(i) 21.16 thousand dollars; (ii) residual = 5.84 thousand dollars",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Points flat (~24-29) for ages 1-4 then drop steeply; residuals positive in middle, negative at both ends -> curved pattern.",
+     "final_answer": "No. The pattern is curved: prices stay roughly constant for ages 1-4 then fall sharply, so points lie above the line in the middle and below it at the ends; a residual plot would show a curve. Linear model not appropriate despite high r^2.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Standard",
+     "final_answer": "About 83% of the variation in selling price is explained by the linear relationship with car age.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Extrapolation",
+     "final_answer": "No. x=16 is far outside the observed ages (1-10), so it's extrapolation; it predicts -41.4 thousand dollars, which is impossible, and the pattern is curved anyway.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Reject: the part C key describes the residual pattern backwards (it should be below the line at the ends and above in the middle). The data also contain impossible negative selling prices.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C model answer and row C1 say points lie above the line at both ends and below in the middle. From the data and line (y=42-5.21x), the points are below the line at the ends (x=1: 24.2 vs 36.79; x=10: -21.4 vs -10.1) and above it in the middle (x=3: about 27-29 vs 26.37). The key states the opposite pattern."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Negative selling prices (-5.2 and -21.4 thousand dollars) are impossible in context. The prediction of -41.4 at x=16 is also nonsensical."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part item on standard Unit 5 skills: slope interpretation, prediction and residual, a residual-pattern/linearity judgment from a scatterplot, r-squared interpretation, and extrapolation. Each part is a routine one- or two-step task. The only part that goes beyond direct recall is the linearity check, where the points curve relative to the line. The arithmetic is short, with stated values and no rounding ambiguity. All content is in scope, and the item has the breadth of a full-mock free-response question.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f03-k0",
+  "cellId": "ap_statistics-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "76/181",
+     "ambiguous_or_flawed": false,
+     "final_answer": "0.420"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "P(sport|freshman)=0.420 differs from P(sport)=0.453",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Not independent, since P(sport | freshman) = 0.420 is not equal to P(sport) = 0.453."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "X ~ Binomial(n=6, p=0.45). P(X>=2) = 1 - 0.55^6 - 6(0.45)(0.55^5) = 1 - 0.0277 - 0.1359",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Binomial(6, 0.45); P(X>=2) ≈ 0.836"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "One-sample z interval: 0.420 ± 1.96*sqrt(0.420*0.580/181) = 0.420 ± 0.072. Conditions: random sample; 76 and 105 are both at least 10; 181 is less than 10% of all freshmen.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(0.348, 0.492)"
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Standard interpretation of the interval and of the confidence level",
+     "ambiguous_or_flawed": false,
+     "final_answer": "We are 95% confident that the true proportion of all freshmen who play a sport is between 0.348 and 0.492. The 95% confidence level means that if we took many random samples of the same size and built an interval from each one, about 95% of those intervals would contain the true proportion of freshmen who play a sport."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Integrated Q4-style bundle with ten 1-point rows over five parts. Keys are unique and verified. Minor weakness: part D does not require checking the interval conditions (10% condition, at least 10 successes and failures). Acceptable overall.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts D and E use unit 3 inference. The bundle declares 3.3 as an extra topic, and the Q4 format is integrated. Each part is judged against its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct and unique. D1 omits the CED conditions for the interval, a minor rubric gap."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The two-way table has complete labels and counts, and the totals match 278."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are listed for each rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits about 22 minutes, and a calculator is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five-part item typical of a full-mock free-response question. It covers conditional probability from a two-way table, an independence check by comparing probabilities, a binomial 'at least' probability, a one-proportion z-interval and its interpretation with the confidence level. Each part is a standard procedure with 1-3 steps and a modest calculator load. Difficulty comes from breadth and from choosing and applying the correct procedure in each part, not from long arithmetic or ambiguous wording. Parts D and E touch Unit 3 inference, but the bundle is stated to span 3.3, so this is acceptable.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_statistics-f03-k1",
+  "cellId": "ap_statistics-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "36/77",
+     "final_answer": "0.468",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "P(bus|under40)=0.468 ≠ P(bus)=0.436",
+     "final_answer": "Not independent, since P(bus | under 40) ≈ 0.468 ≠ P(bus) ≈ 0.436",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Binomial n=6, p=0.44; 1 - P(0) - P(1) = 1 - 0.0308 - 0.1454",
+     "final_answer": "Binomial(6, 0.44); P(X≥2) ≈ 0.824",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "0.4675 ± 1.96*sqrt(0.4675*0.5325/77) = 0.4675 ± 0.1114; conditions: random sample, 36 and 41 both ≥ 10",
+     "final_answer": "(0.356, 0.579)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Standard interpretation",
+     "final_answer": "We are 95% confident the true proportion of all employees under 40 who commute by bus is between 0.356 and 0.579. If we took many random samples and built an interval from each, about 95% of those intervals would contain the true proportion.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All numeric keys are correct and the stimulus is complete. The main flaw is that Part D, a confidence interval for a proportion, has no rubric row or required element for checking the CED conditions (random sample, at least 10 successes and 10 failures), although the CED requires them for inference procedures. Part E's required elements are also loosely worded. The structure (five parts, ten 1-point rows) is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts match their topics (2.6, 2.7, 2.10, 3.3), and the bundle is stated to span related topics. Mixed skills across parts are acceptable."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part D's rubric omits the conditions check. The prompt only says to treat the data as a random sample, so the 10-successes and 10-failures condition is never assessed. Part E's required elements (\"in context\") are vague for scoring."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The two-way table has headers, labels and all counts, and it belongs to the same study as the parts that use it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no options. The common_errors listed in the rubric rows are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical for a 22-minute question, and calculator use is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item: reading a two-way table for a conditional probability, checking independence by comparing probabilities, a binomial 'at least' calculation, a one-proportion confidence interval with a condition check, and an interpretation of the interval and confidence level. Each part is a standard, short procedure, but the breadth and the linking of results to claims fit a full-mock free-response question. Parts D and E draw on inference content that sits beyond strict Unit 2 scope, but the intent is a bundle of related topics, and the arithmetic and wording are clean, so the difficulty is not inflated.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 720
+  }
+ }
+]

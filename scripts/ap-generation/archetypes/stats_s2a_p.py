@@ -126,57 +126,78 @@ def st_hypotheses_setup(rng):
 
 
 # ======================= P2-b. 추론 방법 선택 (4.4 평균 / 3.14 범주형) (2.C) =======================
-def _feat(k):
-    return {"type": k[0], "samples": k[1], "goal": k[2]}
-
-
-MEAN_M = {
-    ("quant", 1, "test"): ("A one-sample t-test for a population mean", "A coach wants to test whether the mean time for all of her runners to finish a mile is less than $7$ minutes, using the times of a random sample of $25$ runners"),
-    ("paired", 2, "test"): ("A matched-pairs t-test for a mean difference", "A trainer wants to test whether a program changes the mean weight of members, using the weight of each of $20$ randomly selected members before and after the program"),
-    ("quant", 2, "test"): ("A two-sample t-test for a difference in population means", "A scientist wants to test whether the mean growth, in centimeters, differs for plants given two fertilizers, using one random sample of $30$ plants for each fertilizer"),
-    ("cat", 1, "test"): ("A one-sample z-test for a population proportion", "A factory manager wants to test whether the proportion of defective items in a shipment is above $5\\%$, using the counts from a random sample of $200$ items"),
+PROC = {
+    "paired": "A matched-pairs t-test for a mean difference",
+    "one_t": "A one-sample t-test for a population mean",
+    "two_t": "A two-sample t-test for a difference in population means",
+    "one_z": "A one-sample z-test for a population proportion",
+    "two_z": "A two-sample z-test for a difference in population proportions",
+    "chi_ind": "A chi-square test of independence",
 }
-CAT_M = {
-    ("cat", 1, "interval"): ("A one-sample z-interval for a population proportion", "A polling firm wants to estimate the proportion of all registered voters in a city who support a proposed park, using a random sample of $400$ voters"),
-    ("cat", 2, "test"): ("A two-sample z-test for a difference in population proportions", "A school wants to test whether the proportion of students who bring lunch from home differs between two grades, using separate random samples of $150$ students from each grade"),
-    ("assoc", 1, "test"): ("A chi-square test of independence", "A researcher wants to test for an association between the type of transportation to work and the age group of employees, using one random sample of $300$ employees classified by both variables"),
-    ("quant", 1, "interval"): ("A one-sample t-interval for a population mean", "A dentist wants to estimate the mean time that all patients wait before their appointment, using the waiting times of a random sample of $40$ patients"),
+# 시나리오(키 절차별). 고르는 근거가 되는 구조 단서를 문장에 넣는다(쌍 구조·표본 수·변수 유형).
+MEAN_SC = {
+    "paired": [
+        "A trainer wants to test whether a training program changes the mean resting heart rate of members, using the heart rate of each of $20$ randomly selected members measured before the program and again after the program",
+        "A researcher wants to test whether the mean reaction time differs between a person's dominant hand and non-dominant hand, using both reaction times for each of $24$ randomly selected volunteers",
+        "A teacher wants to test whether a new reading program changes the mean score on a reading test, using the scores of $18$ pairs of twins in which one twin in each pair was randomly assigned to the new program and the other to the old program",
+    ],
+    "one_t": [
+        "A coach wants to test whether the mean time for all of her runners to finish a mile is less than $7$ minutes, using the times of a random sample of $25$ runners",
+        "A dentist wants to test whether the mean waiting time of all patients before an appointment is more than $15$ minutes, using the waiting time of each patient in a random sample of $40$ patients",
+        "A farmer wants to test whether the mean weight of all apples from an orchard differs from $150$ grams, using the weight of each apple in a random sample of $35$ apples",
+    ],
+}
+# 오답 절차별 구별 근거(키 절차, 오답 절차) -> 이 오답이 틀린 구체적 이유. 일반 문구를 쓰지 않는다.
+MEAN_WHY = {
+    ("paired", "two_t"): "Treats the two sets of measurements as independent samples, but each pair comes from the same individual or a matched pair, so the analysis must use the differences within pairs.",
+    ("paired", "one_z"): "Needs a count of successes in a category, but the data are measurements of a quantitative variable, and the pairing is ignored.",
+    ("paired", "two_z"): "Compares two proportions, but the variable is a measurement rather than a success or failure, and the two measurements are matched.",
+    ("one_t", "two_t"): "Needs two independent samples to compare, but the scenario has only one sample from one population.",
+    ("one_t", "paired"): "Needs two measurements on the same individual or on matched individuals, but each individual is measured only once, so there are no pairs.",
+    ("one_t", "one_z"): "Needs a count of successes in a category, but each individual contributes a measurement of a quantitative variable.",
+}
+CAT_SC = [
+    "A researcher wants to test for an association between the type of transportation to work (car, bus, bicycle or walking) and the age group (under $30$, $30$ to $50$ or over $50$) of employees, using one random sample of $300$ employees classified by both variables",
+    "A school wants to test for an association between the favorite subject (math, science, history or art) and the grade level (freshman, sophomore, junior or senior) of students, using one random sample of $240$ students classified by both variables",
+    "A marketing analyst wants to test whether the brand of phone chosen (three brands) is associated with the region of the country where a customer lives (four regions), using one random sample of $500$ customers classified by both variables",
+]
+CAT_WHY = {
+    "two_z": "Compares exactly two proportions, but a variable in the scenario has more than two categories, so there is no single difference in proportions to test.",
+    "one_z": "Tests one proportion for a single categorical variable, but each individual here is classified by two categorical variables.",
+    "two_t": "Compares the means of a quantitative variable in two groups, but both variables in the scenario are categorical.",
 }
 
 
-def _method(rng, table, arch, topic):
-    kk = pick(rng, list(table))
-    # 진리표(독립 경로): 시나리오 특징(변수 유형, 표본 수·짝, 목적)이 정확히 한 절차와 일치한다
-    assert len([k for k in table if _feat(k) == _feat(kk)]) == 1
-    def reason(k):
-        f, g = _feat(k), _feat(kk)
-        bits = []
-        if f["type"] != g["type"]:
-            bits.append({"cat": "the scenario's data are counts of a category", "quant": "the scenario's data are measurements, not counts of a category", "paired": "the scenario's measurements come in pairs from the same individuals", "assoc": "the scenario classifies each individual by two categorical variables"}[g["type"]])
-        if f["samples"] != g["samples"]:
-            bits.append("the number of samples does not fit the scenario")
-        if f["goal"] != g["goal"]:
-            bits.append("the scenario's goal is " + ("an interval" if g["goal"] == "interval" else "a test") + ", not " + ("an interval" if f["goal"] == "interval" else "a test"))
-        return "Chooses " + table[k][0][0].lower() + table[k][0][1:] + ", but " + "; ".join(bits or ["its features do not match the scenario"]) + "."
-    wrongs = [k for k in table if k != kk]
-    key = Opt(table[kk][0], True, "The variables, the number of samples and the goal in the scenario match this procedure.", None)
-    ds = [Opt(table[k][0], False, reason(k), None) for k in wrongs]
-    stem = f"{table[kk][1]}. Which of the following procedures is appropriate?"
-    bpr = sbp(arch, topic, "2.C", "Choose the statistical inference procedure that fits a scenario",
-              ["Decide whether the data are categorical counts or measurements and whether the individuals are paired", "Count the samples and decide whether the goal is an interval or a test, then match the procedure"],
-              [("the type of variable, the number of samples, pairing and the goal determine the procedure", "the scenario states the variable, the sampling and the goal")],
-              [("mismatched_data_type", "mixes up proportions and means"), ("mismatched_sampling", "uses the wrong number of samples or ignores pairing"), ("mismatched_goal", "uses a test when an interval is needed or the reverse")],
-              "a feature table (variable type, sample count, pairing, goal) is matched against each procedure and exactly one procedure matches the scenario",
-              {"type": "none", "must_include": []}, ["procedure_choice"], method="feature table enumeration")
-    return spack(arch, topic, "2.C", stem, key, ds, rng, bpr, None, 80, [f"method={kk}"])
+def _method_item(rng, arch, topic, scenario, key_proc, wrongs, concept, bpr_wrong):
+    key = Opt(PROC[key_proc], True, "The variables, the number of samples and the way the data were collected in the scenario match this procedure.", None)
+    ds = [Opt(PROC[w], False, why, None) for w, why in wrongs]
+    stem = f"{scenario}. Which of the following procedures is appropriate?"
+    bpr = sbp(arch, topic, "2.C", concept,
+              ["Decide whether the data are categorical counts or quantitative measurements, and whether the measurements are paired", "Count the samples and the variables, then match the one procedure that fits the data collection"],
+              [("the type of variable, the number of samples, pairing and the number of variables determine the procedure", "the scenario states the variables, the sampling and the goal")],
+              bpr_wrong,
+              "each procedure is tied to a feature table (variable type, number of samples, pairing, number of variables) and exactly one procedure matches the scenario; each wrong option is rejected by a stated feature",
+              {"type": "none", "must_include": []}, ["procedure_choice", "condition_check"], method="feature table enumeration")
+    return spack(arch, topic, "2.C", stem, key, ds, rng, bpr, None, 85, [f"key={key_proc}"])
 
 
 def st_method_choice_means(rng):
-    return _method(rng, MEAN_M, "st_method_choice_means", "4.4")
+    kk = pick(rng, ["paired", "one_t"])
+    sc = pick(rng, MEAN_SC[kk])
+    wrongs = [(w, MEAN_WHY[(kk, w)]) for w in (["two_t", "one_z", "two_z"] if kk == "paired" else ["two_t", "paired", "one_z"])]
+    # 진리표(독립 경로): 키 절차만 시나리오 특징(변수 유형·표본 수·쌍)과 모두 일치한다
+    feat = {"paired": ("quant", 2, True), "one_t": ("quant", 1, False), "two_t": ("quant", 2, False), "one_z": ("cat", 1, False), "two_z": ("cat", 2, False)}
+    scen = {"paired": ("quant", 2, True), "one_t": ("quant", 1, False)}[kk]
+    assert [p for p, f in feat.items() if f == scen] == [kk]
+    return _method_item(rng, "st_method_choice_means", "4.4", sc, kk, wrongs, "Choose the inference procedure for a mean or a mean difference",
+                        [("two_sample_for_paired_or_one_sample", "uses two independent samples where there is a pairing or only one sample"), ("pairs_without_pairs", "uses matched pairs when there are no pairs"), ("proportion_for_measurements", "uses a proportion procedure for measurements")])
 
 
 def st_method_choice_cat(rng):
-    return _method(rng, CAT_M, "st_method_choice_cat", "3.14")
+    sc = pick(rng, CAT_SC)
+    wrongs = [(w, CAT_WHY[w]) for w in ("two_z", "one_z", "two_t")]
+    return _method_item(rng, "st_method_choice_cat", "3.14", sc, "chi_ind", wrongs, "Choose the chi-square test of independence for two categorical variables",
+                        [("two_proportion_for_many_categories", "uses a two-proportion procedure when a variable has more than two categories"), ("one_proportion_for_two_variables", "uses a one-proportion procedure for two variables"), ("means_for_categorical", "uses a means procedure for categorical variables")])
 
 
 # ======================= P2-c. 제1·2종 오류 (3.8 / 2.D) =======================
@@ -263,53 +284,81 @@ CP_CTX = [("a city", "residents", "own a bicycle", "city residents"), ("a school
 
 
 def st_conditions_prop(rng):
+    """다단계 조건 확인(S2-b): 표본 비율(p-hat)이 아니라 귀무값 p0 로 큰 수 조건을 확인해야 하고, 10% 조건은 N 의 10% 를 직접 계산해야 한다.
+    선택지 4개는 서로 다른 판정(모두 충족 / 임의성 / 10% / 큰 수) 이고, 정답 하나만 코드가 계산한 세 조건과 일치한다. p-hat 로 확인하면 판정이 뒤집히도록 값을 설계한다."""
     pop, who, trait, label = pick(rng, CP_CTX)
-    fail = pick(rng, ["none", "random", "ten", "large"])
+    fail = pick(rng, ["none", "ten", "large", "random"])
     for _ in forever():
-        p0 = pick(rng, [0.3, 0.4, 0.5, 0.6])
-        n = pick(rng, [60, 80, 100, 120, 150])
-        N = pick(rng, [3000, 5000, 8000, 12000])
-        random_ok = True
-        if fail == "random":
-            random_ok = False
-        if fail == "ten":
-            N = pick(rng, [400, 500, 600, 700])
-            n = pick(rng, [80, 100, 120]);
         if fail == "large":
-            p0 = pick(rng, [0.05, 0.08, 0.1]); n = pick(rng, [40, 60, 80])
-        conds = {"random": random_ok, "ten": N >= 10 * n, "large": n * p0 >= 10 and n * (1 - p0) >= 10}
-        bad = [k for k, v in conds.items() if not v]
-        if (fail == "none" and not bad) or (fail != "none" and bad == [fail]):
-            break
-    # 독립 경로: 열거 — 조건을 따로 평가
-    lc = (round(n * p0, 1), round(n * (1 - p0), 1))
-    sel = f"a random sample of ${n}$ {who}" if random_ok else f"${n}$ {who} who volunteered to answer an online survey"
-    stem = f"In {pop} with ${N}$ {who}, {sel} is used to test $H_0: p = {p0}$, where $p$ is the proportion of all {label} who {trait}. A one-sample z-test for a proportion is planned. Which of the following statements about the conditions for this test is correct?"
-    stmts = {
-        "none": ("All three conditions are satisfied", "none"),
-        "random": ("The random condition is not satisfied", "random"),
-        "ten": ("The $10\\%$ condition is not satisfied", "ten"),
-        "large": ("The large counts condition is not satisfied", "large"),
+            p0 = pick(rng, [0.05, 0.08, 0.1]); n = pick(rng, [60, 70, 80, 90])
+        else:
+            p0 = pick(rng, [0.15, 0.2, 0.25, 0.3]); n = pick(rng, [70, 80, 90, 100, 120])
+        N = n * pick(rng, [6, 7, 8, 9]) if fail == "ten" else n * pick(rng, [12, 13, 14, 15]) + rng.randrange(0, 9)
+        np0, nq0 = n * p0, n * (1 - p0)
+        large_ok = np0 >= 10 and nq0 >= 10
+        ten_ok = n <= N / 10
+        random_ok = fail != "random"
+        if (fail == "large" and (large_ok or np0 < 4.5)) or (fail != "large" and (not large_ok or np0 < 12)):
+            continue
+        if (fail == "ten") == ten_ok:
+            continue
+        # 표본 성공 수 x: p-hat 로 확인한 큰 수 조건의 판정이 p0 로 확인한 판정과 달라지게 한다
+        x = rng.randint(11, max(12, n // 2 - 5)) if not large_ok else rng.randint(5, 9)
+        phat_large_ok = x >= 10 and n - x >= 10
+        if phat_large_ok == large_ok:
+            continue
+        break
+    # 독립 경로: 조건별로 따로 평가해 판정을 만든다
+    conds = {"random": random_ok, "ten": ten_ok, "large": large_ok}
+    bad = [k for k, v in conds.items() if not v]
+    assert (fail == "none" and not bad) or bad == [fail]
+    truth = {"all": not bad, "random": not random_ok, "ten": not ten_ok, "large": not large_ok}
+    a0, b0 = clean(np0, 1), clean(nq0, 1)
+    ten_v = N // 10 if N % 10 == 0 else clean(N / 10, 1)
+    S = {
+        ("all", "p0"): f"All three conditions are satisfied, because the sample is random, $n = {n}$ is less than $10\\%$ of $N = {N}$, and $np_0 = {a0}$ and $n(1-p_0) = {b0}$ are both at least $10$",
+        ("all", "phat"): f"All three conditions are satisfied, because the sample is random, $n = {n}$ is less than $10\\%$ of $N = {N}$, and ${x}$ and ${n - x}$ are both at least $10$",
+        ("ten", "x"): f"The $10\\%$ condition is not satisfied, because $n = {n}$ is more than $10\\%$ of $N = {N}$",
+        ("large", "p0"): f"The large counts condition is not satisfied, because $np_0 = {a0}$ is less than $10$",
+        ("large", "phat"): f"The large counts condition is not satisfied, because the number of sampled {who} who {trait} is ${x}$, which is less than $10$",
+        ("random", "x"): f"The random condition is not satisfied, because the {who} in the sample were not randomly selected" if fail == "random" else f"The random condition is not satisfied, because only a small part of all {label} was included in the sample",
     }
-    key_t = stmts[fail][0]
-    whys = {
-        "none": "Claims all conditions are satisfied even though one condition is violated.",
-        "random": "Claims the sample is not random even though the sample was selected at random.",
-        "ten": f"Claims the $10\\%$ condition fails even though ${n}$ is less than $10\\%$ of ${N}$.",
-        "large": f"Claims the large counts condition fails even though $np_0 = {clean(lc[0], 1)}$ and $n(1-p_0) = {clean(lc[1], 1)}$ are both at least $10$.",
+    sel = f"${n}$ {who} volunteer to complete an online survey" if fail == "random" else f"a random sample of ${n}$ {who} is selected"
+    W = {
+        ("all", "p0"): (f"Claims all conditions are satisfied, but $n = {n}$ is more than $10\\%$ of $N = {N}$ (since $10\\%$ of ${N}$ is ${ten_v}$)." if fail == "ten" else "Claims all conditions are satisfied even though the sample is not random."),
+        ("all", "phat"): f"Checks the large counts condition with the sample counts, but a test uses the null value: $np_0 = {a0}$ is less than $10$, so the condition is violated.",
+        ("ten", "x"): f"Claims the $10\\%$ condition fails, but $n = {n}$ is less than $10\\%$ of $N = {N}$, which is ${ten_v}$.",
+        ("large", "p0"): "",
+        ("large", "phat"): f"Checks the large counts condition with the sample counts, but a test uses the null value: $np_0 = {a0}$ and $n(1-p_0) = {b0}$ are both at least $10$.",
+        ("random", "x"): "The sample was selected at random, and a small part of the population being sampled does not make a sample non-random." if fail != "random" else "",
     }
-    # 각 진술이 코드가 계산한 조건과 맞는지 확인: 정답 진술만 참
-    truth = {"none": not bad, "random": not conds["random"], "ten": not conds["ten"], "large": not conds["large"]}
-    assert truth[fail] and sum(1 for k, v in truth.items() if v) == 1
-    key = Opt(key_t, True, {"none": f"Each condition is verified: the sample is random, ${n} < 10\\%$ of ${N}$, and both expected counts are at least $10$.", "random": "A sample of volunteers is not a random sample, so the random condition is violated.", "ten": f"$10\\%$ of ${N}$ is ${N // 10}$, and ${n} > {N // 10}$, so the $10\\%$ condition is violated.", "large": f"$np_0 = {clean(lc[0], 1)} < 10$, so the large counts condition is violated."}[fail], None)
-    ds = [Opt(v[0], False, whys[k] if k != "none" else "Claims all conditions are satisfied even though one condition is violated.", None) for k, v in stmts.items() if k != fail]
+    key_id = {"none": ("all", "p0"), "ten": ("ten", "x"), "large": ("large", "p0"), "random": ("random", "x")}[fail]
+    opt_ids = [key_id]
+    if fail == "large":
+        opt_ids += [("all", "phat"), ("ten", "x"), ("random", "x")]
+    elif fail == "random":
+        opt_ids += [("large", "phat"), ("ten", "x"), ("all", "p0")]
+    elif fail == "ten":
+        opt_ids += [("large", "phat"), ("all", "p0"), ("random", "x")]
+    else:
+        opt_ids += [("large", "phat"), ("ten", "x"), ("random", "x")]
+    verdict = lambda oid: truth[oid[0]]
+    assert [o for o in opt_ids if verdict(o)] == [key_id] and len({o[0] for o in opt_ids}) == 4
+    KW = {"none": f"The sample is random, $n = {n}$ is less than $10\\%$ of $N = {N}$ (that is, ${ten_v}$), and $np_0 = {a0}$ and $n(1-p_0) = {b0}$ are both at least $10$.",
+          "ten": f"$10\\%$ of ${N}$ is ${ten_v}$, and $n = {n}$ is more than ${ten_v}$, so the sample is too large a part of the population for independence.",
+          "large": f"The test is carried out under $H_0$, so the counts use $p_0$: $np_0 = {a0} < 10$.",
+          "random": "A group of volunteers is not a random sample, so the random condition is violated."}[fail]
+    key = Opt(S[key_id], True, KW, None)
+    ds = [Opt(S[o], False, W[o], None) for o in opt_ids[1:]]
+    stem = (f"In {pop} with ${N}$ {who}, {sel}. Of the sampled {who}, ${x}$ {trait}. The sample is used to test $H_0: p = {p0}$ versus $H_a: p \\ne {p0}$, where $p$ is the proportion of all {label} who {trait}. "
+            "Which of the following statements about the conditions for a one-sample $z$-test for a proportion is correct?")
     bpr = sbp("st_conditions_prop", "3.7", "4.E", "Verify the conditions for a one-sample z-test for a proportion",
-              ["Check each condition separately: random selection, the 10 percent condition for independence and the large counts condition using the null value", "Find the single condition that fails, or decide that all are met"],
-              [("a z-test for a proportion needs random selection, a sample under 10 percent of the population and both np0 and n(1-p0) at least 10", "the stem gives the sampling method, the sample and population sizes and the null value")],
-              [("claims_all_met", "says conditions are met when one fails"), ("false_random_failure", "claims random fails"), ("false_count_failure", "claims large counts fails")],
-              "each condition is evaluated separately in code and exactly one statement agrees with all three evaluations",
-              {"type": "none", "must_include": []}, ["condition_check", "claim_justification"], method="separate evaluation of each condition")
-    return spack("st_conditions_prop", "3.7", "4.E", stem, key, ds, rng, bpr, None, 100, [f"fail={fail}", f"n={n}", f"N={N}", f"p0={p0}"])
+              ["Check random selection, then compare n with ten percent of N for independence", "Check large counts with the null value p0, not with the sample proportion, then decide which single condition fails or that none does"],
+              [("a z-test for a proportion needs random selection, n at most 10 percent of N, and np0 and n(1-p0) both at least 10", "the stem gives the sampling method, N, n, the number of successes in the sample and the null value")],
+              [("uses_sample_proportion", "checks large counts with the sample counts instead of the null value"), ("false_ten_percent_failure", "claims the 10 percent condition fails when it holds"), ("confuses_small_fraction_with_nonrandom", "treats a small sampled fraction as a random-selection problem")],
+              "each condition is evaluated separately in code from N, n, p0 and the sample count, and exactly one of the four verdicts agrees with all three evaluations; the verdict from the sample counts is checked to disagree with the verdict from p0",
+              {"type": "none", "must_include": []}, ["condition_check", "claim_justification"], method="separate evaluation of each condition plus sample-count trap check")
+    return spack("st_conditions_prop", "3.7", "4.E", stem, key, ds, rng, bpr, None, 110, [f"fail={fail}", f"n={n}", f"N={N}", f"p0={p0}", f"x={x}"])
 
 
 # ======================= C2. 평균 t 절차 조건: 점도표 (4.2 / 4.E) =======================
@@ -585,39 +634,39 @@ BC_CTX = [("test scores, in points,", "Class A", "Class B"), ("delivery times, i
 
 
 def st_boxplot_compare(rng):
+    """그림에서 눈으로 구별되는 비교만 쓴다(S2-b): 비교하는 모든 통계량(중앙값·IQR·범위·Q3·최댓값)의 두 집단 차이가 6 이상이고, 눈금(격자)이 그림에 표시된다."""
     what, g1, g2 = pick(rng, BC_CTX)
     for _ in forever():
         def fs():
-            q1 = rng.randint(55, 75); iqr = rng.randint(6, 18); q3 = q1 + iqr; med = q1 + rng.randint(2, iqr - 2)
-            lo = q1 - rng.randint(4, 14); hi = q3 + rng.randint(4, 14)
+            q1 = rng.randint(50, 72); iqr = rng.randint(7, 26); q3 = q1 + iqr; med = q1 + rng.randint(3, iqr - 3)
+            lo = q1 - rng.randint(5, 18); hi = q3 + rng.randint(5, 18)
             return dict(min=lo, q1=q1, median=med, q3=q3, max=hi, outliers=[])
         A, B = fs(), fs()
         iqa, iqb = A["q3"] - A["q1"], B["q3"] - B["q1"]
         ra, rb = A["max"] - A["min"], B["max"] - B["min"]
-        if A["median"] == B["median"] or iqa == iqb or ra == rb or iqa == ra or iqb == rb:
+        diffs = [A["median"] - B["median"], iqa - iqb, ra - rb, A["q3"] - B["q3"], A["max"] - B["max"]]
+        if min(abs(d) for d in diffs) < 6:
             continue
         pool = {
-            "med_A": (A["median"] > B["median"], f"The median of {g1} is greater than the median of {g2}", "Compares the medians in the wrong direction."),
-            "iqr_A": (iqa > iqb, f"The interquartile range of {g1} is greater than the interquartile range of {g2}", "Compares the interquartile ranges in the wrong direction or misreads the box length."),
-            "rng_A": (ra > rb, f"The range of {g1} is greater than the range of {g2}", "Compares the ranges in the wrong direction or reads the box instead of the whiskers."),
-            "q3_A": (A["q3"] > B["q3"], f"The third quartile of {g1} is greater than the third quartile of {g2}", "Misreads the right edge of the boxes."),
-            "max_A": (A["max"] > B["max"], f"The maximum of {g1} is greater than the maximum of {g2}", "Misreads the end of the upper whiskers."),
+            "med_A": (diffs[0] > 0, f"The median of {g1} is greater than the median of {g2}", f"The median of {g1} is ${A['median']}$ and the median of {g2} is ${B['median']}$, so this comparison of medians is reversed."),
+            "iqr_A": (diffs[1] > 0, f"The interquartile range of {g1} is greater than the interquartile range of {g2}", f"The interquartile range of {g1} is ${iqa}$ and that of {g2} is ${iqb}$ (the lengths of the boxes), so this comparison is reversed."),
+            "rng_A": (diffs[2] > 0, f"The range of {g1} is greater than the range of {g2}", f"The range of {g1} is ${ra}$ and the range of {g2} is ${rb}$ (whisker end to whisker end), so this comparison is reversed."),
+            "q3_A": (diffs[3] > 0, f"The third quartile of {g1} is greater than the third quartile of {g2}", f"The third quartile of {g1} is ${A['q3']}$ and that of {g2} is ${B['q3']}$ (the right edge of each box), so this comparison is reversed."),
+            "max_A": (diffs[4] > 0, f"The maximum of {g1} is greater than the maximum of {g2}", f"The maximum of {g1} is ${A['max']}$ and that of {g2} is ${B['max']}$ (the right end of each upper whisker), so this comparison is reversed."),
         }
         trues = [k for k, v in pool.items() if v[0]]; falses = [k for k, v in pool.items() if not v[0]]
         if len(trues) >= 1 and len(falses) >= 3:
             break
     kk = rng.choice(trues); wf = rng.sample(falses, 3)
     key = Opt(pool[kk][1], True, "This comparison is true for the plotted five-number summaries.", None)
-    whys = {"med_A": "The line inside the box of the other class is higher, so this comparison of medians is reversed.", "iqr_A": "The box for the other class is longer, so this comparison of interquartile ranges is reversed.",
-            "rng_A": "The whiskers of the other class span a larger range, so this comparison of ranges is reversed.", "q3_A": "The right edge of the box for the other class is farther right, so this comparison is reversed.", "max_A": "The upper whisker of the other class extends farther right, so this comparison is reversed."}
-    ds = [Opt(pool[k][1], False, whys[k], None) for k in wf]
-    stem = f"The boxplots shown display {what} for {g1} and {g2}. Which of the following statements is correct?"
+    ds = [Opt(pool[k][1], False, pool[k][2], None) for k in wf]
+    stem = f"The boxplots shown display {what} for {g1} and {g2}. The gridlines mark equal steps on the horizontal axis. Which of the following statements is correct?"
     stim = stat_stim(f"Side-by-side boxplots of {what.strip(',')}", "boxplot", xTitle=what.strip(" ,").capitalize(), boxes=[{"name": g1, **A}, {"name": g2, **B}])
     bpr = sbp("st_boxplot_compare", "1.9", "4.A", "Compare two distributions displayed in boxplots",
               ["Read the median, the quartiles and the whisker ends for each group from the boxplot", "Evaluate each statement about center, spread or extremes and keep the one that matches the plotted values"],
-              [("a boxplot shows the minimum, the quartiles, the median and the maximum", "the boxplots show the five-number summaries of both groups with no outliers")],
+              [("a boxplot shows the minimum, the quartiles, the median and the maximum", "the boxplots show the five-number summaries of both groups with no outliers, and every compared statistic differs by at least six units")],
               [("reversed_median_comparison", "reverses a comparison of medians"), ("reversed_spread_comparison", "reverses a comparison of spreads"), ("misread_whisker", "misreads a whisker end")],
-              "each statement is evaluated against the plotted five-number summaries and exactly one of the four chosen statements is true",
+              "each statement is evaluated against the plotted five-number summaries, every compared statistic is required to differ by at least six units so the difference is visible, and exactly one of the four chosen statements is true",
               {"type": "boxplot", "must_include": ["both groups"]}, ["representation_reading", "interpretation"], method="statement evaluation against five-number summaries")
     return spack("st_boxplot_compare", "1.9", "4.A", stem, key, ds, rng, bpr, stim, 85, [f"med={A['median']},{B['median']}", f"iqr={iqa},{iqb}"])
 
