@@ -6,6 +6,8 @@ vi.mock("@/app/session/[id]/MockExamMathTools", () => ({ GraphingCalculator: () 
 import SubjectToolPanels from "./SubjectToolPanels";
 import StatsCalculator from "./StatsCalculator";
 import { subjectToolsConfig } from "@/lib/exam-tools/subject-tools";
+import { evalScientific } from "./PhysicsCalculator";
+import { PHYSICS_REF_DISCLAIMER, PHYSICS_CONSTANTS } from "@/lib/exam-tools/physics-reference";
 import { parseNum, STATS_MODES } from "@/lib/stats-calc/modes";
 
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });
@@ -177,5 +179,30 @@ describe("390px 모바일 사용성(코드 기준)", () => {
     expect(screen.getByTestId("stats-mode").className).toContain("min-h-[44px]");
     expect(screen.getByTestId("stats-mode").className).toContain("text-[16px]");
     expect(screen.getByRole("tablist", { name: "Calculator type" }).className).toContain("flex-wrap");
+  });
+});
+
+describe("AP Physics 1 도구", () => {
+  const phys = subjectToolsConfig("ap_physics_1");
+  it("공학용 계산기 + Reference, Desmos 없음", () => {
+    expect(phys.calculatorTabs).toEqual(["scientific"]);
+    expect(phys.reference).toBe("physics");
+  });
+  it("Reference 는 자체 문구 고지와 상수를 보인다", () => {
+    render(<SubjectToolPanels config={phys} calculatorAllowed open="reference" onClose={() => {}} />);
+    expect(screen.getByTestId("physics-reference-disclaimer").textContent).toBe(PHYSICS_REF_DISCLAIMER);
+    expect(PHYSICS_REF_DISCLAIMER).toMatch(/not the official College Board sheet/);
+    expect(screen.getByText(PHYSICS_CONSTANTS[0].value)).toBeInTheDocument();
+  });
+  it("계산기: 탭 하나(Desmos 없음), 식을 계산한다", () => {
+    render(<SubjectToolPanels config={phys} calculatorAllowed open="calculator" onClose={() => {}} />);
+    expect(screen.queryByTestId("desmos-stub")).toBeNull();
+    fireEvent.change(document.getElementById("phys-calc-input")!, { target: { value: "2*3^2" } });
+    expect(screen.getByTestId("physics-calc-result").textContent).toBe("= 18");
+  });
+  it("evalScientific: 각도 상수·오류", () => {
+    expect(evalScientific("sin(30*deg)")).toEqual({ ok: true, value: "0.5" });
+    expect(evalScientific("1/0").ok).toBe(false);
+    expect(evalScientific("2+").ok).toBe(false);
   });
 });

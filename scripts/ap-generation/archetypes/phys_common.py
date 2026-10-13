@@ -118,10 +118,10 @@ def pbp(arch, topic, skill, concept, thinking, cond, mis, path, material, judgme
 
 def ppack(arch, topic, skill, stem, key, ds, rng, bpr, stim=None, est=120, facts=None, option_scenes=None):
     p = pack(arch, topic, skill, "allowed", stem, key, ds, rng, stimulus=stim, est=est, facts=facts or [], extra={"blueprint": bpr})
-    if option_scenes:  # 선택지가 그림인 문항: 임시 태그(text) -> 보기 순서대로 scene 재배열 후 "Diagram n" 으로 라벨(정답 암시 요소 없음은 phys_figs.choice_checks 가 검증)
+    if option_scenes:  # 선택지가 그림인 문항: 임시 태그(text) -> 보기 순서대로 scene 재배열 후 "Diagram A~D" 으로 라벨(정답 암시 요소 없음은 phys_figs.choice_checks 가 검증)
         p["option_scenes"] = [option_scenes[o["text"]] for o in p["options"]]
         for i, o in enumerate(p["options"]):
-            o["text"] = f"Diagram {i + 1}"
+            o["text"] = f"Diagram {chr(65 + i)}"
     return p
 
 

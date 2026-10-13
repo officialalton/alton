@@ -1,5 +1,6 @@
 // AP Biology 분자 도식 3종 — 후보가 실제로 쓰는 것만(DNA 프로브 정렬, 복제 기포, 리보솜 A/P/E 자리). 엄격한 스펙으로 받아 직접 그린다.
 import { esc, f, FONT, labelWidth, type FigureIssue } from "./_layout";
+import { renderPhysSceneSpec, validatePhysScene, type PhysSceneSpec } from "./ap-phys-scene";
 
 export type StrandPairSpec = {
   type: "ap_diagram"; variant: "strand_pair"; title?: string;
@@ -22,7 +23,7 @@ export type RibosomeSpec = {
   sites: { site: "E" | "P" | "A"; codonIndex: number; trna?: string }[];
   codonTable?: Record<string, string>;
 };
-export type ApDiagramSpec = StrandPairSpec | ReplicationBubbleSpec | RibosomeSpec;
+export type ApDiagramSpec = StrandPairSpec | ReplicationBubbleSpec | RibosomeSpec | PhysSceneSpec;
 
 const W = 520;
 const strOk = (v: unknown): v is string => typeof v === "string" && v.trim().length > 0;
@@ -45,6 +46,11 @@ export function validateApDiagram(s: Record<string, unknown>): { ok: true; spec:
     if (!Array.isArray(s.codons) || s.codons.length < 2 || !s.codons.every(strOk) || !strOk(s.leftEnd) || !strOk(s.rightEnd) || !Array.isArray(s.sites)) return { ok: false, error: "ribosome 은 codons/leftEnd/rightEnd/sites 가 필요합니다." };
     return { ok: true, spec: s as unknown as RibosomeSpec };
   }
+  if (s.variant === "phys_scene") {
+    const v = validatePhysScene(s.scene);
+    if (!v.ok) return { ok: false, error: `phys_scene: ${v.error}` };
+    return { ok: true, spec: { type: "ap_diagram", variant: "phys_scene", title: typeof s.title === "string" ? s.title : undefined, scene: v.scene } };
+  }
   return { ok: false, error: `알 수 없는 ap_diagram variant: ${String(s.variant)}` };
 }
 
@@ -52,6 +58,7 @@ const T = (x: number, y: number, t: string, o: { anchor?: string; size?: number;
   `<text x="${f(x)}" y="${f(y)}" text-anchor="${o.anchor ?? "middle"}" font-size="${o.size ?? 13}" fill="${o.fill ?? "#111"}"${o.bold ? ' font-weight="bold"' : ""}>${esc(t)}</text>`;
 
 export function renderApDiagram(spec: ApDiagramSpec): { svg: string; alt: string; issues: FigureIssue[] } {
+  if (spec.variant === "phys_scene") return renderPhysSceneSpec(spec);
   const issues: FigureIssue[] = [];
   const o: string[] = [];
   let H = 200; let alt = "";

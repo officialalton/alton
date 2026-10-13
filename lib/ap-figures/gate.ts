@@ -6,7 +6,8 @@ import { checkFigure } from "../problem-figures/check";
 import { validateFigureSpec } from "../problem-figures/spec";
 import { renderFigureSvg } from "../problem-figures/render";
 import { niceTicks, interpAt, type ApGraphSpec, type ApSpec } from "../problem-figures/templates/ap-figures";
-import { normalizeStimulus, parseStimulusEx, type Feature, type NormIssue } from "./normalize";
+import { normalizeStimulus, parseStimulusEx, type Feature, type NormIssue, type NormResult } from "./normalize";
+import type { FigureChoiceSpec } from "../problem-figures/templates/figure-choice";
 
 type Json = Record<string, unknown>;
 const isObj = (v: unknown): v is Json => typeof v === "object" && v !== null && !Array.isArray(v);
@@ -27,7 +28,7 @@ export type GateResult = {
   needReason: string;
   status: "pass" | "fail" | "not_applicable";
   issues: GateIssue[];
-  spec: ApSpec | null;
+  spec: ApSpec | FigureChoiceSpec | null;
   output: string | null;
   alt: string | null;
   validation?: string;
@@ -129,7 +130,7 @@ function pairsInStem(stem: string): [number, number][] {
   return res;
 }
 
-function classifyNeed(stimKind: string, spec: ApSpec | null, text: { stem: string; options: string; all: string }, stimData: unknown): { need: FigureNeed; reason: string } {
+function classifyNeed(stimKind: string, spec: ApSpec | FigureChoiceSpec | null, text: { stem: string; options: string; all: string }, stimData: unknown): { need: FigureNeed; reason: string } {
   const refs = /\b(graph|figure|table|diagram|shown|plotted|curve|matrix|chart|data below|data above|the data|illustrated)\b/i.test(text.stem);
   if (stimKind === "none" || (stimKind === "text" && !spec)) return { need: "text_only", reason: stimKind === "none" ? "자료 없음" : "텍스트 자료(식·조건)가 본문에 모두 있음" };
   if (stimKind === "diagram" && !spec) return { need: "text_only", reason: "도식이지만 본문이 모든 정보를 담음(그리지 않음)" };
@@ -152,14 +153,17 @@ function classifyNeed(stimKind: string, spec: ApSpec | null, text: { stem: strin
   return { need: "required", reason: "도식/그림 자료" };
 }
 
-export function renderTypeOf(stimKind: string, spec: ApSpec | null, subject: string): string {
-  if (!spec) return stimKind === "diagram" ? "none(diagram_text_only)" : stimKind;
+export function renderTypeOf(stimKind: string, specIn: ApSpec | FigureChoiceSpec | null, subject: string): string {
+  if (!specIn) return stimKind === "diagram" ? "none(diagram_text_only)" : stimKind;
+  if (specIn.type === "figure_choice") return `figure_choice:${(specIn.choices[0] as { type?: string; variant?: string }).type}:${(specIn.choices[0] as { variant?: string }).variant ?? "graph"}`;
+  const spec = specIn;
   if (spec.type === "ap_table_set") return "ap_table:multi_panel";
   if (spec.type === "ap_table") return stimKind === "payoff_matrix" ? "ap_table:payoff_matrix" : stimKind === "text" ? "ap_table:given_info" : spec.columns.length === 2 && spec.columns[0] === "Item" ? "ap_table:given_info" : "ap_table";
   if (spec.type === "ap_diagram") return `ap_diagram:${spec.variant}`;
   if (spec.type === "ap_stat_chart") return `ap_stat_chart:${spec.chart}`;
   // 그래프 하위 유형
   if (subject === "ap_biology") return "ap_graph:bio_line";
+  if (subject === "ap_physics_1") return "ap_graph:phys_line";
   if (subject === "ap_microeconomics") return "ap_graph:econ_curves";
   const hasMarkersOpen = (spec.markers ?? []).some((m) => m.style === "open");
   if (hasMarkersOpen) return "ap_graph:calc_piecewise_limits";
@@ -168,10 +172,19 @@ export function renderTypeOf(stimKind: string, spec: ApSpec | null, subject: str
   return "ap_graph:calc_function_or_derivative";
 }
 
+/** 선택지가 그림인 문항(payload.option_scenes: 보기 순서대로 장면 모델) → figure_choice 스펙. 자료(stimulus) 그림이 따로 있으면 그림이 둘이 되어 표시 불가라 거부한다. */
+function withOptionFigures(norm: NormResult, payload: Json): NormResult {
+  const os = payload.option_scenes;
+  if (!Array.isArray(os) || os.length < 2) return norm;
+  if (norm.spec) return { ...norm, issues: [...norm.issues, { level: "error", code: "stimulus_and_choice_figures", message: "자료 그림과 선택지 그림이 동시에 있습니다 — 한 문항에 그림 하나만 표시할 수 있습니다." }] };
+  const spec: FigureChoiceSpec = { type: "figure_choice", choices: os.map((sc) => ({ type: "ap_diagram", variant: "phys_scene", scene: sc })) };
+  return { stimKind: "diagram", spec: spec as never, features: norm.features, issues: norm.issues, hidden: norm.hidden };
+}
+
 export function gateCandidate(c: ApCandidateLike): GateResult {
   const issues: GateIssue[] = [];
   const text = visibleTextOf(c.payload);
-  const norm = normalizeStimulus(c.payload.stimulus, { subject: c.apSubjectCode, visibleText: text.all });
+  const norm = withOptionFigures(normalizeStimulus(c.payload.stimulus, { subject: c.apSubjectCode, visibleText: text.all }), c.payload);
   for (const i of norm.issues) issues.push({ level: i.level, code: i.code, message: i.message });
   const stimData = parseStimulusEx(c.payload.stimulus).value;
   const key = c.stockKey ?? c.candidateKey;

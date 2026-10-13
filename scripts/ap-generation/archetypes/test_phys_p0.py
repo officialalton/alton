@@ -228,7 +228,7 @@ class Figures(unittest.TestCase):
                 scenes = p["option_scenes"]
                 self.assertEqual(len(scenes), 4)
                 self.assertEqual(F.choice_checks(scenes, p["key_index"]), [], n)
-                self.assertEqual([o["text"] for o in p["options"]], [f"Diagram {i + 1}" for i in range(4)])
+                self.assertEqual([o["text"] for o in p["options"]], [f"Diagram {chr(65 + i)}" for i in range(4)])
 
     def test_fbd_checks_catch_bad_scenes(self):
         good = F.make_fbd([{"id": "a", "label": "Fg", "angle": 270, "mag": 10}, {"id": "b", "label": "N", "angle": 90, "mag": 10}])

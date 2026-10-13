@@ -6,6 +6,7 @@
 
 import { esc, type FigureIssue } from "./_layout";
 import { dedupe } from "./_layout";
+import { physChoiceIssues, type PhysScene } from "./ap-phys-scene";
 
 export type ChildValidate = (input: unknown) => { ok: true; spec: unknown } | { ok: false; error: string };
 export type ChildRender = (spec: unknown) => string;
@@ -15,7 +16,7 @@ export type FigureChoiceSpec = { type: "figure_choice"; choices: unknown[]; notT
 export type FigureSetSpec = { type: "figure_set"; figures: { id: string; title?: string; spec: unknown }[] };
 
 const LETTERS = ["A", "B", "C", "D", "E"];
-const CHILD_TYPES_ALLOWED = ["plane", "parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "unit_circle", "trig_curve", "data", "number_line"];
+const CHILD_TYPES_ALLOWED = ["plane", "parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "unit_circle", "trig_curve", "data", "number_line", "ap_diagram", "ap_graph"];
 
 /** 지문의 일차식과 같은 그래프가 든 선택지 번호(정확히 하나일 때). */
 /** 지문의 식(일차 y = mx + b, 이차 y = ax² + bx + c, 절댓값 y = a|x − h| + k)과 같은 그래프가 든 선택지 번호들. */
@@ -97,6 +98,18 @@ export function lintFigureChoice(spec: FigureChoiceSpec, options: string[] | nul
       if (Boolean(first.notToScale) !== Boolean(c.notToScale)) issues.push({ code: "choice_bias", message: `선택지 ${LETTERS[i]} 의 'not drawn to scale' 표기가 선택지 A 와 다릅니다.` });
       if (first.type === "polygon" && first.kind !== c.kind) { /* 사각형 종류가 다른 것은 문항의 요지일 수 있어 허용 */ }
     }
+  }
+  // AP 선택지 그림: 장면(phys_scene)은 같은 type·서로 구별·보조 요소 없음, AP 그래프는 같은 축·눈금.
+  if (first.type === "ap_diagram") {
+    const scenes = spec.choices.map((c) => (c as { scene?: PhysScene }).scene);
+    if (scenes.every(Boolean)) for (const code of physChoiceIssues(scenes as PhysScene[], ctx?.correctIndex)) issues.push({ code: "choice_bias", message: `선택지 장면 그림 검사 실패: ${code}` });
+    else issues.push({ code: "choice_bias", message: "선택지 그림이 모두 장면(phys_scene)이어야 합니다." });
+  } else if (first.type === "ap_graph") {
+    for (let i = 1; i < n; i++) {
+      const c = spec.choices[i] as Record<string, unknown>;
+      if (JSON.stringify(c.x) !== JSON.stringify(first.x) || JSON.stringify(c.y) !== JSON.stringify(first.y)) issues.push({ code: "choice_bias", message: `선택지 ${LETTERS[i]} 의 축 범위·눈금이 선택지 A 와 다릅니다 — 모든 선택지는 같은 축을 씁니다.` });
+    }
+    for (let i = 0; i < n; i++) if (((spec.choices[i] as Record<string, unknown>).markers as unknown[] | undefined)?.length) issues.push({ code: "choice_bias", message: `선택지 ${LETTERS[i]} 의 그래프에 표식이 있습니다 — 보조 점은 정답을 암시할 수 있어 두지 않습니다.` });
   }
   if (options && options.length !== n) issues.push({ code: "choice_count", message: `선택지 글 ${options.length}개와 선택지 그림 ${n}개의 수가 다릅니다.` });
   for (let i = 0; i < n; i++) {
