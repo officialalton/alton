@@ -1,0 +1,81 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "AB3",
+ "sourceSetName": "AP Calculus AB — Practice Exam 3",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/audit/ap-external-audit-swap-plans.ts",
+ "note": "external audit triage 2026-10-13 (docs/audit/2026-10-13-external-audit-triage.md); verifier violations checked across all 6 full sets",
+ "swapCount": 3,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq_a",
+   "position": 1,
+   "removeKey": "run2:ap_calculus_ab-f04-k2",
+   "addKey": "v45ab-final:v5-ab:ap_calculus_ab-f01-k0",
+   "reason": "external audit: AB2/AB3 share 5 of 6 FRQ archetypes (identical sub-goal order, some identical answers); diversify AB3",
+   "remove": {
+    "unit": 8,
+    "skill": 1,
+    "calculator": "required",
+    "graph": true,
+    "family": "fam:run2:ap_calculus_ab-f04-k0",
+    "type": "frq_area_volume"
+   },
+   "add": {
+    "unit": 4,
+    "skill": 3,
+    "calculator": "required",
+    "graph": false,
+    "family": "fam:v45ab-final:v5-ab:ap_calculus_ab-f01-k0",
+    "type": "frq_particle_motion"
+   }
+  },
+  {
+   "section": "ap_frq_a",
+   "position": 2,
+   "removeKey": "s1a-final:ap_calculus_ab-f01-k0",
+   "addKey": "supp-r3c-ab-final:ap_calculus_ab-f01-k0",
+   "reason": "external audit: AB2/AB3 share 5 of 6 FRQ archetypes (identical sub-goal order, some identical answers); diversify AB3",
+   "remove": {
+    "unit": 6,
+    "skill": 2,
+    "calculator": "required",
+    "graph": false,
+    "family": "fam:run2:ap_calculus_ab-f01-k3",
+    "type": "frq_table_rate"
+   },
+   "add": {
+    "unit": 6,
+    "skill": 3,
+    "calculator": "required",
+    "graph": false,
+    "family": "fam:supp-r3c-ab-final:ap_calculus_ab-f01-k0",
+    "type": "frq_accum_charge"
+   }
+  },
+  {
+   "section": "ap_frq_b",
+   "position": 3,
+   "removeKey": "run2:ap_calculus_ab-f03-k3",
+   "addKey": "supp-r3c2-ab-final:ap_calculus_ab-f05-k0",
+   "reason": "external audit: AB2/AB3 share 5 of 6 FRQ archetypes (identical sub-goal order, some identical answers); diversify AB3",
+   "remove": {
+    "unit": 7,
+    "skill": 1,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "fam:run2:ap_calculus_ab-f03-k0",
+    "type": "frq_diffeq"
+   },
+   "add": {
+    "unit": 7,
+    "skill": 1,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "fam:supp-r3c2-ab-final:ap_calculus_ab-f05-k0",
+    "type": "frq_exp_decay_de"
+   }
+  }
+ ]
+}

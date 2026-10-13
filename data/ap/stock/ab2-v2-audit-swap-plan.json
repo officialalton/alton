@@ -1,0 +1,35 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "AB2",
+ "sourceSetName": "AP Calculus AB — Practice Exam 2",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/audit/ap-external-audit-swap-plans.ts",
+ "note": "external audit triage 2026-10-13 (docs/audit/2026-10-13-external-audit-triage.md); verifier violations checked across all 6 full sets",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc_a",
+   "position": 18,
+   "removeKey": "s1a-final:ap_calculus_ab-m17-k1",
+   "addKey": "s1a-final:ap_calculus_ab-m19-k0",
+   "reason": "external audit: fprime_graph_statements premises contradict (f' increasing from its own sign-change point while negative)",
+   "remove": {
+    "unit": 5,
+    "skill": 2,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m17-k2",
+    "type": "5.9"
+   },
+   "add": {
+    "unit": 5,
+    "skill": 1,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m19-k0",
+    "type": "5.11"
+   }
+  }
+ ]
+}

@@ -39,6 +39,27 @@ describe("planConversion on current stock", () => {
   });
 });
 
+// 외부 감사(2026-10-08): 그래프 FRQ 의 초기값·함수 정의가 그림 스펙에만 없고 학생 화면에 안 나왔다(AB1 저축·AB2 태양광·BC1 f' 그래프).
+describe("그래프 FRQ 의 context·given 이 학생 지문에 실린다", () => {
+  const get = (key: string) => items.find((i) => i.candidateKey === key && i.kind === "frq_bundle")!;
+  const passageOf = (key: string) => { const p = planConversion(get(key)); expect(p.ok).toBe(true); return p.ok ? (p.items[0].passage ?? "") : ""; };
+  it("AB1 저축 그래프: f(0)=40 과 f 의 정의", () => {
+    const t = passageOf("ap_calculus_ab-f02-k5");
+    expect(t).toContain("cumulative net savings");
+    expect(t).toContain("$f(0) = 40$");
+  });
+  it("AB2 태양광: S(0)=0, BC1 f' 그래프: f(0)=1 (문자열 given)", () => {
+    expect(passageOf("ap_calculus_ab-f02-k9")).toContain("S(0)=0 dollars");
+    expect(passageOf("ap_calculus_ab-f02-k10")).toContain("f(0)=1");
+  });
+  it("자료가 없는 그래프 FRQ 의 지문은 바뀌지 않는다", () => {
+    const skip = ["ap_calculus_ab-f02-k5", "ap_calculus_ab-f02-k9", "ap_calculus_ab-f02-k10"];
+    const g = items.filter((i) => i.kind === "frq_bundle" && i.validation === "auto_passed" && (i.payload.stimulus as { kind?: string } | undefined)?.kind === "graph" && !skip.includes(i.candidateKey));
+    expect(g.length).toBeGreaterThan(0);
+    for (const c of g) { const p = planConversion(c); if (p.ok) expect(p.items[0].passage).toBeNull(); }
+  });
+});
+
 describe("layouts", () => {
   it("official structure and label rules", () => {
     expect(AP_LAYOUTS.ap_calculus_ab.reduce((a, s) => a + (s.kind === "mc" ? s.count : 0), 0)).toBe(42);

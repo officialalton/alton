@@ -1,0 +1,2558 @@
+{
+ "kind": "sat_problem_edit_patch_list",
+ "generatedBy": "external-audit triage 2026-10-13 (see docs/audit/2026-10-13-external-audit-triage.md)",
+ "applies": "PLAN ONLY - no DB write was made. Apply through the admin problem editor / new-version flow, then re-run render check + RW reviewer. Patch by option TEXT if the DB version was position-shuffled by position-fix.",
+ "count": 67,
+ "patches": [
+  {
+   "id": "S-01",
+   "gid": "a118bb1b-89a4-4b3a-9d85-81dffc83e575",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT2 Math Module 2 Q17 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Answer key is wrong: -200x+6000 = -350x+9000 gives x=20, altitude 2000 (option \"x = 20, altitude = 2000\"); the explanation divides 3000/150 as 10.",
+   "changes": [
+    {
+     "field": "correct_index",
+     "old": 2,
+     "new": 1
+    },
+    {
+     "field": "explanation",
+     "old": "두 식이 같은 고도를 나타내는 시각을 구하려면 연립방정식을 풀어야 한다. $$\\begin{cases} y = -200x + 6000 \\\\ y = -350x + 9000 \\end{cases}$$ 두 식의 우변을 같게 놓으면 $-200x + 6000 = -350x + 9000$이다. 양변에 $350x$를 더하면 $150x + 6000 = 9000$이고, $6000$을 빼면 $150x = 3000$이므로 $x = 10$이다. 이를 첫 번째 식에 대입하면 $y = -200(10) + 6000 = -2000 + 6000 = 4000$이다. 그래프에서도 직선 $a$와 직선 $b$가 $x=10$ 근처에서 교차하며 그 높이가 $4000$임을 확인할 수 있다. 따라서 정답은 C번이다. 오답 A는 두 식을 계산하는 과정에서 부호를 잘못 처리해 $150x$ 대신 $250x$로 잘못 나눈 경우 나올 수 있는 값이고, 오답 B는 $x=20$일 때 각 직선의 $y$값을 개별적으로 잘못 계산해 나온 값이며(교점이 아님), 오답 D는 두 기울기의 차이를 잘못 계산($150$ 대신 $200$으로 착각)하여 $x=15$로 잘못 구한 경우이다.",
+     "new": "두 식이 같은 고도를 나타내는 시각을 구하려면 연립방정식을 풀어야 한다. $$\\begin{cases} y = -200x + 6000 \\\\ y = -350x + 9000 \\end{cases}$$ 두 식의 우변을 같게 놓으면 $-200x + 6000 = -350x + 9000$이다. 양변에 $350x$를 더하면 $150x + 6000 = 9000$이고, $6000$을 빼면 $150x = 3000$이므로 $x = 20$이다. 이를 첫 번째 식에 대입하면 $y = -200(20) + 6000 = 2000$이고, 두 번째 식에서도 $-350(20) + 9000 = 2000$이므로 두 직선은 $(20, 2000)$에서 만난다. 따라서 정답은 B번이다. 다른 선택지는 두 고도가 서로 다르다(예: $x=10$이면 A기 $4000$, B기 $5500$)."
+    },
+    {
+     "field": "explanation_en",
+     "old": "To find when the two altitudes are equal, set the two expressions equal: $$\\begin{cases} y = -200x + 6000 \\\\ y = -350x + 9000 \\end{cases}$$ Setting the right-hand sides equal gives $-200x + 6000 = -350x + 9000$. Adding $350x$ to both sides gives $150x + 6000 = 9000$, and subtracting $6000$ gives $150x = 3000$, so $x = 10$. Substituting into the first equation gives $y = -200(10) + 6000 = 4000$. The graph confirms that lines $a$ and $b$ intersect near $x = 10$ at height $4000$. Therefore, the correct answer is C. Distractor A results from a sign-handling error that leads to dividing by $250$ instead of $150$. Distractor B comes from evaluating each line's $y$-value at $x = 20$ separately (not the intersection point). Distractor D results from miscalculating the difference in slopes as $200$ instead of $150$, leading to $x = 15$.",
+     "new": "To find when the two altitudes are equal, set the expressions equal: $-200x + 6000 = -350x + 9000$. Adding $350x$ to both sides gives $150x + 6000 = 9000$, and subtracting $6000$ gives $150x = 3000$, so $x = 20$. Substituting into the first equation gives $y = -200(20) + 6000 = 2000$, and the second equation gives $-350(20) + 9000 = 2000$, so the lines meet at $(20, 2000)$, the right-hand end of the graphed domain. Therefore, the correct answer is B. In the other choices the two altitudes differ at the listed time (for example, at $x = 10$ Airplane A is at $4000$ feet but Airplane B is at $5500$ feet)."
+    }
+   ],
+   "validation": "sympy: solve(-200x+6000 = -350x+9000) = [20]; y=2000; at x=10 B=5500. Only option B matches. If the DB version was position-shuffled, patch by option text '$x = 20$, altitude $= 2000$' instead of by index.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'a118bb1b-89a4-4b3a-9d85-81dffc83e575' order by pv.version_no desc"
+  },
+  {
+   "id": "S-02",
+   "gid": "f5124a1b-0ff4-4154-92ad-fea85f2b0dfe",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT3 Math Module 1 Q6 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Three options (-2, 1, 4) are all x-intercepts of g; replace the two extra roots with non-roots.",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "-4",
+      "-2",
+      "1",
+      "4"
+     ],
+     "new": [
+      "-4",
+      "-2",
+      "2",
+      "3"
+     ]
+    },
+    {
+     "field": "explanation",
+     "old": "다항함수 $g(x) = (x+2)(x-1)(x-4)$의 x절편은 함수값이 0이 되는 x값, 즉 각 인수를 0으로 만드는 값이다. $x+2=0$이면 $x=-2$, $x-1=0$이면 $x=1$, $x-4=0$이면 $x=4$이다. 따라서 x절편은 $x=-2, 1, 4$이다. 선택지 중 이 값에 해당하는 것은 $-2$뿐이다. 그래프에서도 곡선이 $x=-2, 1, 4$에서 x축을 지나는 것을 확인할 수 있다. $-4$는 인수분해된 식에 나타나지 않으므로 x절편이 아니다. 따라서 정답은 B번이다.",
+     "new": "다항함수 $g(x) = (x+2)(x-1)(x-4)$의 x절편은 각 인수를 0으로 만드는 값 $x=-2, 1, 4$이다. 선택지 중 이 값에 해당하는 것은 $-2$뿐이다. $-4$, $2$, $3$은 $g$의 영점이 아니다($g(-4)=-80$, $g(2)=-8$, $g(3)=-10$). 따라서 정답은 B번이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "For the polynomial $g(x) = (x+2)(x-1)(x-4)$, the x-intercepts occur where the function equals zero, i.e., where each factor equals zero. Setting $x+2=0$ gives $x=-2$; $x-1=0$ gives $x=1$; $x-4=0$ gives $x=4$. So the x-intercepts are $x=-2, 1, 4$. Among the answer choices, only $-2$ matches one of these values. The graph confirms the curve crosses the x-axis at $x=-2, 1, 4$. Note that $-4$ does not appear in the factored expression, so it is not an x-intercept. Therefore, the correct answer is choice B.",
+     "new": "For the polynomial $g(x) = (x+2)(x-1)(x-4)$, the x-intercepts occur where the function equals zero, i.e., where each factor equals zero: $x=-2$, $x=1$, $x=4$. Among the answer choices only $-2$ is one of these values; $-4$, $2$ and $3$ are not zeros of $g$ (g(-4) = -80, g(2) = -8, g(3) = -10). The graph confirms the curve crosses the x-axis at $x=-2$, $1$ and $4$ only. Therefore, the correct answer is choice B."
+    }
+   ],
+   "validation": "sympy: g(-4,-2,2,3) = [-80, 0, -8, -10] -> exactly one root.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'f5124a1b-0ff4-4154-92ad-fea85f2b0dfe' order by pv.version_no desc"
+  },
+  {
+   "id": "S-03",
+   "gid": "1239c707-e34c-488c-9c14-156b58fa4159",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT8 Math Module 2 Q22 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "3x^2+7x+2 = (3x+1)(x+2), not (3x+2)(x+2): the printed expression has no matching option. Changing the divisor numerator to 3x^2+8x+4 = (3x+2)(x+2) makes the stored solution and option A correct.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "For all values of $x$ for which the expression is defined,\n$$\\dfrac{6x^2 - 5x - 6}{2x^2 - 7x + 3} \\div \\dfrac{3x^2 + 7x + 2}{x^2 - 9}$$\nis equivalent to which of the following?",
+     "new": "For all values of $x$ for which the expression is defined,\n$$\\dfrac{6x^2 - 5x - 6}{2x^2 - 7x + 3} \\div \\dfrac{3x^2 + 8x + 4}{x^2 - 9}$$\nis equivalent to which of the following?"
+    },
+    {
+     "field": "explanation",
+     "old": "각 다항식을 인수분해하면 다음과 같다.\n$6x^2-5x-6=(3x+2)(2x-3)$\n$2x^2-7x+3=(2x-1)(x-3)$\n$3x^2+7x+2=(3x+2)(x+2)$\n$x^2-9=(x+3)(x-3)$\n\n나눗셈을 역수의 곱셈으로 바꾸면\n$$\\frac{(3x+2)(2x-3)}{(2x-1)(x-3)}\\times\\frac{(x+3)(x-3)}{(3x+2)(x+2)}$$\n이다.\n\n분자·분모에서 $(3x+2)$가 약분되고, $(x-3)$도 분자·분모에서 약분된다. 남는 식은\n$$\\frac{(2x-3)(x+3)}{(2x-1)(x+2)}$$\n이므로 정답은 A이다.\n\nB는 $(2x-1)$을 $(x-1)$로 잘못 쓴 오류(즉 $2x^2-7x+3$의 인수분해를 틀리게 한 경우)이다.\nC는 $(x+3)$과 $(x+2)$가 서로 약분된다고 착각하여(실제로는 서로 다른 인수이므로 약분 불가) 과도하게 약분한 오류이다.\nD는 $6x^2-5x-6$의 인수분해에서 부호를 잘못 처리하여 $(3x+2)$ 대신 $(2x+3)$이 남는다고 착각한 오류이다.",
+     "new": "각 다항식을 인수분해하면 다음과 같다.\n$6x^2-5x-6=(3x+2)(2x-3)$\n$2x^2-7x+3=(2x-1)(x-3)$\n$3x^2+8x+4=(3x+2)(x+2)$\n$x^2-9=(x+3)(x-3)$\n\n나눗셈을 역수의 곱셈으로 바꾸면\n$$\\frac{(3x+2)(2x-3)}{(2x-1)(x-3)}\\times\\frac{(x+3)(x-3)}{(3x+2)(x+2)}$$\n이다.\n\n분자·분모에서 $(3x+2)$가 약분되고, $(x-3)$도 분자·분모에서 약분된다. 남는 식은\n$$\\frac{(2x-3)(x+3)}{(2x-1)(x+2)}$$\n이므로 정답은 A이다.\n\nB는 $(2x-1)$을 $(x-1)$로 잘못 쓴 오류(즉 $2x^2-7x+3$의 인수분해를 틀리게 한 경우)이다.\nC는 $(x+3)$과 $(x+2)$가 서로 약분된다고 착각하여(실제로는 서로 다른 인수이므로 약분 불가) 과도하게 약분한 오류이다.\nD는 $6x^2-5x-6$의 인수분해에서 부호를 잘못 처리하여 $(3x+2)$ 대신 $(2x+3)$이 남는다고 착각한 오류이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": null,
+     "new": "Factor each polynomial: $6x^2-5x-6=(3x+2)(2x-3)$, $2x^2-7x+3=(2x-1)(x-3)$, $3x^2+8x+4=(3x+2)(x+2)$ and $x^2-9=(x+3)(x-3)$. Dividing by a fraction is multiplying by its reciprocal: $$\\frac{(3x+2)(2x-3)}{(2x-1)(x-3)}\\times\\frac{(x+3)(x-3)}{(3x+2)(x+2)}.$$ The factors $(3x+2)$ and $(x-3)$ cancel, leaving $$\\frac{(2x-3)(x+3)}{(2x-1)(x+2)},$$ so the answer is A. Choice B changes $(2x-1)$ to $(x-1)$; C cancels $(x+3)$ against $(x+2)$, which are different factors; D uses $(2x+3)$ instead of $(2x-3)$."
+    }
+   ],
+   "validation": "sympy: as printed -> (x+3)(2x-3)(3x+2)/((x+2)(2x-1)(3x+1)) (matches none of A-D); with 3x^2+8x+4 -> (x+3)(2x-3)/((x+2)(2x-1)) == option A, B/C/D differ.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '1239c707-e34c-488c-9c14-156b58fa4159' order by pv.version_no desc"
+  },
+  {
+   "id": "S-04",
+   "gid": "bc9b4038-6141-594c-a3a7-249f26efac98",
+   "repoSource": "data/mock-exam-generation/gapfill-20261006/items8.json",
+   "auditRefs": [
+    "SAT11 Math Module 2 Q22 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Photo side 2t-2 is always twice the poster side t-1, so the photo cannot be placed inside and the keyed area is negative (-3(t-1)^2). Swap the roles (poster 2t-2, photo t-1): uncovered area = 3(t-1)^2. Root cause: generator ee.polynomial_distribution.compose_kind/area_context never enforces inner side < outer side (lib/problem-generation/math-archetypes/skills/equivalent-expressions.ts:23-33).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "A square poster has side length $t - 1$ inches, and a square photo with side length $2t - 2$ inches is placed inside it, where t is a positive number large enough for this to make sense.",
+     "new": "A square poster has side length $2t - 2$ inches, and a square photo with side length $t - 1$ inches is placed inside it, where t is a positive number large enough for this to make sense."
+    },
+    {
+     "field": "options",
+     "old": [
+      "$-3t^2 + 6t - 3$",
+      "$t^2 - 2t + 1$",
+      "$-3t^2 + 6t + 5$",
+      "$-3t^2 - 3$"
+     ],
+     "new": [
+      "$3t^2 - 6t + 3$",
+      "$t^2 - 2t + 1$",
+      "$3t^2 - 6t + 5$",
+      "$3t^2 + 3$"
+     ]
+    },
+    {
+     "field": "explanation",
+     "old": "(1) 첫 번째 제곱을 전개한다: $(t - 1)^2 = t^2 - 2t + 1$. (2) 두 번째 제곱을 전개한다: $(2t - 2)^2 = 4t^2 - 8t + 4$. (3) 두 번째 전개식 전체에 뺄셈을 분배해 모든 항의 부호를 바꾼다. (4) $t^2$ 항: 1 - 4 = -3, $t$ 항: -2 - (-8) = 6, 상수항: 1 - 4 = -3 이다. (5) 결과는 $-3t^2 + 6t - 3$ 이다. 따라서 정답은 $-3t^2 + 6t - 3$이다.",
+     "new": "(1) 포스터의 넓이: $(2t - 2)^2 = 4t^2 - 8t + 4$. (2) 사진의 넓이: $(t - 1)^2 = t^2 - 2t + 1$. (3) 덮이지 않은 넓이 = 포스터 − 사진 $= 4t^2 - 8t + 4 - (t^2 - 2t + 1)$. (4) 동류항 정리: $3t^2 - 6t + 3$. 따라서 정답은 $3t^2 - 6t + 3$이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "(1) Expand the first square. (2) Expand the second square. (3) Distribute the subtraction over every term of the second expansion. (4) Combine like terms. (5) Write the simplified result. So the answer is $-3t^2 + 6t - 3$.",
+     "new": "(1) Area of the poster: $(2t-2)^2 = 4t^2 - 8t + 4$. (2) Area of the photo: $(t-1)^2 = t^2 - 2t + 1$. (3) Uncovered area = poster minus photo: $4t^2 - 8t + 4 - (t^2 - 2t + 1)$. (4) Distribute the subtraction over every term and combine like terms: $3t^2 - 6t + 3$. So the answer is $3t^2 - 6t + 3$."
+    }
+   ],
+   "validation": "sympy: (2t-2)^2-(t-1)^2 = 3t^2-6t+3 (>0 for all t!=1); old keyed value (t-1)^2-(2t-2)^2 = -3t^2+6t-3 (<0 for t>1). Distractors: (t-1)^2 (single square), 3t^2-6t+5 (constant sign slip), 3t^2+3 (middle term dropped).",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'bc9b4038-6141-594c-a3a7-249f26efac98' order by pv.version_no desc"
+  },
+  {
+   "id": "S-05",
+   "gid": "992e2718-a74d-47e6-9b24-bc5e0766ed3f",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT1 Math Module 1 Q12 (P1)",
+    "SAT1 new-attempt: student entered 1, marked wrong"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "f(x)=f(1) has solutions x=1 and x=5; \"other than x=3\" excludes the vertex, not the given point, so 1 and 5 both qualify. Intended wording excludes x=1. Answer 5 stays unique.",
+   "changes": [
+    {
+     "field": "question",
+     "old": "What is the value of $x$, other than $x = 3$, for which the height of the water arc equals the height at $x = 1$?",
+     "new": "What is the value of $x$, other than $x = 1$, for which the height of the water arc equals the height at $x = 1$?"
+    }
+   ],
+   "validation": "sympy: solve(-2(x-3)^2+8 = f(1)=0) = [1, 5]; with 'other than x=1' only 5 remains. Alternative: accept answers ['1','5'] (not recommended).",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '992e2718-a74d-47e6-9b24-bc5e0766ed3f' order by pv.version_no desc"
+  },
+  {
+   "id": "S-06",
+   "gid": "6fe93dc4-6ef8-4930-99f1-bfafaf5e59b2",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT2 Math Module 2 Q16 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The boundary line \"x = 5\" is stored as slope 0, intercept 0 (the x-axis). The plane renderer supports vertical lines via through: [[5,0],[5,25]] (lib/problem-figures/templates/coordinate-plane.ts lineParams). Text answer (6,10) is unique and correct. Only this item in the bank has this mis-encoding (scan over all figure specs).",
+   "changes": [
+    {
+     "field": "figure",
+     "old": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": 0,
+        "max": 30,
+        "step": 5,
+        "title": "Number of paintings (x)"
+       },
+       "y": {
+        "min": 0,
+        "max": 25,
+        "step": 5,
+        "title": "Number of sculptures (y)"
+       }
+      },
+      "objects": [
+       {
+        "id": "l1",
+        "kind": "line",
+        "slope": -0.5333,
+        "intercept": 16,
+        "label": "8x + 15y = 240"
+       },
+       {
+        "id": "l2",
+        "kind": "line",
+        "slope": 0,
+        "intercept": 0,
+        "label": "x = 5"
+       }
+      ]
+     },
+     "new": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": 0,
+        "max": 30,
+        "step": 5,
+        "title": "Number of paintings (x)"
+       },
+       "y": {
+        "min": 0,
+        "max": 25,
+        "step": 5,
+        "title": "Number of sculptures (y)"
+       }
+      },
+      "objects": [
+       {
+        "id": "l1",
+        "kind": "line",
+        "slope": -0.5333,
+        "intercept": 16,
+        "label": "8x + 15y = 240"
+       },
+       {
+        "id": "l2",
+        "kind": "line",
+        "label": "x = 5",
+        "through": [
+         [
+          5,
+          0
+         ],
+         [
+          5,
+          25
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "validation": "Render check required after patch (figure_checked must be reset and re-confirmed by an admin). Option check: (6,10): x>=5 and 8*6+15*10=198<=240 -> only valid option.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '6fe93dc4-6ef8-4930-99f1-bfafaf5e59b2' order by pv.version_no desc"
+  },
+  {
+   "id": "S-07",
+   "gid": "9e664468-12eb-406b-bc76-38c8d15ecd39",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT2 new-attempt Math Module 2 Q20 (P1, flat arch figure)",
+    "observation: tangency vs one-point"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Figure: the arch is stored as fn sqrt params [0,0,0] (y = 0, a flat line) and the beam as y = 4, which also shows the answer. Content: k = 5/4 (option D) also gives exactly one point on the upper half (the second ellipse point has y < 0), so A and D are both valid. Replace D by 3/5 (two points) and redraw the arch as a polygon (the plane template has no ellipse object).",
+   "changes": [
+    {
+     "field": "figure",
+     "old": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -7,
+        "max": 7,
+        "step": 1,
+        "title": "x (feet)"
+       },
+       "y": {
+        "min": -1,
+        "max": 6,
+        "step": 1,
+        "title": "y (feet)"
+       }
+      },
+      "objects": [
+       {
+        "id": "arch",
+        "kind": "function",
+        "fn": "sqrt",
+        "params": [
+         0,
+         0,
+         0
+        ],
+        "label": "arch",
+        "domain": [
+         -5,
+         5
+        ]
+       },
+       {
+        "id": "beam",
+        "kind": "line",
+        "slope": 0,
+        "intercept": 4,
+        "label": "beam"
+       }
+      ]
+     },
+     "new": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -7,
+        "max": 7,
+        "step": 1,
+        "title": "x (feet)"
+       },
+       "y": {
+        "min": -1,
+        "max": 6,
+        "step": 1,
+        "title": "y (feet)"
+       }
+      },
+      "objects": [
+       {
+        "id": "arch",
+        "kind": "polygon",
+        "vertices": [
+         [
+          -5.0,
+          0.0
+         ],
+         [
+          -4.5,
+          1.7436
+         ],
+         [
+          -4.0,
+          2.4
+         ],
+         [
+          -3.5,
+          2.8566
+         ],
+         [
+          -3.0,
+          3.2
+         ],
+         [
+          -2.5,
+          3.4641
+         ],
+         [
+          -2.0,
+          3.6661
+         ],
+         [
+          -1.5,
+          3.8158
+         ],
+         [
+          -1.0,
+          3.9192
+         ],
+         [
+          -0.5,
+          3.9799
+         ],
+         [
+          0.0,
+          4.0
+         ],
+         [
+          0.5,
+          3.9799
+         ],
+         [
+          1.0,
+          3.9192
+         ],
+         [
+          1.5,
+          3.8158
+         ],
+         [
+          2.0,
+          3.6661
+         ],
+         [
+          2.5,
+          3.4641
+         ],
+         [
+          3.0,
+          3.2
+         ],
+         [
+          3.5,
+          2.8566
+         ],
+         [
+          4.0,
+          2.4
+         ],
+         [
+          4.5,
+          1.7436
+         ],
+         [
+          5.0,
+          0.0
+         ]
+        ],
+        "label": "arch"
+       }
+      ]
+     }
+    },
+    {
+     "field": "options",
+     "old": [
+      "$0$",
+      "$\\frac{4}{5}$",
+      "$\\frac{16}{25}$",
+      "$\\frac{5}{4}$"
+     ],
+     "new": [
+      "$0$",
+      "$\\frac{4}{5}$",
+      "$\\frac{16}{25}$",
+      "$\\frac{3}{5}$"
+     ]
+    }
+   ],
+   "validation": "sympy: x[(16+25k^2)x+200k]=0 -> second point x=-200k/(16+25k^2). k=0: 1 point; 4/5: (-5,0) and (0,4) = 2; 16/25: 2; 5/4: second point y<0 -> 1 point (invalid distractor); 3/5: second point (-24/5, 1.12) -> 2 points (valid distractor).",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '9e664468-12eb-406b-bc76-38c8d15ecd39' order by pv.version_no desc"
+  },
+  {
+   "id": "S-08",
+   "gid": "18ef1549-7fdb-52bb-ab8f-ad5d9de5b6ca",
+   "repoSource": "data/mock-exam-generation/gapfill-20261006/items4.clean.json",
+   "auditRefs": [
+    "SAT5 Math Module 1 Q1 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Removing the outlier of plot C (6,18) or plot D (9,27) both increase the least-squares slope (3.0909->3.2716 and 1.9394->3.2145). Move plot C outlier to (6,66): a high point right of the mean x pulls the slope up, so removing it decreases the slope; only D increases. Key stays D.",
+   "changes": [
+    {
+     "field": "figure",
+     "old": {
+      "type": "figure_choice",
+      "choices": [
+       {
+        "type": "data",
+        "kind": "scatter",
+        "xTitle": "Days observed (days)",
+        "yTitle": "Ice thickness (meters)",
+        "points": [
+         [
+          1,
+          31
+         ],
+         [
+          2,
+          35
+         ],
+         [
+          3,
+          38
+         ],
+         [
+          4,
+          42
+         ],
+         [
+          5,
+          44
+         ],
+         [
+          6,
+          45
+         ],
+         [
+          7,
+          50
+         ],
+         [
+          8,
+          94
+         ],
+         [
+          9,
+          58
+         ],
+         [
+          10,
+          60
+         ]
+        ],
+        "fitLine": {
+         "slope": 4.4061,
+         "intercept": 25.4667
+        },
+        "yMin": 0,
+        "yMax": 100,
+        "yStep": 10
+       },
+       {
+        "type": "data",
+        "kind": "scatter",
+        "xTitle": "Days observed (days)",
+        "yTitle": "Ice thickness (meters)",
+        "points": [
+         [
+          1,
+          31
+         ],
+         [
+          2,
+          35
+         ],
+         [
+          3,
+          38
+         ],
+         [
+          4,
+          42
+         ],
+         [
+          5,
+          44
+         ],
+         [
+          6,
+          45
+         ],
+         [
+          7,
+          50
+         ],
+         [
+          8,
+          84
+         ],
+         [
+          9,
+          58
+         ],
+         [
+          10,
+          60
+         ]
+        ],
+        "fitLine": {
+         "slope": 4.103,
+         "intercept": 26.1333
+        },
+        "yMin": 0,
+        "yMax": 100,
+        "yStep": 10
+       },
+       {
+        "type": "data",
+        "kind": "scatter",
+        "xTitle": "Days observed (days)",
+        "yTitle": "Ice thickness (meters)",
+        "points": [
+         [
+          1,
+          31
+         ],
+         [
+          2,
+          35
+         ],
+         [
+          3,
+          38
+         ],
+         [
+          4,
+          42
+         ],
+         [
+          5,
+          44
+         ],
+         [
+          6,
+          18
+         ],
+         [
+          7,
+          50
+         ],
+         [
+          8,
+          56
+         ],
+         [
+          9,
+          58
+         ],
+         [
+          10,
+          60
+         ]
+        ],
+        "fitLine": {
+         "slope": 3.0909,
+         "intercept": 26.2
+        },
+        "yMin": 0,
+        "yMax": 100,
+        "yStep": 10
+       },
+       {
+        "type": "data",
+        "kind": "scatter",
+        "xTitle": "Days observed (days)",
+        "yTitle": "Ice thickness (meters)",
+        "points": [
+         [
+          1,
+          31
+         ],
+         [
+          2,
+          35
+         ],
+         [
+          3,
+          38
+         ],
+         [
+          4,
+          42
+         ],
+         [
+          5,
+          44
+         ],
+         [
+          6,
+          45
+         ],
+         [
+          7,
+          50
+         ],
+         [
+          8,
+          56
+         ],
+         [
+          9,
+          27
+         ],
+         [
+          10,
+          60
+         ]
+        ],
+        "fitLine": {
+         "slope": 1.9394,
+         "intercept": 32.1333
+        },
+        "yMin": 0,
+        "yMax": 100,
+        "yStep": 10
+       }
+      ]
+     },
+     "new": {
+      "type": "figure_choice",
+      "choices": [
+       {
+        "type": "data",
+        "kind": "scatter",
+        "xTitle": "Days observed (days)",
+        "yTitle": "Ice thickness (meters)",
+        "points": [
+         [
+          1,
+          31
+         ],
+         [
+          2,
+          35
+         ],
+         [
+          3,
+          38
+         ],
+         [
+          4,
+          42
+         ],
+         [
+          5,
+          44
+         ],
+         [
+          6,
+          45
+         ],
+         [
+          7,
+          50
+         ],
+         [
+          8,
+          94
+         ],
+         [
+          9,
+          58
+         ],
+         [
+          10,
+          60
+         ]
+        ],
+        "fitLine": {
+         "slope": 4.4061,
+         "intercept": 25.4667
+        },
+        "yMin": 0,
+        "yMax": 100,
+        "yStep": 10
+       },
+       {
+        "type": "data",
+        "kind": "scatter",
+        "xTitle": "Days observed (days)",
+        "yTitle": "Ice thickness (meters)",
+        "points": [
+         [
+          1,
+          31
+         ],
+         [
+          2,
+          35
+         ],
+         [
+          3,
+          38
+         ],
+         [
+          4,
+          42
+         ],
+         [
+          5,
+          44
+         ],
+         [
+          6,
+          45
+         ],
+         [
+          7,
+          50
+         ],
+         [
+          8,
+          84
+         ],
+         [
+          9,
+          58
+         ],
+         [
+          10,
+          60
+         ]
+        ],
+        "fitLine": {
+         "slope": 4.103,
+         "intercept": 26.1333
+        },
+        "yMin": 0,
+        "yMax": 100,
+        "yStep": 10
+       },
+       {
+        "type": "data",
+        "kind": "scatter",
+        "xTitle": "Days observed (days)",
+        "yTitle": "Ice thickness (meters)",
+        "points": [
+         [
+          1,
+          31
+         ],
+         [
+          2,
+          35
+         ],
+         [
+          3,
+          38
+         ],
+         [
+          4,
+          42
+         ],
+         [
+          5,
+          44
+         ],
+         [
+          6,
+          66
+         ],
+         [
+          7,
+          50
+         ],
+         [
+          8,
+          56
+         ],
+         [
+          9,
+          58
+         ],
+         [
+          10,
+          60
+         ]
+        ],
+        "fitLine": {
+         "slope": 3.3818,
+         "intercept": 29.4
+        },
+        "yMin": 0,
+        "yMax": 100,
+        "yStep": 10
+       },
+       {
+        "type": "data",
+        "kind": "scatter",
+        "xTitle": "Days observed (days)",
+        "yTitle": "Ice thickness (meters)",
+        "points": [
+         [
+          1,
+          31
+         ],
+         [
+          2,
+          35
+         ],
+         [
+          3,
+          38
+         ],
+         [
+          4,
+          42
+         ],
+         [
+          5,
+          44
+         ],
+         [
+          6,
+          45
+         ],
+         [
+          7,
+          50
+         ],
+         [
+          8,
+          56
+         ],
+         [
+          9,
+          27
+         ],
+         [
+          10,
+          60
+         ]
+        ],
+        "fitLine": {
+         "slope": 1.9394,
+         "intercept": 32.1333
+        },
+        "yMin": 0,
+        "yMax": 100,
+        "yStep": 10
+       }
+      ]
+     }
+    }
+   ],
+   "validation": "numpy OLS: A 4.4061->3.1824 (down), B 4.1030->3.1824 (down), C new 3.3818->3.2716 (down), D 1.9394->3.2145 (up).",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '18ef1549-7fdb-52bb-ab8f-ad5d9de5b6ca' order by pv.version_no desc"
+  },
+  {
+   "id": "S-09",
+   "gid": "bbfa0e1a-c6d4-4b6b-ac17-f3797636eda0",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT2 new-attempt Math Module 2 Q14 (P1 MC uniqueness)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "400*(1/3)^(-t/6) equals 400*3^(t/6) = P(t), so option D is also equivalent; replace with 400*(1/3)^(t/6) (a decay).",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "$400 \\cdot (3^{1/6})^{t}$",
+      "$400 \\cdot (3^{6})^{t}$",
+      "$400 \\cdot 3 \\cdot (t/6)$",
+      "$400 \\cdot (1/3)^{-t/6}$"
+     ],
+     "new": [
+      "$400 \\cdot (3^{1/6})^{t}$",
+      "$400 \\cdot (3^{6})^{t}$",
+      "$400 \\cdot 3 \\cdot (t/6)$",
+      "$400 \\cdot (1/3)^{t/6}$"
+     ]
+    }
+   ],
+   "validation": "sympy: 400*3^(t/6) - 400*(3^(1/6))^t = 0; 400*3^(t/6) - 400*(1/3)^(-t/6) = 0 (so D was valid); (1/3)^(t/6) = 3^(-t/6) != 3^(t/6).",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'bbfa0e1a-c6d4-4b6b-ac17-f3797636eda0' order by pv.version_no desc"
+  },
+  {
+   "id": "S-10",
+   "gid": "3c263c92-e14d-4312-8051-886f17996d79",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT1 RW49? no: SAT1 RW Q32 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Printed text says distance makes Eris \"should look dim\" - then Given / Because of / As a result of are all valid and Despite (the key) is illogical. Rewrite the second clause so the concession reading is the only valid one (key unchanged).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Astronomers tracking the dwarf planet Eris noticed that its surface reflects nearly all incoming sunlight, appearing brighter than expected for a body so far from the sun. ______ its extreme distance, Eris should look dim, but a fresh coating of frozen nitrogen keeps its surface highly reflective.",
+     "new": "Astronomers tracking the dwarf planet Eris noticed that its surface reflects nearly all incoming sunlight, appearing brighter than expected for a body so far from the sun. ______ its extreme distance, Eris appears bright, thanks to a fresh coating of frozen nitrogen that keeps its surface highly reflective."
+    },
+    {
+     "field": "explanation",
+     "old": "문장은 에리스가 멀리 있어 어두워야 하지만 실제로는 질소 코팅 때문에 밝게 보인다는, 예상과 반대되는 결과를 설명한다. 이는 양보 관계이므로 'Despite'가 정답이다. 나머지 선택지는 모두 원인이나 근거를 나타내는 표현이라 '그런데도 불구하고'라는 문맥과 맞지 않는다.",
+     "new": "문장은 에리스가 멀리 있음에도 밝게 보인다는, 예상과 반대되는 사실을 서술한다. 양보 관계이므로 'Despite'가 정답이다. 'Given', 'Because of', 'As a result of'는 거리가 밝음의 원인이라는 뜻이 되어 맞지 않는다."
+    },
+    {
+     "field": "explanation_en",
+     "old": null,
+     "new": "The sentence contrasts the expectation set by distance with what is actually observed: Eris is far away, yet it appears bright. A concession is needed, so \"Despite\" is correct. \"Given,\" \"Because of,\" and \"As a result of\" all present the distance as the cause of the brightness, which does not make sense."
+    }
+   ],
+   "validation": "Manual grammar/semantics check; run the RW reviewer (blind + audit) again after patch.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '3c263c92-e14d-4312-8051-886f17996d79' order by pv.version_no desc"
+  },
+  {
+   "id": "S-11",
+   "gid": "c9923475-95b4-4767-b881-325f5b34da25",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT1 RW Q26 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Option \"an examination that considers\" (\"requires an examination that considers how ... \") is also grammatical; replace with a clearly ungrammatical distractor.",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "examining",
+      "to have examined",
+      "one who examines",
+      "an examination that considers"
+     ],
+     "new": [
+      "examining",
+      "to have examined",
+      "one who examines",
+      "examine"
+     ]
+    },
+    {
+     "field": "explanation",
+     "old": "\"requires\" 뒤에는 동명사가 목적어로 와야 하며, \"examining\"은 이어지는 세 개의 how절을 자연스럽게 목적어로 취한다. \"to have examined\"는 완료부정사로 requires의 목적어 자리에 시제상 불필요하고 어색하며, \"one who examines\"는 사람을 가리키는 명사구로 how절들을 목적어로 받을 수 없고, \"an examination that considers\"는 명사구 뒤에 관계절이 붙는 구조라 이어지는 how절들과 문법적으로 연결되지 않아 동사 뒤에 올바른 형태를 요구하는 규칙을 위반한다.",
+     "new": "\"requires\" 뒤에는 동명사가 목적어로 와야 하며 \"examining\"이 뒤의 세 how절을 목적어로 취한다. \"to have examined\", \"one who examines\", \"examine\"은 requires의 목적어 자리에 올 수 없다."
+    },
+    {
+     "field": "explanation_en",
+     "old": null,
+     "new": "\"Requires\" takes a gerund as its object, and \"examining\" governs the three following how-clauses. \"To have examined\" (perfect infinitive), \"one who examines\" (a person, not an action), and \"examine\" (a bare verb) cannot serve as the object of \"requires\" here."
+    }
+   ],
+   "validation": "Manual grammar check.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'c9923475-95b4-4767-b881-325f5b34da25' order by pv.version_no desc"
+  },
+  {
+   "id": "S-12",
+   "gid": "07fdeecb-6540-4e55-a54e-f5f6ab39d0aa",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT1 RW Q25 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Both \", which offered a solution that promised...\" and \", offering a solution...\" are grammatical; replace option A with an ungrammatical variant.",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      ", which offered",
+      "offering",
+      "; offering",
+      ", offering"
+     ],
+     "new": [
+      ", which offering",
+      "offering",
+      "; offering",
+      ", offering"
+     ]
+    },
+    {
+     "field": "explanation",
+     "old": "빈칸 앞은 완전한 독립절(Some planners proposed elevated tracks)이고, 빈칸 뒤는 동사가 없는 명사구(a solution that promised...)이다. 이런 비독립적 수식 구는 분사(offering)를 사용해 콤마로 연결하는 것이 표준이므로 D가 정답이다. A는 관계대명사절(which offered)을 쓰지만 동사 offered 앞에 which가 있어도 의미상 괜찮아 보이지만, 뒤에 이어지는 'a solution'이 이미 명사구이므로 which offered a solution 구조가 되어 이중 서술이 되어 어색하다. B는 구두점이 전혀 없어 독립절과 분사구 사이의 경계가 불분명하다. C는 세미콜론 뒤에 독립절이 아닌 분사구가 와서 세미콜론 사용 규칙을 어긴다. 따라서 정답은 D이다.",
+     "new": "빈칸 앞은 완전한 독립절이고 뒤는 명사구이므로 쉼표 + 분사(, offering)로 잇는 D가 맞다. A(which offering)는 관계대명사 뒤에 정동사가 없고, B는 구두점이 없어 경계가 불분명하며, C는 세미콜론 뒤에 독립절이 아닌 구가 와서 틀리다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "Before the blank is a complete independent clause (Some planners proposed elevated tracks), and after the blank is a non-independent phrase (a solution that promised...). Such a modifying phrase should be introduced by a participle (offering) preceded by a comma, making D correct. Option A awkwardly duplicates description with a relative clause, option B has no punctuation to mark the boundary, and option C misuses a semicolon before a non-independent phrase. Therefore, D is correct.",
+     "new": "Before the blank is a complete independent clause, and after the blank is a noun phrase (a solution that promised ...). A participle introduced by a comma (\", offering\") correctly attaches that phrase. \"Which offering\" has a relative pronoun without a finite verb, \"offering\" with no punctuation does not mark the boundary, and the semicolon in C cannot precede a non-independent phrase. Therefore, D is correct."
+    }
+   ],
+   "validation": "Manual grammar check.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '07fdeecb-6540-4e55-a54e-f5f6ab39d0aa' order by pv.version_no desc"
+  },
+  {
+   "id": "S-13",
+   "gid": "410e5e7e-6c7e-4276-9b61-b7faa4c05c79",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT1 RW Q17 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "\"..., and this launched the field...\" is also a valid sentence; replace with an ungrammatical option.",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "and this launched",
+      "launching",
+      "they launched",
+      "which had launched"
+     ],
+     "new": [
+      "and this launching",
+      "launching",
+      "they launched",
+      "which had launched"
+     ]
+    },
+    {
+     "field": "explanation",
+     "old": "빈칸 앞 절 전체(천문학자들이 이 신호가 지구가 아닌 우주 먼 곳의 사건에서 왔음을 깨달은 것)가 결과적으로 새로운 학문 분야를 \"만들어냈다\"는 의미를 나타내야 하므로, 정동사 없는 분사구 \"launching\"이 앞 절 전체를 의미상 수식하며 결과를 나타내기에 적절하다. \"and this launched\"는 \"this\"가 무엇을 가리키는지 모호하고 등위접속사로 두 절을 나란히 붙여 인과관계를 약화시킨다. \"they launched\"는 \"they\"가 앞 문장의 \"cataclysmic events\"나 \"astronomers\" 중 무엇을 가리키는지 불분명하며 콤마로 독립절을 이어 붙이는 오류를 만든다. \"which had launched\"는 과거완료로 시제가 앞뒤 문맥과 맞지 않고, 관계대명사 \"which\"가 바로 앞의 명사구(\"the solar system\")를 가리키는 것처럼 오독되어 의미가 왜곡된다. 따라서 정답은 B번이다.",
+     "new": "빈칸 앞 절 전체가 새로운 학문 분야를 만들어냈다는 결과를 나타내야 하므로 정동사 없는 분사구 \"launching\"이 적절하다. \"and this launching\"은 등위접속사 뒤에 정동사가 없고, \"they launched\"는 콤마로 독립절을 이어 붙이며 대명사가 불분명하고, \"which had launched\"는 시제가 맞지 않고 \"the solar system\"을 수식하는 것으로 오독된다. 정답은 B."
+    },
+    {
+     "field": "explanation_en",
+     "old": "The clause before the blank as a whole (the astronomers' realization that these signals came from cataclysmic cosmic events rather than Earth) needs to be shown as having resulted in a new field of study, so the participial phrase \"launching,\" without its own finite verb, appropriately modifies the entire preceding clause to express that result. \"And this launched\" leaves \"this\" ambiguous and weakens the causal link by coordinating two clauses as equals. \"They launched\" is unclear about whether \"they\" refers to the \"cataclysmic events\" or the \"astronomers,\" and it creates a comma splice by attaching an independent clause. \"Which had launched\" uses an ill-fitting past perfect tense and risks being misread as modifying only the nearest noun phrase (\"the solar system\"), distorting the meaning. Therefore, the correct answer is B.",
+     "new": "The clause before the blank as a whole needs to be shown as having resulted in a new field of study, so the participial phrase \"launching\" appropriately modifies the entire preceding clause. \"And this launching\" has no finite verb after a coordinating conjunction; \"they launched\" splices two independent clauses with a comma and has an unclear pronoun; \"which had launched\" has a mismatched tense and can be misread as modifying \"the solar system.\" Therefore, B is correct."
+    }
+   ],
+   "validation": "Manual grammar check.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '410e5e7e-6c7e-4276-9b61-b7faa4c05c79' order by pv.version_no desc"
+  },
+  {
+   "id": "S-14",
+   "gid": "88e31501-803a-489d-bb6e-9847846137e7",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT1 RW Q33 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "\"displaced, relocated fish\" (two coordinate adjectives with a comma) is as grammatical as \"displaced and relocated fish\"; replace A with a comma-before-and variant (incorrect).",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "displaced, relocated",
+      "displaced and, relocated",
+      "displaced, relocated,",
+      "displaced and relocated"
+     ],
+     "new": [
+      "displaced, and relocated",
+      "displaced and, relocated",
+      "displaced, relocated,",
+      "displaced and relocated"
+     ]
+    }
+   ],
+   "validation": "Manual grammar check. Explanation text stays valid (it already rejects commas with and).",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '88e31501-803a-489d-bb6e-9847846137e7' order by pv.version_no desc"
+  },
+  {
+   "id": "S-15",
+   "gid": "3b5485c3-f437-4786-aeb6-14f5f97fecbc",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT3 new-attempt RW Module 2 Q19 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "\"Her team, which used satellite transmitters to track ...\" and \"Her team, using satellite transmitters ...\" are both grammatical.",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "which used",
+      "using",
+      "used",
+      "they used"
+     ],
+     "new": [
+      "which using",
+      "using",
+      "used",
+      "they used"
+     ]
+    }
+   ],
+   "validation": "Manual grammar check; explanation_en must drop the claim that 'which used' inserts a second finite verb.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '3b5485c3-f437-4786-aeb6-14f5f97fecbc' order by pv.version_no desc"
+  },
+  {
+   "id": "S-16",
+   "gid": "5ccf4804-9d89-4c6f-b4c2-de3a55e6b97b",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT2 new-attempt RW Module 2 Q11 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "\"The revised routes, which featured dedicated lanes and synchronized traffic signals, cut ...\" is grammatical (non-restrictive relative clause) as is \", featuring ...\".",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "which featured",
+      "they featured",
+      "featuring",
+      "having been featured"
+     ],
+     "new": [
+      "which featuring",
+      "they featured",
+      "featuring",
+      "having been featured"
+     ]
+    }
+   ],
+   "validation": "Manual grammar check.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '5ccf4804-9d89-4c6f-b4c2-de3a55e6b97b' order by pv.version_no desc"
+  },
+  {
+   "id": "S-17",
+   "gid": "d3db447d-6bc0-46b1-b14c-0e3b0597d7e0",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT3 new-attempt RW Module 2 Q20 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "\"a group that comprised transportation officials, ...\" is grammatical; so is \"a group comprising ...\". Replace C with an ungrammatical variant.",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "comprising",
+      "comprised of",
+      "that comprised",
+      "which was comprised of"
+     ],
+     "new": [
+      "comprising",
+      "comprised of",
+      "that comprising",
+      "which was comprised of"
+     ]
+    }
+   ],
+   "validation": "Manual grammar check.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'd3db447d-6bc0-46b1-b14c-0e3b0597d7e0' order by pv.version_no desc"
+  },
+  {
+   "id": "S-18",
+   "gid": "rwstock4:med-se-2:medium-boundaries-408",
+   "repoSource": "data/mock-exam-generation/rw-stock-20261008/passed.json",
+   "auditRefs": [
+    "SAT10 RW Module 2 Q17 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "\"mill workers; indeed, many of them ...\" (key) and \"mill workers indeed; many of them ...\" are both grammatical (the explanation calls the latter unconventional, which is style, not grammar). Replace the second with a run-on.",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "workers; indeed,",
+      "workers, indeed,",
+      "workers indeed;",
+      "workers, indeed"
+     ],
+     "new": [
+      "workers; indeed,",
+      "workers, indeed,",
+      "workers indeed",
+      "workers, indeed"
+     ]
+    }
+   ],
+   "validation": "Manual grammar check; explanation_en must stop rejecting 'indeed;' as 'unconventional' and say it is a run-on instead.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'rwstock4:med-se-2:medium-boundaries-408' order by pv.version_no desc"
+  },
+  {
+   "id": "S-19",
+   "gid": "5b2b6b59-5c82-4c60-b93d-d3b36e9c48db",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT1 new-attempt RW Module 2 Q22 (P1)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The generated sentence continues after the blank (\"juveniles tracked in the same study drifted ...\") although every option already supplies the complete second clause -> no grammatical completion. Cut the leftover continuation so the passage ends at the blank.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Marine biologist Sylvia Alarcón spent a decade tracking the migratory routes of leatherback sea turtles across the Pacific. Her data revealed that the turtles do not simply drift with ocean currents, as earlier researchers had assumed, but instead adjust their swimming direction in response to subtle magnetic field variations. This finding suggested that the turtles possess an internal compass sensitive enough to detect geomagnetic gradients far weaker than scientists had previously believed detectable by any marine animal. Alarcón's conclusion, however, rested on a critical qualification: the compass sense appeared only in turtles older than five years, ______ juveniles tracked in the same study drifted passively with currents just as the earlier researchers had described.",
+     "new": "Marine biologist Sylvia Alarcón spent a decade tracking the migratory routes of leatherback sea turtles across the Pacific. Her data revealed that the turtles do not simply drift with ocean currents, as earlier researchers had assumed, but instead adjust their swimming direction in response to subtle magnetic field variations. This finding suggested that the turtles possess an internal compass sensitive enough to detect geomagnetic gradients far weaker than scientists had previously believed detectable by any marine animal. Alarcón's conclusion, however, rested on a critical qualification: the compass sense appeared only in turtles older than five years, ______."
+    }
+   ],
+   "validation": "Manual check; the 4 options then complete the sentence on their own and only 'while ... lacked ... moved ...' is grammatical.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '5b2b6b59-5c82-4c60-b93d-d3b36e9c48db' order by pv.version_no desc"
+  },
+  {
+   "id": "F-f87e641a",
+   "gid": "f87e641a-c551-5b11-a25a-340d4aa53f30",
+   "repoSource": "data/mock-exam-generation/gapfill-20261006/items4.clean.json",
+   "auditRefs": [
+    "SAT10 Math Module 2 Q21 (P2)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The lines meet at (11, +-17) which is outside the displayed [-10,10] x [-10,10] window; widen the axes so the solution is visible.",
+   "changes": [
+    {
+     "field": "figure",
+     "old": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -10,
+        "max": 10,
+        "step": 2,
+        "title": "x"
+       },
+       "y": {
+        "min": -10,
+        "max": 10,
+        "step": 2,
+        "title": "y"
+       }
+      },
+      "objects": [
+       {
+        "id": "A1",
+        "kind": "line",
+        "through": [
+         [
+          4,
+          -3
+         ],
+         [
+          7,
+          -9
+         ]
+        ]
+       },
+       {
+        "id": "B1",
+        "kind": "line",
+        "through": [
+         [
+          -2,
+          -4
+         ],
+         [
+          3,
+          -9
+         ]
+        ]
+       }
+      ]
+     },
+     "new": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -20,
+        "max": 20,
+        "step": 4,
+        "title": "x"
+       },
+       "y": {
+        "min": -20,
+        "max": 20,
+        "step": 4,
+        "title": "y"
+       }
+      },
+      "objects": [
+       {
+        "id": "A1",
+        "kind": "line",
+        "through": [
+         [
+          4,
+          -3
+         ],
+         [
+          7,
+          -9
+         ]
+        ]
+       },
+       {
+        "id": "B1",
+        "kind": "line",
+        "through": [
+         [
+          -2,
+          -4
+         ],
+         [
+          3,
+          -9
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "validation": "Axes -20..20 contain the intersection; lattice points read from the lines are unchanged. Re-run render check.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'f87e641a-c551-5b11-a25a-340d4aa53f30' order by pv.version_no desc"
+  },
+  {
+   "id": "F-c27d0f37",
+   "gid": "c27d0f37-985d-50aa-a9de-da4b37b244f2",
+   "repoSource": "data/mock-exam-generation/gapfill-20261006/items4.clean.json",
+   "auditRefs": [
+    "SAT12 Math Module 2 Q21 (P2)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The lines meet at (11, +-17) which is outside the displayed [-10,10] x [-10,10] window; widen the axes so the solution is visible.",
+   "changes": [
+    {
+     "field": "figure",
+     "old": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -10,
+        "max": 10,
+        "step": 2,
+        "title": "x"
+       },
+       "y": {
+        "min": -10,
+        "max": 10,
+        "step": 2,
+        "title": "y"
+       }
+      },
+      "objects": [
+       {
+        "id": "A1",
+        "kind": "line",
+        "through": [
+         [
+          4,
+          -3
+         ],
+         [
+          7,
+          -9
+         ]
+        ]
+       },
+       {
+        "id": "B1",
+        "kind": "line",
+        "through": [
+         [
+          -8,
+          2
+         ],
+         [
+          2,
+          -8
+         ]
+        ]
+       }
+      ]
+     },
+     "new": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -20,
+        "max": 20,
+        "step": 4,
+        "title": "x"
+       },
+       "y": {
+        "min": -20,
+        "max": 20,
+        "step": 4,
+        "title": "y"
+       }
+      },
+      "objects": [
+       {
+        "id": "A1",
+        "kind": "line",
+        "through": [
+         [
+          4,
+          -3
+         ],
+         [
+          7,
+          -9
+         ]
+        ]
+       },
+       {
+        "id": "B1",
+        "kind": "line",
+        "through": [
+         [
+          -8,
+          2
+         ],
+         [
+          2,
+          -8
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "validation": "Axes -20..20 contain the intersection; lattice points read from the lines are unchanged. Re-run render check.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'c27d0f37-985d-50aa-a9de-da4b37b244f2' order by pv.version_no desc"
+  },
+  {
+   "id": "F-8329a1bd",
+   "gid": "8329a1bd-0921-53c0-a7bb-dffbf69c9493",
+   "repoSource": "data/mock-exam-generation/gapfill-20261006/items4.clean.json",
+   "auditRefs": [
+    "same defect class (not in audit): intersection (11, 17)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The lines meet at (11, +-17) which is outside the displayed [-10,10] x [-10,10] window; widen the axes so the solution is visible.",
+   "changes": [
+    {
+     "field": "figure",
+     "old": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -10,
+        "max": 10,
+        "step": 2,
+        "title": "x"
+       },
+       "y": {
+        "min": -10,
+        "max": 10,
+        "step": 2,
+        "title": "y"
+       }
+      },
+      "objects": [
+       {
+        "id": "A1",
+        "kind": "line",
+        "through": [
+         [
+          -4,
+          2
+         ],
+         [
+          2,
+          8
+         ]
+        ]
+       },
+       {
+        "id": "B1",
+        "kind": "line",
+        "through": [
+         [
+          4,
+          3
+         ],
+         [
+          7,
+          9
+         ]
+        ]
+       }
+      ]
+     },
+     "new": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -20,
+        "max": 20,
+        "step": 4,
+        "title": "x"
+       },
+       "y": {
+        "min": -20,
+        "max": 20,
+        "step": 4,
+        "title": "y"
+       }
+      },
+      "objects": [
+       {
+        "id": "A1",
+        "kind": "line",
+        "through": [
+         [
+          -4,
+          2
+         ],
+         [
+          2,
+          8
+         ]
+        ]
+       },
+       {
+        "id": "B1",
+        "kind": "line",
+        "through": [
+         [
+          4,
+          3
+         ],
+         [
+          7,
+          9
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "validation": "Axes -20..20 contain the intersection; lattice points read from the lines are unchanged. Re-run render check.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '8329a1bd-0921-53c0-a7bb-dffbf69c9493' order by pv.version_no desc"
+  },
+  {
+   "id": "Q-838ef1c9",
+   "gid": "838ef1c9-3909-5cfa-af47-d789fb7dad50",
+   "repoSource": "data/mock-exam-generation/gapfill-20261006/items8.json",
+   "auditRefs": [
+    "SAT13 Math Q14 / cumulative 68 (P2)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The question says \"the equation\" without naming it.",
+   "changes": [
+    {
+     "field": "question",
+     "old": "What is the greatest value of $x$ that satisfies the equation?",
+     "new": "What is the greatest value of $x$ that satisfies the equation $q(x) = 0$?"
+    }
+   ],
+   "validation": "String edit; answer unchanged (greatest zero).",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '838ef1c9-3909-5cfa-af47-d789fb7dad50' order by pv.version_no desc"
+  },
+  {
+   "id": "Q-e222cbc8",
+   "gid": "e222cbc8-007f-59e5-a61d-a7f3a301e1d7",
+   "repoSource": "data/mock-exam-generation/gapfill-20261006/items8.json",
+   "auditRefs": [
+    "SAT10 Math Module 1 Q1 (P2)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The question says \"the equation\" without naming it.",
+   "changes": [
+    {
+     "field": "question",
+     "old": "What is the greatest value of $x$ that satisfies the equation?",
+     "new": "What is the greatest value of $x$ that satisfies the equation $q(x) = 0$?"
+    }
+   ],
+   "validation": "String edit; answer unchanged (greatest zero).",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'e222cbc8-007f-59e5-a61d-a7f3a301e1d7' order by pv.version_no desc"
+  },
+  {
+   "id": "C-aaeb9945",
+   "gid": "aaeb9945-8b35-5351-af60-92e0f2734f3a",
+   "repoSource": "data/mock-exam-generation/gapfill-20261006/items7.json",
+   "auditRefs": [
+    "SAT9 Math Module 1 Q16 (P2)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "A burning candle's remaining height cannot increase with days burning; context-pool defect of the gapfill table compiler. Re-theme to a growing quantity (numbers/answer unchanged). Same class (not in audit): gids 67e3c854(neg slope ok), cb0b6233, fe679eca.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "The table shown gives several values of the number of days since a candle was lit and the matching values of the candle's remaining height. There is a linear relationship between these quantities.",
+     "new": "The table shown gives several values of the number of days since a seedling was planted and the matching values of the seedling's height. There is a linear relationship between these quantities."
+    },
+    {
+     "field": "question",
+     "old": "If the relationship continues, what is the candle's remaining height, in centimeters, when the number of days since a candle was lit is 18 days?",
+     "new": "If the relationship continues, what is the seedling's height, in centimeters, when the number of days since a seedling was planted is 18 days?"
+    },
+    {
+     "field": "figure",
+     "old": {
+      "type": "data",
+      "kind": "table",
+      "columns": [
+       "Days burning (days)",
+       "Candle height (centimeters)"
+      ],
+      "rows": [
+       [
+        6,
+        73
+       ],
+       [
+        9,
+        94
+       ],
+       [
+        12,
+        115
+       ],
+       [
+        15,
+        136
+       ]
+      ]
+     },
+     "new": {
+      "type": "data",
+      "kind": "table",
+      "columns": [
+       "Days since planting (days)",
+       "Seedling height (centimeters)"
+      ],
+      "rows": [
+       [
+        6,
+        73
+       ],
+       [
+        9,
+        94
+       ],
+       [
+        12,
+        115
+       ],
+       [
+        15,
+        136
+       ]
+      ]
+     }
+    }
+   ],
+   "validation": "Answer and explanation unchanged (pure re-theme).",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'aaeb9945-8b35-5351-af60-92e0f2734f3a' order by pv.version_no desc"
+  },
+  {
+   "id": "C-445bab61",
+   "gid": "445bab61-b420-574d-a08c-abff7d043042",
+   "repoSource": "data/mock-exam-generation/gapfill-20261006/items6.clean.json",
+   "auditRefs": [
+    "SAT9 Math Module 2 Q22 (P2)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "A burning candle's remaining height cannot increase with days burning; context-pool defect of the gapfill table compiler. Re-theme to a growing quantity (numbers/answer unchanged). Same class (not in audit): gids 67e3c854(neg slope ok), cb0b6233, fe679eca.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "The table shown gives several values of the number of days since a candle was lit and the matching values of the candle's remaining height. There is a linear relationship between these quantities. Suppose the relationship continues past the last row of the table.",
+     "new": "The table shown gives several values of the number of days since a seedling was planted and the matching values of the seedling's height. There is a linear relationship between these quantities. Suppose the relationship continues past the last row of the table."
+    },
+    {
+     "field": "question",
+     "old": "Starting from the last row of the table, what is the least whole number of additional days after which the candle's remaining height is greater than 116 centimeters?",
+     "new": "Starting from the last row of the table, what is the least whole number of additional days after which the seedling's height is greater than 116 centimeters?"
+    },
+    {
+     "field": "figure",
+     "old": {
+      "type": "data",
+      "kind": "table",
+      "columns": [
+       "Days burning (days)",
+       "Candle height (centimeters)"
+      ],
+      "rows": [
+       [
+        4,
+        72
+       ],
+       [
+        6,
+        82
+       ],
+       [
+        8,
+        92
+       ],
+       [
+        10,
+        102
+       ]
+      ]
+     },
+     "new": {
+      "type": "data",
+      "kind": "table",
+      "columns": [
+       "Days since planting (days)",
+       "Seedling height (centimeters)"
+      ],
+      "rows": [
+       [
+        4,
+        72
+       ],
+       [
+        6,
+        82
+       ],
+       [
+        8,
+        92
+       ],
+       [
+        10,
+        102
+       ]
+      ]
+     }
+    }
+   ],
+   "validation": "Answer and explanation unchanged (pure re-theme).",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '445bab61-b420-574d-a08c-abff7d043042' order by pv.version_no desc"
+  },
+  {
+   "id": "C-9939657f",
+   "gid": "9939657f-174b-52fc-a0c0-cf1b88a5b242",
+   "repoSource": "data/mock-exam-generation/gapfill-20261006/items8.json",
+   "auditRefs": [
+    "SAT12 Math Module 2 Q8 (P2)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "A car's resale value does not rise with age unless it is a collector car; context-pool defect (4 gids: 704b95a5, 593e942e, 9939657f, 9f5d1526 use the same context with positive slope).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "A linear relationship relates the age of a car to the car's resale value. Some pairs of values are shown in the table.",
+     "new": "A linear relationship relates the age of a collector car to the car's resale value. Some pairs of values are shown in the table."
+    }
+   ],
+   "validation": "String edit; answer unchanged.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '9939657f-174b-52fc-a0c0-cf1b88a5b242' order by pv.version_no desc"
+  },
+  {
+   "id": "U-efdafa88",
+   "gid": "efdafa88-0b16-5ab0-a7a6-a46a602eb484",
+   "repoSource": "data/mock-exam-generation/gapfill-20261006/items4.clean.json",
+   "auditRefs": [
+    "SAT7 Math Module 2 Q7 (P2)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Text says every number is a length in the same unit but the labels are angle measures in degrees (copy error from a length template).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "An engineer models three parallel pipes crossed by a cable. Three parallel lines, $f$, $g$, and $h$, are cut by the line $t$, as shown in the figure. The question below refers to the labeled drawing, in which each number is a length in the same unit.",
+     "new": "An engineer models three parallel pipes crossed by a cable. Three parallel lines, $f$, $g$, and $h$, are cut by the line $t$, as shown in the figure. The question below refers to the labeled drawing."
+    }
+   ],
+   "validation": "String edit.",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'efdafa88-0b16-5ab0-a7a6-a46a602eb484' order by pv.version_no desc"
+  },
+  {
+   "id": "A-d4922e40",
+   "gid": "d4922e40-4840-4448-88e9-0061b738438b",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "SAT2 Math Module 1 Q11 (P2)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Text places (4x+10) above r and (6x-30) below s (exterior side) but calls them co-interior; the figure draws them between the lines (co-interior). Fix the text; x = 20 is unchanged.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "In the figure, line $r$ is parallel to line $s$, and line $t$ is a transversal that crosses both lines. The angle formed at the intersection of line $t$ and line $r$ is marked $(4x + 10)^\\circ$, and the angle formed at the intersection of line $t$ and line $s$ is marked $(6x - 30)^\\circ$. These two angles are on the same side of the transversal, with one above line $r$ and the other below line $s$ (co-interior/same-side interior angles).",
+     "new": "In the figure, line $r$ is parallel to line $s$, and line $t$ is a transversal that crosses both lines. The angle formed at the intersection of line $t$ and line $r$ is marked $(4x + 10)^\\circ$, and the angle formed at the intersection of line $t$ and line $s$ is marked $(6x - 30)^\\circ$. These two angles are on the same side of the transversal, with one below line $r$ and the other above line $s$ (co-interior/same-side interior angles)."
+    }
+   ],
+   "validation": "sympy: (4x+10)+(6x-30)=180 -> x=20 (option B).",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'd4922e40-4840-4448-88e9-0061b738438b' order by pv.version_no desc"
+  },
+  {
+   "id": "R-rwstock4:med-se-1:medium-boundaries-319",
+   "gid": "rwstock4:med-se-1:medium-boundaries-319",
+   "repoSource": "data/mock-exam-generation/rw-stock-20261008/passed.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "In 1978, engineers reviewing the Citicorp Center in Manhattan realized that the skyscraper, which rests on four nine-story stilts positioned at the midpoints of its sides rather than at its corners, was far more vulnerable to diagonal winds than its designers had calculated______ welders spent the following weeks working overnight to reinforce more than two hundred bolted joints with thick steel plates.",
+     "new": "In 1978, engineers reviewing the Citicorp Center in Manhattan realized that the skyscraper, which rests on four nine-story stilts positioned at the midpoints of its sides rather than at its corners, was far more vulnerable to diagonal winds than its designers had calculated______ spent the following weeks working overnight to reinforce more than two hundred bolted joints with thick steel plates."
+    }
+   ],
+   "validation": "completed-with-key preview: o diagonal winds than its designers had calculated[; welders] spent the following weeks working overnight to reinforce mo",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'rwstock4:med-se-1:medium-boundaries-319' order by pv.version_no desc"
+  },
+  {
+   "id": "R-rwstock4:med-se-2:medium-boundaries-419",
+   "gid": "rwstock4:med-se-2:medium-boundaries-419",
+   "repoSource": "data/mock-exam-generation/rw-stock-20261008/passed.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "To cut drag on cargo ships, engineers at a Danish shipyard tested a hull coating modeled on shark skin, whose tiny ridged scales disrupt the turbulent flow of water along a moving surface. The results of the eighteen-month trial, which tracked fuel consumption on identical shipping routes, were ______ treated vessels burned roughly 6 percent less fuel than untreated ones.",
+     "new": "To cut drag on cargo ships, engineers at a Danish shipyard tested a hull coating modeled on shark skin, whose tiny ridged scales disrupt the turbulent flow of water along a moving surface. The results of the eighteen-month trial, which tracked fuel consumption on identical shipping routes, were ______ vessels burned roughly 6 percent less fuel than untreated ones."
+    }
+   ],
+   "validation": "completed-with-key preview: el consumption on identical shipping routes, were [striking: treated] vessels burned roughly 6 percent less fuel than untreated o",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'rwstock4:med-se-2:medium-boundaries-419' order by pv.version_no desc"
+  },
+  {
+   "id": "R-rwstock:easy-1:easy-boundaries-100",
+   "gid": "rwstock:easy-1:easy-boundaries-100",
+   "repoSource": "data/mock-exam-generation/rw-stock-20261007/passed.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "In 1850, the British Parliament passed the Public Libraries Act, which allowed towns to use local taxes to pay for free libraries. Before the law, most books could be borrowed only through private subscription libraries ______ many factory workers could not afford the yearly fees those libraries charged.",
+     "new": "In 1850, the British Parliament passed the Public Libraries Act, which allowed towns to use local taxes to pay for free libraries. Before the law, most books could be borrowed only through private subscription libraries ______ factory workers could not afford the yearly fees those libraries charged."
+    }
+   ],
+   "validation": "completed-with-key preview: rowed only through private subscription libraries [; many] factory workers could not afford the yearly fees those libr",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'rwstock:easy-1:easy-boundaries-100' order by pv.version_no desc"
+  },
+  {
+   "id": "R-rwstock:easy-1:easy-boundaries-104",
+   "gid": "rwstock:easy-1:easy-boundaries-104",
+   "repoSource": "data/mock-exam-generation/rw-stock-20261007/passed.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Lake Chad, which borders four countries in north-central Africa, has shrunk dramatically since the 1960s ______ drought and heavy use of its water for farming have reduced the lake's surface area by roughly 90 percent.",
+     "new": "Lake Chad, which borders four countries in north-central Africa, has shrunk dramatically since the 1960s ______ and heavy use of its water for farming have reduced the lake's surface area by roughly 90 percent."
+    }
+   ],
+   "validation": "completed-with-key preview: l Africa, has shrunk dramatically since the 1960s [; drought] and heavy use of its water for farming have reduced the lak",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'rwstock:easy-1:easy-boundaries-104' order by pv.version_no desc"
+  },
+  {
+   "id": "R-rwstock:med-se-1:medium-boundaries-302",
+   "gid": "rwstock:med-se-1:medium-boundaries-302",
+   "repoSource": "data/mock-exam-generation/rw-stock-20261007/passed.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-2-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "The Okavango Delta, a vast inland wetland in northern Botswana where a river fans out across the Kalahari Desert instead of reaching the sea, reaches its greatest extent in the dry winter months even though the region's rains fall in summer______ the floodwaters must travel slowly for several months from the highlands of Angola before they spread across the delta's channels and islands.",
+     "new": "The Okavango Delta, a vast inland wetland in northern Botswana where a river fans out across the Kalahari Desert instead of reaching the sea, reaches its greatest extent in the dry winter months even though the region's rains fall in summer______ must travel slowly for several months from the highlands of Angola before they spread across the delta's channels and islands."
+    }
+   ],
+   "validation": "completed-with-key preview: nths even though the region's rains fall in summer[; the floodwaters] must travel slowly for several months from the highlands of",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'rwstock:med-se-1:medium-boundaries-302' order by pv.version_no desc"
+  },
+  {
+   "id": "R-rwstock:med-se-1:medium-boundaries-311",
+   "gid": "rwstock:med-se-1:medium-boundaries-311",
+   "repoSource": "data/mock-exam-generation/rw-stock-20261007/passed.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "The novelist Marguerite Thale, whose fog-bound harbor towns and candlelit drawing rooms deliberately recall the fiction of the 1850s, rarely names the decade in which her stories take place______ readers instead infer the period from small details, such as gaslit parlors, horse-drawn cabs, and letters sealed with wax.",
+     "new": "The novelist Marguerite Thale, whose fog-bound harbor towns and candlelit drawing rooms deliberately recall the fiction of the 1850s, rarely names the decade in which her stories take place______ instead infer the period from small details, such as gaslit parlors, horse-drawn cabs, and letters sealed with wax."
+    }
+   ],
+   "validation": "completed-with-key preview: y names the decade in which her stories take place[; readers] instead infer the period from small details, such as gaslit",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'rwstock:med-se-1:medium-boundaries-311' order by pv.version_no desc"
+  },
+  {
+   "id": "R-rwstock:med-se-2:medium-boundaries-609",
+   "gid": "rwstock:med-se-2:medium-boundaries-609",
+   "repoSource": "data/mock-exam-generation/rw-stock-20261007/passed.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-2-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "In 2021, a stainless steel footbridge built by the Dutch firm MX3D—a structure \"printed\" by robotic arms that deposited molten metal one thin layer at a time—was installed over a canal in Amsterdam. Sensors embedded in the bridge's frame continuously record strain, vibration, and temperature______ the data feed a \"digital twin,\" a computer model that researchers use to predict how the printed steel will age.",
+     "new": "In 2021, a stainless steel footbridge built by the Dutch firm MX3D—a structure \"printed\" by robotic arms that deposited molten metal one thin layer at a time—was installed over a canal in Amsterdam. Sensors embedded in the bridge's frame continuously record strain, vibration, and temperature______ feed a \"digital twin,\" a computer model that researchers use to predict how the printed steel will age."
+    }
+   ],
+   "validation": "completed-with-key preview: inuously record strain, vibration, and temperature[; the data] feed a \"digital twin,\" a computer model that researchers us",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'rwstock:med-se-2:medium-boundaries-609' order by pv.version_no desc"
+  },
+  {
+   "id": "R-sesup-medium-boundaries-42",
+   "gid": "sesup-medium-boundaries-42",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/se-topup/adopted-se-medium-topup.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "The Atacama Desert's fog oases, known locally as lomas, depend almost entirely on moisture drawn from coastal clouds. The camanchaca—a dense marine fog that rolls inland from the Pacific Ocean on winter ______ condenses on the leaves of cacti and shrubs, sustaining plant communities in a region where measurable rain may not fall for years.",
+     "new": "The Atacama Desert's fog oases, known locally as lomas, depend almost entirely on moisture drawn from coastal clouds. The camanchaca—a dense marine fog that rolls inland from the Pacific Ocean on winter ______ on the leaves of cacti and shrubs, sustaining plant communities in a region where measurable rain may not fall for years."
+    }
+   ],
+   "validation": "completed-with-key preview: hat rolls inland from the Pacific Ocean on winter [mornings—condenses] on the leaves of cacti and shrubs, sustaining plant communi",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'sesup-medium-boundaries-42' order by pv.version_no desc"
+  },
+  {
+   "id": "R-sesup-medium-boundaries-43",
+   "gid": "sesup-medium-boundaries-43",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/se-topup/adopted-se-medium-topup.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "In the 1880s, Danish dairy farmers began pooling their milk at cooperative creameries, processing plants owned jointly by the very farmers who supplied them______ each member, regardless of how many cows he kept, received a single vote in decisions about how the creamery would be run. Historians credit this arrangement with spreading democratic habits through the Danish countryside.",
+     "new": "In the 1880s, Danish dairy farmers began pooling their milk at cooperative creameries, processing plants owned jointly by the very farmers who supplied them______ member, regardless of how many cows he kept, received a single vote in decisions about how the creamery would be run. Historians credit this arrangement with spreading democratic habits through the Danish countryside."
+    }
+   ],
+   "validation": "completed-with-key preview: wned jointly by the very farmers who supplied them[; each] member, regardless of how many cows he kept, received a sin",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'sesup-medium-boundaries-43' order by pv.version_no desc"
+  },
+  {
+   "id": "R-recipe-boundaries-02",
+   "gid": "recipe-boundaries-02",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/batch2/D-cross/adopted-hard.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "American ceramicist Toshiko Takaezu often closed the tops of her stoneware vessels completely, leaving no opening through which a viewer could look inside ______ she frequently dropped a small ball of clay into each form before sealing it, so that the finished piece would rattle softly when it was lifted.",
+     "new": "American ceramicist Toshiko Takaezu often closed the tops of her stoneware vessels completely, leaving no opening through which a viewer could look inside ______ frequently dropped a small ball of clay into each form before sealing it, so that the finished piece would rattle softly when it was lifted."
+    }
+   ],
+   "validation": "completed-with-key preview:  opening through which a viewer could look inside [; however, she] frequently dropped a small ball of clay into each form befo",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'recipe-boundaries-02' order by pv.version_no desc"
+  },
+  {
+   "id": "R-e5a18ded-27f1-4874-b132-b405069b8b50",
+   "gid": "e5a18ded-27f1-4874-b132-b405069b8b50",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-2-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "During the Renaissance, wealthy patrons commissioned portraits not only to display status but also to preserve a likeness for future generations. The painter Lavinia Fontana became especially known for her attention to fabric and jewelry______she rendered these details with far more precision than earlier portraitists typically did.",
+     "new": "During the Renaissance, wealthy patrons commissioned portraits not only to display status but also to preserve a likeness for future generations. The painter Lavinia Fontana became especially known for her attention to fabric and jewelry______ these details with far more precision than earlier portraitists typically did."
+    }
+   ],
+   "validation": "completed-with-key preview: ally known for her attention to fabric and jewelry[; she rendered] these details with far more precision than earlier portrait",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'e5a18ded-27f1-4874-b132-b405069b8b50' order by pv.version_no desc"
+  },
+  {
+   "id": "R-d61e2d5e-4967-4995-bb5d-e6b76c7f9c7f",
+   "gid": "d61e2d5e-4967-4995-bb5d-e6b76c7f9c7f",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-4-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Art historians examining the restoration of Renaissance frescoes must weigh the risk of removing centuries-old varnish against the possibility that the varnish itself has become historically significant, since later generations of viewers experienced the artwork through that altered, yellowed ______ some conservators now argue that stripping the varnish to reveal the artist's original palette actually erases a meaningful layer of the painting's reception history.",
+     "new": "Art historians examining the restoration of Renaissance frescoes must weigh the risk of removing centuries-old varnish against the possibility that the varnish itself has become historically significant, since later generations of viewers experienced the artwork through that altered, yellowed ______ that stripping the varnish to reveal the artist's original palette actually erases a meaningful layer of the painting's reception history."
+    }
+   ],
+   "validation": "completed-with-key preview: ienced the artwork through that altered, yellowed [surface; some conservators now argue] that stripping the varnish to reveal the artist's original ",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'd61e2d5e-4967-4995-bb5d-e6b76c7f9c7f' order by pv.version_no desc"
+  },
+  {
+   "id": "R-45bc6500-05da-4836-866c-7a5994191c88",
+   "gid": "45bc6500-05da-4836-866c-7a5994191c88",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-6-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Art historians examining the restoration records of a fifteenth-century Flemish altarpiece discovered that an earlier conservator had overpainted several background figures in the 1930s, apparently believing the original composition to be unfinished ______ infrared reflectography conducted decades later revealed faint underdrawings beneath the overpaint that matched the artist's documented style so closely that curators concluded the composition had always been complete and the overpainting had been an unnecessary, if well-intentioned, alteration.",
+     "new": "Art historians examining the restoration records of a fifteenth-century Flemish altarpiece discovered that an earlier conservator had overpainted several background figures in the 1930s, apparently believing the original composition to be unfinished ______ faint underdrawings beneath the overpaint that matched the artist's documented style so closely that curators concluded the composition had always been complete and the overpainting had been an unnecessary, if well-intentioned, alteration."
+    }
+   ],
+   "validation": "completed-with-key preview: lieving the original composition to be unfinished [; however, infrared reflectography conducted decades later revealed] faint underdrawings beneath the overpaint that matched the ",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '45bc6500-05da-4836-866c-7a5994191c88' order by pv.version_no desc"
+  },
+  {
+   "id": "R-0a3372d9-a0d6-4d65-83d1-7d3a2ef10a64",
+   "gid": "0a3372d9-a0d6-4d65-83d1-7d3a2ef10a64",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-4-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Art historians reexamining Rosa Bonheur's studio records discovered that she maintained a private menagerie______lions, horses, and deer she sketched obsessively to achieve the anatomical precision that made her paintings so widely admired in nineteenth-century France.",
+     "new": "Art historians reexamining Rosa Bonheur's studio records discovered that she maintained a private menagerie______ she sketched obsessively to achieve the anatomical precision that made her paintings so widely admired in nineteenth-century France."
+    }
+   ],
+   "validation": "completed-with-key preview: discovered that she maintained a private menagerie[of animals: lions, horses, and deer] she sketched obsessively to achieve the anatomical precisio",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '0a3372d9-a0d6-4d65-83d1-7d3a2ef10a64' order by pv.version_no desc"
+  },
+  {
+   "id": "R-6e8e14d6-bcfb-44b3-a4b8-554d7a2b037b",
+   "gid": "6e8e14d6-bcfb-44b3-a4b8-554d7a2b037b",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Renaissance workshops rarely credited individual assistants for their contributions to a master's canvas, so art historians must rely on chemical analysis of paint layers to determine who actually applied certain sections. Recent infrared scans of several altarpieces attributed solely to a single painter ______ reveal underdrawings and brushwork inconsistent with that painter's documented habits, suggesting that apprentices completed significant portions of the finished works.",
+     "new": "Renaissance workshops rarely credited individual assistants for their contributions to a master's canvas, so art historians must rely on chemical analysis of paint layers to determine who actually applied certain sections. Recent infrared scans of several altarpieces attributed solely to a single painter ______ underdrawings and brushwork inconsistent with that painter's documented habits, suggesting that apprentices completed significant portions of the finished works."
+    }
+   ],
+   "validation": "completed-with-key preview: altarpieces attributed solely to a single painter [reveal] underdrawings and brushwork inconsistent with that painter'",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '6e8e14d6-bcfb-44b3-a4b8-554d7a2b037b' order by pv.version_no desc"
+  },
+  {
+   "id": "R-a5895ddf-0728-4328-a9c3-063bdce6363f",
+   "gid": "a5895ddf-0728-4328-a9c3-063bdce6363f",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Botanists studying the desert plant genus Fouquieria have documented an unusual survival strategy: the shrub sheds its leaves entirely during prolonged droughts and regrows them within days of a single rainfall. This rapid cycling, which can occur several times in a single year, ______ allows the plant to photosynthesize whenever moisture is briefly available while minimizing water loss during dry stretches.",
+     "new": "Botanists studying the desert plant genus Fouquieria have documented an unusual survival strategy: the shrub sheds its leaves entirely during prolonged droughts and regrows them within days of a single rainfall. This rapid cycling, which can occur several times in a single year, ______ the plant to photosynthesize whenever moisture is briefly available while minimizing water loss during dry stretches."
+    }
+   ],
+   "validation": "completed-with-key preview: , which can occur several times in a single year, [allows] the plant to photosynthesize whenever moisture is briefly a",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'a5895ddf-0728-4328-a9c3-063bdce6363f' order by pv.version_no desc"
+  },
+  {
+   "id": "R-f4dcff2e-6c99-4dad-bef6-8af843033ac9",
+   "gid": "f4dcff2e-6c99-4dad-bef6-8af843033ac9",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-3-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Urban planners in several mid-sized cities have begun redesigning bus routes around a 'grid' model rather than a traditional 'hub-and-spoke' system. In the older model, most routes converge on a single downtown terminal; in the newer model, ______ frequent routes cross one another at multiple points throughout the city, allowing riders to transfer without traveling through downtown. Early data from Fresno and Tulsa suggest that grid systems can reduce average commute times, though they require more buses to maintain the same frequency on each route.",
+     "new": "Urban planners in several mid-sized cities have begun redesigning bus routes around a 'grid' model rather than a traditional 'hub-and-spoke' system. In the older model, most routes converge on a single downtown terminal; in the newer model, ______ one another at multiple points throughout the city, allowing riders to transfer without traveling through downtown. Early data from Fresno and Tulsa suggest that grid systems can reduce average commute times, though they require more buses to maintain the same frequency on each route."
+    }
+   ],
+   "validation": "completed-with-key preview: n a single downtown terminal; in the newer model, [frequent routes cross] one another at multiple points throughout the city, allowin",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'f4dcff2e-6c99-4dad-bef6-8af843033ac9' order by pv.version_no desc"
+  },
+  {
+   "id": "R-04f6acc4-4938-437e-bf33-bcb857df8185",
+   "gid": "04f6acc4-4938-437e-bf33-bcb857df8185",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (literal-comma-after-blank).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Art historians studying the Dutch Golden Age have generally treated still-life paintings of flowers as straightforward displays of wealth, since the blooms depicted, such as tulips and irises, were often rare and expensive imports that only affluent patrons could afford to commission in paint, if not in actual gardens. Closer examination of specific canvases, however, reveals that many of these paintings combine flowers that bloom in different seasons within a single impossible bouquet, a detail that could not have escaped painters renowned for their botanical precision. ______ , some scholars now read these still lifes not merely as records of wealth but as deliberate meditations on the fleeting nature of beauty, since an arrangement that could never exist in real life draws attention to the artifice of the painted image itself. Skeptics of this newer reading counter that the seasonal impossibility may simply reflect painters working from separate botanical sketches gathered over an entire year rather than any symbolic intent.",
+     "new": "Art historians studying the Dutch Golden Age have generally treated still-life paintings of flowers as straightforward displays of wealth, since the blooms depicted, such as tulips and irises, were often rare and expensive imports that only affluent patrons could afford to commission in paint, if not in actual gardens. Closer examination of specific canvases, however, reveals that many of these paintings combine flowers that bloom in different seasons within a single impossible bouquet, a detail that could not have escaped painters renowned for their botanical precision. ______ some scholars now read these still lifes not merely as records of wealth but as deliberate meditations on the fleeting nature of beauty, since an arrangement that could never exist in real life draws attention to the artifice of the painted image itself. Skeptics of this newer reading counter that the seasonal impossibility may simply reflect painters working from separate botanical sketches gathered over an entire year rather than any symbolic intent."
+    }
+   ],
+   "validation": "completed-with-key preview:  painters renowned for their botanical precision. [Consequently,] some scholars now read these still lifes not merely as reco",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '04f6acc4-4938-437e-bf33-bcb857df8185' order by pv.version_no desc"
+  },
+  {
+   "id": "R-51fc09b3-4755-4fab-99e1-9633bcf8d8a5",
+   "gid": "51fc09b3-4755-4fab-99e1-9633bcf8d8a5",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (literal-comma-after-blank).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "During the 1960s, transportation planners in several major American cities pursued an ambitious strategy of building elevated urban freeways directly through downtown neighborhoods, believing that faster automobile access would revitalize struggling city centers by drawing shoppers and businesses back from the suburbs. In practice, many of these freeways instead severed neighborhoods, displaced thousands of low-income residents, and cast long shadows over streets that had once supported thriving foot traffic and retail. ______ , a handful of cities that built similar elevated freeways in already low-density industrial corridors, rather than through residential downtowns, saw measurable increases in regional commerce without comparable neighborhood destruction. This contrast has led urban historians to argue that the failure of downtown freeways was not an inevitable consequence of highway construction itself but a result of specific routing decisions that ignored existing neighborhood fabric.",
+     "new": "During the 1960s, transportation planners in several major American cities pursued an ambitious strategy of building elevated urban freeways directly through downtown neighborhoods, believing that faster automobile access would revitalize struggling city centers by drawing shoppers and businesses back from the suburbs. In practice, many of these freeways instead severed neighborhoods, displaced thousands of low-income residents, and cast long shadows over streets that had once supported thriving foot traffic and retail. ______ a handful of cities that built similar elevated freeways in already low-density industrial corridors, rather than through residential downtowns, saw measurable increases in regional commerce without comparable neighborhood destruction. This contrast has led urban historians to argue that the failure of downtown freeways was not an inevitable consequence of highway construction itself but a result of specific routing decisions that ignored existing neighborhood fabric."
+    }
+   ],
+   "validation": "completed-with-key preview:  once supported thriving foot traffic and retail. [By contrast,] a handful of cities that built similar elevated freeways in",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '51fc09b3-4755-4fab-99e1-9633bcf8d8a5' order by pv.version_no desc"
+  },
+  {
+   "id": "R-ef96f2f7-8419-4ac7-95c4-9188ff97ae3b",
+   "gid": "ef96f2f7-8419-4ac7-95c4-9188ff97ae3b",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (literal-comma-after-blank).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Marine biologists have long debated why deep-sea anglerfish exhibit such extreme sexual dimorphism, with females growing many times larger than the tiny males that fuse permanently to their bodies. One hypothesis holds that in the sparse, dark waters of the deep sea, the odds of any two anglerfish encountering each other are so low that a male cannot afford to search for multiple mates; instead, natural selection favors males that latch onto the first female they find and remain attached for life, sacrificing independent mobility for guaranteed reproductive access. Recent tagging studies have complicated this picture, however, by showing that in regions with unusually high anglerfish density, some males detach and successfully reattach to a second female after the first female dies. ______ , researchers now argue that permanent fusion is not a fixed trait of the species but a flexible strategy that depends on local population density.",
+     "new": "Marine biologists have long debated why deep-sea anglerfish exhibit such extreme sexual dimorphism, with females growing many times larger than the tiny males that fuse permanently to their bodies. One hypothesis holds that in the sparse, dark waters of the deep sea, the odds of any two anglerfish encountering each other are so low that a male cannot afford to search for multiple mates; instead, natural selection favors males that latch onto the first female they find and remain attached for life, sacrificing independent mobility for guaranteed reproductive access. Recent tagging studies have complicated this picture, however, by showing that in regions with unusually high anglerfish density, some males detach and successfully reattach to a second female after the first female dies. ______ researchers now argue that permanent fusion is not a fixed trait of the species but a flexible strategy that depends on local population density."
+    }
+   ],
+   "validation": "completed-with-key preview: h to a second female after the first female dies. [Consequently,] researchers now argue that permanent fusion is not a fixed ",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'ef96f2f7-8419-4ac7-95c4-9188ff97ae3b' order by pv.version_no desc"
+  },
+  {
+   "id": "R-b4cdabde-f747-4dc9-80d3-c5565cbb3bac",
+   "gid": "b4cdabde-f747-4dc9-80d3-c5565cbb3bac",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (literal-comma-after-blank).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Art historians studying the Dutch Golden Age have generally attributed the rapid rise of still-life painting in the seventeenth century to the growing wealth of merchant-class patrons who wanted decorative, secular art for their homes rather than religious commissions for churches. This economic explanation accounts for the sheer volume of still-life production, but it struggles to explain a more specific puzzle: why so many of these paintings incorporated hidden symbols of mortality, such as wilting flowers, half-peeled fruit, or extinguished candles, tucked among otherwise celebratory displays of abundance. A closer look at sermons and moral literature circulating in Dutch cities during this period reveals that vanitas themes, warning against the vanity of earthly pleasures, were a dominant strain of public religious discourse even as church commissions declined. Because this moral discourse continued to shape how ordinary citizens thought about wealth and mortality, painters and patrons alike remained conscious of the tension between material display and spiritual warning. ______, the paintings may reflect not simply new patrons' tastes but a broader cultural anxiety about material wealth that persisted independently of formal religious institutions.",
+     "new": "Art historians studying the Dutch Golden Age have generally attributed the rapid rise of still-life painting in the seventeenth century to the growing wealth of merchant-class patrons who wanted decorative, secular art for their homes rather than religious commissions for churches. This economic explanation accounts for the sheer volume of still-life production, but it struggles to explain a more specific puzzle: why so many of these paintings incorporated hidden symbols of mortality, such as wilting flowers, half-peeled fruit, or extinguished candles, tucked among otherwise celebratory displays of abundance. A closer look at sermons and moral literature circulating in Dutch cities during this period reveals that vanitas themes, warning against the vanity of earthly pleasures, were a dominant strain of public religious discourse even as church commissions declined. Because this moral discourse continued to shape how ordinary citizens thought about wealth and mortality, painters and patrons alike remained conscious of the tension between material display and spiritual warning. ______ the paintings may reflect not simply new patrons' tastes but a broader cultural anxiety about material wealth that persisted independently of formal religious institutions."
+    }
+   ],
+   "validation": "completed-with-key preview: n between material display and spiritual warning. [As a result,] the paintings may reflect not simply new patrons' tastes bu",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'b4cdabde-f747-4dc9-80d3-c5565cbb3bac' order by pv.version_no desc"
+  },
+  {
+   "id": "R-be9e745f-1fc6-4071-b448-96a1927213dd",
+   "gid": "be9e745f-1fc6-4071-b448-96a1927213dd",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (literal-comma-after-blank).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "During the 1970s energy crisis, many American cities scrambled to reduce dependence on private automobiles by investing heavily in new light-rail systems, betting that dedicated rail infrastructure would draw commuters away from cars. In most cities where rail lines were built without complementary changes to zoning or bus feeder routes, ridership fell far short of projections, and the systems required ongoing subsidies simply to remain operational. Portland, Oregon, took a different approach: city planners paired new light-rail construction with zoning reforms that permitted denser housing and mixed-use development near stations, and they restructured bus routes specifically to feed passengers into rail stations rather than compete with them. ______, ridership on Portland's system grew steadily for decades and eventually exceeded initial projections, a pattern rarely seen among cities that pursued rail investment alone.",
+     "new": "During the 1970s energy crisis, many American cities scrambled to reduce dependence on private automobiles by investing heavily in new light-rail systems, betting that dedicated rail infrastructure would draw commuters away from cars. In most cities where rail lines were built without complementary changes to zoning or bus feeder routes, ridership fell far short of projections, and the systems required ongoing subsidies simply to remain operational. Portland, Oregon, took a different approach: city planners paired new light-rail construction with zoning reforms that permitted denser housing and mixed-use development near stations, and they restructured bus routes specifically to feed passengers into rail stations rather than compete with them. ______ ridership on Portland's system grew steadily for decades and eventually exceeded initial projections, a pattern rarely seen among cities that pursued rail investment alone."
+    }
+   ],
+   "validation": "completed-with-key preview: into rail stations rather than compete with them. [As a result,] ridership on Portland's system grew steadily for decades an",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'be9e745f-1fc6-4071-b448-96a1927213dd' order by pv.version_no desc"
+  },
+  {
+   "id": "R-w1-boundaries-m-042",
+   "gid": "w1-boundaries-m-042",
+   "repoSource": "data/mock-exam-generation/rebalance-20261008/gen/merged.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "In the early 1950s, psychologist Solomon Asch asked participants to match the length of a reference line to one of three comparison lines, a task so simple that people tested alone almost never erred. When seated among confederates who unanimously gave a clearly wrong answer, however, participants went along with the group on roughly a third of the critical trials______ some later reported that they had begun to doubt their own eyesight, while others admitted they had simply wanted to avoid standing out.",
+     "new": "In the early 1950s, psychologist Solomon Asch asked participants to match the length of a reference line to one of three comparison lines, a task so simple that people tested alone almost never erred. When seated among confederates who unanimously gave a clearly wrong answer, however, participants went along with the group on roughly a third of the critical trials______ later reported that they had begun to doubt their own eyesight, while others admitted they had simply wanted to avoid standing out."
+    }
+   ],
+   "validation": "completed-with-key preview: he group on roughly a third of the critical trials[: some] later reported that they had begun to doubt their own eyesi",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'w1-boundaries-m-042' order by pv.version_no desc"
+  },
+  {
+   "id": "R-w1-boundaries-m-254",
+   "gid": "w1-boundaries-m-254",
+   "repoSource": "data/mock-exam-generation/rebalance-20261008/gen/merged.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Wabi-sabi, an aesthetic that finds beauty in imperfection and impermanence, shaped how Japanese potters approached their craft. Raku tea bowls were often left with uneven rims and irregular glazes by their makers, among them the sixteenth-century potter Chōjirō, whose rough, hand-formed bowls were prized by the tea master Sen no Rikyū______ such flaws were not regarded as mistakes but as deliberate invitations to contemplate the passage of time.",
+     "new": "Wabi-sabi, an aesthetic that finds beauty in imperfection and impermanence, shaped how Japanese potters approached their craft. Raku tea bowls were often left with uneven rims and irregular glazes by their makers, among them the sixteenth-century potter Chōjirō, whose rough, hand-formed bowls were prized by the tea master Sen no Rikyū______ flaws were not regarded as mistakes but as deliberate invitations to contemplate the passage of time."
+    }
+   ],
+   "validation": "completed-with-key preview: d bowls were prized by the tea master Sen no Rikyū[; such] flaws were not regarded as mistakes but as deliberate invit",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'w1-boundaries-m-254' order by pv.version_no desc"
+  },
+  {
+   "id": "R-w1-boundaries-m-259",
+   "gid": "w1-boundaries-m-259",
+   "repoSource": "data/mock-exam-generation/rebalance-20261008/gen/merged.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Persian classical music is organized not into fixed scales but into the radif, a body of melodic models grouped into modal systems called dastgahs. Several of these systems depend on intervals smaller than a Western semitone, most famously the koron, a pitch lowered by roughly a quarter of a whole step______ Iranian composer Alireza Mashayekhi has drawn on such intervals in works that fuse traditional modes with avant-garde techniques.",
+     "new": "Persian classical music is organized not into fixed scales but into the radif, a body of melodic models grouped into modal systems called dastgahs. Several of these systems depend on intervals smaller than a Western semitone, most famously the koron, a pitch lowered by roughly a quarter of a whole step______ composer Alireza Mashayekhi has drawn on such intervals in works that fuse traditional modes with avant-garde techniques."
+    }
+   ],
+   "validation": "completed-with-key preview: pitch lowered by roughly a quarter of a whole step[; Iranian] composer Alireza Mashayekhi has drawn on such intervals in ",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'w1-boundaries-m-259' order by pv.version_no desc"
+  },
+  {
+   "id": "R-rebal13:w3-boundaries-m-038",
+   "gid": "rebal13:w3-boundaries-m-038",
+   "repoSource": "data/mock-exam-generation/rebalance-20261008/gen/all.passed.json",
+   "auditRefs": [
+    "RW completion text duplicates a word/clause already present after the blank (SAT1 RW49, SAT13 RW13/RW23, SAT1-new RW11, SAT3/4/5/6/7 ...)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "Passage text after the blank repeats words that the options already contain (trim-1-leading-words-of-continuation).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "From his seat beside the tram window, Senhor Oliveira had watched the Saints' procession wind down Rua da Graça for fifty-one Junes. This year, a spark from a paper lantern caught the hem of a small boy's Saint Anthony costume, and the crowd, a tangle of grandmothers, fishmongers, and brass-band players who had been singing together only moments earlier, ______ neighbors shoved past neighbors, and no one seemed certain whose child the boy was.",
+     "new": "From his seat beside the tram window, Senhor Oliveira had watched the Saints' procession wind down Rua da Graça for fifty-one Junes. This year, a spark from a paper lantern caught the hem of a small boy's Saint Anthony costume, and the crowd, a tangle of grandmothers, fishmongers, and brass-band players who had been singing together only moments earlier, ______ shoved past neighbors, and no one seemed certain whose child the boy was."
+    }
+   ],
+   "validation": "completed-with-key preview: o had been singing together only moments earlier, [broke apart: neighbors] shoved past neighbors, and no one seemed certain whose chil",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'rebal13:w3-boundaries-m-038' order by pv.version_no desc"
+  },
+  {
+   "id": "D-309f9901",
+   "gid": "309f9901-7065-4914-93c3-63855e5e805c",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "question/goal sentence shown twice (stimulus + question block)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The stimulus already contains the question text, which is also stored as the question -> students see it twice.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Text 1\n\nEconomic historians studying the spread of the printing press across sixteenth-century Europe have generally emphasized supply-side factors: cities with established paper mills, skilled metalworkers, and merchant capital available for investment were the first to acquire presses. On this account, the technology diffused outward from a handful of well-resourced hubs to peripheral towns only as production costs fell and capital became more widely available. Studies using guild records and apprenticeship rolls have shown a strong correlation between a city's manufacturing base and the timing of its first press, reinforcing the view that access to capital and craft infrastructure was the binding constraint on adoption.\n\nText 2\n\nA close reading of correspondence between early printers reveals that presses frequently appeared first in cities with modest manufacturing capacity but with strong ties to university towns or ecclesiastical courts that generated consistent demand for texts. In several documented cases, printers relocated to smaller towns specifically because a bishopric or university had commissioned a large run of religious or academic texts, even though the necessary paper and metal had to be imported at considerable expense. This pattern suggests that guaranteed demand, not local production capacity, was often the decisive factor determining where presses were established first.\n\nBased on the texts, how would the author of Text 2 most likely respond to the claim in Text 1 that \"access to capital and craft infrastructure was the binding constraint on adoption\"?",
+     "new": "Text 1\n\nEconomic historians studying the spread of the printing press across sixteenth-century Europe have generally emphasized supply-side factors: cities with established paper mills, skilled metalworkers, and merchant capital available for investment were the first to acquire presses. On this account, the technology diffused outward from a handful of well-resourced hubs to peripheral towns only as production costs fell and capital became more widely available. Studies using guild records and apprenticeship rolls have shown a strong correlation between a city's manufacturing base and the timing of its first press, reinforcing the view that access to capital and craft infrastructure was the binding constraint on adoption.\n\nText 2\n\nA close reading of correspondence between early printers reveals that presses frequently appeared first in cities with modest manufacturing capacity but with strong ties to university towns or ecclesiastical courts that generated consistent demand for texts. In several documented cases, printers relocated to smaller towns specifically because a bishopric or university had commissioned a large run of religious or academic texts, even though the necessary paper and metal had to be imported at considerable expense. This pattern suggests that guaranteed demand, not local production capacity, was often the decisive factor determining where presses were established first."
+    }
+   ],
+   "validation": "string rule: stimulus minus question text",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '309f9901-7065-4914-93c3-63855e5e805c' order by pv.version_no desc"
+  },
+  {
+   "id": "D-d69794f8",
+   "gid": "d69794f8-ad2d-4e47-9641-ec64ca12dc87",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "question/goal sentence shown twice (stimulus + question block)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The stimulus already contains the question text, which is also stored as the question -> students see it twice.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Text 1\n\nThe collapse of coral reefs following marine heatwaves is often described as a straightforward function of temperature: reefs that experience more degree-heating weeks bleach more severely and recover more slowly. Researchers who model reef futures under warming scenarios have generally relied on cumulative heat stress as the dominant predictor, arguing that once a thermal threshold is crossed, symbiotic algae are expelled regardless of other local conditions. This framework has been useful for generating broad regional forecasts, but it treats reefs largely as passive thermometers, responding uniformly to a single external variable while other site-specific factors are folded into statistical noise.\n\nText 2\n\nRecent surveys of reefs that experienced nearly identical heat exposure during the same bleaching event found striking differences in mortality, differences that heat-stress metrics alone cannot explain. Reefs with strong wave action and higher nutrient flushing retained more of their coral cover than sheltered reefs with comparable degree-heating weeks, suggesting that local water circulation modulates how corals experience thermal stress. Some researchers now argue that regional forecasts built solely on cumulative heat exposure will systematically misestimate which specific reefs survive, since circulation patterns can either compound or partially offset the physiological damage caused by elevated temperature.\n\nBased on the texts, how would the author of Text 2 most likely respond to the claim in Text 1 that \"once a thermal threshold is crossed, symbiotic algae are expelled regardless of other local conditions\"?",
+     "new": "Text 1\n\nThe collapse of coral reefs following marine heatwaves is often described as a straightforward function of temperature: reefs that experience more degree-heating weeks bleach more severely and recover more slowly. Researchers who model reef futures under warming scenarios have generally relied on cumulative heat stress as the dominant predictor, arguing that once a thermal threshold is crossed, symbiotic algae are expelled regardless of other local conditions. This framework has been useful for generating broad regional forecasts, but it treats reefs largely as passive thermometers, responding uniformly to a single external variable while other site-specific factors are folded into statistical noise.\n\nText 2\n\nRecent surveys of reefs that experienced nearly identical heat exposure during the same bleaching event found striking differences in mortality, differences that heat-stress metrics alone cannot explain. Reefs with strong wave action and higher nutrient flushing retained more of their coral cover than sheltered reefs with comparable degree-heating weeks, suggesting that local water circulation modulates how corals experience thermal stress. Some researchers now argue that regional forecasts built solely on cumulative heat exposure will systematically misestimate which specific reefs survive, since circulation patterns can either compound or partially offset the physiological damage caused by elevated temperature."
+    }
+   ],
+   "validation": "string rule: stimulus minus question text",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'd69794f8-ad2d-4e47-9641-ec64ca12dc87' order by pv.version_no desc"
+  },
+  {
+   "id": "D-18ec5fbb",
+   "gid": "18ec5fbb-2079-4d2f-8317-4c39af5a7500",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "question/goal sentence shown twice (stimulus + question block)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The stimulus already contains the question text, which is also stored as the question -> students see it twice.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "A marine biology research team is tracking the migration speed of a pod of gray whales along the Pacific coast. The team recorded the whales' position at several checkpoints during a single continuous swim, measuring distance traveled (in nautical miles) and elapsed time (in hours) from the start of tracking, shown in the scatterplot below. The line of best fit is also shown.\n\nThe team wants to convert the whales' average speed, based on the line of best fit, into miles per day, using the fact that 1 nautical mile = 1.15 miles.\n\nBased on the line of best fit, what is the whales' average speed, in miles per day, rounded to the nearest whole number?",
+     "new": "A marine biology research team is tracking the migration speed of a pod of gray whales along the Pacific coast. The team recorded the whales' position at several checkpoints during a single continuous swim, measuring distance traveled (in nautical miles) and elapsed time (in hours) from the start of tracking, shown in the scatterplot below. The line of best fit is also shown.\n\nThe team wants to convert the whales' average speed, based on the line of best fit, into miles per day, using the fact that 1 nautical mile = 1.15 miles."
+    }
+   ],
+   "validation": "string rule: stimulus minus question text",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '18ec5fbb-2079-4d2f-8317-4c39af5a7500' order by pv.version_no desc"
+  },
+  {
+   "id": "D-5b9b865b",
+   "gid": "5b9b865b-09e9-435d-b138-7710f25187f7",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "question/goal sentence shown twice (stimulus + question block)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The stimulus already contains the question text, which is also stored as the question -> students see it twice.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "While researching a topic, a student has taken the following notes:\n- Barter systems, in which goods and services are exchanged directly without money, were common in many early societies.\n- Barter requires a \"double coincidence of wants\": each party must want what the other offers.\n- Metal coins emerged in several ancient civilizations, including Lydia around the 7th century BCE, partly to solve this matching problem.\n- Coins allowed value to be standardized and stored, making trade over long distances easier.\n- Paper money later developed in China during the Tang and Song dynasties as a lighter alternative to carrying metal coins.\n- Today, most transactions occur through digital records rather than physical currency.\n\nThe student wants to explain why metal coins were introduced as an advance over barter. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "new": "While researching a topic, a student has taken the following notes:\n- Barter systems, in which goods and services are exchanged directly without money, were common in many early societies.\n- Barter requires a \"double coincidence of wants\": each party must want what the other offers.\n- Metal coins emerged in several ancient civilizations, including Lydia around the 7th century BCE, partly to solve this matching problem.\n- Coins allowed value to be standardized and stored, making trade over long distances easier.\n- Paper money later developed in China during the Tang and Song dynasties as a lighter alternative to carrying metal coins.\n- Today, most transactions occur through digital records rather than physical currency."
+    }
+   ],
+   "validation": "string rule: stimulus minus question text",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '5b9b865b-09e9-435d-b138-7710f25187f7' order by pv.version_no desc"
+  },
+  {
+   "id": "D-fcde57e1",
+   "gid": "fcde57e1-5271-4194-8dae-5c2bef3423e1",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "question/goal sentence shown twice (stimulus + question block)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The stimulus already contains the question text, which is also stored as the question -> students see it twice.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "While researching a topic, a student has taken the following notes:\n- The saguaro cactus is native to the Sonoran Desert in Arizona, California, and northern Mexico.\n- Saguaros grow very slowly, sometimes taking up to 75 years to develop their first side arm.\n- Some saguaros live for more than 150 years and can grow taller than 40 feet.\n- The flower of the saguaro cactus is the official state flower of Arizona.\n- Saguaro flowers bloom at night and close by the following afternoon, making them accessible to nocturnal pollinators like bats.\n\nThe student wants to emphasize how long it takes for a saguaro cactus to reach physical maturity. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "new": "While researching a topic, a student has taken the following notes:\n- The saguaro cactus is native to the Sonoran Desert in Arizona, California, and northern Mexico.\n- Saguaros grow very slowly, sometimes taking up to 75 years to develop their first side arm.\n- Some saguaros live for more than 150 years and can grow taller than 40 feet.\n- The flower of the saguaro cactus is the official state flower of Arizona.\n- Saguaro flowers bloom at night and close by the following afternoon, making them accessible to nocturnal pollinators like bats."
+    }
+   ],
+   "validation": "string rule: stimulus minus question text",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'fcde57e1-5271-4194-8dae-5c2bef3423e1' order by pv.version_no desc"
+  },
+  {
+   "id": "D-b43f2d6a",
+   "gid": "b43f2d6a-15dc-420d-a460-88be79a5b9c4",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "question/goal sentence shown twice (stimulus + question block)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The stimulus already contains the question text, which is also stored as the question -> students see it twice.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "While researching a topic, a student has taken the following notes:\n- The silphium plant, prized in antiquity, grew only in a narrow coastal strip of Cyrenaica (modern-day Libya) and could not be successfully cultivated elsewhere.\n- Ancient physicians used silphium resin to treat coughs, fevers, and indigestion, and it was also used as a seasoning in cooking.\n- Roman authors reported that silphium was so valuable that its image appeared on Cyrenaic coins, and by the first century CE it had reportedly become extinct due to overharvesting and overgrazing by livestock.\n- Some modern botanists argue that silphium may not have gone fully extinct but instead survives today as a rare, unrecognized relative of the giant fennel plant.\n- The plant's demand was driven largely by its supposed effectiveness as a contraceptive, which further intensified harvesting pressure beyond what was needed for medicine and seasoning.\n\nThe student wants to explain why silphium's medicinal reputation, rather than its culinary use alone, most directly hastened its disappearance. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "new": "While researching a topic, a student has taken the following notes:\n- The silphium plant, prized in antiquity, grew only in a narrow coastal strip of Cyrenaica (modern-day Libya) and could not be successfully cultivated elsewhere.\n- Ancient physicians used silphium resin to treat coughs, fevers, and indigestion, and it was also used as a seasoning in cooking.\n- Roman authors reported that silphium was so valuable that its image appeared on Cyrenaic coins, and by the first century CE it had reportedly become extinct due to overharvesting and overgrazing by livestock.\n- Some modern botanists argue that silphium may not have gone fully extinct but instead survives today as a rare, unrecognized relative of the giant fennel plant.\n- The plant's demand was driven largely by its supposed effectiveness as a contraceptive, which further intensified harvesting pressure beyond what was needed for medicine and seasoning."
+    }
+   ],
+   "validation": "string rule: stimulus minus question text",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'b43f2d6a-15dc-420d-a460-88be79a5b9c4' order by pv.version_no desc"
+  },
+  {
+   "id": "D-3b4169b4",
+   "gid": "3b4169b4-bd54-4fa1-bc01-eef69ef8ba9f",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "question/goal sentence shown twice (stimulus + question block)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The stimulus already contains the question text, which is also stored as the question -> students see it twice.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "While researching a topic, a student has taken the following notes:\n- In the 1960s, urban planners in several U.S. cities began replacing streetcar lines with bus routes, arguing that buses offered greater route flexibility.\n- Streetcars require fixed tracks and overhead wires, which are expensive to install and maintain but tend to have longer operational lifespans than buses.\n- A 2015 study found that cities with light rail systems, a modern successor to streetcars, saw a 15% increase in ridership within five years of construction compared to comparable bus-only corridors.\n- Buses can be rerouted quickly in response to construction, accidents, or changing demand, without the need for costly infrastructure changes.\n- Fixed rail lines tend to attract more private real estate investment near stations because developers view rail infrastructure as a permanent commitment to a corridor.\n- Bus rapid transit (BRT) systems attempt to combine rail-like dedicated lanes with the flexibility of buses, though they often lack the permanence signal that attracts investment.\n\nThe student wants to explain why real estate developers might prefer investing near rail lines rather than near bus routes. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "new": "While researching a topic, a student has taken the following notes:\n- In the 1960s, urban planners in several U.S. cities began replacing streetcar lines with bus routes, arguing that buses offered greater route flexibility.\n- Streetcars require fixed tracks and overhead wires, which are expensive to install and maintain but tend to have longer operational lifespans than buses.\n- A 2015 study found that cities with light rail systems, a modern successor to streetcars, saw a 15% increase in ridership within five years of construction compared to comparable bus-only corridors.\n- Buses can be rerouted quickly in response to construction, accidents, or changing demand, without the need for costly infrastructure changes.\n- Fixed rail lines tend to attract more private real estate investment near stations because developers view rail infrastructure as a permanent commitment to a corridor.\n- Bus rapid transit (BRT) systems attempt to combine rail-like dedicated lanes with the flexibility of buses, though they often lack the permanence signal that attracts investment."
+    }
+   ],
+   "validation": "string rule: stimulus minus question text",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '3b4169b4-bd54-4fa1-bc01-eef69ef8ba9f' order by pv.version_no desc"
+  },
+  {
+   "id": "D-896b1d19",
+   "gid": "896b1d19-9734-425c-887d-ca61860501fc",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "question/goal sentence shown twice (stimulus + question block)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The stimulus already contains the question text, which is also stored as the question -> students see it twice.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "While researching a topic, a student has taken the following notes:\n- Coral reefs cover less than 1% of the ocean floor but support roughly 25% of all known marine species.\n- Rising ocean temperatures cause coral bleaching, a process in which corals expel the symbiotic algae that provide them with food and color.\n- Bleached corals are not immediately dead; if water temperatures return to normal quickly, corals can sometimes recover and reabsorb algae.\n- The Great Barrier Reef experienced mass bleaching events in 2016, 2017, and 2020, with each event affecting different sections of the reef.\n- Ocean acidification, caused by absorption of excess atmospheric carbon dioxide, makes it harder for corals to build their calcium carbonate skeletons.\n- Marine biologists are experimenting with selectively breeding heat-resistant coral strains to help reefs withstand future warming events.\n\nThe student wants to explain why coral bleaching does not always result in the death of a coral colony. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "new": "While researching a topic, a student has taken the following notes:\n- Coral reefs cover less than 1% of the ocean floor but support roughly 25% of all known marine species.\n- Rising ocean temperatures cause coral bleaching, a process in which corals expel the symbiotic algae that provide them with food and color.\n- Bleached corals are not immediately dead; if water temperatures return to normal quickly, corals can sometimes recover and reabsorb algae.\n- The Great Barrier Reef experienced mass bleaching events in 2016, 2017, and 2020, with each event affecting different sections of the reef.\n- Ocean acidification, caused by absorption of excess atmospheric carbon dioxide, makes it harder for corals to build their calcium carbonate skeletons.\n- Marine biologists are experimenting with selectively breeding heat-resistant coral strains to help reefs withstand future warming events."
+    }
+   ],
+   "validation": "string rule: stimulus minus question text",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '896b1d19-9734-425c-887d-ca61860501fc' order by pv.version_no desc"
+  },
+  {
+   "id": "D-eec841e6",
+   "gid": "eec841e6-8154-4d0a-8d8c-d32c3f87bc46",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "question/goal sentence shown twice (stimulus + question block)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The stimulus already contains the question text, which is also stored as the question -> students see it twice.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "While researching a topic, a student has taken the following notes:\n- The Dutch painter Johannes Vermeer produced fewer than 40 known paintings during his lifetime, a small output compared to contemporaries like Rembrandt.\n- Vermeer often used a rare and expensive pigment called ultramarine, made from crushed lapis lazuli imported from Afghanistan, even in underpainting layers not visible in the finished work.\n- X-ray analysis of Vermeer's paintings has revealed that he frequently reworked compositions, painting over earlier versions of figures and objects.\n- Art historians believe Vermeer's small output may be partly explained by his meticulous, slow working method and his use of costly materials.\n- Vermeer worked in Delft, a city with a thriving art market, but he sold most of his paintings to a single wealthy patron rather than on the open market.\n- After Vermeer's death, his reputation faded for nearly two centuries until 19th-century critics rediscovered and championed his work.\n\nThe student wants to explain why Vermeer completed so few paintings during his career. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "new": "While researching a topic, a student has taken the following notes:\n- The Dutch painter Johannes Vermeer produced fewer than 40 known paintings during his lifetime, a small output compared to contemporaries like Rembrandt.\n- Vermeer often used a rare and expensive pigment called ultramarine, made from crushed lapis lazuli imported from Afghanistan, even in underpainting layers not visible in the finished work.\n- X-ray analysis of Vermeer's paintings has revealed that he frequently reworked compositions, painting over earlier versions of figures and objects.\n- Art historians believe Vermeer's small output may be partly explained by his meticulous, slow working method and his use of costly materials.\n- Vermeer worked in Delft, a city with a thriving art market, but he sold most of his paintings to a single wealthy patron rather than on the open market.\n- After Vermeer's death, his reputation faded for nearly two centuries until 19th-century critics rediscovered and championed his work."
+    }
+   ],
+   "validation": "string rule: stimulus minus question text",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'eec841e6-8154-4d0a-8d8c-d32c3f87bc46' order by pv.version_no desc"
+  },
+  {
+   "id": "D-ef704d02",
+   "gid": "ef704d02-d963-4fc9-a9b9-7b2523e33205",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "question/goal sentence shown twice (stimulus + question block)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The stimulus already contains the question text, which is also stored as the question -> students see it twice.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "While researching a topic, a student has taken the following notes:\n- The Monarch butterfly (Danaus plexippus) migrates up to 3,000 miles each fall from Canada and the northern United States to overwintering sites in central Mexico.\n- Monarchs use a time-compensated sun compass, adjusting their flight direction based on the sun's position and the time of day.\n- Individual monarchs live only 2 to 6 weeks during the breeding season, so no single butterfly completes the entire round-trip migration.\n- The generation that migrates south in fall, called the \"super generation,\" can live up to 8 months, long enough to fly to Mexico and begin the journey back north.\n- Scientists have found that monarchs also use the Earth's magnetic field as a backup navigational cue on overcast days when the sun is not visible.\n- Habitat loss along migration corridors, especially the decline of milkweed plants, threatens the monarch's ability to complete its migration.\n\nThe student wants to explain how monarch butterflies are able to navigate accurately even when the sun is obscured by clouds. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "new": "While researching a topic, a student has taken the following notes:\n- The Monarch butterfly (Danaus plexippus) migrates up to 3,000 miles each fall from Canada and the northern United States to overwintering sites in central Mexico.\n- Monarchs use a time-compensated sun compass, adjusting their flight direction based on the sun's position and the time of day.\n- Individual monarchs live only 2 to 6 weeks during the breeding season, so no single butterfly completes the entire round-trip migration.\n- The generation that migrates south in fall, called the \"super generation,\" can live up to 8 months, long enough to fly to Mexico and begin the journey back north.\n- Scientists have found that monarchs also use the Earth's magnetic field as a backup navigational cue on overcast days when the sun is not visible.\n- Habitat loss along migration corridors, especially the decline of milkweed plants, threatens the monarch's ability to complete its migration."
+    }
+   ],
+   "validation": "string rule: stimulus minus question text",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'ef704d02-d963-4fc9-a9b9-7b2523e33205' order by pv.version_no desc"
+  },
+  {
+   "id": "D-f6ad8197",
+   "gid": "f6ad8197-06ca-4bf3-9c40-d425bb696d7d",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "question/goal sentence shown twice (stimulus + question block)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The stimulus already contains the question text, which is also stored as the question -> students see it twice.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "While researching a topic, a student has taken the following notes:\n- During the Tulip Mania of the 1630s in the Dutch Republic, prices for rare tulip bulbs rose to levels exceeding the cost of a house in Amsterdam.\n- Tulip bulbs were traded through futures contracts, allowing buyers to purchase bulbs that would not be delivered until the following growing season.\n- The tulip market was especially vulnerable because bulbs cannot be inspected for their eventual flower pattern until they actually bloom, making value highly speculative.\n- In February 1637, prices collapsed suddenly when buyers at a routine bulb auction refused to pay previously agreed prices, triggering panic selling.\n- Some economic historians argue that Tulip Mania's effects on the broader Dutch economy were smaller than popular accounts suggest, since trading was largely limited to wealthy merchants.\n- Tulip Mania is often cited as one of the earliest recorded speculative asset bubbles in economic history.\n\nThe student wants to explain why buyers were willing to pay extremely high prices for tulip bulbs whose actual quality could not yet be confirmed. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "new": "While researching a topic, a student has taken the following notes:\n- During the Tulip Mania of the 1630s in the Dutch Republic, prices for rare tulip bulbs rose to levels exceeding the cost of a house in Amsterdam.\n- Tulip bulbs were traded through futures contracts, allowing buyers to purchase bulbs that would not be delivered until the following growing season.\n- The tulip market was especially vulnerable because bulbs cannot be inspected for their eventual flower pattern until they actually bloom, making value highly speculative.\n- In February 1637, prices collapsed suddenly when buyers at a routine bulb auction refused to pay previously agreed prices, triggering panic selling.\n- Some economic historians argue that Tulip Mania's effects on the broader Dutch economy were smaller than popular accounts suggest, since trading was largely limited to wealthy merchants.\n- Tulip Mania is often cited as one of the earliest recorded speculative asset bubbles in economic history."
+    }
+   ],
+   "validation": "string rule: stimulus minus question text",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = 'f6ad8197-06ca-4bf3-9c40-d425bb696d7d' order by pv.version_no desc"
+  },
+  {
+   "id": "D-0debec47",
+   "gid": "0debec47-4e39-48d7-9bed-10af938bcdf3",
+   "repoSource": "data/mock-exam-generation/mockgen-20260929/acceptance/import-general.json",
+   "auditRefs": [
+    "question/goal sentence shown twice (stimulus + question block)"
+   ],
+   "route": "edit question + rerun validation",
+   "why": "The stimulus already contains the question text, which is also stored as the question -> students see it twice.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "A city parks department is designing a rectangular community garden that will be enclosed by fencing and divided by an internal path. Line $\\ell$ represents the total fencing cost equation, and line $m$ represents the total planting-soil cost equation, both in terms of $x$, the length of the garden in meters, and $y$, the total cost in dollars, for a fixed garden width. The graph shows lines $\\ell$ and $m$.\n\nThe system is consistent and has exactly one solution, represented by the intersection point of $\\ell$ and $m$ shown in the graph.\n\nIf the fencing cost equation is $y = -\\frac{1}{2}x + 40$ and line $m$ passes through the points shown in the graph, which of the following could be the equation for line $m$?",
+     "new": "A city parks department is designing a rectangular community garden that will be enclosed by fencing and divided by an internal path. Line $\\ell$ represents the total fencing cost equation, and line $m$ represents the total planting-soil cost equation, both in terms of $x$, the length of the garden in meters, and $y$, the total cost in dollars, for a fixed garden width. The graph shows lines $\\ell$ and $m$.\n\nThe system is consistent and has exactly one solution, represented by the intersection point of $\\ell$ and $m$ shown in the graph."
+    }
+   ],
+   "validation": "string rule: stimulus minus question text",
+   "dbLookup": "select pv.id, pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = '0debec47-4e39-48d7-9bed-10af938bcdf3' order by pv.version_no desc"
+  }
+ ]
+}

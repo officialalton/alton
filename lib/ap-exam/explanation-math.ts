@@ -15,8 +15,28 @@ const POWER = /(?:\|[^|\n]{1,20}\||\[[^\[\]\\^]*\]|\((?:[^()]|\([^()]*\))*\)|[A-
 // 부등호 사슬(<=, >= 가 하나 이상): "0 <= t <= 6", "x<=2", "p <= 1"
 const INEQ = /(?:[-+]?[A-Za-z0-9.]+(?:\([^()]*\))?(?:\^[A-Za-z0-9]+)?)(?:[ ]?(?:<=|>=|<|>)[ ]?[-+]?[A-Za-z0-9.]+(?:\([^()]*\))?(?:\^[A-Za-z0-9]+)?)+/g;
 
+/**
+ * TeX 에서 `^`·`_` 뒤의 여러 글자 숫자는 중괄호가 없으면 첫 글자만 첨자가 되고 나머지는 기준선으로 떨어진다
+ * (`\int_0^3.154` → 상한 "3" + 본문 ".154"). 생성기가 쓴 `\int_0^2.746`·`x^10`·`x^-2` 를 `^{2.746}`·`^{10}`·`^{-2}` 로 바꾼다.
+ * 한 글자 숫자(`x^2`)·이미 중괄호가 있는 첨자는 그대로. 표시 전용(저장된 해설은 바뀌지 않는다), 멱등.
+ */
+export function braceNumericScripts(tex: string): string {
+  return tex.replace(/([_^])(-?\d+(?:\.\d+)?)(?![\d{])/g, (m, op: string, num: string) => (num.length === 1 ? m : `${op}{${num}}`));
+}
+/** `$...$`·`$$...$$` 안쪽만 변환한다(`\$` 로 이스케이프된 달러는 수식이 아니다). */
+function mapInsideMath(text: string, fn: (tex: string) => string): string {
+  return text.split(MATH_SEG).map((seg, i) => {
+    if (i % 2 === 0 || seg === "\\$") return seg;
+    return seg.startsWith("$$") ? `$$${fn(seg.slice(2, -2))}$$` : `$${fn(seg.slice(1, -1))}$`;
+  }).join("");
+}
+
 export function autoMathExplanation(text: string): string {
   if (!text) return text;
+  return mapInsideMath(wrapMathSegments(text), braceNumericScripts);
+}
+
+function wrapMathSegments(text: string): string {
   let t = decodeUnicodeEscapes(text);
   t = t.replace(/\^pi\b/g, "^\\pi"); // e^pi
   // 유니코드 적분 한계 "∫₀^2.746", "∫₀^∞" → `$\int_0^{2.746}$`(글자 그대로 ^ 가 보이지 않게), 극한 "lim_{x->inf}" → `$\lim_{x\to\infty}$`

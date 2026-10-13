@@ -1,0 +1,35 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "BC2",
+ "sourceSetName": "AP Calculus BC — Practice Exam 2",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/audit/ap-external-audit-swap-plans.ts",
+ "note": "external audit triage 2026-10-13 (docs/audit/2026-10-13-external-audit-triage.md); verifier violations checked across all 6 full sets",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq_a",
+   "position": 2,
+   "removeKey": "run2:ap_calculus_ab-f04-k1",
+   "addKey": "supp-r3c-ab-final:ap_calculus_ab-f04-k0",
+   "reason": "external audit: the BC set has only one real-world-context FRQ; official minimum is two",
+   "remove": {
+    "unit": 8,
+    "skill": 1,
+    "calculator": "required",
+    "graph": true,
+    "family": "fam:run2:ap_calculus_ab-f04-k0",
+    "type": "frq_area_volume"
+   },
+   "add": {
+    "unit": 8,
+    "skill": 1,
+    "calculator": "required",
+    "graph": false,
+    "family": "fam:supp-r3c-ab-final:ap_calculus_ab-f04-k0",
+    "type": "frq_trench_volume"
+   }
+  }
+ ]
+}
