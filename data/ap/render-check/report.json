@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-13T13:20:02.076Z",
- "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + phys-p1a2-items.json + phys-p1b-items.json + phys-s2-items.json + phys-s3-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json + chem-p1a-items.json + chem-p1a2-items.json + chem-p1b-items.json + chem-s2f-items.json + chem-s2ma-items.json + chem-s2mb-items.json + chem-s2mc-items.json (2005행)",
+ "generatedAt": "2026-10-13T15:45:15.390Z",
+ "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + phys-p1a2-items.json + phys-p1b-items.json + phys-s2-items.json + phys-s3-items.json + phys-s4-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json + chem-p1a-items.json + chem-p1a2-items.json + chem-p1b-items.json + chem-s2f-items.json + chem-s2ma-items.json + chem-s2mb-items.json + chem-s2mc-items.json (2029행)",
  "all": {
-  "total": 2005,
-  "pass": 996,
+  "total": 2029,
+  "pass": 1005,
   "fail": 3,
-  "notApplicable": 1006
+  "notApplicable": 1021
  },
  "liveStates": {
-  "total": 1235,
-  "pass": 540,
+  "total": 1243,
+  "pass": 543,
   "fail": 0,
-  "notApplicable": 695
+  "notApplicable": 700
  },
  "byType": [
   {
@@ -30,8 +30,8 @@
   },
   {
    "type": "ap_diagram:phys_scene",
-   "total": 38,
-   "pass": 38,
+   "total": 41,
+   "pass": 41,
    "fail": 0,
    "notApplicable": 0
   },
@@ -170,8 +170,8 @@
   },
   {
    "type": "ap_table",
-   "total": 498,
-   "pass": 498,
+   "total": 504,
+   "pass": 504,
    "fail": 0,
    "notApplicable": 0
   },
@@ -219,10 +219,10 @@
   },
   {
    "type": "text",
-   "total": 170,
+   "total": 185,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 170
+   "notApplicable": 185
   }
  ],
  "bySubject": {
@@ -257,10 +257,10 @@
    "notApplicable": 57
   },
   "ap_physics_1": {
-   "total": 342,
-   "pass": 117,
+   "total": 366,
+   "pass": 126,
    "fail": 2,
-   "notApplicable": 223
+   "notApplicable": 238
   },
   "ap_chemistry": {
    "total": 345,
@@ -270,8 +270,8 @@
   }
  },
  "figureNeed": {
-  "required": 923,
-  "text_only": 1006,
+  "required": 932,
+  "text_only": 1021,
   "supporting": 76
  },
  "errorCodes": {
@@ -287,7 +287,7 @@
   "shade_unparsed": 10,
   "axis_label_long": 4,
   "axis_label_defaulted": 6,
-  "table_no_title": 190,
+  "table_no_title": 196,
   "axis_units_missing": 23,
   "text_data_not_in_stem": 1,
   "axis_range_derived": 28,
@@ -24250,6 +24250,378 @@
    "status": "not_applicable",
    "issues": [],
    "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f02-k0",
+   "contentHash": "9971d4d8eb0877100c94359d6f4bc7b359971e73270875eb23e311f05bf29079",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f02-k1",
+   "contentHash": "6ccbf1e3c9cce56a14bfa0a1746dd46e54d59a2b6d62c4167f0e43311f2ed0ab",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f02-k2",
+   "contentHash": "48097c00e090de897ede771fac213d1749086ed8b2775bd024df2c9669cd825f",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f03-k0",
+   "contentHash": "80ba2dc866045b4caf0ef78896bfae6a63ee18d2d4d1f5faa55cf498f95fca1e",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f03-k1",
+   "contentHash": "0429e7e10766f7804c957c5e1d84a891ba7bfe700e8cc14069abf346ef0689ec",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f03-k2",
+   "contentHash": "060bc65e2fbae9f5858590fb952fbca076e3f56f6cdc20f106f1faa363fcd298",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f04-k0",
+   "contentHash": "fd517376caaaf96506cf120a638001685607a56b17d82b7c42a0f859a84bf182",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f04-k1",
+   "contentHash": "22fe3ea8b9168513502ca83c542cf8612ae5f981f43f6e683c792d86bb4d4182",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f04-k2",
+   "contentHash": "bb50c1ef5a69d0f64433a92a921e75925ea5e4ef0c3e464518e76d0a259a6b6a",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f07-k0",
+   "contentHash": "2627e271252189caf291201aacb86393a7f07c51b7a28dac9ffc4f9350533c1f",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f07-k1",
+   "contentHash": "9e0403c78f0e17668ce6cc8fb43edfe6b65b81ee5deb759da325bf9f0ee234ca",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f07-k2",
+   "contentHash": "55009f2ca66bd6bdf6a64c3e9ff68e4740fe38c568978efe6a706e51e29c2a26",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f08-k0",
+   "contentHash": "87735fc1809ae261fae70cda4cfb32cacd4635af5588d3e0e0953e1e2425b2ec",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f08-k1",
+   "contentHash": "32bab86de79fd9bdec147d0625fd90964a0feffcaabb958b2dd8d992d72aafeb",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-a:ap_physics_1-f08-k2",
+   "contentHash": "a5e2d25ce84dd51481e575138067fb26c5a45b91e56cbfe86b0e2c93648364cc",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "phys-s4-b:ap_physics_1-f01-k0",
+   "contentHash": "5c3b00b3d433679520766ab9dd1b6fa708ef2b0d2f72d912b8ba16876bdb74d0",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "A 30 degree incline with a 2 kg block."
+  },
+  {
+   "key": "phys-s4-b:ap_physics_1-f01-k1",
+   "contentHash": "fef243faab584285518dc6b1f18136108d66f5cbe83b1e57d8653d82b06b8b52",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "A 30 degree incline with a 3 kg block."
+  },
+  {
+   "key": "phys-s4-b:ap_physics_1-f01-k2",
+   "contentHash": "5aa6df3ce079f1123f31c227004c7ef133e29838a7a8c0416419e779da47a42f",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "diagram",
+   "renderType": "ap_diagram:phys_scene",
+   "need": "required",
+   "needReason": "도식/그림 자료",
+   "status": "pass",
+   "issues": [],
+   "alt": "A 30 degree incline with a 2 kg block."
+  },
+  {
+   "key": "phys-s4-b:ap_physics_1-f02-k0",
+   "contentHash": "dd5a9279cc6ce385103cc4faab5c89da52a64b8ea56a3541418f103a4e162324",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Length L (m), Period T (s) and 5 rows."
+  },
+  {
+   "key": "phys-s4-b:ap_physics_1-f02-k1",
+   "contentHash": "64c0ddf26a4cd2f64d30d497d2b98cd3df038f1d12b23b0f047cce190c6c2137",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Length L (m), Period T (s) and 5 rows."
+  },
+  {
+   "key": "phys-s4-b:ap_physics_1-f02-k2",
+   "contentHash": "4b3701d284416091a5975c7949b11fc7d48637d9a1360d58e9b21813578eb084",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Length L (m), Period T (s) and 5 rows."
+  },
+  {
+   "key": "phys-s4-b:ap_physics_1-f03-k0",
+   "contentHash": "afd1301504fc11b78da3e6e90fa15078f0bc5103d36aaabf0035421a2e2742a1",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Initial speed v0 (m/s), Stopping distance d (m) and 5 rows."
+  },
+  {
+   "key": "phys-s4-b:ap_physics_1-f03-k1",
+   "contentHash": "75c1a801aa425fb23fe19b1d6499d4b00155bec9c180fbc11f06a0399852bcd5",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Initial speed v0 (m/s), Stopping distance d (m) and 5 rows."
+  },
+  {
+   "key": "phys-s4-b:ap_physics_1-f03-k2",
+   "contentHash": "54d122860857e267656f7198a75b0f000242e800868b807c4d54bcc1e55f44ee",
+   "subject": "ap_physics_1",
+   "kind": "frq_bundle",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Initial speed v0 (m/s), Stopping distance d (m) and 5 rows."
   },
   {
    "key": "supp-b1-bc-final:ap_calculus_bc-m01-k0",

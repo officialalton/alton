@@ -1,0 +1,1681 @@
+[
+ {
+  "key": "ap_physics_1-f01-k0",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Three forces: weight mg straight down, normal force perpendicular to and away from the incline surface, kinetic friction parallel to the incline pointing up the slope.",
+     "final_answer": "Weight (mg, down), Normal (perpendicular to surface), Kinetic friction (up the incline)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "N = mg cosθ; ma = mg sinθ − μmg cosθ.",
+     "final_answer": "a = g(sinθ − μ cosθ)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = 9.8(0.5 − 0.0866) ≈ 4.05 m/s²; v = √(2ad) = √40.5.",
+     "final_answer": "v ≈ 6.4 m/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The acceleration g(sinθ − μcosθ) does not depend on mass. Starting from rest, d = ½at², so t = √(2d/a) is unchanged.",
+     "final_answer": "Stays the same",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The incline-friction bundle is in scope, the keys are consistent (a ≈ 4.05 m/s², v ≈ 6.36 m/s, time unchanged), and the rubric rows are clear. The 10-point total matches the Mathematical Routines weight, and the part skills (1.A/1.C, 2.A, 2.B, 3.B/3.C) are each assessed against their own rows. The only minor concern is that part A depends on the dot response format, which the stimulus data does not specify, but the prompt describes it well enough to grade.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.7 with related 2.5, 2.2, and 1.2 content. Each part is judged against its own skill. Part C is the 2.B calculation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and defensible. Rubric rows chain correctly (C1 requires B3, C2 requires C1). The part A relative-length row is valid for μ = 0.1."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives angle, mass, μ, and distance, which is complete for the incline scene. The dot for part A is described only in the prompt, which is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are listed for each rubric row (an extra force down the incline, a vertical normal force, a missing square root, and mass dependence)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 22 minutes for 10 points with a calculator, light arithmetic, and a standard scenario. The load is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ on an incline with kinetic friction. It needs an FBD, a Newton's second law derivation along and perpendicular to the incline, a kinematics calculation (v^2=2ad, about 6.4 m/s), and a mass-independence justification. The steps are standard and the numbers are clean. The difficulty comes from selecting the governing law and from the representation changes, not from heavy arithmetic or vague wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k1",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Three forces act: gravity mg pointing straight down, the normal force N perpendicular to the incline and away from it, and kinetic friction f pointing up the incline (parallel to the surface).",
+     "final_answer": "Gravity (mg) downward; normal force perpendicular to the incline surface; kinetic friction up the incline",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Perpendicular to the incline: N = mg cosθ. Along the incline: ma = mg sinθ − μmg cosθ, and the mass cancels.",
+     "final_answer": "a = g(sinθ − μcosθ)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = 9.8(0.602 − 0.15·0.799) ≈ 4.73 m/s². Then v² = 2ad = 2(4.73)(4) ≈ 37.8, so v ≈ 6.15 m/s. Using g = 10 m/s² gives about 6.2 m/s.",
+     "final_answer": "≈6.2 m/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The acceleration a = g(sinθ − μcosθ) does not depend on mass. Since d = ½at², the time t = sqrt(2d/a) is the same.",
+     "final_answer": "Stays the same",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard incline-with-friction FRQ spanning topics 2.7, 2.5, 2.2 and 1.2 and totaling 10 points. The key is correct and unique, with numeric values and tolerance adequate. Scope is clean, with no out-of-scope physics. One minor concern is that Part A row A3 grades relative arrow lengths without the prompt asking for them; this does not warrant failing the item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Every part is Unit 2 content. Part C is a light 2.B calculation that follows from the Part B expression. Part D's skill codes 3.B/3.C are a mixed skill, which is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Part C: a ≈ 4.72 m/s², v ≈ 6.15 m/s. Part D: the time stays the same. Both are correct and unique, and the tolerance covers g = 10 as well as 9.8."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The diagram data supplies theta, m, mu and block, and the stem gives d. The stem states that the block starts from rest and that forces, not components, are to be drawn."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric lists common errors per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10 points match the Mathematical Routines weight. The estimated 22 minutes is reasonable, and calculator use is light and consistent with the allowed designation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part incline-with-friction FRQ. Requires an FBD, symbolic derivation of a = g(sin θ - μ cos θ) via Newton's second law along and perpendicular to the incline, a short numeric kinematics calculation (a ≈ 4.8 m/s², v ≈ 6.2 m/s), and a mass-independence justification. Concepts are core to Unit 2, arithmetic is light, and reading load is low. This suits a full mock exam rather than basic learning or an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k2",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Three forces: gravity mg straight down, normal force perpendicular to incline away from surface, kinetic friction parallel to incline pointing up the slope.",
+     "final_answer": "Weight mg (down), Normal force N (perpendicular to incline, outward), Kinetic friction f (along incline, up the slope)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Perpendicular: N = mg cosθ. Along incline: mg sinθ − μmg cosθ = ma.",
+     "final_answer": "a = g(sinθ − μ cosθ)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = 9.8(0.602 − 0.2·0.799) ≈ 4.33 m/s²; v = √(2ad) = √(2·4.33·4) ≈ 5.9 m/s.",
+     "final_answer": "v ≈ 5.9 m/s (5.88 m/s with g=9.8; 5.93 m/s with g=10)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Mass cancels in a = g(sinθ − μcosθ), so the acceleration is the same. Starting from rest, d = ½at², so t is unchanged.",
+     "final_answer": "Stays the same",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct 10-point incline-with-friction bundle. The key and rubric agree with the stem, and the independent solver reached the same answers. Parts are well aligned with their own skills, and part C fits 2.B. The calculation part is light on 2.B, but that is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part incline-with-friction free-response item. It involves a free-body diagram (weight, normal, kinetic friction), a symbolic derivation of a = g(sin θ − μ cos θ), a kinematics calculation (a ≈ 4.3 m/s², v ≈ 5.9 m/s), and a mass-independence justification. Each part is a routine AP Physics 1 skill and the arithmetic is short with clean numbers. The concept depth is moderate, with a few linked steps and a representation change from diagram to equations. It fits the full-mock target rather than basic learning, but it is not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k0",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Total energy mgh = 0.5(9.8)(0.8) ≈ 3.9 J stays the same in all three states. State 1: Ug = 3.9 J, K = 0, Eth = 0. State 2: K = 3.9 J, Ug = 0, Eth = 0. State 3: Eth = 3.9 J, K = 0, Ug = 0. All bars are the same height.",
+     "final_answer": "Release point: Ug bar only, height mgh ≈ 3.9 J. Bottom of track: K bar only, same height. At rest: Eth bar only, same height.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Work by friction equals the energy lost: mgh = μmg·d, so d = h/μ.",
+     "final_answer": "d = h/μ",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d = 0.8 / 0.2 = 4 m",
+     "final_answer": "4.0 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "d is proportional to h, and the friction force μmg stays the same. Twice the height gives twice the energy, so the block slides twice as far.",
+     "final_answer": "The distance doubles (factor of 2).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard in-scope energy conservation with friction FRQ. Keys are correct and unique (d = h/mu = 4 m, doubling h doubles d). The point total is 10 and the part weights are reasonable. Minor concerns: the stimulus data object is empty (the bar chart templates are only described in text), and the 2.B calculation part is trivial. Passes overall.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All content is Unit 3 (kinetic energy, gravitational potential energy, friction work, bar charts). Each part matches its own assigned skill. Part C is a light 2.B computation, but it is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answers d = h/mu, 4.00 m and factor 2 are correct and unique. The rubric rows are consistent. C1 depends on B3, which is a minor carry-over penalty."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text is clear and the model assumptions are stated (smooth track, rough section long enough). The data object is empty, and the bar chart templates are specified only in the prompt text."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ item, so no options. The listed common errors are realistic and distinct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading and arithmetic load is low and typical of AP Physics 1. Calculator use is consistent with allowed designation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard single-system energy conservation with friction. Part A is a routine energy bar chart (three states). Part B is a one-step derivation: mgh = mu*m*g*d gives d = h/mu. Part C is a one-line calculation: 0.8/0.2 = 4 m, with no long arithmetic. Part D is a proportional-reasoning step: d is proportional to h, so doubling h doubles d. The concepts are core Unit 3 and the wording is clear. The representation change is limited to energy bars to an equation. The mass cancels, so there are no hidden traps. This is more routine than a full-mock exam item, and the multi-part structure is scaffolded and gives little depth beyond basic learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k1",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Total energy mgh = 0.5(9.8)(1.5) ≈ 7.35 J stays the same in every state. Release point: all of it is gravitational potential energy (Ug full, K = 0, Eth = 0). Bottom of the frictionless track: all of it is kinetic energy (K full, Ug = 0, Eth = 0). At rest on the rough section: all of it is thermal energy (Eth full, K = 0, Ug = 0).",
+     "final_answer": "State 1: Ug = mgh ≈ 7.35 J, K = 0, Eth = 0. State 2: K = 7.35 J, Ug = 0, Eth = 0. State 3: Eth = 7.35 J, K = 0, Ug = 0. The one nonzero bar is the same height in all three charts.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "On a horizontal surface the normal force is mg, so friction is μmg. All the starting energy is turned into heat: mgh = μmg·d, so d = h/μ. The result does not depend on mass or on g.",
+     "final_answer": "d = h/μ",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d = h/μ = 1.5 m / 0.25 = 6.0 m",
+     "final_answer": "6.0 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "d = h/μ, so d is directly proportional to h. Doubling the height doubles the starting energy. The friction force stays μmg, so the block needs twice the distance to dissipate twice the energy.",
+     "final_answer": "The distance doubles (factor of 2).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is coherent and correct (d = h/μ = 6.00 m), and the solver confirms it. It stays within Unit 3 scope, its rubric rows are consistent, and the 10-point weight is correct. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part item requiring selection of energy conservation with dissipation (mgh = mu*m*g*d), translation to energy bar charts, a symbolic derivation where m cancels, a simple numeric evaluation (d = 6 m), and a proportional-reasoning claim (doubling h doubles d). All difficulty comes from allowed levers (governing law, representation, one proportional prediction). Reading is short, arithmetic is trivial, wording is unambiguous, and the scope is within Unit 3.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k2",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Total energy mgh = 0.5(9.8)(1.5) ≈ 7.35 J stays the same in all three states. State 1: Ug = 7.35 J, K = 0, Eth = 0. State 2: K = 7.35 J, Ug = 0, Eth = 0. State 3: Eth = 7.35 J, K = 0, Ug = 0. All bars are the same height.",
+     "final_answer": "Release point: only a Ug bar (mgh ≈ 7.35 J). Bottom of track: only a K bar of the same height. At rest: only an Eth bar of the same height.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Energy conservation: mgh = μmg·d, so the mass m and g cancel.",
+     "final_answer": "d = h/μ",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d = 1.5 m / 0.4",
+     "final_answer": "d = 3.75 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "d = h/μ, so d is directly proportional to h. Doubling h doubles the gravitational potential energy that friction must remove. The friction force μmg stays the same, so the block slides twice as far.",
+     "final_answer": "The distance doubles (factor of 2), to 7.5 m.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. It is a coherent multi-part energy item on topic 3.4 that uses a bar chart, a derivation, a calculation and a proportional prediction. The key is unique: d = h/μ, which gives 3.75 m, and doubling h doubles d. The rubric rows are consistent and the dependencies between rows are sensible. The 10-point weight matches the Mathematical Routines type, and the load is typical for an FRQ of this kind.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part uses its own skill: A is a representation, B is a derivation, C is a calculation, and D is a justification. The content stays within Unit 3, and 2.B is assessed in part C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The independent solver agrees on every part. The conditions are stated: the track is smooth, the rough section is horizontal, and the block comes to rest on it. The rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and the wording is clear. The data object is empty, but the text carries all the given values, and the bar chart templates are provided on the answer sheet."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors entries in the rubric rows name realistic mistakes."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The calculator is allowed and the arithmetic is minimal. The total of 10 points matches the Mathematical Routines weight."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part energy conservation with friction dissipation. Requires choosing the governing law (mgh = mu*m*g*d), translating between energy bar charts and algebra, a symbolic derivation giving d = h/mu, a simple calculation (3.75 m), and one proportional-reasoning step (d doubles when h doubles). Arithmetic is light, wording is clear, and the scope is within Unit 3. The difficulty comes from legitimate levers only.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k0",
+  "cellId": "ap_physics_1-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "v rises linearly from 0 to 3 m/s over 0–3 s, stays flat at 3 m/s from 3–7 s, then falls linearly to 0 from 7–11 s. Axes: v (m/s) vs t (s).",
+     "final_answer": "Trapezoid: (0,0)→(3 s,3 m/s)→(7 s,3 m/s)→(11 s,0)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Displacement is the area under the v-t graph: 4.5 + 12 + 6 = 22.5 m.",
+     "final_answer": "22.5 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a is +1 m/s² from 0–3 s, 0 from 3–7 s, and −0.75 m/s² from 7–11 s (slope = −3/4). Axes: a (m/s²) vs t (s).",
+     "final_answer": "Step graph: +1 m/s² (0–3 s), 0 (3–7 s), −0.75 m/s² (7–11 s)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The flat segment gets 4 s wider, which adds a rectangle of 3 m/s × 4 s to the area. The triangles stay the same.",
+     "final_answer": "Increases by 12 m (total 34.5 m)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle passes all five criteria. It is a clean Translation Between Representations item on topic 1.3, with v-t and a-t graph sketches, displacement from area, and a proportional prediction. The values are consistent: v = 3 m/s, displacement 22.5 m, a3 = -0.75 m/s^2, and a change of 12 m for 4 extra seconds. The stimulus is complete and unambiguous, and the independent solver agreed on every part.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and C create motion graphs (skill 1.A) in topic 1.3, and parts B and D use the area under the v-t graph (topic 1.2). Everything stays within Unit 1 and uses constant acceleration only. The 12-point weight matches the Translation Between Representations type."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and verified: 3 m/s peak velocity, 22.5 m total displacement, +1, 0 and -0.75 m/s^2 for the three stages, and a 12 m increase when the constant-velocity stage is 4 s longer. The rubric rows are consistent with the model answers and set sensible dependencies (B2 requires B1, B3 requires B2, D2 requires D1)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives a1, t1, t2 and t3, the direction of motion, and states that blank axes are provided. The wording is clear and the data is complete for the graphs to be sketched."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric rows list realistic common errors, such as a curved line for uniform acceleration, a sloped constant-velocity segment, a positive braking acceleration, and using slope instead of area."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP free-response question: simple numbers, a short stimulus, and a calculator that is allowed but barely needed. The estimated 27 minutes is only an internal reference and is not penalized."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ on representing motion. Students translate a verbal description into a piecewise v-t graph, use area under the graph for displacement (4.5 + 12 + 6 = 22.5 m), derive an a-t graph with a negative deceleration of -0.75 m/s^2, and reason about how the displacement changes when the constant-velocity stretch is extended (+12 m). The concepts are core Unit 1, the arithmetic is small, the wording is unambiguous, and the multi-part graph-to-graph translation fits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k1",
+  "cellId": "ap_physics_1-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Velocity rises in a straight line from (0 s, 0) to (5 s, 7.5 m/s). It stays flat at 7.5 m/s until 9 s, then falls in a straight line to 0 at 11 s.",
+     "final_answer": "Trapezoid-shaped v–t graph (v in m/s, t in s): 0 to 7.5 m/s over 0–5 s, flat at 7.5 m/s from 5–9 s, down to 0 by 11 s.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Displacement is the area under the v–t graph: 18.75 m + 30 m + 7.5 m.",
+     "final_answer": "56.25 m (about 56 m) in the positive direction",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Acceleration is the slope of the v–t graph in each stage: +1.5 m/s² from 0–5 s, 0 from 5–9 s, and -7.5/2 = -3.75 m/s² from 9–11 s.",
+     "final_answer": "Step graph (a in m/s², t in s): +1.5 m/s² for 0–5 s, 0 for 5–9 s, -3.75 m/s² for 9–11 s.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Making the flat segment 3 s longer adds a rectangle of area 7.5 m/s × 3 s under the graph. The two triangles do not change.",
+     "final_answer": "The displacement increases by 22.5 m.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a Translation Between Representations bundle worth 12 points, matching the fixed weight for that type, and it is consistent and in scope.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and C create v-t and a-t graphs (skill 1.A), part B reads the area under the graph, and part D reasons about a change. All of this is Unit 1 content (topics 1.2 and 1.3), with no calculus or later-unit material."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The velocity of 7.5 m/s, the displacement of 56.25 m, the deceleration of -3.75 m/s^2 and the added 22.5 m are all unique and consistent with the stem. The rubric rows are one point each, with dependencies set correctly. The displacement answer of 56.2 m is within the stated tolerance of the 56.25 m reference value."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the acceleration and the three durations, and states that the cart moves in the positive direction throughout. The wording is clear. The blank axes are on the answer sheet and need no extra data."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors listed in the rubric rows are realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The arithmetic load is light and a calculator is allowed. At 12 points the bundle sits within the Translation Between Representations grain. The 27 estimated minutes is an internal reference only and was not penalized."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ on core Unit 1 content. Students translate a verbal description into a v-t graph, compute displacement from graph areas (triangle, rectangle, triangle), derive and sketch the a-t graph (including the non-given deceleration of -3.75 m/s^2), and then reason about how a longer constant-velocity segment changes displacement. Concepts are standard and the arithmetic is short and simple, so the difficulty comes from representation translation and multi-step reasoning, not from unfair sources. It is more than a single-step basic item but not beyond the AP-level scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k2",
+  "cellId": "ap_physics_1-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "v rises linearly from 0 to 1.5*5=7.5 m/s over 0-5 s, stays flat at 7.5 m/s from 5-10 s, then falls linearly to 0 at 12 s. Axes: v (m/s) vs t (s).",
+     "final_answer": "Trapezoid: (0,0)->(5 s,7.5 m/s)->(10 s,7.5 m/s)->(12 s,0)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Displacement = area under v-t graph: 18.75 + 37.5 + 7.5 m.",
+     "final_answer": "63.75 m ≈ 64 m in the positive direction",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "a = slope of v-t: 1.5 m/s^2 for 0-5 s, 0 for 5-10 s, -7.5/2 = -3.75 m/s^2 for 10-12 s.",
+     "final_answer": "Step graph: +1.5 m/s^2 (0-5 s), 0 (5-10 s), -3.75 m/s^2 (10-12 s)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The flat section of the graph gets 3 s wider at 7.5 m/s, so a rectangle of area 7.5*3 is added. The sloped sections stay the same.",
+     "final_answer": "Increases by 22.5 m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a Translation Between Representations bundle with 12 points (4+3+3+2), as the fixed weight requires. The key values (7.5 m/s, 63.75 m, -3.75 m/s^2, 22.5 m) are consistent with the stem, and the solver agrees. The rubric rows are consistent and each has its own conditions.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and C create v-t and a-t graphs, which is the target skill 1.A in topics 1.3 and 1.2. Parts B and D use the area under the graph, which is within Unit 1."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are unique and match the independent solver. The tolerances are reasonable. Rubric rows are mostly 1 point and carry dependencies where needed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem gives all of the data (accelerations, durations, direction, starting from rest). The data object is empty, but blank axes are stated to be provided, and the text is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "There are no options because this is a free-response item. The common_errors fields name realistic misconceptions, such as using slope instead of area, drawing a curve for uniform acceleration, and giving braking a positive sign."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload is moderate and the arithmetic is simple. Calculators are allowed and the load is consistent with that."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ on core Unit 1 content. Students translate a verbal description into a piecewise v-t graph, use areas under the graph for displacement, derive an a-t graph from the slopes (including computing the negative acceleration of -3.75 m/s^2), and then reason about how extending the constant-velocity segment changes displacement. Numbers are simple (7.5 m/s, 63.75 m, 22.5 m) and the reading load is light. Difficulty comes from the representation changes and the multi-step linking, which are allowed levers. This fits the standard AP exam-style level for full mocks, neither basic single-step practice nor beyond-scope enrichment.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f04-k0",
+  "cellId": "ap_physics_1-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Mechanical energy is conserved, so the total stays 3.6 J in every state. At launch: K = 3.6 J and Ug = 0. Halfway up: Ug increases linearly with h, so K = Ug = 1.8 J. At maximum height: K = 0 and Ug = 3.6 J.",
+     "final_answer": "Launch: K bar at full height (3.6 J), no Ug bar. Halfway: K and Ug bars each at half height (1.8 J). Maximum height: no K bar, Ug bar at full height (3.6 J).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Conservation of energy: ½mv0² = K + mgh, so K = ½mv0² − mgh.",
+     "final_answer": "K(h) = ½ m v0² − m g h",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Both graphs are straight lines. K falls from 3.6 J at h = 0 to 0 at hmax. Ug rises from 0 at h = 0 to 3.6 J at hmax. The two lines cross at h ≈ 0.92 m, where each is 1.8 J. hmax = v0²/2g ≈ 1.84 m.",
+     "final_answer": "Axes: horizontal axis is h (m), vertical axis is energy (J). K line: from (0, 3.6 J) down to (1.84 m, 0). Ug line: from (0, 0) up to (1.84 m, 3.6 J). The lines cross at (0.92 m, 1.8 J). The sum K + Ug stays at 3.6 J throughout.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "K0 = ½mv² depends on v², so doubling the speed makes K0 four times larger. All of the initial K becomes mg·hmax at the top, so hmax = v²/2g also depends on v² and becomes four times larger.",
+     "final_answer": "Initial kinetic energy is 4 times larger (14.4 J). Maximum height is 4 times larger (≈ 7.35 m).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle has valid parts A-D with correct values and consistent 1-point rubric rows. It totals 12 points, as required for Translation Between Representations. It stays within Unit 3 content and requires only light arithmetic.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Bar charts and the K/Ug vs h graph target skill 1.A. The derivation and prediction parts use their own skills 2.A and 2.D/3.B/3.C, and all content stays within topics 3.4, 3.3, 3.1 and 1.2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All values are correct: E = 3.6 J, h_max = 1.84 m, crossing at 0.92 m, and a factor of 4 for both quantities in D. The independent solver agreed on every part. The rubric rows match the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives mass, speed, the negligible-air-resistance assumption and the U=0 reference level. The data object is empty, but the description fully specifies the task."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The rubric rows list a plausible common error for each criterion."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 12-point weight matches the Translation Between Representations type. The arithmetic load is light and calculators are allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ on conservation of energy with no dissipation. It requires energy bar charts, a derivation of K(h), a labeled graph of K and Ug versus h, and a proportional prediction for doubled speed with justification. Difficulty comes only from allowed levers (representation translation and one scaling argument). Numbers are clean (K0 = 3.6 J, hmax = 1.8 m), the reading load is minimal, and everything is within Unit 3 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f04-k1",
+  "cellId": "ap_physics_1-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Total energy E = ½mv0² = 16 J. When thrown: K = 16 J, U = 0. At half the maximum height, U grows linearly with h, so K = 8 J and U = 8 J. At maximum height: K = 0, U = 16 J.",
+     "final_answer": "Thrown: K bar 16 J (full height), no U bar. Halfway: K and U bars each 8 J (half height). Top: no K bar, U bar 16 J (full height).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Energy is conserved: ½mv0² = K + mgh.",
+     "final_answer": "K = ½mv0² − mgh",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Both graphs are straight lines. U_g = mgh rises from 0 J to 16 J. K falls from 16 J to 0 J. They cross at h_max/2, where each is 8 J.",
+     "final_answer": "Horizontal axis: h (m). Vertical axis: energy (J). K goes from (0 m, 16 J) down to (3.27 m, 0 J). U_g goes from (0 m, 0 J) up to (3.27 m, 16 J). Lines cross at (1.63 m, 8 J). Maximum height h_max = v0²/2g ≈ 3.27 m (3.2 m if g = 10 m/s²).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "K0 = ½mv² depends on v², so doubling the speed gives 4 times the energy. At the top all of it is potential energy, mgh_max = K0, so h_max is proportional to v0² and also becomes 4 times larger.",
+     "final_answer": "Initial kinetic energy becomes 4 times larger (64 J). Maximum height becomes 4 times larger (about 13.1 m).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a coherent, in-scope multi-part representation task. Answers are unique and verified. The rubric is consistent with the prompts. It passes all five criteria.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Bar charts and graph target 1.A; B and D use prerequisite skills; all content is in Unit 3."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "E=16 J and h_max=3.27 m are consistent with the independent solver. The rubric rows match the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and the wording is clear. The blank templates are described as answer-sheet materials."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free response, so no distractors. The common_errors entries are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP FRQ load, minimal arithmetic, calculator designation consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on conservation of energy with no dissipation. It requires translating among energy bar charts, an algebraic expression K(h) = (1/2)mv0^2 - mgh, a labeled K and Ug vs h graph with intercepts (16 J and about 3.2 m), and a proportional prediction (2v0 gives 4x the max height and 4x the initial KE) with justification. Concepts are core and in scope, arithmetic is light, and wording is unambiguous. The breadth of representations and the need for written justification make it suitable for a full mock rather than purely introductory practice.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f04-k2",
+  "cellId": "ap_physics_1-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Total energy E = ½mv0² = 25 J is conserved. At launch: K = 25 J, Ug = 0. Halfway to max height, Ug depends linearly on h, so K = 12.5 J and Ug = 12.5 J (equal bars). At max height: K = 0, Ug = 25 J.",
+     "final_answer": "Launch: K=25 J, Ug=0; Halfway: K=Ug=12.5 J; Top: K=0, Ug=25 J",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Energy conservation: ½mv0² = K + mgh, so K = ½mv0² − mgh.",
+     "final_answer": "K = ½mv0² − mgh",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Both graphs are straight lines. K falls from 25 J at h = 0 to 0 at h_max = v0²/(2g) ≈ 5.1 m (5.0 m if g = 10 m/s²). Ug rises from 0 to 25 J. The two lines cross at h ≈ 2.55 m, where each is 12.5 J. Axes: energy (J) vs height h (m).",
+     "final_answer": "K line: from (0 m, 25 J) to (≈5.1 m, 0 J). Ug line: from (0 m, 0 J) to (≈5.1 m, 25 J). They cross at 12.5 J, halfway up.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "K0 = ½m(2v0)² = 4 × ½mv0², so initial kinetic energy quadruples to 100 J. At the top, all of this energy becomes Ug: mgh_max = K0, so h_max is proportional to v0² and also quadruples to ≈20.4 m (20 m if g = 10 m/s²).",
+     "final_answer": "Both the initial KE and the maximum height become 4 times larger (100 J; ≈20 m)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope 12-point translation-between-representations FRQ (energy bars, derivation, graph, proportional prediction). The key matches the independent solver. Rubric rows are consistent with the model answers, and the stem is complete and unambiguous.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.4 energy conservation, with representation creation (bars and graph) dominant in parts A and C. The derivation and scaling parts are in-scope prerequisites."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are consistent with the solver. E = 25 J, h_max = 5.10 m, crossing at 2.55 m, and a factor of 4 for both kinetic energy and height."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "A text-only stimulus with all numbers given. The blank templates are described on the answer sheet. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; common errors are listed per rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable for a 12-point FRQ. Calculator use is minimal and consistent with the allowed designation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard single-system conservation of energy for a ball thrown straight up with no dissipation. Part A is energy bars at three states, Part B is a one-step derivation K = (1/2)mv0^2 - mgh, Part C is a sketch of two linear graphs with intercepts (K0 = 25 J, hmax of about 5.1 m), and Part D is a proportional-reasoning prediction (hmax x4, K0 x4). It needs no multi-concept synthesis and has light arithmetic and little reading. The representation changes (bars, equation, graph) are routine for the topic and match skill 1.A. It is more of a foundational learning item than a mock-exam item, because it is highly scaffolded and every part is a standard textbook step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f05-k0",
+  "cellId": "ap_physics_1-f05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: a stand and clamp as the pivot, light string, dense bob, meter stick and stopwatch. Measure L from the pivot to the center of the bob. Release the bob from a small angle (under about 10°) and time 10 full oscillations, then divide by 10 to get T. Repeat the timing several times and average. Change L by adjusting the string length to 0.2, 0.4, 0.6, 0.8 and 1.0 m. To reduce uncertainty, time many oscillations, start and stop the timer as the bob passes the lowest point, and repeat the trials.",
+     "final_answer": "Measure L with a meter stick (pivot to bob center), adjust the string to vary L, and time 10 oscillations at a small angle. Divide by 10 and average repeated trials to reduce the uncertainty in T.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "T = 2π√(L/g), so T² = (4π²/g)L. A graph of T² against L is a straight line with slope 4π²/g.",
+     "final_answer": "Plot T² (s²) on the vertical axis and L (m) on the horizontal axis. The slope is 4π²/g.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "T² values: 0.808, 1.595, 2.418, 3.190 and 3.912 s² at L = 0.2 to 1.0 m. Plot these points and draw a best-fit line that passes close to the origin, with a slope of about 3.9 s²/m.",
+     "final_answer": "Points (L, T²): (0.2, 0.81), (0.4, 1.60), (0.6, 2.42), (0.8, 3.19), (1.0, 3.91). Label the axes T² (s²) and L (m). The best-fit line has a slope of about 3.9 s²/m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A least-squares fit gives a slope of about 3.90 s²/m. Then g = 4π²/slope = 39.48/3.90 ≈ 10.1 m/s². If the line is forced through the origin, the slope is 3.96 s²/m and g ≈ 9.97 m/s². Values from about 9.9 to 10.1 m/s² are acceptable.",
+     "final_answer": "g ≈ 10 m/s² (about 10.1 m/s² from a slope of ≈ 3.9 s²/m)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a coherent, in-scope pendulum lab FRQ and the key values check out. It is not accepted as it stands, because the weights and rubric rows deviate from the stated format and several rubric details are loose.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Pendulum period, the T^2 versus L linearization, and the slope-to-g analysis are in Unit 7 scope, and parts A and B fit skill 3.A. Part D is analysis, not 3.A, which is acceptable because each part is judged against its own skill. The bundle covers 10 points, 3 more than the shortfall listed under Distractors below, and the weights are consistent with Experimental Design and Analysis."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The numeric keys are consistent: slope about 3.90 s^2/m and g about 10.1. Several rubric details are loose. D1 requires the slope to be computed from two points on the line, and the model answer's wording is not specific enough to check that. D1 says to accept values within 5 percent, while the expected_values tolerance is 0.195, which is exactly 5 percent, so they agree. A fit forced through the origin gives about 3.96 s^2/m, which is within 5 percent, so it is accepted. Row D1 depends on C3, which penalizes a student twice for the same graphing error. The g of 10.1 sits about 3 percent above 9.8, which is fine given the data is generated from a stated random error. The A2 row bundles two conditions (changing only the length, and holding the angle and bob fixed) into one point, and the rubric does not say how partial credit is handled (requires_both is false)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with labels, units, and 5 rows. The wording is clear and the model assumptions (small angle, light string, measuring to the bob center) are stated."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors fields are sparse and several are empty, and the rubric gives little help for typical wrong answers such as plotting T versus L or using slope = g."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable for a 10-point FRQ. The estimated time of 27 minutes is higher than usual, but it is only an internal reference, so it is not penalized. The calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics 1 experimental-design FRQ. Requires writing a procedure (skill 3.A), choosing the governing law T=2π√(L/g), linearizing to T² vs L, plotting with a chosen scale, and extracting g from the slope (4π²/slope). Several steps and representation changes (table to graph to slope to g), but all in scope with clean data and short arithmetic. Fits a full-mock lab question rather than basic learning or advanced supplement.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 780
+  }
+ },
+ {
+  "key": "ap_physics_1-f05-k1",
+  "cellId": "ap_physics_1-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Standard procedure",
+     "final_answer": "Equipment: a stand with a clamp as the pivot, light string, dense bob, meter stick and stopwatch. Measure L with the meter stick from the pivot to the center of the bob. Pull the bob aside to a small angle (under about 10°, checked with a protractor) and release it from rest. Time 10 or more full oscillations and divide by that number to get T. Repeat the timing 3 times and average. Then change L by shortening or lengthening the string (0.2, 0.4, 0.6, 0.8, 1.0 m), keeping the angle and the bob the same, and repeat. Timing many oscillations, averaging repeated trials, and starting the timer as the bob passes its lowest point all reduce the uncertainty in T.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Squaring T = 2π√(L/g) gives T² = (4π²/g)L",
+     "final_answer": "Plot T² (s²) on the vertical axis and L (m) on the horizontal axis. The slope equals 4π²/g, so g = 4π²/slope.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Squared the measured periods",
+     "final_answer": "Plotted points (L in m, T² in s²): (0.2, 0.806), (0.4, 1.568), (0.6, 2.487), (0.8, 3.143), (1.0, 3.980). Axes: vertical T² (s²) from 0 to 4.5; horizontal L (m) from 0 to 1.0. The best-fit straight line passes close to the origin and has a slope of about 3.96–3.99 s²/m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Least-squares slope ≈ 3.96 s²/m; with the line forced through the origin it is 3.99 s²/m",
+     "final_answer": "Take two points on the best-fit line, for example (0.1 m, 0.39 s²) and (0.9 m, 3.56 s²). Slope = (3.56 − 0.39)/(0.9 − 0.1) ≈ 3.96 s²/m. Then g = 4π²/slope = 39.48/3.96 ≈ 9.9 m/s² (accept roughly 9.8–10.0 m/s²).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A standard, valid pendulum-g lab FRQ with a complete data table and a consistent key. The solver agrees on all four parts. Minor rubric nits: numeric_tolerance is null in D1, and the A2 'same bob' element is missing from the model answer.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.2 pendulum period with experimental design and linearization. Each part fits its own skill. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The squared values and the slope of 3.96 are consistent with the table, and the solver matches. Tolerances are stated in the criterion text. The model answer omits keeping the same bob, which is minor."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels and five rows, and the setup is clearly worded with the length definition and small angle."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. Common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for an experimental design FRQ. Calculators are allowed and the designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics 1 experimental-design free-response item. Students must choose the governing law T=2π√(L/g), linearize it (T^2 vs L), build a graph from tabular data, and use the slope (4π²/g) to find g. Concept depth is moderate and all reasoning is in scope: the pendulum period, with no damped, driven or physical-pendulum content. The main difficulty levers are choosing the law, translating between table and graph, and linking the slope to g. Arithmetic is light (squaring five values and one slope calculation) and the wording is clear, with the small-angle assumption stated. The four parts are many, but each is short and routine for the exam.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f05-k2",
+  "cellId": "ap_physics_1-f05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: a stand and clamp as the pivot, a light string, a small dense bob, a meterstick and a stopwatch. Measure L from the pivot to the center of the bob. Pull the bob to a small angle (under about 10°) and release it from rest. Time 10 or more full oscillations and divide by the number of oscillations to get T. Change L by adjusting the string length (0.2, 0.4 ... 1.0 m) and repeat. To reduce uncertainty in T, time many oscillations, repeat each trial and average, and start and stop timing as the bob passes the lowest point.",
+     "final_answer": "Time 10 or more oscillations at a small angle for each L (0.2–1.0 m, measured to the center of the bob), divide by the count, repeat and average.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "T = 2π√(L/g), so T² = (4π²/g)L. A graph of T² against L is a straight line through the origin with slope 4π²/g.",
+     "final_answer": "Vertical axis: T² (s²). Horizontal axis: L (m). Slope = 4π²/g.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "T² values (s²) at L = 0.2, 0.4, 0.6, 0.8, 1.0 m are 0.814, 1.608, 2.471, 3.331, 4.097. Plot these with L from 0 to 1.0 m and T² from 0 to 4.5 s². The best-fit line passes close to the origin.",
+     "final_answer": "Plot T² (s²) against L (m) using the points (0.2, 0.81), (0.4, 1.61), (0.6, 2.47), (0.8, 3.33), (1.0, 4.10). The best-fit line has slope ≈ 4.14 s²/m and intercept ≈ 0.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A least-squares fit gives slope ≈ 4.14 s²/m. Then g = 4π²/slope = 39.48/4.14 ≈ 9.5 m/s².",
+     "final_answer": "g ≈ 9.5 m/s² (accept roughly 9.4–9.8 m/s² depending on the hand-drawn line)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": true,
+   "summary": "The physics is correct and the solver agrees, but the bundle departs from the official FRQ pattern. Its parts are weighted 3/1/3/3, and the 10-point total does not fit the 9-point grain. It also closely mirrors the standard College Board pendulum-g lab FRQ, which is a banned scenario source.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Only part A (3 points) assesses 3.A, creating a procedure. Part B is linearization and part C is plotting (skill 1.B, graph construction). Part D is slope analysis (2.D) with a 2.B relation row. The dominant demand is therefore data analysis and graphing, not designing an experimental procedure. Topic 7.2 is only lightly engaged, because the question reduces to using T = 2π√(L/g)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The model answers are consistent: T² versus L, slope about 4.14 s²/m, g about 9.5 m/s². The tolerances are reasonable. Row D1 depends on C3 (the best-fit line). Rubric rows for parts A and C are checklist-style and loosely specified, for example 'scale fills grid' and 'axis labels with units' bundled into one row."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with labels, units and five rows. The setup states the small angle, the light string and that L is measured to the center of the bob. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common errors are listed only briefly in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The estimated load of 27 minutes for 10 points is heavy. The student must design a procedure, plot five points on a grid, and find the slope, which is a lot of writing and graphing in one bundle. The part weights (3/1/3/3) are not the 1-5 variety seen in official 9-point FRQs. The scenario is also the well-known pendulum-g lab already used in the official AP Physics 1 materials."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part lab item: design a procedure (time many oscillations, vary L), pick the governing law T=2π√(L/g) and linearize to T² vs L, square the data and plot with a chosen scale and best-fit line, then use slope=4π²/g to get g. Levers used are choosing the law, a table-to-graph-to-slope representation change, and one linking step from slope to g. Arithmetic is short and uses rounded data (5 squarings, one slope, one division). Wording is clear and the small-angle, light-string, dense-bob assumptions are stated. This matches the style of a full-mock experimental design question and is not a basic single-concept item or an advanced extension.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f06-k0",
+  "cellId": "ap_physics_1-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: a block, a level rough table, a photogate attached to a timer or computer, a meterstick or tape measure, and a ruler or caliper to measure the width of the flag on the block. Procedure: (1) Place the photogate right where the block's free slide starts. (2) Push the block or launch it with a compressed spring so it passes through the gate. Find v0 by dividing the flag width by the time the gate is blocked. (3) Measure d with the meterstick, from the photogate to the block's resting position, using the same reference edge each time. (4) Change the independent variable v0 by pushing harder, or by compressing the spring by different amounts. Collect at least 5 different speeds. Reducing uncertainty in d: do several trials at each speed and average d. Also, read the stopping point at eye level using a fixed edge of the block.",
+     "final_answer": "Use a photogate to measure v0 (flag width ÷ blocking time) and a meterstick to measure d from the gate to where the block stops. Vary v0 with a spring launcher compressed by different amounts. Repeat trials at each speed and average d.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The work done by friction equals the loss in kinetic energy: μmgd = ½mv0². So d = v0²/(2μg), and a graph of d against v0² is a straight line with slope 1/(2μg).",
+     "final_answer": "Put stopping distance d (m) on the vertical axis and v0² (m²/s²) on the horizontal axis. The slope equals 1/(2μg).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Squaring the speeds gives these points (v0², d): (1.00, 0.256), (2.25, 0.571), (4.00, 1.021), (6.25, 1.587), (9.00, 2.263). Scale: horizontal axis from 0 to 10 m²/s², vertical axis from 0 to 2.5 m. The points fall on a straight line through the origin, and the best-fit slope is about 0.251 s²/m.",
+     "final_answer": "Graph d (m) against v0² (m²/s²) on axes running 0–10 m²/s² and 0–2.5 m. The best-fit line passes close to the origin with slope ≈ 0.251 s²/m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A least-squares fit gives a slope of about 0.251 s²/m. Two points on the line, (0, 0) and (9.0, 2.26), give the same value. Since slope = 1/(2μg), μ = 1/(2 × 9.8 m/s² × 0.251 s²/m) ≈ 0.20.",
+     "final_answer": "μ ≈ 0.20",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound experimental design and analysis bundle. The key (d vs v0², slope 1/(2μg), μ≈0.20) is correct, and the rubric is consistent with 10 points total. The stimulus is complete and the scope is in Unit 3. No instant-reject conditions.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style lab/FRQ: the student must choose work-energy (mu*m*g*d = 1/2 m v0^2), linearize to d vs v0^2, plot, and extract mu from the slope (slope = 1/(2*mu*g), about 0.25 s^2/m, giving mu of about 0.2). It combines procedure design, linearization, graphing and slope interpretation with clean numbers and in-scope content, which is appropriate for full mocks and not trivially basic or beyond-exam.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_1-f06-k1",
+  "cellId": "ap_physics_1-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: block, level rough table, photogate connected to a timer/computer, a flag (card) of known width mounted on the block, and a meterstick or measuring tape. Place the photogate at a marked starting line. Give the block a push by hand, or launch it with a spring launcher compressed by different amounts, so that it passes through the gate after the push has ended. Find v0 as flag width divided by the gate blocking time. Measure d from the gate line to the block's resting position, using the same reference edge each time. To change the independent variable, push harder or compress the launcher more. Run several trials over a range of speeds. To reduce uncertainty in d: do repeated trials at about the same speed and average them, and read the position at eye level with a long tape.",
+     "final_answer": "Photogate + flag measure v0 = width/time; tape measures d from gate to rest; vary launcher compression or push strength; repeat trials and average d.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The work done by friction removes all the kinetic energy: μmg·d = ½mv0², so d = v0²/(2μg). A graph of d against v0² is a straight line through the origin with slope 1/(2μg).",
+     "final_answer": "Vertical axis: d (m). Horizontal axis: v0² (m²/s²). The slope is 1/(2μg).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Squaring the speeds gives these points (v0², d): (1.00, 0.204), (2.25, 0.453), (4.00, 0.828), (6.25, 1.26), (9.00, 1.826). Scales that fill the grid: horizontal axis 0 to 10 m²/s², vertical axis 0 to 2.0 m. The points lie very close to a straight line through the origin with slope about 0.203 s²/m.",
+     "final_answer": "Plot d (m) against v0² (m²/s²) using the points (1.00, 0.204), (2.25, 0.453), (4.00, 0.828), (6.25, 1.26), (9.00, 1.826). Draw a best-fit line through about the origin with slope ≈ 0.203 s²/m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A least-squares fit through the origin gives slope = Σxy/Σx² = 28.84/142.1 ≈ 0.203 s²/m. Since slope = 1/(2μg), μ = 1/(2g·slope) = 1/(2 × 9.8 × 0.203) ≈ 0.25.",
+     "final_answer": "μ ≈ 0.25",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a coherent design-and-analysis FRQ on work-energy with friction, and the key matches the independent solver (slope about 0.203, mu about 0.25). The rubric is consistent, totals 10 points, and is acceptable for AP Physics 1.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 3.2, 2.7 and 3.1 are in scope. Parts A and B target skill 3.A; part C is graphing and part D is analysis, which is acceptable per part."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are consistent with d = v0^2/(2 mu g) and match the solver. Row dependencies and tolerances are sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data table is complete, with labels and five rows. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. Common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Task load is typical for a 10-point experimental design FRQ. The calculator is allowed and the arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard linearization lab FRQ. The student designs a procedure, applies the work-energy theorem with friction to get d = v0^2/(2*mu*g), chooses d vs v0^2, plots and fits, then extracts mu from the slope. The concept is in scope, the arithmetic is light, and the wording is clear. The difficulty comes from the multi-part structure and the representation changes, not from unfair sources. This matches full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_1-f06-k2",
+  "cellId": "ap_physics_1-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Procedure",
+     "final_answer": "Equipment: block, level rough table, photogate with timer, meterstick or tape measure, and a launcher (for example a compressed spring with adjustable compression). Put the photogate right where the block leaves the launcher, so v0 = (flag width)/(gate time). Change v0 by changing the spring compression. For each launch, measure d from the photogate to where the block stops. Use 5 or more different speeds. To reduce uncertainty in d, repeat each speed several times and average the distances, and mark the stopping point on tape before measuring.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "μmgd = ½mv0², so d = v0²/(2μg)",
+     "final_answer": "Plot d on the vertical axis and v0² on the horizontal axis. The line goes through the origin with slope 1/(2μg). (Plotting v0² vs d instead also works, giving slope 2μg.)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Linearized data",
+     "final_answer": "Plot the points (v0², d): (1.00, 0.170), (2.25, 0.380), (4.00, 0.684), (6.25, 1.075), (9.00, 1.535). Label the horizontal axis v0² (m²/s²) from 0 to 10 and the vertical axis d (m) from 0 to 1.6. The best-fit line passes through the origin with slope ≈ 0.171 s²/m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Use the line, not one data point: slope ≈ (1.54 − 0)/(9.0 − 0) ≈ 0.171 s²/m. Then μ = 1/(2g·slope) = 1/(2·9.8·0.171).",
+     "final_answer": "μ ≈ 0.30",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle passes all five criteria. It is a standard lab-design FRQ: procedure, linearization (d vs v0^2), graph, and slope-to-μ analysis. The keys are consistent with the table. The weights total 10 points, which matches the type, and the rubric rows are clear and mostly 1 point each. The only minor ambiguity is that part B does not say which axis the student must put d on, though the rubric asks for d vertical.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own skill. Work-energy with friction is the dominant physics. There is no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The slope of 0.171 and μ of about 0.30 are consistent with the data. The row dependencies are valid and the tolerances are sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels, units, and five complete rows. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to FRQ. The common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP Physics 1 experimental design FRQ, and calculator use is appropriate for the slope and μ calculation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP Physics 1 experimental-design/analysis FRQ. Students must choose the work-energy theorem with friction (mu*m*g*d = 1/2 m v0^2, mass cancels), recognize that d vs v0^2 is linear with slope 1/(2*mu*g), square the table values, plot and fit a line, and convert the slope to mu (~0.30). The procedure design (photogate, ruler/tape, vary launch speed, repeat trials to reduce distance uncertainty) is standard. Arithmetic is light with clean numbers, wording is unambiguous, and everything is in Unit 3 scope, so the difficulty comes from legitimate levers (choosing the law, linearizing a table into a graph, linking slope to a physical quantity).",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f07-k0",
+  "cellId": "ap_physics_1-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Static friction provides centripetal force f = mv^2/r; f scales with v^2, so doubling speed quadruples required friction (and may exceed max static friction).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Disagree: required friction quadruples, not doubles."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "mu_s m g = m v^2/r -> v_max = sqrt(mu_s g r) = sqrt(0.5*9.8*40)=14 m/s",
+     "ambiguous_or_flawed": false,
+     "final_answer": "v_max = sqrt(mu_s g r) ≈ 14 m/s"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Both max friction (mu m g) and required centripetal force (m v^2/r) scale with m; mass cancels.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Stays the same"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope QQT bundle. Keys are unique and valid, the parts total 8 points, and the load is reasonable. Passes all criteria.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style item on friction providing centripetal force. Part A needs proportional reasoning (F ∝ v², so doubling v quadruples the force). Part B is a short derivation (μmg = mv²/r) with simple arithmetic (v ≈ 14 m/s). Part C is mass cancellation. All content is in Unit 2 scope, with no unfair difficulty sources. It is more demanding than a basic single-step item because it requires choosing the governing model, doing an algebraic derivation, and justifying claims, but it is not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_physics_1-f07-k1",
+  "cellId": "ap_physics_1-f07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "On a flat curve, static friction is the only horizontal force, so it supplies the whole centripetal force, F = mv²/r. That force goes with the square of the speed, so doubling v makes the needed friction four times larger, not two. Also, the maximum static friction μs·mg might be less than the new amount needed.",
+     "final_answer": "Disagree. The friction needed is the centripetal force mv²/r, which goes with v², so doubling the speed makes it 4 times larger, not 2 times.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Set the maximum friction equal to the centripetal force: μs·m·g = m·v²/r. Solving gives v_max = √(μs·g·r) = √(0.5 × 9.8 × 50) = √245 ≈ 15.7 m/s.",
+     "final_answer": "v_max = √(μs g r) ≈ 15.7 m/s (about 15.8 m/s if g = 10 m/s²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Doubling the mass doubles the normal force, so the maximum friction (μs·m·g) doubles. The centripetal force needed at a given speed (m·v²/r) also doubles. Mass cancels, so v_max = √(μs g r) does not change.",
+     "final_answer": "Stays the same",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Content, key and scoring are sound: the friction supplies the centripetal force, and v_max = sqrt(mu g r) is about 15.7 m/s. The problem is exam suitability. The subject notes fix Qualitative/Quantitative Translation at 8 points, and this item matches that total (3+3+2). But part A asks for a 3-point qualitative justification and part B a 3-point derivation plus calculation, which is a heavy write-up. The part A and C rubric rows also look closer to a writing checklist than to AP Physics 1 point grain. The 17-minute estimate is only an internal reference and is not penalized on its own. Part A's rubric also quietly requires \"disagree\" while ignoring that the claim could hold if the friction limit is exceeded, but the key is still defensible. I fail the item on suitability and reference-pattern grounds. These are weak, borderline concerns, and I fail when unsure.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Circular motion on a flat curve with friction (2.9, with 2.7 and 2.5) is in scope for Unit 2. The dominant skill is applying a law to evaluate a claim, which fits 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and correct. Part A is disagree (the force scales as v^2). Part B is v_max = sqrt(mu g r), about 15.7 m/s. Part C is stays the same (mass cancels). The rubric rows are consistent and dependent rows are properly chained."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clear. It gives mass, radius, mu_s and a flat, unbanked curve. The data object is empty, but no figure is needed. Wording is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors entries (force proportional to speed, an outward force balancing friction, mass left in the answer) are realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The 8-point total matches the stated type weight, but the load is heavy: a qualitative justification, a symbolic derivation plus a calculation, and a mass-dependence prediction. Part A's three rubric rows (disagree, friction provides the centripetal force, force depends on v^2) are fine-grained and partly overlap. The load is borderline for the 8-point type, and the part B/C overlap makes the item feel padded."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics 1 flat-curve friction item. Part A asks for a qualitative proportional-reasoning argument: required friction is proportional to v^2, so doubling speed quadruples it, and the claim is rejected. Part B has the student set f_s,max = mu_s*m*g equal to m*v^2/r, derive v = sqrt(mu_s*g*r), and compute about 15.7 m/s. Part C asks whether mass cancels, so max speed stays the same. All three parts use one governing model (Newton's second law with centripetal acceleration and static friction). The arithmetic is a single square root, the reading load is short, the wording is unambiguous, and everything is within Unit 2 scope. Difficulty comes from choosing the law and from the proportional and cancellation reasoning, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_physics_1-f07-k2",
+  "cellId": "ap_physics_1-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Static friction is the only horizontal force, so it supplies the centripetal force: f = mv²/r. Since f depends on v², doubling the speed makes the needed friction four times as large, not twice.",
+     "final_answer": "Disagree: the friction needed goes up by a factor of 4, because f = mv²/r is proportional to v².",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The largest friction available is μs·mg. Setting μs·mg = m·v²/r gives v_max = sqrt(μs·g·r) = sqrt(0.6 × 9.8 × 60) ≈ 18.8 m/s.",
+     "final_answer": "v_max = sqrt(μs g r) ≈ 18.8 m/s (≈19 m/s; using g = 10 m/s² gives ≈19.0 m/s)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Doubling the mass doubles both the maximum friction (μs·mg) and the force needed (mv²/r). The mass cancels, so v_max = sqrt(μs·g·r) does not change.",
+     "final_answer": "Stays the same",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope flat-curve FRQ with three parts (claim evaluation, derivation and calculation, mass-independence prediction). The keys are unique and the rubric rows are consistent and total 8 points, matching the Qualitative/Quantitative Translation weight. The load is reasonable and the scenario is standard rather than a College Board sample item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Circular motion with static friction on a flat curve (topic 2.9). The dominant demand is applying the centripetal-force model to evaluate a claim, which fits skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are correct and unique: disagree (the force goes as v^2), v_max of about 18.8 m/s, and the maximum speed stays the same. Rubric rows are consistent and total 8 points."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives all needed values and needs no figure. The wording is clear and unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item. The rubric's common-error entries cover the main misconceptions: force proportional to speed, an outward balancing force, and mass left in the answer."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable, with light arithmetic and a calculator allowed. The estimated 17 minutes for 8 points is slightly long but acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three-part item on a flat curve. Part A applies F = mv²/r with a proportional prediction (force quadruples). Part B sets static friction equal to centripetal force, so v = sqrt(μ g r) ≈ 18.8 m/s, one short calculation. Part C notes mass cancels, so v_max is unchanged. It needs one governing law, a short derivation and a proportional-reasoning argument. Reading and arithmetic loads are low, and everything is in Unit 2 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_physics_1-f08-k0",
+  "cellId": "ap_physics_1-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "I disagree. A floating block is in equilibrium, so the buoyant force equals the block's weight in both liquids, and that weight doesn't change. Buoyant force equals the density of the liquid times the submerged volume times g. In a denser liquid, a smaller submerged volume displaces the same weight of liquid, so the block floats higher in the salt solution.",
+     "final_answer": "Disagree: the block floats higher, with a smaller fraction of its volume submerged, in the salt solution.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "At equilibrium, buoyant force equals weight: ρ·V_sub·g = ρ_b·V·g. Solving gives V_sub/V = ρ_b/ρ. In the salt solution this is 600/1200 = 0.5. In fresh water it would be 600/1000 = 0.6, which confirms the block sits higher in salt solution.",
+     "final_answer": "f = ρ_b/ρ; f = 0.50 in the salt solution",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The coin adds weight. To stay in equilibrium, the buoyant force must increase by the same amount. The liquid's density hasn't changed, so the only way to do this is to displace more liquid, which means a larger submerged volume.",
+     "final_answer": "Increases",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a clean buoyancy and floating-equilibrium bundle on Unit 8 content. Each part is keyed uniquely and the independent solver agrees on all three. Rubric rows are consistent and dependency-linked, and the 8 points match the stated Qualitative/Quantitative Translation weight.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Buoyancy and force balance on a floating block fall within topics 8.3, 8.1 and 2.4. The dominant demand is applying a law to evaluate a claim (3.B). Nothing from out-of-scope content such as viscosity or surface tension appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All three parts have a unique correct answer: disagree, a submerged fraction of 0.5, and an increase when the coin is added. The block floats at rest in each liquid, which is stated, so the condition for using the force balance is met. The rubric rows are consistent and ordered by dependency, and the single expected value of 0.5 matches the stated tolerance."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives every density and the scenario. The empty data object is acceptable because the stimulus is text only. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors entries in each row name realistic misconceptions, such as the denser liquid pushing harder or an inverted density ratio."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The arithmetic is minimal. The total load, three parts worth 8 points, is reasonable for this type of item, and calculator use is consistent with the allowed designation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Core floating condition (buoyant force = weight) applied in three linked parts: refuting a misconception qualitatively, deriving V_sub/V = rho_b/rho and evaluating it (0.5), then predicting the effect of added weight. Requires choosing the governing law, a proportional-reasoning step, and linking results to a claim. Arithmetic is trivial, reading is short, and the wording is unambiguous, so difficulty comes only from the legitimate conceptual and argumentation demands. This is typical of a multi-part free-response item for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_physics_1-f08-k1",
+  "cellId": "ap_physics_1-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Disagree. When the block floats at rest, the buoyant force equals its weight, and the block's weight is the same in both liquids. Buoyant force is the weight of the liquid pushed aside, which is ρgV_sub. A denser liquid gives the same buoyant force with a smaller submerged volume, so the block floats higher in the salt solution, not lower.",
+     "final_answer": "Disagree: the block floats higher, with a smaller fraction submerged, because the denser liquid supplies the needed buoyant force (equal to the unchanged weight) with less volume pushed aside.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "At equilibrium the buoyant force equals the weight: ρ g V_sub = ρ_b g V. Solving gives V_sub/V = ρ_b/ρ. For the salt solution, 800/1300 ≈ 0.615. For comparison, in fresh water the fraction is 0.80.",
+     "final_answer": "f = ρ_b/ρ; in the salt solution f = 800/1300 ≈ 0.62 (about 61.5%)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Adding the coin increases the total weight the liquid must support. To balance it, the buoyant force must increase, so the submerged volume must increase. Because the block still floats, the submerged fraction goes up but stays below 1.",
+     "final_answer": "Increases",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It evaluates a claim about floating using force balance, derives the submerged fraction, and predicts the effect of an added load. The keys are unique and verified, and the rubric rows are consistent with the 8-point total. The load is typical, and the item stays within Unit 8 with no out-of-scope content.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item targets 8.3 buoyancy and force balance with claim evaluation (3.B). It stays in scope and uses no content from later units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Part A: disagree. Part B: V_sub/V = rho_b/rho = 0.615. Part C: the fraction increases. Each answer is unique and the rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus states all densities and the floating-at-rest condition. The wording is clear and the data object is not needed for a text stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item. The rubric rows list realistic common errors, such as agreeing because the denser liquid pushes harder and inverting the density ratio."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is reasonable, the arithmetic is minimal, and calculator use is allowed and consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Floating-block item with three short parts. A: qualitative argument using Newton's 2nd law (equilibrium) and buoyancy, which shows the claim is wrong because the submerged fraction decreases in the denser liquid. B: a one-line derivation (rho_b V g = rho V_sub g, so V_sub/V = rho_b/rho) and a simple calculation, 800/1300 ≈ 0.62. C: a proportional-reasoning prediction with an added weight, so the buoyant force must increase and the submerged fraction increases. The concepts are in scope and the items are standard. There are about 3 reasoning steps, with a shift between a verbal claim and an algebraic expression, and the arithmetic and reading load are light. Appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_physics_1-f08-k2",
+  "cellId": "ap_physics_1-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Disagree. When the block floats at rest, the buoyant force equals its weight, and that weight is the same in both liquids. Buoyant force equals the weight of the liquid displaced. A denser liquid weighs more per unit volume, so less of it has to be displaced to hold up the same weight. The block therefore floats higher in the salt solution, with a smaller fraction of its volume submerged.",
+     "final_answer": "Disagree: the block floats higher in the salt solution, with a smaller fraction submerged.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "For floating equilibrium, buoyant force = weight: ρ·g·V_sub = ρ_b·g·V. Solving gives V_sub/V = ρ_b/ρ. For the salt solution: 900/1300 = 0.692.",
+     "final_answer": "f = ρ_b/ρ; f ≈ 0.69 (about 69%) in the salt solution",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The coin adds weight, so the block needs a larger buoyant force to stay at rest. A larger buoyant force means more liquid must be displaced, so more of the block's volume goes under the surface.",
+     "final_answer": "The submerged fraction increases.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The floating-block bundle is in scope, with a correct and unique key, a consistent rubric, a complete text stimulus and a typical exam load. It passes all five criteria.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard floating-equilibrium FRQ: apply F_B = mg to evaluate a flawed claim (qualitative), derive V_sub/V = rho_b/rho and compute one simple ratio (about 0.69), then predict the effect of added load on the submerged fraction. It requires choosing the governing law and linking results to a claim, with modest algebra and no heavy arithmetic or reading. All content is in Unit 8 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]
