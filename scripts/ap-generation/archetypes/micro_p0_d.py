@@ -82,19 +82,19 @@ def mi_monopoly_numeric(rng):
     agree(float(Fr(ref["P"])), Pm, 1e-9, "Pm")
     if which == "quantity":
         key_val = qs; label = "quantity"
-        cands = [("Sets price equal to marginal cost, which gives the competitive quantity.", qc), ("Sets total revenue per unit equal to marginal cost using demand instead of marginal revenue.", (A - m) / (2 * B) + 0.0 if False else qc / 2 + qc / 4), ("Reports the price instead of the quantity.", Pm), ("Reports the demand intercept as the quantity.", A / B), ("Reports the profit-maximizing price at the competitive quantity.", A - B * qc)]
+        cands = [("Sets price equal to marginal cost, which gives the competitive quantity.", qc), ("Reports the price instead of the quantity.", Pm), ("Reads the quantity at which the price falls to zero.", A / B), ("Reads the quantity at which marginal revenue equals zero (the revenue-maximizing quantity).", A / (2 * B))]
         f = lambda v: nm(v, 0) + " units"  # noqa: E731
         kw = f"MR = {A} - {2 * B}Q equals MC = {m} at Q = {int(qs)}."
         q_text = "the profit-maximizing quantity"
     elif which == "price":
         key_val = Pm
-        cands = [("Reports marginal cost as the price.", m), ("Reports the price at the competitive quantity, which equals marginal cost.", A - B * qc + 0.0 if A - B * qc != m else m + 0.0), ("Reports the quantity instead of the price.", qs), ("Reports the demand intercept as the price.", A), ("Reports marginal revenue at the profit-maximizing quantity as the price.", A - 2 * B * qs)]
+        cands = [("Reports marginal cost as the price.", m), ("Reports the quantity instead of the price.", qs), ("Reports the demand intercept as the price.", A), ("Charges the price at the revenue-maximizing quantity (where marginal revenue is zero).", A / 2)]
         f = lambda v: usd(v)  # noqa: E731
         kw = f"MR = MC gives Q = {int(qs)}; the price comes from the demand curve: P = {A} - {B}({int(qs)}) = {usd(Pm)}."
         q_text = "the price the monopolist charges"
     else:
         key_val = prof
-        cands = [("Uses total revenue as the profit.", Pm * qs), ("Computes profit at the competitive quantity.", (A - B * qc - m) * qc), ("Uses the difference between price and the demand intercept.", (A - Pm) * qs), ("Omits the quantity and reports the margin per unit.", Pm - m), ("Uses marginal revenue instead of price in the margin.", (A - 2 * B * qs - m) * qs + Pm)]
+        cands = [("Uses total revenue as the profit.", Pm * qs), ("Reports the per-unit margin (price minus marginal cost) instead of multiplying by the quantity.", Pm - m), ("Multiplies the monopoly margin by the competitive quantity.", (Pm - m) * qc), ("Reports the deadweight loss instead of the profit.", 0.5 * (qc - qs) * (Pm - m)), ("Multiplies the monopoly price by the competitive quantity.", Pm * qc)]
         f = lambda v: usd(v)  # noqa: E731
         kw = f"Q = {int(qs)} and P = {usd(Pm)}; profit = ({usd(Pm)} - {usd(m)}) x {int(qs)} = {usd(prof)}."
         q_text = "the monopolist's economic profit"
@@ -115,7 +115,7 @@ def mi_monopoly_graph(rng):
     which = rng.choice(["price", "quantity"])
     if which == "price":
         key_val = Pm
-        cands = [("Reads the price from the marginal cost curve at the profit-maximizing quantity.", m), ("Reads the marginal revenue value at the competitive quantity as the price.", 0.0 + 1), ("Uses the demand price at the competitive quantity (where D crosses MC).", A - B * Qc), ("Reports the demand intercept.", A), ("Reports the profit-maximizing quantity as the price.", Qm)]
+        cands = [("Reads the price from the marginal cost curve at the profit-maximizing quantity.", m), ("Reports the demand intercept.", A), ("Reports the profit-maximizing quantity as the price.", Qm), ("Charges the price at the revenue-maximizing quantity (where marginal revenue is zero).", A / 2)]
         f = lambda v: usd(v)  # noqa: E731
         stem = "The graph shows the demand, marginal revenue, and marginal cost curves of a profit-maximizing monopolist. What price does the monopolist charge?"
         kw = f"MR crosses MC at {int(Qm)} units; the demand curve above that quantity gives the price {usd(Pm)}."
@@ -468,7 +468,7 @@ def mi_pigou_numeric(rng):
     stim = tbl("Marginal private benefit (MPB), marginal private cost (MPC), and marginal external cost (MEC), in dollars, for each unit of a good.", ["Unit", "MPB", "MPC", "MEC"], [[q, usd(mb), usd(mc), usd(me)] for q, mb, mc, me in table])
     k, ds = val_opts(tax, [("Uses the marginal external cost at the market quantity instead of the efficient quantity.", table[qmkt - 1][3]), ("Uses the marginal external cost of the first unit.", table[0][3]), ("Uses the gap between marginal private benefit and cost at the market quantity.", table[qmkt - 1][1] - table[qmkt - 1][2]), ("Uses the total external cost at the efficient quantity.", sum(r[3] for r in table[:qeff])),
                           ("Uses marginal private cost at the efficient quantity.", table[qeff - 1][2])], usd)
-    stem = "The table shows the marginal private benefit, marginal private cost, and marginal external cost of each unit of a good produced in a competitive market. The government wants to impose a per-unit tax to achieve the socially efficient quantity. What per-unit tax would do this?"
+    stem = "The table shows the marginal private benefit, marginal private cost, and marginal external cost of each unit of a good produced in a competitive market. The government sets a per-unit tax equal to the marginal external cost at the socially efficient quantity. What is the amount of this tax?"
     return mk("mi_pigou_numeric", "6.2", "3.C", stem, k, ds, rng, concept="Pigouvian tax equals marginal external cost at the efficient quantity", path="last unit with MPB >= MPC + MEC (exact) vs argmax of cumulative social net benefit", stim=stim, kwhy=f"The efficient quantity is {qeff} units, where MPB still covers MPC + MEC; the tax equals the MEC of that unit, {usd(tax)}.", facts=[f"table={table}", f"qmkt={qmkt}", f"qeff={qeff}", f"tax={tax}"], est=100)
 
 

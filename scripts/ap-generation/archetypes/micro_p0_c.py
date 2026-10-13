@@ -120,8 +120,8 @@ def mi_cost_graph_min(rng):
     q_start = max(k0 / 2, 2.0)
     stim = econ_graph("Short-run cost curves for a firm: marginal cost MC and average total cost ATC.", [("MC", line_pts(a, 2 * b, 0, qmax)), ("ATC", dense_pts(atc, q_start, qmax, 45))], qmax, ymax, 10, 20, ylabel="Cost (dollars per unit)")
     stem = "The graph shows a firm's marginal cost (MC) and average total cost (ATC) curves. At which quantity is average total cost at its minimum?"
-    cand = [("Chooses the quantity where marginal cost is lowest, which is at zero output.", 0), ("Chooses a quantity where marginal cost is still below average total cost, so the average is still falling.", k0 / 2), ("Chooses a quantity where marginal cost is above average total cost, so the average is already rising.", 2 * k0),
-            ("Chooses the right edge of the graph where costs are highest.", qmax), ("Chooses the quantity where marginal cost reaches the price intercept.", 3 * k0)]
+    cand = [("Chooses the quantity where marginal cost is lowest, which is at zero output.", 0), ("Chooses a quantity where marginal cost is below average total cost, so the average is still falling.", k0 / 2), ("Chooses a quantity where marginal cost is above average total cost, so the average is already rising.", 2 * k0),
+            ("Chooses the right edge of the graph.", qmax), ("Chooses a quantity just beyond the crossing, where marginal cost only slightly exceeds average total cost and the average has begun to rise.", 1.5 * k0)]
     k, ds = val_opts(float(k0), cand, lambda v: nm(v, 0) + " units")
     return mk("mi_cost_graph_min", "3.2", "2.A", stem, k, ds, rng, concept="average total cost is minimized where marginal cost crosses it", path="grid search of the ATC curve vs analytic sqrt(F/b)", stim=stim, kwhy=f"MC crosses ATC at the minimum of ATC, at {k0} units.", facts=[f"F={F}", f"a={a}", f"b={b}", f"k0={k0}"], est=65)
 
@@ -185,8 +185,11 @@ def mi_profit_max_table(rng):
         raise ValueError("not_enough_separated_distractors")
     stim = tbl(f"Total cost for a price-taking firm. The market price is {usd(P)} per unit.", ["Quantity", "Total cost"], [[q, usd(TC[q])] for q in range(0, 8)])
     stem = f"The table shows the total cost of a perfectly competitive firm that sells its output at a market price of {usd(P)} per unit. Which quantity maximizes the firm's profit?"
-    k, ds = val_opts(best, [("Chooses the quantity that minimizes average total cost instead of the quantity where price equals marginal cost.", max(1, best - 1) if best > 1 else best + 1), ("Chooses the quantity just after marginal cost exceeds the price.", best + 1), ("Chooses the largest quantity in the table.", 7), ("Chooses the quantity where total cost is lowest, which is zero output.", 0),
-                           ("Chooses the quantity where marginal cost first equals the fixed cost.", min(7, best + 2))], lambda v: str(int(v)))
+    atcs = {q_: Fr(TC[q_], q_) for q_ in range(1, 8)}
+    q_atc = min(atcs, key=lambda q_: atcs[q_]); q_unit = max(atcs, key=lambda q_: P - atcs[q_])
+    k, ds = val_opts(best, [("Chooses the quantity at which average total cost is lowest instead of equating price with marginal cost.", q_atc), ("Chooses the quantity that maximizes profit per unit (price minus average total cost) instead of total profit.", q_unit),
+                           ("Chooses the quantity just after marginal cost exceeds the price.", best + 1), ("Chooses the largest quantity in the table.", 7), ("Chooses one unit fewer than the profit-maximizing quantity, stopping before the last unit whose marginal cost is at most the price.", best - 1),
+                           ("Chooses zero output because total cost is lowest at zero output.", 0)], lambda v: str(int(v)))
     return mk("mi_profit_max_table", "3.5", "2.C", stem, k, ds, rng, concept="a price taker maximizes profit where price equals marginal cost", path="last unit with price at least marginal cost vs argmax of total profit", stim=stim, kwhy=f"The last unit whose marginal cost does not exceed {usd(P)} is unit {best}, which also gives the maximum profit.", facts=[f"F={F}", f"a={a}", f"b={b}", f"P={P}", f"best={best}"], est=80)
 
 
@@ -233,13 +236,15 @@ def mi_shutdown_decision(rng):
     f = lambda act_, v: f"The firm should {act_}, and its loss is {usd(v)}."  # noqa: E731
     key = Opt(f(act, best_loss), True, (f"Price {usd(P)} is below average variable cost {usd(avc)}, so operating loses more than the fixed cost; shutting down limits the loss to fixed cost ({usd(fc)})." if shut else f"Price {usd(P)} covers average variable cost {usd(avc)}, so producing loses {usd(op_loss)}, less than the fixed cost of {usd(fc)} lost by shutting down."), best_loss)
     other = "continue to produce" if shut else "shut down"
-    cands = [(f(other, fc if shut else op_loss), "Reaches the wrong decision by comparing price with the wrong cost measure; the loss shown is the loss that goes with that wrong decision."),
-             (f(other, op_loss if shut else fc), "Reaches the wrong decision and attaches the loss of the other scenario."),
-             (f(act, op_loss if shut else fc), "Chooses the right action but reports the loss from the other scenario."),
-             (f(act, (avc - P) * q if shut else (atc - P) * q + fc), "Chooses the right action but computes the loss from the average variable cost gap or double counts fixed cost."),
-             (f(other, (atc - P) * q + fc if shut else (avc - P) * q), "Reaches the wrong decision and adds or drops fixed cost in the loss."),
+    loss_other = op_loss if shut else fc
+    why_wrong_act = ("Keeps producing because revenue covers part of the fixed cost, but at this price each unit also loses money on variable cost, so producing loses more than shutting down." if shut
+                     else "Shuts down because price is below average total cost, but price covers average variable cost, so producing loses less than the fixed cost that shutting down would lose.")
+    cands = [(f(other, loss_other), why_wrong_act),
+             (f(act, loss_other), f"Chooses the right action but reports the loss of the {'operating' if shut else 'shut-down'} alternative instead of the loss that goes with the action chosen."),
              (f(act, atc * q), "Chooses the right action but reports total cost as the loss instead of the shortfall of revenue."),
-             (f(other, atc * q), "Reaches the wrong decision and reports total cost as the loss.")]
+             (f(other, atc * q), "Chooses the wrong action and reports total cost as the loss instead of the shortfall of revenue."),
+             ((f(act, (avc - P) * q), "Chooses the right action but reports only the loss on variable cost (average variable cost minus price, times quantity) and leaves out fixed cost.") if shut
+              else (f(act, (P - avc) * q), "Chooses the right action but reports the amount by which revenue exceeds variable cost, which is not a loss."))]
     ds, seen = [], {key.text}
     for t, w in cands:
         if t in seen: continue

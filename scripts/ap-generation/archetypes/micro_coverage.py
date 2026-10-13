@@ -12,7 +12,7 @@ NUMERIC_SKILLS = ("1.C", "2.C", "3.C")
 MC_SKILLS = ["1.A", "1.B", "1.C", "1.D", "2.A", "2.B", "2.C", "3.A", "3.B", "3.C"]
 FRQ_TOTAL = 20  # 긴 10 + 짧은 5 x 2
 FRQ_TYPE_PCT = {"graph": (30, 50), "assertion": (10, 20), "explain": (25, 35), "numeric": (15, 30)}
-MODE_TYPE = {"draw": "graph", "select": "assertion", "explain": "explain", "calculate": "numeric"}
+MODE_TYPE = {"draw": "graph", "select": "assertion", "identify": "assertion", "explain": "explain", "calculate": "numeric"}
 
 
 def count_bounds(rng_pct, n=MC_N):

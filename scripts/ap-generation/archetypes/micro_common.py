@@ -25,6 +25,8 @@ MAT_MATRIX = {"type": "payoff_matrix", "must_include": ["row and column strategi
 # ---------------- 표기 ----------------
 def usd(v):
     v = float(v)
+    if v < 0:
+        return "-" + usd(-v)
     if abs(v - round(v)) < 1e-9:
         return f"${int(round(v)):,}"
     return f"${v:,.2f}"

@@ -405,7 +405,7 @@ def mi_per_unit_tax(rng):
     sol = sp.solve(sp.Eq(a - b * P, c + d * (P - t)), P)[0]
     agree(float(sol), float(Pb), 1e-9, "tax_price")
     f = lambda v: nm(v, 0)  # noqa: E731
-    k, ds = val_opts(float(Qt), [("Keeps the pre-tax equilibrium quantity, ignoring the effect of the tax.", Q0), ("Subtracts the amount of the tax from the equilibrium quantity.", Q0 - t), ("Shifts the supply curve by the tax in the wrong direction.", a - b * float(Fr(a - c - d * t, b + d))), ("Shifts both curves by the tax.", a - b * float(Fr(a - c, b + d) + t)),
+    k, ds = val_opts(float(Qt), [("Keeps the pre-tax equilibrium quantity, ignoring the effect of the tax.", Q0), ("Subtracts the amount of the tax from the equilibrium quantity.", Q0 - t), ("Shifts the supply curve by the tax in the wrong direction.", a - b * float(Fr(a - c - d * t, b + d))), ("Assumes buyers pay the whole tax and reads the quantity demanded at the pre-tax price plus the tax.", a - b * (P0 + t)),
                           ("Reports the price consumers pay instead of the quantity.", float(Pb))], f)
     stem = f"In a market, Qd = {a} - {b}P and Qs = {c} + {d}P, where P is the price in dollars. The government imposes a tax of {usd(t)} per unit on sellers, so sellers receive P - {t} per unit. What is the new equilibrium quantity?"
     stem = f"In a market, the quantity demanded is Qd = {a} - {b}P, where P is the price buyers pay. Sellers receive the price buyers pay minus a tax of {usd(t)} per unit, so the quantity supplied is Qs = {c} + {d}(P - {t}). What is the new equilibrium quantity?"

@@ -2,6 +2,7 @@
 // AB 는 기존 OFFICIAL.unitBounds(ab-select.ts)를 그대로 쓴다. 통계는 공식 MC 비중 20-30/15-25/15-25/10-20/10-20 % × 42 → [9,12]/[7,10]/[7,10]/[5,8]/[5,8],
 // 스킬(Practice) 5-10/20-30/25-35/25-35 % → [3,4]/[9,12]/[11,14]/[11,14]. 목표 배분(제안, 공식 고정 아님)은 STATS_FULL_TARGET.
 import { OFFICIAL } from "./ab-select";
+import { microUnitBounds } from "./micro-rules";
 
 export type UnitBounds = Record<string, { min: number; max: number }>;
 export const rangeFromPct = ([lo, hi]: [number, number], n: number) => ({ min: Math.ceil((lo * n) / 100 - 1e-9), max: Math.floor((hi * n) / 100 + 1e-9) });
@@ -26,6 +27,7 @@ export function fullPracticeUnitBounds(subject: string | null | undefined, label
   if (subject === "ap_statistics") return statsUnitBounds();
   if (subject === "ap_physics_1") return physUnitBounds();
   if (subject === "ap_chemistry") return chemUnitBounds();
+  if (subject === "ap_microeconomics") return microUnitBounds();
   return undefined;
 }
 
