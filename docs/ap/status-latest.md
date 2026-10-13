@@ -45,3 +45,4 @@
 - 섹션 타이머: 탭 클릭으로 시계가 시작되지 않고 'Start section' 누를 때만 시작(마이그레이션 560, 배포본 확인).
 - Statistics(`docs/ap/statistics-facts.md`): 시험 3시간, MC 42(90분, 3문항 세트 2개), FRQ 4(90분, 각 10점), investigative question은 별도 FRQ가 아니라 Q1 파트 E(스킬 1.A·토픽 1.10), 수식·표 제공, 계산기 허용. 코드 공백은 생성·조립 계층(`gates.ts` OPTION_COUNT, `cells.ts`, `subjects/stats.ts`, `stock.ts` SUBJECT_FAMILY, `assemble-draft.ts` subjectOfSetId, unitBounds). 파일럿 사양: 20 원형(U1 5·U2 5·U3 4·U4 3·U5 3).
 
+- 2026-10-12 ST1 새 버전(v2) 교체 계획: `scripts/ap-generation/st1-new-version-plan.ts` → `data/ap/stock/st1-v2-swap-plan.json`(v1 `stats-st1-s2b` → `stats-st1-s3a-prefer-ep`, 단독 MC 10칸 위치 교체, 검증기 위반 0, exam_prep 10→17/42). 섹션 ap_mc(1–42, 세트 13–15·31–33 불변)/ap_frq. 패널·서버·RPC 는 과목 비의존이라 코드 변경 없이 목록에 나타남(안내 문구만 보강). 테스트 `lib/ap-admin/new-version-stats.test.ts`. 미리보기·초안 생성은 조정 세션이 비프로덕션에서 실행.
