@@ -29,7 +29,7 @@ d("AP Statistics S1 pilot archetypes (Python, 3 seeds each)", () => {
   it("registers 20 archetypes in risk order (L 10, M 6, H 4) and the guide JSON lists exactly the same ids", () => {
     expect(r.status).toBe(0);
     expect(out.names).toHaveLength(20);
-    expect(statsGuide.archetypes.map((a) => a.id)).toEqual(out.names);
+    expect(statsGuide.archetypes.map((a) => a.id).slice(0, out.names.length)).toEqual(out.names); // 뒤쪽은 S2-a 원형(stats-s2a.test.ts)
     const unit = (id: string) => String(out.packs[id][0].topic).split(".")[0];
     const perUnit: Record<string, number> = {}; for (const n of out.names) perUnit[unit(n)] = (perUnit[unit(n)] ?? 0) + 1;
     expect(perUnit).toEqual({ "1": 5, "2": 5, "3": 4, "4": 3, "5": 3 });

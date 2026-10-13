@@ -303,5 +303,320 @@
    "reverses x and y",
    "confuses the slope with the intercept"
   ]
+ },
+ {
+  "id": "st_investigative_question",
+  "topic": "1.10",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option is generated from a table of three properties (variability, population, answerable with data) and exactly one option has all three"
+  ],
+  "misconceptions": [
+   "asks for a count or fact that can be looked up",
+   "asks about one person",
+   "asks for an opinion"
+  ]
+ },
+ {
+  "id": "st_question_data_match",
+  "topic": "1.10",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the variable names in each option are matched mechanically against the table and exactly one option uses only recorded variables and an association question"
+  ],
+  "misconceptions": [
+   "needs a variable that was not recorded",
+   "asks a cause-and-effect question of survey data",
+   "asks for a list of individual values"
+  ]
+ },
+ {
+  "id": "st_hypotheses_setup",
+  "topic": "3.5",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option is built from a table of direction, parameter symbol and role of the equality, and only one row matches the scenario's claim and suspicion"
+  ],
+  "misconceptions": [
+   "uses an alternative in the wrong direction",
+   "writes hypotheses about a sample statistic",
+   "swaps the roles of the two hypotheses"
+  ]
+ },
+ {
+  "id": "st_method_choice_means",
+  "topic": "4.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a feature table (variable type, sample count, pairing, goal) is matched against each procedure and exactly one procedure matches the scenario"
+  ],
+  "misconceptions": [
+   "mixes up proportions and means",
+   "uses the wrong number of samples or ignores pairing",
+   "uses a test when an interval is needed or the reverse"
+  ]
+ },
+ {
+  "id": "st_method_choice_cat",
+  "topic": "3.14",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a feature table (variable type, sample count, pairing, goal) is matched against each procedure and exactly one procedure matches the scenario"
+  ],
+  "misconceptions": [
+   "mixes up proportions and means",
+   "uses the wrong number of samples or ignores pairing",
+   "uses a test when an interval is needed or the reverse"
+  ]
+ },
+ {
+  "id": "st_type_errors",
+  "topic": "3.8",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the four options are the four cells of the truth-by-decision table; exactly one cell matches the requested error type"
+  ],
+  "misconceptions": [
+   "swaps Type I and Type II",
+   "calls a correct decision an error",
+   "calls the other correct decision an error"
+  ]
+ },
+ {
+  "id": "st_sampling_method",
+  "topic": "1.11",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a table of methods and defining properties is used and exactly one method has the property required by the stated goal"
+  ],
+  "misconceptions": [
+   "names another random method",
+   "names a different random method",
+   "treats a convenience sample as random"
+  ]
+ },
+ {
+  "id": "st_conditions_prop",
+  "topic": "3.7",
+  "skill": "4.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each condition is evaluated separately in code and exactly one statement agrees with all three evaluations"
+  ],
+  "misconceptions": [
+   "says conditions are met when one fails",
+   "claims random fails",
+   "claims large counts fails"
+  ]
+ },
+ {
+  "id": "st_conditions_t",
+  "topic": "4.2",
+  "skill": "4.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the sample is simulated and the skewness, interquartile outlier count and sample size are computed independently of the plotted counts; the case is accepted only if the rule agrees with the planned case"
+  ],
+  "misconceptions": [
+   "rejects a small symmetric sample",
+   "applies the Central Limit Theorem to a small sample",
+   "cites an unknown sigma as the problem"
+  ]
+ },
+ {
+  "id": "st_conditions_two_t",
+  "topic": "4.7",
+  "skill": "4.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the outlier rule is applied again to the plotted five-number summaries, and the decision rule is evaluated separately from the planned case"
+  ],
+  "misconceptions": [
+   "treats unequal sample sizes as a problem",
+   "rejects every small sample regardless of the graphs",
+   "believes the boxplot cannot show a problem"
+  ]
+ },
+ {
+  "id": "st_two_prop_ci_claim",
+  "topic": "3.11",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the interval is recomputed from counts with z* found by bisection on the normal cdf and the claim is derived from the sign pattern of the endpoints"
+  ],
+  "misconceptions": [
+   "treats inclusion of zero as proof of no difference",
+   "reverses the direction of the difference",
+   "gives a probability interpretation of the confidence level"
+  ]
+ },
+ {
+  "id": "st_regression_residual_output",
+  "topic": "5.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the residual is recomputed from the coefficients and checked against the side of the line (above or below) on which the observed point lies"
+  ],
+  "misconceptions": [
+   "subtracts in the wrong order",
+   "swaps slope and intercept",
+   "leaves out the intercept"
+  ]
+ },
+ {
+  "id": "st_r2_interp",
+  "topic": "5.5",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "r squared is checked as the square of a correlation r whose sign matches the described direction, and the sentences are generated from a fixed set of interpretations"
+  ],
+  "misconceptions": [
+   "reads r squared as points on the line",
+   "reads r squared as a slope",
+   "confuses r squared with r"
+  ]
+ },
+ {
+  "id": "st_boxplot_compare",
+  "topic": "1.9",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "each statement is evaluated against the plotted five-number summaries and exactly one of the four chosen statements is true"
+  ],
+  "misconceptions": [
+   "reverses a comparison of medians",
+   "reverses a comparison of spreads",
+   "misreads a whisker end"
+  ]
+ },
+ {
+  "id": "st_independence_check",
+  "topic": "2.7",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the table is expanded into individual records and P(A given B) and P(A) are found by enumeration, independent of the cell-ratio calculation"
+  ],
+  "misconceptions": [
+   "thinks independence needs equal counts",
+   "confuses independence with mutual exclusivity",
+   "compares the wrong probabilities"
+  ]
+ },
+ {
+  "id": "st_set_binomial_q1",
+  "topic": "2.9",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the mean is recomputed as the sum of x times P(X = x) over the table and compared with n times p"
+  ],
+  "misconceptions": [
+   "uses n(1-p) instead of np",
+   "reports p instead of the mean",
+   "reports the most likely value as the mean"
+  ]
+ },
+ {
+  "id": "st_set_binomial_q2",
+  "topic": "2.10",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the table probabilities are summed from x = 2 up and compared with the complement, using binomial probabilities computed from the combinations formula and scipy"
+  ],
+  "misconceptions": [
+   "uses more than 2 instead of at least 2",
+   "uses exactly 2 instead of at least 2",
+   "subtracts only one value from 1"
+  ]
+ },
+ {
+  "id": "st_set_binomial_q3",
+  "topic": "2.8",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the sentences are generated from the definition of X and the table value; the event wording is checked against X = 0"
+  ],
+  "misconceptions": [
+   "confuses with the probability for one item",
+   "reads it as a guaranteed percentage",
+   "reverses the event"
+  ]
+ },
+ {
+  "id": "st_set_regression_q1",
+  "topic": "5.3",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the interpretation sentences are generated from the slope sign and units, and the slope is checked against the sign implied by the correlation"
+  ],
+  "misconceptions": [
+   "claims an exact change",
+   "reverses the variables",
+   "uses percent"
+  ]
+ },
+ {
+  "id": "st_set_regression_q2",
+  "topic": "5.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the prediction is recomputed from the printed coefficients and compared with the generating line"
+  ],
+  "misconceptions": [
+   "leaves out the intercept",
+   "swaps slope and intercept",
+   "adds instead of multiplies"
+  ]
+ },
+ {
+  "id": "st_set_regression_q3",
+  "topic": "5.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "r is recomputed as the square root of the printed R-Sq with the slope's sign and rounded to two decimals; options are at least 0.04 apart"
+  ],
+  "misconceptions": [
+   "reports r squared",
+   "uses the wrong sign",
+   "divides r by two"
+  ]
  }
 ]

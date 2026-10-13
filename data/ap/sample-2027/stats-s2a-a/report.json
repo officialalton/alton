@@ -1,0 +1,40 @@
+{
+ "run": "stats-s2a-a",
+ "subject": "ap_statistics",
+ "generatedAt": "2026-10-13T04:44:59.404Z",
+ "totalCostUsd": 0.56,
+ "newSpendSinceBaseline": 0.64,
+ "cap": 0.75,
+ "calls": 45,
+ "candidates": 15,
+ "mcCandidates": 15,
+ "frqCandidates": 0,
+ "passedAll": 11,
+ "adopted": 11,
+ "mcAdopted": 11,
+ "frqAdopted": 0,
+ "reserve": 0,
+ "yield": 0.733,
+ "costPerAdopted": 0.051,
+ "callsPerAdopted": 4.1,
+ "duplicateRejected": 0,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 15
+ },
+ "rejectionReasons": {
+  "criterion_failed_distractor_explanation": 3,
+  "criterion_failed_scope_skill": 1,
+  "reference_pattern_mismatch": 2,
+  "criterion_failed_exam_suitability": 2,
+  "criterion_failed_key_scoring": 1,
+  "criterion_failed_stimulus_expression": 1
+ },
+ "unfilledCells": [
+  "ap_statistics-m04",
+  "ap_statistics-m05",
+  "ap_statistics-m08",
+  "ap_statistics-m14"
+ ]
+}

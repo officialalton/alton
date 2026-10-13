@@ -28,7 +28,7 @@ const psql = (sql: string) => execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP
 const q = (t: string) => `'${t.replace(/'/g, "''")}'`;
 const VIEWPORTS = [{ w: 390, h: 844, mobile: true }, { w: 1280, h: 800, mobile: false }];
 
-type Row = { set_item_id: string; section: string; position: number; problem_version_id: string; candidate_key: string; kind: "mc" | "frq_bundle"; ap_subject_code: string; payload: Record<string, unknown> };
+type Row = { set_item_id: string; section: string; position: number; problem_version_id: string; candidate_key: string; kind: "mc" | "frq_bundle"; ap_subject_code: string; payload: Record<string, unknown>; item_index?: number };
 
 async function login(page: Page, email: string) {
   await page.goto(`${BASE}/login`);
@@ -42,7 +42,9 @@ async function checkItem(page: Page, r: Row, shot: string): Promise<Record<Scree
   const root = page.locator('[data-testid="ap-exam-take"]');
   await root.waitFor({ state: "visible", timeout: 20_000 });
   const g = gateCandidate({ candidateKey: r.candidate_key, apSubjectCode: r.ap_subject_code, kind: r.kind, payload: r.payload as never });
-  const p = r.payload as { options?: unknown[]; parts?: unknown[]; explanation_en?: string };
+  // 공유 자료 세트(후보 1개 = 문제 3건): 선택지·해설은 payload.items[item_index] 에 있다.
+  const items = Array.isArray(r.payload.items) ? (r.payload.items as { options?: unknown[]; explanation_en?: string }[]) : null;
+  const p = (items ? { ...(items[r.item_index ?? 0] ?? {}), parts: undefined } : r.payload) as { options?: unknown[]; parts?: unknown[]; explanation_en?: string };
   const out = {} as Record<ScreenCheckName, ScreenCheck>;
   const m = await page.evaluate(({ expectFig }) => {
     const root = document.querySelector('[data-testid="ap-exam-take"]')!;
@@ -115,7 +117,7 @@ async function main() {
   const only = arg("only-sets", ""); // 디버그: 앞에서 N개 세트만
   const idx = arg("set-index", "");
   for (const setId of idx ? [state.sets[Number(idx)]] : only ? state.sets.slice(0, Number(only)) : state.sets) {
-    const rows = JSON.parse(psql(`select coalesce(json_agg(x order by x.ord), '[]') from (select i.section || ':' || i.position as ord, i.section, i.position, i.id as set_item_id, i.problem_version_id, c.candidate_key, c.kind, c.ap_subject_code, c.payload from mock_exam_set_items i join problems p on p.id = i.problem_id join ap_candidate_items c on c.candidate_key = p.ap_candidate_key where i.exam_set_id = ${q(setId)}) x;`)) as Row[];
+    const rows = JSON.parse(psql(`select coalesce(json_agg(x order by x.ord), '[]') from (select i.section || ':' || i.position as ord, i.section, i.position, i.id as set_item_id, i.problem_version_id, c.candidate_key, c.kind, c.ap_subject_code, c.payload, cp.item_index from mock_exam_set_items i join problems p on p.id = i.problem_id join ap_candidate_items c on c.candidate_key = p.ap_candidate_key join ap_candidate_problems cp on cp.problem_id = p.id where i.exam_set_id = ${q(setId)}) x;`)) as Row[];
     const tier = psql(`select access_tier from mock_exam_sets where id = ${q(setId)};`);
     const email = state.students[tier === "tutoring" ? "tutoring" : "free"];
     const sid = psql(`select id from auth.users where email = ${q(email)};`);
@@ -141,7 +143,7 @@ async function main() {
           try { await nav.nth(i).click({ timeout: 8000 }); await page.waitForTimeout(300); } catch (e) { navErr = (e as Error).message.replace(/\s+/g, " ").slice(0, 100); } // 학생이 문항 번호를 누를 수 없으면 그 자체가 실패
           const hash = itemContentHash(r.payload);
           const key0 = keysByHash.get(hash)?.[0] ?? r.candidate_key;
-          const shot = `${shotDir}/${key0.replace(/[^A-Za-z0-9_.-]/g, "_")}-${vp.w}x${vp.h}.jpg`;
+          const shot = `${shotDir}/${key0.replace(/[^A-Za-z0-9_.-]/g, "_")}${Array.isArray(r.payload.items) ? `-q${(r.item_index ?? 0) + 1}` : ""}-${vp.w}x${vp.h}.jpg`; // 공유 세트는 문항(q1~q3)마다 스크린샷
           let checks: Record<ScreenCheckName, ScreenCheck>;
           try { if (navErr) throw new Error(`cannot open question ${i + 1}: ${navErr}`); checks = await checkItem(page, r, shot); } catch (e) { checks = Object.fromEntries([...SCREEN_CHECKS, STIMULUS_CHECK].map((c) => [c, { result: "fail", note: `screen run error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 120)}` }])) as Record<ScreenCheckName, ScreenCheck>; }
           const bad = ([...SCREEN_CHECKS, STIMULUS_CHECK] as const).filter((c) => (checks as Record<string, ScreenCheck>)[c]?.result === "fail");

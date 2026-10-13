@@ -34,6 +34,8 @@ export const STOCK_BATCHES: StockBatch[] = [
   ...(["r3a", "r3b", "r3b2", "r3c", "r3c2"] as const).map((n): StockBatch => ({ id: `supp-${n}`, title: `예비 3차 ${n}`, itemsFile: `supp-${n}-items.json`, loadLabel: `supp-${n}-2026-10-12`, supplement: true, passKeysFile: `supp-${n}-pass-keys.json`, evidenceFile: "evidence-r3.json" })),
   // 2026-10-12 AP Statistics S1 파일럿(docs/ap/statistics-pilot-report.md): 원형 20개 × 1(L 10·M 6·H 4), 세 런(stats-s1-l/m/h-final)이 한 증거 파일을 공유한다.
   { id: "stats-s1", title: "AP Statistics 파일럿 S1 (원형 20)", itemsFile: "stats-s1-items.json", loadLabel: "stats-s1-2026-10-12", supplement: true, passKeysFile: "stats-s1-pass-keys.json", evidenceFile: "evidence-stats-s1.json" },
+  // 2026-10-12 AP Statistics S2-a(docs/ap/statistics-s2a-report.md): 단독 15 + 공유 자료 세트 2(3문항씩) + FRQ 2 후보, 세 런(stats-s2a-a/b/c)이 한 증거 파일을 공유한다.
+  { id: "stats-s2a", title: "AP Statistics S2-a (단독 15 + 공유 세트 2 + FRQ 2)", itemsFile: "stats-s2a-items.json", loadLabel: "stats-s2a-2026-10-12", supplement: true, passKeysFile: "stats-s2a-pass-keys.json", evidenceFile: "evidence-stats-s2a.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 

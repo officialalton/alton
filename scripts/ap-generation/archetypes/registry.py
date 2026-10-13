@@ -32,6 +32,8 @@ for _m in _ST:
         if _n.startswith("STAGE_"):
             STATS_STAGES[_m.__name__.rsplit("_", 1)[0] + "_" + _n[6:].lower()] = list(getattr(_m, _n))  # stats_s1_l.STAGE_L -> stats_s1_l
 STATS_STAGES["stats_s1_all"] = STATS_STAGES.get("stats_s1_l", []) + STATS_STAGES.get("stats_s1_m", []) + STATS_STAGES.get("stats_s1_h", [])  # 위험 L→M→H 순서
+STATS_STAGES["stats_s2a_all"] = STATS_STAGES.get("stats_s2a_singles", []) + STATS_STAGES.get("stats_s2a_sets", [])
+STATS_STAGES["stats_all"] = STATS_STAGES["stats_s1_all"] + STATS_STAGES.get("stats_s2a_singles", []) + STATS_STAGES.get("stats_s2a_sets", [])  # 가이드 JSON(stats-archetypes.json)의 원천 순서
 GRAPH = {n: (getattr(m, n), "0") for m in GRAPH_MODS for n in dir(m) if n.startswith(("g_", "c_")) and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
 MC.update(GRAPH)
 GRAPH_STAGES = {}  # 단계별 목록(graph_s1_ab, graph_s1_bc …): calc_graph_stages.py 가 채운다
@@ -41,6 +43,7 @@ except ImportError:
     pass
 FRQ ={"frq_table_values": _sf.frq_table_values, "frq_function_analysis": _sf.frq_function_analysis, "frq_rate_in_out": _sf.frq_rate_in_out, "frq_model_analysis_calc": _sf2.frq_model_analysis_calc, "frq_piecewise_diff": _sf2.frq_piecewise_diff, "frq_bc_taylor_diffeq": _sf.frq_bc_taylor_diffeq, "frq_bc_improper_parts": _sf.frq_bc_improper_parts, "frq_series": bc.frq_series, "frq_parametric": bc.frq_parametric, "frq_euler_logistic": tf.frq_euler_logistic, "frq_polar_region": _gfp.frq_polar_region, "frq_table_rate": cf.frq_table_rate, "frq_fprime_graph": cf.frq_fprime_graph, "frq_diffeq": cf.frq_diffeq, "frq_area_volume": cf.frq_area_volume, "frq_bio_investigation": bf.frq_bio_investigation, "frq_bio_data_short": bf.frq_bio_data_short, "frq_particle_motion": rf.frq_particle_motion, "frq_related_rates": rf.frq_related_rates, "frq_implicit_diff": rf.frq_implicit_diff, "frq_micro_monopoly": mf.frq_micro_monopoly, "frq_micro_game": mf.frq_micro_game}
 
+STATS_FRQ = {n: (getattr(m, n), "0") for m in _ST for n in dir(m) if n.startswith("stfrq_") and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}  # 통계 FRQ 원형(S2-a)
 for _m in _R3:  # R3 모듈: 단계 목록(STAGE_LISTS)과 frq_ 함수 자동 등록
     GRAPH_STAGES.update(getattr(_m, "STAGE_LISTS", {}))
     for _n in dir(_m):
@@ -51,7 +54,7 @@ def sig(p):
     return hashlib.sha1(json.dumps([p.get("stem"), [o["text"] for o in p.get("options", [])], p.get("stimulus")], sort_keys=True).encode()).hexdigest()[:12]
 
 def batch(name, n, seed0):
-    fn = (MC.get(name) or STATS.get(name) or (FRQ.get(name),))[0]  # 통계 원형은 MC 사전(칼큘러스 회귀 테스트 대상)에 넣지 않는다
+    fn = (MC.get(name) or STATS.get(name) or STATS_FRQ.get(name) or (FRQ.get(name),))[0]  # 통계 원형은 MC 사전(칼큘러스 회귀 테스트 대상)에 넣지 않는다
     out, seen, seed = [], set(), seed0
     while len(out) < n and seed < seed0 + 400:
         try:
@@ -71,7 +74,7 @@ if __name__ == "__main__":
         if which == "bc": print(json.dumps({"mc": list(BCMC), "frq": ["frq_series", "frq_parametric"]}))
         elif which == "bctopup": print(json.dumps({"mc": list(TOPUP), "frq": ["frq_euler_logistic"]}))
         elif which == "new": print(json.dumps({"mc": list(NEWMC), "frq": []}))
-        elif which.startswith("stats"): print(json.dumps({"mc": [n for n in STATS_STAGES.get(which, list(STATS)) if n in STATS], "frq": []}))  # 목록 순서 보존(위험 L→M→H)
+        elif which.startswith("stats"): print(json.dumps({"mc": [n for n in STATS_STAGES.get(which, list(STATS)) if n in STATS], "frq": [n for n in STATS_STAGES.get(which, []) if n in STATS_FRQ]}))  # 목록 순서 보존(위험 L→M→H)
         elif which.startswith(("graph", "supp")): print(json.dumps({"mc": sorted(GRAPH if which == "graph" else [n for n in GRAPH if n in GRAPH_STAGES.get(which, [])]), "frq": [n for n in FRQ if n in GRAPH_STAGES.get(which, [])]}))
         elif which == "reinforce": print(json.dumps({"mc": ["graph_fprime_extremum", "graph_accum_value"], "frq": ["frq_particle_motion", "frq_related_rates", "frq_implicit_diff"]}))
         elif which == "reinforce2": print(json.dumps({"mc": [], "frq": ["frq_particle_motion", "frq_implicit_diff"]}))
@@ -87,13 +90,14 @@ if __name__ == "__main__":
             b = p["blueprint"]
             out.append({"id": n, "topic": p["topic"], "skill": p["skill"], "calculator": p["calculator"], "stimulus": p["stimulus"]["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]], "bc": b["subject"] == "ap_calculus_bc"})
         print(json.dumps(out, indent=1))
-    elif cmd == "guide-stats":  # 통계 원형의 가이드 항목(JSON): lib/ap-generation/subjects/stats-archetypes.json 의 원천
+    elif cmd == "guide-stats":  # 통계 원형의 가이드 항목(JSON): lib/ap-generation/subjects/stats-archetypes.json 의 원천. 공유 세트는 문항(<id>_q1..q3)마다 한 항목.
         out = []
-        for n in STATS_STAGES.get("stats_s1_all", [k for k in STATS]):
+        for n in STATS_STAGES.get("stats_all", [k for k in STATS]):
             p = (batch(n, 1, 0) or [None])[0]
             if not p: raise SystemExit(f"no pack for {n}")
-            b = p["blueprint"]
-            out.append({"id": n, "topic": p["topic"], "skill": p["skill"], "calculator": p["calculator"], "stimulus": p["stimulus"]["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]]})
+            for q in (p["items"] if "items" in p else [p]):
+                b = q["blueprint"]
+                out.append({"id": q["archetype"], "topic": q["topic"], "skill": q["skill"], "calculator": q["calculator"] if "calculator" in q else p["calculator"], "stimulus": (q.get("stimulus") or p["stimulus"])["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]]})
         print(json.dumps(out, indent=1))
     elif cmd == "all":print(json.dumps({n: batch(n, int(sys.argv[2]), 0) for n in list(MC) + list(FRQ)}))
     elif cmd == "batch": print(json.dumps(batch(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 0)))

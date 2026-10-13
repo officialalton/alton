@@ -1,0 +1,892 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.9",
+  "unitCode": "2",
+  "skillPrimary": "3.D",
+  "structure": "shared_set",
+  "calculator": "allowed",
+  "archetype": "st_set_binomial_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; set_item_1:criterion_failed_stimulus_expression; set_item_1:criterion_failed_distractor_explanation; set_item_2:criterion_failed_scope_skill; set_item_2:reference_pattern_mismatch; criterion_failed_scope_skill; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Direct application of the expected value formula to a given table of a discrete random variable; the alternative shortcut np = 5(0.4) = 2 also works. Single procedure, no interpretation or condition checking. Distractors reflect common errors (unweighted mean of x-values, using p). Arithmetic is brief with 6 products and values given to 4 decimals.",
+  "payload": {
+   "archetype": "st_set_binomial",
+   "topic": "2.9",
+   "skill": "3.D",
+   "calculator": "allowed",
+   "set_intro": "Questions refer to the following information. In a certain process, a clinic phones a random sample of $5$ patients from a large list on which $40\\%$ of the patients missed their last appointment. Let $X$ be the number of patients in the sample who missed an appointment. The probability distribution of $X$ is shown in the table.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Probability distribution of X, the number of patients in the sample who missed an appointment",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "x",
+       "P(X = x)"
+      ],
+      "rows": [
+       [
+        "0",
+        "0.0778"
+       ],
+       [
+        "1",
+        "0.2592"
+       ],
+       [
+        "2",
+        "0.3456"
+       ],
+       [
+        "3",
+        "0.2304"
+       ],
+       [
+        "4",
+        "0.0768"
+       ],
+       [
+        "5",
+        "0.0102"
+       ]
+      ]
+     },
+     "title": "Probability distribution of X"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_binomial_q1",
+     "topic": "2.9",
+     "skill": "3.D",
+     "stem": "What is the mean (expected value) of $X$? Round to two decimal places.",
+     "options": [
+      {
+       "text": "$2.50$",
+       "why": "Uses $n/2$, as if each outcome had probability $0.5$.",
+       "value": "2.5000000"
+      },
+      {
+       "text": "$2.00$",
+       "why": "The mean of a binomial random variable is $np = 5(0.4) = 2$; weighting each value of $X$ by its probability in the table gives the same value.",
+       "value": "2.0000000"
+      },
+      {
+       "text": "$0.40$",
+       "why": "Reports the probability of one outcome instead of the mean of $X$.",
+       "value": "0.40000000"
+      },
+      {
+       "text": "$3.00$",
+       "why": "Uses $n(1-p)$, the expected number of non-defective outcomes, instead of $np$.",
+       "value": "3.0000000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $2.00$. The mean of a binomial random variable is $np = 5(0.4) = 2$; weighting each value of $X$ by its probability in the table gives the same value.\n$2.50$ is incorrect: Uses $n/2$, as if each outcome had probability $0.5$.\n$0.40$ is incorrect: Reports the probability of one outcome instead of the mean of $X$.\n$3.00$ is incorrect: Uses $n(1-p)$, the expected number of non-defective outcomes, instead of $np$.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_binomial_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the mean of a random variable from its probability distribution",
+      "topic": "2.9",
+      "skill": "3.D",
+      "student_thinking": [
+       "Recognize that the mean of X weights each value by its probability, or equals np for a binomial random variable",
+       "Distinguish the mean from the most likely value and from the expected number of the other outcome"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the mean of a binomial random variable is n times p",
+        "evidence": "the table gives the distribution and the stem gives n and the percent of defective outcomes"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "probability distribution"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "expected_failures",
+        "description": "uses n(1-p) instead of np"
+       },
+       {
+        "id": "probability_not_mean",
+        "description": "reports p instead of the mean"
+       },
+       {
+        "id": "mode_not_mean",
+        "description": "reports the most likely value as the mean"
+       }
+      ],
+      "verification": {
+       "independent_path": "the mean is recomputed as the sum of x times P(X = x) over the table and compared with n times p",
+       "method": "table expectation vs np"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_binomial_q2",
+     "topic": "2.10",
+     "skill": "3.C",
+     "stem": "What is the probability that at least $2$ of the patients in the sample missed an appointment? Use the table and round to three decimal places.",
+     "options": [
+      {
+       "text": "$0.741$",
+       "why": "Subtracts only $P(X=1)$ from $1$, leaving out the probability that $X=0$ from the removed values.",
+       "value": "0.74100000"
+      },
+      {
+       "text": "$0.317$",
+       "why": "Finds $P(X > 2)$, leaving out the probability that $X = 2$.",
+       "value": "0.31700000"
+      },
+      {
+       "text": "$0.663$",
+       "why": "$P(X \\ge 2) = 1 - P(X=0) - P(X=1) = 1 - 0.0778 - 0.2592 \\approx 0.663$, which equals the sum of the table probabilities from $x=2$ on.",
+       "value": "0.66300000"
+      },
+      {
+       "text": "$0.346$",
+       "why": "Finds $P(X = 2)$ only, instead of the probability of $2$ or more.",
+       "value": "0.34600000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $0.663$. $P(X \\ge 2) = 1 - P(X=0) - P(X=1) = 1 - 0.0778 - 0.2592 \\approx 0.663$, which equals the sum of the table probabilities from $x=2$ on.\n$0.741$ is incorrect: Subtracts only $P(X=1)$ from $1$, leaving out the probability that $X=0$ from the removed values.\n$0.317$ is incorrect: Finds $P(X > 2)$, leaving out the probability that $X = 2$.\n$0.346$ is incorrect: Finds $P(X = 2)$ only, instead of the probability of $2$ or more.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_binomial_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find an at-least probability from a probability distribution table",
+      "topic": "2.10",
+      "skill": "3.C",
+      "student_thinking": [
+       "Translate at least 2 into the values 2 and above of X",
+       "Add those probabilities or subtract the probabilities of the values below 2 from 1"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "P(X at least 2) equals one minus the probabilities of 0 and 1",
+        "evidence": "the table lists the probability of every value of X"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "probability distribution"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "excludes_boundary",
+        "description": "uses more than 2 instead of at least 2"
+       },
+       {
+        "id": "single_value",
+        "description": "uses exactly 2 instead of at least 2"
+       },
+       {
+        "id": "partial_complement",
+        "description": "subtracts only one value from 1"
+       }
+      ],
+      "verification": {
+       "independent_path": "the table probabilities are summed from x = 2 up and compared with the complement, using binomial probabilities computed from the combinations formula and scipy",
+       "method": "direct sum vs complement"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_binomial_q3",
+     "topic": "2.8",
+     "skill": "4.D",
+     "stem": "Which of the following is the correct interpretation of $P(X=0)$ in this context?",
+     "options": [
+      {
+       "text": "In about $8\\%$ of all such random samples of $5$ patients, none of the patients would have missed an appointment",
+       "why": "$P(X=0) \\approx 0.0778$ is the long-run proportion of random samples of $5$ patients in which none of the patients missed an appointment.",
+       "value": null
+      },
+      {
+       "text": "There is a $8\\%$ chance that any one of the patients in a sample missed an appointment",
+       "why": "Confuses $P(X=0)$ with the probability for one individual item; the probability for one patient is given in the scenario.",
+       "value": null
+      },
+      {
+       "text": "Exactly $8\\%$ of the patients in every sample of $5$ missed an appointment",
+       "why": "Reads a probability as a guaranteed percentage in every sample.",
+       "value": null
+      },
+      {
+       "text": "In about $8\\%$ of all such samples, all of the patients would have missed an appointment",
+       "why": "Reverses the event: $X=0$ means none are of the stated kind, not all.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is In about $8\\%$ of all such random samples of $5$ patients, none of the patients would have missed an appointment. $P(X=0) \\approx 0.0778$ is the long-run proportion of random samples of $5$ patients in which none of the patients missed an appointment.\nThere is a $8\\%$ chance that any one of the patients in a sample missed an appointment is incorrect: Confuses $P(X=0)$ with the probability for one individual item; the probability for one patient is given in the scenario.\nExactly $8\\%$ of the patients in every sample of $5$ missed an appointment is incorrect: Reads a probability as a guaranteed percentage in every sample.\nIn about $8\\%$ of all such samples, all of the patients would have missed an appointment is incorrect: Reverses the event: $X=0$ means none are of the stated kind, not all.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_binomial_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Interpret a probability from a distribution in context",
+      "topic": "2.8",
+      "skill": "4.D",
+      "student_thinking": [
+       "Read P(X = 0) from the table and recall what the event X = 0 means in words",
+       "Interpret a probability as a long-run proportion of repeated random samples"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "a probability from a distribution describes the long-run proportion of samples with that outcome",
+        "evidence": "the table gives P(X = 0) and the scenario defines X"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "probability distribution"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "probability_for_one_item",
+        "description": "confuses with the probability for one item"
+       },
+       {
+        "id": "guaranteed_percentage",
+        "description": "reads it as a guaranteed percentage"
+       },
+       {
+        "id": "reversed_event",
+        "description": "reverses the event"
+       }
+      ],
+      "verification": {
+       "independent_path": "the sentences are generated from the definition of X and the table value; the event wording is checked against X = 0",
+       "method": "definition check"
+      },
+      "judgment_demand": [
+       "interpretation"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 250,
+   "facts": [
+    "n=5",
+    "p=0.4",
+    "X~Bin"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_binomial_q1",
+   "facts": [
+    "n=5",
+    "p=0.4",
+    "X~Bin"
+   ],
+   "seed": 8900
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Mean of a discrete/binomial random variable from a table; fits 2.9 / 3.D."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "2.00 is unique; table expectation is 1.9998, which rounds to 2.00. Rounding is stated."
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": "Table data are complete, but the stem opens with the stray 'Questions refer to the following information' line, which is odd for a standalone item."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "The 3.00 explanation says 'non-defective outcomes', context that does not match the clinic/missed-appointment scenario. The 2.50 and 0.40 distractors are weak but distinct."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 80 seconds, low reading and calculation load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct and the item is in scope. It fails on wording and explanation: the stem has a stray multi-question lead-in, and the 3.00 explanation uses 'non-defective' language that doesn't fit the missed-appointment context. These are minor and fixable."
+   },
+   {
+    "scope_skill": {
+     "pass": false,
+     "notes": "Labeled 2.10 Binomial Distribution, but the full probability table is provided; the task is just summing or complementing table entries (discrete random variable skill). No binomial setup, conditions, or calculator binomial function is needed, so the dominant demand is not the target topic."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "0.3456+0.2304+0.0768+0.0102=0.663; the key is unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table data are complete and sum to 1; rounding is stated. The stem opening 'Questions refer to the following information' is a leftover from a set format for a single item, which is minor."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The three distractors (1-P(1), P(X>2), P(X=2)) are distinct, realistic errors, and the explanation addresses each."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, with a low reading load; the calculator is not really needed, but this is harmless."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The key and distractors are sound, but the item does not assess the binomial distribution: the table is given, so it reduces to reading a discrete probability distribution. It fails scope/skill fit for topic 2.10 and should be revised so the student must use binomial structure (identify n and p, use binompdf/binomcdf)."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 60-85 seconds, needs no calculation, and has a light reading load.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean interpretation item with a unique key and three distinct misinterpretation distractors. It is in scope and suitable for the exam. Only minor wording nits (the preamble, \"a 8%\")."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Direct application of the expected value formula to a given table of a discrete random variable; the alternative shortcut np = 5(0.4) = 2 also works. Single procedure, no interpretation or condition checking. Distractors reflect common errors (unweighted mean of x-values, using p). Arithmetic is brief with 6 products and values given to 4 decimals.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step table lookup: P(X>=2) = 1 - P(X<=1) = 1 - 0.3370 = 0.663, or sum the upper four entries. Distractors reflect common errors (P(X=2), wrong complement). Minimal reading and arithmetic; no binomial computation required since the distribution is given.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step interpretation of one table value as a long-run relative frequency, choosing among clearly distinct misinterpretations (any one patient, exact percent in every sample, all missed). No computation, minimal reading, one representation (table). Core concept check for 2.8 rather than a multi-step mock-level item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "shared_set",
+  "calculator": "allowed",
+  "archetype": "st_set_regression_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "This is a standard slope interpretation read directly from computer output. The student only has to find the Age coefficient and pick the option that says \"predicted\" and \"about\" rather than \"exactly\". The distractors are the usual named misinterpretations: a deterministic claim, reversed variables, and percent versus units. It takes one reasoning step, with no calculation and little reading.",
+  "payload": {
+   "archetype": "st_set_regression",
+   "topic": "5.3",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "set_intro": "Questions refer to the following information. The relationship between the age of a used car, in years, and its selling price, in thousands of dollars, is described by a least-squares regression line. Computer output for the regression is shown.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Computer output for a least-squares regression",
+    "data": {
+     "chart": "output",
+     "output": {
+      "title": "Regression Analysis: Price versus Age",
+      "sections": [
+       {
+        "columns": [
+         "Predictor",
+         "Coef",
+         "SE Coef",
+         "T",
+         "P"
+        ],
+        "rows": [
+         [
+          "Constant",
+          "24.30",
+          "1.073",
+          "22.65",
+          "0.000"
+         ],
+         [
+          "Age",
+          "-1.76",
+          "0.208",
+          "-8.46",
+          "0.000"
+         ]
+        ]
+       },
+       {
+        "columns": [
+         "S",
+         "R-Sq"
+        ],
+        "rows": [
+         [
+          "2.15",
+          "81.0%"
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_regression_q1",
+     "topic": "5.3",
+     "skill": "4.D",
+     "stem": "Which of the following is the correct interpretation of the slope of the regression line?",
+     "options": [
+      {
+       "text": "For each additional year of age, the selling price decreases by exactly $1.76$ thousand dollars",
+       "why": "Claims an exact change for every individual, but the slope describes the predicted change on average.",
+       "value": null
+      },
+      {
+       "text": "For each additional year of age, the predicted selling price decreases by about $1.76$ thousand dollars",
+       "why": "The slope is $-1.76$, so each one-year increase in age goes with a predicted change of $-1.76$ thousand dollars in selling price.",
+       "value": null
+      },
+      {
+       "text": "For each additional $1.76$ thousand dollars of selling price, the predicted age decreases by about $1$ year",
+       "why": "Reverses the roles of the explanatory and the response variables.",
+       "value": null
+      },
+      {
+       "text": "For each additional year of age, the predicted selling price decreases by about $1.76\\%$",
+       "why": "Treats the slope as a percent change instead of a change in the units of the response.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is For each additional year of age, the predicted selling price decreases by about $1.76$ thousand dollars. The slope is $-1.76$, so each one-year increase in age goes with a predicted change of $-1.76$ thousand dollars in selling price.\nFor each additional year of age, the selling price decreases by exactly $1.76$ thousand dollars is incorrect: Claims an exact change for every individual, but the slope describes the predicted change on average.\nFor each additional $1.76$ thousand dollars of selling price, the predicted age decreases by about $1$ year is incorrect: Reverses the roles of the explanatory and the response variables.\nFor each additional year of age, the predicted selling price decreases by about $1.76\\%$ is incorrect: Treats the slope as a percent change instead of a change in the units of the response.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_regression_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Interpret the slope of a least-squares line in context",
+      "topic": "5.3",
+      "skill": "4.D",
+      "student_thinking": [
+       "Read the slope from the Coef column next to the explanatory variable",
+       "Describe the predicted change in the response for a one-unit increase in the explanatory variable, in context and with units"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the slope is the predicted change in y for a one-unit increase in x",
+        "evidence": "the output gives the slope in the Coef column and the stem names both variables and their units"
+       }
+      ],
+      "material": {
+       "type": "computer_output",
+       "must_include": [
+        "Coef column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "exact_change",
+        "description": "claims an exact change"
+       },
+       {
+        "id": "roles_reversed",
+        "description": "reverses the variables"
+       },
+       {
+        "id": "percent_change",
+        "description": "uses percent"
+       }
+      ],
+      "verification": {
+       "independent_path": "the interpretation sentences are generated from the slope sign and units, and the slope is checked against the sign implied by the correlation",
+       "method": "template and sign check"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_regression_q2",
+     "topic": "5.3",
+     "skill": "3.B",
+     "stem": "What is the predicted selling price when age is $7$? Round to one decimal place.",
+     "options": [
+      {
+       "text": "$12.0$",
+       "why": "The predicted value is $\\hat y = 24.3 + (-1.76)(7) \\approx 12.0$.",
+       "value": "12.000000"
+      },
+      {
+       "text": "$-12.3$",
+       "why": "Leaves out the intercept and predicts with the slope times $x$ alone.",
+       "value": "-12.300000"
+      },
+      {
+       "text": "$22.5$",
+       "why": "Adds the slope to the intercept instead of multiplying the slope by $x$.",
+       "value": "22.500000"
+      },
+      {
+       "text": "$168.3$",
+       "why": "Uses the slope as the intercept and the intercept as the slope.",
+       "value": "168.30000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $12.0$. The predicted value is $\\hat y = 24.3 + (-1.76)(7) \\approx 12.0$.\n$-12.3$ is incorrect: Leaves out the intercept and predicts with the slope times $x$ alone.\n$22.5$ is incorrect: Adds the slope to the intercept instead of multiplying the slope by $x$.\n$168.3$ is incorrect: Uses the slope as the intercept and the intercept as the slope.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_regression_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Predict a response value from regression output",
+      "topic": "5.3",
+      "skill": "3.B",
+      "student_thinking": [
+       "Read the intercept and the slope from the Coef column",
+       "Substitute the x value into the line and round as stated"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the predicted value is intercept plus slope times x",
+        "evidence": "the output gives both coefficients and the stem gives x"
+       }
+      ],
+      "material": {
+       "type": "computer_output",
+       "must_include": [
+        "Coef column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "intercept_omitted",
+        "description": "leaves out the intercept"
+       },
+       {
+        "id": "coefficients_swapped",
+        "description": "swaps slope and intercept"
+       },
+       {
+        "id": "slope_added",
+        "description": "adds instead of multiplies"
+       }
+      ],
+      "verification": {
+       "independent_path": "the prediction is recomputed from the printed coefficients and compared with the generating line",
+       "method": "recomputation"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "calculated_value_decision"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_regression_q3",
+     "topic": "5.2",
+     "skill": "3.B",
+     "stem": "What is the correlation coefficient between the two variables? Round to two decimal places.",
+     "options": [
+      {
+       "text": "$-0.45$",
+       "why": "Divides $r$ by $2$, which has no basis in the output.",
+       "value": "-0.45000000"
+      },
+      {
+       "text": "$0.81$",
+       "why": "Reports $r^2$ as if it were the correlation $r$.",
+       "value": "0.81000000"
+      },
+      {
+       "text": "$-0.90$",
+       "why": "The correlation has the same sign as the slope, so $r = -\\sqrt{0.81} = -0.90$.",
+       "value": "-0.90000000"
+      },
+      {
+       "text": "$0.90$",
+       "why": "Uses the wrong sign: the sign of $r$ must match the sign of the slope.",
+       "value": "0.90000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $-0.90$. The correlation has the same sign as the slope, so $r = -\\sqrt{0.81} = -0.90$.\n$-0.45$ is incorrect: Divides $r$ by $2$, which has no basis in the output.\n$0.81$ is incorrect: Reports $r^2$ as if it were the correlation $r$.\n$0.90$ is incorrect: Uses the wrong sign: the sign of $r$ must match the sign of the slope.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_regression_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the correlation coefficient from R-squared and the sign of the slope",
+      "topic": "5.2",
+      "skill": "3.B",
+      "student_thinking": [
+       "Take the square root of the R-Sq value written as a proportion",
+       "Give r the same sign as the slope"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "r is the square root of r squared with the sign of the slope",
+        "evidence": "the output shows R-Sq and the slope"
+       }
+      ],
+      "material": {
+       "type": "computer_output",
+       "must_include": [
+        "R-Sq",
+        "Coef column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "r_squared_as_r",
+        "description": "reports r squared"
+       },
+       {
+        "id": "wrong_sign",
+        "description": "uses the wrong sign"
+       },
+       {
+        "id": "halved_r",
+        "description": "divides r by two"
+       }
+      ],
+      "verification": {
+       "independent_path": "r is recomputed as the square root of the printed R-Sq with the slope's sign and rounded to two decimals; options are at least 0.04 apart",
+       "method": "recomputation"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "calculated_value_decision"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 255,
+   "facts": [
+    "a=24.3",
+    "b=-1.76",
+    "r2=0.81",
+    "x0=7"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_regression_q1",
+   "facts": [
+    "a=24.3",
+    "b=-1.76",
+    "r2=0.81",
+    "x0=7"
+   ],
+   "seed": 8900
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Slope interpretation from computer output fits 5.3 / 4.D. T and P columns are present but unused."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "B is the unique correct interpretation: predicted change, units in thousand dollars, correct roles."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Output data is complete and the units are stated in the stem. The 'Questions refer to the following information' preamble is odd for a single item but harmless."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors encode distinct misconceptions (exact change, reversed roles, percent) and each is explained. Option A differs from the key only by 'exactly' and 'predicted', a mild cue."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-90 seconds, no calculation needed, typical of the AP exam."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean slope-interpretation question with a unique key, distinct misconception distractors and a complete output stimulus. Only minor cosmetic issues were found (unused inference columns, stem preamble), so it passes."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Predicting a response from regression output is the target of 5.3 / 3.B. The slope t-test columns are present in the output but are not used."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "24.30 - 1.76(7) = 11.98, which rounds to 12.0. The key is unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The output data is complete: it has a title, a Coef column, and the Constant and Age rows. The stem gives units and the rounding rule. The wording \"Questions refer to\" is slightly odd for a single question."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor matches a distinct named misconception (omitted intercept, added slope, swapped coefficients), and each computes to its stated value. The explanation covers every wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-80 seconds with minimal arithmetic. The calculator designation is consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean, standard prediction-from-computer-output item. The key is correct and unique, the distractors encode distinct misconceptions, and the stimulus is complete. Accept."
+   },
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item passes all five criteria. The key is -0.90, since r is the negative square root of 0.81 and the slope is negative. The output data is complete, the rounding is stated, and each distractor encodes a distinct misconception: reporting r-squared, using the wrong sign, or halving r. The task is short and typical of the AP exam.",
+    "scope_skill": {
+     "pass": true,
+     "notes": "Finding r from R-Sq and the sign of the slope is topic 5.2 and skill 3.B. No later-unit or deleted content is involved."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "The key is unique: -0.90. The slope Coef is -1.76 and R-Sq is 81.0%, so r = -sqrt(0.81) = -0.90."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The output has a title, Coef and R-Sq columns, and a stated rounding convention. The T and P columns are inference-for-slope output but are not used in the task. The stem begins with \"Questions refer to the following information,\" which is a minor oddity for a single question."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each wrong option has its own explanation. The 0.81 option reports r-squared as r, the 0.90 option uses the wrong sign, and the -0.45 option halves r. The three misconceptions are distinct and the options are parallel in form."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The task takes about 85 seconds, with low reading load and a calculator allowed."
+    }
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "This is a standard slope interpretation read directly from computer output. The student only has to find the Age coefficient and pick the option that says \"predicted\" and \"about\" rather than \"exactly\". The distractors are the usual named misinterpretations: a deterministic claim, reversed variables, and percent versus units. It takes one reasoning step, with no calculation and little reading.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 40
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step item: read the intercept (24.30) and slope (-1.76) from the computer output, form the line, and substitute x=7 to get 11.98, which rounds to 12.0. Distractors reflect common errors (slope term only, using x=1, wrong operation). Little concept depth and trivial arithmetic; no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read R-Sq from computer output, take the square root (0.81 -> 0.90), and use the sign of the slope to assign the sign of r. Distractors target common errors (r vs r^2, ignoring the sign). Concept depth is moderate, with minimal computation and reading. A typical AP exam-style item at the easier end of exam_prep.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ }
+]

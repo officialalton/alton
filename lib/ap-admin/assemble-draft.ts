@@ -4,6 +4,8 @@
 import { verifyAssignment, type SetResult, type Spec } from "../../scripts/ap-generation/exact-assign";
 import { loadPool, type Item } from "../../scripts/ap-generation/assign-pool";
 import { apSectionLayout } from "../ap-exam/layouts";
+import { planStatsDraftSet } from "./assemble-stats-draft";
+import type { StatsItem } from "../../scripts/ap-generation/stats-pool";
 
 export type SetKeys = { mcA: string[]; mcB: string[]; frqA: string[]; frqB: string[] };
 export const SECTION: Record<keyof SetKeys, string> = { mcA: "ap_mc_a", mcB: "ap_mc_b", frqA: "ap_frq_a", frqB: "ap_frq_b" };
@@ -39,7 +41,7 @@ export type DraftPlan = {
 };
 
 export function planDraftSet(o: {
-  setId: string; keys: SetKeys; hasVirtual: boolean; name?: string; pool: PoolRow[]; existingFullSets: FullSetUsage[]; publishedKeys: Set<string>; stock: Item[]; floor?: number;
+  setId: string; keys: SetKeys; hasVirtual: boolean; name?: string; pool: PoolRow[]; existingFullSets: FullSetUsage[]; publishedKeys: Set<string>; stock: Item[]; floor?: number; /** 통계 재고(테스트 주입용; 기본은 커밋된 재고 + 화면 증거). */ statsStock?: StatsItem[];
 }): DraftPlan {
   const problems: string[] = [];
   const subjectKnown = subjectOfSetIdOrNull(o.setId); const subject = subjectKnown ?? "unknown";
@@ -49,7 +51,10 @@ export function planDraftSet(o: {
   const composition = { mcA: g("mcA").length, mcB: g("mcB").length, frqA: g("frqA").length, frqB: g("frqB").length, mcTotal: g("mcA").length + g("mcB").length, frqTotal: g("frqA").length + g("frqB").length };
   if (!SET_ID_RE.test(o.setId)) problems.push(`세트 이름 형식 오류: ${o.setId}`);
   else if (o.setId === "AB1") problems.push("AB#1 은 게시 고정 세트라 저장하지 않습니다.");
-  if (subjectKnown === "ap_statistics") problems.push("통계 풀 세트 초안 조립은 아직 지원하지 않습니다(MC 42 = 단독 36 + 3문항 공유 세트 2개; 후속 작업 — 구성 규칙은 lib/ap-exam/full-set-rules.ts).");
+  if (subjectKnown === "ap_statistics" && SET_ID_RE.test(o.setId)) { // 통계: 공유 세트·FRQ 4유형 구조는 전용 계획기가 독립 검증한다
+    const sp = planStatsDraftSet({ setId: o.setId, keys: o.keys, hasVirtual: o.hasVirtual, name, pool: o.pool, existingFullSets: o.existingFullSets, subject, stock: o.statsStock });
+    return { ...sp, problems: [...problems, ...sp.problems], ok: problems.length === 0 && sp.ok };
+  }
   if (o.hasVirtual) problems.push("이 배정에는 가상 문항(재고에 없는 칸)이 있어 저장하지 않습니다.");
   for (const k of Object.keys(SECTION) as (keyof SetKeys)[]) if (g(k).length !== need[SECTION[k]]) problems.push(`공식 구성 불일치 ${SECTION[k]}: ${g(k).length}/${need[SECTION[k]]}`);
   const all = (Object.keys(SECTION) as (keyof SetKeys)[]).flatMap((k) => g(k).map((key) => ({ key, sec: k })));

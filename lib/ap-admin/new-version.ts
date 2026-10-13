@@ -7,7 +7,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { fullPracticeUnitBounds } from "../ap-exam/full-set-rules";
 import { checkNewVersionComposition, type NewVersionContext, type SlotItem } from "../mock-exam/new-version";
 
-export type SwapSpec = { section: string; position: number; addKey: string };
+export type SwapSpec = { section: string; position: number; addKey: string; /** 공유 자료 세트 교체에서 새 세트 안의 문항 순서(0부터). 단독 문항은 없음. */ addIndex?: number };
 export type PlanSwapInput = { section: string; position?: number; removeKey?: string; addKey: string };
 export type SwapPlanFile = { kind: "ap_new_version_swap_plan"; set: string; sourceSetName: string; sourceVersionNo?: number; swaps: PlanSwapInput[] };
 export type PlanListing = { file: string; set: string; sourceSetName: string; swapCount: number };
@@ -38,23 +38,32 @@ export function parseSwapPlan(raw: unknown): SwapPlanFile {
   return { kind: "ap_new_version_swap_plan", set: String(o.set ?? ""), sourceSetName: o.sourceSetName, sourceVersionNo: o.sourceVersionNo, swaps };
 }
 
-/** 계획의 removeKey/position 을 원본 세트의 실제 슬롯으로 해석한다. 키가 그 섹션에 없거나 position 과 키가 어긋나면 사유를 돌려준다. */
+/** 계획의 removeKey/position 을 원본 세트의 실제 슬롯으로 해석한다. 키가 그 섹션에 없거나 position 과 키가 어긋나면 사유를 돌려준다.
+ *  공유 자료 세트(같은 후보 키가 한 섹션의 여러 슬롯 — 통계 3문항 세트)는 세트 전체가 한 번에, 같은 교체 후보 하나로만 바뀐다: 세트의 한 문항만 가리켜도 세트 전체 슬롯으로 펼치고(addIndex 0..n-1), 다른 교체 후보로 나누면 거부한다. */
 export function resolveSwaps(inputs: PlanSwapInput[], slots: { section: string; position: number; candidateKey: string | null }[]): { swaps: (SwapSpec & { removeKey: string | null })[]; problems: string[] } {
   const problems: string[] = []; const swaps: (SwapSpec & { removeKey: string | null })[] = [];
+  const setGroups = new Map<string, string>(); // `${section}|${removeKey}` → addKey
   for (const s of inputs) {
     let slot = s.position !== undefined ? slots.find((x) => x.section === s.section && x.position === s.position) : undefined;
     if (s.removeKey) {
       const byKey = slots.find((x) => x.section === s.section && x.candidateKey === s.removeKey);
       if (!byKey) { problems.push(`제거할 문항 ${s.removeKey} 이(가) ${s.section} 섹션에 없습니다(이미 바뀌었거나 다른 버전).`); continue; }
-      if (slot && slot !== byKey) { problems.push(`${s.section} #${s.position} 의 현재 문항이 계획(${s.removeKey})과 다릅니다.`); continue; }
-      slot = byKey;
+      if (slot && slot.candidateKey !== s.removeKey) { problems.push(`${s.section} #${s.position} 의 현재 문항이 계획(${s.removeKey})과 다릅니다.`); continue; }
+      slot = slot ?? byKey;
     }
     if (!slot) { problems.push(`슬롯 ${s.section} #${s.position} 이(가) 없습니다.`); continue; }
+    const members = slot.candidateKey ? slots.filter((x) => x.section === slot!.section && x.candidateKey === slot!.candidateKey).sort((a, b) => a.position - b.position) : [slot];
+    if (members.length > 1) {
+      const gk = `${slot.section}|${slot.candidateKey}`; const prev = setGroups.get(gk);
+      if (prev !== undefined && prev !== s.addKey) { problems.push(`공유 자료 세트 ${slot.candidateKey} 를 서로 다른 문항으로 나눠 교체할 수 없습니다(세트 전체를 하나의 새 세트로).`); continue; }
+      if (prev === undefined) { setGroups.set(gk, s.addKey); members.forEach((m, j) => swaps.push({ section: m.section, position: m.position, addKey: s.addKey, removeKey: m.candidateKey, addIndex: j })); }
+      continue;
+    }
     swaps.push({ section: slot.section, position: slot.position, addKey: s.addKey, removeKey: slot.candidateKey });
   }
   const seen = new Set<string>();
   for (const s of swaps) { const k = `${s.section}:${s.position}`; if (seen.has(k)) problems.push(`슬롯 ${k} 을(를) 두 번 교체할 수 없습니다.`); seen.add(k); }
-  const adds = swaps.map((s) => s.addKey); if (new Set(adds).size !== adds.length) problems.push("같은 문항을 두 슬롯에 넣을 수 없습니다.");
+  const adds = swaps.map((s) => `${s.addKey}#${s.addIndex ?? 0}`); if (new Set(adds).size !== adds.length) problems.push("같은 문항을 두 슬롯에 넣을 수 없습니다.");
   return { swaps, problems };
 }
 
@@ -97,10 +106,8 @@ export async function buildNewVersionPreview(db: SupabaseClient, sourceSetId: st
   const slots = (srcItems ?? []).map((i) => ({ section: i.section as string, position: i.position as number, problemId: i.problem_id as string, candidateKey: keyOf(i.problems as never) }));
   const res = resolveSwaps(inputs, slots); issues.push(...res.problems);
 
-  // 공유 자료 세트(같은 후보 키가 여러 슬롯 — 통계 3문항 세트)는 이 화면의 키 단위 미리보기로 바꿀 수 없다(교체는 세트 단위로 서버 액션에서만; 후속 작업).
-  const keyCount = new Map<string, number>(); for (const sl of slots) if (sl.candidateKey) keyCount.set(sl.candidateKey, (keyCount.get(sl.candidateKey) ?? 0) + 1);
-  for (const r of res.swaps) if (r.removeKey && (keyCount.get(r.removeKey) ?? 0) > 1) issues.push(`공유 자료 세트 문항(${r.removeKey})은 이 화면에서 교체할 수 없습니다 — 세트 단위 교체는 후속 지원.`);
-  const addKeys = res.swaps.map((s) => s.addKey);
+  const addKeys = [...new Set(res.swaps.map((s) => s.addKey))];
+  const need = new Map<string, number>(); for (const r of res.swaps) need.set(r.addKey, (need.get(r.addKey) ?? 0) + 1);
   const allKeys = [...new Set([...slots.map((s) => s.candidateKey), ...addKeys].filter((k): k is string => !!k))];
   const cands = new Map<string, CandRow>();
   for (let i = 0; i < allKeys.length; i += 100) {
@@ -108,30 +115,34 @@ export async function buildNewVersionPreview(db: SupabaseClient, sourceSetId: st
     if (e) throw new Error(e.message);
     for (const c of (data ?? []) as CandRow[]) cands.set(c.candidate_key, c);
   }
-  const probByKey = new Map<string, string>();
+  const probsByKey = new Map<string, string[]>(); // 후보 키 → 문제 id(item_index 순; 공유 세트는 3건)
   const probMeta = new Map<string, { status: string | null; archived_at: string | null; published_version_id: string | null; usage_scope: string | null }>();
   if (addKeys.length) {
     const { data, error: e } = await db.from("problems").select("id, ap_candidate_key, status, archived_at, published_version_id, usage_scope").in("ap_candidate_key", addKeys);
     if (e) throw new Error(e.message);
-    const per = new Map<string, number>();
-    for (const p of data ?? []) { const k = p.ap_candidate_key as string; per.set(k, (per.get(k) ?? 0) + 1); probByKey.set(k, p.id as string); probMeta.set(k, p as never); }
-    for (const [k, n] of per) if (n !== 1) issues.push(`교체 문항 ${k} 은(는) 변환된 문제가 ${n}건이라 지원하지 않습니다(후보당 1건만).`);
+    const { data: ord, error: oe } = await db.from("ap_candidate_problems").select("candidate_key, item_index, problem_id").in("candidate_key", addKeys);
+    if (oe) throw new Error(oe.message);
+    const order = new Map((ord ?? []).map((x) => [x.problem_id as string, x.item_index as number]));
+    for (const p of data ?? []) { const k = p.ap_candidate_key as string; probsByKey.set(k, [...(probsByKey.get(k) ?? []), p.id as string]); probMeta.set(p.id as string, p as never); }
+    for (const ids of probsByKey.values()) ids.sort((a, b) => (order.get(a) ?? 0) - (order.get(b) ?? 0));
+    for (const k of addKeys) { const n = probsByKey.get(k)?.length ?? 0; if (n && n !== (need.get(k) ?? 1)) issues.push(`교체 문항 ${k} 은(는) 변환된 문제가 ${n}건인데 교체할 슬롯은 ${need.get(k) ?? 1}개입니다(공유 자료 세트는 같은 크기의 세트로만 교체).`); }
   }
   const brief = (key: string | null): Brief => { const c = key ? cands.get(key) : undefined; return { candidateKey: key, unit: c?.keyword_code?.split(".")[0] ?? null, calculator: c?.calculator ?? null, kind: c?.kind === "mc" ? "mc" : c?.kind ? "frq" : null, family: c?.item_family_id ?? null }; };
 
   // (2) DB RPC 가 거부할 조건 미리 점검
   for (const k of addKeys) {
-    const c = cands.get(k); const p = probMeta.get(k);
-    if (!c || !probByKey.has(k)) { issues.push(`교체 문항 ${k} 이(가) 문제은행으로 변환되지 않았습니다.`); continue; }
+    const c = cands.get(k); const ids = probsByKey.get(k) ?? [];
+    if (!c || !ids.length) { issues.push(`교체 문항 ${k} 이(가) 문제은행으로 변환되지 않았습니다.`); continue; }
     if (c.purpose !== "mock_exam" || !["review_env", "launch"].includes(c.release_tier ?? "") || c.review_env_ready !== true) issues.push(`교체 문항 ${k} 이(가) 검수 환경 준비(review_env_ready)·모의고사 용도가 아닙니다.`);
     if (c.is_current === false) issues.push(`교체 문항 ${k} 은(는) 현재 버전 후보가 아닙니다.`);
-    if (!p || p.status !== "confirmed" || p.archived_at || !p.published_version_id || !["mock_exam", "both"].includes(p.usage_scope ?? "")) issues.push(`교체 문항 ${k} 의 문제가 확정·공개된 모의고사 문항이 아닙니다.`);
+    for (const id of ids) { const p = probMeta.get(id); if (!p || p.status !== "confirmed" || p.archived_at || !p.published_version_id || !["mock_exam", "both"].includes(p.usage_scope ?? "")) { issues.push(`교체 문항 ${k} 의 문제가 확정·공개된 모의고사 문항이 아닙니다.`); break; } }
     if (c.ap_subject_code !== set.ap_subject && !(set.ap_subject === "ap_calculus_bc" && c.ap_subject_code === "ap_calculus_ab")) issues.push(`교체 문항 ${k} 은(는) 다른 AP 과목입니다.`);
   }
 
   // (1) TS 조립 규칙
   const sections = ((set.section_layout as { sections?: { key: string; calculator?: string }[] } | null)?.sections ?? []);
-  const pids = addKeys.map((k) => probByKey.get(k)).filter((x): x is string => !!x);
+  const probFor = (sw: { addKey: string; addIndex?: number }) => probsByKey.get(sw.addKey)?.[sw.addIndex ?? 0];
+  const pids = res.swaps.map((sw) => probFor(sw)).filter((x): x is string => !!x);
   let used = new Set<string>();
   if (pids.length) {
     const { data, error: e } = await db.from("mock_exam_set_items").select("problem_id, mock_exam_sets!inner(set_group_id, status, ap_label)").in("problem_id", pids).neq("mock_exam_sets.set_group_id", set.set_group_id).in("mock_exam_sets.status", ["draft", "published"]).eq("mock_exam_sets.ap_label", "full_practice");
@@ -143,9 +154,10 @@ export async function buildNewVersionPreview(db: SupabaseClient, sourceSetId: st
     apLabel: set.ap_label as NewVersionContext["apLabel"], sectionCalculator: Object.fromEntries(sections.map((x) => [x.key, x.calculator ?? "na"])),
     unitBounds: fullPracticeUnitBounds(set.ap_subject as string | null, set.ap_label as string | null),
     usedByOtherExams: used,
-    replacements: new Map(res.swaps.filter((s) => probByKey.has(s.addKey)).map((s) => { const sl = toSlot({ section: s.section, position: s.position, problemId: probByKey.get(s.addKey)!, candidateKey: s.addKey }); return [sl.problemId, { problemId: sl.problemId, candidateKey: sl.candidateKey, kind: sl.kind, unit: sl.unit, family: sl.family, calculator: sl.calculator }] as const; })),
+    setSizes: new Map([...probsByKey].filter(([, ids]) => ids.length > 1).map(([k, ids]) => [k, ids.length] as [string, number])),
+    replacements: new Map(res.swaps.filter((s) => probFor(s)).map((s) => { const sl = toSlot({ section: s.section, position: s.position, problemId: probFor(s)!, candidateKey: s.addKey }); return [sl.problemId, { problemId: sl.problemId, candidateKey: sl.candidateKey, kind: sl.kind, unit: sl.unit, family: sl.family, calculator: sl.calculator }] as const; })),
   };
-  const actionSwaps = res.swaps.filter((s) => probByKey.has(s.addKey)).map((s) => ({ section: s.section, position: s.position, problemId: probByKey.get(s.addKey)! }));
+  const actionSwaps = res.swaps.filter((s) => probFor(s)).map((s) => ({ section: s.section, position: s.position, problemId: probFor(s)! }));
   const before = slots.map(toSlot);
   const { items: afterItems, issues: tsIssues } = res.problems.length || actionSwaps.length !== res.swaps.length ? { items: before, issues: [] as string[] } : checkNewVersionComposition(before, actionSwaps, ctx);
   issues.push(...tsIssues);
@@ -159,7 +171,7 @@ export async function buildNewVersionPreview(db: SupabaseClient, sourceSetId: st
     ok: issues.length === 0, issues,
     source: { id: set.id as string, name: set.name as string, versionNo: set.version_no as number, status: set.status as string, accessTier: set.access_tier as string, apSubject: (set.ap_subject as string | null) ?? null, apLabel: (set.ap_label as string | null) ?? null },
     newVersionNo: ((maxV?.[0]?.version_no as number | undefined) ?? (set.version_no as number)) + 1,
-    swaps: res.swaps.map((s) => ({ section: s.section, position: s.position, removeKey: s.removeKey, addKey: s.addKey, problemId: probByKey.get(s.addKey) ?? null, before: brief(s.removeKey), after: brief(s.addKey) })),
+    swaps: res.swaps.map((s) => ({ section: s.section, position: s.position, removeKey: s.removeKey, addKey: s.addKey, problemId: probFor(s) ?? null, before: brief(s.removeKey), after: brief(s.addKey) })),
     before: summarize(before), after: summarize(afterItems),
     attempts: { total: (att ?? []).length, byStatus }, actionSwaps,
   };
