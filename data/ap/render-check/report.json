@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-13T01:51:39.446Z",
- "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json (1179행)",
+ "generatedAt": "2026-10-13T02:03:21.294Z",
+ "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (1187행)",
  "all": {
-  "total": 1179,
-  "pass": 700,
+  "total": 1187,
+  "pass": 701,
   "fail": 1,
-  "notApplicable": 478
+  "notApplicable": 485
  },
  "liveStates": {
-  "total": 695,
-  "pass": 349,
+  "total": 703,
+  "pass": 350,
   "fail": 0,
-  "notApplicable": 346
+  "notApplicable": 353
  },
  "byType": [
   {
@@ -86,8 +86,8 @@
   },
   {
    "type": "ap_table:given_info",
-   "total": 30,
-   "pass": 30,
+   "total": 31,
+   "pass": 31,
    "fail": 0,
    "notApplicable": 0
   },
@@ -121,18 +121,18 @@
   },
   {
    "type": "text",
-   "total": 97,
+   "total": 104,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 97
+   "notApplicable": 104
   }
  ],
  "bySubject": {
   "ap_calculus_ab": {
-   "total": 671,
-   "pass": 311,
+   "total": 679,
+   "pass": 312,
    "fail": 1,
-   "notApplicable": 359
+   "notApplicable": 366
   },
   "ap_biology": {
    "total": 200,
@@ -154,8 +154,8 @@
   }
  },
  "figureNeed": {
-  "required": 649,
-  "text_only": 478,
+  "required": 650,
+  "text_only": 485,
   "supporting": 52
  },
  "errorCodes": {
@@ -19823,6 +19823,118 @@
    "subject": "ap_calculus_ab",
    "kind": "frq_bundle",
    "validation": "rejected",
+   "stimKind": "text",
+   "renderType": "ap_table:given_info",
+   "need": "required",
+   "needReason": "본문에 없는 조건·식·수치를 자료 패널이 담고 있음",
+   "status": "pass",
+   "issues": [],
+   "alt": "Given information. Table with columns Item, Value and 2 rows."
+  },
+  {
+   "key": "supp-r3c2-ab-final:ap_calculus_ab-f01-k0",
+   "contentHash": "bef17933b49065d517a3c56c4753cf512678a0f7a7da39257660f26e17addcaf",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c2-ab-final:ap_calculus_ab-f02-k0",
+   "contentHash": "3746c986fb27f3ec0f3ebe3a907a91327b29ccb3c1468d37b24d79abf48dbe08",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c2-ab-final:ap_calculus_ab-f03-k0",
+   "contentHash": "586ce2091ef019d2fca3183d68341b77c7dd48218b063255e11485e0eaa10060",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c2-ab-final:ap_calculus_ab-f04-k0",
+   "contentHash": "0eb3cb830353f78c1d7ab6e921e6b37733943f3bcd1bf8079a733d0d99333670",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c2-ab-final:ap_calculus_ab-f05-k0",
+   "contentHash": "3241a2caf49bad3f4d336a0c69849776ef11ef2fb3274dc61db2ada14c05af14",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c2-ab-final:ap_calculus_ab-f06-k0",
+   "contentHash": "4f07bdeb361c017cff24f58ed10a42dfad3abe6bf410807f62591972d4646df9",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c2-ab-final:ap_calculus_ab-f07-k0",
+   "contentHash": "1d76934b7f7e0284da245f14ea38e69697eae96042870b89149a525930ad59c9",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "text",
+   "renderType": "text",
+   "need": "text_only",
+   "needReason": "텍스트 자료(식·조건)가 본문에 모두 있음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "supp-r3c2-ab-final:ap_calculus_ab-f08-k0",
+   "contentHash": "e5b55acf943cdee7a0990c7481b303675baea4de3078cb2b63d38e8ec21046b9",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
    "stimKind": "text",
    "renderType": "ap_table:given_info",
    "need": "required",
