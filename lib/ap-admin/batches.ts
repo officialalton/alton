@@ -52,6 +52,14 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "phys-s2", title: "AP Physics 1 phys-s2 (PH1·PH2 부족분: 단독·세트·FRQ)", itemsFile: "phys-s2-items.json", loadLabel: "phys-s2-2026-10-13", supplement: true, passKeysFile: "phys-s2-pass-keys.json", evidenceFile: "evidence-phys-s2.json" },
   // phys-s3: 스킬 범위 보강(2026-10-13) — 신규 원형 40(2.A 기호식 11·2.C 순위 10·2.D 예측 7·3.B 주장 7·3.C 자료 근거 5) x 후보 2 = 80, 런 phys-s3-a, 비용 $2.6406.
   { id: "phys-s3", title: "AP Physics 1 phys-s3 (스킬 범위 보강: 2.A·2.C·2.D·3.B·3.C 단독)", itemsFile: "phys-s3-items.json", loadLabel: "phys-s3-2026-10-13", supplement: true, passKeysFile: "phys-s3-pass-keys.json", evidenceFile: "evidence-phys-s3.json" },
+  // 2026-10-13 AP Chemistry(docs/ap/chemistry-groundwork.md): 파일럿 3 + chem-s2 부족분 4배치. 한 증거 파일(evidence-chem-s2.json)을 공유한다.
+  { id: "chem-p1a", title: "AP Chemistry P1-a v1 (MC 파일럿) (통과 15)", itemsFile: "chem-p1a-items.json", loadLabel: "chem-p1a-2026-10-13", supplement: true, passKeysFile: "chem-p1a-pass-keys.json", evidenceFile: "evidence-chem-s2.json" },
+  { id: "chem-p1a2", title: "AP Chemistry P1-a v2 (MC 재검증) (통과 32)", itemsFile: "chem-p1a2-items.json", loadLabel: "chem-p1a2-2026-10-13", supplement: true, passKeysFile: "chem-p1a2-pass-keys.json", evidenceFile: "evidence-chem-s2.json" },
+  { id: "chem-p1b", title: "AP Chemistry P1-b (FRQ 파일럿) (통과 1)", itemsFile: "chem-p1b-items.json", loadLabel: "chem-p1b-2026-10-13", supplement: true, passKeysFile: "chem-p1b-pass-keys.json", evidenceFile: "evidence-chem-s2.json" },
+  { id: "chem-s2f", title: "AP Chemistry chem-s2 FRQ (CH1·CH2 부족분) (통과 22)", itemsFile: "chem-s2f-items.json", loadLabel: "chem-s2f-2026-10-13", supplement: true, passKeysFile: "chem-s2f-pass-keys.json", evidenceFile: "evidence-chem-s2.json" },
+  { id: "chem-s2ma", title: "AP Chemistry chem-s2 MC-a (통과 54)", itemsFile: "chem-s2ma-items.json", loadLabel: "chem-s2ma-2026-10-13", supplement: true, passKeysFile: "chem-s2ma-pass-keys.json", evidenceFile: "evidence-chem-s2.json" },
+  { id: "chem-s2mb", title: "AP Chemistry chem-s2 MC-b (통과 38)", itemsFile: "chem-s2mb-items.json", loadLabel: "chem-s2mb-2026-10-13", supplement: true, passKeysFile: "chem-s2mb-pass-keys.json", evidenceFile: "evidence-chem-s2.json" },
+  { id: "chem-s2mc", title: "AP Chemistry chem-s2 MC-c (통과 17)", itemsFile: "chem-s2mc-items.json", loadLabel: "chem-s2mc-2026-10-13", supplement: true, passKeysFile: "chem-s2mc-pass-keys.json", evidenceFile: "evidence-chem-s2.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 

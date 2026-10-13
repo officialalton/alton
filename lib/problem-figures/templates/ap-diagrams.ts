@@ -1,6 +1,7 @@
 // AP Biology 분자 도식 3종 — 후보가 실제로 쓰는 것만(DNA 프로브 정렬, 복제 기포, 리보솜 A/P/E 자리). 엄격한 스펙으로 받아 직접 그린다.
 import { esc, f, FONT, labelWidth, type FigureIssue } from "./_layout";
 import { renderPhysSceneSpec, validatePhysScene, type PhysSceneSpec } from "./ap-phys-scene";
+import { renderChemSceneSpec, validateChemScene, type ChemSceneSpec } from "./ap-chem-scene";
 
 export type StrandPairSpec = {
   type: "ap_diagram"; variant: "strand_pair"; title?: string;
@@ -23,7 +24,7 @@ export type RibosomeSpec = {
   sites: { site: "E" | "P" | "A"; codonIndex: number; trna?: string }[];
   codonTable?: Record<string, string>;
 };
-export type ApDiagramSpec = StrandPairSpec | ReplicationBubbleSpec | RibosomeSpec | PhysSceneSpec;
+export type ApDiagramSpec = StrandPairSpec | ReplicationBubbleSpec | RibosomeSpec | PhysSceneSpec | ChemSceneSpec;
 
 const W = 520;
 const strOk = (v: unknown): v is string => typeof v === "string" && v.trim().length > 0;
@@ -51,6 +52,11 @@ export function validateApDiagram(s: Record<string, unknown>): { ok: true; spec:
     if (!v.ok) return { ok: false, error: `phys_scene: ${v.error}` };
     return { ok: true, spec: { type: "ap_diagram", variant: "phys_scene", title: typeof s.title === "string" ? s.title : undefined, scene: v.scene } };
   }
+  if (s.variant === "chem_pes" || s.variant === "chem_particles") {
+    const v = validateChemScene(s.variant, s.scene);
+    if (!v.ok) return { ok: false, error: `${s.variant}: ${v.error}` };
+    return { ok: true, spec: { type: "ap_diagram", variant: s.variant, title: typeof s.title === "string" ? s.title : undefined, scene: v.scene } as ChemSceneSpec };
+  }
   return { ok: false, error: `알 수 없는 ap_diagram variant: ${String(s.variant)}` };
 }
 
@@ -59,6 +65,7 @@ const T = (x: number, y: number, t: string, o: { anchor?: string; size?: number;
 
 export function renderApDiagram(spec: ApDiagramSpec): { svg: string; alt: string; issues: FigureIssue[] } {
   if (spec.variant === "phys_scene") return renderPhysSceneSpec(spec);
+  if (spec.variant === "chem_pes" || spec.variant === "chem_particles") return renderChemSceneSpec(spec);
   const issues: FigureIssue[] = [];
   const o: string[] = [];
   let H = 200; let alt = "";

@@ -10,6 +10,8 @@ import chem_p0_a as _A
 import chem_p0_e as _E
 import chem_p0_b as _B
 
+_C_fmass = fmass  # 분자식 -> {원소: 개수}(chem_common)
+
 REF_NOTE = "ALTON reference answer for self-review — not official AP scoring"
 
 
@@ -94,22 +96,22 @@ def chf_long_thermo(rng):
     agree(dG, float(sp.nsimplify(dH) - sp.nsimplify(T) * sp.nsimplify(dS) / 1000), 1e-9, "dG")
     agree(K, float(sp.exp(-sp.nsimplify(dG) * 1000 / (sp.nsimplify(R_J) * sp.nsimplify(T)))), 1e-9, "K")
     fav = "above" if dS > 0 else "below"
-    stim = {"kind": "text", "description": f"For a reaction at ${T:g}\\text{{ K}}$: $\\Delta H^\\circ={dH:+g}\\text{{ kJ/mol}}_{{rxn}}$ and $\\Delta S^\\circ={dS:+g}\\text{{ J/(mol}}_{{rxn}}\\cdot\\text{{K)}}$ (both independent of temperature). Part (d) concerns a different system: a galvanic cell with {_E.k_fmt(a)} and {_E.k_fmt(c)} half-cells, with standard reduction potentials ${_E.REDP[a][0]:+.2f}\\text{{ V}}$ and ${_E.REDP[c][0]:+.2f}\\text{{ V}}$ respectively.", "data": {}}
+    stim = {"kind": "text", "description": f"For a reaction at ${T:g}\\text{{ K}}$: $\\Delta H^\\circ={dH:+g}\\text{{ kJ/mol}}_{{rxn}}$ and $\\Delta S^\\circ={dS:+g}\\text{{ J/(mol}}_{{rxn}}\\cdot\\text{{K)}}$ (both independent of temperature). Part (d) concerns a different system: a galvanic cell built from {_E.k_fmt(a)} and {_E.k_fmt(c)} half-cells connected by a wire and a salt bridge, with standard reduction potentials ${_E.REDP[a][0]:+.2f}\\text{{ V}}$ and ${_E.REDP[c][0]:+.2f}\\text{{ V}}$ respectively. Each half-cell contains the metal electrode in a solution of its ions under standard conditions.", "data": {}}
     parts = [
         part("A", f"Calculate $\\Delta G^\\circ$, in kJ/mol, for the reaction at ${T:g}\\text{{ K}}$.", 2, "calculate", ["5.F"], f"$\\Delta G^\\circ=\\Delta H^\\circ-T\\Delta S^\\circ={dG:.1f}\\text{{ kJ/mol}}$.",
              [R("A1", "expression", "Uses $\\Delta G^\\circ=\\Delta H^\\circ-T\\Delta S^\\circ$ with entropy converted to kJ", ["ΔG = ΔH − TΔS", "J to kJ"], err=["omits the unit conversion"]),
               R("A2", "numeric", f"Calculates $\\Delta G^\\circ$ (about {dG:.1f} kJ/mol) with units", [f"{dG:.1f}"], requires="A1", nums=True, units=True, err=["uses a Celsius temperature"])]),
         part("B", f"Determine the temperature at which the reaction changes between thermodynamically favorable and unfavorable, and state whether the reaction is favorable above or below that temperature. Justify your answer.", 3, "determine", ["5.B", "6.D"],
-             f"$\\Delta G^\\circ=0$ at $T=\\Delta H^\\circ/\\Delta S^\\circ={Tx:.0f}\\text{{ K}}$; the reaction is favorable {fav} this temperature because $\\Delta S^\\circ$ is {'positive' if dS > 0 else 'negative'}.",
+             f"$\\Delta G^\\circ=0$ at $T=\\Delta H^\\circ/\\Delta S^\\circ={Tx:.1f}\\text{{ K}}$; the reaction is favorable {fav} this temperature because $\\Delta S^\\circ$ is {'positive' if dS > 0 else 'negative'}.",
              [R("B1", "expression", "Sets $\\Delta G^\\circ=0$ and solves $T=\\Delta H^\\circ/\\Delta S^\\circ$", ["ΔG = 0", "T = ΔH/ΔS"], err=["divides ΔS by ΔH"]),
-              R("B2", "numeric", f"Calculates the temperature (about {Tx:.0f} K)", [f"{Tx:.0f}"], requires="B1", nums=True, units=True, err=["leaves ΔH in kJ"]),
+              R("B2", "numeric", f"Calculates the temperature (about {Tx:.1f} K)", [f"{Tx:.1f}"], requires="B1", nums=True, units=True, err=["leaves ΔH in kJ"]),
               R("B3", "justification", f"States the reaction is favorable {fav} that temperature, citing the sign of $\\Delta S^\\circ$ in $\\Delta G^\\circ=\\Delta H^\\circ-T\\Delta S^\\circ$", [fav, "sign of ΔS"], requires="B2", err=["links favorability to the sign of ΔH alone"])]),
-        part("C", f"Calculate the equilibrium constant, $K$, at ${T:g}\\text{{ K}}$.", 2, "calculate", ["5.B", "5.F"], f"$K=e^{{-\\Delta G^\\circ/RT}}\\approx {K:.2g}$.",
+        part("C", f"Calculate the equilibrium constant, $K$, at ${T:g}\\text{{ K}}$.", 2, "calculate", ["5.B", "5.F"], f"$K=e^{{-\\Delta G^\\circ/RT}}\\approx {sn(K, 2)}$.",
              [R("C1", "expression", "Uses $\\Delta G^\\circ=-RT\\ln K$ with R in J/(mol·K) and ΔG° in joules", ["ΔG = −RT ln K"], err=["uses kJ with R in J"]),
-              R("C2", "numeric", f"Calculates $K$ (about {K:.2g})", [f"{K:.2g}"], requires="C1", nums=True, err=["omits the negative sign"])]),
-        part("D", "On a diagram of the galvanic cell, label the anode and the direction of electron flow, and calculate the standard cell potential.", 2, "calculate", ["3.B", "5.F"], f"The anode is the half-cell with the less positive reduction potential ({a}); $E^\\circ_{{cell}}={E:.2f}\\text{{ V}}$.",
-             [R("D1", "diagram", f"Labels the {a} half-cell as the anode (more negative reduction potential, where oxidation occurs) and electrons flowing from the anode through the wire to the cathode", [a, "anode"], err=["identifies the more positive half-cell as the anode"]),
-              R("D2", "numeric", f"Calculates $E^\\circ_{{cell}}={E:.2f}\\text{{ V}}$ (cathode minus anode)", [f"{E:.2f}"], requires="D1", nums=True, units=True, err=["adds the potentials"])]),
+              R("C2", "numeric", f"Calculates $K$ (about {sn(K, 2)})", [f"{sn(K, 2)}"], requires="C1", nums=True, err=["omits the negative sign"])]),
+        part("D", "Sketch a diagram of the galvanic cell described in the stimulus. Label the anode, the cathode and the direction of electron flow in the external wire, and calculate the standard cell potential.", 2, "calculate", ["3.B", "5.F"], f"The anode is the half-cell with the less positive reduction potential ({a}); $E^\\circ_{{cell}}={E:.2f}\\text{{ V}}$.",
+             [R("D1", "diagram", f"Draws the two half-cells with a wire and salt bridge, labels the {a} half-cell as the anode (more negative reduction potential, where oxidation occurs) and the other as the cathode, and shows electrons flowing from the anode through the wire to the cathode", [a, "anode", "cathode"], err=["identifies the more positive half-cell as the anode"]),
+              R("D2", "numeric", f"Calculates $E^\\circ_{{cell}}={E:.2f}\\text{{ V}}$ (cathode minus anode)", [f"{E:.2f}"], nums=True, units=True, err=["adds the potentials"])]),
         part("E", f"Calculate $\\Delta G^\\circ$ for the cell reaction, if {n} moles of electrons are transferred per mole of reaction, and state what the sign of the result indicates.", 1, "calculate", ["5.F", "6.D"], f"$\\Delta G^\\circ=-nFE^\\circ={dGe:.0f}\\text{{ kJ/mol}}$; the negative value shows the cell reaction is thermodynamically favorable.",
              [R("E1", "numeric", f"Calculates $\\Delta G^\\circ$ (about {dGe:.0f} kJ/mol) and states that the negative sign means favorable", [f"{dGe:.0f}", "favorable"], nums=True, err=["omits the number of electrons"])]),
     ]
@@ -136,30 +138,31 @@ def chf_long_kinetics(rng):
     slope = abs(np.polyfit(ts, [tr[order](a) for a in As], 1)[0])
     t_half = math.log(2) / k if order == 1 else 1 / (k * A0)
     kun = "\\text{ s}^{-1}" if order == 1 else "\\text{ M}^{-1}\\text{s}^{-1}"
+    kun_txt = "s⁻¹" if order == 1 else "M⁻¹·s⁻¹"
+    nm = "first" if order == 1 else "second"
     plot = "ln[A] versus t" if order == 1 else "1/[A] versus t"
     rows = [[str(t), f"{a:.4f}"] for t, a in zip(ts, As)]
     stim = {"kind": "table", "description": "Concentration of A in the reaction A → products at 310 K", "data": {"x_label": "Time (s)", "y_label": "[A] (M)", "rows": rows}}
     parts = [
-        part("A", "Determine the order of the reaction with respect to A. Describe the plot you would make and what it would show to support your conclusion.", 3, "determine", ["3.A", "6.B"],
-             f"The reaction is {'first' if order == 1 else 'second'} order: a plot of {plot} is a straight line (the other linearized plots curve).",
-             [R("A1", "diagram", f"Describes making the plot of {plot} (and checks at least one other linearization)", [plot], err=["plots [A] versus t only"]),
-              R("A2", "claim", f"Concludes the reaction is {'first' if order == 1 else 'second'} order", ["first order" if order == 1 else "second order"], requires="A1", err=["picks the order whose plot is curved"]),
-              R("A3", "justification", "Supports the claim with the linearity of that plot and the curvature of the others", ["linear", "curved"], requires="A2", err=["cites the decrease of [A] only"])]),
-        part("B", "Calculate the rate constant, $k$, with units.", 2, "calculate", ["5.D", "5.F"], f"$k=|\\text{{slope}}|\\approx {slope:.3g}{kun}$.",
-             [R("B1", "numeric", f"Obtains $k$ (about {slope:.2g}) from the slope magnitude of the linear plot", [f"{slope:.2g}"], nums=True, err=["uses a slope from the curved plot"]),
-              R("B2", "numeric", f"Gives the correct units for k (${kun.replace(chr(92) + 'text', '').replace('{', '').replace('}', '')}$ form)", ["units"], requires="B1", units=True, err=["gives units of a first-order constant for a second-order reaction"])]),
-        part("C", "Calculate the half-life of the reaction for the initial concentration shown.", 2, "calculate", ["5.B", "5.F"], f"$t_{{1/2}}={t_half:.0f}\\text{{ s}}$ ({'$0.693/k$' if order == 1 else '$1/(k[\\mathrm{A}]_0)$'}).",
-             [R("C1", "expression", "Uses the half-life relation for the identified order", ["0.693/k" if order == 1 else "1/(k[A]0)"], err=["uses the first-order relation for a second-order reaction"] if order == 2 else ["uses the second-order relation"]),
-              R("C2", "numeric", f"Calculates the half-life (about {t_half:.0f} s)", [f"{t_half:.0f}"], requires="C1", nums=True, units=True, err=["divides instead of multiplying"])]),
-        part("D", "The experiment is repeated at a higher temperature. Predict whether $k$ increases, decreases, or is unchanged, and justify your answer using the collision model.", 2, "predict", ["2.B", "2.F", "6.E"], "$k$ increases: at the higher temperature a larger fraction of collisions has energy at least equal to the activation energy.",
+        part("A", "Determine the order of the reaction with respect to A. Describe the linearized plot you would make to test your answer and explain how that plot supports your conclusion.", 3, "determine", ["3.A", "6.B"],
+             f"The reaction is {nm} order. A plot of {plot} gives a straight line, while the other two linearized plots curve.",
+             [R("A1", "claim", f"States that the reaction is {nm} order in A", [f"{nm} order"], err=["picks the order whose plot is curved"]),
+              R("A2", "graph", f"Names the axes of the linearized plot to make: {plot}", [plot], err=["plots [A] versus t only"]),
+              R("A3", "justification", f"Explains that the points of this plot fall on a straight line, whereas the other linearized plots are curved", ["straight line", "curved"], requires="A2", err=["cites only that [A] decreases with time"])]),
+        part("B", f"Using the linear plot from part A, determine the rate constant, $k$. Give the value as a decimal number (not in scientific notation) with units.", 3, "calculate", ["3.A", "5.F"], f"$k=|\\text{{slope}}|\\approx {slope:.4f}{kun}$.",
+             [R("B1", "numeric", f"Determines the slope of the linear plot, {'negative' if order == 1 else 'positive'} for a {nm}-order reaction (about {'−' if order == 1 else '+'}{slope:.4f} in the units of the plot)", [f"{slope:.4f}"], nums=True, err=["uses a slope from a curved plot"]),
+              R("B2", "numeric", f"States $k\\approx {slope:.4f}$, which is the magnitude of that slope for this {nm}-order reaction", [f"{slope:.4f}"], requires="B1", nums=True, err=["gives k with the wrong sign"]),
+              R("B3", "numeric", f"Gives the units of $k$ as {kun_txt}", ["units"], requires="B2", units=True, err=["gives units of a first-order constant for a second-order reaction" if order == 2 else "gives units of a second-order constant for a first-order reaction"])]),
+        part("C", "Calculate the half-life of the reaction for the initial concentration in the table.", 2, "calculate", ["5.B", "5.F"], f"$t_{{1/2}}={sig(t_half, 3)}\\text{{ s}}$ ({'$0.693/k$' if order == 1 else '$1/(k[\\mathrm{A}]_0)$'}).",
+             [R("C1", "expression", f"Uses the half-life relation for a {nm}-order reaction: {'0.693/k' if order == 1 else '1/(k[A]0)'}", ["0.693/k" if order == 1 else "1/(k[A]0)"], err=["uses the first-order relation for a second-order reaction"] if order == 2 else ["uses the second-order relation"]),
+              R("C2", "numeric", f"Calculates the half-life (about {sig(t_half, 3)} s)", [f"{sig(t_half, 3)}"], requires="C1", nums=True, units=True, err=["divides instead of multiplying"])]),
+        part("D", "The experiment is repeated at a higher temperature. Predict whether $k$ increases, decreases, or stays the same, and justify your answer using the collision model.", 2, "predict", ["2.B", "2.F", "6.E"], "$k$ increases: at the higher temperature a larger fraction of collisions has energy at least equal to the activation energy.",
              [R("D1", "claim", "States that $k$ increases", ["increases"], err=["states k decreases because particles collide more often"]),
-              R("D2", "justification", "Justifies with a larger fraction of collisions exceeding the activation energy (and more frequent collisions)", ["fraction of collisions", "activation energy"], requires="D1", err=["says the activation energy decreases"])]),
-        part("E", "A student proposes that the reaction occurs in one elementary step. Is this consistent with the order you determined? Explain.", 1, "explain", ["4.B"], f"A one-step mechanism with one molecule of A would be first order; it is {'consistent' if order == 1 else 'not consistent'} with the data because the determined order is {order}.",
-             [R("E1", "justification", f"States the proposal is {'consistent' if order == 1 else 'not consistent'} and links the molecularity of the elementary step to the order of {order}", ["consistent" if order == 1 else "not consistent", "molecularity"], err=["ignores the order found in part A"])]),
+              R("D2", "justification", "Justifies with a larger fraction of collisions that exceed the activation energy (and more frequent collisions)", ["fraction of collisions", "activation energy"], requires="D1", err=["says the activation energy decreases"])]),
     ]
-    return _pack("chf_long_kinetics", "long", "5.3", ["5.2", "5.5", "5.7"], "5.D", "Concentration–time data and the order of a reaction", stim, parts, 10, 23, [f"order={order}", f"k={k}", f"A0={A0}", f"slope={slope:.6g}", f"t_half={t_half:.4f}"],
+    return _pack("chf_long_kinetics", "long", "5.3", ["5.2", "5.5"], "5.F", "Concentration–time data and the order of a reaction", stim, parts, 10, 23, [f"order={order}", f"k={k}", f"A0={A0}", f"slope={slope:.6g}", f"t_half={t_half:.4f}"],
                  [_ev("B", "rate constant", slope, 0.03 * slope, "units"), _ev("C", "half-life", t_half, 0.04 * t_half, "s")],
-                 ("Linearize concentration–time data to find the order and rate constant; link order, half-life, temperature and mechanism", ["Compare the three linearized plots for straightness", "Read the rate constant from the slope of the straight plot", "Relate temperature to the fraction of energetic collisions"],
+                 ("Linearize concentration–time data to find the order and rate constant; link order, half-life and temperature", ["Compare the three linearized plots for straightness", "Read the rate constant from the slope of the straight plot", "Relate temperature to the fraction of energetic collisions"],
                   [("the data come from a single reactant at constant temperature", "the stimulus")], {"type": "table", "must_include": ["time", "concentration"]},
                   "R^2 of three linearizations by polyfit selects the order and the slope magnitude gives k; the half-life is computed from the order-specific relation"), ["representation_reading", "law_selection", "justification"])
 
@@ -167,29 +170,27 @@ def chf_long_kinetics(rng):
 # ======================= 짧은 문항 1 (4): PES =======================
 def chf_short_pes(rng):
     for _ in forever():
-        z = rng.randint(6, 16); peaks = _A._pes_peaks(z); es = [p[0] for p in peaks]
-        if all(es[i] > es[i + 1] * 1.08 for i in range(len(es) - 1)):
+        z = pick(rng, [5, 6, 8, 9, 11, 13, 14, 16]); peaks = _A._pes_peaks(z); es = [p[0] for p in peaks]
+        nxt_peaks = _A._pes_peaks(z + 1)
+        # 같은 부껍질에 전자가 하나 더 들어가고(원자가 봉우리가 반드시 더 높은 결합 에너지) 봉우리 간격이 충분한 경우만
+        if all(es[i] > es[i + 1] * 1.08 for i in range(len(es) - 1)) and nxt_peaks[-1][2] == peaks[-1][2] and nxt_peaks[-1][0] > peaks[-1][0]:
             break
     sym = _A.SYM[z]; nxt = _A.SYM[z + 1]
     cfg = " ".join(f"{p[2]}$^{{{p[1]}}}$" for p in peaks)
-    cfg_n = _A._config(z + 1); val_next = [p for p in _A._pes_peaks(z + 1)][-2:] if len(cfg_n) > 2 else _A._pes_peaks(z + 1)
-    stim = {"kind": "diagram", "description": "Photoelectron spectrum of a neutral atom of element X. Peaks (binding energy in MJ/mol, relative number of electrons): " + "; ".join(f"({e:g}, {k})" for e, k, _ in peaks) + ".", "data": {"variant": "chem_pes", "peaks": [{"energy": e, "electrons": k} for e, k, _ in peaks], "unit": "MJ/mol", "z": z}}
-    ie1 = peaks[-1][0]
+    stim = {"kind": "diagram", "description": "Photoelectron spectrum of a neutral atom of element X. The height of each peak is proportional to the number of electrons in that subshell. Peaks (binding energy in MJ/mol, relative number of electrons): " + "; ".join(f"({e:g}, {k})" for e, k, _ in peaks) + ".", "data": {"variant": "chem_pes", "peaks": [{"energy": e, "electrons": k} for e, k, _ in peaks], "unit": "MJ/mol"}}
     parts = [
-        part("A", "Identify element X and write its complete ground-state electron configuration.", 1, "identify", ["1.A", "5.D"], f"The total relative number of electrons is {z}, so X is {sym}: {cfg}.",
-             [R("A1", "claim", f"Identifies X as {sym} with the configuration {cfg} (electron total {z})", [sym, cfg], err=["counts peaks instead of electrons"])]),
-        part("B", "Explain why the peak at the highest binding energy corresponds to the electrons in the 1s subshell, using Coulomb's law.", 1, "explain", ["6.D", "4.A"], "The 1s electrons are closest to the nucleus, so the attraction is greatest (Coulomb's law: larger force at a smaller distance), so they need the most energy to remove.",
-             [R("B1", "justification", "Cites the smaller distance from the nucleus and the larger Coulombic attraction", ["closest to the nucleus", "Coulomb's law"], err=["says 1s electrons are shielded the most"])]),
-        part("C", f"On the axes of the spectrum, sketch the peak(s) for the valence electrons of {nxt}, which has one more proton than X. State whether they appear at a higher or lower binding energy than the valence peak of X, and justify.", 1, "draw", ["3.A"],
-             f"The valence peak of {nxt} is at a slightly higher binding energy than that of X because the greater nuclear charge acts on electrons in the same shell with little added shielding.",
-             [R("C1", "graph", f"Draws the valence peak(s) of {nxt} at a higher binding energy than X's valence peak, with a justification based on the larger nuclear charge", ["higher binding energy", "greater nuclear charge"], err=["draws the peak at a lower energy"])]),
-        part("D", f"Is the first ionization energy of {nxt} expected to be larger or smaller than that of X? Explain using the spectrum.", 1, "explain", ["4.C", "6.E"],
-             "Generally larger (a larger effective nuclear charge in the same shell), unless the next element's electron is placed in a new subshell or paired, in which case it is smaller; use the configuration to decide.",
-             [R("D1", "justification", "Compares the valence-peak energies of X and the next element and states the relation to the first ionization energy, noting the exception when the electron enters a new subshell or is paired", ["valence peak energy", "ionization energy"], err=["states the ionization energy is the energy of the 1s peak"])]),
+        part("A", "Identify element X and write its complete ground-state electron configuration.", 1, "identify", ["1.A"], f"The peak heights show {' + '.join(str(p[1]) for p in peaks)} = {z} electrons, so X is {sym}: {cfg}.",
+             [R("A1", "claim", f"Identifies X as {sym} (the peak heights sum to {z} electrons) with the configuration {cfg}", [sym, cfg], err=["counts the number of peaks instead of the number of electrons"])]),
+        part("B", "Explain, using Coulomb's law, why the peak with the highest binding energy corresponds to the electrons in the 1s subshell.", 1, "explain", ["6.D"], "The 1s electrons are closest to the nucleus, so the Coulombic attraction between them and the nucleus is greatest (Coulomb's law: the force is larger at a smaller distance), and the most energy is needed to remove them.",
+             [R("B1", "justification", "Cites the smaller distance of the 1s electrons from the nucleus and the resulting larger Coulombic attraction", ["closest to the nucleus", "Coulomb's law"], err=["says the 1s electrons are shielded the most"])]),
+        part("C", f"The element that follows X in the periodic table is {nxt}, which has one more proton. Is the binding energy of the valence-electron peak of {nxt} higher or lower than that of X? Justify your answer.", 2, "predict", ["4.A", "6.D"],
+             f"Higher: {nxt} has one more proton, and its extra electron enters the same subshell, which adds little shielding, so the effective nuclear charge is larger and the Coulombic attraction for the valence electrons is greater.",
+             [R("C1", "claim", f"States that the valence peak of {nxt} is at a higher binding energy than that of X", ["higher"], err=["says the peak of the next element is at a lower binding energy"]),
+              R("C2", "justification", "Justifies with the greater nuclear charge acting on electrons in the same subshell with little added shielding (Coulomb's law)", ["greater nuclear charge", "same subshell"], requires="C1", err=["says the electrons are farther from the nucleus"])]),
     ]
     return _pack("chf_short_pes", "short", "1.6", ["1.5", "1.7"], "1.A", "Photoelectron spectrum of an element", stim, parts, 4, 9, [f"z={z}", f"peaks={[(p[0], p[1]) for p in peaks]}"], [],
                  ("Identify an element from a photoelectron spectrum and compare it with the next element", ["Add the relative peak heights to find the atomic number", "Use Coulomb's law to explain the peak positions", "Compare the valence peaks of neighboring elements"],
-                  [("relative peak height equals the number of electrons", "the stimulus")], {"type": "diagram", "must_include": ["peak energies", "relative heights"]}, "configuration from two independent filling orders; the electron total of the peaks equals Z"), ["representation_reading", "justification"])
+                  [("relative peak height equals the number of electrons", "the stimulus")], {"type": "diagram", "must_include": ["peak energies", "relative heights"]}, "configuration from two independent filling orders; the electron total of the peaks equals Z; the next element's valence peak energy is higher in the tabulated data"), ["representation_reading", "justification"])
 
 
 # ======================= 짧은 문항 2 (4): 연소 화학량론과 기체 =======================
@@ -203,42 +204,51 @@ def chf_short_stoich(rng):
     V = nco2 * R_ATM * T / P
     b = x + y / 4
     agree(V, bisect(lambda v: P * v - nco2 * R_ATM * T, 1e-6, 1e5), 1e-6, "V")
-    stim = {"kind": "text", "description": f"A ${m:g}\\text{{ g}}$ sample of {cf(form)} is burned completely in excess oxygen, producing $\\mathrm{{CO_2}}(g)$ and $\\mathrm{{H_2O}}(g)$.", "data": {}}
+    den = sp.denom(sp.nsimplify(b)); coefs = (int(den), int(b * den), int(x * den), int(y * den // 2))
+    bal = f"{coefs[0] if coefs[0] > 1 else ''}{form} + {coefs[1]}O2 → {coefs[2]}CO2 + {coefs[3]}H2O"
+    stim = {"kind": "text", "description": f"A ${m:.1f}\\text{{ g}}$ sample of {cf(form)} is burned completely in excess oxygen, producing $\\mathrm{{CO_2}}(g)$ and $\\mathrm{{H_2O}}(g)$. The carbon dioxide is collected at ${Tc}\\,^{{\\circ}}\\text{{C}}$ and ${P:g}\\text{{ atm}}$. Use the periodic table to find molar masses.", "data": {}}
     parts = [
-        part("A", f"Write the balanced equation for the complete combustion of {cf(form)}, using the smallest whole-number coefficients.", 1, "write", ["5.E"], f"With whole numbers: coefficient of $\\mathrm{{O_2}}$ scales from ${b:g}$ (multiply by 2 if needed to clear fractions).",
-             [R("A1", "expression", f"Balanced equation for {form} + O2 → CO2 + H2O with whole numbers (CO2: {x}·k, H2O: {y // 2}·k, O2: {b:g}·k)", ["balanced", "whole numbers"], err=["leaves a fractional coefficient"])]),
-        part("B", f"Calculate the number of moles of {cf('CO2')} produced.", 1, "calculate", ["5.F"], f"$n(\\mathrm{{CO_2}})={x}\\times{m:g}/{M:.2f}={nco2:.3g}\\text{{ mol}}$.",
-             [R("B1", "numeric", f"Calculates {nco2:.3g} mol using the molar mass of the fuel and the {x}:1 mole ratio", [f"{nco2:.3g}"], nums=True, err=["omits the mole ratio"])]),
-        part("C", f"Calculate the volume, in L, occupied by the {cf('CO2')} at ${Tc}\\,^{{\\circ}}\\text{{C}}$ and ${P:g}\\text{{ atm}}$.", 1, "calculate", ["5.B", "5.F"], f"$V=nRT/P={V:.1f}\\text{{ L}}$.",
-             [R("C1", "numeric", f"Calculates the volume (about {V:.1f} L) using kelvins and consistent R", [f"{V:.1f}"], nums=True, units=True, err=["uses the Celsius temperature"])]),
-        part("D", "A student claims that this combustion is an oxidation–reduction reaction. Justify the claim using oxidation numbers of one element.", 1, "justify", ["6.D"], "Oxygen goes from 0 in $\\mathrm{O_2}$ to −2 in the products (reduced), and carbon's oxidation number increases (oxidized).",
-             [R("D1", "justification", "Gives oxidation numbers before and after for oxygen (0 to −2) or carbon (increase) showing electron transfer", ["0 to −2", "oxidation numbers"], err=["says redox requires a metal"])]),
+        part("A", f"Write the balanced equation for the complete combustion of {cf(form)}, using the smallest whole-number coefficients.", 1, "write", ["5.E"], f"The balanced equation is {bal}.",
+             [R("A1", "expression", f"Balanced equation with the smallest whole-number coefficients: {bal}", [bal], err=["leaves a fractional coefficient"])]),
+        part("B", f"Calculate the number of moles of {cf('CO2')} produced.", 2, "calculate", ["5.F"], f"$n({form})={m:.1f}\\text{{ g}}/{M:.2f}\\text{{ g/mol}}={n:.4g}\\text{{ mol}}$; with {x} mol of $\\mathrm{{CO_2}}$ per mole of fuel, $n(\\mathrm{{CO_2}})={nco2:.3g}\\text{{ mol}}$.",
+             [R("B1", "numeric", f"Converts the mass of fuel to moles using its molar mass ({M:.2f} g/mol): {n:.3g} mol", [f"{n:.3g}"], nums=True, err=["uses the molar mass of CO2"]),
+              R("B2", "numeric", f"Applies the {x}:1 mole ratio from the balanced equation to obtain {nco2:.3g} mol of CO2", [f"{nco2:.3g}"], requires="B1", nums=True, err=["omits the mole ratio"])]),
+        part("C", f"Calculate the volume, in L, occupied by the {cf('CO2')} at the stated temperature and pressure.", 1, "calculate", ["5.B", "5.F"], f"$V=nRT/P=({nco2:.3g}\\text{{ mol}})(0.08206)({T:.2f}\\text{{ K}})/({P:g}\\text{{ atm}})={V:.1f}\\text{{ L}}$.",
+             [R("C1", "numeric", f"Calculates the volume (about {V:.1f} L) using kelvins and consistent units for R", [f"{V:.1f}"], nums=True, units=True, err=["uses the Celsius temperature"])]),
     ]
-    return _pack("chf_short_stoich", "short", "4.5", ["4.3", "3.4", "4.9"], "5.F", "Combustion stoichiometry and gas volume", stim, parts, 4, 9, [f"x={x}", f"y={y}", f"m={m}", f"M={M:.4f}", f"nco2={nco2:.5f}", f"V={V:.4f}", f"Tc={Tc}", f"P={P}"],
+    return _pack("chf_short_stoich", "short", "4.5", ["4.3", "3.4"], "5.F", "Combustion stoichiometry and gas volume", stim, parts, 4, 9, [f"x={x}", f"y={y}", f"m={m}", f"M={M:.4f}", f"n={n:.5f}", f"nco2={nco2:.5f}", f"V={V:.4f}", f"Tc={Tc}", f"P={P}"],
                  [_ev("B", "moles CO2", nco2, 0.01 * nco2 + 0.002, "mol"), _ev("C", "volume", V, 0.02 * V + 0.1, "L")],
-                 ("Combustion stoichiometry, ideal gas volume, and an oxidation-number justification", ["Balance the combustion equation with whole numbers", "Use the mole ratio to find the moles of carbon dioxide", "Apply the ideal gas law with a temperature in kelvins"], [("oxygen is in excess", "the stimulus")], {"type": "text", "must_include": ["mass", "conditions"]},
-                  "sympy balance by linear system; the gas volume is recomputed by bisection on P V - nRT"), ["law_selection", "justification"])
+                 ("Combustion stoichiometry and an ideal gas volume", ["Balance the combustion equation with whole numbers", "Use the molar mass and the mole ratio to find the moles of carbon dioxide", "Apply the ideal gas law with a temperature in kelvins"], [("oxygen is in excess", "the stimulus")], {"type": "text", "must_include": ["mass", "conditions"]},
+                  "sympy balance by linear system; the gas volume is recomputed by bisection on P V - nRT"), ["law_selection", "representation_reading"])
 
 
 # ======================= 짧은 문항 3 (4): 결합과 분자 간 힘 =======================
 def chf_short_bonding(rng):
-    f, V, sg, lp = pick(rng, [s for s in _A.SPECIES if s[0] in ("SO2", "NH3", "ClF3", "XeF4", "H2O", "SF4", "CH4")])
+    f, V, sg, lp = pick(rng, [s_ for s_ in _A.SPECIES if s_[0] in ("SO2", "NH3", "ClF3", "XeF4", "H2O", "SF4")])
     dom = sg + lp; shape, ang = _A.VSEPR[(dom, lp)]
     hi, lo = pick(rng, [("H2O", "H2S"), ("CH3OH", "C2H6"), ("HF", "HCl"), ("NH3", "PH3"), ("C2H5OH", "CH3OCH3")])
     agree(1.0, 1.0 if _B.BP[hi][1] > _B.BP[lo][1] else 0.0, 1e-9, "bp")
-    polar = {"SO2": True, "NH3": True, "H2O": True, "ClF3": True, "SF4": True, "XeF4": False, "CH4": False}[f]
-    stim = {"kind": "text", "description": f"Consider the molecule {cf(f)} and the two compounds {cf(hi)} and {cf(lo)}.", "data": {}}
+    polar = {"SO2": True, "NH3": True, "H2O": True, "ClF3": True, "SF4": True, "XeF4": False}[f]
+    VAL = {"H": 1, "C": 4, "N": 5, "O": 6, "F": 7, "Cl": 7, "S": 6, "Xe": 8}
+    total_ve = sum(VAL[a_] * n_ for a_, n_ in _C_fmass(f).items())
+    lewis = {"SO2": "S bonded to both O atoms (one double bond and one single bond, or two equivalent resonance forms), with 1 lone pair on S and 2 or 3 lone pairs on each O", "NH3": "three N–H single bonds and 1 lone pair on N", "H2O": "two O–H single bonds and 2 lone pairs on O",
+             "ClF3": "three Cl–F single bonds, 2 lone pairs on Cl and 3 lone pairs on each F", "XeF4": "four Xe–F single bonds, 2 lone pairs on Xe and 3 lone pairs on each F", "SF4": "four S–F single bonds, 1 lone pair on S and 3 lone pairs on each F"}[f]
+    ang_txt = {"SF4": "about 90° and about 120° (the see-saw has two different bond angles)", "ClF3": "about 90°", "XeF4": "90°", "NH3": "slightly less than 109.5° (about 107°)", "H2O": "slightly less than 109.5° (about 104.5°)", "SO2": "slightly less than 120° (about 118°)"}[f]
+    why_shape = {"SO2": "the bonding pair and lone pair on sulfur make three electron domains arranged trigonal planar, and the lone pair bends the molecule", "NH3": "four electron domains (three bonding pairs and one lone pair) are arranged tetrahedrally and the lone pair makes the molecule trigonal pyramidal", "H2O": "four electron domains (two bonding pairs and two lone pairs) are arranged tetrahedrally and the lone pairs make the molecule bent",
+                 "ClF3": "five electron domains (three bonding pairs and two lone pairs) are arranged trigonal bipyramidally with the lone pairs in equatorial positions, giving a T shape", "XeF4": "six electron domains (four bonding pairs and two lone pairs) are arranged octahedrally with the lone pairs on opposite sides, giving a square planar shape", "SF4": "five electron domains (four bonding pairs and one lone pair) are arranged trigonal bipyramidally and the lone pair is equatorial, giving a see-saw shape"}[f]
+    stim = {"kind": "text", "description": f"Consider the molecule {cf(f)} and the two compounds {cf(hi)} ({_B.BP[hi][2]:g} g/mol, normal boiling point {_B.BP[hi][1]} K) and {cf(lo)} ({_B.BP[lo][2]:g} g/mol, normal boiling point {_B.BP[lo][1]} K).", "data": {}}
     parts = [
-        part("A", f"In the box provided, draw a Lewis electron-dot diagram of {cf(f)} that shows all valence electrons.", 1, "draw", ["3.B"], f"A valid diagram with {V} valence electrons on the central atom group and {sg} bonded atoms and {lp} lone pair(s) on the central atom.",
-             [R("A1", "diagram", f"Draws a Lewis structure with the correct total valence electrons, {sg} bonds to the central atom and {lp} lone pair(s) on it", ["valence electrons", "lone pairs"], err=["omits the lone pairs on the central atom"])]),
-        part("B", f"Based on your diagram, identify the molecular geometry of {cf(f)} and the approximate bond angle.", 1, "identify", ["4.A", "1.A"], f"{shape}; about {ang}° ({'less than the ideal value because of lone pairs' if lp else 'the ideal value'}).",
-             [R("B1", "claim", f"States {shape} geometry and a bond angle close to {ang}°", [shape, f"{ang}"], err=["reports the electron-domain geometry"])]),
-        part("C", f"Is the {cf(f)} molecule polar or nonpolar? Justify your answer.", 1, "justify", ["6.C", "4.C"], f"{'Polar' if polar else 'Nonpolar'}: the bond dipoles {'do not cancel because of the lone pair or shape' if polar else 'cancel by symmetry'}.",
-             [R("C1", "justification", f"States {'polar' if polar else 'nonpolar'} and links it to {'an asymmetric shape' if polar else 'symmetric cancellation of the bond dipoles'}", ["polar" if polar else "nonpolar", "symmetry"], err=["decides by bond polarity alone"])]),
-        part("D", f"The boiling point of {cf(hi)} is higher than that of {cf(lo)}. Explain the difference in terms of intermolecular forces.", 1, "explain", ["6.E", "4.C"], "The compound with the higher boiling point has the stronger intermolecular forces (hydrogen bonding or stronger dispersion/dipole attractions), which need more energy to overcome.",
-             [R("D1", "justification", f"Names the stronger intermolecular force of {hi} (hydrogen bonding where an N–H, O–H, or F–H bond is present, otherwise stronger dispersion) as the reason", ["hydrogen bonding" if _B.BP[hi][0] == "H" else "dispersion forces"], err=["says covalent bonds break on boiling"])]),
+        part("A", f"Draw a Lewis electron-dot diagram of {cf(f)} that shows all of its valence electrons.", 1, "draw", ["3.B"], f"{f} has {total_ve} valence electrons in total. A correct diagram shows {lewis}.",
+             [R("A1", "diagram", f"Draws a Lewis diagram that accounts for all {total_ve} valence electrons: {lewis}", [f"{total_ve} valence electrons", "lone pairs"], err=["omits the lone pairs on the central atom"])]),
+        part("B", f"Use your diagram to identify the molecular geometry of {cf(f)} and the approximate bond angle.", 1, "identify", ["4.A"], f"{shape}; bond angle {ang_txt} ({why_shape}).",
+             [R("B1", "claim", f"States {shape} geometry and a bond angle of {ang_txt}", [shape, "bond angle"], err=["reports the electron-domain geometry instead of the molecular geometry"])]),
+        part("C", f"Is the {cf(f)} molecule polar or nonpolar? Justify your answer.", 1, "justify", ["4.C"], f"{'Polar' if polar else 'Nonpolar'}: the bond dipoles {'do not cancel because the shape is not symmetric' if polar else 'cancel because the shape is symmetric'}.",
+             [R("C1", "justification", f"States {'polar' if polar else 'nonpolar'} and links it to {'a shape in which the bond dipoles do not cancel' if polar else 'the symmetric arrangement, in which the bond dipoles cancel'}", ["polar" if polar else "nonpolar", "bond dipoles"], err=["decides by the polarity of the bonds alone"])]),
+        part("D", f"The data in the stimulus show that {cf(hi)} has a higher boiling point than {cf(lo)} even though it has {'a smaller' if _B.BP[hi][2] < _B.BP[lo][2] else 'a similar'} molar mass. Explain this difference in terms of intermolecular forces.", 1, "explain", ["6.E"],
+             f"{hi} molecules form hydrogen bonds with one another, which are stronger than the attractions between {lo} molecules, so more energy is needed to separate the molecules of {hi}.",
+             [R("D1", "justification", f"Identifies hydrogen bonding between {hi} molecules (a hydrogen atom bonded to N, O or F) as stronger than the attractions between {lo} molecules, which raises the boiling point", ["hydrogen bonding", "stronger attractions between molecules"], err=["says covalent bonds within the molecules break when the liquid boils"])]),
     ]
-    return _pack("chf_short_bonding", "short", "2.7", ["2.5", "3.1"], "4.A", "Lewis structure, geometry and boiling points", stim, parts, 4, 9, [f"species={f}", f"hi={hi}", f"lo={lo}", f"shape={shape}"], [],
+    return _pack("chf_short_bonding", "short", "2.7", ["2.5", "3.1"], "4.A", "Lewis structure, geometry and boiling points", stim, parts, 4, 9, [f"species={f}", f"hi={hi}", f"lo={lo}", f"shape={shape}", f"valence_total={total_ve}"], [],
                  ("Lewis structure, VSEPR geometry, polarity, and intermolecular forces", ["Draw the structure with every valence electron", "Use VSEPR to find the geometry and the angle", "Relate the type of intermolecular force to the boiling point"], [("standard valence-electron rules apply", "the stimulus names the species")], {"type": "text", "must_include": ["species", "boiling-point comparison"]},
                   "geometry from two independent rules (table by domains and lone pairs vs valence-electron count); boiling points from a tabulated pair"), ["representation_reading", "justification"])
 
@@ -246,23 +256,24 @@ def chf_short_bonding(rng):
 # ======================= 짧은 문항 4 (4): 평형 =======================
 def chf_short_equilibrium(rng):
     for _ in forever():
-        K = pick(rng, [0.20, 0.50, 2.0]); A0 = pick(rng, [0.50, 1.0]); B0 = pick(rng, [0.10, 0.30])
+        K = pick(rng, [0.20, 0.25, 0.50, 2.0, 4.0]); A0 = pick(rng, [0.40, 0.50, 0.80, 1.0]); B0 = pick(rng, [0.10, 0.20, 0.30, 0.40])
         Q = B0 ** 2 / A0
         if abs(Q / K - 1) > 0.25:
             break
     exo = rng.random() < 0.5
     right = Q < K
-    stim = {"kind": "text", "description": f"At a certain temperature the equilibrium $\\mathrm{{A}}(g) \\rightleftharpoons 2\\,\\mathrm{{B}}(g)$ has $K_c={K:g}$ and is {'exothermic' if exo else 'endothermic'}. A rigid flask initially contains $[\\mathrm{{A}}]={A0:g}\\text{{ M}}$ and $[\\mathrm{{B}}]={B0:g}\\text{{ M}}$.", "data": {}}
+    stim = {"kind": "text", "description": f"At a certain temperature the equilibrium $\\mathrm{{A}}(g) \\rightleftharpoons 2\\,\\mathrm{{B}}(g)$ has $K_c={K:g}$ and is {'exothermic' if exo else 'endothermic'}. A cylinder with a movable piston initially contains $[\\mathrm{{A}}]={A0:g}\\text{{ M}}$ and $[\\mathrm{{B}}]={B0:g}\\text{{ M}}$ at this temperature.", "data": {}}
     parts = [
         part("A", "Write the equilibrium-constant expression, $K_c$, for the reaction.", 1, "write", ["5.B"], "$K_c=[\\mathrm{B}]^2/[\\mathrm{A}]$.",
              [R("A1", "expression", "Writes $[\\mathrm{B}]^2/[\\mathrm{A}]$ (products over reactant, with the coefficient as an exponent)", ["[B]^2/[A]"], err=["omits the exponent 2"])]),
-        part("B", "Calculate the reaction quotient, $Q$, for the initial mixture and determine the direction in which the reaction proceeds.", 1, "determine", ["5.F", "6.D"], f"$Q={Q:.3g}$, which is {'less' if right else 'greater'} than $K_c$, so the reaction proceeds {'toward the products' if right else 'toward the reactant'}.",
+        part("B", "Calculate the reaction quotient, $Q$, for the initial mixture and determine the direction in which the reaction proceeds.", 1, "determine", ["5.F", "6.D"], f"$Q={B0:g}^2/{A0:g}={Q:.3g}$, which is {'less' if right else 'greater'} than $K_c={K:g}$, so the reaction proceeds {'toward the products' if right else 'toward the reactant'}.",
              [R("B1", "numeric", f"Calculates $Q\\approx {Q:.3g}$ and states the direction as {'forward' if right else 'reverse'} by comparing Q with K", [f"{Q:.3g}", "forward" if right else "reverse"], nums=True, err=["reverses the comparison of Q and K"])]),
-        part("C", "The volume of the flask is doubled at constant temperature after the system reaches equilibrium. Predict the direction of the shift and justify.", 1, "predict", ["2.B"], "The system shifts toward the products because the side with more moles of gas is favored at lower pressure ($Q<K$ right after the expansion).",
-             [R("C1", "justification", "States the shift toward the products with the argument that expansion lowers the pressure and favors more moles of gas (Q becomes less than K)", ["toward products", "more moles of gas"], err=["says K changes with volume"])]),
-        part("D", f"The temperature is increased. Does the value of $K_c$ increase or decrease? Justify using the sign of the enthalpy change.", 1, "predict", ["2.B", "6.F"], f"$K_c$ {'decreases' if exo else 'increases'}: for an {'exothermic' if exo else 'endothermic'} reaction, heat acts as a {'product' if exo else 'reactant'}, so raising the temperature favors the {'reactants' if exo else 'products'}.",
-             [R("D1", "justification", f"States that $K_c$ {'decreases' if exo else 'increases'} because heat behaves as a {'product' if exo else 'reactant'} in an {'exothermic' if exo else 'endothermic'} reaction", ["decreases" if exo else "increases", "heat as product" if exo else "heat as reactant"], err=["says K does not depend on temperature"])]),
+        part("C", "After the system reaches equilibrium, the piston is moved so that the volume of the cylinder is doubled at constant temperature. Predict the direction of the shift and justify your answer.", 1, "predict", ["2.B"], "The system shifts toward the products: the expansion lowers the concentrations, $Q$ becomes less than $K_c$, and the side with more moles of gas (two moles of B instead of one of A) is favored at lower pressure.",
+             [R("C1", "justification", "States the shift toward the products and justifies it with either Q becoming less than K after the expansion or the favored side having more moles of gas", ["toward the products"], alt=["Q becomes less than K after the expansion", "the side with more moles of gas is favored at lower pressure"], err=["says K changes with volume"])]),
+        part("D", f"The temperature is then increased. Does the value of $K_c$ increase or decrease? Justify your answer using the sign of the enthalpy change.", 1, "predict", ["2.B", "6.F"], f"$K_c$ {'decreases' if exo else 'increases'}: for an {'exothermic' if exo else 'endothermic'} reaction heat acts as a {'product' if exo else 'reactant'}, so raising the temperature favors the {'reactants' if exo else 'products'}.",
+             [R("D1", "justification", f"States that $K_c$ {'decreases' if exo else 'increases'} and justifies it with the enthalpy change: heat acts as a {'product' if exo else 'reactant'} in an {'exothermic' if exo else 'endothermic'} reaction, so added heat favors the {'reactants' if exo else 'products'}", ["decreases" if exo else "increases"], alt=[f"heat behaves as a {'product' if exo else 'reactant'}", f"the equilibrium shifts toward the {'reactants' if exo else 'products'} when heat is added"], err=["says K does not depend on temperature"])]),
     ]
     return _pack("chf_short_equilibrium", "short", "7.3", ["7.2", "7.9", "7.10"], "6.D", "Equilibrium expression, Q versus K and disturbances", stim, parts, 4, 9, [f"K={K}", f"A0={A0}", f"B0={B0}", f"Q={Q:.6f}", f"exo={exo}"], [_ev("B", "reaction quotient", Q, 0.02 * Q + 0.005, "")],
-                 ("Equilibrium expression, reaction quotient, and Le Chatelier with temperature dependence of K", ["Write the equilibrium expression from the balanced equation", "Compare the reaction quotient with the equilibrium constant", "Reason about the effect of volume and temperature changes"], [("the reaction is gas-phase in a rigid flask", "the stimulus")], {"type": "text", "must_include": ["K", "initial concentrations", "enthalpy sign"]},
+                 ("Equilibrium expression, reaction quotient, and Le Chatelier with temperature dependence of K", ["Write the equilibrium expression from the balanced equation", "Compare the reaction quotient with the equilibrium constant", "Reason about the effect of volume and temperature changes"], [("the reaction is gas-phase in a cylinder with a movable piston", "the stimulus")], {"type": "text", "must_include": ["K", "initial concentrations", "enthalpy sign"]},
                   "Q computed exactly and compared with K by the sign of ln(Q/K); the volume-change direction follows from recomputing Q after the change"), ["law_selection", "justification"])
+

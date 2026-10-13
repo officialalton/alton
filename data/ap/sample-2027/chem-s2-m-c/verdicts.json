@@ -1,0 +1,1322 @@
+[
+ {
+  "key": "ap_chemistry-m01-k0",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "H₂PO₄⁻ / HPO₄²⁻",
+     "brief_reasoning": "Its pKa of 7.21 is the closest to pH 7.7 (difference 0.49) and is the only one within ±1.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, unambiguous and suitable. It is a standard pKa-matching buffer question with a unique key and explained distractors.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 8.8 buffer selection. The skill is a rule-application form of 4.B, which is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only the pKa 7.21 pair is within one unit of pH 7.7, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "All pKa values are in the stem and no stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained with its distance from the target pH, and the misconceptions are distinct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, with little arithmetic and a calculator allowed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of the buffer selection rule: choose the pair whose pKa is closest to the target pH (7.21 vs 7.7). No calculation beyond comparing pKa values, no representation changes, and low reading load. It is a direct recall/application item rather than a multi-step model-analysis task.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k1",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Pick the pair whose pKa is closest to the target pH. HCO3-/CO3^2- has pKa 10.33, which is about equal to pH 10.3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "HCO3- / CO3^2-"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.8 is covered: choose a buffer whose pKa is closest to the target pH. The item is tagged 4.B (model analysis), but the task is closer to selecting a relationship, so the skill label is a loose fit. This is acceptable because the justification rests on chemical theory (the buffer works best within about one pH unit of the pKa)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "HCO3-/CO3^2- has pKa 10.33, which is 0.03 units from pH 10.3. It is the unique best choice, and the independent solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Every pKa needed is in the stem, and no stimulus is required. The pKa values are embedded in a parenthetical inside the question sentence, which is slightly awkward but clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained with its distance from the target pH. The distractor aimed at the 'strongest acid' misconception (HCOOH) is explicit. The other two are simply farther from the target."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-80 seconds and needs no calculation. The format is typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous buffer-selection question with a unique key and explained distractors. Its only weakness is that skill 4.B is a loose fit, which does not warrant a fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student recalls that an effective buffer has a pKa close to the target pH (within about 1 unit) and compares four given pKa values to 10.3. The answer is HCO3-/CO3^2- (pKa 10.33). It takes one reasoning step, needs no calculation, and involves no representation change. It is in scope for 8.8 but only loosely addresses skill 4.B, since it asks for a selection with no justification.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k2",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "A buffer works best when its pKa is close to the target pH. NH4+/NH3 has pKa 9.25, the closest of the four pairs to pH 9.1.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "NH4+ / NH3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.8 fits. Skill 4.B is somewhat loose (it reads as relationship choice), but it can be read as applying the pKa-within-one-unit model to the target."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "NH4+/NH3 (pKa 9.25) is uniquely closest to pH 9.1. key_index 1 matches that option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. All pKa values are in the stem and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode the strongest-acid and far-pKa misconceptions. Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with little reading load and no heavy arithmetic. Typical AP MC load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound buffer-choice item with a unique key and clear distractors. The only caveat is that the 4.B skill tag is somewhat loose for a relationship-choice question."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept application: an effective buffer has pKa close to the target pH. The student compares four given pKa values to 9.1 and picks NH4+/NH3 (pKa 9.25). There is no calculation, table or graph reading, or multi-step linking. It is fair and unambiguous, and it is easier than a typical full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k0",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "The temperature fell in every trial, by an average of about -2.5 °C. The dissolving process absorbed heat from the water, so it is endothermic.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Claim from calorimetry temperature data; fits 6.4/6.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is unique: temperature drops in all trials (mean -2.5 C), so the process is endothermic. B is clearly wrong because all three trials agree in direction."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with initial and final temperatures for three trials; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception and the explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, minimal arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the table is complete, the distractors are distinct misconceptions, and the task load is typical for AP."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student averages three small temperature changes (about -2.5 °C) and links a solution temperature decrease to energy absorbed by the dissolving process (endothermic). Distractors probe common misconceptions (steady temperature means no heat flow, trial variation invalidates the claim, temperature drop means exothermic). No heat-capacity calculation, minimal reading, simple arithmetic, in-scope concepts only. Conceptual and data-argumentation at a foundational level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k1",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Average ΔT ≈ -4.4 °C; temperature drops, so dissolving absorbs energy from solution: endothermic.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Claim supported by calorimetry temperature data; fits 6.4/6.B and prerequisite 6.1."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mean change is -4.37, which rounds to -4.4. All trials show a decrease, so endothermic. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has initial and final temperatures for three trials. The calorimeter insulation assumption is implicit and standard."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, light arithmetic, and a calculator is not needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound with a unique key and distinct distractors. It is slightly easy and the key option is the longest, but it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads a small table, averages three simple temperature changes (about -4.4 °C), and links a solution temperature decrease to an endothermic process (system absorbs energy from the surroundings/solution). No q = mcΔT computation is needed. Distractors target the common sign/direction misconception and a trial-variation misconception, but the reasoning is a short, direct claim-evidence link. Wording is clear and arithmetic is minimal, so this suits basic learning rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k2",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "ΔT values 4.4, 4.6, 4.3; average ≈ +4.4 °C. The temperature rose, so the dissolving released energy: exothermic.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60-85 seconds, with minimal reading and arithmetic. The calculator is barely needed but the designation is acceptable.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, the table is complete, and the distractors encode distinct misconceptions. The item is easy, option D is a weak straw man, and the key is longer than the other options, but these are minor, so it passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student reads a small table, averages three temperature changes (4.4, 4.6, 4.3, mean about 4.4 °C), and links a temperature rise in the solution to energy released, which makes the process exothermic. Concept depth is shallow: no q = mc?T calculation, no heat capacity values, no unit conversions. The distractors target a reversed heat-flow direction, a confusion between steady temperature and no energy change, and an overreaction to small trial-to-trial variation. Wording is unambiguous and the reading load is low, so the item suits foundational practice of claim-evidence linking rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k0",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Halving the volume doubles both concentrations, so Q = 2[B]/(4[A]^2) = K/2. Since Q < K, the system shifts toward the products (the side with fewer moles of gas).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.9 Le Chatelier volume change; the model-based prediction via Q vs K fits skill 4.A. Q-versus-K reasoning is borderline with 7.10 but is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is uniquely correct. B is wrong because concentrations do change. C has the wrong Q direction. D claims K changes, but K depends only on temperature."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear; it should perhaps state that no species is a solid or liquid, but both species are labeled (g)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions: no shift, reversed Q-versus-K direction, and K changes. The explanations for B and C are somewhat generic (\"Q is smaller than K\") but adequate. Option A is much longer than D, a mild length cue, but the other options are comparably long, so there is no real giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Takes about 60-90 seconds and requires no calculation, which is typical for the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct Le Chatelier volume-change item with a unique key and distinct distractors, suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires recognizing that halving the volume doubles all concentrations. Q = [B]/[A]^2 then becomes Q/2, which is less than K, so the system shifts toward the product, the side with fewer gas moles. The distractors target common misconceptions: no shift, K changes, and a wrong Q direction. The item needs one proportional-reasoning step and a link from Q vs K to the shift direction. It has minimal reading and no arithmetic burden, and it is within Unit 7 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k1",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Q=[B]/[A]^2. Adding A makes Q smaller than K, so the reaction shifts toward B (the product) until Q equals K again.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Shifts toward products; Q < K"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Le Chatelier concentration-change prediction with Q vs K reasoning fits 7.9 and the model-analysis skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Adding A lowers Q below K, so the shift is toward products. Option 3 is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions (reversed Q vs K comparison, no shift, K changes). The explanation covers every option. The 'why' for option 2 is slightly weak because it does not address the claim that the concentrations do not change."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 to 90 seconds with no calculation. It is easy but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound, unique-key Le Chatelier question with distinct distractors. It is easy but acceptable for AP."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative Le Chatelier prediction: adding reactant A lowers Q below K, so the system shifts toward products. It needs one reasoning link (Q vs K to direction) and no calculation or representation change. The distractors target common misconceptions such as K changing or no shift, but the item stays at the introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k2",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Halving the volume doubles all concentrations. Q = [B]/[A]^2 becomes Q/2, which is less than K, so the system shifts toward the product B.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.9 Le Chatelier volume change; predicting the shift from the Q vs K model fits 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Halving the volume gives Q = K/2, so the system shifts toward products. Key D is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is complete with constant temperature stated and clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (K changes, no shift, Q > K reversal). All wrong options are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no arithmetic, typical AP format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous Le Chatelier volume-change item with distinct distractors and full explanations. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single-concept Le Chatelier volume-change item. Student must recognize that halving the volume doubles concentrations, then reason through Q = [B]/[A]^2 to see that Q = K/2 < K, so the shift is toward products. There is one proportional-reasoning step and one link from the Q-vs-K result to the claim. No heavy arithmetic, a short stem, and distractors that target common misconceptions (K changes, no shift, wrong direction). It is standard AP difficulty and fits a full mock, on the easier side.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k0",
+  "cellId": "ap_chemistry-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Proceeds toward products; Q<K",
+     "brief_reasoning": "Q=[B]/[A]; increasing [A] lowers Q below K=0.4, so net forward reaction.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Q vs K after a concentration disturbance fits 7.10 and the prediction skill 2.B, though the demand is low."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Any increase in A gives Q<K, so the key (toward products, Q<K) is unique."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem never states how much A is added, yet the explanation uses Q=0.222 (A=0.9 M). That value is not derivable from the stem."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanations rely on the unstated Q=0.222. Option 4 (right direction, wrong Q relation) is internally inconsistent and implausible as a distinct misconception."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Very easy and solvable by memorized Le Chatelier shift. The calculator is unneeded. The explanation mismatches the stem."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the explanation cites Q=0.222, which relies on an added amount of A that the stem never gives. The item is also trivially easy and has a weak, inconsistent distractor. Fail for stimulus and explanation completeness; revise the stem to state the new [A] (e.g., 0.9 M)."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative item: increasing [A] makes Q = [B]/[A] smaller than K, so the net reaction shifts toward products. It needs one reasoning step with no real computation and no representation change. Distractors vary only the direction and the Q/K relationship. This is a foundational check of Q vs. K, below typical full-mock complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k1",
+  "cellId": "ap_chemistry-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Adding B raises Qc=[B]/[A] above Kc=0.75, so the net reaction proceeds toward the reactant A.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Q vs K direction prediction after adding product fits 7.10 / 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key C is unique: any increase in [B] at constant [A] makes Q > K=0.75, so net reaction goes toward reactants."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Stem never gives the new [B] or the amount added, yet the explanation uses Q = 1.5. The post-change quantity is missing from the stem."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Every rationale cites Q = 1.5, a value the student cannot see or derive from the stem, so the explanations are not grounded in the item as written. Distractors are otherwise distinct misconceptions."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is quick, but it is a purely qualitative question that provides numbers it never uses, and the explanation relies on an unstated value."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, but the stem omits the amount of B added while the explanation and distractor rationales rely on Q = 1.5, so the stimulus and explanations are inconsistent. Fail; fix by stating the new [B] (e.g., 0.6 M) or by rewording the explanations qualitatively."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative item: adding product B increases Q above K, so net reaction shifts toward reactants. Requires one reasoning step linking Q vs K to direction, with no numerical computation. Distractors target common misconceptions (reversed Q/K comparison, no shift). Appropriate for foundational learning rather than full-mock exam-level difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k2",
+  "cellId": "ap_chemistry-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Q=[B]/[A]^2; increasing [A] lowers Q below K=0.8, so the net reaction proceeds toward the products.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 7.10 / 2.B prediction via Q vs K."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key A is defensible qualitatively, since adding A lowers Q below K."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The amount or new concentration of A is not given, yet the explanation cites Q = 0.247, which requires [A] of about 0.9 M. The stem lacks this condition."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanations rely on Q = 0.247, a value that cannot be derived from the stem."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with a light load."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The stem does not say how much A is added, but the rationale uses a specific Q = 0.247 that depends on an unstated new [A]. The direction is deducible, but the item and its explanation are not self-consistent. Rejected for a missing condition."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative prediction: adding reactant A lowers Q = [B]/[A]^2 below K, so the net reaction shifts toward products. It requires no calculation and little reading, and the distractors test only the Q-versus-K direction logic. It is a core Le Chatelier/Q item rather than a multi-step exam-level problem.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m05-k0",
+  "cellId": "ap_chemistry-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "X2 combinations 63+63=126, 63+65=128, 65+65=130 give 3 distinct m/z peaks.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.2 mass spectra: enumerating molecular-ion peaks for X2 from isotope table. Fits skill 1.A reasonably (quantitative info from representation)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Distinct sums 126, 128, 130 give 3 peaks. Singly charged ions assumed (X2+ stated). Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table lists two isotope masses; the 'present' column is filler but harmless. Complete enough. Abundances not needed for the peak count."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 4, 2, 1 map to distinct misconceptions. Explanation covers each wrong option. The option '1' rationale (only mixed pairs) is slightly odd, since there is exactly 1 mixed pair, but it is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-75 seconds, short, no calculation needed. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct item on the number of X2+ molecular-ion peaks with 2 isotopes. The key of 3 is unique and the distractors are distinct. Minor: the 'present' table column is filler."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires moving from atomic isotope data to the particulate-level X2+ ion combinations (63-63, 63-65, 65-65), recognizing that isotope order doesn't matter, and counting distinct m/z values (126, 128, 130). The concept is moderately deep, with a common distractor (4 peaks) and a representation shift from atoms to molecules. The reading load is minimal, the arithmetic is trivial, and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m05-k1",
+  "cellId": "ap_chemistry-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Possible X2+ ions are 79-79, 79-81 and 81-81, with masses 158, 160 and 162, so there are 3 peaks.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.2 mass spectra, enumerating X2+ ion masses from isotopes; fits 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "3 peaks (158,160,162) is unique; intact X2+ specified."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is degenerate (all 'present') and redundant with stem, but consistent and complete for the question."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; each wrong option explained. Option 1 rationale slightly loose but fine."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 s, minimal reading, no arithmetic burden."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, simple item. The key of 3 is unique, and the distractors and explanation are adequate. The table stimulus is redundant but not flawed."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires moving from the isotope table to a particulate model of X2 molecules, enumerating the distinct isotope pairings (79-79, 79-81, 81-81), and converting them to distinct m/z values (158, 160, 162). The arithmetic is trivial and the reading is short. The difficulty comes from the concept: it tests the common misconception that peaks equal the number of isotopes, and the distractors 2 and 4 target that error and double-counting 79-81 as separate from 81-79. This is a standard Unit 1.2 extension, such as the Br2 spectrum, so it is a fair mock-exam item and not an advanced one.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m05-k2",
+  "cellId": "ap_chemistry-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "X2 combinations: 35-35 (70), 35-37 (72), 37-37 (74) give 3 distinct m/z peaks.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 1.2 and skill 1.A: enumerate isotope pair combinations and the resulting ion masses."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is 3: the sums 70, 72 and 74 amu are distinct. Unique and defensible, assuming singly charged ions."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table's y column 'Present in the sample' holds only 'present' in every row and carries no information. It is a weak representation, and a mass spectrum or abundance table would be more usual. The data are still sufficient to solve the item."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception and has its own explanation."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, with a light reading load. It is slightly easy and the calculator is unnecessary, which is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (3 peaks) is correct and unique, and the item fits the topic and skill. The weakness is the stimulus: the table's 'present' column carries no information. The distractors, explanation and timing are fine."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that intact X2+ ions combine isotopes (35-35, 35-37, 37-37), compute distinct masses (70, 72, 74), and avoid the distractor of 4 from counting ordered pairs. It goes beyond reading a simple atomic mass spectrum but needs only light enumeration, no heavy arithmetic, and has clear wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m06-k0",
+  "cellId": "ap_chemistry-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "E=hc/λ=6.626e-34*3.00e8/7.00e-7=2.84e-19 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "2.84×10^-19 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 70 seconds, with a single calculation and a calculator allowed. This is typical for the AP exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, single-skill photon energy calculation with a unique key and distinct misconception distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application of E = hc/λ with one nm-to-m conversion and one short calculation. The stem is short and unambiguous, and the distractors are plausible errors (frequency, per-mole energy, conversion slip). Choosing the relationship and converting units add only modest demand, so the item suits foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m06-k1",
+  "cellId": "ap_chemistry-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "E=hc/λ=(6.626e-34)(3.00e8)/(1.500e-6 m)=1.32e-19 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1.32×10^-19 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.12 photon energy from wavelength; skill 5.F calculate an unknown. The nm to m conversion is a permitted lever."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique: 1.32e-19 J for a single photon. The other options are the mole of photons, the frequency, and an answer with h omitted. None can be defended as correct for the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and gives the wavelength with units. The constants h and c are standard and available on the AP reference sheet."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation covers every wrong option. The options are parallel in format with no length giveaway. The 2.00e-4 distractor is labeled 'c/λ in wrong units', which is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A single-step calculation of about 70 seconds with a calculator, typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard photon-energy item with a unique key and distinct distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of E = hc/lambda with one nm to m unit conversion. Students must choose the correct relationship, but there is no graph, no multi-step linking, and no heavy arithmetic. Distractors reflect common errors (unit omission, missing h, frequency). Fits foundational practice rather than full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m06-k2",
+  "cellId": "ap_chemistry-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "E=hc/λ=(6.626e-34)(3.00e8)/(450e-9)=4.42e-19 J",
+     "choice_index": 3,
+     "final_answer": "4.41e-19 J",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.12 photon energy via E=hc/λ; skill 5.F fits. Includes nm to m conversion."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "4.41e-19 J is the unique correct answer; the solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (frequency, mole of photons, omitted h). The third rationale is slightly vague, but the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, calculator allowed, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard E=hc/λ item with a unique key and distinct distractors. The frequency distractor's unit is mislabeled as J, and the third distractor's rationale is a bit vague. Both are minor, so the item passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of E = hc/λ from the equation sheet, with one nm-to-m unit conversion and one short calculation. No stimulus, no representation change, no linking reasoning step. Distractors reflect common errors (frequency value, unit/exponent mistakes). Fits foundational practice of skill 5.F rather than the multi-step demands of a full mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m07-k0",
+  "cellId": "ap_chemistry-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "X = 1 (body center). Y = 12 edge centers × 1/4 = 3. Formula XY3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "XY3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.3 unit cell ion counting; fits 1.A quantitative particulate model."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "X=1, Y=12/4=3, XY3 unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem self-contained with sharing rules; no stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct rationale; XY6 'doubles anions' is slightly weak but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, quick, no heavy arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear unit-cell counting item with a unique key and plausible distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student applies the given sharing fractions to count ions per unit cell (1 center ion; 12 edge ions x 1/4 = 3) and reduces to the ratio XY3. The sharing rules are supplied in the stem, so only direct application and simple arithmetic are needed, with no representation changes or multi-step linking.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m07-k1",
+  "cellId": "ap_chemistry-m07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "X: 12×1/4 + 1 = 4; Y: 8×1/8 + 6×1/2 = 4; ratio 1:1 → XY (NaCl-type)",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "XY"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Unit-cell ion counting from shared positions fits 2.3 and skill 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "X=4, Y=4, so XY. The key is unique and the stem gives the sharing fractions."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The XY2 rationale ('doubles anions') and the X2Y rationale ('2:1 for any body-centered cell') are not realistic or well-defined misconceptions. Neither follows from a plausible counting error. Only X13Y14 encodes a genuine misconception. The XY2 rationale also refers to 'anions' although the stem never identifies the ions' charges."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 100 seconds, and the calculator designation is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (XY) is correct and unique, and the item fits topic and skill. Two of the three distractor rationales (XY2 and X2Y) describe contrived misconceptions rather than realistic student errors, so the item fails the distractor criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard unit-cell ion counting with the sharing fractions supplied in the stem. The student computes X = 12(1/4) + 1 = 4 and Y = 8(1/8) + 6(1/2) = 4, then reduces to the 1:1 ratio, giving XY. The arithmetic is simple and the concept depth is modest. The distractor X13Y14 comes from counting ions without the sharing fractions. The item has no graph or table and no unit conversion.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m07-k2",
+  "cellId": "ap_chemistry-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Corners: 8×1/8=1 X; body center: 1 Y → XY",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "XY"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.3 unit cell counting. Skill 1.A is a reasonable fit: the student interprets a particulate-level unit cell representation described in text and gets quantitative information (ions per cell)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "8 corner X x 1/8 = 1 X; 1 body-center Y = 1 Y. XY is the unique correct answer. The sharing fractions are given in the stem, so no condition is missing."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed because the stem fully describes the ion positions. The wording is clear. The parenthetical gives the sharing rules, which slightly over-scaffolds the item but is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The X8Y distractor encodes a real misconception (counting whole ions, ignoring sharing). The XY2 rationale ('doubles the anions') and the X2Y rationale ('2 to 1 for any body-centered cell') are weak and somewhat artificial, but they are distinct and each is explained. The correct-answer explanation contains the template phrase 'ion(s)' and mentions faces and edges that are not in this cell, which is a minor wording flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick (about 60 seconds), no calculator needed, four short parallel formula options, and no giveaway in option length or format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, with a unique key (XY) and a clear stem that gives all needed information. It is within scope for topic 2.3 and suitable for the exam. The only weaknesses are mildly artificial distractor rationales and template wording in the explanation."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step unit cell ion counting: 8 corners x 1/8 = 1 X; 1 center Y = 1 Y; formula XY. Sharing fractions are given in the stem, so no recall beyond the basic idea is needed. Arithmetic is trivial, reading is minimal, and there is no representation change or multi-step reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m08-k0",
+  "cellId": "ap_chemistry-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "F ∝ q1q2/r^2: factor = 2/9 = 0.222",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.222"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Coulomb's law scaling, topic 2.2, skill 5.C: explains how variables relate in an equation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2/9 = 0.222 is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 2/3, 1/9 and 4/9 encode distinct misconceptions, and each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, minimal arithmetic, consistent with the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct Coulomb's law scaling item with a unique key and well-motivated distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single application of Coulomb's law proportionality: F scales with q1*q2/r^2, giving 2/9 = 0.222. Distractors target common errors (not squaring r, ignoring the charge change, squaring the charge factor). One proportional-reasoning step, trivial arithmetic, no representation changes, minimal reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m08-k1",
+  "cellId": "ap_chemistry-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "F ∝ q1q2/r^2: 2/4 = 0.5",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.5"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds and needs no calculation. Options are plain numbers in parallel form.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous Coulomb's-law scaling question with the correct key of 0.5 and distinct misconception-based distractors, and the distractor explanations I rechecked are consistent with their values. One minor point is that the distractor_explanation check is marked fail even though my notes find the explanations consistent, so that mark should be treated as an error on my part and the item passes overall."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Apply Coulomb's law F ∝ q1q2/r^2: doubling one charge gives x2, doubling distance gives x1/4, net factor 0.5. One governing relationship, two simple proportional adjustments, no computation or representation change, minimal reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m08-k2",
+  "cellId": "ap_chemistry-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "F ∝ q1q2/r^2; factor = 2/2^2 = 0.5",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.5"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds and needs no arithmetic beyond a simple ratio. Calculator designation is consistent with the subject notes.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean Coulomb's law proportional-reasoning item. The key of 0.5 is unique, the distractors reflect distinct errors, and the load is appropriate for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single governing relationship (Coulomb's law, F proportional to q1q2/r^2) applied with two simultaneous proportional changes: doubling one charge gives x2, doubling distance gives x1/4, net 0.5. No arithmetic burden, minimal reading, no representation change. Distractors map to common errors (ignoring charge change, canceling, inverting the inverse-square). Fits skill 5.C at a foundational level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]

@@ -15,6 +15,9 @@ const items = buildStock(runs, {});
 // 결정적 TeX 위생(의미 변경 없음; 2026-10-13: \text{ N\cdot m} 의 \cdot 도 KaTeX 가 text 안에서 렌더하지 못해 가운뎃점으로 바꾼다): 유료 런 시점의 생성기가 \text{ m/s^2} 처럼 text 안에 ^ 를 넣었다(KaTeX 가 거부 → 화면 증거에서 원문 수식 노출). 지수를 text 밖으로 옮긴다. 생성기는 같은 커밋에서 고쳤다(phys_common.unit_tex).
 const fixTex = (v: unknown): unknown => typeof v === "string" ? v.replace(/\\text\{([^}^_]*?)\^(\{?-?\d+\}?)\}/g, (_m, a: string, e: string) => `\\text{${a}}^{${e.replace(/[{}]/g, "")}}`).replace(/\\text\{([^}]*?)\\cdot ?([^}]*)\}/g, (_m, a: string, b: string) => `\\text{${a}·${b}}`) : Array.isArray(v) ? v.map(fixTex) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, fixTex(x)])) : v;
 for (const i of items) i.payload = fixTex(i.payload) as typeof i.payload;
+// 2026-10-13(화학): 그림이 없는 문항의 지문이 "the diagram" 을 쓰면 문제은행 표준 렌더링 검증이 '그림을 가리키는데 그림이 없다'며 거부한다. 같은 뜻의 "the student's drawing" 으로 바꾼다(원형은 고쳤고 이미 만든 재고만 해당).
+const noDiagramWord = (v: unknown): unknown => typeof v === "string" ? v.replace(/\bthe diagram\b/g, "the student's drawing") : Array.isArray(v) ? v.map(noDiagramWord) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v as Record<string, unknown>).map(([k, x]) => [k, noDiagramWord(x)])) : v;
+for (const i of items) if (String((i.payload as { archetype?: string }).archetype ?? "") === "ch_lewis_electron_check") i.payload = noDiagramWord(i.payload) as typeof i.payload;
 for (const i of items) if (Array.isArray(i.payload.items)) { i.structure = "shared_stimulus_set"; i.stockCell = i.stockCell.replace("|shared_set|", "|shared_stimulus_set|"); }
 writeFileSync(path.join(out, `${BATCH}-items.json`), JSON.stringify(items.map((i) => ({ ...i })), null, 0));
 const pass = items.filter((i) => i.validation === "auto_passed" && !i.duplicateOf && generatorDefects(i.payload).length === 0);

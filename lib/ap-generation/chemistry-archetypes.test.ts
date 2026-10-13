@@ -55,16 +55,19 @@ d("AP Chemistry P0 archetypes (Python generators, 2 seeds each)", () => {
     }
   });
 
-  it("graph stimuli pass the existing ap_graph figure gate (diagram variants have no TS renderer yet)", () => {
-    let graphs = 0;
+  it("graph stimuli and the PES / particle diagrams pass the figure gate (ap_graph, ap_diagram chem_pes | chem_particles)", () => {
+    let graphs = 0, diagrams = 0;
     for (const n of out.names) for (const p of flat(n)) {
-      if (p.stimulus.kind !== "graph") continue;
-      graphs++;
+      const variant = (p.stimulus as { data?: { variant?: string } }).data?.variant;
+      const chemDiagram = p.stimulus.kind === "diagram" && (variant === "chem_pes" || variant === "chem_particles");
+      if (p.stimulus.kind !== "graph" && !chemDiagram) continue;
+      if (chemDiagram) diagrams++; else graphs++;
       const g = gateCandidate({ candidateKey: n, apSubjectCode: "ap_chemistry", kind: "mc", payload: p as unknown as Record<string, unknown> });
       expect({ n, fig: g.issues.filter((i) => i.level === "error").map((i) => i.code) }).toEqual({ n, fig: [] });
       expect({ n, status: g.status }).toEqual({ n, status: "pass" });
     }
     expect(graphs).toBeGreaterThanOrEqual(10);
+    expect(diagrams).toBeGreaterThanOrEqual(5);
   });
 
   it("registers the 7 FRQ types (3 long x 10 + 4 short x 4 = 46 points) and passes the FRQ gates", () => {

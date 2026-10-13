@@ -32,9 +32,9 @@ export function contentSignature(c: Pick<RawCand, "kind" | "payload">): string {
   const p = c.payload;
   if (c.kind === "mc") {
     const items = Array.isArray(p.items) ? (p.items as any[]) : [p]; // eslint-disable-line @typescript-eslint/no-explicit-any
-    return norm(items.map((it) => `${it.stem ?? ""}|${((it.options as unknown[]) ?? []).map(optText).map(norm).sort().join("~")}`).join("##") + "|" + JSON.stringify(p.stimulus?.data ?? {}));
+    return norm(items.map((it) => `${it.stem ?? ""}|${((it.options as unknown[]) ?? []).map(optText).map(norm).sort().join("~")}`).join("##") + "|" + JSON.stringify(p.stimulus?.data ?? {}) + "|" + (p.stimulus?.description ?? ""));
   }
-  return norm(`${p.title ?? ""}|${((p.parts as any[]) ?? []).map((x) => x.prompt).join("|")}|${JSON.stringify(p.stimulus?.data ?? {})}`); // eslint-disable-line @typescript-eslint/no-explicit-any
+  return norm(`${p.title ?? ""}|${((p.parts as any[]) ?? []).map((x) => x.prompt).join("|")}|${JSON.stringify(p.stimulus?.data ?? {})}|${p.stimulus?.description ?? ""}`); // eslint-disable-line @typescript-eslint/no-explicit-any — 2026-10-13: 글 자료(data={}) FRQ 는 설명(description)에 수치가 있어 빠지면 모두 exact 중복으로 오판된다
 }
 export const shingleSet = (s: string) => { const t = norm(s).replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter(Boolean); const o = new Set<string>(); for (let i = 0; i + 2 < t.length; i++) o.add(t.slice(i, i + 3).join(" ")); return o; };
 export const jaccard = (a: Set<string>, b: Set<string>) => { let i = 0; a.forEach((x) => b.has(x) && i++); const u = a.size + b.size - i; return u ? i / u : 0; };

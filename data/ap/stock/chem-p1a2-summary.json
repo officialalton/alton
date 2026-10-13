@@ -1,0 +1,69 @@
+{
+ "runs": [
+  "chem-p1-a2"
+ ],
+ "rows": 42,
+ "passed": 32,
+ "rejected": 10,
+ "passRate": 0.762,
+ "singles": {
+  "candidates": 42
+ },
+ "unitsPassed": {
+  "1": 3,
+  "2": 2,
+  "3": 7,
+  "4": 2,
+  "5": 3,
+  "6": 3,
+  "7": 4,
+  "8": 6,
+  "9": 2
+ },
+ "figPassed": {
+  "none": 27,
+  "scene": 1,
+  "graph": 4
+ },
+ "figAll": {
+  "none": 36,
+  "scene": 2,
+  "graph": 4
+ },
+ "figPassRate": {
+  "none": "27/36",
+  "scene": "1/2",
+  "graph": "4/4"
+ },
+ "renderTypesPassed": {
+  "none": 22,
+  "ap_table": 5,
+  "ap_diagram:chem_pes": 1,
+  "ap_graph:calc_multi_curve": 2,
+  "ap_graph:calc_function_or_derivative": 2
+ },
+ "archetypesPassed": {
+  "ch_moles_of_atoms": 2,
+  "ch_ideal_gas": 2,
+  "ch_beer_lambert": 1,
+  "ch_limiting_reagent": 2,
+  "ch_rate_law_initial": 2,
+  "ch_calorimetry": 2,
+  "ch_ice_table": 2,
+  "ch_weak_acid_ph": 2,
+  "ch_buffer_ph": 2,
+  "ch_cell_potential": 1,
+  "ch_pes_identify": 1,
+  "ch_bond_polarity": 2,
+  "ch_imf_boiling": 2,
+  "ch_mb_curves": 2,
+  "ch_mechanism_consistent": 1,
+  "ch_calorimetry_error": 1,
+  "ch_q_vs_k": 2,
+  "ch_gibbs_sign": 1,
+  "chs_titration_set_q1": 2
+ },
+ "costUsd": {
+  "chem-p1-a2": 1.5315
+ }
+}

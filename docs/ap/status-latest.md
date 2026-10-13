@@ -78,3 +78,5 @@
 ## Physics 1 스킬 범위 보강 phys-s3 · PH3/PH4 (2026-10-13, 비프로덕션 미적재)
 - 신규 원형 40(2.A 11·2.C 10·2.D 7·3.B 7·3.C 5), 유료 80후보 → 통과 71(88.75%), 비용 $2.6406(단계 상한 $3.00), 이 작업 트리 원장 누적 $55.4477(Chemistry 별도 집행 약 $2.1 합산 약 $57.5, 중단선 $90). 화면 증거 71개 x 2 뷰포트 = 142항목 fail 0, 격리 스택 정리 완료.
 - **PH3/PH4 = 공식 스킬 범위(2.A 7–8, 2.B 9–10, 2.C 5–6, 2.D 5–6, 3.B 9–10, 3.C 3–4) + 단원 5/8/8/5/5/3/3/5 정확 충족**, 겹침 0, 가상 칸 0(`data/ap/stock/exact-assign-phys-ph3-ph4.json`). PH3 {2.A 8, 2.B 10, 2.C 6, 2.D 5, 3.B 9, 3.C 4}, PH4 {2.A 8, 2.B 10, 2.C 5, 2.D 6, 3.B 9, 3.C 4}. PH1/PH2 는 스킬 범위 이탈이라 대체 대상(FRQ 8건을 같이 써서 PH1/PH2 삭제 후 저장). 적재 배치: phys-p1a·p1a2·p1b·s2·**s3**. 상세 `physics1-groundwork.md` §15.
+## Chemistry CH1·CH2 조립 완료 (2026-10-13, 누적 $65.7914 / 중단선 $90)
+- 정확 배정 `data/ap/stock/exact-assign-chem-ch1-ch2.json`: 가상 0, 위반 0, 각 MC 60(단독 56 + 세트 2)·FRQ 7. 적재 배치 `chem-p1a, chem-p1a2, chem-p1b, chem-s2f, chem-s2ma, chem-s2mb, chem-s2mc`(증거 `evidence-chem-s2.json`). 상세는 `docs/ap/chemistry-groundwork.md` 부록.

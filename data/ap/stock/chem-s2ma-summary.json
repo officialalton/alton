@@ -1,0 +1,87 @@
+{
+ "runs": [
+  "chem-s2-m-a"
+ ],
+ "rows": 104,
+ "passed": 54,
+ "rejected": 50,
+ "passRate": 0.519,
+ "singles": {
+  "candidates": 104
+ },
+ "unitsPassed": {
+  "1": 3,
+  "2": 6,
+  "3": 14,
+  "4": 5,
+  "5": 6,
+  "6": 4,
+  "7": 5,
+  "8": 4,
+  "9": 7
+ },
+ "figPassed": {
+  "none": 48,
+  "scene": 4,
+  "graph": 2
+ },
+ "figAll": {
+  "none": 92,
+  "graph": 4,
+  "scene": 8
+ },
+ "figPassRate": {
+  "none": "48/92",
+  "graph": "2/4",
+  "scene": "4/8"
+ },
+ "renderTypesPassed": {
+  "none": 40,
+  "ap_table": 8,
+  "ap_diagram:chem_particles": 1,
+  "ap_diagram:chem_pes": 3,
+  "ap_graph:calc_multi_curve": 2
+ },
+ "archetypesPassed": {
+  "ch_beer_procedure": 1,
+  "ch_buffer_choice": 1,
+  "ch_chromatography": 2,
+  "ch_entropy_sign": 2,
+  "ch_formation_enthalpy": 2,
+  "ch_gas_deviation": 1,
+  "ch_gas_vapor_error": 1,
+  "ch_gibbs_sign": 2,
+  "ch_gibbs_temperature": 1,
+  "ch_hess_law": 2,
+  "ch_k_manipulation": 2,
+  "ch_ksp_solubility": 2,
+  "ch_lewis_electron_check": 2,
+  "ch_mechanism_consistent": 1,
+  "ch_miscibility": 1,
+  "ch_needed_dumas": 1,
+  "ch_nernst": 2,
+  "ch_order_plot": 2,
+  "ch_partial_pressure": 1,
+  "ch_particulate_limiting": 1,
+  "ch_pes_identify": 2,
+  "ch_pes_subshell": 1,
+  "ch_ph_ranking": 1,
+  "ch_photon_energy": 1,
+  "ch_precipitate_claim": 1,
+  "ch_rate_prediction": 1,
+  "ch_redox_agent": 2,
+  "ch_resonance_lengths": 1,
+  "ch_species_ratio": 2,
+  "ch_testable_variables": 2,
+  "ch_titration_conc": 1,
+  "ch_unit_cell_ratio": 1,
+  "ch_vapor_pressure_graph": 2,
+  "ch_variable_gas": 2,
+  "ch_viscosity_trend": 1,
+  "ch_vsepr_shape": 2,
+  "chs_equilibrium_set_q1": 1
+ },
+ "costUsd": {
+  "chem-s2-m-a": 3.6794
+ }
+}

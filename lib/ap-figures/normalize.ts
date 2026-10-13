@@ -582,6 +582,16 @@ function normalizeDiagram(d: Json | null, stim: Json, ctx: StimCtx, issues: Norm
     if (!isObj(d.scene)) return fail("diagram_phys_scene", "phys_scene 의 scene 객체가 없습니다.");
     return { stimKind: "diagram", spec: { type: "ap_diagram", variant: "phys_scene", scene: d.scene as never }, features, issues, hidden };
   }
+  // AP Chemistry 장면 모델: PES 는 봉우리 목록(원자 번호 등 화면에 없는 값은 버린다), 입자 그림은 scene 객체.
+  if (d.variant === "chem_pes") {
+    if (!Array.isArray(d.peaks)) return fail("diagram_chem_pes", "chem_pes 의 peaks 배열이 없습니다.");
+    const peaks = (d.peaks as unknown[]).map((p) => (isObj(p) ? { energy: Number(p.energy), electrons: Number(p.electrons) } : { energy: NaN, electrons: NaN }));
+    return { stimKind: "diagram", spec: { type: "ap_diagram", variant: "chem_pes", scene: { type: "pes", peaks, unit: typeof d.unit === "string" ? d.unit : "MJ/mol" } }, features, issues, hidden };
+  }
+  if (d.variant === "chem_particles") {
+    if (!isObj(d.scene)) return fail("diagram_chem_particles", "chem_particles 의 scene 객체가 없습니다.");
+    return { stimKind: "diagram", spec: { type: "ap_diagram", variant: "chem_particles", scene: d.scene as never }, features, issues, hidden };
+  }
   const strand = (s: unknown) => (isObj(s) && Array.isArray(s.bases) ? { label: String(s.label ?? s.type ?? ""), leftEnd: String(s.left_end ?? ""), rightEnd: String(s.right_end ?? ""), bases: (s.bases as unknown[]).map(String) } : null);
   if (isObj(d.top_strand) && isObj(d.bottom_strand)) {
     const top = strand(d.top_strand), bottom = strand(d.bottom_strand);
