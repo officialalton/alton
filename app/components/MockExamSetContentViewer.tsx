@@ -6,6 +6,7 @@ import type { MockExamSetContentItem } from "@/lib/mock-exam/set-content";
 import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
+import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
 import { problemText } from "@/lib/problem-figures/label-rule";
 
 const SECTION_LABEL: Record<string, string> = { rw: "R&W", math: "Math" };
@@ -14,7 +15,9 @@ const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
 /** 관리자·교사가 모의고사 세트의 실제 문항(지문·질문·선택지·정답·해설·그림)을 확인하는 화면
  * (2026-09-21 UAT 지적 — 기존 "검토" 화면은 영역·난이도 메타데이터뿐이라 문제 내용 자체를
  * 볼 방법이 없었다). 정답·해설은 스태프라 항상 보여준다(학생 응시 마스킹과 무관). */
-export default function MockExamSetContentViewer({ items }: { items: MockExamSetContentItem[] }) {
+/** autoMath: AP 세트는 생성기가 `$...$` 없이 쓴 수식이 있어 학생 화면과 같은 보수적 변환(autoMathExplanation)을 거쳐 그린다(저장본은 그대로). */
+export default function MockExamSetContentViewer({ items, autoMath = false }: { items: MockExamSetContentItem[]; autoMath?: boolean }) {
+  const m = (t: string) => (autoMath ? autoMathExplanation(t) : t);
   const [index, setIndex] = useState(0);
   const current = items[index];
 
@@ -46,7 +49,7 @@ export default function MockExamSetContentViewer({ items }: { items: MockExamSet
             {current.skillCode ? ` · ${current.skillCode}` : ""} · {current.difficulty}
           </p>
           {dedupeStem(current.passage, current.question) && <RwStimulusView question={current.question} passage={dedupeStem(current.passage, current.question)} className="mb-3 text-[13px]" />}
-          {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[13.5px]" />}
+          {current.question && <LearningText text={m(current.question)} className="mb-3 font-semibold text-[13.5px]" />}
           {current.figure ? <ProblemFigure spec={current.figure} text={problemText(current.passage, current.question, current.options)} className="mb-3" /> : null}
 
           {current.options && current.options.length > 0 ? (
@@ -61,7 +64,7 @@ export default function MockExamSetContentViewer({ items }: { items: MockExamSet
                     }`}
                   >
                     <span>{OPTION_LETTERS[i] ?? i + 1}.</span>
-                    <LearningText text={opt} />
+                    <LearningText text={m(opt)} />
                     {isCorrect && <span className="ml-auto shrink-0 text-[11px] font-bold text-green">Answer</span>}
                   </div>
                 );
@@ -77,7 +80,7 @@ export default function MockExamSetContentViewer({ items }: { items: MockExamSet
           {current.explanation && (
             <div className="mt-3 rounded-lg bg-grey-50 p-3 text-[12.5px] leading-relaxed">
               <p className="mb-1 text-[11px] font-extrabold uppercase tracking-wide text-grey-400">Explanation</p>
-              <LearningText text={current.explanation} />
+              <LearningText text={m(current.explanation)} />
             </div>
           )}
 

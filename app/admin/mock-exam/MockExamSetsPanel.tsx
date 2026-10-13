@@ -758,7 +758,7 @@ function ReviewTab() {
               })()}
               {publishError && <p className="mb-2 text-sm text-red">{publishError}</p>}
               {sets?.find((s) => s.id === selectedId)?.format === "mst" && <MstModuleFlags examSetId={selectedId} />}
-              <MockExamSetContentViewer items={items} />
+              <MockExamSetContentViewer items={items} autoMath={sets?.find((s) => s.id === selectedId)?.examProgram === "ap"} />
             </>
           )}
         </section>
@@ -900,7 +900,7 @@ function PublishTab() {
                 )}
               </div>
               {archiveError && <p className="mb-2 text-sm text-red">{archiveError}</p>}
-              <MockExamSetContentViewer items={items} />
+              <MockExamSetContentViewer items={items} autoMath={sets?.find((s) => s.id === selectedId)?.examProgram === "ap"} />
             </>
           )}
         </section>
@@ -962,7 +962,7 @@ function ArchiveTab() {
           ) : items === null ? (
             <p className="text-sm text-grey-400">불러오는 중…</p>
           ) : (
-            <MockExamSetContentViewer items={items} />
+            <MockExamSetContentViewer items={items} autoMath={sets?.find((s) => s.id === selectedId)?.examProgram === "ap"} />
           )}
         </section>
       )}

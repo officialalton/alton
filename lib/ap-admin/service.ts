@@ -18,7 +18,7 @@ import { readPartialPlan } from "./batches";
 import { reservedKeyMap } from "./reserved-keys";
 import { published } from "../../scripts/ap-generation/assign-pool";
 
-export type AuditAction = "load_check" | "import" | "render_verify" | "screen_verify" | "convert" | "assemble_draft" | "new_version_preview" | "new_version_draft" | "new_version_publish" | "set_access_tier";
+export type AuditAction = "load_check" | "import" | "render_verify" | "screen_verify" | "convert" | "assemble_draft" | "new_version_preview" | "new_version_draft" | "new_version_publish" | "set_access_tier" | "explanation_fix_preview" | "explanation_fix" | "set_refresh_draft";
 export type StepResult = {
   action: AuditAction; mode: "dry_run" | "execute"; executed: boolean; target: { ref: string; kind: string; canWrite: boolean; reason: string | null };
   scope: Record<string, unknown>; counts: Record<string, number>; lines: string[]; planHash: string | null; blocked: string | null; ok: boolean;

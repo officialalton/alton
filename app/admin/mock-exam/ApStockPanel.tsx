@@ -11,6 +11,7 @@ import {
 } from "../ap-stock-actions";
 import type { BatchCheck } from "@/lib/ap-admin/load-check";
 import ApNewVersionPanel from "./ApNewVersionPanel";
+import ApExplanationFixPanel from "./ApExplanationFixPanel";
 
 // 'AP 재고 관리'(2026-10-12). 터미널 스크립트를 대체하는 관리자 화면: 점검 → (적재 · 렌더 기록 · 화면 기록 · 문제은행 변환) → 초안 세트.
 // 모든 쓰기는 "미리보기 → 확인 체크 → 실행" 순서이고, 실행은 미리보기와 같은 계획일 때만 된다. 공개(게시)는 이 화면에 없다.
@@ -264,6 +265,7 @@ export default function ApStockPanel() {
         <AssemblePanel ov={ov} canWrite={ov.target.canWrite} onDone={load} />
         <PartialPanel ov={ov} canWrite={ov.target.canWrite} onDone={load} />
         <ApNewVersionPanel canWrite={ov.target.canWrite} />
+        <ApExplanationFixPanel canWrite={ov.target.canWrite} />
       </section>
 
       <section>
