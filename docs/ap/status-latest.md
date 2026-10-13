@@ -63,3 +63,14 @@
 - 재고(통과·고유·화면 증거): MC 단원별 1:19 2:25 3:48 4:21 5:23 6:10 7:14 8:13, FRQ 8(유형당 2). 화면 증거 157 후보 328항목 fail 0(`evidence-phys-s2.json`, 세 배치 공유).
 - **PH1·PH2**: MC 42(단독 38 + 2문항 세트 2)·FRQ 4(MR·TBR·LAB·QQT), 단원 5/8/8/5/5/3/3/5, 문항군 1, 서로 겹침 0, 가상 0, 독립 검증기 위반 0 — `data/ap/stock/assembled/phys-ph1-ph2.json`, 목록용 `exact-assign-phys-ph1-ph2.json`. 적재 필요 배치: `phys-p1a`(미적재 시)·`phys-p1a2`·`phys-p1b`·`phys-s2`(조정 세션이 관리자 화면에서 적재 후 PH1·PH2 초안 저장).
 - 열린 결정: 공식 MC 스킬 비중(2.A 7–8, 2.B 9–10, 2.C 5–6, 2.D 5–6, 3.B 9–10, 3.C 3–4) 대비 현재 원형이 2.B 편중(PH1 25·PH2 36)이라 스킬 범위는 비차단 경고로만 다룬다. 해소 = 2.A·2.C·3.B/3.C 원형 약 20개 + 약 $2–3 유료. FRQ 는 유형당 시나리오 1개(PH1·PH2 가 같은 상황의 다른 숫자).
+
+## Chemistry P0 무료 엔지니어링 완료 (2026-10-13)
+- 범위: 유료 호출·DB·키·push·삭제 없음. 사실: `docs/ap/chemistry-facts.md`(CED ©2024·AP Central 직접 대조), 설계·결과·비용: `docs/ap/chemistry-groundwork.md`.
+- 사실: MC 60문항·90분(세트 크기 미공표), FRQ 7문항·105분 = 긴 3×10점 + 짧은 4×4점(46점), 단원 MC U3 18–22·U8 11–15·나머지 7–9, Practice 3 은 MC 비평가, 계산기 "공학용 또는 그래핑 권장"(4칙·Bluebook 내장 UNVERIFIED), 주기율표·식 시트 제공, 하이브리드(FRQ 종이).
+- 구현: Python 원형 **단독 MC 97 + 2문항 세트 3 + FRQ 7유형**(`chem_p0_*.py`), 9단원 전부, 정답은 sympy·정확 분수와 numpy·이분법·ODE·최소제곱·시뮬레이션 **이중 경로**. **스킬 범위 내장**: 공식 MC 스킬 25개 전부에 원형, 라이브러리로 공식 단원·Practice 범위 안 60문항 세트 조립 가능(정수계획 검사), FRQ 46점 Practice 비중도 범위 안. TS: `subjects/chem.ts`·`gates.ts`(`NOT_ASSESSED_MC` 3.A–3.C·FRQ 프로필)·`stats-set.ts`·`pipeline2.ts`.
+- 도구: `ap_chemistry` = 공학용 계산기 + Chemistry Reference 패널(주기율표 1–86·상수·식, "ALTON study reference — not the official College Board sheet").
+- 테스트: Python 31 + Vitest(`chemistry-archetypes.test.ts` 7, exam-tools 3) 통과, `--project unit` 373 통과. `CHEM_SEEDS=12` 확대 통과.
+- 파이프라인 무료 배선 점검(plan·blueprint·check, `--subject ap_chemistry`, 호출 0): MC 88/88·FRQ 28/28 통과.
+- 동결 골격(미동결·미실행): `config/ap-frozen/chem-p1-a.template.json`(MC 22, 상한 $2.0), `chem-p1-b.template.json`(FRQ 7, 상한 $1.0). 누적 $52.8070 기준 중단선 $90 여유 $37.19.
+- **비용 추정**(Physics 실측 MC $0.039/후보·FRQ $0.05–0.06/후보, 첫 통과 68%/53%): 파일럿 ≈ **$2.1**(상한 $3.0), 풀 모의고사 2회 + 1.3배 예비 + 파일럿 ≈ **$13**(낙관 $9 / 보수 $20).
+- 유료 호출 전 남은 일: PES·입자 그림의 TS `ap_diagram` 렌더 연결(해당 원형 5종), 한 원형뿐인 스킬(1.B·2.A·2.B·2.F·6.A–6.C·6.E–6.G) 변형 추가, 풀 세트용 `cells.ts`·`stock.ts`·`assemble-draft.ts`·`full-set-rules.ts` 배선, 계산기·시트 UNVERIFIED 항목 확인, 오너 예산 승인.
