@@ -1,0 +1,401 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "BI2",
+ "sourceSetName": "AP Biology — Practice Exam 2",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/audit/bio-new-version-plans.ts",
+ "note": "단계 ① BI2 중간판(v2): BI1 가 v3 에서 가져갈 문항을 비우고 빈 칸을 아무도 안 쓰는 문항으로 채운다(단원 범위 유지). 공개 직후 ②③ 을 이어서 한다.",
+ "swapCount": 19,
+ "verifierViolations": [
+  "BI2: practice_1_9_not_in_15-20",
+  "BI2: practice_5_11_not_in_4-9",
+  "BI2: practice_1_9_not_in_15-20",
+  "BI2: practice_5_11_not_in_4-9"
+ ],
+ "substitutions": [
+  "BI1: bio-s2-mc-b:ap_biology-m20-k0 는 BI1 가 지금 이미 갖고 있고 v3 에서만 빠지는 같은 원형(bi_evidence_evolution)·단원·Practice 문항이라 그대로 유지한다(교체 불필요).",
+  "BI1: v3 의 bio-r2:ap_biology-m18-k0 는 DB 에서 아직 변환되지 않아 같은 (단원·Practice) 의 변환 완료 문항 bio-s2-mc-b:ap_biology-m20-k0 로 대체(exam_prep 0/0; 단원·Practice 동일)."
+ ],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "position": 4,
+   "removeKey": "bio-s2-mc-a:ap_biology-m67-k0",
+   "addKey": "bio-v2a:ap_biology-m16-k0",
+   "remove": {
+    "unit": 1,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 6,
+    "skill": "2.D",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 5,
+   "removeKey": "bio-s2-mc-a:ap_biology-m68-k0",
+   "addKey": "bio-v2c:ap_biology-m08-k0",
+   "remove": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "4.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 8,
+   "removeKey": "bio-s2-mc-a:ap_biology-m32-k0",
+   "addKey": "bio-v2a:ap_biology-m28-k1",
+   "remove": {
+    "unit": 2,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 8,
+    "skill": "5.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 9,
+   "removeKey": "bio-s2-mc-a:ap_biology-m49-k0",
+   "addKey": "bio-v2b:ap_biology-m06-k1",
+   "remove": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "6.E",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 14,
+   "removeKey": "bio-p1-a:ap_biology-m12-k1",
+   "addKey": "bio-v2b:ap_biology-m14-k2",
+   "remove": {
+    "unit": 3,
+    "skill": "4.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   },
+   "add": {
+    "unit": 3,
+    "skill": "4.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 15,
+   "removeKey": "bio-r1-mc:ap_biology-m05-k0",
+   "addKey": "bio-v2b:ap_biology-m01-k1",
+   "remove": {
+    "unit": 3,
+    "skill": "3.D",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 7,
+    "skill": "6.E",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 26,
+   "removeKey": "bio-r2:ap_biology-m05-k0",
+   "addKey": "bio-r1-mc:ap_biology-m01-k0",
+   "remove": {
+    "unit": 4,
+    "skill": "2.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 6,
+    "skill": "2.D",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 36,
+   "removeKey": "bio-s2-mc-b:ap_biology-m42-k0",
+   "addKey": "bio-v2b:ap_biology-m08-k2",
+   "remove": {
+    "unit": 5,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 8,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 37,
+   "removeKey": "bio-p1-a:ap_biology-m18-k1",
+   "addKey": "bio-p1-a:ap_biology-m16-k0",
+   "remove": {
+    "unit": 6,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 7,
+    "skill": "2.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 42,
+   "removeKey": "bio-s2-mc-b:ap_biology-m62-k0",
+   "addKey": "bio-v2b:ap_biology-m09-k1",
+   "remove": {
+    "unit": 6,
+    "skill": "2.D",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 7,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 43,
+   "removeKey": "bio-s2-mc-b:ap_biology-m63-k0",
+   "addKey": "bio-v2b:ap_biology-m02-k1",
+   "remove": {
+    "unit": 6,
+    "skill": "6.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 8,
+    "skill": "6.E",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 45,
+   "removeKey": "bio-r1-mc:ap_biology-m14-k0",
+   "addKey": "bio-r2:ap_biology-m13-k0",
+   "remove": {
+    "unit": 7,
+    "skill": "6.E",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 7,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 46,
+   "removeKey": "bio-r2:ap_biology-m13-k1",
+   "addKey": "bio-v2b:ap_biology-m12-k0",
+   "remove": {
+    "unit": 7,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   },
+   "add": {
+    "unit": 6,
+    "skill": "4.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 50,
+   "removeKey": "bio-s2-mc-b:ap_biology-m25-k0",
+   "addKey": "bio-v2c:ap_biology-m01-k1",
+   "remove": {
+    "unit": 7,
+    "skill": "1.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "6.E",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 57,
+   "removeKey": "bio-s2-mc-b:ap_biology-m18-k0",
+   "addKey": "bio-p1-a:ap_biology-m05-k0",
+   "remove": {
+    "unit": 8,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "5.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 1,
+   "removeKey": "bio-p1-b:ap_biology-f01-k0",
+   "addKey": "bio-s2-frq:ap_biology-f03-k0",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q1_results",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q1_results",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 2,
+   "removeKey": "bio-s2-frq:ap_biology-f04-k0",
+   "addKey": "bio-s2-frq:ap_biology-f05-k0",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q2_graphing",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q2_graphing",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 3,
+   "removeKey": "bio-s2-frq:ap_biology-f07-k0",
+   "addKey": "bio-s2-frq:ap_biology-f08-k0",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q3_investigation",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q3_investigation",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 4,
+   "removeKey": "bio-s2-frq:ap_biology-f16-k0",
+   "addKey": "bio-s2-frq:ap_biology-f15-k0",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q4_conceptual",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q4_conceptual",
+    "examPrep": 0
+   }
+  }
+ ]
+}
