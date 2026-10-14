@@ -22,6 +22,13 @@ export const GRADER_TOOL = {
   },
 };
 
+/** 모델이 improve 를 배열 대신 문자열(JSON 배열 텍스트 또는 줄/글머리표 목록)로 돌려주는 경우가 실측됨(보정 2026-10-14) — 무해한 형식 차이이므로 배열로 복원한다. 그 밖의 타입은 그대로 두어 검증이 거부한다. */
+export function coerceImprove(v: unknown): unknown {
+  if (typeof v !== "string") return v;
+  const t = v.trim();
+  if (t.startsWith("[")) { try { const a: unknown = JSON.parse(t); if (Array.isArray(a)) return a; } catch { /* 줄 분리로 */ } }
+  return t.split(/\n+/).map((x) => x.replace(/^\s*(?:[-*•]|\d+[.)])\s*/, "").trim()).filter(Boolean);
+}
 const clip = (s: string, n: number) => s.replace(/\s+/g, " ").trim().slice(0, n);
 
 /** 모델 출력(도구 입력 객체 또는 JSON 문자열) 검증. 점수는 범위 안 정수, 근거는 비어 있지 않아야 한다. */
@@ -38,7 +45,7 @@ export function validateGraderOutput(raw: unknown): { ok: true; value: GraderOut
     if (typeof t !== "string" || t.trim().length < 5) return { ok: false, reason: `bad_rationale_${row.key}` };
     scores[row.key] = v; rationale[row.key] = clip(t, 600);
   }
-  const imp = r.improve;
+  const imp = coerceImprove(r.improve);
   if (!Array.isArray(imp) || imp.some((x) => typeof x !== "string")) return { ok: false, reason: "bad_improve" };
   return { ok: true, value: { scores, rationale, improve: (imp as string[]).map((x) => clip(x, 300)).filter(Boolean).slice(0, 3) } };
 }

@@ -35,8 +35,12 @@ describe("schema", () => {
     expect(validateGraderOutput(good()).ok).toBe(true);
     expect(validateGraderOutput(JSON.stringify(good())).ok).toBe(true);
   });
-  it.each([[{ ...good(), thesis: 2 }], [{ ...good(), evidence: 4.5 }], [{ ...good(), evidence: -1 }], [{ ...good(), thesis_rationale: "" }], [{ ...good(), improve: "x" }], ["not json"], [null], [[1]]])("rejects %j", (bad) => {
+  it.each([[{ ...good(), thesis: 2 }], [{ ...good(), evidence: 4.5 }], [{ ...good(), evidence: -1 }], [{ ...good(), thesis_rationale: "" }], [{ ...good(), improve: 5 }], [{ ...good(), improve: [1] }], ["not json"], [null], [[1]]])("rejects %j", (bad) => {
     expect(validateGraderOutput(bad).ok).toBe(false);
+  });
+  it("tolerates improve returned as a string (JSON array text or bullet lines)", () => {
+    const a = validateGraderOutput({ ...good(), improve: '["Do A.", "Do B."]' }); const b = validateGraderOutput({ ...good(), improve: "- Do A.\n- Do B." });
+    for (const r of [a, b]) { expect(r.ok).toBe(true); if (r.ok) expect(r.value.improve).toEqual(["Do A.", "Do B."]); }
   });
   it("combines runs conservatively and flags >1 disagreement", () => {
     const a = validateGraderOutput(good(1, 4, 1)); const b = validateGraderOutput(good(1, 2, 0));
