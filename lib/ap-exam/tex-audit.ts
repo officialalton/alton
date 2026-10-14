@@ -8,7 +8,8 @@ export type TexHit = { kind: string; token: string; context: string };
 const MATH_SEG = /\\\$|\$\$[\s\S]+?\$\$|\$[^$\n]+?\$|\\\([\s\S]+?\\\)|\\\[[\s\S]+?\\\]/g;
 /** 수식 구분자 안과 이스케이프된 달러를 걷어낸 "평문"만 남긴다(통화 `\$5` 는 글자). */
 export function outsideMath(text: string): string {
-  return text.replace(MATH_SEG, (m) => (m === "\\$" ? "\u00a4" : " "));
+  // 코드 블록(```)·한 줄 코드(`x`)는 렌더러(render-learning-content)가 코드로 그리므로 `i <= 7` 같은 코드 연산자는 원문 수식이 아니다.
+  return text.replace(/```[\s\S]*?```|`[^`\n]+`/g, " ").replace(MATH_SEG, (m) => (m === "\\$" ? "\u00a4" : " "));
 }
 
 const DETECTORS: { kind: string; re: RegExp }[] = [

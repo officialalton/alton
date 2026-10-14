@@ -9,7 +9,7 @@ const inkSave = vi.fn();
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn(), refresh: vi.fn() }) }));
 vi.mock("@/lib/mock-exam/attempt-actions", () => ({
   saveMockExamAnswerAction: vi.fn(async () => ({ ok: true, value: undefined })),
-  submitMockExamAttemptAction: vi.fn(),
+  submitMockExamAttemptAction: vi.fn(async () => ({ ok: true, value: { attempt: null } })),
   toggleMockExamFlagAction: vi.fn(async () => ({ ok: true, value: undefined })),
   toggleMockExamGuessedAction: vi.fn(async () => ({ ok: true, value: undefined })),
   toggleMockExamSavedToPracticeAction: vi.fn(async () => ({ ok: true, value: undefined })),

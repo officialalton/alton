@@ -36,6 +36,7 @@ export const GUARDED_ACTION_FILES: readonly GuardedActionFile[] = [
   { file: "app/student/curriculum-overlay-actions.ts", key: "course" },
   { file: "app/student/incident-report-actions.ts", key: "class" },
   { file: "app/student/memo-actions.ts", key: "class" },
+  { file: "app/student/notebook-actions.ts", key: "problem_log" },
   { file: "app/student/mock-exam-tab-actions.ts", key: "mock_exam" },
   { file: "app/student/review-actions.ts", key: "class" },
   { file: "app/student/stats-actions.ts", key: "class" },

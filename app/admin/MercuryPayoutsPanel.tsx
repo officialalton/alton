@@ -199,7 +199,7 @@ export default function MercuryPayoutsPanel() {
                 {r.trackingUrl && <a className="underline" href={r.trackingUrl} target="_blank" rel="noreferrer">Tracking</a>}
                 {r.mercuryDashboardUrl && <a className="underline" href={r.mercuryDashboardUrl} target="_blank" rel="noopener noreferrer" data-testid="mercury-dashboard-link">View in Mercury</a>}
                 {r.estimatedDeliveryDate && <span>Estimated delivery: {formatDateOnlyEn(r.estimatedDeliveryDate, true)}</span>}
-                {r.mercuryFailedAt && <span>Failed at: {new Date(r.mercuryFailedAt).toLocaleString("en-US")}</span>}
+                {r.mercuryFailedAt && <span>Failed at: {new Date(r.mercuryFailedAt).toLocaleString("en-US", { timeZone: "Asia/Seoul" })}</span>}
                 {r.receiptUrl && <a className="underline" href={r.receiptUrl} target="_blank" rel="noreferrer">Receipt</a>}
                 <span>Reconciliation: {FLAG_LABEL_EN[r.reconciliationFlag] ?? r.reconciliationFlag}</span>
               </div>

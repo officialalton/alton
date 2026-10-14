@@ -282,7 +282,7 @@ export default function ApStockPanel() {
               <tbody>
                 {ov.history.map((h) => (
                   <tr key={h.id} className="border-t border-grey-100 align-top">
-                    <td className="py-1 pr-2 whitespace-nowrap">{new Date(h.createdAt).toLocaleString("ko-KR")}</td><td className="py-1 pr-2">{h.actor}</td>
+                    <td className="py-1 pr-2 whitespace-nowrap">{new Date(h.createdAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}</td><td className="py-1 pr-2">{h.actor}</td>
                     <td className="py-1 pr-2">{ACTION_LABEL[h.action] ?? h.action}{typeof h.scope.batchId === "string" ? ` · ${h.scope.batchId}` : typeof h.scope.setId === "string" ? ` · ${h.scope.setId}` : ""}</td>
                     <td className="py-1 pr-2">{h.mode === "execute" ? "실행" : "미리보기"}</td><td className="py-1 pr-2">{h.status === "ok" ? "성공" : h.status === "refused" ? "거부" : "오류"}{h.note ? ` (${h.note})` : ""}</td>
                     <td className="py-1 pr-2 font-mono">{h.targetRef}</td><td className="py-1">{Object.entries(h.counts).map(([k, v]) => `${k} ${v}`).join(" · ")}</td>
