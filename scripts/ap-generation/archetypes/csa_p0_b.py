@@ -329,7 +329,7 @@ def cs_selection_sort_pass(rng):
     py = " ".join(map(str, r))
     muts = [{"why": "Believes each pass selects the largest element instead of the smallest.", "swap": ("a[j] < a[min]", "a[j] > a[min]")},
             {"why": "Believes the loop runs one pass more than the stated bound.", "swap": (f"i < {k};", f"i <= {k};")},
-            {"why": "Believes each pass swaps the element with its right neighbor, like one pass of bubble sort.", "swap": ("int temp = a[i];\n    a[i] = a[min];\n    a[min] = temp;", "int temp = a[i];\n    a[i] = a[i + 1];\n    a[i + 1] = temp;")},
+            {"why": "Believes each pass swaps position i with its right neighbor instead of with the smallest element found.", "swap": ("int temp = a[i];\n    a[i] = a[min];\n    a[min] = temp;", "int temp = a[i];\n    a[i] = a[i + 1];\n    a[i + 1] = temp;")},
             {"why": "Believes the minimum is copied to the front without moving the displaced element, losing it.", "swap": ("a[min] = temp;", "")}]
     return mk(rng, "cs_selection_sort_pass", "4.15", "3.A", STEM_OUT, code, muts=muts, py=py, concept="array state after a fixed number of selection sort passes", path="javac+java output vs Python selection sort passes",
               kwhy=f"Each pass finds the smallest element in the unsorted part and swaps it into position i, so after {k} passes the first {k} positions hold the {k} smallest values in order.", facts=[f"k={k}", f"key={py}"], est=110)
@@ -372,7 +372,7 @@ def cs_recursion_string(rng):
     shown = f"class Rec {{\n    {m}\n}}"
     call = f'return Rec.mystery("{w}");'
     return mk(rng, "cs_recursion_string", "4.17", "3.C", f"What is returned by the call Rec.mystery(\"{w}\")?", shown, call=call, muts=[{"why": x[2], "swap": (x[0], x[1])} for x in muts], py=py, concept="a recursive String method that builds its result from substring calls",
-              path="javac+java return value vs Python slicing", kwhy="Each call handles one character and delegates the rest to a smaller String; the pending concatenations complete in reverse order after the base case returns.", facts=[f"w={w}", f"kind={kind}", f"key={py}"])
+              path="javac+java return value vs Python slicing", kwhy="Each call handles one character and delegates the rest to a smaller String; each pending concatenation is finished when the call below it returns, starting with the call that reached the base case.", facts=[f"w={w}", f"kind={kind}", f"key={py}"])
 
 
 # ======================= 4.A 동작 설명 / 4.B 초기 조건 =======================
@@ -421,9 +421,9 @@ def _describe(rng, fam, arch, stim=True, topic="4.5", skill="4.A"):
         if why is not None and all(match):
             raise ValueError("distractor_description_true_on_all_tests")
     def _lit_s(t):
-        return f"Probe.mystery({_lit(kind, t)})".replace("new int[] ", "").replace("new int[][] ", "")
+        return f"Probe.mystery(list) with list = [{', '.join(map(str, t))}]" if kind == "list" else f"Probe.mystery({_lit(kind, t)})"
     t0 = tests[0]
-    key = Opt(descs[0][0], True, f"The loop does exactly what this description says. For example, {_lit_s(t0)} returns {actual[0]}, and the description gives the same value for every other input checked.", None)
+    key = Opt(descs[0][0], True, f"The loop does exactly what this description says. For example, {_lit_s(t0)} returns {actual[0]}.", None)
     ds = []
     for text, fn, why in descs[1:]:
         k = next(i for i, t in enumerate(tests) if _pyfmt(fn(t)) != actual[i])
@@ -492,7 +492,7 @@ def css_array_set(rng):
             break
     py = str(sum(1 for v in a[1:] if v > a[0]))
     muts = [{"why": "Counts the elements that are greater than the last element instead of the first.", "call": f"return Probe.mystery(new int[] {{ {', '.join(map(str, a[::-1]))} }});"},
-            {"why": "Includes the first element in the count by starting the loop at index 0 (it is never greater than itself, so the count is the same) and then adds 1 for the comparison it makes.", "call": f"return Probe.mystery(new int[] {{ {', '.join(map(str, a))} }}) + 1;"},
+            {"why": "Also counts the first element itself, as if it were greater than itself.", "call": f"return Probe.mystery(new int[] {{ {', '.join(map(str, a))} }}) + 1;"},
             {"why": "Counts the elements that are less than the first element.", "call": f"int[] b = {{ {', '.join(map(str, a))} }}; int c = 0; for (int i = 1; i < b.length; i++) {{ if (b[i] < b[0]) {{ c++; }} }} return c;"},
             {"why": "Returns the largest value instead of a count.", "call": f"int[] b = {{ {', '.join(map(str, a))} }}; int m = b[0]; for (int v : b) {{ if (v > m) {{ m = v; }} }} return m;"}]
     q1 = mk(rng, "css_array_set_q1", "4.5", "3.B", f"What is returned by the call Probe.mystery(new int[] {{ {', '.join(map(str, a))} }})?", cls, call=f"return Probe.mystery(new int[] {{ {', '.join(map(str, a))} }});", muts=muts, py=py, stim_code=False, concept="trace an array scan on a concrete array", path="javac+java return value vs Python count",
