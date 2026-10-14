@@ -239,10 +239,10 @@ def cs_arraylist_remove_loop(rng):
     py = "[" + ", ".join(map(str, l)) + "]"
     muts = [{"why": "Believes the loop visits every element after a removal, so all even values are removed.", "swap": ("nums.remove(i);", "nums.remove(i);\n        i--;")},
             {"why": "Believes only the first even value is removed.", "swap": ("nums.remove(i);", "nums.remove(i);\n        break;")},
-            {"why": "Uses the original size as the loop bound, so an index past the end is accessed.", "swap": ("i < nums.size()", f"i < {n}")},
-            {"why": "Believes the loop removes the odd values instead.", "swap": ("nums.get(i) % 2 == 0", "nums.get(i) % 2 == 1")}]
+            {"why": "Believes the loop bound is the original number of elements, so after removals the loop reads past the end of the shorter list and throws an exception.", "swap": ("i < nums.size()", f"i < {n}")},
+            {"why": "Mixes up the test and removes odd values instead of even values (the skipped element after each removal still stays).", "swap": ("nums.get(i) % 2 == 0", "nums.get(i) % 2 == 1")}]
     return mk(rng, "cs_arraylist_remove_loop", "4.9", "3.B", STEM_OUT, code, muts=muts, py=py, concept="removing elements inside a forward loop skips the element that shifts into the removed index", path="javac+java output vs Python list pop simulation",
-              kwhy="After an element is removed, the next element shifts into the same index but the loop moves on, so an even value directly after a removed even value is skipped and stays in the list.", facts=[f"key={py}"], est=105)
+              kwhy=f"After an element is removed, the next element shifts into the same index but the loop moves on, so an even value directly after a removed even value is skipped and stays in the list; the list that remains is {py}.", facts=[f"key={py}"], est=105)
 
 
 # ======================= 4.12 2D 배열 순회 (3.B) =======================
@@ -338,7 +338,7 @@ def cs_selection_sort_pass(rng):
 # ======================= 4.16 재귀 (3.C) =======================
 REC = {
     "sum2": ("public static int mystery(int n) {\n        if (n <= 1) {\n            return n;\n        }\n        return n + mystery(n - 2);\n    }", lambda n: sum(range(n, 0, -2)), [("n <= 1", "n <= 0", "Uses a base case that returns 0 for n of 1 so the final odd term is dropped."), ("n + mystery(n - 2)", "n + mystery(n - 1)", "Believes the argument decreases by 1 instead of 2."), ("return n;", "return 1;", "Believes the base case always returns 1."), ("n + mystery(n - 2)", "mystery(n - 2)", "Forgets to add n to the recursive result.")]),
-    "fact": ("public static int mystery(int n) {\n        if (n == 0) {\n            return 1;\n        }\n        return n * mystery(n - 1);\n    }", lambda n: math.factorial(n), [("return 1;", "return 0;", "Believes the base case returns 0, which makes every product 0."), ("n * mystery(n - 1)", "n + mystery(n - 1)", "Adds instead of multiplying."), ("n == 0", "n == 1", "Stops one level early, at n of 1, returning the base value for 1."), ("n * mystery(n - 1)", "n * mystery(n - 2)", "Skips every other factor.")]),
+    "fact": ("public static int mystery(int n) {\n        if (n == 0) {\n            return 1;\n        }\n        return n * mystery(n - 1);\n    }", lambda n: math.factorial(n), [("return 1;", "return 0;", "Believes the base case returns 0, which makes every product 0."), ("n * mystery(n - 1)", "n + mystery(n - 1)", "Adds instead of multiplying."), ("n == 0", "n == 1", "Stops one level early, at n of 1, returning the base value for 1."), ("n * mystery(n - 1)", "n * mystery(n - 2)", "Steps down by 2 instead of 1, skipping every other factor; the base case at 0 is reached only when n is even, and otherwise the recursion never ends.")]),
     "fib": ("public static int mystery(int n) {\n        if (n <= 1) {\n            return n;\n        }\n        return mystery(n - 1) + mystery(n - 2);\n    }", lambda n: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55][n], [("mystery(n - 1) + mystery(n - 2)", "mystery(n - 1) + mystery(n - 1)", "Calls the same subproblem twice."), ("return n;", "return 1;", "Believes the base case returns 1 for every n of at most 1."), ("n <= 1", "n <= 2", "Ends the recursion one step too early."), ("mystery(n - 1) + mystery(n - 2)", "mystery(n - 1) * mystery(n - 2)", "Multiplies the two recursive results.")]),
 }
 
@@ -420,8 +420,14 @@ def _describe(rng, fam, arch, stim=True, topic="4.5", skill="4.A"):
             raise ValueError("key_description_not_true_on_all_tests")
         if why is not None and all(match):
             raise ValueError("distractor_description_true_on_all_tests")
-    key = Opt(descs[0][0], True, "On every test input the value returned by running the method equals this description, which is what the loop computes.", None)
-    ds = [Opt(t, False, w, None) for t, _f, w in descs[1:]]
+    def _lit_s(t):
+        return f"Probe.mystery({_lit(kind, t)})".replace("new int[] ", "").replace("new int[][] ", "")
+    t0 = tests[0]
+    key = Opt(descs[0][0], True, f"The loop does exactly what this description says. For example, {_lit_s(t0)} returns {actual[0]}, and the description gives the same value for every other input checked.", None)
+    ds = []
+    for text, fn, why in descs[1:]:
+        k = next(i for i, t in enumerate(tests) if _pyfmt(fn(t)) != actual[i])
+        ds.append(Opt(text, False, f"{why.rstrip('.')}. For instance, {_lit_s(tests[k])} returns {actual[k]}, but this description would give {_pyfmt(fn(tests[k]))}.", None))
     shown = cls
     p = pack(arch, topic, skill, "not_allowed", "x", key, ds, rng, stimulus=(code_stim(shown) if stim else None), est=85, facts=[f"family={fam}", f"tests={len(tests)}"])
     p["stem"] = "Which of the following best describes the value returned by the method mystery?" if True else ""
@@ -451,7 +457,7 @@ def cs_describe_int(rng):
 PRE = {
     "middle": ("public static char middle(String s) {\n        return s.charAt(s.length() / 2);\n    }", [('middle("")', True, "An empty string has no character at index 0, so charAt throws a StringIndexOutOfBoundsException."), ('middle("a")', False, "A one-character string has a character at index 0."), ('middle("ab")', False, "Index 1 exists in a two-character string."), ('middle("abc")', False, "Index 1 exists in a three-character string.")], "Which of the following calls to middle causes a run-time exception?"),
     "ratio": ("public static int ratio(int total, int count) {\n        return total / count;\n    }", [("ratio(5, 0)", True, "Integer division by zero throws an ArithmeticException."), ("ratio(0, 5)", False, "A zero numerator is fine: the quotient is 0."), ("ratio(-4, 2)", False, "A negative numerator is fine."), ("ratio(7, 3)", False, "The quotient is truncated and no exception is thrown.")], "Which of the following calls to ratio causes a run-time exception?"),
-    "next": ("public static int next(int[] a, int i) {\n        return a[i + 1];\n    }", [("next(new int[] { 4, 5, 6 }, 2)", True, "The index 3 is past the end of a three-element array."), ("next(new int[] { 4, 5, 6 }, 0)", False, "Index 1 is valid."), ("next(new int[] { 4, 5, 6 }, 1)", False, "Index 2 is valid."), ("next(new int[] { 4, 5, 6 }, -1)", False, "The index -1 + 1 is 0, which is valid.")], "Which of the following calls to next causes a run-time exception?"),
+    "firstWord": ("public static String firstWord(String s) {\n        return s.substring(0, s.indexOf(\" \"));\n    }", [('firstWord("hello")', True, "There is no space, so indexOf returns -1 and substring(0, -1) throws a StringIndexOutOfBoundsException."), ('firstWord("hi there")', False, "The space is at index 2, so substring(0, 2) returns hi."), ('firstWord("a b c")', False, "The first space is at index 1, so the call returns a."), ('firstWord(" x")', False, "The space is at index 0, so substring(0, 0) returns an empty string and no exception is thrown.")], "Which of the following calls to firstWord causes a run-time exception?"),
 }
 
 
@@ -509,7 +515,7 @@ def css_class_set(rng):
             {"why": "Believes each added song is also counted as a play.", "swap": ("public void add(String title) { songs.add(title); }", "public void add(String title) { songs.add(title); plays++; }")},
             {"why": "Believes size reports the number of plays.", "swap": ("public int size() { return songs.size(); }", "public int size() { return plays; }")},
             {"why": "Believes the constructor starts the play count at 1.", "swap": ("plays = 0;", "plays = 1;")}]
-    q1 = mk(rng, "css_class_set_q1", "3.5", "3.B", STEM_OUT, shown, call=stm, muts=muts, py=py, stim_code=False, concept="trace object state through add and play calls", path="javac+java output vs Python counters",
+    q1 = mk(rng, "css_class_set_q1", "3.5", "3.B", "What is printed as a result of executing the following code segment?\n```java\n" + stm + "\n```", shown, call=stm, muts=muts, py=py, stim_code=False, concept="trace object state through add and play calls", path="javac+java output vs Python counters",
             kwhy=f"The list holds {k} songs and play was called {plays} times, and the two quantities are tracked independently.", facts=[f"key={py}"])
     body = "/*MISSING*/"
     cands = [("public int averagePlays() {\n        return size() == 0 ? 0 : plays / size();\n    }", True, None), ("public int averagePlays() {\n        return plays / size();\n    }", False, "Divides without checking for an empty playlist, which throws an ArithmeticException."), ("public int averagePlays() {\n        return size() / plays;\n    }", False, "Divides the number of songs by the number of plays, in the wrong order."), ("public int averagePlays() {\n        return plays * size();\n    }", False, "Multiplies instead of dividing.")]

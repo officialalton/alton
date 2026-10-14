@@ -84,6 +84,10 @@ def mk(rng, arch, topic, skill, stem, shown, *, muts, py, concept, path, kwhy, c
     res = J.java_eval(classes, bodies)
     key_res = res[0]
     agree_str(J.tidy(key_res), py)
+    kt = J.tidy(key_res)
+    if not kwhy.rstrip().endswith("."):
+        kwhy = kwhy.rstrip() + "."
+    kwhy = kwhy + (f" Tracing the code gives {kt}." if kt and "EXC:" not in kt else "")
     keyo = Opt(opt_text(key_res), True, kwhy, opt_value(key_res))
     seen, ds = {opt_text(key_res)}, []
     seen_vals = {opt_value(key_res)} - {None}
@@ -92,6 +96,8 @@ def mk(rng, arch, topic, skill, stem, shown, *, muts, py, concept, path, kwhy, c
         v = opt_value(r)
         if t in seen or (v is not None and v in seen_vals):
             continue  # 변형이 정답과 같은 결과(또는 같은 수치)를 내면 오답으로 쓸 수 없다
+        if "EXC:" in J.tidy(r) and "exception" not in w.lower():
+            w = w.rstrip(".") + ". Running this version throws a run-time exception."
         seen.add(t); ds.append(Opt(t, False, w, v))
         if v is not None:
             seen_vals.add(v)

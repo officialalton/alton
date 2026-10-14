@@ -71,6 +71,7 @@ d("AP Computer Science A P0 archetypes (Python generators run against the JDK, 2
         converted += plan.items.length;
         if (plan.items.some((it) => (it.passage ?? "").includes("```java"))) withCode++;
         expect(plan.items).toHaveLength(items.length);
+        if (p.items) expect({ n, shared: plan.items.every((it) => (it.passage ?? "").includes("```java") && (it.passage ?? "").startsWith("Consider the following")) }).toEqual({ n, shared: true }); // 세트의 공통 코드가 학생 지문에 실린다
       }
     }
     expect(withCode).toBeGreaterThanOrEqual(60);
