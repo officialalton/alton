@@ -204,10 +204,11 @@ export async function saveFrqHandwritingAction(
   strokes: { c: number; p: number[] }[],
   previewSvg: string,
   boardHeight = 500,
+  background?: string, // 생략하면 6인자 함수(배경 마이그레이션 610 적용 전에도 동작), 주면 7인자
 ): Promise<ActionResult> {
   return callRpc(
     "save_mock_exam_frq_handwriting",
-    { p_attempt_id: attemptId, p_set_item_id: setItemId, p_part_label: partLabel, p_strokes: strokes, p_preview_svg: previewSvg, p_board_height: boardHeight },
+    { p_attempt_id: attemptId, p_set_item_id: setItemId, p_part_label: partLabel, p_strokes: strokes, p_preview_svg: previewSvg, p_board_height: boardHeight, ...(background ? { p_background: background } : {}) },
     "Could not save your handwriting.",
   );
 }

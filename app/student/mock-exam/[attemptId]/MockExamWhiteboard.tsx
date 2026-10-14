@@ -8,8 +8,8 @@
 // 크기 조절 UI 는 FRQ 손글씨 패드와 같은 BoardSizeControls 를 쓴다.
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { loadProblemNoteBoardAction, saveProblemNoteBoardAction, type StrokeSegment } from "@/lib/problem-notes-actions";
-import { drawAll } from "@/app/components/ProblemNoteCanvas";
+import { loadProblemNoteBoardAction, saveProblemNoteBoardAction, type ProblemNoteContext, type StrokeSegment } from "@/lib/problem-notes-actions";
+import { drawAll } from "@/lib/problem-note-draw";
 import { WB_H_PRESETS, WB_MAX_H, WB_MAX_SEGMENTS, WB_MIN_H, WB_TOO_LARGE, WB_WIDTH, clampWbHeight, wbSizeProblem } from "@/lib/mock-exam/whiteboard-size";
 import { BoardResizeHandle, BoardScrollGutter, BoardSizeButtons, BoardTouchModeToggle, boardTouchClass, touchDrawBlocked, type BoardTouchMode } from "./BoardSizeControls";
 
@@ -37,14 +37,26 @@ export function eraseNear(strokes: StrokeSegment[], x: number, y: number, radius
 export default function MockExamWhiteboard({
   attemptId,
   itemId,
-  locked = false,
+  locked: lockedProp = false,
   onClose,
+  context = "mock_exam",
+  authorId,
+  readOnly = false,
+  inline = false,
 }: {
-  attemptId: string;
+  attemptId: string; // 저장 대상 id(context 에 따라 응시·과제 배치·세션 문제 id)
   itemId: string;
   locked?: boolean;
-  onClose: () => void;
+  onClose?: () => void;
+  /** 2026-10-14: 홈워크·세션 문제 풀이(레거시 640×220 ProblemNoteCanvas 대체)도 같은 보드를 쓴다. 저장 형식(problem_note_strokes, w=640)은 동일. */
+  context?: ProblemNoteContext;
+  /** 넘기면 그 학생의 필기를 읽기 전용으로 본다(교사·관리자·보호자). */
+  authorId?: string;
+  readOnly?: boolean;
+  /** true 면 떠 있는 패널이 아니라 문서 흐름 안에 인라인으로 그린다. */
+  inline?: boolean;
 }) {
+  const locked = lockedProp || readOnly || !!authorId;
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const strokesRef = useRef<StrokeSegment[]>([]);
   const dirtyRef = useRef(false);
@@ -77,16 +89,16 @@ export default function MockExamWhiteboard({
       return;
     }
     dirtyRef.current = false;
-    const r = await saveProblemNoteBoardAction("mock_exam", attemptId, itemId, strokesRef.current, heightRef.current);
+    const r = await saveProblemNoteBoardAction(context, attemptId, itemId, strokesRef.current, heightRef.current);
     if (!r.ok) {
       dirtyRef.current = true;
       setError(r.error);
     } else setError(null);
-  }, [attemptId, itemId, locked]);
+  }, [attemptId, itemId, locked, context]);
 
   useEffect(() => {
     let cancelled = false;
-    loadProblemNoteBoardAction("mock_exam", attemptId, itemId)
+    loadProblemNoteBoardAction(context, attemptId, itemId, authorId)
       .then((board) => {
         if (cancelled) return;
         strokesRef.current = board.strokes;
@@ -100,7 +112,7 @@ export default function MockExamWhiteboard({
     return () => {
       cancelled = true;
     };
-  }, [attemptId, itemId]);
+  }, [attemptId, itemId, context, authorId]);
 
   // 높이가 바뀌면 canvas 속성이 비워지므로 다시 그린다(선분 좌표는 그대로).
   useEffect(() => {
@@ -197,9 +209,13 @@ export default function MockExamWhiteboard({
     <aside
       aria-label="Whiteboard"
       data-testid="mst-whiteboard"
-      className={`fixed right-4 top-[72px] z-20 flex max-h-[calc(100vh-88px)] flex-col rounded-lg border border-grey-300 bg-white shadow-lg ${
-        wide ? "w-[min(720px,calc(100vw-2rem))]" : "w-[min(540px,calc(100vw-2rem))]"
-      }`}
+      className={
+        inline
+          ? "mt-2 flex w-full flex-col overflow-hidden rounded-lg border border-grey-200 bg-white"
+          : `fixed right-4 top-[72px] z-20 flex max-h-[calc(100vh-88px)] flex-col rounded-lg border border-grey-300 bg-white shadow-lg ${
+              wide ? "w-[min(720px,calc(100vw-2rem))]" : "w-[min(540px,calc(100vw-2rem))]"
+            }`
+      }
     >
       <div className="flex flex-wrap items-center gap-1.5 border-b border-grey-200 px-2.5 py-2">
         <span className="mr-1 text-[12px] font-extrabold text-ink">Whiteboard</span>
@@ -232,9 +248,11 @@ export default function MockExamWhiteboard({
             <BoardTouchModeToggle mode={touchMode} onChange={setTouchMode} testId="wb-touch-mode" />
           </>
         )}
-        <button type="button" onClick={onClose} aria-label="Close whiteboard" className={`${locked ? "ml-auto" : ""} px-1 text-[16px] leading-none text-grey-500`}>
-          ×
-        </button>
+        {onClose && (
+          <button type="button" onClick={onClose} aria-label="Close whiteboard" className={`${locked ? "ml-auto" : ""} px-1 text-[16px] leading-none text-grey-500`}>
+            ×
+          </button>
+        )}
       </div>
       {ready ? (
         <>
