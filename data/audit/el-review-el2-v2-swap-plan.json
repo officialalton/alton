@@ -1,0 +1,234 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "EL2",
+ "sourceSetName": "AP English Language — Practice Exam 2",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/ap-generation/el-review-build-fixes.ts (EL review 2026-10-14)",
+ "note": "Replacement candidates (keys el-review-fix:*) are NOT in the DB yet. Import data/audit/el-review-fix-items.json first (scripts/ap-generation/import-candidates.ts --items data/audit/el-review-fix-items.json --batch el-review-fix-2026-10-14 --supplement), mark render/screen evidence as for the originals, then copy this file to data/ap/stock/ so the admin 'new version' screen lists it. Each swap replaces a whole passage set (all its slots) or one FRQ with the same-cell corrected copy. tier=required fixes a content/prompt defect; tier=recommended is the option-length balancing.",
+ "swapCount": 13,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p1-a2:ap_english_language-r01-k0",
+   "addKey": "el-review-fix:ap_english_language-r01-k0",
+   "tier": "recommended",
+   "reason": "MC option-length balancing (key was the strictly longest option in 4/5 items; now 1/5)",
+   "remove": {
+    "skill": "1.B",
+    "topic": "U2.1",
+    "items": 5
+   },
+   "add": {
+    "skill": "1.B",
+    "topic": "U2.1",
+    "items": 5,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p2-a2:ap_english_language-r05-k0",
+   "addKey": "el-review-fix:ap_english_language-r05-k0",
+   "tier": "recommended",
+   "reason": "MC option-length balancing (key was the strictly longest option in 3/3 items; now 1/3)",
+   "remove": {
+    "skill": "3.A",
+    "topic": "U3.1",
+    "items": 3
+   },
+   "add": {
+    "skill": "3.A",
+    "topic": "U3.1",
+    "items": 3,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p2-a2:ap_english_language-r08-k0",
+   "addKey": "el-review-fix:ap_english_language-r08-k0",
+   "tier": "recommended",
+   "reason": "MC option-length balancing (key was the strictly longest option in 3/5 items; now 1/5)",
+   "remove": {
+    "skill": "1.B",
+    "topic": "U2.1",
+    "items": 5
+   },
+   "add": {
+    "skill": "1.B",
+    "topic": "U2.1",
+    "items": 5,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p2-a2:ap_english_language-r10-k0",
+   "addKey": "el-review-fix:ap_english_language-r10-k0",
+   "tier": "required",
+   "reason": "MC option-length balancing (key was the strictly longest option in 0/3 items; now 0/3); stems/options no longer assume the writer's gender",
+   "remove": {
+    "skill": "1.A",
+    "topic": "U1.1",
+    "items": 3
+   },
+   "add": {
+    "skill": "1.A",
+    "topic": "U1.1",
+    "items": 3,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-s2a:ap_english_language-r26-k0",
+   "addKey": "el-review-fix:ap_english_language-r26-k0",
+   "tier": "required",
+   "reason": "MC option-length balancing (key was the strictly longest option in 4/5 items; now 2/5); explanations no longer cite hidden sentence numbers",
+   "remove": {
+    "skill": "1.A",
+    "topic": "U1.1",
+    "items": 5
+   },
+   "add": {
+    "skill": "1.A",
+    "topic": "U1.1",
+    "items": 5,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-s2b:ap_english_language-r31-k0",
+   "addKey": "el-review-fix:ap_english_language-r31-k0",
+   "tier": "recommended",
+   "reason": "MC option-length balancing (key was the strictly longest option in 1/4 items; now 0/4)",
+   "remove": {
+    "skill": "1.B",
+    "topic": "U2.1",
+    "items": 4
+   },
+   "add": {
+    "skill": "1.B",
+    "topic": "U2.1",
+    "items": 4,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p1-a2:ap_english_language-w02-k0",
+   "addKey": "el-review-fix:ap_english_language-w02-k0",
+   "tier": "recommended",
+   "reason": "MC option-length balancing (key was the strictly longest option in 2/4 items; now 0/4)",
+   "remove": {
+    "skill": "4.A",
+    "topic": "U3.2",
+    "items": 4
+   },
+   "add": {
+    "skill": "4.A",
+    "topic": "U3.2",
+    "items": 4,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p2-a2:ap_english_language-w04-k0",
+   "addKey": "el-review-fix:ap_english_language-w04-k0",
+   "tier": "recommended",
+   "reason": "MC option-length balancing (key was the strictly longest option in 4/6 items; now 0/6)",
+   "remove": {
+    "skill": "2.A",
+    "topic": "U7.2",
+    "items": 6
+   },
+   "add": {
+    "skill": "2.A",
+    "topic": "U7.2",
+    "items": 6,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-s2b:ap_english_language-w31-k0",
+   "addKey": "el-review-fix:ap_english_language-w31-k0",
+   "tier": "recommended",
+   "reason": "MC option-length balancing (key was the strictly longest option in 2/4 items; now 0/4)",
+   "remove": {
+    "skill": "2.A",
+    "topic": "U7.2",
+    "items": 4
+   },
+   "add": {
+    "skill": "2.A",
+    "topic": "U7.2",
+    "items": 4,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-s2b:ap_english_language-w32-k0",
+   "addKey": "el-review-fix:ap_english_language-w32-k0",
+   "tier": "required",
+   "reason": "MC option-length balancing (key was the strictly longest option in 5/6 items; now 1/6); w32 q5 key: 'close to remarkable' -> 'nothing short of remarkable'; w32 q6 stem: nothing is underlined in the display; remove 'underlined'",
+   "remove": {
+    "skill": "2.A",
+    "topic": "U4.2",
+    "items": 6
+   },
+   "add": {
+    "skill": "2.A",
+    "topic": "U4.2",
+    "items": 6,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "englang-p1-b2:ap_english_language-fa1-k0",
+   "addKey": "el-review-fix:ap_english_language-fa1-k0",
+   "tier": "required",
+   "reason": "EL-F4: high sample: 'dollars' token displaced after punctuation in two sentences and one annotation (7.50, dollars / 11.40. dollars); high sample reasoned that the hub 'saves money only because' of fewer visits (the 300,000 dollar saving is independent of visits; fewer visits raise cost per visit) and the annotation endorsed it; low sample Row B: the package's own rubric says a five-source essay with thin commentary 'stays at 2', but the sample was scored 1: B=2, total 2; prompt scenario no longer states the conditional position that Source D recommends and both top samples adopt",
+   "remove": {
+    "type": "q1"
+   },
+   "add": {
+    "type": "q1",
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "englang-p1-b2:ap_english_language-fa2-k0",
+   "addKey": "el-review-fix:ap_english_language-fa2-k0",
+   "tier": "required",
+   "reason": "EL-F5: student-visible prompt block restated the speech's strategy (Purpose line: reframing the wharf as infrastructure while acknowledging financial pressure); keep speaker, audience and occasion only; rubric and high sample described sentences 18-21 as 'shrinking' but sentence 21 is the longest of the four (19-20 are the clipped ones); high sample asserted facts not in the passage (developer 'from out of town'; brochure pitching taxes and the culvert); annotation cited a non-existent 'Row 4'; mid sample misquoted 'belongs' as 'belong'; mid sample had no Row A annotation; rubric Row A tied the thesis to the 'opening sentences' although a thesis may appear anywhere",
+   "remove": {
+    "type": "q2"
+   },
+   "add": {
+    "type": "q2",
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "englang-p1-b2:ap_english_language-fa3-k0",
+   "addKey": "el-review-fix:ap_english_language-fa3-k0",
+   "tier": "required",
+   "reason": "EL-F6: rubric Row C and the high sample's sophistication annotation said both sides share the view that the wobbling chair is a failure, but the board chair rejects it ('not about chairs'); annotation said the essay explores 'the rubric's own example of internal tension' which Row C does not contain; Source A opening sentence: crafts list punctuated as a run-on; now parenthesised",
+   "remove": {
+    "type": "q3"
+   },
+   "add": {
+    "type": "q3",
+    "sameCell": true
+   }
+  }
+ ]
+}

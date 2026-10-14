@@ -1,5 +1,5 @@
 {
- "spent": 195.82719999999998,
+ "spent": 201.706,
  "entries": [
   {
    "at": "2026-10-08T09:13:14.616Z",
@@ -974,7 +974,7 @@
   {
    "at": "2026-10-09T03:26:06.749447+00:00",
    "usd": 0,
-   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) \u2014 invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
+   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) — invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
    "excludedRun": "v8-bio-r"
   },
   {
@@ -3211,6 +3211,61 @@
    "at": "2026-10-14T17:30:00.000Z",
    "usd": 0.4443,
    "note": "essay-calibration round 2 (16 calls: diagnosis, rubric v2 re-run, injection)"
+  },
+  {
+   "at": "2026-10-14T21:14:01.895Z",
+   "usd": 0.879816,
+   "note": "rewrite batch msgbatch_01KHffaDdEYBhxx1UQG5NEhD"
+  },
+  {
+   "at": "2026-10-14T21:14:54.113Z",
+   "usd": 0,
+   "note": "refs sync"
+  },
+  {
+   "at": "2026-10-14T21:15:47.407Z",
+   "usd": 0,
+   "note": "refs sync"
+  },
+  {
+   "at": "2026-10-14T21:16:08.989Z",
+   "usd": 0.103304,
+   "note": "refs sync"
+  },
+  {
+   "at": "2026-10-14T21:16:36.551Z",
+   "usd": 1.7164079999999995,
+   "note": "mc batch msgbatch_01CJmEaMxmei55yn5EHrAWSq"
+  },
+  {
+   "at": "2026-10-14T21:17:55.398Z",
+   "usd": 0.32230999999999993,
+   "note": "frq batch msgbatch_01S8yDFVUUFo3FnPTJPVQ8XH"
+  },
+  {
+   "at": "2026-10-14T21:18:12.654Z",
+   "usd": 0.130644,
+   "note": "pron sync"
+  },
+  {
+   "at": "2026-10-14T21:19:01.074Z",
+   "usd": 0.485812,
+   "note": "verify batch msgbatch_015AN8qrLkjgaDfYqQdkscgg"
+  },
+  {
+   "at": "2026-10-14T21:23:04.700Z",
+   "usd": 0.47176400000000007,
+   "note": "verify batch msgbatch_01E7KxTrZXEJ8oTReeKcpBhu"
+  },
+  {
+   "at": "2026-10-14T21:25:53.682Z",
+   "usd": 1.4453,
+   "note": "frqreview batch msgbatch_01ATtZq4ur1ioQNKSvk3zekN"
+  },
+  {
+   "at": "2026-10-14T21:31:41.690Z",
+   "usd": 0.3234600000000001,
+   "note": "frqfix batch msgbatch_019fuQWJZgKtTfyDwRQn7u9Y"
   }
  ]
 }

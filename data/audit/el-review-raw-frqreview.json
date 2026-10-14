@@ -1,0 +1,409 @@
+{
+ "fq__englang_p2_b_ap_english_language_fb1_k0": {
+  "findings": [
+   {
+    "where": "source F",
+    "severity": "blocker",
+    "issue": "The chart that constitutes Source F is not in the package. The student-facing text says the chart 'appears below the sources,' but nothing follows. Two of the three samples cite specific content from it (a 165,000-dollar bus bar, 'no bar for teacher salaries'), and the rubric's Row B descriptor explicitly refers to interpreting 'numbers from Source E or Source F.' None of this can be verified or taught without the chart.",
+    "evidence": "Source F: 'The chart for this source appears below the sources.' — no chart follows. High sample: 'The biggest savings come from parking buses (165,000 dollars) and paying for fewer utilities, and there is no bar for teacher salaries at all.' Mid sample: 'Source F shows that most of this came from transportation and utilities, and none of it came from teacher salaries.'",
+    "fix": "Insert the actual chart (categories and dollar amounts summing to ~410,000) and then re-verify every Source F figure quoted in the high and mid samples."
+   },
+   {
+    "where": "source A / source F (as cited in high sample)",
+    "severity": "major",
+    "issue": "Source A says most of the 410,000-dollar savings came from parking the bus fleet, but the bus figure the high sample reads off Source F is 165,000, which is about 40 percent — a plurality, not 'most.' Either the chart contradicts Source A or the high sample misreads the chart; without the chart it is impossible to tell which, but one of them is wrong.",
+    "evidence": "Source A: 'a savings of roughly 410,000 dollars ... most of it from parking the bus fleet one day a week.' High sample: 'The biggest savings come from parking buses (165,000 dollars).' 165,000 / 410,000 = 0.402 = 40.2%, which is not 'most.'",
+    "fix": "Either change Source A to 'the largest share of it from parking the bus fleet' or set the transportation bar in the chart above 205,000 (more than half of 410,000), then align the high sample's figure."
+   },
+   {
+    "where": "source D",
+    "severity": "minor",
+    "issue": "Internal timeline does not support the claim of three years of records. Districts that adopted in 2023 can have at most two school years of data (2023–24, 2024–25) by the 2025 brief date, yet the brief reports three-year outcomes for all 23 districts and 'year three' staffing figures.",
+    "evidence": "'Research brief ... 2025'; 'three years of records from 23 districts ... that adopted a four-day instructional calendar between 2021 and 2023'; 'mathematics growth over three years'; 'in year three as in the year before adoption.' A 2023 adopter has only 2023–24 and 2024–25 complete by 2025.",
+    "fix": "Change the adoption window to 'between 2020 and 2022' (or date the brief 2026)."
+   },
+   {
+    "where": "prompt / source D",
+    "severity": "major",
+    "issue": "The prompt's framing plus Source D's Recommendation paragraph effectively hand students the conditional thesis. Both the high and mid samples adopt Source D's three conditions nearly verbatim as their thesis, so Row A's task-specific requirement that 'conditions are named' is satisfiable by copying a source sentence, and the rubric's warning that 'sophistication is not earned by taking the middle stance automatically' is undercut by the package's own models.",
+    "evidence": "Prompt: 'Some observers argue the schedule can work only under specific conditions.' Source D: 'Districts considering the calendar should commit in advance to preserving instructional hours, funding a fifth-day option for younger children, and reviewing achievement data publicly after two years.' Mid sample conclusion: 'only with preserved hours, a funded Friday option for young children, and a plan to check the results.' High sample thesis: 'lengthen the remaining days enough to keep total instructional hours the same, and pay for a Friday option for children under twelve.'",
+    "fix": "Soften or remove Source D's Recommendation paragraph (report findings only), or cut the prompt's 'only under specific conditions' sentence, so students must derive the conditions themselves. Consider adding a one-sided sample so the Row C guidance has a model."
+   },
+   {
+    "where": "annotation (high, row C)",
+    "severity": "minor",
+    "issue": "The annotation credits the high essay for a phrase ('the lunch line') that does not appear anywhere in the essay; it is from Source B. It also claims the moves it praises are 'listed'/'named' in the rubric, but the supplied Row C text names no such moves.",
+    "evidence": "Annotation: \"The vivid, plain style ('a day-care bill,' 'the lunch line' idea) also strengthens the argument.\" The high essay never uses 'lunch line'; Source B does: 'Do not hand the bill to the families in the lunch line.' Annotation: 'This is one of the complex moves the rubric lists' / 'another move the rubric names' — Row C task-specific text contains neither 'short-run vs long-run' nor 'different districts.'",
+    "fix": "Delete the 'lunch line' reference (or quote a phrase the essay actually uses, e.g., 'a Friday that someone has to cover') and either cite the generic College Board Row C language or drop 'the rubric lists/names.'"
+   },
+   {
+    "where": "sample mid",
+    "severity": "minor",
+    "issue": "Misstates a Source E figure: 49 percent of employers favoring a return is a plurality, not 'mostly.' The annotation does not flag this.",
+    "evidence": "Mid sample: 'local employers mostly want to go back.' Source E, Local employers row: Return to five days 49%, Keep it 37%, Unsure 14% — 49 < 50.",
+    "fix": "Change to 'local employers lean toward going back (49 to 37)' or have the annotation note the overstatement as a reason B stays at 3."
+   },
+   {
+    "where": "sample low / annotation",
+    "severity": "nit",
+    "issue": "The low sample mischaracterizes Source D's achievement finding as scores going down; Source D reports slower growth relative to comparison districts, not declines. The annotation says Source D is 'mostly summarized' but does not note the misreading.",
+    "evidence": "Low sample: 'It also says math scores went down in some districts.' Source D: 'mathematics growth over three years trailed comparison districts by an average of 3 percentile points.'",
+    "fix": "Add to the Row B annotation that the writer misreads relative growth as absolute decline."
+   },
+   {
+    "where": "annotation (mid, row B)",
+    "severity": "nit",
+    "issue": "The annotation faults the writer for not linking Source E to 'Source D's grade-level findings,' but Source E contains no grade-level data to link; the criticism cannot be applied as written.",
+    "evidence": "Annotation: 'the link to Source D's grade-level findings is not made.' Source E rows are respondent groups (teachers, parents, employers), not grades.",
+    "fix": "Reword to 'does not explain why the elementary-parent and employer rows diverge from the teacher row, or connect the split to Source D's 41 percent childcare figure.'"
+   },
+   {
+    "where": "prompt (student-facing header)",
+    "severity": "nit",
+    "issue": "Stray internal label and a fiction disclaimer appear in student-facing text; other sources carry no such disclaimer, so labeling is inconsistent.",
+    "evidence": "'SOURCES / PASSAGE (student sees) ALTON original passage'; Source D byline: 'Meridian Basin Institute for Rural Education Policy (a fictional policy research center), 2025.'",
+    "fix": "Remove 'ALTON original passage' and either drop the parenthetical or apply a uniform note that all sources are fictional."
+   },
+   {
+    "where": "sample high",
+    "severity": "nit",
+    "issue": "Punctuation error in the quoted figure and a loosely worded multiplier.",
+    "evidence": "'Harrow Fork saved about 410,000, dollars \"close to 2 percent of its operating budget\" (Source A)' — comma misplaced; 'applicants per vacancy rose 2.4 times (Source D)' vs. Source D's 'a median of 2.4 times as many applicants.'",
+    "fix": "'saved about 410,000 dollars, \"close to 2 percent...\"'; 'applicants per vacancy reached 2.4 times their earlier level.'"
+   }
+  ],
+  "verdict": "REVISE — not usable as is. The Source F chart is missing even though the prompt, rubric, and two samples depend on it (blocker), and the one Source F figure the high sample cites (165,000 of 410,000 ≈ 40%) contradicts Source A's 'most of it from parking the bus fleet.' Source D's Recommendation paragraph effectively supplies the model thesis that both the high and mid samples adopt, weakening Rows A and C as discriminators. Remaining issues are a timeline impossibility in Source D (2023 adopters cannot have three years of data by 2025), an annotation crediting the high essay for a Source B phrase it never uses, a 'mostly' overstatement of a 49% plurality in the mid sample, and several nits. All sample figures from Sources A–E recompute correctly; Source E rows sum to 100; Source B's 76 × 36 ≈ 2,736 supports 'more than 2,700.'"
+ },
+ "_key_fq__englang_p2_b_ap_english_language_fb1_k0": "fq__englang_p2_b_ap_english_language_fb1_k0",
+ "fq__englang_p2_b_ap_english_language_fb2_k0": {
+  "verdict": "REVISE BEFORE USE. The passage is internally consistent (nineteen years ×3; 44/71 = 62% nurse-triggered vs. 27 alarm-triggered, so \"machines caught fewer\" holds; times and anecdote details check out) and no sample misquotes a figure. The real problems are (a) the Row A task-specific descriptor as written would award the thesis point to the low sample that the key scores A:0, (b) the rubric and all three samples misidentify \"Listen anyway\" (sentence 47) as the speech's closing sentence when sentence 48 follows, (c) the high sample's annotation cites a rubric \"warning\" that does not exist, and (d) the student-facing SOAPS block paraphrases the speech's own key claim (sentence 11) and previews paragraph 5, partially leaking the analysis. Fix the Row A wording or the low score, remove or re-describe sentence 48, and trim the prompt's Purpose/Exigence lines.",
+  "findings": [
+   {
+    "where": "rubric / sample low",
+    "severity": "major",
+    "issue": "Row A descriptor and the low sample's A:0 contradict each other. The rubric says a thesis that 'names devices but also asserts what they accomplish for this audience earns the point.' The low thesis names three devices and asserts what they accomplish for the graduates, so by the rubric's own wording it would earn the point; the annotation denies it on the grounds that it 'lists devices without claiming how they work for this audience,' a standard not stated in the rubric.",
+    "evidence": "Rubric Row A: 'A thesis that names devices but also asserts what they accomplish for this audience earns the point.' Low sample thesis: 'She uses many rhetorical choices like stories, statistics, and metaphors to convince them that attention is something they have to practice.' Annotation: 'lists devices without claiming how they work for this audience. It earns no thesis point.'",
+    "fix": "Either tighten Row A to say explicitly that a device list plus a restatement of the prompt's purpose is NOT sufficient (require the thesis to indicate the mechanism or relationship, not just name devices + purpose), or rescore the low sample A:1 (total 3) and adjust the annotation. Also note the actual AP rubric frequently awards such theses, so the low sample is a risky exemplar for 'no thesis.'"
+   },
+   {
+    "where": "rubric; sample high; sample mid; sample low",
+    "severity": "minor",
+    "issue": "The rubric and all three samples treat 'Listen anyway' (sentence 47) as the speech's final sentence, but the passage ends with sentence 48, 'Congratulations, and welcome to the work.' This is a factual misstatement repeated in the answer key and in every model essay.",
+    "evidence": "Passage (48): 'Congratulations, and welcome to the work.' Rubric Row B: 'the closing two-word sentence \"Listen anyway\" (47)'. High: 'Two words is all she leaves them with'. Mid: 'The last line, \"Listen anyway,\" is short'. Low: 'She ends with \"Listen anyway.\"'",
+    "fix": "Either delete sentence 48 from the passage (if the intended ending is 'Listen anyway') or revise the rubric to 'the penultimate two-word sentence' and edit the three samples to say the speech's substantive charge ends with 'Listen anyway' before the formulaic congratulations."
+   },
+   {
+    "where": "annotation (sample high, Row B)",
+    "severity": "minor",
+    "issue": "Annotation references a rubric warning that does not exist. Row B mentions 'the qualification about machines (36 to 37)' as a countable choice but contains no warning about misreading the statistic.",
+    "evidence": "High annotation: 'avoids the misreading of the statistic the rubric warns about.' Rubric Row B text: 'the hospital statistic and the one-word sentence \"Forty-four\" (32 to 35); the qualification about machines (36 to 37)' — no warning language anywhere in the rubric.",
+    "fix": "Either add a note to Row B (e.g., 'Commentary that reads the statistic as proof that nurses are better than machines misreads sentences 36–37') — which would also support the low/mid annotations that criticize 'nurses are better than machines' / 'proves' — or reword the high annotation to drop the phantom reference."
+   },
+   {
+    "where": "prompt",
+    "severity": "minor",
+    "issue": "The student-facing Purpose and Exigence lines partially give away the analysis. 'Purpose' paraphrases the speech's own thesis sentence (11), including the mood/practice antithesis, and 'Exigence' previews the machines-vs-attention tension of paragraph 5 before the student reads it. The actual AP prompt supplies occasion and audience, not a labeled Purpose that restates the text's central antithesis.",
+    "evidence": "Prompt: 'Purpose: to persuade the new nurses that attention is a deliberate, practiced discipline rather than a mood' vs. passage (11): 'Attention is not a mood you fall into when the floor is quiet; it is a practice, like scrubbing in'. Prompt: 'tempted to rely on monitors and routine' vs. ¶5's alarm-vs-nurse statistic.",
+    "fix": "Collapse the SOAPS block into a single AP-style context paragraph (speaker, occasion, audience, date) and keep only the task sentence's statement of the message ('...to convince the new graduates that paying attention is a discipline they must practice deliberately'). Remove 'rather than a mood' and 'rely on monitors and routine.'"
+   },
+   {
+    "where": "prompt",
+    "severity": "nit",
+    "issue": "Context is stated twice in the student-facing task (the SOAPS block and then the 'The passage below is a commencement address delivered in 2019...' sentence repeat speaker, hospital, school, and occasion), and the passage header carries an internal production label.",
+    "evidence": "'Speaker: Marisol Quenneville, a charge nurse who has worked the overnight shift at the fictional Harrowgate Memorial Hospital...' followed by 'The passage below is a commencement address delivered in 2019 by Marisol Quenneville, a night-shift charge nurse at Harrowgate Memorial Hospital...'; header line 'ALTON original passage'.",
+    "fix": "Keep one context statement; strip 'ALTON original passage' from the student-facing version."
+   },
+   {
+    "where": "rubric",
+    "severity": "minor",
+    "issue": "Row B (max 4) has no score-point descriptors distinguishing 1/2/3/4, and Row C gives only negative guidance (what not to award) with no positive description of what earns the point. As written, a grader cannot apply the rows to separate the mid (B:3) from the low (B:2) without importing the unstated College Board descriptors.",
+    "evidence": "Row B task_specific lists countable choices and says 'Student commentary should connect choices to the specific audience' but has no language for 'some specific evidence / minimal commentary' vs. 'consistently explains'. Row C: 'Do not award for merely using sophisticated vocabulary, for a long introduction..., or for a single clever sentence... The point is for thinking carried through the essay.'",
+    "fix": "Attach the standard 6-point descriptors (B: 0–4; C: criteria such as explaining significance in the broader rhetorical situation, exploring tensions/complexities, vivid persuasive style) so the task-specific notes sit on top of them."
+   },
+   {
+    "where": "annotation (sample low, Row B)",
+    "severity": "nit",
+    "issue": "Annotation says the essay 'ignores the concession in paragraph 4,' but the low essay does mention it (without analyzing it).",
+    "evidence": "Low sample: 'Then she says that the graduates will be tired and have six or eight patients.' Annotation: 'The essay ignores the concession in paragraph 4 and how it moves the danger from fatigue to certainty.'",
+    "fix": "Reword to 'mentions but does not analyze the concession.'"
+   }
+  ]
+ },
+ "_key_fq__englang_p2_b_ap_english_language_fb2_k0": "fq__englang_p2_b_ap_english_language_fb2_k0",
+ "fq__englang_p2_b_ap_english_language_fb3_k0": {
+  "findings": [
+   {
+    "where": "sample mid / annotation",
+    "severity": "major",
+    "issue": "The mid sample's score line awards Sophistication (C:1, total 5), but the only Row C annotation explicitly says the point is not earned. Either the score or the annotation is wrong; as written the sample cannot be used for calibration.",
+    "evidence": "Scores: {\"A\":1,\"B\":3,\"C\":1,\"total\":5}. Row C annotation: \"Brief rebuttal of the opposing view; it is a single sentence and the essay does not explore unintended consequences, so no sustained sophistication.\" If C=0 the total is 1+3+0=4, not 5.",
+    "fix": "Decide whether the mid essay earns C. If yes, rewrite the C annotation to cite the nurse/hardware distinction (\"The nurse in the column is a harder problem... I think the answer is time of day\") as the rubric-named move; if no, change scores to C:0, total 4 and retitle the target."
+   },
+   {
+    "where": "rubric",
+    "severity": "major",
+    "issue": "Row A contradicts itself about where the thesis may appear: it requires the 'opening' to clarify a vague thesis, then says the thesis may appear anywhere including the conclusion. A grader cannot apply both rules to an essay whose clarification comes only in the conclusion.",
+    "evidence": "Row A: \"'Cities should limit cars somewhat' earns the point only if the essay's opening makes clear what 'somewhat' means or on what the degree depends. A thesis may appear anywhere in the essay, including the conclusion.\" The low annotation then applies the first rule: \"the opening never says what the limit should depend on.\"",
+    "fix": "Replace 'the essay's opening' with 'the essay (wherever the thesis is stated)' or drop the 'anywhere' sentence."
+   },
+   {
+    "where": "sample mid / annotation",
+    "severity": "minor",
+    "issue": "The mid essay and high essay use nearly the same thesis and the same nurse-vs-hardware/time-of-day structure, so the package does not clearly differentiate a 5 from a 6; the rubric's own Row C example (nurse and hardware customer are different problems, solved by time-of-day rules) is performed by the mid essay, which the annotation then says lacks sophistication.",
+    "evidence": "High: \"How much a city restricts cars should depend on why people are on the street, not on one rule for all six blocks.\" Mid: \"how much a city limits cars should depend on what each street is used for, not on one rule for the whole downtown.\" Mid: \"The nurse in the column is a harder problem... I think the answer is time of day.\" Rubric C: \"an essay that argues the nurse and the hardware customer are different problems (one solved by time-of-day rules...)\"",
+    "fix": "Revise the mid essay so its commentary is visibly thinner/less consistent than the high, or make the annotations explain what specifically separates the two on Rows B and C."
+   },
+   {
+    "where": "sample mid",
+    "severity": "minor",
+    "issue": "Misstates a figure from the column: the column puts the garage eight blocks away (and 'six' is the number of closed blocks); the sample says six blocks from the garage.",
+    "evidence": "Sample: \"You cannot carry lumber six blocks from a parking garage.\" Column: \"closed six blocks of Carrow Street\" ... \"the garage eight blocks away.\"",
+    "fix": "Change to 'eight blocks' or make clear the writer is estimating."
+   },
+   {
+    "where": "sample high",
+    "severity": "minor",
+    "issue": "The quoted fragment attributed to Teague is not what the column says; the sample splices 'because' directly onto 'nothing is idling'.",
+    "evidence": "Sample: Teague says they stay \"because nothing is idling at their backs.\" Column: \"because people linger when nothing is idling at their backs.\"",
+    "fix": "Quote exactly: people linger \"when nothing is idling at their backs.\""
+   },
+   {
+    "where": "annotation (mid, row B)",
+    "severity": "minor",
+    "issue": "An annotation penalizes the writer for relying on the column, which contradicts the rubric's own Row B guidance that stimulus evidence counts fully.",
+    "evidence": "Annotation: \"but this is mostly column material rather than new evidence.\" Rubric B: \"Evidence counts whether drawn from the stimulus, from the writer's own town, from reading, or from reasoned hypotheticals, as long as it is specific.\"",
+    "fix": "Reword to critique the thinness of the commentary, not the source of the evidence."
+   },
+   {
+    "where": "sample low / annotation",
+    "severity": "minor",
+    "issue": "B=1 is borderline against the published rubric: Row B score 1 is for evidence that is 'mostly general,' but the low essay cites specific column details (hardware owner, highway/outlet strip, nurse, garage) and offers a counter-consequence, which fits the score-2 descriptor (specific evidence, little or no commentary). The annotation calls the column references 'the level-1 pattern of listing the three figures' without reconciling this.",
+    "evidence": "Low: \"If a city closes everything then people will just go somewhere else, like the outlet strip. That would hurt downtown.\" Annotation: \"This is the level-1 pattern of listing the three figures.\"",
+    "fix": "Either justify B=1 by explaining why the column references are treated as summary rather than evidence, or rescore B=2 (total 2)."
+   },
+   {
+    "where": "source",
+    "severity": "minor",
+    "issue": "Stray internal label and missing attribution on the source header; the prompt names the author but the source block does not.",
+    "evidence": "Source header: \"ALTON original passage\" / \"Column in a small-city newspaper, the Verrick Falls Ledger (fictional)\" with no byline, while the prompt says \"the commentator Marisol Teague describes...\"",
+    "fix": "Remove 'ALTON original passage'; add 'by Marisol Teague' to the source header."
+   },
+   {
+    "where": "prompt",
+    "severity": "nit",
+    "issue": "The full column is reproduced twice (inside the prompt and again as the source), which is redundant for a single-stimulus argument task and risks the two copies drifting apart in future edits.",
+    "evidence": "Prompt paragraph beginning \"Last spring the council of Verrick Falls closed six blocks...\" is repeated verbatim under SOURCES.",
+    "fix": "Keep one copy, following the exam format where the stimulus sits inside the prompt."
+   },
+   {
+    "where": "source",
+    "severity": "nit",
+    "issue": "Mild gender asymmetry in how the two merchants are introduced (man by ownership role, woman as 'the woman who runs'), echoed in the low sample as 'the bakery lady'.",
+    "evidence": "\"The owner of the hardware store says...\" vs \"The woman who runs the bakery two doors down says...\"; low sample: \"The bakery lady says she sells more rolls.\"",
+    "fix": "Use parallel phrasing, e.g., 'The owner of the bakery two doors down.'"
+   }
+  ],
+  "verdict": "Revise before use. The prompt, stimulus and 6-point structure are sound and the figures (six closed blocks, garage eight blocks away, 11 p.m. shift) are consistent across the column and the high sample. The package fails on calibration: the mid sample is scored C:1/total 5 while its only Row C annotation says no sophistication is earned, and the mid essay performs the exact move the rubric names for sophistication, so the 5-vs-6 distinction is not demonstrated. Row A also contains an unapplyable contradiction (thesis 'anywhere' vs. 'opening' must clarify). Lesser fixes: mid misstates six vs eight blocks, high misquotes the column, one annotation penalizes stimulus use against the rubric's own rule, and the source header carries a stray 'ALTON' label with no byline."
+ },
+ "_key_fq__englang_p2_b_ap_english_language_fb3_k0": "fq__englang_p2_b_ap_english_language_fb3_k0",
+ "fq__englang_p1_b2_ap_english_language_fa1_k0": {
+  "verdict": "NOT READY. The package's arithmetic is largely consistent (1.9M/177,000 = $10.73; 1.6M/140,000 ≈ $11.43; 300,000 − 95,000 − 85,000 = 120,000; Source C's 14/33 matches Source E), but Source F, which the rubric and all three samples depend on for the $11.40 hub figure, is absent from the package. The low sample's Evidence score contradicts both the AP descriptors and the package's own rubric text, and the high anchor contains a reasoning error that the annotation endorses as a model move. Fix the blocker and the two scoring/reasoning issues, clean the formatting artifacts, then re-review.",
+  "findings": [
+   {
+    "where": "source F",
+    "severity": "blocker",
+    "issue": "Source F is referenced but not present. The student is told to read six sources, the rubric and all three samples cite a Source F value (hub at 11.40 per visit, plus branch figures for Lowen Mill/Oskar Bend), yet the package contains only a title and the line 'The chart for this source appears below the sources' with no chart.",
+    "evidence": "Source F body: 'The chart for this source appears below the sources.' — nothing follows. Rubric Row B: 'the hub's projected 11.40'. Mid sample: 'The hub is projected to cost 11.40 per visit, which is a lot less than Dreyfield or Lowen Mill' — Lowen Mill's per-visit cost appears in no text source, so it cannot be verified. Note also 1,600,000 / 140,000 = 11.43, so the chart value should be checked against the Source A figures when it is supplied.",
+    "fix": "Insert the chart (or a tabular rendering) with per-visit costs for all four branches and the hub. Ensure the hub value is consistent with 1.6M/140,000 (label as ≈$11.40 or $11.43 consistently across rubric and samples), and that Oskar Bend + Lowen Mill values are consistent with the implied remainder (1.9M − 16,000×21.50 − 96,000×7.50 = $836,000 over 65,000 visits ≈ $12.86 average)."
+   },
+   {
+    "where": "sample low",
+    "severity": "major",
+    "issue": "Row B score of 1 contradicts both the AP descriptors and the package's own task-specific rubric. The essay draws evidence from five sources (B, F, C, E, D) and attaches commentary to several, which is a 2 under AP (evidence from 3+ sources with some/faulty explanation) and the rubric itself says a five-source essay with no commentary 'stays at 2'.",
+    "evidence": "Rubric Row B: 'an essay that cites five sources in one sentence each with no commentary stays at 2.' Low sample cites Source B, F, C, E, D and includes commentary such as 'This shows that the small libraries are expensive and the hub would save money' and 'This is a good point because lots of people would not be able to get to the hub.' Scores given: {\"A\":0,\"B\":1,\"C\":0,\"total\":1}.",
+    "fix": "Either rescore the low sample B=2 (total 2) and adjust annotations, or rewrite the low essay so it genuinely references only two sources with pure summary to justify B=1. Also reconcile the rubric sentence 'stays at 2' with the AP row-1 descriptor (summary with no explanation is a 1 under the published rubric regardless of source count)."
+   },
+   {
+    "where": "sample high",
+    "severity": "major",
+    "issue": "The model essay's key arithmetic paragraph contains a logical error that the annotation endorses. The hub's absolute saving ($1.9M → $1.6M) does not depend on visit counts at all; fewer visits make the hub's cost-per-visit WORSE, not the source of the saving. The essay inverts this.",
+    "evidence": "High sample: 'The hub saves money overall only because it expects 37,000 fewer visits. In other words, part of the \"efficiency\" is just fewer people using the library.' But Source A: branches 1.9M, hub 1.6M — a $300,000 saving independent of visits; Source B attributes it to fixed building costs. Annotation praises this: 'The essay then explains what it means: the savings depend partly on 37,000 fewer visits.'",
+    "fix": "Revise to: the hub's headline per-visit advantage over Dreyfield ($11.40 vs $21.50) is misleading because system-wide the branches already cost ~$10.73 a visit; the hub's per-visit figure is higher precisely because it expects 37,000 fewer visits, so the $300,000 saving comes from buildings, not from serving people more efficiently. Update the annotation accordingly."
+   },
+   {
+    "where": "sample mid",
+    "severity": "minor",
+    "issue": "Annotations for Row B describe commentary as 'fairly general', 'brief and a little repetitive', and note a missed limitation, which are 3-level descriptors (explains how some evidence supports a line of reasoning), yet the score awarded is 4 (consistently explains). The annotation text and score are in tension; the mid and high samples then differ only on Row C.",
+    "evidence": "Mid annotations: 'This is good evidence, though the commentary after it is fairly general.' / 'the explanation is brief and a little repetitive.' / 'the essay does not look at whether \"expect\" is only an intention.' Scores: {\"A\":1,\"B\":4,\"C\":0,\"total\":5}.",
+    "fix": "Either score B=3 (total 4) to match the annotations, or revise the annotations to explain why the commentary is nonetheless consistent enough for 4."
+   },
+   {
+    "where": "prompt",
+    "severity": "minor",
+    "issue": "The prompt's third framing sentence pre-packages the conditional position of Source D (transport + local presence), which is also the rubric's model thesis and the stance both top samples take. This telegraphs the 'right' answer and reduces the synthesis challenge.",
+    "evidence": "Prompt: 'Others argue that consolidation can work only if it is paired with transportation and some form of local presence.' Source D: 'a fixed-route shuttle… a staffed reading room… in Dreyfield and in Lowen Mill.' Rubric Row A example: 'Towns should consolidate only if they fund a way for people without cars to reach the hub.'",
+    "fix": "Trim the third sentence to a neutral 'Still others question whether any single plan can serve all four towns equally,' or delete it, so the conditional position must be discovered from Source D."
+   },
+   {
+    "where": "sample high",
+    "severity": "minor",
+    "issue": "Currency formatting artifacts garble a sentence in the model essay and its annotation.",
+    "evidence": "High sample: 'each Pennick visit costs 7.50, dollars and Source F charts the hub at 11.40. dollars That looks like an obvious win'. Annotation: 'checked against Source F's 11.40. dollars The rubric names…'",
+    "fix": "Rewrite as '…costs 7.50 dollars, and Source F charts the hub at 11.40 dollars. That looks…' and fix the annotation."
+   },
+   {
+    "where": "source A",
+    "severity": "nit",
+    "issue": "Stray production label precedes the sources.",
+    "evidence": "'SOURCES / PASSAGE (student sees)\\nALTON original passage\\n———\\nSource A'",
+    "fix": "Delete 'ALTON original passage'."
+   },
+   {
+    "where": "source C",
+    "severity": "nit",
+    "issue": "Marrow equates Source E's 'visit a library branch at least monthly' with visiting the Dreyfield branch specifically; the survey column does not restrict respondents to their own town's branch. Not an error in the package's numbers (33 and 14 match Source E), but a slight interpretive stretch a sharp student could challenge and the rubric does not anticipate.",
+    "evidence": "Source C: 'Thirty-three in a hundred visit our branch that often now.' Source E column header: 'Visit a library branch at least monthly (percent)'.",
+    "fix": "Either change the Source E column header to 'Visit their town's branch at least monthly' or leave as-is and add a rubric note that challenging Marrow's reading is a legitimate sophistication move."
+   }
+  ]
+ },
+ "_key_fq__englang_p1_b2_ap_english_language_fa1_k0": "fq__englang_p1_b2_ap_english_language_fa1_k0",
+ "fq__englang_p1_b2_ap_english_language_fa2_k0": {
+  "verdict": "REVISE BEFORE USE. The passage, numbers, and sample scores are internally consistent (31 years, 2019, town of six thousand, ~$4M catch, ~140 jobs, 11 vs 40 minutes all match across prompt, passage and samples). Two substantive problems need fixing: (1) the student-facing task block pre-announces Osgood's strategy (\"reframing the wharf not as a failing business but as the infrastructure... while acknowledging the town's real financial pressures\"), which is essentially the high sample's thesis and defeats the analytic task; (2) the rubric and the high sample both describe sentences 18-21 as \"shrinking,\" but sentence 21 is the longest in the chain, so an inaccurate textual claim is being modeled and rewarded as full-credit commentary. Remaining items are minor labeling, sourcing and quotation issues.",
+  "findings": [
+   {
+    "where": "prompt",
+    "severity": "major",
+    "issue": "The student-facing task block leaks the analytical answer. The 'Purpose' line names the speech's central strategy (redefinition from failing business to infrastructure, plus concession of financial pressures), which is exactly what students are supposed to discover and argue. The high sample's thesis is nearly a paraphrase of it.",
+    "evidence": "Prompt: \"Purpose: to persuade the town to reject the rezoning and preserve the working waterfront by reframing the wharf not as a failing business but as the infrastructure on which the town's trades, safety, and identity depend, while acknowledging the town's real financial pressures.\" High sample thesis: \"she redefines the wharf from a failing business into infrastructure the town cannot function without.\" Rubric Row A lists \"the concession in paragraph 3\" and \"the shift from economic to moral framing\" as target thesis content.",
+    "fix": "Cut the Speaker/Audience/Exigence/Purpose block from the student view (or reduce Purpose to 'to persuade the council to vote no on the rezoning'); keep the strategic description in teacher notes only. The second paragraph of the task already gives the needed context."
+   },
+   {
+    "where": "rubric",
+    "severity": "major",
+    "issue": "Row B describes sentences 18-21 as a chain with 'shrinking sentences,' but the chain does not shrink: sentence 21 is the longest of the four. The high sample makes the same inaccurate claim and the annotation calls it 'full-credit commentary,' so the package models and rewards a misreading of the text.",
+    "evidence": "Rubric Row B: \"the cause-and-effect chain with 'Then' repetition and shrinking sentences (18-21)\". Passage: (19) \"Then the mechanic goes.\" = 4 words; (20) \"Then the welder.\" = 3 words; (21) \"Then the kids who might have learned a trade from either of them go somewhere that still has trades to learn.\" = 21 words. High sample: \"The sentences get shorter as the town loses more, so the losses fall like dominoes, ending with the kids who leave.\" Annotation: \"Describes how sentence length and repetition create an effect in sentences 19-21. This is full-credit commentary.\"",
+    "fix": "Revise the rubric to 'anaphora of Then with two clipped sentences (19-20) followed by a longer sentence (21) that lands on the kids'; revise the high sample to describe the actual pattern (two blunt losses, then the drawn-out final loss), and update the annotation accordingly."
+   },
+   {
+    "where": "sample high",
+    "severity": "minor",
+    "issue": "The high sample asserts contextual facts that are not in the passage: that the developer is 'from out of town' and that the brochure pitched tax revenue and the culvert. The passage never locates the developer and never says the brochure mentions taxes or the culvert; Osgood herself raises those. The annotations do not flag these unsupported claims in a model essay.",
+    "evidence": "High sample: \"someone who climbed 'a rope ladder' for thirty-one years is probably more trustworthy than a developer from out of town\" and \"The developer's brochure had a simple pitch: pretty condos, tax revenue, and maybe a culvert that finally gets fixed.\" Passage sentence 8 lists only what the renderings show (\"cafes with striped awnings, a boardwalk, furled sailboats\"); taxes and the culvert appear only in Osgood's own sentence 12.",
+    "fix": "Change to 'than a developer' and 'The developer's pitch, as Osgood frames it, was...' or otherwise tie the claims to the text."
+   },
+   {
+    "where": "annotation",
+    "severity": "minor",
+    "issue": "High-sample annotation refers to 'Row 4 commentary,' but this package's rubric has rows A, B, C; there is no Row 4. (Row B is worth up to 4 points, which is probably what was meant.)",
+    "evidence": "Annotation on \"Osgood saves the Anna Belle story for after the economics...\": \"Explains why the story is placed where it is, which the rubric singles out as Row 4 commentary.\"",
+    "fix": "Change to 'Row B (4-point level) commentary' or 'the kind of commentary the rubric rewards at the top of Row B.'"
+   },
+   {
+    "where": "rubric",
+    "severity": "minor",
+    "issue": "Row A ties the thesis point to the essay's 'opening sentences,' which conflicts with the published AP Lang rubric convention that the thesis may appear anywhere in the essay (including the conclusion). This matters for the low sample, whose only strategy-naming claim ('uses ethos, logos, and pathos to persuade the town') is in its conclusion; graders applying the CB convention and this rubric could reach different Row A results.",
+    "evidence": "Rubric Row A: \"award the point only if the essay's opening sentences attach those devices to a purpose.\" Low sample conclusion: \"Overall Osgood uses ethos, logos, and pathos to persuade the town and it works because it makes the audience agree with her.\" Low annotation for Row A: \"It still offers no defensible claim about this speech in particular.\"",
+    "fix": "Replace 'opening sentences' with 'the thesis statement, wherever it appears' and state explicitly whether a generic ethos/logos/pathos list attached to 'to persuade the town' earns the point, so the low sample's 0 is clearly justified."
+   },
+   {
+    "where": "sample mid",
+    "severity": "nit",
+    "issue": "Mid sample misquotes sentence 33 (changes 'belongs' to 'belong'), producing an ungrammatical quotation; annotation does not note it.",
+    "evidence": "Mid: 'says the waterfront will either \"belong to the town or merely faces it.\"' Passage (33): \"We are deciding whether the waterfront belongs to the town or merely faces it.\"",
+    "fix": "Either correct the quotation or add an annotation noting the minor misquotation as a realistic mid-level flaw."
+   },
+   {
+    "where": "sample mid",
+    "severity": "nit",
+    "issue": "Mid sample is awarded A=1 but has no Row A annotation explaining why the thesis earns the point; high and low samples both have Row A annotations.",
+    "evidence": "Mid scores: {\"A\":1,\"B\":3,\"C\":0}. Mid annotations list row_ids B, B, B, B, B, C only.",
+    "fix": "Add a Row A annotation on the mid thesis ('presenting herself as a practical person... and then by redefining the north wharf...')."
+   },
+   {
+    "where": "source X",
+    "severity": "nit",
+    "issue": "Student-facing source header carries an internal production label ('ALTON original passage') that will look like a source name or author to students.",
+    "evidence": "\"SOURCES / PASSAGE (student sees)\\nALTON original passage\\nRemarks on the North Wharf Rezoning\"",
+    "fix": "Remove the internal label from the student view."
+   },
+   {
+    "where": "source X",
+    "severity": "nit",
+    "issue": "Plausibility wrinkle in the fictional premise: a harbor pilot boards large arriving ships via pilot ladder, but the wharf economy described is entirely small-boat fishing (lobster boat, crab pots, co-op catch), and the north wharf is the town's 'last commercial working pier.' It is not clear what ships a pilot would have guided in or where they docked. Not a scoring problem, but a sharp student may notice.",
+    "evidence": "Sentence 1: \"I climbed a rope ladder up the side of other people's ships.\" Sentences 17-18, 22, 26: \"crab pot,\" \"the boats go to Carrow Point,\" \"the co-op landed just under four million dollars of catch,\" \"Dale Cuttery in his lobster boat.\" Prompt: \"the town's last commercial working pier.\"",
+    "fix": "Optional: add a half-sentence (e.g., fuel barges or coastal freighters calling at the wharf) or make her a former fishing-boat captain/harbormaster."
+   }
+  ]
+ },
+ "_key_fq__englang_p1_b2_ap_english_language_fa2_k0": "fq__englang_p1_b2_ap_english_language_fa2_k0",
+ "fq__englang_p1_b2_ap_english_language_fa3_k0": {
+  "findings": [
+   {
+    "where": "rubric",
+    "severity": "major",
+    "issue": "Row C's task-specific guidance names 'that the wobbling chair is a failure' as an assumption 'shared by both sides in the stimulus,' but the passage shows the board chair explicitly rejecting the chair as the measure. Only the parents treat the wobble as a failure. A grader applying this descriptor literally would reward students for 'questioning' a shared assumption that one side never held.",
+    "evidence": "Rubric C: 'questioning an assumption shared by both sides in the stimulus: ... or that the wobbling chair is a failure.' Passage: 'the student's chair will wobble. But the board's chair answered with a question of her own: what does a person lose who has never made anything with her hands ... never had to live with a mistake she cannot undo ... The requirement, she said, is not about chairs.'",
+    "fix": "Reword Row C to 'an assumption held by the parents (or implicit in the prompt)' for the wobbling-chair example, or drop that example and keep the two genuinely shared assumptions (fixed time budget, usefulness as the measure)."
+   },
+   {
+    "where": "sample high",
+    "severity": "major",
+    "issue": "The high sample misreads the stimulus in the exact passage the annotation cites for the sophistication point: it says 'both sides' treat the chair as the measure, then reframes the wobble as the point of the class. That reframing is essentially the board chair's own stated view ('not about chairs'; 'live with a mistake she cannot undo'), so the essay is restating one side rather than questioning a shared assumption. The annotation nonetheless credits it as 'an assumption both sides in the stimulus share.'",
+    "evidence": "High sample: 'That is why I think both sides in Pellingham are measuring the wrong thing when they talk about the chair. The parents treat the wobbling chair as a failure ... The point of the class is the wobble.' Annotation C: 'The essay questions an assumption both sides in the stimulus share, that the wobbling chair is a failure.' Passage: 'The requirement, she said, is not about chairs.'",
+    "fix": "Either revise the sample to acknowledge the board chair's position and push past it (e.g., argue the chair herself undersells the wobble), or re-anchor the C annotation to the fixed-time-budget paragraph and the internal-tension paragraph, which are the genuinely sophisticated moves."
+   },
+   {
+    "where": "annotation",
+    "severity": "minor",
+    "issue": "High sample Row C annotation claims the essay 'explores the rubric's own example of internal tension,' but Row C lists no such example (its examples are fixed time, usefulness as measure, wobbling chair as failure). The annotation also treats the student as if responding to the rubric, which students never see.",
+    "evidence": "Annotation: 'The essay explores the rubric's own example of internal tension: forcing a craft may undermine the attention that gives it value.' Rubric C examples: 'that time in school is a fixed quantity..., that usefulness is the right measure, or that the wobbling chair is a failure.'",
+    "fix": "Change to 'The essay identifies a tension inside its own position (forced participation may undermine attention) and uses it to justify the thesis conditions.'"
+   },
+   {
+    "where": "prompt",
+    "severity": "minor",
+    "issue": "The prompt's framing asserts as fact a broad claim the passage does not make ('machines can perform most manual work faster and more precisely than people can'). The passage only says a factory machine can produce a flawless chair in minutes. This embeds a contestable premise in the task and pre-empts one of the sophistication moves (questioning usefulness/precision as the measure).",
+    "evidence": "Prompt: 'at a time when machines can perform most manual work faster and more precisely than people can.' Passage: 'A machine in a factory two states away can produce a flawless chair in minutes.'",
+    "fix": "Soften to 'at a time when machines can perform much manual work faster and more precisely than people' or 'when many argue that machines...'."
+   },
+   {
+    "where": "prompt",
+    "severity": "minor",
+    "issue": "The first bullet departs from the standard AP wording and steers students toward a conditional/qualified thesis ('how far, and under what conditions'), partially leaking the shape of a high-scoring answer; meanwhile Rubric A accepts an unconditional 'whether' thesis, so prompt and rubric are not aligned on what the thesis must do.",
+    "evidence": "Prompt bullet: 'a thesis that presents a defensible position on how far, and under what conditions, a hand-craft requirement is worthwhile.' Rubric A: 'any claim about whether, how much, or under what conditions a craft requirement is justified.'",
+    "fix": "Use the standard wording: 'Respond to the prompt with a thesis that presents a defensible position.' Keep the conditions language in the rubric only."
+   },
+   {
+    "where": "source X",
+    "severity": "minor",
+    "issue": "The opening sentence of the passage is syntactically garbled: the list of crafts is set off only by commas inside an already comma-heavy sentence, so 'graduating, woodworking, weaving' reads as a run-on and the appositive relationship to 'a hand craft' is unclear.",
+    "evidence": "'to require every student to complete a year of a hand craft before graduating, woodworking, weaving, bookbinding, bicycle repair, whatever the shop could staff, the objections came fast.'",
+    "fix": "Set the list off with dashes: '...a year of a hand craft before graduating—woodworking, weaving, bookbinding, bicycle repair, whatever the shop could staff—the objections came fast.'"
+   },
+   {
+    "where": "sample high / sample mid",
+    "severity": "minor",
+    "issue": "The high and mid samples are nearly the same essay: identical thesis (require, but one semester, student choice, taught as living with irreversible mistakes), identical evidence types (eighth-grade shop project cut/glued wrong with 'no undo', a mechanic who hears/feels what the machine misses, 'nobody can predict which skills will be needed'). The score gap therefore rests only on prose execution, which weakens the package as a teaching contrast and makes the mid sample look like a degraded copy rather than an independent 4.",
+    "evidence": "High: 'In eighth grade I glued up a maple cutting board'; 'hits Ctrl-Z'; 'the class should be one semester'; 'Students should pick their own craft'; 'nobody is very good at predicting that.' Mid: 'In eighth grade I took a shop class'; 'there was no undo button'; 'a semester that counts toward electives'; 'the students can pick which craft'; 'nobody really knows which skills students will actually need.'",
+    "fix": "Give the mid sample a different thesis position (e.g., oppose the requirement but favor an elective, or support the full year) and a distinct evidence set so the samples illustrate different defensible positions."
+   },
+   {
+    "where": "source X",
+    "severity": "nit",
+    "issue": "Internal production label left in student-facing material.",
+    "evidence": "'ALTON original passage' appears above the passage title.",
+    "fix": "Remove the label from the student-visible section."
+   },
+   {
+    "where": "prompt",
+    "severity": "nit",
+    "issue": "Student-facing prompt flags the source as fictional ('a fictional regional magazine'), which real AP prompts never do and which slightly undercuts the stimulus's authority for the student.",
+    "evidence": "'In a 2026 column for the Kettle Hill Quarterly, a fictional regional magazine, commentator Odalys Vreeland...'",
+    "fix": "Move the 'fictional' disclosure to teacher notes or a footer outside the prompt text."
+   }
+  ],
+  "verdict": "Revise before use. The package is structurally sound (correct 1/4/1 rubric, single-passage argument stimulus, source quotations in all three samples are accurate, numeric references to 'ninety hours'/'a year'/'a semester' are consistent). The main defects are interpretive: both Rubric Row C and the high sample's sophistication annotation claim the board chair shares the assumption that the wobbling chair is a failure, when the passage shows her explicitly rejecting that framing, so the showcased 'sophistication' move in the 6-point sample is really a restatement of one side. Secondary issues: the prompt embeds an unsupported premise and nudges toward a conditional thesis, the passage's first sentence is garbled, and the high and mid samples are near-duplicates. No blockers."
+ },
+ "_key_fq__englang_p1_b2_ap_english_language_fa3_k0": "fq__englang_p1_b2_ap_english_language_fa3_k0"
+}
