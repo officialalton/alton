@@ -27,7 +27,7 @@ const SYS_CACHE = { type: "ephemeral", ttl: "1h" };
 
 type Json = Record<string, unknown>;
 type Cand = { key: string; cellId: string; subject: string; kind: "mc" | "frq_bundle"; structure: Cell["structure"]; unitCode: string; keywordCode: string; skill: string; idx: number; payload: Json | null; genCost: number };
-const OPTION_COUNT: Record<string, number> = { ap_calculus_ab: 4, ap_biology: 4, ap_microeconomics: 5 };
+const OPTION_COUNT: Record<string, number> = { ap_calculus_ab: 4, ap_biology: 4, ap_microeconomics: 5, ap_macroeconomics: 5 };
 
 const readJson = <T>(f: string): T => JSON.parse(readFileSync(f, "utf-8")) as T;
 const curr = new Map<string, { f: ApCurriculumFile; topic: Map<string, string>; skill: Map<string, string> }>();
