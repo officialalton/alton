@@ -143,11 +143,11 @@ def bis_population_set(rng):
     """세트 4: 개체군 크기 표 → 서술·성장률·수용력·교란 예측."""
     for _ in forever():
         K = rng.choice([400, 600, 800]); r = rng.choice([0.55, 0.65, 0.75]); N0 = rng.choice([10, 20])
-        yrs = [0, 2, 4, 6, 8, 10, 12]
+        yrs = [0, 2, 4, 6, 8, 10, 12, 14, 16]
         N = [round(K / (1 + (K - N0) / N0 * math.exp(-r * y))) for y in yrs]
-        inc = [N[i + 1] - N[i] for i in range(6)]
+        inc = [N[i + 1] - N[i] for i in range(len(yrs) - 1)]
         pk = int(np.argmax(inc))
-        if 0 < pk < 5 and inc[-1] < 0.2 * max(inc) and N[-1] > 0.95 * K:
+        if 0 < pk < 5 and N[-1] >= 0.99 * K and N[-1] - N[-3] <= 0.012 * K:
             break
     stim = tbl("Number of individuals in a population of mice introduced to an island", ["Year", "Number of individuals"], [[y, n] for y, n in zip(yrs, N)])
     k1, d1 = sentence_options("The population grows slowly, then quickly, and then levels off near a maximum size.", f"The yearly increases are small at first, largest between years {yrs[pk]} and {yrs[pk + 1]}, and small near {N[-1]}.",
@@ -155,13 +155,13 @@ def bis_population_set(rng):
     q1 = mk("bis_population_set_q1", "8.4", "4.B", "Which statement best describes the growth of the population?", k1, d1, rng, concept="describe an S-shaped growth table", path="interval increases vs the generating logistic curve", material=MAT_TABLE("population sizes"), facts=[f"N={N}"], est=60)
     a_i, b_i = pk, pk + 1
     rate = (N[b_i] - N[a_i]) / (yrs[b_i] - yrs[a_i])
-    pairs = [("Divides the change by the final year instead of the interval length.", (N[b_i] - N[a_i]) / yrs[b_i]), ("Reports the change in population without dividing by time.", float(N[b_i] - N[a_i])), ("Reports the population size at the end of the interval divided by the interval.", N[b_i] / (yrs[b_i] - yrs[a_i])), ("Divides the interval length by the change.", (yrs[b_i] - yrs[a_i]) / (N[b_i] - N[a_i]))]
+    pairs = [("Divides the change by the final year instead of the interval length.", (N[b_i] - N[a_i]) / yrs[b_i]), ("Reports the change in population without dividing by time.", float(N[b_i] - N[a_i])), ("Reports the population size at the end of the interval divided by the interval.", N[b_i] / (yrs[b_i] - yrs[a_i])), ("Divides the final population by the total number of years in the table.", N[-1] / yrs[-1])]
     k2, d2 = val_opts(rate, pairs, lambda v: f"{hu(v, 1)} mice per year" if v < 100 else f"{hu(v, 0)} mice per year", gap=0.05, rel=0.08)
     q2 = mk("bis_population_set_q2", "8.3", "5.A", f"What is the average rate of population growth from year {yrs[a_i]} to year {yrs[b_i]}?", k2, d2, rng, concept="average growth rate from a table", path="(N2 - N1)/(t2 - t1) vs the mean of the yearly increments", material=MAT_TABLE("population sizes"), facts=[f"rate={rate:.4f}"], est=60,
             kwhy=f"Rate = change in population / change in time = ({N[b_i]} - {N[a_i]}) / ({yrs[b_i]} - {yrs[a_i]}) = {rate:.1f} mice per year.")
     pairs = [("Reads the population size in the year of fastest growth.", float(N[pk + 1])), ("Reads the starting population size.", float(N[0])), ("Reads the population size in year 4, which is still increasing.", float(N[2])), ("Reads half of the final value.", N[-1] / 2)]
     k3, d3 = val_opts(float(N[-1]), pairs, lambda v: f"{int(round(v)):,}", gap=12, rel=0.08)
-    q3 = mk("bis_population_set_q3", "8.4", "2.B", "Which value is the best estimate of the carrying capacity of the island for this population?", k3, d3, rng, concept="read the plateau of a growth table as the carrying capacity", path="last values of the table vs the generating K", material=MAT_TABLE("population sizes"), facts=[f"K={K}"], est=60)
+    q3 = mk("bis_population_set_q3", "8.4", "4.B", "The population size stops changing at the end of the table. Which value is the best estimate of the carrying capacity of the island for this population?", k3, d3, rng, concept="read the plateau of a growth table as the carrying capacity", path="last values of the table vs the generating K", material=MAT_TABLE("population sizes"), facts=[f"K={K}"], est=60, kwhy=f"The last three counts ({N[-3]}, {N[-2]}, and {N[-1]}) are nearly the same, so the population has leveled off at about {N[-1]}, which is the carrying capacity.")
     k4, d4 = sentence_options("The carrying capacity would decrease, and the population would decline toward a smaller size.", "Fewer resources can support fewer individuals, so the population falls toward the lower carrying capacity.",
         [("The carrying capacity would stay the same, and the population would continue to grow at the same rate.", "The carrying capacity is set by the resources, which have decreased."), ("The carrying capacity would increase, because competition for the remaining food would be stronger.", "A loss of resources lowers, not raises, the carrying capacity."), ("The population would increase without limit, because fewer plants mean fewer competitors.", "A reduction of the food supply does not remove limits on a population.")])
     q4 = mk("bis_population_set_q4", "8.4", "6.E", "A drought reduces the amount of plant food available on the island. Which prediction about the mouse population is best supported?", k4, d4, rng, concept="predict the effect of a resource loss on carrying capacity", path="logistic model with a smaller K vs the generating population", material=MAT_TABLE("population sizes"), facts=[f"K={K}"], est=65)

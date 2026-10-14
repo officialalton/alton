@@ -1,0 +1,121 @@
+{
+ "runs": [
+  "bio-v2a"
+ ],
+ "rows": 93,
+ "passed": 62,
+ "rejected": 31,
+ "passRate": 0.667,
+ "mc": {
+  "rows": 93,
+  "passed": 62,
+  "passRate": 0.667
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 2,
+  "2": 6,
+  "3": 6,
+  "4": 3,
+  "5": 8,
+  "6": 11,
+  "7": 13,
+  "8": 13
+ },
+ "skillsPassed": {
+  "5.A": 57,
+  "2.D": 3,
+  "4.B": 2
+ },
+ "figPassed": {
+  "none": 40,
+  "table": 22
+ },
+ "figAll": {
+  "none": 57,
+  "table": 36
+ },
+ "figPassRate": {
+  "none": "40/57",
+  "table": "22/36"
+ },
+ "renderTypesPassed": {
+  "none": 40,
+  "ap_table": 22
+ },
+ "archetypesPassed": {
+  "bi_x_hbond_count": 2,
+  "bi_x_cell_size_limit": 3,
+  "bi_x_plant_osmosis": 3,
+  "bi_x_gross_productivity": 3,
+  "bi_x_respirometer_ratio": 1,
+  "bi_x_enzyme_rate_percent": 2,
+  "bi_x_mitosis_hours": 2,
+  "bi_x_cascade_amplification": 1,
+  "bi_x_dna_meiosis_amount": 2,
+  "bi_x_trihybrid_prob": 1,
+  "bi_x_xlinked_two_children": 1,
+  "bi_x_linkage_class_count": 3,
+  "bi_x_blood_type_inference": 1,
+  "bi_x_okazaki_primers": 2,
+  "bi_x_template_to_peptide": 1,
+  "bi_x_transformation_eff": 2,
+  "bi_x_gel_size_estimate": 1,
+  "bi_x_new_mutations": 3,
+  "bi_x_hw_selection_next_gen": 3,
+  "bi_x_hw_carriers": 3,
+  "bi_x_selection_coefficient": 3,
+  "bi_x_antibiotic_generations": 2,
+  "bi_x_gene_flow_freq": 2,
+  "bi_x_trophic_chain_energy": 3,
+  "bi_x_logistic_ratio": 3,
+  "bi_x_invasive_percent_change": 3,
+  "bi_x_gpp_respired": 2,
+  "bis_translation_set": 2,
+  "bis_population_set": 2
+ },
+ "archetypesAll": {
+  "bi_x_hbond_count": 3,
+  "bi_x_cell_size_limit": 3,
+  "bi_x_plant_osmosis": 3,
+  "bi_x_gross_productivity": 3,
+  "bi_x_respirometer_ratio": 3,
+  "bi_x_enzyme_rate_percent": 3,
+  "bi_x_mitosis_hours": 3,
+  "bi_x_cascade_amplification": 3,
+  "bi_x_dna_meiosis_amount": 3,
+  "bi_x_trihybrid_prob": 3,
+  "bi_x_xlinked_two_children": 3,
+  "bi_x_pedigree_carrier_prob": 3,
+  "bi_x_linkage_class_count": 3,
+  "bi_x_blood_type_inference": 3,
+  "bi_x_okazaki_primers": 3,
+  "bi_x_template_to_peptide": 3,
+  "bi_x_transformation_eff": 3,
+  "bi_x_gel_size_estimate": 3,
+  "bi_x_new_mutations": 3,
+  "bi_x_hw_selection_next_gen": 3,
+  "bi_x_hw_carriers": 3,
+  "bi_x_selection_coefficient": 3,
+  "bi_x_antibiotic_generations": 3,
+  "bi_x_gene_flow_freq": 3,
+  "bi_x_trophic_chain_energy": 3,
+  "bi_x_logistic_ratio": 3,
+  "bi_x_invasive_percent_change": 3,
+  "bi_x_gpp_respired": 3,
+  "bi_x_sd_to_se_overlap": 3,
+  "bis_translation_set": 3,
+  "bis_population_set": 3
+ },
+ "failedArchetypes": [
+  "bi_x_pedigree_carrier_prob",
+  "bi_x_sd_to_se_overlap"
+ ],
+ "costUsd": {
+  "bio-v2a": 4.046
+ }
+}

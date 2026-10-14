@@ -1,0 +1,270 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "EL1",
+ "sourceSetName": "AP English Language — Practice Exam 1",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/ap-generation/el-review-build-fixes.ts (EL review 2026-10-14)",
+ "note": "Replacement candidates (keys el-review-fix:*) are NOT in the DB yet. Import data/audit/el-review-fix-items.json first (scripts/ap-generation/import-candidates.ts --items data/audit/el-review-fix-items.json --batch el-review-fix-2026-10-14 --supplement), mark render/screen evidence as for the originals, then copy this file to data/ap/stock/ so the admin 'new version' screen lists it. Each swap replaces a whole passage set (all its slots) or one FRQ with the same-cell corrected copy. tier=required fixes a content/prompt defect; tier=recommended is the option-length balancing.",
+ "swapCount": 15,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p2-a2:ap_english_language-r03-k0",
+   "addKey": "el-review-fix:ap_english_language-r03-k0",
+   "tier": "required",
+   "reason": "MC option-length balancing (key was the strictly longest option in 2/3 items; now 0/3); explanations no longer cite hidden sentence numbers; r03 P2: 'one hundred and twenty' -> 'one hundred and ten' working days (Nov-Mar has about 108 weekdays)",
+   "remove": {
+    "skill": "1.B",
+    "topic": "U8.1",
+    "items": 3
+   },
+   "add": {
+    "skill": "1.B",
+    "topic": "U8.1",
+    "items": 3,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p2-a2:ap_english_language-r04-k0",
+   "addKey": "el-review-fix:ap_english_language-r04-k0",
+   "tier": "required",
+   "reason": "MC option-length balancing (key was the strictly longest option in 2/4 items; now 0/4); stems/options no longer assume the writer's gender",
+   "remove": {
+    "skill": "1.A",
+    "topic": "U4.1",
+    "items": 4
+   },
+   "add": {
+    "skill": "1.A",
+    "topic": "U4.1",
+    "items": 4,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p2-a2:ap_english_language-r11-k0",
+   "addKey": "el-review-fix:ap_english_language-r11-k0",
+   "tier": "required",
+   "reason": "MC option-length balancing (key was the strictly longest option in 5/5 items; now 2/5); stems/options no longer assume the writer's gender; r11 q5 option: single quotes around 'circular' -> double quotes",
+   "remove": {
+    "skill": "1.B",
+    "topic": "U8.1",
+    "items": 5
+   },
+   "add": {
+    "skill": "1.B",
+    "topic": "U8.1",
+    "items": 5,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-s2a:ap_english_language-r23-k0",
+   "addKey": "el-review-fix:ap_english_language-r23-k0",
+   "tier": "required",
+   "reason": "MC option-length balancing (key was the strictly longest option in 4/5 items; now 1/5); explanations no longer cite hidden sentence numbers",
+   "remove": {
+    "skill": "3.B",
+    "topic": "U4.3",
+    "items": 5
+   },
+   "add": {
+    "skill": "3.B",
+    "topic": "U4.3",
+    "items": 5,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-s2a:ap_english_language-r25-k0",
+   "addKey": "el-review-fix:ap_english_language-r25-k0",
+   "tier": "required",
+   "reason": "MC option-length balancing (key was the strictly longest option in 3/4 items; now 1/4); stems/options no longer assume the writer's gender",
+   "remove": {
+    "skill": "1.A",
+    "topic": "U1.1",
+    "items": 4
+   },
+   "add": {
+    "skill": "1.A",
+    "topic": "U1.1",
+    "items": 4,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-s2b:ap_english_language-r32-k0",
+   "addKey": "el-review-fix:ap_english_language-r32-k0",
+   "tier": "recommended",
+   "reason": "MC option-length balancing (key was the strictly longest option in 2/3 items; now 0/3)",
+   "remove": {
+    "skill": "1.A",
+    "topic": "U1.1",
+    "items": 3
+   },
+   "add": {
+    "skill": "1.A",
+    "topic": "U1.1",
+    "items": 3,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p2-a2:ap_english_language-w05-k0",
+   "addKey": "el-review-fix:ap_english_language-w05-k0",
+   "tier": "recommended",
+   "reason": "MC option-length balancing (key was the strictly longest option in 0/4 items; now 0/4)",
+   "remove": {
+    "skill": "2.A",
+    "topic": "U4.2",
+    "items": 4
+   },
+   "add": {
+    "skill": "2.A",
+    "topic": "U4.2",
+    "items": 4,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p2-a2:ap_english_language-w06-k0",
+   "addKey": "el-review-fix:ap_english_language-w06-k0",
+   "tier": "required",
+   "reason": "MC option-length balancing (key was the strictly longest option in 2/4 items; now 0/4); w06 q1 stem: 'panel members' -> 'council members' (the passage addresses the council)",
+   "remove": {
+    "skill": "2.B",
+    "topic": "U2.1",
+    "items": 4
+   },
+   "add": {
+    "skill": "2.B",
+    "topic": "U2.1",
+    "items": 4,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p2-a2:ap_english_language-w07-k0",
+   "addKey": "el-review-fix:ap_english_language-w07-k0",
+   "tier": "recommended",
+   "reason": "MC option-length balancing (key was the strictly longest option in 3/3 items; now 1/3)",
+   "remove": {
+    "skill": "2.B",
+    "topic": "U2.1",
+    "items": 3
+   },
+   "add": {
+    "skill": "2.B",
+    "topic": "U2.1",
+    "items": 3,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p2-a2:ap_english_language-w11-k0",
+   "addKey": "el-review-fix:ap_english_language-w11-k0",
+   "tier": "required",
+   "reason": "MC option-length balancing (key was the strictly longest option in 3/3 items; now 0/3); w11 s11: British 'neighbourhood' -> 'neighborhood'",
+   "remove": {
+    "skill": "2.B",
+    "topic": "U2.1",
+    "items": 3
+   },
+   "add": {
+    "skill": "2.B",
+    "topic": "U2.1",
+    "items": 3,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-p2-a2:ap_english_language-w12-k0",
+   "addKey": "el-review-fix:ap_english_language-w12-k0",
+   "tier": "recommended",
+   "reason": "MC option-length balancing (key was the strictly longest option in 2/3 items; now 0/3)",
+   "remove": {
+    "skill": "4.A",
+    "topic": "U2.2",
+    "items": 3
+   },
+   "add": {
+    "skill": "4.A",
+    "topic": "U2.2",
+    "items": 3,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "englang-s2a:ap_english_language-w22-k0",
+   "addKey": "el-review-fix:ap_english_language-w22-k0",
+   "tier": "required",
+   "reason": "MC option-length balancing (key was the strictly longest option in 4/4 items; now 1/4); w22 q1 key: 'forty others' (overstates: the passage says every section except the oboe played softer) -> 'everyone else'",
+   "remove": {
+    "skill": "2.A",
+    "topic": "U7.2",
+    "items": 4
+   },
+   "add": {
+    "skill": "2.A",
+    "topic": "U7.2",
+    "items": 4,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "englang-p2-b:ap_english_language-fb1-k0",
+   "addKey": "el-review-fix:ap_english_language-fb1-k0",
+   "tier": "required",
+   "reason": "EL-F1: high sample: misplaced comma/'dollars' artifact (410,000, dollars); Source F category labels truncated by the 13-character renderer rule (Transportati., Custodial and); Source A said most of the savings came from parking buses, but Source F shows transportation is 165 of 410 thousand (40 percent): changed to 'the largest share'; Source D: districts adopting 'between 2021 and 2023' cannot have three years of data by a 2025 brief: changed to 2020-2022; mid sample: 'employers mostly want to go back' (49 percent is a plurality) -> 'lean toward going back'; three annotations cited rubric 'moves' and a phrase ('the lunch line') that the rubric/essay do not contain; one referenced grade-level data Source E does not have; prompt scenario no longer states the conditional position that Source D's recommendation and both top samples adopt",
+   "remove": {
+    "type": "q1"
+   },
+   "add": {
+    "type": "q1",
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "englang-p2-b:ap_english_language-fb2-k0",
+   "addKey": "el-review-fix:ap_english_language-fb2-k0",
+   "tier": "required",
+   "reason": "EL-F2: student-visible prompt block restated the speech's purpose (Speaker/Audience/Exigence/Purpose scaffold); keep speaker, audience and occasion only; rubric and three samples called 'Listen anyway' (sentence 47) the closing sentence although sentence 48 follows; high annotation cited a rubric warning that does not exist; rubric Row A task_specific could be read to award the point to a device list with a generic purpose; clarified (the low sample's A=0 matches descriptor 0)",
+   "remove": {
+    "type": "q2"
+   },
+   "add": {
+    "type": "q2",
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "englang-p2-b:ap_english_language-fb3-k0",
+   "addKey": "el-review-fix:ap_english_language-fb3-k0",
+   "tier": "required",
+   "reason": "EL-F3: high sample put quotation marks around words that are not a verbatim quote of Source A; mid sample: Sophistication annotation says not earned but rubric_scores.C = 1 (see decisions file); rubric Row A said the opening must clarify a vague thesis and also that the thesis may appear anywhere; mid sample put the hardware customer 'six blocks' from a garage (six is the number of closed blocks; the garage in the column is the nurse's, eight blocks away); mid annotation penalised using the column although Row B says stimulus evidence counts fully",
+   "remove": {
+    "type": "q3"
+   },
+   "add": {
+    "type": "q3",
+    "sameCell": true
+   }
+  }
+ ]
+}

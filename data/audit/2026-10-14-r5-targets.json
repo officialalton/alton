@@ -1,0 +1,791 @@
+{
+ "note": "Round 5 read targets: grammar patches re-check, RW >160-word trims, figure-text fixes.",
+ "problemIds": [
+  "b7c3a411-636e-4408-82ca-2c39be73e605",
+  "20a54859-dce7-4280-9786-f449da9b72d0",
+  "209a923d-d40a-4d2a-8c6d-4f291963952f",
+  "1a7c11c4-a457-435c-a599-6ff1c564868b",
+  "0cf57c09-cb27-4166-9f90-10d260c961e5",
+  "2dcea9c9-aebc-40fc-9bd7-7df8b1dd2036",
+  "bbd15ed7-db08-496e-894e-ff3471603bbe",
+  "8a9ed576-2730-4661-9ce1-d4d7cbdfd3b7",
+  "c907ef0f-9235-4f88-9ef5-7620634d88f1",
+  "eef6e85a-c1d1-4829-9b80-df13fcf153dd",
+  "10b609b4-a0e2-4d80-9f24-1bea3d2e4b36",
+  "3c327f82-85da-4467-9209-bc8dfc5256ff",
+  "ef903982-122d-41bf-a83c-9de904e8c159",
+  "197fb7f1-4641-4965-ac6f-03a91db8088b",
+  "8b49717e-5b2f-45ea-8a6f-e3478b914095",
+  "8d4393d8-8f93-40d6-9122-0f1b16ac7f4e",
+  "65748760-4afd-4506-9289-a5e1f9af6f9e",
+  "831408a6-08f4-413f-8727-81c32568ae8a",
+  "b4df4856-bad0-42c1-9d7d-e02f0df9274c",
+  "a422e2b1-ade3-48b9-90d3-7013a98f6803",
+  "01990482-cf4d-443a-a8bc-90dc787457a7",
+  "07ce3c76-f50b-4c48-bdae-36e1a4234e61",
+  "0a87396c-e339-4516-83c0-6045247b5553",
+  "0aac2eb0-1251-495f-9d4a-e35510ac6dda",
+  "0abe38d3-8869-4ad1-9522-090c2c6bac91",
+  "0dca370e-1829-4086-a2b6-9316f97dc97a",
+  "0f87deb6-b1c7-45d5-bbd2-891028f9090d",
+  "13883025-41d3-4f2d-8d0d-3a797afa0c2c",
+  "165f68f1-e9c3-4d3b-a802-f330cae94054",
+  "16afc848-9de9-499c-9b40-daa51f7fb80e",
+  "1b7778dc-6c37-4aa7-b8aa-c21f82321560",
+  "1cdafeb2-9348-4649-9afd-32af176b2dfc",
+  "230602ac-9166-4912-bad0-c0628a8c2ea3",
+  "267d2956-2f81-46e9-aeae-1d4a6e65a01b",
+  "315bf246-84e5-4731-81d3-7c1c57f74803",
+  "31f8c0e2-da6a-4d78-81d2-10d6392c9710",
+  "32b63987-3958-40cb-a6a1-b91f97a2cd6f",
+  "35a1d518-f01b-4d98-819f-a8fffe2e5c8e",
+  "376e9f71-3875-4f18-9910-4b56cfdefde2",
+  "387cc5bf-00fb-453e-86cf-e9484094070d",
+  "39de9cb4-30cc-4be9-b4a2-75e80b772cac",
+  "3a6e8cbd-4abe-4327-94b5-cec57ec81b09",
+  "3b4e74b1-e97e-4726-a77e-498f2befd7e9",
+  "3bfca90b-7516-4182-9de8-c7d7eaebb5c8",
+  "3eb729fb-a486-4367-bb15-58c1fcec488b",
+  "421f69a5-3643-4d66-a7b9-0c4de357fd5b",
+  "4535a3a1-9c72-435d-bdca-b7334497b725",
+  "457d567a-8ed3-4ca3-9e3d-989326420aa4",
+  "47056b8e-21e4-4e4c-ab4a-d4efb2276c16",
+  "47c8f3d1-e260-46a7-bbd0-91776f1bc277",
+  "5327a369-73ca-4481-82f5-297931d8e270",
+  "54c1da25-6100-4410-834a-e2e2887a2923",
+  "56786280-b2a7-48e2-b748-4b394c5f9195",
+  "58bb07a8-311f-4a1b-b051-301ed0b9c068",
+  "592aeec2-28ca-4960-acb0-b30f8f0f1cc7",
+  "5959f6f9-4626-4e6f-819a-aa448ce10fa9",
+  "5b73c9b2-5309-49af-8e31-63a54863e8fd",
+  "5fca6127-5cf1-414e-a674-9ff5cb1a42a3",
+  "629adba2-a4ca-4ab8-94a5-7307a40c6b5b",
+  "650d79b4-9299-4a24-9b78-7d9f39657a2e",
+  "69a471cd-89e8-4590-bde1-4388052b4de1",
+  "69ec37d9-8077-466d-b7c2-d68e498525bc",
+  "6eed1b91-670c-4df9-9306-a07d2dde2bd0",
+  "6f3efbc8-7387-4e90-8873-dd36e55084a1",
+  "6fcf27ff-3f8f-409b-8f81-c64744c2d3e1",
+  "7249eebb-92c0-478b-bfbb-e4f067eb881e",
+  "75a960f3-9bb6-43d9-9fe5-7b1646b42b2a",
+  "787914bd-8a84-4b42-8fa8-e68ca3f54931",
+  "7eaa8af3-fbcd-4a79-80e7-a9c93de76787",
+  "7f0f959b-855d-4311-9377-671235b5ddb4",
+  "82bf419d-27e7-4be7-a3cf-3025fe34ad75",
+  "862d879e-363f-4a1a-abe6-c38a9b211b4c",
+  "8a08ffdb-7e75-4e6b-86ec-217c5ab668b9",
+  "92292bb5-68d4-4dfe-a116-f4bd3a45a769",
+  "97d50145-2e13-4e97-b8da-b47d9c5a4942",
+  "9938da0c-e5d3-4be6-ad6e-4a58d8381782",
+  "9d489fd5-2131-43fa-a23a-c192b0d8c0ff",
+  "a4ed282c-6665-472e-aa30-7780c7110163",
+  "a750101b-abd3-4872-a103-7f45216f00bc",
+  "ae686ae5-a53b-47d2-a7d7-eb69a644e233",
+  "b2136fd0-5450-4305-aef8-b30e54bd1bcb",
+  "b4af5fd9-678f-4f8c-82f4-45905d194cad",
+  "b7b12e03-7848-424f-99c8-6790ef461744",
+  "c175e2ce-634a-48e5-a3c5-fc25207c0cf6",
+  "c40eda06-e1ec-4c4f-ac06-ae7bab36fedb",
+  "c581d087-d476-490a-92de-4df3ced30efd",
+  "c5c0acf9-4617-45b0-a86a-8b590e9e851e",
+  "ce71df12-711d-45b1-924b-72cb911f1da6",
+  "d929bf0d-7dd3-489a-abc5-7c44611cb2e9",
+  "dcd983fc-2c1c-4aea-8982-002b18b652c2",
+  "e49f18af-6443-46ce-9ac1-84b1c7527700",
+  "e80cb92f-0300-49ae-8959-81729742d09e",
+  "f0dba0b5-a6ee-4966-b287-d6ad9672b2b8",
+  "f194a236-d663-4531-abf8-de31b8473ffe",
+  "f1ae181f-f41e-473f-b5f4-05cd3f3b1664",
+  "f42d1cb6-1801-4905-b44f-7395e22b10b6",
+  "7ddfae40-f506-48b2-a2c2-fd8dab606f30",
+  "3dfd2cba-99e0-4fd1-a6dc-7770c3637480",
+  "0049d229-8bdc-4a0d-a585-c43cbe9e96dd"
+ ],
+ "over150Live": [
+  {
+   "problemId": "01990482-cf4d-443a-a8bc-90dc787457a7",
+   "words": 164,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "07ce3c76-f50b-4c48-bdae-36e1a4234e61",
+   "words": 163,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "08bc9c95-ed38-449f-872d-92503ec512d0",
+   "words": 154,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "0a87396c-e339-4516-83c0-6045247b5553",
+   "words": 211,
+   "skill": "inferences"
+  },
+  {
+   "problemId": "0aac2eb0-1251-495f-9d4a-e35510ac6dda",
+   "words": 207,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "0abe38d3-8869-4ad1-9522-090c2c6bac91",
+   "words": 167,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "0ba6f34b-3e6d-4662-a8e8-6b89318ae956",
+   "words": 153,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "0db10ac0-96c5-4013-bbcd-f84ebc510092",
+   "words": 151,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "0dc64031-b4f5-4f05-aee2-717452faa4f3",
+   "words": 155,
+   "skill": "rhetorical_synthesis"
+  },
+  {
+   "problemId": "0dca370e-1829-4086-a2b6-9316f97dc97a",
+   "words": 174,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "0f87deb6-b1c7-45d5-bbd2-891028f9090d",
+   "words": 180,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "13883025-41d3-4f2d-8d0d-3a797afa0c2c",
+   "words": 182,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "16315955-d50a-4a40-bc56-0c90f8b9372b",
+   "words": 160,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "165f68f1-e9c3-4d3b-a802-f330cae94054",
+   "words": 229,
+   "skill": "command_of_evidence_text"
+  },
+  {
+   "problemId": "16afc848-9de9-499c-9b40-daa51f7fb80e",
+   "words": 220,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "197e86d6-0d71-4f38-ba7d-6b752be57ee5",
+   "words": 153,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "1b7778dc-6c37-4aa7-b8aa-c21f82321560",
+   "words": 185,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "1cdafeb2-9348-4649-9afd-32af176b2dfc",
+   "words": 176,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "1d58da80-12b3-4e9d-8259-630398c37162",
+   "words": 153,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "1db1254d-a211-4923-8c8f-d5564e9afd9d",
+   "words": 151,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "1e2e4913-8f7e-4fa6-a94b-641684c050ac",
+   "words": 153,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "1f7949dd-f352-4021-ae78-2f2742cbd9a1",
+   "words": 160,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "230602ac-9166-4912-bad0-c0628a8c2ea3",
+   "words": 164,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "25775a7b-1f8f-41de-9b5d-a9e87e849e27",
+   "words": 157,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "2644ce3e-8cf5-4f08-be68-1cf00a8ea2a1",
+   "words": 156,
+   "skill": "rhetorical_synthesis"
+  },
+  {
+   "problemId": "267d2956-2f81-46e9-aeae-1d4a6e65a01b",
+   "words": 181,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "2c066add-82d7-4239-bc9d-70210c2ebfc7",
+   "words": 151,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "2eb72af3-8808-4a55-9874-c8c0964ae682",
+   "words": 152,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "304e4d99-ca2d-4b2f-a243-ceb83ebc1114",
+   "words": 152,
+   "skill": "command_of_evidence_text"
+  },
+  {
+   "problemId": "315bf246-84e5-4731-81d3-7c1c57f74803",
+   "words": 198,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "31f8c0e2-da6a-4d78-81d2-10d6392c9710",
+   "words": 194,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "32b63987-3958-40cb-a6a1-b91f97a2cd6f",
+   "words": 169,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "35a1d518-f01b-4d98-819f-a8fffe2e5c8e",
+   "words": 166,
+   "skill": "command_of_evidence_text"
+  },
+  {
+   "problemId": "376e9f71-3875-4f18-9910-4b56cfdefde2",
+   "words": 162,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "387cc5bf-00fb-453e-86cf-e9484094070d",
+   "words": 169,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "39de9cb4-30cc-4be9-b4a2-75e80b772cac",
+   "words": 172,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "3a6e8cbd-4abe-4327-94b5-cec57ec81b09",
+   "words": 181,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "3b4e74b1-e97e-4726-a77e-498f2befd7e9",
+   "words": 176,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "3bdf8705-9e63-4fca-a55f-b155c761df7c",
+   "words": 152,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "3bfca90b-7516-4182-9de8-c7d7eaebb5c8",
+   "words": 174,
+   "skill": "rhetorical_synthesis"
+  },
+  {
+   "problemId": "3d8bd684-e1e8-4912-a9e2-5d20c58f105a",
+   "words": 155,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "3eb729fb-a486-4367-bb15-58c1fcec488b",
+   "words": 186,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "40cd07d8-5b26-4c63-9d49-6655cca890a4",
+   "words": 158,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "412f64f2-e6a3-4057-80ee-cb21048836f6",
+   "words": 154,
+   "skill": "command_of_evidence_text"
+  },
+  {
+   "problemId": "419acba1-89a7-43fe-ac37-d45c6f97a6bc",
+   "words": 154,
+   "skill": "rhetorical_synthesis"
+  },
+  {
+   "problemId": "421f69a5-3643-4d66-a7b9-0c4de357fd5b",
+   "words": 190,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "45128826-f43f-488d-971d-75e431c6d619",
+   "words": 152,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "4535a3a1-9c72-435d-bdca-b7334497b725",
+   "words": 168,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "457d567a-8ed3-4ca3-9e3d-989326420aa4",
+   "words": 163,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "47056b8e-21e4-4e4c-ab4a-d4efb2276c16",
+   "words": 170,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "47c8f3d1-e260-46a7-bbd0-91776f1bc277",
+   "words": 163,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "47ff116a-0219-48db-95a1-c3332f2a4c78",
+   "words": 155,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "491c047f-c841-4dff-a435-efe9e5d14095",
+   "words": 153,
+   "skill": "inferences"
+  },
+  {
+   "problemId": "4ab864e3-6d02-4009-8e83-959e2c6d9ae4",
+   "words": 153,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "4afabf84-e589-4100-8833-1f29469ca2df",
+   "words": 151,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "50635297-9ab4-4437-b505-5c0b4d4a6ec7",
+   "words": 151,
+   "skill": "inferences"
+  },
+  {
+   "problemId": "5327a369-73ca-4481-82f5-297931d8e270",
+   "words": 170,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "549756b1-ae89-4281-b8c8-253951b74466",
+   "words": 159,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "54c1da25-6100-4410-834a-e2e2887a2923",
+   "words": 163,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "56786280-b2a7-48e2-b748-4b394c5f9195",
+   "words": 168,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "578cb18d-dba1-4e2b-9041-53504a1ce126",
+   "words": 159,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "58bb07a8-311f-4a1b-b051-301ed0b9c068",
+   "words": 187,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "592aeec2-28ca-4960-acb0-b30f8f0f1cc7",
+   "words": 162,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "5959f6f9-4626-4e6f-819a-aa448ce10fa9",
+   "words": 164,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "5b73c9b2-5309-49af-8e31-63a54863e8fd",
+   "words": 167,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "5fca6127-5cf1-414e-a674-9ff5cb1a42a3",
+   "words": 193,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "60283760-3701-4620-aff6-30da28ce6e53",
+   "words": 153,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "629adba2-a4ca-4ab8-94a5-7307a40c6b5b",
+   "words": 192,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "62bfef0a-fb15-42b7-869f-2a1cf48dc851",
+   "words": 159,
+   "skill": "rhetorical_synthesis"
+  },
+  {
+   "problemId": "646c2672-e27c-483a-b955-4209195e61ee",
+   "words": 155,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "650d79b4-9299-4a24-9b78-7d9f39657a2e",
+   "words": 164,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "65a15558-344d-46d0-8312-1884eb13934e",
+   "words": 155,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "69a471cd-89e8-4590-bde1-4388052b4de1",
+   "words": 165,
+   "skill": "inferences"
+  },
+  {
+   "problemId": "69cd2635-7946-4b26-af19-d3bd32ab5da7",
+   "words": 153,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "69ec37d9-8077-466d-b7c2-d68e498525bc",
+   "words": 192,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "6eed1b91-670c-4df9-9306-a07d2dde2bd0",
+   "words": 183,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "6f3efbc8-7387-4e90-8873-dd36e55084a1",
+   "words": 163,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "6fcf27ff-3f8f-409b-8f81-c64744c2d3e1",
+   "words": 162,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "7249eebb-92c0-478b-bfbb-e4f067eb881e",
+   "words": 182,
+   "skill": "transitions"
+  },
+  {
+   "problemId": "733880c6-e64f-4df0-ae99-49c9f71362d5",
+   "words": 158,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "75a960f3-9bb6-43d9-9fe5-7b1646b42b2a",
+   "words": 164,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "7779ffb4-4aa3-4d1c-b735-9e70ba1ec2ee",
+   "words": 155,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "787914bd-8a84-4b42-8fa8-e68ca3f54931",
+   "words": 192,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "79f9e372-9a04-4f8e-9907-86a67a17483a",
+   "words": 155,
+   "skill": "command_of_evidence_text"
+  },
+  {
+   "problemId": "7eaa8af3-fbcd-4a79-80e7-a9c93de76787",
+   "words": 197,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "7f0f959b-855d-4311-9377-671235b5ddb4",
+   "words": 168,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "7fc8bd61-52ed-441b-bb86-25cf7696329d",
+   "words": 151,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "826d1ecc-ce49-4a72-aa7d-714c75d5f1a9",
+   "words": 159,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "82bf419d-27e7-4be7-a3cf-3025fe34ad75",
+   "words": 168,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "84fa86f9-d767-48d4-bd9a-45b77e769128",
+   "words": 153,
+   "skill": "rhetorical_synthesis"
+  },
+  {
+   "problemId": "862d879e-363f-4a1a-abe6-c38a9b211b4c",
+   "words": 170,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "8a08ffdb-7e75-4e6b-86ec-217c5ab668b9",
+   "words": 175,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "8c4714ca-35da-4993-bbfa-a56f60f6a79d",
+   "words": 152,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "92292bb5-68d4-4dfe-a116-f4bd3a45a769",
+   "words": 161,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "97d50145-2e13-4e97-b8da-b47d9c5a4942",
+   "words": 175,
+   "skill": "text_structure_purpose"
+  },
+  {
+   "problemId": "9818fe8b-4aa5-4a51-bd2c-ee99310afb22",
+   "words": 156,
+   "skill": "rhetorical_synthesis"
+  },
+  {
+   "problemId": "9938da0c-e5d3-4be6-ad6e-4a58d8381782",
+   "words": 167,
+   "skill": "rhetorical_synthesis"
+  },
+  {
+   "problemId": "9b6a5cbd-fe19-422c-97bf-26d88fabb3fd",
+   "words": 156,
+   "skill": "inferences"
+  },
+  {
+   "problemId": "9d489fd5-2131-43fa-a23a-c192b0d8c0ff",
+   "words": 177,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "9d5ec799-293f-445e-9fba-0e7dd2a4a43c",
+   "words": 160,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "9f950f0d-2d35-4dc0-8acf-acf7936596c7",
+   "words": 159,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "a4ed282c-6665-472e-aa30-7780c7110163",
+   "words": 172,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "a750101b-abd3-4872-a103-7f45216f00bc",
+   "words": 178,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "a79f6e53-f1c6-4784-8496-bdee02dd0254",
+   "words": 151,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "ae686ae5-a53b-47d2-a7d7-eb69a644e233",
+   "words": 166,
+   "skill": "command_of_evidence_text"
+  },
+  {
+   "problemId": "b2136fd0-5450-4305-aef8-b30e54bd1bcb",
+   "words": 164,
+   "skill": "rhetorical_synthesis"
+  },
+  {
+   "problemId": "b4af5fd9-678f-4f8c-82f4-45905d194cad",
+   "words": 188,
+   "skill": "transitions"
+  },
+  {
+   "problemId": "b5ada322-c413-40cc-a89a-3095410eb0b6",
+   "words": 151,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "b7b12e03-7848-424f-99c8-6790ef461744",
+   "words": 174,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "b813eb91-6efc-4d80-8631-10e987928c3e",
+   "words": 155,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "b89ffea4-6186-4922-a91e-3fe3f1bf6d34",
+   "words": 152,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "bc91cc0e-10fb-48f2-8f69-95f9235e10f8",
+   "words": 151,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "bdbd62b8-3068-4bcb-91f9-0f2914ea84bf",
+   "words": 160,
+   "skill": "command_of_evidence_text"
+  },
+  {
+   "problemId": "bf2fcd7b-49c1-4eff-8e11-cc3aa748e6fc",
+   "words": 156,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "c175e2ce-634a-48e5-a3c5-fc25207c0cf6",
+   "words": 165,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "c40eda06-e1ec-4c4f-ac06-ae7bab36fedb",
+   "words": 182,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "c581d087-d476-490a-92de-4df3ced30efd",
+   "words": 167,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "c5c0acf9-4617-45b0-a86a-8b590e9e851e",
+   "words": 189,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "c9c51221-93ac-4810-bb5e-9e77ced568b9",
+   "words": 159,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "ca9f72c3-e56b-4677-919d-579ff3d52c2e",
+   "words": 159,
+   "skill": "inferences"
+  },
+  {
+   "problemId": "cde7ef56-02cd-4012-988b-ece4669db8ef",
+   "words": 152,
+   "skill": "command_of_evidence_text"
+  },
+  {
+   "problemId": "ce71df12-711d-45b1-924b-72cb911f1da6",
+   "words": 182,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "cf5a7f3c-8a00-405c-9d7e-c6016cf8a3ff",
+   "words": 151,
+   "skill": "rhetorical_synthesis"
+  },
+  {
+   "problemId": "d07ca7d3-eec2-4221-bdd6-7fbca6489315",
+   "words": 157,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "d205668f-af94-4292-82ff-de250474b8dc",
+   "words": 155,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "d43954ee-e92c-467d-91c8-f823ae486ab7",
+   "words": 151,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "d516442a-19ee-4663-a413-745181c1326d",
+   "words": 157,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "d929bf0d-7dd3-489a-abc5-7c44611cb2e9",
+   "words": 171,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "dcd983fc-2c1c-4aea-8982-002b18b652c2",
+   "words": 161,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "e49f18af-6443-46ce-9ac1-84b1c7527700",
+   "words": 174,
+   "skill": "central_ideas_details"
+  },
+  {
+   "problemId": "e80cb92f-0300-49ae-8959-81729742d09e",
+   "words": 190,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "f0dba0b5-a6ee-4966-b287-d6ad9672b2b8",
+   "words": 191,
+   "skill": "inferences"
+  },
+  {
+   "problemId": "f194a236-d663-4531-abf8-de31b8473ffe",
+   "words": 166,
+   "skill": "words_in_context"
+  },
+  {
+   "problemId": "f1ae181f-f41e-473f-b5f4-05cd3f3b1664",
+   "words": 188,
+   "skill": "cross_text_connections"
+  },
+  {
+   "problemId": "f42d1cb6-1801-4905-b44f-7395e22b10b6",
+   "words": 165,
+   "skill": "rhetorical_synthesis"
+  },
+  {
+   "problemId": "f49fd449-a1ee-4968-805e-b42ae91f3688",
+   "words": 154,
+   "skill": "command_of_evidence_text"
+  },
+  {
+   "problemId": "f8035f24-d038-4938-a772-00acde6199ac",
+   "words": 154,
+   "skill": "words_in_context"
+  }
+ ]
+}

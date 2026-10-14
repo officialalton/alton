@@ -42,3 +42,12 @@ describe("계획 입력", () => {
     expect(passage("run1:ap_calculus_ab-f02-k10")).toContain("f(0)=1");
   });
 });
+
+describe("라운드 5 패치", () => {
+  it("라운드 5 패치 목록을 읽고 id 가 겹치지 않으며 SAT 전용이다", () => {
+    const { patches } = loadPatches({ round: 5 });
+    expect(patches.length).toBeGreaterThan(10);
+    expect(new Set(patches.map((p) => p.id)).size).toBe(patches.length);
+    for (const p of patches) expect(p.kind).toBe("sat");
+  });
+});

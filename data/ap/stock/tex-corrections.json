@@ -3,7 +3,7 @@
  "version": 1,
  "generatedBy": "lib/ap-exam/tex-corrections-gen.test.ts (AP_TEX_CORR_WRITE=1)",
  "note": "변환 전 해설(explanation_en)의 sha256 에 묶인 교정 문안. 적용은 관리자 'AP 설명 수정 새 버전'(미리보기→확인→실행)만. before 해시가 DB 와 다르면 건드리지 않는다.",
- "count": 293,
+ "count": 295,
  "entries": [
   {
    "candidateKey": "bc-topup-final:ap_calculus_bc-f01-k0",
@@ -222,6 +222,22 @@
    "beforeSha256": "0ab6de632897f7abad136697bfadae727f72be124b92de622762a357347b120e",
    "afterSha256": "d5d6dc4739195b61f99926692dde3c6c9bedd74a5abb396e09c40e7683cb9772",
    "after": "The correct answer is 27/64. Each offspring has a 3/4 chance of the dominant phenotype. For three independent offspring, P = $(3/4)^3$ = 27/64.\n1/64 is incorrect: Cubes the probability of the recessive phenotype.\n3/4 is incorrect: Gives the probability for a single offspring.\n9/16 is incorrect: Squares the dominant probability, using only two offspring."
+  },
+  {
+   "candidateKey": "bio-v2a:ap_biology-m23-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "3b125cf5180f555f6c4bfeceddaf6baab7dadebb24fcce4cef1e10332403d3ac",
+   "afterSha256": "a3d35ca346551068c2ccf1c6c08b191e821d8e6ceb6cf38e35fcf708cbbd298d",
+   "after": "The correct answer is 7.0 hours. There are 1,000 resistant cells at the start. The surviving sensitive cells number 9,999,990. The resistant cells double each generation, so they outnumber 9,999,990 after 14 generations, because 1,000 x $2^{14}$ = 16,384,000. With a doubling time of 30 minutes, this takes 14 x 30/60 = 7 hours.\n5,000 hours is incorrect: Treats the ratio of surviving sensitive cells to resistant cells as the number of generations.\n10.0 hours is incorrect: Ignores the antibiotic and waits for the resistant cells to outnumber the original sensitive population.\n0.5 hours is incorrect: Counts the time for one doubling only."
+  },
+  {
+   "candidateKey": "bio-v2a:ap_biology-m23-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "c0c1276d677a8f05e393088bac681c1149a2eab2054139bde627a7108fc9c46c",
+   "afterSha256": "77e02d19a206bfa8015ab3fd4ccd94cae88b795dc7546fe4be82e08175bcd223",
+   "after": "The correct answer is 5.0 hours. There are 10,000 resistant cells at the start. The surviving sensitive cells number 9,999,900. The resistant cells double each generation, so they outnumber 9,999,900 after 10 generations, because 10,000 x $2^{10}$ = 10,240,000. With a doubling time of 30 minutes, this takes 10 x 30/60 = 5 hours.\n500 hours is incorrect: Treats the ratio of surviving sensitive cells to resistant cells as the number of generations.\n4.5 hours is incorrect: Rounds the number of generations down, so the resistant cells have not yet outnumbered the surviving sensitive cells.\n8.5 hours is incorrect: Ignores the antibiotic and waits for the resistant cells to outnumber the original sensitive population."
   },
   {
    "candidateKey": "chem-p1-a2:ap_chemistry-m05-k0",
