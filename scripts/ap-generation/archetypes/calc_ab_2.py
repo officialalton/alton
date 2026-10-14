@@ -97,10 +97,12 @@ def extrema_classification(rng):
     return pack("extrema_classification", "5.4", "3.E", "not_allowed", stem, key, ds, rng, est=85, facts=[f"max at {ans}"])
 
 def fprime_graph_statements(rng):
-    r1, r2 = sorted(rng.sample(range(1, 7), 2))
-    lo = r1 + rng.choice([0, 1]) if False else r1 - 0
-    lo, hi = sorted(rng.sample(range(0, 9), 2))
-    while hi - lo < 2: lo, hi = sorted(rng.sample(range(0, 9), 2))
+    # 2026-10-13 외부 감사 A-01~03: f' 가 증가하는 구간 (lo,hi) 를 부호 변화점과 무관하게 뽑아, f' 가 r1 에서 0 이고 (r1,r2) 에서 음수인데 r1 을 품는 구간에서 "증가"한다는
+    # 모순 전제(존재하지 않는 함수)를 만들었다. f' 는 r1 에서 0 → 음수로 내려가므로 r1 바로 뒤에서는 증가할 수 없다. 증가 구간은 r1 < lo < hi <= r2 (f' 가 음수에서 0 으로 올라오는 구간)로 제한한다.
+    while True:
+        r1, r2 = sorted(rng.sample(range(1, 7), 2))
+        if r2 - r1 >= 2: break
+    lo = rng.randint(r1 + 1, r2 - 1); hi = rng.randint(lo + 1, r2)
     mid = S(lo + hi) / 2
     stem = (f"The derivative $f'$ of a twice-differentiable function $f$ is positive on $(0,{r1})$, negative on $({r1},{r2})$ and positive on $({r2},9)$. "
             f"Also, $f'$ is increasing on $({lo},{hi})$. Which statement about $f$ is true?")

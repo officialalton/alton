@@ -119,3 +119,7 @@ export const SE_TOPICS: SeTopic[] = [
 ];
 
 export const CONV_TOPICS = SE_TOPICS.filter((t) => t.conv);
+
+/** 의미상 x 가 늘면 y 가 줄어드는 장면(양의 기울기로 쓰면 어색하다) — 이 목록 밖은 모두 y 가 늘어난다. 직선 그래프·값표의 기울기 부호는 장면이 정한다(2026-10-13 외부 감사: 값표가 부호를 무작위로 뽑아 촛불 높이·중고차 가치가 늘고 매표 수입이 주는 문항이 나왔다). */
+const NEG_PAIRS = new Set(["Daily use|Battery remaining", "Days burning|Candle height", "Flight time|Battery remaining", "Running time|Freezer temperature", "Ticket price|Tickets sold", "Price|Pens sold", "Ride cost|Riders", "Price|Sandwiches sold", "Apps installed|Free storage", "Age|Resale value", "Backpack weight|Walking speed", "Days since baking|Freshness score"]);
+export const topicSign = (t: SeTopic): 1 | -1 => (NEG_PAIRS.has(`${t.xa}|${t.ya}`) ? -1 : 1);

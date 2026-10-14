@@ -1,5 +1,6 @@
 // 2026-10-02 모의고사 UAT(C1·C2) — 문항 텍스트 공용 방어 함수.
 // 렌더 경로(응시·결과·오답)와 임포트·조립 경로가 같은 규칙을 쓰도록 한 곳에 둔다.
+import { blankJunctionIssues } from "./problem-blank-junction";
 
 const HANGUL = /[ㄱ-ㆎ가-힣]/;
 
@@ -77,6 +78,11 @@ export function draftBankGateError(p: {
     const fields = findHangulInStem({ passage: p.passage, question: p.question, options: p.options, statements: p.statements });
     if (hasHangul(p.explanationEn)) fields.push("explanation_en");
     if (fields.length) return `영어 SAT 문항의 본문·선택지·영어 해설에 한글이 있어 저장하지 않았습니다 (${fields.join(", ")}).`;
+  }
+  // 2026-10-13 외부 감사: 빈칸 뒤 지문이 선택지 끝 단어·구두점과 겹치면 어떤 선택지도 문법적으로 완성되지 않는다(RW 26건). SAT R&W 빈칸 문항만.
+  if (p.examSystem === "sat_rw" && p.passage && p.options?.length) {
+    const junction = blankJunctionIssues(p.passage, p.options.map((o) => o ?? ""));
+    if (junction.length) return `빈칸 뒤 지문이 선택지와 겹쳐 완성문이 성립하지 않습니다: ${junction[0]}`;
   }
   if ((p.usageScope === "mock_exam" || p.usageScope === "both") && !(p.explanationEn ?? "").trim()) {
     return "모의고사용 문항은 영어 해설(explanation_en)이 있어야 저장할 수 있습니다.";

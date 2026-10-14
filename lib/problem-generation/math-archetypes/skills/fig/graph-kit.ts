@@ -4,7 +4,8 @@
 // verification_js 는 FIGURE.objects 의 직선·점만 읽어 다시 계산하고, 점이 직선 위에 없으면 던진다 — 점 하나만 바뀌어도(G6 'line' 변조) 검출된다.
 import { GenFail } from "../../types";
 import type { Rng } from "../../rng";
-import { SE_TOPICS, type SeTopic } from "../../figure-topics";
+import { SE_TOPICS, topicSign, type SeTopic } from "../../figure-topics";
+export { topicSign };
 import { fmtNum } from "../../text";
 import { figInst } from "../../figure-kit";
 import type { Draft } from "../../text";
@@ -15,9 +16,6 @@ import { titleWith } from "./axis-title";
 export { sing, capFirst, lc };
 const isInt = Number.isInteger;
 
-/** 의미상 x 가 늘면 y 가 줄어드는 장면(양의 기울기로 쓰면 어색하다) — 이 목록 밖은 모두 y 가 늘어난다. 직선 그래프의 기울기 부호는 장면이 정한다. */
-const NEG_PAIRS = new Set(["Daily use|Battery remaining", "Days burning|Candle height", "Flight time|Battery remaining", "Running time|Freezer temperature", "Ticket price|Tickets sold", "Price|Pens sold", "Ride cost|Riders", "Price|Sandwiches sold", "Apps installed|Free storage", "Age|Resale value", "Backpack weight|Walking speed", "Days since baking|Freshness score"]);
-export const topicSign = (t: SeTopic): 1 | -1 => (NEG_PAIRS.has(`${t.xa}|${t.ya}`) ? -1 : 1);
 export const LIN_G_TOPICS: SeTopic[] = SE_TOPICS.filter((t) => !/ of | per /.test(t.xu) && t.xa !== t.ya);
 export const CONV_LIN_G_TOPICS: SeTopic[] = LIN_G_TOPICS.filter((t) => t.conv);
 

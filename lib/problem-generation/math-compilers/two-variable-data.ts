@@ -178,10 +178,11 @@ function generateTwoWayTableModel(params: {
 
 // 지문·해설의 $는 KaTeX 수식 모드 구분자로 예약돼 있어(다른 컴파일러와 동일 규칙) 그대로
 // 쓰면 화면에 반쪽짜리 수식이 남는다 — 맥락 라벨에 달러 기호를 넣지 않는다.
-const SCATTER_CONTEXTS: { xLabel: string; yLabel: string }[] = [
-  { xLabel: "hours studied per week", yLabel: "test score" },
-  { xLabel: "advertising spending (in thousands of dollars)", yLabel: "monthly sales (in thousands of dollars)" },
-  { xLabel: "age of a car (in years)", yLabel: "resale value (in thousands of dollars)" },
+// sign: 장면이 정하는 기울기 부호(2026-10-13 외부 감사 — 중고차 가치가 나이와 함께 오르는 문항 방지). 장면에 맞지 않는 부호는 뽑지 않는다.
+const SCATTER_CONTEXTS: { xLabel: string; yLabel: string; sign: 1 | -1 }[] = [
+  { xLabel: "hours studied per week", yLabel: "test score", sign: 1 },
+  { xLabel: "advertising spending (in thousands of dollars)", yLabel: "monthly sales (in thousands of dollars)", sign: 1 },
+  { xLabel: "age of a car (in years)", yLabel: "resale value (in thousands of dollars)", sign: -1 },
 ];
 const SCATTER_SLOPES = [1, 2, 3, -1, -2, -3, 0.5, 1.5, -0.5, -1.5];
 
@@ -198,11 +199,12 @@ function generateScatterModel(params: {
 }): ScatterModel {
   const kinds: ScatterQuestionKind[] = ["scatter_equation", "scatter_predict", "scatter_slope_context", "scatter_count_above"];
   const questionKind = params.questionKind ?? kinds[randInt(0, kinds.length - 1)];
-  const { xLabel, yLabel } = SCATTER_CONTEXTS[randInt(0, SCATTER_CONTEXTS.length - 1)];
+  const { xLabel, yLabel, sign: ctxSign } = SCATTER_CONTEXTS[randInt(0, SCATTER_CONTEXTS.length - 1)];
+  const slopesForContext = SCATTER_SLOPES.filter((m) => Math.sign(m) === ctxSign);
   const noiseMagnitude = params.difficulty === "hard" ? 2 : 1;
 
   for (let attempt = 0; attempt < 50; attempt++) {
-    const slope = SCATTER_SLOPES[randInt(0, SCATTER_SLOPES.length - 1)];
+    const slope = slopesForContext[randInt(0, slopesForContext.length - 1)];
     const intercept = randInt(-5, 15);
     const n = randInt(6, 8);
     const xs = Array.from({ length: n }, (_, i) => i + 1);

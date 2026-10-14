@@ -3,7 +3,7 @@
 // verification_js 는 FIGURE.rows 만 읽어 다시 계산하고, 표가 장면의 전제(일차 관계 등)를 어기면 던진다 — 칸 하나만 바뀌어도(G6 'cell' 변조) 검출된다.
 import { GenFail } from "../../types";
 import type { Rng } from "../../rng";
-import { SE_TOPICS, type SeTopic } from "../../figure-topics";
+import { SE_TOPICS, topicSign, type SeTopic } from "../../figure-topics";
 import { fmtNum } from "../../text";
 
 export const lc = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
@@ -23,10 +23,12 @@ export type LinOpts = { topic?: SeTopic; conv?: boolean; n?: number; /** 기울�
 export function makeLinTab(rng: Rng, o: LinOpts = {}): LinTab {
   const pool = o.conv ? CONV_LIN_TOPICS : LIN_TOPICS;
   for (let tr = 0; tr < 80; tr++) {
-    const t = o.topic ?? rng.pick(pool); const n = o.n ?? rng.int(4, 5);
+    // 기울기 부호는 장면이 정한다(topicSign). 호출자가 부호를 지정하면 그 부호와 맞는 장면만 뽑는다. 장면과 부호가 어긋나면(촛불 높이가 늘어남 등) 건너뛴다.
+    const t = o.topic ?? rng.pick(o.mSign ? pool.filter((q) => topicSign(q) === o.mSign) : pool); const n = o.n ?? rng.int(4, 5);
     const d = o.half ? rng.pick([2, 4]) : rng.pick([1, 2, 2, 3, 5]);
     const x0 = o.x0Zero ? 0 : o.noZeroX ? rng.pick([1, 2, 3, 4, 5]) * d : rng.pick([0, 1, 2, 3]) * d;
-    const sign = o.mSign ?? (rng.chance(0.7) ? 1 : -1);
+    const sign = topicSign(t);
+    if (o.mSign && sign !== o.mSign) continue;
     const m = o.half ? sign * (rng.int(1, 9) + 0.5) : sign * rng.int(2, 12);
     const b = rng.int(2, 60) + (sign < 0 ? Math.ceil(Math.abs(m) * (x0 + d * (n + 6))) : 0);
     if (!isInt(m * d) || !isInt(m * x0)) continue;
