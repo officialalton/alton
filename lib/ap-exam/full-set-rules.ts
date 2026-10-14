@@ -28,6 +28,7 @@ export function fullPracticeUnitBounds(subject: string | null | undefined, label
   if (subject === "ap_physics_1") return physUnitBounds();
   if (subject === "ap_chemistry") return chemUnitBounds();
   if (subject === "ap_microeconomics") return microUnitBounds();
+  if (subject === "ap_computer_science_a") return csaUnitBounds();
   return undefined;
 }
 
@@ -131,6 +132,45 @@ export function verifyChemFullComposition(items: ChemSetItem[]): string[] {
   if (sets.length !== CHEM_SET_COUNT) out.push(`shared_sets_${sets.length}/${CHEM_SET_COUNT}`);
   for (const s of sets) {
     if (s.length !== CHEM_SET_SIZE) out.push(`set_size_${s.length}_not_${CHEM_SET_SIZE}`);
+    const pos = s.map((x) => x.position).sort((a, b) => a - b);
+    if (pos.some((p, i) => i > 0 && p !== pos[i - 1] + 1)) out.push(`set_not_contiguous_${s[0].candidateKey}`);
+  }
+  const ft = frq.map((i) => i.candidateKey).filter(Boolean);
+  if (new Set(ft).size !== ft.length) out.push("frq_duplicate_key");
+  return out;
+}
+
+// ---- AP Computer Science A (2027 CED, docs/ap/csa-facts.md) ----
+// MC 42 = 단독 + 2문항 세트(공식은 "대부분 단독 문항, 가끔 2문항 세트"라고만 밝힌다 — 세트 수는 미공표라 우리 구성은 회마다 1~3개이며 "공식 구성"이라 주장하지 않는다), FRQ 4 = Q1 메서드·제어문 / Q2 클래스 설계 / Q3 ArrayList / Q4 2D 배열 각 1(문항당 9점).
+// 단원 MC 비중 U1 15-25 / U2 25-35 / U3 10-18 / U4 30-40 % 와 Practice MC 비중 P1 2-10 / P2 22-38 / P3 37-53 / P4 10-15 / P5 2-10 % 를 42문항에 옮길 때 하한은 내림, 상한은 올림(csa_coverage.count_bounds 와 같음).
+// Practice 1·5 는 코드 실행으로 정답을 검증할 수 없어 재고에 없다(하한이 0문항이라 범위 안 조립은 가능). 단원·Practice 범위는 모두 차단 조건이다.
+export const CSA_MC_COUNT = 42;
+export const CSA_MC_UNIT_PCT: Record<string, [number, number]> = { "1": [15, 25], "2": [25, 35], "3": [10, 18], "4": [30, 40] };
+export const CSA_MC_PRACTICE_PCT: Record<string, [number, number]> = { "1": [2, 10], "2": [22, 38], "3": [37, 53], "4": [10, 15], "5": [2, 10] };
+export const CSA_SET_SIZE = 2;
+export const CSA_SET_COUNT = { min: 1, max: 3 } as const;
+export const CSA_FRQ_TYPES = ["q1", "q2", "q3", "q4"] as const;
+export const CSA_FRQ_COUNT = 4;
+export const csaUnitBounds = (): UnitBounds => mapFloorCeil(CSA_MC_UNIT_PCT, CSA_MC_COUNT);
+export const csaPracticeBounds = (): UnitBounds => mapFloorCeil(CSA_MC_PRACTICE_PCT, CSA_MC_COUNT);
+/** 공식 비중 중앙값을 42 문항으로 정수화한 목표(제안): U1 8·U2 13·U3 6·U4 15. */
+export const CSA_FULL_TARGET = { units: { "1": 8, "2": 13, "3": 6, "4": 15 } as Record<string, number> };
+
+export type CsaSetItem = { kind: "mc" | "frq"; unit: string | null; skill: string | null; candidateKey: string | null; position: number };
+/** CS A 풀 세트 구성 검증(순수, 차단 위반): MC 42·FRQ 4, 단원 범위, Practice 범위, 2문항 세트 1~3개(연속 위치). FRQ 유형·문항군·시험 간 구조 중복은 계획기·배정기가 재고로 따로 본다. */
+export function verifyCsaFullComposition(items: CsaSetItem[]): string[] {
+  const out: string[] = [];
+  const mc = items.filter((i) => i.kind === "mc"), frq = items.filter((i) => i.kind === "frq");
+  if (mc.length !== CSA_MC_COUNT) out.push(`mc_count_${mc.length}/${CSA_MC_COUNT}`);
+  if (frq.length !== CSA_FRQ_COUNT) out.push(`frq_count_${frq.length}/${CSA_FRQ_COUNT}`);
+  for (const [u, b] of Object.entries(csaUnitBounds())) { const n = mc.filter((i) => i.unit === u).length; if (n < b.min || n > b.max) out.push(`unit_${u}_${n}_not_in_${b.min}-${b.max}`); }
+  for (const [p, b] of Object.entries(csaPracticeBounds())) { const n = mc.filter((i) => (i.skill ?? "").startsWith(`${p}.`)).length; if (n < b.min || n > b.max) out.push(`practice_${p}_${n}_not_in_${b.min}-${b.max}`); }
+  const byKey = new Map<string, CsaSetItem[]>();
+  for (const i of mc) if (i.candidateKey) byKey.set(i.candidateKey, [...(byKey.get(i.candidateKey) ?? []), i]);
+  const sets = [...byKey.values()].filter((v) => v.length > 1);
+  if (sets.length < CSA_SET_COUNT.min || sets.length > CSA_SET_COUNT.max) out.push(`shared_sets_${sets.length}_not_in_${CSA_SET_COUNT.min}-${CSA_SET_COUNT.max}`);
+  for (const s of sets) {
+    if (s.length !== CSA_SET_SIZE) out.push(`set_size_${s.length}_not_${CSA_SET_SIZE}`);
     const pos = s.map((x) => x.position).sort((a, b) => a - b);
     if (pos.some((p, i) => i > 0 && p !== pos[i - 1] + 1)) out.push(`set_not_contiguous_${s[0].candidateKey}`);
   }

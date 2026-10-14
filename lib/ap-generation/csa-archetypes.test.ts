@@ -32,14 +32,14 @@ const expl = (p: McPack) => `The correct answer is ${p.options[p.key_index].text
 
 d("AP Computer Science A P0 archetypes (Python generators run against the JDK, 2 seeds each)", () => {
   const code = "import json,registry as R\nn=R.CSA_STAGES['csa_mc_all']+R.CSA_STAGES['csa_sets']\nf=R.CSA_STAGES['csa_frq']\nprint(json.dumps({'names':n,'frq':f,'packs':{k:R.batch(k," + SEEDS + ",500) for k in n},'frqPacks':{k:R.batch(k,1,500) for k in f}}))";
-  const r = spawnSync(PY, ["-B", "-c", code], { cwd: ARCH, encoding: "utf-8", maxBuffer: 256 * 1024 * 1024, timeout: 170000 });
+  const r = spawnSync(PY, ["-B", "-c", code], { cwd: ARCH, encoding: "utf-8", maxBuffer: 256 * 1024 * 1024, timeout: 420000 });
   const out = (r.status === 0 ? JSON.parse(r.stdout) : { names: [], frq: [], packs: {}, frqPacks: {} }) as { names: string[]; frq: string[]; packs: Record<string, Pk[]>; frqPacks: Record<string, (FrqPack & { self_check_tests: unknown[]; blueprint: Partial<Blueprint> })[]> };
   const flat = (n: string) => out.packs[n].flatMap((p) => (p.items ?? [p]).map((q) => ({ ...q, stimulus: q.stimulus ?? p.stimulus, set_intro: (p as unknown as { set_intro?: string }).set_intro })));
 
-  it("registers the singles and the 2 two-item sets, covers all 4 units, and the guide JSON lists the same ids", () => {
+  it("registers the singles and the 4 two-item sets, covers all 4 units, and the guide JSON lists the same ids", () => {
     expect(r.status).toBe(0);
-    expect(out.names.filter((n) => n.startsWith("cs_")).length).toBeGreaterThanOrEqual(40);
-    expect(out.names.filter((n) => n.startsWith("css_"))).toHaveLength(2);
+    expect(out.names.filter((n) => n.startsWith("cs_")).length).toBeGreaterThanOrEqual(80);
+    expect(out.names.filter((n) => n.startsWith("css_"))).toHaveLength(4);
     const ids = csaGuide.archetypes.map((a) => a.id).sort();
     const expected = out.names.flatMap((n) => flat(n).slice(0, out.packs[n][0].items ? 2 : 1).map((q) => q.archetype)).sort();
     expect(ids).toEqual(expected);
@@ -73,7 +73,7 @@ d("AP Computer Science A P0 archetypes (Python generators run against the JDK, 2
         expect(plan.items).toHaveLength(items.length);
       }
     }
-    expect(withCode).toBeGreaterThanOrEqual(30);
+    expect(withCode).toBeGreaterThanOrEqual(60);
     expect(converted).toBeGreaterThanOrEqual(out.names.length);
   });
 
@@ -93,7 +93,7 @@ d("AP Computer Science A P0 archetypes (Python generators run against the JDK, 2
       expect(plan.ok).toBe(true);
       if (plan.ok) expect((plan.items[0].statements as { mode: string }[]).every((s) => s.mode === "code")).toBe(true);
     }
-    expect(byTemplate).toEqual({ q1: 2, q2: 2, q3: 2, q4: 2 });
+    expect(byTemplate).toEqual({ q1: 4, q2: 4, q3: 4, q4: 4 });
     for (const t of ["q1", "q2", "q3", "q4"]) total += out.frqPacks[out.frq.find((n) => out.frqPacks[n][0].template === t)!][0].total_points;
     expect(total).toBe(36);
     expect(csaGuide.frqTemplates.map((t) => t.id).sort()).toEqual([...out.frq].sort());
