@@ -82,13 +82,13 @@ def cs_string_methods(rng):
 # ======================= 1.11 Math 클래스 (3.C) =======================
 @retry_sep
 def cs_math_class(rng):
-    b, c, d = rng.randint(2, 6), pick(rng, [20, 28, 40, 55, 70]), -rng.randint(2, 9)
+    b, c, d = rng.randint(2, 6), pick(rng, [22, 33, 47, 60, 78]), -rng.randint(2, 9)
     code = f"double a = Math.pow({b}, 2);\nint b = (int) Math.sqrt({c});\nSystem.out.println(a + b + Math.abs({d}));"
     py = str(float(b ** 2) + int(math.sqrt(c)) + abs(d))
     muts = [{"why": "Reads Math.pow(base, 2) as base * 2.", "swap": (f"Math.pow({b}, 2)", f"({b} * 2.0)")},
             {"why": "Rounds the square root to the nearest integer instead of truncating it with the cast.", "swap": (f"(int) Math.sqrt({c})", f"(int) Math.round(Math.sqrt({c}))")},
             {"why": "Ignores Math.abs and adds the negative number.", "swap": (f"Math.abs({d})", f"({d})")},
-            {"why": "Treats Math.sqrt as returning the square.", "swap": (f"(int) Math.sqrt({c})", f"(int) Math.pow({c}, 2) % 10")}]
+            {"why": "Reads Math.pow(base, 2) as the base raised to itself.", "swap": (f"Math.pow({b}, 2)", f"Math.pow({b}, {b})")}]
     return mk(rng, "cs_math_class", "1.11", "3.C", STEM_OUT, code, muts=muts, py=py, concept="Math.pow, Math.sqrt with a cast, Math.abs and a double result",
               path="javac+java output vs Python math.pow/sqrt/abs", kwhy=f"Math.pow({b}, 2) is {float(b ** 2)}; the cast keeps {int(math.sqrt(c))}; Math.abs({d}) is {abs(d)}; the sum is the double {py}.", facts=[f"key={py}"])
 

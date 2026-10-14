@@ -36,7 +36,7 @@ def cs_class_trace(rng):
     muts = [{"why": "Believes a deposit of a negative amount is applied (the guard on deposit is ignored).", "swap": ("if (amt > 0) {\n            balance += amt;\n        }", "balance += amt;")},
             {"why": "Believes withdraw succeeds even when the amount exceeds the balance.", "swap": ("amt > 0 && amt <= balance", "amt > 0")},
             {"why": "Believes a failed withdraw still reduces the balance.", "swap": ("            return true;\n        }\n        return false;", "            return true;\n        }\n        balance -= amt;\n        return false;")},
-            {"why": "Believes the constructor adds the start value to a balance that is already 100.", "swap": ("balance = start;", "balance = start + 100;")}]
+            {"why": "Believes the constructor ignores its parameter and always starts the balance at 0.", "swap": ("balance = start;", "balance = 0;")}]
     return mk(rng, "cs_class_trace", "3.5", "3.B", STEM_OUT, ACCOUNT, call=stm, muts=muts, py=py, stim_code=ACCOUNT + "\n\n" + client(stm), concept="tracing instance state through methods that guard their updates",
               path="javac+java output vs Python class simulation", kwhy="Only positive deposits and withdrawals that do not exceed the balance change the state, and a failed withdraw returns false without changing the balance.", facts=[f"key={py}"], est=110)
 

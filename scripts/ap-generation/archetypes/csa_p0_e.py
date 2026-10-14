@@ -122,8 +122,8 @@ def cs_overload_resolution(rng):
     muts = []
     for i, c in enumerate(ch):
         s = "System.out.println(" + " + ".join(f"Show.f({(c2[2] if j == i else c2[0])})" for j, c2 in enumerate(ch)) + ");"
-        muts.append({"why": c[3], "call": s})
-    muts.append({"why": "Believes the overloaded methods cannot be told apart, so the first one declared is always used.", "call": "System.out.println(" + " + ".join('Show.f(5)' for _ in ch) + ");"})
+        muts.append({"why": c[3] + f" In this code Show.f({c[0]}) actually matches the version that returns {c[1]}.", "call": s})
+    muts.append({"why": "Believes the overloaded methods cannot be told apart, so the first one declared (the int version, which returns I) is used for every call.", "call": "System.out.println(" + " + ".join('Show.f(5)' for _ in ch) + ");"})
     return mk(rng, "cs_overload_resolution", "1.9", "3.C", STEM_OUT, OVL, call=stm, muts=muts, py=py, stim_code=OVL + "\n\n" + client(stm), concept="overload resolution by the number and static types of the arguments",
               path="javac+java output vs Python table of the matching signature", kwhy="Each call selects the overload whose parameter types match the argument types exactly; an int expression selects the int version and a double expression selects the double version.", facts=[f"key={py}"])
 
