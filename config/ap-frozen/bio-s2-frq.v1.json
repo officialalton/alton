@@ -5,7 +5,7 @@
  "archetypeList": "bio_s2_frq",
  "seed0": 9000,
  "candidatesPerCell": 1,
- "capUsd": 1.7,
+ "capUsd": 2.5,
  "repair": false,
  "env": {
   "AP_REQUIRE_BLUEPRINT": "1",
@@ -40,7 +40,7 @@
  "skipStages": [
   "gen"
  ],
- "hardStopCumulativeUsd": 99.2,
+ "hardStopCumulativeUsd": 98.3,
  "expected": {
   "generatorHash": "7b740c786ff7",
   "reviewerPromptHash": "27a77ef5f491",
@@ -63,7 +63,7 @@
  },
  "_budget_estimate": {
   "note": "27 FRQ scenarios",
-  "capUsd": 1.7,
+  "capUsd": 2.5,
   "ownerBioCapUsd": 22,
   "stopWhenLedgerCumulativeReaches": 110.0814
  }

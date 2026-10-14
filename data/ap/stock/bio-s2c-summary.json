@@ -1,0 +1,133 @@
+{
+ "runs": [
+  "bio-s2-sets",
+  "bio-s2-frq"
+ ],
+ "rows": 35,
+ "passed": 24,
+ "rejected": 11,
+ "passRate": 0.686,
+ "mc": {
+  "rows": 8,
+  "passed": 2,
+  "passRate": 0.25
+ },
+ "frq": {
+  "rows": 27,
+  "passed": 22,
+  "passRate": 0.815
+ },
+ "unitsPassed": {
+  "2": 1,
+  "3": 1
+ },
+ "skillsPassed": {
+  "4.B": 2
+ },
+ "figPassed": {
+  "table": 14,
+  "text": 8,
+  "graph": 1,
+  "diagram": 1
+ },
+ "figAll": {
+  "table": 22,
+  "text": 10,
+  "graph": 1,
+  "stat_chart": 1,
+  "diagram": 1
+ },
+ "figPassRate": {
+  "table": "14/22",
+  "text": "8/10",
+  "graph": "1/1",
+  "stat_chart": "0/1",
+  "diagram": "1/1"
+ },
+ "renderTypesPassed": {
+  "ap_table": 14,
+  "text": 8,
+  "ap_graph:bio_line": 1,
+  "ap_diagram:strand_pair": 1
+ },
+ "archetypesPassed": {
+  "bis_enzyme_set": 1,
+  "bis_water_potential_set": 1,
+  "bif_q1_growthfactor": 1,
+  "bif_q1_resistance": 1,
+  "bif_q1_salinity": 1,
+  "bif_q2_enzymetemp": 1,
+  "bif_q2_photosyn": 1,
+  "bif_q2_popgrowth": 1,
+  "bif_q3_catalase": 1,
+  "bif_q3_density": 1,
+  "bif_q3_osmosis": 1,
+  "bif_q4_etcblock": 1,
+  "bif_q4_frameshift": 1,
+  "bif_q4_insulin": 1,
+  "bif_q4_runoff": 1,
+  "bif_q4_saltroot": 1,
+  "bif_q5_energy": 1,
+  "bif_q5_pedigree": 1,
+  "bif_q5_replication": 1,
+  "bif_q6_enzymeph": 1,
+  "bif_q6_growth": 1,
+  "bif_q6_mitotic": 1,
+  "bif_q6_photo": 1,
+  "bif_q6_resp": 1
+ },
+ "archetypesAll": {
+  "bis_cell_cycle_set": 1,
+  "bis_chi_square_set": 1,
+  "bis_enzyme_set": 1,
+  "bis_hw_set": 1,
+  "bis_leafdisk_set": 1,
+  "bis_population_set": 1,
+  "bis_translation_set": 1,
+  "bis_water_potential_set": 1,
+  "bif_q1_growthfactor": 1,
+  "bif_q1_resistance": 1,
+  "bif_q1_salinity": 1,
+  "bif_q2_enzymetemp": 1,
+  "bif_q2_photosyn": 1,
+  "bif_q2_popgrowth": 1,
+  "bif_q3_catalase": 1,
+  "bif_q3_density": 1,
+  "bif_q3_osmosis": 1,
+  "bif_q3_pillbug": 1,
+  "bif_q3_yeast": 1,
+  "bif_q4_etcblock": 1,
+  "bif_q4_frameshift": 1,
+  "bif_q4_insulin": 1,
+  "bif_q4_runoff": 1,
+  "bif_q4_saltroot": 1,
+  "bif_q5_energy": 1,
+  "bif_q5_pedigree": 1,
+  "bif_q5_phylogeny": 1,
+  "bif_q5_pyramid": 1,
+  "bif_q5_replication": 1,
+  "bif_q6_enzymeph": 1,
+  "bif_q6_growth": 1,
+  "bif_q6_mitotic": 1,
+  "bif_q6_photo": 1,
+  "bif_q6_resp": 1,
+  "bif_q6_salt": 1
+ },
+ "failedArchetypes": [
+  "bis_cell_cycle_set",
+  "bis_chi_square_set",
+  "bis_hw_set",
+  "bis_leafdisk_set",
+  "bis_population_set",
+  "bis_translation_set",
+  "bif_q3_pillbug",
+  "bif_q3_yeast",
+  "bif_q5_phylogeny",
+  "bif_q5_pyramid",
+  "bif_q6_salt"
+ ],
+ "costUsd": {
+  "bio-s2-sets": 1.2062,
+  "bio-s2-frq": 1.2594
+ }
+}
