@@ -42,4 +42,14 @@ describe("Practice Tests: SAT / AP 분리", () => {
     expect(pickNextPracticeTest(rows)?.examSetId).toBe("sat1");
     expect(pickNextPracticeTest(buildMockExamListRows([overview.catalog[1]], []))).toBeNull();
   });
+  it("AP 안에서는 과목별 서브탭으로 좁혀 본다", () => {
+    render(<StudentMockExamTab initialOverview={overview} />);
+    fireEvent.click(screen.getByTestId("program-ap"));
+    expect(screen.getByTestId("ap-subject-all")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("ap-subject-ap_biology"));
+    expect(screen.getByText("AP Biology MC Practice 1")).toBeInTheDocument();
+    expect(screen.queryByText("AP Calculus AB Full Practice 1")).toBeNull();
+    fireEvent.click(screen.getByTestId("ap-subject-all"));
+    expect(screen.getByText("AP Calculus AB Full Practice 1")).toBeInTheDocument();
+  });
 });

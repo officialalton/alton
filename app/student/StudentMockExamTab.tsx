@@ -9,6 +9,7 @@ import Pager from "@/app/components/Pager";
 import { trackEvent } from "@/lib/analytics/track";
 import { startMockExamAction, loadFrqHandwritingAction } from "@/lib/mock-exam/attempt-actions";
 import { apFrqIsPaper } from "@/lib/ap-exam/frq-delivery";
+import { AP_SUBJECT_NAME } from "@/lib/ap-exam/layouts";
 import type { FrqInkRow } from "@/lib/ap-exam/frq-ink";
 import MockExamOpenList from "@/app/components/MockExamOpenList";
 import { loadMyMockExamOverviewAction, loadMockExamAttemptDetailAction } from "./mock-exam-tab-actions";
@@ -34,6 +35,8 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
   const [listTab, setListTab] = useState<PracticeTestTab>("todo");
   // SAT / AP 는 서로 다른 시험 층 — 한 목록에 섞지 않는다. AP 세트가 하나도 없으면 전환 UI 를 보이지 않는다.
   const [program, setProgram] = useState<"sat" | "ap">("sat");
+  // AP 안에서는 과목별 서브탭으로 다시 좁힌다("all" = 전체). 과목은 목록에 실제로 있는 것만 보인다.
+  const [apSubject, setApSubject] = useState<string>("all");
   const [page, setPage] = useState(0);
 
   useEffect(() => {
@@ -54,7 +57,16 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
 
   const allRows = useMemo(() => (overview ? buildMockExamListRows(overview.catalog, overview.attempts) : []), [overview]);
   const hasAp = allRows.some(isApRow);
-  const rows = useMemo(() => allRows.filter((r) => (program === "ap" ? isApRow(r) : !isApRow(r))), [allRows, program]);
+  const apSubjects = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const r of allRows) if (isApRow(r) && r.apSubject) counts.set(r.apSubject, (counts.get(r.apSubject) ?? 0) + 1);
+    return [...counts.entries()].sort((a, b) => (AP_SUBJECT_NAME[a[0]] ?? a[0]).localeCompare(AP_SUBJECT_NAME[b[0]] ?? b[0]));
+  }, [allRows]);
+  const apSubjectSafe = apSubjects.some(([k]) => k === apSubject) ? apSubject : "all";
+  const rows = useMemo(
+    () => allRows.filter((r) => (program === "ap" ? isApRow(r) && (apSubjectSafe === "all" || r.apSubject === apSubjectSafe) : !isApRow(r))),
+    [allRows, program, apSubjectSafe],
+  );
 
   const tabRows = useMemo(() => rows.filter((r) => practiceTestTabOf(r.state) === listTab), [rows, listTab]);
   const pageCount = Math.max(1, Math.ceil(tabRows.length / PRACTICE_TESTS_PAGE_SIZE));
@@ -137,6 +149,14 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
           {(["sat", "ap"] as const).map((p) => (
             <button key={p} type="button" role="tab" aria-selected={program === p} data-testid={`program-${p}`} onClick={() => { setProgram(p); setPage(0); }}
               className={`rounded-full px-4 py-1.5 text-[12.5px] font-bold ${program === p ? "bg-ink text-white" : "bg-grey-100 text-grey-600"}`}>{p === "sat" ? "SAT" : "AP"}</button>
+          ))}
+        </div>
+      )}
+      {hasAp && program === "ap" && apSubjects.length > 1 && (
+        <div className="mb-3 flex flex-wrap gap-1.5" role="tablist" aria-label="AP subject">
+          {([["all", "All AP", apSubjects.reduce((n, [, c]) => n + c, 0)], ...apSubjects.map(([k, c]) => [k, AP_SUBJECT_NAME[k] ?? k, c] as const)] as const).map(([k, label, count]) => (
+            <button key={k} type="button" role="tab" aria-selected={apSubjectSafe === k} data-testid={`ap-subject-${k}`} onClick={() => { setApSubject(k); setPage(0); }}
+              className={`rounded-full border px-3 py-1 text-[12px] font-semibold ${apSubjectSafe === k ? "border-ink bg-ink text-white" : "border-grey-200 bg-white text-grey-600"}`}>{label} <span className="opacity-60">{count}</span></button>
           ))}
         </div>
       )}
