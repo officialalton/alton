@@ -102,4 +102,25 @@ bi_cell_cycle_question = make_bank_archetype("bi_cell_cycle_question", "4.6", "3
        ("Would the tumor cells be better off if they divided less often than the normal cells?", "Better off is not a measurable quantity, so the question cannot be tested.")], est=60),
 ], "identify a testable question about cell cycle regulation", "fixed fact bank checked against CED 4.6")
 
-STAGE_H = ["bi_selection_claim_data", "bi_antibiotic_survival_claim", "bi_expression_tissue_table", "bi_checkpoint_mutation_claim", "bi_hw_migration_scenario", "bi_signal_receptor_prediction", "bi_meiosis_crossing_scenario", "bi_selection_followup_design", "bi_yeast_respiration_scenario", "bi_cell_cycle_question"]
+bi_transcription_concept = make_bank_archetype("bi_transcription_concept", "6.3", "1.A", [
+    B("A researcher isolates a gene from a eukaryotic cell and finds that the mature mRNA from the gene is shorter than the gene itself. Which process best explains why the mature mRNA is shorter?",
+      ("Introns were removed from the primary transcript, and the remaining exons were joined together.", "RNA processing removes noncoding introns and joins the exons before the mRNA leaves the nucleus."),
+      [("Exons were removed from the primary transcript, and the remaining introns were joined together.", "Exons code for the protein and stay in the mature mRNA, so this reverses the roles."),
+       ("Ribosomes cut the mRNA into shorter pieces while it was translated in the cytoplasm.", "Translation reads the mRNA and does not shorten it, and splicing occurs earlier in the nucleus."),
+       ("RNA polymerase copied only part of each gene because it cannot copy a complete sequence.", "RNA polymerase copies the whole gene, and the shortening happens after transcription.")], est=65),
+    B("In a eukaryotic cell, a newly made primary transcript receives a 5' cap and a poly-A tail before it is used for translation. Which statement best describes the function of these modifications?",
+      ("They protect the mRNA from degradation and help it to be exported and translated.", "The cap and tail stabilize the mRNA and help ribosomes recognize it after it leaves the nucleus."),
+      [("They add amino acids to the mRNA so that the protein can begin to fold.", "Amino acids are added during translation by ribosomes, not by modifying the mRNA."),
+       ("They remove the introns so that only the coding sequence remains in the mRNA.", "Introns are removed by splicing, which is a different modification."),
+       ("They copy the DNA template so that more mRNA can be made from the gene.", "Copying a template is transcription, which is not the function of the cap and tail.")], est=65),
+], "explain eukaryotic RNA processing", "fixed fact bank checked against CED 6.3")
+
+bi_replication_enzyme_scenario = make_bank_archetype("bi_replication_enzyme_scenario", "6.2", "1.A", [
+    B("A researcher adds a drug that blocks DNA ligase to dividing cells. Which result is most likely during DNA replication in the treated cells?",
+      ("Gaps remain between the Okazaki fragments on the lagging strand, because the fragments are not joined together.", "DNA ligase joins the Okazaki fragments, so blocking it leaves nicks in the lagging strand."),
+      [("The two parental strands cannot separate, because DNA ligase unwinds the double helix.", "Helicase unwinds the double helix, and DNA ligase joins fragments."),
+       ("New nucleotides cannot be added to the leading strand, because DNA ligase adds the nucleotides.", "DNA polymerase adds nucleotides, and the leading strand is made without fragments."),
+       ("RNA primers are not made, because DNA ligase builds the primers on each strand.", "Primase builds the RNA primers, and DNA ligase does not make them.")], est=65),
+], "relate replication enzymes to their functions in a scenario", "fixed fact bank checked against CED 6.2")
+
+STAGE_H = ["bi_selection_claim_data", "bi_antibiotic_survival_claim", "bi_expression_tissue_table", "bi_checkpoint_mutation_claim", "bi_hw_migration_scenario", "bi_signal_receptor_prediction", "bi_meiosis_crossing_scenario", "bi_selection_followup_design", "bi_yeast_respiration_scenario", "bi_cell_cycle_question", "bi_transcription_concept", "bi_replication_enzyme_scenario"]

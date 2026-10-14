@@ -211,3 +211,6 @@ STAGE_R2 = [
 
 # R3: R2 후에도 가상 칸으로 남은 칸용 새 시나리오형 원형 10개(bio_p0_h) + 수정한 근접 세트 3개(chi_square·cell_cycle·leafdisk).
 STAGE_R3 = ["bi_selection_claim_data", "bi_antibiotic_survival_claim", "bi_expression_tissue_table", "bi_checkpoint_mutation_claim", "bi_hw_migration_scenario", "bi_signal_receptor_prediction", "bi_meiosis_crossing_scenario", "bi_selection_followup_design", "bi_yeast_respiration_scenario", "bi_cell_cycle_question", "bis_chi_square_set", "bis_cell_cycle_set", "bis_leafdisk_set"]
+
+# R4: R3 후 남은 칸 — 단원 6 Practice 1 원형 2개 + 고친 세트 2개(leafdisk, cell_cycle).
+STAGE_R4 = ["bi_transcription_concept", "bi_replication_enzyme_scenario", "bis_leafdisk_set", "bis_cell_cycle_set"]

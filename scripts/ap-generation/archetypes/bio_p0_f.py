@@ -112,7 +112,7 @@ def bis_cell_cycle_set(rng):
             t = {"Interphase": int(N * 0.96)}
             r2 = N - t["Interphase"]
             t["Prophase"] = int(r2 * 0.4); t["Metaphase"] = int(r2 * 0.2); t["Anaphase"] = int(r2 * 0.2); t["Telophase"] = r2 - t["Prophase"] - t["Metaphase"] - t["Anaphase"]
-        if min(t.values()) >= 1 and min(c.values()) >= 1:
+        if min(t.values()) >= 1 and min(c.values()) >= 1 and (N - c["Interphase"]) * 100 % N == 0 and (N - t["Interphase"]) * 100 % N == 0:
             break
     phases = list(c)
     stim = tbl(f"Number of root-tip cells in each stage of the cell cycle in a control group and in a group treated with a drug (N = {N} cells counted in each group)", ["Stage", "Control", "Treated"], [[p_, c[p_], t[p_]] for p_ in phases])
@@ -133,7 +133,7 @@ def bis_cell_cycle_set(rng):
         k4, d4 = sentence_options("The drug most likely interferes with spindle fibers, so cells stall in metaphase and do not complete anaphase.", f"Cells accumulate in metaphase ({t['Metaphase']} compared with {c['Metaphase']}) and few reach anaphase, as expected if chromosomes cannot be pulled apart.",
             [("The drug most likely blocks DNA replication, so cells cannot enter mitosis.", "Blocking replication would lower the number of cells entering mitosis, not increase the number in metaphase."), ("The drug most likely speeds up cytokinesis, so many cells are in telophase.", "The number of cells in telophase does not increase in the treated group."), ("The drug most likely has no effect on mitosis.", "The distribution of cells in the stages of mitosis changed.")])
     else:
-        k4, d4 = sentence_options("The drug most likely blocks DNA synthesis, so fewer cells enter mitosis and more remain in interphase.", f"The treated group has {t['Interphase']} cells in interphase compared with {c['Interphase']}, and the mitotic index is much lower.",
+        k4, d4 = sentence_options("The drug most likely prevents cells from entering mitosis, so more cells remain in interphase.", f"The treated group has {t['Interphase']} cells in interphase compared with {c['Interphase']}, and the mitotic index is much lower.",
             [("The drug most likely interferes with spindle fibers, so cells stall in metaphase.", "The data do not show an accumulation of cells in metaphase."), ("The drug most likely speeds up the cell cycle, so more cells are in mitosis.", "The treated group has fewer cells in mitosis."), ("The drug most likely has no effect on the cell cycle.", "The mitotic index changed strongly.")])
     q4 = mk("bis_cell_cycle_set_q4", "4.6", "6.E", "Which statement best explains the effect of the drug on the cell cycle?", k4, d4, rng, concept="infer the target of a cell-cycle drug from stage counts", path="stage with the largest relative change vs the generating drug", material=MAT_TABLE("stage counts"), facts=[f"drug={drug}"], est=70)
     return _set("bis_cell_cycle_set", "A student treats onion root tips with a drug and counts cells in each stage of the cell cycle in treated and control root tips. The table shows the counts.", stim, [q1, q2, q3, q4], "4.6", "4.B")

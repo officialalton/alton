@@ -2025,6 +2025,21 @@
   ]
  },
  {
+  "id": "bi_replication_enzyme_scenario",
+  "topic": "6.2",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.2"
+  ],
+  "misconceptions": [
+   "Primase builds the RNA primers, and DNA ligase does not make them.",
+   "DNA polymerase adds nucleotides, and the leading strand is made without fragments.",
+   "Helicase unwinds the double helix, and DNA ligase joins fragments."
+  ]
+ },
+ {
   "id": "bi_replication_enzymes",
   "topic": "6.2",
   "skill": "1.B",
@@ -2397,6 +2412,21 @@
    "Reverses the template and replaces T with U, without taking the complement.",
    "Builds the correct complement but reads it from the wrong end and labels it 5' to 3'.",
    "Copies the template strand and replaces T with U, without taking the complement."
+  ]
+ },
+ {
+  "id": "bi_transcription_concept",
+  "topic": "6.3",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.3"
+  ],
+  "misconceptions": [
+   "Copying a template is transcription, which is not the function of the cap and tail.",
+   "Introns are removed by splicing, which is a different modification.",
+   "Amino acids are added during translation by ribosomes, not by modifying the mRNA."
   ]
  },
  {
@@ -2889,9 +2919,9 @@
    "trend of the half-floating time against light vs the light-reaction model"
   ],
   "misconceptions": [
-   "Photosynthesis needs light and does not make more oxygen in the dark.",
-   "The data show that light intensity affects the floating time.",
-   "Removing carbon dioxide would reduce photosynthesis and delay floating."
+   "The data show that less light slows floating, and carbon dioxide supply is not changed by light.",
+   "The data show that the time at which disks float changes with light intensity.",
+   "Disks floated under dim light, so oxygen production continues at lower light intensities."
   ]
  },
  {

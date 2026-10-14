@@ -1,0 +1,87 @@
+{
+ "runs": [
+  "bio-r3"
+ ],
+ "rows": 26,
+ "passed": 15,
+ "rejected": 11,
+ "passRate": 0.577,
+ "mc": {
+  "rows": 26,
+  "passed": 15,
+  "passRate": 0.577
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "3": 1,
+  "4": 3,
+  "5": 4,
+  "6": 1,
+  "7": 6
+ },
+ "skillsPassed": {
+  "6.B": 3,
+  "2.A": 1,
+  "6.D": 1,
+  "1.B": 5,
+  "3.B": 1,
+  "3.D": 1,
+  "3.A": 1,
+  "5.A": 2
+ },
+ "figPassed": {
+  "table": 7,
+  "none": 8
+ },
+ "figAll": {
+  "table": 14,
+  "none": 12
+ },
+ "figPassRate": {
+  "table": "7/14",
+  "none": "8/12"
+ },
+ "renderTypesPassed": {
+  "ap_table": 7,
+  "none": 8
+ },
+ "archetypesPassed": {
+  "bi_selection_claim_data": 2,
+  "bi_antibiotic_survival_claim": 1,
+  "bi_expression_tissue_table": 1,
+  "bi_checkpoint_mutation_claim": 1,
+  "bi_hw_migration_scenario": 2,
+  "bi_signal_receptor_prediction": 1,
+  "bi_meiosis_crossing_scenario": 2,
+  "bi_selection_followup_design": 1,
+  "bi_yeast_respiration_scenario": 1,
+  "bi_cell_cycle_question": 1,
+  "bis_chi_square_set": 2
+ },
+ "archetypesAll": {
+  "bi_selection_claim_data": 2,
+  "bi_antibiotic_survival_claim": 2,
+  "bi_expression_tissue_table": 2,
+  "bi_checkpoint_mutation_claim": 2,
+  "bi_hw_migration_scenario": 2,
+  "bi_signal_receptor_prediction": 2,
+  "bi_meiosis_crossing_scenario": 2,
+  "bi_selection_followup_design": 2,
+  "bi_yeast_respiration_scenario": 2,
+  "bi_cell_cycle_question": 2,
+  "bis_chi_square_set": 2,
+  "bis_cell_cycle_set": 2,
+  "bis_leafdisk_set": 2
+ },
+ "failedArchetypes": [
+  "bis_cell_cycle_set",
+  "bis_leafdisk_set"
+ ],
+ "costUsd": {
+  "bio-r3": 1.4496
+ }
+}
