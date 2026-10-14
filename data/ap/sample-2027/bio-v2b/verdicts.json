@@ -1,0 +1,2628 @@
+[
+ {
+  "key": "ap_biology-m01-k0",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Genotype frequencies are 0.49, 0.42 and 0.09. After selection, mean fitness is 0.955. q' = (0.21 + 0.045)/0.955 = 0.267, which rounds to 0.27.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "0.27"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicting allele frequency change under selection with Hardy-Weinberg starting point fits 7.4 and 6.E; within Unit 7 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "q' = 0.255/0.955 = 0.267, which rounds to 0.27. The key is unique, and no other option is defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives q, the fitness values, and the rounding instruction. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct rationale (no selection, q times fitness, aa frequency after selection), and the explanation covers each one. The 0.15 distractor is somewhat artificial but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, calculator allowed, numeric options in parallel form. The multi-step calculation is reasonable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound prediction question on selection against a recessive genotype. The key is verified as 0.27, the distractors are distinct, and the load is appropriate. I recommend acceptance."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must choose the governing relationship (Hardy-Weinberg genotype frequencies followed by fitness-weighted selection), compute p^2, 2pq, q^2, apply relative fitness, and renormalize to get the new q (0.255/0.955 = 0.27). Distractors reflect real misconceptions: no change (0.30), simply halving q (0.15), and using the aa genotype frequency (0.05). Arithmetic is short with rounded values, wording is unambiguous, and the content is in scope (simple selection with Hardy-Weinberg). Multi-step but not heavy, which suits a full mock.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Genotype frequencies after selection: AA 0.49, Aa 0.42, aa 0.09×0.6=0.054; mean fitness w̄=0.964. q' = (0.21+0.054)/0.964 ≈ 0.274 → 0.27.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.27"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Multi-step but about 100 seconds, calculator allowed, short stem, numeric options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, unambiguous selection-prediction item with a unique key and distinct distractors. Acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must apply Hardy-Weinberg to get genotype frequencies, weight them by relative fitness, normalize by mean fitness, and convert to the allele frequency in gametes. This is a multi-step selection-plus-HW prediction within the Unit 7 scope. Numbers are clean, the wording is unambiguous, and the distractors target real misconceptions (no change, multiplying q by fitness, unnormalized aa contribution). Reading load is minimal.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_biology-m01-k2",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "0.27",
+     "brief_reasoning": "q' = (pq + q^2*0.6)/w̄ = (0.21+0.054)/0.964 ≈ 0.274",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Multi-step but manageable with a calculator, at about 100 seconds. The mean-fitness step is not on the formula sheet but is derivable by allele counting.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, the distractors are realistic, and the load is acceptable. The only mild concern is that the selection calculation goes beyond the formula sheet."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must apply Hardy-Weinberg to get genotype frequencies (0.49, 0.42, 0.09), weight them by relative fitness, compute mean fitness (0.964), and then find the new allele frequency (about 0.27). This is a multi-step prediction of the effect of selection on allele frequency. Numbers are small and rounded, the calculator is allowed, and the wording is unambiguous. Distractors correspond to plausible errors (no change, multiplying q by fitness, and so on). The depth is appropriate for a full mock exam but not beyond the CED scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_biology-m02-k0",
+  "cellId": "ap_biology-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Before the change: 0.2*560*(240/800)=33.6, a gain of about 34 per year. After the change: 0.2*560*(-160/400)=-44.8, a loss of about 45 per year.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.4 carrying capacity change with logistic equation; skill 6.E prediction. Fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is unique and correct: +34 before, -45 after. Other options are wrong on sign, magnitude, or K-dependence."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; all numbers in stem; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option D is much longer than the others and includes a comparison clause not asked for, giving a length cue. Option A (17,920 per year for a population of 560) is implausible and easily eliminated, so it is not a realistic misconception. Distractor rationales are brief and generic."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Load is acceptable (about 110 s) but option-length giveaway and the absurd magnitude in option A reduce exam quality."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is in scope and its key is correct and unique. It fails on distractor quality: the correct option is much longer and carries a before/after clause that cues it, and option A's 17,920 per year is an implausible distractor for a population of 560. Revise the options to be parallel in length and make the wrong magnitudes realistic."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires applying the logistic growth equation twice (old K and new K), recognizing that N above the new K gives negative growth, and rejecting distractors that use the wrong formula, wrong sign, or outdated K. Arithmetic is short and rounded; the scenario is concise and in scope for topic 8.4 and skill 6.E. Difficulty comes from legitimate conceptual and reasoning demands.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m02-k1",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Before the change: 0.3*560*(240/800)=50.4/yr. After the change: 0.3*560*(-160/400)=-67.2/yr, so the population declines by about 67 per year.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.4 carrying capacity, predict effect of K change; fits 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is unique: -67/yr with prior 50/yr. Others have wrong sign, magnitude, or ignore K."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; all values in stem; equation given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (sign, omit /K, ignore K change); each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 s, two simple calculations, calculator allowed; acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: correct unique key, clear stem, distinct distractors, suitable load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must choose the logistic growth equation, compute dN/dt before and after K changes (50.4 vs -67.2, clean numbers), and interpret the sign to predict a decline since N exceeds new K. Distractors target common errors (wrong sign, dropping /K, ignoring K change). Concept depth is moderate, wording is clear, and arithmetic is short with a calculator.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m02-k2",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Before the change: 0.3*560*(240/800) = 50.4, so the population grows by about 50 per year. After the change: 0.3*560*(-160/400) = -67.2, so it declines by about 67 per year.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Logistic growth with a changed carrying capacity fits 8.4 and skill 6.E (predicting the effect of a change)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique correct option: about +50 per year before the change and about -67 per year after. All values needed are in the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and the formula is on the equations sheet."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error: omitting the division by K (the 26,880 figure is consistent with the new K), the wrong sign, and treating the rate as independent of K. The explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 seconds, with a calculator and a formula-sheet equation. The load is reasonable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the distractors are distinct and accurate, the topic and skill fit, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must apply the logistic growth equation from the formula sheet with a changed K, compute one rate (about -67/yr vs +50/yr before), and interpret the sign as N exceeding the new carrying capacity. Distractors reflect plausible errors (omitting /K, using old K, ignoring the change). Numbers are simple, the reading load is low, and the content is in scope for topic 8.4 with skill 6.E prediction.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m03-k0",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Linear interpolation between 0.5 M (-6.0%) and 0.8 M (-13.2%): slope -24%/M, so at 0.6 M: -6.0 - 2.4 = -8.4%.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "A loss of 8.4% in mass"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Prediction of mass change in a new sucrose solution from data; fits 6.E in topic 2.7, with interpolation as an allowed proportional calculation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "-8.4% is unique and correct under the stated linear assumption; matches the solver."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and all numbers used appear in it; the linear assumption is stated; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct misconception (nearest point, averaging, sign error) with a rationale; the sign-error distractor is somewhat weak but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, light reading, calculator allowed, simple arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable: the key (-8.4%) is correct, the stimulus is complete, the distractors are distinct, and the task load is typical. Minor weaknesses are the heavy interpolation emphasis and the weak sign-error distractor."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, choose the correct bracketing interval (0.5 to 0.8 M), perform one clean linear interpolation (slope -24 %/M gives -8.4%), and interpret the sign as mass loss in a hypertonic solution. Distractors target nearest-value, wrong-interval, and sign errors. Concept depth is moderate, arithmetic is short and exact, wording is unambiguous, and the interpolation assumption is stated. Fits a full-mock level item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m03-k1",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "A loss of 8.4% in mass",
+     "brief_reasoning": "Linear interpolation between 0.5 M (-3.6%) and 0.8 M (-10.8%): slope -24%/M; at 0.7 M: -3.6 - 4.8 = -8.4%.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The time and reading load are typical, and the calculator is allowed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. The key is correct and unique, the stimulus is complete, and the distractors are reasonable. The explanation has minor wording and rounding issues only."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, pick the correct bracketing interval (0.5-0.8 M), and linearly interpolate with clean numbers (slope -2.4 per 0.1 M, giving -8.4). It also requires recognizing that higher sucrose molarity means water loss from the potato core. Distractors reflect plausible errors (slope, endpoint value, sign). The calculation is a single short proportional step, so the difficulty is within the allowed levers and fits a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m03-k2",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Linear interpolation between 0.5 M (-3%) and 0.8 M (-9%): slope -20%/M, so 0.6 M gives -3 - 2 = -5%.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A loss of 5.0% in mass"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicting mass change in a new sucrose concentration for potato cores is topic 2.7 and a prediction task. It leans on interpolation, but that is allowed as a proportional calculation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The linear assumption is stated, so -5.0% is the unique answer. The rounded 0.33 fraction does not change the key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with units and the stem conditions are clear. Every number used appears in the table."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct error (averaging the neighbors, nearest point, sign). The option B rationale wording is slightly awkward and the sign distractor is weak, but all are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, with simple arithmetic and a calculator allowed. This is suitable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, the stimulus is complete, and the distractors encode distinct errors. Passes; the sign-error distractor and the wording of the option B rationale are minor weaknesses."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student reads a 4-row table, picks the correct bracketing interval (0.5-0.8 M), and does one linear interpolation with clean numbers (slope -20 per M, giving -5.0%). The osmosis concept is simple: higher sucrose means water loss. This is a short, single-concept task with minimal reasoning and no unfair difficulty sources. It is more routine than a typical full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m04-k0",
+  "cellId": "ap_biology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "r=0.12-0.04=0.08 per year; N=500(1.08)^3=629.9≈630",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "630"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Exponential growth prediction from per capita rates fits 8.3 and 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "630 is unique; stem states constant rates per 100 per year, so net 8% compounding is the only defensible reading."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct error (1.16^3, one year, 1.12^3), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds with a calculator, and the cube is a modest load. Options are unordered, which is a minor flaw."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and passes all five criteria. The key is unique, and the distractors encode distinct, accurately explained errors. The only flaw is minor: the numeric options are not in order."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must convert births and deaths per 100 into a net per-capita rate (0.08), recognize that constant per-capita rates imply exponential rather than linear growth, and compound over 3 years: 500(1.08)^3 ≈ 630. One formula-sheet-style calculation with short, rounded arithmetic. Distractors reflect plausible errors (single year, linear growth). Clear wording, no extraneous reading, in scope for 8.3.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m04-k1",
+  "cellId": "ap_biology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "r=(12-4)/100=0.08; N=500(1.08)^3=629.86≈630",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "630"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 100 seconds, calculator allowed, light reading load. The exponent calculation is modest and consistent with the formula-sheet growth equation.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, the distractors are distinct and each is explained, and the item fits topic 8.3 and a calculator exam setting. The only weakness is that the arithmetic dominates the biological prediction."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify exponential growth with constant per-capita rate, compute net rate (12-4)/100 = 0.08, and apply it over 3 years (500 x 1.08^3 = 629.9, about 630). Distractors reflect using birth rate only (702) and a single year of growth (540). One governing relationship plus a short calculator computation, with clear wording and no unfair load. This is typical AP-level quantitative population ecology. The predict-effect skill is only lightly engaged.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m04-k2",
+  "cellId": "ap_biology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "r=0.12-0.04=0.08 per year; N=500(1.08)^3≈629.9≈630",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "630"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique at 630, the distractors are distinct and verified, and it fits topic 8.3 with a light calculation.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Exponential growth from per capita birth and death rates is topic 8.3; predicting future population size fits 6.E reasonably."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "500 x 1.08^3 = 629.856, which rounds to 630. The key is unique, and the continuous-model value of about 636 is not among the options."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and the constant rates are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct, computed misconception (one year only, death as gain, births only), and the explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds with a calculator allowed, and the load is typical. Options are not in numeric order, a minor point."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item requires computing a per-capita growth rate (births minus deaths per 100 = 0.08) and applying exponential growth over 3 years (500 x 1.08^3 = 630). It involves one formula-sheet-style calculation with simple numbers and one conceptual choice (exponential rather than linear growth, since the rates stay constant per capita). There is no data representation to read, the wording is clear and the reading load is low. Distractors such as 540 (one year only) and linear-growth errors test common misconceptions, but the reasoning depth is modest for a full-mock exam_prep item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m05-k0",
+  "cellId": "ap_biology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(RR)=1/4 and P(tall)=3/4. Since the genes assort independently, 1/4 × 3/4 = 3/16, and 3/16 × 320 = 60.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "60"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Incomplete dominance plus independent assortment fits topic 5.4. Predicting expected offspring counts fits 6.E adequately."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "P(red)=1/4, P(tall)=3/4, so 320 × 3/16 = 60. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives all conditions: genotypes, dominance relationships, independent assortment, and the number of offspring."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "20 = 1/4 × 1/4 × 320, 80 = 1/4 × 320, 180 = 3/4 × 3/4 × 320. Each encodes a distinct misconception and is explained. The wording of the 20 rationale is slightly awkward but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, simple arithmetic, parallel numeric options, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clean MC item with a unique key and distinct distractors, suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must choose the governing relationship (incomplete dominance means red requires RR, 1/4, while tall under complete dominance is 3/4), combine the independent probabilities by multiplication (3/16), and scale to 320 offspring. The arithmetic is clean and short, and the reading load is minimal. The distractors target named misconceptions (ignoring one trait, treating color as complete dominance, using 1/16). This is a moderate-depth two-trait probability item, appropriate for a full mock. The skill tag 6.E is a loose fit, but the difficulty is appropriate and in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m05-k1",
+  "cellId": "ap_biology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "90",
+     "brief_reasoning": "P(RR)=1/4, P(tall)=3/4, product 3/16 x 480 = 90",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Incomplete dominance plus an independent gene is in scope for 5.4. Predicting offspring numbers is an acceptable fit for 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "480 x 1/4 x 3/4 = 90 is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "270, 30 and 120 each map to a distinct computed misconception. The rationale for 30 is slightly vague but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light arithmetic, appropriate for an AP exam item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, the distractors are distinct, and the scope and load are appropriate. The item passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student must recognize incomplete dominance (RR = 1/4 red) versus complete dominance (tall = 3/4), apply the multiplication rule for independent genes (3/16), and multiply by 480 to get 90. This is a single straightforward probability calculation with short, unambiguous wording and clean numbers. Distractors reflect common errors: 270 treats red as complete dominance (9/16), 30 uses the red-short class (1/16), and 120 uses 1/4 for the red fraction alone. Concept depth is modest and no representation changes are needed. The item is in scope for Unit 5.4 and is not an epistasis ratio. Fit to skill 6.E is loose, since it is mostly calculation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m05-k2",
+  "cellId": "ap_biology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(RR)=1/4, P(T_)=3/4; 3/16*320=60",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "60"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Incomplete dominance plus independent gene prediction; fits 5.4 and 6.E reasonably."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "60 is the unique correct answer: 320 x 1/4 x 3/4."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem states all conditions, including independent assortment."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "80, 20 and 180 each map to a distinct misconception. The wording for 20 is a bit awkward but still understandable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, simple arithmetic, typical exam load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the key is unique and correct, the distractors are distinct, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must apply incomplete dominance (red = RR = 1/4) to one gene and complete dominance (tall = 3/4) to the other, multiply independent probabilities to get 3/16, then scale to 320 offspring (60). Distractors reflect real misconceptions (treating red as dominant gives 180; using 1/4 or 1/16 gives 80 or 20). Concept depth is moderate, the arithmetic is clean and short, the wording is clear, and the content is in scope (no epistasis or linkage mapping). It is more than recall but not a multi-representation challenge, so it fits a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m06-k0",
+  "cellId": "ap_biology-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "7.6 mg/L",
+     "brief_reasoning": "Gross photosynthesis = 1.2 + 0.4 = 1.6 mg/L/h. At half light it is 0.8, so the net rate is 0.8 − 0.4 = 0.4 mg/L/h. After 4 h: 6.0 + 1.6 = 7.6 mg/L.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicts effect of reduced light on O2 using gross photosynthesis and respiration; fits 3.4 and 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "7.6 is unique; assumptions (respiration continues in light, gross proportional to light) are stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct computed error (10.8 unchanged light, 8.4 halved net, 9.2 ignored respiration); explanations accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Simple arithmetic, about 100 seconds, calculator allowed is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of 7.6 mg/L is unique, the assumptions are stated, the distractors encode distinct misconceptions, and the load is appropriate for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must distinguish net from gross O2 production, recover gross photosynthesis (1.2+0.4), scale it by light intensity, subtract constant respiration, then apply over 4 h. Distractors map to named misconceptions (halving net rate, ignoring respiration, using bright light). Conceptually central to CED 3.4/3.5, arithmetic is light, wording is unambiguous with stated assumptions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m06-k1",
+  "cellId": "ap_biology-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Gross = net + respiration = 0.8+0.4 = 1.2 mg/L/h. Half light gives gross 0.6, net 0.6-0.4 = 0.2 mg/L/h. Over 5 h: 6.0 + 1.0 = 7.0 mg/L.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "7.0 mg/L"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicts effect of reduced light using gross vs net O2 production; fits 3.4 and 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "7.0 is unique; assumptions are explicit (respiration constant, gross proportional to light)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; all numbers are in the stem and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct, verified error (8.0 halves net, 9.0 omits respiration, 10.0 ignores the light change); explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, simple arithmetic, calculator allowed, short options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound multi-step prediction item on gross vs net photosynthesis. The key is unique and the distractors are distinct and verified. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must separate net O2 change into gross photosynthesis minus respiration, scale gross by light intensity, then recompute net and project 5 h. Distractors reflect the misconception of halving net rate (8.0 mg/L). Arithmetic is simple and all assumptions are stated, so difficulty comes from the biological reasoning, not unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m06-k2",
+  "cellId": "ap_biology-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "7.0 mg/L",
+     "brief_reasoning": "Gross = 0.8 + 0.4 = 1.2; at half light gross = 0.6, net = 0.2 mg/L/h; 6.0 + 0.2 × 5 = 7.0",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 100 seconds, with light arithmetic and a calculator allowed. This is typical of the exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and correct, the distractors encode distinct misconceptions, and the scope and load are appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires distinguishing net from gross photosynthesis, scaling only the gross rate with light, and then recombining it with respiration over time. Distractors capture the misconception of halving the net rate and the error of dropping respiration. The numbers are small and clean, the assumptions are explicit, and the reading load is low, so the difficulty comes from legitimate conceptual reasoning rather than unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m07-k0",
+  "cellId": "ap_biology-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "q=240/800=0.30, p=0.70; expected Aa=0.42*400=168; observed 84 < 168, so heterozygote deficit, not in HWE.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hardy-Weinberg claim supported by computed expected vs observed heterozygotes; fits 7.5 and 6.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "q=0.30, expected Aa=168 vs observed 84; D uniquely correct; A true statement but invalid reasoning, B false comparison, C irrelevant."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete; stem clear; derived numbers in options follow from table."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions with accurate explanations."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 s, calculator allowed, single formula-sheet calculation; typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique, verified key and distinct distractors. It fits topic 7.5 and skill 6.B, and the load is appropriate for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the genotype table, compute q from counts (240/800 = 0.30), get p = 0.70, compute expected heterozygotes 2pq x 400 = 168, compare to the observed 84, and choose the claim with the correct direction. Requires choosing the Hardy-Weinberg relationship and rejecting misconceptions (allele frequency alone implies equilibrium; counts summing to N implies equilibrium). Arithmetic uses clean numbers, the wording is unambiguous, and the content is in scope for 7.5 and skill 6.B.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_biology-m07-k1",
+  "cellId": "ap_biology-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "p=q=0.5; expected Aa=2pq*500=250; observed 150 is a heterozygote deficit, so the population is probably not in HWE.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "HW equilibrium claim supported by observed vs expected heterozygotes; fits 7.5 and 6.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "p=q=0.5, expected Aa=250, observed 150; B unique. Deviation is large, so 'probably not' is defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete; all numbers used appear in the table or are derivable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; explanations accurate. C's explanation is thin but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light calculation, about 110 s, calculator allowed, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. Key B is unique and the distractors are distinct. The stimulus is complete and the calculation load is appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the genotype table, calculate allele frequencies (p = q = 0.50) from clean counts, apply 2pq to get the expected heterozygote count (250), compare it with the observed count (150), and select the claim supported by the evidence. Distractors test rejecting a reversed comparison and non-diagnostic reasoning (alleles being common, counts summing to the total). Arithmetic is short and uses round numbers, the reading load is minimal, and the wording is unambiguous, so the difficulty comes from the Hardy-Weinberg reasoning itself.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "ap_biology-m07-k2",
+  "cellId": "ap_biology-m07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "p=0.7,q=0.3; expected 490/420/90 matches observed exactly, consistent with HWE.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Option A is internally contradictory (420 is not 420) but is just a weak distractor; B is clearly correct. 'Close to' undersells an exact match."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hardy-Weinberg topic, claim supported by computed evidence; fits 7.5/6.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer; observed counts equal expected exactly (490/420/90)."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Option A says 420 is 'not exactly 420', a self-contradictory statement; option B says 'close to' when the values are identical. Wording is imprecise and odd."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option A is a non-credible, self-contradictory distractor; its stated misconception (demanding exact match) is unrealistic and its rationale does not fit a perfect match. The distractor is a giveaway."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "A perfect-match dataset removes the real judgment about chance variation; the item is unlike an official item and the contradictory option would not appear on the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Correct key, but option A is self-contradictory ('420 is not exactly 420') and option B's 'close to' mismatches an exact match. The distractor set is weak and the wording flawed, so fail."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must read the genotype table and compute p and q from counts (p=0.7, q=0.3). They then compute the expected heterozygotes (2pq x 1000 = 420) and compare this with the observed 420. They must also reject distractors based on misconceptions (alleles must be equal in frequency, genotype counts must be equal). The numbers are clean and the reading load is low. This is typical Hardy-Weinberg application for a full mock. One flaw: option B says 'close to' when the match is exact, and option A is self-contradictory, so it is a weak distractor.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m08-k0",
+  "cellId": "ap_biology-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "K≈400; max at N=200: 0.4*200*(200/400)=40/day, consistent with graph slope ~40/day near day 9-10.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "40 individuals per day"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reads K and the half-K point from a logistic graph and applies the formula-sheet equation; fits 8.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 40 is unique and consistent with the graph (K about 400, steepest increase about 40 per day)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete vertex data, labeled axes, all numbers available."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rationale for 200 says 'in the year of fastest growth', but time is in days, so the explanation is inaccurate. The other rationales (100 = forgot r_max; 80 = r_max*N without the (K-N)/K factor) are acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 s, a calculator is allowed, and the arithmetic is light."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in key, stimulus and scope. It fails only on the distractor explanation, where the rationale for 200 wrongly refers to 'the year' although time is in days. Fixing that wording would make it acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read K (~400) from the graph plateau, recognize that growth rate is maximal at N = K/2 (the inflection point), and substitute into the logistic equation: 0.4 x 200 x (200/400) = 40. This requires choosing the governing relationship and one formula-sheet calculation with clean numbers. Distractors map to plausible errors (200 = N at max growth, 80 = omitting the (K-N)/K factor, 100 = misapplied K/N). Arithmetic and reading load are light, and the wording is unambiguous, so the difficulty comes from legitimate conceptual sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m08-k1",
+  "cellId": "ap_biology-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "K≈400; max growth at N=K/2=200: 0.4*200*(200/400)=40/day",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "40 individuals per day"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Logistic growth, K, and maximum growth rate at K/2 fit 8.4 and skill 2.B (relating graph features to the model equation)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "K = 400 from the plateau, N = 200 at the fastest growth, dN/dt = 0.4*200*0.5 = 40. This is unique. The graph's largest one-day increase is about 40 (233.3 - 193.6 = 39.7), which agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are complete: axes and vertices are given, and the plateau at 400 is readable. A minor point is that the y-axis maximum of 600 leaves extra empty space. K is not stated and must be read from the graph, which is intended."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rationale for the 200 option says 'in the year of fastest growth', but the time axis is in days, not years, so the wording is inaccurate. The 160 distractor is described as using K in place of N, which gives r*K*(K-K)/K = 0 rather than 160. Plugging K = 400 into the N factor only (r*K*(K-N)/K with N = 200) gives 80, and r*K = 160 comes from dropping the (K-N)/K factor. The misconception explanation for 160 is therefore muddled. The 80 rationale ('half of K but leaves out (K-N)/K') is also questionable, since r*N = 0.4*200 = 80 is correct for that error."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "This is a standard single-step calculation with a graph read, which suits the exam and the calculator allowance."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in scope and key. It fails on distractor rationales: the 200 option mentions 'year' although the axis is in days, and the 160 rationale is internally inconsistent. These rationales should be fixed before use."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read K (~400) from a logistic graph, recognize that growth rate peaks at N = K/2, and apply the formula-sheet logistic equation with clean numbers (0.4 x 200 x 0.5 = 40). Requires choosing the governing relationship and one simple calculation; distractors reflect plausible misconceptions. The stem is clear and has little reading load, and the arithmetic is simple and rounded, so the difficulty comes from the concept rather than unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m08-k2",
+  "cellId": "ap_biology-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "40 individuals per day",
+     "brief_reasoning": "The graph levels off near K = 400. In logistic growth the rate is highest at N = K/2 = 200, so dN/dt = 0.4 × 200 × (200/400) = 40 individuals per day. This matches the graph, which rises by about 40 between days 9 and 10.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of 40 is unique and consistent with the graph and equation, and the distractors encode distinct misconceptions. One minor flaw: the explanation for the 200 option says \"year\" although the time unit is days.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.4, logistic growth and the maximum growth rate. Skill 2.B, relating graph features to the model equation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "K is about 400, the maximum rate occurs at N = 200, and 0.4 × 400 / 4 = 40. The largest one-day increase in the plotted data is about 40, which agrees with the key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are complete and the axes are labeled. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct, specific rationale. The rationale for 200 wrongly says \"year\" instead of days, which is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 seconds with a single simple calculation, typical of AP Biology, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must read K (about 400) from the logistic graph, recognize that growth rate peaks at N = K/2 = 200, and apply the formula-sheet logistic equation once with clean numbers: 0.4 x 200 x 0.5 = 40. This is one proportional calculation plus choosing the governing relationship, which fits the allowed difficulty levers. Distractors correspond to common errors (omitting the (K-N)/K term, using N at K/2). Reading and arithmetic loads are light and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m09-k0",
+  "cellId": "ap_biology-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The smallest distance is between Q and R (4). Under a constant clock, each of the two lineages contributes half of that, so 4/2 = 2 substitutions per 100 sites since their common ancestor.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.9: reading a distance table to infer sister taxa and per-lineage divergence; fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The table is ultrametric. Q and R are sisters at distance 4, so 2 per lineage; the key C is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and symmetric, and the stem states the constant-rate assumption."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (wrong pair, total vs per-lineage, largest distance as closest), and the explanations address each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short item with minimal arithmetic and typical reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and the distractors are distinct and accurately explained. The task load is appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must read a distance table, identify the closest pair (Q-R, 4) as sister taxa, and see that P is equidistant from all others, which marks it as the outgroup. They then apply the constant-rate assumption by splitting the pairwise distance between two lineages (4/2 = 2). The distractors target the misconception of not halving the distance and the error of choosing the wrong pair. The computation is a single division on small integers, the reading load is minimal, and everything is within CED 7.9. The difficulty comes from the concept (distance as the sum of two branches) and not from arithmetic or wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m09-k1",
+  "cellId": "ap_biology-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Q and R share the most recent common ancestor, with about 3 substitutions per 100 sites on each lineage",
+     "brief_reasoning": "Q and R have the fewest differences (6). At an equal constant rate, each lineage accounts for half of that, which is 3. The table is consistent with an ultrametric tree.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reads a distance table as a phylogenetic model and infers sister taxa and per-lineage change under a constant rate; fits 7.9 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Q-R is the smallest distance, so they are sister taxa. The table is ultrametric, so 6/2 = 3 per lineage. Option A is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and symmetric, and the constant-rate condition is stated in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions: wrong pair by distance, largest distance read as closest, and total distance not halved. Option lengths are parallel. The rationale for B is slightly thin but accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and light load, with one simple division. Calculator designation is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the table is consistent with a constant-rate tree, and the distractors encode distinct errors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the distance table, pick the smallest pairwise difference (Q-R = 6) to identify the most recent common ancestor, then apply the constant-rate assumption to split the pairwise distance between two lineages (3 each), rejecting the distractor that treats total distance as per-lineage. Mental conversion from table to implied tree and one simple division; in-scope, unambiguous, minimal reading and arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m09-k2",
+  "cellId": "ap_biology-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Q and R have the smallest distance (6), so they are sister species. Under a constant rate, each lineage contributes half of that distance, so each has about 3 substitutions per 100 sites since their common ancestor.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading a distance table to infer sister taxa and per-lineage change fits 7.9 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Table is ultrametric, tree (P,(S,(Q,R))); Q-R sister with 3 per lineage is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete symmetric table, constant-rate assumption stated, clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct errors (total vs per-lineage, wrong pair, largest distance as closest); explanations accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90-110 s, minimal arithmetic, four parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and follows from the ultrametric table plus the stated constant rate. The distractors are distinct and the item fits topic 7.9 and skill 2.B."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read a distance table, identify the closest pair (Q,R) as sharing the most recent common ancestor, and apply the molecular clock idea that the pairwise distance is split across two lineages (6/2 = 3). Distractors target common misconceptions (using the full distance, choosing the wrong pair). Concept depth is moderate, with one simple proportional step and a table-to-tree representation change. Numbers are small and wording is clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m10-k0",
+  "cellId": "ap_biology-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Rate = slope. Tube 1: 1 µmol/min with 2 µg. Tube 2: (9-1)/4 = 2 µmol/min, so it has 4 µg.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "4.0 µg"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of 4.0 µg is unique and follows from the slopes (1 vs 2 µmol/min). The stimulus data are complete, the three distractors encode distinct misconceptions with accurate rationales, and the load is appropriate for AP Biology.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Students read slopes from two linear curves, ignore the nonzero starting product in tube 2 (the main trap, along with comparing endpoints), and apply a direct proportionality between rate and enzyme amount. Computation is trivial (a slope ratio of 2 gives 4.0 µg). The concept depth is shallow and the wording is clear. This is a straightforward graph-reading item suited to initial learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m10-k1",
+  "cellId": "ap_biology-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slopes: Tube 1 = 1 µmol/min, Tube 2 = (8-2)/4 = 1.5 µmol/min. 2 µg × 1.5 = 3.0 µg. The initial product in Tube 2 does not affect the slope.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "3.0 µg"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Relating reaction-rate slopes to enzyme amount is core 3.1 content. Explaining the relationship between graph features and enzyme amount fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slopes are 1 and 1.5 µmol/min, so the ratio is 1.5 and tube 2 has 3.0 µg. The stem states that rate is proportional to enzyme amount and that substrate concentration is the same. The initial product in tube 2 is flagged and does not affect the slope. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are complete, with axes, scales and vertices for both lines. The y-axis maximum of 8 matches the tube 2 endpoint. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named error: comparing endpoints (4.0), inverting the ratio (1.3), and subtracting rates (2.5). The explanation addresses every wrong option. The 4.0 option arises from comparing endpoints of 8 versus 4, which is plausible. The options are numeric, parallel and similar in length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is a single-step slope comparison with a light reading load, about 90 to 120 seconds. Calculator use is minimal and the designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the stimulus is complete, the distractors are distinct, and the task load is appropriate for 3.1 and skill 2.B."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read two curves, recognize that rate is the slope rather than the final product amount (rejecting the nonzero start offset as a distractor), compute the slopes (1 and 1.5 µmol/min), and apply one direct proportion to get 3.0 µg. The numbers are clean and the wording is clear. The difficulty comes from choosing the governing relationship (rate = slope, rate proportional to enzyme amount) and rejecting a named misconception (endpoint vs. rate), which are allowed levers.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m10-k2",
+  "cellId": "ap_biology-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slope tube1 = 1 µmol/min; slope tube2 = (8-2)/4 = 1.5 µmol/min. Enzyme = 2 µg × 1.5 = 3.0 µg.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "3.0 µg"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Relates graph slopes (rates) to enzyme amount; fits 3.1 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slopes 1 and 1.5 give 3.0 µg; unique, with the proportionality assumption stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes and vertices are fully specified and match the stem (tube 2 starts at 2 µmol). All numbers are available."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (subtracting rates, endpoint comparison, inverted ratio); the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one simple ratio calculation, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key and a complete stimulus. The distractors are distinct and realistic, and the scope is correct."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single governing relationship: rate is proportional to enzyme amount. The student reads the slope of each line from the graph (1 vs 1.5 µmol/min), ignores the nonzero starting product in tube 2 (the named misconception of comparing totals or endpoints), and does one clean proportion: 1.5 × 2 µg = 3.0 µg. The arithmetic is trivial and the wording is unambiguous. Distractors map to plausible errors (endpoint ratio, using the intercept, inverted ratio). This is below full-mock exam_prep depth because it takes only a few steps and one representation change.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m11-k0",
+  "cellId": "ap_biology-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Rates (6min-2min)/4: 2.0, 4.0, 6.4, 1.6 µmol/min. Increases: 100%, 60%, then a 75% decrease. Largest increase is 15→25 °C, 100%.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describes enzyme rate data across temperature (3.2) via table reading and percent change (4.B)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rates 2.0, 4.0, 6.4, 1.6; changes +100%, +60%, -75%. Key D is unique. Proportional-by-time method gives the same answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with units and the linearity condition stated. The 2-minute values are odd but consistent with a nonzero intercept."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode absolute vs percent change, decrease vs increase, and rate difference reported as a percent. Each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Multi-step but a calculator is allowed; roughly 120 seconds is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and verified. The distractors are distinct and explained. Scope, skill and calculator use are appropriate. The 2-minute product values are slightly unrealistic but do not change the answer."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must read the table and see that rate comes from the change between 2 and 6 min, not the raw 6-min totals. They then compute four rates (2.0, 4.0, 6.4, 1.6 µmol/min) and the percent change between neighboring temperatures, and reject distractors (a smaller true increase, a decrease treated as an increase, and a decimal-vs-percent error). The arithmetic is short and clean, the reading load is low, and the stem is unambiguous. It fits the 4.B skill and topic 3.2 and stays within the allowed difficulty levers.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m11-k1",
+  "cellId": "ap_biology-m11",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Rates (Δproduct/4 min): 4.0, 8.0, 12.8, 6.4 µmol/min. 15→25 +100%, 25→35 +60%, 35→45 −50% (decrease). Largest increase 100% between 15 and 25.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The data are unrealistic: nearly identical 2-minute values against very different 6-minute values. This invites confusion about whether the reaction is truly linear. The calculation load is otherwise acceptable with a calculator.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the distractors are good, but the stimulus is internally inconsistent with the stem's \"linear\" statement and has unrealistic 2-minute values. Failing on stimulus quality."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, compute rates as (P6 - P2)/4 min for four temperatures, calculate percent change across three neighboring intervals, and notice that the 35 to 45 °C change is a decrease. Answer is 100% increase between 15 and 25 °C. Arithmetic is short with clean numbers, the stimulus is compact, and the distractors target real misconceptions: misreading a rate as a percent, ignoring the sign, and picking a smaller increase. The skill, describing data from a table, matches 4.B and the unit scope. The multi-step data handling suits full mock exams.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m11-k2",
+  "cellId": "ap_biology-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A: largest percent increase is between 15 °C and 25 °C, 50%",
+     "brief_reasoning": "Rates over 2–6 min: 15°C 16/4=4.0, 25°C 24/4=6.0, 35°C 33.6/4=8.4, 45°C 8.4/4=2.1 µmol/min. Changes: +50%, +40%, then −75% (a decrease). Largest percent increase is 50%, between 15 and 25 °C.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reads a table of enzyme activity vs temperature and describes rate changes; fits 3.2 and 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is unique: percent changes are +50%, +40%, -75%. The linearity statement justifies the rate computation."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete, with units in the description and clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct error (a decrease read as an increase, absolute change given as a percent, largest absolute change taken as largest percent), and the explanations are accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A few simple calculations with a calculator allowed; about 2 minutes is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and verified, the table is complete, the distractors are distinct, and the load is reasonable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, compute rates from the change between 2 and 6 min (not just use the 6-min value), calculate percent change across three neighboring intervals, and recognize that the 35-45 °C change is a decrease, which rejects distractor B. Distractors reflect plausible errors (ignoring direction, wrong percent, non-largest interval). Arithmetic is clean and short, the concept (temperature effect and denaturation) is in scope, and the wording is unambiguous with linearity stated. Matches skill 4.B with a moderate multi-step load.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m12-k0",
+  "cellId": "ap_biology-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Normalize to control gene: 20/100=0.2, 80/200=0.4; ratio 2.0",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "2.0"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of 2.0 is unique, the stem and table are complete, each distractor encodes a distinct error, and the load is typical of the exam.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, recognize that the constant-expression control gene reveals a loading difference, normalize the gene of interest to the control (80/200 divided by 20/100 = 2.0), and reject the raw 4x change. This involves one proportional calculation with round numbers and a single conceptual choice (normalization). It is appropriate for a full mock, as it is more than basic recall but not extended.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m12-k1",
+  "cellId": "ap_biology-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Normalize to control: (60/180)/(20/120)=0.333/0.167=2.0",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2.0"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Normalizing mRNA to a control gene to describe fold change fits 6.6 and 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2.0 is the unique correct value."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete; control gene condition is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions explained. The 0.2 option is a rounding of 0.1667 and is slightly loose, but it is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A light calculation and a typical reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key is correct and unique, and the stimulus is complete. The only flaw is the slightly loose 0.2 distractor, which does not warrant rejection."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read a small table, recognize that the control gene corrects for unequal RNA loading, and compute a normalized fold change (3.0 / 1.5 = 2.0). The arithmetic is clean and the reading load is low. The challenge is choosing the governing relationship (normalization to a constant-expression control) and rejecting the raw 3-fold change, which is a typical AP data-analysis step. Distractors correspond to the unnormalized ratio and inverted ratios. The item is fair, with no vague wording or heavy computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m12-k2",
+  "cellId": "ap_biology-m12",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Normalize to control: (60/180)/(20/120)=0.333/0.1667=2.0",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "2.0"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Normalizing mRNA signals to a control gene and describing the fold change fits 4.B with a gene-expression context."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "(60/180)/(20/120)=2.0. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and the stem states the control gene is constant per cell."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 0.2 option is attributed to subtracting normalized values, but 0.333-0.167=0.167, which is not 0.2. The option text and its rationale do not match. The 0.2 option does not cleanly encode its stated misconception."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The load is acceptable, but the inconsistent distractor makes the item unsuitable as written."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (2.0) is correct and the stimulus is complete, but the 0.2 distractor is inconsistent with its stated subtraction misconception (the subtraction gives 0.167). The distractor needs to be fixed, for example by making the option 0.17 or by changing the misconception description."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, recognize that unequal RNA loading requires normalizing to the control gene, and compute a ratio of ratios (20/120 vs 60/180 gives 2.0). The raw fold change of 3.0 is the misconception distractor. It requires one proportional calculation with clean numbers and a short stimulus, matching the allowed levers (choosing the governing relationship, reading a table, one proportional calculation). No vocabulary-only recall, no long arithmetic, and no ambiguity in the conditions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m13-k0",
+  "cellId": "ap_biology-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "In a testcross with independent assortment, the four offspring classes each make up 1/4. So Aabb + aaBb should be 1/2 of 400, which is 200. Only 40 were observed, which points to linkage. Here those two genotypes are the recombinant classes.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tests expected testcross results under independent assortment and interpretation (linkage), fitting 5.4 and 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct option. The unstated coupling/repulsion phase is a minor gap, but no other option is defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. All numbers (400 offspring, 40 observed) are in the stem. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error (wrong fraction, wrong conclusion, wrong classes), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 seconds, minimal arithmetic, long but parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. B is the unique key and the distractors are distinct. The only flaw is that the stem leaves the parental phase (coupling vs repulsion) unstated, which does not create a second correct answer."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize a testcross, derive the 1:1:1:1 null expectation, identify the recombinant classes (Aabb/aaBb) as 50% = 200 of 400, and interpret the much lower observed count as evidence of linkage. The distractors target named misconceptions (25% vs 50%, wrong genotype classes, wrong interpretation). The arithmetic is trivial, the wording is unambiguous, and the item is within scope (recombination frequency, no chi-square needed). The difficulty is from concept use, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m13-k1",
+  "cellId": "ap_biology-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "In a test cross with independent assortment, the four genotypes appear in a 1:1:1:1 ratio. Aabb and aaBb together make up half of the offspring, so about 200 of 400 are expected. Only 32 were observed, which is far fewer, so these are recombinants and the genes are linked (about 8% recombination).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Stating the null expectation under independent assortment and interpreting observed data is on 5.4 and skill 3.B; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Expected 200 of 400 under 1:1:1:1; observed 32 is far lower, so linkage is suggested. Option A is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem gives the cross, N=400 and the observed 32. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are wrong classes, wrong conclusion and wrong expected value (100), each a distinct misconception, and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "One simple proportion plus an interpretation, about 110 seconds, with parallel options. The load is typical of AP Biology."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and correct, the distractors encode distinct misconceptions, the scope fits 5.4 and skill 3.B, and the load is appropriate. The only quibble is that \"different chromosomes\" is slightly loose for independent assortment, which does not affect the key."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the testcross null expectation (1/2 recombinant-type offspring under independent assortment, so 200 of 400), recognize which genotypes are the recombinant class, and interpret a large deviation as evidence for linkage. This requires one simple proportion, no heavy arithmetic, and rejects named misconceptions (swapped classes, wrong fraction, wrong conclusion). It fits skill 3.B and stays within Unit 5 scope (recombination frequency, no three-gene mapping).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m13-k2",
+  "cellId": "ap_biology-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "A test cross gives 1:1:1:1 under independent assortment, so about 200 of 400 offspring should be Aabb or aaBb. Observing only 32 points to linkage, with these two genotypes being the recombinants.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The long options take a little reading time, but the load is within a normal AP range (about 100 seconds).",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a unique key, distinct distractors and an appropriate scope. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the null expectation for a testcross (1:1:1:1, so 50% of offspring in the two recombinant classes, 200 of 400), correctly identify which genotypes are the recombinant classes, and interpret a large deviation (32 observed) as evidence of linkage. Distractors target misconceptions (wrong class, wrong expected count, wrong conclusion). Arithmetic is trivial and the wording is clear, with no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m14-k0",
+  "cellId": "ap_biology-m14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The target rate is 10.0, which lies between 11.1 at 4 µM and 7.7 at 8 µM. A straight-line estimate gives 4 + 4(1.1/3.4) ≈ 5.3 µM.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "5.3 µM"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "One short interpolation, calculator allowed, about 110 seconds, options are short parallel values.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, the table is complete, the distractors are distinct and accurately explained, and the load is suitable. I found no reject conditions."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must read the table, convert \"50% reduction\" to a target rate of 10.0 µmol/min, find the bracketing interval (4 to 8 µM), and do one linear interpolation with rounded numbers. Distractors reflect plausible errors (lower bound, midpoint, upper bound). The item sits within 3.2 and skill 4.B, uses a single proportional calculation, and has no out-of-scope content or ambiguous wording. This is a moderate multi-step data-description item suitable for full mocks.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m14-k1",
+  "cellId": "ap_biology-m14",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "50% of 40.0 = 20.0; linear interpolation between 8 µM (22.2) and 16 µM (15.4): 8 + 8*(2.2/6.8) ≈ 10.6 µM",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "10.6 µM"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Reasonable time and load. Linear interpolation of a 50% value is slightly atypical but acceptable.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is suitable. It fails on distractor explanation because the m2 misconception rationale for 16.0 µM is illogical."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must compute the 50% rate (20.0), find the bracketing interval in the table (8 to 16 µM), and do one linear interpolation to get about 10.6 µM. The data are rounded, the assumption is stated, and a calculator is allowed. The distractors (the interval midpoint and the endpoints) target plausible errors. The biology concept is light, so difficulty comes from table reading and a single proportional calculation, both of which are allowed levers. This suits a full mock.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m14-k2",
+  "cellId": "ap_biology-m14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "A 50% drop means the rate is 20. Interpolating between 4 µM (22.2) and 8 µM (15.4): 4 + 4(2.2/6.8) ≈ 5.3 µM.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "5.3 µM"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key of 5.3 µM is unique and correct. The stimulus is complete, the linear-interpolation assumption is stated, and each distractor encodes a distinct misconception with an accurate rationale. The item fits topic 3.2 and skill 4.B, and its load is suitable for the exam.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must compute the 50% target rate (20.0), identify the bracketing table rows (4 and 8 µM), and perform one linear interpolation (4 + 4 x 2.2/6.8 = about 5.3 µM). It is a single proportional calculation with simple numbers, and the table is easy to read. The distractors target the nearest-value, first-below-threshold, and midpoint errors. The item fits skill 4.B and stays within the allowed difficulty levers, with no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m15-k0",
+  "cellId": "ap_biology-m15",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Parents are obligate carriers; unaffected II-3 has 2/3 chance carrier; II-4 known carrier; 2/3*1/4=1/6",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "1/6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mendelian carrier probability calculation fits 5.3/5.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "1/6 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Table skips II-2 without explanation; a text table in place of a pedigree is a weak stimulus."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Rationales are terse; the 1/4 rationale ('leaves out the 2/3 chance') is awkwardly phrased and the explanations mix the misconception with the arithmetic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 s, calculator not needed but allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key 1/6 is correct, but the distractor rationales are vague and the table omits II-2, so I fail the item on distractors and stimulus."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the family table, infer that I-1 and I-2 are both carriers from an affected child, recognize that unaffected II-3 has a 2/3 chance of being a carrier, and combine this with II-4 being a known carrier (2/3 x 1/4 = 1/6). It requires a conditional probability step and rejects common misconceptions (1/4, 1/3). The calculation is short and clean, with no ambiguity or excess reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m15-k1",
+  "cellId": "ap_biology-m15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Both parents must be carriers because II-1 is affected. II-3 is unaffected, so the chance II-3 is a carrier is 2/3. II-4 is a known carrier. Probability the child is affected = 2/3 × 1/4 = 1/6.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1/6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mendelian carrier probability calculation; fits 5.3 and 5.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "1/6 is the unique correct answer; all facts are given in the table."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and clear; the missing II-2 is harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "1/4 and 1/8 match their misconceptions exactly. The 1/3 rationale is loosely worded (it corresponds to omitting one transmission step) but still plausible and distinct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 seconds, one proportional probability calculation, no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and well-formed pedigree carrier probability item. The one minor weakness is the imprecise rationale for the 1/3 distractor, which does not justify rejection."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table and infer that I-1 and I-2 are carriers because they have an affected child, then recognize that unaffected II-3 has a 2/3 chance of being a carrier, and multiply by 1/4 for the cross with a known carrier (2/3 x 1/4 = 1/6). This is a standard AP-level conditional probability in Mendelian genetics using one multiplication rule. Distractors reflect common errors (omitting the 2/3, using 1/2 incorrectly). The arithmetic and reading are light, and the content is in scope for topic 5.3.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m15-k2",
+  "cellId": "ap_biology-m15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Both parents of II-1 must be carriers. II-3 is unaffected, so II-3 has a 2/3 chance of being a carrier. II-4 is a known carrier. Probability the child is affected = 2/3 × 1/4 = 1/6.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1/6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mendelian carrier probability calculation fits 5.3 and 5.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "1/6 is correct and unique: 2/3 × 1 × 1/4."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and sufficient. II-2 is not listed, which is a harmless numbering quirk."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions. The explanation wording for the correct answer is slightly muddled (the partner's 1/2 and 1/4), but it is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable. The 110 second estimate is acceptable and a calculator is not needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key 1/6 is unique and the distractors are plausible. The only weakness is slightly loose wording in the explanation."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires inferring parental genotypes from an affected child, applying conditional probability (2/3 carrier for unaffected sibling), then multiplying by 1/4 with a known carrier partner. Concept depth is moderate, with a few reasoning steps and a simple table to read. Arithmetic is trivial and wording is clear. This fits a full-mock item, and the difficulty comes from legitimate conceptual sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m16-k0",
+  "cellId": "ap_biology-m16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "SE = 2/sqrt(9) ≈ 0.67, so 2SE ≈ 1.33. The ranges are 10.67–13.33 and 13.67–16.33. They don't overlap, so the difference is likely real.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Uses SD to SE conversion and mean ± 2SE comparison (5.B) in a photosynthesis (light intensity, O2 rate) context; the context is thin but legitimate for a data-skill item."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "SE = 0.67, so the ranges are 10.7-13.3 and 13.7-16.3. They do not overlap, so D is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives mean, SD and n for both groups, so the data are complete. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (comparing means only, reversing the overlap rule, thinking SD cannot be used), and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "One simple calculation with n = 9 fits about 110 seconds and calculator use is allowed. The options are short sentences."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and passes all five criteria. D is the unique key, the stimulus is complete, each distractor has a distinct misconception, and the task load is appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must compute SE = SD/sqrt(n) = 2/3 from a table (clean numbers, n=9), build mean ± 2SE ranges for both groups, and judge non-overlap as evidence of a real difference. Distractors target common misconceptions: any difference in means is meaningful, non-overlap implies chance, and SD cannot be converted to SE. Single formula-sheet calculation, short reading, and a standard AP statistics-interpretation skill, so appropriate for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "ap_biology-m16-k1",
+  "cellId": "ap_biology-m16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "SE = SD/√9: low 0.67, so ±2SE is 10.67–13.33; high 1.0, so ±2SE is 14–18. The ranges don't overlap, so the difference is likely real.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. Converting SD to SE gives non-overlapping ±2SE ranges, so B is the unique key. Distractors encode distinct misconceptions and the table is complete.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must choose SE = SD/√n from the formula sheet, compute SE for two groups with n=9 (clean √9=3), build mean ± 2SE ranges, compare for overlap, and interpret the result while rejecting the misconceptions in the distractors (a larger mean alone proves a difference, non-overlap implies chance, SD cannot be converted to SE). This is typical of AP Practice 5 data-analysis items. Arithmetic is light and the wording is unambiguous. The biology context (photosynthesis rate vs. light) is simple and in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m16-k2",
+  "cellId": "ap_biology-m16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "SE = s/√n gives 0.67 for low light and 1.0 for high light. The ±2SE ranges are 10.67–13.33 and 14–18. They do not overlap, so the difference is likely real.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant demand is skill 5.B (convert SD and n to SE, compare mean ± 2SE ranges). The photosynthesis context (light intensity and O2 production) fits topic 3.4. Slight caveat: the biology is incidental, but data-skill items are allowed."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "SE is 0.67 and 1.00, so the ranges are 10.67-13.33 and 14.0-18.0, which do not overlap. Option C is the unique defensible answer. A is false because SE can be computed from SD and n. B rests on a flawed rationale (a larger mean alone is not enough). D reverses the overlap rule."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives means, SDs and n for both groups. The stem states that the SD is the sample standard deviation and that n is the same in both groups. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception: SD cannot be used, a mean difference alone suffices, or the overlap rule is reversed. The explanation addresses each one. The options are parallel in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator use is minimal (division by 3 and a square root of 9). The reading load is light and the item fits the 60-110 second range. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean: a unique key, a complete table, distinct misconceptions and a light load. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must convert SD to SE using n=9 (SE = SD/√n, giving 0.67 and 1.0), build mean ± 2SE ranges (10.67-13.33 vs 14.0-18.0), and judge that non-overlap means the difference is likely real. Distractors target misconceptions: SD cannot be used, any mean difference is real, and non-overlap implies chance. Numbers are clean (√9 = 3), reading is minimal, and the scope matches skill 5.B in the photosynthesis context.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

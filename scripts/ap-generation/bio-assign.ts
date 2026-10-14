@@ -1,5 +1,5 @@
 // AP Biology 풀 모의고사 세트 정확 배정(무료·읽기 전용·DB 없음). chem-assign.ts 와 같은 방식(정수계획 HiGHS + 배정기와 별개인 독립 검증기)을 Biology 구조에 적용한다.
-//   npx tsx scripts/ap-generation/bio-assign.ts --sets BI1[,BI2] [--time-ms 120000] [--write-report data/ap/stock/exact-assign-bio-cs1-cs2.json] [--files bio-p1a-items,...] [--no-screen] [--prefer-exam-prep] [--block-file <보고서.json[,..]>] [--sequential] [--allow-shared-structure]
+//   npx tsx scripts/ap-generation/bio-assign.ts --sets BI1[,BI2] [--time-ms 120000] [--write-report data/ap/stock/exact-assign-bio-cs1-cs2.json] [--files bio-p1a-items,...] [--no-screen] [--prefer-exam-prep] [--min-exam-prep N] [--block-file <보고서.json[,..]>] [--sequential] [--allow-shared-structure]
 // 조건(공식 구조, docs/ap/bio-facts.md): MC 42 = 단독 + 2문항 세트 1~3개, 단원 비중 15-25/25-35/10-18/30-40 %·Practice 비중 2-10/22-38/37-53/10-15/2-10 %(하한 내림·상한 올림 정수 범위, **둘 다 차단 조건**),
 //   FRQ 4 = Q1 메서드·제어문 / Q2 클래스 설계 / Q3 ArrayList / Q4 2D 배열 각 1, 한 시험 안 문항군(look-alike 포함) 1, **시험 사이 구조(원형) 겹침 0**(기본: 같은 라이브러리 원형은 두 회 합쳐 한 번만 — 같은 코드 모양에 숫자만 바뀐 문항이
 //   두 회에 나오지 않는다; 끄려면 --allow-shared-structure), 시험 사이 같은 문항 0. 재고에 없는 칸은 가상 문항으로 세어 부족분을 (단원 × 스킬) 칸 단위로 정확히 보고한다(가상 단독 = 라이브러리 단독 원형, 가상 세트 = 라이브러리 세트 원형, 가상 FRQ = 시나리오).
@@ -27,7 +27,7 @@ export const LIB_SETS = [...new Set(guideRows.filter((g) => g.id.startsWith("bis
 /** FRQ 시나리오(유형당 4개): 가상 FRQ 는 이 시나리오 중 하나. */
 export const LIB_FRQ = (biologyGuide.frqTemplates ?? []).filter((t) => !EXCLUDED_ARCHETYPES.has(t.id)).map((t) => ({ id: t.id, type: String(t.template), key: t.id }));
 
-export function solveBioSets(ids: string[], items: BioItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; blockedArchetypes?: Set<string>; preferExamPrep?: boolean; cost?: (c: BioItem) => number; disjoint?: boolean }) {
+export function solveBioSets(ids: string[], items: BioItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; blockedArchetypes?: Set<string>; preferExamPrep?: boolean; minExamPrep?: number; cost?: (c: BioItem) => number; disjoint?: boolean }) {
   const blocked = o.blocked ?? new Set<string>(); const blockedArch = o.blockedArchetypes ?? new Set<string>(); const disjoint = o.disjoint ?? true;
   const LS = LIB_SINGLES.filter((e) => !blockedArch.has(e.id)), LT = LIB_SETS.filter((e) => !blockedArch.has(e.id)), LF = LIB_FRQ.filter((e) => !blockedArch.has(e.id));
   const usable = items.filter((c) => !blocked.has(c.key) && !blockedArch.has(c.archetype) && (c.kind === "frq" ? (BIO_FRQ_TYPES as readonly string[]).includes(c.frqType) : c.shared ? c.members.length === BIO_SET_SIZE : c.members.length === 1) && (c.kind === "frq" || c.members.every((m) => PRACTICES.includes(practiceOf(m.skill)) && UNITS.includes(m.unit))));
@@ -58,6 +58,8 @@ export function solveBioSets(ids: string[], items: BioItem[], o: { timeMs: numbe
     // MC 60 = 단독 + 4 x 세트, 세트는 정확히 2개
     cons.push({ coef: [...singleTerms(), ...setTerms().map(([j, v]) => [j, v * BIO_SET_SIZE] as [number, number])], sense: "=", rhs: BIO_MC_COUNT });
     cons.push({ coef: setTerms(), sense: "=", rhs: BIO_SET_COUNT });
+    // 한 회의 exam_prep MC 문항 수 하한(선택): 재고 문항의 난이도 라벨 기준. 가상 문항은 라벨이 없어 세지 않는다.
+    if (o.minExamPrep) cons.push({ coef: [...mcSingles, ...mcSets].filter((c) => (c.exam ?? 0) > 0).map((c) => [x(c, s), c.exam ?? 0] as [number, number]), sense: ">=", rhs: o.minExamPrep });
     for (const u of UNITS) {
       const co: [number, number][] = [...mcSingles.filter((c) => c.members[0].unit === u).map((c) => [x(c, s), 1] as [number, number]),
         ...mcSets.map((c) => [x(c, s), c.members.filter((m) => m.unit === u).length] as [number, number]).filter(([, v]) => v > 0),
@@ -162,11 +164,11 @@ function main() {
   const blocked = new Set<string>(); for (const f of arg("--block-file").split(",").filter(Boolean)) for (const st of (JSON.parse(readFileSync(f, "utf-8")) as { sets: { mcA?: string[]; frqA?: string[] }[] }).sets) for (const k of [...(st.mcA ?? []), ...(st.frqA ?? [])]) blocked.add(k);
   const disjoint = !has("--allow-shared-structure");
   let m: ReturnType<typeof solveBioSets>;
-  if (!has("--sequential")) m = solveBioSets(ids, pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), blocked, disjoint });
+  if (!has("--sequential")) m = solveBioSets(ids, pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), minExamPrep: Number(arg("--min-exam-prep", "0")) || undefined, blocked, disjoint });
   else { // 순차: BI1 을 최적으로 푼 뒤 그 문항·구조를 막고 BI2 를 푼다
     const out: BioResult[] = []; let res = { status: "optimal", obj: 0, nodes: 0, x: [0] } as unknown as ReturnType<typeof solveBioSets>["res"]; const bl = new Set(blocked); const blArch = new Set<string>();
     for (const id of ids) {
-      const one = solveBioSets([id], pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), blocked: bl, blockedArchetypes: blArch, disjoint });
+      const one = solveBioSets([id], pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), minExamPrep: Number(arg("--min-exam-prep", "0")) || undefined, blocked: bl, blockedArchetypes: blArch, disjoint });
       out.push(...one.out); res = { ...one.res, obj: (res.obj ?? 0) + one.res.obj, nodes: (res.nodes ?? 0) + one.res.nodes, status: one.res.status } as typeof res;
       const r0 = one.out[0];
       for (const it of [...r0.singles, ...r0.sets, ...r0.frq]) { bl.add(it.key); if (disjoint) blArch.add(it.archetype); }

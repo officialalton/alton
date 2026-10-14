@@ -2610,6 +2610,651 @@
   ]
  },
  {
+  "id": "bi_x_antibiotic_generations",
+  "topic": "7.8",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "doubling loop until the counts cross vs a base-2 logarithm"
+  ],
+  "misconceptions": [
+   "Treats the ratio of surviving sensitive cells to resistant cells as the number of generations.",
+   "Rounds the number of generations down, so the resistant cells have not yet outnumbered the surviving sensitive cells.",
+   "Ignores the antibiotic and waits for the resistant cells to outnumber the original sensitive population."
+  ]
+ },
+ {
+  "id": "bi_x_blood_type_inference",
+  "topic": "5.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "gamete enumeration for the ABO locus and the Rh locus vs product of two single-gene probabilities"
+  ],
+  "misconceptions": [
+   "Gives the probability for the Rh factor only and leaves out the blood type.",
+   "Gives the probability for the blood type only and leaves out the Rh factor.",
+   "Treats the Rh cross as Dd x dd, which gives one half for each Rh phenotype."
+  ]
+ },
+ {
+  "id": "bi_x_cascade_amplification",
+  "topic": "4.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "step-by-step update of the molecule count vs the product formula"
+  ],
+  "misconceptions": [
+   "Leaves out the number of receptors and counts the cascade for one receptor.",
+   "Leaves out the phosphatase, so no activated molecules are lost at the second step.",
+   "Adds the number of receptors and the numbers of molecules activated at each step instead of multiplying them."
+  ]
+ },
+ {
+  "id": "bi_x_cell_size_limit",
+  "topic": "2.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scan of radii comparing supply and demand vs r = 3j/k"
+  ],
+  "misconceptions": [
+   "Treats the surface-area-to-volume ratio as 2/r, as for a long cylinder, instead of 3/r.",
+   "Divides by three instead of multiplying by three when the surface area and volume are set equal.",
+   "Gives the diameter of the cell instead of the radius."
+  ]
+ },
+ {
+  "id": "bi_x_dna_meiosis_amount",
+  "topic": "5.1",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "count of chromatids per cell after each division vs the doubling-and-halving rule"
+  ],
+  "misconceptions": [
+   "Gives the amount after S phase, before the cell divides.",
+   "Divides the amount per cell after meiosis I by four instead of by two.",
+   "Gives the amount per cell after meiosis I, which forgets the second division."
+  ]
+ },
+ {
+  "id": "bi_x_enzyme_rate_percent",
+  "topic": "3.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "two rates from the table vs the generating percent increase"
+  ],
+  "misconceptions": [
+   "Uses the increase in rate in \u00b5mol per minute as the percent.",
+   "Reports the higher rate as a percent of the lower rate, which leaves out subtracting the original 100 percent.",
+   "Divides the increase in rate by the new rate instead of the original rate."
+  ]
+ },
+ {
+  "id": "bi_x_gel_size_estimate",
+  "topic": "6.8",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "line equation through two standards vs interpolation by fraction of the distance"
+  ],
+  "misconceptions": [
+   "Uses the larger of the two bracketing standards.",
+   "Uses the size of the nearest standard band.",
+   "Uses the midpoint of the two bracketing sizes."
+  ]
+ },
+ {
+  "id": "bi_x_gene_flow_freq",
+  "topic": "7.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "allele counts per generation vs repeated weighted average"
+  ],
+  "misconceptions": [
+   "Gives the average of the island and mainland frequencies.",
+   "Gives the allele frequency after only one generation of gene flow.",
+   "Adds the mainland contribution m x q in each of the two generations to the original frequency without removing the emigrating part."
+  ]
+ },
+ {
+  "id": "bi_x_gpp_respired",
+  "topic": "8.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fraction arithmetic vs percent formula"
+  ],
+  "misconceptions": [
+   "Divides the respiration by the total gross primary productivity of all four ecosystems.",
+   "Gives the percent of the gross primary productivity that remains as net primary productivity.",
+   "Divides the respiration by the net primary productivity instead of by the gross primary productivity."
+  ]
+ },
+ {
+  "id": "bi_x_gross_productivity",
+  "topic": "3.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "hour-by-hour bookkeeping of both bottles vs (net + respiration)/time"
+  ],
+  "misconceptions": [
+   "Reports the oxygen used in respiration per hour, from the dark bottle only.",
+   "Divides the net change in the light bottle by the time and does not add the oxygen used in respiration.",
+   "Subtracts the oxygen used in respiration from the net gain instead of adding it."
+  ]
+ },
+ {
+  "id": "bi_x_hbond_count",
+  "topic": "1.6",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "explicit base list pairing vs closed-form 2(A-T)+3(G-C)"
+  ],
+  "misconceptions": [
+   "Counts only the G-C pairs, three hydrogen bonds each, and leaves out the A-T pairs.",
+   "Counts one hydrogen bond for each base pair.",
+   "Swaps the bond numbers, giving three hydrogen bonds to A-T pairs and two to G-C pairs."
+  ]
+ },
+ {
+  "id": "bi_x_hw_carriers",
+  "topic": "7.5",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "1 - p^2 - q^2 vs 2pq"
+  ],
+  "misconceptions": [
+   "Uses q as the carrier frequency, which leaves out the factor 2p.",
+   "Gives the number of homozygous dominant individuals.",
+   "Gives the number of affected individuals instead of carriers."
+  ]
+ },
+ {
+  "id": "bi_x_hw_selection_next_gen",
+  "topic": "7.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "allele counting among reproducing genotypes vs q/(1+q)"
+  ],
+  "misconceptions": [
+   "Halves the allele frequency because half of the genotypes carry the allele.",
+   "Subtracts the frequency of the removed genotype from the allele frequency without correcting for the smaller number of remaining individuals.",
+   "Reports the frequency of the allele before selection."
+  ]
+ },
+ {
+  "id": "bi_x_invasive_percent_change",
+  "topic": "8.7",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "percent change recomputed from reconstructed counts vs the generating changes"
+  ],
+  "misconceptions": [
+   "Gives the control change as a gain, but the number of native species in the plots where the plant was left decreased.",
+   "Reports the change in the number of species as a percent without dividing by the starting richness.",
+   "Divides each change by the final richness instead of the starting richness."
+  ]
+ },
+ {
+  "id": "bi_x_linkage_class_count",
+  "topic": "5.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "class frequency from the generating haplotypes vs a fraction of gametes"
+  ],
+  "misconceptions": [
+   "Assumes independent assortment, so each of the four classes has one quarter of the offspring.",
+   "Uses the parental class frequency for the recombinant class, or the reverse, which mixes up the linkage phase.",
+   "Gives the number of offspring that are parental types of both kinds together."
+  ]
+ },
+ {
+  "id": "bi_x_logistic_ratio",
+  "topic": "8.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical derivative of the logistic solution vs the formula ratio"
+  ],
+  "misconceptions": [
+   "Compares the two values of (K - N)/K as differences.",
+   "Compares only the population sizes and leaves out the (K - N)/K term.",
+   "Compares only the (K - N) terms and leaves out the population sizes."
+  ]
+ },
+ {
+  "id": "bi_x_mitosis_hours",
+  "topic": "4.5",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "durations for each group vs the combined difference formula"
+  ],
+  "misconceptions": [
+   "Gives the estimated duration of mitosis in the treated group only.",
+   "Gives the estimated duration of mitosis in the control group only.",
+   "Divides the difference in the number of dividing cells by the number in the control group and multiplies by the cycle time."
+  ]
+ },
+ {
+  "id": "bi_x_new_mutations",
+  "topic": "6.7",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "mutations counted per base-pair class vs a chain of fractions"
+  ],
+  "misconceptions": [
+   "Stops after finding the new mutations in the whole genome.",
+   "Counts the haploid genome once and leaves out the second set of chromosomes.",
+   "Stops after finding the new mutations in the coding regions, without taking only those that change an amino acid."
+  ]
+ },
+ {
+  "id": "bi_x_okazaki_primers",
+  "topic": "6.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "primers counted fork by fork vs L/F + 2"
+  ],
+  "misconceptions": [
+   "Counts both new strands of each fork as lagging strands, which doubles the number of Okazaki fragments.",
+   "Counts only the primers for the lagging strands and leaves out the primer for each leading strand.",
+   "Counts the primers for one replication fork only."
+  ]
+ },
+ {
+  "id": "bi_x_pedigree_carrier_prob",
+  "topic": "5.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "share of carriers among unaffected genotypes of two-carrier crosses vs product of 2/3, partner chance and 1/4"
+  ],
+  "misconceptions": [
+   "Uses one half as the chance that the unaffected sibling is a carrier.",
+   "Uses one half as the chance that a carrier passes the recessive allele to a child.",
+   "Assumes that the unaffected sibling is certainly a carrier, which leaves out the 2/3 chance."
+  ]
+ },
+ {
+  "id": "bi_x_plant_osmosis",
+  "topic": "2.7",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "solution \u03a8_S = -iCRT and cell \u03a8 = \u03a8_P + \u03a8_S vs a direct difference calculation"
+  ],
+  "misconceptions": [
+   "Water moves from higher water potential to lower water potential, so the direction of movement is reversed.",
+   "Uses only the solute potential of the cell and leaves out its pressure potential, so the difference in water potential is wrong.",
+   "Uses the temperature in degrees Celsius instead of kelvins when calculating the solute potential of the solution."
+  ]
+ },
+ {
+  "id": "bi_x_respirometer_ratio",
+  "topic": "3.5",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "corrected rates as separate numbers vs the generating multiplier"
+  ],
+  "misconceptions": [
+   "Compares the uncorrected readings of the germinating peas and does not subtract the control.",
+   "Divides the lower-temperature rate by the higher-temperature rate.",
+   "Subtracts the two corrected readings instead of dividing them."
+  ]
+ },
+ {
+  "id": "bi_x_sd_to_se_overlap",
+  "topic": "3.4",
+  "skill": "5.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "difference between means vs the sum of the two 2SE half-widths"
+  ],
+  "misconceptions": [
+   "Ranges that do not overlap support a real difference, so this reverses the rule for comparing ranges.",
+   "A difference between two means is not enough by itself; the \u00b12SE ranges must be compared, and here they do not overlap.",
+   "The standard error is the standard deviation divided by the square root of the number of trials, so the table has enough information."
+  ]
+ },
+ {
+  "id": "bi_x_selection_coefficient",
+  "topic": "7.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "relative fitness through the ratio of survival rates vs 1 - w"
+  ],
+  "misconceptions": [
+   "Reports the fraction of aa individuals that did not survive, which uses survival itself instead of fitness relative to the best genotype.",
+   "Reports the relative fitness of aa instead of the selection coefficient.",
+   "Reports the survival rate of aa."
+  ]
+ },
+ {
+  "id": "bi_x_template_to_peptide",
+  "topic": "6.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "mutated template transcribed again vs direct codon substitution"
+  ],
+  "misconceptions": [
+   "The new mRNA codon GAG codes for Glu, not Gln, so the amino acid changes.",
+   "Reads the template strand directly as the mRNA codon instead of reading its complement.",
+   "Reads the complement of the template in the wrong direction, which reverses the order of the bases in the codon."
+  ]
+ },
+ {
+  "id": "bi_x_transformation_eff",
+  "topic": "6.8",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "total colonies per ng converted to \u00b5g vs a single combined formula"
+  ],
+  "misconceptions": [
+   "Multiplies the colonies on the plate by the micrograms of DNA instead of dividing.",
+   "Divides the colonies on the plate by the micrograms of DNA and does not scale up to the whole culture.",
+   "Scales to the whole culture but divides by the nanograms of DNA, which gives colonies per ng."
+  ]
+ },
+ {
+  "id": "bi_x_trihybrid_prob",
+  "topic": "5.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "gamete-pair enumeration for each gene vs table of phenotype probabilities"
+  ],
+  "misconceptions": [
+   "Uses the probability for one gene only.",
+   "Uses the probability of the recessive phenotype (1/4 for an Aa x Aa gene and 1/2 for an Aa x aa gene) for every gene, whatever phenotype is asked for.",
+   "Counts only the heterozygous offspring, with probability one half, for each Aa x Aa gene with a dominant phenotype, which leaves out the AA offspring."
+  ]
+ },
+ {
+  "id": "bi_x_trophic_chain_energy",
+  "topic": "8.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "forward multiplication of the producer energy vs backward division"
+  ],
+  "misconceptions": [
+   "Uses 10% for every transfer instead of the stated efficiencies.",
+   "Divides by the efficiency of only two of the three transfers.",
+   "Multiplies the energy in the top level by the three efficiencies, which moves the energy the wrong way."
+  ]
+ },
+ {
+  "id": "bi_x_xlinked_two_children",
+  "topic": "5.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "enumeration of gamete pairs vs product of phenotype-by-sex probabilities"
+  ],
+  "misconceptions": [
+   "Gives the probability that a single child is an affected son.",
+   "Considers only whether the second child is affected, which ignores its sex and treats the first child as certain.",
+   "Gives the probability that the first child is a carrier daughter and the second is an affected son."
+  ]
+ },
+ {
+  "id": "bi_y_carrying_capacity_drop",
+  "topic": "8.4",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "short-time change in the closed-form logistic solution vs the logistic equation"
+  ],
+  "misconceptions": [
+   "The growth rate depends on K as well as on N, so reducing K changes the rate even if N does not change.",
+   "The growth rate becomes negative when the population is above the new carrying capacity, so the sign is wrong.",
+   "The logistic equation divides by K, so leaving that out gives a rate that is too large."
+  ]
+ },
+ {
+  "id": "bi_y_enzyme_graph_slopes",
+  "topic": "3.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "least-squares slopes vs the generating rate ratio"
+  ],
+  "misconceptions": [
+   "Subtracts the two rates and adds the result to the enzyme amount in tube 1.",
+   "Compares the amounts of product at 4 minutes instead of the rates, which includes the product already present at time zero.",
+   "Divides the rate of tube 1 by the rate of tube 2."
+  ]
+ },
+ {
+  "id": "bi_y_exponential_predict",
+  "topic": "8.3",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "year-by-year update of births and deaths vs a power of the yearly factor"
+  ],
+  "misconceptions": [
+   "Leaves out the deaths and grows the population only by births.",
+   "Adds the yearly net increase of the starting population three times, which does not let the increase grow with the population.",
+   "Applies the death rate as a gain instead of a loss."
+  ]
+ },
+ {
+  "id": "bi_y_expression_normalized",
+  "topic": "6.6",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "normalized ratios of each sample vs the generating fold change"
+  ],
+  "misconceptions": [
+   "Compares the signals of the gene of interest without dividing by the control gene, which includes the change in the amount of RNA loaded.",
+   "Divides the untreated normalized value by the treated normalized value.",
+   "Subtracts the normalized values instead of dividing them."
+  ]
+ },
+ {
+  "id": "bi_y_hw_equilibrium_claim",
+  "topic": "7.5",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "allele list recount of q and expected 2pqN vs the generating counts"
+  ],
+  "misconceptions": [
+   "Any sample adds up to its sample size; equilibrium depends on whether the genotype counts match the expected frequencies.",
+   "This reverses the comparison: the observed number of heterozygotes is on the other side of the expected number.",
+   "Equilibrium depends on genotype frequencies matching p\u00b2, 2pq, and q\u00b2, not on whether both alleles are common."
+  ]
+ },
+ {
+  "id": "bi_y_incomplete_dom_counts",
+  "topic": "5.4",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "16-square Punnett enumeration vs product of single-gene probabilities"
+  ],
+  "misconceptions": [
+   "Leaves out the height gene and uses only the flower color ratio.",
+   "Treats flower color as completely dominant, so pink flowers are counted together with red flowers.",
+   "Uses one half for each gene."
+  ]
+ },
+ {
+  "id": "bi_y_inhibitor_half",
+  "topic": "3.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "dense interpolation grid search vs linear interpolation between the bracketing points"
+  ],
+  "misconceptions": [
+   "Uses the midpoint of the two concentrations on either side without interpolating.",
+   "Uses the concentration at which the rate is half of the rate with the highest concentration of inhibitor.",
+   "Uses the concentration with the rate closest to half of the rate without the inhibitor, with no interpolation."
+  ]
+ },
+ {
+  "id": "bi_y_light_halved_o2",
+  "topic": "3.4",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "hour-by-hour bookkeeping vs a closed-form net rate"
+  ],
+  "misconceptions": [
+   "Assumes that the light does not change.",
+   "Halves the net rate measured in bright light instead of halving only the gross production.",
+   "Leaves out the oxygen used in respiration and counts only the halved gross production."
+  ]
+ },
+ {
+  "id": "bi_y_logistic_graph_peak",
+  "topic": "8.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "largest one-day increase between plotted points vs r_max K/4"
+  ],
+  "misconceptions": [
+   "Uses the carrying capacity in place of the population size in r_max N (K - N)/K, which gives r_max times K.",
+   "Uses half of the carrying capacity but leaves out the factor (K - N)/K.",
+   "Calculates N(K - N)/K at the midpoint but forgets to multiply by r_max."
+  ]
+ },
+ {
+  "id": "bi_y_null_recombinants",
+  "topic": "5.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "four-class enumeration vs the generating expectation N/2"
+  ],
+  "misconceptions": [
+   "A large deficit of these classes is not what independent assortment predicts, so the data do not support independent assortment.",
+   "The observed number refers to offspring with exactly one dominant allele (Aabb and aaBb), which is a different pair of classes from the one named in this option.",
+   "Each of the four classes has one quarter of the offspring, so the two classes together make up one half, not one quarter."
+  ]
+ },
+ {
+  "id": "bi_y_phylo_distance_tree",
+  "topic": "7.9",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "smallest-distance pair vs the generating tree heights"
+  ],
+  "misconceptions": [
+   "Q and S have the largest difference, so they are the most distantly related pair and not the most closely related pair.",
+   "The table gives the total difference between the two taxa, which is the sum of changes on both lineages; each lineage has half of it.",
+   "The pair with the smallest difference is the most closely related pair, and R and Q differ more than R and P do."
+  ]
+ },
+ {
+  "id": "bi_y_potato_predict",
+  "topic": "2.7",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "least-squares line through all points vs interpolation between the two bracketing points"
+  ],
+  "misconceptions": [
+   "Gives the correct size with the wrong sign.",
+   "Averages the percent changes of the two molarities on either side, which treats M as the midpoint between them.",
+   "Uses the percent change of the nearest molarity in the table."
+  ]
+ },
+ {
+  "id": "bi_y_rates_percent_greatest",
+  "topic": "3.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "rates and percent changes recomputed from the table vs the generating rate sequence"
+  ],
+  "misconceptions": [
+   "This interval has the largest increase in \u00b5mol per minute (4.8), but its percent increase (60%) is not the largest.",
+   "The rate decreased in this interval, so it is a percent decrease of 50% and not an increase.",
+   "The number is the increase in the rate in \u00b5mol per minute and not a percent of the starting rate."
+  ]
+ },
+ {
+  "id": "bi_y_selection_partial",
+  "topic": "7.4",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "allele counting among 10,000 weighted individuals vs q'=(q-sq^2)/(1-sq^2)"
+  ],
+  "misconceptions": [
+   "Multiplies the allele frequency by the fitness of aa, which treats the allele frequency as a genotype frequency.",
+   "Subtracts the loss of a alleles from the aa individuals but does not divide by the mean fitness of the population.",
+   "Reports the frequency of the allele before selection."
+  ]
+ },
+ {
   "id": "bi_yeast_respiration_scenario",
   "topic": "3.5",
   "skill": "1.B",
@@ -2622,6 +3267,171 @@
    "The Calvin cycle occurs in photosynthetic cells and fixes carbon dioxide; it does not make ethanol.",
    "Yeast cells do not photosynthesize, and the flask contains no light-driven reactions.",
    "The flask has no oxygen, so the electron transport chain cannot run."
+  ]
+ },
+ {
+  "id": "bi_z_bag_percent_change",
+  "topic": "2.7",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "final/initial ratios vs the generating percent changes"
+  ],
+  "misconceptions": [
+   "The number is the change in mass in grams, not the percent of the starting mass.",
+   "Bag D lost mass, so its change is a decrease and not an increase.",
+   "Bag B gained the most mass in grams (4.0 g), but its percent increase is not the greatest."
+  ]
+ },
+ {
+  "id": "bi_z_beet_leakage",
+  "topic": "2.4",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "corrected ratios vs the generating leakage fractions"
+  ],
+  "misconceptions": [
+   "The corrected absorbance is not a percent; it must be divided by the corrected absorbance of the boiled sample and multiplied by 100.",
+   "The values are reversed: leakage is lower at the lower temperature.",
+   "This does not subtract the absorbance of the water blank from the readings before comparing them with the boiled sample."
+  ]
+ },
+ {
+  "id": "bi_z_biomagnification",
+  "topic": "8.7",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "trophic level by trophic level update vs a closed-form product"
+  ],
+  "misconceptions": [
+   "This leaves out the concentration of the substance in the producers, which is the concentration in the water multiplied by the factor for the producers.",
+   "This applies the increase from one trophic level to the next only twice; there are three transfers from the producers to the tertiary consumers.",
+   "The substance becomes more concentrated at each trophic level by a factor, so the increases are multiplied and not added."
+  ]
+ },
+ {
+  "id": "bi_z_cell_growth_supply",
+  "topic": "2.2",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct surface-area and volume formulas at both radii vs the ratio 3j/(kr)"
+  ],
+  "misconceptions": [
+   "The surface area of a sphere increases with the square of the radius, so doubling the radius increases the surface area four-fold and not two-fold.",
+   "The volume of a sphere increases with the cube of the radius, so doubling the radius increases the volume eight-fold and not two-fold.",
+   "The surface area to volume ratio decreases as the radius increases, so the fraction of demand that uptake can supply decreases."
+  ]
+ },
+ {
+  "id": "bi_z_cell_volume_osmolarity",
+  "topic": "2.7",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "solute-conservation volume calculation vs ratio of osmolarities"
+  ],
+  "misconceptions": [
+   "The final volume is the ratio of the cell osmolarity to the solution osmolarity, which is a multiple of the original volume and not an increase of that amount.",
+   "A red blood cell bursts when its volume exceeds 1.5 times the original volume; 1.50 is below this value.",
+   "The solution has a lower solute concentration than the cell, so water moves into the cell, and the cell swells."
+  ]
+ },
+ {
+  "id": "bi_z_dna_content_counts",
+  "topic": "4.5",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "percent of each class computed from exact fractions vs the generating percents"
+  ],
+  "misconceptions": [
+   "This reverses the control and treated groups.",
+   "The counts must be divided by the total number of cells before percents are compared, and the percent did not necessarily double.",
+   "The percent of cells in S phase did not change; the largest changes are in the cells with 2C and 4C of DNA."
+  ]
+ },
+ {
+  "id": "bi_z_dna_sample_prediction",
+  "topic": "1.6",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "Chargaff equalities per sample then maximum G+C among double-stranded samples vs the generating GC percents"
+  ],
+  "misconceptions": [
+   "All three DNA samples have equal amounts of A and T and of G and C, so this feature does not distinguish them.",
+   "This sample has uracil and unequal amounts of A and U and of G and C, so it is single-stranded RNA and has no second strand to separate.",
+   "A-T pairs have two hydrogen bonds, fewer than the three of G-C pairs, so a sample rich in A-T pairs separates at a lower temperature."
+  ]
+ },
+ {
+  "id": "bi_z_gene_order",
+  "topic": "5.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "test of each gene as the middle gene (distances add) vs the generating order"
+  ],
+  "misconceptions": [
+   "The distance between the outer genes is the sum of the two shorter distances and not their difference.",
+   "The two genes with the largest recombination frequency (A and B) are the outer genes, so C is in the middle and not A.",
+   "The largest recombination frequency is between A and B, which places them at the two ends and C between them."
+  ]
+ },
+ {
+  "id": "bi_z_p53_predict",
+  "topic": "4.6",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "cell-by-cell count vs the product of fractions"
+  ],
+  "misconceptions": [
+   "Gives the number of damaged cells that would enter S phase in a culture with a functioning checkpoint.",
+   "Uses the percent of damaged cells that are stopped by the mutant checkpoint instead of the percent that continue.",
+   "Leaves out the percent of cells with damaged DNA and applies the checkpoint to all cells in the culture."
+  ]
+ },
+ {
+  "id": "bi_z_pcr_cycles_predict",
+  "topic": "6.8",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "cycle-by-cycle update vs a product of two powers"
+  ],
+  "misconceptions": [
+   "Leaves out the first cycles at full efficiency.",
+   "Doubles the number of copies in every cycle, including the cycles at lower efficiency.",
+   "Multiplies the copies by the efficiency instead of by one plus the efficiency in the last cycles."
+  ]
+ },
+ {
+  "id": "bi_z_stage_time_claim",
+  "topic": "4.5",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions of the cycle time vs the generating counts"
+  ],
+  "misconceptions": [
+   "These times are ten times too large; a stage occupying a small fraction of the cells uses only that fraction of the cell cycle time.",
+   "A larger fraction of cells in a stage means that cells spend more time in that stage, if the total cycle length is unchanged.",
+   "Anaphase is shorter because fewer cells reach it from the blocked metaphase, which does not mean that the cycle is faster; the largest change is the accumulation of cells in metaphase."
   ]
  },
  {
@@ -2949,15 +3759,15 @@
    "(N2 - N1)/(t2 - t1) vs the mean of the yearly increments"
   ],
   "misconceptions": [
-   "Divides the change by the final year instead of the interval length.",
-   "Divides the interval length by the change.",
-   "Reports the change in population without dividing by time."
+   "Reports the change in population without dividing by time.",
+   "Reports the population size at the end of the interval divided by the interval.",
+   "Divides the change by the final year instead of the interval length."
   ]
  },
  {
   "id": "bis_population_set_q3",
   "topic": "8.4",
-  "skill": "2.B",
+  "skill": "4.B",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
@@ -2965,8 +3775,8 @@
   ],
   "misconceptions": [
    "Reads the starting population size.",
-   "Reads the population size in year 4, which is still increasing.",
-   "Reads half of the final value."
+   "Reads half of the final value.",
+   "Reads the population size in the year of fastest growth."
   ]
  },
  {
@@ -2979,9 +3789,9 @@
    "logistic model with a smaller K vs the generating population"
   ],
   "misconceptions": [
-   "A reduction of the food supply does not remove limits on a population.",
+   "The carrying capacity is set by the resources, which have decreased.",
    "A loss of resources lowers, not raises, the carrying capacity.",
-   "The carrying capacity is set by the resources, which have decreased."
+   "A reduction of the food supply does not remove limits on a population."
   ]
  },
  {
@@ -2991,42 +3801,42 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "codon-table loop vs translate()"
+   "codon-table loop on both strings vs translate()"
   ],
   "misconceptions": [
-   "Starts reading one nucleotide after the start codon.",
-   "Includes the stop codon as an amino acid position and keeps reading.",
-   "Lists the amino acids in reverse order."
+   "The mutated codon GUA specifies Val, so no stop codon appears early and both polypeptides have 5 amino acids.",
+   "Only one codon differs and no nucleotide was added or removed, so the reading frame and the later amino acids are unchanged.",
+   "The codons at position 2 differ (GAA and GUA) and specify Glu and Val, so the polypeptides are not identical."
   ]
  },
  {
   "id": "bis_translation_set_q2",
   "topic": "6.7",
-  "skill": "5.D",
+  "skill": "1.B",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "translate both sequences vs the generating substitution"
+   "comparison of the translated polypeptides vs the generating substitution"
   ],
   "misconceptions": [
-   "No codon has changed into a stop codon in this sequence.",
-   "A frameshift would require the insertion or deletion of a nucleotide; mutation 1 replaced a nucleotide.",
-   "The sequence of amino acids is the same as the original."
+   "The mutated codon GUA does not specify a stop, and the mutant polypeptide still has 5 amino acids.",
+   "A silent mutation keeps the same amino acid, but the amino acid at position 2 changed from Glu to Val.",
+   "A frameshift needs an insertion or deletion; here the sequence length is the same and the codons after the change are unchanged."
   ]
  },
  {
   "id": "bis_translation_set_q3",
-  "topic": "6.7",
-  "skill": "5.D",
+  "topic": "6.4",
+  "skill": "2.D",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "length comparison and translation vs the generating deletion"
+   "complement of the mutated codon vs reverse complement written in the opposite direction"
   ],
   "misconceptions": [
-   "The sequence is shorter by one nucleotide, so it cannot be a substitution.",
-   "The deletion shifts the frame; the effect is not limited to a new stop codon.",
-   "A single amino acid replacement does not explain a deletion of one nucleotide."
+   "This is the anticodon for the codon GAA of the original sequence, which specifies Glu, not Val.",
+   "The anticodon pairs antiparallel with the codon, so its bases are not the complement read in the same order written 5' to 3'.",
+   "The anticodon is complementary to the codon, so it cannot have the same sequence as the codon."
   ]
  },
  {
@@ -3036,12 +3846,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "number of changed codons in each mutated sequence vs the generating mutation types"
+   "codon table lookup of each single-nucleotide neighbor vs the generating synonymous codon"
   ],
   "misconceptions": [
-   "A change after the start codon can still change the protein's amino acid sequence.",
-   "The effects differ because a deletion shifts the reading frame.",
-   "A substitution changes at most one codon."
+   "GAU specifies Asp, which is different from Glu, so the amino acid would change.",
+   "GCA specifies Ala, which is different from Glu, so the amino acid would change.",
+   "GGA specifies Gly, which is different from Glu, so the amino acid would change."
   ]
  },
  {
