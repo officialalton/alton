@@ -32,6 +32,14 @@ describe("content hash", () => {
     expect(itemContentHash({ ...p, key_index: 0 })).not.toBe(itemContentHash(p));
     expect(itemContentHash({ ...p, stimulus: "{}" })).not.toBe(itemContentHash(p));
   });
+  it("영어 지문 묶음(stimulus·stem 없음)은 지문·문항 내용이 해시에 들어가고, 다른 과목 해시는 그대로다", () => {
+    const a = { archetype: "el_reading_r01", set_intro: "ALTON original passage\nA\n\nBody one.", items: [{ stem: "q1", options: ["x", "y"], key_index: 0 }] };
+    expect(itemContentHash({ ...a, set_intro: "ALTON original passage\nA\n\nBody two." })).not.toBe(itemContentHash(a));
+    expect(itemContentHash({ ...a, items: [{ stem: "q1", options: ["x", "z"], key_index: 0 }] })).not.toBe(itemContentHash(a));
+    expect(itemContentHash({ ...a, archetype: "el_reading_r02" })).toBe(itemContentHash(a)); // 원형 이름은 해시 대상 아님
+    const other = { archetype: "st_set_x", set_intro: "intro", items: [{ stem: "q" }], stimulus: null };
+    expect(itemContentHash({ ...other, set_intro: "changed", items: [] })).toBe(itemContentHash(other)); // 영어가 아니면 종전처럼 set_intro·items 는 무시
+  });
   it("보고서 행과 DB payload 대조", () => {
     const h = itemContentHash(p);
     expect(checkRenderedMatchesDb({ key: "k", status: "pass", contentHash: h }, p)).toEqual({ ok: true });

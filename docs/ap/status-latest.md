@@ -105,3 +105,7 @@
 - 단독 MC 163 + 세트 8 + FRQ 6유형 29시나리오 원형(코드 우선) → 파일럿 $2.30, s2 $7.47(MC 2 + 세트·FRQ), 부족분 R1–R4 $6.9. 통과 MC·세트 문항 포함 총 9개 배치 `bio-*`.
 - **BI1·BI2 정확 배정: 가상 칸 0**, 각 회 MC 60(단독 52 + 세트 2) + FRQ 6, 두 회 겹침 0, 단원·Practice 범위 충족. 화면 증거 392항목 fail 0. 상세: `docs/ap/biology-groundwork.md` §9–10.
 - 남은 일: 적재(`STOCK_BATCHES` 9배치, 관리자 "전체 적재")·BI 조립 초안 생성(오너 실행). Biology FRQ 는 종이 제출.
+## AP English Language 두 번째 시험 준비 — P0·P1·P2 (2026-10-14)
+- 본문: `docs/ap/englang-groundwork.md` §7(FRQ 스키마 el-frq-1)·§8(구현)·§9(결과). 지출 $22.73(원장 $88.0814 → $110.8147, 영어 상한 $24).
+- 적재할 배치: `el-p1`(MC 묶음 3 + FRQ 3)·`el-p2a`(MC 묶음 14)·`el-p2b`(FRQ 3), 증거 `evidence-el.json`(23 후보, 390x844·1280x800 144건 전부 통과), 렌더 보고서 갱신. EL1 정확 배정 `exact-assign-el-el1.json`(가상 0, 위반 0). **EL2 는 재고 부족**(MC 읽기 ≥16·글쓰기 ≥6문항, ≈ $3.5 필요 — 상한 상향 결정 대기).
+- 변경: `itemContentHash` 가 영어 원형(el_·elfrq_)에는 지문·문항(set_intro·items)을 포함(다른 과목 해시 불변). `apPassageForDisplay` 영어 표지(`ALTON original passage`)가 있으면 stem 인용 오탐 없이 표시·수식 변환 없음. 에세이 입력칸(18줄·단어 수). `local-demo-seed.ts` 연습 세트 분할이 문제 행 수 기준(지문 묶음이 20문항을 넘겨도 전부 포함).

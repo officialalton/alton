@@ -90,6 +90,10 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "bio-r2", title: "AP Biology 부족분 R2 (MC·세트) (통과 17)", itemsFile: "bio-r2-items.json", loadLabel: "bio-r2-2026-10-14", supplement: true, passKeysFile: "bio-r2-pass-keys.json", evidenceFile: "evidence-bio-s2.json" },
   { id: "bio-r3", title: "AP Biology 부족분 R3 (시나리오 원형·세트) (통과 15)", itemsFile: "bio-r3-items.json", loadLabel: "bio-r3-2026-10-14", supplement: true, passKeysFile: "bio-r3-pass-keys.json", evidenceFile: "evidence-bio-s2.json" },
   { id: "bio-r4", title: "AP Biology 부족분 R4 (단원 6 원형·세트) (통과 7)", itemsFile: "bio-r4-items.json", loadLabel: "bio-r4-2026-10-14", supplement: true, passKeysFile: "bio-r4-pass-keys.json", evidenceFile: "evidence-bio-s2.json" },
+  // 2026-10-14 AP English Language(docs/ap/englang-groundwork.md §9): 파일럿(MC 지문 묶음 3 + FRQ 3) + P2 MC 14묶음 + FRQ 3. 한 증거 파일(evidence-el.json)을 공유한다. EL1 정확 배정: data/ap/stock/exact-assign-el-el1.json
+  { id: "el-p1", title: "AP English Language P1 (MC 파일럿 묶음 3 + FRQ 3)", itemsFile: "el-p1-items.json", loadLabel: "el-p1-2026-10-14", supplement: true, passKeysFile: "el-p1-pass-keys.json", evidenceFile: "evidence-el.json" },
+  { id: "el-p2a", title: "AP English Language P2 MC (지문 묶음 14: 읽기 7 + 글쓰기 7)", itemsFile: "el-p2a-items.json", loadLabel: "el-p2a-2026-10-14", supplement: true, passKeysFile: "el-p2a-pass-keys.json", evidenceFile: "evidence-el.json" },
+  { id: "el-p2b", title: "AP English Language P2 FRQ (종합·수사 분석·논증 각 1)", itemsFile: "el-p2b-items.json", loadLabel: "el-p2b-2026-10-14", supplement: true, passKeysFile: "el-p2b-pass-keys.json", evidenceFile: "evidence-el.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 

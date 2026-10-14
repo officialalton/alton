@@ -1,0 +1,232 @@
+{
+ "runs": [
+  "englang-p1-a2",
+  "englang-p1-b2"
+ ],
+ "rows": 7,
+ "passed": 6,
+ "rejected": 1,
+ "mcSets": {
+  "rows": 4,
+  "passed": 3
+ },
+ "frqSets": {
+  "rows": 3,
+  "passed": 3
+ },
+ "mcItems": {
+  "generated": 18,
+  "deterministicPass": 16,
+  "solvers3of3": 16,
+  "finalPass": 13,
+  "firstPassRate": 0.722
+ },
+ "failureReasons": {
+  "deterministic": 4,
+  "adversary_missing": 2,
+  "judge_missing": 2,
+  "solver_reports_second_defensible_option": 1
+ },
+ "keyConfidence": {
+  "items": 13,
+  "high": 2,
+  "medium": 11,
+  "mean": 0.877
+ },
+ "categoriesPassed": {
+  "RS-R": 1,
+  "CE-R": 1,
+  "RO-R": 2,
+  "S-R": 1,
+  "RS-W": 1,
+  "CE-W": 2,
+  "RO-W": 2,
+  "S-W": 3
+ },
+ "skillsPassed": {
+  "1.B": 1,
+  "3.A": 1,
+  "5.A": 1,
+  "5.B": 1,
+  "7.A": 1,
+  "2.A": 1,
+  "4.B": 1,
+  "6.B": 1,
+  "8.A": 2,
+  "4.A": 1,
+  "6.C": 1,
+  "8.C": 1
+ },
+ "renderTypesPassed": {
+  "none": 5,
+  "ap_stat_chart:bar": 1
+ },
+ "frqAudit": [
+  {
+   "id": "fa1",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 0
+    },
+    {
+     "k": 1,
+     "total": 6,
+     "spread": 0
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fa1",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 5,
+     "spread": 1
+    },
+    {
+     "k": 1,
+     "total": 6,
+     "spread": 0
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fa1",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 1
+    },
+    {
+     "k": 1,
+     "total": 1,
+     "spread": 1
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fa2",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 0
+    },
+    {
+     "k": 1,
+     "total": 6,
+     "spread": 0
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fa2",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 4,
+     "spread": 0
+    },
+    {
+     "k": 1,
+     "total": 4,
+     "spread": 0
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fa2",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 1
+    },
+    {
+     "k": 1,
+     "total": 2,
+     "spread": 0
+    }
+   ],
+   "chosen": 1
+  },
+  {
+   "id": "fa3",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 0
+    },
+    {
+     "k": 1,
+     "total": 6,
+     "spread": 0
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fa3",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 2
+    },
+    {
+     "k": 1,
+     "total": 4,
+     "spread": 0
+    }
+   ],
+   "chosen": 1
+  },
+  {
+   "id": "fa3",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0
+    },
+    {
+     "k": 1,
+     "total": 1,
+     "spread": 0
+    }
+   ],
+   "chosen": 0
+  }
+ ],
+ "costUsd": {
+  "englang-p1-a2": {
+   "adv": 0.1945,
+   "judge": 0.051,
+   "review": 0.0213,
+   "solve-retry": 0,
+   "solve": 0.3033
+  },
+  "englang-p1-b2": {
+   "frq-grade": 2.3794,
+   "frq-samples": 0.8639
+  }
+ }
+}
