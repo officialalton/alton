@@ -1,5 +1,5 @@
 {
- "spent": 195.82719999999998,
+ "spent": 197.6248,
  "entries": [
   {
    "at": "2026-10-08T09:13:14.616Z",
@@ -974,7 +974,7 @@
   {
    "at": "2026-10-09T03:26:06.749447+00:00",
    "usd": 0,
-   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) \u2014 invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
+   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) — invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
    "excludedRun": "v8-bio-r"
   },
   {
@@ -3211,6 +3211,31 @@
    "at": "2026-10-14T17:30:00.000Z",
    "usd": 0.4443,
    "note": "essay-calibration round 2 (16 calls: diagnosis, rubric v2 re-run, injection)"
+  },
+  {
+   "at": "2026-10-14T21:50:49.355Z",
+   "usd": 0.2996344,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-14T21:51:36.486Z",
+   "usd": 0.8138873999999999,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-14T21:51:51.167Z",
+   "usd": 0.203039,
+   "note": "review2 sync"
+  },
+  {
+   "at": "2026-10-14T21:51:59.273Z",
+   "usd": 0.10349,
+   "note": "review4 sync"
+  },
+  {
+   "at": "2026-10-14T21:52:28.191Z",
+   "usd": 0.3775820000000001,
+   "note": "difficulty sync"
   }
  ]
 }

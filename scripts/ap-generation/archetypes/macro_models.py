@@ -105,8 +105,6 @@ LF_EVENTS = [
     ("Households decrease their saving at every real interest rate.", -1, 0, "Lower saving decreases the supply of loanable funds."),
     ("Firms become more optimistic about the profitability of new capital and plan more investment.", 0, 1, "Higher expected returns on investment increase the demand for loanable funds."),
     ("Firms become pessimistic about the profitability of new capital and plan less investment.", 0, -1, "Lower expected returns on investment decrease the demand for loanable funds."),
-    ("The government begins running larger budget deficits financed by borrowing from private savers.", 0, 1, "Government borrowing adds to the demand for loanable funds."),
-    ("The government moves from a budget deficit to a budget surplus and retires some of its debt.", 0, -1, "A smaller government demand for borrowing decreases the demand for loanable funds."),
     ("Foreign savers increase their lending in the country's financial markets.", 1, 0, "Greater capital inflows increase the supply of loanable funds."),
     ("The government introduces a tax credit that rewards firms for purchasing new equipment.", 0, 1, "A higher after-tax return on investment increases the demand for loanable funds."),
 ]

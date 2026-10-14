@@ -96,7 +96,7 @@ def ma_ppc_graph_points(rng):
     return mk("ma_ppc_graph_points", "1.2", "1.B", stem, k, ds, rng, concept="points on, inside, and outside a PPC", path="curve equation x^2/a^2+y^2/b^2=1 inequality test vs marker-to-curve vertical distance", stim=stim, facts=[f"pos={pos}", f"top={top}", f"right={right}"], est=60)
 
 
-PPC_EVENTS = [("A technological advance doubles the output of capital goods that can be made with any given resources, but does not affect consumer goods.", "pivots outward along the capital goods axis only"),
+PPC_EVENTS = [("A technological advance doubles the output of capital goods that can be made with any given resources, but does not affect consumer goods.", "shifts outward at the capital goods intercept only"),
               ("A natural disaster destroys half of the economy's factories and machines.", "shifts inward on both axes"),
               ("A large increase in the number of workers moves into the economy.", "shifts outward on both axes"),
               ("An economy that has been using some resources inefficiently begins to use all of them efficiently.", "moves from a point inside the curve to a point on the curve")]
@@ -105,7 +105,7 @@ PPC_EVENTS = [("A technological advance doubles the output of capital goods that
 def ma_ppc_shift(rng):
     ev, ans = _v(rng, PPC_EVENTS)
     others = [e[1] for e in PPC_EVENTS if e[1] != ans] + ["shifts outward on the consumer goods axis only"]
-    wh = {"pivots outward along the capital goods axis only": "Assumes a technology that helps one good moves the other axis intercept as well.", "shifts inward on both axes": "Assumes any change to a single input removes capacity for both goods in this way.",
+    wh = {"shifts outward at the capital goods intercept only": "Assumes a technology that helps one good moves the other axis intercept as well.", "shifts inward on both axes": "Assumes any change to a single input removes capacity for both goods in this way.",
           "shifts outward on both axes": "Assumes any change makes the curve grow in both directions.", "moves from a point inside the curve to a point on the curve": "Confuses a movement to the curve with a shift of the curve itself.",
           "shifts outward on the consumer goods axis only": "Reverses which good the technology affects."}
     subj = lambda a: "The economy" if "moves" in a else "The PPC"  # noqa: E731

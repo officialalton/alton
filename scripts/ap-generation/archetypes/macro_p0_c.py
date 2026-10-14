@@ -266,8 +266,9 @@ def ma_adas_shock(rng):
         shift_txt = "short-run aggregate supply shifts " + ("right" if up else "left")
     d = adas_dirs(ds_, ss_)
     vs = _adas_vars(rng)
+    other_c = "SRAS" if kind == "ad" else "AD"
     mm = {
-        "P": f"{cap1(shift_txt)}, so the economy moves along the other curve and the price level {'rises' if d['P'] == 1 else 'falls'}.",
+        "P": f"{cap1(shift_txt)}, so the economy moves along {other_c} and the price level {'rises' if d['P'] == 1 else 'falls'}.",
         "Y": f"{cap1(shift_txt)}, so equilibrium real GDP {'rises' if d['Y'] == 1 else 'falls'}.",
         "U": f"Cyclical unemployment moves opposite to real GDP, so it {'rises' if d['U'] == 1 else 'falls'} when real GDP {'falls' if d['U'] == 1 else 'rises'}.",
     }
@@ -398,7 +399,7 @@ def ma_fiscal_policy_gap(rng):
     stem = f"An economy is experiencing {txt}. Which of the following fiscal policy actions would be most appropriate to move the economy toward full employment?"
     pool = [t for t in (FISCAL_CON if rec else FISCAL_EXP)]
     wr = [(p[0], f"{'Contractionary' if rec else 'Expansionary'} fiscal policy through {p[1]} shifts AD {'left' if rec else 'right'}, which would widen the gap instead of closing it.") for p in pool]
-    wr.append(("Keeping the government's budget unchanged, since the economy will self-correct at once.", "Ignores that fiscal policy is used to speed the return to full employment instead of waiting for slow wage adjustment."))
+    wr.append((f"The government makes no change to taxes or spending and waits for wages to adjust.", f"Waiting for wage adjustment is slow and is not an action; fiscal policy is used to {'close' if rec else 'remove'} the gap sooner."))
     k, ds = sent_opts(key_t, f"{'Expansionary' if rec else 'Contractionary'} fiscal policy shifts AD {'right' if rec else 'left'} and moves output toward potential.", wr)
     return mk("ma_fiscal_policy_gap", "3.8", "2.A", stem, k, ds, rng, concept="choose expansionary or contractionary fiscal policy for a gap", path="fixed vetted policy table keyed to the gap sign", facts=[f"gap={gap}", f"key={key_t[:30]}"], est=60)
 

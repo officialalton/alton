@@ -63,7 +63,7 @@ def ma_phillips_graph(rng):
     srpc = [(u, round(a - float(b) * u, 3)) for u in [0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9] if a - float(b) * u > 0.4]
     ymax = a + 1
     stim = econ_graph("Short-run Phillips curve (SRPC) and long-run Phillips curve (LRPC): inflation rate against unemployment rate.", [("SRPC", srpc), ("LRPC", [(un, 0), (un, ymax)])], 10, ymax, 1, 1, xlabel="Unemployment rate (percent)", ylabel="Inflation rate (percent)")
-    ask = rng.choice(["u_at", "pi_at"])
+    ask = rng.choice(["u_at", "delta"])
     f = lambda v: f"{nm(v, 1)}%"  # noqa: E731
     if ask == "u_at":
         stem = f"The graph shows the short-run Phillips curve (SRPC) and the long-run Phillips curve (LRPC) for an economy. The curves are labeled SRPC and LRPC. If the inflation rate is currently {infl_target} percent on the SRPC, what is the current unemployment rate?"
@@ -72,11 +72,14 @@ def ma_phillips_graph(rng):
         k, ds = val_opts(key, [("Reports the inflation rate as the unemployment rate.", infl_target), ("Reports the natural rate of unemployment from the LRPC.", un), ("Reads the unemployment rate at the vertical intercept of the SRPC.", 0.5), ("Reads the unemployment rate where the SRPC would reach zero inflation.", a / float(b)), ("Adds the inflation rate and the natural rate.", infl_target + un)], f)
         kw = f"On the SRPC, an inflation rate of {infl_target} percent corresponds to an unemployment rate of {k_} percent."
     else:
-        stem = f"The graph shows the short-run Phillips curve (SRPC) and the long-run Phillips curve (LRPC) for an economy. The curves are labeled SRPC and LRPC. If the unemployment rate is {k_} percent on the SRPC, what is the inflation rate?"
-        key = float(infl_target)
-        k, ds = val_opts(key, [("Reports the unemployment rate as the inflation rate.", k_), ("Reports the natural rate of unemployment.", un), ("Reads the inflation rate at the horizontal axis.", 0.0), ("Reads the inflation rate at the top of the vertical axis.", ymax), ("Adds the unemployment rate and the natural rate.", k_ + un)], f)
-        kw = f"On the SRPC, an unemployment rate of {k_} percent corresponds to an inflation rate of {infl_target} percent."
-    return mk("ma_phillips_graph", "5.2", "2.C", stem, k, ds, rng, concept="read inflation and unemployment on the short-run Phillips curve", path="line equation pi = a - b*u evaluated exactly vs the plotted vertices", stim=stim, kwhy=kw, facts=[f"a={a}", f"b={float(b)}", f"un={un}", f"u={k_}", f"pi={infl_target}", f"ask={ask}"], est=60)
+        dd_ = rng.choice([1, 2]); u2 = k_ + dd_
+        if u2 > 9 or a - float(b) * u2 <= 0.4:
+            raise ValueError("range")
+        key = -float(b) * dd_
+        stem = f"The graph shows the short-run Phillips curve (SRPC) and the long-run Phillips curve (LRPC) for an economy. The curves are labeled SRPC and LRPC. Along the SRPC, the unemployment rate rises from {k_} percent to {u2} percent. What is the change in the inflation rate, in percentage points?"
+        k, ds = val_opts(key, [("Gets the sign wrong: along the SRPC higher unemployment goes with lower inflation.", -key), ("Reports the change in the unemployment rate as the change in inflation.", dd_), ("Reports the inflation rate at the new unemployment rate.", a - float(b) * u2), ("Reports the change in the natural rate, which is zero.", 0), ("Reports the inflation rate at the starting unemployment rate.", float(infl_target))], lambda v: f"{nm(v, 1)} points")
+        kw = f"The SRPC falls {nm(float(b), 1)} points of inflation for each point of unemployment, so a {dd_}-point rise changes inflation by {nm(key, 1)} points."
+    return mk("ma_phillips_graph", "5.2", "2.C", stem, k, ds, rng, concept="read inflation and unemployment on the short-run Phillips curve", path="line equation pi = a - b*u evaluated exactly vs the plotted vertices", stim=stim, kwhy=kw, facts=[f"a={a}", f"b={float(b)}", f"un={un}", f"u={k_}", f"pi={infl_target}", f"ask={ask}", f"key={key:.4f}"], est=60)
 
 
 def ma_phillips_move(rng):
@@ -166,7 +169,7 @@ def ma_quantity_theory(rng):
             raise ValueError("not_enough_separated_distractors")
         stem = f"In an economy, the money supply is ${M:,} billion, the velocity of money is {V}, and real output is {Q:,} billion units. According to the quantity equation (MV = PQ), what is the price level, in dollars per unit?"
         f = lambda v: usd(v)  # noqa: E731
-        k, ds = val_opts(float(P), [("Divides real output by the product of money and velocity.", Q / (M * V)), ("Multiplies money, velocity, and output.", float(M * V * Q) / 1000), ("Divides the money supply by real output and ignores velocity.", M / Q), ("Divides money by velocity before dividing by output.", M / V / Q), ("Adds money and velocity and divides by output.", (M + V) / Q)], f)
+        k, ds = val_opts(float(P), [("Divides real output by the product of money and velocity.", Q / (M * V)), ("Multiplies money by velocity and ignores output.", M * V), ("Divides the money supply by real output and ignores velocity.", M / Q), ("Divides money by velocity before dividing by output.", M / V / Q), ("Adds money and velocity and divides by output.", (M + V) / Q)], f)
         kw = f"P = MV/Q = {M} x {V}/{Q} = {nm(float(P), 2)}."
         agree(float(P), float(sp.Rational(M * V, Q)), 1e-9, "P")
         facts = [f"kind=P", f"M={M}", f"V={V}", f"Q={Q}", f"P={float(P):.4f}"]
@@ -263,7 +266,7 @@ def ma_debt_gdp(rng):
 # ======================= 5.5 구축효과 =======================
 def ma_crowding_out(rng):
     up = rng.choice([True, False])
-    ev = "The government increases its budget deficit and finances it by borrowing from private savers." if up else "The government reduces its budget deficit, so it borrows less from private savers."
+    ev = "The government increases its budget deficit and finances it by borrowing from private savers, which increases the demand for loanable funds." if up else "The government reduces its budget deficit, so it borrows less from private savers and the demand for loanable funds decreases."
     d = lf_dirs(0, 1 if up else -1)
     r = d["r"]
     inv = -1 if up else 1  # 민간 투자

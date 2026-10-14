@@ -62,7 +62,7 @@ def ma_real_rate(rng):
     if ask == "real":
         stem = f"A bank offers a loan with a nominal interest rate of {nom} percent. Borrowers and lenders expect an inflation rate of {infl} percent over the life of the loan. What is the expected real interest rate?"
         key = real
-        k, ds = val_opts(key, [("Adds expected inflation to the nominal rate.", nom + infl), ("Reports the nominal rate as the real rate.", nom), ("Reports the expected inflation rate.", infl), ("Reverses the subtraction, producing the negative of the real rate.", -real), ("Multiplies the nominal rate by expected inflation.", nom * infl / 10)], f)
+        k, ds = val_opts(key, [("Adds expected inflation to the nominal rate.", nom + infl), ("Reports the nominal rate as the real rate.", nom), ("Reports the expected inflation rate.", infl), ("Reverses the subtraction, producing the negative of the real rate.", -real), ("Divides the nominal rate by expected inflation.", nom / infl)], f)
         kw = f"Real interest rate = nominal rate - expected inflation = {nom} - {infl} = {real} percent."
     elif ask == "nominal":
         stem = f"Borrowers and lenders agree that the real interest rate on a loan should be {real} percent, and they expect inflation of {infl} percent. What nominal interest rate should the loan carry?"
@@ -346,7 +346,7 @@ def ma_lf_graph(rng):
     stim = econ_graph("Loanable funds market: the equilibrium moves from E1 to E2 after one curve shifts.", cur, 100, yhi, 10, 20, points=[("E1", m.Q0, m.P0), ("E2", float(q1), float(p1))], xlabel="Quantity of loanable funds (billions of dollars)", ylabel="Real interest rate (percent)")
     which = "demand" if dem else "supply"
     sgn = (dem or sup)
-    cause = {("supply", 1): ("Households increase their saving at every real interest rate.", "S+"), ("supply", -1): ("Households decrease their saving at every real interest rate.", "S-"), ("demand", 1): ("The government begins running larger budget deficits financed by borrowing.", "D+"), ("demand", -1): ("Firms become pessimistic about the profitability of new capital.", "D-")}
+    cause = {("supply", 1): ("Households increase their saving at every real interest rate.", "S+"), ("supply", -1): ("Households decrease their saving at every real interest rate.", "S-"), ("demand", 1): ("Firms become more optimistic about the profitability of new capital.", "D+"), ("demand", -1): ("Firms become pessimistic about the profitability of new capital.", "D-")}
     kt, tag = cause[(which, sgn)]
     wl = []
     for c, (t, tg) in cause.items():

@@ -758,7 +758,7 @@
   ],
   "misconceptions": [
    "Expansionary fiscal policy through government purchases shifts AD right, which would widen the gap instead of closing it.",
-   "Ignores that fiscal policy is used to speed the return to full employment instead of waiting for slow wage adjustment.",
+   "Waiting for wage adjustment is slow and is not an action; fiscal policy is used to remove the gap sooner.",
    "Expansionary fiscal policy through transfers shifts AD right, which would widen the gap instead of closing it.",
    "Expansionary fiscal policy through taxes shifts AD right, which would widen the gap instead of closing it."
   ],
@@ -788,7 +788,7 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "direction rule table vs numeric simulation of a linear currency market; net exports opposite to currency value"
+   "direction rule table vs numeric simulation of a linear currency market; for interest-rate events net exports move opposite to currency value"
   ],
   "misconceptions": [
    "Says net exports would not change, but it would increase. When the currency depreciates, the country's goods become less expensive to foreigners and imports become more expensive, so net exports rise.",
@@ -1114,10 +1114,10 @@
    "direction rule table vs numeric simulation of a linear loanable funds market"
   ],
   "misconceptions": [
-   "Says the quantity of loanable funds would not change, but it would increase. Greater capital inflows increase the supply of loanable funds. The quantity of loanable funds exchanged rises.",
-   "Says the quantity of loanable funds would decrease, but it would increase. Greater capital inflows increase the supply of loanable funds. The quantity of loanable funds exchanged rises.",
-   "Says the real interest rate would increase, but it would decrease. Greater capital inflows increase the supply of loanable funds. The real interest rate falls.",
-   "Says the real interest rate would not change, but it would decrease. Greater capital inflows increase the supply of loanable funds. The real interest rate falls."
+   "Says the quantity of loanable funds would not change, but it would decrease. Lower expected returns on investment decrease the demand for loanable funds. The quantity of loanable funds exchanged falls.",
+   "Says the quantity of loanable funds would increase, but it would decrease. Lower expected returns on investment decrease the demand for loanable funds. The quantity of loanable funds exchanged falls.",
+   "Says the real interest rate would increase, but it would decrease. Lower expected returns on investment decrease the demand for loanable funds. The real interest rate falls.",
+   "Says the real interest rate would not change, but it would decrease. Lower expected returns on investment decrease the demand for loanable funds. The real interest rate falls."
   ],
   "bc": false
  },
@@ -1933,7 +1933,7 @@
    "Reverses the subtraction, producing the negative of the real rate.",
    "Adds expected inflation to the nominal rate.",
    "Reports the nominal rate as the real rate.",
-   "Multiplies the nominal rate by expected inflation."
+   "Divides the nominal rate by expected inflation."
   ],
   "bc": false
  },

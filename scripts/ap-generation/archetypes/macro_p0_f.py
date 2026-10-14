@@ -72,7 +72,19 @@ def ma_exchange_calc(rng):
     cur = {Fr(1, 10): ("pounds", "dollars"), Fr(1, 2): ("euros", "dollars"), Fr(2): ("francs", "dollars"), Fr(4): ("pesos", "dollars"), Fr(5): ("yuan", "dollars"), Fr(10): ("pesos", "dollars"), Fr(100): ("yen", "dollars")}[rate]
     foreign = cur[0]
     price = rng.choice([20, 40, 50, 100, 200])
-    ask = rng.choice(["dollars_to_foreign", "foreign_price_in_dollars"])
+    ask = rng.choice(["dollars_to_foreign", "foreign_price_in_dollars", "round_trip"])
+    if ask == "round_trip":
+        amt = rng.choice([100, 200, 500]); r2 = rate * rng.choice([Fr(5, 4), Fr(4, 5), Fr(2), Fr(1, 2)])
+        back = amt * rate / r2
+        if back == amt:
+            raise ValueError("not_enough_separated_distractors")
+        key = float(back)
+        stem = f"A traveler exchanges ${amt} for {foreign} at {nm(float(rate), 2)} {foreign} per dollar and keeps all of the {foreign}. Later the exchange rate is {nm(float(r2), 2)} {foreign} per dollar, and the traveler exchanges all of the {foreign} back into dollars. How many dollars does the traveler receive?"
+        k, ds = val_opts(key, [("Ignores the change in the exchange rate and returns the original amount.", amt), ("Multiplies by the new rate instead of dividing.", float(amt * rate * r2)), ("Divides by the original rate instead of the new rate.", float(amt * r2 / rate)), ("Reports the amount of foreign currency received at the start.", float(amt * rate)), ("Subtracts the two rates from the original amount.", amt - float(r2 - rate))], lambda v: usd(v))
+        kw = f"{amt} dollars buy {nm(float(amt * rate), 2)} {foreign}, which convert back at {nm(float(r2), 2)} per dollar to {usd(key)}."
+        agree(key, float(sp.Integer(amt) * sp.Rational(rate.numerator, rate.denominator) / sp.Rational(r2.numerator, r2.denominator)), 1e-9, "rt")
+        facts = [f"rate={float(rate):.4f}", f"amt={amt}", "ask=rt", f"key={key:.4f}"]
+        return mk("ma_exchange_calc", "6.2", "3.C", stem, k, ds, rng, concept="convert between currencies using the exchange rate", path="exact fraction vs sympy rational", kwhy=kw, facts=facts, est=75)
     if ask == "dollars_to_foreign":
         amt = rng.choice([10, 20, 50, 100])
         key = float(amt * rate)
@@ -142,12 +154,20 @@ def ma_fx_events(rng):
     ev, dd, sd, mech = _v(rng, FX_EVENTS)
     d = fx_dirs(dd, sd)
     er = d["ER"]
-    nx = -er  # 통화 가치가 오르면 순수출 감소
-    truth = {"ER": er, "NX": nx}
-    mm = {"ER": f"{mech} The currency {'appreciates' if er == 1 else 'depreciates'}.", "NX": f"When the currency {'appreciates' if er == 1 else 'depreciates'}, the country's goods become {'more' if er == 1 else 'less'} expensive to foreigners and imports become {'cheaper' if er == 1 else 'more expensive'}, so net exports {'fall' if nx == -1 else 'rise'}."}
-    key, ds = combo_item(rng, ["ER", "NX"], truth, mm, dirs=(1, -1, 0))
-    stem = f"Consider the following event in a country with a floating exchange rate: {ev} What is the most likely effect on the value of the country's currency and on its net exports?"
-    return mk("ma_fx_events", "6.4", "3.A", stem, key, ds, rng, concept="determinants of currency demand and supply: effect on the exchange rate and net exports", path="direction rule table vs numeric simulation of a linear currency market; net exports opposite to currency value", facts=[f"ev={ev[:30]}", f"dd={dd}", f"sd={sd}", f"truth={truth}"], est=70)
+    financial = "interest rates" in ev
+    if financial:
+        nx = -er  # 금융 사건: 통화 가치 변화가 순수출을 반대로 움직인다
+        truth = {"ER": er, "NX": nx}
+        mm = {"ER": f"{mech} The currency {'appreciates' if er == 1 else 'depreciates'}.", "NX": f"When the currency {'appreciates' if er == 1 else 'depreciates'}, the country's goods become {'more' if er == 1 else 'less'} expensive to foreigners and imports become {'cheaper' if er == 1 else 'more expensive'}, so net exports {'fall' if nx == -1 else 'rise'}."}
+        vs = ["ER", "NX"]
+        stem = f"Consider the following event in a country with a floating exchange rate: {ev} What is the most likely effect on the value of the country's currency and on its net exports?"
+    else:
+        truth = {"ER": er, "QC": d["QC"]}
+        mm = {"ER": f"{mech} The currency {'appreciates' if er == 1 else 'depreciates'}.", "QC": f"The shift of a curve in the currency market changes the quantity of the currency traded: it {'rises' if d['QC'] == 1 else 'falls'}."}
+        vs = ["ER", "QC"]
+        stem = f"Consider the following event in a country with a floating exchange rate: {ev} What is the most likely effect on the value of the country's currency and on the quantity of the currency traded?"
+    key, ds = combo_item(rng, vs, truth, mm, dirs=(1, -1, 0))
+    return mk("ma_fx_events", "6.4", "3.A", stem, key, ds, rng, concept="determinants of currency demand and supply: effect on the exchange rate", path="direction rule table vs numeric simulation of a linear currency market; for interest-rate events net exports move opposite to currency value", facts=[f"ev={ev[:30]}", f"dd={dd}", f"sd={sd}", f"truth={truth}"], est=70)
 
 
 FXD = [
