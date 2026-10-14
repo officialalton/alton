@@ -123,7 +123,7 @@ export const isApRow = (r: MockExamListRow) => r.examProgram === "ap";
 /** 완료 카드의 점수 문구(앞의 " · " 포함) — 없으면 빈 문자열.
  * AP 는 FRQ 가 자동 채점되지 않으므로 객관식 문항만 센다(결과 화면 "n / m multiple-choice correct"와 같은 기준).
  * FRQ 만의 세트는 점수 대신 "Free-response practice". SAT 는 기존대로 "n/total correct". */
-export function completedScoreText(a: Pick<MockExamAttemptSummary, "status" | "correctCount" | "totalCount" | "examProgram" | "apSubject" | "apLabel">): string {
+export function completedScoreText(a: Pick<MockExamAttemptSummary, "status" | "correctCount" | "totalCount" | "scoreRange" | "examProgram" | "apSubject" | "apLabel">): string {
   if (a.status !== "graded") return "";
   if (a.examProgram === "ap") {
     if (a.apLabel === "frq_practice") return " · Free-response practice";
@@ -132,5 +132,7 @@ export function completedScoreText(a: Pick<MockExamAttemptSummary, "status" | "c
     const mcTotal = Math.max(0, a.totalCount - frq);
     return mcTotal > 0 ? ` · ${a.correctCount}/${mcTotal} multiple-choice correct` : "";
   }
-  return a.correctCount !== null ? ` · ${a.correctCount}/${a.totalCount} correct` : "";
+  if (a.correctCount === null) return "";
+  const range = a.scoreRange?.estimate?.total;
+  return range ? ` · ${range.low}–${range.high} (est.) · ${a.correctCount}/${a.totalCount} correct` : ` · ${a.correctCount}/${a.totalCount} correct`;
 }

@@ -5,6 +5,7 @@ import PageFrame from "@/app/components/PageFrame";
 import type { MockExamOverview } from "@/lib/mock-exam/attempt-data";
 import type { BreakdownRow } from "@/lib/mock-exam/report";
 import { buildMockExamListRows, completedScoreText, pickNextPracticeTest } from "@/lib/mock-exam/open-list";
+import { INSUFFICIENT_RESPONSES_TEXT } from "@/lib/mock-exam/score-estimate";
 import { ctaLabelFor, type InterestStatus } from "./tutoring-state";
 
 // 2026-10-05 무료 회원 S2 — 무료 학습 회원 홈(브리프 §3.6): 다음 모의고사, 최근 결과 점수, 약점 상위 3,
@@ -32,6 +33,7 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
   const nextExam = nextRow ? { name: nextRow.name, format: catalog.find((c) => c.examSetId === nextRow.examSetId)?.format ?? "fixed" } : null;
   const inProgress = nextRow?.state === "in_progress";
   const latestGraded = attempts.find((a) => a.status === "graded" && a.correctCount !== null) ?? null;
+  const est = latestGraded?.scoreRange?.estimate ?? null;
 
   return (
     <PageFrame title="Home">
@@ -67,9 +69,26 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
           <h3 className="text-[13px] font-bold text-navy mb-2">Latest Result</h3>
           {latestGraded ? (
             <>
-              <p className="text-[15px] font-extrabold text-ink">
-                {completedScoreText(latestGraded).replace(/^ · /, "")}
-              </p>
+              {est ? (
+                <div data-testid="free-home-score-range">
+                  <p className="text-[18px] font-extrabold text-ink">{est.total.low}–{est.total.high} <span className="text-[12px] font-bold text-grey-500">Total (est.)</span></p>
+                  <p className="text-[12px] text-grey-600 mt-0.5">R&W {est.rw.low}–{est.rw.high} · Math {est.math.low}–{est.math.high}</p>
+                  <p className="text-[11px] font-semibold text-grey-500 mt-1">Internal estimate — accuracy not verified</p>
+                  <p className="text-[12px] text-grey-500 mt-1">{latestGraded.correctCount}/{latestGraded.totalCount} correct</p>
+                </div>
+              ) : latestGraded.scoreRange?.insufficient ? (
+                <div data-testid="free-home-score-insufficient">
+                  <p className="text-[13px] font-semibold text-grey-600">{INSUFFICIENT_RESPONSES_TEXT}</p>
+                  {(["rw", "math"] as const).map((k) => {
+                    const r = latestGraded.scoreRange?.sections?.[k]?.range;
+                    return r ? <p key={k} className="text-[12px] text-grey-600 mt-0.5">{k === "rw" ? "R&W" : "Math"} {r.low}–{r.high} (est.)</p> : null;
+                  })}
+                  <p className="text-[11px] font-semibold text-grey-500 mt-1">Internal estimate — accuracy not verified</p>
+                  <p className="text-[12px] text-grey-500 mt-1">{latestGraded.correctCount}/{latestGraded.totalCount} correct</p>
+                </div>
+              ) : (
+                <p className="text-[15px] font-extrabold text-ink">{completedScoreText(latestGraded).replace(/^ · /, "")}</p>
+              )}
               <p className="text-[12px] text-grey-500 mt-0.5">{latestGraded.examSetName}</p>
               <Link href={`/student/mock-exam/${latestGraded.id}`} className="inline-block mt-3 px-4 py-2.5 rounded-lg border border-brand-border text-navy text-[13px] font-bold">
                 View results

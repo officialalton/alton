@@ -1,7 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { computeMockExamReport } from "./report";
-import { estimateScoreWithPolicy, type ScoreEstimate } from "./score-estimate";
+import { estimateScoreWithPolicy, estimateSectionWithPolicy, type ScoreEstimate, type SectionEstimateOutcome } from "./score-estimate";
 import { mstSectionSeconds } from "./mst";
 
 // 고정형 SAT 모의고사 V1 — 응시 기록 읽기 계층(학생/교사/학부모 공용).
@@ -36,6 +36,8 @@ export type MockExamAttemptSummary = {
   /** 2026-09-22(사용자 지시) — 응시 화면을 나갔다가 다시 들어온 횟수. 시간
    * 어뷰징 의심 신호로 교사 화면에 노출한다(정교한 타이머 재설계는 아님). */
   entryCount: number;
+  /** 예상 점수 범위(내부 추정) — 개요 로더가 가장 최근 채점된 SAT(MST) 응시에만 싣는다. 결과 화면과 같은 추정기·응답 임계값. 없으면 undefined. */
+  scoreRange?: { estimate: ScoreEstimate | null; insufficient: boolean; sections?: { rw: SectionEstimateOutcome; math: SectionEstimateOutcome } | null };
   /** 재응시(2026-10-08): 같은 학생·시험의 몇 번째 응시인지(1부터). 마이그레이션 370 적용 전 응답에는 없다. */
   attemptNo?: number;
   /** 같은 학생·시험의 전체 응시 횟수. */
@@ -128,6 +130,8 @@ export type MockExamAttemptDetail = {
   scoreEstimate?: ScoreEstimate | null;
   /** 범위가 없는 이유: 응답 비율이 임계값(80%) 미만이면 "insufficient_responses"(화면은 정해진 문구를 보인다). */
   scoreEstimateNote?: "insufficient_responses" | null;
+  /** 섹션별 범위(같은 정책). 총점 범위가 없어도 추정 가능한 섹션은 범위가 있다. */
+  sectionEstimates?: { rw: SectionEstimateOutcome; math: SectionEstimateOutcome } | null;
   /** 섹션 소요 시간(초). MST 는 모듈 시작~제출 시각으로 계산한다(문항별 시간 미수집). null 이면 문항별 합계. */
   sectionTimeSeconds?: { rw: number | null; math: number | null } | null;
   routing?: {
@@ -180,7 +184,7 @@ export async function loadMockExamAttemptDetail(supabase: SupabaseClient, attemp
   const detail = { ...d, items: Array.isArray(d.items) ? d.items : [] };
   if (detail.format !== "mst") return { ...detail, versionNote: await loadAttemptVersionNote(supabase, attemptId) };
   const [est, sectionTimeSeconds] = await Promise.all([computeScoreEstimate(detail), loadMstSectionTime(detail.id)]);
-  return { ...detail, scoreEstimate: est.estimate, scoreEstimateNote: est.reason === "insufficient_responses" ? "insufficient_responses" : null, sectionTimeSeconds };
+  return { ...detail, scoreEstimate: est.estimate, scoreEstimateNote: est.reason === "insufficient_responses" ? "insufficient_responses" : null, sectionEstimates: est.sections, sectionTimeSeconds };
 }
 
 /** 결과 화면용 'Updated version' 안내 — 새 버전 재응시일 때만 값이 있다(마이그레이션 482). 실패해도 결과 화면을 막지 않는다. */
@@ -205,7 +209,7 @@ async function loadMstSectionTime(attemptId: string): Promise<{ rw: number | nul
 }
 
 /** 경로는 학생·보호자 RPC 응답에 없으므로(RPC가 접근 권한을 이미 확인한 뒤) 서비스 롤로 읽어 계산에만 쓴다. */
-async function computeScoreEstimate(detail: MockExamAttemptDetail): Promise<{ estimate: ScoreEstimate | null; reason: "insufficient_responses" | "incomplete" | null }> {
+async function computeScoreEstimate(detail: MockExamAttemptDetail): Promise<{ estimate: ScoreEstimate | null; reason: "insufficient_responses" | "incomplete" | null; sections: { rw: SectionEstimateOutcome; math: SectionEstimateOutcome } | null }> {
   try {
     const report = computeMockExamReport(detail.items);
     const { data } = await createAdminClient()
@@ -213,10 +217,12 @@ async function computeScoreEstimate(detail: MockExamAttemptDetail): Promise<{ es
       .select("rw_m2_route, math_m2_route")
       .eq("id", detail.id)
       .maybeSingle();
-    if (!data) return { estimate: null, reason: "incomplete" };
-    return estimateScoreWithPolicy(report.bySection, { rw: data.rw_m2_route ?? null, math: data.math_m2_route ?? null });
+    if (!data) return { estimate: null, reason: "incomplete", sections: null };
+    const routes = { rw: data.rw_m2_route ?? null, math: data.math_m2_route ?? null };
+    const sec = (k: "rw" | "math") => estimateSectionWithPolicy(report.bySection.find((x) => x.section === k), routes[k]);
+    return { ...estimateScoreWithPolicy(report.bySection, routes), sections: { rw: sec("rw"), math: sec("math") } };
   } catch {
-    return { estimate: null, reason: "incomplete" };
+    return { estimate: null, reason: "incomplete", sections: null };
   }
 }
 
@@ -282,6 +288,21 @@ export async function loadUpdatedVersionInfo(supabase: SupabaseClient, studentId
 /** 학생·학부모 모의고사 탭 데이터 — 공개 세트 목록 + 응시 요약(RPC 2회, 병렬). */
 export type MockExamOverview = { catalog: MockExamCatalogRow[]; attempts: MockExamAttemptSummary[] };
 
+/** 가장 최근 채점된 SAT 응시 하나에만 결과 화면과 같은 경로(loadMockExamAttemptDetail → estimateScoreWithPolicy)로 예상 범위를 붙인다. 추가 호출은 그 1건의 상세 로드뿐이고 실패해도 개요를 막지 않는다. */
+export async function attachLatestScoreRange(supabase: SupabaseClient, attempts: MockExamAttemptSummary[]): Promise<MockExamAttemptSummary[]> {
+  // 목록 순서(최신 우선) 그대로 첫 채점 SAT 응시 — 홈의 'Latest Result'가 고르는 규칙과 같다.
+  const latest = attempts.find((a) => a.status === "graded" && a.correctCount !== null && a.examProgram !== "ap");
+  if (!latest) return attempts;
+  try {
+    const d = await loadMockExamAttemptDetail(supabase, latest.id);
+    if (!d || d.format !== "mst") return attempts;
+    const scoreRange = { estimate: d.scoreEstimate ?? null, insufficient: d.scoreEstimateNote === "insufficient_responses", sections: d.sectionEstimates ?? null };
+    return attempts.map((a) => (a.id === latest.id ? { ...a, scoreRange } : a));
+  } catch {
+    return attempts;
+  }
+}
+
 export async function loadMockExamOverview(supabase: SupabaseClient, studentId: string): Promise<MockExamOverview> {
   // RPC 3회 병렬(카탈로그·응시 요약·Updated version 정보). 새 버전 정보는 실패해도 목록 자체를 막지 않는다.
   const [catalog, attempts, updated] = await Promise.all([
@@ -289,6 +310,7 @@ export async function loadMockExamOverview(supabase: SupabaseClient, studentId: 
     loadSummaries(supabase, studentId),
     loadUpdatedVersionInfo(supabase, studentId),
   ]);
-  if (updated.size === 0) return { catalog, attempts };
-  return { catalog: catalog.map((c) => (updated.has(c.examSetId) ? { ...c, updatedVersion: updated.get(c.examSetId)! } : c)), attempts };
+  const withRange = await attachLatestScoreRange(supabase, attempts);
+  if (updated.size === 0) return { catalog, attempts: withRange };
+  return { catalog: catalog.map((c) => (updated.has(c.examSetId) ? { ...c, updatedVersion: updated.get(c.examSetId)! } : c)), attempts: withRange };
 }

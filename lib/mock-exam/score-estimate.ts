@@ -37,6 +37,18 @@ export function estimateScoreWithPolicy(
   return estimate ? { estimate, reason: null } : { estimate: null, reason: "incomplete" };
 }
 
+/** 섹션 단독 추정(같은 80% 응답 정책·같은 섹션 추정기). 한 섹션이 부족해도 다른 섹션 범위는 보일 수 있다. */
+export type SectionEstimateOutcome = { range: ScoreRange | null; reason: null | "insufficient_responses" | "incomplete" };
+export function estimateSectionWithPolicy(
+  s: { total: number; correct: number | null; answered?: number | null } | undefined,
+  route: ScoreRoute | null,
+): SectionEstimateOutcome {
+  if (!s || !route) return { range: null, reason: "incomplete" };
+  if (s.correct === null || !hasEnoughResponses(s.answered, s.total)) return { range: null, reason: "insufficient_responses" };
+  const range = estimateSectionRange(s.correct, s.total, route);
+  return range ? { range, reason: null } : { range: null, reason: "incomplete" };
+}
+
 /** 검증 상태 표기(문서·내부 화면용): 표시 조건은 검증했지만 점수 모델의 정확도는 검증하지 않았다. 표시 규칙: lib/mock-exam/score-display-rule.test.ts · score-display-rule.integration.test.ts. */
 export const SCORE_VALIDATION_STATUS = "display verified, accuracy NOT verified" as const;
 export const SCORE_DISCLAIMER = "These results are a learning diagnostic and are not equivalent to an official SAT / College Board score. Score ranges are internal estimates.";
