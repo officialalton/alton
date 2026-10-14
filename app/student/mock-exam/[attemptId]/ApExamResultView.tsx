@@ -1,6 +1,10 @@
 "use client";
 
-import { memo, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import EssayScoreCard from "@/app/components/EssayScoreCard";
+import type { EssayScoreView } from "@/lib/essay-grading/view";
+import { enqueueEssayGradingAction } from "@/lib/essay-grading/actions";
 import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 import { AP_SUBJECT_NAME, apBadgeText, apCoverageLines, apGuidanceLines, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
 import { AccuracyBarList } from "@/app/components/AccuracyBars";
@@ -30,7 +34,7 @@ export function topicOf(i: MockExamAttemptItem): string {
 const EAGER_ITEMS = 4;
 
 /** 문항 하나의 본문(지문·그림·질문·선택지/FRQ 답·해설·오류 신고). 같은 문항이 다시 그려질 일(필터 전환 등)에 수식을 다시 조판하지 않도록 memo. */
-const ApReviewItem = memo(function ApReviewItem({ it, attemptId, inkByPart }: { it: MockExamAttemptItem; attemptId: string; inkByPart: Map<string, string> }) {
+const ApReviewItem = memo(function ApReviewItem({ it, attemptId, inkByPart, essayByPart, readOnly, onRetry }: { it: MockExamAttemptItem; attemptId: string; inkByPart: Map<string, string>; essayByPart?: Map<string, EssayScoreView>; readOnly?: boolean; onRetry?: () => void }) {
   return (
     <>
               {apPassageForDisplay(it.passage, it.question) && <LearningText text={apPassageForDisplay(it.passage, it.question) as string} className="mb-2 text-[13.5px]" />}
@@ -62,6 +66,7 @@ const ApReviewItem = memo(function ApReviewItem({ it, attemptId, inkByPart }: { 
                           <img src={svgDataUrl(inkByPart.get(inkKey(it.setItemId, p.label)) as string)} alt={`Your handwritten answer for part (${p.label})`} className="w-full max-w-xl rounded border border-grey-200 bg-white" />
                         </figure>
                       )}
+                      {essayByPart && <EssayScoreCard score={essayByPart.get(inkKey(it.setItemId, p.label)) ?? null} readOnly={readOnly} onRetry={onRetry} />}
                     </div>
                   ))}
                 </div>
@@ -77,7 +82,18 @@ const ApReviewItem = memo(function ApReviewItem({ it, attemptId, inkByPart }: { 
   );
 });
 
-export default function ApExamResultView({ attempt, attempts, topicNames, handwriting }: { attempt: MockExamAttemptDetail; attempts?: MockExamAttemptSummary[]; topicNames?: Record<string, string>; handwriting?: FrqInkRow[] }) {
+export default function ApExamResultView({ attempt, attempts, topicNames, handwriting, essayScores, essayAiEnabled = false, readOnly = false }: { attempt: MockExamAttemptDetail; attempts?: MockExamAttemptSummary[]; topicNames?: Record<string, string>; handwriting?: FrqInkRow[]; essayScores?: EssayScoreView[]; essayAiEnabled?: boolean; readOnly?: boolean }) {
+  const router = useRouter();
+  const essayByPart = useMemo(() => (essayAiEnabled ? new Map((essayScores ?? []).map((r) => [inkKey(r.setItemId, r.partLabel), r])) : undefined), [essayScores, essayAiEnabled]);
+  const started = useRef(false);
+  const startScoring = () => { void enqueueEssayGradingAction(attempt.id).then(() => router.refresh()); };
+  // 플래그가 켜져 있고 에세이 파트 중 점수 행이 없는 것이 있으면 학생 화면에서 한 번 채점을 시작한다(멱등, 서버가 상한을 강제).
+  useEffect(() => {
+    if (readOnly || !essayByPart || started.current) return;
+    const missing = attempt.items.some((i) => i.format === "essay" && (i.parts ?? []).some((p) => !essayByPart.has(inkKey(i.setItemId, p.label))));
+    if (missing) { started.current = true; startScoring(); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [essayByPart, readOnly]);
   const inkByPart = useMemo(() => new Map((handwriting ?? []).filter((r) => r.previewSvg).map((r) => [inkKey(r.setItemId, r.partLabel), r.previewSvg])), [handwriting]);
   const [filter, setFilter] = useState<Filter>("all");
   const layout = attempt.sectionLayout ?? [];
@@ -115,7 +131,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames, handwr
         {bySection.length > 1 && (
           <ul className="mt-2 text-[12.5px] text-grey-600">{bySection.map((s) => <li key={s.key}>{s.label}: {s.correct}/{s.total}</li>)}</ul>
         )}
-        {frq.length > 0 && <p className="mt-2 text-[12.5px] text-grey-600">Free-response answers are shown next to a reference answer and scoring guide for self-review. This is reference feedback, not official scoring, and no score is given.</p>}
+        {frq.length > 0 && <p className="mt-2 text-[12.5px] text-grey-600">Free-response answers are shown next to a reference answer and scoring guide for self-review. This is reference feedback, not official scoring.{essayAiEnabled ? " Where shown, an AI estimate is an internal estimate, not an official AP score." : " No score is given."}</p>}
         <p className="mt-2 text-[11.5px] text-grey-500">AP scores (1–5) are not estimated for practice tests.</p>
       </section>
 
@@ -142,7 +158,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames, handwr
               {/* 2026-10-13(결과 화면 지연 점검): 문항 본문(지문·수식·그림·해설)은 앞 몇 개만 서버가 그리고 나머지는 화면 근처에 올 때 그린다 —
                   48~70문항의 수식 조판을 한꺼번에 하면 HTML 수 MB·DOM 십수만 개가 되어 열기가 매우 느렸다. 번호·정오 줄은 항상 보인다. */}
               <LazyWhenVisible eager={idx < EAGER_ITEMS} minHeight={420}>
-                <ApReviewItem it={it} attemptId={attempt.id} inkByPart={inkByPart} />
+                <ApReviewItem it={it} attemptId={attempt.id} inkByPart={inkByPart} essayByPart={essayByPart} readOnly={readOnly} onRetry={readOnly ? undefined : startScoring} />
               </LazyWhenVisible>
             </li>
           );
