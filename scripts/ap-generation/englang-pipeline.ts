@@ -103,7 +103,7 @@ function specsOf(): P.SetSpec[] {
 // ── 단계: gen / check ──────────────────────────────────────────────
 async function genStage() {
   const specs = specsOf(); wj("plan.json", { specs, summary: planSummary(specs) });
-  const reqs = specs.map((s) => mk(`g-${s.id}`, cfg.genModels?.[s.kind] ?? cfg.models.gen, s.kind === "reading" ? P.GEN_READING_SYSTEM : P.GEN_WRITING_SYSTEM, P.setTool, P.genUser(s), 22000, false, cfg.genEffort ?? cfg.effort));
+  const reqs = specs.map((s) => mk(`g-${s.id}`, cfg.genModels?.[s.kind] ?? cfg.models.gen, s.kind === "reading" ? P.GEN_READING_SYSTEM : P.GEN_WRITING_SYSTEM, P.setTool, P.genUser(s), 20000, false, cfg.genEffort ?? cfg.effort));
   const est = estimate(cfg.models.gen, reqs.length, 2500, 9000);
   const out = await call("gen", reqs, est); wj("gen.json", Object.fromEntries([...out.entries()]));
 }
@@ -228,7 +228,7 @@ function toFrqPayload(plan: NonNullable<ElCfg["frqPlan"]>[number], inp: Json): E
 }
 async function frqGenStage() {
   const plan = cfg.frqPlan ?? []; const sys = { synthesis: P.FRQ_SYNTH_SYSTEM, rhetorical_analysis: P.FRQ_RHET_SYSTEM, argument: P.FRQ_ARG_SYSTEM };
-  const reqs = plan.map((p) => mk(`f-${p.id}`, cfg.models.gen, sys[p.type], P.frqTool(), P.frqUser(p.type, p.theme, p.seed), 24000, false, cfg.genEffort ?? cfg.effort));
+  const reqs = plan.map((p) => mk(`f-${p.id}`, cfg.models.gen, sys[p.type], P.frqTool(), P.frqUser(p.type, p.theme, p.seed), 20000, false, cfg.genEffort ?? cfg.effort));
   const out = await call("frq-gen", reqs, estimate(cfg.models.gen, reqs.length, 2200, 9000));
   wj("frq.json", plan.map((p) => ({ id: p.id, plan: p, payload: toFrqPayload(p, out.get(`f-${p.id}`) as Json) })));
 }
