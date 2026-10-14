@@ -1,0 +1,2073 @@
+{
+ "model": "claude-sonnet-5-5",
+ "over": 160,
+ "target": 150,
+ "spentUsd": 2.7848,
+ "results": [
+  {
+   "problemId": "0a87396c-e339-4516-83c0-6045247b5553",
+   "versionId": "76a3a992-90b1-408e-9d9c-f7805a152621",
+   "skill": "inferences",
+   "wordsBefore": 211,
+   "decision": "keep",
+   "reason": "Safe cuts (background clauses, the 1970s phrase, the \"(BRT)\" parenthetical) reach only about 160 words. Getting below 150 would mean cutting the diagnosis sentence, the subway-style multi-door boarding, or the evidence span, all of which the key and distractor A depend on.",
+   "accepted": false,
+   "usd": 0.023634
+  },
+  {
+   "problemId": "0aac2eb0-1251-495f-9d4a-e35510ac6dda",
+   "versionId": "54d482cf-ab75-4544-974e-a99dc428d3b4",
+   "skill": "cross_text_connections",
+   "wordsBefore": 207,
+   "decision": "trim",
+   "reason": "Removed Text 1's despite-clause and final argument sentence and Text 2's closing sentence and a trailing phrase; the tool use/puzzle-solving claim, Text 2's semi-autonomous arms point, and the evidence span remain, so D is still correct and A-C stay wrong.",
+   "accepted": false,
+   "usd": 0.039888,
+   "newPassage": "Text 1\nMarine biologists studying octopus cognition have proposed that these animals possess a form of intelligence comparable to that of many vertebrates. Two-thirds of an octopus's neurons are distributed throughout its arms rather than centralized in a brain, yet octopuses solve puzzle boxes, recognize individual human faces, and use tools such as coconut shells for shelter.\n\nText 2\nWhile octopuses undeniably display impressive behavioral flexibility, some cognitive scientists caution against equating this flexibility with intelligence. An octopus's arms can each act with a degree of autonomy, solving local problems like gripping or exploring without input from the central brain at all. This decentralization means that what looks like unified, deliberate problem-solving may actually be the aggregate of many semi-independent local reactions.",
+   "wordsAfter": 122,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Text 2 accepts the behaviors but attributes them to aggregated semi-independent arm reactions rather than unified intelligence, which is what D says."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": true,
+    "tested_skill_changed": true,
+    "explanation_refers_to_deleted": false,
+    "verdict": "reject",
+    "details": "The deleted material includes Text 1's argument that intelligence can evolve along different neural architectures and should not be measured by resemblance to our own brains. It also includes Text 2's statement that octopus cognition is organized differently from vertebrate cognition. Option A was written to tempt because of this material: it attributes to Text 2 a call to apply vertebrate standards, and Text 2's emphasis on different organization is what rules A out. With that gone, A is easier to dismiss, and the Text 1 point that A conflicts with is no longer on the page. Text 2's \"intelligence in the sense usually reserved for vertebrates\" framing was also cut, which removes the vertebrate comparison that makes A plausible. The item is now a simpler matching task, so the cross-text comparison it tests has changed."
+   },
+   "rejectedBy": "checker"
+  },
+  {
+   "problemId": "01990482-cf4d-443a-a8bc-90dc787457a7",
+   "versionId": "76907d0d-ac91-4b66-9deb-91f6427a162e",
+   "skill": "words_in_context",
+   "wordsBefore": 164,
+   "decision": "trim",
+   "reason": "Removed the opening line, the stairwell/skylight staging, and the closing gull sentence. None bears on the lamp metaphor, the reviewer praise, or the shrinking-name clue the key (A) and the distractors rely on.",
+   "accepted": true,
+   "usd": 0.037812,
+   "newPassage": "Ten years after my first novel appeared, I wanted a dinner on the harbor, speeches, a printed card with both our names. Eulalio, who had carried my sentences into English through three books, wanted nothing. We argued on the stairwell of my lodging on the Cornish coast. I reminded him that reviewers had praised the music of the English pages, and that he had asked for his name to be printed small on the title page, then smaller. He said that was rather the point. His part, he told me, had always been a lamp in the next room: enough to read by, never meant to be looked at. I wanted to argue that lamps can be thanked. Instead I asked him to write the card himself, in whatever size he liked.",
+   "wordsAfter": 132,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The lamp is \"enough to read by, never meant to be looked at\": it lets the reader see while staying unseen, which matches the translator's role as Eulalio describes it. B, C and D are not supported by the passage."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deletions removed only the opening line, stairwell staging details, and the gull sentence. All evidence for the correct answer (reviewer praise, name printed smaller, \"rather the point,\" lamp description) and for the distractors remains. The explanation relies only on retained text. The \"Pilar\" name in the options is absent from the passage in both versions, so the edit did not introduce it."
+   }
+  },
+  {
+   "problemId": "07ce3c76-f50b-4c48-bdae-36e1a4234e61",
+   "versionId": "df337ed3-4cf3-4e63-8db7-c88d6c935a9f",
+   "skill": "central_ideas_details",
+   "wordsBefore": 163,
+   "decision": "trim",
+   "reason": "Cut the lamp-smell clause and the French/English column detail (about 20 words, leaving ~143). Both are atmospheric or incidental. The road excuse, mule timing, missing publisher's letter, intact ledger, and sales detail for the distractors all remain, so the key D is unaffected.",
+   "accepted": true,
+   "usd": 0.039369,
+   "newPassage": "Rain drums on the galvanized roof. Each night Roshane sits across from you and copies your pages into his ledger, his pen scratching long after you have gone to bed. You had expected him to arrive with objections; his own novels sold better than yours in Paris. When you ask why he has not gone back down to Port of Spain, Linton, he says the road below the cocoa estate is washed out. Perhaps it is. Yet the boy who brought his mule up the hill led it home on Tuesday, a full day before the first rain. And the publisher's letter, the one asking for forty pages to be cut, is no longer on the shelf where you left it. On Sunday morning you find his finished ledger beside your inkwell, every chapter intact, its spine tied with your own blue ribbon.",
+   "wordsAfter": 143,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The road excuse is undercut by the mule leaving before the rain. The publisher's letter demanding cuts has vanished, and Roshane produces a complete ledger with every chapter intact, so he most likely stays to preserve the full book."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only sensory detail (lamp smell) and the French/English column layout were deleted. All key clues (mule leaving before the rain, missing publisher's letter, finished ledger with every chapter intact, copying, sales) remain. The explanation's \"translation\" label is slightly less explicit but still inferable from \"copies your pages\". Distractors remain grounded."
+   }
+  },
+  {
+   "problemId": "0abe38d3-8869-4ad1-9522-090c2c6bac91",
+   "versionId": "281f070d-5301-4a6b-a684-79fd9c92fb93",
+   "skill": "central_ideas_details",
+   "wordsBefore": 167,
+   "decision": "trim",
+   "reason": "Cut \"trousers rolled,\" the swimming-a-length clause, and the damp-towel clause. Both cover-up episodes (her resting, his rust-word pause) and the distractor details (lessons, older word, towel) remain, so the answer A is unaffected.",
+   "accepted": true,
+   "usd": 0.042041999999999996,
+   "newPassage": "We never reached the far wall that summer, though Dario spoke of it each morning as if distance were only another word to learn. He sat on the rim of the salt pool in Havana and named things in the language of his village: tile, gull, the green rust on the ladder. Bartolo repeated each word. On Thursday she stopped short of the far wall, held the rope, and came back saying she had only wanted to rest. Dario nodded and gave her the word for rest, then a second, older word that he said meant resting before one has finished. She practiced it without asking why. Later, reciting the colors, he paused at the word for the rust, and let her supply it, which she did loudly, as though he had been testing her. On the walk home she carried his towel over her shoulder.",
+   "wordsAfter": 146,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Both characters gracefully cover for the other's lapse: Dario accepts her excuse and gives her a face-saving word; Bartolo supplies the forgotten word as if he were testing her."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deletions were only atmospheric details (rolled trousers, swimming a length between words, damp towel corner). The key evidence for A (Bartolo's rest excuse, Dario's gentle word, the rust word supplied as if a test) remains. Distractors B, C and D remain grounded in retained text, and the explanation cites nothing that was removed."
+   }
+  },
+  {
+   "problemId": "13883025-41d3-4f2d-8d0d-3a797afa0c2c",
+   "versionId": "f3cea03a-0f68-4a0e-8c22-5c73e71eb5f4",
+   "skill": "central_ideas_details",
+   "wordsBefore": 182,
+   "decision": "trim",
+   "reason": "Removed the sentence describing how the shell steers sound and the \"wrong way\" gloss, plus \"were striking, but they\". The narrow-frequency limitation, the shift to specific frequencies, and the distractor details (negative refractive index, light origin, units smaller than waves, submarine/factory) remain, so the answer B is unchanged. The result is 139 words.",
+   "accepted": true,
+   "usd": 0.040887,
+   "newPassage": "Engineers designing acoustic cloaks often borrow an idea first developed for light: metamaterials, structures built from repeating units smaller than the waves they manipulate, can be arranged to give a material properties no natural substance has, including a negative refractive index. Early laboratory demonstrations worked only within a narrow band of frequencies, because the tiny resonating units that produce the unusual behavior respond strongly to some pitches and hardly at all to others.\n\nResearchers at several universities have therefore shifted their focus. Rather than pursuing a perfect cloak, many now design shells that hide objects from the specific frequencies that matter in a given setting, such as the sonar pulses used to locate submarines or the low hum of machinery in a factory. This narrower aim, they argue, turns a laboratory curiosity into something that could actually be built and used.",
+   "wordsAfter": 141,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "B matches the passage: the narrow-band limitation led researchers to design cloaks for specific, practically relevant frequencies. A, C, and D each contradict or go beyond the text."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deletions (the \"wrong way\" bending clause and the sentence on steering sound around an object) are not needed for the main-idea question. The limitation and the shift to targeted frequencies remain, and every distractor and the explanation still have support in the shortened text."
+   }
+  },
+  {
+   "problemId": "0dca370e-1829-4086-a2b6-9316f97dc97a",
+   "versionId": "a1074fc6-fed8-4f13-8491-b345952e3502",
+   "skill": "central_ideas_details",
+   "wordsBefore": 174,
+   "decision": "trim",
+   "reason": "Cut the scene-setting opening sentence and the stopped-watch sentence (41 words). Neither bears on the loan, the apparent mix-up, the pre-written joint card, or the glass raise, so the main idea and key B are unchanged, and the distractors keep their source details.",
+   "accepted": false,
+   "usd": 0.024645,
+   "newPassage": "I had come with an envelope in my jacket: the eight thousand kroner my aunt Wilhelmina had lent me eleven years earlier, when I was nineteen and stranded in Bergen without a ticket home. I found her near the cake table and pressed it into her hand. She looked at the envelope, thanked me for being so generous to the bride, and dropped it into the white box of cards by the door before I could explain. I stood there with my mouth open. Hours later, during the speeches, the bride read aloud a card that had been tucked into my envelope, a card I had not written, thanking Devon and Wilhelmina together for their gift. Across the room my aunt raised her glass toward me and turned back to her conversation.",
+   "wordsAfter": 132,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [
+     "A"
+    ],
+    "matchesKey": true,
+    "note": "The aunt adds a card in both names and raises her glass, which implies the 'mix-up' was deliberate and her way of refusing repayment. B captures this. A describes the surface events but misses the reveal. C and D are unsupported."
+   }
+  },
+  {
+   "problemId": "165f68f1-e9c3-4d3b-a802-f330cae94054",
+   "versionId": "be899a27-953e-45b0-8856-d802c8e84246",
+   "skill": "command_of_evidence_text",
+   "wordsBefore": 229,
+   "decision": "trim",
+   "reason": "Removed background (assistants clause, Florentine workshop detail) and elaborations within the two views. Kept both views, the master-style/matching-brushwork contrast, and the full evidence span, so B remains correct and the distractors keep their source details.",
+   "accepted": false,
+   "usd": 0.024747,
+   "newPassage": "Art historians have long questioned how much of a celebrated master's output was actually painted by the master himself. One view holds that attribution to a given master should be based primarily on stylistic consistency, regardless of who physically applied the paint. A competing view holds that true authorship requires evidence of the master's own hand in the actual execution, so a painting produced largely by assistants should not be attributed to the master. Conservators examining underdrawings and pigment layers found that in works where the underlying sketch showed the confident, fluid lines characteristic of the master's documented solo drawings, the final paint layers also showed brushstroke patterns matching his known technique. By contrast, in paintings where the underdrawing showed the more tentative, corrected lines typical of apprentice practice, the final paint layers showed brushwork inconsistent with the master's documented technique, even though the overall composition and color choices closely followed his typical designs.",
+   "wordsAfter": 154,
+   "mechanical": {
+    "ok": false,
+    "issues": [
+     "새 단어가 더해졌거나 순서가 바뀜(삭제만 허용)",
+     "목표(150) 초과: 154단어"
+    ]
+   }
+  },
+  {
+   "problemId": "0f87deb6-b1c7-45d5-bbd2-891028f9090d",
+   "versionId": "e26756af-b868-4f21-9694-4ffbed10997e",
+   "skill": "cross_text_connections",
+   "wordsBefore": 180,
+   "decision": "trim",
+   "reason": "Removed the electrospinning definition sentence, \"Materials engineer\", \"Like other groups,\", and \"directly with high-speed imaging\". These are background details. The claim, the field-strength assumption, the PVA/room-temperature detail, and the flow-rate agreement that the options and key depend on are all intact.",
+   "accepted": false,
+   "usd": 0.028338000000000002,
+   "newPassage": "Text 1\nPriya Venkataraman argues that fiber diameter can be reliably minimized by tuning just two dials: raising voltage while lowering flow rate. Her reasoning is that a stronger electric field pulls harder on the jet, and that this added stretching, applied to less fluid per second, must translate directly into thinner fibers. Her lab's tests used a single polyvinyl alcohol solution at room temperature.\n\nText 2\nA team led by Tomás Ferreira measured jet behavior. They found that a modest reduction in flow rate generally yields finer fibers. But beyond a moderate threshold, increasing voltage did not lengthen the stretching phase; instead, the jet began whipping erratically and ejecting from several points on the droplet at once, producing fibers with widely scattered and often larger diameters. The added field strength, the team concluded, changes how the jet forms rather than simply how much it is drawn out.",
+   "wordsAfter": 148,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [
+     "A"
+    ],
+    "matchesKey": true,
+    "note": "Text 2 says that past a threshold, higher voltage did not lengthen the stretching phase but caused whipping and multiple ejection points, which contradicts the idea that more field strength means more drawing out. D is supported by Text 2, and C is not addressed. A is the broader conclusion and is weakened by the same findings, but B is the specific element challenged."
+   }
+  },
+  {
+   "problemId": "230602ac-9166-4912-bad0-c0628a8c2ea3",
+   "versionId": "ec842a10-5fa4-490e-a0a2-25c75ccd15c6",
+   "skill": "central_ideas_details",
+   "wordsBefore": 164,
+   "decision": "trim",
+   "reason": "Removed the opening definition of acoustic cavitation, which is background not needed for the main idea; all details behind the key (D) and distractors A, B, and C remain, bringing the passage to about 136 words.",
+   "accepted": true,
+   "usd": 0.036975,
+   "newPassage": "In 1990, physicist Felipe Gaitan showed that a single bubble trapped in a flask of water by a standing sound wave could be made to collapse over and over, giving off a faint flash of blue-white light with each cycle. This effect, called sonoluminescence, had first been noticed decades earlier in clouds of bubbles, but isolating one bubble let researchers time the flashes precisely. They found that each flash lasts less than a billionth of a second, far shorter than many had expected. Yet even with this precision, researchers still disagree about what produces the light. Some argue that the collapsing bubble heats its gas enough to form a glowing plasma, while others propose that the light comes from chemical reactions or from electric charges separating at the bubble wall, and no single model yet accounts for all the measurements.",
+   "wordsAfter": 140,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "D combines the precise single-bubble measurements with the unresolved debate over the cause of the light. A contradicts the text (flashes were shorter than expected), B overstates one of several competing models, and C adds claims the passage never makes."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the opening definition of acoustic cavitation was removed. The main-idea question, correct answer D, all distractors, and the explanation rely only on retained content (single-bubble precision, unresolved cause, competing models, flash duration). The tested skill is unchanged."
+   }
+  },
+  {
+   "problemId": "16afc848-9de9-499c-9b40-daa51f7fb80e",
+   "versionId": "d96134cd-7863-4a5d-b0a2-6a770f8aa789",
+   "skill": "cross_text_connections",
+   "wordsBefore": 220,
+   "decision": "trim",
+   "reason": "Cut background detail, dialogue, the physical-sensation sentence, and the critic's redundant closing and \"as if\" clause. This keeps Masako's \"only to please him\" (B), \"useless\" claim (C), her inability to stop looking at the row, and the critic's rejection of the stay-in-village reading (A) and the value-and-leave point (D), so the answer is unchanged.",
+   "accepted": false,
+   "usd": 0.025377,
+   "newPassage": "Text 1\nIn the following excerpt from a novel, Masako practices net-weaving. A marriage to a merchant in the castle town has already been arranged for her.\nHer father guided her fingers through the knot again. She told herself she was learning only to please him, that the skill would be useless behind a merchant's counter. Yet when the finished row lay taut and even across her lap, she found she could not stop looking at it.\n\nText 2\nA literary critic comments on the novel.\nSome readers take Masako's net-weaving scenes as proof that she secretly wants to stay in the village. This reading overlooks how firmly the author keeps Masako's choice intact: she never wavers in her plan to leave. What the weaving scenes reveal is not a hidden wish to remain but the cost of departure—Masako can value what her father gives her and still give it up.",
+   "wordsAfter": 151,
+   "mechanical": {
+    "ok": false,
+    "issues": [
+     "목표(150) 초과: 151단어"
+    ]
+   }
+  },
+  {
+   "problemId": "1b7778dc-6c37-4aa7-b8aa-c21f82321560",
+   "versionId": "3582dc07-2a1d-462f-b393-1d658b504317",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 185,
+   "decision": "trim",
+   "reason": "Removed decorative detail (octopus plates, course after course, coffee at seven, list numbering, final vines image). The night-shift bickering, the proud list, the mothers' mishaps and Genevieve's mouthed number remain, so the irritation-to-sheepish-humor shift and answer D are unaffected.",
+   "accepted": true,
+   "usd": 0.04224,
+   "newPassage": "We had argued for weeks about the table. I wanted the terrace laid the Galician way for my mother's visit; Genevieve insisted on the long French lunch her grandmother used to serve. Both of us worked nights at the hospital, and we fought the way tired people fight, in clipped sentences. I kept a list of every dish she rejected, and I was proud of how long it had grown. On the morning itself, both mothers arrived early. I found them in the kitchen, mine rolling crêpe batter far too thick and hers slicing octopus with a bread knife, each doing the other's dish badly and neither apologizing. I touched the list in my pocket. Seventeen items. We set out both kinds of plates, and Genevieve, catching my eye across the terrace, mouthed the number seventeen, which meant she had found it on the dresser days ago.",
+   "wordsAfter": 147,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The tone moves from tired, petty conflict (the grievance list) to rueful, humorous reconciliation when Genevieve reveals she found the list."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deletions removed only atmospheric detail (octopus on wooden plates, cold coffee, neat handwriting, vines). The tone shift from weary irritation to sheepish humor is still fully supported by the retained text. The distractors and the explanation do not depend on anything cut."
+   }
+  },
+  {
+   "problemId": "1cdafeb2-9348-4649-9afd-32af176b2dfc",
+   "versionId": "fcf71f85-df26-4af5-8a24-0c83c97607c5",
+   "skill": "central_ideas_details",
+   "wordsBefore": 176,
+   "decision": "trim",
+   "reason": "Cut the closing pigeon/scrap sentence and the redundant second cobbler-inspection sentence. Both are atmospheric or repetitive; the repeated glue repair, the unspoken decline, the covered high note, and the distractor details (appearance, cobbler, hardship) all remain, so the answer B is unaffected.",
+   "accepted": true,
+   "usd": 0.042732,
+   "newPassage": "Years later, Nicolas would remember the boots more clearly than the songs. Every Saturday that last autumn, before their set in the plaza, Sergio left his left boot at a shoe repair stall near the cathedral in Seville, where an old cobbler glued the split sole back together without comment. The duo was drawing fewer listeners each week, though neither of them said so. Nicolas noticed that Sergio had begun to miss the high note in their closing song and to cover it with a flourish on the guitar; Nicolas, in turn, pretended not to hear. Each week the glue held for a few days, and then the sole began, quietly, to open again. One evening Nicolas saw Sergio wince as he stepped onto a curb, the boot gaping at the toe, and still say nothing.",
+   "wordsAfter": 136,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The boot's patched-but-failing sole parallels the duo's unspoken patching over of their decline (the covered high note, pretending not to hear, not mentioning the shrinking audience)."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted sentences (the cobbler inspecting the boot, and the closing image of the cobbler sweeping scraps) are atmospheric. All evidence for B remains, and the cobbler is still present for distractor C. The explanation cites only retained content."
+   }
+  },
+  {
+   "problemId": "315bf246-84e5-4731-81d3-7c1c57f74803",
+   "versionId": "0da690c4-48f5-462c-8694-51603786aa15",
+   "skill": "cross_text_connections",
+   "wordsBefore": 198,
+   "decision": "keep",
+   "reason": "Safe cuts (setting phrase, rationing aside, family-joke gloss, her son laughing) save only about 35 of the 48+ words needed. Reaching 150 would require cutting the dark/overnight detail (distractor C), the teaching detail (D), the \"whatever the novel decides\" sentence (B), or the laughing/self-mockery evidence for A. Each of these is needed, so no safe cut exists.",
+   "accepted": false,
+   "usd": 0.015684
+  },
+  {
+   "problemId": "267d2956-2f81-46e9-aeae-1d4a6e65a01b",
+   "versionId": "563559e0-4e08-439f-a0e9-c2f42e0264c2",
+   "skill": "cross_text_connections",
+   "wordsBefore": 181,
+   "decision": "trim",
+   "reason": "Removed Text 2's final sentence (extra supporting examples about yields and indebted farms). The evidence span and Text 2's central credit-access argument remain, so the answer A is unchanged and distractors remain clearly wrong. Passage is now about 140 words.",
+   "accepted": false,
+   "usd": 0.038127,
+   "newPassage": "Text 1\n\nEconomic historians studying the collapse of small family farms in the early twentieth century often point to mechanization as the central cause. As tractors and mechanical harvesters became affordable, farms that could invest in this equipment achieved dramatically higher yields per worker, allowing them to undercut smaller neighbors on price. Within a generation, thousands of family farms that could not afford machinery were forced to sell their land to larger operations, consolidating agricultural production into far fewer, much larger farms than had existed before.\n\nText 2\n\nMechanization certainly reshaped agriculture, but focusing on machinery alone obscures the role that credit access played in determining which farms survived. Bank records from the period show that many small farms failed not because they lacked machinery outright, but because they were denied the loans needed to purchase it, while larger operations with more collateral secured favorable financing terms.",
+   "wordsAfter": 147,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Text 2 acknowledges mechanization but argues credit access explains which farms survived; only A matches."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": true,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "reject",
+    "details": "The deleted final sentence of Text 2 (farms with modest yields but better banking relationships survived; mechanized but indebted farms failed) gave distractor C its tempting, partially grounded appeal. Without it, C is easier to dismiss. The question, answer A and explanation still hold on the remaining text."
+   },
+   "rejectedBy": "checker"
+  },
+  {
+   "problemId": "31f8c0e2-da6a-4d78-81d2-10d6392c9710",
+   "versionId": "945f930b-bda7-4e5f-9c1e-f641298668c1",
+   "skill": "cross_text_connections",
+   "wordsBefore": 194,
+   "decision": "trim",
+   "reason": "Removed Text 1's case-study and price-signal sentences and Text 2's outer-neighborhood sentence and a clause. The reinvestment cycle claim, Holloway's burden argument, and the evidence span remain, so the answer A still holds and the distractors stay plausible.",
+   "accepted": false,
+   "usd": 0.028283999999999997,
+   "newPassage": "Text 1\n\nUrban planner Miriam Ostrander maintains that congestion pricing—charging drivers a fee to enter a city's downtown during peak hours—is the most effective tool for reducing gridlock. She argues that the revenue generated can be reinvested into buses and trains, creating a self-reinforcing cycle: fewer cars, better transit, and further reductions in driving.\n\nText 2\n\nTransportation economist Devon Holloway argues that congestion pricing, while effective at reducing traffic volume, disproportionately burdens lower-income commuters who cannot easily switch to alternative transportation. He contends that any pricing scheme must be paired with substantial transit expansion in underserved areas before it is implemented, not after, or it risks simply taxing those who have the fewest alternatives.",
+   "wordsAfter": 114,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [
+     "C"
+    ],
+    "matchesKey": true,
+    "note": "Holloway insists transit expansion come before pricing; Ostrander's revenue-funded transit comes after, so commuters would be burdened first. A states this directly. C is similar in spirit but adds an unsupported 'years' claim."
+   }
+  },
+  {
+   "problemId": "32b63987-3958-40cb-a6a1-b91f97a2cd6f",
+   "versionId": "421680aa-1476-426e-9a64-5d0cfaaef105",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 169,
+   "decision": "trim",
+   "reason": "Removed the opening clause about the buffet doors, the collar detail, and the final wave to a cousin. These are incidental; the relaxed laughing, the deflecting behaviors (refilling the cup, japchae, dress compliments, napkin) that support D, and the details behind each distractor remain. Now 145 words.",
+   "accepted": true,
+   "usd": 0.048291,
+   "newPassage": "The wedding hall in Busan dissolved into a hundred conversations, and Sunja let the noise carry her to a corner table. Joon, her grandson, slid in beside her and teased her about the cousin who had tripped on the aisle runner. Sunja swatted his wrist and laughed until her eyes watered. Then he drew a creased photograph from his jacket: a young woman in a borrowed hanbok beside a man no one in the family had ever named. \"Who is he, Halmeoni?\" Sunja glanced at it, smiled, and said it was only a neighbor, a long time ago. She refilled Joon's cup, though it was nearly full, and asked loudly whether he had tried the japchae. Twice more she praised the bride's dress. When he slid the photograph back toward her, she placed her napkin over it, smoothing the cloth flat with both hands.",
+   "wordsAfter": 144,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Sunja's relaxed laughter turns into deflecting behavior after the photo appears: a dismissive answer, a needless refill, loud talk about food, and covering the photo with a napkin. Her cheerfulness is forced and aimed at changing the subject."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deletions were the opening clause, the collar detail, and the final wave-at-cousin clause. All evidence used by the correct answer and explanation (laughing, refilled cup, japchae, dress praise, napkin over photo) remains. Distractors are still grounded and the tested skill is unchanged."
+   }
+  },
+  {
+   "problemId": "35a1d518-f01b-4d98-819f-a8fffe2e5c8e",
+   "versionId": "16231185-651d-46f3-b9cf-c9a866af05ed",
+   "skill": "command_of_evidence_text",
+   "wordsBefore": 166,
+   "decision": "trim",
+   "reason": "Removed the purpose phrase, the variety description, the timeframe, and the detail about bidders' willingness to pay. The claim, the unchanged-supply sentence, and the guild-letter evidence span that support D and rule out A-C are untouched.",
+   "accepted": true,
+   "usd": 0.045561000000000004,
+   "newPassage": "An economic historian studying the collapse of the Dutch tulip market in 1637 argued that the crash resulted primarily from a sudden failure of buyer confidence rather than from any change in tulip bulbs' actual scarcity or agricultural value. The historian traced contract prices for Semper Augustus. The price records showed that contracts for delivery of the bulbs held steady at extremely high values right up until a single afternoon in February, when a routine auction in Haarlem failed to attract any bidders. No new bulbs had been planted, harvested, or destroyed in the days surrounding this event, and no change in the growing conditions or bulb supply was recorded. The historian also noted that, within days of the failed auction, several regional guilds began circulating letters urging members to stop honoring existing tulip delivery contracts altogether, regardless of the bulbs' condition or quantity.",
+   "wordsAfter": 144,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "D shows a confidence-driven repudiation of contracts with no change in the bulbs' condition or quantity, which directly supports the claim. A, B, and C each introduce a change in bulb value or scarcity, which undercuts the claim."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deletions were minor (purpose phrase, \"specific variety\", \"across several weeks\", \"fraction of asking price\"). The guild letters sentence, the no-supply-change statement, and the steady-price detail all remain. The question, distractors, and explanation are still fully grounded."
+   }
+  },
+  {
+   "problemId": "376e9f71-3875-4f18-9910-4b56cfdefde2",
+   "versionId": "909cbe54-546c-4eb4-8007-2210d8c779c4",
+   "skill": "central_ideas_details",
+   "wordsBefore": 162,
+   "decision": "trim",
+   "reason": "Removed the habitat appositive and a few adverbial modifiers (\"for decades\", \"initially\", \"surprisingly\", \"More\"). The photoreceptor contrast, the poor discrimination finding, the human-blending contrast, the bees comparison, the predators detail and the evidence span are untouched, so the main idea and answer B are unaffected.",
+   "accepted": true,
+   "usd": 0.04797,
+   "newPassage": "The mantis shrimp possesses one of the most complex visual systems in the animal kingdom, yet the exact purpose of this complexity has puzzled scientists. Unlike humans, who perceive color using three types of photoreceptors, mantis shrimp have between twelve and sixteen types, and their eyes can independently rotate to track prey while scanning for predators. Researchers assumed this abundance of photoreceptors allowed the shrimp to distinguish an extraordinary range of colors, but behavioral tests revealed the opposite: mantis shrimp are poor at telling similar hues apart compared to humans and bees. Recent studies suggest that instead of blending color signals in the brain the way human vision does, the shrimp's eyes may process each photoreceptor's input separately and rapidly, allowing near-instant color identification without complex neural computation—a system suited less for fine discrimination than for extremely fast recognition in the fast-moving reef environments where the shrimp hunts.",
+   "wordsAfter": 148,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "B summarizes the passage: many photoreceptors, poor fine discrimination, built for rapid recognition. A, C, and D each misstate or contradict the passage."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only minor descriptive details and hedging words were removed (habitat, \"for decades,\" \"initially,\" \"surprisingly,\" \"More\"). The central argument and all the material the options and explanation rely on remain intact."
+   }
+  },
+  {
+   "problemId": "387cc5bf-00fb-453e-86cf-e9484094070d",
+   "versionId": "f916d049-4a79-46f7-86e3-2c2850a17701",
+   "skill": "cross_text_connections",
+   "wordsBefore": 169,
+   "decision": "trim",
+   "reason": "Removed Text 1's sentence on reported traffic drops and revenue. The tested claim (faster, more measurable results than infrastructure), Text 2's evidence span, and the detail distractor A relies on are all kept, so the answer B is unchanged. The passage is now about 145 words.",
+   "accepted": true,
+   "usd": 0.040608000000000005,
+   "newPassage": "Text 1\nUrban planners advocating for congestion pricing argue that charging drivers a fee to enter crowded downtown areas during peak hours is the most effective way to reduce gridlock. Because the fee directly targets the behavior causing congestion—driving into the city center at busy times—proponents claim it produces faster and more measurable results than infrastructure projects, which can take years to complete and may simply attract new drivers once finished.\n\nText 2\nCritics of congestion pricing point out that the policy places a disproportionate burden on lower-income commuters who cannot afford the daily fee but also lack convenient access to public transit alternatives. These critics argue that without first expanding affordable transit options in underserved neighborhoods, congestion pricing effectively restricts who can drive downtown based on income rather than genuinely solving the underlying transportation problem. They favor phasing in transit investment before introducing any fee.",
+   "wordsAfter": 146,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Text 2 objects on equity grounds, not effectiveness, so it would likely concede speed but stress the fairness cost."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted sentence (reported traffic drops and transit revenue) is not needed by the question, which targets the \"faster and more measurable results than infrastructure projects\" claim that remains. Option C is still a clearly wrong, plausible distractor based on \"measurable results.\" The explanation cites only retained content. The skill tested is unchanged."
+   }
+  },
+  {
+   "problemId": "39de9cb4-30cc-4be9-b4a2-75e80b772cac",
+   "versionId": "b792bdcb-bda1-4585-80fa-96f26a8bb3fe",
+   "skill": "central_ideas_details",
+   "wordsBefore": 172,
+   "decision": "trim",
+   "reason": "Removed the broom-path description sentence and the closing tram sentence, which are atmospheric detail. The wedding talk while sweeping, the floor remark, the untouched catalog (B), Marlon's joke (D), and the role swap at the end all remain, so the answer C is unaffected. The passage is now about 145 words.",
+   "accepted": true,
+   "usd": 0.041508,
+   "newPassage": "Milena held the dustpan while her mother swept, as she had every Saturday since she was nine. Marlon's barbershop on Brīvības Street closed at six, and her mother, who had cut hair there for twenty years, never let anyone else sweep the floor. Tonight they were meant to choose wedding napkins; the catalog lay open on a barber chair, untouched. Her mother talked about guest lists and seating while she swept, and Milena answered without looking up. Once her mother paused and said that Milena's new flat had wooden floors, the kind that showed every hair. Marlon, counting the till, laughed and said she would need a better broom. Near the end, her mother's arms slowed. Milena set down the pan, took the broom, and finished the last corner in the same strokes, left to right. Her mother picked up the dustpan without a word.",
+   "wordsAfter": 145,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Sweeping is a long-standing shared ritual; the role swap at the end (Milena takes the broom, the mother takes the dustpan) shows the bond continuing as roles shift."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the \"old pattern\" sweeping sentence and the closing tram line were deleted. The habit (every Saturday), the role reversal, the wedding talk, the catalog, and Marlon's joke all remain, so the correct answer and every distractor are still grounded and the explanation is intact."
+   }
+  },
+  {
+   "problemId": "3a6e8cbd-4abe-4327-94b5-cec57ec81b09",
+   "versionId": "b51d508d-5cce-41e4-abef-7147a81ac9bd",
+   "skill": "central_ideas_details",
+   "wordsBefore": 181,
+   "decision": "trim",
+   "reason": "Removed the opening time phrase, the jar-turning sentence, and the closing weather/stove sentence, which are atmosphere only. All clues for C (vanished villages, coat pockets, seeds sprouting, father's move, new jar labeled with his farm) and the distractor-B detail (Dvora's coldness to the teacher) remain.",
+   "accepted": true,
+   "usd": 0.037659,
+   "newPassage": "Dvora still sat at the farthest table in the seed-saving cooperative in Haifa, sorting lentils without a word to me. I was the new teacher, and she had made it plain that she considered me temporary. Her father, I learned from the director, was to be moved from his farm in the hills to a small room in the city, and he had refused to go. One afternoon she showed me a cabinet of glass jars, each labeled in faded ink with the name of a village that no longer appeared on any map. These were carried here in coat pockets, she said. Some of them still come up every spring. The next morning, she asked me for an empty jar and a label, and she wrote the name of her father's farm on it in careful letters.",
+   "wordsAfter": 138,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The jars preserve vanished villages through living seeds; Dvora labels one for her father's farm, showing hope that home can survive relocation."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deletions (time marker, Dvora weighing the wheat jar, closing rain and stove sentence) are atmospheric or redundant. All the clues the answer and explanation rely on remain: the village-name labels, the coat pockets, seeds that still come up every spring, the father's forced move, and the jar labeled with the farm name. The distractors are unaffected."
+   }
+  },
+  {
+   "problemId": "3bfca90b-7516-4182-9de8-c7d7eaebb5c8",
+   "versionId": "313e8fd3-144d-4f34-a6c7-aa5bb94c149b",
+   "skill": "rhetorical_synthesis",
+   "wordsBefore": 174,
+   "decision": "trim",
+   "reason": "Removed the sun-compass and magnetic-field bullets, which only support distractor B (irrelevant to the goal). The generations, diapause, distance and \"inherited\" notes that A, C and D depend on are kept intact, so the answer is unchanged.",
+   "accepted": false,
+   "usd": 0.038148,
+   "newPassage": "While researching a topic, a student has taken the following notes:\n- The Monarch butterfly (Danaus plexippus) migrates up to 3,000 miles each fall from Canada and the northern United States to overwintering sites in central Mexico.\n- No single butterfly completes the round trip; the migration spans four to five generations, with each generation living only a few weeks except the final \"super generation,\" which can live up to eight months.\n- The super generation delays reproduction until spring, a state called reproductive diapause, which allows it to survive the winter and begin the journey north.\n- Because no individual monarch has ever made the full round trip, researchers describe the migratory route itself as being \"inherited\" across generations rather than learned by any single butterfly.",
+   "wordsAfter": 127,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "A is the only choice that explains the remarkable part, the multi-generation relay and the inherited route, using only information from the notes."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": true,
+    "tested_skill_changed": true,
+    "explanation_refers_to_deleted": true,
+    "verdict": "reject",
+    "details": "The stem and correct answer A rely only on retained notes. But distractor B cites the sun compass, circadian clock, magnetic field and cloudy-day navigation, which were deleted. B is now ungrounded and easy to dismiss as unsupported by the notes, which weakens its role as a tempting but off-goal choice. The explanation also references the deleted sun compass and magnetic field notes. The item is now materially easier in kind."
+   },
+   "rejectedBy": "checker"
+  },
+  {
+   "problemId": "3b4e74b1-e97e-4726-a77e-498f2befd7e9",
+   "versionId": "d2766529-9415-4dd7-8265-b5be2708939b",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 176,
+   "decision": "trim",
+   "reason": "Cut the closing cart-wheel sentence, \"newly hired,\" and the list of cousins and musicians. The wry opening, the unmet expectation of thunder, the father's story and the reflective ending are untouched, so answer A and the distractors still work.",
+   "accepted": true,
+   "usd": 0.043632000000000004,
+   "newPassage": "Hasan counted chairs. At every wedding we staffed in Thessaloniki that summer of 1872, he circled the hall twice before the guests came, tapping each chair back like a priest blessing pews, and I, learned to time my yawns to the movement of his lips. That evening the count collapsed within minutes: an aunt sat squarely on his tally board. I braced for thunder. None came. Hasan stood among the dancers with his hands loose at his sides, watching a boy asleep across two laps. Much later, as we folded linens, he mentioned that his father had once lost a post over a single guest left standing, and that he had counted chairs every night since, though no one had ever asked him to. Then he set his tally slate on my stack of napkins. Keep it or break it, Sadia, he said, and went to help the cooks.",
+   "wordsAfter": 149,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The opening is wry (yawns, priest blessing pews); after Hasan's calm reaction and his confession about his father, the tone becomes gentle, reflective sympathy."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deleted: \"newly hired\", the crowding details, and the closing cart-wheel sentence. All the evidence for the tone shift (priest simile, yawns, bracing for thunder, sleeping boy, father's story, slate) remains. The only flaw is a minor grammatical roughness (\"I, learned to time\"), which does not affect the item."
+   }
+  },
+  {
+   "problemId": "421f69a5-3643-4d66-a7b9-0c4de357fd5b",
+   "versionId": "d24aeb2a-e632-4c8b-9cdd-75ca8dc89984",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 190,
+   "decision": "trim",
+   "reason": "Cut the nineteen/engines detail, Tane's second rejoinder, the thumping machines, and the closing bus/dryer sentence. The three rules, the private fourth rule, Tane's offer, Moana's silence, and the shared memory remain, so answer C and the distractors are unaffected.",
+   "accepted": true,
+   "usd": 0.038274,
+   "newPassage": "Three rules hung on the laundromat wall in Moana's handwriting: no dyeing, no sleeping, no leaving wet clothes past closing. He had added a fourth in his head the day the will was read, a rule for himself: do not mention the chisel. His father had left the carving chisel, the one with the whalebone handle, not to Moana but to Moana's son, Tane. Now Tane sat on a dryer, turning the chisel over. \"You want it,\" Tane said. \"Take it.\" Moana said that was not how it worked. Moana folded a towel twice and did not answer. Then he asked, almost against his will, whether Tane had ever noticed the small notch near the blade. Tane had not. Moana took the chisel, showed him where his own thumb had slipped at age eight, and handed it back. \"Your grandfather wanted someone to ask about that,\" he said.",
+   "wordsAfter": 148,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Moana's private rule not to mention the chisel is set up, then he breaks it by asking about the notch and sharing the memory of his thumb slipping at age eight."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted material (Tane's age and engine interest, Tane's \"one second\" line, and the closing bus and dryer imagery) is incidental. The structure that the question tests is fully preserved. It sets up the private fourth rule, Moana goes silent, then he breaks the vow by asking about the notch and sharing the memory. Every option is still evaluable. A is still wrong because Tane hands the chisel back. B and D are still clearly off-focus. The explanation refers only to retained content. The small mismatch between its wording (\"groove\", \"no talking about\") and the passage's wording (\"notch\", \"do not mention\") is already in the original item, so the edit did not cause it."
+   }
+  },
+  {
+   "problemId": "457d567a-8ed3-4ca3-9e3d-989326420aa4",
+   "versionId": "6b4c8ee3-8503-41ab-94c7-e1b038e6849e",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 163,
+   "decision": "trim",
+   "reason": "Removed the quoted line and bow (\"Etienne, listen to this one,\" she would say, and bow before reading). It is redundant playful detail; the mock-theatrical voice, applause, the sober shift, and the plane ticket that support C remain, as does the boxes detail used by distractor B.",
+   "accepted": false,
+   "usd": 0.014079,
+   "newPassage": "We took the letters to the bridge because the apartment was already full of boxes. Mathis, my sister, read the first one aloud in a mock-theatrical voice, and I applauded each of our mother's complaints about the price of leeks, the neighbor's dog, the rain over the Saone. For half an hour it felt like a performance staged for two. Then she opened a letter dated the spring before she was born, and her voice dropped. Our mother had written that she was afraid of staying in Lyon forever, afraid she would never see the sea again. Mathis folded the page along its old crease. I thought of her plane ticket, tucked into the passport in her coat, and of how she had mentioned it to me as if mentioning the weather. Below us the river carried a single plastic bottle past the pillars, turning it slowly, never letting it sink.",
+   "wordsAfter": 151,
+   "mechanical": {
+    "ok": false,
+    "issues": [
+     "목표(150) 초과: 151단어"
+    ]
+   }
+  },
+  {
+   "problemId": "3eb729fb-a486-4367-bb15-58c1fcec488b",
+   "versionId": "d032a455-8edf-4678-b6b4-fdf989d9f015",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 186,
+   "decision": "trim",
+   "reason": "Removed the melon-cart clause, the coin-counting sentence, and the clerk's frowning at the scale. The underlined sentence, the village name, the unfolded corner and the distant river dot are kept, as are the clerk's weighing (for B) and the clerk comparison (for A), so the answer D is unchanged.",
+   "accepted": false,
+   "usd": 0.020604,
+   "newPassage": "\"Father, the postmaster says the river road is shorter,\" I told him, spreading the map across the counter. Taeyang did not look at it. He had folded the corner of every map he owned toward the north, a habit I took for the neatness of a clerk. The clerk weighed our parcel twice. We had come to send a parcel to my aunt, though Father had written nothing on the label but a name. When the clerk asked where it should go, Father answered with the name of a village I had never once heard him say aloud. He took the map from me, opened its folded corner, and pressed his thumbnail against a small dot beside a river that does not run anywhere near Shanghai. Then he handed the map back to me and asked whether the river road was paved.",
+   "wordsAfter": 142,
+   "mechanical": {
+    "ok": false,
+    "issues": [
+     "새 단어가 더해졌거나 순서가 바뀜(삭제만 허용)"
+    ]
+   }
+  },
+  {
+   "problemId": "4535a3a1-9c72-435d-bdca-b7334497b725",
+   "versionId": "24af40d6-b7ad-4ba7-a34b-e04ab94992df",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 168,
+   "decision": "trim",
+   "reason": "Removed the sentence about the flax mat and border pattern, which is background unused by the key, the explanation, or any distractor. The saying, the underlined sentence, the apology, the vanished drawing, and the final kite scene all remain, so the answer is unchanged and the passage is 136 words.",
+   "accepted": true,
+   "usd": 0.035952,
+   "newPassage": "Promises are cheap on a tram line. That was my mother's saying, and I repeated it the winter I rode Moana's bus each morning to the weaving cooperative on Ponsonby Road. __Moana kept a child's drawing of a red kite pinned above the fare box, its corners curling from the heat of the engine.__ One morning Moana missed my stop and drove two streets past it before he noticed, apologizing so many times that I laughed at him. In late August his route changed, and a new driver took the bus. The drawing was gone from above the fare box. That Saturday, walking home, I saw Moana on the hill above the harbor, holding the string of a red kite while a small girl in a borrowed coat ran beneath it, shouting at the wind.",
+   "wordsAfter": 135,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The kite drawing is set up early and pays off when Moana is seen flying a real red kite with a little girl, so it points toward a promise he keeps for a child."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted sentences cover the cooperative work and the border pattern argument. They are background atmosphere and nothing in the question, options, or explanation depends on them. The drawing, its disappearance, the apology, the mother's saying, and the closing kite scene all remain, so every option stays grounded."
+   }
+  },
+  {
+   "problemId": "47056b8e-21e4-4e4c-ab4a-d4efb2276c16",
+   "versionId": "a29bd5cf-842e-4cfb-84d4-1e1a07fe95ba",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 170,
+   "decision": "trim",
+   "reason": "Cut background (shop description, father's complaints, father going pale, gentle-turning detail). The puzzling habit, the ledger request recasting it, and the open ending are intact, so the key is unchanged.",
+   "accepted": true,
+   "usd": 0.04476,
+   "newPassage": "Why did Hedwig wind the clocks backward? Kalani, the landlord's son, had noticed it on three rent days running: while her father counted coins at the bench, she moved along the wall of clocks and turned each key the wrong way. He took it for a girl's idle mischief and said nothing. On the fourth rent day his father asked to see the shop's account book. Hedwig set the book on the counter herself, opened to a page in her own neat hand, and stepped back to the clocks. Kalani, reading over his father's shoulder, saw that every entry was dated a week before the coins had truly come in. His father nodded and closed the book. Hedwig turned one more key the wrong way and looked at Kalani, and he held her gaze without a word.",
+   "wordsAfter": 137,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Opens with the puzzling habit, the account-book request recasts it as parallel to the backdated entries, and it ends with Kalani's silent choice unresolved."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deletions removed only atmospheric or minor detail (setting, key resisting, the landlord disliking complaints, father going pale). The structure of the passage is intact: the habit, the ledger request that recasts it, and the open ending. The explanation and distractors still rely only on text that remains."
+   }
+  },
+  {
+   "problemId": "47c8f3d1-e260-46a7-bbd0-91776f1bc277",
+   "versionId": "1704f890-e1ec-495c-966c-2905f81583da",
+   "skill": "words_in_context",
+   "wordsBefore": 163,
+   "decision": "trim",
+   "reason": "Removed the decorative folk-tale clause about brides' tolls and the closing gulls sentence; neither bears on the metaphor, the flood/thirty-years evidence, or the customs-officer detail behind distractor A.",
+   "accepted": true,
+   "usd": 0.037068000000000004,
+   "newPassage": "Anything to declare? asked Lorenzo, the customs officer, as my mother and I reached the little checkpoint on the Cornish coast. My mother had nothing but a photograph she had found that morning in a box of my grandmother's linens, a box she had not opened in thirty years. It showed her own wedding, the groom's half torn away. I had thought it lost in the flood of '89, she said, and I wanted Callum to see it before we choose the chapel. Lorenzo studied it and waved us through. On the cliff path she told me that the torn-away man had drowned off this coast before I was born, and that the man I call father had married her the next spring. The photograph was a locked chest washed ashore, and I could not decide whether I wanted the key.",
+   "wordsAfter": 141,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The metaphor of a chest washed ashore conveys a hidden past unexpectedly resurfacing; the mother thought the photo lost, so she was not guarding it (C is wrong)."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the shells-toll tale and the closing gulls image were removed. All evidence for D (flood, 30-year box, drowned first groom, the key) and the distractor grounding (customs inspection, lost vs. guarded) remain. The explanation does not reference the deleted text."
+   }
+  },
+  {
+   "problemId": "5327a369-73ca-4481-82f5-297931d8e270",
+   "versionId": "22b3496e-af64-4585-99a5-46cdb35fd105",
+   "skill": "cross_text_connections",
+   "wordsBefore": 170,
+   "decision": "trim",
+   "reason": "Removed background (century and a half, markets, outlying islands), \"regular,\" \"Historian,\" and minor modifiers. Kept Lindqvist's enforcement-as-barrier claim (key D), the garrison detail (B), the smuggling claim (C), the monopoly-ending conclusion (A), and Text 2's difficulty-of-growing evidence.",
+   "accepted": true,
+   "usd": 0.05091899999999999,
+   "newPassage": "Text 1\nThe Dutch East India Company (VOC) kept cloves and nutmeg scarce and expensive. Company fleets made \"extirpation\" voyages to burn unauthorized clove trees, and garrisons on the Banda Islands guarded the nutmeg groves. Pieter Lindqvist argues that this enforcement was what confined spice cultivation to Dutch-held islands. So when the company's naval patrols thinned in the 1760s and agents of the French administrator Pierre Poivre slipped seedlings out of the region, the monopoly's days were numbered.\n\nText 2\nBotanist Amara Siregar's review of colonial garden records from Mauritius complicates the story of the smuggled seedlings. Most of the trees that Poivre's agents carried out died within months. Nutmeg proved hard to grow: it needs specific soils, shade, and humidity, and it requires both male and female trees, which cannot be told apart until they flower. Profitable plantations outside the Moluccas appeared only after decades of repeated failed attempts.",
+   "wordsAfter": 150,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Text 2 says the real obstacle was the difficulty of cultivating nutmeg, not Dutch enforcement, so it disputes Text 1's claim that policing was the main barrier."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deletions are limited to minor modifiers (e.g., \"roughly a century and a half,\" \"steady,\" \"years later,\" \"Historian\"). Text 1's enforcement-confined-cultivation claim and Text 2's seedling deaths and growing-difficulty evidence remain intact. All options are still grounded, and the explanation's references (soils, shade, humidity, sexes indistinguishable until flowering, decades of failure) are still present; \"waited years\" is still implied by \"until they flower.\" The tested skill is unchanged."
+   }
+  },
+  {
+   "problemId": "58bb07a8-311f-4a1b-b051-301ed0b9c068",
+   "versionId": "dc8db1cb-0574-41fd-bbd3-56dee7beddb2",
+   "skill": "words_in_context",
+   "wordsBefore": 187,
+   "decision": "trim",
+   "reason": "Cut the final two sentences (the river stone and the closing shadows/dog imagery). They are background that the key, explanation and distractors do not depend on. The brother's death, \"Neither of us mentioned him,\" the grazing sentence and the hawk sentence all remain. Result is about 141 words.",
+   "accepted": true,
+   "usd": 0.038114999999999996,
+   "newPassage": "Tell me about the trading post first, Aponi said, before I had even set down my bundle. So I told her. We stood on the stone bridge below the mesa in the spring of 1879, a year after my family had gone east, and I described my father's ledgers and the schoolmaster's squeaking boots until she laughed. Once, when we were nine, her brother had dared us both to walk the parapet; the summer before I left, the flood had taken him from beneath these same arches. Neither of us mentioned him. For two days we grazed our talk around the edges of one pasture, wandering wide to horses, to weather, to the price of wool. Whenever the water grew loud below us, she would point out a hawk, and I would look where she pointed, though I saw no hawk.",
+   "wordsAfter": 141,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The brother's death is unmentioned by both (\"Neither of us mentioned him\"), and Aponi deflects with the hawk, so the phrase means mutual deliberate avoidance of one painful subject."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the final two atmospheric sentences (river stone, shadows/dog and sheep) were removed. All clues needed for the answer (brother's death, \"Neither of us mentioned him,\" the hawk deflection) remain. The distractors and the explanation are still grounded, and the tested skill is unchanged."
+   }
+  },
+  {
+   "problemId": "56786280-b2a7-48e2-b748-4b394c5f9195",
+   "versionId": "68941af4-500d-47a2-aab7-62cf4c3df40a",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 168,
+   "decision": "trim",
+   "reason": "Removed the bay-scenery sentence and two adverbial modifiers (\"without fail,\" \"quite formally,\"). The routine coffee gesture, the disclosed past favor, the later request, and the final look at the coffee all remain, so the structure and answer D are unchanged.",
+   "accepted": true,
+   "usd": 0.042699,
+   "newPassage": "When Anacleto came up to the terrace on Thursdays, he brought his grammar and a small paper of coffee, which he set on the wall beside my inkstand as though it had arrived there by itself. I never thanked him, and he never waited to be thanked. Some months before, I had paid the physician who attended his father, and neither of us had spoken of it since; I believed the matter forgotten, as I had wished it to be. This Thursday, however, he recited the conditional mood without a single error and then asked whether I might set him harder lessons, longer ones, as many as I pleased. Rosalinda, my housekeeper, laughed from the doorway at such appetite. I did not laugh. I looked at the coffee on the wall, and then at his careful hands, which had already opened the grammar to a page we had not reached.",
+   "wordsAfter": 150,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The passage moves from the routine coffee gesture, to the disclosed past favor (paying the physician), to the request for harder lessons, which makes the narrator see the coffee as repayment. The other options describe events or decisions the passage does not contain."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deletions were \"without fail,\" the bay/verbs scenic sentence, and \"quite formally.\" The structure (routine coffee gesture, disclosed past favor, later request recasting the gesture) is fully intact. The distractors are still clearly unsupported, and the explanation relies only on retained text."
+   }
+  },
+  {
+   "problemId": "592aeec2-28ca-4960-acb0-b30f8f0f1cc7",
+   "versionId": "e99fdf65-65d5-45a5-bd51-4610610c524c",
+   "skill": "central_ideas_details",
+   "wordsBefore": 162,
+   "decision": "trim",
+   "reason": "Cut the hats-and-skirts detail and the black-cloak example (20 words total, leaving 142). The outsider/dervish contrast, the palm and rotation symbolism, and the Rumi, dizziness, training, and planets/pilgrims details behind the distractors remain, so the answer A is unaffected.",
+   "accepted": false,
+   "usd": 0.041163000000000005,
+   "newPassage": "To outside observers, the sema ceremony of the Mevlevi order, founded in thirteenth-century Konya by followers of the poet Rumi, often appears to be a performance of endurance: dancers turn for long stretches without apparent dizziness. Yet for the Ottoman-era dervishes who practiced it, the spinning was valued less as a physical feat than as a structured form of prayer. Each element of the ritual carried assigned meaning. The right palm, turned upward, received divine grace, while the left, turned downward, passed that grace to the earth. Even the counterclockwise rotation around the heart was understood as aligning the body with the circling of planets and of pilgrims around the Kaaba. Novices trained for a thousand and one days before joining the ceremony, and much of that training concerned not balance but the inner recitation that was meant to accompany every turn.",
+   "wordsAfter": 142,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "A captures the contrast between the outsider view (endurance) and the practitioners' view (symbolically structured prayer). B and C contradict the passage, and D misstates it."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": true,
+    "verdict": "reject",
+    "details": "The question, the correct answer and the distractors all still work after the deletions. The explanation, however, lists \"the cloak\" as supporting evidence, and the sentence about the black cloak was deleted from the passage. The explanation therefore refers to text that is no longer there, so the edit is rejected under the strict standard."
+   },
+   "rejectedBy": "checker"
+  },
+  {
+   "problemId": "5b73c9b2-5309-49af-8e31-63a54863e8fd",
+   "versionId": "509ef491-79af-473e-bca5-358068b9a6ac",
+   "skill": "central_ideas_details",
+   "wordsBefore": 167,
+   "decision": "trim",
+   "reason": "Removed the train/pigeons sentence and the closing hibiscus-bud sentence, which are atmospheric and not needed for the key. All clues for C (withdrawn entry, ribbon pushed back, \"learn my name\", ribbon in drawer, careful tending) and the distractor details remain.",
+   "accepted": true,
+   "usd": 0.039096,
+   "newPassage": "Janelle was already at the train-station cafe in Port of Spain when I arrived, two cups of sorrel tea sweating on the table and the blue ribbon from Saturday's garden show lying between them. I had bought the house on the hill only in March; she had tended its hibiscus for thirty years before that. Everyone at the show knew her blooms were the best, and everyone saw her withdraw her entry an hour before judging, leaving mine to win. I had brought the ribbon to return it. She pushed it back across the table and said the garden needed to learn my name. Since then I have kept the ribbon in a drawer rather than on the wall, and each time I see it I water more carefully, prune more slowly, as though the prize is still being judged.",
+   "wordsAfter": 140,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Janelle's withdrawal and her remark that the garden needed to learn the narrator's name make the ribbon a gift of welcome. Keeping it in a drawer and tending the garden more carefully \"as though the prize is still being judged\" shows the narrator feels she must still earn it."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the train/pigeons detail and the closing budding-hibiscus sentence were removed. These are atmospheric and not used by the question, options, or explanation. All key evidence (Janelle withdrawing, refusing the ribbon, the 'learn my name' line, ribbon kept in drawer, more careful tending) is intact."
+   }
+  },
+  {
+   "problemId": "5959f6f9-4626-4e6f-819a-aa448ce10fa9",
+   "versionId": "57d2486c-3c1d-4799-b01a-e655e7253f33",
+   "skill": "words_in_context",
+   "wordsBefore": 164,
+   "decision": "trim",
+   "reason": "Removed the opening aphorism, \"outside Bergen\", \"the week after\", and the \"spoke less and slept more\" sentence (147 words). The brother's death, the letter, the family-reading exchange, the door line, the water imagery, and the burning of the envelope all remain, so the key and every distractor are unaffected.",
+   "accepted": true,
+   "usd": 0.037326,
+   "newPassage": "At the sanatorium above the lake, I was the nurse who sat up with the patients who could not sleep, and Thorvald was the most stubborn of them. He would not lie down until I wheeled him to the end of the dock, where he watched the water as if a boat were due. On the fourth night he told me about his brother, a quarrel over their father's boathouse, and a letter he had written and carried in his coat ever since. His brother had died the following spring. I said that someone in the family might still read the letter, and he shook his head. An apology, he said, was a door that opens from one side only. When he asked me, Sigrid, to burn the envelope in the ward stove, I did, and I noticed that he no longer looked out at the water.",
+   "wordsAfter": 147,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The brother is dead, so the apology has no one to receive it; a door that opens from one side only requires someone on the other side. Thorvald did write the letter, and he told Sigrid about it, which rules out C and B. A misreads the metaphor as being about forgiveness."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deleted material (opening line, \"outside Bergen\", \"the week after\", \"spoke less and slept more\") is atmospheric or minor. All evidence the question and explanation rely on (brother's death, the letter, the head shake, watching the water, burning the envelope) remains. Distractors are still grounded."
+   }
+  },
+  {
+   "problemId": "54c1da25-6100-4410-834a-e2e2887a2923",
+   "versionId": "b6416bd4-cc8e-4fa9-a552-be87fcfa18e0",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 163,
+   "decision": "trim",
+   "reason": "Removed the 'sharing the road with pedestrians, streetcars, and horse-drawn carts' clause and the 'causing drivers to stop and start unpredictably' clause. Both are background detail. The manual-signal problem, Morgan's partial fix, the underlined sentence and the concluding sentence are all kept, so the function of the underlined sentence and answer C are unchanged.",
+   "accepted": true,
+   "usd": 0.042459,
+   "newPassage": "During the 1920s, city planners in several American cities began installing traffic signals at intersections to manage the growing number of automobiles. Early signals were often manually operated by police officers stationed in booths, a system that proved inconsistent because officers in different intersections along the same street frequently changed the lights at different times. Engineer Garrett Morgan's patented signal design, which introduced a distinct caution position between stop and go, addressed part of this problem by giving drivers time to slow down before a full stop. __The more lasting solution, however, came from coordinating signal timing across entire streets so that a driver traveling at a steady speed could pass through a series of green lights without stopping.__ This innovation, known as signal progression, transformed traffic engineering from a matter of managing individual intersections into a matter of managing the flow of traffic across whole corridors.",
+   "wordsAfter": 147,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The sentence presents signal progression as the more lasting solution to the inconsistency problem that Morgan's design only partly addressed, so it identifies the development that resolved a limitation left by an earlier improvement."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deletions were minor: the list of other road users and the clause about drivers stopping and starting unpredictably. The underlined sentence, the partial fix from Morgan's design, and the problem it solves are all intact. Answer C stays correct, the distractors stay plausible, and the explanation does not rely on deleted text."
+   }
+  },
+  {
+   "problemId": "5fca6127-5cf1-414e-a674-9ff5cb1a42a3",
+   "versionId": "27d9870f-01d3-482f-bccf-8d8907e9b957",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 193,
+   "decision": "trim",
+   "reason": "Cut the extra jab, the shallow-end sentence, the \"trading jabs\" sentence and the closing dragonfly imagery. The playful opening, the vial pivot, the drain trick and \"did not ask me to stay\" remain, so D stays correct and A, B and C stay wrong.",
+   "accepted": true,
+   "usd": 0.044838,
+   "newPassage": "When Paloma handed me the ring of keys that morning, she bowed as if presenting a crown, and I laughed so hard I nearly dropped them. The salt-water pool behind the Dayton rec center had been hers for thirty summers; I was nineteen, her apprentice, and the aquatic park across town had just offered me twice her wage. I mentioned it while we skimmed leaves. Paloma asked whether they would give me a whistle with my name engraved on it. Then, testing the water, she held the vial up to the light longer than she needed to. Her father's crew had poured these walls, she said. The drain still stuck each November in a way no manual explained. She did not ask me to stay. She only showed me, slowly, where to kick the grate. I set down the net.",
+   "wordsAfter": 140,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Playful bow and teasing give way to a quiet, sincere sharing of knowledge about the pool."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted material (the manager joke, the jabs sentence, the Fifth Street detail and the closing dragonfly image) is redundant atmosphere. The teasing opening, the whistle joke, the slow, quiet explanation of the pool and the drain, and \"She did not ask me to stay\" all remain. They fully support D and the explanation. The distractors are still wrong for the same reasons, and the tested skill is unchanged."
+   }
+  },
+  {
+   "problemId": "650d79b4-9299-4a24-9b78-7d9f39657a2e",
+   "versionId": "281cd17a-6e21-481d-89c4-7b366effaeeb",
+   "skill": "words_in_context",
+   "wordsBefore": 164,
+   "decision": "trim",
+   "reason": "Removed the last two sentences (Josiah's reflection on the children and Ephraim erasing the board). The key rests on the free teaching, the cake episode, and the \"fence he had built himself\" line, all kept. The reputation detail in sentence 2 stays so distractor C remains tempting.",
+   "accepted": true,
+   "usd": 0.035175,
+   "newPassage": "Josiah had bought fish from Ephraim every Friday for two years and had never once seen the old man smile. On Mill Street people said he shorted his scales and shouted at children who leaned on his counter. So Josiah nearly dropped his notebook the Tuesday he walked into the night English class at the Ohio language school and found Ephraim at the chalkboard, drilling six new arrivals on the names of vegetables. Afterward the teacher explained that Ephraim had come to town forty years earlier knowing no English and had taught the class for free ever since. Once, she said, a student had brought him a cake at the market, and he had not spoken to her for a month. His temper, the teacher said, was a fence he had built himself.",
+   "wordsAfter": 133,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The fence metaphor plus the cake anecdote shows his gruffness deters gratitude and closeness while he quietly does kind work."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the closing two sentences were deleted (Josiah's reflection and Ephraim erasing the board). The key evidence (free teaching, the cake episode, the fence line) is intact. The explanation and all distractors remain grounded, and the tested skill is unchanged."
+   }
+  },
+  {
+   "problemId": "69a471cd-89e8-4590-bde1-4388052b4de1",
+   "versionId": "ccc79c7a-2d77-4cec-8e32-54148de848de",
+   "skill": "inferences",
+   "wordsBefore": 165,
+   "decision": "trim",
+   "reason": "Removed the redundant \"vast darkness\" phrase and the closing \"since...\" clause explaining why higher density helps; the evidence sentence, the density comparison, and all distractor-relevant details remain, so the answer B is unchanged. The result is 143 words.",
+   "accepted": true,
+   "usd": 0.039603,
+   "newPassage": "Marine biologists studying the deep-sea anglerfish have long puzzled over how males, which are dramatically smaller than females, manage to find mates. Some species solve this problem through a permanent physical fusion: upon locating a female, the male bites into her body and gradually merges with her tissue, eventually sharing her bloodstream and losing his own digestive organs. This extreme strategy makes sense only if encounters between the sexes are exceedingly rare events. Researchers have found that in species where males retain independent digestive systems and free-swimming ability throughout adulthood, population densities tend to be considerably higher than in species exhibiting permanent fusion. In these higher-density species, a male that separates from one female after mating retains a reasonable chance of encountering another receptive female later on. This pattern suggests that the evolution of permanent sexual parasitism among anglerfish is closely tied to ______.",
+   "wordsAfter": 144,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The passage ties fusion to rare encounters and low density, so the conclusion should say that a male is unlikely to find more than one female in the sparse deep sea. A is too vague, C adds an unsupported claim, and D overgeneralizes."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted phrases (\"in the vast darkness of the ocean depths\" and \"since individuals of both sexes are more frequently within range of one another\") were atmospheric or redundant. The core premises remain: fusion makes sense only if encounters are exceedingly rare, and higher density allows re-encounters. The correct answer and distractors are still fully supported or still wrong for the same reasons."
+   }
+  },
+  {
+   "problemId": "629adba2-a4ca-4ab8-94a5-7307a40c6b5b",
+   "versionId": "687f7d3e-dfe4-4731-94df-81958a56aeea",
+   "skill": "central_ideas_details",
+   "wordsBefore": 192,
+   "decision": "trim",
+   "reason": "Cut the scene-setting opening sentence, the description of Yona, and the table-of-packets clause. All evidence for C (not pressing, distrust of long confessions, set-aside packet, matching handwriting) and the distractor details (Yona's eyebrows, Mass) remain.",
+   "accepted": true,
+   "usd": 0.042638999999999996,
+   "newPassage": "I was labeling squash seed when Nova walked in, eleven years after she had stopped coming to Mass, and asked whether we still needed volunteers. Yona raised her eyebrows at me over the scale. I asked Nova nothing beyond whether she knew beans from squash. She said she had grown up sorting both. I have heard a great many confessions, and I have come to distrust the long ones; the shortest are often followed, much later, by the true account. So I let the afternoon pass in envelopes. Nova sorted the speckled bean seed from the plain faster than I could, pausing only once, over a packet labeled in her late grandmother's slanted script, which she set aside without comment. I did not ask about it. I found that she had labeled each of hers in a hand very much like the one on the packet she had set aside.",
+   "wordsAfter": 150,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The narrator asks nothing, lets the afternoon pass, and notices telling details (the grandmother's packet, the similar handwriting). That shows patience with her silence and attention to what her actions reveal."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deletions were atmosphere (setting smells), Yona's characterization, and the evening table detail. All evidence for the correct answer (asking nothing, distrust of long confessions, the set-aside packet, the matching handwriting) remains. Distractors A, B, and D are still evaluable; B still hinges on Yona raising her eyebrows, which is retained. The explanation cites no deleted text."
+   }
+  },
+  {
+   "problemId": "69ec37d9-8077-466d-b7c2-d68e498525bc",
+   "versionId": "56b1dd28-e3cc-41cd-bcc4-fd13d9832ebb",
+   "skill": "cross_text_connections",
+   "wordsBefore": 192,
+   "decision": "trim",
+   "reason": "Cut Text 1's third sentence, the \"Archaeologists argue that\" lead-in, the \"rather than within individual households\" clause and the famine-risk clause. Text 2, which holds the evidence span and everything D depends on, is untouched. The cooperative-system claim in Text 1 remains, and the question stem restates the famine-protection point.",
+   "accepted": false,
+   "usd": 0.043932,
+   "newPassage": "Text 1\n\nExcavations of Bronze Age settlements in the eastern Mediterranean have uncovered communal grain silos located at the center of villages. This arrangement reflects a cooperative economic system in which grain surplus was pooled and redistributed by community leaders.\n\nText 2\n\nThe interpretation of centrally located grain silos as evidence of egalitarian, cooperative economies deserves scrutiny. In several excavated villages, the silos nearest the ceremonial structures contained noticeably larger stores of grain than smaller silos scattered elsewhere, and skeletal remains from elite burials in the same period show better nutrition than those from ordinary households. This pattern is more consistent with a system in which local leaders controlled and unevenly distributed the communal surplus, using access to stored grain as a source of political power rather than a mechanism for protecting the whole community from famine.",
+   "wordsAfter": 137,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Text 2 cites skeletal nutrition differences and unequal silo stores to argue leaders kept a disproportionate share, undermining the cooperative-famine-protection claim."
+   },
+   "checker": {
+    "question_depends_on_deleted": true,
+    "distractor_depends_on_deleted": true,
+    "tested_skill_changed": true,
+    "explanation_refers_to_deleted": false,
+    "verdict": "reject",
+    "details": "The question asks about Text 1's claim that the silos reflect a cooperative system \"designed to protect the whole community from famine\". The shortened Text 1 no longer says anything about reducing the risk of starvation, so the stem now refers to a deleted claim. The stem also lost its connection to Text 1's religious-authority argument, which was cut along with the ceremonial-structure placement. Option C (\"overstates how religious authority influenced the placement of silos\") was a distractor built on that deleted religious-authority claim. It is now ungrounded and easy to dismiss. Text 1 is also much thinner, so the cross-text comparison is weaker, and the item is easier and different in kind."
+   },
+   "rejectedBy": "checker"
+  },
+  {
+   "problemId": "6fcf27ff-3f8f-409b-8f81-c64744c2d3e1",
+   "versionId": "631a68ed-87df-40d2-8348-4d01a980e4d9",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 162,
+   "decision": "trim",
+   "reason": "Removed the May/midnight-sun clause and the ticket seller detail, which are background only. The shift from easy chat (popcorn, parking) to awkward shared cover-up, and every distractor's source detail, remain intact. The passage is now about 143 words.",
+   "accepted": true,
+   "usd": 0.038505,
+   "newPassage": "Who goes to the cinema in Tromso? Anders asked himself this as he bought a ticket. Inside, the theater held eleven people, and one of them was Anneke, who had not come to Mass in three years. She waved with easy warmth, and Anders, who had rehearsed several gentle reproaches over the years, found he wanted none of them. They traded complaints about the stale popcorn and the price of parking. Then Anneke's daughter leaned across her mother's lap. \"Why don't we go to church anymore? You said Father Anders moved away.\" Anneke laughed a little too quickly and said children mix everything up. Anders laughed as well, and agreed that he did travel a great deal. He began folding his ticket stub into smaller and smaller squares. When the lights finally dimmed, he found himself studying the advertisements with unusual care.",
+   "wordsAfter": 142,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Tone moves from easy warmth to awkward shared pretense after the daughter's question; B, C and D misdescribe the direction or the endpoint."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deleted only the midnight-sun clause and the ticket seller detail. All evidence for the tone shift (dropped reproaches, small talk, child's question, shared excuse, ticket folding) remains. Distractor C is still plausible and the explanation cites nothing deleted."
+   }
+  },
+  {
+   "problemId": "6f3efbc8-7387-4e90-8873-dd36e55084a1",
+   "versionId": "de074029-0acc-4da2-8126-437bd00fc041",
+   "skill": "words_in_context",
+   "wordsBefore": 163,
+   "decision": "trim",
+   "reason": "Removed the closing mist sentence and the captain appositive; neither is used by the key, the explanation, or any distractor. Only deletions plus a capitalization repair at the join.",
+   "accepted": true,
+   "usd": 0.040035,
+   "newPassage": "Bao did not like surprises. He had found Wira curled among the rice sacks two days out, and now, docked below the terraced hills outside Hanoi, he had brought the boy home to eat because there was nowhere else to put him. Bao's mother set out bowls and chopsticks with the precision she gave to every meal. Wira, from an island far to the south, hesitated, then began eating with his right hand as his family always had. Bao waited for the small frown he had known since childhood. Instead his mother watched a moment, set down her chopsticks, and tore a piece of rice cake with her fingers. Bao felt the meal tilt on its hinge. Later Wira picked up the chopsticks and fumbled a dumpling into his lap, and Bao's mother laughed, a sound Bao had not heard at that table in years.",
+   "wordsAfter": 145,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The mother abandons her usual chopstick precision and eats with her fingers like Wira. The 'hinge' image is a turning point where the household's familiar rules open to another way. A, B, and D are contradicted by the text."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the 'captain of the river freighter' detail and the closing mist sentence were removed. Neither is needed for the question, the correct answer, the distractors, or the explanation. All the evidence (the expected frown, the mother eating with her fingers, Wira's fumbling, the laugh) remains."
+   }
+  },
+  {
+   "problemId": "6eed1b91-670c-4df9-9306-a07d2dde2bd0",
+   "versionId": "84407b9c-fc00-4f42-9ce7-e81b47b24e31",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 183,
+   "decision": "trim",
+   "reason": "Cut the second example (aunt quote), the teasing clause, the traffic sentence, the rewrite-count appositive, and two small modifiers. The playful opening, the quick reading of the ending, the missing sauce joke, the noodle-shop pivot, the careful handling (B) and the even voice (D) all remain, so the tone shift and answer A are unaffected.",
+   "accepted": true,
+   "usd": 0.046944,
+   "newPassage": "Rain beaded on the manuscript pages Jiayi had carried to the stone bridge, and she shielded them with her sleeve while Haoran read. He had translated four of her novels and liked to say that he read her endings first, the way some people taste the sauce before the noodles. He lingered over the opening chapters, laughing at a scene in a fish market. He bowed to the lanterns as if they were an audience. When he reached the last pages, he read them quickly, squared the stack, and began to tell her about a noodle shop that had opened behind the temple. She waited for the joke about the sauce. He offered her the pages instead, holding them by the corners so the rain would not spot the final chapter. Jiayi tucked the manuscript under her coat and asked, in an even voice, whether the shop stayed open late.",
+   "wordsAfter": 150,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The tone moves from playful warmth (the sauce joke, laughing, bowing to the lanterns) to a subdued mood. Haoran rushes the ending and skips the expected joke, and Jiayi's even voice implies she senses the ending has failed."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deletions (the aunt quote, the teasing, the six rewrites, the traffic sound) are redundant or atmospheric. The playful opening (fish-market laughter, lantern bow) and the pivot (quick reading, missing sauce joke, careful handling, even voice) remain. The explanation and all distractors are still grounded in the shortened text."
+   }
+  },
+  {
+   "problemId": "7249eebb-92c0-478b-bfbb-e4f067eb881e",
+   "versionId": "de840675-e534-4042-ba67-410722dd51d1",
+   "skill": "transitions",
+   "wordsBefore": 182,
+   "decision": "trim",
+   "reason": "Removed the two opening background sentences (the economic explanation and the puzzle). The cause sentence before the blank and the result sentence after it are intact, so \"As a result,\" remains correct.",
+   "accepted": false,
+   "usd": 0.023847,
+   "newPassage": "A closer look at sermons and moral literature circulating in Dutch cities during this period reveals that vanitas themes, warning against the vanity of earthly pleasures, were a dominant strain of public religious discourse even as church commissions declined. Because this moral discourse continued to shape how ordinary citizens thought about wealth and mortality, painters and patrons alike remained conscious of the tension between material display and spiritual warning. ______ the paintings may reflect not simply new patrons' tastes but a broader cultural anxiety about material wealth that persisted independently of formal religious institutions.",
+   "wordsAfter": 94,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [
+     "C"
+    ],
+    "matchesKey": true,
+    "note": "The final sentence is a hedged conclusion that follows from the preceding claim about continued moral discourse, so a causal transition (\"As a result\") fits. \"In fact\" is a weaker alternative, since the sentence extends the argument rather than intensifying it."
+   }
+  },
+  {
+   "problemId": "787914bd-8a84-4b42-8fa8-e68ca3f54931",
+   "versionId": "6571241a-63d6-47ce-adc4-df5a630503b9",
+   "skill": "cross_text_connections",
+   "wordsBefore": 192,
+   "decision": "trim",
+   "reason": "Cut redundant background and modifiers (the light/shadow detail, the geographic detail, the fresco contrast, the \"same transition\" phrase). Text 1's technical-cause claim, Text 2's patron-demand claim and the evidence sentence are intact, and the details behind the distractors (blending, durability, panels) remain. The result is about 140 words.",
+   "accepted": false,
+   "usd": 0.0225,
+   "newPassage": "Text 1\n\nArt historians often emphasize technical advantages as the driving cause of the transition from tempera to oil paint. Oil paint dries more slowly than tempera, allowing artists to blend colors gradually on the canvas. These historians argue that once painters recognized oil's capacity for richer modeling of form, workshops adopted the new medium primarily because it expanded what was technically achievable on canvas.\n\nText 2\n\nOther historians argue that economic and social pressures, not technical capability alone, drove the shift to oil paint. They note that wealthy merchant patrons commissioned portable panel paintings, and oil paint's durability and suitability for such panels made it commercially attractive independent of its blending properties. These historians contend that workshops adopted oil paint largely because patron demand for a new kind of artwork made the medium economically necessary, with its technical qualities serving as a secondary justification rather than the primary cause.",
+   "wordsAfter": 150,
+   "mechanical": {
+    "ok": false,
+    "issues": [
+     "새 단어가 더해졌거나 순서가 바뀜(삭제만 허용)"
+    ]
+   }
+  },
+  {
+   "problemId": "75a960f3-9bb6-43d9-9fe5-7b1646b42b2a",
+   "versionId": "c89dcb9d-6151-4dd3-b223-a112dce5d583",
+   "skill": "cross_text_connections",
+   "wordsBefore": 164,
+   "decision": "trim",
+   "reason": "Removed only minor modifiers (\"newly compiled\", \"across the steppe\", \"she warns,\", \"now\", \"yet\"). Farouk's multi-source standard, Reyes's coins-only conclusion, and the details behind distractors A, C and D are intact, so the answer B is unchanged.",
+   "accepted": false,
+   "usd": 0.021696,
+   "newPassage": "Text 1\nHistorians of medieval trade routes often reconstruct caravan paths from scattered finds of coins. The historian Leila Farouk argues that such reconstructions deserve confidence only when a single path explains finds from several independent kinds of evidence at once, coins, but also pottery styles, place-names, and written itineraries. A route that fits one kind of evidence very closely but has no support from the others may simply reflect where coins happened to be buried or dug up.\n\nText 2\nUsing a database of more than four hundred coin hoards, archaeologist Tomas Reyes has mapped a previously unrecognized northern caravan route. The hoards line up along the proposed path with remarkable precision, and their dates form a clear sequence from east to west. Although no pottery or documents from the region have been examined, Reyes concludes that the coin evidence alone is so dense and so consistent that the route should be considered firmly established.",
+   "wordsAfter": 156,
+   "mechanical": {
+    "ok": false,
+    "issues": [
+     "새 단어가 더해졌거나 순서가 바뀜(삭제만 허용)",
+     "목표(150) 초과: 156단어"
+    ]
+   }
+  },
+  {
+   "problemId": "7eaa8af3-fbcd-4a79-80e7-a9c93de76787",
+   "versionId": "7b8259bd-5e40-4eb2-bb7e-deb4a0df7a63",
+   "skill": "central_ideas_details",
+   "wordsBefore": 197,
+   "decision": "keep",
+   "reason": "Safe deletions (about 20 words) cannot reach 150 words. Nearly every remaining sentence supports the key (feedback loop, models underestimating) or a distractor's source detail (oxygen-poor methane for A, the less-than-a-fifth figure for B, the no-point-of-no-return statement for C). Cutting further would weaken the item.",
+   "accepted": false,
+   "usd": 0.022014
+  },
+  {
+   "problemId": "7f0f959b-855d-4311-9377-671235b5ddb4",
+   "versionId": "5e048428-1776-4929-9a76-e6ccca41ee30",
+   "skill": "words_in_context",
+   "wordsBefore": 168,
+   "decision": "trim",
+   "reason": "Removed the final atmospheric sentence (kettle and concertina), which is unrelated to the tested phrase; the shrug and weakening-hands clues the key depends on remain, bringing the passage to about 147 words.",
+   "accepted": true,
+   "usd": 0.033852,
+   "newPassage": "Thandiwe had kept the boarding house on Bree Street for twenty years, and Lindiwe had lodged in its back room for nearly as long, paying in coins or, when coins were scarce, in reed mats woven to a pattern her grandmother had carried down from the hills. Buyers at the Saturday market sometimes asked who else made them. Lindiwe would only shrug. Lately she had begun leaving mats half finished on the windowsill, and in the mornings she ran her knuckles under the hot tap before she could close her hand around a cup. One winter evening Thandiwe cleared the kitchen table, laid out a bundle of reeds, and sat down with her sleeves rolled. Teach me, she said, before the pattern goes to sleep in your hands. Lindiwe snorted, but she pulled up a chair, and by the light of the stove the first rows appeared, crooked and stubborn.",
+   "wordsAfter": 150,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Lindiwe's stiff, painful hands and unfinished mats show her ability to weave is fading, so the pattern risks being lost. Thandiwe asks to learn it before that happens."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the final atmospheric sentence (kettle, concertina) was removed. All clues used by the question and explanation remain, and the distractors are unaffected."
+   }
+  },
+  {
+   "problemId": "82bf419d-27e7-4be7-a3cf-3025fe34ad75",
+   "versionId": "538a1a43-cf2d-46a5-af46-4684f2412aa7",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 168,
+   "decision": "trim",
+   "reason": "Cut the second example (blue-podded pea), \"Saga learned quickly.\", and the clause about people Marit hadn't spoken to. The underlined sentence, the lease/\"closing\" detail, and Marit's handing over the key and garden list (which the key depends on) remain. Result is about 143 words.",
+   "accepted": true,
+   "usd": 0.042692999999999995,
+   "newPassage": "Seeds keep longer than people expect. Marit used to say this to every new member of the cooperative, tapping the glass jars along the warehouse shelves in Rotterdam: beans from 1961. When her son married Saga, Marit brought the bride to the warehouse the very next week and taught her to label envelopes in the old way: variety, grower, year. By then the lease was ending, and the members had stopped coming to meetings, but no one said the word closing. __She began writing a fourth line on each envelope, in small letters: where it could be planted next.__ Marit noticed and said nothing for a month. Then, one wet afternoon, she handed Saga the key to the oldest cabinet and a list of gardens across the city. The last jars left in a borrowed van, rattling down the Maasboulevard in the rain.",
+   "wordsAfter": 143,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Saga's added line looks toward replanting elsewhere, implicitly accepting the closure; Marit's later handing over the key and garden list shows she comes to share that acceptance."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deleted material (blue-podded pea, \"Saga learned quickly.\", people Marit hadn't spoken to) is not relied on by the question, options, or explanation. The deletion of \"Saga learned quickly.\" makes the pronoun \"She\" slightly less anchored, but Saga is still the clear referent from the earlier sentence. Everything needed for B (lease ending, \"closing\", key and garden list) remains, and the skill tested is unchanged."
+   }
+  },
+  {
+   "problemId": "8a08ffdb-7e75-4e6b-86ec-217c5ab668b9",
+   "versionId": "d6d91cdb-0d9c-4ef3-bbe8-05522765c016",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 175,
+   "decision": "trim",
+   "reason": "Removed the remarriage clause, the year-of-silence sentence, and the closing scooter sentence. The kept text still has Putri's misreading of the rule, the unanswered open book, the slip listing her books, and the underlined sentence, so the answer C and the distractors are unaffected.",
+   "accepted": true,
+   "usd": 0.034707,
+   "newPassage": "Putri learned that Anh kept one rule above all others: no talking in the reading room of the old library in Hanoi, where he took her every Sunday. She resented it. She decided the rule was his way of not having to know her. Twice that spring she left a book open on the table, hoping he would ask about it; he only turned another page. The week before she left for university, she asked whether the rule still applied now that she was grown. He considered the question, then slid a library slip across the table. On it, in pencil, was the title of every book she had read there, with a small mark beside the ones she had read twice. __He had been listening in the only language the room allowed.__",
+   "wordsAfter": 133,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The slip shows Anh tracked her reading, so the sentence reframes his silence (which Putri resented as indifference) as attentive listening."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deleted material (mother's remarriage, year of silence behind newspapers/novels, closing scooter image) is not needed. The resentment, the belief that the rule means Anh doesn't want to know her, the unanswered open book, and the slip of titles all remain, so the reframing function of the underlined sentence is still clear and all options and the explanation remain grounded."
+   }
+  },
+  {
+   "problemId": "862d879e-363f-4a1a-abe6-c38a9b211b4c",
+   "versionId": "9ef22190-b63d-46f9-9e5b-477b6c799192",
+   "skill": "central_ideas_details",
+   "wordsBefore": 170,
+   "decision": "trim",
+   "reason": "Removed the date range and the Bahia/Angola trade-goods detail. The Eltis conclusion, the incomplete legs, the Brazil-bypasses-Europe point, and the source details for distractors B, C and D all remain, so the answer is unchanged.",
+   "accepted": true,
+   "usd": 0.044937000000000005,
+   "newPassage": "The phrase \"triangular trade\" is often used to describe Atlantic commerce: European manufactured goods shipped to West Africa, enslaved Africans carried across the Atlantic to the Americas, and sugar, tobacco, and cotton returned to Europe. The image is tidy, and it does capture how profits in one region depended on labor and markets in the others. Historians such as David Eltis, however, have argued that the triangle misrepresents how most voyages actually operated. Shipping records show that many vessels did not complete all three legs; ships that delivered captives to the Caribbean frequently sailed home with little cargo, while plantation goods crossed the ocean on separate, specialized ships. Moreover, a large share of the trade to Brazil ran directly between Brazilian and African ports, bypassing Europe entirely. For these historians, the system is better understood as a web of overlapping routes than as a single closed loop.",
+   "wordsAfter": 147,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "A matches the passage: Eltis argues the triangle oversimplifies a web of overlapping routes, including direct Brazil-Africa voyages. B, C and D each contradict the text."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the date range and the Bahia/Angola/Bight of Benin example were deleted. The central claim, the Brazil-Africa direct trade, and all the evidence the options and explanation rely on remain. The skill tested is unchanged."
+   }
+  },
+  {
+   "problemId": "97d50145-2e13-4e97-b8da-b47d9c5a4942",
+   "versionId": "2fb2d22a-8f42-47cf-a056-de27fc7efed2",
+   "skill": "text_structure_purpose",
+   "wordsBefore": 175,
+   "decision": "trim",
+   "reason": "Cut the designer/completion-date appositive, the firm name, \"at the time\", and the precast-ribs clause (about 35 words, leaving about 140). The underlined sentence, the freeform-vs-sphere context, and the final sentence that supplies distractors C and D are all intact, so the answer stays A.",
+   "accepted": true,
+   "usd": 0.044313,
+   "newPassage": "The Sydney Opera House is often celebrated purely for its sail-like shells, but the building's structural history complicates that image of effortless elegance. Utzon's original 1957 competition sketches depicted the shells as freeform curves, a shape that engineers found impossible to construct with the technology available. Only after years of experimentation did Utzon arrive at a solution: deriving every shell from sections of a single sphere. __This geometric breakthrough, more than the shells' visual profile, is what ultimately made the building constructible, since it converted an unrepeatable sculptural form into a system of standardized, mass-producible components.__ The shift from freeform sketch to spherical geometry cost years of delay and contributed to Utzon's eventual departure from the project before its completion, yet it is this very solution that engineers still cite as one of the most influential structural innovations in twentieth-century architecture.",
+   "wordsAfter": 141,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The sentence claims the spherical geometry, more than the visual profile, made the building constructible. This is the central claim the passage sets up, and A states it directly."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deletions were peripheral (designer name and completion date, firm name, precast ribs detail). The underlined sentence, the claim-support structure, all distractor referents (shells' appearance, Utzon's departure, final sentence), and the explanation remain intact."
+   }
+  },
+  {
+   "problemId": "92292bb5-68d4-4dfe-a116-f4bd3a45a769",
+   "versionId": "bc490635-daa6-4386-8f6d-29033769d244",
+   "skill": "words_in_context",
+   "wordsBefore": 161,
+   "decision": "trim",
+   "reason": "Removed the decorative opening participle phrase, the date \"in the year 1868,\" and \"with his pipe\"; all are non-essential detail. The unanswered invitation, nightly rereading, the \"little tide\" line and the lemon/card ending are untouched, so the answer B is unaffected.",
+   "accepted": true,
+   "usd": 0.040203,
+   "newPassage": "Salma's invitation lay on the planks of the dock, weighted with a lemon. Her son's bride had come to Marrakesh only that spring, and the small lake below the rented villa was the one place in the household where no one followed anyone. The luncheon the card announced was a week off, and the bride had not answered. Each evening she walked to the end of the dock, lifted the lemon, unfolded the card, read the date, and refolded it along the same creases before setting the lemon back. Wolfram, watching from the terrace, called the card his mother's little tide. Salma heard him and went on shelling beans. On the third evening the bride carried the lemon up to the kitchen, sliced it, and served it with the tea, and the card stayed on the boards with nothing to hold it but the stillness of the air.",
+   "wordsAfter": 148,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The tide image captures the bride's repeated return to the dock each evening to reread the card while she has not yet answered, so the choice stays open."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the folding detail, the year, and the pipe were removed. The recurring evening visits, the unanswered card, and the date reading that support the \"tide\" metaphor remain. The distractors and the explanation are unaffected."
+   }
+  },
+  {
+   "problemId": "9938da0c-e5d3-4be6-ad6e-4a58d8381782",
+   "versionId": "4732bb20-e716-4426-a800-c89465cd00f8",
+   "skill": "rhetorical_synthesis",
+   "wordsBefore": 167,
+   "decision": "trim",
+   "reason": "Trimmed only non-essential modifiers in notes 2, 4 and 5 (e.g., \"at the time,\" \"as staging points,\" \"decades later\"); note 3 (the evidence for C) and all details the distractors rely on remain intact.",
+   "accepted": false,
+   "usd": 0.033417,
+   "newPassage": "While researching a topic, a student has taken the following notes:\n- In 1867, Russia sold the Alaska territory to the United States for 7.2 million dollars, a deal negotiated by Secretary of State William Seward.\n- Many American newspapers mocked the purchase as \"Seward's Folly,\" arguing that Alaska was a frozen wasteland with no economic value.\n- Russia's motivation for selling was partly financial strain following the Crimean War and partly a strategic concern that Britain might seize Alaska from Russia during a future conflict, since Russia could not adequately defend the remote territory.\n- The 1896-1899 Klondike Gold Rush, which occurred in Canada's Yukon but relied on Alaska's port cities, brought an influx of prospectors.\n- Alaska's oil reserves, discovered at Prudhoe Bay in 1968, made the territory one of the most valuable acquisitions in U.S. history.\n- Alaska was admitted as the 49th U.S. state in 1959.",
+   "wordsAfter": 150,
+   "mechanical": {
+    "ok": false,
+    "issues": [
+     "새 단어가 더해졌거나 순서가 바뀜(삭제만 허용)"
+    ]
+   }
+  },
+  {
+   "problemId": "9d489fd5-2131-43fa-a23a-c192b0d8c0ff",
+   "versionId": "e02e1103-b35f-44ec-b973-f625c4247fcf",
+   "skill": "central_ideas_details",
+   "wordsBefore": 177,
+   "decision": "trim",
+   "reason": "Removed the sentence-internal detail about cutters, polishers and brokers passing stones in a day, plus \"often\" and \"increasingly\". The cluster-as-coordination idea, the vertical-integration shift, the labor-cost and handshake details behind the distractors, and the shift away from cutting all remain, so the main idea and key C are unchanged.",
+   "accepted": true,
+   "usd": 0.043911,
+   "newPassage": "For much of the twentieth century, Antwerp dominated the world's diamond trade not because any single firm controlled the business but because thousands of small, specialized firms operated within a few city blocks. Reputations built through repeated face-to-face dealings allowed deals worth millions to be sealed with a handshake. Economists have cited this arrangement as a textbook example of how geographic clustering can substitute for the coordination that a large, vertically integrated company would otherwise provide internally.\n\nSince the 1990s, however, that model has come under strain. Major mining companies have sought to control their stones from mine to retail counter, sending rough diamonds directly to their own cutting facilities, many of them in India, where labor costs are lower. As a result, the advantages that Antwerp's dense network once offered have mattered less, and the city's role has shifted toward trading and certification rather than cutting itself.",
+   "wordsAfter": 148,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "C covers both parts of the passage: the cluster's past coordinating role and its decline under vertical integration. A, B and D each contradict or go beyond the text."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deletions were minor detail (stones passing through hands in a day, \"often,\" \"increasingly\"). The core claims for the main idea, including the cluster substituting for integration, the mining firms' control of the supply chain, and the shift to trading and certification, remain. The distractors still rest on details that are present, and the explanation still holds."
+   }
+  },
+  {
+   "problemId": "a4ed282c-6665-472e-aa30-7780c7110163",
+   "versionId": "c6d434c5-d134-4899-aa32-2f1580ed81a5",
+   "skill": "cross_text_connections",
+   "wordsBefore": 172,
+   "decision": "trim",
+   "reason": "Removed background detail (telescope/data mentions, \"currently available\") and Text 2's final \"since...\" clause. The exclusivity claim in Text 1 and the lab-simulation evidence in Text 2 that support answer A are intact, and all distractor-relevant content remains.",
+   "accepted": true,
+   "usd": 0.040991999999999994,
+   "newPassage": "Text 1\nAstronomers argue that the unusual chemical signatures detected in a distant exoplanet's atmosphere are best explained by volcanic activity on the planet's surface. The relative abundance of sulfur compounds, they note, closely matches patterns produced by volcanic outgassing observed on rocky planets within our own solar system. Because no other atmospheric process known to occur on such planets produces this particular combination of gases in these proportions, the researchers conclude that active volcanism offers the most plausible explanation.\n\nText 2\nA separate team proposes that the sulfur compounds could instead result from chemical reactions between the atmosphere and a subsurface ocean rich in dissolved minerals. Laboratory simulations replicating the exoplanet's estimated temperature and pressure conditions produced similar gas ratios without requiring any volcanic activity at all. This team acknowledges that volcanism remains possible but argues that the ocean-based mechanism should not be dismissed.",
+   "wordsAfter": 145,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Text 2's lab simulations show an ocean-atmosphere mechanism producing similar gas ratios without volcanism, which refutes Text 1's claim that no other process can."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deletions were minor context (telescope mention, \"currently available\") and a redundant final clause in Text 2. The laboratory simulation sentence that supports A remains. The question, distractors and explanation are all still grounded in the shortened text."
+   }
+  },
+  {
+   "problemId": "ae686ae5-a53b-47d2-a7d7-eb69a644e233",
+   "versionId": "51f4591c-d61e-4023-84fd-20aea0693a22",
+   "skill": "command_of_evidence_text",
+   "wordsBefore": 166,
+   "decision": "trim",
+   "reason": "Removed the murmured bead-color quote and the clause about riders waiting at the lights. The money motive (first day) and the shift (no longer counting shillings) that the key relies on remain, and the distractors are unaffected.",
+   "accepted": false,
+   "usd": 0.036714,
+   "newPassage": "At every stop, while the conductor shouted for passengers, Kariuki opened his tin of glass beads on his knee. Benson watched, then held out his hand. On the first day he had said he only wanted to make bracelets to sell to tourists at the Kenyatta Avenue lights. Kariuki had shrugged and given him a needle anyway. Now, by the third week, Benson's fingers moved more slowly than before, and he no longer counted aloud how many shillings each strand might bring.",
+   "wordsAfter": 82,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The student's argument isn't shown. I inferred it from the passage's arc: Benson moves from a money-driven motive to a more meaningful, non-commercial engagement with beadwork. D shows him refusing a high price for personal meaning, which supports that. A reinforces the money motive, B shows only diligence, and C is about Kariuki."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted material (the color-symbolism dialogue and the clause about riders waiting) is atmospheric. The question, the correct answer D, the distractors, and the explanation all rest on the student's stated argument and the retained details (the shift from counting shillings to slower, more absorbed work). The tested skill, judging which hypothetical evidence supports a claim, is unchanged."
+   },
+   "rejectedBy": "manual: the student argument sentence the question depends on was deleted"
+  },
+  {
+   "problemId": "a750101b-abd3-4872-a103-7f45216f00bc",
+   "versionId": "cfe6f508-1472-4b92-9a8e-6f6db704a237",
+   "skill": "cross_text_connections",
+   "wordsBefore": 178,
+   "decision": "trim",
+   "reason": "Cut the opening arrival sentence and the sentence about the children arriving. The calf, the failed attempts to move it, the Manila snowfall workbook and the sitting-and-questioning remain, so the key (C) and distractors B and D are unaffected. The result is 145 words.",
+   "accepted": true,
+   "usd": 0.043353,
+   "newPassage": "Text 1\nOn the schoolhouse steps lay a carabao calf, legs folded, chewing as if it had been hired to guard the door. She clapped; it blinked. She pushed; it sighed. Rosario looked at the workbook in her satchel, printed in Manila, its first lesson about measuring snowfall. Then she sat down beside the calf. \"Who can tell me,\" she asked, \"how many steps this animal is blocking, and how much it weighs compared to all of you?\"\n\nText 2\nReaders often celebrate the carabao scene as proof of Rosario's sudden, playful inventiveness, as though the calf alone sparks her new approach. But the story has already shown us her doubts about lessons written far from the island. The calf does not create her impulse to teach from the world around her; it simply gives her an excuse she has been waiting for to act on it.",
+   "wordsAfter": 147,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Text 2 says the calf is an excuse for an impulse Rosario already had, stemming from her doubts about lessons written far from the island."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the boat arrival and the 'children watching her closely' sentence were deleted. The workbook detail, the failed clapping and pushing, and the question to the children all remain, so the question, answer, distractors, and explanation are still fully grounded. The cross-text skill is unchanged."
+   }
+  },
+  {
+   "problemId": "b2136fd0-5450-4305-aef8-b30e54bd1bcb",
+   "versionId": "f51b7c31-9de2-4247-931c-99b0d042049e",
+   "skill": "rhetorical_synthesis",
+   "wordsBefore": 164,
+   "decision": "trim",
+   "reason": "Removed only minor modifiers and the \"narrow path\" clause from note 1, which duplicates note 6. The evidence span (note 3), the 400x ratio (note 2), the future-change notes behind B, and note 6 behind A all remain, so the answer D is unchanged.",
+   "accepted": false,
+   "usd": 0.020481,
+   "newPassage": "While researching a topic, a student has taken the following notes:\n- Total solar eclipses occur when the Moon passes directly between the Earth and the Sun, blocking the Sun's disk.\n- The Moon is about 400 times smaller than the Sun, but it is about 400 times closer to Earth than the Sun is.\n- This coincidental ratio means the Moon and Sun appear almost exactly the same size in Earth's sky, allowing the Moon to fully cover the Sun during a total eclipse.\n- The Moon's orbit is moving it farther from Earth, at a rate of about 3.8 centimeters per year.\n- In several hundred million years, the Moon will be far enough away that it will appear too small to fully cover the Sun, ending total solar eclipses.\n- Total solar eclipses are currently visible from Earth only within a narrow path called the path of totality.",
+   "wordsAfter": 151,
+   "mechanical": {
+    "ok": false,
+    "issues": [
+     "목표(150) 초과: 151단어"
+    ]
+   }
+  },
+  {
+   "problemId": "b4af5fd9-678f-4f8c-82f4-45905d194cad",
+   "versionId": "5fdc5e60-0ada-4637-9904-622f8cd1d57f",
+   "skill": "transitions",
+   "wordsBefore": 188,
+   "decision": "trim",
+   "reason": "Removed the captivity-observation sentence and the \"Some of these interactions...\" signaling sentence. These are background and do not affect the concession relationship between the acknowledged crowding explanation (before the blank) and the researchers' claim (after the blank). The passage is now about 143 words, and 'Even so,' remains the correct answer.",
+   "accepted": true,
+   "usd": 0.039209999999999995,
+   "newPassage": "For decades, marine biologists assumed that octopuses were solitary creatures with little tolerance for one another outside of mating. Recent fieldwork at a site off the coast of Australia nicknamed \"Octlantis,\" however, has complicated this picture. There, researchers documented dozens of octopuses living in close proximity, denning within a few body lengths of each other for extended periods, and engaging in repeated visual displays and physical contact that did not end in violence. Researchers acknowledge that the density of octopuses at Octlantis may simply reflect a shortage of suitable denning sites nearby, forcing individuals into proximity regardless of their social preferences. ______ they maintain that many of the observed interactions, including the signaling displays, appear only when other octopuses are within sight, suggesting the behavior is a genuine response to social presence rather than a mere byproduct of crowding.",
+   "wordsAfter": 139,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The researchers concede the crowding explanation, then maintain the behavior is genuinely social. \"Even so,\" marks that concession-then-contrast."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted sentences (captivity observations and signaling examples) are not needed for the transition. The concession logic between the denning-site shortage sentence and the \"they maintain\" sentence is intact. \"The signaling displays\" still has a reasonable referent in \"visual displays\". The explanation cites only the adjacent sentences."
+   }
+  },
+  {
+   "problemId": "b7b12e03-7848-424f-99c8-6790ef461744",
+   "versionId": "fd6af927-17bd-4aa4-adbb-f00494602694",
+   "skill": "cross_text_connections",
+   "wordsBefore": 174,
+   "decision": "trim",
+   "reason": "Removed Text 1's second sentence (elaboration of the individualism claim). The core claim, Text 2's evidence span, and all distractor contrasts remain intact; the passage is about 128 words.",
+   "accepted": true,
+   "usd": 0.040308,
+   "newPassage": "Text 1\nArt historians have long treated the sudden proliferation of self-portraits among Northern European painters in the sixteenth century as evidence of a new individualism, arguing that artists began to see themselves as worthy subjects independent of religious or aristocratic patronage.\n\nText 2\nA more recent generation of scholars has questioned whether self-portraiture in this period should be read primarily as a statement of individual identity. Surviving guild records indicate that self-portraits were frequently produced as demonstrations of technical skill, intended to attract future patrons by showcasing an artist's mastery of likeness and detail. Rather than expressions of a painter's inner selfhood, these images may have functioned largely as advertisements circulated within a competitive commercial market for commissioned portraiture, a practical motive quite distinct from the philosophical individualism earlier historians emphasized.",
+   "wordsAfter": 132,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Text 2 cites guild records showing self-portraits served as advertisements of skill to attract patrons, not as expressions of individual identity. This matches B; A, C and D are each contradicted by or absent from the text."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted sentence in Text 1 (broader intellectual currents, artist's social and philosophical standing) is elaboration. The core claim of new individualism and independence from patronage remains. Text 2 is intact. The question, the answer, the distractors, and the explanation all remain grounded in the retained text."
+   }
+  },
+  {
+   "problemId": "c175e2ce-634a-48e5-a3c5-fc25207c0cf6",
+   "versionId": "5db5a88f-a68c-4499-88e8-9ca890d43d99",
+   "skill": "central_ideas_details",
+   "wordsBefore": 165,
+   "decision": "trim",
+   "reason": "Removed the \"hemmed in by surviving houses and lanes\" detail, the redundant \"Rather than forcing a uniform design\" clause, and \"striking\" (about 148 words). The main idea and all distractor source details (fire, towers built later, columns) remain intact.",
+   "accepted": true,
+   "usd": 0.044055,
+   "newPassage": "After the Great Fire of 1666 destroyed most of the City of London, Christopher Wren was commissioned to rebuild more than fifty parish churches. Many of the sites he inherited were cramped, irregular plots, so a single standard plan was impossible. Wren treated every church as a separate problem, fitting naves into odd angles and placing entrances wherever the street allowed. Yet he held firmly to one priority across these varied buildings: that the congregation should be able to see the pulpit and hear the preacher clearly. Wren argued that a Protestant church was essentially an \"auditory,\" a room for listening, and he kept interiors compact and largely free of obstructing columns. The towers and steeples that rose above the rooftops, often designed years after the main structures were finished, gave each church a distinctive public face, but the logic of the interior began with the spoken word.",
+   "wordsAfter": 148,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "B",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "B captures both the variation across sites and the consistent priority on sightlines and hearing. A, C, and D each misstate a cause the passage gives differently."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deletions removed only minor detail: \"hemmed in by surviving houses and lanes\", the phrase \"Rather than forcing a uniform design onto each lot\", and the adjective \"striking\". The main idea (varied layouts, constant priority of seeing and hearing the preacher) is intact. Distractors A, C and D are still grounded in and refuted by the remaining text, and the explanation cites nothing that was removed."
+   }
+  },
+  {
+   "problemId": "c40eda06-e1ec-4c4f-ac06-ae7bab36fedb",
+   "versionId": "0a6f56eb-bf2d-4b3f-a0ee-11f2a34b4d72",
+   "skill": "words_in_context",
+   "wordsBefore": 182,
+   "decision": "trim",
+   "reason": "Cut the Bergen/damp-apartment background and the spine-pressing and doctor simile. The unspoken issues, the glue quarrel, the stitches metaphor and the ledger that split when read through are all kept, so the key A is unaffected. The result is about 143 words.",
+   "accepted": true,
+   "usd": 0.045657,
+   "newPassage": "Jens brought me straight to the bookbinder's workshop where he now spent his days. We argued within the hour about glue. He said the animal glue was better; I said he only liked it because the old man who owned the shop liked it. Neither of us raised the week's notice he had given me before he left, or the letters I had not answered since. I watched him check the binding by letting the book fall open on the bench. Our friendship, I thought, had become a book sewn with too few stitches. Later he showed me a ledger he had rebound for a shipping firm, its pages lying flat under the lamp, and told me the old one had looked fine on the shelf for decades and split the first time anyone needed to read it straight through. I said nothing about glue after that.",
+   "wordsAfter": 147,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The metaphor of a weakly sewn book, echoed by the ledger that looked fine but split when read straight through, suggests a friendship that appears intact but is fragile under honest scrutiny, given the avoided topics."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deletions removed only atmospheric detail: the Bergen and apartment setup, the screw-press action, and the doctor simile. The evidence for the answer is intact: the avoided topics, the glue quarrel, the metaphor sentence, and the ledger that looked fine but split when read through. The distractors and the explanation do not rely on deleted text, and the skill tested is unchanged."
+   }
+  },
+  {
+   "problemId": "c5c0acf9-4617-45b0-a86a-8b590e9e851e",
+   "versionId": "d81faf7b-6ff4-4c13-8f49-932ac63e39bc",
+   "skill": "cross_text_connections",
+   "wordsBefore": 189,
+   "decision": "trim",
+   "reason": "Removed Text 1's mechanism sentence and Text 2's closing lower-income sentence. The remaining text keeps Text 1's \"powerful and relatively fast\" claim, the measurable-declines detail that makes A tempting, and Text 2's evidence span, so the key D is unchanged.",
+   "accepted": true,
+   "usd": 0.041844000000000006,
+   "newPassage": "Text 1\n\nUrban planners advocating for congestion pricing argue that charging drivers a fee to enter crowded downtown areas during peak hours is the most direct way to reduce gridlock. Studies of cities that have implemented such fees show measurable declines in traffic volume and average commute times within the first year, suggesting that price signals are a powerful and relatively fast lever for changing commuter behavior.\n\nText 2\n\nCongestion pricing schemes often produce impressive short-term reductions in traffic, but critics note that these gains can erode over time if the underlying public transit system cannot absorb the displaced demand. In cities where buses and trains already run at capacity during rush hour, commuters priced out of driving frequently have no viable alternative and either pay the fee anyway or shift their trips only slightly, blunting the policy's effect.",
+   "wordsAfter": 139,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Text 2 concedes short-term gains but qualifies them: effectiveness erodes if transit lacks capacity to absorb displaced drivers. D captures this; A ignores the caveat, B contradicts the acknowledged reductions, C is unsupported."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted sentences (Text 1's mechanism sentence and Text 2's final sentence on revenue and lower-income drivers) are not needed. The claim in the question stem remains in Text 1, and the transit-capacity condition that supports D remains in Text 2. The explanation and distractors rely only on retained text."
+   }
+  },
+  {
+   "problemId": "c581d087-d476-490a-92de-4df3ced30efd",
+   "versionId": "52a12e95-3bca-46b7-9ccd-d6bda3e7f300",
+   "skill": "cross_text_connections",
+   "wordsBefore": 167,
+   "decision": "trim",
+   "reason": "Cut the list of example objects, \"during cleaning sessions\", \"where clients are numerous\", and \"having served more clients\". The key (C), the crowded-reef detail (B), the reputation claim (A) and the bitten-clients claim (D) are all intact.",
+   "accepted": true,
+   "usd": 0.045297000000000004,
+   "newPassage": "Text 1\nResearchers studying a population of cleaner wrasse, small reef fish that remove parasites from larger \"client\" fish, found that wrasse which spent more time inspecting a mirror placed in their tank later bit fewer clients. Because mirror inspection is a standard sign of self-awareness, and because biting clients is a form of cheating that damages a cleaner's reputation, the researchers concluded that self-aware wrasse are better able to manage their reputations. The effect was strongest in wrasse collected from crowded reef sections.\n\nText 2\nA separate team observed that cleaner wrasse vary widely in general boldness, a trait measurable by how quickly an individual approaches any novel object. Bold wrasse lingered near all such objects equally long. The same bold individuals also tended to be the most experienced cleaners, and experienced cleaners are known to bite less because clients that are bitten stop returning.",
+   "wordsAfter": 146,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Text 2 offers boldness as an alternative explanation for time spent at the mirror, so its author would challenge treating mirror inspection as a sign of self-awareness."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Deleted material was only illustrative examples (plastic cube, colored disk), \"during cleaning sessions\", \"where clients are numerous\", and \"having served more clients\". The key reasoning for C (boldness measured by approach to any novel object, equal lingering, bold = experienced = bite less, bitten clients stop returning) is intact. Distractors A, B, D remain grounded, and the explanation cites nothing removed."
+   }
+  },
+  {
+   "problemId": "ce71df12-711d-45b1-924b-72cb911f1da6",
+   "versionId": "bb4b9cf4-5d4c-4e8a-8707-95d517e73ec8",
+   "skill": "central_ideas_details",
+   "wordsBefore": 182,
+   "decision": "keep",
+   "reason": "Safe cuts (the Sapir-Whorf attribution, minor modifiers) only get the passage to about 168 words. Reaching 150 would mean cutting the study details, the digit-task reasoning, or the closing sentence, which D's main-idea synthesis and the distractors A, B, and C depend on.",
+   "accepted": false,
+   "usd": 0.016332
+  },
+  {
+   "problemId": "d929bf0d-7dd3-489a-abc5-7c44611cb2e9",
+   "versionId": "052c6657-2870-45b1-a5d6-288b3fa40908",
+   "skill": "central_ideas_details",
+   "wordsBefore": 171,
+   "decision": "trim",
+   "reason": "Removed the final elaborating sentence about other adjustable systems' large power supplies. The passive-vs-adjustable contrast, low power use, particle chains/soft solid and sensors (all distractor sources) remain, so D stays correct. The result is 144 words.",
+   "accepted": true,
+   "usd": 0.037988999999999995,
+   "newPassage": "Engineers protecting buildings from earthquakes have long relied on passive dampers, devices filled with oil that resist motion by a fixed amount. Such dampers work well for the shaking they were designed for but cannot adjust when an earthquake proves stronger or weaker than expected. Magnetorheological (MR) dampers offer an alternative. They contain a fluid with suspended iron particles; when an electromagnetic coil inside the damper is switched on, the particles line up into chains, and the fluid thickens from a liquid with the consistency of motor oil to something close to a soft solid within milliseconds. By varying the current, sensors and a controller can tune the damper's resistance as ground motion changes. Because the coil needs only about as much power as a household light bulb, MR dampers can keep running on backup batteries even when an earthquake knocks out the electrical grid.",
+   "wordsAfter": 145,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "D",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "D covers both key points: adjustability and low power need. A, B, C are partial or unsupported."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted final sentence only elaborated on the low-power advantage (contrast with stronger adjustable systems needing large power supplies). The main idea, correct answer D, and all distractors and the explanation remain fully supported by the shortened text."
+   }
+  },
+  {
+   "problemId": "dcd983fc-2c1c-4aea-8982-002b18b652c2",
+   "versionId": "14de09e4-7ed9-4242-9924-4da7ca3f4c2e",
+   "skill": "central_ideas_details",
+   "wordsBefore": 161,
+   "decision": "trim",
+   "reason": "Removed the final sentence about the polarity timescale and seafloor spreading. It is background not needed for the correct answer (C) and contains no detail the distractors rely on. The passage is now about 128 words.",
+   "accepted": true,
+   "usd": 0.036137999999999997,
+   "newPassage": "When lava cools into basalt, tiny grains of magnetite inside the rock lock in the direction of Earth's magnetic field at that moment. In the mid-twentieth century, geologists sampling stacked lava flows in places such as Iceland and Hawaii noticed that some layers recorded a field pointing roughly north, as it does today, while others recorded one pointing south. At first, some researchers suspected that certain minerals simply magnetized themselves backward as they cooled, a chemical quirk unrelated to the planet's field. That explanation weakened when scientists dated the flows using the slow decay of radioactive potassium into argon. Rocks of the same age from distant continents turned out to share the same polarity, and reversed layers did not consistently contain a different mix of minerals than normal ones.",
+   "wordsAfter": 129,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "C restates both findings the passage gives: same-age rocks from distant continents share polarity, and reversed layers lacked a distinct mineral mix. A, B and D are not in the text."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted last sentence (polarity timescale, seafloor spreading) is not needed for the question or the correct answer. The explanation's passing mention of alternating intervals is a minor, non-essential reference, and B is still clearly unsupported by the shortened text. The distractors remain grounded and plausible."
+   }
+  },
+  {
+   "problemId": "e49f18af-6443-46ce-9ac1-84b1c7527700",
+   "versionId": "d686172e-45b4-48b6-9c59-48b10b0c2284",
+   "skill": "central_ideas_details",
+   "wordsBefore": 174,
+   "decision": "trim",
+   "reason": "Removed the illustrative example quotation, the region phrase, and the landmarks detail; the task, the critics' environment objection, and the later same-environment findings that support A and rule out B, C, and D remain.",
+   "accepted": true,
+   "usd": 0.036579,
+   "newPassage": "Speakers of Guugu Yimithirr, an Aboriginal language, describe locations almost entirely with cardinal directions. Some researchers have argued that such habits shape how speakers mentally encode space. In one well-known task, participants viewed a row of objects on a table, were turned 180 degrees to face a second table, and were asked to rebuild the row \"the same way.\" Dutch speakers, whose language relies on left and right, usually kept the row's order relative to their own bodies, whereas Guugu Yimithirr speakers usually kept its compass orientation. Critics have noted, however, that the two groups also differed in setting: most Guugu Yimithirr participants lived in rural areas, while the Dutch participants were mostly city dwellers tested indoors. Later studies that compared speakers of different languages living in the same environment have found that language still predicts which strategy people choose, although environment influences that choice too.",
+   "wordsAfter": 146,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "A",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "A matches the passage: language still predicts strategy even when environment is controlled, though environment matters too. B, C and D go beyond or contradict the text."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the illustrative example, region detail, and \"strong outdoor landmarks\" were removed. The core structure (task, critique, follow-up studies) remains, so the main-idea question, answer, distractors, and explanation are all still supported."
+   }
+  },
+  {
+   "problemId": "f0dba0b5-a6ee-4966-b287-d6ad9672b2b8",
+   "versionId": "113b914a-8b0d-44c7-91f4-64611fac1e43",
+   "skill": "inferences",
+   "wordsBefore": 191,
+   "decision": "trim",
+   "reason": "Removed background, size detail, sulfide-poisoning clause and descriptive modifiers. The evidence span, the no-digestive-tract premise, and the details behind distractors B, C and D (plume, hemoglobin binding, trophosome absorption) remain, so the answer A is unchanged.",
+   "accepted": false,
+   "usd": 0.023448,
+   "newPassage": "Tubeworms called Riftia pachyptila lack a mouth, gut, or anus as adults, yet they grow rapidly. Biologists have found that the worms host sulfur-oxidizing bacteria in an organ called the trophosome and possess hemoglobin capable of binding oxygen, hydrogen sulfide, and carbon dioxide simultaneously. This hemoglobin is concentrated in a plume that the worm extends into the surrounding vent water, retracting it whenever a shadow signals a passing predator. The bacteria use the hydrogen sulfide delivered by this hemoglobin, along with oxygen and carbon dioxide, to synthesize organic compounds through chemosynthesis, and the worm absorbs these compounds directly through the trophosome tissue. worms transplanted to water with normal hydrogen sulfide levels but experimentally depleted bacterial populations stop growing entirely, even though their hemoglobin continues to bind oxygen and carbon dioxide normally. Given that Riftia has no digestive tract at all, researchers conclude that its rapid growth and survival depend entirely on ______",
+   "wordsAfter": 152,
+   "mechanical": {
+    "ok": false,
+    "issues": [
+     "새 단어가 더해졌거나 순서가 바뀜(삭제만 허용)",
+     "목표(150) 초과: 152단어"
+    ]
+   }
+  },
+  {
+   "problemId": "e80cb92f-0300-49ae-8959-81729742d09e",
+   "versionId": "d0a24dfa-e096-4c45-ac26-ae6e1aad7778",
+   "skill": "cross_text_connections",
+   "wordsBefore": 190,
+   "decision": "trim",
+   "reason": "Removed secondary detail (price undercutting, shipping, union background, Southern mills' later construction, Northern aging infrastructure). The evidence sentence in Text 1 and Text 2's decades-old wage gap argument are intact, so answer C is unchanged.",
+   "accepted": true,
+   "usd": 0.046994999999999995,
+   "newPassage": "Text 1\n\nEconomic historians examining the decline of the New England textile mills have emphasized labor costs as the decisive factor. Southern mills paid workers less and operated free of the union contracts. This wage gap, more than any single technological or managerial difference, explains why textile production migrated southward so rapidly once interstate transportation made the shift logistically feasible for manufacturers seeking to preserve their profit margins.\n\nText 2\n\nWage differentials alone cannot account for the timing of the textile industry's southward shift, since the gap between Northern and Southern labor costs had existed for decades before mills began relocating in large numbers. What changed in the mid-twentieth century was the introduction of newer, more efficient machinery that Southern mills adopted far more readily than Northern mills. It was this gap in equipment, not wages, that ultimately determined which region's mills could compete profitably.",
+   "wordsAfter": 145,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "Text 1 treats wages as decisive and already addresses timing via transportation feasibility; C best engages the timing challenge. A contradicts Text 1; B is illogical; D adds an unsupported capital claim."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deletions are minor: \"mid-twentieth century\" and \"substantially\" in Text 1, the shipping-to-national-markets clause, and the \"built later... aging infrastructure\" detail in Text 2. The key content is intact: Text 1 treats the wage gap as decisive and cites transportation feasibility, and Text 2 says the gap existed for decades and that equipment determined the shift. The question, the correct answer C, and distractors A, B and D all remain grounded in the shortened texts. The explanation refers only to retained content (transportation feasibility, the decades-old wage gap). The skill tested, anticipating a rebuttal across texts, is unchanged."
+   }
+  },
+  {
+   "problemId": "f194a236-d663-4531-abf8-de31b8473ffe",
+   "versionId": "f77f3ef3-dc6e-49a7-adb6-efb50d40fc05",
+   "skill": "words_in_context",
+   "wordsBefore": 166,
+   "decision": "trim",
+   "reason": "Removed the setting phrase \"after our night shift at the bakery in Oaxaca\" and the closing street-vendor sentence. Both are atmosphere only. The gradual fading (soft creases), the apron detail behind distractor B, and the \"neither sorry nor relieved... coat\" evidence for C are all kept, so the answer is unchanged.",
+   "accepted": true,
+   "usd": 0.035546999999999995,
+   "newPassage": "Dario hung his uniforms on the rooftop line every morning at six, and I, Tendai, hung mine beside his. For months he had talked of quitting to drive a taxi with his cousin; he kept the license forms folded in his wallet and showed them to anyone who asked. That spring he showed them less often, and when he did, the creases had gone soft and gray. One morning I noticed he had begun pinning a second apron to the line, the white one the head baker gave only to those training for the ovens. He did not mention it, and neither did I. Weeks later, when I finally asked about the taxi, he shrugged and said his plans had gone out with the wash. He seemed neither sorry nor relieved, only mildly surprised, as though remembering a coat he had once owned.",
+   "wordsAfter": 143,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "The faded forms, his showing them less often, and his mild surprise show the plan drifted away gradually, with no deliberate decision, which is choice C."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "Only the bakery/night shift clause and the closing umbrella sentence were removed. All evidence for the answer (soft creases, second apron, mild surprise, coat simile) remains. Distractors are still grounded and equally plausible."
+   }
+  },
+  {
+   "problemId": "f1ae181f-f41e-473f-b5f4-05cd3f3b1664",
+   "versionId": "3ca58b17-45d1-4314-9cef-ab0dc23fa66e",
+   "skill": "cross_text_connections",
+   "wordsBefore": 188,
+   "decision": "trim",
+   "reason": "Removed the parenthetical definition, the patrons' circulation detail, the clients clause, the timing phrase, and the pigment-quality elaboration. Both authors' claims, the evidence span, and the contrast that makes A correct are intact.",
+   "accepted": false,
+   "usd": 0.021069,
+   "newPassage": "Text 1\n\nArt historians examining the sudden popularity of chiaroscuro in seventeenth-century European painting often attribute the technique's rise to the influence of a small circle of innovative painters. According to this view, once influential collectors began commissioning works featuring stark contrasts of illumination, provincial painters imitated the style, and the technique spread outward from urban centers of artistic patronage.\n\nText 2\n\nThe patronage-driven account of chiaroscuro's spread overlooks a simpler explanation. Analysis of surviving pigments and canvases shows that this same period saw the wider availability of more affordable, stable dark pigments, alongside improved oil-based mediums that allowed for more precise gradations of light. Painters in provincial workshops, far from imitating fashionable urban patrons, appear to have adopted these techniques largely because the newly available materials simply made dramatic light effects easier and cheaper to produce reliably, regardless of who was commissioning the work.",
+   "wordsAfter": 145,
+   "mechanical": {
+    "ok": false,
+    "issues": [
+     "새 단어가 더해졌거나 순서가 바뀜(삭제만 허용)"
+    ]
+   }
+  },
+  {
+   "problemId": "f42d1cb6-1801-4905-b44f-7395e22b10b6",
+   "versionId": "ea732df0-e603-43fb-a29f-d701be696d14",
+   "skill": "rhetorical_synthesis",
+   "wordsBefore": 165,
+   "decision": "trim",
+   "reason": "Removed the first note (1960s bus replacement), which no answer choice or the explanation uses. The key note on developers and permanence, and the source notes for distractors A, B and D, are intact.",
+   "accepted": true,
+   "usd": 0.036381,
+   "newPassage": "While researching a topic, a student has taken the following notes:\n- Streetcars require fixed tracks and overhead wires, which are expensive to install and maintain but tend to have longer operational lifespans than buses.\n- A 2015 study found that cities with light rail systems, a modern successor to streetcars, saw a 15% increase in ridership within five years of construction compared to comparable bus-only corridors.\n- Buses can be rerouted quickly in response to construction, accidents, or changing demand, without the need for costly infrastructure changes.\n- Fixed rail lines tend to attract more private real estate investment near stations because developers view rail infrastructure as a permanent commitment to a corridor.\n- Bus rapid transit (BRT) systems attempt to combine rail-like dedicated lanes with the flexibility of buses, though they often lack the permanence signal that attracts investment.",
+   "wordsAfter": 141,
+   "mechanical": {
+    "ok": true,
+    "issues": []
+   },
+   "solver": {
+    "pick": "C",
+    "alsoDefensible": [],
+    "matchesKey": true,
+    "note": "C directly states the notes' explanation: developers view fixed rail as a permanent commitment to a corridor."
+   },
+   "checker": {
+    "question_depends_on_deleted": false,
+    "distractor_depends_on_deleted": false,
+    "tested_skill_changed": false,
+    "explanation_refers_to_deleted": false,
+    "verdict": "ok",
+    "details": "The deleted first bullet (1960s bus replacement) is not used by the question, the correct answer, or any distractor. All the notes the options rely on remain. The explanation's \"fifth note\" is now positionally the fourth, but it still clearly identifies the real estate note, which is intact. The item tests the same skill."
+   }
+  }
+ ]
+}

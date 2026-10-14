@@ -285,3 +285,41 @@ npx vitest run --project unit lib/ap-exam/explanation-math.test.ts lib/ap-exam/c
 - 변환기: `frqLostSetup` 이 MC 에도 적용된다(캡션 뒤에 조건 문장이 더 있는 설명 + 화면에 없는 숫자일 때만 — 한 줄 캡션은 그대로).
 - 금액 `$`: 본문 렌더러는 이미 `looksLikeCurrencyPair` 로 "$3 … $55" 를 글로 그리지만 저장 문안이 그 휴리스틱에 기대면 게시 검사·수정 도구의 `$` 짝 맞춤과 어긋난다(`lib/problem-content-check.ts` 는 이스케이프된 `\$` 까지 "닫히지 않은 $" 로 잡던 버그도 수정). 저장 표기를 `\$` 로 통일(`lib/currency-dollars.ts`, 화면 모양 불변 검증), `mathToPlain` 도 `\$` 를 글자로 처리.
 - 데이터: `data/audit/apply/2026-10-13-r4-{apply,rollback,verify}.sql` (패치 57건: AP 43·SAT 14, 세트 새 버전 4개 — 전부 free 등급 승계).
+
+
+## 라운드 5 (2026-10-14): 남은 감사 항목 마감 (문법 재검토 · RW 길이 · 전환어 · 그림 육안 확인)
+
+원본: `lib/audit-fix/r5-edits.ts`(편집 정의), `lib/audit-fix/trim-check.ts`(삭제 전용 검사), `scripts/audit/r5-*.ts`. SQL(실행 금지 상태로 생성, 총괄이 실행): `data/audit/apply/2026-10-14-r5-{apply,verify,rollback}.sql`(64건, 전부 apply 계획, DRIFT 안전·멱등). 재생성: `r5-readout.ts` → `r5-build-patches.ts` → `apply-audit-fixes.ts --round5 --dry-run --readout-in data/audit/2026-10-14-r5-readout.json --emit-sql …`.
+
+### (a) 문법 패치 영어 검수 재확인(20건 독립 재독)
+선택지를 정답 없이 읽고 문법적 정답 개수를 다시 셌다. 11건은 정문 1개로 확인(R2-G07/G08/G10b/G11a/G11b/G13/N01/P02, S-11, S-14, S-18 정답). 아래는 여전히 모호하거나 해설이 선택지와 어긋나 패치함:
+| 패치 | 문제 | 조치 |
+|---|---|---|
+| R5-G-S10 | Given/Because of/As a result of/Despite 모두 문법적(의미로만 구분) | 오답을 Despite of / In spite / Despite that 으로 |
+| R5-G-S12 | ", offering"과 "offering" 둘 다 정문 | "offering"→"that offering" |
+| R5-G-S13 | ", launching"과 "which had launched" 둘 다 정문 | "which launching" |
+| R5-G-S17 | "comprised of"·"which was comprised of" 현대 용법상 용인 | "comprised"·"which was comprised" (정답 comprising) |
+| R5-G-S19 | A·B·D 모두 문법적, 해설이 A(relying)·D를 잘못 설명 | A·D 를 분사(정동사 없음)로, 해설 재작성 |
+| R5-G-G12 (S-G12) | 복수 선행사여도 "his or her"을 분배 단수로 용인하는 편집자 있음 | "his or her"→"whose", 정답 their |
+| R5-G-S15/S16/S18 | 정답은 유일하나 해설이 없는 선택지(which used, which featured, C 세미콜론)를 설명 | 해설만 한·영 재작성 |
+R2-G10a 의 "and, thereby"(B)는 짝 없는 쉼표로 오류이나 일부 편집자가 용인할 수 있어 낮은 위험으로 남김(변경 안 함).
+
+### (b) RW 지문 150단어 초과
+게시 세트 RW 중 공백 기준 150단어 초과 137건(감사 chars/6 기준 134건과 기준 차이). 공식 Digital SAT RW 지문은 대략 25~150단어. 판정: 160단어 이하 61건은 허용(공식 범위의 근사 오차, 변경 없음). 160 초과 76건은 모델(claude-sonnet-5-5)이 "삭제만으로" 150 이하 정리안을 제안 → 기계 검사(새 단어 추가·순서 변경 금지, 빈칸·Text 표지·글머리표 유지, 해설·근거 인용 문구 보존, ≤150단어) → 정답을 숨긴 독립 풀이(같은 정답, 다른 방어 가능 선택지 없음) → 질문·오답 함정·해설이 삭제 내용에 기대는지 점검 → 통과 52건만 패치(`R5-TRIM-*`). 수동 반려 1건(ae686ae5: 학생 주장 문장이 삭제됨). 미통과 24건(교차 텍스트·추론·종합 중심, 삭제로는 시험 내용이 바뀜)은 길이를 허용으로 두고 유지: 결과·이유는 `data/audit/2026-10-14-r5-trim-results.json`.
+
+### (c) 전환어 판단(S-P02 / S-G07 / S-G11a)
+세 항목(R2-P02/G07/G11a)은 문항 계약상 `form_structure_sense`("conforms to the conventions") 로 분류돼 있고 현재 선택지는 문장부호·접속 오류로 정문이 1개다(재독 확인). 전환 논리를 시험하려면 `transitions` 스킬(스템 "most logical transition", 선택지는 표준 전환어) 로 재분류가 필요하나 이는 `problems.skill_code` 변경이라 세트 영역 구성에 영향이 있어 이번에는 하지 않았다. 결정: 현행 유지(문법 항목으로 유효), 전환 논리 문항이 더 필요하면 새 `transitions` 문항 추가가 맞다.
+
+### (d) 그림 육안 확인 10건 (`data/audit/r5-figures/*.png`, 저장소 렌더러로 렌더 후 직접 확인)
+`figure_checked` 는 현재 DB 에서 10건 모두 이미 true 였다(PENDING.sql 불필요/실행하지 않음). 판정:
+| 항목 | 결과 |
+|---|---|
+| S-06 | 그림 정상(x=5 수직선, 8x+15y=240). 문구가 "해 영역을 보여 준다"고 했으나 음영 없음 → R5-F-S06 으로 해당 절 삭제 |
+| S-07 | 다각형 아치 정상(타원 점 (±4,2.4),(±2.5,3.46)). 문구 "horizontal beam" 이 y=kx+4 와 모순 → R5-F-S07 "straight" (k=0 만 접점 1개 재계산 확인) |
+| S-08 | 4개 산점도 OLS 직선이 저장값과 일치, 이상점 제거 시 기울기 A,B,C 감소·D 만 증가 → 정상 |
+| F-f87e641a / F-c27d0f37 / F-8329a1bd / R2-F-c5eb51a6 | 축 -20..20, 교점 (11,-17)·(11,17) 이 창 안, 정답과 일치 → 정상 |
+| C-aaeb9945 / C-445bab61 | 표 기울기 +7·+5/일, 정답 157·3 일치 → 정상 |
+| R2-M17 | 그림은 정상이나 5회 값이 점으로 그려져 "예측" 정답이 그대로 읽힘 → R5-F-M17 마지막 점 제거(정답 10 불변, 해설 재작성; 수정 후 그림 figure_checked=false 가 되며 렌더 후 눈으로 재확인 필요, 이번엔 수정본 렌더는 보지 못함) |
+
+### 비용
+모델 호출 약 232회, $2.78(제안 $1.9 + 점검 $0.87, 단가 가정 $3/$15 per M), 원장 반영. 누적 약 $138.7 / 중단선 $195.
