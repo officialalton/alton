@@ -3,6 +3,7 @@
 //   * 수식 밖에 남은 LaTeX 제어문(\frac, \sqrt …)은 원문 노출이라 거부.
 //   * 선택지 수·중복·정답 인덱스 범위, 로마숫자 진술(statements)과 선택지 조합의 정합.
 import { splitLearningContent } from "./render-learning-content";
+import { escapeCurrencyDollars } from "./currency-dollars";
 import type { FigureIssue } from "./problem-figures/templates/_layout";
 import { checkRwStructure } from "./rw-stimulus";
 
@@ -30,8 +31,10 @@ function mathErrors(field: string, text: string): FigureIssue[] {
     if (part.kind === "text" && /\\(frac|sqrt|left|right|begin|end|cdot|times|le|ge|neq|pi|theta|dfrac|tfrac|overline|angle|triangle)\b/.test(part.value)) {
       issues.push({ code: "latex_leak", message: `${field}에 수식 기호($…$) 밖에 LaTeX 제어문이 있습니다 — 그대로 노출됩니다: "${part.value.match(/\\[a-zA-Z]+[^\s]*/)?.[0] ?? ""}"` });
     }
-    if (part.kind === "text" && /(^|[^$])\$(?![^$]*\$)/.test(part.value.replace(/\$\$/g, ""))) issues.push({ code: "math_unclosed", message: `${field}에 닫히지 않은 수식 기호 $ 가 있습니다.` });
   }
+  // 닫히지 않은 수식 기호: 금액의 $("$3 … $55", `\\$3`)는 통화로 읽어 제외한다(2026-10-14) — 이전엔 이스케이프된 \\$ 까지 '닫히지 않음'으로 잡혔다.
+  const safe = escapeCurrencyDollars(text).replace(/\\\$/g, "\u0001");
+  if (splitLearningContent(safe).some((part) => part.kind === "text" && /(^|[^$])\$(?![^$]*\$)/.test(part.value.replace(/\$\$/g, "")) && !/^\$(?=\d)|(?<![\w$])\$\d/.test(part.value))) issues.push({ code: "math_unclosed", message: `${field}에 닫히지 않은 수식 기호 $ 가 있습니다.` });
   return issues;
 }
 

@@ -278,3 +278,10 @@ npx vitest run --project unit lib/ap-exam/explanation-math.test.ts lib/ap-exam/c
 
 ### E. 그림 확인 대기
 라운드 1·2 에서 그림이 바뀌어 figure_checked=false 로 저장되는 문항 10건: S-06, S-07, S-08, F-f87e641a, F-c27d0f37, F-8329a1bd, C-aaeb9945, C-445bab61, R2-M17, R2-F-c5eb51a6. 코디네이터가 눈으로 확인한 뒤에만 쓸 수 있는 SQL 은 `data/audit/apply/2026-10-13-figure-checked.PENDING.sql`(기본 실행 불가: 첫 줄 RAISE EXCEPTION 을 지워야 동작).
+
+## 라운드 4 (2026-10-14): 숫자 누락 의심 MC 판정 + 금액 `$` 이스케이프
+
+- 스캔: 공개 AP MC 중 표·그림 설명(stimulus.description)의 숫자가 화면에 없는 문항 10건(Chemistry 8, Calculus BC 1, Microeconomics 1). 풀이에 필요한 자료가 빠진 진짜 결함은 `micro-p2-a:ap_microeconomics-m32-k0`(한계비용 $26 가 화면에 없어 효율 수량을 구할 수 없음; 표 MSB 46·42·32·28·20·10 에서 MC=26 이면 4개 — 정답 4 확인) 1건뿐. Chemistry 8건("298 K"·"25 °C"·"5.0 mL" 는 풀이에 불필요한 캡션/조건 — 문항에 "same temperature"·"same small volume"·100 mL 이 이미 있음, Ka 순위·pH 변화 0.03/8.0 검산 일치)과 BC `s2-graph-bc-final:ap_calculus_bc-m02-k0`(f⁽⁴⁾ 의 "4" 는 표기; Lagrange 오차 3·1.4⁴/4! = 0.4802 = 선택지 C 검산 일치)는 정상.
+- 변환기: `frqLostSetup` 이 MC 에도 적용된다(캡션 뒤에 조건 문장이 더 있는 설명 + 화면에 없는 숫자일 때만 — 한 줄 캡션은 그대로).
+- 금액 `$`: 본문 렌더러는 이미 `looksLikeCurrencyPair` 로 "$3 … $55" 를 글로 그리지만 저장 문안이 그 휴리스틱에 기대면 게시 검사·수정 도구의 `$` 짝 맞춤과 어긋난다(`lib/problem-content-check.ts` 는 이스케이프된 `\$` 까지 "닫히지 않은 $" 로 잡던 버그도 수정). 저장 표기를 `\$` 로 통일(`lib/currency-dollars.ts`, 화면 모양 불변 검증), `mathToPlain` 도 `\$` 를 글자로 처리.
+- 데이터: `data/audit/apply/2026-10-13-r4-{apply,rollback,verify}.sql` (패치 57건: AP 43·SAT 14, 세트 새 버전 4개 — 전부 free 등급 승계).

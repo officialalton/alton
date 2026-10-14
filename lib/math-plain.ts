@@ -54,9 +54,10 @@ function convert(s: string): string {
 /** 본문 전체에서 $...$ / $$...$$ / \( \) 구간만 변환하고 구분자는 지운다. 수식이 없으면 그대로. */
 export function mathToPlain(text: string): string {
   if (!text || !/[$\\]/.test(text)) return text;
-  const t = text
+  // 이스케이프된 통화 기호 \$ 는 수식 구분자가 아니다 — 자리표시자로 보호했다가 글자 "$" 로 되돌린다(2026-10-14).
+  const t = text.replace(/\\\$/g, "\u0001")
     .replace(/\$\$([\s\S]+?)\$\$/g, (_, m) => convert(m))
     .replace(/\\\(([\s\S]+?)\\\)/g, (_, m) => convert(m))
     .replace(/\$([^$]+?)\$/g, (_, m) => convert(m));
-  return /\\[A-Za-z]/.test(t) ? convert(t) : t;
+  return (/\\[A-Za-z]/.test(t) ? convert(t) : t).replace(/\u0001/g, "$");
 }
