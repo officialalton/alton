@@ -17,7 +17,7 @@ writeFileSync(path.join(out, `${BATCH}-items.json`), JSON.stringify(items.map((i
 const pass = items.filter((i) => i.validation === "auto_passed" && !i.duplicateOf && generatorDefects(i.payload).length === 0);
 writeFileSync(path.join(out, `${BATCH}-pass-keys.json`), "[\n" + pass.map((r) => JSON.stringify(r.stockKey)).join(",\n") + "\n]\n");
 
-const stageCost = (dir: string) => { const c: Record<string, number> = {}; for (const f of readdirSync(dir)) if (/\.results\.jsonl$/.test(f)) for (const l of readFileSync(path.join(dir, f), "utf-8").split("\n").filter(Boolean)) { try { const j = JSON.parse(l); c[f.replace(/\.results\.jsonl$/, "")] = (c[f.replace(/\.results\.jsonl$/, "")] ?? 0) + Number(j.cost ?? 0); } catch { /* skip */ } } return Object.fromEntries(Object.entries(c).map(([k, v]) => [k, Number(v.toFixed(4))])); };
+const stageCost = (dir: string) => { const c: Record<string, number> = {}; for (const f of readdirSync(dir)) if (/\.results\.jsonl$/.test(f)) for (const l of readFileSync(path.join(dir, f), "utf-8").split("\n").filter(Boolean)) { try { const j = JSON.parse(l); if (j.cached) continue; c[f.replace(/\.results\.jsonl$/, "")] = (c[f.replace(/\.results\.jsonl$/, "")] ?? 0) + Number(j.cost ?? 0); } catch { /* skip */ } } return Object.fromEntries(Object.entries(c).map(([k, v]) => [k, Number(v.toFixed(4))])); };
 type It = { skill?: string; key_confidence?: { score: number; band: string } };
 const mcRows = items.filter((i) => i.kind === "mc"), frqRows = items.filter((i) => i.kind !== "mc");
 const passMc = mcRows.filter((i) => pass.includes(i)); const passItems = passMc.flatMap((i) => ((i.payload.items as It[]) ?? []));

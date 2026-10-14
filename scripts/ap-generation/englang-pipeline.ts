@@ -40,7 +40,7 @@ const mk = (id: string, model: string, sys: string, tool: Json, user: string, ma
 const BASE_F = path.join(ROOT, "englang-baseline.json");
 const myBaseline = (): number => { if (!existsSync(BASE_F)) writeFileSync(BASE_F, JSON.stringify({ spent: ledger(DIR).spent(), at: new Date().toISOString(), note: "ledger.spent at the start of the English work (2026-10-14); my total cap is cfg.myTotalCapUsd" })); return (JSON.parse(readFileSync(BASE_F, "utf-8")) as { spent: number }).spent; };
 const runBase = (): number => { const f = path.join(DIR, "baseline.json"); if (!existsSync(f)) writeFileSync(f, JSON.stringify({ spent: ledger(DIR).spent() })); return (JSON.parse(readFileSync(f, "utf-8")) as { spent: number }).spent; };
-const costIn = (dir: string): number => { let c = 0; if (!existsSync(dir)) return 0; for (const f of readdirSync(dir)) if (/\.results\.jsonl$/.test(f)) for (const l of readFileSync(path.join(dir, f), "utf-8").split("\n").filter(Boolean)) { try { c += Number(JSON.parse(l).cost ?? 0); } catch { /* skip */ } } return c; };
+const costIn = (dir: string): number => { let c = 0; if (!existsSync(dir)) return 0; for (const f of readdirSync(dir)) if (/\.results\.jsonl$/.test(f)) for (const l of readFileSync(path.join(dir, f), "utf-8").split("\n").filter(Boolean)) { try { const j = JSON.parse(l); if (!j.cached) c += Number(j.cost ?? 0); } catch { /* skip */ } } return c; };
 const spentRun = () => costIn(DIR);
 const spentMine = () => readdirSync(ROOT).filter((d) => /^englang-/.test(d) && statSync(path.join(ROOT, d)).isDirectory()).reduce((a, d) => a + costIn(path.join(ROOT, d)), 0);
 function guard(stage: string, est: number) {
