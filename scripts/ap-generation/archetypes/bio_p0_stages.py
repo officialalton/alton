@@ -190,3 +190,13 @@ STAGE_S2_FRQ = [
  "bif_q6_resp",
  "bif_q6_salt"
 ]
+
+# 2026-10-14 부족분 라운드(R1): 정확 배정에서 가상 칸으로 남은 원형 19개 + 예비 6개(1.3배 예비), 후보 2개.
+STAGE_R1_MC = [
+    "bi_translation", "bi_rna_processing", "bi_origin_of_life", "bi_new_investigation_selection", "bi_new_investigation_enzyme",
+    "bi_meiosis_variation", "bi_hypothesis_signal", "bi_graph_pcr_cycles", "bi_feedback_type", "bi_enzyme_active_site",
+    "bi_elements_life", "bi_dna_structure", "bi_cyclin_graph", "bi_continuing_evolution", "bi_communication_types",
+    "bi_common_ancestry", "bi_chi_square_hypothesis", "bi_carb_structure", "bi_antibiotic_data",
+    "bi_hw_allele_freq", "bi_water_potential", "bi_simpson", "bi_sa_v_ratio", "bi_selection_type", "bi_transport_type",
+]
+STAGE_R1_SETS = ["bis_population_set", "bis_translation_set", "bis_hw_set", "bis_chi_square_set"]
