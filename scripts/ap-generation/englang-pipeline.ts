@@ -11,7 +11,7 @@ import { ledgerTotal } from "./ledger-total";
 import { planSets, planSummary } from "../../lib/ap-generation/englang-plan";
 import * as P from "../../lib/ap-generation/englang-prompts";
 import { balancedKeyPositions, itemViolations, keyConfidence, passageDisplay, passagePlain, placeKey, setItemSpread, setViolations, similarityViolations, keyPositionViolations, type ElItemRaw, type ElSetRaw, type CorpusDoc, type SolverVote } from "../../lib/ap-generation/englang-gates";
-import { EL_FRQ_SCHEMA_VERSION, frqPassageDisplay, frqTaskText, frqViolations, frqReferenceText, sourceText, type ElFrqPayload, type ElFrqSource, type ElSample } from "../../lib/ap-generation/englang-frq";
+import { EL_FRQ_SCHEMA_VERSION, normalizeFrqPayload, frqPassageDisplay, frqTaskText, frqViolations, frqReferenceText, sourceText, type ElFrqPayload, type ElFrqSource, type ElSample } from "../../lib/ap-generation/englang-frq";
 import { elTopicFor, EL_THEMES } from "../../lib/ap-generation/subjects/englang";
 
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -20,7 +20,7 @@ export type ElCfg = {
   plan?: { reading?: { sets: number; seed: number; startIndex?: number; perSet?: number }; writing?: { sets: number; seed: number; startIndex?: number; perSet?: number } };
   frqPlan?: { id: string; type: "synthesis" | "rhetorical_analysis" | "argument"; theme: string; seed: number }[];
   models: { gen: string; solvers: string[]; adversary: string; judge: string; review: string; sampleHigh: string; sampleLow: string; graders: string[] };
-  effort: string; syncStages?: string[]; minKeyConfidence: number; generatorFiles: string[]; expected: { hash: string };
+  effort: string; genEffort?: string; syncStages?: string[]; minKeyConfidence: number; generatorFiles: string[]; expected: { hash: string };
 };
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const has = (n: string) => process.argv.includes(n);
@@ -33,15 +33,16 @@ const rj = <T,>(f: string, d: T): T => (existsSync(path.join(DIR, f)) ? (JSON.pa
 const wj = (f: string, v: unknown) => writeFileSync(path.join(DIR, f), JSON.stringify(v, null, 1));
 
 const think = (model: string, effort: string) => ({ thinking: model.includes("sonnet") ? { type: "between_tools" } : { type: "adaptive" }, output_config: { effort } });
-const mk = (id: string, model: string, sys: string, tool: Json, user: string, max: number, force = false): BatchReq => ({
-  custom_id: id, params: { model, ...(force ? {} : think(model, cfg.effort)), max_tokens: max, system: [{ type: "text", text: sys, cache_control: SYS_CACHE }], tools: [tool], tool_choice: force ? { type: "tool", name: tool.name } : { type: "auto" }, messages: [{ role: "user", content: user }] } });
+const mk = (id: string, model: string, sys: string, tool: Json, user: string, max: number, force = false, effort = cfg.effort): BatchReq => ({
+  custom_id: id, params: { model, ...(force ? {} : think(model, effort)), max_tokens: max, system: [{ type: "text", text: sys, cache_control: SYS_CACHE }], tools: [tool], tool_choice: force ? { type: "tool", name: tool.name } : { type: "auto" }, messages: [{ role: "user", content: user }] } });
 
 // ── 예산 ───────────────────────────────────────────────────────────
 const BASE_F = path.join(ROOT, "englang-baseline.json");
 const myBaseline = (): number => { if (!existsSync(BASE_F)) writeFileSync(BASE_F, JSON.stringify({ spent: ledger(DIR).spent(), at: new Date().toISOString(), note: "ledger.spent at the start of the English work (2026-10-14); my total cap is cfg.myTotalCapUsd" })); return (JSON.parse(readFileSync(BASE_F, "utf-8")) as { spent: number }).spent; };
 const runBase = (): number => { const f = path.join(DIR, "baseline.json"); if (!existsSync(f)) writeFileSync(f, JSON.stringify({ spent: ledger(DIR).spent() })); return (JSON.parse(readFileSync(f, "utf-8")) as { spent: number }).spent; };
-const spentRun = () => ledger(DIR).spent() - runBase();
-const spentMine = () => ledger(DIR).spent() - myBaseline();
+const costIn = (dir: string): number => { let c = 0; if (!existsSync(dir)) return 0; for (const f of readdirSync(dir)) if (/\.results\.jsonl$/.test(f)) for (const l of readFileSync(path.join(dir, f), "utf-8").split("\n").filter(Boolean)) { try { c += Number(JSON.parse(l).cost ?? 0); } catch { /* skip */ } } return c; };
+const spentRun = () => costIn(DIR);
+const spentMine = () => readdirSync(ROOT).filter((d) => /^englang-/.test(d)).reduce((a, d) => a + costIn(path.join(ROOT, d)), 0);
 function guard(stage: string, est: number) {
   const t = ledgerTotal();
   const why = spentRun() + est > cfg.capUsd ? `run cap ${cfg.capUsd}` : spentMine() + est > cfg.myTotalCapUsd ? `English total cap ${cfg.myTotalCapUsd}` : t.cumulativeUsd + est >= cfg.hardStopCumulativeUsd ? `cumulative ${t.cumulativeUsd} + est >= hard stop ${cfg.hardStopCumulativeUsd}` : "";
@@ -102,7 +103,7 @@ function specsOf(): P.SetSpec[] {
 // ── 단계: gen / check ──────────────────────────────────────────────
 async function genStage() {
   const specs = specsOf(); wj("plan.json", { specs, summary: planSummary(specs) });
-  const reqs = specs.map((s) => mk(`g-${s.id}`, cfg.models.gen, s.kind === "reading" ? P.GEN_READING_SYSTEM : P.GEN_WRITING_SYSTEM, P.setTool, P.genUser(s), 14000));
+  const reqs = specs.map((s) => mk(`g-${s.id}`, cfg.models.gen, s.kind === "reading" ? P.GEN_READING_SYSTEM : P.GEN_WRITING_SYSTEM, P.setTool, P.genUser(s), 22000, false, cfg.genEffort ?? cfg.effort));
   const est = estimate(cfg.models.gen, reqs.length, 2500, 9000);
   const out = await call("gen", reqs, est); wj("gen.json", Object.fromEntries([...out.entries()]));
 }
@@ -223,30 +224,30 @@ function toFrqPayload(plan: NonNullable<ElCfg["frqPlan"]>[number], inp: Json): E
   if (!inp?.rubric || !inp?.sources) return null; const tpl = plan.type === "synthesis" ? "q1" : plan.type === "rhetorical_analysis" ? "q2" : "q3";
   const sources: ElFrqSource[] = (inp.sources as Json[]).map((s) => ({ id: String(s.id), kind: s.kind, title: String(s.title ?? ""), attribution: String(s.attribution ?? ""), genre: s.genre, body: s.body, paragraphs: Array.isArray(s.paragraphs) ? s.paragraphs.map((p: unknown) => (Array.isArray(p) ? p.map(String) : splitSentences(String(p)))) : undefined, figure: s.figure, table: s.table, stance: s.stance, provenance: { kind: "original", author_alias: String(s.author_alias ?? ""), year_alias: s.year_alias ?? "" } }));
   const rows = (inp.rubric.rows as Json[]).map((r) => ({ row_id: r.row_id, name: String(r.name), max: Number(r.max), descriptors: Object.fromEntries(Object.entries(r.descriptors ?? {}).map(([k, v]) => [String(k), String(v)])), task_specific: String(r.task_specific ?? "") }));
-  return { schema_version: EL_FRQ_SCHEMA_VERSION, task_type: plan.type, template: tpl, title: String(inp.title ?? ""), prompt: { scenario: String(inp.prompt?.scenario ?? ""), task: String(inp.prompt?.task ?? ""), requirements: (inp.prompt?.requirements ?? []).map(String) }, sources, rubric: { total_points: 6, rows: rows as never, scoring_notes: (inp.rubric.scoring_notes ?? []).map(String) }, expected_features: { ...(inp.expected_features ?? {}), common_pitfalls: (inp.common_pitfalls ?? []).map(String) }, samples: [], blueprint: { ...(inp.blueprint ?? {}), stances: inp.blueprint?.stances ?? sources.map((s) => s.stance).filter(Boolean) }, provenance: { kind: "original", note: "ALTON original practice material; fictional sources and attributions." } };
+  return normalizeFrqPayload({ schema_version: EL_FRQ_SCHEMA_VERSION, task_type: plan.type, template: tpl, title: String(inp.title ?? ""), prompt: { scenario: String(inp.prompt?.scenario ?? ""), task: String(inp.prompt?.task ?? ""), requirements: (inp.prompt?.requirements ?? []).map(String) }, sources, rubric: { total_points: 6, rows: rows as never, scoring_notes: (inp.rubric.scoring_notes ?? []).map(String) }, expected_features: { ...(inp.expected_features ?? {}), common_pitfalls: (inp.common_pitfalls ?? []).map(String) }, samples: [], blueprint: { ...(inp.blueprint ?? {}), stances: inp.blueprint?.stances ?? sources.map((s) => s.stance).filter(Boolean) }, provenance: { kind: "original", note: "ALTON original practice material; fictional sources and attributions." } });
 }
 async function frqGenStage() {
   const plan = cfg.frqPlan ?? []; const sys = { synthesis: P.FRQ_SYNTH_SYSTEM, rhetorical_analysis: P.FRQ_RHET_SYSTEM, argument: P.FRQ_ARG_SYSTEM };
-  const reqs = plan.map((p) => mk(`f-${p.id}`, cfg.models.gen, sys[p.type], P.frqTool(), P.frqUser(p.type, p.theme, p.seed), 16000));
+  const reqs = plan.map((p) => mk(`f-${p.id}`, cfg.models.gen, sys[p.type], P.frqTool(), P.frqUser(p.type, p.theme, p.seed), 24000, false, cfg.genEffort ?? cfg.effort));
   const out = await call("frq-gen", reqs, estimate(cfg.models.gen, reqs.length, 2200, 9000));
   wj("frq.json", plan.map((p) => ({ id: p.id, plan: p, payload: toFrqPayload(p, out.get(`f-${p.id}`) as Json) })));
 }
 async function frqSampleStage() {
-  const fr = rj<{ id: string; plan: Json; payload: ElFrqPayload | null }[]>("frq.json", []); const reqs: BatchReq[] = [];
+  const fr = rj<{ id: string; plan: Json; payload: ElFrqPayload | null }[]>("frq.json", []).map((f) => ({ ...f, payload: f.payload ? normalizeFrqPayload(f.payload) : null })); const reqs: BatchReq[] = [];
   for (const f of fr) { if (!f.payload) continue; const pv = frqViolations(f.payload).filter((x) => !/^sample_|samples_/.test(x)); if (pv.length) { console.log(`[frq-samples] ${f.id}: 과제 위반 ${pv.join(",")} → 샘플 생성 건너뜀`); continue; }
     for (const tier of ["high", "mid", "low"] as const) for (const k of [0, 1]) reqs.push(mk(`s-${f.id}-${tier}-${k}`, tier === "high" ? cfg.models.sampleHigh : cfg.models.sampleLow, P.SAMPLE_SYSTEM(tier), P.SAMPLE_TOOL, P.sampleUser(frqTaskText(f.payload), frqPassageDisplay(f.payload) + (f.payload.sources.find((s) => s.figure) ? `\n\nSource F chart data: ${JSON.stringify(f.payload.sources.find((s) => s.figure)!.figure)}` : ""), rubricText(f.payload)), 6000)); }
   const out = await call("frq-samples", reqs, estimate(cfg.models.sampleHigh, reqs.length, 3200, 1500));
   wj("frq-samples.json", Object.fromEntries([...out.entries()]));
 }
 async function frqGradeStage() {
-  const fr = rj<{ id: string; payload: ElFrqPayload | null }[]>("frq.json", []); const samples = rj<Record<string, Json | null>>("frq-samples.json", {}); const reqs: BatchReq[] = [];
+  const fr = rj<{ id: string; payload: ElFrqPayload | null }[]>("frq.json", []).map((f) => ({ ...f, payload: f.payload ? normalizeFrqPayload(f.payload) : null })); const samples = rj<Record<string, Json | null>>("frq-samples.json", {}); const reqs: BatchReq[] = [];
   for (const f of fr) { if (!f.payload) continue; for (const tier of ["high", "mid", "low"]) for (const k of [0, 1]) { const s = samples[`s-${f.id}-${tier}-${k}`]; if (!s?.essay) continue; cfg.models.graders.forEach((m, g) => reqs.push(mk(`r${g}-${f.id}-${tier}-${k}`, m, P.GRADE_SYSTEMS[g], P.GRADE_TOOL, P.gradeUser(frqTaskText(f.payload!), frqPassageDisplay(f.payload!), rubricText(f.payload!), String(s.essay)), 2500))); } }
   const out = await call("frq-grade", reqs, cfg.models.graders.reduce((a, m) => a + estimate(m, reqs.length / 3, 3600, 700), 0)); wj("frq-grades.json", Object.fromEntries([...out.entries()]));
 }
 const median = (a: number[]) => { const s = a.slice().sort((x, y) => x - y); return s.length % 2 ? s[(s.length - 1) / 2] : Math.round((s[s.length / 2 - 1] + s[s.length / 2]) / 2); };
 const TARGET = { high: 6, mid: 4, low: 2 } as const;
 function frqFinalizeStage() {
-  const fr = rj<{ id: string; plan: Json; payload: ElFrqPayload | null }[]>("frq.json", []); const samples = rj<Record<string, Json | null>>("frq-samples.json", {}); const grades = rj<Record<string, Json | null>>("frq-grades.json", {}); const cands: Json[] = []; const audit: Json[] = [];
+  const fr = rj<{ id: string; plan: Json; payload: ElFrqPayload | null }[]>("frq.json", []).map((f) => ({ ...f, payload: f.payload ? normalizeFrqPayload(f.payload) : null })); const samples = rj<Record<string, Json | null>>("frq-samples.json", {}); const grades = rj<Record<string, Json | null>>("frq-grades.json", {}); const cands: Json[] = []; const audit: Json[] = [];
   const prior = corpus(cfg.run);
   for (const f of fr) {
     const base = { cellId: `ap_english_language-${f.id}`, apSubjectCode: "ap_english_language", kind: "frq_bundle" as const, calculator: "na", reserve: false, wording: "generated", candidateKey: `ap_english_language-${f.id}-k0` };

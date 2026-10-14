@@ -149,3 +149,11 @@ export function frqReferenceText(p: ElFrqPayload): string {
   }
   return L.join("\n");
 }
+
+/** 생성 응답 정규화(결정적): 정량 소스 본문에 모델이 쓴 마크다운 표 줄을 지우고(표는 구조화 자료로 코드가 그린다), 수사 분석의 blueprint.devices 가 비어 있으면 expected_features.rhetorical_choices 에서 만든다. */
+export function normalizeFrqPayload(p: ElFrqPayload): ElFrqPayload {
+  const sources = p.sources.map((s) => (s.kind === "quantitative" && s.body ? { ...s, body: s.body.split("\n").filter((l) => !/^\s*\|/.test(l)).join("\n").trim() } : s));
+  const rc = p.expected_features?.rhetorical_choices ?? [];
+  const blueprint = p.task_type === "rhetorical_analysis" && !(p.blueprint.devices?.length) && rc.length ? { ...p.blueprint, devices: rc.map((c) => ({ device: c.device, sentence_ids: c.sentence_ids, function: c.effect })) } : p.blueprint;
+  return { ...p, sources, blueprint };
+}

@@ -80,7 +80,7 @@ export function setViolations(set: ElSetRaw): string[] {
   } else {
     for (const f of ["purpose", "audience", "claim"] as const) if (!String(bp[f] ?? "").trim()) v.push(`blueprint_missing_${f}`);
   }
-  for (const d of bp.devices ?? []) {
+  for (const d of set.kind === "reading" ? bp.devices ?? [] : []) { // 글쓰기 묶음은 수사 장치 인벤토리가 없다(수정 문항은 계획된 결함 planned_flaws 로 점검)
     if (!(EL_DEVICES as readonly string[]).includes(d.device)) v.push(`device_not_in_inventory_${d.device}`);
     if (!d.sentence_ids?.length || d.sentence_ids.some((i) => !Number.isInteger(i) || i < 1 || i > sents.length)) v.push(`device_sentence_out_of_range_${d.device}`);
   }
@@ -117,7 +117,7 @@ export function itemViolations(set: ElSetRaw, it: ElItemRaw): string[] {
   if (new Set(labels).size < 2) v.push("distractor_labels_not_diverse");
   if (dis.some((o) => countWords(o.why ?? "") < 6)) v.push("distractor_flaw_missing");
   if (keys[0] && countWords(keys[0].why ?? "") < 8) v.push("key_rationale_missing");
-  if (keys[0] && dis.length) { const kw = countWords(keys[0].text), mx = Math.max(...dis.map((o) => countWords(o.text))); if (kw > mx * 1.5 && kw - mx >= 6) v.push("key_much_longer_than_distractors"); }
+  if (keys[0] && dis.length) { const kw = countWords(keys[0].text), mx = Math.max(...dis.map((o) => countWords(o.text))); if (kw > mx * 1.6 && kw - mx >= 7) v.push("key_much_longer_than_distractors"); }
   if (!it.evidence_sentence_ids?.length || it.evidence_sentence_ids.some((i) => !Number.isInteger(i) || i < 1 || i > sents.length)) v.push("evidence_sentence_missing_or_out_of_range");
   for (const h of textHazards([it.stem, ...it.options.flatMap((o) => [o.text, o.why])].join("\n"))) v.push(`item_${h}`);
   const stem = it.stem ?? ""; const sw = countWords(stem); if (sw < 5 || sw > 100) v.push(`stem_words_${sw}`);
@@ -134,7 +134,7 @@ export function itemViolations(set: ElSetRaw, it: ElItemRaw): string[] {
     if (!/\b(sentence|paragraph|passage|draft|essay|writer|following)\b/i.test(stem)) v.push("writing_stem_not_anchored");
   }
   const inv = new Set((set.blueprint?.devices ?? []).map((d) => d.device));
-  for (const d of it.devices_used ?? []) if (!inv.has(d)) v.push(`item_device_${d}_not_in_blueprint_inventory`);
+  if (set.kind === "reading") for (const d of it.devices_used ?? []) if (!inv.has(d)) v.push(`item_device_${d}_not_in_blueprint_inventory`);
   return v;
 }
 
