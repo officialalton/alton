@@ -102,6 +102,21 @@ describe("FRQ 설정 지문(frqLostSetup)", () => {
     expect(p.ok).toBe(true);
     if (p.ok) expect(p.items[0].passage).toBe("Concentration of A in the reaction A → products at 310 K.");
   });
+  it("MC: 캡션 뒤 조건 문장(한계비용 $26)이 화면에 없으면 지문으로 싣고 금액 $ 는 이스케이프한다(라운드 4)", () => {
+    const desc = "Marginal benefit (in dollars) that two people receive from each unit of a public good. The marginal cost of each unit is $26. A $5 fee applies and $3 refunds.";
+    const mc = { candidateKey: "t:mc2", apSubjectCode: "ap_microeconomics", kind: "mc", payload: { stem: "What is the efficient quantity?", options: ["4", "3", "0", "6"], key_index: 0, explanation_en: "MSB exceeds MC for 4 units: 28 > $26 and $3.", stimulus: table(desc, { x_label: "Unit", y_label: "MB" }) }, keywordCode: "k", difficultyProvisional: "exam_prep" } as unknown as ApCandidateLike;
+    const p = planConversion(mc);
+    expect(p.ok).toBe(true);
+    if (p.ok) {
+      expect(p.items[0].passage).toBe("Marginal benefit (in dollars) that two people receive from each unit of a public good. The marginal cost of each unit is \\$26. A \\$5 fee applies and \\$3 refunds.");
+      expect(p.items[0].explanationEn).toBe("MSB exceeds MC for 4 units: 28 > \\$26 and \\$3.");
+    }
+  });
+  it("MC: 한 줄 캡션(25 °C, 298 K)은 지문으로 싣지 않는다", () => {
+    const mc = { candidateKey: "t:mc3", apSubjectCode: "ap_chemistry", kind: "mc", payload: { stem: "Which has the lowest pH?", options: ["a", "b", "c", "d"], key_index: 0, explanation_en: "Because.", stimulus: table("Acid dissociation constants at 25 °C") }, keywordCode: "k", difficultyProvisional: "exam_prep" } as unknown as ApCandidateLike;
+    const p = planConversion(mc);
+    if (p.ok) expect(p.items[0].passage).toBeNull();
+  });
   it("MC 문항은 영향받지 않는다", () => {
     const mc = { candidateKey: "t:mc", apSubjectCode: "ap_physics_1", kind: "mc", payload: { stem: "Which graph?", options: ["a", "b", "c", "d"], key_index: 0, explanation_en: "Because.", stimulus: table(SETUP) }, keywordCode: "k", difficultyProvisional: "exam_prep" } as unknown as ApCandidateLike;
     const p = planConversion(mc);
