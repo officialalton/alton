@@ -55,7 +55,29 @@ function passageFor(c: ApCandidateLike, gate: GateResult): string | null {
     return codeSet ? `${intro.trim()}\n\n${desc.trim()}` : intro.trim();
   }
   if (gate.stimKind === "text" && !gate.spec && desc && !/^no (stimulus|figure)/i.test(desc)) return desc;
-  return graphStatedFacts(s, gate);
+  return graphStatedFacts(s, gate) ?? frqLostSetup(c, gate, desc);
+}
+
+const NO_STIM = /^no (stimulus|figure)/i;
+const SETUP_NARRATIVE = /^(?:A|An|The)\s[^.]*\b(?:measures?|releases?|released|hangs?|hanging|slides?|swings?|swinging|attached|rests?|floats?|gives?)\b/;
+const specStrings = (v: unknown): string[] => (typeof v === "string" ? [v] : typeof v === "number" ? [String(v)] : Array.isArray(v) ? v.flatMap(specStrings) : isObj(v) ? Object.values(v).flatMap(specStrings) : []);
+const numTokens =(t: string) => t.match(/\d+(?:\.\d+)?/g) ?? [];
+/**
+ * FRQ 표·도식 자료의 stimulus.description 은 그림 스펙(ap_table)에 실리지 않아 학생 화면에 나오지 않는다(2026-10-13 감사 3라운드: 용수철 실험 표 "학생이 …를 측정한다").
+ * 학생이 실험 맥락·조건을 못 보는 경우에만 본문 지문으로 싣는다: (a) 표 자료의 실험 설정 서술문이거나 (b) 설명의 수치(310 K, $55, n=18 …)가 화면 어디에도 없을 때.
+ * 단순 그림 캡션("Selected values of R(t), in gallons per minute")·이미 notes/문항에 있는 설명은 건드리지 않는다. 다른 과목의 기존 표시는 이 두 경우 밖에서 그대로다.
+ */
+export function frqLostSetup(c: ApCandidateLike, gate: GateResult, desc: string): string | null {
+  const d = desc.trim();
+  if (c.kind !== "frq_bundle" || !gate.spec || gate.stimKind === "text" || !d || NO_STIM.test(d)) return null;
+  const parts = Array.isArray(c.payload.parts) ? (c.payload.parts as Json[]) : [];
+  const shown = [String(c.payload.title ?? ""), ...parts.map((x) => String(x.prompt ?? "")), ...specStrings(gate.spec)].join("\n");
+  const norm = (t: string) => t.replace(/[$\\]/g, "").replace(/\s+/g, " ").trim(); // 그림 notes 는 정규화 때 수식 구분자 $ 가 빠진다
+  if (norm(shown).includes(norm(d))) return null;
+  const missingNumber = numTokens(d).some((n) => !new RegExp(`(?<![\\d.])${n.replace(".", "\\.")}(?!\\d)`).test(shown));
+  const narrative = gate.stimKind === "table" && SETUP_NARRATIVE.test(d);
+  if (!narrative && !missingNumber) return null;
+  return /[.!?]$/.test(d) ? d : `${d}.`;
 }
 
 /**

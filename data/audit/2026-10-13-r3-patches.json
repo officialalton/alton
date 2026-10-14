@@ -1,0 +1,119 @@
+{
+ "kind": "ap_frq_passage_patch_list_round3",
+ "generatedBy": "scripts/audit/r3-build-patches.ts",
+ "count": 8,
+ "patches": [
+  {
+   "id": "R3-chem_s2_f2_ap_chemistry_f03_k0",
+   "apCandidateKey": "chem-s2-f2:ap_chemistry-f03-k0",
+   "expectVersionId": "3b4bc404-7c9e-492a-a73b-eab0f7932f4f",
+   "kind": "ap",
+   "why": "AP FRQ: stimulus.description (experiment setup / conditions) was never shown to students because table/diagram figures carry no description. New problem version adds it as the passage (convert.ts frqLostSetup).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": null,
+     "new": "Concentration of A in the reaction A → products at 310 K."
+    }
+   ]
+  },
+  {
+   "id": "R3-chem_s2_f2_ap_chemistry_f03_k1",
+   "apCandidateKey": "chem-s2-f2:ap_chemistry-f03-k1",
+   "expectVersionId": "5f4b7042-3749-4bba-ad9a-36c9c92df488",
+   "kind": "ap",
+   "why": "AP FRQ: stimulus.description (experiment setup / conditions) was never shown to students because table/diagram figures carry no description. New problem version adds it as the passage (convert.ts frqLostSetup).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": null,
+     "new": "Concentration of A in the reaction A → products at 310 K."
+    }
+   ]
+  },
+  {
+   "id": "R3-chem_s2_f4_ap_chemistry_f03_k0",
+   "apCandidateKey": "chem-s2-f4:ap_chemistry-f03-k0",
+   "expectVersionId": "66893939-a62b-49d7-904c-30e990b41103",
+   "kind": "ap",
+   "why": "AP FRQ: stimulus.description (experiment setup / conditions) was never shown to students because table/diagram figures carry no description. New problem version adds it as the passage (convert.ts frqLostSetup).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": null,
+     "new": "Concentration of A in the reaction A → products at 310 K."
+    }
+   ]
+  },
+  {
+   "id": "R3-phys_s2_d_ap_physics_1_f03_k0",
+   "apCandidateKey": "phys-s2-d:ap_physics_1-f03-k0",
+   "expectVersionId": "79520602-ceff-415e-8b14-4e83b9246c7f",
+   "kind": "ap",
+   "why": "AP FRQ: stimulus.description (experiment setup / conditions) was never shown to students because table/diagram figures carry no description. New problem version adds it as the passage (convert.ts frqLostSetup).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": null,
+     "new": "A student measures the period $T$ of a block of mass $m$ hanging on a vertical spring of unknown spring constant $k$."
+    }
+   ]
+  },
+  {
+   "id": "R3-phys_s2_e_ap_physics_1_f02_k0",
+   "apCandidateKey": "phys-s2-e:ap_physics_1-f02-k0",
+   "expectVersionId": "ec213cca-8052-4eec-aaa7-b7fa10aa0d56",
+   "kind": "ap",
+   "why": "AP FRQ: stimulus.description (experiment setup / conditions) was never shown to students because table/diagram figures carry no description. New problem version adds it as the passage (convert.ts frqLostSetup).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": null,
+     "new": "A student measures the period $T$ of a block of mass $m$ hanging on a vertical spring of unknown spring constant $k$."
+    }
+   ]
+  },
+  {
+   "id": "R3-stats_s2b_c_ap_statistics_f02_k0",
+   "apCandidateKey": "stats-s2b-c:ap_statistics-f02-k0",
+   "expectVersionId": "ceacfa91-5bd9-4404-b5b5-821c3f669df5",
+   "kind": "ap",
+   "why": "AP FRQ: stimulus.description (experiment setup / conditions) was never shown to students because table/diagram figures carry no description. New problem version adds it as the passage (convert.ts frqLostSetup).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": null,
+     "new": "Scatterplot of exam score (points) versus number of hours of study for 18 observations, with the least-squares regression line."
+    }
+   ]
+  },
+  {
+   "id": "R3-stats_s3b_c_ap_statistics_f02_k0",
+   "apCandidateKey": "stats-s3b-c:ap_statistics-f02-k0",
+   "expectVersionId": "0f3bc27a-62aa-4236-9446-4b25bb3d9930",
+   "kind": "ap",
+   "why": "AP FRQ: stimulus.description (experiment setup / conditions) was never shown to students because table/diagram figures carry no description. New problem version adds it as the passage (convert.ts frqLostSetup).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": null,
+     "new": "Scatterplot of exam score (points) versus number of hours of study for 16 observations, with the least-squares regression line."
+    }
+   ]
+  },
+  {
+   "id": "R3-stats_s3b_c_ap_statistics_f02_k2",
+   "apCandidateKey": "stats-s3b-c:ap_statistics-f02-k2",
+   "expectVersionId": "ff04c79c-0e5c-43f0-81fa-aefbdd72ecdc",
+   "kind": "ap",
+   "why": "AP FRQ: stimulus.description (experiment setup / conditions) was never shown to students because table/diagram figures carry no description. New problem version adds it as the passage (convert.ts frqLostSetup).",
+   "changes": [
+    {
+     "field": "passage",
+     "old": null,
+     "new": "Scatterplot of exam score (points) versus number of hours of study for 16 observations, with the least-squares regression line."
+    }
+   ]
+  }
+ ]
+}
