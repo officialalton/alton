@@ -208,3 +208,6 @@ STAGE_R2 = [
     "bi_allele_freq_graph", "bi_fitness_allele_change", "bi_genetic_drift", "bi_hw_expected_counts", "bi_natural_selection_conditions", "bi_evidence_evolution",
     "bis_population_set", "bis_translation_set",
 ]
+
+# R3: R2 후에도 가상 칸으로 남은 칸용 새 시나리오형 원형 10개(bio_p0_h) + 수정한 근접 세트 3개(chi_square·cell_cycle·leafdisk).
+STAGE_R3 = ["bi_selection_claim_data", "bi_antibiotic_survival_claim", "bi_expression_tissue_table", "bi_checkpoint_mutation_claim", "bi_hw_migration_scenario", "bi_signal_receptor_prediction", "bi_meiosis_crossing_scenario", "bi_selection_followup_design", "bi_yeast_respiration_scenario", "bi_cell_cycle_question", "bis_chi_square_set", "bis_cell_cycle_set", "bis_leafdisk_set"]

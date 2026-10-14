@@ -60,6 +60,21 @@
   ]
  },
  {
+  "id": "bi_antibiotic_survival_claim",
+  "topic": "7.8",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.8"
+  ],
+  "misconceptions": [
+   "The data show survival and do not show a change in the mutation rate.",
+   "The data are population percents and do not show that individual cells changed.",
+   "Resistance does not arise in response to exposure; it comes from existing variation."
+  ]
+ },
+ {
   "id": "bi_artificial_selection",
   "topic": "7.3",
   "skill": "1.C",
@@ -195,6 +210,21 @@
   ]
  },
  {
+  "id": "bi_cell_cycle_question",
+  "topic": "4.6",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.6"
+  ],
+  "misconceptions": [
+   "Better off is not a measurable quantity, so the question cannot be tested.",
+   "Importance is a judgment, and the question gives no measurable variable to test.",
+   "Whether a treatment is ethical is a matter of values, so no experiment can answer it."
+  ]
+ },
+ {
   "id": "bi_cell_cycle_time",
   "topic": "4.5",
   "skill": "5.A",
@@ -267,6 +297,21 @@
    "The lack of cyclin does not cause re-replication of DNA.",
    "A cell blocked at a checkpoint is arrested; it does not skip phases.",
    "CDKs need cyclin to be active."
+  ]
+ },
+ {
+  "id": "bi_checkpoint_mutation_claim",
+  "topic": "4.6",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.6"
+  ],
+  "misconceptions": [
+   "The mutated cells still divided, so they did replicate their DNA.",
+   "The normal cells divided less often when their DNA was damaged, so the gene slows division.",
+   "More damaged cells divided, which shows that fewer cells were stopped, not that repair was faster."
   ]
  },
  {
@@ -840,6 +885,21 @@
   ]
  },
  {
+  "id": "bi_expression_tissue_table",
+  "topic": "6.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.6"
+  ],
+  "misconceptions": [
+   "All cells of one organism have the same genes, and the muscle cells also made some mRNA.",
+   "The liver value rose with the hormone, so this reverses the direction of the change.",
+   "The liver value rose by 50, while the muscle value did not change."
+  ]
+ },
+ {
   "id": "bi_feedback_graph",
   "topic": "4.4",
   "skill": "2.B",
@@ -1095,6 +1155,21 @@
   ]
  },
  {
+  "id": "bi_hw_migration_scenario",
+  "topic": "7.5",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.5"
+  ],
+  "misconceptions": [
+   "Dominance of an allele does not change the equilibrium conditions.",
+   "The population still exists, and the change comes from unequal survival, not from size alone.",
+   "Predation does not cause mutations; it changes which snails survive."
+  ]
+ },
+ {
   "id": "bi_hypothesis_heredity",
   "topic": "5.3",
   "skill": "3.B",
@@ -1302,6 +1377,21 @@
    "Quadruples the diploid number.",
    "Counts the chromosomes in a haploid gamete.",
    "Counts the chromosomes and ignores that each has two sister chromatids."
+  ]
+ },
+ {
+  "id": "bi_meiosis_crossing_scenario",
+  "topic": "5.2",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.2"
+  ],
+  "misconceptions": [
+   "Replication makes copies of the same alleles and does not mix combinations.",
+   "The combinations are present in the gametes before fertilization takes place.",
+   "Crossing over occurs between homologous chromosomes in prophase I, not in prophase II."
   ]
  },
  {
@@ -2085,6 +2175,21 @@
   ]
  },
  {
+  "id": "bi_selection_claim_data",
+  "topic": "7.2",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.2"
+  ],
+  "misconceptions": [
+   "Variation arises by mutation and does not appear because of a need.",
+   "Which form is favored depends on the environment, and the data come from one habitat.",
+   "The data count whole populations and do not show any individual changing color."
+  ]
+ },
+ {
   "id": "bi_selection_data_table",
   "topic": "7.2",
   "skill": "6.B",
@@ -2097,6 +2202,21 @@
    "Populations do not change because they need to; selection acts on existing heritable variation.",
    "Changes that individuals acquire during life are not inherited; natural selection acts on heritable variation among individuals.",
    "Mutations occur randomly and not in response to an environmental change."
+  ]
+ },
+ {
+  "id": "bi_selection_followup_design",
+  "topic": "7.2",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.2"
+  ],
+  "misconceptions": [
+   "Seed hardness on another island does not test the trait in this population.",
+   "A count of birds does not test whether the beak depth is inherited.",
+   "The same birds measured twice would test growth in individuals and not inheritance."
   ]
  },
  {
@@ -2157,6 +2277,21 @@
    "A kinase mutation does not change the receptor.",
    "The mutation affects an intracellular kinase, not the signal molecule.",
    "A kinase that cannot be activated would not increase the response."
+  ]
+ },
+ {
+  "id": "bi_signal_receptor_prediction",
+  "topic": "4.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.2"
+  ],
+  "misconceptions": [
+   "A blocked receptor cannot trigger the pathway, so glucose release is not triggered.",
+   "A hormone that works through a surface receptor cannot cross the membrane to bypass it.",
+   "A drug that blocks the receptor does not activate it, so the response is not increased."
   ]
  },
  {
@@ -2445,6 +2580,21 @@
   ]
  },
  {
+  "id": "bi_yeast_respiration_scenario",
+  "topic": "3.5",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.5"
+  ],
+  "misconceptions": [
+   "The Calvin cycle occurs in photosynthetic cells and fixes carbon dioxide; it does not make ethanol.",
+   "Yeast cells do not photosynthesize, and the flask contains no light-driven reactions.",
+   "The flask has no oxygen, so the electron transport chain cannot run."
+  ]
+ },
+ {
   "id": "bis_cell_cycle_set_q1",
   "topic": "4.6",
   "skill": "4.B",
@@ -2530,7 +2680,7 @@
   ],
   "misconceptions": [
    "Does not square the differences, using the sum of the absolute differences divided by the expected numbers.",
-   "Adds the observed and expected numbers before squaring.",
+   "Divides the sum of the squared differences by the total number of offspring.",
    "Does not divide by the expected numbers."
   ]
  },
@@ -2710,8 +2860,8 @@
   ],
   "misconceptions": [
    "Reports the time for the dim light treatment.",
-   "Reports the time at which all ten disks had floated.",
-   "Reports the first time at which at least five disks had floated in bright light."
+   "Reports the last measured time before more than five disks had floated in bright light.",
+   "Reports the first measured time at which more than five disks had floated in bright light."
   ]
  },
  {
@@ -2724,9 +2874,9 @@
    "ratio of interpolated times vs the generating midpoints"
   ],
   "misconceptions": [
+   "Divides the time for bright light by the time for dim light.",
    "Subtracts the two times instead of dividing one by the other.",
-   "Compares the number of disks floating at the last time.",
-   "Divides the time for bright light by the time for dim light."
+   "Adds the two times instead of dividing one by the other."
   ]
  },
  {

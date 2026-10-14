@@ -1,0 +1,101 @@
+{
+ "runs": [
+  "bio-r2"
+ ],
+ "rows": 40,
+ "passed": 17,
+ "rejected": 23,
+ "passRate": 0.425,
+ "mc": {
+  "rows": 40,
+  "passed": 17,
+  "passRate": 0.425
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "4": 7,
+  "5": 3,
+  "7": 7
+ },
+ "skillsPassed": {
+  "2.B": 6,
+  "6.E": 2,
+  "2.A": 1,
+  "5.A": 6,
+  "3.B": 1,
+  "1.A": 1
+ },
+ "figPassed": {
+  "graph": 6,
+  "none": 6,
+  "table": 5
+ },
+ "figAll": {
+  "graph": 8,
+  "none": 20,
+  "table": 12
+ },
+ "figPassRate": {
+  "graph": "6/8",
+  "none": "6/20",
+  "table": "5/12"
+ },
+ "renderTypesPassed": {
+  "ap_graph:bio_line": 6,
+  "none": 6,
+  "ap_table": 5
+ },
+ "archetypesPassed": {
+  "bi_graph_dose_response": 2,
+  "bi_signal_mutation": 1,
+  "bi_feedback_graph": 1,
+  "bi_dna_content_graph": 1,
+  "bi_checkpoint": 1,
+  "bi_mitotic_index": 1,
+  "bi_hypothesis_heredity": 1,
+  "bi_pedigree_mode": 1,
+  "bi_linkage_map": 1,
+  "bi_allele_freq_graph": 2,
+  "bi_fitness_allele_change": 2,
+  "bi_hw_expected_counts": 2,
+  "bi_evidence_evolution": 1
+ },
+ "archetypesAll": {
+  "bi_graph_dose_response": 2,
+  "bi_justify_hypothesis_signal": 2,
+  "bi_signal_mutation": 2,
+  "bi_feedback_graph": 2,
+  "bi_dna_content_graph": 2,
+  "bi_checkpoint": 2,
+  "bi_mitotic_index": 2,
+  "bi_hypothesis_heredity": 2,
+  "bi_monohybrid_prob": 2,
+  "bi_pedigree_mode": 2,
+  "bi_linkage_map": 2,
+  "bi_nonmendelian": 2,
+  "bi_allele_freq_graph": 2,
+  "bi_fitness_allele_change": 2,
+  "bi_genetic_drift": 2,
+  "bi_hw_expected_counts": 2,
+  "bi_natural_selection_conditions": 2,
+  "bi_evidence_evolution": 2,
+  "bis_population_set": 2,
+  "bis_translation_set": 2
+ },
+ "failedArchetypes": [
+  "bi_justify_hypothesis_signal",
+  "bi_monohybrid_prob",
+  "bi_nonmendelian",
+  "bi_genetic_drift",
+  "bi_natural_selection_conditions",
+  "bis_population_set",
+  "bis_translation_set"
+ ],
+ "costUsd": {
+  "bio-r2": 1.823
+ }
+}
