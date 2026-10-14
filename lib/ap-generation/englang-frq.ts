@@ -70,6 +70,14 @@ export function sourceNumberConflicts(sources: ElFrqSource[]): string[] {
   return out;
 }
 
+/** 샘플 에세이끼리 겹침을 볼 때 소스를 그대로 인용한 구간(6단어 이상 일치)은 정당한 인용이므로 가린다(수사 분석 에세이는 같은 지문 문장을 인용한다). */
+export function maskSourceQuotes(essay: string, p: ElFrqPayload): string {
+  const tok = (t: string) => t.toLowerCase().replace(/[‘’]/g, "'").replace(/[^a-z0-9' ]/g, " ").split(/\s+/).filter(Boolean);
+  const src = tok(p.sources.map(sourceText).join(" ")); const grams = new Set<string>(); for (let i = 0; i + 6 <= src.length; i++) grams.add(src.slice(i, i + 6).join(" "));
+  const e = tok(essay); const masked = new Array<boolean>(e.length).fill(false);
+  for (let i = 0; i + 6 <= e.length; i++) if (grams.has(e.slice(i, i + 6).join(" "))) for (let k = i; k < i + 6; k++) masked[k] = true;
+  return e.map((w, i) => (masked[i] ? "▯" : w)).join(" ");
+}
 export function frqViolations(p: ElFrqPayload, corpus: { id: string; text: string }[] = []): string[] {
   const v: string[] = [];
   if (p.schema_version !== EL_FRQ_SCHEMA_VERSION) v.push("schema_version");
@@ -130,7 +138,7 @@ export function frqViolations(p: ElFrqPayload, corpus: { id: string; text: strin
   }
   const hi = p.samples.find((x) => x.tier === "high"), mid = p.samples.find((x) => x.tier === "mid"), lo = p.samples.find((x) => x.tier === "low");
   if (hi && mid && lo && !(hi.rubric_scores.total > mid.rubric_scores.total && mid.rubric_scores.total > lo.rubric_scores.total)) v.push("samples_not_strictly_ordered");
-  if (hi && mid && lo) for (const [a, b, n] of [[hi, mid, "high_mid"], [hi, lo, "high_low"], [mid, lo, "mid_low"]] as const) if (longestSharedRun(a.essay, b.essay) >= 18) v.push(`samples_share_run_${n}`);
+  if (hi && mid && lo) for (const [a, b, n] of [[hi, mid, "high_mid"], [hi, lo, "high_low"], [mid, lo, "mid_low"]] as const) if (longestSharedRun(maskSourceQuotes(a.essay, p), maskSourceQuotes(b.essay, p)) >= 14) v.push(`samples_share_run_${n}`);
   for (const c of corpus) { const g = fiveGrams(studentText), h = fiveGrams(c.text); let hit = 0; g.forEach((x) => h.has(x) && hit++); if (g.size && hit / g.size > 0.04) v.push(`similar_to_${c.id}`); }
   void EL_BANNED_PHRASES;
   return v;
