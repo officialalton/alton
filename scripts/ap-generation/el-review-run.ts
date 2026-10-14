@@ -40,10 +40,10 @@ function mcReqs(verify = false): BatchReq[] {
 }
 function frqReqs(fixed = false): BatchReq[] {
   const r: BatchReq[] = [];
-  const fx: Record<string, any> = {}; if (fixed) for (const c of JSON.parse(readFileSync("data/audit/el-review-fix-items.json", "utf-8")) as any[]) fx[c.stockKey] = c;
+  const fx: Record<string, any> = {}; if (fixed) for (const c of JSON.parse(readFileSync("data/ap/stock/el-rv-items.json", "utf-8")) as any[]) fx[c.stockKey] = c;
   for (const s of assign) for (const k of s.frqA) {
-    if (fixed && !fx[`el-review-fix:${stock[k].candidateKey}`]) continue;
-    const e: ElFrqPayload = fixed ? fx[`el-review-fix:${stock[k].candidateKey}`].payload.el_frq : stock[k].payload.el_frq; const disp = frqPassageDisplay(e); const task = frqTaskText(e);
+    if (fixed && !fx[`el-rv:${stock[k].candidateKey}`]) continue;
+    const e: ElFrqPayload = fixed ? fx[`el-rv:${stock[k].candidateKey}`].payload.el_frq : stock[k].payload.el_frq; const disp = frqPassageDisplay(e); const task = frqTaskText(e);
     for (const sm of e.samples) {
       const user = `ESSAY TASK\n${task}\n\nSOURCES / PASSAGE\n${disp}\n\nSTUDENT ESSAY\n${sm.essay}\n\nCall submit_score.`;
       r.push({ custom_id: `${k.replace(/[^a-zA-Z0-9]/g, "_").slice(-48)}__${sm.tier}`, params: { model: "claude-opus-5-5", thinking: { type: "adaptive" }, output_config: { effort: "high" }, max_tokens: 12000, system: [{ type: "text", text: FRQ_SYS }], tools: [FRQ_TOOL], tool_choice: { type: "auto" }, messages: [{ role: "user", content: user }] } });

@@ -54,21 +54,28 @@ DB 쓰기 없음(`supabase db query --linked` SELECT만 2회). 수정본은 모�
 | EL-24 | 정보 | 검수 도구 지적 중 결함이 아닌 것 | fb1·fa1 "Source F 누락"(검수 하네스가 학생용 텍스트만 보내 차트가 빠진 것, 실제로는 stimulus로 전달됨)·"ALTON original passage" 줄(공개 라벨 정책)·fa2 선장과 어선 개연성·fa3 전제 문구·fa3/fb3 높음-중간 샘플 유사·fb1 low "scores went down"·r08 어머니 나이·r10 필자 역할·r01 "wry understatement" 라벨. | 조치 없음. |
 | EL-25 | 정보 | FRQ 샘플 보정 | 수정 전 맹검 채점: 18편 중 14편 정확 일치(불일치 fb2 low A·fb3 mid B/C·fb3 low A/B·fa1 low B), 최대 총점 편차 2(fb3 low 저장 1 vs 3). 서열(high>mid>low)은 6/6 유지. 수정 후: 14/18 정확 일치(fa1 low 일치로 바뀜, fb1 low는 Opus 실행마다 B 1~2로 흔들림, fb3 mid는 저장 4 vs 채점 5). 저장 점수는 3채점기 중앙값이므로 단일 채점기 편차는 허용 범위로 본다. | 조치 없음. |
 
-## 수정본과 교체 계획
+## 수정본과 교체 계획 (관리자 패널로 적재 가능한 형태)
 
-- 신규 후보: `data/audit/el-review-fix-items.json` — 28개 StockItem(MC 22 + FRQ 6), 키 `el-review-fix:<원본 candidateKey>`, 원본과 같은 칸. 원본 DB 문항은 그대로 남는다.
-- 교체 계획(형식은 `ab1-v2-swap-plan.json` 등과 동일, 섹션 `ap_mc`/`ap_frq`):
-  - `data/audit/el-review-el1-v2-swap-plan.json` — 15건(필수 11, 권장 4)
-  - `data/audit/el-review-el2-v2-swap-plan.json` — 13건(필수 6, 권장 7)
-  - `tier: required`는 내용·과제문·해설·점수 결함(EL-02~EL-17) 수정, `tier: recommended`는 EL-01(길이 보정)만 해당하는 세트. 지문 묶음은 슬롯이 여러 개여도 계획에는 항목 하나(`resolveSwaps`가 세트 전체 슬롯으로 펼침).
-  - 계획 파일은 `data/audit/`에 두었다. 관리자 '새 버전' 화면은 `data/ap/stock/`만 읽으므로 반영하려면 후보 적재 뒤 파일을 그쪽으로 복사해야 하고, `lib/ap-admin/audit-swap-plans.test.ts`가 `-audit-swap-plan.json` 이름의 파일 수를 고정하므로 파일명은 `…-review-v2-swap-plan.json` 계열을 유지할 것.
-- 적용 순서(소유자 실행): 1) `npx tsx scripts/ap-generation/import-candidates.ts --items data/audit/el-review-fix-items.json --batch el-review-fix-2026-10-14 --supplement`(기본 dry-run, 확인 후 `--execute`) 2) 새 후보의 render/screen 검증 증거 확보(특히 fb1은 차트 라벨 변경) 3) 계획 파일을 `data/ap/stock/`로 복사 → 관리자 화면에서 EL1·EL2 새 버전 초안 생성 → 미리보기에서 위반 0 확인 후 공개.
+- 신규 배치 `el-rv`: `data/ap/stock/el-rv-items.json`(28개 StockItem = MC 22 묶음 + FRQ 6, 키 `el-rv:<원본 candidateKey>`, 원본과 같은 칸), `el-rv-pass-keys.json`, 화면 증거 `data/ap/screen-evidence/evidence-el-rv.json`(+ 스크린샷 `docs/ap/screen-evidence/el-rv/`). `lib/ap-admin/batches.ts`에 등록(`loadLabel el-rv-2026-10-14`, 보조 적재). `keys-file.ts`·`render-check.ts`는 `el-*-items.json` 파일명 규칙으로 자동 인식한다. 원본 DB 문항은 그대로 남는다.
+- 교체 계획 `data/ap/stock/el1-review-v2-swap-plan.json`(15건: 필수 11·권장 4), `el2-review-v2-swap-plan.json`(13건: 필수 6·권장 7). 관리자 '새 버전' 로더(`listSwapPlans`)가 `*swap-plan*.json` 패턴으로 읽는다. `audit-swap-plans.test.ts`는 `-audit-swap-plan.json` 이름만 세므로 영향이 없고, 새 테스트 `scripts/ap-generation/el-review-fixes.test.ts`가 두 계획(건수 15·13)·배치 등록·pass-keys 일치를 고정한다.
+- `tier: required` = 내용·과제문·해설·점수 결함 수정이 들어간 교체, `tier: recommended` = 길이 단서(EL-01)만 해당. 권장 건을 빼려면 계획 파일에서 해당 swap 항목을 지우고 커밋하면 된다.
+- 검증: 렌더 게이트(`render-check.ts`) 28건 중 text_only 26(해당 없음)·차트 2(fb1·fa1) 통과, fb1 차트 라벨 `Transport/Utilities/Substitutes/Food service/Custodial` 정상 렌더. 학생 화면 증거는 격리 스택(ALTON_elrv, 포트 +300 — 기본 래퍼의 +100 포트는 다른 세션 `ALTON_apbio2`가 사용 중이라 충돌해 수동 포트 이동)에서 Playwright로 후보 28개 전부 390×844·1280×800 점검 192건, 체크 976 통과·368 해당 없음·실패 0. 스택은 중지했고 `supabase/config.toml`은 원복했다.
 - 예비 재고(교체가 필요해질 경우): 통과한 읽기·글쓰기 묶음 5개가 남아 있다 — 2.A `w01`, 1.B `r21`·`r24`, 1.A `r07`, 4.A `w08`(auto_passed). FRQ 예비는 없다.
-- 새 후보의 `key_confidence`(솔버 표)는 원본 값을 그대로 복사한 것이라 수정 선지에 대한 값이 아니다. 대신 `data/audit/el-review-raw-verify.json`에 수정본 재풀이 결과가 있다.
+- 새 후보의 `key_confidence`(솔버 표)는 원본 값 복사본이다. 수정본 재풀이 결과는 `data/audit/el-review-raw-verify.json`.
+
+### 관리자가 할 일(순서대로)
+
+1. **배포**: 이 브랜치를 통합 브랜치에 병합해 배포한다(배치 파일·증거·계획 파일은 저장소 → 배포로만 들어옴). 비프로덕션에서 먼저 실행하고 프로덕션은 별도 승인 후.
+2. **후보 적재**: 관리자 → AP 재고(배치) 화면에서 `AP English Language 검수 수정본 (el-rv)`를 선택하고 '미리보기(dry-run)'로 28건 신규·기존 행 보존 0건 변경을 확인한 뒤 '적재'. (CLI 대안: `npx tsx scripts/ap-generation/import-candidates.ts --items data/ap/stock/el-rv-items.json --batch el-rv-2026-10-14 --supplement` → 확인 후 `--execute`.)
+3. **검증 기록**: 같은 화면에서 `el-rv` 배치의 '렌더 검증 기록' → '화면 검증 기록'을 실행한다(증거 파일의 content_hash가 적재된 payload 해시와 같아야 통과). 28건 모두 렌더·화면 검증됨 상태가 되는지 확인.
+4. **EL1 새 버전**: 관리자 → 모의고사 세트 → `AP English Language — Practice Exam 1`(v1, 게시됨) → '새 버전' → 계획 `el1-review-v2-swap-plan.json` 선택 → 미리보기에서 위반 0·교체 15건·기존 응시 수 확인 → '초안 생성'(v2 초안).
+5. **EL2 새 버전**: 같은 방식으로 `Practice Exam 2` → `el2-review-v2-swap-plan.json`(13건) → 초안 생성.
+6. **초안 검토 후 게시**: v2 초안 두 개를 열어 FRQ 3개(특히 EL1 fb1 차트)와 MC 몇 묶음을 학생 화면으로 확인하고 '새 버전 공개'. 기존 v1 응시 기록은 v1에 남고 바뀌지 않는다.
+7. 문제가 있으면 v2 초안은 폐기하면 되고 v1은 그대로 게시 상태다.
 
 ## 재현 가능한 산출물
 
-- 스크립트: `scripts/ap-generation/el-review-run.ts`(맹검 풀이·FRQ 채점·FRQ 감사), `el-review-rewrite.ts`(선지 길이 보정), `el-review-refs.ts`(해설 문장 번호 제거), `el-review-pron.ts`(성별 대명사), `el-review-build-fixes.ts`(병합·수기 정정·FRQ 패치·게이트 검증·계획 생성), `el-review-fixes.test.ts`(불변식 6개).
+- 스크립트: `scripts/ap-generation/el-review-run.ts`(맹검 풀이·FRQ 채점·FRQ 감사), `el-review-rewrite.ts`(선지 길이 보정), `el-review-refs.ts`(해설 문장 번호 제거), `el-review-pron.ts`(성별 대명사), `el-review-build-fixes.ts`(병합·수기 정정·FRQ 패치·게이트 검증·배치/계획 파일 생성), `el-review-fixes.test.ts`(불변식 6개).
 - 원시 응답: `data/audit/el-review-raw-*.json`, 패치 목록 `el-review-frq-patches.json`, 결정 `el-review-decisions.json`, 병합 MC `el-review-merged-mc.json`.
 - 테스트: `npx vitest run scripts/ap-generation/el-review-fixes.test.ts lib/ap-generation/englang-gates.test.ts lib/ap-generation/englang-frq.test.ts lib/ap-admin/audit-swap-plans.test.ts` 통과(수정본의 키 위치·키 문구 유지·게이트·숨은 문장 번호 0·길이 단서 40% 미만·FRQ 게이트·계획 형식).
 
@@ -81,6 +88,6 @@ DB 쓰기 없음(`supabase db query --linked` SELECT만 2회). 수정본은 모�
 
 1. **사람 검수가 아니다.** 같은 계열 모델 3종(+작성자)의 합의는 공유 사각지대(예: 지나치게 선지 문구에 의존하는 해석, 시험 직전 학생의 실제 오독 패턴)를 못 잡는다. 키 오류율 0–2%는 "자동·모델 검수 후 잔여 추정"이며, 그라운드워크 §6의 사람 표본 30%·지문 100%는 여전히 남는다. 정정 신고 경로는 유지할 것.
 2. 수정본은 모델이 다시 쓴 오답 선지를 포함한다. 맹검 재풀이(Opus)와 결정적 게이트는 통과했지만 **학생 데이터 없이는 오답 선지의 매력도(난이도)가 달라졌는지 확인할 수 없다.** 권장(recommended) 계획은 그 위험을 받아들이고 길이 단서를 없애는 선택이다.
-3. 새 후보는 적재 뒤 render/screen 검증 증거가 새로 필요하다(원본 증거는 키가 달라 승계되지 않음). 검증을 건너뛰면 검수 환경 게시 조건에서 막힐 수 있다.
+3. 화면 증거는 자동 점검(Playwright)이며 그림 의미·문장 자연스러움은 사람 확인이 필요하다. 증거의 problem_version_id는 격리 스택 값이라 적재 시 content_hash로만 매칭된다(기존 EL 증거와 같은 방식).
 4. FRQ 샘플 점수는 저장값(3채점기 중앙값)과 이번 단일 채점기 결과가 최대 2점 차이난다. 경계 사례(fb2·fb3 low의 Thesis)는 사람 채점 보정이 필요하다.
 5. EL-12의 r11 #1 해설 한 줄, EL-21(이름 동질성)은 남겨 두었다.
