@@ -220,7 +220,7 @@ def cs_string_algorithm(rng):
     py = "".join(w[i] for i in range(len(w) - 1) if w[i] == w[i + 1])
     muts = [{"why": "Stops one character early because it uses i < s.length() - 2.", "swap": ("s.length() - 1", "s.length() - 2")},
             {"why": "Compares each character with the character two positions ahead.", "swap": ("s.charAt(i + 1)", "s.charAt(i + 2)")},
-            {"why": "Appends the neighbor instead of the repeated letter's first copy, adding every second occurrence of the pair.", "swap": ("result += s.charAt(i);", "result += s.charAt(i); result += s.charAt(i);")},
+            {"why": "Appends the repeated letter twice for every adjacent pair instead of once.", "swap": ("result += s.charAt(i);", "result += s.charAt(i); result += s.charAt(i);")},
             {"why": "Collects the characters that differ from the next one.", "swap": ("s.charAt(i) == s.charAt(i + 1)", "s.charAt(i) != s.charAt(i + 1)")}]
     if not py:
         raise ValueError("no_repeats")
