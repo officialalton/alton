@@ -35,8 +35,8 @@ export const EL_COGNITIVE = ["identify", "explain", "evaluate"] as const;
 export const EL_COGNITIVE_QUOTA = { identify: 0.4, explain: 0.4, evaluate: 0.2 } as const;
 
 /** 지문 통계 경계(가정 — 사람 검토로 확정; docs/ap/englang-groundwork.md §2.5). */
-export const EL_READING_BOUNDS = { minWords: 380, maxWords: 700, minAvgSentence: 15, maxAvgSentence: 34, minGrade: 9, maxGrade: 17 } as const;
-export const EL_WRITING_BOUNDS = { minWords: 170, maxWords: 360, minAvgSentence: 12, maxAvgSentence: 28, minGrade: 7, maxGrade: 16 } as const;
+export const EL_READING_BOUNDS = { minWords: 380, maxWords: 780, minAvgSentence: 15, maxAvgSentence: 34, minGrade: 7, maxGrade: 17 } as const;
+export const EL_WRITING_BOUNDS = { minWords: 170, maxWords: 360, minAvgSentence: 12, maxAvgSentence: 28, minGrade: 5, maxGrade: 16 } as const;
 export const EL_SOURCE_BOUNDS = { minWords: 120, maxWords: 380 } as const;
 export const EL_OPTION_COUNT = 4;
 

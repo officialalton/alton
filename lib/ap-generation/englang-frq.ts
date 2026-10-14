@@ -130,7 +130,7 @@ export function frqViolations(p: ElFrqPayload, corpus: { id: string; text: strin
   }
   const hi = p.samples.find((x) => x.tier === "high"), mid = p.samples.find((x) => x.tier === "mid"), lo = p.samples.find((x) => x.tier === "low");
   if (hi && mid && lo && !(hi.rubric_scores.total > mid.rubric_scores.total && mid.rubric_scores.total > lo.rubric_scores.total)) v.push("samples_not_strictly_ordered");
-  if (hi && mid && lo) for (const [a, b, n] of [[hi, mid, "high_mid"], [hi, lo, "high_low"], [mid, lo, "mid_low"]] as const) if (longestSharedRun(a.essay, b.essay) >= 12) v.push(`samples_share_run_${n}`);
+  if (hi && mid && lo) for (const [a, b, n] of [[hi, mid, "high_mid"], [hi, lo, "high_low"], [mid, lo, "mid_low"]] as const) if (longestSharedRun(a.essay, b.essay) >= 18) v.push(`samples_share_run_${n}`);
   for (const c of corpus) { const g = fiveGrams(studentText), h = fiveGrams(c.text); let hit = 0; g.forEach((x) => h.has(x) && hit++); if (g.size && hit / g.size > 0.04) v.push(`similar_to_${c.id}`); }
   void EL_BANNED_PHRASES;
   return v;

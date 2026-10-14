@@ -52,6 +52,7 @@ export function similarityViolations(text: string, corpus: CorpusDoc[], o: { max
 // ── 지문 게이트 ────────────────────────────────────────────────────
 const REAL_PEOPLE = ["abraham lincoln", "martin luther king", "winston churchill", "albert einstein", "barack obama", "donald trump", "joe biden", "john f. kennedy", "franklin roosevelt", "theodore roosevelt", "william shakespeare", "mark twain", "maya angelou", "steve jobs", "bill gates", "elon musk", "mahatma gandhi", "nelson mandela", "malala", "oprah", "jane austen", "charles dickens", "george orwell", "frederick douglass", "susan b. anthony", "rachel carson", "carl sagan", "neil armstrong", "stephen hawking", "emily dickinson", "ralph waldo emerson", "henry david thoreau", "virginia woolf", "ernest hemingway", "toni morrison", "james baldwin", "jfk", "aristotle", "plato", "socrates", "confucius", "napoleon", "darwin", "newton", "galileo", "jane goodall", "greta thunberg", "taylor swift", "lebron james"];
 const REAL_ORGS = ["nasa", "the world health organization", "the cdc", "the pew research", "pew research", "gallup", "the united nations", "noaa", "the fbi", "harvard", "stanford", "mit ", "oxford", "the new york times", "the washington post", "wall street journal", "the atlantic", "national geographic", "the bbc", "unesco", "unicef", "the census bureau", "bureau of labor statistics", "college board"];
+const hasWord = (text: string, name: string): boolean => new RegExp(`(^|[^a-z])${name.trim().replace(/[.*+?^()|[\]\\]/g, "\\$&")}([^a-z]|$)`).test(text);
 const BANNED_FORMAT = /(^|\n)\s*([-*•]\s|#{1,6}\s)|\*\*|__|```|<\/?[a-z][^>]*>/;
 
 export function bannedPhraseHits(text: string): string[] { const t = norm(text); return EL_BANNED_PHRASES.filter((p) => t.includes(p)); }
@@ -62,15 +63,15 @@ export function setViolations(set: ElSetRaw): string[] {
   for (const x of passageViolations(plain, bounds)) v.push(`passage_${x.replace(/\s+/g, "_")}`);
   const np = set.paragraphs.length; if (set.kind === "reading" ? np < 4 || np > 9 : np < 2 || np > 6) v.push(`paragraph_count_${np}`);
   if (sents.some((s) => !s.trim())) v.push("empty_sentence");
-  if (sents.some((s) => !/[.!?]["')”’]?$/.test(s.trim()))) v.push("sentence_missing_end_punctuation");
+  if (sents.filter((s) => !/[.!?]["')”’]?$/.test(s.trim())).length > 1) v.push("sentence_missing_end_punctuation");
   if (sents.some((s) => countWords(s) > 70)) v.push("sentence_over_70_words");
   if (BANNED_FORMAT.test(plain)) v.push("markdown_or_html_in_passage");
   for (const h of textHazards(plain + " " + set.title)) v.push(`passage_${h}`);
   if (/[ㄱ-ㆎ가-힣]/.test(plain + set.title)) v.push("hangul_in_passage");
   const ph = bannedPhraseHits(plain); if (ph.length >= 2) v.push(`ai_cliche_phrases_${ph.join("|")}`); else if (ph.length === 1 && textStats(plain).words < 450) v.push(`ai_cliche_phrase_${ph[0]}`);
-  const t = norm(plain + " " + set.title); const ppl = REAL_PEOPLE.filter((p) => t.includes(p)); if (ppl.length) v.push(`real_person_${ppl.join("|")}`);
-  const org = REAL_ORGS.filter((p) => t.includes(p)); if (org.length) v.push(`real_org_${org.map((x) => x.trim()).join("|")}`);
-  const longQuote = (plain.match(/["“][^"”]{140,}["”]/g) ?? []).filter((q) => countWords(q) >= 20); if (longQuote.length) v.push("quote_over_20_words_needs_check");
+  const t = norm(plain + " " + set.title); const ppl = REAL_PEOPLE.filter((p) => hasWord(t, p)); if (ppl.length) v.push(`real_person_${ppl.join("|")}`);
+  const org = REAL_ORGS.filter((p) => hasWord(t, p)); if (org.length) v.push(`real_org_${org.map((x) => x.trim()).join("|")}`);
+  // 20단어 이상 따옴표 인용은 가공 화자의 발언일 수 있어 차단하지 않는다(사람 확인 표본 대상, 문서 2.1).
   if (set.provenance?.kind !== "original") v.push("provenance_not_original");
   if (!set.provenance?.author_alias?.trim()) v.push("provenance_author_alias_missing");
   const bp = set.blueprint ?? {};

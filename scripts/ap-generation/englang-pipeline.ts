@@ -10,7 +10,7 @@ import { fileSetHash } from "../../lib/ap-generation/frozen-config";
 import { ledgerTotal } from "./ledger-total";
 import { planSets, planSummary } from "../../lib/ap-generation/englang-plan";
 import * as P from "../../lib/ap-generation/englang-prompts";
-import { balancedKeyPositions, itemViolations, keyConfidence, passageDisplay, passagePlain, placeKey, setItemSpread, setViolations, similarityViolations, keyPositionViolations, type ElItemRaw, type ElSetRaw, type CorpusDoc, type SolverVote } from "../../lib/ap-generation/englang-gates";
+import { balancedKeyPositions, quoteInPassage, itemViolations, keyConfidence, passageDisplay, passagePlain, placeKey, setItemSpread, setViolations, similarityViolations, keyPositionViolations, type ElItemRaw, type ElSetRaw, type CorpusDoc, type SolverVote } from "../../lib/ap-generation/englang-gates";
 import { EL_FRQ_SCHEMA_VERSION, normalizeFrqPayload, frqPassageDisplay, frqTaskText, frqViolations, frqReferenceText, sourceText, type ElFrqPayload, type ElFrqSource, type ElSample } from "../../lib/ap-generation/englang-frq";
 import { elTopicFor, EL_THEMES } from "../../lib/ap-generation/subjects/englang";
 
@@ -260,7 +260,8 @@ function frqFinalizeStage() {
       const ok = options.filter((o) => o.dist <= 1 && o.spread <= 2).sort((a, b) => a.dist - b.dist || a.spread - b.spread)[0];
       audit.push({ id: f.id, tier, options: options.map((o) => ({ k: o.k, total: o.tot, spread: o.spread })), chosen: ok?.k ?? null });
       if (!ok) { why.push(`sample_${tier}_no_consistent_candidate`); continue; }
-      const text = String(ok.s.essay).trim(); chosen.push({ tier, target_total: ok.tot, essay: text, word_count: (text.match(/\S+/g) ?? []).length, rubric_scores: { ...ok.sc, total: ok.tot }, annotations: ((ok.s.annotations as Json[]) ?? []).map((a) => ({ quote: String(a.quote), comment: String(a.comment), row_id: a.row_id })) });
+      const noDollar = (t: string) => t.replace(/[$]\s*(\d[\d,.]*)/g, "$1 dollars").replace(/[$]/g, ""); // 학생 화면에서 달러 쌍이 수식으로 읽히지 않도록
+      const text = noDollar(String(ok.s.essay)).trim(); chosen.push({ tier, target_total: ok.tot, essay: text, word_count: (text.match(/\S+/g) ?? []).length, rubric_scores: { ...ok.sc, total: ok.tot }, annotations: ((ok.s.annotations as Json[]) ?? []).map((a) => ({ quote: noDollar(String(a.quote)), comment: noDollar(String(a.comment)), row_id: a.row_id })).filter((a) => quoteInPassage(a.quote, text)) });
     }
     p.samples = chosen; const v = [...frqViolations(p, prior), ...why];
     if (v.length) { cands.push({ ...base, keywordCode: "U9.3", unitCode: "9", skillPrimary: "3.B", structure: "frq_multipart", archetype: `elfrq_${f.id}`, reviewState: "rejected", rejectionReason: v.join("; ").slice(0, 1500), difficultyProvisional: null, payload: { archetype: `elfrq_${f.id}`, el_frq: p } }); continue; }
