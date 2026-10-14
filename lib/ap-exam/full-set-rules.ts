@@ -3,6 +3,7 @@
 // 스킬(Practice) 5-10/20-30/25-35/25-35 % → [3,4]/[9,12]/[11,14]/[11,14]. 목표 배분(제안, 공식 고정 아님)은 STATS_FULL_TARGET.
 import { OFFICIAL } from "./ab-select";
 import { microUnitBounds } from "./micro-rules";
+import { macroUnitBounds } from "./macro-rules";
 
 export type UnitBounds = Record<string, { min: number; max: number }>;
 export const rangeFromPct = ([lo, hi]: [number, number], n: number) => ({ min: Math.ceil((lo * n) / 100 - 1e-9), max: Math.floor((hi * n) / 100 + 1e-9) });
@@ -28,6 +29,7 @@ export function fullPracticeUnitBounds(subject: string | null | undefined, label
   if (subject === "ap_physics_1") return physUnitBounds();
   if (subject === "ap_chemistry") return chemUnitBounds();
   if (subject === "ap_microeconomics") return microUnitBounds();
+  if (subject === "ap_macroeconomics") return macroUnitBounds();
   if (subject === "ap_computer_science_a") return csaUnitBounds();
   if (subject === "ap_biology") return bioUnitBounds();
   return undefined;

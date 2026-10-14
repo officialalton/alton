@@ -1,0 +1,74 @@
+{
+ "version": "v1-macro-p1-b",
+ "run": "macro-p1-b",
+ "subject": "ap_macroeconomics",
+ "archetypeList": "macro_p1_frq",
+ "seed0": 9600,
+ "candidatesPerCell": 1,
+ "capUsd": 0.9,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "2",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts",
+  "lib/ap-generation/subjects/micro.ts",
+  "lib/ap-generation/subjects/micro-archetypes.json",
+  "lib/ap-generation/micro-frq-checks.ts",
+  "lib/ap-generation/subjects/macro.ts",
+  "lib/ap-generation/subjects/macro-archetypes.json"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 139.58,
+ "_budget_estimate": {
+  "cells": "10 FRQ slots x 1 candidate: 3 long (10 points: AD-AS and fiscal policy, open economy, money market) and 7 short (5 points: GDP data, PPC trade, loanable funds, money and banking, Phillips curve, fiscal multiplier, foreign exchange); 65 points in total",
+  "perCellUsd": "long 0.08-0.09 (6 parts, 8-10 rubric rows), short 0.045-0.055",
+  "expectedUsd": "0.65 (range 0.55-0.85)",
+  "capUsd": 0.9,
+  "passRateAssumption": "50 percent first pass (Micro P1-b 4/8). Stop if fewer than 3 of 10 pass.",
+  "runAfter": "P1-a, only if its first pass is at least 45 percent"
+ },
+ "_note": "Frozen 2026-10-14 together with P1-a. Hard stop = ledger + P1-a cap 2.6 + cap 0.9 + 0.2.",
+ "expected": {
+  "generatorHash": "2704e6451c08",
+  "reviewerPromptHash": "fbb6d8aa614c",
+  "difficultyPromptHash": "9bda2250d42c",
+  "parserHash": "7528bbe8cdfc",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ }
+}

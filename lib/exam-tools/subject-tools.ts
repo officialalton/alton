@@ -18,6 +18,9 @@ const BY_SUBJECT: Record<string, SubjectToolsConfig> = {
   // Microeconomics: CED(V.1) — 사칙(four-function) 계산기가 두 섹션 모두에서 허용된다. 그래핑·공학용은 요구하지 않으므로 사칙 계산기만 제공하고 Desmos 는 켜지 않는다.
   // 공식 수식 시트는 CED 에 언급이 없다(UNVERIFIED) — Reference 패널은 ALTON 자체 문구의 학습용 요약이며 고지문을 둔다.
   ap_microeconomics: { calculatorTabs: ["basic"], reference: "microeconomics" },
+  // Macroeconomics: CED(V.1) — 사칙(four-function) 계산기가 두 섹션 모두에서 허용된다(Exam Overview p.129). 공식 수식 시트는 CED 에 언급이 없고 AP Macro 는 암기·정의·그래프 중심이라(docs/ap/macroeconomics-facts.md)
+  // Reference 패널을 만들지 않는다(없는 시트를 지어내지 않는다). Bluebook 내장 계산기 형태는 UNVERIFIED.
+  ap_macroeconomics: { calculatorTabs: ["basic"], reference: null },
   // Biology: CED(V.1) — 사칙·공학용·그래핑 계산기가 두 섹션 모두에서 허용된다(Exam Overview p.197). 표준오차·카이제곱·로그가 필요하므로 공학용을 제공하고 Desmos 는 켜지 않는다(Bluebook 내장 형태는 UNVERIFIED).
   // 공식 AP Biology Equations and Formulas 시트(CED Appendix p.230–231)는 시험 중 제공되므로 Reference 패널(ALTON 자체 문구)을 둔다 — docs/ap/biology-facts.md.
   ap_biology: { calculatorTabs: ["scientific"], reference: "biology" },

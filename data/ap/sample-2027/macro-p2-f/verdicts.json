@@ -1,0 +1,1554 @@
+[
+ {
+  "key": "ap_macroeconomics-f01-k0",
+  "cellId": "ap_macroeconomics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Axes: price level (vertical) and real GDP (horizontal). Draw a downward-sloping AD1 and an upward-sloping SRAS1. They cross at Y1 = $2,920 billion with price level PL1. Draw a vertical LRAS at YF = $3,000 billion, to the right of Y1. This shows a recessionary gap.",
+     "final_answer": "AD1 and SRAS1 cross at Y1 and PL1, to the left of a vertical LRAS at YF.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Unemployment is above the natural rate, so nominal wages and other input prices fall over time. Lower costs shift SRAS to the right. The economy returns to YF at a lower price level.",
+     "final_answer": "Wages and input prices fall, SRAS shifts right, and output returns to YF at a lower price level.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Expansionary fiscal policy closes a recessionary gap.",
+     "final_answer": "Increase government purchases (or cut taxes, or increase transfers).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Output gap = 3,000 − 2,920 = $80 billion. Multiplier = 1/(1 − 0.6) = 2.5. Required increase in purchases = 80 / 2.5 = $32 billion.",
+     "final_answer": "$32 billion",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Government purchases add to aggregate demand, so AD shifts right to AD2. AD2 crosses SRAS1 at YF on the LRAS line. The new price level PL2 is higher than PL1.",
+     "final_answer": "AD2 lies to the right of AD1 and crosses SRAS at YF, with PL2 above PL1.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "Government borrowing raises the demand for loanable funds. That pushes the real interest rate up. A higher real interest rate lowers private investment spending, which is crowding out.",
+     "final_answer": "The real interest rate rises and private investment falls (crowding out).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Item passes all five criteria with no reject conditions. It is a standard 10-point long FRQ with six parts of 1-3 points that mix graphing, explanation, and calculation. Part A's graph is fully specified by its own rubric and the table data.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant skill is AD-AS graphing (topic 3.5, skill 4.A). The parts on self-correction (3.7), fiscal policy (3.8), the multiplier (3.2), and crowding out (5.5) are all within the stated Unit 3 scope and the bundle's legitimate related topics."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has a unique defensible answer. The 80 billion gap and the 2.5 multiplier give 32 billion in part D, and the stimulus note fixes the price-level assumption. The rubric rows are consistent with the model answers, and F2 correctly depends on F1."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear: it gives the unemployment rates, real GDP, potential GDP, and the MPC. The note specifies the simple multiplier, so part D is unambiguous. The wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric rows list realistic common errors, such as shifting the wrong curve or multiplying by the multiplier instead of dividing."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The total of 10 points in about 25 minutes matches the long-FRQ grain. The arithmetic is minimal, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ in AP style. It combines a labeled AD-AS graph, a short explanation of long-run self-adjustment, one fiscal policy identification, one simple multiplier calculation (gap 80 / multiplier 2.5 = 32), a graph shift, and a crowding-out explanation. Each part is routine, but the full set needs several concepts and a graph used across parts, which fits a full mock. The arithmetic is trivial, the wording is clear, and everything is in Unit 3 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f01-k1",
+  "cellId": "ap_macroeconomics-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "instant_reject_multiple_correct"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Recessionary gap: AD and SRAS cross at Y1 = 2460, to the left of the vertical LRAS at YF = 2500.",
+     "final_answer": "Graph: price level on the vertical axis, real GDP on the horizontal axis. Downward-sloping AD and upward-sloping SRAS cross at PL1 and Y1. Vertical LRAS at YF, with Y1 to the left of YF.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "High unemployment pushes nominal wages down, which shifts SRAS right.",
+     "final_answer": "Unemployment is above the natural rate, so nominal wages and other input prices fall. SRAS shifts right until output reaches YF, at a lower price level.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Expansionary fiscal policy closes a recessionary gap.",
+     "final_answer": "Increase government purchases (or cut taxes, or raise transfer payments).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Gap = 2500 - 2460 = 40. Multiplier = 1/(1-0.5) = 2. 40 / 2 = 20.",
+     "final_answer": "$20 billion",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "AD shifts right to meet SRAS at YF.",
+     "final_answer": "AD2 is to the right of AD1 and crosses SRAS at YF. PL2 is higher than PL1.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "Government borrowing raises demand for loanable funds.",
+     "final_answer": "Demand for loanable funds rises, so the real interest rate rises. Private investment spending falls (crowding out).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item fails on key and scoring. Part E requires the equilibrium at YF after the AD shift sized in part D under a constant price level, which is inconsistent with an upward-sloping SRAS. The other criteria are acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.5 and skill 4.A are served by the AD-AS graphing part, and the other parts are legitimate related topics."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part E is internally inconsistent. Part D uses the simple multiplier with a constant price level, so AD shifts right by exactly the gap (40) at PL1, and with an upward-sloping SRAS the new equilibrium falls short of YF. Rubric E2 and the model answer require the AD2-SRAS intersection at YF with PL2 higher than PL1. That is incompatible with the D-sized shift, so a precisely drawn graph could be marked wrong or right ambiguously."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not an MC item, so there are no distractors. The common-error lists are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The point and part grain fits a long FRQ, and the load is typical."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard multi-part FRQ in the style of the AP Macroeconomics free-response section. It covers a recessionary gap: drawing the AD-AS graph, explaining long-run self-adjustment, naming a fiscal policy, doing a simple multiplier calculation, shifting AD on the graph, and explaining crowding out. Each part tests one core Unit 3 concept. The only arithmetic is a gap of 40 and a multiplier of 2, which gives a $20 billion increase in purchases. The 10 percent versus 6 percent unemployment data only confirm a recessionary gap, so there is no heavy reading. The graph needs several labels (AD, SRAS, LRAS, Y1, PL1, YF, AD2, PL2), but this is typical exam work. Crowding out in part F is a modest extension within the bundle's scope. There is no out-of-scope content or ambiguity, and the question is fair and typical of a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f02-k0",
+  "cellId": "ap_macroeconomics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Money market graph: the vertical axis is the nominal interest rate and the horizontal axis is the quantity of money. Money demand (MD) slopes downward. Money supply (MS) is vertical. Their intersection gives i1.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Downward-sloping MD, vertical MS, equilibrium nominal interest rate i1 at their intersection, with axes labeled nominal interest rate and quantity of money."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "An open-market purchase adds bank reserves, so the money supply rises. MS shifts right, and the new equilibrium interest rate is lower.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "MS shifts right to MS2. The new interest rate i2 is below i1."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Bond prices and interest rates move in opposite directions. Interest rates fall, so prices of existing bonds rise. The central bank's purchases also add to bond demand.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "The price of previously issued bonds rises."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A lower interest rate makes borrowing cheaper, so investment and interest-sensitive consumption rise. Aggregate demand shifts right, and real GDP increases in the short run.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Investment and interest-sensitive spending rise, AD shifts right, and real GDP increases."
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Money multiplier = 1/0.25 = 4. Maximum change in money supply = 4 × $40 million = $160 million. With no currency held by the public, the full $40 million becomes excess reserves, so this total includes the initial deposit.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "$160 million (money multiplier 1/0.25 = 4; 4 × $40 million = $160 million)"
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "AD rises while expected inflation stays the same, so unemployment falls and inflation rises. With unchanged expectations, the short-run Phillips curve does not shift; the economy moves along it.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Unemployment decreases. This is a movement along the short-run Phillips curve, up and to the left."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 10-point long FRQ is internally consistent and in scope. Parts A and B draw the money market and the supply shift, part C asks for the bond price direction, part D asks for the AD and real GDP effect, part E asks for the money multiplier and maximum money supply change, and part F asks for movement along the SRPC. The part E key of 160 is defensible given the stated assumptions (limited reserves, no excess reserves held, no currency drain). The stimulus table is adequate. Rubric rows are meaning-based and consistent.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is judged against its own skill. Parts A and B are graphing tasks. Parts C through F are related prerequisite or adjacent topics (4.1, 3.6, 4.4, 5.2), which the bundle explicitly allows."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are consistent with the stated assumptions. Part E gives 4 and $160 million. Part F gives unemployment falling along the SRPC, given unchanged expectations."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives the reserve ratio and the purchase amount, plus the assumptions in the notes. The graphs are drawn by students, so no figure needs to be rendered."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric rows list common errors for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits a 10-point long FRQ, with one simple calculation and standard graphing and explanation tasks."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part FRQ on expansionary monetary policy. It covers the money market graph with a supply shift, the bond price inverse relationship, the interest rate to investment to AD to real GDP chain, a single simple multiplier calculation ($40M x 4 = $160M), and a Phillips curve movement along the curve. Each part needs one or two steps with round numbers and a clearly stated model (limited reserves, no currency drain). The breadth across topics and the graphing requirement fit a full mock exam but are not beyond the scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f02-k1",
+  "cellId": "ap_macroeconomics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Vertical axis: nominal interest rate. Horizontal axis: quantity of money. MD slopes downward, MS is vertical, and i1 is where they cross.",
+     "final_answer": "Graph: downward-sloping MD, vertical MS1, equilibrium interest rate i1 where they intersect.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "An open-market purchase adds reserves to banks, so the money supply increases.",
+     "final_answer": "MS shifts right to MS2, and the new rate i2 is lower than i1.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Bond prices move opposite to interest rates. The central bank's purchases also raise bond demand.",
+     "final_answer": "The price of previously issued bonds increases.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Lower interest rates make borrowing cheaper, so investment and interest-sensitive consumption rise. This shifts AD right.",
+     "final_answer": "The lower rate increases investment spending, so AD increases and real GDP rises in the short run.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Money multiplier = 1/0.25 = 4. Maximum change = 4 × $20 million.",
+     "final_answer": "$80 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "Higher AD lowers unemployment and raises inflation. With expected inflation unchanged, the SRPC stays put.",
+     "final_answer": "Unemployment decreases. This is a movement up and to the left along the existing short-run Phillips curve.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "I fail the item because of an unstated or inconsistent condition. Part F says the economy was at its natural rate \"before the recession\" while it is currently in a recession, which makes the unemployment premise muddled. Part E's maximum change in the money supply also depends on an unstated assumption about who sells the bonds and where the reserves go. Parts A-D are sound, but the item should be fixed before use.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B are drawing parts on the money market (4.5/4.6), consistent with skill 4.A. Parts C-F are related topics, which is allowed for the bundle. Part F (Phillips curve, 5.2) is a later-unit topic, but the bundle explicitly lists 5.2 as a legitimate related topic."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part E is the problem. The stem asks for the \"maximum possible change in the money supply from the open-market purchase\", and the model answer is 20 x 4 = $80 million. In a limited-reserves economy, an OMO purchase of $20 million adds $20 million of reserves and raises the money supply by $20M x 4 = $80M. The $20 million paid to the public/banks is itself part of that $80 million total. The $80 million key is therefore defensible only if the reserve injection is taken to go entirely to banks, and the stimulus does not state this. If the seller is the public, the $20 million is a deposit, 25 percent of it is required reserves, and the total change is still $80 million. The key is therefore not clearly wrong, but the condition is unstated.\n\nPart F has a separate flaw. It sets the starting point \"at its natural rate before the recession\" while the economy is in a recession. This is internally inconsistent and ambiguous: the economy is currently above the natural rate, so the SRPC movement is still valid, but the premise is muddled. The stimulus also does not state a condition about the central bank's overall approach or ample reserves. The rubric for B2 says i2 is below i1, which is fine.\n\nPart C asks about \"previously issued bonds\", which is fine.\n\nPart F's phrase \"expected inflation unchanged\" is stated, but the Phillips curve assumption conflicts with the recession premise, so I fail the key criterion on that ambiguity."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete (reserve ratio, purchase amount, assumptions). The graph in A/B is student-drawn, so no figure data is needed. The wording is clear except for the F premise."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The rubric rows list common errors, which is adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a long FRQ: 10 points across six parts. The calculation is simple. The part values (2/2/1/2/2/1) are acceptable. The bundle is broad, but it is realistic for a long FRQ. Part B is tagged with skill 4.C although it is a drawing task. This is allowed, since each part has its own skill."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item covering the money market graph, a one-step comparative-statics shift, the bond price and interest rate relationship, the transmission to AD and real GDP, a simple multiplier calculation (1/0.25 x $20M = $80M), and a Phillips curve movement. Each part is a standard single concept or single step, but combining graphing, calculation, and short explanations across related topics fits a full mock exam. The reading and arithmetic loads are low and the assumptions are clearly stated, so the difficulty comes from the content rather than unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f03-k0",
+  "cellId": "ap_macroeconomics-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "FX market for hal: vertical axis exchange rate (e.g., foreign currency per hal), horizontal axis quantity of hal; downward-sloping demand D, upward-sloping supply S; intersection ER1, Q1.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Graph with D and S for hal, equilibrium at ER1, Q1"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Higher real interest rates attract foreign financial capital.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Net financial capital inflows increase"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Foreign investors demand more hal; demand shifts right (supply may also shift left as residents hold fewer foreign assets), ER rises to ER2 > ER1.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Demand for hal shifts right; ER2 higher than ER1 (hal appreciates)"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Appreciated hal makes Brevonian goods more expensive to foreigners.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Exports decrease"
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "NX = X − M: 700−680 = 20; 620−740 = −120.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Year 1: $20 billion; Year 2: −$120 billion"
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "Higher interest rates reduce interest-sensitive investment and consumption; appreciation reduces net exports (fell from +20 to −120). Both lower AD, so short-run real GDP falls.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Real GDP decreases: lower I and C plus lower NX shift AD left"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stimulus note is truncated: \"Its currency is the hal.\" is garbled, and the foreign-currency and exchange-rate units are not defined. The prompt also does not say that foreign interest rates are held constant, even though the model relies on that assumption. The item has further problems. The table shows only exports and imports, and it does not supply the exchange-rate or capital-flow data the other parts depend on. The Year 1 to Year 2 net-export decline of 140 is attributed entirely to appreciation, an unstated causal assumption. Part F asks for the combined effect on real GDP, but the stem never says that net exports fell because of the appreciation. The bundle is a long FRQ of 10 points, but about 25 minutes is heavy, and it mixes simple identify and calculate parts with graphing. The keys themselves are sound.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts stay within Unit 6 topics and the part skills are acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are defensible and the rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The note text is truncated and the units for the exchange rate are not clearly defined. The foreign-rates-constant assumption is not stated in the stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The common_errors listed in the rubric rows are reasonable."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The load is heavy for the grain, and the table is not integrated with the graph parts. The unstated assumption that the change in net exports is caused by the appreciation undermines parts D, E and F."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on 6.4. Students draw a labeled forex graph, apply one comparative-statics shift (higher interest rates raise financial capital inflows, which raise demand for the hal and appreciate it), link appreciation to lower exports, do two trivial subtractions for net exports, and combine two effects (interest-rate-sensitive spending and net exports) in the real GDP explanation. Concept depth is moderate and the arithmetic is minimal. Representation changes are table to graph to verbal reasoning. The truncated table note is a minor wording flaw but the currency is identified in the prompts, so difficulty does not come from it.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f03-k1",
+  "cellId": "ap_macroeconomics-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Graph: vertical axis is the exchange rate (foreign currency per hal), horizontal axis is the quantity of hal. Demand for hal slopes downward and supply of hal slopes upward. They cross at ER1 and Q1.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "FX market for hal: downward-sloping D, upward-sloping S, equilibrium at ER1 and Q1"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Higher real interest rates make Orlandian financial assets more attractive, so foreign capital flows in.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Net financial capital inflows increase"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Foreigners need more hal to buy Orlandian assets, so demand for hal shifts right. The hal appreciates.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Demand for hal shifts right; ER2 > ER1 (hal appreciates), quantity rises to Q2"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A stronger hal makes Orlandian goods more expensive for foreign buyers, so they buy fewer of them.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Exports decrease"
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Year 1: 700 − 680 = 20. Year 2: 620 − 740 = −120.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Year 1: $20 billion; Year 2: −$120 billion"
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "Higher interest rates reduce investment and interest-sensitive consumption. The appreciation lowers net exports. Both effects reduce aggregate demand, so AD shifts left and real GDP falls in the short run.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Real GDP decreases: lower investment/consumption plus lower net exports reduce AD"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mostly sound, with correct keys and a typical long-FRQ structure. It fails on stimulus completeness: the note is awkwardly worded and omits the ceteris paribus assumption that foreign interest rates stay constant, which the blueprint relies on. Adding that assumption would fix it.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A is a graphing task matching 4.A, and the other parts mix related Unit 6 and 4.6 skills, which is acceptable. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct and unique. The rubric rows are consistent, and the F2 dependency on F1 is acceptable. The vertical axis is defined as foreign currency per hal, consistent with ER2 above ER1."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus note is awkwardly worded (\"Its currency is the hal.\" as a fragment) and omits the assumption that foreign interest rates are unchanged and that other factors are constant. Without that assumption, the capital-inflow and appreciation chain is not fully determined. The table is complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so common errors in the rubric rows stand in for distractors. They are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load and point grain are typical of a long FRQ. The calculator is not really needed, but the designation is not inconsistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ aligned to topic 6.4 and skill 4.A. The student draws a labeled FX market graph, shifts demand for the hal after higher interest rates raise capital inflows, links appreciation to lower exports, computes net exports with simple subtraction, and combines interest-rate and net-export effects on aggregate demand and real GDP. Each step is within scope and typical of AP free-response items. The reading and arithmetic loads are small, and the wording is unambiguous, so the difficulty comes from legitimate concept integration and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f04-k0",
+  "cellId": "ap_macroeconomics-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Multiplier = 1/(1-MPC) = 1/(1-0.6) = 1/0.4",
+     "final_answer": "2.5",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "ΔY = 2.5 × $50 billion",
+     "final_answer": "$125 billion increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Tax multiplier = MPC/(1-MPC) = 0.6/0.4 = 1.5, which is smaller than 2.5",
+     "final_answer": "Smaller",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A tax cut raises disposable income, but households save part of it (MPS = 0.4), so only $30 billion is spent in the first round. Government purchases add the full $50 billion directly to aggregate demand. The tax cut therefore raises real GDP by only 1.5 × 50 = $75 billion.",
+     "final_answer": "Households save part of a tax cut, so initial spending rises by only $30 billion versus the full $50 billion from government purchases; the tax multiplier (1.5) is smaller than the spending multiplier (2.5).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "In a recession, incomes fall, so tax revenue falls automatically. At the same time, transfer payments such as unemployment benefits rise automatically. Both effects push the budget toward a deficit, or make an existing deficit bigger.",
+     "final_answer": "Tax revenues fall and transfer spending rises, so the budget deficit grows (or the surplus shrinks).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a short FRQ with five 1-point parts on the multiplier, the GDP effect, spending versus tax, and automatic stabilizers. The keys are correct, the table conditions (constant price level, lump-sum taxes) are stated, and the load is typical of a short FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is in scope for topics 3.2, 3.8 and 3.9. The parts mix skills, which is acceptable for a bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct and the rubric rows are consistent and meaning-based. Part B depends on A, and that dependency is encoded in the rubric."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete, with the MPC, the spending change and the tax change. The assumptions are stated in the notes."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. Common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, the arithmetic is simple, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multiplier FRQ. It needs the spending multiplier (1/(1-MPC) = 2.5), the GDP change (2.5 x 50 = $125B), a comparison with the tax multiplier (-1.5, so $75B and smaller because part of the tax cut is saved), and a short recall explanation of automatic stabilizers (lower tax revenue, higher transfers, larger deficit). Arithmetic is simple and the assumptions are explicit. It covers 3.2, 3.8 and 3.9 with a modest number of reasoning steps.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f04-k1",
+  "cellId": "ap_macroeconomics-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Multiplier = 1/(1-MPC) = 1/(1-0.5) = 2",
+     "final_answer": "2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "ΔGDP = 2 × $20 billion",
+     "final_answer": "$40 billion increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Tax multiplier = MPC/(1-MPC) = 1, so ΔGDP = $20 billion < $40 billion",
+     "final_answer": "Smaller",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Government purchases add directly to aggregate demand by the full $20B in the first round. With a tax cut, households spend only the MPC share (0.5×20 = $10B) and save the rest, so the first-round increase in spending is smaller. The tax multiplier (1) is therefore smaller than the spending multiplier (2).",
+     "final_answer": "Households save part of the tax cut, so the first round of spending is only $10B; the tax multiplier is 1, which is less than the spending multiplier of 2.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "In a recession, income falls, so tax revenue falls automatically. At the same time, transfer payments such as unemployment benefits rise. Both effects push the budget toward a deficit, or make an existing deficit bigger.",
+     "final_answer": "Tax revenues fall and transfer payments rise, so the budget deficit increases (or the surplus shrinks).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 5-point short FRQ is correct and in scope. Spending multiplier is 2 and the GDP change is $40 billion. A same-sized tax cut has a smaller effect (tax multiplier 1), and the reason (only the MPC share of the cut is spent) is sound. Automatic stabilizers push the budget toward deficit in a recession. The table notes state the constant price level and lump-sum taxes, so the model assumptions are complete. Each part is judged against its own skill; parts C to E fall under related topics 3.8 and 3.9, which the bundle legitimately spans. Rubric rows are consistent and the dependency B on A is valid. The load is light and the 1-point parts match the short-FRQ grain.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A and B are 3.C multiplier calculations. Parts C to E use related skills and topics (3.2, 3.8, 3.9) and fall within Unit 3."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and defensible given the stated assumptions. B correctly depends on A. The rubric accepts equivalent wordings."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and gives the MPC, the $20B purchases, and the $20B tax cut, with notes on the constant price level and lump-sum taxes. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. Common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is low and the calculation is simple. The 5-point short FRQ format with 1-point parts is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part FRQ segment. Requires computing the spending multiplier (1/(1-MPC)=2) and the change in GDP ($40B), then comparing with the tax multiplier (-1, so $20B, smaller) and explaining why (part of the tax cut is saved, so initial spending is lower). Automatic stabilizers part is a recall and explanation task. The numbers are clean, the assumptions are explicit (constant price level, lump-sum taxes), and the reading load is minimal. Depth is appropriate for a full mock, not basic recall and not beyond-course content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f05-k0",
+  "cellId": "ap_macroeconomics-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "FX market for zan: vertical axis = exchange rate (e.g., dollars or foreign currency per zan), horizontal axis = quantity of zan. Downward-sloping D for zan, upward-sloping S of zan, equilibrium ER1 at intersection, Q1.",
+     "final_answer": "Graph with y-axis 'Price of zan (foreign currency per zan)', x-axis 'Quantity of zan', D and S curves, intersection at ER1.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Lower relative interest rates reduce foreign demand for Moravian financial assets, so demand for zan shifts left (and/or supply of zan shifts right as Moravians buy foreign assets). New equilibrium at lower ER2.",
+     "final_answer": "Demand for zan shifts left (D1 to D2), and/or supply shifts right; ER2 is below ER1.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Lower equilibrium exchange rate.",
+     "final_answer": "The zan depreciates (its value falls).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Lower return on Moravian assets.",
+     "final_answer": "Lower interest rates make Moravian financial assets less attractive to foreign investors, so they demand fewer zan to buy those assets (demand for zan falls). Moravians also want more foreign assets with higher returns, so they supply more zan to buy foreign currency.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Depreciation makes exports cheaper and imports more expensive.",
+     "final_answer": "Because the zan depreciates, Moravian goods get cheaper for foreigners and foreign goods get more expensive for Moravians. Exports rise and imports fall, so net exports increase. That raises aggregate demand, so real GDP increases in the short run.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 5-point short FRQ fits the Unit 6 scope (6.3 to 6.6), with part B assessing 4.C. All five keys are unique and defensible, and the rubric rows are consistent and accept either a leftward demand shift or a rightward supply shift. The stimulus table states the floating-rate condition and the fall in relative interest rates. The 1/1/1/1/1 split is acceptable for the official short-FRQ grain, and there are no calculations or calculator demands.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part B directly assesses 4.C (show the shift on the graph and label ER2). Parts A, C, D and E use adjacent skills and topics, which the bundle allows."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The zan depreciates, either a leftward demand shift or a rightward supply shift is accepted, and net exports and AD rise. The rubric rows match the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives the event and the currency. The graph is drawn by the student, and the axes are specified in the rubric for part A. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric rows list the common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 12 minutes, typical of a short FRQ, with no calculation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part graphing item within Unit 6 scope. Students must draw a labeled FX market graph (axes, D, S, ER1), shift demand left for lower interest rates, identify depreciation, explain capital outflow reducing demand for the zan, and link depreciation to higher net exports and higher real GDP. It requires one comparative-statics step plus a short chain of reasoning, with no computation and minimal reading. The wording is clear and the model (floating-rate FX market) is stated, so difficulty comes from legitimate concept application, not unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f05-k1",
+  "cellId": "ap_macroeconomics-f05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "instant_reject_wrong_stimulus"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Vertical axis: exchange rate (e.g., foreign currency per mor); horizontal axis: quantity of mor. Downward-sloping D for mor, upward-sloping S of mor, equilibrium at ER1.",
+     "final_answer": "FX market for mor: y-axis = price of mor in foreign currency, x-axis = quantity of mor; D and S intersect at ER1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Lower Ketland rates make mor-denominated assets less attractive, so demand for mor falls (D shifts left). Ketland residents also buy foreign assets, which increases the supply of mor (S shifts right). Either shift lowers the exchange rate to ER2 < ER1.",
+     "final_answer": "Demand for mor shifts left (and/or supply shifts right); new ER2 is below ER1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The exchange rate falls.",
+     "final_answer": "The mor depreciates (its value decreases)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Relative returns on assets in Ketland fall.",
+     "final_answer": "Lower relative interest rates reduce the return on Ketland financial assets, so foreign investors want fewer Ketland assets and demand fewer mor. Ketland investors also want more foreign assets, so they supply more mor.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Depreciation makes Ketland's exports cheaper and its imports more expensive.",
+     "final_answer": "Ketland's exports become relatively cheaper for foreigners and imports become more expensive for Ketland residents, so net exports rise. This increases aggregate demand, so real GDP rises in the short run.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The content and keys are sound, but the stimulus table's Currency row is truncated (\"The mor\"). The data object is therefore incomplete and cannot be rendered correctly, so the item fails on stimulus completeness.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Content fits 6.4 and nearby topics. Part B is the only 4.C part. Part A's graph and parts C, D and E are marked with other skills, which is acceptable for a bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct and consistent. Lower relative interest rates lower the demand for the mor and raise its supply, so the mor depreciates. Net exports then rise, and AD and real GDP increase."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus table data is truncated. The Currency row reads only \"The mor\" and is cut off mid-phrase, so the machine-readable specification is incomplete. For example, it never states the currency name properly or the foreign currency being used as the unit. The rendered table would show broken text. Part A also asks for the exchange rate in \"foreign currency per mor\" without the stimulus naming that foreign currency."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors rows are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is appropriate for a short FRQ, but the grain is five 1-point parts. Each part is individually thin, which is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard single-shock comparative-statics chain for the foreign exchange market: lower interest rates lead to capital outflow, which lowers demand for the mor (a shift of the demand curve), so the mor depreciates. A depreciated mor raises net exports and short-run real GDP. Each part is one concept step, with no calculation and little reading. The graph labeling and the multi-step causal explanation fit full-mock FRQ practice rather than a basic introduction. The stimulus table is truncated (\"The mor\") but the intent is clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f06-k0",
+  "cellId": "ap_macroeconomics-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Real GDP = Nominal/(deflator/100) = 225,000/1.20",
+     "final_answer": "$187,500",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(120-100)/100 x 100",
+     "final_answer": "20%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Y1: 150,000/120 = $1,250; Y2: 187,500/144 ≈ $1,302.08. Real GDP grew 25% while population grew 20%.",
+     "final_answer": "Increased (from $1,250 to about $1,302)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Inflation was unexpected, so the real interest rate (nominal minus 20%) came out lower than the bank expected. The bank is repaid in dollars with less purchasing power.",
+     "final_answer": "The bank lost",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Nominal GDP changes when prices change. Real GDP removes the price effect, so it shows only the change in the quantity of goods and services produced.",
+     "final_answer": "Real GDP adjusts for price-level changes (inflation), so it measures actual changes in output",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous 5-point short FRQ on real GDP, inflation, per capita output, and the effect of inflation on a lender. Rubric rows are consistent with the keys. Minor: population units are not stated, and the parts are all 1-point, but the total matches the short-FRQ grain.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is within Unit 2 topics 2.6, 2.4, 2.2 and 2.5. Parts are assessed against their own skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are verified and unique. Part D's unexpected-inflation condition is stated in the prompt."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, and the base year is stated in the header. Population units are missing but are not needed for the task."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ. The common-error lists in the rubric are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, the arithmetic is simple, and calculator use is consistent with the task."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item that stays within Unit 2 scope (2.4, 2.5, 2.6). Parts A and B are single clean calculations (deflating nominal GDP and computing inflation from a deflator). Part C requires combining real GDP with population to reach a per-capita comparison and interpret it. Part D applies unexpected inflation to a fixed-rate lender, and part E is a conceptual recall explanation. Numbers are round and easy, and the reading load is light. Difficulty comes from legitimate concept integration, not from unfair sources. It fits a full mock exam rather than basic learning because it spans several related concepts and requires interpretation of calculated results.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f06-k1",
+  "cellId": "ap_macroeconomics-f06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Real GDP = nominal/(deflator/100) = 150000/1.20",
+     "final_answer": "$125,000",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(120-100)/100 x 100",
+     "final_answer": "20%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Y1: 120000/120 = $1000; Y2: 125000/132 ≈ $947. Population grew 10%, faster than real GDP grew (4.17%).",
+     "final_answer": "Decreased (from $1,000 to about $947)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Unexpected inflation lowers the real value of repayments, so the real interest rate is lower than expected.",
+     "final_answer": "The bank lost",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Nominal GDP can go up just because prices rise. Real GDP takes out price changes, so it measures changes in actual output.",
+     "final_answer": "Real GDP adjusts for price-level changes, so differences reflect actual quantity of output",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The content and keys are correct and the part-by-part scope is acceptable, but the table's population column has no units, so the stimulus is incomplete.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is judged against its own skill and topic: real GDP (2.6), inflation (2.4), per capita (2.2), lender loss (2.5), and why real GDP is used (2.6). All of this is within Unit 2. Part D's \"gain or lose\" is classic topic 2.5 content (unexpected inflation hurts a fixed-rate lender). Nothing is out of scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct. Real GDP in Year 2 is 125,000. Inflation is 20%. Real GDP per capita falls from 1,000 to about 947, because population grows 10% and real GDP grows about 4.2%. The lender loses. The rubric rows are consistent, and the alternative wordings are valid. Part C is graded on direction and reason, without a required numeric value, which is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table does not state the units of the population column; the values 120 and 132 could be thousands or millions. The table also has no unit label for the nominal GDP column, and the \"Year 1 = 100\" base is given only in the column header. The model answer's per capita figures (1,000 and 946.97) imply the units, but students are not told them. This is a minor completeness gap in the data. The wording of the prompts is otherwise clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "There are no MC distractors. The rubric lists plausible common errors for each part, such as multiplying by the deflator, dividing by the Year 2 deflator, and using nominal GDP per capita."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, at about 12 minutes for 5 one-point parts, and the calculator is allowed. This is slightly below the usual short-FRQ grain of 1-3 points per part, but the parts are not over-demanding. The 1-point parts are acceptable for the short format."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style item covering real vs. nominal GDP, the deflator, inflation rate, real GDP per capita, and the effect of unanticipated inflation on lenders. Each part needs one or two steps with clean numbers (150,000/1.2 = 125,000; 20% inflation; 1,000 vs. about 947 per capita). The per-capita comparison, where population growth outpaces real GDP growth, requires combining two effects and is the main conceptual step. Reading load is minimal and all content is in Unit 2 scope. It is more than basic recall but not beyond typical AP exam demands.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f07-k0",
+  "cellId": "ap_macroeconomics-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Graph: vertical axis real interest rate, horizontal axis quantity of loanable funds; downward-sloping demand (D_LF), upward-sloping supply (S_LF); equilibrium at r1, Q1. Government borrowing raises demand for loanable funds: D shifts right to D2, so the real interest rate rises to r2 > r1 and the equilibrium quantity rises to Q2. (A setup where government borrowing lowers supply would give the same higher rate, but the usual demand shift is used here.)",
+     "final_answer": "D_LF shifts right; real interest rate rises from r1 to r2 (r2 > r1).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Firms borrow to invest, and the higher real interest rate raises their cost of borrowing. Fewer investment projects are worth doing, so firms move up along the private investment demand curve. This is crowding out.",
+     "final_answer": "Private investment spending decreases because the higher real interest rate makes borrowing more expensive (crowding out).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Less private investment means the stock of physical capital grows more slowly. Productivity and potential output then grow more slowly too, so the LRAS/PPC shifts out more slowly.",
+     "final_answer": "Long-run growth slows: less capital accumulation means slower growth in productivity and potential output.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard crowding-out short FRQ. Part A has a graph and a demand-shift row, Part B covers crowding out of investment with its reason, and Part C links investment to long-run growth. The closed-economy condition is stated in the stimulus, and the solver agrees with the key. The rubric rows are consistent, with B2 depending on B1 and A2 on A1.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A tests graphing (4.C) on topic 5.5. Parts B and C cover related topics 5.5 and 5.6, which the bundle allows."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique and defensible. The rubric rows are meaning-based, and the alternative wordings are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is simple but gives the needed conditions (closed economy, government borrowing). No graph data is needed because students draw the graph."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The rubric lists realistic common errors, such as shifting supply instead of demand and labeling r2 below r1."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 5 points and about 12 minutes are typical of a short FRQ. No calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard crowding-out FRQ. Part A is one comparative-statics step on a loanable funds graph (demand shifts right, the real interest rate rises from r1 to r2). Part B links the higher rate to lower private investment, and Part C links lower investment to slower long-run growth through capital accumulation. There is no computation, reading is minimal, the closed-economy assumption is explicit, and the content is core to topics 5.5 and 5.6 with no out-of-scope knowledge.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f07-k1",
+  "cellId": "ap_macroeconomics-f07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "instant_reject_multiple_correct"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Graph: vertical axis is the real interest rate, horizontal axis is the quantity of loanable funds. Supply of loanable funds slopes upward and demand slopes downward; they cross at r1. When the government borrows more, demand for loanable funds shifts right (D1 to D2), so the real interest rate rises to r2, which is above r1, and the equilibrium quantity rises. Another valid way to draw it is supply shifting left because public saving falls.",
+     "final_answer": "Loanable funds graph (real interest rate vs. quantity of loanable funds). Demand shifts right, so the real interest rate rises from r1 to r2, with r2 > r1.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The real interest rate is higher, so borrowing costs more. Fewer investment projects are worth doing, so firms borrow less and the quantity of private investment demanded falls. This is crowding out.",
+     "final_answer": "Private investment decreases. The higher real interest rate makes borrowing more expensive for firms, so they invest less (crowding out).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Lower investment means slower growth of physical capital per worker, which slows productivity growth and therefore long-run economic growth.",
+     "final_answer": "Long-run growth slows. Less investment means a smaller capital stock, so productivity and potential output grow more slowly (LRAS/PPC shifts out less).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is well scoped and exam-suitable, but row A2 accepts only a rightward demand shift. A leftward shift of supply is a defensible alternative, so a correct response could be denied the point. The rubric should accept it as an alternative, or the stem should say that the borrowing increases demand for loanable funds.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts fit topics 5.5, 4.7 and 5.6. Part A is a graph of the loanable funds market with a demand shift, which fits skill 4.C."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Row A2 requires that the demand curve shifts right. The stimulus says the government plans to increase its deficit by borrowing from private savers. The standard AP treatment is a rightward shift of demand, but a leftward shift of supply from lower public saving is also a defensible depiction, and the independent solver said so as well. The rubric lists \"shifts the supply curve to the right\" as a common error. It does not list a leftward supply shift as an accepted alternative, so a student drawing it would be denied the point. The rubric also does not say whether quantity change must be shown. Row B1 is labeled \"Gives the reason\" but it only asks for an identification. Rows B2 and C1 are fine."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table stimulus is complete and clear. It states that the economy is closed and that the government borrows from private savers."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common errors listed for each row are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP short FRQ. It is 5 points across parts worth 2, 2 and 1, with no calculator needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard, scaffolded crowding-out item in a single model (loanable funds). Part A: draw and label a graph and shift the demand curve to the right, giving a higher r (one comparative-statics step). Part B: state that private investment falls and explain via the higher interest rate. Part C: link lower investment to lower capital accumulation and slower long-run growth. There is no calculation and the reading load is minimal. The closed economy is stated, so no assumptions are ambiguous. The steps are direct recall and application of a core concept, with no combined effects, so it is below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f08-k0",
+  "cellId": "ap_macroeconomics-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "0.25 x $500M = $125M",
+     "final_answer": "$125 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "$225M - $125M = $100M",
+     "final_answer": "$100 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Money multiplier = 1/0.25 = 4; 4 x $100M = $400M",
+     "final_answer": "$400 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Banks may hold some excess reserves instead of lending them all, and the public may hold some of its money as currency instead of depositing it. Both cut down the amount re-deposited and lent in each round, so the actual multiplier is smaller than 4.",
+     "final_answer": "Banks may keep excess reserves and the public may hold cash, which lowers the multiplier",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The central bank buys government bonds (securities) on the open market, which adds to bank reserves.",
+     "final_answer": "Buy government bonds",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The five-part, five-point short FRQ covers required and excess reserves, the maximum money multiplier expansion, leakages and open-market purchases, all within Unit 4 scope. The table is complete: the balance sheet balances only on the liabilities side, and the reserve ratio is given in the notes. Keys are unambiguous: 125, 100, 400, a reason naming excess reserves held by banks or currency held by the public, and buying bonds. Part C states its assumptions (banks lend all excess reserves, no currency held). The rubric rows are consistent and accept equivalent answers, and the item grain matches the official short FRQ of 1-point parts. One minor flaw: assets are 225 + 275 = 500 and liabilities are 500, so the balance sheet is consistent. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part-level skills are mixed (3.C, 1.D, 2.A), which is normal for FRQs. Topics 4.4 and 4.6 are both in scope. Only reserves, loans and deposits appear on the balance sheet."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All numeric keys are correct and unique. Part D accepts either bank excess reserves or currency holdings. Part E's key, buying bonds, is unique for a limited-reserves economy."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, and the limited-reserves economy and the reserve ratio are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The rubric lists common errors for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The calculation and reading load is light and typical of an AP short FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard 4.4 sequence of one-step calculations: required reserves (0.25 x 500 = 125), excess reserves (225 - 125 = 100), and maximum money creation (100 x 4 = 400). The two conceptual parts (leakage or excess reserves held; central bank buys bonds) are routine recall. The table is simple and in scope, with no hidden assumptions, and the arithmetic is small. It is a good foundational item, but it is below the multi-step reasoning level expected of full-mock exam_prep items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f08-k1",
+  "cellId": "ap_macroeconomics-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "0.25 x $400M = $100M",
+     "final_answer": "$100 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "$200M - $100M = $100M",
+     "final_answer": "$100 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Money multiplier 1/0.25 = 4; 4 x $100M = $400M",
+     "final_answer": "$400 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Leakages: banks may hold excess reserves and the public may hold cash instead of depositing it, so the real multiplier is smaller.",
+     "final_answer": "Banks may keep excess reserves, and households may hold currency, which reduces deposit creation",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Buying securities adds to bank reserves",
+     "final_answer": "Buy government bonds (securities) on the open market",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ on required and excess reserves, the money multiplier, leakages, and open-market purchases. Keys are unique and consistent with the stated assumptions, and the balance sheet is complete and balanced. Five 1-point parts match the official short-FRQ grain, and the load is light.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts sit in topics 4.4 and 4.6, use only reserves, loans, and deposits, and are labeled with their own skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Answers are 100, 100, 400, the leakage explanation, and an open-market purchase. In part C the \"money supply\" wording is slightly loose, but the key is the same under any reading consistent with the stated assumptions."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and balanced, and the reserve ratio is given in the notes. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. Common errors are listed per part and the rubric rows are consistent."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The calculations are simple, the reading load is low, and the time and calculator load fit a short FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard topic 4.4 money-multiplier sequence with round numbers. Each part is a single routine step: required reserves, excess reserves, multiplier times excess reserves, a recall-level explanation of leakage, and the open-market purchase. The balance sheet is simple and the concepts are introductory, with no combined effects or novel reasoning. It works well for foundational practice rather than a challenging mock-exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f09-k0",
+  "cellId": "ap_macroeconomics-f09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Axes: inflation rate (vertical), unemployment rate (horizontal). LRPC vertical at 6%. Downward-sloping SRPC1 crosses LRPC at 2% inflation; label point A at (6%, 2%).",
+     "final_answer": "Vertical LRPC at 6% unemployment; downward-sloping SRPC1 that crosses it at 2% inflation; equilibrium point A at (6%, 2%).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Higher expected inflation shifts the SRPC up/right.",
+     "final_answer": "SRPC2 drawn above and to the right of SRPC1, crossing the LRPC at an inflation rate above 2%.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "LRPC vertical at natural rate; expected inflation doesn't change it. The SRPC is drawn for a given expected inflation rate. When expected inflation rises, workers ask for higher nominal wages and firms raise prices, so every unemployment rate now comes with higher inflation.",
+     "final_answer": "In the long run, unemployment stays at the natural rate of 6%, so it does not change. The SRPC shifts up because it is drawn for a given expected inflation rate. When expected inflation rises, workers bargain for higher nominal wages and firms build the expected inflation into their prices. That raises costs, so every unemployment rate now comes with higher inflation.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ (5 points) on the Phillips curve with three parts. Each part is judged against its own skill: A is graphing (4.A), B is a graph shift, and C is identification and explanation. The stimulus table gives the natural rate, expected inflation and actual inflation, which is enough to draw the graph. The rubric rows are consistent and match the model answers. The independent solver's answers agree with the rubric. The 1-3 point part grain and the roughly 12 minutes match the official short-FRQ format, so the item is suitable for the exam.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item is on topic 5.2, and part A assesses skill 4.A (drawing a labeled graph). Parts B and C are labeled with their own skills, which is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rubric rows are consistent with the model answers and the points sum to 5. The wording allows the SRPC2 shift to be described as up or right, and the model answer says \"upward (to the right)\". Part C asks for the long-run unemployment effect and the reason for the shift, and the two rows cover those two demands."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives the natural rate (6 percent) and expected and actual inflation (2 percent each), which is enough to draw and label the graph. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable as there are no options. The rubric rows list common errors, such as a horizontal LRPC or a shifted LRPC."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a short AP FRQ, with a draw part, a one-point shift and a brief explanation. No calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style FRQ on the Phillips curve. Part A needs a labeled SRPC/LRPC graph with the initial equilibrium at 6% unemployment and 2% inflation. Part B is one SRPC shift. Part C is one comparative-statics conclusion (long-run unemployment returns to the natural rate) plus a short explanation of why expected inflation shifts the SRPC. Table is tiny, no arithmetic, and all content is in Unit 5 scope. This is a typical full-mock item rather than a basic recall or advanced extension task.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 360
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f09-k1",
+  "cellId": "ap_macroeconomics-f09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Axes: inflation rate (vertical), unemployment rate (horizontal). LRPC vertical at 5%. Downward-sloping SRPC1 crosses LRPC at 2% inflation. Label point A at (5%, 2%).",
+     "final_answer": "Vertical LRPC at 5% unemployment; downward-sloping SRPC1 crosses it at point A (5%, 2%).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Higher expected inflation shifts the SRPC up/right. SRPC2 crosses the LRPC at an inflation rate above 2%.",
+     "final_answer": "SRPC2 drawn above/right of SRPC1, crossing the LRPC at an inflation rate above 2%.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "In the long run unemployment goes back to the natural rate of 5%, so it does not change. The SRPC shifts because workers and firms build expected inflation into wage contracts and prices. Nominal wages and costs rise, so every unemployment rate now goes with higher inflation (short-run aggregate supply falls).",
+     "final_answer": "No change: unemployment stays at the 5% natural rate in the long run. The SRPC shifts up because higher expected inflation is built into nominal wages and prices, so each unemployment rate comes with higher inflation.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short Phillips curve FRQ with 5 points across three parts. It is in scope for topic 5.2, the key is unique and correct, the stimulus is sufficient, and the rubric rows are consistent. The load fits the short-FRQ format.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits topic 5.2 and its own skill (graph, graph shift, explanation)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The SRPC shift up and right and the unchanged long-run natural rate are unique and correct. The independent solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives the natural rate and expected and actual inflation, which is enough to draw the graph."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to FRQ; common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "5 points in about 12 minutes, no calculator, standard short-FRQ grain."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style graphing FRQ on the Phillips curve. Students must read a small table, draw labeled SRPC and LRPC with the initial equilibrium at 5% unemployment and 2% inflation, shift the SRPC for higher expected inflation, and explain that long-run unemployment stays at the natural rate while the SRPC shifts because wage and price expectations rise. It requires one comparative-statics step and a graph-to-verbal explanation, with no calculation and no out-of-scope content. Difficulty comes only from fair, in-scope concept and graphing demands.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f10-k0",
+  "cellId": "ap_macroeconomics-f10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "30 soybeans / 120 corn",
+     "final_answer": "0.25 soybeans per unit of corn (30/120)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "A's OC 0.25S < B's OC 1S",
+     "final_answer": "Country A",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Straight-line PPC, intercepts corn 120 and soybeans 30. A technology change that affects only soybeans pivots the curve out along the soybean axis to 60, and the corn intercept stays at 120.",
+     "final_answer": "Draw PPC1 as a straight line from 30 soybeans on the vertical axis to 120 corn on the horizontal axis. Draw PPC2 as a straight line from 60 soybeans to 120 corn, so the curve pivots outward and the corn intercept does not change.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Specialize according to comparative advantage and trade at terms between the opportunity costs.",
+     "final_answer": "Country A should specialize in corn and Country B in soybeans. They should trade at a rate between 0.25 and 1 soybean per unit of corn, for example 1 corn for 0.5 soybeans. Then each country gets a good at a lower cost than producing it at home, so both can consume beyond their own PPCs.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 5-point short FRQ matches the official grain. All parts are in scope, the keys are unique and correct, and the table is complete with straight-line PPCs stated. One minor mismatch: part B's prompt only says to identify the country, but its rubric also asks for the lower-opportunity-cost reason; this does not make the key ambiguous.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A, B and D are topic 1.3; part C is topic 1.2. Each part fits its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and correct. Rubric rows are consistent with the model answers and the accepted alternatives are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with straight-line PPCs stated and clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and typical of a short FRQ. The 5-point total and the 1/1/2/1 part split match the official short-FRQ grain, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item on constant-cost PPCs and comparative advantage. It requires reading a table, computing opportunity cost (30/120 = 0.25 soybeans per corn for A vs 1 for B), identifying comparative advantage, drawing a labeled linear PPC with intercepts, applying a one-step technology shift (soybean intercept doubles to 60, corn intercept unchanged), and explaining mutual gains from trade. Concepts are core Unit 1 and the arithmetic is simple. Difficulty comes from the number of parts and representation changes (table to calculation to graph to verbal), not from unfair sources. This fits the typical full-mock level rather than a basic single-step check or an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f10-k1",
+  "cellId": "ap_macroeconomics-f10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "20 bicycles / 120 laptops = 1/6 bicycle per laptop.",
+     "final_answer": "1/6 (about 0.17) bicycle per laptop",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "A gives up 1/6 bicycle per laptop and B gives up 1/2. A's cost is lower.",
+     "final_answer": "Country A",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Draw a straight-line PPC with laptops on the horizontal axis, running from 120 laptops to 20 bicycles. Then draw a new line, PPC2, that pivots out on the bicycle axis to 40 and keeps the laptop intercept at 120.",
+     "final_answer": "PPC1 has intercepts at 120 laptops and 20 bicycles. PPC2 has intercepts at 120 laptops and 40 bicycles. It pivots outward along the vertical axis only.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Each country specializes in the good with the lower opportunity cost and trades for the other.",
+     "final_answer": "A specializes in laptops, where its opportunity cost is lowest. B specializes in bicycles, where its opportunity cost is 2 laptops per bicycle versus 6 for A. They trade at terms between 1/6 and 1/2 bicycle per laptop, for example 1 bicycle for 3 laptops. That way each country gets the other good more cheaply than it could make it at home, and both can consume outside their own PPCs.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item fails on key/scoring and exam suitability. The required \"0.17\" with no rounding rule, and rubric rows that demand more than the prompts ask, make the scoring unreliable. The stimulus and scope are fine.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts fit topics 1.2 and 1.3 and the Unit 1 scope. The 1.B and 4.A/4.C skill tags on parts B and C are acceptable for a mixed-skill bundle."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part A requires \"0.17\" although the exact value is 1/6 and no rounding instruction is given; numeric_tolerance is null, so 1/6 or 0.167 may be marked wrong. Part B's rubric demands the reason (lower opportunity cost) although the prompt only says \"Identify\". Part C's rubric credits an \"outward pivot\" that the prompt does not state, and the intercept labeling is folded into the original-curve row."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with maximum outputs and a straight-line PPC statement. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; the listed common errors are reasonable."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The 5-point short-FRQ format is acceptable, but the unspecified rounding in a calculator-allowed item makes the scoring unreliable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item on comparative advantage and the PPC. It requires computing opportunity cost from a table, comparing the two countries' costs, drawing a linear PPC with labeled intercepts, showing a one-sided technology shift, and explaining mutually beneficial trade. Concept depth is moderate, the arithmetic is clean (20/120, 30/60), and the wording is unambiguous. Difficulty comes from the table-to-graph representation change and the number of parts, which are legitimate sources, so the item fits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ }
+]
