@@ -1,0 +1,194 @@
+{
+ "p-r21": {
+  "ok": true,
+  "issues": [
+   {
+    "severity": "minor",
+    "issue": "The blueprint says the lanterns were 'forty small flames in a row' only implicitly; the passage's 'forty' stalls on one block sits slightly awkwardly beside a plan for 'sixty' stalls, though it is not a contradiction. Consider clarifying that forty is one block."
+   },
+   {
+    "severity": "minor",
+    "issue": "Paragraph 4 says the market 'closed, by ordinance, at nine o'clock' right after vendors left, which could be read as the market itself shutting down. Reads fine on a second pass (closing time, not permanent closure), but 'closed for the night' would be clearer."
+   },
+   {
+    "severity": "minor",
+    "issue": "The final metaphor ('someone who knows where the lanterns are') is strong but the pivot 'You can give Halvern Street a roof' slightly softens the earlier firm stance. Acceptable as conciliatory tone shift."
+   },
+   {
+    "severity": "minor",
+    "issue": "A few tidy rhetorical turns (e.g., 'a market that electrocutes its customers has no character worth defending', 'You can photograph the sailcloth. You cannot photograph the tolerance.') are polished to the point of sounding slightly crafted, but they are specific and voiced, not stock AI prose."
+   }
+  ],
+  "resembles_known_text": false,
+  "real_world_error": false
+ },
+ "p-r22": {
+  "ok": false,
+  "issues": [
+   {
+    "severity": "major",
+    "issue": "The passage does not match the blueprint's sentence-level device mapping. The simile at sentence 5 ('as if the building had been put up around him...') is actually a weak 'as if' construction and sits in a differently structured paragraph than the blueprint's anecdote of sentences 4-8. The blueprint calls for a 'long hallway with doors' metaphor at 26 and 28 and a rhetorical question at 28. In the passage the hallway is in ¶6 as intended, but the 'door the student should not have to find by accident' and the rhetorical question are fused into one sentence, so the blueprint's 26/28 separation is not realized. The parallelism of 'Tell them' at 30-31 also does not contrast 'saints with a ledger' as a closing colon at 31 in the blueprint's form, because the colon appears in a different place than the blueprint's sentence 3 colon, which in the passage is actually a semicolon and a colon-free thesis sentence."
+   },
+   {
+    "severity": "major",
+    "issue": "Blueprint device 'dash_or_colon_emphasis' at sentence 3 (colon setting up the paradoxical thesis) is not realized: the thesis sentence in ¶1 uses a comma, not a colon or dash ('So here it is: ...' is the nearest, but the blueprint ties it to the paradox, which the passage states after the colon only loosely). The tone-shift at 22 is signaled adequately ('I will grant'), but the 'concession_and_rebuttal' at 9-13 is split across ¶3 with the redefinition appearing before the analogy, slightly blurring the antithesis at 13."
+   },
+   {
+    "severity": "minor",
+    "issue": "The statistic ('fewer than a dozen of eleven hundred') is attributed to the pantry director, which fits the blueprint's 'local statistic from pantry director', but it is vague ('Last spring', unnamed director) and rests on an unverifiable secondhand claim. Fine as fiction, but the inference from 'few volunteer' to 'compulsion is necessary' is a leap a careful reader could press, since low volunteering could also reflect lack of outreach or access."
+   },
+   {
+    "severity": "minor",
+    "issue": "Some phrasing reads as familiar stock persuasive rhetoric ('anyone who claims otherwise is selling something', 'administrative problems have administrative solutions', 'the agenda for the first year'). The Teodor anecdote also tidily resolves ('nobody had ever before trusted him with a ledger'), which is slightly sentimental, though serviceable and human."
+   },
+   {
+    "severity": "minor",
+    "issue": "Logical wrinkle: Teodor's visit was offered as an alternative to detention and he agreed ('shrugged'), which is a choice rather than a compelled mandate, so the anecdote supports 'a nudge works' more than 'compulsion works'. This weakens the fit with the central claim, though the passage partly covers it by calling a shrug a yes."
+   }
+  ],
+  "resembles_known_text": false,
+  "real_world_error": false
+ },
+ "p-r23": {
+  "ok": true,
+  "issues": [
+   {
+    "severity": "minor",
+    "issue": "Stray header text 'ALTON original passage' precedes the title and should be removed before use."
+   },
+   {
+    "severity": "minor",
+    "issue": "The phrase 'they are the shape of the thing' in P2 is slightly generic compared with the otherwise concrete voice."
+   },
+   {
+    "severity": "minor",
+    "issue": "Blueprint sentence-id mappings (e.g., sentences 14, 20, 23, 30) do not align neatly with the actual sentence count of the paragraphs; this is a metadata mismatch, not a defect in the passage itself."
+   },
+   {
+    "severity": "minor",
+    "issue": "P3 refers to 'men' working within walking distance of the station; accurate to the historical framing but slightly narrow."
+   }
+  ],
+  "resembles_known_text": false,
+  "real_world_error": false
+ },
+ "p-r24": {
+  "ok": true,
+  "issues": [
+   {
+    "severity": "minor",
+    "issue": "The retention comparison (22 of 26 in the Wednesday group vs. 'roughly half' school-wide) implies causation without acknowledging self-selection. This is acceptable for a persuasive feature, and it gives students something to critique."
+   },
+   {
+    "severity": "minor",
+    "issue": "The 'roughly half' school-wide retention rate sits slightly awkwardly beside 14 of 41 remaining by March (about 34%). These measure different things (spring attendance vs. next-autumn enrollment, across all students vs. adult recital signups), so it is not a contradiction, but it could confuse a careful reader."
+   },
+   {
+    "severity": "minor",
+    "issue": "A few closing phrases ('the verdict rushes in to fill the silence'; 'the only thing we ever meant by learning to play') are slightly polished, but they are consistent with a feature-essay voice and not stock AI prose."
+   }
+  ],
+  "resembles_known_text": false,
+  "real_world_error": false
+ },
+ "p-r25": {
+  "ok": true,
+  "issues": [
+   {
+    "severity": "minor",
+    "issue": "Blueprint sentence IDs may not map exactly onto the passage's actual sentence numbering; this is a labeling matter, not a content defect."
+   },
+   {
+    "severity": "minor",
+    "issue": "The closing line of P5 ('which is, when you think about it, exactly what the lighthouse was built to make people do') is slightly tidy, but it is acceptable and supports the argument."
+   }
+  ],
+  "resembles_known_text": false,
+  "real_world_error": false
+ },
+ "p-r26": {
+  "ok": true,
+  "issues": [
+   {
+    "severity": "minor",
+    "issue": "The header line 'ALTON original passage' is a stray production label inside the passage text and should be removed before shipping."
+   },
+   {
+    "severity": "minor",
+    "issue": "The dateline says the Six ran '1963 to 2024', and the passage says it was sixty-one years old. That is arithmetically consistent, but the exam's year framing should be kept consistent with the other materials."
+   },
+   {
+    "severity": "minor",
+    "issue": "The 'long illness... called a budget' conceit is stated once and not developed beyond P1. Even so, it serves the blueprint's irony and metaphor devices."
+   },
+   {
+    "severity": "minor",
+    "issue": "P6 packs the tone shift and the closing question into a few sentences. The question 'who is this place for' appears inside a declarative sentence rather than as a standalone question, as the blueprint allows ('embedded question'). The shift is slightly abrupt but works."
+   },
+   {
+    "severity": "minor",
+    "issue": "Ending the pivot on the aphorism 'not modern; it is merely unaccompanied' is slightly polished in a way that reads a touch like stock columnist cadence. It is tolerable and fits the persona."
+   },
+   {
+    "severity": "minor",
+    "issue": "The blueprint's sentence-level device mapping (e.g., simile at sentences 7 and 27, definition at 10 and 24) does not align precisely with the paragraph-based text. The devices are all present, so this is only an indexing mismatch."
+   }
+  ],
+  "resembles_known_text": false,
+  "real_world_error": false
+ },
+ "p-w21": {
+  "ok": true,
+  "issues": [
+   {
+    "severity": "minor",
+    "issue": "Timeline tension: the toaster is repaired over 31 years (to about 1989), yet the opening says the street's repair shops existed in 1962 and are now gone. It is unclear whether Vosk was still working through 1989. This is plausible but unstated."
+   },
+   {
+    "severity": "minor",
+    "issue": "Sentence 12 refers to 'the ledgers in the next case' and a claim about 'most of the twentieth century' that the single toaster example does not yet support. This is acceptable in a draft and fits the planned weaknesses."
+   },
+   {
+    "severity": "minor",
+    "issue": "The Corder Street Merchants' Bulletin is invented but cited as a source. This is fine within a fictional exhibit, but it should be labeled as fictional if the passage is ever shown outside that context."
+   }
+  ],
+  "resembles_known_text": false,
+  "real_world_error": false
+ },
+ "p-w22": {
+  "ok": true,
+  "issues": [
+   {
+    "severity": "minor",
+    "issue": "Sentence 2 is a deliberately vague thesis (planned flaw 4.B); it matches the blueprint and is repairable."
+   },
+   {
+    "severity": "minor",
+    "issue": "Sentence 7 gives evidence (oboe becomes audible) without commentary tying it to cooperation (planned flaw 6.A); matches the blueprint."
+   },
+   {
+    "severity": "minor",
+    "issue": "Sentence 8 is an overstated absolute ('Every... always') (planned flaw 4.C); it also sits as a non-sequitur after the evidence, but this is as planned."
+   },
+   {
+    "severity": "minor",
+    "issue": "Sentence 11 contains a comma splice (planned flaw 8.C); matches the blueprint."
+   },
+   {
+    "severity": "minor",
+    "issue": "Sentence 12 omits the closing comma after the nonrestrictive clause 'which spent last winter arguing over a parking lot' (planned flaw 8.C); matches the blueprint. It also pokes mildly at the town council, but it is not partisan about an election."
+   },
+   {
+    "severity": "minor",
+    "issue": "Sentence 13 is a flat conclusion that never invites readers to the spring concert (planned flaw 2.A); matches the blueprint."
+   },
+   {
+    "severity": "minor",
+    "issue": "Sentence 3 says the retired mail carrier 'has played second trombone for thirty years' while describing him as retired, which is slightly awkward but plausible, and the passage is otherwise concrete and human-sounding."
+   }
+  ],
+  "resembles_known_text": false,
+  "real_world_error": false
+ }
+}
