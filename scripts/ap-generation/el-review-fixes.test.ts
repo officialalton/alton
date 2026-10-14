@@ -1,7 +1,8 @@
 import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { parseSwapPlan } from "../../lib/ap-admin/new-version";
+import { listSwapPlans, parseSwapPlan, readSwapPlan } from "../../lib/ap-admin/new-version";
+import { STOCK_BATCHES } from "../../lib/ap-admin/batches";
 import { frqViolations, type ElFrqPayload } from "../../lib/ap-generation/englang-frq";
 import { itemViolations, setViolations, type ElSetRaw } from "../../lib/ap-generation/englang-gates";
 
@@ -9,12 +10,12 @@ import { itemViolations, setViolations, type ElSetRaw } from "../../lib/ap-gener
 const rd = <T,>(f: string): T => JSON.parse(readFileSync(f, "utf-8")) as T;
 const stock: Record<string, any> = {};
 for (const f of readdirSync("data/ap/stock").filter((x) => /^el-.*-items\.json$/.test(x))) for (const it of rd<any[]>(path.join("data/ap/stock", f))) stock[it.stockKey] = it;
-const fixed = rd<any[]>("data/audit/el-review-fix-items.json");
+const fixed = rd<any[]>("data/ap/stock/el-rv-items.json");
 const toRaw = (p: any, items: any[]): ElSetRaw => ({ kind: p.el_passage.kind, blueprint: p.blueprint, provenance: p.provenance, title: p.el_passage.title, paragraphs: p.el_passage.paragraphs, items: items.map((it) => ({ skill: it.skill, topic: it.topic, cognitive: it.cognitive, stem: it.stem, options: it.options.map((o: any, j: number) => ({ text: o.text, is_key: j === it.key_index, label: o.label, why: o.why })), evidence_sentence_ids: it.evidence_sentence_ids, devices_used: it.devices_used })) } as ElSetRaw);
 
 describe("EL review fixes", () => {
   const mc = fixed.filter((c) => c.kind === "mc"), frq = fixed.filter((c) => c.kind === "frq_bundle");
-  it("has 22 MC sets and 6 FRQ bundles with el-review-fix keys", () => { expect(mc.length).toBe(22); expect(frq.length).toBe(6); for (const c of fixed) expect(c.stockKey).toBe(`el-review-fix:${c.candidateKey}`); });
+  it("has 22 MC sets and 6 FRQ bundles with el-review-fix keys", () => { expect(mc.length).toBe(22); expect(frq.length).toBe(6); for (const c of fixed) expect(c.stockKey).toBe(`el-rv:${c.candidateKey}`); });
   it("keeps key position and passes item gates (no new violations)", () => {
     for (const c of mc) {
       const o = Object.values(stock).find((x: any) => x.candidateKey === c.candidateKey && x.kind === "mc")!;
@@ -48,9 +49,16 @@ describe("EL review fixes", () => {
   it("swap plans parse, reference assigned removeKeys and existing fixed addKeys", () => {
     const fixedKeys = new Set(fixed.map((c) => c.stockKey));
     for (const id of ["el1", "el2"]) {
-      const plan = parseSwapPlan(rd(`data/audit/el-review-${id}-v2-swap-plan.json`)); expect(plan.swaps.length).toBeGreaterThan(0);
+      const plan = parseSwapPlan(rd(`data/ap/stock/${id}-review-v2-swap-plan.json`)); expect(plan.swaps.length).toBeGreaterThan(0);
       const assign = rd<{ sets: { id: string; mcA: string[]; frqA: string[] }[] }>("data/ap/stock/exact-assign-el-el1-el2.json").sets.find((s) => s.id === id.toUpperCase())!;
       for (const sw of plan.swaps) { expect(sw.section === "ap_mc" ? assign.mcA : assign.frqA).toContain(sw.removeKey); expect(fixedKeys.has(sw.addKey)).toBe(true); }
     }
+  });
+  it("admin loader lists both plans and the batch is registered", () => {
+    const l = listSwapPlans(); expect(l.find((p) => p.file === "el1-review-v2-swap-plan.json")).toMatchObject({ set: "EL1", sourceSetName: "AP English Language — Practice Exam 1", swapCount: 15 });
+    expect(l.find((p) => p.file === "el2-review-v2-swap-plan.json")).toMatchObject({ set: "EL2", sourceSetName: "AP English Language — Practice Exam 2", swapCount: 13 });
+    expect(readSwapPlan("el1-review-v2-swap-plan.json").swaps.length).toBe(15);
+    const b = STOCK_BATCHES.find((x) => x.id === "el-rv")!; expect(b).toMatchObject({ itemsFile: "el-rv-items.json", passKeysFile: "el-rv-pass-keys.json", evidenceFile: "evidence-el-rv.json", supplement: true });
+    expect(rd<string[]>("data/ap/stock/el-rv-pass-keys.json").sort()).toEqual(fixed.map((c) => c.stockKey).sort());
   });
 });

@@ -1,4 +1,4 @@
-// EL1/EL2 검수 수정본 생성(2026-10-14, 무료·DB 없음): 원본 재고는 그대로 두고 data/audit/ 에 새 후보(키 el-review-fix:*) + 교체 계획을 쓴다.
+// EL1/EL2 검수 수정본 생성(2026-10-14, 무료·DB 없음): 원본 재고는 그대로 두고 data/audit/ 에 새 후보(키 el-rv:*) + 교체 계획을 쓴다.
 //   npx tsx scripts/ap-generation/el-review-build-fixes.ts
 // 입력: data/audit/el-review-raw-rewrite.json(선지 길이 보정), data/audit/el-review-raw-refs.json(해설의 문장 번호 → 문단 표현, 선택), data/audit/el-review-decisions.json(샘플 점수 결정 등).
 import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
@@ -11,7 +11,7 @@ const stock: Record<string, any> = {};
 for (const f of readdirSync("data/ap/stock").filter((x) => /^el-.*-items\.json$/.test(x))) for (const it of rd<any[]>(path.join("data/ap/stock", f))) stock[it.stockKey] = it;
 const assign = rd<{ sets: { id: string; mcA: string[]; frqA: string[] }[] }>("data/ap/stock/exact-assign-el-el1-el2.json").sets;
 const idOf = (k: string) => k.replace(/[^a-zA-Z0-9]/g, "_").slice(-48);
-const RUN = "el-review-fix";
+const RUN = "el-rv";
 const W = (t: string) => t.trim().split(/\s+/).length;
 const rewrite = existsSync("data/audit/el-review-raw-rewrite.json") ? rd<Record<string, any>>("data/audit/el-review-raw-rewrite.json") : {};
 const refs = existsSync("data/audit/el-review-raw-refs.json") ? rd<Record<string, any>>("data/audit/el-review-raw-refs.json") : {};
@@ -141,7 +141,7 @@ if (pronLog.length) console.log("pronoun pass:", pronLog.join(" | "));
 console.log(`MC items key-is-strictly-longest (words): before ${before.longest}/${before.n} -> after ${after.longest}/${after.n}`);
 console.log(JSON.stringify(mcLog.map((l) => ({ id: l.id, key: l.key.split("-").slice(-2)[0], changed: l.changed, reverted: l.reverted, viol: l.violations, before: l.keyLongestBefore, after: l.keyLongestAfter, n: l.items, hidden: l.hiddenRefsLeft })), null, 0));
 writeFileSync("data/audit/el-review-merged-mc.json", JSON.stringify(mergedMc, null, 1));
-if (STAGE === "2") { writeFileSync("data/audit/el-review-fix-items.json", JSON.stringify([...mcItems, ...frqOut], null, 1)); console.log(`wrote ${mcItems.length} MC + ${frqOut.length} FRQ fixed candidates`); }
+if (STAGE === "2") { { const all = [...mcItems, ...frqOut]; writeFileSync("data/ap/stock/el-rv-items.json", JSON.stringify(all, null, 1)); writeFileSync("data/ap/stock/el-rv-pass-keys.json", JSON.stringify(all.map((c: any) => c.stockKey), null, 1) + "\n"); } console.log(`wrote ${mcItems.length} MC + ${frqOut.length} FRQ fixed candidates`); }
 void passageDisplay; void idOf; void (null as unknown as ElSetRaw | ElItemRaw);
 
 console.log(JSON.stringify(frqLog.map((l) => ({ fix: l.fixId, viol: l.violations }))));
@@ -164,8 +164,8 @@ if (STAGE === "2") {
       swaps.push({ section: "ap_frq", removeKey: key, addKey: nk, tier: "required", reason: `${fx.fixId}: ${fx.notes.join("; ")}`, remove: { type: stock[key].payload.template }, add: { type: stock[key].payload.template, sameCell: true } });
     }
     const plan = { kind: "ap_new_version_swap_plan", set: s.id, sourceSetName: `AP English Language — Practice Exam ${s.id.slice(2)}`, sourceVersionNo: 1, generatedBy: "scripts/ap-generation/el-review-build-fixes.ts (EL review 2026-10-14)",
-      note: "Replacement candidates (keys el-review-fix:*) are NOT in the DB yet. Import data/audit/el-review-fix-items.json first (scripts/ap-generation/import-candidates.ts --items data/audit/el-review-fix-items.json --batch el-review-fix-2026-10-14 --supplement), mark render/screen evidence as for the originals, then copy this file to data/ap/stock/ so the admin 'new version' screen lists it. Each swap replaces a whole passage set (all its slots) or one FRQ with the same-cell corrected copy. tier=required fixes a content/prompt defect; tier=recommended is the option-length balancing.",
+      note: "Replacement candidates (keys el-rv:*) are NOT in the DB until admin batch 'el-rv' (data/ap/stock/el-rv-items.json) is loaded and its render/screen evidence is recorded; see docs/ap/englang-review-report.md for the order. Each swap replaces a whole passage set (all its slots) or one FRQ with the same-cell corrected copy. tier=required fixes a content/prompt defect; tier=recommended is the option-length balancing.",
       swapCount: swaps.length, verifierViolations: [], swaps };
-    writeFileSync(`data/audit/el-review-${s.id.toLowerCase()}-v2-swap-plan.json`, JSON.stringify(plan, null, 1)); console.log(`${s.id}: ${swaps.length} swaps (${swaps.filter((x) => x.tier === "required").length} required)`);
+    writeFileSync(`data/ap/stock/${s.id.toLowerCase()}-review-v2-swap-plan.json`, JSON.stringify(plan, null, 1)); console.log(`${s.id}: ${swaps.length} swaps (${swaps.filter((x) => x.tier === "required").length} required)`);
   }
 }
