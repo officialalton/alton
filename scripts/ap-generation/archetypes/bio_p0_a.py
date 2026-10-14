@@ -197,7 +197,7 @@ bi_amino_acid_property = make_bank_archetype("bi_amino_acid_property", "1.7", "2
        ("The change would affect only the primary structure and never the shape of the protein.", "A change in primary structure can change which interactions are possible and so can change shape.")]),
 ], "relate R-group chemistry to protein folding and stability", "fixed fact bank checked against CED 1.7 (amino acid R groups and protein structure)", est=70)
 
-bi_lipid_structure = make_bank_archetype("bi_lipid_structure", "1.5", "2.A", [
+bi_lipid_structure = make_bank_archetype("bi_lipid_structure", "1.5", "1.A", [
     B("Phospholipids have a hydrophilic head and two hydrophobic tails. When phospholipids are placed in water, which arrangement is most likely to form?",
       ("A bilayer with the heads facing the water and the tails facing each other", "Polar heads interact with water and nonpolar tails cluster away from water, forming a bilayer."),
       [("A single layer with the tails facing the water and the heads facing each other", "The nonpolar tails would then be exposed to water, which is unfavorable."),
@@ -215,7 +215,7 @@ bi_lipid_structure = make_bank_archetype("bi_lipid_structure", "1.5", "2.A", [
        ("It is a nucleic acid that stores information in the membrane.", "Cholesterol does not store information and is not a nucleic acid.")]),
 ], "relate lipid structure (saturation, amphipathic character, steroid rings) to behavior in water or membranes", "fixed fact bank checked against CED 1.5", est=60)
 
-bi_carb_structure = make_bank_archetype("bi_carb_structure", "1.4", "2.A", [
+bi_carb_structure = make_bank_archetype("bi_carb_structure", "1.4", "1.A", [
     B("Starch and cellulose are both polymers of glucose, but humans can digest starch and not cellulose. Which statement best explains the difference?",
       ("The glucose units are joined by different types of glycosidic linkages, and human enzymes recognize only one type.", "Alpha linkages in starch and beta linkages in cellulose give different shapes, and human digestive enzymes fit alpha linkages only."),
       [("Cellulose is made of amino acids, so human protein-digesting enzymes cannot break it.", "Cellulose is a polysaccharide of glucose and not a protein."),
@@ -330,7 +330,7 @@ bi_sa_v_concept = make_bank_archetype("bi_sa_v_concept", "2.2", "1.C", [
        ("A larger volume-to-surface-area ratio, which speeds the movement of materials", "A larger volume-to-surface ratio means less membrane relative to the cell contents and slows exchange.")]),
 ], "relate surface-area-to-volume ratio to exchange limits and adaptations", "fixed fact bank checked against CED 2.2", est=60)
 
-bi_membrane_structure = make_bank_archetype("bi_membrane_structure", "2.3", "2.A", [
+bi_membrane_structure = make_bank_archetype("bi_membrane_structure", "2.3", "1.A", [
     B("The fluid mosaic model describes the plasma membrane as a phospholipid bilayer with proteins embedded in it. Which statement correctly describes the proteins that span the bilayer?",
       ("They have hydrophobic regions in contact with the lipid tails and hydrophilic regions exposed to the water on each side.", "Transmembrane proteins are amphipathic, so each region sits where it is most compatible with its surroundings."),
       [("They are entirely hydrophilic and sit only on the surface of the membrane.", "Proteins that span the bilayer need nonpolar regions to be stable inside the lipid core."),

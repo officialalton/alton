@@ -28,7 +28,7 @@ bi_protein_function_shape = make_bank_archetype("bi_protein_function_shape", "1.
        ("The substitution changes the DNA of the red blood cell membrane directly.", "The change is in the amino acid sequence of the protein, not in the membrane DNA.")]),
 ], "connect protein shape to specific functions", "fixed fact bank checked against CED 1.7", est=65)
 
-bi_nucleotide_components = make_bank_archetype("bi_nucleotide_components", "1.6", "2.A", [
+bi_nucleotide_components = make_bank_archetype("bi_nucleotide_components", "1.6", "1.A", [
     B("A student is given a model of a nucleotide that includes a phosphate group, a five-carbon sugar with a hydroxyl group on the second carbon, and the base uracil. To which type of nucleic acid does this nucleotide belong?",
       ("RNA, because it contains ribose and uracil", "Ribose has a hydroxyl group on the second carbon and uracil is found in RNA."),
       [("DNA, because it contains deoxyribose and uracil", "Deoxyribose lacks the hydroxyl group on the second carbon and DNA contains thymine."),

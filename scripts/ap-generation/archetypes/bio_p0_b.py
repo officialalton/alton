@@ -204,9 +204,8 @@ def bi_leaf_disk_et50(rng):
     x0, x1, y0, y1 = ts[i], ts[i + 1], counts[i], counts[i + 1]
     est = float(Fr(x0) + (Fr(5) - Fr(y0)) * (Fr(x1) - Fr(x0)) / (Fr(y1) - Fr(y0)))
     agree(est, float(np.interp(5, counts, ts)), 1e-9, "et50")
-    pairs = [("Reports the first measured time at which at least five disks had floated.", float(x1)), ("Reports the last measured time before five disks had floated.", float(x0)), ("Averages all the measured times.", float(np.mean(ts))), ("Reports the number of disks instead of the time.", 5.0)]
-    key, ds = val_opts(est, pairs, lambda v: f"{hu(v, 1)} minutes" if v != 5.0 else "5.0 disks", gap=0.3)
-    ds = [Opt("5 disks" if d.text == "5.0 disks" else d.text, False, d.why, d.value) for d in ds]
+    pairs = [("Reports the first measured time at which at least five disks had floated.", float(x1)), ("Reports the last measured time before five disks had floated.", float(x0)), ("Averages all the measured times.", float(np.mean(ts))), ("Takes the midpoint of the two bracketing times without using the disk counts.", (x0 + x1) / 2)]
+    key, ds = val_opts(est, pairs, lambda v: f"{hu(v, 1)} minutes", gap=0.3)
     stim = tbl("Number of leaf disks floating (out of 10) at different times in a bicarbonate solution under light", ["Time (minutes)", "Disks floating"], [[t, c] for t, c in zip(ts, counts)])
     stem = "Ten leaf disks were placed in bicarbonate solution under a lamp. The table shows how many disks floated over time. Assuming a steady change between measurements, what is the best estimate of the time at which half of the disks had floated?"
     return mk("bi_leaf_disk_et50", "3.4", "5.A", stem, key, ds, rng, concept="estimate the median floating time of leaf disks by interpolation", stim=stim, path="exact fraction interpolation between the bracketing points vs numpy.interp over the whole table", facts=[f"counts={counts}", f"est={est:.4f}"], judgment="interpolate between the two measurements that bracket five floating disks",
@@ -347,7 +346,7 @@ def bi_signal_amplification(rng):
     for k in (k1, k2, k3):
         n = sum(k for _ in range(n))
     agree(total, n, 1e-9, "total")
-    pairs = [("Adds the three numbers instead of multiplying them.", k1 + k2 + k3), ("Multiplies only the first two numbers and forgets the last step.", k1 * k2), ("Multiplies only the last two steps and forgets the first.", k2 * k3), ("Uses the largest single number as the total.", max(k1, k2, k3) * 3)]
+    pairs = [("Adds the three numbers instead of multiplying them.", k1 + k2 + k3), ("Multiplies only the first two numbers and forgets the last step.", k1 * k2), ("Multiplies only the last two steps and forgets the first.", k2 * k3), ("Multiplies the largest number by the number of steps.", max(k1, k2, k3) * 3)]
     key, ds = val_opts(total, pairs, lambda v: f"{int(v):,}", rel=0.08, gap=1)
     stem = f"In a signal transduction pathway, one activated receptor activates {k1} molecules of kinase 1. Each activated kinase 1 molecule activates {k2} molecules of kinase 2, and each activated kinase 2 molecule activates {k3} molecules of a transcription factor. How many transcription factor molecules are activated by one activated receptor?"
     return mk("bi_signal_amplification", "4.3", "5.A", stem, key, ds, rng, concept="amplification of a signal through successive activation steps", path="product of the step multipliers vs a stepwise loop counting molecules at each tier", facts=[f"k={k1},{k2},{k3}", f"total={total}"], judgment="multiply across tiers to quantify amplification",
