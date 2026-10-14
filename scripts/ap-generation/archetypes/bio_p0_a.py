@@ -86,7 +86,7 @@ def bi_dehydration_count(rng):
     if kind == "peptide":
         stem = f"A ribosome joins {n} amino acids into one linear polypeptide by dehydration synthesis. How many water molecules are released in forming the polypeptide?"
         why_k = f"Each peptide bond forms by dehydration synthesis and releases one water. Joining {n} amino acids in a chain takes {n - 1} bonds, so {n - 1} water molecules are released."
-        pairs = [("Assumes one water is released for every amino acid rather than for every bond.", n), ("Counts one extra bond because the chain has two ends.", n + 1), ("Assumes one water is released for every two amino acids.", n // 2), ("Confuses the number of water molecules with the number of peptide bonds squared minus the monomers.", n - 2)]
+        pairs = [("Assumes one water is released for every amino acid rather than for every bond.", n), ("Counts one extra bond because the chain has two ends.", n + 1), ("Assumes one water is released for every two amino acids.", n // 2), ("Subtracts two because both end amino acids are treated as unbonded.", n - 2)]
     else:
         stem = f"A starch molecule contains {n} glucose units in one unbranched chain. How many water molecules are used when the chain is completely hydrolyzed into individual glucose molecules?"
         why_k = f"Each glycosidic bond is broken by adding one water. A chain of {n} units has {n - 1} bonds, so {n - 1} water molecules are used."
@@ -290,7 +290,7 @@ def bi_sa_v_ratio(rng):
         sa_s = sp.symbols("s", positive=True); sym = (6 * sa_s ** 2) / (sa_s ** 3)
         agree(float(sym.subs(sa_s, s)), SA / V, 1e-9, "ratio")
         wrong = [("Divides volume by surface area instead.", V / SA), ("Uses 6s instead of 6s squared for the surface area.", 6 * s / V), ("Uses the area of one face as the surface area.", s * s / V)]
-        form = f"surface area = 6s² = 6({s})² = {SA} µm² and volume = s³ = {s}³ = {V} µm³"
+        form = f"surface area = 6s² = 6({s})² = {SA:,} µm² and volume = s³ = {s}³ = {V:,} µm³"
     elif shape == "sphere":
         r = pick(rng, [1, 2, 3, 4, 5, 6, 10])
         SA, V = 4 * math.pi * r * r, 4 / 3 * math.pi * r ** 3
@@ -307,9 +307,9 @@ def bi_sa_v_ratio(rng):
         form = f"surface area = 2lh + 2lw + 2wh = {SA} µm² and volume = lwh = {V} µm³"
     ratio = SA / V
     pairs = [(a, b) for a, b in wrong]
-    key, ds = val_opts(ratio, pairs, lambda v: f"${v:.2f}" + "\\text{ µm}^{-1}$", gap=0.02)
+    key, ds = val_opts(ratio, pairs, lambda v: f"${hu(v, 2)}" + "\\text{ µm}^{-1}$", gap=0.02)
     stem = f"What is the surface-area-to-volume ratio of {desc}?"
-    return mk("bi_sa_v_ratio", "2.2", "5.A", stem, key, ds, rng, concept="surface area to volume ratio of a cell from the formula sheet", path="symbolic ratio (sympy) vs direct numeric evaluation of the surface area and volume", facts=[f"shape={shape}", f"SA={SA:.4f}", f"V={V:.4f}"], judgment="select the right formulas from the sheet and divide surface area by volume", kwhy=f"{form[0].upper() + form[1:]}. The ratio is {SA:.4g} / {V:.4g} = {ratio:.2f} per µm.")
+    return mk("bi_sa_v_ratio", "2.2", "5.A", stem, key, ds, rng, concept="surface area to volume ratio of a cell from the formula sheet", path="symbolic ratio (sympy) vs direct numeric evaluation of the surface area and volume", facts=[f"shape={shape}", f"SA={SA:.4f}", f"V={V:.4f}"], judgment="select the right formulas from the sheet and divide surface area by volume", kwhy=f"{form[0].upper() + form[1:]}. The ratio is {SA:,.0f} / {V:,.0f} = {ratio:.2f} per µm.")
 
 
 bi_sa_v_concept = make_bank_archetype("bi_sa_v_concept", "2.2", "1.C", [
@@ -412,7 +412,7 @@ def bi_water_potential(rng):
     psi = -i * C * R_BAR * Tk
     sy = sp.Symbol("x"); agree(float(-sp.Rational(str(i)) * sp.Rational(str(C)) * sp.Rational(str(R_BAR)) * Tk), psi, 1e-9, "psi")
     pairs = [("Omits the ionization constant i, which is 2 for NaCl, and uses i = 1.", -C * R_BAR * Tk if i != 1 else None), ("Uses the temperature in degrees Celsius instead of kelvins.", -i * C * R_BAR * Tc), ("Gives the solute potential a positive sign.", i * C * R_BAR * Tk), ("Multiplies by the pressure constant but forgets the molar concentration.", -i * R_BAR * Tk), ("Uses 0.831 in place of 0.0831 for the pressure constant.", -i * C * 0.831 * Tk)]
-    key, ds = val_opts(psi, pairs, lambda v: f"${v:.2f}" + "\\text{ bars}$", gap=0.03)
+    key, ds = val_opts(psi, pairs, lambda v: f"${hu(v, 2)}" + "\\text{ bars}$", gap=0.03)
     stem = f"A student prepares a {C:g} M solution of {solute} in an open beaker at {Tc} °C. Using the formula sheet equation for solute potential, what is the water potential of the solution? (The ionization constant is {i} for {solute}.)"
     return mk("bi_water_potential", "2.7", "5.A", stem, key, ds, rng, concept="water potential of an open solution equals its solute potential, Psi_S = -iCRT", path="exact rational arithmetic (sympy) vs floating-point evaluation of -iCRT", facts=[f"i={i}", f"C={C}", f"T={Tk}", f"psi={psi:.4f}"], judgment="select the equation, convert temperature to kelvins, and apply the pressure potential of zero in an open container",
               kwhy=f"In an open container the pressure potential is zero, so the water potential equals the solute potential: Ψ = -iCRT = -({i})({C:g})(0.0831)({Tk}) = {psi:.2f} bars.")
@@ -461,7 +461,7 @@ def bi_osmosis_mass_change(rng):
     agree(interp, lsq, 0.03, "iso")
     est = round(interp, 2)
     pairs = [("Reads the molarity with the greatest mass gain instead of the molarity with no change.", ms[int(np.argmax(vals))] if max(vals) > 0 else None), ("Reads the molarity with the greatest mass loss instead of the molarity with no change.", ms[int(np.argmin(vals))]), ("Averages all the molarities tested.", float(np.mean(ms))), ("Uses the midpoint of the two molarities that bracket zero without interpolating.", 0.5 * (ms[i0] + ms[i0 + 1]))]
-    key, ds = val_opts(est, pairs, lambda v: f"${v:.2f}" + "\\text{ M}$", gap=0.04)
+    key, ds = val_opts(est, pairs, lambda v: f"${hu(v, 2)}" + "\\text{ M}$", gap=0.04)
     stim = graph_stim("Percent change in mass of potato cores after 24 hours in sucrose solutions", [("Percent change in mass", [[m, v] for m, v in zip(ms, vals)])], gaxis("Sucrose molarity (M)", 0, 1.0, 0.2), gaxis("Percent change in mass", -30, 30, 10))
     stem = "Identical potato cores were placed in sucrose solutions of different molarities for 24 hours. The graph shows the percent change in mass. Which value is the best estimate of the molarity of sucrose that is isotonic to the potato cells?"
     return mk("bi_osmosis_mass_change", "2.7", "5.A", stem, key, ds, rng, concept="estimate the solute concentration of cells where no net water movement occurs from mass-change data", stim=stim, path="linear interpolation between the two points that bracket zero vs least-squares line x-intercept", facts=[f"iso={iso}", f"vals={vals}", f"est={est}"], judgment="find where the percent change is zero from the plotted data",

@@ -123,7 +123,7 @@ def bis_translation_set(rng):
     from common import Opt as _O
     k1 = _O("-".join(p0), True, f"Translation reads codons in order from the start codon until the stop codon: {'-'.join(p0)}.", None)
     d1 = [_O(t, False, why, None) for t, why in wrong[:3]]
-    q1 = mk("bis_translation_set_q1", "6.4", "5.A", "Which choice shows the amino acid sequence of the polypeptide made from the original mRNA, beginning at the amino terminus? (Use the standard codon table.)", k1, d1, rng, concept="translate an mRNA from the start codon to the stop codon", path="codon-table loop vs translate()", material=MAT_TABLE("original mRNA"), facts=[f"orig={orig}"], est=80)
+    q1 = mk("bis_translation_set_q1", "6.4", "2.D", "Which choice shows the amino acid sequence of the polypeptide made from the original mRNA, beginning at the amino terminus? (Use the standard codon table.)", k1, d1, rng, concept="translate an mRNA from the start codon to the stop codon", path="codon-table loop vs translate()", material=MAT_TABLE("original mRNA"), facts=[f"orig={orig}"], est=80)
     # q2: 돌연변이 1 유형
     kind1 = "missense" if p_mis != p0 else "silent"
     texts = {"missense": "A missense mutation: one amino acid is changed.", "silent": "A silent mutation: the amino acid sequence is unchanged.", "nonsense": "A nonsense mutation: a premature stop codon shortens the polypeptide.", "frameshift": "A frameshift mutation: the reading frame is changed after the mutation."}
@@ -140,7 +140,7 @@ def bis_translation_set(rng):
          ("Both mutations are equally likely to destroy the function, because both change one nucleotide.", "The effects differ because a deletion shifts the reading frame."),
          ("Neither mutation can change the function, because the start codon is unchanged.", "A change after the start codon can still change the protein's amino acid sequence.")])
     q4 = mk("bis_translation_set_q4", "6.7", "6.E", "Which prediction about the effects of the two mutations on the function of the protein is best supported by the data?", k4, d4, rng, concept="compare the likely effects of a substitution and a frameshift", path="number of changed codons in each mutated sequence vs the generating mutation types", material=MAT_TABLE("mutated mRNA"), facts=[f"p_del={p_del}"], est=75)
-    return _set("bis_translation_set", "A researcher compares an original mRNA coding sequence with two mutated sequences of the same gene. The sequences are shown in the table.", stim, [q1, q2, q3, q4], "6.4", "5.A")
+    return _set("bis_translation_set", "A researcher compares an original mRNA coding sequence with two mutated sequences of the same gene. The sequences are shown in the table.", stim, [q1, q2, q3, q4], "6.4", "2.D")
 
 
 def bis_leafdisk_set(rng):
@@ -165,11 +165,11 @@ def bis_leafdisk_set(rng):
         [("More disks floated sooner in dim light than in bright light.", "The table shows more disks floating in bright light at each early time."), ("The same number of disks floated at each time in both light intensities.", "The numbers of floating disks differ between the two light intensities."), ("No disks floated in either light intensity.", "Disks floated in both light intensities.")])
     q1 = mk("bis_leafdisk_set_q1", "3.4", "4.B", "Which statement best describes the data in the table?", k1, d1, rng, concept="describe a comparison of two treatments in a table", path="counts compared at each time vs the generating light effect", material=MAT_TABLE("floating disks"), facts=[f"hi={hi}", f"lo={lo}"], est=55)
     pairs = [("Reports the first time at which at least five disks had floated in bright light.", float(next(t for t, c in zip(ts, hi) if c >= 5))), ("Reports the time at which all ten disks had floated.", float(next((t for t, c in zip(ts, hi) if c >= 10), ts[-1]))), ("Reports the time for the dim light treatment.", e_lo), ("Averages the times at which disks were counted.", float(np.mean(ts)))]
-    k2, d2 = val_opts(e_hi, pairs, lambda v: f"{v:.1f} minutes", gap=0.3)
+    k2, d2 = val_opts(e_hi, pairs, lambda v: f"{hu(v, 1)} minutes", gap=0.3)
     q2 = mk("bis_leafdisk_set_q2", "3.4", "5.A", "Assuming a steady change between measurements, what is the best estimate of the time at which half of the disks had floated in bright light?", k2, d2, rng, concept="median floating time by interpolation", path="exact fraction interpolation vs the generating logistic midpoint", material=MAT_TABLE("floating disks"), facts=[f"e_hi={e_hi:.4f}"], est=75)
     ratio = e_lo / e_hi
     pairs = [("Divides the time for bright light by the time for dim light.", e_hi / e_lo), ("Subtracts the two times instead of dividing one by the other.", e_lo - e_hi), ("Adds the two times instead of dividing one by the other.", e_lo + e_hi), ("Compares the number of disks floating at the last time.", float(hi[-1]) / max(1, lo[-1]))]
-    k3, d3 = val_opts(ratio, pairs, lambda v: f"{v:.1f}", gap=0.12)
+    k3, d3 = val_opts(ratio, pairs, lambda v: f"{hu(v, 1)}", gap=0.12)
     q3 = mk("bis_leafdisk_set_q3", "3.4", "5.A", "Using the times at which half of the disks had floated, the rate of photosynthesis in bright light is how many times the rate in dim light? (Assume that the rate is inversely proportional to the time for half of the disks to float.)", k3, d3, rng, concept="relative rates from times to half floating", path="ratio of interpolated times vs the generating midpoints", material=MAT_TABLE("floating disks"), facts=[f"ratio={ratio:.4f}"], est=90)
     k4, d4 = sentence_options("Disks would float even later than in dim light, because less light energy would drive the light reactions and oxygen production would be slower.", "Less light reduces the output of the light reactions, so less oxygen collects in the disks per minute.",
         [("Disks would float sooner than in bright light, because plants make more oxygen in the dark.", "Photosynthesis needs light and does not make more oxygen in the dark."), ("Disks would float at the same time as in dim light, because light has no effect on oxygen production.", "The data show that light intensity affects the floating time."), ("Disks would float only if carbon dioxide were removed from the solution.", "Removing carbon dioxide would reduce photosynthesis and delay floating.")])

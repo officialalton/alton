@@ -6,6 +6,7 @@
 - 계산기는 4칙·공학용·그래핑 허용(CED p.197)."""
 import re
 import sys
+from decimal import Decimal, ROUND_HALF_UP
 from phys_common import *  # noqa: F401,F403  (sig, Q, TX, pick, forever, agree, rk4, bisect, num_opts, signed_opts, retry_sep, sentence_options, gaxis, graph_stim, ...)
 from common import pack, Opt  # noqa: F401
 from bp import mc_blueprint
@@ -209,3 +210,26 @@ def frac_opts(key_val, pairs):
     if len(ds) < 3:
         raise ValueError("not_enough_separated_distractors")
     return key, ds
+
+
+def hu(v, n=2):
+    """반올림 절반은 위로(0.125 -> 0.13): 오답 설명에 쓰인 값과 선택지 표기가 어긋나지 않게 한다."""
+    q = Decimal(1).scaleb(-n)
+    return str(Decimal(repr(float(v))).quantize(q, rounding=ROUND_HALF_UP))
+
+
+def range_options(sep, ranges_text):
+    """±2SE 범위 비교 문항의 병렬 선택지: 정답과 오답이 같은 형식(결론 + 이유)이고 길이가 비슷하다. ranges_text 는 정답 설명에 쓸 구체적 범위."""
+    if sep:
+        key_t = "The difference is likely real, because the ±2SE ranges do not overlap."
+        key_w = f"{ranges_text} These ranges do not overlap, so the difference is unlikely to be due to chance."
+        wrongs = [("The difference is likely real, because one mean is greater than the other mean.", "A difference between two means is not enough by itself; the ±2SE ranges must be compared, and here they do not overlap."),
+                  ("The difference may be due to chance, because the ±2SE ranges do not overlap.", "Ranges that do not overlap support a real difference, so this reverses the rule for comparing ranges."),
+                  ("The difference cannot be judged, because the table lists no individual measurements.", "The mean and ±2SE values are enough to compare the ranges, so the individual measurements are not needed.")]
+    else:
+        key_t = "The difference may be due to chance, because the ±2SE ranges overlap."
+        key_w = f"{ranges_text} These ranges overlap, so a real difference is not supported."
+        wrongs = [("The difference is likely real, because one mean is greater than the other mean.", "A difference between two means is not enough by itself; the ±2SE ranges overlap, so chance can explain it."),
+                  ("The difference is likely real, because the ±2SE ranges overlap.", "Ranges that overlap mean that chance can explain the difference, so this reverses the rule for comparing ranges."),
+                  ("The difference cannot be judged, because the table lists no individual measurements.", "The mean and ±2SE values are enough to compare the ranges, so the individual measurements are not needed.")]
+    return sentence_options(key_t, key_w, wrongs)

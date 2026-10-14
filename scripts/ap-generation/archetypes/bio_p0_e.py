@@ -8,12 +8,12 @@ bi_design_variable_osmosis = make_bank_archetype("bi_design_variable_osmosis", "
       [("The molarity of the sucrose solution", "Molarity is the independent variable that the student changes."),
        ("The temperature of the room during the 24 hours", "Temperature should be held constant and is a controlled variable."),
        ("The size of the potato cores at the start", "Starting size should be controlled and is not the measured response.")]),
-    B("In the investigation of potato cores in sucrose solutions, the student keeps the temperature, the volume of solution, and the time constant. What is the purpose of keeping these factors constant?",
+    B("A student places equal-sized potato cores in sucrose solutions of five different molarities and measures the percent change in mass of each core after 24 hours. The student keeps the temperature, the volume of solution, and the time the same for all of the cores. What is the purpose of keeping these factors constant?",
       ("To make sure the change in mass is due to the sucrose concentration and not to another factor", "Controlled variables prevent other factors from affecting the dependent variable."),
       [("To make the independent variable change with the time of day", "Controlled factors are kept constant and do not change the independent variable."),
        ("To increase the number of cores that gain mass", "The purpose is to isolate an effect, not to produce a result."),
        ("To ensure that the cores all lose the same percent of mass", "The results should reflect the effect of the variable, not be forced to be equal.")]),
-    B("A student wants to test the hypothesis that potato cells have a lower solute concentration than a 0.6 M sucrose solution. Which result would best support the hypothesis?",
+    B("A student places equal-sized potato cores in sucrose solutions of different molarities for 24 hours and wants to test the hypothesis that potato cells have a lower solute concentration than a 0.6 M sucrose solution. Which result would best support the hypothesis?",
       ("The cores in the 0.6 M solution lose mass.", "Water leaves the cells when the solution has a higher solute concentration than the cells."),
       [("The cores in the 0.6 M solution gain mass.", "Gaining mass shows that the solution has a lower solute concentration than the cells."),
        ("The cores in the 0.6 M solution show no change in mass.", "No change would indicate that the solution is isotonic to the cells."),
@@ -26,12 +26,12 @@ bi_design_variable_enzyme = make_bank_archetype("bi_design_variable_enzyme", "3.
       [("The temperature of the reaction mixture", "Temperature is the independent variable and is changed."),
        ("The volume of oxygen gas produced", "The volume of oxygen is the dependent variable that is measured."),
        ("The time at which each trial is stopped, which should change in each trial", "Time should be the same for all trials.")]),
-    B("In the catalase investigation, which question is best answered by the experiment?",
+    B("A student measures the volume of oxygen gas released in 2 minutes when the enzyme catalase breaks down hydrogen peroxide at 10, 25, 37, and 60 degrees Celsius, using the same amounts of enzyme and hydrogen peroxide each time. Which question is best answered by this experiment?",
       ("How does temperature affect the rate of the reaction catalyzed by catalase?", "The question links one manipulated variable to a measured response."),
       [("Why does catalase exist in cells?", "This question cannot be tested with the data collected."),
        ("What is the best temperature for living organisms?", "The investigation does not address organisms as a whole."),
        ("Does catalase change the structure of hydrogen peroxide permanently?", "The experiment does not measure the structure of hydrogen peroxide.")]),
-    B("A student predicts that the rate of the catalase reaction will be lowest at 60 degrees Celsius. Which statement is the best justification for this prediction?",
+    B("A student measures the rate at which catalase breaks down hydrogen peroxide at 10, 25, 37, and 60 degrees Celsius and predicts that the rate will be lowest at 60 degrees Celsius. Which statement is the best justification for this prediction?",
       ("High temperature can change the shape of the enzyme, which reduces binding of the substrate.", "Denaturation at high temperature reduces enzyme activity."),
       [("High temperature increases the activation energy of the reaction.", "Enzymes lower the activation energy, and heat does not raise it in this way."),
        ("High temperature removes the substrate from the solution.", "Temperature does not remove hydrogen peroxide by itself."),
@@ -166,7 +166,7 @@ bi_control_choice_membrane = make_bank_archetype("bi_control_choice_membrane", "
       [("Starch molecules are small enough to pass through the membrane, but glucose molecules are not.", "The beaker tested positive for glucose, which means glucose crossed the membrane."),
        ("Neither starch nor glucose can pass through the membrane.", "Glucose was detected outside the tubing."),
        ("Both starch and glucose crossed the membrane because the membrane is not selective.", "Starch was not detected outside the tubing.")]),
-    B("In the dialysis tubing investigation, which additional setup would serve as the best control?",
+    B("A student places dialysis tubing, a selectively permeable membrane, filled with a starch and glucose solution in a beaker of water and tests the water in the beaker for starch and glucose after an hour. Which additional setup would serve as the best control?",
       ("A tubing filled with water only and placed in a beaker of water, tested in the same way", "A control with water inside shows whether the tests give a result without the solutes."),
       [("A tubing filled with a more concentrated starch and glucose solution placed in the same beaker", "A different concentration tests another variable."),
        ("A beaker with starch and glucose but no tubing", "Without the tubing the movement across the membrane cannot be tested."),
@@ -192,7 +192,7 @@ bi_new_investigation_cellsize = make_bank_archetype("bi_new_investigation_cellsi
       [("Soak the cubes for a different amount of time and measure the color only on the surface.", "This does not compare the efficiency of exchange with size."),
        ("Compare the mass of the cubes before they are soaked.", "Mass before soaking does not test exchange efficiency."),
        ("Replace the dye with a different dye and keep a single cube size.", "A single cube size cannot test the effect of size.")]),
-    B("In the agar-cube model of cells, a student finds that the dye reaches the center of the small cubes but not the center of the large cubes in the same time. Which conclusion is best supported?",
+    B("A student models cells with agar cubes of different sizes soaked in a dye for the same amount of time. The dye reaches the center of the small cubes but not the center of the large cubes. Which conclusion is best supported?",
       ("Diffusion is less efficient at supplying the interior of larger cubes, which supports a limit to cell size.", "Larger blocks have a smaller surface-area-to-volume ratio and a longer diffusion distance."),
       [("Larger cubes have a larger surface-area-to-volume ratio, so they are exchanged more efficiently.", "Larger cubes have a smaller ratio."),
        ("The dye affects the cubes by making them smaller.", "The data are about the distance the dye travels, not about the dye changing the cubes."),
@@ -222,16 +222,7 @@ def bi_error_bars_overlap(rng):
     rows = [[levels[i], f"{means[i]:.1f} ± {2 * se[i]:.2f}"] for i in range(3)]
     stim = tbl(f"Mean {meas} ({unit}) ± 2SE for three treatments, n = {n} for each treatment", ["Treatment", f"Mean ± 2SE ({unit})"], rows)
     stem = f"The table shows the mean {meas} with the range of ±2SE for three treatments. Which statement about the difference between the {levels[a]} treatment and the {levels[b]} treatment is best supported by the data?"
-    if tgt == "sep":
-        key, ds = sentence_options(f"The difference is likely real, because the ±2SE ranges of the two treatments do not overlap.", f"The ranges are {means[a] - 2 * se[a]:.2f} to {means[a] + 2 * se[a]:.2f} and {means[b] - 2 * se[b]:.2f} to {means[b] + 2 * se[b]:.2f}, which do not overlap, so the difference is unlikely to be due to chance.",
-            [("The difference is not real, because the means are different values.", "Different means alone do not show a real difference; the ranges must be compared."),
-             ("The difference cannot be assessed, because the table gives only the means.", "The ±2SE values allow the ranges to be compared."),
-             ("The difference is likely due to chance, because both treatments have a nonzero standard error.", "A nonzero standard error does not by itself indicate that a difference is due to chance.")])
-    else:
-        key, ds = sentence_options("The difference may be due to chance, because the ±2SE ranges of the two treatments overlap.", f"The ranges are {means[a] - 2 * se[a]:.2f} to {means[a] + 2 * se[a]:.2f} and {means[b] - 2 * se[b]:.2f} to {means[b] + 2 * se[b]:.2f}, which overlap, so a real difference is not supported.",
-            [("The difference is real, because the means are different values.", "Different means alone do not show a real difference; overlapping ranges may reflect chance."),
-             ("The difference is real, because the standard errors are small.", "Small standard errors do not show a difference when the ranges overlap."),
-             ("The difference cannot be assessed, because the table gives only the means.", "The ±2SE values allow the ranges to be compared.")])
+    key, ds = range_options(tgt == "sep", f"The ranges are {means[a] - 2 * se[a]:.2f} to {means[a] + 2 * se[a]:.2f} and {means[b] - 2 * se[b]:.2f} to {means[b] + 2 * se[b]:.2f}.")
     return mk("bi_error_bars_overlap", "3.2", "5.B", stem, key, ds, rng, concept="use ±2SE ranges to judge whether a difference is supported", stim=stim, path="interval overlap computed from the displayed mean and 2SE vs the generating means and standard errors", facts=[f"means={means}", f"se={se}", f"pair={pr}"], judgment="compare the ranges, not only the means", est=75)
 
 
@@ -244,7 +235,7 @@ def bi_se_calc(rng):
     se2 = float(sp.N(sp.Rational(str(s)) / sp.sqrt(n)))
     agree(se, se2, 1e-9, "se")
     pairs = [("Divides the standard deviation by n instead of the square root of n.", s / n), ("Multiplies the standard deviation by the square root of n.", s * math.sqrt(n)), ("Divides n by the standard deviation.", n / s), ("Uses the square of the standard deviation divided by the square root of n.", s * s / math.sqrt(n))]
-    key, ds = val_opts(se, pairs, lambda v: f"{v:.2f}", gap=0.03)
+    key, ds = val_opts(se, pairs, lambda v: f"{hu(v, 2)}", gap=0.03)
     stem = f"A student measures the height of {n} seedlings. The sample standard deviation is {s:g} cm. Using the equation on the formula sheet, what is the standard error of the mean?"
     return mk("bi_se_calc", "8.1", "5.A", stem, key, ds, rng, concept="standard error of the mean SE = s / sqrt(n)", path="s / sqrt(n) computed numerically vs exact symbolic evaluation", facts=[f"s={s}", f"n={n}", f"se={se:.4f}"], judgment="apply the standard error formula", kwhy=f"SE = s / √n = {s:g} / √{n} = {s:g} / {math.sqrt(n):g} = {se:.2f} cm.")
 
@@ -257,7 +248,7 @@ def bi_mean_calc(rng):
     agree(m, float(np.mean(vals)), 1e-9, "mean")
     med = float(np.median(vals)); rngv = max(vals) - min(vals)
     pairs = [("Reports the median instead of the mean.", med), ("Reports the range instead of the mean.", rngv), ("Divides the sum by one less than the number of values.", sum(vals) / (k - 1)), ("Reports the sum of the values.", sum(vals))]
-    key, ds = val_opts(m, pairs, lambda v: f"{v:.1f}", gap=0.2)
+    key, ds = val_opts(m, pairs, lambda v: f"{hu(v, 1)}", gap=0.2)
     stem = f"A student measured the length of {k} leaves, in centimeters: " + ", ".join(f"{v:g}" for v in vals) + ". What is the mean length of the leaves?"
     return mk("bi_mean_calc", "8.1", "5.A", stem, key, ds, rng, concept="mean of a small data set", path="sum divided by count vs numpy.mean", facts=[f"vals={vals}"], judgment="apply the definition of the mean", kwhy=f"The mean is the sum of the values divided by the number of values: {sum(vals):.1f} / {k} = {m:.1f} cm.")
 
@@ -268,16 +259,7 @@ def bi_ci_interpretation(rng):
     m2 = m1 + d; se2 = round(pick(rng, [0.6, 0.8, 1.0]), 1)
     sep = (m2 - 2 * se2) > (m1 + 2 * se1)
     stim = tbl("Mean number of seeds produced per plant ± 2SE in two populations of the same species", ["Population", "Mean seeds per plant ± 2SE", "Plants measured"], [["Population 1 (shaded site)", f"{m1} ± {2 * se1:.1f}", n], ["Population 2 (sunny site)", f"{m2} ± {2 * se2:.1f}", n]])
-    if sep:
-        key, ds = sentence_options(f"The difference in the means is likely not due to chance, because the ranges do not overlap.", f"The ranges are {m1 - 2 * se1:.1f} to {m1 + 2 * se1:.1f} and {m2 - 2 * se2:.1f} to {m2 + 2 * se2:.1f}, which do not overlap.",
-            [("The difference is due to chance, because the plants were not all measured at the same time.", "Nothing in the table suggests that the plants were measured at different times."),
-             ("The data show that sunlight causes the difference, because the populations are in different sites.", "The sites differ in more than one way, so a causal claim is not supported."),
-             ("The difference cannot be assessed because the sample sizes are the same.", "Equal sample sizes do not prevent assessing the difference.")])
-    else:
-        key, ds = sentence_options("The difference in the means may be due to chance, because the ranges overlap.", f"The ranges are {m1 - 2 * se1:.1f} to {m1 + 2 * se1:.1f} and {m2 - 2 * se2:.1f} to {m2 + 2 * se2:.1f}, which overlap, so the difference is not clearly real.",
-            [("The difference is real, because Population 2 has a higher mean than Population 1.", "A higher mean does not show a real difference when the ranges overlap."),
-             ("The data show that sunlight causes the difference, because the populations are in different sites.", "The sites differ in more than one way, so a causal claim is not supported."),
-             ("The difference cannot be assessed because the sample sizes are the same.", "Equal sample sizes do not prevent assessing the difference.")])
+    key, ds = range_options(sep, f"The ranges are {m1 - 2 * se1:.1f} to {m1 + 2 * se1:.1f} and {m2 - 2 * se2:.1f} to {m2 + 2 * se2:.1f}.")
     stem = "The table shows the mean number of seeds produced per plant in two populations of the same species, with the ±2SE range. Which statement is best supported by the data?"
     return mk("bi_ci_interpretation", "8.4", "5.B", stem, key, ds, rng, concept="interpret ±2SE ranges without over-claiming causation", stim=stim, path="range overlap computed from the table values vs the generating means and SE", facts=[f"m1={m1}", f"m2={m2}", f"se={se1},{se2}", f"sep={sep}"], judgment="decide from the ranges whether a difference is supported, and avoid causal claims from correlation", est=75)
 

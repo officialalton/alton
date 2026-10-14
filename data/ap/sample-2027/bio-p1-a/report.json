@@ -1,0 +1,47 @@
+{
+ "run": "bio-p1-a",
+ "subject": "ap_biology",
+ "generatedAt": "2026-10-14T07:31:16.017Z",
+ "totalCostUsd": 1.63,
+ "newSpendSinceBaseline": 2.3,
+ "cap": 3,
+ "calls": 144,
+ "candidates": 48,
+ "mcCandidates": 48,
+ "frqCandidates": 0,
+ "passedAll": 20,
+ "adopted": 15,
+ "mcAdopted": 15,
+ "frqAdopted": 0,
+ "reserve": 5,
+ "yield": 0.313,
+ "costPerAdopted": 0.109,
+ "callsPerAdopted": 9.6,
+ "duplicateRejected": 1,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 48
+ },
+ "rejectionReasons": {
+  "criterion_failed_distractor_explanation": 20,
+  "criterion_failed_scope_skill": 5,
+  "solver_disagrees": 1,
+  "criterion_failed_key_scoring": 1,
+  "criterion_failed_exam_suitability": 7,
+  "instant_reject_wrong_key": 1,
+  "reference_pattern_mismatch": 6,
+  "duplicate_gate_near_duplicate": 1,
+  "criterion_failed_stimulus_expression": 4,
+  "instant_reject_missing_condition": 2,
+  "set_item_N": 28
+ },
+ "unfilledCells": [
+  "ap_biology-m04",
+  "ap_biology-m13",
+  "ap_biology-m15",
+  "ap_biology-m19",
+  "ap_biology-m20",
+  "ap_biology-m21"
+ ]
+}

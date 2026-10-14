@@ -286,9 +286,9 @@ class TestFrq(unittest.TestCase):
                 self.assertAlmostEqual(m, x, places=1)
             ev = next(e for e in p["expected_values"] if e["quantity"] == "percent change")
             if n.startswith("bif_q6_"):
-                best = max(((abs(ms[i][0] - ms[j][0]), i, j) for i in range(3) for j in range(i + 1, 3)))
-                _, i, j = best
-                pct = (ms[j][0] - ms[i][0]) / abs(ms[i][0]) * 100
+                top = max(range(3), key=lambda k: ms[k][0])
+                j = max((k for k in range(3) if k != top), key=lambda k: abs(ms[top][0] - ms[k][0]))
+                pct = (ms[j][0] - ms[top][0]) / abs(ms[top][0]) * 100
             else:
                 pct = (ms[-1][0] - ms[0][0]) / ms[0][0] * 100
             self.assertAlmostEqual(pct, ev["value"], delta=0.1)

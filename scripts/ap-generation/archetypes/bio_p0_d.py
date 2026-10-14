@@ -34,7 +34,7 @@ def bi_selection_type(rng):
     elif kind == "stabilizing":
         after = [40 * g(x, mu, 0.55) for x in xs]
     else:
-        after = [20 * g(x, 3.7, 0.65) + 20 * g(x, 6.3, 0.65) for x in xs]
+        after = [20 * g(x, 2.5, 0.8) + 20 * g(x, 7.5, 0.8) for x in xs]
     ya = np.array(after); yb = np.array(before)
     # 독립 경로: 평균·표준편차·봉우리 수로 분류
     def stats(y):
@@ -43,12 +43,21 @@ def bi_selection_type(rng):
     mb, sb, pb = stats(yb); ma, sa, pa = stats(ya)
     cls = "disruptive" if pa >= 2 else ("directional" if abs(ma - mb) > 0.5 else ("stabilizing" if sa < sb * 0.8 else "?"))
     agree(0, 0 if cls == kind else 1, 1e-9, "type")
+    pk = xs[int(np.argmax(ya))]
     ymax = math.ceil(max(max(before), max(after)) / 5 + 1) * 5
     stim = graph_stim("Distribution of a trait in a population before and after selection", [("Before selection", [[x, round(y, 2)] for x, y in zip(xs, before)]), ("After selection", [[x, round(y, 2)] for x, y in zip(xs, after)])], gaxis("Value of the trait (arbitrary units)", 0, 10, 2), gaxis("Percent of population", 0, ymax, 5))
-    texts = {"directional": ("Directional selection, because the average value of the trait shifted toward one extreme.", "The distribution moved in one direction, so one extreme phenotype was favored."), "stabilizing": ("Stabilizing selection, because individuals with intermediate values were favored.", "The distribution became narrower around the same average, so extremes were selected against."), "disruptive": ("Disruptive selection, because both extreme values of the trait were favored.", "The distribution now has two peaks at the extremes and fewer intermediates.")}
-    wrongs = [(texts[k][0], {"directional": "A directional shift would move the entire distribution toward one extreme; the graph does not show that.", "stabilizing": "Stabilizing selection would narrow the distribution around the mean; the graph does not show that.", "disruptive": "Disruptive selection would produce two peaks at the extremes; the graph does not show that."}[k]) for k in texts if k != kind]
+    texts = {"directional": ("Directional selection, because the whole distribution shifted toward one end of the range.", f"The most common value moved from about 5 before selection to about {pk:g} after selection, so one end of the range was favored."),
+             "stabilizing": ("Stabilizing selection, because individuals near the middle of the range were favored.", "The distribution is narrower after selection and still centered near 5, so extreme values were selected against."),
+             "disruptive": ("Disruptive selection, because individuals at both ends of the range were favored over intermediate ones.", "After selection there are two peaks, near 2.5 and 7.5, and values near 5 have become rare.")}
+    why = {("directional", "stabilizing"): f"After selection the distribution has not become narrower around 5; its peak has moved to about {pk:g}.",
+           ("directional", "disruptive"): "After selection there is still a single peak, not two peaks near the two ends of the range.",
+           ("stabilizing", "directional"): "The most common value stays near 5 after selection, so the distribution did not shift toward one end.",
+           ("stabilizing", "disruptive"): "After selection there is one narrow peak near 5, not two peaks near the two ends of the range.",
+           ("disruptive", "directional"): "The distribution did not move as a whole; it split into two peaks near 2.5 and 7.5.",
+           ("disruptive", "stabilizing"): "Stabilizing selection would leave one narrower peak near 5, but values near 5 have become rare."}
+    wrongs = [(texts[k][0], why[(kind, k)]) for k in texts if k != kind]
     key, ds = sentence_options(texts[kind][0], texts[kind][1], wrongs)
-    ds.append(Opt("No selection occurred, because the trait still varies after selection.", False, "Selection can change the shape or position of the distribution while variation remains.", None))
+    ds.append(Opt("No selection occurred, because the trait still varies after selection.", False, "Selection can change the position or the shape of the distribution while variation remains.", None))
     stem = "The graph shows the distribution of a heritable trait in a population before selection and after one generation of selection. Which type of selection is most consistent with the graph?"
     return mk("bi_selection_type", "7.2", "2.A", stem, key, ds, rng, concept="identify directional, stabilizing, or disruptive selection from distributions", stim=stim, path="mean, standard deviation, and peak count of the plotted series vs the generating kind", facts=[f"kind={kind}"], judgment="compare the position, width, and number of peaks of two distributions")
 
@@ -87,7 +96,7 @@ def bi_fitness_allele_change(rng):
     agree(alleles.count("a") / len(alleles), q_after, 1e-9, "q")
     q_before = (nAa + 2 * naa) / (2 * (nAA + nAa + naa))
     pairs = [("Reports the frequency of the allele before selection.", q_before), ("Counts the proportion of homozygous recessive individuals instead of the allele frequency.", saa / tot), ("Counts each heterozygote as having one allele a for the whole genotype but divides by the number of individuals.", (sAa + saa) / tot), ("Reports the frequency of the dominant allele instead of the recessive allele.", p_after)]
-    key, ds = val_opts(q_after, pairs, lambda v: f"{v:.2f}", gap=0.02)
+    key, ds = val_opts(q_after, pairs, lambda v: f"{hu(v, 2)}", gap=0.02)
     stim = tbl("Number of individuals of each genotype at birth and surviving to reproduce", ["Genotype", "Number at birth", "Number surviving to reproduce"], [["AA", nAA, sAA], ["Aa", nAa, sAa], ["aa", naa, saa]])
     stem = "The table shows the number of individuals of each genotype in a population at birth and the number that survived to reproduce. Which value is the frequency of allele a among the individuals that survived?"
     return mk("bi_fitness_allele_change", "7.4", "5.A", stem, key, ds, rng, concept="allele frequency among survivors after selection", stim=stim, path="allele list built from every surviving individual vs the closed form (Aa + 2 aa) / (2 N)", facts=[f"survivors={sAA},{sAa},{saa}", f"q={q_after:.4f}"], judgment="count alleles, not individuals, among the survivors",
@@ -118,7 +127,7 @@ def bi_hw_allele_freq(rng):
         stem = f"A recessive genetic disorder affects {int(q2 * 100)}% of the individuals in a large population that is in Hardy-Weinberg equilibrium. What proportion of the population is expected to be homozygous dominant?"
         pairs = [("Reports the frequency of the dominant allele, p, instead of p squared.", p), ("Reports the carrier frequency.", 2 * p * q), ("Subtracts the affected proportion from 1, which includes the carriers.", 1 - q2), ("Reports the frequency of the recessive allele.", q)]
         kw = f"q^2 = {q2:g}, so q = {q:.2f} and p = {p:.2f}. The homozygous dominant proportion is p^2 = {val:.2f}."
-    key, ds = val_opts(val, pairs, lambda v: f"{v:.2f}", gap=0.02)
+    key, ds = val_opts(val, pairs, lambda v: f"{hu(v, 2)}", gap=0.02)
     return mk("bi_hw_allele_freq", "7.5", "5.A", stem, key, ds, rng, concept="Hardy-Weinberg: derive allele and genotype frequencies from the recessive phenotype", path="symbolic solution of p^2 + 2pq + q^2 = 1 vs square roots from the phenotype frequency", facts=[f"q2={q2}", f"variant={variant}"], judgment="work from the frequency of the recessive phenotype to q, then to p and the genotype frequencies", kwhy=kw)
 
 
@@ -134,7 +143,7 @@ def bi_hw_expected_counts(rng):
     agree(float(exp_counts[target]), val, 1e-9, "count")
     pairs = [("Uses p squared for every genotype.", p * p * N), ("Uses q squared for every genotype.", q * q * N), ("Uses 2pq without multiplying by the population size.", 2 * p * q), ("Uses 2p times q squared as the frequency of every genotype.", 2 * p * q * q * N), ("Uses the allele frequency times the population size.", p * N), ("Uses p times q without the factor of 2.", p * q * N)]
     pairs = [(w, v) for w, v in pairs if abs(v - val) > 1e-9]
-    key, ds = val_opts(val, pairs, lambda v: f"{v:,.0f}" if v >= 1 else f"{v:.2f}", gap=1, rel=0.05)
+    key, ds = val_opts(val, pairs, lambda v: f"{v:,.0f}" if v >= 1 else f"{hu(v, 2)}", gap=1, rel=0.05)
     stem = f"In a population of {N} individuals that is in Hardy-Weinberg equilibrium for one gene with two alleles, the frequency of the dominant allele A is {p:g}. How many individuals are expected to be {target}?"
     return mk("bi_hw_expected_counts", "7.5", "5.A", stem, key, ds, rng, concept="expected genotype counts under Hardy-Weinberg equilibrium", path="N x genotype frequency from p, q vs binomial expansion with exact fractions", facts=[f"p={p}", f"N={N}", f"target={target}"], judgment="select the right Hardy-Weinberg term for the genotype and scale it by the population size",
               kwhy=f"With p = {p:g} and q = {q:g}, the expected frequency of {target} individuals is {'2pq' if target == 'heterozygous' else ('q^2' if 'recessive' in target else 'p^2')} = {frac:.3f}. Multiplying by {N} gives {val:,.0f} individuals.")
@@ -189,14 +198,10 @@ def bi_phylo_characters(rng):
     best = max(share, key=lambda k: share[k])
     agree(0, 0 if best == tuple(sorted([X, Y])) and list(share.values()).count(share[best]) == 1 else 1, 1e-9, "best")
     key = Opt(f"Taxa {best[0]} and {best[1]}, because they share the most derived characters", True, f"Taxa {best[0]} and {best[1]} share characters 1, 2, and 3, more shared derived characters than any other pair, which indicates the most recent common ancestor.", None)
-    ds = []
-    others = sorted(share.items(), key=lambda kv: -kv[1])
-    for (a, b), n in others:
-        if (a, b) == best:
-            continue
-        if len(ds) == 3:
-            break
-        ds.append(Opt(f"Taxa {a} and {b}, because they share derived characters", False, f"Taxa {a} and {b} share only {n} derived character{'s' if n != 1 else ''}, fewer than the most closely related pair.", None))
+    pr2 = lambda a_, b_: " and ".join(sorted([a_, b_]))  # noqa: E731
+    ds = [Opt(f"Taxa {pr2(W, Z)}, because they both have character 1", False, "Character 1 is present in every taxon of the ingroup, so sharing it gives no information about which pair is most closely related.", None),
+          Opt(f"Taxa {pr2(Y, W)}, because taxon {Y} has the most characters", False, f"Taxon {Y} has the most characters because of character 4, which no other taxon has; a character found in only one taxon does not show a relationship.", None),
+          Opt(f"Taxa {pr2(X, Z)}, because they share characters 1 and 2", False, f"Taxa {X} and {Z} share only characters 1 and 2, while the best pair also shares character 3, so they are less closely related.", None)]
     rows = sorted([[t] + ["+" if v else "-" for v in has[t]] for t in has], key=lambda r: (r[0] != "Outgroup", r[0]))
     stim = tbl("Presence (+) or absence (-) of derived characters in four taxa and an outgroup", ["Taxon"] + chars, rows)
     stem = "The table shows which of four derived characters are present in four taxa and in an outgroup. Which two taxa are most closely related?"
@@ -405,7 +410,7 @@ def bi_pop_growth_calc(rng):
         pop += B_; pop -= D
         agree(pop - N, val, 1e-9, "dN")
         pairs = [("Adds the number of births and deaths instead of subtracting.", B_ + D), ("Divides the births by the deaths.", B_ / D), ("Reports only the number of births.", B_), ("Divides the net change by the population size.", (B_ - D) / N)]
-        key, ds = val_opts(val, pairs, lambda v: f"{v:g}" if v >= 1 else f"{v:.3f}", gap=0.002, rel=0.08)
+        key, ds = val_opts(val, pairs, lambda v: f"{v:g}" if v >= 1 else f"{hu(v, 3)}", gap=0.002, rel=0.08)
         stem = f"A population of {N:,} deer has {B_} births and {D} deaths in one year. Using the equation dN/dt = B - D, how many individuals does the population gain per year?"
         kw = f"dN/dt = B - D = {B_} - {D} = {val} individuals per year."
     else:
@@ -413,7 +418,7 @@ def bi_pop_growth_calc(rng):
         pop = N + B_ - D
         agree((pop - N) / N, val, 1e-9, "r")
         pairs = [("Reports the net change without dividing by the population size.", B_ - D), ("Divides the births alone by the population size.", B_ / N), ("Divides the deaths alone by the population size.", D / N), ("Adds the birth and death rates instead of subtracting.", (B_ + D) / N)]
-        key, ds = val_opts(val, pairs, lambda v: f"{v:.3f}" if v < 1 else f"{v:g}", gap=0.002, rel=0.08)
+        key, ds = val_opts(val, pairs, lambda v: f"{hu(v, 3)}" if v < 1 else f"{v:g}", gap=0.002, rel=0.08)
         stem = f"A population of {N:,} deer has {B_} births and {D} deaths in one year. What is the per capita growth rate of the population per year?"
         kw = f"The net change is B - D = {B_} - {D} = {B_ - D} per year. Divided by the population size, the per capita rate is {B_ - D}/{N:,} = {val:.3f} per individual per year."
     return mk("bi_pop_growth_calc", "8.3", "5.A", stem, key, ds, rng, concept="population growth rate from births and deaths", path="simulated yearly update of the population vs dN/dt = B - D", facts=[f"N={N}", f"B={B_}", f"D={D}", f"variant={variant}"], judgment="use the net change, and divide by population size for a per capita rate", kwhy=kw)
@@ -427,7 +432,7 @@ def bi_exp_growth(rng):
     num_ = (N * math.exp(r * h) - N) / h
     agree(num_, val, 1e-4, "dNdt")
     pairs = [("Divides the population size by the growth rate.", N / r), ("Adds the growth rate to the population size.", N + r), ("Multiplies the population size by one plus the growth rate.", N * (1 + r)), ("Divides the growth rate by the population size.", r / N), ("Uses the square of the population size.", r * N * N)]
-    key, ds = val_opts(val, pairs, lambda v: f"{v:,.0f}" if v >= 10 else f"{v:.3f}", gap=0.002, rel=0.08)
+    key, ds = val_opts(val, pairs, lambda v: f"{v:,.0f}" if v >= 10 else f"{hu(v, 3)}", gap=0.002, rel=0.08)
     stem = f"A population of bacteria with {N:,} cells is growing exponentially with a maximum per capita growth rate of {r} per hour. Using the equation dN/dt = r_max N, what is the population growth rate at this moment, in cells per hour?"
     return mk("bi_exp_growth", "8.3", "5.A", stem, key, ds, rng, concept="exponential growth rate dN/dt = r_max N", path="direct product vs a numerical derivative of N(t) = N0 exp(rt)", facts=[f"N={N}", f"r={r}", f"dNdt={val}"], judgment="apply the exponential growth equation", kwhy=f"dN/dt = r_max N = ({r})({N:,}) = {val:,.2f} cells per hour.")
 
@@ -441,7 +446,7 @@ def bi_logistic(rng):
     Nt = lambda t: K / (1 + A * math.exp(-r * t))  # noqa: E731
     num_ = (Nt(h) - Nt(0)) / h
     agree(num_, val, 1e-4, "dNdt")
-    pairs = [("Ignores the effect of the carrying capacity and uses exponential growth.", r * N), ("Uses (K - N) in place of the fraction (K - N)/K.", r * (K - N)), ("Uses N/K in place of (K - N)/K.", r * N * N / K), ("Reports the carrying capacity minus the population size.", K - N), ("Multiplies by (K + N)/K instead of by (K - N)/K.", r * N * (K + N) / K)]
+    pairs = [("Ignores the effect of the carrying capacity and uses exponential growth.", r * N), ("Leaves out the division by K, using r N (K - N) in place of r N (K - N)/K.", r * N * (K - N)), ("Uses N/K in place of (K - N)/K, so the term grows as the population approaches K.", r * N * N / K), ("Reports the carrying capacity minus the population size.", K - N), ("Multiplies by (K + N)/K instead of by (K - N)/K.", r * N * (K + N) / K)]
     key, ds = val_opts(val, pairs, lambda v: f"{v:,.0f}", gap=1, rel=0.08)
     stem = f"A population of {N:,} individuals lives in an environment with a carrying capacity (K) of {K:,}. The maximum per capita growth rate is {r} per year. Using the logistic growth equation dN/dt = r_max N (K - N)/K, what is the population growth rate, in individuals per year?"
     return mk("bi_logistic", "8.4", "5.A", stem, key, ds, rng, concept="logistic growth rate with the carrying-capacity term", path="formula evaluation vs numerical derivative of the closed-form logistic solution", facts=[f"K={K}", f"N={N}", f"r={r}", f"val={val}"], judgment="include the (K - N)/K term for density dependence", kwhy=f"dN/dt = r_max N (K - N)/K = ({r})({N:,})({K - N:,}/{K:,}) = {val:,.0f} individuals per year.")
@@ -503,7 +508,7 @@ def bi_trophic_energy(rng):
     val = E * 0.1 ** (level - 1)
     agree(cur, val, 1e-9, "E")
     pairs = [("Counts one extra trophic transfer, applying 10 percent once too many times.", E * 0.1 ** level), ("Counts one fewer trophic transfer, applying 10 percent once too few times.", E * 0.1 ** (level - 2)), ("Applies 10 percent only once, regardless of the trophic level.", E * 0.1), ("Divides the energy of the producers by the number of trophic levels.", E / level)]
-    key, ds = val_opts(val, pairs, lambda v: f"{v:,.0f} kcal" if v >= 1 else f"{v:.2f} kcal", gap=0.05, rel=0.08)
+    key, ds = val_opts(val, pairs, lambda v: f"{v:,.0f} kcal" if v >= 1 else f"{hu(v, 2)} kcal", gap=0.05, rel=0.08)
     stem = f"The producers in an ecosystem fix {E:,} kcal of energy. Assuming that 10 percent of the energy is transferred from each trophic level to the next, how much energy is available to the {names[level]}?"
     return mk("bi_trophic_energy", "8.2", "5.A", stem, key, ds, rng, concept="10 percent energy transfer between trophic levels", path="repeated multiplication by 0.1 per trophic transfer vs E x 0.1^(level - 1)", facts=[f"E={E}", f"level={level}"], judgment="count the transfers between the producer level and the consumer level", kwhy=f"The {names[level]} are {level - 1} transfers above the producers, so the energy is {E:,} x 0.1^{level - 1} = {val:,.0f} kcal.")
 
@@ -535,8 +540,8 @@ def bi_simpson(rng):
     D = 1 - sum((n / N) ** 2 for n in counts)
     D2 = float(1 - sum(Fr(n, N) ** 2 for n in counts))
     agree(D, D2, 1e-9, "D")
-    pairs = [("Reports the sum of the squared proportions without subtracting from 1.", 1 - D), ("Uses only the proportion of the most abundant species in the formula.", 1 - (counts[0] / N) ** 2), ("Divides the number of species by the number of individuals.", S / N), ("Uses the proportions without squaring them, which makes the index zero or negative.", None), ("Squares the sum of the proportions of the two most abundant species.", 1 - ((counts[0] + counts[1]) / N) ** 2)]
-    key, ds = val_opts(D, [(w, v) for w, v in pairs if v is not None], lambda v: f"{v:.2f}", gap=0.03)
+    pairs = [(f"Reports the sum of the squared proportions, Σ(n/N)² = {1 - D:.2f}, without subtracting it from 1.", 1 - D), (f"Uses only the most abundant species: 1 − ({counts[0]}/{N})² = {1 - (counts[0] / N) ** 2:.2f}.", 1 - (counts[0] / N) ** 2), (f"Divides the number of species by the number of individuals: {S}/{N} = {S / N:.2f}.", S / N), (f"Squares the combined proportion of the two most abundant species: 1 − (({counts[0]} + {counts[1]})/{N})² = {1 - ((counts[0] + counts[1]) / N) ** 2:.2f}.", 1 - ((counts[0] + counts[1]) / N) ** 2)]
+    key, ds = val_opts(D, [(w, v) for w, v in pairs if v is not None], lambda v: f"{hu(v, 2)}", gap=0.03)
     names = ["Species P", "Species Q", "Species R", "Species S"][:S]
     stim = tbl("Number of individuals of each species in a sampled community", ["Species", "Number of individuals"], [[n, c] for n, c in zip(names, counts)], notes=[f"Total individuals: {N}"])
     stem = "The table shows the number of individuals of each species in a community. Using the formula for Simpson's diversity index, which value is the diversity index for this community?"
@@ -677,10 +682,10 @@ def bi_community_interaction(rng):
 
 @retry_sep
 def bi_predator_prey_graph(rng):
-    a, b, c, d = 0.6, 0.02, 0.5, 0.01
+    a, b, c, d = 0.35, 0.012, 0.3, 0.006
     x0 = pick(rng, [60, 70, 80]); y0 = pick(rng, [15, 20, 25])
     f = lambda t, s: np.array([a * s[0] - b * s[0] * s[1], -c * s[1] + d * s[0] * s[1]])  # noqa: E731
-    ts = np.linspace(0, 40, 161); out = []
+    ts = np.linspace(0, 60, 241); out = []
     s = np.array([x0, y0], float); h = ts[1] - ts[0]
     for _ in ts:
         out.append(s.copy())
@@ -708,11 +713,11 @@ def bi_predator_prey_graph(rng):
     first = pick(rng, ["A", "B"])
     names = {"prey": "Population " + first, "pred": "Population " + ("B" if first == "A" else "A")}
     curves = sorted([(names["prey"].replace("Population ", ""), [[round(float(t), 2), round(float(v), 1)] for t, v in zip(ts[::2], out[::2, 0])]), (names["pred"].replace("Population ", ""), [[round(float(t), 2), round(float(v), 1)] for t, v in zip(ts[::2], out[::2, 1])])], key=lambda cv: cv[0])
-    key, ds = sentence_options(f"{names['pred']} is the predator, because its population peaks after {names['prey']} peaks.", f"{names['pred']} peaks at about {tq:.0f} time units, after {names['prey']} peaks at about {tp:.0f}, which is expected when predator numbers increase after their food supply grows.",
+    key, ds = sentence_options(f"{names['pred']} is the predator, because its population peaks after {names['prey']} peaks.", f"{names['pred']} first peaks at about {tq:.1f} time units, after {names['prey']} first peaks at about {tp:.1f}, which is expected when predator numbers increase after their food supply grows.",
         [(f"{names['prey']} is the predator, because its population peaks first.", "A predator population is expected to peak after its prey increases."),
-         (f"{names['pred']} is the predator, because it has the smaller peak in every cycle.", "The size of the peaks does not identify the predator; the lag does."),
-         ("Neither population is affected by the other, because both populations rise and fall repeatedly.", "The linked, delayed cycles show that the populations influence each other.")])
-    stim = graph_stim("Sizes of populations A and B over time in the same ecosystem", curves, gaxis("Time (arbitrary units)", 0, int(math.ceil(float(ts[-1]) / 10) * 10), 10), gaxis("Number of individuals", 0, ymax, 50))
+         (f"{names['prey']} is the predator, because it reaches the larger population size.", "Predators are usually less numerous than their prey, and the size of the peaks does not identify the predator; the lag does."),
+         ("The two populations cannot be told apart, because both rise and fall in repeated cycles of the same length.", "The two cycles have the same length but one is delayed, and the delay shows which population depends on the other for food.")])
+    stim = graph_stim("Sizes of populations A and B over time in the same ecosystem", curves, gaxis("Time (arbitrary units)", 0, int(math.ceil(float(ts[-1]) / 10) * 10), 10 if ts[-1] > 30 else 5), gaxis("Number of individuals", 0, ymax, 50))
     stem = "The graph shows the sizes of two populations in the same ecosystem over time. One population is a predator and the other is its prey. Which statement is best supported by the graph?"
     return mk("bi_predator_prey_graph", "8.5", "2.B", stem, key, ds, rng, concept="predator populations lag behind prey populations", stim=stim, path="location of the first maximum of each integrated series vs the sign of the lag", facts=[f"tp={tp:.2f}", f"tq={tq:.2f}"], judgment="use the timing of peaks to identify the predator")
 

@@ -324,9 +324,9 @@
    "range overlap computed from the table values vs the generating means and SE"
   ],
   "misconceptions": [
-   "The sites differ in more than one way, so a causal claim is not supported.",
-   "A higher mean does not show a real difference when the ranges overlap.",
-   "Equal sample sizes do not prevent assessing the difference."
+   "Ranges that overlap mean that chance can explain the difference, so this reverses the rule for comparing ranges.",
+   "A difference between two means is not enough by itself; the \u00b12SE ranges overlap, so chance can explain it.",
+   "The mean and \u00b12SE values are enough to compare the ranges, so the individual measurements are not needed."
   ]
  },
  {
@@ -729,9 +729,9 @@
    "sum of squared errors between the table and the two kinetic models vs the generating model"
   ],
   "misconceptions": [
-   "Rates in the presence of X are lower than the normal rates, so X does not activate the enzyme.",
-   "A rate that rises with substrate in both columns does not mean the inhibitor has no effect; the rates differ.",
-   "Reverses the interpretation: the inhibited rate does not approach the normal rate at high substrate."
+   "At every substrate concentration the rate with X (19 at the highest) is lower than the rate without X (75), so X reduces and does not increase the rate.",
+   "A rate that rises with substrate in both columns does not mean there is no effect: at the highest substrate concentration the rates are 75 without X and 19 with X.",
+   "The inhibited rate stays near 25% of the normal rate at every substrate concentration, so it does not approach the normal rate when substrate is added; a competitive inhibitor would be overcome by more substrate."
   ]
  },
  {
@@ -759,7 +759,7 @@
    "(y_b - y_a)/(b - a) vs the time-weighted mean of the segment slopes"
   ],
   "misconceptions": [
-   "Uses only the final amount of product and the final time.",
+   "Uses only the final amount of product divided by the final time.",
    "Divides the interval length by the change in product.",
    "Uses the initial linear rate and ignores the slowing between the two times."
   ]
@@ -804,9 +804,9 @@
    "interval overlap computed from the displayed mean and 2SE vs the generating means and standard errors"
   ],
   "misconceptions": [
-   "Different means alone do not show a real difference; overlapping ranges may reflect chance.",
-   "Small standard errors do not show a difference when the ranges overlap.",
-   "The \u00b12SE values allow the ranges to be compared."
+   "A difference between two means is not enough by itself; the \u00b12SE ranges overlap, so chance can explain it.",
+   "Ranges that overlap mean that chance can explain the difference, so this reverses the rule for comparing ranges.",
+   "The mean and \u00b12SE values are enough to compare the ranges, so the individual measurements are not needed."
   ]
  },
  {
@@ -1241,7 +1241,7 @@
   "misconceptions": [
    "Multiplies by (K + N)/K instead of by (K - N)/K.",
    "Ignores the effect of the carrying capacity and uses exponential growth.",
-   "Uses (K - N) in place of the fraction (K - N)/K."
+   "Leaves out the division by K, using r N (K - N) in place of r N (K - N)/K."
   ]
  },
  {
@@ -1644,9 +1644,9 @@
    "direct simulation of the linear pathway with a defect at each position vs inference from the first rescuing treatment"
   ],
   "misconceptions": [
-   "The protein B is upstream of the defect: adding an active downstream protein skips it, and the table shows a response only after the defective step is bypassed.",
-   "The protein A is upstream of the defect: adding an active downstream protein skips it, and the table shows a response only after the defective step is bypassed.",
-   "The receptor is upstream of the defect: adding an active downstream protein skips it, and the table shows a response only after the defective step is bypassed."
+   "Supplying normal protein B did not restore expression, so protein B is not the nonfunctional component; the defect is further down the pathway.",
+   "Supplying normal protein A did not restore expression, so protein A is not the nonfunctional component; the defect is further down the pathway.",
+   "Supplying normal receptor did not restore expression, so receptor is not the nonfunctional component; the defect is further down the pathway."
   ]
  },
  {
@@ -1719,9 +1719,9 @@
    "count of shared derived characters for every pair vs the generating nested pattern"
   ],
   "misconceptions": [
-   "Taxa A and D share only 2 derived characters, fewer than the most closely related pair.",
-   "Taxa A and B share only 2 derived characters, fewer than the most closely related pair.",
-   "Taxa A and C share only 1 derived character, fewer than the most closely related pair."
+   "Taxon B has the most characters because of character 4, which no other taxon has; a character found in only one taxon does not show a relationship.",
+   "Character 1 is present in every taxon of the ingroup, so sharing it gives no information about which pair is most closely related.",
+   "Taxa D and A share only characters 1 and 2, while the best pair also shares character 3, so they are less closely related."
   ]
  },
  {
@@ -1764,9 +1764,9 @@
    "location of the first maximum of each integrated series vs the sign of the lag"
   ],
   "misconceptions": [
-   "The linked, delayed cycles show that the populations influence each other.",
+   "The two cycles have the same length but one is delayed, and the delay shows which population depends on the other for food.",
    "A predator population is expected to peak after its prey increases.",
-   "The size of the peaks does not identify the predator; the lag does."
+   "Predators are usually less numerous than their prey, and the size of the peaks does not identify the predator; the lag does."
   ]
  },
  {
@@ -2109,9 +2109,9 @@
    "mean, standard deviation, and peak count of the plotted series vs the generating kind"
   ],
   "misconceptions": [
-   "Selection can change the shape or position of the distribution while variation remains.",
-   "Disruptive selection would produce two peaks at the extremes; the graph does not show that.",
-   "A directional shift would move the entire distribution toward one extreme; the graph does not show that."
+   "Selection can change the position or the shape of the distribution while variation remains.",
+   "After selection there is one narrow peak near 5, not two peaks near the two ends of the range.",
+   "The most common value stays near 5 after selection, so the distribution did not shift toward one end."
   ]
  },
  {
@@ -2184,9 +2184,9 @@
    "floating-point sum vs exact fractions"
   ],
   "misconceptions": [
-   "Divides the number of species by the number of individuals.",
-   "Reports the sum of the squared proportions without subtracting from 1.",
-   "Uses only the proportion of the most abundant species in the formula."
+   "Divides the number of species by the number of individuals: 4/196 = 0.02.",
+   "Reports the sum of the squared proportions, \u03a3(n/N)\u00b2 = 0.30, without subtracting it from 1.",
+   "Uses only the most abundant species: 1 \u2212 (75/196)\u00b2 = 0.85."
   ]
  },
  {
@@ -2282,7 +2282,7 @@
  {
   "id": "bi_translation",
   "topic": "6.4",
-  "skill": "5.A",
+  "skill": "2.D",
   "calculator": "allowed",
   "stimulus": "table",
   "verifiedBy": [
@@ -2574,9 +2574,9 @@
    "argmax of the table means vs the generating optimum"
   ],
   "misconceptions": [
-   "The means differ among the pH values.",
-   "The rate at pH 10 is lower than at pH 8.",
-   "The pattern is the reverse of the table."
+   "The rate at pH 8 (18.5) is the greatest value in the table, not the least.",
+   "The rate at pH 10 (7.1) is lower than the rate at pH 8 (18.5), so the rate does not keep rising.",
+   "The rate at pH 8 (18.5) is higher than the rate at pH 4 (6.0), so the rate does not fall steadily."
   ]
  },
  {
@@ -2604,9 +2604,9 @@
    "interval overlap from the displayed values vs the generating means and SE"
   ],
   "misconceptions": [
-   "Different means alone do not show a real difference when the ranges overlap.",
-   "The data already include 2SE ranges that can be compared.",
-   "The means are not identical, although the ranges overlap."
+   "A difference between two means is not enough by itself; the \u00b12SE ranges overlap, so chance can explain it.",
+   "Ranges that overlap mean that chance can explain the difference, so this reverses the rule for comparing ranges.",
+   "The mean and \u00b12SE values are enough to compare the ranges, so the individual measurements are not needed."
   ]
  },
  {
@@ -2619,9 +2619,9 @@
    "trend of the table beyond the optimum vs the denaturation model"
   ],
   "misconceptions": [
-   "Changing pH does not concentrate the substrate.",
-   "A change in pH does not turn the enzyme into a catalyst for a different reaction.",
-   "Enzymes have an optimum pH and lose activity far from it."
+   "Each enzyme has an optimum pH, and the table shows a lower rate at the pH values on either side of the maximum.",
+   "Many enzymes work in basic solutions, and the lower rate at pH 10 shows a decline and not a complete loss of activity.",
+   "The table shows that pH changes the rate between pH values that are only a few units apart, so no effect beyond the range is unsupported."
   ]
  },
  {
@@ -2635,7 +2635,7 @@
   ],
   "misconceptions": [
    "Reports the frequency of the dominant allele.",
-   "Counts the proportion of aa individuals instead of the allele frequency.",
+   "Counts the proportion of homozygous recessive individuals instead of the allele frequency.",
    "Divides the number of a alleles by the number of individuals instead of the number of alleles."
   ]
  },
@@ -2807,7 +2807,7 @@
  {
   "id": "bis_translation_set_q1",
   "topic": "6.4",
-  "skill": "5.A",
+  "skill": "2.D",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [

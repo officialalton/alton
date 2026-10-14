@@ -29,34 +29,29 @@ def bis_enzyme_set(rng):
     stim = tbl("Mean rate of an enzyme-catalyzed reaction (µmol of product per minute) ± 2SE at four pH values", ["pH", "Mean rate ± 2SE", "Number of trials"], [[ph, f"{m:.1f} ± {e:.2f}", n] for ph, m, e in zip(phs, means, se2)])
     # q1: 추세 묘사
     top_ph = phs[top]
-    k1, d1 = sentence_options(f"The rate is greatest at pH {top_ph}, and it is lower at both lower and higher pH values.", f"The means rise to {means[top]:.1f} at pH {top_ph} and fall on either side, so the rate peaks at that pH.",
-        [("The rate increases at every pH as the pH increases.", f"The rate at pH 10 is lower than at pH {top_ph}."), (f"The rate is lowest at pH {top_ph}, and it is higher at both lower and higher pH values.", "The pattern is the reverse of the table."), ("The rate is the same at all four pH values.", "The means differ among the pH values.")])
-    q1 = mk("bis_enzyme_set_q1", "3.2", "4.B", "Which statement best describes the data in the table?", k1, d1, rng, concept="describe an optimum in a table of rates", path="argmax of the table means vs the generating optimum", material=MAT_TABLE("mean rates at four pH values"), facts=[f"means={means}", f"se2={se2}"], est=55)
+    k1, d1 = sentence_options(f"The mean rate rises from {means[0]:.1f} at pH 4 to a maximum of {means[top]:.1f} at pH {top_ph} and then falls to {means[3]:.1f} at pH 10.", f"The table shows an increase from {means[0]:.1f} to {means[top]:.1f} up to pH {top_ph} and a decrease to {means[3]:.1f} at pH 10, so the rate peaks at an intermediate pH.",
+        [(f"The mean rate rises steadily across all four pH values and is greatest at pH 10 ({means[3]:.1f}).", f"The rate at pH 10 ({means[3]:.1f}) is lower than the rate at pH {top_ph} ({means[top]:.1f}), so the rate does not keep rising."),
+         (f"The mean rate falls steadily across all four pH values and is least at pH 10 ({means[3]:.1f}).", f"The rate at pH {top_ph} ({means[top]:.1f}) is higher than the rate at pH 4 ({means[0]:.1f}), so the rate does not fall steadily."),
+         (f"The mean rate falls from {means[0]:.1f} at pH 4 to a minimum at pH {top_ph} and then rises to pH 10.", f"The rate at pH {top_ph} ({means[top]:.1f}) is the greatest value in the table, not the least.")])
+    q1 = mk("bis_enzyme_set_q1", "3.2", "4.B", "Which statement best describes how the mean rate changes as the pH increases from 4 to 10?", k1, d1, rng, concept="describe an optimum in a table of rates", path="argmax of the table means vs the generating optimum", material=MAT_TABLE("mean rates at four pH values"), facts=[f"means={means}", f"se2={se2}"], est=55)
     # q2: 퍼센트 변화(pH 6 → 최대 pH)
     a, b = (1 if top == 2 else 0), top
     ia = a; pct = (means[b] - means[ia]) / means[ia] * 100
     agree(pct, 100 * (means[b] / means[ia] - 1), 1e-9, "pct")
     pairs = [("Divides the change by the larger mean instead of the starting mean.", (means[b] - means[ia]) / means[b] * 100), ("Reports the difference in rates rather than the percent change.", means[b] - means[ia]), ("Reports the ratio of the means as a percent.", means[b] / means[ia] * 100), ("Reverses the starting and ending means.", (means[ia] - means[b]) / means[b] * 100)]
-    k2, d2 = val_opts(pct, pairs, lambda v: f"{v:.0f}%" if abs(v) >= 10 or abs(v) == 0 else f"{v:.1f}", gap=2.0)
+    k2, d2 = val_opts(pct, pairs, lambda v: f"{hu(v, 0)}%" if abs(v) >= 10 or abs(v) == 0 else f"{hu(v, 1)}", gap=2.0)
     q2 = mk("bis_enzyme_set_q2", "3.2", "5.A", f"What is the percent change in the mean rate from pH {phs[ia]} to pH {phs[b]}?", k2, d2, rng, concept="percent change between two means", path="(new - old)/old x 100 vs ratio-based form", material=MAT_TABLE("mean rates"), facts=[f"pct={pct:.4f}"], est=65,
             kwhy=f"Percent change = (new - old) / old x 100 = ({means[b]:.1f} - {means[ia]:.1f}) / {means[ia]:.1f} x 100 = {pct:.0f}%.")
     # q3: ±2SE 비교
     pr = rng.choice(sep); pr2 = rng.choice(ovl)
     tgt_sep = rng.choice([True, False]); i, j = (pr if tgt_sep else pr2)
-    if tgt_sep:
-        k3, d3 = sentence_options(f"The difference between the rates at pH {phs[i]} and pH {phs[j]} is likely real, because the ±2SE ranges do not overlap.", f"The ranges {means[i] - se2[i]:.2f}–{means[i] + se2[i]:.2f} and {means[j] - se2[j]:.2f}–{means[j] + se2[j]:.2f} do not overlap.",
-            [(f"The difference between the rates at pH {phs[i]} and pH {phs[j]} may be due to chance, because the means are only a few units apart.", "The ±2SE ranges, not the size of the difference alone, decide whether the difference is supported."),
-             (f"The difference between the rates at pH {phs[i]} and pH {phs[j]} cannot be judged without more trials.", "The data already include 2SE ranges that can be compared."),
-             (f"The rates at pH {phs[i]} and pH {phs[j]} must be equal, because both are enzyme-catalyzed.", "The means differ and the ranges do not overlap.")])
-    else:
-        k3, d3 = sentence_options(f"The difference between the rates at pH {phs[i]} and pH {phs[j]} may be due to chance, because the ±2SE ranges overlap.", f"The ranges {means[i] - se2[i]:.2f}–{means[i] + se2[i]:.2f} and {means[j] - se2[j]:.2f}–{means[j] + se2[j]:.2f} overlap.",
-            [(f"The difference between the rates at pH {phs[i]} and pH {phs[j]} is real, because the means are different values.", "Different means alone do not show a real difference when the ranges overlap."),
-             (f"The difference between the rates at pH {phs[i]} and pH {phs[j]} cannot be judged without more trials.", "The data already include 2SE ranges that can be compared."),
-             (f"The rates at pH {phs[i]} and pH {phs[j]} are equal, because both are enzyme-catalyzed.", "The means are not identical, although the ranges overlap.")])
+    k3, d3 = range_options(tgt_sep, f"The ranges are {means[i] - se2[i]:.2f} to {means[i] + se2[i]:.2f} and {means[j] - se2[j]:.2f} to {means[j] + se2[j]:.2f}.")
     q3 = mk("bis_enzyme_set_q3", "3.2", "5.B", f"Which statement about the rates at pH {phs[i]} and pH {phs[j]} is best supported by the ±2SE values in the table?", k3, d3, rng, concept="judge a difference with ±2SE ranges", path="interval overlap from the displayed values vs the generating means and SE", material=MAT_TABLE("mean ± 2SE"), facts=[f"pair={(i, j)}"], est=70)
     # q4: pH 12 예측
-    k4, d4 = sentence_options("At pH 12 the rate would be lower than at the optimum, because extreme pH can change the enzyme's shape and the active site.", "Extreme pH disrupts ionic and hydrogen bonds that hold the enzyme's shape, which reduces substrate binding.",
-        [("At pH 12 the rate would be higher than at the optimum, because the substrate is more concentrated.", "Changing pH does not concentrate the substrate."), ("At pH 12 the rate would be the same as at the optimum, because enzymes work at all pH values.", "Enzymes have an optimum pH and lose activity far from it."), ("At pH 12 the enzyme would catalyze a different reaction, because the active site would be larger.", "A change in pH does not turn the enzyme into a catalyst for a different reaction.")])
+    k4, d4 = sentence_options("At pH 12 the rate would be lower than at the optimum, because extreme pH disrupts the bonds that hold the enzyme's shape.", "Extreme pH disrupts ionic and hydrogen bonds that hold the enzyme's shape, which reduces substrate binding at the active site.",
+        [("At pH 12 the rate would be higher than at the optimum, because enzymes work faster in basic solutions.", "Each enzyme has an optimum pH, and the table shows a lower rate at the pH values on either side of the maximum."),
+         ("At pH 12 the rate would be the same as at pH 10, because pH has no effect beyond the tested range.", "The table shows that pH changes the rate between pH values that are only a few units apart, so no effect beyond the range is unsupported."),
+         ("At pH 12 the rate would be zero, because no enzyme can function in a basic solution.", "Many enzymes work in basic solutions, and the lower rate at pH 10 shows a decline and not a complete loss of activity.")])
     q4 = mk("bis_enzyme_set_q4", "3.2", "6.E", "Based on the data and on the structure of enzymes, which prediction about the rate at pH 12 is best supported?", k4, d4, rng, concept="predict enzyme activity beyond the tested range", path="trend of the table beyond the optimum vs the denaturation model", material=MAT_TABLE("mean rates"), facts=[f"means={means}"], est=65)
     return _set("bis_enzyme_set", "A researcher measures the rate of an enzyme-catalyzed reaction at four pH values. Each value in the table is the mean of the trials, with ±2SE.", stim, [q1, q2, q3, q4], "3.2", "4.B")
 
@@ -80,7 +75,7 @@ def bis_chi_square_set(rng):
     k1, d1 = val_opts(key_v, [("Uses the observed number instead of the expected number.", float(obs[pick_i])), ("Divides the total by 4 as if the four classes were equally likely.", N / 4), ("Uses the ratio number as the count.", float((9, 3, 3, 1)[pick_i])), ("Multiplies the total by the ratio number without dividing by 16.", float(N * (9, 3, 3, 1)[pick_i]) if N * (9, 3, 3, 1)[pick_i] < 5000 else None)], lambda v: f"{v:g}", gap=1, rel=0.05)
     q1 = mk("bis_chi_square_set_q1", "5.3", "5.A", f"If the genes assort independently, how many offspring are expected in the phenotype class {labs[pick_i].lower()}?", k1, d1, rng, concept="expected count from a 9:3:3:1 ratio", path="N x ratio/16 vs exact fractions", material=MAT_TABLE("observed offspring"), facts=[f"N={N}", f"exp={exp}"], est=60)
     pairs = [("Divides each squared difference by the observed number instead of the expected number.", sum((o - e) ** 2 / o for o, e in zip(obs, exp))), ("Does not divide by the expected numbers.", sum((o - e) ** 2 for o, e in zip(obs, exp))), ("Does not square the differences, using the sum of the absolute differences divided by the expected numbers.", sum(abs(o - e) / e for o, e in zip(obs, exp))), ("Adds the observed and expected numbers before squaring.", sum((o + e) ** 2 / e for o, e in zip(obs, exp)) / 10)]
-    k2, d2 = val_opts(X, pairs, lambda v: f"{v:.2f}", gap=0.1, rel=0.05)
+    k2, d2 = val_opts(X, pairs, lambda v: f"{hu(v, 2)}", gap=0.1, rel=0.05)
     q2 = mk("bis_chi_square_set_q2", "5.3", "5.C", "Using the chi-square equation on the formula sheet, what is the value of chi-square for the data?", k2, d2, rng, concept="chi-square statistic", path="floating-point sum vs exact fractions", material=MAT_TABLE("observed offspring"), facts=[f"obs={obs}", f"chi2={X:.4f}"], est=90,
             kwhy=f"χ² = Σ(o - e)²/e = " + " + ".join(f"({o} - {e:g})²/{e:g}" for o, e in zip(obs, exp)) + f" = {X:.2f}.")
     k3, d3 = sentence_options(f"The null hypothesis is {'rejected' if reject else 'not rejected'}, because the chi-square value is {'greater' if reject else 'less'} than the critical value of {c} for 3 degrees of freedom at p = 0.05.", f"With four phenotype classes the degrees of freedom are 3, and the critical value at p = 0.05 is {c}; the calculated value is {X:.2f}.",
@@ -125,7 +120,7 @@ def bis_cell_cycle_set(rng):
         [("The drug had no effect, because cells in all stages are present in both groups.", "The number of cells in each stage differs between the control and the treated group."), ("The drug caused all treated cells to enter interphase.", "The treated group still has cells in each stage of mitosis."), ("The drug changed the number of cells counted in the treated group.", "The number of cells counted was the same in both groups.")])
     q1 = mk("bis_cell_cycle_set_q1", "4.6", "4.B", "Which statement best describes the data in the table?", k1, d1, rng, concept="describe differences between control and treated distributions", path="stage counts compared between groups vs the generating drug effect", material=MAT_TABLE("stage counts"), facts=[f"c={c}", f"t={t}"], est=60)
     pairs = [("Reports the percent of control cells in interphase.", c["Interphase"] / N * 100), ("Reports the number of cells in mitosis rather than the percent.", float(N - c["Interphase"])), ("Divides the cells in mitosis by the cells in interphase.", (N - c["Interphase"]) / c["Interphase"] * 100), ("Reports the percent of cells in prophase only.", c["Prophase"] / N * 100)]
-    k2, d2 = val_opts(mi_c, pairs, lambda v: f"{v:.0f}%" if v >= 1 else f"{v:.1f}%", gap=1.0)
+    k2, d2 = val_opts(mi_c, pairs, lambda v: f"{hu(v, 0)}%" if v >= 1 else f"{hu(v, 1)}%", gap=1.0)
     q2 = mk("bis_cell_cycle_set_q2", "4.6", "5.A", "The mitotic index is the percent of cells in mitosis (all stages except interphase). What is the mitotic index of the control group?", k2, d2, rng, concept="mitotic index from counts", path="exact fraction of non-interphase cells vs float computation", material=MAT_TABLE("stage counts"), facts=[f"mi_c={mi_c:.3f}"], est=65,
             kwhy=f"The control group has {N - c['Interphase']} cells in mitosis out of {N}, so the mitotic index is {N - c['Interphase']} / {N} x 100 = {mi_c:.0f}%.")
     pc = (mi_t - mi_c) / mi_c * 100
@@ -159,7 +154,7 @@ def bis_population_set(rng):
     a_i, b_i = pk, pk + 1
     rate = (N[b_i] - N[a_i]) / (yrs[b_i] - yrs[a_i])
     pairs = [("Divides the change by the final year instead of the interval length.", (N[b_i] - N[a_i]) / yrs[b_i]), ("Reports the change in population without dividing by time.", float(N[b_i] - N[a_i])), ("Reports the population size at the end of the interval divided by the interval.", N[b_i] / (yrs[b_i] - yrs[a_i])), ("Divides the interval length by the change.", (yrs[b_i] - yrs[a_i]) / (N[b_i] - N[a_i]))]
-    k2, d2 = val_opts(rate, pairs, lambda v: f"{v:.1f} mice per year" if v < 100 else f"{v:.0f} mice per year", gap=0.05, rel=0.08)
+    k2, d2 = val_opts(rate, pairs, lambda v: f"{hu(v, 1)} mice per year" if v < 100 else f"{hu(v, 0)} mice per year", gap=0.05, rel=0.08)
     q2 = mk("bis_population_set_q2", "8.3", "5.A", f"What is the average rate of population growth from year {yrs[a_i]} to year {yrs[b_i]}?", k2, d2, rng, concept="average growth rate from a table", path="(N2 - N1)/(t2 - t1) vs the mean of the yearly increments", material=MAT_TABLE("population sizes"), facts=[f"rate={rate:.4f}"], est=60,
             kwhy=f"Rate = change in population / change in time = ({N[b_i]} - {N[a_i]}) / ({yrs[b_i]} - {yrs[a_i]}) = {rate:.1f} mice per year.")
     pairs = [("Reads the population size in the year of fastest growth.", float(N[pk + 1])), ("Reads the starting population size.", float(N[0])), ("Reads the population size in year 4, which is still increasing.", float(N[2])), ("Reads half of the final value.", N[-1] / 2)]
@@ -187,7 +182,7 @@ def bis_water_potential_set(rng):
     est = round(ms[i0] + (0 - vals[i0]) * (ms[i0 + 1] - ms[i0]) / (vals[i0 + 1] - vals[i0]), 2)
     co = np.polyfit(ms, vals, 1); agree(est, -co[1] / co[0], 0.05, "iso")
     pairs = [("Uses the molarity with the largest mass gain.", ms[0]), ("Uses the midpoint of all the molarities tested.", float(np.mean(ms))), ("Uses the molarity with the largest mass loss.", ms[-1]), ("Uses the midpoint of the two molarities that bracket zero without interpolating.", 0.5 * (ms[i0] + ms[i0 + 1]))]
-    k2, d2 = val_opts(est, pairs, lambda v: f"{v:.2f} M", gap=0.04)
+    k2, d2 = val_opts(est, pairs, lambda v: f"{hu(v, 2)} M", gap=0.04)
     q2 = mk("bis_water_potential_set_q2", "2.7", "5.A", "Which value is the best estimate of the molarity of sucrose that is isotonic to the potato cells?", k2, d2, rng, concept="isotonic concentration by interpolation", path="interpolation between bracketing points vs least-squares x-intercept", material=MAT_TABLE("percent mass change"), facts=[f"est={est}"], est=75)
     k3, d3 = sentence_options("Water moved into the cores in the 0.0 M solution, because the solution had a higher water potential than the cells.", "A higher water potential outside the cells causes net movement of water into the cells, which increases mass.",
         [("Water moved out of the cores in the 0.0 M solution, because the solution had a higher water potential than the cells.", "Water moves from higher to lower water potential, which is into the cells."), ("Sucrose moved into the cores in the 0.0 M solution, which increased their mass.", "The solution had no sucrose, so none could move in."), ("Water moved into the cores in the 0.0 M solution, because the solution had a lower solute concentration, so the water potential is lower.", "A lower solute concentration gives a higher, not lower, water potential.")])
@@ -195,7 +190,7 @@ def bis_water_potential_set(rng):
     Tc = rng.choice([20, 25]); Mx = rng.choice([0.4, 0.6, 0.8])
     psi = -1 * Mx * R_BAR * (Tc + 273)
     pairs = [("Gives the solute potential a positive sign.", -psi), ("Uses the temperature in degrees Celsius instead of kelvins.", -Mx * R_BAR * Tc), ("Forgets the molar concentration.", -R_BAR * (Tc + 273)), ("Uses 0.831 in place of 0.0831 for the pressure constant.", psi * 10)]
-    k4, d4 = val_opts(psi, pairs, lambda v: f"{v:.2f} bars", gap=0.03)
+    k4, d4 = val_opts(psi, pairs, lambda v: f"{hu(v, 2)} bars", gap=0.03)
     q4 = mk("bis_water_potential_set_q4", "2.7", "5.A", f"Using the equation for solute potential on the formula sheet, what is the water potential of the {Mx:g} M sucrose solution at {Tc} °C in an open beaker? (The ionization constant for sucrose is 1.)", k4, d4, rng, concept="solute potential Psi_S = -iCRT", path="exact rational arithmetic vs float evaluation", material=MAT_TABLE("percent mass change"), facts=[f"psi={psi:.4f}"], est=80,
             kwhy=f"In an open container Ψ = Ψ_S = -iCRT = -(1)({Mx:g})(0.0831)({Tc + 273}) = {psi:.2f} bars.")
     return _set("bis_water_potential_set", "A student places potato cores of equal mass in sucrose solutions of different molarity for 24 hours and measures the change in mass. The table shows the results.", stim, [q1, q2, q3, q4], "2.7", "4.B")
@@ -215,12 +210,12 @@ def bis_hw_set(rng):
     fa = (het + 2 * aa) / (2 * N)
     stim = tbl(f"Genotypes of {N} individuals in a population sampled at one time", ["Genotype", "Number of individuals"], [["AA", AA], ["Aa", het], ["aa", aa]])
     pairs = [("Counts the proportion of homozygous recessive individuals instead of the allele frequency.", aa / N), ("Counts the proportion of heterozygous individuals instead of the allele frequency.", het / N), ("Reports the frequency of the dominant allele.", 1 - fa), ("Divides the number of a alleles by the number of individuals instead of the number of alleles.", (het + 2 * aa) / N)]
-    k1, d1 = val_opts(fa, pairs, lambda v: f"{v:.2f}", gap=0.02)
+    k1, d1 = val_opts(fa, pairs, lambda v: f"{hu(v, 2)}", gap=0.02)
     q1 = mk("bis_hw_set_q1", "7.5", "5.A", "What is the frequency of allele a in the population?", k1, d1, rng, concept="allele frequency from genotype counts", path="allele counting vs the generating q", material=MAT_TABLE("genotype counts"), facts=[f"q={fa:.4f}"], est=65,
             kwhy=f"There are {2 * N} alleles. The number of a alleles is {het} + 2({aa}) = {het + 2 * aa}, so the frequency of a is {het + 2 * aa}/{2 * N} = {fa:.2f}.")
     pf = 1 - fa; eh = 2 * pf * fa * N
     pairs = [("Uses p squared times the population size.", pf * pf * N), ("Uses q squared times the population size.", fa * fa * N), ("Uses 2pq as a number without multiplying by the population size.", 2 * pf * fa), ("Uses p times q times the population size, without the factor of 2.", pf * fa * N)]
-    k2, d2 = val_opts(eh, pairs, lambda v: f"{v:,.0f}" if v >= 2 else f"{v:.2f}", gap=1, rel=0.05)
+    k2, d2 = val_opts(eh, pairs, lambda v: f"{v:,.0f}" if v >= 2 else f"{hu(v, 2)}", gap=1, rel=0.05)
     q2 = mk("bis_hw_set_q2", "7.5", "5.A", "If the population were in Hardy-Weinberg equilibrium with the allele frequencies found in the previous question, how many heterozygotes would be expected?", k2, d2, rng, concept="expected heterozygotes under Hardy-Weinberg", path="2pqN vs binomial expansion", material=MAT_TABLE("genotype counts"), facts=[f"eh={eh:.2f}"], est=75)
     k3, d3 = sentence_options(f"The population has fewer heterozygotes than expected ({het} observed and about {eh:.0f} expected), so it is not in Hardy-Weinberg equilibrium.", "A large deficit of heterozygotes is not consistent with the equilibrium genotype frequencies.",
         [(f"The population has more heterozygotes than expected ({het} observed and about {eh:.0f} expected), so it is not in equilibrium.", "The observed number of heterozygotes is lower than expected, not higher."), (f"The population has about the expected number of heterozygotes, so it is in Hardy-Weinberg equilibrium.", "The observed number differs a lot from the expected number."), ("The comparison cannot be made, because Hardy-Weinberg applies only to dominant alleles.", "Hardy-Weinberg applies to alleles of a gene in a population.")])

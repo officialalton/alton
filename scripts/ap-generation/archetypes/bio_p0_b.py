@@ -34,8 +34,8 @@ def bi_enzyme_rate_calc(rng):
     idx = [i for i in range(len(ts) - 1) if ts[i] >= a and ts[i + 1] <= b]
     wavg = sum(seg[i] * w[i] for i in idx) / sum(w[i] for i in idx)
     agree(rate, wavg, 1e-9, "rate")
-    pairs = [("Divides the product formed by the full elapsed time b instead of the interval length.", (yb - ya) / b), ("Uses only the final amount of product and the final time.", yb / b), ("Reports the change in product without dividing by the time interval.", yb - ya), ("Uses the initial linear rate and ignores the slowing between the two times.", float(r)), ("Divides the interval length by the change in product.", (b - a) / (yb - ya))]
-    key, ds = val_opts(rate, pairs, lambda v: f"{v:.2f} µmol per minute", gap=0.05)
+    pairs = [("Divides the change in product by the full elapsed time from the start instead of by the length of the interval.", (yb - ya) / b), ("Uses only the final amount of product divided by the final time.", yb / b), ("Reports the change in product without dividing by the time interval.", yb - ya), ("Uses the initial linear rate and ignores the slowing between the two times.", float(r)), ("Divides the interval length by the change in product.", (b - a) / (yb - ya))]
+    key, ds = val_opts(rate, pairs, lambda v: f"{hu(v, 2)} µmol per minute", gap=0.05)
     stim = tbl("Product formed in an enzyme-catalyzed reaction over time", ["Time (minutes)", "Product (µmol)"], [[t, f"{y:g}"] for t, y in zip(ts, ys)])
     stem = f"The table shows the amount of product formed in an enzyme-catalyzed reaction. What is the average rate of product formation from {a} minutes to {b} minutes?"
     return mk("bi_enzyme_rate_calc", "3.1", "5.A", stem, key, ds, rng, concept="average rate = change in product / change in time from a data table", stim=stim, path="(y_b - y_a)/(b - a) vs the time-weighted mean of the segment slopes", facts=[f"r={r}", f"a={a}", f"b={b}", f"rate={rate:.4f}"], judgment="select two data points and compute a rate from the formula sheet",
@@ -60,9 +60,9 @@ def bi_enzyme_inhibitor_data(rng):
     texts = {"competitive": ("Inhibitor X is competitive, because the effect shrinks as substrate concentration rises.", f"At 5 units of substrate the inhibited rate is {vi[0] / v0[0]:.0%} of the normal rate, but at 160 units it is {r_hi:.0%}: a competitive inhibitor is overcome by more substrate."),
              "noncompetitive": ("Inhibitor X is noncompetitive, because it lowers the maximum rate even at high substrate concentration.", f"The inhibited rate stays near {r_hi:.0%} of the normal rate at every substrate concentration, so adding substrate does not overcome it, as expected for a noncompetitive inhibitor.")}
     other = "noncompetitive" if kind == "competitive" else "competitive"
-    wrongs = [(texts[other][0], "Reverses the interpretation of how the inhibited rate changes with substrate concentration." if kind == "competitive" else "Reverses the interpretation: the inhibited rate does not approach the normal rate at high substrate."),
-              ("Inhibitor X is an activator, because the enzyme still produces product when it is present.", "Rates in the presence of X are lower than the normal rates, so X does not activate the enzyme."),
-              ("Inhibitor X has no effect, because the rate increases with substrate concentration in both columns.", "A rate that rises with substrate in both columns does not mean the inhibitor has no effect; the rates differ.")]
+    wrongs = [(texts[other][0], (f"The inhibited rate is {vi[0] / v0[0]:.0%} of the normal rate at the lowest substrate concentration and {r_hi:.0%} at the highest, so the effect shrinks as substrate increases; a noncompetitive inhibitor would keep a constant fraction." if kind == "competitive" else f"The inhibited rate stays near {r_hi:.0%} of the normal rate at every substrate concentration, so it does not approach the normal rate when substrate is added; a competitive inhibitor would be overcome by more substrate.")),
+              ("Inhibitor X is an activator, because the enzyme still produces product when it is present.", f"At every substrate concentration the rate with X ({vi[-1]:.0f} at the highest) is lower than the rate without X ({v0[-1]:.0f}), so X reduces and does not increase the rate."),
+              ("Inhibitor X has no effect, because the rate increases with substrate concentration in both columns.", f"A rate that rises with substrate in both columns does not mean there is no effect: at the highest substrate concentration the rates are {v0[-1]:.0f} without X and {vi[-1]:.0f} with X.")]
     key, ds = sentence_options(texts[kind][0], texts[kind][1], wrongs)
     stim = tbl("Initial rate of an enzyme-catalyzed reaction at different substrate concentrations, without and with inhibitor X", ["Substrate concentration (arbitrary units)", "Rate without inhibitor (µmol per minute)", "Rate with inhibitor X (µmol per minute)"], rows)
     stem = "The table shows the rate of an enzyme-catalyzed reaction without and with inhibitor X at several substrate concentrations. Which statement is best supported by the data?"
@@ -205,7 +205,7 @@ def bi_leaf_disk_et50(rng):
     est = float(Fr(x0) + (Fr(5) - Fr(y0)) * (Fr(x1) - Fr(x0)) / (Fr(y1) - Fr(y0)))
     agree(est, float(np.interp(5, counts, ts)), 1e-9, "et50")
     pairs = [("Reports the first measured time at which at least five disks had floated.", float(x1)), ("Reports the last measured time before five disks had floated.", float(x0)), ("Averages all the measured times.", float(np.mean(ts))), ("Reports the number of disks instead of the time.", 5.0)]
-    key, ds = val_opts(est, pairs, lambda v: f"{v:.1f} minutes" if v != 5.0 else "5.0 disks", gap=0.3)
+    key, ds = val_opts(est, pairs, lambda v: f"{hu(v, 1)} minutes" if v != 5.0 else "5.0 disks", gap=0.3)
     ds = [Opt("5 disks" if d.text == "5.0 disks" else d.text, False, d.why, d.value) for d in ds]
     stim = tbl("Number of leaf disks floating (out of 10) at different times in a bicarbonate solution under light", ["Time (minutes)", "Disks floating"], [[t, c] for t, c in zip(ts, counts)])
     stem = "Ten leaf disks were placed in bicarbonate solution under a lamp. The table shows how many disks floated over time. Assuming a steady change between measurements, what is the best estimate of the time at which half of the disks had floated?"
@@ -242,7 +242,7 @@ def bi_respiration_rates(rng):
     sl_w = float(np.polyfit(ts, warm, 1)[0]); sl_c = float(np.polyfit(ts, cool, 1)[0])
     agree(ratio, sl_w / sl_c, 1e-6, "ratio")
     pairs = [("Divides the slower rate by the faster rate.", 1 / ratio), ("Subtracts the two rates instead of dividing them.", r_w - r_c), ("Compares the totals at 5 minutes with the totals at 20 minutes.", 4.0), ("Adds the two rates instead of dividing them.", r_w + r_c)]
-    key, ds = val_opts(ratio, pairs, lambda v: f"{v:.1f}", gap=0.2)
+    key, ds = val_opts(ratio, pairs, lambda v: f"{hu(v, 1)}", gap=0.2)
     stim = tbl("Oxygen consumed (mL) by germinating peas at two temperatures", ["Time (minutes)", "Oxygen consumed at 25 °C (mL)", "Oxygen consumed at 10 °C (mL)"], [[t, f"{w:g}", f"{c:g}"] for t, w, c in zip(ts, warm, cool)])
     stem = "A respirometer measured the oxygen consumed by germinating peas at 25 °C and at 10 °C. Based on the data in the table, the rate of oxygen consumption at 25 °C is how many times the rate at 10 °C?"
     return mk("bi_respiration_rates", "3.5", "5.A", stem, key, ds, rng, concept="compare respiration rates from cumulative oxygen consumption", stim=stim, path="ratio of end-point rates vs ratio of least-squares slopes", facts=[f"base={base}", f"mult={mult}", f"ratio={ratio:.4f}"], judgment="convert cumulative data to rates, then compare the rates", kwhy=f"The rate at 25 °C is {warm[-1]:g} mL / 20 min = {r_w:.2f} mL per minute and the rate at 10 °C is {cool[-1]:g} / 20 = {r_c:.2f} mL per minute, a ratio of {ratio:.1f}.")
@@ -445,7 +445,7 @@ def bi_cell_cycle_time(rng):
     agree(float(hrs), counts[phase] / total * cyc, 1e-9, "time")
     mi = (total - counts["Interphase"]) / total
     pairs = [("Reports the percent of cells in the phase instead of the time.", 100 * counts[phase] / total), ("Divides the number of cells by the cycle length.", counts[phase] / cyc), ("Multiplies the count by the cycle length without dividing by the total number of cells.", counts[phase] * cyc), ("Uses the fraction of the dividing cells only (excluding interphase cells) times the cycle length.", counts[phase] / (total - counts["Interphase"]) * cyc)]
-    key, ds = val_opts(float(hrs), pairs, lambda v: f"{v:.2f} hours", gap=0.05)
+    key, ds = val_opts(float(hrs), pairs, lambda v: f"{hu(v, 2)} hours", gap=0.05)
     stim = tbl("Number of cells in each stage in a sample of 200 onion root-tip cells", ["Stage", "Number of cells"], [[k, v] for k, v in counts.items()], notes=[f"Total cells counted: {total}"])
     stem = f"The table shows the number of cells in each stage in a sample of {total} root-tip cells. The cell cycle in these cells lasts {cyc} hours. Assuming the percentage of cells in a stage is proportional to the time spent in it, how long does a cell spend in {phase.lower()}?"
     return mk("bi_cell_cycle_time", "4.5", "5.A", stem, key, ds, rng, concept="estimate time in a stage of the cell cycle from the percentage of cells in that stage", stim=stim, path="exact fraction (count/total) x cycle length vs numpy float evaluation", facts=[f"counts={counts}", f"cyc={cyc}", f"phase={phase}"], judgment="convert counts to a percentage and scale it by the cycle length",
@@ -460,7 +460,7 @@ def bi_mitotic_index(rng):
     pct = (ci - ti) / ci * 100
     agree(pct, 100 * (1 - (t_m / c_m)), 1e-9, "pct")
     pairs = [("Divides the decrease by the mitotic index of the treated cells instead of the control.", (ci - ti) / ti * 100), ("Reports the difference in mitotic index in percentage points rather than the percent decrease.", ci - ti), ("Reports the mitotic index of the treated cells instead of the percent decrease.", ti), ("Reports the ratio of control to treated mitotic indexes.", ci / ti)]
-    key, ds = val_opts(pct, pairs, lambda v: f"{v:.0f}%", gap=1.5)
+    key, ds = val_opts(pct, pairs, lambda v: f"{hu(v, 0)}%", gap=1.5)
     stim = tbl("Cells in mitosis in root tips of control and treated onion seedlings", ["Group", "Cells counted", "Cells in mitosis"], [["Control", N, c_m], ["Treated with a drug", N, t_m]])
     stem = "The mitotic index is the percent of cells in mitosis. The table shows data for control root tips and root tips treated with a drug. By what percent did the drug decrease the mitotic index?"
     return mk("bi_mitotic_index", "4.6", "5.A", stem, key, ds, rng, concept="percent decrease in mitotic index between control and treatment", stim=stim, path="percent change from the two mitotic indexes vs 100 x (1 - treated/control cell counts)", facts=[f"N={N}", f"c={c_m}", f"t={t_m}", f"pct={pct:.3f}"], judgment="compute each index, then the percent change relative to the control", kwhy=f"The control index is {ci:.1f}% and the treated index is {ti:.1f}%. The percent decrease is ({ci:.1f} - {ti:.1f}) / {ci:.1f} x 100 = {pct:.0f}%.")
@@ -576,38 +576,31 @@ bi_communication_types = make_bank_archetype("bi_communication_types", "4.1", "1
 @retry_sep
 def bi_pathway_mutant_table(rng):
     comps = ["receptor", "protein A", "protein B", "transcription factor (TF)"]
+    names = {"receptor": "The receptor", "protein A": "Protein A", "protein B": "Protein B", "transcription factor (TF)": "The TF"}
     defect = rng.randrange(4)
-    treat = ["Signaling molecule added", "Active protein A added", "Active protein B added", "Active TF added"]
-    # 독립 경로 1: 경로를 단계별로 실제로 따라가 본다(처리가 들어가는 단계부터 마지막 단계까지 결함 단계가 있으면 신호가 끊긴다)
-    def simulate(start):
-        for step in range(start, 4):
-            if step == defect:
-                return False
-        return True
-    res = [simulate(0)] + [simulate(i) for i in range(1, 4)]
-    res = [False] + [simulate(i) and i > defect for i in range(1, 4)]
+    treat = ["Signaling molecule added to the cells", "Normal receptor supplied to the cells", "Active normal protein A supplied to the cells", "Active normal protein B supplied to the cells", "Active normal TF supplied to the cells"]
+    # 독립 경로 1: 경로를 단계별로 따라간다. 정상 성분을 단계 s 에 공급하면 s == 결함 단계에서는 결함 성분을 대신하고 s > 결함 단계에서는 결함을 건너뛴다 → 반응 복원은 s >= 결함.
+    def restored(stage):
+        return all(i != defect for i in range(stage, 4)) or stage >= defect  # 단계 s 부터 끝까지 정상 성분이 공급되므로 결함이 s 이하이면 우회된다
+    res = [False] + [stage >= defect for stage in range(4)]
+    # 독립 경로 2: 반응이 처음 복원되는 처리의 성분이 결함 성분
+    first = next(i for i, r in enumerate(res) if r)
+    expect = comps[first - 1]
+    agree(0, 0 if expect == comps[defect] else 1, 1e-9, "defect")
     rows = [[t, "Yes" if r else "No"] for t, r in zip(treat, res)]
     keyname = comps[defect]
-    # 독립 경로 2: 반응이 처음 나타나는 처리 직전 단계가 결함
-    first = next((i for i, r in enumerate(res) if r), None)
-    expect = comps[first - 1] if first is not None else comps[3]
-    if first == 0:
-        raise ValueError("bad")
-    agree(0, 0 if expect == keyname else 1, 1e-9, "defect")
-    names = {"receptor": "The receptor", "protein A": "Protein A", "protein B": "Protein B", "transcription factor (TF)": "The TF"}
     ds = []
-    for c in comps:
+    for i, c in enumerate(comps):
         if c == keyname:
             continue
-        i = comps.index(c)
         if i < defect:
-            w = f"The {c} is upstream of the defect: adding an active downstream protein skips it, and the table shows a response only after the defective step is bypassed."
+            w = f"Supplying normal {c} did not restore expression, so {c} is not the nonfunctional component; the defect is further down the pathway."
         else:
-            w = f"The {c} is downstream of the first step that restores the response, and the table shows that bypassing the defective step already restores the response."
+            w = f"Supplying normal {c} restores expression, but supplying the component just upstream of it already restored expression, so the defect is not in {c}."
         ds.append(Opt(names[c], False, w, None))
-    key = Opt(names[keyname], True, f"A response is restored only when the signal enters downstream of the {keyname}, so the {keyname} must be the nonfunctional component." if defect < 3 else "No treatment restores the response, including active TF, so the final component, the transcription factor, is nonfunctional.", None)
-    stim = tbl("Response of a mutant cell line to treatments in a pathway: receptor, then protein A, then protein B, then a transcription factor that activates a target gene", ["Treatment", "Target gene expressed"], rows)
-    stem = "In a signaling pathway, the receptor activates protein A, protein A activates protein B, and protein B activates a transcription factor (TF) that turns on a target gene. A mutant cell has one nonfunctional component. The table shows whether the target gene is expressed after each treatment. Which component is most likely nonfunctional?"
+    key = Opt(names[keyname], True, f"Expression is first restored when a normal {keyname} is supplied, and supplying components upstream of it does not restore expression, so the {keyname} is the nonfunctional component.", None)
+    stim = tbl("Target gene expression in a mutant cell line after each treatment (the pathway is: receptor, then protein A, then protein B, then a transcription factor that activates the target gene)", ["Treatment", "Target gene expressed"], rows)
+    stem = "In a signaling pathway, the receptor activates protein A, protein A activates protein B, and protein B activates a transcription factor (TF) that turns on a target gene. A mutant cell has exactly one nonfunctional component. The table shows whether the target gene is expressed after each treatment. Which component is nonfunctional in the mutant?"
     return mk("bi_pathway_mutant_table", "4.3", "4.B", stem, key, ds, rng, concept="locate the defective step of a signal pathway from rescue data", stim=stim, path="direct simulation of the linear pathway with a defect at each position vs inference from the first rescuing treatment", facts=[f"defect={keyname}"], judgment="describe a table of rescue results and infer which step is defective")
 
 

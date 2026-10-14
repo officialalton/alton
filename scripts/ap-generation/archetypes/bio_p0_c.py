@@ -245,7 +245,7 @@ def bi_linkage_map(rng):
     agree(recomb / N * 100, 100 * R / N, 1e-9, "rf")
     rfv = recomb / N * 100
     pairs = [("Reports the percent of parental-type offspring instead of recombinant-type offspring.", 100 - rfv), ("Divides the recombinant count by the number of parental offspring instead of the total.", recomb / (N - recomb) * 100), ("Reports the percent for only one recombinant class.", cls["Ab"] / N * 100), ("Doubles the percent of recombinants.", 2 * rfv)]
-    key, ds = val_opts(rfv, pairs, lambda v: f"{v:.0f} map units", gap=1.5)
+    key, ds = val_opts(rfv, pairs, lambda v: f"{hu(v, 0)} map units", gap=1.5)
     stim = tbl("Offspring of a test cross between an AaBb parent (genotype AB/ab) and an aabb parent", ["Offspring phenotype", "Number of offspring"], [["Dominant for both traits (AB)", cls["AB"]], ["Recessive for both traits (ab)", cls["ab"]], ["Dominant for trait 1 only (Ab)", cls["Ab"]], ["Dominant for trait 2 only (aB)", cls["aB"]]])
     stem = "An AaBb plant whose alleles are arranged AB/ab was crossed with an aabb plant. The table shows the offspring. One map unit equals 1% recombinant offspring. What is the distance between the two genes in map units?"
     return mk("bi_linkage_map", "5.4", "5.A", stem, key, ds, rng, concept="recombination frequency between linked genes from test-cross counts", stim=stim, path="classification of each offspring class against the parental haplotypes vs the generating recombination frequency", facts=[f"N={N}", f"rf={rfv:.3f}"], judgment="identify recombinant classes and divide by the total number of offspring",
@@ -372,11 +372,11 @@ bi_dna_structure = make_bank_archetype("bi_dna_structure", "6.1", "1.A", [
 ], "describe the structure of DNA and RNA", "fixed fact bank checked against CED 6.1", est=55)
 
 bi_replication_enzymes = make_bank_archetype("bi_replication_enzymes", "6.2", "1.B", [
-    B("During DNA replication, which enzyme unwinds the double helix at the replication fork by breaking hydrogen bonds between the strands?",
-      ("Helicase", "Helicase separates the two strands at the replication fork."),
-      [("DNA polymerase", "DNA polymerase adds nucleotides to a growing strand."),
-       ("DNA ligase", "DNA ligase joins Okazaki fragments."),
-       ("Primase", "Primase synthesizes the RNA primers.")]),
+    B("A drug blocks the enzyme that separates the two strands of the double helix at a replication origin. Which result is most likely in cells treated with the drug?",
+      ("DNA replication cannot proceed because the template strands are not opened for copying.", "DNA polymerase needs single-stranded template DNA, so without strand separation neither new strand can be made."),
+      [("Replication proceeds normally because DNA polymerase can copy a double-stranded helix.", "DNA polymerase reads single-stranded templates and cannot copy the closed helix."),
+       ("Only the lagging strand cannot be made, because the leading strand does not need separated strands.", "Both new strands are made on separated templates, so neither strand can be made if the helix stays closed."),
+       ("Replication proceeds, but the new strands lack RNA primers because primase is blocked.", "Primase acts after the strands are opened; the drug acts earlier, so the cause of failure is the closed helix and not missing primers.")]),
     B("DNA polymerase can add nucleotides only to the 3' end of an existing strand. Which statement correctly explains a consequence of this?",
       ("One new strand is made continuously and the other is made in short fragments.", "Because synthesis occurs only in the 5' to 3' direction, the strand oriented away from the fork is made as Okazaki fragments."),
       [("Both strands are made continuously in the same direction as the fork.", "Only the leading strand is continuous."),
@@ -491,7 +491,7 @@ def bi_translation(rng):
     rows = [[c, AA_NAME[CODON[c]]] for c in sorted(allc)]
     stim = tbl("Codons and the amino acids they specify (for the codons that appear in the sequence below)", ["Codon (5' to 3')", "Amino acid"], rows)
     stem = f"The mRNA sequence 5'-{mrna}-3' is translated by a ribosome. Using the table of codons, which choice shows the amino acid sequence of the polypeptide, beginning at the amino terminus?"
-    return mk("bi_translation", "6.4", "5.A", stem, key, ds, rng, concept="translate an mRNA starting at the start codon until a stop codon", stim=stim, path="translate() over the first AUG vs a manual codon-table loop", facts=[f"mrna={mrna}", f"prot={prot}"], judgment="locate the start codon, keep the reading frame, and stop at the stop codon")
+    return mk("bi_translation", "6.4", "2.D", stem, key, ds, rng, concept="translate an mRNA starting at the start codon until a stop codon", stim=stim, path="translate() over the first AUG vs a manual codon-table loop", facts=[f"mrna={mrna}", f"prot={prot}"], judgment="locate the start codon, keep the reading frame, and stop at the stop codon")
 
 
 @retry_sep
