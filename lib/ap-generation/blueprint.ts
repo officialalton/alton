@@ -62,7 +62,7 @@ export function validateBlueprint(bp: Partial<Blueprint> | null | undefined, ctx
   }
   if (bp.subject === "ap_statistics") statsRules(bp, add);
   if (bp.subject === "ap_biology" && !(bp.code_first && !bp.experiment)) bioExperimentRules(bp, ctx, add);
-  if (bp.subject === "ap_microeconomics") microModelRules(bp, add);
+  if (bp.subject === "ap_microeconomics" || bp.subject === "ap_macroeconomics") microModelRules(bp, add);
   return out;
 }
 

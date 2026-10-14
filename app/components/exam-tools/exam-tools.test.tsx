@@ -280,6 +280,23 @@ describe("AP Microeconomics 도구", () => {
   });
 });
 
+describe("AP Macroeconomics 도구", () => {
+  const macro = subjectToolsConfig("ap_macroeconomics");
+  it("사칙 계산기만 있고 Reference 패널은 없다(CED 에 공식 수식 시트 언급이 없다)", () => {
+    expect(macro.calculatorTabs).toEqual(["basic"]);
+    expect(macro.reference).toBeNull();
+  });
+  it("Reference 를 열어도 아무것도 그리지 않는다(없는 시트를 지어내지 않는다)", () => {
+    render(<SubjectToolPanels config={macro} calculatorAllowed open="reference" onClose={() => {}} />);
+    expect(screen.queryByRole("dialog")).toBeNull();
+  });
+  it("사칙 계산기는 사칙·괄호·소수만 계산한다", () => {
+    expect(evalBasic("(480 - 360) / 4")).toEqual({ ok: true, value: "30" });
+    expect(evalBasic("1 / (1 - 0.8)")).toEqual({ ok: true, value: "5" });
+    expect(evalBasic("2^3").ok).toBe(false);
+  });
+});
+
 describe("AP Biology 도구", () => {
   const bio = subjectToolsConfig("ap_biology");
   it("공학용 계산기 + Reference, Desmos 없음", () => {
