@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-14T16:20:21.708Z",
- "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + phys-p1a2-items.json + phys-p1b-items.json + phys-s2-items.json + phys-s3-items.json + phys-s4-items.json + chem-p1a-items.json + chem-p1a2-items.json + chem-p1b-items.json + chem-s2f-items.json + chem-s2ma-items.json + chem-s2mb-items.json + chem-s2mc-items.json + micro-p1a-items.json + micro-p1b-items.json + micro-p2f-items.json + micro-p2a-items.json + micro-p2b-items.json + micro-p2c-items.json + micro-p2d-items.json + csa-p1a-items.json + csa-p1b-items.json + csa-s2a-items.json + csa-s2b-items.json + csa-s2c-items.json + csa-s2fa-items.json + csa-s2fb-items.json + csa-s2sf-items.json + csa-s2sm-items.json + el-p1-items.json + el-p2a-items.json + el-p2b-items.json + el-s2a-items.json + el-s2b-items.json + bio-p1a-items.json + bio-p1b-items.json + bio-r1-items.json + bio-r2-items.json + bio-r3-items.json + bio-r4-items.json + bio-s2a-items.json + bio-s2b-items.json + bio-s2c-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (2927행)",
+ "generatedAt": "2026-10-14T21:51:48.227Z",
+ "universe": "data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + phys-p1a2-items.json + phys-p1b-items.json + phys-s2-items.json + phys-s3-items.json + phys-s4-items.json + chem-p1a-items.json + chem-p1a2-items.json + chem-p1b-items.json + chem-s2f-items.json + chem-s2ma-items.json + chem-s2mb-items.json + chem-s2mc-items.json + micro-p1a-items.json + micro-p1b-items.json + micro-p2f-items.json + micro-p2a-items.json + micro-p2b-items.json + micro-p2c-items.json + micro-p2d-items.json + csa-p1a-items.json + csa-p1b-items.json + csa-s2a-items.json + csa-s2b-items.json + csa-s2c-items.json + csa-s2fa-items.json + csa-s2fb-items.json + csa-s2sf-items.json + csa-s2sm-items.json + el-p1-items.json + el-p2a-items.json + el-p2b-items.json + el-s2a-items.json + el-s2b-items.json + bio-p1a-items.json + bio-p1b-items.json + bio-r1-items.json + bio-r2-items.json + bio-r3-items.json + bio-r4-items.json + bio-s2a-items.json + bio-s2b-items.json + bio-s2c-items.json + bio-v2a-items.json + bio-v2b-items.json + bio-v2c-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (3101행)",
  "all": {
-  "total": 2927,
-  "pass": 1266,
+  "total": 3101,
+  "pass": 1350,
   "fail": 3,
-  "notApplicable": 1658
+  "notApplicable": 1748
  },
  "liveStates": {
-  "total": 1788,
-  "pass": 711,
+  "total": 1894,
+  "pass": 763,
   "fail": 0,
-  "notApplicable": 1077
+  "notApplicable": 1131
  },
  "byType": [
   {
@@ -58,8 +58,8 @@
   },
   {
    "type": "ap_graph:bio_line",
-   "total": 41,
-   "pass": 41,
+   "total": 47,
+   "pass": 47,
    "fail": 0,
    "notApplicable": 0
   },
@@ -177,8 +177,8 @@
   },
   {
    "type": "ap_table",
-   "total": 665,
-   "pass": 665,
+   "total": 743,
+   "pass": 743,
    "fail": 0,
    "notApplicable": 0
   },
@@ -212,10 +212,10 @@
   },
   {
    "type": "none",
-   "total": 1243,
+   "total": 1333,
    "pass": 0,
    "fail": 0,
-   "notApplicable": 1243
+   "notApplicable": 1333
   },
   {
    "type": "none(diagram_text_only)",
@@ -240,10 +240,10 @@
    "notApplicable": 366
   },
   "ap_biology": {
-   "total": 549,
-   "pass": 359,
+   "total": 723,
+   "pass": 443,
    "fail": 0,
-   "notApplicable": 190
+   "notApplicable": 280
   },
   "ap_microeconomics": {
    "total": 458,
@@ -289,9 +289,9 @@
   }
  },
  "figureNeed": {
-  "required": 1170,
-  "text_only": 1658,
-  "supporting": 99
+  "required": 1246,
+  "text_only": 1748,
+  "supporting": 107
  },
  "errorCodes": {
   "declared_intersection_mismatch": 2,
@@ -300,14 +300,14 @@
  "warnCodes": {
   "stimulus_json_repaired": 93,
   "points_only_curve": 24,
-  "table_units_missing": 265,
+  "table_units_missing": 325,
   "data_not_rendered": 130,
   "derivative_label": 6,
   "shade_unparsed": 10,
   "axis_label_long": 4,
   "axis_label_defaulted": 6,
-  "table_no_title": 357,
-  "axis_units_missing": 88,
+  "table_no_title": 435,
+  "axis_units_missing": 91,
   "text_data_not_in_stem": 1,
   "axis_range_derived": 28,
   "curve_clipped": 2,
@@ -44479,6 +44479,3228 @@
     }
    ],
    "alt": "Table with columns Salt concentration, Mean percent change in mass (percent) ± 2SE and 3 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m01-k0",
+   "contentHash": "c084ebecebcf429ad5a6471a25459daebe262a3995479207f84d5890ffa2b8b1",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m01-k1",
+   "contentHash": "c0a0c38e454112faafa70838a197d2ac9b094d3ec2063570c27196219ce755b1",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m01-k2",
+   "contentHash": "c3adbcd800bcc0c78966ee41cbbab5bb5afc772861c2d8f91bc73fd07ee73136",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m02-k0",
+   "contentHash": "6dcbfb9d9d30378ef3b3b262abdbb58ea291141a8b3bacbdf817662d068991fa",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m02-k1",
+   "contentHash": "c5888c99e8c70d3cffb3e7a3279e4553dad67292bbe106f5e19b7b2b00a2fbc6",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m02-k2",
+   "contentHash": "c82f2dc24a8ab5a910cd2354e96a6ee7282de801f35c10a1754e907df0f86351",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m03-k0",
+   "contentHash": "5b3353a3ad1322a3ce478e47bcce93e3b665486d1ec1ec7c920f673c47fc2713",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m03-k1",
+   "contentHash": "1015195f21f77ac66a65763168bcba5f14b3153ab945e272d1fe8c7fecb91af3",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m03-k2",
+   "contentHash": "f12f544eff4e4774d0d08364bb376f6fcc8bfb5b138487bf87d93457a502b949",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m04-k0",
+   "contentHash": "2d51faadace758e23945bef8758d8a9cb7007075b23057f03a0ce611fb5d85ad",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Bottle, Initial O₂ (mg/L), O₂ after 5 hours (mg/L) and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m04-k1",
+   "contentHash": "8568fb8ece57c9f95da968c44fc5e681461364911a5de78edf0ff759da2d5202",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Bottle, Initial O₂ (mg/L), O₂ after 4 hours (mg/L) and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m04-k2",
+   "contentHash": "52c58fef66c145357a18c06b5e3b7af1b308a58510cf5e1afcf75d5d9418fb9d",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Bottle, Initial O₂ (mg/L), O₂ after 4 hours (mg/L) and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m05-k0",
+   "contentHash": "dd0a088be71847cbdbe190c694567e838396e107aed08e42dab3f6807cb4c43b",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 3개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Germinating peas\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Temperature (°C), Germinating peas, Glass beads (control) and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m05-k1",
+   "contentHash": "906826273209f27092a00d28470d649796e34e265093fcb174dd9d8aa38746a1",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Germinating peas\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Temperature (°C), Germinating peas, Glass beads (control) and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m05-k2",
+   "contentHash": "fa004e1b1f2f397ac9d6b9398af5b6ce9b85889ac688d9a5224714f4bd2e3151",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Germinating peas\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Temperature (°C), Germinating peas, Glass beads (control) and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m06-k0",
+   "contentHash": "7376c5a5a723a784a73306def6b2869f82aeb121843756f396479edd6e0071b1",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Temperature, Product at 2 min, Product at 6 min and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m06-k1",
+   "contentHash": "35f3d75bc18f361c1f6cfcbff81570613d837a1e89a191fd4f44e9473d182880",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Temperature, Product at 1 min, Product at 5 min and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m06-k2",
+   "contentHash": "3902c2fac4c9960b52c9771e77453a6769b7fbcc8ac84659f69cb7189a70d64e",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Temperature, Product at 2 min, Product at 6 min and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m07-k0",
+   "contentHash": "ece9dc31c195df00ff6080343f6d1b72e4ee6314edfbf20f02e028728b150714",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Cells in mitosis\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Cells in interphase\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Group, Cells in mitosis, Cells in interphase and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m07-k1",
+   "contentHash": "47522c250041fe662c7d633e339bc3bb2fe5971414cabfcc5acdeac52c981c57",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Cells in mitosis\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Cells in interphase\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Group, Cells in mitosis, Cells in interphase and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m07-k2",
+   "contentHash": "596637f84833edce514a12f19b74f155b1d0deedbf062cd219603904466f94a0",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Cells in mitosis\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Cells in interphase\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Group, Cells in mitosis, Cells in interphase and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m08-k0",
+   "contentHash": "61463f16a8491d07faecf9c40d25d677de2032eb70bf8485d396a522c10ccb99",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m08-k1",
+   "contentHash": "3daec54f6312c52f64065d874452fddac0fa69ddf58176aab0f91840796ee978",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m08-k2",
+   "contentHash": "8079792359bdb7ebe18878a817752cc55028cb04f7aedd82b49587dec24ac20a",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m09-k0",
+   "contentHash": "cffac1c4e4f2aa268af1648fd10e4d3ce7f7784b58210815ba67c70ce40b64d0",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m09-k1",
+   "contentHash": "ea1c272a1e9cd17af0aaa147230a527532d460f209dde19b507e68dd2679f9fb",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m09-k2",
+   "contentHash": "42950418a57f2e73de2f3fa7a1d815212600933e5cbeeb8116400a4b82344895",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m10-k0",
+   "contentHash": "d2f27d43eee7ed6bc85633cc78b2d2490c1e8aeec83dc4c6f713740a1768006b",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m10-k1",
+   "contentHash": "ac6c96cd9ca9ae2931dc29fe8b76ba8e5c3e9bef16c64278ef1ff6c8e6763484",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m10-k2",
+   "contentHash": "431b0a3e66948f82c4aaef37ef2c6dd01c6b38b348e96ef5c4ac22c25115e5ea",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m11-k0",
+   "contentHash": "c160f6ac9b119f8b0663988b30afd3cc787a19df65e02bc64a84a922818ef803",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m11-k1",
+   "contentHash": "1de1c3fedb793be051d0ac541b62d4d9bb48ec135fc57766181eb90f593b7e34",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m11-k2",
+   "contentHash": "5eb918112b694df7c357c28668a7023d69e45b116122834bbcf862352bca3b29",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m12-k0",
+   "contentHash": "e13fc4364cfc2b88c672c2ba9fddaf7ab555dfa167b4807811420546b83c57b5",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m12-k1",
+   "contentHash": "9b3008213093d446e8e28ed2e24fc975e3a85e467b95e79a989f5e48cdcdfcac",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m12-k2",
+   "contentHash": "cf1c81a6f4f8c416f0ece7da7879d6843d300b63a06052e73e00ee7ca653a096",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m13-k0",
+   "contentHash": "451ac4ab3b16e19a7ce2deb217a6b11aed109972ac314e309c48ee876cd4f2db",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m13-k1",
+   "contentHash": "aede2f006038177d0f9cce8b1422418eed5bfed8c2f4e96be9363dac0294ab32",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m13-k2",
+   "contentHash": "9ac5416f83ea28c9984b05bd9aedbb5e065c87331939e0e1a6739248f667a112",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m14-k0",
+   "contentHash": "5ebd9f6e510379de60b03b4220990cc1b801a63c3f196401f072b367cb9dc39d",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m14-k1",
+   "contentHash": "120def3ef86b6b8d022fa495a1fa3cfcf8df5b703d35ef32527848e2f9a464a3",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m14-k2",
+   "contentHash": "1ba649daa6ba9358c1cd1775653d073448270ca7d8b416868438dd62866fae27",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m15-k0",
+   "contentHash": "8eb9d0200e3b70ccbfc7d614dfbd0dc1b53970318aba4043c7bc4858b1e32716",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m15-k1",
+   "contentHash": "c9ed1b5e23197a9f1deb0ff6fc5f30d4bcbf40f988e58cf6caf62c8bdc84dca4",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m15-k2",
+   "contentHash": "a32029d99e977c5b29c308e5e6a6107bb7e2a29032a1b22df8459082e048ebd2",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m16-k0",
+   "contentHash": "c420000581c59579be7b4481097e00411251db4ce294d56c419f80a200b4220d",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "supporting",
+   "needReason": "표의 값이 본문에도 있음",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns mRNA codon (5' to 3'), Amino acid and 6 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m16-k1",
+   "contentHash": "6fdd4d3feed6339f1adbbec25289a5f6541caecabc9be85f2fd0bd3ab35cf5e1",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "supporting",
+   "needReason": "표의 값이 본문에도 있음",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns mRNA codon (5' to 3'), Amino acid and 7 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m16-k2",
+   "contentHash": "54cf7a7f8e4b4d909cb7bc45873d8f41590fe1be035451f424905e46bc03977d",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "supporting",
+   "needReason": "표의 값이 본문에도 있음",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns mRNA codon (5' to 3'), Amino acid and 6 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m17-k0",
+   "contentHash": "f0ad1ad9fd6d866ba5ce47d7c59a5aeefb0b016e65040e22b5ffb03f6b4df3c4",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m17-k1",
+   "contentHash": "9533f6e3598d3f246c9e2966fd3651a24e153b8966a25e4b925bb8f210775e45",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m17-k2",
+   "contentHash": "8cc685b12770214a29ce7630a4ecacb049a36f413339afc3caeb6405234c459f",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m18-k0",
+   "contentHash": "2c078939afe7a0df9c2149090c43d66a4cbe733bb253ea68924cdbd83d921982",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 14개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Band, Size (bp), Distance migrated (mm) and 6 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m18-k1",
+   "contentHash": "18e6b02a38ac86e4e6639417932cd7251bb6f25a2b51dd701ea9478354f085ed",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 14개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Band, Size (bp), Distance migrated (mm) and 6 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m18-k2",
+   "contentHash": "8ee79ad1f18fca7c3b3b661cd443b167acc140df0e6ac4ea4ae834acc9bd3753",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 14개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Band, Size (bp), Distance migrated (mm) and 6 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m19-k0",
+   "contentHash": "1c98ac91835182735e9db0c39239adf7bd2734b80831bd0058385b85e1cac4d1",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m19-k1",
+   "contentHash": "7f8b48db8e03c38bcc13a2e8c167562215e99b760e674f9b65144670fa29b885",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m19-k2",
+   "contentHash": "ee753f2099f84ad1453a988a6e2e9c89ff6170f6ac496320b804cad0cc5a92fd",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m20-k0",
+   "contentHash": "1a4c7e69434988633eec80c893db98a13bb77c9bb8e688a3639d5a59fa4cc935",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m20-k1",
+   "contentHash": "4f55c46393c22f46e5b669226bb8dfba69b9d95048f4417f6db67bc3dc6de60b",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m20-k2",
+   "contentHash": "b355a42444d5b536978b4b191a070c01200a421c11109f8c8c1164f5463847e8",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m21-k0",
+   "contentHash": "ddcd167dd53b9c9a6b78e1016d2ac63719caa9b724f670f83eba0a0b296b7721",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m21-k1",
+   "contentHash": "caed75d254738de286297db43ebbe5ece6a86303d39ad17f153ae0929e7264e7",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m21-k2",
+   "contentHash": "a0e8af3bc2728017a9969b106c81b3948fe823fba4c3d99b80092fb50a6afa4c",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m22-k0",
+   "contentHash": "39c992ec5338fec95f5a36eceec7ce23cae50cd51165dffbf42a0963835da891",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 6개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number at birth\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number surviving to reproduce\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Genotype, Number at birth, Number surviving to reproduce and 3 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m22-k1",
+   "contentHash": "b4c698ba5ed05237f8f1d25adadd53c832ee3c5c76c695c8640163d24257a620",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 6개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number at birth\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number surviving to reproduce\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Genotype, Number at birth, Number surviving to reproduce and 3 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m22-k2",
+   "contentHash": "497471546ac99900e625c97d9f95111b8868fbc418eef5ab1e0e7067b466b1d8",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 6개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number at birth\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number surviving to reproduce\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Genotype, Number at birth, Number surviving to reproduce and 3 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m23-k0",
+   "contentHash": "d81aa2588a71ad86c9954eb90374186533a2ff0d4e1b8180a5461dceec5f25f5",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m23-k1",
+   "contentHash": "1539eb6104c5862b421952163f11d910bbb625bae0e9e8c105aa89a8580236f8",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m23-k2",
+   "contentHash": "b917e754d9bc861fa36a121eabcffcef256fb4906d5fb47d62452d870ec1de55",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m24-k0",
+   "contentHash": "edf9b2dba51b6e7be4b150e3324f90a63f81b55a5bf75ef6f0e692fb5776ee2b",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m24-k1",
+   "contentHash": "a87c5d0e035ff1a8de082ea8d4eef41e8c7e732e4225024c1a827b6012572510",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m24-k2",
+   "contentHash": "8216c76766b159f1a572c8f54ee25a1e8ea6eb549f52405c902e9e019ed4618a",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m25-k0",
+   "contentHash": "ed27ae63e4348f17ee2f128df64d72ced19f7ac16fc4813f682e3c25cbc5d7ea",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m25-k1",
+   "contentHash": "e851d114d5a8b9bc534b454c640027b427b69c93fcf6bbca63e884273e22fb42",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m25-k2",
+   "contentHash": "d27c92302cc20cae4a6fe7285cfd75fb362f49694ac5a85181af2f3c17100188",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m26-k0",
+   "contentHash": "75afce16066f3236794b26ccb02f617a53dec397df56a7d299dad37f7a8a5eea",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m26-k1",
+   "contentHash": "b541c01d928fe288c2472f041da8bc5bf7873760de5e4ebd434f8a82b3308008",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m26-k2",
+   "contentHash": "92de78140f8c61acf67b4c1f0f35332f71702ada406da65bfeb94b7d89cf61af",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2a:ap_biology-m27-k0",
+   "contentHash": "393da01186b5ee897b68bf90608cd5962b52cd902370e91508bf5d07f042d1d2",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Before\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"After two years\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Treatment, Before, After two years and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m27-k1",
+   "contentHash": "6d1e693f0d32c9476f8711a194f324d29fcf44fc2fc7d5cd58a4699df641bd0d",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Before\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"After two years\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Treatment, Before, After two years and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m27-k2",
+   "contentHash": "6edea02eb46ccd08689419583a711b9fa6c4f4c1aeca97519662f9d5200af7dc",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Before\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"After two years\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Treatment, Before, After two years and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m28-k0",
+   "contentHash": "b62b9fdbab5b3065b367c3c127a7089db1b0af6ace084817ee487c16b89b3881",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Net primary productivity\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Respiration by producers\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Ecosystem, Net primary productivity, Respiration by producers and 4 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m28-k1",
+   "contentHash": "b21220cdb83397034960036acca14342f4757b6e440889eba477cc6e3a3391ce",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Net primary productivity\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Respiration by producers\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Ecosystem, Net primary productivity, Respiration by producers and 4 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m28-k2",
+   "contentHash": "1825892585129c5984a2d51be9e0adee6851b494a5e59a8174e71d6f9824003e",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Net primary productivity\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Respiration by producers\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Ecosystem, Net primary productivity, Respiration by producers and 4 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m29-k0",
+   "contentHash": "024c373595a5f55972d6148edd64bb3f77deb1fda62cc5093ddf1fd09a03fcbd",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 6개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number of plants\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Treatment, Mean height (cm), Standard deviation (cm), Number of plants and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m29-k1",
+   "contentHash": "2e2cf78647752bd8009909ef1498e6acc42c46cd321fa09d8a2c7903cc9def88",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 5개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number of plants\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Treatment, Mean height (cm), Standard deviation (cm), Number of plants and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m29-k2",
+   "contentHash": "53bcabe6d373c2c357aa0d95da877f50e6fe89f38e04e8a3c5c2d29b3cc4f49e",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 6개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number of plants\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Treatment, Mean height (cm), Standard deviation (cm), Number of plants and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m30-k0",
+   "contentHash": "876441474c472d401246e0e3af37ef77d3ec0941d34f8c5b7a001d59be7b2789",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "supporting",
+   "needReason": "본문이 표를 가리키지 않음 — 보조 자료",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Sequence, mRNA (5' to 3') and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m30-k1",
+   "contentHash": "58439a2f923260fd8e43559fabf57e727dd2f8e56eb0dc5372155e599f0cbfa9",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "supporting",
+   "needReason": "본문이 표를 가리키지 않음 — 보조 자료",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Sequence, mRNA (5' to 3') and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m30-k2",
+   "contentHash": "77989add70e07563cd41a96ce3b3390b8a6e2728bc5101ac5d11c3e8992f0911",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "supporting",
+   "needReason": "본문이 표를 가리키지 않음 — 보조 자료",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Sequence, mRNA (5' to 3') and 2 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m31-k0",
+   "contentHash": "25c3f4ce1c8ef3e9074b42c29baf05740e279c33de48630ced9d070f908076d9",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 12개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number of individuals\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Year, Number of individuals and 9 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m31-k1",
+   "contentHash": "c443835132c643c0425413063ae5608d7ebf0af6424c1d222eda15d6134c5f33",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 12개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number of individuals\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Year, Number of individuals and 9 rows."
+  },
+  {
+   "key": "bio-v2a:ap_biology-m31-k2",
+   "contentHash": "2e177e469af7314748d990c3c004dd00bc9e7f8cbbd6d5effe6fda3744962a1f",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 11개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number of individuals\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Year, Number of individuals and 9 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m01-k0",
+   "contentHash": "bf62e457c7e7ced0e8df21228a867469a568a0dfff7bd5e23f1f120ab52fb1a5",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m01-k1",
+   "contentHash": "67615d2415234b58a8044252472112aaa7da3e09ad8344b824f034af9730c819",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m01-k2",
+   "contentHash": "a1e8669123928cc2f1c61152156c68709ce2b7b613b72cd67c74875e59410193",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m02-k0",
+   "contentHash": "7f58db574d09bdc0970ac6dd78b1a3263b4b7746aaee15afecf1ff9ef8c629b7",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m02-k1",
+   "contentHash": "9b52ee7effb2f2e04a650021213f098049ab18b28015bb5345e7863c136cd650",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m02-k2",
+   "contentHash": "5eee921ee42734c7c6328d832ad16d4715b8777003b042b4db38ded189eef848",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m03-k0",
+   "contentHash": "407fa23491de286f7d1621b9f5ed86e25b2d3fdf52450dc6e40a4dbe45d0b0ee",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 7개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Sucrose molarity (M), Percent change in mass and 4 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m03-k1",
+   "contentHash": "3f0a04a7708b3743eea03a460d6fb52a0960c1cc1154134f4d2ebb2bf8f23ab5",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 7개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Sucrose molarity (M), Percent change in mass and 4 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m03-k2",
+   "contentHash": "61413e642162dc578e439a53b76a06ae66d571cdf8a4c304fca47c14bd29d3a7",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 7개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Sucrose molarity (M), Percent change in mass and 4 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m04-k0",
+   "contentHash": "190783be95b2c4692e3017a6fef7b6abd9346bb89046613e34f21caebfc2a400",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m04-k1",
+   "contentHash": "377e19177086271fa475402673b3dd923772d613c06a0b5f0582b8e90642eac1",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m04-k2",
+   "contentHash": "a1994b5e2a09ae37efb9d0f2befc8e9e78683bf35db7a17c28bb6908adbaa787",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m05-k0",
+   "contentHash": "03929d46f4249199c94de829fb82200d50d370c59ac65d9d708ff689d4a9048a",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m05-k1",
+   "contentHash": "7e73e86125a504edae961eb3d4fcf31144bed02a02c64dd7f546b5d78edfbd82",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m05-k2",
+   "contentHash": "a366abc2efa5282f5d29ed8d1e5f468c41d3857cfdab6c7c1089a2d192391429",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m06-k0",
+   "contentHash": "6ad02a6ba00253379e84813d1f83d87c5f71bdfad01eeea8b232b4db9469774a",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m06-k1",
+   "contentHash": "cd317faf11e593e7ff57e7d73523a0a5a28f446481659a05133bfe10c83657c4",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m06-k2",
+   "contentHash": "9a9fbed8886240fc2914f3abbceaa980f4d420c9d83f2e8233ec19e4716c7343",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m07-k0",
+   "contentHash": "e0b14069c1670cdb5942ba60728914359332198781c897d7002a34725e4a6625",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 2개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number of individuals\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Genotype, Number of individuals and 3 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m07-k1",
+   "contentHash": "5272ed969dc34eb72b769b164ca3946f51f28719f682e2e7dfc61ed4dab3dfdc",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 2개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number of individuals\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Genotype, Number of individuals and 3 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m07-k2",
+   "contentHash": "b0ad70fc8f4791c963fa13a3544c68e493c3bbb576e1c41398f9a0d1a5c937a9",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "supporting",
+   "needReason": "표의 값이 본문에도 있음",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number of individuals\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Genotype, Number of individuals and 3 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m08-k0",
+   "contentHash": "a0ec5f5fb3ebfc36107c7e3398ba0352c13f68374da5d837369b8fe37f18de77",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:bio_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "y 축 라벨 \"Number of individuals\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: Time (days), 0 to 30. Vertical axis: Number of individuals, 0 to 600."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m08-k1",
+   "contentHash": "d7ef61cad9e02d4e9cd614dba7a87d441c53b344fbae3467f456dfc377f29078",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:bio_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "y 축 라벨 \"Number of individuals\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: Time (days), 0 to 30. Vertical axis: Number of individuals, 0 to 600."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m08-k2",
+   "contentHash": "6a4112e2e628a19c28be9b2108fd580398942e8c9322e5978ee1bb93a43c5302",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:bio_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_units_missing",
+     "message": "y 축 라벨 \"Number of individuals\"에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: Time (days), 0 to 30. Vertical axis: Number of individuals, 0 to 600."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m09-k0",
+   "contentHash": "320a6883bbf6d639af67d35ec8a278ffdc0a7543494662bcc971047a71887326",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Species, P, Q, R, S and 4 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m09-k1",
+   "contentHash": "ff867aed81fe00be6a656c07c1940916caaa0b6b340142b3da5184f8d518d5e3",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Species, P, Q, R, S and 4 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m09-k2",
+   "contentHash": "e2215ee7eb0c244d9e4c6b78716fe6a7d33dbb0dfc2cdae5551b0855d7ff8a0e",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Species, P, Q, R, S and 4 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m10-k0",
+   "contentHash": "97b40c0ea568ad439e86ab4c34ddaf74790bd075fdc6a712fdf96d453f5e850b",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:bio_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of Tube 1, Tube 2. Horizontal axis: Time (minutes), 0 to 4. Vertical axis: Product (µmol), 0 to 10."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m10-k1",
+   "contentHash": "e8a61fd3f06c23f169dc047bfcb5793fb6f28062d898024b5286cff2e9989944",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:bio_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of Tube 1, Tube 2. Horizontal axis: Time (minutes), 0 to 4. Vertical axis: Product (µmol), 0 to 8."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m10-k2",
+   "contentHash": "5afc2355c6dd151943d41d937bf43a036d48b6e8623139491bcc27c5c2e315d6",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "graph",
+   "renderType": "ap_graph:bio_line",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [],
+   "alt": "Graph of Tube 1, Tube 2. Horizontal axis: Time (minutes), 0 to 4. Vertical axis: Product (µmol), 0 to 8."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m11-k0",
+   "contentHash": "909c9a40405b748205bb09f06c249209fb2eb5810e8ac8dd06992673ebadc8d6",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 7개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Temperature, Product at 2 min, Product at 6 min and 4 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m11-k1",
+   "contentHash": "537af55fad819405afca1cdab34d1d3e3c4ed2cd347008525e71a10251951edb",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Temperature, Product at 2 min, Product at 6 min and 4 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m11-k2",
+   "contentHash": "8df5b7972ee9a93ece023ff656b4534740c792ce9ff1951e9b171a14ab3e418f",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 6개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Temperature, Product at 2 min, Product at 6 min and 4 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m12-k0",
+   "contentHash": "00ae7f3ceeabf07572acac2252f37bae62cb8583f0a8491ce52cc10c782c945d",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Without the hormone\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"With the hormone\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Gene, Without the hormone, With the hormone and 2 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m12-k1",
+   "contentHash": "7c593e3dd787f4f01d7b6a6e987d7a0b353b4b86c3d5e2ed22b3e1fd2395e04b",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Without the hormone\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"With the hormone\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Gene, Without the hormone, With the hormone and 2 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m12-k2",
+   "contentHash": "b19b103b72ae16e753761f2ba96d58cd08186d7547c99b08d485938275f80a00",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Without the hormone\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"With the hormone\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Gene, Without the hormone, With the hormone and 2 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m13-k0",
+   "contentHash": "d73464e5bac3fdf507e2a37fe1d18d6b8c85518fb2781d40ef4da75840e3f44d",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m13-k1",
+   "contentHash": "4cf334a4818194bbcb0d048cac1e0360b0450f29dac5429b2a40013838b03242",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m13-k2",
+   "contentHash": "e871eb93c48972a1e1fe6fdf395a0706dbbf20a3e099e5f7a25a1ca8e9f5311d",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2b:ap_biology-m14-k0",
+   "contentHash": "812bb8301febdfe58bc3ab0a63c3c3d1359798424443095ba54a628c2cb9fa05",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Inhibitor concentration (µM), Rate (µmol/min) and 5 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m14-k1",
+   "contentHash": "8fb5ea52eb8d0cfc74fa2784c79d26ecf4503dbe46d26ac13aadb7d78e9cc171",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Inhibitor concentration (µM), Rate (µmol/min) and 5 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m14-k2",
+   "contentHash": "823056193a4f73186719babc3aa8e5349aa24e5c2bec4ec4d93a1bd677f0cb9b",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Inhibitor concentration (µM), Rate (µmol/min) and 5 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m15-k0",
+   "contentHash": "16f609378df104e8bf31b1aeef5f7fc168bbb0d098e2ca21b0d614a4f370dade",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 9개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Individual, Relationship, Phenotype and 5 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m15-k1",
+   "contentHash": "3956d840db4e1e577b5cc900358cc3737dfa91a507a6dc8e230f4fde746c5df6",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 9개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Individual, Relationship, Phenotype and 5 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m15-k2",
+   "contentHash": "629087f46bab5ba9de0535f0010ff838e9be995a4bb43642ed6cf7dd32c7e663",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 9개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Individual, Relationship, Phenotype and 5 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m16-k0",
+   "contentHash": "74ac2f9d7db5fb85b39a7a2e7ff01775a9da02b8af5d13c734d803995bde8a38",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 4개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number of trials\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Light intensity, Mean rate (µmol O₂ per minute), Standard deviation (µmol O₂ per minute), Number of trials and 2 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m16-k1",
+   "contentHash": "cca0efd6234a4fe19c376a4e458fd87d0818a4a08be4287dac0cd5874bb03758",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 5개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number of trials\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Light intensity, Mean rate (µmol O₂ per minute), Standard deviation (µmol O₂ per minute), Number of trials and 2 rows."
+  },
+  {
+   "key": "bio-v2b:ap_biology-m16-k2",
+   "contentHash": "71f2ad7c5c7cf07d4b44d53fa92740e77e823b9a26653a272b8e9fdccd3a942f",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 5개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Number of trials\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Light intensity, Mean rate (µmol O₂ per minute), Standard deviation (µmol O₂ per minute), Number of trials and 2 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m01-k0",
+   "contentHash": "27311afc16919ecd9860652f94626087fd396d0f72f9e47780c8191abc789c42",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 16개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Sample, % A, % T or U (U in RNA), % G, % C and 4 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m01-k1",
+   "contentHash": "3a72477f6ccad986f234bda6fe1c9f6117b41919248b41a1b551f66925e91a62",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 16개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Sample, % A, % T or U (U in RNA), % G, % C and 4 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m01-k2",
+   "contentHash": "41415124ef4698606161a8cc3a4ad4b159adb7d25e879c26027fd0f043453e96",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 16개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Sample, % A, % T or U (U in RNA), % G, % C and 4 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m02-k0",
+   "contentHash": "2a917259a16aa3bdd3a07da6cab97e23ff97b173d78d59d8d149aaf84ba19c07",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m02-k1",
+   "contentHash": "5950f3395a3803551106a25c1a161db270d1842dbd9c886afcd07b25e4b4d52a",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m02-k2",
+   "contentHash": "0b17b4250effeb4745743c114a3ff2261c2b679e5643cb3059e85b7028e80d6c",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m03-k0",
+   "contentHash": "185387e13d4de796a5e423fbc4b3cd5ac9651c5b7e9db78b9c32b88091e94eeb",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Absorbance\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Sample, Absorbance and 7 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m03-k1",
+   "contentHash": "4faa2e86403f6b9e05654bde5e7f7c92ae84cf515193a2ca8c20eb5828d77b2e",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Absorbance\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Sample, Absorbance and 7 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m03-k2",
+   "contentHash": "5112ec70acac220ef9ca01c1e4120b83888b22993620538e57bc71dcd9a258b4",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 10개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Absorbance\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Sample, Absorbance and 7 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m04-k0",
+   "contentHash": "30c36301ce11e75a2f0cc0732f7eb8c049adafaa3c92fa16c8b7a7e6966a8824",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Bag, Starting mass (g), Final mass (g) and 4 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m04-k1",
+   "contentHash": "03cbd25e2f2024007f63363ac31fc357d7a2614ae7dadc82cdae77f03a2217e6",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Bag, Starting mass (g), Final mass (g) and 4 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m04-k2",
+   "contentHash": "773363132972f21f83e685cc4145d8a72b5117bd34621e6da94398b97b2a9f77",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Bag, Starting mass (g), Final mass (g) and 4 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m05-k0",
+   "contentHash": "c7bd8f77dcf9ca6575290144abcd11e5c2b86bc4123863ca6eb2b1394cd7e075",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m05-k1",
+   "contentHash": "fb5471e778511dd9d952fd5ddf5e39ce03e1fbd296e64102685eb105cd5ddd50",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m05-k2",
+   "contentHash": "07dcfed9c7504a8d464faaac8258dfea78983ea1e85278c6a2a75489c5cd073c",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m06-k0",
+   "contentHash": "b2a69dddd03fa1325c4228401053217a1264bd14855f8e243810b55ebe09a9b3",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Control\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Drug\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Stage, Control, Drug and 5 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m06-k1",
+   "contentHash": "360834aa5f5117743c62596a8491d79e69cee2ee87054cba9863b40b66633a2c",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 8개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Control\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Drug\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Stage, Control, Drug and 5 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m06-k2",
+   "contentHash": "f447a7917b9b15612401fc60bcb36762dc91d3eceb8a371fee9d4455083de658",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 3개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Control\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Drug\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns Stage, Control, Drug and 5 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m07-k0",
+   "contentHash": "20aaf6a0cf73a6336c6a7a12cebdd5cf83eae8acdf7fb6d6d5bc9d720679ab0a",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m07-k1",
+   "contentHash": "5bd9764e57ecc060084d30a36b273a333db22ec990fe1024f529d4bdfd71a7a1",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m07-k2",
+   "contentHash": "7284db8d23e9c006fed6a841bb4e29c4e4ddacdadc8e4bb701468844d85a3570",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m08-k0",
+   "contentHash": "fe6b6526a8d7ab66e0d8dcd48bd761dcd609aae514ac2de41673f8b43b8d475f",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 5개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Control\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Drug\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns DNA content, Control, Drug and 3 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m08-k1",
+   "contentHash": "6d934692134ab3b6272cf36d4e35fcf2b1734562af05fa2f0b1801d971b8c745",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 5개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Control\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Drug\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns DNA content, Control, Drug and 3 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m08-k2",
+   "contentHash": "50f66f1826c74784457f5e6c59844992f41f43fab687a9d0332c50eb473f4211",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 5개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Control\" 에 단위 표기가 없습니다."
+    },
+    {
+     "level": "warn",
+     "code": "table_units_missing",
+     "message": "열 \"Drug\" 에 단위 표기가 없습니다."
+    }
+   ],
+   "alt": "Table with columns DNA content, Control, Drug and 3 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m09-k0",
+   "contentHash": "2ed2adcf51b4ad6eea2975c39d3f198e5a45fd606938832df13fda2bf2143391",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "supporting",
+   "needReason": "표의 값이 본문에도 있음",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Gene pair, Recombination frequency (%) and 3 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m09-k1",
+   "contentHash": "00adc35b1bebc3caeba89c4921aaca3b957c4b271a9234f89676f31e7f06c5ba",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 1개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Gene pair, Recombination frequency (%) and 3 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m09-k2",
+   "contentHash": "f945318264d8cd4beed5dcd92a835c273bfdcd4a2e68fb1056885e1bc0a55d71",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 1개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Gene pair, Recombination frequency (%) and 3 rows."
+  },
+  {
+   "key": "bio-v2c:ap_biology-m10-k0",
+   "contentHash": "eb94bf034903250c057f06c1dc22b23f784cdf2001a17429d214289aeea4ddc4",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m10-k1",
+   "contentHash": "81d7f7453a18d4460d15d964084b6b26c8fea1122006bdef301dde2938f719d5",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m10-k2",
+   "contentHash": "31eb2d5aa89d79a825be09263eb8a9e46011ccba0b83a6650c92c49b2d92e742",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "rejected",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m11-k0",
+   "contentHash": "e3744e55d00e05f31344a117bb817bba2437da45e887d3e11f897fde302d3782",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m11-k1",
+   "contentHash": "a9ffd8435e5e9c031c4b9908d7933bfe9ed0feeeb0578a9f08b8937632ade32b",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "exact_duplicate",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
+  },
+  {
+   "key": "bio-v2c:ap_biology-m11-k2",
+   "contentHash": "66513186663fe1ea1393613ce6825f8edf373dcf41d3fe061dd1f91fdf65f270",
+   "subject": "ap_biology",
+   "kind": "mc",
+   "validation": "auto_passed",
+   "stimKind": "none",
+   "renderType": "none",
+   "need": "text_only",
+   "needReason": "자료 없음",
+   "status": "not_applicable",
+   "issues": [],
+   "alt": null
   },
   {
    "key": "supp-b1-bc-final:ap_calculus_bc-m01-k0",
