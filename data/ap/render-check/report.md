@@ -1,11 +1,11 @@
 # AP 그림 렌더링 게이트 결과
 
-생성: 2026-10-14T10:32:44.239Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + phys-p1a2-items.json + phys-p1b-items.json + phys-s2-items.json + phys-s3-items.json + phys-s4-items.json + chem-p1a-items.json + chem-p1a2-items.json + chem-p1b-items.json + chem-s2f-items.json + chem-s2ma-items.json + chem-s2mb-items.json + chem-s2mc-items.json + micro-p1a-items.json + micro-p1b-items.json + micro-p2f-items.json + micro-p2a-items.json + micro-p2b-items.json + micro-p2c-items.json + micro-p2d-items.json + csa-p1a-items.json + csa-p1b-items.json + csa-s2a-items.json + csa-s2b-items.json + csa-s2c-items.json + csa-s2fa-items.json + csa-s2fb-items.json + csa-s2sf-items.json + csa-s2sm-items.json + el-p1-items.json + el-p2a-items.json + el-p2b-items.json + bio-p1a-items.json + bio-p1b-items.json + bio-r1-items.json + bio-r2-items.json + bio-r3-items.json + bio-r4-items.json + bio-s2a-items.json + bio-s2b-items.json + bio-s2c-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (2915행)
+생성: 2026-10-14T16:20:21.708Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + phys-p1a2-items.json + phys-p1b-items.json + phys-s2-items.json + phys-s3-items.json + phys-s4-items.json + chem-p1a-items.json + chem-p1a2-items.json + chem-p1b-items.json + chem-s2f-items.json + chem-s2ma-items.json + chem-s2mb-items.json + chem-s2mc-items.json + micro-p1a-items.json + micro-p1b-items.json + micro-p2f-items.json + micro-p2a-items.json + micro-p2b-items.json + micro-p2c-items.json + micro-p2d-items.json + csa-p1a-items.json + csa-p1b-items.json + csa-s2a-items.json + csa-s2b-items.json + csa-s2c-items.json + csa-s2fa-items.json + csa-s2fb-items.json + csa-s2sf-items.json + csa-s2sm-items.json + el-p1-items.json + el-p2a-items.json + el-p2b-items.json + el-s2a-items.json + el-s2b-items.json + bio-p1a-items.json + bio-p1b-items.json + bio-r1-items.json + bio-r2-items.json + bio-r3-items.json + bio-r4-items.json + bio-s2a-items.json + bio-s2b-items.json + bio-s2c-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (2927행)
 
 ## 전체
 
-- 전체 2915행: 통과 1266 / 실패 3 / 해당 없음(그림·표 없음) 1646
-- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 1778행: 통과 711 / 실패 0 / 해당 없음 1067
+- 전체 2927행: 통과 1266 / 실패 3 / 해당 없음(그림·표 없음) 1658
+- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 1788행: 통과 711 / 실패 0 / 해당 없음 1077
 
 ## 유형별(렌더 유형)
 
@@ -39,7 +39,7 @@
 | ap_table:multi_panel | 29 | 29 | 0 | 0 |
 | ap_table:payoff_matrix | 18 | 18 | 0 | 0 |
 | figure_choice:ap_diagram:phys_scene | 8 | 6 | 2 | 0 |
-| none | 1231 | 0 | 0 | 1231 |
+| none | 1243 | 0 | 0 | 1243 |
 | none(diagram_text_only) | 1 | 0 | 0 | 1 |
 | text | 414 | 0 | 0 | 414 |
 
@@ -55,13 +55,13 @@
 | ap_physics_1 | 366 | 126 | 2 | 238 |
 | ap_chemistry | 345 | 104 | 0 | 241 |
 | ap_computer_science_a | 221 | 0 | 0 | 221 |
-| ap_english_language | 30 | 2 | 0 | 28 |
+| ap_english_language | 42 | 2 | 0 | 40 |
 
 ## 그림 필요 분류(그림이 있어야 풀리는가)
 
 - required(그림·표가 있어야 풀림): 1170
 - supporting(보조 자료, 본문에도 정보 있음): 99
-- text_only(본문만으로 충분): 1646
+- text_only(본문만으로 충분): 1658
 
 ## 실패 사유 코드
 
