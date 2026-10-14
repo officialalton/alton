@@ -114,7 +114,7 @@ def ma_money_functions(rng):
 M_ITEMS = [
     ("A household moves $1,000 from a checking account to a savings account. What happens to M1 and M2?", "M1 decreases by $1,000 and M2 does not change.", "Savings deposits are in M2 but not M1, so the move lowers M1 and leaves M2 unchanged.",
      [("M1 increases by $1,000 and M2 does not change.", "Reverses the effect on M1; checking deposits are part of M1 and savings deposits are not."), ("M1 does not change and M2 decreases by $1,000.", "M2 includes both checking and savings deposits, so the total does not change."), ("Both M1 and M2 decrease by $1,000.", "M2 includes savings deposits, so it does not fall."), ("Both M1 and M2 increase by $1,000.", "Moving funds between accounts does not create money.")]),
-    ("Which of the following is included in M1 but not in credit cards or stocks?", "Currency in circulation and checkable deposits.", "M1 consists of the most liquid forms of money.",
+    ("Which of the following is counted as part of M1?", "Currency in circulation and checkable deposits.", "M1 consists of the most liquid forms of money.",
      [("Stocks and bonds held by households.", "Financial assets such as stocks and bonds are not money."), ("The limit available on a credit card.", "A credit card gives a line of credit, not money."), ("The total wealth of a household.", "Wealth includes assets that are not money."), ("The income a worker earns in a year.", "Income is a flow of earnings, not a stock of money.")]),
 ]
 

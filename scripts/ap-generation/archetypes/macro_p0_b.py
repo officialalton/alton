@@ -100,10 +100,10 @@ def ma_value_added(rng):
 def ma_income_approach(rng):
     wages = rng.choice([500, 600, 700]); rent = rng.choice([40, 60, 80]); interest = rng.choice([30, 50, 70]); profit = rng.choice([80, 100, 120]); other = rng.choice([150, 200, 250])
     gdp = wages + rent + interest + profit
-    stim = tbl("National income components in one year (billions of dollars).", ["Component", "Amount"], [["Wages and salaries", usd(wages)], ["Rental income", usd(rent)], ["Interest income", usd(interest)], ["Profit", usd(profit)], ["Stock market purchases by households", usd(other)]])
-    stem = "The table shows incomes earned by owners of factors of production in a country, in billions of dollars. Assuming the table lists all income earned in producing output, what is the country's GDP, in billions of dollars, using the income approach?"
+    stim = tbl("Incomes earned in producing output, and one other item, in one year (billions of dollars).", ["Item", "Amount"], [["Wages and salaries", usd(wages)], ["Rental income", usd(rent)], ["Interest income", usd(interest)], ["Profit", usd(profit)], ["Government transfer payments", usd(other)]])
+    stem = "The table shows incomes earned in producing output and government transfer payments in a country, in billions of dollars. Using the income approach, what is the country's GDP, in billions of dollars?"
     f = lambda v: f"${int(round(v)):,} billion"  # noqa: E731
-    k, ds = val_opts(gdp, [("Adds stock market purchases, a financial transaction that is not income from production.", gdp + other), ("Leaves out wages and salaries, the largest income component.", gdp - wages), ("Counts only wages and salaries.", wages), ("Leaves out rent and interest income.", wages + profit), ("Leaves out profit.", gdp - profit)], f)
+    k, ds = val_opts(gdp, [("Adds government transfer payments, which are not income earned in producing output.", gdp + other), ("Leaves out wages and salaries, the largest income component.", gdp - wages), ("Counts only wages and salaries.", wages), ("Leaves out rent and interest income.", wages + profit), ("Leaves out profit.", gdp - profit)], f)
     return mk("ma_income_approach", "2.1", "1.C", stem, k, ds, rng, concept="income approach sums wages, rent, interest, and profit", path="exact integer sum vs sympy sum", stim=stim, kwhy=f"GDP equals total income earned in production: {wages} + {rent} + {interest} + {profit} = {gdp}.", facts=[f"wages={wages}", f"rent={rent}", f"interest={interest}", f"profit={profit}", f"gdp={gdp}"], est=60)
 
 

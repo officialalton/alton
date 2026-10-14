@@ -1,0 +1,74 @@
+{
+ "version": "v1-macro-p1-a",
+ "run": "macro-p1-a",
+ "subject": "ap_macroeconomics",
+ "archetypeList": "macro_p1_mc",
+ "seed0": 9500,
+ "candidatesPerCell": 1,
+ "capUsd": 2.6,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "2",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts",
+  "lib/ap-generation/subjects/micro.ts",
+  "lib/ap-generation/subjects/micro-archetypes.json",
+  "lib/ap-generation/micro-frq-checks.ts",
+  "lib/ap-generation/subjects/macro.ts",
+  "lib/ap-generation/subjects/macro-archetypes.json"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 138.58,
+ "_budget_estimate": {
+  "cells": "26 single MC archetypes (units U1 3, U2 4, U3 6, U4 5, U5 4, U6 3 + 1 PPC), AP_MC_CANDS=2 so 52 candidates; 7 of them carry graphs, 6 tables",
+  "perCellUsd": "0.078 (2 candidates x 0.039 observed in Micro/Chemistry; graph cells carry a haircut inside the cap)",
+  "expectedUsd": "2.0 (range 1.8-2.4)",
+  "capUsd": 2.6,
+  "pilotCombinedCap": "P1-a 2.6 + P1-b 0.9 = 3.5 of the 16.0 total cap",
+  "passRateAssumption": "70 percent first pass (Micro P1-a 72.7 percent). Stop and fix archetypes if the first pass is below 45 percent."
+ },
+ "_note": "Frozen 2026-10-14 after the free engineering (31 Python tests, TS assignment/gate tests, pipeline plan/blueprint/check). Ledger at freeze $135.8772 (this worktree); hard stop = ledger + cap + 0.1.",
+ "expected": {
+  "generatorHash": "71de22f50865",
+  "reviewerPromptHash": "fbb6d8aa614c",
+  "difficultyPromptHash": "9bda2250d42c",
+  "parserHash": "7528bbe8cdfc",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ }
+}
