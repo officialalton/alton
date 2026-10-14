@@ -6,6 +6,13 @@
  "capUsd": 3.5,
  "hardStopCumulativeUsd": 125,
  "myTotalCapUsd": 24,
+ "syncStages": [
+  "gen",
+  "solve",
+  "adv",
+  "review",
+  "judge"
+ ],
  "stages": [
   "gen",
   "check",
@@ -58,6 +65,6 @@
   "scripts/mock-exam-generation/batch-lib.ts"
  ],
  "expected": {
-  "hash": "14557b1ffaa3"
+  "hash": "44f6136e1546"
  }
 }
