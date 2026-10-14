@@ -95,5 +95,5 @@ export function eraseStrokesNear(strokes: InkStroke[], x: number, y: number, rad
   });
 }
 
-export type FrqInkRow = { setItemId: string; partLabel: string; strokeCount: number; previewSvg: string; boardHeight?: number; strokes?: InkStroke[] };
+export type FrqInkRow = { setItemId: string; partLabel: string; strokeCount: number; previewSvg: string; boardHeight?: number; background?: string; strokes?: InkStroke[] };
 export const inkKey = (setItemId: string, label: string) => `${setItemId}:${label}`;
