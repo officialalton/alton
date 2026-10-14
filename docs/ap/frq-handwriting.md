@@ -33,3 +33,8 @@
 ## 5. 검증과 성능
 - 쿼리: 응시 화면 마운트 +1 RPC(종이 과목만), 획 저장 파트당 디바운스 1회, 결과 +1 RPC(종이 과목만). 디지털 과목은 추가 호출 0.
 - 테스트: 단위 `lib/ap-exam/frq-ink.test.ts`(단순화·SVG·크기·지우개·과목표), 컴포넌트 `FrqHandwritingPad.test.tsx`(그리기·되돌리기·터치·크기·키보드·드래그·모바일 touch-action)와 `ApExamHandwriting.test.tsx`(종이/디지털 분기·안내·자동 저장·크기 복원·answered 집계·오류·결과 이미지), 통합 `lib/ap-exam/frq-handwriting.integration.test.ts`(격리 DB 12건: 표 일치·미시작/만료/제출 후 거부·상한·검증·RLS·크기 보존·읽기 권한).
+
+## 배경 프리셋 (2026-10-14, 마이그레이션 610 — 작성만, 미적용)
+- 패드 툴바 "Background": Blank/Grid/Axes/Axes + grid/Two-panel axes/Number line. 저장값은 프리셋 id 하나(`mock_exam_frq_handwriting.background`), 픽셀 없음. 기하는 `lib/ap-exam/frq-background.ts` 한 곳(캔버스·결과 SVG 공유), 획 아래 고정 레이어라 지우개·되돌리기·전체 지우기 영향 없음.
+- 기본값: 지문에 "axes" 또는 sketch+graph 가 있으면 Axes, 아니면 Blank. 기본이 Axes 면 첫 획 저장 때 같이 저장해 결과 화면도 같은 축을 그린다.
+- 결과 화면은 저장된 미리보기 SVG 앞에 배경 선을 끼워 `<img>` 로 표시(미리보기 검증 정규식·저장 형식 불변). 610 적용 전에는 blank 일 때 기존 6인자 RPC 만 호출해 그대로 동작.

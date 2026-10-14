@@ -17,3 +17,6 @@
 
 ## 테스트
 `lib/mock-exam/whiteboard-size.test.ts`(clamp·상한), `MockExamWhiteboard.test.tsx`(복원·프리셋·키보드·드래그·좌표 환산·touch-action·잠금·palm rejection), `FrqHandwritingPad.test.tsx`(공유 컴포넌트 회귀), 격리 DB `lib/mock-exam/problem-note-board.integration.test.ts`(기본값·저장/복원·4인자 보존·범위/상한·권한·제출 후 잠금).
+
+## 레거시 640x220 대체 (2026-10-14)
+`ProblemNoteCanvas`(홈워크·세션 문제)는 이제 `MockExamWhiteboard`(context/authorId/readOnly/inline)를 연다. problem_note_strokes 형식·기존 w=640 필기 동일, 읽기 전용 경로 동일 RPC. 어댑터 테스트 `app/components/ProblemNoteCanvas.test.tsx`. 부작용: 이 경로도 저장 시 5인자 오버로드(선분 20,000·2MB 상한, 높이 저장)를 쓴다.

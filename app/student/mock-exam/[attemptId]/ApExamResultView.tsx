@@ -19,6 +19,7 @@ import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import { problemText } from "@/lib/problem-figures/label-rule";
+import { withBackground } from "@/lib/ap-exam/frq-background";
 import { inkKey, svgDataUrl, type FrqInkRow } from "@/lib/ap-exam/frq-ink";
 
 // AP 모의고사 결과(영어 UI). MC: 정답률·섹션별·토픽별. FRQ: 내 답 + "참고 답안/채점 노트(공식 채점 아님)".
@@ -94,7 +95,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames, handwr
     if (missing) { started.current = true; startScoring(); }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [essayByPart, readOnly]);
-  const inkByPart = useMemo(() => new Map((handwriting ?? []).filter((r) => r.previewSvg).map((r) => [inkKey(r.setItemId, r.partLabel), r.previewSvg])), [handwriting]);
+  const inkByPart = useMemo(() => new Map((handwriting ?? []).filter((r) => r.previewSvg).map((r) => [inkKey(r.setItemId, r.partLabel), withBackground(r.previewSvg, r.background)])), [handwriting]);
   const [filter, setFilter] = useState<Filter>("all");
   const layout = attempt.sectionLayout ?? [];
   const mc = attempt.items.filter((i) => i.format === "mc");

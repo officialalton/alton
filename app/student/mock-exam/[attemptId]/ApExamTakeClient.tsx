@@ -30,6 +30,7 @@ import MockExamWhiteboard from "./MockExamWhiteboard";
 import FrqHandwritingPad from "./FrqHandwritingPad";
 import { useFrqInk } from "./useFrqInk";
 import { apFrqIsPaper, PAPER_FRQ_NOTICE } from "@/lib/ap-exam/frq-delivery";
+import { defaultBackgroundForPrompt } from "@/lib/ap-exam/frq-background";
 import { INK_H, inkKey, strokesToSvg, type FrqInkRow } from "@/lib/ap-exam/frq-ink";
 import GuessButton from "./GuessButton";
 import ExitExamButton from "./ExitExamButton";
@@ -173,7 +174,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
       if (sectionRef.current === finalKeyRef.current) void settleApAttemptAction(attempt.id).then((x) => { if (x.ok && x.value.attempt) setSubmittedAttempt(x.value.attempt); });
     }
   }, [attempt.id]);
-  const { ink, heights: inkHeights, loadState: inkLoad, commit: commitInk, resize: resizeInk, flush: flushInk, hasInk } = useFrqInk(attempt.id, paperFrq && !isSubmitted, onInkStatus);
+  const { ink, heights: inkHeights, backgrounds: inkBgs, loadState: inkLoad, commit: commitInk, resize: resizeInk, setBackground: setInkBg, flush: flushInk, hasInk } = useFrqInk(attempt.id, paperFrq && !isSubmitted, onInkStatus);
   const flush = useCallback(async () => { await flushText(); await flushInk(); }, [flushText, flushInk]);
   const [padOpen, setPadOpen] = useState<Record<string, boolean>>({});
   function scheduleSave(setItemId: string, value: string) {
@@ -184,7 +185,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
 
   if (allItems.length === 0 || !section) return <p className="text-[13px] text-grey-500">This exam has no questions.</p>;
   if (submittedAttempt) {
-    const rows: FrqInkRow[] = Object.entries(ink).filter(([, v]) => v.length > 0).map(([k, v]) => { const i = k.lastIndexOf(":"); return { setItemId: k.slice(0, i), partLabel: k.slice(i + 1), strokeCount: v.length, previewSvg: strokesToSvg(v, inkHeights[k] ?? INK_H), boardHeight: inkHeights[k] ?? INK_H }; });
+    const rows: FrqInkRow[] = Object.entries(ink).filter(([, v]) => v.length > 0).map(([k, v]) => { const i = k.lastIndexOf(":"); return { setItemId: k.slice(0, i), partLabel: k.slice(i + 1), strokeCount: v.length, previewSvg: strokesToSvg(v, inkHeights[k] ?? INK_H), boardHeight: inkHeights[k] ?? INK_H, background: inkBgs[k] }; });
     return <main className="mx-auto w-full max-w-4xl px-4 py-6"><h1 className="mb-4 text-[18px] font-extrabold">{submittedAttempt.examSetName}</h1><ApExamResultView attempt={submittedAttempt} handwriting={rows} /></main>;
   }
   if (isSubmitted) return <p className="text-[13px] text-grey-500">Submitted. Open the Practice Tests tab to see your results.</p>;
@@ -430,7 +431,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
                                   {open && (inkLoad === "loading" ? <p className="mt-2 text-[12px] text-grey-500" data-testid="frq-ink-loading">Loading your handwriting…</p>
                                     : <>
                                         {inkLoad === "error" && <p role="alert" className="mt-2 text-[12px] text-red">Could not load earlier handwriting. You can still write; new strokes are saved.</p>}
-                                        <FrqHandwritingPad label={p.label} strokes={ink[k] ?? []} height={inkHeights[k] ?? INK_H} onChange={(next) => commitInk(current.setItemId, p.label, next)} onHeightChange={(h) => resizeInk(current.setItemId, p.label, h)} />
+                                        <FrqHandwritingPad label={p.label} strokes={ink[k] ?? []} height={inkHeights[k] ?? INK_H} background={inkBgs[k] ?? defaultBackgroundForPrompt(p.prompt)} onBackgroundChange={(bg) => setInkBg(current.setItemId, p.label, bg)} onChange={(next) => commitInk(current.setItemId, p.label, next, defaultBackgroundForPrompt(p.prompt))} onHeightChange={(h) => resizeInk(current.setItemId, p.label, h)} />
                                       </>)}
                                 </div>
                               );
