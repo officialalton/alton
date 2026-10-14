@@ -16,6 +16,10 @@ describe("breakOptionAnalysis", () => {
     const t = "A block slides down. A ramp is smooth. B ignores friction. C adds mass.";
     expect(breakOptionAnalysis(t)).toBe("A block slides down. A ramp is smooth.\nB ignores friction.\nC adds mass.");
   });
+  it("정답 문장 뒤의 \"A swaps …\" 처럼 동사형 A 설명도 나눈다", () => {
+    const t = "The answer is B. A swaps the claim. C turns something. D is the opposite.";
+    expect(breakOptionAnalysis(t)).toBe("The answer is B.\nA swaps the claim.\nC turns something.\nD is the opposite.");
+  });
   it("한국어 조사형도 나눈다", () => {
     const t = "정답은 A이다. B는 조건을 무시한다. C는 계산이 틀렸다.";
     expect(breakOptionAnalysis(t)).toBe("정답은 A이다.\nB는 조건을 무시한다.\nC는 계산이 틀렸다.");
