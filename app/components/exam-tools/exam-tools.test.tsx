@@ -12,6 +12,7 @@ import { PHYSICS_REF_DISCLAIMER, PHYSICS_CONSTANTS } from "@/lib/exam-tools/phys
 import { JAVA_REF_DISCLAIMER, JAVA_GROUPS } from "@/lib/exam-tools/java-reference";
 import { MICRO_REF_DISCLAIMER, MICRO_GROUPS } from "@/lib/exam-tools/micro-reference";
 import { evalBasic } from "./BasicCalculator";
+import { BIOLOGY_REF_DISCLAIMER, BIOLOGY_GROUPS, BIOLOGY_CHI_TABLE } from "@/lib/exam-tools/biology-reference";
 import { parseNum, STATS_MODES } from "@/lib/stats-calc/modes";
 
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });
@@ -273,5 +274,28 @@ describe("AP Microeconomics 도구", () => {
     expect(evalBasic("sqrt(9)").ok).toBe(false);
     expect(evalBasic("2^3").ok).toBe(false);
     expect(evalBasic("1/0").ok).toBe(false);
+  });
+});
+
+describe("AP Biology 도구", () => {
+  const bio = subjectToolsConfig("ap_biology");
+  it("공학용 계산기 + Reference, Desmos 없음", () => {
+    expect(bio.calculatorTabs).toEqual(["scientific"]);
+    expect(bio.reference).toBe("biology");
+  });
+  it("Reference 는 자체 문구 고지·식 묶음·카이제곱 임계값 표를 보인다(공식 시트라고 주장하지 않음)", () => {
+    render(<SubjectToolPanels config={bio} calculatorAllowed open="reference" onClose={() => {}} />);
+    expect(screen.getByTestId("biology-reference-disclaimer").textContent).toBe(BIOLOGY_REF_DISCLAIMER);
+    expect(BIOLOGY_REF_DISCLAIMER).toMatch(/not the official College Board sheet/);
+    expect(BIOLOGY_GROUPS.map((g) => g.id)).toEqual(["stat", "hw", "rate", "wp", "geo"]);
+    expect(screen.getByText("p² + 2pq + q² = 1")).toBeInTheDocument();
+    expect(within(screen.getByTestId("chi-square-table")).getByText("7.81")).toBeInTheDocument();
+    expect(BIOLOGY_CHI_TABLE.p05[2]).toBe(7.81);
+    expect(BIOLOGY_CHI_TABLE.p01[0]).toBe(6.63);
+  });
+  it("물 퍼텐셜 식은 R = 0.0831 과 T = °C + 273 을 밝힌다", () => {
+    const wp = BIOLOGY_GROUPS.find((g) => g.id === "wp")!;
+    expect(wp.items.map((i) => i.expr).join(" ")).toMatch(/0\.0831/);
+    expect(wp.items.map((i) => i.expr).join(" ")).toMatch(/°C \+ 273/);
   });
 });

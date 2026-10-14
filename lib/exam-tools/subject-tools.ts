@@ -1,7 +1,7 @@
 // 과목별 시험 도구 구성. 새 과목은 여기에 항목을 더하고 패널 컴포넌트만 꽂으면 된다
 // (예: 물리 참조 정보, 화학 주기율표·데이터). 현재는 통계만 구현.
 export type CalculatorTab = "statistics" | "desmos" | "scientific" | "basic";
-export type ReferenceKind = "statistics" | "physics" | "chemistry" | "java" | "microeconomics";
+export type ReferenceKind = "statistics" | "physics" | "chemistry" | "java" | "microeconomics" | "biology";
 export type SubjectToolsConfig = { calculatorTabs: CalculatorTab[]; reference: ReferenceKind | null };
 
 const DEFAULT_CONFIG: SubjectToolsConfig = { calculatorTabs: ["desmos"], reference: null };
@@ -18,6 +18,9 @@ const BY_SUBJECT: Record<string, SubjectToolsConfig> = {
   // Microeconomics: CED(V.1) — 사칙(four-function) 계산기가 두 섹션 모두에서 허용된다. 그래핑·공학용은 요구하지 않으므로 사칙 계산기만 제공하고 Desmos 는 켜지 않는다.
   // 공식 수식 시트는 CED 에 언급이 없다(UNVERIFIED) — Reference 패널은 ALTON 자체 문구의 학습용 요약이며 고지문을 둔다.
   ap_microeconomics: { calculatorTabs: ["basic"], reference: "microeconomics" },
+  // Biology: CED(V.1) — 사칙·공학용·그래핑 계산기가 두 섹션 모두에서 허용된다(Exam Overview p.197). 표준오차·카이제곱·로그가 필요하므로 공학용을 제공하고 Desmos 는 켜지 않는다(Bluebook 내장 형태는 UNVERIFIED).
+  // 공식 AP Biology Equations and Formulas 시트(CED Appendix p.230–231)는 시험 중 제공되므로 Reference 패널(ALTON 자체 문구)을 둔다 — docs/ap/biology-facts.md.
+  ap_biology: { calculatorTabs: ["scientific"], reference: "biology" },
 };
 
 export function subjectToolsConfig(apSubject: string | null | undefined): SubjectToolsConfig {
