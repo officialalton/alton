@@ -1,0 +1,47 @@
+{
+ "run": "macro-p2-a",
+ "subject": "ap_macroeconomics",
+ "generatedAt": "2026-10-14T22:12:11.913Z",
+ "totalCostUsd": 3.15,
+ "newSpendSinceBaseline": 8.47,
+ "cap": 50,
+ "calls": 360,
+ "candidates": 120,
+ "mcCandidates": 120,
+ "frqCandidates": 0,
+ "passedAll": 85,
+ "adopted": 54,
+ "mcAdopted": 54,
+ "frqAdopted": 0,
+ "reserve": 31,
+ "yield": 0.45,
+ "costPerAdopted": 0.058,
+ "callsPerAdopted": 6.7,
+ "duplicateRejected": 4,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 120
+ },
+ "rejectionReasons": {
+  "criterion_failed_key_scoring": 4,
+  "criterion_failed_stimulus_expression": 4,
+  "criterion_failed_distractor_explanation": 25,
+  "criterion_failed_exam_suitability": 13,
+  "instant_reject_missing_condition": 2,
+  "reference_pattern_mismatch": 9,
+  "instant_reject_multiple_correct": 1,
+  "duplicate_gate_near_duplicate": 4,
+  "solver_disagrees": 1,
+  "instant_reject_wrong_key": 1,
+  "difficulty_from_unfair_sources": 1
+ },
+ "unfilledCells": [
+  "ap_macroeconomics-m03",
+  "ap_macroeconomics-m17",
+  "ap_macroeconomics-m31",
+  "ap_macroeconomics-m43",
+  "ap_macroeconomics-m55",
+  "ap_macroeconomics-m58"
+ ]
+}
