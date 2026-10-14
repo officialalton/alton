@@ -10,6 +10,7 @@ import {
   type ApStockOverview,
 } from "../ap-stock-actions";
 import type { BatchCheck } from "@/lib/ap-admin/load-check";
+import ApLoadBatchPanel from "./ApLoadBatchPanel";
 import ApNewVersionPanel from "./ApNewVersionPanel";
 import ApLaunchGatePanel from "./ApLaunchGatePanel";
 import ApExplanationFixPanel from "./ApExplanationFixPanel";
@@ -258,6 +259,7 @@ export default function ApStockPanel() {
       <ApLaunchGatePanel />
 
       <section className="space-y-3">
+        <ApLoadBatchPanel ov={ov} onDone={load} />
         <div className="flex flex-wrap items-center gap-2">
           <h3 className="text-sm font-bold">배치 작업</h3>
           <select aria-label="배치 선택" className="min-h-9 rounded border border-grey-300 px-2 text-xs" value={batchId} onChange={(e) => setBatchId(e.target.value)}>

@@ -6,11 +6,14 @@ const overview = vi.fn();
 const step = vi.fn();
 const check = vi.fn();
 const partial = vi.fn();
+const loadBatch = vi.fn();
 vi.mock("../ap-stock-actions", () => ({
   getApStockOverviewAction: () => overview(),
   apStockStepAction: (i: unknown) => step(i),
   apStockLoadCheckAction: () => check(),
   apStockAssembleAction: vi.fn(),
+  apStockBatchStatusAction: async () => [],
+  apStockLoadBatchAction: (i: unknown) => loadBatch(i),
   apStockAssemblePartialAction: (i: unknown) => partial(i),
   apLaunchGateStatusAction: () => Promise.resolve({ sets: [], totals: { sets: 0, readySets: 0, blockedItems: 0, openBlockers: 0, openDefectReports: 0, openErrorReports: 0, globalOpenBlockers: 0 } }),
 }));
@@ -28,7 +31,7 @@ const ov = (canWrite: boolean) => ({
 });
 const res = (o: Record<string, unknown> = {}) => ({ action: "render_verify", mode: "dry_run", executed: false, target: { ref: "x", kind: "remote", canWrite: true, reason: null }, scope: {}, counts: { toRecord: 3 }, lines: ["건너뜀 k1: 해시 불일치"], planHash: "h1", blocked: null, ok: true, ...o });
 
-beforeEach(() => { overview.mockReset(); step.mockReset(); check.mockReset(); partial.mockReset(); });
+beforeEach(() => { overview.mockReset(); step.mockReset(); check.mockReset(); partial.mockReset(); loadBatch.mockReset(); });
 afterEach(cleanup);
 
 describe("ApStockPanel", () => {
@@ -101,5 +104,23 @@ describe("ApStockPanel", () => {
     fireEvent.click(runBtn);
     await waitFor(() => expect(partial).toHaveBeenCalledTimes(2));
     expect(partial.mock.calls[1][0]).toMatchObject({ planFile: "partial-rebuild-ab-plan.json", setId: "PC", execute: true, planHash: "ph1", tier: "free" });
+  });
+  it("배치 전체 적재: 미리보기 → 확인 → 실행은 같은 미리보기 해시로 호출, 확인 전·쓰기 차단 시 비활성", async () => {
+    overview.mockResolvedValue(ov(true));
+    const run = (mode: "preview" | "execute") => ({ batchId: "graph-s1", mode, ok: true, completed: mode === "execute", previewHash: "ph1", stoppedAt: null, entries: [{ step: "import", round: 1, phase: "preview", ok: true, summary: "① 후보 적재 — 미리보기", counts: { insert: 3 }, lines: [] }] });
+    loadBatch.mockImplementation(async (i: { execute: boolean }) => run(i.execute ? "execute" : "preview"));
+    render(<ApStockPanel />);
+    const panel = await screen.findByTestId("ap-loadall");
+    fireEvent.click(panel.querySelector("input[aria-label='그래프 배치 s1 선택']")!);
+    const [pv, , runBtn] = [panel.querySelectorAll("button")[3], 0, panel.querySelectorAll("button")[4]] as HTMLButtonElement[];
+    expect(runBtn.disabled).toBe(true);
+    fireEvent.click(pv);
+    await waitFor(() => expect(screen.getByTestId("ap-loadall-run-graph-s1")).toBeTruthy());
+    expect(runBtn.disabled).toBe(true);
+    fireEvent.click(panel.querySelectorAll("input[type=checkbox]")[1]);
+    expect(runBtn.disabled).toBe(false);
+    fireEvent.click(runBtn);
+    await waitFor(() => expect(screen.getByTestId("ap-loadall-summary").textContent).toContain("완료"));
+    expect(loadBatch).toHaveBeenLastCalledWith({ batchId: "graph-s1", execute: true, previewHash: "ph1" });
   });
 });
