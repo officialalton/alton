@@ -20,7 +20,7 @@ export type ElCfg = {
   plan?: { reading?: { sets: number; seed: number; startIndex?: number; perSet?: number }; writing?: { sets: number; seed: number; startIndex?: number; perSet?: number } };
   frqPlan?: { id: string; type: "synthesis" | "rhetorical_analysis" | "argument"; theme: string; seed: number }[];
   models: { gen: string; solvers: string[]; adversary: string; judge: string; review: string; sampleHigh: string; sampleLow: string; graders: string[] };
-  effort: string; genEffort?: string; corpusExclude?: string[]; syncStages?: string[]; minKeyConfidence: number; generatorFiles: string[]; expected: { hash: string };
+  effort: string; genEffort?: string; gradeEffort?: string; sampleCands?: number; genModels?: { reading?: string; writing?: string }; corpusExclude?: string[]; syncStages?: string[]; minKeyConfidence: number; generatorFiles: string[]; expected: { hash: string };
 };
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const has = (n: string) => process.argv.includes(n);
@@ -103,7 +103,7 @@ function specsOf(): P.SetSpec[] {
 // ── 단계: gen / check ──────────────────────────────────────────────
 async function genStage() {
   const specs = specsOf(); wj("plan.json", { specs, summary: planSummary(specs) });
-  const reqs = specs.map((s) => mk(`g-${s.id}`, cfg.models.gen, s.kind === "reading" ? P.GEN_READING_SYSTEM : P.GEN_WRITING_SYSTEM, P.setTool, P.genUser(s), 22000, false, cfg.genEffort ?? cfg.effort));
+  const reqs = specs.map((s) => mk(`g-${s.id}`, cfg.genModels?.[s.kind] ?? cfg.models.gen, s.kind === "reading" ? P.GEN_READING_SYSTEM : P.GEN_WRITING_SYSTEM, P.setTool, P.genUser(s), 22000, false, cfg.genEffort ?? cfg.effort));
   const est = estimate(cfg.models.gen, reqs.length, 2500, 9000);
   const out = await call("gen", reqs, est); wj("gen.json", Object.fromEntries([...out.entries()]));
 }
@@ -235,13 +235,13 @@ async function frqGenStage() {
 async function frqSampleStage() {
   const fr = rj<{ id: string; plan: Json; payload: ElFrqPayload | null }[]>("frq.json", []).map((f) => ({ ...f, payload: f.payload ? normalizeFrqPayload(f.payload) : null })); const reqs: BatchReq[] = [];
   for (const f of fr) { if (!f.payload) continue; const pv = frqViolations(f.payload).filter((x) => !/^sample_|samples_/.test(x)); if (pv.length) { console.log(`[frq-samples] ${f.id}: 과제 위반 ${pv.join(",")} → 샘플 생성 건너뜀`); continue; }
-    for (const tier of ["high", "mid", "low"] as const) for (const k of [0, 1]) reqs.push(mk(`s-${f.id}-${tier}-${k}`, tier === "high" ? cfg.models.sampleHigh : cfg.models.sampleLow, P.SAMPLE_SYSTEM(tier), P.SAMPLE_TOOL, P.sampleUser(frqTaskText(f.payload), frqPassageDisplay(f.payload) + (f.payload.sources.find((s) => s.figure) ? `\n\nSource F chart data: ${JSON.stringify(f.payload.sources.find((s) => s.figure)!.figure)}` : ""), rubricText(f.payload)), 6000)); }
+    for (const tier of ["high", "mid", "low"] as const) for (const k of Array.from({ length: cfg.sampleCands ?? 2 }, (_, i) => i)) reqs.push(mk(`s-${f.id}-${tier}-${k}`, tier === "high" ? cfg.models.sampleHigh : cfg.models.sampleLow, P.SAMPLE_SYSTEM(tier), P.SAMPLE_TOOL, P.sampleUser(frqTaskText(f.payload), frqPassageDisplay(f.payload) + (f.payload.sources.find((s) => s.figure) ? `\n\nSource F chart data: ${JSON.stringify(f.payload.sources.find((s) => s.figure)!.figure)}` : ""), rubricText(f.payload)), 6000)); }
   const out = await call("frq-samples", reqs, estimate(cfg.models.sampleHigh, reqs.length, 3200, 1500));
   wj("frq-samples.json", Object.fromEntries([...out.entries()]));
 }
 async function frqGradeStage() {
   const fr = rj<{ id: string; payload: ElFrqPayload | null }[]>("frq.json", []).map((f) => ({ ...f, payload: f.payload ? normalizeFrqPayload(f.payload) : null })); const samples = rj<Record<string, Json | null>>("frq-samples.json", {}); const reqs: BatchReq[] = [];
-  for (const f of fr) { if (!f.payload) continue; for (const tier of ["high", "mid", "low"]) for (const k of [0, 1]) { const s = samples[`s-${f.id}-${tier}-${k}`]; if (!s?.essay) continue; cfg.models.graders.forEach((m, g) => reqs.push(mk(`r${g}-${f.id}-${tier}-${k}`, m, P.GRADE_SYSTEMS[g], P.GRADE_TOOL, P.gradeUser(frqTaskText(f.payload!), frqPassageDisplay(f.payload!), rubricText(f.payload!), String(s.essay)), 2500))); } }
+  for (const f of fr) { if (!f.payload) continue; for (const tier of ["high", "mid", "low"]) for (const k of Array.from({ length: cfg.sampleCands ?? 2 }, (_, i) => i)) { const s = samples[`s-${f.id}-${tier}-${k}`]; if (!s?.essay) continue; cfg.models.graders.forEach((m, g) => reqs.push(mk(`r${g}-${f.id}-${tier}-${k}`, m, P.GRADE_SYSTEMS[g], P.GRADE_TOOL, P.gradeUser(frqTaskText(f.payload!), frqPassageDisplay(f.payload!), rubricText(f.payload!), String(s.essay)), 2500, false, cfg.gradeEffort ?? cfg.effort))); } }
   const out = await call("frq-grade", reqs, cfg.models.graders.reduce((a, m) => a + estimate(m, reqs.length / 3, 3600, 700), 0)); wj("frq-grades.json", Object.fromEntries([...out.entries()]));
 }
 const median = (a: number[]) => { const s = a.slice().sort((x, y) => x - y); return s.length % 2 ? s[(s.length - 1) / 2] : Math.round((s[s.length / 2 - 1] + s[s.length / 2]) / 2); };
@@ -254,7 +254,7 @@ function frqFinalizeStage() {
     if (!f.payload) { cands.push({ ...base, keywordCode: "U9.3", unitCode: "9", skillPrimary: "3.B", structure: "frq_multipart", archetype: `elfrq_${f.id}`, reviewState: "rejected", rejectionReason: "no_tool_output", difficultyProvisional: null, payload: { archetype: `elfrq_${f.id}` } }); continue; }
     const p = f.payload; const chosen: ElSample[] = []; const why: string[] = [];
     for (const tier of ["high", "mid", "low"] as const) {
-      const options = [0, 1].map((k) => { const s = samples[`s-${f.id}-${tier}-${k}`]; if (!s?.essay) return null; const gs = cfg.models.graders.map((_, g) => grades[`r${g}-${f.id}-${tier}-${k}`]).filter(Boolean) as Json[]; if (gs.length < cfg.models.graders.length) return null;
+      const options = Array.from({ length: cfg.sampleCands ?? 2 }, (_, i) => i).map((k) => { const s = samples[`s-${f.id}-${tier}-${k}`]; if (!s?.essay) return null; const gs = cfg.models.graders.map((_, g) => grades[`r${g}-${f.id}-${tier}-${k}`]).filter(Boolean) as Json[]; if (gs.length < cfg.models.graders.length) return null;
         const sc = { A: median(gs.map((x) => Number(x.A))), B: median(gs.map((x) => Number(x.B))), C: median(gs.map((x) => Number(x.C))) }; const tot = sc.A + sc.B + sc.C; const totals = gs.map((x) => Number(x.A) + Number(x.B) + Number(x.C)); const spread = Math.max(...totals) - Math.min(...totals);
         return { k, s, sc, tot, spread, dist: Math.abs(tot - TARGET[tier]) }; }).filter(Boolean) as { k: number; s: Json; sc: { A: number; B: number; C: number }; tot: number; spread: number; dist: number }[];
       const ok = options.filter((o) => o.dist <= 1 && o.spread <= 2).sort((a, b) => a.dist - b.dist || a.spread - b.spread)[0];

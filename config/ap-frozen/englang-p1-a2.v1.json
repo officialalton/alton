@@ -7,11 +7,7 @@
  "hardStopCumulativeUsd": 125,
  "myTotalCapUsd": 24,
  "syncStages": [
-  "gen",
-  "solve",
-  "adv",
-  "review",
-  "judge"
+  "solve"
  ],
  "stages": [
   "gen",
@@ -67,7 +63,7 @@
   "scripts/mock-exam-generation/batch-lib.ts"
  ],
  "expected": {
-  "hash": "433f59a33952"
+  "hash": "37e6f4f14815"
  },
  "corpusExclude": [
   "englang-p1-a",

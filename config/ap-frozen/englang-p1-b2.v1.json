@@ -6,11 +6,7 @@
  "capUsd": 2.5,
  "hardStopCumulativeUsd": 125,
  "myTotalCapUsd": 24,
- "syncStages": [
-  "frq-gen",
-  "frq-samples",
-  "frq-grade"
- ],
+ "syncStages": [],
  "stages": [
   "frq-gen",
   "frq-samples",
@@ -69,10 +65,11 @@
   "scripts/mock-exam-generation/batch-lib.ts"
  ],
  "expected": {
-  "hash": "3f42583f95dd"
+  "hash": "928506829d6d"
  },
  "corpusExclude": [
   "englang-p1-b",
   "englang-p1-a"
- ]
+ ],
+ "gradeEffort": "low"
 }
