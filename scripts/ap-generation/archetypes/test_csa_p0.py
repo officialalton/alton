@@ -340,8 +340,11 @@ class TestPaidRunPlan(unittest.TestCase):
         tmpl = lambda names: sorted(packs(n, 1)[0]["template"] for n in names)  # noqa: E731
         self.assertEqual(tmpl(a), ["q1", "q1", "q1", "q2", "q2", "q2"]); self.assertEqual(tmpl(b), ["q3", "q3", "q3", "q4", "q4", "q4"])
 
-    def test_shortfall_lists_start_empty_until_the_assign_report_names_the_missing_cells(self):
-        self.assertEqual(R.CSA_STAGES.get("csa_s2_short_mc", []), []); self.assertEqual(R.CSA_STAGES.get("csa_s2_short_frq", []), [])
+    def test_shortfall_lists_name_only_library_archetypes_from_the_assign_report(self):
+        # 2026-10-13: cs-assign 부족분 + 수정 뒤 재시도. 전부 라이브러리에 있는 원형이고 중복이 없다.
+        for k, pool in (("csa_s2_short_mc", R.CSA), ("csa_s2_short_frq", R.CSA_FRQ)):
+            names = R.CSA_STAGES.get(k, [])
+            self.assertEqual(len(names), len(set(names))); self.assertTrue(all(n in pool for n in names), k)
 
 
 class TestPaidRunPlanConfigs(unittest.TestCase):
