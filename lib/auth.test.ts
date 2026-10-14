@@ -267,3 +267,28 @@ describe("requireUser", () => {
     expect(result.profile).toEqual({ role: "student", name: "학생" });
   });
 });
+
+describe("requireUser — 왕복 수(2026-10-13 결과 화면 지연 점검)", () => {
+  it("프로필 조회가 끝나기 전에 계정 게이트 RPC 세 개를 이미 보낸다(순차 왕복 금지)", async () => {
+    let releaseProfile: (v: { data: { role: string } }) => void = () => {};
+    const profilePending = new Promise<{ data: { role: string } }>((r) => (releaseProfile = r));
+    const rpcMock = vi.fn().mockResolvedValue({ data: "active", error: null });
+    const supabase = {
+      auth: { getUser: vi.fn().mockResolvedValue({ data: { user: { id: "u1" } } }), signOut: vi.fn() },
+      from: () => ({ select: () => ({ eq: () => ({ single: () => profilePending }) }) }),
+      rpc: rpcMock,
+    };
+    vi.doMock("@/utils/supabase/server", () => ({ createClient: async () => supabase }));
+    vi.resetModules();
+    const { requireUser } = await import("./auth");
+    const p = requireUser();
+    await new Promise((r) => setTimeout(r, 0));
+    expect(rpcMock.mock.calls.map((c) => c[0]).sort()).toEqual([
+      "current_account_access_allowed",
+      "current_account_status",
+      "current_student_profile_completed",
+    ]);
+    releaseProfile({ data: { role: "parent" } });
+    await p.catch(() => {});
+  });
+});

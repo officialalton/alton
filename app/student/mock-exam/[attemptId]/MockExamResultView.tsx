@@ -423,7 +423,11 @@ export default function MockExamResultView({
       cancelled = true;
     };
   }, [reportRole, attempt.items]);
-  const report = computeMockExamReport(attempt.items, { sectionTimeSeconds: attempt.sectionTimeSeconds ?? null });
+  // 2026-10-13(결과 화면 지연 점검): 탭 전환·문항 선택·주석 로드마다 147문항 집계를 다시 하고(insights 의 useMemo 의존성도 매번 바뀌어 재계산) 있었다.
+  const report = useMemo(
+    () => computeMockExamReport(attempt.items, { sectionTimeSeconds: attempt.sectionTimeSeconds ?? null }),
+    [attempt.items, attempt.sectionTimeSeconds],
+  );
   // MST 응시만 예상 점수 범위(내부 추정)를 보인다. 서버가 계산해 범위만 내려준다.
   const scoreEstimate = attempt.format === "mst" ? (attempt.scoreEstimate ?? null) : null;
   const [tab, setTab] = useState<TabKey>("summary");

@@ -177,12 +177,16 @@ export async function loadTeacherMockExamAttemptsForStudent(
 
 /** 응시 상세 — 문항·본문·(채점 확정 전까지 DB에서 마스킹된) 정답/해설을 포함한 전체 화면 데이터. */
 export async function loadMockExamAttemptDetail(supabase: SupabaseClient, attemptId: string): Promise<MockExamAttemptDetail | null> {
-  const { data, error } = await supabase.rpc("mock_exam_attempt_detail", { p_attempt_id: attemptId });
+  // 'Updated version' 안내는 상세와 서로 결과를 쓰지 않으므로 같이 보낸다(순차 왕복 1회 절감) — MST 에서는 버린다.
+  const [{ data, error }, versionNote] = await Promise.all([
+    supabase.rpc("mock_exam_attempt_detail", { p_attempt_id: attemptId }),
+    loadAttemptVersionNote(supabase, attemptId),
+  ]);
   if (error) throw new Error(error.message);
   if (!data) return null;
   const d = data as MockExamAttemptDetail & { items: MockExamAttemptItem[] | null };
   const detail = { ...d, items: Array.isArray(d.items) ? d.items : [] };
-  if (detail.format !== "mst") return { ...detail, versionNote: await loadAttemptVersionNote(supabase, attemptId) };
+  if (detail.format !== "mst") return { ...detail, versionNote };
   const [est, sectionTimeSeconds] = await Promise.all([computeScoreEstimate(detail), loadMstSectionTime(detail.id)]);
   return { ...detail, scoreEstimate: est.estimate, scoreEstimateNote: est.reason === "insufficient_responses" ? "insufficient_responses" : null, sectionEstimates: est.sections, sectionTimeSeconds };
 }

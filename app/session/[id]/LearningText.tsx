@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { splitLearningBlocks, splitLearningContent, type ContentPart } from "@/lib/render-learning-content";
 
 /**
@@ -18,7 +19,9 @@ function addThousandsSeparators(text: string): string {
   return text.replace(/(?<!\.)\b\d{5,}\b/g, (m) => m.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 }
 
-export default function LearningText({ text, className }: { text: string; className?: string }) {
+// 2026-10-13(결과 화면 지연 점검): 수식 조판(KaTeX)이 렌더마다 동기 실행되므로 memo 로 감싸 text·className 이 그대로면 다시 계산하지 않는다
+// (결과 화면에서 주석·필기 로드, 해설 언어 토글, 필터 전환 같은 부모 상태 변경이 문항 전체의 수식을 다시 조판하던 문제).
+export default memo(function LearningText({ text, className }: { text: string; className?: string }) {
   // 2026-09-14 문제 템플릿 ②: 마크다운 파이프 표는 표로 그린다. 나머지 줄은 글·수식 조각.
   const blocks = splitLearningBlocks(text);
   return (
@@ -65,7 +68,7 @@ export default function LearningText({ text, className }: { text: string; classN
       )}
     </div>
   );
-}
+});
 
 /**
  * 코드 블록(2026-10-13, AP Computer Science A): 고정폭·줄 번호·가로 스크롤. 줄 번호는 선택·복사에 섞이지 않도록 `select-none`·aria-hidden 으로 두고,
