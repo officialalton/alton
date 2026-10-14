@@ -145,7 +145,7 @@ def bi_x_respirometer_ratio(rng):
     if abs(unc - mult) < 0.15:
         raise ValueError("close")
     pairs = [("Compares the uncorrected readings of the germinating peas and does not subtract the control.", unc), ("Subtracts the two corrected readings instead of dividing them.", net_hi - net_lo), ("Divides the lower-temperature rate by the higher-temperature rate.", net_lo / net_hi),
-             ("Subtracts the control reading from the 10 °C reading only.", (peas_hi - bead_lo) / net_lo)]
+             ("Subtracts the 10 °C control reading, instead of the 25 °C control reading, from the 25 °C peas reading before dividing.", (peas_hi - bead_lo) / net_lo)]
     stim = tbl("Oxygen consumed in 15 minutes (mL) in a respirometer", ["Temperature (°C)", "Germinating peas", "Glass beads (control)"], [[t_lo, f"{peas_lo:.1f}", f"{bead_lo:.1f}"], [t_hi, f"{peas_hi:.2f}", f"{bead_hi:.1f}"]])
     stem = f"A student measured the oxygen consumed by germinating peas in a respirometer at {t_lo} °C and at {t_hi} °C. The respirometer with glass beads of the same volume at each temperature was a control. The table shows the oxygen consumed in 15 minutes. After correcting for the control, the rate of oxygen consumption by the peas at {t_hi} °C is how many times the rate at {t_lo} °C?"
     kw = f"Corrected consumption is peas minus beads: {peas_hi:.2f} - {bead_hi:.1f} = {net_hi:.2f} mL at {t_hi} °C and {peas_lo:.1f} - {bead_lo:.1f} = {net_lo:.2f} mL at {t_lo} °C. Both took 15 minutes, so the rate ratio is {net_hi:.2f}/{net_lo:.2f} = {mult:.1f}."
@@ -159,16 +159,16 @@ def bi_x_enzyme_rate_percent(rng):
     r_lo = pick(rng, [4.0, 5.0, 6.0]); inc = pick(rng, [20, 30, 40, 50, 60]); r_hi = r_lo * (1 + inc / 100)
     c1_lo = pick(rng, [2.0, 3.0]); c2_lo = c1_lo + r_lo * (t2 - t1)
     c1_hi = pick(rng, [2.5, 3.5]); c2_hi = c1_hi + r_hi * (t2 - t1)
-    if round(c2_lo, 2) != c2_lo or round(c2_hi, 2) != c2_hi:
+    if round(c2_lo, 1) != round(c2_lo, 6) or round(c2_hi, 1) != round(c2_hi, 6) or abs(r_hi - round(r_hi, 2)) > 1e-9:
         raise ValueError("round")
     rate = lambda a, b: (b - a) / (t2 - t1)  # noqa: E731
     pct = (rate(c1_hi, c2_hi) - rate(c1_lo, c2_lo)) / rate(c1_lo, c2_lo) * 100
     agree(pct, inc, 1e-9, "pct")
     pairs = [("Reports the higher rate as a percent of the lower rate, which leaves out subtracting the original 100 percent.", rate(c1_hi, c2_hi) / rate(c1_lo, c2_lo) * 100), ("Divides the increase in rate by the new rate instead of the original rate.", (r_hi - r_lo) / r_hi * 100),
              ("Compares the product amounts at the final time instead of the rates.", (c2_hi - c2_lo) / c2_lo * 100), ("Uses the increase in rate in µmol per minute as the percent.", r_hi - r_lo)]
-    stim = tbl("Product formed in an enzyme-catalyzed reaction (µmol)", ["Temperature", f"Product at {t1} min", f"Product at {t2} min"], [["25 °C", f"{c1_lo:.1f}", f"{c2_lo:.1f}"], ["35 °C", f"{c1_hi:.1f}", f"{c2_hi:.2f}"]])
-    stem = f"A student measured the amount of product formed by an enzyme at two temperatures. The table shows the amount of product at {t1} minutes and at {t2} minutes. The reaction was linear over this period. By what percent did the rate of the reaction change when the temperature was raised from 25 °C to 35 °C?"
-    kw = f"The rate at 25 °C is ({c2_lo:.1f} - {c1_lo:.1f})/({t2} - {t1}) = {r_lo:.2f} µmol/min and at 35 °C is ({c2_hi:.2f} - {c1_hi:.1f})/({t2} - {t1}) = {r_hi:.2f} µmol/min. Percent change = ({r_hi:.2f} - {r_lo:.2f})/{r_lo:.2f} x 100 = {inc}%."
+    stim = tbl("Product formed in an enzyme-catalyzed reaction (µmol)", ["Temperature", f"Product at {t1} min (µmol)", f"Product at {t2} min (µmol)"], [["25 °C", f"{c1_lo:.1f}", f"{c2_lo:.1f}"], ["35 °C", f"{c1_hi:.1f}", f"{c2_hi:.1f}"]])
+    stem = f"A student measured the amount of product formed by an enzyme at two temperatures. The table shows the amount of product, in µmol, after {t1} minute{'s' if t1 != 1 else ''} and after {t2} minutes. The reaction was linear over this period. By what percent did the rate of the reaction change when the temperature was raised from 25 °C to 35 °C?"
+    kw = f"The rate at 25 °C is ({c2_lo:.1f} - {c1_lo:.1f})/({t2} - {t1}) = {r_lo:.2f} µmol/min and at 35 °C is ({c2_hi:.1f} - {c1_hi:.1f})/({t2} - {t1}) = {r_hi:.2f} µmol/min. Percent change = ({r_hi:.2f} - {r_lo:.2f})/{r_lo:.2f} x 100 = {inc}%."
     return _num("bi_x_enzyme_rate_percent", "3.2", "5.A", stem, float(inc), pairs, lambda v: f"{hu(v, 0)}%" if abs(v) >= 1 else f"{hu(v, 2)}%", rng, concept="percent change in enzyme rate from product amounts at two times", path="two rates from the table vs the generating percent increase",
                 steps=_steps("Find the rate at each temperature from the change in product over the time interval", "Subtract the rates to find the change", "Divide the change by the original rate and convert to a percent"), stim=stim, gap=2, rel=0.08, facts=[f"inc={inc}"], kwhy=kw)
 
@@ -203,7 +203,7 @@ def bi_x_cascade_amplification(rng):
     n *= m1; n *= m2; n -= n * loss / 100; n *= m3
     agree(n, tf, 1e-9, "tf")
     pairs = [("Leaves out the phosphatase, so no activated molecules are lost at the second step.", r * m1 * m2 * m3), ("Leaves out the number of receptors and counts the cascade for one receptor.", m1 * remaining * m3),
-             ("Treats the phosphatase as removing the whole second step instead of the stated percent.", r * m1 * m3), ("Adds the numbers at each step instead of multiplying them.", r + m1 + m2 + m3)]
+             ("Leaves out the second kinase step entirely, so only the receptors, kinase 1, and the transcription factor step are multiplied.", r * m1 * m3), ("Adds the number of receptors and the numbers of molecules activated at each step instead of multiplying them.", r + m1 + m2 + m3)]
     stem = (f"{r} activated receptor molecules each activate {m1} molecules of kinase 1. Each active kinase 1 molecule activates {m2} molecules of kinase 2. A phosphatase inactivates {loss}% of the active kinase 2 molecules. "
             f"Each remaining active kinase 2 molecule activates {m3} molecules of a transcription factor. How many active transcription factor molecules are made?")
     kw = f"Kinase 1: {r} x {m1} = {r * m1}. Kinase 2 before the phosphatase: {r * m1} x {m2} = {r * m1 * m2}; after losing {loss}% it is {r * m1 * remaining:g}. Transcription factors: {r * m1 * remaining:g} x {m3} = {tf:g}."
@@ -221,7 +221,11 @@ def bi_x_dna_meiosis_amount(rng):
     # 독립 경로: 염색분체 수로 센다(상수 = X/2n 단위 DNA)
     cells = 2 if stage == "the end of meiosis I" else 4
     agree(2 * X / cells, val, 1e-9, "dna")
-    pairs = [("Gives the amount after S phase, before the cell divides.", float(after_s)), ("Gives the amount of the original G1 cell.", float(X)), ("Gives the amount expected after meiosis II instead of after meiosis I.", X / 2), ("Halves the amount a second time.", X / 4), ("Doubles the amount after S phase.", float(2 * after_s))]
+    if stage == "the end of meiosis I":
+        pairs = [("Gives the amount after S phase, before the cell divides, which forgets that meiosis I produces two cells.", float(after_s)), ("Halves the amount as if the sister chromatids had separated, which happens in meiosis II and not in meiosis I.", X / 2),
+                 ("Doubles the amount a second time at meiosis I, although no DNA is replicated after S phase.", float(2 * after_s))]
+    else:
+        pairs = [("Gives the amount per cell after meiosis I, which forgets the second division.", float(X)), ("Gives the amount after S phase, before the cell divides.", float(after_s)), ("Divides the amount per cell after meiosis I by four instead of by two.", X / 4)]
     stem = f"A diploid cell that has {X} pg of DNA in G1 completes S phase and then meiosis. How much DNA is in each cell at {stage}?"
     kw = f"S phase doubles the DNA to {after_s} pg. Meiosis I separates homologous chromosomes into two cells, so each cell has {after_s}/2 = {X} pg. Meiosis II separates sister chromatids into four cells with {X / 2:g} pg each. At {stage} each cell has {val:g} pg."
     return _num("bi_x_dna_meiosis_amount", "5.1", "5.A", stem, float(val), pairs, lambda v: f"{v:g} pg", rng, concept="DNA content per cell through S phase and meiosis", path="count of chromatids per cell after each division vs the doubling-and-halving rule",
@@ -257,7 +261,7 @@ def bi_x_trihybrid_prob(rng):
     for g, w in zip(genes, want):
         half_each *= Fr(1, 4) if g == "Aa x Aa" else Fr(1, 2)
     pairs = [("Swaps the dominant and recessive phenotype probabilities for every gene.", flip), ("Counts only the heterozygous offspring, with probability one half, for each Aa x Aa gene with a dominant phenotype, which leaves out the AA offspring.", het_only),
-             ("Uses one quarter for every Aa x Aa gene and one half for every Aa x aa gene regardless of the phenotype asked for.", half_each), ("Uses the probability for one gene only.", table[want[0]][genes[0]])]
+             ("Uses the probability of the recessive phenotype (1/4 for an Aa x Aa gene and 1/2 for an Aa x aa gene) for every gene, whatever phenotype is asked for.", half_each), ("Uses the probability for one gene only.", table[want[0]][genes[0]])]
     key, ds = frac_opts(val, pairs)
     desc = {"dominant": "the dominant phenotype", "recessive": "the recessive phenotype"}
     stem = ("Three genes assort independently, and each gene has a completely dominant allele (capital letter) and a recessive allele (lowercase letter). "
@@ -306,14 +310,16 @@ def bi_x_pedigree_carrier_prob(rng):
     agree(float(carrier_share), 2 / 3, 1e-12, "share")
     pairs = [("Assumes that the unaffected sibling is certainly a carrier, which leaves out the 2/3 chance.", c * Fr(1, 4)), ("Uses one half as the chance that the unaffected sibling is a carrier.", Fr(1, 2) * c * Fr(1, 4)),
              ("Uses one half as the chance that a carrier passes the recessive allele to a child.", Fr(2, 3) * c * Fr(1, 2)), ("Uses the chance 1/4 for the child from two carrier parents without considering the sibling or the partner.", Fr(1, 4))]
-    mate = ("The partner of individual II-3 is a known carrier of the allele." if c == 1 else f"The partner of individual II-3 is from the general population, in which {ffmt(c)} of people are carriers of the allele.")
-    stem = (f"A rare recessive condition is inherited as an autosomal trait. Two unaffected parents have a child, II-1, who is affected, and another child, II-3, who is unaffected. {mate} "
-            "What is the probability that a first child of II-3 and the partner will be affected?")
+    stim = tbl("Family information for a rare autosomal recessive condition", ["Individual", "Relationship", "Phenotype"],
+               [["I-1", "Mother of II-1 and II-3", "Unaffected"], ["I-2", "Father of II-1 and II-3", "Unaffected"], ["II-1", "Child of I-1 and I-2", "Affected"], ["II-3", "Child of I-1 and I-2", "Unaffected"],
+                ["II-4", "Partner of II-3", "Known carrier" if c == 1 else f"Unaffected, from a population in which {ffmt(c)} of people are carriers"]])
+    stem = ("The table gives information about a family in which a rare condition is inherited as an autosomal recessive trait. "
+            "What is the probability that a first child of II-3 and II-4 will be affected?")
     kw = (f"Both parents of II-3 must be carriers because they have an affected child. An unaffected child of two carriers is a carrier with probability 2/3. "
           f"A carrier passes the allele with probability 1/2 and the partner does so with probability {ffmt(c / 2)}, so the probability is (2/3)({ffmt(c)})(1/4) = {ffmt(val)}.")
     key, ds = frac_opts(val, pairs)
     return mk("bi_x_pedigree_carrier_prob", "5.3", "5.A", stem, key, ds, rng, concept="carrier probability and risk to a child in a pedigree", path="share of carriers among unaffected genotypes of two-carrier crosses vs product of 2/3, partner chance and 1/4",
-              thinking=_steps("Infer that both parents are carriers from the affected sibling", "Find the chance that the unaffected sibling is a carrier", "Combine that chance with the partner and the 1/4 chance for a child of two carriers"), est=110, facts=[f"c={ffmt(c)}"], kwhy=kw, judgment="convert pedigree information into a carrier probability before applying the cross")
+              thinking=_steps("Infer that both parents are carriers from the affected sibling", "Find the chance that the unaffected sibling is a carrier", "Combine that chance with the partner and the 1/4 chance for a child of two carriers"), stim=stim, est=110, facts=[f"c={ffmt(c)}"], kwhy=kw, judgment="convert pedigree information into a carrier probability before applying the cross")
 
 
 @_retry
@@ -416,6 +422,8 @@ def bi_x_template_to_peptide(rng):
     # 주형 삼중자를 그대로 코돈으로 읽은 경우, 상보 가닥을 거꾸로 읽은 경우
     raw_old = template[pos:pos + 3].replace("T", "U"); raw_new = mut_template[pos:pos + 3].replace("T", "U")
     rev_old = "".join({"T": "A", "A": "U", "C": "G", "G": "C"}[c] for c in template[pos:pos + 3])[::-1]; rev_new = "".join({"T": "A", "A": "U", "C": "G", "G": "C"}[c] for c in mut_template[pos:pos + 3])[::-1]
+    if AA_NAME[CODON[raw_old]] == AA_NAME[CODON[raw_new]] or AA_NAME[CODON[rev_old]] == AA_NAME[CODON[rev_new]] or "Stop" in (AA_NAME[CODON[raw_old]], AA_NAME[CODON[raw_new]], AA_NAME[CODON[rev_old]], AA_NAME[CODON[rev_new]]):
+        raise ValueError("misread_not_distinct")
     sent = lambda p, x, y: f"The amino acid at position {p} changes from {x} to {y}."  # noqa: E731
     key_t = sent(n, a1, a2)
     cands = [(sent(n, AA_NAME[CODON[raw_old]], AA_NAME[CODON[raw_new]]), "Reads the template strand directly as the mRNA codon instead of reading its complement."),
@@ -452,7 +460,7 @@ def bi_x_transformation_eff(rng):
     pairs = [("Divides the colonies on the plate by the micrograms of DNA and does not scale up to the whole culture.", col / (dna_ng / 1000)), ("Scales to the whole culture but divides by the nanograms of DNA, which gives colonies per ng.", total_col / dna_ng),
              ("Multiplies the colonies on the plate by the micrograms of DNA instead of dividing.", col * dna_ng / 1000), ("Scales to the whole culture but does not divide by the amount of DNA.", total_col)]
     stem = (f"Bacteria were transformed with {dna_ng} ng of plasmid DNA that carries an ampicillin-resistance gene, and the cells were then suspended in a total volume of {total:g} mL. A {plated:g} mL sample of the suspension was spread on a plate with ampicillin, and {col} colonies grew. "
-            "Transformation efficiency is the number of transformed colonies per microgram of DNA that was used (1 µg = 1000 ng). What is the transformation efficiency of the experiment?")
+            "Transformation efficiency is the total number of transformed colonies expected from the entire cell suspension, divided by the micrograms of DNA that were used (1 µg = 1000 ng). What is the transformation efficiency of the experiment, in colonies per µg of DNA?")
     kw = f"The whole {total:g} mL contains {total:g}/{plated:g} = {scale:g} times as many transformed cells as the plated sample, or {total_col:,.0f} colonies. The DNA was {dna_ng} ng = {dna_ng / 1000:g} µg, so the efficiency is {total_col:,.0f}/{dna_ng / 1000:g} = {eff:,.0f} colonies per µg."
     return _num("bi_x_transformation_eff", "6.8", "5.A", stem, eff, pairs, lambda v: f"{v:,.0f}" if v >= 10 else f"{hu(v, 2)}", rng, concept="transformation efficiency from a plated sample", path="total colonies per ng converted to µg vs a single combined formula",
                 steps=_steps("Scale the colonies on the plate to the whole volume of cells", "Convert the amount of DNA from nanograms to micrograms", "Divide the total number of colonies by the micrograms of DNA"), gap=1, rel=0.05, facts=[f"eff={eff}"], kwhy=kw)
@@ -465,6 +473,8 @@ def bi_x_gel_size_estimate(rng):
     i = rng.randint(0, 3)
     du = d[i] + rng.randint(2, d[i + 1] - d[i] - 2)
     f = (du - d[i]) / (d[i + 1] - d[i])
+    if abs(f - 0.5) < 0.14:
+        raise ValueError("near_midpoint")
     est = 10 ** (math.log10(sizes[i]) + f * (math.log10(sizes[i + 1]) - math.log10(sizes[i])))
     # 독립 경로: 로그 눈금 직선의 방정식
     slope = (math.log10(sizes[i + 1]) - math.log10(sizes[i])) / (d[i + 1] - d[i]); icpt = math.log10(sizes[i]) - slope * d[i]
@@ -573,7 +583,7 @@ def bi_x_antibiotic_generations(rng):
              ("Treats the ratio of surviving sensitive cells to resistant cells as the number of generations.", ratio * dt / 60), ("Counts the time for one doubling only.", dt / 60)]
     sup = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
     stem = (f"A culture contains 1 x 10{str(int(round(math.log10(T0)))).translate(sup)} bacterial cells, and 1 in every {int(round(1 / f)):,} of them carries a mutation for resistance to an antibiotic. The antibiotic kills {kill * 100:g}% of the sensitive cells at once and stops the survivors from dividing. "
-            f"The resistant cells divide every {dt} minutes without dying. How many hours does it take for the resistant cells to outnumber the surviving sensitive cells?")
+            f"The resistant cells divide in synchrony every {dt} minutes without dying, so count only whole generations. How many hours does it take for the resistant cells to outnumber the surviving sensitive cells?")
     kw = (f"There are {R0:,.0f} resistant cells at the start. The surviving sensitive cells number {S:,.0f}. The resistant cells double each generation, so they outnumber {S:,.0f} after {g} generations, because {R0:,.0f} x 2^{g} = {R0 * 2 ** g:,.0f}. "
           f"With a doubling time of {dt} minutes, this takes {g} x {dt}/60 = {hrs:g} hours.")
     return _num("bi_x_antibiotic_generations", "7.8", "5.A", stem, hrs, pairs, lambda v: f"{hu(v, 1)} hours" if v < 100 else f"{v:,.0f} hours", rng, concept="selection for resistance: resistant cells outgrow surviving sensitive cells", path="doubling loop until the counts cross vs a base-2 logarithm",
@@ -592,9 +602,9 @@ def bi_x_gene_flow_freq(rng):
     pairs = [("Gives the allele frequency after only one generation of gene flow.", q1), ("Gives the average of the island and mainland frequencies.", (qi + qm) / 2), ("Swaps the weights so that the island contributes the fraction m and the mainland contributes 1 - m in each generation.", m * (m * qi + (1 - m) * qm) + (1 - m) * qm),
              ("Adds the mainland contribution m x q in each of the two generations to the original frequency without removing the emigrating part.", qi + 2 * m * qm), ("Gives the mainland allele frequency.", qm)]
     stem = (f"On a small island, the frequency of allele a is {qi:g}. In each generation, {int(m * 100)}% of the breeding individuals on the island are immigrants from the mainland, where the frequency of allele a is {qm:g}. "
-            f"Assuming that the mainland frequency does not change and that no other evolutionary force acts, what is the frequency of allele a on the island after two generations of gene flow?")
+            f"Assuming that the mainland frequency does not change and that no other evolutionary force acts, what is the frequency of allele a on the island after two generations of gene flow? (Round to three decimal places.)")
     kw = (f"Each generation, q(new) = (1 - {m:g})q(old) + {m:g}({qm:g}). After one generation q = {(1 - m):g}({qi:g}) + {m:g}({qm:g}) = {q1:.3f}. After the second generation q = {(1 - m):g}({q1:.3f}) + {m:g}({qm:g}) = {q2:.3f}.")
-    return _num("bi_x_gene_flow_freq", "7.4", "5.A", stem, q2, pairs, lambda v: f"{hu(v, 2)}", rng, concept="allele frequency change from repeated gene flow", path="allele counts per generation vs repeated weighted average",
+    return _num("bi_x_gene_flow_freq", "7.4", "5.A", stem, q2, pairs, lambda v: f"{hu(v, 3)}", rng, concept="allele frequency change from repeated gene flow", path="allele counts per generation vs repeated weighted average",
                 steps=_steps("Use the proportion of immigrants to weight the island and mainland frequencies in the first generation", "Use the result as the starting frequency for the second generation", "Weight again with the same proportion of immigrants"), gap=0.02, rel=0.05, facts=[f"q2={q2:.4f}"], kwhy=kw)
 
 
@@ -688,10 +698,20 @@ def bi_x_sd_to_se_overlap(rng):
     agree(1.0 if (m2 - m1) > 2 * (se1 + se2) else 0.0, 1.0 if sep else 0.0, 0, "sep")
     if abs((m2 - m1) - 2 * (se1 + se2)) < 0.15:
         raise ValueError("borderline")
-    txt = f"For treatment 1 the range is {lo1:.1f} to {hi1:.1f}, and for treatment 2 the range is {lo2:.1f} to {hi2:.1f}."
-    key, ds = range_options(sep, f"Standard error = SD/√n = {sd:g}/√{n} = {se1:.2f} for treatment 1 and {sd2:g}/√{n} = {se2:.2f} for treatment 2, so mean ± 2SE gives these ranges. {txt}")
-    stim = tbl("Plant height after two fertilizer treatments (mean ± standard deviation, with the same number of plants in each group)", ["Treatment", "Mean height (cm)", "Standard deviation (cm)", "Number of plants"], [["Treatment 1", f"{m1:.1f}", f"{sd:g}", n], ["Treatment 2", f"{m2:.1f}", f"{sd2:g}", n]])
-    stem = "A student measured the height of plants that received two different fertilizer treatments. The table gives the mean, the sample standard deviation, and the number of plants in each group. Which of the following is the best conclusion about the difference between the two means?"
+    txt = f"For low light the range is {lo1:.1f} to {hi1:.1f}, and for high light the range is {lo2:.1f} to {hi2:.1f}."
+    expl = f"Standard error = SD/√n = {sd:g}/√{n} = {se1:.2f} for low light and {sd2:g}/√{n} = {se2:.2f} for high light, so mean ± 2SE gives these ranges. {txt}"
+    if sep:
+        key, ds = sentence_options("The difference is likely real, because the ±2SE ranges do not overlap.", f"{expl} These ranges do not overlap, so the difference is unlikely to be due to chance.",
+            [("The difference is likely real, because one mean is greater than the other mean.", "A difference between two means is not enough by itself; the ±2SE ranges must be compared, and here they do not overlap."),
+             ("The difference may be due to chance, because the ±2SE ranges do not overlap.", "Ranges that do not overlap support a real difference, so this reverses the rule for comparing ranges."),
+             ("The difference cannot be judged, because the table gives standard deviations and not standard errors.", "The standard error is the standard deviation divided by the square root of the number of trials, so the table has enough information.")])
+    else:
+        key, ds = sentence_options("The difference may be due to chance, because the ±2SE ranges overlap.", f"{expl} These ranges overlap, so a real difference is not supported.",
+            [("The difference is likely real, because one mean is greater than the other mean.", "A difference between two means is not enough by itself; the ±2SE ranges overlap, so chance can explain it."),
+             ("The difference is likely real, because the ±2SE ranges overlap.", "Ranges that overlap mean that chance can explain the difference, so this reverses the rule for comparing ranges."),
+             ("The difference cannot be judged, because the table gives standard deviations and not standard errors.", "The standard error is the standard deviation divided by the square root of the number of trials, so the table has enough information.")])
+    stim = tbl("Rate of oxygen production by leaf disks under two light intensities (mean and sample standard deviation, with the same number of trials in each group)", ["Light intensity", "Mean rate (µmol O₂ per minute)", "Standard deviation (µmol O₂ per minute)", "Number of trials"], [["Low light", f"{m1:.1f}", f"{sd:g}", n], ["High light", f"{m2:.1f}", f"{sd2:g}", n]])
+    stem = "A student measured the rate of photosynthesis, as oxygen production, of leaf disks under a low and a high light intensity. The table gives the mean, the sample standard deviation, and the number of trials in each group. Which of the following is the best conclusion about the difference between the two means?"
     return mk("bi_x_sd_to_se_overlap", "3.4", "5.B", stem, key, ds, rng, concept="convert SD and n to ±2SE and compare the ranges", path="difference between means vs the sum of the two 2SE half-widths", thinking=_steps("Convert each standard deviation to a standard error using the sample size", "Calculate the mean ± 2SE range for each group", "Compare the two ranges to judge whether the difference is likely real"),
               stim=stim, est=110, facts=[f"se1={se1:.3f}", f"se2={se2:.3f}", f"sep={sep}"], judgment="convert the SD to SE before using the 2SE overlap rule")
 
