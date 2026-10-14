@@ -82,13 +82,13 @@ def cs_string_methods(rng):
 # ======================= 1.11 Math 클래스 (3.C) =======================
 @retry_sep
 def cs_math_class(rng):
-    b, c, d = rng.randint(2, 6), pick(rng, [20, 28, 40, 55, 70]), -rng.randint(2, 9)
+    b, c, d = rng.randint(2, 6), pick(rng, [22, 33, 47, 60, 78]), -rng.randint(2, 9)
     code = f"double a = Math.pow({b}, 2);\nint b = (int) Math.sqrt({c});\nSystem.out.println(a + b + Math.abs({d}));"
     py = str(float(b ** 2) + int(math.sqrt(c)) + abs(d))
     muts = [{"why": "Reads Math.pow(base, 2) as base * 2.", "swap": (f"Math.pow({b}, 2)", f"({b} * 2.0)")},
             {"why": "Rounds the square root to the nearest integer instead of truncating it with the cast.", "swap": (f"(int) Math.sqrt({c})", f"(int) Math.round(Math.sqrt({c}))")},
             {"why": "Ignores Math.abs and adds the negative number.", "swap": (f"Math.abs({d})", f"({d})")},
-            {"why": "Treats Math.sqrt as returning the square.", "swap": (f"(int) Math.sqrt({c})", f"(int) Math.pow({c}, 2) % 10")}]
+            {"why": "Reads Math.pow(base, 2) as the base raised to itself.", "swap": (f"Math.pow({b}, 2)", f"Math.pow({b}, {b})")}]
     return mk(rng, "cs_math_class", "1.11", "3.C", STEM_OUT, code, muts=muts, py=py, concept="Math.pow, Math.sqrt with a cast, Math.abs and a double result",
               path="javac+java output vs Python math.pow/sqrt/abs", kwhy=f"Math.pow({b}, 2) is {float(b ** 2)}; the cast keeps {int(math.sqrt(c))}; Math.abs({d}) is {abs(d)}; the sum is the double {py}.", facts=[f"key={py}"])
 
@@ -146,7 +146,7 @@ def cs_short_circuit(rng):
     muts = [{"why": "Evaluates every operand because it ignores short-circuit evaluation.", "call": stm.replace("||", "|").replace("&&", "&")},
             {"why": "Gives || higher precedence than &&, grouping (A || B) && C.", "call": stm.replace(cond, f"({cond.split(' || ')[0]} || {cond.split(' || ')[1].split(' && ')[0]}) && {cond.split(' && ')[1]}")},
             {"why": "Stops at the first operand regardless of its value.", "call": stm.replace(cond, cond.split(" || ")[0])},
-            {"why": "Evaluates the right operand of || even when the left operand is true but skips && operands.", "call": stm.replace(" || ", " | ")}]
+            {"why": "Believes || always evaluates both of its operands, so the labels of the && operands are printed even when A is true.", "call": stm.replace(" || ", " | ")}]
     return mk(rng, "cs_short_circuit", "2.5", "3.A", STEM_OUT, cls, call=stm, muts=muts, py=py, stim_code=cls + "\n\n" + client(stm), concept="short-circuit evaluation order and precedence of && over ||",
               path="javac+java output vs Python or/and with an explicit evaluation log", kwhy="&& binds tighter than ||, so the condition is A || (B && C); || stops when A is true, and && stops when B is false, so only the operands that are needed print their labels.", facts=[f"t={t1},{t2},{t3}", f"key={py}"])
 
@@ -205,7 +205,7 @@ def cs_nested_loops_count(rng):
     py = str(sum(1 for i in range(1, n + 1) for j in range(i, m + 1)))
     muts = [{"why": "Assumes the inner loop always runs the full number of times, giving rows times columns.", "swap": ("int j = i;", "int j = 1;")},
             {"why": "Starts the inner loop at i + 1, skipping the diagonal.", "swap": ("int j = i;", "int j = i + 1;")},
-            {"why": "Counts only the passes of the outer loop.", "swap": ("count++;", "count += j == i ? 1 : 0;")},
+            {"why": "Counts only the passes in which j equals i, one for each row whose inner loop runs at least once.", "swap": ("count++;", "count += j == i ? 1 : 0;")},
             {"why": "Uses exclusive upper bounds for both loops.", "swap": (f"i <= {n}", f"i < {n}")}]
     return mk(rng, "cs_nested_loops_count", "2.11", "3.A", "What is printed as a result of executing the code segment?", code, muts=muts, py=py, concept="counting executions of nested loops with a dependent inner start",
               path="javac+java output vs Python double comprehension", kwhy=f"For each i from 1 to {n} the inner loop runs once for each j from i to {m}, which is zero times when i exceeds {m}; the total is {py}.", facts=[f"key={py}"])
@@ -220,7 +220,7 @@ def cs_string_algorithm(rng):
     py = "".join(w[i] for i in range(len(w) - 1) if w[i] == w[i + 1])
     muts = [{"why": "Stops one character early because it uses i < s.length() - 2.", "swap": ("s.length() - 1", "s.length() - 2")},
             {"why": "Compares each character with the character two positions ahead.", "swap": ("s.charAt(i + 1)", "s.charAt(i + 2)")},
-            {"why": "Appends the neighbor instead of the repeated letter's first copy, adding every second occurrence of the pair.", "swap": ("result += s.charAt(i);", "result += s.charAt(i); result += s.charAt(i);")},
+            {"why": "Appends the repeated letter twice for every adjacent pair instead of once.", "swap": ("result += s.charAt(i);", "result += s.charAt(i); result += s.charAt(i);")},
             {"why": "Collects the characters that differ from the next one.", "swap": ("s.charAt(i) == s.charAt(i + 1)", "s.charAt(i) != s.charAt(i + 1)")}]
     if not py:
         raise ValueError("no_repeats")
@@ -288,8 +288,12 @@ def cs_bug_find(rng):
 @retry_sep
 def cs_compile_error(rng):
     """1.2 / 3.D: 컴파일 오류가 나는 문장 하나 — 후보를 각각 컴파일해 판정."""
-    good_pool = [("double d = 5;", "An int value can be widened to a double."), ("int n = (int) 3.9;", "A cast narrows the double to an int."), ("String s = \"a\" + 1;", "String concatenation accepts an int operand."), ("long big = 12;", "An int can be assigned to a long."), ("char c = 'x';", "A char literal is valid."), ("boolean ok = 3 > 2;", "A relational expression produces a boolean.")]
-    bad_pool = [("int k = 3.9;", "Assigning a double to an int requires a cast, so this fails to compile."), ("boolean b = 1;", "An int cannot be assigned to a boolean in Java."), ("String t = 'ab';", "Single quotes allow only one character; a String needs double quotes."), ("int m = \"7\";", "A String cannot be assigned to an int."), ("char q = \"x\";", "A String literal cannot be assigned to a char.")]
+    good_pool = [("double d = 5;", "Believes an int value must be cast before it is stored in a double; the widening conversion is automatic, so this compiles."), ("int n = 'a';", "Believes a char cannot be stored in an int; a char widens to an int (its code, 97), so this compiles."),
+                 ("long big = 12 * 3;", "Believes a long variable needs an L suffix on every value; an int expression widens to long, so this compiles."), ("double avg = 7 / 2;", "Believes integer division in the initializer makes the statement invalid; it compiles and stores 3.0."),
+                 ("char c = 65;", "Believes an int literal cannot be stored in a char; a constant that fits in a char is allowed, so this compiles."), ("String s = \"a\" + 1;", "Believes a String cannot be joined with an int; concatenation converts the int, so this compiles.")]
+    bad_pool = [("int k = 3.9;", "A double cannot be assigned to an int without a cast, because the conversion would lose information, so this fails to compile."), ("boolean b = 1;", "Java does not convert an int to a boolean; only true and false are boolean values, so this fails to compile."),
+                ("float f = 3.5;", "The literal 3.5 is a double, and a double cannot be assigned to a float without a cast or the f suffix, so this fails to compile."), ("int m = \"7\";", "A String cannot be assigned to an int; Integer.parseInt would be needed, so this fails to compile."),
+                ("char q = \"x\";", "A String literal in double quotes cannot be assigned to a char, which needs single quotes, so this fails to compile."), ("long t = 2.0;", "A double cannot be assigned to a long without a cast, so this fails to compile.")]
     bad = pick(rng, bad_pool)
     goods = rng.sample(good_pool, 3)
     cands = [bad] + goods
@@ -301,7 +305,7 @@ def cs_compile_error(rng):
     if ok != [False, True, True, True]:
         raise ValueError("compile_candidates_not_exactly_one_failing")
     key = Opt(f"`{bad[0]}`", True, bad[1], None)
-    ds = [Opt(f"`{g[0]}`", False, "This statement compiles: " + g[1], None) for g in goods]
+    ds = [Opt(f"`{g[0]}`", False, g[1], None) for g in goods]
     p = pack("cs_compile_error", "1.2", "3.D", "not_allowed", "x", key, ds, rng, stimulus={"kind": "none", "description": "", "data": {}}, est=60, facts=[f"bad={bad[0]}"])
     p["stem"] = "Which of the following statements, if placed in a main method, causes a compile-time error?"
     mis = [(f"m{i + 1}", o["why"]) for i, o in enumerate([o for j, o in enumerate(p["options"]) if j != p["key_index"]])]

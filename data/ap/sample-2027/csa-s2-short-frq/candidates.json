@@ -1,0 +1,920 @@
+[
+ {
+  "candidateKey": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.13",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_2d_best_row",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard 2D array FRQ-style method: nested traversal to compute row sums, track max and its index, use strict > for the tie rule, and initialize the max safely (the first row's sum or Integer.MIN_VALUE, since values may be negative). Concept depth is moderate and matches a typical full-mock free-response question. Reading and computation load are small, and the difficulty comes only from legitimate levers (boundary and initialization choices, per-row accumulator reset), not from unfair sources.",
+  "payload": {
+   "archetype": "csf_2d_best_row",
+   "template": "q4",
+   "topic": "4.13",
+   "extra_topics": [
+    "4.12"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "GridStats: the row with the largest sum",
+   "stimulus": {
+    "kind": "text",
+    "description": "A class GridStats analyzes a rectangular two-dimensional array of integers. The class is shown with the header of the method you will write.\n```java\npublic class GridStats {\n    /** Returns the index of the row of grid with the largest sum of its elements.\n     *  If more than one row has the largest sum, returns the smallest such index.\n     *  Precondition: grid has at least one row and every row has at least one element. */\n    public static int bestRow(int[][] grid) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method bestRow, which returns the index of the row of grid with the largest sum of its elements. If more than one row has the largest sum, the method returns the smallest such row index. For example, if grid is { { 1, 2 }, { 5, 0 }, { 3, 2 } } the row sums are 3, 5 and 5, so bestRow returns 1. Complete the method bestRow.",
+     "points": 9,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int bestRow(int[][] grid) {\n        int best = 0;\n        int bestSum = -1000000;\n        for (int r = 0; r < grid.length; r++) {\n            int sum = 0;\n            for (int c = 0; c < grid[r].length; c++) {\n                sum += grid[r][c];\n            }\n            if (sum > bestSum) {\n                bestSum = sum;\n                best = r;\n            }\n        }\n        return best;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Iterates over every row with a loop bounded by grid.length",
+       "required_elements": [
+        "for (int r = 0; r < grid.length; r++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses grid[0].length for the rows"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Iterates over every element of the current row with bounds based on grid[r].length (or an enhanced for)",
+       "required_elements": [
+        "for (int c = 0; c < grid[r].length; c++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses grid.length for the columns"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Accesses elements with the row index first and the column index second",
+       "required_elements": [
+        "grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "swaps the indexes"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Accumulates the sum of the current row (and resets it for each row)",
+       "required_elements": [
+        "int sum = 0 inside the row loop",
+        "sum += grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "does not reset the sum",
+        "sums the whole array"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Keeps track of the largest row sum seen so far, initialized so negative sums work",
+       "required_elements": [
+        "bestSum initialized to the first row or a very small value"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "initializes to 0"
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "Compares the current row sum with the best using a strict comparison so ties keep the smaller index",
+       "required_elements": [
+        "sum > bestSum"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses >= (returns the last tied row)"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "Records the row index (not the sum) of the best row when a new best is found",
+       "required_elements": [
+        "best = r"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "stores the sum as the index"
+       ],
+       "requires_row_id": "A6",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A8",
+       "points": 1,
+       "criterion": "Returns the row index after all rows have been examined",
+       "required_elements": [
+        "return best"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop",
+        "returns the sum"
+       ],
+       "requires_row_id": "A7",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A9",
+       "points": 1,
+       "criterion": "The method compiles with correct 2D array syntax and return type int",
+       "required_elements": [
+        "public static int bestRow(int[][] grid)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "wrong return type"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "grids=8"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 5 } });",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 1, 2 }, { 3, 4 } });",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 4, 4 }, { 1, 7 }, { 8, 0 } });",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { -5, -1 }, { -2, -2 }, { -9, 1 } });",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 1, 1, 1 }, { 3, 0, 0 }, { 0, 2, 1 } });",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 0, 9 }, { 9, 0 } });",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 2, 9, 1 }, { 5, 5, 5 } });",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { -1 }, { -3 }, { -2 } });",
+     "expected": "0"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     3,
+     8,
+     1,
+     1,
+     3
+    ]
+   },
+   "blueprint": {
+    "id": "csf_2d_best_row",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "2D array row traversal with a running maximum and tie rule",
+    "topic": "4.13",
+    "skill": "2.A",
+    "student_thinking": [
+     "Sum each row with nested loops",
+     "Track the best sum and its index",
+     "Break ties toward the smaller index"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (separate sums array) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.13"
+      ],
+      "points": 9,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int bestRow(int[][] grid) {\n        int best = 0;\n        int bestSum = -1000000;\n        for (int r = 0; r < grid.length; r++) {\n            int sum = 0;\n            for (int c = 0; c < grid[r].length; c++) {\n                sum += grid[r][c];\n            }\n            if (sum > bestSum) {\n                bestSum = sum;\n                best = r;\n            }\n        }\n        return best;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Iterates over every row with a loop bounded by grid.length",
+        "elements": [
+         "for (int r = 0; r < grid.length; r++)"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Iterates over every element of the current row with bounds based on grid[r].length (or an enhanced for)",
+        "elements": [
+         "for (int c = 0; c < grid[r].length; c++)"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Accesses elements with the row index first and the column index second",
+        "elements": [
+         "grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Accumulates the sum of the current row (and resets it for each row)",
+        "elements": [
+         "int sum = 0 inside the row loop",
+         "sum += grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Keeps track of the largest row sum seen so far, initialized so negative sums work",
+        "elements": [
+         "bestSum initialized to the first row or a very small value"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "Compares the current row sum with the best using a strict comparison so ties keep the smaller index",
+        "elements": [
+         "sum > bestSum"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "Records the row index (not the sum) of the best row when a new best is found",
+        "elements": [
+         "best = r"
+        ]
+       },
+       {
+        "row_id": "A8",
+        "points": 1,
+        "criterion": "Returns the row index after all rows have been examined",
+        "elements": [
+         "return best"
+        ]
+       },
+       {
+        "row_id": "A9",
+        "points": 1,
+        "criterion": "The method compiles with correct 2D array syntax and return type int",
+        "elements": [
+         "public static int bestRow(int[][] grid)"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8600,
+   "pack_id": "csf_2d_best_row-s8600"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_2d_best_row",
+   "facts": [
+    "grids=8"
+   ],
+   "seed": 8600
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A standard 2D-array row-sum algorithm FRQ that fits 4.13 and skill 2.A. The rubric rows are single-behavior and consistent with the reference, and the independent alternative (initialized from row 0) is accepted by A5. The stimulus gives the header, the tie rule, the precondition and an example. One minor weakness: the reference sentinel of -1000000 is not safe for unbounded ints, but the rubric also accepts initializing from the first row.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant demand is implementing a 2D traversal algorithm (row sums, running maximum, tie rule), matching 4.13/2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rubric rows map to the reference. A5 permits both the sentinel and the first-row initialization. The -1000000 sentinel is a minor weakness since values are not bounded."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The header, the precondition, the tie rule and an example are all given. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric common_errors cover the typical mistakes: >=, no sum reset, swapped indexes, initializing to 0."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A typical 9-point CED-style 2D array FRQ with no calculator load and modest reading."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 2D array FRQ-style method: nested traversal to compute row sums, track max and its index, use strict > for the tie rule, and initialize the max safely (the first row's sum or Integer.MIN_VALUE, since values may be negative). Concept depth is moderate and matches a typical full-mock free-response question. Reading and computation load are small, and the difficulty comes only from legitimate levers (boundary and initialization choices, per-row accumulator reset), not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f02-k0",
+  "cellId": "ap_computer_science_a-f02",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.13",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_2d_transpose",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring; criterion_failed_exam_suitability; reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style 2D array algorithm: allocate a result array with swapped dimensions (grid[0].length x grid.length), then use nested loops to assign result[c][r] = grid[r][c]. The main difficulty is handling non-square dimensions correctly and keeping the indices straight. The stimulus is short, the computation is minimal, and everything is in scope for topics 4.11-4.13.",
+  "payload": {
+   "archetype": "csf_2d_transpose",
+   "template": "q4",
+   "topic": "4.13",
+   "extra_topics": [
+    "4.12",
+    "4.11"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "GridTools: transpose a 2D array",
+   "stimulus": {
+    "kind": "text",
+    "description": "A class GridTools manipulates rectangular two-dimensional arrays of integers. The class is shown with the header of the method you will write.\n```java\npublic class GridTools {\n    /** Returns a new two-dimensional array that is the transpose of grid: for every row r and column c,\n     *  element [c][r] of the result equals element [r][c] of grid. The array grid is not modified.\n     *  Precondition: grid is rectangular and has at least one row and one column. */\n    public static int[][] transpose(int[][] grid) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method transpose, which returns a new two-dimensional array that is the transpose of grid: for every row r and column c, the element at row c and column r of the result equals the element at row r and column c of grid. The array grid must not be modified. For example, if grid is { { 1, 2, 3 }, { 4, 5, 6 } } the method returns { { 1, 4 }, { 2, 5 }, { 3, 6 } }. Complete the method transpose.",
+     "points": 9,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int[][] transpose(int[][] grid) {\n        int[][] result = new int[grid[0].length][grid.length];\n        for (int r = 0; r < grid.length; r++) {\n            for (int c = 0; c < grid[r].length; c++) {\n                result[c][r] = grid[r][c];\n            }\n        }\n        return result;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Creates a new two-dimensional array whose number of rows equals the number of columns of grid and whose number of columns equals the number of rows of grid",
+       "required_elements": [
+        "new int[grid[0].length][grid.length]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "same dimensions as grid",
+        "swapped incorrectly"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Iterates over every row with a loop bounded by grid.length",
+       "required_elements": [
+        "for (int r = 0; r < grid.length; r++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "skips a row"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Iterates over every element of each row with correct column bounds",
+       "required_elements": [
+        "for (int c = 0; c < grid[r].length; c++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses grid.length for the columns"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Reads from grid with the row index first and the column index second",
+       "required_elements": [
+        "grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "swaps the indexes when reading"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Assigns each element read from grid into the result with the indexes exchanged",
+       "required_elements": [
+        "result[c][r] = grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "result[r][c]",
+        "compares instead of assigns"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "Handles a one-row or one-column array correctly: the allocation and both loops stay within bounds",
+       "required_elements": [
+        "no index error for { { 1, 2, 3 } }"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "index out of bounds when rows differ from columns"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "Allocates storage for every row of the result so no row of the result is missing",
+       "required_elements": [
+        "new int[rows][cols] or each row allocated"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "a row of the result is null"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A8",
+       "points": 1,
+       "criterion": "Leaves grid unchanged",
+       "required_elements": [
+        "no assignment to grid elements"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "modifies grid"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A9",
+       "points": 1,
+       "criterion": "Returns the new array after all elements are copied, with return type int[][]",
+       "required_elements": [
+        "return result"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop",
+        "returns grid"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "grids=8"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1]]|[[1]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2, 3 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1], [2], [3]]|[[1, 2, 3]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1 }, { 2 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1, 2]]|[[1], [2]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2 }, { 3, 4 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1, 3], [2, 4]]|[[1, 2], [3, 4]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2, 3 }, { 4, 5, 6 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1, 4], [2, 5], [3, 6]]|[[1, 2, 3], [4, 5, 6]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2 }, { 3, 4 }, { 5, 6 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1, 3, 5], [2, 4, 6]]|[[1, 2], [3, 4], [5, 6]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1, 4, 7], [2, 5, 8], [3, 6, 9]]|[[1, 2, 3], [4, 5, 6], [7, 8, 9]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 7, 8, 9, 0 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[7], [8], [9], [0]]|[[7, 8, 9, 0]]"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     5,
+     7,
+     7,
+     5,
+     7
+    ]
+   },
+   "blueprint": {
+    "id": "csf_2d_transpose",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "2D array traversal that builds a new array with row and column exchanged",
+    "topic": "4.13",
+    "skill": "2.A",
+    "student_thinking": [
+     "Allocate an array with swapped dimensions",
+     "Map [r][c] to [c][r]",
+     "Leave the input unchanged"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (column-first loops) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python zip",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.13"
+      ],
+      "points": 9,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int[][] transpose(int[][] grid) {\n        int[][] result = new int[grid[0].length][grid.length];\n        for (int r = 0; r < grid.length; r++) {\n            for (int c = 0; c < grid[r].length; c++) {\n                result[c][r] = grid[r][c];\n            }\n        }\n        return result;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Creates a new two-dimensional array whose number of rows equals the number of columns of grid and whose number of columns equals the number of rows of grid",
+        "elements": [
+         "new int[grid[0].length][grid.length]"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Iterates over every row with a loop bounded by grid.length",
+        "elements": [
+         "for (int r = 0; r < grid.length; r++)"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Iterates over every element of each row with correct column bounds",
+        "elements": [
+         "for (int c = 0; c < grid[r].length; c++)"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Reads from grid with the row index first and the column index second",
+        "elements": [
+         "grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Assigns each element read from grid into the result with the indexes exchanged",
+        "elements": [
+         "result[c][r] = grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "Handles a one-row or one-column array correctly: the allocation and both loops stay within bounds",
+        "elements": [
+         "no index error for { { 1, 2, 3 } }"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "Allocates storage for every row of the result so no row of the result is missing",
+        "elements": [
+         "new int[rows][cols] or each row allocated"
+        ]
+       },
+       {
+        "row_id": "A8",
+        "points": 1,
+        "criterion": "Leaves grid unchanged",
+        "elements": [
+         "no assignment to grid elements"
+        ]
+       },
+       {
+        "row_id": "A9",
+        "points": 1,
+        "criterion": "Returns the new array after all elements are copied, with return type int[][]",
+        "elements": [
+         "return result"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8600,
+   "pack_id": "csf_2d_transpose-s8600"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_2d_transpose",
+   "facts": [
+    "grids=8"
+   ],
+   "seed": 8600
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The task fits 4.13 and Skill 2.A, and the stimulus is clear. The rubric is padded to nine 1-point rows: A6, A7 and A8 are redundant or earned automatically, and A4 and A5 overlap. A2 and A3 require exact loop headers, which would penalize the valid column-first alternative. A single short method is also thin for a 9-point, 22-minute question, so the item deviates from the official FRQ pattern.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The reference solution is correct. The rubric rows double-count the same behavior: A6 is implied by A1 to A3, A7 by A1, and A8 is earned by any read-only solution. A2 and A3 demand literal loop headers, so valid alternative solutions (column-first loops, local variables) risk losing points."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "One short method (about 8 lines) is stretched into a full 9-point question. The scoring is not discriminating, since most students earn about 7 points almost automatically."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style 2D array algorithm: allocate a result array with swapped dimensions (grid[0].length x grid.length), then use nested loops to assign result[c][r] = grid[r][c]. The main difficulty is handling non-square dimensions correctly and keeping the indices straight. The stimulus is short, the computation is minimal, and everything is in scope for topics 4.11-4.13.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ }
+]

@@ -1,0 +1,99 @@
+{
+ "runs": [
+  "csa-s2-mc-c"
+ ],
+ "rows": 46,
+ "passed": 27,
+ "rejected": 19,
+ "passRate": 0.587,
+ "mc": {
+  "rows": 46,
+  "passed": 27,
+  "passRate": 0.587
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "3": 5,
+  "4": 22
+ },
+ "skillsPassed": {
+  "2.A": 6,
+  "3.B": 8,
+  "3.A": 5,
+  "4.A": 1,
+  "4.B": 3,
+  "3.C": 3,
+  "2.B": 1
+ },
+ "figPassed": {
+  "text": 27
+ },
+ "figAll": {
+  "text": 46
+ },
+ "figPassRate": {
+  "text": "27/46"
+ },
+ "renderTypesPassed": {
+  "text": 27
+ },
+ "archetypesPassed": {
+  "cs_2d_count_completion": 1,
+  "cs_2d_diag_completion": 1,
+  "cs_array_ref_pass": 2,
+  "cs_array_swap_completion": 1,
+  "cs_arraylist_insert_remove": 2,
+  "cs_arraylist_ops": 2,
+  "cs_binary_search": 2,
+  "cs_describe_2d": 1,
+  "cs_initial_conditions": 1,
+  "cs_insertion_completion": 1,
+  "cs_precondition_array": 2,
+  "cs_recursion_completion": 1,
+  "cs_recursion_string": 1,
+  "cs_recursive_binary_trace": 2,
+  "cs_search_completion": 1,
+  "cs_selection_sort_pass": 1,
+  "cs_scope_trace": 2,
+  "cs_static_completion": 1,
+  "cs_static_counter": 2
+ },
+ "archetypesAll": {
+  "cs_2d_count_completion": 2,
+  "cs_2d_diag_completion": 2,
+  "cs_array_ref_pass": 2,
+  "cs_array_swap_completion": 2,
+  "cs_arraylist_insert_remove": 2,
+  "cs_arraylist_ops": 2,
+  "cs_binary_search": 2,
+  "cs_describe_2d": 2,
+  "cs_describe_list": 2,
+  "cs_initial_conditions": 2,
+  "cs_insertion_completion": 2,
+  "cs_precondition_array": 2,
+  "cs_recursion_completion": 2,
+  "cs_recursion_string": 2,
+  "cs_recursive_binary_trace": 2,
+  "cs_search_completion": 2,
+  "cs_selection_sort_pass": 2,
+  "css_array_set": 2,
+  "css_list_set": 2,
+  "cs_scope_trace": 2,
+  "cs_static_completion": 2,
+  "cs_static_counter": 2,
+  "cs_this_shadow": 2
+ },
+ "failedArchetypes": [
+  "cs_describe_list",
+  "css_array_set",
+  "css_list_set",
+  "cs_this_shadow"
+ ],
+ "costUsd": {
+  "csa-s2-mc-c": 1.5692
+ }
+}

@@ -66,7 +66,7 @@ def cs_clamp_completion(rng):
     cands = [("temp += delta;\n        if (temp > max) {\n            temp = max;\n        }\n        if (temp < min) {\n            temp = min;\n        }", True, None),
              ("temp += delta;\n        if (temp > max) {\n            temp = max;\n        }", False, "Limits only the upper end, so the temperature can fall below min."),
              ("if (temp + delta <= max && temp + delta >= min) {\n            temp += delta;\n        }", False, "Ignores a change that would leave the range instead of stopping at the limit."),
-             ("temp = delta;", False, "Replaces the temperature with delta instead of changing it by delta."),
+             ("temp = delta;\n        if (temp > max) {\n            temp = max;\n        }\n        if (temp < min) {\n            temp = min;\n        }", False, "Replaces the temperature with delta instead of changing it by delta."),
              ("temp += delta;\n        if (temp > max) {\n            temp = min;\n        }\n        if (temp < min) {\n            temp = max;\n        }", False, "Wraps around to the other limit instead of stopping at the limit.")]
     options = [{"text": f"```\n{c}\n```", "source": tpl.replace("/*BODY*/", "        " + c), "why": w, "key": k} for c, k, w in cands]
     start = (lo + hi) // 2

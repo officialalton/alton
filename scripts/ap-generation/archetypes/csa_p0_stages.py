@@ -10,5 +10,7 @@ STAGE_S2_MC_C = ["cs_2d_count_completion", "cs_2d_diag_completion", "cs_array_re
                  "cs_scope_trace", "cs_static_completion", "cs_static_counter", "cs_this_shadow"]
 STAGE_S2_FRQ_A = ["csf_methods_runs", "csf_methods_leap", "csf_methods_digits", "csf_class_counter", "csf_class_scoreboard", "csf_class_stock"]
 STAGE_S2_FRQ_B = ["csf_list_reviews", "csf_list_runs", "csf_list_remove_short", "csf_2d_shift", "csf_2d_border", "csf_2d_transpose"]
-STAGE_S2_SHORT_MC = []
-STAGE_S2_SHORT_FRQ = []
+# 2026-10-13 cs-assign 부족분(가상 칸): cs_describe_list·cs_string_algorithm·css_array_set·css_list_set + 안전 여유(원형 수정 뒤 재시도): css_class_set·cs_short_circuit·cs_precondition
+STAGE_S2_SHORT_MC = ["cs_describe_list", "cs_string_algorithm", "css_array_set", "css_list_set", "css_class_set", "cs_short_circuit", "cs_precondition"]
+# Q4 통과가 2개뿐(border·shift)이라 여유 확보: 반려됐던 시나리오 재시도(transpose 는 채점 행 수정)
+STAGE_S2_SHORT_FRQ = ["csf_2d_best_row", "csf_2d_transpose"]

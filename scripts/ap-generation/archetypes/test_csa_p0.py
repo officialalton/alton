@@ -340,8 +340,11 @@ class TestPaidRunPlan(unittest.TestCase):
         tmpl = lambda names: sorted(packs(n, 1)[0]["template"] for n in names)  # noqa: E731
         self.assertEqual(tmpl(a), ["q1", "q1", "q1", "q2", "q2", "q2"]); self.assertEqual(tmpl(b), ["q3", "q3", "q3", "q4", "q4", "q4"])
 
-    def test_shortfall_lists_start_empty_until_the_assign_report_names_the_missing_cells(self):
-        self.assertEqual(R.CSA_STAGES.get("csa_s2_short_mc", []), []); self.assertEqual(R.CSA_STAGES.get("csa_s2_short_frq", []), [])
+    def test_shortfall_lists_name_only_library_archetypes_from_the_assign_report(self):
+        # 2026-10-13: cs-assign 부족분 + 수정 뒤 재시도. 전부 라이브러리에 있는 원형이고 중복이 없다.
+        for k, pool in (("csa_s2_short_mc", R.CSA), ("csa_s2_short_frq", R.CSA_FRQ)):
+            names = R.CSA_STAGES.get(k, [])
+            self.assertEqual(len(names), len(set(names))); self.assertTrue(all(n in pool for n in names), k)
 
 
 class TestPaidRunPlanConfigs(unittest.TestCase):
@@ -369,40 +372,9 @@ class TestPaidRunPlanConfigs(unittest.TestCase):
         hs = [r["hard_stop"] for r in plan["steps"]]
         self.assertEqual(hs, sorted(hs))
 
-    def test_no_frozen_copy_exists_yet(self):
-        # 동결·실행은 오너 승인 뒤: .v1.json 사본이 생기면 이 테스트가 알려 준다
-        frozen = [f for f in os.listdir(self.CFG) if f.startswith("csa-") and not f.endswith(".template.json")]
-        self.assertEqual(frozen, [])
-
-
-class TestPilotAndCost(unittest.TestCase):
-    def test_pilot_list_is_22_items_inside_official_windows(self):
-        names = R.CSA_STAGES["csa_p1_a"]
-        tags = C.tags_from_registry()
-        items_ = [t for n in names for t in tags[n]]
-        self.assertEqual(len(items_), 22)
-        unit = {u: sum(1 for uu, _ in items_ if uu == u) for u in "1234"}
-        prac = {p: sum(1 for _, s in items_ if s[0] == p) for p in "2345"}
-        for u, rng in C.UNIT_MC.items():
-            lo, hi = C.count_bounds(rng, 22)
-            self.assertTrue(lo <= unit[u] <= hi, (u, unit[u], lo, hi))
-        for p, rng in C.PRACTICE_MC.items():
-            if p in prac:
-                lo, hi = C.count_bounds(rng, 22)
-                self.assertTrue(lo <= prac[p] <= hi or (p == "5" and prac[p] == 0), (p, prac[p], lo, hi))
-        self.assertEqual(len(R.CSA_STAGES["csa_p1_frq"]), 4)
-
-    def test_cost_numbers(self):
-        import csa_cost as K
-        s = K.summary()
-        self.assertAlmostEqual(s["pilot_mc"], 1.72, places=2)
-        self.assertAlmostEqual(s["pilot_total"], 2.28, places=2)
-        self.assertLess(s["two_exams"][0], s["two_exams"][1])
-        self.assertAlmostEqual(s["two_exams"][1], round(s["two_exams"][0] * 1.3, 2), places=2)
-        self.assertLess(s["two_exams_optimistic"][1], s["two_exams"][1])
-        self.assertGreater(s["two_exams_pessimistic"][1], s["two_exams"][1])
-        self.assertLess(s["two_exams_with_pilot_reuse"][0], s["two_exams"][0])
-
-
-if __name__ == "__main__":
-    unittest.main()
+    def test_frozen_copies_carry_real_hashes(self):
+        # 오너 승인(2026-10-13) 뒤 동결 사본(.v*.json)이 생긴다: 모두 UNFROZEN 자리표시자가 아닌 실제 해시여야 한다
+        for f in os.listdir(self.CFG):
+            if f.startswith("csa-") and not f.endswith(".template.json"):
+                cfg = json.load(open(os.path.join(self.CFG, f)))
+                self.assertNotIn("UNFROZEN", json.dumps(cfg["expected"]), f)

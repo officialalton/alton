@@ -122,8 +122,8 @@ def cs_overload_resolution(rng):
     muts = []
     for i, c in enumerate(ch):
         s = "System.out.println(" + " + ".join(f"Show.f({(c2[2] if j == i else c2[0])})" for j, c2 in enumerate(ch)) + ");"
-        muts.append({"why": c[3], "call": s})
-    muts.append({"why": "Believes the overloaded methods cannot be told apart, so the first one declared is always used.", "call": "System.out.println(" + " + ".join('Show.f(5)' for _ in ch) + ");"})
+        muts.append({"why": c[3] + f" In this code Show.f({c[0]}) actually matches the version that returns {c[1]}.", "call": s})
+    muts.append({"why": "Believes the overloaded methods cannot be told apart, so the first one declared (the int version, which returns I) is used for every call.", "call": "System.out.println(" + " + ".join('Show.f(5)' for _ in ch) + ");"})
     return mk(rng, "cs_overload_resolution", "1.9", "3.C", STEM_OUT, OVL, call=stm, muts=muts, py=py, stim_code=OVL + "\n\n" + client(stm), concept="overload resolution by the number and static types of the arguments",
               path="javac+java output vs Python table of the matching signature", kwhy="Each call selects the overload whose parameter types match the argument types exactly; an int expression selects the int version and a double expression selects the double version.", facts=[f"key={py}"])
 
@@ -393,7 +393,7 @@ def css_loop_set(rng):
         raise ValueError("ambiguous")
     muts = [{"why": "Counts the occurrences of the first character including the one at index 0.", "call": f'return Probe.mystery("{w}") + 1;'},
             {"why": "Counts the characters that differ from the first character.", "call": f'return {len(w) - 1} - Probe.mystery("{w}");'},
-            {"why": "Counts the characters equal to the last character instead of the first.", "call": f'return Probe.mystery(new StringBuilder("{w}").reverse().toString());'},
+            {"why": "Counts the other characters that equal the last character, instead of those that equal the first character.", "call": f'return Probe.mystery(new StringBuilder("{w}").reverse().toString());'},
             {"why": "Stops counting at the first character that differs from the first character.", "call": f'String w = "{w}"; int c = 0; for (int i = 1; i < w.length(); i++) {{ if (w.substring(i, i + 1).equals(w.substring(0, 1))) {{ c++; }} else {{ break; }} }} return c;'}]
     q1 = mk(rng, "css_loop_set_q1", "2.10", "3.C", f"What is returned by the call Probe.mystery(\"{w}\")?", cls, call=f'return Probe.mystery("{w}");', muts=muts, py=py, stim_code=False, concept="trace a String scan on a concrete string", path="javac+java return value vs Python count",
             kwhy=f"The loop starts at index 1 and counts each character equal to the first character, which is {w[0]}; there are {py} of them.", facts=[f"w={w}", f"key={py}"])

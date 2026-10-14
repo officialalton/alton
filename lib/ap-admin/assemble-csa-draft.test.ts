@@ -50,3 +50,23 @@ describe("planDraftSet for ap_computer_science_a", () => {
     expect(pos).toHaveLength(2); expect(pos[1]).toBe(pos[0] + 1);
   });
 });
+
+describe("the committed CS1/CS2 exact assignment (data/ap/stock/exact-assign-csa-cs1-cs2.json)", () => {
+  it("is a valid draft plan for both sets against the real stock, with no key shared between them", async () => {
+    const { readFileSync } = await import("node:fs");
+    const { planCsaDraftSet, csaStockItems } = await import("./assemble-csa-draft");
+    const rep = JSON.parse(readFileSync("data/ap/stock/exact-assign-csa-cs1-cs2.json", "utf-8")) as { sets: { id: string; mcA: string[]; mcB?: string[]; frqA: string[]; frqB?: string[]; virtual: unknown[]; virtualSets: unknown[]; frqVirtual: unknown[] }[] };
+    const stock = csaStockItems(); const by = new Map(stock.map((c) => [c.key, c]));
+    const used = new Map<string, string>();
+    expect(rep.sets.map((s) => s.id)).toEqual(["CS1", "CS2"]);
+    for (const s of rep.sets) {
+      const k: SetKeys = { mcA: s.mcA, mcB: s.mcB ?? [], frqA: s.frqA, frqB: s.frqB ?? [] };
+      const all = [...k.mcA, ...(k.mcB ?? []), ...k.frqA, ...(k.frqB ?? [])];
+      for (const key of all) { expect(used.get(key)).toBeUndefined(); used.set(key, s.id); }
+      const pool = all.map((key, i) => { const c = by.get(key)!; const m = c.kind === "mc" ? c.members.length : 1; return { candidate_key: key, kind: c.kind === "mc" ? "mc" : "frq_bundle", keyword_code: c.members[0]?.topic ?? "2.9", difficulty_provisional: "exam_prep", purpose: "mock_exam", is_current: true, render_verified: true, screen_verified: true, ap_candidate_problems: Array.from({ length: m }, (_, j) => ({ item_index: j, problem_id: `${s.id}p${i}-${j}`, problem_version_id: `${s.id}v${i}-${j}` })) } as PoolRow; });
+      const p = planCsaDraftSet({ setId: s.id, keys: k, hasVirtual: s.virtual.length + s.virtualSets.length + s.frqVirtual.length > 0, name: defaultDraftName(s.id), pool, existingFullSets: [], stock, subject: "ap_computer_science_a" } as never);
+      expect({ id: s.id, problems: p.problems }).toEqual({ id: s.id, problems: [] });
+      expect(p.composition).toMatchObject({ mcTotal: 42, frqTotal: 4 });
+    }
+  }, 120000);
+});

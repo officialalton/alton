@@ -1,0 +1,35 @@
+{
+ "run": "csa-s2-frq-b",
+ "subject": "ap_computer_science_a",
+ "generatedAt": "2026-10-14T02:51:55.728Z",
+ "totalCostUsd": 0.23,
+ "newSpendSinceBaseline": 0.23,
+ "cap": 50,
+ "calls": 18,
+ "candidates": 6,
+ "mcCandidates": 0,
+ "frqCandidates": 6,
+ "passedAll": 4,
+ "adopted": 4,
+ "mcAdopted": 0,
+ "frqAdopted": 4,
+ "reserve": 0,
+ "yield": 0.667,
+ "costPerAdopted": 0.057,
+ "callsPerAdopted": 4.5,
+ "duplicateRejected": 0,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 6
+ },
+ "rejectionReasons": {
+  "criterion_failed_key_scoring": 2,
+  "criterion_failed_exam_suitability": 1,
+  "reference_pattern_mismatch": 2
+ },
+ "unfilledCells": [
+  "ap_computer_science_a-f03",
+  "ap_computer_science_a-f06"
+ ]
+}

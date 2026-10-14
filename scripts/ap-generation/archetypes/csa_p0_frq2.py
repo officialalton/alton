@@ -585,14 +585,14 @@ def csf_2d_transpose(rng):
     verified = verify_variants("GridTools", ref, alt, w, tests)
     parts = [part("a", "Write the method transpose, which returns a new two-dimensional array that is the transpose of grid: for every row r and column c, the element at row c and column r of the result equals the element at row r and column c of grid. The array grid must not be modified. For example, if grid is { { 1, 2, 3 }, { 4, 5, 6 } } the method returns { { 1, 4 }, { 2, 5 }, { 3, 6 } }. Complete the method transpose.", 9, "code", ["2.A"], "One correct implementation (ALTON reference answer):\n" + _fence(extract_method(ref, "transpose")),
                   [R("A1", "Creates a new two-dimensional array whose number of rows equals the number of columns of grid and whose number of columns equals the number of rows of grid", ["new int[grid[0].length][grid.length]"], ["same dimensions as grid", "swapped incorrectly"]),
-                   R("A2", "Iterates over every row with a loop bounded by grid.length", ["for (int r = 0; r < grid.length; r++)"], ["skips a row"], "A1"),
-                   R("A3", "Iterates over every element of each row with correct column bounds", ["for (int c = 0; c < grid[r].length; c++)"], ["uses grid.length for the columns"], "A2"),
-                   R("A4", "Reads from grid with the row index first and the column index second", ["grid[r][c]"], ["swaps the indexes when reading"], "A3"),
-                   R("A5", "Writes into the result with the indexes exchanged", ["result[c][r]"], ["result[r][c]"], "A3"),
-                   R("A6", "Assigns the element read from grid to the element written in the result", ["result[c][r] = grid[r][c]"], ["compares instead of assigns"], "A5"),
-                   R("A7", "Works for arrays that are not square (rows and columns are bounded separately)", ["separate bounds for rows and columns"], ["fails for non-square arrays"], "A1"),
-                   R("A8", "Leaves grid unchanged", ["no assignment to grid elements"], ["modifies grid"], "A1"),
-                   R("A9", "Returns the new array after all elements are copied and compiles with return type int[][]", ["return result"], ["returns inside the loop", "returns grid"], "A6")])]
+                   R("A2", "Iterates over every row with a loop bounded by grid.length", ["for (int r = 0; r < grid.length; r++)"], ["skips a row"]),
+                   R("A3", "Iterates over every element of each row with correct column bounds", ["for (int c = 0; c < grid[r].length; c++)"], ["uses grid.length for the columns"]),
+                   R("A4", "Reads from grid with the row index first and the column index second", ["grid[r][c]"], ["swaps the indexes when reading"]),
+                   R("A5", "Assigns each element read from grid into the result with the indexes exchanged", ["result[c][r] = grid[r][c]"], ["result[r][c]", "compares instead of assigns"]),
+                   R("A6", "Handles a one-row or one-column array correctly: the allocation and both loops stay within bounds", ["no index error for { { 1, 2, 3 } }"], ["index out of bounds when rows differ from columns"]),
+                   R("A7", "Allocates storage for every row of the result so no row of the result is missing", ["new int[rows][cols] or each row allocated"], ["a row of the result is null"]),
+                   R("A8", "Leaves grid unchanged", ["no assignment to grid elements"], ["modifies grid"]),
+                   R("A9", "Returns the new array after all elements are copied, with return type int[][]", ["return result"], ["returns inside the loop", "returns grid"])])]
     return _pack("csf_2d_transpose", "q4", "4.13", ["4.12", "4.11"], "2.A", "GridTools: transpose a 2D array", "A class GridTools manipulates rectangular two-dimensional arrays of integers. The class is shown with the header of the method you will write.", skeleton, parts, tests, verified, ["grids=8"],
                  ("2D array traversal that builds a new array with row and column exchanged", ["Allocate an array with swapped dimensions", "Map [r][c] to [c][r]", "Leave the input unchanged"], [("the reference and an alternative (column-first loops) pass every test; each wrong solution fails at least one", "java test run")], "javac+java compile and run reference, alternative and wrong solutions; expected values from Python zip"))
 

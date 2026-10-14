@@ -46,10 +46,14 @@ function frqReference(payload: Json): string {
 function passageFor(c: ApCandidateLike, gate: GateResult): string | null {
   // 공유 자료 세트(통계 3문항 세트): 세트 소개 문장은 세 문제에 같은 지문으로 붙는다(자료 그림은 문제마다 같은 figure 로 붙는다).
   const intro = c.payload.set_intro;
-  if (typeof intro === "string" && intro.trim()) return intro.trim();
   const st = c.payload.stimulus;
   const s = typeof st === "string" ? null : isObj(st) ? st : null;
   const desc = s && typeof s.description === "string" ? s.description : "";
+  if (typeof intro === "string" && intro.trim()) {
+    // 코드 자료 세트(AP CS A): 세트가 함께 쓰는 클래스·메서드 코드는 소개 문장 뒤에 같은 지문으로 붙는다(없으면 학생은 코드를 못 본다).
+    const codeSet = gate.stimKind === "text" && isObj(s?.data) && (s?.data as Json).variant === "java_code" && /^```/.test(desc.trim());
+    return codeSet ? `${intro.trim()}\n\n${desc.trim()}` : intro.trim();
+  }
   if (gate.stimKind === "text" && !gate.spec && desc && !/^no (stimulus|figure)/i.test(desc)) return desc;
   return graphStatedFacts(s, gate);
 }

@@ -99,7 +99,7 @@ def cs_initial_conditions(rng):
         cname = "Tools"
     else:
         code = "public static boolean contains(int[] a, int t) {\n        int lo = 0;\n        int hi = a.length - 1;\n        while (lo <= hi) {\n            int mid = (lo + hi) / 2;\n            if (a[mid] == t) {\n                return true;\n            } else if (a[mid] < t) {\n                lo = mid + 1;\n            } else {\n                hi = mid - 1;\n            }\n        }\n        return false;\n    }"
-        stem = "The method contains uses a binary search and is intended to return true if t appears anywhere in the array a. For which of the following calls does contains NOT work as intended?"
+        stem = "The method contains, which uses a binary search, is intended to return true if t appears anywhere in the array a. For which of the following calls does contains NOT work as intended?"
         sorted_cases = [([2, 4, 6, 8, 10], 8), ([1, 3, 5, 7], 4), ([5, 6, 7, 8, 9, 10], 5), ([1, 2, 3], 3)]
         unsorted_cases = [([9, 2, 7, 4, 1], 4), ([8, 3, 9, 1, 5], 1), ([6, 1, 8, 2, 9], 2)]
         cand = [pick(rng, unsorted_cases)] + rng.sample(sorted_cases, 3)

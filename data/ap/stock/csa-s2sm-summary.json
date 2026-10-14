@@ -1,0 +1,66 @@
+{
+ "runs": [
+  "csa-s2-short-mc"
+ ],
+ "rows": 21,
+ "passed": 12,
+ "rejected": 9,
+ "passRate": 0.571,
+ "mc": {
+  "rows": 21,
+  "passed": 12,
+  "passRate": 0.571
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 2,
+  "2": 3,
+  "3": 1,
+  "4": 6
+ },
+ "skillsPassed": {
+  "4.A": 1,
+  "3.C": 2,
+  "3.B": 6,
+  "3.A": 1,
+  "4.B": 2
+ },
+ "figPassed": {
+  "text": 12
+ },
+ "figAll": {
+  "text": 21
+ },
+ "figPassRate": {
+  "text": "12/21"
+ },
+ "renderTypesPassed": {
+  "text": 12
+ },
+ "archetypesPassed": {
+  "cs_describe_list": 1,
+  "cs_string_algorithm": 2,
+  "css_array_set": 2,
+  "css_list_set": 3,
+  "css_class_set": 1,
+  "cs_short_circuit": 1,
+  "cs_precondition": 2
+ },
+ "archetypesAll": {
+  "cs_describe_list": 3,
+  "cs_string_algorithm": 3,
+  "css_array_set": 3,
+  "css_list_set": 3,
+  "css_class_set": 3,
+  "cs_short_circuit": 3,
+  "cs_precondition": 3
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "csa-s2-short-mc": 0.9923
+ }
+}

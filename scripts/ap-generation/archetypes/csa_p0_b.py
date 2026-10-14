@@ -36,7 +36,7 @@ def cs_class_trace(rng):
     muts = [{"why": "Believes a deposit of a negative amount is applied (the guard on deposit is ignored).", "swap": ("if (amt > 0) {\n            balance += amt;\n        }", "balance += amt;")},
             {"why": "Believes withdraw succeeds even when the amount exceeds the balance.", "swap": ("amt > 0 && amt <= balance", "amt > 0")},
             {"why": "Believes a failed withdraw still reduces the balance.", "swap": ("            return true;\n        }\n        return false;", "            return true;\n        }\n        balance -= amt;\n        return false;")},
-            {"why": "Believes the constructor adds the start value to a balance that is already 100.", "swap": ("balance = start;", "balance = start + 100;")}]
+            {"why": "Believes the constructor ignores its parameter and always starts the balance at 0.", "swap": ("balance = start;", "balance = 0;")}]
     return mk(rng, "cs_class_trace", "3.5", "3.B", STEM_OUT, ACCOUNT, call=stm, muts=muts, py=py, stim_code=ACCOUNT + "\n\n" + client(stm), concept="tracing instance state through methods that guard their updates",
               path="javac+java output vs Python class simulation", kwhy="Only positive deposits and withdrawals that do not exceed the balance change the state, and a failed withdraw returns false without changing the balance.", facts=[f"key={py}"], est=110)
 
@@ -239,10 +239,10 @@ def cs_arraylist_remove_loop(rng):
     py = "[" + ", ".join(map(str, l)) + "]"
     muts = [{"why": "Believes the loop visits every element after a removal, so all even values are removed.", "swap": ("nums.remove(i);", "nums.remove(i);\n        i--;")},
             {"why": "Believes only the first even value is removed.", "swap": ("nums.remove(i);", "nums.remove(i);\n        break;")},
-            {"why": "Uses the original size as the loop bound, so an index past the end is accessed.", "swap": ("i < nums.size()", f"i < {n}")},
-            {"why": "Believes the loop removes the odd values instead.", "swap": ("nums.get(i) % 2 == 0", "nums.get(i) % 2 == 1")}]
+            {"why": "Believes the loop bound is the original number of elements, so after removals the loop reads past the end of the shorter list and throws an exception.", "swap": ("i < nums.size()", f"i < {n}")},
+            {"why": "Mixes up the test and removes odd values instead of even values (the skipped element after each removal still stays).", "swap": ("nums.get(i) % 2 == 0", "nums.get(i) % 2 == 1")}]
     return mk(rng, "cs_arraylist_remove_loop", "4.9", "3.B", STEM_OUT, code, muts=muts, py=py, concept="removing elements inside a forward loop skips the element that shifts into the removed index", path="javac+java output vs Python list pop simulation",
-              kwhy="After an element is removed, the next element shifts into the same index but the loop moves on, so an even value directly after a removed even value is skipped and stays in the list.", facts=[f"key={py}"], est=105)
+              kwhy=f"After an element is removed, the next element shifts into the same index but the loop moves on, so an even value directly after a removed even value is skipped and stays in the list; the list that remains is {py}.", facts=[f"key={py}"], est=105)
 
 
 # ======================= 4.12 2D 배열 순회 (3.B) =======================
@@ -329,7 +329,7 @@ def cs_selection_sort_pass(rng):
     py = " ".join(map(str, r))
     muts = [{"why": "Believes each pass selects the largest element instead of the smallest.", "swap": ("a[j] < a[min]", "a[j] > a[min]")},
             {"why": "Believes the loop runs one pass more than the stated bound.", "swap": (f"i < {k};", f"i <= {k};")},
-            {"why": "Believes each pass swaps the element with its right neighbor, like one pass of bubble sort.", "swap": ("int temp = a[i];\n    a[i] = a[min];\n    a[min] = temp;", "int temp = a[i];\n    a[i] = a[i + 1];\n    a[i + 1] = temp;")},
+            {"why": "Believes each pass swaps position i with its right neighbor instead of with the smallest element found.", "swap": ("int temp = a[i];\n    a[i] = a[min];\n    a[min] = temp;", "int temp = a[i];\n    a[i] = a[i + 1];\n    a[i + 1] = temp;")},
             {"why": "Believes the minimum is copied to the front without moving the displaced element, losing it.", "swap": ("a[min] = temp;", "")}]
     return mk(rng, "cs_selection_sort_pass", "4.15", "3.A", STEM_OUT, code, muts=muts, py=py, concept="array state after a fixed number of selection sort passes", path="javac+java output vs Python selection sort passes",
               kwhy=f"Each pass finds the smallest element in the unsorted part and swaps it into position i, so after {k} passes the first {k} positions hold the {k} smallest values in order.", facts=[f"k={k}", f"key={py}"], est=110)
@@ -338,7 +338,7 @@ def cs_selection_sort_pass(rng):
 # ======================= 4.16 재귀 (3.C) =======================
 REC = {
     "sum2": ("public static int mystery(int n) {\n        if (n <= 1) {\n            return n;\n        }\n        return n + mystery(n - 2);\n    }", lambda n: sum(range(n, 0, -2)), [("n <= 1", "n <= 0", "Uses a base case that returns 0 for n of 1 so the final odd term is dropped."), ("n + mystery(n - 2)", "n + mystery(n - 1)", "Believes the argument decreases by 1 instead of 2."), ("return n;", "return 1;", "Believes the base case always returns 1."), ("n + mystery(n - 2)", "mystery(n - 2)", "Forgets to add n to the recursive result.")]),
-    "fact": ("public static int mystery(int n) {\n        if (n == 0) {\n            return 1;\n        }\n        return n * mystery(n - 1);\n    }", lambda n: math.factorial(n), [("return 1;", "return 0;", "Believes the base case returns 0, which makes every product 0."), ("n * mystery(n - 1)", "n + mystery(n - 1)", "Adds instead of multiplying."), ("n == 0", "n == 1", "Stops one level early, at n of 1, returning the base value for 1."), ("n * mystery(n - 1)", "n * mystery(n - 2)", "Skips every other factor.")]),
+    "fact": ("public static int mystery(int n) {\n        if (n == 0) {\n            return 1;\n        }\n        return n * mystery(n - 1);\n    }", lambda n: math.factorial(n), [("return 1;", "return 0;", "Believes the base case returns 0, which makes every product 0."), ("n * mystery(n - 1)", "n + mystery(n - 1)", "Adds instead of multiplying."), ("n == 0", "n == 1", "Stops one level early, at n of 1, returning the base value for 1."), ("n * mystery(n - 1)", "n * mystery(n - 2)", "Steps down by 2 instead of 1, skipping every other factor; the base case at 0 is reached only when n is even, and otherwise the recursion never ends.")]),
     "fib": ("public static int mystery(int n) {\n        if (n <= 1) {\n            return n;\n        }\n        return mystery(n - 1) + mystery(n - 2);\n    }", lambda n: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55][n], [("mystery(n - 1) + mystery(n - 2)", "mystery(n - 1) + mystery(n - 1)", "Calls the same subproblem twice."), ("return n;", "return 1;", "Believes the base case returns 1 for every n of at most 1."), ("n <= 1", "n <= 2", "Ends the recursion one step too early."), ("mystery(n - 1) + mystery(n - 2)", "mystery(n - 1) * mystery(n - 2)", "Multiplies the two recursive results.")]),
 }
 
@@ -372,7 +372,7 @@ def cs_recursion_string(rng):
     shown = f"class Rec {{\n    {m}\n}}"
     call = f'return Rec.mystery("{w}");'
     return mk(rng, "cs_recursion_string", "4.17", "3.C", f"What is returned by the call Rec.mystery(\"{w}\")?", shown, call=call, muts=[{"why": x[2], "swap": (x[0], x[1])} for x in muts], py=py, concept="a recursive String method that builds its result from substring calls",
-              path="javac+java return value vs Python slicing", kwhy="Each call handles one character and delegates the rest to a smaller String; the pending concatenations complete in reverse order after the base case returns.", facts=[f"w={w}", f"kind={kind}", f"key={py}"])
+              path="javac+java return value vs Python slicing", kwhy="Each call handles one character and delegates the rest to a smaller String; each pending concatenation is finished when the call below it returns, starting with the call that reached the base case.", facts=[f"w={w}", f"kind={kind}", f"key={py}"])
 
 
 # ======================= 4.A 동작 설명 / 4.B 초기 조건 =======================
@@ -420,8 +420,14 @@ def _describe(rng, fam, arch, stim=True, topic="4.5", skill="4.A"):
             raise ValueError("key_description_not_true_on_all_tests")
         if why is not None and all(match):
             raise ValueError("distractor_description_true_on_all_tests")
-    key = Opt(descs[0][0], True, "On every test input the value returned by running the method equals this description, which is what the loop computes.", None)
-    ds = [Opt(t, False, w, None) for t, _f, w in descs[1:]]
+    def _lit_s(t):
+        return f"Probe.mystery(list) with list = [{', '.join(map(str, t))}]" if kind == "list" else f"Probe.mystery({_lit(kind, t)})"
+    t0 = tests[0]
+    key = Opt(descs[0][0], True, f"The loop does exactly what this description says. For example, {_lit_s(t0)} returns {actual[0]}.", None)
+    ds = []
+    for text, fn, why in descs[1:]:
+        k = next(i for i, t in enumerate(tests) if _pyfmt(fn(t)) != actual[i])
+        ds.append(Opt(text, False, f"{why.rstrip('.')}. For instance, {_lit_s(tests[k])} returns {actual[k]}, but this description would give {_pyfmt(fn(tests[k]))}.", None))
     shown = cls
     p = pack(arch, topic, skill, "not_allowed", "x", key, ds, rng, stimulus=(code_stim(shown) if stim else None), est=85, facts=[f"family={fam}", f"tests={len(tests)}"])
     p["stem"] = "Which of the following best describes the value returned by the method mystery?" if True else ""
@@ -451,7 +457,7 @@ def cs_describe_int(rng):
 PRE = {
     "middle": ("public static char middle(String s) {\n        return s.charAt(s.length() / 2);\n    }", [('middle("")', True, "An empty string has no character at index 0, so charAt throws a StringIndexOutOfBoundsException."), ('middle("a")', False, "A one-character string has a character at index 0."), ('middle("ab")', False, "Index 1 exists in a two-character string."), ('middle("abc")', False, "Index 1 exists in a three-character string.")], "Which of the following calls to middle causes a run-time exception?"),
     "ratio": ("public static int ratio(int total, int count) {\n        return total / count;\n    }", [("ratio(5, 0)", True, "Integer division by zero throws an ArithmeticException."), ("ratio(0, 5)", False, "A zero numerator is fine: the quotient is 0."), ("ratio(-4, 2)", False, "A negative numerator is fine."), ("ratio(7, 3)", False, "The quotient is truncated and no exception is thrown.")], "Which of the following calls to ratio causes a run-time exception?"),
-    "next": ("public static int next(int[] a, int i) {\n        return a[i + 1];\n    }", [("next(new int[] { 4, 5, 6 }, 2)", True, "The index 3 is past the end of a three-element array."), ("next(new int[] { 4, 5, 6 }, 0)", False, "Index 1 is valid."), ("next(new int[] { 4, 5, 6 }, 1)", False, "Index 2 is valid."), ("next(new int[] { 4, 5, 6 }, -1)", False, "The index -1 + 1 is 0, which is valid.")], "Which of the following calls to next causes a run-time exception?"),
+    "firstWord": ("public static String firstWord(String s) {\n        return s.substring(0, s.indexOf(\" \"));\n    }", [('firstWord("hello")', True, "There is no space, so indexOf returns -1 and substring(0, -1) throws a StringIndexOutOfBoundsException."), ('firstWord("hi there")', False, "The space is at index 2, so substring(0, 2) returns hi."), ('firstWord("a b c")', False, "The first space is at index 1, so the call returns a."), ('firstWord(" x")', False, "The space is at index 0, so substring(0, 0) returns an empty string and no exception is thrown.")], "Which of the following calls to firstWord causes a run-time exception?"),
 }
 
 
@@ -486,7 +492,7 @@ def css_array_set(rng):
             break
     py = str(sum(1 for v in a[1:] if v > a[0]))
     muts = [{"why": "Counts the elements that are greater than the last element instead of the first.", "call": f"return Probe.mystery(new int[] {{ {', '.join(map(str, a[::-1]))} }});"},
-            {"why": "Includes the first element in the count by starting the loop at index 0 (it is never greater than itself, so the count is the same) and then adds 1 for the comparison it makes.", "call": f"return Probe.mystery(new int[] {{ {', '.join(map(str, a))} }}) + 1;"},
+            {"why": "Also counts the first element itself, as if it were greater than itself.", "call": f"return Probe.mystery(new int[] {{ {', '.join(map(str, a))} }}) + 1;"},
             {"why": "Counts the elements that are less than the first element.", "call": f"int[] b = {{ {', '.join(map(str, a))} }}; int c = 0; for (int i = 1; i < b.length; i++) {{ if (b[i] < b[0]) {{ c++; }} }} return c;"},
             {"why": "Returns the largest value instead of a count.", "call": f"int[] b = {{ {', '.join(map(str, a))} }}; int m = b[0]; for (int v : b) {{ if (v > m) {{ m = v; }} }} return m;"}]
     q1 = mk(rng, "css_array_set_q1", "4.5", "3.B", f"What is returned by the call Probe.mystery(new int[] {{ {', '.join(map(str, a))} }})?", cls, call=f"return Probe.mystery(new int[] {{ {', '.join(map(str, a))} }});", muts=muts, py=py, stim_code=False, concept="trace an array scan on a concrete array", path="javac+java return value vs Python count",
@@ -509,10 +515,10 @@ def css_class_set(rng):
             {"why": "Believes each added song is also counted as a play.", "swap": ("public void add(String title) { songs.add(title); }", "public void add(String title) { songs.add(title); plays++; }")},
             {"why": "Believes size reports the number of plays.", "swap": ("public int size() { return songs.size(); }", "public int size() { return plays; }")},
             {"why": "Believes the constructor starts the play count at 1.", "swap": ("plays = 0;", "plays = 1;")}]
-    q1 = mk(rng, "css_class_set_q1", "3.5", "3.B", STEM_OUT, shown, call=stm, muts=muts, py=py, stim_code=False, concept="trace object state through add and play calls", path="javac+java output vs Python counters",
+    q1 = mk(rng, "css_class_set_q1", "3.5", "3.B", "What is printed as a result of executing the following code segment?\n```java\n" + stm + "\n```", shown, call=stm, muts=muts, py=py, stim_code=False, concept="trace object state through add and play calls", path="javac+java output vs Python counters",
             kwhy=f"The list holds {k} songs and play was called {plays} times, and the two quantities are tracked independently.", facts=[f"key={py}"])
     body = "/*MISSING*/"
-    cands = [("public int averagePlays() {\n        return size() == 0 ? 0 : plays / size();\n    }", True, None), ("public int averagePlays() {\n        return plays / size();\n    }", False, "Divides without checking for an empty playlist, which throws an ArithmeticException."), ("public int averagePlays() {\n        return size() / plays;\n    }", False, "Divides the number of songs by the number of plays, in the wrong order."), ("public int averagePlays() {\n        return plays * size();\n    }", False, "Multiplies instead of dividing.")]
+    cands = [("public int averagePlays() {\n        if (size() == 0) {\n            return 0;\n        }\n        return plays / size();\n    }", True, None), ("public int averagePlays() {\n        if (size() == 0) {\n            return 1;\n        }\n        return plays / size();\n    }", False, "Returns 1 for an empty playlist instead of 0."), ("public int averagePlays() {\n        return size() / plays;\n    }", False, "Divides the number of songs by the number of plays, in the wrong order."), ("public int averagePlays() {\n        return plays * size();\n    }", False, "Multiplies instead of dividing.")]
     tpl2 = CLS_TPL
     shown2 = CLS_TPL.replace("/*BODY*/", "    // averagePlays method not shown")
     options = [{"text": f"```\n{c}\n```", "source": tpl2.replace("/*BODY*/", "    " + c), "why": w, "key": kk} for c, kk, w in cands]

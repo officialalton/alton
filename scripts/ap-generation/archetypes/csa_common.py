@@ -84,6 +84,10 @@ def mk(rng, arch, topic, skill, stem, shown, *, muts, py, concept, path, kwhy, c
     res = J.java_eval(classes, bodies)
     key_res = res[0]
     agree_str(J.tidy(key_res), py)
+    kt = J.tidy(key_res)
+    if not kwhy.rstrip().endswith("."):
+        kwhy = kwhy.rstrip() + "."
+    kwhy = kwhy + (f" Tracing the code gives {kt}." if kt and "EXC:" not in kt else "")
     keyo = Opt(opt_text(key_res), True, kwhy, opt_value(key_res))
     seen, ds = {opt_text(key_res)}, []
     seen_vals = {opt_value(key_res)} - {None}
@@ -92,12 +96,17 @@ def mk(rng, arch, topic, skill, stem, shown, *, muts, py, concept, path, kwhy, c
         v = opt_value(r)
         if t in seen or (v is not None and v in seen_vals):
             continue  # 변형이 정답과 같은 결과(또는 같은 수치)를 내면 오답으로 쓸 수 없다
+        if "EXC:" in J.tidy(r) and "exception" not in w.lower():
+            w = w.rstrip(".") + ". Running this version throws a run-time exception."
         seen.add(t); ds.append(Opt(t, False, w, v))
         if v is not None:
             seen_vals.add(v)
     if len(ds) < 3:
         raise ValueError("not_enough_distinct_distractors")
     p = pack(arch, topic, skill, "not_allowed", stem, keyo, ds, rng, stimulus=(None if stim_code is False else code_stim(stim_code if stim_code is not None else shown, note)), est=est, facts=facts or [f"key={J.tidy(key_res)}"])
+    for o in p["options"]:  # 정수 출력은 "15.000000" 이 아니라 "15" 로 기록한다(검토기가 값 필드와 글이 어긋난다고 본다)
+        if o["value"] is not None and re.fullmatch(r"-?\d+", o["text"].strip()):
+            o["value"] = o["text"].strip()
     vals = [o["value"] for o in p["options"]]
     if all(v is not None for v in vals) and not J.spaced_ok([float(v) for v in vals]):
         raise ValueError("not_enough_separated_distractors")
