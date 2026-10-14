@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 import { AP_SUBJECT_NAME, apBadgeText, apCoverageLines, apGuidanceLines, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
 import { AccuracyBarList } from "@/app/components/AccuracyBars";
 import AttemptSwitcher from "./AttemptSwitcher";
+import LazyWhenVisible from "@/app/components/LazyWhenVisible";
 import UpdatedVersionNote, { UpdatedVersionBadge } from "@/app/components/UpdatedVersionNote";
 import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
@@ -24,6 +25,56 @@ type Filter = "all" | "wrong" | "frq";
 export function topicOf(i: MockExamAttemptItem): string {
   return (i.satDomain ?? "").replace(/^ap:/, "") || "—";
 }
+
+const EAGER_ITEMS = 4;
+
+/** 문항 하나의 본문(지문·그림·질문·선택지/FRQ 답·해설·오류 신고). 같은 문항이 다시 그려질 일(필터 전환 등)에 수식을 다시 조판하지 않도록 memo. */
+const ApReviewItem = memo(function ApReviewItem({ it, attemptId, inkByPart }: { it: MockExamAttemptItem; attemptId: string; inkByPart: Map<string, string> }) {
+  return (
+    <>
+              {apPassageForDisplay(it.passage, it.question) && <LearningText text={apPassageForDisplay(it.passage, it.question) as string} className="mb-2 text-[13.5px]" />}
+              {it.figure ? <ProblemFigure spec={it.figure} text={problemText(it.passage, it.question, it.options)} className="mb-3" /> : null}
+              {it.question && <LearningText text={autoMathExplanation(it.question)} className="mb-2 font-semibold text-[14px]" />}
+              {it.format === "mc" && it.options ? (
+                <ul className="flex flex-col gap-1.5">
+                  {it.options.map((o, i) => {
+                    const isKey = it.correctIndex === i, mine = it.response === String(i);
+                    return (
+                      <li key={i} className={`flex gap-2 rounded-lg border px-3 py-1.5 text-[13px] ${isKey ? "border-green bg-green/10" : mine ? "border-red bg-red/5" : "border-grey-200"}`}>
+                        <span className="font-bold">{LETTERS[i]}</span><span className="min-w-0 break-words"><LearningText text={autoMathExplanation(o)} /></span>
+                        {isKey && <span className="ml-auto text-[11px] font-bold text-green">Correct answer</span>}
+                        {mine && !isKey && <span className="ml-auto text-[11px] font-bold text-red">Your answer</span>}
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <div className="flex flex-col gap-2">
+                  {(it.parts ?? []).map((p) => (
+                    <div key={p.label}>
+                      <div className="text-[12.5px] font-semibold"><span>({p.label}) [{p.points} pt]</span> <LearningText text={autoMathExplanation(p.prompt)} className="inline" /></div>
+                      <p className={`mt-1 whitespace-pre-wrap rounded border border-grey-200 bg-grey-50 px-3 py-2 text-[13px] ${p.mode === "code" ? "overflow-x-auto font-mono text-[12.5px] [tab-size:4]" : ""}`} data-testid={`frq-answer-${p.label}`}>{parseFrqAnswer(it.response ?? "")[p.label] || "(no answer)"}</p>
+                      {inkByPart.get(inkKey(it.setItemId, p.label)) && (
+                        <figure className="mt-1.5" data-testid={`frq-handwriting-${p.label}`}>
+                          <figcaption className="mb-1 text-[11.5px] font-bold text-grey-500">Your handwritten answer</figcaption>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={svgDataUrl(inkByPart.get(inkKey(it.setItemId, p.label)) as string)} alt={`Your handwritten answer for part (${p.label})`} className="w-full max-w-xl rounded border border-grey-200 bg-white" />
+                        </figure>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+              {(it.explanationEn ?? it.explanation) && (
+                <div className="mt-3 rounded-lg bg-grey-50 p-3" data-testid="ap-explanation">
+                  <p className="mb-1 text-[11.5px] font-bold text-grey-500">{it.format === "essay" ? "Reference answer and scoring guide (reference feedback, not official scoring)" : "Explanation"}</p>
+                  <LearningText text={autoMathExplanation((it.explanationEn ?? it.explanation) as string)} className="whitespace-pre-wrap text-[13px]" />
+                </div>
+              )}
+              <ProblemErrorReportButton className="mt-3" role="student" context={{ source: "mock_exam", attemptId: attemptId, setItemId: it.setItemId, problemId: it.problemId }} />
+    </>
+  );
+});
 
 export default function ApExamResultView({ attempt, attempts, topicNames, handwriting }: { attempt: MockExamAttemptDetail; attempts?: MockExamAttemptSummary[]; topicNames?: Record<string, string>; handwriting?: FrqInkRow[] }) {
   const inkByPart = useMemo(() => new Map((handwriting ?? []).filter((r) => r.previewSvg).map((r) => [inkKey(r.setItemId, r.partLabel), r.previewSvg])), [handwriting]);
@@ -82,51 +133,16 @@ export default function ApExamResultView({ attempt, attempts, topicNames, handwr
       </div>
 
       <ol className="flex flex-col gap-3">
-        {shown.map((it) => {
+        {shown.map((it, idx) => {
           const n = attempt.items.indexOf(it) + 1;
           return (
             <li key={it.setItemId} className="rounded-lg border border-grey-200 bg-white p-4" data-testid="ap-review-item" data-set-item-id={it.setItemId}>
               <p className="mb-2 text-[12px] font-bold text-grey-500">Question {n}{it.format === "mc" ? (it.correct === true ? " · Correct" : it.response ? " · Incorrect" : " · Not answered") : " · Free response"}</p>
-              {apPassageForDisplay(it.passage, it.question) && <LearningText text={apPassageForDisplay(it.passage, it.question) as string} className="mb-2 text-[13.5px]" />}
-              {it.figure ? <ProblemFigure spec={it.figure} text={problemText(it.passage, it.question, it.options)} className="mb-3" /> : null}
-              {it.question && <LearningText text={autoMathExplanation(it.question)} className="mb-2 font-semibold text-[14px]" />}
-              {it.format === "mc" && it.options ? (
-                <ul className="flex flex-col gap-1.5">
-                  {it.options.map((o, i) => {
-                    const isKey = it.correctIndex === i, mine = it.response === String(i);
-                    return (
-                      <li key={i} className={`flex gap-2 rounded-lg border px-3 py-1.5 text-[13px] ${isKey ? "border-green bg-green/10" : mine ? "border-red bg-red/5" : "border-grey-200"}`}>
-                        <span className="font-bold">{LETTERS[i]}</span><span className="min-w-0 break-words"><LearningText text={autoMathExplanation(o)} /></span>
-                        {isKey && <span className="ml-auto text-[11px] font-bold text-green">Correct answer</span>}
-                        {mine && !isKey && <span className="ml-auto text-[11px] font-bold text-red">Your answer</span>}
-                      </li>
-                    );
-                  })}
-                </ul>
-              ) : (
-                <div className="flex flex-col gap-2">
-                  {(it.parts ?? []).map((p) => (
-                    <div key={p.label}>
-                      <div className="text-[12.5px] font-semibold"><span>({p.label}) [{p.points} pt]</span> <LearningText text={autoMathExplanation(p.prompt)} className="inline" /></div>
-                      <p className={`mt-1 whitespace-pre-wrap rounded border border-grey-200 bg-grey-50 px-3 py-2 text-[13px] ${p.mode === "code" ? "overflow-x-auto font-mono text-[12.5px] [tab-size:4]" : ""}`} data-testid={`frq-answer-${p.label}`}>{parseFrqAnswer(it.response ?? "")[p.label] || "(no answer)"}</p>
-                      {inkByPart.get(inkKey(it.setItemId, p.label)) && (
-                        <figure className="mt-1.5" data-testid={`frq-handwriting-${p.label}`}>
-                          <figcaption className="mb-1 text-[11.5px] font-bold text-grey-500">Your handwritten answer</figcaption>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={svgDataUrl(inkByPart.get(inkKey(it.setItemId, p.label)) as string)} alt={`Your handwritten answer for part (${p.label})`} className="w-full max-w-xl rounded border border-grey-200 bg-white" />
-                        </figure>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-              {(it.explanationEn ?? it.explanation) && (
-                <div className="mt-3 rounded-lg bg-grey-50 p-3" data-testid="ap-explanation">
-                  <p className="mb-1 text-[11.5px] font-bold text-grey-500">{it.format === "essay" ? "Reference answer and scoring guide (reference feedback, not official scoring)" : "Explanation"}</p>
-                  <LearningText text={autoMathExplanation((it.explanationEn ?? it.explanation) as string)} className="whitespace-pre-wrap text-[13px]" />
-                </div>
-              )}
-              <ProblemErrorReportButton className="mt-3" role="student" context={{ source: "mock_exam", attemptId: attempt.id, setItemId: it.setItemId, problemId: it.problemId }} />
+              {/* 2026-10-13(결과 화면 지연 점검): 문항 본문(지문·수식·그림·해설)은 앞 몇 개만 서버가 그리고 나머지는 화면 근처에 올 때 그린다 —
+                  48~70문항의 수식 조판을 한꺼번에 하면 HTML 수 MB·DOM 십수만 개가 되어 열기가 매우 느렸다. 번호·정오 줄은 항상 보인다. */}
+              <LazyWhenVisible eager={idx < EAGER_ITEMS} minHeight={420}>
+                <ApReviewItem it={it} attemptId={attempt.id} inkByPart={inkByPart} />
+              </LazyWhenVisible>
             </li>
           );
         })}

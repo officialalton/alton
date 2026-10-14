@@ -28,22 +28,30 @@ type SupabaseServerClient = Awaited<ReturnType<typeof createClient>>;
  *   돌아온다 — lifecycle 상태 자체는 건드리지 않는 별개의 게이트라서
  *   여기 추가 분기 하나로 충분하다.
  */
-export async function resolveAccountDestination(
-  supabase: SupabaseServerClient,
-  role?: string | null
-): Promise<string> {
-  // 2026-09-21(UAT 지적: 탭 전환마다 체감 지연) — 아래 세 RPC는 전부 auth.uid() 하나로만
-  // 판정하는 순수 조회라 서로 결과를 참조하지 않는다(직렬로 기다릴 이유가 없었다). requireUser()가
-  // 페이지 로드뿐 아니라 서버 액션 하나하나(예: 모의고사 탭 목록 조회)마다도 매번 이 함수를 거치므로,
-  // 3번의 순차 왕복이 매 클릭마다 반복되고 있었다 — Preview처럼 리전 간 왕복 지연이 큰 환경에서는
-  // 이게 누적돼 눈에 띄게 느려진다. 아래에서 병렬로 한 번에 받아온 뒤 기존과 같은 분기 로직을 그대로
-  // 적용한다(호출 여부·순서 조건은 바뀌지 않는다 — 항상 셋 다 물어보고 필요한 값만 쓴다).
+type AccountGates = { status: unknown; profileCompleted: unknown; accessAllowed: unknown };
+
+/** 계정 게이트 세 RPC(전부 auth.uid() 만 본다 — role·profile 과 무관하므로 프로필 조회와 병렬로 보낼 수 있다). */
+async function loadAccountGates(supabase: SupabaseServerClient): Promise<AccountGates> {
   const [{ data: status }, { data: profileCompleted }, { data: accessAllowed }] = await Promise.all([
     supabase.rpc("current_account_status"),
     supabase.rpc("current_student_profile_completed"),
     supabase.rpc("current_account_access_allowed"),
   ]);
+  return { status, profileCompleted, accessAllowed };
+}
 
+export async function resolveAccountDestination(
+  supabase: SupabaseServerClient,
+  role?: string | null
+): Promise<string> {
+  return decideAccountDestination(supabase, role, await loadAccountGates(supabase));
+}
+
+async function decideAccountDestination(
+  supabase: SupabaseServerClient,
+  role: string | null | undefined,
+  { status, profileCompleted, accessAllowed }: AccountGates
+): Promise<string> {
   if (status === "closure_pending" || status === "closed") {
     await supabase.auth.signOut({ scope: "local" });
     return "/login?error=" + encodeURIComponent("This account is closed and cannot sign in.");
@@ -109,13 +117,14 @@ export async function requireUser() {
     redirect("/login");
   }
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role, name, timezone")
-    .eq("id", user.id)
-    .single();
+  // 프로필 조회와 계정 게이트 RPC 는 서로 결과를 쓰지 않으므로 한 번에 보낸다(2026-10-13 결과 화면 지연 점검 —
+  // requireUser 는 모든 포털 페이지·서버 액션이 거치므로 순차 왕복 한 번이 곳곳에 누적된다).
+  const [{ data: profile }, gates] = await Promise.all([
+    supabase.from("profiles").select("role, name, timezone").eq("id", user.id).single(),
+    loadAccountGates(supabase),
+  ]);
 
-  const destination = await resolveAccountDestination(supabase, profile?.role);
+  const destination = await decideAccountDestination(supabase, profile?.role, gates);
   if (destination !== getRoleHomePath(profile?.role)) {
     redirect(destination);
   }
