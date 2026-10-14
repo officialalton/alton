@@ -93,3 +93,75 @@
 
 ## 8. 권고
 **조건부 Go(단계 진행).** ① 무료: SG PDF 로 루브릭 대조, 소스 패널·문장 번호 UI 최소판, `englang.ts`·게이트 구현 ② **파일럿 $8.4(상한 $10.5)** 후 첫 통과율 ≥ 40%·사람 검토 통과 ≥ 75% 이면 계속 ③ 범위 옵션: **(A) MC 전용 풀 1–2회 + FRQ 는 과제문+루브릭 체크리스트 자기 채점**(비용 $17–24, 위험 낮음, 권장 기본) ④ (B) MC+FRQ 완전 풀 2회 $23–48(예산 상향 필요) — 파일럿 결과 후 결정. No-Go 조건: 파일럿 사람 기각률 > 35%, 또는 키 오류 표본 5% 초과.
+
+
+---
+
+## 7. FRQ 안정 JSON 스키마 `el-frq-1` (2026-10-14, AI 채점기 연동용)
+
+AI 채점 기능(별도 에이전트)은 후보 payload 의 `el_frq` 만 읽으면 된다(타입: `lib/ap-generation/englang-frq.ts` `ElFrqPayload`, 검증: `frqViolations`). 학생 화면용 필드(`set_intro`·`parts[0].prompt`·`stimulus`)는 같은 데이터에서 만든 파생값이다.
+
+```
+payload (frq_bundle 후보)
+  archetype "elfrq_<id>", template "q1|q2|q3", topic "U9.3", skill, calculator "na", title,
+  set_intro        학생용 소스 묶음 텍스트(첫 줄 "ALTON original passage"; 종합은 Source A–F, 수사 분석은 ¶ 번호 문단 지문)
+  stimulus         종합의 시각 소스 F: {kind:"stat_chart", data:{chart:"bar", ...}}  (렌더 게이트·화면 증거 대상)
+  parts[0]         {label:"A", prompt: 과제문+요구 사항, points:6, response_mode:"essay", model_answer: 상 샘플, rubric_rows[3]}
+  reference_text   결과 화면 참고 답안(루브릭 요약 + 3단계 샘플 + 주석; "not official College Board scoring")
+  el_frq           ↓ 안정 스키마
+el_frq
+  schema_version   "el-frq-1"
+  task_type        "synthesis" | "rhetorical_analysis" | "argument"      (template q1 / q2 / q3)
+  title, prompt    {scenario, task, requirements[]}                      (학생에게 보이는 과제문)
+  sources[]        {id "A".."F", kind "text|visual|quantitative", title, attribution(가공 저자·가공 매체·연도), genre?, stance?,
+                    body | paragraphs[[문장]] , table{columns,rows}(quantitative) , figure{chart:"bar",title,categories,series[{name,values}],xTitle?,yTitle?,description}(visual),
+                    provenance{kind:"original", author_alias, year_alias}}
+                    종합 = 6개(A–D 텍스트 150–340단어, E 정량 표, F 시각 차트, 표·차트·본문 수치 상충 금지, 입장 ≥3), 수사 분석 = 원본 지문 1개(450–620단어, 문장 번호는 전체 연속 1..N),
+                    논증 = 자극 문단 1개(id "A", ≤ 260단어)
+  rubric           {total_points: 6, rows[3], scoring_notes[]}
+                    rows[i] = {row_id "A|B|C", name "Thesis|Evidence and commentary|Sophistication", max 1|4|1,
+                               descriptors{ "0": …, "1": … , (B 는 "2","3","4" 까지) }, task_specific}
+  expected_features {defensible_positions[], source_uses[{source_id, usable_for}], rhetorical_choices[{device, paragraph, sentence_ids[], effect}], lines_of_reasoning[], common_pitfalls[]}
+  samples[3]       {tier "high|mid|low", target_total, essay, word_count, rubric_scores{A,B,C,total}, annotations[{quote(에세이에서 그대로), comment, row_id}]}
+                    rubric_scores 는 작성자의 의도가 아니라 **독립 채점기 3(Opus·Sonnet·Fable) 행별 중앙값**이다. 상 5–6 / 중 3–5 / 하 1–3, 엄격한 서열(상>중>하), 채점기 총점 편차 ≤ 2.
+  blueprint        {stances[], devices[{device,sentence_ids,function}], issue?, theme?}
+  provenance       {kind:"original", note}
+```
+수사 장치 값은 `EL_DEVICES`(26개) 중 하나여야 하고 문장 번호는 지문 문장 수 안이어야 한다. 학생 화면 텍스트에는 `$`·`\^_<>{}|~` 를 쓰지 않는다(금액은 "12 dollars"; 마크다운 표 구분 `|` 는 소스 E 표를 코드로 만들 때만).
+
+## 8. P0 구현 현황 (무료, 2026-10-14)
+
+| 항목 | 구현 | 테스트 |
+|---|---|---|
+| 구성 규칙·8범주 범위·묶음 규칙 | `lib/ap-exam/elang-rules.ts`(MC 45 = 읽기 23–25 + 글쓰기 20–22, 범주별 하한 내림·상한 올림 4–7/5–8, 묶음 3–6문항·읽기/글쓰기 각 4–6묶음, FRQ q1·q2·q3) | `elang-rules.test.ts` |
+| 과목 가이드 | `lib/ap-generation/subjects/englang.ts`: 스킬 22·토픽 매핑·수사 장치 26·발전 방식 10·오답 분류 11·문항 유형(스킬별)·주제 40·장르·금지 상투구 20 | — |
+| 결정적 게이트 | `lib/ap-generation/englang-gates.ts`: 지문 통계(english-text-stats)·문단/문장 수·실존 인물/기관 명단·AI 상투구·`$`/수식 기호·블루프린트 장치 인벤토리(문장 번호 범위)·인용문 원문 일치(stem·선지의 따옴표는 지문에 그대로 있어야 함)·문단/문장 번호 범위·글쓰기 stem 목표 명시·오답 라벨 다양성·키 길이 편향·선지 글자 참조 금지·5-gram/연속 12단어 유사도·키 위치 균형(각 위치 floor/ceil, 3연속 금지) | `englang-gates.test.ts` |
+| FRQ 스키마·게이트 | `lib/ap-generation/englang-frq.ts` | `englang-frq.test.ts` |
+| 키 신뢰도 | `keyConfidence`: 풀이 3 전원 일치 ∧ 어느 풀이도 제2 방어 가능 선택지를 보고하지 않음 ∧ 적대 검토 strong 아님 ∧ 심판 key_clearly_better ∧ 결정적 위반 0 이어야 통과, 점수 0–1(풀이 0.55 + 적대 0.25 + 심판 0.15 + 결정적 0.05), high ≥ 0.9 / medium ≥ 0.8 | 동 |
+| 계획기 | `englang-plan.ts`: 범주 비중 목표(ELANG_FULL_TARGET)대로 묶음마다 스킬 6개·장르·주제(중복 없음) | `englang-plan.test.ts` |
+| 파이프라인 | `scripts/ap-generation/englang-pipeline.ts`: gen(Fable) → check → solve(Opus·Sonnet·Fable, 선지 순서를 풀이기마다 다르게) → adv(Fable 적대적 검토 + Sonnet 지문 검토) → judge(Opus) → finalize; FRQ: frq-gen → frq-samples(상·중·하 × 후보 2) → frq-grade(3 채점기) → frq-finalize. 동결(--freeze/--check-only), 예산 가드(실행·영어 합계 $24·누적 중단선) | 구성 해시 |
+| 배정·초안 | `el-pool.ts`·`el-assign.ts`(정수계획 + 독립 검증기)·`assemble-elang-draft.ts`, 세트 접두 `EL`, `service.ts` saveable | `assemble-elang-draft.test.ts` |
+| 학생 화면 | 영어 지문 표지(`ALTON original passage`)가 있으면 stem 이 지문을 인용해도 지문을 숨기지 않고 수식 자동 변환도 하지 않음(`apPassageForDisplay` 오탐 수정), 에세이 칸(18줄·단어 수), 계산기·Reference 없음, 토픽 코드 `U5.4` 단원 번호 인식. 지문·문항 좌우 2패널 + 각 패널 스크롤은 기존 레이아웃 그대로(문단 ¶ 번호·문장 [n] 번호는 지문 본문에 들어 있음) | `stimulus-display.test.ts`, `ApExamEnglish.test.tsx`, `convert-english.test.ts`, `exam-tools.test.tsx` |
+
+## 9. 실행 결과 (2026-10-14, 유료 P1·P2, 원장 기준 지출 $22.73 / 영어 상한 $24)
+
+**지출(원장 $88.0814 → $110.8147):** 결과 파일 합 $21.87 + 중단·무효 측정 ≈ $0.87(취소한 배치 2건·solver 거절 재시도·잘못된 캐시 키로 한 번 더 돌린 풀이). 단계별: 지문 묶음 생성 $10.26(P1-a $2.60 + P2 $7.66, 동기 호출 = 배치 단가의 2배), 풀이·적대·심판·검토 $3.97, FRQ 생성 $3.92(P1-b $2.10 + P2-b $1.82), 샘플 $1.07, 채점 $3.12. 배치 단가(Fable 큐 정체로 생성은 동기 전환)를 못 써서 계획($12–15)보다 비쌌다.
+
+**통과율(첫 통과 = 결정적 게이트 ∧ 풀이 3/3 ∧ 적대 strong 아님 ∧ 심판 key_clearly_better ∧ 지문 검토 ok):**
+
+| 배치 | 묶음 | 문항 생성 | 결정적 통과 | 풀이 3/3 일치 | 최종 통과 | 묶음 통과 |
+|---|---|---|---|---|---|---|
+| el-p1 (파일럿 재평가) | 4 | 18 | 16 | 16/16 | 13 (72.2%) | 3/4 |
+| el-p2a | 20 | 120 | 112 | 107/114 | 59 (49.2%) | 14/20 |
+| 합계 | 24 | 138 | 128 | 123/130 | 72 (52.2%) | 17/24 |
+
+- 파일럿 기준(≥ 40%, 체계적 키 문제 없음) 통과. **키 문제 신호**: 풀이를 받은 문항 130 중 3풀이 전원 일치 123(95%, P1 은 16/16). 불일치·제2 방어 가능 보고 문항은 제외했고(키 신뢰도 게이트), 적대적 검토는 실제 결함(해설이 지문보다 강하게 주장)을 잡았다(P1 w02-q1).
+- 첫 시도의 낮은 수치(P1-a 3/18)는 **측정 무효**였다: 계획 재현 오류로 요청 스킬이 달라졌고(캐시 키), Sonnet 풀이기가 한 지문에서 `refusal`(문구 변경으로 해소), 사후 게이트 과엄격(글쓰기 수사 장치 인벤토리·FK 하한·"mit" 부분 문자열 오탐). 생성물은 그대로 두고 사후 게이트만 조정해 재평가(생성 재지불 없음). 조정 내역: `englang-gates.ts`(글쓰기 장치 검사 제외, 단어 경계 일치, 20단어 인용 차단 해제, 키 길이 1.6×/7단어), `subjects/englang.ts`(읽기 FK 7–17·780단어, 글쓰기 FK 5–16).
+- 키 신뢰도 분포(통과 문항 66, 묶음 내): high(≥0.9) 23 / medium(0.8–0.9) 43, 평균 0.90. 모든 통과 문항에 `payload.items[].key_confidence`(점수·밴드·풀이 표·적대 판정·심판 판정)가 저장돼 있다. 평균이 0.9 근처인 이유는 적대적 검토가 거의 모든 문항에서 "weak" 대안을 보고했기 때문(방어 가능 정도 weak = 부주의한 독자가 고를 수 있음)이며 strong 은 제외.
+- 탈락 사유(P2-a 120문항): 결정적 45(묶음 게이트 탈락 묶음 포함), 풀이기 제2 방어 가능 보고 10, 적대/심판 단계 미도달 13.
+
+**FRQ(스키마 §7):** 6 프롬프트 세트 전부 통과(종합 2·수사 분석 2·논증 2). 샘플은 독립 채점기 3(Opus·Sonnet·Fable) 행별 중앙값으로 점수를 기록: 상 6/6/6/6/6/6, 중 5·4·4 / 4·4·5, 하 1·2·1 / 2·2·1 — 순서 위반 0. 종합 시각 소스는 막대그래프(긴 범주명은 13자로 줄이고 전체 이름은 대체 설명에 남김, 렌더 게이트 통과), 정량 소스는 구조화 표(코드가 마크다운 표로 그림).
+
+**조립:** 재고(화면 증거 있음) = 읽기 묶음 8(32문항)·글쓰기 묶음 9(34문항)·FRQ 6. **EL1 = 정확 배정 성공**(가상 0, 독립 검증기 위반 0): 읽기 묶음 6(24문항) + 글쓰기 묶음 5(21문항), 범주 RS-R 5 / CE-R 7 / RO-R 8 / S-R 5 / RS-W 5 / CE-W 5 / RO-W 5 / S-W 5(전부 범위 안), exam_prep 34/45, FRQ q1·q2·q3 = fa1·fa2·fa3. `data/ap/stock/exact-assign-el-el1.json`. **EL2 는 배정 불가(재고 부족)**: EL1 을 뺀 남은 MC 읽기 7·글쓰기 14문항(필요 23–25 / 20–22) → 읽기 ≥ 16문항(약 4묶음)·글쓰기 ≥ 6문항(약 2묶음)과 범주별 하한(남은 재고 기준 CE-R·RO-R·S-R 등) 부족. FRQ 는 EL2 용 3세트(fb1–fb3)가 이미 있다. 보충에 필요한 추정 비용 ≈ $3.5(읽기 5묶음 Fable 동기 $1.9 + 글쓰기 2묶음 Opus $0.4 + 검증 $1.2): 영어 상한 $24 의 잔여 $1.27 을 넘어 **오너 상한 상향 또는 중단 결정 필요**.
+
+**사람 검수(출시 전 필수, §6 그대로):** 모든 지문·소스, 모든 FRQ 과제문·루브릭·샘플 100%, MC 통과 문항 무작위 30%·풀이 제2 방어 가능이었던 묶음의 이웃 문항·적대 weak 판정 문항 우선. 사람 검수 인력이 없어 이번에는 자동 게이트만 적용했고, 남은 위험은 §7 의 1·2·7번과 동일(잔여 키 오류율 3–8% 추정 유지).

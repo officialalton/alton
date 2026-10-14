@@ -1,5 +1,5 @@
 {
- "spent": 164.7211,
+ "spent": 187.4541,
  "entries": [
   {
    "at": "2026-10-08T09:13:14.616Z",
@@ -974,7 +974,7 @@
   {
    "at": "2026-10-09T03:26:06.749447+00:00",
    "usd": 0,
-   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) — invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
+   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) \u2014 invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
    "excludedRun": "v8-bio-r"
   },
   {
@@ -2976,6 +2976,181 @@
    "at": "2026-10-14T08:14:41.870Z",
    "usd": 0.154026,
    "note": "difficulty sync"
+  },
+  {
+   "at": "2026-10-14T09:01:41.664Z",
+   "usd": 2.60348,
+   "note": "gen sync"
+  },
+  {
+   "at": "2026-10-14T09:01:54.058Z",
+   "usd": 0.118438,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-14T09:02:14.923Z",
+   "usd": 0.1222,
+   "note": "adv sync"
+  },
+  {
+   "at": "2026-10-14T09:02:18.450Z",
+   "usd": 2.0985,
+   "note": "frq-gen sync"
+  },
+  {
+   "at": "2026-10-14T09:02:22.424Z",
+   "usd": 0.017828,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-14T09:15:18.155Z",
+   "usd": 0.1876978,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-14T09:15:18.423Z",
+   "usd": 0,
+   "note": "solve-retry sync"
+  },
+  {
+   "at": "2026-10-14T09:15:33.659Z",
+   "usd": 0.142812,
+   "note": "adv sync"
+  },
+  {
+   "at": "2026-10-14T09:15:41.407Z",
+   "usd": 0.027504400000000002,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-14T09:15:45.931Z",
+   "usd": 0.039476,
+   "note": "judge sync"
+  },
+  {
+   "at": "2026-10-14T09:16:10.615Z",
+   "usd": 0.8638756000000001,
+   "note": "frq-samples sync"
+  },
+  {
+   "at": "2026-10-14T09:16:44.215Z",
+   "usd": 0.3164298,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-14T09:16:44.238Z",
+   "usd": 0,
+   "note": "solve-retry sync"
+  },
+  {
+   "at": "2026-10-14T09:16:44.253Z",
+   "usd": 0,
+   "note": "adv sync"
+  },
+  {
+   "at": "2026-10-14T09:16:44.260Z",
+   "usd": 0,
+   "note": "adv-retry sync"
+  },
+  {
+   "at": "2026-10-14T09:17:00.604Z",
+   "usd": 1.6617360000000003,
+   "note": "frq-grade sync"
+  },
+  {
+   "at": "2026-10-14T09:18:11.492Z",
+   "usd": 0,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-14T09:18:11.499Z",
+   "usd": 0,
+   "note": "solve-retry sync"
+  },
+  {
+   "at": "2026-10-14T09:18:47.368Z",
+   "usd": 0.152993,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-14T09:18:47.779Z",
+   "usd": 0,
+   "note": "solve-retry sync"
+  },
+  {
+   "at": "2026-10-14T09:19:37.264Z",
+   "usd": 0.3032686,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-14T09:22:22.240Z",
+   "usd": 0.194463,
+   "note": "adv batch msgbatch_01RWX7XZfQ5z398NrM1pEADQ"
+  },
+  {
+   "at": "2026-10-14T09:28:10.196Z",
+   "usd": 0.0212668,
+   "note": "review batch msgbatch_01RDdaJbNfWH7ujvAAAeQqQN"
+  },
+  {
+   "at": "2026-10-14T09:46:29.614Z",
+   "usd": 0.051000000000000004,
+   "note": "judge batch msgbatch_01Rm1jvEAac9ngUZzKKJEqgT"
+  },
+  {
+   "at": "2026-10-14T09:49:10.475Z",
+   "usd": 0,
+   "note": "gen sync"
+  },
+  {
+   "at": "2026-10-14T09:51:25.552Z",
+   "usd": 0,
+   "note": "gen-retry sync"
+  },
+  {
+   "at": "2026-10-14T09:51:52.427Z",
+   "usd": 0.7176429999999998,
+   "note": "frq-grade batch msgbatch_01YNM4qPVnj5T8XfJ7PQCCpK"
+  },
+  {
+   "at": "2026-10-14T09:56:12.655Z",
+   "usd": 7.6572876,
+   "note": "gen sync"
+  },
+  {
+   "at": "2026-10-14T10:02:16.136Z",
+   "usd": 1.82115,
+   "note": "frq-gen sync"
+  },
+  {
+   "at": "2026-10-14T10:09:05.050Z",
+   "usd": 0.20575880000000002,
+   "note": "frq-samples batch msgbatch_014uBz2KUFfz73xM3FxQPWTb"
+  },
+  {
+   "at": "2026-10-14T10:11:11.440Z",
+   "usd": 0.9339928,
+   "note": "solve batch msgbatch_01VKnqk6y6aSkxrskTAgZTx7"
+  },
+  {
+   "at": "2026-10-14T10:13:15.444Z",
+   "usd": 1.307182,
+   "note": "adv batch msgbatch_01QSotSaFPXNTgydxyJYm6tL"
+  },
+  {
+   "at": "2026-10-14T10:15:53.526Z",
+   "usd": 0.742535,
+   "note": "frq-grade batch msgbatch_01QV2Kp9GpyEXYSxSBMyXWUg"
+  },
+  {
+   "at": "2026-10-14T10:20:24.541Z",
+   "usd": 0.1193474,
+   "note": "review batch msgbatch_01EocqZoA4CfdZxMGz4XAFVY"
+  },
+  {
+   "at": "2026-10-14T10:22:48.986Z",
+   "usd": 0.30545000000000005,
+   "note": "judge batch msgbatch_014s7nnSh9BFB2ASkX1ikXkH"
   }
  ]
 }

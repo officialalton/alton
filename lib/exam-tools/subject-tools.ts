@@ -21,6 +21,8 @@ const BY_SUBJECT: Record<string, SubjectToolsConfig> = {
   // Biology: CED(V.1) — 사칙·공학용·그래핑 계산기가 두 섹션 모두에서 허용된다(Exam Overview p.197). 표준오차·카이제곱·로그가 필요하므로 공학용을 제공하고 Desmos 는 켜지 않는다(Bluebook 내장 형태는 UNVERIFIED).
   // 공식 AP Biology Equations and Formulas 시트(CED Appendix p.230–231)는 시험 중 제공되므로 Reference 패널(ALTON 자체 문구)을 둔다 — docs/ap/biology-facts.md.
   ap_biology: { calculatorTabs: ["scientific"], reference: "biology" },
+  // English Language and Composition: 계산·수식 도구가 없다(AP Central 시험 페이지에 계산기·참조 시트 언급 없음, docs/ap/englang-facts.md) — 계산기·참조 패널을 모두 끈다(기본값 Desmos 로 떨어지면 안 된다).
+  ap_english_language: { calculatorTabs: [], reference: null },
 };
 
 export function subjectToolsConfig(apSubject: string | null | undefined): SubjectToolsConfig {
