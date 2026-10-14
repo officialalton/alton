@@ -1,0 +1,2697 @@
+[
+ {
+  "spec": {
+   "id": "r31",
+   "kind": "reading",
+   "genre": "policy brief introduction",
+   "theme": "learning to read data visualisations critically",
+   "skills": [
+    "1.B",
+    "3.A",
+    "3.C",
+    "5.A",
+    "5.C",
+    "7.B"
+   ],
+   "seed": 25812
+  },
+  "set": {
+   "kind": "reading",
+   "blueprint": {
+    "speaker": "Marisol Veck, senior analyst at the fictional Hollowmere Civic Data Office, writing the introduction to a policy brief",
+    "audience": "Members of the Hollowmere Unified School District board and its curriculum committee",
+    "exigence": "A county council hearing in which a chart with a truncated vertical axis nearly led to the closure of three branch libraries; a retired surveyor's question exposed the distortion",
+    "purpose": "To persuade the board to adopt a required four-week chart literacy unit for ninth and tenth graders, and to frame the detailed sections that follow",
+    "context": "Introduction to a policy brief submitted to a school district; the writer's office has run a diagnostic across district high schools and a pilot at one school",
+    "claim": "The district should deliberately teach chart literacy, the habit of reading a data visualization as an argument, in a required unit rather than assuming students acquire it on their own",
+    "line_of_reasoning": "Paragraph 1 narrates the library-chart incident to establish stakes; paragraph 2 defines chart literacy and states the recommendation; paragraph 3 supplies diagnostic evidence that the skill is lacking and teachable; paragraph 4 concedes the time objection and rebuts the overlap objection; paragraph 5 widens the scope to civic life and qualifies the claim so it is not anti-chart; paragraph 6 previews the brief and returns to the surveyor, turning the anecdote into a call to action",
+    "evidence_types": [
+     "anecdote",
+     "diagnostic statistics from a fictional office",
+     "definition",
+     "analogy",
+     "hypothetical civic examples",
+     "reference to a pilot program"
+    ],
+    "devices": [
+     {
+      "device": "anecdote",
+      "sentence_ids": [
+       1,
+       2,
+       3,
+       4
+      ],
+      "function": "Establishes the exigence and stakes through a concrete civic incident"
+     },
+     {
+      "device": "dash_or_colon_emphasis",
+      "sentence_ids": [
+       3,
+       6
+      ],
+      "function": "Colon isolates the omitted detail (axis) and the components of the definition"
+     },
+     {
+      "device": "definition",
+      "sentence_ids": [
+       6,
+       7,
+       8
+      ],
+      "function": "Clarifies the proposed skill by stating what it is and what it is not"
+     },
+     {
+      "device": "analogy",
+      "sentence_ids": [
+       8,
+       20
+      ],
+      "function": "Compares chart literacy to reading an editorial and to detecting a restaurant's concealment, making the skill and its distinctness concrete"
+     },
+     {
+      "device": "statistic",
+      "sentence_ids": [
+       11,
+       13,
+       14
+      ],
+      "function": "Diagnostic figures show the problem is real and that brief instruction produces gains"
+     },
+     {
+      "device": "logos",
+      "sentence_ids": [
+       10,
+       11,
+       12,
+       13,
+       14,
+       15
+      ],
+      "function": "Evidence-based reasoning that the need is not speculative"
+     },
+     {
+      "device": "metaphor",
+      "sentence_ids": [
+       15,
+       20
+      ],
+      "function": "'Moved the needle' and 'under the sauce' compress abstract points into images"
+     },
+     {
+      "device": "concession_and_rebuttal",
+      "sentence_ids": [
+       16,
+       17,
+       18,
+       19
+      ],
+      "function": "Grants the time concern and adjusts the proposal; rejects the overlap concern with a distinction"
+     },
+     {
+      "device": "antithesis",
+      "sentence_ids": [
+       19,
+       25
+      ],
+      "function": "Balanced opposed clauses expose the gap between building and judging charts, and between persuading and deceiving"
+     },
+     {
+      "device": "parallelism",
+      "sentence_ids": [
+       22
+      ],
+      "function": "Repeated 'arrives as' clauses convey how pervasively information reaches citizens as pictures"
+     },
+     {
+      "device": "repetition",
+      "sentence_ids": [
+       22
+      ],
+      "function": "'arrives' repeated three times for accumulation"
+     },
+     {
+      "device": "tone_shift",
+      "sentence_ids": [
+       21
+      ],
+      "function": "Shift from procedural, committee-facing reasoning to a broader, more urgent civic register"
+     },
+     {
+      "device": "qualification",
+      "sentence_ids": [
+       23
+      ],
+      "function": "Limits the claim so that it advocates critical reading, not distrust of charts"
+     },
+     {
+      "device": "sentence_length_variation",
+      "sentence_ids": [
+       24
+      ],
+      "function": "Short sentence after longer ones creates a pivot and emphasis"
+     },
+     {
+      "device": "ethos",
+      "sentence_ids": [
+       11,
+       26
+      ],
+      "function": "The office's own diagnostic and pilot establish credibility"
+     },
+     {
+      "device": "direct_address",
+      "sentence_ids": [
+       27
+      ],
+      "function": "Addresses the board directly to frame how the rest of the brief should be read"
+     }
+    ],
+    "tone_shifts": [
+     {
+      "sentence_id": 21,
+      "from": "measured, procedural",
+      "to": "urgent, civic"
+     },
+     {
+      "sentence_id": 27,
+      "from": "expository preview",
+      "to": "direct, hortatory appeal"
+     }
+    ],
+    "counterargument": "Committee members question whether the unit fits in a crowded year and whether it duplicates mathematics instruction; the writer concedes the time concern by shrinking the proposal to a four-week unit inside existing courses, and rebuts the overlap concern by distinguishing building charts from evaluating charts built by others"
+   },
+   "provenance": {
+    "kind": "original",
+    "author_alias": "Marisol Veck",
+    "year_alias": 2025,
+    "venue_alias": "Hollowmere Civic Data Office policy brief",
+    "note": "Entirely fictional writer, office, district, schools and figures."
+   },
+   "title": "Who Was in the Room: Why Hollowmere Should Teach Chart Literacy",
+   "paragraphs": [
+    [
+     "Last March, at a hearing of the Hollowmere County Council, a single chart nearly closed three branch libraries.",
+     "The chart showed a line plunging from the upper left corner to the lower right, labeled Library Visits, 2019 to 2024, and several council members cited it in their remarks before the vote.",
+     "The slide omitted one detail: its vertical axis began not at zero but at 410,000, so that a decline of about six percent looked, from the back of the room, like a collapse.",
+     "The branches stayed open only because a retired surveyor in the audience asked to see the numbers behind the picture.",
+     "This brief argues that the Hollowmere Unified School District should not leave such questions to the luck of who happens to be in the room."
+    ],
+    [
+     "We use the term chart literacy to mean the ability to read a data visualization as an argument rather than as a fact: to ask who drew it, what was left out, and what the chosen scale, color, and shape are doing to the viewer's judgment.",
+     "It is not statistics, though it borrows from statistics, and it is not graphic design, though it borrows from that too.",
+     "It is closer to the habit a careful reader brings to an editorial, the reflex of asking what the writer wants you to feel before you decide whether to feel it.",
+     "Our recommendation is that this habit be taught deliberately, in a required unit for ninth and tenth graders, rather than assumed to arrive on its own."
+    ],
+    [
+     "The need is not speculative.",
+     "In the spring of 2025, our office administered a short diagnostic to 1,140 students across four district high schools.",
+     "Each student saw two bar charts describing the same fictional survey; one used a truncated axis and the other did not.",
+     "Sixty-eight percent of students described the two charts as showing very different results, and fewer than one in five noticed the axis at all.",
+     "When the same students were given five minutes of instruction on axis conventions and shown a third pair, the share who caught the truncation rose to just over half.",
+     "Five minutes moved the needle; a semester, we believe, could move it much further."
+    ],
+    [
+     "Some members of the curriculum committee have reasonably asked whether this material belongs in an already crowded year, and whether it is really distinct from what mathematics teachers already cover.",
+     "The concern about time is fair, and we do not propose adding a course; we propose a four-week unit that can live inside the existing civics or English sequence, where students are already learning to weigh sources.",
+     "The concern about overlap is, we think, mistaken.",
+     "Mathematics classes teach students to build charts correctly; almost no class teaches them what to do when someone else has built a chart incorrectly, or built it correctly and chosen the frame with care.",
+     "The difference is the difference between learning to cook and learning to tell when a restaurant is hiding something under the sauce."
+    ],
+    [
+     "Consider how much of a citizen's year now arrives as a picture.",
+     "Rent trends arrive as a line; crime arrives as a heat map; a candidate's record arrives as a pair of bars, one towering and one squat.",
+     "These pictures are efficient, and we do not want students to distrust them wholesale, since a well-made chart can tell the truth faster than a paragraph can.",
+     "But efficiency cuts both ways.",
+     "A picture that persuades in two seconds also deceives in two seconds, and it leaves no sentence a reader can point to and call false."
+    ],
+    [
+     "The remainder of this brief sets out the proposed unit: four weeks of lessons, a cost of roughly 38 dollars per student, and the results of a pilot at Fenwick Ridge High School.",
+     "We ask the board to read those sections with the surveyor in mind.",
+     "He was not an expert; he simply knew which question to ask, and he was there.",
+     "The district can make sure that, next time, a few hundred more people are."
+    ]
+   ],
+   "items": [
+    {
+     "skill": "1.B",
+     "topic": "U2.1",
+     "cognitive": "explain",
+     "stem": "The writer's account of the retired surveyor in the first and last paragraphs most directly appeals to the audience's",
+     "options": [
+      {
+       "text": "belief that public decisions should depend on informed scrutiny rather than on chance",
+       "is_key": true,
+       "label": "correct",
+       "why": "The surveyor's question saved the libraries, and the writer frames this as luck ('the luck of who happens to be in the room') that the district can replace with deliberate teaching so that 'a few hundred more people' are there next time."
+      },
+      {
+       "text": "resentment toward county council members who were prepared to close the libraries",
+       "is_key": false,
+       "label": "wrong_tone",
+       "why": "The passage reports the council's reliance on the chart neutrally; it blames the chart's design and the lack of trained readers, not the council's motives."
+      },
+      {
+       "text": "conviction that only trained specialists can be relied on to interpret data correctly",
+       "is_key": false,
+       "label": "reversal",
+       "why": "The writer stresses the opposite: 'He was not an expert; he simply knew which question to ask,' arguing the skill is teachable to ordinary students."
+      },
+      {
+       "text": "interest in limiting what the district spends on new curricular materials each year",
+       "is_key": false,
+       "label": "unsupported",
+       "why": "Cost appears only as a preview detail (38 dollars per student) and is never connected to the surveyor; the anecdote does not address budget concerns."
+      }
+     ],
+     "evidence_sentence_ids": [
+      4,
+      5,
+      27,
+      28,
+      29
+     ],
+     "devices_used": [
+      "anecdote",
+      "direct_address"
+     ],
+     "est_seconds": 70
+    },
+    {
+     "skill": "3.A",
+     "topic": "U3.1",
+     "cognitive": "identify",
+     "stem": "The results of the diagnostic described in paragraph 3 are used primarily to support the claim that",
+     "options": [
+      {
+       "text": "students rarely notice chart manipulation on their own, but even brief instruction measurably improves their attention to it",
+       "is_key": true,
+       "label": "correct",
+       "why": "The figures (fewer than one in five noticed the axis; just over half after five minutes) directly back 'The need is not speculative' and 'Five minutes moved the needle.'"
+      },
+      {
+       "text": "mathematics classes already give students most of the skills needed to evaluate charts built by other people",
+       "is_key": false,
+       "label": "reversal",
+       "why": "Paragraph 4 argues the reverse, that almost no class teaches students to judge others' charts; the diagnostic shows the skill is largely absent."
+      },
+      {
+       "text": "a visual argument can mislead a viewer more quickly than a written argument and leaves no false sentence behind",
+       "is_key": false,
+       "label": "wrong_scope",
+       "why": "This is the claim of paragraph 5 about charts in civic life; the diagnostic measures student perception, not the speed of deception relative to prose."
+      },
+      {
+       "text": "the proposed unit should be housed in the civics or English sequence rather than offered as a separate course",
+       "is_key": false,
+       "label": "wrong_function",
+       "why": "Placement of the unit is the writer's response to the time objection in paragraph 4; the diagnostic data say nothing about where the unit belongs."
+      }
+     ],
+     "evidence_sentence_ids": [
+      10,
+      13,
+      14,
+      15
+     ],
+     "devices_used": [
+      "statistic",
+      "logos"
+     ],
+     "est_seconds": 60
+    },
+    {
+     "skill": "3.C",
+     "topic": "U7.1",
+     "cognitive": "explain",
+     "stem": "In paragraph 4, the writer handles the committee's concern that chart literacy overlaps with mathematics instruction by",
+     "options": [
+      {
+       "text": "accepting that the two fields overlap but maintaining that some redundancy in a curriculum is harmless",
+       "is_key": false,
+       "label": "unsupported",
+       "why": "The writer calls the overlap concern 'mistaken' and never argues that redundancy is acceptable; the rebuttal denies the overlap rather than tolerating it."
+      },
+      {
+       "text": "distinguishing between producing charts correctly and evaluating charts that others have produced",
+       "is_key": true,
+       "label": "correct",
+       "why": "The writer says mathematics teaches students 'to build charts correctly' while 'almost no class' teaches what to do when someone else has built one, then crystallizes the distinction with the cooking analogy."
+      },
+      {
+       "text": "proposing that the unit be absorbed into existing mathematics courses to avoid duplicating content",
+       "is_key": false,
+       "label": "reversal",
+       "why": "The writer places the unit inside civics or English, not mathematics, and does so in response to the time concern, not the overlap concern."
+      },
+      {
+       "text": "granting the point as fair and narrowing the proposal from a full course to a shorter four-week unit",
+       "is_key": false,
+       "label": "partially_right",
+       "why": "This describes the writer's handling of the time objection; the overlap objection is rejected, not granted."
+      }
+     ],
+     "evidence_sentence_ids": [
+      16,
+      18,
+      19,
+      20
+     ],
+     "devices_used": [
+      "concession_and_rebuttal",
+      "antithesis"
+     ],
+     "est_seconds": 65
+    },
+    {
+     "skill": "5.A",
+     "topic": "U5.1",
+     "cognitive": "identify",
+     "stem": "Which of the following best describes the relationship between paragraph 2 and paragraph 3?",
+     "options": [
+      {
+       "text": "Paragraph 2 defines the skill and states the recommendation; paragraph 3 offers evidence that the skill is lacking and can be taught",
+       "is_key": true,
+       "label": "correct",
+       "why": "Paragraph 2 defines chart literacy and recommends a required unit; paragraph 3 opens 'The need is not speculative' and supplies diagnostic results showing both the deficit and the gain from instruction."
+      },
+      {
+       "text": "Paragraph 2 proposes a definition that paragraph 3 then narrows by showing which parts of it students already possess",
+       "is_key": false,
+       "label": "illogical_relationship",
+       "why": "Paragraph 3 does not revise the definition; it shows students mostly lack the skill, with fewer than one in five noticing the axis."
+      },
+      {
+       "text": "Paragraph 2 states the recommendation in general terms; paragraph 3 restates it with more specific scheduling details",
+       "is_key": false,
+       "label": "wrong_function",
+       "why": "Scheduling details (a four-week unit inside civics or English) appear in paragraph 4, and paragraph 3 presents data rather than restating the proposal."
+      },
+      {
+       "text": "Paragraph 2 raises a theoretical distinction that paragraph 3 challenges with results from the district's own students",
+       "is_key": false,
+       "label": "reversal",
+       "why": "The diagnostic supports the writer's position rather than challenging it; paragraph 3 confirms, not contests, the need described in paragraph 2."
+      }
+     ],
+     "evidence_sentence_ids": [
+      6,
+      9,
+      10,
+      13,
+      14,
+      15
+     ],
+     "devices_used": [
+      "definition",
+      "logos"
+     ],
+     "est_seconds": 60
+    },
+    {
+     "skill": "5.C",
+     "topic": "U3.3",
+     "cognitive": "evaluate",
+     "stem": "The comparison in paragraph 4 between 'learning to cook' and 'learning to tell when a restaurant is hiding something under the sauce' most effectively advances the writer's purpose by",
+     "options": [
+      {
+       "text": "making the distinction between building charts and judging them concrete enough to settle the overlap objection",
+       "is_key": true,
+       "label": "correct",
+       "why": "The analogy restates the preceding sentence's contrast (building correctly versus detecting what someone else has done) in everyday terms, clinching the rebuttal that the unit is distinct from mathematics."
+      },
+      {
+       "text": "implying that the district's mathematics instruction has failed to teach even the basics of chart construction",
+       "is_key": false,
+       "label": "reversal",
+       "why": "The writer credits mathematics classes with teaching students 'to build charts correctly'; the analogy concerns a different skill, not a failure of the existing one."
+      },
+      {
+       "text": "introducing a lighter register that signals the committee's concerns are not worth serious attention",
+       "is_key": false,
+       "label": "wrong_tone",
+       "why": "The writer calls the concerns 'reasonable' and 'fair' and answers them point by point; the analogy clarifies rather than mocks."
+      },
+      {
+       "text": "suggesting that most people who produce data visualizations are deliberately concealing something",
+       "is_key": false,
+       "label": "too_broad",
+       "why": "The passage allows that a chart can be 'built correctly' with a frame 'chosen with care' and that a well-made chart 'can tell the truth'; the analogy is about detection, not about universal dishonesty."
+      }
+     ],
+     "evidence_sentence_ids": [
+      18,
+      19,
+      20
+     ],
+     "devices_used": [
+      "analogy",
+      "metaphor"
+     ],
+     "est_seconds": 70
+    },
+    {
+     "skill": "7.B",
+     "topic": "U7.3",
+     "cognitive": "explain",
+     "stem": "In the sentence beginning 'Mathematics classes teach students' in paragraph 4, the writer's use of two balanced clauses joined by a semicolon primarily serves to",
+     "options": [
+      {
+       "text": "set what is already taught directly against what is not, so that the gap itself becomes the point",
+       "is_key": true,
+       "label": "correct",
+       "why": "The first clause names what mathematics teaches; the parallel second clause, 'almost no class teaches them what to do when...,' mirrors its structure so the missing instruction stands out by contrast."
+      },
+      {
+       "text": "subordinate mathematics instruction to the proposed unit and imply that the former should give way to it",
+       "is_key": false,
+       "label": "reversal",
+       "why": "The clauses are coordinate, not subordinate, and the writer does not propose replacing mathematics; the unit is placed in civics or English alongside existing courses."
+      },
+      {
+       "text": "suggest that the two kinds of instruction are equally available and that students may choose between them",
+       "is_key": false,
+       "label": "illogical_relationship",
+       "why": "The balanced form highlights an imbalance: one kind of teaching exists and the other almost does not, which is the opposite of equal availability."
+      },
+      {
+       "text": "convey the writer's hesitation about whether the distinction between the two skills will hold up",
+       "is_key": false,
+       "label": "wrong_tone",
+       "why": "The sentence follows the flat assertion that the overlap concern is 'mistaken' and is itself declarative; the structure asserts the distinction rather than doubting it."
+      }
+     ],
+     "evidence_sentence_ids": [
+      18,
+      19
+     ],
+     "devices_used": [
+      "antithesis"
+     ],
+     "est_seconds": 65
+    }
+   ]
+  },
+  "setViolations": [],
+  "itemViolations": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ],
+  "items": [
+   {
+    "skill": "1.B",
+    "topic": "U2.1",
+    "cognitive": "explain",
+    "stem": "The writer's account of the retired surveyor in the first and last paragraphs most directly appeals to the audience's",
+    "options": [
+     {
+      "text": "resentment toward county council members who were prepared to close the libraries",
+      "is_key": false,
+      "label": "wrong_tone",
+      "why": "The passage reports the council's reliance on the chart neutrally; it blames the chart's design and the lack of trained readers, not the council's motives."
+     },
+     {
+      "text": "interest in limiting what the district spends on new curricular materials each year",
+      "is_key": false,
+      "label": "unsupported",
+      "why": "Cost appears only as a preview detail (38 dollars per student) and is never connected to the surveyor; the anecdote does not address budget concerns."
+     },
+     {
+      "text": "conviction that only trained specialists can be relied on to interpret data correctly",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The writer stresses the opposite: 'He was not an expert; he simply knew which question to ask,' arguing the skill is teachable to ordinary students."
+     },
+     {
+      "text": "belief that public decisions should depend on informed scrutiny rather than on chance",
+      "is_key": true,
+      "label": "correct",
+      "why": "The surveyor's question saved the libraries, and the writer frames this as luck ('the luck of who happens to be in the room') that the district can replace with deliberate teaching so that 'a few hundred more people' are there next time."
+     }
+    ],
+    "evidence_sentence_ids": [
+     4,
+     5,
+     27,
+     28,
+     29
+    ],
+    "devices_used": [
+     "anecdote",
+     "direct_address"
+    ],
+    "est_seconds": 70,
+    "key_index": 3,
+    "det": []
+   },
+   {
+    "skill": "3.A",
+    "topic": "U3.1",
+    "cognitive": "identify",
+    "stem": "The results of the diagnostic described in paragraph 3 are used primarily to support the claim that",
+    "options": [
+     {
+      "text": "students rarely notice chart manipulation on their own, but even brief instruction measurably improves their attention to it",
+      "is_key": true,
+      "label": "correct",
+      "why": "The figures (fewer than one in five noticed the axis; just over half after five minutes) directly back 'The need is not speculative' and 'Five minutes moved the needle.'"
+     },
+     {
+      "text": "the proposed unit should be housed in the civics or English sequence rather than offered as a separate course",
+      "is_key": false,
+      "label": "wrong_function",
+      "why": "Placement of the unit is the writer's response to the time objection in paragraph 4; the diagnostic data say nothing about where the unit belongs."
+     },
+     {
+      "text": "mathematics classes already give students most of the skills needed to evaluate charts built by other people",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Paragraph 4 argues the reverse, that almost no class teaches students to judge others' charts; the diagnostic shows the skill is largely absent."
+     },
+     {
+      "text": "a visual argument can mislead a viewer more quickly than a written argument and leaves no false sentence behind",
+      "is_key": false,
+      "label": "wrong_scope",
+      "why": "This is the claim of paragraph 5 about charts in civic life; the diagnostic measures student perception, not the speed of deception relative to prose."
+     }
+    ],
+    "evidence_sentence_ids": [
+     10,
+     13,
+     14,
+     15
+    ],
+    "devices_used": [
+     "statistic",
+     "logos"
+    ],
+    "est_seconds": 60,
+    "key_index": 0,
+    "det": []
+   },
+   {
+    "skill": "3.C",
+    "topic": "U7.1",
+    "cognitive": "explain",
+    "stem": "In paragraph 4, the writer handles the committee's concern that chart literacy overlaps with mathematics instruction by",
+    "options": [
+     {
+      "text": "accepting that the two fields overlap but maintaining that some redundancy in a curriculum is harmless",
+      "is_key": false,
+      "label": "unsupported",
+      "why": "The writer calls the overlap concern 'mistaken' and never argues that redundancy is acceptable; the rebuttal denies the overlap rather than tolerating it."
+     },
+     {
+      "text": "granting the point as fair and narrowing the proposal from a full course to a shorter four-week unit",
+      "is_key": false,
+      "label": "partially_right",
+      "why": "This describes the writer's handling of the time objection; the overlap objection is rejected, not granted."
+     },
+     {
+      "text": "distinguishing between producing charts correctly and evaluating charts that others have produced",
+      "is_key": true,
+      "label": "correct",
+      "why": "The writer says mathematics teaches students 'to build charts correctly' while 'almost no class' teaches what to do when someone else has built one, then crystallizes the distinction with the cooking analogy."
+     },
+     {
+      "text": "proposing that the unit be absorbed into existing mathematics courses to avoid duplicating content",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The writer places the unit inside civics or English, not mathematics, and does so in response to the time concern, not the overlap concern."
+     }
+    ],
+    "evidence_sentence_ids": [
+     16,
+     18,
+     19,
+     20
+    ],
+    "devices_used": [
+     "concession_and_rebuttal",
+     "antithesis"
+    ],
+    "est_seconds": 65,
+    "key_index": 2,
+    "det": []
+   },
+   {
+    "skill": "5.A",
+    "topic": "U5.1",
+    "cognitive": "identify",
+    "stem": "Which of the following best describes the relationship between paragraph 2 and paragraph 3?",
+    "options": [
+     {
+      "text": "Paragraph 2 defines the skill and states the recommendation; paragraph 3 offers evidence that the skill is lacking and can be taught",
+      "is_key": true,
+      "label": "correct",
+      "why": "Paragraph 2 defines chart literacy and recommends a required unit; paragraph 3 opens 'The need is not speculative' and supplies diagnostic results showing both the deficit and the gain from instruction."
+     },
+     {
+      "text": "Paragraph 2 raises a theoretical distinction that paragraph 3 challenges with results from the district's own students",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The diagnostic supports the writer's position rather than challenging it; paragraph 3 confirms, not contests, the need described in paragraph 2."
+     },
+     {
+      "text": "Paragraph 2 proposes a definition that paragraph 3 then narrows by showing which parts of it students already possess",
+      "is_key": false,
+      "label": "illogical_relationship",
+      "why": "Paragraph 3 does not revise the definition; it shows students mostly lack the skill, with fewer than one in five noticing the axis."
+     },
+     {
+      "text": "Paragraph 2 states the recommendation in general terms; paragraph 3 restates it with more specific scheduling details",
+      "is_key": false,
+      "label": "wrong_function",
+      "why": "Scheduling details (a four-week unit inside civics or English) appear in paragraph 4, and paragraph 3 presents data rather than restating the proposal."
+     }
+    ],
+    "evidence_sentence_ids": [
+     6,
+     9,
+     10,
+     13,
+     14,
+     15
+    ],
+    "devices_used": [
+     "definition",
+     "logos"
+    ],
+    "est_seconds": 60,
+    "key_index": 0,
+    "det": []
+   },
+   {
+    "skill": "5.C",
+    "topic": "U3.3",
+    "cognitive": "evaluate",
+    "stem": "The comparison in paragraph 4 between 'learning to cook' and 'learning to tell when a restaurant is hiding something under the sauce' most effectively advances the writer's purpose by",
+    "options": [
+     {
+      "text": "implying that the district's mathematics instruction has failed to teach even the basics of chart construction",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The writer credits mathematics classes with teaching students 'to build charts correctly'; the analogy concerns a different skill, not a failure of the existing one."
+     },
+     {
+      "text": "making the distinction between building charts and judging them concrete enough to settle the overlap objection",
+      "is_key": true,
+      "label": "correct",
+      "why": "The analogy restates the preceding sentence's contrast (building correctly versus detecting what someone else has done) in everyday terms, clinching the rebuttal that the unit is distinct from mathematics."
+     },
+     {
+      "text": "suggesting that most people who produce data visualizations are deliberately concealing something",
+      "is_key": false,
+      "label": "too_broad",
+      "why": "The passage allows that a chart can be 'built correctly' with a frame 'chosen with care' and that a well-made chart 'can tell the truth'; the analogy is about detection, not about universal dishonesty."
+     },
+     {
+      "text": "introducing a lighter register that signals the committee's concerns are not worth serious attention",
+      "is_key": false,
+      "label": "wrong_tone",
+      "why": "The writer calls the concerns 'reasonable' and 'fair' and answers them point by point; the analogy clarifies rather than mocks."
+     }
+    ],
+    "evidence_sentence_ids": [
+     18,
+     19,
+     20
+    ],
+    "devices_used": [
+     "analogy",
+     "metaphor"
+    ],
+    "est_seconds": 70,
+    "key_index": 1,
+    "det": []
+   },
+   {
+    "skill": "7.B",
+    "topic": "U7.3",
+    "cognitive": "explain",
+    "stem": "In the sentence beginning 'Mathematics classes teach students' in paragraph 4, the writer's use of two balanced clauses joined by a semicolon primarily serves to",
+    "options": [
+     {
+      "text": "convey the writer's hesitation about whether the distinction between the two skills will hold up",
+      "is_key": false,
+      "label": "wrong_tone",
+      "why": "The sentence follows the flat assertion that the overlap concern is 'mistaken' and is itself declarative; the structure asserts the distinction rather than doubting it."
+     },
+     {
+      "text": "subordinate mathematics instruction to the proposed unit and imply that the former should give way to it",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The clauses are coordinate, not subordinate, and the writer does not propose replacing mathematics; the unit is placed in civics or English alongside existing courses."
+     },
+     {
+      "text": "set what is already taught directly against what is not, so that the gap itself becomes the point",
+      "is_key": true,
+      "label": "correct",
+      "why": "The first clause names what mathematics teaches; the parallel second clause, 'almost no class teaches them what to do when...,' mirrors its structure so the missing instruction stands out by contrast."
+     },
+     {
+      "text": "suggest that the two kinds of instruction are equally available and that students may choose between them",
+      "is_key": false,
+      "label": "illogical_relationship",
+      "why": "The balanced form highlights an imbalance: one kind of teaching exists and the other almost does not, which is the opposite of equal availability."
+     }
+    ],
+    "evidence_sentence_ids": [
+     18,
+     19
+    ],
+    "devices_used": [
+     "antithesis"
+    ],
+    "est_seconds": 65,
+    "key_index": 2,
+    "det": []
+   }
+  ]
+ },
+ {
+  "spec": {
+   "id": "r32",
+   "kind": "reading",
+   "genre": "historical-narrative essay",
+   "theme": "urban beekeeping",
+   "skills": [
+    "1.A",
+    "3.A",
+    "3.B",
+    "5.A",
+    "5.B",
+    "7.B"
+   ],
+   "seed": 95037
+  },
+  "set": {
+   "kind": "reading",
+   "blueprint": {
+    "speaker": "Theodora Vasic, a municipal archivist in the fictional city of Halverton who has spent eleven years with the city's records and writes with wry, grounded authority",
+    "audience": "Educated general readers of a city-interest quarterly, including local residents and council members who may assume beekeeping is a rural or outdated practice",
+    "exigence": "A council hearing debating whether a schoolteacher may keep two hives on her garage roof, during which a councilman declared that bees 'do not belong in a modern city'",
+    "purpose": "To use the archival history of beekeeping in Halverton to show that bees have always been part of the city's modern life, that the earlier ban was driven by self-image rather than danger, and that the current proposal rests on a mistaken assumption",
+    "context": "Historical-narrative essay published in a fictional city quarterly; traces beekeeping from 1891 through a 1923 ban, a 1981 repeal, and the present day",
+    "claim": "Bees have belonged to Halverton for longer than its modern infrastructure; the city's periodic impulse to ban them reflects anxiety about appearing modern, not a proportionate response to harm",
+    "line_of_reasoning": "Paragraph 1 establishes the hearing and the councilman's assumption; paragraph 2 narrates the earliest records to prove bees and the city coexisted productively; paragraph 3 explains the 1923 ban as a story the city told about itself rather than a response to danger; paragraph 4 concedes that stings and poorly placed hives are real problems, then reframes the issue as one of proportion; paragraph 5 narrates the practice's survival and return after repeal, undermining the 'relic' idea; paragraph 6 returns to the councilman and states the thesis directly, ending on what bees ask and offer",
+    "evidence_types": [
+     "archival records (ledger, city directory, photographs)",
+     "historical anecdotes (Agnes Durrow, the 1923 boy, Oscar Lindqvist)",
+     "dates and counts of households",
+     "personal testimony of the archivist"
+    ],
+    "devices": [
+     {
+      "device": "irony",
+      "sentence_ids": [
+       3
+      ],
+      "function": "Mocks the councilman's certainty by treating 'modern' and 'bee' as words supposedly never joined, which the next sentence immediately refutes"
+     },
+     {
+      "device": "anecdote",
+      "sentence_ids": [
+       5,
+       6
+      ],
+      "function": "Agnes Durrow's skeps and ledger make the earliest beekeeping concrete and humanize it as a widow's trade"
+     },
+     {
+      "device": "metaphor",
+      "sentence_ids": [
+       8
+      ],
+      "function": "Bees 'ate' the city and 'gave something back,' framing the relationship as reciprocal rather than tolerated"
+     },
+     {
+      "device": "sentence_length_variation",
+      "sentence_ids": [
+       9,
+       12,
+       28
+      ],
+      "function": "Abrupt short sentences mark the turn to the ban, isolate the key point that the bees had not changed, and deliver the closing line with force"
+     },
+     {
+      "device": "anecdote",
+      "sentence_ids": [
+       10
+      ],
+      "function": "The stung boy and the newspaper headline supply the trigger for the ban and show how small an incident started it"
+     },
+     {
+      "device": "cause_effect_chain",
+      "sentence_ids": [
+       10,
+       11
+      ],
+      "function": "Incident leads to headline leads to ordinance leads to disappearance of all hives, showing the speed and disproportion of the reaction"
+     },
+     {
+      "device": "dash_or_colon_emphasis",
+      "sentence_ids": [
+       13,
+       26
+      ],
+      "function": "Colons open onto the explanation of the city's self-image and onto the short list of what bees require"
+     },
+     {
+      "device": "metaphor",
+      "sentence_ids": [
+       14
+      ],
+      "function": "The ban as 'a tidying away of the past' recasts regulation as housekeeping driven by image"
+     },
+     {
+      "device": "concession_and_rebuttal",
+      "sentence_ids": [
+       15,
+       16,
+       17
+      ],
+      "function": "Admits stings and bad placement are real problems, then rebuts by showing that the same standard would outlaw horses, trolleys and citizens"
+     },
+     {
+      "device": "enumeration",
+      "sentence_ids": [
+       17,
+       19,
+       23
+      ],
+      "function": "Lists of horses, trolleys, citizens; of bakeries, gardens, a trade; of hive locations make the argument concrete and cumulative"
+     },
+     {
+      "device": "repetition",
+      "sentence_ids": [
+       18,
+       19
+      ],
+      "function": "'The question was never... The question was whether...' reframes the issue from possibility of harm to proportion of harm"
+     },
+     {
+      "device": "antithesis",
+      "sentence_ids": [
+       18,
+       19
+      ],
+      "function": "Opposes the wrong question to the right one"
+     },
+     {
+      "device": "anecdote",
+      "sentence_ids": [
+       21
+      ],
+      "function": "Oscar Lindqvist's illicit hive and the inspectors' reluctance show the practice surviving and public sympathy shifting"
+     },
+     {
+      "device": "simile",
+      "sentence_ids": [
+       22
+      ],
+      "function": "Hives returning 'the way weeds come back to a vacant lot' suggests irrepressible, natural resurgence"
+     },
+     {
+      "device": "parallelism",
+      "sentence_ids": [
+       26,
+       27
+      ],
+      "function": "'What they ask of us... What they offer in return...' balances small demand against larger gift, framing the exchange as favorable"
+     },
+     {
+      "device": "juxtaposition",
+      "sentence_ids": [
+       25
+      ],
+      "function": "Bees set beside sewers, streetlights and the council chamber to show they predate the very markers of modernity"
+     }
+    ],
+    "tone_shifts": [
+     {
+      "sentence_id": 9,
+      "from": "warm, archival storytelling",
+      "to": "abrupt and foreboding"
+     },
+     {
+      "sentence_id": 15,
+      "from": "confident argument",
+      "to": "measured concession"
+     },
+     {
+      "sentence_id": 24,
+      "from": "historical narration",
+      "to": "direct, pointed resolution addressed to the councilman's claim"
+     }
+    ],
+    "counterargument": "Bees sting and hives placed carelessly above crowded sidewalks are genuine nuisances; the 1923 boy's injury and his mother's anger were legitimate. The writer concedes this fully, then argues the harm is too small to justify erasing a productive practice, since the same standard would ban horses, trolleys and citizens.",
+    "planned_flaws": []
+   },
+   "provenance": {
+    "kind": "original",
+    "author_alias": "Theodora Vasic",
+    "year_alias": 2024,
+    "venue_alias": "The Halverton Lantern Quarterly",
+    "note": "Entirely fictional city, people, newspaper, dates and figures invented for this exercise."
+   },
+   "title": "The Widow's Ledger",
+   "paragraphs": [
+    [
+     "On a Tuesday evening in March, the Halverton City Council spent forty minutes debating whether a schoolteacher named Priya Castellanos could keep two hives on the roof of her garage.",
+     "I sat in the back row with a folder of photocopies from the municipal archive, where I have worked for eleven years, and listened to a councilman warn that bees \"do not belong in a modern city.\"",
+     "He said it as if the matter were settled, as if modern and bee were words that had never shared a sentence.",
+     "They have shared a great many, and most of them were written in Halverton."
+    ],
+    [
+     "The first beekeeper in our records was not a farmer but a tanner's widow, Agnes Durrow, who in 1891 set four straw skeps against the brick wall behind her rowhouse on Cordage Street.",
+     "Her ledger survives, and it is a modest, stubborn document: so many pounds of honey sold to the druggist, so many to the bakery, a jar given to the priest, a sting noted and then forgotten.",
+     "By 1905 the city directory listed nineteen households that kept bees, and the honey they produced was dark and faintly mineral, flavored by the linden trees the city had planted along the trolley lines.",
+     "The bees, in other words, did not merely tolerate the city; they ate it, and gave something back."
+    ],
+    [
+     "Then came 1923.",
+     "A boy on Fulling Lane was stung several times after poking a hive with a broom handle, and the Halverton Evening Courier ran the story under a headline that called the bees \"a swarm of menace.\"",
+     "Within a month the council passed an ordinance forbidding hives within the city limits, and within a year the nineteen households had become none.",
+     "Nothing had changed about the bees.",
+     "What had changed was the story the city told about itself: it was becoming a place of paved streets and electric signs, and a straw skep behind a rowhouse looked, suddenly, like a thing left over from a slower century.",
+     "The ban was less a response to danger than a tidying away of the past."
+    ],
+    [
+     "I do not want to pretend the worries were all invented.",
+     "Bees sting, and a hive placed on a fire escape above a crowded sidewalk is a poor neighbor; the boy on Fulling Lane spent two days in bed, and his mother's anger was neither foolish nor small.",
+     "But a city that outlawed every creature capable of causing two days in bed would have to begin with its horses, its trolleys, and its own citizens.",
+     "The question was never whether bees could do harm.",
+     "The question was whether the harm was large enough to justify erasing a practice that fed bakeries, pollinated gardens, and gave a tanner's widow a trade of her own."
+    ],
+    [
+     "The practice did not stay erased.",
+     "In 1974 a retired machinist named Oscar Lindqvist quietly installed a hive on the roof of a shuttered hat factory, and the inspectors who discovered it three summers later could not bring themselves to write him up.",
+     "The ordinance was repealed in 1981, and the hives came back the way weeds come back to a vacant lot, first in one place, then in a dozen, then everywhere the sun reached.",
+     "Today the archive holds photographs of hives on the library roof, in the courtyard of the firehouse, and behind the same rowhouse on Cordage Street where Agnes Durrow kept hers."
+    ],
+    [
+     "So when the councilman says bees do not belong in a modern city, I want to hand him the ledger.",
+     "Bees have belonged to Halverton for longer than its sewers, its streetlights, or its council chamber.",
+     "What they ask of us is small: a roof, a water dish, a measure of patience with the occasional sting.",
+     "What they offer in return is a reminder that a city is not only pavement and ordinance but a living thing, and that the people who tend small, stubborn, useful work in its corners are not relics of a slower century.",
+     "They are the ones who keep it alive."
+    ]
+   ],
+   "items": [
+    {
+     "skill": "1.A",
+     "topic": "U1.1",
+     "cognitive": "identify",
+     "stem": "The passage as a whole is best understood as a response to which of the following situations?",
+     "options": [
+      {
+       "text": "A council debate over a resident's request to keep hives, during which a speaker voiced an assumption about the city's past that the writer believes the archive disproves",
+       "is_key": true,
+       "label": "correct",
+       "why": "Paragraph 1 describes the hearing on Priya Castellanos's hives and the councilman's remark that bees 'do not belong in a modern city'; the writer's archival evidence throughout answers that remark, and paragraph 6 returns to it directly."
+      },
+      {
+       "text": "A newspaper campaign that has stirred public alarm about bees by exaggerating a single incident of a child being stung several times",
+       "is_key": false,
+       "label": "lexical_trap",
+       "why": "The Evening Courier headline and the stung boy belong to the 1923 narrative in paragraph 3, not to the present occasion that prompted the essay."
+      },
+      {
+       "text": "A proposal before the council to repeal a long-standing ordinance that has kept hives out of the city limits since the early twentieth century",
+       "is_key": false,
+       "label": "reversal",
+       "why": "The ban was already repealed in 1981 (paragraph 5); the present debate concerns permitting a specific resident's hives, not lifting an existing ban."
+      },
+      {
+       "text": "The recent discovery in the municipal archive of a ledger that overturns what historians had previously assumed about the city's earliest beekeepers",
+       "is_key": false,
+       "label": "unsupported",
+       "why": "The ledger is described as surviving in the archive, but nothing suggests it was newly discovered or that it overturned any prior scholarly assumption."
+      }
+     ],
+     "evidence_sentence_ids": [
+      1,
+      2,
+      3,
+      4,
+      24
+     ],
+     "devices_used": [],
+     "est_seconds": 60
+    },
+    {
+     "skill": "3.A",
+     "topic": "U3.1",
+     "cognitive": "identify",
+     "stem": "The writer's reference in paragraph 2 to the 'nineteen households that kept bees' listed in the 1905 city directory primarily serves as evidence for the claim that",
+     "options": [
+      {
+       "text": "the 1923 ban was motivated by the city's image of itself rather than by any genuine change in the bees' behavior",
+       "is_key": false,
+       "label": "wrong_function",
+       "why": "That claim is made and supported in paragraph 3; the directory count in paragraph 2 establishes earlier coexistence, though the number is reused later only to measure the ban's effect."
+      },
+      {
+       "text": "bees and the city of Halverton have a long shared history that contradicts the councilman's assertion",
+       "is_key": true,
+       "label": "correct",
+       "why": "Paragraph 1 ends by asserting that 'modern' and 'bee' have shared many sentences written in Halverton; paragraph 2's records, including the directory count, are offered to prove that shared history."
+      },
+      {
+       "text": "honey produced within city limits was superior in flavor to honey produced on farms beyond the river",
+       "is_key": false,
+       "label": "unsupported",
+       "why": "The passage describes the honey as dark and mineral, flavored by linden trees, but makes no comparison with rural honey or any claim of superiority."
+      },
+      {
+       "text": "beekeeping had grown widespread enough by 1905 that some form of regulation was clearly becoming necessary",
+       "is_key": false,
+       "label": "reversal",
+       "why": "The writer presents the growth as productive coexistence; the passage argues against the regulation that followed, not for its necessity."
+      }
+     ],
+     "evidence_sentence_ids": [
+      4,
+      5,
+      7,
+      8
+     ],
+     "devices_used": [],
+     "est_seconds": 60
+    },
+    {
+     "skill": "3.B",
+     "topic": "U4.3",
+     "cognitive": "identify",
+     "stem": "Which of the following sentences from the passage most directly states the writer's central claim?",
+     "options": [
+      {
+       "text": "\"The ban was less a response to danger than a tidying away of the past.\"",
+       "is_key": false,
+       "label": "too_narrow",
+       "why": "This explains the motive behind the 1923 ordinance specifically; it is a supporting claim about one episode rather than the overall argument about bees' place in the city."
+      },
+      {
+       "text": "\"Nothing had changed about the bees.\"",
+       "is_key": false,
+       "label": "too_narrow",
+       "why": "This short sentence sets up the explanation of the 1923 ban's true cause; it addresses one moment in the narrative, not the thesis as a whole."
+      },
+      {
+       "text": "\"Bees have belonged to Halverton for longer than its sewers, its streetlights, or its council chamber.\"",
+       "is_key": true,
+       "label": "correct",
+       "why": "This sentence in the final paragraph directly answers the councilman's claim that opened the essay and gathers the whole historical narrative into one assertion about belonging."
+      },
+      {
+       "text": "\"The practice did not stay erased.\"",
+       "is_key": false,
+       "label": "wrong_function",
+       "why": "This is a transitional sentence that opens paragraph 5 and announces the revival narrative; it links sections rather than stating the argument's main point."
+      }
+     ],
+     "evidence_sentence_ids": [
+      4,
+      24,
+      25
+     ],
+     "devices_used": [],
+     "est_seconds": 55
+    },
+    {
+     "skill": "5.A",
+     "topic": "U5.1",
+     "cognitive": "explain",
+     "stem": "Which of the following best describes the relationship between paragraph 3 and paragraph 4?",
+     "options": [
+      {
+       "text": "Paragraph 4 supplies the archival evidence that the interpretation offered in paragraph 3 had asserted without documentation",
+       "is_key": false,
+       "label": "wrong_function",
+       "why": "Paragraph 4 does not add archival records; it reasons about proportion. The documentation (headline, ordinance, household count) is already in paragraph 3."
+      },
+      {
+       "text": "Paragraph 4 withdraws the interpretation of paragraph 3 by admitting that the injury to the boy made the ordinance a reasonable precaution",
+       "is_key": false,
+       "label": "reversal",
+       "why": "The writer concedes the injury was real but explicitly argues the harm was not large enough to justify erasing the practice; the ordinance is not called reasonable."
+      },
+      {
+       "text": "Paragraph 4 acknowledges a legitimate objection to the interpretation in paragraph 3 and then reframes the issue from whether harm is possible to whether it is proportionate",
+       "is_key": true,
+       "label": "correct",
+       "why": "Paragraph 4 opens by refusing to 'pretend the worries were all invented,' grants the sting and the mother's anger, then uses the repeated 'The question was' sentences to shift the issue to the size of the harm relative to what was lost."
+      },
+      {
+       "text": "Paragraph 4 moves the narrative forward to a later decade in order to show the long-term consequences of the ordinance described in paragraph 3",
+       "is_key": false,
+       "label": "illogical_relationship",
+       "why": "Paragraph 4 stays with the 1923 episode and reasons about it; the move to later decades happens in paragraph 5."
+      }
+     ],
+     "evidence_sentence_ids": [
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+     ],
+     "devices_used": [
+      "concession_and_rebuttal",
+      "repetition"
+     ],
+     "est_seconds": 70
+    },
+    {
+     "skill": "5.B",
+     "topic": "U5.1",
+     "cognitive": "evaluate",
+     "stem": "In the context of the passage as a whole, the fifth paragraph most strengthens the writer's argument by",
+     "options": [
+      {
+       "text": "introducing a new objection to beekeeping, raised by city inspectors, that the writer must answer before concluding",
+       "is_key": false,
+       "label": "wrong_function",
+       "why": "The inspectors are shown sympathizing with Lindqvist and declining to cite him; they raise no objection, and the paragraph answers nothing new."
+      },
+      {
+       "text": "demonstrating that the practice survived and returned on its own, which undercuts the idea that hives are relics of an earlier era",
+       "is_key": true,
+       "label": "correct",
+       "why": "Lindqvist's hidden hive, the repeal, and the weed simile show the practice reviving across the city; this directly counters the 'thing left over from a slower century' framing and prepares the conclusion's claim that keepers 'are not relics.'"
+      },
+      {
+       "text": "recounting the writer's own experience of keeping hives on a rooftop, which lends personal credibility to the archival account",
+       "is_key": false,
+       "label": "unsupported",
+       "why": "The writer speaks only as an archivist; nothing in the passage indicates that she keeps bees herself."
+      },
+      {
+       "text": "bringing the historical narrative to its close and delivering the writer's final judgment on the councilman's assertion",
+       "is_key": false,
+       "label": "wrong_scope",
+       "why": "The final judgment on the councilman comes in paragraph 6, which returns to the hearing; paragraph 5 ends with photographs, not a verdict."
+      }
+     ],
+     "evidence_sentence_ids": [
+      13,
+      20,
+      21,
+      22,
+      23,
+      27
+     ],
+     "devices_used": [
+      "anecdote",
+      "simile"
+     ],
+     "est_seconds": 65
+    },
+    {
+     "skill": "7.B",
+     "topic": "U7.3",
+     "cognitive": "explain",
+     "stem": "In the final paragraph, the writer begins two consecutive sentences with \"What they ask of us\" and \"What they offer in return.\" This parallel structure primarily serves to",
+     "options": [
+      {
+       "text": "suggest that the demands bees make and the benefits they provide are roughly equal, so the city's choice is a matter of taste",
+       "is_key": false,
+       "label": "illogical_relationship",
+       "why": "The first sentence names a 'small' request and the second a much larger return; the balance of the structure highlights an imbalance in favor of keeping bees, not an even trade."
+      },
+      {
+       "text": "set the modest requirements of bees against the larger return they provide, framing the exchange as plainly favorable to the city",
+       "is_key": true,
+       "label": "correct",
+       "why": "The matched openings invite direct comparison; the first sentence's colon lists only a roof, a water dish and patience, while the second expands into a reminder that the city is a living thing, making the trade appear obviously worthwhile."
+      },
+      {
+       "text": "present a list of hazards associated with hives before conceding that those hazards are outweighed by the honey they produce",
+       "is_key": false,
+       "label": "wrong_function",
+       "why": "The colon in the first sentence introduces simple needs, not hazards, and the return described is a reminder about the city's nature, not honey."
+      },
+      {
+       "text": "convey the writer's uncertainty about whether the benefits of beekeeping can be measured against its costs",
+       "is_key": false,
+       "label": "wrong_tone",
+       "why": "The paragraph is assertive throughout; the parallel sentences and the short closing line express confidence, not doubt."
+      }
+     ],
+     "evidence_sentence_ids": [
+      26,
+      27,
+      28
+     ],
+     "devices_used": [
+      "parallelism",
+      "dash_or_colon_emphasis"
+     ],
+     "est_seconds": 60
+    }
+   ]
+  },
+  "setViolations": [
+   "key_is_longest_in_4_of_6"
+  ],
+  "itemViolations": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ],
+  "items": [
+   {
+    "skill": "1.A",
+    "topic": "U1.1",
+    "cognitive": "identify",
+    "stem": "The passage as a whole is best understood as a response to which of the following situations?",
+    "options": [
+     {
+      "text": "A newspaper campaign that has stirred public alarm about bees by exaggerating a single incident of a child being stung several times",
+      "is_key": false,
+      "label": "lexical_trap",
+      "why": "The Evening Courier headline and the stung boy belong to the 1923 narrative in paragraph 3, not to the present occasion that prompted the essay."
+     },
+     {
+      "text": "A proposal before the council to repeal a long-standing ordinance that has kept hives out of the city limits since the early twentieth century",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The ban was already repealed in 1981 (paragraph 5); the present debate concerns permitting a specific resident's hives, not lifting an existing ban."
+     },
+     {
+      "text": "A council debate over a resident's request to keep hives, during which a speaker voiced an assumption about the city's past that the writer believes the archive disproves",
+      "is_key": true,
+      "label": "correct",
+      "why": "Paragraph 1 describes the hearing on Priya Castellanos's hives and the councilman's remark that bees 'do not belong in a modern city'; the writer's archival evidence throughout answers that remark, and paragraph 6 returns to it directly."
+     },
+     {
+      "text": "The recent discovery in the municipal archive of a ledger that overturns what historians had previously assumed about the city's earliest beekeepers",
+      "is_key": false,
+      "label": "unsupported",
+      "why": "The ledger is described as surviving in the archive, but nothing suggests it was newly discovered or that it overturned any prior scholarly assumption."
+     }
+    ],
+    "evidence_sentence_ids": [
+     1,
+     2,
+     3,
+     4,
+     24
+    ],
+    "devices_used": [],
+    "est_seconds": 60,
+    "key_index": 2,
+    "det": []
+   },
+   {
+    "skill": "3.A",
+    "topic": "U3.1",
+    "cognitive": "identify",
+    "stem": "The writer's reference in paragraph 2 to the 'nineteen households that kept bees' listed in the 1905 city directory primarily serves as evidence for the claim that",
+    "options": [
+     {
+      "text": "honey produced within city limits was superior in flavor to honey produced on farms beyond the river",
+      "is_key": false,
+      "label": "unsupported",
+      "why": "The passage describes the honey as dark and mineral, flavored by linden trees, but makes no comparison with rural honey or any claim of superiority."
+     },
+     {
+      "text": "the 1923 ban was motivated by the city's image of itself rather than by any genuine change in the bees' behavior",
+      "is_key": false,
+      "label": "wrong_function",
+      "why": "That claim is made and supported in paragraph 3; the directory count in paragraph 2 establishes earlier coexistence, though the number is reused later only to measure the ban's effect."
+     },
+     {
+      "text": "beekeeping had grown widespread enough by 1905 that some form of regulation was clearly becoming necessary",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The writer presents the growth as productive coexistence; the passage argues against the regulation that followed, not for its necessity."
+     },
+     {
+      "text": "bees and the city of Halverton have a long shared history that contradicts the councilman's assertion",
+      "is_key": true,
+      "label": "correct",
+      "why": "Paragraph 1 ends by asserting that 'modern' and 'bee' have shared many sentences written in Halverton; paragraph 2's records, including the directory count, are offered to prove that shared history."
+     }
+    ],
+    "evidence_sentence_ids": [
+     4,
+     5,
+     7,
+     8
+    ],
+    "devices_used": [],
+    "est_seconds": 60,
+    "key_index": 3,
+    "det": []
+   },
+   {
+    "skill": "3.B",
+    "topic": "U4.3",
+    "cognitive": "identify",
+    "stem": "Which of the following sentences from the passage most directly states the writer's central claim?",
+    "options": [
+     {
+      "text": "\"Bees have belonged to Halverton for longer than its sewers, its streetlights, or its council chamber.\"",
+      "is_key": true,
+      "label": "correct",
+      "why": "This sentence in the final paragraph directly answers the councilman's claim that opened the essay and gathers the whole historical narrative into one assertion about belonging."
+     },
+     {
+      "text": "\"The ban was less a response to danger than a tidying away of the past.\"",
+      "is_key": false,
+      "label": "too_narrow",
+      "why": "This explains the motive behind the 1923 ordinance specifically; it is a supporting claim about one episode rather than the overall argument about bees' place in the city."
+     },
+     {
+      "text": "\"Nothing had changed about the bees.\"",
+      "is_key": false,
+      "label": "too_narrow",
+      "why": "This short sentence sets up the explanation of the 1923 ban's true cause; it addresses one moment in the narrative, not the thesis as a whole."
+     },
+     {
+      "text": "\"The practice did not stay erased.\"",
+      "is_key": false,
+      "label": "wrong_function",
+      "why": "This is a transitional sentence that opens paragraph 5 and announces the revival narrative; it links sections rather than stating the argument's main point."
+     }
+    ],
+    "evidence_sentence_ids": [
+     4,
+     24,
+     25
+    ],
+    "devices_used": [],
+    "est_seconds": 55,
+    "key_index": 0,
+    "det": []
+   },
+   {
+    "skill": "5.A",
+    "topic": "U5.1",
+    "cognitive": "explain",
+    "stem": "Which of the following best describes the relationship between paragraph 3 and paragraph 4?",
+    "options": [
+     {
+      "text": "Paragraph 4 withdraws the interpretation of paragraph 3 by admitting that the injury to the boy made the ordinance a reasonable precaution",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The writer concedes the injury was real but explicitly argues the harm was not large enough to justify erasing the practice; the ordinance is not called reasonable."
+     },
+     {
+      "text": "Paragraph 4 supplies the archival evidence that the interpretation offered in paragraph 3 had asserted without documentation",
+      "is_key": false,
+      "label": "wrong_function",
+      "why": "Paragraph 4 does not add archival records; it reasons about proportion. The documentation (headline, ordinance, household count) is already in paragraph 3."
+     },
+     {
+      "text": "Paragraph 4 moves the narrative forward to a later decade in order to show the long-term consequences of the ordinance described in paragraph 3",
+      "is_key": false,
+      "label": "illogical_relationship",
+      "why": "Paragraph 4 stays with the 1923 episode and reasons about it; the move to later decades happens in paragraph 5."
+     },
+     {
+      "text": "Paragraph 4 acknowledges a legitimate objection to the interpretation in paragraph 3 and then reframes the issue from whether harm is possible to whether it is proportionate",
+      "is_key": true,
+      "label": "correct",
+      "why": "Paragraph 4 opens by refusing to 'pretend the worries were all invented,' grants the sting and the mother's anger, then uses the repeated 'The question was' sentences to shift the issue to the size of the harm relative to what was lost."
+     }
+    ],
+    "evidence_sentence_ids": [
+     14,
+     15,
+     16,
+     17,
+     18,
+     19
+    ],
+    "devices_used": [
+     "concession_and_rebuttal",
+     "repetition"
+    ],
+    "est_seconds": 70,
+    "key_index": 3,
+    "det": []
+   },
+   {
+    "skill": "5.B",
+    "topic": "U5.1",
+    "cognitive": "evaluate",
+    "stem": "In the context of the passage as a whole, the fifth paragraph most strengthens the writer's argument by",
+    "options": [
+     {
+      "text": "demonstrating that the practice survived and returned on its own, which undercuts the idea that hives are relics of an earlier era",
+      "is_key": true,
+      "label": "correct",
+      "why": "Lindqvist's hidden hive, the repeal, and the weed simile show the practice reviving across the city; this directly counters the 'thing left over from a slower century' framing and prepares the conclusion's claim that keepers 'are not relics.'"
+     },
+     {
+      "text": "introducing a new objection to beekeeping, raised by city inspectors, that the writer must answer before concluding",
+      "is_key": false,
+      "label": "wrong_function",
+      "why": "The inspectors are shown sympathizing with Lindqvist and declining to cite him; they raise no objection, and the paragraph answers nothing new."
+     },
+     {
+      "text": "recounting the writer's own experience of keeping hives on a rooftop, which lends personal credibility to the archival account",
+      "is_key": false,
+      "label": "unsupported",
+      "why": "The writer speaks only as an archivist; nothing in the passage indicates that she keeps bees herself."
+     },
+     {
+      "text": "bringing the historical narrative to its close and delivering the writer's final judgment on the councilman's assertion",
+      "is_key": false,
+      "label": "wrong_scope",
+      "why": "The final judgment on the councilman comes in paragraph 6, which returns to the hearing; paragraph 5 ends with photographs, not a verdict."
+     }
+    ],
+    "evidence_sentence_ids": [
+     13,
+     20,
+     21,
+     22,
+     23,
+     27
+    ],
+    "devices_used": [
+     "anecdote",
+     "simile"
+    ],
+    "est_seconds": 65,
+    "key_index": 0,
+    "det": []
+   },
+   {
+    "skill": "7.B",
+    "topic": "U7.3",
+    "cognitive": "explain",
+    "stem": "In the final paragraph, the writer begins two consecutive sentences with \"What they ask of us\" and \"What they offer in return.\" This parallel structure primarily serves to",
+    "options": [
+     {
+      "text": "set the modest requirements of bees against the larger return they provide, framing the exchange as plainly favorable to the city",
+      "is_key": true,
+      "label": "correct",
+      "why": "The matched openings invite direct comparison; the first sentence's colon lists only a roof, a water dish and patience, while the second expands into a reminder that the city is a living thing, making the trade appear obviously worthwhile."
+     },
+     {
+      "text": "present a list of hazards associated with hives before conceding that those hazards are outweighed by the honey they produce",
+      "is_key": false,
+      "label": "wrong_function",
+      "why": "The colon in the first sentence introduces simple needs, not hazards, and the return described is a reminder about the city's nature, not honey."
+     },
+     {
+      "text": "suggest that the demands bees make and the benefits they provide are roughly equal, so the city's choice is a matter of taste",
+      "is_key": false,
+      "label": "illogical_relationship",
+      "why": "The first sentence names a 'small' request and the second a much larger return; the balance of the structure highlights an imbalance in favor of keeping bees, not an even trade."
+     },
+     {
+      "text": "convey the writer's uncertainty about whether the benefits of beekeeping can be measured against its costs",
+      "is_key": false,
+      "label": "wrong_tone",
+      "why": "The paragraph is assertive throughout; the parallel sentences and the short closing line express confidence, not doubt."
+     }
+    ],
+    "evidence_sentence_ids": [
+     26,
+     27,
+     28
+    ],
+    "devices_used": [
+     "parallelism",
+     "dash_or_colon_emphasis"
+    ],
+    "est_seconds": 60,
+    "key_index": 0,
+    "det": []
+   }
+  ]
+ },
+ {
+  "spec": {
+   "id": "w31",
+   "kind": "writing",
+   "genre": "school-paper editorial draft",
+   "theme": "the quiet value of boredom",
+   "skills": [
+    "2.A",
+    "2.B",
+    "4.B",
+    "6.A",
+    "6.C",
+    "8.B"
+   ],
+   "seed": 85771
+  },
+  "set": {
+   "kind": "writing",
+   "blueprint": {
+    "purpose": "To persuade readers of the school paper, especially student council members, to vote against replacing the Tuesday quiet block with scheduled enrichment sessions",
+    "audience": "Students, teachers and student council members at Marlow Ridge High who read the school paper",
+    "claim": "The unstructured, sometimes boring quiet block has real value and should be kept",
+    "genre": "school-paper editorial draft",
+    "theme": "the quiet value of boredom",
+    "planned_flaws": [
+     {
+      "sentence_id": 4,
+      "flaw": "Vague thesis that takes no position and previews nothing",
+      "repair_type": "replace with arguable thesis that previews structure"
+     },
+     {
+      "sentence_id": 7,
+      "flaw": "Examples given with no commentary linking them to the claim",
+      "repair_type": "add commentary after sentence 7"
+     },
+     {
+      "sentence_id": 10,
+      "flaw": "Rebuttal asserted without development",
+      "repair_type": "add an analogy that advances the argument"
+     },
+     {
+      "sentence_id": 11,
+      "flaw": "Slangy, dismissive tone toward the council the writer is trying to persuade",
+      "repair_type": "revise for audience"
+     },
+     {
+      "sentence_id": 12,
+      "flaw": "Wordy, redundant sentence",
+      "repair_type": "revise for concision"
+     },
+     {
+      "sentence_id": 13,
+      "flaw": "Conclusion that ignores the upcoming vote and simply announces the end",
+      "repair_type": "replace closing sentence"
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "author_alias": "TheoRanganathan, junior",
+    "year_alias": 2026,
+    "venue_alias": "The Marlow Ridge Lantern (student newspaper)",
+    "note": "Original draft editorial written for practice"
+   },
+   "title": "Leave Tuesday Empty",
+   "paragraphs": [
+    [
+     "Every Tuesday at Marlow Ridge High, the twenty-five minutes after lunch belong to nobody.",
+     "There is no lesson and no club meeting, and phones stay in the gray caddies by the door.",
+     "Next month the student council will vote on whether to fill this \"quiet block\" with scheduled enrichment sessions.",
+     "Boredom is an interesting topic that people have many different opinions about."
+    ],
+    [
+     "Last spring I spent one quiet block staring at a water stain on the ceiling of Room 114.",
+     "By the end of it, I had sketched the plot of a short story that later won second place in the district writing contest.",
+     "My friend Dara Pell says she drafted half of her college essay during quiet blocks in October."
+    ],
+    [
+     "Supporters of the change argue that unstructured time is wasted time.",
+     "They point out that some students just sleep or doodle.",
+     "But sleeping and doodling are not necessarily failures.",
+     "Honestly, the council needs to chill out and not ruin the one good thing about Tuesdays."
+    ],
+    [
+     "The quiet block is something that is a period of time when students are able to think about things in a way that they choose themselves without being told what to think about.",
+     "So, that's my opinion on boredom."
+    ]
+   ],
+   "items": [
+    {
+     "skill": "2.A",
+     "topic": "U7.2",
+     "cognitive": "evaluate",
+     "stem": "The writer wants to replace sentence 13 with a closing sentence that returns to the upcoming vote and urges council members to keep the quiet block as it is. Which choice best accomplishes this goal?",
+     "options": [
+      {
+       "text": "When the council votes next month, I hope its members will leave those twenty-five empty minutes exactly as they are.",
+       "is_key": true,
+       "label": "correct",
+       "why": "Names the vote from sentence 3 and asks the council to keep the block unchanged, fitting the editorial's purpose."
+      },
+      {
+       "text": "People throughout history have complained about boredom, and they will probably keep complaining about it for centuries.",
+       "is_key": false,
+       "label": "too_broad",
+       "why": "Drifts to boredom in general and never mentions the vote or makes a request."
+      },
+      {
+       "text": "That water stain in Room 114 may never look the same to me, since it gave me my best story idea.",
+       "is_key": false,
+       "label": "too_narrow",
+       "why": "Revisits one anecdote rather than closing the argument or addressing the vote."
+      },
+      {
+       "text": "Perhaps the council could keep half of the block quiet and give the other half to enrichment sessions.",
+       "is_key": false,
+       "label": "reversal",
+       "why": "Proposes a compromise that partly accepts the change the writer opposes."
+      }
+     ],
+     "evidence_sentence_ids": [
+      3,
+      13
+     ],
+     "devices_used": [],
+     "est_seconds": 60
+    },
+    {
+     "skill": "2.B",
+     "topic": "U2.1",
+     "cognitive": "explain",
+     "stem": "The writer wants to revise sentence 11 so that it addresses student council members respectfully while still holding firm against the proposal. Which choice best accomplishes this goal?",
+     "options": [
+      {
+       "text": "I ask council members to weigh what students would lose before trading the week's only unscheduled stretch for one more schedule.",
+       "is_key": true,
+       "label": "correct",
+       "why": "Respectful toward the council, keeps the writer's opposition, and gives them a reason to reconsider."
+      },
+      {
+       "text": "Clearly the council has never had an original thought, so it is no surprise they want to schedule ours for us.",
+       "is_key": false,
+       "label": "wrong_tone",
+       "why": "Insults the very readers the writer must persuade."
+      },
+      {
+       "text": "Every single student at Marlow Ridge agrees with me, so council members have no choice but to vote the proposal down.",
+       "is_key": false,
+       "label": "unsupported",
+       "why": "Makes a sweeping claim the draft never supports and pressures rather than persuades."
+      },
+      {
+       "text": "Council members surely know best, so I will trust whatever schedule they decide on for our Tuesday afternoons.",
+       "is_key": false,
+       "label": "reversal",
+       "why": "Respectful but abandons the writer's position."
+      }
+     ],
+     "evidence_sentence_ids": [
+      3,
+      11
+     ],
+     "devices_used": [],
+     "est_seconds": 55
+    },
+    {
+     "skill": "4.B",
+     "topic": "U4.3",
+     "cognitive": "identify",
+     "stem": "The writer wants to replace sentence 4 with a thesis that takes a clear, arguable position and previews the editorial's two main points: student experiences of the block and a response to critics. Which choice best accomplishes this goal?",
+     "options": [
+      {
+       "text": "The council should keep the quiet block, because its boredom has sparked real student work and even its idle moments have value.",
+       "is_key": true,
+       "label": "correct",
+       "why": "States a debatable position and previews paragraph 2 (student work) and paragraph 3 (answering critics about idleness)."
+      },
+      {
+       "text": "The quiet block is a twenty-five-minute period that takes place every Tuesday after lunch at Marlow Ridge High.",
+       "is_key": false,
+       "label": "wrong_function",
+       "why": "States a fact, not an arguable claim, and previews nothing."
+      },
+      {
+       "text": "The council should keep the quiet block, because I personally like having a break in the middle of each Tuesday.",
+       "is_key": false,
+       "label": "partially_right",
+       "why": "Takes a position but rests on preference and does not preview the student examples or rebuttal."
+      },
+      {
+       "text": "The council should keep the quiet block, because enrichment sessions would cost money and require extra teacher training.",
+       "is_key": false,
+       "label": "wrong_scope",
+       "why": "Previews cost and staffing points the editorial never develops."
+      }
+     ],
+     "evidence_sentence_ids": [
+      4,
+      6,
+      7,
+      8,
+      10
+     ],
+     "devices_used": [],
+     "est_seconds": 60
+    },
+    {
+     "skill": "6.A",
+     "topic": "U3.2",
+     "cognitive": "explain",
+     "stem": "The writer wants to add a sentence after sentence 7 that explains how the two examples support the claim that unstructured boredom leads to meaningful work. Which choice best accomplishes this goal?",
+     "options": [
+      {
+       "text": "In both cases, having no assignment was not an obstacle; it was the reason our minds wandered toward something worth making.",
+       "is_key": true,
+       "label": "correct",
+       "why": "Links both examples to the claim by explaining that the empty time itself produced the work."
+      },
+      {
+       "text": "Dara's college essay was about her grandmother's bakery, and she later sent it to six different colleges.",
+       "is_key": false,
+       "label": "too_narrow",
+       "why": "Adds detail about one example without explaining how it supports the claim."
+      },
+      {
+       "text": "Scientists everywhere have proven that boredom makes every person far more creative than they would be otherwise.",
+       "is_key": false,
+       "label": "unsupported",
+       "why": "Invokes vague, overstated research instead of interpreting the writer's own evidence."
+      },
+      {
+       "text": "Both of us had planned to use quiet blocks for homework, but our assignments that week turned out to be short.",
+       "is_key": false,
+       "label": "illogical_relationship",
+       "why": "Suggests the work came from light homework, undercutting the link between boredom and creativity."
+      }
+     ],
+     "evidence_sentence_ids": [
+      5,
+      6,
+      7
+     ],
+     "devices_used": [],
+     "est_seconds": 55
+    },
+    {
+     "skill": "6.C",
+     "topic": "U3.4",
+     "cognitive": "identify",
+     "stem": "After sentence 10, the writer wants to add a comparison that supports the idea that time spent seeming idle can make later work possible. Which choice best accomplishes this goal?",
+     "options": [
+      {
+       "text": "A farmer who leaves a field unplanted for a season is not wasting it; she is letting the soil recover for the next harvest.",
+       "is_key": true,
+       "label": "correct",
+       "why": "Fallow-field comparison shows apparent idleness as preparation for later productivity."
+      },
+      {
+       "text": "A student who sleeps through a math lecture is being rude to a teacher who spent hours preparing the day's lesson.",
+       "is_key": false,
+       "label": "reversal",
+       "why": "Treats sleeping as a failure, supporting the critics rather than the writer."
+      },
+      {
+       "text": "The word boredom comes from an older English term, and its meaning has shifted a great deal over the centuries.",
+       "is_key": false,
+       "label": "wrong_function",
+       "why": "Offers word history, not a comparison, and does not advance the rebuttal."
+      },
+      {
+       "text": "A runner who skips every practice before a big race is likely to finish far behind runners who trained steadily.",
+       "is_key": false,
+       "label": "illogical_relationship",
+       "why": "Suggests inactivity leads to failure, the opposite of the writer's point."
+      }
+     ],
+     "evidence_sentence_ids": [
+      8,
+      9,
+      10
+     ],
+     "devices_used": [],
+     "est_seconds": 45
+    },
+    {
+     "skill": "8.B",
+     "topic": "U8.3",
+     "cognitive": "identify",
+     "stem": "The writer wants to revise sentence 12 so that it is as clear and concise as possible while keeping its meaning. Which choice best accomplishes this goal?",
+     "options": [
+      {
+       "text": "The quiet block gives students time to think about whatever they choose.",
+       "is_key": true,
+       "label": "correct",
+       "why": "Cuts the redundancy and keeps the original idea of freely chosen thinking."
+      },
+      {
+       "text": "The quiet block is a period of time in which students can think about things they themselves choose.",
+       "is_key": false,
+       "label": "partially_right",
+       "why": "Somewhat shorter but keeps the redundant \"period of time\" and \"themselves choose\" wording."
+      },
+      {
+       "text": "The quiet block gives students time to think about their schoolwork.",
+       "is_key": false,
+       "label": "lexical_trap",
+       "why": "Concise but changes the meaning by limiting thinking to schoolwork."
+      },
+      {
+       "text": "The quiet block, giving students time to think about whatever they choose.",
+       "is_key": false,
+       "label": "convention_error",
+       "why": "A sentence fragment with no main verb."
+      }
+     ],
+     "evidence_sentence_ids": [
+      12
+     ],
+     "devices_used": [],
+     "est_seconds": 40
+    }
+   ]
+  },
+  "setViolations": [],
+  "itemViolations": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ],
+  "items": [
+   {
+    "skill": "2.A",
+    "topic": "U7.2",
+    "cognitive": "evaluate",
+    "stem": "The writer wants to replace sentence 13 with a closing sentence that returns to the upcoming vote and urges council members to keep the quiet block as it is. Which choice best accomplishes this goal?",
+    "options": [
+     {
+      "text": "Perhaps the council could keep half of the block quiet and give the other half to enrichment sessions.",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Proposes a compromise that partly accepts the change the writer opposes."
+     },
+     {
+      "text": "That water stain in Room 114 may never look the same to me, since it gave me my best story idea.",
+      "is_key": false,
+      "label": "too_narrow",
+      "why": "Revisits one anecdote rather than closing the argument or addressing the vote."
+     },
+     {
+      "text": "People throughout history have complained about boredom, and they will probably keep complaining about it for centuries.",
+      "is_key": false,
+      "label": "too_broad",
+      "why": "Drifts to boredom in general and never mentions the vote or makes a request."
+     },
+     {
+      "text": "When the council votes next month, I hope its members will leave those twenty-five empty minutes exactly as they are.",
+      "is_key": true,
+      "label": "correct",
+      "why": "Names the vote from sentence 3 and asks the council to keep the block unchanged, fitting the editorial's purpose."
+     }
+    ],
+    "evidence_sentence_ids": [
+     3,
+     13
+    ],
+    "devices_used": [],
+    "est_seconds": 60,
+    "key_index": 3,
+    "det": []
+   },
+   {
+    "skill": "2.B",
+    "topic": "U2.1",
+    "cognitive": "explain",
+    "stem": "The writer wants to revise sentence 11 so that it addresses student council members respectfully while still holding firm against the proposal. Which choice best accomplishes this goal?",
+    "options": [
+     {
+      "text": "Every single student at Marlow Ridge agrees with me, so council members have no choice but to vote the proposal down.",
+      "is_key": false,
+      "label": "unsupported",
+      "why": "Makes a sweeping claim the draft never supports and pressures rather than persuades."
+     },
+     {
+      "text": "Council members surely know best, so I will trust whatever schedule they decide on for our Tuesday afternoons.",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Respectful but abandons the writer's position."
+     },
+     {
+      "text": "Clearly the council has never had an original thought, so it is no surprise they want to schedule ours for us.",
+      "is_key": false,
+      "label": "wrong_tone",
+      "why": "Insults the very readers the writer must persuade."
+     },
+     {
+      "text": "I ask council members to weigh what students would lose before trading the week's only unscheduled stretch for one more schedule.",
+      "is_key": true,
+      "label": "correct",
+      "why": "Respectful toward the council, keeps the writer's opposition, and gives them a reason to reconsider."
+     }
+    ],
+    "evidence_sentence_ids": [
+     3,
+     11
+    ],
+    "devices_used": [],
+    "est_seconds": 55,
+    "key_index": 3,
+    "det": []
+   },
+   {
+    "skill": "4.B",
+    "topic": "U4.3",
+    "cognitive": "identify",
+    "stem": "The writer wants to replace sentence 4 with a thesis that takes a clear, arguable position and previews the editorial's two main points: student experiences of the block and a response to critics. Which choice best accomplishes this goal?",
+    "options": [
+     {
+      "text": "The council should keep the quiet block, because enrichment sessions would cost money and require extra teacher training.",
+      "is_key": false,
+      "label": "wrong_scope",
+      "why": "Previews cost and staffing points the editorial never develops."
+     },
+     {
+      "text": "The council should keep the quiet block, because its boredom has sparked real student work and even its idle moments have value.",
+      "is_key": true,
+      "label": "correct",
+      "why": "States a debatable position and previews paragraph 2 (student work) and paragraph 3 (answering critics about idleness)."
+     },
+     {
+      "text": "The council should keep the quiet block, because I personally like having a break in the middle of each Tuesday.",
+      "is_key": false,
+      "label": "partially_right",
+      "why": "Takes a position but rests on preference and does not preview the student examples or rebuttal."
+     },
+     {
+      "text": "The quiet block is a twenty-five-minute period that takes place every Tuesday after lunch at Marlow Ridge High.",
+      "is_key": false,
+      "label": "wrong_function",
+      "why": "States a fact, not an arguable claim, and previews nothing."
+     }
+    ],
+    "evidence_sentence_ids": [
+     4,
+     6,
+     7,
+     8,
+     10
+    ],
+    "devices_used": [],
+    "est_seconds": 60,
+    "key_index": 1,
+    "det": []
+   },
+   {
+    "skill": "6.A",
+    "topic": "U3.2",
+    "cognitive": "explain",
+    "stem": "The writer wants to add a sentence after sentence 7 that explains how the two examples support the claim that unstructured boredom leads to meaningful work. Which choice best accomplishes this goal?",
+    "options": [
+     {
+      "text": "Scientists everywhere have proven that boredom makes every person far more creative than they would be otherwise.",
+      "is_key": false,
+      "label": "unsupported",
+      "why": "Invokes vague, overstated research instead of interpreting the writer's own evidence."
+     },
+     {
+      "text": "Both of us had planned to use quiet blocks for homework, but our assignments that week turned out to be short.",
+      "is_key": false,
+      "label": "illogical_relationship",
+      "why": "Suggests the work came from light homework, undercutting the link between boredom and creativity."
+     },
+     {
+      "text": "In both cases, having no assignment was not an obstacle; it was the reason our minds wandered toward something worth making.",
+      "is_key": true,
+      "label": "correct",
+      "why": "Links both examples to the claim by explaining that the empty time itself produced the work."
+     },
+     {
+      "text": "Dara's college essay was about her grandmother's bakery, and she later sent it to six different colleges.",
+      "is_key": false,
+      "label": "too_narrow",
+      "why": "Adds detail about one example without explaining how it supports the claim."
+     }
+    ],
+    "evidence_sentence_ids": [
+     5,
+     6,
+     7
+    ],
+    "devices_used": [],
+    "est_seconds": 55,
+    "key_index": 2,
+    "det": []
+   },
+   {
+    "skill": "6.C",
+    "topic": "U3.4",
+    "cognitive": "identify",
+    "stem": "After sentence 10, the writer wants to add a comparison that supports the idea that time spent seeming idle can make later work possible. Which choice best accomplishes this goal?",
+    "options": [
+     {
+      "text": "A runner who skips every practice before a big race is likely to finish far behind runners who trained steadily.",
+      "is_key": false,
+      "label": "illogical_relationship",
+      "why": "Suggests inactivity leads to failure, the opposite of the writer's point."
+     },
+     {
+      "text": "A farmer who leaves a field unplanted for a season is not wasting it; she is letting the soil recover for the next harvest.",
+      "is_key": true,
+      "label": "correct",
+      "why": "Fallow-field comparison shows apparent idleness as preparation for later productivity."
+     },
+     {
+      "text": "The word boredom comes from an older English term, and its meaning has shifted a great deal over the centuries.",
+      "is_key": false,
+      "label": "wrong_function",
+      "why": "Offers word history, not a comparison, and does not advance the rebuttal."
+     },
+     {
+      "text": "A student who sleeps through a math lecture is being rude to a teacher who spent hours preparing the day's lesson.",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Treats sleeping as a failure, supporting the critics rather than the writer."
+     }
+    ],
+    "evidence_sentence_ids": [
+     8,
+     9,
+     10
+    ],
+    "devices_used": [],
+    "est_seconds": 45,
+    "key_index": 1,
+    "det": []
+   },
+   {
+    "skill": "8.B",
+    "topic": "U8.3",
+    "cognitive": "identify",
+    "stem": "The writer wants to revise sentence 12 so that it is as clear and concise as possible while keeping its meaning. Which choice best accomplishes this goal?",
+    "options": [
+     {
+      "text": "The quiet block gives students time to think about their schoolwork.",
+      "is_key": false,
+      "label": "lexical_trap",
+      "why": "Concise but changes the meaning by limiting thinking to schoolwork."
+     },
+     {
+      "text": "The quiet block, giving students time to think about whatever they choose.",
+      "is_key": false,
+      "label": "convention_error",
+      "why": "A sentence fragment with no main verb."
+     },
+     {
+      "text": "The quiet block gives students time to think about whatever they choose.",
+      "is_key": true,
+      "label": "correct",
+      "why": "Cuts the redundancy and keeps the original idea of freely chosen thinking."
+     },
+     {
+      "text": "The quiet block is a period of time in which students can think about things they themselves choose.",
+      "is_key": false,
+      "label": "partially_right",
+      "why": "Somewhat shorter but keeps the redundant \"period of time\" and \"themselves choose\" wording."
+     }
+    ],
+    "evidence_sentence_ids": [
+     12
+    ],
+    "devices_used": [],
+    "est_seconds": 40,
+    "key_index": 2,
+    "det": []
+   }
+  ]
+ },
+ {
+  "spec": {
+   "id": "w32",
+   "kind": "writing",
+   "genre": "local newspaper column draft",
+   "theme": "community radio in the streaming age",
+   "skills": [
+    "2.A",
+    "4.C",
+    "4.C",
+    "6.C",
+    "8.A",
+    "8.C"
+   ],
+   "seed": 61190
+  },
+  "set": {
+   "kind": "writing",
+   "blueprint": {
+    "purpose": "To persuade local readers to donate during the community radio station's fortieth-anniversary pledge drive",
+    "audience": "General readers of a small-town weekly newspaper, many of them longtime residents and listeners",
+    "claim": "Harrow Bend should support Riverbend Community Radio because it serves the town in ways streaming services cannot.",
+    "genre": "local newspaper column draft",
+    "theme": "community radio in the streaming age",
+    "planned_flaws": [
+     {
+      "sentence_id": 1,
+      "flaw": "Vague, generic opening",
+      "repair_type": "introduction revision"
+     },
+     {
+      "sentence_id": 7,
+      "flaw": "Overstated claim that every person was listening",
+      "repair_type": "qualify with modifier"
+     },
+     {
+      "sentence_id": 8,
+      "flaw": "Absolute dismissal of algorithms",
+      "repair_type": "acknowledge alternative perspective"
+     },
+     {
+      "sentence_id": 12,
+      "flaw": "Claim about ordinary people lacks an example",
+      "repair_type": "add example"
+     },
+     {
+      "sentence_id": 11,
+      "flaw": "Mocking, flippant tone undercuts appeal",
+      "repair_type": "tone revision"
+     },
+     {
+      "sentence_id": 13,
+      "flaw": "Comma splice",
+      "repair_type": "punctuation"
+     },
+     {
+      "sentence_id": 14,
+      "flaw": "Flat conclusion that does not call readers to act",
+      "repair_type": "conclusion revision"
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "author_alias": "Delia Marchetti",
+    "year_alias": 2026,
+    "venue_alias": "Harrow Bend Ledger",
+    "note": "Fictional column draft"
+   },
+   "title": "Forty Years on 89.7",
+   "paragraphs": [
+    [
+     "Radio is a thing that many people have listened to over the years.",
+     "This Saturday, Riverbend Community Radio turns forty, and its volunteers will spend the weekend asking listeners for enough money to replace a transmitter older than most of its DJs.",
+     "I think the town should give generously, because the little station on Kettle Street does something no streaming app can do."
+    ],
+    [
+     "Streaming services know what I like, but they do not know where I live.",
+     "When the Oxbow River flooded in March, it was 89.7 FM that told us which roads were closed and which church basement had dry cots.",
+     "Volunteer Hal Pruitt stayed on the air for nineteen hours, reading messages from neighbors looking for lost dogs and elderly parents.",
+     "Every single person in Harrow Bend was listening that night.",
+     "No algorithm will ever do anything useful for a small town."
+    ],
+    [
+     "The station is also a kind of town square.",
+     "On Tuesday nights, high school students host a show about their marching band's season, and on Sunday mornings retired farmers argue about rainfall totals.",
+     "The station's budget is pathetic, and frankly the fact that it survives at all is kind of a joke.",
+     "Yet it does survive, because ordinary people keep it going."
+    ],
+    [
+     "The pledge drive runs from 6 a.m. Saturday until midnight Sunday, a donation of 25 dollars keeps the station on the air for about an hour.",
+     "So, that's my opinion on radio."
+    ]
+   ],
+   "items": [
+    {
+     "skill": "2.A",
+     "topic": "U4.2",
+     "cognitive": "evaluate",
+     "stem": "The writer wants to replace sentence 14 with a closing sentence that urges readers to donate and returns to the contrast introduced in sentence 4. Which choice best accomplishes this goal?",
+     "options": [
+      {
+       "text": "Your playlist will keep guessing what you like; this weekend, pledge to the one station that knows where you live.",
+       "is_key": true,
+       "label": "correct",
+       "why": "Calls readers to pledge and echoes the like/live contrast from sentence 4."
+      },
+      {
+       "text": "Radio has changed a great deal in forty years, and it will surely keep changing in the decades ahead.",
+       "is_key": false,
+       "label": "too_broad",
+       "why": "Generic reflection on radio; no call to donate and no link to sentence 4."
+      },
+      {
+       "text": "Hal Pruitt's nineteen hours on the air during the flood deserve a plaque in the station lobby.",
+       "is_key": false,
+       "label": "too_narrow",
+       "why": "Focuses on one volunteer rather than urging donations or returning to the streaming contrast."
+      },
+      {
+       "text": "Streaming apps offer millions of songs, so perhaps local radio has simply had its day here.",
+       "is_key": false,
+       "label": "reversal",
+       "why": "Undercuts the column's argument instead of urging support."
+      }
+     ],
+     "evidence_sentence_ids": [
+      4,
+      13,
+      14
+     ],
+     "devices_used": [],
+     "est_seconds": 70
+    },
+    {
+     "skill": "4.C",
+     "topic": "U7.2",
+     "cognitive": "explain",
+     "stem": "The writer wants to revise sentence 7 so that it no longer overstates the station's audience but still suggests how widely the broadcast was heard. Which revision best accomplishes this goal?",
+     "options": [
+      {
+       "text": "Judging by the calls the station logged, hundreds of households in Harrow Bend were listening that night.",
+       "is_key": true,
+       "label": "correct",
+       "why": "Replaces the absolute claim with a qualified, evidence-based estimate that still shows wide reach."
+      },
+      {
+       "text": "Absolutely everyone in Harrow Bend, without exception, had the station on that night.",
+       "is_key": false,
+       "label": "reversal",
+       "why": "Intensifies the overstatement rather than qualifying it."
+      },
+      {
+       "text": "A few people in Harrow Bend may have had their radios turned on that night.",
+       "is_key": false,
+       "label": "partially_right",
+       "why": "Qualifies the claim but abandons the sense of wide reach the writer wants."
+      },
+      {
+       "text": "Some people in Harrow Bend prefer podcasts to the radio on most ordinary nights.",
+       "is_key": false,
+       "label": "wrong_scope",
+       "why": "Shifts to listening habits generally, not the flood-night audience."
+      }
+     ],
+     "evidence_sentence_ids": [
+      6,
+      7
+     ],
+     "devices_used": [],
+     "est_seconds": 60
+    },
+    {
+     "skill": "4.C",
+     "topic": "U9.2",
+     "cognitive": "explain",
+     "stem": "The writer wants to revise sentence 8 to acknowledge what streaming services do well while maintaining the paragraph's point about local service. Which revision best accomplishes this goal?",
+     "options": [
+      {
+       "text": "An algorithm may be good at finding me a new song, but no algorithm found my neighbor a dry cot.",
+       "is_key": true,
+       "label": "correct",
+       "why": "Concedes a real strength of streaming, then reasserts the station's local value using the flood detail."
+      },
+      {
+       "text": "Algorithms are useless, and anyone who relies on them is ignoring what really matters in life.",
+       "is_key": false,
+       "label": "wrong_tone",
+       "why": "Remains absolute and adds a dismissive jab; acknowledges nothing."
+      },
+      {
+       "text": "Algorithms are better than radio in nearly every way, including during floods and emergencies.",
+       "is_key": false,
+       "label": "reversal",
+       "why": "Concedes so much it contradicts the paragraph's point."
+      },
+      {
+       "text": "Many streaming companies were founded in the past two decades by large technology firms.",
+       "is_key": false,
+       "label": "wrong_function",
+       "why": "Offers off-topic background instead of a concession tied to local service."
+      }
+     ],
+     "evidence_sentence_ids": [
+      4,
+      5,
+      8
+     ],
+     "devices_used": [],
+     "est_seconds": 60
+    },
+    {
+     "skill": "6.C",
+     "topic": "U4.4",
+     "cognitive": "identify",
+     "stem": "The writer wants to add a sentence after sentence 12 that gives a specific example supporting the claim that ordinary people keep the station going. Which choice best accomplishes this goal?",
+     "options": [
+      {
+       "text": "Last winter, when the roof leaked, a local roofer patched it for free and the bakery next door paid for shingles.",
+       "is_key": true,
+       "label": "correct",
+       "why": "Concrete example of ordinary residents sustaining the station."
+      },
+      {
+       "text": "Many community stations across the country face similar money troubles in the streaming era.",
+       "is_key": false,
+       "label": "too_broad",
+       "why": "Generalizes nationally; gives no example of local people keeping this station alive."
+      },
+      {
+       "text": "The transmitter that needs replacing was installed when the station first went on the air.",
+       "is_key": false,
+       "label": "wrong_scope",
+       "why": "Repeats the transmitter detail and does not show people sustaining the station."
+      },
+      {
+       "text": "Ordinary people are the backbone of the station, and without them it truly could not survive.",
+       "is_key": false,
+       "label": "unsupported",
+       "why": "Restates the claim without any specific example."
+      }
+     ],
+     "evidence_sentence_ids": [
+      11,
+      12
+     ],
+     "devices_used": [],
+     "est_seconds": 50
+    },
+    {
+     "skill": "8.A",
+     "topic": "U8.3",
+     "cognitive": "identify",
+     "stem": "The writer wants to revise sentence 11 so that it conveys a sincere, admiring tone suited to readers being asked to donate. Which choice best accomplishes this goal?",
+     "options": [
+      {
+       "text": "The station runs on a budget smaller than the high school band's, which makes its survival close to remarkable.",
+       "is_key": true,
+       "label": "correct",
+       "why": "Respectful and admiring; sets up 'Yet it does survive' and keeps the local detail."
+      },
+      {
+       "text": "The station's budget is a total disaster, and honestly it's a miracle the thing hasn't collapsed already.",
+       "is_key": false,
+       "label": "wrong_tone",
+       "why": "Still flippant and disparaging, discouraging donors."
+      },
+      {
+       "text": "Fiscal resources allocated to the station remain suboptimal relative to its operational requirements.",
+       "is_key": false,
+       "label": "wrong_tone",
+       "why": "Stiff bureaucratic jargon, not sincere or warm for newspaper readers."
+      },
+      {
+       "text": "The station is very well funded and has never had much trouble paying its bills on time.",
+       "is_key": false,
+       "label": "reversal",
+       "why": "Contradicts the need for the pledge drive and makes sentence 12 illogical."
+      }
+     ],
+     "evidence_sentence_ids": [
+      11,
+      12
+     ],
+     "devices_used": [],
+     "est_seconds": 45
+    },
+    {
+     "skill": "8.C",
+     "topic": "U7.5",
+     "cognitive": "identify",
+     "stem": "The writer wants to correct the punctuation error in sentence 13. Which revision of the underlined portion, \"midnight Sunday, a donation,\" correctly joins the two independent clauses?",
+     "options": [
+      {
+       "text": "midnight Sunday; a donation",
+       "is_key": true,
+       "label": "correct",
+       "why": "A semicolon correctly joins two independent clauses, fixing the comma splice."
+      },
+      {
+       "text": "midnight Sunday a donation",
+       "is_key": false,
+       "label": "convention_error",
+       "why": "Creates a run-on sentence with no punctuation between clauses."
+      },
+      {
+       "text": "midnight Sunday, and, a donation",
+       "is_key": false,
+       "label": "convention_error",
+       "why": "The comma after 'and' is incorrect and interrupts the clause."
+      },
+      {
+       "text": "midnight Sunday, because a donation",
+       "is_key": false,
+       "label": "illogical_relationship",
+       "why": "Grammatical, but falsely claims the schedule exists because of the donation rate."
+      }
+     ],
+     "evidence_sentence_ids": [
+      13
+     ],
+     "devices_used": [],
+     "est_seconds": 35
+    }
+   ]
+  },
+  "setViolations": [
+   "key_is_longest_in_5_of_6"
+  ],
+  "itemViolations": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ],
+  "items": [
+   {
+    "skill": "2.A",
+    "topic": "U4.2",
+    "cognitive": "evaluate",
+    "stem": "The writer wants to replace sentence 14 with a closing sentence that urges readers to donate and returns to the contrast introduced in sentence 4. Which choice best accomplishes this goal?",
+    "options": [
+     {
+      "text": "Your playlist will keep guessing what you like; this weekend, pledge to the one station that knows where you live.",
+      "is_key": true,
+      "label": "correct",
+      "why": "Calls readers to pledge and echoes the like/live contrast from sentence 4."
+     },
+     {
+      "text": "Radio has changed a great deal in forty years, and it will surely keep changing in the decades ahead.",
+      "is_key": false,
+      "label": "too_broad",
+      "why": "Generic reflection on radio; no call to donate and no link to sentence 4."
+     },
+     {
+      "text": "Streaming apps offer millions of songs, so perhaps local radio has simply had its day here.",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Undercuts the column's argument instead of urging support."
+     },
+     {
+      "text": "Hal Pruitt's nineteen hours on the air during the flood deserve a plaque in the station lobby.",
+      "is_key": false,
+      "label": "too_narrow",
+      "why": "Focuses on one volunteer rather than urging donations or returning to the streaming contrast."
+     }
+    ],
+    "evidence_sentence_ids": [
+     4,
+     13,
+     14
+    ],
+    "devices_used": [],
+    "est_seconds": 70,
+    "key_index": 0,
+    "det": []
+   },
+   {
+    "skill": "4.C",
+    "topic": "U7.2",
+    "cognitive": "explain",
+    "stem": "The writer wants to revise sentence 7 so that it no longer overstates the station's audience but still suggests how widely the broadcast was heard. Which revision best accomplishes this goal?",
+    "options": [
+     {
+      "text": "Some people in Harrow Bend prefer podcasts to the radio on most ordinary nights.",
+      "is_key": false,
+      "label": "wrong_scope",
+      "why": "Shifts to listening habits generally, not the flood-night audience."
+     },
+     {
+      "text": "Judging by the calls the station logged, hundreds of households in Harrow Bend were listening that night.",
+      "is_key": true,
+      "label": "correct",
+      "why": "Replaces the absolute claim with a qualified, evidence-based estimate that still shows wide reach."
+     },
+     {
+      "text": "Absolutely everyone in Harrow Bend, without exception, had the station on that night.",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Intensifies the overstatement rather than qualifying it."
+     },
+     {
+      "text": "A few people in Harrow Bend may have had their radios turned on that night.",
+      "is_key": false,
+      "label": "partially_right",
+      "why": "Qualifies the claim but abandons the sense of wide reach the writer wants."
+     }
+    ],
+    "evidence_sentence_ids": [
+     6,
+     7
+    ],
+    "devices_used": [],
+    "est_seconds": 60,
+    "key_index": 1,
+    "det": []
+   },
+   {
+    "skill": "4.C",
+    "topic": "U9.2",
+    "cognitive": "explain",
+    "stem": "The writer wants to revise sentence 8 to acknowledge what streaming services do well while maintaining the paragraph's point about local service. Which revision best accomplishes this goal?",
+    "options": [
+     {
+      "text": "Algorithms are useless, and anyone who relies on them is ignoring what really matters in life.",
+      "is_key": false,
+      "label": "wrong_tone",
+      "why": "Remains absolute and adds a dismissive jab; acknowledges nothing."
+     },
+     {
+      "text": "An algorithm may be good at finding me a new song, but no algorithm found my neighbor a dry cot.",
+      "is_key": true,
+      "label": "correct",
+      "why": "Concedes a real strength of streaming, then reasserts the station's local value using the flood detail."
+     },
+     {
+      "text": "Many streaming companies were founded in the past two decades by large technology firms.",
+      "is_key": false,
+      "label": "wrong_function",
+      "why": "Offers off-topic background instead of a concession tied to local service."
+     },
+     {
+      "text": "Algorithms are better than radio in nearly every way, including during floods and emergencies.",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Concedes so much it contradicts the paragraph's point."
+     }
+    ],
+    "evidence_sentence_ids": [
+     4,
+     5,
+     8
+    ],
+    "devices_used": [],
+    "est_seconds": 60,
+    "key_index": 1,
+    "det": []
+   },
+   {
+    "skill": "6.C",
+    "topic": "U4.4",
+    "cognitive": "identify",
+    "stem": "The writer wants to add a sentence after sentence 12 that gives a specific example supporting the claim that ordinary people keep the station going. Which choice best accomplishes this goal?",
+    "options": [
+     {
+      "text": "Ordinary people are the backbone of the station, and without them it truly could not survive.",
+      "is_key": false,
+      "label": "unsupported",
+      "why": "Restates the claim without any specific example."
+     },
+     {
+      "text": "Many community stations across the country face similar money troubles in the streaming era.",
+      "is_key": false,
+      "label": "too_broad",
+      "why": "Generalizes nationally; gives no example of local people keeping this station alive."
+     },
+     {
+      "text": "Last winter, when the roof leaked, a local roofer patched it for free and the bakery next door paid for shingles.",
+      "is_key": true,
+      "label": "correct",
+      "why": "Concrete example of ordinary residents sustaining the station."
+     },
+     {
+      "text": "The transmitter that needs replacing was installed when the station first went on the air.",
+      "is_key": false,
+      "label": "wrong_scope",
+      "why": "Repeats the transmitter detail and does not show people sustaining the station."
+     }
+    ],
+    "evidence_sentence_ids": [
+     11,
+     12
+    ],
+    "devices_used": [],
+    "est_seconds": 50,
+    "key_index": 2,
+    "det": []
+   },
+   {
+    "skill": "8.A",
+    "topic": "U8.3",
+    "cognitive": "identify",
+    "stem": "The writer wants to revise sentence 11 so that it conveys a sincere, admiring tone suited to readers being asked to donate. Which choice best accomplishes this goal?",
+    "options": [
+     {
+      "text": "The station's budget is a total disaster, and honestly it's a miracle the thing hasn't collapsed already.",
+      "is_key": false,
+      "label": "wrong_tone",
+      "why": "Still flippant and disparaging, discouraging donors."
+     },
+     {
+      "text": "The station runs on a budget smaller than the high school band's, which makes its survival close to remarkable.",
+      "is_key": true,
+      "label": "correct",
+      "why": "Respectful and admiring; sets up 'Yet it does survive' and keeps the local detail."
+     },
+     {
+      "text": "The station is very well funded and has never had much trouble paying its bills on time.",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Contradicts the need for the pledge drive and makes sentence 12 illogical."
+     },
+     {
+      "text": "Fiscal resources allocated to the station remain suboptimal relative to its operational requirements.",
+      "is_key": false,
+      "label": "wrong_tone",
+      "why": "Stiff bureaucratic jargon, not sincere or warm for newspaper readers."
+     }
+    ],
+    "evidence_sentence_ids": [
+     11,
+     12
+    ],
+    "devices_used": [],
+    "est_seconds": 45,
+    "key_index": 1,
+    "det": []
+   },
+   {
+    "skill": "8.C",
+    "topic": "U7.5",
+    "cognitive": "identify",
+    "stem": "The writer wants to correct the punctuation error in sentence 13. Which revision of the underlined portion, \"midnight Sunday, a donation,\" correctly joins the two independent clauses?",
+    "options": [
+     {
+      "text": "midnight Sunday, because a donation",
+      "is_key": false,
+      "label": "illogical_relationship",
+      "why": "Grammatical, but falsely claims the schedule exists because of the donation rate."
+     },
+     {
+      "text": "midnight Sunday a donation",
+      "is_key": false,
+      "label": "convention_error",
+      "why": "Creates a run-on sentence with no punctuation between clauses."
+     },
+     {
+      "text": "midnight Sunday, and, a donation",
+      "is_key": false,
+      "label": "convention_error",
+      "why": "The comma after 'and' is incorrect and interrupts the clause."
+     },
+     {
+      "text": "midnight Sunday; a donation",
+      "is_key": true,
+      "label": "correct",
+      "why": "A semicolon correctly joins two independent clauses, fixing the comma splice."
+     }
+    ],
+    "evidence_sentence_ids": [
+     13
+    ],
+    "devices_used": [],
+    "est_seconds": 35,
+    "key_index": 3,
+    "det": []
+   }
+  ]
+ }
+]
