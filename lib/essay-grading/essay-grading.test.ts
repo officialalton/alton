@@ -166,3 +166,19 @@ describe("context parsing", () => {
     expect(parseEssayContext(null, "a")).toBeNull();
   });
 });
+
+import { toEssayPayload } from "./payload";
+describe("toEssayPayload (English FRQ stock → 채점 맥락)", () => {
+  const stock = { parts: [{ label: "A", prompt: "Write an argument." }], el_frq: { prompt: "Task", sources: [{ id: "s1", title: "T", body: "Body" }], samples: [{ tier: "high", essay: "E1", annotations: { a: 1 } }, { tier: "mid", essay: "E2" }, { tier: "low", essay: "E3" }] } };
+  it("출처·샘플·파트를 채점 맥락으로 옮긴다", () => {
+    const ctx = parseEssayContext(toEssayPayload(stock), "A");
+    expect(ctx?.taskPrompt).toBe("Write an argument.");
+    expect(ctx?.sources).toEqual([{ id: "s1", title: "T", body: "Body" }]);
+    expect(ctx?.anchors.map((a) => a.tier)).toEqual(["high", "mid", "low"]);
+    expect(ctx?.anchors[0].text).toBe("E1");
+  });
+  it("el_frq 가 없으면 null(채점 건너뜀)", () => {
+    expect(toEssayPayload({ parts: [] })).toBeNull();
+    expect(toEssayPayload(null)).toBeNull();
+  });
+});
