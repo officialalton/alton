@@ -50,6 +50,24 @@ def summary():
             "two_exams_pessimistic": exams(2, p_mc=MC_PASS[0], usd_frq=FRQ_USD_RANGE[1]), "two_exams_optimistic": exams(2, p_mc=MC_PASS[2], usd_frq=FRQ_USD_RANGE[0])}
 
 
+BASE_CUMULATIVE = 80.04   # 2026-10-13 오너 결정 시점의 누적(ledger-total 기준 약 80.04). 유료 CS A 단계 전에 ledger-total.ts 로 다시 계산한다.
+STOP_LINE = 95.0          # 오너 결정(2026-10-13): 중단선 95, 상한 100
+HARD_CAP = 100.0
+# 단계: (구성 이름, 종류, 칸 수 가중(세트 = 2), 칸당 후보, 상한 $). 칸 수는 csa_p0_stages.py 목록에서 온다(테스트가 구성 파일과 대조).
+PAID_STEPS = [("csa-p1-a", "mc", 22, 2, 2.0), ("csa-p1-b", "frq", 4, 2, 0.9), ("csa-s2-mc-a", "mc", 22, 2, 2.3), ("csa-s2-mc-b", "mc", 23, 2, 2.3), ("csa-s2-mc-c", "mc", 25, 2, 2.3),
+              ("csa-s2-frq-a", "frq", 6, 2, 1.1), ("csa-s2-frq-b", "frq", 6, 2, 1.1), ("csa-s2-short-mc", "mc", 10, 3, 1.4), ("csa-s2-short-frq", "frq", 2, 3, 0.5)]
+
+
+def paid_plan(reserve=1.15):
+    """단계별 기대 비용·상한과 누적 최악(모든 상한을 다 쓴다고 가정)·기대 합계. 부족분 칸 수(10 MC, 2 FRQ)는 계획 가정이다 — 실제 값은 cs-assign 보고서가 정한다."""
+    rows, cum, exp = [], BASE_CUMULATIVE, 0.0
+    for name, kind, w, cands, cap in PAID_STEPS:
+        e = round(w * cands * (MC_USD if kind == "mc" else FRQ_USD), 2)
+        cum = round(cum + cap, 2); exp += e
+        rows.append({"step": name, "kind": kind, "cells_weighted": w, "cands": cands, "expected": e, "cap": cap, "cumulative_if_all_caps_used": cum, "hard_stop": round(cum + 0.1, 2)})
+    return {"steps": rows, "expected_total": round(exp, 2), "expected_with_reserve": round(exp * reserve, 2), "caps_total": round(sum(r["cap"] for r in rows), 2), "worst_case_cumulative": cum, "stop_line": STOP_LINE, "headroom_to_stop_line": round(STOP_LINE - cum, 2)}
+
+
 if __name__ == "__main__":
     import json
     print(json.dumps(summary(), indent=1))

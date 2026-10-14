@@ -18,7 +18,9 @@ TOPICS = {t["code"] for u in curriculum["units"] for t in u["topics"]}
 SEEDS = int(os.environ.get("CSA_SEEDS", 2))
 # 학생에게 보이는 코드가 곧 실행된 문장인 원형(문장 모드): 화면 코드를 다시 실행해 키와 대조한다
 STATEMENT_MODE = ["cs_int_division_expr", "cs_casting_range", "cs_compound_assign", "cs_string_methods", "cs_math_class", "cs_while_trace", "cs_nested_loops_count", "cs_arraylist_ops", "cs_array_traverse",
-                  "cs_arraylist_remove_loop", "cs_2d_traverse", "cs_binary_search", "cs_selection_sort_pass", "cs_if_nesting"]
+                  "cs_arraylist_remove_loop", "cs_2d_traverse", "cs_binary_search", "cs_selection_sort_pass", "cs_if_nesting",
+                  # 2026-10-13 두 번째 풀 모의고사용 새 구조(csa_p0_e·f): 화면 코드가 곧 실행 문장인 것
+                  "cs_assign_swap_bug", "cs_string_concat_prec", "cs_char_arith", "cs_int_overflow", "cs_string_equals_compare", "cs_for_iter_count", "cs_boolean_expr_trace", "cs_else_if_chain", "cs_nested_triangle", "cs_halving_count", "cs_scope_trace", "cs_arraylist_insert_remove"]
 
 
 def items(pack):
@@ -105,8 +107,8 @@ class TestIndependentPath(unittest.TestCase):
 @unittest.skipUnless(J.java_available(), "JDK not available")
 class TestMcArchetypes(unittest.TestCase):
     def test_library_size(self):
-        self.assertGreaterEqual(len(MC), 40)
-        self.assertEqual(len(SETS), 2)
+        self.assertGreaterEqual(len(MC), 80)  # 2026-10-13: 두 번 풀 모의고사(겹침 0)용으로 약 34개 구조 추가
+        self.assertEqual(len(SETS), 4)
 
     def test_deterministic(self):
         for n in MC + SETS:
@@ -205,7 +207,7 @@ class TestMcArchetypes(unittest.TestCase):
 @unittest.skipUnless(J.java_available(), "JDK not available")
 class TestFrq(unittest.TestCase):
     def test_four_official_types(self):
-        want = {"q1": 2, "q2": 2, "q3": 2, "q4": 2}
+        want = {"q1": 4, "q2": 4, "q3": 4, "q4": 4}  # 유형마다 시나리오 4개: 파일럿 1 + 풀 모의고사 2회 + 보충 1
         got = {}
         for n in FRQ:
             p = packs(n, 1)[0]
@@ -234,9 +236,9 @@ class TestFrq(unittest.TestCase):
                     self.assertIsNone(re.search(r"[ㄱ-ㆎ가-힣]", code))
 
     def test_part_split_matches_official_shape(self):
-        q1 = packs("csf_methods_pass", 1)[0]
-        self.assertEqual([x["points"] for x in q1["parts"]], [4, 5])
-        for n in ("csf_class_steps", "csf_list_above", "csf_2d_best_row"):
+        for n in ("csf_methods_pass", "csf_methods_leap", "csf_methods_digits"):
+            self.assertEqual([x["points"] for x in packs(n, 1)[0]["parts"]], [4, 5])
+        for n in ("csf_class_steps", "csf_list_above", "csf_2d_best_row", "csf_class_scoreboard", "csf_class_stock", "csf_list_runs", "csf_list_remove_short", "csf_2d_border", "csf_2d_transpose"):
             self.assertEqual([x["points"] for x in packs(n, 1)[0]["parts"]], [9])
 
     def test_model_answers_compile(self):
@@ -255,6 +257,122 @@ class TestFrq(unittest.TestCase):
             texts = [p["stimulus"]["description"]] + [x["prompt"] for x in p["parts"]] + [x["model_answer"] for x in p["parts"]]
             for t in texts:
                 self.assertIsNone(bad.search(t), (n, t[:60]))
+
+
+@unittest.skipUnless(J.java_available(), "JDK not available")
+class TestTwoExams(unittest.TestCase):
+    """2026-10-13: 서로 겹치지 않는 풀 모의고사 두 회(MC 42 + FRQ 4)를 한 라이브러리에서 공식 범위 안에 조립할 수 있다."""
+    NEW_MODULES = ("csa_p0_e", "csa_p0_f")
+
+    def test_two_disjoint_42_sets_inside_official_ranges(self):
+        tags = C.tags_from_registry()
+        ok, sel, why = C.assemble_two_check(tags)
+        self.assertTrue(ok, why)
+        a, b = sel
+        self.assertFalse(set(a) & set(b), "구조(원형)는 두 회에서 겹치지 않아야 한다")
+        for exam in sel:
+            self.assertEqual(sum(len(tags[x]) for x in exam), C.MC_N)
+            unit = {u: sum(1 for x in exam for uu, _ in tags[x] if uu == u) for u in "1234"}
+            prac = {p: sum(1 for x in exam for _, s in tags[x] if s[0] == p) for p in "12345"}
+            for u, rng_ in C.UNIT_MC.items():
+                lo, hi = C.count_bounds(rng_); self.assertTrue(lo <= unit[u] <= hi, (u, unit[u], lo, hi))
+            for p, rng_ in C.PRACTICE_MC.items():
+                lo, hi = C.count_bounds(rng_); self.assertTrue(lo <= prac[p] <= hi, (p, prac[p], lo, hi))
+            skills = {s for x in exam for _, s in tags[x]}
+            self.assertTrue(set(C.CODE_SKILLS) <= skills, set(C.CODE_SKILLS) - skills)
+
+    def test_survives_the_loss_of_any_two_archetypes(self):
+        """검수에서 구조 두 개가 통째로 반려돼도(첫 통과율 60~75%) 두 회 조립이 계속 가능하다 — 마진 확인."""
+        import itertools
+        tags = C.tags_from_registry()
+        names = sorted(tags)
+        for x in names:
+            self.assertTrue(C.assemble_two_check({k: v for k, v in tags.items() if k != x})[0], x)
+        bad = [(x, y) for x, y in itertools.combinations(names, 2) if not C.assemble_two_check({k: v for k, v in tags.items() if k not in (x, y)})[0]]
+        self.assertEqual(bad, [])
+
+    def test_new_archetype_count(self):
+        new = [n for n in MC + SETS if R.CSA[n][0].__module__ in self.NEW_MODULES]
+        self.assertGreaterEqual(len(new), 30)
+        for n in new:
+            for pack in packs(n, 1):
+                for q in items(pack):
+                    with self.subTest(n):
+                        mis = [o["why"] for i, o in enumerate(q["options"]) if i != q["key_index"]]
+                        self.assertEqual(len(set(mis)), 3)  # 오답 세 개는 서로 다른 이름 붙은 오개념
+                        self.assertTrue(q["blueprint"]["misconceptions"])
+
+    def test_eight_distinct_new_frq_scenarios_two_per_type(self):
+        extra = R.CSA_STAGES["csa_frq_extra"]
+        self.assertEqual(len(extra), 8)
+        per = {}
+        for n in extra:
+            p = packs(n, 1)[0]
+            per.setdefault(p["template"], []).append(p["stimulus"]["description"])
+        self.assertEqual({k: len(v) for k, v in per.items()}, {"q1": 2, "q2": 2, "q3": 2, "q4": 2})
+        old = [packs(n, 1)[0]["stimulus"]["description"] for n in R.CSA_STAGES["csa_p1_frq"] + R.CSA_STAGES["csa_frq_alt"]]
+        allp = old + [d for v in per.values() for d in v]
+        self.assertEqual(len(set(allp)), len(allp), "시나리오 지문이 서로 달라야 한다")
+        # 두 회가 유형마다 서로 다른 시나리오를 쓴다: 유형당 파일럿 외 3개 이상
+        count = {}
+        for n in R.CSA_STAGES["csa_frq"]:
+            t = packs(n, 1)[0]["template"]; count[t] = count.get(t, 0) + 1
+        self.assertTrue(all(v >= 4 for v in count.values()), count)
+
+
+class TestPaidRunPlan(unittest.TestCase):
+    """유료 실행 단계 목록(csa_p0_stages.py)이 파일럿과 함께 라이브러리 전체를 겹침·누락 없이 덮는다."""
+
+    def test_mc_batches_plus_pilot_cover_the_whole_library_once(self):
+        pilot = R.CSA_STAGES["csa_p1_a"]
+        batches = [R.CSA_STAGES[f"csa_s2_mc_{x}"] for x in "abc"]
+        allx = pilot + [n for b in batches for n in b]
+        self.assertEqual(len(allx), len(set(allx)), "배치끼리 원형이 겹친다")
+        self.assertEqual(sorted(allx), sorted(MC + SETS))
+        for b in batches:
+            self.assertTrue(20 <= len(b) <= 26, len(b))
+
+    def test_frq_batches_plus_pilot_cover_all_scenarios_with_three_per_type_pair_per_batch(self):
+        pilot = R.CSA_STAGES["csa_p1_frq"]
+        a, b = R.CSA_STAGES["csa_s2_frq_a"], R.CSA_STAGES["csa_s2_frq_b"]
+        allx = pilot + a + b
+        self.assertEqual(sorted(allx), sorted(FRQ)); self.assertEqual(len(allx), len(set(allx)))
+        tmpl = lambda names: sorted(packs(n, 1)[0]["template"] for n in names)  # noqa: E731
+        self.assertEqual(tmpl(a), ["q1", "q1", "q1", "q2", "q2", "q2"]); self.assertEqual(tmpl(b), ["q3", "q3", "q3", "q4", "q4", "q4"])
+
+    def test_shortfall_lists_start_empty_until_the_assign_report_names_the_missing_cells(self):
+        self.assertEqual(R.CSA_STAGES.get("csa_s2_short_mc", []), []); self.assertEqual(R.CSA_STAGES.get("csa_s2_short_frq", []), [])
+
+
+class TestPaidRunPlanConfigs(unittest.TestCase):
+    """config/ap-frozen/csa-*.template.json 은 미동결 템플릿이다: 해시 placeholder, 비용 상한 합이 중단선 이내, 목록 이름이 레지스트리에 있다."""
+    CFG = os.path.join(HERE, "../../../config/ap-frozen")
+
+    def test_templates_are_unfrozen_and_inside_the_budget(self):
+        import csa_cost as K
+        plan = K.paid_plan()
+        self.assertLessEqual(plan["worst_case_cumulative"], K.STOP_LINE)
+        self.assertLessEqual(plan["expected_with_reserve"], 12.8)
+        for row in plan["steps"]:
+            cfg = json.load(open(os.path.join(self.CFG, row["step"] + ".template.json")))
+            self.assertEqual(cfg["expected"]["generatorHash"], "UNFROZEN"); self.assertEqual(cfg["expected"]["reviewerPromptHash"], "UNFROZEN")
+            self.assertEqual(cfg["capUsd"], row["cap"]); self.assertAlmostEqual(cfg["hardStopCumulativeUsd"], row["hard_stop"], places=2)
+            self.assertLessEqual(cfg["hardStopCumulativeUsd"], K.STOP_LINE)
+            self.assertEqual(cfg["subject"], "ap_computer_science_a"); self.assertEqual(cfg["run"], row["step"]); self.assertFalse(cfg["repair"])
+            self.assertIn("perCellCapUsd", cfg["_budget_estimate"]); self.assertIn("perCellUsd", cfg["_budget_estimate"])
+            self.assertIn(cfg["archetypeList"], R.CSA_STAGES)
+            if not row["step"].startswith("csa-s2-short"):
+                cells = len(R.CSA_STAGES[cfg["archetypeList"]]); weighted = cells + sum(1 for n in R.CSA_STAGES[cfg["archetypeList"]] if n.startswith("css_"))
+                self.assertEqual(weighted if row["kind"] == "mc" else cells, row["cells_weighted"], row["step"])
+        seeds = [json.load(open(os.path.join(self.CFG, r["step"] + ".template.json")))["seed0"] for r in plan["steps"]]
+        self.assertEqual(len(seeds), len(set(seeds)))
+        hs = [r["hard_stop"] for r in plan["steps"]]
+        self.assertEqual(hs, sorted(hs))
+
+    def test_no_frozen_copy_exists_yet(self):
+        # 동결·실행은 오너 승인 뒤: .v1.json 사본이 생기면 이 테스트가 알려 준다
+        frozen = [f for f in os.listdir(self.CFG) if f.startswith("csa-") and not f.endswith(".template.json")]
+        self.assertEqual(frozen, [])
 
 
 class TestPilotAndCost(unittest.TestCase):

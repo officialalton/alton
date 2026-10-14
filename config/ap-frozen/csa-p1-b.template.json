@@ -4,8 +4,8 @@
  "subject": "ap_computer_science_a",
  "archetypeList": "csa_p1_frq",
  "seed0": 8200,
- "candidatesPerCell": 1,
- "capUsd": 1.0,
+ "candidatesPerCell": 2,
+ "capUsd": 0.9,
  "repair": false,
  "env": {
   "AP_REQUIRE_BLUEPRINT": "1",
@@ -38,7 +38,7 @@
  "skipStages": [
   "gen"
  ],
- "hardStopCumulativeUsd": 88.3,
+ "hardStopCumulativeUsd": 83.04,
  "expected": {
   "generatorHash": "UNFROZEN",
   "reviewerPromptHash": "UNFROZEN",
@@ -59,14 +59,16 @@
    "repair": false
   }
  },
- "_template": "TEMPLATE, NOT FROZEN (2026-10-13, docs/ap/csa-groundwork.md section 8). Do not run as is: expected hashes are placeholders so --check-only fails on purpose. To use: copy to <name>.v1.json, run `--freeze`, commit, then --check-only, and only then the paid run after the owner approves the budget. hardStopCumulativeUsd assumes cumulative 85.0 plus the P1-a cap 2.2 plus this cap 1.0 plus a 0.1 margin; recompute from `ledger-total.ts` before freezing.",
+ "_template": "TEMPLATE, NOT FROZEN (2026-10-13, docs/ap/csa-groundwork.md section 8). Do not run as is: expected hashes are placeholders so --check-only fails on purpose. To use: copy to <name>.v1.json, run `npx tsx scripts/ap-generation/run-frozen.ts --config <copy> --freeze`, commit, then --check-only, and only then the paid run after the owner approves the step. hardStopCumulativeUsd = 80.04 cumulative at the start of the CS A work + the caps of this and every earlier step in the plan (82.94) + a 0.1 margin, assuming every earlier cap is fully used; recompute from `ledger-total.ts` before freezing. Budget stop line 95 USD, hard cap 100 USD (owner decision 2026-10-13).",
  "_budget_estimate": {
-  "cells": "4 FRQ cells x 2 candidates: Q1 PasswordCheck (4+5), Q2 StepTracker (9), Q3 DataTools.aboveAverage (9), Q4 GridStats.bestRow (9); 36 points. The reference, an independent alternative and 3-5 wrong solutions were already compiled and run offline against the stored self-check tests",
-  "perCellUsd": "0.07 per FRQ candidate (assumption: Physics observed 0.05-0.06 with 4 parts; the Opus solver writes full Java, range 0.05-0.10)",
-  "expectedUsd": "0.56 (range 0.4-0.8) = 4 cells x 2 candidates x 0.07",
-  "capUsd": 1.0,
-  "passRateAssumption": "about 45% first pass (Physics and Chemistry FRQ). Stop if fewer than 1 of 4 passes.",
-  "runAfter": "P1-a, only if its first pass is at least 45%"
+  "step": "pilot FRQ: one scenario per type (Q1..Q4), 2 candidates per cell",
+  "cells": "4 cells: csf_methods_pass, csf_class_steps, csf_list_above, csf_2d_best_row",
+  "perCellUsd": "0.14 expected per cell = 2 candidates x 0.07 (assumption 0.07 per FRQ candidate; Physics/Chemistry observed 0.05-0.06, the Opus solver writes full Java, range 0.05-0.10)",
+  "perCellCapUsd": 0.21,
+  "expectedUsd": "0.56 = 4 single-question equivalents (4 cells; a two-question set counts as 2) x 0.14",
+  "capUsd": 0.9,
+  "passRateAssumption": "MC first pass 60-75% (Physics 52%, Chemistry 76%, Micro in range; code-verified keys should sit in the upper half); FRQ first pass about 45-55% Stop this step if the first-pass rate is below 40 percent.",
+  "cumulativeAfterStepIfAllCapsUsed": 82.94
  },
  "_java": "The generator executes every item with a real JDK (scripts/ap-generation/archetypes/csa_java.py). Record `java -version` (OpenJDK 21.0.x, /opt/homebrew/opt/openjdk@21) in the freeze commit message; a different JDK major version is a different generator. Results are content-addressed and deterministic."
 }

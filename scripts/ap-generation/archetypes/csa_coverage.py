@@ -72,3 +72,45 @@ def pilot_cells(n=22):
     for u in sorted(raw, key=lambda k: raw[k] - base[k], reverse=True)[: n - sum(base.values())]:
         base[u] += 1
     return base
+
+
+SET_PER_EXAM = (1, 3)  # 우리 구성(공식 세트 수는 미공표): 풀 모의고사 한 회의 2문항 세트는 0~3개
+
+
+def assemble_two_check(tags, n=MC_N, require_all_skills=True, sets_per_exam=SET_PER_EXAM):
+    """서로 겹치지 않는 풀 모의고사 두 회(각 n문항)를 같은 라이브러리에서 조립할 수 있는지(정수계획): 원형(구조)은 두 시험을 통틀어 최대 한 번, 각 회는 공식 단원·Practice 범위를 지키고
+    (require_all_skills 면) 코드 검증 가능한 스킬이 회마다 하나 이상 나오며, 2문항 세트는 회마다 sets_per_exam 범위. 반환: (feasible, [첫 회 원형, 둘째 회 원형] 또는 None, 사유)."""
+    ids = sorted(tags)
+    A = len(ids)
+    rows, lo, hi = [], [], []
+
+    def add(coefs, l, h):
+        rows.append(coefs); lo.append(l); hi.append(h)
+
+    def zeros():
+        return [0.0] * (2 * A)
+
+    def exam_row(e, f):
+        r = zeros()
+        for i, a in enumerate(ids):
+            r[e * A + i] = f(tags[a])
+        return r
+    for i in range(A):  # 원형은 두 시험에서 합쳐 한 번만
+        r = zeros(); r[i] = 1; r[A + i] = 1
+        add(r, 0, 1)
+    for e in (0, 1):
+        add(exam_row(e, len), n, n)
+        for u, rng_ in UNIT_MC.items():
+            l, h = count_bounds(rng_, n)
+            add(exam_row(e, lambda t, u=u: sum(1 for uu, _ in t if uu == u)), l, h)
+        for pr, rng_ in PRACTICE_MC.items():
+            l, h = count_bounds(rng_, n)
+            add(exam_row(e, lambda t, pr=pr: sum(1 for _, s in t if s[0] == pr)), l, h)
+        if require_all_skills:
+            for sk in CODE_SKILLS:
+                add(exam_row(e, lambda t, sk=sk: sum(1 for _, s in t if s == sk)), 1, 2 * A)
+        add(exam_row(e, lambda t: 1 if len(t) > 1 else 0), sets_per_exam[0], sets_per_exam[1])
+    res = milp(c=np.zeros(2 * A), constraints=LinearConstraint(np.array(rows, dtype=float), lo, hi), integrality=np.ones(2 * A), bounds=Bounds(0, 1))
+    if not res.success:
+        return False, None, res.message
+    return True, [[a for i, a in enumerate(ids) if res.x[e * A + i] > 0.5] for e in (0, 1)], "ok"

@@ -1,0 +1,74 @@
+{
+ "version": "v1-csa-s2-frq-b",
+ "run": "csa-s2-frq-b",
+ "subject": "ap_computer_science_a",
+ "archetypeList": "csa_s2_frq_b",
+ "seed0": 8410,
+ "candidatesPerCell": 2,
+ "capUsd": 1.1,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "2",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts",
+  "lib/ap-generation/subjects/csa.ts",
+  "lib/ap-generation/subjects/csa-archetypes.json"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 92.14,
+ "expected": {
+  "generatorHash": "UNFROZEN",
+  "reviewerPromptHash": "UNFROZEN",
+  "difficultyPromptHash": "UNFROZEN",
+  "parserHash": "UNFROZEN",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ },
+ "_template": "TEMPLATE, NOT FROZEN (2026-10-13, docs/ap/csa-groundwork.md section 8). Do not run as is: expected hashes are placeholders so --check-only fails on purpose. To use: copy to <name>.v1.json, run `npx tsx scripts/ap-generation/run-frozen.ts --config <copy> --freeze`, commit, then --check-only, and only then the paid run after the owner approves the step. hardStopCumulativeUsd = 80.04 cumulative at the start of the CS A work + the caps of this and every earlier step in the plan (92.04) + a 0.1 margin, assuming every earlier cap is fully used; recompute from `ledger-total.ts` before freezing. Budget stop line 95 USD, hard cap 100 USD (owner decision 2026-10-13).",
+ "_budget_estimate": {
+  "step": "FRQ scenarios beyond the pilot, Q3 and Q4 (3 + 3)",
+  "cells": "6 cells: csf_list_reviews, csf_list_runs, csf_list_remove_short, csf_2d_shift, csf_2d_border, csf_2d_transpose",
+  "perCellUsd": "0.14 expected per cell = 2 candidates x 0.07 (assumption 0.07 per FRQ candidate; Physics/Chemistry observed 0.05-0.06, the Opus solver writes full Java, range 0.05-0.10)",
+  "perCellCapUsd": 0.21,
+  "expectedUsd": "0.84 = 6 single-question equivalents (6 cells; a two-question set counts as 2) x 0.14",
+  "capUsd": 1.1,
+  "passRateAssumption": "MC first pass 60-75% (Physics 52%, Chemistry 76%, Micro in range; code-verified keys should sit in the upper half); FRQ first pass about 45-55% Stop this step if the first-pass rate is below 40 percent.",
+  "cumulativeAfterStepIfAllCapsUsed": 92.04
+ },
+ "_java": "The generator executes every item with a real JDK (scripts/ap-generation/archetypes/csa_java.py). Record `java -version` (OpenJDK 21.0.x, /opt/homebrew/opt/openjdk@21) in the freeze commit message; a different JDK major version is a different generator. Results are content-addressed and deterministic."
+}
