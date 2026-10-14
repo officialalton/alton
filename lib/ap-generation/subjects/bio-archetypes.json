@@ -3270,6 +3270,171 @@
   ]
  },
  {
+  "id": "bi_z_bag_percent_change",
+  "topic": "2.7",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "final/initial ratios vs the generating percent changes"
+  ],
+  "misconceptions": [
+   "The number is the change in mass in grams, not the percent of the starting mass.",
+   "Bag D lost mass, so its change is a decrease and not an increase.",
+   "Bag B gained the most mass in grams (4.0 g), but its percent increase is not the greatest."
+  ]
+ },
+ {
+  "id": "bi_z_beet_leakage",
+  "topic": "2.4",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "corrected ratios vs the generating leakage fractions"
+  ],
+  "misconceptions": [
+   "The corrected absorbance is not a percent; it must be divided by the corrected absorbance of the boiled sample and multiplied by 100.",
+   "The values are reversed: leakage is lower at the lower temperature.",
+   "This does not subtract the absorbance of the water blank from the readings before comparing them with the boiled sample."
+  ]
+ },
+ {
+  "id": "bi_z_biomagnification",
+  "topic": "8.7",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "trophic level by trophic level update vs a closed-form product"
+  ],
+  "misconceptions": [
+   "This leaves out the concentration of the substance in the producers, which is the concentration in the water multiplied by the factor for the producers.",
+   "This applies the increase from one trophic level to the next only twice; there are three transfers from the producers to the tertiary consumers.",
+   "The substance becomes more concentrated at each trophic level by a factor, so the increases are multiplied and not added."
+  ]
+ },
+ {
+  "id": "bi_z_cell_growth_supply",
+  "topic": "2.2",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct surface-area and volume formulas at both radii vs the ratio 3j/(kr)"
+  ],
+  "misconceptions": [
+   "The surface area of a sphere increases with the square of the radius, so doubling the radius increases the surface area four-fold and not two-fold.",
+   "The volume of a sphere increases with the cube of the radius, so doubling the radius increases the volume eight-fold and not two-fold.",
+   "The surface area to volume ratio decreases as the radius increases, so the fraction of demand that uptake can supply decreases."
+  ]
+ },
+ {
+  "id": "bi_z_cell_volume_osmolarity",
+  "topic": "2.7",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "solute-conservation volume calculation vs ratio of osmolarities"
+  ],
+  "misconceptions": [
+   "The final volume is the ratio of the cell osmolarity to the solution osmolarity, which is a multiple of the original volume and not an increase of that amount.",
+   "A red blood cell bursts when its volume exceeds 1.5 times the original volume; 1.50 is below this value.",
+   "The solution has a lower solute concentration than the cell, so water moves into the cell, and the cell swells."
+  ]
+ },
+ {
+  "id": "bi_z_dna_content_counts",
+  "topic": "4.5",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "percent of each class computed from exact fractions vs the generating percents"
+  ],
+  "misconceptions": [
+   "This reverses the control and treated groups.",
+   "The counts must be divided by the total number of cells before percents are compared, and the percent did not necessarily double.",
+   "The percent of cells in S phase did not change; the largest changes are in the cells with 2C and 4C of DNA."
+  ]
+ },
+ {
+  "id": "bi_z_dna_sample_prediction",
+  "topic": "1.6",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "Chargaff equalities per sample then maximum G+C among double-stranded samples vs the generating GC percents"
+  ],
+  "misconceptions": [
+   "All three DNA samples have equal amounts of A and T and of G and C, so this feature does not distinguish them.",
+   "This sample has uracil and unequal amounts of A and U and of G and C, so it is single-stranded RNA and has no second strand to separate.",
+   "A-T pairs have two hydrogen bonds, fewer than the three of G-C pairs, so a sample rich in A-T pairs separates at a lower temperature."
+  ]
+ },
+ {
+  "id": "bi_z_gene_order",
+  "topic": "5.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "test of each gene as the middle gene (distances add) vs the generating order"
+  ],
+  "misconceptions": [
+   "The distance between the outer genes is the sum of the two shorter distances and not their difference.",
+   "The two genes with the largest recombination frequency (A and B) are the outer genes, so C is in the middle and not A.",
+   "The largest recombination frequency is between A and B, which places them at the two ends and C between them."
+  ]
+ },
+ {
+  "id": "bi_z_p53_predict",
+  "topic": "4.6",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "cell-by-cell count vs the product of fractions"
+  ],
+  "misconceptions": [
+   "Gives the number of damaged cells that would enter S phase in a culture with a functioning checkpoint.",
+   "Uses the percent of damaged cells that are stopped by the mutant checkpoint instead of the percent that continue.",
+   "Leaves out the percent of cells with damaged DNA and applies the checkpoint to all cells in the culture."
+  ]
+ },
+ {
+  "id": "bi_z_pcr_cycles_predict",
+  "topic": "6.8",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "cycle-by-cycle update vs a product of two powers"
+  ],
+  "misconceptions": [
+   "Leaves out the first cycles at full efficiency.",
+   "Doubles the number of copies in every cycle, including the cycles at lower efficiency.",
+   "Multiplies the copies by the efficiency instead of by one plus the efficiency in the last cycles."
+  ]
+ },
+ {
+  "id": "bi_z_stage_time_claim",
+  "topic": "4.5",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions of the cycle time vs the generating counts"
+  ],
+  "misconceptions": [
+   "These times are ten times too large; a stage occupying a small fraction of the cells uses only that fraction of the cell cycle time.",
+   "A larger fraction of cells in a stage means that cells spend more time in that stage, if the total cycle length is unchanged.",
+   "Anaphase is shorter because fewer cells reach it from the blocked metaphase, which does not mean that the cycle is faster; the largest change is the accumulation of cells in metaphase."
+  ]
+ },
+ {
   "id": "bis_cell_cycle_set_q1",
   "topic": "4.6",
   "skill": "4.B",
