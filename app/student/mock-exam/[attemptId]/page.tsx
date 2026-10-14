@@ -11,6 +11,7 @@ import ApExamTakeClient from "./ApExamTakeClient";
 import ApExamResultView from "./ApExamResultView";
 import { apFrqIsPaper } from "@/lib/ap-exam/frq-delivery";
 import type { FrqInkRow } from "@/lib/ap-exam/frq-ink";
+import type { MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 
 // 고정형 SAT 모의고사 V1 — 독립 진입점(사양 4절 "학생 포털의 독립 모의고사 탭에서도 재개").
 // 수업 화면 안 진입(세션 탭)은 이번 패스에서 배선하지 않았다(최종 보고 "미완료" 참고) — 이
@@ -36,32 +37,31 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
   // 보였다 — 결과 화면에만 명시적 뒤로가기를 붙인다.
   const isGraded = attempt.status === "graded";
   // 2026-10-05 무료 회원 S4 — 채점된 결과 상단에만 "Talk with a tutor" 링크(무료 회원 한정, +1 RPC). UI 본문은 건드리지 않는다.
-  const showTutoringCta = isGraded && !hasFeature(await loadStudentFeatureAccess(supabase, user.id).catch(() => []), "class");
-
+  // 2026-10-13 결과 화면 지연 점검 — 아래 부가 조회들은 서로 결과를 쓰지 않으므로 순차로 기다리지 않고 한 번에 보낸다(왕복 수 절감).
   // 재응시: 회차가 둘 이상일 때만 요약 목록을 한 번 더 읽어 Attempt 1 | Attempt 2 전환을 만든다.
-  const attempts = isGraded && (attempt.attemptTotal ?? 1) > 1
-    ? (await loadStudentMockExamAttempts(supabase, user.id).catch(() => [])).filter((a) => a.setGroupId === attempt.setGroupId)
-    : undefined;
+  const attemptsP: Promise<MockExamAttemptSummary[] | undefined> = isGraded && (attempt.attemptTotal ?? 1) > 1
+    ? loadStudentMockExamAttempts(supabase, user.id).catch(() => []).then((l) => l.filter((a) => a.setGroupId === attempt.setGroupId))
+    : Promise.resolve(undefined);
 
   // AP 모의고사: 같은 엔진, AP 전용 응시·결과 화면(영어 UI).
   if (attempt.examProgram === "ap") {
     // 결과 화면 "Topics to review"에 코드와 함께 보일 토픽 이름(과목 키워드). 못 읽으면 코드만 보인다.
-    let topicNames: Record<string, string> | undefined;
-    if (isGraded && attempt.apSubject) {
+    const topicNamesP: Promise<Record<string, string> | undefined> = (async () => {
+      if (!isGraded || !attempt.apSubject) return undefined;
       try {
         const { data: subj } = await supabase.from("subjects").select("id").eq("ap_subject_code", attempt.apSubject).maybeSingle();
-        if (subj) {
-          const { data: kws } = await supabase.from("subject_keywords").select("content_code, label").eq("subject_id", subj.id).not("content_code", "is", null).not("content_code", "like", "%#%");
-          topicNames = Object.fromEntries((kws ?? []).map((k) => [k.content_code as string, k.label as string]));
-        }
-      } catch { /* 이름 없이 코드만 */ }
-    }
+        if (!subj) return undefined;
+        const { data: kws } = await supabase.from("subject_keywords").select("content_code, label").eq("subject_id", subj.id).not("content_code", "is", null).not("content_code", "like", "%#%");
+        return Object.fromEntries((kws ?? []).map((k) => [k.content_code as string, k.label as string]));
+      } catch { return undefined; /* 이름 없이 코드만 */ }
+    })();
     // 종이 FRQ 과목의 손글씨 미리보기(RPC 1회, 획 제외). 재응시·지난 응시도 attemptId 별로 그대로 읽는다.
-    let handwriting: FrqInkRow[] = [];
-    if (isGraded && apFrqIsPaper(attempt.apSubject)) {
+    const handwritingP: Promise<FrqInkRow[]> = (async () => {
+      if (!isGraded || !apFrqIsPaper(attempt.apSubject)) return [];
       const { data } = await supabase.rpc("load_mock_exam_frq_handwriting", { p_attempt_id: attemptId, p_with_strokes: false });
-      if (Array.isArray(data)) handwriting = data as FrqInkRow[];
-    }
+      return Array.isArray(data) ? (data as FrqInkRow[]) : [];
+    })();
+    const [topicNames, handwriting, attempts] = await Promise.all([topicNamesP, handwritingP, attemptsP]);
     // w-full: body 가 flex-col 이라 mx-auto 만 있으면 main 이 내용 최소폭(문항 번호 줄 796px)까지 늘어나 모바일에서 가로 스크롤·번호 버튼 클릭 불가가 됐다(2026-10-09 화면 점검에서 발견). *
     // 응시 중에는 SAT 응시 화면처럼 전체 화면 레이아웃(자체 위 막대에 제목·타이머가 있다). 결과는 기존 카드형 페이지.
     if (!isGraded) return <ApExamTakeClient attempt={attempt} />;
@@ -92,6 +92,10 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
     );
   }
 
+  const featureP: Promise<boolean> = isGraded
+    ? loadStudentFeatureAccess(supabase, user.id).catch(() => []).then((f) => !hasFeature(f, "class"))
+    : Promise.resolve(false);
+  const [showTutoringCta, attempts] = await Promise.all([featureP, attemptsP]);
   return (
     <main className={`mx-auto px-4 py-6 ${isGraded ? "max-w-6xl" : "max-w-4xl"}`}>
       {isGraded && (

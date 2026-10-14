@@ -117,6 +117,19 @@ describe("ApExamResultView", () => {
     expect(screen.getByTestId("ap-badge")).toHaveTextContent("Practice Set");
     expect(screen.queryByText(/Full Practice Exam/)).toBeNull();
   });
+  it("2026-10-13 긴 결과: IntersectionObserver 가 있으면 앞 4문항만 본문을 그리고 나머지는 자리표시(번호·정오 줄은 항상 보임)", () => {
+    vi.stubGlobal("IntersectionObserver", class { observe() {} disconnect() {} });
+    try {
+      const many = base(Array.from({ length: 10 }, (_, i) => item(`m${i}`, "ap_mc_a", { response: "1", correct: true, correctIndex: 1, explanation: `Why ${i}` })), { status: "graded" });
+      render(<ApExamResultView attempt={many} />);
+      expect(screen.getAllByTestId("ap-review-item")).toHaveLength(10);
+      expect(screen.getAllByTestId("ap-explanation")).toHaveLength(4);
+      expect(screen.getAllByTestId("lazy-placeholder")).toHaveLength(6);
+      expect(screen.getByText(/Question 10/)).toBeInTheDocument();
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
   it("Missed 필터는 틀린 MC 만 보인다", () => {
     render(<ApExamResultView attempt={graded} />);
     fireEvent.click(screen.getByRole("tab", { name: "Missed" }));
