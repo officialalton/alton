@@ -5,6 +5,7 @@
 import { checkFigure } from "../problem-figures/check";
 import { gateCandidate, optionText, type ApCandidateLike, type GateResult } from "../ap-figures/gate";
 import { autoMathExplanation } from "./explanation-math";
+import { escapeCurrencyDollars } from "../currency-dollars";
 
 type Json = Record<string, unknown>;
 export type ApPurpose = "mock_exam" | "lesson";
@@ -69,15 +70,20 @@ const numTokens =(t: string) => t.match(/\d+(?:\.\d+)?/g) ?? [];
  */
 export function frqLostSetup(c: ApCandidateLike, gate: GateResult, desc: string): string | null {
   const d = desc.trim();
-  if (c.kind !== "frq_bundle" || !gate.spec || gate.stimKind === "text" || !d || NO_STIM.test(d)) return null;
+  const isMc = c.kind === "mc";
+  if ((c.kind !== "frq_bundle" && !isMc) || !gate.spec || gate.stimKind === "text" || !d || NO_STIM.test(d)) return null;
+  // MC(라운드 4, 2026-10-14): 한 줄 그림 캡션("… at 25 °C")은 문항 풀이에 필요하지 않아 그대로 둔다. 캡션 뒤에 조건 문장이 더 있는 설명("… public good. The marginal cost of each unit is $26.")만 대상이다.
+  if (isMc && !/[.!?]\s+\S/.test(d)) return null;
   const parts = Array.isArray(c.payload.parts) ? (c.payload.parts as Json[]) : [];
-  const shown = [String(c.payload.title ?? ""), ...parts.map((x) => String(x.prompt ?? "")), ...specStrings(gate.spec)].join("\n");
+  const mcItems = Array.isArray(c.payload.items) ? (c.payload.items as Json[]) : [c.payload as Json];
+  const mcText = mcItems.flatMap((it) => [String(it.stem ?? ""), ...(Array.isArray(it.options) ? (it.options as unknown[]).map(optionText) : [])]);
+  const shown = [String(c.payload.title ?? ""), ...parts.map((x) => String(x.prompt ?? "")), ...mcText, ...specStrings(gate.spec)].join("\n");
   const norm = (t: string) => t.replace(/[$\\]/g, "").replace(/\s+/g, " ").trim(); // 그림 notes 는 정규화 때 수식 구분자 $ 가 빠진다
   if (norm(shown).includes(norm(d))) return null;
   const missingNumber = numTokens(d).some((n) => !new RegExp(`(?<![\\d.])${n.replace(".", "\\.")}(?!\\d)`).test(shown));
   const narrative = gate.stimKind === "table" && SETUP_NARRATIVE.test(d);
   if (!narrative && !missingNumber) return null;
-  return /[.!?]$/.test(d) ? d : `${d}.`;
+  return escapeCurrencyDollars(/[.!?]$/.test(d) ? d : `${d}.`, { force: true });
 }
 
 /**
@@ -100,7 +106,7 @@ function graphStatedFacts(stim: Json | null, gate: GateResult): string | null {
 
 /** wrapMath(기본 true): 해설·참고 답안에 생성기가 `$...$` 없이 쓴 수식을 변환 시점에 구분자로 감싼다(화면 변환과 같은 규칙, 멱등). false 는 "변환 전 원문"(교정 계획의 before 해시 계산)용. */
 export function planConversion(c: ApCandidateLike, opts: { wrapMath?: boolean } = {}): ConversionPlan {
-  const wm = (t: string) => (opts.wrapMath === false ? t : autoMathExplanation(t));
+  const wm = (t: string) => (opts.wrapMath === false ? t : escapeCurrencyDollars(autoMathExplanation(t))); // 금액 $ 는 \\$ 로(수식 구분자와 섞이지 않게)
   const gate = gateCandidate(c);
   if (gate.status === "fail") return { ok: false, reason: `render gate failed: ${gate.issues.filter((i) => i.level === "error").map((i) => i.code).join(", ")}`, gate };
   const p = c.payload;
