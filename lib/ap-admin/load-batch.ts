@@ -3,7 +3,7 @@
 // 환경 가드(AP_STOCK_ADMIN_ALLOWED_REFS)와 감사 로그(ap_stock_admin_runs)는 주입된 step 함수(= guarded 래퍼)가 단계마다 기존처럼 남긴다.
 // 더 엄격한 점: 어느 단계든 건너뜀·충돌·오류가 하나라도 있으면 그 자리에서 멈추고 다음 단계로 넘어가지 않는다(단일 단계 흐름은 건너뜀을 보고 사람이 판단).
 import { planHash } from "./plan-hash";
-import { LABEL, msg, stepsFor, type BatchRun, type LoadStep, type LoadStepFn, type LoadStepResult, type ProgressEntry } from "./load-batch-client";
+import { LABEL, SKIP_KIND_LABEL, classifySkip, msg, stepsFor, type BatchRun, type LoadStepInput, type SkippedRow, type LoadStep, type LoadStepFn, type LoadStepResult, type ProgressEntry } from "./load-batch-client";
 export * from "./load-batch-client";
 
 /** 단계별 반복 상한(변환은 ⌈n/20⌉ 회). 상한을 넘으면 오류로 멈춘다. */
@@ -13,7 +13,8 @@ export const HARD_ROUND_CAP = 60;
  * 한 단계의 dry-run 결과가 "그대로 실행해도 되는" 결과인지 판정한다. 문제 있으면 사유 문자열, 없으면 null.
  * strictReady: 실행 시점(앞 단계가 끝난 뒤)에만 켠다 — 미리보기 때는 아직 적재·검증 전이라 준비 안 됨이 정상이다.
  */
-export function violation(step: LoadStep, r: LoadStepResult, strictReady: boolean): string | null {
+export type SkipOpts = { allowSkips: boolean; prior: Set<string> };
+export function violation(step: LoadStep, r: LoadStepResult, strictReady: boolean, opt?: SkipOpts): string | null {
   if (r.blocked) return r.blocked;
   if (!r.ok) return "단계가 실패로 끝났습니다.";
   const n = (k: string) => r.counts[k] ?? 0;
@@ -22,11 +23,20 @@ export function violation(step: LoadStep, r: LoadStepResult, strictReady: boolea
     if (n("stateConflictsKept") > 0) return `상태 충돌로 유지된 후보 ${n("stateConflictsKept")}건 — 단일 단계 화면에서 확인하세요.`;
     if (n("upgradesOnVerifiedOrConverted") > 0) return `검증·변환된 행에 대한 상태 승급 ${n("upgradesOnVerifiedOrConverted")}건 — 단일 단계 화면에서 확인하세요.`;
   } else if (step === "render" || step === "screen") {
-    if (n("skipped") > 0) return `건너뜀 ${n("skipped")}건(증거 없음·해시 불일치 등) — 상세: ${r.lines.slice(0, 3).join(" / ")}`;
+    if (n("skipped") > 0) {
+      if (!opt?.allowSkips) return `건너뜀 ${n("skipped")}건(증거 없음·해시 불일치 등) — 상세: ${r.lines.slice(0, 3).join(" / ")}`;
+      // 건너뜀 허용: 구조화된 목록이 건수와 맞고 전부 허용 종류일 때만 통과. 하나라도 다르면 엄격 모드와 똑같이 멈춘다.
+      const sk = r.skips;
+      if (!sk || sk.length !== n("skipped")) return `건너뜀 ${n("skipped")}건의 목록을 확인할 수 없어 멈춥니다.`;
+      // 미리보기(strictReady=false)에서는 ② 가 아직 안 돈 행이 ③ 에서 '렌더 먼저'로 건너뛰이는 게 정상이라 연쇄로 본다.
+      const bad = sk.filter((x) => !classifySkip(x.reason, x.key, opt.prior) && !(!strictReady && x.reason.includes("렌더 검증이 먼저입니다")));
+      if (bad.length) return `허용되지 않는 건너뜀 ${bad.length}건(결함·게이트 실패·증거 검증 실패 등) — ${bad.slice(0, 3).map((x) => `${x.key}: ${x.reason}`).join(" / ")}`;
+    }
   } else {
     if (n("skipped") > 0) return `변환 불가 후보 ${n("skipped")}건 — 상세: ${r.lines.slice(0, 3).join(" / ")}`;
     if (strictReady) {
-      if (n("notReviewReady") > 0) return `렌더·화면 검증이 끝나지 않은 후보 ${n("notReviewReady")}건이 남아 변환을 시작하지 않습니다.`;
+      if (n("notReviewReady") > 0 && opt?.allowSkips) { if (!r.notReady || r.notReady.length !== n("notReviewReady")) return `검증 미완료 ${n("notReviewReady")}건의 목록을 확인할 수 없어 멈춥니다.`; }
+      else if (n("notReviewReady") > 0) return `렌더·화면 검증이 끝나지 않은 후보 ${n("notReviewReady")}건이 남아 변환을 시작하지 않습니다.`;
       const missing = n("passKeys") - n("alreadyConverted") - n("notReviewReady") - n("skipped") - n("convertible");
       if (missing > 0) return `DB 에 없는 통과 키 ${missing}건(적재 누락).`;
     }
@@ -39,20 +49,48 @@ const entryOf = (step: LoadStep, round: number, phase: "preview" | "execute", r:
   summary: `${LABEL[step]}${round > 1 ? ` (${round}회차)` : ""} — ${phase === "preview" ? "미리보기" : r.executed ? "실행 완료" : "실행 안 됨"}${r.blocked ? `: ${r.blocked}` : ""}`,
 });
 
-/** 한 배치의 모든 단계를 dry-run 만으로 계산한다(쓰기 0). 해시는 단계별 dry-run 해시의 합. */
-async function previewBatch(step: LoadStepFn, batchId: string, hasLoadStep: boolean): Promise<BatchRun> {
-  const run: BatchRun = { batchId, mode: "preview", ok: true, completed: false, previewHash: null, stoppedAt: null, entries: [] };
+/** 단계 입력. 건너뜀 허용일 때만 allowSkips 를 싣는다(엄격 모드 호출 모양은 그대로). */
+const inp = (step: LoadStep, batchId: string, execute: boolean, allowSkips: boolean, planHashV?: string | null): LoadStepInput =>
+  ({ step, batchId, execute, ...(planHashV !== undefined ? { planHash: planHashV } : {}), ...(allowSkips ? { allowSkips: true } : {}) });
+
+/** 허용된 건너뜀을 모은다(위반 검사를 통과한 결과에서만 호출). ④ 의 검증 미완료 키는 실행 시점(strictReady)에만 센다 — 미리보기 때는 ②③ 이 아직 안 돈 상태라서. */
+function collectSkips(step: LoadStep, r: LoadStepResult, prior: Set<string>, out: Map<string, SkippedRow>, strictReady: boolean) {
+  const add = (x: SkippedRow) => { const k = `${x.step}:${x.key}`; if (!out.has(k)) out.set(k, x); };
+  if (step === "render" || step === "screen") {
+    for (const x of r.skips ?? []) {
+      const kind = classifySkip(x.reason, x.key, prior) ?? (x.reason.includes("렌더 검증이 먼저입니다") ? "render_prereq" : null);
+      if (kind) { add({ step, key: x.key, reason: x.reason, kind }); if (kind !== "render_prereq") prior.add(x.key); }
+    }
+  } else if (step === "convert" && strictReady) {
+    for (const key of r.notReady ?? []) add({ step, key, reason: "렌더·화면 검증이 끝나지 않아 변환하지 않음", kind: "not_review_ready" });
+  }
+}
+/** 남은 것: 통과했지만 변환되지 않는 후보(키 기준 중복 제거, 먼저 만난 사유 우선). */
+export function remainingOf(skipped: SkippedRow[]): { key: string; reason: string }[] {
+  const m = new Map<string, string>();
+  for (const x of skipped) if (!m.has(x.key)) m.set(x.key, `${SKIP_KIND_LABEL[x.kind]} — ${x.reason}`);
+  return [...m].map(([key, reason]) => ({ key, reason }));
+}
+
+/** 한 배치의 모든 단계를 dry-run 만으로 계산한다(쓰기 0). 해시는 단계별 dry-run 해시의 합(건너뜀 허용이면 허용 여부와 건너뛸 키 목록도 포함). */
+async function previewBatch(step: LoadStepFn, batchId: string, hasLoadStep: boolean, allowSkips = false): Promise<BatchRun> {
+  const run: BatchRun = { batchId, mode: "preview", ok: true, completed: false, previewHash: null, stoppedAt: null, entries: [], allowSkips, skipped: [] };
   const hashes: [LoadStep, string | null][] = [];
+  const prior = new Set<string>(); const found = new Map<string, SkippedRow>();
+  const seal = () => { run.skipped = [...found.values()]; run.remaining = remainingOf(run.skipped); return run; };
   for (const s of stepsFor(hasLoadStep)) {
     let r: LoadStepResult;
-    try { r = await step({ step: s, batchId, execute: false }); }
-    catch (e) { run.ok = false; run.stoppedAt = { step: s, reason: msg(e) }; run.entries.push({ step: s, round: 1, phase: "preview", ok: false, summary: `${LABEL[s]} — 미리보기 오류: ${msg(e)}`, counts: {}, lines: [] }); return run; }
-    const v = violation(s, r, false);
+    try { r = await step(inp(s, batchId, false, allowSkips)); }
+    catch (e) { run.ok = false; run.stoppedAt = { step: s, reason: msg(e) }; run.entries.push({ step: s, round: 1, phase: "preview", ok: false, summary: `${LABEL[s]} — 미리보기 오류: ${msg(e)}`, counts: {}, lines: [] }); return seal(); }
+    const v = violation(s, r, false, { allowSkips, prior });
     run.entries.push(entryOf(s, 1, "preview", r, !v));
     hashes.push([s, r.planHash]);
-    if (v) { run.ok = false; run.stoppedAt = { step: s, reason: v }; return run; }
+    if (v) { run.ok = false; run.stoppedAt = { step: s, reason: v }; return seal(); }
+    if (allowSkips) collectSkips(s, r, prior, found, false);
   }
-  run.previewHash = planHash("load_batch", { batchId }, hashes);
+  seal();
+  const skipKeys = run.skipped!.map((x) => `${x.step}:${x.key}`).sort();
+  run.previewHash = allowSkips ? planHash("load_batch", { batchId, allowSkips: true }, [hashes, skipKeys]) : planHash("load_batch", { batchId }, hashes);
   return run;
 }
 
@@ -73,16 +111,18 @@ function afterExecuteProblem(s: LoadStep, ex: LoadStepResult): string | null {
  * 한 배치를 미리보기(execute=false) 또는 실행(execute=true)한다.
  * 실행: ① 쓰기 허용 대상·미리보기 해시 확인 → ② 단계마다 dry-run 을 다시 계산해 검증하고 그 해시로 execute → ③ 반복(변환 ≤20건씩, 검증 시간 제한 잔여분) 상한 내에서 남은 0 까지.
  */
-export async function loadBatch(deps: RunDeps, batchId: string, execute: boolean, expectedPreviewHash?: string | null): Promise<BatchRun> {
+export async function loadBatch(deps: RunDeps, batchId: string, execute: boolean, expectedPreviewHash?: string | null, allowSkips = false): Promise<BatchRun> {
   const hasLoad = deps.hasLoadStep(batchId);
-  if (!execute) return previewBatch(deps.step, batchId, hasLoad);
+  if (!execute) return previewBatch(deps.step, batchId, hasLoad, allowSkips);
 
-  const run: BatchRun = { batchId, mode: "execute", ok: false, completed: false, previewHash: null, stoppedAt: null, entries: [] };
-  const stop = (step: LoadStep | "guard" | "preview", reason: string) => { run.stoppedAt = { step, reason }; return run; };
+  const run: BatchRun = { batchId, mode: "execute", ok: false, completed: false, previewHash: null, stoppedAt: null, entries: [], allowSkips, skipped: [], remaining: [] };
+  const prior = new Set<string>(); const found = new Map<string, SkippedRow>();
+  const seal = () => { run.skipped = [...found.values()]; run.remaining = remainingOf(run.skipped); return run; };
+  const stop = (step: LoadStep | "guard" | "preview", reason: string) => { run.stoppedAt = { step, reason }; return seal(); };
   // 가드: 단계 함수들도 각자 다시 거부하지만, 아무것도 호출하기 전에 먼저 멈춘다.
   if (!deps.canWrite) return stop("guard", "쓰기 허용 목록 밖의 대상입니다(AP_STOCK_ADMIN_ALLOWED_REFS). 쓰기를 시작하지 않습니다.");
   if (!expectedPreviewHash) return stop("preview", "미리보기를 먼저 실행하고 같은 계획을 확인한 뒤 실행하세요.");
-  const pv = await previewBatch(deps.step, batchId, hasLoad);
+  const pv = await previewBatch(deps.step, batchId, hasLoad, allowSkips);
   run.entries.push(...pv.entries.map((e) => ({ ...e, summary: `(사전 확인) ${e.summary}` })));
   if (!pv.ok) return stop(pv.stoppedAt!.step, pv.stoppedAt!.reason);
   if (pv.previewHash !== expectedPreviewHash) return stop("preview", "미리보기 이후 계획이 달라졌습니다(DB 상태 변경). 미리보기를 다시 실행하세요.");
@@ -95,14 +135,15 @@ export async function loadBatch(deps: RunDeps, batchId: string, execute: boolean
       round++;
       if (round > cap) return stop(s, `반복 상한(${cap}회)을 넘어 중단했습니다. 상태를 확인한 뒤 다시 실행하세요.`);
       let dry: LoadStepResult;
-      try { dry = await deps.step({ step: s, batchId, execute: false }); }
+      try { dry = await deps.step(inp(s, batchId, false, allowSkips)); }
       catch (e) { run.entries.push({ step: s, round, phase: "preview", ok: false, summary: `${LABEL[s]} — 확인 오류: ${msg(e)}`, counts: {}, lines: [] }); return stop(s, msg(e)); }
-      const v = violation(s, dry, true);
+      const v = violation(s, dry, true, { allowSkips, prior });
       run.entries.push(entryOf(s, round, "preview", dry, !v));
       if (v) return stop(s, v);
+      if (allowSkips) collectSkips(s, dry, prior, found, true);
       if (nothingToDo(s, dry)) break; // 멱등 재실행: 할 일이 없으면 실행 없이 통과
       let ex: LoadStepResult;
-      try { ex = await deps.step({ step: s, batchId, execute: true, planHash: dry.planHash }); }
+      try { ex = await deps.step(inp(s, batchId, true, allowSkips, dry.planHash)); }
       catch (e) { run.entries.push({ step: s, round, phase: "execute", ok: false, summary: `${LABEL[s]} — 실행 오류: ${msg(e)}`, counts: {}, lines: [] }); return stop(s, msg(e)); }
       const bad = ex.blocked ?? (!ex.executed || !ex.ok ? "실행되지 않았습니다." : null) ?? afterExecuteProblem(s, ex) ?? ex.auditWarning ?? null;
       run.entries.push(entryOf(s, round, "execute", ex, !bad));
@@ -113,6 +154,6 @@ export async function loadBatch(deps: RunDeps, batchId: string, execute: boolean
     }
   }
   run.ok = true; run.completed = true;
-  return run;
+  return seal();
 }
 
