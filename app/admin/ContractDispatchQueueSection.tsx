@@ -7,6 +7,7 @@
 // 실제 DocuSign 계약서가 자동 발송된다. 환경변수 "false"는 비상 강제 정지.
 
 import { useState } from "react";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import {
   listContractDispatchJobs,
   runContractDispatchQueueAction,
@@ -51,6 +52,7 @@ const TRIGGER_LABEL: Record<ContractDispatchJobListItem["trigger_type"], string>
 };
 
 export default function ContractDispatchQueueSection() {
+  const viewerTz = useViewerTimezone();
   const { data, refreshing, refresh } = useTabCachedData<{
     autoDispatchEnabled: boolean;
     envHardStop: boolean;
@@ -110,7 +112,7 @@ export default function ContractDispatchQueueSection() {
           </span>
           <span className="text-[11.5px] text-grey-500" data-testid="contract-dispatch-toggle-meta">
             {data?.setting.updatedAt
-              ? `마지막 변경: ${data.setting.updatedByName ?? "알 수 없음"} · ${new Date(data.setting.updatedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}`
+              ? `마지막 변경: ${data.setting.updatedByName ?? "알 수 없음"} · ${new Date(data.setting.updatedAt).toLocaleString("ko-KR", { timeZone: viewerTz })}`
               : "마지막 변경: 기본값(켜짐)"}
           </span>
         </div>

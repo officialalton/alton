@@ -5,6 +5,7 @@
 // Mercury 거래·추적·영수증, 실패·반환·대사 불일치. 실행 버튼은 스위치가 닫혀 있으면 이유를 보여 준다.
 // 폴리싱(탭 구조·밀도·문구)은 마일스톤 종료 뒤 라운드에서 한다.
 import { useCallback, useEffect, useState } from "react";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import {
   approvePayoutAttemptAction,
   createResendAttemptAction,
@@ -55,6 +56,7 @@ const money = (minor: number | null, cur: string | null) =>
 type Msg = { tone: "ok" | "error"; text: string } | null;
 
 export default function MercuryPayoutsPanel() {
+  const viewerTz = useViewerTimezone();
   const [filter, setFilter] = useState<MercuryPayoutFilter>({ status: "all" });
   const [rows, setRows] = useState<MercuryPayoutRow[] | null>(null);
   const [gateOpen, setGateOpen] = useState(false);
@@ -199,7 +201,7 @@ export default function MercuryPayoutsPanel() {
                 {r.trackingUrl && <a className="underline" href={r.trackingUrl} target="_blank" rel="noreferrer">Tracking</a>}
                 {r.mercuryDashboardUrl && <a className="underline" href={r.mercuryDashboardUrl} target="_blank" rel="noopener noreferrer" data-testid="mercury-dashboard-link">View in Mercury</a>}
                 {r.estimatedDeliveryDate && <span>Estimated delivery: {formatDateOnlyEn(r.estimatedDeliveryDate, true)}</span>}
-                {r.mercuryFailedAt && <span>Failed at: {new Date(r.mercuryFailedAt).toLocaleString("en-US", { timeZone: "Asia/Seoul" })}</span>}
+                {r.mercuryFailedAt && <span>Failed at: {new Date(r.mercuryFailedAt).toLocaleString("en-US", { timeZone: viewerTz })}</span>}
                 {r.receiptUrl && <a className="underline" href={r.receiptUrl} target="_blank" rel="noreferrer">Receipt</a>}
                 <span>Reconciliation: {FLAG_LABEL_EN[r.reconciliationFlag] ?? r.reconciliationFlag}</span>
               </div>
