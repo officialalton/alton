@@ -38,6 +38,7 @@ describe("이름 기반 보조 판별", () => {
 
 import { apCoverageLines, apUnitsFromDomains } from "./layouts";
 describe("단원 안내", () => {
+  it("영어 토픽 코드(U5.4)도 단원 번호로 읽는다", () => { expect(apUnitsFromDomains(["ap:U5.4", "ap:U1.1", "ap:2.3"])).toEqual(["1", "2", "5"]); });
   it("sat_domain → 정렬된 단원", () => { expect(apUnitsFromDomains(["ap:8.2", "ap:4.3", "ap:5.1", "ap:4.1", null, "rw_x", "ap:6.7"])).toEqual(["4", "5", "6", "8"]); });
   it("부분 세트는 Covers + 전범위 아님 안내, 공식 풀 구성은 생략", () => {
     const l = apCoverageLines({ subject: "ap_calculus_ab", units: ["4", "5", "6", "8"], layout: AP_LAYOUTS.ap_calculus_ab.filter((x) => x.key === "ap_mc_b"), label: "mc_practice" });

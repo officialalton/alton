@@ -17,6 +17,7 @@ import {
 import { AP_SUBJECT_NAME, CALCULATOR_TEXT, apBadgeText, apCoverageLines, apGuidanceLines, apSectionDisplayLabel, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
 import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
 import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
+import { countWords } from "@/lib/ap-generation/english-text-stats";
 import { sharedSetRange } from "@/lib/ap-exam/shared-set";
 import SharedStimulus from "./SharedStimulus";
 import { frqAnswerToJson, parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
@@ -405,18 +406,19 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
                       <div className="flex flex-col gap-3" data-testid="ap-frq-parts">
                         {paperFrq
                           ? <p className="rounded-lg bg-grey-50 px-3 py-2 text-[12px] text-grey-600" data-testid="frq-paper-notice">{PAPER_FRQ_NOTICE} Your work is saved automatically.</p>
-                          : <p className="text-[11.5px] text-grey-500">{partsOf.some((x) => x.mode === "code") ? "Type your Java code below. Your work is saved automatically." : "Type your answers below. For graphs or diagrams, describe the key features in words (you may sketch on paper). Your work is saved automatically."}</p>}
+                          : <p className="text-[11.5px] text-grey-500">{partsOf.some((x) => x.mode === "code") ? "Type your Java code below. Your work is saved automatically." : partsOf.some((x) => x.mode === "essay") ? "Type your essay below. Your work is saved automatically." : "Type your answers below. For graphs or diagrams, describe the key features in words (you may sketch on paper). Your work is saved automatically."}</p>}
                         {partsOf.map((p) => (
                           <div key={p.label}>
                             <label htmlFor={`frq-${current.setItemId}-${p.label}`} className="mb-1 block text-[13px] font-semibold">
                               ({p.label}) <span className="font-normal text-grey-500">[{p.points} {p.points === 1 ? "point" : "points"}]</span>
                             </label>
-                            <LearningText text={autoMathExplanation(p.prompt)} className="mb-1.5 text-[13.5px]" />
+                            <LearningText text={p.mode === "essay" ? p.prompt : autoMathExplanation(p.prompt)} className="mb-1.5 text-[13.5px]" />
                             {p.mode === "code"
                               ? <CodeAnswerField id={`frq-${current.setItemId}-${p.label}`} testId={`frq-input-${p.label}`} label={`Code for part (${p.label})`} value={frqValues[p.label] ?? ""} onChange={(v) => editPart(current, p.label, v)} onBlur={() => void flush()} />
-                              : <textarea id={`frq-${current.setItemId}-${p.label}`} data-testid={`frq-input-${p.label}`} rows={p.mode === "calculate" ? 4 : 6}
+                              : <textarea id={`frq-${current.setItemId}-${p.label}`} data-testid={`frq-input-${p.label}`} rows={p.mode === "essay" ? 18 : p.mode === "calculate" ? 4 : 6}
                                   value={frqValues[p.label] ?? ""} onChange={(e) => editPart(current, p.label, e.target.value)} onBlur={() => void flush()}
-                                  className="w-full rounded-lg border-[1.5px] border-grey-200 px-3 py-2 text-[14px]" placeholder="Type your answer" />}
+                                  className="w-full rounded-lg border-[1.5px] border-grey-200 px-3 py-2 text-[14px]" placeholder={p.mode === "essay" ? "Type your essay" : "Type your answer"} />}
+                            {p.mode === "essay" && <p className="mt-1 text-[11.5px] text-grey-500" data-testid={`frq-word-count-${p.label}`} aria-live="off">{countWords(frqValues[p.label] ?? "")} words</p>}
                             {paperFrq && (() => {
                               const k = inkKey(current.setItemId, p.label);
                               const has = (ink[k]?.length ?? 0) > 0;

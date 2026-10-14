@@ -12,9 +12,13 @@ export function passageDuplicatesStem(passage: string, stem: string): boolean {
   const hit = pw.filter((w) => sw.has(w) || [...sw].some((s) => s.startsWith(w.slice(0, 5)) && w.length >= 5)).length;
   return hit / pw.length >= 0.8;
 }
+/** ALTON 원본 영어 지문(AP English Language) 표지. 영어 지문은 stem 이 지문 문장을 인용해도 중복이 아니고, 산문이라 수식 자동 변환 대상도 아니다(2026-10-14). */
+export const EN_PASSAGE_MARKER = "ALTON original passage";
+export const isEnglishPassage = (p: string): boolean => p.startsWith(`${EN_PASSAGE_MARKER}\n`);
 /** 화면에 그릴 자료 텍스트(없으면 null). */
 export function apPassageForDisplay(passage: string | null | undefined, stem: string | null | undefined): string | null {
   const p = (passage ?? "").trim(); if (!p) return null;
+  if (isEnglishPassage(p)) return p; // 영어: 본문 인용 때문에 숨기지 않고, 산문을 수식으로 바꾸지 않는다
   if (!p.includes("```") && passageDuplicatesStem(p, stem ?? "")) return null; // 코드 자료는 본문과 단어가 겹쳐도 숨기지 않는다(코드가 곧 문제)
   return autoMathExplanation(p);
 }

@@ -29,6 +29,9 @@ describe("과목 도구 구성", () => {
     expect(subjectToolsConfig("ap_calculus_ab")).toEqual({ calculatorTabs: ["desmos"], reference: null });
     expect(subjectToolsConfig(null).reference).toBeNull();
   });
+  it("영어(English Language)는 계산기도 Reference 도 없다(기본값 Desmos 로 떨어지지 않는다)", () => {
+    expect(subjectToolsConfig("ap_english_language")).toEqual({ calculatorTabs: [], reference: null });
+  });
 });
 
 describe("SubjectToolPanels", () => {

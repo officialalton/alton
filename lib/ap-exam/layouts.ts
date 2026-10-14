@@ -162,7 +162,7 @@ export function apGuidanceLines(o: { subject?: string | null; layout?: (LayoutLi
 // ── 다루는 단원 안내(부분 세트는 과목 전체가 아니라 일부 단원만 다룬다) ─────────────────────────
 /** sat_domain("ap:4.3") 목록 → 정렬된 단원 번호("4"). */
 export function apUnitsFromDomains(domains: (string | null | undefined)[]): string[] {
-  return [...new Set(domains.map((d) => /^ap:(\d+)\./.exec(d ?? "")?.[1]).filter((u): u is string => !!u))].sort((a, b) => Number(a) - Number(b));
+  return [...new Set(domains.map((d) => /^ap:U?(\d+)\./.exec(d ?? "")?.[1]).filter((u): u is string => !!u))].sort((a, b) => Number(a) - Number(b));
 }
 const unitList = (u: string[]) => (u.length === 1 ? `Unit ${u[0]}` : `Units ${u.join(", ")}`);
 /** 시작·결과 화면의 단원 안내. 공식 풀 구성에는 붙이지 않는다. 내부의 단원 불균형은 UI 에 "전범위 커버"로 주장하지 않는다. */

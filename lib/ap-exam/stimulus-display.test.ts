@@ -17,3 +17,19 @@ describe("자료 텍스트가 본문과 겹치면 숨긴다", () => {
   });
   it("자료가 없으면 null", () => { expect(apPassageForDisplay(null, "x")).toBeNull(); expect(apPassageForDisplay("  ", "x")).toBeNull(); });
 });
+
+describe("AP English Language 지문(2026-10-14): stem 이 지문 문장을 인용해도 숨기지 않는다", () => {
+  const short = "ALTON original passage\nThe Library Night\n\n[1] The library stayed open late on Fridays. [2] Nobody complained about the quiet evenings.";
+  const quotingStem = "The Library Night: The library stayed open late on Fridays. Nobody complained about the quiet evenings. The writer wants to combine the sentences; which choice does so most effectively?";
+  it("짧은 지문을 인용하는 stem 에서도 지문이 남는다(일반 자료였다면 중복으로 숨겨졌을 모양)", () => {
+    expect(passageDuplicatesStem(short, quotingStem)).toBe(true); // 같은 모양의 일반 텍스트는 여전히 숨김
+    expect(apPassageForDisplay(short, quotingStem)).toBe(short);
+  });
+  it("산문을 수식으로 바꾸지 않는다(지수·아래첨자 모양 글자가 있어도 그대로)", () => {
+    const p = "ALTON original passage\nTitle\n\n¶1 The ratio 2^3 and x_1 are discussed, but only as words.";
+    expect(apPassageForDisplay(p, "Which choice best describes paragraph 1?")).toBe(p);
+  });
+  it("표지가 없는 같은 글은 기존 규칙(중복 숨김)을 그대로 따른다", () => {
+    expect(apPassageForDisplay("The Library Night\n\n[1] The library stayed open late on Fridays. [2] Nobody complained about the quiet evenings.", quotingStem)).toBeNull();
+  });
+});

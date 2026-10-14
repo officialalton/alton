@@ -46,17 +46,17 @@ export function frqPassageDisplay(p: ElFrqPayload): string {
       const meta = `${s.title}\n${s.attribution}`;
       const body = s.kind === "visual" ? "The chart for this source appears below the sources." : s.kind === "quantitative" && s.table ? `${sourceText(s)}\n\n${tableMarkdown(s.table)}` : sourceText(s);
       return `${t}\n${meta}\n\n${body}`;
-    })].join("\n\n---\n\n");
+    })].join("\n\n———\n\n");
   }
   if (p.task_type === "rhetorical_analysis") {
     const s = p.sources[0];
     return `${head}\n${s.title}\n${s.attribution}\n\n${(s.paragraphs ?? []).map((par, i) => `¶${i + 1} ${par.join(" ")}`).join("\n\n")}`;
   }
-  return p.sources.length ? `${head}\n\n${p.sources.map((s) => `${s.title}\n${s.attribution}\n\n${sourceText(s)}`).join("\n\n---\n\n")}` : "";
+  return p.sources.length ? `${head}\n\n${p.sources.map((s) => `${s.title}\n${s.attribution}\n\n${sourceText(s)}`).join("\n\n———\n\n")}` : "";
 }
 
 /** 학생이 보는 과제문(파트 A 의 prompt). */
-export const frqTaskText = (p: ElFrqPayload): string => [p.prompt.scenario, p.prompt.task, ...(p.prompt.requirements.length ? ["Your essay should:", ...p.prompt.requirements.map((r) => `- ${r}`)] : [])].filter(Boolean).join("\n\n");
+export const frqTaskText = (p: ElFrqPayload): string => [p.prompt.scenario, p.prompt.task, p.prompt.requirements.length ? `Your essay should:\n${p.prompt.requirements.map((r) => `- ${r}`).join("\n")}` : ""].filter(Boolean).join("\n\n");
 
 // ── 숫자 일관성(종합: 표·차트·본문 사이 상충 금지) ───────────────────
 const labelNum = (label: string) => norm(label).replace(/[^a-z0-9 ]/g, "").trim();

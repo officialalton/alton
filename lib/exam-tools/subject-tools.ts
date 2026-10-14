@@ -18,6 +18,8 @@ const BY_SUBJECT: Record<string, SubjectToolsConfig> = {
   // Microeconomics: CED(V.1) — 사칙(four-function) 계산기가 두 섹션 모두에서 허용된다. 그래핑·공학용은 요구하지 않으므로 사칙 계산기만 제공하고 Desmos 는 켜지 않는다.
   // 공식 수식 시트는 CED 에 언급이 없다(UNVERIFIED) — Reference 패널은 ALTON 자체 문구의 학습용 요약이며 고지문을 둔다.
   ap_microeconomics: { calculatorTabs: ["basic"], reference: "microeconomics" },
+  // English Language and Composition: 계산·수식 도구가 없다(AP Central 시험 페이지에 계산기·참조 시트 언급 없음, docs/ap/englang-facts.md) — 계산기·참조 패널을 모두 끈다(기본값 Desmos 로 떨어지면 안 된다).
+  ap_english_language: { calculatorTabs: [], reference: null },
 };
 
 export function subjectToolsConfig(apSubject: string | null | undefined): SubjectToolsConfig {
