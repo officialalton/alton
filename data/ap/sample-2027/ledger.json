@@ -1,5 +1,5 @@
 {
- "spent": 194.4029,
+ "spent": 195.82719999999998,
  "entries": [
   {
    "at": "2026-10-08T09:13:14.616Z",
@@ -974,7 +974,7 @@
   {
    "at": "2026-10-09T03:26:06.749447+00:00",
    "usd": 0,
-   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) — invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
+   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) \u2014 invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
    "excludedRun": "v8-bio-r"
   },
   {
@@ -3201,6 +3201,16 @@
    "at": "2026-10-14T16:18:05.655Z",
    "usd": 0.058518,
    "note": "judge batch msgbatch_01C3LCqUSnasw1VSS9YP18Uc"
+  },
+  {
+   "at": "2026-10-14T17:00:00.000Z",
+   "usd": 0.98,
+   "note": "essay-calibration (37 calls, stage essay-calibration)"
+  },
+  {
+   "at": "2026-10-14T17:30:00.000Z",
+   "usd": 0.4443,
+   "note": "essay-calibration round 2 (16 calls: diagnosis, rubric v2 re-run, injection)"
   }
  ]
 }
