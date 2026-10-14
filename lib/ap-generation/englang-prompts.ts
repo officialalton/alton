@@ -91,7 +91,7 @@ export const SOLVER_TOOL = { name: "submit_answers", description: "Submit your a
 const SOLVER_COMMON = `You answer AP English Language and Composition multiple-choice questions about a passage. Use only the passage; do not rely on outside knowledge. Choose ONE best answer per question. Be honest: if a second option is also defensible, report it in also_defensible; if a question seems flawed, say so in reasoning and mark your confidence accordingly. Do not guess to please the examiner. Call submit_answers once with every question.`;
 export const SOLVER_SYSTEMS = [
   `${SOLVER_COMMON}\nMethod A: read the passage once as a test-taker, then answer each question, checking the key words of the stem against the exact text.`,
-  `${SOLVER_COMMON}\nMethod B (elimination): for each question, write compare the options with the text, rule out the ones the text does not support, and then pick the best-supported one.`,
+  `${SOLVER_COMMON}\nMethod B (elimination): for each question, compare the options with the text, rule out the ones the text does not support, and then pick the best-supported one.`,
   `${SOLVER_COMMON}\nMethod C (annotation): before answering, summarize the rhetorical situation (writer, audience, purpose, claim) and the function of each paragraph in your head, then answer each question by locating the specific lines that decide it.`,
 ];
 export const solverUser = (display: string, items: { stem: string; options: string[] }[]) =>
