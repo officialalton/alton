@@ -200,3 +200,11 @@ STAGE_R1_MC = [
     "bi_hw_allele_freq", "bi_water_potential", "bi_simpson", "bi_sa_v_ratio", "bi_selection_type", "bi_transport_type",
 ]
 STAGE_R1_SETS = ["bis_population_set", "bis_translation_set", "bis_hw_set", "bis_chi_square_set"]
+
+# R2: R1 후에도 가상 칸으로 남은 단원 4·5·7 부족분 — 반복 실패한 원형(0/3)은 빼고 같은 단원에서 일관되게 통과한 원형의 새 인스턴스 + 세트 2개.
+STAGE_R2 = [
+    "bi_graph_dose_response", "bi_justify_hypothesis_signal", "bi_signal_mutation", "bi_feedback_graph", "bi_dna_content_graph", "bi_checkpoint", "bi_mitotic_index",
+    "bi_hypothesis_heredity", "bi_monohybrid_prob", "bi_pedigree_mode", "bi_linkage_map", "bi_nonmendelian",
+    "bi_allele_freq_graph", "bi_fitness_allele_change", "bi_genetic_drift", "bi_hw_expected_counts", "bi_natural_selection_conditions", "bi_evidence_evolution",
+    "bis_population_set", "bis_translation_set",
+]

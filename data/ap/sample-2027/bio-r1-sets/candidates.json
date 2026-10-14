@@ -1,0 +1,4299 @@
+[
+ {
+  "candidateKey": "ap_biology-m01-k0",
+  "cellId": "ap_biology-m01",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "8.4",
+  "unitCode": "8",
+  "skillPrimary": "4.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_population_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_distractor_explanation; set_item_3:criterion_failed_scope_skill; set_item_3:criterion_failed_key_scoring; set_item_3:criterion_failed_distractor_explanation; set_item_3:criterion_failed_exam_suitability; set_item_3:instant_reject_wrong_key; set_item_3:reference_pattern_mismatch; criterion_failed_distractor_explanation; criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_exam_suitability; instant_reject_wrong_key; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step table description (skill 4.B): student scans a short 7-row table and recognizes the logistic pattern of slow, then fast, then leveling growth. Distractors (exponential, linear, decline) are easily rejected by eyeballing the values. No calculation or representation change is needed, and the reading load is minimal. This fits foundational learning rather than a full-mock exam item, which would typically require a calculation, comparing representations, or linking to density-dependent factors.",
+  "payload": {
+   "archetype": "bis_population_set",
+   "topic": "8.4",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "set_intro": "A small population of mice was introduced to an island that had no mice, and the number of mice was counted every two years. The table shows the data.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Number of individuals in a population of mice introduced to an island",
+    "data": {
+     "columns": [
+      "Year",
+      "Number of individuals"
+     ],
+     "rows": [
+      [
+       "0",
+       "20"
+      ],
+      [
+       "2",
+       "80"
+      ],
+      [
+       "4",
+       "246"
+      ],
+      [
+       "6",
+       "454"
+      ],
+      [
+       "8",
+       "560"
+      ],
+      [
+       "10",
+       "591"
+      ],
+      [
+       "12",
+       "598"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_population_set_q1",
+     "topic": "8.4",
+     "skill": "4.B",
+     "stem": "Which statement best describes the growth of the population?",
+     "options": [
+      {
+       "text": "The population grows faster and faster throughout the study.",
+       "why": "The increases become smaller near the end.",
+       "value": null
+      },
+      {
+       "text": "The population grows at a constant rate throughout the study.",
+       "why": "The increases differ from interval to interval.",
+       "value": null
+      },
+      {
+       "text": "The population decreases after the first two years.",
+       "why": "The population increases in every interval.",
+       "value": null
+      },
+      {
+       "text": "The population grows slowly, then quickly, and then levels off near a maximum size.",
+       "why": "The yearly increases are small at first, largest between years 4 and 6, and small near 598.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The population grows slowly, then quickly, and then levels off near a maximum size.. The yearly increases are small at first, largest between years 4 and 6, and small near 598.\nThe population grows faster and faster throughout the study. is incorrect: The increases become smaller near the end.\nThe population grows at a constant rate throughout the study. is incorrect: The increases differ from interval to interval.\nThe population decreases after the first two years. is incorrect: The population increases in every interval.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "bis_population_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "describe an S-shaped growth table",
+      "topic": "8.4",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: describe an S-shaped growth table",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "population sizes"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The increases become smaller near the end."
+       },
+       {
+        "id": "m2",
+        "description": "The increases differ from interval to interval."
+       },
+       {
+        "id": "m3",
+        "description": "The population increases in every interval."
+       }
+      ],
+      "verification": {
+       "independent_path": "interval increases vs the generating logistic curve",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_population_set_q2",
+     "topic": "8.3",
+     "skill": "5.A",
+     "stem": "What is the average rate of population growth from year 4 to year 6?",
+     "options": [
+      {
+       "text": "104 mice per year",
+       "why": "Rate = change in population / change in time = (454 - 246) / (6 - 4) = 104.0 mice per year.",
+       "value": "104.00000"
+      },
+      {
+       "text": "0.0 mice per year",
+       "why": "Divides the interval length by the change.",
+       "value": "0.0096153846"
+      },
+      {
+       "text": "227 mice per year",
+       "why": "Reports the population size at the end of the interval divided by the interval.",
+       "value": "227.00000"
+      },
+      {
+       "text": "34.7 mice per year",
+       "why": "Divides the change by the final year instead of the interval length.",
+       "value": "34.666667"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is 104 mice per year. Rate = change in population / change in time = (454 - 246) / (6 - 4) = 104.0 mice per year.\n0.0 mice per year is incorrect: Divides the interval length by the change.\n227 mice per year is incorrect: Reports the population size at the end of the interval divided by the interval.\n34.7 mice per year is incorrect: Divides the change by the final year instead of the interval length.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "bis_population_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "average growth rate from a table",
+      "topic": "8.3",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: average growth rate from a table",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "population sizes"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Divides the interval length by the change."
+       },
+       {
+        "id": "m2",
+        "description": "Reports the population size at the end of the interval divided by the interval."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the change by the final year instead of the interval length."
+       }
+      ],
+      "verification": {
+       "independent_path": "(N2 - N1)/(t2 - t1) vs the mean of the yearly increments",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_population_set_q3",
+     "topic": "8.4",
+     "skill": "2.B",
+     "stem": "Which value is the best estimate of the carrying capacity of the island for this population?",
+     "options": [
+      {
+       "text": "454",
+       "why": "Reads the population size in the year of fastest growth.",
+       "value": "454.00000"
+      },
+      {
+       "text": "299",
+       "why": "Reads half of the final value.",
+       "value": "299.00000"
+      },
+      {
+       "text": "598",
+       "why": "Applying the relationship to the values given in the question and the stimulus gives 598; each other option comes from a specific, named error.",
+       "value": "598.00000"
+      },
+      {
+       "text": "20",
+       "why": "Reads the starting population size.",
+       "value": "20.000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 598. Applying the relationship to the values given in the question and the stimulus gives 598; each other option comes from a specific, named error.\n454 is incorrect: Reads the population size in the year of fastest growth.\n299 is incorrect: Reads half of the final value.\n20 is incorrect: Reads the starting population size.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "bis_population_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "read the plateau of a growth table as the carrying capacity",
+      "topic": "8.4",
+      "skill": "2.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: read the plateau of a growth table as the carrying capacity",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "population sizes"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Reads the population size in the year of fastest growth."
+       },
+       {
+        "id": "m2",
+        "description": "Reads half of the final value."
+       },
+       {
+        "id": "m3",
+        "description": "Reads the starting population size."
+       }
+      ],
+      "verification": {
+       "independent_path": "last values of the table vs the generating K",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_population_set_q4",
+     "topic": "8.4",
+     "skill": "6.E",
+     "stem": "A drought reduces the amount of plant food available on the island. Which prediction about the mouse population is best supported?",
+     "options": [
+      {
+       "text": "The carrying capacity would increase, because competition for the remaining food would be stronger.",
+       "why": "A loss of resources lowers, not raises, the carrying capacity.",
+       "value": null
+      },
+      {
+       "text": "The population would increase without limit, because fewer plants mean fewer competitors.",
+       "why": "A reduction of the food supply does not remove limits on a population.",
+       "value": null
+      },
+      {
+       "text": "The carrying capacity would decrease, and the population would decline toward a smaller size.",
+       "why": "Fewer resources can support fewer individuals, so the population falls toward the lower carrying capacity.",
+       "value": null
+      },
+      {
+       "text": "The carrying capacity would stay the same, and the population would continue to grow at the same rate.",
+       "why": "The carrying capacity is set by the resources, which have decreased.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is The carrying capacity would decrease, and the population would decline toward a smaller size.. Fewer resources can support fewer individuals, so the population falls toward the lower carrying capacity.\nThe carrying capacity would increase, because competition for the remaining food would be stronger. is incorrect: A loss of resources lowers, not raises, the carrying capacity.\nThe population would increase without limit, because fewer plants mean fewer competitors. is incorrect: A reduction of the food supply does not remove limits on a population.\nThe carrying capacity would stay the same, and the population would continue to grow at the same rate. is incorrect: The carrying capacity is set by the resources, which have decreased.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_population_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "predict the effect of a resource loss on carrying capacity",
+      "topic": "8.4",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: predict the effect of a resource loss on carrying capacity",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "population sizes"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "A loss of resources lowers, not raises, the carrying capacity."
+       },
+       {
+        "id": "m2",
+        "description": "A reduction of the food supply does not remove limits on a population."
+       },
+       {
+        "id": "m3",
+        "description": "The carrying capacity is set by the resources, which have decreased."
+       }
+      ],
+      "verification": {
+       "independent_path": "logistic model with a smaller K vs the generating population",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 245,
+   "facts": [
+    "N=[20, 80, 246, 454, 560, 591, 598]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_population_set_q1",
+   "facts": [
+    "N=[20, 80, 246, 454, 560, 591, 598]"
+   ],
+   "seed": 9200
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 60 seconds and has a light reading load. It is low difficulty but typical of an AP description item.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean 4.B description of an S-shaped growth table with a unique key and distinct distractors, so it passes all five criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The task load is light and appropriate for a calculator-allowed item.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct and in scope, but option B is displayed as \"0.0 mice per year\" for a true value of 0.0096. This makes the distractor misleading and implausible, so the distractor criterion fails. Fix by rewording or rounding that option."
+   },
+   {
+    "instant_reject": [
+     "wrong_key"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The item fails on key, scope, distractors and suitability. The data are still rising at year 12 (591 to 598), so 598 is the last observation, not a certain carrying capacity. The plateau is only approached, and K could plausibly be about 600. The prompt asks for the best estimate, and 598 is the only option near the plateau. The item is nonetheless trivial: students just pick the largest or last value, with no explanation of relationships between model characteristics (skill 2.B). The distractor 299 (half the final value) is weak. The 454 rationale (\"year of fastest growth\") is inaccurate, because fastest growth occurs between years 4 and 6 (246 to 454) and the population at the midpoint is not 454. The correct-answer explanation is generic boilerplate and the item is not tied to density-dependent effects (topic 8.4).",
+    "scope_skill": {
+     "pass": false,
+     "notes": "The item only requires reading the last value of a table. It does not require explaining a relationship between model characteristics (2.B) or the effect of density on growth (8.4)."
+    },
+    "key_scoring": {
+     "pass": false,
+     "notes": "598 is the largest and last value in the table, so it is the best of the four options. However, the table shows growth still continuing, so the key is only an approximation of carrying capacity. The question does not ask for a justification."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete and clear."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "The correct-answer rationale is a placeholder with no biology. The rationale for 454 as the year of fastest growth is inaccurate. The distractors (20, 299, 454) are implausible, so the item gives students almost nothing to reject."
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": "The item has too low a cognitive demand for an AP Biology multiple-choice question, and a calculator is not needed."
+    }
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Topic 8.4 (density effects, carrying capacity) with a 6.E prediction of the effect of a resource loss. It is in scope for Unit 8 and the skill fits."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option C is the only defensible answer. A drought lowers food, which lowers K, so the population declines toward a smaller size. The other three options contradict basic carrying-capacity logic."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete and shows logistic growth leveling near 600. The stem is clear. The table is only loosely needed, but it sets the context for the pre-drought carrying capacity."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct misconception: K rises with competition, no limit on growth, and K unchanged. The explanation addresses each one. The rationales are somewhat terse and the third one is a little circular, but they are acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The item takes about 65 seconds, needs no calculation, and has four options. The distractors are fairly easy to reject, and the correct option is slightly longer than the others, but this is acceptable."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean, unambiguous 6.E prediction item on carrying capacity with a single defensible key and distinct distractors. It is somewhat easy, but it passes all criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step table description (skill 4.B): student scans a short 7-row table and recognizes the logistic pattern of slow, then fast, then leveling growth. Distractors (exponential, linear, decline) are easily rejected by eyeballing the values. No calculation or representation change is needed, and the reading load is minimal. This fits foundational learning rather than a full-mock exam item, which would typically require a calculation, comparing representations, or linking to density-dependent factors.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single table lookup (years 4 and 6), then one subtraction and one division with small whole numbers: (454-246)/2 = 104 mice/year. The concept is straightforward average rate of change, with no need to choose among competing models or interpret a graph. Distractors reflect simple errors, such as dividing the final value by 2 or confusing the plateau with zero growth. This is suitable for foundational practice rather than the multi-step reasoning of full mocks.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step item: read a short 7-row table, see that growth is logistic and the population plateaus near 598, and identify that plateau as carrying capacity. No calculation, minimal reading, and distractors (initial value, mid-growth value, midpoint) are easily rejected. It is below the depth and multi-step reasoning expected of a full-mock exam_prep item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The table shows logistic growth leveling near 600, so a student only has to recognize the plateau as carrying capacity. Reduced food supply lowers carrying capacity, which is a single, direct relationship. The distractors are standard misconceptions (unlimited growth, K unchanged, K increasing from competition) and can each be rejected in one step. No calculation is needed and the reading load is minimal. This is a straightforward application of a core concept, below the multi-step demands of a full-mock exam item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m01-k1",
+  "cellId": "ap_biology-m01",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "8.4",
+  "unitCode": "8",
+  "skillPrimary": "4.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_population_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_distractor_explanation; set_item_2:criterion_failed_exam_suitability; set_item_3:criterion_failed_key_scoring; set_item_3:criterion_failed_distractor_explanation; set_item_3:criterion_failed_exam_suitability; set_item_3:reference_pattern_mismatch; set_item_4:criterion_failed_exam_suitability; set_item_4:reference_pattern_mismatch; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; criterion_failed_key_scoring; reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student reads a short 7-row table and matches the visible trend (slow start, rapid increase, plateau near ~390) to the correct description. Distractors are clearly wrong on inspection (decrease, constant increase, ever-accelerating). No calculation or multi-step inference is required, and the item is within Unit 8 scope with no unfair difficulty sources.",
+  "payload": {
+   "archetype": "bis_population_set",
+   "topic": "8.4",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "set_intro": "A small population of mice was introduced to an island that had no mice, and the number of mice was counted every two years. The table shows the data.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Number of individuals in a population of mice introduced to an island",
+    "data": {
+     "columns": [
+      "Year",
+      "Number of individuals"
+     ],
+     "rows": [
+      [
+       "0",
+       "10"
+      ],
+      [
+       "2",
+       "34"
+      ],
+      [
+       "4",
+       "103"
+      ],
+      [
+       "6",
+       "224"
+      ],
+      [
+       "8",
+       "329"
+      ],
+      [
+       "10",
+       "378"
+      ],
+      [
+       "12",
+       "394"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_population_set_q1",
+     "topic": "8.4",
+     "skill": "4.B",
+     "stem": "Which statement best describes the growth of the population?",
+     "options": [
+      {
+       "text": "The population decreases after the first two years.",
+       "why": "The population increases in every interval.",
+       "value": null
+      },
+      {
+       "text": "The population grows faster and faster throughout the study.",
+       "why": "The increases become smaller near the end.",
+       "value": null
+      },
+      {
+       "text": "The population grows at a constant rate throughout the study.",
+       "why": "The increases differ from interval to interval.",
+       "value": null
+      },
+      {
+       "text": "The population grows slowly, then quickly, and then levels off near a maximum size.",
+       "why": "The yearly increases are small at first, largest between years 4 and 6, and small near 394.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The population grows slowly, then quickly, and then levels off near a maximum size.. The yearly increases are small at first, largest between years 4 and 6, and small near 394.\nThe population decreases after the first two years. is incorrect: The population increases in every interval.\nThe population grows faster and faster throughout the study. is incorrect: The increases become smaller near the end.\nThe population grows at a constant rate throughout the study. is incorrect: The increases differ from interval to interval.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "bis_population_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "describe an S-shaped growth table",
+      "topic": "8.4",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: describe an S-shaped growth table",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "population sizes"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The population increases in every interval."
+       },
+       {
+        "id": "m2",
+        "description": "The increases become smaller near the end."
+       },
+       {
+        "id": "m3",
+        "description": "The increases differ from interval to interval."
+       }
+      ],
+      "verification": {
+       "independent_path": "interval increases vs the generating logistic curve",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_population_set_q2",
+     "topic": "8.3",
+     "skill": "5.A",
+     "stem": "What is the average rate of population growth from year 4 to year 6?",
+     "options": [
+      {
+       "text": "121 mice per year",
+       "why": "Reports the change in population without dividing by time.",
+       "value": "121.00000"
+      },
+      {
+       "text": "20.2 mice per year",
+       "why": "Divides the change by the final year instead of the interval length.",
+       "value": "20.166667"
+      },
+      {
+       "text": "60.5 mice per year",
+       "why": "Rate = change in population / change in time = (224 - 103) / (6 - 4) = 60.5 mice per year.",
+       "value": "60.500000"
+      },
+      {
+       "text": "0.0 mice per year",
+       "why": "Divides the interval length by the change.",
+       "value": "0.016528926"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 60.5 mice per year. Rate = change in population / change in time = (224 - 103) / (6 - 4) = 60.5 mice per year.\n121 mice per year is incorrect: Reports the change in population without dividing by time.\n20.2 mice per year is incorrect: Divides the change by the final year instead of the interval length.\n0.0 mice per year is incorrect: Divides the interval length by the change.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "bis_population_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "average growth rate from a table",
+      "topic": "8.3",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: average growth rate from a table",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "population sizes"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Reports the change in population without dividing by time."
+       },
+       {
+        "id": "m2",
+        "description": "Divides the change by the final year instead of the interval length."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the interval length by the change."
+       }
+      ],
+      "verification": {
+       "independent_path": "(N2 - N1)/(t2 - t1) vs the mean of the yearly increments",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_population_set_q3",
+     "topic": "8.4",
+     "skill": "2.B",
+     "stem": "Which value is the best estimate of the carrying capacity of the island for this population?",
+     "options": [
+      {
+       "text": "224",
+       "why": "Reads the population size in the year of fastest growth.",
+       "value": "224.00000"
+      },
+      {
+       "text": "10",
+       "why": "Reads the starting population size.",
+       "value": "10.000000"
+      },
+      {
+       "text": "394",
+       "why": "Applying the relationship to the values given in the question and the stimulus gives 394; each other option comes from a specific, named error.",
+       "value": "394.00000"
+      },
+      {
+       "text": "197",
+       "why": "Reads half of the final value.",
+       "value": "197.00000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 394. Applying the relationship to the values given in the question and the stimulus gives 394; each other option comes from a specific, named error.\n224 is incorrect: Reads the population size in the year of fastest growth.\n10 is incorrect: Reads the starting population size.\n197 is incorrect: Reads half of the final value.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "bis_population_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "read the plateau of a growth table as the carrying capacity",
+      "topic": "8.4",
+      "skill": "2.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: read the plateau of a growth table as the carrying capacity",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "population sizes"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Reads the population size in the year of fastest growth."
+       },
+       {
+        "id": "m2",
+        "description": "Reads the starting population size."
+       },
+       {
+        "id": "m3",
+        "description": "Reads half of the final value."
+       }
+      ],
+      "verification": {
+       "independent_path": "last values of the table vs the generating K",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_population_set_q4",
+     "topic": "8.4",
+     "skill": "6.E",
+     "stem": "A drought reduces the amount of plant food available on the island. Which prediction about the mouse population is best supported?",
+     "options": [
+      {
+       "text": "The carrying capacity would stay the same, and the population would continue to grow at the same rate.",
+       "why": "The carrying capacity is set by the resources, which have decreased.",
+       "value": null
+      },
+      {
+       "text": "The population would increase without limit, because fewer plants mean fewer competitors.",
+       "why": "A reduction of the food supply does not remove limits on a population.",
+       "value": null
+      },
+      {
+       "text": "The carrying capacity would increase, because competition for the remaining food would be stronger.",
+       "why": "A loss of resources lowers, not raises, the carrying capacity.",
+       "value": null
+      },
+      {
+       "text": "The carrying capacity would decrease, and the population would decline toward a smaller size.",
+       "why": "Fewer resources can support fewer individuals, so the population falls toward the lower carrying capacity.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The carrying capacity would decrease, and the population would decline toward a smaller size.. Fewer resources can support fewer individuals, so the population falls toward the lower carrying capacity.\nThe carrying capacity would stay the same, and the population would continue to grow at the same rate. is incorrect: The carrying capacity is set by the resources, which have decreased.\nThe population would increase without limit, because fewer plants mean fewer competitors. is incorrect: A reduction of the food supply does not remove limits on a population.\nThe carrying capacity would increase, because competition for the remaining food would be stronger. is incorrect: A loss of resources lowers, not raises, the carrying capacity.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_population_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "predict the effect of a resource loss on carrying capacity",
+      "topic": "8.4",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: predict the effect of a resource loss on carrying capacity",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "population sizes"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The carrying capacity is set by the resources, which have decreased."
+       },
+       {
+        "id": "m2",
+        "description": "A reduction of the food supply does not remove limits on a population."
+       },
+       {
+        "id": "m3",
+        "description": "A loss of resources lowers, not raises, the carrying capacity."
+       }
+      ],
+      "verification": {
+       "independent_path": "logistic model with a smaller K vs the generating population",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 245,
+   "facts": [
+    "N=[10, 34, 103, 224, 329, 378, 394]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_population_set_q1",
+   "facts": [
+    "N=[10, 34, 103, 224, 329, 378, 394]"
+   ],
+   "seed": 9202
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 60 seconds, needs no calculation, and has parallel, short options, which matches the reference pattern. The options differ little in length.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item passes all five criteria. It is a clean 4.B table-description item on S-shaped growth, with a unique key and distinct misconception distractors. The only blemish is a minor wording slip in the rationale (\"yearly\" instead of two-year intervals)."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The task is quick and easy. However, the malformed 0.0 option and the extra rows of table data that serve no purpose reduce exam quality.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct and the item fits scope, but the distractor \"0.0 mice per year\" is a rounded reciprocal that misrepresents its value and is implausible. Failing on distractor quality and exam suitability."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Reading a logistic plateau as carrying capacity fits 8.4. It is a low-level reading task for skill 2.B, but acceptable."
+    },
+    "key_scoring": {
+     "pass": false,
+     "notes": "The table is still rising at year 12 (378 to 394). The data do not show a true plateau, so 394 is only a lower-bound reading. The generating K is likely higher, such as 400. Calling 394 the best estimate is defensible, but it is not clearly unique or exact."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete and clear. The stem states the context. It does not say the population is limited by resources, but that is implied."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "The explanation for the key is a generic boilerplate sentence that gives no biological reasoning: 'Applying the relationship ... gives 394'. The distractor 197 ('half of the final value') is weak. The 224 rationale claims the year of fastest growth, which is only approximate, since the fastest growth interval is years 4 to 6 or 6 to 8. The options are not a plausible set of misconceptions, and 10 is trivial."
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": "The item is very easy because the answer is simply the last value in the table. The calculator is irrelevant. The explanation text is placeholder-quality."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The item fails on key and distractor quality. The table has not truly plateaued, so 394 is only an approximate best estimate. The key rationale is generic placeholder text, and the distractors and rationales are weak. The task is also trivially easy for skill 2.B."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The table is largely decorative, because the answer follows from the drought alone without reading any data. Option D is also the longest and the only one with a hedged two-part conclusion, which is a mild giveaway. The stimulus adds reading load without adding demand. It could be strengthened with an option that uses the data, for example the approximate carrying capacity of about 400.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The biology and key are sound, but the table is not needed to answer the question and the correct option is the longest, so the item fails on exam suitability."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Student reads a short 7-row table and matches the visible trend (slow start, rapid increase, plateau near ~390) to the correct description. Distractors are clearly wrong on inspection (decrease, constant increase, ever-accelerating). No calculation or multi-step inference is required, and the item is within Unit 8 scope with no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "One-step rate calculation: read two table values (103 and 224), subtract, divide by a 2-year interval to get 60.5 mice per year. Small whole numbers and a clear stem. Distractors reflect typical errors such as omitting the time division or using the wrong interval. This is a foundational skill with low conceptual depth and no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Student reads a short 7-row table, recognizes logistic growth leveling off, and picks the plateau value (~394) as carrying capacity. Distractors (starting size, mid-growth value, half of K) target common misconceptions but require only a single inference. No calculation, minimal reading, one concept. Fits foundational learning more than a full-mock item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the table to recognize logistic growth leveling near ~400 (carrying capacity), identify food as the limiting density-dependent resource, and predict that a drought lowers carrying capacity so the population declines. Distractors reflect common misconceptions (unlimited growth, K rising with competition, no change). No calculation, short reading, in-scope content; difficulty comes from concept application, not unfair sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m02-k0",
+  "cellId": "ap_biology-m02",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "6.4",
+  "unitCode": "6",
+  "skillPrimary": "2.D",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_translation_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_stimulus_expression; criterion_failed_exam_suitability; reference_pattern_mismatch; set_item_1:criterion_failed_stimulus_expression; set_item_1:criterion_failed_exam_suitability; set_item_1:reference_pattern_mismatch; set_item_2:criterion_failed_scope_skill; set_item_2:criterion_failed_stimulus_expression; set_item_2:criterion_failed_distractor_explanation; set_item_2:criterion_failed_exam_suitability; set_item_2:instant_reject_missing_condition; set_item_2:reference_pattern_mismatch; set_item_3:criterion_failed_scope_skill; set_item_3:criterion_failed_key_scoring; set_item_3:criterion_failed_distractor_explanation; set_item_3:criterion_failed_exam_suitability; set_item_3:instant_reject_multiple_correct; set_item_3:reference_pattern_mismatch; criterion_failed_scope_skill; criterion_failed_distractor_explanation; instant_reject_missing_condition; criterion_failed_key_scoring; instant_reject_multiple_correct",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-step task: split an 18-nt mRNA into codons and look each one up in the standard codon table, then pick the option that reads 5' to 3' and includes the stop. Distractors are a reversed order, a missing stop, and an unrelated peptide. The two mutated sequences in the table are not needed for this question, so there is no comparison or prediction of effects. Reading and arithmetic are minimal, and no unfair difficulty sources are present.",
+  "payload": {
+   "archetype": "bis_translation_set",
+   "topic": "6.4",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "set_intro": "A researcher compares an original mRNA coding sequence with two mutated sequences of the same gene. The sequences are shown in the table.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Original and mutated mRNA coding sequences (5' to 3') for one gene",
+    "data": {
+     "columns": [
+      "Sequence",
+      "mRNA (5' to 3')"
+     ],
+     "rows": [
+      [
+       "Original",
+       "AUGGCUCCCGUGAGUUAG"
+      ],
+      [
+       "Mutation 1",
+       "AUGGAUCCCGUGAGUUAG"
+      ],
+      [
+       "Mutation 2",
+       "AUGGUCCCGUGAGUUAG"
+      ]
+     ],
+     "notes": [
+      "Each sequence begins at the start codon."
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_translation_set_q1",
+     "topic": "6.4",
+     "skill": "2.D",
+     "stem": "Which choice shows the amino acid sequence of the polypeptide made from the original mRNA, beginning at the amino terminus? (Use the standard codon table.)",
+     "options": [
+      {
+       "text": "Trp-Leu-Pro",
+       "why": "Starts reading one nucleotide after the start codon.",
+       "value": null
+      },
+      {
+       "text": "Met-Ala-Pro-Val-Ser-Stop",
+       "why": "Includes the stop codon as an amino acid position and keeps reading.",
+       "value": null
+      },
+      {
+       "text": "Ser-Val-Pro-Ala-Met",
+       "why": "Lists the amino acids in reverse order.",
+       "value": null
+      },
+      {
+       "text": "Met-Ala-Pro-Val-Ser",
+       "why": "Translation reads codons in order from the start codon until the stop codon: Met-Ala-Pro-Val-Ser.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is Met-Ala-Pro-Val-Ser. Translation reads codons in order from the start codon until the stop codon: Met-Ala-Pro-Val-Ser.\nTrp-Leu-Pro is incorrect: Starts reading one nucleotide after the start codon.\nMet-Ala-Pro-Val-Ser-Stop is incorrect: Includes the stop codon as an amino acid position and keeps reading.\nSer-Val-Pro-Ala-Met is incorrect: Lists the amino acids in reverse order.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "bis_translation_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "translate an mRNA from the start codon to the stop codon",
+      "topic": "6.4",
+      "skill": "2.D",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: translate an mRNA from the start codon to the stop codon",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "original mRNA"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Starts reading one nucleotide after the start codon."
+       },
+       {
+        "id": "m2",
+        "description": "Includes the stop codon as an amino acid position and keeps reading."
+       },
+       {
+        "id": "m3",
+        "description": "Lists the amino acids in reverse order."
+       }
+      ],
+      "verification": {
+       "independent_path": "codon-table loop vs translate()",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_translation_set_q2",
+     "topic": "6.7",
+     "skill": "5.D",
+     "stem": "Which statement best describes mutation 1?",
+     "options": [
+      {
+       "text": "A missense mutation: one amino acid is changed.",
+       "why": "Mutation 1 changes one nucleotide, so it is a substitution. Compare the two sequences: one codon codes for a different amino acid.",
+       "value": null
+      },
+      {
+       "text": "A nonsense mutation: a premature stop codon shortens the polypeptide.",
+       "why": "No codon has changed into a stop codon in this sequence.",
+       "value": null
+      },
+      {
+       "text": "A silent mutation: the amino acid sequence is unchanged.",
+       "why": "The sequence of amino acids is the same as the original.",
+       "value": null
+      },
+      {
+       "text": "A frameshift mutation: the reading frame is changed after the mutation.",
+       "why": "A frameshift would require the insertion or deletion of a nucleotide; mutation 1 replaced a nucleotide.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is A missense mutation: one amino acid is changed.. Mutation 1 changes one nucleotide, so it is a substitution. Compare the two sequences: one codon codes for a different amino acid.\nA nonsense mutation: a premature stop codon shortens the polypeptide. is incorrect: No codon has changed into a stop codon in this sequence.\nA silent mutation: the amino acid sequence is unchanged. is incorrect: The sequence of amino acids is the same as the original.\nA frameshift mutation: the reading frame is changed after the mutation. is incorrect: A frameshift would require the insertion or deletion of a nucleotide; mutation 1 replaced a nucleotide.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_translation_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "classify a point mutation by comparing translations",
+      "topic": "6.7",
+      "skill": "5.D",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: classify a point mutation by comparing translations",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "mutated mRNA"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "No codon has changed into a stop codon in this sequence."
+       },
+       {
+        "id": "m2",
+        "description": "The sequence of amino acids is the same as the original."
+       },
+       {
+        "id": "m3",
+        "description": "A frameshift would require the insertion or deletion of a nucleotide; mutation 1 replaced a nucleotide."
+       }
+      ],
+      "verification": {
+       "independent_path": "translate both sequences vs the generating substitution",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_translation_set_q3",
+     "topic": "6.7",
+     "skill": "5.D",
+     "stem": "Which statement best describes mutation 2?",
+     "options": [
+      {
+       "text": "A missense mutation: one amino acid is changed.",
+       "why": "A single amino acid replacement does not explain a deletion of one nucleotide.",
+       "value": null
+      },
+      {
+       "text": "A nonsense mutation: a premature stop codon shortens the polypeptide.",
+       "why": "The deletion shifts the frame; the effect is not limited to a new stop codon.",
+       "value": null
+      },
+      {
+       "text": "A frameshift mutation: the reading frame is changed after the mutation.",
+       "why": "Mutation 2 is missing one nucleotide compared with the original, so the reading frame shifts after the deletion.",
+       "value": null
+      },
+      {
+       "text": "A silent mutation: the amino acid sequence is unchanged.",
+       "why": "The sequence is shorter by one nucleotide, so it cannot be a substitution.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is A frameshift mutation: the reading frame is changed after the mutation.. Mutation 2 is missing one nucleotide compared with the original, so the reading frame shifts after the deletion.\nA missense mutation: one amino acid is changed. is incorrect: A single amino acid replacement does not explain a deletion of one nucleotide.\nA nonsense mutation: a premature stop codon shortens the polypeptide. is incorrect: The deletion shifts the frame; the effect is not limited to a new stop codon.\nA silent mutation: the amino acid sequence is unchanged. is incorrect: The sequence is shorter by one nucleotide, so it cannot be a substitution.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_translation_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "recognize a frameshift from a deletion",
+      "topic": "6.7",
+      "skill": "5.D",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: recognize a frameshift from a deletion",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "mutated mRNA"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "A single amino acid replacement does not explain a deletion of one nucleotide."
+       },
+       {
+        "id": "m2",
+        "description": "The deletion shifts the frame; the effect is not limited to a new stop codon."
+       },
+       {
+        "id": "m3",
+        "description": "The sequence is shorter by one nucleotide, so it cannot be a substitution."
+       }
+      ],
+      "verification": {
+       "independent_path": "length comparison and translation vs the generating deletion",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_translation_set_q4",
+     "topic": "6.7",
+     "skill": "6.E",
+     "stem": "Which prediction about the effects of the two mutations on the function of the protein is best supported by the data?",
+     "options": [
+      {
+       "text": "Mutation 2 is more likely to destroy the function of the protein, because it can change many amino acids after the deletion.",
+       "why": "A frameshift changes all of the codons after the deletion, which usually changes the protein's structure much more than one amino acid substitution.",
+       "value": null
+      },
+      {
+       "text": "Both mutations are equally likely to destroy the function, because both change one nucleotide.",
+       "why": "The effects differ because a deletion shifts the reading frame.",
+       "value": null
+      },
+      {
+       "text": "Mutation 1 is more likely to destroy the function of the protein, because every missense mutation changes all of the amino acids.",
+       "why": "A substitution changes at most one codon.",
+       "value": null
+      },
+      {
+       "text": "Neither mutation can change the function, because the start codon is unchanged.",
+       "why": "A change after the start codon can still change the protein's amino acid sequence.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is Mutation 2 is more likely to destroy the function of the protein, because it can change many amino acids after the deletion.. A frameshift changes all of the codons after the deletion, which usually changes the protein's structure much more than one amino acid substitution.\nBoth mutations are equally likely to destroy the function, because both change one nucleotide. is incorrect: The effects differ because a deletion shifts the reading frame.\nMutation 1 is more likely to destroy the function of the protein, because every missense mutation changes all of the amino acids. is incorrect: A substitution changes at most one codon.\nNeither mutation can change the function, because the start codon is unchanged. is incorrect: A change after the start codon can still change the protein's amino acid sequence.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_translation_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "compare the likely effects of a substitution and a frameshift",
+      "topic": "6.7",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: compare the likely effects of a substitution and a frameshift",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "mutated mRNA"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The effects differ because a deletion shifts the reading frame."
+       },
+       {
+        "id": "m2",
+        "description": "A substitution changes at most one codon."
+       },
+       {
+        "id": "m3",
+        "description": "A change after the start codon can still change the protein's amino acid sequence."
+       }
+      ],
+      "verification": {
+       "independent_path": "number of changed codons in each mutated sequence vs the generating mutation types",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 300,
+   "facts": [
+    "orig=AUGGCUCCCGUGAGUUAG"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_translation_set_q1",
+   "facts": [
+    "orig=AUGGCUCCCGUGAGUUAG"
+   ],
+   "seed": 9201
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Translation of mRNA by codon reading fits topic 6.4. The 2.D skill fit is weak but acceptable."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Met-Ala-Pro-Val-Ser is unique and correct; the stop codon adds no residue."
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": "The table includes two mutation rows that the question never uses, and the stem opens by describing the comparison, which misleads. It also refers to a standard codon table that is not supplied in the stimulus. This adds needless reading load and a missing reference."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors encode a frame shift, including the stop, and reverse order. All are explained. The reverse-order option is somewhat weak."
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": "The unused mutation rows and the stem framing are leftovers from a multi-question set. This is irrelevant context that a strict AP item would not carry. The calculator designation is irrelevant here."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct and the topic fits. The stimulus carries two unused mutated sequences and relies on a codon table that is not provided, creating extraneous load and a mismatch between the stem framing and the actual question. I fail it on stimulus and exam suitability."
+   },
+   {
+    "scope_skill": {
+     "pass": false,
+     "notes": ""
+    },
+    "notes": "The item depends on memorized codons because no codon table is given, which is unlike AP practice. Mutation 2 is an unused distractor row.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": ""
+    },
+    "instant_reject": [
+     "missing_condition"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The key (missense) is correct, but the item is unsolvable without a codon table, mutation 2 is unused, and the 5.D skill fit and distractor rationales are weak. Fail."
+   },
+   {
+    "scope_skill": {
+     "pass": false,
+     "notes": ""
+    },
+    "notes": "The wording \"best describes\" is ambiguous because two options are true. The task is mostly vocabulary matching.",
+    "key_scoring": {
+     "pass": false,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": ""
+    },
+    "instant_reject": [
+     "multiple_correct"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "Fail. Mutation 2 is a frameshift, but it also produces a premature UGA stop codon, so option B is also true and the key is not unique. The item is a recall-style classification rather than 5.D data evaluation."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Topic 6.7 mutations; predicts effect of substitution vs frameshift (6.E)."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Mutation 2 deletion causes frameshift and premature stop; Mutation 1 is a single missense. Unique key."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table complete; sequences begin at start codon; all needed data present."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct misconception; explanations accurate."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 75 s, short reading, appropriate."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound item: the key is unique and correct, the distractors are distinct and accurately explained, and the task load is appropriate."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step task: split an 18-nt mRNA into codons and look each one up in the standard codon table, then pick the option that reads 5' to 3' and includes the stop. Distractors are a reversed order, a missing stop, and an unrelated peptide. The two mutated sequences in the table are not needed for this question, so there is no comparison or prediction of effects. Reading and arithmetic are minimal, and no unfair difficulty sources are present.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Mutation 1 is a single-base substitution (GCU to GAU) in the second codon. The reading frame is intact and no stop codon is created, so it is a missense mutation. The student reads a short table, splits the sequences into codons, and classifies the mutation type. This takes one comparison and one classification step, with no calculation and little reading. The item tests recognition of the standard mutation categories in a concrete sequence, which is below the depth of a full-mock exam item. Mutation 2 is an unused extra row and adds only slight reading. The item only loosely fits skill 5.D (use data to evaluate a hypothesis).",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the sequence table, split the sequences into codons, notice that mutation 2 is a single-nucleotide deletion (17 vs 18 nt), and determine that the frame shifts. They must also weigh distractor B, since the frameshift here happens to create an early UGA stop, and choose the mechanism-level description (frameshift) over a nonsense label. This requires applying the concept of mutation types to data rather than recalling a definition. There is no arithmetic and the reading load is small. Minor concerns: B is partially defensible, so the wording 'best describes' carries the discrimination, and mutation 1 is unused extra context. These do not make the item unfair.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must parse the table sequences into codons, recognize Mutation 1 as a single-base substitution (missense, one amino acid changed) and Mutation 2 as a single-base deletion causing a frameshift with premature stop, then predict relative functional impact and reject misconceptions (all single-nucleotide changes are equal, missense changes all amino acids, intact start codon protects function). Requires a table read and a cause/effect prediction at a typical AP level. Reading and computation are minimal; difficulty comes from the biological reasoning itself.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m02-k1",
+  "cellId": "ap_biology-m02",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "6.4",
+  "unitCode": "6",
+  "skillPrimary": "2.D",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_translation_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; reference_pattern_mismatch; set_item_1:criterion_failed_scope_skill; set_item_1:criterion_failed_stimulus_expression; set_item_1:criterion_failed_distractor_explanation; set_item_1:criterion_failed_exam_suitability; set_item_1:reference_pattern_mismatch; set_item_2:criterion_failed_scope_skill; set_item_2:criterion_failed_stimulus_expression; set_item_2:criterion_failed_distractor_explanation; set_item_2:criterion_failed_exam_suitability; set_item_2:instant_reject_out_of_scope_knowledge; set_item_2:reference_pattern_mismatch; set_item_3:solver_disagrees:The shifted frame makes UAG right away, a stop codon at codon 4. The polypeptide ends early (Met-Trp-Arg) and none of the shifted codons are translated. So D (a nonsense mutation with a premature stop) is also defensible. C names the type of mutation and D describes its effect.; set_item_3:criterion_failed_scope_skill; set_item_3:criterion_failed_key_scoring; set_item_3:criterion_failed_distractor_explanation; set_item_3:criterion_failed_exam_suitability; set_item_3:instant_reject_multiple_correct; set_item_3:reference_pattern_mismatch; set_item_4:criterion_failed_key_scoring; set_item_4:criterion_failed_distractor_explanation; instant_reject_out_of_scope_knowledge; solver_disagrees:The shifted frame makes UAG right away, a stop codon at codon 4. The polypeptide ends early (Met-Trp-Arg) and none of the shifted codons are translated. So D (a nonsense mutation with a premature stop) is also defensible. C names the type of mutation and D describes its effect.; criterion_failed_key_scoring; instant_reject_multiple_correct",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The item requires splitting a short mRNA into codons, looking up six codons in the standard table, and choosing the correct order and stop-codon handling. This is a single-step translation procedure with no data comparison, prediction, or calculation. The mutation rows are not needed for this question. Distractors target the reversed order, an incomplete frame, and listing Stop as an amino acid. Depth and reasoning are below full-mock level, so this fits foundational practice.",
+  "payload": {
+   "archetype": "bis_translation_set",
+   "topic": "6.4",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "set_intro": "A researcher compares an original mRNA coding sequence with two mutated sequences of the same gene. The sequences are shown in the table.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Original and mutated mRNA coding sequences (5' to 3') for one gene",
+    "data": {
+     "columns": [
+      "Sequence",
+      "mRNA (5' to 3')"
+     ],
+     "rows": [
+      [
+       "Original",
+       "AUGUGGCGGUUAGCAUAA"
+      ],
+      [
+       "Mutation 1",
+       "AUGUGGCGGUUUGCAUAA"
+      ],
+      [
+       "Mutation 2",
+       "AUGUGGCGGUAGCAUAA"
+      ]
+     ],
+     "notes": [
+      "Each sequence begins at the start codon."
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_translation_set_q1",
+     "topic": "6.4",
+     "skill": "2.D",
+     "stem": "Which choice shows the amino acid sequence of the polypeptide made from the original mRNA, beginning at the amino terminus? (Use the standard codon table.)",
+     "options": [
+      {
+       "text": "Ala-Leu-Arg-Trp-Met",
+       "why": "Lists the amino acids in reverse order.",
+       "value": null
+      },
+      {
+       "text": "Cys-Gly-Gly",
+       "why": "Starts reading one nucleotide after the start codon.",
+       "value": null
+      },
+      {
+       "text": "Met-Trp-Arg-Leu-Ala",
+       "why": "Translation reads codons in order from the start codon until the stop codon: Met-Trp-Arg-Leu-Ala.",
+       "value": null
+      },
+      {
+       "text": "Met-Trp-Arg-Leu-Ala-Stop",
+       "why": "Includes the stop codon as an amino acid position and keeps reading.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Met-Trp-Arg-Leu-Ala. Translation reads codons in order from the start codon until the stop codon: Met-Trp-Arg-Leu-Ala.\nAla-Leu-Arg-Trp-Met is incorrect: Lists the amino acids in reverse order.\nCys-Gly-Gly is incorrect: Starts reading one nucleotide after the start codon.\nMet-Trp-Arg-Leu-Ala-Stop is incorrect: Includes the stop codon as an amino acid position and keeps reading.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "bis_translation_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "translate an mRNA from the start codon to the stop codon",
+      "topic": "6.4",
+      "skill": "2.D",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: translate an mRNA from the start codon to the stop codon",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "original mRNA"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Lists the amino acids in reverse order."
+       },
+       {
+        "id": "m2",
+        "description": "Starts reading one nucleotide after the start codon."
+       },
+       {
+        "id": "m3",
+        "description": "Includes the stop codon as an amino acid position and keeps reading."
+       }
+      ],
+      "verification": {
+       "independent_path": "codon-table loop vs translate()",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_translation_set_q2",
+     "topic": "6.7",
+     "skill": "5.D",
+     "stem": "Which statement best describes mutation 1?",
+     "options": [
+      {
+       "text": "A silent mutation: the amino acid sequence is unchanged.",
+       "why": "The sequence of amino acids is the same as the original.",
+       "value": null
+      },
+      {
+       "text": "A missense mutation: one amino acid is changed.",
+       "why": "Mutation 1 changes one nucleotide, so it is a substitution. Compare the two sequences: one codon codes for a different amino acid.",
+       "value": null
+      },
+      {
+       "text": "A nonsense mutation: a premature stop codon shortens the polypeptide.",
+       "why": "No codon has changed into a stop codon in this sequence.",
+       "value": null
+      },
+      {
+       "text": "A frameshift mutation: the reading frame is changed after the mutation.",
+       "why": "A frameshift would require the insertion or deletion of a nucleotide; mutation 1 replaced a nucleotide.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is A missense mutation: one amino acid is changed.. Mutation 1 changes one nucleotide, so it is a substitution. Compare the two sequences: one codon codes for a different amino acid.\nA silent mutation: the amino acid sequence is unchanged. is incorrect: The sequence of amino acids is the same as the original.\nA nonsense mutation: a premature stop codon shortens the polypeptide. is incorrect: No codon has changed into a stop codon in this sequence.\nA frameshift mutation: the reading frame is changed after the mutation. is incorrect: A frameshift would require the insertion or deletion of a nucleotide; mutation 1 replaced a nucleotide.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_translation_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "classify a point mutation by comparing translations",
+      "topic": "6.7",
+      "skill": "5.D",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: classify a point mutation by comparing translations",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "mutated mRNA"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The sequence of amino acids is the same as the original."
+       },
+       {
+        "id": "m2",
+        "description": "No codon has changed into a stop codon in this sequence."
+       },
+       {
+        "id": "m3",
+        "description": "A frameshift would require the insertion or deletion of a nucleotide; mutation 1 replaced a nucleotide."
+       }
+      ],
+      "verification": {
+       "independent_path": "translate both sequences vs the generating substitution",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_translation_set_q3",
+     "topic": "6.7",
+     "skill": "5.D",
+     "stem": "Which statement best describes mutation 2?",
+     "options": [
+      {
+       "text": "A missense mutation: one amino acid is changed.",
+       "why": "A single amino acid replacement does not explain a deletion of one nucleotide.",
+       "value": null
+      },
+      {
+       "text": "A silent mutation: the amino acid sequence is unchanged.",
+       "why": "The sequence is shorter by one nucleotide, so it cannot be a substitution.",
+       "value": null
+      },
+      {
+       "text": "A frameshift mutation: the reading frame is changed after the mutation.",
+       "why": "Mutation 2 is missing one nucleotide compared with the original, so the reading frame shifts after the deletion.",
+       "value": null
+      },
+      {
+       "text": "A nonsense mutation: a premature stop codon shortens the polypeptide.",
+       "why": "The deletion shifts the frame; the effect is not limited to a new stop codon.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is A frameshift mutation: the reading frame is changed after the mutation.. Mutation 2 is missing one nucleotide compared with the original, so the reading frame shifts after the deletion.\nA missense mutation: one amino acid is changed. is incorrect: A single amino acid replacement does not explain a deletion of one nucleotide.\nA silent mutation: the amino acid sequence is unchanged. is incorrect: The sequence is shorter by one nucleotide, so it cannot be a substitution.\nA nonsense mutation: a premature stop codon shortens the polypeptide. is incorrect: The deletion shifts the frame; the effect is not limited to a new stop codon.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_translation_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "recognize a frameshift from a deletion",
+      "topic": "6.7",
+      "skill": "5.D",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: recognize a frameshift from a deletion",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "mutated mRNA"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "A single amino acid replacement does not explain a deletion of one nucleotide."
+       },
+       {
+        "id": "m2",
+        "description": "The sequence is shorter by one nucleotide, so it cannot be a substitution."
+       },
+       {
+        "id": "m3",
+        "description": "The deletion shifts the frame; the effect is not limited to a new stop codon."
+       }
+      ],
+      "verification": {
+       "independent_path": "length comparison and translation vs the generating deletion",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_translation_set_q4",
+     "topic": "6.7",
+     "skill": "6.E",
+     "stem": "Which prediction about the effects of the two mutations on the function of the protein is best supported by the data?",
+     "options": [
+      {
+       "text": "Neither mutation can change the function, because the start codon is unchanged.",
+       "why": "A change after the start codon can still change the protein's amino acid sequence.",
+       "value": null
+      },
+      {
+       "text": "Mutation 1 is more likely to destroy the function of the protein, because every missense mutation changes all of the amino acids.",
+       "why": "A substitution changes at most one codon.",
+       "value": null
+      },
+      {
+       "text": "Both mutations are equally likely to destroy the function, because both change one nucleotide.",
+       "why": "The effects differ because a deletion shifts the reading frame.",
+       "value": null
+      },
+      {
+       "text": "Mutation 2 is more likely to destroy the function of the protein, because it can change many amino acids after the deletion.",
+       "why": "A frameshift changes all of the codons after the deletion, which usually changes the protein's structure much more than one amino acid substitution.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is Mutation 2 is more likely to destroy the function of the protein, because it can change many amino acids after the deletion.. A frameshift changes all of the codons after the deletion, which usually changes the protein's structure much more than one amino acid substitution.\nNeither mutation can change the function, because the start codon is unchanged. is incorrect: A change after the start codon can still change the protein's amino acid sequence.\nMutation 1 is more likely to destroy the function of the protein, because every missense mutation changes all of the amino acids. is incorrect: A substitution changes at most one codon.\nBoth mutations are equally likely to destroy the function, because both change one nucleotide. is incorrect: The effects differ because a deletion shifts the reading frame.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_translation_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "compare the likely effects of a substitution and a frameshift",
+      "topic": "6.7",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: compare the likely effects of a substitution and a frameshift",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "mutated mRNA"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "A change after the start codon can still change the protein's amino acid sequence."
+       },
+       {
+        "id": "m2",
+        "description": "A substitution changes at most one codon."
+       },
+       {
+        "id": "m3",
+        "description": "The effects differ because a deletion shifts the reading frame."
+       }
+      ],
+      "verification": {
+       "independent_path": "number of changed codons in each mutated sequence vs the generating mutation types",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 300,
+   "facts": [
+    "orig=AUGUGGCGGUUAGCAUAA"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_translation_set_q1",
+   "facts": [
+    "orig=AUGUGGCGGUUAGCAUAA"
+   ],
+   "seed": 9202
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": false,
+     "notes": "Task is codon lookup/decoding, not representing relationships within a model (2.D). Mutation rows are unused, so the item doesn't exercise the stated skill."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Met-Trp-Arg-Leu-Ala is correct. The option containing Stop is arguably defensible to some, but strictly wrong for an amino acid sequence."
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": "The table includes two mutated sequences that the question never uses, adding needless reading load and confusion. The stem says 'two mutated sequences' but asks only about the original."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "Cys-Gly-Gly does not result from reading one nucleotide offset (that would give Trp-Arg-Leu-Ala), so the stated rationale is inaccurate. The reversed-order distractor is weak. The 'Stop' option is not clearly an amino acid sequence error."
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": "Reads as a stem fragment from a set (unused mutations); mostly a decoding exercise with a superfluous stimulus."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct, but the item fails on several criteria. It is a codon lookup rather than skill 2.D, and the stimulus includes unused mutation rows. The Cys-Gly-Gly distractor does not match its stated misconception (offset reading would give Trp-Arg-Leu-Ala). The Stop-inclusive option is ambiguous. Fail."
+   },
+   {
+    "scope_skill": {
+     "pass": false,
+     "notes": ""
+    },
+    "notes": "The item depends on memorized codon assignments, which AP Biology does not expect. The calculator is irrelevant.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": ""
+    },
+    "instant_reject": [
+     "out_of_scope_knowledge"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct, but the item requires recalling codon assignments with no codon table given, a recall demand outside AP Biology expectations. It also fits skill 5.D poorly and carries an unused sequence (mutation 2)."
+   },
+   {
+    "scope_skill": {
+     "pass": false,
+     "notes": ""
+    },
+    "notes": "The time and reading load are fine, but the item would be challenged because two options are defensible.",
+    "key_scoring": {
+     "pass": false,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": ""
+    },
+    "instant_reject": [
+     "multiple_correct"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "Rejected. Deleting one nucleotide in mutation 2 shifts the frame so that codon 4 becomes UAG, a premature stop. Both the frameshift option (C) and the nonsense/premature-stop option (D) are therefore correct. The distractor rationale for D is also inaccurate, and the item tests mutation classification more than 5.D."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Mutation effects prediction fits 6.7/6.E."
+    },
+    "key_scoring": {
+     "pass": false,
+     "notes": "Conclusion (Mutation 2 more damaging) is right, but the key's reason ('change many amino acids after the deletion') does not match the data: the frameshift creates UAG at codon 4, a premature stop, so the protein is truncated, not many amino acids altered. The rationale 'changes all codons after the deletion' is likewise inaccurate for this sequence. The reasoning in the key is not supported by the stimulus."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete and clear."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "Option B is a strawman (a missense mutation changes all amino acids), C ignores the visible length difference, and the key is the longest and most detailed. The explanation also mis-describes the frameshift outcome for this sequence."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Time and load are appropriate."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item fails on key and rationale fidelity. The frameshift in Mutation 2 produces an immediate premature stop codon (UAG), so the data show truncation rather than 'many changed amino acids'. This makes the key's stated reason inconsistent with the stimulus, and the weak strawman distractors compound the problem. A better item would use a frameshift sequence that does not immediately yield a stop codon, or key the answer to truncation."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "The item requires splitting a short mRNA into codons, looking up six codons in the standard table, and choosing the correct order and stop-codon handling. This is a single-step translation procedure with no data comparison, prediction, or calculation. The mutation rows are not needed for this question. Distractors target the reversed order, an incomplete frame, and listing Stop as an amino acid. Depth and reasoning are below full-mock level, so this fits foundational practice.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Student splits the sequence into codons, translates using a codon table, and classifies the point mutation as missense (UUA Leu to UUU Phe). Same length rules out frameshift, and the stop codon remains in place, so it is not nonsense. This requires a single concept and a short chain of steps, with low reading and no arithmetic. Distractors are plausible but easily rejected by direct comparison. It is a fairly routine application of 6.7 and needs little data evaluation beyond comparing sequences, so it is below typical full-mock difficulty.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must compare sequences, detect a single-nucleotide deletion, re-read codons in the shifted frame, and recognize that the frameshift creates an immediate UAG stop, choosing between frameshift and nonsense as the best description. Content is squarely within 6.7, with short reading and no arithmetic. Minor concerns: the frameshift option is also technically true (the 'best' wording resolves it toward nonsense), and the item is only loosely aligned with skill 5.D.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the table, split the mRNA into codons, recognize Mutation 1 as a single-nucleotide substitution (a missense change at one codon) and Mutation 2 as a one-nucleotide deletion that causes a frameshift (here an immediate premature UAG stop), then predict the relative effects on protein function. This requires applying the governing relationship (frameshift versus substitution) and rejecting the misconceptions in the distractors. Reading and computation loads are low, and the item is unambiguous and in scope for topic 6.7. The correct option's wording (many amino acids changed) is slightly less precise than a premature stop but remains the best supported choice.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m03-k0",
+  "cellId": "ap_biology-m03",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "7.5",
+  "unitCode": "7",
+  "skillPrimary": "5.A",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_hw_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_key_scoring; set_item_2:criterion_failed_stimulus_expression; set_item_2:criterion_failed_distractor_explanation; set_item_2:criterion_failed_exam_suitability; set_item_2:instant_reject_missing_condition; set_item_2:reference_pattern_mismatch; set_item_4:solver_disagrees:Options A and B describe the same violation. A names the Hardy-Weinberg condition itself (random mating). B describes the violation (nonrandom mating), which is not itself a Hardy-Weinberg condition. Both are defensible keys, so the item cannot tell apart students who reached the correct conclusion.; set_item_4:criterion_failed_stimulus_expression; set_item_4:criterion_failed_distractor_explanation; set_item_4:criterion_failed_exam_suitability; set_item_4:reference_pattern_mismatch; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; instant_reject_missing_condition; reference_pattern_mismatch; solver_disagrees:Options A and B describe the same violation. A names the Hardy-Weinberg condition itself (random mating). B describes the violation (nonrandom mating), which is not itself a Hardy-Weinberg condition. Both are defensible keys, so the item cannot tell apart students who reached the correct conclusion.",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "One-step allele counting from a small genotype table: q = (2×182 + 235)/2000 ≈ 0.30. It needs recognizing that each diploid individual has two alleles, and distractors reflect common errors (heterozygote frequency, p instead of q, 2q). It does not require applying the p² + 2pq + q² = 1 equation or testing equilibrium, so it is a straightforward introductory calculation with minimal reading and arithmetic.",
+  "payload": {
+   "archetype": "bis_hw_set",
+   "topic": "7.5",
+   "skill": "5.A",
+   "calculator": "allowed",
+   "set_intro": "A biologist samples a population of a plant species and records the genotypes at a gene with two alleles, A and a. The table shows the data.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Genotypes of 1000 individuals in a population sampled at one time",
+    "data": {
+     "columns": [
+      "Genotype",
+      "Number of individuals"
+     ],
+     "rows": [
+      [
+       "AA",
+       "583"
+      ],
+      [
+       "Aa",
+       "235"
+      ],
+      [
+       "aa",
+       "182"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_hw_set_q1",
+     "topic": "7.5",
+     "skill": "5.A",
+     "stem": "What is the frequency of allele a in the population?",
+     "options": [
+      {
+       "text": "0.30",
+       "why": "There are 2000 alleles. The number of a alleles is 235 + 2(182) = 599, so the frequency of a is 599/2000 = 0.30.",
+       "value": "0.29950000"
+      },
+      {
+       "text": "0.24",
+       "why": "Counts the proportion of heterozygous individuals instead of the allele frequency.",
+       "value": "0.23500000"
+      },
+      {
+       "text": "0.60",
+       "why": "Divides the number of a alleles by the number of individuals instead of the number of alleles.",
+       "value": "0.59900000"
+      },
+      {
+       "text": "0.70",
+       "why": "Reports the frequency of the dominant allele.",
+       "value": "0.70050000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is 0.30. There are 2000 alleles. The number of a alleles is 235 + 2(182) = 599, so the frequency of a is 599/2000 = 0.30.\n0.24 is incorrect: Counts the proportion of heterozygous individuals instead of the allele frequency.\n0.60 is incorrect: Divides the number of a alleles by the number of individuals instead of the number of alleles.\n0.70 is incorrect: Reports the frequency of the dominant allele.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_hw_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "allele frequency from genotype counts",
+      "topic": "7.5",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: allele frequency from genotype counts",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Counts the proportion of heterozygous individuals instead of the allele frequency."
+       },
+       {
+        "id": "m2",
+        "description": "Divides the number of a alleles by the number of individuals instead of the number of alleles."
+       },
+       {
+        "id": "m3",
+        "description": "Reports the frequency of the dominant allele."
+       }
+      ],
+      "verification": {
+       "independent_path": "allele counting vs the generating q",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_hw_set_q2",
+     "topic": "7.5",
+     "skill": "5.A",
+     "stem": "If the population were in Hardy-Weinberg equilibrium with the allele frequencies found in the previous question, how many heterozygotes would be expected?",
+     "options": [
+      {
+       "text": "0.42",
+       "why": "Uses 2pq as a number without multiplying by the population size.",
+       "value": "0.41959950"
+      },
+      {
+       "text": "420",
+       "why": "Applying the relationship to the values given in the question and the stimulus gives 420; each other option comes from a specific, named error.",
+       "value": "419.59950"
+      },
+      {
+       "text": "491",
+       "why": "Uses p squared times the population size.",
+       "value": "490.70025"
+      },
+      {
+       "text": "210",
+       "why": "Uses p times q times the population size, without the factor of 2.",
+       "value": "209.79975"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is 420. Applying the relationship to the values given in the question and the stimulus gives 420; each other option comes from a specific, named error.\n0.42 is incorrect: Uses 2pq as a number without multiplying by the population size.\n491 is incorrect: Uses p squared times the population size.\n210 is incorrect: Uses p times q times the population size, without the factor of 2.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_hw_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "expected heterozygotes under Hardy-Weinberg",
+      "topic": "7.5",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: expected heterozygotes under Hardy-Weinberg",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses 2pq as a number without multiplying by the population size."
+       },
+       {
+        "id": "m2",
+        "description": "Uses p squared times the population size."
+       },
+       {
+        "id": "m3",
+        "description": "Uses p times q times the population size, without the factor of 2."
+       }
+      ],
+      "verification": {
+       "independent_path": "2pqN vs binomial expansion",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_hw_set_q3",
+     "topic": "7.5",
+     "skill": "4.B",
+     "stem": "Which statement best compares the observed number of heterozygotes with the expected number?",
+     "options": [
+      {
+       "text": "The population has fewer heterozygotes than expected (235 observed and about 420 expected), so it is not in Hardy-Weinberg equilibrium.",
+       "why": "A large deficit of heterozygotes is not consistent with the equilibrium genotype frequencies.",
+       "value": null
+      },
+      {
+       "text": "The comparison cannot be made, because Hardy-Weinberg applies only to dominant alleles.",
+       "why": "Hardy-Weinberg applies to alleles of a gene in a population.",
+       "value": null
+      },
+      {
+       "text": "The population has about the expected number of heterozygotes, so it is in Hardy-Weinberg equilibrium.",
+       "why": "The observed number differs a lot from the expected number.",
+       "value": null
+      },
+      {
+       "text": "The population has more heterozygotes than expected (235 observed and about 420 expected), so it is not in equilibrium.",
+       "why": "The observed number of heterozygotes is lower than expected, not higher.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is The population has fewer heterozygotes than expected (235 observed and about 420 expected), so it is not in Hardy-Weinberg equilibrium.. A large deficit of heterozygotes is not consistent with the equilibrium genotype frequencies.\nThe comparison cannot be made, because Hardy-Weinberg applies only to dominant alleles. is incorrect: Hardy-Weinberg applies to alleles of a gene in a population.\nThe population has about the expected number of heterozygotes, so it is in Hardy-Weinberg equilibrium. is incorrect: The observed number differs a lot from the expected number.\nThe population has more heterozygotes than expected (235 observed and about 420 expected), so it is not in equilibrium. is incorrect: The observed number of heterozygotes is lower than expected, not higher.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_hw_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "compare observed and expected heterozygotes",
+      "topic": "7.5",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: compare observed and expected heterozygotes",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Hardy-Weinberg applies to alleles of a gene in a population."
+       },
+       {
+        "id": "m2",
+        "description": "The observed number differs a lot from the expected number."
+       },
+       {
+        "id": "m3",
+        "description": "The observed number of heterozygotes is lower than expected, not higher."
+       }
+      ],
+      "verification": {
+       "independent_path": "observed minus expected heterozygotes vs the generating inbreeding",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_hw_set_q4",
+     "topic": "7.5",
+     "skill": "6.E",
+     "stem": "Which condition of Hardy-Weinberg equilibrium is most likely to have been violated?",
+     "options": [
+      {
+       "text": "Random mating among all the individuals in the population",
+       "why": "Random mating is a condition for equilibrium, not a violation.",
+       "value": null
+      },
+      {
+       "text": "Nonrandom mating, such as mating between relatives, which increases the proportion of homozygotes",
+       "why": "Inbreeding raises the frequency of homozygotes and lowers the frequency of heterozygotes without changing allele frequencies.",
+       "value": null
+      },
+      {
+       "text": "A very large population, which prevents chance changes in allele frequencies",
+       "why": "A large population helps maintain equilibrium and would not cause a heterozygote deficit.",
+       "value": null
+      },
+      {
+       "text": "No mutation, because the alleles are not changed",
+       "why": "The absence of mutation would help keep equilibrium.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is Nonrandom mating, such as mating between relatives, which increases the proportion of homozygotes. Inbreeding raises the frequency of homozygotes and lowers the frequency of heterozygotes without changing allele frequencies.\nRandom mating among all the individuals in the population is incorrect: Random mating is a condition for equilibrium, not a violation.\nA very large population, which prevents chance changes in allele frequencies is incorrect: A large population helps maintain equilibrium and would not cause a heterozygote deficit.\nNo mutation, because the alleles are not changed is incorrect: The absence of mutation would help keep equilibrium.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_hw_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "identify a violated equilibrium condition from a heterozygote deficit",
+      "topic": "7.5",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: identify a violated equilibrium condition from a heterozygote deficit",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Random mating is a condition for equilibrium, not a violation."
+       },
+       {
+        "id": "m2",
+        "description": "A large population helps maintain equilibrium and would not cause a heterozygote deficit."
+       },
+       {
+        "id": "m3",
+        "description": "The absence of mutation would help keep equilibrium."
+       }
+      ],
+      "verification": {
+       "independent_path": "deficit pattern vs the generating cause",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 275,
+   "facts": [
+    "q=0.2995"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_hw_set_q1",
+   "facts": [
+    "q=0.2995"
+   ],
+   "seed": 9200
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "Short item with low reading load and a single calculation. The calculator designation is consistent.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean allele-counting item with a correct, unique key, a complete table, and distinct distractors. It passes all criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The stem is not self-contained because it depends on a nonexistent previous question, which makes it unsuitable as a standalone exam item.",
+    "key_scoring": {
+     "pass": false,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": ""
+    },
+    "instant_reject": [
+     "missing_condition"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "Rejected. The stem says \"the allele frequencies found in the previous question\", but this is a standalone item, so a required condition is missing. The answer of 420 is otherwise computable from the table. The key explanation is also generic and does not show the calculation."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Topic 7.5 with data comparison; the short HW calculation fits the allowed difficulty levers."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "p=0.70, expected Aa about 420 vs 235 observed; A is unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete and consistent with the stem, with 1000 individuals and counts summing correctly."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor is explained. B is weak but acceptable, while C and D encode a no-difference reading and a direction reversal."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 70 seconds, calculator appropriate, clean numbers."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound and has a unique key. Distractor B is weak but acceptable, so the item passes."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The timing and calculator load are fine, but the inconsistent option framing makes it unsuitable for the exam as written, since a careful student can read A as the violated condition.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The biology and key are sound (heterozygote deficit points to nonrandom mating). The options are poorly constructed: they mix conditions that hold with a violation, the distractors encode one repeated misconception, and A creates a wording ambiguity that confused the independent solver. It should be revised so that all options are parallel violation statements, such as nonrandom mating, small population size, gene flow, and selection."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "One-step allele counting from a small genotype table: q = (2×182 + 235)/2000 ≈ 0.30. It needs recognizing that each diploid individual has two alleles, and distractors reflect common errors (heterozygote frequency, p instead of q, 2q). It does not require applying the p² + 2pq + q² = 1 equation or testing equilibrium, so it is a straightforward introductory calculation with minimal reading and arithmetic.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Standard Hardy-Weinberg calculation: derive allele frequencies from genotype counts (p≈0.70, q≈0.30), then compute 2pq x 1000 = 420. One table, one formula-sheet equation, short rounded arithmetic. Distractors target common errors (frequency vs count, p^2 instead of 2pq). The reference to 'previous question' is a minor wording flaw, but frequencies can be recomputed from the table. Fits the core skill with modest reasoning load.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read genotype counts from a table, convert them to allele frequencies (p about 0.70, q about 0.30), apply the Hardy-Weinberg 2pq expression to get about 420 expected heterozygotes, and compare this with the observed 235. This is one formula-sheet calculation with a representation change, and the distractors target direction-of-difference and misconceptions about Hardy-Weinberg. Arithmetic is short and rounds cleanly, wording is clear, and the content is in scope for 7.5 and skill 4.B.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the genotype table, calculate p and q from the counts, and compare the expected 2pq with the observed heterozygotes (~420 vs 235). From the heterozygote deficit they infer which Hardy-Weinberg condition is violated (nonrandom mating) and reject the other conditions. This requires one formula-sheet calculation and a prediction of cause, which fits the allowed levers. Arithmetic is short and the wording is clear. Option B gives away the mechanism somewhat, which keeps it from being advanced.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m03-k1",
+  "cellId": "ap_biology-m03",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "7.5",
+  "unitCode": "7",
+  "skillPrimary": "5.A",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_hw_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_stimulus_expression; set_item_2:criterion_failed_distractor_explanation; set_item_2:instant_reject_missing_condition; set_item_4:solver_disagrees:Options C and D refer to the same thing. C describes the violation (nonrandom mating), while D names the Hardy-Weinberg condition that was broken (random mating). The stem asks which condition was violated, so D fits it literally, but C is worded as the explanation. Either could be keyed as correct.; set_item_4:criterion_failed_key_scoring; set_item_4:criterion_failed_distractor_explanation; set_item_4:criterion_failed_exam_suitability; set_item_4:instant_reject_multiple_correct; set_item_4:reference_pattern_mismatch; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; instant_reject_missing_condition; solver_disagrees:Options C and D refer to the same thing. C describes the violation (nonrandom mating), while D names the Hardy-Weinberg condition that was broken (random mating). The stem asks which condition was violated, so D fits it literally, but C is worded as the explanation. Either could be keyed as correct.; criterion_failed_key_scoring; criterion_failed_exam_suitability; instant_reject_multiple_correct; reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single table read and one clean allele-frequency calculation: (2x91+118)/1000 = 0.30. Distractors are genotype frequencies (0.18, 0.24) and a doubling error (0.60). No Hardy-Weinberg prediction or multi-step reasoning is needed. Arithmetic is small and clean, so it is suited to foundational practice rather than a full mock.",
+  "payload": {
+   "archetype": "bis_hw_set",
+   "topic": "7.5",
+   "skill": "5.A",
+   "calculator": "allowed",
+   "set_intro": "A biologist samples a population of a plant species and records the genotypes at a gene with two alleles, A and a. The table shows the data.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Genotypes of 500 individuals in a population sampled at one time",
+    "data": {
+     "columns": [
+      "Genotype",
+      "Number of individuals"
+     ],
+     "rows": [
+      [
+       "AA",
+       "291"
+      ],
+      [
+       "Aa",
+       "118"
+      ],
+      [
+       "aa",
+       "91"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_hw_set_q1",
+     "topic": "7.5",
+     "skill": "5.A",
+     "stem": "What is the frequency of allele a in the population?",
+     "options": [
+      {
+       "text": "0.24",
+       "why": "Counts the proportion of heterozygous individuals instead of the allele frequency.",
+       "value": "0.23600000"
+      },
+      {
+       "text": "0.18",
+       "why": "Counts the proportion of homozygous recessive individuals instead of the allele frequency.",
+       "value": "0.18200000"
+      },
+      {
+       "text": "0.30",
+       "why": "There are 1000 alleles. The number of a alleles is 118 + 2(91) = 300, so the frequency of a is 300/1000 = 0.30.",
+       "value": "0.30000000"
+      },
+      {
+       "text": "0.60",
+       "why": "Divides the number of a alleles by the number of individuals instead of the number of alleles.",
+       "value": "0.60000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 0.30. There are 1000 alleles. The number of a alleles is 118 + 2(91) = 300, so the frequency of a is 300/1000 = 0.30.\n0.24 is incorrect: Counts the proportion of heterozygous individuals instead of the allele frequency.\n0.18 is incorrect: Counts the proportion of homozygous recessive individuals instead of the allele frequency.\n0.60 is incorrect: Divides the number of a alleles by the number of individuals instead of the number of alleles.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_hw_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "allele frequency from genotype counts",
+      "topic": "7.5",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: allele frequency from genotype counts",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Counts the proportion of heterozygous individuals instead of the allele frequency."
+       },
+       {
+        "id": "m2",
+        "description": "Counts the proportion of homozygous recessive individuals instead of the allele frequency."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the number of a alleles by the number of individuals instead of the number of alleles."
+       }
+      ],
+      "verification": {
+       "independent_path": "allele counting vs the generating q",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_hw_set_q2",
+     "topic": "7.5",
+     "skill": "5.A",
+     "stem": "If the population were in Hardy-Weinberg equilibrium with the allele frequencies found in the previous question, how many heterozygotes would be expected?",
+     "options": [
+      {
+       "text": "210",
+       "why": "Applying the relationship to the values given in the question and the stimulus gives 210; each other option comes from a specific, named error.",
+       "value": "210.00000"
+      },
+      {
+       "text": "0.42",
+       "why": "Uses 2pq as a number without multiplying by the population size.",
+       "value": "0.42000000"
+      },
+      {
+       "text": "245",
+       "why": "Uses p squared times the population size.",
+       "value": "245.00000"
+      },
+      {
+       "text": "45",
+       "why": "Uses q squared times the population size.",
+       "value": "45.000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is 210. Applying the relationship to the values given in the question and the stimulus gives 210; each other option comes from a specific, named error.\n0.42 is incorrect: Uses 2pq as a number without multiplying by the population size.\n245 is incorrect: Uses p squared times the population size.\n45 is incorrect: Uses q squared times the population size.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_hw_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "expected heterozygotes under Hardy-Weinberg",
+      "topic": "7.5",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: expected heterozygotes under Hardy-Weinberg",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses 2pq as a number without multiplying by the population size."
+       },
+       {
+        "id": "m2",
+        "description": "Uses p squared times the population size."
+       },
+       {
+        "id": "m3",
+        "description": "Uses q squared times the population size."
+       }
+      ],
+      "verification": {
+       "independent_path": "2pqN vs binomial expansion",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_hw_set_q3",
+     "topic": "7.5",
+     "skill": "4.B",
+     "stem": "Which statement best compares the observed number of heterozygotes with the expected number?",
+     "options": [
+      {
+       "text": "The population has about the expected number of heterozygotes, so it is in Hardy-Weinberg equilibrium.",
+       "why": "The observed number differs a lot from the expected number.",
+       "value": null
+      },
+      {
+       "text": "The population has more heterozygotes than expected (118 observed and about 210 expected), so it is not in equilibrium.",
+       "why": "The observed number of heterozygotes is lower than expected, not higher.",
+       "value": null
+      },
+      {
+       "text": "The population has fewer heterozygotes than expected (118 observed and about 210 expected), so it is not in Hardy-Weinberg equilibrium.",
+       "why": "A large deficit of heterozygotes is not consistent with the equilibrium genotype frequencies.",
+       "value": null
+      },
+      {
+       "text": "The comparison cannot be made, because Hardy-Weinberg applies only to dominant alleles.",
+       "why": "Hardy-Weinberg applies to alleles of a gene in a population.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is The population has fewer heterozygotes than expected (118 observed and about 210 expected), so it is not in Hardy-Weinberg equilibrium.. A large deficit of heterozygotes is not consistent with the equilibrium genotype frequencies.\nThe population has about the expected number of heterozygotes, so it is in Hardy-Weinberg equilibrium. is incorrect: The observed number differs a lot from the expected number.\nThe population has more heterozygotes than expected (118 observed and about 210 expected), so it is not in equilibrium. is incorrect: The observed number of heterozygotes is lower than expected, not higher.\nThe comparison cannot be made, because Hardy-Weinberg applies only to dominant alleles. is incorrect: Hardy-Weinberg applies to alleles of a gene in a population.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_hw_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "compare observed and expected heterozygotes",
+      "topic": "7.5",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: compare observed and expected heterozygotes",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The observed number differs a lot from the expected number."
+       },
+       {
+        "id": "m2",
+        "description": "The observed number of heterozygotes is lower than expected, not higher."
+       },
+       {
+        "id": "m3",
+        "description": "Hardy-Weinberg applies to alleles of a gene in a population."
+       }
+      ],
+      "verification": {
+       "independent_path": "observed minus expected heterozygotes vs the generating inbreeding",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_hw_set_q4",
+     "topic": "7.5",
+     "skill": "6.E",
+     "stem": "Which condition of Hardy-Weinberg equilibrium is most likely to have been violated?",
+     "options": [
+      {
+       "text": "A very large population, which prevents chance changes in allele frequencies",
+       "why": "A large population helps maintain equilibrium and would not cause a heterozygote deficit.",
+       "value": null
+      },
+      {
+       "text": "No mutation, because the alleles are not changed",
+       "why": "The absence of mutation would help keep equilibrium.",
+       "value": null
+      },
+      {
+       "text": "Nonrandom mating, such as mating between relatives, which increases the proportion of homozygotes",
+       "why": "Inbreeding raises the frequency of homozygotes and lowers the frequency of heterozygotes without changing allele frequencies.",
+       "value": null
+      },
+      {
+       "text": "Random mating among all the individuals in the population",
+       "why": "Random mating is a condition for equilibrium, not a violation.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Nonrandom mating, such as mating between relatives, which increases the proportion of homozygotes. Inbreeding raises the frequency of homozygotes and lowers the frequency of heterozygotes without changing allele frequencies.\nA very large population, which prevents chance changes in allele frequencies is incorrect: A large population helps maintain equilibrium and would not cause a heterozygote deficit.\nNo mutation, because the alleles are not changed is incorrect: The absence of mutation would help keep equilibrium.\nRandom mating among all the individuals in the population is incorrect: Random mating is a condition for equilibrium, not a violation.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_hw_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "identify a violated equilibrium condition from a heterozygote deficit",
+      "topic": "7.5",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: identify a violated equilibrium condition from a heterozygote deficit",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "A large population helps maintain equilibrium and would not cause a heterozygote deficit."
+       },
+       {
+        "id": "m2",
+        "description": "The absence of mutation would help keep equilibrium."
+       },
+       {
+        "id": "m3",
+        "description": "Random mating is a condition for equilibrium, not a violation."
+       }
+      ],
+      "verification": {
+       "independent_path": "deficit pattern vs the generating cause",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 275,
+   "facts": [
+    "q=0.3000"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_hw_set_q1",
+   "facts": [
+    "q=0.3000"
+   ],
+   "seed": 9201
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Allele frequency from genotype counts, a calculation within 7.5 and skill 5.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "300/1000 = 0.30 is the unique correct answer by allele counting; no equilibrium assumption is needed."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete, counts sum to 500, and all numbers used appear in the stimulus."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct, accurate misconception (heterozygote proportion, recessive genotype proportion, dividing by individuals); the explanation covers each wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, one-step calculation with a calculator allowed; typical AP load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct and clean. The key is 0.30, the distractors are distinct and realistic, and the stimulus is complete. It passes all five criteria."
+   },
+   {
+    "instant_reject": [
+     "missing_condition"
+    ],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key (210) is correct, but the stem refers to a \"previous question\" that does not exist in this standalone item, so the allele-frequency step is left unstated. The explanation for the correct option is a generic placeholder with no derivation of p and q. Fix the stem so it says to calculate the allele frequencies from the table, and write a real explanation.",
+    "scope_skill": {
+     "pass": true,
+     "notes": "The item fits 7.5 and skill 5.A: a Hardy-Weinberg calculation from genotype counts."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "The key is correct: p = 0.70, q = 0.30, 2pq = 0.42, and 0.42 × 500 = 210. Only one option is defensible."
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": "The stem says \"allele frequencies found in the previous question\", which is not part of this item. This is a missing condition. The table itself is complete."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "The distractor rationales are accurate (0.42 is 2pq as a frequency, 245 is p²N, 45 is q²N). The explanation for the correct answer is a generic placeholder and never shows the p and q derivation."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The calculation load is appropriate for the exam, and calculator use is allowed."
+    }
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "About 70 seconds, light calculation, calculator allowed, and the Hardy-Weinberg equation is on the formula sheet.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key is unique and correct, the table is complete, the distractors are distinct, and the load is typical for the exam."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "The item fits 7.5. It asks the student to infer a violated condition from a heterozygote deficit. That is acceptable for 6.E, though it is more a diagnosis than a prediction."
+    },
+    "key_scoring": {
+     "pass": false,
+     "notes": "The key C is the biologically correct violation. However, option D, \"Random mating,\" is the name of the condition the stem asks about (\"which condition ... violated\"), so a literal reading allows D. The independent solver chose D, which shows the key is not unambiguously unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete and consistent (291+118+91 = 500)."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "The options are mixed in form. A, B and D are phrased as conditions that are met, while C alone is phrased as a violation, which is a giveaway. Options C and D are near mirror images, so D is not a clean distractor. The rationale for D (\"not a violation\") conflicts with the stem's wording about conditions."
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": "The timing is fine, but the ambiguity between C and D and the unparallel options make it unsuitable as written."
+    },
+    "instant_reject": [
+     "multiple_correct"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The item fails on option design. C (nonrandom mating) is the intended key, but D (random mating) can be read as the violated condition by name, and the solver chose it. The options are also not parallel: only C is phrased as a violation, which gives away the answer."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single table read and one clean allele-frequency calculation: (2x91+118)/1000 = 0.30. Distractors are genotype frequencies (0.18, 0.24) and a doubling error (0.60). No Hardy-Weinberg prediction or multi-step reasoning is needed. Arithmetic is small and clean, so it is suited to foundational practice rather than a full mock.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "The student must derive p and q from genotype counts in a table, apply 2pq from the formula sheet, and convert the frequency to a count of 500 individuals. The numbers are clean (p=0.7, q=0.3, 2pq=0.42, answer 210). The distractors target common errors: reporting the frequency instead of the count, and using p² instead of 2pq. The reference to 'the previous question' is a minor wording flaw, but the allele frequencies can be recomputed from the table.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the genotype table, compute allele frequency p = 0.7 from counts (700/1000), apply 2pq to get the expected 210 heterozygotes, compare it with the observed 118, and pick the correct direction and conclusion. This requires choosing the Hardy-Weinberg relationship and doing one short formula-sheet calculation with clean numbers. Distractors target named misconceptions (reversed direction, false equilibrium, dominance-only). It is typical for a full-mock multiple-choice item, with low reading load and no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the genotype table, compute p and q (p=0.7, q=0.3), find the expected HW genotype counts (245/210/45), compare them with the observed counts (291/118/91), and infer that the heterozygote deficit points to nonrandom mating (inbreeding) rather than the other conditions. This involves one formula-sheet calculation with clean numbers plus predicting the cause of a deviation and rejecting plausible distractors. The reading load is short and the context is concise.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m04-k0",
+  "cellId": "ap_biology-m04",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "5.C",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_chi_square_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_distractor_explanation; criterion_failed_distractor_explanation",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single proportional calculation: apply the 9:3:3:1 dihybrid ratio to find expected round, green = 3/16 x 320 = 60. Requires reading the table, selecting the correct ratio fraction, and a short clean multiplication. Distractors target common errors (using the observed value, the raw ratio number, or a 1/4 fraction). Appropriate for a full mock; not trivially definitional and not beyond scope.",
+  "payload": {
+   "archetype": "bis_chi_square_set",
+   "topic": "5.3",
+   "skill": "5.A",
+   "calculator": "allowed",
+   "set_intro": "A student crosses two pea plants that are heterozygous for seed shape (round or wrinkled) and seed color (yellow or green) and counts the offspring. The table shows the data.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Phenotypes of the offspring of a cross between two plants that are heterozygous for seed shape and seed color",
+    "data": {
+     "columns": [
+      "Phenotype",
+      "Observed number of offspring"
+     ],
+     "rows": [
+      [
+       "Round, yellow",
+       "190"
+      ],
+      [
+       "Round, green",
+       "56"
+      ],
+      [
+       "Wrinkled, yellow",
+       "54"
+      ],
+      [
+       "Wrinkled, green",
+       "20"
+      ]
+     ],
+     "notes": [
+      "Total offspring: 320",
+      "Hypothesis: the genes assort independently, giving a 9:3:3:1 ratio."
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_chi_square_set_q1",
+     "topic": "5.3",
+     "skill": "5.A",
+     "stem": "If the genes assort independently, how many offspring are expected in the phenotype class round, green?",
+     "options": [
+      {
+       "text": "56",
+       "why": "Uses the observed number instead of the expected number.",
+       "value": "56.000000"
+      },
+      {
+       "text": "3",
+       "why": "Uses the ratio number as the count.",
+       "value": "3.0000000"
+      },
+      {
+       "text": "60",
+       "why": "Applying the relationship to the values given in the question and the stimulus gives 60; each other option comes from a specific, named error.",
+       "value": "60.000000"
+      },
+      {
+       "text": "80",
+       "why": "Divides the total by 4 as if the four classes were equally likely.",
+       "value": "80.000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 60. Applying the relationship to the values given in the question and the stimulus gives 60; each other option comes from a specific, named error.\n56 is incorrect: Uses the observed number instead of the expected number.\n3 is incorrect: Uses the ratio number as the count.\n80 is incorrect: Divides the total by 4 as if the four classes were equally likely.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "bis_chi_square_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "expected count from a 9:3:3:1 ratio",
+      "topic": "5.3",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: expected count from a 9:3:3:1 ratio",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "observed offspring"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses the observed number instead of the expected number."
+       },
+       {
+        "id": "m2",
+        "description": "Uses the ratio number as the count."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the total by 4 as if the four classes were equally likely."
+       }
+      ],
+      "verification": {
+       "independent_path": "N x ratio/16 vs exact fractions",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_chi_square_set_q2",
+     "topic": "5.3",
+     "skill": "5.C",
+     "stem": "Using the chi-square equation on the formula sheet, what is the value of chi-square for the data?",
+     "options": [
+      {
+       "text": "1.42",
+       "why": "χ² = Σ(o - e)²/e = (190 - 180)²/180 + (56 - 60)²/60 + (54 - 60)²/60 + (20 - 20)²/20 = 1.42.",
+       "value": "1.4222222"
+      },
+      {
+       "text": "0.22",
+       "why": "Does not square the differences, using the sum of the absolute differences divided by the expected numbers.",
+       "value": "0.22222222"
+      },
+      {
+       "text": "152.00",
+       "why": "Does not divide by the expected numbers.",
+       "value": "152.00000"
+      },
+      {
+       "text": "128.14",
+       "why": "Adds the observed and expected numbers before squaring.",
+       "value": "128.14222"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is 1.42. χ² = Σ(o - e)²/e = (190 - 180)²/180 + (56 - 60)²/60 + (54 - 60)²/60 + (20 - 20)²/20 = 1.42.\n0.22 is incorrect: Does not square the differences, using the sum of the absolute differences divided by the expected numbers.\n152.00 is incorrect: Does not divide by the expected numbers.\n128.14 is incorrect: Adds the observed and expected numbers before squaring.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "bis_chi_square_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "chi-square statistic",
+      "topic": "5.3",
+      "skill": "5.C",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: chi-square statistic",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "observed offspring"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Does not square the differences, using the sum of the absolute differences divided by the expected numbers."
+       },
+       {
+        "id": "m2",
+        "description": "Does not divide by the expected numbers."
+       },
+       {
+        "id": "m3",
+        "description": "Adds the observed and expected numbers before squaring."
+       }
+      ],
+      "verification": {
+       "independent_path": "floating-point sum vs exact fractions",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_chi_square_set_q3",
+     "topic": "5.3",
+     "skill": "5.C",
+     "stem": "Which conclusion is correct at the 0.05 level of significance?",
+     "options": [
+      {
+       "text": "The null hypothesis is rejected, because the chi-square value is greater than the critical value of 7.81 for 3 degrees of freedom at p = 0.05.",
+       "why": "States the opposite decision from the comparison of the calculated and critical values.",
+       "value": null
+      },
+      {
+       "text": "The null hypothesis is not rejected, because the chi-square value is less than the critical value of 7.81 for 3 degrees of freedom at p = 0.05.",
+       "why": "With four phenotype classes the degrees of freedom are 3, and the critical value at p = 0.05 is 7.81; the calculated value is 1.42.",
+       "value": null
+      },
+      {
+       "text": "The null hypothesis is rejected, because the critical value for 4 degrees of freedom, 9.49, is used.",
+       "why": "The degrees of freedom are the number of classes minus one, which is 3.",
+       "value": null
+      },
+      {
+       "text": "The null hypothesis is proven true, because the chi-square value is not zero.",
+       "why": "A statistical test cannot prove the null hypothesis.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is The null hypothesis is not rejected, because the chi-square value is less than the critical value of 7.81 for 3 degrees of freedom at p = 0.05.. With four phenotype classes the degrees of freedom are 3, and the critical value at p = 0.05 is 7.81; the calculated value is 1.42.\nThe null hypothesis is rejected, because the chi-square value is greater than the critical value of 7.81 for 3 degrees of freedom at p = 0.05. is incorrect: States the opposite decision from the comparison of the calculated and critical values.\nThe null hypothesis is rejected, because the critical value for 4 degrees of freedom, 9.49, is used. is incorrect: The degrees of freedom are the number of classes minus one, which is 3.\nThe null hypothesis is proven true, because the chi-square value is not zero. is incorrect: A statistical test cannot prove the null hypothesis.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_chi_square_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "compare chi-square with the critical value",
+      "topic": "5.3",
+      "skill": "5.C",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: compare chi-square with the critical value",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "observed offspring"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "States the opposite decision from the comparison of the calculated and critical values."
+       },
+       {
+        "id": "m2",
+        "description": "The degrees of freedom are the number of classes minus one, which is 3."
+       },
+       {
+        "id": "m3",
+        "description": "A statistical test cannot prove the null hypothesis."
+       }
+      ],
+      "verification": {
+       "independent_path": "decision rule with df = 3 vs the generating comparison",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_chi_square_set_q4",
+     "topic": "5.3",
+     "skill": "6.B",
+     "stem": "Which explanation is best supported by the result of the chi-square test?",
+     "options": [
+      {
+       "text": "The data show that the genes are linked on the same chromosome.",
+       "why": "Linked genes would give a significant departure from the expected ratio.",
+       "value": null
+      },
+      {
+       "text": "The two genes must be on the sex chromosomes.",
+       "why": "Nothing in the data indicates sex linkage.",
+       "value": null
+      },
+      {
+       "text": "The data prove that the genes are on different chromosomes.",
+       "why": "A test cannot prove the hypothesis; it shows consistency.",
+       "value": null
+      },
+      {
+       "text": "The data are consistent with independent assortment of the two genes.",
+       "why": "The difference from 9:3:3:1 is small enough to be explained by chance.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The data are consistent with independent assortment of the two genes.. The difference from 9:3:3:1 is small enough to be explained by chance.\nThe data show that the genes are linked on the same chromosome. is incorrect: Linked genes would give a significant departure from the expected ratio.\nThe two genes must be on the sex chromosomes. is incorrect: Nothing in the data indicates sex linkage.\nThe data prove that the genes are on different chromosomes. is incorrect: A test cannot prove the hypothesis; it shows consistency.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_chi_square_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "interpret a chi-square result in terms of linkage and assortment",
+      "topic": "5.3",
+      "skill": "6.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: interpret a chi-square result in terms of linkage and assortment",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "observed offspring"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Linked genes would give a significant departure from the expected ratio."
+       },
+       {
+        "id": "m2",
+        "description": "Nothing in the data indicates sex linkage."
+       },
+       {
+        "id": "m3",
+        "description": "A test cannot prove the hypothesis; it shows consistency."
+       }
+      ],
+      "verification": {
+       "independent_path": "decision rule outcome vs the generating deviation",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 285,
+   "facts": [
+    "N=320",
+    "exp=[180.0, 60.0, 60.0, 20.0]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_chi_square_set_q1",
+   "facts": [
+    "N=320",
+    "exp=[180.0, 60.0, 60.0, 20.0]"
+   ],
+   "seed": 9201
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Expected count from 9:3:3:1 dihybrid ratio; fits 5.3 and skill 5.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "3/16 x 320 = 60, unique answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete; total is in the notes and the observed counts sum to 320."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors encode distinct named errors. The correct-answer rationale is a generic template that does not show 3/16 x 320, which is a minor weakness."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "A quick one-step calculation with a light reading load and a calculator allowed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct and in scope. The only weakness is a generic rationale for the key, which I consider minor, so it passes."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "Reasonable load, calculator allowed, though it is a pure computation.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct and the stimulus is complete. Two distractor values (0.22 and 128.14) do not correspond to the misconceptions claimed in their rationales, so the item fails the distractor and explanation criterion."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Chi-square test on a Mendelian dihybrid cross; fits 5.3 and 5.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Chi-square is 1.42, below the critical value of 7.81 for df = 3, so the null is not rejected. B is the unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table gives observed counts, the total, and the 9:3:3:1 hypothesis. The 0.05 level is in the stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors encode a reversed decision, a wrong df, and the claim that a test proves the null. The explanation covers each option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The calculation is short, calculator use is allowed, and the item fits about 70 seconds."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A sound chi-square MC item with a unique correct answer. The distractors are acceptable, though option C is slightly contrived."
+   },
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct and unique: chi-square is about 1.42 against a critical value of 7.82, so the data are consistent with independent assortment. The distractors encode named misconceptions, and the explanation addresses each one. The item is acceptable.",
+    "scope_skill": {
+     "pass": true,
+     "notes": "Independent assortment is Mendelian genetics (5.3). Supporting a conclusion with a chi-square result is skill 6.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Expected counts are 180, 60, 60 and 20, giving chi-square of about 1.42 with 3 df. This is below 7.82, so the keyed option is correct. The other three options are unsupported by the data."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table gives observed counts, the total and the 9:3:3:1 hypothesis. The stem refers to \"the result of the chi-square test\" without giving a value, so students must compute it. This is acceptable with a calculator and the formula sheet."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The linkage and \"prove\" distractors are realistic misconceptions with accurate rationales. The sex-chromosome distractor is weak because peas have no sex chromosomes, but it is still wrong and is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "One short calculation and four brief options. Timing and calculator load are typical of AP Biology."
+    }
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "exam_prep",
+    "rationale": "Single proportional calculation: apply the 9:3:3:1 dihybrid ratio to find expected round, green = 3/16 x 320 = 60. Requires reading the table, selecting the correct ratio fraction, and a short clean multiplication. Distractors target common errors (using the observed value, the raw ratio number, or a 1/4 fraction). Appropriate for a full mock; not trivially definitional and not beyond scope.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Standard AP chi-square application: derive expected counts from the 9:3:3:1 ratio (180, 60, 60, 20), then apply the formula-sheet equation across four categories to get 1.42. Concept depth is moderate, with one formula use and clean integer arithmetic. Distractors reflect plausible errors (e.g., omitting division by expected, or summing differences). Fully in scope, with no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 3,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must derive expected counts from 9:3:3:1 and 320 total, compute a four-term chi-square (about 1.42) with clean numbers, determine df = 3, compare with the given critical value, and reject distractors (wrong df, 'proven true'). Single-concept, moderate multi-step, calculator-friendly; matches standard AP chi-square practice. No unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 5,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 150
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the table, derive expected counts from the 9:3:3:1 ratio, apply the chi-square formula across four categories (about 1.42, df = 3, critical value 7.81), and conclude fail to reject. Distractors target the common misconceptions that the data 'prove' something and that linkage or sex chromosomes are involved. Arithmetic is short with clean numbers and the scenario is concise, so the difficulty comes from the concepts and reasoning rather than unfair sources.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 150
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m04-k1",
+  "cellId": "ap_biology-m04",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "5.C",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_chi_square_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation; set_item_1:criterion_failed_distractor_explanation; set_item_2:criterion_failed_distractor_explanation",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-step proportional calculation: apply the 9/16 fraction from the stated 9:3:3:1 ratio to the 160 total (9/16 × 160 = 90). The table is simple and the numbers are clean. The distractors correspond to common errors (using 1/4, giving the ratio term, multiplying 9 by 160). It tests basic application of an expected ratio, which is the first step of a chi-square setup, and needs no multi-step reasoning or representation change, so it is better suited to basic learning than a full mock exam.",
+  "payload": {
+   "archetype": "bis_chi_square_set",
+   "topic": "5.3",
+   "skill": "5.A",
+   "calculator": "allowed",
+   "set_intro": "A student crosses two pea plants that are heterozygous for seed shape (round or wrinkled) and seed color (yellow or green) and counts the offspring. The table shows the data.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Phenotypes of the offspring of a cross between two plants that are heterozygous for seed shape and seed color",
+    "data": {
+     "columns": [
+      "Phenotype",
+      "Observed number of offspring"
+     ],
+     "rows": [
+      [
+       "Round, yellow",
+       "89"
+      ],
+      [
+       "Round, green",
+       "33"
+      ],
+      [
+       "Wrinkled, yellow",
+       "29"
+      ],
+      [
+       "Wrinkled, green",
+       "9"
+      ]
+     ],
+     "notes": [
+      "Total offspring: 160",
+      "Hypothesis: the genes assort independently, giving a 9:3:3:1 ratio."
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_chi_square_set_q1",
+     "topic": "5.3",
+     "skill": "5.A",
+     "stem": "If the genes assort independently, how many offspring are expected in the phenotype class round, yellow?",
+     "options": [
+      {
+       "text": "40",
+       "why": "Divides the total by 4 as if the four classes were equally likely.",
+       "value": "40.000000"
+      },
+      {
+       "text": "90",
+       "why": "Applying the relationship to the values given in the question and the stimulus gives 90; each other option comes from a specific, named error.",
+       "value": "90.000000"
+      },
+      {
+       "text": "9",
+       "why": "Uses the ratio number as the count.",
+       "value": "9.0000000"
+      },
+      {
+       "text": "1440",
+       "why": "Multiplies the total by the ratio number without dividing by 16.",
+       "value": "1440.0000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is 90. Applying the relationship to the values given in the question and the stimulus gives 90; each other option comes from a specific, named error.\n40 is incorrect: Divides the total by 4 as if the four classes were equally likely.\n9 is incorrect: Uses the ratio number as the count.\n1440 is incorrect: Multiplies the total by the ratio number without dividing by 16.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "bis_chi_square_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "expected count from a 9:3:3:1 ratio",
+      "topic": "5.3",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: expected count from a 9:3:3:1 ratio",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "observed offspring"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Divides the total by 4 as if the four classes were equally likely."
+       },
+       {
+        "id": "m2",
+        "description": "Uses the ratio number as the count."
+       },
+       {
+        "id": "m3",
+        "description": "Multiplies the total by the ratio number without dividing by 16."
+       }
+      ],
+      "verification": {
+       "independent_path": "N x ratio/16 vs exact fractions",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_chi_square_set_q2",
+     "topic": "5.3",
+     "skill": "5.C",
+     "stem": "Using the chi-square equation on the formula sheet, what is the value of chi-square for the data?",
+     "options": [
+      {
+       "text": "12.00",
+       "why": "Does not divide by the expected numbers.",
+       "value": "12.000000"
+      },
+      {
+       "text": "0.24",
+       "why": "Does not square the differences, using the sum of the absolute differences divided by the expected numbers.",
+       "value": "0.24444444"
+      },
+      {
+       "text": "0.44",
+       "why": "χ² = Σ(o - e)²/e = (89 - 90)²/90 + (33 - 30)²/30 + (29 - 30)²/30 + (9 - 10)²/10 = 0.44.",
+       "value": "0.44444444"
+      },
+      {
+       "text": "64.04",
+       "why": "Adds the observed and expected numbers before squaring.",
+       "value": "64.044444"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 0.44. χ² = Σ(o - e)²/e = (89 - 90)²/90 + (33 - 30)²/30 + (29 - 30)²/30 + (9 - 10)²/10 = 0.44.\n12.00 is incorrect: Does not divide by the expected numbers.\n0.24 is incorrect: Does not square the differences, using the sum of the absolute differences divided by the expected numbers.\n64.04 is incorrect: Adds the observed and expected numbers before squaring.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "bis_chi_square_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "chi-square statistic",
+      "topic": "5.3",
+      "skill": "5.C",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: chi-square statistic",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "observed offspring"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Does not divide by the expected numbers."
+       },
+       {
+        "id": "m2",
+        "description": "Does not square the differences, using the sum of the absolute differences divided by the expected numbers."
+       },
+       {
+        "id": "m3",
+        "description": "Adds the observed and expected numbers before squaring."
+       }
+      ],
+      "verification": {
+       "independent_path": "floating-point sum vs exact fractions",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_chi_square_set_q3",
+     "topic": "5.3",
+     "skill": "5.C",
+     "stem": "Which conclusion is correct at the 0.05 level of significance?",
+     "options": [
+      {
+       "text": "The null hypothesis is proven true, because the chi-square value is not zero.",
+       "why": "A statistical test cannot prove the null hypothesis.",
+       "value": null
+      },
+      {
+       "text": "The null hypothesis is rejected, because the chi-square value is greater than the critical value of 7.81 for 3 degrees of freedom at p = 0.05.",
+       "why": "States the opposite decision from the comparison of the calculated and critical values.",
+       "value": null
+      },
+      {
+       "text": "The null hypothesis is rejected, because the critical value for 4 degrees of freedom, 9.49, is used.",
+       "why": "The degrees of freedom are the number of classes minus one, which is 3.",
+       "value": null
+      },
+      {
+       "text": "The null hypothesis is not rejected, because the chi-square value is less than the critical value of 7.81 for 3 degrees of freedom at p = 0.05.",
+       "why": "With four phenotype classes the degrees of freedom are 3, and the critical value at p = 0.05 is 7.81; the calculated value is 0.44.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The null hypothesis is not rejected, because the chi-square value is less than the critical value of 7.81 for 3 degrees of freedom at p = 0.05.. With four phenotype classes the degrees of freedom are 3, and the critical value at p = 0.05 is 7.81; the calculated value is 0.44.\nThe null hypothesis is proven true, because the chi-square value is not zero. is incorrect: A statistical test cannot prove the null hypothesis.\nThe null hypothesis is rejected, because the chi-square value is greater than the critical value of 7.81 for 3 degrees of freedom at p = 0.05. is incorrect: States the opposite decision from the comparison of the calculated and critical values.\nThe null hypothesis is rejected, because the critical value for 4 degrees of freedom, 9.49, is used. is incorrect: The degrees of freedom are the number of classes minus one, which is 3.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_chi_square_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "compare chi-square with the critical value",
+      "topic": "5.3",
+      "skill": "5.C",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: compare chi-square with the critical value",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "observed offspring"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "A statistical test cannot prove the null hypothesis."
+       },
+       {
+        "id": "m2",
+        "description": "States the opposite decision from the comparison of the calculated and critical values."
+       },
+       {
+        "id": "m3",
+        "description": "The degrees of freedom are the number of classes minus one, which is 3."
+       }
+      ],
+      "verification": {
+       "independent_path": "decision rule with df = 3 vs the generating comparison",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_chi_square_set_q4",
+     "topic": "5.3",
+     "skill": "6.B",
+     "stem": "Which explanation is best supported by the result of the chi-square test?",
+     "options": [
+      {
+       "text": "The data are consistent with independent assortment of the two genes.",
+       "why": "The difference from 9:3:3:1 is small enough to be explained by chance.",
+       "value": null
+      },
+      {
+       "text": "The data show that the genes are linked on the same chromosome.",
+       "why": "Linked genes would give a significant departure from the expected ratio.",
+       "value": null
+      },
+      {
+       "text": "The two genes must be on the sex chromosomes.",
+       "why": "Nothing in the data indicates sex linkage.",
+       "value": null
+      },
+      {
+       "text": "The data prove that the genes are on different chromosomes.",
+       "why": "A test cannot prove the hypothesis; it shows consistency.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is The data are consistent with independent assortment of the two genes.. The difference from 9:3:3:1 is small enough to be explained by chance.\nThe data show that the genes are linked on the same chromosome. is incorrect: Linked genes would give a significant departure from the expected ratio.\nThe two genes must be on the sex chromosomes. is incorrect: Nothing in the data indicates sex linkage.\nThe data prove that the genes are on different chromosomes. is incorrect: A test cannot prove the hypothesis; it shows consistency.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_chi_square_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "interpret a chi-square result in terms of linkage and assortment",
+      "topic": "5.3",
+      "skill": "6.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: interpret a chi-square result in terms of linkage and assortment",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "observed offspring"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Linked genes would give a significant departure from the expected ratio."
+       },
+       {
+        "id": "m2",
+        "description": "Nothing in the data indicates sex linkage."
+       },
+       {
+        "id": "m3",
+        "description": "A test cannot prove the hypothesis; it shows consistency."
+       }
+      ],
+      "verification": {
+       "independent_path": "decision rule outcome vs the generating deviation",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 285,
+   "facts": [
+    "N=160",
+    "exp=[90.0, 30.0, 30.0, 10.0]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_chi_square_set_q1",
+   "facts": [
+    "N=160",
+    "exp=[90.0, 30.0, 30.0, 10.0]"
+   ],
+   "seed": 9202
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 60 seconds. The load is low and a calculator is allowed. The stem is slightly easy but acceptable.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct and in scope, with a unique key of 90. It fails only on the explanation, which is a generic template for the key and never shows the 9/16 × 160 step. It should be revised to show the calculation."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Chi-square on a dihybrid cross, fits 5.3/5.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "0.44 is correct and unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table complete with total and hypothesis."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "The rationale for 64.04 (adds observed and expected before squaring) does not reproduce the value: (o+e)^2/e terms give about 356 or more, not 64.04. The stated misconception is not verifiably linked to the option. 12.00 and 0.24 match their stated errors."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Appropriate time and calculator load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key (0.44) is correct and the stimulus is complete. The distractor 64.04 is not reproduced by its stated misconception, so its rationale is inaccurate. Failed on the distractor criterion."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Chi-square on a dihybrid cross; dominant demand is the 5.C decision."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Chi-square ≈ 0.44 < 7.81 at df = 3, so fail to reject. Unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Observed counts, total and hypothesis are given. Expected counts are derivable with the calculator. Critical value is in the options."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each wrong option has a specific rationale: proving the null, reversed decision, wrong degrees of freedom."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 70 seconds, calculator allowed, light reading load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound chi-square decision item with a unique correct key and distinct distractors. It passes all five criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Dihybrid cross, chi-square for independent assortment; supports a claim with evidence (6.B). In scope for 5.3."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Chi-square ≈ 0.44 < 7.815 (df=3); consistent with independent assortment is the unique defensible answer. D overclaims 'prove'."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table gives observed counts, total and the hypothesized 9:3:3:1 ratio; everything needed is present. The stem says 'the result' without a stated value, so the student computes it, which is acceptable."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each wrong option has a specific rationale: B linkage misread, C sex linkage, D proving. C is a somewhat weak, implausible distractor but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "A four-term chi-square calculation with a calculator and the provided table takes about 65-90 seconds, which is typical. Calculator designation is consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key is verified by independent computation, the stimulus is complete, and the distractors are distinct. Option C is somewhat weak, but that is a minor flaw."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step proportional calculation: apply the 9/16 fraction from the stated 9:3:3:1 ratio to the 160 total (9/16 × 160 = 90). The table is simple and the numbers are clean. The distractors correspond to common errors (using 1/4, giving the ratio term, multiplying 9 by 160). It tests basic application of an expected ratio, which is the first step of a chi-square setup, and needs no multi-step reasoning or representation change, so it is better suited to basic learning than a full mock exam.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must derive expected counts from the 9:3:3:1 ratio (90, 30, 30, 10), then apply the chi-square formula across four categories and sum. This is a standard formula-sheet calculation with small, exact numbers. It requires reading the table and a multi-step but routine computation. It does not rely on obscure content or heavy reading. Distractors reflect plausible errors such as omitting division by the expected value.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Standard AP chi-square item: derive expected counts from 9:3:3:1, compute four terms (chi-square ~0.44), use df = 3, compare to the critical value given in the options, and reject misconceptions (proving the null, using the wrong df). Clean numbers, a single formula-sheet equation, and an unambiguous setup, so the difficulty comes from legitimate skill demands.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 5,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 150
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the table, compute expected counts from a 9:3:3:1 ratio (90, 30, 30, 10), calculate chi-square (about 0.44) with df = 3, compare it to the critical value (7.81), and conclude the data fail to reject independent assortment. Distractors test the named misconceptions of 'prove' language, linkage, and sex chromosomes. This is a single formula-sheet calculation with clean numbers, in scope for 5.3 and skill 6.B, with a moderate number of steps. It is typical of a full-mock item.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 150
+   }
+  ]
+ }
+]
