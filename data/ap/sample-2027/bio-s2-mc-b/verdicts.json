@@ -1,0 +1,3707 @@
+[
+ {
+  "key": "ap_biology-m01-k0",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "With no selection acting, the changes come from genetic drift. Drift has a bigger effect in small populations. X swings widely, so X is probably the smaller population.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Relating drift magnitude to population size is a core 7.4 concept. Reading the graph and linking fluctuation size to population size fits skill 2.B (explaining relationships in a model)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The stem states that there is no selection and that both populations start at the same frequency. X fluctuates widely and Y changes smoothly and slowly, so the unique defensible answer is A (X is the smaller population). Options B, C and D are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are complete: axes with ranges and steps, and full vertex lists for both curves. The wording is clear. X drifts to a frequency near 0.05 and then rebounds, which is plausible under drift."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: reversed size and drift (B), confusing variation with fluctuation (C), and equating a shared starting value with equal size (D). The explanation addresses every wrong option. Option lengths are similar, so there is no giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 75 seconds, needs no calculation, and puts a light reading load on the student. The one-graph format is typical of AP Biology."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound drift-versus-population-size graph interpretation question with a unique key, a complete stimulus, and distinct distractors, so it is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read two allele-frequency curves, compare the magnitude of fluctuations, recognize that with no selection the changes reflect genetic drift, and link stronger drift to smaller population size, while rejecting distractors based on misconceptions (slow change implies small size, variation drives change, same start means same size). No calculation is needed. Wording is clear and the context is concise.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m02-k0",
+  "cellId": "ap_biology-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Natural selection: resistant bacteria survive and reproduce more when the antibiotic is present, so their share of the population goes up.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 7.8 antibiotic resistance; claim supported by data aligns with 6.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is uniquely correct; A, B, D are clearly flawed mechanisms."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete; numbers 5% and 53% appear in the table; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (habit, need, induced resistance) each explained."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Only the correct option and one distractor restate the data, and the correct option is the only one pairing data with a valid mechanism. This is a mild format giveaway. The data demand is minimal, since any monotonic increase would do, so the item leans toward recall of the selection explanation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound and correctly keyed. Weak on exam suitability because the option format gives away the answer and data use is minimal, so it is borderline."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read a short 5-row table showing a steady increase in resistant percent (about +12 points per generation), then choose the explanation based on differential survival and reproduction. Distractors are standard misconceptions (need-driven change, habit/behavior, antibiotic inducing resistance), so the item mainly checks rejection of named misconceptions. No calculation is needed, the reading load is minimal, and the wording is unambiguous. This is below full-mock exam depth, which would typically require multi-step reasoning, data comparison or calculation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m03-k0",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Artificial selection: humans choose breeders with desired traits, increasing those traits' frequency.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item fits topic 7.3 and skill 1.C. Option C is the only correct statement, and each distractor targets a distinct misconception: farmer-directed mutation, need-driven change (Lamarckian), and environmental selection. The stem is concise and self-contained, needs no stimulus, and takes about 60 seconds. It uses a standard textbook scenario (Brassica varieties) that is not a copy of a specific sample item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies the concept of artificial selection to a concrete case, which matches 7.3 and 1.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is unique and correct. A, B and D are each clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has an accurate, specific rationale tied to a distinct misconception."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, no arithmetic, and the time estimate is typical of an AP Biology item."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification: artificial selection is humans choosing which individuals breed, raising the frequency of desired heritable traits. The scenario (Brassica crop varieties) is familiar and concrete, with no data, calculation, or representation change. Distractors are standard misconceptions (farmer-induced mutation, need-driven gene change, natural selection), but rejecting them needs only the core definition. This is below the multi-step reasoning expected of full-mock exam_prep items. Reading load is minimal and there are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m04-k0",
+  "cellId": "ap_biology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "2500/50000 = 0.05 = 5%",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "5%"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key of 5% is correct and unique. The \"2,000\" distractor is not parallel with the percent options and its rationale is wrong (50000/2500 = 20, or 2,000%, not 2,000). The task is a plain two-bar percent calculation rather than explaining relationships between model characteristics (skill 2.B), so skill fit is weak. Fail.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The dominant demand is reading two bars and dividing, which fits the data-calculation skills more than 2.B. Weak fit to the target skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2500/50000 = 5%. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data are complete. The bars span 50000 to 125, so the smallest bar is barely visible, but the values can still be read from the data."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option \"2,000\" has no percent sign and is not parallel with the other options. Its rationale (\"divides larger by smaller\") yields 20, or 2,000%, so the explanation does not match the option as written."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and the time is appropriate. The inconsistent option format is a flaw."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read two bar values (50,000 and 2,500) and compute 2,500/50,000 = 5%. It tests the concept of energy transfer efficiency between trophic levels (about 10% rule). Distractors reflect plausible errors (95% = energy lost, 2,000 = ratio not percent, 0.25% = decimal slip). Numbers are clean and reading load is minimal. Skill 2.B is only lightly engaged, since the visual is simply read and used for one division.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m05-k0",
+  "cellId": "ap_biology-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "All four tissues have nonzero mRNA levels, and muscle has the highest (21).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item asks students to describe a bar graph of tissue-specific mRNA levels. This fits 2.A and the topic of differential gene expression in 6.6."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only defensible answer. All four tissues show mRNA, and muscle is the highest at 21. The independent solver agreed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The chart data is complete, with categories, values, axis titles and a title. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option C is the longest and the only one that combines two claims, which gives it away. The \"lost from the DNA\" distractor is an implausible misconception for most students, so it is not very discriminating. The \"kidney highest\" distractor is a pure misreading of the graph, not a biological misconception. The rationale for the \"expressed only in muscle\" distractor is accurate but thin."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds and needs no calculation. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, the stimulus is complete, and the scope fits. The distractors fail because the correct option is the longest and most detailed, and two of the wrong options are weak (implausible gene loss, simple misreading of the graph). I would fail it on distractor quality, with a revision to make the options parallel and the misconceptions more realistic."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step bar graph read: all four bars are nonzero and muscle is tallest. The distractors are plainly wrong (only muscle, gene loss, kidney highest). The item needs no calculation and just one connection, that differential mRNA levels reflect differential expression across tissues with the same DNA. It sits squarely in topic 6.6 and skill 2.A, with minimal reading load. This is a foundational item, below full-mock exam_prep complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m06-k0",
+  "cellId": "ap_biology-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Kin selection: the alarm pheromone helps the colony survive, and the colony is made up of close relatives who carry the workers' alleles. That raises the workers' inclusive fitness.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is close to recall of the kin selection idea. The longest option is correct, and two distractors are easily eliminated, so it discriminates poorly. The calculator designation is irrelevant here, though harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope fits, but the item fails on distractor quality and exam suitability. The correct option is noticeably longer than the others, and distractors A and B are implausible. The rationales do not encode distinct, realistic misconceptions. Revise the distractors to be parallel and plausible, for example individual-selection-only reasoning or learned versus innate behavior."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify that a pheromone-mediated alarm/defense behavior is innate and increases colony (kin) survival, which propagates shared alleles. No data, calculation, or representation change. One or two reasoning steps: recognize the behavior as innate and apply the kin-selection/inclusive fitness idea. Distractors are straightforward (learned behavior, decreased colony survival, individual-only benefit). Fits the allowed concept-explanation format with a concrete situation and no data. Reading load is minimal and wording is clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m07-k0",
+  "cellId": "ap_biology-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Higher biodiversity gives functional redundancy and resilience. If plot 1 loses one of its 20 species, the other 19 can fill its roles. If plot 2 loses one of its 2 species, about half its diversity is gone.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Biodiversity, resilience and redundancy are core 8.6 content. The item asks the student to apply the concept to a specific case, which fits 6.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the defensible answer. A is wrong because more species raise the chance that some tolerate the drought. B is wrong because a single species loss does not affect both plots equally. D is wrong because a plot with 2 species has little redundancy. The stem does not state which species was lost, but the 'more likely' wording makes the general redundancy argument valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: more species means more vulnerability, equal effect regardless of diversity, and fewer species means easier maintenance. The explanations are specific to each option. The 'why' for B is generic rather than tied to the option. The option lengths are parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 65 seconds, needs no calculation, and has a low reading load. It is typical of an AP Biology multiple-choice item. Its distractors are plausible but easy to reject, so the difficulty is on the low side."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 6.D application of biodiversity as redundancy and resilience. It has a unique key and distinct distractors, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept prediction: higher species diversity buffers an ecosystem against disruption through functional redundancy. The student must pick the governing relationship and reject two misconceptions (more species means more vulnerability, and all species loss has the same effect). It needs no data reading, no calculation, and only one or two reasoning steps. The wording is clear and unambiguous, so it suits foundational practice more than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m08-k0",
+  "cellId": "ap_biology-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Cells have the same genome, but differential gene expression produces different sets of proteins, so the cells have different structures and functions.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets 6.6 (differential gene expression yields specialization) with a concrete situation; skill 1.B concept explanation fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct statement. A is wrong because specialization arises from different proteins, not the same proteins in different amounts. B and D contradict the fact that somatic cells keep the same genome."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, and the stated condition (same DNA) is sufficient."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific rationale. B (gene loss) and D (different genes) are related misconceptions about genome content but are still distinct. A (same proteins, different organelle amounts) is a weaker misconception, yet it is plausible and is rebutted accurately. The correct option is the longest, but only slightly."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, low reading load, no calculation. This is typical of AP Biology multiple choice."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all criteria. Option C is the unique correct answer, and the distractors encode distinct misconceptions with accurate rationales. The task load fits the AP Biology multiple-choice pattern."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: same DNA but differential gene expression yields different protein sets. One reasoning step, no stimulus or data, and the distractors are common misconceptions (gene loss, different genomes) that are easily rejected. Core CED content at an introductory level, below the multi-step demand expected for full mock exams.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m09-k0",
+  "cellId": "ap_biology-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "If RNA polymerase is blocked, transcription stops, so new mRNA levels drop first. Protein synthesis falls later, once the existing mRNA is broken down.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds and has a low reading load. It is easy but typical of an AP Biology multiple-choice question, and no calculation is needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and correct, the scope fits topic 6.3 with skill 6.E, and each distractor has a specific rationale. It is easy, but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: RNA polymerase carries out transcription, so blocking it lowers new mRNA, with protein synthesis declining later. It requires one short causal prediction and rejecting obvious misconceptions (ribosomes making DNA, RNA polymerase doing replication or maintaining proteins). There is no data, no calculation and minimal reading. This is below the multi-step reasoning or representation changes expected of a full-mock exam_prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m10-k0",
+  "cellId": "ap_biology-m10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Degrees of freedom = number of phenotype classes minus one = 4 - 1 = 3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Three"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a rote recall of the degrees-of-freedom rule. It does not require stating a null hypothesis or predicting results, and it has no data or situation. The distractor rationales merely restate the rule rather than naming distinct misconceptions. The key is correct.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Tests recall of the degrees-of-freedom convention, not skill 3.B (state a null hypothesis or predict results). No experimental situation or data."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Three is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Clear wording; no stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The \"why\" texts are generic restatements of the rule and do not identify the specific misconception behind each option; the \"genes minus one\" rationale does not explain why that reasoning is wrong.</distractor_explanation_notes>\n<parameter name=\"exam_suitability_notes\">Trivial single-fact recall; not typical of AP Biology item demands."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item tests one recalled procedural rule: degrees of freedom = number of phenotype classes - 1 = 3. There is no data to interpret, no chi-square calculation, and no representation change. The distractors are common misconceptions (16 boxes, genes minus one, classes without subtracting one), but rejecting them takes a single step of recall. It is a short, fair, in-scope item. It does not clearly address skill 3.B (null hypothesis or predicting results), so it is better suited to basic learning practice than to a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m11-k0",
+  "cellId": "ap_biology-m11",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "A shared genetic material and a nearly universal genetic code are best explained by common ancestry. Acquired traits are not inherited through DNA. Separate origins of the code would not produce the same code. Organisms share the code, not identical genes.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "All living things share a common ancestor."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, but the item is a near-vocabulary recall question with trivial distractors and no evidence to evaluate. It does not meaningfully assess 6.B and is too easy for the exam.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Topic 7.7 fits, but the item is a single-sentence recall of a well-known fact (universal genetic code implies common ancestry). Skill 6.B (support a claim with evidence) is only nominally assessed because the student just picks the textbook conclusion. There is no situation, data, or reasoning to select among, so it is close to rote recall."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Common ancestry is the unique defensible answer. The other claims are not supported by the evidence."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is clear. The phrase \"DNA or RNA\" and \"nearly the same genetic code\" are accurate."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are weak and obviously wrong. The acquired-traits option (Lamarckian inheritance) is unrelated to the evidence. \"Evolved separately\" is an easy straw man. \"All organisms have the same genes\" is clearly false. The correct option is also the only one that is a statement about ancestry, which makes it a giveaway. The explanations are generic restatements, e.g. \"they have different genes\"."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "It is much easier and more recall-based than AP Biology items, which typically use a concrete scenario or data. It would be answered in about 15 seconds without reasoning. The \"calculator allowed\" designation is irrelevant."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step claim-evidence matching on a core CED idea (universal genetic code implies common ancestry). No data, calculation, or representation change. Distractors are standard misconceptions (acquired traits, separate origins, identical genes) that are easy to reject. This is appropriate for introductory learning rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m12-k0",
+  "cellId": "ap_biology-m12",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Both species benefit (+/+), so this is mutualism.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Mutualism"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is essentially vocabulary or definition matching. The stem gives away the answer (\"digest food... animal supplies nutrients\"), and the table is a redundant stimulus that is not needed. It is too easy and lacks the reasoning demand of an AP item. The banned-source guidance rules out pure definition matching.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope, but the item is a trivial definition match. The table is redundant with the stem, the distractors are weak and one rationale is imprecise, and the item lacks AP-level reasoning demand. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step classification: the table shows + / + effects for both species, which matches mutualism. There is no calculation, no multi-step reasoning, and little representation change, since the stem restates what the table shows. The item is short and unambiguous, so it suits foundational learning more than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m13-k0",
+  "cellId": "ap_biology-m13",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Random mutations (antigenic drift) create variation; host immunity selects for variants that evade it.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fails on skill fit: the stem asks for an explanation of a known fact, not a prediction of cause or effect (6.E), and the item is essentially recall. The key is unique and correct. The correct option is noticeably the longest, a length giveaway. Distractor rationales are thin. Overall the item is too easy and generic for the AP exam.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The item asks for an explanation of an established fact (annual flu change), not a prediction of effects from a change. Skill 6.E is not demanded, and the item is close to rote recall."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct answer; the independent solver agreed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Rationales are accurate but terse, and option A's is a restatement of the fact rather than a named misconception. Option C is much longer than the distractors, which gives it away."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Time load is fine, but the item is too easy and is a generic recall question. The length cue on the key reduces discrimination."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item with no stimulus or data. The student picks the standard explanation for yearly flu vaccine updates (mutation generates variation, selection favors immune-escape variants) and rejects clear misconceptions (evolution stops, acquired immunity is inherited, purposeful change). Only about 2 reasoning steps, with no calculation or representation change. Depth is below typical exam prep, which would usually include data, a table, or a prediction of a disruption.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m14-k0",
+  "cellId": "ap_biology-m14",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Disease transmission goes up when the population is more crowded, so its effect depends on density. A freeze, a volcanic eruption and a wildfire all act regardless of density.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is close to pure classification recall. The correct option contains a clause that gives away the answer, and the wildfire option states its own classification. Both leave little real reasoning to do. The item is too easy and tests little beyond a definition.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope fits, but the options give the answer away. Option C spells out the density mechanism and option D states \"regardless of population density\". Three distractors repeat the same misconception. The item amounts to vocabulary matching. I recommend rewriting it with a concrete scenario and distractors that each encode a distinct misconception."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step classification of density-dependent vs density-independent factors. Three distractors are textbook abiotic or catastrophic events, and the correct option explicitly cites crowding, so little reasoning is needed. There is no data, no calculation, and no representation change. This suits early concept learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m15-k0",
+  "cellId": "ap_biology-m15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Increments 29,99,228,253,127,40: growth is slow, then fast, then slows near a carrying capacity (~800). This is logistic growth.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, needs no calculation, and the options are short and parallel.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, straightforward table-description question on logistic growth. It has a unique key and distinct distractors, and it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single table read; student compares successive changes in population size (slow, then rapid, then leveling) and matches the pattern to logistic growth near carrying capacity. No calculation required, options are distinct and unambiguous, and the concept is introductory for 8.4. Distractors (decline, exponential, linear) are easily ruled out by scanning the data. Too straightforward for exam-prep full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m16-k0",
+  "cellId": "ap_biology-m16",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Phosphodiester bond between sugar of one nucleotide and phosphate of the next",
+     "brief_reasoning": "Within one strand, the sugar-phosphate backbone is held together by phosphodiester bonds: the 3' carbon of one sugar links through a phosphate to the 5' carbon of the next sugar. Hydrogen bonds join bases on opposite strands, not neighbours in the same strand.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the distractors are fine, but the item is pure definition recall with no situation. That breaks the ban on vocabulary-only multiple choice and the apply-to-a-case judgment demand, so it should be rejected for scope/skill and exam suitability.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Topic 6.1 is correct, but the item is pure recall of one bond name with no situation. The task guidelines ban pure vocabulary or definition matching with no situation in multiple choice. The judgment demand says \"apply a biological concept to a specific case\", and no specific case is present."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key C (index 2), the phosphodiester bond, is unique and correct. The independent solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct named misconception and a rationale. The glycosidic rationale is slightly loose, since glycosidic bonds join a sugar to a base, but it is acceptable."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "It is a rote fact-recall item that does not match the reference pattern of apply-to-a-situation items. It is not a realistic AP Biology exam item."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recall of the phosphodiester linkage in the DNA backbone. There is no stimulus, data, or scenario, and no multi-step reasoning or representation change. Distractors are standard misconceptions (hydrogen, peptide, glycosidic bonds). It is suitable for basic learning checks. It is largely pure vocabulary/definition matching, which is below the exam_prep target and falls under the banned difficulty sources for full mocks. The difficulty is not inflated by unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 20
+  }
+ },
+ {
+  "key": "ap_biology-m17-k0",
+  "cellId": "ap_biology-m17",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Less transpiration means less water vapor goes into the air, so less local rain falls. With fewer roots holding the soil, more of it erodes.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.7 human-caused disruption (deforestation); asks to predict effects, matching 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique defensible answer: reduced transpiration lowers local rainfall and loss of roots increases erosion. The other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific rationale. A: habitat loss increases species. B: forests do not affect rainfall. D: the reversed effect. They are somewhat weak and D is the mirror of C, but they are distinct enough."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-70 seconds, with no arithmetic. The calculator is allowed but unneeded, which is typical."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A valid, simple prediction item on a deforestation disruption. The key is unique and each distractor is explained. Its difficulty is low, but it fits the topic and skill and is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step causal prediction with no data or calculation. The stem gives the cause (reduced transpiration and vegetation), and the learner only needs to link it to lower local rainfall and more soil erosion. Distractors are simple misconceptions (more space means more species, forests don't affect weather, reversed effects). Concept depth is shallow, there is one reasoning step, and there are no representation changes. Fits recall and application at the basic learning level, not full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m18-k0",
+  "cellId": "ap_biology-m18",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Energy is lost as heat at each trophic level and cannot be reused by producers.",
+     "brief_reasoning": "Energy isn't recycled or destroyed. At each transfer, metabolism turns some of it into heat, and producers can't capture heat for photosynthesis. That's why the ecosystem needs a constant energy input, such as sunlight.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, has a light reading load, and needs no calculation. It is typical of an AP Biology concept-explanation item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, single-key concept-explanation item on energy flow with distinct, realistic distractors, so it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item with no data or calculation. The student identifies why energy needs continuous input (lost as heat, not recycled) and rejects three common misconceptions. It needs one reasoning step and no representation changes, so it is below full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m19-k0",
+  "cellId": "ap_biology-m19",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Identical twins share genotype; phenotypic differences reflect environmental influence on gene expression/phenotype.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly tests 5.5 environmental effects on phenotype via an applied twin case (skill 1.C)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique correct answer; the other three are clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (genes only/measurement error, environment alters DNA, twins differ genetically). Each wrong option is explained; the rationales are brief but accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculation, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard 5.5 concept-explanation item with a unique key and distinct distractors, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept recognition in a brief concrete scenario (identical twins in different environments). The correct choice is the standard genotype x environment statement. The distractors are obvious misconceptions (measurement error, environment altering DNA sequence, crossing over making identical twins differ). There is no data, calculation, or representation change, so it is below the typical depth and reasoning load of a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m20-k0",
+  "cellId": "ap_biology-m20",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Older rock layers hold the less modified species and younger layers hold the more modified relative. That is fossil evidence of structures changing over time.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Fossil evidence showing change in structures over time"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60 seconds with a light reading load and no calculation. The item is somewhat easy and leans on classification of evidence type, but it applies the concept to a concrete case, which is acceptable for 1.A.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A valid, clear 7.6 / 1.A item with a unique key and distinct distractors. It is easy because the stem names fossils and rock layers, but it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to classify one scenario as fossil evidence for evolution. The stem's cues (fossils, older rock layers, more modified structure) point directly to one option, and the distractors (biogeography, embryology, biochemistry) are clearly different evidence types. It takes one recognition step, with no data, calculation, or representation change. This is foundational recall and application of the evidence-type categories, below the level expected on a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m21-k0",
+  "cellId": "ap_biology-m21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Survivors: 145 individuals, so 290 alleles. Copies of a = 80 + 2(10) = 100. Frequency = 100/290 ≈ 0.345, which rounds to 0.34.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.34"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 75 seconds of work, light arithmetic, and a calculator is allowed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, the table is complete, and the distractors are plausible. The only flaw is the loosely worded rationale for 0.62."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must pick the survivors column (not the birth column), convert genotype counts to allele counts (heterozygotes contribute one a, aa contributes two), and divide by total alleles (2 x 145 = 290) to get q of about 0.345. Single proportional calculation with small integers; distractors map to common errors (aa genotype fraction, birth-stage frequency, allele A frequency). Fits the allowed levers: reading a table and one proportional calculation. No vagueness, heavy reading, or out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m22-k0",
+  "cellId": "ap_biology-m22",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "This is a trophic cascade. With most otters gone, little is eating the urchins, so their numbers grow. More urchins eat more kelp, so the kelp forests shrink.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Sea urchins increase and kelp forests decline."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, has low reading load, and needs no calculation. It is fairly easy, but this is acceptable for the pattern.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard trophic-cascade prediction item with a unique key and distinct distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Classic trophic cascade prediction in a three-level food chain. It needs one indirect-effect inference (otters removed, urchins increase, kelp declines) with no data, calculation, or representation change. Distractors are plausible but easily rejected (kelp as a consumer, both lower levels increasing, the effect reversed). Concept depth and step count are below full-mock exam_prep level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m23-k0",
+  "cellId": "ap_biology-m23",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Suspect B's fragments (900, 620, 450 bp) exactly match the crime scene sample. Suspect A has 1600 instead of 900, and Suspect C has 2800 and lacks 450.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Suspect B"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The key is correct and unique: Suspect B is identical to the crime scene sample. The item fits topic 6.8 and skill 4.B, since it requires reading a fragment table and comparing patterns. The distractors are weak. \"None of the suspects\" is implausible, and its rationale just restates the fact that a match exists. Suspects A and C each differ from the crime scene sample in an obvious way, and the answer order puts the key third. This is the standard gel/forensic scenario that closely resembles many textbook and College Board gel-comparison items, and the item is very easy.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Table reading and comparison of restriction fragment patterns within 6.8 (gel electrophoresis) at 4.B. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Suspect B's fragments (900, 620, 450 bp) match the crime scene sample exactly. A and C each differ in at least one band. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with a clear description and units (bp). The stem wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Options A and C each give a specific mismatch, but each is a generic \"pattern doesn't match\" with no distinct named misconception. A partial-match trap would be more realistic, for example Suspect C sharing two of the three bands. The option \"None of the suspects\" is a throwaway distractor. Its rationale restates the key rather than naming a misconception, and the three listed \"misconceptions\" are really just explanations of why each option is wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time load (about 75 s) is appropriate. The item is too easy and low in discrimination, because a set comparison of three numbers is all it requires. A calculator is not needed, but the \"allowed\" designation is consistent with AP Biology."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step table comparison: the student matches the crime scene fragment set (900, 620, 450) to the identical set for Suspect B. Distractors are partial matches (A shares 620 and 450; C shares 900 and 620), which are easy to reject on inspection. No calculation, no representation change, and minimal reading. Concept depth is low: identical restriction fragment patterns indicate a match. It fits skill 4.B, but it is below full-mock exam_prep level, which would need an additional reasoning step such as inferring fragment position on the gel or the effect of a mutated restriction site.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m24-k0",
+  "cellId": "ap_biology-m24",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Steroid hormones pass through the membrane and bind intracellular receptors. The hormone-receptor complex then acts as a transcription factor, turning transcription of specific genes up or down, but only in cells that have the receptor.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item fits topic 6.5 and skill 1.C. The key is unique and each distractor encodes a distinct misconception (non-specific repression, translation at the membrane, DNA sequence change). It takes about 60 seconds, needs no stimulus and has no calculation load.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies the concept of transcription factors and gene regulation to a concrete situation (steroid hormones). This matches skill 1.C and does not require a stimulus."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only defensible answer. The other options are clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, and the options are parallel."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific, accurate rationale tied to a distinct misconception."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load and about 60 seconds. This is typical of the AP exam."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The stem gives the key fact that the receptor acts as a transcription factor, so the answer follows in one step: the complex alters transcription of specific genes in target cells. The distractors are blatant misconceptions (global gene blocking, translation at the plasma membrane, DNA sequence change) that are easy to reject. There is no data, no calculation and no representation change, so the item works as a basic concept check rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m25-k0",
+  "cellId": "ap_biology-m25",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Sampling error is proportionally larger when there are few individuals, so random events change allele frequencies more.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Chance events shift allele frequencies by more when few individuals are present."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Genetic drift and population size fit topic 7.4. Skill 1.C (explain a concept) is met, since the item asks why drift is stronger in small populations. The context is brief and no later-unit content is needed."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct answer. The sampling-error explanation is standard and the solver agreed. The other three options are clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: no variation, no selection, or more mutation in small populations. The explanation addresses each one accurately. The key is slightly longer than the distractors, but not by more than a few words."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 65 seconds, needs no calculation, and has a typical reading load for an AP Biology item. It is a recall-like concept explanation, but the guidelines allow this for skill 1.C."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standalone 1.C concept-explanation item for topic 7.4. It has a unique key and distinct distractors, and the explanation covers each wrong option. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item with no stimulus or data. The student must recall that random sampling error is larger with fewer individuals, and reject three common misconceptions (no variation, no selection, more mutations). It requires one reasoning step, no calculation and no representation changes. This fits introductory-level understanding rather than full-mock exam prep. Difficulty is not inflated by unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m26-k0",
+  "cellId": "ap_biology-m26",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "About 8x increase every 3 cycles means the DNA doubles each cycle, then it plateaus at 5000 because a reagent becomes limiting.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Minor: the cycle-0 value of 0 is probably a rounded small amount, and the plateau is abrupt; neither changes the best answer."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Graph data are problematic: the value at cycle 0 is 0 (impossible for exponential amplification), early values are invisible on a 0-5000 axis so doubling cannot be verified from the graph, and the jump to a flat 5000 at cycle 21 is abrupt and unrealistic."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are easy to dismiss because each contradicts the graph. They do not encode distinct, realistic named misconceptions, and the rationales only say 'the graph does not show this'. The correct option is also the longest and most detailed."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is too easy and gives the answer away through option length and the contradiction with the graph. The doubling claim cannot be checked from the plotted scale."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the graph data are flawed (zero at cycle 0, doubling invisible on the axis scale, abrupt plateau). The distractors are weak, contradict the graph, and the correct option is the longest. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single graph read qualitatively: exponential rise then plateau, linked to PCR doubling and a limiting reagent. Distractors (constant, decreasing, linear) are easy to reject. No calculation, minimal reading, and only one representation change (graph to mechanism). Fits skill 2.B at a foundational level, so it is below the typical full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m27-k0",
+  "cellId": "ap_biology-m27",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Logistic curve plateaus at 1,200 individuals, which is the carrying capacity K.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1,200"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item asks students to read the plateau of a logistic growth curve as carrying capacity. It fits topic 8.4 and skill 2.A. The key of 1,200 is unique, since the data level off at exactly 1,200. The graph data are complete, with axes and vertices. Each distractor reflects a distinct misconception: reading the axis maximum, reading a mid-growth value, or reading half of K. Reading load is minimal.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading a growth curve to estimate carrying capacity fits topic 8.4 and skill 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The curve plateaus at 1,200, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data include axes with labels and ranges plus the plotted vertices. The stem wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific, accurate rationale. The option 930 appears as 926.7 in the data and is a reasonable rounding of the value at 10 days."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 75 seconds and needs no calculation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step graph interpretation: recognize the plateau of a logistic growth curve as carrying capacity (1,200). Distractors are the axis maximum, the K/2 inflection value, and a mid-growth value. No calculation, minimal reading, one representation. Concept depth is shallow, so it suits basic learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m28-k0",
+  "cellId": "ap_biology-m28",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "200",
+     "brief_reasoning": "Logistic growth rate is maximal at K/2 = 200; largest daily increase occurs between days 7-8 (~184 to 233).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Logistic growth, steepest at K/2; fits 8.4 and relating curve features to the model."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Max increase between days 6-8 spans about 184-233, so about 200 is unique and defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, labels and plotted vertices are complete; K is given in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, quick graph reading; consistent with AP format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound logistic-growth graph item. The key of 200 (K/2) is supported by the data, the distractors are distinct, and the stimulus is complete."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize a logistic curve and know that per-capita-limited growth rate peaks at K/2 (200 here), where the curve is steepest. The graph is simple and the stem gives K, so the student only needs to halve it or find the steepest slope. No calculation and minimal reading. Distractors (10, 100, 400) target common misconceptions, but the item stays at a standard recall-and-apply level rather than the multi-step reasoning typical of full-mock exam_prep items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m29-k0",
+  "cellId": "ap_biology-m29",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Random changes in allele frequency in a small population happen by chance, which is genetic drift. Because the population is isolated, gene flow is ruled out. Natural selection is not random.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Genetic drift"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": true,
+   "summary": "The key is unique and correct, and the stem is clear. The item is essentially a vocabulary match for \"genetic drift\" with a thin lizard label. It does not tie to Hardy-Weinberg conditions or require reasoning about a situation, so it falls short of the exam-style concept-explanation demand. It also closely resembles standard drift-in-small-populations questions. The \"directional mutation\" distractor is awkward and its rationale does not name a distinct misconception.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 7.5 and 1.B at the level of identifying a violated H-W condition."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Genetic drift is the only defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a rationale, but the mutation rationale is weak and \"directional mutation\" is an awkward term."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Close to pure definition matching, which is a banned difficulty source. It lacks a real situation or reasoning demand and resembles a standard textbook item."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The stem essentially defines genetic drift (random, chance-based allele frequency change in a small population) and asks for the term. It requires one recall step, with no data, calculation, or representation change. It is closer to vocabulary matching than concept explanation, and it does not engage Hardy-Weinberg reasoning. This is suitable for basic learning, not full mock exams.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 20
+  }
+ },
+ {
+  "key": "ap_biology-m30-k0",
+  "cellId": "ap_biology-m30",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "q=1-0.3=0.7; q^2=0.49; 0.49*200=98",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "98"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hardy-Weinberg expected count calculation fits 7.5 and 5.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "98 is correct and unique; all conditions are given in the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Rationales are accurate for 0.42 and 42. The rationale for 59 is awkward (2p times q^2 as the frequency of every genotype) and not a realistic misconception, but every wrong option is addressed. Marginal pass."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, one formula-sheet calculation, and a calculator is allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, standard Hardy-Weinberg expected-count question. The key (98) is unique and the stem is complete. The distractor 59 has a weak, vaguely worded misconception, but this is a minor issue and the item passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single Hardy-Weinberg application: the dominant allele frequency p = 0.3 gives q = 0.7, q^2 = 0.49, and 0.49 x 200 = 98. It takes one formula-sheet relationship, a simple subtraction, and one multiplication, with no stimulus to read. Distractors target common errors (using 2pq, confusing a frequency with a count). It is a straightforward skill check below full-mock exam complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m31-k0",
+  "cellId": "ap_biology-m31",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "A null hypothesis says any gap between observed and expected (3:1) counts is due to chance alone, so there is no significant difference.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "The observed numbers do not differ from a 3:1 ratio beyond chance."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes on all five criteria. It asks for the null hypothesis in a 3:1 monohybrid cross, which fits 5.3 and skill 3.B, and the key is the only statement of no difference from the expected ratio. The distractors are distinct: a specific outcome, an irrelevant gene-number claim, and an alternative ratio. The load is light, about 60 seconds, and no stimulus is needed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choosing the null hypothesis for a 3:1 cross matches skill 3.B and topic 5.3."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only option C states no difference from the expected ratio beyond chance, so the key is unique. The 1:1 option is a different predicted ratio, and the other two are not null statements."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete, clear and in US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific rationale. The three wrong options are plausible and not clearly shorter or longer than the key."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading load is short and no calculation is required, which is typical of AP Biology."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of the null hypothesis for a 3:1 monohybrid cross (chi-square framing). No data, no calculation, short options with clearly wrong distractors. Tests recognition of 'no difference beyond chance' with a concrete situation, but involves minimal reasoning depth for AP level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m32-k0",
+  "cellId": "ap_biology-m32",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Native plants receive less light, and native species that depend on them decline.",
+     "brief_reasoning": "A mat covering the surface shades out submerged native plants. That cuts producers and harms the organisms that rely on them.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicting the effect of an invasive species is squarely CED 8.7, and the task is predicting an effect (6.E). No content from outside Unit 8."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only the shading and food-web decline option is defensible. The other three contradict ecological principles: acquired immunity to a competitor, no ecosystem change, and native plants increasing."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states the scenario, including that the plant covers the lake surface, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: acquired immunity, no change because the plant is photosynthetic, and nutrient addition helping natives. Each is explained, though the rationales are brief. The correct option is only slightly longer than the others, so there is no real length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Takes about 60 seconds with no calculation. The distractors are somewhat easy, but this is acceptable for a prediction item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous 8.7 prediction item with one defensible key and distinct misconception distractors. It is slightly easy but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step qualitative prediction: an invasive plant covering the lake surface reduces light to native plants, so dependent native species decline. There is no data, graph, or calculation. Distractors are plainly flawed misconceptions (acclimation immunity, no change because the plant is photosynthetic, natives increasing from added nutrients). This is below the multi-step reasoning or representation-change demand typical of full-mock exam_prep items. Difficulty is not inflated by unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m33-k0",
+  "cellId": "ap_biology-m33",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Strain 3",
+     "brief_reasoning": "Promoter mutation blocking RNA polymerase prevents transcription regardless of lactose; only Strain 3 lacks enzyme in both conditions.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 75 seconds, with a short table and no calculation. This is typical of an AP item, though it is fairly easy.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a sound lac operon mutant-data item with a unique key, a complete table and plausible distractors. I recommend accepting it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Students read a small 3x2 table and link each pattern to a lac operon genotype. Strain 2 is the normal inducible pattern and Strain 1 is constitutive, as with a repressor or operator mutation. Strain 3 shows no enzyme under either condition, which matches a promoter mutation that blocks RNA polymerase binding. The item needs one governing relationship and one short inference, with no calculation and little reading. The concepts are core Unit 6.5 and the distractors are straightforward. It is closer to recall and application than to the multi-step argumentation that skill 6.C implies, and it does not rely on unfair sources of difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m34-k0",
+  "cellId": "ap_biology-m34",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Recombinant offspring (Ab, aB) = 220 of 1000 = 22% = 22 map units",
+     "choice_index": 2,
+     "final_answer": "22 map units",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key of 22 map units is unique and correct (220/1000). The table is complete, the arrangement AB/ab is stated, and the distractors each encode a distinct error with accurate explanations. The item is in scope for 5.4 and 5.A, with a light calculation load.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Recombination frequency from test-cross counts is in scope, and the dominant demand is a calculation (skill 5.A)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The parent genotype AB/ab is stated, so Ab and aB are the recombinant classes. 220/1000 gives 22%, and no other option is defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and the wording is clear. Options are not in numeric order, which is a minor issue."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "11 (one class only), 28 (220/780) and 44 (doubled) are distinct, realistic errors, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds with a single division, which is typical of the AP exam. A calculator is allowed and not needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of recombination frequency. The student reads a small table, identifies the recombinant classes (given the AB/ab arrangement), sums them (220), divides by the total (1000), and converts to map units (22). The numbers are round, the wording is unambiguous, and the item is in scope (two-gene linkage, recombination frequency only). Distractors reflect common errors: using only one recombinant class (11) or doubling (44). It is more suited to basic learning than to a full mock exam because it requires only one concept and one calculation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m35-k0",
+  "cellId": "ap_biology-m35",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Meiosis halves the diploid number: 2n=24, so n=12.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "12"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key of 12 is correct, but the item is rote recall of the haploid number with trivial halving. It does not assess a real 5.A calculation or data analysis, and it is below AP rigor. The distractor rationales are thin and contrived, such as \"homologous pairs plus one\".",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The dominant demand is recalling that gametes are haploid, not a mathematical calculation. The item does not assess skill 5.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key of 12 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractor rationales are minimal and partly contrived. The 13 option has no realistic misconception behind it, and the 6 option's rationale is weak."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is too trivial for the AP exam. It is a single recall step with no situation, data or reasoning."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step recall that meiosis halves the chromosome number (24 -> 12), with trivial arithmetic. There is no stimulus, data, or representation change, and the distractors (48, 6, 13) are simple misconceptions. It is below exam_prep depth for a full mock and only minimally engages skill 5.A.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 15
+  }
+ },
+ {
+  "key": "ap_biology-m36-k0",
+  "cellId": "ap_biology-m36",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Random fertilization",
+     "brief_reasoning": "The stem asks about variation that comes from combining gametes. That is random fertilization: any sperm can fuse with any egg. The other options describe processes that don't create variation, or describe them wrongly.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item is a near-giveaway recall question. The stem names the answer, the distractors are implausible strawmen, and it does not test crossing over or independent assortment in meiosis. It is below the standard of an AP Biology 1.B item for topic 5.2.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The blueprint concept is to relate crossing over, independent assortment, and fertilization to genetic variation. The stem asks only which process explains variation from the combination of gametes, which gives away the answer (fertilization). The item does not require reasoning about meiotic sources of variation, so the dominant demand is close to vocabulary recall rather than explaining a concept in a situation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Random fertilization is the unique defensible answer. The other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear, but \"the variation arising from the combination of gametes\" practically names the key."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are implausible, and the option-level rationales for the binary fission and replication options are weak. Binary fission of an egg is a strawman that no student would choose, and \"replication after fertilization\" is trivially wrong. No distractor encodes a realistic misconception such as crossing over or independent assortment being confused with fertilization. The rationale \"Eggs do not reproduce by binary fission\" only states a fact. The correct option is also the only one that sounds like a legitimate variation mechanism, so the item is easy to answer by elimination."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is far too easy for AP Biology. It tests rote recall with no situation or discrimination among meiotic sources of variation. The calculator designation is irrelevant but not harmful."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept recognition: random fertilization explains variation among offspring of the same parents. No data, calculation, or representation change. Distractors are simple misconceptions (DNA replication, binary fission, mitosis altering alleles) that are readily rejected. Fits the concept-explanation skill but sits at the foundational level rather than full-mock depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m37-k0",
+  "cellId": "ap_biology-m37",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "6 million years",
+     "brief_reasoning": "Both lineages add differences after they split, so the total rate is 2 per million years. 12 ÷ 2 = 6 million years.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Molecular clock divergence time from sequence differences fits 7.7 common ancestry. The dominant demand is a single proportional calculation (5.A) with the key conceptual step of counting both lineages."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The stem states 1 difference per million years in each lineage with a constant rate. Total divergence is 2 per million years, so 12/2 = 6 million years. This is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. All quantities are in the stem and the wording is clear. The phrase 'each lineage' leaves no ambiguity."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 3 million option's rationale ('divides by twice the rate and then by two again') is garbled. Dividing 12 by 4 gives 3, so it is a double-counting error, but the wording is not a clean named misconception. The 24 million option ('doubles the differences before dividing') is a weak, unrealistic misconception. The 12 million option is a good distractor. Option values are in ascending order except for key placement, which is fine."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, has a light reading load, and needs no calculator. This is typical of AP Biology, though it is slightly easy."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and unambiguous. It fails only on distractor quality: the rationale for the 3 million option is awkwardly worded, and the 24 million option encodes a weak misconception. This is a borderline fail on criterion 4 and could be fixed by rewording the rationales."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single short calculation with small integers. The only conceptual hurdle is recognizing that differences accumulate along both lineages since divergence (total rate 2 per million years), so 12/2 = 6 million years. Distractors map to the common misconception of using one lineage only (12) or arithmetic slips. No stimulus, minimal reading, wording is unambiguous, and the content is in scope for 7.7 and skill 5.A.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m38-k0",
+  "cellId": "ap_biology-m38",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Each offspring round with prob 3/4; independent: (3/4)^3 = 27/64.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "27/64"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 75 seconds and requires one simple calculation. The calculator designation is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous monohybrid product-rule item with a unique key and distinct distractors, suitable for AP Biology."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single monohybrid cross (Rr x Rr gives 3/4 round) followed by one application of the multiplication rule for three independent offspring: (3/4)^3 = 27/64. There is one probability calculation with simple fractions, no data representation, and clear wording. The distractors correspond to common errors (wrinkled only, one offspring, two offspring). It is a straightforward application of core Mendelian probability and fits the basic learning tier rather than a full mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m39-k0",
+  "cellId": "ap_biology-m39",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Natural selection works on heritable variation that already exists. Giraffes with longer necks survived and reproduced more, so the long-neck trait became more common. The other choices describe Lamarckian inheritance, inheritance driven by wanting a trait, or ignore existing variation.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies natural selection to a concrete case and rejects acquired-trait and need-driven explanations. This fits topic 7.2 and skill 1.B (explain a concept)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only statement that correctly describes natural selection (heritable variation, differential survival and reproduction). The other three are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions: no existing variation with simultaneous mutation, evolution driven by wants, and inheritance of acquired traits. The explanation addresses each wrong option. Option C is slightly longer, but only by a few words."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, light reading, no calculation. The giraffe scenario is a standard textbook example and is typical for AP Biology."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound concept-application item with a unique key, distinct misconception distractors, and appropriate load. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item with no stimulus: the student must pick the natural selection explanation (heritable variation, differential survival and reproduction) and reject two named misconceptions (Lamarckian inheritance of acquired traits, and need- or desire-driven change) plus a distractor with simultaneous identical mutations. It takes one reasoning step with no data, calculation or representation changes. The stem is short and unambiguous. It suits initial concept learning of 7.2 more than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m40-k0",
+  "cellId": "ap_biology-m40",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "For natural selection to change a population, the trait has to be heritable. Comparing the beak sizes of parents and offspring tests whether beak size is heritable. The other choices test learned changes, ignore the trait, or only re-check the same measurements.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.2 and skill 3.D fit: choose a follow-up investigation testing heritability in a selection hypothesis."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique defensible follow-up test; A, B, D do not test the hypothesis."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors B (count birds without measuring traits) and D (remeasure same week) are implausible throwaways, not realistic student misconceptions. The correct option is the longest. Explanations are brief and generic."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Too easy because of the weak distractors; real 3.D items offer plausible alternative designs (e.g., comparing survivors vs non-survivors, controls, seed hardness). Length giveaway on the key."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key and scope are sound, but the distractors are implausible, so the item is too easy and the key stands out by length. It fails the distractor and exam-suitability criteria; revise with realistic competing investigation designs of similar length."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks which follow-up investigation would test a natural selection hypothesis. The student needs to recall that selection acts on heritable variation and pick the heritability test. The distractors are clearly flawed: an acquired-trait/learning misconception, a count with no trait data, and a repeated measurement that does not address the hypothesis. It requires one conceptual step, with no data, calculation or representation change. The wording is unambiguous and the context is minimal, so the difficulty is fair and low.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m41-k0",
+  "cellId": "ap_biology-m41",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Nondisjunction of chromosome 21 in a parent's meiosis gave a gamete with two copies",
+     "brief_reasoning": "If a gamete with two copies of chromosome 21 joins a normal gamete with one copy, the zygote ends up with three copies (trisomy 21). None of the other choices describes an error during gamete formation that would give this result.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The reading and time load is appropriate at about 70 seconds. The calculator designation is not an issue.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope is fine. The item fails on distractor quality because the key is the longest option and the only one that names meiosis or a gamete. Distractor B's rationale is inaccurate, and distractors B and D are implausible rather than realistic misconceptions. It should be revised so the options are parallel (for example nondisjunction in meiosis I versus meiosis II versus mitosis) before use."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: link trisomy 21 to nondisjunction in meiosis producing a gamete with two copies. Distractors are easily eliminated (point mutation cannot duplicate a chromosome, skipping replication does not add a chromosome copy, and mitotic crossing over does not cause trisomy). No data, no calculation, no representation change. Targets a prediction skill only superficially, since it is mostly a recall of the standard cause of Down syndrome. Too easy for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m42-k0",
+  "cellId": "ap_biology-m42",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Incomplete dominance",
+     "brief_reasoning": "Pink is a blended, intermediate phenotype in the heterozygote, and the F2 shows a 1:2:1 phenotypic ratio. Both of these point to incomplete dominance.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 65 seconds, short reading load, four parallel options, no arithmetic.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound 5.4 concept-application item with a unique key and plausible distractors. The only weakness is that the sex-linkage rationale refers to sex data the stem does not provide."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on a concrete scenario: intermediate F1 phenotype and 1:2:1 F2 ratio indicate incomplete dominance. The only real discrimination is incomplete dominance vs codominance, a standard contrast. No data, calculation, or representation change; low reading load. Fits foundational concept explanation rather than multi-step exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m43-k0",
+  "cellId": "ap_biology-m43",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The null hypothesis says there is no effect, so here it means no preference between the two conditions.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Pill bugs show no preference for humid or dry conditions."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Pill bug choice chamber is a standard 8.1 behavior investigation. The task is stating a null hypothesis, which matches skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The no-preference statement is the unique null hypothesis. The other options are directional predictions or alternative hypotheses."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem names the apparatus and variable, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The movement-based option encodes a distinct misconception (kinesis vs. distribution). The two preference options are less distinct from each other but each is explained as an alternative hypothesis. No length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, low reading load, no calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean null-hypothesis question for a pill bug choice chamber with a unique key and acceptable distractors, and it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of the null hypothesis (no preference) in a familiar choice-chamber scenario. No data, graph, or calculation; no representation changes. Distractors are directional or alternative hypotheses, so the item checks basic understanding of the null concept applied to a concrete situation. It is fair and clearly worded, but too low in depth and steps for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m44-k0",
+  "cellId": "ap_biology-m44",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "In the control, the larvae split evenly (10:10). In the test, 15 of 20 went to the dark side. A chi-square test against an expected 10:10 split gives χ² = (5²/10)×2 = 5.0. This is above the critical value of 3.84 (df = 1, p = 0.05), so the move toward the dark side is unlikely to be due to chance.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Minor wording issue: the control row is labeled 'light side' and 'dark side' even though both sides were light. It does not change the answer."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The key asserts 'not due to chance' with no test or statistics given. This goes beyond describing the data, and the key needs a statistical inference not supported by the stimulus.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mostly sound, but the control row has confusing light/dark side labels and the key claims 'not due to chance' without a test. I am failing it on stimulus clarity and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads a 2-row table, compares control (10/10, no preference) to test (5/15, more on dark side), and picks the conclusion that matches. Requires about two reasoning steps, with no calculation and a single representation. Distractors are easy to reject: control-as-preference, 'no response' because some larvae are on each side, and reversed direction. Concept depth is introductory (taxis, role of a control). Note for item review: the correct option claims 'not due to chance' without any statistical test in the data, which is a wording/validity concern but does not make the item harder.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m45-k0",
+  "cellId": "ap_biology-m45",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Miller-Urey: abiotic synthesis of organic molecules (amino acids) from simple precursors under simulated early-Earth conditions. Methane is technically organic, but the intended answer is clear.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": true,
+   "summary": "Fail. The key is sound, but the item reproduces the classic Miller-Urey scenario as a pure recall question and does not really assess 6.B argumentation from evidence. Its distractors are easy to dismiss.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The item asks students to recall the Miller-Urey conclusion. There is no data or evidence-to-claim reasoning, so 6.B is only nominal. This is essentially recall of a textbook result."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique best answer. The wording \"from simple inorganic ones\" is slightly imprecise because methane is an organic compound, but this does not make another option defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the wording is clear. The stem does not state the reducing, oxygen-poor condition, though no option depends on it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each rationale is accurate and specific to its option. The distractors are weak: option B contradicts the gases named in the stem, and option A is a naive vitalism claim."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Time and reading load are fine. The scenario is the classic Miller-Urey sample scenario, which is banned, and the item has no data-based argumentation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a single-step recall-and-apply item built on the Miller-Urey experiment. The student picks the claim the result supports from four options, and the distractors are common misconceptions: that amino acids form only in cells, that early Earth air was oxygen-rich, and that cells were created. No data, calculation, or representation change is needed. It touches the 6.B skill only lightly, since it asks for the supported claim without requiring the student to build the argument. It is suitable for initial learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m46-k0",
+  "cellId": "ap_biology-m46",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "X-linked recessive",
+     "brief_reasoning": "The affected male I-1 passes his X to his daughter II-1, who becomes an unaffected carrier. She then passes it to her son III-1, who is affected. Y-linked is ruled out because I-1's son II-2 is unaffected. Autosomal dominant is ruled out because the trait skips a generation through II-1. Autosomal recessive is ruled out because III-1's father does not carry the allele.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Inferring the mode of inheritance from pedigree data fits 5.3 and the 2.B relationship-explanation skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "X-linked recessive is the unique consistent mode given the note that the father does not carry the allele."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: sex, phenotype and parents are given, and the note supplies the needed condition."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and has a specific rationale."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, about 75 seconds, and no calculation needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound pedigree-inference item. The key is unique, the stimulus is complete, and the distractors are distinct and explained. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must convert a tabular pedigree into a mental pedigree, then use the stated father-not-a-carrier condition to eliminate autosomal recessive, autosomal dominant and Y-linked modes and arrive at X-linked recessive. This requires choosing the governing inheritance relationship and rejecting named misconceptions (rare means recessive; skipping a generation means dominant; only males affected means Y-linked). No heavy computation, and conditions are stated explicitly.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "ap_biology-m47-k0",
+  "cellId": "ap_biology-m47",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Taxa A and B",
+     "brief_reasoning": "A and B both have derived character 3, which no other taxon has, so they are sister taxa. The characters form nested sets: C has 1; D has 1 and 2; A has 1, 2 and 3; B has all four.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading a character table to infer relatedness fits topic 7.9 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Nested characters give a unique answer: A and B are sister taxa, sharing character 3 and characters 1-3 overall."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data are complete and clear; the outgroup is shown."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions: counting total characters, partial sharing, and using a shared ancestral character. Explanations are accurate for each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, short reading load, no arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key is unique, the distractors are distinct and accurate, and the stimulus is complete, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step table reading: identify the pair sharing the most derived characters (A and B share 1, 2, 3). Distractors target common misconceptions (most characters overall, character 1 shared by all ingroup taxa, partial overlap), but the item requires no tree construction, no multi-step inference, and no calculation. The concept is core to 7.9 and in scope, with a concise stimulus and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m48-k0",
+  "cellId": "ap_biology-m48",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P and Q differ at only 6 nucleotides, fewer than any other pair, so they shared a common ancestor most recently.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Species P and Q"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 30 to 60 seconds and needs no calculation. It is very easy, and the calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clear, with a unique key and a complete table. The distractors are weak: every option repeats the same \"fewest differences\" clause, and the wrong options are just other cells in the table. They encode no distinct misconceptions, so the distractor criterion fails and the item should be revised, for example by adding a tree-reading or relatedness-misconception distractor."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads a small 4x4 pairwise-difference table and identifies the smallest value (P-Q = 6), applying the single idea that fewer nucleotide differences means a more recent common ancestor under a constant-rate assumption. No calculation, no tree construction, and no misconception beyond choosing the wrong low-value pair. Concept depth and reasoning are shallow, so this suits basic learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m49-k0",
+  "cellId": "ap_biology-m49",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Lactose (allolactose) binds the lac repressor and changes its shape, so it lets go of the operator. RNA polymerase can then transcribe the operon. With no glucose present, cAMP-CAP also boosts transcription.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is close to rote recall of the lac operon mechanism and the distractors are weak. As a result it has little discriminating power and is too easy for an AP item. Three of the four options can be eliminated without knowing the biology. It does not really require predicting an experimental result, because the stem gives the prediction and asks for a mechanism.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, and the item is on topic. It fails on distractor quality and exam suitability: the distractors are implausible and encode no realistic misconceptions, the correct option is a length giveaway, the explanation is perfunctory, and the item reads as recall of the lac operon mechanism more than a prediction task."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall of lac operon induction: lactose binds the repressor, which releases the operator and allows transcription. There is no data, graph, or calculation. Distractors are clearly incorrect (ribosome blocking, lactose becoming DNA, lactose acting as a repressor at the promoter). About two reasoning steps connect the prediction to its mechanism. This is too straightforward for full-mock exam prep, and the difficulty is not driven by unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m50-k0",
+  "cellId": "ap_biology-m50",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Comparing DNA requires digesting both samples with the same restriction enzyme and comparing the band patterns from gel electrophoresis (RFLP analysis).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the topic fits. The distractors are trivially implausible and the key is a length giveaway. The item is rote-level and offers little discrimination, so it is not suitable for an AP-level exam.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.8 fits (gel electrophoresis and restriction enzymes). The skill is weakly engaged, since the item asks the student to choose a procedure rather than identify variables or controls, but it is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Two distractors (pH measurement and hair color) are implausible and do not encode realistic misconceptions. The key is also the longest and most detailed option, a length giveaway. The rationales are thin and restate the option rather than naming a misconception."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is too easy and is close to rote recall. It is answerable by elimination, so it falls short of AP-level discrimination."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: choose the procedure that uses the same restriction enzyme on both samples and compares gel patterns. Distractors are clearly wrong (different enzymes, pH, hair color). It requires only basic recall of gel electrophoresis and a controlled comparison. It has no data, no calculation, no representation change, and very little reading. The depth is below the exam_prep target.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m51-k0",
+  "cellId": "ap_biology-m51",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Option C names a measurable independent variable (number of seedlings per container), a measurable dependent variable (mass per seedling) and a set time (four weeks). The other options are off-topic, value-laden ('better') or anthropomorphic ('like').",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Quick to read and answer (about 60 seconds), with low reading load. No calculation is required, so the calculator designation is irrelevant. It is somewhat easy, but typical of this skill.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 3.A testable-question item in a density context. It has a unique key and distinct distractors, and the load is appropriate. The only minor issue is that the correct option is longer than the others."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of a testable question. The correct option names a measurable independent variable (seedling number per container) and dependent variable (mass after four weeks). The distractors are clearly off-topic, vague (\"better\"), or anthropomorphic (\"like\"). No data, calculation, or representation change is required. The density concept is straightforward and the question is accessible after basic instruction.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m52-k0",
+  "cellId": "ap_biology-m52",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Semiconservative",
+     "brief_reasoning": "Gen 1 has only intermediate DNA, which rules out conservative replication. Gen 2 has equal intermediate and light bands, which rules out dispersive replication (that would give one band shifting toward light).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.2 DNA replication, with density-band data used to argue for a model (6.C). The dominant demand is connecting evidence to theory. The Meselson-Stahl design is a standard textbook context, not a recognizable released item with specific wording."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Semiconservative is the unique defensible answer. Generation 1 with a single intermediate band rules out conservative replication. Generation 2 with separate intermediate and light bands rules out dispersive replication. Option A is contradicted because the intermediate band shows the heavy strands served as templates."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear: three generations with their band positions. The stem states the experimental conditions, and no numbers are missing."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: originals not used as templates, dispersive, and conservative. The explanation addresses each wrong option accurately. Option lengths are similar. The wording of the dispersive rationale is brief but accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds with a short table and no calculation, which is typical for AP Biology. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound evidence-to-model reasoning question on DNA replication. It has a unique key, a complete stimulus, distinct distractors with accurate rationales, and a typical exam load. I recommend acceptance."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read a short table and connect band patterns to the three replication models. The key reasoning is that the generation 1 intermediate band rules out conservative replication, and the generation 2 light band rules out dispersive replication, leaving semiconservative. The distractors are named misconceptions. There is no computation, the reading is light, and the content is within CED topic 6.2. Difficulty comes from the evidence-to-theory reasoning, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m53-k0",
+  "cellId": "ap_biology-m53",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Griffith's experiment: a transforming principle from the heat-killed S strain changed the harmless R strain into virulent bacteria.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is mostly recall of a famous experiment and never links the evidence to DNA as the genetic material. The key's length makes the answer guessable, and the item has little argumentation demand.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the distractor rationales rely on conditions not given in the stem, the key is the longest option, and the item is largely recall of Griffith's experiment without a link to DNA. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Classic Griffith transformation scenario with a short stem and no data. Students pick the conclusion supported by the evidence and reject three common misconceptions (spontaneous production, injection-induced mutation, revival of dead cells). It takes about two reasoning steps, with no calculation or representation change. This is below the depth expected of a full-mock exam_prep item for skill 6.C, which usually requires linking evidence to theory with more steps or data interpretation. Difficulty comes from the concept alone, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m54-k0",
+  "cellId": "ap_biology-m54",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "White reappears in F2 at 1/4, so the white factor was hidden (recessive) in F1 heterozygotes and segregated as a discrete unit; this rules out blending and mutation, and F1 were heterozygous.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reasoning from monohybrid cross data to particulate inheritance fits 5.3 and skill 6.C (connecting evidence to theory)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique defensible conclusion. A is contradicted by white F2 offspring, B is unsupported, and D is contradicted by the reappearance of white."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is self-contained and clear. The term 'factor' is Mendel's own wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (homozygous F1, mutation, blending), and the explanation addresses every wrong option accurately. Option C is slightly longer than the others, but only by a few words."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculation, one dominant skill, four parallel sentence options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous 5.3 reasoning question with a unique key and distinct misconception-based distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Classic monohybrid cross with a short text-only stem. The student links the F1 uniform phenotype and the reappearing 1/4 white in the F2 to a masked, separately inherited recessive factor, and rejects blending, mutation, and F1-homozygous misconceptions. It requires one concept and few reasoning steps, with no data table, calculation, or representation change, so it is foundational rather than full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m55-k0",
+  "cellId": "ap_biology-m55",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Top template's new strand is lagging (Okazaki fragments)",
+     "brief_reasoning": "Top template is 3' to 5' going left to right, so its new strand grows 5' to 3' rightward, away from a fork moving left. That makes it the lagging strand, made in fragments. The bottom template's new strand grows leftward toward the fork and is made continuously.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 75 seconds, four short parallel options, no arithmetic, and a diagram that is needed to answer.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is correct and unique, the stimulus is complete, and the distractors encode distinct misconceptions. It fits the topic and skill."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read 3'/5' labels on a diagram, apply antiparallel complementarity and 5'->3' synthesis only, relate new-strand direction to fork movement, and identify the lagging strand. Distractors target misconceptions (both continuous; polymerase works both directions). No calculation, concise reading, unambiguous stem, in scope for 6.2.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m56-k0",
+  "cellId": "ap_biology-m56",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "A 5' cap and a poly-A tail are added, and introns are removed by splicing.",
+     "brief_reasoning": "Eukaryotic pre-mRNA processing involves adding a 5' cap, adding a 3' poly-A tail, and splicing out introns.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The task is a recall of three processing facts with no situation, data or reasoning. The stem is a bare \"which set of modifications describes this\" question, which is close to the vocabulary and definition matching the brief bans. Concept-explanation items may use a concrete situation without data, but this one gives no situation at all, such as a disruption or a prediction. The calculator is irrelevant here, although \"allowed\" is consistent with the other items in the set.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique and the topic is in scope. However, the item is pure recall with implausible, double-error distractors and no biological situation or reasoning. It fails the distractor and exam-suitability criteria, so I recommend revising it into a scenario, for example predicting the effect of a missing cap or tail or of failed splicing."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recall of eukaryotic RNA processing (5' cap, poly-A tail, intron removal/exon joining). Distractors contain clear errors (reverse transcription, translating introns, swapping introns and exons, swapped cap and tail ends). No data, representation change, or calculation. In scope for 6.3 and skill 1.B. Too direct for a full mock, so it fits foundational learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m57-k0",
+  "cellId": "ap_biology-m57",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Option C describes the measured drop in mean body length as consistent with selection. The other options are wrong because they claim the population changed out of need, that new alleles appeared on demand in every individual, or that changes acquired during an insect's life were passed on.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The key restates the table and is the only option that is not an obvious misconception. This is too easy for a 6.B argumentation item. The calculator is not needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the distractors are fine. The stimulus omits heritability, has an unexplained drop in sample size (200 to 60), and gives no variability data, so the \"selection\" claim is not fully supported. The item is also too easy for 6.B. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read a two-row table, notice that mean body length dropped from 62 to 58.4 mm, and choose the option that links this to selection favoring smaller size. The distractors name common misconceptions (adaptation by need, simultaneous mutation in all individuals, Lamarckian inheritance of acquired traits), and rejecting them takes only direct recall of core natural selection ideas. No calculation is required, and the reading load is minimal. The item is a straightforward application of the concept with little data interpretation, so it fits foundational learning more than full-mock exam prep. A weakness is that the 'after' sample (60) differs from the 'before' sample (200) with no variance information, so the data can only be 'consistent with' selection. The correct option is worded appropriately for this.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m58-k0",
+  "cellId": "ap_biology-m58",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Every daughter gets the father's normal X^B allele, so she is either X^B X^B or X^B X^b. Neither is color blind, so the probability is 0.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": true,
+   "summary": "The key (0) is correct, but the item does not really test the calculation skill, the distractors are weak, and it is a stock textbook scenario that resembles known sample items. Fail.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill is 5.A (perform calculation), but the item needs no calculation. A single fact (daughters inherit the father's normal X) gives the answer, so it is closer to recall than a mathematical calculation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is clear and complete without a stimulus."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are weak: 1/4 and 3/4 are not natural errors for a question about daughters. The explanation is formulaic and repeats the rationale text, and the correct-answer text mixes in extra material about carriers."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "It is a stock carrier-mother, normal-father scenario that closely mirrors common sample items. It is trivial for the calculator-allowed 5.A skill and has little discrimination."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step X-linked recessive cross: carrier mother x normal father. Student must recognize that every daughter inherits the father's normal X, so the probability is 0. The only twist is conditioning on daughters, which rejects the 1/4 misconception. No data, no calculation beyond a simple Punnett square, and low reading load. This is core-concept application rather than a multi-step exam-style item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m59-k0",
+  "cellId": "ap_biology-m59",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Simpson D for A ≈ 0.18 and for B ≈ 0.67. The species richness is the same, so B's greater evenness gives it the higher diversity.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Biodiversity (richness vs evenness) with table description; fits 8.6 and 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B has higher Simpson's index (0.67 vs 0.18); unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with totals noted; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained accurately."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light load, appropriate for AP."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: key verified, distinct distractors, in scope, suitable load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read a small table and apply the idea that Simpson's index reflects both richness and evenness. Equal richness (3 species) and equal N make richness alone a tempting but wrong distractor. Community B is perfectly even (D about 0.67) versus A dominated by one species (D about 0.18), so the answer can be reasoned conceptually or confirmed with a quick calculation using simple proportions. Distractors target realistic misconceptions. Reading load is minimal and arithmetic is short, so difficulty comes from the concept and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m60-k0",
+  "cellId": "ap_biology-m60",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Doubling of chromosomes from a meiotic error gives polyploid plants that are reproductively isolated right away, with no geographic barrier involved. That makes this sympatric speciation.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Polyploidy, a form of sympatric speciation"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Polyploidy and sympatric speciation are in CED 7.10. The item applies a concept to a concrete case, which fits skill 1.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The scenario describes a chromosome doubling with immediate reproductive isolation and no geographic barrier. The key is the only defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and all options are parallel short phrases."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: gene flow, selection for a trait, or allopatric speciation. Every explanation is accurate. The key is slightly longer than the other options, but not by more than a few words."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, has a light reading load and requires no calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound, unambiguous concept-application question on speciation mechanisms. It has a unique key and distinct distractors, and its length is typical of the exam. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item has one concept (polyploidy as sympatric speciation) and a short scenario with no data. The student matches a chromosome-doubling meiotic error and immediate reproductive isolation to the mechanism. Each distractor can be rejected directly: gene flow would reduce isolation, nothing in the stem mentions selection for height, and no geographic barrier is described. It takes about two reasoning steps, with no calculation and no representation changes. This is below full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m61-k0",
+  "cellId": "ap_biology-m61",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Heterozygous (Rr)",
+     "brief_reasoning": "The test cross gave 37 round to 43 wrinkled, which is close to 1:1. That ratio means the unknown plant passes on R and r equally, so it is Rr.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "The stimulus has a small wording problem ('round flowers or traits'), but it does not change the answer."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "A test cross used to infer a genotype from offspring counts fits 5.3 and skill 6.B, since the item asks the student to support a genotype claim with data."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The counts of 37 round to 43 wrinkled are close to 1:1, which supports Rr. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table description reads \"round flowers or traits of unknown genotype\", which is garbled. The stem says \"round\" is a plant phenotype and the description says \"flowers\". The data rows are complete, but the wording is unclear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option D, \"Heterozygous (Rr), because exactly all offspring show the dominant phenotype\", contradicts the table and is implausible. Its explanation, \"This reasoning does not match the observed numbers\", is vague and gives no misconception. Option C's \"because the dominant phenotype is present in the offspring\" is an acceptable misconception. Option B is trivially eliminated by the parent's dominant phenotype. The distractors are weak and only partly distinct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is a short, quick reading task with a small table, no arithmetic burden, and a calculator designation that is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The biology and key are sound. The item fails on the garbled stimulus description (\"round flowers or traits\") and on weak distractors: option D contradicts the data outright, and its explanation is vague. It needs revision of the stimulus wording and of options B and D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step interpretation of a small table: a roughly 1:1 phenotype ratio in a test cross indicates a heterozygous parent. No calculation is needed, only recognition of the ratio. Distractors are easily eliminated (an RR or rr parent contradicts the stated round phenotype or the data). Target skill 6.B is only lightly engaged, since the claim-evidence link is supplied in the option text. The item has minor wording flaws (garbled stimulus description, awkward 'exactly all' option) that do not add difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m62-k0",
+  "cellId": "ap_biology-m62",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The mRNA pairs with the template base by base and runs in the opposite direction. Read the template 3' to 5' and swap each base (A to U, G to C, T to A, C to G). This gives mRNA 5'-UCUCAAGUU-3'.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "5'-UCUCAAGUU-3'"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 75 seconds, short reading, no arithmetic. The options are parallel sequences.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clean 6.3 item on polarity and base pairing with distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of complementary, antiparallel base pairing with U replacing T, on a 9-nt sequence. Distractors target common errors (T instead of U, wrong direction, copying the template). Little reading or computation and no data or diagram, so it is below full-mock depth and only weakly fits skill 2.D.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m63-k0",
+  "cellId": "ap_biology-m63",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Plate 3",
+     "brief_reasoning": "Ampicillin kills cells that aren't resistant. Plate 2 shows that untransformed cells can't grow on ampicillin, so the colonies on plate 3 must come from cells that took up the plasmid and got the resistance gene.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Uses selection on antibiotic plates and the control plates to support a claim about transformation. This fits 6.8 and the argumentation skill 6.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Plate 3 is the only plate where growth on ampicillin appears alongside a no-plasmid control (plate 2) with no growth. The other options are clearly weaker."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear. The 89 colonies appear in the data and are mentioned in the rationale. The stem wording is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception: lawn means uptake by all cells, a control mistaken for evidence, and growth alone mistaken for evidence. The explanation addresses each one. The correct option is somewhat longer but within a few words."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculation, low reading load. A standard AP-style table with a control-based argument."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean control-based argumentation item on bacterial transformation with a unique key and distinct distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify which plate in a small 4-row table shows evidence of transformation (growth on ampicillin only if the plasmid was taken up), using the controls as comparison. Requires one or two reasoning steps, no calculation, and low reading load. Distractors target common misconceptions (lawn = all cells transformed; control plate = evidence), but the discrimination is direct. Appropriate for an introductory check of biotechnology controls rather than a full-mock level item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m64-k0",
+  "cellId": "ap_biology-m64",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Secretory proteins are made by ribosomes bound to the rough ER, then moved through the endomembrane system.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "The rough endoplasmic reticulum"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, but the item is rote recall with weak distractors and no applied situation. It fails scope/skill and distractor quality and falls short of AP-style rigor.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The stem is a one-line fact-recall question (where are secretory-protein ribosomes bound?) with no concrete situation. It matches the banned difficulty source of pure vocabulary or definition matching. It requires no application, prediction or rejection of misconceptions, so it does not reach the intended judgment demand. It is also only loosely tied to the blueprint concept of tRNA roles and ribosome sites."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rough ER is the unique correct answer. The other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear, and this part is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractor rationales are thin. \"Ribosomes are not bound to the nuclear lamina\" just restates the option negatively and names no real misconception. The nuclear lamina and the inner mitochondrial membrane are implausible distractors. The Golgi rationale is acceptable. The set does not encode distinct, realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Time is short and reading load is low. However, the item is rote recall, which is not typical of AP Biology's applied style. The calculator designation is irrelevant here but harmless."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-fact recall (ribosomes making secreted proteins are bound to rough ER) with no scenario, data, or multi-step reasoning. It is close to pure vocabulary/definition matching, which is a banned difficulty source, and the distractors are clearly wrong. It is too shallow for a full-mock exam_prep item. Nothing in it is hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 20
+  }
+ },
+ {
+  "key": "ap_biology-m65-k0",
+  "cellId": "ap_biology-m65",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The anticodon pairs with the codon in antiparallel orientation: C-G, A-U, G-C, which gives 3'-GUC-5'. Option D contains T, which is not found in RNA.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "3'-GUC-5'"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Codon-anticodon pairing with polarity in translation; fits 6.4 and representing a relationship (2.D)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "3'-GUC-5' is the unique correct anticodon for 5'-CAG-3'."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (identical, wrong polarity/reversed, T for U). Rationale for C is slightly terse but accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean anticodon item with distinct distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of complementary, antiparallel base pairing between mRNA codon and tRNA anticodon. Distractors (same sequence, wrong orientation, T instead of U) test basic misconceptions only. No stimulus, no data, no calculation. Minimal alignment with skill 2.D since no visual representation is used, but the content is fundamental and not unfairly hard.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m66-k0",
+  "cellId": "ap_biology-m66",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "A population with more genetic variation is more likely to include alleles that give resistance, so some individuals survive and reproduce.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets 7.11 (importance of variation for population survival under a new disease) and applies the concept to a concrete situation, which fits skill 1.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique defensible answer. A is wrong because diversity does not cause extinction. B is wrong because variation does affect survival. D is wrong because uniformity makes a population vulnerable to a single pathogen."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, and the two populations are compared under the same disease condition."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors reflect distinct misconceptions: that diversity harms survival, that variation is irrelevant, and that uniformity is advantageous. The explanation addresses each wrong option. The rationales are somewhat generic and not tightly tied to each option's wording, which is acceptable. The key is slightly longer than the other options but not by more than a few words."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 55 seconds, no calculation, and low reading load. It is on the easy side, but acceptable for a 1.C item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous 7.11 concept-explanation question with one defensible key and distinct distractors. It passes all five criteria, with the minor caveats that it is easy and the key is the most detailed option."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: genetic variation increases the chance that some individuals have alleles conferring resistance to a new selective pressure. Only one or two reasoning steps are needed, with no data, calculation, or representation change. Distractors are common misconceptions (diversity causes extinction, variation is irrelevant, uniformity is protective), which makes them easy to reject. Wording is clear and short. Suitable for foundational practice rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ }
+]

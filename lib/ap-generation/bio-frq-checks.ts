@@ -18,7 +18,7 @@ export function gateBioFrq(p: Json, ctx: { topics: Set<string> }): BioIssue[] {
   const tm = tableMeans(p.stimulus); const labels = tm?.labels ?? [];
   // 2) 모호한 대조군: 실험 설계에서는 표에 (control) 표시가 정확히 1개이고, 파트 B 정답이 그 집단을 지목하며, 대조군의 근거(control_rationale)가 설계도에 있어야 한다
   const exp = p.blueprint?.experiment; const hasControlPart = (p.parts ?? []).some((x: Json) => /control/i.test(x.prompt ?? ""));
-  if (hasControlPart) {
+  if (hasControlPart && labels.length > 0) { // 표 집단 라벨이 있는 설계에서만(글 시나리오의 '통제 변수' 문구는 대조군 표 규칙 대상이 아니다)
     const marked = labels.filter((l) => /\(control\)/i.test(l)); if (marked.length !== 1) add("control_group_not_unique", `표에 (control) 표시 집단이 ${marked.length}개(정확히 1개 필요)`);
     if (!exp?.control_rationale) add("control_rationale_missing", "대조군이 기준 조건인 이유가 설계도에 없다");
     const b = (p.parts ?? []).find((x: Json) => /control/i.test(x.prompt ?? "")); const base = marked[0]?.replace(/\s*\(control\)/i, "").trim();
@@ -33,7 +33,7 @@ export function gateBioFrq(p: Json, ctx: { topics: Set<string> }): BioIssue[] {
       if (trend === "increases" && DOWN.test(t) && !UP.test(t) && part.label === "A") add("accepted_answer_contradicts_data", `허용 답 "${t}" 는 증가 추세와 모순`);
       if (trend === "decreases" && UP.test(t) && !DOWN.test(t) && part.label === "A") add("accepted_answer_contradicts_data", `허용 답 "${t}" 는 감소 추세와 모순`);
     }
-    const tableNums = new Set([...tm.means.map(String), ...tm.means.map((v) => v.toFixed(1)), ...tm.se2.map(String), ...tm.se2.map((v) => v.toFixed(1)), ...tm.se2.map((v) => v.toFixed(2)), ...tm.means.flatMap((m, i) => [(m - tm.se2[i]).toFixed(2), (m + tm.se2[i]).toFixed(2), (m - tm.se2[i]).toFixed(1), (m + tm.se2[i]).toFixed(1)])]); // ±2SE 범위 경계도 표에서 파생된 수
+    const tableNums = new Set([...tm.means.map((v) => Math.abs(v).toFixed(1)),...tm.means.map(String), ...tm.means.map((v) => v.toFixed(1)), ...tm.se2.map(String), ...tm.se2.map((v) => v.toFixed(1)), ...tm.se2.map((v) => v.toFixed(2)), ...tm.means.flatMap((m, i) => [(m - tm.se2[i]).toFixed(2), (m + tm.se2[i]).toFixed(2), (m - tm.se2[i]).toFixed(1), (m + tm.se2[i]).toFixed(1)])]); for (const x of [...tableNums]) if (x.startsWith("-")) tableNums.add(x.slice(1)); // ±2SE 범위 경계도 표에서 파생된 수(부호 없는 크기 포함: 본문은 음수의 크기를 따로 인용할 수 있다)
     for (const part of p.parts ?? []) for (const n of (String(part.model_answer ?? "").match(/\d+\.\d+/g) ?? [])) { if (!tableNums.has(n) && !(p.facts ?? []).some((f: string) => String(f).includes(n)) && !/%|\$|=/.test(String(part.model_answer))) add("model_answer_number_not_in_data", `모범 답의 수 ${n} 가 표·사실에 없다`); }
   }
   // 4) 표시 문구 중복: (control) (control), 같은 단어 연속
@@ -43,7 +43,7 @@ export function gateBioFrq(p: Json, ctx: { topics: Set<string> }): BioIssue[] {
   const cols: string[] = p.stimulus?.data?.columns ?? []; if (cols.some((c) => !String(c).trim())) add("empty_column_name", "빈 열 이름"); if (new Set(cols.map((c) => String(c).toLowerCase())).size !== cols.length) add("duplicate_column_name", "열 이름 중복");
   for (const t of [...cols, ...texts]) if (/\bPh\b/.test(t)) add("ph_miscased", `"Ph" 는 "pH" 여야 한다: ${t}`);
   // 7) 프롬프트가 자료 형식과 어긋나는 표현: 표 자료인데 "graph"/"error bars"(그래프의 오차 막대)를 말하지 않는다
-  if (p.stimulus?.kind === "table") for (const part of p.parts ?? []) if (/\b(graph|error bars?)\b/i.test(part.prompt ?? "")) add("prompt_mentions_graph_for_table", `파트 ${part.label}: 표 자료인데 그래프/오차 막대를 언급`);
+  if (p.stimulus?.kind === "table") for (const part of p.parts ?? []) if (/\b(graph|error bars?)\b/i.test(part.prompt ?? "") && !/\b(construct|draw|plot|sketch)\b/i.test(part.prompt ?? "")) add("prompt_mentions_graph_for_table", `파트 ${part.label}: 표 자료인데 그래프/오차 막대를 언급`);
   // 9) ±2SE 표기와 실제 표 자료 일치(머리글·값·단위): 문구가 ±2SE 를 말하면 표 머리글에 2SE 와 ±, 모든 칸에 ±, 단위가 설계도 측정 단위와 같고 표시값이 사실(means, se×2)과 일치해야 한다
   const text = [p.title, p.stimulus?.description, ...(p.parts ?? []).map((x: Json) => x.prompt)].join(" ");
   if (/2SE/.test(text)) {

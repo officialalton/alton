@@ -1,0 +1,73 @@
+{
+ "version": "v1-bio-p1-b",
+ "run": "bio-p1-b",
+ "subject": "ap_biology",
+ "archetypeList": "bio_p1_frq",
+ "seed0": 8600,
+ "candidatesPerCell": 1,
+ "capUsd": 0.8,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "2",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts",
+  "lib/ap-generation/subjects/bio.ts",
+  "lib/ap-generation/subjects/bio-archetypes.json",
+  "lib/ap-generation/subjects/bio-frq-templates.json",
+  "lib/ap-generation/bio-frq-checks.ts"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 91.2,
+ "expected": {
+  "generatorHash": "UNFROZEN",
+  "reviewerPromptHash": "UNFROZEN",
+  "difficultyPromptHash": "UNFROZEN",
+  "parserHash": "UNFROZEN",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ },
+ "_template": "TEMPLATE, NOT FROZEN (2026-10-14, docs/ap/biology-groundwork.md section 8). To use: copy to <name>.v1.json, run `npx tsx scripts/ap-generation/run-frozen.ts --config <copy> --freeze`, commit, then --check-only, then the paid run. hardStopCumulativeUsd = ledger cumulative before the Biology work ($88.0814) + the Biology steps' caps so far + 0.1 margin; the owner's hard cap for all Biology paid steps is $22 (stop at ledger cumulative $110.0814).",
+ "_budget_estimate": {
+  "cells": "6 FRQ slots x 1 candidate (one per official question type: Q1 and Q2 long 9 points, Q3-Q6 short 4 points = 34 points)",
+  "perCellUsd": "long 0.09, short 0.045",
+  "expectedUsd": "0.45 (range 0.35-0.8)",
+  "capUsd": 0.8,
+  "passRateAssumption": "50% first pass. Stop if fewer than 2 of 6 pass.",
+  "runAfter": "P1-a, only if its first pass is at least 45%"
+ }
+}

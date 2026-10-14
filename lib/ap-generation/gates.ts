@@ -25,7 +25,7 @@ export const NOT_ASSESSED_MC: Record<string, string[]> = {
 };
 export const OPTION_COUNT: Record<string, number> = { ap_calculus_ab: 4, ap_biology: 4, ap_microeconomics: 5, ap_statistics: 4, ap_physics_1: 4, ap_chemistry: 4, ap_computer_science_a: 4 };
 /** 수식 구분자 규칙이 적용되는 수학·통계 과목(달러 기호가 통화인 Micro 는 제외). 통계는 정수·확률·통계량을 모두 $...$ 안에 쓴다. */
-const MATH_SUBJECT = /^ap_(calculus|statistics|physics|chemistry)/;
+const MATH_SUBJECT = /^ap_(calculus|statistics|physics|chemistry|biology)/;
 
 const NARRATED = /\b(because|incorrectly|mistake|forgets|forgot|ignores|assumes|wrongly|error)\b/i;
 const LETTER_REF = /\b(?:[Oo]ption|[Cc]hoice|[Aa]nswer)s?\s+\(?[A-E]\)?(?![a-z])|(?:^|\s)\([A-E]\)(?=\s|$|[.,;])/;

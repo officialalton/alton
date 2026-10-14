@@ -18,6 +18,8 @@ export type Blueprint = {
   verification: { independent_path: string; method: string }; parts?: BlueprintPart[]; total_points?: number; experiment?: BioExperiment; model?: MicroModel;
   /** AP Statistics: 문항이 요구하는 판단(계산기 허용 과목이므로 계산만 묻는 문항을 막는다). */
   judgment_demand?: string[];
+  /** 코드 우선 원형(Biology 2026-10-13): 수치·자료·정답을 코드가 만든 설계도. 실험 설계(experiment)가 없으면 Bio 실험 규칙을 적용하지 않고, 있으면 그대로 검증한다. */
+  code_first?: boolean;
 };
 export type BlueprintContext = { skills: Set<string>; topicUnit: Map<string, string> }; // 공식 CED 스킬 코드, 토픽 코드 → 단원
 export type BlueprintIssue = { code: string; message: string };
@@ -59,7 +61,7 @@ export function validateBlueprint(bp: Partial<Blueprint> | null | undefined, ctx
     if (bp.total_points !== undefined && bp.total_points !== total) add("total_points_mismatch", `총점 ${bp.total_points} ≠ 파트 합 ${total}`);
   }
   if (bp.subject === "ap_statistics") statsRules(bp, add);
-  if (bp.subject === "ap_biology") bioExperimentRules(bp, ctx, add);
+  if (bp.subject === "ap_biology" && !(bp.code_first && !bp.experiment)) bioExperimentRules(bp, ctx, add);
   if (bp.subject === "ap_microeconomics") microModelRules(bp, add);
   return out;
 }
