@@ -52,7 +52,7 @@ function guard(stage: string, est: number) {
 async function call(stage: string, reqs: BatchReq[], estUsd: number): Promise<Map<string, Json | null>> {
   if (!reqs.length) return new Map(); guard(stage, estUsd);
   const sync = cfg.syncStages?.includes(stage) ?? false;
-  const run = async (name: string, rs: BatchReq[]) => runBatch({ dir: DIR, name, requests: rs, budgetUsd: runBase() + cfg.capUsd, estimateUsd: estUsd * (rs.length / reqs.length), sync, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 8), pollMs: 20000 });
+  const run = async (name: string, rs: BatchReq[]) => runBatch({ dir: DIR, name, requests: rs, budgetUsd: ledger(DIR).spent() + Math.max(0, cfg.capUsd - spentRun()), estimateUsd: estUsd * (rs.length / reqs.length), sync, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 8), pollMs: 20000 });
   const got = await run(stage, reqs); const out = new Map<string, Json | null>();
   for (const r of reqs) out.set(r.custom_id, got.has(r.custom_id) ? (toolInput(got.get(r.custom_id)!) as Json | null) : null);
   const missing = reqs.filter((r) => !out.get(r.custom_id));
