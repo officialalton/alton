@@ -2,10 +2,36 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { apStockBatchStatusAction, apStockLoadBatchAction, type ApStockOverview } from "../ap-stock-actions";
-import { loadStepLabel, runBatchSequence, type BatchRun, type BatchStatus } from "@/lib/ap-admin/load-batch-client";
+import { SKIP_KIND_LABEL, loadStepLabel, runBatchSequence, type BatchRun, type BatchStatus, type LoadStep, type SkipKind } from "@/lib/ap-admin/load-batch-client";
 
 // '배치 전체 적재'(2026-10-13): ①적재→②렌더→③화면→④변환을 한 번에. 위 4개 단계 카드와 같은 서버 함수·가드·감사 기록을 쓰며,
 // 건너뜀·충돌·오류가 하나라도 있으면 그 자리에서 멈춘다. 배치는 순서대로 한 번에 하나씩 서버를 호출한다.
+
+/** 건너뜀 허용 모드의 단계×종류별 묶음(건수 + 펼치면 키 목록) 과 실행 후 '남은 것' 목록. */
+function SkipView({ r }: { r: BatchRun }) {
+  if (!r.allowSkips) return null;
+  const groups = new Map<string, { step: LoadStep; kind: SkipKind; rows: { key: string; reason: string }[] }>();
+  for (const x of r.skipped ?? []) { const g = groups.get(`${x.step}/${x.kind}`) ?? { step: x.step, kind: x.kind, rows: [] }; g.rows.push({ key: x.key, reason: x.reason }); groups.set(`${x.step}/${x.kind}`, g); }
+  const remaining = r.remaining ?? [];
+  return (
+    <div className="mt-1 text-xs" data-testid={`ap-loadall-skips-${r.batchId}`}>
+      <p className="font-bold">{r.mode === "preview" ? "건너뛸 후보(기록·변환하지 않고 미검증 후보로 남음)" : "건너뛴 후보(기록·변환하지 않음)"}: {remaining.length}건</p>
+      {[...groups.values()].map((g) => (
+        <details key={`${g.step}/${g.kind}`} className="ml-2">
+          <summary className="cursor-pointer">{loadStepLabel(g.step)} — {SKIP_KIND_LABEL[g.kind]} {g.rows.length}건</summary>
+          <ul className="ml-3 list-disc text-grey-600">{g.rows.map((x) => <li key={x.key}><code>{x.key}</code> — {x.reason}</li>)}</ul>
+        </details>
+      ))}
+      {r.mode === "preview" && <p className="ml-2 text-grey-500">※ ② 기록 전 후보의 화면 증거 여부는 ② 실행 뒤에 확정됩니다(④ 의 검증 미완료 후보는 실행 시점에 확정). 실행 중 목록과 다르면 중단합니다.</p>}
+      {r.mode === "execute" && remaining.length > 0 && (
+        <div className="mt-1" data-testid={`ap-loadall-remaining-${r.batchId}`}>
+          <p className="font-bold">남은 것(통과했지만 변환되지 않음) {remaining.length}건</p>
+          <ul className="ml-3 list-disc text-grey-600">{remaining.map((x) => <li key={x.key}><code>{x.key}</code> — {x.reason}</li>)}</ul>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function RunView({ r }: { r: BatchRun }) {
   return (
@@ -19,6 +45,7 @@ function RunView({ r }: { r: BatchRun }) {
           </li>
         ))}
       </ul>
+      <SkipView r={r} />
       {r.stoppedAt && <p className="mt-1 font-bold text-red" role="alert">멈춘 위치: {r.stoppedAt.step === "guard" || r.stoppedAt.step === "preview" ? r.stoppedAt.step : loadStepLabel(r.stoppedAt.step)} — {r.stoppedAt.reason}</p>}
     </div>
   );
@@ -31,6 +58,7 @@ export default function ApLoadBatchPanel({ ov, onDone }: { ov: ApStockOverview; 
   const [previews, setPreviews] = useState<Map<string, BatchRun>>(new Map());
   const [runs, setRuns] = useState<BatchRun[]>([]);
   const [confirm, setConfirm] = useState(false);
+  const [allowSkips, setAllowSkips] = useState(false);
   const [busy, setBusy] = useState<"preview" | "run" | null>(null);
   const [summary, setSummary] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -50,18 +78,21 @@ export default function ApLoadBatchPanel({ ov, onDone }: { ov: ApStockOverview; 
     setBusy("preview"); resetResults();
     const got = new Map<string, BatchRun>();
     try {
-      for (const id of order) { const r = await apStockLoadBatchAction({ batchId: id, execute: false }); got.set(id, r); setPreviews(new Map(got)); }
+      for (const id of order) { const r = await apStockLoadBatchAction({ batchId: id, execute: false, allowSkips }); got.set(id, r); setPreviews(new Map(got)); }
     } catch (e) { setError(e instanceof Error ? e.message : "미리보기에 실패했습니다."); }
     finally { setBusy(null); }
   };
   const previewOk = order.length > 0 && order.every((id) => previews.get(id)?.ok && previews.get(id)?.previewHash);
+  const skipCount = order.reduce((n, id) => n + (previews.get(id)?.remaining?.length ?? 0), 0);
   const canRun = ov.target.canWrite && previewOk && confirm && !busy;
 
   const runAll = async () => {
     setBusy("run"); setRuns([]); setSummary(null); setError(null);
     try {
-      const out = await runBatchSequence(order, (id) => apStockLoadBatchAction({ batchId: id, execute: true, previewHash: previews.get(id)?.previewHash ?? null }), (r) => setRuns((x) => [...x, r]));
-      setSummary(out.stoppedAt ? `중단: ${out.stoppedAt.batchId} / ${out.stoppedAt.step} — ${out.stoppedAt.reason} (완료 ${out.completed}/${order.length}개 배치)` : `완료: ${out.completed}/${order.length}개 배치 적재·검증·변환 끝.`);
+      const out = await runBatchSequence(order, (id) => apStockLoadBatchAction({ batchId: id, execute: true, previewHash: previews.get(id)?.previewHash ?? null, allowSkips }), (r) => setRuns((x) => [...x, r]));
+      const left = out.runs.filter((x) => (x.remaining?.length ?? 0) > 0).map((x) => `${x.batchId} ${x.remaining!.length}건(${x.remaining!.map((y) => y.key).join(", ")})`);
+      const skipNote = allowSkips ? ` 건너뜀 허용 모드 — 변환되지 않고 남은 후보: ${left.length ? left.join(" / ") : "없음"}.` : "";
+      setSummary((out.stoppedAt ? `중단: ${out.stoppedAt.batchId} / ${out.stoppedAt.step} — ${out.stoppedAt.reason} (완료 ${out.completed}/${order.length}개 배치)` : `완료: ${out.completed}/${order.length}개 배치 적재·검증·변환 끝.`) + skipNote);
     } catch (e) { setError(e instanceof Error ? e.message : "실행에 실패했습니다."); }
     finally { setBusy(null); setConfirm(false); setPreviews(new Map()); refresh(); onDone(); }
   };
@@ -94,9 +125,13 @@ export default function ApLoadBatchPanel({ ov, onDone }: { ov: ApStockOverview; 
           </tbody>
         </table>
       </div>
+      <label className="mt-2 flex items-start gap-1 text-xs text-grey-600" data-testid="ap-loadall-allow-skips">
+        <input type="checkbox" className="mt-0.5" checked={allowSkips} disabled={!!busy} onChange={(e) => { setAllowSkips(e.target.checked); resetResults(); }} />
+        <span><b>증거 없는 행은 건너뛰고 나머지만 적재</b> (기본 꺼짐) — 화면 증거 없음·해시 불일치·렌더 보고서 없음(②③)과 검증 미완료(④)인 후보만 건너뜁니다. 건너뛴 후보는 기록·변환·검증 표시를 하지 않고 미검증 후보로 남습니다. 오류·충돌·가드·변환 실패 등 다른 중단 조건은 그대로 멈춥니다. 미리보기에서 건너뛸 후보 목록을 확인하세요.</span>
+      </label>
       <div className="mt-2 flex flex-wrap items-center gap-2">
         <button type="button" disabled={!!busy || order.length === 0} onClick={previewAll} className="min-h-9 rounded border border-grey-300 px-3 text-xs font-bold disabled:opacity-50">{busy === "preview" ? "미리보기 계산 중..." : "미리보기"}</button>
-        <label className="flex items-center gap-1 text-xs text-grey-600"><input type="checkbox" checked={confirm} disabled={!previewOk || !!busy} onChange={(e) => setConfirm(e.target.checked)} />미리보기 결과를 확인했습니다</label>
+        <label className="flex items-center gap-1 text-xs text-grey-600"><input type="checkbox" checked={confirm} disabled={!previewOk || !!busy} onChange={(e) => setConfirm(e.target.checked)} />{allowSkips ? `미리보기 결과를 확인했고, 후보 ${skipCount}건을 건너뛰고(적재·변환하지 않음) 진행하는 데 동의합니다` : "미리보기 결과를 확인했습니다"}</label>
         <button type="button" disabled={!canRun} onClick={runAll} className="min-h-9 rounded bg-ink px-3 text-xs font-bold text-white disabled:opacity-40" title={ov.target.canWrite ? undefined : "이 대상에는 쓸 수 없습니다"}>{busy === "run" ? "실행 중..." : "선택한 배치 전체 적재 실행"}</button>
       </div>
       {error && <p className="mt-2 text-xs text-red" role="alert">{error}</p>}
