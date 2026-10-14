@@ -206,3 +206,75 @@ python3 scripts/audit/stock-defect-scans.py
 STRUCTURE_GROUPS_FILE=data/ap/stock/structure-groups.conservative.json npx tsx scripts/audit/ap-external-audit-swap-plans.ts [--write]
 npx vitest run --project unit lib/ap-exam/explanation-math.test.ts lib/ap-exam/convert.test.ts lib/ap-admin/explanation-fix.test.ts lib/ap-exam/tex-audit.test.ts
 ```
+
+
+## 라운드 2 (2026-10-13 밤): 판단형 항목 검증·수정, 신규 지적 삼각검증, 근본 원인 수정
+
+라운드 1(69문항 버전/16세트 버전)은 비프로덕션에 적용됐다. 라운드 2 는 라운드 1 이 패치하지 않은 판단형 항목을 **현재 게시 버전(v1/v2 그대로)** 에서 다시 읽어 확인하고(읽기 전용 SELECT), 결함이면 검증된 패치로, 아니면 이유와 함께 기록했다. 패치 원본은 `lib/audit-fix/r2-edits.ts`(편집 함수 + 문항별 why/validation), 생성 결과는 `data/audit/2026-10-13-r2-patches.json`(37건), 계획 상태는 `data/audit/2026-10-13-r2-apply-status.json`.
+
+### A. 외부 감사 폴더 재확인(10-13 00:00 PDT 이후 갱신분)
+갱신 파일은 SAT4~7 추가 경로(`findings-sat4/5/6-alt-*`, `findings-sat7-alt-rw2`)뿐이다(audit-report.md 는 10-12 23:47 이후 변경 없음). 새 지적은 두 건이고 나머지는 라운드 1 이 이미 다룬 항목이다.
+
+| 감사 위치 | 내용 | 판정 | 내부 id | 처리 |
+|---|---|---|---|---|
+| SAT7 alt RW2 Q6 | "a chemical reaction which/that occurs" 둘 다 제한적 관계절로 문법상 유효 | a | gid 5f2cc935-… (SAT7 v3 rw_m2#33) | R2-N01: "which"를 "who"로 바꿈(사물 선행사에 불가) |
+| SAT7 alt RW2 Q7 | 표 원자료가 지문 문장과 서식 표에 이중 표시 | a | gid cc5b3af5-… (SAT7 v3 rw_m2#34) | R2-N02: 지문의 원자료 줄 삭제(표 그림 유지) |
+| SAT4 alt RW2 Q9, SAT6 alt RW2 Q11·Q24 | 빈칸 뒤 단어 중복 | (라운드 1 S-R10) | rwstock:easy-1:easy-boundaries-100 / medium-boundaries-302 / sesup-medium-boundaries-43 | 라운드 1 적용분 |
+| SAT6 alt Math Q15 | 판매자가 구매가를 지출했다고 서술 | a(S-M25 확인) | gid d368cef5-… | R2-M25 |
+| SAT6 alt RW2 Q21 | 검수자 풀이 실수로 철회(감사 파일 자체가 철회) | c | — | 조치 없음 |
+| SAT4/5 alt Math2·결과 검토 | 확정 P1/P2 없음(관찰만) | — | — | 조치 없음 |
+| 길이 후보(SAT5/6 alt RW2 > 155 표준단어) | RW 150단어 초과 | 목록 | — | B 절 목록 |
+
+### B. 판단형 항목 판정
+
+| ID | 판정 | 근거(독립 검증) | 처리 |
+|---|---|---|---|
+| S-G05 | c 오탐 | 선택지 A는 경쟁 가설(왁스 코팅)을 뒷받침, C·D는 뿌리 가설을 약화 — 뿌리 가설을 직접 뒷받침하는 것은 B 하나 | 조치 없음 |
+| S-G07 | a | "In doing so"/"…, however"/"Despite doing so" 셋 다 문법적. 스킬 코드(form_structure_sense)가 전환어 문구를 금지(렌더 검사) → 선택지를 "In doing so, and/which/or"로 바꿔 한 개만 정문 | R2-G07 |
+| S-G08 | a | B와 D("She used …, and she was able…") 둘 다 정문, 기존 해설의 "주어 중복 금지"는 규칙 아님. D를 쉼표만 남겨 콤마 스플라이스로 | R2-G08 |
+| S-G10(Q21) | a | "and thereby"와 "and, thereby," 둘 다 용인. C를 "and thereby,"(짝 없는 쉼표)로 | R2-G10a |
+| S-G10(Q12) | a | "having reviewed …"와 "…and residents' letters carefully" 둘 다 정문. A를 "which having reviewed…", D를 "…submissions and"로 바꿔 오류화 | R2-G10b |
+| S-G11(Q8)+스캔 b7c3a411 | a | "meanwhile/consequently/having achieved this" 모두 정문 + "she" 선택지가 지문의 "she became"와 중복. 선택지를 "consequently;/consequently:/consequent"로 바꿔 한 개만 정문 | R2-G11a |
+| S-G11(Q22) | a | B("despite these obstacles Noether persisted…, so")도 Noether 가 주어라 정문. B를 "her persistence … so"(현수 수식어)로 | R2-G11b |
+| S-G12 | a | singular they 가 허용돼 "their"와 "his or her" 모호. 선행사를 복수("all of whom … instruments")로 바꾸고 정답을 "their"로 | R2-G12 |
+| S-G13 | a | "reflecting"와 "a practice reflecting" 둘 다 유효. B를 "which reflecting…"(정동사 없음)로 | R2-G13 |
+| S-M17 | a | 매표 수입이 판매 표 수와 함께 60→10 으로 감소(비현실). 선불카드 잔액 맥락으로 재테마(데이터·정답 10 불변), 그림 축 제목 변경 → figure_checked=false | R2-M17 |
+| S-M19 | a | 기울기 −5(퍼센트포인트/시간). "By how many percentage points … decrease" | R2-M19 |
+| S-M20 | a | 가구 표본인데 "people" 질문. (12/3)²×200=3200 가구 | R2-M20 |
+| S-M23 | a | Note 가 인수분해를 알려 줌. 삭제(전개로 정답 (x−5)(x−2)(x+2) 확인) | R2-M23 |
+| S-M24 | a | 문두가 이미 동치식을 제시. x²−5x−14=(x−7)(x+2), x²−4=(x−2)(x+2) 이므로 D만 동치(sympy 재계산) | R2-M24 |
+| S-M25 | a | 판매자 지출 서술 → 고객 구매로(4·5=20, (32−20)/6=2) | R2-M25 |
+| S-M28 | a(9건) | 해설이 값을 하나도 보이지 않고 "다른 표는 정확히 한 군데만 어긋난다"는 근거 없는 템플릿. 실제 표의 모든 행을 계산해 한·영 해설을 재생성(정답 표가 정확히 하나이고 DB 키와 같음을 코드가 검사) | R2-T1~T9 |
+| S-P02 | a | 전환어 문항인데 Standard English 문구. 스킬 코드 때문에 문구를 못 바꿔 선택지를 문장부호/접속사 변형("Eventually;" 등)으로 바꿔 한 개만 정문(전환 논리 측면은 포기, 스킬 재분류가 대안) | R2-P02 |
+| S-P03 | a | Philips 컴팩트 카세트는 1960년대 초 개발(Ottens 1960 부서장 취임, 나무 블록 원형은 "early 1960s", 1963 공개; Wikipedia "Lou Ottens", Philips Museum 인용). "In 1959" → "In the early 1960s" | R2-P03 |
+| S-P04 | a | 타코마 내로스 붕괴는 공진이 아니라 공탄성 플러터(Practical Engineering, Structure magazine, Scanlan). 지문을 "풍력이 계속 에너지를 공급" / "oscillation problems"로 | R2-P04 |
+| S-P05 sponge(6273a28a) | a | 해면이 규산질 골격을 영양분으로 소비한다는 근거 없음 → 문헌상 "sponge loop"(용존 유기물 흡수→입자 배출, de Goeij 2013)로 지문·선택지·해설 정렬 | R2-P05-sponge |
+| S-P05 bridge(easy-boundaries-101) | a | 2019 네덜란드 재활용 플라스틱 "자전거 다리" 확인 불가. 확인된 것은 2018-09 즈월러 30m PlasticRoad 자전거 도로(Guinness, Yale e360, Total 보도자료). "installed in a single day"도 출처 없음 → 2018 자전거 도로·"installed quickly" | R2-P05-bridge |
+| S-P05 fern(205) | a | 부활 고사리는 사막 식물이 아님 → "Many plants that endure dry seasons, such as desert succulents" | R2-P05-fern |
+| S-P05 fern(b3de9199) | a | "Certain desert plants, such as the resurrection fern" → "Certain plants"; 선택지 A "other desert organisms" → "other plants" | R2-P05-fern2 |
+| S-P05 FRB(3b57dca2) | a(경미) | 2016 발견 보고에서 "수십 번·수개월 반복"은 과장 → "multiple times" | R2-P05-frb |
+| S-P05 NGC 6791(ebd8bd34) | a | 병합으로 생긴 별은 성단보다 **젊어 보인다**(blue straggler; Brogaard 2018, arXiv:1809.00705). 지문의 "older" 방향이 반대 → 지문·선택지 B/C·한영 해설을 "younger"로 | R2-P05-ngc |
+| S-P05 신호등(963ebc71) | c | Garrett Morgan 1923 특허(정지·진행 사이 주의 위치), 경찰 수동 신호, 신호 연동은 사실과 일치 | 조치 없음 |
+| S-P05 망원경(aeaae082) | c | 통과(transit) 주기로 궤도 길이를 구한다는 서술은 정확 | 조치 없음 |
+| S-P05 w1-boundaries-m-189 | c | Kuapa Kokoo(가나, 1993, Divine Chocolate 공동 소유) 사실 일치, DB 미적재 | 조치 없음 |
+| 스캔 318348e4 | a | 모든 선택지가 "the"/"the fixed exchange rate era"로 끝나는데 지문이 이어서 같은 말을 씀 → 선택지를 "ended"+부호로 | R2-SCAN-318348e4 |
+| 스캔 b7c3a411 | a | S-G11(Q8)과 같은 문항 | R2-G11a |
+| 스캔 53e14b14 | a | 빈칸 뒤 리터럴 쉼표 + 선택지 "However," 이중 쉼표(세트에 없음) → 지문의 쉼표 삭제 | R2-SCAN-53e14b14 |
+| 그림 c5eb51a6 | a | f=x+6, g=2x−5 교점 (11,17) 이 축 [−10,10] 밖 → 축 −20..20(세트에 없음, figure_checked=false) | R2-F-c5eb51a6 |
+| RW 150단어 초과 | 목록 | 게시 세트 RW 134개(문자수/6 기준, 150–155 25 · 156–170 55 · 171–200 37 · 200 초과 17). 안전한 기계적 삭제 없음(중심 내용·두 글 비교 문항은 문장을 빼면 문항 자체가 바뀜) | `data/audit/2026-10-13-r2-rw-over150.json` 에 목록만, 작성자 결정 필요 |
+| S-M21, S-M27, S-P07 | — | 라운드 1 판정 유지(저영향·주관적) | 조치 없음 |
+
+### C. 라운드 2 SQL
+- `data/audit/apply/2026-10-13-r2-apply.sql`(DO 블록 1개 = 트랜잭션, 멱등, DRIFT 시 전체 롤백) → 검증 `…-r2-verify.sql` → 문제 시 `…-r2-rollback.sql`. 적용 대상 37문항 버전 + 세트 새 버전 13개(`r2-apply-status.json`).
+- 재생성: `npx tsx scripts/audit/r2-readout.ts`(SELECT 전용 조회) → `npx tsx scripts/audit/r2-build-patches.ts` → `npx tsx scripts/audit/apply-audit-fixes.ts --round2 --dry-run --readout-in data/audit/2026-10-13-r2-readout.json --status-out … --emit-sql … --emit-rollback … --emit-verify …`.
+- PGlite 가짜 스키마 하니스로 적용→재적용(멱등, 변화 없음)→롤백→재적용→검증→DRIFT 검출·원자성을 확인했다(대상 DB 쓰기 없음).
+
+### D. 근본 원인 수정
+1. **빈칸 이음새 게이트**: `lib/problem-blank-junction.ts`(순수)를 `draftBankGateError`(모의고사·일반 임포트·관리자 저장 공통)에 연결 → sat_rw 빈칸 문항에서 선택지 끝 단어가 빈칸 뒤 첫 단어와 같거나 리터럴 쉼표가 선택지 쉼표와 겹치면 저장·임포트 거절. 테스트 `lib/problem-text-guards.test.ts`.
+2. **`fprime_graph_statements`**: 증가 구간을 `r1 < lo < hi <= r2` 로 제한. 회귀 `scripts/ap-generation/archetypes/test_calc_ab_2_fprime.py`(3000 시드).
+3. **`equivalent-expressions.ts` 문맥형**: 안쪽 변이 바깥 변보다 길면 두 변의 역할을 바꿔 넓이가 항상 양수. 회귀 `ee-area-context.test.ts`.
+4. **맥락 풀**: 값표 기울기 부호를 장면이 정함(`topicSign`을 `figure-topics.ts`로 이동, `makeLinTab` 적용), 산점도 "차 나이→중고 가치"는 음수만, 서술형 선형 모델 풀의 촛불은 증가 서술 금지(`canUp:false`). 회귀 `context-sign.test.ts`.
+5. **저장소 원본**: DB 에 없던 R-* 7건·D-* 4건(D-309f9901 포함)의 지문을 `acceptance/import-general.json` 에 반영(`scripts/audit/apply-patches-to-stock.ts`), 테스트 `lib/audit-fix/stock-clean.test.ts`(옛 지문은 새 게이트가 거절함을 함께 확인).
+
+### E. 그림 확인 대기
+라운드 1·2 에서 그림이 바뀌어 figure_checked=false 로 저장되는 문항 10건: S-06, S-07, S-08, F-f87e641a, F-c27d0f37, F-8329a1bd, C-aaeb9945, C-445bab61, R2-M17, R2-F-c5eb51a6. 코디네이터가 눈으로 확인한 뒤에만 쓸 수 있는 SQL 은 `data/audit/apply/2026-10-13-figure-checked.PENDING.sql`(기본 실행 불가: 첫 줄 RAISE EXCEPTION 을 지워야 동작).

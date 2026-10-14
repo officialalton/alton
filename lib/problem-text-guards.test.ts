@@ -55,3 +55,20 @@ describe("draftBankGateError / answerKeyError (2026-10-06 은행 게이트)", ()
     expect(answerKeyError(["a"], 0)).toMatch(/2개/);
   });
 });
+
+describe("draftBankGateError - blank junction (2026-10-13 external audit root cause)", () => {
+  const base = { examSystem: "sat_rw", usageScope: "mock_exam", question: "Which choice completes the text so that it conforms to the conventions of Standard English?", explanationEn: "En." };
+  it("rejects an option ending with the word that follows the blank ('the data')", () => {
+    const passage = "Sensors monitor pressure and temperature ______ the data feed a digital twin.";
+    expect(draftBankGateError({ ...base, passage, options: [", the data", "; the data", "the data", "and, the data"] })).toMatch(/빈칸 뒤 지문이 선택지와 겹쳐/);
+  });
+  it("rejects a literal comma after the blank when options end with a comma (double comma)", () => {
+    const passage = "Many animals avoid crowds. ______ , they maintain distance.";
+    expect(draftBankGateError({ ...base, passage, options: ["Even so,", "For example,", "Similarly,", "Consequently,"] })).toMatch(/빈칸 뒤 지문이 선택지와 겹쳐/);
+  });
+  it("passes when nothing overlaps and is not applied to math", () => {
+    const ok = "Sensors monitor pressure and temperature ______ the data feed a digital twin.";
+    expect(draftBankGateError({ ...base, passage: ok, options: [", and", ";", "while", "so that"] })).toBeNull();
+    expect(draftBankGateError({ ...base, examSystem: "sat_math", passage: ok, options: [", the data", "x", "y", "z"] })).toBeNull();
+  });
+});

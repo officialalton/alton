@@ -21,12 +21,15 @@ export const EE_ARCHETYPES: Archetype[] = [
       const v = rng.pick(VARS); const co = [a * a - c * c, 2 * (a * b - c * d), b * b - d * d];
       const ctx = rng.pick([null, ["square patio", "square pool", "meters"], ["square poster", "square photo", "inches"], ["square lawn", "square flower bed", "feet"], ["square tile", "square cutout", "centimeters"]] as const);
       const expr = `(${lin(a, b, v)})^2 - (${lin(c, d, v)})^2`;
-      const stimulus = ctx
-        ? `A ${ctx[0]} has side length ${M(lin(Math.abs(a) === a ? a : -a, Math.abs(a) === a ? b : -b, v))} ${ctx[2]}, and a ${ctx[1]} with side length ${M(lin(c > 0 ? c : -c, c > 0 ? d : -d, v))} ${ctx[2]} is placed inside it, where ${v} is a positive number large enough for this to make sense.`
-        : `${sub(rng.pick(INTRO), v)}\n\n${M(expr)}`;
       const areaCtx = ctx !== null;
-      // 문맥형은 변 길이 부호를 양수 계수로 정규화했으므로 계수를 다시 계산한다.
-      const aa = areaCtx && a < 0 ? -a : a, bb = areaCtx && a < 0 ? -b : b, cc = areaCtx && c < 0 ? -c : c, dd = areaCtx && c < 0 ? -d : d;
+      // 문맥형은 변 길이 부호를 양수 계수로 정규화한다.
+      let aa = areaCtx && a < 0 ? -a : a, bb = areaCtx && a < 0 ? -b : b, cc = areaCtx && c < 0 ? -c : c, dd = areaCtx && c < 0 ? -d : d;
+      // 2026-10-13 외부 감사 S-M04: 문맥형은 "큰 정사각형(바깥 변) 안에 작은 정사각형(안쪽 변)"이므로 안쪽 변이 바깥 변보다 길면 안 된다(넓이가 음수가 된다).
+      // v 가 충분히 클 때 바깥 > 안쪽이려면 aa > cc (a*a !== c*c 이므로 같을 수 없다). 그렇지 않으면 두 변의 역할을 바꾼다. 문장은 바꾼 뒤의 값으로 쓴다.
+      if (areaCtx && aa < cc) { [aa, cc] = [cc, aa]; [bb, dd] = [dd, bb]; }
+      const stimulus = ctx
+        ? `A ${ctx[0]} has side length ${M(lin(aa, bb, v))} ${ctx[2]}, and a ${ctx[1]} with side length ${M(lin(cc, dd, v))} ${ctx[2]} is placed inside it, where ${v} is a positive number large enough for this to make sense.`
+        : `${sub(rng.pick(INTRO), v)}\n\n${M(expr)}`;
       const co2 = [aa * aa - cc * cc, 2 * (aa * bb - cc * dd), bb * bb - dd * dd];
       const C = areaCtx ? co2 : co;
       const A_ = areaCtx ? aa : a, B_ = areaCtx ? bb : b, C_ = areaCtx ? cc : c, D_ = areaCtx ? dd : d;

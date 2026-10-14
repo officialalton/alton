@@ -293,7 +293,7 @@ export const LF_ARCHETYPES: Archetype[] = [
     extraThinking: "표(두 관측값)를 변화율로 번역하고 그 해석을 다른 구간에 적용 — medium 은 주어진 식에서 기울기의 의미를 읽음",
     concepts: ["표→변화율", "기울기의 의미", "변화량 = 기울기 × 증가량"], mediumSteps: 3,
     generate(rng) {
-      const c = rng.pick(LMS), m = rng.nz(-7, 8), b = rng.int(10, 60); if (m < 0 && !c.canDown) throw new GenFail("x");
+      const c = rng.pick(LMS), m = rng.nz(-7, 8), b = rng.int(10, 60); if ((m < 0 && !c.canDown) || (m > 0 && c.canUp === false)) throw new GenFail("x");
       const p = rng.int(1, 4), q = p + rng.int(2, 5), k = rng.int(4, 12); const u = m * p + b, v = m * q + b; if (u < 0 || v < 0) throw new GenFail("x");
       const ans = Math.abs(m) * k;
       const dirWord = m > 0 ? "increase" : "decrease";
@@ -378,7 +378,7 @@ export const LF_ARCHETYPES: Archetype[] = [
     extraThinking: "표의 두 점을 직선의 식으로 번역한 뒤 t = 0 으로 외삽해 절편의 의미(시작값)를 읽음 — medium 은 식에서 절편 해석",
     concepts: ["표→직선의 식", "y 절편의 의미(시작값)"], mediumSteps: 2,
     generate(rng) {
-      const c = rng.pick(LMS), m = rng.nz(-7, 8), b = rng.int(10, 80); if (m < 0 && !c.canDown) throw new GenFail("x");
+      const c = rng.pick(LMS), m = rng.nz(-7, 8), b = rng.int(10, 80); if ((m < 0 && !c.canDown) || (m > 0 && c.canUp === false)) throw new GenFail("x");
       const p = rng.int(2, 5), q = p + rng.int(2, 5), u = m * p + b, v = m * q + b; if (u < 0 || v < 0) throw new GenFail("x");
       return finish(rng, {
         stimulus: `${c.subj} follows a linear pattern. ${rng.pick([`After ${p} ${c.xUnits}, the ${c.yName} is ${u} ${c.yUnit}, and after ${q} ${c.xUnits}, it is ${v} ${c.yUnit}.`, `The ${c.yName} is ${u} ${c.yUnit} after ${p} ${c.xUnits} and ${v} ${c.yUnit} after ${q} ${c.xUnits}.`, `Records show ${u} ${c.yUnit} after ${p} ${c.xUnits}, then ${v} ${c.yUnit} after ${q} ${c.xUnits}.`])}`,
@@ -396,7 +396,7 @@ export const LF_ARCHETYPES: Archetype[] = [
     extraThinking: "정방향(시작값→현재값)을 거꾸로 되돌리는 역산에서 증가·감소 방향을 문장으로 판단 — medium 은 식에서 절편 해석",
     concepts: ["일차 모델의 시작값", "변화 방향(증가·감소) 판단", "역산"], mediumSteps: 2,
     generate(rng) {
-      const c = rng.pick(LMS), m = rng.nz(-8, 9), k = rng.int(3, 12), b = rng.int(10, 90); if (m < 0 && !c.canDown) throw new GenFail("x");
+      const c = rng.pick(LMS), m = rng.nz(-8, 9), k = rng.int(3, 12), b = rng.int(10, 90); if ((m < 0 && !c.canDown) || (m > 0 && c.canUp === false)) throw new GenFail("x");
       const now = b + m * k; if (now < 0) throw new GenFail("x");
       return finish(rng, {
         stimulus: `${c.subj} ${rng.pick(["changes at a constant rate", "changes steadily", "follows a steady linear trend", "changes by the same amount every " + c.xUnit])}. It ${m >= 0 ? rng.pick(c.ups)(m) : rng.pick(c.downs)(-m)}. ${rng.pick([`After ${k} ${c.xUnits}, the ${c.yName} is ${now} ${c.yUnit}.`, `Once ${k} ${c.xUnits} have passed, the ${c.yName} reads ${now} ${c.yUnit}.`, `The ${c.yName} is ${now} ${c.yUnit} after ${k} ${c.xUnits}.`])}`,

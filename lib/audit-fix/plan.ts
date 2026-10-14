@@ -52,25 +52,8 @@ export function mathDelimitersBalanced(text: string | null | undefined): boolean
   return (t.match(/\$/g)?.length ?? 0) % 2 === 0;
 }
 
-/** 빈칸 뒤 이어지는 글과 선택지가 겹치는지(빈칸 뒤 단어 중복·이중 쉼표). 문제 없으면 []. */
-export function blankJunctionIssues(passage: string, options: string[]): string[] {
-  const m = passage.match(/_{3,}/);
-  if (!m || m.index === undefined) return [];
-  const after = passage.slice(m.index + m[0].length);
-  const tok = (t: string) => t.toLowerCase().split(/\s+/).map((w) => w.replace(/[^a-z0-9']/g, "")).filter(Boolean);
-  const afterTok = tok(after).slice(0, 6);
-  const afterPunct = after.replace(/^\s+/, "")[0] ?? "";
-  const out: string[] = [];
-  options.forEach((o, i) => {
-    const t = o.trim(); const ot = tok(t);
-    for (let k = Math.min(6, ot.length, afterTok.length); k >= 1; k--) {
-      const tail = ot.slice(-k).join(" "); const head = afterTok.slice(0, k).join(" ");
-      if (tail === head && !(k === 1 && head.length < 2)) { out.push(`option ${i + 1} ends with "${tail}" which the passage repeats right after the blank`); break; }
-    }
-    if (/[,;:]$/.test(t) && afterPunct && afterPunct === t[t.length - 1]) out.push(`option ${i + 1} ends with "${t[t.length - 1]}" and the passage repeats it after the blank`);
-  });
-  return out;
-}
+export { blankJunctionIssues } from "../problem-blank-junction";
+import { blankJunctionIssues } from "../problem-blank-junction";
 
 /** 정답 선택지 글자를 선언하는 문장(해설)에서 글자들을 뽑는다. 키 글자와 다르면 해설이 거짓이 된다. */
 export function statedAnswerLetters(text: string | null | undefined): string[] {

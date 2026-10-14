@@ -117,7 +117,7 @@ export const LF_EM_ARCHETYPES: Archetype[] = [
     ...base, id: "lf.interpret_slope.m_rate_context", kind: "interpret_slope", difficulty: "medium",
     structure: "맥락 속 일차 모델의 기울기가 단위 시간당 변화량임을 해석한다", extraThinking: "medium 틀", concepts: ["기울기의 의미(변화율)", "문장 해석"],
     generate(rng) {
-      const c = rng.pick(LMS), m = rng.nz(-9, 10), b = rng.int(10, 90); if (m < 0 && !c.canDown) throw new GenFail("x");
+      const c = rng.pick(LMS), m = rng.nz(-9, 10), b = rng.int(10, 90); if ((m < 0 && !c.canDown) || (m > 0 && c.canUp === false)) throw new GenFail("x");
       const F = rng.pick(["C", "F", "G", "H", "A", "W"]), subj = c.subj.toLowerCase();
       const model = M(`${F}(t) = ${lin(m, b, "t")}`);
       const stim = rng.pick([`The ${c.yName} of ${subj} is modeled by ${model}, where t is the number of ${c.xUnits} and ${F}(t) is measured in ${c.yUnit}.`, `Let ${model} give the ${c.yName} of ${subj}, in ${c.yUnit}, after t ${c.xUnits}.`, `With t in ${c.xUnits}, the ${c.yName} of ${subj}, in ${c.yUnit}, is ${model}.`, `After t ${c.xUnits}, the ${c.yName} of ${subj} equals ${model} ${c.yUnit}.`]);
@@ -135,7 +135,7 @@ export const LF_EM_ARCHETYPES: Archetype[] = [
     ...base, id: "lf.interpret_intercept.m_start_context", kind: "interpret_intercept", difficulty: "medium",
     structure: "맥락 속 일차 모델에서 t = 0 의 값(y 절편)이 시작값임을 해석한다", extraThinking: "medium 틀", concepts: ["y 절편의 의미(시작값)", "문장 해석"],
     generate(rng) {
-      const c = rng.pick(LMS), m = rng.nz(-9, 10), b = rng.int(10, 90); if (m < 0 && !c.canDown) throw new GenFail("x");
+      const c = rng.pick(LMS), m = rng.nz(-9, 10), b = rng.int(10, 90); if ((m < 0 && !c.canDown) || (m > 0 && c.canUp === false)) throw new GenFail("x");
       const F = rng.pick(["C", "F", "G", "H", "A", "W"]), subj = c.subj.toLowerCase(), model = M(`${F}(t) = ${lin(m, b, "t")}`);
       const stim = rng.pick([`The ${c.yName} of ${subj} is modeled by ${model}, where t is the number of ${c.xUnits} since tracking began and ${F}(t) is measured in ${c.yUnit}.`, `Let ${model} give the ${c.yName} of ${subj}, in ${c.yUnit}, t ${c.xUnits} after tracking began.`, `With t in ${c.xUnits} since tracking began, the ${c.yName} of ${subj}, in ${c.yUnit}, is ${model}.`, `Starting from the day tracking began, the ${c.yName} of ${subj} follows ${model}, with t in ${c.xUnits} and the result in ${c.yUnit}.`]);
       return finish(rng, {
