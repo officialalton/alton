@@ -85,62 +85,65 @@ def bi_graph_pcr_cycles(rng):
 
 
 def bis_translation_set(rng):
-    """세트 7: 번역·돌연변이 표 → 아미노산 서열·돌연변이 유형·영향·예측."""
+    """세트 7(2026-10-14 재설계): 원래 mRNA 와 치환 돌연변이 하나 → 폴리펩타이드 비교·돌연변이 유형·변이 tRNA 안티코돈·침묵 치환 선택.
+    모든 문항이 표의 두 서열을 함께 쓰고, 필요한 코돈 표를 세트 도입문에 싣는다(코돈 표 누락·미사용 서열·프레임이동 정지 모호성 제거)."""
+    RNA_PAIR = {"A": "U", "U": "A", "G": "C", "C": "G"}
     for _ in forever():
         aas = [c for c in CODON if CODON[c] not in ("*", "M")]
         body = [rng.choice(aas) for _ in range(4)]
         stop = rng.choice(["UAA", "UAG", "UGA"])
         orig = "AUG" + "".join(body) + stop
         idx = rng.randint(1, 4); pos = 3 * idx; cod = orig[pos:pos + 3]
-        opts = [c for c in CODON if CODON[c] not in ("*", CODON[cod]) and sum(a != b for a, b in zip(c, cod)) == 1]
-        syn = [c for c in CODON if CODON[c] == CODON[cod] and c != cod and sum(a != b for a, b in zip(c, cod)) == 1]
-        near = [c for c in ("UAA", "UAG", "UGA") if sum(a != b for a, b in zip(c, cod)) == 1]
-        if opts and syn and len(translate(orig)) == 5:
+        nb = [c for c in CODON if sum(a != b for a, b in zip(c, cod)) == 1]
+        syn = [c for c in nb if CODON[c] == CODON[cod]]
+        non = [c for c in nb if CODON[c] not in (CODON[cod], "*")]
+        if syn and len(non) >= 3:
             break
-    mis = orig[:pos] + rng.choice(opts) + orig[pos + 3:]
-    syn_m = orig[:pos] + rng.choice(syn) + orig[pos + 3:]
-    delm = orig[:pos + 1] + orig[pos + 2:]
-    p0 = translate(orig); p_mis = translate(mis); p_del = translate(delm)
-    used = sorted({orig[k:k + 3] for k in range(0, len(orig) - 2)} | {mis[k:k + 3] for k in range(0, len(mis) - 2)} | {delm[k:k + 3] for k in range(0, len(delm) - 2)})
-    stim = tbl("Original and mutated mRNA coding sequences (5' to 3') for one gene", ["Sequence", "mRNA (5' to 3')"], [["Original", orig], ["Mutation 1", mis], ["Mutation 2", delm]], notes=["Each sequence begins at the start codon."])
-    # q1: 원래 폴리펩타이드
-    cands = [("Includes the stop codon as an amino acid position and keeps reading.", [AA_NAME[CODON[orig[k:k + 3]]] for k in range(0, len(orig), 3) if len(orig[k:k + 3]) == 3][:len(p0) + 1]), ("Lists the amino acids in reverse order.", p0[::-1]), ("Starts reading one nucleotide after the start codon.", None)]
-    wrong = []
-    for why, v in cands:
-        if v is None:
-            v = []
-            j = 1
-            while j + 3 <= len(orig):
-                a = CODON[orig[j:j + 3]]
-                if a == "*":
-                    break
-                v.append(AA_NAME[a]); j += 3
-        t = "-".join(v)
-        if t and t != "-".join(p0) and t not in [w[0] for w in wrong]:
-            wrong.append((t, why))
-    if len(wrong) < 3:
+    m = rng.choice(non)
+    mut = orig[:pos] + m + orig[pos + 3:]
+    p0 = translate(orig); p1 = translate(mut)
+    q4_non = [c for c in non if c != m]
+    q4_opts = [rng.choice(syn)] + rng.sample(q4_non if len(q4_non) >= 3 else non, 3)
+    q4_opts = list(dict.fromkeys(q4_opts))
+    if len(q4_opts) < 4 or len(p0) != 5 or len(p1) != 5:
         raise ValueError("few")
+    spaced = lambda s: " ".join(s[k:k + 3] for k in range(0, len(s), 3))  # noqa: E731
+    used = sorted({orig[k:k + 3] for k in range(0, len(orig), 3)} | {mut[k:k + 3] for k in range(0, len(mut), 3)} | set(q4_opts))
+    table_txt = "; ".join(f"{c} = {AA_NAME[CODON[c]]}" for c in used)
+    stim = tbl("Original and mutated mRNA coding sequences (5' to 3', in codons) for one gene", ["Sequence", "mRNA (5' to 3')"], [["Original", spaced(orig)], ["Mutated", spaced(mut)]], notes=["Each sequence begins at the start codon and ends at a stop codon."])
     from common import Opt as _O
-    k1 = _O("-".join(p0), True, f"Translation reads codons in order from the start codon until the stop codon: {'-'.join(p0)}.", None)
-    d1 = [_O(t, False, why, None) for t, why in wrong[:3]]
-    q1 = mk("bis_translation_set_q1", "6.4", "2.D", "Which choice shows the amino acid sequence of the polypeptide made from the original mRNA, beginning at the amino terminus? (Use the standard codon table.)", k1, d1, rng, concept="translate an mRNA from the start codon to the stop codon", path="codon-table loop vs translate()", material=MAT_TABLE("original mRNA"), facts=[f"orig={orig}"], est=80)
-    # q2: 돌연변이 1 유형
-    kind1 = "missense" if p_mis != p0 else "silent"
-    texts = {"missense": "A missense mutation: one amino acid is changed.", "silent": "A silent mutation: the amino acid sequence is unchanged.", "nonsense": "A nonsense mutation: a premature stop codon shortens the polypeptide.", "frameshift": "A frameshift mutation: the reading frame is changed after the mutation."}
-    whys = {"missense": "Compare the two sequences: one codon codes for a different amino acid.", "silent": "The sequence of amino acids is the same as the original.", "nonsense": "No codon has changed into a stop codon in this sequence.", "frameshift": "A frameshift would require the insertion or deletion of a nucleotide; mutation 1 replaced a nucleotide."}
-    k2 = _O(texts[kind1], True, f"Mutation 1 changes one nucleotide, so it is a substitution. {whys[kind1]}", None)
-    d2 = [_O(texts[k], False, whys[k] if k != kind1 else "", None) for k in ("missense", "silent", "nonsense", "frameshift") if k != kind1]
-    q2 = mk("bis_translation_set_q2", "6.7", "5.D", "Which statement best describes mutation 1?", k2, d2, rng, concept="classify a point mutation by comparing translations", path="translate both sequences vs the generating substitution", material=MAT_TABLE("mutated mRNA"), facts=[f"mis={mis}"], est=75)
-    # q3: 돌연변이 2(결실)
-    k3 = _O(texts["frameshift"], True, "Mutation 2 is missing one nucleotide compared with the original, so the reading frame shifts after the deletion.", None)
-    d3 = [_O(texts[k], False, {"missense": "A single amino acid replacement does not explain a deletion of one nucleotide.", "silent": "The sequence is shorter by one nucleotide, so it cannot be a substitution.", "nonsense": "The deletion shifts the frame; the effect is not limited to a new stop codon."}[k], None) for k in ("missense", "silent", "nonsense")]
-    q3 = mk("bis_translation_set_q3", "6.7", "5.D", "Which statement best describes mutation 2?", k3, d3, rng, concept="recognize a frameshift from a deletion", path="length comparison and translation vs the generating deletion", material=MAT_TABLE("mutated mRNA"), facts=[f"del={delm}"], est=70)
-    k4, d4 = sentence_options("Mutation 2 is more likely to destroy the function of the protein, because it can change many amino acids after the deletion.", "A frameshift changes all of the codons after the deletion, which usually changes the protein's structure much more than one amino acid substitution.",
-        [("Mutation 1 is more likely to destroy the function of the protein, because every missense mutation changes all of the amino acids.", "A substitution changes at most one codon."),
-         ("Both mutations are equally likely to destroy the function, because both change one nucleotide.", "The effects differ because a deletion shifts the reading frame."),
-         ("Neither mutation can change the function, because the start codon is unchanged.", "A change after the start codon can still change the protein's amino acid sequence.")])
-    q4 = mk("bis_translation_set_q4", "6.7", "6.E", "Which prediction about the effects of the two mutations on the function of the protein is best supported by the data?", k4, d4, rng, concept="compare the likely effects of a substitution and a frameshift", path="number of changed codons in each mutated sequence vs the generating mutation types", material=MAT_TABLE("mutated mRNA"), facts=[f"p_del={p_del}"], est=75)
-    return _set("bis_translation_set", "A researcher compares an original mRNA coding sequence with two mutated sequences of the same gene. The sequences are shown in the table.", stim, [q1, q2, q3, q4], "6.4", "2.D")
+    pos_aa = idx + 1
+    a0, a1 = p0[idx], p1[idx]
+    # q1: 두 폴리펩타이드의 비교
+    k1 = _O(f"Both polypeptides have {len(p0)} amino acids, and only the amino acid at position {pos_aa} differs: {a0} in the original and {a1} in the mutant.", True,
+            f"Translating each sequence from the start codon gives {'-'.join(p0)} for the original and {'-'.join(p1)} for the mutant. Only position {pos_aa} differs.", None)
+    d1 = [_O(f"The mutant polypeptide is shorter than the original, because a stop codon appears at position {pos_aa}.", False, f"The mutated codon {m} specifies {a1}, so no stop codon appears early and both polypeptides have {len(p0)} amino acids.", None),
+          (_O(f"Every amino acid after position {pos_aa} differs, because the reading frame changed.", False, "Only one codon differs and no nucleotide was added or removed, so the reading frame and the later amino acids are unchanged.", None)),
+          _O("The two polypeptides are identical, because the sequences have the same length.", False, f"The codons at position {pos_aa} differ ({cod} and {m}) and specify {a0} and {a1}, so the polypeptides are not identical.", None)]
+    q1 = mk("bis_translation_set_q1", "6.4", "2.D", "Which statement correctly compares the polypeptides encoded by the original and the mutated sequences? (Use the codons in the passage.)", k1, d1, rng, concept="translate an original and a mutated mRNA and compare the polypeptides", path="codon-table loop on both strings vs translate()", material=MAT_TABLE("original and mutated mRNA"), facts=[f"orig={orig}", f"mut={mut}"], est=95)
+    # q2: 돌연변이 유형
+    k2 = _O("A missense mutation, because one codon changed and now specifies a different amino acid.", True, f"One nucleotide differs ({cod} to {m}), and the new codon specifies {a1} instead of {a0}. That is a substitution that changes one amino acid, a missense mutation.", None)
+    d2 = [_O("A silent mutation, because only one nucleotide of the sequence changed.", False, f"A silent mutation keeps the same amino acid, but the amino acid at position {pos_aa} changed from {a0} to {a1}.", None),
+          _O("A nonsense mutation, because one codon changed and the polypeptide is now shorter.", False, f"The mutated codon {m} does not specify a stop, and the mutant polypeptide still has {len(p1)} amino acids.", None),
+          _O("A frameshift mutation, because a nucleotide of the original sequence was replaced.", False, "A frameshift needs an insertion or deletion; here the sequence length is the same and the codons after the change are unchanged.", None)]
+    q2 = mk("bis_translation_set_q2", "6.7", "1.B", "Which choice correctly identifies the type of mutation and explains the evidence?", k2, d2, rng, concept="classify a substitution as missense from the amino acid change", path="comparison of the translated polypeptides vs the generating substitution", material=MAT_TABLE("original and mutated mRNA"), facts=[f"mut={mut}"], est=80)
+    # q3: 변이 서열의 tRNA 안티코돈
+    anti = lambda c: "".join(RNA_PAIR[x] for x in c)  # noqa: E731
+    key_ac = f"3'-{anti(m)}-5'"
+    wrongs = [(f"3'-{m}-5'", "The anticodon is complementary to the codon, so it cannot have the same sequence as the codon."), (f"3'-{anti(m)[::-1]}-5'", "The anticodon pairs antiparallel with the codon, so its bases are not the complement read in the same order written 5' to 3'."),
+              (f"3'-{anti(cod)}-5'", f"This is the anticodon for the codon {cod} of the original sequence, which specifies {a0}, not {a1}."), (f"3'-{anti(m).replace('U', 'T')}-5'", "tRNA anticodons are RNA and contain uracil, not thymine.")]
+    wrongs = [(t, w) for t, w in wrongs if t != key_ac]
+    ds3 = [_O(t, False, w, None) for t, w in dict(((t, w) for t, w in wrongs)).items()]
+    if len({o.text for o in ds3}) < 3:
+        raise ValueError("few")
+    k3 = _O(key_ac, True, f"The mutated codon at position {pos_aa} is {m}, which specifies {a1}. The tRNA that carries {a1} has the complementary anticodon, which is 3'-{anti(m)}-5' when written antiparallel to the codon.", None)
+    q3 = mk("bis_translation_set_q3", "6.4", "2.D", f"Which anticodon is on the tRNA that adds the amino acid at position {pos_aa} of the mutant polypeptide?", k3, ds3[:3], rng, concept="anticodon of the tRNA for a mutated codon", path="complement of the mutated codon vs reverse complement written in the opposite direction", material=MAT_TABLE("original and mutated mRNA"), facts=[f"m={m}"], est=90)
+    # q4: 침묵 치환 선택
+    k4 = _O(f"Changing the codon {cod} to {q4_opts[0]}", True, f"{q4_opts[0]} specifies {AA_NAME[CODON[q4_opts[0]]]}, the same amino acid as {cod}, so the amino acid sequence would be unchanged.", None)
+    d4 = [_O(f"Changing the codon {cod} to {c}", False, f"{c} specifies {AA_NAME[CODON[c]]}, which is different from {AA_NAME[CODON[cod]]}, so the amino acid would change.", None) for c in q4_opts[1:4]]
+    q4 = mk("bis_translation_set_q4", "6.7", "6.E", f"A second mutant has a different single-nucleotide change in the codon at position {pos_aa} of the original sequence. Which change would be a silent mutation?", k4, d4, rng, concept="predict which substitution leaves the amino acid unchanged", path="codon table lookup of each single-nucleotide neighbor vs the generating synonymous codon", material=MAT_TABLE("original and mutated mRNA"), facts=[f"cod={cod}"], est=85)
+    intro = f"A researcher compares the mRNA coding sequence of a gene with the sequence from a mutant. The sequences are shown in the table. Part of the codon table is: {table_txt}."
+    return _set("bis_translation_set", intro, stim, [q1, q2, q3, q4], "6.4", "2.D")
 
 
 def bis_leafdisk_set(rng):
