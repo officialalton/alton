@@ -22,9 +22,9 @@ export const MACRO_FRQ_PROFILES: Record<string, MacroFrqProfile> = {
   maf_short_fiscal_multiplier: { points: 5, graph: 0, assertion: 1, explain: 2, numeric: 2 },
   maf_short_fx_trade: { points: 5, graph: 2, assertion: 1, explain: 2, numeric: 0 },
   maf_short_gdp_data: { points: 5, graph: 0, assertion: 1, explain: 2, numeric: 2 },
-  maf_short_lf_crowding: { points: 5, graph: 2, assertion: 1, explain: 2, numeric: 0 },
+  maf_short_lf_crowding: { points: 5, graph: 2, assertion: 0, explain: 3, numeric: 0 },
   maf_short_money_banking: { points: 5, graph: 0, assertion: 1, explain: 1, numeric: 3 },
-  maf_short_phillips: { points: 5, graph: 3, assertion: 1, explain: 1, numeric: 0 },
+  maf_short_phillips: { points: 5, graph: 3, assertion: 0, explain: 2, numeric: 0 },
   maf_short_ppc_trade: { points: 5, graph: 2, assertion: 1, explain: 1, numeric: 1 },
 };
 export const MACRO_FRQ_TYPES = Object.keys(MACRO_FRQ_PROFILES);

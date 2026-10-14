@@ -1,0 +1,63 @@
+{
+ "runs": [
+  "macro-p1-b"
+ ],
+ "rows": 10,
+ "passed": 5,
+ "rejected": 5,
+ "passRate": 0.5,
+ "mc": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "frq": {
+  "rows": 10,
+  "passed": 5,
+  "passRate": 0.5
+ },
+ "unitsPassed": {},
+ "skillsPassed": {},
+ "figPassed": {
+  "table": 5
+ },
+ "figAll": {
+  "table": 10
+ },
+ "figPassRate": {
+  "table": "5/10"
+ },
+ "renderTypesPassed": {
+  "ap_table:given_info": 2,
+  "ap_table": 3
+ },
+ "archetypesPassed": {
+  "maf_long_money_market": 1,
+  "maf_short_gdp_data": 1,
+  "maf_short_ppc_trade": 1,
+  "maf_short_money_banking": 1,
+  "maf_short_fiscal_multiplier": 1
+ },
+ "archetypesAll": {
+  "maf_long_adas_policy": 1,
+  "maf_long_open_economy": 1,
+  "maf_long_money_market": 1,
+  "maf_short_gdp_data": 1,
+  "maf_short_ppc_trade": 1,
+  "maf_short_lf_crowding": 1,
+  "maf_short_money_banking": 1,
+  "maf_short_phillips": 1,
+  "maf_short_fiscal_multiplier": 1,
+  "maf_short_fx_trade": 1
+ },
+ "failedArchetypes": [
+  "maf_long_adas_policy",
+  "maf_long_open_economy",
+  "maf_short_lf_crowding",
+  "maf_short_phillips",
+  "maf_short_fx_trade"
+ ],
+ "costUsd": {
+  "macro-p1-b": 0.4918
+ }
+}
