@@ -4,7 +4,7 @@ import { LIB_SINGLES, ONE_EXAM_ONLY, buildMacroOrder, categorySummary, solveMacr
 import type { MacroItem } from "./macro-pool";
 
 let n = 0;
-const mc = (e: { id: string; topic: string; skill: string }, copy: number): MacroItem => ({ key: `m${n++}`, kind: "mc", members: [{ unit: Number(e.topic.split(".")[0]), skill: e.skill, topic: e.topic }], fam: `${e.id}|${e.topic}|${copy}`, frqType: "", archetype: e.id, screen: true, batch: "t", renderType: "none", stimKind: "none", exam: 0 });
+const mc = (e: { id: string; topic: string; skill: string }, copy: number): MacroItem => ({ key: `m${n++}`, kind: "mc", members: [{ unit: Number(e.topic.split(".")[0]), skill: e.skill, topic: e.topic }], fam: `${e.id}|${e.topic}|${copy}`, frqType: "", archetype: e.id, screen: true, batch: "t", renderType: "none", stimKind: "none", sig: "", exam: 0 });
 const frq = (t: string): MacroItem => ({ key: `f-${t}-${n++}`, kind: "frq", members: [], fam: `ff-${t}`, frqType: t, archetype: t, screen: true, batch: "t", renderType: "text", stimKind: "table", sig: "", exam: 0 });
 /** 라이브러리 원형마다 한 문항(+선택적으로 둘째 문항) + FRQ 10유형. 문항군은 원형별로 따로 둔다. */
 const stock = (copies = 2) => { n = 0; return [...LIB_SINGLES.flatMap((e) => Array.from({ length: copies }, (_, c) => mc(e, c))), ...MACRO_FRQ_TYPES.map(frq)]; };
