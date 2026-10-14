@@ -3,7 +3,7 @@
 //   npx tsx scripts/ap-generation/englang-pipeline.ts --config config/ap-frozen/englang-p1-a.v1.json --freeze|--check-only|--plan
 //   npx tsx scripts/ap-generation/englang-pipeline.ts --config <cfg> [--stages gen,check,...]       (키는 프로세스 환경 ANTHROPIC_API_KEY 로만; 파일에 쓰지 않는다)
 // 산출: data/ap/sample-2027/<run>/{sets.json, solve.json, adv.json, judge.json, review.json, candidates.json} + <stage>.results.jsonl(원시 응답·비용).
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { runBatch, toolInput, estimate, ledger, type BatchReq } from "../mock-exam-generation/batch-lib";
 import { fileSetHash } from "../../lib/ap-generation/frozen-config";
@@ -20,7 +20,7 @@ export type ElCfg = {
   plan?: { reading?: { sets: number; seed: number; startIndex?: number; perSet?: number }; writing?: { sets: number; seed: number; startIndex?: number; perSet?: number } };
   frqPlan?: { id: string; type: "synthesis" | "rhetorical_analysis" | "argument"; theme: string; seed: number }[];
   models: { gen: string; solvers: string[]; adversary: string; judge: string; review: string; sampleHigh: string; sampleLow: string; graders: string[] };
-  effort: string; genEffort?: string; syncStages?: string[]; minKeyConfidence: number; generatorFiles: string[]; expected: { hash: string };
+  effort: string; genEffort?: string; corpusExclude?: string[]; syncStages?: string[]; minKeyConfidence: number; generatorFiles: string[]; expected: { hash: string };
 };
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const has = (n: string) => process.argv.includes(n);
@@ -42,7 +42,7 @@ const myBaseline = (): number => { if (!existsSync(BASE_F)) writeFileSync(BASE_F
 const runBase = (): number => { const f = path.join(DIR, "baseline.json"); if (!existsSync(f)) writeFileSync(f, JSON.stringify({ spent: ledger(DIR).spent() })); return (JSON.parse(readFileSync(f, "utf-8")) as { spent: number }).spent; };
 const costIn = (dir: string): number => { let c = 0; if (!existsSync(dir)) return 0; for (const f of readdirSync(dir)) if (/\.results\.jsonl$/.test(f)) for (const l of readFileSync(path.join(dir, f), "utf-8").split("\n").filter(Boolean)) { try { c += Number(JSON.parse(l).cost ?? 0); } catch { /* skip */ } } return c; };
 const spentRun = () => costIn(DIR);
-const spentMine = () => readdirSync(ROOT).filter((d) => /^englang-/.test(d)).reduce((a, d) => a + costIn(path.join(ROOT, d)), 0);
+const spentMine = () => readdirSync(ROOT).filter((d) => /^englang-/.test(d) && statSync(path.join(ROOT, d)).isDirectory()).reduce((a, d) => a + costIn(path.join(ROOT, d)), 0);
 function guard(stage: string, est: number) {
   const t = ledgerTotal();
   const why = spentRun() + est > cfg.capUsd ? `run cap ${cfg.capUsd}` : spentMine() + est > cfg.myTotalCapUsd ? `English total cap ${cfg.myTotalCapUsd}` : t.cumulativeUsd + est >= cfg.hardStopCumulativeUsd ? `cumulative ${t.cumulativeUsd} + est >= hard stop ${cfg.hardStopCumulativeUsd}` : "";
@@ -85,7 +85,7 @@ function parseSet(spec: P.SetSpec, inp: Json): ElSetRaw | null {
 // ── 코퍼스(내 이전 지문·소스·샘플) ──────────────────────────────────
 function corpus(excludeRun: string): CorpusDoc[] {
   const docs: CorpusDoc[] = [];
-  for (const d of existsSync(ROOT) ? readdirSync(ROOT).filter((x) => /^(englang|el)-/.test(x) && x !== excludeRun) : []) {
+  for (const d of existsSync(ROOT) ? readdirSync(ROOT).filter((x) => /^(englang|el)-/.test(x) && x !== excludeRun && !(cfg.corpusExclude ?? []).includes(x) && statSync(path.join(ROOT, x)).isDirectory()) : []) {
     const sf = path.join(ROOT, d, "sets.json"); if (existsSync(sf)) for (const s of JSON.parse(readFileSync(sf, "utf-8")) as { spec: P.SetSpec; set: ElSetRaw | null }[]) if (s.set) docs.push({ id: `${d}:${s.spec.id}`, text: passagePlain(s.set) });
     const ff = path.join(ROOT, d, "frq.json"); if (existsSync(ff)) for (const f of JSON.parse(readFileSync(ff, "utf-8")) as { id: string; payload: ElFrqPayload | null }[]) if (f.payload) docs.push({ id: `${d}:${f.id}`, text: f.payload.sources.map(sourceText).join("\n\n") });
   }
@@ -95,7 +95,7 @@ function corpus(excludeRun: string): CorpusDoc[] {
 // ── 단계: plan ─────────────────────────────────────────────────────
 function specsOf(): P.SetSpec[] {
   const used = new Set<string>(); const out: P.SetSpec[] = [];
-  const f = path.join(ROOT); for (const d of existsSync(f) ? readdirSync(f).filter((x) => /^(englang|el)-/.test(x) && x !== cfg.run) : []) { const sf = path.join(f, d, "sets.json"); if (existsSync(sf)) for (const s of JSON.parse(readFileSync(sf, "utf-8")) as { spec: P.SetSpec }[]) used.add(s.spec.theme); }
+  const f = path.join(ROOT); for (const d of existsSync(f) ? readdirSync(f).filter((x) => /^(englang|el)-/.test(x) && x !== cfg.run && statSync(path.join(f, x)).isDirectory()) : []) { const sf = path.join(f, d, "sets.json"); if (existsSync(sf)) for (const s of JSON.parse(readFileSync(sf, "utf-8")) as { spec: P.SetSpec }[]) used.add(s.spec.theme); }
   for (const k of ["reading", "writing"] as const) { const p = cfg.plan?.[k]; if (p?.sets) { const part = planSets({ kind: k, sets: p.sets, perSet: p.perSet, seed: p.seed, startIndex: p.startIndex, usedThemes: used }); part.forEach((s) => used.add(s.theme)); out.push(...part); } }
   return out;
 }
