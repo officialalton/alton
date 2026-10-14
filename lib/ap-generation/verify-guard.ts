@@ -35,7 +35,9 @@ function canon(v: unknown): unknown {
 /** 렌더된 문항 버전의 내용 해시: 자료(stimulus: 데이터·그림 명세)·선지·정답·FRQ 파트. 후보 payload(재고 items.json 또는 DB)에서 같은 방식으로 계산한다. */
 export function itemContentHash(payload: Record<string, unknown> | null | undefined): string {
   const p = payload ?? {};
-  const pick = { stimulus: p.stimulus ?? null, stem: p.stem ?? null, options: p.options ?? null, key_index: p.key_index ?? null, key_index_final: p.key_index_final ?? null, parts: p.parts ?? null };
+  const pick: Record<string, unknown> = { stimulus: p.stimulus ?? null, stem: p.stem ?? null, options: p.options ?? null, key_index: p.key_index ?? null, key_index_final: p.key_index_final ?? null, parts: p.parts ?? null };
+  // AP English(2026-10-14): 지문 묶음 MC 는 stimulus·stem 이 없고 지문(set_intro)·문항(items)에 내용이 있다 — 빼면 모든 영어 묶음이 같은 해시가 된다. 영어 원형(el_·elfrq_)에만 더해 다른 과목의 기존 해시·증거는 그대로다.
+  if (typeof p.archetype === "string" && /^el(frq)?_/.test(p.archetype)) { pick.set_intro = p.set_intro ?? null; pick.items = p.items ?? null; }
   return createHash("sha256").update(JSON.stringify(canon(pick))).digest("hex");
 }
 

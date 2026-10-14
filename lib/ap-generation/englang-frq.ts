@@ -161,6 +161,11 @@ export function frqReferenceText(p: ElFrqPayload): string {
 /** 생성 응답 정규화(결정적): 정량 소스 본문에 모델이 쓴 마크다운 표 줄을 지우고(표는 구조화 자료로 코드가 그린다), 수사 분석의 blueprint.devices 가 비어 있으면 expected_features.rhetorical_choices 에서 만든다. */
 export function normalizeFrqPayload(p: ElFrqPayload): ElFrqPayload {
   const sources = p.sources.map((s) => (s.kind === "quantitative" && s.body ? { ...s, body: s.body.split("\n").filter((l) => !/^\s*\|/.test(l)).join("\n").trim() } : s));
+  for (const s of sources) if (s.figure) { // 막대그래프 가로 라벨은 짧아야 그려진다(회전 라벨 폭 96px ≈ 13자): 긴 이름은 단어를 뒤에서부터 줄이고, 전체 이름은 대체 설명에 남긴다
+    const short = (c: string): string => { const w = c.split(/\s+/); while (w.length > 1 && w.join(" ").length > 13) w.pop(); return w.join(" ").length > 13 ? `${w.join(" ").slice(0, 12)}.` : w.join(" "); };
+    const cats = s.figure.categories.map(short); const uniq = cats.map((c, i) => (cats.indexOf(c) === i ? c : `${c.slice(0, 11)} ${i + 1}`));
+    if (uniq.some((c, i) => c !== s.figure!.categories[i])) s.figure = { ...s.figure, categories: uniq, description: `${s.figure.description} Categories: ${s.figure.categories.map((c, i) => `${uniq[i]} = ${c}`).join("; ")}.` };
+  }
   const rc = p.expected_features?.rhetorical_choices ?? [];
   const blueprint = p.task_type === "rhetorical_analysis" && !(p.blueprint.devices?.length) && rc.length ? { ...p.blueprint, devices: rc.map((c) => ({ device: c.device, sentence_ids: c.sentence_ids, function: c.effect })) } : p.blueprint;
   return { ...p, sources, blueprint };

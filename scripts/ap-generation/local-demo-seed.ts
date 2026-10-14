@@ -99,7 +99,8 @@ async function seed() {
   } else {
     // 과목별로 객관식 20문항씩, FRQ 는 6개씩 끊어 세트를 만든다(전부 free 등급: 한 학생 계정으로 모두 응시).
     for (const code of Object.keys(SUBJECTS)) {
-      const cnt = (k: string) => Number(psql(`select count(*) from ap_candidate_items where run_id = ${q(RUN)} and ap_subject_code = ${q(code)} and purpose = 'mock_exam' and kind = ${q(k)};`));
+      // 문제 행 수로 센다: 지문 묶음(후보 1개 = 문제 여러 건)이 있는 과목에서 후보 수로 세면 앞 20문항만 세트에 들어간다(2026-10-14 영어).
+      const cnt = (k: string) => Number(psql(`select count(*) from ap_candidate_items i join ap_candidate_problems cp on cp.candidate_key = i.candidate_key where i.run_id = ${q(RUN)} and i.ap_subject_code = ${q(code)} and i.purpose = 'mock_exam' and i.kind = ${q(k)};`));
       const nMc = cnt("mc"), nFrq = cnt("frq_bundle");
       for (let i = 0; i < nMc; i += 20) await mk(code, "mc_practice", `${code} MC ${i / 20 + 1} (demo)`, "free", { mc: [i, i + 20], frq: [0, 0] });
       for (let i = 0; i < nFrq; i += 6) await mk(code, "full_practice", `${code} FRQ ${i / 6 + 1} (demo)`, "free", { mc: [0, 0], frq: [i, i + 6] });

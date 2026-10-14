@@ -80,6 +80,10 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "csa-s2fb", title: "AP Computer Science A s2 FRQ-b (Q3·Q4) (통과 4)", itemsFile: "csa-s2fb-items.json", loadLabel: "csa-s2fb-2026-10-13", supplement: true, passKeysFile: "csa-s2fb-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
   { id: "csa-s2sm", title: "AP Computer Science A s2 부족분 MC (수정 원형 재시도) (통과 12)", itemsFile: "csa-s2sm-items.json", loadLabel: "csa-s2sm-2026-10-13", supplement: true, passKeysFile: "csa-s2sm-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
   { id: "csa-s2sf", title: "AP Computer Science A s2 부족분 FRQ (Q4 재시도) (통과 1)", itemsFile: "csa-s2sf-items.json", loadLabel: "csa-s2sf-2026-10-13", supplement: true, passKeysFile: "csa-s2sf-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
+  // 2026-10-14 AP English Language(docs/ap/englang-groundwork.md §9): 파일럿(MC 지문 묶음 3 + FRQ 3) + P2 MC 14묶음 + FRQ 3. 한 증거 파일(evidence-el.json)을 공유한다. EL1 정확 배정: data/ap/stock/exact-assign-el-el1.json
+  { id: "el-p1", title: "AP English Language P1 (MC 파일럿 묶음 3 + FRQ 3)", itemsFile: "el-p1-items.json", loadLabel: "el-p1-2026-10-14", supplement: true, passKeysFile: "el-p1-pass-keys.json", evidenceFile: "evidence-el.json" },
+  { id: "el-p2a", title: "AP English Language P2 MC (지문 묶음 14: 읽기 7 + 글쓰기 7)", itemsFile: "el-p2a-items.json", loadLabel: "el-p2a-2026-10-14", supplement: true, passKeysFile: "el-p2a-pass-keys.json", evidenceFile: "evidence-el.json" },
+  { id: "el-p2b", title: "AP English Language P2 FRQ (종합·수사 분석·논증 각 1)", itemsFile: "el-p2b-items.json", loadLabel: "el-p2b-2026-10-14", supplement: true, passKeysFile: "el-p2b-pass-keys.json", evidenceFile: "evidence-el.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 

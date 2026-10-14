@@ -100,3 +100,8 @@
 ## Microeconomics MI1·MI2 조립 완료 (2026-10-13, 누적 $78.1525 / 중단선 $90)
 - 원형 MC 110(5지선다)·FRQ 8유형, 공식 단원·스킬 범주·수치 분석·FRQ 과제 유형 범위 내장. 유료 합계 $9.72(P1 $2.03 + P2 $7.69), 통과 MC 184·FRQ 11, 화면 증거 195후보 × 2 뷰포트 fail 0(`evidence-micro-s2.json`).
 - 정확 배정 `data/ap/stock/exact-assign-micro-mi1-mi2.json`: 각 MC 60 + FRQ 3(긴 1 + 짧은 2), 가상 0, 위반 0, 겹침 0, FRQ 유형도 서로 다름. 적재 배치 `micro-p1a, p1b, p2f, p2a, p2b, p2c, p2d`. 상세 `docs/ap/microeconomics-groundwork.md`, 사실 `microeconomics-facts.md`.
+
+## AP English Language 두 번째 시험 준비 — P0·P1·P2 (2026-10-14)
+- 본문: `docs/ap/englang-groundwork.md` §7(FRQ 스키마 el-frq-1)·§8(구현)·§9(결과). 지출 $22.73(원장 $88.0814 → $110.8147, 영어 상한 $24).
+- 적재할 배치: `el-p1`(MC 묶음 3 + FRQ 3)·`el-p2a`(MC 묶음 14)·`el-p2b`(FRQ 3), 증거 `evidence-el.json`(23 후보, 390x844·1280x800 144건 전부 통과), 렌더 보고서 갱신. EL1 정확 배정 `exact-assign-el-el1.json`(가상 0, 위반 0). **EL2 는 재고 부족**(MC 읽기 ≥16·글쓰기 ≥6문항, ≈ $3.5 필요 — 상한 상향 결정 대기).
+- 변경: `itemContentHash` 가 영어 원형(el_·elfrq_)에는 지문·문항(set_intro·items)을 포함(다른 과목 해시 불변). `apPassageForDisplay` 영어 표지(`ALTON original passage`)가 있으면 stem 인용 오탐 없이 표시·수식 변환 없음. 에세이 입력칸(18줄·단어 수). `local-demo-seed.ts` 연습 세트 분할이 문제 행 수 기준(지문 묶음이 20문항을 넘겨도 전부 포함).

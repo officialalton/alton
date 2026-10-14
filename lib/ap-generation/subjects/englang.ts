@@ -90,4 +90,4 @@ export const EL_SOURCE_KINDS = ["text", "visual", "quantitative"] as const;
 export const EL_FRQ_TYPE_BY_TEMPLATE = { q1: "synthesis", q2: "rhetorical_analysis", q3: "argument" } as const;
 /** FRQ 루브릭 3행(공식 구조: 논지 0–1 · 증거와 해설 0–4 · 정교함 0–1; 공식 문구는 직접 대조 전까지 UNVERIFIED — 문안은 ALTON 요약). */
 export const EL_RUBRIC_ROWS = [{ row_id: "A", name: "Thesis", max: 1 }, { row_id: "B", name: "Evidence and commentary", max: 4 }, { row_id: "C", name: "Sophistication", max: 1 }] as const;
-export const EL_SAMPLE_WORDS = { high: [380, 760], mid: [260, 520], low: [110, 330] } as const;
+export const EL_SAMPLE_WORDS = { high: [380, 780], mid: [260, 580], low: [110, 360] } as const;
