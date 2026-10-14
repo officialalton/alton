@@ -7,9 +7,10 @@
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { resolveStockTarget } from "@/lib/ap-admin/env-guard";
-import { STOCK_BATCHES, batchArtifactsPresent, listPartialPlans } from "@/lib/ap-admin/batches";
-import { listAssignments, loadCheck, recordRun, runAssemble, runAssemblePartial, runConvert, runImport, runVerify, type Ctx, type StepResult } from "@/lib/ap-admin/service";
+import { STOCK_BATCHES, batchArtifactsPresent, batchById, listPartialPlans, readPassKeys } from "@/lib/ap-admin/batches";
+import { fetchReviewRows, listAssignments, loadCheck, recordRun, runAssemble, runAssemblePartial, runConvert, runImport, runVerify, type Ctx, type StepResult } from "@/lib/ap-admin/service";
 import type { BatchCheck } from "@/lib/ap-admin/load-check";
+import { computeBatchStatus, loadBatch, type BatchRun, type BatchStatus } from "@/lib/ap-admin/load-batch";
 import { fetchLaunchGateReport, type LaunchGateReport } from "@/lib/ap-admin/launch-gate";
 
 export type ApStockOverview = {
@@ -66,9 +67,8 @@ export async function apStockLoadCheckAction(): Promise<{ result: StepResult; ba
   return { result: out.result, batches: out.check.batches, totals: out.check.totals };
 }
 
-export async function apStockStepAction(input: ApStockStepInput): Promise<StepResult & { auditWarning?: string }> {
-  const { adminUserId } = await requireAdmin();
-  const c: Ctx = { db: createAdminClient(), target: target(), actorId: adminUserId };
+/** 단일 단계·배치 전체 적재가 같이 쓰는 한 단계 실행(감사 기록·환경 가드 포함). */
+function runStepGuarded(c: Ctx, input: ApStockStepInput) {
   const mode = input.execute ? "execute" : "dry_run";
   const action = ({ import: "import", render: "render_verify", screen: "screen_verify", convert: "convert" } as const)[input.step];
   if (!action) throw new Error("알 수 없는 단계입니다.");
@@ -77,6 +77,36 @@ export async function apStockStepAction(input: ApStockStepInput): Promise<StepRe
     if (input.step === "convert") return runConvert(c, input.batchId, input.execute, input.planHash);
     return runVerify(c, input.step, input.batchId, input.execute, input.planHash);
   });
+}
+
+export async function apStockStepAction(input: ApStockStepInput): Promise<StepResult & { auditWarning?: string }> {
+  const { adminUserId } = await requireAdmin();
+  const c: Ctx = { db: createAdminClient(), target: target(), actorId: adminUserId };
+  return runStepGuarded(c, input);
+}
+
+/** '배치 전체 적재': 한 배치의 ①→④ 를 기존 단계 함수 그대로(같은 가드·해시·감사 기록) 이어서 실행. 배치당 한 번 호출(서버 시간 제한 때문에 여러 배치는 화면이 순서대로 호출). */
+export async function apStockLoadBatchAction(input: { batchId: string; execute: boolean; previewHash?: string | null }): Promise<BatchRun> {
+  const { adminUserId } = await requireAdmin();
+  const c: Ctx = { db: createAdminClient(), target: target(), actorId: adminUserId };
+  batchById(input.batchId); // 알 수 없는 배치면 여기서 오류
+  return loadBatch({ step: (i) => runStepGuarded(c, i), canWrite: c.target.canWrite, hasLoadStep: (id) => !!batchById(id).itemsFile }, input.batchId, input.execute, input.previewHash);
+}
+
+/** 배치별 적재 현황(읽기 전용): 기존 점검(ap_item_review_status_v) + 변환된 후보 수. 쿼리 ≈ ⌈DB행/1000⌉ + ⌈변환행/1000⌉. */
+export async function apStockBatchStatusAction(): Promise<BatchStatus[]> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const rows = await fetchReviewRows(db);
+  const converted = new Set<string>();
+  for (let from = 0; ; from += 1000) {
+    const { data, error } = await db.from("ap_candidate_items").select("candidate_key").not("problem_id", "is", null).range(from, from + 999);
+    if (error) throw new Error(error.message);
+    for (const x of data ?? []) converted.add(x.candidate_key as string);
+    if (!data || data.length < 1000) break;
+  }
+  const batches = STOCK_BATCHES.filter((b) => batchArtifactsPresent(b).passKeys).map((b) => ({ id: b.id, keys: readPassKeys(b) }));
+  return computeBatchStatus(batches, rows, converted);
 }
 
 export async function apStockAssembleAction(input: ApStockAssembleInput): Promise<StepResult & { auditWarning?: string }> {
