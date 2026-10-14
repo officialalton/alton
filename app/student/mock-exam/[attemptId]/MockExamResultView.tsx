@@ -14,6 +14,7 @@ import { attemptLabel } from "@/lib/mock-exam/open-list";
 import { satDomainDisplayName, satSkillDisplayName } from "@/lib/sat-keywords/taxonomy";
 import { satDomainDescription, satSkillDescription } from "@/lib/sat-keywords/skill-descriptions";
 import LearningText from "@/app/session/[id]/LearningText";
+import { breakOptionAnalysis } from "@/lib/mock-exam/explanation-format";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import ProblemNoteSnapshot from "@/app/components/ProblemNoteSnapshot";
@@ -90,7 +91,7 @@ export function ExplanationPanel({ item }: { item: MockExamAttemptItem }) {
         </p>
       )}
       <div lang={showing}>
-        <LearningText text={(showing === "en" ? en : ko) ?? ""} />
+        <LearningText text={breakOptionAnalysis((showing === "en" ? en : ko) ?? "")} />
       </div>
     </div>
   );
