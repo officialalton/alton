@@ -30,6 +30,14 @@ vi.mock("./trial-onboarding-actions", () => ({
 
 import { listKanbanBoardAction, closeConsultationAction } from "./consultation-kanban-actions";
 
+// loadPendingAccountLinkCards(2026-10-12)는 .is().is().eq().gt().in().order().limit() 체인을 쓴다 — 어느 단계에서 await해도 빈 결과.
+function emptyQ(): Record<string, unknown> {
+  const q: Record<string, unknown> = {};
+  for (const m of ["not", "is", "eq", "gt", "in", "order", "limit"]) q[m] = () => q;
+  q.then = (f: (v: unknown) => unknown) => Promise.resolve({ data: [] }).then(f);
+  return q;
+}
+
 function baseRow(overrides: Partial<Record<string, unknown>> = {}) {
   return {
     id: "c1",
@@ -107,7 +115,7 @@ function mockTrialProgressTables(opts: { hasSession?: boolean; hasRegularIntent?
         }),
       };
     }
-    return { select: () => ({ not: () => Promise.resolve({ data: [] }), is: () => Promise.resolve({ data: [] }) }) };
+    return { select: () => emptyQ() };
   });
 }
 
@@ -115,7 +123,7 @@ describe("listKanbanBoardAction — 5단계 stage 분류", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     adminFromMock.mockReturnValue({
-      select: () => ({ not: () => Promise.resolve({ data: [] }), is: () => Promise.resolve({ data: [] }) }),
+      select: () => emptyQ(),
     });
   });
 
@@ -169,7 +177,7 @@ describe("listKanbanBoardAction — 5단계 stage 분류", () => {
   it("종료(closure_type not null)된 상담은 칸반 보드에서 제외한다", async () => {
     listConsultationsMock.mockResolvedValue([baseRow({ id: "c1" }), baseRow({ id: "c2" })]);
     adminFromMock.mockReturnValue({
-      select: () => ({ not: () => Promise.resolve({ data: [{ id: "c2" }] }), is: () => Promise.resolve({ data: [] }) }),
+      select: () => ({ not: () => Promise.resolve({ data: [{ id: "c2" }] }), is: () => emptyQ() }),
     });
     const cards = await listKanbanBoardAction();
     expect(cards.map((c) => c.id)).toEqual(["c1"]);

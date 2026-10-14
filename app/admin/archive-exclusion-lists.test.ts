@@ -93,8 +93,8 @@ describe("신규 보드(loadKanbanBoard) — 아카이브 제외", () => {
     setQueue("trial_onboarding_link_students", [
       {
         data: [
-          { id: "s-active", link_id: "l1", student_name: "활성자녀", student_grade: null, child_auth_user_id: "child-active", created_at: "2026-09-01" },
-          { id: "s-archived", link_id: "l1", student_name: "아카이브자녀", student_grade: null, child_auth_user_id: "child-archived", created_at: "2026-09-02" },
+          { id: "s-active", link_id: "l1", student_name: "활성자녀", student_grade: null, child_auth_user_id: "child-active", status: "created", created_at: "2026-09-01" },
+          { id: "s-archived", link_id: "l1", student_name: "아카이브자녀", student_grade: null, child_auth_user_id: "child-archived", status: "created", created_at: "2026-09-02" },
         ],
         error: null,
       },

@@ -22,6 +22,8 @@ export type AuditAction = "load_check" | "import" | "render_verify" | "screen_ve
 export type StepResult = {
   action: AuditAction; mode: "dry_run" | "execute"; executed: boolean; target: { ref: string; kind: string; canWrite: boolean; reason: string | null };
   scope: Record<string, unknown>; counts: Record<string, number>; lines: string[]; planHash: string | null; blocked: string | null; ok: boolean;
+  /** 구조화된 건너뜀 목록(배치 전체 적재의 '건너뜀 허용' 모드용). 검증 단계의 건너뜀 / 변환 단계의 검증 미완료 키. lines 와 달리 잘리지 않는다. */
+  skips?: { key: string; reason: string }[]; notReady?: string[];
 };
 export type Ctx = { db: SupabaseClient; target: StockTarget; actorId: string; now?: () => number };
 
@@ -141,6 +143,7 @@ export async function runVerify(c: Ctx, kind: "render" | "screen", batchId: stri
   }
   r.counts = { passKeys: keys.length, dbTargets: rows.length, notLoadedOrNotEligible: notInDb, toRecord: todo.length, relabel: relabeled, alreadyVerified: already, skipped: skipped.length };
   r.planHash = planHash(action, r.scope, todo.map((x) => ({ k: x.row.candidate_key, h: (x.evidence as { contentHash?: string }).contentHash })).sort((a, z) => a.k.localeCompare(z.k)));
+  r.skips = skipped.map((s) => { const i = s.indexOf(": "); return { key: s.slice(0, i), reason: s.slice(i + 2) }; });
   r.lines = cap(skipped.map((s) => `건너뜀 ${s}`));
   if (!checkHash(r, expectedHash, execute)) return r;
   if (!execute) return r;
@@ -161,19 +164,20 @@ const CONVERT_LIMIT = 20;
 export async function runConvert(c: Ctx, batchId: string, execute: boolean, expectedHash?: string | null): Promise<StepResult> {
   const b = batchById(batchId); const r = base(c, "convert", execute ? "execute" : "dry_run", { batchId, purpose: "mock_exam" });
   if (!gate(c, r, execute, expectedHash)) return r;
-  const keys = readPassKeys(b); const cands: { row: Record<string, unknown>; cand: CandidateRow }[] = []; let notReady = 0, alreadyConverted = 0;
+  const keys = readPassKeys(b); const cands: { row: Record<string, unknown>; cand: CandidateRow }[] = []; let notReady = 0, alreadyConverted = 0; const notReadyKeys: string[] = [];
   for (const ks of chunk(keys, 100)) {
     const { data, error } = await c.db.from("ap_candidate_items").select("candidate_key, ap_subject_code, kind, keyword_code, difficulty_provisional, payload, purpose, problem_id, review_env_ready").eq("is_current", true).in("candidate_key", ks);
     if (error) throw new Error(error.message);
     for (const x of data ?? []) {
       if (x.problem_id || x.purpose) { alreadyConverted++; continue; }
-      if (!x.review_env_ready) { notReady++; continue; }
+      if (!x.review_env_ready) { notReady++; notReadyKeys.push(x.candidate_key); continue; }
       cands.push({ row: x, cand: { candidateKey: x.candidate_key, apSubjectCode: x.ap_subject_code, kind: x.kind, payload: x.payload, keywordCode: x.keyword_code, difficultyProvisional: x.difficulty_provisional } });
     }
   }
   const skipped: string[] = []; const ok: CandidateRow[] = [];
   for (const { cand } of cands) { const p = planConversion(cand); if (p.ok) ok.push(cand); else skipped.push(`${cand.candidateKey}: ${p.reason}`); }
   const batch = ok.slice(0, CONVERT_LIMIT);
+  r.notReady = notReadyKeys;
   r.counts = { passKeys: keys.length, convertible: ok.length, thisRun: batch.length, alreadyConverted, notReviewReady: notReady, skipped: skipped.length };
   r.planHash = planHash("convert", r.scope, batch.map((x) => x.candidateKey).sort());
   r.lines = cap([...(ok.length > batch.length ? [`한 번에 최대 ${CONVERT_LIMIT}건씩 변환합니다. 남은 ${ok.length - batch.length}건은 이어서 다시 실행하세요.`] : []), ...skipped.map((s) => `건너뜀 ${s}`)]);

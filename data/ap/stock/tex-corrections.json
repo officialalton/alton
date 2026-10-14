@@ -3,7 +3,7 @@
  "version": 1,
  "generatedBy": "lib/ap-exam/tex-corrections-gen.test.ts (AP_TEX_CORR_WRITE=1)",
  "note": "변환 전 해설(explanation_en)의 sha256 에 묶인 교정 문안. 적용은 관리자 'AP 설명 수정 새 버전'(미리보기→확인→실행)만. before 해시가 DB 와 다르면 건드리지 않는다.",
- "count": 281,
+ "count": 293,
  "entries": [
   {
    "candidateKey": "bc-topup-final:ap_calculus_bc-f01-k0",
@@ -144,6 +144,86 @@
    "after": "The correct answer is 13. Speed = sqrt($(x')^2$ + $(y')^2$) with the table values at that time.\n17 is incorrect: Adds the absolute values of the components instead of using the Pythagorean combination.\n- $\\frac{12}{5}$ is incorrect: Reports the slope dy/dx = y'/x' instead of the speed.\n-5 is incorrect: Reports x'(t) alone."
   },
   {
+   "candidateKey": "bio-p1-a:ap_biology-m06-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "18de54a076cd6925c57f717aa0c1f6508dbce5409b8eb55f569dca85652966bf",
+   "afterSha256": "424253e272e4a413f8281c20e9f45a1854f656ae18c144aad94ddf84bc3da987",
+   "after": "The correct answer is The chi-square value is 0.05, which is less than the critical value of 3.84 (df = 1, p = 0.05), so the null hypothesis is not rejected.. Sum of $(o - e)^2$/e over the 2 classes is 0.05. With df = 2 - 1 = 1, the critical value at p = 0.05 is 3.84, and 0.05 is less than 3.84, so the null hypothesis (the observed ratio matches 3:1) is not rejected.\nThe chi-square value is 2.00, which is less than the critical value of 3.84 (df = 1, p = 0.05), so the null hypothesis is not rejected. is incorrect: Sums the squared differences without dividing by the expected counts.\nThe chi-square value is 0.05, which is less than the critical value of 5.99 (df = 2, p = 0.05), so the null hypothesis is not rejected. is incorrect: Uses the number of phenotype classes as the degrees of freedom instead of the number minus one.\nThe chi-square value is 0.05, which is greater than the critical value of 3.84 (df = 1, p = 0.05), so the null hypothesis is rejected. is incorrect: Computes the statistic correctly but draws the opposite conclusion from the comparison with the critical value."
+  },
+  {
+   "candidateKey": "bio-p1-a:ap_biology-m06-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "86ddfca8ff1d7d60c5af520eb92a5dde0c214b18590d8e8fce48d35d5a7ca028",
+   "afterSha256": "09d1bfe5668e274ed7c4bd17303010bd8f11379e6266b077c0452904d369f828",
+   "after": "The correct answer is The chi-square value is 3.41, which is less than the critical value of 3.84 (df = 1, p = 0.05), so the null hypothesis is not rejected.. Sum of $(o - e)^2$/e over the 2 classes is 3.41. With df = 2 - 1 = 1, the critical value at p = 0.05 is 3.84, and 3.41 is less than 3.84, so the null hypothesis (the observed ratio matches 3:1) is not rejected.\nThe chi-square value is 3.41, which is less than the critical value of 5.99 (df = 2, p = 0.05), so the null hypothesis is not rejected. is incorrect: Uses the number of phenotype classes as the degrees of freedom instead of the number minus one.\nThe chi-square value is 3.86, which is greater than the critical value of 3.84 (df = 1, p = 0.05), so the null hypothesis is rejected. is incorrect: Divides each squared difference by the observed count instead of the expected count.\nThe chi-square value is 3.41, which is greater than the critical value of 3.84 (df = 1, p = 0.05), so the null hypothesis is rejected. is incorrect: Computes the statistic correctly but draws the opposite conclusion from the comparison with the critical value."
+  },
+  {
+   "candidateKey": "bio-p1-a:ap_biology-m08-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "1eb7b15f713e1ec24097a768838981227d7deec78c633738db9db6e8da549760",
+   "afterSha256": "bc3eba08521b4053c9fa8031a66c2f22d15de4eb739edb27dcdc46cbe90cffff",
+   "after": "The correct answer is 0.81. $q^2$ = 0.01, so q = 0.10 and p = 0.90. The homozygous dominant proportion is $p^2$ = 0.81.\n0.10 is incorrect: Reports the frequency of the recessive allele.\n0.99 is incorrect: Subtracts the affected proportion from 1, which includes the carriers.\n0.18 is incorrect: Reports the carrier frequency."
+  },
+  {
+   "candidateKey": "bio-p1-a:ap_biology-m08-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "0128da36faf82b819cb337286b94265978fc7baa6813360294a260da862d3059",
+   "afterSha256": "ca3b749067ff532406b43c4b73edf305b7a71ea4e1f2fbc3ebe3f345989fe8ab",
+   "after": "The correct answer is 0.48. $q^2$ = 0.36, so q = 0.60 and p = 1 - q = 0.40. The proportion of carriers is 2pq = 2(0.40)(0.60) = 0.48.\n0.40 is incorrect: Reports the frequency of the dominant allele.\n0.60 is incorrect: Reports the frequency of the recessive allele, q, instead of the carrier frequency.\n0.16 is incorrect: Reports the proportion of individuals that are homozygous dominant."
+  },
+  {
+   "candidateKey": "bio-r1-mc:ap_biology-m20-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "f0877aab45c62c489251131c4dbbf6b2d6e41e24589f33db4b6374fa9d5d4676",
+   "afterSha256": "47a7c8789f68812e5480b455ea0d5ab8037deaff3b58b79ca2f9fc70b0178cc7",
+   "after": "The correct answer is 0.81. $q^2$ = 0.01, so q = 0.10 and p = 0.90. The homozygous dominant proportion is $p^2$ = 0.81.\n0.18 is incorrect: Reports the carrier frequency.\n0.10 is incorrect: Reports the frequency of the recessive allele.\n0.90 is incorrect: Reports the frequency of the dominant allele, p, instead of p squared."
+  },
+  {
+   "candidateKey": "bio-r1-mc:ap_biology-m20-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "d96df4c6a7f639e3a182e3a55f2c6972fd795d657d1cde6231bd40a2b0a52c71",
+   "afterSha256": "531732cdb0d272dc6515e4accc751e40d83ea0f620925edabf40417efa2e2a5a",
+   "after": "The correct answer is 0.48. $q^2$ = 0.36, so q = 0.60 and p = 1 - q = 0.40. The proportion of carriers is 2pq = 2(0.40)(0.60) = 0.48.\n0.40 is incorrect: Reports the frequency of the dominant allele.\n0.72 is incorrect: Doubles q squared instead of using 2pq.\n0.60 is incorrect: Reports the frequency of the recessive allele, q, instead of the carrier frequency."
+  },
+  {
+   "candidateKey": "bio-r2:ap_biology-m16-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "b8dfdfcee9c29167cd7dcbefe29b75321b9629b47e83b066a0a38a3247200504",
+   "afterSha256": "2667e2c701002d5459b247894e2ce0b635569249a0c422443c7a961f466c1c59",
+   "after": "The correct answer is 8. With p = 0.8 and q = 0.2, the expected frequency of homozygous recessive individuals is $q^2$ = 0.040. Multiplying by 200 gives 8 individuals.\n32 is incorrect: Uses p times q without the factor of 2.\n128 is incorrect: Uses p squared for every genotype.\n0.32 is incorrect: Uses 2pq without multiplying by the population size."
+  },
+  {
+   "candidateKey": "bio-r2:ap_biology-m16-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "603807526f2219e21c0fc372d7a0401753c5edbc6bbc9af244a7041762463111",
+   "afterSha256": "1519bef2a5a4a0cc59813c8813834a7b1cbb5df3fb65408688ffa81eee149dbc",
+   "after": "The correct answer is 20. With p = 0.8 and q = 0.2, the expected frequency of homozygous recessive individuals is $q^2$ = 0.040. Multiplying by 500 gives 20 individuals.\n400 is incorrect: Uses the allele frequency times the population size.\n32 is incorrect: Uses 2p times q squared as the frequency of every genotype.\n320 is incorrect: Uses p squared for every genotype."
+  },
+  {
+   "candidateKey": "bio-s2-mc-b:ap_biology-m30-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "2f0ceb02dddba4081078f1840a20a26a3cc1eebcb9f2806963b01c21b105f579",
+   "afterSha256": "2e7c64912a2dae7cab596f2758ef427d0563afdda95f144d95a411084e2cc85a",
+   "after": "The correct answer is 98. With p = 0.3 and q = 0.7, the expected frequency of homozygous recessive individuals is $q^2$ = 0.490. Multiplying by 200 gives 98 individuals.\n0.42 is incorrect: Uses 2pq without multiplying by the population size.\n42 is incorrect: Uses p times q without the factor of 2.\n59 is incorrect: Uses 2p times q squared as the frequency of every genotype."
+  },
+  {
+   "candidateKey": "bio-s2-mc-b:ap_biology-m38-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "0ab6de632897f7abad136697bfadae727f72be124b92de622762a357347b120e",
+   "afterSha256": "d5d6dc4739195b61f99926692dde3c6c9bedd74a5abb396e09c40e7683cb9772",
+   "after": "The correct answer is 27/64. Each offspring has a 3/4 chance of the dominant phenotype. For three independent offspring, P = $(3/4)^3$ = 27/64.\n1/64 is incorrect: Cubes the probability of the recessive phenotype.\n3/4 is incorrect: Gives the probability for a single offspring.\n9/16 is incorrect: Squares the dominant probability, using only two offspring."
+  },
+  {
    "candidateKey": "chem-p1-a2:ap_chemistry-m05-k0",
    "itemIndex": 0,
    "sets": [],
@@ -254,6 +334,22 @@
    "beforeSha256": "af494a869fe38a6ec7b88f69a82d2cbf647f8e41b0e8a616d8bdf3eb2fa93f3b",
    "afterSha256": "9e1657096f0ec03c0cbcd4d880f2f210b330c3815aeed3fa4790706f866137d8",
    "after": "The correct answer is The system shifts toward the products, because the reaction quotient Q becomes smaller than K, so more products must form until Q equals K again.. For this disturbance halving the volume doubles both concentrations, so Q = $[B]^1$/$[A]^2$ is multiplied by $2^{1 − 2}$ = 0.5; Q is therefore smaller than K, so the system shifts toward the products until Q equals K again.\nThe system shifts in neither direction, because the concentrations of A and B do not change, so Q still equals K. is incorrect: After this disturbance Q is smaller than K, not equal to K, so the system does not stay at equilibrium.\nThe system shifts toward the reactant, because the reaction quotient Q becomes larger than K, so more reactant must form until Q equals K again. is incorrect: After this disturbance Q is smaller than K, not larger than K, so the system does not shift toward the reactant.\nThe system shifts toward the reactant, because the equilibrium constant changes. is incorrect: Believes that a change in concentration or volume changes the value of K, which depends only on temperature."
+  },
+  {
+   "candidateKey": "micro-p2-a:ap_microeconomics-m13-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "33705afdcaf4fe980c2c3d9456e075e6d21aa9239e09c775f0ef851d9ad1b88f",
+   "afterSha256": "915f6ef655bed16ece15459ee455d1284d7d310693601b6d09ab038bd437de58",
+   "after": "The correct answer is 4,550. HHI = $50^2$ + $45^2$ + $5^2$ = 4550.\n1517 is incorrect: Uses the average of the squared shares.\n10,000 is incorrect: Squares the sum of the shares.\n2,500 is incorrect: Squares only the largest firm's share.\n100 is incorrect: Adds the market shares (always 100) instead of squaring them."
+  },
+  {
+   "candidateKey": "micro-p2-a:ap_microeconomics-m13-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "51e5ef602f5a948cd7b8022c13c54416ba40777575dd912497b03e68b35040f0",
+   "afterSha256": "a8f8792af9391972b0638668ba6acd325a281695dee04ee4e4f73d50ef7ad469",
+   "after": "The correct answer is 3,550. HHI = $45^2$ + $30^2$ + $25^2$ = 3550.\n1183 is incorrect: Uses the average of the squared shares.\n100 is incorrect: Adds the market shares (always 100) instead of squaring them.\n10,000 is incorrect: Squares the sum of the shares.\n2,025 is incorrect: Squares only the largest firm's share."
   },
   {
    "candidateKey": "phys-s2-d:ap_physics_1-f03-k0",

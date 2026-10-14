@@ -20,7 +20,7 @@ export type ApStockOverview = {
   partialPlans?: { file: string; sets: { id: string; name: string; partial: string }[] }[];
   history: { id: string; createdAt: string; actor: string; action: string; mode: string; status: string; targetRef: string; scope: Record<string, unknown>; counts: Record<string, number>; note: string | null }[];
 };
-export type ApStockStepInput = { step: "import" | "render" | "screen" | "convert"; batchId: string; execute: boolean; planHash?: string | null };
+export type ApStockStepInput = { step: "import" | "render" | "screen" | "convert"; batchId: string; execute: boolean; planHash?: string | null; allowSkips?: boolean };
 export type ApStockPartialInput = { planFile: string; setId: string; execute: boolean; planHash?: string | null; tier?: "free" | "tutoring" };
 export type ApStockAssembleInput = { reportFile: string; setId: string; name?: string; execute: boolean; planHash?: string | null; tier?: "free" | "tutoring" };
 
@@ -72,10 +72,13 @@ function runStepGuarded(c: Ctx, input: ApStockStepInput) {
   const mode = input.execute ? "execute" : "dry_run";
   const action = ({ import: "import", render: "render_verify", screen: "screen_verify", convert: "convert" } as const)[input.step];
   if (!action) throw new Error("알 수 없는 단계입니다.");
-  return guarded(c, { action, mode, scope: { batchId: input.batchId } }, () => {
-    if (input.step === "import") return runImport(c, input.batchId, input.execute, input.planHash);
-    if (input.step === "convert") return runConvert(c, input.batchId, input.execute, input.planHash);
-    return runVerify(c, input.step, input.batchId, input.execute, input.planHash);
+  return guarded(c, { action, mode, scope: { batchId: input.batchId, ...(input.allowSkips ? { skipTolerant: true } : {}) } }, async () => {
+    const r = input.step === "import" ? await runImport(c, input.batchId, input.execute, input.planHash)
+      : input.step === "convert" ? await runConvert(c, input.batchId, input.execute, input.planHash)
+      : await runVerify(c, input.step, input.batchId, input.execute, input.planHash);
+    // 감사 기록: 건너뜀 허용 모드로 호출됐음을 scope 에 남긴다(건수는 counts.skipped / notReviewReady). 계획 해시는 이미 계산된 뒤라 영향 없음.
+    if (input.allowSkips) r.scope = { ...r.scope, skipTolerant: true };
+    return r;
   });
 }
 
@@ -86,11 +89,11 @@ export async function apStockStepAction(input: ApStockStepInput): Promise<StepRe
 }
 
 /** '배치 전체 적재': 한 배치의 ①→④ 를 기존 단계 함수 그대로(같은 가드·해시·감사 기록) 이어서 실행. 배치당 한 번 호출(서버 시간 제한 때문에 여러 배치는 화면이 순서대로 호출). */
-export async function apStockLoadBatchAction(input: { batchId: string; execute: boolean; previewHash?: string | null }): Promise<BatchRun> {
+export async function apStockLoadBatchAction(input: { batchId: string; execute: boolean; previewHash?: string | null; allowSkips?: boolean }): Promise<BatchRun> {
   const { adminUserId } = await requireAdmin();
   const c: Ctx = { db: createAdminClient(), target: target(), actorId: adminUserId };
   batchById(input.batchId); // 알 수 없는 배치면 여기서 오류
-  return loadBatch({ step: (i) => runStepGuarded(c, i), canWrite: c.target.canWrite, hasLoadStep: (id) => !!batchById(id).itemsFile }, input.batchId, input.execute, input.previewHash);
+  return loadBatch({ step: (i) => runStepGuarded(c, i), canWrite: c.target.canWrite, hasLoadStep: (id) => !!batchById(id).itemsFile }, input.batchId, input.execute, input.previewHash, !!input.allowSkips);
 }
 
 /** 배치별 적재 현황(읽기 전용): 기존 점검(ap_item_review_status_v) + 변환된 후보 수. 쿼리 ≈ ⌈DB행/1000⌉ + ⌈변환행/1000⌉. */

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type Dispatch, type SetStateAction } from "react";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import {
   getCurriculumDocDetailAction,
   setDocAccess,
@@ -45,6 +46,7 @@ export default function CurriculumDocsTab({
   setDocs: Dispatch<SetStateAction<CurriculumDocListItem[]>>;
   subjects: AdminSubject[];
 }) {
+  const viewerTz = useViewerTimezone();
   const [openDocId, setOpenDocId] = useState<string | null>(null);
   // 2026-09-10(P1 성능 배치) — 문서를 실제로 열 때만 섹션·문제·키워드 전체를
   // 조회한다. 한 번 연 문서는 이 캐시에 남아 다시 열 때 재조회하지 않는다
@@ -325,7 +327,7 @@ export default function CurriculumDocsTab({
                   {d.rightsStatus === "confirmed" && (
                     <span>
                       확인: {d.rightsConfirmedByName ?? "방금"}
-                      {d.rightsConfirmedAt ? ` · ${new Date(d.rightsConfirmedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}` : ""}
+                      {d.rightsConfirmedAt ? ` · ${new Date(d.rightsConfirmedAt).toLocaleString("ko-KR", { timeZone: viewerTz })}` : ""}
                     </span>
                   )}
                   <input
