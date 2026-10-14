@@ -1,0 +1,1947 @@
+[
+ {
+  "key": "ap_biology-f01-k0",
+  "cellId": "ap_biology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Signal transduction",
+     "final_answer": "The growth factor binds a receptor on the cell surface (for example, a receptor tyrosine kinase). This changes the receptor's shape and activates it, often by phosphorylation, which starts a signal transduction cascade such as a kinase cascade. The signal turns on transcription factors and genes that make cyclins. Cyclins activate Cdks, which push the cell past the G1 checkpoint into S phase and then mitosis.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Read the variables from the table",
+     "final_answer": "(i) The independent variable is growth factor concentration (ng/mL). The dependent variable is the percent of cells in mitosis after 24 hours. (ii) Keep one factor constant, such as temperature, cell type, medium/nutrients, starting cell density, or incubation time. (iii) As concentration goes up, the percent of cells in mitosis goes up. The rise is steep from 0 to 10 ng/mL and smaller from 10 to 20 ng/mL, so the effect starts to level off.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(17.1-4.0)/4.0 = 3.275. The 2SE intervals 8.14-10.06 and 12.64-14.56 do not overlap.",
+     "final_answer": "(i) (17.1 − 4.0)/4.0 × 100 = 327.5% increase (about 328%). (ii) Yes, the difference is statistically supported. The 5 ng/mL interval is 8.14–10.06 and the 10 ng/mL interval is 12.64–14.56. The ±2SE intervals do not overlap.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "No receptor signaling means less signal for division",
+     "final_answer": "The percent of cells in mitosis would drop, toward about the 0 ng/mL level (about 4%). The growth factor could not bind its receptor, so no signal transduction would happen. Cyclin/Cdk activation would not be stimulated, and fewer cells would pass the G1 checkpoint. Only the baseline level of division, which does not depend on the growth factor, would remain.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is a standard 9-point Q1-style FRQ (A1, B3, C3, D2) on growth factor signaling and cell division. The keys are correct: 327.5% and non-overlapping ±2SE ranges. Rubric rows are consistent and list accepted alternatives. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP-style multi-part FRQ. It combines a concept explanation of receptor binding and signal transduction leading to division, experimental design basics, and trend description. It also has one simple percent-change calculation (327.5%), a mean ± 2SE non-overlap comparison, and a prediction of the effect of a receptor-blocking drug. Every part is in CED scope, the data are clean and rounded, and the wording is unambiguous. The load is moderate and spread across several skills, which suits a full mock exam rather than basic learning or an advanced supplement.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_biology-f02-k0",
+  "cellId": "ap_biology-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Variation exists; resistant cells survive antibiotic and reproduce more, passing resistance alleles; susceptible cells die, so resistant proportion rises over generations.",
+     "final_answer": "Pre-existing heritable variation (resistance from mutation); antibiotic kills susceptible cells; resistant cells survive and reproduce, passing resistance genes to offspring, increasing their frequency.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "IV days of exposure; DV percent resistant; constants e.g. antibiotic concentration, temperature, medium; pattern increasing at accelerating rate.",
+     "final_answer": "(i) IV: days of exposure to antibiotic; DV: mean percent of cells resistant. (ii) Antibiotic concentration (also temperature, growth medium, strain). (iii) Percent resistant increases with days of exposure, rising faster over time (1.0% at day 0 to 69.5% at day 4).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(69.5-1.0)/1.0*100=6850%. Day 1 range 5.36–6.64, day 2 range 21.66–24.94; no overlap.",
+     "final_answer": "(i) 6850% increase. (ii) Supported: the ±2SE intervals (5.36–6.64 vs 21.66–24.94) do not overlap.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Trend continues upward but percent caps at 100% as susceptible cells are eliminated.",
+     "final_answer": "About 95–100% resistant; selection keeps removing susceptible cells, but percent cannot go above 100%, so the curve levels off near 100%.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle passes all five criteria. It is a 9-point long FRQ with parts of 1, 3, 3 and 2 points, which is acceptable. Each part is judged against its own skill. The stimulus table has the data, n, and mean ± 2SE. The part C calculations (6850% and non-overlapping ranges) match the table. The part D prediction is open-ended and tolerant, and the rubric allows equivalent wordings. Two minor weaknesses remain. The 6850% percent change is an unusual value, and the rubric row for the D1 common error says \"71 percent\" when the table shows 69.5. Neither changes the key or the scoring.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle requires the topic concept of natural selection and resistance (parts A and D). The other parts assess official data skills, which is legitimate."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and defensible, and the rubric lists alternative accepted answers. The D1 common-error note says \"71 percent\", but the table gives 69.5. This is a minor inconsistency in a listed error, not in the key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete: levels, means, ±2SE, and n are all given. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response bundle, so there are no distractors. The common errors listed in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an AP long FRQ. The calculator load is a single percent change calculation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item aligned to 7.2/7.8. Requires explaining selection on resistant variants, identifying variables and a control, describing a trend, one simple percent-change calculation ((69.5-1.0)/1.0 x 100 = 6850%), a mean ± 2SE interval comparison (the ranges 5.36-6.64 and 21.66-24.94 do not overlap), and a prediction at 8 days that must account for the 100% ceiling and the slowing growth. Each step is modest, and the item is hard only through the combination of parts, which is appropriate for a full mock. Arithmetic is short with rounded values, wording is unambiguous, and everything stays within the CED.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_biology-f03-k0",
+  "cellId": "ap_biology-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Water moves from higher to lower water potential; seed (dry, solutes/matric) has lower water potential than surrounding water, so water enters by osmosis/imbibition.",
+     "final_answer": "Water moves passively from the surrounding solution (higher water potential) into the seed (lower water potential) by osmosis/imbibition.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "IV NaCl concentration; DV percent germinated; constants: seed species, temperature, light, volume of solution, number of seeds; pattern: germination decreases as NaCl increases, little change 0-50, sharp drop after.",
+     "final_answer": "(i) IV: NaCl concentration (mM); DV: mean percent of seeds germinated after 7 days. (ii) e.g., temperature (or seed type, light, volume of solution, number of seeds). (iii) As NaCl concentration increases, germination decreases. It is slight from 0 to 50 mM (95.1→90.5) and steep at 100 and 200 mM (60.3, 19.6).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(19.6-95.1)/95.1×100 = -79.4%. Error bars: 80.94–100.06 vs 56.06–64.54 do not overlap.",
+     "final_answer": "(i) ≈ -79.4% (a 79.4% decrease). (ii) Yes, the difference is statistically supported. The ±2SE intervals (80.9–100.1 vs 56.1–64.5) do not overlap.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Higher salt means lower external water potential, so less water uptake and lower germination.",
+     "final_answer": "Fewer seeds would germinate at 300 mM than at 200 mM (below 19.6%, near 0–10%). The higher solute concentration lowers the water potential of the solution further, so less water moves into the seeds. The trend in the data also shows germination falling as NaCl increases.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle passes all five criteria. It is a 9-point Q1-style FRQ (1/3/3/2). The key values were verified and the independent solver agreed on every part. The rubric rows are consistent, with accepted alternatives listed. The workload is typical of an AP Biology long FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Water potential and osmosis are required in parts A and D, and parts B and C legitimately assess data and design skills within the 2.7 context."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The percent change of -79.4% and the non-overlapping ±2SE ranges are consistent with the table. Alternative accepted answers are listed in the rubric rows."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table includes n, units and the ±2SE values, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no distractors. The common_errors listed in the rubric rows are specific and sensible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP Biology long FRQ, with one simple percent-change calculation and a calculator allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP short free-response with a table. It combines concept explanation (water potential and osmosis), variable identification, pattern description, one percent-change calculation with rounded values, comparison of mean ± 2SE ranges (80.94-100.06 vs 56.06-64.54, no overlap), and a justified prediction. All levers are within the allowed list, wording is unambiguous, and arithmetic is short. Appropriate for full mocks.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_biology-f04-k0",
+  "cellId": "ap_biology-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Active site shape/chemistry complementary to substrate",
+     "final_answer": "The enzyme's tertiary/quaternary structure folds to form an active site whose shape and chemical properties (charge, polarity of R groups) are complementary to the specific substrate; substrate binds there, forming enzyme-substrate complex, which lowers activation energy.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Line/scatter graph, independent variable temperature on x",
+     "final_answer": "x-axis: Temperature (°C), 0–60 linear scale; y-axis: Rate of reaction (µmol product/min), 0–100+ linear scale; plot six points (10,13),(20,60),(30,100),(40,60),(50,13),(60,1) connected by lines; peak at 30 °C.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(60-13)/13*100",
+     "final_answer": "(i) (60−13)/13 × 100 ≈ 361.5% (≈362%) increase. (ii) Null hypothesis: Temperature has no effect on the rate of the enzyme-catalyzed reaction.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Denaturation beyond optimum",
+     "final_answer": "The rate at 70 °C will be the same as or lower than at 60 °C, near 0 µmol/min. Rate declines sharply above the 30 °C optimum because high temperature disrupts the hydrogen/ionic bonds that hold tertiary structure, so the enzyme denatures. Active site shape is lost and substrate cannot bind; at 60 °C it is nearly fully denatured already.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Valid long-FRQ bundle: A1/B4/C2/D2 for 9 points, with a graphing part on temperature and enzyme rate. Table data and rubric rows are consistent, and the percent increase of about 362% is correct.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ in AP style. Part A asks for a concept description tied to enzyme structure. Part B asks for a four-point graph (axes, labels, scale, plotted points) from six clean data points. Part C is one percent-change calculation with small integers plus a null hypothesis. Part D asks for a prediction justified by denaturation. All content is in scope for topics 3.1 and 3.2. Difficulty comes from the graph construction and from linking the data to the concept, not from heavy arithmetic or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_biology-f05-k0",
+  "cellId": "ap_biology-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The light reactions in the thylakoid membranes capture light energy. Water is split, which releases O2. Electron transport makes ATP and reduces NADP+ to NADPH, and both are used by the Calvin cycle.",
+     "final_answer": "The light reactions turn light energy into chemical energy. Water is split and O2 is released, and the reactions make ATP and NADPH. The Calvin cycle uses the ATP and NADPH (either one counts) to fix CO2 into sugar.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Use a line graph with the independent variable on the x-axis. Use linear scales, plot all six points and connect them.",
+     "final_answer": "Line graph. X-axis: Light intensity (arbitrary units), 0–800 on a linear scale. Y-axis: Rate of O2 production (µL/min), 0–90. Plot (0,0), (50,30), (100,60), (200,80), (400,80) and (800,80), then connect the points. The rate rises linearly at first and levels off at 80 µL/min from 200 units onward.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Slope = (30 − 0)/(50 − 0) = 0.6. At the plateau, more light does not raise the rate, so something else is limiting, such as CO2 concentration, temperature or enzyme (rubisco) activity.",
+     "final_answer": "(i) (30 − 0) µL/min ÷ (50 − 0) units = 0.6 µL/min per unit of light intensity. (ii) Carbon dioxide concentration (temperature or the amount of enzymes are also acceptable).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "At the plateau, light is no longer the limiting factor; CO2 most likely is. More CO2 would speed up carbon fixation in the Calvin cycle. That regenerates ADP and NADP+ for the light reactions faster, so O2 is released faster.",
+     "final_answer": "The rate would increase above 80 µL/min, until some other factor becomes limiting. At high light, CO2 is limiting, so more CO2 lets the Calvin cycle fix carbon faster. ATP and NADPH get used up faster, so ADP and NADP+ return to the light reactions sooner, which speeds up electron transport and water splitting (O2 release).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle follows the long FRQ Q2 structure (A1, B4 graph construction, C2, D2) for a photosynthesis light-response table. The key values and rubric rows are consistent, and the independent solver agreed on every part. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle as a whole requires the topic concept: the light reactions in part A, the limiting factor at the plateau in parts C and D, and graphing in part B. The skills are mixed across parts, as the Q2 format allows."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Part A accepts ATP or NADPH as the product. Part B scores labels, scale, plotted points and a connected line graph. Part C expects 0.60 with a ±0.02 tolerance, and (ii) lists several valid limiting factors. Part D has a prediction row and a justification row, and the justification requires the prediction. The rows are consistent and alternatives are listed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives all six data pairs with units and states that each value is a mean of repeated trials. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item. The common_errors listed in each rubric row are realistic: glucose made directly, O2 attributed to the Calvin cycle, and CO2 named as the source of O2."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Nine points in about 24 minutes matches the official long FRQ grain. The only calculation is a single division, and the load is typical of the AP exam."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Short free-response item with a small, clean table (6 rows, round numbers). Part A asks for the role of the light reactions and one product used by the Calvin cycle, a standard concept-explanation question tied to the scenario. Part B is the target skill 4.A: choosing axes, labeling with units, scaling, plotting, and drawing a line or curve that shows the plateau. Part C(i) is one simple division (30/50 = 0.6 µL/min per unit), and C(ii) asks for a limiting factor (CO2, temperature, or enzyme/Rubisco capacity). Part D requires predicting that the plateau rises with more CO2 and justifying it through carbon fixation in the Calvin cycle. The concept depth is moderate, and the table-to-graph representation change is the main demand. The arithmetic is trivial, the reading load is low, and the wording is clear. Everything stays within Unit 3 scope (3.3 and 3.4), with no out-of-scope content. This is typical of a full-mock short free-response question rather than a basic or advanced item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_biology-f06-k0",
+  "cellId": "ap_biology-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Definition",
+     "final_answer": "Carrying capacity is the maximum population size of a species that an environment can sustain indefinitely given available resources (food, space, water).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Plot time on x-axis, mice on y-axis",
+     "final_answer": "Line/scatter graph: x-axis Time (weeks) 0–12, y-axis Number of mice 0–400+, with appropriate scales, points plotted and connected, showing a sigmoidal (logistic) curve leveling near 400.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(362-166)/(8-4)=196/4",
+     "final_answer": "(i) 49 mice per week; (ii) about 400 mice",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Less food resource lowers sustainable population",
+     "final_answer": "Carrying capacity would decrease (below ~400) because less food is available, so the island can support fewer mice; increased competition raises death/lowers birth rates.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a valid Q2-style long FRQ with a correct key, a complete table, and a standard 1/4/2/2 point structure. No instant-reject conditions apply.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Bundle requires carrying capacity and growth in A, C and D. Part B assesses 4.A graph construction, consistent with Q2 (A1 B4 C2 D2)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "49 mice/week is correct. The carrying capacity tolerance of ±20 around 397 accepts \"about 400\". The rubric rows are consistent and sum to 9."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with units in the headers. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; common errors are listed per row and are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for the Q2 long FRQ, with light arithmetic and a standard population-growth context."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style short FRQ. It combines a scenario-based definition, a 4-point graph construction (axes, labels, scale, plotting), one simple rate calculation ((362-166)/4 = 49 mice/week), reading the plateau for carrying capacity, and a prediction about a resource disruption. The concepts are core to 8.3/8.4, the numbers are small and rounded, and the wording is unambiguous, so it fits a full mock rather than basic learning or an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_biology-f07-k0",
+  "cellId": "ap_biology-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Enzymes lower activation energy by binding substrate at active site, stabilizing transition state.",
+     "final_answer": "An enzyme binds its substrate at the active site and lowers the activation energy of the reaction (stabilizing the transition state), so the reaction proceeds faster without the enzyme being consumed.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Measured outcome is O2 volume in 2 min.",
+     "final_answer": "Dependent variable: volume of O2 gas produced in 2 minutes (rate of reaction); measured by collecting the gas, e.g., by water displacement in an inverted graduated cylinder or with a gas syringe, and reading the volume after 2 minutes.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Increasing kinetic energy increases collisions up to near optimum (~37 °C).",
+     "final_answer": "Volume of O2 will increase as temperature increases from 10 °C to 37 °C, because molecules move faster and enzyme-substrate collisions become more frequent.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Denaturation at high temp.",
+     "final_answer": "Very little O2 will be produced at 70 °C (much less than at 37 °C), because high temperature breaks the hydrogen bonds and other weak interactions that hold the enzyme's tertiary structure, denaturing catalase. The active site changes shape and can no longer bind hydrogen peroxide, so the reaction rate falls sharply.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ with four 1-point parts that matches the official Q3 structure. Keys and rubric rows are clear and consistent, and topic 3.2 is required across the bundle. Minor wording flaw: part D refers to \"your prediction\" at 70 °C, but part C only asks for a prediction from 10 to 37 °C. This is not disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text scenario is complete. The collection method for the oxygen is not stated, but the rubric accepts a generic \"collecting the gas\". Part D assumes a prediction that was never requested."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four one-point parts, each a single recall or one-step reasoning task on a standard catalase and temperature scenario: enzymes lower activation energy, the dependent variable is the volume of O2 measured over 2 minutes, rate increases with temperature up to the optimum, and high temperature denatures the enzyme and changes the active site. There is no data table or graph, no calculation, and no representation changes. The concept depth is introductory and fits skill 3.C at a basic level. The wording is clear and the experimental conditions are stated, with no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f08-k0",
+  "cellId": "ap_biology-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Definition",
+     "final_answer": "A density-dependent factor is a limiting factor whose effect on a population gets stronger as population density rises. Examples are competition for limited resources, disease, predation and waste buildup. These factors lower birth or growth rates and raise death rates more in crowded populations.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Manipulated vs measured",
+     "final_answer": "Independent variable: the number of seeds planted per container (5, 10, 20 or 40). Dependent variable: the mean mass per plant after four weeks.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Crowding effect",
+     "final_answer": "As the number of seeds per container increases, the mean mass per plant will decrease. Containers with 40 seeds will have the lowest mean mass, and those with 5 seeds the highest.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Fixed resources shared among more plants",
+     "final_answer": "Every container gets the same fixed amount of soil nutrients, water, light and space. With more plants, each plant gets a smaller share, so competition within the species is stronger. Each plant can do less photosynthesis and take up fewer nutrients, so it makes less biomass.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The short FRQ has four 1-point parts: describe, identify variables, predict, justify. This matches the official Q3 structure (A describe, B identify procedure, C predict, D justify). The topic fit to 8.4 is clear, since density-dependent competition is needed in parts A, C and D. Part B directly assesses skill 3.C. Each key is unique and defensible, and the independent solver agreed on all four parts. The scenario is a standard textbook one and states its controlled conditions (same soil, water and light). One weakness: the B rubric criterion wording (\"gives the reason\") does not fit what the prompt asks, but the required element is clear, so scoring is unaffected. Part C does not require a null hypothesis, but the Q3 purpose also allows a prediction, so this is acceptable. Overall the item is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.4 is required across the bundle. Part B assesses 3.C. Parts A, C and D carry their own official Q3 purposes."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has a single clear answer, and the alternate phrasings listed in the rubric rows are valid. The solver matched the keys."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text-only stimulus is complete. It gives the seed numbers, the controlled conditions and the measured quantity, and no data object is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors lists in each rubric row are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a short FRQ (about 10 minutes), with little reading and no calculation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short FRQ on a familiar experiment with no data table and no calculation. Part A is a definition tied to a named concept, B identifies variables read directly from the stem, C is a qualitative inverse-relationship prediction, and D is a resource-competition justification. Each part takes one or two reasoning steps, and the conditions are clearly stated. This is a good fit for foundational learning of 8.4 and skill 3.C, and it is below full-mock exam_prep rigor.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f09-k0",
+  "cellId": "ap_biology-f09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Water moves from higher to lower water potential.",
+     "final_answer": "There is a net movement of water out of the cell, into the solution with the lower water potential. The cell loses water and mass, and a plant cell may plasmolyze.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Temperature, core size and surface area, and potato type all affect osmosis rate.",
+     "final_answer": "Temperature, or the size and surface area of the cores. It should be kept the same because it affects how fast water moves by osmosis. If it changed between trials, differences in mass change could not be blamed only on sucrose concentration.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Null hypothesis: the independent variable has no effect.",
+     "final_answer": "Sucrose concentration has no effect on the percent change in mass of the potato cores.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Distilled water has Ψ = 0, which is higher than the cell's negative water potential.",
+     "final_answer": "The mass will increase. Distilled water has a water potential of 0, which is higher than the negative water potential of the potato cells. Water therefore moves into the cells by osmosis.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ with four 1-point parts matching the official Q3 structure (describe, identify a control, null hypothesis, predict and justify). Topic 2.7 is required throughout, Part B directly assesses 3.C, rubrics are meaning-based with valid alternatives, and the load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard four-part AP-style FRQ on a familiar osmosis lab. Parts require the direction of water movement, a control variable with justification, a null hypothesis, and a water potential prediction. Each part is a single short step and no data or calculation is needed. Concept depth is moderate, and the item suits a full mock exam. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f10-k0",
+  "cellId": "ap_biology-f10",
+  "passed": false,
+  "reasons": [
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Behavioral response (taxis/kinesis).",
+     "final_answer": "An organism can respond with a change in behavior, such as moving toward or away from the cue (taxis) or changing how fast or how often it turns (kinesis). For example, pill bugs move around more in dry conditions and slow down or stay put in humid areas.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Same humidity on both sides.",
+     "final_answer": "Control: a chamber where both halves have the same humidity (both humid or both dry), with all other conditions the same. With no humidity difference, the pill bugs should spread out about evenly (roughly 10 and 10). This shows that any uneven spread in the experiment is caused by humidity, not by the chamber itself, light, or random movement.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "No preference.",
+     "final_answer": "Null hypothesis: humidity has no effect on where pill bugs go. The number of pill bugs in the humid half will not differ from the number in the dry half (expected about 10 in each).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Gills/desiccation.",
+     "final_answer": "Pill bugs are land crustaceans that breathe through gill-like structures, and these must stay moist to take in oxygen. Pill bugs also lose water easily through their exoskeleton. Choosing humid places helps them avoid drying out (desiccation) and breathe properly. So pill bugs that move to humid areas are more likely to survive and reproduce.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The four 1-point parts follow the short-FRQ Q3 structure and are well aligned to the official part purposes. The keys are defensible and the rubric lists alternatives. The scenario resembles the classic pill-bug choice-chamber lab used by the College Board. This is flagged as a resemblance to a known item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle as a whole covers 8.1 (behavioral response to the environment) and targets 3.C in part B. The other parts match the Q3 purposes."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The control in part B is defensible and the alternative answers are listed. The null hypothesis in part C is appropriate. The rubric is meaning-based."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scenario is clear and the wording is fine. The stimulus has no data, and none is needed. It does not state that light and temperature are held constant, which is a minor omission."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ; the rubric lists common errors per part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, with four 1-point parts in about 10 minutes and no calculator work."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four single-point parts, each needing one idea: a behavioral response to humidity, a control chamber with uniform humidity, a null hypothesis of no preference, and a survival justification based on water loss. There is no data to analyze and no calculation. The scenario is concrete and short, so this suits foundational practice rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f11-k0",
+  "cellId": "ap_biology-f11",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_multiple_correct",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Without oxygen, the electron transport chain stops, so NADH cannot be reoxidized there. Fermentation lets glycolysis continue making ATP.",
+     "final_answer": "Fermentation turns pyruvate into ethanol and CO2, which regenerates NAD+ from NADH. This lets glycolysis keep running and making ATP (2 ATP per glucose) without oxygen.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Tube 3 has no yeast, so any gas there cannot come from yeast. Tube 2 (no sugar) is arguably also a negative control.",
+     "final_answer": "Tube 3 (sucrose with no yeast). It shows that sucrose alone does not make gas, so any gas in tube 1 must come from the yeast.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Tube 2 (yeast with no sugar) is also a defensible negative control, since it tests whether gas forms without a substrate. The prompt does not make clear which variable the control is for."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Only tube 1 has both yeast and a substrate. Tube 2 has little stored substrate, and tube 3 has no organisms.",
+     "final_answer": "Tube 1 has the largest balloon. Tube 2 shows little or no inflation. Tube 3 shows no inflation, so tube 1 > tube 2 ≥ tube 3.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Sucrose is broken down into glucose and fructose, which go through glycolysis to pyruvate. Pyruvate is turned into CO2 and ethanol.",
+     "final_answer": "Yeast break down sucrose into hexoses that enter glycolysis. Cellular respiration (aerobic while oxygen is left, then alcoholic fermentation) releases CO2, and pyruvate decarboxylation in fermentation releases more CO2. This gas builds up and inflates the balloon.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "multiple_correct",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is on topic and is a four-part, 1-point short FRQ, but Part B has a key problem. It asks to identify \"the tube\" that is the negative control, while the model answer accepts either tube 2 or tube 3 and the independent solver flagged this ambiguity. The unspecified variable makes the key non-unique. The stimulus is also incomplete: the scenario says \"sealed tubes\" with balloons but does not say whether oxygen is present. This leaves it unclear whether yeast in tube 1 respire aerobically or ferment, which undermines Part A and Part D. The balloon diameter must also change before it can be measured, but no initial diameter or baseline is given. Part A (the role of fermentation) is generic and answerable without the scenario. The short FRQ structure officially expects Q3 parts A (describe), B (identify an experimental procedure), C (null hypothesis or prediction) and D (justify). Part C here is a prediction, which is acceptable. The item is thin on difficulty and has an ambiguous key in B, so it fails.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.5 and skill 3.C are addressed, mainly in Part B. Parts have their own skills (1.A, 3.C, 3.B, 6.C), which is acceptable."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B asks for \"the tube\" but accepts two different tubes, tube 2 or tube 3, because the question does not name which variable the control is for. The solver also flagged this as ambiguous. The Part B rubric is vague (\"a tube that lacks yeast or lacks sugar\"). Part D's rubric allows fermentation CO2, but the scenario never establishes oxygen conditions, so the key relies on an unstated assumption."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Oxygen availability inside the sealed tubes is not stated. The stimulus data object is empty. There is no initial balloon size or volume of sucrose solution, and the sucrose concentration is not given. The scenario conditions are only partly specified."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ with common errors listed per row. They are adequate."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The task load is reasonable for a short FRQ, but the ambiguity in Part B and the unstated oxygen condition make it unsuitable as written. The calculator designation is irrelevant here, and there is no calculation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short 4-part FRQ on a familiar yeast/balloon fermentation setup. Each part needs 1-2 steps: recall of the role of fermentation (regenerating NAD+ so glycolysis continues), identifying the no-yeast tube as the negative control, a simple qualitative ordering prediction, and linking the prediction to sucrose metabolism. There is no data, no calculation and no representation change. The target skill (identifying controls and variables) is applied at an introductory level. Part C's wording leaves the expected ordering of tubes 2 and 3 implicit, which the key should state, but this does not make the item harder.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f12-k0",
+  "cellId": "ap_biology-f12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The ETC takes electrons from NADH and FADH2 and passes them through a series of redox reactions, ending with O2, which is the final electron acceptor and gets reduced to water. The energy released along the way is used to pump H+ from the matrix into the intermembrane space, which builds an electrochemical gradient. This also regenerates NAD+ and FAD.",
+     "final_answer": "The ETC passes electrons from NADH/FADH2 to O2 and uses the energy released to pump protons across the inner membrane, building a proton gradient.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Protons flow back into the matrix down their electrochemical gradient through ATP synthase. This proton flow turns the enzyme, which phosphorylates ADP to make ATP. This process is chemiosmosis (oxidative phosphorylation).",
+     "final_answer": "H+ diffuses down its gradient through ATP synthase, which drives the phosphorylation of ADP to ATP (chemiosmosis).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Compound Z stops electron flow at complex I, so electrons from NADH cannot reach oxygen.",
+     "final_answer": "Oxygen consumption will decrease, falling to near zero.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Complex I cannot pass electrons from NADH on to ubiquinone or the later complexes. As a result, no electrons reach complex IV, and O2 does not receive electrons to be reduced to H2O. The only substrate supplied is NADH, which enters only at complex I, so no electrons get around the block.",
+     "final_answer": "The block at complex I stops electrons from moving down the chain to O2, the final acceptor, so O2 is not reduced to water and is not consumed.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a short FRQ with four 1-point parts that follow the official Q4 Conceptual Analysis structure (describe, explain, predict, justify). All parts address topic 3.5, and the independent solver reached the same answers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle stays within topic 3.5 (electron transport chain, chemiosmosis, oxygen as final electron acceptor). Part B is the 1.B explain part, and the other parts fit their own skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has a single defensible answer. NADH enters at complex I, so blocking complex I stops electron flow to oxygen and oxygen consumption falls. The rubric rows are meaning-based and list alternative wordings. The stimulus states that NADH is the only substrate, which removes ambiguity about FADH2 entering at complex II."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clear. It names the compound, the substrate (NADH), the oxygen supply, and the block at the first complex. No data object is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to the FRQ format. The rubric rows list specific common errors for each part, such as protons converted directly to ATP or oxygen destroyed directly."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 10 minutes for four 1-point parts, which matches the official short FRQ grain. No calculation is needed. The calculator designation is allowed, which is consistent with the subject notes."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short concept-explanation item with a concrete scenario and no data. Parts A and B are standard recall-and-explain on the ETC and chemiosmosis. Parts C and D need one causal step: blocked Complex I stops electron flow to O2, so oxygen consumption drops. No graph, calculation, or misconception rejection is required. This fits core-concept practice better than a full-mock item. Wording is clear and in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f13-k0",
+  "cellId": "ap_biology-f13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "mRNA carries the genetic information from DNA to the ribosome. The ribosome reads its codons (sets of 3 nucleotides) and pairs them with tRNA anticodons, so the codons set the order of amino acids.",
+     "final_answer": "mRNA is the template that carries the gene's code to the ribosome. Its codons are read 5'→3' by complementary tRNA anticodons, which sets the amino acid sequence of the polypeptide.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Removing one nucleotide shifts the triplet reading frame.",
+     "final_answer": "Codons are read in nonoverlapping groups of three, so deleting one nucleotide causes a frameshift. Every codon after the deletion is regrouped, so most of the following amino acids change, and an early stop codon often appears downstream.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "A frameshift near the start changes most of the protein.",
+     "final_answer": "The enzyme will likely be nonfunctional, or its activity will be greatly reduced.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Primary structure determines how the protein folds.",
+     "final_answer": "The altered amino acid sequence (primary structure), which may also be cut short, changes the R-group interactions that control folding into secondary, tertiary and quaternary structure. The active site's shape and chemistry are therefore lost, and the substrate can no longer bind or be catalyzed.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ (four 1-point parts) on frameshift mutation, matching the official Q4 structure (describe, explain, predict, justify). Part B directly assesses explaining the reading-frame mechanism (1.B). The stimulus is clear, the rubric rows are meaning-based with alternative answers listed, and the task load fits a short FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.7 is required throughout. Part B targets 1.B by asking for the reading-frame mechanism. The other parts are legitimate Q4 purposes (describe, predict, justify)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Model answers are unique and defensible. The stem rules out a lost start codon and an immediate stop codon, so loss of function is the clear prediction. Alternatives are listed in the rubric rows."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete, and no data object is needed. The wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. Common errors are listed for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 10 minutes for four 1-point parts, with low reading load and no calculation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four short concept-explanation parts on a frameshift deletion: mRNA's role in translation, why a deletion shifts the reading frame and alters downstream codons, predicting loss of enzyme function, and justifying with protein structure (altered primary sequence, folding, active site). All content is in scope for 6.4 and 6.7. There is no data, calculation or representation change, and the reasoning chain is short and linear. It is mostly direct recall and application of a well-known concept, so it is suited to basic learning rather than full mock exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f14-k0",
+  "cellId": "ap_biology-f14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Rising blood glucose after a meal is detected by pancreatic beta cells, which secrete insulin. Insulin causes body cells to take up glucose and the liver to store it as glycogen, so blood glucose falls. As glucose returns to the set point, insulin secretion decreases. The response reverses the original stimulus.",
+     "final_answer": "High blood glucose triggers beta cells to release insulin. Insulin increases glucose uptake and glycogen storage, which lowers blood glucose back toward the set point. Insulin release then decreases, so the response counteracts the original change.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Insulin binds the extracellular part of its receptor, a receptor tyrosine kinase. This changes the receptor's shape and causes autophosphorylation, which starts a phosphorylation cascade inside the cell. The cascade leads to GLUT4 transporters moving to the plasma membrane and activates glycogen synthesis.",
+     "final_answer": "Binding changes the receptor's shape and activates its kinase activity, so the receptor phosphorylates itself. This starts an intracellular phosphorylation cascade (signal transduction). The cascade causes GLUT4 transporters to be inserted into the membrane and activates enzymes such as glycogen synthase, which increases glucose uptake and storage.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "If the receptor does not work, the insulin signal cannot be received by the cell.",
+     "final_answer": "Glucose uptake by liver and muscle cells will decrease and stay low even when insulin levels are normal, so blood glucose stays high.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Insulin can still bind, or try to bind, but the nonfunctional receptor cannot be activated. Without receptor activation, the signal is not relayed and no cellular response occurs.",
+     "final_answer": "The nonfunctional receptor cannot bind insulin properly or become activated (phosphorylated), so it does not start the intracellular relay cascade. Without this signal transduction, GLUT4 transporters are not moved to the membrane and glycogen synthesis is not stimulated, so cells take up and store less glucose.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is a short FRQ with four 1-point parts that follow the Q4 Conceptual Analysis structure (describe, explain, predict, justify). The scenario is a standard insulin and glucose feedback case that stays within topics 4.2 to 4.4. Each part has its own skill and rubric row, and the meaning-based rubric rows list accepted alternative phrasings. The independent solver's answers agree with the key. No calculator is needed, and the reading load is light.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle covers negative feedback and insulin signal transduction, which fits topic 4.4. Part B assesses 1.B explanation, and the other parts follow their own purposes (describe, predict, justify)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has one defensible answer, and each rubric row lists alternative accepted wordings. The solver's more detailed answers (GLUT4, receptor kinase activity) still meet the required elements."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clear. It states that insulin is normal and receptors are nonfunctional, and no data object is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item. The rubric rows list common errors, such as describing positive feedback or saying insulin enters the cell."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The bundle has four 1-point parts, which is the official short-FRQ grain, and takes about 10 minutes. No arithmetic is required, and the calculator designation is harmless."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Short FRQ with a concrete scenario and no data. It requires describing negative feedback, linking ligand binding to a cellular response, predicting the effect of a receptor disruption, and justifying the prediction with the signal transduction pathway. Each part uses a core CED concept at moderate depth and builds on the previous one. Reading load is minimal, there is no calculation, and the difficulty comes from fair conceptual reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f15-k0",
+  "cellId": "ap_biology-f15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Algae are photosynthetic autotrophs.",
+     "final_answer": "Algae are primary producers. They use photosynthesis to turn light energy and CO2 into organic matter, which is the energy source for consumers. They also release O2 into the water.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Before the runoff, nutrient supply limited algal growth.",
+     "final_answer": "Nitrogen and phosphorus are limiting nutrients. Algae need N to make proteins and nucleic acids, and P to make nucleic acids, ATP and phospholipids. Adding these nutrients removes the limit, so algae can grow and reproduce rapidly.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "This is eutrophication.",
+     "final_answer": "Dissolved oxygen concentration will decrease, possibly to hypoxic levels.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Decomposers use aerobic respiration.",
+     "final_answer": "The large mass of dead algae is food for decomposers such as bacteria, so their population grows. Decomposers break down the organic matter by aerobic cellular respiration, which uses up dissolved O2 faster than it is replaced. Also, the surface algae had blocked light, so less photosynthesis happened below the surface. Fish then suffocate.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard eutrophication short FRQ with four 1-point parts (describe, explain, predict, justify). The scenario is clean and in scope for 8.7, the rubric rows are meaning-based with accepted alternatives, and the independent solver agrees on every part. The load is appropriate for a 10-minute short FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The whole bundle centers on a disruption (nutrient runoff and eutrophication), which fits 8.7. Part B explains limiting nutrients (skill 1.B). The other parts each use their own official purpose: describe, predict, and justify."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has one defensible answer, and the rubric lists alternative phrasings. The solver's answers match the keys. In part D the solver mentions decomposers using oxygen, which satisfies the rubric."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text-only stimulus is complete and clear. No data are needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric's common_errors list realistic misconceptions, such as algae being decomposers or nutrients serving as an energy source."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading load is minimal, there is no arithmetic, and the item fits the short-FRQ format of four 1-point parts."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard eutrophication scenario with four 1-point concept-explanation parts that follow a predictable sequence: producer role, limiting nutrients, decreased dissolved oxygen, decomposer respiration. Each part needs only one or two recall-level steps. There is no data, no calculation and no representation change. The concepts are shallow and cued by the stimulus, so the item suits unit-level learning more than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f16-k0",
+  "cellId": "ap_biology-f16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Water moves passively by osmosis from soil (higher water potential) across the selectively permeable plasma membrane, largely through aquaporins, into root hair cells with lower water potential.",
+     "final_answer": "By osmosis: passive diffusion of water across the root cell membrane (via aquaporins) from higher to lower water potential.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Solute potential Ψs = -iCRT; higher solute concentration makes Ψs more negative, lowering total water potential.",
+     "final_answer": "Increasing solute (salt) concentration lowers (makes more negative) the solute potential and thus the water potential of the soil water.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Soil Ψ drops below root cell Ψ.",
+     "final_answer": "Net water moves out of the root cells into the soil water.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Water moves from higher to lower water potential.",
+     "final_answer": "The salty soil water has a lower (more negative) water potential than the root cells, and water moves from higher to lower water potential. So water leaves the roots, the cells lose turgor pressure, and the plants wilt even though the soil is wet.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is a four-part, 1-point-each short FRQ (Q4 Conceptual Analysis structure: describe, explain, predict, justify) on tonicity and water potential in plants in salty soil. Every part fits topic 2.7. The independent solver's answers match the model answers for all four parts.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle stays within topic 2.7, and the explain part B tests skill 1.B directly. The parts follow the official Q4 purposes of describe, explain, predict and justify."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has one defensible answer, and each rubric row lists alternative accepted wordings. In part C, the prediction that water moves out or less enters is consistent with the stem's wilting."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "A text-only stimulus is appropriate here, and the wording is clear. The empty data object is fine because no numbers are used."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Each rubric row lists specific common errors, such as reversing the direction of the water potential gradient."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading load is light and the 10-minute estimate fits four 1-point parts. No calculation is needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Concrete scenario with no data. Four scaffolded 1-point parts walk through osmosis, solute concentration lowering water potential, direction of net water movement, and justification using water potential. Each part names the needed concept, and answers are short and sequential. No calculation or data reading is required, so this is a core-concept check suited to initial learning rather than a full-mock discriminating item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f17-k0",
+  "cellId": "ap_biology-f17",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Ea = 140 - 50 = 90 kJ/mol; products (30) are lower than reactants (50), so the reaction is exergonic.",
+     "final_answer": "Activation energy ≈ 90 kJ/mol; exergonic",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "ΔG = 30 - 50 = -20 kJ/mol, so free energy is released and the reaction is spontaneous.",
+     "final_answer": "Products have 20 kJ/mol less free energy than reactants (ΔG = -20 kJ/mol), so energy is released and the reaction is exergonic/spontaneous.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The enzyme lowers the peak but leaves the starting and ending levels unchanged.",
+     "final_answer": "Draw a curve that starts at 50 kJ/mol and ends at 30 kJ/mol, like the original, but with a lower peak (for example about 90 kJ/mol instead of 140).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A lower activation energy speeds up the reaction, but ΔG does not change.",
+     "final_answer": "The lower peak shows the enzyme lowers the activation energy, so more molecules can reach the transition state and the reaction goes faster. The reactant and product levels stay the same, so ΔG (-20 kJ/mol) does not change.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ with four 1-point parts following the Q5 purposes (describe, explain, draw, relate to principle). The graph data (50, 140, 30 kJ/mol) fully supports the keys (Ea = 90, exergonic, ΔG = -20). The content is in scope for 3.1 and 3.3. Rubrics are consistent and list accepted alternatives. Minor overlap between parts A and B (exergonic) is not disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1/3.3 content: activation energy, exergonic reactions, catalysis. No out-of-scope kinetics."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are determined by the plotted vertices. Part A bundles two elements into one point, which is acceptable. Alternatives are listed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph spec has axes, ranges and vertices, and states that no enzyme is present. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The FRQ rubrics list realistic common errors (peak as Ea, endergonic, enzyme changes product energy)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 4 points in about 10 minutes fit the short FRQ format. The reading load is light and no heavy calculation is needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single clean energy diagram with round values. A: read peak (140) minus reactant level (50) = 90 kJ/mol, and compare reactants (50) to products (30) to call it exergonic. B: interpret the sign of ΔG. C: sketch a lower activation-energy curve with the same start and end levels. D: explain that a lower activation energy speeds the rate while ΔG is unchanged. Each part is a one- or two-step application of core Unit 3.1/3.3 concepts. No multi-step data analysis, no misconception rejection, and no heavy calculation. It is better suited to practice than to a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_biology-f18-k0",
+  "cellId": "ap_biology-f18",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Unaffected parents have an affected daughter, and the father is unaffected.",
+     "final_answer": "Autosomal recessive",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Rule out each mode in turn.",
+     "final_answer": "Parents I-1 and I-2 are both unaffected but have an affected child (II-2). So both parents must carry a hidden recessive allele, which rules out dominant inheritance. II-2 is an affected female, so under X-linked recessive inheritance she would have received a mutant X from her father, and he would be affected. I-1 is unaffected, so the trait must be autosomal recessive.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Both parents are carriers, so the cross is Aa x Aa.",
+     "final_answer": "I-1 is Aa (heterozygous carrier). II-2 is aa. Punnett square for Aa (I-1) x Aa (I-2): the gametes from each parent are A and a. Offspring are AA, Aa, Aa, aa, giving a 1 AA : 2 Aa : 1 aa genotype ratio. This means a 3 unaffected : 1 affected phenotype ratio, so each child has a 1/4 chance of being affected.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Each parent passes on only one allele, so an aa child needs an a from each parent.",
+     "final_answer": "Each heterozygous parent puts its two alleles into separate gametes during meiosis, so half the gametes carry A and half carry a. An affected aa child (II-2) can only happen if each parent passed on an a gamete. The 3 unaffected : 1 affected ratio, along with the unaffected children (AA or Aa), comes from the random joining of these gametes, which is what segregation predicts.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Four 1-point parts following the Q5 pattern. Autosomal recessive is the unique defensible answer, since the unaffected father with an affected daughter rules out X-linked recessive and two unaffected parents with an affected child rules out dominant. Rubric rows are consistent and meaning-based. Minor weaknesses (the weak 'skipped a generation' alternative in part B, and the table as a loose visual) are not disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle requires Mendelian pedigree and segregation reasoning (5.3, with 5.2 for gamete segregation). Parts mix skills, which is allowed."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique and defensible. The part B alternative 'skipped a generation' is slightly weak but acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete (individuals, sex, phenotypes, parents) and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric lists common errors for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload fits a short FRQ of four 1-point parts in about 10 minutes, and no calculation is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Core 5.3 content with a short, clear table. The student infers autosomal recessive inheritance from unaffected parents with an affected daughter and rules out X-linked recessive because an affected daughter would need an affected father. Then assigns genotypes (Aa and aa), builds a Punnett square, and links the 1:2:1 result to segregation. Several linked reasoning steps and a table-to-Punnett representation change fit a full-mock free-response item. The computation is trivial and there is no ambiguity or out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f19-k0",
+  "cellId": "ap_biology-f19",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Only B and C share Character 3 (along with 1 and 2), so they share the most derived characters.",
+     "final_answer": "Taxa B and C",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Shared derived characters are inherited from a common ancestor in which the trait first appeared.",
+     "final_answer": "A shared derived character first appeared in a common ancestor and was passed to all of its descendants. So taxa that share more derived characters had a more recent common ancestor. B and C share characters 1, 2 and 3. A shares 1 and 2 with them, and D shares only 1. The outgroup has none, which shows these are derived states. This gives the nesting D < A < (B, C).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The sets of taxa with each character are nested, so the tree has one branching order.",
+     "final_answer": "Tree: (Outgroup,(D,(A,(C,B)))). The outgroup branches first. Character 1 is placed on the branch leading to all four taxa, and D splits off next. Character 2 comes next, then A splits off. Character 3 is placed on the branch leading to B and C. Character 4 is on the branch leading only to B.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Branch points stand for common ancestors.",
+     "final_answer": "Each node (branch point) stands for a common ancestor, and every taxon on the tree traces back to one shared root ancestor. The pattern of nested shared derived characters is what you would expect if traits arose once and were passed down, changing over time. This supports the idea that living organisms descended with modification from common ancestors.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Keys are correct and the table is complete. Parts B and D are largely definitional, with little reasoning needed. Part A is a simple table reading, and Part B overlaps with it. The part skills do not align with the official Q5 purposes, and the item is thin on 2.B reasoning, so it fails scope/skill and exam suitability.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Only Part B assesses the labeled skill 2.B, and it is a generic definition of how shared derived characters indicate relationships. Part D is near-recall that a tree shows common descent. The dominant demand is not explaining relationships between model characteristics."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and correct. B and C share characters 1-3, and the nesting D, A, (B, C) is unique. Rubric alternatives are adequate."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clearly worded, with an outgroup and nested characters."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free response; the rubric lists plausible common errors for each part."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Parts A and B are redundant, since both rest on the shared-characters reasoning. The part purposes deviate from the official Q5 structure (describe, explain relationships, represent, relate to a larger principle). Part D is rote and generic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item uses a small, cleanly nested character table with no conflicting characters. Part A requires reading the table to find the pair sharing the most derived characters (B and C). Part B asks for the concept of shared derived characters as evidence of common ancestry and recency of divergence. Part C requires a representation change from table to cladogram, building a nested ladder (Outgroup, D, A, C, B) with the outgroup at the root. Part D connects trees to common ancestry conceptually. Concept depth is moderate and reasoning is a few sequential steps. The only data-driven step is the table-to-tree conversion. There is no calculation, the reading load is low, and nothing is ambiguous or out of scope, so it suits a full mock rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f20-k0",
+  "cellId": "ap_biology-f20",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "3000/20000 ×100",
+     "final_answer": "15%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Energy is lost as heat in cellular respiration, used for metabolism and movement, or left in material that is not eaten or digested (feces, dead matter, which goes to decomposers).",
+     "final_answer": "Most of it is used in cellular respiration and lost as heat. The rest stays in material that is not eaten or not digested (waste, dead organisms) and is used by decomposers.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "450 × 0.15",
+     "final_answer": "67.5 kcal per year (about 68). Add a fourth bar labeled 'Tertiary' at about 67.5 kcal.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Energy shrinks at each level and is lost as heat. It cannot be reused, so the sun has to keep supplying it. Matter is broken down by decomposers and reused.",
+     "final_answer": "Available energy drops by about 85% at each level because it leaves as heat that organisms cannot reuse. So energy moves one way and producers need a constant new supply from sunlight. Matter (for example carbon and nitrogen) is not lost: decomposers return it to the soil and air, where producers take it up again, so matter cycles.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is on topic (8.2) but has structural and scoring problems. The Part C rubric awards no credit for the bar itself, and Part B is too loose.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Topic 8.2 is covered, and parts A, C and D are legitimate for their own skills. Part D tests the energy-flow versus matter-cycling principle in general terms rather than relating model characteristics to the data. Only part B carries skill 2.B, and it is largely recall of where energy goes. The bundle as a whole barely meets the target skill of explaining relationships between model characteristics. The 8.5 extra topic is never assessed."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C asks the student both to calculate and to draw a fourth bar, but the single rubric row is purely numeric (67.5, tolerance ±3.4). Nothing in the rubric awards or checks the drawn bar, so the response mode (\"draw\") and the rubric are inconsistent. Part B accepts a \"heat OR used by the organism\" answer. This is lenient but defensible. Part D's rubric row is kind \"justification\" but requires several elements at once (heat loss, constant input and matter recycling). Under single-point scoring this makes the criterion ambiguous about what suffices."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus data are complete: three categories, three values, axis titles and units. The category labels \"Primary\" and \"Secondary\" are explained in the description. The chart is rendered correctly from the data."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The common_errors listed (energy destroyed, energy recycled) are reasonable."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The 4-point bundle of four 1-point parts follows the short-FRQ structure. However, the official Q5 pattern calls for a describe part A, an explain part B, a represent part C and a principle part D. Here part A is a calculation, which is closer to Q6. The 3000/20000 calculation is trivial. The 10-minute estimate is acceptable. The bar-drawing part is poorly specified for scoring."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four 1-point parts on a clean bar chart: a single percent calculation (3000/20000 = 15%), a standard explanation of energy loss (heat from cellular respiration, waste, uneaten parts), a one-step extrapolation (450 x 0.15 = 67.5 kcal) with a new bar added to the chart, and a conceptual link between one-way energy flow and matter recycling. All content is in the CED for 8.2 and the arithmetic is short and clean. The chart-to-number-to-chart conversions and the synthesis in part D put it at typical AP FRQ level, not basic recall and not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f21-k0",
+  "cellId": "ap_biology-f21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Bottom template runs 3'->5' left to right, so new strand grows 5'->3' toward the fork, continuously.",
+     "final_answer": "Bottom template strand",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The new strand on the top template must run 3'->5' left to right. Polymerase only adds to a 3' end, so synthesis goes away from the fork. It must restart with new primers as more template is exposed, giving Okazaki fragments that ligase joins.",
+     "final_answer": "DNA polymerase only builds 5'->3', so the new strand on the top template grows away from the fork and is made in short Okazaki fragments, each started by a new primer and later joined by ligase.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Complement of GATCCTCGC, antiparallel to 5'...3'.",
+     "final_answer": "3'-CTAGGAGCG-5'",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The daughter duplex has one parental (top template) strand paired with one newly made strand.",
+     "final_answer": "Each new DNA molecule has one original parental strand (the top template) and one newly made complementary strand, so half of the parent molecule is kept.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The four 1-point parts follow the official Q5 structure (describe, explain, represent, relate to a principle) and the keys are correct from the diagram polarity and fork direction. The stimulus data are complete and the rubrics are meaning-based with alternatives. No reject conditions apply.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle centers on DNA replication (6.2) with strand polarity (6.1), and the parts mix skills as the Q5 purposes allow."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Bottom strand is the leading-strand template; the new strand on the top template is CTAGGAGCG with its left end 3' and its right end 5'. The B and D rubrics list valid alternative wordings."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Both strands, their 5'/3' labels and the fork direction are given, which is enough to render the diagram."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item; the common errors listed per part are realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits a short FRQ of about 10 minutes, and no calculation is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Moderate difficulty comes from legitimate levers. Students must read antiparallel orientation labels in the diagram and work out which template supports continuous synthesis given the fork direction. They then apply 5'->3' synthesis to explain Okazaki fragments, write a complementary strand with correct antiparallel end labels (3' on left, 5' on right), and link the template/new strand pair to semiconservative replication. There is no calculation, the reading load is low, the wording is unambiguous, and everything is in CED scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 360
+  }
+ },
+ {
+  "key": "ap_biology-f22-k0",
+  "cellId": "ap_biology-f22",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Rate goes up from 5.9 at pH 4 to a peak of 18.1 at pH 7, then drops to 8.7 at pH 10.",
+     "final_answer": "The rate rises from 5.9 µmol/min at pH 4 to a maximum of 18.1 µmol/min at pH 7, then falls to 8.7 µmol/min at pH 10. The best pH is near 7.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(5.9 − 18.1)/18.1 × 100 = −67.4%",
+     "final_answer": "About a 67.4% decrease (−67.4%)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "pH 7 range is 16.54–19.66. pH 4 range is 5.50–6.30 and pH 10 range is 7.78–9.62. The pH 7 range does not overlap either one.",
+     "final_answer": "The data support the claim. The ±2SE range at pH 7 (16.54–19.66) does not overlap pH 4 (5.50–6.30) or pH 10 (7.78–9.62), so the difference is likely statistically significant.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "At low pH, extra H+ changes the charges on R groups. This breaks ionic and hydrogen bonds and changes the enzyme's shape.",
+     "final_answer": "At pH 4, the high H+ concentration changes the charges on amino acid R groups. This disrupts the ionic and hydrogen bonds that hold the enzyme's tertiary structure, so the active site changes shape (the enzyme partly denatures). The substrate then binds less well, fewer enzyme-substrate complexes form, and the rate is lower than at pH 7.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The short FRQ follows the official Q6 structure of four 1-point parts: describe, calculate, evaluate with ±2SE, and explain. The table gives the mean ± 2SE and n, and every number used appears in it. The keys are correct and unique. The percent change is -67.4%, and the ±2SE ranges at pH 7 (16.54-19.66) do not overlap those at pH 4 (5.50-6.30) or pH 10 (7.78-9.62). Part D asks a concept that the scenario names, which is legitimate. The task load is appropriate for about 10 minutes.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The whole bundle centers on pH effects on enzyme rate (topic 3.2). Part A assesses 4.B, and Parts B to D assess related skills, which the Q6 structure allows. Part D requires the topic concept directly."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and verified. Part B's tolerance of ±0.7 is reasonable. Alternative phrasings are listed in the Part A, C and D rubric rows."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: it has column headers, three rows of mean ± 2SE, and n = 8 stated in the description. The units are given, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors lists in the rubric rows are sensible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a short FRQ: one simple percent-change calculation, which the calculator permits, and brief written responses."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item uses a small 3-row table and four short parts that match allowed levers: describing a pattern with values, one percent-change calculation with simple numbers, a mean ± 2SE range comparison (no overlap, so the claim is supported), and a standard explanation of how pH alters enzyme structure and the active site. The concepts are core Unit 3 and the multi-part structure fits full-mock free-response practice. It is not purely basic because it requires SE interpretation and a calculation. It is not advanced because the numbers are clean, the conditions are clearly stated, and there is no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_biology-f23-k0",
+  "cellId": "ap_biology-f23",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "As density goes up, mean seeds per plant goes down: 61.4 at 5/m², 45.3 at 20/m², and 20.4 at 80/m².",
+     "final_answer": "Higher plant density goes with fewer seeds per plant. The mean drops from 61.4 seeds (5 plants/m²) to 45.3 (20/m²) to 20.4 (80/m²).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(20.4 − 61.4) / 61.4 × 100 = −41.0 / 61.4 × 100 ≈ −66.8%",
+     "final_answer": "About −66.8% (a decrease of roughly 67%)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE ranges are 57.18–65.62 at 5/m², 41.40–49.20 at 20/m² and 18.24–22.56 at 80/m². The 5/m² range does not overlap either of the other two.",
+     "final_answer": "The data support the claim. The 5/m² range (57.18–65.62) does not overlap the 20/m² range (41.40–49.20) or the 80/m² range (18.24–22.56), so the mean at 5/m² is very likely truly greater than both.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Each plant makes fewer seeds as density rises, which suggests stronger competition for limited resources.",
+     "final_answer": "Density-dependent factors, such as competition between plants for light, water, nutrients and space, get stronger as density rises. In crowded plots each plant gets fewer resources, so it puts less into reproduction and makes fewer seeds. This lowers per-capita reproduction and limits population growth at high density.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a short FRQ on seeds per plant at three plant densities (topic 8.4). It has four 1-point parts matching the Q6 Analyze Data structure: A describes the data, B is a calculation, C uses data to evaluate a claim, and D relates the results to a principle. The table is complete, and the independent solver's answers agree with the model answers on all four parts. The scenario is a standard density-dependence setting rather than a copy of a College Board item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle as a whole requires the 8.4 concept in part D (density-dependent limiting factors) and uses density data throughout. Part A matches the target skill 4.B, describing a table. Parts B, C and D assess their own skills (5.A, 5.D/5.B and 6.D), which is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has one defensible answer. The percent change of -66.8% is within the stated tolerance. The ±2SE ranges for 5 plants per m² do not overlap those for either other density, so the claim is supported. The rubric rows list alternative phrasings."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and include the mean ± 2SE and n = 10 plots per density. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors entries in the rubric are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light: a short table, one simple calculation, and a calculator is allowed. It fits a roughly 10-minute short FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part short FRQ on a single small table. Part A describes the inverse trend with values. Part B is one percent-change calculation with rounded numbers (about -66.8%). Part C compares mean ±2SE ranges (57.2-65.6 vs 41.4-49.2 vs 18.2-22.6), which do not overlap, so the claim is supported. Part D links the result to density-dependent limiting factors such as competition for resources. This matches typical AP FRQ demands and uses only the allowed difficulty levers. The wording is unambiguous, the arithmetic is short, and nothing is out of scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_biology-f24-k0",
+  "cellId": "ap_biology-f24",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "As concentration rises, the percent in mitosis falls: 11.9% at 0 µM, 7.0% at 5 µM, 2.4% at 20 µM.",
+     "final_answer": "Negative, dose-dependent relationship: higher drug concentration means a lower mean percent of cells in mitosis (11.9% → 7.0% → 2.4%).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(2.4−11.9)/11.9 ×100 = −9.5/11.9 ×100",
+     "final_answer": "≈ −79.8% (about an 80% decrease)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Ranges: 0 µM 11.08–12.72; 5 µM 6.40–7.60; 20 µM 2.14–2.66. The 0 µM range does not overlap either of the other ranges.",
+     "final_answer": "Supported: the 0 µM ±2SE interval does not overlap the 5 µM or 20 µM intervals, so its mean is very likely truly greater than both.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Checkpoint arrest stops progression before M.",
+     "final_answer": "If the drug activates or imitates a G1 or G2/M checkpoint signal (for example, by blocking CDK/cyclin activity), cells stop in G1 or G2 and cannot enter M phase. Fewer cells reach mitosis, while cells already in mitosis finish dividing, so the fraction of cells in mitosis drops.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The short FRQ follows the Q6 Analyze Data structure: A describes data, B is a calculation, C evaluates a claim, and D relates the results to a principle. Four 1-point parts are consistent with the official short-FRQ grain. The key values (-79.8%, ±2SE ranges, non-overlap) are correct, and the solver agreed on every part. The stimulus is complete, with mean ± 2SE and n stated. Part D ties to checkpoint regulation of the cell cycle (topic 4.6), so the bundle as a whole requires the topic concept. The rubric lists equivalent alternative answers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A tests 4.B directly. Parts B and C use data skills, and D requires the checkpoint concept from topic 4.6. The bundle as a whole fits the topic."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The percent change of -79.8% is correct, and the ±2SE ranges for 0 µM do not overlap the ranges for 5 µM or 20 µM. The rubric rows are unambiguous and each part is worth one point."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives the concentrations, mean ± 2SE, and n = 6, and every number used in the parts appears in it. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors lists in the rubric rows are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, with one simple calculation and a calculator allowed. It fits a short FRQ in about 10 minutes."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item has four short parts: describe a table trend, compute one percent change with rounded values, compare mean ± 2SE ranges for non-overlap, and explain how a checkpoint block lowers the percent of cells in mitosis. It uses only allowed levers (table reading, one formula-sheet calculation, 2SE comparison, a disruption prediction). The reading and arithmetic loads are small and the wording is unambiguous, so the difficulty is conceptual and appropriate for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_biology-f25-k0",
+  "cellId": "ap_biology-f25",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Blue light gave the highest rate (47.6 µL/min), red was in the middle (29.2 µL/min) and green was lowest (12.1 µL/min).",
+     "final_answer": "Oxygen production was highest in blue light (47.6 µL/min), lower in red light (29.2 µL/min) and lowest in green light (12.1 µL/min).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Percent change = (12.1 − 47.6)/47.6 × 100 = −35.5/47.6 × 100 ≈ −74.6%.",
+     "final_answer": "About −74.6%, so the rate dropped by about 75%.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE ranges are: Blue 44.32–50.88, Red 26.12–32.28 and Green 11.06–13.14. The blue range does not overlap either of the others, so the difference is likely statistically significant.",
+     "final_answer": "Yes, the data support the claim. The blue ±2SE range (44.32–50.88 µL/min) does not overlap the red range (26.12–32.28) or the green range (11.06–13.14).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Chlorophyll absorbs mostly blue and red light and reflects green. The light it absorbs drives the light reactions, which split water and release O2.",
+     "final_answer": "Chlorophyll absorbs blue and red light strongly, and that absorbed energy drives the light reactions, which split water and release O2. Chlorophyll absorbs little green light (it mostly reflects it), so oxygen production was lowest in green light.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. It follows the Q6 Analyze Data structure (A and B describe data, with B as a calculation; C evaluates a claim; D relates the results to a principle) with four 1-point parts. The numbers are consistent with the table. The independent solver's answers agree with the key.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Photosynthesis and light absorption by chlorophyll (3.4) are required in Part D and underlie the data. Part A assesses 4.B as targeted. Parts B, C and D assess 5.A, 5.D/5.B and 6.D, which official Q6 parts legitimately mix."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique. Part B, -74.6%, is within the stated tolerance. In Part C, the Blue range (44.32 to 50.88) does not overlap Red (26.12 to 32.28) or Green (11.06 to 13.14), so the claim is supported. The Part A rubric is a little generic, but it requires values and the level with the greatest mean, and its alternative phrasings are listed. Part D accepts equivalent wordings."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has complete data: units, mean ± 2SE, and n = 6. The wording is clear. The Part A rubric's \"levels\" wording is generic but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors rows listed are realistic, such as the misconception that plants absorb green light best because they look green."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical for a short FRQ. One percent-change calculation is a reasonable use of the calculator, and the reading load is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard short free-response item. Part A describes a table pattern with values. Part B is one percent-change calculation on rounded numbers (about -74.6%). Part C compares non-overlapping mean ± 2SE ranges. Part D links the rates to chlorophyll absorbing blue and red light and reflecting green. All difficulty comes from permitted levers (table reading, one proportional calculation, 2SE comparison, governing concept). Reading load is minimal and experimental conditions are clearly stated, so this fits a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f26-k0",
+  "cellId": "ap_biology-f26",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Mean O2 consumption goes up as temperature goes up: 1.2 mL/min at 10 °C, 2.5 at 20 °C and 4.8 at 30 °C. It roughly doubles with each 10 °C rise.",
+     "final_answer": "Oxygen consumption increases with temperature, from 1.2 mL/min (10 °C) to 2.5 (20 °C) to 4.8 (30 °C), roughly doubling every 10 °C.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Percent change = (1.2 − 4.8)/4.8 × 100 = (−3.6/4.8) × 100 = −75%.",
+     "final_answer": "−75% (a 75% decrease)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE ranges are 4.3–5.3 at 30 °C, 2.28–2.72 at 20 °C and 1.0–1.4 at 10 °C. The 30 °C range does not overlap either of the other two.",
+     "final_answer": "The data support the claim. The 30 °C range (4.3–5.3) does not overlap the 20 °C range (2.28–2.72) or the 10 °C range (1.0–1.4), so the difference is likely significant.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Oxygen is the final electron acceptor in the electron transport chain. Higher temperatures speed up the enzymes of respiration, so more electrons pass through the chain and more O2 is used.",
+     "final_answer": "Oxygen is the final electron acceptor at the end of the electron transport chain (it is reduced to water), which lets oxidative phosphorylation make ATP. At higher temperatures, the respiratory enzymes work faster, so the peas respire faster and use more O2. That is why O2 consumption is a measure of the respiration rate.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a valid Q6-style short FRQ with four 1-point parts: describe, calculate, evaluate with ±2SE, and relate to a principle. The keys are unique and verified, and the table is complete. The only flaw is minor: the Part B rubric tolerance (±0.8) is slightly wider than the expected-value tolerance (0.75).",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Bundle requires respiration concepts (oxygen as final electron acceptor, rate of aerobic respiration). Part A is target skill 4.B (describe data). Other parts legitimately use other skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique. 30 °C range 4.30-5.30 does not overlap 2.28-2.72 or 1.00-1.40. Percent change is -75%. Minor tolerance mismatch (±0.8 vs 0.75) is not material."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has columns, units, mean ± 2SE and n = 6 stated in the description. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ; the rubric rows list plausible common errors (such as comparing with only one other level, or concluding not supported)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Low reading and calculation load, a calculator is allowed, and the percent change arithmetic is a single step. This fits the short FRQ time."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part short FRQ on a small 3-row table. Part A describes a trend with values (skill 4.B). Part B is one percent-change calculation with clean numbers: (1.2-4.8)/4.8 = -75%. Part C requires building mean ± 2SE ranges (4.3-5.3, 2.28-2.72, 1.0-1.4) and noting no overlap, so the claim is supported. Part D links oxygen as the final electron acceptor in the ETC to ATP production and rate of respiration. All concepts are in Unit 3 scope; the multi-part format and interval comparison fit a full-mock level, and the difficulty comes from legitimate levers rather than reading or arithmetic burden.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_biology-f27-k0",
+  "cellId": "ap_biology-f27",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Inverse relationship",
+     "final_answer": "As salt concentration increases, mean percent change in mass decreases: +17.8% at 0 M, +3.0% at 0.3 M, -15.6% at 0.6 M (gain turns to loss).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(-15.6-17.8)/17.8*100",
+     "final_answer": "(−15.6 − 17.8)/17.8 × 100 ≈ −188% (a decrease of about 188%)",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Computing the percent change of a value that is already a percent change, and that crosses zero, is not very meaningful, but the calculation can be done."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Non-overlapping 2SE intervals",
+     "final_answer": "Supported: 0 M range is 16.58–19.02, which does not overlap 0.3 M (2.74–3.26) or 0.6 M (−15.80 to −15.40), so the 0 M mean is greater than both.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Hypertonic solution",
+     "final_answer": "The 0.6 M solution has a lower (more negative) water potential than the tissue cells because its solute potential is lower. Water moves by osmosis from higher to lower water potential, so it leaves the tissue and the mass decreases (−15.6%).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fails on part B, which asks for the percent change of a value that is already a percent change and crosses zero. The resulting -187.6% has no sensible biological interpretation. Parts A, C and D are acceptable, and the stimulus is complete.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle requires tonicity and water potential reasoning (parts A and D) and data description (A). Topic and skills fit overall."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B asks for a percent change of a percent-change value that crosses zero. The result (-187.6%) is biologically uninterpretable, and the item has no clear reason to ask for it. Part A's rubric sets requires_numbers to false even though the criterion requires values, which is inconsistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: levels, mean ± 2SE, and n = 8 are all given. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to this free-response item. Common errors are listed for each rubric row."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Part B is a contrived calculation that adds needless arithmetic and has no biological meaning. This is a poor fit for the Q6 data-analysis part purposes. Part C labels the claim as causal although the data show only a difference in means."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical short free-response item on tonicity with a mean ± 2SE table. Four parts: (A) describe the inverse trend using table values; (B) one formula-sheet percent-change calculation, (17.8 to -15.6 is a change of -33.4, about -188%), with small, clean numbers; (C) compare 2SE ranges (15.58-19.02 vs 2.74-3.26 vs -15.8 to -15.4) and find no overlap, so the claim is supported; (D) explain mass loss at 0.6 M with water potential (water moves from higher to lower water potential, out of the tissue, in a hypertonic environment). This needs several reasoning steps and a few representation changes (table to trend, SE ranges to a conclusion, data to concept). It stays within the Unit 2 scope and the allowed difficulty levers. Wording and conditions are unambiguous, and the reading load is light. The arithmetic is short and the calculator is allowed, so no unfair difficulty sources are present.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

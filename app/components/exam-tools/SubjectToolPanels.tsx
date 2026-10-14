@@ -10,6 +10,7 @@ import PhysicsReference from "./PhysicsReference";
 import ChemistryReference from "./ChemistryReference";
 import JavaReference from "./JavaReference";
 import MicroReference from "./MicroReference";
+import BiologyReference from "./BiologyReference";
 import BasicCalculator from "./BasicCalculator";
 import { TabBar } from "./Tabs";
 
@@ -29,6 +30,7 @@ const REFERENCE_PANELS: Record<ReferenceKind, { title: string; Component: Compon
   chemistry: { title: "Reference", Component: ChemistryReference },
   java: { title: "Reference", Component: JavaReference },
   microeconomics: { title: "Reference", Component: MicroReference },
+  biology: { title: "Reference", Component: BiologyReference },
 };
 
 function Modal({ label, show, onClose, closeTestId, children, header }: { label: string; show: boolean; onClose: () => void; closeTestId: string; children: React.ReactNode; header?: React.ReactNode }) {

@@ -1,0 +1,58 @@
+{
+ "runs": [
+  "bio-p1-b"
+ ],
+ "rows": 6,
+ "passed": 2,
+ "rejected": 4,
+ "passRate": 0.333,
+ "mc": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "frq": {
+  "rows": 6,
+  "passed": 2,
+  "passRate": 0.333
+ },
+ "unitsPassed": {},
+ "skillsPassed": {},
+ "figPassed": {
+  "table": 2
+ },
+ "figAll": {
+  "table": 3,
+  "text": 2,
+  "diagram": 1
+ },
+ "figPassRate": {
+  "table": "2/3",
+  "text": "0/2",
+  "diagram": "0/1"
+ },
+ "renderTypesPassed": {
+  "ap_table": 2
+ },
+ "archetypesPassed": {
+  "bif_q1_inhibitor": 1,
+  "bif_q2_potato": 1
+ },
+ "archetypesAll": {
+  "bif_q1_inhibitor": 1,
+  "bif_q2_potato": 1,
+  "bif_q3_osmosis": 1,
+  "bif_q4_cyanide": 1,
+  "bif_q5_replication": 1,
+  "bif_q6_enzymeph": 1
+ },
+ "failedArchetypes": [
+  "bif_q3_osmosis",
+  "bif_q4_cyanide",
+  "bif_q5_replication",
+  "bif_q6_enzymeph"
+ ],
+ "costUsd": {
+  "bio-p1-b": 0.3143
+ }
+}

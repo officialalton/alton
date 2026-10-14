@@ -1,0 +1,446 @@
+[
+ {
+  "key": "ap_biology-f01-k0",
+  "cellId": "ap_biology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Competitive inhibitor structurally resembles substrate and binds the active site, blocking substrate binding, so fewer enzyme-substrate complexes form per unit time and rate decreases.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "It binds reversibly to the enzyme's active site (competing with substrate), preventing substrate from binding, reducing the number of enzyme-substrate complexes formed and thus the reaction rate."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "IV = [compound X]; DV = initial reaction rate. Constants: substrate concentration, enzyme concentration, temperature, pH. Pattern: rate decreases as [X] increases, with diminishing decreases per µM (nonlinear).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(i) IV: concentration of compound X (µM); DV: mean initial reaction rate (µmol product/min). (ii) e.g., substrate concentration (or enzyme concentration, temperature, pH). (iii) As concentration of X increases from 0 to 8 µM, the initial rate decreases (39.1 to 12.3 µmol/min); the decline is nonlinear—smaller decrease per µM at higher concentrations."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(12.3-39.1)/39.1×100 = -68.5%. Intervals 26.26–30.54 vs 18.24–21.96 do not overlap.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(i) (12.3 − 39.1)/39.1 × 100 ≈ −68.5% (a 68.5% decrease). (ii) Yes: 2 µM interval 26.26–30.54 and 4 µM interval 18.24–21.96 do not overlap, so the difference is statistically supported."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "High substrate outcompetes competitive inhibitor for active site, so inhibition is reduced.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Compound X's inhibitory effect would be reduced (rates at each [X] closer to the uninhibited rate, which would approach Vmax), because the much more abundant substrate outcompetes X for the active site, so substrate binds most active sites."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound 9-point FRQ on competitive inhibition. The key and rubric are consistent and the solver agrees on every part. The stimulus is complete, and the task load fits the official free-response grain.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and D require the competitive inhibition concept (3.1). Parts B and C are data-analysis parts with their own skills, which is legitimate. No later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Percent change is -68.5% and the 2 vs 4 µM ±2SE ranges do not overlap. Rubric rows are consistent and the alternative answers are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives n, units, and mean ± 2SE at each level. Wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric rows list realistic common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Parts worth 1/3/3/2 fit the 9-point grain. The load is moderate, and the calculation is simple and fits a calculator-allowed item."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ combining qualitative competitive inhibition, variable identification, one short percent-change calculation, a mean ± 2SE overlap comparison, and a prediction with justification (substrate outcompetes inhibitor). All levers are within the allowed set, with rounded and light arithmetic, in-scope content, and no ambiguity or extra reading. The mix of representations and reasoning steps is typical of a full mock exam item rather than a basic learning item.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_biology-f02-k0",
+  "cellId": "ap_biology-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Definition: water potential (Ψ = Ψs + Ψp) measures how much potential energy water has per unit volume, which sets how free it is to move. Water moves by osmosis.",
+     "final_answer": "Water potential (Ψ = Ψs + Ψp) is the potential energy of water per unit volume compared with pure water at atmospheric pressure. It shows how likely water is to move. Net water movement is from higher (less negative) water potential to lower (more negative) water potential.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Use a line graph because the independent variable is continuous. The points fall on a straight line.",
+     "final_answer": "Line graph: x-axis 'Sucrose molarity (M)' from 0 to 1.0. y-axis 'Percent change in mass (%)' from about -25 to +10, with a zero line. Plot all 6 points, connect them or draw a best-fit line (slope -28% per M, y-intercept 7%), and add a title.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The data are linear: % change = 7 − 28M. Setting this to 0 gives M = 0.25. The x-intercept falls between 0.2 M (+1.4%) and 0.4 M (−4.2%).",
+     "final_answer": "(i) About 0.25 M sucrose (any value from about 0.2 to 0.3 M is acceptable). (ii) Null hypothesis: sucrose molarity has no effect on the percent change in mass of the potato cores.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Ψs = −iCRT. NaCl has i = 2, so 0.4 M NaCl has about the same solute effect as 0.8 M sucrose.",
+     "final_answer": "The cores would lose more mass, giving a more negative percent change (about −15% instead of −4.2%). NaCl splits into 2 ions, so the number of solute particles doubles (i = 2). This makes the solute potential and the solution's water potential more negative, so more water leaves the cores by osmosis.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is a 9-point FRQ (1/4/2/2 points) on topic 2.7: describe water potential, construct a graph (skill 4.A), estimate the zero-change molarity, and predict the effect of NaCl ionization. The data are exactly linear (7 - 28M), so the 0.25 M key is exact and the tolerance of ±0.05 is fine. Rubric rows are separated and have alternatives listed. Minor issues: Part A's rubric credits only the direction of water movement, not the description the prompt asks for. The graph rows require a line connecting the points, while a best-fit line is likely to be credited under the listed alternatives. Overall the item meets all five criteria.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle requires the topic 2.7 concepts of water potential, osmosis, and solute ionization. Part B directly assesses skill 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key of 0.25 M is exact for the linear data, the tolerance is reasonable, and the rubric is consistent. Part A's rubric does not require the description that the prompt asks for."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with six data pairs and a clear description, so a graph can be drawn from it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ item; the common errors listed in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The point grain and time load are typical of an AP Biology long FRQ, and the calculator is allowed and consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ on tonicity and water potential. It asks for a definition, graph construction from a table, interpolation of the zero-net-movement point (about 0.25 M), a null hypothesis, and a prediction using ionization (i = 2) that lowers the external water potential. Data are clean and linear with no long arithmetic. Reading load is modest, and everything is within the CED for topics 2.7 and 2.4. The difficulty comes from standard exam-level skills, not unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_biology-f03-k0",
+  "cellId": "ap_biology-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Water moves from higher to lower water potential.",
+     "final_answer": "There is a net movement of water out of the cell into the solution, because water moves from higher water potential (inside the cell) to lower water potential (outside). The cell loses water and mass, and in plant cells the membrane pulls away from the wall (plasmolysis).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Controlled variable",
+     "final_answer": "Temperature (or core surface area/size, or potato source). It should be kept the same because temperature affects how fast water moves and the solute potential (ψs = −iCRT). If it varied, differences in mass change could not be blamed on sucrose concentration alone.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "No effect",
+     "final_answer": "Sucrose concentration has no effect on the percent change in mass of the potato cores.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Distilled water has ψ=0, which is higher than the cell's ψ",
+     "final_answer": "Positive percent change: the core gains mass (for example, about +10 to +20%). Distilled water has a water potential of 0, which is higher than the negative water potential of the potato cells. So there is a net movement of water into the cells by osmosis until the cell wall's pressure stops further uptake.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is on topic 2.7 and includes a 3.C part, but it is a 4-point set of four 1-point parts rather than a 9-point FRQ. Part A is rote recall of a definition, and part D largely repeats part A. The part C rubric is inconsistent: the criterion accepts \"prediction\" while common_errors rejects predictions. The rubric common_errors and the explanation are generic, and the only design content is a single loosely scored 1-point item in part B.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle requires the topic 2.7 concept. Part B assesses the target skill 3.C."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The part C criterion says \"null hypothesis or prediction\" but common_errors rejects predictions. The part B rubric is loose, accepting any variable that is the same across treatments. Part D accepts a direction only even though it asks for a predicted percent change."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is a text-only description with an empty data object. It does not state conditions that parts B and D rely on, such as replicates or whether the cores are blotted before weighing."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The common_errors are generic and the explanation is minimal."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The bundle is only 4 points in four 1-point parts and has no data to analyze. Part A is rote recall, which the banned difficulty sources exclude. The target skill 3.C carries only 1 point, so the dominant demand is not experimental design."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "All four parts are one-step, short-response prompts on a standard potato-core osmosis lab. A: state the direction of water movement in a lower water potential solution (basic recall of the concept). B: name one controlled variable and give a reason (for example, temperature, time, core size or solution volume). C: state a null hypothesis (no difference in percent change in mass across sucrose concentrations). D: predict a mass gain in distilled water because the core has lower water potential than the surroundings. No calculation is needed and no data need to be read. The stimulus is short and unambiguous. The experimental-design skill (3.C) is assessed at an introductory level, with no multi-step data analysis, no representation changes and no discriminating between misconceptions. This suits foundational practice rather than the integrated reasoning of a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f04-k0",
+  "cellId": "ap_biology-f04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "ETC passes electrons from NADH/FADH2 down a series of carriers to O2 (final acceptor, forming water), using the released energy to pump H+ from the matrix into the intermembrane space, which builds an electrochemical gradient used to make ATP.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "The ETC carries electrons from NADH and FADH2 to O2, which forms water. The energy released is used to pump H+ into the intermembrane space, making a proton gradient that powers ATP synthesis (oxidative phosphorylation)."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "H+ moves down its gradient through ATP synthase, which makes the enzyme rotate. The rotation changes the enzyme's shape so it joins ADP and Pi.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Protons move down their electrochemical gradient (intermembrane space to matrix) through ATP synthase. This flow makes part of the enzyme rotate, and the resulting shape changes join ADP + Pi to make ATP (chemiosmosis)."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Electron flow stops, so oxidative phosphorylation stops.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Mitochondrial ATP production drops sharply, nearly to zero. Only a small amount would still come from the Krebs cycle (substrate-level), and that also stops once NAD+ runs out."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "With no electron flow, no H+ is pumped. The gradient dissipates, so ATP synthase has no proton-motive force to drive it.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Because electrons cannot pass to O2, the chain backs up and the proton pumps stop moving H+ into the intermembrane space. The proton gradient is no longer kept up and runs down, so there is no H+ flow through ATP synthase and no ATP is made."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The item is scientifically correct with a consistent rubric, but parts A and B are rote recall that does not use the cyanide scenario. Only part B targets 1.B, and the 1-point prediction in C is trivial. The bundle fails the no-rote-recall rule, and the cyanide/ETC scenario is a textbook scenario very close to released AP items.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Only one of four points (part B) assesses the target skill 1.B, and it is a standard recall of chemiosmosis with no link to the scenario. Part A is a recall description of the electron transport chain. The topic is 3.5, but the bundle is dominated by recall."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are correct and the rubric rows are consistent with the stated point values. Alternative accepted phrasings are listed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is clear and complete for the questions asked."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. Common errors are listed in each rubric row."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Parts A and B can be answered without the stimulus, so they are rote recall, which the banned difficulty sources exclude. Part C is a trivial one-word prediction. The load fits a short FRQ, but the cognitive demand is below the AP standard for argumentation and data use."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four 1-point parts on core ETC and chemiosmosis concepts. Part A is a description, B is a standard mechanism explanation, C is a direct prediction (ATP production falls), and D is a short causal justification (no electron flow to O2 means no proton pumping, so no gradient and no ATP synthase activity). The stimulus is one short sentence with no data, so there is no table or graph reading and no calculation. The chain is linear and sits squarely within CED 3.5 skill 1.B. It requires understanding rather than pure rote recall, but the depth is introductory. A calculator is permitted but unused.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f05-k0",
+  "cellId": "ap_biology-f05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The fork moves left, so the leading strand has to grow leftward. A strand that grows leftward has its 3' end on the left, so it pairs with a template that runs 5' on the left to 3' on the right. That is the top strand.",
+     "final_answer": "Top template strand",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "DNA polymerase only adds nucleotides to a free 3' end, so new DNA is made 5'→3'. On the bottom template, that direction points away from the moving fork. The polymerase therefore has to keep starting again near the fork, using new RNA primers. It makes short Okazaki fragments, which DNA ligase later joins together.",
+     "final_answer": "The new strand on the bottom template is made 5'→3', which is away from the fork. So it is made in short Okazaki fragments, each started with a new primer, and these are later joined by ligase.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Pair each base of the top strand, GACGCTAA, with its complement. The new strand runs antiparallel to the top strand, so its left end is 3' and its right end is 5'.",
+     "final_answer": "3'-CTGCGATT-5'",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The two strands run in opposite directions. DNA polymerase can only add nucleotides to the 3' end, so it reads the template 3'→5' and builds the new strand 5'→3'. As a result, one new strand (the leading strand) is made continuously toward the fork. The other (the lagging strand) is made in fragments away from the fork. Each new strand is antiparallel to its template, and replication is semiconservative.",
+     "final_answer": "Because the strands are antiparallel and polymerase only builds 5'→3', the two strands are copied differently. The leading strand is made continuously and the lagging strand is made in Okazaki fragments.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The biology and keys are correct, but Parts B and D are redundant, D's prompt is vague and its model answer exceeds its rubric, and the fork direction is not in the structured data. These weaknesses lead me to fail the item on stimulus/expression and exam suitability.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle as a whole covers 6.2 replication and 6.1 antiparallel structure, so topic fit is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are biologically correct: the top template makes the leading strand, and the new strand is 3'-CTGCGATT-5'. The D model answer adds \"one old and one new strand\", which is not among the rubric's required elements."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The fork direction is stated only in the description text and not as a structured data field. Part D's prompt (\"relate ... to the way a DNA molecule is copied\") is vague and does not say what the response should contain."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "As an FRQ, it lists common errors per row, which is adequate."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Parts B and D assess essentially the same reasoning (antiparallel strands and 5'→3' synthesis lead to fragmented synthesis), so the bundle is redundant. Part C is mostly a mechanical complement. The load is low, and the bundle is a thin four 1-point parts."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single core concept (leading/lagging strand synthesis, antiparallel strands, 5'->3' polymerase direction) applied to a short 8-base diagram. Requires determining which template permits continuous synthesis toward a left-moving fork, deriving the complementary strand with correct polarity labels, and explaining Okazaki fragments and antiparallel structure. Moderate reasoning and one representation change, with no heavy arithmetic, little reading, and in-scope content. Fork direction is stated explicitly, so there is no ambiguity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_biology-f06-k0",
+  "cellId": "ap_biology-f06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The rate goes up from pH 4 to pH 7 and then down at pH 10.",
+     "final_answer": "The reaction rate is highest at pH 7 (18.2 µmol/min). It is lower at pH 10 (9.1 µmol/min) and lowest at pH 4 (5.9 µmol/min). So the rate rises from pH 4 to pH 7 and then falls at pH 10.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(18.2 − 5.9)/5.9 × 100",
+     "final_answer": "(18.2 − 5.9)/5.9 × 100 ≈ 208% increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Compare the ±2SE ranges: pH 4 is 5.24–6.56, pH 7 is 16.32–20.08, pH 10 is 8.42–9.78. None overlap.",
+     "final_answer": "The claim is supported among the pH values tested. The ±2SE range at pH 7 (16.32–20.08) does not overlap with the range at pH 4 (5.24–6.56) or pH 10 (8.42–9.78), so the rate at pH 7 is significantly higher than at the other two. However, only three pH values were tested, so the true optimum could be somewhere between them.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A low pH changes the charges on amino acid R groups, which disrupts the enzyme's shape.",
+     "final_answer": "At pH 4 there are extra H+ ions. These change the charges (ionization) on the enzyme's amino acid side chains, which disrupts the hydrogen and ionic bonds that hold its 3-D shape. The active site changes shape or charge (partial denaturation), so less substrate binds and fewer enzyme–substrate complexes form. This makes the rate lower than at pH 7, where the enzyme keeps its normal shape.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle fits the topic and its numbers are correct. Part C's key and rubric are incomplete: they accept a pH 4 versus pH 7 comparison alone and do not require comparison with pH 10 or a caveat about the three tested levels. Part A's rubric is also loose. Fail on key and scoring, flagged as missing_condition.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle as a whole fits 3.2 and 4.B. Part A is a 4.B description. B, C and D use other skills, which is acceptable for a bundle."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C asks whether the claim \"greatest activity at pH 7\" is supported. The model answer and rubric compare only pH 4 and pH 7. They never require comparing pH 7 with pH 10, although a \"greatest\" claim requires comparison with all tested levels. The rubric lets a response that checks only pH 4 earn the point, which is an incomplete test of the claim. The claim is also stated as a causal claim about the enzyme's greatest activity, but only three pH values were tested, so the true optimum is not established. The rubric ignores this limit, and the solver raised it. Part B's tolerance of ±2.1 is fine. Part A's rubric is vague: it does not require pH 7 to be named as the greatest, and requires_numbers is false even though the prompt asks for values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: it gives n = 8, the units and the mean ± 2SE at each pH. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to MC. The rubric lists common errors, but they are generic. In Part A the common error \"describes a pattern the data do not show\" is vague."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is appropriate for a 4-point bundle. Part B's calculation is simple and a calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts on one small table: describe the pattern, compute one percent change (about 208.5%, short arithmetic), compare ±2SE ranges (no overlap, so the claim is supported among tested pHs), and explain how pH alters enzyme structure (R-group ionization, tertiary structure, active site). Uses only allowed levers, is in scope for 3.2, and the wording and conditions are clear. Depth and step count are typical for a full-mock FRQ rather than introductory recall or an advanced stretch.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ }
+]

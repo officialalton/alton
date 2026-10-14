@@ -29,6 +29,7 @@ export function fullPracticeUnitBounds(subject: string | null | undefined, label
   if (subject === "ap_chemistry") return chemUnitBounds();
   if (subject === "ap_microeconomics") return microUnitBounds();
   if (subject === "ap_computer_science_a") return csaUnitBounds();
+  if (subject === "ap_biology") return bioUnitBounds();
   return undefined;
 }
 
@@ -171,6 +172,46 @@ export function verifyCsaFullComposition(items: CsaSetItem[]): string[] {
   if (sets.length < CSA_SET_COUNT.min || sets.length > CSA_SET_COUNT.max) out.push(`shared_sets_${sets.length}_not_in_${CSA_SET_COUNT.min}-${CSA_SET_COUNT.max}`);
   for (const s of sets) {
     if (s.length !== CSA_SET_SIZE) out.push(`set_size_${s.length}_not_${CSA_SET_SIZE}`);
+    const pos = s.map((x) => x.position).sort((a, b) => a - b);
+    if (pos.some((p, i) => i > 0 && p !== pos[i - 1] + 1)) out.push(`set_not_contiguous_${s[0].candidateKey}`);
+  }
+  const ft = frq.map((i) => i.candidateKey).filter(Boolean);
+  if (new Set(ft).size !== ft.length) out.push("frq_duplicate_key");
+  return out;
+}
+
+// ---- AP Biology (2027 CED V.1 p.197–201, docs/ap/biology-facts.md) ----
+// MC 60 = 단독 + 4문항 공유 세트(공식 "typically 4–5 questions each"; 세트 개수는 미공표 — 우리 구성은 회당 정확히 2개이며 "공식 구성"이라 주장하지 않는다), FRQ 6 = Q1·Q2 긴 문항(각 9점) + Q3–Q6 짧은 문항(각 4점) = 6유형 각 1(34점).
+// 단원 MC 비중 U1 8-11 / U2 10-13 / U3 12-16 / U4 10-15 / U5 8-11 / U6 12-16 / U7 13-20 / U8 10-15 % 와 Practice MC 비중 P1 25-33 / P2 16-24 / P3 8-14 / P4 8-14 / P5 8-14 / P6 20-26 % 를 60문항에 옮길 때
+// 하한은 내림, 상한은 올림(bio_coverage.count_bounds 와 같음). 둘 다 차단 조건이다(오너 2026-10-13: 공식 단원·Practice 범위를 처음부터 계획에 넣는다).
+export const BIO_MC_COUNT = 60;
+export const BIO_MC_UNIT_PCT: Record<string, [number, number]> = { "1": [8, 11], "2": [10, 13], "3": [12, 16], "4": [10, 15], "5": [8, 11], "6": [12, 16], "7": [13, 20], "8": [10, 15] };
+export const BIO_MC_PRACTICE_PCT: Record<string, [number, number]> = { "1": [25, 33], "2": [16, 24], "3": [8, 14], "4": [8, 14], "5": [8, 14], "6": [20, 26] };
+export const BIO_SET_SIZE = 4;
+export const BIO_SET_COUNT = 2;
+export const BIO_FRQ_TYPES = ["bio_q1_results", "bio_q2_graphing", "bio_q3_investigation", "bio_q4_conceptual", "bio_q5_model", "bio_q6_data"] as const;
+export const BIO_FRQ_COUNT = 6;
+export const bioUnitBounds = (): UnitBounds => mapFloorCeil(BIO_MC_UNIT_PCT, BIO_MC_COUNT);
+export const bioPracticeBounds = (): UnitBounds => mapFloorCeil(BIO_MC_PRACTICE_PCT, BIO_MC_COUNT);
+/** 공식 비중 중앙값 × 60(제안, 공식 고정 아님; 중앙값 합이 정확히 100% 라 문항 수 합 60): U1 5.7·U2 6.9·U3 8.4·U4 7.5·U5 5.7·U6 8.4·U7 9.9·U8 7.5. */
+export const BIO_FULL_TARGET = { units: Object.fromEntries(Object.entries(BIO_MC_UNIT_PCT).map(([u, [lo, hi]]) => [u, ((lo + hi) / 2 * BIO_MC_COUNT) / 100])) as Record<string, number> };
+
+export type BioSetItem = { kind: "mc" | "frq"; unit: string | null; skill: string | null; candidateKey: string | null; position: number };
+/** Biology 풀 세트 구성 검증(순수, 차단 위반): MC 60·FRQ 6, 단원 범위, Practice 범위, 4문항 공유 세트 정확히 2개(연속 위치). FRQ 유형·문항군·시험 간 구조 중복은 계획기·배정기가 재고로 따로 본다. */
+export function verifyBioFullComposition(items: BioSetItem[]): string[] {
+  const out: string[] = [];
+  const mc = items.filter((i) => i.kind === "mc"), frq = items.filter((i) => i.kind === "frq");
+  if (mc.length !== BIO_MC_COUNT) out.push(`mc_count_${mc.length}/${BIO_MC_COUNT}`);
+  if (frq.length !== BIO_FRQ_COUNT) out.push(`frq_count_${frq.length}/${BIO_FRQ_COUNT}`);
+  for (const [u, b] of Object.entries(bioUnitBounds())) { const n = mc.filter((i) => i.unit === u).length; if (n < b.min || n > b.max) out.push(`unit_${u}_${n}_not_in_${b.min}-${b.max}`); }
+  for (const [p, b] of Object.entries(bioPracticeBounds())) { const n = mc.filter((i) => (i.skill ?? "").startsWith(`${p}.`)).length; if (n < b.min || n > b.max) out.push(`practice_${p}_${n}_not_in_${b.min}-${b.max}`); }
+  if (mc.some((i) => (i.skill ?? "") === "4.A")) out.push("skill_4A_not_assessed_in_mc");
+  const byKey = new Map<string, BioSetItem[]>();
+  for (const i of mc) if (i.candidateKey) byKey.set(i.candidateKey, [...(byKey.get(i.candidateKey) ?? []), i]);
+  const sets = [...byKey.values()].filter((v) => v.length > 1);
+  if (sets.length !== BIO_SET_COUNT) out.push(`shared_sets_${sets.length}/${BIO_SET_COUNT}`);
+  for (const s of sets) {
+    if (s.length !== BIO_SET_SIZE) out.push(`set_size_${s.length}_not_${BIO_SET_SIZE}`);
     const pos = s.map((x) => x.position).sort((a, b) => a - b);
     if (pos.some((p, i) => i > 0 && p !== pos[i - 1] + 1)) out.push(`set_not_contiguous_${s[0].candidateKey}`);
   }

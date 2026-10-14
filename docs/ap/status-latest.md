@@ -100,3 +100,8 @@
 ## Microeconomics MI1·MI2 조립 완료 (2026-10-13, 누적 $78.1525 / 중단선 $90)
 - 원형 MC 110(5지선다)·FRQ 8유형, 공식 단원·스킬 범주·수치 분석·FRQ 과제 유형 범위 내장. 유료 합계 $9.72(P1 $2.03 + P2 $7.69), 통과 MC 184·FRQ 11, 화면 증거 195후보 × 2 뷰포트 fail 0(`evidence-micro-s2.json`).
 - 정확 배정 `data/ap/stock/exact-assign-micro-mi1-mi2.json`: 각 MC 60 + FRQ 3(긴 1 + 짧은 2), 가상 0, 위반 0, 겹침 0, FRQ 유형도 서로 다름. 적재 배치 `micro-p1a, p1b, p2f, p2a, p2b, p2c, p2d`. 상세 `docs/ap/microeconomics-groundwork.md`, 사실 `microeconomics-facts.md`.
+
+## Biology BI1·BI2 조립 완료 (2026-10-14, 누적 $104.7711 / 중단선 $145, Biology $16.69 / 캡 $22)
+- 단독 MC 163 + 세트 8 + FRQ 6유형 29시나리오 원형(코드 우선) → 파일럿 $2.30, s2 $7.47(MC 2 + 세트·FRQ), 부족분 R1–R4 $6.9. 통과 MC·세트 문항 포함 총 9개 배치 `bio-*`.
+- **BI1·BI2 정확 배정: 가상 칸 0**, 각 회 MC 60(단독 52 + 세트 2) + FRQ 6, 두 회 겹침 0, 단원·Practice 범위 충족. 화면 증거 392항목 fail 0. 상세: `docs/ap/biology-groundwork.md` §9–10.
+- 남은 일: 적재(`STOCK_BATCHES` 9배치, 관리자 "전체 적재")·BI 조립 초안 생성(오너 실행). Biology FRQ 는 종이 제출.

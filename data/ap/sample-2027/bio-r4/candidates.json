@@ -1,0 +1,2808 @@
+[
+ {
+  "candidateKey": "ap_biology-m01-k0",
+  "cellId": "ap_biology-m01",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "6.3",
+  "unitCode": "6",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_transcription_concept",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step concept recall of the function of the 5' cap and poly-A tail in a brief eukaryotic scenario. There is no data, calculation or representation change. The distractors (amino acid addition, intron removal, DNA copying) are clearly distinct misconceptions, so the correct option can be chosen after one reasoning step. This fits the topic 6.3 and skill 1.A scope and sits at foundational level, below full-mock target difficulty.",
+  "payload": {
+   "archetype": "bi_transcription_concept",
+   "topic": "6.3",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "In a eukaryotic cell, a newly made primary transcript receives a 5' cap and a poly-A tail before it is used for translation. Which statement best describes the function of these modifications?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "They add amino acids to the mRNA so that the protein can begin to fold.",
+     "why": "Amino acids are added during translation by ribosomes, not by modifying the mRNA.",
+     "value": null
+    },
+    {
+     "text": "They remove the introns so that only the coding sequence remains in the mRNA.",
+     "why": "Introns are removed by splicing, which is a different modification.",
+     "value": null
+    },
+    {
+     "text": "They copy the DNA template so that more mRNA can be made from the gene.",
+     "why": "Copying a template is transcription, which is not the function of the cap and tail.",
+     "value": null
+    },
+    {
+     "text": "They protect the mRNA from degradation and help it to be exported and translated.",
+     "why": "The cap and tail stabilize the mRNA and help ribosomes recognize it after it leaves the nucleus.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 65,
+   "facts": [
+    "In a eukaryotic cell, a newly made primary transcript receiv"
+   ],
+   "blueprint": {
+    "id": "bi_transcription_concept",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "explain eukaryotic RNA processing",
+    "topic": "6.3",
+    "skill": "1.A",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: explain eukaryotic RNA processing",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Amino acids are added during translation by ribosomes, not by modifying the mRNA."
+     },
+     {
+      "id": "m2",
+      "description": "Introns are removed by splicing, which is a different modification."
+     },
+     {
+      "id": "m3",
+      "description": "Copying a template is transcription, which is not the function of the cap and tail."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 6.3",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9500,
+   "pack_id": "bi_transcription_concept-s9500",
+   "explanation_en": "The correct answer is They protect the mRNA from degradation and help it to be exported and translated.. The cap and tail stabilize the mRNA and help ribosomes recognize it after it leaves the nucleus.\nThey add amino acids to the mRNA so that the protein can begin to fold. is incorrect: Amino acids are added during translation by ribosomes, not by modifying the mRNA.\nThey remove the introns so that only the coding sequence remains in the mRNA. is incorrect: Introns are removed by splicing, which is a different modification.\nThey copy the DNA template so that more mRNA can be made from the gene. is incorrect: Copying a template is transcription, which is not the function of the cap and tail."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_transcription_concept",
+   "facts": [
+    "In a eukaryotic cell, a newly made primary transcript receiv"
+   ],
+   "seed": 9500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.3 (RNA processing: 5' cap, poly-A tail), skill 1.A describing a process. Directly in scope; splicing mechanism is not required in detail."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the only correct statement. The cap and tail protect mRNA from degradation and aid export and translation. The other three describe translation, splicing and transcription."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and self-contained, and the option wording is parallel and in US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: translation, splicing, transcription. The explanation addresses every wrong option. Option lengths are similar, with no giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, with no calculator load. It is somewhat recall-oriented but applies the concept to a concrete situation, which is acceptable for 1.A."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous 1.A item on 6.3 RNA processing. The key is unique, the distractors are distinct misconceptions, and the load is typical of an AP item."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept recall of the function of the 5' cap and poly-A tail in a brief eukaryotic scenario. There is no data, calculation or representation change. The distractors (amino acid addition, intron removal, DNA copying) are clearly distinct misconceptions, so the correct option can be chosen after one reasoning step. This fits the topic 6.3 and skill 1.A scope and sits at foundational level, below full-mock target difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m01-k1",
+  "cellId": "ap_biology-m01",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "6.3",
+  "unitCode": "6",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_transcription_concept",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step concept recall of RNA processing (intron removal, exon joining) in a brief concrete scenario. No data, calculation, or representation change. Distractors are simple misconceptions (exon/intron swap, ribosome cutting, incomplete transcription). It is in scope for 6.3 and skill 1.A, but it is too straightforward for a full-mock exam_prep item.",
+  "payload": {
+   "archetype": "bi_transcription_concept",
+   "topic": "6.3",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A researcher isolates a gene from a eukaryotic cell and finds that the mature mRNA from the gene is shorter than the gene itself. Which process best explains why the mature mRNA is shorter?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Exons were removed from the primary transcript, and the remaining introns were joined together.",
+     "why": "Exons code for the protein and stay in the mature mRNA, so this reverses the roles.",
+     "value": null
+    },
+    {
+     "text": "Ribosomes cut the mRNA into shorter pieces while it was translated in the cytoplasm.",
+     "why": "Translation reads the mRNA and does not shorten it, and splicing occurs earlier in the nucleus.",
+     "value": null
+    },
+    {
+     "text": "RNA polymerase copied only part of each gene because it cannot copy a complete sequence.",
+     "why": "RNA polymerase copies the whole gene, and the shortening happens after transcription.",
+     "value": null
+    },
+    {
+     "text": "Introns were removed from the primary transcript, and the remaining exons were joined together.",
+     "why": "RNA processing removes noncoding introns and joins the exons before the mRNA leaves the nucleus.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 65,
+   "facts": [
+    "A researcher isolates a gene from a eukaryotic cell and find"
+   ],
+   "blueprint": {
+    "id": "bi_transcription_concept",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "explain eukaryotic RNA processing",
+    "topic": "6.3",
+    "skill": "1.A",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: explain eukaryotic RNA processing",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Exons code for the protein and stay in the mature mRNA, so this reverses the roles."
+     },
+     {
+      "id": "m2",
+      "description": "Translation reads the mRNA and does not shorten it, and splicing occurs earlier in the nucleus."
+     },
+     {
+      "id": "m3",
+      "description": "RNA polymerase copies the whole gene, and the shortening happens after transcription."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 6.3",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9501,
+   "pack_id": "bi_transcription_concept-s9501",
+   "explanation_en": "The correct answer is Introns were removed from the primary transcript, and the remaining exons were joined together.. RNA processing removes noncoding introns and joins the exons before the mRNA leaves the nucleus.\nExons were removed from the primary transcript, and the remaining introns were joined together. is incorrect: Exons code for the protein and stay in the mature mRNA, so this reverses the roles.\nRibosomes cut the mRNA into shorter pieces while it was translated in the cytoplasm. is incorrect: Translation reads the mRNA and does not shorten it, and splicing occurs earlier in the nucleus.\nRNA polymerase copied only part of each gene because it cannot copy a complete sequence. is incorrect: RNA polymerase copies the whole gene, and the shortening happens after transcription."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_transcription_concept",
+   "facts": [
+    "A researcher isolates a gene from a eukaryotic cell and find"
+   ],
+   "seed": 9501
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short reading load, about 60 seconds, and no calculation required. The correct option is only slightly more detailed than the others, and option lengths are similar.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, single-skill concept item on intron removal and exon joining, with a unique key and distinct misconception-based distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept recall of RNA processing (intron removal, exon joining) in a brief concrete scenario. No data, calculation, or representation change. Distractors are simple misconceptions (exon/intron swap, ribosome cutting, incomplete transcription). It is in scope for 6.3 and skill 1.A, but it is too straightforward for a full-mock exam_prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m02-k0",
+  "cellId": "ap_biology-m02",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "6.2",
+  "unitCode": "6",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_replication_enzyme_scenario",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: identify DNA ligase's role in joining Okazaki fragments and predict the effect of blocking it. Distractors are named enzyme-role misconceptions (helicase, DNA polymerase, primase). No data, calculation, or representation change. Short, clear wording; difficulty is not from unfair sources.",
+  "payload": {
+   "archetype": "bi_replication_enzyme_scenario",
+   "topic": "6.2",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A researcher adds a drug that blocks DNA ligase to dividing cells. Which result is most likely during DNA replication in the treated cells?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The two parental strands cannot separate, because DNA ligase unwinds the double helix.",
+     "why": "Helicase unwinds the double helix, and DNA ligase joins fragments.",
+     "value": null
+    },
+    {
+     "text": "New nucleotides cannot be added to the leading strand, because DNA ligase adds the nucleotides.",
+     "why": "DNA polymerase adds nucleotides, and the leading strand is made without fragments.",
+     "value": null
+    },
+    {
+     "text": "RNA primers are not made, because DNA ligase builds the primers on each strand.",
+     "why": "Primase builds the RNA primers, and DNA ligase does not make them.",
+     "value": null
+    },
+    {
+     "text": "Gaps remain between the Okazaki fragments on the lagging strand, because the fragments are not joined together.",
+     "why": "DNA ligase joins the Okazaki fragments, so blocking it leaves nicks in the lagging strand.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 65,
+   "facts": [
+    "A researcher adds a drug that blocks DNA ligase to dividing "
+   ],
+   "blueprint": {
+    "id": "bi_replication_enzyme_scenario",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "relate replication enzymes to their functions in a scenario",
+    "topic": "6.2",
+    "skill": "1.A",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: relate replication enzymes to their functions in a scenario",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Helicase unwinds the double helix, and DNA ligase joins fragments."
+     },
+     {
+      "id": "m2",
+      "description": "DNA polymerase adds nucleotides, and the leading strand is made without fragments."
+     },
+     {
+      "id": "m3",
+      "description": "Primase builds the RNA primers, and DNA ligase does not make them."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 6.2",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9500,
+   "pack_id": "bi_replication_enzyme_scenario-s9500",
+   "explanation_en": "The correct answer is Gaps remain between the Okazaki fragments on the lagging strand, because the fragments are not joined together.. DNA ligase joins the Okazaki fragments, so blocking it leaves nicks in the lagging strand.\nThe two parental strands cannot separate, because DNA ligase unwinds the double helix. is incorrect: Helicase unwinds the double helix, and DNA ligase joins fragments.\nNew nucleotides cannot be added to the leading strand, because DNA ligase adds the nucleotides. is incorrect: DNA polymerase adds nucleotides, and the leading strand is made without fragments.\nRNA primers are not made, because DNA ligase builds the primers on each strand. is incorrect: Primase builds the RNA primers, and DNA ligase does not make them."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_replication_enzyme_scenario",
+   "facts": [
+    "A researcher adds a drug that blocks DNA ligase to dividing "
+   ],
+   "seed": 9500
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item fits topic 6.2 and skill 1.A. It uses a concrete drug scenario and asks the student to apply enzyme functions, so it is not pure vocabulary matching. Option D (key) is the only defensible answer: blocking ligase leaves gaps between Okazaki fragments on the lagging strand. Each distractor swaps in the wrong enzyme (helicase, polymerase, primase) and carries its own rationale. No stimulus is needed, and the reading load and timing are typical.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies the roles of the replication enzymes to a concrete scenario, which fits 6.2 and 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique and correct. Ligase seals nicks between Okazaki fragments, and the other enzymes still function."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is required. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor assigns ligase the function of another enzyme: helicase, polymerase and primase. The rationales are accurate and specific to each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, with no calculation and a short stem. This is typical of an AP item."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify DNA ligase's role in joining Okazaki fragments and predict the effect of blocking it. Distractors are named enzyme-role misconceptions (helicase, DNA polymerase, primase). No data, calculation, or representation change. Short, clear wording; difficulty is not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m02-k1",
+  "cellId": "ap_biology-m02",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "6.2",
+  "unitCode": "6",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_replication_enzyme_scenario",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step concept item: identify DNA ligase's role (joining Okazaki fragments) and predict the effect of blocking it. Distractors attribute the functions of primase, helicase, and DNA polymerase to ligase, so the student must reject named misconceptions. There is no data, calculation, or representation change, and the reading load is minimal. It fits skill 1.A as a concrete situation without data. It is more than pure vocabulary because it requires predicting a disruption, but the reasoning is shallow and direct.",
+  "payload": {
+   "archetype": "bi_replication_enzyme_scenario",
+   "topic": "6.2",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A researcher adds a drug that blocks DNA ligase to dividing cells. Which result is most likely during DNA replication in the treated cells?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "RNA primers are not made, because DNA ligase builds the primers on each strand.",
+     "why": "Primase builds the RNA primers, and DNA ligase does not make them.",
+     "value": null
+    },
+    {
+     "text": "The two parental strands cannot separate, because DNA ligase unwinds the double helix.",
+     "why": "Helicase unwinds the double helix, and DNA ligase joins fragments.",
+     "value": null
+    },
+    {
+     "text": "New nucleotides cannot be added to the leading strand, because DNA ligase adds the nucleotides.",
+     "why": "DNA polymerase adds nucleotides, and the leading strand is made without fragments.",
+     "value": null
+    },
+    {
+     "text": "Gaps remain between the Okazaki fragments on the lagging strand, because the fragments are not joined together.",
+     "why": "DNA ligase joins the Okazaki fragments, so blocking it leaves nicks in the lagging strand.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 65,
+   "facts": [
+    "A researcher adds a drug that blocks DNA ligase to dividing "
+   ],
+   "blueprint": {
+    "id": "bi_replication_enzyme_scenario",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "relate replication enzymes to their functions in a scenario",
+    "topic": "6.2",
+    "skill": "1.A",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: relate replication enzymes to their functions in a scenario",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Primase builds the RNA primers, and DNA ligase does not make them."
+     },
+     {
+      "id": "m2",
+      "description": "Helicase unwinds the double helix, and DNA ligase joins fragments."
+     },
+     {
+      "id": "m3",
+      "description": "DNA polymerase adds nucleotides, and the leading strand is made without fragments."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 6.2",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9502,
+   "pack_id": "bi_replication_enzyme_scenario-s9502",
+   "explanation_en": "The correct answer is Gaps remain between the Okazaki fragments on the lagging strand, because the fragments are not joined together.. DNA ligase joins the Okazaki fragments, so blocking it leaves nicks in the lagging strand.\nRNA primers are not made, because DNA ligase builds the primers on each strand. is incorrect: Primase builds the RNA primers, and DNA ligase does not make them.\nThe two parental strands cannot separate, because DNA ligase unwinds the double helix. is incorrect: Helicase unwinds the double helix, and DNA ligase joins fragments.\nNew nucleotides cannot be added to the leading strand, because DNA ligase adds the nucleotides. is incorrect: DNA polymerase adds nucleotides, and the leading strand is made without fragments."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_replication_enzyme_scenario",
+   "facts": [
+    "A researcher adds a drug that blocks DNA ligase to dividing "
+   ],
+   "seed": 9502
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.2: relates replication enzyme (ligase) function to a concrete scenario. This fits skill 1.A (describe a biological process) and stays within Unit 6 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only D is correct. DNA ligase joins Okazaki fragments, so blocking it leaves nicks on the lagging strand. Options A to C each assign another enzyme's function to ligase."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and self-contained, and all conditions are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (primase, helicase, and polymerase functions attributed to ligase). The explanation addresses each wrong option accurately. The correct option is slightly longer, by only a few words."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, short reading load, no calculation. Typical of AP Biology multiple choice."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, single-skill replication-enzyme scenario with a unique key and distinct misconception distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept item: identify DNA ligase's role (joining Okazaki fragments) and predict the effect of blocking it. Distractors attribute the functions of primase, helicase, and DNA polymerase to ligase, so the student must reject named misconceptions. There is no data, calculation, or representation change, and the reading load is minimal. It fits skill 1.A as a concrete situation without data. It is more than pure vocabulary because it requires predicting a disruption, but the reasoning is shallow and direct.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m03-k0",
+  "cellId": "ap_biology-m03",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "3.4",
+  "unitCode": "3",
+  "skillPrimary": "4.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_leafdisk_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-step description of a small table: compare two columns across time and pick the statement that matches. Two distractors are plainly contradicted by the data; the key requires only noting that bright light reaches higher counts earlier. No calculation, no representation change, no misconception rejection beyond simple reading. Skill 4.B is addressed at an entry level, suitable for initial learning rather than full-mock exam items.",
+  "payload": {
+   "archetype": "bis_leafdisk_set",
+   "topic": "3.4",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "set_intro": "A student places leaf disks in bicarbonate solution under two light intensities and counts how many of ten disks float over time. Disks float when oxygen from photosynthesis collects inside them. The table shows the data.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Number of leaf disks floating (out of 10) over time at two light intensities",
+    "data": {
+     "columns": [
+      "Time (minutes)",
+      "Disks floating in bright light",
+      "Disks floating in dim light"
+     ],
+     "rows": [
+      [
+       "2",
+       "1",
+       "0"
+      ],
+      [
+       "4",
+       "3",
+       "0"
+      ],
+      [
+       "6",
+       "7",
+       "1"
+      ],
+      [
+       "8",
+       "9",
+       "3"
+      ],
+      [
+       "10",
+       "10",
+       "7"
+      ],
+      [
+       "12",
+       "10",
+       "9"
+      ],
+      [
+       "14",
+       "10",
+       "10"
+      ],
+      [
+       "16",
+       "10",
+       "10"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_leafdisk_set_q1",
+     "topic": "3.4",
+     "skill": "4.B",
+     "stem": "Which statement best describes the data in the table?",
+     "options": [
+      {
+       "text": "No disks floated in either light intensity.",
+       "why": "Disks floated in both light intensities.",
+       "value": null
+      },
+      {
+       "text": "The same number of disks floated at each time in both light intensities.",
+       "why": "The numbers of floating disks differ between the two light intensities.",
+       "value": null
+      },
+      {
+       "text": "More disks floated sooner in bright light than in dim light.",
+       "why": "In bright light 9 disks were floating at 8 minutes, compared with 3 in dim light.",
+       "value": null
+      },
+      {
+       "text": "More disks floated sooner in dim light than in bright light.",
+       "why": "The table shows more disks floating in bright light at each early time.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is More disks floated sooner in bright light than in dim light.. In bright light 9 disks were floating at 8 minutes, compared with 3 in dim light.\nNo disks floated in either light intensity. is incorrect: Disks floated in both light intensities.\nThe same number of disks floated at each time in both light intensities. is incorrect: The numbers of floating disks differ between the two light intensities.\nMore disks floated sooner in dim light than in bright light. is incorrect: The table shows more disks floating in bright light at each early time.",
+     "est_seconds": 55,
+     "blueprint": {
+      "id": "bis_leafdisk_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "describe a comparison of two treatments in a table",
+      "topic": "3.4",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: describe a comparison of two treatments in a table",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "floating disks"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Disks floated in both light intensities."
+       },
+       {
+        "id": "m2",
+        "description": "The numbers of floating disks differ between the two light intensities."
+       },
+       {
+        "id": "m3",
+        "description": "The table shows more disks floating in bright light at each early time."
+       }
+      ],
+      "verification": {
+       "independent_path": "counts compared at each time vs the generating light effect",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_leafdisk_set_q2",
+     "topic": "3.4",
+     "skill": "5.A",
+     "stem": "Assuming a steady change between measurements, what is the best estimate of the time at which half of the disks had floated in bright light?",
+     "options": [
+      {
+       "text": "9.0 minutes",
+       "why": "Reports the time for the dim light treatment.",
+       "value": "9.0000000"
+      },
+      {
+       "text": "5.0 minutes",
+       "why": "Five disks is half of ten. Between 4 minutes (3 disks) and 6 minutes (7 disks), the time is estimated by interpolation: 5.0 minutes.",
+       "value": "5.0000000"
+      },
+      {
+       "text": "4.0 minutes",
+       "why": "Reports the last measured time before more than five disks had floated in bright light.",
+       "value": "4.0000000"
+      },
+      {
+       "text": "6.0 minutes",
+       "why": "Reports the first measured time at which more than five disks had floated in bright light.",
+       "value": "6.0000000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is 5.0 minutes. Five disks is half of ten. Between 4 minutes (3 disks) and 6 minutes (7 disks), the time is estimated by interpolation: 5.0 minutes.\n9.0 minutes is incorrect: Reports the time for the dim light treatment.\n4.0 minutes is incorrect: Reports the last measured time before more than five disks had floated in bright light.\n6.0 minutes is incorrect: Reports the first measured time at which more than five disks had floated in bright light.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_leafdisk_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "median floating time by interpolation",
+      "topic": "3.4",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: median floating time by interpolation",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "floating disks"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Reports the time for the dim light treatment."
+       },
+       {
+        "id": "m2",
+        "description": "Reports the last measured time before more than five disks had floated in bright light."
+       },
+       {
+        "id": "m3",
+        "description": "Reports the first measured time at which more than five disks had floated in bright light."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fraction interpolation vs the generating logistic midpoint",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_leafdisk_set_q3",
+     "topic": "3.4",
+     "skill": "5.A",
+     "stem": "Assume a steady change between measurements to estimate the time at which half of the disks had floated in each light intensity. Using these times, the rate of photosynthesis in bright light is how many times the rate in dim light? (Assume that the rate is inversely proportional to the time for half of the disks to float.)",
+     "options": [
+      {
+       "text": "14.0",
+       "why": "Adds the two times instead of dividing one by the other.",
+       "value": "14.000000"
+      },
+      {
+       "text": "4.0",
+       "why": "Subtracts the two times instead of dividing one by the other.",
+       "value": "4.0000000"
+      },
+      {
+       "text": "1.8",
+       "why": "The rate is inversely proportional to the time, so the rate ratio is the dim light time divided by the bright light time: 9.0 / 5.0 = 1.8.",
+       "value": "1.8000000"
+      },
+      {
+       "text": "0.6",
+       "why": "Divides the time for bright light by the time for dim light.",
+       "value": "0.55555556"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 1.8. The rate is inversely proportional to the time, so the rate ratio is the dim light time divided by the bright light time: 9.0 / 5.0 = 1.8.\n14.0 is incorrect: Adds the two times instead of dividing one by the other.\n4.0 is incorrect: Subtracts the two times instead of dividing one by the other.\n0.6 is incorrect: Divides the time for bright light by the time for dim light.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "bis_leafdisk_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "relative rates from times to half floating",
+      "topic": "3.4",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: relative rates from times to half floating",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "floating disks"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Adds the two times instead of dividing one by the other."
+       },
+       {
+        "id": "m2",
+        "description": "Subtracts the two times instead of dividing one by the other."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the time for bright light by the time for dim light."
+       }
+      ],
+      "verification": {
+       "independent_path": "ratio of interpolated times vs the generating midpoints",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_leafdisk_set_q4",
+     "topic": "3.4",
+     "skill": "6.E",
+     "stem": "A third treatment places the leaf disks in very dim light, much dimmer than the dim light treatment. Which prediction is best supported by the data and by the process of photosynthesis?",
+     "options": [
+      {
+       "text": "Disks would float even later than in dim light, because less light energy would drive the light reactions and oxygen production would be slower.",
+       "why": "Less light reduces the output of the light reactions, so less oxygen collects in the disks per minute.",
+       "value": null
+      },
+      {
+       "text": "Disks would float at the same time as in dim light, because light changes only how many disks float and not how fast.",
+       "why": "The data show that the time at which disks float changes with light intensity.",
+       "value": null
+      },
+      {
+       "text": "Disks would float sooner than in the dim light treatment, because less light leaves more carbon dioxide available.",
+       "why": "The data show that less light slows floating, and carbon dioxide supply is not changed by light.",
+       "value": null
+      },
+      {
+       "text": "Disks would never float, because oxygen production stops completely at any light level below bright light.",
+       "why": "Disks floated under dim light, so oxygen production continues at lower light intensities.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is Disks would float even later than in dim light, because less light energy would drive the light reactions and oxygen production would be slower.. Less light reduces the output of the light reactions, so less oxygen collects in the disks per minute.\nDisks would float at the same time as in dim light, because light changes only how many disks float and not how fast. is incorrect: The data show that the time at which disks float changes with light intensity.\nDisks would float sooner than in the dim light treatment, because less light leaves more carbon dioxide available. is incorrect: The data show that less light slows floating, and carbon dioxide supply is not changed by light.\nDisks would never float, because oxygen production stops completely at any light level below bright light. is incorrect: Disks floated under dim light, so oxygen production continues at lower light intensities.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_leafdisk_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "predict the effect of lower light on oxygen production",
+      "topic": "3.4",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: predict the effect of lower light on oxygen production",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "floating disks"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The data show that the time at which disks float changes with light intensity."
+       },
+       {
+        "id": "m2",
+        "description": "The data show that less light slows floating, and carbon dioxide supply is not changed by light."
+       },
+       {
+        "id": "m3",
+        "description": "Disks floated under dim light, so oxygen production continues at lower light intensities."
+       }
+      ],
+      "verification": {
+       "independent_path": "trend of the half-floating time against light vs the light-reaction model",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 290,
+   "facts": [
+    "hi=[1, 3, 7, 9, 10, 10, 10, 10]",
+    "lo=[0, 0, 1, 3, 7, 9, 10, 10]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_leafdisk_set_q1",
+   "facts": [
+    "hi=[1, 3, 7, 9, 10, 10, 10, 10]",
+    "lo=[0, 0, 1, 3, 7, 9, 10, 10]"
+   ],
+   "seed": 9500
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "The leaf-disk table sits in topic 3.4, and the task is describing table data, which is skill 4.B. No content from later units is needed."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option C is the only defensible answer. Bright light has more disks floating at every time from 2 to 12 minutes, and both conditions reach 10 by 14 minutes. Options A, B and D are each plainly contradicted by the table."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table data is complete, with columns and rows consistent with the stem. The method and the 10-disk total are stated in the stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors are distinct wrong readings of the table: no disks floated, identical counts, and the reversed comparison. The explanation addresses each one. A and B are fairly trivial but acceptable for a data-description item."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The item takes about 55 seconds, with a light reading load and no calculation, which fits the reference pattern. It is a very easy item, but it is suitable for skill 4.B."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a correct, unambiguous table-description question for topic 3.4 and skill 4.B. It is easy, but it is within the reference pattern and passes all five criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "About 75 seconds, a light reading load, and a calculator is acceptable.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound: the key is correct and unique, the stimulus is complete, the distractors are distinct, and it is suitable for the exam."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "About 90 seconds, a calculator is allowed, and the reading load is light.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct and well formed, with a unique key and distinct distractors."
+   },
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Passes all five criteria. A is the unique defensible prediction, and each distractor encodes a distinct named misconception.",
+    "scope_skill": {
+     "pass": true,
+     "notes": "Predicts the effect of reduced light on oxygen production, which fits 3.4 and skill 6.E."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "The table shows floating is delayed in dim light compared with bright light, so even dimmer light predicts even later floating. A is unique. D's claim of \"never\" under any sub-bright light is contradicted by the dim-light data."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete and the wording is clear. The stem names the bicarbonate solution but does not say the CO2 supply is held constant, which is a minor point."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "B, C and D each encode a distinct misconception, and the explanation addresses each accurately."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The task takes about 70 seconds with light reading load and no calculation, and the calculator designation is consistent."
+    }
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step description of a small table: compare two columns across time and pick the statement that matches. Two distractors are plainly contradicted by the data; the key requires only noting that bright light reaches higher counts earlier. No calculation, no representation change, no misconception rejection beyond simple reading. Skill 4.B is addressed at an entry level, suitable for initial learning rather than full-mock exam items.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single table read plus one simple linear interpolation (5 disks lies midway between 3 at 4 min and 7 at 6 min, so 5.0 min). Minimal biological reasoning, small whole numbers, no representation change, and clear wording. Distractors are nearest-table-value or wrong-column errors. Suitable for basic practice rather than full mock exam depth.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the table, identify the 5-disk (half) threshold, linearly interpolate in each condition (5 min bright, 9 min dim), then convert times to rates via the stated inverse proportionality and compute a ratio (1.8). Arithmetic is clean and short, wording and conditions are explicit, and the context is a standard AP leaf disk lab. The difficulty comes from multi-step quantitative reasoning (the allowed levers), not from unfair sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The student reads a small two-column table, notices that dim light delays floating compared with bright light, and extrapolates to very dim light using the link between light energy and O2 production. This is about two reasoning steps with one clear governing relationship and no calculation. The distractors are easy to reject (light has no effect on rate, less light frees up CO2, oxygen production stops completely below bright light). There is little reading and no arithmetic, and the item is in scope for topic 3.4.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m03-k1",
+  "cellId": "ap_biology-m03",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "3.4",
+  "unitCode": "3",
+  "skillPrimary": "4.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_leafdisk_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single direct comparison of two table columns across time points; no calculation, no inference about mechanism, and distractors are plainly contradicted by the data. Aligns with skill 4.B at an entry level. Wording is clear and conditions are stated, so no unfair difficulty sources.",
+  "payload": {
+   "archetype": "bis_leafdisk_set",
+   "topic": "3.4",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "set_intro": "A student places leaf disks in bicarbonate solution under two light intensities and counts how many of ten disks float over time. Disks float when oxygen from photosynthesis collects inside them. The table shows the data.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Number of leaf disks floating (out of 10) over time at two light intensities",
+    "data": {
+     "columns": [
+      "Time (minutes)",
+      "Disks floating in bright light",
+      "Disks floating in dim light"
+     ],
+     "rows": [
+      [
+       "2",
+       "1",
+       "0"
+      ],
+      [
+       "4",
+       "3",
+       "0"
+      ],
+      [
+       "6",
+       "7",
+       "0"
+      ],
+      [
+       "8",
+       "9",
+       "1"
+      ],
+      [
+       "10",
+       "10",
+       "3"
+      ],
+      [
+       "12",
+       "10",
+       "7"
+      ],
+      [
+       "14",
+       "10",
+       "9"
+      ],
+      [
+       "16",
+       "10",
+       "10"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_leafdisk_set_q1",
+     "topic": "3.4",
+     "skill": "4.B",
+     "stem": "Which statement best describes the data in the table?",
+     "options": [
+      {
+       "text": "More disks floated sooner in bright light than in dim light.",
+       "why": "In bright light 9 disks were floating at 8 minutes, compared with 1 in dim light.",
+       "value": null
+      },
+      {
+       "text": "More disks floated sooner in dim light than in bright light.",
+       "why": "The table shows more disks floating in bright light at each early time.",
+       "value": null
+      },
+      {
+       "text": "The same number of disks floated at each time in both light intensities.",
+       "why": "The numbers of floating disks differ between the two light intensities.",
+       "value": null
+      },
+      {
+       "text": "No disks floated in either light intensity.",
+       "why": "Disks floated in both light intensities.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is More disks floated sooner in bright light than in dim light.. In bright light 9 disks were floating at 8 minutes, compared with 1 in dim light.\nMore disks floated sooner in dim light than in bright light. is incorrect: The table shows more disks floating in bright light at each early time.\nThe same number of disks floated at each time in both light intensities. is incorrect: The numbers of floating disks differ between the two light intensities.\nNo disks floated in either light intensity. is incorrect: Disks floated in both light intensities.",
+     "est_seconds": 55,
+     "blueprint": {
+      "id": "bis_leafdisk_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "describe a comparison of two treatments in a table",
+      "topic": "3.4",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: describe a comparison of two treatments in a table",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "floating disks"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The table shows more disks floating in bright light at each early time."
+       },
+       {
+        "id": "m2",
+        "description": "The numbers of floating disks differ between the two light intensities."
+       },
+       {
+        "id": "m3",
+        "description": "Disks floated in both light intensities."
+       }
+      ],
+      "verification": {
+       "independent_path": "counts compared at each time vs the generating light effect",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_leafdisk_set_q2",
+     "topic": "3.4",
+     "skill": "5.A",
+     "stem": "Assuming a steady change between measurements, what is the best estimate of the time at which half of the disks had floated in bright light?",
+     "options": [
+      {
+       "text": "11.0 minutes",
+       "why": "Reports the time for the dim light treatment.",
+       "value": "11.000000"
+      },
+      {
+       "text": "5.0 minutes",
+       "why": "Five disks is half of ten. Between 4 minutes (3 disks) and 6 minutes (7 disks), the time is estimated by interpolation: 5.0 minutes.",
+       "value": "5.0000000"
+      },
+      {
+       "text": "6.0 minutes",
+       "why": "Reports the first measured time at which more than five disks had floated in bright light.",
+       "value": "6.0000000"
+      },
+      {
+       "text": "4.0 minutes",
+       "why": "Reports the last measured time before more than five disks had floated in bright light.",
+       "value": "4.0000000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is 5.0 minutes. Five disks is half of ten. Between 4 minutes (3 disks) and 6 minutes (7 disks), the time is estimated by interpolation: 5.0 minutes.\n11.0 minutes is incorrect: Reports the time for the dim light treatment.\n6.0 minutes is incorrect: Reports the first measured time at which more than five disks had floated in bright light.\n4.0 minutes is incorrect: Reports the last measured time before more than five disks had floated in bright light.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_leafdisk_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "median floating time by interpolation",
+      "topic": "3.4",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: median floating time by interpolation",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "floating disks"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Reports the time for the dim light treatment."
+       },
+       {
+        "id": "m2",
+        "description": "Reports the first measured time at which more than five disks had floated in bright light."
+       },
+       {
+        "id": "m3",
+        "description": "Reports the last measured time before more than five disks had floated in bright light."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fraction interpolation vs the generating logistic midpoint",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_leafdisk_set_q3",
+     "topic": "3.4",
+     "skill": "5.A",
+     "stem": "Assume a steady change between measurements to estimate the time at which half of the disks had floated in each light intensity. Using these times, the rate of photosynthesis in bright light is how many times the rate in dim light? (Assume that the rate is inversely proportional to the time for half of the disks to float.)",
+     "options": [
+      {
+       "text": "2.0",
+       "why": "Uses the first measured times at which more than five disks had floated instead of the interpolated times.",
+       "value": "2.0000000"
+      },
+      {
+       "text": "0.5",
+       "why": "Divides the time for bright light by the time for dim light.",
+       "value": "0.45454545"
+      },
+      {
+       "text": "2.2",
+       "why": "The rate is inversely proportional to the time, so the rate ratio is the dim light time divided by the bright light time: 11.0 / 5.0 = 2.2.",
+       "value": "2.2000000"
+      },
+      {
+       "text": "6.0",
+       "why": "Subtracts the two times instead of dividing one by the other.",
+       "value": "6.0000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 2.2. The rate is inversely proportional to the time, so the rate ratio is the dim light time divided by the bright light time: 11.0 / 5.0 = 2.2.\n2.0 is incorrect: Uses the first measured times at which more than five disks had floated instead of the interpolated times.\n0.5 is incorrect: Divides the time for bright light by the time for dim light.\n6.0 is incorrect: Subtracts the two times instead of dividing one by the other.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "bis_leafdisk_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "relative rates from times to half floating",
+      "topic": "3.4",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: relative rates from times to half floating",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "floating disks"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses the first measured times at which more than five disks had floated instead of the interpolated times."
+       },
+       {
+        "id": "m2",
+        "description": "Divides the time for bright light by the time for dim light."
+       },
+       {
+        "id": "m3",
+        "description": "Subtracts the two times instead of dividing one by the other."
+       }
+      ],
+      "verification": {
+       "independent_path": "ratio of interpolated times vs the generating midpoints",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_leafdisk_set_q4",
+     "topic": "3.4",
+     "skill": "6.E",
+     "stem": "A third treatment places the leaf disks in very dim light, much dimmer than the dim light treatment. Which prediction is best supported by the data and by the process of photosynthesis?",
+     "options": [
+      {
+       "text": "Disks would float at the same time as in dim light, because light changes only how many disks float and not how fast.",
+       "why": "The data show that the time at which disks float changes with light intensity.",
+       "value": null
+      },
+      {
+       "text": "Disks would float sooner than in the dim light treatment, because less light leaves more carbon dioxide available.",
+       "why": "The data show that less light slows floating, and carbon dioxide supply is not changed by light.",
+       "value": null
+      },
+      {
+       "text": "Disks would float even later than in dim light, because less light energy would drive the light reactions and oxygen production would be slower.",
+       "why": "Less light reduces the output of the light reactions, so less oxygen collects in the disks per minute.",
+       "value": null
+      },
+      {
+       "text": "Disks would never float, because oxygen production stops completely at any light level below bright light.",
+       "why": "Disks floated under dim light, so oxygen production continues at lower light intensities.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Disks would float even later than in dim light, because less light energy would drive the light reactions and oxygen production would be slower.. Less light reduces the output of the light reactions, so less oxygen collects in the disks per minute.\nDisks would float at the same time as in dim light, because light changes only how many disks float and not how fast. is incorrect: The data show that the time at which disks float changes with light intensity.\nDisks would float sooner than in the dim light treatment, because less light leaves more carbon dioxide available. is incorrect: The data show that less light slows floating, and carbon dioxide supply is not changed by light.\nDisks would never float, because oxygen production stops completely at any light level below bright light. is incorrect: Disks floated under dim light, so oxygen production continues at lower light intensities.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_leafdisk_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "predict the effect of lower light on oxygen production",
+      "topic": "3.4",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: predict the effect of lower light on oxygen production",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "floating disks"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The data show that the time at which disks float changes with light intensity."
+       },
+       {
+        "id": "m2",
+        "description": "The data show that less light slows floating, and carbon dioxide supply is not changed by light."
+       },
+       {
+        "id": "m3",
+        "description": "Disks floated under dim light, so oxygen production continues at lower light intensities."
+       }
+      ],
+      "verification": {
+       "independent_path": "trend of the half-floating time against light vs the light-reaction model",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 290,
+   "facts": [
+    "hi=[1, 3, 7, 9, 10, 10, 10, 10]",
+    "lo=[0, 0, 0, 1, 3, 7, 9, 10]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_leafdisk_set_q1",
+   "facts": [
+    "hi=[1, 3, 7, 9, 10, 10, 10, 10]",
+    "lo=[0, 0, 0, 1, 3, 7, 9, 10]"
+   ],
+   "seed": 9502
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Describes table data in the leaf disk photosynthesis context; fits 4.B and topic 3.4."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "A is uniquely supported by the table. B, C and D are contradicted by it."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table data is complete, with units and clear column headings. The wording is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Every wrong option is explained, but the distractors are weak and trivially false (especially D). This is acceptable for a basic describe-data item."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The item takes about 55 seconds, needs no calculation, and has a low reading load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key is unique and the table is complete, so the item is acceptable. The distractors are easy and not realistic misconceptions, which is a minor weakness at the 4.B level."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Interpolating the time at which half of the disks float (ET50) is a standard calculation within the photosynthesis leaf-disk context (3.4, skill 5.A)."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Linear interpolation between (4, 3) and (6, 7) gives 5.0 min at 5 disks. This is the unique correct answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table has complete columns and rows, and all the numbers the item uses appear in it. The wording is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "11.0 is the dim-light interpolation. 6.0 is the first measured time above five disks. 4.0 is the last measured time before that. All are distinct, realistic errors and each has a rationale."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The task takes about 75 seconds, has a light reading load, and needs a single simple calculation."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean item: the key is correct and unique, the stimulus is complete, the distractors are distinct, and the load is appropriate. Pass."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Leaf-disk photosynthesis data with interpolation and a ratio calculation fits topic 3.4 and skill 5.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Half-float times are 5 min and 11 min by linear interpolation, so the ratio is 2.2. The key is unique and the stem states the assumptions."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete and all numbers used appear in it. The wording is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors come from distinct misconceptions: using the first measured times (2.0), inverting the ratio (0.45, shown as 0.5), and subtracting the times (6.0). The explanation covers each wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The task takes about 90 seconds, with a light calculation and a calculator allowed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key of 2.2 is unique and every number needed appears in the table. The distractors map to distinct misconceptions. The only minor flaw is that \"0.5\" is a loose rounding of 0.45, but no other option is close to it."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Predicting the effect of lower light on oxygen production from leaf-disk data fits topic 3.4 and skill 6.E. It requires linking light intensity to the light reactions, and nothing from later units is needed."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option C is the only defensible prediction. The table shows dim light delays floating relative to bright light, and the stem says the new light is much dimmer. A is contradicted by the data, B reverses the causal direction, and D is contradicted by the dim-light disks floating."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete, with clear columns and 8 time rows. The conditions are stated: bicarbonate solution, ten disks, and the cause of floating. The wording is clear and the stem uses only numbers from the table."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct misconception: light affects only the number of disks and not the rate, less light frees up CO2, and oxygen production stops entirely below bright light. The explanation addresses each wrong option specifically. The correct option is slightly longer, but only by a few words."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The item takes about 70 seconds, requires no calculation, has a small table, and has four parallel-sentence options. It is typical of the AP Biology exam."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean 6.E prediction question on the leaf-disk context. It has a unique key, a complete table, and distinct misconception-based distractors, and its time and reading load are appropriate for the exam. It passes all criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single direct comparison of two table columns across time points; no calculation, no inference about mechanism, and distractors are plainly contradicted by the data. Aligns with skill 4.B at an entry level. Wording is clear and conditions are stated, so no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 30
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step linear interpolation from a small table: half of 10 disks = 5, which lies midway between 3 disks (4 min) and 7 disks (6 min), giving 5.0 min. Requires reading one column of the table and a trivial calculation. Little conceptual depth beyond knowing that the disk-floating assay indicates photosynthetic rate. Distractors correspond to the dim-light half point (11 min) and the bracketing endpoints (4, 6 min).",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the table, linearly interpolate the time to 5 floating disks in each light condition (5 min and 11 min), then apply inverse proportionality to get the rate ratio 11/5 = 2.2. Requires choosing the governing relationship (rate = 1/time) and a few clean calculation steps; the arithmetic is short and the assumptions are stated, so the difficulty comes from legitimate sources. The inverted ratio (0.5) is a plausible distractor.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "One-step qualitative prediction: lower light intensity means slower light reactions and slower O2 accumulation. The table shows a clear trend (bright light reaches 10 floating disks by 10 min, dim light by 16 min), and extending it to very dim light is a direct extrapolation. The distractors are easily rejected: a CO2-availability misconception, 'light has no effect on rate', and 'oxygen production stops entirely'. No calculation and a short stem. It fits target skill 6.E but is accessible and not full-mock level.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m04-k0",
+  "cellId": "ap_biology-m04",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "4.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_cell_cycle_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single small table with equal N in both groups. The student compares interphase vs. mitotic counts and rejects three clearly wrong statements (the total count is unchanged, 8 treated cells are not in interphase, the counts differ between groups). No calculation is needed and the concept demand is low (describing a shift toward interphase / fewer dividing cells). This fits foundational practice on describing data rather than a full-mock item.",
+  "payload": {
+   "archetype": "bis_cell_cycle_set",
+   "topic": "4.6",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "set_intro": "A student treats onion root tips with a drug and counts cells in each stage of the cell cycle in treated and control root tips. The table shows the counts.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Number of root-tip cells in each stage of the cell cycle in a control group and in a group treated with a drug (N = 200 cells counted in each group)",
+    "data": {
+     "columns": [
+      "Stage",
+      "Control",
+      "Treated"
+     ],
+     "rows": [
+      [
+       "Interphase",
+       "170",
+       "192"
+      ],
+      [
+       "Prophase",
+       "13",
+       "3"
+      ],
+      [
+       "Metaphase",
+       "6",
+       "1"
+      ],
+      [
+       "Anaphase",
+       "4",
+       "1"
+      ],
+      [
+       "Telophase",
+       "7",
+       "3"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_cell_cycle_set_q1",
+     "topic": "4.6",
+     "skill": "4.B",
+     "stem": "Which statement best describes the data in the table?",
+     "options": [
+      {
+       "text": "The drug changed the number of cells counted in the treated group.",
+       "why": "The number of cells counted was the same in both groups.",
+       "value": null
+      },
+      {
+       "text": "The drug caused a change in the distribution of cells among the stages of mitosis, compared with the control.",
+       "why": "The treated group has 1 cells in metaphase compared with 6 in the control, and its distribution among the stages differs.",
+       "value": null
+      },
+      {
+       "text": "The drug caused all treated cells to enter interphase.",
+       "why": "The treated group still has cells in each stage of mitosis.",
+       "value": null
+      },
+      {
+       "text": "The drug had no effect, because cells in all stages are present in both groups.",
+       "why": "The number of cells in each stage differs between the control and the treated group.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is The drug caused a change in the distribution of cells among the stages of mitosis, compared with the control.. The treated group has 1 cells in metaphase compared with 6 in the control, and its distribution among the stages differs.\nThe drug changed the number of cells counted in the treated group. is incorrect: The number of cells counted was the same in both groups.\nThe drug caused all treated cells to enter interphase. is incorrect: The treated group still has cells in each stage of mitosis.\nThe drug had no effect, because cells in all stages are present in both groups. is incorrect: The number of cells in each stage differs between the control and the treated group.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "bis_cell_cycle_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "describe differences between control and treated distributions",
+      "topic": "4.6",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: describe differences between control and treated distributions",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "stage counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The number of cells counted was the same in both groups."
+       },
+       {
+        "id": "m2",
+        "description": "The treated group still has cells in each stage of mitosis."
+       },
+       {
+        "id": "m3",
+        "description": "The number of cells in each stage differs between the control and the treated group."
+       }
+      ],
+      "verification": {
+       "independent_path": "stage counts compared between groups vs the generating drug effect",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_cell_cycle_set_q2",
+     "topic": "4.6",
+     "skill": "5.A",
+     "stem": "The mitotic index is the percent of cells in mitosis (all stages except interphase). What is the mitotic index of the control group?",
+     "options": [
+      {
+       "text": "18%",
+       "why": "Divides the cells in mitosis by the cells in interphase.",
+       "value": "17.647059"
+      },
+      {
+       "text": "85%",
+       "why": "Reports the percent of control cells in interphase.",
+       "value": "85.000000"
+      },
+      {
+       "text": "7%",
+       "why": "Reports the percent of cells in prophase only.",
+       "value": "6.5000000"
+      },
+      {
+       "text": "15%",
+       "why": "The control group has 30 cells in mitosis out of 200, so the mitotic index is 30 / 200 x 100 = 15%.",
+       "value": "15.000000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is 15%. The control group has 30 cells in mitosis out of 200, so the mitotic index is 30 / 200 x 100 = 15%.\n18% is incorrect: Divides the cells in mitosis by the cells in interphase.\n85% is incorrect: Reports the percent of control cells in interphase.\n7% is incorrect: Reports the percent of cells in prophase only.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_cell_cycle_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "mitotic index from counts",
+      "topic": "4.6",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: mitotic index from counts",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "stage counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Divides the cells in mitosis by the cells in interphase."
+       },
+       {
+        "id": "m2",
+        "description": "Reports the percent of control cells in interphase."
+       },
+       {
+        "id": "m3",
+        "description": "Reports the percent of cells in prophase only."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fraction of non-interphase cells vs float computation",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_cell_cycle_set_q3",
+     "topic": "4.6",
+     "skill": "5.A",
+     "stem": "The drug is being tested for its effect on the progression of cells through the cell cycle. What is the percent change in the mitotic index of the treated group compared with the control group?",
+     "options": [
+      {
+       "text": "-11%",
+       "why": "Reports the difference in percentage points rather than the percent change.",
+       "value": "-11.000000"
+      },
+      {
+       "text": "+27%",
+       "why": "Reports the ratio of the treated index to the control index as a percent.",
+       "value": "26.666667"
+      },
+      {
+       "text": "-73%",
+       "why": "The mitotic index changed from 15.0% to 4.0%, so the percent change is (4.0 - 15.0) / 15.0 x 100 = -73%.",
+       "value": "-73.333333"
+      },
+      {
+       "text": "-275%",
+       "why": "Divides by the mitotic index of the treated group instead of the control group.",
+       "value": "-275.00000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is -73%. The mitotic index changed from 15.0% to 4.0%, so the percent change is (4.0 - 15.0) / 15.0 x 100 = -73%.\n-11% is incorrect: Reports the difference in percentage points rather than the percent change.\n+27% is incorrect: Reports the ratio of the treated index to the control index as a percent.\n-275% is incorrect: Divides by the mitotic index of the treated group instead of the control group.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_cell_cycle_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "percent change in mitotic index",
+      "topic": "4.6",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: percent change in mitotic index",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "stage counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Reports the difference in percentage points rather than the percent change."
+       },
+       {
+        "id": "m2",
+        "description": "Reports the ratio of the treated index to the control index as a percent."
+       },
+       {
+        "id": "m3",
+        "description": "Divides by the mitotic index of the treated group instead of the control group."
+       }
+      ],
+      "verification": {
+       "independent_path": "(treated - control)/control x 100 vs ratio form",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_cell_cycle_set_q4",
+     "topic": "4.6",
+     "skill": "6.E",
+     "stem": "Which statement best explains the effect of the drug on the cell cycle?",
+     "options": [
+      {
+       "text": "The drug most likely speeds up the cell cycle, so more cells are in mitosis.",
+       "why": "The treated group has fewer cells in mitosis.",
+       "value": null
+      },
+      {
+       "text": "The drug most likely prevents cells from entering mitosis, so more cells remain in interphase.",
+       "why": "The treated group has 192 cells in interphase compared with 170, and the mitotic index is much lower.",
+       "value": null
+      },
+      {
+       "text": "The drug most likely has no effect on the cell cycle.",
+       "why": "The mitotic index changed strongly.",
+       "value": null
+      },
+      {
+       "text": "The drug most likely interferes with spindle fibers, so cells stall in metaphase.",
+       "why": "The data do not show an accumulation of cells in metaphase.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is The drug most likely prevents cells from entering mitosis, so more cells remain in interphase.. The treated group has 192 cells in interphase compared with 170, and the mitotic index is much lower.\nThe drug most likely speeds up the cell cycle, so more cells are in mitosis. is incorrect: The treated group has fewer cells in mitosis.\nThe drug most likely has no effect on the cell cycle. is incorrect: The mitotic index changed strongly.\nThe drug most likely interferes with spindle fibers, so cells stall in metaphase. is incorrect: The data do not show an accumulation of cells in metaphase.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_cell_cycle_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "infer the target of a cell-cycle drug from stage counts",
+      "topic": "4.6",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: infer the target of a cell-cycle drug from stage counts",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "stage counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The treated group has fewer cells in mitosis."
+       },
+       {
+        "id": "m2",
+        "description": "The mitotic index changed strongly."
+       },
+       {
+        "id": "m3",
+        "description": "The data do not show an accumulation of cells in metaphase."
+       }
+      ],
+      "verification": {
+       "independent_path": "stage with the largest relative change vs the generating drug",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 270,
+   "facts": [
+    "c={'Interphase': 170, 'Prophase': 13, 'Metaphase': 6, 'Anaphase': 4, 'Telophase': 7}",
+    "t={'Interphase': 192, 'Prophase': 3, 'Metaphase': 1, 'Anaphase': 1, 'Telophase': 3}"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_cell_cycle_set_q1",
+   "facts": [
+    "c={'Interphase': 170, 'Prophase': 13, 'Metaphase': 6, 'Anaphase': 4, 'Telophase': 7}",
+    "t={'Interphase': 192, 'Prophase': 3, 'Metaphase': 1, 'Anaphase': 1, 'Telophase': 3}"
+   ],
+   "seed": 9500
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Describing table data in a cell-cycle drug context fits 4.B and 4.6."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "B is the only defensible option, though 'among the stages of mitosis' is slightly imprecise; the intended reading is the distribution across all stages including interphase."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete and both columns sum to 200. The control/treated labels and the N are given."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each wrong option is explained. A is trivially wrong, and C and D are standard misconceptions. Minor grammar slip ('1 cells')."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60 seconds, light reading, no calculation needed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is acceptable. Key B is the best answer and the distractors are distinct. The key's wording about the stages of mitosis is a little imprecise, but it does not create a second correct answer."
+   },
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean mitotic index calculation. The key of 15% is unique and the distractors map to distinct misconceptions. The only weaknesses are the unused Treated column and the item's light link to regulation. It passes.",
+    "scope_skill": {
+     "pass": true,
+     "notes": "Skill 5.A calculation (percent from counts) in a cell-cycle data context. The item does not require regulation concepts, but the guidelines allow data-skill items in the topic's context."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Control mitotic cells = 13+6+4+7 = 30, and 30/200 = 15%. The key is unique, and the 18% option is a different value."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete and the totals match N = 200. The Treated column is unused, which adds a little reading load but is not misleading."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor maps to a distinct, plausible error (mitosis/interphase ratio, interphase percent, prophase only), and the explanation addresses each one."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 65 seconds, with simple arithmetic and a calculator allowed."
+    }
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Mitotic index percent change fits 4.6 and skill 5.A calculation."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Control 30/200=15%, treated 8/200=4%, change -73.3%. The key is unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete, N is given, and the numbers match the stem. Mitotic index is standard AP content."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct, realistic calculation misconceptions. The explanations are accurate."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 75 seconds, a calculator is allowed, and the load is typical of the exam."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key (-73%) is correct and unique, the distractors encode distinct errors, and the stimulus is complete."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Infers the effect of a drug on cell-cycle progression from stage counts, which fits topic 4.6 (regulation and disruption of the cell cycle). Predicting or inferring the effect of a disruption fits skill 6.E."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option B is the unique defensible answer. Interphase counts rise (170 to 192) and every mitotic stage falls. A metaphase stall would show a metaphase pile-up, which is not seen. The drug could also act at G1/S or G2 and the wording \"most likely\" covers that. \"Prevents cells from entering mitosis\" is a reasonable summary."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete: columns, rows and N = 200 per group are given, and the totals sum to 200 in each group. The stem is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct misconception: A reads the data backwards, C ignores a large change, and D assumes a spindle-fiber block that the data do not show. The explanation addresses each wrong option. The rationale for D is brief but accurate."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "A small table and four short parallel options can be done in about 70 seconds, with no needless arithmetic. Calculator use is optional, which is consistent. The correct option is slightly longer than the others, but only by a few words."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A sound, clear item. The table supports a single correct inference, the distractors are distinct and plausible, and the load matches the AP exam."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single small table with equal N in both groups. The student compares interphase vs. mitotic counts and rejects three clearly wrong statements (the total count is unchanged, 8 treated cells are not in interphase, the counts differ between groups). No calculation is needed and the concept demand is low (describing a shift toward interphase / fewer dividing cells). This fits foundational practice on describing data rather than a full-mock item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step item: read the table, sum the four mitotic stages (30), and divide by 200 to get 15%. The stem defines the mitotic index, so no concept selection is needed. The numbers are small and clean. The distractors are plausible slips (interphase percentage, a single stage), but the item involves no prediction or multi-step reasoning about cell cycle regulation, which makes it more suitable for basic skill practice than for full mocks.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the table, decide that interphase is excluded from the mitotic index, sum the mitotic stages for both groups, compute two proportions, then compute a percent change with the control as the base. Numbers are small and clean. The distractors map to realistic errors (percentage-point difference, wrong base). The concept is in scope for 4.6 and skill 5.A. This is a multi-step but fair calculation that is suited to a full mock exam.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the table, compare the proportion of cells in interphase versus mitosis between groups (about 15% vs 4% in mitosis), and infer that the drug blocks entry into mitosis. Distractors test the misconceptions of speeding up, no effect, and metaphase arrest, which the data contradict. Arithmetic is trivial, reading load is light, and the content is within the CED. This is a typical full-mock data-interpretation item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m04-k1",
+  "cellId": "ap_biology-m04",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "4.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_cell_cycle_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single small table with equal totals (400 each). The student only needs to compare columns and see that metaphase rises sharply while anaphase and telophase fall, which makes D the best description. Distractors are easy to reject: A (interphase count is only slightly lower in the treated group), B (the misconception that the presence of all stages means no effect), and C (the totals are both 400). It requires no calculation and no interpretation beyond describing the data, which is a skill 4.B entry-level task. Difficulty does not come from unfair sources.",
+  "payload": {
+   "archetype": "bis_cell_cycle_set",
+   "topic": "4.6",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "set_intro": "A student treats onion root tips with a drug and counts cells in each stage of the cell cycle in treated and control root tips. The table shows the counts.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Number of root-tip cells in each stage of the cell cycle in a control group and in a group treated with a drug (N = 400 cells counted in each group)",
+    "data": {
+     "columns": [
+      "Stage",
+      "Control",
+      "Treated"
+     ],
+     "rows": [
+      [
+       "Interphase",
+       "336",
+       "312"
+      ],
+      [
+       "Prophase",
+       "28",
+       "22"
+      ],
+      [
+       "Metaphase",
+       "12",
+       "57"
+      ],
+      [
+       "Anaphase",
+       "9",
+       "1"
+      ],
+      [
+       "Telophase",
+       "15",
+       "8"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_cell_cycle_set_q1",
+     "topic": "4.6",
+     "skill": "4.B",
+     "stem": "Which statement best describes the data in the table?",
+     "options": [
+      {
+       "text": "The drug caused all treated cells to enter interphase.",
+       "why": "The treated group still has cells in each stage of mitosis.",
+       "value": null
+      },
+      {
+       "text": "The drug had no effect, because cells in all stages are present in both groups.",
+       "why": "The number of cells in each stage differs between the control and the treated group.",
+       "value": null
+      },
+      {
+       "text": "The drug changed the number of cells counted in the treated group.",
+       "why": "The number of cells counted was the same in both groups.",
+       "value": null
+      },
+      {
+       "text": "The drug caused a change in the distribution of cells among the stages of mitosis, compared with the control.",
+       "why": "The treated group has 57 cells in metaphase compared with 12 in the control, and its distribution among the stages differs.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The drug caused a change in the distribution of cells among the stages of mitosis, compared with the control.. The treated group has 57 cells in metaphase compared with 12 in the control, and its distribution among the stages differs.\nThe drug caused all treated cells to enter interphase. is incorrect: The treated group still has cells in each stage of mitosis.\nThe drug had no effect, because cells in all stages are present in both groups. is incorrect: The number of cells in each stage differs between the control and the treated group.\nThe drug changed the number of cells counted in the treated group. is incorrect: The number of cells counted was the same in both groups.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "bis_cell_cycle_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "describe differences between control and treated distributions",
+      "topic": "4.6",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: describe differences between control and treated distributions",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "stage counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The treated group still has cells in each stage of mitosis."
+       },
+       {
+        "id": "m2",
+        "description": "The number of cells in each stage differs between the control and the treated group."
+       },
+       {
+        "id": "m3",
+        "description": "The number of cells counted was the same in both groups."
+       }
+      ],
+      "verification": {
+       "independent_path": "stage counts compared between groups vs the generating drug effect",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_cell_cycle_set_q2",
+     "topic": "4.6",
+     "skill": "5.A",
+     "stem": "The mitotic index is the percent of cells in mitosis (all stages except interphase). What is the mitotic index of the control group?",
+     "options": [
+      {
+       "text": "64%",
+       "why": "Reports the number of cells in mitosis rather than the percent.",
+       "value": "64.000000"
+      },
+      {
+       "text": "16%",
+       "why": "The control group has 64 cells in mitosis out of 400, so the mitotic index is 64 / 400 x 100 = 16%.",
+       "value": "16.000000"
+      },
+      {
+       "text": "19%",
+       "why": "Divides the cells in mitosis by the cells in interphase.",
+       "value": "19.047619"
+      },
+      {
+       "text": "84%",
+       "why": "Reports the percent of control cells in interphase.",
+       "value": "84.000000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is 16%. The control group has 64 cells in mitosis out of 400, so the mitotic index is 64 / 400 x 100 = 16%.\n64% is incorrect: Reports the number of cells in mitosis rather than the percent.\n19% is incorrect: Divides the cells in mitosis by the cells in interphase.\n84% is incorrect: Reports the percent of control cells in interphase.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_cell_cycle_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "mitotic index from counts",
+      "topic": "4.6",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: mitotic index from counts",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "stage counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Reports the number of cells in mitosis rather than the percent."
+       },
+       {
+        "id": "m2",
+        "description": "Divides the cells in mitosis by the cells in interphase."
+       },
+       {
+        "id": "m3",
+        "description": "Reports the percent of control cells in interphase."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fraction of non-interphase cells vs float computation",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_cell_cycle_set_q3",
+     "topic": "4.6",
+     "skill": "5.A",
+     "stem": "The drug is being tested for its effect on the progression of cells through the cell cycle. What is the percent change in the mitotic index of the treated group compared with the control group?",
+     "options": [
+      {
+       "text": "+38%",
+       "why": "The mitotic index changed from 16.0% to 22.0%, so the percent change is (22.0 - 16.0) / 16.0 x 100 = +38%.",
+       "value": "37.500000"
+      },
+      {
+       "text": "+22%",
+       "why": "Reports the mitotic index of the treated group.",
+       "value": "22.000000"
+      },
+      {
+       "text": "+138%",
+       "why": "Reports the ratio of the treated index to the control index as a percent.",
+       "value": "137.50000"
+      },
+      {
+       "text": "+6%",
+       "why": "Reports the difference in percentage points rather than the percent change.",
+       "value": "6.0000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is +38%. The mitotic index changed from 16.0% to 22.0%, so the percent change is (22.0 - 16.0) / 16.0 x 100 = +38%.\n+22% is incorrect: Reports the mitotic index of the treated group.\n+138% is incorrect: Reports the ratio of the treated index to the control index as a percent.\n+6% is incorrect: Reports the difference in percentage points rather than the percent change.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_cell_cycle_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "percent change in mitotic index",
+      "topic": "4.6",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: percent change in mitotic index",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "stage counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Reports the mitotic index of the treated group."
+       },
+       {
+        "id": "m2",
+        "description": "Reports the ratio of the treated index to the control index as a percent."
+       },
+       {
+        "id": "m3",
+        "description": "Reports the difference in percentage points rather than the percent change."
+       }
+      ],
+      "verification": {
+       "independent_path": "(treated - control)/control x 100 vs ratio form",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_cell_cycle_set_q4",
+     "topic": "4.6",
+     "skill": "6.E",
+     "stem": "Which statement best explains the effect of the drug on the cell cycle?",
+     "options": [
+      {
+       "text": "The drug most likely blocks DNA replication, so cells cannot enter mitosis.",
+       "why": "Blocking replication would lower the number of cells entering mitosis, not increase the number in metaphase.",
+       "value": null
+      },
+      {
+       "text": "The drug most likely speeds up cytokinesis, so many cells are in telophase.",
+       "why": "The number of cells in telophase does not increase in the treated group.",
+       "value": null
+      },
+      {
+       "text": "The drug most likely has no effect on mitosis.",
+       "why": "The distribution of cells in the stages of mitosis changed.",
+       "value": null
+      },
+      {
+       "text": "The drug most likely interferes with spindle fibers, so cells stall in metaphase and do not complete anaphase.",
+       "why": "Cells accumulate in metaphase (57 compared with 12) and few reach anaphase, as expected if chromosomes cannot be pulled apart.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The drug most likely interferes with spindle fibers, so cells stall in metaphase and do not complete anaphase.. Cells accumulate in metaphase (57 compared with 12) and few reach anaphase, as expected if chromosomes cannot be pulled apart.\nThe drug most likely blocks DNA replication, so cells cannot enter mitosis. is incorrect: Blocking replication would lower the number of cells entering mitosis, not increase the number in metaphase.\nThe drug most likely speeds up cytokinesis, so many cells are in telophase. is incorrect: The number of cells in telophase does not increase in the treated group.\nThe drug most likely has no effect on mitosis. is incorrect: The distribution of cells in the stages of mitosis changed.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_cell_cycle_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "infer the target of a cell-cycle drug from stage counts",
+      "topic": "4.6",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: infer the target of a cell-cycle drug from stage counts",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "stage counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Blocking replication would lower the number of cells entering mitosis, not increase the number in metaphase."
+       },
+       {
+        "id": "m2",
+        "description": "The number of cells in telophase does not increase in the treated group."
+       },
+       {
+        "id": "m3",
+        "description": "The distribution of cells in the stages of mitosis changed."
+       }
+      ],
+      "verification": {
+       "independent_path": "stage with the largest relative change vs the generating drug",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 270,
+   "facts": [
+    "c={'Interphase': 336, 'Prophase': 28, 'Metaphase': 12, 'Anaphase': 9, 'Telophase': 15}",
+    "t={'Interphase': 312, 'Prophase': 22, 'Metaphase': 57, 'Anaphase': 1, 'Telophase': 8}"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_cell_cycle_set_q1",
+   "facts": [
+    "c={'Interphase': 336, 'Prophase': 28, 'Metaphase': 12, 'Anaphase': 9, 'Telophase': 15}",
+    "t={'Interphase': 312, 'Prophase': 22, 'Metaphase': 57, 'Anaphase': 1, 'Telophase': 8}"
+   ],
+   "seed": 9501
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Describing table data on cell-cycle stage distribution fits 4.B and 4.6."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "D is unique. Both totals are 400, metaphase rises 12 to 57, and every stage differs."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete, the columns and rows are consistent, and N is stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, each explained accurately."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60 seconds, light reading, no calculation needed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key is unique, the table is consistent, and the distractors are distinct and accurately explained. It is suitable for 4.B on topic 4.6."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "About 65 seconds with light reading and simple arithmetic.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a correct, clean mitotic-index calculation with distinct distractors. It is acceptable."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Mitotic index calculation from stage counts fits 4.6 and skill 5.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Control 64/400=16%, treated 88/400=22%, change 37.5% ≈ +38%. Unique answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table complete, totals 400 each, all numbers present; clear wording."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct realistic errors (treated index, ratio, percentage-point difference), each explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, calculator-appropriate, typical AP load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, well-formed percent-change-in-mitotic-index item with a single defensible key and distinct distractors."
+   },
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item passes all five criteria. The table data point to a metaphase arrest, so option D is the unique defensible answer. The distractors are plausible and each is rejected by the data. The item is short and suits a roughly 70-second multiple-choice slot.",
+    "scope_skill": {
+     "pass": true,
+     "notes": "Predicting the cause of a cell-cycle disruption from stage counts fits topic 4.6 and skill 6.E. Spindle function and metaphase arrest are standard AP Biology content, so nothing from outside the unit is needed."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Metaphase cells rise from 12 to 57 and anaphase cells fall from 9 to 1, which fits spindle interference. Interphase falls only modestly (336 to 312), and the data contradict the other options. The independent solver agreed with the key."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table gives N = 400 per group and all the counts. The columns and rows are complete, the counts sum to 400 in each group, and the wording is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each wrong option encodes a distinct error: a replication block (which would not raise metaphase counts), faster cytokinesis (telophase counts actually fall), and no effect (the distribution clearly changed). The explanation addresses each one specifically."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The item needs only a quick table read, with no arithmetic burden and a short stem. The calculator designation is consistent."
+    }
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single small table with equal totals (400 each). The student only needs to compare columns and see that metaphase rises sharply while anaphase and telophase fall, which makes D the best description. Distractors are easy to reject: A (interphase count is only slightly lower in the treated group), B (the misconception that the presence of all stages means no effect), and C (the totals are both 400). It requires no calculation and no interpretation beyond describing the data, which is a skill 4.B entry-level task. Difficulty does not come from unfair sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step quantitative item: read the control column, sum the four mitotic stages (64), divide by 400 to get 16%. The definition of mitotic index is given in the stem, so no outside knowledge is needed. Arithmetic is small and clean. Distractors target common slips (raw count, using interphase percent). There is little conceptual depth about cell cycle regulation, and the Treated column is unused for this question.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Requires knowing mitotic index excludes interphase, summing mitotic stages from a table for two groups, computing two proportions, then a percent change. Distractors reflect realistic errors (treated index alone, percentage-point difference, ratio instead of change). Small integers, in-scope content, and clear wording make it typical full-mock difficulty rather than basic or advanced.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single table read with no calculation required: metaphase counts rise (12 to 57) while anaphase falls (9 to 1), pointing to a metaphase arrest from spindle disruption. Distractors target straightforward misconceptions (blocked replication would raise interphase, faster cytokinesis would raise telophase, no effect contradicts the data). Only one concept and a short chain of reasoning are needed, so it is suitable for basic learning rather than a full mock.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ }
+]

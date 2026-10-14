@@ -15,7 +15,7 @@ export function checkPartRefinement(pack: FrqPack, part: Part, newPrompt: string
   // 기대값(구조화 필드)에 있는 값이 프롬프트에 다른 값으로 바뀌어 나타나면 안 된다: 프롬프트의 수는 원문·자료·기대값에서만 와야 한다
   const allowed = new Set<string>([...numbersOf(part.prompt), ...numbersOf(JSON.stringify(pack.stimulus)), ...(pack.expected_values ?? []).flatMap((e) => numbersOf(String(e.value))), ...(pack.facts ?? []).flatMap((f) => numbersOf(String(f)))]);
   for (const n of numbersOf(newPrompt)) if (!allowed.has(n) && !["1", "2", "3"].includes(n)) r.push(`new_number_${n}`);
-  if (/\bgraph\b|error bars?/i.test(newPrompt) && pack.stimulus?.kind === "table") r.push("prompt_mentions_graph_for_table");
+  if (/\bgraph\b|error bars?/i.test(newPrompt) && pack.stimulus?.kind === "table" && !/\b(construct|draw|plot|sketch)\b/i.test(part.prompt)) r.push("prompt_mentions_graph_for_table");
   return [...new Set(r)];
 }
 /** 번들 수준 일관성: 파트 간 참조, 공유 자료, 조건(수준 이름·값)이 자료와 맞는지. */

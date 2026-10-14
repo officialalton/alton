@@ -80,6 +80,16 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "csa-s2fb", title: "AP Computer Science A s2 FRQ-b (Q3·Q4) (통과 4)", itemsFile: "csa-s2fb-items.json", loadLabel: "csa-s2fb-2026-10-13", supplement: true, passKeysFile: "csa-s2fb-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
   { id: "csa-s2sm", title: "AP Computer Science A s2 부족분 MC (수정 원형 재시도) (통과 12)", itemsFile: "csa-s2sm-items.json", loadLabel: "csa-s2sm-2026-10-13", supplement: true, passKeysFile: "csa-s2sm-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
   { id: "csa-s2sf", title: "AP Computer Science A s2 부족분 FRQ (Q4 재시도) (통과 1)", itemsFile: "csa-s2sf-items.json", loadLabel: "csa-s2sf-2026-10-13", supplement: true, passKeysFile: "csa-s2sf-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
+  // 2026-10-14 AP Biology(docs/ap/biology-groundwork.md): 파일럿 2 + s2 3 + 부족분 4배치. 한 증거 파일(evidence-bio-s2.json)을 공유한다. BI1·BI2 정확 배정: data/ap/stock/exact-assign-bio-bi1-bi2.json
+  { id: "bio-p1a", title: "AP Biology P1-a (MC 파일럿) (통과 20)", itemsFile: "bio-p1a-items.json", loadLabel: "bio-p1a-2026-10-14", supplement: true, passKeysFile: "bio-p1a-pass-keys.json", evidenceFile: "evidence-bio-s2.json" },
+  { id: "bio-p1b", title: "AP Biology P1-b (FRQ 파일럿) (통과 2)", itemsFile: "bio-p1b-items.json", loadLabel: "bio-p1b-2026-10-14", supplement: true, passKeysFile: "bio-p1b-pass-keys.json", evidenceFile: "evidence-bio-s2.json" },
+  { id: "bio-s2a", title: "AP Biology s2 MC-a (통과 39)", itemsFile: "bio-s2a-items.json", loadLabel: "bio-s2a-2026-10-14", supplement: true, passKeysFile: "bio-s2a-pass-keys.json", evidenceFile: "evidence-bio-s2.json" },
+  { id: "bio-s2b", title: "AP Biology s2 MC-b (통과 37)", itemsFile: "bio-s2b-items.json", loadLabel: "bio-s2b-2026-10-14", supplement: true, passKeysFile: "bio-s2b-pass-keys.json", evidenceFile: "evidence-bio-s2.json" },
+  { id: "bio-s2c", title: "AP Biology s2 세트·FRQ (통과 24)", itemsFile: "bio-s2c-items.json", loadLabel: "bio-s2c-2026-10-14", supplement: true, passKeysFile: "bio-s2c-pass-keys.json", evidenceFile: "evidence-bio-s2.json" },
+  { id: "bio-r1", title: "AP Biology 부족분 R1 (MC·세트) (통과 21)", itemsFile: "bio-r1-items.json", loadLabel: "bio-r1-2026-10-14", supplement: true, passKeysFile: "bio-r1-pass-keys.json", evidenceFile: "evidence-bio-s2.json" },
+  { id: "bio-r2", title: "AP Biology 부족분 R2 (MC·세트) (통과 17)", itemsFile: "bio-r2-items.json", loadLabel: "bio-r2-2026-10-14", supplement: true, passKeysFile: "bio-r2-pass-keys.json", evidenceFile: "evidence-bio-s2.json" },
+  { id: "bio-r3", title: "AP Biology 부족분 R3 (시나리오 원형·세트) (통과 15)", itemsFile: "bio-r3-items.json", loadLabel: "bio-r3-2026-10-14", supplement: true, passKeysFile: "bio-r3-pass-keys.json", evidenceFile: "evidence-bio-s2.json" },
+  { id: "bio-r4", title: "AP Biology 부족분 R4 (단원 6 원형·세트) (통과 7)", itemsFile: "bio-r4-items.json", loadLabel: "bio-r4-2026-10-14", supplement: true, passKeysFile: "bio-r4-pass-keys.json", evidenceFile: "evidence-bio-s2.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 
