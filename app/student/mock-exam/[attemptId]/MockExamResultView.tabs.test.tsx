@@ -187,3 +187,20 @@ describe("MockExamResultView — 서브탭·영어 UI", () => {
     expect(screen.queryByTestId("attempt-label")).toBeNull();
   });
 });
+
+describe("MockExamResultView — Summary score ranges", () => {
+  const est = { rw: { low: 300, high: 360 }, math: { low: 320, high: 380 }, total: { low: 620, high: 740 }, modelVersion: "v" };
+  it("shows total range in Overall and section ranges in Section Breakdown", () => {
+    render(<MockExamResultView attempt={attempt(items, { scoreEstimate: est, sectionEstimates: { rw: { range: est.rw, reason: null }, math: { range: est.math, reason: null } } })} readOnly={false} />);
+    expect(screen.getByTestId("mock-exam-overall-range")).toHaveTextContent("620–740");
+    expect(screen.getByTestId("mock-exam-overall-range")).toHaveTextContent("Internal estimate — accuracy not verified");
+    expect(screen.getByTestId("mock-exam-section-range-rw")).toHaveTextContent("300–360");
+    expect(screen.getByTestId("mock-exam-section-range-math")).toHaveTextContent("320–380");
+  });
+  it("R&W estimable but Math insufficient: R&W range, insufficient text for Math and total", () => {
+    render(<MockExamResultView attempt={attempt(items, { scoreEstimate: null, scoreEstimateNote: "insufficient_responses", sectionEstimates: { rw: { range: est.rw, reason: null }, math: { range: null, reason: "insufficient_responses" } } })} readOnly={false} />);
+    expect(screen.getByTestId("mock-exam-section-range-rw")).toHaveTextContent("300–360");
+    expect(screen.getByTestId("mock-exam-section-range-math-insufficient")).toHaveTextContent("Not enough responses to estimate a score range.");
+    expect(screen.getByTestId("mock-exam-overall-range-insufficient")).toBeInTheDocument();
+  });
+});

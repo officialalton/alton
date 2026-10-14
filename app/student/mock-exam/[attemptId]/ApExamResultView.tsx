@@ -8,6 +8,7 @@ import AttemptSwitcher from "./AttemptSwitcher";
 import UpdatedVersionNote, { UpdatedVersionBadge } from "@/app/components/UpdatedVersionNote";
 import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
+import { breakOptionAnalysis } from "@/lib/mock-exam/explanation-format";
 import { parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
 import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
@@ -123,7 +124,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames, handwr
               {(it.explanationEn ?? it.explanation) && (
                 <div className="mt-3 rounded-lg bg-grey-50 p-3" data-testid="ap-explanation">
                   <p className="mb-1 text-[11.5px] font-bold text-grey-500">{it.format === "essay" ? "Reference answer and scoring guide (reference feedback, not official scoring)" : "Explanation"}</p>
-                  <LearningText text={autoMathExplanation((it.explanationEn ?? it.explanation) as string)} className="whitespace-pre-wrap text-[13px]" />
+                  <LearningText text={breakOptionAnalysis(autoMathExplanation((it.explanationEn ?? it.explanation) as string))} className="whitespace-pre-wrap text-[13px]" />
                 </div>
               )}
               <ProblemErrorReportButton className="mt-3" role="student" context={{ source: "mock_exam", attemptId: attempt.id, setItemId: it.setItemId, problemId: it.problemId }} />

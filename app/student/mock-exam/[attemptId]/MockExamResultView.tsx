@@ -14,6 +14,7 @@ import { attemptLabel } from "@/lib/mock-exam/open-list";
 import { satDomainDisplayName, satSkillDisplayName } from "@/lib/sat-keywords/taxonomy";
 import { satDomainDescription, satSkillDescription } from "@/lib/sat-keywords/skill-descriptions";
 import LearningText from "@/app/session/[id]/LearningText";
+import { breakOptionAnalysis } from "@/lib/mock-exam/explanation-format";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import ProblemNoteSnapshot from "@/app/components/ProblemNoteSnapshot";
@@ -90,7 +91,7 @@ export function ExplanationPanel({ item }: { item: MockExamAttemptItem }) {
         </p>
       )}
       <div lang={showing}>
-        <LearningText text={(showing === "en" ? en : ko) ?? ""} />
+        <LearningText text={breakOptionAnalysis((showing === "en" ? en : ko) ?? "")} />
       </div>
     </div>
   );
@@ -505,6 +506,13 @@ export default function MockExamResultView({
                   {pct(report.correctCount ?? 0, report.totalCount)}
                   {totalTime && <> · Total time {totalTime}</>}
                 </p>
+                {attempt.format === "mst" && (scoreEstimate ? (
+                  <p className="mt-2 text-[15px] font-extrabold" data-testid="mock-exam-overall-range">
+                    {scoreEstimate.total.low}–{scoreEstimate.total.high} <span className="text-[11.5px] font-semibold text-grey-500">Total (est.) · Internal estimate — accuracy not verified</span>
+                  </p>
+                ) : attempt.scoreEstimateNote === "insufficient_responses" ? (
+                  <p className="mt-2 text-[12.5px] font-semibold text-grey-600" data-testid="mock-exam-overall-range-insufficient">{INSUFFICIENT_RESPONSES_TEXT}</p>
+                ) : null)}
               </div>
             </div>
             <p className="mt-3 text-[11.5px] text-grey-400">
@@ -557,6 +565,15 @@ export default function MockExamResultView({
                       <div className="h-full rounded-full bg-ink" style={{ width: `${s.total ? Math.round(((s.correct ?? 0) / s.total) * 100) : 0}%` }} />
                     </div>
                     {t && <p className="mt-1 text-[11.5px] text-grey-500">Time {t}</p>}
+                    {attempt.format === "mst" && attempt.sectionEstimates?.[s.section] && (
+                      attempt.sectionEstimates[s.section].range ? (
+                        <p className="mt-1 text-[12px] font-bold" data-testid={`mock-exam-section-range-${s.section}`}>
+                          {attempt.sectionEstimates[s.section].range!.low}–{attempt.sectionEstimates[s.section].range!.high} <span className="font-semibold text-grey-500">(est., internal estimate — accuracy not verified)</span>
+                        </p>
+                      ) : attempt.sectionEstimates[s.section].reason === "insufficient_responses" ? (
+                        <p className="mt-1 text-[11.5px] font-semibold text-grey-600" data-testid={`mock-exam-section-range-${s.section}-insufficient`}>{INSUFFICIENT_RESPONSES_TEXT}</p>
+                      ) : null
+                    )}
                   </div>
                 );
               })}
