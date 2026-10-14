@@ -1,0 +1,112 @@
+[
+ {
+  "key": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Work out each row's sum. Start with row 0 as the best row and its sum as the best sum. Replace the best row only when a later row's sum is strictly greater, so a tie keeps the smallest index. For the example, the sums are 3, 5 and 5, so the method returns 1.",
+     "final_answer": "public static int bestRow(int[][] grid) {\n    int best = 0;\n    int bestSum = 0;\n    for (int c = 0; c < grid[0].length; c++) bestSum += grid[0][c];\n    for (int r = 1; r < grid.length; r++) {\n        int sum = 0;\n        for (int c = 0; c < grid[r].length; c++) sum += grid[r][c];\n        if (sum > bestSum) { bestSum = sum; best = r; }\n    }\n    return best;\n}",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A standard 2D-array row-sum algorithm FRQ that fits 4.13 and skill 2.A. The rubric rows are single-behavior and consistent with the reference, and the independent alternative (initialized from row 0) is accepted by A5. The stimulus gives the header, the tie rule, the precondition and an example. One minor weakness: the reference sentinel of -1000000 is not safe for unbounded ints, but the rubric also accepts initializing from the first row.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant demand is implementing a 2D traversal algorithm (row sums, running maximum, tie rule), matching 4.13/2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rubric rows map to the reference. A5 permits both the sentinel and the first-row initialization. The -1000000 sentinel is a minor weakness since values are not bounded."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The header, the precondition, the tie rule and an example are all given. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric common_errors cover the typical mistakes: >=, no sum reset, swapped indexes, initializing to 0."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A typical 9-point CED-style 2D array FRQ with no calculator load and modest reading."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 2D array FRQ-style method: nested traversal to compute row sums, track max and its index, use strict > for the tie rule, and initialize the max safely (the first row's sum or Integer.MIN_VALUE, since values may be negative). Concept depth is moderate and matches a typical full-mock free-response question. Reading and computation load are small, and the difficulty comes only from legitimate levers (boundary and initialization choices, per-row accumulator reset), not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f02-k0",
+  "cellId": "ap_computer_science_a-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Make a new array that is cols x rows and copy each element so result[c][r] = grid[r][c]. The original grid is never written to.",
+     "final_answer": "public static int[][] transpose(int[][] grid) {\n    int rows = grid.length;\n    int cols = grid[0].length;\n    int[][] result = new int[cols][rows];\n    for (int r = 0; r < rows; r++) {\n        for (int c = 0; c < cols; c++) {\n            result[c][r] = grid[r][c];\n        }\n    }\n    return result;\n}",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The task fits 4.13 and Skill 2.A, and the stimulus is clear. The rubric is padded to nine 1-point rows: A6, A7 and A8 are redundant or earned automatically, and A4 and A5 overlap. A2 and A3 require exact loop headers, which would penalize the valid column-first alternative. A single short method is also thin for a 9-point, 22-minute question, so the item deviates from the official FRQ pattern.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The reference solution is correct. The rubric rows double-count the same behavior: A6 is implied by A1 to A3, A7 by A1, and A8 is earned by any read-only solution. A2 and A3 demand literal loop headers, so valid alternative solutions (column-first loops, local variables) risk losing points."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "One short method (about 8 lines) is stretched into a full 9-point question. The scoring is not discriminating, since most students earn about 7 points almost automatically."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style 2D array algorithm: allocate a result array with swapped dimensions (grid[0].length x grid.length), then use nested loops to assign result[c][r] = grid[r][c]. The main difficulty is handling non-square dimensions correctly and keeping the indices straight. The stimulus is short, the computation is minimal, and everything is in scope for topics 4.11-4.13.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ }
+]

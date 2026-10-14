@@ -53,7 +53,7 @@ async function checkItem(page: Page, r: Row, shot: string): Promise<Record<Scree
     const inside = (el: Element) => { const b = el.getBoundingClientRect(); return b.width > 0 && b.height > 0 && b.left >= -1 && b.right <= vw + 1; };
     const vis = (el: Element) => { const b = el.getBoundingClientRect(); return b.width > 0 && b.height > 0; };
     const opts = [...root.querySelectorAll('[data-testid^="ap-option-"]')];
-    const inputs = [...root.querySelectorAll('[data-testid^="frq-input-"]')];
+    const inputs = [...root.querySelectorAll('textarea[data-testid^="frq-input-"], input[data-testid^="frq-input-"]')];
     const figs = [...root.querySelectorAll("svg, table, img")].filter((e) => !e.closest("nav") && !e.closest("button") && (e.tagName === "TABLE" ? e.getBoundingClientRect().width >= 60 && e.getBoundingClientRect().height >= 40 : e.getBoundingClientRect().width >= 120 && e.getBoundingClientRect().height >= 60));
     const clip = [...opts, ...inputs, ...figs].filter((e) => !inside(e) && !scrollable(e)).length;
     const text = (document.body.innerText || "").toLowerCase();
@@ -70,7 +70,7 @@ async function checkItem(page: Page, r: Row, shot: string): Promise<Record<Scree
   out.no_answer_before_submit = !m.leaked && !(expl.length >= 20 && m.text.includes(expl)) ? { result: "pass", note: "no explanation/correct-answer text on screen before submit" } : { result: "fail", note: "explanation or answer text visible before submit" };
   if (mc) out.frq_input_works = { result: "na", note: "multiple-choice item" };
   else {
-    const areas = root.locator('[data-testid^="frq-input-"]'); let ok = m.inputCount > 0;
+    const areas = root.locator('textarea[data-testid^="frq-input-"], input[data-testid^="frq-input-"]'); let ok = m.inputCount > 0;
     for (let i = 0; i < await areas.count(); i++) { const a = areas.nth(i); await a.fill("screen check"); if ((await a.inputValue()) !== "screen check") ok = false; await a.fill(""); }
     out.frq_input_works = ok ? { result: "pass", note: `typed into ${m.inputCount} part input(s), value retained` } : { result: "fail", note: "input did not retain text" };
   }

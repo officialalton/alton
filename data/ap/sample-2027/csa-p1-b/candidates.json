@@ -1,0 +1,2994 @@
+[
+ {
+  "candidateKey": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "2.10",
+  "unitCode": "2",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_methods_pass",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Part (a) is a standard String traversal with a counter, using charAt or substring and a range comparison on characters. Part (b) is a three-way selection with a compound condition, and it calls the part (a) method. The concepts are in scope for Unit 2 and the bundle's related topics (2.10, 1.15, 2.9). The reasoning is moderate: students must correctly order the strong/medium/weak conditions and handle the 'or' in the medium case. Reading and computation load are low, preconditions are clearly specified, and there is no hidden or out-of-scope knowledge. This is typical of a short FRQ-style item suited to a full mock rather than basic learning or an advanced supplement.",
+  "payload": {
+   "archetype": "csf_methods_pass",
+   "template": "q1",
+   "topic": "2.10",
+   "extra_topics": [
+    "1.15",
+    "2.9"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "PasswordCheck: counting uppercase letters and rating a password",
+   "stimulus": {
+    "kind": "text",
+    "description": "A teacher is writing a class PasswordCheck with two static methods. The class is shown with the method headers. (The threshold for a long password is 6 characters.)\n```java\npublic class PasswordCheck {\n    /** Returns the number of uppercase letters (A through Z) in s. */\n    public static int countUpper(String s) { /* to be implemented in part (a) */ }\n\n    /** Rates the strength of the password s; see part (b). */\n    public static String rate(String s) { /* to be implemented in part (b) */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method countUpper, which returns the number of uppercase letters (A through Z) in the String s. For example, countUpper(\"Hello World\") returns 2 and countUpper(\"abc\") returns 0. Complete the method countUpper.",
+     "points": 4,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int countUpper(String s) {\n        int count = 0;\n        for (int i = 0; i < s.length(); i++) {\n            char ch = s.charAt(i);\n            if (ch >= 'A' && ch <= 'Z') {\n                count++;\n            }\n        }\n        return count;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Iterates over every character of s with a loop whose bounds are correct (first through last index)",
+       "required_elements": [
+        "loop over 0 to s.length() - 1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "stops before the last character"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Tests each character for being between A and Z inclusive (or an equivalent test)",
+       "required_elements": [
+        "ch >= 'A' && ch <= 'Z'"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "excludes A or Z",
+        "counts lowercase letters"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Increments (or otherwise accumulates) a counter only for uppercase characters",
+       "required_elements": [
+        "count++ inside the condition"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "increments for every character"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Initializes the counter before the loop and returns it after the loop",
+       "required_elements": [
+        "int count = 0",
+        "return count"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Write the method rate, which returns a String that rates the strength of the password s. The rating is \"strong\" if s has at least 6 characters and at least 2 uppercase letters; otherwise \"medium\" if s has at least 6 characters or at least 1 uppercase letter; otherwise \"weak\". Your solution must call countUpper from part (a). Assume that countUpper works as specified.",
+     "points": 5,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static String rate(String s) {\n        int upper = countUpper(s);\n        if (s.length() >= 6 && upper >= 2) {\n            return \"strong\";\n        }\n        if (s.length() >= 6 || upper >= 1) {\n            return \"medium\";\n        }\n        return \"weak\";\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Calls countUpper(s) and uses its result (does not duplicate the counting loop)",
+       "required_elements": [
+        "countUpper(s)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "re-implements the loop"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Compares s.length() with 6 using a correct boundary (at least 6)",
+       "required_elements": [
+        "s.length() >= 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses > instead of >="
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Returns \"strong\" exactly when the length condition and the uppercase count of at least 2 both hold",
+       "required_elements": [
+        "&&",
+        "strong"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses || for strong"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "B4",
+       "points": 1,
+       "criterion": "Returns \"medium\" exactly when the length condition or at least one uppercase letter holds (and the password is not strong)",
+       "required_elements": [
+        "||",
+        "medium"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses && for medium"
+       ],
+       "requires_row_id": "B3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "B5",
+       "points": 1,
+       "criterion": "Returns \"weak\" otherwise; the tests are ordered or combined so exactly one value is returned for every input",
+       "required_elements": [
+        "weak",
+        "else or fall through"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "checks medium before strong"
+       ],
+       "requires_row_id": "B4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "L=6",
+    "U=2"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"\");",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"abc\");",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"Abc\");",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"HELLO\");",
+     "expected": "5"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"abcdefgh\");",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"Abcdefgh\");",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"AbCdEfGh\");",
+     "expected": "4"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"ABcdefghij\");",
+     "expected": "2"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"zzzzzzzzzzzz\");",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"QWERTYUIOP\");",
+     "expected": "10"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"\");",
+     "expected": "weak"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"abc\");",
+     "expected": "weak"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"Abc\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"HELLO\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"abcdefgh\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"Abcdefgh\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"AbCdEfGh\");",
+     "expected": "strong"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"ABcdefghij\");",
+     "expected": "strong"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"zzzzzzzzzzzz\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"QWERTYUIOP\");",
+     "expected": "strong"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"xyzABC\");",
+     "expected": "strong"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"ZaZa\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"Az\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"aZ\");",
+     "expected": "medium"
+    }
+   ],
+   "verification": {
+    "variants": 8,
+    "wrong_failures": [
+     3,
+     7,
+     11,
+     1,
+     7,
+     4
+    ]
+   },
+   "blueprint": {
+    "id": "csf_methods_pass",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "Methods and control structures with String traversal and a helper call",
+    "topic": "2.10",
+    "skill": "2.A",
+    "student_thinking": [
+     "Write a counting loop over the characters of a String",
+     "Combine conditions with && and || in the right order",
+     "Call the method from part (a) instead of repeating it"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and three wrong solutions per part; expected values from Python",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.10"
+      ],
+      "points": 4,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int countUpper(String s) {\n        int count = 0;\n        for (int i = 0; i < s.length(); i++) {\n            char ch = s.charAt(i);\n            if (ch >= 'A' && ch <= 'Z') {\n                count++;\n            }\n        }\n        return count;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Iterates over every character of s with a loop whose bounds are correct (first through last index)",
+        "elements": [
+         "loop over 0 to s.length() - 1"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Tests each character for being between A and Z inclusive (or an equivalent test)",
+        "elements": [
+         "ch >= 'A' && ch <= 'Z'"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Increments (or otherwise accumulates) a counter only for uppercase characters",
+        "elements": [
+         "count++ inside the condition"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Initializes the counter before the loop and returns it after the loop",
+        "elements": [
+         "int count = 0",
+         "return count"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "2.10"
+      ],
+      "points": 5,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static String rate(String s) {\n        int upper = countUpper(s);\n        if (s.length() >= 6 && upper >= 2) {\n            return \"strong\";\n        }\n        if (s.length() >= 6 || upper >= 1) {\n            return \"medium\";\n        }\n        return \"weak\";\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Calls countUpper(s) and uses its result (does not duplicate the counting loop)",
+        "elements": [
+         "countUpper(s)"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Compares s.length() with 6 using a correct boundary (at least 6)",
+        "elements": [
+         "s.length() >= 6"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Returns \"strong\" exactly when the length condition and the uppercase count of at least 2 both hold",
+        "elements": [
+         "&&",
+         "strong"
+        ]
+       },
+       {
+        "row_id": "B4",
+        "points": 1,
+        "criterion": "Returns \"medium\" exactly when the length condition or at least one uppercase letter holds (and the password is not strong)",
+        "elements": [
+         "||",
+         "medium"
+        ]
+       },
+       {
+        "row_id": "B5",
+        "points": 1,
+        "criterion": "Returns \"weak\" otherwise; the tests are ordered or combined so exactly one value is returned for every input",
+        "elements": [
+         "weak",
+         "else or fall through"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8200,
+   "pack_id": "csf_methods_pass-s8200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_methods_pass",
+   "facts": [
+    "L=6",
+    "U=2"
+   ],
+   "seed": 8200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound two-part Methods and Control Structures FRQ. Part (a) is a String traversal and counting loop; part (b) calls the helper and uses compound booleans. Rubric rows are single-behavior, and the unit tests distinguish the wrong solutions. Minor nit: the parenthetical about the threshold in the stimulus is redundant.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part (a) targets 2.10 and 2.A directly. Part (b) is labeled 2.C and combines compound booleans with a helper call (2.5, 1.15), which is within the bundle's stated scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Reference and alternative solutions agree. The independent solver's compareTo-based solution is also valid under the \"equivalent test\" clause in rubric row A2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Class skeleton with method headers and examples is complete. The parenthetical about the 6-character threshold is redundant but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ: the common_errors listed for each row are realistic, such as an off-by-one loop bound, a wrong boolean operator, and an incorrect test order."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points split 4/5, typed Java, no calculator, and a typical AP load."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Part (a) is a standard String traversal with a counter, using charAt or substring and a range comparison on characters. Part (b) is a three-way selection with a compound condition, and it calls the part (a) method. The concepts are in scope for Unit 2 and the bundle's related topics (2.10, 1.15, 2.9). The reasoning is moderate: students must correctly order the strong/medium/weak conditions and handle the 'or' in the medium case. Reading and computation load are low, preconditions are clearly specified, and there is no hidden or out-of-scope knowledge. This is typical of a short FRQ-style item suited to a full mock rather than basic learning or an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f01-k1",
+  "cellId": "ap_computer_science_a-f01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "2.10",
+  "unitCode": "2",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_methods_pass",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Two-part coding task: (a) standard String traversal with a counter and an uppercase range test; (b) three-tier selection using compound boolean expressions (&& and ||), correct ordering or nesting of conditions, boundary values (>= 8, >= 2), and a call to the part (a) method. Matches typical AP CS A FRQ methods and control structures depth. Reading and computation are light, and the difficulty comes only from in-scope concepts.",
+  "payload": {
+   "archetype": "csf_methods_pass",
+   "template": "q1",
+   "topic": "2.10",
+   "extra_topics": [
+    "1.15",
+    "2.9"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "PasswordCheck: counting uppercase letters and rating a password",
+   "stimulus": {
+    "kind": "text",
+    "description": "A teacher is writing a class PasswordCheck with two static methods. The class is shown with the method headers. (The threshold for a long password is 8 characters.)\n```java\npublic class PasswordCheck {\n    /** Returns the number of uppercase letters (A through Z) in s. */\n    public static int countUpper(String s) { /* to be implemented in part (a) */ }\n\n    /** Rates the strength of the password s; see part (b). */\n    public static String rate(String s) { /* to be implemented in part (b) */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method countUpper, which returns the number of uppercase letters (A through Z) in the String s. For example, countUpper(\"Hello World\") returns 2 and countUpper(\"abc\") returns 0. Complete the method countUpper.",
+     "points": 4,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int countUpper(String s) {\n        int count = 0;\n        for (int i = 0; i < s.length(); i++) {\n            char ch = s.charAt(i);\n            if (ch >= 'A' && ch <= 'Z') {\n                count++;\n            }\n        }\n        return count;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Iterates over every character of s with a loop whose bounds are correct (first through last index)",
+       "required_elements": [
+        "loop over 0 to s.length() - 1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "stops before the last character"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Tests each character for being between A and Z inclusive (or an equivalent test)",
+       "required_elements": [
+        "ch >= 'A' && ch <= 'Z'"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "excludes A or Z",
+        "counts lowercase letters"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Increments (or otherwise accumulates) a counter only for uppercase characters",
+       "required_elements": [
+        "count++ inside the condition"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "increments for every character"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Initializes the counter before the loop and returns it after the loop",
+       "required_elements": [
+        "int count = 0",
+        "return count"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Write the method rate, which returns a String that rates the strength of the password s. The rating is \"strong\" if s has at least 8 characters and at least 2 uppercase letters; otherwise \"medium\" if s has at least 8 characters or at least 1 uppercase letter; otherwise \"weak\". Your solution must call countUpper from part (a). Assume that countUpper works as specified.",
+     "points": 5,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static String rate(String s) {\n        int upper = countUpper(s);\n        if (s.length() >= 8 && upper >= 2) {\n            return \"strong\";\n        }\n        if (s.length() >= 8 || upper >= 1) {\n            return \"medium\";\n        }\n        return \"weak\";\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Calls countUpper(s) and uses its result (does not duplicate the counting loop)",
+       "required_elements": [
+        "countUpper(s)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "re-implements the loop"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Compares s.length() with 8 using a correct boundary (at least 8)",
+       "required_elements": [
+        "s.length() >= 8"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses > instead of >="
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Returns \"strong\" exactly when the length condition and the uppercase count of at least 2 both hold",
+       "required_elements": [
+        "&&",
+        "strong"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses || for strong"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "B4",
+       "points": 1,
+       "criterion": "Returns \"medium\" exactly when the length condition or at least one uppercase letter holds (and the password is not strong)",
+       "required_elements": [
+        "||",
+        "medium"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses && for medium"
+       ],
+       "requires_row_id": "B3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "B5",
+       "points": 1,
+       "criterion": "Returns \"weak\" otherwise; the tests are ordered or combined so exactly one value is returned for every input",
+       "required_elements": [
+        "weak",
+        "else or fall through"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "checks medium before strong"
+       ],
+       "requires_row_id": "B4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "L=8",
+    "U=2"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"\");",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"abc\");",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"Abc\");",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"HELLO\");",
+     "expected": "5"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"abcdefgh\");",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"Abcdefgh\");",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"AbCdEfGh\");",
+     "expected": "4"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"ABcdefghij\");",
+     "expected": "2"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"zzzzzzzzzzzz\");",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"QWERTYUIOP\");",
+     "expected": "10"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"\");",
+     "expected": "weak"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"abc\");",
+     "expected": "weak"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"Abc\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"HELLO\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"abcdefgh\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"Abcdefgh\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"AbCdEfGh\");",
+     "expected": "strong"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"ABcdefghij\");",
+     "expected": "strong"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"zzzzzzzzzzzz\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"QWERTYUIOP\");",
+     "expected": "strong"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"xyzABC\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"ZaZa\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"Az\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"aZ\");",
+     "expected": "medium"
+    }
+   ],
+   "verification": {
+    "variants": 8,
+    "wrong_failures": [
+     3,
+     7,
+     11,
+     1,
+     8,
+     4
+    ]
+   },
+   "blueprint": {
+    "id": "csf_methods_pass",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "Methods and control structures with String traversal and a helper call",
+    "topic": "2.10",
+    "skill": "2.A",
+    "student_thinking": [
+     "Write a counting loop over the characters of a String",
+     "Combine conditions with && and || in the right order",
+     "Call the method from part (a) instead of repeating it"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and three wrong solutions per part; expected values from Python",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.10"
+      ],
+      "points": 4,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int countUpper(String s) {\n        int count = 0;\n        for (int i = 0; i < s.length(); i++) {\n            char ch = s.charAt(i);\n            if (ch >= 'A' && ch <= 'Z') {\n                count++;\n            }\n        }\n        return count;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Iterates over every character of s with a loop whose bounds are correct (first through last index)",
+        "elements": [
+         "loop over 0 to s.length() - 1"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Tests each character for being between A and Z inclusive (or an equivalent test)",
+        "elements": [
+         "ch >= 'A' && ch <= 'Z'"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Increments (or otherwise accumulates) a counter only for uppercase characters",
+        "elements": [
+         "count++ inside the condition"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Initializes the counter before the loop and returns it after the loop",
+        "elements": [
+         "int count = 0",
+         "return count"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "2.10"
+      ],
+      "points": 5,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static String rate(String s) {\n        int upper = countUpper(s);\n        if (s.length() >= 8 && upper >= 2) {\n            return \"strong\";\n        }\n        if (s.length() >= 8 || upper >= 1) {\n            return \"medium\";\n        }\n        return \"weak\";\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Calls countUpper(s) and uses its result (does not duplicate the counting loop)",
+        "elements": [
+         "countUpper(s)"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Compares s.length() with 8 using a correct boundary (at least 8)",
+        "elements": [
+         "s.length() >= 8"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Returns \"strong\" exactly when the length condition and the uppercase count of at least 2 both hold",
+        "elements": [
+         "&&",
+         "strong"
+        ]
+       },
+       {
+        "row_id": "B4",
+        "points": 1,
+        "criterion": "Returns \"medium\" exactly when the length condition or at least one uppercase letter holds (and the password is not strong)",
+        "elements": [
+         "||",
+         "medium"
+        ]
+       },
+       {
+        "row_id": "B5",
+        "points": 1,
+        "criterion": "Returns \"weak\" otherwise; the tests are ordered or combined so exactly one value is returned for every input",
+        "elements": [
+         "weak",
+         "else or fall through"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8201,
+   "pack_id": "csf_methods_pass-s8201"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_methods_pass",
+   "facts": [
+    "L=8",
+    "U=2"
+   ],
+   "seed": 8201
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard Methods and Control Structures FRQ with a String traversal in part (a) and a helper-call plus compound-condition method in part (b). The rubric is clean, with 1-point rows. The only flaw is that part (b) is labeled skill 2.C, which does not describe the task; the labeling issue is minor.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part (a) matches 2.10 and skill 2.A. Part (b) is labeled 2.C but is really selection logic plus a method call; this is a minor label mismatch, not a scope violation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The spec is unambiguous. The reference and an alternative pass the tests, and the rubric rows each check one behavior."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Method headers and specifications with examples are complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric lists common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical for an AP CSA FRQ, with 9 points in total."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-part coding task: (a) standard String traversal with a counter and an uppercase range test; (b) three-tier selection using compound boolean expressions (&& and ||), correct ordering or nesting of conditions, boundary values (>= 8, >= 2), and a call to the part (a) method. Matches typical AP CS A FRQ methods and control structures depth. Reading and computation are light, and the difficulty comes only from in-scope concepts.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f02-k0",
+  "cellId": "ap_computer_science_a-f02",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "3.3",
+  "unitCode": "3",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_class_steps",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Full class-writing task typical of an AP FRQ Question 2. The student must choose private instance variables, write a constructor that stores the minimum, update state in addDailySteps, and write two accessors. The main subtlety is the integer-division trap in averageSteps (cast to double) and the zero-days guard. Preconditions are clearly stated, the arithmetic is trivial, and the reading load is light, so the difficulty comes from legitimate concept depth only.",
+  "payload": {
+   "archetype": "csf_class_steps",
+   "template": "q2",
+   "topic": "3.3",
+   "extra_topics": [
+    "3.4",
+    "3.5"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "not_allowed",
+   "title": "StepTracker: design a class",
+   "stimulus": {
+    "kind": "text",
+    "description": "A fitness app counts the days on which a user is active. The minimum for an active day is 5000 steps. Write the StepTracker class described below.\n```java\npublic class StepTracker {\n    // to be written in this question:\n    //   constructor StepTracker(int minActive)\n    //   void addDailySteps(int steps)\n    //   int activeDays()\n    //   double averageSteps()\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the complete StepTracker class, including the constructor and any required instance variables and methods. A StepTracker records the number of steps taken on each day. The constructor takes the minimum number of steps for a day to count as active. addDailySteps records one more day. activeDays returns the number of recorded days with at least the minimum number of steps. averageSteps returns the average number of steps per recorded day as a double, or 0.0 if no days have been recorded. Examples of the behavior are listed in the following table.\n\n| Statement | Value returned | Explanation |\n|---|---|---|\n| StepTracker t = new StepTracker(5000); | (none) | A tracker whose active-day minimum is 5000 steps |\n| t.addDailySteps(5500); | (none) | One day with 5500 steps |\n| t.addDailySteps(3000); | (none) | A second day, below the minimum |\n| t.activeDays() | 1 | Only the first day counted as active |\n| t.averageSteps() | 4250.0 | The mean of the two days |",
+     "points": 9,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\npublic class StepTracker {\n    private int minActive;\n    private int totalSteps;\n    private int days;\n    private int active;\n\n    public StepTracker(int minActive) {\n        this.minActive = minActive;\n        totalSteps = 0;\n        days = 0;\n        active = 0;\n    }\n    public void addDailySteps(int steps) {\n        totalSteps += steps;\n        days++;\n        if (steps >= minActive) {\n            active++;\n        }\n    }\n    public int activeDays() {\n        return active;\n    }\n    public double averageSteps() {\n        if (days == 0) {\n            return 0.0;\n        }\n        return (double) totalSteps / days;\n    }\n}\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Declares the class header public class StepTracker",
+       "required_elements": [
+        "public class StepTracker"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "declares an interface or a method named StepTracker"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Declares private instance variables sufficient to store the minimum and the data needed by all methods",
+       "required_elements": [
+        "private int ..."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "declares public instance variables",
+        "declares the variables inside a method"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Declares a public constructor with one int parameter that stores the minimum in an instance variable",
+       "required_elements": [
+        "public StepTracker(int minActive)",
+        "stores the parameter"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "assigns the parameter to itself without this"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "addDailySteps updates the stored data to reflect one more day (steps are accumulated, not replaced)",
+       "required_elements": [
+        "totalSteps += steps"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "replaces the total"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "addDailySteps (or activeDays) counts a day as active exactly when steps is at least the minimum",
+       "required_elements": [
+        "steps >= minActive"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses > instead of >="
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "activeDays returns the number of active days (declared int, public)",
+       "required_elements": [
+        "public int activeDays()",
+        "return active"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns the total steps"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "averageSteps handles the case of no recorded days by returning 0.0 without dividing by zero",
+       "required_elements": [
+        "days == 0",
+        "return 0.0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "divides by zero"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A8",
+       "points": 1,
+       "criterion": "averageSteps computes the average using floating-point division (a cast or double operand)",
+       "required_elements": [
+        "(double) totalSteps / days"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses integer division"
+       ],
+       "requires_row_id": "A7",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A9",
+       "points": 1,
+       "criterion": "All methods have the correct headers and return types (void, int, double) and the class compiles as a whole",
+       "required_elements": [
+        "void addDailySteps(int steps)",
+        "double averageSteps()"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "wrong return type"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "min=5000"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000);  return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "0 0.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000); t.addDailySteps(5000); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "1 5000.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000); t.addDailySteps(4999); t.addDailySteps(5001); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "1 5000.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000); t.addDailySteps(5000); t.addDailySteps(0); t.addDailySteps(10000); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "2 5000.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000); t.addDailySteps(100); t.addDailySteps(200); t.addDailySteps(300); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "0 200.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000); t.addDailySteps(5000); t.addDailySteps(5000); t.addDailySteps(5000); t.addDailySteps(4999); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "3 4999.75"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000); t.addDailySteps(5007); t.addDailySteps(3); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "1 2505.0"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     3,
+     1,
+     1,
+     5,
+     5
+    ]
+   },
+   "blueprint": {
+    "id": "csf_class_steps",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "Class design: header, private state, constructor, accessors and a guarded division",
+    "topic": "3.3",
+    "skill": "2.B",
+    "student_thinking": [
+     "Choose private state",
+     "Initialize it in the constructor",
+     "Update and report it from methods"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (different state representation) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative with a different internal representation, and wrong solutions; expected values from a Python simulation",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "3.3"
+      ],
+      "points": 9,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\npublic class StepTracker {\n    private int minActive;\n    private int totalSteps;\n    private int days;\n    private int active;\n\n    public StepTracker(int minActive) {\n        this.minActive = minActive;\n        totalSteps = 0;\n        days = 0;\n        active = 0;\n    }\n    public void addDailySteps(int steps) {\n        totalSteps += steps;\n        days++;\n        if (steps >= minActive) {\n            active++;\n        }\n    }\n    public int activeDays() {\n        return active;\n    }\n    public double averageSteps() {\n        if (days == 0) {\n            return 0.0;\n        }\n        return (double) totalSteps / days;\n    }\n}\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Declares the class header public class StepTracker",
+        "elements": [
+         "public class StepTracker"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Declares private instance variables sufficient to store the minimum and the data needed by all methods",
+        "elements": [
+         "private int ..."
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Declares a public constructor with one int parameter that stores the minimum in an instance variable",
+        "elements": [
+         "public StepTracker(int minActive)",
+         "stores the parameter"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "addDailySteps updates the stored data to reflect one more day (steps are accumulated, not replaced)",
+        "elements": [
+         "totalSteps += steps"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "addDailySteps (or activeDays) counts a day as active exactly when steps is at least the minimum",
+        "elements": [
+         "steps >= minActive"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "activeDays returns the number of active days (declared int, public)",
+        "elements": [
+         "public int activeDays()",
+         "return active"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "averageSteps handles the case of no recorded days by returning 0.0 without dividing by zero",
+        "elements": [
+         "days == 0",
+         "return 0.0"
+        ]
+       },
+       {
+        "row_id": "A8",
+        "points": 1,
+        "criterion": "averageSteps computes the average using floating-point division (a cast or double operand)",
+        "elements": [
+         "(double) totalSteps / days"
+        ]
+       },
+       {
+        "row_id": "A9",
+        "points": 1,
+        "criterion": "All methods have the correct headers and return types (void, int, double) and the class compiles as a whole",
+        "elements": [
+         "void addDailySteps(int steps)",
+         "double averageSteps()"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8200,
+   "pack_id": "csf_class_steps-s8200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_class_steps",
+   "facts": [
+    "min=5000"
+   ],
+   "seed": 8200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A class-design FRQ covering 3.3 to 3.5, skill 2.B. The nine one-point rows each judge one behavior. Rubric rows allow alternative state representations, as the independent solution shows.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a whole class with private state, a constructor and methods fits 3.3 through 3.5 and skill 2.B. No inheritance or other out-of-scope content is needed."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each row is one behavior. The row A5 element says activeDays counts steps >= minActive, and the criterion text allows the check in either addDailySteps or activeDays. A solution that stores the steps in an ArrayList and computes the results on demand would still satisfy the behavior, though rows A4 and A6 are worded around a running total and counter. The reference and an independent alternative both passed the tests, and each wrong solution failed at least one. A5 depends on A4, and A8 on A7, which is slightly harsh but acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives the method signatures and the part prompt includes a table of example behavior. The prose \"The minimum for an active day is 5000 steps\" is slightly in tension with the constructor parameter. The part prompt makes it clear that the constructor takes the minimum."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric rows list common errors such as the > comparison, integer division and replacing the total instead of adding."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 9-point class-design question is the standard AP Computer Science A free-response format. The load is typical and no calculator is involved."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Full class-writing task typical of an AP FRQ Question 2. The student must choose private instance variables, write a constructor that stores the minimum, update state in addDailySteps, and write two accessors. The main subtlety is the integer-division trap in averageSteps (cast to double) and the zero-days guard. Preconditions are clearly stated, the arithmetic is trivial, and the reading load is light, so the difficulty comes from legitimate concept depth only.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f02-k1",
+  "cellId": "ap_computer_science_a-f02",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "3.3",
+  "unitCode": "3",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_class_steps",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style class-writing task covering instance variables, constructor, mutator, and accessors. Difficulty levers are legitimate and in scope: the >= boundary for active days, the integer-division cast in averageSteps, and the zero-day guard returning 0.0. No inheritance or out-of-scope content, minimal reading, and no heavy computation. It is more demanding than basic learning because the student must design state and coordinate several methods, but it is not beyond typical exam difficulty.",
+  "payload": {
+   "archetype": "csf_class_steps",
+   "template": "q2",
+   "topic": "3.3",
+   "extra_topics": [
+    "3.4",
+    "3.5"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "not_allowed",
+   "title": "StepTracker: design a class",
+   "stimulus": {
+    "kind": "text",
+    "description": "A fitness app counts the days on which a user is active. The minimum for an active day is 8000 steps. Write the StepTracker class described below.\n```java\npublic class StepTracker {\n    // to be written in this question:\n    //   constructor StepTracker(int minActive)\n    //   void addDailySteps(int steps)\n    //   int activeDays()\n    //   double averageSteps()\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the complete StepTracker class, including the constructor and any required instance variables and methods. A StepTracker records the number of steps taken on each day. The constructor takes the minimum number of steps for a day to count as active. addDailySteps records one more day. activeDays returns the number of recorded days with at least the minimum number of steps. averageSteps returns the average number of steps per recorded day as a double, or 0.0 if no days have been recorded. Examples of the behavior are listed in the following table.\n\n| Statement | Value returned | Explanation |\n|---|---|---|\n| StepTracker t = new StepTracker(8000); | (none) | A tracker whose active-day minimum is 8000 steps |\n| t.addDailySteps(8500); | (none) | One day with 8500 steps |\n| t.addDailySteps(6000); | (none) | A second day, below the minimum |\n| t.activeDays() | 1 | Only the first day counted as active |\n| t.averageSteps() | 7250.0 | The mean of the two days |",
+     "points": 9,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\npublic class StepTracker {\n    private int minActive;\n    private int totalSteps;\n    private int days;\n    private int active;\n\n    public StepTracker(int minActive) {\n        this.minActive = minActive;\n        totalSteps = 0;\n        days = 0;\n        active = 0;\n    }\n    public void addDailySteps(int steps) {\n        totalSteps += steps;\n        days++;\n        if (steps >= minActive) {\n            active++;\n        }\n    }\n    public int activeDays() {\n        return active;\n    }\n    public double averageSteps() {\n        if (days == 0) {\n            return 0.0;\n        }\n        return (double) totalSteps / days;\n    }\n}\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Declares the class header public class StepTracker",
+       "required_elements": [
+        "public class StepTracker"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "declares an interface or a method named StepTracker"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Declares private instance variables sufficient to store the minimum and the data needed by all methods",
+       "required_elements": [
+        "private int ..."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "declares public instance variables",
+        "declares the variables inside a method"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Declares a public constructor with one int parameter that stores the minimum in an instance variable",
+       "required_elements": [
+        "public StepTracker(int minActive)",
+        "stores the parameter"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "assigns the parameter to itself without this"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "addDailySteps updates the stored data to reflect one more day (steps are accumulated, not replaced)",
+       "required_elements": [
+        "totalSteps += steps"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "replaces the total"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "addDailySteps (or activeDays) counts a day as active exactly when steps is at least the minimum",
+       "required_elements": [
+        "steps >= minActive"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses > instead of >="
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "activeDays returns the number of active days (declared int, public)",
+       "required_elements": [
+        "public int activeDays()",
+        "return active"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns the total steps"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "averageSteps handles the case of no recorded days by returning 0.0 without dividing by zero",
+       "required_elements": [
+        "days == 0",
+        "return 0.0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "divides by zero"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A8",
+       "points": 1,
+       "criterion": "averageSteps computes the average using floating-point division (a cast or double operand)",
+       "required_elements": [
+        "(double) totalSteps / days"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses integer division"
+       ],
+       "requires_row_id": "A7",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A9",
+       "points": 1,
+       "criterion": "All methods have the correct headers and return types (void, int, double) and the class compiles as a whole",
+       "required_elements": [
+        "void addDailySteps(int steps)",
+        "double averageSteps()"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "wrong return type"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "min=8000"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(8000);  return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "0 0.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(8000); t.addDailySteps(8000); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "1 8000.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(8000); t.addDailySteps(7999); t.addDailySteps(8001); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "1 8000.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(8000); t.addDailySteps(8000); t.addDailySteps(0); t.addDailySteps(16000); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "2 8000.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(8000); t.addDailySteps(100); t.addDailySteps(200); t.addDailySteps(300); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "0 200.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(8000); t.addDailySteps(8000); t.addDailySteps(8000); t.addDailySteps(8000); t.addDailySteps(7999); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "3 7999.75"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(8000); t.addDailySteps(8007); t.addDailySteps(3); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "1 4005.0"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     3,
+     1,
+     1,
+     5,
+     5
+    ]
+   },
+   "blueprint": {
+    "id": "csf_class_steps",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "Class design: header, private state, constructor, accessors and a guarded division",
+    "topic": "3.3",
+    "skill": "2.B",
+    "student_thinking": [
+     "Choose private state",
+     "Initialize it in the constructor",
+     "Update and report it from methods"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (different state representation) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative with a different internal representation, and wrong solutions; expected values from a Python simulation",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "3.3"
+      ],
+      "points": 9,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\npublic class StepTracker {\n    private int minActive;\n    private int totalSteps;\n    private int days;\n    private int active;\n\n    public StepTracker(int minActive) {\n        this.minActive = minActive;\n        totalSteps = 0;\n        days = 0;\n        active = 0;\n    }\n    public void addDailySteps(int steps) {\n        totalSteps += steps;\n        days++;\n        if (steps >= minActive) {\n            active++;\n        }\n    }\n    public int activeDays() {\n        return active;\n    }\n    public double averageSteps() {\n        if (days == 0) {\n            return 0.0;\n        }\n        return (double) totalSteps / days;\n    }\n}\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Declares the class header public class StepTracker",
+        "elements": [
+         "public class StepTracker"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Declares private instance variables sufficient to store the minimum and the data needed by all methods",
+        "elements": [
+         "private int ..."
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Declares a public constructor with one int parameter that stores the minimum in an instance variable",
+        "elements": [
+         "public StepTracker(int minActive)",
+         "stores the parameter"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "addDailySteps updates the stored data to reflect one more day (steps are accumulated, not replaced)",
+        "elements": [
+         "totalSteps += steps"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "addDailySteps (or activeDays) counts a day as active exactly when steps is at least the minimum",
+        "elements": [
+         "steps >= minActive"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "activeDays returns the number of active days (declared int, public)",
+        "elements": [
+         "public int activeDays()",
+         "return active"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "averageSteps handles the case of no recorded days by returning 0.0 without dividing by zero",
+        "elements": [
+         "days == 0",
+         "return 0.0"
+        ]
+       },
+       {
+        "row_id": "A8",
+        "points": 1,
+        "criterion": "averageSteps computes the average using floating-point division (a cast or double operand)",
+        "elements": [
+         "(double) totalSteps / days"
+        ]
+       },
+       {
+        "row_id": "A9",
+        "points": 1,
+        "criterion": "All methods have the correct headers and return types (void, int, double) and the class compiles as a whole",
+        "elements": [
+         "void addDailySteps(int steps)",
+         "double averageSteps()"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8202,
+   "pack_id": "csf_class_steps-s8202"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_class_steps",
+   "facts": [
+    "min=8000"
+   ],
+   "seed": 8202
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard AP CS A Class Design FRQ worth 9 points, with one 1-point row per behavior, and it covers 3.3 to 3.5 with skill 2.B. It is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The task is writing a class with private state, a constructor, methods, a guard against division by zero, and a cast. This fits Unit 3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The spec is unambiguous. The reference solution and an independent solver's solution agree, and the test cases cover the boundary at exactly 8000 and the empty case. The rubric rows are single-behavior and the dependency chain is reasonable. Row A5 allows the active-day check in either addDailySteps or activeDays. Row A9 partly overlaps A6 and A1 on headers, but the overlap is minor."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The skeleton, the spec, and the example table are complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common errors listed in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load fits a 9-point FRQ, and no calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style class-writing task covering instance variables, constructor, mutator, and accessors. Difficulty levers are legitimate and in scope: the >= boundary for active days, the integer-division cast in averageSteps, and the zero-day guard returning 0.0. No inheritance or out-of-scope content, minimal reading, and no heavy computation. It is more demanding than basic learning because the student must design state and coordinate several methods, but it is not beyond typical exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f03-k0",
+  "cellId": "ap_computer_science_a-f03",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.10",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_list_above",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style ArrayList algorithm. The student must handle the empty-list case, sum the Integer values, compute the average as a double to avoid integer division, then traverse again to build a new list of values strictly above the average without modifying the input. The concept depth is moderate (two traversals, a casting subtlety, a strict inequality, the empty-list edge case). It is not trivial, but it is within the Unit 4 scope and typical of a full mock. The reading load is light and the specification is unambiguous.",
+  "payload": {
+   "archetype": "csf_list_above",
+   "template": "q3",
+   "topic": "4.10",
+   "extra_topics": [
+    "4.8",
+    "4.9"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "DataTools: values above the average of an ArrayList",
+   "stimulus": {
+    "kind": "text",
+    "description": "A data-analysis class uses an ArrayList<Integer> of measurements. The class is shown with the header of the method you will write.\n```java\nimport java.util.ArrayList;\n\npublic class DataTools {\n    /** Returns a new ArrayList containing the values of data that are strictly greater than the average\n     *  of all values in data, in their original order. The list data is not modified.\n     *  Returns an empty list if data is empty. */\n    public static ArrayList<Integer> aboveAverage(ArrayList<Integer> data) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method aboveAverage, which returns a new ArrayList<Integer> containing the values of data that are strictly greater than the average of all the values in data, in their original order. The method must not modify data and returns an empty list when data is empty. For example, if data is [1, 2, 3, 10] the average is 4.0 and the method returns [10]. Complete the method aboveAverage.",
+     "points": 9,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static ArrayList<Integer> aboveAverage(ArrayList<Integer> data) {\n        ArrayList<Integer> result = new ArrayList<Integer>();\n        if (data.size() == 0) {\n            return result;\n        }\n        int sum = 0;\n        for (int i = 0; i < data.size(); i++) {\n            sum += data.get(i);\n        }\n        double avg = (double) sum / data.size();\n        for (int i = 0; i < data.size(); i++) {\n            if (data.get(i) > avg) {\n                result.add(data.get(i));\n            }\n        }\n        return result;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Creates a new ArrayList<Integer> to hold the result and returns it (the original list is not returned or modified)",
+       "required_elements": [
+        "new ArrayList<Integer>()",
+        "return result"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns data",
+        "modifies data"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Handles an empty list without an exception (empty result, no division by zero)",
+       "required_elements": [
+        "data.size() == 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "divides by zero"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Traverses all of data to accumulate the sum using get(i) or an enhanced for loop with correct bounds",
+       "required_elements": [
+        "for (int i = 0; i < data.size(); i++)",
+        "sum += data.get(i)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses length instead of size()",
+        "misses the last element"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Computes the average of all values (not of a subset) and does not lose the fractional part",
+       "required_elements": [
+        "(double) sum / data.size()"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "integer division"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Makes a second pass (or an equivalent single approach) that examines every element again after the average is known",
+       "required_elements": [
+        "second traversal"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "compares against a running average"
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "Tests each element for being strictly greater than the average",
+       "required_elements": [
+        "data.get(i) > avg"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses >=",
+        "compares the index"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "Adds qualifying elements to the result",
+       "required_elements": [
+        "result.add(data.get(i))"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds the index"
+       ],
+       "requires_row_id": "A6",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A8",
+       "points": 1,
+       "criterion": "Preserves the original order of the qualifying elements",
+       "required_elements": [
+        "add at the end"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "add(0, ...) reverses the order"
+       ],
+       "requires_row_id": "A7",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A9",
+       "points": 1,
+       "criterion": "Does not remove elements from data while it is traversed and the code compiles with correct ArrayList and Integer use",
+       "required_elements": [
+        "no data.remove"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "remove inside the loop"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "list_cases=8"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>();  ArrayList<Integer> r = DataTools.aboveAverage(d); return r + \"|\" + d;",
+     "expected": "[]|[]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(5); ArrayList<Integer> r = DataTools.aboveAverage(d); return r + \"|\" + d;",
+     "expected": "[]|[5]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(1); d.add(2); d.add(3); ArrayList<Integer> r = DataTools.aboveAverage(d); return r + \"|\" + d;",
+     "expected": "[3]|[1, 2, 3]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(4); d.add(4); d.add(4); ArrayList<Integer> r = DataTools.aboveAverage(d); return r + \"|\" + d;",
+     "expected": "[]|[4, 4, 4]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(10); d.add(1); d.add(1); d.add(1); ArrayList<Integer> r = DataTools.aboveAverage(d); return r + \"|\" + d;",
+     "expected": "[10]|[10, 1, 1, 1]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(-3); d.add(-1); d.add(-2); d.add(0); ArrayList<Integer> r = DataTools.aboveAverage(d); return r + \"|\" + d;",
+     "expected": "[-1, 0]|[-3, -1, -2, 0]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(7); d.add(9); d.add(8); d.add(6); ArrayList<Integer> r = DataTools.aboveAverage(d); return r + \"|\" + d;",
+     "expected": "[9, 8]|[7, 9, 8, 6]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(2); d.add(3); ArrayList<Integer> r = DataTools.aboveAverage(d); return r + \"|\" + d;",
+     "expected": "[3]|[2, 3]"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     1,
+     3,
+     7,
+     2,
+     1
+    ]
+   },
+   "blueprint": {
+    "id": "csf_list_above",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "ArrayList traversal with two passes, a floating-point average and building a new list",
+    "topic": "4.10",
+    "skill": "2.A",
+    "student_thinking": [
+     "Traverse an ArrayList with get and size",
+     "Compute an average without losing the fraction",
+     "Build a new list without changing the input"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative (enhanced for + cross-multiplication) and wrong solutions; expected values from Python",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.10"
+      ],
+      "points": 9,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static ArrayList<Integer> aboveAverage(ArrayList<Integer> data) {\n        ArrayList<Integer> result = new ArrayList<Integer>();\n        if (data.size() == 0) {\n            return result;\n        }\n        int sum = 0;\n        for (int i = 0; i < data.size(); i++) {\n            sum += data.get(i);\n        }\n        double avg = (double) sum / data.size();\n        for (int i = 0; i < data.size(); i++) {\n            if (data.get(i) > avg) {\n                result.add(data.get(i));\n            }\n        }\n        return result;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Creates a new ArrayList<Integer> to hold the result and returns it (the original list is not returned or modified)",
+        "elements": [
+         "new ArrayList<Integer>()",
+         "return result"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Handles an empty list without an exception (empty result, no division by zero)",
+        "elements": [
+         "data.size() == 0"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Traverses all of data to accumulate the sum using get(i) or an enhanced for loop with correct bounds",
+        "elements": [
+         "for (int i = 0; i < data.size(); i++)",
+         "sum += data.get(i)"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Computes the average of all values (not of a subset) and does not lose the fractional part",
+        "elements": [
+         "(double) sum / data.size()"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Makes a second pass (or an equivalent single approach) that examines every element again after the average is known",
+        "elements": [
+         "second traversal"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "Tests each element for being strictly greater than the average",
+        "elements": [
+         "data.get(i) > avg"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "Adds qualifying elements to the result",
+        "elements": [
+         "result.add(data.get(i))"
+        ]
+       },
+       {
+        "row_id": "A8",
+        "points": 1,
+        "criterion": "Preserves the original order of the qualifying elements",
+        "elements": [
+         "add at the end"
+        ]
+       },
+       {
+        "row_id": "A9",
+        "points": 1,
+        "criterion": "Does not remove elements from data while it is traversed and the code compiles with correct ArrayList and Integer use",
+        "elements": [
+         "no data.remove"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8200,
+   "pack_id": "csf_list_above-s8200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_list_above",
+   "facts": [
+    "list_cases=8"
+   ],
+   "seed": 8200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard ArrayList algorithm FRQ (two passes, double average, new list) that fits topic 4.10 and skill 2.A. The specification is clear, with an example and the empty-list condition. The nine rubric rows each judge one behavior and are consistent, and alternative solutions such as an enhanced for loop are acceptable. The load is typical of an AP FRQ. The only concern is the A9 row, which is somewhat vague, but it is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item is dominated by ArrayList traversal and building a new list, which is the target of 4.10 and skill 2.A. It uses no content from outside Unit 4."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference answer is correct. Independent solutions, such as the solver's enhanced for loop, also satisfy the specification. The rubric rows are 1 point each, sum to 9, and have consistent dependencies."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class header, spec and example are complete and unambiguous, and the precondition for empty data is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric's common_errors cover realistic mistakes (integer division, >=, add(0, ...) reversing the order)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task is typical in length for an AP FRQ question, needs no calculator, and has no extra reading load."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style ArrayList algorithm. The student must handle the empty-list case, sum the Integer values, compute the average as a double to avoid integer division, then traverse again to build a new list of values strictly above the average without modifying the input. The concept depth is moderate (two traversals, a casting subtlety, a strict inequality, the empty-list edge case). It is not trivial, but it is within the Unit 4 scope and typical of a full mock. The reading load is light and the specification is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f04-k0",
+  "cellId": "ap_computer_science_a-f04",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.13",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_2d_best_row",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard 2D array algorithm: traverse rows, accumulate each row's sum with a per-row reset, and track the max and its index. Using a strict > comparison handles the smallest-index tie rule. The pitfalls (sum reset placement, initial max value, strict vs non-strict comparison) are fair and in scope. Preconditions are fully specified, there is no heavy reading or arithmetic, and it is typical of a full-mock FRQ-style method-writing item.",
+  "payload": {
+   "archetype": "csf_2d_best_row",
+   "template": "q4",
+   "topic": "4.13",
+   "extra_topics": [
+    "4.12"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "GridStats: the row with the largest sum",
+   "stimulus": {
+    "kind": "text",
+    "description": "A class GridStats analyzes a rectangular two-dimensional array of integers. The class is shown with the header of the method you will write.\n```java\npublic class GridStats {\n    /** Returns the index of the row of grid with the largest sum of its elements.\n     *  If more than one row has the largest sum, returns the smallest such index.\n     *  Precondition: grid has at least one row and every row has at least one element. */\n    public static int bestRow(int[][] grid) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method bestRow, which returns the index of the row of grid with the largest sum of its elements. If more than one row has the largest sum, the method returns the smallest such row index. For example, if grid is { { 1, 2 }, { 5, 0 }, { 3, 2 } } the row sums are 3, 5 and 5, so bestRow returns 1. Complete the method bestRow.",
+     "points": 9,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int bestRow(int[][] grid) {\n        int best = 0;\n        int bestSum = -1000000;\n        for (int r = 0; r < grid.length; r++) {\n            int sum = 0;\n            for (int c = 0; c < grid[r].length; c++) {\n                sum += grid[r][c];\n            }\n            if (sum > bestSum) {\n                bestSum = sum;\n                best = r;\n            }\n        }\n        return best;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Iterates over every row with a loop bounded by grid.length",
+       "required_elements": [
+        "for (int r = 0; r < grid.length; r++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses grid[0].length for the rows"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Iterates over every element of the current row with bounds based on grid[r].length (or an enhanced for)",
+       "required_elements": [
+        "for (int c = 0; c < grid[r].length; c++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses grid.length for the columns"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Accesses elements with the row index first and the column index second",
+       "required_elements": [
+        "grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "swaps the indexes"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Accumulates the sum of the current row (and resets it for each row)",
+       "required_elements": [
+        "int sum = 0 inside the row loop",
+        "sum += grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "does not reset the sum",
+        "sums the whole array"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Keeps track of the largest row sum seen so far, initialized so negative sums work",
+       "required_elements": [
+        "bestSum initialized to the first row or a very small value"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "initializes to 0"
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "Compares the current row sum with the best using a strict comparison so ties keep the smaller index",
+       "required_elements": [
+        "sum > bestSum"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses >= (returns the last tied row)"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "Records the row index (not the sum) of the best row when a new best is found",
+       "required_elements": [
+        "best = r"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "stores the sum as the index"
+       ],
+       "requires_row_id": "A6",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A8",
+       "points": 1,
+       "criterion": "Returns the row index after all rows have been examined",
+       "required_elements": [
+        "return best"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop",
+        "returns the sum"
+       ],
+       "requires_row_id": "A7",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A9",
+       "points": 1,
+       "criterion": "The method compiles with correct 2D array syntax and return type int",
+       "required_elements": [
+        "public static int bestRow(int[][] grid)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "wrong return type"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "grids=8"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 5 } });",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 1, 2 }, { 3, 4 } });",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 4, 4 }, { 1, 7 }, { 8, 0 } });",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { -5, -1 }, { -2, -2 }, { -9, 1 } });",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 1, 1, 1 }, { 3, 0, 0 }, { 0, 2, 1 } });",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 0, 9 }, { 9, 0 } });",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 2, 9, 1 }, { 5, 5, 5 } });",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { -1 }, { -3 }, { -2 } });",
+     "expected": "0"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     3,
+     8,
+     1,
+     1,
+     3
+    ]
+   },
+   "blueprint": {
+    "id": "csf_2d_best_row",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "2D array row traversal with a running maximum and tie rule",
+    "topic": "4.13",
+    "skill": "2.A",
+    "student_thinking": [
+     "Sum each row with nested loops",
+     "Track the best sum and its index",
+     "Break ties toward the smaller index"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (separate sums array) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.13"
+      ],
+      "points": 9,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int bestRow(int[][] grid) {\n        int best = 0;\n        int bestSum = -1000000;\n        for (int r = 0; r < grid.length; r++) {\n            int sum = 0;\n            for (int c = 0; c < grid[r].length; c++) {\n                sum += grid[r][c];\n            }\n            if (sum > bestSum) {\n                bestSum = sum;\n                best = r;\n            }\n        }\n        return best;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Iterates over every row with a loop bounded by grid.length",
+        "elements": [
+         "for (int r = 0; r < grid.length; r++)"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Iterates over every element of the current row with bounds based on grid[r].length (or an enhanced for)",
+        "elements": [
+         "for (int c = 0; c < grid[r].length; c++)"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Accesses elements with the row index first and the column index second",
+        "elements": [
+         "grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Accumulates the sum of the current row (and resets it for each row)",
+        "elements": [
+         "int sum = 0 inside the row loop",
+         "sum += grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Keeps track of the largest row sum seen so far, initialized so negative sums work",
+        "elements": [
+         "bestSum initialized to the first row or a very small value"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "Compares the current row sum with the best using a strict comparison so ties keep the smaller index",
+        "elements": [
+         "sum > bestSum"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "Records the row index (not the sum) of the best row when a new best is found",
+        "elements": [
+         "best = r"
+        ]
+       },
+       {
+        "row_id": "A8",
+        "points": 1,
+        "criterion": "Returns the row index after all rows have been examined",
+        "elements": [
+         "return best"
+        ]
+       },
+       {
+        "row_id": "A9",
+        "points": 1,
+        "criterion": "The method compiles with correct 2D array syntax and return type int",
+        "elements": [
+         "public static int bestRow(int[][] grid)"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8200,
+   "pack_id": "csf_2d_best_row-s8200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_2d_best_row",
+   "facts": [
+    "grids=8"
+   ],
+   "seed": 8200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a single 9-point 2D-array FRQ on 4.13 and skill 2.A with a clear specification, a worked example and a stated precondition. The rubric has nine 1-point rows, each judging one behavior. The reference solution and an independent alternative both pass the tests, and the independent solver's answer is also correct. Minor concerns: the reference initializes bestSum to -1000000, a sentinel that is not strictly safe for all ints, though the rubric also accepts initializing from the first row. Row A9 (the method header) is slightly redundant because the header is given in the stimulus. The single 9-point part departs from the 3-6 part reference pattern, but the course notes fix the free response at 9 one-point rows, so I did not fail it.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Nested row traversal with a running maximum and a tie rule is core 4.13 content. It is Unit 4 only and uses no inheritance or other out-of-scope material."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The specification is unambiguous, and the model answer returns the smallest index on ties via the strict comparison. The independent solver's solution gives the same result. Rubric rows are each one behavior and consistent with the model answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class skeleton, Javadoc and example are complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "As an FRQ it has no distractors. The rubric lists common errors (using >=, not resetting the sum, initializing the best sum to 0, swapped indexes)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Writing one short method with nested loops fits the load of an AP CS A free-response question. No calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 2D array algorithm: traverse rows, accumulate each row's sum with a per-row reset, and track the max and its index. Using a strict > comparison handles the smallest-index tie rule. The pitfalls (sum reset placement, initial max value, strict vs non-strict comparison) are fair and in scope. Preconditions are fully specified, there is no heavy reading or arithmetic, and it is typical of a full-mock FRQ-style method-writing item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

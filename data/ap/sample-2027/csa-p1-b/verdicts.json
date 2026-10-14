@@ -1,0 +1,335 @@
+[
+ {
+  "key": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Loop over characters, count those between 'A' and 'Z'.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "public static int countUpper(String s) { int count = 0; for (int i = 0; i < s.length(); i++) { String c = s.substring(i, i + 1); if (c.compareTo(\"A\") >= 0 && c.compareTo(\"Z\") <= 0) count++; } return count; }"
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Compute length and upper count; check strong, then medium, else weak.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "public static String rate(String s) { int up = countUpper(s); boolean longPw = s.length() >= 6; if (longPw && up >= 2) return \"strong\"; if (longPw || up >= 1) return \"medium\"; return \"weak\"; }"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound two-part Methods and Control Structures FRQ. Part (a) is a String traversal and counting loop; part (b) calls the helper and uses compound booleans. Rubric rows are single-behavior, and the unit tests distinguish the wrong solutions. Minor nit: the parenthetical about the threshold in the stimulus is redundant.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part (a) targets 2.10 and 2.A directly. Part (b) is labeled 2.C and combines compound booleans with a helper call (2.5, 1.15), which is within the bundle's stated scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Reference and alternative solutions agree. The independent solver's compareTo-based solution is also valid under the \"equivalent test\" clause in rubric row A2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Class skeleton with method headers and examples is complete. The parenthetical about the 6-character threshold is redundant but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ: the common_errors listed for each row are realistic, such as an off-by-one loop bound, a wrong boolean operator, and an incorrect test order."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points split 4/5, typed Java, no calculator, and a typical AP load."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Part (a) is a standard String traversal with a counter, using charAt or substring and a range comparison on characters. Part (b) is a three-way selection with a compound condition, and it calls the part (a) method. The concepts are in scope for Unit 2 and the bundle's related topics (2.10, 1.15, 2.9). The reasoning is moderate: students must correctly order the strong/medium/weak conditions and handle the 'or' in the medium case. Reading and computation load are low, preconditions are clearly specified, and there is no hidden or out-of-scope knowledge. This is typical of a short FRQ-style item suited to a full mock rather than basic learning or an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f01-k1",
+  "cellId": "ap_computer_science_a-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Loop over characters, count those between 'A' and 'Z'.",
+     "final_answer": "public static int countUpper(String s) {\n  int count = 0;\n  for (int i = 0; i < s.length(); i++) {\n    String c = s.substring(i, i + 1);\n    if (c.compareTo(\"A\") >= 0 && c.compareTo(\"Z\") <= 0) count++;\n  }\n  return count;\n}",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Call countUpper once, then check the conditions in order: strong, then medium, then weak.",
+     "final_answer": "public static String rate(String s) {\n  int up = countUpper(s);\n  int len = s.length();\n  if (len >= 8 && up >= 2) return \"strong\";\n  if (len >= 8 || up >= 1) return \"medium\";\n  return \"weak\";\n}",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard Methods and Control Structures FRQ with a String traversal in part (a) and a helper-call plus compound-condition method in part (b). The rubric is clean, with 1-point rows. The only flaw is that part (b) is labeled skill 2.C, which does not describe the task; the labeling issue is minor.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part (a) matches 2.10 and skill 2.A. Part (b) is labeled 2.C but is really selection logic plus a method call; this is a minor label mismatch, not a scope violation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The spec is unambiguous. The reference and an alternative pass the tests, and the rubric rows each check one behavior."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Method headers and specifications with examples are complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric lists common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical for an AP CSA FRQ, with 9 points in total."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-part coding task: (a) standard String traversal with a counter and an uppercase range test; (b) three-tier selection using compound boolean expressions (&& and ||), correct ordering or nesting of conditions, boundary values (>= 8, >= 2), and a call to the part (a) method. Matches typical AP CS A FRQ methods and control structures depth. Reading and computation are light, and the difficulty comes only from in-scope concepts.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f02-k0",
+  "cellId": "ap_computer_science_a-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Keep the minimum, a running total of steps, a count of days and a count of active days. Return 0.0 when no days are recorded, and use floating-point division for the average.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "public class StepTracker {\n    private int minActive;\n    private int totalSteps;\n    private int numDays;\n    private int numActive;\n\n    public StepTracker(int minActive) {\n        this.minActive = minActive;\n        totalSteps = 0;\n        numDays = 0;\n        numActive = 0;\n    }\n\n    public void addDailySteps(int steps) {\n        totalSteps += steps;\n        numDays++;\n        if (steps >= minActive) {\n            numActive++;\n        }\n    }\n\n    public int activeDays() {\n        return numActive;\n    }\n\n    public double averageSteps() {\n        if (numDays == 0) {\n            return 0.0;\n        }\n        return (double) totalSteps / numDays;\n    }\n}",
+     "flaw_note": "The stimulus says the minimum is fixed at 5000, but the constructor takes it as a parameter. This is minor and doesn't stop the item being answered."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A class-design FRQ covering 3.3 to 3.5, skill 2.B. The nine one-point rows each judge one behavior. Rubric rows allow alternative state representations, as the independent solution shows.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a whole class with private state, a constructor and methods fits 3.3 through 3.5 and skill 2.B. No inheritance or other out-of-scope content is needed."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each row is one behavior. The row A5 element says activeDays counts steps >= minActive, and the criterion text allows the check in either addDailySteps or activeDays. A solution that stores the steps in an ArrayList and computes the results on demand would still satisfy the behavior, though rows A4 and A6 are worded around a running total and counter. The reference and an independent alternative both passed the tests, and each wrong solution failed at least one. A5 depends on A4, and A8 on A7, which is slightly harsh but acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives the method signatures and the part prompt includes a table of example behavior. The prose \"The minimum for an active day is 5000 steps\" is slightly in tension with the constructor parameter. The part prompt makes it clear that the constructor takes the minimum."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric rows list common errors such as the > comparison, integer division and replacing the total instead of adding."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 9-point class-design question is the standard AP Computer Science A free-response format. The load is typical and no calculator is involved."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Full class-writing task typical of an AP FRQ Question 2. The student must choose private instance variables, write a constructor that stores the minimum, update state in addDailySteps, and write two accessors. The main subtlety is the integer-division trap in averageSteps (cast to double) and the zero-days guard. Preconditions are clearly stated, the arithmetic is trivial, and the reading load is light, so the difficulty comes from legitimate concept depth only.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f02-k1",
+  "cellId": "ap_computer_science_a-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Use instance variables for the minimum, total steps, day count and active-day count. addDailySteps updates the totals and counts the day as active if steps >= minimum. averageSteps returns (double) total / days, or 0.0 when no days are recorded.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "public class StepTracker {\n    private int minActive;\n    private int totalSteps;\n    private int numDays;\n    private int activeCount;\n\n    public StepTracker(int minActive) {\n        this.minActive = minActive;\n        totalSteps = 0;\n        numDays = 0;\n        activeCount = 0;\n    }\n\n    public void addDailySteps(int steps) {\n        totalSteps += steps;\n        numDays++;\n        if (steps >= minActive) {\n            activeCount++;\n        }\n    }\n\n    public int activeDays() {\n        return activeCount;\n    }\n\n    public double averageSteps() {\n        if (numDays == 0) {\n            return 0.0;\n        }\n        return (double) totalSteps / numDays;\n    }\n}"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard AP CS A Class Design FRQ worth 9 points, with one 1-point row per behavior, and it covers 3.3 to 3.5 with skill 2.B. It is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The task is writing a class with private state, a constructor, methods, a guard against division by zero, and a cast. This fits Unit 3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The spec is unambiguous. The reference solution and an independent solver's solution agree, and the test cases cover the boundary at exactly 8000 and the empty case. The rubric rows are single-behavior and the dependency chain is reasonable. Row A5 allows the active-day check in either addDailySteps or activeDays. Row A9 partly overlaps A6 and A1 on headers, but the overlap is minor."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The skeleton, the spec, and the example table are complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common errors listed in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load fits a 9-point FRQ, and no calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style class-writing task covering instance variables, constructor, mutator, and accessors. Difficulty levers are legitimate and in scope: the >= boundary for active days, the integer-division cast in averageSteps, and the zero-day guard returning 0.0. No inheritance or out-of-scope content, minimal reading, and no heavy computation. It is more demanding than basic learning because the student must design state and coordinate several methods, but it is not beyond typical exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f03-k0",
+  "cellId": "ap_computer_science_a-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "First loop adds up the values (as int, then cast to double) to get the average, guarding against an empty list. Second loop adds every value strictly greater than the average to a new list, in its original order. data is never changed.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "public static ArrayList<Integer> aboveAverage(ArrayList<Integer> data) {\n    ArrayList<Integer> result = new ArrayList<Integer>();\n    if (data.size() == 0) return result;\n    int sum = 0;\n    for (int v : data) sum += v;\n    double avg = (double) sum / data.size();\n    for (int v : data) {\n        if (v > avg) result.add(v);\n    }\n    return result;\n}"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard ArrayList algorithm FRQ (two passes, double average, new list) that fits topic 4.10 and skill 2.A. The specification is clear, with an example and the empty-list condition. The nine rubric rows each judge one behavior and are consistent, and alternative solutions such as an enhanced for loop are acceptable. The load is typical of an AP FRQ. The only concern is the A9 row, which is somewhat vague, but it is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item is dominated by ArrayList traversal and building a new list, which is the target of 4.10 and skill 2.A. It uses no content from outside Unit 4."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference answer is correct. Independent solutions, such as the solver's enhanced for loop, also satisfy the specification. The rubric rows are 1 point each, sum to 9, and have consistent dependencies."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class header, spec and example are complete and unambiguous, and the precondition for empty data is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric's common_errors cover realistic mistakes (integer division, >=, add(0, ...) reversing the order)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task is typical in length for an AP FRQ question, needs no calculator, and has no extra reading load."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style ArrayList algorithm. The student must handle the empty-list case, sum the Integer values, compute the average as a double to avoid integer division, then traverse again to build a new list of values strictly above the average without modifying the input. The concept depth is moderate (two traversals, a casting subtlety, a strict inequality, the empty-list edge case). It is not trivial, but it is within the Unit 4 scope and typical of a full mock. The reading load is light and the specification is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f04-k0",
+  "cellId": "ap_computer_science_a-f04",
+  "passed": false,
+  "reasons": [
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Compute each row sum. Use the first row's sum as the starting best value, so negative sums are handled correctly. Only replace the best row when a sum is strictly greater, so the smallest index wins a tie. Example: sums 3, 5, 5 give 1.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "public static int bestRow(int[][] grid) {\n    int bestIndex = 0;\n    int bestSum = 0;\n    for (int c = 0; c < grid[0].length; c++) bestSum += grid[0][c];\n    for (int r = 1; r < grid.length; r++) {\n        int sum = 0;\n        for (int c = 0; c < grid[r].length; c++) sum += grid[r][c];\n        if (sum > bestSum) { bestSum = sum; bestIndex = r; }\n    }\n    return bestIndex;\n}"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a single 9-point 2D-array FRQ on 4.13 and skill 2.A with a clear specification, a worked example and a stated precondition. The rubric has nine 1-point rows, each judging one behavior. The reference solution and an independent alternative both pass the tests, and the independent solver's answer is also correct. Minor concerns: the reference initializes bestSum to -1000000, a sentinel that is not strictly safe for all ints, though the rubric also accepts initializing from the first row. Row A9 (the method header) is slightly redundant because the header is given in the stimulus. The single 9-point part departs from the 3-6 part reference pattern, but the course notes fix the free response at 9 one-point rows, so I did not fail it.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Nested row traversal with a running maximum and a tie rule is core 4.13 content. It is Unit 4 only and uses no inheritance or other out-of-scope material."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The specification is unambiguous, and the model answer returns the smallest index on ties via the strict comparison. The independent solver's solution gives the same result. Rubric rows are each one behavior and consistent with the model answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class skeleton, Javadoc and example are complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "As an FRQ it has no distractors. The rubric lists common errors (using >=, not resetting the sum, initializing the best sum to 0, swapped indexes)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Writing one short method with nested loops fits the load of an AP CS A free-response question. No calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 2D array algorithm: traverse rows, accumulate each row's sum with a per-row reset, and track the max and its index. Using a strict > comparison handles the smallest-index tie rule. The pitfalls (sum reset placement, initial max value, strict vs non-strict comparison) are fair and in scope. Preconditions are fully specified, there is no heavy reading or arithmetic, and it is typical of a full-mock FRQ-style method-writing item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

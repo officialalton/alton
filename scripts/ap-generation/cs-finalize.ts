@@ -5,6 +5,7 @@ import path from "node:path";
 import { LATEST_GATE, buildStock, type RawCand } from "../../lib/ap-generation/stock";
 import { generatorDefects } from "../../lib/ap-generation/generator-defects";
 import { gateCandidate } from "../../lib/ap-figures/gate";
+import { fenceCodeExplanation } from "../../lib/ap-generation/code-explanation";
 
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const RUNS = arg("--runs", "csa-p1-a").split(","), BATCH = arg("--batch", "csa-p1a");
@@ -12,6 +13,8 @@ const root = path.resolve("data/ap/sample-2027"), out = path.resolve("data/ap/st
 const runs: Record<string, RawCand[]> = {};
 for (const r of RUNS) { const f = path.join(root, r, "candidates.json"); if (existsSync(f)) runs[r] = (JSON.parse(readFileSync(f, "utf-8")) as RawCand[]).map((c) => ({ ...c, gateOverride: LATEST_GATE } as RawCand)); }
 const items = buildStock(runs, {});
+// 코드 블록 선택지가 든 해설: 펜스를 줄 단위로 옮겨 결과 화면이 코드 블록으로 그리게 한다(lib/ap-generation/code-explanation.ts).
+for (const i of items) { const pl = i.payload as { explanation_en?: unknown; items?: { explanation_en?: unknown }[] }; if (typeof pl.explanation_en === "string") pl.explanation_en = fenceCodeExplanation(pl.explanation_en); for (const it of pl.items ?? []) if (typeof it.explanation_en === "string") it.explanation_en = fenceCodeExplanation(it.explanation_en); }
 writeFileSync(path.join(out, `${BATCH}-items.json`), JSON.stringify(items.map((i) => ({ ...i })), null, 0));
 const pass = items.filter((i) => i.validation === "auto_passed" && !i.duplicateOf && generatorDefects(i.payload).length === 0);
 writeFileSync(path.join(out, `${BATCH}-pass-keys.json`), "[\n" + pass.map((r) => JSON.stringify(r.stockKey)).join(",\n") + "\n]\n");

@@ -70,6 +70,16 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "micro-p2b", title: "AP Microeconomics P2 MC-b (MI1·MI2 부족분)", itemsFile: "micro-p2b-items.json", loadLabel: "micro-p2b-2026-10-13", supplement: true, passKeysFile: "micro-p2b-pass-keys.json", evidenceFile: "evidence-micro-s2.json" },
   { id: "micro-p2c", title: "AP Microeconomics P2 MC-c (MI2 부족분·수정 원형)", itemsFile: "micro-p2c-items.json", loadLabel: "micro-p2c-2026-10-13", supplement: true, passKeysFile: "micro-p2c-pass-keys.json", evidenceFile: "evidence-micro-s2.json" },
   { id: "micro-p2d", title: "AP Microeconomics P2 MC-d (마지막 부족 칸)", itemsFile: "micro-p2d-items.json", loadLabel: "micro-p2d-2026-10-13", supplement: true, passKeysFile: "micro-p2d-pass-keys.json", evidenceFile: "evidence-micro-s2.json" },
+  // 2026-10-13 AP Computer Science A(docs/ap/csa-groundwork.md §9): 파일럿 2 + s2 보충 5 + 부족분 2배치. 한 증거 파일(evidence-csa-s2.json)을 공유한다. CS1·CS2 정확 배정: data/ap/stock/exact-assign-csa-cs1-cs2.json
+  { id: "csa-p1a", title: "AP Computer Science A P1-a (MC 파일럿) (통과 22)", itemsFile: "csa-p1a-items.json", loadLabel: "csa-p1a-2026-10-13", supplement: true, passKeysFile: "csa-p1a-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
+  { id: "csa-p1b", title: "AP Computer Science A P1-b (FRQ 파일럿) (통과 3)", itemsFile: "csa-p1b-items.json", loadLabel: "csa-p1b-2026-10-13", supplement: true, passKeysFile: "csa-p1b-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
+  { id: "csa-s2a", title: "AP Computer Science A s2 MC-a (통과 31)", itemsFile: "csa-s2a-items.json", loadLabel: "csa-s2a-2026-10-13", supplement: true, passKeysFile: "csa-s2a-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
+  { id: "csa-s2b", title: "AP Computer Science A s2 MC-b (통과 30)", itemsFile: "csa-s2b-items.json", loadLabel: "csa-s2b-2026-10-13", supplement: true, passKeysFile: "csa-s2b-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
+  { id: "csa-s2c", title: "AP Computer Science A s2 MC-c (통과 27)", itemsFile: "csa-s2c-items.json", loadLabel: "csa-s2c-2026-10-13", supplement: true, passKeysFile: "csa-s2c-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
+  { id: "csa-s2fa", title: "AP Computer Science A s2 FRQ-a (Q1·Q2) (통과 5)", itemsFile: "csa-s2fa-items.json", loadLabel: "csa-s2fa-2026-10-13", supplement: true, passKeysFile: "csa-s2fa-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
+  { id: "csa-s2fb", title: "AP Computer Science A s2 FRQ-b (Q3·Q4) (통과 4)", itemsFile: "csa-s2fb-items.json", loadLabel: "csa-s2fb-2026-10-13", supplement: true, passKeysFile: "csa-s2fb-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
+  { id: "csa-s2sm", title: "AP Computer Science A s2 부족분 MC (수정 원형 재시도) (통과 12)", itemsFile: "csa-s2sm-items.json", loadLabel: "csa-s2sm-2026-10-13", supplement: true, passKeysFile: "csa-s2sm-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
+  { id: "csa-s2sf", title: "AP Computer Science A s2 부족분 FRQ (Q4 재시도) (통과 1)", itemsFile: "csa-s2sf-items.json", loadLabel: "csa-s2sf-2026-10-13", supplement: true, passKeysFile: "csa-s2sf-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 
