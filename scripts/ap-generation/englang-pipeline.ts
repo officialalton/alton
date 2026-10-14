@@ -95,7 +95,7 @@ function corpus(excludeRun: string): CorpusDoc[] {
 // ── 단계: plan ─────────────────────────────────────────────────────
 function specsOf(): P.SetSpec[] {
   const used = new Set<string>(); const out: P.SetSpec[] = [];
-  const f = path.join(ROOT); for (const d of existsSync(f) ? readdirSync(f).filter((x) => /^(englang|el)-/.test(x) && x !== cfg.run && statSync(path.join(f, x)).isDirectory()) : []) { const sf = path.join(f, d, "sets.json"); if (existsSync(sf)) for (const s of JSON.parse(readFileSync(sf, "utf-8")) as { spec: P.SetSpec }[]) used.add(s.spec.theme); }
+  const f = path.join(ROOT); for (const d of existsSync(f) ? readdirSync(f).filter((x) => /^(englang|el)-/.test(x) && x !== cfg.run && !(cfg.corpusExclude ?? []).includes(x) && statSync(path.join(f, x)).isDirectory()) : []) { const sf = path.join(f, d, "sets.json"); if (existsSync(sf)) for (const s of JSON.parse(readFileSync(sf, "utf-8")) as { spec: P.SetSpec }[]) used.add(s.spec.theme); }
   for (const k of ["reading", "writing"] as const) { const p = cfg.plan?.[k]; if (p?.sets) { const part = planSets({ kind: k, sets: p.sets, perSet: p.perSet, seed: p.seed, startIndex: p.startIndex, usedThemes: used }); part.forEach((s) => used.add(s.theme)); out.push(...part); } }
   return out;
 }
@@ -139,7 +139,7 @@ async function solveStage() {
     if (!setAlive(r)) continue; const idx = r.items.map((_, i) => i).filter((i) => r.items[i].det.length === 0); if (!idx.length) continue;
     cfg.models.solvers.forEach((model, k) => {
       const shown = idx.map((i) => ({ stem: r.items[i].stem, options: perm(4, k).map((j) => r.items[i].options[j].text) }));
-      reqs.push(mk(`v${k}-${r.spec.id}`, model, P.SOLVER_SYSTEMS[k], P.SOLVER_TOOL, P.solverUser(passageDisplay(r.set!), shown), 4000)); meta.push({ id: `v${k}-${r.spec.id}`, setId: r.spec.id, k, idx });
+      reqs.push(mk(`v${k}-${r.spec.id}-${idx.join("")}`, model, P.SOLVER_SYSTEMS[k], P.SOLVER_TOOL, P.solverUser(passageDisplay(r.set!), shown), 4000)); meta.push({ id: `v${k}-${r.spec.id}-${idx.join("")}`, setId: r.spec.id, k, idx });
     });
   }
   const est = cfg.models.solvers.reduce((a, m) => a + estimate(m, reqs.length / 3, 1800, 1800), 0);
@@ -158,7 +158,7 @@ async function advStage() {
   for (const r of rows) {
     if (!setAlive(r)) continue; const idx = r.items.map((_, i) => i).filter((i) => solved(votes, r, i)); if (!idx.length) continue;
     const items = idx.map((i) => ({ stem: r.items[i].stem, options: r.items[i].options.map((o) => o.text), key: r.items[i].key_index, why: r.items[i].options[r.items[i].key_index].why }));
-    reqs.push(mk(`a-${r.spec.id}`, cfg.models.adversary, P.ADV_SYSTEM, P.ADV_TOOL, P.advUser(passageDisplay(r.set!), items), 6000)); meta.push({ id: `a-${r.spec.id}`, setId: r.spec.id, idx });
+    reqs.push(mk(`a-${r.spec.id}-${idx.join("")}`, cfg.models.adversary, P.ADV_SYSTEM, P.ADV_TOOL, P.advUser(passageDisplay(r.set!), items), 6000)); meta.push({ id: `a-${r.spec.id}-${idx.join("")}`, setId: r.spec.id, idx });
   }
   const out = await call("adv", reqs, estimate(cfg.models.adversary, reqs.length, 2500, 2500));
   const adv: Record<string, (Json | null)[]> = {};
@@ -173,7 +173,7 @@ async function judgeStage() {
   for (const r of rows) {
     const idx = r.items.map((_, i) => i).filter((i) => adv[r.spec.id]?.[i]); if (!idx.length) continue;
     const items = idx.map((i) => { const a = adv[r.spec.id][i]!; return { stem: r.items[i].stem, options: r.items[i].options.map((o) => o.text), key: r.items[i].key_index, alt: Number.isInteger(a.alt_index) ? (a.alt_index as number) : null, argument: String(a.argument ?? "") }; });
-    reqs.push(mk(`j-${r.spec.id}`, cfg.models.judge, P.JUDGE_SYSTEM, P.JUDGE_TOOL, P.judgeUser(passageDisplay(r.set!), items), 4000)); meta.push({ id: `j-${r.spec.id}`, setId: r.spec.id, idx });
+    reqs.push(mk(`j-${r.spec.id}-${idx.join("")}`, cfg.models.judge, P.JUDGE_SYSTEM, P.JUDGE_TOOL, P.judgeUser(passageDisplay(r.set!), items), 4000)); meta.push({ id: `j-${r.spec.id}-${idx.join("")}`, setId: r.spec.id, idx });
   }
   const out = await call("judge", reqs, estimate(cfg.models.judge, reqs.length, 2800, 1500)); const jd: Record<string, (Json | null)[]> = {};
   for (const m of meta) { const row = rows.find((r) => r.spec.id === m.setId)!; const arr = (jd[m.setId] ??= row.items.map(() => null)); for (const v of (out.get(m.id)?.verdicts ?? []) as Json[]) { const ii = m.idx[Number(v.question) - 1]; if (ii !== undefined) arr[ii] = v; } }
