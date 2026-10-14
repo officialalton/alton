@@ -68,3 +68,43 @@ describe("layouts", () => {
     expect(AP_LAYOUTS.ap_microeconomics[0].options).toBe(5);
   });
 });
+
+// ── FRQ 표·도식 자료의 stimulus.description(실험 설정) 이 학생 화면에서 사라지던 문제(감사 3라운드, 2026-10-13) ──
+describe("FRQ 설정 지문(frqLostSetup)", () => {
+  const SETUP = "A student measures the period $T$ of a block of mass $m$ hanging on a vertical spring of unknown spring constant $k$.";
+  const frq = (stimulus: Record<string, unknown>, subject = "ap_physics_1"): ApCandidateLike => ({
+    candidateKey: "t:frq", apSubjectCode: subject, kind: "frq_bundle",
+    payload: {
+      title: "Experiment: spring constant", total_points: 3, stimulus,
+      parts: [{ label: "A", points: 3, prompt: "Describe an experimental procedure to collect the data.", response_mode: "explain", model_answer: "Time ten oscillations for several masses.", rubric_rows: [{ points: 3, criterion: "procedure" }] }],
+    },
+    keywordCode: "k", difficultyProvisional: "exam_prep",
+  } as unknown as ApCandidateLike);
+  const table = (description: string, extra: Record<string, unknown> = {}) => ({ kind: "table", description, data: { x_label: "Mass m (kg)", y_label: "Period T (s)", rows: [[0.1, 0.445], [0.2, 0.62], [0.3, 0.774]], ...extra } });
+
+  it("표 자료의 실험 설정 서술문은 본문 지문으로 실린다(표만 보이던 화면 수정)", () => {
+    const p = planConversion(frq(table(SETUP)));
+    expect(p.ok).toBe(true);
+    if (p.ok) expect(p.items[0].passage).toBe(SETUP);
+  });
+  it("같은 설명이 이미 그림 notes 에 있으면(phys-s4 방식) 지문으로 중복해서 싣지 않는다", () => {
+    const p = planConversion(frq(table(SETUP, { notes: [SETUP] })));
+    expect(p.ok).toBe(true);
+    if (p.ok) expect(p.items[0].passage).toBeNull();
+  });
+  it("단순 그림 캡션은 건드리지 않는다(다른 과목의 기존 표시 유지)", () => {
+    const p = planConversion(frq(table("Selected values of R(t), in gallons per minute"), "ap_calculus_ab"));
+    expect(p.ok).toBe(true);
+    if (p.ok) expect(p.items[0].passage).toBeNull();
+  });
+  it("설명의 수치(310 K)가 화면 어디에도 없으면 지문으로 싣는다", () => {
+    const p = planConversion(frq(table("Concentration of A in the reaction A → products at 310 K"), "ap_chemistry"));
+    expect(p.ok).toBe(true);
+    if (p.ok) expect(p.items[0].passage).toBe("Concentration of A in the reaction A → products at 310 K.");
+  });
+  it("MC 문항은 영향받지 않는다", () => {
+    const mc = { candidateKey: "t:mc", apSubjectCode: "ap_physics_1", kind: "mc", payload: { stem: "Which graph?", options: ["a", "b", "c", "d"], key_index: 0, explanation_en: "Because.", stimulus: table(SETUP) }, keywordCode: "k", difficultyProvisional: "exam_prep" } as unknown as ApCandidateLike;
+    const p = planConversion(mc);
+    if (p.ok) expect(p.items[0].passage).toBeNull();
+  });
+});

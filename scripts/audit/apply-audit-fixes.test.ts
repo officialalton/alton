@@ -17,6 +17,15 @@ describe("assertSelectOnly", () => {
   });
 });
 
+describe("라운드 3 패치(AP FRQ 설정 지문)", () => {
+  it("물리1 용수철 실험 FRQ 가 포함되고 모두 passage 한 필드만 바꾼다", () => {
+    const { patches } = loadPatches({ round: 3 });
+    expect(patches.some((p) => p.apCandidateKey === "phys-s2-e:ap_physics_1-f02-k0")).toBe(true);
+    for (const p of patches) { expect(p.kind).toBe("ap"); expect(p.changes.map((c) => c.field)).toEqual(["passage"]); expect(String(p.changes[0].new)).not.toMatch(/(?<!\\)\$\d/); }
+    expect(new Set(patches.map((p) => p.id)).size).toBe(patches.length);
+  });
+});
+
 describe("계획 입력", () => {
   it("SAT 패치 목록 + 영어 해설 수동 패치(E-*)를 읽고, 패치 id 는 겹치지 않는다", () => {
     const { patches, overrides } = loadPatches({ includeScan: false });
