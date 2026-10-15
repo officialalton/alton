@@ -87,3 +87,42 @@ LT1·LT2 는 후보·문항군이 서로소(테스트 `lt-assign.test.ts`). 예�
 - 모든 FRQ 샘플의 인용·작품 사실을 사람이 읽지 않았다(Q3 샘플의 실제 작품 사실은 채점기 신고에만 의존).
 - 7문항은 합성 점수 0.7–0.8(위 설명). 보수적으로 쓰려면 해당 문항(`key_confidence.score < 0.8`)을 교체 후보로 빼면 된다.
 - 이 세션의 에세이 채점 flag(`AI_ESSAY_GRADING_ENABLED`)는 건드리지 않았다. `englit` 루브릭은 코드·테스트만 있고 프로덕션 점수 행은 만들어지지 않았다.
+
+## 10. Stage 1 — 게시 LT1·LT2 의 가공 지문 3칸을 실제 공유 영역 작품으로 교체 (2026-10-15, 브랜치 `englit-real-2`, DB 쓰기 없음)
+정책: `docs/POLICY-DECISIONS.md` 2026-10-15(재사용 권리가 확인된 실제 작품 · 지문 먼저 → 스킬·문항·키·오답 근거 · 기존 ALTON 작성 지문은 그대로 두고 "ALTON original passage" 표지로 구분(실제 시험의 대표가 아님) · 일괄 재생성 없음 · 단계별 소규모 교체 · 미해결 문항 제외). 1단계 산출물(`docs/ap/englit-material-audit.md`, `data/ap/englit-sources/`)에서 가져와 **3칸만** 교체한다.
+
+| 시험·칸 | 현재(ALTON 작성) | 교체(`lt-real-1:…`) | 출처 |
+|---|---|---|---|
+| LT1 MC 시 세트 `p03`(8문항) | The Bench in Vrana Square(가공) | `real-rs1-k0` — Dickinson "The Chariot"(20줄 전문, 8문항) | Poems by Emily Dickinson, ed. Todd & Higginson (1890), Gutenberg #12242 |
+| LT1 FRQ Q1(ap_frq #1) `fb1` | 가공 시 | `real-rf1-k0` — Hopkins "God's Grandeur"(14줄 소네트 전문, 약 125단어) | Poems of G. M. Hopkins, ed. Bridges (1918), Gutenberg #22403 |
+| LT2 FRQ Q2(ap_frq #2) `fa2` | 가공 산문 | `real-rf2-k0` — Chekhov "The Lady with the Dog"(I장 도입 발췌, 8문단 689단어) | trans. Constance Garnett (1917), Gutenberg #13415 |
+
+- **지문 길이**: Chekhov 발췌 689단어는 공식 산문 FRQ 범위(약 600–800단어, `englit-facts.md` §추정 가정)에 들어 경계 확장이 필요 없었다(그대로 원문). Hopkins 125단어는 시 FRQ 범위(100–400). 지문 텍스트는 레지스트리 저장본과 글자 그대로 같다(테스트가 `stanzas` 를 등록부에서 다시 만들어 비교).
+- **출처 표기**: 지문 첫 줄이 `Public-domain source text — <저자>, <작품>, <판본>`(예: "…— Emily Dickinson, The Chariot ("Because I could not stop for Death"), Poems by Emily Dickinson, ed. Mabel Loomis Todd and T. W. Higginson (Series One, 1890)"). `realAttribution()`(`lib/ap-generation/englit-real.ts`)이 만들고, `stimulus-display.ts` 의 `startsWithRealTextMarker`/`isEnglishPassage`·`problem-figures/check.ts` 가 이 형태를 영어 원문 지문으로 인식한다(표지 단독 줄 `Public-domain source text\n` 도 계속 인식). 문항 payload 에는 `provenance`(저장소·URL·재사용 근거·텍스트 sha256·변형 기록)와 `sourceRegistryIds`·`stimulusOrigin: real_public_domain_text`·`replaces` 가 남는다.
+- **줄 번호**: 시의 번호는 **원문 줄**에 붙고(5줄마다), 들여쓰기 줄은 걸어 접기(hanging indent) 수정이 반영된 `PassageBlock` 으로 그려진다(스크린샷 `docs/ap/screen-evidence/lt-real-1/`).
+
+### 10-1. 검증
+- **구성 규칙**(독립 검증기 `verifyLtAssignment`·`verifyEnglitFullComposition`): LT1·LT2 교체 뒤 위반 **0**(MC 55·FRQ 3, 묶음 5개 8–13문항, 장르 문항 수, 범주 1–7 범위, 시 ≥2·산문 ≥2 묶음, FRQ 유형 q1/q2/q3 각 1, LT1/LT2 후보·문항군 서로소). p03 → rs1 교체는 문항 수(8)·장르(시) 같아 구조 불변이고 범주만 바뀐다: LT1 범주(1…7) **8/4/11/12/6/6/8 → 9/3/10/13/7/5/8**(허용 8–11/1–4/8–11/11–15/5–8/5–8/5–8 안; 범주 6 이 하한 5). 그래서 문항을 고르거나 다시 쓰지 않아도 균형이 유지된다. LT2 는 MC 불변(FRQ 만 교체).
+- **실제 새 버전 검사 재생**(`lib/ap-admin/lt-real-1-plans.test.ts`): 2026-10-15 `supabase db query --linked` **SELECT 전용** 스냅샷(`data/ap/stock/lt1-lt2-published-v1-slots.json` — 게시 LT1·LT2 **둘 다 v1**, 58칸씩 + 후보 메타 16건)으로 `parseSwapPlan → resolveSwaps → checkNewVersionComposition`(관리자 미리보기와 같은 경로·`fullPracticeUnitBounds('ap_english_literature','full_practice')`·문항군 상한·교체 후보 완전성·다른 시험 겹침)을 돌려 위반 0. 문학에는 단원 상·하한이 **정의돼 있지 않다**(`fullPracticeUnitBounds` 가 undefined) — US History 때의 단원 불일치 문제는 해당 없음. 새 버전 후보 단원은 keyword_code 단원(U5.3→5, U9.4→9)이다.
+- **MC 8문항(rs1)**: 1차(1단계) 전 단계 통과 8/10(탈락 2: 풀이자 둘째 선택지 신고) → **재검증**(같은 파이프라인 `englit-real-pipeline.ts` 재실행, `REAL_RUN=englit-real-2`, 엄격 임계 0.8): 5문항 그대로 통과, 2문항(1.E·5.B)은 점수 0.788(두 풀이자 모두 'likely'+적대 'weak' 로 0.012 모자람; 4표·심판·사후 Fable 패널 모두 키와 일치 → 유지), **1문항(4.A "speaker's situation")은 풀이자의 '둘째 방어 가능 선택지' 신고로 탈락 → 같은 텍스트에서 새로 생성**(`englit-real-3`, 2문항 생성 → 1문항이 코드 게이트·블라인드 풀이 2·적대·심판·Fable 패널 전부 통과, 5.A) **해 같은 자리(7번째)에 교체**. 최종 8문항 스킬 6.C·1.E·4.C·4.D·3.C·5.B·5.A·7.B, 키 위치 0·2·3·1·2·1·2·0(균형 게이트 통과). 설정(범주 2) 문항 없음. 제외된 3문항(1단계 탈락 2 + 재검증 탈락 1)은 `payload.excluded_items` 에 사유와 함께 남고 학생에게 보이지 않는다.
+- **FRQ 샘플 6개**(Q1 3·Q2 3): 1단계에서 독립 채점기 2종(Opus·Sonnet)의 합의로 뽑은 6/4/2 샘플을 **운영 채점 경로 `processEssay`**(루브릭 `englit-v1`, 2회 실행 후 낮은 쪽, 샘플 leave-one-out 앵커; `scripts/essay-calibration.ts` `CALIB_SUBJECT=lit CALIB_FILES=lt-real-1`, `AI_ESSAY_GRADING_ENABLED` 는 이 프로세스에서만)로 재채점: rf1 **6/4/2 = 의도와 정확히 일치**, rf2 **6/4/3**(low 샘플 +1; 서열 6>4>3 유지, 모두 `done`, disagreement 없음). MAE 0.167. 결과 `data/ap/sample-2027/englit-real-2/frq-processessay.json`, 요약 `lt-real-1-summary.json`.
+- **화면 증거**(격리 스택 `ALTON_ltreal1`, 포트 +100, dev 서버 3111): 후보 3개 × 390×844·1280×800 = **20항목 fail 0**(보기 가시·잘림 없음·정답/해설 비노출·원문 수식 없음 전부 pass, FRQ 입력 4 pass). `data/ap/screen-evidence/evidence-lt-real-1.json`, 스크린샷 `docs/ap/screen-evidence/lt-real-1/`. 종료 후 시드 정리·`isolated-stack.sh stop`(컨테이너 0)·`config.toml` 원복·임시 비밀번호/키 파일 삭제.
+- **렌더 보고서**: `render-check.ts` 재생성, 보고서(`report.json/md`)에 신규 3행(`not_applicable`)만 반영.
+- **모델 지출**(원장): 재검증 MC $0.15+0.03(경계 패널)+0.22(교체 생성·검증)·processEssay $0.33 = **약 $0.76**(누적 $214.59 → $215.35, 중단선 $235 이내).
+
+### 10-2. 배치·계획·재현
+- **배치** `lt-real-1`(`lib/ap-admin/batches.ts`, `lt-real-1-2026-10-15`, 보조 적재, 증거 `evidence-lt-real-1.json`): 파일 `data/ap/stock/lt-real-1-{items,pass-keys,summary}.json`(생성기 `scripts/ap-generation/englit-real-stage1-build.ts`). `keys-file`·`render-check`·`supp-batches` 는 `lt-*-items.json` 규칙(`ltItemNames`)으로 자동 인식.
+- **새 버전 계획**: `data/ap/stock/lt1-v2-real-1-swap-plan.json`(9칸: ap_mc #(p03 의 첫 칸부터 8칸) + ap_frq #1) · `lt2-v2-real-1-swap-plan.json`(1칸: ap_frq #2). 생성기 `scripts/ap-generation/lt-real-1-plans.ts [--write]`. 원본 버전 = 현재 게시본(v1). FRQ 교체는 같은 FRQ 유형 칸 안(q1↔q1, q2↔q2).
+- **관리자 작업 순서**(DB 쓰기는 전부 관리자 화면, 이 브랜치는 쓰지 않았다):
+  1. 이 브랜치를 통합 브랜치에 병합·배포(배치 파일·증거·계획이 번들에 실려야 한다).
+  2. 관리자 → Mock Exams → AP 재고 관리 → **배치 전체 적재**: 배치 **`lt-real-1`**(3키) → 미리보기 → "확인했습니다" → 실행(① 적재 ② 렌더 기록 ③ 화면 기록 ④ 문제은행 변환). **건너뜀 허용은 켜지 않는다(엄격 모드)** — 3키 모두 렌더 보고서·화면 증거(해시 일치)가 있다. 건너뜀·"검증 미완료"가 보이면 진행하지 말고 원인(증거 해시 불일치 = 배포본 payload 가 다름)부터 해결. 적재 뒤 현황 표에서 `lt-real-1` 3/3 변환·`review_env_ready` 확인.
+  3. **새 버전 — `AP English Literature — Practice Exam 1`**: 계획 `lt1-v2-real-1-swap-plan.json`(교체 9칸 = MC 시 세트 `p03` 8칸 → rs1, FRQ Q1 `fb1` → rf1) → 미리보기(위반 0 기대) → 확인 → 초안 v2 → 초안 확인(시 세트 8문항이 같은 위치·FRQ Q1 이 Hopkins) → **'새 버전 공개'**.
+  4. **새 버전 — `AP English Literature — Practice Exam 2`**: 계획 `lt2-v2-real-1-swap-plan.json`(FRQ Q2 `fa2` → rf2) 동일 절차. 3·4 는 서로 독립.
+  5. 공개 뒤 학생 화면에서 Dickinson 세트·두 FRQ 지문을 한 번씩 연다(머리말 출처 줄·줄 번호·정답/해설 비노출).
+
+### 10-3. Stage 1 의 한계·UNVERIFIED
+- 사실·해석 정확성은 LLM 검사(Opus·Sonnet 블라인드 풀이, 적대, 심판, Fable 패널, 채점기 2종)로 보증한 것이며 **영문학 교사 검수가 아니다**. 재검증에서 같은 파이프라인이 문항 3개에 다른 결과를 낸 점(점수 경계 2, 둘째 선택지 신고 1)은 이 검증의 분산을 보여 준다.
+- 경계 2문항(1.E·5.B)은 엄격 임계(0.8) 아래 0.788 이지만 모든 표·판정이 키와 일치해 유지했다. 더 보수적으로 가려면 해당 문항을 빼고 같은 텍스트에서 추가 생성해야 한다(8문항 크기 유지 필요).
+- Dickinson 판본은 1890년 편집본(Todd·Higginson)이며 이후 원고 기반 텍스트(Johnson)와 어휘·구두점이 다르다(출처 줄에 판본을 밝힘). Hopkins 는 Bridges 1918 초판 줄 접힘 3곳을 레지스트리 `modifications` 에 기록한 대로 원 줄로 복원했다.
+- 샘플 에세이 점수는 모델 채점기 결과이며 공식 College Board 채점과의 일치는 검증하지 않았다. rf2 low 샘플은 운영 채점기가 3점(의도 2)을 준다 — 서열은 유지.
+- 이 브랜치는 `AI_ESSAY_GRADING_ENABLED` 를 건드리지 않았고(보정 프로세스 env 만), DB 적재·새 버전 공개를 실행하지 않았다.

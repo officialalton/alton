@@ -3,7 +3,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { isEnglishPassage, REAL_TEXT_MARKER } from "../ap-exam/stimulus-display";
 import { passageRequiresFigure } from "../problem-figures/check";
-import { locate, realDisplay, realHeadnote, realItemViolations, realSet, resolveEvidence, unitOfLine, type RealItemRaw } from "./englit-real";
+import { locate, realAttribution, realDisplay, realHeadnote, realItemViolations, realSet, resolveEvidence, unitOfLine, type RealItemRaw } from "./englit-real";
 import type { Registry } from "./englit-sources";
 
 const SRC = path.resolve("data/ap/englit-sources");
@@ -26,7 +26,7 @@ describe("real-text set building", () => {
   });
   it("display carries the public-domain marker (not the ALTON-original one) and the credit", () => {
     const e = entry("dickinson-chariot"); const d = realDisplay(chariot() as never, e);
-    expect(d.startsWith(`${REAL_TEXT_MARKER}\n`)).toBe(true); expect(d).toContain("by Emily Dickinson"); expect(d).toContain("```passage"); expect(d).not.toContain("ALTON original");
+    expect(d.startsWith(`${REAL_TEXT_MARKER} — Emily Dickinson, The Chariot`)).toBe(true); expect(d.split("\n")[0]).toBe(realAttribution(e)); expect(d.split("\n")[0]).toContain("Poems by Emily Dickinson, ed. Mabel Loomis Todd and T. W. Higginson (Series One, 1890)"); expect(d.split("\n")[0]).not.toContain("Gutenberg"); expect(d).toContain("by Emily Dickinson"); expect(d).toContain("```passage"); expect(d).not.toContain("ALTON original");
     expect(isEnglishPassage(d)).toBe(true); expect(passageRequiresFigure(d)).toBe(false);
   });
   it("headnote states author, year and excerpt status", () => {

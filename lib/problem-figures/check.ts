@@ -1,6 +1,7 @@
 // 표준 렌더링 엔진 — 검증 계층(docs/2026-09-14-standard-rendering-engine-design.md 3절).
 // 초안 저장 시 서버가 돌리고 결과(render_check)를 버전에 남긴다. 공개 게이트는 ok=true + 그림 해시 일치를 요구한다.
 
+import { startsWithRealTextMarker } from "../ap-exam/stimulus-display";
 import { LEGACY_FIGURE_TYPES, validateFigureSpec } from "./spec";
 import { lintParallelTransversalAgainstText, renderParallelTransversal, type FigureIssue } from "./templates/parallel-transversal";
 import { lintTriangleAgainstText, renderTriangle } from "./templates/triangle";
@@ -36,7 +37,7 @@ export type RenderCheck = {
 
 /** 지문이 그림을 요구하는가("as shown", "in the figure", "the graph", "in the diagram"). */
 export function passageRequiresFigure(passage: string): boolean {
-  if (passage.startsWith("ALTON original passage\n") || passage.startsWith("Public-domain source text\n")) return false; // 영어 원본 지문(시·소설·희곡·논픽션): "the figure of the old man" 같은 문학적 표현은 그림 지시가 아니다(2026-10-14 AP English Literature)
+  if (passage.startsWith("ALTON original passage\n") || startsWithRealTextMarker(passage)) return false; // 영어 원본 지문(시·소설·희곡·논픽션): "the figure of the old man" 같은 문학적 표현은 그림 지시가 아니다(2026-10-14 AP English Literature)
   return /\b(as shown|in the figure|the figure|the diagram|shown below|shown above|the graph (?:above|below|shown))\b/i.test(passage);
 }
 

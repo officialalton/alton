@@ -18,12 +18,12 @@ import { groupOfEntry, locate, realDisplay, realItemViolations, realSet, resolve
 import type { Registry, SourceEntry } from "../../lib/ap-generation/englit-sources";
 
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
-const RUN = "englit-real-1"; const ROOT = path.resolve("data/ap/sample-2027"); const DIR = path.join(ROOT, RUN); mkdirSync(DIR, { recursive: true });
-const SRC = path.resolve("data/ap/englit-sources"); const OUT = path.join(SRC, "sample"); mkdirSync(OUT, { recursive: true });
-const CFG = { runCapUsd: 5.8, hardStopCumulativeUsd: 222, models: { gen: "claude-opus-5-5", solvers: ["claude-opus-5-5", "claude-sonnet-5-5"], adversary: "claude-opus-5-5", judge: "claude-opus-5-5", panel: "claude-fable-5-1", sampleHigh: "claude-opus-5-5", sampleLow: "claude-sonnet-5-5", graders: ["claude-opus-5-5", "claude-sonnet-5-5"] }, effort: "medium", gradeEffort: "low", sampleCands: 2, minKeyConfidence: 0.8 };
+const RUN = process.env.REAL_RUN ?? "englit-real-1"; const ROOT = path.resolve("data/ap/sample-2027"); const DIR = path.join(ROOT, RUN); mkdirSync(DIR, { recursive: true });
+const SRC = path.resolve("data/ap/englit-sources"); const OUT = process.env.REAL_RUN ? DIR : path.join(SRC, "sample"); mkdirSync(OUT, { recursive: true }); // REAL_RUN(재검증 실행)이면 산출물을 그 실행 폴더에만 쓴다(원본 샘플 파일 보존)
+const CFG = { runCapUsd: 5.8, hardStopCumulativeUsd: 222, models: { gen: "claude-opus-5-5", solvers: ["claude-opus-5-5", "claude-sonnet-5-5"], adversary: "claude-opus-5-5", judge: "claude-opus-5-5", panel: "claude-fable-5-1", sampleHigh: "claude-opus-5-5", sampleLow: "claude-sonnet-5-5", graders: ["claude-opus-5-5", "claude-sonnet-5-5"] }, effort: "medium", gradeEffort: "low", sampleCands: 2, minKeyConfidence: Number(process.env.REAL_MIN_KEY ?? 0.8) };
 type SetSpecR = { id: string; entry: string; n: number; group?: string; avoidFrom?: string };
 // rs2x = Dunbar 보충 라운드(첫 라운드에서 검증 통과가 5문항뿐이라 겹치지 않는 문항을 추가로 요청, 같은 세트 rs2 로 합친다).
-const SETS: SetSpecR[] = [{ id: "rs1", entry: "dickinson-chariot", n: 10 }, { id: "rs2", entry: "dunbar-mask", n: 9 }, { id: "rs3", entry: "chopin-silk-stockings", n: 10 }, { id: "rs2x", entry: "dunbar-mask", n: 7, group: "rs2", avoidFrom: "rs2" }];
+const SETS: SetSpecR[] = process.env.REAL_SETS ? (JSON.parse(process.env.REAL_SETS) as SetSpecR[]) : [{ id: "rs1", entry: "dickinson-chariot", n: 10 }, { id: "rs2", entry: "dunbar-mask", n: 9 }, { id: "rs3", entry: "chopin-silk-stockings", n: 10 }, { id: "rs2x", entry: "dunbar-mask", n: 7, group: "rs2", avoidFrom: "rs2" }];
 const FRQS = [{ id: "rf1", entry: "hopkins-grandeur", type: "poetry_analysis" as const, workTitle: "God's Grandeur", workYear: 1918 }, { id: "rf2", entry: "chekhov-lady-dog", type: "prose_analysis" as const, workTitle: "The Lady with the Dog", workYear: 1899 }];
 const LAYOUT_STATUS = "not verified identical to the official AP Central preview: layout was checked only against the ALTON PassageBlock at 390px and 1280px (docs/ap/englit-material-audit.md section 6)";
 const registry = JSON.parse(readFileSync(path.join(SRC, "registry.json"), "utf-8")) as Registry;
@@ -45,7 +45,7 @@ function guard(stage: string, est: number) {
 }
 async function call(stage: string, reqs: BatchReq[], estUsd: number): Promise<Map<string, Json | null>> {
   if (!reqs.length) return new Map(); guard(stage, estUsd);
-  const run = async (name: string, rs: BatchReq[]) => runBatch({ dir: DIR, name, requests: rs, budgetUsd: ledger(DIR).spent() + Math.max(0, CFG.runCapUsd - spentRun()), estimateUsd: estUsd * (rs.length / reqs.length), pollMs: 20000 });
+  const run = async (name: string, rs: BatchReq[]) => runBatch({ dir: DIR, name, requests: rs, budgetUsd: ledger(DIR).spent() + Math.max(0, CFG.runCapUsd - spentRun()), estimateUsd: estUsd * (rs.length / reqs.length), pollMs: 20000, ...(process.env.REAL_SYNC === "1" ? { sync: true, syncConcurrency: 4 } : {}) });
   const got = await run(stage, reqs); const out = new Map<string, Json | null>(); for (const r of reqs) out.set(r.custom_id, got.has(r.custom_id) ? (toolInput(got.get(r.custom_id)!) as Json | null) : null);
   const missing = reqs.filter((r) => !out.get(r.custom_id));
   if (missing.length) { console.log(`[${stage}] 도구 호출 없음 ${missing.length}건 → 강제 재요청`); const forced = missing.map((r) => ({ custom_id: r.custom_id, params: { ...r.params } })) as BatchReq[]; for (const f of forced) { delete (f.params as Json).thinking; delete (f.params as Json).output_config; } guard(`${stage}-retry`, estUsd * (missing.length / reqs.length)); const got2 = await run(`${stage}-retry`, forced); for (const r of missing) if (got2.has(r.custom_id)) out.set(r.custom_id, toolInput(got2.get(r.custom_id)!) as Json | null); }
