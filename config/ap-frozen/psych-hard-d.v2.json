@@ -1,0 +1,56 @@
+{
+ "version": "v2-psych-hard-d",
+ "run": "psych-hard-d",
+ "subject": "ap_psychology",
+ "archetypeList": "psych_hd_d",
+ "seed0": 11600,
+ "candidatesPerCell": 1,
+ "capUsd": 1.5,
+ "repair": false,
+ "batch": true,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "3",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts",
+  "lib/ap-generation/subjects/psych.ts",
+  "lib/ap-generation/subjects/psych-archetypes.json",
+  "lib/ap-generation/psych-frq-checks.ts",
+  "lib/ap-exam/psych-rules.ts"
+ ],
+ "skipStages": [
+  "gen",
+  "solve",
+  "review",
+  "review-retry",
+  "review-retry2"
+ ],
+ "hardStopCumulativeUsd": 225.1,
+ "_budget_estimate": {
+  "note": "psych-hard-d: 11 fixed archetypes (x2 variants), batch mode",
+  "capUsd": 1.5,
+  "taskCapUsd": 6,
+  "ownerStopLine": 295
+ },
+ "_note": "v2: re-label only. Reuses the v1 run's solve/review results (item text unchanged) and re-runs plan, blueprint, check, difficulty, verdicts with the difficulty-signal declarations (generator hash differs from v1)."
+}
