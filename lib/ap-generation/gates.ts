@@ -196,7 +196,7 @@ export function calibrateMc(subject: string, p: McPack): string[] {
   if (words < 3 || words > P.stemWords[1]) r.push("reference_stem_length_out_of_range");
   const whys = new Set(p.options.filter((_, i) => i !== p.key_index).map((o) => norm(o.why ?? "")));
   if (whys.size < Math.min(P.minDistinctMisconceptions, p.options.length - 1)) r.push("reference_distractor_misconceptions_not_distinct");
-  if (subject === "ap_statistics") r.push(...gateDifficultySignals(p as Parameters<typeof gateDifficultySignals>[0])); // 구조 난이도 선언 검증(선언이 있는 원형만)
+  if (subject === "ap_statistics" || subject === "ap_psychology") r.push(...gateDifficultySignals(p as Parameters<typeof gateDifficultySignals>[0])); // 구조 난이도 선언 검증(선언이 있는 원형만)
   return r;
 }
 /** Biology: 섹션 II 90분 / 34점(긴 9×2 + 짧은 4×4) = 점당 약 2.65분 → 9점 약 24분, 4점 약 10.6분(점수 비례 추정; 공식은 총 시간만 공시). 짧은 문항은 정확히 4개의 1점 파트. */

@@ -44,7 +44,27 @@ FRQ: AAQ 4종·EBQ 3종 중 시험당 AAQ 1·EBQ 1(`psf_ebq_team_bonus` 는 검�
 
 ## 8. 한계·UNVERIFIED
 - 개념 문항의 정답은 사람이 쓴 것을 **LLM 4개 검사(Opus 풀이·Sonnet 검토·Fable/Sonnet 패널)가 일치시킨 것**일 뿐 심리학 교사 검수가 아니다. 출시 전 교사 표본 검수 필수.
-- exam_prep 난이도 라벨 문항이 PS1 1/75, PS2 1/75 로 적다(난이도 분류기 기준; 다수가 basic_learning 로 분류됨). 문항이 시험 난이도보다 쉬울 가능성이 크다.
+- exam_prep 난이도 라벨 문항이 v2 게시본에서는 PS1 1/75, PS2 1/75 로 적었다(§9 에서 v3 배정으로 보강 — 51·52/75).
 - 세트 비중 12%(공식 샘플 43%), Practice ±5%p 허용, Bluebook 도구 동작, FRQ 읽기 시간 처리, 계산기 정책은 `psychology-facts.md` §4.
 - FRQ 4종이 같은 AAQ 구조라 시나리오 다양성이 제한적이다(통과 AAQ 4·EBQ 3).
 - 로컬 시드 비밀번호는 실행마다 무작위로 만들어 로컬 DB 에만 썼다. 개발 서버는 `--webpack` 으로 실행했다.
+
+## 9. psych-hard: 응용·분석 문항 보강과 PS1·PS2 v3 배정 (2026-10-15, 브랜치 `psych-hard`, DB 쓰기 없음)
+상세 감사·표: `docs/ap/psychology-difficulty-audit.md`. 요약: 게시 v2 의 exam_prep MC 1/75(PS1)·1/75(PS2) → **v3 배정 51/75·52/75**, 설계 기록 풀이 단계 3 이상 58·59문항, 가상 칸 0, 독립 검증기 위반 0, 두 시험 겹침 0, 공유 세트 3개씩 완전, 단원 15×5, Practice 45/19/11(공식 범위: 단원 11–19, Practice 1 45–53·2 15–23·3 3–12).
+- **원형**(`archetypes/psych_p0_hd_a..f.py`): 다단계 개념 적용 41, 연구 설계 평가 16, 코드 계산 자료 해석 13(총 70개, 고정 문장 변형 2개씩 + 코드 원형은 무제한 변형). 공통 도우미 `psych_hd_common.py`(정답이 가장 긴 선택지 금지·표 비율 정수 인원 검사), 구조 신호 `psych_hd_signals.py`. 테스트 `test_psych_hd.py`(11), `lib/ap-generation/psych-hd-signals.test.ts`(3).
+- **난이도 신호 선언**: `gates.ts`(`gateDifficultySignals` 를 ap_psychology 에도 적용)·`stats-difficulty.ts`(`difficultyContext` 를 ap_psychology MC 에 적용; 선언이 없는 기존 문항은 판정 요청이 바이트 단위로 같다). 판정기는 신호 없이는 다단계 개념 문항을 거의 basic 으로 분류했다(통과 23건 중 exam_prep 3). 신호를 주면 통과 24건 중 22건. 자세한 근거·한계는 감사 문서 §4–5.
+- **유료 실행**(동결 구성 `config/ap-frozen/psych-hard-{a,b,c3,d}.*.json`, --freeze → 커밋 → --check-only → 실행, Message Batches): 최종 재고 = 런 a(다단계 개념 26 원형)+d(11 원형) → 배치 `psych-hard-a`, 런 b(연구 설계·자료 해석·세트 2)+c3(13 원형) → 배치 `psych-hard-b`. v1 실행(신호 없음)의 solve·review 결과는 **문항 텍스트가 바뀌지 않은 칸에만** 재사용했고(`.v2` 구성, `skipStages: gen`), 검토기 지적(핵심 절의 근거 오류·약한 절대어 오답·꼬리 질문 모호성 등)으로 고친 원형 13개와 c 는 처음부터 다시 돌렸다. 난이도 라벨은 전부 신호 포함으로 다시 판정했다. 통과: a·d 72/74(배치 통과 키는 그림 누락 2건을 빼 70), b·c3 69/81(실패 원형 `ps_hd_r_meta_effect`·`ps_hd_s_relative`). **비용**: 원장 $219.13 → $224.31 = **$5.17**(생성·재판정 $3.97 + 두 번째 모델 패널 $1.20; 캡 $6, 중단선 $295).
+- **두 번째 모델 패널**(`psych-panel.ts --files psych-hard-a-items,psych-hard-b-items --report <배정>`): 새 배정에 들어간 119키(238회 맹검 풀이, Fable+Sonnet) **불일치·모호 표시 0**. 기존 문항 23키는 2026-10-14 패널 결과(`psych-panel-flags.json`)를 그대로 쓴다(패널 스크립트가 파일을 덮어쓰므로 기존 반려 목록을 복원·보존했다).
+- **화면 증거**(격리 스택 `ALTON_apsych2`, 가드 통과, 종료 후 `isolated-stack.sh stop`·`config.toml` 원복·컨테이너 0·시드 정리·개발 서버 종료): 후보 139개 x 390x844·1280x800 = 318항목, **fail 0**(pass 1664 / 해당 없음 562), `data/ap/screen-evidence/evidence-psych-hard.json`, 스크린샷 `docs/ap/screen-evidence/psych-hard/`(자동 점검일 뿐 사람이 문장·자료 의미를 본 것은 아니다). 렌더 검사 재생성: 보고서만 반영(Psychology 표 렌더 행 추가, 실패 `figure_referenced_but_missing` 2건은 배정 밖 — 본문이 "photograph/advertisement is shown"만 있고 그림이 없는 두 후보라 **통과 키 목록에서 뺐다**).
+- **표 비율 정수 인원 수**: 감사 지적에 따라 `scripts/audit/psych-table-pct-scan.ts` 로 점검(표의 행마다 인원 x 백분율이 정수여야 한다) → 위반 후보 8건(세트 2종·AAQ 1종)을 `psych-table-pct-flags.json` 으로 재고에서 뺐고 원형을 고쳤다(세트 2종은 새 배치로 재생성·통과, AAQ 는 다른 3종 사용). `psych-pool.ts` 가 목록을 읽어 배정에서 제외하고, 새 원형은 코드로 같은 검사를 강제한다.
+- **v3 배정**: `data/ap/stock/exact-assign-psych-ps1-ps2-v3.json`(검증기 출력 `…-v3-verifier.txt`). 재현: `npx tsx scripts/ap-generation/psych-assign.ts --sets PS1,PS2 --joint --prefer-exam-prep --exam-weight 0.5 --hd-bonus 0.05 --no-transfer data/ap/stock/psych-ps1-ps2-published-v2-slots.json --time-ms 240000 --write-report data/ap/stock/exact-assign-psych-ps1-ps2-v3.json`(HiGHS 용 `.venv-ap` 필요; 같은 재고에서 `--min-exam-prep 51` 까지 가상 0, 52 는 가상 3칸, 53 은 infeasible). 재검증: `psych-assign.ts --verify-report <보고서>`. 새 옵션: `--min-exam-prep N`, `--exam-weight`, `--hd-bonus`, `--no-transfer <게시 슬롯 스냅샷>`(상대 시험이 지금 갖고 있는 문항을 가져오지 않는다 → 두 시험의 새 버전이 서로 독립이라 **중간판이 필요 없다**), 후보 keyword_code 단원(`keyUnit`)과 문항 토픽 단원이 다른 후보는 쓰지 않는다(관리자 새 버전 검사는 keyword_code 단원을 센다).
+- **새 버전 계획**(`scripts/ap-generation/psych-new-version-plans.ts [--write]`, 입력 = 게시 PS1 v2·PS2 v2 SELECT 전용 스냅샷 `data/ap/stock/psych-ps1-ps2-published-v2-slots.json`: 둘 다 published, 77칸): `ps1-v3-swap-plan.json`(교체 60 = 단독 MC + 공유 세트 3칸 통째 + FRQ 같은 유형), `ps2-v3-swap-plan.json`(교체 60). 검증 `lib/ap-admin/psych-new-version-plans.test.ts`(17): 관리자 흐름의 `resolveSwaps` + `checkNewVersionComposition`(`fullPracticeUnitBounds('ap_psychology','full_practice')` 절대 범위 11-19, **DB 단원 = 후보 keyword_code 단원**, 문항군 상한, 다른 시험 겹침, 교체 후보 완전성)을 라이브 스냅샷에서 재현해 위반 0, 교체 뒤 구성 = v3 배정, 독립 검증기 0, 계획 파일이 다른 시험에는 적용되지 않음, 표 비율 정수 인원, 정답 길이 단서 < 45 %, exam_prep ≥ 51.
+
+### 관리자가 할 일(순서대로; PS1·PS2 는 독립이라 단계 사이 순서 제약이 없다)
+1. **새 배치 적재·변환**: 관리자 → Mock Exams → AP 재고 관리 → 배치 `psych-hard-a`(통과 70)·`psych-hard-b`(통과 69)를 각각 "배치 전체 적재"(① 후보 적재 ②③ 렌더·화면 기록 ④ 문제은행 변환). 증거 파일은 `evidence-psych-hard.json`(318항목 fail 0), 렌더 보고서는 이미 갱신돼 있어 건너뜀이 없어야 한다.
+2. **새 버전**(관리자 ⑥ 새 버전, 계획 파일은 목록에서 선택. 각 시험 = 미리보기 → 확인 → 초안 생성 → 별도 '새 버전 공개'; 공개 범위(무료)는 이전 공개본에서 승계):
+   - `AP Psychology — Practice Exam 1`(지금 게시 v2): 계획 `ps1-v3-swap-plan.json` → 초안 v3 확인 → 공개.
+   - `AP Psychology — Practice Exam 2`(지금 게시 v2): 계획 `ps2-v3-swap-plan.json` → 초안 v3 확인 → 공개.
+   - 각 계획의 `sourceVersionNo`(2)와 제거 문항이 현재 공개본의 그 칸과 맞아야 미리보기가 통과한다. 어긋나면(다른 새 버전이 먼저 공개됨 등) 고치지 말고 `psych-new-version-plans.ts` 를 새 스냅샷으로 다시 생성한다. `requiresConvertedCandidates` 는 1단계에서 변환해야 하는 새 배치 키다.
+3. **최종 상태**: PS1·PS2 = v3 배정(MC 75 + AAQ + EBQ), exam_prep MC 51·52/75, 두 시험 문항 서로소.
+- **남은 위험**: ① exam_prep 은 내부 라벨이다(감사 문서 §5). ② 새 문항은 자동 게이트·두 모델 검토를 통과한 초안이며 **심리학 교사 검수 전**이다(FRQ 루브릭은 "ALTON reference answer — not official AP scoring"). ③ 새 배치는 DB 적재 전이다(적재·새 버전은 관리자 화면). ④ 일부 문항은 검토기가 지적한 "약한 절대어 오답" 형태가 남아 있을 수 있다. ⑤ 공유 세트는 기존 3개 그대로(회당 12 %, 공식 샘플 43 %와 다름 — §6).

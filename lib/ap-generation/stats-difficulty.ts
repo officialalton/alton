@@ -79,7 +79,7 @@ export function auditLabel(label: string | null | undefined, s: DifficultySignal
 
 /** 판정 요청 본문에 덧붙일 문자열(파이프라인이 호출). Statistics MC 이고 원형이 선언을 가진 경우에만 비어 있지 않다 — 다른 과목·선언 없는 문항은 기존 요청과 바이트 단위로 같다. */
 export function difficultyContext(subject: string, kind: string, item: unknown): string {
-  if (subject !== "ap_statistics" || kind !== "mc") return "";
+  if ((subject !== "ap_statistics" && subject !== "ap_psychology") || kind !== "mc") return ""; // 2026-10-15 psych-hard: 다단계 개념 원형이 같은 선언을 쓴다(선언이 없는 기존 문항은 요청이 바이트 단위로 같다)
   const sg = (item as { difficulty_signals?: DifficultySignals } | null)?.difficulty_signals;
   return sg ? `\n\n${difficultyBrief(sg)}` : "";
 }

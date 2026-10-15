@@ -1,0 +1,38 @@
+{
+ "run": "psych-hard-b",
+ "subject": "ap_psychology",
+ "generatedAt": "2026-10-15T23:00:21.458Z",
+ "totalCostUsd": 0.82,
+ "newSpendSinceBaseline": 3.98,
+ "cap": 4.2,
+ "calls": 165,
+ "candidates": 55,
+ "mcCandidates": 55,
+ "frqCandidates": 0,
+ "passedAll": 49,
+ "adopted": 21,
+ "mcAdopted": 21,
+ "frqAdopted": 0,
+ "reserve": 24,
+ "yield": 0.382,
+ "costPerAdopted": 0.039,
+ "callsPerAdopted": 7.9,
+ "duplicateRejected": 1,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 55
+ },
+ "rejectionReasons": {
+  "duplicate_gate_near_duplicate": 1,
+  "criterion_failed_scope_skill": 5,
+  "criterion_failed_exam_suitability": 3,
+  "reference_pattern_mismatch": 2,
+  "criterion_failed_stimulus_expression": 1,
+  "criterion_failed_distractor_explanation": 2,
+  "instant_reject_out_of_scope_knowledge": 1
+ },
+ "unfilledCells": [
+  "ap_psychology-m21"
+ ]
+}

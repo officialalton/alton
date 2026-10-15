@@ -4,8 +4,9 @@ import { planDraftSet, subjectOfSetIdOrNull, SET_ID_RE, defaultDraftName, type F
 import { loadPsychPool } from "../../scripts/ap-generation/psych-pool";
 
 // 심리학 풀 세트 초안 계획(DB 없음): 커밋된 정확 배정 보고서(PS1·PS2)의 키 + 커밋된 재고로, 변환 상태만 가짜 풀로 주입한다.
-const report = JSON.parse(readFileSync("data/ap/stock/exact-assign-psych-ps1-ps2.json", "utf-8")) as { sets: { id: string; mcA: string[]; mcB: string[]; frqA: string[]; frqB: string[]; virtual?: unknown[]; virtualSets?: unknown[]; frqVirtual?: unknown[] }[] };
-const { pool: st } = loadPsychPool({ requireScreen: true });
+const REPORT = process.env.PSYCH_REPORT ?? "data/ap/stock/exact-assign-psych-ps1-ps2.json";
+const report = JSON.parse(readFileSync(REPORT, "utf-8")) as { sets: { id: string; mcA: string[]; mcB: string[]; frqA: string[]; frqB: string[]; virtual?: unknown[]; virtualSets?: unknown[]; frqVirtual?: unknown[] }[] };
+const { pool: st } = loadPsychPool({ requireScreen: true, ignorePctFlags: true }); // v1 배정에는 표 비율 위반으로 재고에서 빠진 후보가 있다(v1 보고서 검증용)
 const stockBy = new Map(st.map((c) => [c.key, c]));
 const ps = (id: string) => report.sets.find((s) => s.id === id)!;
 const keysOf = (id: string): SetKeys => ({ mcA: ps(id).mcA, mcB: ps(id).mcB ?? [], frqA: ps(id).frqA, frqB: ps(id).frqB ?? [] });
@@ -39,5 +40,17 @@ describe("planDraftSet for ap_psychology", () => {
     expect(planDraftSet({ ...base("PS1"), keys: { ...keysOf("PS1"), mcA: keysOf("PS1").mcA.slice(1) } } as never).ok).toBe(false);
     const existing: FullSetUsage[] = [{ id: "x", name: "other", status: "draft", problemIds: ["p0-0"], candidateKeys: [keysOf("PS1").mcA[0]] }];
     expect(planDraftSet({ ...base("PS1"), existingFullSets: existing } as never).problems.join()).toMatch(/다른 풀 세트가 이미 쓰는 문항/);
+  });
+});
+
+describe("planDraftSet for the psych-hard v3 report (DB 없음)", () => {
+  const v3 = JSON.parse(readFileSync("data/ap/stock/exact-assign-psych-ps1-ps2-v3.json", "utf-8")) as typeof report;
+  const keys3 = (id: string): SetKeys => { const s = v3.sets.find((x) => x.id === id)!; return { mcA: s.mcA, mcB: s.mcB ?? [], frqA: s.frqA, frqB: s.frqB ?? [] }; };
+  it("PS1·PS2 v3 are saveable as full sets: 75 MC + 2 FRQ, no virtual cells, disjoint", () => {
+    for (const id of ["PS1", "PS2"]) {
+      const k = keys3(id); const p = planDraftSet({ setId: id, keys: k, hasVirtual: false, pool: poolFor(k), existingFullSets: [] as FullSetUsage[], publishedKeys: new Set<string>(), stock: [], psychStock: st } as never);
+      expect({ id, problems: p.problems }).toEqual({ id, problems: [] }); expect(p.composition).toMatchObject({ mcTotal: 75, frqTotal: 2 });
+    }
+    const a = new Set([...keys3("PS1").mcA, ...keys3("PS1").frqA]); expect([...keys3("PS2").mcA, ...keys3("PS2").frqA].filter((x) => a.has(x))).toEqual([]);
   });
 });
