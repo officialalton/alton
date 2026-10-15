@@ -48,12 +48,12 @@ export function realSetIntro(refs: { id: string; context: string }[], reg: Map<s
   const multi = refs.length > 1;
   return `${WH_SOURCE_MARKER}\n` + refs.map((r, i) => realBlock(multi ? `Source ${String.fromCharCode(65 + i)}` : null, reg.get(r.id)!, r.context)).join("\n\n———\n\n");
 }
-/** 그림 칸(stimulus): 표 자료는 표, 이미지 자료는 정적 이미지(여러 장이면 more). */
-export function realStimulus(refs: { id: string }[], reg: Map<string, RegistrySource>): Record<string, unknown> | undefined {
-  const rs = refs.map((r) => reg.get(r.id)!);
-  const imgs = rs.filter(isImage);
-  if (imgs.length) { const label = (s: RegistrySource, i: number) => (rs.length > 1 ? { label: `Source ${String.fromCharCode(65 + rs.indexOf(s))}` } : {}); const [a, ...more] = imgs;
-    return { kind: "image", description: imgs.map((s) => s.alt).join(" "), data: { path: a.public_path, alt: a.alt, credit: a.credit, ...label(a, 0), ...(more.length ? { more: more.map((s, i) => ({ path: s.public_path, alt: s.alt, credit: s.credit, ...label(s, i + 1) })) } : {}) } }; }
+/** 그림 칸(stimulus): 표 자료는 표, 이미지 자료는 정적 이미지(여러 장이면 more). labelFor: 자료 순번(0부터) → 이미지 라벨(기본: 자료가 둘 이상이면 "Source A"…). */
+export function realStimulus(refs: { id: string }[], reg: Map<string, RegistrySource>, labelFor?: (i: number) => string | undefined): Record<string, unknown> | undefined {
+  const rs = refs.map((r) => reg.get(r.id)!); const lab = labelFor ?? ((i: number) => (rs.length > 1 ? `Source ${String.fromCharCode(65 + i)}` : undefined));
+  const imgs = rs.map((s, i) => ({ s, i })).filter((x) => isImage(x.s));
+  if (imgs.length) { const L = (i: number) => { const l = lab(i); return l ? { label: l } : {}; }; const [a, ...more] = imgs;
+    return { kind: "image", description: imgs.map((x) => x.s.alt).join(" "), data: { path: a.s.public_path, alt: a.s.alt, credit: a.s.credit, ...L(a.i), ...(more.length ? { more: more.map((x) => ({ path: x.s.public_path, alt: x.s.alt, credit: x.s.credit, ...L(x.i) })) } : {}) } }; }
   const t = rs.find(isTable); if (t) return { kind: "table", description: t.title, data: { columns: t.table!.columns, rows: t.table!.rows } };
   return undefined;
 }
@@ -84,14 +84,17 @@ export function whRealSetViolations(payload: Json, reg: Map<string, WhRegistrySo
   if (JSON.stringify(st ?? null) !== JSON.stringify(want ?? null)) v.push("stimulus_differs_from_registry");
   const items = (payload.items as Json[]) ?? [];
   if (items.length < 3 || items.length > 4) v.push(`items_${items.length}`);
-  const set = shim(spec, spec.sources, reg); const srcText = norm(set.sources.map((s) => s.body ?? "").join(" ") + " " + spec.sources.map((r) => reg.get(r.id)?.notes ?? "").join(" "));
-  for (const [i, it] of items.entries()) {
-    const raw: UshItemRaw = { skill: String(it.skill), topic: String(it.topic), stem: String(it.stem), options: (it.options as Json[]).map((o, j) => ({ text: String(o.text), is_key: j === it.key_index, label: String(o.label), why: String(o.why) })), facts: (it.facts as string[]) ?? [], est_seconds: Number(it.est_seconds ?? 75) };
-    for (const x of itemViolations(set, raw)) v.push(`item${i + 1}:${x}`);
-    if (whUnitOfTopic(raw.topic) !== String(spec.unit)) v.push(`item${i + 1}:topic_${raw.topic}_not_in_unit_${spec.unit}`);
-    const d = it.design as Json | undefined; if (!d || d.source_fixed_first !== true || !(String(d.key_evidence_in_source ?? "").trim())) v.push(`item${i + 1}:design_evidence_missing`);
-    const q = String((d?.evidence_quote as string) ?? "").trim(); if (q && !norm(srcText).includes(norm(q.replace(/\s*\[\.\.\.\]\s*/g, " ")))) v.push(`item${i + 1}:evidence_quote_not_in_source`);
-  }
+  for (const [i, it] of items.entries()) { const raw = rawItemOf(it); for (const x of whItemViolations(spec, reg, raw, it.design as Json | undefined)) v.push(`item${i + 1}:${x}`); }
   return v;
+}
+export const rawItemOf = (it: Json): UshItemRaw => ({ skill: String(it.skill), topic: String(it.topic), stem: String(it.stem), options: ((it.options as Json[]) ?? []).map((o, j) => ({ text: String(o.text), is_key: typeof o.is_key === "boolean" ? o.is_key : j === it.key_index, label: String(o.label), why: String(o.why) })), facts: (it.facts as string[]) ?? [], ...(it.derived ? { derived: it.derived as never } : {}), est_seconds: Number(it.est_seconds ?? 75) });
+/** 문항 하나의 결정적 점검(공통 문항 게이트 + 단원 일치 + 설계 근거 + 근거 인용이 자료에 있는지). */
+export function whItemViolations(spec: Pick<WhSetSpec, "unit" | "stim" | "sources">, reg: Map<string, WhRegistrySource>, raw: UshItemRaw, design: Json | undefined): string[] {
+  const v: string[] = []; const set = shim(spec, spec.sources, reg); const srcText = norm(set.sources.map((s) => s.body ?? "").join(" ") + " " + spec.sources.map((r) => reg.get(r.id)?.notes ?? "").join(" "));
+  v.push(...itemViolations(set, raw));
+  if (whUnitOfTopic(raw.topic) !== String(spec.unit)) v.push(`topic_${raw.topic}_not_in_unit_${spec.unit}`);
+  if (!design || design.source_fixed_first !== true || !String(design.key_evidence_in_source ?? "").trim()) v.push("design_evidence_missing");
+  const q = String((design?.evidence_quote as string) ?? "").trim(); if (q && !srcText.includes(norm(q.replace(/\s*\[\.\.\.\]\s*/g, " ")))) v.push("evidence_quote_not_in_source");
+  return [...new Set(v)];
 }
 export { sha256 };
