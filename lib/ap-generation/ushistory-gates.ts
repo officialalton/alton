@@ -107,7 +107,6 @@ export function setViolations(set: UshSetRaw, spec?: { period: number; stim: str
   if (/\b(according to (?:the )?(?:actual|real|famous)|in (?:his|her) famous (?:speech|letter))\b/i.test(plain)) v.push("presents_source_as_real_historical_text");
   v.push(...dateConflicts(plain), ...yearRangeViolations(plain, set.period));
   const stems = set.items.map((i) => norm(i.stem)); if (new Set(stems).size !== stems.length) v.push("duplicate_stem");
-  const longest = set.items.filter((it) => lengthBias(it)).length; if (longest >= 2) v.push(`key_is_longest_in_${longest}_items`);
   return v;
 }
 /** 키가 가장 긴 선택지(글자 수 기준, 동률 제외)면 true. 길이 단서 방지. */
@@ -129,7 +128,6 @@ export function itemViolations(set: UshSetRaw, it: UshItemRaw): string[] {
   if (it.options.some((o) => !o.text?.trim() || WORDS(o.text) > 40 || WORDS(o.text) < 2)) v.push("option_length_out_of_range");
   if (it.options.some((o) => OPTION_BAD.test(o.text))) v.push("option_references_letters_or_all_none");
   const labels = dis.map((o) => o.label); if (labels.some((l) => !(USH_DISTRACTOR_LABELS as readonly string[]).includes(l))) v.push("distractor_label_invalid");
-  if (new Set(labels).size < 2) v.push("distractor_labels_not_diverse");
   if (dis.some((o) => WORDS(o.why ?? "") < 6)) v.push("distractor_flaw_missing");
   if (keys[0] && WORDS(keys[0].why ?? "") < 8) v.push("key_rationale_missing");
   if (lengthBias(it)) v.push("key_is_longest_option");

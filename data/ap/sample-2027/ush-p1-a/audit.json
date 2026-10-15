@@ -1,0 +1,443 @@
+[
+ {
+  "set": "u201",
+  "i": 0,
+  "skill": "3.A",
+  "det": [
+   "key_is_longest_option"
+  ],
+  "reasons": [
+   "key_is_longest_option",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u201",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u201",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u201",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u302",
+  "i": 0,
+  "skill": "2.A",
+  "det": [
+   "key_is_longest_option"
+  ],
+  "reasons": [
+   "key_is_longest_option",
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u302",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u302",
+  "i": 2,
+  "skill": "4.B",
+  "det": [
+   "distractor_labels_not_diverse",
+   "key_is_longest_option"
+  ],
+  "reasons": [
+   "distractor_labels_not_diverse",
+   "key_is_longest_option",
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u302",
+  "i": 3,
+  "skill": "1.B",
+  "det": [
+   "key_is_longest_option"
+  ],
+  "reasons": [
+   "key_is_longest_option",
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u403",
+  "i": 0,
+  "skill": "3.C",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u403",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u403",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u403",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u504",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u504",
+  "i": 1,
+  "skill": "3.D",
+  "det": [
+   "distractor_labels_not_diverse",
+   "key_is_longest_option"
+  ],
+  "reasons": [
+   "distractor_labels_not_diverse",
+   "key_is_longest_option",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u504",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u504",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u605",
+  "i": 0,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u605",
+  "i": 1,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u605",
+  "i": 2,
+  "skill": "4.A",
+  "det": [
+   "distractor_labels_not_diverse",
+   "number_1800_not_in_data"
+  ],
+  "reasons": [
+   "distractor_labels_not_diverse",
+   "number_1800_not_in_data",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u605",
+  "i": 3,
+  "skill": "5.B",
+  "det": [
+   "distractor_labels_not_diverse",
+   "number_1920_not_in_data",
+   "number_1930_not_in_data"
+  ],
+  "reasons": [
+   "distractor_labels_not_diverse",
+   "number_1920_not_in_data",
+   "number_1930_not_in_data",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u706",
+  "i": 0,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u706",
+  "i": 1,
+  "skill": "3.D",
+  "det": [
+   "key_is_longest_option"
+  ],
+  "reasons": [
+   "key_is_longest_option",
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u706",
+  "i": 2,
+  "skill": "4.A",
+  "det": [
+   "distractor_labels_not_diverse",
+   "key_is_longest_option"
+  ],
+  "reasons": [
+   "distractor_labels_not_diverse",
+   "key_is_longest_option",
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u706",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u807",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u807",
+  "i": 1,
+  "skill": "3.A",
+  "det": [
+   "key_is_longest_option"
+  ],
+  "reasons": [
+   "key_is_longest_option",
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u807",
+  "i": 2,
+  "skill": "4.B",
+  "det": [
+   "distractor_labels_not_diverse"
+  ],
+  "reasons": [
+   "distractor_labels_not_diverse",
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u807",
+  "i": 3,
+  "skill": "5.B",
+  "det": [
+   "key_is_longest_option"
+  ],
+  "reasons": [
+   "key_is_longest_option",
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u908",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u908",
+  "i": 1,
+  "skill": "3.A",
+  "det": [
+   "distractor_labels_not_diverse"
+  ],
+  "reasons": [
+   "distractor_labels_not_diverse",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u908",
+  "i": 2,
+  "skill": "4.A",
+  "det": [
+   "distractor_labels_not_diverse",
+   "key_is_longest_option"
+  ],
+  "reasons": [
+   "distractor_labels_not_diverse",
+   "key_is_longest_option",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u908",
+  "i": 3,
+  "skill": "1.B",
+  "det": [
+   "distractor_labels_not_diverse"
+  ],
+  "reasons": [
+   "distractor_labels_not_diverse",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ }
+]

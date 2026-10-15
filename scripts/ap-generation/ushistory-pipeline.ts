@@ -123,6 +123,20 @@ async function genStage() {
   if (!has("--dry")) wj("gen.json", Object.fromEntries([...out.entries()]));
 }
 type Row = { spec: UshSetSpec; set: UshSetRaw | null; setViolations: string[]; itemViolations: string[][]; items: (UshItemRaw & { key_index: number; det: string[] })[] };
+const detOf = (spec: UshSetSpec, set: UshSetRaw, it: UshItemRaw, i: number): string[] => { const v = itemViolations(set, it); if (it.skill !== spec.skills[i]) v.push("skill_not_as_requested"); if (it.topic && !allTopicCodes.has(it.topic)) v.push(`topic_${it.topic}_not_in_ced`); else if (it.topic && Math.abs(Number(ushUnitOfTopic(it.topic)) - spec.period) > 1) v.push(`topic_${it.topic}_far_from_period_${spec.period}`); return v; };
+/** 길이 단서 교정: 키가 가장 긴 문항만 오답 문구를 다시 쓴다(Sonnet). 키·줄기는 그대로이고 결과는 같은 결정적 게이트로 다시 검사한다. 풀이·패널은 교정 후 문구로 돌린다. */
+async function balanceStage() {
+  const rows = rj<Row[]>("sets.json", []); const reqs: BatchReq[] = []; const meta: { id: string; r: number; i: number }[] = [];
+  rows.forEach((r, ri) => { if (!r.set) return; r.items.forEach((it, i) => { if (it.det.includes("key_is_longest_option") && it.det.filter((d) => d !== "key_is_longest_option").length === 0) { const id = `b-${r.spec.id}-${i}`; reqs.push(mk(id, cfg.models.sampleLow, P.BALANCE_SYSTEM, P.BALANCE_TOOL, P.balanceUser(it.stem, it.options.map((o) => ({ text: o.text, is_key: o.is_key, why: o.why }))), 1500, true)); meta.push({ id, r: ri, i }); } }); });
+  const out = await call("balance", reqs, estimate(cfg.models.sampleLow, reqs.length, 700, 400)); if (has("--dry")) return; let fixed = 0;
+  for (const m of meta) {
+    const o = out.get(m.id); const row = rows[m.r]; const it = row.items[m.i]; const opts = (o?.options ?? []) as Json[]; if (opts.length !== 4) continue;
+    const next = it.options.map((old, j) => { const n = opts.find((x) => Number(x.index) === j); return n && !old.is_key ? { ...old, text: String(n.text ?? "").trim() } : old; });
+    if (next.some((x, j) => !x.text) || next.some((x) => /[$\\^_<>{}|~`]/.test(x.text))) continue;
+    const cand = { ...it, options: next }; const det = detOf(row.spec, row.set!, cand, m.i); row.items[m.i] = { ...cand, det }; row.itemViolations[m.i] = det; if (!det.length) fixed++;
+  }
+  wj("sets.json", rows); console.log(`[balance] 길이 단서 교정 ${fixed}/${meta.length}건 통과`);
+}
 function checkStage() {
   const specs = rj<{ specs: UshSetSpec[] }>("plan.json", { specs: [] }).specs; const gen = rj<Record<string, Json | null>>("gen.json", {}); const prior = corpus(cfg.run);
   const rows: Row[] = []; const same: CorpusDoc[] = [];
@@ -132,7 +146,7 @@ function checkStage() {
     const sv = [...setViolations(set, { period: spec.period, stim: spec.stim }), ...realDataViolations(set), ...ushSimilarity(ushPassagePlain(set), [...prior, ...same])];
     same.push({ id: `${cfg.run}:${spec.id}`, text: ushPassagePlain(set) });
     if (set.items.length !== spec.nItems) sv.push(`item_count_${set.items.length}_not_${spec.nItems}`);
-    const iv = set.items.map((it, i) => { const v = itemViolations(set, it); if (it.skill !== spec.skills[i]) v.push("skill_not_as_requested"); if (it.topic && !allTopicCodes.has(it.topic)) v.push(`topic_${it.topic}_not_in_ced`); else if (it.topic && Math.abs(Number(ushUnitOfTopic(it.topic)) - spec.period) > 1) v.push(`topic_${it.topic}_far_from_period_${spec.period}`); return v; });
+    const iv = set.items.map((it, i) => detOf(spec, set, it, i));
     const items = set.items.map((it, i) => { const placed = placeKey(it.options, pos[pi++ % pos.length], 31 * (i + 1) + spec.seed); return { ...it, options: placed.options, key_index: placed.key_index, det: iv[i] }; });
     rows.push({ spec, set, setViolations: sv, itemViolations: iv, items });
   }
@@ -212,7 +226,7 @@ const frqMaterial = (p: UshFrqPayload) => (p.task_type === "leq" ? "" : p.task_t
 function solverTextFrq(p: UshFrqPayload): string { return p.sources.map((s) => `Source ${s.id} (${s.kind})\n${s.title}\n${s.attribution}\n${s.body ?? ""}${s.table ? "\n" + tableMarkdown(s.table) : ""}${s.figure ? `\n${s.figure.title}: ${s.figure.categories.map((c, i) => `${c} = ${s.figure!.series.map((x) => `${x.name} ${x.values[i]}`).join(", ")}`).join("; ")}` : ""}`).join("\n\n"); }
 function toFrqPayload(spec: P.FrqSpec, inp: Json): UshFrqPayload | null {
   if (!inp?.rubric || !inp?.prompt) return null; const task = taskOf(spec.template); const want = USH_RUBRIC_ROWS[task];
-  const rows = want.map((w) => { const r = (inp.rubric.rows as Json[]).find((x) => String(x.row_id).toLowerCase() === w.row_id) ?? {}; return { row_id: w.row_id, name: w.name, max: w.max, descriptors: Object.fromEntries(Object.entries(r.descriptors ?? {}).map(([k, v]) => [String(k), String(v)])), task_specific: String(r.task_specific ?? "") }; });
+  const rows = want.map((w) => { const r = ((inp.rubric.rows ?? []) as Json[]).find((x) => String(x.row_id).toLowerCase() === w.row_id) ?? {}; return { row_id: w.row_id, name: w.name, max: w.max, descriptors: Object.fromEntries(Object.entries(r.descriptors ?? {}).map(([k, v]) => [String(k), String(v)])), task_specific: String(r.task_specific ?? "") }; });
   const af = inp.expected_features ?? {};
   return { schema_version: USH_FRQ_SCHEMA_VERSION, task_type: task, template: spec.template, period: spec.period, periods: (inp.periods ?? [spec.period]).map(Number), title: String(inp.title ?? ""),
     prompt: { scenario: String(inp.prompt.scenario ?? ""), task: String(inp.prompt.task ?? ""), requirements: strs(inp.prompt.requirements), ...(task === "saq" ? { parts: (inp.prompt.parts ?? []).map((p: Json) => ({ label: p.label, prompt: String(p.prompt), points: 1 })) } : {}) },
@@ -287,14 +301,14 @@ function frqFinalizeStage() {
   console.log(`[frq-finalize] 세트 ${cands.length}: 통과 ${cands.filter((c) => c.reviewState === "auto_passed").length}; ${cands.filter((c) => c.reviewState === "rejected").map((c) => `${c.cellId}: ${String(c.rejectionReason).slice(0, 200)}`).join(" || ")}`);
 }
 
-const STAGES: Record<string, () => Promise<void> | void> = { gen: genStage, check: checkStage, solve: solveStage, panel: panelStage, finalize: finalizeStage, "frq-gen": frqGenStage, "frq-fact": frqFactStage, "frq-samples": frqSampleStage, "frq-grade": frqGradeStage, "frq-fact2": frqFact2Stage, "frq-finalize": frqFinalizeStage };
+const STAGES: Record<string, () => Promise<void> | void> = { gen: genStage, check: checkStage, balance: balanceStage, solve: solveStage, panel: panelStage, finalize: finalizeStage, "frq-gen": frqGenStage, "frq-fact": frqFactStage, "frq-samples": frqSampleStage, "frq-grade": frqGradeStage, "frq-fact2": frqFact2Stage, "frq-finalize": frqFinalizeStage };
 async function main() {
   const hash = require("node:crypto").createHash("sha1").update(fileSetHash(cfg.generatorFiles) + JSON.stringify({ ...cfg, expected: undefined })).digest("hex").slice(0, 12);
   if (has("--plan")) { const s = specsOf(); console.log(JSON.stringify(planSummaryUsh(s), null, 1)); for (const x of s) console.log(x.id, `p${x.period}`, x.stim, x.skills.join(","), "|", x.theme); return 0; }
   if (has("--freeze")) { writeFileSync(cfgPath, JSON.stringify({ ...cfg, expected: { hash } }, null, 1)); console.log(`동결 구성 기록: ${path.relative(process.cwd(), cfgPath)} hash=${hash}`); return 0; }
   if (cfg.expected.hash !== hash) { console.error(`ABORT: 동결 구성 해시 불일치 — 유료 호출 전에 중단 (기대 ${cfg.expected.hash}, 실제 ${hash})`); return 2; }
   console.log(`동결 구성 일치 hash=${hash}`); if (has("--check-only")) return 0;
-  if (!process.env.ANTHROPIC_API_KEY && !has("--dry") && cfg.stages.some((s) => ["gen", "solve", "panel", "frq-gen", "frq-fact", "frq-samples", "frq-grade", "frq-fact2"].includes(s))) { console.error("ANTHROPIC_API_KEY 환경 변수가 필요합니다(파일에 쓰지 않는다)."); return 3; }
+  if (!process.env.ANTHROPIC_API_KEY && !has("--dry") && cfg.stages.some((s) => ["gen", "balance", "solve", "panel", "frq-gen", "frq-fact", "frq-samples", "frq-grade", "frq-fact2"].includes(s))) { console.error("ANTHROPIC_API_KEY 환경 변수가 필요합니다(파일에 쓰지 않는다)."); return 3; }
   myBaseline();
   const only = arg("--stages") ? arg("--stages").split(",") : cfg.stages;
   const t0 = ledgerTotal(); console.log(`시작 누적 $${t0.cumulativeUsd} / 중단선 $${t0.stopLine}; US History 합계 $${spentMine().toFixed(4)} / ${cfg.myTotalCapUsd}`);
