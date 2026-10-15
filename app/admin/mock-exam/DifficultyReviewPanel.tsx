@@ -1,3 +1,4 @@
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
@@ -52,6 +53,7 @@ function judgeLine(j: JudgeRecord | null, title: string) {
 }
 
 function DetailView({ d }: { d: DifficultyReviewDetail }) {
+  const tz = useViewerTimezone();
   const { judge } = d;
   const hasBasis = judge.hardJudge || judge.advisory || judge.recipeCheck;
   return (
@@ -142,7 +144,7 @@ function DetailView({ d }: { d: DifficultyReviewDetail }) {
           <ul className="mt-1 space-y-1">
             {d.history.map((h) => (
               <li key={h.id} className="text-grey-600">
-                {fmtDate(h.at)} · {h.by ?? "관리자"} · {h.action === "confirm" ? `${DIFF_LABEL[h.to]} 확인` : `${DIFF_LABEL[h.from]} → ${DIFF_LABEL[h.to]}`}
+                {fmtDate(h.at, undefined, tz)} · {h.by ?? "관리자"} · {h.action === "confirm" ? `${DIFF_LABEL[h.to]} 확인` : `${DIFF_LABEL[h.from]} → ${DIFF_LABEL[h.to]}`}
                 {h.reason && <span className="text-ink"> — {h.reason}</span>}
               </li>
             ))}
@@ -154,6 +156,7 @@ function DetailView({ d }: { d: DifficultyReviewDetail }) {
 }
 
 export default function DifficultyReviewPanel() {
+  const tz = useViewerTimezone();
   const [status, setStatus] = useState<StatusFilter>("provisional");
   const [domain, setDomain] = useState("");
   const [skill, setSkill] = useState("");
@@ -446,7 +449,7 @@ export default function DifficultyReviewPanel() {
                       <p className="mt-1 truncate text-[12.5px] text-ink">{r.snippet || "(본문 없음)"}</p>
                       <p className="mt-0.5 text-[11.5px] text-grey-500">
                         {r.responses > 0 ? `응답 ${r.responses}건 · 정답률 ${r.correctPct === null ? "–" : `${r.correctPct}%`}` : "응답 없음"}
-                        {r.publishedAt && ` · 공개 ${fmtDate(r.publishedAt)}`}
+                        {r.publishedAt && ` · 공개 ${fmtDate(r.publishedAt, undefined, tz)}`}
                       </p>
                     </div>
                     <button
