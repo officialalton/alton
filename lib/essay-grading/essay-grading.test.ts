@@ -186,3 +186,37 @@ describe("toEssayPayload (English FRQ stock → 채점 맥락)", () => {
     expect(toEssayPayload(null)).toBeNull();
   });
 });
+
+// ── AP English Literature(2026-10-14): 새 루브릭 id "englit" + lit_frq payload 어댑터. Language 루브릭·동작은 그대로다. ──
+import { RUBRIC_ROWS, RUBRIC_ROWS_ENGLIT, RUBRIC_VERSION, RUBRIC_VERSION_ENGLIT, rubricIdForSubject, rubricVersionFor } from "./rubric";
+describe("AP English Literature rubric id", () => {
+  it("maps subjects to rubric ids and versions without touching the Language rubric", () => {
+    expect(rubricIdForSubject("ap_english_language")).toBe("englang"); expect(rubricIdForSubject("ap_english_literature")).toBe("englit"); expect(rubricIdForSubject("ap_psychology")).toBeNull();
+    expect(rubricVersionFor("englang")).toBe(RUBRIC_VERSION); expect(rubricVersionFor(undefined)).toBe(RUBRIC_VERSION); expect(rubricVersionFor("englit")).toBe(RUBRIC_VERSION_ENGLIT);
+    expect(RUBRIC_VERSION).toBe("englang-v2");
+    expect(RUBRIC_ROWS_ENGLIT.map((r) => [r.key, r.max])).toEqual(RUBRIC_ROWS.map((r) => [r.key, r.max])); // 같은 행 키·배점이라 채점 스키마·점수 카드를 그대로 쓴다
+    expect(RUBRIC_ROWS_ENGLIT[1].guide).not.toBe(RUBRIC_ROWS[1].guide);
+  });
+  it("builds a literature prompt only when asked and keeps the default prompt identical", () => {
+    const input = { taskPrompt: "Analyze the poem.", sources: [{ id: "Text", body: "line" }], essay: words(120), anchors: [] };
+    const lang = buildPrompt(input); const lit = buildPrompt({ ...input, rubricId: "englit" });
+    expect(lang.system).toBe(SYSTEM_PROMPT); expect(lang.user).toContain("Thesis (0-1)"); expect(lang.user).not.toContain("literary element or technique");
+    expect(lit.system).toContain("AP English Literature and Composition"); expect(lit.system).not.toContain("AP English Language"); expect(lit.user).toContain("literary element or technique"); expect(lit.user.match(/<rubric>/g)).toHaveLength(1);
+  });
+  it("stores literature scores under the englit rubric version and the request carries the literature system prompt", async () => {
+    const store = new MemStore(); const seen: GraderRequest[] = [];
+    const client = fakeClient((r) => { seen.push(r); return good(1, 3, 0); });
+    const out = await processEssay({ store, client }, job({ rubricId: "englit", anchors: [{ tier: "high", text: words(300) }, { tier: "mid", text: words(200) }, { tier: "low", text: words(100) }] }));
+    expect(out.status).toBe("done"); expect(seen[0].system).toContain("AP English Literature and Composition");
+    const row = [...store.rows.values()][0]; expect((row.fin?.scores as { rubricVersion: string }).rubricVersion).toBe("englit-v1");
+  });
+  it("adapts the lit_frq payload (poem with numbered lines, no passage for the argument question)", () => {
+    const stock = { parts: [{ label: "A", prompt: "In the poem Salt, the speaker ... Read the poem closely." }], lit_frq: { prompt: { lead: "Lead.", task: "Task." }, passage: { title: "Salt", stanzas: [["l1", "l2", "l3"], ["l4", "l5", "l6"]] }, samples: [{ tier: "high", essay: "E1", annotations: [{ quote: "q" }] }, { tier: "mid", essay: "E2" }, { tier: "low", essay: "E3" }] } };
+    const ctx = parseEssayContext(toEssayPayload(stock), "A");
+    expect(ctx?.taskPrompt).toContain("Read the poem closely"); expect(ctx?.anchors.map((a) => a.tier)).toEqual(["high", "mid", "low"]);
+    expect(ctx?.sources).toHaveLength(1); expect(ctx?.sources[0].id).toBe("Text"); expect(ctx?.sources[0].body).toContain("  5  l5"); expect(ctx?.sources[0].body).toContain("Salt");
+    const q3 = parseEssayContext(toEssayPayload({ parts: [{ label: "A", prompt: "Choose a work." }], lit_frq: { prompt: { task: "Choose a work." }, samples: [{ tier: "high", essay: "E" }] } }), "A");
+    expect(q3?.sources).toEqual([]); expect(q3?.anchors).toHaveLength(1);
+    expect(toEssayPayload({ lit_frq: { prompt: {} } })).toBeNull();
+  });
+});

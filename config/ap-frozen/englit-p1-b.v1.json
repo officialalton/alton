@@ -1,0 +1,98 @@
+{
+ "version": "v1-englit-p1-b",
+ "run": "englit-p1-b",
+ "subject": "ap_english_literature",
+ "mode": "frq",
+ "batch": true,
+ "capUsd": 5.8,
+ "hardStopCumulativeUsd": 186,
+ "myTotalCapUsd": 12,
+ "stages": [
+  "frq-gen",
+  "frq-samples",
+  "frq-grade",
+  "frq-finalize"
+ ],
+ "models": {
+  "gen": "claude-opus-5-5",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "adversary": "claude-opus-5-5",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "panel": "claude-fable-5-1",
+  "rebalance": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "effort": "medium",
+ "genEffort": "low",
+ "minKeyConfidence": 0.8,
+ "generatorFiles": [
+  "lib/ap-generation/englit-prompts.ts",
+  "lib/ap-generation/englit-gates.ts",
+  "lib/ap-generation/englit-plan.ts",
+  "lib/ap-generation/englit-frq.ts",
+  "lib/ap-generation/subjects/englit.ts",
+  "lib/ap-exam/passage-lines.ts",
+  "lib/ap-exam/englit-rules.ts",
+  "scripts/ap-generation/englit-pipeline.ts"
+ ],
+ "expected": {
+  "hash": "6802320665e0"
+ },
+ "genForce": false,
+ "sampleCands": 2,
+ "gradeEffort": "low",
+ "frqPlan": [
+  {
+   "id": "fa1",
+   "type": "poetry_analysis",
+   "seedText": "a speaker standing in a laundromat at night remembers a mother's hands, ambivalent about leaving",
+   "era": "contemporary",
+   "seed": 4101
+  },
+  {
+   "id": "fa2",
+   "type": "prose_analysis",
+   "seedText": "a young tutor visits a wealthy household where the pupil is quietly cleverer than the family admits",
+   "era": "19th-century manner",
+   "seed": 4102
+  },
+  {
+   "id": "fa3",
+   "type": "literary_argument",
+   "seedText": "the idea of a home that protects and also confines",
+   "era": "contemporary",
+   "seed": 4103
+  },
+  {
+   "id": "fb1",
+   "type": "poetry_analysis",
+   "seedText": "a field hand addresses the orchard he will not own, proud and aggrieved at once",
+   "era": "early 20th-century manner",
+   "seed": 4201
+  },
+  {
+   "id": "fb2",
+   "type": "prose_analysis",
+   "seedText": "a daughter and her father mend nets on a beach while a letter from the city lies unopened",
+   "era": "mid-20th-century manner",
+   "seed": 4202
+  },
+  {
+   "id": "fb3",
+   "type": "literary_argument",
+   "seedText": "the idea of a secret that binds people together and also isolates them",
+   "era": "contemporary",
+   "seed": 4203
+  }
+ ]
+}
