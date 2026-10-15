@@ -29,6 +29,6 @@ describe("AP English Literature conversion", () => {
       payload: { archetype: "ltfrq_fa1", template: "q1", topic: "U9.4", skill: "6.B", calculator: "na", title: "Last Crossing", set_intro: DISPLAY, reference_text: "Reference answer and scoring notes (ALTON-authored).\nSample essay (high; scored 6/6)", lit_frq: { schema_version: "lit-frq-1" },
         parts: [{ label: "A", prompt: "Read the poem closely. Then write an essay...", points: 6, response_mode: "essay", skill_codes: ["6.B"], topic_codes: ["U9.4"], model_answer: "A strong essay.", rubric_rows: [{ row_id: "A", points: 1, criterion: "A thesis", required_elements: [], optional_phrases: [], alt_solutions: [], common_errors: [], requires_row_id: null, requires_both: false, requires_numbers: false, numeric_tolerance: null, units_row: false }] }] } } as unknown as ApCandidateLike;
     const p = planConversion(frq); expect(p.ok).toBe(true);
-    if (p.ok) { expect(p.items).toHaveLength(1); expect(p.items[0].format).toBe("essay"); expect(p.items[0].passage).toContain("```passage"); expect(p.items[0].explanation).toContain("Sample essay (high; scored 6/6)"); expect(p.items[0].statements?.[0].mode).toBe("essay"); }
+    if (p.ok) { expect(p.items).toHaveLength(1); expect(p.items[0].format).toBe("essay"); expect(p.items[0].passage).toContain("```passage"); expect(p.items[0].explanation).toContain("Sample essay (high; scored 6/6)"); expect((p.items[0].statements as { mode: string }[])[0].mode).toBe("essay"); }
   });
 });

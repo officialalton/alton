@@ -5,15 +5,9 @@
  "mode": "mc",
  "batch": true,
  "capUsd": 3,
- "hardStopCumulativeUsd": 186,
+ "hardStopCumulativeUsd": 184.9,
  "myTotalCapUsd": 12,
  "stages": [
-  "gen",
-  "check",
-  "rebalance",
-  "solve",
-  "adv",
-  "judge",
   "panel",
   "finalize"
  ],
@@ -60,7 +54,8 @@
   "scripts/ap-generation/englit-pipeline.ts"
  ],
  "expected": {
-  "hash": "f3c8b7142597"
+  "hash": "2bacb65e981e"
  },
- "genForce": false
+ "genForce": false,
+ "syncStages": []
 }

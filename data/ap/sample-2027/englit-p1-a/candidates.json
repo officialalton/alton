@@ -8849,9 +8849,6 @@
    },
    {
     "label": "exam_prep"
-   },
-   {
-    "label": "exam_prep"
    }
   ],
   "payload": {
@@ -9819,76 +9816,6 @@
      }
     },
     {
-     "archetype": "lt_short_1B",
-     "topic": "U7.1",
-     "skill": "1.B",
-     "cognitive": "explain",
-     "stem": "Compared with his attitude in the first paragraph, the narrator's attitude at the end of the passage is best described as",
-     "options": [
-      {
-       "text": "shaken in practice, though in his retelling he still claims the hardness of his younger self",
-       "why": "He did not ask and saw 'Paid,' yet 'I still tell people I would have asked her.'",
-       "value": null,
-       "label": "correct"
-      },
-      {
-       "text": "fully converted, so that he now speaks openly about the mercy Mr. Pruitt taught him",
-       "why": "He tells people the opposite: that he would have asked her.",
-       "value": null,
-       "label": "reversal"
-      },
-      {
-       "text": "entirely unchanged, since he went on believing that Mrs. Danner had cheated Mr. Pruitt",
-       "why": "Ignores his silence and his discovery of Pruitt's payments.",
-       "value": null,
-       "label": "too_narrow"
-      },
-      {
-       "text": "bitter toward Mr. Pruitt for hiding the truth of the ledger from his young apprentice",
-       "why": "No resentment toward Pruitt is expressed.",
-       "value": null,
-       "label": "wrong_tone"
-      }
-     ],
-     "key_index": 0,
-     "explanation_en": "The correct answer is \"shaken in practice, though in his retelling he still claims the hardness of his younger self\". He did not ask and saw 'Paid,' yet 'I still tell people I would have asked her.'\n\"fully converted, so that he now speaks openly about the mercy Mr. Pruitt taught him\" is incorrect: He tells people the opposite: that he would have asked her.\n\"entirely unchanged, since he went on believing that Mrs. Danner had cheated Mr. Pruitt\" is incorrect: Ignores his silence and his discovery of Pruitt's payments.\n\"bitter toward Mr. Pruitt for hiding the truth of the ledger from his young apprentice\" is incorrect: No resentment toward Pruitt is expressed.",
-     "est_seconds": 60,
-     "evidence_quotes": [
-      "believed that the world ran on payment",
-      "I still tell people I would have asked her"
-     ],
-     "ref_lines": {},
-     "devices_used": [
-      "irony"
-     ],
-     "review_notes": {
-      "key_flaw": null,
-      "stem_issue": null
-     },
-     "key_confidence": {
-      "score": 0.829,
-      "band": "medium",
-      "solver_agreement": 1,
-      "adversary": "weak",
-      "judge": "key_clearly_better",
-      "panel": {
-       "model": "claude-fable-5-1",
-       "choice": 0,
-       "agree": true
-      },
-      "solver_votes": [
-       {
-        "choice": 0,
-        "confidence": "certain"
-       },
-       {
-        "choice": 0,
-        "confidence": "likely"
-       }
-      ]
-     }
-    },
-    {
      "archetype": "lt_short_1A",
      "topic": "U1.1",
      "skill": "1.A",
@@ -10042,6 +9969,13 @@
       "adversary_missing",
       "judge_missing",
       "deterministic_1"
+     ]
+    },
+    {
+     "index": 12,
+     "skill": "1.B",
+     "reasons": [
+      "set_size_cap"
      ]
     }
    ]
