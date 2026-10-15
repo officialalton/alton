@@ -10214,88 +10214,6 @@
    }
   },
   {
-   "candidate_key": "psych-hard-d:ap_psychology-m03-k0",
-   "checker_kind": "automated",
-   "content_hash": "b5ed299a2e3b1a6ae9ce7c6c494fbde58506a1084a618ada5fb228717679fb54",
-   "problem_version_id": "16f1fcfb-9703-4c15-8e9a-b449463348f5",
-   "kind": "mc",
-   "viewport": "390x844",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m03-k0-390x844.jpg",
-   "timestamp": "2026-10-15T23:03:56.603Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m03-k1",
-   "checker_kind": "automated",
-   "content_hash": "02c6c426e886a4846a99c72a5f665fb86240f65adb451d43054152310739ed49",
-   "problem_version_id": "838a56a5-31a9-482a-b049-751fc908b0e9",
-   "kind": "mc",
-   "viewport": "390x844",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m03-k1-390x844.jpg",
-   "timestamp": "2026-10-15T23:03:56.990Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
    "candidate_key": "psych-hard-d:ap_psychology-m04-k0",
    "checker_kind": "automated",
    "content_hash": "91dcf41e0159d9346eeb82d8c930eeba4495e817c1c8733db0867eb75691e33f",
@@ -11034,47 +10952,6 @@
    }
   },
   {
-   "candidate_key": "psych-hard-d:ap_psychology-m08-k1",
-   "checker_kind": "automated",
-   "content_hash": "65b446a0907ef49e0b82004e50ee90a482ec90200509127286f6c6867cdba9b8",
-   "problem_version_id": "1e3f7049-a942-45ce-9e7a-0e8a9de358c8",
-   "kind": "mc",
-   "viewport": "390x844",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m08-k1-390x844.jpg",
-   "timestamp": "2026-10-15T23:04:00.822Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
    "candidate_key": "psych-hard-d:ap_psychology-m09-k0",
    "checker_kind": "automated",
    "content_hash": "9916e2fe8d97f5a6518d7445acb7628f3769b618158445ec84193d6fd8c438ce",
@@ -11124,47 +11001,6 @@
    "viewport": "390x844",
    "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m09-k0-390x844.jpg",
    "timestamp": "2026-10-15T23:04:01.204Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m09-k1",
-   "checker_kind": "automated",
-   "content_hash": "e5f84f1f76b77e70e1395a49d1a454bb974c3838cb8432931f24ad603172cee3",
-   "problem_version_id": "62d9b592-06ae-4cc0-869e-3cf7334a21df",
-   "kind": "mc",
-   "viewport": "390x844",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m09-k1-390x844.jpg",
-   "timestamp": "2026-10-15T23:04:01.590Z",
    "checker": "automated-playwright/151.0.7922.34 local student exam screen",
    "checks": {
     "options_visible": {
@@ -11649,14 +11485,14 @@
    }
   },
   {
-   "candidate_key": "psych-hard-d:ap_psychology-m03-k0",
+   "candidate_key": "psych-hard-d:ap_psychology-m04-k0",
    "checker_kind": "automated",
-   "content_hash": "b5ed299a2e3b1a6ae9ce7c6c494fbde58506a1084a618ada5fb228717679fb54",
-   "problem_version_id": "16f1fcfb-9703-4c15-8e9a-b449463348f5",
+   "content_hash": "91dcf41e0159d9346eeb82d8c930eeba4495e817c1c8733db0867eb75691e33f",
+   "problem_version_id": "65032931-4338-458c-afa0-87e9b499c9aa",
    "kind": "mc",
    "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m03-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:10.422Z",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m04-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:11.155Z",
    "checker": "automated-playwright/151.0.7922.34 local student exam screen",
    "checks": {
     "options_visible": {
@@ -11686,18 +11522,1084 @@
     "result_no_raw_tex": {
      "result": "pass",
      "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m04-k0",
+   "checker_kind": "automated",
+   "content_hash": "91dcf41e0159d9346eeb82d8c930eeba4495e817c1c8733db0867eb75691e33f",
+   "problem_version_id": "65032931-4338-458c-afa0-87e9b499c9aa",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m04-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:11.155Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m04-k1",
+   "checker_kind": "automated",
+   "content_hash": "d5ce66cdcc36bf95ef64bb6adb9a1bd0260548fd83cc15af751ee10e21cdc3dd",
+   "problem_version_id": "a62d8945-c09a-44d8-8af1-63165d7b252a",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m04-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:11.543Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m04-k1",
+   "checker_kind": "automated",
+   "content_hash": "d5ce66cdcc36bf95ef64bb6adb9a1bd0260548fd83cc15af751ee10e21cdc3dd",
+   "problem_version_id": "a62d8945-c09a-44d8-8af1-63165d7b252a",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m04-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:11.543Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m05-k0",
+   "checker_kind": "automated",
+   "content_hash": "c11121371a838ae8eb1210aaf87c180fbe28710b8ad5d2bac5f93eb4281b54c3",
+   "problem_version_id": "198cbe65-1000-403b-bb81-35cbc5bc2028",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m05-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:11.917Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m05-k0",
+   "checker_kind": "automated",
+   "content_hash": "c11121371a838ae8eb1210aaf87c180fbe28710b8ad5d2bac5f93eb4281b54c3",
+   "problem_version_id": "198cbe65-1000-403b-bb81-35cbc5bc2028",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m05-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:11.917Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m05-k1",
+   "checker_kind": "automated",
+   "content_hash": "1ef2947fa0c3712c4af45d16380a259170bb53d5efe0e0d7b9501f4b19296709",
+   "problem_version_id": "17016ca6-2062-4ab8-bce4-d66c327111ce",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m05-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:12.292Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m05-k1",
+   "checker_kind": "automated",
+   "content_hash": "1ef2947fa0c3712c4af45d16380a259170bb53d5efe0e0d7b9501f4b19296709",
+   "problem_version_id": "17016ca6-2062-4ab8-bce4-d66c327111ce",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m05-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:12.292Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m06-k0",
+   "checker_kind": "automated",
+   "content_hash": "fd8aef0ddd26805b9a71de02c90453c451ca3a2bc93926c40b95b6e6b398aa19",
+   "problem_version_id": "5ad8eed4-dacb-40ad-b229-3728e527da3b",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m06-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:12.667Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m06-k0",
+   "checker_kind": "automated",
+   "content_hash": "fd8aef0ddd26805b9a71de02c90453c451ca3a2bc93926c40b95b6e6b398aa19",
+   "problem_version_id": "5ad8eed4-dacb-40ad-b229-3728e527da3b",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m06-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:12.667Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m06-k1",
+   "checker_kind": "automated",
+   "content_hash": "954caa829da8e23ea9ac04bdeb4e0519977ea0a2a5e0f782981774cb93072fdb",
+   "problem_version_id": "959081c1-6265-4ae5-94e8-c51f22dac536",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m06-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:13.042Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m06-k1",
+   "checker_kind": "automated",
+   "content_hash": "954caa829da8e23ea9ac04bdeb4e0519977ea0a2a5e0f782981774cb93072fdb",
+   "problem_version_id": "959081c1-6265-4ae5-94e8-c51f22dac536",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m06-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:13.042Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m07-k0",
+   "checker_kind": "automated",
+   "content_hash": "ca2d16f33239983f137472197501eae3ceb7f778d717bda05718828b70ac50f5",
+   "problem_version_id": "538ea53d-547a-4cde-9c61-fee300bacf45",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m07-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:13.423Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m07-k0",
+   "checker_kind": "automated",
+   "content_hash": "ca2d16f33239983f137472197501eae3ceb7f778d717bda05718828b70ac50f5",
+   "problem_version_id": "538ea53d-547a-4cde-9c61-fee300bacf45",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m07-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:13.423Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m07-k1",
+   "checker_kind": "automated",
+   "content_hash": "a4ef75cf577aeea10d4bec446d853698a5f3dc2d1a5b249f25fc743afe6bf019",
+   "problem_version_id": "5181a054-ce99-4d52-b9c8-f03d41df5c1a",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m07-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:13.794Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m07-k1",
+   "checker_kind": "automated",
+   "content_hash": "a4ef75cf577aeea10d4bec446d853698a5f3dc2d1a5b249f25fc743afe6bf019",
+   "problem_version_id": "5181a054-ce99-4d52-b9c8-f03d41df5c1a",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m07-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:13.794Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m08-k0",
+   "checker_kind": "automated",
+   "content_hash": "fa95a80dc8eda04855b0f23c46bdbea395dc50470ed7eae11daa745b30270c19",
+   "problem_version_id": "6d406ba7-985e-4bb5-b3e4-d95880cc71c5",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m08-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:14.170Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m08-k0",
+   "checker_kind": "automated",
+   "content_hash": "fa95a80dc8eda04855b0f23c46bdbea395dc50470ed7eae11daa745b30270c19",
+   "problem_version_id": "6d406ba7-985e-4bb5-b3e4-d95880cc71c5",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m08-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:14.170Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m09-k0",
+   "checker_kind": "automated",
+   "content_hash": "9916e2fe8d97f5a6518d7445acb7628f3769b618158445ec84193d6fd8c438ce",
+   "problem_version_id": "0364c013-fac3-4abf-872a-edf2d46a5ceb",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m09-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:14.919Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m09-k0",
+   "checker_kind": "automated",
+   "content_hash": "9916e2fe8d97f5a6518d7445acb7628f3769b618158445ec84193d6fd8c438ce",
+   "problem_version_id": "0364c013-fac3-4abf-872a-edf2d46a5ceb",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m09-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:14.919Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m10-k0",
+   "checker_kind": "automated",
+   "content_hash": "c9dd92652e1ee546ff63a2eb1003ac9a4b1af0c8bbb096dccd92a19208a6ee9e",
+   "problem_version_id": "79e744ed-8d51-49ce-8a57-f6c085f8670d",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m10-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:15.678Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m10-k0",
+   "checker_kind": "automated",
+   "content_hash": "c9dd92652e1ee546ff63a2eb1003ac9a4b1af0c8bbb096dccd92a19208a6ee9e",
+   "problem_version_id": "79e744ed-8d51-49ce-8a57-f6c085f8670d",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m10-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:15.678Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m10-k1",
+   "checker_kind": "automated",
+   "content_hash": "66a2221100eb5ab010a8d53eb3a919f394283ed9addcbcef7fab30602f43c8c8",
+   "problem_version_id": "eb8831e5-0c07-45cd-b95d-428984ed4884",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m10-k1-390x844.jpg",
+   "timestamp": "2026-10-15T23:04:22.557Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m10-k1",
+   "checker_kind": "automated",
+   "content_hash": "66a2221100eb5ab010a8d53eb3a919f394283ed9addcbcef7fab30602f43c8c8",
+   "problem_version_id": "eb8831e5-0c07-45cd-b95d-428984ed4884",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m10-k1-390x844.jpg",
+   "timestamp": "2026-10-15T23:04:22.557Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m10-k1",
+   "checker_kind": "automated",
+   "content_hash": "66a2221100eb5ab010a8d53eb3a919f394283ed9addcbcef7fab30602f43c8c8",
+   "problem_version_id": "eb8831e5-0c07-45cd-b95d-428984ed4884",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m10-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:27.212Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m10-k1",
+   "checker_kind": "automated",
+   "content_hash": "66a2221100eb5ab010a8d53eb3a919f394283ed9addcbcef7fab30602f43c8c8",
+   "problem_version_id": "eb8831e5-0c07-45cd-b95d-428984ed4884",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m10-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:04:27.212Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m03-k0",
+   "checker_kind": "automated",
+   "content_hash": "b26e80fcf94c84a4d34dc6e5ba57086e9c29a81ce308411e4c2348b1e006b043",
+   "problem_version_id": "18214b9d-4500-4655-9bd0-3d02eadfee26",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m03-k0-390x844.jpg",
+   "timestamp": "2026-10-15T23:30:26.395Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
     }
    }
   },
   {
    "candidate_key": "psych-hard-d:ap_psychology-m03-k1",
    "checker_kind": "automated",
-   "content_hash": "02c6c426e886a4846a99c72a5f665fb86240f65adb451d43054152310739ed49",
-   "problem_version_id": "838a56a5-31a9-482a-b049-751fc908b0e9",
+   "content_hash": "b85bc7f0879b7dbdd1cf05dd99c2a3a21d84dd8f1557a97e2481c7c70b3711d5",
+   "problem_version_id": "3e0e4035-1a5c-4fcd-a4f3-063da4a5ff84",
    "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m03-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:10.785Z",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m03-k1-390x844.jpg",
+   "timestamp": "2026-10-15T23:30:26.770Z",
    "checker": "automated-playwright/151.0.7922.34 local student exam screen",
    "checks": {
     "options_visible": {
@@ -11726,757 +12628,19 @@
     },
     "result_no_raw_tex": {
      "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m04-k0",
-   "checker_kind": "automated",
-   "content_hash": "91dcf41e0159d9346eeb82d8c930eeba4495e817c1c8733db0867eb75691e33f",
-   "problem_version_id": "65032931-4338-458c-afa0-87e9b499c9aa",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m04-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:11.155Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m04-k0",
-   "checker_kind": "automated",
-   "content_hash": "91dcf41e0159d9346eeb82d8c930eeba4495e817c1c8733db0867eb75691e33f",
-   "problem_version_id": "65032931-4338-458c-afa0-87e9b499c9aa",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m04-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:11.155Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m04-k1",
-   "checker_kind": "automated",
-   "content_hash": "d5ce66cdcc36bf95ef64bb6adb9a1bd0260548fd83cc15af751ee10e21cdc3dd",
-   "problem_version_id": "a62d8945-c09a-44d8-8af1-63165d7b252a",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m04-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:11.543Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m04-k1",
-   "checker_kind": "automated",
-   "content_hash": "d5ce66cdcc36bf95ef64bb6adb9a1bd0260548fd83cc15af751ee10e21cdc3dd",
-   "problem_version_id": "a62d8945-c09a-44d8-8af1-63165d7b252a",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m04-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:11.543Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m05-k0",
-   "checker_kind": "automated",
-   "content_hash": "c11121371a838ae8eb1210aaf87c180fbe28710b8ad5d2bac5f93eb4281b54c3",
-   "problem_version_id": "198cbe65-1000-403b-bb81-35cbc5bc2028",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m05-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:11.917Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m05-k0",
-   "checker_kind": "automated",
-   "content_hash": "c11121371a838ae8eb1210aaf87c180fbe28710b8ad5d2bac5f93eb4281b54c3",
-   "problem_version_id": "198cbe65-1000-403b-bb81-35cbc5bc2028",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m05-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:11.917Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m05-k1",
-   "checker_kind": "automated",
-   "content_hash": "1ef2947fa0c3712c4af45d16380a259170bb53d5efe0e0d7b9501f4b19296709",
-   "problem_version_id": "17016ca6-2062-4ab8-bce4-d66c327111ce",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m05-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:12.292Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m05-k1",
-   "checker_kind": "automated",
-   "content_hash": "1ef2947fa0c3712c4af45d16380a259170bb53d5efe0e0d7b9501f4b19296709",
-   "problem_version_id": "17016ca6-2062-4ab8-bce4-d66c327111ce",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m05-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:12.292Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m06-k0",
-   "checker_kind": "automated",
-   "content_hash": "fd8aef0ddd26805b9a71de02c90453c451ca3a2bc93926c40b95b6e6b398aa19",
-   "problem_version_id": "5ad8eed4-dacb-40ad-b229-3728e527da3b",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m06-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:12.667Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m06-k0",
-   "checker_kind": "automated",
-   "content_hash": "fd8aef0ddd26805b9a71de02c90453c451ca3a2bc93926c40b95b6e6b398aa19",
-   "problem_version_id": "5ad8eed4-dacb-40ad-b229-3728e527da3b",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m06-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:12.667Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m06-k1",
-   "checker_kind": "automated",
-   "content_hash": "954caa829da8e23ea9ac04bdeb4e0519977ea0a2a5e0f782981774cb93072fdb",
-   "problem_version_id": "959081c1-6265-4ae5-94e8-c51f22dac536",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m06-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:13.042Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m06-k1",
-   "checker_kind": "automated",
-   "content_hash": "954caa829da8e23ea9ac04bdeb4e0519977ea0a2a5e0f782981774cb93072fdb",
-   "problem_version_id": "959081c1-6265-4ae5-94e8-c51f22dac536",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m06-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:13.042Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m07-k0",
-   "checker_kind": "automated",
-   "content_hash": "ca2d16f33239983f137472197501eae3ceb7f778d717bda05718828b70ac50f5",
-   "problem_version_id": "538ea53d-547a-4cde-9c61-fee300bacf45",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m07-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:13.423Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m07-k0",
-   "checker_kind": "automated",
-   "content_hash": "ca2d16f33239983f137472197501eae3ceb7f778d717bda05718828b70ac50f5",
-   "problem_version_id": "538ea53d-547a-4cde-9c61-fee300bacf45",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m07-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:13.423Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m07-k1",
-   "checker_kind": "automated",
-   "content_hash": "a4ef75cf577aeea10d4bec446d853698a5f3dc2d1a5b249f25fc743afe6bf019",
-   "problem_version_id": "5181a054-ce99-4d52-b9c8-f03d41df5c1a",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m07-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:13.794Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m07-k1",
-   "checker_kind": "automated",
-   "content_hash": "a4ef75cf577aeea10d4bec446d853698a5f3dc2d1a5b249f25fc743afe6bf019",
-   "problem_version_id": "5181a054-ce99-4d52-b9c8-f03d41df5c1a",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m07-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:13.794Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m08-k0",
-   "checker_kind": "automated",
-   "content_hash": "fa95a80dc8eda04855b0f23c46bdbea395dc50470ed7eae11daa745b30270c19",
-   "problem_version_id": "6d406ba7-985e-4bb5-b3e4-d95880cc71c5",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m08-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:14.170Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m08-k0",
-   "checker_kind": "automated",
-   "content_hash": "fa95a80dc8eda04855b0f23c46bdbea395dc50470ed7eae11daa745b30270c19",
-   "problem_version_id": "6d406ba7-985e-4bb5-b3e4-d95880cc71c5",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m08-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:14.170Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
+     "note": "explanation math rendered (no raw TeX tokens)"
     }
    }
   },
   {
    "candidate_key": "psych-hard-d:ap_psychology-m08-k1",
    "checker_kind": "automated",
-   "content_hash": "65b446a0907ef49e0b82004e50ee90a482ec90200509127286f6c6867cdba9b8",
-   "problem_version_id": "1e3f7049-a942-45ce-9e7a-0e8a9de358c8",
+   "content_hash": "d6df0188248e0f7893108677cc9c356976f9345372b8525f33be08b06a9dff09",
+   "problem_version_id": "3fc8250b-9cda-447e-b24d-31349c602242",
    "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m08-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:14.543Z",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m08-k1-390x844.jpg",
+   "timestamp": "2026-10-15T23:30:27.136Z",
    "checker": "automated-playwright/151.0.7922.34 local student exam screen",
    "checks": {
     "options_visible": {
@@ -12505,265 +12669,19 @@
     },
     "result_no_raw_tex": {
      "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m09-k0",
-   "checker_kind": "automated",
-   "content_hash": "9916e2fe8d97f5a6518d7445acb7628f3769b618158445ec84193d6fd8c438ce",
-   "problem_version_id": "0364c013-fac3-4abf-872a-edf2d46a5ceb",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m09-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:14.919Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m09-k0",
-   "checker_kind": "automated",
-   "content_hash": "9916e2fe8d97f5a6518d7445acb7628f3769b618158445ec84193d6fd8c438ce",
-   "problem_version_id": "0364c013-fac3-4abf-872a-edf2d46a5ceb",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m09-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:14.919Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
+     "note": "explanation math rendered (no raw TeX tokens)"
     }
    }
   },
   {
    "candidate_key": "psych-hard-d:ap_psychology-m09-k1",
    "checker_kind": "automated",
-   "content_hash": "e5f84f1f76b77e70e1395a49d1a454bb974c3838cb8432931f24ad603172cee3",
-   "problem_version_id": "62d9b592-06ae-4cc0-869e-3cf7334a21df",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m09-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:15.296Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m10-k0",
-   "checker_kind": "automated",
-   "content_hash": "c9dd92652e1ee546ff63a2eb1003ac9a4b1af0c8bbb096dccd92a19208a6ee9e",
-   "problem_version_id": "79e744ed-8d51-49ce-8a57-f6c085f8670d",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m10-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:15.678Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m10-k0",
-   "checker_kind": "automated",
-   "content_hash": "c9dd92652e1ee546ff63a2eb1003ac9a4b1af0c8bbb096dccd92a19208a6ee9e",
-   "problem_version_id": "79e744ed-8d51-49ce-8a57-f6c085f8670d",
-   "kind": "mc",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m10-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:15.678Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "no explanation text on result screen"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m10-k1",
-   "checker_kind": "automated",
-   "content_hash": "66a2221100eb5ab010a8d53eb3a919f394283ed9addcbcef7fab30602f43c8c8",
-   "problem_version_id": "eb8831e5-0c07-45cd-b95d-428984ed4884",
+   "content_hash": "5c9473bd08c512c1bee75243603d8f5a4fe93c5c4a99646113aae2ac076ca43a",
+   "problem_version_id": "cf9cf58d-a6ea-4049-86f4-3257244f5f74",
    "kind": "mc",
    "viewport": "390x844",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m10-k1-390x844.jpg",
-   "timestamp": "2026-10-15T23:04:22.557Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "4/4 options visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "na",
-     "note": "multiple-choice item"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "explanation math rendered (no raw TeX tokens)"
-    }
-   }
-  },
-  {
-   "candidate_key": "psych-hard-d:ap_psychology-m10-k1",
-   "checker_kind": "automated",
-   "content_hash": "66a2221100eb5ab010a8d53eb3a919f394283ed9addcbcef7fab30602f43c8c8",
-   "problem_version_id": "eb8831e5-0c07-45cd-b95d-428984ed4884",
-   "kind": "mc",
-   "viewport": "390x844",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m10-k1-390x844.jpg",
-   "timestamp": "2026-10-15T23:04:22.557Z",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m09-k1-390x844.jpg",
+   "timestamp": "2026-10-15T23:30:27.503Z",
    "checker": "automated-playwright/151.0.7922.34 local student exam screen",
    "checks": {
     "options_visible": {
@@ -12799,12 +12717,12 @@
   {
    "candidate_key": "psych-hard-d:ap_psychology-m11-k0",
    "checker_kind": "automated",
-   "content_hash": "d2f9713df6292d67d44b8ae4c8666ee5f229f1965f6b41943226cce19a02e0d5",
-   "problem_version_id": "53ebe2a8-918e-40df-b979-fc4f8775cd06",
+   "content_hash": "471fc0f64b60f0ab8cc7edfc151c07990eecbefe8f3f584124f26cac05170318",
+   "problem_version_id": "9bcea24d-e3de-4cc6-90d6-976175b77c3e",
    "kind": "mc",
    "viewport": "390x844",
    "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m11-k0-390x844.jpg",
-   "timestamp": "2026-10-15T23:04:22.927Z",
+   "timestamp": "2026-10-15T23:30:27.881Z",
    "checker": "automated-playwright/151.0.7922.34 local student exam screen",
    "checks": {
     "options_visible": {
@@ -12833,19 +12751,60 @@
     },
     "result_no_raw_tex": {
      "result": "pass",
-     "note": "explanation math rendered (no raw TeX tokens)"
+     "note": "no explanation text on result screen"
     }
    }
   },
   {
    "candidate_key": "psych-hard-d:ap_psychology-m11-k1",
    "checker_kind": "automated",
-   "content_hash": "466eba348e730610a388362faec8208dbcf112a8dd77d29527e81c751a2210ed",
-   "problem_version_id": "efdc9e8c-90a4-47d6-bd4d-97dc986dca86",
+   "content_hash": "01f7d7fb3580bfc88e5565210d1200eeed77a70bfddad360be0586745fc0ffe4",
+   "problem_version_id": "d9d13268-c7f7-409c-9e05-964dca311ee7",
    "kind": "mc",
    "viewport": "390x844",
    "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m11-k1-390x844.jpg",
-   "timestamp": "2026-10-15T23:04:23.293Z",
+   "timestamp": "2026-10-15T23:30:28.264Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m03-k0",
+   "checker_kind": "automated",
+   "content_hash": "b26e80fcf94c84a4d34dc6e5ba57086e9c29a81ce308411e4c2348b1e006b043",
+   "problem_version_id": "18214b9d-4500-4655-9bd0-3d02eadfee26",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m03-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T23:30:34.099Z",
    "checker": "automated-playwright/151.0.7922.34 local student exam screen",
    "checks": {
     "options_visible": {
@@ -12879,14 +12838,14 @@
    }
   },
   {
-   "candidate_key": "psych-hard-d:ap_psychology-m10-k1",
+   "candidate_key": "psych-hard-d:ap_psychology-m03-k1",
    "checker_kind": "automated",
-   "content_hash": "66a2221100eb5ab010a8d53eb3a919f394283ed9addcbcef7fab30602f43c8c8",
-   "problem_version_id": "eb8831e5-0c07-45cd-b95d-428984ed4884",
+   "content_hash": "b85bc7f0879b7dbdd1cf05dd99c2a3a21d84dd8f1557a97e2481c7c70b3711d5",
+   "problem_version_id": "3e0e4035-1a5c-4fcd-a4f3-063da4a5ff84",
    "kind": "mc",
    "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m10-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:27.212Z",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m03-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:30:34.474Z",
    "checker": "automated-playwright/151.0.7922.34 local student exam screen",
    "checks": {
     "options_visible": {
@@ -12920,14 +12879,55 @@
    }
   },
   {
-   "candidate_key": "psych-hard-d:ap_psychology-m10-k1",
+   "candidate_key": "psych-hard-d:ap_psychology-m08-k1",
    "checker_kind": "automated",
-   "content_hash": "66a2221100eb5ab010a8d53eb3a919f394283ed9addcbcef7fab30602f43c8c8",
-   "problem_version_id": "eb8831e5-0c07-45cd-b95d-428984ed4884",
+   "content_hash": "d6df0188248e0f7893108677cc9c356976f9345372b8525f33be08b06a9dff09",
+   "problem_version_id": "3fc8250b-9cda-447e-b24d-31349c602242",
    "kind": "mc",
    "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m10-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:27.212Z",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m08-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:30:34.839Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "psych-hard-d:ap_psychology-m09-k1",
+   "checker_kind": "automated",
+   "content_hash": "5c9473bd08c512c1bee75243603d8f5a4fe93c5c4a99646113aae2ac076ca43a",
+   "problem_version_id": "cf9cf58d-a6ea-4049-86f4-3257244f5f74",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m09-k1-1280x800.jpg",
+   "timestamp": "2026-10-15T23:30:35.199Z",
    "checker": "automated-playwright/151.0.7922.34 local student exam screen",
    "checks": {
     "options_visible": {
@@ -12963,12 +12963,12 @@
   {
    "candidate_key": "psych-hard-d:ap_psychology-m11-k0",
    "checker_kind": "automated",
-   "content_hash": "d2f9713df6292d67d44b8ae4c8666ee5f229f1965f6b41943226cce19a02e0d5",
-   "problem_version_id": "53ebe2a8-918e-40df-b979-fc4f8775cd06",
+   "content_hash": "471fc0f64b60f0ab8cc7edfc151c07990eecbefe8f3f584124f26cac05170318",
+   "problem_version_id": "9bcea24d-e3de-4cc6-90d6-976175b77c3e",
    "kind": "mc",
    "viewport": "1280x800",
    "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m11-k0-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:27.591Z",
+   "timestamp": "2026-10-15T23:30:35.555Z",
    "checker": "automated-playwright/151.0.7922.34 local student exam screen",
    "checks": {
     "options_visible": {
@@ -12997,19 +12997,19 @@
     },
     "result_no_raw_tex": {
      "result": "pass",
-     "note": "explanation math rendered (no raw TeX tokens)"
+     "note": "no explanation text on result screen"
     }
    }
   },
   {
    "candidate_key": "psych-hard-d:ap_psychology-m11-k1",
    "checker_kind": "automated",
-   "content_hash": "466eba348e730610a388362faec8208dbcf112a8dd77d29527e81c751a2210ed",
-   "problem_version_id": "efdc9e8c-90a4-47d6-bd4d-97dc986dca86",
+   "content_hash": "01f7d7fb3580bfc88e5565210d1200eeed77a70bfddad360be0586745fc0ffe4",
+   "problem_version_id": "d9d13268-c7f7-409c-9e05-964dca311ee7",
    "kind": "mc",
    "viewport": "1280x800",
    "screenshot": "docs/ap/screen-evidence/psych-hard/psych-hard-d_ap_psychology-m11-k1-1280x800.jpg",
-   "timestamp": "2026-10-15T23:04:27.956Z",
+   "timestamp": "2026-10-15T23:30:35.914Z",
    "checker": "automated-playwright/151.0.7922.34 local student exam screen",
    "checks": {
     "options_visible": {
@@ -13038,7 +13038,7 @@
     },
     "result_no_raw_tex": {
      "result": "pass",
-     "note": "explanation math rendered (no raw TeX tokens)"
+     "note": "no explanation text on result screen"
     }
    }
   }
