@@ -139,6 +139,15 @@ describe("pipeline", () => {
     } finally { vi.useRealTimers(); }
     expect(JSON.stringify([...store.rows.values()])).not.toContain("SECRET");
   });
+  it("a run whose tool input omits a field is re-asked once (cost summed); two bad in a row still fails", async () => {
+    const store = new MemStore(); let n = 0;
+    const c = fakeClient(() => (n++ === 0 ? { ...good(), sophistication: undefined } : good(1, 3, 0)));
+    expect(await processEssay({ store, client: c }, job())).toMatchObject({ status: "done", total: 4 });
+    expect(c.calls).toBe(3); // 1 bad + 1 retry + 1 second run
+    const store2 = new MemStore(); const c2 = fakeClient(() => ({ ...good(), sophistication: undefined }));
+    expect(await processEssay({ store: store2, client: c2 }, job())).toEqual({ status: "failed", error: "invalid_output" });
+    expect(c2.calls).toBe(2);
+  });
   it("client network error is classified without leaking message", async () => {
     const store = new MemStore(); const c: GraderClient = { async grade() { throw new Error("401 Bearer sk-ant-SECRETKEY"); } };
     const r = await processEssay({ store, client: c }, job());
