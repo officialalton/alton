@@ -33,7 +33,7 @@
   }
  },
  "models": {
-  "gen": "claude-fable-5-1",
+  "gen": "claude-opus-5-5",
   "solvers": [
    "claude-opus-5-5",
    "claude-sonnet-5-5"
@@ -65,6 +65,7 @@
   "scripts/ap-generation/englit-pipeline.ts"
  ],
  "expected": {
-  "hash": "UNFROZEN"
- }
+  "hash": "92fabc2c425d"
+ },
+ "genForce": true
 }

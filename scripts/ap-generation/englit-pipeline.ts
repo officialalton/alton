@@ -22,7 +22,7 @@ export type LtCfg = {
   plan?: { poetry?: { sets: number; seed: number; startIndex?: number }; short?: { sets: number; seed: number; startIndex?: number }; longer?: { sets: number; seed: number; startIndex?: number; dramaSets?: number } };
   frqPlan?: { id: string; type: "poetry_analysis" | "prose_analysis" | "literary_argument"; seedText: string; era: string; seed: number }[];
   models: { gen: string; solvers: string[]; adversary: string; judge: string; review: string; panel: string; rebalance: string; sampleHigh: string; sampleLow: string; graders: string[] };
-  effort: string; genEffort?: string; gradeEffort?: string; sampleCands?: number; genModels?: Partial<Record<"poetry" | "short" | "longer", string>>; corpusExclude?: string[]; minKeyConfidence: number; generatorFiles: string[]; expected: { hash: string };
+  effort: string; genForce?: boolean; genEffort?: string; gradeEffort?: string; sampleCands?: number; genModels?: Partial<Record<"poetry" | "short" | "longer", string>>; corpusExclude?: string[]; minKeyConfidence: number; generatorFiles: string[]; expected: { hash: string };
 };
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const has = (n: string) => process.argv.includes(n);
@@ -103,7 +103,7 @@ function specsOf(): P.SetSpec[] {
 type Row = { spec: P.SetSpec; set: LtSetRaw | null; setViolations: string[]; items: (LtItemRaw & { key_index: number; det: string[]; rebalanced?: boolean })[] };
 async function genStage() {
   const specs = specsOf(); wj("plan.json", { specs, summary: planSummary(specs) });
-  const reqs = specs.map((s) => mk(`g-${s.id}`, cfg.genModels?.[s.group] ?? cfg.models.gen, s.form === "poem" ? P.GEN_POEM_SYSTEM : P.GEN_PROSE_SYSTEM(s.form), P.setTool, P.genUser(s), 24000, false, cfg.genEffort ?? cfg.effort));
+  const reqs = specs.map((s) => mk(`g-${s.id}`, cfg.genModels?.[s.group] ?? cfg.models.gen, s.form === "poem" ? P.GEN_POEM_SYSTEM : P.GEN_PROSE_SYSTEM(s.form), P.setTool, P.genUser(s), 24000, Boolean(cfg.genForce), cfg.genEffort ?? cfg.effort));
   const out = await call("gen", reqs, estimate(cfg.models.gen, reqs.length, 3200, 10000)); wj("gen.json", Object.fromEntries([...out.entries()]));
 }
 const sameSkills = (spec: P.SetSpec, items: LtItemRaw[]) => [...spec.skills].sort().join() === items.map((i) => i.skill).sort().join();
@@ -267,7 +267,7 @@ function toFrqPayload(plan: NonNullable<LtCfg["frqPlan"]>[number], inp: Json): L
 }
 async function frqGenStage() {
   const plan = cfg.frqPlan ?? []; const sys = { poetry_analysis: P.FRQ_POEM_SYSTEM, prose_analysis: P.FRQ_PROSE_SYSTEM, literary_argument: P.FRQ_ARG_SYSTEM };
-  const reqs = plan.map((p) => mk(`f-${p.id}`, cfg.models.gen, sys[p.type], P.frqTool, P.frqUser(p.type, p.seedText, p.era, p.seed), 16000, false, cfg.genEffort ?? cfg.effort));
+  const reqs = plan.map((p) => mk(`f-${p.id}`, cfg.models.gen, sys[p.type], P.frqTool, P.frqUser(p.type, p.seedText, p.era, p.seed), 16000, Boolean(cfg.genForce), cfg.genEffort ?? cfg.effort));
   const out = await call("frq-gen", reqs, estimate(cfg.models.gen, reqs.length, 2200, 6500));
   wj("frq.json", plan.map((p) => ({ id: p.id, plan: p, payload: toFrqPayload(p, out.get(`f-${p.id}`) as Json) })));
 }

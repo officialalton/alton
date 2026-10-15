@@ -4,12 +4,18 @@
  "subject": "ap_english_literature",
  "mode": "mc",
  "batch": true,
- "capUsd": 1.6,
+ "capUsd": 3,
  "hardStopCumulativeUsd": 186,
  "myTotalCapUsd": 12,
  "stages": [
   "gen",
-  "check"
+  "check",
+  "rebalance",
+  "solve",
+  "adv",
+  "judge",
+  "panel",
+  "finalize"
  ],
  "plan": {
   "poetry": {
@@ -22,7 +28,7 @@
   }
  },
  "models": {
-  "gen": "claude-fable-5-1",
+  "gen": "claude-opus-5-5",
   "solvers": [
    "claude-opus-5-5",
    "claude-sonnet-5-5"
@@ -54,6 +60,7 @@
   "scripts/ap-generation/englit-pipeline.ts"
  ],
  "expected": {
-  "hash": "ee626b6ed977"
- }
+  "hash": "76f0f3c934a4"
+ },
+ "genForce": true
 }

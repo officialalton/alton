@@ -1,4 +1,5 @@
 import type { createAdminClient } from "@/lib/supabase-admin";
+import { litPassageForModels } from "@/lib/ap-exam/passage-lines";
 
 /** 문항의 stock JSON(payload) 로더 — AP English FRQ(ap_stock_current_v.payload.el_frq)를 채점 맥락 형식(context.ts)으로 옮긴다.
  *  현재 버전 행(is_current)만, 변환된 problem_id 로만 찾는다. 없거나 모양이 다르면 null → actions 가 앵커 샘플 부족으로 채점을 건너뛴다
@@ -6,8 +7,20 @@ import type { createAdminClient } from "@/lib/supabase-admin";
 const isObj = (v: unknown): v is Record<string, unknown> => typeof v === "object" && v !== null && !Array.isArray(v);
 const str = (v: unknown) => (typeof v === "string" ? v : "");
 
-/** payload(el_frq: prompt·sources[{id,title,body}]·samples[{tier,essay,annotations}]; parts[{label,prompt}]) → context.ts 가 읽는 모양. */
+/** AP English Literature FRQ(payload.lit_frq, lib/ap-generation/englit-frq.ts 의 lit-frq-1): 과제문은 parts[].prompt(학생이 보는 전문), 지문(시·산문)은 줄 번호가 붙은 출처 하나("Text")로 옮긴다. Q3(문학 논증)은 지문이 없다. */
+function litToEssayPayload(payload: Record<string, unknown>, lit: Record<string, unknown>): unknown | null {
+  const parts = (Array.isArray(payload.parts) ? payload.parts.filter(isObj) : []).map((p) => ({ label: str(p.label), prompt: str(p.prompt) }));
+  const pr = isObj(lit.prompt) ? lit.prompt : {}; const taskFallback = [str(pr.lead), str(pr.task)].filter(Boolean).join("\n\n");
+  if (!parts.some((p) => p.prompt.trim()) && !taskFallback.trim()) return null;
+  const ps = isObj(lit.passage) ? lit.passage : null; const stanzas = ps && Array.isArray(ps.stanzas) ? (ps.stanzas as unknown[]).map((s) => (Array.isArray(s) ? s.map(str) : [])) : [];
+  const sources = ps && stanzas.length ? [{ id: "Text", title: str(ps.title), body: litPassageForModels({ title: str(ps.title), stanzas }) }] : [];
+  const samples = (Array.isArray(lit.samples) ? lit.samples.filter(isObj) : []).map((s) => ({ tier: str(s.tier), text: str(s.essay) || str(s.text), note: s.annotations == null ? "" : typeof s.annotations === "string" ? s.annotations : JSON.stringify(s.annotations).slice(0, 600) }));
+  return { task: taskFallback, parts: parts.map((p) => ({ ...p, prompt: p.prompt || taskFallback })), sources, samples };
+}
+
+/** payload(el_frq: prompt·sources[{id,title,body}]·samples[{tier,essay,annotations}]; parts[{label,prompt}] 또는 lit_frq) → context.ts 가 읽는 모양. */
 export function toEssayPayload(payload: unknown): unknown | null {
+  if (isObj(payload) && isObj(payload.lit_frq)) return litToEssayPayload(payload, payload.lit_frq);
   if (!isObj(payload) || !isObj(payload.el_frq)) return null;
   const el = payload.el_frq;
   const parts = (Array.isArray(payload.parts) ? payload.parts.filter(isObj) : []).map((p) => ({ label: str(p.label), prompt: str(p.prompt) || str(el.prompt) }));

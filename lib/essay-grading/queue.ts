@@ -1,5 +1,5 @@
 import { buildPrompt, checkEssayLength, type Anchor } from "./prompt";
-import { RUBRIC_VERSION } from "./rubric";
+import { rubricVersionFor, type RubricId } from "./rubric";
 import { checkCaps, costUsd, flagEnabled, limits, type Usage } from "./costs";
 import { combineRuns, totalOf, validateGraderOutput, type Disagreement, type GraderOutput } from "./schema";
 import { GraderRefusal, type GraderClient } from "./client";
@@ -7,7 +7,7 @@ import { GraderRefusal, type GraderClient } from "./client";
 export const MAX_ATTEMPTS = 3;
 export const backoffMs = (attemptsMade: number): number => Math.min(60 * 60_000, 2 ** attemptsMade * 60_000); // 2,4,8분…
 
-export type EssayKey = { attemptId: string; setItemId: string; partLabel: string; studentId: string };
+export type EssayKey = { attemptId: string; setItemId: string; partLabel: string; studentId: string; /** 루브릭 버전(생략하면 Language 루브릭 버전). 점수 행의 고유 키에 들어간다. */ rubricVersion?: string };
 export type Status = "pending" | "processing" | "done" | "failed" | "dead" | "skipped";
 export type Row = { status: Status; attemptsMade: number; nextRetryAt: string | null };
 export type Finish = {
@@ -21,7 +21,7 @@ export interface EssayStore {
   finish(key: EssayKey, f: Finish): Promise<void>;
 }
 export type Deps = { store: EssayStore; client: GraderClient; now?: () => Date };
-export type Job = EssayKey & { taskPrompt: string; sources: { id: string; title?: string; body: string }[]; essay: string; anchors: Anchor[] };
+export type Job = EssayKey & { taskPrompt: string; sources: { id: string; title?: string; body: string }[]; essay: string; anchors: Anchor[]; rubricId?: RubricId };
 export type Outcome =
   | { status: "disabled" }
   | { status: "skipped"; reason: string }
@@ -35,7 +35,7 @@ const errCode = (e: unknown): string => (e instanceof GraderRefusal ? e.code : e
 export async function processEssay(deps: Deps, job: Job): Promise<Outcome> {
   if (!flagEnabled()) return { status: "disabled" };
   const { store, client } = deps; const now = deps.now ?? (() => new Date()); const l = limits();
-  const key: EssayKey = { attemptId: job.attemptId, setItemId: job.setItemId, partLabel: job.partLabel, studentId: job.studentId };
+  const key: EssayKey = { attemptId: job.attemptId, setItemId: job.setItemId, partLabel: job.partLabel, studentId: job.studentId, ...(job.rubricId ? { rubricVersion: rubricVersionFor(job.rubricId) } : {}) };
 
   const refusal = checkEssayLength(job.essay);
   const { claimed, row } = await store.claim(key);
@@ -43,7 +43,7 @@ export async function processEssay(deps: Deps, job: Job): Promise<Outcome> {
   const attemptsMade = row.attemptsMade + 1;
   if (refusal) { await store.finish(key, { status: "skipped", lastError: refusal, attemptsMade }); return { status: "skipped", reason: refusal }; }
 
-  const prompt = buildPrompt({ taskPrompt: job.taskPrompt, sources: job.sources, essay: job.essay, anchors: job.anchors });
+  const prompt = buildPrompt({ taskPrompt: job.taskPrompt, sources: job.sources, essay: job.essay, anchors: job.anchors, rubricId: job.rubricId });
   const cap = checkCaps(await store.usage(key), prompt.system.length + prompt.user.length, l);
   if (!cap.ok) { await store.finish(key, { status: "skipped", lastError: cap.reason, attemptsMade: row.attemptsMade }); return { status: "skipped", reason: cap.reason }; }
 
@@ -61,7 +61,7 @@ export async function processEssay(deps: Deps, job: Job): Promise<Outcome> {
     const total = totalOf(result.scores);
     await store.finish(key, {
       status: "done", model, attemptsMade, nextRetryAt: null, lastError: null, inputTokens: inTok, outputTokens: outTok, costUsd: costUsd(inTok, outTok, l),
-      scores: { ...result.scores, total, disagreement: disagreement !== null, rubricVersion: RUBRIC_VERSION },
+      scores: { ...result.scores, total, disagreement: disagreement !== null, rubricVersion: rubricVersionFor(job.rubricId) },
       rationale: { ...result.rationale, improve: result.improve },
     });
     return { status: "done", total, disagreement };

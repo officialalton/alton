@@ -129,7 +129,7 @@ export function itemViolations(set: LtSetRaw, it: LtItemRaw, resolved?: Resolved
   if (set.form === "poem" && /\bparagraph\b/i.test(r.stem)) v.push("poem_stem_says_paragraph");
   if (set.form !== "poem" && /\bstanza\b/i.test(r.stem)) v.push("prose_stem_says_stanza");
   // 장치
-  const inv = new Set((set.blueprint?.devices ?? []).map((d) => d.device)); for (const d of it.devices_used ?? []) if (!inv.has(d)) v.push(`item_device_${d}_not_in_blueprint_inventory`);
+  // 장치 목록은 보조 정보: 6.x(비교) 스킬만 블루프린트 장치(근거 구절 코드 검증)를 요구한다
   const needs: Record<string, string> = { "6.A": "simile", "6.B": "metaphor|extended_metaphor", "6.C": "personification", "6.D": "allusion" };
   if (needs[it.skill] && !(it.devices_used ?? []).some((d) => new RegExp(`^(${needs[it.skill]})$`).test(d))) v.push(`skill_${it.skill}_without_${needs[it.skill]}_device`);
   if (it.skill === "6.D") for (const d of (set.blueprint?.devices ?? []).filter((x) => x.device === "allusion")) if (/\b(president|senator|actor|singer|company|brand)\b/i.test(d.function)) v.push("allusion_to_real_person_or_brand");
