@@ -1,7 +1,7 @@
 # Piri Reis world map (surviving western fragment)
 
 - id: img-piri-reis-1513
-- author: Piri Reis (Ottoman admiral and cartographer)
+- author: Piri Reis (Ottoman naval captain and cartographer)
 - year: 1513
 - repository: Wikimedia Commons (file page records the source institution and public-domain tag)
 - url: https://commons.wikimedia.org/wiki/File:Piri_reis_world_map_01.jpg

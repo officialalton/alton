@@ -101,15 +101,15 @@ export const WH_SETS: WhSetSpec[] = [
 const F = (id: string, exam: "WH1" | "WH2", template: WhFrqSpec["template"], era: number, units: number[], focus: string, srcs: string[], seed: number): WhFrqSpec => ({ id, exam, template, era, units, focus, sources: srcs.map(S), seed });
 export const WH_FRQS: WhFrqSpec[] = [
   F("wh1_saq1", "WH1", "saq1", 4, [8], "Superpower rivalry and the end of European control in the Middle East in the 1950s (Suez crisis)", ["txt-cs-egypt-1991"], 2101),
-  F("wh1_saq2", "WH1", "saq2", 1, [2], "The Black Death and the connected world of the 13th and 14th centuries", ["txt-boccaccio-plague-1353"], 2102),
-  F("wh1_saq3", "WH1", "saq3", 2, [4], "Maritime exploration, mapmaking and the Atlantic world in the early 16th century", ["img-piri-reis-1513"], 2103),
-  F("wh1_dbq", "WH1", "dbq", 3, [5, 6, 7], "How industrialization changed relationships between industrial and non-industrial societies and conditions within industrial societies, 1776-1922", ["txt-smith-1776", "txt-qianlong-1793", "txt-engels-1845", "txt-tientsin-1858", "img-dore-london-1872", "txt-gandhi-1909-machinery", "txt-sun-1922"], 2104),
-  F("wh1_leq", "WH1", "leq", 2, [1, 2, 3, 4], "Long-distance trade and the exchange of goods, ideas and diseases, c. 1200 to c. 1750", [], 2105),
+  F("wh1_saq2", "WH1", "saq2", 1, [2], "The Black Death as a disease that moved along trade routes, and its social and economic effects in Europe and the Mediterranean (do not tie the plague to the fall of any particular dynasty)", ["txt-boccaccio-plague-1353"], 3102),
+  F("wh1_saq3", "WH1", "saq3", 2, [4], "Maritime exploration, mapmaking and the Atlantic world in the early 16th century", ["img-piri-reis-1513"], 3103),
+  F("wh1_dbq", "WH1", "dbq", 3, [5, 6, 7], "How industrialization changed relationships between industrial and non-industrial societies and conditions within industrial societies, 1776-1922", ["txt-smith-1776", "txt-qianlong-1793", "txt-engels-1845", "txt-tientsin-1858", "img-dore-london-1872", "txt-gandhi-1909-machinery", "txt-sun-1922"], 3104),
+  F("wh1_leq", "WH1", "leq", 2, [1, 2, 3, 4], "Long-distance trade and the exchange of goods, ideas and diseases, c. 1200 to c. 1750", [], 3105),
   F("wh2_saq1", "WH2", "saq1", 3, [6], "Western trade and military pressure on China in the 19th century and its consequences", ["txt-cs-china-1988-treaties"], 2201),
-  F("wh2_saq2", "WH2", "saq2", 4, [8], "Anti-colonial movements and the principles stated by the Allies in the Second World War", ["txt-atlantic-1941"], 2202),
-  F("wh2_saq3", "WH2", "saq3", 1, [1], "Mongol expansion and the response of the states it threatened in the 13th century", ["img-mongol-invasion-japan-1293"], 2203),
+  F("wh2_saq2", "WH2", "saq2", 4, [8], "Anti-colonial movements and the principles stated by the Allies in the Second World War", ["txt-atlantic-1941"], 3202),
+  F("wh2_saq3", "WH2", "saq3", 1, [1], "Mongol expansion and the response of the states it threatened in the 13th century", ["img-mongol-invasion-japan-1293"], 3203),
   F("wh2_dbq", "WH2", "dbq", 4, [7], "How far Allied commitments and the peace settlements after the First World War reshaped political authority in the former Ottoman Arab provinces, 1915-1922", ["txt-hussein-1915", "txt-mcmahon-1915", "txt-sykes-1916", "img-sykes-picot-map-1916", "txt-balfour-1917", "txt-leagcov-art22", "txt-whitepaper-1922"], 2204),
-  F("wh2_leq", "WH2", "leq", 3, [5, 6, 7, 8, 9], "Nationalism and resistance to foreign rule, c. 1750 to the present", [], 2205),
+  F("wh2_leq", "WH2", "leq", 3, [5, 6, 7, 8, 9], "Nationalism and resistance to foreign rule, c. 1750 to the present (use only well-established facts; avoid details about who led the early stages of any revolution)", [], 3205),
 ];
 export const whSetsOf = (exam?: string) => WH_SETS.filter((s) => !exam || s.exam === exam);
 export const whPlanSummary = () => ({ sets: WH_SETS.length, items: WH_SETS.reduce((a, s) => a + s.nItems, 0), byExam: Object.fromEntries(["WH1", "WH2"].map((e) => [e, { sets: whSetsOf(e).length, items: whSetsOf(e).reduce((a, s) => a + s.nItems, 0), units: whSetsOf(e).reduce<Record<string, number>>((o, s) => { o[s.unit] = (o[s.unit] ?? 0) + s.nItems; return o; }, {}), stim: whSetsOf(e).reduce<Record<string, number>>((o, s) => { o[s.stim] = (o[s.stim] ?? 0) + 1; return o; }, {}), skillCats: whSetsOf(e).reduce<Record<string, number>>((o, s) => { for (const k of s.skills) o[k[0]] = (o[k[0]] ?? 0) + 1; return o; }, {}) }])) });

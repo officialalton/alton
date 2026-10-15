@@ -195,6 +195,7 @@ function finalizeStage() {
 }
 
 // ── FRQ ────────────────────────────────────────────────────────────
+const annList = (v: unknown): Json[] => { const u = unstring(v); return Array.isArray(u) ? (u as Json[]).filter((x) => x && typeof x === "object") : u && typeof u === "object" ? Object.values(u as Json).filter((x) => x && typeof x === "object") as Json[] : []; };
 const median = (a: number[]) => { const s = a.slice().sort((x, y) => x - y); return s.length % 2 ? s[(s.length - 1) / 2] : Math.round((s[s.length / 2 - 1] + s[s.length / 2]) / 2); };
 const rubricText = (p: WhFrqPayload) => p.rubric.rows.map((r) => `${r.name} (0-${r.max}): ${r.task_specific}\n${Object.entries(r.descriptors).sort().map(([k, v]) => `  ${k}: ${v}`).join("\n")}`).join("\n") + "\n" + p.rubric.scoring_notes.map((n) => `Note: ${n}`).join("\n");
 const frqDisplay = (spec: WhFrqSpec) => whFrqIntro(spec, REG) + imageNote(spec.sources);
@@ -260,7 +261,7 @@ function frqFinalizeStage() {
       audit.push({ id: f.id, tier, options: opts.map((o) => ({ k: o.k, total: o.tot, spread: o.spread, flagged: o.flagged, flags: o.fl.map((x) => `${x.kind}:${String(x.detail).slice(0, 120)}`) })), chosen: ok?.k ?? null });
       if (!ok) { why.push(`sample_${tier}_no_consistent_candidate`); continue; }
       const text = noDollar(String(ok.s.essay)).trim();
-      chosen.push({ tier, target_total: ok.tot, essay: text, word_count: (text.match(/\S+/g) ?? []).length, rubric_scores: { ...ok.sc, total: ok.tot }, annotations: ((ok.s.annotations as Json[]) ?? []).map((a) => ({ quote: noDollar(String(a.quote)), comment: noDollar(String(a.comment)), row_id: String(a.row_id).toLowerCase() })).filter((a) => quoteInPassage(a.quote, text)) });
+      chosen.push({ tier, target_total: ok.tot, essay: text, word_count: (text.match(/\S+/g) ?? []).length, rubric_scores: { ...ok.sc, total: ok.tot }, annotations: annList(ok.s.annotations).map((a) => ({ quote: noDollar(String(a.quote)), comment: noDollar(String(a.comment)), row_id: String(a.row_id).toLowerCase() })).filter((a) => quoteInPassage(a.quote, text)) });
     }
     p.samples = chosen; const rec = frqRecord(cfg.run, cfg.gate, f.spec, p, REG); const gv = [...frqGates(rec, f.spec, REG), ...why, ...(f.fact ?? []).filter((x) => BAD_FLAG.test(String(x.kind))).map((x) => `fact_${x.kind}`)];
     if (gv.length) { recs.push({ __rejected: true, specId: f.id, reason: gv.join("; ").slice(0, 900) }); continue; }

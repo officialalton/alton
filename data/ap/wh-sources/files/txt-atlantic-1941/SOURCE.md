@@ -1,4 +1,4 @@
-# The Atlantic Charter (excerpt: points 2 and 3)
+# The Atlantic Charter (excerpt: the first three points)
 
 - id: txt-atlantic-1941
 - author: Franklin D. Roosevelt and Winston S. Churchill (joint declaration)

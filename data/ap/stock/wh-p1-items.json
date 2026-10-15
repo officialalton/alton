@@ -324,6 +324,340 @@
   }
  },
  {
+  "cellId": "ap_world_history-w102",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w102-k0",
+  "keywordCode": "2.4",
+  "unitCode": "2",
+  "skillPrimary": "2.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w102",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "wh-p1-2026-10-15",
+  "run": "wh-p1",
+  "stockKey": "wh-p1:ap_world_history-w102-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-p1-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-p1:ap_world_history-w102-k0",
+  "canonicalKey": "wh-p1:ap_world_history-w102-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:2.4",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|2.4|2.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-p1",
+    "gateVersion": "wh-p1-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "img-catalan-mansa-musa-1375"
+  ],
+  "exam": "WH1",
+  "payload": {
+   "archetype": "wh_w102",
+   "topic": "2.4",
+   "skill": "2.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(map)\nCatalan Atlas, sheet 6 (detail): a crowned ruler holding a gold piece, labeled by the Atlas's caption as the king of Mali\nAttributed to Abraham Cresques (Majorcan Jewish cartographer); Catalan Atlas of 1375, 1375. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (14th-century work). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail; 960 px wide for tall images, 1280 px wide for wide images).\nContext: This detail comes from a hand-painted atlas made in 1375 on the island of Majorca, which shows lands around the Mediterranean and beyond as European mapmakers knew them.\n\nThe image for this source is shown below. Select the image to open it full size.",
+   "stimulus": {
+    "kind": "image",
+    "description": "A detail from a 14th-century hand-painted map: a bearded, dark-skinned ruler in a gold crown sits on a cushioned throne, holding a scepter in one hand and a round gold piece in the other, on a parchment background crossed by colored compass lines, with a few lines of Catalan text at the upper right and small buildings at the lower corners.",
+    "data": {
+     "path": "ap-sources/img-catalan-mansa-musa-1375/image.jpg",
+     "alt": "A detail from a 14th-century hand-painted map: a bearded, dark-skinned ruler in a gold crown sits on a cushioned throne, holding a scepter in one hand and a round gold piece in the other, on a parchment background crossed by colored compass lines, with a few lines of Catalan text at the upper right and small buildings at the lower corners.",
+     "credit": "Catalan Atlas (1375), attributed to Abraham Cresques, sheet 6 detail. Bibliotheque nationale de France via Wikimedia Commons (public domain)."
+    }
+   },
+   "wh_set": {
+    "unit": 2,
+    "stim_type": "image",
+    "theme": "Trans-Saharan trade, gold and the image of the king of Mali on a European atlas",
+    "title": "Trans-Saharan trade, gold and the image of the king of Mali on a European atlas",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "image",
+      "title": "Catalan Atlas, sheet 6 (detail): a crowned ruler holding a gold piece, labeled by the Atlas's caption as the king of Mali",
+      "attribution": "Attributed to Abraham Cresques (Majorcan Jewish cartographer); Catalan Atlas of 1375, 1375. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (14th-century work). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail; 960 px wide for tall images, 1280 px wide for wide images).",
+      "context": "This detail comes from a hand-painted atlas made in 1375 on the island of Majorca, which shows lands around the Mediterranean and beyond as European mapmakers knew them.",
+      "real_data": true,
+      "source_registry_id": "img-catalan-mansa-musa-1375",
+      "source_sha256": "e52c6f336edec5e567c20d5d4c09358887ac677b51209e4712181c944f4332d1"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w102_2A",
+     "topic": "2.4",
+     "skill": "2.A",
+     "stem": "The way the mapmaker depicted the ruler most directly reflects which European view of West Africa in the late fourteenth century?",
+     "options": [
+      {
+       "text": "It was a poor land whose people had no organized states or trade.",
+       "why": "This is the opposite of the image, which shows a crowned monarch with gold, scepter and throne.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "It was a distant province governed directly by the Mongol khans of the Golden Horde.",
+       "why": "The Golden Horde ruled the steppe north of the Black Sea, not West Africa. The caption identifies the figure as the king of Mali, an independent ruler.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "It was a region ruled by kings rich in gold.",
+       "why": "The crowned, enthroned figure holds up a large gold piece, so the Majorcan mapmaker presents West Africa as a land of wealthy rulers. That matches what Mediterranean merchants knew about Mali's gold.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "It was a pagan frontier that crusading orders were preparing to conquer by force.",
+       "why": "Nothing in the image suggests a planned conquest. The ruler is shown with dignity and wealth, not as a target of crusade.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"It was a region ruled by kings rich in gold.\". The crowned, enthroned figure holds up a large gold piece, so the Majorcan mapmaker presents West Africa as a land of wealthy rulers. That matches what Mediterranean merchants knew about Mali's gold.\n\"It was a poor land whose people had no organized states or trade.\" is incorrect: This is the opposite of the image, which shows a crowned monarch with gold, scepter and throne.\n\"It was a distant province governed directly by the Mongol khans of the Golden Horde.\" is incorrect: The Golden Horde ruled the steppe north of the Black Sea, not West Africa. The caption identifies the figure as the king of Mali, an independent ruler.\n\"It was a pagan frontier that crusading orders were preparing to conquer by force.\" is incorrect: Nothing in the image suggests a planned conquest. The ruler is shown with dignity and wealth, not as a target of crusade.",
+     "est_seconds": 50,
+     "facts": [
+      "The Catalan Atlas was made on Majorca in 1375 and is attributed to Abraham Cresques.",
+      "In the 1300s the Mali Empire was a major source of the gold that reached Mediterranean markets."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.A",
+      "key_evidence_in_source": "The ruler holds up a round gold piece while wearing a crown and sitting on a throne, and the caption identifies him as the king of Mali.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
+     "archetype": "wh_w102_3A",
+     "topic": "2.4",
+     "skill": "3.A",
+     "stem": "By showing the king of Mali with a crown, a scepter and a throne, the image makes which claim about him?",
+     "options": [
+      {
+       "text": "He ruled as a subordinate governor appointed by the Mamluk sultan of Egypt.",
+       "why": "The image presents him as an independent crowned king, not a subordinate. Mali was not governed by the Mamluks.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "He was a sovereign equal in rank to Europe's kings.",
+       "why": "The crown, scepter and throne are standard European symbols of royal authority. Using them claims that Mali's ruler was a monarch on the same level as European kings.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "He gained his wealth chiefly by selling captives to Atlantic sugar plantations.",
+       "why": "The Atlantic plantation slave trade grew after 1450, long after this 1375 atlas. The image links his wealth to gold.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "He had converted to Christianity and accepted the authority of the pope in Rome.",
+       "why": "Royal symbols do not show religious conversion. Mali's rulers in this period were Muslims, not Christians.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"He was a sovereign equal in rank to Europe's kings.\". The crown, scepter and throne are standard European symbols of royal authority. Using them claims that Mali's ruler was a monarch on the same level as European kings.\n\"He ruled as a subordinate governor appointed by the Mamluk sultan of Egypt.\" is incorrect: The image presents him as an independent crowned king, not a subordinate. Mali was not governed by the Mamluks.\n\"He gained his wealth chiefly by selling captives to Atlantic sugar plantations.\" is incorrect: The Atlantic plantation slave trade grew after 1450, long after this 1375 atlas. The image links his wealth to gold.\n\"He had converted to Christianity and accepted the authority of the pope in Rome.\" is incorrect: Royal symbols do not show religious conversion. Mali's rulers in this period were Muslims, not Christians.",
+     "est_seconds": 50,
+     "facts": [
+      "Mali's rulers in the 1300s, including Mansa Musa, were Muslims.",
+      "The Atlantic slave trade to plantation economies developed mainly after the mid-1400s."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "The visible royal symbols (gold crown, fleur-de-lis scepter, cushioned throne) present the ruler as a full sovereign.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "likely"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w102_4B",
+     "topic": "2.4",
+     "skill": "4.B",
+     "stem": "The European knowledge of Mali shown in this 1375 image is best explained in the context of which earlier development?",
+     "options": [
+      {
+       "text": "Arab dhow voyages bringing East African ivory and gold from Kilwa to Indian ports",
+       "why": "Indian Ocean trade from the Swahili coast was real, but it did not connect Mali to the Mediterranean world that made this atlas.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Mongol-protected Silk Road caravans that carried Chinese porcelain and silk to Europe",
+       "why": "The Mongols did protect Silk Road trade, but that trade explains European knowledge of East Asia, not of West African gold.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "The spread of printed maps from presses in German cities across Mediterranean ports",
+       "why": "Movable-type printing began in Europe around 1450, after 1375, and this atlas was painted by hand.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "A Malian king's lavish pilgrimage to Mecca by way of Cairo in 1324",
+       "why": "Mansa Musa's hajj, with its large spending of gold in Cairo, spread reports of Mali's wealth around the Mediterranean. Those reports shaped how European mapmakers pictured the king of Mali.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"A Malian king's lavish pilgrimage to Mecca by way of Cairo in 1324\". Mansa Musa's hajj, with its large spending of gold in Cairo, spread reports of Mali's wealth around the Mediterranean. Those reports shaped how European mapmakers pictured the king of Mali.\n\"Arab dhow voyages bringing East African ivory and gold from Kilwa to Indian ports\" is incorrect: Indian Ocean trade from the Swahili coast was real, but it did not connect Mali to the Mediterranean world that made this atlas.\n\"Mongol-protected Silk Road caravans that carried Chinese porcelain and silk to Europe\" is incorrect: The Mongols did protect Silk Road trade, but that trade explains European knowledge of East Asia, not of West African gold.\n\"The spread of printed maps from presses in German cities across Mediterranean ports\" is incorrect: Movable-type printing began in Europe around 1450, after 1375, and this atlas was painted by hand.",
+     "est_seconds": 55,
+     "facts": [
+      "Mansa Musa of Mali made his pilgrimage to Mecca in 1324, passing through Cairo.",
+      "His spending of gold in Cairo spread his reputation for wealth across the Mediterranean world."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "The atlas dates to 1375 and shows the king of Mali holding gold, about fifty years after Mansa Musa's well-known hajj.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "wh_w102_5A",
+     "topic": "2.4",
+     "skill": "5.A",
+     "stem": "European interest in the West African gold shown in the image most directly contributed to which development in the fifteenth century?",
+     "options": [
+      {
+       "text": "Portuguese voyages down Africa's Atlantic coast",
+       "why": "In the 1400s the Portuguese sailed down the West African coast, partly to reach the sources of gold directly and avoid the Saharan and North African middlemen.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Ottoman conquest of Constantinople and its control of Black Sea trade",
+       "why": "The Ottomans took Constantinople in 1453, but European demand for West African gold did not cause it.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Spanish conquest of the Aztec Empire to seize the gold of central Mexico",
+       "why": "The Spanish conquest of the Aztecs happened in 1519 to 1521, in the sixteenth century, and in the Americas, not West Africa.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Ming dynasty treasure fleets under Zheng He sailing to East African ports",
+       "why": "Zheng He's voyages were real and took place in the 1400s, but Chinese imperial goals drove them, not European interest in West African gold.",
+       "value": null,
+       "label": "unrelated_development"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Portuguese voyages down Africa's Atlantic coast\". In the 1400s the Portuguese sailed down the West African coast, partly to reach the sources of gold directly and avoid the Saharan and North African middlemen.\n\"The Ottoman conquest of Constantinople and its control of Black Sea trade\" is incorrect: The Ottomans took Constantinople in 1453, but European demand for West African gold did not cause it.\n\"Spanish conquest of the Aztec Empire to seize the gold of central Mexico\" is incorrect: The Spanish conquest of the Aztecs happened in 1519 to 1521, in the sixteenth century, and in the Americas, not West Africa.\n\"Ming dynasty treasure fleets under Zheng He sailing to East African ports\" is incorrect: Zheng He's voyages were real and took place in the 1400s, but Chinese imperial goals drove them, not European interest in West African gold.",
+     "est_seconds": 45,
+     "facts": [
+      "Portuguese expeditions explored the West African coast during the 1400s, seeking direct access to African gold.",
+      "The Spanish conquest of the Aztec Empire took place in 1519-1521."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.A",
+      "key_evidence_in_source": "The prominent gold piece in the king's hand shows how strongly European mapmakers linked Mali with gold.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
   "cellId": "ap_world_history-w108",
   "apSubjectCode": "ap_world_history",
   "kind": "mc",
