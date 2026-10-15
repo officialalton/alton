@@ -65,11 +65,11 @@ export function normalizeFrqPayload(p: LtFrqPayload): LtFrqPayload {
   return { ...p, rubric: { total_points: 6, rows, scoring_notes: [...(p.rubric?.scoring_notes ?? []), ...(p.task_type === "literary_argument" ? [LT_Q3_ROW_B_NOTE] : [])].filter((x, i, a) => a.indexOf(x) === i) } };
 }
 
-const REAL_NAMES = ["shakespeare", "dickinson", "whitman", "frost", "hughes", "angelou", "plath", "blake", "wordsworth", "keats", "shelley", "byron", "tennyson", "browning", "milton", "chaucer", "yeats", "auden", "neruda", "rilke", "poe", "hemingway", "faulkner", "austen", "dickens", "hardy", "woolf", "joyce", "kafka", "chekhov", "tolstoy", "hawthorne", "melville", "twain", "wilde", "ibsen", "morrison"];
+const REAL_NAMES = ["shakespeare", "dickinson", "whitman", "robert frost", "langston hughes", "angelou", "plath", "william blake", "wordsworth", "keats", "shelley", "byron", "tennyson", "browning", "milton", "chaucer", "yeats", "auden", "neruda", "rilke", "edgar allan poe", "hemingway", "faulkner", "austen", "dickens", "thomas hardy", "woolf", "joyce", "kafka", "chekhov", "tolstoy", "hawthorne", "melville", "twain", "wilde", "ibsen", "morrison"];
 const hasWord = (text: string, name: string) => new RegExp(`(^|[^a-z])${name}([^a-z]|$)`).test(text);
 /** 샘플 답안의 줄 단위 인용(따옴표 안 3단어 이상)이 지문에 그대로 있는가 — 지문 없는 Q3 는 검사하지 않는다. */
-export function sampleQuoteViolations(essay: string, passage: string): string[] {
-  const out: string[] = []; for (const q of quotedSpans(essay)) { if (q.split(/\s+/).length < 3) continue; if (!quoteInPassage(q.replace(/\s*\/\s*/g, " "), passage)) out.push(`sample_quote_not_in_passage_${frqNorm(q).slice(0, 30).replace(/\s+/g, "_")}`); }
+export function sampleQuoteViolations(essay: string, passage: string, title = ""): string[] {
+  const out: string[] = []; const t = frqNorm(title).replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim(); for (const q of quotedSpans(essay)) { if (q.split(/\s+/).length < 3) continue; const qn = frqNorm(q).replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim(); if (t && (qn === t || t.includes(qn))) continue; /* 시·글 제목 인용은 지문 본문이 아니다 */ if (!quoteInPassage(q.replace(/\s*\/\s*/g, " "), passage)) out.push(`sample_quote_not_in_passage_${frqNorm(q).slice(0, 30).replace(/\s+/g, "_")}`); }
   return out;
 }
 export const LT_SAMPLE_WORDS = { high: [380, 800], mid: [250, 560], low: [110, 360] } as const;
@@ -108,7 +108,7 @@ export function frqViolations(p: LtFrqPayload, prior: { id: string; text: string
       if (s.rubric_scores.A + s.rubric_scores.B + s.rubric_scores.C !== s.rubric_scores.total) v.push(`sample_${s.tier}_total_mismatch`);
       for (const h of textHazards(s.essay)) v.push(`sample_${s.tier}_${h}`);
       if (!s.annotations.length) v.push(`sample_${s.tier}_no_annotations`); for (const a of s.annotations) if (!quoteInPassage(a.quote, s.essay)) v.push(`sample_${s.tier}_annotation_quote_not_in_essay`);
-      if (p.passage) v.push(...sampleQuoteViolations(s.essay, frqPassageText(p.passage)).map((x) => `sample_${s.tier}_${x}`));
+      if (p.passage) v.push(...sampleQuoteViolations(s.essay, frqPassageText(p.passage), p.passage.title).map((x) => `sample_${s.tier}_${x}`));
       if (/\b(ai-generated|as an ai|language model)\b/i.test(s.essay)) v.push(`sample_${s.tier}_meta_text`);
       if (t === "q3" && p.works_list && !p.works_list.some((w) => frqNorm(s.essay).includes(frqNorm(w.title)))) v.push(`sample_${s.tier}_names_no_listed_work`);
     }

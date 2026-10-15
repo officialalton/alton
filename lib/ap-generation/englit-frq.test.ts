@@ -41,3 +41,11 @@ describe("englit frq", () => {
     expect(frqViolations({ ...q3, passage: q1().passage }).join()).toMatch(/q3_has_passage/);
   });
 });
+
+describe("englit frq quote checks", () => {
+  it("does not treat a quoted title as an invented passage quotation, and 'frost' alone is not a real-name hit", () => {
+    expect(sampleQuoteViolations('In "Last Crossing" the speaker says "the far shore is whatever the rope holds".', STANZAS.flat().join(" "), "Last Crossing")).toEqual([]);
+    expect(sampleQuoteViolations('In "Last Crossing, Pier Nine" ...', STANZAS.flat().join(" "), "Last Crossing, Pier Nine")).toEqual([]);
+    const p = q1(); expect(frqViolations({ ...p, passage: { ...p.passage!, stanzas: [[...STANZAS[0].slice(0, 4), "frost on the rail like a quiet sentence."], ...STANZAS.slice(1)], line_count: 20 } }).join()).not.toMatch(/real_name/);
+  });
+});
