@@ -22,7 +22,7 @@ type It = { skill?: string; key_confidence?: { score: number; band: string } };
 const mcRows = items.filter((i) => i.kind === "mc"), frqRows = items.filter((i) => i.kind !== "mc");
 const passMc = mcRows.filter((i) => pass.includes(i)); const passItems = passMc.flatMap((i) => ((i.payload.items as It[]) ?? []));
 const auditRows = RUNS.flatMap((r) => { const f = path.join(root, r, "audit.json"); return existsSync(f) ? (JSON.parse(readFileSync(f, "utf-8")) as { skill?: string; det?: string[]; solverAgree?: number; adversary?: string | null; judge?: string | null; score?: number; pass?: boolean; reasons?: string[]; tier?: string }[]) : []; });
-const itemAudit = auditRows.filter((a) => a.skill !== undefined);
+const itemAudit = auditRows.filter((a) => a.skill !== undefined && !(a as { pre?: boolean }).pre); // 확장 묶음의 기존 문항(pre)은 이번 생성 통계에서 뺀다
 const by = <T,>(xs: T[], f: (x: T) => string) => xs.reduce<Record<string, number>>((o, x) => { const k = f(x); o[k] = (o[k] ?? 0) + 1; return o; }, {});
 const summary = {
   runs: RUNS, rows: items.length, passed: pass.length, rejected: items.length - pass.length,

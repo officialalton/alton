@@ -83,6 +83,28 @@ export function genUser(s: SetSpec): string {
   return `Write one ${s.kind} set.\nGenre: ${s.genre}\nTheme: ${s.theme}\nVariation seed (use it only to vary names, setting and approach): ${s.seed}\nQuestions (in this order):\n${topics}\n\nMake the passage distinctive: a specific fictional writer, a specific occasion, concrete details. Methods of development to consider: ${EL_METHODS.join(", ")}.\nCall submit_passage_set.`;
 }
 
+// ── 확장 묶음(EXT): 이미 검증된 지문·기존 문항에 문항만 더한다(공식 구성: 읽기 묶음 11–14문항, 글쓰기 묶음 7–9문항) ─────────
+const qBlock = (sys: string) => { const a = sys.indexOf("THE QUESTIONS"), b = sys.indexOf("Call the tool submit_passage_set exactly once."); return sys.slice(a, b).trim(); };
+export const EXT_READING_SYSTEM = `You are a senior item writer for the AP English Language and Composition exam (2027 course framework). The nonfiction passage below is ALREADY WRITTEN and approved. You write ADDITIONAL multiple-choice questions about it, for a private tutoring company's practice exams.
+
+${COMMON_ORIGINALITY}
+
+${qBlock(GEN_READING_SYSTEM)}
+- The passage is fixed: never rewrite it, quote only text that is really in it, and keep to the sentence numbering shown. Each new question must test a different place or feature of the passage than the existing questions and must not repeat or give away the answer to an existing question. Spread new questions across the whole passage (all paragraphs).
+Call the tool submit_items exactly once with the new questions only. Put "is_key": true on exactly one option per question.`;
+export const EXT_WRITING_SYSTEM = `You are a senior item writer for the AP English Language and Composition exam (2027 course framework). The student draft below is ALREADY WRITTEN and approved. You write ADDITIONAL "writing" (revision) multiple-choice questions about it, for a private tutoring company's practice exams.
+
+${COMMON_ORIGINALITY}
+
+${qBlock(GEN_WRITING_SYSTEM)}
+- The draft is fixed: never rewrite it and keep to the sentence numbering shown (students see numbers in brackets). Each new question must target a different sentence or issue than the existing questions, must not repeat one, and must not give away an existing answer. If the draft has few unaddressed weaknesses, ask about improvements that serve the draft's stated purpose and audience (combining, transition, evidence, concision, tone, organization, introduction or conclusion).
+Call the tool submit_items exactly once with the new questions only. Put "is_key": true on exactly one option per question.`;
+export const extTool = { name: "submit_items", description: "Submit the additional questions.", input_schema: { type: "object", properties: { items: (setTool.input_schema.properties.items as unknown) }, required: ["items"] } };
+export function extUser(o: { kind: "reading" | "writing"; passageShown: string; blueprint: unknown; existing: { skill: string; stem: string }[]; newSkills: string[]; seed: number }): string {
+  const topics = o.newSkills.map((k, i) => `  ${i + 1}. skill ${k}: topic code one of ${(EL_TOPICS_FOR_SKILL[k] ?? []).join(" / ")}`).join("\n");
+  return `PASSAGE (fixed)\n${o.passageShown}\n\nBLUEPRINT (facts about the passage)\n${JSON.stringify(o.blueprint)}\n\nEXISTING QUESTIONS (do not repeat or overlap)\n${o.existing.map((e, i) => `  ${i + 1}. [${e.skill}] ${e.stem}`).join("\n")}\n\nWrite ${o.newSkills.length} NEW ${o.kind} questions in this order:\n${topics}\nVariation seed: ${o.seed}\nCall submit_items.`;
+}
+
 // ── 풀이기(3) ───────────────────────────────────────────────────────
 export const SOLVER_TOOL = { name: "submit_answers", description: "Submit your answer to every question.", input_schema: { type: "object", properties: { answers: { type: "array", items: { type: "object", properties: {
   question: { type: "integer", description: "1-based question number as given" }, choice: { type: "integer", description: "0-based index of the option you choose, in the order shown to you" },

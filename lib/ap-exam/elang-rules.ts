@@ -11,6 +11,9 @@ export const ELANG_READING_RANGE = { min: 23, max: 25 } as const;
 export const ELANG_WRITING_RANGE = { min: 20, max: 22 } as const;
 export const ELANG_SET_SIZE = { min: 3, max: 6 } as const;
 export const ELANG_SET_COUNT = { min: 4, max: 6 } as const;
+/** 공식 CED(Exam Information, 2024 판) MC 구성: 5개 묶음 — 읽기 2묶음(각 11–14문항, 스킬 1·3·5·7), 글쓰기 3묶음(7–9 / 7–9 / 4–6문항, 스킬 2·4·6·8). 지문 길이는 CED 에 명시 없음. 이 구성이면 아래 레거시 묶음 크기·수 규칙 대신 적용한다. */
+export const ELANG_OFFICIAL_READING_SETS = { count: 2, size: { min: 11, max: 14 } } as const;
+export const ELANG_OFFICIAL_WRITING_SETS = { count: 3, sizes: [{ min: 7, max: 9 }, { min: 7, max: 9 }, { min: 4, max: 6 }] } as const;
 export const ELANG_FRQ_TYPES = ["q1", "q2", "q3"] as const;
 export const ELANG_FRQ_COUNT = 3;
 const PREFIX_CATEGORY: Record<string, string> = { "1": "RS-R", "2": "RS-W", "3": "CE-R", "4": "CE-W", "5": "RO-R", "6": "RO-W", "7": "S-R", "8": "S-W" };
@@ -37,13 +40,22 @@ export function verifyElangFullComposition(items: ElangSetItem[]): string[] {
   const byKey = new Map<string, ElangSetItem[]>();
   for (const i of mc) if (i.candidateKey) byKey.set(i.candidateKey, [...(byKey.get(i.candidateKey) ?? []), i]);
   const sets = [...byKey.values()];
+  const secOf = (s: ElangSetItem[]) => elangSectionOf(s[0].skill);
+  const rSets = sets.filter((s) => secOf(s) === "reading"), wSets = sets.filter((s) => secOf(s) === "writing");
+  const official = rSets.length === ELANG_OFFICIAL_READING_SETS.count && wSets.length === ELANG_OFFICIAL_WRITING_SETS.count; // 5묶음이면 공식 구성으로 검사, 아니면 레거시(묶음 3–6문항·읽기/글쓰기 각 4–6묶음)
   for (const s of sets) {
-    if (s.length < ELANG_SET_SIZE.min || s.length > ELANG_SET_SIZE.max) out.push(`set_size_${s.length}_not_in_${ELANG_SET_SIZE.min}-${ELANG_SET_SIZE.max}`);
+    if (!official && (s.length < ELANG_SET_SIZE.min || s.length > ELANG_SET_SIZE.max)) out.push(`set_size_${s.length}_not_in_${ELANG_SET_SIZE.min}-${ELANG_SET_SIZE.max}`);
     const pos = s.map((x) => x.position).sort((a, b) => a - b);
     if (pos.some((p, i) => i > 0 && p !== pos[i - 1] + 1)) out.push(`set_not_contiguous_${s[0].candidateKey}`);
     if (new Set(s.map((x) => elangSectionOf(x.skill))).size > 1) out.push(`set_mixes_reading_and_writing_${s[0].candidateKey}`);
   }
-  for (const sec of ["reading", "writing"] as const) { const n = sets.filter((s) => elangSectionOf(s[0].skill) === sec).length; if (n < ELANG_SET_COUNT.min || n > ELANG_SET_COUNT.max) out.push(`${sec}_sets_${n}_not_in_${ELANG_SET_COUNT.min}-${ELANG_SET_COUNT.max}`); }
+  if (official) {
+    for (const s of rSets) if (s.length < ELANG_OFFICIAL_READING_SETS.size.min || s.length > ELANG_OFFICIAL_READING_SETS.size.max) out.push(`official_reading_set_size_${s.length}_not_in_${ELANG_OFFICIAL_READING_SETS.size.min}-${ELANG_OFFICIAL_READING_SETS.size.max}`);
+    const ws = wSets.map((s) => s.length).sort((a, b) => b - a); // 큰 묶음부터 7–9, 7–9, 4–6 에 대응
+    ws.forEach((n, i) => { const b = ELANG_OFFICIAL_WRITING_SETS.sizes[i]; if (n < b.min || n > b.max) out.push(`official_writing_set_${i + 1}_size_${n}_not_in_${b.min}-${b.max}`); });
+  } else {
+    for (const [sec, n] of [["reading", rSets.length], ["writing", wSets.length]] as const) if (n < ELANG_SET_COUNT.min || n > ELANG_SET_COUNT.max) out.push(`${sec}_sets_${n}_not_in_${ELANG_SET_COUNT.min}-${ELANG_SET_COUNT.max}`);
+  }
   const rp = mc.filter((i) => elangSectionOf(i.skill) === "reading").map((i) => i.position), wp = mc.filter((i) => elangSectionOf(i.skill) === "writing").map((i) => i.position);
   if (rp.length && wp.length && Math.max(...rp) > Math.min(...wp)) out.push("reading_after_writing");
   const ft = frq.map((i) => i.candidateKey).filter(Boolean); if (new Set(ft).size !== ft.length) out.push("frq_duplicate_key");
