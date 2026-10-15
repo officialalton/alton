@@ -17,6 +17,9 @@ const credit = (s: RegistrySource) => `${s.author}, ${s.year}. ${s.repository}. 
 const intro = (s: RegistrySource, extra: string) => `${MARK}\n(table)\n${s.title}\n${credit(s)} ${extra}\n\nThe table for this source appears below.`;
 const stim = (s: RegistrySource, description: string) => ({ kind: "table", description, data: { columns: s.table!.columns, rows: s.table!.rows } });
 const srcEntry = (s: RegistrySource) => ({ id: "A", kind: "table", title: s.title, attribution: credit(s), real_data: true, source_registry_id: s.id, source_sha256: s.sha256 });
+// 정답 위치를 고르게 흩는다(자료 순서와 무관하게 키가 늘 A 가 되지 않도록). 오답은 원래 상대 순서를 유지한다.
+const KEY_AT: Record<string, number[]> = { real_a_gm: [2, 0, 3], real_a_imm: [1, 3, 2] };
+const placeKey = <T,>(arr: T[], from: number, to: number): T[] => { const rest = arr.filter((_, i) => i !== from); rest.splice(to, 0, arr[from]); return rest; };
 const MC_TOPIC_PERIOD = (t: string) => Number(t.split(".")[0]);
 
 function base(cell: string, kind: "mc" | "frq_bundle", keyword: string, unit: string, skill: string, structure: string, archetype: string, sourceId: string, difficulty: Json) {
@@ -29,10 +32,12 @@ function base(cell: string, kind: "mc" | "frq_bundle", keyword: string, unit: st
 
 function mcRecord(m: McSet): Json {
   const s = reg.get(m.sourceId)!;
-  const items = m.items.map((it) => {
-    const opts = it.options.map((x, i) => ({ text: x.text, why: x.why, value: null, label: i === it.key ? "key" : x.label }));
-    const ex = [`The correct answer is "${opts[it.key].text}". ${opts[it.key].why}`, ...opts.map((x, i) => (i === it.key ? "" : `"${x.text}" is incorrect: ${x.why}`)).filter(Boolean)].join("\n");
-    return { archetype: `ush_real_${it.tag}`, topic: it.topic, skill: it.skill, stem: it.stem, options: opts, key_index: it.key, explanation_en: ex, est_seconds: 75, facts: it.facts, design: { source_fixed_first: true, skill: it.skill, key_evidence_in_source: it.evidence } };
+  const items = m.items.map((it, n) => {
+    const at = KEY_AT[m.cell]?.[n] ?? it.key; const keyIdx = at;
+    const opts = placeKey(it.options.map((x, i) => ({ text: x.text, why: x.why, value: null, label: i === it.key ? "key" : x.label })), it.key, keyIdx);
+    const it2 = { ...it, key: keyIdx };
+    const ex = [`The correct answer is "${opts[it2.key].text}". ${opts[it2.key].why}`, ...opts.map((x, i) => (i === it2.key ? "" : `"${x.text}" is incorrect: ${x.why}`)).filter(Boolean)].join("\n");
+    return { archetype: `ush_real_${it.tag}`, topic: it.topic, skill: it.skill, stem: it.stem, options: opts, key_index: it2.key, explanation_en: ex, est_seconds: 75, facts: it.facts, design: { source_fixed_first: true, skill: it.skill, key_evidence_in_source: it.evidence } };
   });
   const payload = { archetype: `ush_real_${m.cell}`, topic: m.topic, skill: m.items[0].skill, calculator: "na", set_intro: intro(s, m.intro), stimulus: stim(s, m.tableDescription),
     ush_set: { period: m.period, stim_type: "quantitative", theme: m.theme, title: m.title, sources: [srcEntry(s)] }, items, excluded_items: [] };

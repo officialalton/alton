@@ -147,12 +147,6 @@
      "stem": "Which of the following most directly contributed to the change in the Black population of the Northeast and Midwest between 1910 and 1930 shown in the table?",
      "options": [
       {
-       "text": "Northern factories recruited Black workers during and after World War I as European immigration declined.",
-       "why": "Northern war production created a demand for industrial labor while immigration from Europe fell, and the table shows the Black population of the Northeast rising from 484,176 in 1910 to 1,146,985 in 1930.",
-       "value": null,
-       "label": "key"
-      },
-      {
        "text": "The Emancipation Proclamation of 1863, which immediately moved most formerly enslaved Southerners to northern cities.",
        "why": "The table shows 7,922,969 Black residents still living in the South in 1900, almost four decades after 1863, so emancipation did not directly cause the movement of 1910 to 1930.",
        "value": null,
@@ -165,13 +159,19 @@
        "label": "wrong_period"
       },
       {
+       "text": "Northern factories recruited Black workers during and after World War I as European immigration declined.",
+       "why": "Northern war production created a demand for industrial labor while immigration from Europe fell, and the table shows the Black population of the Northeast rising from 484,176 in 1910 to 1,146,985 in 1930.",
+       "value": null,
+       "label": "key"
+      },
+      {
        "text": "A sharp fall in northern factory hiring during World War I, which sent Black workers back to Southern farms.",
        "why": "Northern hiring rose during the war, and the table shows the Black population of the Midwest growing from 543,498 in 1910 to 793,075 in 1920, not shrinking.",
        "value": null,
        "label": "reversal"
       }
      ],
-     "key_index": 0,
+     "key_index": 2,
      "explanation_en": "The correct answer is \"Northern factories recruited Black workers during and after World War I as European immigration declined.\". Northern war production created a demand for industrial labor while immigration from Europe fell, and the table shows the Black population of the Northeast rising from 484,176 in 1910 to 1,146,985 in 1930.\n\"The Emancipation Proclamation of 1863, which immediately moved most formerly enslaved Southerners to northern cities.\" is incorrect: The table shows 7,922,969 Black residents still living in the South in 1900, almost four decades after 1863, so emancipation did not directly cause the movement of 1910 to 1930.\n\"The Dust Bowl, which forced large numbers of farm families to leave the southern Plains in the 1930s.\" is incorrect: The Dust Bowl began in the 1930s, after most of the increase shown between 1910 and 1930 had already occurred.\n\"A sharp fall in northern factory hiring during World War I, which sent Black workers back to Southern farms.\" is incorrect: Northern hiring rose during the war, and the table shows the Black population of the Midwest growing from 543,498 in 1910 to 793,075 in 1920, not shrinking.",
      "est_seconds": 75,
      "facts": [
@@ -236,12 +236,6 @@
      "stem": "Which of the following was part of the historical context for the movement of Black Southerners to northern cities in the early twentieth century?",
      "options": [
       {
-       "text": "Jim Crow segregation and sharecropping limited Black Southerners' political rights and economic opportunity.",
-       "why": "Southern states enforced segregation and disfranchised Black voters, and many Black farmers were trapped in debt as sharecroppers, which pushed many to look for work and rights elsewhere.",
-       "value": null,
-       "label": "key"
-      },
-      {
        "text": "Federal troops enforced the voting rights of Black Southerners across the South throughout the early twentieth century.",
        "why": "Federal troops left the South in 1877 when Reconstruction ended, and by the early twentieth century many Black Southerners were barred from voting.",
        "value": null,
@@ -258,9 +252,15 @@
        "why": "The table shows the Black population of the Northeast rising from 385,020 in 1900 to 679,234 in 1920, well before the Depression began in 1929.",
        "value": null,
        "label": "wrong_period"
+      },
+      {
+       "text": "Jim Crow segregation and sharecropping limited Black Southerners' political rights and economic opportunity.",
+       "why": "Southern states enforced segregation and disfranchised Black voters, and many Black farmers were trapped in debt as sharecroppers, which pushed many to look for work and rights elsewhere.",
+       "value": null,
+       "label": "key"
       }
      ],
-     "key_index": 0,
+     "key_index": 3,
      "explanation_en": "The correct answer is \"Jim Crow segregation and sharecropping limited Black Southerners' political rights and economic opportunity.\". Southern states enforced segregation and disfranchised Black voters, and many Black farmers were trapped in debt as sharecroppers, which pushed many to look for work and rights elsewhere.\n\"Federal troops enforced the voting rights of Black Southerners across the South throughout the early twentieth century.\" is incorrect: Federal troops left the South in 1877 when Reconstruction ended, and by the early twentieth century many Black Southerners were barred from voting.\n\"The Supreme Court ruled in Plessy v. Ferguson that segregation in public facilities was unconstitutional.\" is incorrect: Plessy v. Ferguson (1896) upheld segregation under the doctrine of separate but equal, so the ruling supported Jim Crow rather than ending it.\n\"The collapse of crop prices in the Great Depression began the movement of Black Southerners northward.\" is incorrect: The table shows the Black population of the Northeast rising from 385,020 in 1900 to 679,234 in 1920, well before the Depression began in 1929.",
      "est_seconds": 75,
      "facts": [
@@ -445,16 +445,16 @@
      "stem": "Which of the following most directly helped cause the decline in the foreign-born share of the population between 1920 and 1940 shown in the table?",
      "options": [
       {
-       "text": "Congress used national-origins quotas in the 1920s to sharply reduce new immigration.",
-       "why": "The Emergency Quota Act of 1921 and the Immigration Act of 1924 limited arrivals by national origin, so few new immigrants arrived and the foreign-born share of the population fell.",
-       "value": null,
-       "label": "key"
-      },
-      {
        "text": "The Immigration and Nationality Act of 1965 ended the national-origins quota system.",
        "why": "That law was passed in 1965, decades after the decline shown between 1920 and 1940.",
        "value": null,
        "label": "wrong_period"
+      },
+      {
+       "text": "Congress used national-origins quotas in the 1920s to sharply reduce new immigration.",
+       "why": "The Emergency Quota Act of 1921 and the Immigration Act of 1924 limited arrivals by national origin, far fewer new immigrants arrived and the foreign-born share of the population fell.",
+       "value": null,
+       "label": "key"
       },
       {
        "text": "The Chinese Exclusion Act of 1882 barred most new immigrants from entering the country.",
@@ -469,8 +469,8 @@
        "label": "overstated"
       }
      ],
-     "key_index": 0,
-     "explanation_en": "The correct answer is \"Congress used national-origins quotas in the 1920s to sharply reduce new immigration.\". The Emergency Quota Act of 1921 and the Immigration Act of 1924 limited arrivals by national origin, so few new immigrants arrived and the foreign-born share of the population fell.\n\"The Immigration and Nationality Act of 1965 ended the national-origins quota system.\" is incorrect: That law was passed in 1965, decades after the decline shown between 1920 and 1940.\n\"The Chinese Exclusion Act of 1882 barred most new immigrants from entering the country.\" is incorrect: The 1882 law barred Chinese laborers only, and the table shows the foreign-born share rising from 13.3 percent in 1880 to 14.8 percent in 1890.\n\"The federal government deported most foreign-born residents during the Great Depression.\" is incorrect: The table still shows 11,594,896 foreign-born residents in 1940, so mass deportation of most of them did not happen.",
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Congress used national-origins quotas in the 1920s to sharply reduce new immigration.\". The Emergency Quota Act of 1921 and the Immigration Act of 1924 limited arrivals by national origin, far fewer new immigrants arrived and the foreign-born share of the population fell.\n\"The Immigration and Nationality Act of 1965 ended the national-origins quota system.\" is incorrect: That law was passed in 1965, decades after the decline shown between 1920 and 1940.\n\"The Chinese Exclusion Act of 1882 barred most new immigrants from entering the country.\" is incorrect: The 1882 law barred Chinese laborers only, and the table shows the foreign-born share rising from 13.3 percent in 1880 to 14.8 percent in 1890.\n\"The federal government deported most foreign-born residents during the Great Depression.\" is incorrect: The table still shows 11,594,896 foreign-born residents in 1940, so mass deportation of most of them did not happen.",
      "est_seconds": 75,
      "facts": [
       "The Emergency Quota Act (1921) and the Immigration Act of 1924 set national-origins quotas that sharply cut immigration.",
@@ -490,12 +490,6 @@
      "stem": "Which of the following broader developments of the 1920s helps explain why Congress restricted immigration, as reflected in the table?",
      "options": [
       {
-       "text": "Nativism and fear of foreign radicals after World War I and the Red Scare.",
-       "why": "Many Americans blamed immigrants for radicalism after the war and the Red Scare of 1919-1920, and nativist feeling pushed Congress to pass quota laws in 1921 and 1924.",
-       "value": null,
-       "label": "key"
-      },
-      {
        "text": "Growing demand for cheap immigrant labor to build the transcontinental railroads.",
        "why": "The first transcontinental railroad was completed in 1869, and railroad construction did not drive immigration policy in the 1920s.",
        "value": null,
@@ -512,9 +506,15 @@
        "why": "Plains settlement had been promoted in the late nineteenth century, and by the 1920s the frontier was long closed, so this did not shape the quota laws.",
        "value": null,
        "label": "unrelated_development"
+      },
+      {
+       "text": "Nativism and fear of foreign radicals after World War I and the Red Scare.",
+       "why": "Many Americans blamed immigrants for radicalism after the war and the Red Scare of 1919-1920, and nativist feeling pushed Congress to pass quota laws in 1921 and 1924.",
+       "value": null,
+       "label": "key"
       }
      ],
-     "key_index": 0,
+     "key_index": 3,
      "explanation_en": "The correct answer is \"Nativism and fear of foreign radicals after World War I and the Red Scare.\". Many Americans blamed immigrants for radicalism after the war and the Red Scare of 1919-1920, and nativist feeling pushed Congress to pass quota laws in 1921 and 1924.\n\"Growing demand for cheap immigrant labor to build the transcontinental railroads.\" is incorrect: The first transcontinental railroad was completed in 1869, and railroad construction did not drive immigration policy in the 1920s.\n\"A new agreement among labor unions that open immigration benefited American workers.\" is incorrect: The American Federation of Labor and many other unions supported restriction in the 1920s because they feared wage competition from new immigrants.\n\"A widespread belief that the nation needed more European settlers to farm the Great Plains.\" is incorrect: Plains settlement had been promoted in the late nineteenth century, and by the 1920s the frontier was long closed, so this did not shape the quota laws.",
      "est_seconds": 75,
      "facts": [
@@ -535,12 +535,6 @@
      "stem": "Which of the following earlier policies is most similar to the immigration restrictions of the 1920s reflected in the table?",
      "options": [
       {
-       "text": "The Chinese Exclusion Act of 1882, which barred Chinese laborers from entering the United States.",
-       "why": "Like the 1920s quota laws, the 1882 law restricted immigration on the basis of national origin and race, and it was the first major federal law restricting immigration by group.",
-       "value": null,
-       "label": "key"
-      },
-      {
        "text": "The Homestead Act of 1862, which gave settlers free public land in the West.",
        "why": "The Homestead Act encouraged settlement of western land and did not restrict immigrants, so it is the opposite of a restriction.",
        "value": null,
@@ -553,14 +547,20 @@
        "label": "unrelated_development"
       },
       {
+       "text": "The Chinese Exclusion Act of 1882, which barred Chinese laborers from entering the United States.",
+       "why": "Like the 1920s quota laws, the 1882 law restricted immigration on the basis of national origin and race, and it was one of the first federal laws to restrict immigration on the basis of national origin and race.",
+       "value": null,
+       "label": "key"
+      },
+      {
        "text": "The Pendleton Civil Service Act of 1883, which set up merit-based hiring for federal jobs.",
        "why": "The Pendleton Act reformed federal hiring and did not limit immigration.",
        "value": null,
        "label": "unrelated_development"
       }
      ],
-     "key_index": 0,
-     "explanation_en": "The correct answer is \"The Chinese Exclusion Act of 1882, which barred Chinese laborers from entering the United States.\". Like the 1920s quota laws, the 1882 law restricted immigration on the basis of national origin and race, and it was the first major federal law restricting immigration by group.\n\"The Homestead Act of 1862, which gave settlers free public land in the West.\" is incorrect: The Homestead Act encouraged settlement of western land and did not restrict immigrants, so it is the opposite of a restriction.\n\"The Dawes Act of 1887, which divided reservation land into individual allotments for Native Americans.\" is incorrect: The Dawes Act concerned Native American land ownership and assimilation, not the entry of immigrants into the United States.\n\"The Pendleton Civil Service Act of 1883, which set up merit-based hiring for federal jobs.\" is incorrect: The Pendleton Act reformed federal hiring and did not limit immigration.",
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"The Chinese Exclusion Act of 1882, which barred Chinese laborers from entering the United States.\". Like the 1920s quota laws, the 1882 law restricted immigration on the basis of national origin and race, and it was one of the first federal laws to restrict immigration on the basis of national origin and race.\n\"The Homestead Act of 1862, which gave settlers free public land in the West.\" is incorrect: The Homestead Act encouraged settlement of western land and did not restrict immigrants, so it is the opposite of a restriction.\n\"The Dawes Act of 1887, which divided reservation land into individual allotments for Native Americans.\" is incorrect: The Dawes Act concerned Native American land ownership and assimilation, not the entry of immigrants into the United States.\n\"The Pendleton Civil Service Act of 1883, which set up merit-based hiring for federal jobs.\" is incorrect: The Pendleton Act reformed federal hiring and did not limit immigration.",
      "est_seconds": 75,
      "facts": [
       "The Chinese Exclusion Act (1882) barred Chinese laborers and was the first major federal law restricting a group of immigrants.",
@@ -1178,7 +1178,7 @@
    "skill": "1.B",
    "representative_skill": "1.B",
    "calculator": "na",
-   "title": "Population of Four Plains States, 1870-1900",
+   "title": "Population of Kansas, Nebraska, and the Dakotas, 1870-1900",
    "set_intro": "Historical source (real document)\n(table)\nTotal population of Kansas, Nebraska, North Dakota and South Dakota, census counts 1870-1900\nCampbell Gibson and Kay Jung, U.S. Census Bureau, Population Division, 2002 (Working Paper No. 56, Sept. 2002; figures from decennial censuses). U.S. Census Bureau. Reuse: public domain (U.S. government work). excerpted (selected rows/columns; values unchanged). Census Bureau, Working Paper No. 56. Each figure is the total population at the census year shown. For North and South Dakota, the 1870 and 1880 figures are for the area of the present state, and the source notes that the division of Dakota Territory's population between the two is partly estimated.\n\nThe table for this source appears below.",
    "stimulus": {
     "kind": "table",
@@ -1235,14 +1235,14 @@
      "topic_codes": [
       "6.2"
      ],
-     "model_answer": "Population grew rapidly in all four states between 1870 and 1890; Kansas rose from 364,399 to 1,427,096 and Nebraska from 122,993 to 1,058,910.",
+     "model_answer": "Population grew rapidly in all four areas between 1870 and 1890; Kansas rose from 364,399 to 1,427,096 and Nebraska from 122,993 to 1,058,910.",
      "rubric_rows": [
       {
        "row_id": "a",
        "points": 1,
-       "criterion": "Students identify one accurate trend or pattern from the table. Acceptable answers include: rapid population growth in all four states from 1870 to 1890; Kansas and Nebraska growing very little between 1890 and 1900 while North and South Dakota kept growing; or the Dakotas growing from very small populations in 1870 to more than 300,000 by 1900.",
+       "criterion": "Students identify one accurate trend or pattern from the table. Acceptable answers include: rapid population growth in all four areas from 1870 to 1890; Kansas and Nebraska growing very little between 1890 and 1900 while North and South Dakota kept growing; or the Dakotas growing from very small populations in 1870 to more than 300,000 by 1900.",
        "required_elements": [
-        "Population grew rapidly in all four states between 1870 and 1890; Kansas rose from 364,399 to 1,427,096 and Nebraska from 122,993 to 1,058,910.",
+        "Population grew rapidly in all four areas between 1870 and 1890; Kansas rose from 364,399 to 1,427,096 and Nebraska from 122,993 to 1,058,910.",
         "Kansas and Nebraska grew very little in the 1890s (1,427,096 to 1,470,495 and 1,058,910 to 1,066,300), while North and South Dakota kept growing.",
         "North and South Dakota grew from very small populations in 1870 (2,405 and 11,776) to more than 300,000 each by 1900."
        ],
@@ -1326,7 +1326,7 @@
      ]
     }
    ],
-   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 3 points.\nPart A (0-1): Students identify one accurate trend or pattern from the table. Acceptable answers include: rapid population growth in all four states from 1870 to 1890; Kansas and Nebraska growing very little between 1890 and 1900 while North and South Dakota kept growing; or the Dakotas growing from very small populations in 1870 to more than 300,000 by 1900.\n   - 1: The response accurately identifies one trend or pattern shown in the table, such as Kansas rising from about 364,000 in 1870 to about 1,427,000 in 1890.\n   - 0: The response misreads the table, gives a vague statement, or names no trend that the data support.\nPart B (0-1): Students explain one specific historical cause that fits the trend they named in part A. Examples: the Homestead Act's 160-acre claims; federal land grants to railroads under the Pacific Railway Acts, along with railroad promotion of settlement; immigrant recruitment in Europe; or drought, falling crop prices and the Panic of 1893 for the slowdown in the 1890s.\n   - 1: The response explains how one specific, accurate development from the period caused or contributed to the trend identified in part A.\n   - 0: The response gives no cause, gives a cause from the wrong period, or does not explain how the cause connects to the trend.\nPart C (0-1): Students explain one specific effect of, or development connected to, Plains settlement from 1865 to 1898. Examples: Native nations displaced, the bison destroyed, and the Dawes Act passed; farmer protest through the Grange, the Farmers' Alliances, and the Populist Party; railroad regulation through Granger laws, Munn v. Illinois, and the Interstate Commerce Act; the 1890 census report that a frontier line no longer existed; or greater commercial farming for national and world markets.\n   - 1: The response explains one specific, accurate effect of or development related to Great Plains settlement between 1865 and 1898.\n   - 0: The response gives no effect, an inaccurate one, or one outside the period or not connected to Plains settlement.\nNote: Each part is worth one point. Parts are scored separately, but part B must explain a cause of a trend that the data actually show.\nNote: In part A, accept an accurate reading of any column. Students do not need to quote exact numbers.\nNote: In part B, a bare name such as 'the Homestead Act' with no explanation does not earn the point. The response must show how the development produced the trend.\nNote: In part C, accept effects on Native peoples, farmers, railroads, politics, or the national economy if they are tied to western settlement in the period.\nAcceptable answers for A: Population grew rapidly in all four states between 1870 and 1890; Kansas rose from 364,399 to 1,427,096 and Nebraska from 122,993 to 1,058,910. / Kansas and Nebraska grew very little in the 1890s (1,427,096 to 1,470,495 and 1,058,910 to 1,066,300), while North and South Dakota kept growing. / North and South Dakota grew from very small populations in 1870 (2,405 and 11,776) to more than 300,000 each by 1900.\nAcceptable answers for B: The Homestead Act of 1862 offered 160 acres of public land to settlers who lived on and improved it for five years, which drew farm families to the Plains and raised the population. / Federal land grants under the Pacific Railway Acts led railroads to build lines across the Plains and to sell land and advertise for settlers, so population grew quickly once track reached an area. / Railroads and state immigration boards recruited settlers in Europe, including Germans and Scandinavians, which brought many new residents to the Plains states. / Drought, falling crop prices, and the Panic of 1893 ruined many Plains farmers in the early 1890s, which explains why growth in Kansas and Nebraska nearly stopped.\nAcceptable answers for C: Settlement and railroad building helped destroy the bison herds and pushed Plains nations onto reservations, and the Dawes Act of 1887 later divided reservation land into individual allotments. / Farmers who resented railroad rates, debt, and low prices organized the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of railroads and free coinage of silver. / Farmer pressure led to state Granger laws regulating railroads, which the Supreme Court upheld in Munn v. Illinois in 1877, and later to the Interstate Commerce Act of 1887. / The Superintendent of the Census reported in 1890 that a frontier line no longer existed, and Frederick Jackson Turner made that report the starting point of his 1893 frontier thesis.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) One trend in the table is that the Plains states grew very fast between 1870 and 1890. Kansas went from 364,399 people in 1870 to 1,427,096 in 1890, and Nebraska went from 122,993 to 1,058,910.\n\n(B) One cause of this growth was the Homestead Act of 1862, which gave settlers 160 acres of public land if they lived on it and farmed it for five years. Land that cost almost nothing drew families from the East and from Europe to places like Kansas and Nebraska, so the population multiplied.\n\n(C) One effect of Plains settlement was that farmers organized politically. Plains farmers depended on railroads to ship their wheat and corn and resented high rates, debt, and falling crop prices, so they joined the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of the railroads and free coinage of silver.\n   - \"Kansas went from 364,399 people in 1870 to 1,427,096 in 1890\" - Reads the table correctly and gives exact figures to show the growth trend from 1870 to 1890. Earns the Part A point.\n   - \"gave settlers 160 acres of public land if they lived on it and farmed it for five years\" - Names an accurate, specific cause with correct details from the right period. It goes beyond a bare name of the act.\n   - \"so the population multiplied\" - Connects the cause to the trend from part A, which the rubric requires. Earns the Part B point.\n   - \"formed the Populist Party\" - Gives an accurate development tied to Plains settlement between 1865 and 1898.\n   - \"whose 1892 Omaha Platform called for government ownership of the railroads\" - Backs the effect with specific, accurate evidence tied to farmers' complaints about railroads. Earns the Part C point.\n\nSample response, middle score (2/3; Part A 1, Part B 1, Part C 0):\n(A) The population in all four states grew a lot between 1870 and 1890. For example, South Dakota went from 11,776 people in 1870 to 328,808 in 1890.\n\n(B) A cause of this was the Homestead Act. It was passed in 1862 and many people moved to the Plains because of it.\n\n(C) One effect of the settlement of the Great Plains was that Native Americans were pushed off their land. As settlers and railroads spread across the Plains, the buffalo herds were destroyed and Plains nations were forced onto reservations. Later the Dawes Act of 1887 broke up reservation land into individual allotments.\n   - \"South Dakota went from 11,776 people in 1870 to 328,808 in 1890\" - Accurate figures from the table support a clear trend. This earns the Part A point.\n   - \"many people moved to the Plains because of it\" - Names a valid cause but never says what the Homestead Act offered or how it drew settlers, so it only restates the trend. No credit for Part B.\n   - \"the buffalo herds were destroyed and Plains nations were forced onto reservations\" - Accurate and specific development tied to settlement and railroad building.\n   - \"the Dawes Act of 1887 broke up reservation land into individual allotments\" - Correct evidence from the period. This earns the Part C point.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) One trend is that the population of the states went up between 1870 and 1900. For Kansas it went from 364,399 to 1,470,495.\n\n(B) The population went up because people wanted to move to the Plains and there was a lot of land there.\n\n(C) Settlement of the Great Plains was important in American history. People moved west and built farms and towns, and the country grew.\n   - \"For Kansas it went from 364,399 to 1,470,495.\" - Accurate reading of the table, so this earns the Part A point.\n   - \"people wanted to move to the Plains and there was a lot of land there\" - Restates the trend and names no specific development such as the Homestead Act or railroad land grants. No credit for Part B.\n   - \"Settlement of the Great Plains was important in American history\" - A vague claim of importance. Part C needs one specific, accurate effect such as farmer protest or Native displacement.",
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 3 points.\nPart A (0-1): Students identify one accurate trend or pattern from the table. Acceptable answers include: rapid population growth in all four areas from 1870 to 1890; Kansas and Nebraska growing very little between 1890 and 1900 while North and South Dakota kept growing; or the Dakotas growing from very small populations in 1870 to more than 300,000 by 1900.\n   - 1: The response accurately identifies one trend or pattern shown in the table, such as Kansas rising from about 364,000 in 1870 to about 1,427,000 in 1890.\n   - 0: The response misreads the table, gives a vague statement, or names no trend that the data support.\nPart B (0-1): Students explain one specific historical cause that fits the trend they named in part A. Examples: the Homestead Act's 160-acre claims; federal land grants to railroads under the Pacific Railway Acts, along with railroad promotion of settlement; immigrant recruitment in Europe; or drought, falling crop prices and the Panic of 1893 for the slowdown in the 1890s.\n   - 1: The response explains how one specific, accurate development from the period caused or contributed to the trend identified in part A.\n   - 0: The response gives no cause, gives a cause from the wrong period, or does not explain how the cause connects to the trend.\nPart C (0-1): Students explain one specific effect of, or development connected to, Plains settlement from 1865 to 1898. Examples: Native nations displaced, the bison destroyed, and the Dawes Act passed; farmer protest through the Grange, the Farmers' Alliances, and the Populist Party; railroad regulation through Granger laws, Munn v. Illinois, and the Interstate Commerce Act; the 1890 census report that a frontier line no longer existed; or greater commercial farming for national and world markets.\n   - 1: The response explains one specific, accurate effect of or development related to Great Plains settlement between 1865 and 1898.\n   - 0: The response gives no effect, an inaccurate one, or one outside the period or not connected to Plains settlement.\nNote: Each part is worth one point. Parts are scored separately, but part B must explain a cause of a trend that the data actually show.\nNote: In part A, accept an accurate reading of any column. Students do not need to quote exact numbers.\nNote: In part B, a bare name such as 'the Homestead Act' with no explanation does not earn the point. The response must show how the development produced the trend.\nNote: In part C, accept effects on Native peoples, farmers, railroads, politics, or the national economy if they are tied to western settlement in the period.\nAcceptable answers for A: Population grew rapidly in all four areas between 1870 and 1890; Kansas rose from 364,399 to 1,427,096 and Nebraska from 122,993 to 1,058,910. / Kansas and Nebraska grew very little in the 1890s (1,427,096 to 1,470,495 and 1,058,910 to 1,066,300), while North and South Dakota kept growing. / North and South Dakota grew from very small populations in 1870 (2,405 and 11,776) to more than 300,000 each by 1900.\nAcceptable answers for B: The Homestead Act of 1862 offered 160 acres of public land to settlers who lived on and improved it for five years, which drew farm families to the Plains and raised the population. / Federal land grants under the Pacific Railway Acts led railroads to build lines across the Plains and to sell land and advertise for settlers, so population grew quickly once track reached an area. / Railroads and state immigration boards recruited settlers in Europe, including Germans and Scandinavians, which brought many new residents to the Plains states. / Drought, falling crop prices, and the Panic of 1893 ruined many Plains farmers in the early 1890s, which explains why growth in Kansas and Nebraska nearly stopped.\nAcceptable answers for C: Settlement and railroad building helped destroy the bison herds and pushed Plains nations onto reservations, and the Dawes Act of 1887 later divided reservation land into individual allotments. / Farmers who resented railroad rates, debt, and low prices organized the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of railroads and free coinage of silver. / Farmer pressure led to state Granger laws regulating railroads, which the Supreme Court upheld in Munn v. Illinois in 1877, and later to the Interstate Commerce Act of 1887. / The Superintendent of the Census reported in 1890 that a frontier line no longer existed, and Frederick Jackson Turner made that report the starting point of his 1893 frontier thesis.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) One trend in the table is that Kansas and Nebraska grew very fast between 1870 and 1890. Kansas went from 364,399 people in 1870 to 1,427,096 in 1890, and Nebraska went from 122,993 to 1,058,910.\n\n(B) One cause of this growth was the Homestead Act of 1862, which gave settlers 160 acres of public land if they lived on it and farmed it for five years. Land that cost almost nothing drew families from the East and from Europe to places like Kansas and Nebraska, so the population multiplied.\n\n(C) One effect of Plains settlement was that farmers organized politically. Plains farmers depended on railroads to ship their wheat and corn and resented high rates, debt, and falling crop prices, so they joined the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of the railroads and free coinage of silver.\n   - \"Kansas went from 364,399 people in 1870 to 1,427,096 in 1890\" - Reads the table correctly and gives exact figures to show the growth trend from 1870 to 1890. Earns the Part A point.\n   - \"gave settlers 160 acres of public land if they lived on it and farmed it for five years\" - Names an accurate, specific cause with correct details from the right period. It goes beyond a bare name of the act.\n   - \"so the population multiplied\" - Connects the cause to the trend from part A, which the rubric requires. Earns the Part B point.\n   - \"formed the Populist Party\" - Gives an accurate development tied to Plains settlement between 1865 and 1898.\n   - \"whose 1892 Omaha Platform called for government ownership of the railroads\" - Backs the effect with specific, accurate evidence tied to farmers' complaints about railroads. Earns the Part C point.\n\nSample response, middle score (2/3; Part A 1, Part B 1, Part C 0):\n(A) The population in all four places grew a lot between 1870 and 1890. For example, South Dakota went from 11,776 people in 1870 to 328,808 in 1890.\n\n(B) A cause of this was the Homestead Act. It was passed in 1862 and many people moved to the Plains because of it.\n\n(C) One effect of the settlement of the Great Plains was that Native Americans were pushed off their land. As settlers and railroads spread across the Plains, the buffalo herds were destroyed and Plains nations were forced onto reservations. Later the Dawes Act of 1887 broke up reservation land into individual allotments.\n   - \"South Dakota went from 11,776 people in 1870 to 328,808 in 1890\" - Accurate figures from the table support a clear trend. This earns the Part A point.\n   - \"many people moved to the Plains because of it\" - Names a valid cause but never says what the Homestead Act offered or how it drew settlers, so it only restates the trend. No credit for Part B.\n   - \"the buffalo herds were destroyed and Plains nations were forced onto reservations\" - Accurate and specific development tied to settlement and railroad building.\n   - \"the Dawes Act of 1887 broke up reservation land into individual allotments\" - Correct evidence from the period. This earns the Part C point.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) One trend is that the population of these places went up between 1870 and 1900. For Kansas it went from 364,399 to 1,470,495.\n\n(B) The population went up because people wanted to move to the Plains and there was a lot of land there.\n\n(C) Settlement of the Great Plains was important in American history. People moved west and built farms and towns, and the country grew.\n   - \"For Kansas it went from 364,399 to 1,470,495.\" - Accurate reading of the table, so this earns the Part A point.\n   - \"people wanted to move to the Plains and there was a lot of land there\" - Restates the trend and names no specific development such as the Homestead Act or railroad land grants. No credit for Part B.\n   - \"Settlement of the Great Plains was important in American history\" - A vague claim of importance. Part C needs one specific, accurate effect such as farmer protest or Native displacement.",
    "ush_frq": {
     "schema_version": "ush-frq-1",
     "task_type": "saq",
@@ -1335,7 +1335,7 @@
     "periods": [
      6
     ],
-    "title": "Population of Four Plains States, 1870-1900",
+    "title": "Population of Kansas, Nebraska, and the Dakotas, 1870-1900",
     "prompt": {
      "scenario": "The table below, from the U.S. Census Bureau, gives the total population of Kansas, Nebraska, North Dakota, and South Dakota in census years from 1870 to 1900.",
      "task": "Using the table, answer parts A, B, and C.",
@@ -1430,7 +1430,7 @@
         "0": "The response misreads the table, gives a vague statement, or names no trend that the data support.",
         "1": "The response accurately identifies one trend or pattern shown in the table, such as Kansas rising from about 364,000 in 1870 to about 1,427,000 in 1890."
        },
-       "task_specific": "Students identify one accurate trend or pattern from the table. Acceptable answers include: rapid population growth in all four states from 1870 to 1890; Kansas and Nebraska growing very little between 1890 and 1900 while North and South Dakota kept growing; or the Dakotas growing from very small populations in 1870 to more than 300,000 by 1900."
+       "task_specific": "Students identify one accurate trend or pattern from the table. Acceptable answers include: rapid population growth in all four areas from 1870 to 1890; Kansas and Nebraska growing very little between 1890 and 1900 while North and South Dakota kept growing; or the Dakotas growing from very small populations in 1870 to more than 300,000 by 1900."
       },
       {
        "row_id": "b",
@@ -1463,7 +1463,7 @@
     "expected_features": {
      "saq_answers": {
       "a": [
-       "Population grew rapidly in all four states between 1870 and 1890; Kansas rose from 364,399 to 1,427,096 and Nebraska from 122,993 to 1,058,910.",
+       "Population grew rapidly in all four areas between 1870 and 1890; Kansas rose from 364,399 to 1,427,096 and Nebraska from 122,993 to 1,058,910.",
        "Kansas and Nebraska grew very little in the 1890s (1,427,096 to 1,470,495 and 1,058,910 to 1,066,300), while North and South Dakota kept growing.",
        "North and South Dakota grew from very small populations in 1870 (2,405 and 11,776) to more than 300,000 each by 1900."
       ],
@@ -1481,7 +1481,7 @@
       ]
      },
      "common_pitfalls": [
-      "Reading the Dakotas' 1870 figures as state populations of established states.",
+      "Treating the Dakotas' 1870 figures as populations of established states.",
       "Naming the Homestead Act without saying what it offered.",
       "Giving twentieth-century developments such as the Dust Bowl as effects of 1865-1898 settlement."
      ],
@@ -1498,7 +1498,7 @@
      {
       "tier": "high",
       "target_total": 3,
-      "essay": "(A) One trend in the table is that the Plains states grew very fast between 1870 and 1890. Kansas went from 364,399 people in 1870 to 1,427,096 in 1890, and Nebraska went from 122,993 to 1,058,910.\n\n(B) One cause of this growth was the Homestead Act of 1862, which gave settlers 160 acres of public land if they lived on it and farmed it for five years. Land that cost almost nothing drew families from the East and from Europe to places like Kansas and Nebraska, so the population multiplied.\n\n(C) One effect of Plains settlement was that farmers organized politically. Plains farmers depended on railroads to ship their wheat and corn and resented high rates, debt, and falling crop prices, so they joined the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of the railroads and free coinage of silver.",
+      "essay": "(A) One trend in the table is that Kansas and Nebraska grew very fast between 1870 and 1890. Kansas went from 364,399 people in 1870 to 1,427,096 in 1890, and Nebraska went from 122,993 to 1,058,910.\n\n(B) One cause of this growth was the Homestead Act of 1862, which gave settlers 160 acres of public land if they lived on it and farmed it for five years. Land that cost almost nothing drew families from the East and from Europe to places like Kansas and Nebraska, so the population multiplied.\n\n(C) One effect of Plains settlement was that farmers organized politically. Plains farmers depended on railroads to ship their wheat and corn and resented high rates, debt, and falling crop prices, so they joined the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of the railroads and free coinage of silver.",
       "word_count": 152,
       "rubric_scores": {
        "a": 1,
@@ -1537,7 +1537,7 @@
      {
       "tier": "mid",
       "target_total": 2,
-      "essay": "(A) The population in all four states grew a lot between 1870 and 1890. For example, South Dakota went from 11,776 people in 1870 to 328,808 in 1890.\n\n(B) A cause of this was the Homestead Act. It was passed in 1862 and many people moved to the Plains because of it.\n\n(C) One effect of the settlement of the Great Plains was that Native Americans were pushed off their land. As settlers and railroads spread across the Plains, the buffalo herds were destroyed and Plains nations were forced onto reservations. Later the Dawes Act of 1887 broke up reservation land into individual allotments.",
+      "essay": "(A) The population in all four places grew a lot between 1870 and 1890. For example, South Dakota went from 11,776 people in 1870 to 328,808 in 1890.\n\n(B) A cause of this was the Homestead Act. It was passed in 1862 and many people moved to the Plains because of it.\n\n(C) One effect of the settlement of the Great Plains was that Native Americans were pushed off their land. As settlers and railroads spread across the Plains, the buffalo herds were destroyed and Plains nations were forced onto reservations. Later the Dawes Act of 1887 broke up reservation land into individual allotments.",
       "word_count": 104,
       "rubric_scores": {
        "a": 1,
@@ -1571,7 +1571,7 @@
      {
       "tier": "low",
       "target_total": 1,
-      "essay": "(A) One trend is that the population of the states went up between 1870 and 1900. For Kansas it went from 364,399 to 1,470,495.\n\n(B) The population went up because people wanted to move to the Plains and there was a lot of land there.\n\n(C) Settlement of the Great Plains was important in American history. People moved west and built farms and towns, and the country grew.",
+      "essay": "(A) One trend is that the population of these places went up between 1870 and 1900. For Kansas it went from 364,399 to 1,470,495.\n\n(B) The population went up because people wanted to move to the Plains and there was a lot of land there.\n\n(C) Settlement of the Great Plains was important in American history. People moved west and built farms and towns, and the country grew.",
       "word_count": 68,
       "rubric_scores": {
        "a": 1,
