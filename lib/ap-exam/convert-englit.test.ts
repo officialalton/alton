@@ -32,3 +32,12 @@ describe("AP English Literature conversion", () => {
     if (p.ok) { expect(p.items).toHaveLength(1); expect(p.items[0].format).toBe("essay"); expect(p.items[0].passage).toContain("```passage"); expect(p.items[0].explanation).toContain("Sample essay (high; scored 6/6)"); expect((p.items[0].statements as { mode: string }[])[0].mode).toBe("essay"); }
   });
 });
+
+import { passageRequiresFigure } from "../problem-figures/check";
+describe("passageRequiresFigure and literary passages", () => {
+  it("ignores the literary noun 'the figure' in ALTON original passages but still flags real figure references", () => {
+    expect(passageRequiresFigure("ALTON original passage\nTitle\n\n```passage\nShe saw the figure of her father in the doorway.\n```\nWhich word")).toBe(false);
+    expect(passageRequiresFigure("As shown in the figure, the force is 3 N.")).toBe(true);
+    expect(passageRequiresFigure("the figure of a man")).toBe(true);
+  });
+});

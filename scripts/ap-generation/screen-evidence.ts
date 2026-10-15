@@ -58,7 +58,9 @@ async function checkItem(page: Page, r: Row, shot: string): Promise<Record<Scree
     const clip = [...opts, ...inputs, ...figs].filter((e) => !inside(e) && !scrollable(e)).length;
     const text = (document.body.innerText || "").toLowerCase();
     // leaked: 문제 문장에 쓰인 단어 "explanation"(예: Which explanation best…)은 노출이 아니다 — 해설 블록·정답 라벨·해설 앞부분만 본다.
-    return { optCount: opts.length, optVisible: opts.filter(vis).length, optTextEmpty: opts.filter((o) => !(o.textContent ?? "").trim()).length, inputCount: inputs.length, inputVisible: inputs.filter(vis).length, figCount: figs.length, figVisible: figs.filter(vis).length, hScroll: document.documentElement.scrollWidth > vw + 1, clip, leaked: /\bcorrect answer\b/.test(text) || !!document.querySelector('[data-testid="ap-explanation"], [data-testid="ap-review-item"]'), expectFig, text };
+    // 문학 지문 본문(줄 번호 블록)은 지문 속 문장이 "correct answer" 를 쓸 수 있어(2026-10-15 AP English Literature FRQ 지문) 노출 점검에서 뺀다.
+    const noPass = root.cloneNode(true) as Element; noPass.querySelectorAll('[data-testid="lit-passage"]').forEach((e) => e.remove()); const textNoPassage = (noPass.textContent ?? "").replace(/\s+/g, " ").toLowerCase();
+    return { optCount: opts.length, optVisible: opts.filter(vis).length, optTextEmpty: opts.filter((o) => !(o.textContent ?? "").trim()).length, inputCount: inputs.length, inputVisible: inputs.filter(vis).length, figCount: figs.length, figVisible: figs.filter(vis).length, hScroll: document.documentElement.scrollWidth > vw + 1, clip, leaked: /\bcorrect answer\b/.test(textNoPassage) || !!document.querySelector('[data-testid="ap-explanation"], [data-testid="ap-review-item"]'), expectFig, text };
   }, { expectFig: !!g.spec });
   const mc = r.kind === "mc";
   const wantOpts = mc ? (p.options?.length ?? 0) : (p.parts?.length ?? 0);
