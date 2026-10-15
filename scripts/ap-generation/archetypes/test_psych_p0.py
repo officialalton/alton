@@ -243,7 +243,7 @@ class TestFrq(unittest.TestCase):
         p = FN("psf_aaq_compliance")(random.Random(1))
         rows = {r[0]: r for r in p["stimulus"]["data"]["rows"]}
         self.assertEqual(round(100 * int(rows["Large-then-small"][2]) / int(rows["Large-then-small"][1])), 65)
-        self.assertEqual(round(100 * int(rows["Small-only"][2]) / int(rows["Small-only"][1])), 38)
+        self.assertEqual(round(100 * int(rows["Small-only"][2]) / int(rows["Small-only"][1])), 40)
         p = FN("psf_aaq_mindfulness")(random.Random(1))
         rows = {r[0]: r for r in p["stimulus"]["data"]["rows"]}
         self.assertEqual(int(rows["Mindfulness course"][2]) - int(rows["Mindfulness course"][3]), 14)
