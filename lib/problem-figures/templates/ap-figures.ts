@@ -109,6 +109,8 @@ export function niceTicks(min: number, max: number, step?: number): number[] {
   return out;
 }
 const fnum = (n: number) => (Math.abs(n) >= 1000 ? new Intl.NumberFormat("en-US").format(n) : (Math.round(n * 100) / 100).toString());
+/** 표 셀 숫자: 최대 6자리 소수까지 원값 유지(부동소수 잡음 제거), 1000 이상은 천 단위 쉼표. */
+export const cellNum = (n: number) => (Math.abs(n) >= 1000 ? new Intl.NumberFormat("en-US", { maximumFractionDigits: 6 }).format(n) : (Math.round(n * 1e6) / 1e6).toString());
 function hash(s: string): string { let h = 5381; for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0; return (h >>> 0).toString(36); }
 
 export function interpAt(points: Pt[], x: number): number | null {
@@ -244,7 +246,8 @@ export function escMath(t: string): string {
 
 export function renderApTable(spec: ApTableSpec): { markup: string; alt: string; issues: FigureIssue[] } {
   const issues: FigureIssue[] = [];
-  const cell = (c: string | number) => escMath(typeof c === "number" ? fnum(c) : c);
+  // 표 셀은 저장된 값을 그대로 보인다(축 눈금용 fnum 의 소수 2자리 반올림을 쓰지 않는다: 0.442 가 0.44 로 보이면 T² 를 학생이 다시 계산할 수 없다).
+  const cell = (c: string | number) => escMath(typeof c === "number" ? cellNum(c) : c);
   const num = (c: string | number) => typeof c === "number" || /^-?[\d,.]+%?$/.test(String(c).trim());
   const head = spec.columns.map((c) => `<th scope="col" style="border:1px solid #6b7280;padding:6px 10px;background:#f3f4f6;text-align:left;font-weight:600">${escMath(c)}</th>`).join("");
   const body = spec.rows.map((r) => `<tr>${r.map((c, i) => `<td style="border:1px solid #9ca3af;padding:6px 10px;${num(c) && i > 0 ? "text-align:right;font-variant-numeric:tabular-nums" : ""}">${cell(c)}</td>`).join("")}</tr>`).join("");

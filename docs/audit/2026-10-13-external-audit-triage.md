@@ -323,3 +323,34 @@ R2-G10a 의 "and, thereby"(B)는 짝 없는 쉼표로 오류이나 일부 편집
 
 ### 비용
 모델 호출 약 232회, $2.78(제안 $1.9 + 점검 $0.87, 단가 가정 $3/$15 per M), 원장 반영. 누적 약 $138.7 / 중단선 $195.
+
+## 라운드 6 — 새 AP 9과목×2회차(18세트) 외부 감사 (2026-10-15, 외부 검수자가 1,044문항 응시·제출)
+
+검수자 보고서는 데이터로만 취급하고 항목마다 현재 DB 공개본·코드로 재현했다. 패치 26건 → 새 문제 버전 26개 + 새 세트 버전 15개(`data/audit/apply/2026-10-15-r6-{apply,rollback,verify}.sql`, 총괄이 적용; 멱등·DRIFT 안전). 생성: `scripts/audit/r6-readout.ts`(SELECT) → `lib/audit-fix/r6-edits.ts` → `scripts/audit/r6-build-patches.ts` → `apply-audit-fixes.ts --round6`.
+
+| CSV 항목 | 판정 |
+|---|---|
+| P1 Micro2 MC56(한계비용 누락) | 이미 반영됨: R4(2026-10-14 08:12 UTC) v2 지문에 "marginal cost \$26" 포함, 검수 응시는 그 이전 버전으로 보임. 이번 패치 없음 |
+| P1 Stats2 MC28(C·D 동치) | 재현됨 → D 를 "연관 있음(대립가설)을 귀무로 서술"로 교체, 키 C 유지 |
+| P1 CSA2 FRQ4 참고 코드 | 재현됨(JDK 21 에서 `{{-2000000},{-1500000}}` 가 0 반환, 무작위 20만건 중 1,284 불일치) → `r == 0 \|\| sum > bestSum`, 신 코드 불일치 0 |
+| P2 Physics1 시험1 MC9 | 재현됨 → "정지에서 놓여 아래로 가속" 명시 |
+| P2 Micro1 MC53 | 재현됨 → "다음 근로자의 MRP 30" |
+| P2 CSA2 MC33/42 중복 | 재현됨(코드·질문·선택지 동일) → 교체 계획 `data/ap/stock/csa2-v2-audit-r6-swap-plan.json`(MC33 → 단원4 같은 실습4 의 미사용 확정 재고 pairSum 예외 문항; 총괄이 SQL 뒤에 패널로 적용) |
+| P2 Macro1 MC28 | 재현됨(정의 의존) → 문항에 M1/M2 정의 명시 |
+| P2 Chem2 MC29 | 재현됨 → 이상값 제외 규칙(다른 두 값과 0.50 mL 초과 차이) 명시 |
+| P2 Stats2 FRQ1C | 재현됨 → 처치를 몇 주 먼저 배정·그 뒤 "전날 밤" 숙제 시간 보고 |
+| P2 Psych2 MC58–60 | 재현됨 → 표 83%/63%/40%(25·19·12/30)와 주석, MC60 해설 정정 |
+| P2 Stats1 MC35 | 증상 재현됨, **원인은 코드**: SAT data 렌더러가 SVG `aria-label`/`<title>` 에 한국어·이상치 없는 설명을 넣었다(ap_stat_chart 53개 중 25개가 한국어 라벨). `englishAltInMarkup` 로 렌더 시점에 영어 alt(이상치 79 포함)로 교체 — DB 쓰기 없음, 테스트 추가 |
+| P2 Physics1 두 시험 FRQ3 표/좌표 | 참고 좌표는 맞음(저장 주기 0.442 → 0.195 …). **표 렌더러가 숫자 셀을 소수 2자리로 반올림**해 0.44 로 보였다 → `cellNum`(원값 유지)으로 코드 수정, 해당 표는 이 두 문항뿐, 참고답 변경 없음 |
+| P2 Physics1 시험2 FRQ1D(+시험1 FRQ1D 주석) | 재현됨 → 두 시행 모두 멈출 만큼 긴 거친 구간 / 계속 가속 조건 명시 |
+| P2 Micro2 FRQ1E, FRQ3C | 재현됨 → constant-cost 가정 명시, million 단위 삭제 |
+| P2 Stats1 FRQ4D | 재현됨 → 1810 명 초과 가정과 조건 서술 |
+| P2 Macro1 FRQ1 D/E | 재현됨 → D 는 일정 물가 근사 명시, E 는 정성적 효과·YF 정확 도달 단정 삭제 |
+| P2 ELA 2 FRQ1/FRQ2 참고답 | 재현됨 → "always" 삭제, 항만 전체 적자 → 경제적 압박·시설 쇠퇴(4곳) |
+| P2 ELA 1 FRQ1·FRQ3 rubric | 재현됨 → 출처 수 하한 공식 기준(2개 미만 B0, 2개 B1, 3개 이상 B2+), A=0 상한은 "ALTON 학습 권고(공식 상한 아님)", Row C 0 에서 일방적 입장 자체를 감점하지 않음 |
+| P2 Psych1 EBQ A/C/E, Psych2 EBQ C | 재현됨 → 묶음 처치·설명 가설·간헐 강화·비무작위 한계로 표현 정리 |
+| P2 Bio1 FRQ1D, FRQ3C/D, Bio2 FRQ2D | 재현됨 → 경쟁 억제 가설 하 예측, C 에 70 °C 예측 요청, D 는 C 에서 고른 제한 요인 기준 조건부 예측 |
+| P3 Bio1/2 잘린 FRQ 제목 | 재현됨(2건; 원인은 스톡 payload.title 잘림) → 완전한 제목 |
+| 보류 | Bio1 효소 편중(22/34점)은 새 문항이 필요 → 권고: 효소 FRQ 3개 중 1~2개를 실험설계·자료해석(생태·유전·세포) 유형 재고로 교체. ELA 5세트 구조(공식 5개 vs 12/10개 자극자료)는 구조 재설계 → 권고만 |
+
+검증: MC 5건은 Opus·Sonnet 이 키 없이 풀어 전부 키와 일치(ambiguous 0), FRQ 21건은 Opus 적대 검토에서 모델이 찾은 3건(CSA 루브릭 문구가 `Integer.MIN_VALUE` 초기화를 막음, Stats2 C 가 응답변수를 두 가지로 정의, ELA2 FRQ2 의 "failing business" 2곳 누락)을 고친 뒤 재검토 통과(`data/audit/2026-10-15-r6-model-verify.json`). 비용 $0.79(원장 stage audit-r6).

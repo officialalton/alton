@@ -1,5 +1,5 @@
 {
- "spent": 262.5908,
+ "spent": 263.3846,
  "entries": [
   {
    "at": "2026-10-08T09:13:14.616Z",
@@ -974,7 +974,7 @@
   {
    "at": "2026-10-09T03:26:06.749447+00:00",
    "usd": 0,
-   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) \u2014 invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
+   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) — invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
    "excludedRun": "v8-bio-r"
   },
   {
@@ -3936,6 +3936,31 @@
    "at": "2026-10-15T12:20:00.000Z",
    "usd": 3.7726,
    "note": "essay-calibration englit-v1 + ushistory-v1 (stage essay-calibration; lit 18 samples + re-runs 1.8681, ush SAQ 6 packs + DBQ/LEQ 1.9045, ~190 calls)"
+  },
+  {
+   "at": "2026-10-15T15:15:43.386Z",
+   "usd": 0,
+   "note": "audit-r6-verify batch msgbatch_016WkHc1KphwPMfKFPox4iwr"
+  },
+  {
+   "at": "2026-10-15T15:16:58.191Z",
+   "usd": 0,
+   "note": "audit-r6-verify batch msgbatch_01XeDGwD4sS6qRdNjfof8PTK"
+  },
+  {
+   "at": "2026-10-15T15:29:19.883Z",
+   "usd": 0.622606,
+   "note": "audit-r6-verify sync"
+  },
+  {
+   "at": "2026-10-15T15:30:31.494Z",
+   "usd": 0.171168,
+   "note": "audit-r6-verify-2 sync"
+  },
+  {
+   "at": "2026-10-15T15:31:14.397Z",
+   "usd": 0,
+   "note": "audit-r6 (stage audit-r6) summary: MC blind solve Opus+Sonnet 5 items, FRQ hostile review Opus 21 items + 6 re-reviews; total $0.7938 = the two sync entries above (0.6226 + 0.1712); batch queue stalled, cancelled batch msgbatch_01NFudSMysdhA6VEm6zQfTWG cost $0"
   }
  ]
 }

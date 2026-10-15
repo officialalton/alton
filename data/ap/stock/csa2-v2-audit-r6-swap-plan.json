@@ -1,0 +1,21 @@
+{
+  "kind": "ap_new_version_swap_plan",
+  "set": "CSA2",
+  "sourceSetName": "AP Computer Science A — Practice Exam 2",
+  "sourceVersionNo": 2,
+  "generatedBy": "audit-r6 (external audit 2026-10-15, docs/audit/2026-10-15-new-ap-audit-r6.md)",
+  "note": "MC33 (csa-p1-a:ap_computer_science_a-m19-k1) and MC42 (csa-s2-short-mc:ap_computer_science_a-m03-k2, shared set Q1) are the same code, question and option set (verified in the DB). Replace the standalone MC33 with an unused confirmed stock item of the same unit (4) and practice (4: 4.A -> 4.B): a pairSum run-time-exception question (key verified: pairSum(new int[]{4,5,6}, 2) reads a[3]). Apply AFTER data/audit/apply/2026-10-15-r6-apply.sql (which makes CSA2 v1 -> v2 for the FRQ4 reference-code fix); the panel then creates v3 from v2. verifyCsaFullComposition: no new violation (the pre-existing practice_3_24_not_in_15-23 is unchanged by this swap).",
+  "swapCount": 1,
+  "verifierViolations": [],
+  "swaps": [
+    {
+      "section": "ap_mc",
+      "position": 33,
+      "removeKey": "csa-p1-a:ap_computer_science_a-m19-k1",
+      "addKey": "csa-s2-mc-c:ap_computer_science_a-m12-k0",
+      "reason": "external audit R6: exact duplicate of MC42 (same code, stem and options)",
+      "remove": { "unit": 4, "skill": "4.A", "shared": false, "type": "4.5" },
+      "add": { "unit": 4, "skill": "4.B", "shared": false, "type": "4.3" }
+    }
+  ]
+}
