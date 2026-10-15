@@ -34,11 +34,11 @@ export type PoolRow = {
 export type FullSetUsage = { id: string; name: string; status: string; problemIds: string[]; candidateKeys: string[]; label?: string };
 
 /** 세트 ID 접두 → AP 과목. 모르는 접두는 AB 로 가정하지 않고 거부한다(2026-10-12: 통계 등 새 과목이 AB 로 오판되던 문제). */
-export const SET_PREFIX_SUBJECT: Record<string, string> = { AB: "ap_calculus_ab", BC: "ap_calculus_bc", ST: "ap_statistics", PH: "ap_physics_1", CH: "ap_chemistry", MI: "ap_microeconomics", MA: "ap_macroeconomics", PS: "ap_psychology", CS: "ap_computer_science_a", BI: "ap_biology", EL: "ap_english_language" };
-export const SET_ID_RE = /^(AB|BC|ST|PH|CH|MI|MA|PS|CS|BI|EL)\d$/;
+export const SET_PREFIX_SUBJECT: Record<string, string> = { AB: "ap_calculus_ab", BC: "ap_calculus_bc", ST: "ap_statistics", PH: "ap_physics_1", CH: "ap_chemistry", MI: "ap_microeconomics", MA: "ap_macroeconomics", PS: "ap_psychology", CS: "ap_computer_science_a", BI: "ap_biology", EL: "ap_english_language", LT: "ap_english_literature" };
+export const SET_ID_RE = /^(AB|BC|ST|PH|CH|MI|MA|PS|CS|BI|EL|LT)\d$/;
 export const subjectOfSetIdOrNull = (id: string): string | null => SET_PREFIX_SUBJECT[id.slice(0, 2)] ?? null;
 export function subjectOfSetId(id: string): string { const s = subjectOfSetIdOrNull(id); if (!s) throw new Error(`알 수 없는 세트 ID 접두: ${id}`); return s; }
-const SUBJECT_TITLE: Record<string, string> = { ap_calculus_ab: "AP Calculus AB", ap_calculus_bc: "AP Calculus BC", ap_statistics: "AP Statistics", ap_physics_1: "AP Physics 1", ap_chemistry: "AP Chemistry", ap_microeconomics: "AP Microeconomics", ap_macroeconomics: "AP Macroeconomics", ap_psychology: "AP Psychology", ap_computer_science_a: "AP Computer Science A", ap_biology: "AP Biology", ap_english_language: "AP English Language" };
+const SUBJECT_TITLE: Record<string, string> = { ap_calculus_ab: "AP Calculus AB", ap_calculus_bc: "AP Calculus BC", ap_statistics: "AP Statistics", ap_physics_1: "AP Physics 1", ap_chemistry: "AP Chemistry", ap_microeconomics: "AP Microeconomics", ap_macroeconomics: "AP Macroeconomics", ap_psychology: "AP Psychology", ap_computer_science_a: "AP Computer Science A", ap_biology: "AP Biology", ap_english_language: "AP English Language", ap_english_literature: "AP English Literature" };
 export const defaultDraftName = (setId: string) => `${SUBJECT_TITLE[subjectOfSetId(setId)]} — Practice Exam ${setId.slice(2)}`;
 
 let poolCache: Item[] | null = null;

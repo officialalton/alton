@@ -1,0 +1,59 @@
+{
+ "version": "v1-englit-p0",
+ "run": "englit-p0",
+ "subject": "ap_english_literature",
+ "mode": "mc",
+ "batch": true,
+ "capUsd": 1.6,
+ "hardStopCumulativeUsd": 186,
+ "myTotalCapUsd": 12,
+ "stages": [
+  "gen",
+  "check"
+ ],
+ "plan": {
+  "poetry": {
+   "sets": 1,
+   "seed": 9101
+  },
+  "short": {
+   "sets": 1,
+   "seed": 9102
+  }
+ },
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "adversary": "claude-opus-5-5",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "panel": "claude-fable-5-1",
+  "rebalance": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "effort": "medium",
+ "genEffort": "low",
+ "minKeyConfidence": 0.8,
+ "generatorFiles": [
+  "lib/ap-generation/englit-prompts.ts",
+  "lib/ap-generation/englit-gates.ts",
+  "lib/ap-generation/englit-plan.ts",
+  "lib/ap-generation/englit-frq.ts",
+  "lib/ap-generation/subjects/englit.ts",
+  "lib/ap-exam/passage-lines.ts",
+  "lib/ap-exam/englit-rules.ts",
+  "scripts/ap-generation/englit-pipeline.ts"
+ ],
+ "expected": {
+  "hash": "ee626b6ed977"
+ }
+}
