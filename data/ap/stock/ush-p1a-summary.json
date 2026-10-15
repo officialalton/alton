@@ -1,0 +1,60 @@
+{
+ "runs": [
+  "ush-p1-a"
+ ],
+ "rows": 8,
+ "passed": 2,
+ "rejected": 6,
+ "mcSets": {
+  "rows": 8,
+  "passed": 2
+ },
+ "frqSets": {
+  "rows": 0,
+  "passed": 0
+ },
+ "mcItems": {
+  "generated": 32,
+  "deterministicPass": 17,
+  "solvers3of3": 6,
+  "finalPass": 6,
+  "firstPassRate": 0.188
+ },
+ "failureReasons": {
+  "key_is_longest_option": 10,
+  "solver_disagreement_or_missing": 26,
+  "panel_missing": 26,
+  "set_gate_failed": 16,
+  "distractor_labels_not_diverse": 9,
+  "number": 3
+ },
+ "keyConfidence": {
+  "items": 6,
+  "high": 6,
+  "medium": 0,
+  "mean": 1
+ },
+ "categoriesPassed": {
+  "1": 2,
+  "3": 2,
+  "4": 2
+ },
+ "skillsPassed": {
+  "3.D": 1,
+  "4.A": 1,
+  "1.B": 2,
+  "3.A": 1,
+  "4.B": 1
+ },
+ "renderTypesPassed": {
+  "none": 2
+ },
+ "frqAudit": [],
+ "costUsd": {
+  "ush-p1-a": {
+   "gen": 0.4158,
+   "panel": 0.0514,
+   "solve": 0.024
+  }
+ }
+}

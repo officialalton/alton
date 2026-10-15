@@ -505,13 +505,7 @@
     "note": "ALTON-composed practice material; fictional sources and attributions."
    }
   },
-  "fact": [
-   {
-    "where": "pack",
-    "kind": "other",
-    "detail": "not_checked"
-   }
-  ]
+  "fact": []
  },
  {
   "id": "saq2_1",
@@ -2642,13 +2636,7 @@
     "note": "ALTON-composed practice material; fictional sources and attributions."
    }
   },
-  "fact": [
-   {
-    "where": "pack",
-    "kind": "other",
-    "detail": "not_checked"
-   }
-  ]
+  "fact": []
  },
  {
   "id": "leq_1",
@@ -3107,6 +3095,341 @@
      "The Kansas-Nebraska Act of 1854 allowed popular sovereignty in those territories.",
      "The Know-Nothing (American) Party was an anti-immigrant, anti-Catholic party that reached its peak in the mid-1850s.",
      "The Homestead Act was passed in 1862."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_composed",
+    "note": "ALTON-composed practice material; fictional sources and attributions."
+   }
+  },
+  "fact": []
+ },
+ {
+  "id": "saq1_4",
+  "spec": {
+   "id": "saq1_4",
+   "template": "saq1",
+   "period": 6,
+   "focus": "Two fictional historians interpret the causes of the Populist revolt of the 1890s: one emphasizes farmers' economic grievances (credit, railroad rates, falling crop prices), the other emphasizes political and cultural organizing through the Farmers' Alliance and the People's Party.",
+   "seed": 4250
+  },
+  "payload": {
+   "schema_version": "ush-frq-1",
+   "task_type": "saq",
+   "template": "saq1",
+   "period": 6,
+   "periods": [
+    6
+   ],
+   "title": "Interpreting the Causes of the Populist Revolt, 1870s-1890s",
+   "prompt": {
+    "scenario": "The following two excerpts come from fictional historians who interpret the origins of the Populist movement in different ways. Read both excerpts, then answer all three parts of the question.",
+    "task": "Answer (A), (B), and (C).",
+    "requirements": [
+     "Answer all three parts.",
+     "Use specific historical evidence that is not explicitly mentioned in the excerpts for parts B and C."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE major difference between Ardmore's and Penwright's interpretations of the causes of the Populist revolt.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1865 to 1898 that is not explicitly mentioned in the excerpts could be used to support Ardmore's interpretation.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1865 to 1898 that is not explicitly mentioned in the excerpts could be used to support Penwright's interpretation.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "secondary_text",
+     "title": "Excerpt from Ruth Ardmore, Furrows of Debt: The Farmer and the Market, 1865-1896",
+     "attribution": "Ruth Ardmore, fictional historian, Furrows of Debt: The Farmer and the Market, 1865-1896 (ALTON-composed, in the style of an economic history of American agriculture)",
+     "body": "The Populist revolt grew out of the ledger book before it reached the ballot box. For three decades after the Civil War, the price a farmer got for a bushel of wheat or a pound of cotton kept falling, while the debts he had taken on stayed fixed. A mortgage signed when prices were high became much harder to repay as money grew scarcer and dearer. Credit in the rural South and on the plains was thin and costly, and the railroad that carried a farmer's crop could charge whatever the traffic would bear. Farmers did not need speakers to tell them they were losing ground. Hard arithmetic drove them toward insurgency.",
+     "provenance": {
+      "kind": "alton_composed",
+      "note": "ush-prompts-v1"
+     }
+    },
+    {
+     "id": "B",
+     "kind": "secondary_text",
+     "title": "Excerpt from Elias Penwright, The Lecturer's Road: Farmers, Organization, and Democratic Revolt",
+     "attribution": "Elias Penwright, fictional historian, The Lecturer's Road: Farmers, Organization, and Democratic Revolt (ALTON-composed, in the style of a social and political history of rural movements)",
+     "body": "Hard times were nothing new in the countryside. Hardship alone does not explain why the 1890s produced a national third party. What changed was organization. Traveling lecturers carried a shared analysis of money, monopoly, and power from one county to the next. Farmers met in local chapters, built cooperative buying and selling ventures, and gathered at camp meetings where whole families sang, listened, and debated. Through these experiences, isolated producers learned to see themselves as a class with common interests and common enemies. When the cooperatives ran into opposition from merchants and bankers, the movement turned to politics. The People's Party came out of this school of collective action.",
+     "provenance": {
+      "kind": "alton_composed",
+      "note": "ush-prompts-v1"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "ushistory-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {},
+      "task_specific": ""
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {},
+      "task_specific": ""
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {},
+      "task_specific": ""
+     }
+    ],
+    "scoring_notes": []
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [],
+    "outside_evidence": [
+     "Crime of '73 and the free silver movement",
+     "Panic of 1893",
+     "Crop-lien system and sharecropping",
+     "Granger laws, Munn v. Illinois, Wabash case, Interstate Commerce Act",
+     "Ocala Demands and subtreasury plan",
+     "Omaha Platform",
+     "Colored Farmers' Alliance",
+     "Weaver campaign of 1892",
+     "Fusion with Democrats and the Bryan campaign of 1896"
+    ],
+    "reasoning_types": [
+     "Causation",
+     "Analyzing secondary-source interpretations"
+    ],
+    "saq_answers": {
+     "a": [
+      "Ardmore argues that the revolt was caused mainly by economic pressures such as falling crop prices, fixed debts, costly credit, and high railroad rates. Penwright argues that hardship had always existed and that organizing through the Farmers' Alliance was what turned it into a political movement.",
+      "Ardmore suggests farmers needed no speakers to see their troubles, while Penwright gives traveling lecturers a central role in building a shared understanding of money and monopoly.",
+      "Ardmore treats the revolt as a fairly direct response to market conditions. Penwright treats it as the product of a culture of collective action, built through cooperatives and camp meetings, that taught farmers to see themselves as a class.",
+      "Similarity: both historians agree that farmers faced serious economic difficulties after the Civil War, though they disagree about whether hardship alone explains the revolt."
+     ],
+     "b": [
+      "The Coinage Act of 1873 ended the coinage of silver dollars. Along with the gold standard, it helped shrink the money supply and cause deflation, which made fixed debts harder to repay. That supports Ardmore's claim that debt and scarce money drove farmers to revolt.",
+      "The Panic of 1893 and the depression that followed pushed crop prices down further and caused many farm foreclosures. That deepened the economic distress Ardmore sees as the root of Populism.",
+      "The crop-lien system in the postwar South tied tenant farmers and sharecroppers to merchants who charged high interest. Many fell into a cycle of debt, which supports Ardmore's emphasis on credit.",
+      "Farmers' anger at railroad rate discrimination led to Granger laws in the 1870s, upheld in Munn v. Illinois (1877). After the Wabash decision (1886), Congress passed the Interstate Commerce Act (1887), but the law was weakly enforced. This shows that railroad grievances were long-standing and economic."
+     ],
+     "c": [
+      "The Ocala Demands of 1890 showed the Alliance turning a set of grievances into a common national program, including the subtreasury plan. That supports Penwright's claim that organizing shaped the revolt.",
+      "The Omaha Platform of 1892 called for free silver, a graduated income tax, government ownership of railroads, and direct election of senators. It shows how Alliance networks became an organized national party.",
+      "The Texas Farmers' Alliance set up a cooperative exchange to escape merchants and the crop-lien system. When it failed for lack of credit, members turned toward political action, which matches Penwright's sequence.",
+      "The Colored Farmers' Alliance organized Black farmers in the South, and some Populists, such as Tom Watson in Georgia, appealed across racial lines. This shows organizing creating a shared sense of class interest."
+     ]
+    },
+    "common_pitfalls": [
+     "In part A, summarizing each excerpt separately without stating a difference.",
+     "In part B or C, restating excerpt content (falling prices, lecturers, cooperatives) with no specific outside evidence.",
+     "Using evidence from outside 1865-1898, such as New Deal farm policy.",
+     "Confusing the Grange of the 1870s with the Farmers' Alliance, or mixing up the 1892 and 1896 elections.",
+     "Naming evidence without explaining how it supports that particular historian's argument."
+    ],
+    "facts": [
+     "The Coinage Act of 1873 ended the coinage of the silver dollar; critics called it the 'Crime of '73.'",
+     "The Grange (Patrons of Husbandry) was founded in 1867.",
+     "Munn v. Illinois (1877) upheld state regulation of grain elevators. The Wabash case (1886) limited state regulation of interstate railroads, and the Interstate Commerce Act followed in 1887.",
+     "The Southern Farmers' Alliance's Ocala Demands came in 1890, and they included the subtreasury plan.",
+     "The People's Party adopted the Omaha Platform in 1892. Its candidate, James B. Weaver, won more than one million popular votes and 22 electoral votes.",
+     "The Panic of 1893 began a severe depression.",
+     "In 1896 the Populists endorsed Democrat William Jennings Bryan, who lost to William McKinley."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_composed",
+    "note": "ALTON-composed practice material; fictional sources and attributions."
+   }
+  },
+  "fact": [
+   {
+    "where": "pack",
+    "kind": "other",
+    "detail": "not_checked"
+   }
+  ]
+ },
+ {
+  "id": "saq1_5",
+  "spec": {
+   "id": "saq1_5",
+   "template": "saq1",
+   "period": 5,
+   "focus": "Two fictional historians interpret the legacy of Reconstruction (1865-1877): one stresses the lasting constitutional and legal changes, the other stresses the limits and reversals that followed as federal enforcement faded.",
+   "seed": 4251
+  },
+  "payload": {
+   "schema_version": "ush-frq-1",
+   "task_type": "saq",
+   "template": "saq1",
+   "period": 5,
+   "periods": [
+    5,
+    6
+   ],
+   "title": "Interpreting the Legacy of Reconstruction, 1865-1877",
+   "prompt": {
+    "scenario": "Historians continue to debate what Reconstruction achieved. The two excerpts below, by fictional historians, offer different interpretations of the legacy of Reconstruction between 1865 and 1877.",
+    "task": "Using the excerpts, answer parts A, B, and C.",
+    "requirements": [
+     "Answer all three parts.",
+     "Each part asks for ONE response; write in complete sentences.",
+     "For parts B and C, use evidence that is not explicitly mentioned in the excerpts."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE major difference between Ashcombe's and Wrenfield's historical interpretations of the legacy of Reconstruction.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1865 to 1877 that is not explicitly mentioned in the excerpts could be used to support Ashcombe's interpretation.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1865 to 1877 that is not explicitly mentioned in the excerpts could be used to support Wrenfield's interpretation.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "secondary_text",
+     "title": "Historian Miriam Ashcombe on the constitutional legacy of Reconstruction",
+     "attribution": "Miriam Ashcombe, fictional historian, Charters of Citizenship: Law and Freedom after Appomattox, 2019 (ALTON-composed, in the style of a modern academic history of Reconstruction)",
+     "body": "Whatever its disappointments, Reconstruction rewrote the terms of American nationhood. In barely five years, Congress and the states abolished slavery, defined national citizenship by birth, promised every person the equal protection of the laws, and barred the states from denying the vote on account of race. These were not temporary measures tied to an army in the field. They were written into the Constitution itself, and they stayed there after Northern resolve weakened. Later generations of Black Americans and their allies returned to these clauses again and again. Reconstruction's most lasting achievement was to place in the nation's highest law a standard of equality that the country would one day be forced to honor.",
+     "provenance": {
+      "kind": "alton_composed",
+      "note": "ush-prompts-v1"
+     }
+    },
+    {
+     "id": "B",
+     "kind": "secondary_text",
+     "title": "Historian Tobias Wrenfield on the limits of Reconstruction",
+     "attribution": "Tobias Wrenfield, fictional historian, The Receding Tide: Federal Power and the Southern Countryside, 2021 (ALTON-composed, in the style of a modern academic history of Reconstruction)",
+     "body": "To read Reconstruction mainly through its amendments is to mistake promise for practice. Rights on paper depended on federal willingness to defend them in Southern courthouses, at polling places, and on cotton plantations, and that willingness proved short-lived. By the mid-1870s, Northern voters had grown tired of Southern questions, Republican leaders were divided, and white Democrats had retaken one state government after another through fraud and intimidation. As federal enforcement faded, freedpeople were left to face landlords, sheriffs, and legislatures determined to hollow out their gains. For most Black Southerners, the decades that followed brought a narrowing of freedom, not equality.",
+     "provenance": {
+      "kind": "alton_composed",
+      "note": "ush-prompts-v1"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "ushistory-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not accurately describe a difference between the two interpretations, or only summarizes one excerpt.",
+       "1": "The response accurately describes one major difference between Ashcombe's emphasis on lasting constitutional change and Wrenfield's emphasis on weak enforcement and reversal."
+      },
+      "task_specific": "Describe one major difference: Ashcombe sees Reconstruction's legacy in permanent constitutional and legal change that served as a foundation for later equality; Wrenfield argues that rights on paper meant little without federal enforcement, which faded and allowed white Southern Democrats to reverse gains."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no relevant evidence, uses only what the excerpt states, or does not connect the evidence to Ashcombe's argument.",
+       "1": "The response explains how one specific, accurate event or development from 1865-1877 supports Ashcombe's interpretation."
+      },
+      "task_specific": "Explain how one specific piece of evidence from 1865-1877 not explicitly in the excerpts (for example the Civil Rights Act of 1866, the Enforcement Acts and Ku Klux Klan Act, election of Black officeholders such as Hiram Revels, Freedmen's Bureau schools, the Civil Rights Act of 1875) supports the argument that Reconstruction produced lasting legal and constitutional change."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no relevant evidence, uses only what the excerpt states, or does not connect the evidence to Wrenfield's argument.",
+       "1": "The response explains how one specific, accurate event or development from 1865-1877 supports Wrenfield's interpretation."
+      },
+      "task_specific": "Explain how one specific piece of evidence from 1865-1877 not explicitly in the excerpts (for example the Slaughterhouse Cases, United States v. Cruikshank, the Colfax Massacre, Ku Klux Klan or White League violence, the spread of sharecropping and crop liens, the Panic of 1873 shifting Northern attention, the Compromise of 1877) supports the argument that rights were limited or reversed as federal enforcement faded."
+     }
+    ],
+    "scoring_notes": [
+     "Each part is scored independently, 0 or 1 point.",
+     "For B and C, generic statements such as 'the amendments' or 'white Democrats took back states' only repeat the excerpts; credit needs a specific development and an explanation of how it supports the interpretation.",
+     "Naming a specific amendment (Thirteenth, Fourteenth, or Fifteenth) can earn credit in part B only if the response goes beyond the excerpt, for example by explaining a specific clause's later use or the Fourteenth Amendment's ratification as a condition of readmission.",
+     "Evidence from slightly after 1877 (such as the Civil Rights Cases of 1883 or Plessy v. Ferguson in 1896) falls outside the stated years and should not earn credit for B or C."
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Conflict between Presidential and Congressional (Radical) Reconstruction",
+     "Rise of Redeemer governments and paramilitary violence in the 1870s",
+     "Later use of the Fourteenth Amendment in twentieth-century civil rights cases"
+    ],
+    "outside_evidence": [],
+    "reasoning_types": [
+     "Comparison of historical interpretations",
+     "Use of evidence to support an argument"
+    ],
+    "saq_answers": {
+     "a": [
+      "Ashcombe argues that Reconstruction's main legacy was permanent constitutional change, the Thirteenth, Fourteenth, and Fifteenth Amendments, that later generations could use. Wrenfield argues that those rights meant little in practice because federal enforcement soon ended.",
+      "Ashcombe treats the amendments as lasting even after Northern commitment declined. Wrenfield stresses that the decline in Northern commitment let white Southern Democrats undo Black Americans' gains.",
+      "Ashcombe looks at the long-run promise of equality, while Wrenfield looks at the lived experience of Black Southerners, which he describes as a narrowing of freedom."
+     ],
+     "b": [
+      "The Civil Rights Act of 1866, passed over President Andrew Johnson's veto, defined Black Americans as citizens with equal rights to make contracts and own property. It shows Congress building a national, legal basis for citizenship.",
+      "The Enforcement Acts of 1870-1871, including the Ku Klux Klan Act, let the federal government prosecute people who violated Black citizens' rights, and they weakened the Klan in the early 1870s. This shows the new amendments being backed by national law.",
+      "Hiram Revels became the first Black U.S. senator in 1870, and hundreds of Black men held state and local offices. This shows that the Fourteenth and Fifteenth Amendments changed who could take part in government.",
+      "The Civil Rights Act of 1875 banned racial discrimination in public accommodations, which shows Congress trying to put a national standard of equality into law."
+     ],
+     "c": [
+      "In the Slaughterhouse Cases (1873), the Supreme Court read the Fourteenth Amendment's privileges or immunities clause narrowly, which weakened federal protection of Black citizens' rights.",
+      "United States v. Cruikshank (1876) came out of the Colfax Massacre of 1873. The Court ruled that the Fourteenth Amendment limited only state action, which made it harder for the federal government to punish private violence against freedpeople.",
+      "Many freedpeople became sharecroppers bound by crop liens because they did not receive land. This kept them economically dependent on white landowners even though they were legally free.",
+      "The Panic of 1873 and the economic depression that followed turned Northern voters toward economic concerns. Democrats won the House in 1874, and support for enforcing Reconstruction declined.",
+      "In the Compromise of 1877, Rutherford B. Hayes became president and federal troops stopped propping up the last Republican governments in the South, which left Black Southerners without federal protection."
+     ]
+    },
+    "common_pitfalls": [
+     "Summarizing each excerpt separately without stating a difference in part A.",
+     "Using only the amendments in general or 'white Democrats retaking states', which the excerpts already mention, in parts B or C.",
+     "Citing evidence from after 1877, such as Plessy v. Ferguson (1896), when the prompt limits evidence to 1865-1877.",
+     "Mixing up the amendments, for example saying the Fourteenth Amendment gave Black men the vote.",
+     "Naming an event without explaining how it supports the historian's interpretation."
+    ],
+    "facts": [
+     "Thirteenth Amendment ratified 1865; Fourteenth 1868; Fifteenth 1870.",
+     "Civil Rights Act of 1866 passed over Andrew Johnson's veto.",
+     "Freedmen's Bureau established 1865.",
+     "Enforcement Acts 1870-1871, including the Ku Klux Klan Act of 1871.",
+     "Hiram Revels of Mississippi became the first Black U.S. senator in 1870.",
+     "Colfax Massacre in Louisiana, 1873.",
+     "Slaughterhouse Cases decided 1873; United States v. Cruikshank decided 1876.",
+     "Panic of 1873 began a long depression; Democrats won control of the House in the 1874 elections.",
+     "Civil Rights Act of 1875 banned discrimination in public accommodations.",
+     "Compromise of 1877 resolved the disputed 1876 election in favor of Rutherford B. Hayes and ended federal support for the remaining Republican Southern governments."
     ]
    },
    "samples": [],

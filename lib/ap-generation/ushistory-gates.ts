@@ -75,7 +75,9 @@ export function tableNumberViolations(set: UshSetRaw, it: UshItemRaw): string[] 
   const src = new Set<string>(); for (const s of set.sources) for (const n of sourceBody(s).match(/\d+(?:\.\d+)?/g) ?? []) src.add(String(Number(n)));
   for (const d of it.derived ?? []) { src.add(String(Number(d.result))); d.operands.forEach((x) => src.add(String(x))); }
   const text = [it.stem, ...it.options.map((o) => o.text)].join(" ").replace(/\b(1[4-9]\d\d|20[0-2]\d)\b/g, " ");
-  const bad = (text.match(/\d+(?:\.\d+)?/g) ?? []).map((n) => String(Number(n))).filter((n) => Number(n) > 12 && !src.has(n));
+  // 자료 숫자에서 파생 가능한 값(차·합·비·변화율, 같은 표 안 모든 쌍)은 선언 없이도 허용한다.
+  const base = [...src].map(Number).filter((x) => Number.isFinite(x)); const derivedOk = (n: number): boolean => { for (const a of base) for (const b of base) { if (a === b) continue; for (const d of [a - b, a + b, b !== 0 ? a / b : NaN, b !== 0 ? ((a - b) / b) * 100 : NaN, a !== 0 ? ((b - a) / a) * 100 : NaN]) if (Number.isFinite(d) && Math.abs(Math.abs(d) - n) <= Math.max(0.51, n * 0.02)) return true; } return false; };
+  const bad = (text.match(/\d+(?:,\d{3})*(?:\.\d+)?/g) ?? []).map((n) => String(Number(n.replace(/,/g, "")))).filter((n) => Number(n) > 12 && !src.has(n) && !derivedOk(Number(n)));
   return set.sources.some((s) => s.table || s.figure) ? [...new Set(bad)].map((n) => `number_${n}_not_in_data`) : [];
 }
 
@@ -105,7 +107,7 @@ export function setViolations(set: UshSetRaw, spec?: { period: number; stim: str
   if (/[ㄱ-ㆎ가-힣]/.test(plain + set.title)) v.push("hangul_in_source");
   const lower = norm(plain); const ph = USH_BANNED_PHRASES.filter((p) => lower.includes(p)); if (ph.length) v.push(`ai_cliche_${ph.join("|")}`);
   if (/\b(according to (?:the )?(?:actual|real|famous)|in (?:his|her) famous (?:speech|letter))\b/i.test(plain)) v.push("presents_source_as_real_historical_text");
-  v.push(...dateConflicts(plain), ...yearRangeViolations(plain, set.period));
+  v.push(...dateConflicts(plain), ...yearRangeViolations(body, set.period));
   const stems = set.items.map((i) => norm(i.stem)); if (new Set(stems).size !== stems.length) v.push("duplicate_stem");
   return v;
 }

@@ -87,12 +87,15 @@ function specsOf(): UshSetSpec[] {
 }
 
 // ── 파싱 ───────────────────────────────────────────────────────────
+/** 모델이 객체·배열 필드를 JSON 문자열로 돌려주는 경우(실측)를 복원한다. */
+const unstring = (v: unknown): unknown => { if (typeof v !== "string") return v; const t = v.trim(); if (t.startsWith("{") || t.startsWith("[")) { try { return JSON.parse(t); } catch { return v; } } return v; };
 const strs = (v: unknown): string[] => (Array.isArray(v) ? v.map(String) : []);
 function parseSource(s: Json): UshSource {
   const table = s.table && Array.isArray(s.table.columns) ? { columns: strs(s.table.columns), rows: (s.table.rows ?? []).map((r: unknown[]) => r.map((x) => (typeof x === "number" ? x : String(x)))) } : undefined;
   return { id: String(s.id), kind: s.kind, title: String(s.title ?? ""), attribution: String(s.attribution ?? ""), body: s.body === undefined ? undefined : String(s.body), table, figure: s.figure, provenance: { kind: "alton_composed", note: P.PROMPT_VERSION, ...(s.real_data_set && s.real_data_set !== "none" ? { real_data: true, dataset: s.real_data_set } : {}) } as UshSource["provenance"] };
 }
-function parseSet(spec: UshSetSpec, inp: Json): UshSetRaw | null {
+function parseSet(spec: UshSetSpec, raw: Json): UshSetRaw | null {
+  const inp: Json | null = raw ? { ...raw, sources: unstring(raw.sources), items: ((unstring(raw.items) as Json[]) ?? []).map?.((it: Json) => (it && typeof it === "object" ? { ...it, options: unstring(it.options), facts: unstring(it.facts), derived: unstring(it.derived) } : it)) } : raw;
   if (!inp || !Array.isArray(inp.sources) || !Array.isArray(inp.items)) return null;
   const items: UshItemRaw[] = inp.items.map((it: Json) => ({ skill: String(it.skill ?? ""), topic: String(it.topic ?? ""), stem: String(it.stem ?? ""), options: (Array.isArray(it.options) ? it.options : []).map((o: Json) => ({ text: String(o?.text ?? ""), is_key: o?.is_key === true, label: String(o?.label ?? ""), why: String(o?.why ?? "") })), facts: strs(it.facts), derived: Array.isArray(it.derived) ? it.derived.map((d: Json) => ({ desc: String(d.desc ?? ""), op: d.op, operands: (d.operands ?? []).map(Number), result: Number(d.result) })) : undefined, est_seconds: Number(it.est_seconds ?? 75) }));
   return { period: spec.period, stim_type: spec.stim, theme: spec.theme, title: String(inp.title ?? ""), sources: inp.sources.map(parseSource), items };
@@ -224,7 +227,8 @@ function finalizeStage() {
 const rubricText = (p: UshFrqPayload) => p.rubric.rows.map((r) => `${r.name} (0-${r.max}): ${r.task_specific}\n${Object.entries(r.descriptors).sort().map(([k, v]) => `  ${k}: ${v}`).join("\n")}`).join("\n") + "\n" + p.rubric.scoring_notes.map((n) => `Note: ${n}`).join("\n");
 const frqMaterial = (p: UshFrqPayload) => (p.task_type === "leq" ? "" : p.task_type === "dbq" ? frqPassageDisplay(p) : solverTextFrq(p));
 function solverTextFrq(p: UshFrqPayload): string { return p.sources.map((s) => `Source ${s.id} (${s.kind})\n${s.title}\n${s.attribution}\n${s.body ?? ""}${s.table ? "\n" + tableMarkdown(s.table) : ""}${s.figure ? `\n${s.figure.title}: ${s.figure.categories.map((c, i) => `${c} = ${s.figure!.series.map((x) => `${x.name} ${x.values[i]}`).join(", ")}`).join("; ")}` : ""}`).join("\n\n"); }
-function toFrqPayload(spec: P.FrqSpec, inp: Json): UshFrqPayload | null {
+function toFrqPayload(spec: P.FrqSpec, raw: Json): UshFrqPayload | null {
+  const inp: Json | null = raw ? Object.fromEntries(Object.entries(raw).map(([k, v]) => [k, unstring(v)])) : raw; if (inp?.rubric && typeof inp.rubric === "object") inp.rubric = Object.fromEntries(Object.entries(inp.rubric as Json).map(([k, v]) => [k, unstring(v)])); if (inp?.expected_features && typeof inp.expected_features === "object") inp.expected_features = Object.fromEntries(Object.entries(inp.expected_features as Json).map(([k, v]) => [k, unstring(v)])); if (inp?.prompt && typeof inp.prompt === "object") inp.prompt = Object.fromEntries(Object.entries(inp.prompt as Json).map(([k, v]) => [k, unstring(v)]));
   if (!inp?.rubric || !inp?.prompt) return null; const task = taskOf(spec.template); const want = USH_RUBRIC_ROWS[task];
   const rows = want.map((w) => { const r = ((inp.rubric.rows ?? []) as Json[]).find((x) => String(x.row_id).toLowerCase() === w.row_id) ?? {}; return { row_id: w.row_id, name: w.name, max: w.max, descriptors: Object.fromEntries(Object.entries(r.descriptors ?? {}).map(([k, v]) => [String(k), String(v)])), task_specific: String(r.task_specific ?? "") }; });
   const af = inp.expected_features ?? {};

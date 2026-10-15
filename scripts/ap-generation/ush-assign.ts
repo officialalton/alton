@@ -14,7 +14,7 @@ export type UshResult = { id: string; sets: UshItem[]; frq: UshItem[] };
 const usableOf = (items: UshItem[], blocked: Set<string>) => items.filter((c) => !blocked.has(c.key) && (c.kind === "frq" ? (USH_FRQ_TEMPLATES as readonly string[]).includes(c.template) && c.period >= 1 : c.members.length >= USH_SET_SIZE.min && c.members.length <= USH_SET_SIZE.max && c.members.every((m) => /^[1-5]$/.test(m.cat))));
 const UNITS = Object.keys(ushUnitBounds());
 
-export function solveUshSets(ids: string[], items: UshItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; highs?: boolean }) {
+export function solveUshSets(ids: string[], items: UshItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; highs?: boolean; mcOnly?: boolean }) {
   const usable = usableOf(items, o.blocked ?? new Set()); const mc = usable.filter((c) => c.kind === "mc"), frqs = usable.filter((c) => c.kind === "frq");
   let n = 0; const xv = new Map<string, number>(); usable.forEach((c, i) => ids.forEach((_, s) => xv.set(`${i}|${s}`, n++)));
   const idx = new Map(usable.map((c, i) => [c, i] as const)); const x = (c: UshItem, s: number) => xv.get(`${idx.get(c)}|${s}`)!;
@@ -35,8 +35,8 @@ export function solveUshSets(ids: string[], items: UshItem[], o: { timeMs: numbe
     }
     for (const cat of ["1", "2", "3", "4", "5"]) cons.push({ coef: count((c) => c.members.filter((m) => m.cat === cat).length), sense: ">=", rhs: USH_SKILL_CATEGORY_MIN });
     for (const t of USH_STIM_TYPES) cons.push({ coef: count((c) => (c.stim === t ? 1 : 0)), sense: ">=", rhs: USH_STIM_MIN[t] });
-    for (const t of USH_FRQ_TEMPLATES) cons.push({ coef: frqs.filter((c) => c.template === t).map((c) => [x(c, s), 1] as [number, number]), sense: "=", rhs: 1 });
-    for (let p = 1; p <= 9; p++) cons.push({ coef: frqs.filter((c) => /^saq/.test(c.template) && c.period === p).map((c) => [x(c, s), 1] as [number, number]), sense: "<=", rhs: 1 }); // SAQ 3개는 서로 다른 시대
+    if (!o.mcOnly) for (const t of USH_FRQ_TEMPLATES) cons.push({ coef: frqs.filter((c) => c.template === t).map((c) => [x(c, s), 1] as [number, number]), sense: "=", rhs: 1 });
+    if (!o.mcOnly) for (let p = 1; p <= 9; p++) cons.push({ coef: frqs.filter((c) => /^saq/.test(c.template) && c.period === p).map((c) => [x(c, s), 1] as [number, number]), sense: "<=", rhs: 1 }); // SAQ 3개는 서로 다른 시대
   });
   const binary = new Array<boolean>(n).fill(false); for (const j of xv.values()) binary[j] = true;
   const prob = { n, obj, cons, integer: new Array(n).fill(true), binary };
@@ -74,8 +74,8 @@ export function unitSummary(r: UshResult) { const c: Record<string, number> = {}
 function main() {
   const ids = arg("--sets", "US1,US2").split(",").filter(Boolean); const TIME = Number(arg("--time-ms", "120000")); const files = arg("--files") ? arg("--files").split(",") : undefined;
   const { pool } = loadUshPool({ requireScreen: !has("--no-screen"), files }); const log = (s: string) => console.error(s);
-  const m = solveUshSets(ids, pool, { timeMs: TIME, log, highs: has("--highs") });
-  const bad = m.res.x.length ? verifyUshAssignment(m.out) : ["해 없음(재고만으로 공식 구조를 채울 수 없음)"];
+  const m = solveUshSets(ids, pool, { timeMs: TIME, log, highs: has("--highs"), mcOnly: has("--mc-only") });
+  const bad = m.res.x.length ? verifyUshAssignment(m.out).filter((v) => !has("--mc-only") || !/frq/.test(v)) : ["해 없음(재고만으로 공식 구조를 채울 수 없음)"];
   const cnt = (f: (c: UshItem) => boolean) => pool.filter(f).length;
   console.log(`# ush-assign sets=${ids.join(",")} 재고 MC 세트 ${cnt((c) => c.kind === "mc")} (문항 ${pool.filter((c) => c.kind === "mc").reduce((a, c) => a + c.members.length, 0)}) FRQ ${cnt((c) => c.kind === "frq")} (${USH_FRQ_TEMPLATES.map((t) => `${t}:${cnt((c) => c.template === t)}`).join(" ")})`);
   console.log(`status=${m.res.status} 목적값(단원 목표 이탈)=${m.res.obj}`);

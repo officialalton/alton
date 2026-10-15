@@ -17,13 +17,13 @@
   {
    "id": "u102",
    "period": 1,
-   "stim": "primary_text",
+   "stim": "secondary_text",
    "theme": "Early Atlantic slave trade and its place in Spanish and Portuguese colonies",
    "skills": [
-    "2.B",
-    "3.A",
-    "4.A",
-    "5.B"
+    "3.B",
+    "3.D",
+    "4.B",
+    "5.A"
    ],
    "nItems": 4,
    "seed": 70177
@@ -73,13 +73,13 @@
   {
    "id": "u206",
    "period": 2,
-   "stim": "quantitative",
+   "stim": "secondary_text",
    "theme": "Colonial assemblies and salutary neglect",
    "skills": [
-    "1.A",
     "3.A",
+    "3.D",
     "4.B",
-    "5.B"
+    "5.A"
    ],
    "nItems": 4,
    "seed": 47353
@@ -143,13 +143,13 @@
   {
    "id": "u311",
    "period": 3,
-   "stim": "quantitative",
+   "stim": "secondary_text",
    "theme": "Washington's neutrality policy and the Jay Treaty",
    "skills": [
-    "1.A",
-    "3.B",
+    "3.A",
+    "3.D",
     "4.A",
-    "5.B"
+    "5.A"
    ],
    "nItems": 4,
    "seed": 26700
@@ -199,13 +199,13 @@
   {
    "id": "u315",
    "period": 3,
-   "stim": "quantitative",
+   "stim": "secondary_text",
    "theme": "Alien and Sedition Acts and the Kentucky and Virginia Resolutions",
    "skills": [
-    "1.A",
-    "3.B",
+    "3.A",
+    "3.D",
     "4.B",
-    "5.B"
+    "5.A"
    ],
    "nItems": 4,
    "seed": 33971
@@ -283,13 +283,13 @@
   {
    "id": "u421",
    "period": 4,
-   "stim": "quantitative",
+   "stim": "secondary_text",
    "theme": "Missouri Compromise",
    "skills": [
-    "1.A",
-    "3.B",
+    "3.A",
+    "3.D",
     "4.B",
-    "5.A"
+    "1.B"
    ],
    "nItems": 4,
    "seed": 53391
@@ -395,13 +395,13 @@
   {
    "id": "u529",
    "period": 5,
-   "stim": "quantitative",
+   "stim": "secondary_text",
    "theme": "Freedmen's Bureau and Black Codes",
    "skills": [
-    "1.B",
     "3.B",
+    "3.D",
     "4.B",
-    "5.B"
+    "5.A"
    ],
    "nItems": 4,
    "seed": 52957
@@ -549,13 +549,13 @@
   {
    "id": "u640",
    "period": 6,
-   "stim": "quantitative",
+   "stim": "secondary_text",
    "theme": "The New South, sharecropping and convict leasing",
    "skills": [
-    "1.A",
-    "3.B",
+    "3.A",
+    "3.D",
     "4.A",
-    "5.A"
+    "1.B"
    ],
    "nItems": 4,
    "seed": 85849
@@ -591,13 +591,13 @@
   {
    "id": "u743",
    "period": 7,
-   "stim": "quantitative",
+   "stim": "secondary_text",
    "theme": "Progressive reforms: initiative, referendum, direct election of senators",
    "skills": [
-    "1.A",
-    "3.B",
+    "3.A",
+    "3.D",
     "4.B",
-    "5.A"
+    "1.B"
    ],
    "nItems": 4,
    "seed": 65153
@@ -675,13 +675,13 @@
   {
    "id": "u849",
    "period": 8,
-   "stim": "quantitative",
+   "stim": "secondary_text",
    "theme": "Containment, the Truman Doctrine and the Marshall Plan",
    "skills": [
-    "1.A",
-    "3.B",
+    "3.A",
+    "3.D",
     "4.A",
-    "5.A"
+    "5.B"
    ],
    "nItems": 4,
    "seed": 59880
@@ -731,13 +731,13 @@
   {
    "id": "u853",
    "period": 8,
-   "stim": "quantitative",
+   "stim": "secondary_text",
    "theme": "Watergate and declining trust in government",
    "skills": [
-    "1.B",
     "3.B",
+    "3.D",
     "4.B",
-    "5.A"
+    "1.B"
    ],
    "nItems": 4,
    "seed": 50413
@@ -856,10 +856,10 @@
    "9": 4
   },
   "byStim": {
-   "primary_text": 24,
+   "primary_text": 23,
+   "secondary_text": 24,
    "paired_text": 8,
-   "secondary_text": 14,
-   "quantitative": 14
+   "quantitative": 5
   }
  }
 }
