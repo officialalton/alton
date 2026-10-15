@@ -45,7 +45,7 @@ export const CTX: Record<string, string> = {
   "txt-smith-1776": "Adam Smith was a Scottish moral philosopher who published this book in 1776.",
   "txt-qianlong-1793": "The Qianlong Emperor of China wrote this reply to King George III of Britain in 1793, after a British ambassador asked for expanded trade and a permanent British envoy in Beijing.",
   "txt-engels-1845": "Friedrich Engels, a German who helped manage his family's cotton business in Manchester, England, published this book in German in 1845.",
-  "txt-tientsin-1858": "Britain and China signed this treaty in 1858 after the Second Opium War.",
+  "txt-tientsin-1858": "Britain and China signed this treaty in June 1858, during the Second Opium War.",
   "img-dore-london-1872": "The French artist Gustave Dore drew scenes of London for a book published in 1872.",
   "txt-gandhi-1909-machinery": "Mohandas Gandhi, an Indian lawyer, wrote this book in 1909 as a dialogue between a Reader and an Editor; the Editor states Gandhi's views.",
   "txt-sun-1922": "Sun Yat-sen, a leader of the Chinese revolution of 1911, wrote this plan to attract foreign investment to China after the First World War; it was published in English in 1922.",
@@ -101,13 +101,13 @@ export const WH_SETS: WhSetSpec[] = [
 const F = (id: string, exam: "WH1" | "WH2", template: WhFrqSpec["template"], era: number, units: number[], focus: string, srcs: string[], seed: number): WhFrqSpec => ({ id, exam, template, era, units, focus, sources: srcs.map(S), seed });
 export const WH_FRQS: WhFrqSpec[] = [
   F("wh1_saq1", "WH1", "saq1", 4, [8], "Superpower rivalry and the end of European control in the Middle East in the 1950s (Suez crisis)", ["txt-cs-egypt-1991"], 2101),
-  F("wh1_saq2", "WH1", "saq2", 1, [2], "The Black Death as a disease that moved along trade routes, and its social and economic effects in Europe and the Mediterranean (do not tie the plague to the fall of any particular dynasty)", ["txt-boccaccio-plague-1353"], 3112),
+  F("wh1_saq2", "WH1", "saq2", 1, [2], "The Black Death as a disease that moved along trade routes, and its social and economic effects in Europe and the Mediterranean (do not tie the plague to the fall of any particular dynasty)", ["txt-boccaccio-plague-1353"], 3122),
   F("wh1_saq3", "WH1", "saq3", 2, [4], "Maritime exploration, mapmaking and the Atlantic world in the early 16th century", ["img-piri-reis-1513"], 3103),
-  F("wh1_dbq", "WH1", "dbq", 3, [5, 6, 7], "How industrialization changed relationships between industrial and non-industrial societies and conditions within industrial societies, 1776-1922", ["txt-smith-1776", "txt-qianlong-1793", "txt-engels-1845", "txt-tientsin-1858", "img-dore-london-1872", "txt-gandhi-1909-machinery", "txt-sun-1922"], 3114),
-  F("wh1_leq", "WH1", "leq", 2, [1, 2, 3, 4], "Long-distance trade and the exchange of goods, ideas and diseases, c. 1200 to c. 1750", [], 3115),
+  F("wh1_dbq", "WH1", "dbq", 3, [5, 6, 7], "How industrialization changed relationships between industrial and non-industrial societies and conditions within industrial societies, 1776-1922", ["txt-smith-1776", "txt-qianlong-1793", "txt-engels-1845", "txt-tientsin-1858", "img-dore-london-1872", "txt-gandhi-1909-machinery", "txt-sun-1922"], 3124),
+  F("wh1_leq", "WH1", "leq", 2, [1, 2, 3, 4], "Long-distance trade and the exchange of goods, ideas and diseases, c. 1200 to c. 1750 (avoid 'for the first time' claims)", [], 3125),
   F("wh2_saq1", "WH2", "saq1", 3, [6], "Western trade and military pressure on China in the 19th century and its consequences", ["txt-cs-china-1988-treaties"], 2201),
   F("wh2_saq2", "WH2", "saq2", 4, [8], "Anti-colonial movements and the principles stated by the Allies in the Second World War", ["txt-atlantic-1941"], 3212),
-  F("wh2_saq3", "WH2", "saq3", 1, [1], "Mongol expansion and the response of the states it threatened in the 13th century", ["img-mongol-invasion-japan-1293"], 3213),
+  F("wh2_saq3", "WH2", "saq3", 1, [1], "Mongol expansion and the response of the states it threatened in the 13th century (the image is a detail of a longer scroll; make no claims about the rest of the scroll)", ["img-mongol-invasion-japan-1293"], 3223),
   F("wh2_dbq", "WH2", "dbq", 4, [7], "How far Allied commitments and the peace settlements after the First World War reshaped political authority in the former Ottoman Arab provinces, 1915-1922", ["txt-hussein-1915", "txt-mcmahon-1915", "txt-sykes-1916", "img-sykes-picot-map-1916", "txt-balfour-1917", "txt-leagcov-art22", "txt-whitepaper-1922"], 2204),
   F("wh2_leq", "WH2", "leq", 3, [5, 6, 7, 8, 9], "Nationalism and resistance to foreign rule, c. 1750 to the present (use only well-established facts; avoid details about who led the early stages of any revolution)", [], 3205),
 ];
