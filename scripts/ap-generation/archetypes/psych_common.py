@@ -108,7 +108,7 @@ def register_sets(g, sets):
     return names
 
 
-TXT = {"kind": "text", "description": "The study description above is the only material shown with these questions.", "data": {}}  # 표·그래프가 없는 세트의 공유 자료(지문만)
+TXT = {"kind": "text", "description": "Study description (no table or figure accompanies it)", "data": {}}  # 표·그래프가 없는 세트의 공유 자료(지문만)
 
 
 def tbl(desc, cols, rows, notes=None):
