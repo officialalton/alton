@@ -8,7 +8,8 @@ import { fullPracticeUnitBounds } from "../ap-exam/full-set-rules";
 import { checkNewVersionComposition, type NewVersionContext, type SlotItem } from "../mock-exam/new-version";
 
 export type SwapSpec = { section: string; position: number; addKey: string; /** 공유 자료 세트 교체에서 새 세트 안의 문항 순서(0부터). 단독 문항은 없음. */ addIndex?: number };
-export type PlanSwapInput = { section: string; position?: number; removeKey?: string; addKey: string };
+/** addIndex 가 있으면 '재편(regroup)' 항목: 슬롯(section+position)과 새 후보 안의 문항 순서를 직접 지정한다(묶음 크기가 달라지는 교체 — 영어 장문 묶음). 이 항목은 기존 묶음 전체로 펼치지 않는다. */
+export type PlanSwapInput = { section: string; position?: number; removeKey?: string; addKey: string; addIndex?: number };
 export type SwapPlanFile = { kind: "ap_new_version_swap_plan"; set: string; sourceSetName: string; sourceVersionNo?: number; swaps: PlanSwapInput[] };
 export type PlanListing = { file: string; set: string; sourceSetName: string; swapCount: number };
 
@@ -33,7 +34,8 @@ export function parseSwapPlan(raw: unknown): SwapPlanFile {
   if (!o || o.kind !== "ap_new_version_swap_plan" || !Array.isArray(o.swaps) || typeof o.sourceSetName !== "string") throw new Error("교체 계획 형식이 올바르지 않습니다.");
   const swaps = o.swaps.map((s) => {
     if (!s || typeof s.section !== "string" || typeof s.addKey !== "string" || (s.position === undefined && typeof s.removeKey !== "string")) throw new Error("교체 항목에는 section, addKey 와 position 또는 removeKey 가 필요합니다.");
-    return { section: s.section, position: typeof s.position === "number" ? s.position : undefined, removeKey: s.removeKey, addKey: s.addKey } as PlanSwapInput;
+    if (s.addIndex !== undefined && (!Number.isInteger(s.addIndex) || s.addIndex < 0 || typeof s.position !== "number")) throw new Error("재편 항목(addIndex)에는 0 이상의 정수 addIndex 와 position 이 필요합니다.");
+    return { section: s.section, position: typeof s.position === "number" ? s.position : undefined, removeKey: s.removeKey, addKey: s.addKey, ...(s.addIndex !== undefined ? { addIndex: s.addIndex } : {}) } as PlanSwapInput;
   });
   return { kind: "ap_new_version_swap_plan", set: String(o.set ?? ""), sourceSetName: o.sourceSetName, sourceVersionNo: o.sourceVersionNo, swaps };
 }
@@ -44,6 +46,12 @@ export function resolveSwaps(inputs: PlanSwapInput[], slots: { section: string; 
   const problems: string[] = []; const swaps: (SwapSpec & { removeKey: string | null })[] = [];
   const setGroups = new Map<string, string>(); // `${section}|${removeKey}` → addKey
   for (const s of inputs) {
+    if (s.addIndex !== undefined) { // 재편 항목: 슬롯을 그대로 한 칸씩 교체(묶음 펼치기 없음). 묶음 무결성은 조합 검사·DB RPC 가 최종으로 본다.
+      const slot = slots.find((x) => x.section === s.section && x.position === s.position);
+      if (!slot) { problems.push(`슬롯 ${s.section} #${s.position} 이(가) 없습니다.`); continue; }
+      if (s.removeKey && slot.candidateKey !== s.removeKey) { problems.push(`${s.section} #${s.position} 의 현재 문항이 계획(${s.removeKey})과 다릅니다.`); continue; }
+      swaps.push({ section: slot.section, position: slot.position, addKey: s.addKey, addIndex: s.addIndex, removeKey: slot.candidateKey }); continue;
+    }
     let slot = s.position !== undefined ? slots.find((x) => x.section === s.section && x.position === s.position) : undefined;
     if (s.removeKey) {
       const byKey = slots.find((x) => x.section === s.section && x.candidateKey === s.removeKey);
