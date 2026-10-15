@@ -24,7 +24,7 @@ export async function probePdf(data: Uint8Array): Promise<PdfProbe> {
   if (!pdfjs.GlobalWorkerOptions.workerSrc) {
     const { createRequire } = await import("node:module");
     const req = createRequire(import.meta.url);
-    pdfjs.GlobalWorkerOptions.workerSrc = req.resolve("pdfjs-dist/legacy/build/pdf.worker.mjs");
+    pdfjs.GlobalWorkerOptions.workerSrc = req.resolve("pdfjs-dist/legacy/build/pdf.worker.min.mjs");
   }
   const task = pdfjs.getDocument({ data: new Uint8Array(data), disableFontFace: true, verbosity: 0 });
   try {
