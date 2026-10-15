@@ -4,9 +4,9 @@ import { LIB_FRQ, LIB_SETS, LIB_SINGLES, buildPsychOrder, solvePsychSets, toRepo
 import type { PsychItem } from "./psych-pool";
 
 let n = 0;
-const single = (e: { id: string; topic: string; skill: string }, copy: number): PsychItem => ({ key: `m${n++}`, kind: "mc", shared: false, members: [{ unit: Number(e.topic.split(".")[0]), skill: e.skill, topic: e.topic }], fam: `${e.id}|${e.topic}`, frqType: "", archetype: e.id, screen: true, batch: "t", renderType: "none", stimKind: "none", sig: `${e.id}|${copy}`, exam: 0 });
-const set = (e: (typeof LIB_SETS)[number]): PsychItem => ({ key: `s${n++}`, kind: "mc", shared: true, members: e.members.map((m, i) => ({ unit: m.unit, skill: m.skill, topic: `${m.unit}.1#${i}` })), fam: e.id, frqType: "", archetype: e.id, screen: true, batch: "t", renderType: "none", stimKind: "none", sig: e.id, exam: 0 });
-const frq = (e: (typeof LIB_FRQ)[number]): PsychItem => ({ key: `f${n++}`, kind: "frq", shared: false, members: [], fam: e.id, frqType: e.type, archetype: e.id, screen: true, batch: "t", renderType: "table", stimKind: "table", sig: "", exam: 0 });
+const single = (e: { id: string; topic: string; skill: string }, copy: number): PsychItem => ({ key: `m${n++}`, kind: "mc", shared: false, members: [{ unit: Number(e.topic.split(".")[0]), skill: e.skill, topic: e.topic }], fam: `${e.id}|${e.topic}`, frqType: "", archetype: e.id, screen: true, batch: "t", renderType: "none", stimKind: "none", sig: `${e.id}|${copy}`, exam: 0, keyUnit: Number(e.topic.split(".")[0]) });
+const set = (e: (typeof LIB_SETS)[number]): PsychItem => ({ key: `s${n++}`, kind: "mc", shared: true, members: e.members.map((m, i) => ({ unit: m.unit, skill: m.skill, topic: `${m.unit}.1#${i}` })), fam: e.id, frqType: "", archetype: e.id, screen: true, batch: "t", renderType: "none", stimKind: "none", sig: e.id, exam: 0, keyUnit: e.unit });
+const frq = (e: (typeof LIB_FRQ)[number]): PsychItem => ({ key: `f${n++}`, kind: "frq", shared: false, members: [], fam: e.id, frqType: e.type, archetype: e.id, screen: true, batch: "t", renderType: "table", stimKind: "table", sig: "", exam: 0, keyUnit: 0 });
 const stock = () => { n = 0; return [...LIB_SINGLES.flatMap((e) => [single(e, 0), single(e, 1)]), ...LIB_SETS.map(set), ...LIB_FRQ.map(frq)]; };
 
 describe("psych exact assignment (ILP + independent verifier)", () => {
@@ -23,6 +23,21 @@ describe("psych exact assignment (ILP + independent verifier)", () => {
     expect(toReportSet(out[0]).frqA).toHaveLength(2);
     expect(buildPsychOrder(out[0])).toHaveLength(75);
   }, 300000);
+  it("min exam_prep per exam and the no-transfer rule are enforced (psych-hard)", () => {
+    const st = stock().map((c, i) => (c.kind === "mc" && !c.shared && i % 2 === 0 ? { ...c, exam: 1 } : c));
+    const ex = (r: { singles: { exam?: number }[]; sets: { exam?: number }[] }) => [...r.singles, ...r.sets].reduce((n, c) => n + (c.exam ?? 0), 0);
+    const base = solvePsychSets(["PS1", "PS2"], st, { timeMs: 120000, preferExamPrep: true, examWeight: 0.5 });
+    expect(base.res.status).toBe("optimal"); expect(verifyPsychAssignment(base.out)).toEqual([]);
+    const lo = Math.min(...base.out.map(ex));
+    const strict = solvePsychSets(["PS1", "PS2"], st, { timeMs: 120000, preferExamPrep: true, examWeight: 0.5, minExamPrep: lo });
+    for (const r of strict.out) expect(ex(r)).toBeGreaterThanOrEqual(lo);
+    const infeasible = solvePsychSets(["PS1", "PS2"], st, { timeMs: 60000, minExamPrep: 76 });
+    expect(infeasible.res.x.length === 0 || infeasible.out.some((r) => r.virtual.length > 0 || ex(r) < 76)).toBe(true);
+    // no-transfer: PS1 may not take any item that the other exam currently has
+    const other = new Set(base.out[1].singles.map((c) => c.key));
+    const nt = solvePsychSets(["PS1", "PS2"], st, { timeMs: 120000, forbidSets: { PS1: other } });
+    for (const c of [...nt.out[0].singles, ...nt.out[0].sets]) expect(other.has(c.key)).toBe(false);
+  }, 400000);
   it("reports missing slots as virtual items when the stock has no AAQ", () => {
     const keep = stock().filter((c) => !(c.kind === "frq" && c.frqType === "aaq")).filter((c, i) => c.kind !== "mc" || i % 3 !== 0);
     const { res, out } = solvePsychSets(["PS1"], keep, { timeMs: 60000 });
