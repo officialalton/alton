@@ -288,10 +288,53 @@ class TestFrq(unittest.TestCase):
             if n.startswith("bif_q6_"):
                 top = max(range(3), key=lambda k: ms[k][0])
                 j = max((k for k in range(3) if k != top), key=lambda k: abs(ms[top][0] - ms[k][0]))
+                top, j = next((s["pct"] for s in __import__("bio_p0_l").L_Q6 if f"bif_q6_{s['key']}" == n and s.get("pct")), (top, j))  # 순서가 있는 행(나이 등)은 시나리오가 지정한 시작→끝 행
                 pct = (ms[j][0] - ms[top][0]) / abs(ms[top][0]) * 100
             else:
                 pct = (ms[-1][0] - ms[0][0]) / ms[0][0] * 100
             self.assertAlmostEqual(pct, ev["value"], delta=0.1)
+
+
+class TestSpreadRound(unittest.TestCase):
+    """2026-10-15 주제 분산 라운드(bio_p0_l FRQ 시나리오 14 + bio_p0_m MC 11): 구조·값 재계산."""
+
+    def test_new_frq_scenarios_build_for_many_seeds_and_keep_the_official_structure(self):
+        pts = {"bio_q1_results": 9, "bio_q2_graphing": 9, "bio_q3_investigation": 4, "bio_q4_conceptual": 4, "bio_q5_model": 4, "bio_q6_data": 4}
+        for n in R.BIO_STAGES["bio_spread_frq"]:
+            for seed in range(25):
+                p = R.BIO_FRQ[n][0](random.Random(seed))
+                self.assertEqual(p["total_points"], pts[p["template"]], n)
+                self.assertEqual(sum(pt["points"] for pt in p["parts"]), p["total_points"], n)
+                self.assertRegex(p["topic"], r"^[1-8]\.\d$")
+
+    def test_q2_rate_and_crossing_are_recomputed_from_the_table(self):
+        for n in ("bif_q2_receptorsat", "bif_q2_allelefreq"):
+            for seed in range(25):
+                p = R.BIO_FRQ[n][0](random.Random(seed))
+                xs = [float(r[0]) for r in p["stimulus"]["data"]["rows"]]
+                ys = [float(r[1]) for r in p["stimulus"]["data"]["rows"]]
+                rate = next(e for e in p["expected_values"] if e["quantity"] == "average rate of increase")
+                a, b = (xs.index(2.0), xs.index(8.0)) if n == "bif_q2_receptorsat" else (xs.index(2.0), xs.index(6.0))
+                self.assertAlmostEqual((ys[b] - ys[a]) / (xs[b] - xs[a]), rate["value"], delta=0.02)
+                second = p["expected_values"][1]
+                if n == "bif_q2_allelefreq":
+                    import numpy as np
+                    self.assertAlmostEqual(float(np.interp(50.0, ys, xs)), second["value"], delta=0.06)
+                else:
+                    self.assertEqual(second["value"], ys[-1])
+
+    def test_new_mc_banks_have_distinct_whys_and_a_unique_key(self):
+        for n in R.BIO_STAGES["bio_spread_mc"]:
+            for seed in range(40):
+                p = R.BIO[n][0](random.Random(seed))
+                whys = [o["why"] for i, o in enumerate(p["options"]) if i != p["key_index"]]
+                self.assertEqual(len(set(whys)), 3, n)
+                self.assertEqual(len({o["text"] for o in p["options"]}), 4, n)
+
+    def test_new_mc_skills_and_units_match_the_spread_targets(self):
+        for n in R.BIO_STAGES["bio_spread_mc"]:
+            p = R.BIO[n][0](random.Random(1))
+            self.assertIn(p["skill"], ("3.A", "3.B", "3.C", "3.D", "4.B"), n)
 
 
 if __name__ == "__main__":

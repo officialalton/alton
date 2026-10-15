@@ -1,0 +1,3990 @@
+[
+ {
+  "candidateKey": "ap_biology-m01-k0",
+  "cellId": "ap_biology-m01",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "8.4",
+  "unitCode": "8",
+  "skillPrimary": "3.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_sp_error_quadrat",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: identify the confound (time of day perfectly correlated with distance) and choose the standard control. No data, calculation or representation change. Distractors are clearly flawed (new confound, reversed confound, removes the independent variable). Short stem with clearly stated conditions. Suitable for foundational practice on experimental design, not full-mock difficulty.",
+  "payload": {
+   "archetype": "bi_sp_error_quadrat",
+   "topic": "8.4",
+   "skill": "3.D",
+   "calculator": "allowed",
+   "stem": "A student counts the snails in quadrats along a line from a pond to a dry field to test the hypothesis that the density of snails decreases with the distance from the pond. The student counts the quadrats near the pond in the morning and the quadrats far from the pond in the afternoon. Which revision would best allow the student to test the hypothesis?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Count the snails in the quadrats at all of the distances at the same time of day",
+     "why": "The time of day is then the same for all distances, so only the distance differs.",
+     "value": null
+    },
+    {
+     "text": "Use a larger quadrat only for the counts far from the pond",
+     "why": "Different quadrat sizes change the counts and add another variable.",
+     "value": null
+    },
+    {
+     "text": "Count the snails at the quadrats far from the pond in the morning and near the pond in the afternoon",
+     "why": "Switching the times keeps the time of day different for the two distances.",
+     "value": null
+    },
+    {
+     "text": "Count the snails only in the quadrats nearest to the pond",
+     "why": "Counting at one distance cannot show how the density changes with distance.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "A student counts the snails in quadrats along a line from a "
+   ],
+   "blueprint": {
+    "id": "bi_sp_error_quadrat",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "propose a revision that improves a field sampling procedure",
+    "topic": "8.4",
+    "skill": "3.D",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: propose a revision that improves a field sampling procedure",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Different quadrat sizes change the counts and add another variable."
+     },
+     {
+      "id": "m2",
+      "description": "Switching the times keeps the time of day different for the two distances."
+     },
+     {
+      "id": "m3",
+      "description": "Counting at one distance cannot show how the density changes with distance."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 8.4 and science practice 3.D",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9900,
+   "pack_id": "bi_sp_error_quadrat-s9900",
+   "explanation_en": "The correct answer is Count the snails in the quadrats at all of the distances at the same time of day. The time of day is then the same for all distances, so only the distance differs.\nUse a larger quadrat only for the counts far from the pond is incorrect: Different quadrat sizes change the counts and add another variable.\nCount the snails at the quadrats far from the pond in the morning and near the pond in the afternoon is incorrect: Switching the times keeps the time of day different for the two distances.\nCount the snails only in the quadrats nearest to the pond is incorrect: Counting at one distance cannot show how the density changes with distance."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_sp_error_quadrat",
+   "facts": [
+    "A student counts the snails in quadrats along a line from a "
+   ],
+   "seed": 9900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Evaluates a field sampling design and proposes a revision (3.D); density measurement context fits 8.4 adequately."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Same time of day for all distances is the unique best revision; the other options are clearly flawed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem states the design and the confound clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct flaw (added variable, confound merely reversed, a single distance) and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading, about 70 seconds, no arithmetic; typical of AP Biology experimental-design items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous experimental-design revision item with a unique key and distinct distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the confound (time of day perfectly correlated with distance) and choose the standard control. No data, calculation or representation change. Distractors are clearly flawed (new confound, reversed confound, removes the independent variable). Short stem with clearly stated conditions. Suitable for foundational practice on experimental design, not full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m01-k1",
+  "cellId": "ap_biology-m01",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "8.4",
+  "unitCode": "8",
+  "skillPrimary": "3.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_sp_error_quadrat",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: increasing the number of randomly placed quadrats reduces sampling error. No data table, no calculation, and short text. The distractors describe obvious bias or inconsistency (selective counting, discarding data, varying quadrat size). Students only need to recognize a sound sampling design, so this is below typical full-mock difficulty even though the skill is 3.D.",
+  "payload": {
+   "archetype": "bi_sp_error_quadrat",
+   "topic": "8.4",
+   "skill": "3.D",
+   "calculator": "allowed",
+   "stem": "A student estimates the number of clover plants in a large field by counting the plants in 5 randomly placed quadrats of 1 square meter. The counts in the quadrats range from 2 to 40 plants. Which change to the investigation would best reduce the effect of chance variation on the estimate of the density?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Count the clover only in the quadrats that have more than 20 plants",
+     "why": "Excluding quadrats biases the estimate.",
+     "value": null
+    },
+    {
+     "text": "Average the counts of the two quadrats with the fewest plants",
+     "why": "Using two selected quadrats does not represent the whole field.",
+     "value": null
+    },
+    {
+     "text": "Count the clover in many more randomly placed quadrats of the same size",
+     "why": "A larger random sample reduces the effect of chance variation on the mean.",
+     "value": null
+    },
+    {
+     "text": "Use quadrats of different sizes in each part of the field",
+     "why": "Different quadrat sizes make the counts harder to compare and add a variable.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "A student estimates the number of clover plants in a large f"
+   ],
+   "blueprint": {
+    "id": "bi_sp_error_quadrat",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "propose a revision that improves a field sampling procedure",
+    "topic": "8.4",
+    "skill": "3.D",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: propose a revision that improves a field sampling procedure",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Excluding quadrats biases the estimate."
+     },
+     {
+      "id": "m2",
+      "description": "Using two selected quadrats does not represent the whole field."
+     },
+     {
+      "id": "m3",
+      "description": "Different quadrat sizes make the counts harder to compare and add a variable."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 8.4 and science practice 3.D",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9902,
+   "pack_id": "bi_sp_error_quadrat-s9902",
+   "explanation_en": "The correct answer is Count the clover in many more randomly placed quadrats of the same size. A larger random sample reduces the effect of chance variation on the mean.\nCount the clover only in the quadrats that have more than 20 plants is incorrect: Excluding quadrats biases the estimate.\nAverage the counts of the two quadrats with the fewest plants is incorrect: Using two selected quadrats does not represent the whole field.\nUse quadrats of different sizes in each part of the field is incorrect: Different quadrat sizes make the counts harder to compare and add a variable."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_sp_error_quadrat",
+   "facts": [
+    "A student estimates the number of clover plants in a large f"
+   ],
+   "seed": 9902
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item asks the student to revise a quadrat sampling design to reduce chance variation in a density estimate. That is a proposal for improving an investigation (3.D), and it sits in the population density and sampling context of 8.4. The link to 8.4 is somewhat loose, since it concerns sampling method rather than density-dependent effects. It is still within Unit 8 and uses no later content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C, many more random quadrats of the same size, is the unique defensible answer. A is biased selection, B uses a non-representative subset, and D introduces a variable and inconsistent sampling. The independent solver chose C."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is self-contained. The conditions (5 random quadrats of 1 m², counts of 2 to 40) are stated clearly, and the wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: excluding data, relying on a non-representative subset, and varying quadrat size. The explanation addresses every wrong option. The option lengths are similar, so there is no giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 to 70 seconds with a short reading load and no arithmetic, which is typical of an AP MC item. The calculator is allowed but not needed, which is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, single-key MC item on improving a quadrat sampling design (3.D). The distractors are distinct and plausible, and the load is light. The topic link to 8.4 is somewhat loose but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: increasing the number of randomly placed quadrats reduces sampling error. No data table, no calculation, and short text. The distractors describe obvious bias or inconsistency (selective counting, discarding data, varying quadrat size). Students only need to recognize a sound sampling design, so this is below typical full-mock difficulty even though the skill is 3.D.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m01-k2",
+  "cellId": "ap_biology-m01",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "8.4",
+  "unitCode": "8",
+  "skillPrimary": "3.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_sp_error_quadrat",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: identify sampling bias (quadrats clustered near the path) and choose random placement with more replicates. No data, no calculation, short stem, and distractors are clearly flawed. It fits skill 3.D at an introductory level, so it suits basic learning rather than a full mock.",
+  "payload": {
+   "archetype": "bi_sp_error_quadrat",
+   "topic": "8.4",
+   "skill": "3.D",
+   "calculator": "allowed",
+   "stem": "A student estimates the density of dandelions in a large field by counting the dandelions in five square quadrats that are placed in the part of the field closest to the path. Which revision to the procedure would best improve the reliability of the estimate of the density in the whole field?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Count the dandelions in the part of the field where they are most common",
+     "why": "This would bias the estimate toward a higher density than the density of the whole field.",
+     "value": null
+    },
+    {
+     "text": "Use one smaller quadrat that is placed along the path",
+     "why": "One small quadrat placed in one location gives a less representative sample.",
+     "value": null
+    },
+    {
+     "text": "Count the dandelions in the same five quadrats a second time and use the larger count",
+     "why": "Recounting the same quadrats does not make the sample more representative.",
+     "value": null
+    },
+    {
+     "text": "Count the dandelions in a larger number of quadrats that are placed at random locations across the field",
+     "why": "Random placement of many quadrats makes the sample represent the whole field.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 70,
+   "facts": [
+    "A student estimates the density of dandelions in a large fie"
+   ],
+   "blueprint": {
+    "id": "bi_sp_error_quadrat",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "propose a revision that improves a field sampling procedure",
+    "topic": "8.4",
+    "skill": "3.D",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: propose a revision that improves a field sampling procedure",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "This would bias the estimate toward a higher density than the density of the whole field."
+     },
+     {
+      "id": "m2",
+      "description": "One small quadrat placed in one location gives a less representative sample."
+     },
+     {
+      "id": "m3",
+      "description": "Recounting the same quadrats does not make the sample more representative."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 8.4 and science practice 3.D",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9903,
+   "pack_id": "bi_sp_error_quadrat-s9903",
+   "explanation_en": "The correct answer is Count the dandelions in a larger number of quadrats that are placed at random locations across the field. Random placement of many quadrats makes the sample represent the whole field.\nCount the dandelions in the part of the field where they are most common is incorrect: This would bias the estimate toward a higher density than the density of the whole field.\nUse one smaller quadrat that is placed along the path is incorrect: One small quadrat placed in one location gives a less representative sample.\nCount the dandelions in the same five quadrats a second time and use the larger count is incorrect: Recounting the same quadrats does not make the sample more representative."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_sp_error_quadrat",
+   "facts": [
+    "A student estimates the density of dandelions in a large fie"
+   ],
+   "seed": 9903
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Quadrat sampling for density fits 8.4; proposing a revision to a flawed design is 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Random placement of more quadrats is the unique best revision; the other options increase bias, shrink the sample, or only recount."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem states all conditions clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no calculation, option lengths parallel."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound 3.D item on improving a quadrat sampling design. The key is unique, the distractors are distinct, and the load is appropriate for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify sampling bias (quadrats clustered near the path) and choose random placement with more replicates. No data, no calculation, short stem, and distractors are clearly flawed. It fits skill 3.D at an introductory level, so it suits basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m02-k0",
+  "cellId": "ap_biology-m02",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "3.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_sp_error_catalase",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step reasoning: recognize that replication tests whether a difference exceeds experimental error. No data to read, no calculation, no representation change. The distractors (room temperature, a different enzyme, a single trial at 100 C) are clearly weaker designs. This is a straightforward experimental-design check and falls below the depth and multi-step reasoning typical of full mock exam items.",
+  "payload": {
+   "archetype": "bi_sp_error_catalase",
+   "topic": "3.2",
+   "skill": "3.D",
+   "calculator": "allowed",
+   "stem": "In a catalase investigation the volume of oxygen collected at 60 degrees Celsius is lower than the volume collected at 37 degrees Celsius. A classmate claims the difference is only due to experimental error. Which additional data would best test this claim?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Repeated trials at both temperatures to see whether the difference is consistent",
+     "why": "Consistent differences across repeated trials indicate an effect and not random error.",
+     "value": null
+    },
+    {
+     "text": "A measurement of the room temperature in the laboratory on the day of the trials",
+     "why": "The room temperature does not test whether the difference between the two treatments is reliable.",
+     "value": null
+    },
+    {
+     "text": "One additional trial at 37 degrees Celsius that uses a different enzyme",
+     "why": "Changing the enzyme introduces a new variable.",
+     "value": null
+    },
+    {
+     "text": "A single additional trial at a much higher temperature, such as 100 degrees Celsius",
+     "why": "One trial at a new temperature does not test the difference between 37 and 60 degrees.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "In a catalase investigation the volume of oxygen collected a"
+   ],
+   "blueprint": {
+    "id": "bi_sp_error_catalase",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "identify sources of error and ways to reduce error in an enzyme investigation",
+    "topic": "3.2",
+    "skill": "3.D",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: identify sources of error and ways to reduce error in an enzyme investigation",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The room temperature does not test whether the difference between the two treatments is reliable."
+     },
+     {
+      "id": "m2",
+      "description": "Changing the enzyme introduces a new variable."
+     },
+     {
+      "id": "m3",
+      "description": "One trial at a new temperature does not test the difference between 37 and 60 degrees."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 3.2 and science practice 3.D",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9900,
+   "pack_id": "bi_sp_error_catalase-s9900",
+   "explanation_en": "The correct answer is Repeated trials at both temperatures to see whether the difference is consistent. Consistent differences across repeated trials indicate an effect and not random error.\nA measurement of the room temperature in the laboratory on the day of the trials is incorrect: The room temperature does not test whether the difference between the two treatments is reliable.\nOne additional trial at 37 degrees Celsius that uses a different enzyme is incorrect: Changing the enzyme introduces a new variable.\nA single additional trial at a much higher temperature, such as 100 degrees Celsius is incorrect: One trial at a new temperature does not test the difference between 37 and 60 degrees."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_sp_error_catalase",
+   "facts": [
+    "In a catalase investigation the volume of oxygen collected a"
+   ],
+   "seed": 9900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Environmental effect (temperature) on enzyme activity, with the demand to propose additional data or an investigation to test a claim of experimental error. This fits topic 3.2 and skill 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Replication at both temperatures is the unique defensible way to test whether the difference is real or random error. The other three options do not address the claim."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is self-contained and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct flaws: irrelevant measurement, a new confounding variable, and a single trial at a new temperature. The explanation addresses each wrong option. Option lengths are parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, about 70 seconds, no calculation, typical of AP Biology multiple choice."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound item: the key is unique, the distractors are distinct and plausible, and the load is appropriate for topic 3.2 and skill 3.D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step reasoning: recognize that replication tests whether a difference exceeds experimental error. No data to read, no calculation, no representation change. The distractors (room temperature, a different enzyme, a single trial at 100 C) are clearly weaker designs. This is a straightforward experimental-design check and falls below the depth and multi-step reasoning typical of full mock exam items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m02-k1",
+  "cellId": "ap_biology-m02",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "3.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_sp_error_catalase",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step experimental design revision: recognize that the substrate degraded and choose the fix that controls substrate concentration (fresh, covered H2O2). No data, no calculation, no representation change. Distractors (more enzyme, longer collection at one temperature, a single temperature) are plainly wrong because they either do not address the substrate problem or remove the variable being tested. Concept depth is shallow and the wording is clear, with no unfair difficulty sources.",
+  "payload": {
+   "archetype": "bi_sp_error_catalase",
+   "topic": "3.2",
+   "skill": "3.D",
+   "calculator": "allowed",
+   "stem": "In a catalase investigation, a student leaves the bottle of hydrogen peroxide uncovered on the bench for a day before using it for the trials at four temperatures. Hydrogen peroxide slowly breaks down into water and oxygen gas when it is left standing, so less hydrogen peroxide is present than the student assumed. Which revision to the procedure would best prevent this error in future trials?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Use a larger amount of catalase in each of the trials",
+     "why": "Changing the amount of enzyme adds a second variable and does not correct the lost substrate.",
+     "value": null
+    },
+    {
+     "text": "Collect the oxygen for a longer time only in the trials at the lowest temperature",
+     "why": "A longer time for some trials adds a second variable and does not fix the substrate.",
+     "value": null
+    },
+    {
+     "text": "Use hydrogen peroxide solution that is freshly prepared and kept covered until the trials",
+     "why": "Fresh covered solution has the concentration of substrate that the student intends to use.",
+     "value": null
+    },
+    {
+     "text": "Run all of the trials at the highest temperature in the study",
+     "why": "Running every trial at one temperature removes the independent variable.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "In a catalase investigation, a student leaves the bottle of "
+   ],
+   "blueprint": {
+    "id": "bi_sp_error_catalase",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "identify sources of error and ways to reduce error in an enzyme investigation",
+    "topic": "3.2",
+    "skill": "3.D",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: identify sources of error and ways to reduce error in an enzyme investigation",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Changing the amount of enzyme adds a second variable and does not correct the lost substrate."
+     },
+     {
+      "id": "m2",
+      "description": "A longer time for some trials adds a second variable and does not fix the substrate."
+     },
+     {
+      "id": "m3",
+      "description": "Running every trial at one temperature removes the independent variable."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 3.2 and science practice 3.D",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9902,
+   "pack_id": "bi_sp_error_catalase-s9902",
+   "explanation_en": "The correct answer is Use hydrogen peroxide solution that is freshly prepared and kept covered until the trials. Fresh covered solution has the concentration of substrate that the student intends to use.\nUse a larger amount of catalase in each of the trials is incorrect: Changing the amount of enzyme adds a second variable and does not correct the lost substrate.\nCollect the oxygen for a longer time only in the trials at the lowest temperature is incorrect: A longer time for some trials adds a second variable and does not fix the substrate.\nRun all of the trials at the highest temperature in the study is incorrect: Running every trial at one temperature removes the independent variable."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_sp_error_catalase",
+   "facts": [
+    "In a catalase investigation, a student leaves the bottle of "
+   ],
+   "seed": 9902
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes every criterion. The key (fresh, covered H2O2) is the only revision that addresses the lost substrate, and the solver agrees. Each distractor encodes a distinct flaw and its rationale is specific. The stem is complete and the load is typical for a 70-second item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item is a catalase investigation (topic 3.2) that asks the student to revise the procedure to fix an identified error, which fits the skill of proposing a change after evaluating the design."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only option C restores the intended substrate concentration. The other options either leave the lost substrate unaddressed or add a new variable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives all the conditions and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor has its own named flaw: enzyme amount as a second variable, unequal collection times as a second variable, and removal of the independent variable. The explanation covers each one. The correct option is only slightly longer than the others, not enough to be a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading and reasoning load fits about 70 seconds, with no arithmetic. The calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step experimental design revision: recognize that the substrate degraded and choose the fix that controls substrate concentration (fresh, covered H2O2). No data, no calculation, no representation change. Distractors (more enzyme, longer collection at one temperature, a single temperature) are plainly wrong because they either do not address the substrate problem or remove the variable being tested. Concept depth is shallow and the wording is clear, with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m02-k2",
+  "cellId": "ap_biology-m02",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "3.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_sp_error_catalase",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item asks which design change reduces random error: replicate trials and average them. This is one reasoning step with a concrete catalase scenario, no stimulus, and no calculation. The distractors are clearly flawed: varying enzyme amount confounds the test, cherry-picking trials is biased, and single trials at more temperatures do not address random error. The concept depth is shallow, with no data interpretation or representation changes. Skill 3.D is only lightly tested, because the proposed improvement is the standard replication answer. The item stays within the CED and is not hard for unfair reasons.",
+  "payload": {
+   "archetype": "bi_sp_error_catalase",
+   "topic": "3.2",
+   "skill": "3.D",
+   "calculator": "allowed",
+   "stem": "A student measures the volume of oxygen released when the enzyme catalase breaks down hydrogen peroxide at 10, 25, 37, and 60 degrees Celsius, with one trial at each temperature. Which change would best reduce the effect of random error on the conclusion about how temperature affects the rate?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Using a different amount of catalase at each temperature",
+     "why": "This adds a second changing variable and so adds error instead of reducing it.",
+     "value": null
+    },
+    {
+     "text": "Reporting only the trial with the highest rate at each temperature",
+     "why": "Selecting one trial hides the variation and introduces bias.",
+     "value": null
+    },
+    {
+     "text": "Adding more temperatures but running each only once",
+     "why": "More temperatures do not reduce the random error in each measurement.",
+     "value": null
+    },
+    {
+     "text": "Repeating each trial several times at each temperature and calculating the mean rate",
+     "why": "Repeated trials allow random variation to average out and show the typical rate at each temperature.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 70,
+   "facts": [
+    "A student measures the volume of oxygen released when the en"
+   ],
+   "blueprint": {
+    "id": "bi_sp_error_catalase",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "identify sources of error and ways to reduce error in an enzyme investigation",
+    "topic": "3.2",
+    "skill": "3.D",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: identify sources of error and ways to reduce error in an enzyme investigation",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "This adds a second changing variable and so adds error instead of reducing it."
+     },
+     {
+      "id": "m2",
+      "description": "Selecting one trial hides the variation and introduces bias."
+     },
+     {
+      "id": "m3",
+      "description": "More temperatures do not reduce the random error in each measurement."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 3.2 and science practice 3.D",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9903,
+   "pack_id": "bi_sp_error_catalase-s9903",
+   "explanation_en": "The correct answer is Repeating each trial several times at each temperature and calculating the mean rate. Repeated trials allow random variation to average out and show the typical rate at each temperature.\nUsing a different amount of catalase at each temperature is incorrect: This adds a second changing variable and so adds error instead of reducing it.\nReporting only the trial with the highest rate at each temperature is incorrect: Selecting one trial hides the variation and introduces bias.\nAdding more temperatures but running each only once is incorrect: More temperatures do not reduce the random error in each measurement."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_sp_error_catalase",
+   "facts": [
+    "A student measures the volume of oxygen released when the en"
+   ],
+   "seed": 9903
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short reading load, about 60 seconds, no arithmetic. This is typical of the AP exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean experimental-design item. The key is unique, the distractors reflect distinct misconceptions, and the item fits topic 3.2 and skill 3.D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks which design change reduces random error: replicate trials and average them. This is one reasoning step with a concrete catalase scenario, no stimulus, and no calculation. The distractors are clearly flawed: varying enzyme amount confounds the test, cherry-picking trials is biased, and single trials at more temperatures do not address random error. The concept depth is shallow, with no data interpretation or representation changes. Skill 3.D is only lightly tested, because the proposed improvement is the standard replication answer. The item stays within the CED and is not hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m03-k0",
+  "cellId": "ap_biology-m03",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "3.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_sp_hypothesis_flycross",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation; criterion_failed_exam_suitability; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: recognize that an Aa x Aa cross predicts a 3:1 phenotypic ratio and that a testable question must be answerable by counting offspring. Two distractors are non-testable or evolutionary-purpose questions, and one uses the 1:1 ratio expected from a test cross. There is no data, no representation change and no calculation, and the reading load is minimal.",
+  "payload": {
+   "archetype": "bi_sp_hypothesis_flycross",
+   "topic": "5.3",
+   "skill": "3.A",
+   "calculator": "allowed",
+   "stem": "A student wants to find out whether the gene for eye color in fruit flies, with red eyes dominant to brown eyes, is inherited in a simple Mendelian pattern. The student crosses two flies that are heterozygous and have red eyes and counts the eye color of the offspring. Which of the following is the best testable question for the investigation?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Do about three-fourths of the offspring have red eyes and about one-fourth have brown eyes?",
+     "why": "A cross of two heterozygotes is predicted to give a 3:1 ratio of dominant to recessive phenotypes.",
+     "value": null
+    },
+    {
+     "text": "Do about half of the offspring have red eyes and half have brown eyes?",
+     "why": "A 1:1 ratio is expected from a test cross and not from a cross of two heterozygotes.",
+     "value": null
+    },
+    {
+     "text": "Is red eye color more useful to fruit flies than brown eye color?",
+     "why": "Usefulness to the flies is not measured by counting offspring.",
+     "value": null
+    },
+    {
+     "text": "Why do fruit flies have red eyes in nature?",
+     "why": "This question asks about the reason for a trait and cannot be answered by counting the offspring.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 65,
+   "facts": [
+    "A student wants to find out whether the gene for eye color i"
+   ],
+   "blueprint": {
+    "id": "bi_sp_hypothesis_flycross",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "state a testable hypothesis or expected ratio for a genetic cross",
+    "topic": "5.3",
+    "skill": "3.A",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: state a testable hypothesis or expected ratio for a genetic cross",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "A 1:1 ratio is expected from a test cross and not from a cross of two heterozygotes."
+     },
+     {
+      "id": "m2",
+      "description": "Usefulness to the flies is not measured by counting offspring."
+     },
+     {
+      "id": "m3",
+      "description": "This question asks about the reason for a trait and cannot be answered by counting the offspring."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 5.3 and science practice 3",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9900,
+   "pack_id": "bi_sp_hypothesis_flycross-s9900",
+   "explanation_en": "The correct answer is Do about three-fourths of the offspring have red eyes and about one-fourth have brown eyes?. A cross of two heterozygotes is predicted to give a 3:1 ratio of dominant to recessive phenotypes.\nDo about half of the offspring have red eyes and half have brown eyes? is incorrect: A 1:1 ratio is expected from a test cross and not from a cross of two heterozygotes.\nIs red eye color more useful to fruit flies than brown eye color? is incorrect: Usefulness to the flies is not measured by counting offspring.\nWhy do fruit flies have red eyes in nature? is incorrect: This question asks about the reason for a trait and cannot be answered by counting the offspring."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_sp_hypothesis_flycross",
+   "facts": [
+    "A student wants to find out whether the gene for eye color i"
+   ],
+   "seed": 9900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.3 fits. Skill 3.A (identify a testable question) is addressed, though it is mostly a 3:1 ratio recall."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Options C and D are non-testable throwaways and are not realistic student misconceptions. Only B encodes a real misconception (test cross ratio). The option set is not parallel."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Low discrimination. Two options are trivially eliminated, and the item largely reduces to knowing that Aa x Aa gives 3:1. It is not a rigorous test of the skill of identifying a testable question."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope is acceptable. The distractors are weak: two options are non-testable throwaways, so the item does not discriminate and falls short of AP standards for skill 3.A."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize that an Aa x Aa cross predicts a 3:1 phenotypic ratio and that a testable question must be answerable by counting offspring. Two distractors are non-testable or evolutionary-purpose questions, and one uses the 1:1 ratio expected from a test cross. There is no data, no representation change and no calculation, and the reading load is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m03-k1",
+  "cellId": "ap_biology-m03",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "3.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_sp_hypothesis_flycross",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step recognition of a testable question tied to the dihybrid cross. Distractors are clearly non-testable (why/importance) or mismatched to the cross (1:1). Requires knowing the 9:3:3:1 expectation for independent assortment, but there is no data, calculation, or multi-step reasoning. Suitable for initial learning rather than full mock exams.",
+  "payload": {
+   "archetype": "bi_sp_hypothesis_flycross",
+   "topic": "5.3",
+   "skill": "3.A",
+   "calculator": "allowed",
+   "stem": "A student wants to find out whether two traits in pea plants, seed shape and seed color, are inherited independently. The student crosses plants that are heterozygous for both traits and counts the phenotypes of the offspring. Which of the following is the best testable question?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Why do pea plants have seeds that are round or wrinkled?",
+     "why": "This question asks for a reason and is not answered by counting offspring phenotypes.",
+     "value": null
+    },
+    {
+     "text": "Do the offspring of heterozygous parents have a 1:1 ratio of phenotypes?",
+     "why": "A 1:1 ratio is not expected from a cross of two double heterozygotes.",
+     "value": null
+    },
+    {
+     "text": "Do the phenotypes of the offspring appear in a 9:3:3:1 ratio?",
+     "why": "A 9:3:3:1 ratio is expected for two independently assorting genes in a cross of double heterozygotes.",
+     "value": null
+    },
+    {
+     "text": "Which of the two traits is more important to the pea plant?",
+     "why": "Importance to the plant cannot be tested by counting offspring.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 65,
+   "facts": [
+    "A student wants to find out whether two traits in pea plants"
+   ],
+   "blueprint": {
+    "id": "bi_sp_hypothesis_flycross",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "state a testable hypothesis or expected ratio for a genetic cross",
+    "topic": "5.3",
+    "skill": "3.A",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: state a testable hypothesis or expected ratio for a genetic cross",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "This question asks for a reason and is not answered by counting offspring phenotypes."
+     },
+     {
+      "id": "m2",
+      "description": "A 1:1 ratio is not expected from a cross of two double heterozygotes."
+     },
+     {
+      "id": "m3",
+      "description": "Importance to the plant cannot be tested by counting offspring."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 5.3 and science practice 3",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9902,
+   "pack_id": "bi_sp_hypothesis_flycross-s9902",
+   "explanation_en": "The correct answer is Do the phenotypes of the offspring appear in a 9:3:3:1 ratio?. A 9:3:3:1 ratio is expected for two independently assorting genes in a cross of double heterozygotes.\nWhy do pea plants have seeds that are round or wrinkled? is incorrect: This question asks for a reason and is not answered by counting offspring phenotypes.\nDo the offspring of heterozygous parents have a 1:1 ratio of phenotypes? is incorrect: A 1:1 ratio is not expected from a cross of two double heterozygotes.\nWhich of the two traits is more important to the pea plant? is incorrect: Importance to the plant cannot be tested by counting offspring."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_sp_hypothesis_flycross",
+   "facts": [
+    "A student wants to find out whether two traits in pea plants"
+   ],
+   "seed": 9902
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Targets 3.A (identify a testable question) in a Mendelian dihybrid context (5.3). Dominant demand is choosing the testable question tied to the independent assortment test."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The 9:3:3:1 question is the only one that tests independent assortment from counted phenotypes. The 1:1 option is also testable in principle but does not address the stated aim, and it is not the question that tests independence. Key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and every condition is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct flaws: a why/mechanism question, a wrong expected ratio, and an untestable value judgment. Each is explained. Option lengths are similar."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds with short options and no arithmetic. The calculator designation is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean 3.A item on a Mendelian dihybrid cross. The key is unique, the distractors are distinct and explained, and the item has no stimulus problems or scope issues."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recognition of a testable question tied to the dihybrid cross. Distractors are clearly non-testable (why/importance) or mismatched to the cross (1:1). Requires knowing the 9:3:3:1 expectation for independent assortment, but there is no data, calculation, or multi-step reasoning. Suitable for initial learning rather than full mock exams.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m03-k2",
+  "cellId": "ap_biology-m03",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "3.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_sp_hypothesis_flycross",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: recognize that a heterozygote x homozygous recessive testcross predicts a 1:1 phenotypic ratio, and that this is a testable, measurable prediction. Distractors are the 3:1 ratio (monohybrid cross misconception), all long wings, and an untestable-from-counts flight claim. No stimulus, minimal reading, and only a trivial Punnett square. This is straightforward Mendelian application, below typical full-mock complexity.",
+  "payload": {
+   "archetype": "bi_sp_hypothesis_flycross",
+   "topic": "5.3",
+   "skill": "3.A",
+   "calculator": "allowed",
+   "stem": "A student crosses fruit flies that are heterozygous for a gene for wing length (long wings are dominant) with flies that have short wings. The student counts the offspring. Which is the best testable hypothesis for the investigation?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The offspring will all have long wings.",
+     "why": "Half of the offspring inherit the recessive allele from the heterozygous parent and have short wings.",
+     "value": null
+    },
+    {
+     "text": "The offspring will have long wings and short wings in a 3:1 ratio.",
+     "why": "A 3:1 ratio is expected from a cross of two heterozygotes.",
+     "value": null
+    },
+    {
+     "text": "The long-winged flies will be better at flying than the short-winged flies.",
+     "why": "Flying ability is not measured by counting the offspring.",
+     "value": null
+    },
+    {
+     "text": "The offspring will have long wings and short wings in a 1:1 ratio.",
+     "why": "A test cross of a heterozygote and a homozygous recessive is predicted to give a 1:1 ratio.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 65,
+   "facts": [
+    "A student crosses fruit flies that are heterozygous for a ge"
+   ],
+   "blueprint": {
+    "id": "bi_sp_hypothesis_flycross",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "state a testable hypothesis or expected ratio for a genetic cross",
+    "topic": "5.3",
+    "skill": "3.A",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: state a testable hypothesis or expected ratio for a genetic cross",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Half of the offspring inherit the recessive allele from the heterozygous parent and have short wings."
+     },
+     {
+      "id": "m2",
+      "description": "A 3:1 ratio is expected from a cross of two heterozygotes."
+     },
+     {
+      "id": "m3",
+      "description": "Flying ability is not measured by counting the offspring."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 5.3 and science practice 3",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9903,
+   "pack_id": "bi_sp_hypothesis_flycross-s9903",
+   "explanation_en": "The correct answer is The offspring will have long wings and short wings in a 1:1 ratio.. A test cross of a heterozygote and a homozygous recessive is predicted to give a 1:1 ratio.\nThe offspring will all have long wings. is incorrect: Half of the offspring inherit the recessive allele from the heterozygous parent and have short wings.\nThe offspring will have long wings and short wings in a 3:1 ratio. is incorrect: A 3:1 ratio is expected from a cross of two heterozygotes.\nThe long-winged flies will be better at flying than the short-winged flies. is incorrect: Flying ability is not measured by counting the offspring."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_sp_hypothesis_flycross",
+   "facts": [
+    "A student crosses fruit flies that are heterozygous for a ge"
+   ],
+   "seed": 9903
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choosing a testable hypothesis for a testcross fits 3.A and topic 5.3. The skill demand is light, since it reduces to knowing that a testcross gives 1:1, but it is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A heterozygote crossed with a short-winged (homozygous recessive) fly gives a 1:1 ratio. Option C is not testable by counting offspring, and A and B are wrong predictions. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states all conditions: heterozygous parent, dominant long wings, short-winged (recessive) mate, and counting offspring."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The option 'will all have long wings' is a weak distractor because the stem says the parent is heterozygous. The rationale for option C is accurate, but it is a transparent distractor, since it is the only option that is not about offspring counts. The correct option is also the only one that is both testable and correct for a testcross. The rationales are short but specific to each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds and has low reading load, and no calculator is needed. The 'best testable hypothesis' format resembles AP Biology 3.A items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clear, with a unique key. It is easy and its distractors are somewhat transparent, but it is acceptable for 3.A on topic 5.3."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize that a heterozygote x homozygous recessive testcross predicts a 1:1 phenotypic ratio, and that this is a testable, measurable prediction. Distractors are the 3:1 ratio (monohybrid cross misconception), all long wings, and an untestable-from-counts flight claim. No stimulus, minimal reading, and only a trivial Punnett square. This is straightforward Mendelian application, below typical full-mock complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m04-k0",
+  "cellId": "ap_biology-m04",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "1.7",
+  "unitCode": "1",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_sp_design_protein_ph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must apply the concept of a negative control to a concrete protein denaturation experiment: the control should match the added volume and temperature but lack the pH variable. Distractors test rejecting a no-protein tube, a changed volume, and a different variable (heat). Requires experimental-design reasoning without data or calculation, which is typical AP skill 3.C at the easier end of exam-level items.",
+  "payload": {
+   "archetype": "bi_sp_design_protein_ph",
+   "topic": "1.7",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "A student adds equal volumes of solutions with pH values of 2, 4, 10, and 12 to samples of egg white at 25 degrees Celsius and measures the cloudiness of each sample after 10 minutes. The student wants to be sure that any cloudiness is caused by the pH of the solution and not by the act of adding liquid to the egg white. Which additional sample is the best control?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Egg white mixed with an equal volume of distilled water at 25 degrees Celsius",
+     "why": "This sample receives the same volume of liquid but has no change in pH.",
+     "value": null
+    },
+    {
+     "text": "A tube of distilled water with no egg white added",
+     "why": "A tube without egg white cannot show the effect of liquid added to egg white.",
+     "value": null
+    },
+    {
+     "text": "Egg white mixed with twice the volume of the solution with a pH of 2",
+     "why": "A different volume changes a second variable and is not a control.",
+     "value": null
+    },
+    {
+     "text": "Egg white that is heated to 60 degrees Celsius with no solution added",
+     "why": "Heating changes the temperature, which is a second variable.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 65,
+   "facts": [
+    "A student adds equal volumes of solutions with pH values of "
+   ],
+   "blueprint": {
+    "id": "bi_sp_design_protein_ph",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "identify variables and controls in a protein denaturation investigation",
+    "topic": "1.7",
+    "skill": "3.C",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: identify variables and controls in a protein denaturation investigation",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "A tube without egg white cannot show the effect of liquid added to egg white."
+     },
+     {
+      "id": "m2",
+      "description": "A different volume changes a second variable and is not a control."
+     },
+     {
+      "id": "m3",
+      "description": "Heating changes the temperature, which is a second variable."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 1.7 and science practice 3",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9900,
+   "pack_id": "bi_sp_design_protein_ph-s9900",
+   "explanation_en": "The correct answer is Egg white mixed with an equal volume of distilled water at 25 degrees Celsius. This sample receives the same volume of liquid but has no change in pH.\nA tube of distilled water with no egg white added is incorrect: A tube without egg white cannot show the effect of liquid added to egg white.\nEgg white mixed with twice the volume of the solution with a pH of 2 is incorrect: A different volume changes a second variable and is not a control.\nEgg white that is heated to 60 degrees Celsius with no solution added is incorrect: Heating changes the temperature, which is a second variable."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_sp_design_protein_ph",
+   "facts": [
+    "A student adds equal volumes of solutions with pH values of "
+   ],
+   "seed": 9900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying the control in a protein denaturation (pH) investigation fits topic 1.7 and skill 3.C. Dominant demand is experimental design."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Equal-volume distilled water at 25 C is the unique appropriate negative control. The other options change volume or temperature, or omit egg white."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives volumes, temperature and time. The wording is clear. Distilled water's near-neutral pH is a standard assumption."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (no protein in the tube, changed volume, changed temperature). The explanation addresses each one. The 'why' for option B is slightly terse but accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds of reading, no calculation, four parallel options. The answer is not given away by option length. This is typical of AP Biology experimental-design items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, single-skill control-identification question in a protein denaturation context. The key is unique, the distractors are distinct and plausible, and the load is appropriate. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must apply the concept of a negative control to a concrete protein denaturation experiment: the control should match the added volume and temperature but lack the pH variable. Distractors test rejecting a no-protein tube, a changed volume, and a different variable (heat). Requires experimental-design reasoning without data or calculation, which is typical AP skill 3.C at the easier end of exam-level items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m04-k1",
+  "cellId": "ap_biology-m04",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "1.7",
+  "unitCode": "1",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_sp_design_protein_ph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step identification of controlled variables in a simple pH and protein denaturation experiment. Correct answer (keep temperature, volume, and time constant) is a standard controlled-experiment principle. Distractors are clearly flawed (varying volume, holding the independent variable constant, varying time). There is no data, no calculation, and no representation change, and minimal reading. Concept depth is shallow, so it fits foundational learning rather than a full mock exam.",
+  "payload": {
+   "archetype": "bi_sp_design_protein_ph",
+   "topic": "1.7",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "A student adds equal volumes of solutions with pH values of 2, 4, 7, and 10 to samples of egg white and measures the cloudiness of each sample after 10 minutes. Which of the following should be done so that differences in cloudiness are due to pH?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Use a different volume of egg white for each pH",
+     "why": "Different volumes would add a second changing variable.",
+     "value": null
+    },
+    {
+     "text": "Keep the pH of all the samples the same",
+     "why": "The pH is the variable that is being tested and must differ among the samples.",
+     "value": null
+    },
+    {
+     "text": "Keep the temperature, the volume of egg white, and the time before measuring the same for all samples",
+     "why": "Holding these factors constant isolates the effect of pH on the protein.",
+     "value": null
+    },
+    {
+     "text": "Measure the cloudiness of the pH 2 sample after 10 minutes and the pH 10 sample after 30 minutes",
+     "why": "Different times would add a second changing variable.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 65,
+   "facts": [
+    "A student adds equal volumes of solutions with pH values of "
+   ],
+   "blueprint": {
+    "id": "bi_sp_design_protein_ph",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "identify variables and controls in a protein denaturation investigation",
+    "topic": "1.7",
+    "skill": "3.C",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: identify variables and controls in a protein denaturation investigation",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Different volumes would add a second changing variable."
+     },
+     {
+      "id": "m2",
+      "description": "The pH is the variable that is being tested and must differ among the samples."
+     },
+     {
+      "id": "m3",
+      "description": "Different times would add a second changing variable."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 1.7 and science practice 3",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9902,
+   "pack_id": "bi_sp_design_protein_ph-s9902",
+   "explanation_en": "The correct answer is Keep the temperature, the volume of egg white, and the time before measuring the same for all samples. Holding these factors constant isolates the effect of pH on the protein.\nUse a different volume of egg white for each pH is incorrect: Different volumes would add a second changing variable.\nKeep the pH of all the samples the same is incorrect: The pH is the variable that is being tested and must differ among the samples.\nMeasure the cloudiness of the pH 2 sample after 10 minutes and the pH 10 sample after 30 minutes is incorrect: Different times would add a second changing variable."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_sp_design_protein_ph",
+   "facts": [
+    "A student adds equal volumes of solutions with pH values of "
+   ],
+   "seed": 9902
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It tests identifying controlled variables in a protein denaturation (egg white, pH) investigation, which fits topic 1.7 and skill 3.C. Only option C is a valid design improvement; A and D add a second changing variable, and B removes the independent variable. The stem is complete and clear, and the item takes about 65 seconds, which is typical for an MC item. The correct option is somewhat longer than the others, but only by a few words, which is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item asks the student to identify the variables and controls in a protein denaturation investigation. This matches skill 3.C and topic 1.7 (protein structure and denaturation by pH)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only defensible answer. Options A and D each introduce a second changing variable, and B eliminates the independent variable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is self-contained. The wording is clear US English, and the conditions (equal volumes, 10 minutes, four pH values) are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific rationale: A and D add a second changing variable (volume or time), and B removes the tested variable. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 65 seconds, requires no calculation and has a low reading load. The \"calculator allowed\" designation is consistent with the other items in this subject."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of controlled variables in a simple pH and protein denaturation experiment. Correct answer (keep temperature, volume, and time constant) is a standard controlled-experiment principle. Distractors are clearly flawed (varying volume, holding the independent variable constant, varying time). There is no data, no calculation, and no representation change, and minimal reading. Concept depth is shallow, so it fits foundational learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_biology-m04-k2",
+  "cellId": "ap_biology-m04",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "1.7",
+  "unitCode": "1",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "bi_sp_design_protein_ph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "One-step identification of the independent variable in a short, clear scenario. Distractors are the dependent variable and two controlled variables. No data, calculation, or representation changes. The protein denaturation context is simple, and the difficulty is appropriate for foundational practice rather than full-mock level.",
+  "payload": {
+   "archetype": "bi_sp_design_protein_ph",
+   "topic": "1.7",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "A student adds equal volumes of solutions with pH values of 2, 4, 7, and 10 to samples of egg white at 25 degrees Celsius. After 10 minutes the student measures how cloudy each sample is, because denatured protein makes egg white cloudy. Which of the following is the independent variable?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The cloudiness of each sample after 10 minutes",
+     "why": "Cloudiness is the quantity that is measured, which is the dependent variable.",
+     "value": null
+    },
+    {
+     "text": "The temperature of the samples",
+     "why": "The temperature is the same for all samples, so it is a controlled variable.",
+     "value": null
+    },
+    {
+     "text": "The volume of solution added to each sample",
+     "why": "The volume is the same for all samples, so it is a controlled variable.",
+     "value": null
+    },
+    {
+     "text": "The pH of the solution added to each sample",
+     "why": "The independent variable is the factor that the student changes on purpose.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 65,
+   "facts": [
+    "A student adds equal volumes of solutions with pH values of "
+   ],
+   "blueprint": {
+    "id": "bi_sp_design_protein_ph",
+    "subject": "ap_biology",
+    "kind": "mc",
+    "concept": "identify variables and controls in a protein denaturation investigation",
+    "topic": "1.7",
+    "skill": "3.C",
+    "student_thinking": [
+     "Identify the biological principle or relationship that governs the situation: identify variables and controls in a protein denaturation investigation",
+     "Apply it to the information given and compare the result with the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or fact needed is given in the stem or the stimulus",
+      "evidence": "stem and stimulus"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Cloudiness is the quantity that is measured, which is the dependent variable."
+     },
+     {
+      "id": "m2",
+      "description": "The temperature is the same for all samples, so it is a controlled variable."
+     },
+     {
+      "id": "m3",
+      "description": "The volume is the same for all samples, so it is a controlled variable."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 1.7 and science practice 3",
+     "method": "independent computation / fixed fact bank"
+    },
+    "judgment_demand": "apply a biological concept to a specific case and reject plausible misconceptions",
+    "code_first": true
+   },
+   "seed": 9903,
+   "pack_id": "bi_sp_design_protein_ph-s9903",
+   "explanation_en": "The correct answer is The pH of the solution added to each sample. The independent variable is the factor that the student changes on purpose.\nThe cloudiness of each sample after 10 minutes is incorrect: Cloudiness is the quantity that is measured, which is the dependent variable.\nThe temperature of the samples is incorrect: The temperature is the same for all samples, so it is a controlled variable.\nThe volume of solution added to each sample is incorrect: The volume is the same for all samples, so it is a controlled variable."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bi_sp_design_protein_ph",
+   "facts": [
+    "A student adds equal volumes of solutions with pH values of "
+   ],
+   "seed": 9903
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying the independent variable in a protein denaturation (pH) investigation fits topic 1.7 and skill 3.C. The cloudiness measure ties to protein denaturation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The pH of the solution is the only factor the student deliberately varies, so it is uniquely the independent variable. Cloudiness is dependent. Temperature (25 C) and equal volumes are stated constant."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states all conditions: pH values of 2, 4, 7, 10; equal volumes; 25 C; 10 minutes. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (dependent variable, constant temperature, constant volume), and each is explained. The options are parallel in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short, takes about 60 seconds, and needs no calculation. It is typical of AP Biology experimental design items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous variable-identification question that fits topic 1.7 and skill 3.C. It passes all five criteria with no instant-reject conditions."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step identification of the independent variable in a short, clear scenario. Distractors are the dependent variable and two controlled variables. No data, calculation, or representation changes. The protein denaturation context is simple, and the difficulty is appropriate for foundational practice rather than full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_biology-f01-k0",
+  "cellId": "ap_biology-f01",
+  "apSubjectCode": "ap_biology",
+  "kind": "frq_bundle",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "3.C",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "bif_q3_flycross",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Four short parts: allele segregation in meiosis, naming a controlled variable with its purpose, writing a null hypothesis for a 1:1 test cross, and comparing a given chi-square value (2.25) to the critical value (3.84). The given chi-square value is consistent with the counts (expected 200/200). Reasoning is standard AP FRQ level with no heavy computation and no unclear wording. It targets experimental design skills (variables, controls, hypothesis testing) within Mendelian genetics.",
+  "payload": {
+   "archetype": "bif_q3_flycross",
+   "template": "bio_q3_investigation",
+   "topic": "5.3",
+   "extra_topics": [],
+   "skill": "3.C",
+   "representative_skill": "3.C",
+   "calculator": "allowed",
+   "title": "A test cross in fruit flies",
+   "stimulus": {
+    "kind": "text",
+    "description": "A student sets up several vials, and in each vial crosses a fruit fly that is heterozygous for a dominant allele for long wings with a fly that is homozygous recessive and has vestigial (short) wings. All of the vials are kept at the same temperature and given the same food. The gene is on an autosome. After the offspring emerge, the student counts a total of 400 offspring and records the number with long wings and the number with vestigial wings.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Describe how the two alleles of a gene separate during meiosis in a heterozygous fly.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.A"
+     ],
+     "model_answer": "The homologous chromosomes separate in meiosis I, so each gamete receives only one of the two alleles of the gene.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Gives a correct description of the biological concept or process",
+       "required_elements": [
+        "The homologous chromosomes separate during meiosis, so each gamete receives one allele of the gene"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "each gamete gets only one of the two alleles because the homologs are separated",
+        "segregation puts the two alleles into different gametes"
+       ],
+       "common_errors": [
+        "says each gamete receives both alleles",
+        "says the alleles are combined into one allele in the gamete"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.3"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Identify one factor that should be kept the same in all of the vials, and explain why it should be kept the same.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.C"
+     ],
+     "model_answer": "The temperature at which the larvae develop (or the food or the age of the parents) should be the same in all vials, so differences in the offspring are not caused by the environment.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Identifies an appropriate feature of the experimental design and gives the reason",
+       "required_elements": [
+        "Names a factor held constant and links it to reducing environmental effects on the phenotype"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the temperature of development should be the same so the phenotype is not changed by the environment",
+        "the food supplied should be the same so that wing size is not affected by nutrition"
+       ],
+       "common_errors": [
+        "names the genotype of the parents as the factor to keep the same, with no reason",
+        "names a factor without connecting it to the comparison of offspring"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.3"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "State a null hypothesis for a chi-square test of the offspring counts.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "The observed numbers of long-winged and vestigial-winged offspring do not differ from the 1:1 ratio expected from the test cross, other than by chance.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "States an appropriate null hypothesis",
+       "required_elements": [
+        "States that there is no difference between the observed offspring counts and the expected 1:1 ratio"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "any difference from a 1:1 ratio is due to chance alone",
+        "the data fit the expected 1:1 ratio of long to vestigial offspring"
+       ],
+       "common_errors": [
+        "states a prediction that the ratio will be 3:1",
+        "states that the observed counts will be very different from the expected counts"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.3"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The student calculates a chi-square value of 2.25 for the observed counts of 215 long-winged and 185 vestigial-winged offspring. Using the critical value of 3.84 (df = 1, p = 0.05), state whether the null hypothesis can be rejected, and justify your answer.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "5.C"
+     ],
+     "model_answer": "The chi-square value of 2.25 is less than the critical value of 3.84, so the null hypothesis cannot be rejected; the difference from the 1:1 ratio can be explained by chance.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Justifies the prediction or result with biological reasoning",
+       "required_elements": [
+        "The value 2.25 is less than 3.84, so the null hypothesis is not rejected and the difference from 1:1 is due to chance"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the calculated value is below the critical value, so the data are consistent with the expected ratio",
+        "fails to reject the null hypothesis because 2.25 does not exceed 3.84"
+       ],
+       "common_errors": [
+        "concludes that the null hypothesis is rejected even though 2.25 is below 3.84",
+        "compares the value with the wrong critical value and gives no reason"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.3"
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 10,
+   "facts": [
+    "scenario=flycross"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "bif_q3_flycross",
+    "subject": "ap_biology",
+    "kind": "frq_bundle",
+    "concept": "Scientific investigation: A test cross in fruit flies",
+    "topic": "5.3",
+    "skill": "3.C",
+    "student_thinking": [
+     "Describe the biological concept behind the investigation",
+     "Identify variables or controls",
+     "State a null hypothesis or prediction",
+     "Justify the prediction"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "The investigation describes one manipulated variable with a measured response",
+      "evidence": "the scenario names the treatments and what is measured"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "a fixed scenario with rubric rows derived from the design (variable, control, null hypothesis, mechanism)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A"
+      ],
+      "topics": [
+       "5.3"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The homologous chromosomes separate in meiosis I, so each gamete receives only one of the two alleles of the gene."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Gives a correct description of the biological concept or process",
+        "elements": [
+         "The homologous chromosomes separate during meiosis, so each gamete receives one allele of the gene"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.C"
+      ],
+      "topics": [
+       "5.3"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The temperature at which the larvae develop (or the food or the age of the parents) should be the same in all vials, so differences in the offspring are not caused by the environment."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Identifies an appropriate feature of the experimental design and gives the reason",
+        "elements": [
+         "Names a factor held constant and links it to reducing environmental effects on the phenotype"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "5.3"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The observed numbers of long-winged and vestigial-winged offspring do not differ from the 1:1 ratio expected from the test cross, other than by chance."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "States an appropriate null hypothesis",
+        "elements": [
+         "States that there is no difference between the observed offspring counts and the expected 1:1 ratio"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "5.C"
+      ],
+      "topics": [
+       "5.3"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The chi-square value of 2.25 is less than the critical value of 3.84, so the null hypothesis cannot be rejected; the difference from the 1:1 ratio can be explained by chance."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Justifies the prediction or result with biological reasoning",
+        "elements": [
+         "The value 2.25 is less than 3.84, so the null hypothesis is not rejected and the difference from 1:1 is due to chance"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": "design, predict, and justify within one investigation",
+    "code_first": true
+   },
+   "seed": 9900,
+   "pack_id": "bif_q3_flycross-s9900"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bif_q3_flycross",
+   "facts": [
+    "scenario=flycross"
+   ],
+   "seed": 9900
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ with four 1-point parts that follows the Q3 structure (describe, identify a controlled variable, null hypothesis, justify). The chi-square value of 2.25 and the critical value of 3.84 are consistent with the counts. The rubrics list alternative answers. Part B is somewhat weak because the stem already states that temperature and food are constant, but it is still acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle as a whole requires Mendelian segregation and test-cross reasoning (topic 5.3). The part skills match the official Q3 purposes."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All four keys are correct and unique. The rubric rows are consistent and list alternative accepted answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clear. All numbers used appear in the stem or in the part prompt."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; the common errors are listed for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading and writing load is light and typical of a short FRQ. The calculator is not needed because the chi-square value is given."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts: allele segregation in meiosis, naming a controlled variable with its purpose, writing a null hypothesis for a 1:1 test cross, and comparing a given chi-square value (2.25) to the critical value (3.84). The given chi-square value is consistent with the counts (expected 200/200). Reasoning is standard AP FRQ level with no heavy computation and no unclear wording. It targets experimental design skills (variables, controls, hypothesis testing) within Mendelian genetics.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "candidateKey": "ap_biology-f02-k0",
+  "cellId": "ap_biology-f02",
+  "apSubjectCode": "ap_biology",
+  "kind": "frq_bundle",
+  "keywordCode": "5.1",
+  "unitCode": "5",
+  "skillPrimary": "4.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "bif_q6_agemeiosis",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Four-part FRQ on a small 3-row table. A: describe the increasing trend with values. B: one percent-change calculation with clean numbers, (28.5-2.0)/2.0 x 100 = 1325%. C: compare mean ± 2SE ranges (25.12-31.88 vs 8.30-10.10 and 1.80-2.20), which do not overlap, so the claim is supported. D: explain nondisjunction producing an egg with an abnormal chromosome number. The levers are all allowed (table reading, one formula-sheet calculation, 2SE comparison, concept explanation tied to the scenario). Reading is light and arithmetic is short, so any difficulty comes from the multi-skill demand typical of a full-mock FRQ rather than from unfair sources.",
+  "payload": {
+   "archetype": "bif_q6_agemeiosis",
+   "template": "bio_q6_data",
+   "topic": "5.1",
+   "extra_topics": [],
+   "skill": "4.B",
+   "representative_skill": "4.B",
+   "calculator": "allowed",
+   "title": "Data analysis: percent of eggs with an abnormal number of chromosomes",
+   "stimulus": {
+    "kind": "table",
+    "description": "The table shows the mean percent of eggs with an abnormal number of chromosomes ± 2SE in samples from female mice of three ages; n = 10 samples for each age.",
+    "data": {
+     "columns": [
+      "Age of the mice",
+      "Mean percent of eggs with an abnormal number of chromosomes (percent of eggs) ± 2SE"
+     ],
+     "rows": [
+      [
+       "3 months",
+       "2.0 ± 0.20"
+      ],
+      [
+       "12 months",
+       "9.2 ± 0.90"
+      ],
+      [
+       "18 months",
+       "28.5 ± 3.38"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Describe the pattern shown by the data in the table, using values from the table to support your description.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.B"
+     ],
+     "model_answer": "The mean percent of eggs with an abnormal number of chromosomes increases across the levels: 2.0, 9.2, 28.5; it is greatest at 18 months.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Describes the pattern and supports it with values from the table",
+       "required_elements": [
+        "Describes how the mean percent of eggs with an abnormal number of chromosomes changes across the levels and names the level with the greatest mean using the table values"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "goes up across the levels",
+        "rises from the first to the last level"
+       ],
+       "common_errors": [
+        "describes a pattern that the data do not show",
+        "describes the pattern without values from the table"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.1"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the percent change in the mean percent of eggs with an abnormal number of chromosomes from 3 months to 18 months. Show your work.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.A"
+     ],
+     "model_answer": "((28.5 - 2.0) / 2.0) x 100 = 1325.0%.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Gives the correct percent change with the formula applied (answer)",
+       "required_elements": [
+        "1325.0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the wrong values from the table or an incorrect formula"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±13.2",
+       "units_row": false,
+       "kind": "numeric",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.1"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "A student claims that the mean percent of eggs with an abnormal number of chromosomes at 18 months is greater than the mean at each of the other two levels. Using the ±2SE ranges in the table, evaluate whether the data support the claim.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "5.D",
+      "5.B"
+     ],
+     "model_answer": "The ±2SE ranges are 18 months: 25.12 to 31.88; 3 months: 1.80 to 2.20; 12 months: 8.30 to 10.10. The range at 18 months does not overlap the range at either of the other levels, so the data support the claim for both comparisons.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Uses the ±2SE ranges of both comparisons to evaluate the claim",
+       "required_elements": [
+        "The ±2SE range at 18 months does not overlap the range at either of the other two levels, so the data support the claim"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the error ranges at the greatest level are separated from both other levels, so the claim is supported",
+        "compares the intervals of the greatest level with those of both other levels and concludes the claim is supported"
+       ],
+       "common_errors": [
+        "compares the greatest level with only one other level",
+        "compares only the means",
+        "concludes that the claim is not supported even though the ranges do not overlap"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.1"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Explain how an error in meiosis such as nondisjunction can produce an egg with an abnormal number of chromosomes.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "6.D"
+     ],
+     "model_answer": "In nondisjunction a pair of homologous chromosomes or a pair of sister chromatids fails to separate, so one gamete receives an extra chromosome and another gamete is missing one.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Connects the results to a larger biological principle with an explanation",
+       "required_elements": [
+        "Homologous chromosomes or sister chromatids fail to separate, so one gamete receives an extra chromosome and another receives too few"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "a pair of chromosomes stays together and moves to the same pole, giving an abnormal number in the gametes",
+        "improper separation in meiosis I or II changes the chromosome number of the gametes"
+       ],
+       "common_errors": [
+        "says nondisjunction happens when DNA is replicated twice before meiosis",
+        "says nondisjunction changes the sequence of the genes on the chromosome"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.1"
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 10,
+   "facts": [
+    "means=[2.0, 9.2, 28.5]",
+    "se=[0.1, 0.45, 1.69]",
+    "pct=1325.0000",
+    "levels=['3 months', '12 months', '18 months']"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "percent change",
+     "value": 1325,
+     "unit": "%",
+     "tolerance": 13.25
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "bif_q6_agemeiosis",
+    "subject": "ap_biology",
+    "kind": "frq_bundle",
+    "concept": "Analyze a table of means with ±2SE: percent of eggs with an abnormal number of chromosomes",
+    "topic": "5.1",
+    "skill": "4.B",
+    "student_thinking": [
+     "Describe the pattern",
+     "Calculate a percent change",
+     "Evaluate a claim with ±2SE ranges",
+     "Relate the result to a biological principle"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Means with ±2SE for the same number of replicates at each level",
+      "evidence": "the table gives mean ± 2SE and n"
+     }
+    ],
+    "material": {
+     "type": "experiment_table",
+     "must_include": [
+      "levels",
+      "mean ± 2SE",
+      "n"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "percent change and ±2SE overlap recomputed from the displayed values",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.B"
+      ],
+      "topics": [
+       "5.1"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The mean percent of eggs with an abnormal number of chromosomes increases across the levels: 2.0, 9.2, 28.5; it is greatest at 18 months."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Describes the pattern and supports it with values from the table",
+        "elements": [
+         "Describes how the mean percent of eggs with an abnormal number of chromosomes changes across the levels and names the level with the greatest mean using the table values"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.A"
+      ],
+      "topics": [
+       "5.1"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "((28.5 - 2.0) / 2.0) x 100 = 1325.0%."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Gives the correct percent change with the formula applied (answer)",
+        "elements": [
+         "1325.0"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "5.D",
+       "5.B"
+      ],
+      "topics": [
+       "5.1"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The ±2SE ranges are 18 months: 25.12 to 31.88; 3 months: 1.80 to 2.20; 12 months: 8.30 to 10.10. The range at 18 months does not overlap the range at either of the other levels, so the data support the claim for both comparisons."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Uses the ±2SE ranges of both comparisons to evaluate the claim",
+        "elements": [
+         "The ±2SE range at 18 months does not overlap the range at either of the other two levels, so the data support the claim"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "6.D"
+      ],
+      "topics": [
+       "5.1"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "In nondisjunction a pair of homologous chromosomes or a pair of sister chromatids fails to separate, so one gamete receives an extra chromosome and another gamete is missing one."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Connects the results to a larger biological principle with an explanation",
+        "elements": [
+         "Homologous chromosomes or sister chromatids fail to separate, so one gamete receives an extra chromosome and another receives too few"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": "describe, calculate, evaluate with ±2SE, and explain",
+    "code_first": true,
+    "experiment": {
+     "fictional": true,
+     "design": "experimental",
+     "independent_variables": [
+      "Age of the mice"
+     ],
+     "dependent_variable": "percent of eggs with an abnormal number of chromosomes",
+     "controls": [],
+     "control_not_applicable": "levels of one condition are compared and every other condition is held constant",
+     "replicates_per_group": 10,
+     "measurement": {
+      "variable": "percent of eggs with an abnormal number of chromosomes",
+      "unit": "percent of eggs"
+     },
+     "claims": [
+      {
+       "text": "the mean percent of eggs with an abnormal number of chromosomes at 18 months is greater than the mean at each of the other two levels",
+       "scope": "causation"
+      }
+     ],
+     "ced_topics_used": [
+      "5.1"
+     ]
+    }
+   },
+   "seed": 9900,
+   "pack_id": "bif_q6_agemeiosis-s9900"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bif_q6_agemeiosis",
+   "facts": [
+    "means=[2.0, 9.2, 28.5]",
+    "se=[0.1, 0.45, 1.69]",
+    "pct=1325.0000",
+    "levels=['3 months', '12 months', '18 months']"
+   ],
+   "seed": 9900
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short Q6-style FRQ with four 1-point parts: describe, calculate, evaluate with ±2SE, and explain nondisjunction. Keys are unique and correct. The table is complete (n, units, mean ± 2SE). Minor nit: Part A's rubric says to use values, but requires_numbers is false.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ on a small 3-row table. A: describe the increasing trend with values. B: one percent-change calculation with clean numbers, (28.5-2.0)/2.0 x 100 = 1325%. C: compare mean ± 2SE ranges (25.12-31.88 vs 8.30-10.10 and 1.80-2.20), which do not overlap, so the claim is supported. D: explain nondisjunction producing an egg with an abnormal chromosome number. The levers are all allowed (table reading, one formula-sheet calculation, 2SE comparison, concept explanation tied to the scenario). Reading is light and arithmetic is short, so any difficulty comes from the multi-skill demand typical of a full-mock FRQ rather than from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_biology-f02-k1",
+  "cellId": "ap_biology-f02",
+  "apSubjectCode": "ap_biology",
+  "kind": "frq_bundle",
+  "keywordCode": "5.1",
+  "unitCode": "5",
+  "skillPrimary": "4.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "bif_q6_agemeiosis",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Four-part short FRQ on a small 3-row table. A: describe the trend with values. B: one percent-change calculation with clean numbers (1260%). C: compare mean ± 2SE ranges (25.12-29.28 vs 8.3-9.9 and 1.8-2.2; no overlap, so the claim is supported). D: explain nondisjunction, which the prompt names. All levers are within scope (table reading, one formula-sheet calculation, 2SE comparison). Arithmetic is short, wording is unambiguous, and reading load is low. This matches the standard AP exam-level FRQ format.",
+  "payload": {
+   "archetype": "bif_q6_agemeiosis",
+   "template": "bio_q6_data",
+   "topic": "5.1",
+   "extra_topics": [],
+   "skill": "4.B",
+   "representative_skill": "4.B",
+   "calculator": "allowed",
+   "title": "Data analysis: percent of eggs with an abnormal number of chromosomes",
+   "stimulus": {
+    "kind": "table",
+    "description": "The table shows the mean percent of eggs with an abnormal number of chromosomes ± 2SE in samples from female mice of three ages; n = 10 samples for each age.",
+    "data": {
+     "columns": [
+      "Age of the mice",
+      "Mean percent of eggs with an abnormal number of chromosomes (percent of eggs) ± 2SE"
+     ],
+     "rows": [
+      [
+       "3 months",
+       "2.0 ± 0.20"
+      ],
+      [
+       "12 months",
+       "9.1 ± 0.80"
+      ],
+      [
+       "18 months",
+       "27.2 ± 2.08"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Describe the pattern shown by the data in the table, using values from the table to support your description.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.B"
+     ],
+     "model_answer": "The mean percent of eggs with an abnormal number of chromosomes increases across the levels: 2.0, 9.1, 27.2; it is greatest at 18 months.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Describes the pattern and supports it with values from the table",
+       "required_elements": [
+        "Describes how the mean percent of eggs with an abnormal number of chromosomes changes across the levels and names the level with the greatest mean using the table values"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "goes up across the levels",
+        "rises from the first to the last level"
+       ],
+       "common_errors": [
+        "describes a pattern that the data do not show",
+        "describes the pattern without values from the table"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.1"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the percent change in the mean percent of eggs with an abnormal number of chromosomes from 3 months to 18 months. Show your work.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.A"
+     ],
+     "model_answer": "((27.2 - 2.0) / 2.0) x 100 = 1260.0%.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Gives the correct percent change with the formula applied (answer)",
+       "required_elements": [
+        "1260.0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the wrong values from the table or an incorrect formula"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±12.6",
+       "units_row": false,
+       "kind": "numeric",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.1"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "A student claims that the mean percent of eggs with an abnormal number of chromosomes at 18 months is greater than the mean at each of the other two levels. Using the ±2SE ranges in the table, evaluate whether the data support the claim.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "5.D",
+      "5.B"
+     ],
+     "model_answer": "The ±2SE ranges are 18 months: 25.12 to 29.28; 3 months: 1.80 to 2.20; 12 months: 8.30 to 9.90. The range at 18 months does not overlap the range at either of the other levels, so the data support the claim for both comparisons.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Uses the ±2SE ranges of both comparisons to evaluate the claim",
+       "required_elements": [
+        "The ±2SE range at 18 months does not overlap the range at either of the other two levels, so the data support the claim"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the error ranges at the greatest level are separated from both other levels, so the claim is supported",
+        "compares the intervals of the greatest level with those of both other levels and concludes the claim is supported"
+       ],
+       "common_errors": [
+        "compares the greatest level with only one other level",
+        "compares only the means",
+        "concludes that the claim is not supported even though the ranges do not overlap"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.1"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Explain how an error in meiosis such as nondisjunction can produce an egg with an abnormal number of chromosomes.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "6.D"
+     ],
+     "model_answer": "In nondisjunction a pair of homologous chromosomes or a pair of sister chromatids fails to separate, so one gamete receives an extra chromosome and another gamete is missing one.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Connects the results to a larger biological principle with an explanation",
+       "required_elements": [
+        "Homologous chromosomes or sister chromatids fail to separate, so one gamete receives an extra chromosome and another receives too few"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "a pair of chromosomes stays together and moves to the same pole, giving an abnormal number in the gametes",
+        "improper separation in meiosis I or II changes the chromosome number of the gametes"
+       ],
+       "common_errors": [
+        "says nondisjunction happens when DNA is replicated twice before meiosis",
+        "says nondisjunction changes the sequence of the genes on the chromosome"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.1"
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 10,
+   "facts": [
+    "means=[2.0, 9.1, 27.2]",
+    "se=[0.1, 0.4, 1.04]",
+    "pct=1260.0000",
+    "levels=['3 months', '12 months', '18 months']"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "percent change",
+     "value": 1260,
+     "unit": "%",
+     "tolerance": 12.6
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "bif_q6_agemeiosis",
+    "subject": "ap_biology",
+    "kind": "frq_bundle",
+    "concept": "Analyze a table of means with ±2SE: percent of eggs with an abnormal number of chromosomes",
+    "topic": "5.1",
+    "skill": "4.B",
+    "student_thinking": [
+     "Describe the pattern",
+     "Calculate a percent change",
+     "Evaluate a claim with ±2SE ranges",
+     "Relate the result to a biological principle"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Means with ±2SE for the same number of replicates at each level",
+      "evidence": "the table gives mean ± 2SE and n"
+     }
+    ],
+    "material": {
+     "type": "experiment_table",
+     "must_include": [
+      "levels",
+      "mean ± 2SE",
+      "n"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "percent change and ±2SE overlap recomputed from the displayed values",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.B"
+      ],
+      "topics": [
+       "5.1"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The mean percent of eggs with an abnormal number of chromosomes increases across the levels: 2.0, 9.1, 27.2; it is greatest at 18 months."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Describes the pattern and supports it with values from the table",
+        "elements": [
+         "Describes how the mean percent of eggs with an abnormal number of chromosomes changes across the levels and names the level with the greatest mean using the table values"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.A"
+      ],
+      "topics": [
+       "5.1"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "((27.2 - 2.0) / 2.0) x 100 = 1260.0%."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Gives the correct percent change with the formula applied (answer)",
+        "elements": [
+         "1260.0"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "5.D",
+       "5.B"
+      ],
+      "topics": [
+       "5.1"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The ±2SE ranges are 18 months: 25.12 to 29.28; 3 months: 1.80 to 2.20; 12 months: 8.30 to 9.90. The range at 18 months does not overlap the range at either of the other levels, so the data support the claim for both comparisons."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Uses the ±2SE ranges of both comparisons to evaluate the claim",
+        "elements": [
+         "The ±2SE range at 18 months does not overlap the range at either of the other two levels, so the data support the claim"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "6.D"
+      ],
+      "topics": [
+       "5.1"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "In nondisjunction a pair of homologous chromosomes or a pair of sister chromatids fails to separate, so one gamete receives an extra chromosome and another gamete is missing one."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Connects the results to a larger biological principle with an explanation",
+        "elements": [
+         "Homologous chromosomes or sister chromatids fail to separate, so one gamete receives an extra chromosome and another receives too few"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": "describe, calculate, evaluate with ±2SE, and explain",
+    "code_first": true,
+    "experiment": {
+     "fictional": true,
+     "design": "experimental",
+     "independent_variables": [
+      "Age of the mice"
+     ],
+     "dependent_variable": "percent of eggs with an abnormal number of chromosomes",
+     "controls": [],
+     "control_not_applicable": "levels of one condition are compared and every other condition is held constant",
+     "replicates_per_group": 10,
+     "measurement": {
+      "variable": "percent of eggs with an abnormal number of chromosomes",
+      "unit": "percent of eggs"
+     },
+     "claims": [
+      {
+       "text": "the mean percent of eggs with an abnormal number of chromosomes at 18 months is greater than the mean at each of the other two levels",
+       "scope": "causation"
+      }
+     ],
+     "ced_topics_used": [
+      "5.1"
+     ]
+    }
+   },
+   "seed": 9901,
+   "pack_id": "bif_q6_agemeiosis-s9901"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bif_q6_agemeiosis",
+   "facts": [
+    "means=[2.0, 9.1, 27.2]",
+    "se=[0.1, 0.4, 1.04]",
+    "pct=1260.0000",
+    "levels=['3 months', '12 months', '18 months']"
+   ],
+   "seed": 9901
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a valid Q6-style short FRQ with four 1-point parts on age-related meiotic errors. The table is complete, the keys are unique and correct, and the task load is light. Only minor labeling inconsistencies in the rubric metadata (requires_numbers on part A, causation scope on the claim).",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.1 is required by part D and fits the data context. The mixed skills across parts match the official Q6 structure."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The percent change (1260%) and the non-overlap conclusion are unique and defensible. Part A's description is accepted whenever it states the increasing trend with table values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives the mean ± 2SE, n and the units, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The rubric lists plausible common errors for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and typical of a short FRQ. One simple calculation is allowed with a calculator, and the designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part short FRQ on a small 3-row table. A: describe the trend with values. B: one percent-change calculation with clean numbers (1260%). C: compare mean ± 2SE ranges (25.12-29.28 vs 8.3-9.9 and 1.8-2.2; no overlap, so the claim is supported). D: explain nondisjunction, which the prompt names. All levers are within scope (table reading, one formula-sheet calculation, 2SE comparison). Arithmetic is short, wording is unambiguous, and reading load is low. This matches the standard AP exam-level FRQ format.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_biology-f03-k0",
+  "cellId": "ap_biology-f03",
+  "apSubjectCode": "ap_biology",
+  "kind": "frq_bundle",
+  "keywordCode": "7.2",
+  "unitCode": "7",
+  "skillPrimary": "4.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "bif_q6_moth",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Four-part item on a small 3-row table. A: describe pattern with values (skill 4.B). B: one percent-change calculation with short numbers, about -56.9%. C: compare mean ± 2SE ranges (62.18-74.82 vs 29.38-35.82 and 26.02-32.98; no overlap), so the claim is supported. D: explain natural selection using a heritable trait, differential survival and reproduction, and camouflage against predation. All difficulty comes from allowed levers: reading a table, one formula calculation, error-range comparison, and applying the governing concept. Wording is clear, arithmetic is short, and the context is brief. This is appropriate for a full mock exam rather than basic learning, and it is not beyond the AP scope.",
+  "payload": {
+   "archetype": "bif_q6_moth",
+   "template": "bio_q6_data",
+   "topic": "7.2",
+   "extra_topics": [],
+   "skill": "4.B",
+   "representative_skill": "4.B",
+   "calculator": "allowed",
+   "title": "Data analysis: percent of moths that survived",
+   "stimulus": {
+    "kind": "table",
+    "description": "The table shows the mean percent of moths that survived for three days ± 2SE after release onto tree trunks; n = 8 trunks for each group. Birds that hunt by sight feed on the moths, and the color of the moths is a heritable trait.",
+    "data": {
+     "columns": [
+      "Moths and tree bark",
+      "Mean percent of moths that survived (percent of moths) ± 2SE"
+     ],
+     "rows": [
+      [
+       "Dark moths on dark bark",
+       "68.5 ± 6.32"
+      ],
+      [
+       "Light moths on dark bark",
+       "32.6 ± 3.22"
+      ],
+      [
+       "Dark moths on light bark",
+       "29.5 ± 3.48"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Describe the pattern shown by the data in the table, using values from the table to support your description.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.B"
+     ],
+     "model_answer": "The mean percent of moths that survived is greatest for Dark moths on dark bark (68.5) and much lower for the other two groups (32.6 and 29.5).",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Describes the pattern and supports it with values from the table",
+       "required_elements": [
+        "Names the group with the greatest mean percent of moths that survived and describes how the other two groups compare, using the table values"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the first group named has the highest mean and the other two groups are much lower, citing values",
+        "one group stands out with the greatest mean while the other two groups have similar lower means"
+       ],
+       "common_errors": [
+        "describes a pattern that the data do not show",
+        "describes the pattern without values from the table"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "7.2"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the percent change in the mean percent of moths that survived from Dark moths on dark bark to Dark moths on light bark. Show your work.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.A"
+     ],
+     "model_answer": "((29.5 - 68.5) / 68.5) x 100 = -56.9%.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Gives the correct percent change with the formula applied (answer)",
+       "required_elements": [
+        "-56.9"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the wrong values from the table or an incorrect formula"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.6",
+       "units_row": false,
+       "kind": "numeric",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "7.2"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "A student claims that the mean percent of moths that survived at Dark moths on dark bark is greater than the mean at each of the other two levels. Using the ±2SE ranges in the table, evaluate whether the data support the claim.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "5.D",
+      "5.B"
+     ],
+     "model_answer": "The ±2SE ranges are Dark moths on dark bark: 62.18 to 74.82; Light moths on dark bark: 29.38 to 35.82; Dark moths on light bark: 26.02 to 32.98. The range at Dark moths on dark bark does not overlap the range at either of the other levels, so the data support the claim for both comparisons.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Uses the ±2SE ranges of both comparisons to evaluate the claim",
+       "required_elements": [
+        "The ±2SE range at Dark moths on dark bark does not overlap the range at either of the other two levels, so the data support the claim"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the error ranges at the greatest level are separated from both other levels, so the claim is supported",
+        "compares the intervals of the greatest level with those of both other levels and concludes the claim is supported"
+       ],
+       "common_errors": [
+        "compares the greatest level with only one other level",
+        "compares only the means",
+        "concludes that the claim is not supported even though the ranges do not overlap"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "7.2"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Explain how the results illustrate natural selection acting on the color of the moths.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "6.D"
+     ],
+     "model_answer": "Moths whose color matches the bark are less visible to birds, so they survive and reproduce more, and the allele for that color becomes more common in the population.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Connects the results to a larger biological principle with an explanation",
+       "required_elements": [
+        "Moths matching the bark are eaten less, so they survive and reproduce more and the allele for that color becomes more common"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "predation by birds selects for the camouflaged color, which leaves more offspring",
+        "the better matched variant has higher survival and reproduction, which changes allele frequencies"
+       ],
+       "common_errors": [
+        "says the moths change their color to match the bark",
+        "says the birds cause the mutation for dark color"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "7.2"
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 10,
+   "facts": [
+    "means=[68.5, 32.6, 29.5]",
+    "se=[3.16, 1.61, 1.74]",
+    "pct=-56.9343",
+    "levels=['Dark moths on dark bark', 'Light moths on dark bark', 'Dark moths on light bark']"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "percent change",
+     "value": -56.934306569343065,
+     "unit": "%",
+     "tolerance": 0.5693430656934306
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "bif_q6_moth",
+    "subject": "ap_biology",
+    "kind": "frq_bundle",
+    "concept": "Analyze a table of means with ±2SE: percent of moths that survived",
+    "topic": "7.2",
+    "skill": "4.B",
+    "student_thinking": [
+     "Describe the pattern",
+     "Calculate a percent change",
+     "Evaluate a claim with ±2SE ranges",
+     "Relate the result to a biological principle"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Means with ±2SE for the same number of replicates at each level",
+      "evidence": "the table gives mean ± 2SE and n"
+     }
+    ],
+    "material": {
+     "type": "experiment_table",
+     "must_include": [
+      "levels",
+      "mean ± 2SE",
+      "n"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "percent change and ±2SE overlap recomputed from the displayed values",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.B"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The mean percent of moths that survived is greatest for Dark moths on dark bark (68.5) and much lower for the other two groups (32.6 and 29.5)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Describes the pattern and supports it with values from the table",
+        "elements": [
+         "Names the group with the greatest mean percent of moths that survived and describes how the other two groups compare, using the table values"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.A"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "((29.5 - 68.5) / 68.5) x 100 = -56.9%."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Gives the correct percent change with the formula applied (answer)",
+        "elements": [
+         "-56.9"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "5.D",
+       "5.B"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The ±2SE ranges are Dark moths on dark bark: 62.18 to 74.82; Light moths on dark bark: 29.38 to 35.82; Dark moths on light bark: 26.02 to 32.98. The range at Dark moths on dark bark does not overlap the range at either of the other levels, so the data support the claim for both comparisons."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Uses the ±2SE ranges of both comparisons to evaluate the claim",
+        "elements": [
+         "The ±2SE range at Dark moths on dark bark does not overlap the range at either of the other two levels, so the data support the claim"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "6.D"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Moths whose color matches the bark are less visible to birds, so they survive and reproduce more, and the allele for that color becomes more common in the population."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Connects the results to a larger biological principle with an explanation",
+        "elements": [
+         "Moths matching the bark are eaten less, so they survive and reproduce more and the allele for that color becomes more common"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": "describe, calculate, evaluate with ±2SE, and explain",
+    "code_first": true,
+    "experiment": {
+     "fictional": true,
+     "design": "experimental",
+     "independent_variables": [
+      "Moths and tree bark"
+     ],
+     "dependent_variable": "percent of moths that survived",
+     "controls": [],
+     "control_not_applicable": "levels of one condition are compared and every other condition is held constant",
+     "replicates_per_group": 8,
+     "measurement": {
+      "variable": "percent of moths that survived",
+      "unit": "percent of moths"
+     },
+     "claims": [
+      {
+       "text": "the mean percent of moths that survived at Dark moths on dark bark is greater than the mean at each of the other two levels",
+       "scope": "causation"
+      }
+     ],
+     "ced_topics_used": [
+      "7.2"
+     ]
+    }
+   },
+   "seed": 9900,
+   "pack_id": "bif_q6_moth-s9900"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bif_q6_moth",
+   "facts": [
+    "means=[68.5, 32.6, 29.5]",
+    "se=[3.16, 1.61, 1.74]",
+    "pct=-56.9343",
+    "levels=['Dark moths on dark bark', 'Light moths on dark bark', 'Dark moths on light bark']"
+   ],
+   "seed": 9900
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ (four 1-point parts) on Q6 Analyze Data lines, with natural selection in the moth scenario. Keys are unique and verified, the rubric rows are consistent with listed alternatives, the data are complete, and the load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A is 4.B description and part B is a calculation, both legitimate for a short FRQ. Parts C and D require the natural selection concept in the moth context."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The ±2SE ranges for the dark-on-dark group do not overlap those of the other two groups, so the claim is supported. The percent change of -56.9% is correct and has a tolerance. The rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has columns, rows, units, and n stated in the description. Every number the parts use appears in the stimulus. The wording in part C (\"levels\") is slightly loose but not ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response. The common errors listed are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload is light for four 1-point parts, and the calculator use is minimal and consistent with the designation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part item on a small 3-row table. A: describe pattern with values (skill 4.B). B: one percent-change calculation with short numbers, about -56.9%. C: compare mean ± 2SE ranges (62.18-74.82 vs 29.38-35.82 and 26.02-32.98; no overlap), so the claim is supported. D: explain natural selection using a heritable trait, differential survival and reproduction, and camouflage against predation. All difficulty comes from allowed levers: reading a table, one formula calculation, error-range comparison, and applying the governing concept. Wording is clear, arithmetic is short, and the context is brief. This is appropriate for a full mock exam rather than basic learning, and it is not beyond the AP scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "candidateKey": "ap_biology-f03-k1",
+  "cellId": "ap_biology-f03",
+  "apSubjectCode": "ap_biology",
+  "kind": "frq_bundle",
+  "keywordCode": "7.2",
+  "unitCode": "7",
+  "skillPrimary": "4.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "bif_q6_moth",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Four 1-point parts on a small 3-row table, with a clear scope fit to Unit 7.2 and skill 4.B. Part A is a describe-the-pattern task using table values. Part B is a single percent-change calculation, (28.2-68.3)/68.3, with rounded inputs and a result of about -58.7 percent. Part C compares mean ± 2SE ranges (62.6-74.0 vs 29.48-35.12 and 26.04-30.36), which do not overlap, so the claim is supported. Part D explains natural selection, linking heritable color variation, differential predation by sight-hunting birds based on camouflage, and differential survival and reproduction. The item does not require out-of-scope knowledge, and the stimulus is short and unambiguous. The reasoning is moderate and fits a full-mock FRQ: not purely introductory, but with no advanced extension demands.",
+  "payload": {
+   "archetype": "bif_q6_moth",
+   "template": "bio_q6_data",
+   "topic": "7.2",
+   "extra_topics": [],
+   "skill": "4.B",
+   "representative_skill": "4.B",
+   "calculator": "allowed",
+   "title": "Data analysis: percent of moths that survived",
+   "stimulus": {
+    "kind": "table",
+    "description": "The table shows the mean percent of moths that survived for three days ± 2SE after release onto tree trunks; n = 8 trunks for each group. Birds that hunt by sight feed on the moths, and the color of the moths is a heritable trait.",
+    "data": {
+     "columns": [
+      "Moths and tree bark",
+      "Mean percent of moths that survived (percent of moths) ± 2SE"
+     ],
+     "rows": [
+      [
+       "Dark moths on dark bark",
+       "68.3 ± 5.70"
+      ],
+      [
+       "Light moths on dark bark",
+       "32.3 ± 2.82"
+      ],
+      [
+       "Dark moths on light bark",
+       "28.2 ± 2.16"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Describe the pattern shown by the data in the table, using values from the table to support your description.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.B"
+     ],
+     "model_answer": "The mean percent of moths that survived is greatest for Dark moths on dark bark (68.3) and much lower for the other two groups (32.3 and 28.2).",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Describes the pattern and supports it with values from the table",
+       "required_elements": [
+        "Names the group with the greatest mean percent of moths that survived and describes how the other two groups compare, using the table values"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the first group named has the highest mean and the other two groups are much lower, citing values",
+        "one group stands out with the greatest mean while the other two groups have similar lower means"
+       ],
+       "common_errors": [
+        "describes a pattern that the data do not show",
+        "describes the pattern without values from the table"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "7.2"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the percent change in the mean percent of moths that survived from Dark moths on dark bark to Dark moths on light bark. Show your work.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.A"
+     ],
+     "model_answer": "((28.2 - 68.3) / 68.3) x 100 = -58.7%.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Gives the correct percent change with the formula applied (answer)",
+       "required_elements": [
+        "-58.7"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the wrong values from the table or an incorrect formula"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.6",
+       "units_row": false,
+       "kind": "numeric",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "7.2"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "A student claims that the mean percent of moths that survived at Dark moths on dark bark is greater than the mean at each of the other two levels. Using the ±2SE ranges in the table, evaluate whether the data support the claim.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "5.D",
+      "5.B"
+     ],
+     "model_answer": "The ±2SE ranges are Dark moths on dark bark: 62.60 to 74.00; Light moths on dark bark: 29.48 to 35.12; Dark moths on light bark: 26.04 to 30.36. The range at Dark moths on dark bark does not overlap the range at either of the other levels, so the data support the claim for both comparisons.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Uses the ±2SE ranges of both comparisons to evaluate the claim",
+       "required_elements": [
+        "The ±2SE range at Dark moths on dark bark does not overlap the range at either of the other two levels, so the data support the claim"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the error ranges at the greatest level are separated from both other levels, so the claim is supported",
+        "compares the intervals of the greatest level with those of both other levels and concludes the claim is supported"
+       ],
+       "common_errors": [
+        "compares the greatest level with only one other level",
+        "compares only the means",
+        "concludes that the claim is not supported even though the ranges do not overlap"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "7.2"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Explain how the results illustrate natural selection acting on the color of the moths.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "6.D"
+     ],
+     "model_answer": "Moths whose color matches the bark are less visible to birds, so they survive and reproduce more, and the allele for that color becomes more common in the population.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Connects the results to a larger biological principle with an explanation",
+       "required_elements": [
+        "Moths matching the bark are eaten less, so they survive and reproduce more and the allele for that color becomes more common"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "predation by birds selects for the camouflaged color, which leaves more offspring",
+        "the better matched variant has higher survival and reproduction, which changes allele frequencies"
+       ],
+       "common_errors": [
+        "says the moths change their color to match the bark",
+        "says the birds cause the mutation for dark color"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "7.2"
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 10,
+   "facts": [
+    "means=[68.3, 32.3, 28.2]",
+    "se=[2.85, 1.41, 1.08]",
+    "pct=-58.7116",
+    "levels=['Dark moths on dark bark', 'Light moths on dark bark', 'Dark moths on light bark']"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "percent change",
+     "value": -58.71156661786237,
+     "unit": "%",
+     "tolerance": 0.5871156661786237
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "bif_q6_moth",
+    "subject": "ap_biology",
+    "kind": "frq_bundle",
+    "concept": "Analyze a table of means with ±2SE: percent of moths that survived",
+    "topic": "7.2",
+    "skill": "4.B",
+    "student_thinking": [
+     "Describe the pattern",
+     "Calculate a percent change",
+     "Evaluate a claim with ±2SE ranges",
+     "Relate the result to a biological principle"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Means with ±2SE for the same number of replicates at each level",
+      "evidence": "the table gives mean ± 2SE and n"
+     }
+    ],
+    "material": {
+     "type": "experiment_table",
+     "must_include": [
+      "levels",
+      "mean ± 2SE",
+      "n"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "percent change and ±2SE overlap recomputed from the displayed values",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.B"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The mean percent of moths that survived is greatest for Dark moths on dark bark (68.3) and much lower for the other two groups (32.3 and 28.2)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Describes the pattern and supports it with values from the table",
+        "elements": [
+         "Names the group with the greatest mean percent of moths that survived and describes how the other two groups compare, using the table values"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.A"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "((28.2 - 68.3) / 68.3) x 100 = -58.7%."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Gives the correct percent change with the formula applied (answer)",
+        "elements": [
+         "-58.7"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "5.D",
+       "5.B"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The ±2SE ranges are Dark moths on dark bark: 62.60 to 74.00; Light moths on dark bark: 29.48 to 35.12; Dark moths on light bark: 26.04 to 30.36. The range at Dark moths on dark bark does not overlap the range at either of the other levels, so the data support the claim for both comparisons."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Uses the ±2SE ranges of both comparisons to evaluate the claim",
+        "elements": [
+         "The ±2SE range at Dark moths on dark bark does not overlap the range at either of the other two levels, so the data support the claim"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "6.D"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Moths whose color matches the bark are less visible to birds, so they survive and reproduce more, and the allele for that color becomes more common in the population."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Connects the results to a larger biological principle with an explanation",
+        "elements": [
+         "Moths matching the bark are eaten less, so they survive and reproduce more and the allele for that color becomes more common"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": "describe, calculate, evaluate with ±2SE, and explain",
+    "code_first": true,
+    "experiment": {
+     "fictional": true,
+     "design": "experimental",
+     "independent_variables": [
+      "Moths and tree bark"
+     ],
+     "dependent_variable": "percent of moths that survived",
+     "controls": [],
+     "control_not_applicable": "levels of one condition are compared and every other condition is held constant",
+     "replicates_per_group": 8,
+     "measurement": {
+      "variable": "percent of moths that survived",
+      "unit": "percent of moths"
+     },
+     "claims": [
+      {
+       "text": "the mean percent of moths that survived at Dark moths on dark bark is greater than the mean at each of the other two levels",
+       "scope": "causation"
+      }
+     ],
+     "ced_topics_used": [
+      "7.2"
+     ]
+    }
+   },
+   "seed": 9901,
+   "pack_id": "bif_q6_moth-s9901"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bif_q6_moth",
+   "facts": [
+    "means=[68.3, 32.3, 28.2]",
+    "se=[2.85, 1.41, 1.08]",
+    "pct=-58.7116",
+    "levels=['Dark moths on dark bark', 'Light moths on dark bark', 'Dark moths on light bark']"
+   ],
+   "seed": 9901
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ with four 1-point parts (describe, calculate, evaluate with ±2SE, relate to principle) on moth survival and natural selection. Keys are unique and verified: percent change is -58.7, and the greatest group's ±2SE range does not overlap either other range. Stimulus is complete with n and the heritability statement. Acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A assesses 4.B. Part D requires the 7.2 concept. The bundle as a whole fits topic 7.2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and consistent with the table. Rubric alt_solutions cover equivalent wordings."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table includes mean ± 2SE, n, and the context. Wording is clear. The generic \"levels\" wording in part C is minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are specific for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light reading and a single-step calculation. Matches the short-FRQ Q6 structure."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four 1-point parts on a small 3-row table, with a clear scope fit to Unit 7.2 and skill 4.B. Part A is a describe-the-pattern task using table values. Part B is a single percent-change calculation, (28.2-68.3)/68.3, with rounded inputs and a result of about -58.7 percent. Part C compares mean ± 2SE ranges (62.6-74.0 vs 29.48-35.12 and 26.04-30.36), which do not overlap, so the claim is supported. Part D explains natural selection, linking heritable color variation, differential predation by sight-hunting birds based on camouflage, and differential survival and reproduction. The item does not require out-of-scope knowledge, and the stimulus is short and unambiguous. The reasoning is moderate and fits a full-mock FRQ: not purely introductory, but with no advanced extension demands.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

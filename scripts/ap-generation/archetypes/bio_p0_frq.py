@@ -232,6 +232,32 @@ def _q2(rng, sc):
         c_rows = [R("C1", "Gives the correct average growth rate with units (answer)", None, None, None, "numeric", num=f"{rate:.1f}", tol=f"±{max(0.2, abs(rate) * 0.01):.1f}", units=True),
                   R("C2", "Estimates the carrying capacity from the plateau of the graph (value)", None, None, None, "numeric", num=f"{ys[-1]:g}", tol=f"±{max(10, 0.05 * ys[-1]):.0f}")]
         ev = [_ev("C", "average growth rate", rate, max(0.2, abs(rate) * 0.01), "mice per week"), _ev("C", "carrying capacity", ys[-1], max(10, 0.05 * ys[-1]), "mice")]
+    elif sc.get("calc") in ("rate_plateau", "rate_threshold"):
+        # 2026-10-15 주제 분산 시나리오(bio_p0_l.py): 두 x 값 사이 평균 변화율 + (포화값 또는 기준값을 넘는 x 의 선형 보간) — 값은 표에서 코드가 다시 계산한다.
+        a, b = xs.index(float(sc["ia"])), xs.index(float(sc["ib"]))
+        rate = (ys[b] - ys[a]) / (xs[b] - xs[a])
+        if rate <= 0 or any(ys[i + 1] < ys[i] for i in range(len(ys) - 1)):
+            raise ValueError("shape")
+        agree(rate, float((np.interp(xs[b], xs, ys) - np.interp(xs[a], xs, ys)) / (xs[b] - xs[a])), 1e-9, "rate")
+        ru = sc["rate_unit"]
+        if sc["calc"] == "rate_plateau":
+            if abs(ys[-1] - ys[-2]) > 0.05 * ys[-1]:
+                raise ValueError("shape")
+            est, est_tol = ys[-1], max(sc.get("plateau_tol_min", 2), 0.05 * ys[-1])
+            c2_crit = f"Estimates the maximum {sc['yl'].lower()} from the plateau of the graph (value)"
+            c_ans = f"(i) rate = ({ys[b]:g} - {ys[a]:g}) / ({xs[b]:g} - {xs[a]:g}) = {rate:.2f} {ru}. (ii) The graph levels off at about {est:g} {sc['yunit']}, which estimates the maximum."
+            ev = [_ev("C", "average rate of increase", rate, max(0.02, abs(rate) * 0.01), ru), _ev("C", "plateau value", est, est_tol, sc["yunit"])]
+        else:
+            thr = float(sc["threshold"])
+            j = next(i for i in range(len(ys) - 1) if ys[i] < thr <= ys[i + 1])
+            est = xs[j] + (thr - ys[j]) * (xs[j + 1] - xs[j]) / (ys[j + 1] - ys[j])
+            agree(est, float(np.interp(thr, ys, xs)), 1e-6, "crossing")
+            est = round(est, 1); est_tol = sc["threshold_tol"]
+            c2_crit = f"Estimates from the graph the {sc['xl'].split(' (')[0].lower()} at which the value first exceeds {thr:g} (value)"
+            c_ans = f"(i) rate = ({ys[b]:g} - {ys[a]:g}) / ({xs[b]:g} - {xs[a]:g}) = {rate:.2f} {ru}. (ii) The plotted line crosses {thr:g} at about {est:.1f} (between {xs[j]:g} and {xs[j + 1]:g})."
+            ev = [_ev("C", "average rate of increase", rate, max(0.02, abs(rate) * 0.01), ru), _ev("C", "crossing point", est, est_tol, "")]
+        c_rows = [R("C1", "Gives the correct average rate of increase with units (answer)", None, None, None, "numeric", num=f"{rate:.2f}", tol=f"±{max(0.02, abs(rate) * 0.01):.2f}", units=True),
+                  R("C2", c2_crit, None, None, None, "numeric", num=f"{est:g}", tol=f"±{est_tol:g}")]
     else:
         slope = (ys[1] - ys[0]) / (xs[1] - xs[0])
         if ys[-1] != ys[-2] or slope <= 0:
@@ -539,17 +565,19 @@ def _q6(rng, sc):
     top = int(np.argmax(means)); others = [i for i in range(3) if i != top]
     if any(_overlap(means, se, top, j) for j in others):
         raise ValueError("expected_separated_from_both")
-    bi, bj = top, max(others, key=lambda j: abs(means[top] - means[j]))
+    bi, bj = sc.get("pct", (top, max(others, key=lambda j: abs(means[top] - means[j]))))  # pct=(시작 행, 끝 행): 시간·나이처럼 순서가 있는 행은 시간 순서로 계산한다
     pct = (means[bj] - means[bi]) / abs(means[bi]) * 100
     agree(pct, 100 * (means[bj] - means[bi]) / abs(means[bi]), 1e-9, "pct")
     stim = _table(sc["intro"].format(n=n), [sc["cond"], f"Mean {sc['dv']} ({sc['unit']}) ± 2SE"], [[L[i], f"{means[i]:.1f} ± {2 * se[i]:.2f}"] for i in range(3)])
     trend = "peaks" if (means[1] > max(means[0], means[2])) else ("decreases" if means[0] > means[1] > means[2] else ("increases" if means[0] < means[1] < means[2] else "mixed"))
+    if sc.get("categorical"):
+        trend = "categorical"  # 순서가 없는 범주(예: 색·서식지 조합): 추세가 아니라 가장 큰 집단과 나머지의 차이로 기술한다
     rng_ = lambda i: f"{L[i]}: {means[i] - 2 * se[i]:.2f} to {means[i] + 2 * se[i]:.2f}"  # noqa: E731
     claim = f"the mean {sc['dv']} at {L[top]} is greater than the mean at each of the other two levels"
-    desc_alts = {"peaks": ["the values rise to the middle level then fall", "highest at the middle level"], "decreases": ["goes down across the levels", "falls from the first to the last level"], "increases": ["goes up across the levels", "rises from the first to the last level"], "mixed": ["changes across the levels, with values cited", "the values differ among the levels, citing the highest and the lowest"]}[trend]
+    desc_alts = {"categorical": ["the first group named has the highest mean and the other two groups are much lower, citing values", "one group stands out with the greatest mean while the other two groups have similar lower means"], "peaks": ["the values rise to the middle level then fall", "highest at the middle level"], "decreases": ["goes down across the levels", "falls from the first to the last level"], "increases": ["goes up across the levels", "rises from the first to the last level"], "mixed": ["changes across the levels, with values cited", "the values differ among the levels, citing the highest and the lowest"]}[trend]
     parts = [
-        P("A", f"Describe the pattern shown by the data in the table, using values from the table to support your description.", "explain", ["4.B"], [sc["topic"]], f"The mean {sc['dv']} {'increases' if trend == 'increases' else 'decreases' if trend == 'decreases' else 'changes'} across the levels: {', '.join(f'{m:.1f}' for m in means)}; it is greatest at {L[top]}.",
-          [R("A1", "Describes the pattern and supports it with values from the table", f"Describes how the mean {sc['dv']} changes across the levels and names the level with the greatest mean using the table values", desc_alts, ["describes a pattern that the data do not show", "describes the pattern without values from the table"], "claim")]),
+        P("A", f"Describe the pattern shown by the data in the table, using values from the table to support your description.", "explain", ["4.B"], [sc["topic"]], (f"The mean {sc['dv']} is greatest for {L[top]} ({means[top]:.1f}) and much lower for the other two groups ({means[others[0]]:.1f} and {means[others[1]]:.1f})." if trend == "categorical" else f"The mean {sc['dv']} {'increases' if trend == 'increases' else 'decreases' if trend == 'decreases' else 'changes'} across the levels: {', '.join(f'{m:.1f}' for m in means)}; it is greatest at {L[top]}."),
+          [R("A1", "Describes the pattern and supports it with values from the table", (f"Names the group with the greatest mean {sc['dv']} and describes how the other two groups compare, using the table values" if trend == "categorical" else f"Describes how the mean {sc['dv']} changes across the levels and names the level with the greatest mean using the table values"), desc_alts, ["describes a pattern that the data do not show", "describes the pattern without values from the table"], "claim")]),
         P("B", f"Calculate the percent change in the mean {sc['dv']} from {L[bi]} to {L[bj]}. Show your work.", "calculate", ["5.A"], [sc["topic"]], f"(({means[bj]:.1f} - {means[bi]:.1f}) / {abs(means[bi]):.1f}) x 100 = {pct:.1f}%.",
           [R("B1", "Gives the correct percent change with the formula applied (answer)", None, None, None, "numeric", num=f"{pct:.1f}", tol=f"±{max(0.2, abs(pct) * 0.01):.1f}")]),
         P("C", f"A student claims that {claim}. Using the ±2SE ranges in the table, evaluate whether the data support the claim.", "explain", ["5.D", "5.B"], [sc["topic"]], f"The ±2SE ranges are {rng_(top)}; {rng_(others[0])}; {rng_(others[1])}. The range at {L[top]} does not overlap the range at either of the other levels, so the data support the claim for both comparisons.",

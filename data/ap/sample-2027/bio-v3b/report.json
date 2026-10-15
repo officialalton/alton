@@ -1,0 +1,40 @@
+{
+ "run": "bio-v3b",
+ "subject": "ap_biology",
+ "generatedAt": "2026-10-15T16:46:31.812Z",
+ "totalCostUsd": 0.97,
+ "newSpendSinceBaseline": 1.17,
+ "cap": 1.7,
+ "calls": 99,
+ "candidates": 33,
+ "mcCandidates": 33,
+ "frqCandidates": 0,
+ "passedAll": 14,
+ "adopted": 10,
+ "mcAdopted": 10,
+ "frqAdopted": 0,
+ "reserve": 4,
+ "yield": 0.303,
+ "costPerAdopted": 0.097,
+ "callsPerAdopted": 9.9,
+ "duplicateRejected": 2,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 33
+ },
+ "rejectionReasons": {
+  "criterion_failed_distractor_explanation": 10,
+  "duplicate_gate_near_duplicate": 2,
+  "criterion_failed_scope_skill": 10,
+  "criterion_failed_stimulus_expression": 5,
+  "criterion_failed_exam_suitability": 10,
+  "instant_reject_missing_condition": 3,
+  "reference_pattern_mismatch": 12,
+  "criterion_failed_key_scoring": 3,
+  "resembles_known_exam_item": 2
+ },
+ "unfilledCells": [
+  "ap_biology-m08"
+ ]
+}
