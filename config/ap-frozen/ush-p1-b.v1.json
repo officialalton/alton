@@ -3,12 +3,10 @@
  "run": "ush-p1-b",
  "subject": "ap_us_history",
  "mode": "frq",
- "capUsd": 5.5,
+ "capUsd": 6.5,
  "hardStopCumulativeUsd": 200,
  "myTotalCapUsd": 16,
  "stages": [
-  "frq-gen",
-  "frq-fact",
   "frq-samples",
   "frq-grade",
   "frq-fact2",
@@ -41,7 +39,7 @@
   "lib/ap-exam/ush-rules.ts"
  ],
  "expected": {
-  "hash": "f2b9ff837eed"
+  "hash": "b38e39da8156"
  },
  "frqPlan": [
   {
@@ -164,5 +162,40 @@
    "seed": 4251
   }
  ],
- "sampleCands": 1
+ "sampleCands": 3,
+ "resample": {
+  "saq1_3": [
+   "low"
+  ],
+  "saq2_2": [
+   "low"
+  ],
+  "saq2_3": [
+   "low"
+  ],
+  "saq2_1": [
+   "high",
+   "low"
+  ],
+  "saq3_3": [
+   "mid",
+   "low"
+  ],
+  "dbq_2": [
+   "mid"
+  ],
+  "dbq_1": [
+   "mid",
+   "low"
+  ],
+  "leq_1": [
+   "mid",
+   "low"
+  ],
+  "leq_3": [
+   "mid",
+   "low"
+  ],
+  "saq1_5": []
+ }
 }

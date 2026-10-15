@@ -31,7 +31,7 @@ export type UshFrqPayload = {
 
 const norm = (t: string) => t.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, " ").trim().toLowerCase();
 const SAMPLE_WORDS: Record<UshFrqTask, Record<string, [number, number]>> = {
-  saq: { high: [45, 220], mid: [30, 200], low: [15, 160] },
+  saq: { high: [40, 340], mid: [30, 300], low: [12, 240] },
   dbq: { high: [480, 950], mid: [300, 650], low: [110, 380] },
   leq: { high: [430, 850], mid: [270, 560], low: [90, 320] },
 };

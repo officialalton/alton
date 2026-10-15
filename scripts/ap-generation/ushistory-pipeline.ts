@@ -19,7 +19,7 @@ import { ushUnitOfTopic } from "../../lib/ap-exam/ush-rules";
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 export type UshCfg = {
   version: string; run: string; subject: string; mode: "mc" | "frq"; capUsd: number; hardStopCumulativeUsd: number; myTotalCapUsd: number; stages: string[];
-  plan?: PlanCfg; frqPlan?: P.FrqSpec[]; syncStages?: string[]; sampleCands?: number; corpusExclude?: string[]; minPanelAgree?: number;
+  plan?: PlanCfg; frqPlan?: P.FrqSpec[]; syncStages?: string[]; sampleCands?: number; /** 보충 후보(k≥1)를 만들 세트·단계 */ resample?: Record<string, string[]>; corpusExclude?: string[]; minPanelAgree?: number;
   models: { gen: string; solvers: string[]; panel: string; sampleHigh: string; sampleLow: string; graders: string[]; fact: string };
   effort: string; genEffort?: string; gradeEffort?: string; generatorFiles: string[]; expected: { hash: string };
 };
@@ -238,6 +238,7 @@ function toFrqPayload(spec: P.FrqSpec, raw: Json): UshFrqPayload | null {
     expected_features: { defensible_theses: strs(af.defensible_theses), contextualization_ideas: strs(af.contextualization_ideas), outside_evidence: strs(af.outside_evidence), reasoning_types: strs(af.reasoning_types), doc_uses: af.doc_uses, saq_answers: af.saq_answers, common_pitfalls: strs(af.common_pitfalls), facts: strs(af.facts) },
     samples: [], provenance: { kind: "alton_composed", note: "ALTON-composed practice material; fictional sources and attributions." } };
 }
+const candsFor = (id: string, tier: string): number[] => Array.from({ length: cfg.sampleCands ?? 1 }, (_, k) => k).filter((k) => k === 0 || (cfg.resample?.[id] ?? []).includes(tier));
 const loadFrq = () => rj<{ id: string; spec: P.FrqSpec; payload: UshFrqPayload | null; fact?: Json[] }[]>("frq.json", []);
 async function frqGenStage() {
   const plan = cfg.frqPlan ?? []; const sys = { saq: P.FRQ_SAQ_SYSTEM, dbq: P.FRQ_DBQ_SYSTEM, leq: P.FRQ_LEQ_SYSTEM };
@@ -258,19 +259,19 @@ async function frqFactStage() {
 const packOk = (f: { payload: UshFrqPayload | null; fact?: Json[] }) => Boolean(f.payload) && !frqViolations(f.payload!).filter((x) => !/^sample_|samples_|^similar_to/.test(x)).length && (f.fact ?? []).every((x) => !BAD_FLAG.test(String(x.kind)) && x.kind !== "inconsistent_with_documents") && f.fact !== undefined && !(f.fact ?? []).some((x) => x.detail === "not_checked");
 async function frqSampleStage() {
   const fr = loadFrq().filter(packOk); const reqs: BatchReq[] = [];
-  for (const f of fr) { const p = f.payload!; const task = p.task_type; for (const tier of ["high", "mid", "low"] as const) for (let k = 0; k < (cfg.sampleCands ?? 1); k++) reqs.push(mk(`s-${f.id}-${tier}-${k}`, tier === "high" ? cfg.models.sampleHigh : cfg.models.sampleLow, P.SAMPLE_SYSTEM(task, tier), P.SAMPLE_TOOL, P.sampleUser(frqTaskText(p), frqMaterial(p), rubricText(p)), 6000)); }
+  for (const f of fr) { const p = f.payload!; const task = p.task_type; for (const tier of ["high", "mid", "low"] as const) for (const k of candsFor(f.id, tier)) reqs.push(mk(`s-${f.id}-${tier}-${k}`, tier === "high" ? cfg.models.sampleHigh : cfg.models.sampleLow, P.SAMPLE_SYSTEM(task, tier), P.SAMPLE_TOOL, P.sampleUser(frqTaskText(p), frqMaterial(p), rubricText(p)), 6000)); }
   const out = await call("frq-samples", reqs, estimate(cfg.models.sampleHigh, reqs.length, 3200, 1800)); if (has("--dry")) return;
   wj("frq-samples.json", Object.fromEntries([...out.entries()]));
 }
 async function frqGradeStage() {
   const fr = loadFrq().filter(packOk); const samples = rj<Record<string, Json | null>>("frq-samples.json", {}); const reqs: BatchReq[] = [];
-  for (const f of fr) { const p = f.payload!; const rows = USH_RUBRIC_ROWS[p.task_type]; for (const tier of ["high", "mid", "low"]) for (let k = 0; k < (cfg.sampleCands ?? 1); k++) { const s = samples[`s-${f.id}-${tier}-${k}`]; if (!s?.essay) continue; cfg.models.graders.forEach((m, g) => reqs.push(mk(`r${g}-${f.id}-${tier}-${k}`, m, P.GRADE_SYSTEMS[g % P.GRADE_SYSTEMS.length], P.GRADE_TOOL(rows), P.gradeUser(frqTaskText(p), frqMaterial(p), rubricText(p), noDollar(String(s.essay))), 2500, false, cfg.gradeEffort ?? cfg.effort))); } }
+  for (const f of fr) { const p = f.payload!; const rows = USH_RUBRIC_ROWS[p.task_type]; for (const tier of ["high", "mid", "low"]) for (const k of candsFor(f.id, tier)) { const s = samples[`s-${f.id}-${tier}-${k}`]; if (!s?.essay) continue; cfg.models.graders.forEach((m, g) => reqs.push(mk(`r${g}-${f.id}-${tier}-${k}`, m, P.GRADE_SYSTEMS[g % P.GRADE_SYSTEMS.length], P.GRADE_TOOL(rows), P.gradeUser(frqTaskText(p), frqMaterial(p), rubricText(p), noDollar(String(s.essay))), 2500, false, cfg.gradeEffort ?? cfg.effort))); } }
   const out = await call("frq-grade", reqs, cfg.models.graders.reduce((a, m) => a + estimate(m, reqs.length / cfg.models.graders.length, 3800, 700), 0)); if (has("--dry")) return;
   wj("frq-grades.json", Object.fromEntries([...out.entries()]));
 }
 async function frqFact2Stage() { // 높은·중간 샘플의 역사적 정확성(Fable)
   const fr = loadFrq().filter(packOk); const samples = rj<Record<string, Json | null>>("frq-samples.json", {}); const reqs: BatchReq[] = [];
-  for (const f of fr) for (const tier of ["high", "mid", "low"]) for (let k = 0; k < (cfg.sampleCands ?? 1); k++) { const s = samples[`s-${f.id}-${tier}-${k}`]; if (s?.essay) reqs.push(mk(`fs-${f.id}-${tier}-${k}`, cfg.models.fact, P.FACT_SYSTEM, P.FACT_TOOL, P.factUser(`Prompt: ${frqTaskText(f.payload!)}\n\nSTUDENT SAMPLE RESPONSE (${tier} tier; weaknesses may be vagueness but historical claims should be accurate)\n${s.essay}`), 3000)); }
+  for (const f of fr) for (const tier of ["high", "mid", "low"]) for (const k of candsFor(f.id, tier)) { const s = samples[`s-${f.id}-${tier}-${k}`]; if (s?.essay) reqs.push(mk(`fs-${f.id}-${tier}-${k}`, cfg.models.fact, P.FACT_SYSTEM, P.FACT_TOOL, P.factUser(`Prompt: ${frqTaskText(f.payload!)}\n\nSTUDENT SAMPLE RESPONSE (${tier} tier; weaknesses may be vagueness but historical claims should be accurate)\n${s.essay}`), 3000)); }
   const out = await call("frq-fact2", reqs, estimate(cfg.models.fact, reqs.length, 1800, 700)); if (has("--dry")) return;
   wj("frq-fact2.json", Object.fromEntries([...out.entries()]));
 }
@@ -283,7 +284,7 @@ function frqFinalizeStage() {
     if (!f.payload) { cands.push({ ...base, keywordCode: kw, unitCode: String(f.spec.period), skillPrimary: "1.B", structure: "frq_multipart", archetype: `ushfrq_${f.id}`, reviewState: "rejected", rejectionReason: "no_tool_output", difficultyProvisional: null, payload: { archetype: `ushfrq_${f.id}` } }); continue; }
     const p = f.payload; const rows = USH_RUBRIC_ROWS[task]; const chosen: UshSample[] = []; const why: string[] = [];
     for (const tier of ["high", "mid", "low"] as const) {
-      const opts = Array.from({ length: cfg.sampleCands ?? 1 }, (_, i) => i).map((k) => { const s = samples[`s-${f.id}-${tier}-${k}`]; if (!s?.essay) return null; const gs = cfg.models.graders.map((_, g) => grades[`r${g}-${f.id}-${tier}-${k}`]).filter(Boolean) as Json[]; if (gs.length < cfg.models.graders.length) return null;
+      const opts = candsFor(f.id, tier).map((k) => { const s = samples[`s-${f.id}-${tier}-${k}`]; if (!s?.essay) return null; const gs = cfg.models.graders.map((_, g) => grades[`r${g}-${f.id}-${tier}-${k}`]).filter(Boolean) as Json[]; if (gs.length < cfg.models.graders.length) return null;
         const sc: Record<string, number> = {}; for (const r of rows) sc[r.row_id] = Math.min(r.max, Math.max(0, median(gs.map((x) => Number(x[r.row_id]))))); const tot = Object.values(sc).reduce((a, b) => a + b, 0); const totals = gs.map((x) => rows.reduce((a, r) => a + Number(x[r.row_id] ?? 0), 0)); const spread = Math.max(...totals) - Math.min(...totals);
         const fl = ((f2[`fs-${f.id}-${tier}-${k}`]?.flags ?? []) as Json[]).filter((x) => BAD_FLAG.test(String(x.kind)));
         return { k, s, sc, tot, spread, dist: Math.abs(tot - USH_SAMPLE_TARGET[task][tier]), flagged: fl.length > 0, fl }; }).filter(Boolean) as { k: number; s: Json; sc: Record<string, number>; tot: number; spread: number; dist: number; flagged: boolean; fl: Json[] }[];
