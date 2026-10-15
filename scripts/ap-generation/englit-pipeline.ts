@@ -36,7 +36,7 @@ const wj = (f: string, v: unknown) => writeFileSync(path.join(DIR, f), JSON.stri
 
 const think = (model: string, effort: string) => ({ thinking: model.includes("sonnet") ? { type: "between_tools" } : { type: "adaptive" }, output_config: { effort } });
 const mk = (id: string, model: string, sys: string, tool: Json, user: string, max: number, force = false, effort = cfg.effort): BatchReq => ({
-  custom_id: id, params: { model, ...(force ? {} : think(model, effort)), max_tokens: max, system: [{ type: "text", text: sys, cache_control: SYS_CACHE }], tools: [tool], tool_choice: force ? { type: "tool", name: tool.name } : { type: "auto" }, messages: [{ role: "user", content: user }] } });
+  custom_id: id, params: { model, ...(force ? {} : think(model, effort)), max_tokens: max, system: [{ type: "text", text: sys, cache_control: SYS_CACHE }], tools: [tool], tool_choice: { type: "auto" }, messages: [{ role: "user", content: user }] } });
 
 // ── 예산 ───────────────────────────────────────────────────────────
 const BASE_F = path.join(ROOT, "englit-baseline.json");
@@ -59,7 +59,7 @@ async function call(stage: string, reqs: BatchReq[], estUsd: number): Promise<Ma
   const missing = reqs.filter((r) => !out.get(r.custom_id));
   if (missing.length) {
     console.log(`[${stage}] 도구 호출 없음 ${missing.length}건 → 강제 재요청`);
-    const forced = missing.map((r) => ({ custom_id: r.custom_id, params: { ...r.params, tool_choice: { type: "tool", name: (r.params.tools as Json[])[0].name } } })) as BatchReq[];
+    const forced = missing.map((r) => ({ custom_id: r.custom_id, params: { ...r.params } })) as BatchReq[];
     for (const f of forced) { delete (f.params as Json).thinking; delete (f.params as Json).output_config; }
     guard(`${stage}-retry`, estUsd * (missing.length / reqs.length));
     const got2 = await run(`${stage}-retry`, forced);

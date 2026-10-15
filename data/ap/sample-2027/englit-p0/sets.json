@@ -1003,10 +1003,10 @@
     "stem": "A student claims that Hedda controls the sale despite her absence from the island. Which of the following sentences of commentary most clearly links the phrase \"arranged the whole morning from under a blanket\" ([[r1]]) to that claim?",
     "options": [
      {
-      "text": "The sentence pairs a verb of command with an image of confinement, showing that Hedda's authority survives the loss of her mobility.",
-      "is_key": true,
-      "label": "correct",
-      "why": "Directly connects the evidence ('arranged' against 'under a blanket') to the claim about control despite absence; the passage supports it with Hedda's letters to Pell and instructions to Agnes."
+      "text": "The sentence shows that Agnes resents being sent into the wind, which establishes the conflict between the two generations of the family.",
+      "is_key": false,
+      "label": "wrong_scope",
+      "why": "Shifts focus from Hedda's control to Agnes's resentment and generational conflict, which the quoted phrase does not itself address."
      },
      {
       "text": "The sentence describes Hedda lying in bed at the home, which proves she is too ill to travel to the island herself to sell the boat.",
@@ -1015,10 +1015,10 @@
       "why": "Explains Hedda's absence rather than her control; it restates the circumstance without connecting to the claim's main point."
      },
      {
-      "text": "The sentence shows that Agnes resents being sent into the wind, which establishes the conflict between the two generations of the family.",
-      "is_key": false,
-      "label": "wrong_scope",
-      "why": "Shifts focus from Hedda's control to Agnes's resentment and generational conflict, which the quoted phrase does not itself address."
+      "text": "The sentence pairs a verb of command with an image of confinement, showing that Hedda's authority survives the loss of her mobility.",
+      "is_key": true,
+      "label": "correct",
+      "why": "Directly connects the evidence ('arranged' against 'under a blanket') to the claim about control despite absence; the passage supports it with Hedda's letters to Pell and instructions to Agnes."
      },
      {
       "text": "The sentence uses the word 'blanket' to suggest that Hedda is hiding something from Agnes, which the reader learns is the debt owed to Pell.",
@@ -1042,11 +1042,8 @@
      "diction"
     ],
     "est_seconds": 75,
-    "key_index": 0,
-    "det": [
-     "item_device_juxtaposition_not_in_blueprint_inventory",
-     "item_device_diction_not_in_blueprint_inventory"
-    ],
+    "key_index": 2,
+    "det": [],
     "cue": 0
    },
    {
@@ -1054,12 +1051,6 @@
     "cognitive": "explain",
     "stem": "The placement of Pell's reply \"I know it is.\" ([[r1]]) immediately after Agnes's protest serves primarily to",
     "options": [
-     {
-      "text": "signal that the price is not a matter of the boat's value, before the reason is given",
-      "is_key": true,
-      "label": "correct",
-      "why": "By conceding her point at once, Pell removes value from the dispute; the reader is left with an unexplained gap that the fifth paragraph fills."
-     },
      {
       "text": "show that Pell has been shamed by Agnes into reconsidering the sum he has named",
       "is_key": false,
@@ -1077,6 +1068,12 @@
       "is_key": false,
       "label": "wrong_function",
       "why": "The exchange ends bargaining rather than displaying it, and Hedda is shown refusing money, not bargaining for it."
+     },
+     {
+      "text": "signal that the price is not a matter of the boat's value, before the reason is given",
+      "is_key": true,
+      "label": "correct",
+      "why": "By conceding her point at once, Pell removes value from the dispute; the reader is left with an unexplained gap that the fifth paragraph fills."
      }
     ],
     "refs": [
@@ -1094,10 +1091,8 @@
      "syntax"
     ],
     "est_seconds": 60,
-    "key_index": 0,
-    "det": [
-     "item_device_syntax_not_in_blueprint_inventory"
-    ],
+    "key_index": 3,
+    "det": [],
     "cue": 0
    },
    {
@@ -1105,6 +1100,12 @@
     "cognitive": "explain",
     "stem": "Which of the following best describes the function of the final sentence of the passage?",
     "options": [
+     {
+      "text": "It demonstrates that Agnes has forgiven Pell for accepting a boat that was worth far more than he paid for it.",
+      "is_key": false,
+      "label": "wrong_scope",
+      "why": "The sentence concerns Agnes's relation to the house and the ferry, not to Pell; forgiveness is never at issue."
+     },
      {
       "text": "It confirms that Agnes has decided to remain permanently on the island rather than return to the mainland.",
       "is_key": false,
@@ -1116,12 +1117,6 @@
       "is_key": true,
       "label": "correct",
       "why": "The opening establishes the instruction not to go up to the house and the implied four o'clock return; the ending has her stand at the path to the house and let the ferry go, recasting the errand."
-     },
-     {
-      "text": "It demonstrates that Agnes has forgiven Pell for accepting a boat that was worth far more than he paid for it.",
-      "is_key": false,
-      "label": "wrong_scope",
-      "why": "The sentence concerns Agnes's relation to the house and the ferry, not to Pell; forgiveness is never at issue."
      },
      {
       "text": "It suggests that Agnes has become too distressed by the sale to make her way back along the shingle to the slip.",
@@ -1141,7 +1136,7 @@
      "shift_in_tone"
     ],
     "est_seconds": 60,
-    "key_index": 1,
+    "key_index": 2,
     "det": [],
     "cue": 1.0884146341463414
    },
@@ -1150,12 +1145,6 @@
     "cognitive": "explain",
     "stem": "The observation that the Linnet \"looked smaller than Agnes remembered, the way the island did, the way the dock did; only the sky had kept its size\" ([[r1]]) most directly conveys that Agnes",
     "options": [
-     {
-      "text": "has grown away from a place that once seemed to fill her whole world",
-      "is_key": true,
-      "label": "correct",
-      "why": "Everything human-scaled has shrunk relative to her memory while the sky has not, a conventional sign of a returning adult's estrangement; the city shoes and resisting stones reinforce it."
-     },
      {
       "text": "has begun to suspect that the boat has been damaged since it was hauled in October",
       "is_key": false,
@@ -1167,6 +1156,12 @@
       "is_key": false,
       "label": "reversal",
       "why": "The sentence registers change in her perception, not sameness, and the passage gives no sign of relief."
+     },
+     {
+      "text": "has grown away from a place that once seemed to fill her whole world",
+      "is_key": true,
+      "label": "correct",
+      "why": "Everything human-scaled has shrunk relative to her memory while the sky has not, a conventional sign of a returning adult's estrangement; the city shoes and resisting stones reinforce it."
      },
      {
       "text": "feels oppressed by an island sky that is vaster than anything on the mainland",
@@ -1190,7 +1185,7 @@
      "contrast"
     ],
     "est_seconds": 60,
-    "key_index": 0,
+    "key_index": 2,
     "det": [],
     "cue": 0
    },
@@ -1200,28 +1195,28 @@
     "stem": "In the sixth paragraph, the description of the mainland as \"a gray line with the home somewhere on it, a window, a bed\" ([[r1]]) functions primarily to",
     "options": [
      {
-      "text": "contrast the mainland's prosperity with the island's poverty and decline",
-      "is_key": false,
-      "label": "unsupported",
-      "why": "Nothing in the description concerns prosperity or poverty; the gray line and bed are about distance and confinement."
-     },
-     {
-      "text": "explain why Agnes has chosen to live on the mainland rather than on the island",
+      "text": "explain why Agnes has chosen to settle on the mainland instead of returning to live on the island",
       "is_key": false,
       "label": "wrong_function",
-      "why": "The passage never addresses why Agnes lives on the mainland; the image concerns Hedda's location, not Agnes's choice."
-     },
-     {
-      "text": "show how far Hedda is from the scene while making her the source of what happens in it",
-      "is_key": false,
-      "label": "partially_right",
-      "why": "Wait: this is the key's content. Mark as distractor would be wrong."
+      "why": "Wrong function: the image locates Hedda, not Agnes; the passage never addresses why Agnes lives on the mainland."
      },
      {
       "text": "narrow from a distant horizon to a single bed, locating the scene's hidden author at a remove",
       "is_key": true,
       "label": "correct",
       "why": "The syntax moves from 'gray line' to 'window' to 'bed' to 'a woman who had arranged the whole morning,' using the setting to place Hedda both far away and in control."
+     },
+     {
+      "text": "contrast the mainland's comfortable prosperity with the island's poverty, neglect, and slow decline",
+      "is_key": false,
+      "label": "unsupported",
+      "why": "Unsupported: the image concerns distance and confinement, not any economic contrast between mainland and island."
+     },
+     {
+      "text": "suggest that Hedda has been forgotten by the mainland, her bed lost among indifferent, distant windows",
+      "is_key": false,
+      "label": "partially_right",
+      "why": "Misreads the image: the passage presents Hedda as the controlling source of the morning, not as forgotten or neglected."
      }
     ],
     "refs": [
@@ -1238,11 +1233,10 @@
      "syntax"
     ],
     "est_seconds": 60,
-    "key_index": 3,
-    "det": [
-     "item_device_syntax_not_in_blueprint_inventory"
-    ],
-    "cue": 1.1822033898305084
+    "key_index": 1,
+    "det": [],
+    "cue": 1.1822033898305084,
+    "rebalanced": true
    },
    {
     "skill": "4.A",
@@ -1256,12 +1250,6 @@
       "why": "Pell's and Hedda's thoughts are never given; Hedda is known only through quoted speech and letters, Pell only through what he says and does."
      },
      {
-      "text": "a third-person voice confined to Agnes's perceptions and memories of the island",
-      "is_key": true,
-      "label": "correct",
-      "why": "The narration reports Agnes's memories ('She remembered Hedda in the stern'), her expectations and her realization, but gives no interior access to others."
-     },
-     {
       "text": "a first-person voice recalling, years later, a morning spent on the island as a girl",
       "is_key": false,
       "label": "misread_speaker",
@@ -1272,6 +1260,12 @@
       "is_key": false,
       "label": "too_narrow",
       "why": "The narrator reports Agnes's thoughts and memories, which an external observer could not see or hear."
+     },
+     {
+      "text": "a third-person voice confined to Agnes's perceptions and memories of the island",
+      "is_key": true,
+      "label": "correct",
+      "why": "The narration reports Agnes's memories ('She remembered Hedda in the stern'), her expectations and her realization, but gives no interior access to others."
      }
     ],
     "refs": [],
@@ -1284,7 +1278,7 @@
      "free_indirect_discourse"
     ],
     "est_seconds": 45,
-    "key_index": 1,
+    "key_index": 3,
     "det": [],
     "cue": 0
    },
@@ -1294,10 +1288,10 @@
     "stem": "Agnes's signing the bill of sale \"pressing hard so the pencil would take on the damp paper\" ([[r1]]), after learning the true nature of the price, most clearly reveals",
     "options": [
      {
-      "text": "her determination to carry out Hedda's wishes exactly as they were written to Pell",
+      "text": "her worry that a lightly written signature might later let the sale be challenged and undone in law",
       "is_key": false,
-      "label": "too_narrow",
-      "why": "Captures obedience but misses the force of 'pressing hard,' which carries feeling beyond simple compliance."
+      "label": "literal_for_figurative",
+      "why": "Literal for figurative: treats the pressing as legal caution, when the moment is emotional recognition."
      },
      {
       "text": "her compliance with an arrangement she resents, the pressure of the pencil carrying what she does not say",
@@ -1306,16 +1300,16 @@
       "why": "She completes the sale as instructed, yet the hard pressing follows her recognition that she is 'the hands' of someone else's plan; the gesture holds both obedience and suppressed anger."
      },
      {
-      "text": "her hope that a firmly written signature will make the sale legally binding against future challenge",
+      "text": "her determination to carry out Hedda's wishes exactly as they had been set down in the letter to Pell",
       "is_key": false,
-      "label": "literal_for_figurative",
-      "why": "Reads the pressing as a practical legal concern; the passage frames the moment as emotional recognition, not legal caution."
+      "label": "too_narrow",
+      "why": "Too narrow: captures obedience but misses that 'pressing hard' carries unspoken feeling beyond simple compliance."
      },
      {
-      "text": "her sudden affection for Pell, whose loyalty to her grandfather she has only now come to understand",
+      "text": "her sudden warmth toward Pell, whose quiet loyalty to her grandfather she has only now come to grasp",
       "is_key": false,
       "label": "unsupported",
-      "why": "No affection toward Pell is expressed; she does not answer him in the final paragraph."
+      "why": "Unsupported: no affection toward Pell is expressed, and she does not answer him afterward."
      }
     ],
     "refs": [
@@ -1336,7 +1330,8 @@
     "est_seconds": 70,
     "key_index": 1,
     "det": [],
-    "cue": 1.1209964412811386
+    "cue": 1.1209964412811386,
+    "rebalanced": true
    },
    {
     "skill": "1.A",
@@ -1350,16 +1345,16 @@
       "why": "The stones are weights for a cover, and nothing indicates his plans for the boat; the detail is about his habit, not the boat's future."
      },
      {
-      "text": "treats even small objects as part of an order that should not be wasted or discarded",
-      "is_key": true,
-      "label": "correct",
-      "why": "Consistent with 'did everything in fours' and 'one, two, three'; his careful, provident handling characterizes a man who also kept an unpaid debt for twenty years without discarding it."
-     },
-     {
       "text": "doubts that the sale will go through and expects to have to cover the boat again",
       "is_key": false,
       "label": "reversal",
       "why": "Pell proceeds confidently with the sale and has Hedda's letters; the 'as if' signals a habit of care, not expectation of failure."
+     },
+     {
+      "text": "treats even small objects as part of an order that should not be wasted or discarded",
+      "is_key": true,
+      "label": "correct",
+      "why": "Consistent with 'did everything in fours' and 'one, two, three'; his careful, provident handling characterizes a man who also kept an unpaid debt for twenty years without discarding it."
      },
      {
       "text": "is deliberately delaying the transaction in order to prolong his time with Agnes",
@@ -1384,11 +1379,8 @@
      "motif"
     ],
     "est_seconds": 55,
-    "key_index": 1,
-    "det": [
-     "item_device_diction_not_in_blueprint_inventory",
-     "item_device_motif_not_in_blueprint_inventory"
-    ],
+    "key_index": 2,
+    "det": [],
     "cue": 1.0588235294117647
    },
    {
@@ -1403,16 +1395,16 @@
       "why": "Because the reader knows only what Agnes knows, the low price seems an insult or a cheat until the fifth paragraph; the reader undergoes the same recognition she does."
      },
      {
-      "text": "hiding from the reader the fact that Pell and Hedda have been in correspondence",
-      "is_key": false,
-      "label": "reversal",
-      "why": "Pell states openly in the third paragraph that Hedda wrote to him; the correspondence is not hidden."
-     },
-     {
       "text": "making Pell appear untrustworthy because his motives are never directly stated",
       "is_key": false,
       "label": "partially_right",
       "why": "Pell's motives are unstated internally but he explains them plainly in speech; the passage does not render him untrustworthy."
+     },
+     {
+      "text": "hiding from the reader the fact that Pell and Hedda have been in correspondence",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Pell states openly in the third paragraph that Hedda wrote to him; the correspondence is not hidden."
      },
      {
       "text": "presenting Hedda's instructions as cruel because Agnes cannot understand them",
@@ -1497,10 +1489,10 @@
     "stem": "Agnes's thought of \"the coin you were supposed to put in the mouth of the dead for the ferryman\" ([[r1]]) frames the sale primarily as",
     "options": [
      {
-      "text": "a theft in which Pell, like the ferryman, takes payment from those who cannot refuse",
+      "text": "a ritual that Agnes performs correctly because her grandmother has instructed her in it",
       "is_key": false,
-      "label": "reversal",
-      "why": "Agnes notes that in this case the ferryman is the one paying; the allusion is inverted, not applied straightforwardly to Pell as taker."
+      "label": "wrong_function",
+      "why": "The allusion registers confusion ('the stories never said what happened'), not correct performance of a ritual."
      },
      {
       "text": "a passage toward Hedda's death, with roles so inverted that Agnes cannot tell who pays whom",
@@ -1509,10 +1501,10 @@
       "why": "The burial coin ties the sale to Hedda's approaching end, and the twist that the ferryman pays captures Agnes's realization that she is not the seller she thought."
      },
      {
-      "text": "a ritual that Agnes performs correctly because her grandmother has instructed her in it",
+      "text": "a theft in which Pell, like the ferryman, takes payment from those who cannot refuse",
       "is_key": false,
-      "label": "wrong_function",
-      "why": "The allusion registers confusion ('the stories never said what happened'), not correct performance of a ritual."
+      "label": "reversal",
+      "why": "Agnes notes that in this case the ferryman is the one paying; the allusion is inverted, not applied straightforwardly to Pell as taker."
      },
      {
       "text": "a superstition of the island that Agnes, as a mainlander, no longer takes seriously",
@@ -1586,9 +1578,7 @@
     ],
     "est_seconds": 55,
     "key_index": 1,
-    "det": [
-     "item_device_diction_not_in_blueprint_inventory"
-    ],
+    "det": [],
     "cue": 0
    },
    {
@@ -1603,16 +1593,16 @@
       "why": "Names specific techniques (recurring image, final silence) and a complex idea with tension (used, yet discovering belonging), both grounded in the text's opening and closing."
      },
      {
-      "text": "Through Pell's dialogue and Hedda's letters, the passage shows that older people often manipulate the young, and that such manipulation is always harmful to family relationships.",
-      "is_key": false,
-      "label": "too_broad",
-      "why": "Generalizes beyond the text to 'older people' and 'always harmful'; the passage treats Hedda's arrangement with more ambivalence."
-     },
-     {
       "text": "Through the description of the boat and the island, the passage shows that Agnes travels to Scarrow, sells the Linnet to Pell for a small sum, and then misses the afternoon ferry.",
       "is_key": false,
       "label": "wrong_function",
       "why": "Summarizes plot rather than interpreting it; no claim about meaning or complexity is made."
+     },
+     {
+      "text": "Through Pell's dialogue and Hedda's letters, the passage shows that older people often manipulate the young, and that such manipulation is always harmful to family relationships.",
+      "is_key": false,
+      "label": "too_broad",
+      "why": "Generalizes beyond the text to 'older people' and 'always harmful'; the passage treats Hedda's arrangement with more ambivalence."
      },
      {
       "text": "Through the allusion to the ferryman and the sale's low price, the passage shows that Pell is the true owner of the boat and that Agnes comes to accept his superior moral claim to it.",
@@ -1643,12 +1633,6 @@
     "stem": "The passage places Agnes's memory of Hedda at the tiller and of Pell \"never once in the boat\" ([[r1]]) before Pell's explanation of the debt. This ordering most significantly affects the reader by",
     "options": [
      {
-      "text": "making Pell's account confirm an impression already formed of Hedda's refusal to let go",
-      "is_key": true,
-      "label": "correct",
-      "why": "The flashback shows Hedda 'declining to let the boat go anywhere else' and Pell excluded; when Pell then explains she would 'let the boat rot sooner than take money,' the reader recognizes rather than learns."
-     },
-     {
       "text": "creating suspense about whether Pell will reveal that he once stole the boat's engine",
       "is_key": false,
       "label": "unsupported",
@@ -1665,6 +1649,12 @@
       "is_key": false,
       "label": "wrong_scope",
       "why": "The memory concerns relationships, not valuation; the passage has already settled that the boat is worth more than the price."
+     },
+     {
+      "text": "making Pell's account confirm an impression already formed of Hedda's refusal to let go",
+      "is_key": true,
+      "label": "correct",
+      "why": "The flashback shows Hedda 'declining to let the boat go anywhere else' and Pell excluded; when Pell then explains she would 'let the boat rot sooner than take money,' the reader recognizes rather than learns."
      }
     ],
     "refs": [
@@ -1683,10 +1673,9 @@
      "foreshadowing"
     ],
     "est_seconds": 70,
-    "key_index": 0,
+    "key_index": 3,
     "det": [
-     "evidence_quote_not_in_passage_\"she'd_have_let_the_boat_rot_s",
-     "item_device_foreshadowing_not_in_blueprint_inventory"
+     "evidence_quote_not_in_passage_\"she'd_have_let_the_boat_rot_s"
     ],
     "cue": 0
    }
