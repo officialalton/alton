@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LearningText from "@/app/session/[id]/LearningText";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { stripInlineOptions } from "@/lib/problem-text";
 import type { UnitPreview } from "@/app/student/curriculum-overlay-actions";
@@ -177,8 +178,8 @@ function ProblemList({ problems }: { problems: UnitPreview["problems"] }) {
 You can read ahead here. Solving and submitting happen in the lesson.
       </p>
       {problems.map((p, index) => (
+        <PassageRefsScope key={p.problemId}>
         <article
-          key={p.problemId}
           className="border-[1.5px] border-grey-200 rounded-2xl px-5 sm:px-7 py-6 mb-5"
         >
           <header className="flex items-center gap-2 mb-4">
@@ -212,6 +213,7 @@ You can read ahead here. Solving and submitting happen in the lesson.
             </ol>
           )}
         </article>
+        </PassageRefsScope>
       ))}
     </div>
   );

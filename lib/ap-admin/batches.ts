@@ -1,7 +1,7 @@
 // 재고 배치 레지스트리와 저장소 산출물 읽기. 배치 정의는 scripts/ap-generation/owner-load.sh(graph|siblings|supp)와 owner-run-bc-topup-load.md 의 값을 그대로 옮긴 것이다.
 // 산출물(data/ap/stock/*, data/ap/screen-evidence/*.json, data/ap/render-check/report.json)은 배포 번들에 포함돼(next.config.ts outputFileTracingIncludes)
 // 서버가 파일 시스템에서 읽는다. 업로드 경로는 없다 — 임의 파일을 올려 DB 에 쓰는 통로를 만들지 않는다. 새 배치는 저장소 커밋 → 배포로만 들어온다.
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "../ap-generation/data-fs";
 import path from "node:path";
 import type { RenderReportRow, ScreenEvidence } from "../ap-generation/verify-guard";
 import type { StockItem } from "../ap-generation/stock";

@@ -1,7 +1,7 @@
 // US History 실제 자료 게이트(2026-10-15): 자료 레지스트리(data/ap/ush-sources/registry.json)를 먼저 고정하고, 문항은 그 자료에서만 나와야 한다.
 // 점검: 레지스트리 필수 필드·파일 해시·발췌 해시 / 문항의 자료가 레지스트리와 글자 그대로 같은지 / "ALTON 작성" 표지가 실제 자료에 붙지 않았는지 / 문항 공통 게이트(itemViolations).
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "./data-fs";
 import path from "node:path";
 import { itemViolations, type UshItemRaw, type UshSetRaw } from "./ushistory-gates";
 import { frqViolations, type UshFrqPayload } from "./ushistory-frq";

@@ -10,6 +10,7 @@ import { loadMyProblemErrorReportsAction } from "@/lib/problem-error-reports/act
 import type { MyReportStatus } from "@/lib/problem-error-reports/labels";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import LearningText from "@/app/session/[id]/LearningText";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
 import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
 import { problemText } from "@/lib/problem-figures/label-rule";
@@ -321,6 +322,7 @@ function BatchRunner({
   const currentGrade = currentOverride?.grade ?? (item.autoCorrect === null ? null : item.autoCorrect ? "correct" : "incorrect");
 
   return (
+    <PassageRefsScope>
     <div className="flex gap-6">
       <div className="w-[120px] shrink-0">
         <p className="text-[11px] font-bold text-grey-400 uppercase mb-2">Contents</p>
@@ -558,5 +560,6 @@ function BatchRunner({
         {error && viewerRole === "teacher" && <p className="text-[12px] text-red mt-2">{error}</p>}
       </div>
     </div>
+    </PassageRefsScope>
   );
 }

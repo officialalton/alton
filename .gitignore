@@ -50,3 +50,6 @@ next-env.d.ts
 /data/mock-exam-generation/figure-qa/_html/
 tmp/
 .venv-ap/
+
+# AP 재고 JSON 의 빌드 시 압축본(scripts/pack-ap-data.cjs 가 만든다)
+data/ap/**/*.json.gz

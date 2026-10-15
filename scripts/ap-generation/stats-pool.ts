@@ -1,6 +1,6 @@
 // AP Statistics 풀 모의고사 배정용 재고 로더(읽기 전용, DB 없음). assign-pool.ts(AB/BC)와 같은 재고 정의(자동 통과·결함 0·완전 중복 제외·렌더 게이트 통과·화면 증거 보유)를 통계 과목에 적용한다.
 // 후보 모델: 단독 MC 1개 = 후보 1개(문항 1), 공유 세트 = 후보 1개(문항 3: payload.items 의 topic·skill 이 문항별), FRQ 번들 = 후보 1개(유형 = payload.template).
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "../../lib/ap-generation/data-fs";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { clusterLookAlikes } from "../../lib/ap-exam/look-alike";
 import { STOCK_FILES } from "./keys-file";

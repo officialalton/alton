@@ -12,6 +12,7 @@ import { NAV_BTN, ScrollPanes, ToolIconButton } from "./take-ui";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import LearningText from "@/app/session/[id]/LearningText";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, SprDirections, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
@@ -474,6 +475,7 @@ export default function MockExamMstTakeClient({
               {/* 두 칸: 왼쪽 지문·문제·그림 / 오른쪽 선택지(또는 답 입력). 각 칸이 따로 스크롤, 좁은 화면에서는 위아래로 쌓인다. */}
               <ScrollPanes resetKey={item.setItemId}>
                 <section aria-label="Passage and question" className="min-w-0 shrink-0 overflow-x-auto overflow-y-hidden px-4 py-4 md:shrink md:w-1/2 md:px-8 md:py-6 md:overflow-y-auto md:border-r md:border-grey-200" data-testid="mst-pane-left">
+                  <PassageRefsScope>
                   <AnnotationLayer
                     key={item.setItemId}
                     highlightMode={highlightMode}
@@ -483,6 +485,7 @@ export default function MockExamMstTakeClient({
                     {dedupeStem(item.passage, item.question) && <RwStimulusView question={item.question} passage={dedupeStem(item.passage, item.question)} className="mb-4 text-[13.5px]" />}
                     {item.question && <LearningText text={item.question} className="mb-3 text-[14px] font-semibold" />}
                   </AnnotationLayer>
+                  </PassageRefsScope>
                   {item.figure ? <ProblemFigure spec={item.figure} text={problemText(item.passage, item.question, item.options)} className="mb-4" /> : null}
                 </section>
 
