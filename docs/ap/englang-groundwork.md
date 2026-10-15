@@ -165,3 +165,21 @@ el_frq
 **조립:** 재고(화면 증거 있음) = 읽기 묶음 8(32문항)·글쓰기 묶음 9(34문항)·FRQ 6. **EL1 = 정확 배정 성공**(가상 0, 독립 검증기 위반 0): 읽기 묶음 6(24문항) + 글쓰기 묶음 5(21문항), 범주 RS-R 5 / CE-R 7 / RO-R 8 / S-R 5 / RS-W 5 / CE-W 5 / RO-W 5 / S-W 5(전부 범위 안), exam_prep 34/45, FRQ q1·q2·q3 = fa1·fa2·fa3. `data/ap/stock/exact-assign-el-el1.json`. **EL2 는 배정 불가(재고 부족)**: EL1 을 뺀 남은 MC 읽기 7·글쓰기 14문항(필요 23–25 / 20–22) → 읽기 ≥ 16문항(약 4묶음)·글쓰기 ≥ 6문항(약 2묶음)과 범주별 하한(남은 재고 기준 CE-R·RO-R·S-R 등) 부족. FRQ 는 EL2 용 3세트(fb1–fb3)가 이미 있다. 보충에 필요한 추정 비용 ≈ $3.5(읽기 5묶음 Fable 동기 $1.9 + 글쓰기 2묶음 Opus $0.4 + 검증 $1.2): 영어 상한 $24 의 잔여 $1.27 을 넘어 **오너 상한 상향 또는 중단 결정 필요**.
 
 **사람 검수(출시 전 필수, §6 그대로):** 모든 지문·소스, 모든 FRQ 과제문·루브릭·샘플 100%, MC 통과 문항 무작위 30%·풀이 제2 방어 가능이었던 묶음의 이웃 문항·적대 weak 판정 문항 우선. 사람 검수 인력이 없어 이번에는 자동 게이트만 적용했고, 남은 위험은 §7 의 1·2·7번과 동일(잔여 키 오류율 3–8% 추정 유지).
+
+
+---
+
+## 10. 공식 5묶음 구조 재편(2026-10-15) — 관리자 순서
+
+감사·결과: `docs/ap/englang-structure-audit.md`. 공식 MC 구성은 5묶음(읽기 2 × 11–14, 글쓰기 7–9 / 7–9 / 4–6)이며, 위 §1·§5·§9의 "지문당 4–6문항·9–10지문" 가정은 대체됐다. 구 EL1/EL2 v3는 레거시 규칙으로 계속 유효하다.
+
+산출물(모두 저장소 데이터, 원격 쓰기 없음): 배치 `el-long`(`data/ap/stock/el-long-items.json`·`el-long-pass-keys.json`, 화면 증거 `data/ap/screen-evidence/evidence-el-long.json`), 정확 배정 `data/ap/stock/exact-assign-el-long-el1-el2.json`, 새 버전 교체 계획 `data/ap/stock/el1-long-v4-swap-plan.json`(41 슬롯)·`el2-long-v4-swap-plan.json`(39 슬롯).
+
+관리자가 할 일(순서대로, 비프로덕션 먼저·프로덕션은 별도 승인):
+1. **배포**: 브랜치(`el-long`)를 통합 브랜치에 병합·배포한다(배치·증거·계획 파일과 `resolveSwaps` 재편 지원이 함께 들어가야 한다).
+2. **후보 적재**: 관리자 → AP 재고(배치)에서 `AP English Language 공식 5묶음 구조 장문 묶음 (el-long)`을 선택, '미리보기(dry-run)'로 신규 8건·기존 행 변경 0 확인 후 '적재'. (CLI 대안: `npx tsx scripts/ap-generation/import-candidates.ts --items data/ap/stock/el-long-items.json --batch el-long-2026-10-15 --supplement` → 확인 후 `--execute`.)
+3. **검증 기록**: 같은 화면에서 `el-long` 배치의 '렌더 검증 기록' → '화면 검증 기록'(증거 content_hash 일치 확인). 8건 모두 렌더·화면 검증됨이어야 한다.
+4. **EL1 새 버전**: 모의고사 세트 → `AP English Language — Practice Exam 1`(v3, 게시됨) → '새 버전' → 계획 `el1-long-v4-swap-plan.json` → 미리보기에서 위반 0·교체 41건 확인 → '초안 생성'(v4 초안). 짧은 글쓰기 묶음 w22(42–45)와 FRQ 3은 바뀌지 않는다.
+5. **EL2 새 버전**: `Practice Exam 2`(v3) → `el2-long-v4-swap-plan.json` → 교체 39건 → '초안 생성'. (w32 40–45와 FRQ 3은 그대로.)
+6. 초안을 열어 읽기 2묶음·글쓰기 3묶음 구조와 MC 45·FRQ 3, 문항 번호 연속을 학생 화면으로 확인한 뒤 '새 버전 공개'. 기존 v3 응시 기록은 v3에 남는다. 문제가 있으면 초안을 폐기하면 되고 v3는 게시 상태 그대로다.
+- 먼저 `el1/el2-review-v2-swap-plan.json`(검수 수정본)이 이미 적용된 v3 위에서 만든 계획이다. v3 슬롯 구성이 다르면(다른 버전이 게시된 경우) 미리보기가 "현재 문항이 계획과 다릅니다"로 막는다 — 계획을 다시 생성(`npx tsx scripts/ap-generation/el-long-swap-plans.ts`)해야 한다.

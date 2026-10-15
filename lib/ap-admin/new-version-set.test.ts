@@ -49,3 +49,28 @@ describe("composition check keeps shared sets together", () => {
     expect(one.issues.join()).toMatch(/set_replacement_incomplete_setB_1\/3/);
   });
 });
+
+// 영어 장문 재편: 묶음 크기가 다른 새 묶음(12문항)으로 교체 — 기존 묶음 전체를 한꺼번에 비우고 새 묶음을 연속 슬롯에 채운다.
+describe("regroup swaps (addIndex) for differently sized sets", () => {
+  const old = [["oA", 5], ["oB", 3], ["oC", 4], ["keep", 2]] as const; let pos = 1;
+  const oslots = old.flatMap(([k, n]) => Array.from({ length: n }, () => ({ section: "ap_mc", position: pos++, candidateKey: k })));
+  const plan = Array.from({ length: 12 }, (_, j) => ({ section: "ap_mc", position: j + 1, addKey: "newLong", addIndex: j }));
+  it("maps 12 consecutive slots spanning three old sets to one new 12-problem set without expanding old groups", () => {
+    const r = resolveSwaps(plan, oslots);
+    expect(r.problems).toEqual([]); expect(r.swaps).toHaveLength(12);
+    expect(r.swaps.map((s) => s.addIndex)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]); expect(new Set(r.swaps.map((s) => s.removeKey))).toEqual(new Set(["oA", "oB", "oC"]));
+  });
+  it("rejects a plan that replaces a slot twice or names a missing slot", () => {
+    expect(resolveSwaps([...plan, { section: "ap_mc", position: 1, addKey: "x", addIndex: 0 }], oslots).problems.join()).toMatch(/두 번/);
+    expect(resolveSwaps([{ section: "ap_mc", position: 99, addKey: "x", addIndex: 0 }], oslots).problems.join()).toMatch(/없습니다/);
+  });
+  it("the composition check accepts it when every old set is replaced as a whole and the new set is complete", () => {
+    const source: SlotItem[] = oslots.map((s, i) => ({ ...s, problemId: `p${i}`, kind: "mc" as const, unit: "1", family: s.candidateKey, calculator: "na" }));
+    const swaps = plan.map((s, j) => ({ section: s.section, position: s.position, problemId: `n${j}` }));
+    const reps = new Map(swaps.map((s) => [s.problemId, { problemId: s.problemId, candidateKey: "newLong", kind: "mc" as const, unit: "1", family: "newLong", calculator: "na" }]));
+    const c = { apLabel: "full_practice" as const, sectionCalculator: { ap_mc: "na" }, usedByOtherExams: new Set<string>(), replacements: reps, setSizes: new Map([["newLong", 12]]) };
+    expect(checkNewVersionComposition(source, swaps, c as never).issues).toEqual([]);
+    const partial = checkNewVersionComposition(source, swaps.slice(0, 11), { ...c, setSizes: new Map([["newLong", 12]]) } as never);
+    expect(partial.issues.join()).toMatch(/set_replacement_incomplete_newLong_11\/12/);
+  });
+});

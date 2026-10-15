@@ -30,4 +30,19 @@ describe("elang rules", () => {
     expect(verifyElangFullComposition(swap).some((x) => x.startsWith("set_not_contiguous"))).toBe(true);
     const reordered = build(W, R); expect(verifyElangFullComposition(reordered)).toContain("reading_after_writing");
   });
+  describe("official 5-set structure (2 reading 11-14, 3 writing 7-9/7-9/4-6)", () => {
+    const rd = (n: number, skills: string[]) => Array.from({ length: n }, (_, i) => skills[i % skills.length]);
+    const r1 = rd(12, ["1.A", "1.B", "3.A", "3.B", "3.C", "5.A", "5.B", "5.C", "7.A", "7.B", "7.C", "3.A"]), r2 = rd(12, ["1.A", "1.B", "3.A", "3.B", "3.C", "5.A", "5.B", "5.C", "7.A", "7.B", "7.C", "5.A"]);
+    const w1 = ["2.A", "2.B", "4.A", "4.B", "6.A", "6.B", "8.A", "8.B"], w2 = ["2.A", "4.A", "4.C", "6.A", "6.C", "8.A", "8.B", "8.C"], w3 = ["2.B", "4.B", "6.B", "8.C", "2.A"];
+    it("accepts the official shape and keeps the legacy shape valid", () => {
+      expect(verifyElangFullComposition(build([r1, r2], [w1, w2, w3])).filter((x) => !x.startsWith("category_"))).toEqual([]);
+      expect(verifyElangFullComposition(build(R, W)).filter((x) => !x.startsWith("category_"))).toEqual([]);
+    });
+    it("rejects wrong sizes in the official shape", () => {
+      const sizes = (rs: string[][], ws: string[][]) => verifyElangFullComposition(build(rs, ws)).filter((x) => x.startsWith("official_") || x.startsWith("set_size"));
+      expect(sizes([r1.slice(0, 10), [...r2, "1.A", "3.A"]], [w1, w2, w3]).length).toBeGreaterThan(0); // 10 and 14 -> first too small
+      expect(sizes([r1, r2], [w1, w2, [...w3, "4.A", "6.A"]]).some((x) => x.startsWith("official_writing_set_3"))).toBe(true);
+      expect(sizes([r1, r2], [w1.slice(0, 6), w2, w3]).some((x) => x.startsWith("official_writing_set_2") || x.startsWith("official_writing_set_1"))).toBe(true);
+    });
+  });
 });

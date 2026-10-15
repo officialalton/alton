@@ -5,7 +5,7 @@
 // 가상 칸(재고에 없는 칸)은 만들지 않는다: 재고만으로 불가능하면 해 없음(infeasible)과 부족 요약을 보고한다.
 import { writeFileSync } from "node:fs";
 import { solveMip, type Cons } from "../../lib/ap-exam/ilp";
-import { ELANG_CATEGORIES, ELANG_FRQ_COUNT, ELANG_FRQ_TYPES, ELANG_FULL_TARGET, ELANG_MC_COUNT, ELANG_READING_RANGE, ELANG_SET_COUNT, ELANG_SET_SIZE, ELANG_WRITING_RANGE, elangCategoryBounds, elangSectionOf, verifyElangFullComposition, type ElangSetItem } from "../../lib/ap-exam/elang-rules";
+import { ELANG_OFFICIAL_READING_SETS, ELANG_OFFICIAL_WRITING_SETS, ELANG_CATEGORIES, ELANG_FRQ_COUNT, ELANG_FRQ_TYPES, ELANG_FULL_TARGET, ELANG_MC_COUNT, ELANG_READING_RANGE, ELANG_SET_COUNT, ELANG_SET_SIZE, ELANG_WRITING_RANGE, elangCategoryBounds, elangSectionOf, verifyElangFullComposition, type ElangSetItem } from "../../lib/ap-exam/elang-rules";
 import { loadElPool, type ElItem } from "./el-pool";
 import { solveMipHighs } from "./ilp-highs";
 
@@ -13,10 +13,12 @@ const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i
 const has = (n: string) => process.argv.includes(n);
 export type ElResult = { id: string; sets: ElItem[]; frq: ElItem[] };
 
-const usableOf = (items: ElItem[], blocked: Set<string>) => items.filter((c) => !blocked.has(c.key) && (c.kind === "frq" ? (ELANG_FRQ_TYPES as readonly string[]).includes(c.frqType) : c.section !== null && c.members.length >= ELANG_SET_SIZE.min && c.members.length <= ELANG_SET_SIZE.max));
+/** 공식 5묶음 구성(읽기 11–14, 글쓰기 7–9 ×2 + 4–6)에서 후보 묶음 크기 범주. */
+export const officialClass = (c: ElItem): "r" | "wl" | "ws" | null => c.section === "reading" ? (c.members.length >= ELANG_OFFICIAL_READING_SETS.size.min && c.members.length <= ELANG_OFFICIAL_READING_SETS.size.max ? "r" : null) : c.section === "writing" ? (c.members.length >= ELANG_OFFICIAL_WRITING_SETS.sizes[0].min && c.members.length <= ELANG_OFFICIAL_WRITING_SETS.sizes[0].max ? "wl" : c.members.length >= ELANG_OFFICIAL_WRITING_SETS.sizes[2].min && c.members.length <= ELANG_OFFICIAL_WRITING_SETS.sizes[2].max ? "ws" : null) : null;
+const usableOf = (items: ElItem[], blocked: Set<string>, official = false) => items.filter((c) => !blocked.has(c.key) && (c.kind === "frq" ? (ELANG_FRQ_TYPES as readonly string[]).includes(c.frqType) : official ? officialClass(c) !== null : c.section !== null && c.members.length >= ELANG_SET_SIZE.min && c.members.length <= ELANG_SET_SIZE.max));
 
-export function solveElSets(ids: string[], items: ElItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; highs?: boolean }) {
-  const usable = usableOf(items, o.blocked ?? new Set()); const mc = usable.filter((c) => c.kind === "mc"), frqs = usable.filter((c) => c.kind === "frq");
+export function solveElSets(ids: string[], items: ElItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; highs?: boolean; official?: boolean; frqPins?: Record<string, string[]>; mcPins?: Record<string, string[]> }) {
+  const usable = usableOf(items, o.blocked ?? new Set(), o.official); const mc = usable.filter((c) => c.kind === "mc"), frqs = usable.filter((c) => c.kind === "frq");
   let n = 0; const xv = new Map<string, number>(); usable.forEach((c, i) => ids.forEach((_, s) => xv.set(`${i}|${s}`, n++)));
   const idx = new Map(usable.map((c, i) => [c, i] as const)); const x = (c: ElItem, s: number) => xv.get(`${idx.get(c)}|${s}`)!;
   const dv = new Map<string, number>(); ids.forEach((_, s) => ELANG_CATEGORIES.forEach((k) => dv.set(`${s}|${k}`, n++)));
@@ -32,7 +34,10 @@ export function solveElSets(ids: string[], items: ElItem[], o: { timeMs: number;
     const rd = count((c) => (c.section === "reading" ? c.members.length : 0)), wr = count((c) => (c.section === "writing" ? c.members.length : 0));
     cons.push({ coef: rd, sense: ">=", rhs: ELANG_READING_RANGE.min }); cons.push({ coef: rd, sense: "<=", rhs: ELANG_READING_RANGE.max });
     cons.push({ coef: wr, sense: ">=", rhs: ELANG_WRITING_RANGE.min }); cons.push({ coef: wr, sense: "<=", rhs: ELANG_WRITING_RANGE.max });
-    for (const sec of ["reading", "writing"] as const) { const sc = count((c) => (c.section === sec ? 1 : 0)); cons.push({ coef: sc, sense: ">=", rhs: ELANG_SET_COUNT.min }); cons.push({ coef: sc, sense: "<=", rhs: ELANG_SET_COUNT.max }); }
+    if (o.official) { for (const [cl, n] of [["r", ELANG_OFFICIAL_READING_SETS.count], ["wl", 2], ["ws", 1]] as const) cons.push({ coef: count((c) => (officialClass(c) === cl ? 1 : 0)), sense: "=", rhs: n }); }
+    else for (const sec of ["reading", "writing"] as const) { const sc = count((c) => (c.section === sec ? 1 : 0)); cons.push({ coef: sc, sense: ">=", rhs: ELANG_SET_COUNT.min }); cons.push({ coef: sc, sense: "<=", rhs: ELANG_SET_COUNT.max }); }
+    for (const k of o.mcPins?.[ids[s]] ?? []) { const c = mc.find((f) => f.key === k); if (c) cons.push({ coef: [[x(c, s), 1]], sense: "=", rhs: 1 }); }
+    for (const k of o.frqPins?.[ids[s]] ?? []) { const c = frqs.find((f) => f.key === k); if (c) cons.push({ coef: [[x(c, s), 1]], sense: "=", rhs: 1 }); }
     for (const k of ELANG_CATEGORIES) {
       const co = count((c) => c.members.filter((m) => m.cat === k).length); const b = bounds[k]; const t = ELANG_FULL_TARGET.categories[k]; const d = dv.get(`${s}|${k}`)!;
       cons.push({ coef: co, sense: ">=", rhs: b.min }); cons.push({ coef: co, sense: "<=", rhs: b.max });
@@ -51,7 +56,7 @@ export function solveElSets(ids: string[], items: ElItem[], o: { timeMs: number;
 /** 한 시험의 MC 위치 목록: 읽기 묶음 먼저(묶음 키 순), 글쓰기 묶음이 뒤. 묶음은 연속 칸. */
 export function buildElOrder(r: ElResult): ElangSetItem[] {
   const rank = (c: ElItem) => (c.section === "reading" ? 0 : 1);
-  const blocks = [...r.sets].sort((a, b) => rank(a) - rank(b) || a.key.localeCompare(b.key)); const out: ElangSetItem[] = []; let pos = 1;
+  const blocks = [...r.sets].sort((a, b) => rank(a) - rank(b) || (a.section === "writing" ? b.members.length - a.members.length : 0) || a.key.localeCompare(b.key)); const out: ElangSetItem[] = []; let pos = 1; // 글쓰기는 큰 묶음(7–9) 먼저, 마지막이 4–6
   for (const b of blocks) for (const m of b.members) out.push({ kind: "mc", skill: m.skill, candidateKey: b.key, position: pos++ });
   return out;
 }
@@ -82,9 +87,10 @@ export function toReportSet(r: ElResult) {
 export function categorySummary(r: ElResult) { const c: Record<string, number> = {}; for (const s of r.sets) for (const m of s.members) c[m.cat] = (c[m.cat] ?? 0) + 1; return c; }
 
 function main() {
+  const official = has("--official"); const mcPins = arg("--mc-pins") ? (JSON.parse(arg("--mc-pins")) as Record<string, string[]>) : undefined; const pins = arg("--frq-pins") ? (JSON.parse(arg("--frq-pins")) as Record<string, string[]>) : undefined;
   const ids = arg("--sets", "EL1,EL2").split(",").filter(Boolean); const TIME = Number(arg("--time-ms", "120000")); const files = arg("--files") ? arg("--files").split(",") : undefined;
   const { pool } = loadElPool({ requireScreen: !has("--no-screen"), files }); const log = (s: string) => console.error(s);
-  const m = solveElSets(ids, pool, { timeMs: TIME, log, highs: has("--highs") });
+  const m = solveElSets(ids, pool, { timeMs: TIME, log, highs: has("--highs"), official, frqPins: pins, mcPins });
   const bad = m.res.x.length ? verifyElAssignment(m.out) : ["해 없음(재고만으로 공식 구조를 채울 수 없음)"];
   const cnt = (f: (c: ElItem) => boolean) => pool.filter(f).length;
   console.log(`# el-assign sets=${ids.join(",")} 재고 읽기 묶음 ${cnt((c) => c.section === "reading")} 글쓰기 묶음 ${cnt((c) => c.section === "writing")} (문항 ${pool.filter((c) => c.kind === "mc").reduce((a, c) => a + c.members.length, 0)}) FRQ ${cnt((c) => c.kind === "frq")} (${ELANG_FRQ_TYPES.map((t) => `${t}:${cnt((c) => c.frqType === t)}`).join(" ")})`);

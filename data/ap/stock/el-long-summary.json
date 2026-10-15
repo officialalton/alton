@@ -1,0 +1,90 @@
+{
+ "runs": [
+  "englang-long-a",
+  "englang-long-b"
+ ],
+ "rows": 8,
+ "passed": 8,
+ "rejected": 0,
+ "mcSets": {
+  "rows": 8,
+  "passed": 8
+ },
+ "frqSets": {
+  "rows": 0,
+  "passed": 0
+ },
+ "mcItems": {
+  "generated": 74,
+  "deterministicPass": 69,
+  "solvers3of3": 69,
+  "finalPass": 51,
+  "firstPassRate": 0.689
+ },
+ "failureReasons": {
+  "adversary_missing": 5,
+  "judge_missing": 5,
+  "deterministic": 19,
+  "solver_reports_second_defensible_option": 5
+ },
+ "keyConfidence": {
+  "items": 80,
+  "high": 22,
+  "medium": 58,
+  "mean": 0.898
+ },
+ "categoriesPassed": {
+  "RS-R": 11,
+  "CE-R": 13,
+  "RO-R": 14,
+  "S-R": 10,
+  "RS-W": 9,
+  "CE-W": 7,
+  "RO-W": 8,
+  "S-W": 8
+ },
+ "skillsPassed": {
+  "1.B": 5,
+  "3.A": 5,
+  "5.C": 4,
+  "7.C": 3,
+  "1.A": 6,
+  "3.B": 3,
+  "3.C": 5,
+  "5.A": 5,
+  "5.B": 5,
+  "7.B": 4,
+  "7.A": 3,
+  "2.A": 5,
+  "4.B": 3,
+  "6.A": 5,
+  "8.B": 4,
+  "2.B": 4,
+  "4.A": 3,
+  "8.C": 2,
+  "6.B": 2,
+  "6.C": 1,
+  "8.A": 2,
+  "4.C": 1
+ },
+ "renderTypesPassed": {
+  "none": 8
+ },
+ "frqAudit": [],
+ "costUsd": {
+  "englang-long-a": {
+   "adv": 0.6811,
+   "gen": 1.1099,
+   "judge": 0.1492,
+   "review": 0.0541,
+   "solve": 0.4953
+  },
+  "englang-long-b": {
+   "adv": 0.1364,
+   "gen": 0.0858,
+   "judge": 0.0254,
+   "review": 0.0115,
+   "solve": 0.097
+  }
+ }
+}
