@@ -39,3 +39,20 @@ describe("EssayScoreCard", () => {
     expect(screen.getByText(/too short/)).toBeTruthy();
   });
 });
+
+describe("EssayScoreCard — US History rubrics", () => {
+  const ush = (taskType: string, scores: Record<string, number>, total: number): EssayScoreView => ({ setItemId: "i", partLabel: "A", status: "done", lastError: null, rubricVersion: "ushistory-v1",
+    scores: { ...scores, total, rubricVersion: "ushistory-v1", taskType }, rationale: { ...Object.fromEntries(Object.keys(scores).map((k) => [k, `why ${k}`])), improve: [] } });
+  it("SAQ shows a/b/c out of 3", () => {
+    render(<EssayScoreCard score={ush("saq", { a: 1, b: 0, c: 1 }, 2)} />);
+    expect(screen.getByTestId("essay-score-total").textContent).toMatch(/2\s*\/ 3/);
+    expect(screen.getByTestId("essay-row-b").textContent).toMatch(/Part \(B\).*0\/1/);
+  });
+  it("DBQ shows its rows out of 7; LEQ out of 6", () => {
+    const { unmount } = render(<EssayScoreCard score={ush("dbq", { thesis: 1, context: 1, docs: 2, outside: 0, sourcing: 1, complexity: 0 }, 5)} />);
+    expect(screen.getByTestId("essay-score-total").textContent).toMatch(/5\s*\/ 7/); expect(screen.getByTestId("essay-row-docs").textContent).toMatch(/2\/2/); unmount();
+    render(<EssayScoreCard score={ush("leq", { thesis: 1, context: 0, evidence: 2, analysis: 1 }, 4)} />);
+    expect(screen.getByTestId("essay-score-total").textContent).toMatch(/4\s*\/ 6/); expect(screen.getByTestId("essay-row-analysis").textContent).toMatch(/1\/2/);
+    expect(screen.getByText(/AI estimated score \(internal estimate — not an official AP score\)/)).toBeTruthy();
+  });
+});

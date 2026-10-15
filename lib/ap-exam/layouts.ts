@@ -26,6 +26,8 @@ export const AP_LAYOUTS: Record<string, ApSection[]> = {
   ap_computer_science_a: [s("ap_mc", "mc", "Section I: Multiple Choice", 90, 42, "na", 4), s("ap_frq", "frq", "Section II: Free Response", 90, 4, "na")],
   ap_english_language: [s("ap_mc", "mc", "Section I: Multiple Choice", 60, 45, "na", 4), s("ap_frq", "frq", "Section II: Free Response (3 essays)", 135, 3, "na")],
   // Psychology: CED effective Fall 2025 (Exam Overview p.147-149) — 75 MC / 90 min (4 options, discrete + set-based), 2 FRQ / 70 min (Article Analysis 25 min incl. 10 min reading + Evidence-Based 45 min incl. 15 min reading). No calculator mentioned.
+  // US History: CED(effective Fall 2026) p.497 — MC 55/55분(4지선다, 3–4문항 세트), SAQ 3/40분, DBQ 60분(읽기 15 포함)+LEQ 40분 = Section II 100분. 계산기 없음. 완전 디지털.
+  ap_us_history: [s("ap_mc", "mc", "Section I, Part A: Multiple Choice", 55, 55, "na", 4), s("ap_saq", "frq", "Section I, Part B: Short Answer", 40, 3, "na"), s("ap_frq", "frq", "Section II: Document-Based Question and Long Essay", 100, 2, "na")],
   ap_psychology: [s("ap_mc", "mc", "Section I: Multiple Choice", 90, 75, "na", 4), s("ap_frq", "frq", "Section II: Free Response (Article Analysis + Evidence-Based)", 70, 2, "na")],
 };
 
@@ -45,7 +47,7 @@ export const AP_LABEL_TEXT: Record<ApSetLabel, string> = {
 export const AP_SUBJECT_NAME: Record<string, string> = {
   ap_calculus_ab: "AP Calculus AB", ap_calculus_bc: "AP Calculus BC", ap_biology: "AP Biology", ap_microeconomics: "AP Microeconomics",
   ap_macroeconomics: "AP Macroeconomics", ap_statistics: "AP Statistics", ap_chemistry: "AP Chemistry", ap_physics_1: "AP Physics 1",
-  ap_computer_science_a: "AP Computer Science A", ap_english_language: "AP English Language", ap_psychology: "AP Psychology",
+  ap_computer_science_a: "AP Computer Science A", ap_english_language: "AP English Language", ap_psychology: "AP Psychology", ap_us_history: "AP U.S. History",
 };
 
 /** 라벨이 요구하는 섹션(조립이 채워야 할 섹션). */

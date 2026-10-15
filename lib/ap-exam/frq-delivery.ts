@@ -14,6 +14,7 @@ export const AP_FRQ_DELIVERY: Record<string, ApFrqDelivery> = {
   ap_statistics: "digital",
   ap_computer_science_a: "digital",
   ap_english_language: "digital",
+  ap_us_history: "digital", // AP Central: 완전 디지털(Bluebook), 2027 SAQ/LEQ 개편
   ap_psychology: "digital", // 서술형(Article Analysis·Evidence-Based) 타이핑 — 실제 전달 방식은 UNVERIFIED(docs/ap/psychology-facts.md)
 };
 export function apFrqIsPaper(subject: string | null | undefined): boolean {

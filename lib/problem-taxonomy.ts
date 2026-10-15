@@ -142,6 +142,7 @@ export const AP_SUBJECTS: ApSubjectMeta[] = [
   { code: "ap_microeconomics", label: "AP Microeconomics", supported: false, formats: [] },
   { code: "ap_macroeconomics", label: "AP Macroeconomics", supported: false, formats: [] },
   { code: "ap_psychology", label: "AP Psychology", supported: false, formats: [] },
+  { code: "ap_us_history", label: "AP U.S. History", supported: false, formats: [] },
   { code: "ap_computer_science_a", label: "AP Computer Science A", supported: false, formats: [] },
 ];
 export const AP_SUBJECT_BY_CODE = new Map(AP_SUBJECTS.map((a) => [a.code, a]));

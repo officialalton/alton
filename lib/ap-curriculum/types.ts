@@ -13,6 +13,7 @@ export const AP_SUBJECT_CODES = [
   "ap_macroeconomics",
   "ap_english_language",
   "ap_psychology",
+  "ap_us_history",
 ] as const;
 export type ApSubjectCode = (typeof AP_SUBJECT_CODES)[number];
 

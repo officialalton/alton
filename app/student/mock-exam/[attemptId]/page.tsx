@@ -11,6 +11,7 @@ import ApExamTakeClient from "./ApExamTakeClient";
 import ApExamResultView from "./ApExamResultView";
 import { loadEssayScores } from "@/lib/essay-grading/view";
 import { flagEnabled as essayAiEnabledFlag } from "@/lib/essay-grading/costs";
+import { essayGradingSubject } from "@/lib/essay-grading/subject";
 import { apFrqIsPaper } from "@/lib/ap-exam/frq-delivery";
 import type { FrqInkRow } from "@/lib/ap-exam/frq-ink";
 import type { MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
@@ -64,7 +65,7 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
       return Array.isArray(data) ? (data as FrqInkRow[]) : [];
     })();
     // AI 에세이 추정 점수(플래그 켜짐 + AP English 일 때만 쿼리 1회). 꺼져 있으면 조회도 없다.
-    const essayAi = isGraded && essayAiEnabledFlag() && attempt.apSubject === "ap_english_language";
+    const essayAi = isGraded && essayAiEnabledFlag() && essayGradingSubject(attempt.apSubject);
     const essayScoresP = essayAi ? loadEssayScores(supabase, attemptId) : Promise.resolve([]);
     const [topicNames, handwriting, attempts, essayScores] = await Promise.all([topicNamesP, handwritingP, attemptsP, essayScoresP]);
     // w-full: body 가 flex-col 이라 mx-auto 만 있으면 main 이 내용 최소폭(문항 번호 줄 796px)까지 늘어나 모바일에서 가로 스크롤·번호 버튼 클릭 불가가 됐다(2026-10-09 화면 점검에서 발견). *

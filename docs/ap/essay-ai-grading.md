@@ -26,3 +26,13 @@
 
 ## 4. 비용 추정(단가는 가정: 입력 $3/M, 출력 $15/M — `AI_ESSAY_USD_PER_M_*` 로 교정)
 에세이 1건 = 입력 약 6k(루브릭 0.7k + 샘플 3개 약 2.5k + 소스 약 2k + 에세이 약 1k) × 2회 + 출력(사고 포함) 약 1.5k × 2회 ≈ **$0.08**(범위 $0.05–0.15). 응시 1회(에세이 3건) ≈ **$0.25**. 월 예산 $25 = 약 300 응시.
+
+## § US History (ushistory-v1)
+AP U.S. History 자유응답도 같은 파이프라인·같은 플래그(`AI_ESSAY_GRADING_ENABLED`)로 채점한다. 루브릭 레지스트리(`rubric.ts resolveRubric(id, taskType)`)가 행·프롬프트 머리말·최소 단어·상한을 정한다. 영어(`englang-v2`)는 변경 없음. DB 마이그레이션 없음(`rubric_version = 'ushistory-v1'`, 과제 유형은 `scores.taskType`).
+- **SAQ 3점**: 행 a·b·c 각 0–1(파트별 독립). 행 문구는 일반형 — 문항별 기대는 payload 의 루브릭 descriptor·`expected_features` 가 "question-specific scoring notes" 로 프롬프트에 들어간다.
+- **DBQ 7점**: thesis 0–1 · context 0–1 · docs 0–2(3개 이상 정확 서술=1, 4개 이상 논증에 활용=2) · outside 0–1 · sourcing 0–1(2개 이상 문서의 관점·목적·상황·청중) · complexity 0–1.
+- **LEQ 6점**: thesis 0–1 · context 0–1 · evidence 0–2 · analysis 0–2(역사적 추론 구조=1, 복합적 이해=2).
+- 공통 규칙(시스템 프롬프트): 각 점수 독립 · 정확성(역사적 주장이 틀리면 인정 안 함, 논지를 해치지 않는 사소한 오류는 허용) · 문법 오류는 의미를 가리지 않으면 불감점. 문구는 공개 AP History 루브릭 구조의 ALTON 자체 의역(공식 문구·샘플 답안 복제 아님, 공식 대조 UNVERIFIED).
+- **채점 단위**: SAQ 한 문항(A·B·C)=1건 — 답한 파트를 `(A) … (B) … (C) …` 로 합쳐 첫 파트 라벨을 키로 저장하고 결과 화면은 문항 아래 카드 하나(a/b/c 행). DBQ·LEQ = 문항당 1건. 최소 단어 SAQ 10 · DBQ/LEQ 50, 최대 1,500단어/12,000자(영어와 동일). 보정 샘플(high/mid/low) 3개 미만이면 채점 안 함(동일 안전 규칙).
+- **상한**: 응시당 영어 3건(`AI_ESSAY_PER_ATTEMPT_CAP`) · U.S. History 6건(`AI_ESSAY_PER_ATTEMPT_CAP_USH`, 응시 최대 5건=SAQ 3+DBQ+LEQ); 일 계정 상한 기본 영어 6 · History 12(`AI_ESSAY_DAILY_CAP` 가 있으면 그 값), History 입력 한도 기본 16k 토큰(`AI_ESSAY_MAX_INPUT_TOKENS` 로 덮어씀). 월 예산 가드는 공통.
+- **payload**: `payload.ush_frq`(schema_version `ush-frq-1`)를 `payload.ts` 가 채점 맥락(과제문=scenario+task+requirements(+SAQ 파트), 소스=문서/발췌 텍스트(표·그림은 텍스트), 앵커 note=주석+샘플이 받은 행별 점수, rubricId·taskType·scoringNotes)으로 변환한다.

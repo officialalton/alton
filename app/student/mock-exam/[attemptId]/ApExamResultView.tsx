@@ -4,6 +4,7 @@ import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import EssayScoreCard from "@/app/components/EssayScoreCard";
 import type { EssayScoreView } from "@/lib/essay-grading/view";
+import { USH_RUBRIC_ID } from "@/lib/essay-grading/rubric";
 import { enqueueEssayGradingAction } from "@/lib/essay-grading/actions";
 import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 import { AP_SUBJECT_NAME, apBadgeText, apCoverageLines, apGuidanceLines, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
@@ -36,6 +37,9 @@ const EAGER_ITEMS = 4;
 
 /** 문항 하나의 본문(지문·그림·질문·선택지/FRQ 답·해설·오류 신고). 같은 문항이 다시 그려질 일(필터 전환 등)에 수식을 다시 조판하지 않도록 memo. */
 const ApReviewItem = memo(function ApReviewItem({ it, attemptId, inkByPart, essayByPart, readOnly, onRetry }: { it: MockExamAttemptItem; attemptId: string; inkByPart: Map<string, string>; essayByPart?: Map<string, EssayScoreView>; readOnly?: boolean; onRetry?: () => void }) {
+  // U.S. History SAQ: A·B·C 를 한 건으로 채점해 첫 파트 라벨에 저장된다 → 카드는 문항 아래에 한 번만(a/b/c 행 점수).
+  const groupedScore = it.format === "essay" && (it.parts?.length ?? 0) > 1 ? essayByPart?.get(inkKey(it.setItemId, it.parts![0].label)) : undefined;
+  const grouped = groupedScore?.rubricVersion === USH_RUBRIC_ID;
   return (
     <>
               {apPassageForDisplay(it.passage, it.question) && <LearningText text={apPassageForDisplay(it.passage, it.question) as string} className="mb-2 text-[13.5px]" />}
@@ -67,9 +71,10 @@ const ApReviewItem = memo(function ApReviewItem({ it, attemptId, inkByPart, essa
                           <img src={svgDataUrl(inkByPart.get(inkKey(it.setItemId, p.label)) as string)} alt={`Your handwritten answer for part (${p.label})`} className="w-full max-w-xl rounded border border-grey-200 bg-white" />
                         </figure>
                       )}
-                      {essayByPart && <EssayScoreCard score={essayByPart.get(inkKey(it.setItemId, p.label)) ?? null} readOnly={readOnly} onRetry={onRetry} />}
+                      {essayByPart && !grouped && <EssayScoreCard score={essayByPart.get(inkKey(it.setItemId, p.label)) ?? null} readOnly={readOnly} onRetry={onRetry} />}
                     </div>
                   ))}
+                  {essayByPart && grouped && <EssayScoreCard score={groupedScore ?? null} readOnly={readOnly} onRetry={onRetry} />}
                 </div>
               )}
               {(it.explanationEn ?? it.explanation) && (
@@ -91,7 +96,12 @@ export default function ApExamResultView({ attempt, attempts, topicNames, handwr
   // 플래그가 켜져 있고 에세이 파트 중 점수 행이 없는 것이 있으면 학생 화면에서 한 번 채점을 시작한다(멱등, 서버가 상한을 강제).
   useEffect(() => {
     if (readOnly || !essayByPart || started.current) return;
-    const missing = attempt.items.some((i) => i.format === "essay" && (i.parts ?? []).some((p) => !essayByPart.has(inkKey(i.setItemId, p.label))));
+    const missing = attempt.items.some((i) => {
+      if (i.format !== "essay") return false;
+      const ps = i.parts ?? [];
+      if (ps.length > 1 && essayByPart.get(inkKey(i.setItemId, ps[0].label))?.rubricVersion === USH_RUBRIC_ID) return false; // SAQ 묶음: 첫 파트 행 하나가 전체
+      return ps.some((p) => !essayByPart.has(inkKey(i.setItemId, p.label)));
+    });
     if (missing) { started.current = true; startScoring(); }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [essayByPart, readOnly]);
