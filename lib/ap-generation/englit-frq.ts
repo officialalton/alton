@@ -12,7 +12,7 @@ export const LT_FRQ_TYPE_BY_TEMPLATE: Record<LtFrqTemplate, LtFrqTaskType> = { q
 export type LtRubricRow = { row_id: "A" | "B" | "C"; name: string; max: number; descriptors: Record<string, string>; task_specific: string };
 export type LtAnnotation = { quote: string; comment: string; row_id: "A" | "B" | "C" };
 export type LtSample = { tier: "high" | "mid" | "low"; target_total: number; essay: string; word_count: number; rubric_scores: { A: number; B: number; C: number; total: number }; annotations: LtAnnotation[]; work_chosen?: string };
-export type LtFrqPassage = { form: "poem" | "prose"; title: string; attribution: string; headnote?: string; stanzas: string[][]; line_count: number; provenance: { kind: "original"; author_alias: string; year_alias: number | string } };
+export type LtFrqPassage = { form: "poem" | "prose"; title: string; attribution: string; headnote?: string; stanzas: string[][]; line_count: number; provenance: { kind: "original"; author_alias: string; year_alias: number | string } | { kind: "public_domain"; author_alias: string; year_alias: number | string; registry_id: string; source_url: string } };
 export type LtFrqPayload = {
   schema_version: typeof LT_FRQ_SCHEMA_VERSION; task_type: LtFrqTaskType; template: LtFrqTemplate; title: string;
   prompt: { lead?: string; task: string; requirements: string[] };
@@ -73,7 +73,7 @@ export function sampleQuoteViolations(essay: string, passage: string, title = ""
   return out;
 }
 export const LT_SAMPLE_WORDS = { high: [380, 800], mid: [250, 560], low: [110, 360] } as const;
-export function frqViolations(p: LtFrqPayload, prior: { id: string; text: string }[] = []): string[] {
+export function frqViolations(p: LtFrqPayload, prior: { id: string; text: string }[] = [], opts: { realText?: boolean } = {}): string[] {
   const v: string[] = []; const t = p.template;
   if (p.schema_version !== LT_FRQ_SCHEMA_VERSION) v.push("schema_version"); if (LT_FRQ_TYPE_BY_TEMPLATE[t] !== p.task_type) v.push("template_task_type_mismatch");
   if (!p.prompt?.task?.trim()) v.push("prompt_task_missing"); if ((p.prompt?.requirements ?? []).length < 2) v.push("prompt_requirements_fewer_than_2");
@@ -90,10 +90,10 @@ export function frqViolations(p: LtFrqPayload, prior: { id: string; text: string
       const b = ps.form === "poem" ? LT_FRQ_BOUNDS.poem : LT_FRQ_BOUNDS.prose; const w = passageWords(ps); if ((t === "q1") !== (ps.form === "poem")) v.push("passage_form_mismatch");
       if (w < b.minWords || w > b.maxWords) v.push(`passage_words_${w}_outside_${b.minWords}-${b.maxWords}`);
       const text = frqPassageText(ps); for (const h of textHazards(text + " " + ps.title)) v.push(`passage_${h}`);
-      const low = frqNorm(text + " " + ps.title + " " + ps.provenance.author_alias); const real = REAL_NAMES.filter((n) => hasWord(low, n)); if (real.length) v.push(`passage_real_name_${real.join("|")}`);
-      const bans = LT_BANNED_PHRASES.filter((x) => low.includes(x)); if (bans.length >= 2) v.push(`passage_ai_cliche_${bans.join("|")}`);
+      const low = frqNorm(text + " " + ps.title + " " + ps.provenance.author_alias); const real = opts.realText ? [] : REAL_NAMES.filter((n) => hasWord(low, n)); if (real.length) v.push(`passage_real_name_${real.join("|")}`);
+      const bans = opts.realText ? [] : LT_BANNED_PHRASES.filter((x) => low.includes(x)); if (bans.length >= 2) v.push(`passage_ai_cliche_${bans.join("|")}`);
       if (ps.line_count !== countedLines(ps.stanzas).length) v.push("passage_line_count_mismatch");
-      for (const d of prior) { const g = fiveGrams(text), h = fiveGrams(d.text); let hit = 0; g.forEach((x) => h.has(x) && hit++); if (g.size && hit / g.size > 0.04) v.push(`passage_similar_to_${d.id}`); else if (longestSharedRun(text, d.text) >= 10) v.push(`passage_shared_run_with_${d.id}`); }
+      for (const d of opts.realText ? [] : prior) { const g = fiveGrams(text), h = fiveGrams(d.text); let hit = 0; g.forEach((x) => h.has(x) && hit++); if (g.size && hit / g.size > 0.04) v.push(`passage_similar_to_${d.id}`); else if (longestSharedRun(text, d.text) >= 10) v.push(`passage_shared_run_with_${d.id}`); }
     }
   }
   for (const r of p.rubric?.rows ?? []) { if (!r.task_specific?.trim() || countWords(r.task_specific) < 15) v.push(`rubric_row_${r.row_id}_task_specific_missing`); }

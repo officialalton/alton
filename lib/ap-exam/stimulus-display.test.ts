@@ -33,3 +33,8 @@ describe("AP English Language 지문(2026-10-14): stem 이 지문 문장을 인�
     expect(apPassageForDisplay("The Library Night\n\n[1] The library stayed open late on Fridays. [2] Nobody complained about the quiet evenings.", quotingStem)).toBeNull();
   });
 });
+
+import { REAL_TEXT_MARKER as REAL_MARKER_T, isEnglishPassage as isEnT } from "./stimulus-display";
+describe("real public-domain text marker (2026-10-15)", () => {
+  it("is treated as an English passage (shown verbatim, never math-converted)", () => { expect(isEnT(`${REAL_MARKER_T}\nTitle\n\n\`\`\`passage\nA line\n\`\`\``)).toBe(true); });
+});

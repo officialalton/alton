@@ -16,7 +16,9 @@ export function passageDuplicatesStem(passage: string, stem: string): boolean {
 export const EN_PASSAGE_MARKER = "ALTON original passage";
 /** ALTON 작성 US History 자료(원문 아님) 표지 — 산문이므로 영어 지문과 같이 취급한다(2026-10-14). */
 export const US_STIMULUS_MARKER = "ALTON-composed stimulus";
-export const isEnglishPassage = (p: string): boolean => p.startsWith(`${EN_PASSAGE_MARKER}\n`) || p.startsWith(`${US_STIMULUS_MARKER}\n`);
+/** 실제 공개 저작물(공유 영역) 발췌 표지(AP English Literature 실제 작품 보강, 2026-10-15) — 산문·시이므로 영어 지문과 같이 취급한다. */
+export const REAL_TEXT_MARKER = "Public-domain source text";
+export const isEnglishPassage = (p: string): boolean => p.startsWith(`${EN_PASSAGE_MARKER}\n`) || p.startsWith(`${US_STIMULUS_MARKER}\n`) || p.startsWith(`${REAL_TEXT_MARKER}\n`);
 /** 화면에 그릴 자료 텍스트(없으면 null). */
 export function apPassageForDisplay(passage: string | null | undefined, stem: string | null | undefined): string | null {
   const p = (passage ?? "").trim(); if (!p) return null;
