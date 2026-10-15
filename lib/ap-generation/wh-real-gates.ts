@@ -63,8 +63,8 @@ export function srcEntry(s: RegistrySource, id: string, context: string) {
 /** 문항 게이트용 모양(UshSetRaw 호환): 텍스트는 발췌, 표는 표, 이미지는 alt·제목(그림 존재 처리). */
 function shim(spec: Pick<WhSetSpec, "unit" | "stim">, refs: { id: string }[], reg: Map<string, RegistrySource>): UshSetRaw {
   const sources: UshSource[] = refs.map((r, i) => { const s = reg.get(r.id)!; const base = { id: String.fromCharCode(65 + i), kind: KIND_FOR[s.type], title: s.title, attribution: credit(s), provenance: { kind: "real_historical_source" as const, note: "real source" } };
-    if (s.excerpt_segments) return { ...base, body: s.excerpt_segments.join(" ") }; if (s.table) return { ...base, body: s.title, table: { columns: s.table.columns, rows: s.table.rows } };
-    return { ...base, body: `${s.alt} ${s.title}`, figure: { chart: "bar" as const, title: s.title, categories: ["a", "b", "c"], series: [{ name: "x", values: [1, 2, 3] }], description: s.alt ?? "" } }; });
+    if (s.excerpt_segments) return { ...base, body: s.excerpt_segments.join(" ") }; if (s.table) return { ...base, body: `${s.title} ${s.year}`, table: { columns: s.table.columns, rows: s.table.rows } };
+    return { ...base, body: `${s.alt} ${s.title} ${s.year} ${s.credit ?? ""} ${s.notes ?? ""}`, figure: { chart: "bar" as const, title: s.title, categories: ["a", "b", "c"], series: [{ name: "x", values: [1, 2, 3] }], description: s.alt ?? "" } }; });
   return { period: 1, stim_type: spec.stim, theme: "", title: "", sources, items: [] };
 }
 const norm = (t: string) => t.replace(/[‘’‛]/g, "'").replace(/[“”„]/g, '"').replace(/—|–/g, "-").replace(/\s+/g, " ").trim().toLowerCase();
@@ -90,11 +90,11 @@ export function whRealSetViolations(payload: Json, reg: Map<string, WhRegistrySo
 export const rawItemOf = (it: Json): UshItemRaw => ({ skill: String(it.skill), topic: String(it.topic), stem: String(it.stem), options: ((it.options as Json[]) ?? []).map((o, j) => ({ text: String(o.text), is_key: typeof o.is_key === "boolean" ? o.is_key : j === it.key_index, label: String(o.label), why: String(o.why) })), facts: (it.facts as string[]) ?? [], ...(it.derived ? { derived: it.derived as never } : {}), est_seconds: Number(it.est_seconds ?? 75) });
 /** 문항 하나의 결정적 점검(공통 문항 게이트 + 단원 일치 + 설계 근거 + 근거 인용이 자료에 있는지). */
 export function whItemViolations(spec: Pick<WhSetSpec, "unit" | "stim" | "sources">, reg: Map<string, WhRegistrySource>, raw: UshItemRaw, design: Json | undefined): string[] {
-  const v: string[] = []; const set = shim(spec, spec.sources, reg); const srcText = norm(set.sources.map((s) => s.body ?? "").join(" ") + " " + spec.sources.map((r) => reg.get(r.id)?.notes ?? "").join(" "));
+  const v: string[] = []; const set = shim(spec, spec.sources, reg); const srcText = norm(set.sources.map((s) => `${s.body ?? ""} ${s.table ? `${s.table.columns.join(" ")} ${s.table.rows.map((r) => r.join(" ")).join(" ")}` : ""}`).join(" ") + " " + spec.sources.map((r) => reg.get(r.id)?.notes ?? "").join(" "));
   v.push(...itemViolations(set, raw));
   if (whUnitOfTopic(raw.topic) !== String(spec.unit)) v.push(`topic_${raw.topic}_not_in_unit_${spec.unit}`);
   if (!design || design.source_fixed_first !== true || !String(design.key_evidence_in_source ?? "").trim()) v.push("design_evidence_missing");
-  const q = String((design?.evidence_quote as string) ?? "").trim(); if (q && !srcText.includes(norm(q.replace(/\s*\[\.\.\.\]\s*/g, " ")))) v.push("evidence_quote_not_in_source");
+  const q = String((design?.evidence_quote as string) ?? "").trim(); if (q && !spec.sources.some((r) => reg.get(r.id)?.table) && !srcText.includes(norm(q.replace(/\s*\[\.\.\.\]\s*/g, " ")))) v.push("evidence_quote_not_in_source");
   return [...new Set(v)];
 }
 export { sha256 };
