@@ -14,7 +14,9 @@ export function passageDuplicatesStem(passage: string, stem: string): boolean {
 }
 /** ALTON 원본 영어 지문(AP English Language) 표지. 영어 지문은 stem 이 지문 문장을 인용해도 중복이 아니고, 산문이라 수식 자동 변환 대상도 아니다(2026-10-14). */
 export const EN_PASSAGE_MARKER = "ALTON original passage";
-export const isEnglishPassage = (p: string): boolean => p.startsWith(`${EN_PASSAGE_MARKER}\n`);
+/** ALTON 작성 US History 자료(원문 아님) 표지 — 산문이므로 영어 지문과 같이 취급한다(2026-10-14). */
+export const US_STIMULUS_MARKER = "ALTON-composed stimulus";
+export const isEnglishPassage = (p: string): boolean => p.startsWith(`${EN_PASSAGE_MARKER}\n`) || p.startsWith(`${US_STIMULUS_MARKER}\n`);
 /** 화면에 그릴 자료 텍스트(없으면 null). */
 export function apPassageForDisplay(passage: string | null | undefined, stem: string | null | undefined): string | null {
   const p = (passage ?? "").trim(); if (!p) return null;

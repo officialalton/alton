@@ -195,7 +195,7 @@ export async function runConvert(c: Ctx, batchId: string, execute: boolean, expe
 
 // ── (4) 세트 배정 검증 → 초안 세트 저장 ──────────────────────────────────
 export function listAssignments() {
-  return listAssignReports().map((f) => ({ file: f, sets: readAssignReport(f).sets.map((s) => ({ id: s.id, virtual: (s.virtual?.length ?? 0) + (s.frqVirtual?.length ?? 0), saveable: /^(AB|BC|ST|PH|CH|MI|MA|PS|CS|BI|EL|LT)\d$/.test(s.id) && s.id !== "AB1" })) }));
+  return listAssignReports().map((f) => ({ file: f, sets: readAssignReport(f).sets.map((s) => ({ id: s.id, virtual: (s.virtual?.length ?? 0) + (s.frqVirtual?.length ?? 0), saveable: /^(AB|BC|ST|PH|CH|MI|MA|PS|CS|BI|EL|LT|US)\d$/.test(s.id) && s.id !== "AB1" })) }));
 }
 /** 비보관 AP 세트의 문항 사용 현황. fullOnly 면 풀 모의고사(full_practice)만, 아니면 부분 연습 세트까지 전부. */
 export async function fetchApSetUsage(db: SupabaseClient, fullOnly: boolean): Promise<FullSetUsage[]> {

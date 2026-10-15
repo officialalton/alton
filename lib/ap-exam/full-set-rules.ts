@@ -5,6 +5,7 @@ import { OFFICIAL } from "./ab-select";
 import { microUnitBounds } from "./micro-rules";
 import { macroUnitBounds } from "./macro-rules";
 import { psychUnitBounds } from "./psych-rules";
+import { ushUnitBounds } from "./ush-rules";
 
 export type UnitBounds = Record<string, { min: number; max: number }>;
 export const rangeFromPct = ([lo, hi]: [number, number], n: number) => ({ min: Math.ceil((lo * n) / 100 - 1e-9), max: Math.floor((hi * n) / 100 + 1e-9) });
@@ -32,6 +33,7 @@ export function fullPracticeUnitBounds(subject: string | null | undefined, label
   if (subject === "ap_microeconomics") return microUnitBounds();
   if (subject === "ap_macroeconomics") return macroUnitBounds();
   if (subject === "ap_psychology") return psychUnitBounds();
+  if (subject === "ap_us_history") return ushUnitBounds();
   if (subject === "ap_computer_science_a") return csaUnitBounds();
   if (subject === "ap_biology") return bioUnitBounds();
   return undefined;

@@ -1,0 +1,216 @@
+{
+ "version": "v1-ush-p1-b4",
+ "run": "ush-p1-b",
+ "subject": "ap_us_history",
+ "mode": "frq",
+ "capUsd": 7.9,
+ "hardStopCumulativeUsd": 200,
+ "myTotalCapUsd": 16,
+ "stages": [
+  "frq-gen",
+  "frq-fact",
+  "frq-samples",
+  "frq-grade",
+  "frq-fact2",
+  "frq-finalize"
+ ],
+ "models": {
+  "gen": "claude-opus-5-5",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "panel": "claude-fable-5-1",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "effort": "low",
+ "genEffort": "medium",
+ "generatorFiles": [
+  "scripts/ap-generation/ushistory-pipeline.ts",
+  "lib/ap-generation/ushistory-prompts.ts",
+  "lib/ap-generation/ushistory-plan.ts",
+  "lib/ap-generation/ushistory-gates.ts",
+  "lib/ap-generation/ushistory-frq.ts",
+  "lib/ap-generation/subjects/ushistory.ts",
+  "lib/ap-exam/ush-rules.ts"
+ ],
+ "expected": {
+  "hash": "6f1f82e68368"
+ },
+ "frqPlan": [
+  {
+   "id": "saq1_1",
+   "template": "saq1",
+   "period": 6,
+   "focus": "Two fictional historians interpret how industrialization changed the lives of ordinary wage earners in the Gilded Age (1865-1898): one stresses new opportunities and consumer goods, the other stresses loss of control over work and rising labor conflict.",
+   "seed": 4200
+  },
+  {
+   "id": "saq1_2",
+   "template": "saq1",
+   "period": 5,
+   "focus": "Two fictional historians interpret why the Union won the Civil War (1861-1865): one emphasizes the North's economic and manpower advantages, the other emphasizes political and military choices including emancipation policy.",
+   "seed": 4201
+  },
+  {
+   "id": "saq1_3",
+   "template": "saq1",
+   "period": 8,
+   "focus": "Two fictional historians interpret the postwar suburban boom (1945-1970): one emphasizes federal housing and highway policy, the other emphasizes consumer preferences and family culture.",
+   "seed": 4202
+  },
+  {
+   "id": "saq2_1",
+   "template": "saq2",
+   "period": 4,
+   "focus": "A composed editorial from a fictional canal-town newspaper in the 1830s about how canals and turnpikes are changing local farm life and trade (Market Revolution).",
+   "seed": 4210
+  },
+  {
+   "id": "saq2_2",
+   "template": "saq2",
+   "period": 7,
+   "focus": "A composed letter from a fictional shipyard or aircraft-plant worker in 1943 describing wartime work, wages and changing roles for women and African Americans on the home front.",
+   "seed": 4211
+  },
+  {
+   "id": "saq2_3",
+   "template": "saq2",
+   "period": 3,
+   "focus": "A composed 1787-1788 pamphlet by a fictional backcountry farmer ('A Farmer') objecting to a stronger national government during the debate over ratifying the Constitution.",
+   "seed": 4212
+  },
+  {
+   "id": "saq3_1",
+   "template": "saq3",
+   "period": 8,
+   "focus": "Non-text source: a table or bar chart (fictional composite) of a fictional county's new-home permits and automobile registrations in selected years 1946-1960, consistent with postwar suburbanization.",
+   "seed": 4220
+  },
+  {
+   "id": "saq3_2",
+   "template": "saq3",
+   "period": 3,
+   "focus": "Non-text source: a bar chart (fictional composite) of tea imports through a fictional colonial port in selected years 1764-1775 showing the effect of colonial boycotts and the Tea Act.",
+   "seed": 4221
+  },
+  {
+   "id": "saq3_3",
+   "template": "saq3",
+   "period": 6,
+   "focus": "Non-text source: a table (fictional composite) of a fictional Plains county's population and miles of railroad in selected years 1870-1900, consistent with western settlement after the Homestead Act.",
+   "seed": 4222
+  },
+  {
+   "id": "dbq_1",
+   "template": "dbq",
+   "period": 4,
+   "focus": "Evaluate the extent to which the market revolution (transportation, manufacturing, commercial agriculture) changed the lives of Americans between 1815 and 1860.",
+   "seed": 4230
+  },
+  {
+   "id": "dbq_2",
+   "template": "dbq",
+   "period": 6,
+   "focus": "Evaluate the relative importance of different factors in the growth of the labor movement and its limited success between 1877 and 1900.",
+   "seed": 4231
+  },
+  {
+   "id": "dbq_3",
+   "template": "dbq",
+   "period": 7,
+   "focus": "Evaluate the extent to which the New Deal changed the relationship between the federal government and ordinary Americans between 1933 and 1945.",
+   "seed": 4232
+  },
+  {
+   "id": "leq_1",
+   "template": "leq",
+   "period": 3,
+   "focus": "Prompt spanning periods 3-5 (about 1787-1877): debates over the power of the federal government versus the states and how they shaped the nation.",
+   "seed": 4240
+  },
+  {
+   "id": "leq_2",
+   "template": "leq",
+   "period": 7,
+   "focus": "Prompt spanning periods 6-8 (about 1865-1980): how wars and international conflicts changed American society and the role of the federal government.",
+   "seed": 4241
+  },
+  {
+   "id": "leq_3",
+   "template": "leq",
+   "period": 4,
+   "focus": "Prompt spanning periods 2-5 (about 1607-1865): how migration and immigration changed American society and politics.",
+   "seed": 4242
+  },
+  {
+   "id": "saq1_4",
+   "template": "saq1",
+   "period": 6,
+   "focus": "Two fictional historians interpret the causes of the Populist revolt of the 1890s: one emphasizes farmers' economic grievances (credit, railroad rates, falling crop prices), the other emphasizes political and cultural organizing through the Farmers' Alliance and the People's Party.",
+   "seed": 4250
+  },
+  {
+   "id": "saq1_5",
+   "template": "saq1",
+   "period": 5,
+   "focus": "Two fictional historians interpret the legacy of Reconstruction (1865-1877): one stresses the lasting constitutional and legal changes, the other stresses the limits and reversals that followed as federal enforcement faded.",
+   "seed": 4251
+  },
+  {
+   "id": "saq1_6",
+   "template": "saq1",
+   "period": 7,
+   "focus": "Two fictional historians interpret who drove Progressive Era reform (1890-1920): one stresses middle-class professionals and urban reformers working through government, the other stresses working-class, immigrant and women's organizing from below.",
+   "seed": 4260
+  }
+ ],
+ "sampleCands": 5,
+ "resample": {
+  "saq1_3": [
+   "mid",
+   "low:5"
+  ],
+  "saq2_2": [
+   "low"
+  ],
+  "saq2_3": [
+   "low"
+  ],
+  "saq2_1": [
+   "high",
+   "low"
+  ],
+  "saq3_3": [
+   "mid",
+   "low"
+  ],
+  "dbq_2": [
+   "mid"
+  ],
+  "dbq_1": [
+   "mid",
+   "low"
+  ],
+  "leq_1": [
+   "mid",
+   "low"
+  ],
+  "leq_3": [
+   "mid",
+   "low"
+  ],
+  "saq1_5": [],
+  "saq1_6": [
+   "high:3",
+   "mid:3",
+   "low:3"
+  ]
+ }
+}

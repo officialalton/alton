@@ -1,5 +1,5 @@
 import { buildPrompt, checkEssayLength, type Anchor } from "./prompt";
-import { rubricVersionFor, type RubricId } from "./rubric";
+import { resolveRubric } from "./rubric";
 import { checkCaps, costUsd, flagEnabled, limits, type Usage } from "./costs";
 import { combineRuns, totalOf, validateGraderOutput, type Disagreement, type GraderOutput } from "./schema";
 import { GraderRefusal, type GraderClient } from "./client";
@@ -7,7 +7,7 @@ import { GraderRefusal, type GraderClient } from "./client";
 export const MAX_ATTEMPTS = 3;
 export const backoffMs = (attemptsMade: number): number => Math.min(60 * 60_000, 2 ** attemptsMade * 60_000); // 2,4,8분…
 
-export type EssayKey = { attemptId: string; setItemId: string; partLabel: string; studentId: string; /** 루브릭 버전(생략하면 Language 루브릭 버전). 점수 행의 고유 키에 들어간다. */ rubricVersion?: string };
+export type EssayKey = { attemptId: string; setItemId: string; partLabel: string; studentId: string; /** 생략 = englang-v2 */ rubricVersion?: string };
 export type Status = "pending" | "processing" | "done" | "failed" | "dead" | "skipped";
 export type Row = { status: Status; attemptsMade: number; nextRetryAt: string | null };
 export type Finish = {
@@ -21,7 +21,7 @@ export interface EssayStore {
   finish(key: EssayKey, f: Finish): Promise<void>;
 }
 export type Deps = { store: EssayStore; client: GraderClient; now?: () => Date };
-export type Job = EssayKey & { taskPrompt: string; sources: { id: string; title?: string; body: string }[]; essay: string; anchors: Anchor[]; rubricId?: RubricId };
+export type Job = EssayKey & { taskPrompt: string; sources: { id: string; title?: string; body: string }[]; essay: string; anchors: Anchor[]; /** 생략 = englang-v2 */ rubricId?: string; taskType?: "saq" | "dbq" | "leq" | string; scoringNotes?: string };
 export type Outcome =
   | { status: "disabled" }
   | { status: "skipped"; reason: string }
@@ -34,16 +34,19 @@ const errCode = (e: unknown): string => (e instanceof GraderRefusal ? e.code : e
 /** 에세이 하나를 채점한다(멱등). 플래그 꺼짐이면 아무 것도 쓰지 않고 호출도 하지 않는다. */
 export async function processEssay(deps: Deps, job: Job): Promise<Outcome> {
   if (!flagEnabled()) return { status: "disabled" };
-  const { store, client } = deps; const now = deps.now ?? (() => new Date()); const l = limits();
-  const key: EssayKey = { attemptId: job.attemptId, setItemId: job.setItemId, partLabel: job.partLabel, studentId: job.studentId, ...(job.rubricId ? { rubricVersion: rubricVersionFor(job.rubricId) } : {}) };
+  const { store, client } = deps; const now = deps.now ?? (() => new Date());
+  const def = resolveRubric(job.rubricId, job.taskType);
+  if (!def) return { status: "skipped", reason: "bad_rubric" }; // 알 수 없는 루브릭/과제 유형: 행을 만들지 않고 건너뜀
+  const l = limits(def.id);
+  const key: EssayKey = { attemptId: job.attemptId, setItemId: job.setItemId, partLabel: job.partLabel, studentId: job.studentId, rubricVersion: def.id };
 
-  const refusal = checkEssayLength(job.essay);
+  const refusal = checkEssayLength(job.essay, def);
   const { claimed, row } = await store.claim(key);
   if (!claimed) return { status: "already", row };
   const attemptsMade = row.attemptsMade + 1;
   if (refusal) { await store.finish(key, { status: "skipped", lastError: refusal, attemptsMade }); return { status: "skipped", reason: refusal }; }
 
-  const prompt = buildPrompt({ taskPrompt: job.taskPrompt, sources: job.sources, essay: job.essay, anchors: job.anchors, rubricId: job.rubricId });
+  const prompt = buildPrompt({ taskPrompt: job.taskPrompt, sources: job.sources, essay: job.essay, anchors: job.anchors, rubricId: def.id, taskType: def.taskType, scoringNotes: job.scoringNotes });
   const cap = checkCaps(await store.usage(key), prompt.system.length + prompt.user.length, l);
   if (!cap.ok) { await store.finish(key, { status: "skipped", lastError: cap.reason, attemptsMade: row.attemptsMade }); return { status: "skipped", reason: cap.reason }; }
 
@@ -51,17 +54,17 @@ export async function processEssay(deps: Deps, job: Job): Promise<Outcome> {
   try {
     const runs: GraderOutput[] = [];
     for (let i = 0; i < 2; i++) {
-      const r = await client.grade({ system: prompt.system, user: prompt.user, maxOutputTokens: l.maxOutputTokensPerEssay });
+      const r = await client.grade({ system: prompt.system, user: prompt.user, maxOutputTokens: l.maxOutputTokensPerEssay, rubricRows: def.rows });
       inTok += r.inputTokens; outTok += r.outputTokens; model = r.model;
-      const v = validateGraderOutput(r.output);
+      const v = validateGraderOutput(r.output, def.rows);
       if (!v.ok) throw new Error("invalid_output");
       runs.push(v.value);
     }
-    const { result, disagreement } = combineRuns(runs[0], runs[1]);
-    const total = totalOf(result.scores);
+    const { result, disagreement } = combineRuns(runs[0], runs[1], def.rows);
+    const total = totalOf(result.scores, def.rows);
     await store.finish(key, {
       status: "done", model, attemptsMade, nextRetryAt: null, lastError: null, inputTokens: inTok, outputTokens: outTok, costUsd: costUsd(inTok, outTok, l),
-      scores: { ...result.scores, total, disagreement: disagreement !== null, rubricVersion: rubricVersionFor(job.rubricId) },
+      scores: { ...result.scores, total, disagreement: disagreement !== null, rubricVersion: def.id, ...(def.taskType ? { taskType: def.taskType } : {}) },
       rationale: { ...result.rationale, improve: result.improve },
     });
     return { status: "done", total, disagreement };

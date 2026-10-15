@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { ESSAY_DISCLAIMER, ESSAY_SCORE_LABEL, MAX_TOTAL, RUBRIC_ROWS } from "@/lib/essay-grading/rubric";
+import { ESSAY_DISCLAIMER, ESSAY_SCORE_LABEL, englishRubric, resolveRubric } from "@/lib/essay-grading/rubric";
 import type { EssayScoreView } from "@/lib/essay-grading/view";
 
 // AI 에세이 추정 점수 카드(영어 UI). 학생 결과 화면과 보호자 읽기 전용 화면이 같이 쓴다. 공식 AP 점수가 아님을 항상 함께 표시한다.
@@ -42,14 +42,15 @@ export default function EssayScoreCard({ score, readOnly = false, onRetry }: { s
   if (!score.scores || !score.rationale) return null;
 
   const { scores: s, rationale: r } = score;
+  const def = resolveRubric(s.rubricVersion ?? score.rubricVersion, typeof s.taskType === "string" ? s.taskType : undefined) ?? englishRubric(); // 저장된 루브릭의 행·만점으로 그린다
   return (
     <div className={box} data-testid="essay-score-card">
       {head}
-      <p className="mt-1 text-[20px] font-extrabold" data-testid="essay-score-total">{s.total} <span className="text-[13px] font-semibold text-grey-500">/ {MAX_TOTAL}</span></p>
+      <p className="mt-1 text-[20px] font-extrabold" data-testid="essay-score-total">{s.total} <span className="text-[13px] font-semibold text-grey-500">/ {def.total}</span></p>
       <ul className="mt-2 flex flex-col gap-2">
-        {RUBRIC_ROWS.map((row) => (
+        {def.rows.map((row) => (
           <li key={row.key} className="text-[13px]" data-testid={`essay-row-${row.key}`}>
-            <span className="font-bold">{row.label}</span> <span className="font-semibold text-grey-600">{s[row.key]}/{row.max}</span>
+            <span className="font-bold">{row.label}</span> <span className="font-semibold text-grey-600">{String(s[row.key] ?? 0)}/{row.max}</span>
             <p className="mt-0.5 text-grey-600">{r[row.key]}</p>
           </li>
         ))}

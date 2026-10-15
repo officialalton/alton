@@ -1,3 +1,4 @@
+import { resolveRubric } from "./rubric";
 // 비용·상한. 단가는 가정값(환경변수로 덮어쓴다) — 실제 단가는 Anthropic 가격표로 확인 후 설정할 것.
 export const flagEnabled = (): boolean => process.env.AI_ESSAY_GRADING_ENABLED === "true";
 const num = (v: string | undefined, d: number) => { const n = Number(v); return v && Number.isFinite(n) && n >= 0 ? n : d; };
@@ -7,15 +8,19 @@ export type Limits = {
   perAttemptEssays: number; perAccountDailyEssays: number; monthlyBudgetUsd: number;
   usdPerMInput: number; usdPerMOutput: number;
 };
-export const limits = (): Limits => ({
-  maxInputTokensPerEssay: num(process.env.AI_ESSAY_MAX_INPUT_TOKENS, 12_000),
+/** rubricId 를 주면 그 루브릭의 응시당 상한·입력 한도 기본값을 쓴다(영어 3건 · U.S. History 6건). 환경변수는 영어 AI_ESSAY_PER_ATTEMPT_CAP · History AI_ESSAY_PER_ATTEMPT_CAP_USH. */
+export const limits = (rubricId?: string | null): Limits => {
+  const def = resolveRubric(rubricId, "leq") ?? resolveRubric(undefined)!;
+  return {
+  maxInputTokensPerEssay: num(process.env.AI_ESSAY_MAX_INPUT_TOKENS, def.maxInputTokens ?? 12_000),
   maxOutputTokensPerEssay: num(process.env.AI_ESSAY_MAX_OUTPUT_TOKENS, 1_500),
-  perAttemptEssays: num(process.env.AI_ESSAY_PER_ATTEMPT_CAP, 3),
-  perAccountDailyEssays: num(process.env.AI_ESSAY_DAILY_CAP, 6),
+  perAttemptEssays: num(process.env[def.perAttemptEnv], def.perAttemptDefault),
+  perAccountDailyEssays: num(process.env.AI_ESSAY_DAILY_CAP, def.perAttemptDefault * 2),
   monthlyBudgetUsd: num(process.env.AI_ESSAY_MONTHLY_BUDGET_USD, 25),
   usdPerMInput: num(process.env.AI_ESSAY_USD_PER_M_INPUT, 3),
   usdPerMOutput: num(process.env.AI_ESSAY_USD_PER_M_OUTPUT, 15),
-});
+  };
+};
 
 export const estimateInputTokens = (chars: number): number => Math.ceil(chars / 3.6); // 보수적(영어 약 4자/토큰)
 export const costUsd = (inTok: number, outTok: number, l: Limits = limits()): number =>

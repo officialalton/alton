@@ -1,5 +1,5 @@
 import type { createAdminClient } from "@/lib/supabase-admin";
-import { RUBRIC_VERSION } from "./rubric";
+import { RUBRIC_VERSION } from "./rubric"; // 키에 rubricVersion 이 없으면 영어
 import type { EssayKey, EssayStore, Finish, Row } from "./queue";
 import type { Usage } from "./costs";
 

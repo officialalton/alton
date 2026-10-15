@@ -1,0 +1,71 @@
+{
+ "runs": [
+  "ush-p3-a"
+ ],
+ "rows": 24,
+ "passed": 24,
+ "rejected": 0,
+ "mcSets": {
+  "rows": 24,
+  "passed": 24
+ },
+ "frqSets": {
+  "rows": 0,
+  "passed": 0
+ },
+ "mcItems": {
+  "generated": 96,
+  "deterministicPass": 94,
+  "solvers3of3": 94,
+  "finalPass": 85,
+  "firstPassRate": 0.885
+ },
+ "failureReasons": {
+  "panel_flag_contested": 1,
+  "solver_second_defensible": 8,
+  "panel_second_defensible": 2,
+  "panel_flag_second_defensible": 2,
+  "number": 3,
+  "solver_disagreement_or_missing": 2,
+  "panel_missing": 2
+ },
+ "keyConfidence": {
+  "items": 85,
+  "high": 0,
+  "medium": 0,
+  "mean": 0
+ },
+ "categoriesPassed": {
+  "1": 14,
+  "2": 6,
+  "3": 24,
+  "4": 22,
+  "5": 19
+ },
+ "skillsPassed": {
+  "3.B": 8,
+  "4.B": 11,
+  "5.B": 9,
+  "2.B": 5,
+  "3.A": 11,
+  "4.A": 11,
+  "1.B": 10,
+  "5.A": 10,
+  "3.D": 4,
+  "1.A": 4,
+  "2.A": 1,
+  "3.C": 1
+ },
+ "renderTypesPassed": {
+  "ap_table": 11,
+  "none": 13
+ },
+ "frqAudit": [],
+ "costUsd": {
+  "ush-p3-a": {
+   "gen": 1.5779,
+   "panel": 0.6174,
+   "solve": 0.3118
+  }
+ }
+}

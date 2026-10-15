@@ -2,7 +2,7 @@ import type { Anchor } from "./prompt";
 
 // 문항 stock JSON(payload) → 채점 맥락. 형식은 docs/ap/englang-groundwork.md §3 의 제안: payload.task|parts[].prompt, payload.sources[{id,title,body}], payload.samples[{tier,text,note}].
 // English FRQ 문항이 아직 생성되기 전이라 실제 저장 위치(problems 의 어느 열)는 문항 생성 단계에서 확정된다 — 로더는 actions.ts 에서 주입한다.
-export type EssayContext = { taskPrompt: string; sources: { id: string; title?: string; body: string }[]; anchors: Anchor[] };
+export type EssayContext = { taskPrompt: string; sources: { id: string; title?: string; body: string }[]; anchors: Anchor[]; rubricId?: string; taskType?: string; scoringNotes?: string };
 const isObj = (v: unknown): v is Record<string, unknown> => typeof v === "object" && v !== null && !Array.isArray(v);
 const str = (v: unknown) => (typeof v === "string" ? v : "");
 
@@ -17,5 +17,11 @@ export function parseEssayContext(payload: unknown, partLabel: string): EssayCon
   const anchors = (Array.isArray(payload.samples) ? payload.samples.filter(isObj) : [])
     .map((s) => ({ tier: str(s.tier) as Anchor["tier"], text: str(s.text), note: str(s.note) || undefined }))
     .filter((a) => (a.tier === "high" || a.tier === "mid" || a.tier === "low") && a.text.trim());
-  return { taskPrompt, sources, anchors };
+  const rubricId = str(payload.rubricId), taskType = str(payload.taskType), scoringNotes = str(payload.scoringNotes);
+  return { taskPrompt, sources, anchors, ...(rubricId ? { rubricId } : {}), ...(taskType ? { taskType } : {}), ...(scoringNotes ? { scoringNotes } : {}) };
+}
+
+/** SAQ 한 문항의 파트 답을 한 건 채점용 텍스트로 합친다: 답한 파트만 "(A) … (B) … (C) …". */
+export function concatSaqAnswers(parts: { label: string }[], answers: Record<string, string>): string {
+  return parts.map((p) => ({ label: p.label, text: (answers[p.label] ?? "").trim() })).filter((x) => x.text).map((x) => `(${x.label}) ${x.text}`).join("\n\n");
 }

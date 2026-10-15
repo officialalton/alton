@@ -30,6 +30,7 @@ const BY_SUBJECT: Record<string, SubjectToolsConfig> = {
   ap_english_literature: { calculatorTabs: [], reference: null },
   // Psychology: CED(effective Fall 2025) 시험 안내에 계산기·공식 수식 시트 언급이 없다(docs/ap/psychology-facts.md). 통계는 평균·중앙값·최빈값·범위·표준편차 해석 수준이라 손계산이다 — 계산기·참조 패널을 모두 끈다(기본값 Desmos 로 떨어지면 안 된다). 실제 시험 계산기 정책은 UNVERIFIED.
   ap_psychology: { calculatorTabs: [], reference: null },
+  ap_us_history: { calculatorTabs: [], reference: null }, // 계산기·참조 시트 없음(CED)
 };
 
 export function subjectToolsConfig(apSubject: string | null | undefined): SubjectToolsConfig {

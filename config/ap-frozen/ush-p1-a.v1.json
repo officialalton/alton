@@ -1,0 +1,59 @@
+{
+ "version": "v1-ush-p1-a",
+ "run": "ush-p1-a",
+ "subject": "ap_us_history",
+ "mode": "mc",
+ "capUsd": 2.5,
+ "hardStopCumulativeUsd": 200,
+ "myTotalCapUsd": 16,
+ "stages": [
+  "gen",
+  "check",
+  "solve",
+  "panel",
+  "finalize"
+ ],
+ "plan": {
+  "perPeriod": {
+   "2": 1,
+   "3": 1,
+   "4": 1,
+   "5": 1,
+   "6": 1,
+   "7": 1,
+   "8": 1,
+   "9": 1
+  },
+  "seed": 4101,
+  "startIndex": 0
+ },
+ "models": {
+  "gen": "claude-opus-5-5",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "panel": "claude-fable-5-1",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "effort": "low",
+ "genEffort": "medium",
+ "generatorFiles": [
+  "scripts/ap-generation/ushistory-pipeline.ts",
+  "lib/ap-generation/ushistory-prompts.ts",
+  "lib/ap-generation/ushistory-plan.ts",
+  "lib/ap-generation/ushistory-gates.ts",
+  "lib/ap-generation/ushistory-frq.ts",
+  "lib/ap-generation/subjects/ushistory.ts",
+  "lib/ap-exam/ush-rules.ts"
+ ],
+ "expected": {
+  "hash": "f1c4bcaba05d"
+ }
+}
