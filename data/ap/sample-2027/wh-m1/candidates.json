@@ -1624,9 +1624,339 @@
   }
  },
  {
-  "__rejected": true,
-  "specId": "w110",
-  "reason": "0/4 items; setFlags=0; setViolations="
+  "cellId": "ap_world_history-w110",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w110-k0",
+  "keywordCode": "6.2",
+  "unitCode": "6",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w110",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "wh-m1-2026-10-15",
+  "run": "wh-m1",
+  "stockKey": "wh-m1:ap_world_history-w110-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-m1-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-m1:ap_world_history-w110-k0",
+  "canonicalKey": "wh-m1:ap_world_history-w110-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:6.2",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|6.2|2.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-m1",
+    "gateVersion": "wh-m1-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "img-rhodes-colossus-1892"
+  ],
+  "exam": "WH1",
+  "payload": {
+   "archetype": "wh_w110",
+   "topic": "6.2",
+   "skill": "2.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(political cartoon)\nThe Rhodes Colossus: Striding from Cape Town to Cairo\nEdward Linley Sambourne (cartoonist), Punch, or the London Charivari, 1892 (December 10). Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (published 1892; author died 1910). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail; 960 px wide for tall images, 1280 px wide for wide images).\nContext: Cecil Rhodes was a British businessman and politician in southern Africa who proposed a railway and telegraph line from Cape Town to Cairo; this cartoon was printed in a British magazine in 1892.\n\nThe image for this source is shown below. Select the image to open it full size.",
+   "stimulus": {
+    "kind": "image",
+    "description": "A black-and-white line drawing of a giant man in military-style clothes with a rifle slung on his back, standing astride the African continent with one boot at the south and the other far to the north; he holds a telegraph wire that runs from his raised right hand across Africa to his left; the caption below reads 'The Rhodes Colossus, Striding from Cape Town to Cairo'.",
+    "data": {
+     "path": "ap-sources/img-rhodes-colossus-1892/image.jpg",
+     "alt": "A black-and-white line drawing of a giant man in military-style clothes with a rifle slung on his back, standing astride the African continent with one boot at the south and the other far to the north; he holds a telegraph wire that runs from his raised right hand across Africa to his left; the caption below reads 'The Rhodes Colossus, Striding from Cape Town to Cairo'.",
+     "credit": "The Rhodes Colossus, Edward Linley Sambourne, Punch, Dec. 10, 1892. Wikimedia Commons (public domain)."
+    }
+   },
+   "wh_set": {
+    "unit": 6,
+    "stim_type": "image",
+    "theme": "Railways, telegraphs and imperial ambition in Africa",
+    "title": "Railways, telegraphs and imperial ambition in Africa",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "image",
+      "title": "The Rhodes Colossus: Striding from Cape Town to Cairo",
+      "attribution": "Edward Linley Sambourne (cartoonist), Punch, or the London Charivari, 1892 (December 10). Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (published 1892; author died 1910). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail; 960 px wide for tall images, 1280 px wide for wide images).",
+      "context": "Cecil Rhodes was a British businessman and politician in southern Africa who proposed a railway and telegraph line from Cape Town to Cairo; this cartoon was printed in a British magazine in 1892.",
+      "real_data": true,
+      "source_registry_id": "img-rhodes-colossus-1892",
+      "source_sha256": "44f18675457084f461502552a09c1b1ad5ec9ebbbdf9053ec72abee518ddf48b"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w110_2B",
+     "topic": "6.2",
+     "skill": "2.B",
+     "stem": "Which of the following best describes the historical situation in which this cartoon of Cecil Rhodes was published in 1892?",
+     "options": [
+      {
+       "text": "Abolition of the Atlantic slave trade had just ended all European commercial interest in the African interior",
+       "why": "Britain abolished its slave trade in 1807, long before 1892. European commercial interest in the African interior rose sharply after that.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "African kingdoms had expelled European merchants from most of their coastal trading forts in West Africa",
+       "why": "In the 1890s European control in West Africa was growing, not shrinking.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "European states were rapidly claiming African territory in the decade after the Berlin Conference.",
+       "why": "The cartoon came out in 1892, during the Scramble for Africa that sped up after the Berlin Conference of 1884 to 1885. It shows a British figure claiming the continent from south to north.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Britain was pulling back from Africa after suffering costly defeats in the South African War against the Boer republics",
+       "why": "The South African War was fought from 1899 to 1902, after the cartoon was made. Britain also did not withdraw from Africa after it.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"European states were rapidly claiming African territory in the decade after the Berlin Conference.\". The cartoon came out in 1892, during the Scramble for Africa that sped up after the Berlin Conference of 1884 to 1885. It shows a British figure claiming the continent from south to north.\n\"Abolition of the Atlantic slave trade had just ended all European commercial interest in the African interior\" is incorrect: Britain abolished its slave trade in 1807, long before 1892. European commercial interest in the African interior rose sharply after that.\n\"African kingdoms had expelled European merchants from most of their coastal trading forts in West Africa\" is incorrect: In the 1890s European control in West Africa was growing, not shrinking.\n\"Britain was pulling back from Africa after suffering costly defeats in the South African War against the Boer republics\" is incorrect: The South African War was fought from 1899 to 1902, after the cartoon was made. Britain also did not withdraw from Africa after it.",
+     "est_seconds": 50,
+     "facts": [
+      "The Berlin Conference of 1884 to 1885 set rules for European claims to African territory.",
+      "Britain abolished its slave trade in 1807.",
+      "The South African (Anglo-Boer) War was fought from 1899 to 1902."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.B",
+      "key_evidence_in_source": "The credit line dates the cartoon to 1892, and the image shows a British figure standing over the whole African map.",
+      "evidence_quote": "Striding from Cape Town to Cairo"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
+     "archetype": "wh_w110_3A",
+     "topic": "6.2",
+     "skill": "3.A",
+     "stem": "The cartoonist's depiction of Rhodes as a giant standing astride the map of Africa most directly conveys which claim?",
+     "options": [
+      {
+       "text": "The telegraph line would mainly benefit African farmers by linking them to new overseas markets",
+       "why": "No African farmers or markets appear in the image. The cartoon is about Rhodes's ambition, not who would benefit.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "France and Germany had already secured control of the land between Cape Town and Cairo",
+       "why": "No rival powers appear in the cartoon. It presents the land as open to Rhodes's stride.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "African states were powerful enough to keep British railway and telegraph builders confined to the coasts",
+       "why": "The cartoon shows Rhodes spanning the interior. Nothing in it suggests that British builders were held back to the coasts.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Rhodes's ambitions aimed at a British presence stretching across the whole continent",
+       "why": "One boot is at the southern tip and the other far to the north, and he holds a wire across Africa. Together these show ambition that covers the whole continent from Cape Town to Cairo.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Rhodes's ambitions aimed at a British presence stretching across the whole continent\". One boot is at the southern tip and the other far to the north, and he holds a wire across Africa. Together these show ambition that covers the whole continent from Cape Town to Cairo.\n\"The telegraph line would mainly benefit African farmers by linking them to new overseas markets\" is incorrect: No African farmers or markets appear in the image. The cartoon is about Rhodes's ambition, not who would benefit.\n\"France and Germany had already secured control of the land between Cape Town and Cairo\" is incorrect: No rival powers appear in the cartoon. It presents the land as open to Rhodes's stride.\n\"African states were powerful enough to keep British railway and telegraph builders confined to the coasts\" is incorrect: The cartoon shows Rhodes spanning the interior. Nothing in it suggests that British builders were held back to the coasts.",
+     "est_seconds": 40,
+     "facts": [
+      "Cecil Rhodes promoted a Cape-to-Cairo railway and telegraph line in the 1890s.",
+      "Rhodes served as prime minister of the Cape Colony from 1890 to 1896."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "The giant's boots are placed at the southern and northern ends of Africa, and the caption names Cape Town and Cairo.",
+      "evidence_quote": "The Rhodes Colossus: Striding from Cape Town to Cairo"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "wh_w110_4B",
+     "topic": "6.4",
+     "skill": "4.B",
+     "stem": "The telegraph wire Rhodes holds in the cartoon is best understood as part of which broader process of the nineteenth century?",
+     "options": [
+      {
+       "text": "Industrial technologies helped European states extend and coordinate control over distant colonies",
+       "why": "Telegraphs, railways and steamships were industrial technologies that let imperial powers send orders, troops and goods quickly. Rhodes's proposed line fits this pattern.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Columbian Exchange carried new crops and diseases between the Eastern and Western Hemispheres",
+       "why": "The Columbian Exchange began after 1492 and has no link to telegraph technology.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Islamic reform movements such as the Sokoto Caliphate spread through jihad across the West African savanna",
+       "why": "The Sokoto Caliphate was a real development of the 1800s, but it was an African religious and political movement that had nothing to do with British telegraph building.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The spread of Enlightenment ideas through printed pamphlets encouraged colonial independence movements across the Americas",
+       "why": "That process belongs to the late 1700s and early 1800s. It is not connected to a telegraph serving imperial expansion in Africa.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Industrial technologies helped European states extend and coordinate control over distant colonies\". Telegraphs, railways and steamships were industrial technologies that let imperial powers send orders, troops and goods quickly. Rhodes's proposed line fits this pattern.\n\"The Columbian Exchange carried new crops and diseases between the Eastern and Western Hemispheres\" is incorrect: The Columbian Exchange began after 1492 and has no link to telegraph technology.\n\"Islamic reform movements such as the Sokoto Caliphate spread through jihad across the West African savanna\" is incorrect: The Sokoto Caliphate was a real development of the 1800s, but it was an African religious and political movement that had nothing to do with British telegraph building.\n\"The spread of Enlightenment ideas through printed pamphlets encouraged colonial independence movements across the Americas\" is incorrect: That process belongs to the late 1700s and early 1800s. It is not connected to a telegraph serving imperial expansion in Africa.",
+     "est_seconds": 45,
+     "facts": [
+      "Electric telegraph networks spread worldwide in the second half of the 1800s, including undersea cables.",
+      "Railways and telegraphs helped European states govern and exploit colonies in the late 1800s."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "Rhodes holds a telegraph wire that runs across Africa, and the context line notes his proposed railway and telegraph line.",
+      "evidence_quote": "proposed a railway and telegraph line from Cape Town to Cairo"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w110_5A",
+     "topic": "6.2",
+     "skill": "5.A",
+     "stem": "Which of the following projects was most similar to the Cape-to-Cairo plan associated with Rhodes in the cartoon?",
+     "options": [
+      {
+       "text": "The Tokugawa shogunate's restriction of foreign merchants to a single Dutch trading post at Nagasaki",
+       "why": "This was a pre-1750 policy that limited outside contact. It was not a project to expand an empire's reach.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Russia's Trans-Siberian Railway, begun in 1891 to link European Russia with the Pacific coast",
+       "why": "Like the Cape-to-Cairo plan, the Trans-Siberian Railway was an industrial-age transport project meant to tie together a huge empire across a continent.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Inca road network, whose relay runners carried messages and tribute records along the length of the Andes",
+       "why": "The Inca roads did connect an empire, but they came centuries earlier and did not use industrial technology.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Ming dynasty's rebuilding of the Great Wall to defend its northern frontier against Mongol raids",
+       "why": "This was a defensive building project from before 1750. It did not use industrial technology to tie an empire together.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Russia's Trans-Siberian Railway, begun in 1891 to link European Russia with the Pacific coast\". Like the Cape-to-Cairo plan, the Trans-Siberian Railway was an industrial-age transport project meant to tie together a huge empire across a continent.\n\"The Tokugawa shogunate's restriction of foreign merchants to a single Dutch trading post at Nagasaki\" is incorrect: This was a pre-1750 policy that limited outside contact. It was not a project to expand an empire's reach.\n\"The Inca road network, whose relay runners carried messages and tribute records along the length of the Andes\" is incorrect: The Inca roads did connect an empire, but they came centuries earlier and did not use industrial technology.\n\"The Ming dynasty's rebuilding of the Great Wall to defend its northern frontier against Mongol raids\" is incorrect: This was a defensive building project from before 1750. It did not use industrial technology to tie an empire together.",
+     "est_seconds": 45,
+     "facts": [
+      "Construction of the Trans-Siberian Railway began in 1891.",
+      "The Inca road system was built before Spanish conquest in the 1530s."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.A",
+      "key_evidence_in_source": "The caption and the context line identify a railway and telegraph plan spanning a continent, which students compare with another empire's continental railway.",
+      "evidence_quote": "proposed a railway and telegraph line from Cape Town to Cairo"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    }
+   ],
+   "excluded_items": []
+  }
  },
  {
   "cellId": "ap_world_history-w111",
@@ -4123,7 +4453,7 @@
     "label": "exam_prep"
    },
    {
-    "label": "exam_prep"
+    "label": "basic_learning"
    },
    {
     "label": "exam_prep"
@@ -4259,6 +4589,64 @@
      }
     },
     {
+     "archetype": "wh_w205_3A",
+     "topic": "4.5",
+     "skill": "3.A",
+     "stem": "Which of the following claims is most directly made by the printed headings on the plan of the Brookes?",
+     "options": [
+      {
+       "text": "Captives were kept mostly on the open upper deck, where store rooms and guns blocked any escape",
+       "why": "Both headings describe the lower deck. Nothing in the plan says captives were held mainly on an open upper deck.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Captives were given more space after 1788 because Parliament had made the crossing safe and humane",
+       "why": "The plan was printed to show that conditions stayed brutal under the 1788 limits, which is the opposite of this claim.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Captives were crowded into spaces with little more than two and a half feet of headroom",
+       "why": "The heading says captives on and below the shelves had only 2 feet 7 inches between the beams, and far less under them.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Captives were separated by sex and age so that families from the same region could remain together",
+       "why": "The plan does mark separate areas for women, boys and men, but nothing in it says families or people from one region were kept together. Splitting people by sex actually separated families.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Captives were crowded into spaces with little more than two and a half feet of headroom\". The heading says captives on and below the shelves had only 2 feet 7 inches between the beams, and far less under them.\n\"Captives were kept mostly on the open upper deck, where store rooms and guns blocked any escape\" is incorrect: Both headings describe the lower deck. Nothing in the plan says captives were held mainly on an open upper deck.\n\"Captives were given more space after 1788 because Parliament had made the crossing safe and humane\" is incorrect: The plan was printed to show that conditions stayed brutal under the 1788 limits, which is the opposite of this claim.\n\"Captives were separated by sex and age so that families from the same region could remain together\" is incorrect: The plan does mark separate areas for women, boys and men, but nothing in it says families or people from one region were kept together. Splitting people by sex actually separated families.",
+     "est_seconds": 55,
+     "facts": [
+      "Captives on the Middle Passage were usually held below deck in very cramped conditions for voyages lasting weeks or months.",
+      "Abolitionists used the Brookes plan in their campaign beginning in 1788 and 1789."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "The second heading gives the measurement of 2 feet 7 inches of height for captives stowed on and under the shelves.",
+      "evidence_quote": "HAVE ONLY A HEIGHT OF 2 FEET 7 INCHES BETWEEN THE BEAMS: AND FAR LESS UNDER THE BEAMS"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
      "archetype": "wh_w205_4B",
      "topic": "4.4",
      "skill": "4.B",
@@ -4372,64 +4760,6 @@
        }
       ],
       "panel_choice": 1
-     }
-    },
-    {
-     "archetype": "wh_w205_2C",
-     "topic": "4.7",
-     "skill": "2.C",
-     "stem": "EXTRA: Which of the following is a limitation of the plan as evidence about the experience of captives during the Middle Passage?",
-     "options": [
-      {
-       "text": "It was produced by slave traders who wished to hide how crowded their ships actually were from the public",
-       "why": "Opponents of the trade made the plan in order to expose the crowding, not to hide it.",
-       "value": null,
-       "label": "misattributed"
-      },
-      {
-       "text": "It shows only voyages to Spanish colonies, so it cannot reveal anything about British ship conditions",
-       "why": "The title and context line identify the Brookes as a British ship regulated by a British law.",
-       "value": null,
-       "label": "unsupported_by_source"
-      },
-      {
-       "text": "It was made by British opponents of the trade and does not record captives' own accounts",
-       "why": "The plan comes from an abolition society and shows captives only as rows of identical figures. It cannot show how the enslaved people themselves experienced or described the voyage.",
-       "value": null,
-       "label": "key"
-      },
-      {
-       "text": "It was drawn decades after the trade ended, so its creators had no access to actual ship records",
-       "why": "The plan dates from 1788, while the trade was still going on, and its figures were based on the ship's legal capacity at that time.",
-       "value": null,
-       "label": "wrong_period"
-      }
-     ],
-     "key_index": 2,
-     "explanation_en": "The correct answer is \"It was made by British opponents of the trade and does not record captives' own accounts\". The plan comes from an abolition society and shows captives only as rows of identical figures. It cannot show how the enslaved people themselves experienced or described the voyage.\n\"It was produced by slave traders who wished to hide how crowded their ships actually were from the public\" is incorrect: Opponents of the trade made the plan in order to expose the crowding, not to hide it.\n\"It shows only voyages to Spanish colonies, so it cannot reveal anything about British ship conditions\" is incorrect: The title and context line identify the Brookes as a British ship regulated by a British law.\n\"It was drawn decades after the trade ended, so its creators had no access to actual ship records\" is incorrect: The plan dates from 1788, while the trade was still going on, and its figures were based on the ship's legal capacity at that time.",
-     "est_seconds": 55,
-     "facts": [
-      "Accounts by formerly enslaved people, such as Olaudah Equiano's narrative published in 1789, give captives' own perspectives on the Middle Passage.",
-      "The Brookes plan was produced by abolitionists in 1788."
-     ],
-     "design": {
-      "source_fixed_first": true,
-      "skill": "2.C",
-      "key_evidence_in_source": "The credit line identifies abolitionists as the makers of the plan, and the image shows captives only as uniform drawn figures, not through their own voices.",
-      "evidence_quote": ""
-     },
-     "key_confidence": {
-      "solver_votes": [
-       {
-        "choice": 2,
-        "confidence": "certain"
-       },
-       {
-        "choice": 2,
-        "confidence": "certain"
-       }
-      ],
-      "panel_choice": 2
      }
     }
    ],
@@ -6814,9 +7144,277 @@
   }
  },
  {
-  "__rejected": true,
-  "specId": "w214",
-  "reason": "0/3 items; setFlags=0; setViolations="
+  "cellId": "ap_world_history-w214",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w214-k0",
+  "keywordCode": "8.2",
+  "unitCode": "8",
+  "skillPrimary": "2.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w214",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-m1-2026-10-15",
+  "run": "wh-m1",
+  "stockKey": "wh-m1:ap_world_history-w214-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-m1-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-m1:ap_world_history-w214-k0",
+  "canonicalKey": "wh-m1:ap_world_history-w214-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:8.2",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|8.2|2.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-m1",
+    "gateVersion": "wh-m1-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "img-berlin-wall-cia-1961"
+  ],
+  "exam": "WH2",
+  "payload": {
+   "archetype": "wh_w214",
+   "topic": "8.2",
+   "skill": "2.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(photograph)\nConstructing Berlin Wall (September 18, 1961)\nCentral Intelligence Agency (U.S. government photograph), 1961 (September 18). Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (U.S. government work, 17 U.S.C. 105). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail; 960 px wide for tall images, 1280 px wide for wide images).\nContext: This photograph from the U.S. Central Intelligence Agency shows work on a wall dividing East Berlin from West Berlin in September 1961.\n\nThe image for this source is shown below. Select the image to open it full size.",
+   "stimulus": {
+    "kind": "image",
+    "description": "A dark black-and-white night photograph shot through barbed wire: under bright floodlights, several workers lift concrete slabs into place in a street with cobblestones while a truck and a high wall stand behind them.",
+    "data": {
+     "path": "ap-sources/img-berlin-wall-cia-1961/image.jpg",
+     "alt": "A dark black-and-white night photograph shot through barbed wire: under bright floodlights, several workers lift concrete slabs into place in a street with cobblestones while a truck and a high wall stand behind them.",
+     "credit": "Constructing Berlin Wall, Sept. 18, 1961. Central Intelligence Agency via Wikimedia Commons (public domain)."
+    }
+   },
+   "wh_set": {
+    "unit": 8,
+    "stim_type": "image",
+    "theme": "The division of Berlin during the Cold War",
+    "title": "The division of Berlin during the Cold War",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "image",
+      "title": "Constructing Berlin Wall (September 18, 1961)",
+      "attribution": "Central Intelligence Agency (U.S. government photograph), 1961 (September 18). Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (U.S. government work, 17 U.S.C. 105). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail; 960 px wide for tall images, 1280 px wide for wide images).",
+      "context": "This photograph from the U.S. Central Intelligence Agency shows work on a wall dividing East Berlin from West Berlin in September 1961.",
+      "real_data": true,
+      "source_registry_id": "img-berlin-wall-cia-1961",
+      "source_sha256": "279099887e8b6048fa7c6ce6b206b2a2eed984ab39686272a596e25a09344e0d"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w214_2A",
+     "topic": "8.2",
+     "skill": "2.A",
+     "stem": "Based on the credit line and the photograph, during which historical situation was the image most likely taken?",
+     "options": [
+      {
+       "text": "Crowds on both sides were dismantling the barrier after the East German government opened its border crossings",
+       "why": "The photograph shows the wall being built in 1961. The crossings opened and the wall came down in 1989.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The victorious Allies were dividing the city into four occupation sectors after the defeat of Nazi Germany",
+       "why": "Berlin was divided into occupation sectors in 1945. The physical wall in the photograph dates from 1961.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Soviet Union was blockading road and rail routes into West Berlin, prompting a large Western airlift of food and supplies",
+       "why": "The Berlin Blockade and Airlift happened in 1948 and 1949, more than a decade before this 1961 photograph.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "East German authorities were sealing the border between the city's sectors to stop emigration to the West",
+       "why": "The September 1961 date and the scene of workers setting concrete slabs behind barbed wire match the building of the Berlin Wall, which began in August 1961 to stop East Germans from leaving for West Berlin.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"East German authorities were sealing the border between the city's sectors to stop emigration to the West\". The September 1961 date and the scene of workers setting concrete slabs behind barbed wire match the building of the Berlin Wall, which began in August 1961 to stop East Germans from leaving for West Berlin.\n\"Crowds on both sides were dismantling the barrier after the East German government opened its border crossings\" is incorrect: The photograph shows the wall being built in 1961. The crossings opened and the wall came down in 1989.\n\"The victorious Allies were dividing the city into four occupation sectors after the defeat of Nazi Germany\" is incorrect: Berlin was divided into occupation sectors in 1945. The physical wall in the photograph dates from 1961.\n\"The Soviet Union was blockading road and rail routes into West Berlin, prompting a large Western airlift of food and supplies\" is incorrect: The Berlin Blockade and Airlift happened in 1948 and 1949, more than a decade before this 1961 photograph.",
+     "est_seconds": 75,
+     "facts": [
+      "Construction of the Berlin Wall began on August 13, 1961.",
+      "East Germany built the wall largely to stop large numbers of its citizens from leaving through West Berlin."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.A",
+      "key_evidence_in_source": "The date in the credit line and the image of workers putting concrete slabs in place behind barbed wire point to the building of the wall in 1961.",
+      "evidence_quote": "Constructing Berlin Wall (September 18, 1961)"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "wh_w214_4B",
+     "topic": "8.2",
+     "skill": "4.B",
+     "stem": "The construction shown in the photograph is best understood in the context of which broader development of the mid-twentieth century?",
+     "options": [
+      {
+       "text": "Rivalry between the United States and the Soviet Union over the political future of postwar Europe",
+       "why": "Berlin was split between Soviet-backed East Germany and Western-aligned West Berlin, so the wall was a product of the superpower rivalry over postwar Europe.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The spread of fascist regimes that challenged the post-First World War settlement in Europe",
+       "why": "Fascist regimes belong to the interwar period. By 1961 the context was the Cold War.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The founding of the Non-Aligned Movement by newly independent states seeking to stay out of superpower alliances",
+       "why": "The Non-Aligned Movement was founded in 1961, but it was a response to bloc politics by other states. It was not the setting that produced the division of Berlin.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "Nationalist movements in Africa and Asia demanding independence from British and French colonial rule",
+       "why": "Decolonization was happening in these same years, but it does not explain why a wall divided Berlin.",
+       "value": null,
+       "label": "unrelated_development"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Rivalry between the United States and the Soviet Union over the political future of postwar Europe\". Berlin was split between Soviet-backed East Germany and Western-aligned West Berlin, so the wall was a product of the superpower rivalry over postwar Europe.\n\"The spread of fascist regimes that challenged the post-First World War settlement in Europe\" is incorrect: Fascist regimes belong to the interwar period. By 1961 the context was the Cold War.\n\"The founding of the Non-Aligned Movement by newly independent states seeking to stay out of superpower alliances\" is incorrect: The Non-Aligned Movement was founded in 1961, but it was a response to bloc politics by other states. It was not the setting that produced the division of Berlin.\n\"Nationalist movements in Africa and Asia demanding independence from British and French colonial rule\" is incorrect: Decolonization was happening in these same years, but it does not explain why a wall divided Berlin.",
+     "est_seconds": 75,
+     "facts": [
+      "After 1945 Germany and Berlin were divided between Soviet and Western zones; the two German states were founded in 1949.",
+      "The Berlin Wall stood from 1961 to 1989 as a symbol of the Cold War division of Europe."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "The context line says the wall divided East Berlin from West Berlin, and that division reflected the split between the Soviet and Western blocs.",
+      "evidence_quote": "a wall dividing East Berlin from West Berlin in September 1961"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w214_5B",
+     "topic": "8.8",
+     "skill": "5.B",
+     "stem": "The barrier shown being built in the photograph was opened in 1989. That opening was most directly related to which of the following developments?",
+     "options": [
+      {
+       "text": "Economic reforms in China under Deng Xiaoping that opened the country to foreign investment and markets",
+       "why": "Deng's reforms were real, but they took place in China and did not bring about the opening of the Berlin border.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Soviet reforms under Gorbachev and mass protests that weakened communist rule in Eastern Europe",
+       "why": "Gorbachev's reforms and his unwillingness to use force to hold the Eastern bloc together, along with mass protests in East Germany and nearby states, led to the opening of the wall in November 1989.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "A NATO military offensive that forced Warsaw Pact troops to withdraw from East Germany",
+       "why": "No NATO offensive took place. The wall opened through peaceful political change, not military defeat.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "The peaceful resolution of the Cuban Missile Crisis, which led to a direct communication line between superpowers",
+       "why": "The Cuban Missile Crisis was in 1962 and the hotline was set up in 1963. Both came decades before the wall opened.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Soviet reforms under Gorbachev and mass protests that weakened communist rule in Eastern Europe\". Gorbachev's reforms and his unwillingness to use force to hold the Eastern bloc together, along with mass protests in East Germany and nearby states, led to the opening of the wall in November 1989.\n\"Economic reforms in China under Deng Xiaoping that opened the country to foreign investment and markets\" is incorrect: Deng's reforms were real, but they took place in China and did not bring about the opening of the Berlin border.\n\"A NATO military offensive that forced Warsaw Pact troops to withdraw from East Germany\" is incorrect: No NATO offensive took place. The wall opened through peaceful political change, not military defeat.\n\"The peaceful resolution of the Cuban Missile Crisis, which led to a direct communication line between superpowers\" is incorrect: The Cuban Missile Crisis was in 1962 and the hotline was set up in 1963. Both came decades before the wall opened.",
+     "est_seconds": 75,
+     "facts": [
+      "The Berlin Wall was opened on November 9, 1989.",
+      "Mikhail Gorbachev, Soviet leader from 1985, pursued the reform policies of glasnost and perestroika."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.B",
+      "key_evidence_in_source": "The question builds on the wall shown under construction in 1961 and asks how it relates to its opening in 1989.",
+      "evidence_quote": "Constructing Berlin Wall"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    }
+   ],
+   "excluded_items": []
+  }
  },
  {
   "cellId": "ap_world_history-w215",

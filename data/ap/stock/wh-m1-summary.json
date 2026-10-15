@@ -7,6 +7,7 @@
   "wh-m1:ap_world_history-w105-k0",
   "wh-m1:ap_world_history-w106-k0",
   "wh-m1:ap_world_history-w107-k0",
+  "wh-m1:ap_world_history-w110-k0",
   "wh-m1:ap_world_history-w111-k0",
   "wh-m1:ap_world_history-w112-k0",
   "wh-m1:ap_world_history-w113-k0",
@@ -24,23 +25,14 @@
   "wh-m1:ap_world_history-w211-k0",
   "wh-m1:ap_world_history-w212-k0",
   "wh-m1:ap_world_history-w213-k0",
+  "wh-m1:ap_world_history-w214-k0",
   "wh-m1:ap_world_history-w215-k0"
  ],
  "rejected": [
   {
    "__rejected": true,
-   "specId": "w110",
-   "reason": "0/4 items; setFlags=0; setViolations="
-  },
-  {
-   "__rejected": true,
    "specId": "w114",
    "reason": "0/3 items; setFlags=0; setViolations=no_tool_output_or_unparseable"
-  },
-  {
-   "__rejected": true,
-   "specId": "w214",
-   "reason": "0/3 items; setFlags=0; setViolations="
   }
  ],
  "sets": [
@@ -87,8 +79,8 @@
   {
    "set": "w110",
    "requested": 4,
-   "passed": 0,
-   "chosen": 0,
+   "passed": 5,
+   "chosen": 4,
    "setFlags": [],
    "setViolations": []
   },
@@ -169,7 +161,7 @@
   {
    "set": "w205",
    "requested": 4,
-   "passed": 4,
+   "passed": 5,
    "chosen": 4,
    "setFlags": [],
    "setViolations": []
@@ -241,8 +233,8 @@
   {
    "set": "w214",
    "requested": 3,
-   "passed": 0,
-   "chosen": 0,
+   "passed": 4,
+   "chosen": 3,
    "setFlags": [],
    "setViolations": []
   },
@@ -257,6 +249,6 @@
  ],
  "items": {
   "generated": 142,
-  "passed": 120
+  "passed": 130
  }
 }
