@@ -1,5 +1,5 @@
-import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 "use client";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 
 // R6 11/N — 관리자 통합 일정. `official` 관리자 계정에 선생님 개인 Google Calendar를
 // 직접 공유하지 않고, ALTON DB에 이미 있는 전체 선생님 확정 예약을 여기서 중앙 조회한다.
