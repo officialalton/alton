@@ -46,7 +46,8 @@ type SatList = { patches: Patch[] };
 export type Readout = { generatedAt: string; project: string; problems: ProblemReadout[]; sets: SetRow[]; triage: Record<string, unknown> };
 
 /** apply 대상 패치 전부(SAT 목록 + 수동 E-* + AP FRQ). */
-export function loadPatches(opts: { includeScan?: boolean; round?: 1 | 2 | 3 | 4 | 5 } = {}): { patches: Patch[]; overrides: Overrides } {
+export function loadPatches(opts: { includeScan?: boolean; round?: 1 | 2 | 3 | 4 | 5 | 6 } = {}): { patches: Patch[]; overrides: Overrides } {
+  if (opts.round === 6) return { patches: rd<SatList>("data/audit/2026-10-15-r6-patches.json").patches, overrides: rd<Overrides>("data/audit/2026-10-15-r6-overrides.json") };
   if (opts.round === 5) return { patches: rd<SatList>("data/audit/2026-10-14-r5-patches.json").patches, overrides: rd<Overrides>("data/audit/2026-10-14-r5-overrides.json") };
   if (opts.round === 4) return { patches: rd<SatList>("data/audit/2026-10-13-r4-patches.json").patches, overrides: rd<Overrides>("data/audit/2026-10-13-r4-overrides.json") };
   if (opts.round === 3) return { patches: rd<SatList>("data/audit/2026-10-13-r3-patches.json").patches, overrides: rd<Overrides>("data/audit/2026-10-13-r3-overrides.json") };
@@ -122,9 +123,10 @@ async function main() {
   const round2 = flag("--round2"); // 라운드 2: data/audit/2026-10-13-r2-patches.json 만 대상(라운드 1 은 이미 적용됨). AP 그래프 FRQ 패치 제외.
   const round3 = flag("--round3"); // 라운드 3: data/audit/2026-10-13-r3-patches.json(AP FRQ 설정 지문) 만 대상.
   const round5 = flag("--round5"); // 라운드 5: data/audit/2026-10-14-r5-patches.json(문법 재검토·RW 150단어 정리·그림 확인 문구) 만 대상.
+  const round6 = flag("--round6"); // 라운드 6: data/audit/2026-10-15-r6-patches.json(새 AP 9과목×2회차 외부 감사 결과) 만 대상.
   const round4 = flag("--round4"); // 라운드 4: data/audit/2026-10-13-r4-patches.json(금액 $ 이스케이프 + Micro 한계비용 지문) 만 대상.
-  const { patches: base, overrides } = loadPatches({ includeScan: !flag("--no-scan"), round: round5 ? 5 : round4 ? 4 : round3 ? 3 : round2 ? 2 : 1 });
-  let patches = [...base, ...(flag("--no-ap") || round2 || round3 || round4 || round5 ? [] : buildApPatches())];
+  const { patches: base, overrides } = loadPatches({ includeScan: !flag("--no-scan"), round: round6 ? 6 : round5 ? 5 : round4 ? 4 : round3 ? 3 : round2 ? 2 : 1 });
+  let patches = [...base, ...(flag("--no-ap") || round2 || round3 || round4 || round5 || round6 ? [] : buildApPatches())];
   const only = arg("--only")?.split(",");
   if (only) patches = patches.filter((p) => only.includes(p.id));
   const inFile = arg("--readout-in");

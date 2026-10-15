@@ -183,8 +183,18 @@ export function renderApStatChart(spec: ApStatChartSpec): { svg: string; alt: st
   const checks = statChartChecks(spec);
   if (spec.chart === "curve") { const r = renderCurve(spec); return { ...r, issues: [...r.issues, ...checks] }; }
   if (spec.chart === "output") { const r = renderOutput(spec); return { svg: r.markup, alt: r.alt, issues: [...r.issues, ...checks] }; }
-  if (spec.chart === "tree") { const r = renderVennTree(treeSpecOf(spec)); return { svg: r.svg, alt: spec.title ? `${spec.title}. ${r.alt}` : r.alt, issues: [...r.issues, ...checks] }; }
+  if (spec.chart === "tree") { const r = renderVennTree(treeSpecOf(spec)); const ta = r.alt.replace(/^수형도:/, "Tree diagram:"); const alt = spec.title ? `${spec.title}. ${ta}` : ta; return { svg: englishAltInMarkup(r.svg, alt), alt, issues: [...r.issues, ...checks] }; }
   const ds = dataSpecOf(spec); const r = renderData(ds);
-  return { svg: r.markup, alt: dataAlt(spec, ds), issues: [...r.issues, ...checks] };
+  const alt = dataAlt(spec, ds);
+  return { svg: englishAltInMarkup(r.markup, alt), alt, issues: [...r.issues, ...checks] };
+}
+
+const HANGUL_RE = /[\uac00-\ud7a3]/;
+const escAttr = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+/** SAT data 렌더러가 SVG 안에 넣은 한국어 aria-label·<title>(이상치 누락 포함)을 영어 alt 로 바꾼다. 한글이 없으면 그대로(감사 R6: 화면 판독기가 한국어·이상치 79 가 빠진 설명을 읽었다). */
+export function englishAltInMarkup(markup: string, alt: string): string {
+  return markup
+    .replace(/aria-label="([^"]*)"/g, (m, v: string) => (HANGUL_RE.test(v) ? `aria-label="${escAttr(alt)}"` : m))
+    .replace(/<title>([^<]*)<\/title>/g, (m, v: string) => (HANGUL_RE.test(v) ? `<title>${escAttr(alt)}</title>` : m));
 }
 
