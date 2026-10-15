@@ -5,7 +5,7 @@
  "archetypeList": "psych_p2_mc",
  "seed0": 10100,
  "candidatesPerCell": 1,
- "capUsd": 6,
+ "capUsd": 10,
  "repair": false,
  "batch": true,
  "env": {
@@ -41,9 +41,9 @@
  "skipStages": [
   "gen"
  ],
- "hardStopCumulativeUsd": 172,
+ "hardStopCumulativeUsd": 176,
  "expected": {
-  "generatorHash": "8198ce411d6b",
+  "generatorHash": "7c06f0641050",
   "reviewerPromptHash": "609c0842cb3c",
   "difficultyPromptHash": "9bda2250d42c",
   "parserHash": "7528bbe8cdfc",
