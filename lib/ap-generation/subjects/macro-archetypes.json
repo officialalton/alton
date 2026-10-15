@@ -1207,6 +1207,57 @@
   "bc": false
  },
  {
+  "id": "ma_h_lf_two_events",
+  "topic": "4.7",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "rule table vs three-region numeric simulation of the linear loanable funds market; initial equilibrium recomputed exactly and by sympy"
+  ],
+  "misconceptions": [
+   "Claims the real interest rate would decrease for certain, but the effect is indeterminate. The shifts push the real interest rate in opposite directions and their sizes are not given, so the change in the real interest rate is indeterminate.",
+   "Says the quantity of loanable funds would increase, but it would decrease. Both shifts decrease the quantity of loanable funds.",
+   "Claims the real interest rate would increase for certain, but the effect is indeterminate. The shifts push the real interest rate in opposite directions and their sizes are not given, so the change in the real interest rate is indeterminate.",
+   "Calls the effect on the quantity of loanable funds indeterminate, but it would decrease. Both shifts decrease the quantity of loanable funds."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_lr_phillips_policy",
+  "topic": "5.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "linear Phillips-curve simulation with full expectation adjustment vs rule table"
+  ],
+  "misconceptions": [
+   "Says the short-run unemployment rate would not change, but it would increase. The policy lowers aggregate demand, so the economy moves down the short-run Phillips curve and unemployment is above the natural rate.",
+   "Says the long-run inflation rate would increase, but it would decrease. Expected inflation has caught up, so inflation stays lower than in the initial situation.",
+   "Says the short-run inflation rate would not change, but it would decrease. Along the short-run Phillips curve, higher unemployment goes with lower inflation.",
+   "Says the long-run unemployment rate would increase, but it would not change. Once expectations adjust, the short-run Phillips curve shifts and unemployment returns to the natural rate on the vertical long-run Phillips curve."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_mix_open",
+  "topic": "5.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "policy-mix rule table vs numeric sign simulation; loanable-funds rule; foreign-exchange rule table for the currency and net exports"
+  ],
+  "misconceptions": [
+   "Says the real interest rate would increase, but it would decrease. Smaller government borrowing lowers the demand for loanable funds, and open market purchases increase the money supply, so both push the real interest rate down.",
+   "Says the real interest rate would increase, but it would decrease. Smaller government borrowing lowers the demand for loanable funds, and open market purchases increase the money supply, so both push the real interest rate down. Says net exports would decrease, but it would increase. A lower real interest rate reduces financial capital inflows, so the currency depreciates and net exports rise.",
+   "Says investment spending would decrease, but it would increase. A lower real interest rate makes private investment rise.",
+   "Says net exports would decrease, but it would increase. A lower real interest rate reduces financial capital inflows, so the currency depreciates and net exports rise."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_h_money_growth_real",
   "topic": "5.3",
   "skill": "2.C",

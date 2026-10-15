@@ -5,7 +5,7 @@
  "archetypeList": "macro_hard_b",
  "seed0": 12000,
  "candidatesPerCell": 1,
- "capUsd": 1.9,
+ "capUsd": 2.4,
  "repair": false,
  "env": {
   "AP_REQUIRE_BLUEPRINT": "1",
@@ -44,11 +44,11 @@
  "hardStopCumulativeUsd": 225.2,
  "_budget_estimate": {
   "basis": "0.036 per MC candidate observed in the macro runs; 3 candidates per archetype",
-  "capUsd": 1.9
+  "capUsd": 2.4
  },
  "_note": "Frozen 2026-10-15 for macro-hard (exam_prep reinforcement). Worktree ledger cumulative 219.13 at start; model-spend cap for the whole task 6.0 (hard stop 225.2).",
  "expected": {
-  "generatorHash": "5c19a6781204",
+  "generatorHash": "e46cc8032c20",
   "reviewerPromptHash": "fbb6d8aa614c",
   "difficultyPromptHash": "9bda2250d42c",
   "parserHash": "7528bbe8cdfc",

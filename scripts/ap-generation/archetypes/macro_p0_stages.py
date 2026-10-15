@@ -21,4 +21,4 @@ STAGE_P3 = ['ma_phillips_adas', 'ma_policy_goal', 'ma_phillips_explain']  # ë§ˆì
 STAGE_HARD_A = ['ma_h_trade_gain', 'ma_h_shift_shortage', 'ma_h_ppc_rotate', 'ma_h_terms_range', 'ma_h_real_percapita', 'ma_h_unemp_event', 'ma_h_cpi_real_wage', 'ma_h_exp_real_growth', 'ma_h_gdp_classify', 'ma_h_unexpected_inflation',
                 'ma_h_omo_chain', 'ma_h_real_rate_ad', 'ma_h_money_target', 'ma_h_rr_cut', 'ma_h_export_price', 'ma_h_trip_exchange', 'ma_h_depr_nx_gdp']
 STAGE_HARD_B = ['ma_h_gap_tax', 'ma_h_shock_fiscal_vs_self', 'ma_h_mpc_table_gap', 'ma_h_two_policy_net', 'ma_h_adas_table_shift', 'ma_h_ulc_adas', 'ma_h_phillips_expect', 'ma_h_debt_path', 'ma_h_crowding_table', 'ma_h_money_growth_real',
-                'ma_h_fx_two_events', 'ma_h_real_rate_fx']
+                'ma_h_fx_two_events', 'ma_h_real_rate_fx', 'ma_h_mix_open', 'ma_h_lr_phillips_policy', 'ma_h_lf_two_events']

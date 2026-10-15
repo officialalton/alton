@@ -21,7 +21,7 @@ def sent_item(arch, topic, skill, stem, key_text, key_why, wrongs, rng, *, conce
               judgment=judgment or "carry the result of each step into the next step")
 
 
-def combo_n(rng, vs, truth, mech, dirs=(1, -1), phr=None):
+def combo_n(rng, vs, truth, mech, dirs=(1, -1), phr=None, join=None):
     """n 개 변수의 방향 조합 선택지(정답 1 + 오답 4). 한 변수만 틀린 조합을 우선한다. 반환 (key Opt, [Opt])."""
     import itertools
     from common import Opt as _O
@@ -37,6 +37,8 @@ def combo_n(rng, vs, truth, mech, dirs=(1, -1), phr=None):
 
     def txt(c):
         parts = [ph(v, d) for v, d in zip(vs, c)]
+        if join:
+            return join(parts)
         low = lambda x: x[0].lower() + x[1:]  # noqa: E731
         return (parts[0] + ", " + ", ".join(low(x) for x in parts[1:-1]) + ", and " + low(parts[-1]) + ".") if len(parts) > 2 else parts[0] + ", and " + low(parts[1]) + "."
     key = _O(txt(t), True, " ".join(mech[v] for v in vs), None)

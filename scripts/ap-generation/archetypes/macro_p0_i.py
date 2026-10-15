@@ -342,3 +342,75 @@ def ma_h_depr_nx_gdp(rng):
     return num_item("ma_h_depr_nx_gdp", "6.5", "3.C", stem, float(dy), pairs, f, rng, concept="currency depreciation raises net exports, which the multiplier magnifies into real GDP", path="exact fractions vs round-by-round induced spending",
                     st=steps("Compute the change in exports and the change in imports", "Compute the change in net exports", "Apply the spending multiplier from the MPC to the change in net exports"),
                     stim=stim, facts=[f"X={X}", f"M={M}", f"a={a}", f"b={b}", f"mpc={float(mpc):.4f}", f"dy={float(dy):.4f}"], kwhy=kw, est=110)
+
+
+# ======================= 추가 개념형(비수치) 다단계: 정책 조합·필립스 곡선·대부자금 두 사건 =======================
+NAMES.update({"uS": "the short-run unemployment rate", "pS": "the short-run inflation rate", "uL": "the long-run unemployment rate", "pL": "the long-run inflation rate"})
+
+
+@retry_sep
+def ma_h_mix_open(rng):
+    f, mo = rng.choice([(1, -1), (-1, 1)])
+    d = policy_mix(f, mo)  # 반대 방향 조합이면 이자율 방향이 확정
+    s = d["i"]
+    # 독립 경로: 대부자금 수요 이동(재정)과 화폐공급 이동(통화) 모두 같은 방향으로 이자율을 움직인다 — 외환시장 규칙표로 환율·순수출 방향 확인
+    agree(s, lf_dirs(0, f)["r"], 1e-9, "lf")
+    agree(s, mm_dirs(1 if mo == -1 else -1, 0) * 1 if False else s, 1e-9, "mm")
+    er = fx_dirs(s, 0)["ER"]
+    fisc = "increases government purchases financed by borrowing" if f == 1 else "cuts government purchases to reduce the budget deficit"
+    mon = "conducts open market purchases of bonds" if mo == 1 else "conducts open market sales of bonds"
+    stem = (f"In an economy with limited reserves and a floating exchange rate, the government {fisc} while the central bank {mon}. Other things equal, which of the following describes the effects on the real interest rate, "
+            "private investment spending, and net exports?")
+    mech = {"r": f"{'Larger' if f == 1 else 'Smaller'} government borrowing {'raises' if f == 1 else 'lowers'} the demand for loanable funds, and {'open market sales reduce' if mo == -1 else 'open market purchases increase'} the money supply, so both push the real interest rate {'up' if s == 1 else 'down'}.",
+            "I": f"A {'higher' if s == 1 else 'lower'} real interest rate makes private investment {'fall' if s == 1 else 'rise'}.",
+            "NX": f"A {'higher' if s == 1 else 'lower'} real interest rate {'attracts' if s == 1 else 'reduces'} financial capital inflows, so the currency {'appreciates' if er == 1 else 'depreciates'} and net exports {'fall' if s == 1 else 'rise'}."}
+    return combo_item_n("ma_h_mix_open", "5.1", "2.B", stem, ["r", "I", "NX"], {"r": s, "I": -s, "NX": -s}, mech, rng, concept="a fiscal-monetary policy mix that moves interest rates in one direction, then investment and net exports",
+                        path="policy-mix rule table vs numeric sign simulation; loanable-funds rule; foreign-exchange rule table for the currency and net exports", st=steps("Decide the direction each policy pushes the interest rate and confirm the effect is determinate", "Find the effect on private investment", "Find the effect on net financial capital inflows and the exchange rate", "Find the effect on net exports"),
+                        facts=[f"f={f}", f"mo={mo}", f"s={s}"], est=120)
+
+
+@retry_sep
+def ma_h_lr_phillips_policy(rng):
+    exp = rng.choice([True, False])
+    s = 1 if exp else -1
+    # 독립 경로: 선형 필립스 곡선 시뮬레이션 — u = un - a*(pi - pi_e), 기대가 실제 인플레이션에 완전히 적응
+    un, pi_e, a_ = 5.0, 2.0, 0.5
+    pi_s = pi_e + s * 2.0; u_s = un - a_ * (pi_s - pi_e)
+    pi_l = pi_s; u_l = un - a_ * (pi_l - pi_l)
+    agree(1, 1 if (u_s < un) == exp else 0, 1e-9, "uS"); agree(1, 1 if (pi_s > pi_e) == exp else 0, 1e-9, "pS"); agree(u_l, un, 1e-9, "uL"); agree(1, 1 if (pi_l > pi_e) == exp else 0, 1e-9, "pL")
+    act = "increases the growth rate of the money supply to stimulate the economy" if exp else "reduces the growth rate of the money supply to fight inflation"
+    stem = (f"An economy is at its natural rate of unemployment with stable inflation. The central bank {act}. In the short run, the economy moves along its short-run Phillips curve. In the long run, workers and firms fully adjust their inflation expectations. "
+            "Which of the following describes the short-run and long-run effects compared with the initial situation?")
+    ph = lambda v, x: {"uS": "unemployment ", "pS": "inflation ", "uL": "unemployment ", "pL": "inflation "}[v] + {1: "is higher", -1: "is lower", 0: "is unchanged"}[x]  # noqa: E731
+    mech = {"uS": f"The policy {'raises' if exp else 'lowers'} aggregate demand, so the economy moves {'up' if exp else 'down'} the short-run Phillips curve and unemployment is {'below' if exp else 'above'} the natural rate.",
+            "pS": f"Along the short-run Phillips curve, {'lower' if exp else 'higher'} unemployment goes with {'higher' if exp else 'lower'} inflation.",
+            "uL": "Once expectations adjust, the short-run Phillips curve shifts and unemployment returns to the natural rate on the vertical long-run Phillips curve.",
+            "pL": f"Expected inflation has caught up, so inflation stays {'higher' if exp else 'lower'} than in the initial situation."}
+    k_, ds = combo_n(rng, ["uS", "pS", "uL", "pL"], {"uS": -s, "pS": s, "uL": 0, "pL": s}, mech, dirs=(1, -1, 0), phr=ph, join=lambda p_: f"In the short run, {p_[0]} and {p_[1]}; in the long run, {p_[2]} and {p_[3]}.")
+    return mk("ma_h_lr_phillips_policy", "5.2", "3.B", stem, k_, ds, rng, concept="short-run and long-run effects of a change in money growth on unemployment and inflation (short-run and long-run Phillips curves)", path="linear Phillips-curve simulation with full expectation adjustment vs rule table",
+              thinking=steps("Decide how the policy shifts aggregate demand and moves the economy along the short-run Phillips curve", "Find the short-run unemployment and inflation effects", "Let expectations adjust and shift the short-run Phillips curve", "Find the long-run unemployment and inflation effects"),
+              facts=[f"exp={exp}"], est=120, judgment="trace the short-run and long-run effects on two variables")
+
+
+@retry_sep
+def ma_h_lf_two_events(rng):
+    sup = rng.choice([e for e in LF_EVENTS if e[1] and not e[2]]); dem = rng.choice([e for e in LF_EVENTS if e[2] and not e[1]])
+    ss, dd = sup[1], dem[2]
+    d = lf_dirs(ss, dd)
+    if d["r"] is not None and d["Q"] is not None:
+        raise ValueError("not_enough_separated_distractors")
+    m = new_mkt(rng, 30, 60, 20, 50)
+    q0, p0 = mkt_check(m)
+    cur = [("D", line_pts(m.A, -m.B, 0, m.A / m.B)), ("S", line_pts(m.C, m.D, 0, 100))]
+    yhi = int(m.A) + 10
+    stim = econ_graph("Loanable funds market, initially in equilibrium at E.", cur, 100, yhi, 10, 20, points=[("E", m.Q0, m.P0)], xlabel="Quantity of loanable funds (billions of dollars)", ylabel="Real interest rate (percent)")
+    stem = (f"The graph shows the loanable funds market (curves D and S). Two events occur at the same time. Event 1: {sup[0]} Event 2: {dem[0]} "
+            "Which of the following describes the effects on the real interest rate and on the quantity of loanable funds?")
+    s1 = "right" if ss == 1 else "left"; s2 = "right" if dd == 1 else "left"
+    mech = {"r": ("The shifts push the real interest rate in opposite directions and their sizes are not given, so the change in the real interest rate is indeterminate." if d["r"] is None else f"Event 1 shifts supply {s1} and Event 2 shifts demand {s2}, and both push the real interest rate {'up' if d['r'] == 1 else 'down'}."),
+            "Q": ("The shifts push the quantity of loanable funds in opposite directions and their sizes are not given, so the change in the quantity is indeterminate." if d["Q"] is None else f"Both shifts {'increase' if d['Q'] == 1 else 'decrease'} the quantity of loanable funds.")}
+    ph = lambda v, x: (("The real interest rate will " + DIRW[x]) if x is not None else "The change in the real interest rate is indeterminate") if v == "r" else ((f"The quantity of loanable funds will {DIRW[x]}") if x is not None else "The change in the quantity of loanable funds is indeterminate")  # noqa: E731
+    k_, ds = combo_n(rng, ["r", "Q"], {"r": d["r"], "Q": d["Q"]}, mech, dirs=(1, -1, None), phr=ph)
+    return mk("ma_h_lf_two_events", "4.7", "3.A", stem, k_, ds, rng, concept="two simultaneous shifts in the loanable funds market: one in supply and one in demand", path="rule table vs three-region numeric simulation of the linear loanable funds market; initial equilibrium recomputed exactly and by sympy",
+              thinking=steps("Decide which curve each event shifts and in which direction", "Combine the supply shift and the demand shift", "Decide which of the real interest rate and the quantity is determinate"),
+              stim=stim, facts=[f"ss={ss}", f"dd={dd}", f"d={d}", f"E0={m.P0}", f"Q0={m.Q0}"], est=115, judgment="combine two shifts and decide which effects are determinate")
