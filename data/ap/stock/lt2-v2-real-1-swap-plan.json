@@ -1,0 +1,26 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "LT2",
+ "sourceSetName": "AP English Literature — Practice Exam 2",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/ap-generation/lt-real-1-plans.ts",
+ "note": "Stage 1: FRQ Q2 fa2(ALTON 작성 산문) → rf2(Chekhov 'The Lady with the Dog' 발췌, 689단어). MC 는 그대로. 교체 뒤 독립 검증기 위반 0.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "position": 2,
+   "removeKey": "englit-p1-b:ap_english_literature-fa2-k0",
+   "addKey": "lt-real-1:ap_english_literature-real-rf2-k0",
+   "remove": {
+    "kind": "frq",
+    "frqType": "q2"
+   },
+   "add": {
+    "kind": "frq",
+    "frqType": "q2"
+   }
+  }
+ ]
+}

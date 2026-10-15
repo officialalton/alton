@@ -1,0 +1,137 @@
+{
+ "subject": "lit",
+ "rows": [
+  {
+   "cell": "ap_english_literature-real-rf1",
+   "tier": "high",
+   "target": 6,
+   "got": 6,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 1,
+    "evidence": 4,
+    "sophistication": 1,
+    "total": 6,
+    "disagreement": false,
+    "rubricVersion": "englit-v1"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_english_literature-real-rf1",
+   "tier": "mid",
+   "target": 4,
+   "got": 4,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 1,
+    "evidence": 3,
+    "sophistication": 0,
+    "total": 4,
+    "disagreement": false,
+    "rubricVersion": "englit-v1"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_english_literature-real-rf1",
+   "tier": "low",
+   "target": 2,
+   "got": 2,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 0,
+    "evidence": 2,
+    "sophistication": 0,
+    "total": 2,
+    "disagreement": false,
+    "rubricVersion": "englit-v1"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_english_literature-real-rf2",
+   "tier": "high",
+   "target": 6,
+   "got": 6,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 1,
+    "evidence": 4,
+    "sophistication": 1,
+    "total": 6,
+    "disagreement": false,
+    "rubricVersion": "englit-v1"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_english_literature-real-rf2",
+   "tier": "mid",
+   "target": 4,
+   "got": 4,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 1,
+    "evidence": 3,
+    "sophistication": 0,
+    "total": 4,
+    "disagreement": false,
+    "rubricVersion": "englit-v1"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_english_literature-real-rf2",
+   "tier": "low",
+   "target": 2,
+   "got": 3,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 1,
+    "evidence": 2,
+    "sophistication": 0,
+    "total": 3,
+    "disagreement": false,
+    "rubricVersion": "englit-v1"
+   },
+   "disagreement": false
+  }
+ ],
+ "mae": 0.167,
+ "meanSignedError": 0.167,
+ "ordering": [
+  {
+   "cell": "ap_english_literature-real-rf1",
+   "ok": true,
+   "h": 6,
+   "m": 4,
+   "l": 2
+  },
+  {
+   "cell": "ap_english_literature-real-rf2",
+   "ok": true,
+   "h": 6,
+   "m": 4,
+   "l": 3
+  }
+ ],
+ "injection": [],
+ "notes": [
+  "ap_english_literature-real-rf1: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_english_literature-real-rf1: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_english_literature-real-rf1: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_english_literature-real-rf2: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_english_literature-real-rf2: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_english_literature-real-rf2: 2 anchors (leave-one-out) — prompt/sources only for the rest"
+ ],
+ "diagnostics": [],
+ "calls": 12,
+ "spentUsd": 0.3326
+}

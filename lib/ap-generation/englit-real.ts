@@ -25,8 +25,12 @@ export function realSet(e: SourceEntry, storedText: string, items: LtSetRaw["ite
 /** 학생 화면용 지문 문자열: 표지 + 제목 + 저자 + 머리글 + 줄 번호 펜스. */
 export function realDisplay(set: Pick<LtSetRaw, "title" | "headnote" | "stanzas"> & { provenance: { author_alias: string } }, e: SourceEntry): string {
   const credit = [`by ${set.provenance.author_alias}${e.translator ? `, translated by ${e.translator}` : ""}`, set.headnote?.trim() ?? ""].filter(Boolean).join("\n");
-  return [REAL_TEXT_MARKER, set.title.trim(), credit, "", "```" + PASSAGE_FENCE, ...flatWithBreaks(set.stanzas), "```"].join("\n");
+  return [realAttribution(e), set.title.trim(), credit, "", "```" + PASSAGE_FENCE, ...flatWithBreaks(set.stanzas), "```"].join("\n");
 }
+/** 저장소 안내("Gutenberg eBook #…")를 뺀 짧은 판본 표기. */
+export const shortEdition = (e: Pick<SourceEntry, "edition">): string => e.edition.split(/,? (?:as in )?Gutenberg eBook/)[0].replace(/\.$/, "").trim();
+/** 지문 맨 윗줄(2026-10-15 Stage 1): "Public-domain source text — <저자>, <작품>, <판본>". 표지 문구(REAL_TEXT_MARKER)로 시작해 영어 지문으로 인식된다. */
+export const realAttribution = (e: Pick<SourceEntry, "author" | "title" | "edition">): string => `${REAL_TEXT_MARKER} — ${e.author}, ${e.title}, ${shortEdition(e)}`;
 /** 줄 번호(세는 줄 기준 1부터) → 연(시) 또는 문단(산문) 번호(1부터). */
 export function unitOfLine(stanzas: string[][], line: number): number {
   let n = 0; for (let i = 0; i < stanzas.length; i++) { n += stanzas[i].filter((l) => l.trim() !== "").length; if (line <= n) return i + 1; } return stanzas.length;

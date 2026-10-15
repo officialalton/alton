@@ -1,0 +1,929 @@
+[
+ {
+  "cellId": "ap_english_literature-real-rs1",
+  "apSubjectCode": "ap_english_literature",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "source_first_real_text",
+  "candidateKey": "ap_english_literature-real-rs1-k0",
+  "structure": "shared_stimulus_set",
+  "archetype": "lt_real_poetry_rs1",
+  "pipeline": "real_text_v1",
+  "releaseTier": "sample_not_loaded",
+  "expertStatus": "unreviewed",
+  "renderVerified": false,
+  "screenVerified": false,
+  "sourceKind": "real_public_domain",
+  "registryId": "dickinson-chariot",
+  "keywordCode": "U5.3",
+  "unitCode": "5",
+  "skillPrimary": "6.C",
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "payload": {
+   "layout_status": "not verified identical to the official AP Central preview: layout was checked only against the ALTON PassageBlock at 390px and 1280px (docs/ap/englit-material-audit.md section 6)",
+   "archetype": "lt_real_poetry_rs1",
+   "topic": "U5.3",
+   "skill": "6.C",
+   "calculator": "na",
+   "set_intro": "Public-domain source text\nThe Chariot (\"Because I could not stop for Death\")\nby Emily Dickinson\nThe following poem is by Emily Dickinson (1890).\n\n```passage\nBecause I could not stop for Death,\nHe kindly stopped for me;\nThe carriage held but just ourselves\nAnd Immortality.\n\nWe slowly drove, he knew no haste,\nAnd I had put away\nMy labor, and my leisure too,\nFor his civility.\n\nWe passed the school where children played,\nTheir lessons scarcely done;\nWe passed the fields of gazing grain,\nWe passed the setting sun.\n\nWe paused before a house that seemed\nA swelling of the ground;\nThe roof was scarcely visible,\nThe cornice but a mound.\n\nSince then 't is centuries; but each\nFeels shorter than the day\nI first surmised the horses' heads\nWere toward eternity.\n```",
+   "lt_passage": {
+    "form": "poem",
+    "group": "poetry",
+    "title": "The Chariot (\"Because I could not stop for Death\")",
+    "headnote": "The following poem is by Emily Dickinson (1890).",
+    "stanzas": [
+     [
+      "Because I could not stop for Death,",
+      "He kindly stopped for me;",
+      "The carriage held but just ourselves",
+      "And Immortality."
+     ],
+     [
+      "We slowly drove, he knew no haste,",
+      "And I had put away",
+      "My labor, and my leisure too,",
+      "For his civility."
+     ],
+     [
+      "We passed the school where children played,",
+      "Their lessons scarcely done;",
+      "We passed the fields of gazing grain,",
+      "We passed the setting sun."
+     ],
+     [
+      "We paused before a house that seemed",
+      "A swelling of the ground;",
+      "The roof was scarcely visible,",
+      "The cornice but a mound."
+     ],
+     [
+      "Since then 't is centuries; but each",
+      "Feels shorter than the day",
+      "I first surmised the horses' heads",
+      "Were toward eternity."
+     ]
+    ],
+    "line_count": 20
+   },
+   "provenance": {
+    "kind": "public_domain",
+    "registry_id": "dickinson-chariot",
+    "author": "Emily Dickinson",
+    "translator": null,
+    "year": 1890,
+    "repository": "Project Gutenberg (gutenberg.org)",
+    "url": "https://www.gutenberg.org/ebooks/12242",
+    "reuse_basis": "United States public domain: poem and 1890 edition published before 1929; author died 1886. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+    "text_sha256": "fe0a7bffeb75412b66c7b23b8be485c00555b76b0fb28d5eba11b6b8d9a914f7",
+    "excerpt": {
+     "unit": "line",
+     "from": 1,
+     "to": 20,
+     "whole_work": true,
+     "note": "Complete poem (heading 'XXVII. The Chariot.' omitted)."
+    },
+    "modifications": [
+     "Removed heading lines and the section number.",
+     "Line and stanza structure unchanged."
+    ]
+   },
+   "text_map": {
+    "central_idea": "Speaking from centuries after her death, the speaker remembers dying as a polite, unhurried carriage ride with a courteous Death. The ride passes images of a whole life and stops at a grave described as a sunken house. Only at the end does she reveal that she slowly realized the ride led to eternity. The calm, mannerly surface keeps death's finality half-hidden until the last stanza.",
+    "speaker_or_narrator": "A first-person speaker who has died. She looks back from an eternity that has lasted 'centuries' to the day Death called for her. She was Death's passenger and, in effect, the woman he was courting.",
+    "structure_and_shifts": [
+     {
+      "quote": "We passed the school where children played",
+      "from": "Death picking up the speaker, told in the language of a social call",
+      "to": "the journey itself, a run of passing images"
+     },
+     {
+      "quote": "We paused before a house that seemed",
+      "from": "movement past scenes of life",
+      "to": "a stop at a grave described as a house"
+     },
+     {
+      "quote": "Since then 't is centuries; but each",
+      "from": "a past-tense account of the ride",
+      "to": "a view from eternity, looking back over centuries"
+     }
+    ],
+    "devices": [
+     {
+      "device": "personification",
+      "quote": "He kindly stopped for me",
+      "function": "Turns Death into a polite gentleman caller, so a feared event looks like a social courtesy."
+     },
+     {
+      "device": "diction",
+      "quote": "For his civility",
+      "function": "The vocabulary of manners and courtship gives the encounter a decorous, almost romantic feel."
+     },
+     {
+      "device": "anaphora",
+      "quote": "We passed the setting sun",
+      "function": "The repeated 'We passed' strings together stages of life (childhood, ripeness, decline) as scenery going by."
+     },
+     {
+      "device": "symbol",
+      "quote": "We passed the setting sun",
+      "function": "The setting sun stands for the end of life and the coming of death."
+     },
+     {
+      "device": "personification",
+      "quote": "fields of gazing grain",
+      "function": "The grain seems to watch the speaker go by, as if the living world is looking on while she leaves it."
+     },
+     {
+      "device": "metaphor",
+      "quote": "A swelling of the ground",
+      "function": "Presents the grave as a house, a new home, without ever naming it."
+     },
+     {
+      "device": "understatement",
+      "quote": "The cornice but a mound",
+      "function": "Calmly describes the sunken tomb in architectural terms, softening the horror of burial."
+     },
+     {
+      "device": "paradox",
+      "quote": "Feels shorter than the day",
+      "function": "Centuries feel shorter than one day, which shows how much the moment of realization weighed on her."
+     },
+     {
+      "device": "shift_in_tone",
+      "quote": "Were toward eternity",
+      "function": "The calm ride ends with the speaker finally understanding that its destination was eternity."
+     }
+    ],
+    "skills_supported": [
+     {
+      "skill": "6.C",
+      "why_supported": "Death is personified as a kind, courteous caller.",
+      "quote": "He kindly stopped for me"
+     },
+     {
+      "skill": "1.D",
+      "why_supported": "The shared carriage and the 'civility' suggest a courtship-like relationship between the speaker and Death.",
+      "quote": "The carriage held but just ourselves"
+     },
+     {
+      "skill": "1.E",
+      "why_supported": "The speaker who 'could not stop' still gives up both labor and leisure, which shows a complex surrender.",
+      "quote": "My labor, and my leisure too"
+     },
+     {
+      "skill": "4.C",
+      "why_supported": "The diction of the second stanza sets an unhurried tone.",
+      "quote": "We slowly drove, he knew no haste"
+     },
+     {
+      "skill": "3.B",
+      "why_supported": "The three images passed in order follow the stages of a life.",
+      "quote": "We passed the fields of gazing grain"
+     },
+     {
+      "skill": "4.D",
+      "why_supported": "The speaker describes the grave only as a house, so the reader has to infer what she does not say.",
+      "quote": "We paused before a house that seemed"
+     },
+     {
+      "skill": "3.C",
+      "why_supported": "The final stanza changes the time frame and reveals where the ride was going.",
+      "quote": "Since then 't is centuries; but each"
+     },
+     {
+      "skill": "5.B",
+      "why_supported": "'Surmised' suggests a slow, tentative realization.",
+      "quote": "I first surmised the horses' heads"
+     },
+     {
+      "skill": "4.A",
+      "why_supported": "The speaker's position after death is shown by the passing of centuries.",
+      "quote": "Were toward eternity"
+     },
+     {
+      "skill": "7.B",
+      "why_supported": "The poem's calm treatment of death and its delayed sense of finality support thesis-level interpretation.",
+      "quote": "For his civility"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "lt_poetry_6C",
+     "topic": "U5.3",
+     "skill": "6.C",
+     "cognitive": "explain",
+     "stem": "The personification of Death in (line 2) primarily serves to",
+     "options": [
+      {
+       "text": "present death as a courteous caller, making a feared event seem a polite visit",
+       "why": "'Kindly' and the act of stopping for someone make Death a considerate gentleman, so dying looks like a social courtesy.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "show that the speaker literally refused to halt her carriage for a stranger",
+       "why": "'Could not stop' is figurative: she was too busy living. She did not literally refuse anything, and she did not own a carriage.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "suggest that all people secretly long for death as a welcome release from their toil",
+       "why": "The poem tells one speaker's experience. It makes no general claim about what all people long for.",
+       "value": null,
+       "label": "too_broad"
+      },
+      {
+       "text": "portray death as a menacing pursuer who seizes the speaker against her will",
+       "why": "Death stops 'kindly' and acts with 'civility'. Nothing about him is threatening.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"present death as a courteous caller, making a feared event seem a polite visit\". 'Kindly' and the act of stopping for someone make Death a considerate gentleman, so dying looks like a social courtesy.\n\"show that the speaker literally refused to halt her carriage for a stranger\" is incorrect: 'Could not stop' is figurative: she was too busy living. She did not literally refuse anything, and she did not own a carriage.\n\"suggest that all people secretly long for death as a welcome release from their toil\" is incorrect: The poem tells one speaker's experience. It makes no general claim about what all people long for.\n\"portray death as a menacing pursuer who seizes the speaker against her will\" is incorrect: Death stops 'kindly' and acts with 'civility'. Nothing about him is threatening.",
+     "est_seconds": 55,
+     "evidence_quotes": [
+      "He kindly stopped for me"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 2,
+       "to": 2
+      }
+     },
+     "devices_used": [
+      "personification"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "6.C",
+      "key_evidence": {
+       "quote": "He kindly stopped for me",
+       "from": 2,
+       "to": 2,
+       "ref": "line 2",
+       "unit": "stanza 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "literal_for_figurative",
+        "why": "'Could not stop' is figurative: she was too busy living. She did not literally refuse anything, and she did not own a carriage.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Because I could not stop for Death",
+         "from": 1,
+         "to": 1,
+         "ref": "line 1",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "too_broad",
+        "why": "The poem tells one speaker's experience. It makes no general claim about what all people long for.",
+        "evidence_kind": "absence",
+        "evidence": null
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "Death stops 'kindly' and acts with 'civility'. Nothing about him is threatening.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "For his civility",
+         "from": 8,
+         "to": 8,
+         "ref": "line 8",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_4C",
+     "topic": "U6.2",
+     "skill": "4.C",
+     "cognitive": "identify",
+     "stem": "The tone of the second stanza, particularly in (line 5), is best described as",
+     "options": [
+      {
+       "text": "bitter and resentful",
+       "why": "She speaks of Death's 'civility'. Nothing she says is resentful.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "grieving and somber",
+       "why": "The subject is death, but the speaker does not grieve. She calmly sets her life aside out of courtesy.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "anxious and hurried",
+       "why": "The stanza says outright that there was no haste.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "calm and unhurried",
+       "why": "'Slowly' and 'knew no haste' create a leisurely, composed pace.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"calm and unhurried\". 'Slowly' and 'knew no haste' create a leisurely, composed pace.\n\"bitter and resentful\" is incorrect: She speaks of Death's 'civility'. Nothing she says is resentful.\n\"grieving and somber\" is incorrect: The subject is death, but the speaker does not grieve. She calmly sets her life aside out of courtesy.\n\"anxious and hurried\" is incorrect: The stanza says outright that there was no haste.",
+     "est_seconds": 45,
+     "evidence_quotes": [
+      "We slowly drove, he knew no haste"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 5,
+       "to": 5
+      }
+     },
+     "devices_used": [
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "4.C",
+      "key_evidence": {
+       "quote": "We slowly drove, he knew no haste",
+       "from": 5,
+       "to": 5,
+       "ref": "line 5",
+       "unit": "stanza 2"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_tone",
+        "why": "She speaks of Death's 'civility'. Nothing she says is resentful.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "For his civility",
+         "from": 8,
+         "to": 8,
+         "ref": "line 8",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 1,
+        "label": "partially_right",
+        "why": "The subject is death, but the speaker does not grieve. She calmly sets her life aside out of courtesy.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "And I had put away",
+         "from": 6,
+         "to": 6,
+         "ref": "line 6",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 2,
+        "label": "reversal",
+        "why": "The stanza says outright that there was no haste.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We slowly drove, he knew no haste",
+         "from": 5,
+         "to": 5,
+         "ref": "line 5",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_4D",
+     "topic": "U6.2",
+     "skill": "4.D",
+     "cognitive": "evaluate",
+     "stem": "The speaker's description of the house in the fourth stanza (line 13) affects the reader's interpretation chiefly by",
+     "options": [
+      {
+       "text": "revealing that the speaker deliberately lies to conceal her terror of burial",
+       "why": "'Seemed' marks an honest impression, not a lie, and the speaker never shows terror.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "inviting the reader to recognize a grave the speaker never names directly",
+       "why": "A 'house' that is 'A swelling of the ground', with a roof barely visible and a cornice that is only a mound, is clearly a grave. The speaker keeps calling it a house, so the reader has to supply what she leaves unsaid.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "suggesting that the speaker's entire account of the journey is only a dream",
+       "why": "Treats one veiled image as if it cast doubt on the whole poem. The speaker says centuries have really passed since that day.",
+       "value": null,
+       "label": "wrong_scope"
+      },
+      {
+       "text": "establishing that the journey ends at the speaker's new home among the living",
+       "why": "Takes 'house' literally. A dwelling that is only a mound in the ground is a grave, not a home among the living.",
+       "value": null,
+       "label": "literal_for_figurative"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"inviting the reader to recognize a grave the speaker never names directly\". A 'house' that is 'A swelling of the ground', with a roof barely visible and a cornice that is only a mound, is clearly a grave. The speaker keeps calling it a house, so the reader has to supply what she leaves unsaid.\n\"revealing that the speaker deliberately lies to conceal her terror of burial\" is incorrect: 'Seemed' marks an honest impression, not a lie, and the speaker never shows terror.\n\"suggesting that the speaker's entire account of the journey is only a dream\" is incorrect: Treats one veiled image as if it cast doubt on the whole poem. The speaker says centuries have really passed since that day.\n\"establishing that the journey ends at the speaker's new home among the living\" is incorrect: Takes 'house' literally. A dwelling that is only a mound in the ground is a grave, not a home among the living.",
+     "est_seconds": 80,
+     "evidence_quotes": [
+      "A swelling of the ground",
+      "The roof was scarcely visible",
+      "The cornice but a mound"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 13,
+       "to": 13
+      }
+     },
+     "devices_used": [
+      "metaphor",
+      "understatement",
+      "imagery"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "4.D",
+      "key_evidence": {
+       "quote": "A swelling of the ground",
+       "from": 14,
+       "to": 14,
+       "ref": "line 14",
+       "unit": "stanza 4"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "unsupported",
+        "why": "'Seemed' marks an honest impression, not a lie, and the speaker never shows terror.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "a house that seemed",
+         "from": 13,
+         "to": 13,
+         "ref": "line 13",
+         "unit": "stanza 4"
+        }
+       },
+       {
+        "index": 2,
+        "label": "wrong_scope",
+        "why": "Treats one veiled image as if it cast doubt on the whole poem. The speaker says centuries have really passed since that day.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Since then 't is centuries; but each",
+         "from": 17,
+         "to": 17,
+         "ref": "line 17",
+         "unit": "stanza 5"
+        }
+       },
+       {
+        "index": 3,
+        "label": "literal_for_figurative",
+        "why": "Takes 'house' literally. A dwelling that is only a mound in the ground is a grave, not a home among the living.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "The cornice but a mound",
+         "from": 16,
+         "to": 16,
+         "ref": "line 16",
+         "unit": "stanza 4"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_3C",
+     "topic": "U2.2",
+     "skill": "3.C",
+     "cognitive": "explain",
+     "stem": "The final stanza functions primarily to",
+     "options": [
+      {
+       "text": "describe the horses in detail, adding a last image of the carriage itself",
+       "why": "The horses' heads matter for the direction they point, which is what she realizes. They are not there as description.",
+       "value": null,
+       "label": "wrong_function"
+      },
+      {
+       "text": "express the speaker's anguish at the endless, weary boredom of her centuries dead",
+       "why": "She says the centuries feel short, not weary, and she shows no anguish.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "shift to a vantage beyond death, revealing where the ride was always headed",
+       "why": "'Since then 't is centuries' moves the speaker into eternity, and the stanza reveals that the horses were headed 'toward eternity' all along.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "return the speaker to life, ending the journey before it reaches its goal",
+       "why": "The stanza confirms that the ride's destination was eternity. It does not bring her back to life.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"shift to a vantage beyond death, revealing where the ride was always headed\". 'Since then 't is centuries' moves the speaker into eternity, and the stanza reveals that the horses were headed 'toward eternity' all along.\n\"describe the horses in detail, adding a last image of the carriage itself\" is incorrect: The horses' heads matter for the direction they point, which is what she realizes. They are not there as description.\n\"express the speaker's anguish at the endless, weary boredom of her centuries dead\" is incorrect: She says the centuries feel short, not weary, and she shows no anguish.\n\"return the speaker to life, ending the journey before it reaches its goal\" is incorrect: The stanza confirms that the ride's destination was eternity. It does not bring her back to life.",
+     "est_seconds": 65,
+     "evidence_quotes": [
+      "Since then 't is centuries; but each",
+      "Were toward eternity"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "shift_in_tone",
+      "paradox"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "3.C",
+      "key_evidence": {
+       "quote": "Since then 't is centuries; but each",
+       "from": 17,
+       "to": 17,
+       "ref": "line 17",
+       "unit": "stanza 5"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_function",
+        "why": "The horses' heads matter for the direction they point, which is what she realizes. They are not there as description.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "I first surmised the horses' heads",
+         "from": 19,
+         "to": 19,
+         "ref": "line 19",
+         "unit": "stanza 5"
+        }
+       },
+       {
+        "index": 1,
+        "label": "wrong_tone",
+        "why": "She says the centuries feel short, not weary, and she shows no anguish.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Feels shorter than the day",
+         "from": 18,
+         "to": 18,
+         "ref": "line 18",
+         "unit": "stanza 5"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "The stanza confirms that the ride's destination was eternity. It does not bring her back to life.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Were toward eternity",
+         "from": 20,
+         "to": 20,
+         "ref": "line 20",
+         "unit": "stanza 5"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_7B",
+     "topic": "U5.4",
+     "skill": "7.B",
+     "cognitive": "evaluate",
+     "stem": "Which of the following statements is the most defensible thesis about the poem as a whole?",
+     "options": [
+      {
+       "text": "Through Death's courtly manners and the unhurried ride, the poem turns dying into a calm passage whose finality emerges only gradually",
+       "why": "Death's 'civility' and the slow pace make dying gentle. The disguised grave and the late 'surmised ... eternity' show that its finality dawns only slowly. The claim is specific and covers the whole poem.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "Through images of decay and darkness, the poem depicts death as a cruel abductor who violently tears the speaker away from a life she cherishes",
+       "why": "Death is 'kind' and civil, and the speaker gives up her pursuits willingly. Nothing is violent.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The third stanza's catalog of school, grain, and sunset is the poem's central achievement, a pastoral portrait of village life",
+       "why": "Focuses on one stanza and misses its symbolism. The setting sun points to death, not to village life.",
+       "value": null,
+       "label": "too_narrow"
+      },
+      {
+       "text": "The poem argues that all human fear of death is irrational, since every life, however busy, ends in the same peaceful eternity",
+       "why": "The poem presents one speaker's experience. It makes no argument about everyone's fears.",
+       "value": null,
+       "label": "too_broad"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Through Death's courtly manners and the unhurried ride, the poem turns dying into a calm passage whose finality emerges only gradually\". Death's 'civility' and the slow pace make dying gentle. The disguised grave and the late 'surmised ... eternity' show that its finality dawns only slowly. The claim is specific and covers the whole poem.\n\"Through images of decay and darkness, the poem depicts death as a cruel abductor who violently tears the speaker away from a life she cherishes\" is incorrect: Death is 'kind' and civil, and the speaker gives up her pursuits willingly. Nothing is violent.\n\"The third stanza's catalog of school, grain, and sunset is the poem's central achievement, a pastoral portrait of village life\" is incorrect: Focuses on one stanza and misses its symbolism. The setting sun points to death, not to village life.\n\"The poem argues that all human fear of death is irrational, since every life, however busy, ends in the same peaceful eternity\" is incorrect: The poem presents one speaker's experience. It makes no argument about everyone's fears.",
+     "est_seconds": 90,
+     "evidence_quotes": [
+      "For his civility",
+      "We slowly drove, he knew no haste",
+      "I first surmised the horses' heads"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "personification",
+      "imagery",
+      "shift_in_tone"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "7.B",
+      "key_evidence": {
+       "quote": "I first surmised the horses' heads",
+       "from": 19,
+       "to": 19,
+       "ref": "line 19",
+       "unit": "stanza 5"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "reversal",
+        "why": "Death is 'kind' and civil, and the speaker gives up her pursuits willingly. Nothing is violent.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "He kindly stopped for me",
+         "from": 2,
+         "to": 2,
+         "ref": "line 2",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "too_narrow",
+        "why": "Focuses on one stanza and misses its symbolism. The setting sun points to death, not to village life.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We passed the setting sun",
+         "from": 12,
+         "to": 12,
+         "ref": "line 12",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "too_broad",
+        "why": "The poem presents one speaker's experience. It makes no argument about everyone's fears.",
+        "evidence_kind": "absence",
+        "evidence": null
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    }
+   ],
+   "excluded_items": [
+    {
+     "index": 1,
+     "skill": "1.E",
+     "stem": "Taken together, the speaker's statement that she \"could not stop for Death\" ([[r1]]) and her admission that she \"had put away\" her pursuits ",
+     "reasons": []
+    },
+    {
+     "index": 5,
+     "skill": "5.B",
+     "stem": "In context, the word \"surmised\" ([[r1]]) most strongly suggests that the speaker",
+     "reasons": []
+    },
+    {
+     "index": 6,
+     "skill": "4.A",
+     "stem": "Which of the following best describes the speaker's situation as the poem presents it?",
+     "reasons": [
+      "solver_reports_second_defensible_option"
+     ]
+    }
+   ],
+   "assignable_size": false,
+   "set_note": "only 5 verified items: below the exam's 8-13 per set; not assignable as a full set"
+  }
+ }
+]
