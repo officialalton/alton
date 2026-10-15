@@ -15,6 +15,7 @@ import {
   recordMockExamEntryAction,
 } from "@/lib/mock-exam/attempt-actions";
 import LearningText from "@/app/session/[id]/LearningText";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
@@ -442,10 +443,12 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                 )}
               </div>
             </div>
+            <PassageRefsScope>
             <div ref={passageRef} onMouseUp={handlePassageMouseUp}>
               {dedupeStem(current.passage, current.question) && <RwStimulusView question={current.question} passage={dedupeStem(current.passage, current.question)} className="mb-4 text-[13.5px]" />}
               {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[14px]" />}
             </div>
+            </PassageRefsScope>
             {highlightMode && highlightSupported && (
               <button
                 type="button"
