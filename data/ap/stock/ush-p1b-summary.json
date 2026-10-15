@@ -2,16 +2,16 @@
  "runs": [
   "ush-p1-b"
  ],
- "rows": 17,
- "passed": 9,
+ "rows": 18,
+ "passed": 10,
  "rejected": 8,
  "mcSets": {
   "rows": 0,
   "passed": 0
  },
  "frqSets": {
-  "rows": 17,
-  "passed": 9
+  "rows": 18,
+  "passed": 10
  },
  "mcItems": {
   "generated": 0,
@@ -30,7 +30,7 @@
  "categoriesPassed": {},
  "skillsPassed": {},
  "renderTypesPassed": {
-  "none": 7,
+  "none": 8,
   "ap_table": 2
  },
  "frqAudit": [
@@ -148,9 +148,23 @@
      "spread": 0,
      "flagged": false,
      "flags": []
+    },
+    {
+     "k": 3,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
     }
    ],
-   "chosen": null
+   "chosen": 3
   },
   {
    "id": "saq2_1",
@@ -935,15 +949,33 @@
     }
    ],
    "chosen": 0
+  },
+  {
+   "id": "saq1_6",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "saq1_6",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "saq1_6",
+   "tier": "low",
+   "options": [],
+   "chosen": null
   }
  ],
  "costUsd": {
   "ush-p1-b": {
-   "frq-fact": 0.7456,
-   "frq-fact2": 1.3793,
-   "frq-gen": 1.0863,
-   "frq-grade": 1.2348,
-   "frq-samples": 0.7031
+   "frq-fact": 0.7878,
+   "frq-fact2": 1.4001,
+   "frq-gen": 1.1421,
+   "frq-grade": 1.2669,
+   "frq-samples": 0.7189
   }
  }
 }

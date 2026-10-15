@@ -1,0 +1,7 @@
+HiGHS: optimal Optimization terminated successfully. (HiGHS Status 7: Optimal)
+# ush-assign sets=US1,US2 재고 MC 세트 73 (문항 262) FRQ 10 (saq1:2 saq2:2 saq3:2 dbq:2 leq:2)
+status=optimal 목적값(단원 목표 이탈)=3.9999999999999747
+독립 검증기 위반: 0
+- US1: 세트 15, MC 55, FRQ 5, 단원 {"1":2,"2":4,"3":8,"4":7,"5":8,"6":7,"7":8,"8":7,"9":4}, exam_prep 26/55, SAQ 시대 5/7/8
+- US2: 세트 15, MC 55, FRQ 5, 단원 {"1":4,"2":4,"3":8,"4":7,"5":8,"6":6,"7":8,"8":7,"9":3}, exam_prep 30/55, SAQ 시대 8/4/6
+보고서 기록: data/ap/stock/exact-assign-ushistory-us1-us2.json

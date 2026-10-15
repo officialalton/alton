@@ -329,14 +329,126 @@
   "candidateKey": "ap_us_history-saq1_3-k0",
   "keywordCode": "8.1",
   "unitCode": "8",
-  "skillPrimary": "1.B",
+  "skillPrimary": "3.C",
   "structure": "frq_multipart",
   "archetype": "ushfrq_saq1_3",
-  "reviewState": "rejected",
-  "rejectionReason": "sample_low_missing; sample_low_no_consistent_candidate",
-  "difficultyProvisional": null,
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
   "payload": {
    "archetype": "ushfrq_saq1_3",
+   "template": "saq1",
+   "topic": "8.1",
+   "extra_topics": [],
+   "skill": "3.C",
+   "representative_skill": "3.C",
+   "calculator": "na",
+   "title": "Interpreting the Postwar Suburban Boom, 1945-1970",
+   "set_intro": "ALTON-composed stimulus\nSource A (secondary source)\nHistorian Ruth Calderwood on federal policy and the suburbs\nRuth Calderwood, fictional historian, Paved with Credit: Washington and the Making of the Suburbs, 2009 (ALTON-composed, in the style of a scholarly monograph on urban history)\n\n\"The suburbs of the postwar decades did not grow out of millions of private choices alone. Their foundation was laid in Washington. Federal mortgage programs cut down payments and spread repayment over decades, so that for many young families buying a new house on the edge of town cost less each month than renting an apartment in the city. Federal road money carried commuters outward. And because lending rules favored new, racially uniform developments while marking older city neighborhoods as poor risks, public policy also decided who could join the boom and who would be left behind.\"\n\n———\n\nSource B (secondary source)\nHistorian Daniel Ashby-Monroe on family culture and the suburbs\nDaniel Ashby-Monroe, fictional historian, Room to Grow: Families and the Suburban Dream, 2014 (ALTON-composed, in the style of a scholarly monograph on social and cultural history)\n\n\"Government programs made suburban houses affordable, but they cannot explain why so many Americans wanted them. After fifteen years of depression and war, young couples married earlier and had more children than their parents had, and they wanted space, privacy, and safety. The detached house with a yard and a modern kitchen became the centerpiece of a culture that prized the family as a refuge from a dangerous world. Builders, advertisers, and popular entertainment sold the suburb as a place of abundance, and families moved because it matched the life they hoped to lead.\"",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly describe ONE major difference between Calderwood's and Ashby-Monroe's interpretations of the growth of suburbs from 1945 to 1970.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.C"
+     ],
+     "topic_codes": [
+      "8.1"
+     ],
+     "model_answer": "Calderwood argues that federal mortgage and highway policy was the main cause of suburban growth, while Ashby-Monroe argues that the main cause was Americans' desire for family space and abundance, with government only making homes affordable.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Describe one major difference: Calderwood treats federal housing, lending, and highway policy as the main cause of suburban growth and of who was excluded from it; Ashby-Monroe treats consumer demand rooted in postwar family culture as the main cause and sees government programs as only making the move affordable.",
+       "required_elements": [
+        "Calderwood argues that federal mortgage and highway policy was the main cause of suburban growth, while Ashby-Monroe argues that the main cause was Americans' desire for family space and abundance, with government only making homes affordable.",
+        "Calderwood stresses that government lending rules decided who could move to the suburbs and left racial minorities and city neighborhoods behind, while Ashby-Monroe focuses on the hopes of the families who moved and does not discuss exclusion.",
+        "Calderwood explains suburbanization mainly through economic incentives set by the state, while Ashby-Monroe explains it mainly through cultural values such as the family as a refuge and consumer abundance marketed by builders and advertisers."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1945 to 1970 that is not explicitly mentioned in the excerpts could be used to support Calderwood's interpretation.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.C"
+     ],
+     "topic_codes": [
+      "8.1"
+     ],
+     "model_answer": "The Servicemen's Readjustment Act (GI Bill) of 1944 let millions of veterans buy homes through VA-guaranteed loans, often with little or no down payment, which pulled young families into new suburban tracts.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Explain how specific evidence from 1945-1970 not explicitly named in the excerpts, such as the GI Bill's VA-guaranteed home loans, FHA-insured mortgages, the Federal-Aid Highway Act of 1956, or redlining and the exclusion of Black buyers from places like Levittown, supports the claim that federal policy drove and shaped suburbanization.",
+       "required_elements": [
+        "The Servicemen's Readjustment Act (GI Bill) of 1944 let millions of veterans buy homes through VA-guaranteed loans, often with little or no down payment, which pulled young families into new suburban tracts.",
+        "The Federal-Aid Highway Act of 1956 paid for the Interstate Highway System, which let workers live in distant suburbs and drive to city jobs, showing that federal road spending made the suburbs possible.",
+        "FHA-insured mortgages carried low down payments and long terms, but FHA underwriting practices and redlining kept loans away from Black and mixed neighborhoods, so federal policy shaped who could move.",
+        "Levittown, New York (begun in 1947), relied on federally backed financing yet barred Black buyers at first, which shows Calderwood's point that public policy and lending practices decided who could join the boom."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1945 to 1970 that is not explicitly mentioned in the excerpts could be used to support Ashby-Monroe's interpretation.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.C"
+     ],
+     "topic_codes": [
+      "8.1"
+     ],
+     "model_answer": "The baby boom, with births of about four million a year from the mid-1950s to the early 1960s, created strong demand for larger homes with yards and nearby schools, supporting the idea that family needs drove the move.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Explain how specific evidence from 1945-1970 not explicitly named in the excerpts, such as the baby boom, television programs idealizing suburban families, the growth of car ownership and shopping centers, or the 1959 Kitchen Debate's celebration of American consumer homes, supports the claim that family culture and consumer preferences drove suburbanization.",
+       "required_elements": [
+        "The baby boom, with births of about four million a year from the mid-1950s to the early 1960s, created strong demand for larger homes with yards and nearby schools, supporting the idea that family needs drove the move.",
+        "Television shows such as Leave It to Beaver and Father Knows Best showed the suburban nuclear family as the American ideal, reflecting and spreading the cultural desires Ashby-Monroe describes.",
+        "The spread of car ownership and of suburban shopping centers, such as Southdale Center in Edina, Minnesota (1956), shows a consumer culture built around suburban family life.",
+        "In the 1959 Kitchen Debate, Vice President Richard Nixon praised the modern American home and its appliances as a sign of Cold War superiority, showing how the consumer home stood for the family as a refuge and for abundance."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 3 points.\nPart A (0-1): Describe one major difference: Calderwood treats federal housing, lending, and highway policy as the main cause of suburban growth and of who was excluded from it; Ashby-Monroe treats consumer demand rooted in postwar family culture as the main cause and sees government programs as only making the move affordable.\n   - 1: Accurately describes one major difference between the two interpretations, such as federal policy as the driving cause versus family desires and consumer culture as the driving cause.\n   - 0: Does not describe a difference, only summarizes one excerpt, or misreads either historian's argument.\nPart B (0-1): Explain how specific evidence from 1945-1970 not explicitly named in the excerpts, such as the GI Bill's VA-guaranteed home loans, FHA-insured mortgages, the Federal-Aid Highway Act of 1956, or redlining and the exclusion of Black buyers from places like Levittown, supports the claim that federal policy drove and shaped suburbanization.\n   - 1: Explains how one specific, accurate event, development, or circumstance from 1945-1970 supports Calderwood's emphasis on federal housing and highway policy.\n   - 0: Gives no specific evidence, relies only on what the excerpt already says, uses evidence outside the period, or does not connect the evidence to Calderwood's argument.\nPart C (0-1): Explain how specific evidence from 1945-1970 not explicitly named in the excerpts, such as the baby boom, television programs idealizing suburban families, the growth of car ownership and shopping centers, or the 1959 Kitchen Debate's celebration of American consumer homes, supports the claim that family culture and consumer preferences drove suburbanization.\n   - 1: Explains how one specific, accurate event, development, or circumstance from 1945-1970 supports Ashby-Monroe's emphasis on consumer preferences and family culture.\n   - 0: Gives no specific evidence, relies only on what the excerpt already says, uses evidence outside the period, or does not connect the evidence to Ashby-Monroe's argument.\nNote: Each part is scored on its own and is worth 1 point; the total is 3 points.\nNote: Broad references already in the excerpts, such as 'federal mortgage programs' or 'married earlier and had more children', are not enough by themselves for B or C. A response earns the point by naming a specific program, law, event, or cultural example and explaining how it supports the argument.\nNote: For Part A, an accurately described similarity (for example, that both historians agree federal programs made homes affordable) does not earn the point, because the prompt asks for a difference.\nNote: Evidence may come from shortly before 1945, such as the 1944 GI Bill, if the response ties it to postwar suburban growth.\nAcceptable answers for A: Calderwood argues that federal mortgage and highway policy was the main cause of suburban growth, while Ashby-Monroe argues that the main cause was Americans' desire for family space and abundance, with government only making homes affordable. / Calderwood stresses that government lending rules decided who could move to the suburbs and left racial minorities and city neighborhoods behind, while Ashby-Monroe focuses on the hopes of the families who moved and does not discuss exclusion. / Calderwood explains suburbanization mainly through economic incentives set by the state, while Ashby-Monroe explains it mainly through cultural values such as the family as a refuge and consumer abundance marketed by builders and advertisers.\nAcceptable answers for B: The Servicemen's Readjustment Act (GI Bill) of 1944 let millions of veterans buy homes through VA-guaranteed loans, often with little or no down payment, which pulled young families into new suburban tracts. / The Federal-Aid Highway Act of 1956 paid for the Interstate Highway System, which let workers live in distant suburbs and drive to city jobs, showing that federal road spending made the suburbs possible. / FHA-insured mortgages carried low down payments and long terms, but FHA underwriting practices and redlining kept loans away from Black and mixed neighborhoods, so federal policy shaped who could move. / Levittown, New York (begun in 1947), relied on federally backed financing yet barred Black buyers at first, which shows Calderwood's point that public policy and lending practices decided who could join the boom.\nAcceptable answers for C: The baby boom, with births of about four million a year from the mid-1950s to the early 1960s, created strong demand for larger homes with yards and nearby schools, supporting the idea that family needs drove the move. / Television shows such as Leave It to Beaver and Father Knows Best showed the suburban nuclear family as the American ideal, reflecting and spreading the cultural desires Ashby-Monroe describes. / The spread of car ownership and of suburban shopping centers, such as Southdale Center in Edina, Minnesota (1956), shows a consumer culture built around suburban family life. / In the 1959 Kitchen Debate, Vice President Richard Nixon praised the modern American home and its appliances as a sign of Cold War superiority, showing how the consumer home stood for the family as a refuge and for abundance.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) Calderwood argues that federal policy was the main cause of suburban growth, since mortgage programs, road money, and lending rules both built the suburbs and decided who got to live in them. Ashby-Monroe argues that the real cause was what families wanted after depression and war: space, privacy, and a home centered on family life. In his view government programs only made the houses affordable, not desirable.\n\n(B) The Federal-Aid Highway Act of 1956 supports Calderwood's interpretation. It paid for about 41,000 miles of interstate highways, with the federal government covering 90 percent of the cost, and that made it possible for people to live in the suburbs and drive into the city for work. Also, FHA appraisal rules and redlining kept Black families out of developments like Levittown, which shows that federal policy shaped who could join the move to the suburbs.\n\n(C) The popularity of television shows like Leave It to Beaver and Father Knows Best supports Ashby-Monroe's interpretation. These shows presented the suburban house with a yard, a working father, and a stay-at-home mother as the ideal American family, which helped make people want that lifestyle. The 1959 Kitchen Debate, where Nixon showed off a model American kitchen to Khrushchev, also shows how the consumer home was celebrated as part of what made America better during the Cold War.\n   - \"federal policy was the main cause of suburban growth\" - Accurately states Calderwood's argument that federal policy was the main cause.\n   - \"In his view government programs only made the houses affordable, not desirable.\" - Sets the two causes against each other and gets right that Ashby-Monroe still grants government a smaller role. This is a real difference, so the point is earned.\n   - \"The Federal-Aid Highway Act of 1956\" - Names a specific, accurate law that the excerpt does not name. It goes beyond the excerpt's general phrase 'federal road money.'\n   - \"made it possible for people to live in the suburbs and drive into the city for work\" - Explains how the evidence supports Calderwood's argument that federal action drove suburbanization. The point is earned.\n   - \"kept Black families out of developments like Levittown\" - A second accurate example that supports Calderwood's point about exclusion. It adds strength but was not needed for the point.\n   - \"Leave It to Beaver and Father Knows Best\" - Specific cultural examples from the 1950s that the excerpt does not mention by name.\n   - \"which helped make people want that lifestyle\" - Connects the evidence to Ashby-Monroe's claim that demand and family culture drove the move. The point is earned.\n\nSample response, middle score (2/3; Part A 1, Part B 1, Part C 0):\n(A) One major difference is what each historian thinks was the main cause of suburban growth. Calderwood argues that the federal government was the driving force, because its mortgage programs and road building made suburbs possible and also decided who was allowed to live in them. Ashby-Monroe argues that the main cause was what families wanted after the Depression and the war, like space and a safe home life, and he says government programs only made the houses affordable.\n\n(B) The GI Bill of 1944 supports Calderwood's interpretation. It gave veterans home loans guaranteed by the Veterans Administration, so many returning soldiers could buy a house with little or no down payment. This helped fuel the move to new suburbs like Levittown after World War II, because government backing made it cheap for young families to buy there instead of renting in the city. That shows federal policy was what made the suburban boom happen, which is what Calderwood says.\n\n(C) The baby boom supports Ashby-Monroe's interpretation. After World War II there was a baby boom in the late 1940s and 1950s, and a lot of people were having children. This fits with what Ashby-Monroe says about families in the suburbs.\n   - \"Calderwood argues that the federal government was the driving force, because its mortgage programs and road building made suburbs possible and also decided who was allowed to live in them.\" - Accurately states Calderwood's claim of federal policy as the main cause, including exclusion. This sets up a real contrast, not just a summary of one excerpt.\n   - \"Ashby-Monroe argues that the main cause was what families wanted after the Depression and the war\" - Correctly contrasts this with family culture and demand as the main cause, with government only making houses affordable. A difference is clearly described, so Part A earns the point.\n   - \"The GI Bill of 1944 supports Calderwood's interpretation.\" - Names a specific, accurate program not named in the excerpt. The 1944 date is allowed because it is tied to postwar suburban growth.\n   - \"government backing made it cheap for young families to buy there instead of renting in the city\" - Explains the link: VA-guaranteed loans lowered the cost of buying and drove suburban growth, supporting Calderwood's argument. Part B earns the point.\n   - \"The baby boom supports Ashby-Monroe's interpretation.\" - The baby boom is an acceptable, specific example from the period, but the response only names it.\n   - \"This fits with what Ashby-Monroe says about families in the suburbs.\" - This only asserts a fit and restates the excerpt's point about larger families. It never explains how more children led families to want suburban homes or space, so the link to consumer and cultural preference is missing. No credit for Part C.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) Calderwood thinks the suburbs grew mainly because of what the federal government did, like the mortgage programs and roads, and that these policies also decided who was able to move there. Ashby-Monroe thinks the main cause was that families wanted suburban homes because of the culture after the Depression and the war, and he says government programs only made the houses affordable. So one says government policy was the driving cause and the other says family desires were the driving cause.\n\n(B) The government did a lot to help people move to the suburbs during this time. It gave out help for people to buy houses and that made it easier for them to live outside the city. This supports Calderwood because she says that Washington laid the foundation for the suburbs, so the government policies are what really made suburbs grow in the years after World War II.\n\n(C) After the war lots of families wanted to have a nice home and be safe and have more kids. People saw the suburbs as the American dream and wanted to live there. This supports Ashby-Monroe because he says that families moved because it matched the life they hoped to lead, so the culture of the time is why the suburbs grew.\n   - \"Calderwood thinks the suburbs grew mainly because of what the federal government did\" - Accurately states Calderwood's argument that federal policy was the main cause. This is the contrast needed for the point.\n   - \"So one says government policy was the driving cause and the other says family desires were the driving cause.\" - Clearly states the difference between the two interpretations rather than just summarizing one. Earns the Part A point.\n   - \"The government did a lot to help people move to the suburbs during this time.\" - Too general. It names no specific law, program, or event such as the GI Bill, the FHA, or the 1956 highway act, so no outside evidence is given.\n   - \"It gave out help for people to buy houses\" - Only restates the excerpt's mention of federal mortgage programs. Restating the source does not earn credit without a specific example and an explanation of how it supports the argument.\n   - \"After the war lots of families wanted to have a nice home and be safe and have more kids.\" - Paraphrases Ashby-Monroe's excerpt (more children, safety, a home) and names no specific event or development such as the baby boom, television shows, or the Kitchen Debate.\n   - \"because he says that families moved because it matched the life they hoped to lead\" - This quotes the source instead of bringing in outside evidence, so Part C earns no credit.",
    "ush_frq": {
     "schema_version": "ush-frq-1",
     "task_type": "saq",
@@ -599,6 +711,50 @@
        {
         "quote": "This fits with what Ashby-Monroe says about families in the suburbs.",
         "comment": "This only asserts a fit and restates the excerpt's point about larger families. It never explains how more children led families to want suburban homes or space, so the link to consumer and cultural preference is missing. No credit for Part C.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) Calderwood thinks the suburbs grew mainly because of what the federal government did, like the mortgage programs and roads, and that these policies also decided who was able to move there. Ashby-Monroe thinks the main cause was that families wanted suburban homes because of the culture after the Depression and the war, and he says government programs only made the houses affordable. So one says government policy was the driving cause and the other says family desires were the driving cause.\n\n(B) The government did a lot to help people move to the suburbs during this time. It gave out help for people to buy houses and that made it easier for them to live outside the city. This supports Calderwood because she says that Washington laid the foundation for the suburbs, so the government policies are what really made suburbs grow in the years after World War II.\n\n(C) After the war lots of families wanted to have a nice home and be safe and have more kids. People saw the suburbs as the American dream and wanted to live there. This supports Ashby-Monroe because he says that families moved because it matched the life they hoped to lead, so the culture of the time is why the suburbs grew.",
+      "word_count": 212,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "Calderwood thinks the suburbs grew mainly because of what the federal government did",
+        "comment": "Accurately states Calderwood's argument that federal policy was the main cause. This is the contrast needed for the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "So one says government policy was the driving cause and the other says family desires were the driving cause.",
+        "comment": "Clearly states the difference between the two interpretations rather than just summarizing one. Earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "The government did a lot to help people move to the suburbs during this time.",
+        "comment": "Too general. It names no specific law, program, or event such as the GI Bill, the FHA, or the 1956 highway act, so no outside evidence is given.",
+        "row_id": "b"
+       },
+       {
+        "quote": "It gave out help for people to buy houses",
+        "comment": "Only restates the excerpt's mention of federal mortgage programs. Restating the source does not earn credit without a specific example and an explanation of how it supports the argument.",
+        "row_id": "b"
+       },
+       {
+        "quote": "After the war lots of families wanted to have a nice home and be safe and have more kids.",
+        "comment": "Paraphrases Ashby-Monroe's excerpt (more children, safety, a home) and names no specific event or development such as the baby boom, television shows, or the Kitchen Debate.",
+        "row_id": "c"
+       },
+       {
+        "quote": "because he says that families moved because it matched the life they hoped to lead",
+        "comment": "This quotes the source instead of bringing in outside evidence, so Part C earns no credit.",
         "row_id": "c"
        }
       ]
@@ -5974,6 +6130,187 @@
       ]
      }
     ],
+    "provenance": {
+     "kind": "alton_composed",
+     "note": "ALTON-composed practice material; fictional sources and attributions."
+    }
+   }
+  }
+ },
+ {
+  "cellId": "ap_us_history-saq1_6",
+  "apSubjectCode": "ap_us_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_us_history-saq1_6-k0",
+  "keywordCode": "7.1",
+  "unitCode": "7",
+  "skillPrimary": "1.B",
+  "structure": "frq_multipart",
+  "archetype": "ushfrq_saq1_6",
+  "reviewState": "rejected",
+  "rejectionReason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate",
+  "difficultyProvisional": null,
+  "payload": {
+   "archetype": "ushfrq_saq1_6",
+   "ush_frq": {
+    "schema_version": "ush-frq-1",
+    "task_type": "saq",
+    "template": "saq1",
+    "period": 7,
+    "periods": [
+     7,
+     6
+    ],
+    "title": "Who Drove Progressive Reform? Experts from Above or Organizing from Below, 1890-1920",
+    "prompt": {
+     "scenario": "Historians disagree about which groups did the most to drive reform in the United States during the Progressive Era. Read the two excerpts by fictional historians below and answer all parts of the question that follows.",
+     "task": "Using the excerpts, answer (A), (B), and (C).",
+     "requirements": [
+      "Answer all three parts.",
+      "Each part is worth one point.",
+      "For parts B and C, use evidence not mentioned in the excerpts."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly describe ONE major difference between Ashcombe's and Whitcomb's interpretations of who drove Progressive Era reform.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1890 to 1920 that is not mentioned in the excerpts could be used to support Ashcombe's interpretation.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1890 to 1920 that is not mentioned in the excerpts could be used to support Whitcomb's interpretation.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "secondary_text",
+      "title": "Excerpt from Leonard Ashcombe, The Expert State: Professionals and Reform in Urban America",
+      "attribution": "Leonard Ashcombe, fictional historian, The Expert State: Professionals and Reform in Urban America, fictional book, 2009 (ALTON-composed, in the style of a modern academic history of the Progressive Era)",
+      "body": "The energy behind progressive reform came chiefly from a new middle class of doctors, lawyers, engineers, social scientists, and college-trained women. These men and women distrusted both party bosses and corporate monopolists, and they believed that disorder in the industrial city could be cured by facts. They gathered statistics on tenements, wrote model statutes, and staffed new boards of health and regulatory commissions. Their characteristic tool was not the strike or the street march but the expert report delivered to a legislature. When reform succeeded, it usually did so because educated professionals persuaded officeholders to expand the administrative reach of city, state, and federal government.",
+      "provenance": {
+       "kind": "alton_composed",
+       "note": "ush-prompts-v1"
+      }
+     },
+     {
+      "id": "B",
+      "kind": "secondary_text",
+      "title": "Excerpt from Rosa Delgado Whitcomb, Pressure from Below: Workers, Immigrants, and the Making of Reform",
+      "attribution": "Rosa Delgado Whitcomb, fictional historian, Pressure from Below: Workers, Immigrants, and the Making of Reform, fictional book, 2016 (ALTON-composed, in the style of a modern social history of the Progressive Era)",
+      "body": "Accounts that center polished reformers in committee rooms overlook where the demand for change was born. Garment workers, many of them young immigrant women, walked picket lines in winter; miners and mill hands organized unions despite blacklists; neighborhood mothers pressed city halls for clean milk and safe streets. Their protests made the costs of unregulated industry impossible to ignore. Middle-class allies often wrote the final bills, but they were responding to pressure created by people who had little money and, in the case of women and many immigrants, no vote. Reform was less a gift from experts than a concession won by organized ordinary people.",
+      "provenance": {
+       "kind": "alton_composed",
+       "note": "ush-prompts-v1"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "ushistory-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response does not describe a valid difference, or merely summarizes one excerpt without contrasting it to the other.",
+        "1": "The response accurately describes one difference between Ashcombe's emphasis on middle-class professionals working through government and Whitcomb's emphasis on working-class, immigrant, and women's organizing from below."
+       },
+       "task_specific": "Describe one meaningful difference between the interpretations, such as the social class of reform's main agents, the methods emphasized (expert reports and administration versus strikes, unions, and protest), or where reform originated (from above through government versus from below through grassroots pressure)."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no specific evidence, uses evidence outside 1890-1920, or does not connect the evidence to Ashcombe's argument.",
+        "1": "The response explains how one specific, accurate piece of evidence from the period shows educated professionals or reformers using expertise and government to achieve reform."
+       },
+       "task_specific": "Explain how a specific event or development from 1890 to 1920, not mentioned in the excerpts, supports the view that middle-class professionals and urban reformers working through government drove reform."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no specific evidence, uses evidence outside 1890-1920, or does not connect the evidence to Whitcomb's argument.",
+        "1": "The response explains how one specific, accurate piece of evidence from the period shows grassroots organizing by workers, immigrants, or women creating pressure that produced reform."
+       },
+       "task_specific": "Explain how a specific event or development from 1890 to 1920, not mentioned in the excerpts, supports the view that working-class, immigrant, and women's organizing from below drove reform."
+      }
+     ],
+     "scoring_notes": [
+      "Each part is scored independently, 0 or 1.",
+      "Generic references to strikes or experts without a specific example do not earn B or C.",
+      "Evidence may support either interpretation depending on how the student explains it; for example, the Triangle fire investigation could support Ashcombe if framed around the expert commission, or Whitcomb if framed around worker protest."
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [],
+     "contextualization_ideas": [
+      "Rapid industrialization, urbanization, and the new immigration of the late nineteenth century created the conditions progressives sought to address.",
+      "Growth of universities and professional associations produced a new class of experts."
+     ],
+     "outside_evidence": [
+      "Muckrakers",
+      "Wisconsin Idea",
+      "Triangle Shirtwaist fire and Factory Investigating Commission",
+      "Women's Trade Union League (founded 1903)",
+      "Nineteenth Amendment"
+     ],
+     "reasoning_types": [
+      "Comparison of historical interpretations",
+      "Use of evidence to support a claim"
+     ],
+     "saq_answers": {
+      "a": [
+       "Ashcombe argues that middle-class professionals such as doctors, lawyers, and social scientists drove reform, while Whitcomb argues that working-class and immigrant people, especially women, created the pressure that drove it.",
+       "Ashcombe stresses expert reports and lobbying legislatures as the main method of reform, while Whitcomb stresses strikes, picket lines, union organizing, and neighborhood protest.",
+       "Ashcombe sees reform coming from above through the growth of government administration, while Whitcomb sees it as a concession won from below, with middle-class allies only writing the final bills.",
+       "Similarity accepted if clearly explained: both historians agree that reform responded to the problems of industrial cities and resulted in new laws and government regulation."
+      ],
+      "b": [
+       "Upton Sinclair's The Jungle (1906) and other muckraking journalism by educated writers such as Ida Tarbell exposed abuses and helped push Congress to pass the Pure Food and Drug Act and Meat Inspection Act of 1906, showing reform through publicity and federal regulation.",
+       "The Wisconsin Idea under Governor Robert La Follette relied on University of Wisconsin experts to draft legislation and staff state commissions, a clear case of professionals working through government.",
+       "After the 1900 Galveston hurricane, business and civic leaders adopted the commission form of city government, and other cities adopted commission and city manager plans meant to replace party bosses with efficient, expert administration.",
+       "Settlement house workers like Jane Addams at Hull House, college-educated women, gathered data on urban conditions and lobbied for child labor and sanitation laws; the Brandeis brief in Muller v. Oregon (1908) used social science evidence to defend limits on women's working hours."
+      ],
+      "c": [
+       "The Uprising of the 20,000 (1909-1910), a strike by mostly immigrant women shirtwaist workers in New York, built the ILGWU and won better conditions in many shops.",
+       "After the Triangle Shirtwaist Factory fire in 1911 killed 146 workers, mostly young immigrant women, protests and mass mourning by workers and unions led New York to create a Factory Investigating Commission and pass new workplace safety laws.",
+       "The 1912 Lawrence, Massachusetts, textile strike, led by immigrant workers with IWW support, drew national attention to low wages and child workers and won wage increases.",
+       "Mass suffrage organizing by women, including parades, picketing of the White House by the National Woman's Party, and state campaigns, led to the Nineteenth Amendment in 1920."
+      ]
+     },
+     "common_pitfalls": [
+      "Using evidence from the excerpts themselves (for example, simply restating garment strikes or tenement surveys) instead of a specific outside example.",
+      "Citing evidence outside 1890-1920, such as New Deal programs or the Haymarket affair, for parts B or C.",
+      "Summarizing each historian separately in part A without stating how they differ.",
+      "Naming an event without explaining how it supports the specific interpretation."
+     ],
+     "facts": [
+      "The Pure Food and Drug Act and the Meat Inspection Act were passed in 1906.",
+      "The Triangle Shirtwaist Factory fire occurred in New York City in March 1911 and killed 146 workers.",
+      "The Uprising of the 20,000 was a 1909-1910 strike of New York shirtwaist workers.",
+      "The Lawrence textile strike took place in 1912 with IWW involvement.",
+      "Muller v. Oregon (1908) upheld limits on working hours for women.",
+      "The Nineteenth Amendment was ratified in 1920.",
+      "Galveston adopted commission government after the 1900 hurricane.",
+      "Hull House was founded in Chicago in 1889 by Jane Addams and Ellen Gates Starr."
+     ]
+    },
+    "samples": [],
     "provenance": {
      "kind": "alton_composed",
      "note": "ALTON-composed practice material; fictional sources and attributions."

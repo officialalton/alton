@@ -3439,5 +3439,183 @@
    }
   },
   "fact": []
+ },
+ {
+  "id": "saq1_6",
+  "spec": {
+   "id": "saq1_6",
+   "template": "saq1",
+   "period": 7,
+   "focus": "Two fictional historians interpret who drove Progressive Era reform (1890-1920): one stresses middle-class professionals and urban reformers working through government, the other stresses working-class, immigrant and women's organizing from below.",
+   "seed": 4260
+  },
+  "payload": {
+   "schema_version": "ush-frq-1",
+   "task_type": "saq",
+   "template": "saq1",
+   "period": 7,
+   "periods": [
+    7,
+    6
+   ],
+   "title": "Who Drove Progressive Reform? Experts from Above or Organizing from Below, 1890-1920",
+   "prompt": {
+    "scenario": "Historians disagree about which groups did the most to drive reform in the United States during the Progressive Era. Read the two excerpts by fictional historians below and answer all parts of the question that follows.",
+    "task": "Using the excerpts, answer (A), (B), and (C).",
+    "requirements": [
+     "Answer all three parts.",
+     "Each part is worth one point.",
+     "For parts B and C, use evidence not mentioned in the excerpts."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE major difference between Ashcombe's and Whitcomb's interpretations of who drove Progressive Era reform.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1890 to 1920 that is not mentioned in the excerpts could be used to support Ashcombe's interpretation.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1890 to 1920 that is not mentioned in the excerpts could be used to support Whitcomb's interpretation.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "secondary_text",
+     "title": "Excerpt from Leonard Ashcombe, The Expert State: Professionals and Reform in Urban America",
+     "attribution": "Leonard Ashcombe, fictional historian, The Expert State: Professionals and Reform in Urban America, fictional book, 2009 (ALTON-composed, in the style of a modern academic history of the Progressive Era)",
+     "body": "The energy behind progressive reform came chiefly from a new middle class of doctors, lawyers, engineers, social scientists, and college-trained women. These men and women distrusted both party bosses and corporate monopolists, and they believed that disorder in the industrial city could be cured by facts. They gathered statistics on tenements, wrote model statutes, and staffed new boards of health and regulatory commissions. Their characteristic tool was not the strike or the street march but the expert report delivered to a legislature. When reform succeeded, it usually did so because educated professionals persuaded officeholders to expand the administrative reach of city, state, and federal government.",
+     "provenance": {
+      "kind": "alton_composed",
+      "note": "ush-prompts-v1"
+     }
+    },
+    {
+     "id": "B",
+     "kind": "secondary_text",
+     "title": "Excerpt from Rosa Delgado Whitcomb, Pressure from Below: Workers, Immigrants, and the Making of Reform",
+     "attribution": "Rosa Delgado Whitcomb, fictional historian, Pressure from Below: Workers, Immigrants, and the Making of Reform, fictional book, 2016 (ALTON-composed, in the style of a modern social history of the Progressive Era)",
+     "body": "Accounts that center polished reformers in committee rooms overlook where the demand for change was born. Garment workers, many of them young immigrant women, walked picket lines in winter; miners and mill hands organized unions despite blacklists; neighborhood mothers pressed city halls for clean milk and safe streets. Their protests made the costs of unregulated industry impossible to ignore. Middle-class allies often wrote the final bills, but they were responding to pressure created by people who had little money and, in the case of women and many immigrants, no vote. Reform was less a gift from experts than a concession won by organized ordinary people.",
+     "provenance": {
+      "kind": "alton_composed",
+      "note": "ush-prompts-v1"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "ushistory-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a valid difference, or merely summarizes one excerpt without contrasting it to the other.",
+       "1": "The response accurately describes one difference between Ashcombe's emphasis on middle-class professionals working through government and Whitcomb's emphasis on working-class, immigrant, and women's organizing from below."
+      },
+      "task_specific": "Describe one meaningful difference between the interpretations, such as the social class of reform's main agents, the methods emphasized (expert reports and administration versus strikes, unions, and protest), or where reform originated (from above through government versus from below through grassroots pressure)."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no specific evidence, uses evidence outside 1890-1920, or does not connect the evidence to Ashcombe's argument.",
+       "1": "The response explains how one specific, accurate piece of evidence from the period shows educated professionals or reformers using expertise and government to achieve reform."
+      },
+      "task_specific": "Explain how a specific event or development from 1890 to 1920, not mentioned in the excerpts, supports the view that middle-class professionals and urban reformers working through government drove reform."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no specific evidence, uses evidence outside 1890-1920, or does not connect the evidence to Whitcomb's argument.",
+       "1": "The response explains how one specific, accurate piece of evidence from the period shows grassroots organizing by workers, immigrants, or women creating pressure that produced reform."
+      },
+      "task_specific": "Explain how a specific event or development from 1890 to 1920, not mentioned in the excerpts, supports the view that working-class, immigrant, and women's organizing from below drove reform."
+     }
+    ],
+    "scoring_notes": [
+     "Each part is scored independently, 0 or 1.",
+     "Generic references to strikes or experts without a specific example do not earn B or C.",
+     "Evidence may support either interpretation depending on how the student explains it; for example, the Triangle fire investigation could support Ashcombe if framed around the expert commission, or Whitcomb if framed around worker protest."
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Rapid industrialization, urbanization, and the new immigration of the late nineteenth century created the conditions progressives sought to address.",
+     "Growth of universities and professional associations produced a new class of experts."
+    ],
+    "outside_evidence": [
+     "Muckrakers",
+     "Wisconsin Idea",
+     "Triangle Shirtwaist fire and Factory Investigating Commission",
+     "Women's Trade Union League (founded 1903)",
+     "Nineteenth Amendment"
+    ],
+    "reasoning_types": [
+     "Comparison of historical interpretations",
+     "Use of evidence to support a claim"
+    ],
+    "saq_answers": {
+     "a": [
+      "Ashcombe argues that middle-class professionals such as doctors, lawyers, and social scientists drove reform, while Whitcomb argues that working-class and immigrant people, especially women, created the pressure that drove it.",
+      "Ashcombe stresses expert reports and lobbying legislatures as the main method of reform, while Whitcomb stresses strikes, picket lines, union organizing, and neighborhood protest.",
+      "Ashcombe sees reform coming from above through the growth of government administration, while Whitcomb sees it as a concession won from below, with middle-class allies only writing the final bills.",
+      "Similarity accepted if clearly explained: both historians agree that reform responded to the problems of industrial cities and resulted in new laws and government regulation."
+     ],
+     "b": [
+      "Upton Sinclair's The Jungle (1906) and other muckraking journalism by educated writers such as Ida Tarbell exposed abuses and helped push Congress to pass the Pure Food and Drug Act and Meat Inspection Act of 1906, showing reform through publicity and federal regulation.",
+      "The Wisconsin Idea under Governor Robert La Follette relied on University of Wisconsin experts to draft legislation and staff state commissions, a clear case of professionals working through government.",
+      "After the 1900 Galveston hurricane, business and civic leaders adopted the commission form of city government, and other cities adopted commission and city manager plans meant to replace party bosses with efficient, expert administration.",
+      "Settlement house workers like Jane Addams at Hull House, college-educated women, gathered data on urban conditions and lobbied for child labor and sanitation laws; the Brandeis brief in Muller v. Oregon (1908) used social science evidence to defend limits on women's working hours."
+     ],
+     "c": [
+      "The Uprising of the 20,000 (1909-1910), a strike by mostly immigrant women shirtwaist workers in New York, built the ILGWU and won better conditions in many shops.",
+      "After the Triangle Shirtwaist Factory fire in 1911 killed 146 workers, mostly young immigrant women, protests and mass mourning by workers and unions led New York to create a Factory Investigating Commission and pass new workplace safety laws.",
+      "The 1912 Lawrence, Massachusetts, textile strike, led by immigrant workers with IWW support, drew national attention to low wages and child workers and won wage increases.",
+      "Mass suffrage organizing by women, including parades, picketing of the White House by the National Woman's Party, and state campaigns, led to the Nineteenth Amendment in 1920."
+     ]
+    },
+    "common_pitfalls": [
+     "Using evidence from the excerpts themselves (for example, simply restating garment strikes or tenement surveys) instead of a specific outside example.",
+     "Citing evidence outside 1890-1920, such as New Deal programs or the Haymarket affair, for parts B or C.",
+     "Summarizing each historian separately in part A without stating how they differ.",
+     "Naming an event without explaining how it supports the specific interpretation."
+    ],
+    "facts": [
+     "The Pure Food and Drug Act and the Meat Inspection Act were passed in 1906.",
+     "The Triangle Shirtwaist Factory fire occurred in New York City in March 1911 and killed 146 workers.",
+     "The Uprising of the 20,000 was a 1909-1910 strike of New York shirtwaist workers.",
+     "The Lawrence textile strike took place in 1912 with IWW involvement.",
+     "Muller v. Oregon (1908) upheld limits on working hours for women.",
+     "The Nineteenth Amendment was ratified in 1920.",
+     "Galveston adopted commission government after the 1900 hurricane.",
+     "Hull House was founded in Chicago in 1889 by Jane Addams and Ellen Gates Starr."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_composed",
+    "note": "ALTON-composed practice material; fictional sources and attributions."
+   }
+  },
+  "fact": [
+   {
+    "where": "saq_answers.c[0] (Uprising of the 20,000) vs. Source B excerpt and common_pitfalls",
+    "kind": "inconsistent_with_documents",
+    "detail": "The question requires evidence 'not mentioned in the excerpts,' and the common_pitfalls list says 'simply restating garment strikes' is a pitfall. Yet Whitcomb's excerpt explicitly describes garment workers, 'many of them young immigrant women,' walking 'picket lines in winter' — a direct description of the 1909–1910 shirtwaist strike — and the expected answers then credit that same strike as acceptable outside evidence. This is an internal inconsistency in the grading guidance that could lead to inconsistent scoring; either the excerpt should be made less specific or the answer key/pitfalls should be reconciled. The historical facts about the strike itself (dates, ILGWU Local 25, immigrant women) are accurate."
+   }
+  ]
  }
 ]

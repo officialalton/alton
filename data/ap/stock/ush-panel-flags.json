@@ -2,14 +2,21 @@
  "summary": {
   "runs": [
    "ush-p1-a",
-   "ush-p2-a"
+   "ush-p2-a",
+   "ush-p3-a",
+   "ush-p1-b"
   ],
-  "panelSets": 58,
-  "panelItems": 222,
-  "panelKeyAgreement": 222,
+  "panelSets": 82,
+  "panelItems": 316,
+  "panelKeyAgreement": 316,
   "flagKinds": {
-   "second_defensible": 2,
-   "inaccurate": 4
+   "second_defensible": 4,
+   "inaccurate": 4,
+   "contested": 1,
+   "frq_other": 3,
+   "frq_inconsistent_with_documents": 2,
+   "frq_contested": 1,
+   "frq_inaccurate": 3
   }
  },
  "entries": {
@@ -222,6 +229,202 @@
   },
   "ush-p2-a:u960": {
    "flags": []
+  },
+  "ush-p3-a:u201": {
+   "flags": [
+    {
+     "where": "q1",
+     "kind": "contested",
+     "detail": "The stem asks what 'best explains' the shift and the only plausible option attributes it to planter fears after Bacon's Rebellion (1676). This Morgan-style interpretation is standard in the APUSH framework, but historians (e.g., Menard, Galenson) emphasize supply-side causes—declining English servan"
+    }
+   ]
+  },
+  "ush-p3-a:u202": {
+   "flags": []
+  },
+  "ush-p3-a:u303": {
+   "flags": []
+  },
+  "ush-p3-a:u304": {
+   "flags": []
+  },
+  "ush-p3-a:u305": {
+   "flags": []
+  },
+  "ush-p3-a:u406": {
+   "flags": []
+  },
+  "ush-p3-a:u407": {
+   "flags": [
+    {
+     "where": "q2",
+     "kind": "second_defensible",
+     "detail": "Option [3] says the town 'grew most rapidly after the canal opened.' In absolute terms that is true (+2,900 to +3,400 per interval after 1825), but in percentage terms the fastest growth is during construction: 1817-1822 (+175%) and 1822-1825 (+109% in three years, ~28%/yr) exceed any post-1825 inte"
+    }
+   ]
+  },
+  "ush-p3-a:u408": {
+   "flags": []
+  },
+  "ush-p3-a:u509": {
+   "flags": []
+  },
+  "ush-p3-a:u510": {
+   "flags": []
+  },
+  "ush-p3-a:u511": {
+   "flags": []
+  },
+  "ush-p3-a:u612": {
+   "flags": []
+  },
+  "ush-p3-a:u613": {
+   "flags": []
+  },
+  "ush-p3-a:u614": {
+   "flags": []
+  },
+  "ush-p3-a:u615": {
+   "flags": []
+  },
+  "ush-p3-a:u616": {
+   "flags": []
+  },
+  "ush-p3-a:u617": {
+   "flags": []
+  },
+  "ush-p3-a:u718": {
+   "flags": []
+  },
+  "ush-p3-a:u719": {
+   "flags": []
+  },
+  "ush-p3-a:u720": {
+   "flags": []
+  },
+  "ush-p3-a:u821": {
+   "flags": [
+    {
+     "where": "q3",
+     "kind": "second_defensible",
+     "detail": "Option [2] (the Great Migration bringing African Americans into northern central cities) is historically accurate for 1950-1970 (the Second Great Migration) and is a recognized context for postwar suburbanization and 'white flight.' Since the stem asks only what the suburban shift 'took place in the"
+    }
+   ]
+  },
+  "ush-p3-a:u822": {
+   "flags": []
+  },
+  "ush-p3-a:u823": {
+   "flags": []
+  },
+  "ush-p3-a:u924": {
+   "flags": []
+  },
+  "ush-p1-b:saq1_1": {
+   "flags": [
+    {
+     "where": "pack",
+     "kind": "other",
+     "detail": "not_checked"
+    }
+   ]
+  },
+  "ush-p1-b:saq1_2": {
+   "flags": [
+    {
+     "where": "saq_answers.c[1] vs facts[3]",
+     "kind": "inconsistent_with_documents",
+     "detail": "Minor imprecision: the sample answer says 'roughly 180,000 Black men into the Union army and navy,' while the facts list gives about 180,000 in the Union army alone. The commonly cited figures are ~179,000 in the army plus ~18,000-19,000 in the navy (roughly 200,000 combined). Either drop 'and navy'"
+    },
+    {
+     "where": "saq_answers.c[3]",
+     "kind": "contested",
+     "detail": "Low severity: saying McClellan 'ran on a Democratic platform calling for peace' is a simplification. The 1864 Democratic platform (the Vallandigham 'peace plank') declared the war a failure and called for a cessation of hostilities, but McClellan publicly repudiated that plank in his acceptance lett"
+    }
+   ]
+  },
+  "ush-p1-b:saq1_3": {
+   "flags": []
+  },
+  "ush-p1-b:saq2_1": {
+   "flags": []
+  },
+  "ush-p1-b:saq2_2": {
+   "flags": []
+  },
+  "ush-p1-b:saq2_3": {
+   "flags": []
+  },
+  "ush-p1-b:saq3_1": {
+   "flags": []
+  },
+  "ush-p1-b:saq3_2": {
+   "flags": [
+    {
+     "where": "Source A chart description and SAQ answer (a) second option: recovery in 1771-1772 'reaching levels higher than in the mid-1760s'; stimulus claims the pattern 'matches the general experience of British North American ports'",
+     "kind": "inaccurate",
+     "detail": "Real legal (dutied) tea imports into the colonies did recover after the 1770 partial repeal, but only partially: roughly 360,000 lb in 1771 and 265,000 lb in 1772 versus about 870,000 lb in 1768, and the recovery was concentrated in Boston, while mid-Atlantic ports (New York, Philadelphia) remained "
+    },
+    {
+     "where": "SAQ answer (b) fourth option: 'The Continental Association ... explains near-zero imports in 1774-1775'",
+     "kind": "inaccurate",
+     "detail": "The Continental Association was adopted in October 1774 and its nonimportation provision took effect only on December 1, 1774, so it cannot account for the collapse of imports across 1774. The 1774 drop is better explained by the colony-wide refusal of East India Company tea after late 1773 (consign"
+    }
+   ]
+  },
+  "ush-p1-b:saq3_3": {
+   "flags": [
+    {
+     "where": "saq_answers.a, second acceptable answer",
+     "kind": "other",
+     "detail": "Says population 'grows fastest after the railroad arrives.' In absolute terms this is true (largest five-year gain is 1880-1885), but the proportional growth rate is actually highest in 1870-1875 (over fivefold), before any track exists. The table also shows population already up to 2,350 by 1875 wi"
+    }
+   ]
+  },
+  "ush-p1-b:dbq_1": {
+   "flags": []
+  },
+  "ush-p1-b:dbq_2": {
+   "flags": []
+  },
+  "ush-p1-b:dbq_3": {
+   "flags": []
+  },
+  "ush-p1-b:leq_1": {
+   "flags": []
+  },
+  "ush-p1-b:leq_2": {
+   "flags": [
+    {
+     "where": "EXPECTED FEATURES > contextualization_ideas, second item",
+     "kind": "inaccurate",
+     "detail": "The Interstate Commerce Act (1887) is labeled a 'Progressive Era reform.' It was passed in the Gilded Age under Cleveland, roughly a decade before the Progressive Era is conventionally dated (c. 1890s/1900–1917). The Federal Reserve Act (1913) and Sixteenth Amendment (1913) are correctly Progressive"
+    }
+   ]
+  },
+  "ush-p1-b:leq_3": {
+   "flags": []
+  },
+  "ush-p1-b:saq1_4": {
+   "flags": [
+    {
+     "where": "pack",
+     "kind": "other",
+     "detail": "not_checked"
+    }
+   ]
+  },
+  "ush-p1-b:saq1_5": {
+   "flags": []
+  },
+  "ush-p1-b:saq1_6": {
+   "flags": [
+    {
+     "where": "saq_answers.c[0] (Uprising of the 20,000) vs. Source B excerpt and common_pitfalls",
+     "kind": "inconsistent_with_documents",
+     "detail": "The question requires evidence 'not mentioned in the excerpts,' and the common_pitfalls list says 'simply restating garment strikes' is a pitfall. Yet Whitcomb's excerpt explicitly describes garment workers, 'many of them young immigrant women,' walking 'picket lines in winter' — a direct descriptio"
+    }
+   ]
   }
  }
 }
