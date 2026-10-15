@@ -9,7 +9,7 @@ type Json = Record<string, unknown>;
 type Raw = { stockKey: string; apSubjectCode: string; kind: "mc" | "frq_bundle"; validation: string; keywordCode: string; itemFamilyId: string; payload: Json; duplicateOf?: string | null; archetype?: string; difficultyProvisional?: string | null; difficulty?: unknown };
 /** skill: "3.B", cat: "3", topic: "3.5", unit: "3". */
 export type UshMember = { skill: string; cat: string; topic: string; unit: string };
-export type UshItem = { key: string; kind: "mc" | "frq"; members: UshMember[]; fam: string; template: string; period: number; stim: string; theme: string; screen: boolean; batch: string; renderType: string; stimKind: string; exam: number };
+export type UshItem = { /** 후보 keyword_code 의 단원 — 관리자 새 버전·초안이 DB 에서 읽는 세트 단위(세트 전 문항에 같은 값). members[].unit 은 문항별 토픽 단원. */ keyUnit: string; key: string; kind: "mc" | "frq"; members: UshMember[]; fam: string; template: string; period: number; stim: string; theme: string; screen: boolean; batch: string; renderType: string; stimKind: string; exam: number };
 
 export function ushMembers(r: Pick<Raw, "kind" | "payload">): UshMember[] {
   if (r.kind !== "mc") return [];
@@ -30,7 +30,7 @@ export function loadUshPool(opts: { requireScreen?: boolean; files?: string[] } 
   const gated = live.map((i) => ({ i, g: gateCandidate({ stockKey: i.stockKey, candidateKey: i.stockKey, apSubjectCode: i.apSubjectCode, kind: i.kind, payload: i.payload }) })).filter((x) => x.g.status !== "fail");
   const all: UshItem[] = gated.map(({ i, g }) => {
     const set = (i.payload.ush_set ?? {}) as { period?: number; stim_type?: string; theme?: string }; const fq = (i.payload.ush_frq ?? {}) as { period?: number };
-    return { key: i.stockKey, kind: i.kind === "mc" ? "mc" : "frq", members: ushMembers(i), fam: i.kind === "mc" ? `theme:${set.theme ?? i.stockKey}` : `frq:${i.stockKey}`, template: i.kind === "frq_bundle" ? String(i.payload.template ?? "") : "", period: Number(set.period ?? fq.period ?? 0), stim: String(set.stim_type ?? ""), theme: String(set.theme ?? ""), screen: ev.has(i.stockKey), batch: batchOf.get(i.stockKey) ?? "", renderType: g.renderType, stimKind: g.stimKind, exam: ushExamCount(i) };
+    return { key: i.stockKey, kind: i.kind === "mc" ? "mc" : "frq", keyUnit: String(i.keywordCode ?? "").split(".")[0], members: ushMembers(i), fam: i.kind === "mc" ? `theme:${set.theme ?? i.stockKey}` : `frq:${i.stockKey}`, template: i.kind === "frq_bundle" ? String(i.payload.template ?? "") : "", period: Number(set.period ?? fq.period ?? 0), stim: String(set.stim_type ?? ""), theme: String(set.theme ?? ""), screen: ev.has(i.stockKey), batch: batchOf.get(i.stockKey) ?? "", renderType: g.renderType, stimKind: g.stimKind, exam: ushExamCount(i) };
   });
   const pool = opts.requireScreen === false ? all : all.filter((c) => c.screen);
   return { all, pool };

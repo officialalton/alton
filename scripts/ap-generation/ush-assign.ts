@@ -48,7 +48,7 @@ export function solveUshSets(ids: string[], items: UshItem[], o: { timeMs: numbe
 /** 한 시험의 MC 위치 목록: 시대(단원) 순으로 세트를 놓는다. 세트는 연속 칸. */
 export function buildUshOrder(r: UshResult): (UshSetItem & { stim: string })[] {
   const blocks = [...r.sets].sort((a, b) => Number(a.members[0].unit) - Number(b.members[0].unit) || a.key.localeCompare(b.key)); const out: (UshSetItem & { stim: string })[] = []; let pos = 1;
-  for (const b of blocks) for (const m of b.members) out.push({ kind: "mc", unit: m.unit, skill: m.skill, candidateKey: b.key, position: pos++, stim: b.stim });
+  for (const b of blocks) for (const m of b.members) out.push({ kind: "mc", unit: m.unit, dbUnit: b.keyUnit, skill: m.skill, candidateKey: b.key, position: pos++, stim: b.stim });
   return out;
 }
 export const frqOrder = (r: UshResult) => USH_FRQ_TEMPLATES.map((t) => r.frq.find((c) => c.template === t)).filter((c): c is UshItem => !!c);
