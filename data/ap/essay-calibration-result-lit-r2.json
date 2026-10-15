@@ -1,0 +1,61 @@
+{
+ "subject": "lit",
+ "rows": [
+  {
+   "cell": "ap_english_literature-fa1",
+   "tier": "mid",
+   "target": 4,
+   "got": 4,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 1,
+    "evidence": 3,
+    "sophistication": 0,
+    "total": 4,
+    "disagreement": false,
+    "rubricVersion": "englit-v1"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_english_literature-fb1",
+   "tier": "high",
+   "target": 6,
+   "got": 6,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 1,
+    "evidence": 4,
+    "sophistication": 1,
+    "total": 6,
+    "disagreement": false,
+    "rubricVersion": "englit-v1"
+   },
+   "disagreement": false
+  }
+ ],
+ "mae": 0,
+ "meanSignedError": 0,
+ "ordering": [
+  {
+   "cell": "ap_english_literature-fa1",
+   "ok": false,
+   "m": 4
+  },
+  {
+   "cell": "ap_english_literature-fb1",
+   "ok": false,
+   "h": 6
+  }
+ ],
+ "injection": [],
+ "notes": [
+  "ap_english_literature-fa1: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_english_literature-fb1: 2 anchors (leave-one-out) — prompt/sources only for the rest"
+ ],
+ "diagnostics": [],
+ "calls": 4,
+ "spentUsd": 0.103
+}

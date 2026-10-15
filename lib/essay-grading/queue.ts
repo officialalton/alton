@@ -54,9 +54,13 @@ export async function processEssay(deps: Deps, job: Job): Promise<Outcome> {
   try {
     const runs: GraderOutput[] = [];
     for (let i = 0; i < 2; i++) {
-      const r = await client.grade({ system: prompt.system, user: prompt.user, maxOutputTokens: l.maxOutputTokensPerEssay, rubricRows: def.rows });
-      inTok += r.inputTokens; outTok += r.outputTokens; model = r.model;
-      const v = validateGraderOutput(r.output, def.rows);
+      // 모델이 도구 입력의 필드(주로 마지막 행)를 가끔 빠뜨린다(실측: englit 18건 중 2건) — 한 번만 다시 호출한다(비용은 합산).
+      let v: ReturnType<typeof validateGraderOutput> = { ok: false, reason: "not_run" };
+      for (let a = 0; a < 2 && !v.ok; a++) {
+        const r = await client.grade({ system: prompt.system, user: prompt.user, maxOutputTokens: l.maxOutputTokensPerEssay, rubricRows: def.rows });
+        inTok += r.inputTokens; outTok += r.outputTokens; model = r.model;
+        v = validateGraderOutput(r.output, def.rows);
+      }
       if (!v.ok) throw new Error("invalid_output");
       runs.push(v.value);
     }
