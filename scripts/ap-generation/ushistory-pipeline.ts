@@ -196,7 +196,7 @@ function finalizeStage() {
     });
     const base = { cellId: `ap_us_history-${r.spec.id}`, apSubjectCode: "ap_us_history", kind: "mc" as const, calculator: "na", reserve: false, wording: "generated", candidateKey: `ap_us_history-${r.spec.id}-k0` };
     if (!r.set || kept.length < 3) { cands.push({ ...base, keywordCode: r.spec.skills[0] ? ownTopics(r.spec.period)[0].code : "", unitCode: String(r.spec.period), skillPrimary: r.spec.skills[0], structure: "shared_stimulus_set", archetype: `ush_${r.spec.id}`, reviewState: "rejected", rejectionReason: `${r.setViolations.join("; ") || "fewer_than_3_items_passed"}; excluded=${JSON.stringify(excluded)}`.slice(0, 1500), difficultyProvisional: null, payload: { archetype: `ush_${r.spec.id}`, spec: r.spec, excluded_items: excluded } }); continue; }
-    const items = kept.map((it) => ({ archetype: `ush_${r.spec.id}_${it.skill.replace(".", "")}`, topic: it.topic, skill: it.skill, stem: it.stem, options: it.options.map((o) => ({ text: o.text, why: o.why, value: null, label: o.label })), key_index: it.key_index, explanation_en: explanationOf(it), est_seconds: Math.min(150, Math.max(30, it.est_seconds || 75)), facts: it.facts, key_confidence: { solver_votes: (votes[r.spec.id]?.[r.items.indexOf(it)] ?? []).map((x) => x && { choice: x.choice, confidence: x.confidence }), panel_choice: panel[r.spec.id]?.answers?.[r.items.indexOf(it)]?.choice ?? null, score: 1, band: "high" } }));
+    const items = kept.map((it) => ({ archetype: `ush_${r.spec.id}_${it.skill.replace(".", "")}`, topic: it.topic, skill: it.skill, stem: it.stem, options: it.options.map((o) => ({ text: o.text, why: o.why, value: null, label: o.label })), key_index: it.key_index, explanation_en: explanationOf(it), est_seconds: Math.min(150, Math.max(30, it.est_seconds || 75)), facts: it.facts, key_confidence: { solver_votes: (votes[r.spec.id]?.[r.items.indexOf(it)] ?? []).map((x) => x && { choice: x.choice, confidence: x.confidence }), panel_choice: panel[r.spec.id]?.answers?.[r.items.indexOf(it)]?.choice ?? null } }));
     const diff = items.map((it) => ({ label: /\.A$/.test(it.skill) ? "basic_learning" : "exam_prep" }));
     const fig = stimulusFigure(r.set);
     cands.push({ ...base, keywordCode: items[0].topic, unitCode: ushUnitOfTopic(items[0].topic), skillPrimary: items[0].skill, structure: "shared_stimulus_set", archetype: `ush_${r.spec.id}`, reviewState: "auto_passed", rejectionReason: null, difficultyProvisional: "exam_prep", difficulty: diff,
@@ -225,14 +225,15 @@ async function frqGenStage() {
   const plan = cfg.frqPlan ?? []; const sys = { saq: P.FRQ_SAQ_SYSTEM, dbq: P.FRQ_DBQ_SYSTEM, leq: P.FRQ_LEQ_SYSTEM };
   const reqs = plan.map((p) => mk(`f-${p.id}`, cfg.models.gen, sys[taskOf(p.template)], P.frqTool(taskOf(p.template)), P.frqUser(p), 20000, false, cfg.genEffort ?? cfg.effort));
   const out = await call("frq-gen", reqs, estimate(cfg.models.gen, reqs.length, 2200, 9000)); if (has("--dry")) return;
-  wj("frq.json", plan.map((p) => ({ id: p.id, spec: p, payload: toFrqPayload(p, out.get(`f-${p.id}`) as Json), fact: [] })));
+  const prev = loadFrq(); // 이미 사실 점검한 세트는 점검 결과를 보존한다(같은 생성 결과일 때)
+  wj("frq.json", plan.map((p) => { const payload = toFrqPayload(p, out.get(`f-${p.id}`) as Json); const old = prev.find((x) => x.id === p.id); return { id: p.id, spec: p, payload, fact: old && JSON.stringify(old.payload) === JSON.stringify(payload) ? old.fact : undefined }; }));
 }
 const packText = (p: UshFrqPayload) => `${frqTaskText(p)}\n\n${solverTextFrq(p)}\n\nEXPECTED FEATURES\n${JSON.stringify(p.expected_features)}\n\nRUBRIC TEXT\n${rubricText(p)}`;
 async function frqFactStage() {
   const fr = loadFrq(); const reqs: BatchReq[] = [];
-  for (const f of fr) { if (!f.payload) continue; const pv = frqViolations(f.payload).filter((x) => !/^sample_|samples_|^similar_to/.test(x)); if (pv.length) { console.log(`[frq-fact] ${f.id}: 무료 게이트 위반 ${pv.join(",")} → 건너뜀`); continue; } reqs.push(mk(`fa-${f.id}`, cfg.models.fact, P.FACT_SYSTEM, P.FACT_TOOL, P.factUser(packText(f.payload)), 4000)); }
+  for (const f of fr) { if (!f.payload) continue; if (f.fact !== undefined && !f.fact.some((x) => x.detail === "not_checked") && !(has("--recheck"))) continue; const pv = frqViolations(f.payload).filter((x) => !/^sample_|samples_|^similar_to/.test(x)); if (pv.length) { console.log(`[frq-fact] ${f.id}: 무료 게이트 위반 ${pv.join(",")} → 건너뜀`); continue; } reqs.push(mk(`fa-${f.id}`, cfg.models.fact, P.FACT_SYSTEM, P.FACT_TOOL, P.factUser(packText(f.payload)), 4000)); }
   const out = await call("frq-fact", reqs, estimate(cfg.models.fact, reqs.length, 3500, 1200)); if (has("--dry")) return;
-  for (const f of fr) { const o = out.get(`fa-${f.id}`); f.fact = o ? ((o.flags ?? []) as Json[]) : [{ where: "pack", kind: "other", detail: "not_checked" }]; }
+  for (const f of fr) { if (!f.payload || !reqs.some((r) => r.custom_id === `fa-${f.id}`)) { if (f.fact === undefined) f.fact = [{ where: "pack", kind: "other", detail: "not_checked" }]; continue; } const o = out.get(`fa-${f.id}`); f.fact = o ? ((o.flags ?? []) as Json[]) : [{ where: "pack", kind: "other", detail: "not_checked" }]; }
   wj("frq.json", fr);
   for (const f of fr) console.log(`  ${f.id}: ${(f.fact ?? []).map((x) => `${x.kind}@${x.where}`).join(", ") || "clean"}`);
 }

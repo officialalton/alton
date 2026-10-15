@@ -2,7 +2,7 @@
 // 정답은 다중 독립 풀이 + 제2 모델 패널(scripts/ap-generation/ushistory-pipeline.ts)이 보증한다. 본문: docs/ap/ushistory-groundwork.md.
 import { countWords } from "./english-text-stats";
 import { fiveGrams, longestSharedRun, textHazards, similarityViolations, type CorpusDoc } from "./englang-gates";
-import { USH_BANNED_PHRASES, USH_CANON_DATES, USH_DISTRACTOR_LABELS, USH_MC_SKILLS, USH_OPTION_COUNT, USH_PERIODS, USH_REAL_PEOPLE, USH_STIM_SKILLS } from "./subjects/ushistory";
+import { USH_BANNED_PHRASES, USH_CANON_DATES, USH_DISTRACTOR_LABELS, USH_MC_SKILLS, USH_OPTION_COUNT, USH_PERIODS, USH_REAL_PEOPLE, USH_STIM_SKILLS, USH_TITLED_SURNAMES, USH_TITLE_WORDS } from "./subjects/ushistory";
 import { US_STIMULUS_MARKER } from "../ap-exam/stimulus-display";
 
 export type UshSourceKind = "primary_text" | "secondary_text" | "table" | "chart";
@@ -25,14 +25,20 @@ const KIND_LABEL: Record<UshSourceKind, string> = { primary_text: "primary sourc
 /** 학생 화면용 자료(set_intro). 표·그래프는 stimulus 그림으로 따로 그려지므로 제목·출처 한 줄만 둔다. */
 export function ushStimulusDisplay(sources: UshSource[], opts: { markdownTables?: boolean } = {}): string {
   const multi = sources.length > 1;
-  return [US_STIMULUS_MARKER, ...sources.map((s) => {
+  return `${US_STIMULUS_MARKER}\n` + sources.map((s) => {
     const head = `${multi ? `Source ${s.id} ` : ""}(${KIND_LABEL[s.kind]})`;
     const body = s.kind === "table" ? [s.body, opts.markdownTables && s.table ? tableMarkdown(s.table) : "The table for this source appears below."].filter(Boolean).join("\n\n") : s.kind === "chart" ? [s.body, "The chart for this source appears below."].filter(Boolean).join("\n\n") : s.kind === "secondary_text" || s.kind === "primary_text" ? `"${(s.body ?? "").trim()}"` : s.body ?? "";
     return `${head}\n${s.title}\n${s.attribution}\n\n${body}`;
-  })].join("\n\n———\n\n");
+  }).join("\n\n———\n\n");
 }
 export const ushPassagePlain = (set: Pick<UshSetRaw, "sources">): string => set.sources.map(sourceBody).join("\n\n");
 
+/** 출처 표기(attribution·title)에 실존 인물이 있는가: 전체 이름 또는 직함+성. */
+export function realPeopleIn(text: string): string[] {
+  const t = norm(text).replace(/alton-composed/g, ""); const out = USH_REAL_PEOPLE.filter((p) => hasWord(t, p));
+  for (const s of USH_TITLED_SURNAMES) if (new RegExp(`(?:^|[^a-z])(?:${USH_TITLE_WORDS})\\s+${s}(?:[^a-z]|$)`).test(t)) out.push(s);
+  return [...new Set(out)];
+}
 const hasWord = (t: string, w: string) => new RegExp(`(^|[^a-z])${w.replace(/[.*+?^()|[\]\\]/g, "\\$&")}([^a-z]|$)`).test(t);
 const BANNED_FORMAT = /(^|\n)\s*([-*•]\s|#{1,6}\s)|\*\*|__|```|<\/?[a-z][^>]*>/;
 const WORDS = (t: string) => countWords(t);
@@ -89,7 +95,7 @@ export function setViolations(set: UshSetRaw, spec?: { period: number; stim: str
     if (!s.attribution?.trim() || !s.title?.trim()) v.push(`source_${s.id}_title_or_attribution_missing`);
     if (!/ALTON-composed/i.test(s.attribution ?? "")) v.push(`source_${s.id}_attribution_not_marked_alton_composed`);
     if (s.provenance?.kind !== "alton_composed") v.push(`source_${s.id}_provenance`);
-    const attr = norm(`${s.attribution} ${s.title}`); const ppl = USH_REAL_PEOPLE.filter((p) => hasWord(attr.replace(/alton-composed/g, ""), p)); if (ppl.length) v.push(`source_${s.id}_real_person_in_attribution_${[...new Set(ppl)].join("|")}`);
+    const ppl = realPeopleIn(`${s.attribution} ${s.title}`); if (ppl.length) v.push(`source_${s.id}_real_person_in_attribution_${ppl.join("|")}`);
     if (s.kind === "primary_text" || s.kind === "secondary_text") { const w = WORDS(s.body ?? ""); if (w < 50 || w > 230) v.push(`source_${s.id}_words_${w}`); }
     if (s.kind === "table") { const t = s.table; if (!t || t.columns.length < 2 || t.rows.length < 3 || t.rows.length > 10 || t.rows.some((r) => r.length !== t.columns.length)) v.push(`source_${s.id}_table_shape`); }
     if (s.kind === "chart") { const f = s.figure; if (!f || f.categories.length < 3 || f.series.some((x) => x.values.length !== f.categories.length || x.values.some((y) => !Number.isFinite(y)))) v.push(`source_${s.id}_chart_shape`); }

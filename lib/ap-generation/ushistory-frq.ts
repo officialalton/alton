@@ -2,8 +2,8 @@
 // 구성(CED effective Fall 2026 p.497-501, 2027 개편): SAQ 3(각 3점, 파트 A·B·C 각 1점; q1 2차 자료 2개 · q2 1차 자료 · q3 비텍스트), DBQ 1(7점, 문서 7개, 1754–1980), LEQ 1(6점, 필수·선택 없음, 자료 없음).
 import { countWords } from "./english-text-stats";
 import { bannedPhraseHits, longestSharedRun, quoteInPassage, textHazards, fiveGrams } from "./englang-gates";
-import { sourceBody, tableMarkdown, ushStimulusDisplay, type UshSource } from "./ushistory-gates";
-import { USH_BANNED_PHRASES, USH_PERIODS, USH_REAL_PEOPLE } from "./subjects/ushistory";
+import { realPeopleIn, sourceBody, tableMarkdown, ushStimulusDisplay, type UshSource } from "./ushistory-gates";
+import { USH_BANNED_PHRASES, USH_PERIODS } from "./subjects/ushistory";
 
 export const USH_FRQ_SCHEMA_VERSION = "ush-frq-1" as const;
 export const USH_RUBRIC_ID = "ushistory-v1" as const;
@@ -42,10 +42,10 @@ export const sourcesText = (p: Pick<UshFrqPayload, "sources">): string => p.sour
 export function frqPassageDisplay(p: UshFrqPayload): string {
   if (p.task_type === "leq") return "";
   if (p.task_type === "dbq") {
-    return ["ALTON-composed stimulus", ...p.sources.map((s) => {
+    return "ALTON-composed stimulus\n" + p.sources.map((s) => {
       const body = s.kind === "table" ? [s.body, s.table ? tableMarkdown(s.table) : ""].filter(Boolean).join("\n\n") : s.kind === "chart" ? `${s.body ?? ""}\n\n${s.figure ? `${s.figure.title}\n${s.figure.categories.map((c, i) => `${c}: ${s.figure!.series.map((x) => `${x.name} ${x.values[i]}`).join(", ")}`).join("\n")}` : ""}`.trim() : `"${(s.body ?? "").trim()}"`;
       return `Document ${s.id} (${s.kind.replace("_", " ")})\n${s.title}\n${s.attribution}\n\n${body}`;
-    })].join("\n\n———\n\n");
+    }).join("\n\n———\n\n");
   }
   return ushStimulusDisplay(p.sources);
 }
@@ -98,7 +98,7 @@ export function frqViolations(p: UshFrqPayload, corpus: { id: string; text: stri
   }
   for (const s of p.sources) {
     if (!/ALTON-composed/i.test(s.attribution ?? "") || s.provenance?.kind !== "alton_composed") v.push(`source_${s.id}_not_marked_alton_composed`);
-    const attr = norm(`${s.attribution} ${s.title}`).replace(/alton-composed/g, ""); const ppl = USH_REAL_PEOPLE.filter((x) => new RegExp(`(^|[^a-z])${x}([^a-z]|$)`).test(attr)); if (ppl.length) v.push(`source_${s.id}_real_person_${[...new Set(ppl)].join("|")}`);
+    const ppl = realPeopleIn(`${s.attribution} ${s.title}`); if (ppl.length) v.push(`source_${s.id}_real_person_${ppl.join("|")}`);
     if (s.kind === "primary_text" || s.kind === "secondary_text") { const w = countWords(s.body ?? ""); const [lo, hi] = task === "dbq" ? [35, 200] : [50, 190]; if (w < lo || w > hi) v.push(`source_${s.id}_words_${w}`); }
     if (s.kind === "table" && (!s.table || s.table.rows.length < 3 || s.table.rows.some((r) => r.length !== s.table!.columns.length))) v.push(`source_${s.id}_table_shape`);
     if (s.kind === "chart" && (!s.figure || s.figure.categories.length < 3 || s.figure.series.some((x) => x.values.length !== s.figure!.categories.length))) v.push(`source_${s.id}_chart_shape`);

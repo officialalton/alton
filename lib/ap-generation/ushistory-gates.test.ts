@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { dateConflicts, derivedViolations, itemViolations, lengthBias, setViolations, yearRangeViolations, type UshItemRaw, type UshSetRaw } from "./ushistory-gates";
+import { realPeopleIn, dateConflicts, derivedViolations, itemViolations, lengthBias, setViolations, yearRangeViolations, type UshItemRaw, type UshSetRaw } from "./ushistory-gates";
 
 const body = "Our town has watched the wagons pass for a season, and the merchants of the river landing now speak of little but the price of freight and the coming of the rails. ".repeat(2);
 const set = (o: Partial<UshSetRaw> = {}): UshSetRaw => ({ period: 6, stim_type: "primary_text", theme: "t", title: "A merchant's letter", sources: [{ id: "A", kind: "primary_text", title: "Letter", attribution: "A letter from a fictional river-town merchant, 1881 (ALTON-composed, in the style of period correspondence)", body, provenance: { kind: "alton_composed", note: "x" } }], items: [], ...o });
@@ -25,7 +25,13 @@ describe("ushistory gates", () => {
   it("accepts a clean set and rejects real people in attribution and missing marker", () => {
     expect(setViolations(set(), { period: 6, stim: "primary_text" }).filter((v) => !/^items_/.test(v))).toEqual([]);
     const bad = set({ sources: [{ ...set().sources[0], attribution: "A letter by Abraham Lincoln, 1881" }] });
-    const v = setViolations(bad, { period: 6, stim: "primary_text" }); expect(v.join()).toMatch(/real_person_in_attribution_lincoln/); expect(v.join()).toMatch(/not_marked_alton_composed/);
+    const v = setViolations(bad, { period: 6, stim: "primary_text" }); expect(v.join()).toMatch(/real_person_in_attribution_abraham lincoln/); expect(v.join()).toMatch(/not_marked_alton_composed/);
+  });
+  it("real people: full names and titled surnames only (place names such as Washington or Monroe pass)", () => {
+    expect(realPeopleIn("A letter from a fictional editor in Washington County (ALTON-composed)")).toEqual([]);
+    expect(realPeopleIn("Monroe Ledger, 1887")).toEqual([]);
+    expect(realPeopleIn("A speech by President Lincoln, 1863")).toEqual(["lincoln"]);
+    expect(realPeopleIn("Letter of Thomas Jefferson")).toEqual(["thomas jefferson"]);
   });
   it("rejects item hazards", () => { expect(itemViolations(set(), item({ stem: "Which cost $5 more than the other option in the excerpt?" }))).toContain("item_dollar_sign"); expect(itemViolations(set(), item({ skill: "6.A" }))).toContain("skill_6.A_not_assessed_in_mc"); });
 });
