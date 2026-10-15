@@ -1,3 +1,11 @@
+# 정정(2026-10-15, 오너 확인): Production 은 비프로덕션과 같은 Supabase 프로젝트를 쓴다
+
+- Vercel Production 의 `NEXT_PUBLIC_SUPABASE_URL` = `https://worpsqwqgnspddnrtnvq.supabase.co` — 지금까지 '비프로덕션'이라 부른 바로 그 프로젝트다. 따라서 이 문서의 '새 프로젝트 생성 → 마이그레이션 594개 적용 → 콘텐츠 이관(§2)' 절차는 **필요 없다**. 마이그레이션과 콘텐츠(공개 세트 44개 포함)는 이미 이 프로젝트에 있다.
+- 오픈 = (1) `main` 을 통합 브랜치로 fast-forward 해 Production 재배포 + (2) Production 환경변수 확인 + (3) **DB 안의 테스트·UAT 데이터 정리** + (4) 백업·요금제 + (5) 스모크 검증.
+- 위험 변화: 이제 '비프로덕션'에서 하던 관리자 쓰기(AP 재고 적재, 새 버전 공개 등)는 곧 **라이브 데이터 변경**이다. Preview(review) 환경의 `AP_STOCK_ADMIN_ALLOWED_REFS` 허용 목록이 이 ref 를 포함하는 한 review 사이트의 관리자 쓰기가 라이브 학생에게 즉시 보인다. 오픈 후 콘텐츠 변경은 '새 버전' 흐름(기존 응시 보존)으로만, 변경 전 오너 확인을 받는다. Production 환경에는 `AP_STOCK_ADMIN_ALLOWED_REFS` 를 설정하지 않는다(관리자 AP 쓰기 차단 유지).
+- 계정 현황(2026-10-15 SELECT): 141개 중 대부분이 테스트·UAT. 실사용으로 보이는 후보: chrisykim94@gmail.com, matchbox512@gmail.com / matchbox512@snu.ac.kr, jiman@springcamp.co, jiman@bulqot.co, official@alton.education(마스터·오너), admin2@alton.education, teacher1@alton.education, 컨설턴트 3명(consultant.jiman@, cs.jiman@, jiman@alton.education). 나머지(UAT/test/example.com/e2e/demo 패턴 + `deleted+…@removed.invalid`)는 정리 후보다. **삭제는 영구적이므로 오너가 목록을 확인·승인한 뒤 정확한 id 로만 실행한다.** 학생 데이터(응시 기록, 노출 기록)와 연결 가족·결제·계약 행의 연쇄를 먼저 점검한다.
+- Production 환경변수는 값이 암호화 표시라 CLI 로 읽을 수 없다. 오너가 대시보드에서 정확한 값을 확인한다: `CONTRACT_AUTO_DISPATCH_ENABLED` = `false`(정확히 이 문자열), `AI_ESSAY_GRADING_ENABLED` = `true`(켤 때). 변경 뒤 재배포해야 반영된다.
+
 # 운영(Production) 오픈 런북 v2 — AP/SAT 모의고사 콘텐츠 포함 (2026-10-15)
 
 작성만 했다. 운영 자원(Supabase 운영 프로젝트, Vercel Production, env)에는 아무것도 실행·조회하지 않았다. 비프로덕션(`worpsqwqgnspddnrtnvq`)은 SELECT만 했다.
