@@ -7,8 +7,8 @@ import { ushSkillCat } from "../ap-exam/ush-rules";
 
 // US History 풀 세트 초안 계획(DB 없음): 합성 재고(계획기가 만든 4문항 세트 + 시대 다른 SAQ + DBQ·LEQ 각 2~3개)를 배정기로 풀어 얻은 키를 쓰고, 변환 상태만 가짜 풀로 만든다.
 const specs = planUshSets({ perPeriod: { 1: 5, 2: 5, 3: 9, 4: 9, 5: 9, 6: 9, 7: 9, 8: 9, 9: 5 }, seed: 77, noQuantPeriods: [1] });
-const sets: UshItem[] = specs.map((s, i) => ({ key: `m${i}`, kind: "mc", members: s.skills.slice(0, i % 3 === 0 ? 3 : 4).map((k, j) => ({ skill: k, cat: ushSkillCat(k), topic: `${s.period}.${j + 2}`, unit: String(s.period) })), fam: `theme:${s.theme}`, template: "", period: s.period, stim: s.stim, theme: s.theme, screen: true, batch: "t", renderType: "none", stimKind: "text", exam: 3 }));
-const frq = (t: string, p: number, i: number): UshItem => ({ key: `f-${t}-${i}`, kind: "frq", members: [], fam: `frq:${t}${i}`, template: t, period: p, stim: "", theme: "", screen: true, batch: "t", renderType: "none", stimKind: "none", exam: 0 });
+const sets: UshItem[] = specs.map((s, i) => ({ key: `m${i}`, keyUnit: String(s.period), kind: "mc", members: s.skills.slice(0, i % 3 === 0 ? 3 : 4).map((k, j) => ({ skill: k, cat: ushSkillCat(k), topic: `${s.period}.${j + 2}`, unit: String(s.period) })), fam: `theme:${s.theme}`, template: "", period: s.period, stim: s.stim, theme: s.theme, screen: true, batch: "t", renderType: "none", stimKind: "text", exam: 3 }));
+const frq = (t: string, p: number, i: number): UshItem => ({ key: `f-${t}-${i}`, keyUnit: "", kind: "frq", members: [], fam: `frq:${t}${i}`, template: t, period: p, stim: "", theme: "", screen: true, batch: "t", renderType: "none", stimKind: "none", exam: 0 });
 const st: UshItem[] = [...sets, frq("saq1", 6, 0), frq("saq1", 5, 1), frq("saq2", 4, 0), frq("saq2", 7, 1), frq("saq3", 8, 0), frq("saq3", 3, 1), frq("dbq", 4, 0), frq("dbq", 6, 1), frq("leq", 4, 0), frq("leq", 7, 1)];
 // 두 시험을 한 번에 풀면 내장 분기한정이 느려, 한 시험씩 풀고 쓴 후보는 차단한다(psych-assign.test.ts 와 같은 방식).
 const bl = new Set<string>(); const outs: ReturnType<typeof solveUshSets>["out"] = []; let status = "optimal";

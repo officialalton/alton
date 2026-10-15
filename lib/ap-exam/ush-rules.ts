@@ -22,7 +22,8 @@ export const ushUnitBounds = (): UnitBounds => Object.fromEntries(Object.entries
 export const ushSkillCat = (skill: string | null | undefined): string => String(skill ?? "").split(".")[0];
 export const ushUnitOfTopic = (topic: string): string => /^U?(\d+)\./.exec(topic)?.[1] ?? "";
 
-export type UshSetItem = { kind: "mc" | "frq"; unit: string | null; skill: string | null; candidateKey: string | null; position: number; stim?: string; template?: string; period?: number };
+/** dbUnit = 후보 keyword_code 단원(관리자 새 버전·초안이 DB 에서 읽는 단원; 세트의 모든 문항에 같은 값). 주면 같은 범위를 dbUnit 으로도 검사한다. */
+export type UshSetItem = { kind: "mc" | "frq"; unit: string | null; dbUnit?: string | null; skill: string | null; candidateKey: string | null; position: number; stim?: string; template?: string; period?: number };
 /** 풀 세트 구성 검증(순수, 차단 위반): MC 55·FRQ 5, 단원 범위, 세트 크기·수·연속 위치, 자료 유형 최소, 스킬 범주, FRQ 유형·SAQ 시대 서로 다름·DBQ/LEQ. */
 export function verifyUshFullComposition(items: UshSetItem[]): string[] {
   const out: string[] = [];
@@ -30,6 +31,7 @@ export function verifyUshFullComposition(items: UshSetItem[]): string[] {
   if (mc.length !== USH_MC_COUNT) out.push(`mc_count_${mc.length}/${USH_MC_COUNT}`);
   if (frq.length !== USH_FRQ_COUNT) out.push(`frq_count_${frq.length}/${USH_FRQ_COUNT}`);
   for (const [u, b] of Object.entries(ushUnitBounds())) { const n = mc.filter((i) => i.unit === u).length; if (n < b.min || n > b.max) out.push(`unit_${u}_${n}_not_in_${b.min}-${b.max}`); }
+  if (mc.length && mc.every((i) => i.dbUnit)) for (const [u, b] of Object.entries(ushUnitBounds())) { const n = mc.filter((i) => i.dbUnit === u).length; if (n < b.min || n > b.max) out.push(`db_unit_${u}_${n}_not_in_${b.min}-${b.max}`); }
   for (const i of mc) if (!/^[1-5]\./.test(i.skill ?? "")) out.push(`mc_skill_${i.skill}_not_assessed`);
   for (const c of ["1", "2", "3", "4", "5"]) { const n = mc.filter((i) => ushSkillCat(i.skill) === c).length; if (n < USH_SKILL_CATEGORY_MIN) out.push(`skill_category_${c}_${n}_lt_${USH_SKILL_CATEGORY_MIN}`); }
   const byKey = new Map<string, UshSetItem[]>();
