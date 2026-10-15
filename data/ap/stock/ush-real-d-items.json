@@ -1,0 +1,1053 @@
+[
+ {
+  "cellId": "ap_us_history-real_d_reynolds",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_d_reynolds-k0",
+  "keywordCode": "5.6",
+  "unitCode": "5",
+  "skillPrimary": "3.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_d_reynolds",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "ush-real-d-2026-10-15",
+  "run": "ush-real-d",
+  "stockKey": "ush-real-d:ap_us_history-real_d_reynolds-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "ush-real-d-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-d:ap_us_history-real_d_reynolds-k0",
+  "canonicalKey": "ush-real-d:ap_us_history-real_d_reynolds-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:5.6",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|5.6|3.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "ush-real-d",
+    "gateVersion": "ush-real-d-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "map-reynolds-1856"
+  ],
+  "replaces": "US2 u527",
+  "payload": {
+   "archetype": "ush_real_real_d_reynolds",
+   "topic": "5.6",
+   "skill": "3.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(map)\nReynolds's political map of the United States, designed to exhibit the comparative area of the free and slave states and the territory open to slavery or freedom by the repeal of the Missouri Compromise\nWilliam C. Reynolds and J. C. Jones, publishers (New York); Rufus Blanchard (Chicago), 1856. Library of Congress, Geography and Map Division. Reuse: public domain (published 1856, before 1929; LoC GMD free to use and reuse). unmodified except LoC's IIIF 12.5% rendering (979x887 px). An 1856 printed map. Free states, slave states and the western territories are shown in different colors; the printed title explains the purpose of the map.\n\nThe image for this source appears below.",
+   "stimulus": {
+    "kind": "image",
+    "description": "An 1856 political map of the United States with its printed title, portraits of two men at the top corners, colored free states, slave states and western territories, and statistical tables below the map.",
+    "data": {
+     "path": "ap-sources/map-reynolds-1856/image.jpg",
+     "alt": "An 1856 political map of the United States in which free states are colored red, slave states gray and western territories green; portraits of John C. Fremont and William L. Dayton appear at the top corners, with tables of census statistics for the free and slave states below the map.",
+     "credit": "Reynolds's Political Map of the United States, 1856. Library of Congress, Geography and Map Division (G3701.E9 1856 .R4). Public domain."
+    }
+   },
+   "ush_set": {
+    "period": 5,
+    "stim_type": "visual",
+    "theme": "The 1856 political map of free and slave territory",
+    "title": "A Political Map of the United States, 1856",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "image",
+      "title": "Reynolds's political map of the United States, designed to exhibit the comparative area of the free and slave states and the territory open to slavery or freedom by the repeal of the Missouri Compromise",
+      "attribution": "William C. Reynolds and J. C. Jones, publishers (New York); Rufus Blanchard (Chicago), 1856. Library of Congress, Geography and Map Division. Reuse: public domain (published 1856, before 1929; LoC GMD free to use and reuse). unmodified except LoC's IIIF 12.5% rendering (979x887 px).",
+      "real_data": true,
+      "source_registry_id": "map-reynolds-1856",
+      "source_sha256": "752cec3f44c1bccf40e032200a94f9a30a173fbb0f9a221edf4d83a500c820a0"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_3A",
+     "topic": "5.6",
+     "skill": "3.A",
+     "stem": "Which of the following best describes the main claim the mapmakers express in the printed title of the map?",
+     "options": [
+      {
+       "text": "Popular sovereignty had finally settled the question of slavery in all of the western territories for good",
+       "why": "The title stresses how much territory was now 'open to slavery', which presents the repeal as unsettling the question, not settling it.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Slavery already existed in every one of the western territories shown on the map",
+       "why": "The map colors the territories differently from the slave states and calls them 'open to slavery or freedom', not already slave.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "The repeal of the Missouri Compromise opened much western territory to the spread of slavery",
+       "why": "The title says the map shows 'the territory open to slavery or freedom by the repeal of the Missouri Compromise', and a wide green region lies west of the slave states.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Missouri Compromise line should be extended to the Pacific Ocean",
+       "why": "The title describes the effect of repealing the line and does not propose extending it.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"The repeal of the Missouri Compromise opened much western territory to the spread of slavery\". The title says the map shows 'the territory open to slavery or freedom by the repeal of the Missouri Compromise', and a wide green region lies west of the slave states.\n\"Popular sovereignty had finally settled the question of slavery in all of the western territories for good\" is incorrect: The title stresses how much territory was now 'open to slavery', which presents the repeal as unsettling the question, not settling it.\n\"Slavery already existed in every one of the western territories shown on the map\" is incorrect: The map colors the territories differently from the slave states and calls them 'open to slavery or freedom', not already slave.\n\"The Missouri Compromise line should be extended to the Pacific Ocean\" is incorrect: The title describes the effect of repealing the line and does not propose extending it.",
+     "est_seconds": 75,
+     "facts": [
+      "The Kansas-Nebraska Act of 1854 repealed the Missouri Compromise ban on slavery north of 36 degrees 30 minutes in most of the Louisiana Purchase."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "Printed title: 'designed to exhibit the comparative area of the free and slave states, and the territory open to slavery or freedom by the repeal of the Missouri Compromise'."
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       2,
+       2
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": [],
+      "images_attached": true
+     }
+    },
+    {
+     "archetype": "ush_real_3D",
+     "topic": "5.7",
+     "skill": "3.D",
+     "stem": "Which of the following developments of 1855 and 1856 would best support the mapmakers' concern about the spread of slavery into the territories?",
+     "options": [
+      {
+       "text": "Violent clashes in Kansas between proslavery and antislavery settlers",
+       "why": "Kansas was organized under popular sovereignty in 1854, and armed conflict there in 1855 and 1856 showed slavery's status in a territory being fought over.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Gadsden Purchase of land from Mexico for a southern railroad route in 1853",
+       "why": "The purchase was made chiefly to secure a southern railroad route and did not itself raise the question of slavery's status in a territory.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "The Supreme Court's Dred Scott decision on slavery in the territories in 1857",
+       "why": "The ruling came after the map's 1856 date and would be later evidence, not a development the mapmakers could cite.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Homestead Act of 1862, which offered western land to small farmers",
+       "why": "The act came six years after the map and concerned land for settlers, after Southern opposition had ended in secession.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Violent clashes in Kansas between proslavery and antislavery settlers\". Kansas was organized under popular sovereignty in 1854, and armed conflict there in 1855 and 1856 showed slavery's status in a territory being fought over.\n\"The Gadsden Purchase of land from Mexico for a southern railroad route in 1853\" is incorrect: The purchase was made chiefly to secure a southern railroad route and did not itself raise the question of slavery's status in a territory.\n\"The Supreme Court's Dred Scott decision on slavery in the territories in 1857\" is incorrect: The ruling came after the map's 1856 date and would be later evidence, not a development the mapmakers could cite.\n\"The Homestead Act of 1862, which offered western land to small farmers\" is incorrect: The act came six years after the map and concerned land for settlers, after Southern opposition had ended in secession.",
+     "est_seconds": 75,
+     "facts": [
+      "Violence in Kansas, including the sack of Lawrence in May 1856, led to the label 'Bleeding Kansas'."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.D",
+      "key_evidence_in_source": "The map highlights 'Kansas' and 'Nebraska' territories in a region colored differently from free and slave states."
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       0,
+       0
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": [],
+      "images_attached": true
+     }
+    },
+    {
+     "archetype": "ush_real_4B",
+     "topic": "5.4",
+     "skill": "4.B",
+     "stem": "The map is best understood in the context of which of the following developments?",
+     "options": [
+      {
+       "text": "Jacksonian opposition to the Second Bank of the United States and to federal internal improvements",
+       "why": "The Bank War was fought in the 1830s and did not concern western territory in 1856.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Sectional conflict over extending slavery into land the nation had acquired in the West",
+       "why": "After the Mexican Cession and the Kansas-Nebraska Act, the future of slavery in the territories divided North and South and shaped the 1856 campaign.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Federal removal of Native American nations from the Southeast to the West",
+       "why": "Removal took place mostly in the 1830s and is unrelated to the question of slavery in the territories.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The growth of factories and railroads in the Old Northwest and the Northeast",
+       "why": "Industrial growth affected the North, but the map's subject is the extension of slavery.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Sectional conflict over extending slavery into land the nation had acquired in the West\". After the Mexican Cession and the Kansas-Nebraska Act, the future of slavery in the territories divided North and South and shaped the 1856 campaign.\n\"Jacksonian opposition to the Second Bank of the United States and to federal internal improvements\" is incorrect: The Bank War was fought in the 1830s and did not concern western territory in 1856.\n\"Federal removal of Native American nations from the Southeast to the West\" is incorrect: Removal took place mostly in the 1830s and is unrelated to the question of slavery in the territories.\n\"The growth of factories and railroads in the Old Northwest and the Northeast\" is incorrect: Industrial growth affected the North, but the map's subject is the extension of slavery.",
+     "est_seconds": 75,
+     "facts": [
+      "The Compromise of 1850 and the Kansas-Nebraska Act each revisited slavery in the territories."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "The map divides the country into free states, slave states and territories 'open to slavery or freedom'."
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       1,
+       1
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": [],
+      "images_attached": true
+     }
+    },
+    {
+     "archetype": "ush_real_5B",
+     "topic": "5.7",
+     "skill": "5.B",
+     "stem": "The political conflict reflected on the map most directly contributed to which of the following later developments?",
+     "options": [
+      {
+       "text": "The end of sectional disagreement after Kansas entered the Union as a slave state in 1857",
+       "why": "Kansas entered as a free state in 1861, and sectional disagreement continued to deepen.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "A Democratic Party landslide in every free state in 1856",
+       "why": "James Buchanan won the 1856 election, but Fremont carried most free states, and the Democrats did not sweep them.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "The ratification of the Fifteenth Amendment",
+       "why": "That amendment was ratified in 1870 and followed the Civil War and Reconstruction.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Republican gains in the North culminating in Lincoln's election as president in 1860",
+       "why": "The party formed in 1854 to oppose slavery's spread, ran Fremont in 1856, and won the presidency with Lincoln in 1860.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Republican gains in the North culminating in Lincoln's election as president in 1860\". The party formed in 1854 to oppose slavery's spread, ran Fremont in 1856, and won the presidency with Lincoln in 1860.\n\"The end of sectional disagreement after Kansas entered the Union as a slave state in 1857\" is incorrect: Kansas entered as a free state in 1861, and sectional disagreement continued to deepen.\n\"A Democratic Party landslide in every free state in 1856\" is incorrect: James Buchanan won the 1856 election, but Fremont carried most free states, and the Democrats did not sweep them.\n\"The ratification of the Fifteenth Amendment\" is incorrect: That amendment was ratified in 1870 and followed the Civil War and Reconstruction.",
+     "est_seconds": 75,
+     "facts": [
+      "The Republican Party nominated John C. Fremont and William L. Dayton in 1856.",
+      "Kansas was admitted as a free state in January 1861."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.B",
+      "key_evidence_in_source": "The portraits at the top corners are labeled 'John C. Fremont' and 'Wm. L. Dayton'."
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       3,
+       3
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": [],
+      "images_attached": true
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_us_history-real_d_school",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_d_school-k0",
+  "keywordCode": "7.2",
+  "unitCode": "7",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_d_school",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "ush-real-d-2026-10-15",
+  "run": "ush-real-d",
+  "stockKey": "ush-real-d:ap_us_history-real_d_school-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "ush-real-d-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-d:ap_us_history-real_d_school-k0",
+  "canonicalKey": "ush-real-d:ap_us_history-real_d_school-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:7.2",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|7.2|3.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "ush-real-d",
+    "gateVersion": "ush-real-d-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "img-school-begins-1899"
+  ],
+  "replaces": "US2 u720",
+  "payload": {
+   "archetype": "ush_real_real_d_school",
+   "topic": "7.2",
+   "skill": "3.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(political cartoon)\nSchool begins\nLouis Dalrymple (artist); Puck (Keppler & Schwarzmann), 1899 (Puck, January 25, 1899, centerfold). Library of Congress, Prints and Photographs Division. Reuse: public domain (U.S. publication before 1929; LoC reports no known restrictions). unmodified except LoC's 1024px reference JPEG (two facing magazine pages with the gutter visible). A color cartoon published in the magazine Puck on January 25, 1899, a few weeks after the Treaty of Paris ending the Spanish-American War was signed. The caption beneath the picture and the writing on the blackboard are part of the cartoon.\n\nThe image for this source appears below.",
+   "stimulus": {
+    "kind": "image",
+    "description": "A 1899 Puck cartoon: Uncle Sam as a teacher stands over four seated children labeled Philippines, Hawaii, Porto Rico and Cuba, with older pupils at the rear and a lesson on the blackboard.",
+    "data": {
+     "path": "ap-sources/img-school-begins-1899/image.jpg",
+     "alt": "A color cartoon from Puck: Uncle Sam, as a stern teacher with a pointer, stands over four seated children labeled Philippines, Hawaii, Porto Rico and Cuba, who look unhappy; behind them a row of better-dressed pupils reads books labeled with western states and territories, a Native American boy sits apart reading an upside-down book, a Black boy washes a window, and a Chinese boy stands outside the door. A blackboard at the right carries a printed lesson about governing new territories with or without the consent of the governed.",
+     "credit": "School begins, Louis Dalrymple, Puck, Jan. 25, 1899. Library of Congress, Prints and Photographs Division (LC-DIG-ppmsca-28668). Public domain; no known restrictions."
+    }
+   },
+   "ush_set": {
+    "period": 7,
+    "stim_type": "visual",
+    "theme": "Cartoon on U.S. rule of the new possessions of 1898",
+    "title": "'School Begins,' a Puck Cartoon of 1899",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "image",
+      "title": "School begins",
+      "attribution": "Louis Dalrymple (artist); Puck (Keppler & Schwarzmann), 1899 (Puck, January 25, 1899, centerfold). Library of Congress, Prints and Photographs Division. Reuse: public domain (U.S. publication before 1929; LoC reports no known restrictions). unmodified except LoC's 1024px reference JPEG (two facing magazine pages with the gutter visible).",
+      "real_data": true,
+      "source_registry_id": "img-school-begins-1899",
+      "source_sha256": "8b79f1f7e3f11d16ecf004af0da6009c1944d27533a85cd9725f6fea92b69202"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_3B",
+     "topic": "7.2",
+     "skill": "3.B",
+     "stem": "Which of the following details of the cartoon best supports the cartoonist's argument that earlier territorial acquisitions had been successfully absorbed?",
+     "options": [
+      {
+       "text": "Uncle Sam leans over the desk and holds a long pointer toward the four new students on the bench",
+       "why": "This detail shows authority over the new students, not the success of earlier acquisitions.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "Older pupils labeled with western states and territories read quietly at the back of the room",
+       "why": "The older class is labeled with earlier acquisitions and is shown calm and attentive while the new students look unhappy, which supports the claim of successful absorption.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "A globe stands at the lower left of the room",
+       "why": "The globe suggests worldwide reach but says nothing about how earlier territories were absorbed.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "Four children labeled with new possessions sit together on a front bench",
+       "why": "These children represent the new possessions, not the earlier acquisitions.",
+       "value": null,
+       "label": "misattributed"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Older pupils labeled with western states and territories read quietly at the back of the room\". The older class is labeled with earlier acquisitions and is shown calm and attentive while the new students look unhappy, which supports the claim of successful absorption.\n\"Uncle Sam leans over the desk and holds a long pointer toward the four new students on the bench\" is incorrect: This detail shows authority over the new students, not the success of earlier acquisitions.\n\"A globe stands at the lower left of the room\" is incorrect: The globe suggests worldwide reach but says nothing about how earlier territories were absorbed.\n\"Four children labeled with new possessions sit together on a front bench\" is incorrect: These children represent the new possessions, not the earlier acquisitions.",
+     "est_seconds": 75,
+     "facts": [
+      "Texas, California, New Mexico, Arizona and Alaska were acquired earlier in the nineteenth century and were labeled on the older pupils' books."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.B",
+      "key_evidence_in_source": "Older students at the rear hold books labeled with western states and territories and read calmly; the four new students labeled Philippines, Hawaii, Porto Rico and Cuba look unhappy."
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       1,
+       1
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": [],
+      "images_attached": true
+     }
+    },
+    {
+     "archetype": "ush_real_3D",
+     "topic": "7.3",
+     "skill": "3.D",
+     "stem": "The cartoonist's message about governing the new possessions is best supported by which of the following policies?",
+     "options": [
+      {
+       "text": "The Teller Amendment of 1898, which disclaimed any U.S. intention to annex or permanently govern Cuba",
+       "why": "That 1898 resolution promised Cuban self-government and does not reflect the cartoon's message of rule 'with or without their consent'.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The Open Door notes to China",
+       "why": "The notes of 1899 asked for equal trading access in China and did not concern governing new possessions.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "The Platt Amendment, which tied the end of U.S. occupation of Cuba to U.S. rights to intervene",
+       "why": "The Platt Amendment of 1901 limited Cuban independence and kept U.S. oversight, as the blackboard's lesson says the United States would govern until they can govern themselves.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Treaty of Paris of 1898 recognizing Philippine independence",
+       "why": "The treaty transferred the Philippines to the United States and did not recognize their independence.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"The Platt Amendment, which tied the end of U.S. occupation of Cuba to U.S. rights to intervene\". The Platt Amendment of 1901 limited Cuban independence and kept U.S. oversight, as the blackboard's lesson says the United States would govern until they can govern themselves.\n\"The Teller Amendment of 1898, which disclaimed any U.S. intention to annex or permanently govern Cuba\" is incorrect: That 1898 resolution promised Cuban self-government and does not reflect the cartoon's message of rule 'with or without their consent'.\n\"The Open Door notes to China\" is incorrect: The notes of 1899 asked for equal trading access in China and did not concern governing new possessions.\n\"The Treaty of Paris of 1898 recognizing Philippine independence\" is incorrect: The treaty transferred the Philippines to the United States and did not recognize their independence.",
+     "est_seconds": 75,
+     "facts": [
+      "The Platt Amendment was added to Cuba's constitution in 1901.",
+      "Under the Treaty of Paris, Spain ceded the Philippines, Puerto Rico and Guam to the United States."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.D",
+      "key_evidence_in_source": "Blackboard lesson: the United States must govern its new territories 'with or without their consent until they can govern themselves'."
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       2,
+       2
+      ],
+      "solver_confidence": [
+       "likely",
+       "likely"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": [],
+      "images_attached": true
+     }
+    },
+    {
+     "archetype": "ush_real_4A",
+     "topic": "7.2",
+     "skill": "4.A",
+     "stem": "The ideas on the blackboard are best understood in the context of which of the following?",
+     "options": [
+      {
+       "text": "Progressive Era efforts to regulate large corporations and to protect consumers and workers at home",
+       "why": "Regulation of business was a domestic reform effort and not the subject of a cartoon on overseas rule.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Isolationist opposition to overseas commitments after World War I",
+       "why": "That movement of the 1920s and 1930s came decades after the cartoon.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Reconstruction policy toward freedpeople in the South",
+       "why": "Reconstruction ended in 1877, and the cartoon concerns overseas possessions acquired in 1898.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "U.S. imperialism around 1900, defended by claims of racial superiority and a civilizing mission",
+       "why": "Supporters of overseas expansion in 1898 and 1899 often argued that the United States had a duty to civilize and govern peoples they judged unfit for self-rule.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"U.S. imperialism around 1900, defended by claims of racial superiority and a civilizing mission\". Supporters of overseas expansion in 1898 and 1899 often argued that the United States had a duty to civilize and govern peoples they judged unfit for self-rule.\n\"Progressive Era efforts to regulate large corporations and to protect consumers and workers at home\" is incorrect: Regulation of business was a domestic reform effort and not the subject of a cartoon on overseas rule.\n\"Isolationist opposition to overseas commitments after World War I\" is incorrect: That movement of the 1920s and 1930s came decades after the cartoon.\n\"Reconstruction policy toward freedpeople in the South\" is incorrect: Reconstruction ended in 1877, and the cartoon concerns overseas possessions acquired in 1898.",
+     "est_seconds": 75,
+     "facts": [
+      "The United States annexed Hawaii in 1898 and took Puerto Rico, Guam and the Philippines from Spain."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "The caption 'Uncle Sam (to his new class in Civilization)' and the blackboard lesson."
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       3,
+       3
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": [],
+      "images_attached": true
+     }
+    },
+    {
+     "archetype": "ush_real_5B",
+     "topic": "7.3",
+     "skill": "5.B",
+     "stem": "The acquisition of the Philippines that the cartoon portrays most directly led to which of the following?",
+     "options": [
+      {
+       "text": "A war between the United States and Filipino nationalists who sought independence",
+       "why": "Filipino forces under Emilio Aguinaldo fought the United States from February 1899 in the Philippine-American War.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The admission of the Philippines as a state in 1900",
+       "why": "The Philippines were never admitted as a state and were a territory until independence in 1946.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "A U.S. war with Japan over control of the islands in 1900",
+       "why": "No U.S.-Japanese war occurred then; war with Japan began in 1941.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Immediate independence for the Philippines under a guarantee from the United States",
+       "why": "The United States kept control, and independence was granted in 1946.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"A war between the United States and Filipino nationalists who sought independence\". Filipino forces under Emilio Aguinaldo fought the United States from February 1899 in the Philippine-American War.\n\"The admission of the Philippines as a state in 1900\" is incorrect: The Philippines were never admitted as a state and were a territory until independence in 1946.\n\"A U.S. war with Japan over control of the islands in 1900\" is incorrect: No U.S.-Japanese war occurred then; war with Japan began in 1941.\n\"Immediate independence for the Philippines under a guarantee from the United States\" is incorrect: The United States kept control, and independence was granted in 1946.",
+     "est_seconds": 75,
+     "facts": [
+      "The Philippine-American War began in February 1899 and the Philippines gained independence in 1946."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.B",
+      "key_evidence_in_source": "A child labeled 'Philippines' is shown as an unwilling pupil among the new possessions."
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       0,
+       0
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": [],
+      "images_attached": true
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_us_history-real_d_reserv",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_d_reserv-k0",
+  "keywordCode": "6.3",
+  "unitCode": "6",
+  "skillPrimary": "3.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_d_reserv",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "ush-real-d-2026-10-15",
+  "run": "ush-real-d",
+  "stockKey": "ush-real-d:ap_us_history-real_d_reserv-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "ush-real-d-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-d:ap_us_history-real_d_reserv-k0",
+  "canonicalKey": "ush-real-d:ap_us_history-real_d_reserv-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:6.3",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|6.3|3.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "ush-real-d",
+    "gateVersion": "ush-real-d-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "map-indian-reservations-1892"
+  ],
+  "replaces": "US1 u616",
+  "payload": {
+   "archetype": "ush_real_real_d_reserv",
+   "topic": "6.3",
+   "skill": "3.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(map)\nMap showing Indian reservations within the limits of the United States\nUnited States, Office of Indian Affairs (compiled under Commissioner T. J. Morgan), 1892. Library of Congress, Geography and Map Division. Reuse: public domain (U.S. government publication of 1892; LoC GMD free to use and reuse). unmodified except LoC's IIIF 12.5% rendering (1311x839 px). A map of the United States printed in 1892 under the direction of the Commissioner of Indian Affairs. The reservations are the areas shaded orange and red.\n\nThe image for this source appears below.",
+   "stimulus": {
+    "kind": "image",
+    "description": "An 1892 map of the United States on which Indian reservations are shaded orange and red, with the largest in Indian Territory, the Dakotas, Montana, Arizona and New Mexico.",
+    "data": {
+     "path": "ap-sources/map-indian-reservations-1892/image.jpg",
+     "alt": "An 1892 color map of the United States prepared for the Commissioner of Indian Affairs: Indian reservations are shaded orange and red, with state names and a legend at the lower left; the largest orange areas are the Indian Territory (present-day Oklahoma), the Dakotas, Montana, Arizona and New Mexico, and smaller reservations appear in the Pacific Northwest, the upper Midwest, New York and elsewhere. Insets show Alaska, California mission reservations and the Indian Territory.",
+     "credit": "Map showing Indian reservations within the limits of the United States, Office of Indian Affairs, 1892. Library of Congress, Geography and Map Division (G3701.G6 1892 .U5). Public domain."
+    }
+   },
+   "ush_set": {
+    "period": 6,
+    "stim_type": "visual",
+    "theme": "Indian reservations in 1892",
+    "title": "A Federal Map of Indian Reservations, 1892",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "image",
+      "title": "Map showing Indian reservations within the limits of the United States",
+      "attribution": "United States, Office of Indian Affairs (compiled under Commissioner T. J. Morgan), 1892. Library of Congress, Geography and Map Division. Reuse: public domain (U.S. government publication of 1892; LoC GMD free to use and reuse). unmodified except LoC's IIIF 12.5% rendering (1311x839 px).",
+      "real_data": true,
+      "source_registry_id": "map-indian-reservations-1892",
+      "source_sha256": "33d21576ad9d2adc742016ef57b5a1fdf0782f3ca839eb30345d209df6cd59ef"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_3A",
+     "topic": "6.3",
+     "skill": "3.A",
+     "stem": "Which of the following best describes the main idea that the map conveys?",
+     "options": [
+      {
+       "text": "The federal government had set aside defined reservations for Native peoples across the nation",
+       "why": "The map is titled as showing Indian reservations and marks them in a distinct color within the nation's borders, as a federal record of reservation lands.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Native American nations still held most of the land in the states and territories of the West in 1892",
+       "why": "The shaded reservations cover only parts of the western states, and the rest of each state is shown as non-reservation land.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "Reservations were located only in the former Confederate states",
+       "why": "The largest reservations lie in the West, and none of the large ones lie in the former Confederacy.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Native Americans had been relocated entirely east of the Mississippi River",
+       "why": "The reservations are shown mostly west of the Mississippi River.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"The federal government had set aside defined reservations for Native peoples across the nation\". The map is titled as showing Indian reservations and marks them in a distinct color within the nation's borders, as a federal record of reservation lands.\n\"Native American nations still held most of the land in the states and territories of the West in 1892\" is incorrect: The shaded reservations cover only parts of the western states, and the rest of each state is shown as non-reservation land.\n\"Reservations were located only in the former Confederate states\" is incorrect: The largest reservations lie in the West, and none of the large ones lie in the former Confederacy.\n\"Native Americans had been relocated entirely east of the Mississippi River\" is incorrect: The reservations are shown mostly west of the Mississippi River.",
+     "est_seconds": 75,
+     "facts": [
+      "The Office of Indian Affairs, part of the Interior Department, administered reservations and published maps of them."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "Title cartouche: 'Map showing Indian Reservations within the limits of the United States ... compiled under the direction of the Hon. T. J. Morgan, Commissioner of Indian Affairs, 1892'."
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       0,
+       0
+      ],
+      "solver_confidence": [
+       "certain",
+       "likely"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": [],
+      "images_attached": true
+     }
+    },
+    {
+     "archetype": "ush_real_3D",
+     "topic": "6.3",
+     "skill": "3.D",
+     "stem": "A historian argues that by 1892 the federal government had confined many Native American peoples to limited areas. Which of the following features of the map best supports that argument?",
+     "options": [
+      {
+       "text": "Reservations appear in every state and territory of the Union, including the Southeast",
+       "why": "Many states, including most of the Southeast and the Atlantic coast, have no shaded reservation, so the map does not show this.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "The map was drawn in 1892 by a private mapmaker with no connection to the government",
+       "why": "It was compiled under the Commissioner of Indian Affairs, so authorship does not support the argument.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "The reservations cover most of the land west of the Rocky Mountains",
+       "why": "The shaded tracts cover only small portions of the Pacific and Mountain states.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Reservations appear as colored tracts covering only part of each state or territory",
+       "why": "Most orange and red tracts are small areas set apart within larger states, which supports the claim of confinement to limited lands.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Reservations appear as colored tracts covering only part of each state or territory\". Most orange and red tracts are small areas set apart within larger states, which supports the claim of confinement to limited lands.\n\"Reservations appear in every state and territory of the Union, including the Southeast\" is incorrect: Many states, including most of the Southeast and the Atlantic coast, have no shaded reservation, so the map does not show this.\n\"The map was drawn in 1892 by a private mapmaker with no connection to the government\" is incorrect: It was compiled under the Commissioner of Indian Affairs, so authorship does not support the argument.\n\"The reservations cover most of the land west of the Rocky Mountains\" is incorrect: The shaded tracts cover only small portions of the Pacific and Mountain states.",
+     "est_seconds": 75,
+     "facts": [
+      "By 1892 the federal government had placed most Native peoples of the West on reservations."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.D",
+      "key_evidence_in_source": "The map shades small reservations inside large states such as Washington, Montana, Nevada and Arizona; the surrounding land is shown without reservation shading."
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       3,
+       3
+      ],
+      "solver_confidence": [
+       "certain",
+       "likely"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": [],
+      "images_attached": true
+     }
+    },
+    {
+     "archetype": "ush_real_4A",
+     "topic": "6.2",
+     "skill": "4.A",
+     "stem": "The creation of many of the western reservations on the map was most directly connected to which of the following?",
+     "options": [
+      {
+       "text": "The Indian Removal Act of 1830, which moved Southeastern nations west of the Mississippi",
+       "why": "The Removal Act led to the removal of Southeastern nations to Indian Territory, but most western reservations on the map were created decades later.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Louisiana Purchase of 1803, which brought the Great Plains into the United States",
+       "why": "The purchase transferred sovereignty claims from France and did not directly create the later reservations.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Conflict as settlers, miners and railroads spread across the West after the Civil War",
+       "why": "Settlement and railroads pushed into Native lands after 1865, and wars and treaties confined many nations to reservations.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "A federal policy of preserving Native lands from non-Native settlement",
+       "why": "The reservations were created as settlement expanded, and federal policy opened much land to settlers.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Conflict as settlers, miners and railroads spread across the West after the Civil War\". Settlement and railroads pushed into Native lands after 1865, and wars and treaties confined many nations to reservations.\n\"The Indian Removal Act of 1830, which moved Southeastern nations west of the Mississippi\" is incorrect: The Removal Act led to the removal of Southeastern nations to Indian Territory, but most western reservations on the map were created decades later.\n\"The Louisiana Purchase of 1803, which brought the Great Plains into the United States\" is incorrect: The purchase transferred sovereignty claims from France and did not directly create the later reservations.\n\"A federal policy of preserving Native lands from non-Native settlement\" is incorrect: The reservations were created as settlement expanded, and federal policy opened much land to settlers.",
+     "est_seconds": 75,
+     "facts": [
+      "The Plains wars, including the Sioux wars and the Battle of Little Bighorn (1876), took place between 1860 and 1890.",
+      "The Indian Removal Act was passed in 1830."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "Large reservations are shown in the Dakotas, Montana, the Southwest and Indian Territory."
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       2,
+       2
+      ],
+      "solver_confidence": [
+       "likely",
+       "likely"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": [],
+      "images_attached": true
+     }
+    },
+    {
+     "archetype": "ush_real_5A",
+     "topic": "7.10",
+     "skill": "5.A",
+     "stem": "Which of the following later developments most directly changed the policy of dividing reservations like those on the map into individual allotments?",
+     "options": [
+      {
+       "text": "The Indian Citizenship Act of 1924",
+       "why": "The act granted citizenship to Native Americans but did not end allotment.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "The Indian Reorganization Act of 1934",
+       "why": "The act ended the allotment of reservation lands and encouraged tribal self-government.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The federal termination policy of the 1950s",
+       "why": "Termination ended federal recognition of some tribes and continued assimilation instead of reversing it.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The occupation of Wounded Knee in 1973",
+       "why": "The occupation was a protest by the American Indian Movement and not a federal policy change.",
+       "value": null,
+       "label": "unrelated_development"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"The Indian Reorganization Act of 1934\". The act ended the allotment of reservation lands and encouraged tribal self-government.\n\"The Indian Citizenship Act of 1924\" is incorrect: The act granted citizenship to Native Americans but did not end allotment.\n\"The federal termination policy of the 1950s\" is incorrect: Termination ended federal recognition of some tribes and continued assimilation instead of reversing it.\n\"The occupation of Wounded Knee in 1973\" is incorrect: The occupation was a protest by the American Indian Movement and not a federal policy change.",
+     "est_seconds": 75,
+     "facts": [
+      "The Dawes Act of 1887 authorized dividing reservation land into individual allotments.",
+      "The Indian Reorganization Act of 1934 ended allotment."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.A",
+      "key_evidence_in_source": "The map marks the reservations as tracts of land held by Native nations, the lands later divided under allotment."
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       1,
+       1
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": [],
+      "images_attached": true
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ }
+]
