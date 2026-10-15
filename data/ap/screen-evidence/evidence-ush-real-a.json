@@ -1,0 +1,664 @@
+{
+ "schema": "ap-screen-evidence/v3",
+ "generator": "playwright",
+ "limitations": "Automated screen check (Playwright): covers display, input, answer/explanation exposure and clipping only. It does NOT verify graph meaning, figure correctness, or naturalness of wording — that still needs human review.",
+ "generatedAt": "2026-10-15T16:37:10.963Z",
+ "entries": [
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_gm-k0",
+   "checker_kind": "automated",
+   "content_hash": "883d422d732539493411b506823e96062d07e542e979edc182c111657e4ef82a",
+   "problem_version_id": "03c0e89a-6b70-4c18-aa25-662aa5a69e7d",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_gm-k0-q1-390x844.jpg",
+   "timestamp": "2026-10-15T16:36:55.658Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_gm-k0",
+   "checker_kind": "automated",
+   "content_hash": "883d422d732539493411b506823e96062d07e542e979edc182c111657e4ef82a",
+   "problem_version_id": "c1efaeb3-81c3-43a3-80b1-aa9382bc2704",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_gm-k0-q2-390x844.jpg",
+   "timestamp": "2026-10-15T16:36:56.037Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_gm-k0",
+   "checker_kind": "automated",
+   "content_hash": "883d422d732539493411b506823e96062d07e542e979edc182c111657e4ef82a",
+   "problem_version_id": "6dd0e9d0-a3d2-4368-8359-726a3ed15af8",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_gm-k0-q3-390x844.jpg",
+   "timestamp": "2026-10-15T16:36:56.394Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_imm-k0",
+   "checker_kind": "automated",
+   "content_hash": "8d1f44bc1111d6a8550b855fcb91ef6dd6b0e0a6b82f7e08e5c7c66e0a26a9bb",
+   "problem_version_id": "af851058-2a4f-4ec4-be92-dbcb50de1c12",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_imm-k0-q1-390x844.jpg",
+   "timestamp": "2026-10-15T16:36:56.760Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_imm-k0",
+   "checker_kind": "automated",
+   "content_hash": "8d1f44bc1111d6a8550b855fcb91ef6dd6b0e0a6b82f7e08e5c7c66e0a26a9bb",
+   "problem_version_id": "ed9720a5-76e2-4f51-8908-7509e16cf845",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_imm-k0-q2-390x844.jpg",
+   "timestamp": "2026-10-15T16:36:57.127Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_imm-k0",
+   "checker_kind": "automated",
+   "content_hash": "8d1f44bc1111d6a8550b855fcb91ef6dd6b0e0a6b82f7e08e5c7c66e0a26a9bb",
+   "problem_version_id": "0638d619-823d-4505-a1f0-2580b010d8ad",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_imm-k0-q3-390x844.jpg",
+   "timestamp": "2026-10-15T16:36:57.486Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_gm-k0",
+   "checker_kind": "automated",
+   "content_hash": "883d422d732539493411b506823e96062d07e542e979edc182c111657e4ef82a",
+   "problem_version_id": "03c0e89a-6b70-4c18-aa25-662aa5a69e7d",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_gm-k0-q1-1280x800.jpg",
+   "timestamp": "2026-10-15T16:37:00.729Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_gm-k0",
+   "checker_kind": "automated",
+   "content_hash": "883d422d732539493411b506823e96062d07e542e979edc182c111657e4ef82a",
+   "problem_version_id": "c1efaeb3-81c3-43a3-80b1-aa9382bc2704",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_gm-k0-q2-1280x800.jpg",
+   "timestamp": "2026-10-15T16:37:01.094Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_gm-k0",
+   "checker_kind": "automated",
+   "content_hash": "883d422d732539493411b506823e96062d07e542e979edc182c111657e4ef82a",
+   "problem_version_id": "6dd0e9d0-a3d2-4368-8359-726a3ed15af8",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_gm-k0-q3-1280x800.jpg",
+   "timestamp": "2026-10-15T16:37:01.461Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_imm-k0",
+   "checker_kind": "automated",
+   "content_hash": "8d1f44bc1111d6a8550b855fcb91ef6dd6b0e0a6b82f7e08e5c7c66e0a26a9bb",
+   "problem_version_id": "af851058-2a4f-4ec4-be92-dbcb50de1c12",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_imm-k0-q1-1280x800.jpg",
+   "timestamp": "2026-10-15T16:37:01.827Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_imm-k0",
+   "checker_kind": "automated",
+   "content_hash": "8d1f44bc1111d6a8550b855fcb91ef6dd6b0e0a6b82f7e08e5c7c66e0a26a9bb",
+   "problem_version_id": "ed9720a5-76e2-4f51-8908-7509e16cf845",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_imm-k0-q2-1280x800.jpg",
+   "timestamp": "2026-10-15T16:37:02.202Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_imm-k0",
+   "checker_kind": "automated",
+   "content_hash": "8d1f44bc1111d6a8550b855fcb91ef6dd6b0e0a6b82f7e08e5c7c66e0a26a9bb",
+   "problem_version_id": "0638d619-823d-4505-a1f0-2580b010d8ad",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_imm-k0-q3-1280x800.jpg",
+   "timestamp": "2026-10-15T16:37:02.577Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_saq3_own-k0",
+   "checker_kind": "automated",
+   "content_hash": "cbaffa834e8854502f9a220511584dfb0b97d91cc2aa8c28a8bc641dfa5f29c5",
+   "problem_version_id": "6b420dd7-7eae-4a6c-8216-8d404761a958",
+   "kind": "frq_bundle",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_saq3_own-k0-390x844.jpg",
+   "timestamp": "2026-10-15T16:37:06.174Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "3/3 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 3 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_saq3_plains-k0",
+   "checker_kind": "automated",
+   "content_hash": "ad54db27b73069cfc8e9ba6b269ec5408c42dccf77d35acc05ae5062adf903ea",
+   "problem_version_id": "3e66eb7b-4416-499a-9f3b-056fabc3eac3",
+   "kind": "frq_bundle",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_saq3_plains-k0-390x844.jpg",
+   "timestamp": "2026-10-15T16:37:06.639Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "3/3 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 3 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_saq3_own-k0",
+   "checker_kind": "automated",
+   "content_hash": "cbaffa834e8854502f9a220511584dfb0b97d91cc2aa8c28a8bc641dfa5f29c5",
+   "problem_version_id": "6b420dd7-7eae-4a6c-8216-8d404761a958",
+   "kind": "frq_bundle",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_saq3_own-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T16:37:09.152Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "3/3 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 3 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-a:ap_us_history-real_a_saq3_plains-k0",
+   "checker_kind": "automated",
+   "content_hash": "ad54db27b73069cfc8e9ba6b269ec5408c42dccf77d35acc05ae5062adf903ea",
+   "problem_version_id": "3e66eb7b-4416-499a-9f3b-056fabc3eac3",
+   "kind": "frq_bundle",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/ush-real-a/ush-real-a_ap_us_history-real_a_saq3_plains-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T16:37:09.603Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "3/3 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 3 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  }
+ ]
+}
