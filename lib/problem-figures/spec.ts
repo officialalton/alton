@@ -56,7 +56,12 @@ export type ImageFigureSpec = {
   width?: number;
   /** 가시 출처 표기(bucket "static" 필수): 저장소·작성자·연도·재사용 근거를 한 줄로 화면에 보인다. */
   credit?: string;
+  /** 화면 라벨(예: "Document 4") — DBQ 처럼 한 문제에 이미지 자료가 여러 장일 때 어느 자료인지 알려 준다. */
+  label?: string;
+  /** 같은 그림 칸에 이어서 그리는 추가 정적 이미지(DBQ 의 두 번째 시각 자료). bucket "static" 전용, 최대 3장. */
+  more?: StaticImageItem[];
 };
+export type StaticImageItem = { path: string; alt?: string; credit: string; label?: string };
 
 /** 정적 실제 자료 이미지(US History 실제 사료, 2026-10-15): bucket "static" 이면 path 는 public/ 아래 ap-sources/<id>/<file> 이고 서명 URL 이 필요 없다. */
 export const STATIC_IMAGE_BUCKET = "static";
@@ -146,7 +151,14 @@ export function validateFigureSpec(input: unknown): { ok: true; spec: FigureSpec
     if (s.bucket === STATIC_IMAGE_BUCKET) {
       if (!STATIC_IMAGE_PATH.test(s.path)) return { ok: false, error: "static image 의 path 는 ap-sources/<id>/<file>.(jpg|png|svg) 형식이어야 합니다." };
       if (typeof s.credit !== "string" || !s.credit.trim()) return { ok: false, error: "static image 에는 화면에 보일 출처 표기(credit)가 필요합니다." };
-    }
+      if (s.more !== undefined) {
+        if (!Array.isArray(s.more) || s.more.length > 3) return { ok: false, error: "image.more 는 최대 3장의 배열이어야 합니다." };
+        for (const m of s.more as Record<string, unknown>[]) {
+          if (!m || typeof m.path !== "string" || !STATIC_IMAGE_PATH.test(m.path)) return { ok: false, error: "image.more 의 path 는 ap-sources/<id>/<file>.(jpg|png|svg) 형식이어야 합니다." };
+          if (typeof m.credit !== "string" || !m.credit.trim()) return { ok: false, error: "image.more 의 각 이미지에는 출처 표기(credit)가 필요합니다." };
+        }
+      }
+    } else if (s.more !== undefined) return { ok: false, error: "image.more 는 static 이미지에서만 쓸 수 있습니다." };
     return { ok: true, spec: s as unknown as ImageFigureSpec };
   }
   if (s.type === "parallel_transversal") return validateParallelTransversal(s);

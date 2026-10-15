@@ -43,14 +43,25 @@ function FigureImage({ spec, className }: { spec: ImageFigureSpec; className?: s
   return <SignedFigureImage spec={spec} className={className} />;
 }
 
-/** 정적 실제 자료 이미지: public/ 에서 그대로 서빙하고 출처 표기를 항상 이미지 아래에 보인다. */
+/** 정적 실제 자료 이미지: public/ 에서 그대로 서빙하고 출처 표기를 항상 이미지 아래에 보인다.
+ *  이미지를 누르면(탭하면) 원본 크기를 새 탭에서 열어 만평 글자·지도 범례를 확대해 읽을 수 있다(2026-10-15, 390px 화면에서 1024px 이미지는 글자가 작다).
+ *  DBQ 처럼 이미지 자료가 여러 장이면 `more` 를 차례로 그리고 각 장에 라벨(Document N)을 붙인다. */
 function StaticFigureImage({ spec, className }: { spec: ImageFigureSpec; className?: string }) {
+  const items = [{ path: spec.path, alt: spec.alt, credit: spec.credit ?? "", label: spec.label }, ...(spec.more ?? [])];
   return (
-    <figure className={"problem-figure max-w-full m-0 " + (className ?? "")} data-testid="problem-figure">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={"/" + spec.path} alt={spec.alt ?? ""} style={{ maxWidth: spec.width ? `${spec.width}px` : "100%" }} className="max-w-full h-auto" />
-      <figcaption className="mt-1 text-[12px] leading-snug text-grey-500" data-testid="figure-credit">{spec.credit}</figcaption>
-    </figure>
+    <div className={"flex flex-col gap-4 " + (className ?? "")} data-testid="problem-figure-set">
+      {items.map((it, i) => (
+        <figure key={it.path + i} className="problem-figure max-w-full m-0" data-testid="problem-figure">
+          {it.label ? <p className="mb-1 text-[12.5px] font-bold text-ink" data-testid="figure-label">{it.label}</p> : null}
+          <a href={"/" + it.path} target="_blank" rel="noopener noreferrer" aria-label={`${it.label ? it.label + ": " : ""}open the image full size in a new tab`} data-testid="figure-open-full" className="block">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={"/" + it.path} alt={it.alt ?? ""} style={{ maxWidth: i === 0 && spec.width ? `${spec.width}px` : "100%" }} className="max-w-full h-auto" />
+          </a>
+          <figcaption className="mt-1 text-[12px] leading-snug text-grey-500" data-testid="figure-credit">{it.credit}</figcaption>
+          <p className="text-[11.5px] text-grey-500" data-testid="figure-enlarge-hint">Tap or click the image to open it full size.</p>
+        </figure>
+      ))}
+    </div>
   );
 }
 

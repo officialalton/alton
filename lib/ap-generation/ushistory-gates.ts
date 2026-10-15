@@ -5,12 +5,15 @@ import { fiveGrams, longestSharedRun, textHazards, similarityViolations, type Co
 import { USH_BANNED_PHRASES, USH_CANON_DATES, USH_DISTRACTOR_LABELS, USH_MC_SKILLS, USH_OPTION_COUNT, USH_PERIODS, USH_REAL_PEOPLE, USH_STIM_SKILLS, USH_TITLED_SURNAMES, USH_TITLE_WORDS } from "./subjects/ushistory";
 import { US_STIMULUS_MARKER } from "../ap-exam/stimulus-display";
 
-export type UshSourceKind = "primary_text" | "secondary_text" | "table" | "chart";
+export type UshSourceKind = "primary_text" | "secondary_text" | "table" | "chart" | "image";
 export type UshSource = {
   id: string; kind: UshSourceKind; title: string; attribution: string; body?: string;
   table?: { columns: string[]; rows: (string | number)[][] };
   figure?: { chart: "bar"; title: string; categories: string[]; series: { name: string; values: number[] }[]; xTitle?: string; yTitle?: string; description: string };
-  provenance: { kind: "alton_composed"; note: string; real_data?: boolean };
+  provenance: { kind: "alton_composed" | "real_historical_source"; note: string; real_data?: boolean };
+  /** 실제 자료(US History Stage B DBQ): 레지스트리 id·해시 고정, 이미지 자료는 정적 이미지 경로·대체 설명·출처 표기. */
+  source_registry_id?: string; source_sha256?: string; real_data?: boolean;
+  image?: { path: string; alt: string; credit: string };
 };
 export type UshOption = { text: string; is_key: boolean; label: string; why: string };
 export type UshDerived = { desc: string; op: "sum" | "diff" | "ratio" | "pct_change" | "max" | "min"; operands: number[]; result: number };
@@ -20,7 +23,7 @@ export type UshSetRaw = { period: number; stim_type: string; theme: string; titl
 const norm = (t: string) => t.replace(/[‘’‛]/g, "'").replace(/[“”„]/g, '"').replace(/—|–/g, "-").replace(/\s+/g, " ").trim().toLowerCase();
 export const sourceBody = (s: UshSource): string => (s.table ? `${s.body ?? ""}\n${s.table.columns.join(" ")} ${s.table.rows.map((r) => r.join(" ")).join(" ")}` : s.figure ? `${s.body ?? ""} ${s.figure.description} ${s.figure.categories.join(" ")}` : s.body ?? "").trim();
 export const tableMarkdown = (t: { columns: string[]; rows: (string | number)[][] }): string => [`| ${t.columns.join(" | ")} |`, `| ${t.columns.map(() => "---").join(" | ")} |`, ...t.rows.map((r) => `| ${r.join(" | ")} |`)].join("\n");
-const KIND_LABEL: Record<UshSourceKind, string> = { primary_text: "primary source", secondary_text: "secondary source", table: "table", chart: "chart" };
+const KIND_LABEL: Record<UshSourceKind, string> = { primary_text: "primary source", secondary_text: "secondary source", table: "table", chart: "chart", image: "image" };
 
 /** 학생 화면용 자료(set_intro). 표·그래프는 stimulus 그림으로 따로 그려지므로 제목·출처 한 줄만 둔다. */
 export function ushStimulusDisplay(sources: UshSource[], opts: { markdownTables?: boolean } = {}): string {
