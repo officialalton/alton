@@ -1,7 +1,7 @@
 // AP English Language 풀 모의고사 배정용 재고 로더(읽기 전용, DB 없음). cs-pool.ts 와 같은 재고 정의(자동 통과·결함 0·완전 중복 제외·렌더 게이트 통과·화면 증거 보유)를 영어에 적용한다.
 // 후보 모델: MC = 지문 묶음 1개 = 후보 1개(문항 3–6: payload.items 의 skill 이 문항별, 읽기/글쓰기는 스킬 첫 숫자로 결정), FRQ = 프롬프트 세트 1개 = 후보 1개(유형 = payload.template: q1 종합 / q2 수사 분석 / q3 논증).
 // 문항군(fam)은 buildStock 의 itemFamilyId(원형 id 가 묶음마다 달라 묶음 = 문항군)에 구조 look-alike 군집을 합친 값이다 — 한 시험에 같은 군을 두 번 넣지 않는다.
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "../../lib/ap-generation/data-fs";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { clusterLookAlikes } from "../../lib/ap-exam/look-alike";
 import { elangCategoryOf, elangSectionOf } from "../../lib/ap-exam/elang-rules";

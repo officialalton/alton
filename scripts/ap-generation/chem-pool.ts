@@ -1,7 +1,7 @@
 // AP Chemistry 풀 모의고사 배정용 재고 로더(읽기 전용, DB 없음). stats-pool.ts 와 같은 재고 정의(자동 통과·결함 0·완전 중복 제외·렌더 게이트 통과·화면 증거 보유)를 화학 과목에 적용한다.
 // 후보 모델: 단독 MC 1개 = 후보 1개(문항 1), 공유 세트 = 후보 1개(문항 2: payload.items 의 topic·skill 이 문항별), FRQ 번들 = 후보 1개(유형 = payload.archetype: chf_long_titration … chf_short_equilibrium 7유형).
 // 문항군(fam)은 buildStock 의 원형+토픽 묶음에 구조 look-alike 군집(lib/ap-exam/look-alike.ts)을 합친 값이다 — 한 세트에 같은 군을 두 번 넣지 않는다.
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "../../lib/ap-generation/data-fs";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { clusterLookAlikes } from "../../lib/ap-exam/look-alike";
 import { STOCK_FILES } from "./keys-file";

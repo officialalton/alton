@@ -1,6 +1,6 @@
 // AP English Literature 풀 모의고사 배정용 재고 로더(읽기 전용, DB 없음). el-pool.ts 와 같은 재고 정의(자동 통과·결함 0·완전 중복 제외·렌더 게이트 통과·화면 증거 보유)를 문학에 적용한다.
 // 후보 모델: MC = 지문 묶음 1개 = 후보 1개(문항 8–13: payload.items 의 skill·topic 이 문항별, 장르 묶음 = payload.lt_passage.group), FRQ = 프롬프트 1개 = 후보 1개(유형 = payload.template: q1 시 / q2 산문 / q3 논증).
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "../../lib/ap-generation/data-fs";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { clusterLookAlikes } from "../../lib/ap-exam/look-alike";
 import { englitCategoryOf, type EnglitGroup } from "../../lib/ap-exam/englit-rules";

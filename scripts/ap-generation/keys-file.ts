@@ -1,5 +1,5 @@
 // 선택 목록 읽기: JSON 배열 / 줄 단위 키 / ab-select 결과 객체({keys:{mcA,mcB,frqA,frqB}}). 객체면 섹션 지정(mcA→ap_mc_a …)도 돌려준다.
-import { readFileSync } from "node:fs";
+import { readFileSync } from "../../lib/ap-generation/data-fs";
 import path from "node:path";
 import { bioItemNames, csaItemNames, elItemNames, ltItemNames, macroItemNames, psychItemNames, suppItemNames, ushItemNames } from "./supp-batches";
 const SEC: Record<string, string> = { mcA: "ap_mc_a", mcB: "ap_mc_b", frqA: "ap_frq_a", frqB: "ap_frq_b" };

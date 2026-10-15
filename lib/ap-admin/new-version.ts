@@ -1,7 +1,7 @@
 // 'AB/AP 세트 새 버전' 화면 로직(2026-10-12): 커밋된 교체 계획 파일 읽기·슬롯 해석(순수), 미리보기(검증 + 구성 전/후 + 기존 응시 수; 읽기 전용).
 // 검증은 두 층이다: (1) lib/mock-exam/new-version.ts 의 TS 조립 규칙(문항군 상한·단원 비중·계산기·중복·풀 모의고사 겹침 0)을 서버 액션 createMockExamNewVersionAction 과 같은 입력으로 돌리고,
 // (2) DB RPC mock_exam_create_new_version 이 거부할 조건(공개·확정 버전, 모의고사 용도, review_env_ready, 같은 과목, 슬롯 형식)을 미리 점검한다. DB 가 최종 방어선이다.
-import { readdirSync, readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "../ap-generation/data-fs";
 import path from "node:path";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { fullPracticeUnitBounds } from "../ap-exam/full-set-rules";

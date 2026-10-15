@@ -2,7 +2,7 @@
 // 후보 모델: 단독 MC 1개 = 후보 1개(문항 1), FRQ 번들 = 후보 1개(유형 = payload.archetype: maf_long_* 3종 + maf_short_* 7종).
 // 문항군(fam)은 buildStock 의 원형+토픽 묶음에 구조 look-alike 군집(lib/ap-exam/look-alike.ts)을 합친 값이다 — 한 시험에 같은 군을 두 번 넣지 않는다.
 import { createHash } from "node:crypto";
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "../../lib/ap-generation/data-fs";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { clusterLookAlikes } from "../../lib/ap-exam/look-alike";
 import { STOCK_FILES } from "./keys-file";
