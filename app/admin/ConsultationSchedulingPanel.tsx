@@ -1,4 +1,5 @@
 "use client";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 
 // M1 — 관리자 상담 운영 화면: 승인 대기 신청 수락/거절/시간변경, 오늘·주간·월간
 // 예정 상담 캘린더, 상담 결과 기록. (공용 상담 가능시간 관리는 2026-09-29 오너 규칙으로 제거 —
@@ -33,8 +34,6 @@ import {
 import MonthCalendar from "@/app/components/MonthCalendar";
 import PillSubTabs from "@/app/components/PillSubTabs";
 import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
-import { getMyTimezoneSettings } from "@/lib/timezone-actions";
-import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 import { fmtIntl } from "@/lib/format-datetime";
 
 // 요구사항 5(2026-09-03 통합 보완) — Calendar 초대 실패는 다른 종류의 문제(단순 재시도
@@ -129,10 +128,7 @@ function rangeFor(view: CalendarView): { from: Date; to: Date } {
 
 export default function ConsultationSchedulingPanel() {
   // R6 — 관리자 본인 시간대 설정(계정 드롭다운 "시간대 설정")을 따른다.
-  const [timezone, setTimezone] = useState<string>(DEFAULT_TIMEZONE);
-  useEffect(() => {
-    getMyTimezoneSettings().then((s) => setTimezone(s.resolvedTimezone));
-  }, []);
+  const timezone = useViewerTimezone();
   const [pending, setPending] = useState<ConsultationListItem[]>([]);
   const [scheduled, setScheduled] = useState<ConsultationListItem[]>([]);
   const [cancelledSyncIssues, setCancelledSyncIssues] = useState<ConsultationListItem[]>([]);

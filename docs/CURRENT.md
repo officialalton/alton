@@ -768,3 +768,12 @@
 - 마이그레이션 `20262100000400_ap_item_conversion.sql`, `20262100000401_ap_exam_sets.sql`(로컬 DB 적용·재적용 멱등 확인, 원격 미적용 — 총괄이 비프로덕션에 순서대로 적용).
 - 그림: `lib/problem-figures/templates/ap-*.ts`(ap_graph/ap_table/ap_table_set/ap_diagram) + `lib/ap-figures/`(정규화·게이트). 보고서·스냅샷 `data/ap/render-check/`.
 - 변환·세트: `lib/ap-exam/`, `scripts/ap-generation/{publish-to-bank,assemble-ap-set,mark-verified,render-check,local-demo-seed}.ts`. 상세 `docs/ap/publication-flow.md` §5.
+
+## AP 모의고사 콘텐츠 현황 (2026-10-14, 비프로덕션 `worpsqwqgnspddnrtnvq`, 전부 무료 공개)
+- 공개: SAT 14세트(감사 r1~r5 반영), AP Calculus AB/BC, Statistics, Physics 1, Chemistry, Microeconomics, Macroeconomics, CS A, Biology(1=v2, 2=v3), English Language(1·2=v2, 독립 검수 수정본), Psychology(1·2, CED 2025: MC 75·FRQ AAQ+EBQ).
+- 진행: English Literature(LT), US History(US) 생성 에이전트. 세계사 등 남은 과목은 예산 상향 후.
+- 예산: 누적 $172.5 / 상한 $220 / 중단선 $215(`scripts/ap-generation/ledger-total.ts`). 원장 병합은 항목 합집합(at,note,usd).
+- 학생 목록은 AP 안에서 과목별 서브탭(`StudentMockExamTab`), 시험 중 나가기 버튼·섹션 시작 화면 포함.
+- English 서술형 AI 채점: `lib/essay-grading/*`(루브릭 englang-v2, 평균 오차 0.33점, 참고용 ±1점), Vercel Preview에 키·플래그 설정 완료. 학생에게 켜기 전 실제 제출 UAT 필요.
+- 새 AP 과목 투입 절차: 커리큘럼 시드 SQL(`scripts/ap-curriculum/seed-sql.ts` → `supabase db query --linked -f`) → 관리자 '배치 전체 적재'(필요 시 건너뜀 허용) → 초안 저장(배정 보고서) → 검토 탭에서 공개. 공개 세트 교체는 '새 버전'(교체안 `data/ap/stock/*swap-plan*.json`).
+- 알려진 한계: 사람 검수 없음(모델 검증), Macro·Psych 난이도 높은 문항 적음, English 샘플 점수 일부 사람 채점 필요, Vercel Function Storage 한도 임박(`docs/vercel-function-size.md` 작업 중).

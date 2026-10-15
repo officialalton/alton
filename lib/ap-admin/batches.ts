@@ -122,6 +122,11 @@ export const STOCK_BATCHES: StockBatch[] = [
   // 2026-10-14 EL2 보충(s2a 8묶음 + s2b 4묶음). 증거 파일 evidence-el-supp.json. EL1·EL2 정확 배정: data/ap/stock/exact-assign-el-el1-el2.json
   { id: "el-s2a", title: "AP English Language s2a MC (EL2 보충: 읽기 6 + 글쓰기 2묶음) (통과 27)", itemsFile: "el-s2a-items.json", loadLabel: "el-s2a-2026-10-14", supplement: true, passKeysFile: "el-s2a-pass-keys.json", evidenceFile: "evidence-el-supp.json" },
   { id: "el-s2b", title: "AP English Language s2b MC (EL2 보충 top-up: 읽기 2 + 글쓰기 2묶음) (통과 17)", itemsFile: "el-s2b-items.json", loadLabel: "el-s2b-2026-10-14", supplement: true, passKeysFile: "el-s2b-pass-keys.json", evidenceFile: "evidence-el-supp.json" },
+  // 2026-10-15 AP English Literature(docs/ap/englit-groundwork.md): 파일럿 지문 묶음 1(p0) + MC 지문 묶음 11(p1a 시 5·단편 4·장편 2)·FRQ 6(p1b)·장편 1(p1c). 한 증거 파일(evidence-lt.json)을 공유한다. LT1·LT2 정확 배정: data/ap/stock/exact-assign-englit-lt1-lt2.json
+  { id: "lt-p0", title: "AP English Literature P0 MC (파일럿 단편 묶음 1)", itemsFile: "lt-p0-items.json", loadLabel: "lt-p0-2026-10-15", supplement: true, passKeysFile: "lt-p0-pass-keys.json", evidenceFile: "evidence-lt.json" },
+  { id: "lt-p1a", title: "AP English Literature P1-a MC (지문 묶음 11: 시 5 + 단편 4 + 장편·희곡 2)", itemsFile: "lt-p1a-items.json", loadLabel: "lt-p1a-2026-10-15", supplement: true, passKeysFile: "lt-p1a-pass-keys.json", evidenceFile: "evidence-lt.json" },
+  { id: "lt-p1b", title: "AP English Literature P1-b FRQ (시 분석·산문 분석·문학 논증 각 2)", itemsFile: "lt-p1b-items.json", loadLabel: "lt-p1b-2026-10-15", supplement: true, passKeysFile: "lt-p1b-pass-keys.json", evidenceFile: "evidence-lt.json" },
+  { id: "lt-p1c", title: "AP English Literature P1-c MC (장편 묶음 1)", itemsFile: "lt-p1c-items.json", loadLabel: "lt-p1c-2026-10-15", supplement: true, passKeysFile: "lt-p1c-pass-keys.json", evidenceFile: "evidence-lt.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 

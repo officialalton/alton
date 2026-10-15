@@ -140,6 +140,7 @@ export function itemViolations(set: UshSetRaw, it: UshItemRaw): string[] {
   if (set.sources.length > 1 && it.skill === "3.C" && !/(both|first|second|two|each|source a|source b|compare)/i.test(it.stem)) v.push("paired_item_not_comparative");
   const all = [it.stem, ...it.options.flatMap((o) => [o.text, o.why])].join("\n");
   v.push(...dateConflicts(all), ...derivedViolations(it), ...tableNumberViolations(set, it));
+  if (!set.sources.some((x) => x.table || x.figure) && /\b(shown (?:in|below|above)|as shown|(?:in|from) the (?:figure|graph|chart|table|image|map|illustration))\b/i.test(it.stem)) v.push("stem_refers_to_figure_that_does_not_exist"); // 그림이 없는 텍스트 세트의 "shown in the …" 줄기는 렌더 게이트(figure_referenced_but_missing)에서 탈락한다
   if ((it.facts ?? []).length < 1) v.push("facts_missing");
   return [...new Set(v)];
 }

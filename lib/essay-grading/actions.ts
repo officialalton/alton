@@ -41,7 +41,7 @@ export async function enqueueEssayGradingAction(attemptId: string): Promise<Resu
       }
       for (const p of parts) {
         const ctx = parseEssayContext(payload, p.label) ?? { taskPrompt: p.prompt, sources: [], anchors: [] };
-        jobs.push({ attemptId, setItemId: it.setItemId, partLabel: p.label, studentId: user.id, essay: answers[p.label] ?? "", ...ctx });
+        jobs.push({ attemptId, setItemId: it.setItemId, partLabel: p.label, studentId: user.id, essay: answers[p.label] ?? "", ...ctx, ...(attempt.apSubject === "ap_english_literature" ? { rubricId: "englit" } : {}) });
       }
     }
     // 보정(앵커) 샘플이 없는 문항은 채점하지 않는다 — 점수 신뢰도를 보증할 수 없다.

@@ -33,5 +33,6 @@ describe("ushistory gates", () => {
     expect(realPeopleIn("A speech by President Lincoln, 1863")).toEqual(["lincoln"]);
     expect(realPeopleIn("Letter of Thomas Jefferson")).toEqual(["thomas jefferson"]);
   });
+  it("rejects a stem that refers to a figure in a text-only set", () => { expect(itemViolations(set(), item({ stem: "Which of the following is shown in the excerpt above about the merchants?" }))).toContain("stem_refers_to_figure_that_does_not_exist"); });
   it("rejects item hazards", () => { expect(itemViolations(set(), item({ stem: "Which cost $5 more than the other option in the excerpt?" }))).toContain("item_dollar_sign"); expect(itemViolations(set(), item({ skill: "6.A" }))).toContain("skill_6.A_not_assessed_in_mc"); });
 });

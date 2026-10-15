@@ -1,4 +1,5 @@
 "use client";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 
 // R6 11/N — 관리자 통합 일정. `official` 관리자 계정에 선생님 개인 Google Calendar를
 // 직접 공유하지 않고, ALTON DB에 이미 있는 전체 선생님 확정 예약을 여기서 중앙 조회한다.
@@ -7,12 +8,10 @@
 
 import AdditionalAttendeesPanel, { ADMIN_ATTENDEE_COPY } from "@/app/components/AdditionalAttendeesPanel";
 import { addAttendeeAction, listAttendeesAction, recordAttendeeStatusAction } from "./attendee-actions";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import MonthCalendar, { type DayBadge } from "@/app/components/MonthCalendar";
 import { dateKeyInTimezone, buildWeekGrid, todayKeyInTimezone } from "@/lib/calendar-date-utils";
 import { listAllTeacherLessons, type UnifiedScheduleLessonRow } from "./booking-actions";
-import { getMyTimezoneSettings } from "@/lib/timezone-actions";
-import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 import { useTabCachedData } from "./use-tab-cached-data";
 
 // 2026-09-10(P1 재진입 성능 배치) — "통합 일정"은 최대 TTL 30초로 분류된다.
@@ -57,11 +56,8 @@ export default function UnifiedScheduleTab({
 }) {
   // R6 — 관리자 본인의 시간대 설정(계정 드롭다운 "시간대 설정")을 따른다.
   // resolveUserTimezone() 우선순위상 관리자는 household가 없어 개인 설정 →
-  // 전역 기본값(America/Los_Angeles) 순으로 결정된다.
-  const [timezone, setTimezone] = useState<string>(DEFAULT_TIMEZONE);
-  useEffect(() => {
-    getMyTimezoneSettings().then((s) => setTimezone(s.resolvedTimezone));
-  }, []);
+  // ViewerTimezoneProvider(profiles.timezone, 없으면 Asia/Seoul)가 내려준 값을 그대로 쓴다.
+  const timezone = useViewerTimezone();
   const [view, setView] = useState<"today" | "week" | "month">("today");
   const [selectedDateKey, setSelectedDateKey] = useState<string | null>(null);
   const [monthAnchor, setMonthAnchor] = useState(initialMonthAnchor);

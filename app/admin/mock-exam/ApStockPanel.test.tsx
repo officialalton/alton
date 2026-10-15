@@ -117,10 +117,11 @@ describe("ApStockPanel", () => {
     fireEvent.click(pv);
     await waitFor(() => expect(screen.getByTestId("ap-loadall-run-graph-s1")).toBeTruthy());
     expect(runBtn.disabled).toBe(true);
-    fireEvent.click(panel.querySelectorAll("input[type=checkbox]")[1]);
+    const confirmBox = [...panel.querySelectorAll("label")].find((l) => /미리보기 결과를 확인했습니다/.test(l.textContent ?? ""))!.querySelector("input[type=checkbox]")!;
+    fireEvent.click(confirmBox);
     expect(runBtn.disabled).toBe(false);
     fireEvent.click(runBtn);
     await waitFor(() => expect(screen.getByTestId("ap-loadall-summary").textContent).toContain("완료"));
-    expect(loadBatch).toHaveBeenLastCalledWith({ batchId: "graph-s1", execute: true, previewHash: "ph1" });
+    expect(loadBatch).toHaveBeenLastCalledWith({ batchId: "graph-s1", execute: true, previewHash: "ph1", allowSkips: false });
   });
 });

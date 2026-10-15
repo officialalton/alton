@@ -484,6 +484,7 @@ function readinessSummary(r: MstReadinessReport): string {
 }
 
 function SetListTable({ sets, emptyLabel }: { sets: MockExamSetSummary[]; emptyLabel: string }) {
+  const tz = useViewerTimezone();
   const [filter, setFilter] = useState<string>("all");
   const [sort, setSort] = useState<SetSort>("latest");
   const programs = Array.from(new Set(sets.map(programKey))).sort((a, b) => (a === "sat" ? -1 : b === "sat" ? 1 : programName(a).localeCompare(programName(b))));
@@ -558,7 +559,7 @@ function SetListTable({ sets, emptyLabel }: { sets: MockExamSetSummary[]; emptyL
                       <span className="text-xs text-grey-500" title={`계열 ${s.setGroupId.slice(0, 8)}`}>
                         v{s.versionNo}{latest.has(s.id) ? " · 최신" : " · 이전"}
                       </span>
-                      <span className="ml-1 text-[11px] text-grey-400">{fmtDate(s.createdAt)}</span>
+                      <span className="ml-1 text-[11px] text-grey-400">{fmtDate(s.createdAt, undefined, tz)}</span>
                       {isAp && (
                         <span className="ml-2 rounded bg-grey-100 px-1.5 py-0.5 text-[11px] font-bold text-grey-600" data-testid="ap-set-label">
                           {programName(programKey(s))} · {apSetLabelText(s)}

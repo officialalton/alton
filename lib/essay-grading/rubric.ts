@@ -24,7 +24,9 @@ export type RubricDef = {
 export type UshTaskType = "saq" | "dbq" | "leq";
 export const USH_RUBRIC_ID = "ushistory-v1";
 export const ENGLANG_RUBRIC_ID = RUBRIC_VERSION;
-export const RUBRIC_IDS = [ENGLANG_RUBRIC_ID, USH_RUBRIC_ID] as const;
+export type RubricId = "englang" | "englit";
+export const RUBRIC_VERSION_ENGLIT = "englit-v1";
+export const RUBRIC_IDS = [ENGLANG_RUBRIC_ID, RUBRIC_VERSION_ENGLIT, USH_RUBRIC_ID] as const;
 const sum = (rows: readonly { max: number }[]) => rows.reduce((n, r) => n + r.max, 0);
 
 const ENGLISH_DEF: RubricDef = {
@@ -67,9 +69,26 @@ const USH_DEFS: Record<UshTaskType, RubricDef> = {
     ], 50),
 };
 
+export const RUBRIC_ROWS_ENGLIT = [
+  { key: "thesis", label: "Thesis", max: 1, guide: "1 if the essay states a defensible interpretation that answers the prompt (of the poem, the passage, or the chosen work as a whole); 0 if it only restates the prompt, summarizes or describes the text, makes a general comment that does not respond to the prompt, or offers no claim that needs defending." },
+  { key: "evidence", label: "Evidence & Commentary", max: 4, guide: "0 = restates the thesis or prompt, repeats given information, or is irrelevant; 1 = evidence is mostly general and the essay summarizes or paraphrases without explaining how the evidence supports an argument; 2 = some specific, relevant evidence mixed with generalities, with explanation of how some evidence relates to the argument but no established (or a faulty) line of reasoning; 3 = specific evidence for the claims in a line of reasoning, with commentary explaining how some evidence supports it, including how at least one literary element or technique contributes to meaning; 4 = specific evidence for every claim, commentary that consistently explains how the evidence supports the line of reasoning, and explanation of how multiple literary elements or techniques contribute to meaning. Naming a device or quoting a line without explaining its effect stays at 1-2. For the literary argument question the evidence must come accurately from the chosen work and the commentary must connect the named concept to an interpretation of the whole work, not retell the plot. Errors that interfere with communication prevent a 4." },
+  { key: "sophistication", label: "Sophistication", max: 1, guide: "1 only if the essay shows sophistication of thought or a complex literary argument sustained through the essay: it explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style. A single passing sentence, sweeping generalizations about humanity, merely hinting at other readings, or ornate language that does not advance the argument do not earn it; otherwise 0." },
+] as const;
+const LIT_DEF: RubricDef = {
+  id: RUBRIC_VERSION_ENGLIT, subject: "AP English Literature and Composition",
+  head: [ENGLISH_DEF.head[0].replace("AP English Language and Composition", "AP English Literature and Composition"), ENGLISH_DEF.head[1]],
+  extraRules: ["This is a literary analysis task (a poem, a prose passage, or a work chosen by the student). Judge the interpretation and how well the commentary explains the effect of literary choices on meaning. Do not reward a list of devices or a plot summary. For the literary argument question, credit only evidence that is accurate about the work the student chose; the text, if shown, is inside <source> tags and line numbers appear every fifth line."],
+  rows: RUBRIC_ROWS_ENGLIT, total: MAX_TOTAL, minWords: 50, maxWords: 1500, maxChars: 12_000, maxSourceChars: 14_000, scoreLabel: ESSAY_SCORE_LABEL, perAttemptEnv: "AI_ESSAY_PER_ATTEMPT_CAP", perAttemptDefault: 3, maxInputTokens: null,
+};
+export const RUBRIC_SUBJECT_LABEL: Record<RubricId, string> = { englang: "AP English Language and Composition", englit: "AP English Literature and Composition" };
+export const rubricIdForSubject = (subject: string | null | undefined): RubricId | null => (subject === "ap_english_language" ? "englang" : subject === "ap_english_literature" ? "englit" : null);
+export const rubricVersionFor = (id: RubricId | undefined): string => (id === "englit" ? RUBRIC_VERSION_ENGLIT : RUBRIC_VERSION);
+export const rubricRowsFor = (id: RubricId | undefined) => (id === "englit" ? RUBRIC_ROWS_ENGLIT : RUBRIC_ROWS);
+
 /** 루브릭 조회. id 생략 = 영어. ushistory-v1 은 과제 유형이 필요하다. 알 수 없는 조합은 null(호출자가 채점을 건너뛴다). */
 export function resolveRubric(id?: string | null, taskType?: string | null): RubricDef | null {
-  if (!id || id === ENGLANG_RUBRIC_ID) return ENGLISH_DEF;
+  if (!id || id === ENGLANG_RUBRIC_ID || id === "englang") return ENGLISH_DEF;
+  if (id === RUBRIC_VERSION_ENGLIT || id === "englit") return LIT_DEF;
   if (id === USH_RUBRIC_ID && (taskType === "saq" || taskType === "dbq" || taskType === "leq")) return USH_DEFS[taskType];
   return null;
 }

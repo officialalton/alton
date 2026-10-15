@@ -137,6 +137,7 @@ export const AP_SUBJECTS: ApSubjectMeta[] = [
   { code: "ap_biology", label: "AP Biology", supported: false, formats: [] },
   { code: "ap_english_language", label: "AP English Language and Composition", supported: false, formats: [] },
   { code: "ap_english_literature", label: "AP English Literature and Composition", supported: false, formats: [] },
+  { code: "ap_english_literature", label: "AP English Literature and Composition", supported: false, formats: [] },
   { code: "ap_us_history", label: "AP United States History", supported: false, formats: [] },
   { code: "ap_world_history", label: "AP World History: Modern", supported: false, formats: [] },
   { code: "ap_microeconomics", label: "AP Microeconomics", supported: false, formats: [] },

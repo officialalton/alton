@@ -1,0 +1,1592 @@
+[
+ {
+  "id": "fa1",
+  "plan": {
+   "id": "fa1",
+   "type": "poetry_analysis",
+   "seedText": "a speaker standing in a laundromat at night remembers a mother's hands, ambivalent about leaving",
+   "era": "contemporary",
+   "seed": 4101
+  },
+  "payload": {
+   "schema_version": "lit-frq-1",
+   "task_type": "poetry_analysis",
+   "template": "q1",
+   "title": "Poetry Analysis: Spin Cycle, Ellery Street",
+   "prompt": {
+    "lead": "In the poem \"Spin Cycle, Ellery Street\" (an original poem by Marisol Teague), the speaker waits out a wash cycle the night before leaving home and recalls the mother's hands at work.",
+    "task": "Read the poem closely. Then write an essay in which you analyze how Marisol Teague uses poetic elements and techniques to convey the speaker's complex attitude toward leaving, in which gratitude for the mother's labor is inseparable from a wish to escape the life that labor kept going.",
+    "requirements": [
+     "Respond to the prompt with a thesis that offers a defensible interpretation of the poem.",
+     "Use specific evidence from the poem, and explain how that evidence supports your line of reasoning.",
+     "Explain how multiple poetic elements and techniques contribute to the meaning you describe.",
+     "Write clearly, with appropriate grammar and punctuation."
+    ]
+   },
+   "passage": {
+    "form": "poem",
+    "title": "Spin Cycle, Ellery Street",
+    "attribution": "by Marisol Teague",
+    "stanzas": [
+     [
+      "Eleven-forty. The change machine",
+      "eats my second five and gives back nothing,",
+      "and I let it, the way she let the landlord",
+      "keep the deposit every March."
+     ],
+     [
+      "Number nine is the only dryer that gets hot.",
+      "I learned that at seven, holding her coat",
+      "while she fed it quarters from a film can,",
+      "counting under her breath in two languages."
+     ],
+     [
+      "Her hands: chapped at the knuckle, a burn",
+      "shaped like a comma on the left thumb",
+      "from the press at Dunmore Cleaners,",
+      "a ring she turned inward so it wouldn't snag."
+     ],
+     [
+      "She folded a fitted sheet in the air",
+      "like a magician closing a box with a dove in it.",
+      "Nothing was ever lost. Nothing",
+      "was ever let go of, either."
+     ],
+     [
+      "Tomorrow the bus leaves at six.",
+      "I have packed the shirts she ironed",
+      "flat as envelopes, sealed, addressed",
+      "to a city she has never seen."
+     ],
+     [
+      "The drum turns. My clothes rise",
+      "and fall and rise, a slow tantrum",
+      "behind the round glass,",
+      "going nowhere at great speed."
+     ],
+     [
+      "I want to tell her: your hands",
+      "built me a door. I want to tell her:",
+      "I am walking out of it. Both are thank you.",
+      "Only one of them sounds like it."
+     ],
+     [
+      "The buzzer. Everything warm.",
+      "I fold the way she taught me, corners to corners,",
+      "and leave one sock in the lint trap,",
+      "so something of mine stays here, turning."
+     ]
+    ],
+    "line_count": 32,
+    "provenance": {
+     "kind": "original",
+     "author_alias": "Marisol Teague",
+     "year_alias": 2019
+    }
+   },
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+       "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+      },
+      "task_specific": "The thesis must make a defensible claim about the speaker's divided attitude, for example that gratitude for the mother's labor and the wish to escape are bound together. Saying the speaker 'misses her mother' or 'remembers the past' does not count, and neither does a list of devices. A thesis that names only one side can earn the point only if it is arguable and tied to how the poem presents leaving."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+       "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+       "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+       "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+       "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+      },
+      "task_specific": "Strong responses use specific quotations such as the 'Nothing / was ever let go of' break, the 'door' metaphor, the 'slow tantrum' dryer, the envelope shirts, and the sock in the lint trap. The commentary must explain how each choice shows care that is also confinement, or departure that is also tribute. A score of 4 needs consistent links between evidence and the complex attitude across the poem. A score of 2 means the essay mostly summarizes or names devices with thin explanation."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+       "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+      },
+      "task_specific": "Sophistication may show in tracing the speaker's inheritance of the mother's gestures (counting, folding) as a kind of continuity that complicates leaving. It may also show in reading the closing image as an unresolved ending, or in analyzing how line breaks enact holding on and letting go. Calling the poem 'complex' or using elevated vocabulary does not earn the point."
+     }
+    ],
+    "scoring_notes": [
+     "Award the evidence points based on how well the commentary explains the evidence, not on how many devices the essay names.",
+     "Readings that see the mother as more critical or more confining are acceptable if the text supports them."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "The speaker sees leaving as the fulfillment of the mother's labor, yet fears it erases her, so the poem holds thanks and guilt together.",
+     "The poem shows the mother's care as both protective and confining, and the speaker's departure as inheriting her gestures while rejecting her circumstances.",
+     "Through laundromat imagery of repetitive motion, the speaker dreads a stalled life and still cannot leave cleanly, as the final sock shows.",
+     "The speaker's restraint and small rituals reveal that love is expressed in labor rather than words, which makes saying goodbye nearly impossible."
+    ],
+    "devices": [
+     {
+      "device": "paradox",
+      "quote": "Nothing was ever lost. Nothing / was ever let go of, either.",
+      "effect": "the line break turns praise into a quiet critique of holding on"
+     },
+     {
+      "device": "metaphor",
+      "quote": "your hands / built me a door",
+      "effect": "the mother's work makes the exit possible, so leaving becomes tribute"
+     },
+     {
+      "device": "personification",
+      "quote": "a slow tantrum",
+      "effect": "puts the speaker's frustration onto the dryer, showing fear of motion without progress"
+     },
+     {
+      "device": "imagery",
+      "quote": "a ring she turned inward so it wouldn't snag",
+      "effect": "self-denial for the sake of work; private feeling turned inward"
+     },
+     {
+      "device": "symbol",
+      "quote": "so something of mine stays here, turning",
+      "effect": "an ambivalent ending in which the speaker leaves a piece of herself in the cycle"
+     },
+     {
+      "device": "simile",
+      "quote": "flat as envelopes",
+      "effect": "care is packed and sent away, which links love to distance"
+     }
+    ],
+    "common_pitfalls": [
+     "Reading the poem as simple nostalgia or pure gratitude and ignoring the wish to escape",
+     "Listing devices without explaining how they show the divided attitude",
+     "Treating the sock as random detail rather than a deliberate gesture",
+     "Summarizing the stanzas in order with no argument"
+    ],
+    "lines_of_reasoning": [
+     "Move from the mother's work in the past to the speaker's own folding in the present",
+     "Follow motion imagery: spinning, turning, the bus, the door",
+     "Read stanza seven as the volta where the two impulses are named"
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "central_idea": "Departure is both tribute to and betrayal of the mother's labor; the speaker inherits her gestures even while leaving her world.",
+    "complexity": "Gratitude and escape coexist; the speaker cannot say thanks without it sounding like leaving.",
+    "concept": "laundromat as site of repetitive maternal labor and of stalled motion",
+    "devices": [
+     {
+      "device": "imagery",
+      "quote": "a burn / shaped like a comma on the left thumb",
+      "function": "makes labor bodily; comma suggests a pause, an unfinished sentence"
+     },
+     {
+      "device": "simile",
+      "quote": "like a magician closing a box with a dove in it",
+      "function": "turns chore into artistry and containment"
+     },
+     {
+      "device": "paradox",
+      "quote": "Nothing was ever lost. Nothing / was ever let go of, either.",
+      "function": "preservation as both care and confinement; enjambment delays the turn"
+     },
+     {
+      "device": "metaphor",
+      "quote": "flat as envelopes, sealed, addressed / to a city she has never seen",
+      "function": "mother's work carries the speaker away from her"
+     },
+     {
+      "device": "personification",
+      "quote": "a slow tantrum / behind the round glass, / going nowhere at great speed",
+      "function": "speaker's restlessness and fear of stalled life"
+     },
+     {
+      "device": "anaphora",
+      "quote": "I want to tell her: your hands / built me a door. I want to tell her:",
+      "function": "balanced, split statements of gratitude and departure"
+     },
+     {
+      "device": "symbol",
+      "quote": "leave one sock in the lint trap, / so something of mine stays here, turning",
+      "function": "deliberate remainder; partial staying amid leaving"
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional writers, titles and works. Q3 lists real published works for student choice."
+   }
+  }
+ },
+ {
+  "id": "fa2",
+  "plan": {
+   "id": "fa2",
+   "type": "prose_analysis",
+   "seedText": "a young tutor visits a wealthy household where the pupil is quietly cleverer than the family admits",
+   "era": "19th-century manner",
+   "seed": 4102
+  },
+  "payload": {
+   "schema_version": "lit-frq-1",
+   "task_type": "prose_analysis",
+   "template": "q2",
+   "title": "The Pupil at Harrowgate Lodge",
+   "prompt": {
+    "lead": "The following passage is an original work of fiction by Edmund Calloway Wrenne. In this passage, a young tutor discovers that his pupil hides her intelligence from her family and chooses to keep her secret.",
+    "task": "Read the passage closely. Then write an essay in which you analyze how Edmund Calloway Wrenne uses literary elements and techniques to convey the narrator's complex attitude toward the girl, her family, and his own role in her concealment.",
+    "requirements": [
+     "Respond to the prompt with a thesis that offers a defensible interpretation of the passage.",
+     "Use specific evidence from the passage, and explain how that evidence supports your line of reasoning.",
+     "Explain how multiple literary elements and techniques contribute to the meaning you describe.",
+     "Write clearly, with appropriate grammar and punctuation."
+    ]
+   },
+   "passage": {
+    "form": "prose",
+    "title": "The Second Lesson",
+    "attribution": "by Edmund Calloway Wrenne",
+    "headnote": "This passage is from a novel published in 1861. Mr. Ashby, a newly engaged tutor of modest means, has come to the country house of the Pellingham family to instruct their eleven-year-old daughter, Clemency.",
+    "stanzas": [
+     [
+      "    Mrs. Pellingham received me in the morning-room,",
+      "which was warmed by two fires and furnished as if the",
+      "family expected at any hour to be inventoried. She",
+      "explained, with the patience of a woman describing a",
+      "weak chest, that her daughter was not quick. 'Clemency",
+      "is a dear, obliging creature,' she said, 'but she does",
+      "not take to figures, and French slides off her like rain",
+      "off a cabbage leaf. We ask only that she be made",
+      "presentable. Her sister was presentable at fourteen.'"
+     ],
+     [
+      "    I bowed, and said that presentability was a worthy",
+      "object, and was conscious of having said something I",
+      "should be ashamed of before supper."
+     ],
+     [
+      "    The schoolroom lay at the end of a long passage hung",
+      "with portraits of Pellinghams in various attitudes of",
+      "having been painted. It was a cold room. Someone had",
+      "decided, at some remote date, that learning wanted no",
+      "fire, and the decision had hardened into a custom, as",
+      "decisions in that house did. The globe in the corner had",
+      "a dent in the Pacific where it had once been knocked",
+      "against the wainscot, and no one had thought the ocean",
+      "worth repairing."
+     ],
+     [
+      "    Clemency sat at the table with her hands folded upon",
+      "a slate. She was a thin child with a great deal of fair",
+      "hair arranged by someone else, and she looked at me with",
+      "the courteous blankness of a person waiting for a coach",
+      "that is late. I set her a sum in long division. She",
+      "considered it for a time, wrote a figure that was wrong,",
+      "and handed back the slate."
+     ],
+     [
+      "    'You see,' said her mother from the doorway, not",
+      "unkindly, and withdrew."
+     ],
+     [
+      "    I set her another. She wrote another wrong figure.",
+      "But I had been watching her pencil, and the pencil had",
+      "gone first to the correct answer and hovered there, as a",
+      "bird hovers over a field it means to cross, before it",
+      "turned aside and set down something a little stupider. I",
+      "said nothing. I gave her a third sum, harder than",
+      "either, and this time I turned my back and studied the",
+      "dented Pacific. When I looked again she had written the",
+      "answer, the true one, small in the corner, and was in",
+      "the very act of rubbing it out with the heel of her",
+      "hand."
+     ],
+     [
+      "    'That was right,' I said."
+     ],
+     [
+      "    She did not start. She only looked at the grey smear",
+      "on her palm, and then at me, and I understood that I had",
+      "been weighed, and that the scales were older than I was.",
+      "'Mamma says I have no head for it,' she said. 'Mamma is",
+      "generally right about heads. She has had a great deal of",
+      "practice.' There was no insolence in it. She said it the",
+      "way one reports the weather to a stranger who has walked",
+      "in from the rain and cannot be expected to know."
+     ],
+     [
+      "    I ought to have gone straight to Mrs. Pellingham. I",
+      "had been engaged, after all, to discover what the child",
+      "could do. Yet I thought of the morning-room and its two",
+      "fires, and of the sister who had been presentable at",
+      "fourteen and was now, I had been told at breakfast,",
+      "married to a gentleman in Shropshire who kept hounds. I",
+      "thought of what becomes of a clever girl in a house",
+      "where cleverness is a draught to be stopped with a",
+      "cushion. And I thought, I confess it, of my forty pounds",
+      "a year, and of how a tutor who reports a prodigy is soon",
+      "asked why his prodigy has not yet been made presentable."
+     ],
+     [
+      "    So we went on, she and I, through the long cold",
+      "winter, with two slates: one for the wrong answers,",
+      "which I showed her mother every Friday, and one for the",
+      "right ones, which Clemency kept beneath the cushion of",
+      "the window-seat. I flattered myself that I was her ally.",
+      "It was not until the spring, when the window-seat was",
+      "found empty and the slate gone with it, that I began to",
+      "suspect I had only been her accomplice, and that she had",
+      "been teaching me the whole while how to look away."
+     ]
+    ],
+    "line_count": 70,
+    "provenance": {
+     "kind": "original",
+     "author_alias": "Edmund Calloway Wrenne",
+     "year_alias": 1861
+    }
+   },
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+       "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+      },
+      "task_specific": "A defensible thesis must make a claim about the narrator's attitude that goes beyond a single feeling, for example admiration mixed with guilt or sympathy undercut by self-interest. Theses that only say the girl is smart and hides it, or that just restate the prompt, do not earn the point. The thesis can be anywhere in the response and may be more than one sentence."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+       "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+       "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+       "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+       "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+      },
+      "task_specific": "Strong responses use specific evidence such as the hovering-bird simile, the dented globe, the draught-and-cushion metaphor, Clemency's 'great deal of practice' line, the two slates, and the 'accomplice' ending. Their commentary explains how each choice shapes the narrator's mixed attitude toward Clemency, the family, and himself. A score of 4 needs a consistent line of reasoning that tracks how his view changes. A score of 2 fits responses that mostly summarize or list techniques with thin explanation, and a score of 1 fits responses that only restate the text."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+       "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+      },
+      "task_specific": "Sophistication can come from explaining the teacher-pupil reversal, the retrospective narrator judging his younger self, the cushion motif tying the family's suppression to Clemency's hiding place, or the tension between real sympathy and economic self-protection. Offhand phrases or a single complex sentence do not earn the point. The complexity has to run through the whole argument."
+     }
+    ],
+    "scoring_notes": [
+     "Do not reward naming devices without explaining what they do.",
+     "Responses must deal with the narrator's attitude, not only Clemency's character.",
+     "Interpretations that read Clemency as manipulative or as self-protective are both acceptable if supported by the text."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "The narrator admires Clemency's concealed intelligence yet comes to see that his protection was compromised by self-interest, so his attitude mixes respect, guilt, and wry self-mockery.",
+     "Through satire of the Pellingham household the narrator presents Clemency's concealment as a rational survival strategy, while the ending exposes his own complicity in the same system.",
+     "The passage reverses the roles of teacher and pupil: the tutor who sets out to assess the child is himself assessed and instructed, which humbles his initial condescension.",
+     "The narrator's retrospective voice treats his younger self ironically, showing that his sympathy for Clemency was genuine but also flattering to himself."
+    ],
+    "devices": [
+     {
+      "device": "simile",
+      "quote": "as a bird hovers over a field it means to cross",
+      "effect": "Reveals the deliberateness of her errors and dignifies her concealment."
+     },
+     {
+      "device": "symbol",
+      "quote": "no one had thought the ocean worth repairing",
+      "effect": "Links the house's neglect of objects to its neglect of Clemency's mind."
+     },
+     {
+      "device": "metaphor",
+      "quote": "cleverness is a draught to be stopped with a cushion",
+      "effect": "Captures the family's view of intellect as an annoyance; the cushion later hides the true slate."
+     },
+     {
+      "device": "irony",
+      "quote": "Mamma is generally right about heads. She has had a great deal of practice.",
+      "effect": "Clemency's deadpan line quietly mocks her mother and shows the wit she hides."
+     },
+     {
+      "device": "contrast",
+      "quote": "one for the wrong answers ... and one for the right ones",
+      "effect": "Makes the double performance concrete and implicates the tutor."
+     },
+     {
+      "device": "shift_in_tone",
+      "quote": "I had only been her accomplice",
+      "effect": "Turns self-congratulation into self-indictment."
+     }
+    ],
+    "lines_of_reasoning": [
+     "Trace the narrator from polite complicity (bowing to presentability) through discovery to self-indictment.",
+     "Connect household images (two fires, cold schoolroom, cushion) to the family's values.",
+     "Analyze Clemency's speech and silence as evidence of her control.",
+     "Read the ending as a reversal recasting the whole relationship."
+    ],
+    "common_pitfalls": [
+     "Summarizing the plot of the girl hiding her answers without analyzing the narrator's attitude.",
+     "Treating the narrator as simply heroic and ignoring the forty pounds and the word accomplice.",
+     "Calling Mrs. Pellingham merely cruel, missing the 'not unkindly' nuance and the satire of custom.",
+     "Listing devices without explaining how they shape the attitude.",
+     "Ignoring the ending's reversal."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "central_idea": "The tutor, who believes he is rescuing a hidden mind, gradually recognizes that the child has long mastered the household and that his complicity is partly self-interest.",
+    "concept": "concealed intelligence and complicity in a house that values appearance",
+    "complexity": "Admiration for Clemency mixes with satire of the family, self-reproach, and a closing reversal in which the observer becomes the observed and the ally an accomplice.",
+    "devices": [
+     {
+      "device": "simile",
+      "quote": "as a bird hovers over a field it means to cross, before it turned aside",
+      "function": "Shows deliberate choice behind wrong answers; intelligence as restrained flight."
+     },
+     {
+      "device": "irony",
+      "quote": "furnished as if the family expected at any hour to be inventoried",
+      "function": "Satirizes a household that values possessions and display."
+     },
+     {
+      "device": "symbol",
+      "quote": "a dent in the Pacific where it had once been knocked against the wainscot, and no one had thought the ocean worth repairing",
+      "function": "The neglected globe figures neglected learning and the damaged mind no one tends."
+     },
+     {
+      "device": "metaphor",
+      "quote": "cleverness is a draught to be stopped with a cushion",
+      "function": "Intelligence as an inconvenience to be suppressed; anticipates the window-seat cushion."
+     },
+     {
+      "device": "contrast",
+      "quote": "one for the wrong answers, which I showed her mother every Friday, and one for the right ones",
+      "function": "The two slates embody the double life of performance and truth."
+     },
+     {
+      "device": "shift_in_tone",
+      "quote": "I had only been her accomplice, and that she had been teaching me the whole while how to look away",
+      "function": "Ironic reversal; self-flattery gives way to humbled recognition."
+     },
+     {
+      "device": "diction",
+      "quote": "I understood that I had been weighed, and that the scales were older than I was",
+      "function": "Positions the child as judge and the tutor as assessed."
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional writers, titles and works. Q3 lists real published works for student choice."
+   }
+  }
+ },
+ {
+  "id": "fa3",
+  "plan": {
+   "id": "fa3",
+   "type": "literary_argument",
+   "seedText": "the idea of a home that protects and also confines",
+   "era": "contemporary",
+   "seed": 4103
+  },
+  "payload": {
+   "schema_version": "lit-frq-1",
+   "task_type": "literary_argument",
+   "template": "q3",
+   "title": "The House That Holds",
+   "prompt": {
+    "lead": "In many works of literature, a home is more than a setting. It can be a farmhouse that keeps a family alive through a hard winter, a crowded apartment where a grandmother's rules decide who may marry whom, or a ship's cabin, a convent cell, or a borrowed room that a refugee is told to be grateful for. The same walls that keep out danger can also keep a person in, and the comfort of belonging can carry obligations, silences, and limits. Writers often use such places to test what characters owe the people and structures that shelter them, and what it costs either to stay or to leave.",
+    "task": "Either from your own reading or from the list below, choose a work of fiction in which a home, or a place that functions as one, both protects a character and confines that character. Then, in a well-written essay, analyze how the home and its double nature contributes to an interpretation of the work as a whole. Do not merely summarize the plot.",
+    "requirements": [
+     "State a defensible thesis about how the idea in the prompt contributes to an interpretation of the work as a whole.",
+     "Support the argument with specific, accurate evidence from the work you chose, and explain how that evidence supports your line of reasoning.",
+     "Do not merely summarize the plot.",
+     "Write clearly, with appropriate grammar and punctuation."
+    ]
+   },
+   "works_list": [
+    {
+     "title": "Their Eyes Were Watching God",
+     "author": "Zora Neale Hurston"
+    },
+    {
+     "title": "Heart of Darkness",
+     "author": "Joseph Conrad"
+    },
+    {
+     "title": "Brave New World",
+     "author": "Aldous Huxley"
+    },
+    {
+     "title": "Things Fall Apart",
+     "author": "Chinua Achebe"
+    },
+    {
+     "title": "Macbeth",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "Never Let Me Go",
+     "author": "Kazuo Ishiguro"
+    },
+    {
+     "title": "The Namesake",
+     "author": "Jhumpa Lahiri"
+    },
+    {
+     "title": "The Great Gatsby",
+     "author": "F. Scott Fitzgerald"
+    },
+    {
+     "title": "The Importance of Being Earnest",
+     "author": "Oscar Wilde"
+    },
+    {
+     "title": "The Bluest Eye",
+     "author": "Toni Morrison"
+    },
+    {
+     "title": "Hamlet",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "The Remains of the Day",
+     "author": "Kazuo Ishiguro"
+    },
+    {
+     "title": "The Handmaid's Tale",
+     "author": "Margaret Atwood"
+    },
+    {
+     "title": "Middlemarch",
+     "author": "George Eliot"
+    },
+    {
+     "title": "A Streetcar Named Desire",
+     "author": "Tennessee Williams"
+    },
+    {
+     "title": "A Raisin in the Sun",
+     "author": "Lorraine Hansberry"
+    },
+    {
+     "title": "Frankenstein",
+     "author": "Mary Shelley"
+    },
+    {
+     "title": "The God of Small Things",
+     "author": "Arundhati Roy"
+    },
+    {
+     "title": "Crime and Punishment",
+     "author": "Fyodor Dostoevsky"
+    },
+    {
+     "title": "Great Expectations",
+     "author": "Charles Dickens"
+    },
+    {
+     "title": "Death of a Salesman",
+     "author": "Arthur Miller"
+    },
+    {
+     "title": "Song of Solomon",
+     "author": "Toni Morrison"
+    },
+    {
+     "title": "The Color Purple",
+     "author": "Alice Walker"
+    },
+    {
+     "title": "One Hundred Years of Solitude",
+     "author": "Gabriel Garcia Marquez"
+    },
+    {
+     "title": "Anna Karenina",
+     "author": "Leo Tolstoy"
+    },
+    {
+     "title": "Wuthering Heights",
+     "author": "Emily Bronte"
+    },
+    {
+     "title": "A Doll's House",
+     "author": "Henrik Ibsen"
+    },
+    {
+     "title": "To the Lighthouse",
+     "author": "Virginia Woolf"
+    },
+    {
+     "title": "Invisible Man",
+     "author": "Ralph Ellison"
+    },
+    {
+     "title": "The Metamorphosis",
+     "author": "Franz Kafka"
+    },
+    {
+     "title": "The Awakening",
+     "author": "Kate Chopin"
+    },
+    {
+     "title": "Jane Eyre",
+     "author": "Charlotte Bronte"
+    },
+    {
+     "title": "The Tempest",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "Mrs Dalloway",
+     "author": "Virginia Woolf"
+    },
+    {
+     "title": "Beloved",
+     "author": "Toni Morrison"
+    },
+    {
+     "title": "The Stranger",
+     "author": "Albert Camus"
+    },
+    {
+     "title": "Oedipus Rex",
+     "author": "Sophocles"
+    },
+    {
+     "title": "Pride and Prejudice",
+     "author": "Jane Austen"
+    },
+    {
+     "title": "Othello",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "The Kite Runner",
+     "author": "Khaled Hosseini"
+    }
+   ],
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+       "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+      },
+      "task_specific": "A defensible thesis names a work and makes a claim about how the home's double nature, both protective and confining, contributes to a meaning of the whole work, for example that the work shows belonging cannot be separated from constraint. Summarizing that a character lives in a house, or just saying the home is both safe and limiting with no interpretation of the work, does not count. A thesis that deals with only one side of the home can earn the point only if it is still defensible and connected to meaning. The thesis may appear anywhere in the response."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+       "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+       "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+       "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+       "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+      },
+      "task_specific": "Strong responses pick specific moments that show both the sheltering and the restricting functions of the home, such as a scene of rescue or comfort set against a scene of refusal, rule, or failed escape. Commentary must explain how these moments, and choices like setting details, symbols, characterization, or structure, build the interpretation, not just retell events. A score of 4 calls for consistent explanation of how the evidence supports a line of reasoning about the double nature. A score of 2 fits responses that are mostly summary with general claims. A score of 1 fits responses that have little relevant evidence or only repeat the plot."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+       "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+      },
+      "task_specific": "Sophistication may come from exploring tensions, for example that the protective and confining sides are the same feature seen differently, or that leaving is both freedom and loss. It may also come from placing the work in a wider context, such as gender roles, migration, or class, or from a consistently vivid and persuasive style. A passing mention of complexity or of other works does not earn the point. The sophistication has to run through the argument as a whole."
+     }
+    ],
+    "scoring_notes": [
+     "Any work of fiction of literary merit is acceptable, from any period or culture, and so are plays.",
+     "A 'home' may be a house, a community, an institution, a vehicle, or a figurative structure, as long as the response shows that it works as a place of belonging or shelter.",
+     "Readers should not penalize factual errors about the work unless they weaken the argument.",
+     "Responses built mainly on film adaptations instead of the written text should be scored on whatever literary analysis they actually contain.",
+     "For the literary argument question the evidence comes from the work the student chooses: it must be specific and accurate, and the commentary must explain how the named concept contributes to an interpretation of the whole work rather than summarize the plot."
+    ]
+   },
+   "expected_features": {
+    "lines_of_reasoning": [
+     "Protection and confinement are one force: the thing that keeps a character safe (isolation, strict rules, a remote location) is exactly what limits growth. Fits a novel about a sheltered daughter on an isolated estate, or a gothic novel set in a crumbling family mansion.",
+     "Home as inheritance and duty: a character stays to keep up a family house or business, and loyalty becomes a trap. Fits family sagas, plays about a declining family farm, or immigrant novels about a family shop.",
+     "Gendered domestic space: the house protects a woman's status while limiting her to roles defined by others. Fits nineteenth-century domestic novels, a play about a wife in a well-run household, or postcolonial stories of courtyard homes.",
+     "Home as refuge from a hostile outside world: for a persecuted or displaced character, the hiding place or community saves a life but cuts the character off from a full self. Fits wartime hiding narratives, novels about enslaved people escaping, or stories of exile communities.",
+     "Leaving as both liberation and loss: the departure frees the character but cuts the roots that formed them, so the ending is ambivalent. Fits coming-of-age novels about leaving a village for a city, or migration stories.",
+     "The character becomes the confining force: someone once sheltered goes on to enforce the same walls on the next generation. Fits multigenerational novels and plays about parents and children.",
+     "Home as a mental structure: a belief system, a memory, or an idealized past acts as a home that comforts and imprisons. Fits novels about characters stuck in nostalgia, or dystopian fiction where a protected city limits thought.",
+     "Institutions as homes: a school, a ship, a monastery, or an asylum gives order and safety while erasing individuality. Fits boarding-school novels, sea narratives, or novels set in hospitals."
+    ],
+    "defensible_positions": [
+     "The home's protection is real, but the work suggests its price, which is a character's selfhood, is too high, and escape becomes necessary.",
+     "The work refuses a simple verdict: the character's confinement and safety cannot be separated, which shows that belonging always involves constraint.",
+     "The confinement is only visible from the inside after a crisis, which suggests that comfort hides the walls until something threatens them.",
+     "Leaving the home doesn't solve anything, because the character carries its limits along; the true enclosure is internal."
+    ],
+    "common_pitfalls": [
+     "Retelling the plot of the work without connecting events to the home's protective and confining sides.",
+     "Talking about only one side (the home as purely a prison or purely a refuge) and ignoring the double nature the prompt asks for.",
+     "Forcing a work to fit by calling any setting a 'home' without showing that it works as a place of belonging or shelter.",
+     "Writing about the concept in general or using several works, instead of developing one work in depth.",
+     "Saying the home is 'complex' without explaining how that complexity shapes a meaning of the whole work.",
+     "Ending with a moral about real homes instead of a claim about the chosen work."
+    ],
+    "devices": [
+     {
+      "device": "symbol",
+      "quote": "a locked door",
+      "effect": "Students may analyze physical features of a home (doors, windows, walls, gates) as symbols of both safety and enclosure."
+     },
+     {
+      "device": "contrast",
+      "quote": "to stay or to leave",
+      "effect": "Students may analyze the contrast between interior and exterior spaces to show how the work weighs safety against freedom."
+     }
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "concept": "Home as both shelter and enclosure",
+    "central_idea": "A place of protection makes demands in return: safety is paid for in freedom, identity, or truth, and characters must work out whether the exchange is worth it.",
+    "complexity": "The protective and confining sides of a home are often the same thing seen from different angles (a locked door both guards and imprisons). A work may present leaving as liberation, as loss, or as both, and characters can turn into the confining force themselves.",
+    "devices": [
+     {
+      "device": "juxtaposition",
+      "quote": "The same walls that keep out danger can also keep a person in",
+      "function": "Sets the two edges of the concept side by side so students see that protection and confinement come from one source."
+     },
+     {
+      "device": "imagery",
+      "quote": "a farmhouse that keeps a family alive through a hard winter",
+      "function": "A concrete case of the protective side, to show the range of forms a home can take."
+     },
+     {
+      "device": "diction",
+      "quote": "a borrowed room that a refugee is told to be grateful for",
+      "function": "The word 'told' shows that gratitude can be required, which hints at the hidden cost of shelter."
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional writers, titles and works. Q3 lists real published works for student choice."
+   }
+  }
+ },
+ {
+  "id": "fb1",
+  "plan": {
+   "id": "fb1",
+   "type": "poetry_analysis",
+   "seedText": "a field hand addresses the orchard he will not own, proud and aggrieved at once",
+   "era": "early 20th-century manner",
+   "seed": 4201
+  },
+  "payload": {
+   "schema_version": "lit-frq-1",
+   "task_type": "poetry_analysis",
+   "template": "q1",
+   "title": "To the Ellery Orchard, at Picking's End",
+   "prompt": {
+    "lead": "In the poem \"To the Ellery Orchard, at Picking's End\" (an original poem by Tobias Wrenfield), the speaker talks to the apple orchard he has pruned, grafted and picked for another man's profit, on the last evening of the harvest.",
+    "task": "Read the poem closely. Then write an essay in which you analyze how Tobias Wrenfield uses poetic elements and techniques to convey the speaker's complex attitude toward the orchard, in which pride of craft and a claim of kinship sit alongside grievance at being dispossessed of what his labor made.",
+    "requirements": [
+     "Respond to the prompt with a thesis that offers a defensible interpretation of the poem.",
+     "Use specific evidence from the poem, and explain how that evidence supports your line of reasoning.",
+     "Explain how multiple poetic elements and techniques contribute to the meaning you describe.",
+     "Write clearly, with appropriate grammar and punctuation."
+    ]
+   },
+   "passage": {
+    "form": "poem",
+    "title": "To the Ellery Orchard, at Picking's End",
+    "attribution": "by Tobias Wrenfield",
+    "headnote": "The Ellery farm in the poem is a fictional property. Old Ellery is its owner; the speaker is a hired hand.",
+    "stanzas": [
+     [
+      "You know my hands better than his ledger does.",
+      "Nine Marches I have climbed into your crotches",
+      "with the pruning hook and the tin of grafting wax,",
+      "and cut you back to the bone so you would bear."
+     ],
+     [
+      "Old Ellery walks you Sundays in his collar.",
+      "He counts you by the bushel, I by the scar.",
+      "There is the Baldwin I split and bound with twine",
+      "the winter the creek froze down to its stones;",
+      "it leans now like a man who has been told a joke",
+      "he did not like, and keeps it to himself."
+     ],
+     [
+      "Bear, then. Bear for him. You never asked",
+      "whose ladder leaned against you in the frost,",
+      "whose knee was bruised blue on your lowest limb.",
+      "A tree is a poor Christian. It forgives",
+      "nobody, and it thanks nobody, and it goes on."
+     ],
+     [
+      "Still, I made you. Say it, if a tree can say.",
+      "Not the deed in the courthouse drawer, not the bank,",
+      "not the man in the buggy with the gold-toothed wife:",
+      "I made you as a man makes a stubborn son,",
+      "by hitting where it hurt and staying near."
+     ],
+     [
+      "Tomorrow they will pay me off in silver",
+      "and the cider press will groan like a cow in calf,",
+      "and I will walk the road toward Hatch's Mill",
+      "with my coat over my arm and nothing in it."
+     ],
+     [
+      "But when your apples sit in some city bowl,",
+      "red as a slapped cheek on a parlor table,",
+      "and a lady turns one in her gloves and says how fine,",
+      "let one of them, just one, be sour at the core.",
+      "Let her taste me."
+     ]
+    ],
+    "line_count": 29,
+    "provenance": {
+     "kind": "original",
+     "author_alias": "Tobias Wrenfield",
+     "year_alias": 1914
+    }
+   },
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+       "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+      },
+      "task_specific": "A defensible thesis must make a claim about how the speaker's attitude holds both pride or kinship and grievance or dispossession, e.g., that his authorship sharpens his loss. Merely saying the speaker loves the orchard, or that the poem uses imagery and simile, does not count. A thesis naming only one side of the attitude earns the point only if it is defensible and interprets the poem rather than restating it."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+       "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+       "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+       "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+       "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+      },
+      "task_specific": "Strong responses cite specific lines such as 'He counts you by the bushel, I by the scar,' the turn 'Still, I made you,' the stubborn-son simile, and the sour core, and explain how each builds the tension between pride and grievance. Commentary should connect bodily diction against commercial diction, or the poem's movement in address, to the speaker's complex attitude. A score of 4 requires consistent explanation of how choices create meaning across the poem; 2 marks mostly summary with general comments on devices; 3 links evidence to the claim but unevenly."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+       "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+      },
+      "task_specific": "Sophistication may come from exploring the paradox that labor makes the orchard his in spirit and not his in law, from reading the final lines as both curse and wish to be remembered, or from setting the poem in the context of hired labor and land ownership without leaving the text. A single phrase or broad statement does not earn the point; the complexity must be sustained."
+     }
+    ],
+    "scoring_notes": [
+     "Accept readings that emphasize love over bitterness, or the reverse, if they account for the other side.",
+     "Do not reward naming devices without analysis.",
+     "Historical context is optional and must serve the analysis."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "The speaker's pride in his craft deepens rather than softens his grievance, since the better he made the orchard the more he loses by leaving it.",
+     "The poem sets bodily, felt knowledge against legal and commercial ownership, claiming the laborer as the orchard's true author while admitting he has no power.",
+     "The speaker's love for the orchard is fatherly and violent at once, so his parting words are both a blessing and a curse.",
+     "The speaker's resentment moves from owner to orchard to the distant consumer, showing that dispossession taints even what he loves."
+    ],
+    "devices": [
+     {
+      "device": "juxtaposition",
+      "quote": "He counts you by the bushel, I by the scar.",
+      "effect": "Opposes profit and pain as two ways of knowing the trees."
+     },
+     {
+      "device": "volta",
+      "quote": "Still, I made you.",
+      "effect": "Moves from bitterness to an assertion of pride and authorship."
+     },
+     {
+      "device": "simile",
+      "quote": "as a man makes a stubborn son",
+      "effect": "Kinship that holds both love and harshness."
+     },
+     {
+      "device": "personification",
+      "quote": "A tree is a poor Christian.",
+      "effect": "Shows the orchard is indifferent; he cannot even claim its gratitude."
+     },
+     {
+      "device": "irony",
+      "quote": "nothing in it",
+      "effect": "Being paid off leaves him with nothing."
+     },
+     {
+      "device": "symbol",
+      "quote": "sour at the core",
+      "effect": "His lasting stake is a hidden grievance inside the fruit."
+     }
+    ],
+    "common_pitfalls": [
+     "Reading the poem as simple nature appreciation or simple protest, missing the divided attitude.",
+     "Listing devices without explaining how they create the tension between pride and grievance.",
+     "Treating the final lines as pure spite, ignoring that the sour apple is also a wish to be remembered.",
+     "Summarizing the stanzas in order without a claim."
+    ],
+    "lines_of_reasoning": [
+     "Trace the shift in address from intimacy, to the owner, to the orchard's indifference, to authorship, to the curse.",
+     "Analyze the bodily diction (hands, scar, knee, bone) set against money diction (ledger, bushel, deed, bank, silver)."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "central_idea": "The laborer's bodily intimacy with the orchard gives him a moral authorship that legal ownership cannot erase, yet that authorship earns him nothing but leaving.",
+    "concept": "labor versus ownership; craft as kinship",
+    "complexity": "He is proud of the trees and loves them as a father, yet resents both owner and orchard; his final blessing is a curse.",
+    "devices": [
+     {
+      "device": "apostrophe",
+      "quote": "You know my hands better than his ledger does.",
+      "function": "Addresses the orchard as the only witness to his labor, establishing intimacy denied by the owner."
+     },
+     {
+      "device": "juxtaposition",
+      "quote": "He counts you by the bushel, I by the scar.",
+      "function": "Sets commercial measure against bodily memory."
+     },
+     {
+      "device": "simile",
+      "quote": "it leans now like a man who has been told a joke / he did not like, and keeps it to himself.",
+      "function": "Projects the speaker's own swallowed resentment onto the grafted tree."
+     },
+     {
+      "device": "personification",
+      "quote": "A tree is a poor Christian. It forgives / nobody, and it thanks nobody, and it goes on.",
+      "function": "Grants the orchard indifference, turning grievance toward the trees themselves."
+     },
+     {
+      "device": "volta",
+      "quote": "Still, I made you.",
+      "function": "Turns from grievance to a claim of authorship."
+     },
+     {
+      "device": "simile",
+      "quote": "I made you as a man makes a stubborn son, / by hitting where it hurt and staying near.",
+      "function": "Frames pruning as harsh paternal love, mixing tenderness and violence."
+     },
+     {
+      "device": "irony",
+      "quote": "with my coat over my arm and nothing in it.",
+      "function": "Payment leaves him empty; understated dispossession."
+     },
+     {
+      "device": "imagery",
+      "quote": "red as a slapped cheek on a parlor table",
+      "function": "Beauty tinged with violence; links the fruit to his hurt."
+     },
+     {
+      "device": "symbol",
+      "quote": "let one of them, just one, be sour at the core. / Let her taste me.",
+      "function": "The sour core embodies his hidden presence and grievance inside the owner's product."
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional writers, titles and works. Q3 lists real published works for student choice."
+   }
+  }
+ },
+ {
+  "id": "fb2",
+  "plan": {
+   "id": "fb2",
+   "type": "prose_analysis",
+   "seedText": "a daughter and her father mend nets on a beach while a letter from the city lies unopened",
+   "era": "mid-20th-century manner",
+   "seed": 4202
+  },
+  "payload": {
+   "schema_version": "lit-frq-1",
+   "task_type": "prose_analysis",
+   "template": "q2",
+   "title": "The Letter on the Net Box",
+   "prompt": {
+    "lead": "The following passage is an original work of fiction by Orla Bressan. In this passage, a young woman mends fishing nets beside her father while a letter from the city waits, unopened, on the box between them.",
+    "task": "Read the passage closely. Then write an essay in which you analyze how Orla Bressan uses literary elements and techniques to convey the daughter's divided feelings about the letter and about the father whose work and silence hold her in place.",
+    "requirements": [
+     "Respond to the prompt with a thesis that offers a defensible interpretation of the passage.",
+     "Use specific evidence from the passage, and explain how that evidence supports your line of reasoning.",
+     "Explain how multiple literary elements and techniques contribute to the meaning you describe.",
+     "Write clearly, with appropriate grammar and punctuation."
+    ]
+   },
+   "passage": {
+    "form": "prose",
+    "title": "The Letter on the Net Box",
+    "attribution": "by Orla Bressan",
+    "headnote": "In this excerpt from the novel Salt Hours, Nell Garrow, nineteen, works with her widowed father, Amos, on the shingle below their village. She has applied for a clerk's position in the city.",
+    "stanzas": [
+     [
+      "    The letter had come on Tuesday and it was Thursday",
+      "now, and still it lay on the lid of the net box with a",
+      "beach stone on it, a gray stone with a white band around",
+      "its middle like a wedding ring somebody had forgotten to",
+      "take off. Nell had put the stone there herself. The wind",
+      "off the point would have had the envelope otherwise, and",
+      "she told herself that was the only reason."
+     ],
+     [
+      "    Her father sat on an upturned crate with the trammel",
+      "net across his knees, and she sat on the shingle with",
+      "the other end of it across hers, so that the two of them",
+      "were joined by forty feet of brown mesh and the holes",
+      "the dogfish had made. He did not look at the letter. He",
+      "looked at the net. He had a way of looking at a net that",
+      "made it seem the whole sea had been arranged to pass",
+      "through it eventually."
+     ],
+     [
+      "    \"Mind your knots,\" he said."
+     ],
+     [
+      "    \"I am minding them.\""
+     ],
+     [
+      "    \"You're pulling them. A pulled knot slips in cold",
+      "water.\" He reached over without getting up and took the",
+      "twine from her fingers and made the knot again, sheet",
+      "bend, a quick small violence of the thumbs, and gave the",
+      "twine back. His hands were split along every crease, and",
+      "in the splits was the tar from the boat, so that his",
+      "palms looked like maps of a country with too many",
+      "rivers."
+     ],
+     [
+      "    She mended. The needle went over, under, through.",
+      "Over, under, through. Out past the breakwater the Callie",
+      "and the Ruth Ann were coming in low, and gulls hung",
+      "above them as if on strings. Her mother had used to say",
+      "you could tell a boat's catch from the shore by how the",
+      "gulls behaved. Her mother had used to say a good many",
+      "things. Nell had been eleven when the saying stopped,",
+      "and since then the house had run on her father's few",
+      "words and the clock and the kettle, and she had learned",
+      "to fill the rest of the quiet herself, the way you learn",
+      "to fill a hole in a net, by working inward from the",
+      "sound edges."
+     ],
+     [
+      "    The envelope was cream, heavier than anything that",
+      "came to the village, with the name of the shipping",
+      "office printed blue in the corner: Harlan and Vey, Cargo",
+      "Agents, Dock Street. She knew what it said. Or she knew",
+      "it said one of two things, and either one would be a",
+      "door, and she did not know which side of the door she",
+      "wanted to be standing on. If it said no, she could keep",
+      "the stone on it forever. If it said yes, someone would",
+      "have to tell him, and the someone would be her."
+     ],
+     [
+      "    \"Ruth Ann's heavy,\" her father said."
+     ],
+     [
+      "    \"Is she?\""
+     ],
+     [
+      "    \"Look at her waterline.\" He jerked his chin. \"Dan",
+      "Pruett will want hands Saturday for the gutting. I told",
+      "him you'd come.\""
+     ],
+     [
+      "    He had told Dan Pruett. Of course he had. He had",
+      "told Dan Pruett on Tuesday, probably, the same afternoon",
+      "the postman came down the cliff path, waving the cream",
+      "envelope above his head like a flag for her to see from",
+      "the beach, and her father had watched him come all the",
+      "way down and said nothing at all. Saturday. He had built",
+      "her a Saturday and set it on the calendar like a stone",
+      "on a letter."
+     ],
+     [
+      "    She could have been angry. She tried it for a",
+      "moment, the way you try a plank before you put your",
+      "weight on it, and found it would not hold. Because he",
+      "was not wrong about her knots. Because the net in her",
+      "lap was one she had mended every spring since she was",
+      "nine, and she knew it the way she knew her own teeth",
+      "with her tongue. Because when he took the twine from her",
+      "fingers his own fingers had been warm, and she had",
+      "wanted, absurdly, for him to keep holding it."
+     ],
+     [
+      "    The tide turned at four. The wind came round and",
+      "lifted one corner of the envelope, and it fluttered",
+      "under the stone like something breathing. Her father's",
+      "needle stopped. Nell watched his hands lie still on the",
+      "mesh for the space of three waves. Then they began",
+      "again, over, under, through, and he said, not looking",
+      "up, \"You'll want to read that before the light goes.\""
+     ],
+     [
+      "    \"Tomorrow,\" she said."
+     ],
+     [
+      "    He nodded as though she had told him the weather.",
+      "She pulled the next knot tight, too tight, and did not",
+      "let him see her loosen it."
+     ]
+    ],
+    "line_count": 79,
+    "provenance": {
+     "kind": "original",
+     "author_alias": "Orla Bressan",
+     "year_alias": 1953
+    }
+   },
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+       "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+      },
+      "task_specific": "A defensible thesis must make a claim about Nell's divided or complex feelings, for example resentment mixed with love, or ambition mixed with fear. A thesis saying only that she is unsure about a letter, or that the writer uses imagery and symbolism, does not earn the point. The thesis may appear anywhere in the essay but has to be arguable."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+       "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+       "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+       "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+       "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+      },
+      "task_specific": "Strong responses use specific evidence such as the stone on the letter, the net that joins them, the repeated 'over, under, through', the 'built her a Saturday' irony, the 'Because' sequence, and the final loosened knot. The commentary should explain how each choice shows the tension between resentment and tenderness, or between leaving and staying. A score of 4 needs consistent reasoning across several choices. A score of 2 fits essays that mostly summarize or that name devices with thin explanation."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+       "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+      },
+      "task_specific": "Sophistication could mean explaining the irony that Nell weighted the letter herself, tracing how the father's silence shifts from control to permission, or exploring how the binding images make leaving and staying seem equally confining. A single sweeping statement about family or ambition does not earn the point."
+     }
+    ],
+    "scoring_notes": [
+     "Do not reward readings that cast the father purely as an oppressor unless they deal with the evidence that Nell's anger fails.",
+     "An accurate reading of the ending (his prompt, her hidden loosening) is strong evidence of complexity."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "Nell resents her father's quiet claim on her future, yet the narration shows that the anchor she resents is partly her own fear and love.",
+     "The passage presents leaving and staying as equally binding, so Nell's delay is an attempt to keep both possibilities alive.",
+     "Her father's silence reads first as control and finally as reluctant permission, which deepens her guilt and tenderness.",
+     "The shared work of mending stands for a bond Nell both treasures and feels trapped by; her final secret loosening of the knot suggests quiet, hidden self-assertion."
+    ],
+    "devices": [
+     {
+      "device": "symbol",
+      "quote": "I put the stone there herself / 'Nell had put the stone there herself.'",
+      "effect": "Shows Nell is complicit in her own delay."
+     },
+     {
+      "device": "irony",
+      "quote": "set it on the calendar like a stone on a letter",
+      "effect": "Her accusation turns back on her."
+     },
+     {
+      "device": "anaphora",
+      "quote": "Because he was not wrong about her knots.",
+      "effect": "Anger gives way to affection."
+     },
+     {
+      "device": "repetition",
+      "quote": "over, under, through",
+      "effect": "Routine both comforts and confines."
+     },
+     {
+      "device": "personification",
+      "quote": "like something breathing",
+      "effect": "The future insists on being acknowledged."
+     },
+     {
+      "device": "understatement",
+      "quote": "He nodded as though she had told him the weather.",
+      "effect": "Feeling is held back, not missing."
+     }
+    ],
+    "lines_of_reasoning": [
+     "Trace the shift from Nell's suspicion of her father toward her recognition that her anger 'would not hold'.",
+     "Link the stone, the net and the knots as images of binding that Nell both accepts and resists.",
+     "Read the ending: the father's prompt to read the letter and Nell's loosened knot as quiet movement on both sides."
+    ],
+    "common_pitfalls": [
+     "Claiming simply that Nell wants to leave and her father is a villain.",
+     "Listing devices without tying them to her divided feelings.",
+     "Summarizing the plot instead of analyzing.",
+     "Ignoring the ending's shift in the father's role."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "concept": "Daughter torn between city ambition and loyalty/love for a taciturn widowed father.",
+    "central_idea": "Nell's postponement of the letter reveals that her resentment of her father's quiet control is inseparable from tenderness and her own fear of leaving.",
+    "complexity": "She blames him for building her Saturday, yet she herself weighted the letter; anger 'would not hold'; father's silence is both possessive and a grudging release.",
+    "devices": [
+     {
+      "device": "simile",
+      "quote": "like a wedding ring somebody had forgotten to take off",
+      "function": "Frames staying as a binding, half-forgotten marriage to home and father."
+     },
+     {
+      "device": "symbol",
+      "quote": "still it lay on the lid of the net box with a beach stone on it",
+      "function": "The stone embodies Nell's own complicity in holding the future down."
+     },
+     {
+      "device": "metaphor",
+      "quote": "joined by forty feet of brown mesh and the holes the dogfish had made",
+      "function": "The net as their bond, intact but damaged."
+     },
+     {
+      "device": "repetition",
+      "quote": "over, under, through",
+      "function": "Routine as comfort and trap; father's resumption signals acceptance."
+     },
+     {
+      "device": "irony",
+      "quote": "He had built her a Saturday and set it on the calendar like a stone on a letter.",
+      "function": "She condemns the very gesture she performed herself."
+     },
+     {
+      "device": "anaphora",
+      "quote": "Because he was not wrong about her knots. Because the net in her lap... Because when he took the twine",
+      "function": "Accumulating reasons dissolve anger into love."
+     },
+     {
+      "device": "personification",
+      "quote": "it fluttered under the stone like something breathing",
+      "function": "The letter's possibility is alive and resisting suppression."
+     },
+     {
+      "device": "understatement",
+      "quote": "He nodded as though she had told him the weather.",
+      "function": "Father masks feeling; restraint carries grief."
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional writers, titles and works. Q3 lists real published works for student choice."
+   }
+  }
+ },
+ {
+  "id": "fb3",
+  "plan": {
+   "id": "fb3",
+   "type": "literary_argument",
+   "seedText": "the idea of a secret that binds people together and also isolates them",
+   "era": "contemporary",
+   "seed": 4203
+  },
+  "payload": {
+   "schema_version": "lit-frq-1",
+   "task_type": "literary_argument",
+   "template": "q3",
+   "title": "The Shared Secret",
+   "prompt": {
+    "lead": "In many works of fiction, characters hold a secret together. The secret might be a crime two siblings both saw, a love affair a household agrees to ignore, or a family's hidden origins kept from the neighbors. Knowing the same thing that no one else knows can tie people together more closely than blood or vows. That same knowledge can also cut them off from everyone outside the circle, and sometimes from each other, because each person has to watch what the others might say. A secret held in common can be a refuge and a cell at once, and that tension often shows what a work believes about loyalty, honesty and belonging.",
+    "task": "Either from your own reading or from the list below, choose a work of fiction in which characters are bound together by a shared secret that also isolates them. Then, in a well-written essay, analyze how the shared secret and its complex effects on those who keep it contributes to an interpretation of the work as a whole. Do not merely summarize the plot.",
+    "requirements": [
+     "State a defensible thesis about how the idea in the prompt contributes to an interpretation of the work as a whole.",
+     "Support the argument with specific, accurate evidence from the work you chose, and explain how that evidence supports your line of reasoning.",
+     "Do not merely summarize the plot.",
+     "Write clearly, with appropriate grammar and punctuation."
+    ]
+   },
+   "works_list": [
+    {
+     "title": "Oedipus Rex",
+     "author": "Sophocles"
+    },
+    {
+     "title": "Pride and Prejudice",
+     "author": "Jane Austen"
+    },
+    {
+     "title": "Othello",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "The Kite Runner",
+     "author": "Khaled Hosseini"
+    },
+    {
+     "title": "Their Eyes Were Watching God",
+     "author": "Zora Neale Hurston"
+    },
+    {
+     "title": "Heart of Darkness",
+     "author": "Joseph Conrad"
+    },
+    {
+     "title": "Brave New World",
+     "author": "Aldous Huxley"
+    },
+    {
+     "title": "Things Fall Apart",
+     "author": "Chinua Achebe"
+    },
+    {
+     "title": "Macbeth",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "Never Let Me Go",
+     "author": "Kazuo Ishiguro"
+    },
+    {
+     "title": "The Namesake",
+     "author": "Jhumpa Lahiri"
+    },
+    {
+     "title": "The Great Gatsby",
+     "author": "F. Scott Fitzgerald"
+    },
+    {
+     "title": "The Importance of Being Earnest",
+     "author": "Oscar Wilde"
+    },
+    {
+     "title": "The Bluest Eye",
+     "author": "Toni Morrison"
+    },
+    {
+     "title": "Hamlet",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "The Remains of the Day",
+     "author": "Kazuo Ishiguro"
+    },
+    {
+     "title": "The Handmaid's Tale",
+     "author": "Margaret Atwood"
+    },
+    {
+     "title": "Middlemarch",
+     "author": "George Eliot"
+    },
+    {
+     "title": "A Streetcar Named Desire",
+     "author": "Tennessee Williams"
+    },
+    {
+     "title": "A Raisin in the Sun",
+     "author": "Lorraine Hansberry"
+    },
+    {
+     "title": "Frankenstein",
+     "author": "Mary Shelley"
+    },
+    {
+     "title": "The God of Small Things",
+     "author": "Arundhati Roy"
+    },
+    {
+     "title": "Crime and Punishment",
+     "author": "Fyodor Dostoevsky"
+    },
+    {
+     "title": "Great Expectations",
+     "author": "Charles Dickens"
+    },
+    {
+     "title": "Death of a Salesman",
+     "author": "Arthur Miller"
+    },
+    {
+     "title": "Song of Solomon",
+     "author": "Toni Morrison"
+    },
+    {
+     "title": "The Color Purple",
+     "author": "Alice Walker"
+    },
+    {
+     "title": "One Hundred Years of Solitude",
+     "author": "Gabriel Garcia Marquez"
+    },
+    {
+     "title": "Anna Karenina",
+     "author": "Leo Tolstoy"
+    },
+    {
+     "title": "Wuthering Heights",
+     "author": "Emily Bronte"
+    },
+    {
+     "title": "A Doll's House",
+     "author": "Henrik Ibsen"
+    },
+    {
+     "title": "To the Lighthouse",
+     "author": "Virginia Woolf"
+    },
+    {
+     "title": "Invisible Man",
+     "author": "Ralph Ellison"
+    },
+    {
+     "title": "The Metamorphosis",
+     "author": "Franz Kafka"
+    },
+    {
+     "title": "The Awakening",
+     "author": "Kate Chopin"
+    },
+    {
+     "title": "Jane Eyre",
+     "author": "Charlotte Bronte"
+    },
+    {
+     "title": "The Tempest",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "Mrs Dalloway",
+     "author": "Virginia Woolf"
+    },
+    {
+     "title": "Beloved",
+     "author": "Toni Morrison"
+    },
+    {
+     "title": "The Stranger",
+     "author": "Albert Camus"
+    }
+   ],
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+       "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+      },
+      "task_specific": "A defensible thesis names a work of fiction in which a secret is shared by two or more characters and makes a claim about how that secret, through its binding or isolating effects or both, contributes to an interpretation of the work as a whole. Simply saying that a secret exists, or restating the prompt, does not earn the point. A thesis about a secret kept by only one person qualifies only if it shows that others are bound into it. The claim may be in one or more sentences anywhere in the response."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+       "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+       "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+       "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+       "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+      },
+      "task_specific": "Strong responses use specific references to the work: scenes where the secret is formed, tested or nearly exposed, and moments where keepers are drawn closer or set apart. Commentary should explain how these moments show both the bond and the isolation, and how the two connect to the work's larger meaning about loyalty, truth or belonging. For 4 points, the line of reasoning must be consistent and the evidence must be analyzed rather than summarized. For 3 points, the commentary is mostly relevant but uneven. Responses that mostly summarize the plot score no higher than 2."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+       "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+      },
+      "task_specific": "Sophistication can be shown by exploring the paradox that the bond depends on the isolation, by placing the secret within the work's social or historical tensions, by weighing competing readings of whether disclosure is redemptive, or by sustaining a vivid, controlled style. A single passing gesture toward complexity does not earn the point."
+     }
+    ],
+    "scoring_notes": [
+     "Any work of fiction of literary merit is acceptable: a novel, a play or an extended short story from any period or culture.",
+     "The secret must be shared or must bind more than one character. Readers should not reward responses that fail to establish this.",
+     "Accuracy about the chosen work matters only insofar as errors undermine the argument.",
+     "Do not penalize a response for arguing that one effect, binding or isolating, outweighs the other, as long as it engages both.",
+     "For the literary argument question the evidence comes from the work the student chooses: it must be specific and accurate, and the commentary must explain how the named concept contributes to an interpretation of the whole work rather than summarize the plot."
+    ]
+   },
+   "expected_features": {
+    "lines_of_reasoning": [
+     "The secret creates a private language or ritual among the keepers that excludes outsiders. Fits novels about siblings or childhood friends who witnessed a death.",
+     "The secret binds a family but cuts it off from the community. Fits family sagas that hide an ancestor's crime or mixed parentage, and colonial-era or diaspora novels about concealed identity.",
+     "Keeping the secret slowly turns the bond into mutual surveillance, which isolates the keepers from each other. Fits crime novels where accomplices grow paranoid, and tragedies of conspiracy.",
+     "A secret that protects a vulnerable person becomes a moral burden on the protectors. Fits novels about hiding refugees, fugitives or enslaved people seeking freedom.",
+     "Revealing the secret breaks the bond and also frees the keepers, so the work sets truth against belonging. Fits domestic dramas and confession narratives.",
+     "The secret marks a class, gender or generational divide: those who know hold power over those who do not. Fits novels of manners and boarding-school novels.",
+     "Outsiders sense the secret without knowing it, which deepens the keepers' isolation. Fits small-town fiction and ghost stories."
+    ],
+    "defensible_positions": [
+     "The shared secret holds a fragile community together but finally shows that intimacy built on concealment cannot last.",
+     "The work treats the secret as a necessary shelter against a hostile society, and the isolation it causes is a cost worth paying.",
+     "The secret isolates the keepers less from the world than from their own past selves, which suggests that identity depends on what one can say aloud."
+    ],
+    "common_pitfalls": [
+     "Retelling the plot of how the secret was formed and revealed without analyzing its effects.",
+     "Treating the secret as only binding or only isolating, which ignores the tension the prompt asks for.",
+     "Forcing a work with a merely private secret (one person alone) to fit the shared-secret requirement.",
+     "Discussing the secret without connecting it to the meaning of the work as a whole.",
+     "Writing about several works superficially instead of one in depth."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "concept": "A shared secret as a bond that also isolates",
+    "central_idea": "Shared concealment creates intimacy and exclusion at the same time, so it shows what a work believes about community and truth.",
+    "complexity": "The secret can protect and imprison at once. Its binding force may depend on the isolation it causes, and revealing it can free the keepers or destroy them.",
+    "devices": []
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional writers, titles and works. Q3 lists real published works for student choice."
+   }
+  }
+ }
+]

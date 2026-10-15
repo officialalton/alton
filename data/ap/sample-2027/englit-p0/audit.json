@@ -1,0 +1,259 @@
+[
+ {
+  "set": "s01",
+  "i": 0,
+  "skill": "1.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "panel": null,
+  "score": 0.691,
+  "pass": false,
+  "reasons": [],
+  "cue": 0
+ },
+ {
+  "set": "s01",
+  "i": 1,
+  "skill": "7.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "panel": {
+   "choice": 2,
+   "agree": true
+  },
+  "score": 1,
+  "pass": true,
+  "reasons": [],
+  "cue": 0
+ },
+ {
+  "set": "s01",
+  "i": 2,
+  "skill": "3.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "panel": {
+   "choice": 3,
+   "agree": true
+  },
+  "score": 1,
+  "pass": true,
+  "reasons": [],
+  "cue": 0
+ },
+ {
+  "set": "s01",
+  "i": 3,
+  "skill": "3.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "panel": {
+   "choice": 2,
+   "agree": true
+  },
+  "score": 0.959,
+  "pass": true,
+  "reasons": [],
+  "cue": 1.09
+ },
+ {
+  "set": "s01",
+  "i": 4,
+  "skill": "2.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "strong",
+  "judge": "key_clearly_better",
+  "panel": null,
+  "score": 0.709,
+  "pass": false,
+  "reasons": [
+   "adversary_strong_alternative"
+  ],
+  "cue": 0
+ },
+ {
+  "set": "s01",
+  "i": 5,
+  "skill": "2.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "panel": {
+   "choice": 1,
+   "agree": true
+  },
+  "score": 0.788,
+  "pass": true,
+  "reasons": [],
+  "cue": 0
+ },
+ {
+  "set": "s01",
+  "i": 6,
+  "skill": "4.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "panel": null,
+  "score": 0.959,
+  "pass": false,
+  "reasons": [
+   "solver_reports_second_defensible_option"
+  ],
+  "cue": 0
+ },
+ {
+  "set": "s01",
+  "i": 7,
+  "skill": "1.E",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "strong",
+  "judge": "key_wrong",
+  "panel": null,
+  "score": 0.421,
+  "pass": false,
+  "reasons": [
+   "solver_reports_second_defensible_option",
+   "adversary_strong_alternative",
+   "judge_key_wrong"
+  ],
+  "cue": 1.05
+ },
+ {
+  "set": "s01",
+  "i": 8,
+  "skill": "1.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "panel": {
+   "choice": 2,
+   "agree": true
+  },
+  "score": 0.788,
+  "pass": true,
+  "reasons": [],
+  "cue": 1.06
+ },
+ {
+  "set": "s01",
+  "i": 9,
+  "skill": "4.B",
+  "det": [
+   "evidence_quote_not_in_passage_\"that's_the_price._she's_payin"
+  ],
+  "solverAgree": 0,
+  "adversary": null,
+  "judge": null,
+  "panel": null,
+  "score": 0,
+  "pass": false,
+  "reasons": [
+   "adversary_missing",
+   "judge_missing",
+   "deterministic_1"
+  ],
+  "cue": 1.06
+ },
+ {
+  "set": "s01",
+  "i": 10,
+  "skill": "5.D",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "panel": {
+   "choice": 0,
+   "agree": true
+  },
+  "score": 0.829,
+  "pass": true,
+  "reasons": [],
+  "cue": 0
+ },
+ {
+  "set": "s01",
+  "i": 11,
+  "skill": "6.D",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "panel": {
+   "choice": 1,
+   "agree": true
+  },
+  "score": 0.788,
+  "pass": true,
+  "reasons": [],
+  "cue": 1.07
+ },
+ {
+  "set": "s01",
+  "i": 12,
+  "skill": "4.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "panel": {
+   "choice": 1,
+   "agree": true
+  },
+  "score": 1,
+  "pass": true,
+  "reasons": [],
+  "cue": 0
+ },
+ {
+  "set": "s01",
+  "i": 13,
+  "skill": "7.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "panel": {
+   "choice": 0,
+   "agree": true
+  },
+  "score": 0.829,
+  "pass": true,
+  "reasons": [],
+  "cue": 1.12
+ },
+ {
+  "set": "s01",
+  "i": 14,
+  "skill": "3.A",
+  "det": [
+   "evidence_quote_not_in_passage_\"she'd_have_let_the_boat_rot_s"
+  ],
+  "solverAgree": 0,
+  "adversary": null,
+  "judge": null,
+  "panel": null,
+  "score": 0,
+  "pass": false,
+  "reasons": [
+   "adversary_missing",
+   "judge_missing",
+   "deterministic_1"
+  ],
+  "cue": 0
+ }
+]
