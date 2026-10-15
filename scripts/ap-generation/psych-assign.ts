@@ -1,5 +1,5 @@
 // AP Psychology 풀 모의고사 세트 정확 배정(무료·읽기 전용·DB 없음). macro-assign.ts·bio-assign.ts 와 같은 방식(정수계획 HiGHS + 배정기와 별개인 독립 검증기)을 Psychology 구조에 적용한다.
-//   npx tsx scripts/ap-generation/psych-assign.ts --sets PS1[,PS2] [--time-ms 120000] [--write-report <경로 .json>] [--files psych-p1a-items,...] [--no-screen] [--prefer-exam-prep] [--block-file <보고서.json[,..]>] [--joint]
+//   npx tsx scripts/ap-generation/psych-assign.ts --sets PS1[,PS2] [--time-ms 120000] [--write-report <경로 .json>] [--files psych-p1a-items,...] [--no-screen] [--prefer-exam-prep] [--min-exam-prep N] [--exam-weight 0.5] [--hd-bonus 0.1] [--forbid-swap-sets <슬롯 스냅샷.json>] [--no-transfer <슬롯 스냅샷.json>] [--block-file <보고서.json[,..]>] [--joint]
 // 조건(공식 구조, docs/ap/psychology-facts.md): MC 75 = 단독 + 3문항 세트 정확히 PSYCH_SET_COUNT 개(같은 단원, 연속 위치), 단원 5-단원 각 15-25 %(정수 11-19, **차단**), Practice 1/2/3 = 60-70 / 20-30 / 5-15 %(차단; CED 는 65/25/10 %를 '대략'으로 공표),
 //   Practice 4 는 MC 에서 평가하지 않는다. FRQ 2 = AAQ 1 + EBQ 1. 한 시험 안에서 같은 문항군(원형+토픽, look-alike 포함)은 한 번만, 시험 사이 같은 문항 0,
 //   시험 사이 같은 질문·같은 정답 문장(같은 변형의 다른 후보; sig)도 0. 재고에 없는 칸은 가상 문항으로 세어 부족분을 (단원 × 스킬) 칸 단위로 정확히 보고한다.
@@ -28,10 +28,10 @@ export const LIB_SETS = [...new Set(guideRows.filter((g) => g.id.startsWith("pss
 /** FRQ 시나리오: 가상 FRQ 는 이 시나리오 중 하나(유형 = template). */
 export const LIB_FRQ = (psychGuide.frqTemplates ?? []).filter((t) => !EXCLUDED_ARCHETYPES.has(t.id)).map((t) => ({ id: t.id, type: String(t.template), key: t.id }));
 
-export function solvePsychSets(ids: string[], items: PsychItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; blockedArchetypes?: Set<string>; blockedSigs?: Set<string>; preferExamPrep?: boolean; cost?: (c: PsychItem) => number; setCount?: number }) {
+export function solvePsychSets(ids: string[], items: PsychItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; blockedArchetypes?: Set<string>; blockedSigs?: Set<string>; preferExamPrep?: boolean; minExamPrep?: number; examWeight?: number; hdBonus?: number; cost?: (c: PsychItem) => number; setCount?: number; forbidSets?: Record<string, Set<string>> }) {
   const blocked = o.blocked ?? new Set<string>(); const blockedArch = o.blockedArchetypes ?? new Set<string>(); const blockedSigs = o.blockedSigs ?? new Set<string>(); const SETN = o.setCount ?? PSYCH_SET_COUNT;
   const LS = LIB_SINGLES.filter((e) => !blockedArch.has(e.id)), LT = LIB_SETS.filter((e) => !blockedArch.has(e.id)), LF = LIB_FRQ.filter((e) => !blockedArch.has(e.id));
-  const usable = items.filter((c) => !blocked.has(c.key) && !blockedArch.has(c.archetype) && !(c.sig && blockedSigs.has(c.sig)) && (c.kind === "frq" ? (PSYCH_FRQ_TYPES as readonly string[]).includes(c.frqType) : c.shared ? c.members.length === PSYCH_SET_SIZE && new Set(c.members.map((m) => m.unit)).size === 1 : c.members.length === 1) && (c.kind === "frq" || c.members.every((m) => PRACTICES.includes(practiceOf(m.skill)) && UNITS.includes(m.unit))));
+  const usable = items.filter((c) => (c.kind === "frq" || c.members.every((m) => m.unit === c.keyUnit)) && !blocked.has(c.key) && !blockedArch.has(c.archetype) && !(c.sig && blockedSigs.has(c.sig)) && (c.kind === "frq" ? (PSYCH_FRQ_TYPES as readonly string[]).includes(c.frqType) : c.shared ? c.members.length === PSYCH_SET_SIZE && new Set(c.members.map((m) => m.unit)).size === 1 : c.members.length === 1) && (c.kind === "frq" || c.members.every((m) => PRACTICES.includes(practiceOf(m.skill)) && UNITS.includes(m.unit))));
   const mcSingles = usable.filter((c) => c.kind === "mc" && !c.shared), mcSets = usable.filter((c) => c.kind === "mc" && c.shared), frqs = usable.filter((c) => c.kind === "frq");
   let n = 0; const V = (): number => n++;
   const xv = new Map<string, number>();
@@ -49,7 +49,9 @@ export function solvePsychSets(ids: string[], items: PsychItem[], o: { timeMs: n
   const obj = new Array<number>(n).fill(0); const cons: Cons[] = [];
   for (const j of vs.values()) obj[j] = 1000; for (const j of vset.values()) obj[j] = 2000; for (const j of vf.values()) obj[j] = 1000;
   for (const j of du.values()) obj[j] = 1; for (const j of dp.values()) obj[j] = 0.2;
-  if (o.preferExamPrep) usable.forEach((c) => ids.forEach((_, s) => { obj[x(c, s)] += -0.01 * (c.exam ?? 0); }));
+  if (o.preferExamPrep) usable.forEach((c) => ids.forEach((_, s) => { obj[x(c, s)] += -(o.examWeight ?? 0.01) * (c.exam ?? 0) - (o.hdBonus ?? 0) * (c.hd ?? 0); }));
+  // 시험 하나가 이 후보를 가질 수 없게 막는다(forbidSets[시험 id] = 후보 키 집합; 새 버전 순환 겹침을 피하려고 세트를 시험 사이에 옮기지 않는 제약)
+  if (o.forbidSets) usable.forEach((c) => ids.forEach((id, s) => { if (o.forbidSets![id]?.has(c.key)) cons.push({ coef: [[x(c, s), 1]], sense: "<=", rhs: 0 }); }));
   if (o.cost) usable.forEach((c) => ids.forEach((_, s) => { obj[x(c, s)] += o.cost!(c); }));
   const uB = psychUnitBounds(), pB = psychPracticeBounds();
   usable.forEach((c) => cons.push({ coef: ids.map((_, s) => [x(c, s), 1] as [number, number]), sense: "<=", rhs: 1 })); // 같은 문항은 시험 하나에만
@@ -58,6 +60,7 @@ export function solvePsychSets(ids: string[], items: PsychItem[], o: { timeMs: n
     const setTerms = (): [number, number][] => [...mcSets.map((c) => [x(c, s), 1] as [number, number]), ...LT.map((e) => [vset.get(`${s}|${e.key}`)!, 1] as [number, number])];
     cons.push({ coef: [...singleTerms(), ...setTerms().map(([j, v]) => [j, v * PSYCH_SET_SIZE] as [number, number])], sense: "=", rhs: PSYCH_MC_COUNT }); // MC 75 = 단독 + 3 x 세트
     cons.push({ coef: setTerms(), sense: "=", rhs: SETN });
+    if (o.minExamPrep) cons.push({ coef: [...mcSingles, ...mcSets].filter((c) => (c.exam ?? 0) > 0).map((c) => [x(c, s), c.exam ?? 0] as [number, number]), sense: ">=", rhs: o.minExamPrep }); // 한 시험의 exam_prep MC 하한(가상 문항은 세지 않는다)
     for (const u of UNITS) {
       const co: [number, number][] = [...mcSingles.filter((c) => c.members[0].unit === u).map((c) => [x(c, s), 1] as [number, number]),
         ...mcSets.map((c) => [x(c, s), c.members.filter((m) => m.unit === u).length] as [number, number]).filter(([, v]) => v > 0),
@@ -163,11 +166,14 @@ function main() {
   const blocked = new Set<string>(); for (const f of arg("--block-file").split(",").filter(Boolean)) for (const st of (JSON.parse(readFileSync(f, "utf-8")) as { sets: { mcA?: string[]; frqA?: string[] }[] }).sets) for (const k of [...(st.mcA ?? []), ...(st.frqA ?? [])]) blocked.add(k);
   const setCount = Number(arg("--set-count", String(PSYCH_SET_COUNT)));
   let m: ReturnType<typeof solvePsychSets>;
-  if (has("--joint")) m = solvePsychSets(ids, pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), blocked, setCount });
+  const minExam = Number(arg("--min-exam-prep", "0")) || undefined, examWeight = Number(arg("--exam-weight", "0.01")), hdBonus = Number(arg("--hd-bonus", "0"));
+  const forbid: Record<string, Set<string>> = {}; if (arg("--forbid-swap-sets")) { const sn = JSON.parse(readFileSync(arg("--forbid-swap-sets"), "utf-8")) as Record<string, { slots: { candidateKey: string }[] }>; const setsOf = new Map(pool.filter((c) => c.shared).map((c) => [c.key, c])); for (const id of ["PS1", "PS2"]) { const other = id === "PS1" ? "PS2" : "PS1"; forbid[id] = new Set(sn[other].slots.map((x) => x.candidateKey).filter((k) => setsOf.has(k))); } } // 상대 시험이 지금 갖고 있는 세트는 가져오지 않는다
+  if (arg("--no-transfer")) { const sn = JSON.parse(readFileSync(arg("--no-transfer"), "utf-8")) as Record<string, { slots: { candidateKey: string }[] }>; for (const id of ["PS1", "PS2"]) { const other = id === "PS1" ? "PS2" : "PS1"; forbid[id] = new Set([...(forbid[id] ?? []), ...sn[other].slots.map((x) => x.candidateKey)]); } } // 상대 시험이 지금 갖고 있는 문항은 가져오지 않는다(새 버전 순환 겹침을 없애 두 시험을 서로 독립 계획으로 만든다)
+  if (has("--joint")) m = solvePsychSets(ids, pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), minExamPrep: minExam, examWeight, hdBonus, blocked, setCount, forbidSets: forbid });
   else { // 순차: PS1 을 최적으로 푼 뒤 그 문항·변형·시나리오를 막고 PS2 를 푼다(세트 간 겹침 0 보장)
     const out: PsychResult[] = []; let res = { status: "optimal", obj: 0, nodes: 0, x: [0] } as unknown as ReturnType<typeof solvePsychSets>["res"]; const bl = new Set(blocked); const blArch = new Set<string>(); const blSig = new Set<string>();
     for (const id of ids) {
-      const one = solvePsychSets([id], pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), blocked: bl, blockedArchetypes: blArch, blockedSigs: blSig, setCount });
+      const one = solvePsychSets([id], pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), minExamPrep: minExam, examWeight, hdBonus, forbidSets: forbid, blocked: bl, blockedArchetypes: blArch, blockedSigs: blSig, setCount });
       out.push(...one.out); res = { ...one.res, obj: (res.obj ?? 0) + one.res.obj, nodes: (res.nodes ?? 0) + one.res.nodes, status: one.res.status } as typeof res;
       const r0 = one.out[0];
       for (const it of [...r0.singles, ...r0.sets, ...r0.frq]) { bl.add(it.key); if (it.sig) blSig.add(it.sig); }

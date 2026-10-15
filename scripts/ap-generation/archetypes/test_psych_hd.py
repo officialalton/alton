@@ -12,10 +12,12 @@ import registry as R
 import psych_p0_hd_a as A
 import psych_p0_hd_b as B
 import psych_p0_hd_c as C
+import psych_p0_hd_d as D
+import psych_p0_hd_e as E  # noqa: F401
 from psych_hd_common import pct_rows_ok
 
-FIXED = [(m.__name__, a) for m in (B, C) for a in m.ITEMS]
-CODE = ["ps_hd_s_did", "ps_hd_s_zcompare", "ps_hd_s_counts", "ps_hd_s_placebo3", "ps_hd_s_corr", "ps_hd_s_skew", "ps_hd_s_pvalue", "ps_hd_s_reliab", "ps_hd_s_normal_count"]
+FIXED = [(m.__name__, a) for m in (B, C, D) for a in m.ITEMS]
+CODE = ["ps_hd_s_did", "ps_hd_s_zcompare", "ps_hd_s_counts", "ps_hd_s_placebo3", "ps_hd_s_corr", "ps_hd_s_skew", "ps_hd_s_pvalue", "ps_hd_s_reliab", "ps_hd_s_normal_count", "ps_hd_s_spacing", "ps_hd_s_twins", "ps_hd_s_relative", "ps_hd_s_twoway"]
 
 
 def build(n, seeds=range(9500, 9540)):
@@ -31,6 +33,8 @@ class TestHd(unittest.TestCase):
         self.assertEqual(len(B.ITEMS), 11)
         self.assertEqual(len(R.PSYCH_STAGES["psych_hd_a"]), 26)
         self.assertEqual(len(R.PSYCH_STAGES["psych_hd_b"]), 22)
+        self.assertEqual(len(D.ITEMS), 9)
+        self.assertEqual(len(R.PSYCH_STAGES["psych_hd_c"]), 13)
 
     def test_fixed_variants_have_three_thinking_steps_and_key_not_longest(self):
         for mod, (arch, topic, skill, concept, ek, variants) in FIXED:
@@ -114,7 +118,7 @@ class TestHd(unittest.TestCase):
 
     def test_units_and_practices(self):
         units = {}; prac = {}
-        for n in R.PSYCH_STAGES["psych_hd_a"] + R.PSYCH_STAGES["psych_hd_b"]:
+        for n in R.PSYCH_STAGES["psych_hd_a"] + R.PSYCH_STAGES["psych_hd_b"] + R.PSYCH_STAGES["psych_hd_c"]:
             if n.startswith("pss_"):
                 continue
             p = build(n, range(9500, 9502))[0]

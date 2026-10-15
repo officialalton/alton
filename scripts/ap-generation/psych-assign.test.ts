@@ -4,9 +4,9 @@ import { LIB_FRQ, LIB_SETS, LIB_SINGLES, buildPsychOrder, solvePsychSets, toRepo
 import type { PsychItem } from "./psych-pool";
 
 let n = 0;
-const single = (e: { id: string; topic: string; skill: string }, copy: number): PsychItem => ({ key: `m${n++}`, kind: "mc", shared: false, members: [{ unit: Number(e.topic.split(".")[0]), skill: e.skill, topic: e.topic }], fam: `${e.id}|${e.topic}`, frqType: "", archetype: e.id, screen: true, batch: "t", renderType: "none", stimKind: "none", sig: `${e.id}|${copy}`, exam: 0 });
-const set = (e: (typeof LIB_SETS)[number]): PsychItem => ({ key: `s${n++}`, kind: "mc", shared: true, members: e.members.map((m, i) => ({ unit: m.unit, skill: m.skill, topic: `${m.unit}.1#${i}` })), fam: e.id, frqType: "", archetype: e.id, screen: true, batch: "t", renderType: "none", stimKind: "none", sig: e.id, exam: 0 });
-const frq = (e: (typeof LIB_FRQ)[number]): PsychItem => ({ key: `f${n++}`, kind: "frq", shared: false, members: [], fam: e.id, frqType: e.type, archetype: e.id, screen: true, batch: "t", renderType: "table", stimKind: "table", sig: "", exam: 0 });
+const single = (e: { id: string; topic: string; skill: string }, copy: number): PsychItem => ({ key: `m${n++}`, kind: "mc", shared: false, members: [{ unit: Number(e.topic.split(".")[0]), skill: e.skill, topic: e.topic }], fam: `${e.id}|${e.topic}`, frqType: "", archetype: e.id, screen: true, batch: "t", renderType: "none", stimKind: "none", sig: `${e.id}|${copy}`, exam: 0, keyUnit: Number(e.topic.split(".")[0]) });
+const set = (e: (typeof LIB_SETS)[number]): PsychItem => ({ key: `s${n++}`, kind: "mc", shared: true, members: e.members.map((m, i) => ({ unit: m.unit, skill: m.skill, topic: `${m.unit}.1#${i}` })), fam: e.id, frqType: "", archetype: e.id, screen: true, batch: "t", renderType: "none", stimKind: "none", sig: e.id, exam: 0, keyUnit: e.unit });
+const frq = (e: (typeof LIB_FRQ)[number]): PsychItem => ({ key: `f${n++}`, kind: "frq", shared: false, members: [], fam: e.id, frqType: e.type, archetype: e.id, screen: true, batch: "t", renderType: "table", stimKind: "table", sig: "", exam: 0, keyUnit: 0 });
 const stock = () => { n = 0; return [...LIB_SINGLES.flatMap((e) => [single(e, 0), single(e, 1)]), ...LIB_SETS.map(set), ...LIB_FRQ.map(frq)]; };
 
 describe("psych exact assignment (ILP + independent verifier)", () => {
