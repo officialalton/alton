@@ -39,11 +39,7 @@
   "lib/ap-exam/psych-rules.ts"
  ],
  "skipStages": [
-  "gen",
-  "solve",
-  "review",
-  "review-retry",
-  "review-retry2"
+  "gen"
  ],
  "hardStopCumulativeUsd": 225.1,
  "_budget_estimate": {
@@ -52,5 +48,25 @@
   "taskCapUsd": 6,
   "ownerStopLine": 295
  },
- "_note": "v2: re-label only. Reuses the v1 run's solve/review results (item text unchanged) and re-runs plan, blueprint, check, difficulty, verdicts with the difficulty-signal declarations (generator hash differs from v1)."
+ "_note": "v2: difficulty-signal declarations enabled; reuses the v1 run's solve/review/difficulty results only for cells whose archetype text is unchanged (changed cells and all difficulty labels are re-run).",
+ "expected": {
+  "generatorHash": "92ada9064888",
+  "reviewerPromptHash": "1be624164053",
+  "difficultyPromptHash": "9bda2250d42c",
+  "parserHash": "7528bbe8cdfc",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ }
 }

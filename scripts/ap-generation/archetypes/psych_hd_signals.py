@@ -57,7 +57,7 @@ CONCEPTS = {
  "hd_c_language_rules": ["overregularization as evidence of rule learning", "stages of language development"],
  "hd_c_punishment_reinforcement": ["added versus removed stimulus", "reinforcement versus punishment"],
  "hd_c_piaget_processes": ["assimilation and accommodation", "object permanence in the sensorimotor stage"],
- "hd_c_emotion_culture": ["universal expressions and display rules", "components of emotion"],
+ "hd_c_emotion_culture": ["universal expressions and display rules", "cultural norms about showing emotion"],
  "hd_c_prejudice_chain": ["stereotype, prejudice, and discrimination", "in-group bias"],
  "hd_c_drug_treatment": ["reuptake blocking and receptor antagonism", "biomedical treatment"],
  "hd_r_ethics_animals": ["institutional review of animal research", "minimizing pain and humane care"],
@@ -70,7 +70,7 @@ FAILS = {
  "hd_r_opdef_validity": [[2, 3, 3], [2, 3, 3]], "hd_r_data_conclusion": [[3, 2, 1], [2, 3, 3]], "hd_r_replication": [[3, 3, 2], [1, 3, 3]],
  "hd_r_meta_effect": [[2, 1, 2], [1, 3, 1]], "hd_r_design_choice": [[2, 1, 2], [2, 2, 1]],
  "hd_c_synapse_drug": [[2, 1, 1], [1, 3, 1]], "hd_c_brain_memory": [[2, 3, 2], [1, 2, 2]], "hd_c_sleep_chain": [[1, 2, 3], [2, 1, 3]],
- "hd_c_nervous_system": [[2, 1, 2], [3, 1, 2]], "hd_c_heredity_environment": [[2, 3, 1], [1, 3, 3]], "hd_c_sensation_process": [[2, 1, 2], [2, 1, 2]],
+ "hd_c_nervous_system": [[2, 1, 2], [3, 1, 2]], "hd_c_heredity_environment": [[2, 3, 1], [1, 3, 3]], "hd_c_sensation_process": [[2, 1, 2], [2, 3, 3]],
  "hd_c_study_plan": [[1, 1, 2], [1, 3, 2]], "hd_c_retrieval_cues": [[1, 2, 3], [2, 2, 3]], "hd_c_forgetting_chain": [[3, 2, 2], [2, 2, 1]],
  "hd_c_decision_bias": [[2, 2, 3], [2, 2, 1]], "hd_c_depth_cues": [[3, 2, 3], [1, 1, 2]], "hd_c_intelligence_views": [[2, 1, 3], [3, 3, 1]],
  "hd_c_conditioning_chain": [[1, 3, 1], [1, 2, 1]], "hd_c_operant_chain": [[2, 1, 1], [1, 2, 1]], "hd_c_cognitive_learning": [[1, 3, 2], [1, 1, 2]],
@@ -83,7 +83,7 @@ FAILS = {
  "hd_r_survey_bias": [[2, 1, 2], [1, 1, 3]], "hd_r_generalize_culture": [[3, 2, 3], [2, 3, 3]], "hd_r_negative_corr": [[1, 1, 3], [1, 1, 3]],
  "hd_c_neuron_signal": [[1, 2, 3], [3, 1, 1]], "hd_c_lobe_function": [[2, 3, 2], [1, 3, 2]], "hd_c_sleep_disorders": [[1, 1, 3], [1, 1, 3]],
  "hd_c_problem_obstacles": [[2, 3, 3], [2, 2, 3]], "hd_c_language_rules": [[1, 2, 3], [2, 2, 3]], "hd_c_punishment_reinforcement": [[2, 1, 1], [1, 2, 1]],
- "hd_c_piaget_processes": [[3, 2, 1], [3, 2, 1]], "hd_c_emotion_culture": [[1, 3, 2], [2, 1, 3]], "hd_c_prejudice_chain": [[2, 3, 1], [3, 3, 1]],
+ "hd_c_piaget_processes": [[3, 2, 1], [3, 2, 1]], "hd_c_emotion_culture": [[1, 3, 2], [2, 3, 3]], "hd_c_prejudice_chain": [[2, 3, 1], [3, 3, 1]],
  "hd_c_drug_treatment": [[1, 2, 1], [1, 2, 1]], "hd_r_ethics_animals": [[1, 2, 3], [2, 1, 3]],
 }
 # 표(자료)가 있는 변형 = 읽어야 할 자료 2(시나리오 문장 + 표)
