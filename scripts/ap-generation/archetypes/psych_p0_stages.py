@@ -24,3 +24,6 @@ STAGE_P2_MC = ['ps_data_retrieval', 'ps_data_scatter', 'ps_data_serial', 'ps_dat
 # P3: 검토기 지적을 고친 세트 8개 + 고친 EBQ 3개(FRQ 목록은 별도)
 STAGE_P3_MC = ["pss_u1_injury_case", "pss_u1_twin_reading", "pss_u3_language_longitudinal", "pss_u4_initiation_club", "pss_u4_bystander_lab", "pss_u4_attribution_cultures", "pss_u3_attachment_style", "pss_u2_eyewitness_speed"]
 STAGE_P3_FRQ = ["psf_ebq_service", "psf_ebq_spacing", "psf_ebq_team_bonus"]
+
+# P4: 검토기 지적을 한 번 더 고친 세트 5개 + 연구 방법 원형 6개(단원 4·5 부족 칸)
+STAGE_P4_MC = ["pss_u1_twin_reading", "pss_u3_language_longitudinal", "pss_u4_initiation_club", "pss_u3_attachment_style", "pss_u2_eyewitness_speed", "ps_r_casestudy_confidential", "ps_r_personality_design", "ps_r_replication", "ps_r_survey_wording", "ps_r_therapy_ethics", "ps_r_therapy_placebo"]
