@@ -7,12 +7,12 @@ import { parseStoredText, type SourceEntry } from "./englit-sources";
 
 export type RealOption = LtOptionRaw & { evidence_quote: string; evidence_kind: "text" | "absence" };
 export type RealItemRaw = Omit<LtItemRaw, "options"> & { options: RealOption[] };
-export const groupOfEntry = (e: Pick<SourceEntry, "genre">): "poetry" | "short" | "longer" => (e.genre === "poetry" ? "poetry" : e.genre === "drama" ? "longer" : "short");
+export const groupOfEntry = (e: Pick<SourceEntry, "genre">): "poetry" | "short" | "longer" => (e.genre === "poetry" ? "poetry" : e.genre === "drama" || e.genre === "long_fiction" ? "longer" : "short");
 
 /** 학생 화면에 보이는 머리글(저자·연도·번역자·발췌 여부). 표지(REAL_TEXT_MARKER)는 realDisplay 가 붙인다. */
 export function realHeadnote(e: SourceEntry): string {
   const by = e.translator ? `${e.author}, translated by ${e.translator}` : e.author;
-  const kind = e.form === "poem" ? "poem" : e.form === "drama" ? "scene from a play" : "passage from a short story";
+  const kind = e.form === "poem" ? "poem" : e.form === "drama" ? "scene from a play" : e.genre === "long_fiction" ? "passage from a novel" : "passage from a short story";
   return `The following ${kind} is by ${by} (${e.year_first_published}).${e.excerpt.whole_work ? "" : " This is an excerpt."}`;
 }
 export function realStanzas(e: SourceEntry, storedText: string): string[][] {
