@@ -52,8 +52,8 @@ export function checkNewVersionComposition(source: SlotItem[], swaps: SwapReques
     const swapped = slots.filter((x) => next.get(`${x.section}:${x.position}`) !== x);
     if (!swapped.length) continue;
     if (swapped.length !== slots.length) { issues.push(`set_partial_swap_${k}_${swapped.length}/${slots.length}`); continue; }
-    const reps = new Set(slots.map((x) => next.get(`${x.section}:${x.position}`)!.candidateKey));
-    if (reps.size !== 1 || reps.has(null)) issues.push(`set_replacement_split_${k}`);
+    // 옛 세트가 통째로 바뀌었다. 채운 후보가 하나가 아니어도(영어 장문 재편: 크기가 다른 묶음으로 다시 묶음) 새 후보가 모두 완전하면(아래 set_replacement_incomplete) 묶음은 깨지지 않는다.
+    if (slots.some((x) => next.get(`${x.section}:${x.position}`)!.candidateKey === null)) issues.push(`set_replacement_split_${k}`);
   }
   // 반대로 세트 후보(문항 수 > 1)를 일부 슬롯에만 넣으면 세트가 깨진다.
   const addedKeys = new Map<string, number>();

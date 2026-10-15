@@ -58,9 +58,9 @@ describe("공유 자료 세트(3문항)는 새 버전에서 함께 움직인다"
   const swaps = (ids: string[], positions = [2, 3, 4]) => ids.map((id, i) => ({ section: "ap_mc", position: positions[i], problemId: id }));
   it("세트를 통째로 같은 교체 세트 하나로 바꾸면 통과", () => expect(checkNewVersionComposition(source, swaps(["n1", "n2", "n3"]), ctx(repl(["n1", "n2", "n3"], "newset"))).issues).toEqual([]));
   it("세트의 일부만 바꾸면 거절한다", () => expect(checkNewVersionComposition(source, swaps(["n1"], [2]), ctx(repl(["n1"], "newset"))).issues.join()).toMatch(/set_partial_swap_set_1\/3/));
-  it("세트 슬롯을 서로 다른 후보로 채우면 거절한다", () => {
+  it("세트 슬롯을 서로 다른 후보로 채우되 그 후보가 불완전하면 거절한다", () => {
     const reps = [...repl(["n1", "n2"], "newset"), ...repl(["n3"], "other")];
-    expect(checkNewVersionComposition(source, swaps(["n1", "n2", "n3"]), ctx(reps, [["newset", 3], ["other", 3]])).issues.join()).toMatch(/set_replacement_split_set/);
+    expect(checkNewVersionComposition(source, swaps(["n1", "n2", "n3"]), ctx(reps, [["newset", 3], ["other", 3]])).issues.join()).toMatch(/set_replacement_incomplete_newset_2\/3/);
   });
   it("단독 문항 슬롯 하나에 3문항 세트의 문항 하나만 넣으면 세트가 깨지므로 거절한다", () => {
     expect(checkNewVersionComposition(source, swaps(["n1"], [1]), ctx(repl(["n1"], "newset"))).issues.join()).toMatch(/set_replacement_incomplete_newset_1\/3/);
