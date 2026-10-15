@@ -1,0 +1,88 @@
+{
+ "version": "v1-englang-long-b",
+ "run": "englang-long-b",
+ "subject": "ap_english_language",
+ "mode": "mc",
+ "capUsd": 1.6,
+ "hardStopCumulativeUsd": 228,
+ "myTotalCapUsd": 9999,
+ "stages": [
+  "gen",
+  "check",
+  "solve",
+  "adv",
+  "judge",
+  "finalize"
+ ],
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ],
+  "adversary": "claude-fable-5-1",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "genModels": {
+  "reading": "claude-fable-5-1",
+  "writing": "claude-opus-5-5"
+ },
+ "effort": "medium",
+ "genEffort": "low",
+ "minKeyConfidence": 0.8,
+ "corpusExclude": [],
+ "generatorFiles": [
+  "lib/ap-generation/englang-gates.ts",
+  "lib/ap-generation/englang-frq.ts",
+  "lib/ap-generation/englang-plan.ts",
+  "lib/ap-generation/englang-prompts.ts",
+  "lib/ap-generation/english-text-stats.ts",
+  "lib/ap-generation/subjects/englang.ts",
+  "lib/ap-exam/elang-rules.ts",
+  "scripts/ap-generation/englang-pipeline.ts",
+  "scripts/mock-exam-generation/batch-lib.ts"
+ ],
+ "expected": {
+  "hash": "e757ded65ada"
+ },
+ "_note": "EL long-passage restructure, part b: writing sets lw02 (EL2 long) and lw05 (EL1 long). EL1 short writing set = w22 (in place), EL2 short = w32 (in place) so a regroup new-version plan can leave them unswapped.",
+ "ext": [
+  {
+   "id": "lw02",
+   "base": "el-rv:ap_english_language-w02-k0",
+   "newSkills": [
+    "2.A",
+    "2.B",
+    "2.A",
+    "4.B",
+    "6.A",
+    "8.A"
+   ],
+   "seed": 4109
+  },
+  {
+   "id": "lw05",
+   "base": "el-rv:ap_english_language-w05-k0",
+   "newSkills": [
+    "2.A",
+    "2.B",
+    "4.B",
+    "6.A",
+    "6.B",
+    "6.C",
+    "8.B",
+    "8.C"
+   ],
+   "seed": 4110
+  }
+ ]
+}
