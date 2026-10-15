@@ -1,0 +1,176 @@
+{
+ "version": "v1-englang-long-a",
+ "run": "englang-long-a",
+ "subject": "ap_english_language",
+ "mode": "mc",
+ "capUsd": 4.8,
+ "hardStopCumulativeUsd": 228,
+ "myTotalCapUsd": 9999,
+ "stages": [
+  "gen",
+  "check",
+  "solve",
+  "adv",
+  "judge",
+  "finalize"
+ ],
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ],
+  "adversary": "claude-fable-5-1",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "genModels": {
+  "reading": "claude-fable-5-1",
+  "writing": "claude-opus-5-5"
+ },
+ "effort": "medium",
+ "genEffort": "low",
+ "minKeyConfidence": 0.8,
+ "corpusExclude": [],
+ "generatorFiles": [
+  "lib/ap-generation/englang-gates.ts",
+  "lib/ap-generation/englang-frq.ts",
+  "lib/ap-generation/englang-plan.ts",
+  "lib/ap-generation/englang-prompts.ts",
+  "lib/ap-generation/english-text-stats.ts",
+  "lib/ap-generation/subjects/englang.ts",
+  "lib/ap-exam/elang-rules.ts",
+  "scripts/ap-generation/englang-pipeline.ts",
+  "scripts/mock-exam-generation/batch-lib.ts"
+ ],
+ "expected": {
+  "hash": "0a67f0ea38fa"
+ },
+ "_note": "EL long-passage restructure: extend 8 verified (el-rv) sets with extra items to the official set sizes (reading 11-14, writing 7-9). Passages and existing items are reused unchanged.",
+ "ext": [
+  {
+   "id": "lr11",
+   "base": "el-rv:ap_english_language-r11-k0",
+   "newSkills": [
+    "1.A",
+    "1.B",
+    "1.A",
+    "3.B",
+    "3.C",
+    "5.A",
+    "5.B",
+    "5.A",
+    "7.A",
+    "7.B"
+   ],
+   "seed": 4101
+  },
+  {
+   "id": "lr23",
+   "base": "el-rv:ap_english_language-r23-k0",
+   "newSkills": [
+    "1.A",
+    "1.B",
+    "1.A",
+    "3.A",
+    "3.C",
+    "5.C",
+    "5.B",
+    "5.C",
+    "7.B",
+    "7.C"
+   ],
+   "seed": 4102
+  },
+  {
+   "id": "lr01",
+   "base": "el-rv:ap_english_language-r01-k0",
+   "newSkills": [
+    "1.A",
+    "1.B",
+    "3.B",
+    "3.C",
+    "3.B",
+    "3.C",
+    "5.C",
+    "5.C",
+    "7.B",
+    "7.C"
+   ],
+   "seed": 4103
+  },
+  {
+   "id": "lr08",
+   "base": "el-rv:ap_english_language-r08-k0",
+   "newSkills": [
+    "1.A",
+    "1.A",
+    "3.A",
+    "3.B",
+    "3.A",
+    "3.B",
+    "5.A",
+    "5.A",
+    "7.B",
+    "7.C"
+   ],
+   "seed": 4104
+  },
+  {
+   "id": "lw04",
+   "base": "el-rv:ap_english_language-w04-k0",
+   "newSkills": [
+    "2.B",
+    "4.A",
+    "6.B",
+    "8.C"
+   ],
+   "seed": 4105
+  },
+  {
+   "id": "lw32",
+   "base": "el-rv:ap_english_language-w32-k0",
+   "newSkills": [
+    "2.B",
+    "4.B",
+    "6.A",
+    "8.B"
+   ],
+   "seed": 4106
+  },
+  {
+   "id": "lw06",
+   "base": "el-rv:ap_english_language-w06-k0",
+   "newSkills": [
+    "2.A",
+    "2.A",
+    "4.B",
+    "6.A",
+    "6.B",
+    "8.A"
+   ],
+   "seed": 4107
+  },
+  {
+   "id": "lw22",
+   "base": "el-rv:ap_english_language-w22-k0",
+   "newSkills": [
+    "2.B",
+    "2.B",
+    "6.B",
+    "6.C",
+    "6.A",
+    "8.A"
+   ],
+   "seed": 4108
+  }
+ ]
+}

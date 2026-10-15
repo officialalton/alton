@@ -18,6 +18,8 @@ type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-ex
 export type ElCfg = {
   version: string; run: string; subject: string; mode: "mc" | "frq"; capUsd: number; hardStopCumulativeUsd: number; myTotalCapUsd: number; stages: string[];
   plan?: { reading?: { sets: number; seed: number; startIndex?: number; perSet?: number }; writing?: { sets: number; seed: number; startIndex?: number; perSet?: number } };
+  /** 확장 묶음: 검증된 기존 묶음(base = 재고 stockKey)에 문항만 더한다. 지문·기존 문항은 그대로(검증 결과 재사용). */
+  ext?: { id: string; base: string; newSkills: string[]; seed: number }[]; extSource?: string;
   frqPlan?: { id: string; type: "synthesis" | "rhetorical_analysis" | "argument"; theme: string; seed: number }[];
   models: { gen: string; solvers: string[]; adversary: string; judge: string; review: string; sampleHigh: string; sampleLow: string; graders: string[] };
   effort: string; genEffort?: string; gradeEffort?: string; sampleCands?: number; genModels?: { reading?: string; writing?: string }; corpusExclude?: string[]; syncStages?: string[]; minKeyConfidence: number; generatorFiles: string[]; expected: { hash: string };
@@ -89,9 +91,11 @@ function corpus(excludeRun: string): CorpusDoc[] {
     const sf = path.join(ROOT, d, "sets.json"); if (existsSync(sf)) for (const s of JSON.parse(readFileSync(sf, "utf-8")) as { spec: P.SetSpec; set: ElSetRaw | null }[]) if (s.set) docs.push({ id: `${d}:${s.spec.id}`, text: passagePlain(s.set) });
     const ff = path.join(ROOT, d, "frq.json"); if (existsSync(ff)) for (const f of JSON.parse(readFileSync(ff, "utf-8")) as { id: string; payload: ElFrqPayload | null }[]) if (f.payload) docs.push({ id: `${d}:${f.id}`, text: f.payload.sources.map(sourceText).join("\n\n") });
   }
-  return docs;
+  const own = extPlain(); return own.size ? docs.filter((d) => !own.has(d.text)) : docs; // 확장 묶음의 기반 지문은 자기 자신과 비교하지 않는다
 }
 
+type ExtSpec = P.SetSpec & { baseCount?: number; baseKey?: string; baseKc?: (Json | null)[] };
+const extPlain = (): Set<string> => { const out = new Set<string>(); if (!cfg.ext?.length) return out; const src = JSON.parse(readFileSync(path.resolve("data/ap/stock", cfg.extSource ?? "el-rv-items.json"), "utf-8")) as { stockKey: string; payload: Json }[]; for (const e of cfg.ext) { const b = src.find((x) => x.stockKey === e.base); if (b) out.add(passagePlain({ kind: b.payload.el_passage.kind, title: b.payload.el_passage.title, paragraphs: b.payload.el_passage.paragraphs, provenance: b.payload.provenance, blueprint: {}, items: [] } as ElSetRaw)); } return out; };
 // ── 단계: plan ─────────────────────────────────────────────────────
 function specsOf(): P.SetSpec[] {
   const used = new Set<string>(); const out: P.SetSpec[] = [];
@@ -101,7 +105,25 @@ function specsOf(): P.SetSpec[] {
 }
 
 // ── 단계: gen / check ──────────────────────────────────────────────
+async function extGenStage() {
+  const src = new Map((JSON.parse(readFileSync(path.resolve("data/ap/stock", cfg.extSource ?? "el-rv-items.json"), "utf-8")) as { stockKey: string; payload: Json }[]).map((r) => [r.stockKey, r]));
+  const specs: ExtSpec[] = []; const reqs: BatchReq[] = []; const base: Record<string, Json[]> = {}; const shell: Record<string, Json> = {};
+  for (const e of cfg.ext ?? []) {
+    const b = src.get(e.base); if (!b) throw new Error(`기반 묶음 없음: ${e.base}`); const pl = b.payload; const kind = pl.el_passage.kind as "reading" | "writing";
+    const items = (pl.items as Json[]).map((it) => ({ skill: it.skill, topic: it.topic, cognitive: it.cognitive, stem: it.stem, options: (it.options as Json[]).map((o, j) => ({ text: o.text, is_key: j === it.key_index, label: o.label, why: o.why })), evidence_sentence_ids: it.evidence_sentence_ids ?? [], devices_used: it.devices_used ?? [], est_seconds: it.est_seconds ?? 75 }));
+    base[e.id] = items; shell[e.id] = { blueprint: pl.blueprint, provenance: pl.provenance, title: pl.el_passage.title, paragraphs: pl.el_passage.paragraphs };
+    const spec: ExtSpec = { id: e.id, kind, genre: String(pl.genre ?? ""), theme: String(pl.theme ?? ""), skills: [...items.map((i) => String(i.skill)), ...e.newSkills], seed: e.seed, baseCount: items.length, baseKey: e.base, baseKc: (pl.items as Json[]).map((it) => (it.key_confidence as Json) ?? null) };
+    specs.push(spec);
+    const shown = passageDisplay({ kind, title: shell[e.id].title, paragraphs: shell[e.id].paragraphs, provenance: pl.provenance } as ElSetRaw);
+    reqs.push(mk(`g-${e.id}`, cfg.genModels?.[kind] ?? cfg.models.gen, kind === "reading" ? P.EXT_READING_SYSTEM : P.EXT_WRITING_SYSTEM, P.extTool, P.extUser({ kind, passageShown: shown, blueprint: pl.blueprint, existing: items.map((i) => ({ skill: String(i.skill), stem: String(i.stem) })), newSkills: e.newSkills, seed: e.seed }), 12000, false, cfg.genEffort ?? cfg.effort));
+  }
+  wj("plan.json", { specs, summary: { sets: specs.length, newItems: (cfg.ext ?? []).reduce((a, e) => a + e.newSkills.length, 0) } });
+  const est = estimate(cfg.models.gen, reqs.length, 3500, 6000); const out = await call("gen", reqs, est);
+  const gen: Record<string, Json | null> = {}; for (const e of cfg.ext ?? []) { const o = out.get(`g-${e.id}`); gen[`g-${e.id}`] = o && Array.isArray(o.items) ? { ...shell[e.id], items: [...base[e.id], ...(o.items as Json[])] } : null; }
+  wj("gen.json", gen);
+}
 async function genStage() {
+  if (cfg.ext?.length) return extGenStage();
   const specs = specsOf(); wj("plan.json", { specs, summary: planSummary(specs) });
   const reqs = specs.map((s) => mk(`g-${s.id}`, cfg.genModels?.[s.kind] ?? cfg.models.gen, s.kind === "reading" ? P.GEN_READING_SYSTEM : P.GEN_WRITING_SYSTEM, P.setTool, P.genUser(s), 20000, false, cfg.genEffort ?? cfg.effort));
   const est = estimate(cfg.models.gen, reqs.length, 2500, 9000);
@@ -110,14 +132,15 @@ async function genStage() {
 function checkStage() {
   const specs = rj<{ specs: P.SetSpec[] }>("plan.json", { specs: [] }).specs; const gen = rj<Record<string, Json | null>>("gen.json", {}); const prior = corpus(cfg.run);
   const rows: { spec: P.SetSpec; set: ElSetRaw | null; setViolations: string[]; itemViolations: string[][]; items: Json[] }[] = []; const same: CorpusDoc[] = [];
-  const total = specs.reduce((a, s) => a + s.skills.length, 0); const pos = balancedKeyPositions(Math.max(total, 4), 7919 + specs.length); let pi = 0;
+  const total = specs.reduce((a, s) => a + s.skills.length - ((s as ExtSpec).baseCount ?? 0), 0); const pos = balancedKeyPositions(Math.max(total, 4), 7919 + specs.length); let pi = 0;
   for (const spec of specs) {
     const set = parseSet(spec, gen[`g-${spec.id}`] as Json); if (!set) { rows.push({ spec, set: null, setViolations: ["no_tool_output_or_unparseable"], itemViolations: [], items: [] }); continue; }
     const sv = [...setViolations(set), ...setItemSpread(set.items), ...similarityViolations(passagePlain(set), [...prior, ...same])];
     same.push({ id: `${cfg.run}:${spec.id}`, text: passagePlain(set) });
     if (set.items.length !== spec.skills.length) sv.push(`item_count_${set.items.length}_not_${spec.skills.length}`);
     const iv = set.items.map((it, i) => { const v = itemViolations(set, it); if (it.skill !== spec.skills[i]) v.push("skill_not_as_requested"); return v; });
-    const items = set.items.map((it, i) => { const placed = placeKey(it.options, pos[pi++ % pos.length], 31 * (i + 1) + spec.seed); return { ...it, options: placed.options, key_index: placed.key_index, det: iv[i] }; });
+    const bc = (spec as ExtSpec).baseCount ?? 0;
+    const items = set.items.map((it, i) => { if (i < bc) return { ...it, key_index: it.options.findIndex((o) => o.is_key), det: iv[i], pre: true }; const placed = placeKey(it.options, pos[pi++ % pos.length], 31 * (i + 1) + spec.seed); return { ...it, options: placed.options, key_index: placed.key_index, det: iv[i], pre: false }; });
     rows.push({ spec, set, setViolations: sv, itemViolations: iv, items });
   }
   wj("sets.json", rows);
@@ -129,14 +152,14 @@ function checkStage() {
 }
 
 // ── 단계: solve / adv / judge / review ─────────────────────────────
-type CheckRow = { spec: P.SetSpec; set: ElSetRaw | null; setViolations: string[]; itemViolations: string[][]; items: (ElItemRaw & { key_index: number; det: string[] })[] };
+type CheckRow = { spec: P.SetSpec; set: ElSetRaw | null; setViolations: string[]; itemViolations: string[][]; items: (ElItemRaw & { key_index: number; det: string[]; pre?: boolean })[] };
 const HARD_SET = (v: string) => !/^(key_is_longest|similar_to_)/.test(v) || /^similar_to_/.test(v);
 const setAlive = (r: CheckRow) => Boolean(r.set) && !r.setViolations.some(HARD_SET);
 const perm = (n: number, k: number): number[] => (k === 0 ? Array.from({ length: n }, (_, i) => i) : k === 1 ? Array.from({ length: n }, (_, i) => n - 1 - i) : Array.from({ length: n }, (_, i) => (i + 1) % n));
 async function solveStage() {
   const rows = rj<CheckRow[]>("sets.json", []); const reqs: BatchReq[] = []; const meta: { id: string; setId: string; k: number; idx: number[] }[] = [];
   for (const r of rows) {
-    if (!setAlive(r)) continue; const idx = r.items.map((_, i) => i).filter((i) => r.items[i].det.length === 0); if (!idx.length) continue;
+    if (!setAlive(r)) continue; const idx = r.items.map((_, i) => i).filter((i) => r.items[i].det.length === 0 && !r.items[i].pre); if (!idx.length) continue;
     cfg.models.solvers.forEach((model, k) => {
       const shown = idx.map((i) => ({ stem: r.items[i].stem, options: perm(4, k).map((j) => r.items[i].options[j].text) }));
       reqs.push(mk(`v${k}-${r.spec.id}-${idx.join("")}`, model, P.SOLVER_SYSTEMS[k], P.SOLVER_TOOL, P.solverUser(passageDisplay(r.set!), shown), 4000)); meta.push({ id: `v${k}-${r.spec.id}-${idx.join("")}`, setId: r.spec.id, k, idx });
@@ -152,7 +175,7 @@ async function solveStage() {
   wj("solve.json", votes);
   let a3 = 0, tot = 0; for (const r of rows) r.items.forEach((it, i) => { const v = votes[r.spec.id]?.[i]; if (!v) return; tot++; if (v.every((x) => x && x.choice === it.key_index)) a3++; }); console.log(`[solve] 3/3 일치 ${a3}/${tot}`);
 }
-const solved = (votes: Record<string, (SolverVote | null)[][]>, r: CheckRow, i: number) => { const v = votes[r.spec.id]?.[i]; return Boolean(v) && v!.every((x) => x && x.choice === r.items[i].key_index);};
+const solved = (votes: Record<string, (SolverVote | null)[][]>, r: CheckRow, i: number) => { if (r.items[i].pre) return false; const v = votes[r.spec.id]?.[i]; return Boolean(v) && v!.every((x) => x && x.choice === r.items[i].key_index);};
 async function advStage() {
   const rows = rj<CheckRow[]>("sets.json", []); const votes = rj<Record<string, (SolverVote | null)[][]>>("solve.json", {}); const reqs: BatchReq[] = []; const meta: { id: string; setId: string; idx: number[] }[] = [];
   for (const r of rows) {
@@ -194,6 +217,12 @@ function finalizeStage() {
     const reviewOut = rv[`p-${r.spec.id}`]; const reviewBad = reviewOut ? Boolean(reviewOut.resembles_known_text) || Boolean(reviewOut.real_world_error) || !reviewOut.ok : true;
     const kept: { it: (typeof r.items)[number]; kc: ReturnType<typeof keyConfidence>; adv: Json | null; judge: Json | null }[] = []; const excluded: Json[] = [];
     r.items.forEach((it, i) => {
+      if (it.pre) { // 확장 묶음의 기존 문항: 이전 파이프라인 검증 결과(key_confidence)를 그대로 가져온다. 결정적 게이트만 다시 본다.
+        const bk = (r.spec as ExtSpec).baseKc?.[i] as Json | null; const okPre = it.det.length === 0 && setAlive(r);
+        audit.push({ set: r.spec.id, i, skill: it.skill, pre: true, det: it.det, solverAgree: bk?.solver_agreement ?? null, adversary: bk?.adversary ?? null, judge: bk?.judge ?? null, score: bk?.score ?? null, pass: okPre, reasons: it.det });
+        if (okPre) kept.push({ it, kc: { score: bk?.score ?? 0, band: bk?.band, solverAgreement: bk?.solver_agreement } as never, adv: null, judge: null }); else excluded.push({ index: i, skill: it.skill, reasons: it.det });
+        return;
+      }
       const v = (votes[r.spec.id]?.[i] ?? []).filter(Boolean) as SolverVote[]; const a = adv[r.spec.id]?.[i] ?? null; const j = jd[r.spec.id]?.[i] ?? null;
       const kc = keyConfidence({ keyIndex: it.key_index, votes: v.length === cfg.models.solvers.length ? v : [], adversary: a ? { defensibility: a.defensibility, alt_index: a.alt_index } : null, judge: j ? { verdict: j.verdict } : null, detViolations: [...it.det, ...(a?.key_flaw ? [`adversary_key_flaw`] : []), ...(a?.stem_issue ? ["adversary_stem_issue"] : [])], minScore: cfg.minKeyConfidence });
       audit.push({ set: r.spec.id, i, skill: it.skill, det: it.det, solverAgree: kc.solverAgreement, adversary: a?.defensibility ?? null, judge: j?.verdict ?? null, score: kc.score, pass: kc.pass && setAlive(r) && !reviewBad, reasons: kc.reasons });
@@ -206,9 +235,9 @@ function finalizeStage() {
       archetype: `el_${r.spec.kind}_${it.skill.replace(".", "")}`, topic: it.topic || elTopicFor(it.skill), skill: it.skill, cognitive: it.cognitive, stem: it.stem,
       options: it.options.map((o) => ({ text: o.text, why: o.why, value: null, label: o.label })), key_index: it.key_index, explanation_en: explanationOf(it), est_seconds: it.est_seconds ?? 75,
       evidence_sentence_ids: it.evidence_sentence_ids, devices_used: it.devices_used ?? [],
-      key_confidence: { score: kc.score, band: kc.band, solver_agreement: kc.solverAgreement, adversary: a?.defensibility ?? null, judge: j?.verdict ?? null, solver_votes: (votes[r.spec.id]?.[r.items.indexOf(it)] ?? []).map((x) => x && { choice: x.choice, confidence: x.confidence }) },
+      key_confidence: (it as { pre?: boolean }).pre ? ((r.spec as ExtSpec).baseKc?.[r.items.indexOf(it)] ?? null) : { score: kc.score, band: kc.band, solver_agreement: kc.solverAgreement, adversary: a?.defensibility ?? null, judge: j?.verdict ?? null, solver_votes: (votes[r.spec.id]?.[r.items.indexOf(it)] ?? []).map((x) => x && { choice: x.choice, confidence: x.confidence }) },
     }));
-    const diff = items.map((it) => ({ label: it.cognitive === "identify" && it.key_confidence.adversary === "none" ? "basic_learning" : it.cognitive === "evaluate" && it.key_confidence.adversary === "weak" ? "advanced_supplement" : "exam_prep" }));
+    const diff = items.map((it) => ({ label: it.cognitive === "identify" && it.key_confidence?.adversary === "none" ? "basic_learning" : it.cognitive === "evaluate" && it.key_confidence?.adversary === "weak" ? "advanced_supplement" : "exam_prep" }));
     cands.push({ ...base, candidateKey: `ap_english_language-${r.spec.id}-k0`, keywordCode: items[0].topic, unitCode: unitOfTopic(items[0].topic), skillPrimary: first.skill, structure: "shared_stimulus_set", archetype: `el_${r.spec.kind}_${r.spec.id}`, reviewState: "auto_passed", rejectionReason: null, difficultyProvisional: "exam_prep", difficulty: diff,
       payload: { archetype: `el_${r.spec.kind}_${r.spec.id}`, topic: items[0].topic, skill: first.skill, calculator: "na", set_intro: display, el_passage: { kind: r.spec.kind, title: r.set.title, paragraphs: r.set.paragraphs, sentence_count: r.set.paragraphs.flat().length }, provenance: r.set.provenance, blueprint: r.set.blueprint, theme: r.spec.theme, genre: r.spec.genre, items, excluded_items: excluded, review: { passage_ok: !reviewBad, issues: reviewOut?.issues ?? [] } } });
   }
