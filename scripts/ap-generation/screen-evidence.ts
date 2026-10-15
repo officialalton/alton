@@ -24,7 +24,7 @@ const DB_URL = TARGET.dbUrl;
 const BASE = arg("base-url", "http://localhost:3011");
 if (!/^http:\/\/(localhost|127\.0\.0\.1)[:/]/.test(BASE)) { console.error("--base-url 은 로컬이어야 합니다."); process.exit(1); }
 const PW = process.env.SEED_TEST_PASSWORD; if (!PW) { console.error("SEED_TEST_PASSWORD 가 필요합니다."); process.exit(1); }
-const psql = (sql: string) => execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], { encoding: "utf-8" }).trim();
+const psql = (sql: string) => execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], { encoding: "utf-8", maxBuffer: 512 * 1024 * 1024 }).trim();
 const q = (t: string) => `'${t.replace(/'/g, "''")}'`;
 const VIEWPORTS = [{ w: 390, h: 844, mobile: true }, { w: 1280, h: 800, mobile: false }];
 
