@@ -192,7 +192,8 @@
     "kind": "alton_authored_from_real_sources",
     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
    }
-  }
+  },
+  "fact": []
  },
  {
   "id": "wh1_saq2",
@@ -385,7 +386,14 @@
     "kind": "alton_authored_from_real_sources",
     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
    }
-  }
+  },
+  "fact": [
+   {
+    "where": "Rubric Part C ('unrest weakening Yuan China') and outside_evidence 'Fall of the Yuan dynasty in 1368' offered as an effect of the mid-fourteenth-century plague",
+    "kind": "contested",
+    "detail": "Whether the Black Death (Yersinia pestis) actually struck Yuan China, and whether the epidemics recorded in China in the 1330s-1350s were plague that contributed to the dynasty's fall, is debated among historians (e.g., work by Hymes vs. skeptics such as Sussman and Buell). The facts list itself only says the Yuan fell after 'famine, floods, epidemics and revolt,' yet the rubric and evidence list present the plague weakening the Yuan as a creditable, settled effect. Should be qualified as a debated connection or reframed."
+   }
+  ]
  },
  {
   "id": "wh1_saq3",
@@ -578,7 +586,14 @@
     "kind": "alton_authored_from_real_sources",
     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
    }
-  }
+  },
+  "fact": [
+   {
+    "where": "Historical source credit line: 'Piri Reis (Ottoman admiral and cartographer), 1513'",
+    "kind": "anachronism",
+    "detail": "In 1513 Piri Reis was a corsair/ship captain (reis) who had served under his uncle Kemal Reis; he was not appointed to an admiral's command (Kapudan of the Ottoman Indian Ocean fleet) until 1547. The prompt and context more cautiously call him a 'naval commander'; labelling him 'admiral' for the 1513 map projects a later rank backward. Minor, but worth aligning with the prompt's wording."
+   }
+  ]
  },
  {
   "id": "wh1_dbq",
@@ -975,7 +990,8 @@
     "kind": "alton_authored_from_real_sources",
     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
    }
-  }
+  },
+  "fact": []
  },
  {
   "id": "wh1_leq",
@@ -1129,7 +1145,8 @@
     "kind": "alton_authored_from_real_sources",
     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
    }
-  }
+  },
+  "fact": []
  },
  {
   "id": "wh2_saq1",
@@ -1340,7 +1357,14 @@
     "kind": "alton_authored_from_real_sources",
     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
    }
-  }
+  },
+  "fact": [
+   {
+    "where": "Rubric Part B list of acceptable examples: 'or the Open Door notes'",
+    "kind": "other",
+    "detail": "The Open Door notes (1899–1900) were U.S. diplomatic circulars to the other powers asking them to preserve equal commercial access within their spheres of influence; they were not agreements imposed on China and did not themselves grant foreigners new privileges or autonomous bases. Listing them alongside the treaties as a development that 'shows foreigners gaining privileged status' is a stretch; at most they presuppose the spheres of influence created by the 1897–98 leaseholds. Consider dropping them or requiring the response to tie them explicitly to the spheres of influence."
+   }
+  ]
  },
  {
   "id": "wh2_saq2",
@@ -1527,7 +1551,14 @@
     "kind": "alton_authored_from_real_sources",
     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
    }
-  }
+  },
+  "fact": [
+   {
+    "where": "Document header / credit line: 'The Atlantic Charter (excerpt: points 2 and 3)'",
+    "kind": "inconsistent_with_documents",
+    "detail": "The header says the excerpt consists of points 2 and 3, but the quoted passage actually begins with the First point ('their countries seek no aggrandizement, territorial or other') and runs through the Third. The rubric note and expected answer (a) both rely on this first clause ('accept ... the first clause about seeking no aggrandizement'), so the header mislabels the excerpt's contents. It should read 'points 1 to 3' (the wording itself matches the real text)."
+   }
+  ]
  },
  {
   "id": "wh2_saq3",
@@ -1721,7 +1752,14 @@
     "kind": "alton_authored_from_real_sources",
     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
    }
-  }
+  },
+  "fact": [
+   {
+    "where": "IMAGE DESCRIPTION: 'two armored mounted warriors with bows and arrow quivers'",
+    "kind": "other",
+    "detail": "The detail actually shows three warriors, not two: a partially cropped helmeted, armored figure at the far left, the central fully armored rider in helmet and ō-yoroi, and a rider on the right wearing a soft cap (eboshi) rather than a helmet. Only the central figure is clearly in full armor with a helmet; the description undercounts the figures and overstates uniform armoring. Minor, but graders relying on the description could wrongly penalize a student who mentions three riders or the cap-wearing warrior."
+   }
+  ]
  },
  {
   "id": "wh2_dbq",
@@ -2119,7 +2157,8 @@
     "kind": "alton_authored_from_real_sources",
     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
    }
-  }
+  },
+  "fact": []
  },
  {
   "id": "wh2_leq",
@@ -2279,6 +2318,13 @@
     "kind": "alton_authored_from_real_sources",
     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
    }
-  }
+  },
+  "fact": [
+   {
+    "where": "EXPECTED FEATURES > outside_evidence, Haitian Revolution item",
+    "kind": "inaccurate",
+    "detail": "The entry says the revolution was 'led at first by Toussaint Louverture.' The 1791 uprising was initiated and initially led by figures such as Boukman, Jean-François, and Biassou; Toussaint rose to leadership only in 1793–94, and independence in 1804 was declared under Jean-Jacques Dessalines after Toussaint's capture in 1802. 'At first' misstates the sequence of leadership."
+   }
+  ]
  }
 ]

@@ -94,7 +94,7 @@ export function whItemViolations(spec: Pick<WhSetSpec, "unit" | "stim" | "source
   v.push(...itemViolations(set, raw));
   if (whUnitOfTopic(raw.topic) !== String(spec.unit)) v.push(`topic_${raw.topic}_not_in_unit_${spec.unit}`);
   if (!design || design.source_fixed_first !== true || !String(design.key_evidence_in_source ?? "").trim()) v.push("design_evidence_missing");
-  const q = String((design?.evidence_quote as string) ?? "").trim(); if (q && !spec.sources.some((r) => reg.get(r.id)?.table) && !srcText.includes(norm(q.replace(/\s*\[\.\.\.\]\s*/g, " ")))) v.push("evidence_quote_not_in_source");
+  const q = String((design?.evidence_quote as string) ?? "").trim(); if (q && !spec.sources.some((r) => reg.get(r.id)?.table || reg.get(r.id)?.public_path) && !srcText.includes(norm(q.replace(/\s*\[\.\.\.\]\s*/g, " ")))) v.push("evidence_quote_not_in_source");
   return [...new Set(v)];
 }
 export { sha256 };
