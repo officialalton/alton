@@ -1,5 +1,6 @@
 "use client";
 
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { useCallback, useEffect, useState } from "react";
 import {
   applyProblemErrorVerdictAction,
@@ -36,9 +37,9 @@ const DIFF_LABEL: Record<string, string> = { easy: "쉬움", medium: "보통", h
 const MODULE_LABEL: Record<string, string> = { rw_m1: "R&W M1", rw_m2: "R&W M2", math_m1: "Math M1", math_m2: "Math M2" };
 const OPEN_REASON: Record<string, string> = { no_spare: "여분 문항 없음", set_started: "응시 시작된 세트(변경 불가)" };
 
-function fmt(iso: string): string {
-  // 시간대는 lib/format-datetime 의 표시 기본값을 따른다(암묵적 로컬 시간대 금지).
-  return fmtDateTime(iso, { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" });
+function fmt(iso: string, tz?: string): string {
+  // 관리자 본인의 시간대(뷰어 tz)로 표시. 없으면 lib/format-datetime 기본값.
+  return fmtDateTime(iso, { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }, tz);
 }
 
 function resultText(r: ApplyVerdictResult): string {
@@ -59,6 +60,7 @@ function resultText(r: ApplyVerdictResult): string {
 /** 오류 신고 > 신고 내역 — 신고된 문항 목록(열린 신고 우선) · 상세 · 판정. 모든 쓰기는 관리자 RPC 하나(problem_error_apply_verdict).
  *  filter: 통계 화면에서 넘어온 조건(skill·난이도·영역·기간). 칩으로 보이고 해제할 수 있다. */
 export default function ReportedProblemsPanel({ filter, onClearFilter }: { filter?: ReportFilter; onClearFilter?: () => void } = {}) {
+  const tz = useViewerTimezone();
   const fSkill = filter?.skill ?? null;
   const fDiff = filter?.difficulty ?? null;
   const fDomain = filter?.domain ?? null;
@@ -217,7 +219,7 @@ export default function ReportedProblemsPanel({ filter, onClearFilter }: { filte
                   <p className="line-clamp-2 text-[13px] text-ink">{g.snippet || "(본문 없음)"}</p>
                   <p className="mt-1 text-[11px] text-grey-400">
                     {g.satDomain ?? "영역 없음"}
-                    {g.skillCode ? ` · ${g.skillCode}` : ""} · 최근 신고 {fmt(g.lastAt)}
+                    {g.skillCode ? ` · ${g.skillCode}` : ""} · 최근 신고 {fmt(g.lastAt, tz)}
                   </p>
                 </button>
               </li>
@@ -243,6 +245,7 @@ export default function ReportedProblemsPanel({ filter, onClearFilter }: { filte
 }
 
 function ReportDetail({ problemId, versionId, onBack, onNext }: { problemId: string; versionId: string; onBack: () => void; onNext?: () => boolean }) {
+  const tz = useViewerTimezone();
   const [d, setD] = useState<ReportedProblemDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [branch, setBranch] = useState<"error" | "normal" | null>(null);
@@ -361,7 +364,7 @@ function ReportDetail({ problemId, versionId, onBack, onNext }: { problemId: str
           {d.reports.map((r) => (
             <li key={r.id} className="rounded-lg border border-grey-100 px-3 py-2 text-[12.5px]">
               <span className="font-bold">{REPORT_TYPE_LABEL[r.reportType]}</span>
-              <span className="text-grey-500"> · {SOURCE_LABEL[r.source] ?? r.source}{r.sessionSource === "homework" ? "(과제)" : ""} · {r.reporterRole === "teacher" ? "선생님" : "학생"} {r.reporterName ?? ""} · {fmt(r.createdAt)}</span>
+              <span className="text-grey-500"> · {SOURCE_LABEL[r.source] ?? r.source}{r.sessionSource === "homework" ? "(과제)" : ""} · {r.reporterRole === "teacher" ? "선생님" : "학생"} {r.reporterName ?? ""} · {fmt(r.createdAt, tz)}</span>
               {r.resolved && <span className="ml-1 text-[11px] font-bold text-grey-400">처리됨</span>}
               {r.memo && <p className="mt-0.5 whitespace-pre-wrap text-grey-700">{r.memo}</p>}
             </li>
@@ -463,7 +466,7 @@ function ReportDetail({ problemId, versionId, onBack, onNext }: { problemId: str
           <ul className="flex flex-col gap-1 text-[12.5px]">
             {d.replacements.map((r, i) => (
               <li key={i} className="text-green">
-                문항 교체됨 → {r.examSetName ?? "세트"} {MODULE_LABEL[r.moduleKey ?? ""] ?? r.moduleKey ?? ""}{r.route ? ` (${r.route === "higher" ? "상" : "하"} 변형)` : ""} · {fmt(r.createdAt)}
+                문항 교체됨 → {r.examSetName ?? "세트"} {MODULE_LABEL[r.moduleKey ?? ""] ?? r.moduleKey ?? ""}{r.route ? ` (${r.route === "higher" ? "상" : "하"} 변형)` : ""} · {fmt(r.createdAt, tz)}
               </li>
             ))}
             {d.replacementNeeds.filter((n) => n.status === "open").map((n) => (
@@ -482,7 +485,7 @@ function ReportDetail({ problemId, versionId, onBack, onNext }: { problemId: str
             {d.verdicts.map((vd) => (
               <li key={vd.id}>
                 <span className="font-bold">{VERDICT_LABEL[vd.decision]}</span>
-                <span className="text-grey-500"> · {vd.decidedByName ?? "관리자"} · {fmt(vd.decidedAt)}</span>
+                <span className="text-grey-500"> · {vd.decidedByName ?? "관리자"} · {fmt(vd.decidedAt, tz)}</span>
                 {vd.note && <p className="whitespace-pre-wrap text-grey-700">{vd.note}</p>}
               </li>
             ))}

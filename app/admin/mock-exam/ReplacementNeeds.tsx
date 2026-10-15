@@ -1,3 +1,4 @@
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 "use client";
 
 import { useEffect, useState } from "react";
@@ -37,6 +38,7 @@ function loadSummary(force = false): Promise<ReplacementNeedSummary> {
 
 /** 문항 풀 서브탭: 대체 문항 필요 건수·부족한 칸·세트별 표시·최근 자동 교체. poolRest 는 (영역|기술) 별 풀에 남은 문항 수. */
 export function ReplacementNeedsBlock({ poolRest }: { poolRest: Record<string, number> }) {
+  const tz = useViewerTimezone();
   const [s, setS] = useState<ReplacementNeedSummary | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
@@ -188,7 +190,7 @@ export function ReplacementNeedsBlock({ poolRest }: { poolRest: Record<string, n
             {s.replacements.slice(0, 20).map((r) => (
               <li key={r.id}>
                 문항 {short(r.oldProblemId)} → {short(r.newProblemId)} 교체됨 · {r.examSetName ?? "세트"} · {MODULE_LABEL[r.moduleKey ?? ""] ?? r.moduleKey ?? ""}
-                {r.route ? `(${r.route === "higher" ? "상" : "하"} 변형)` : ""} · {fmtDate(r.createdAt)}
+                {r.route ? `(${r.route === "higher" ? "상" : "하"} 변형)` : ""} · {fmtDate(r.createdAt, undefined, tz)}
               </li>
             ))}
           </ul>
