@@ -12,7 +12,8 @@ const DIR = path.resolve("data/ap/sample-2027/psych-panel"); mkdirSync(DIR, { re
 const OUT = path.resolve("data/ap/stock/psych-panel-flags.json");
 const files = arg("--files") ? arg("--files").split(",") : readdirSync("data/ap/stock").filter((f) => /^psych-.*-items\.json$/.test(f)).map((f) => f.replace(".json", ""));
 type Json = Record<string, any>;
-const items: Json[] = []; for (const f of files) for (const r of JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as Json[]) if (r.apSubjectCode === "ap_psychology" && r.validation === "auto_passed") items.push(r);
+const only = arg("--report") ? new Set((JSON.parse(readFileSync(arg("--report"), "utf-8")) as { sets: { mcA: string[]; frqA: string[] }[] }).sets.flatMap((x) => [...x.mcA, ...x.frqA])) : null; // 배정 보고서가 있으면 그 안의 문항만(비용 절감)
+const items: Json[] = []; for (const f of files) for (const r of JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as Json[]) if (r.apSubjectCode === "ap_psychology" && r.validation === "auto_passed" && (!only || only.has(r.stockKey))) items.push(r);
 const MODELS = ["claude-fable-5-1", "claude-sonnet-5-5"] as const;
 const SYS = "You are an AP Psychology expert (College Board CED, effective Fall 2025) solving practice questions blind. You are NOT told the author's key. For each question choose the single best option by standard, mainstream, CED-aligned psychology. Flag a question as ambiguous if a second option is also defensible, if a stated option is factually wrong in a way that matters, if the stem needs outside knowledge, or if it relies on a contested or non-replicated finding stated as fact.";
 const tool = { name: "submit_answers", description: "Submit answers.", input_schema: { type: "object", properties: { answers: { type: "array", items: { type: "object", properties: { q: { type: "integer" }, choice_index: { type: "integer" }, ambiguous: { type: "boolean" }, note: { type: "string" } }, required: ["q", "choice_index", "ambiguous", "note"] } } }, required: ["answers"] } };
@@ -32,7 +33,7 @@ for (const it of items) {
   }
 }
 (async () => {
-  const est = reqs.reduce((a, r) => a + estimate(r.params.model, 1, 1200, 900), 0); const cap = Number(arg("--cap", "2.8"));
+  const est = reqs.reduce((a, r) => a + estimate(r.params.model, 1, 1200, 900), 0); const cap = Number(arg("--cap", "6"));
   const t = ledgerTotal(); console.log(`panel: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${t.cumulativeUsd}`);
   if (est > cap) throw new Error(`추정 ${est} > 상한 ${cap}`);
   const res = await runBatch({ dir: DIR, name: "panel", requests: reqs, budgetUsd: ledger(DIR).spent() + cap, estimateUsd: est, sync: false });
