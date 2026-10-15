@@ -78,6 +78,7 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   if (spec.type === "image") {
     if (!spec.alt || !spec.alt.trim()) issues.push({ code: "alt_required", message: "올린 그림에는 대체 설명(alt)이 필요합니다 — 그림에 무엇이 있는지 한 문장." });
     if (spec.bucket === "static" && !(spec.credit ?? "").trim()) issues.push({ code: "credit_required", message: "실제 자료 이미지에는 화면에 보일 출처 표기(credit)가 필요합니다." });
+    for (const m of spec.more ?? []) { if (!(m.alt ?? "").trim()) issues.push({ code: "alt_required", message: "추가 이미지에도 대체 설명(alt)이 필요합니다." }); if (!(m.credit ?? "").trim()) issues.push({ code: "credit_required", message: "추가 이미지에도 출처 표기(credit)가 필요합니다." }); }
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: spec.alt };
   }
   if (spec.type === "parallel_transversal") {

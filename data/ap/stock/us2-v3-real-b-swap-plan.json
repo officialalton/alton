@@ -1,0 +1,28 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "US2",
+ "sourceSetName": "AP U.S. History — Practice Exam 2",
+ "sourceVersionNo": 2,
+ "generatedBy": "scripts/ap-generation/ush-stage-b-plans.ts",
+ "note": "Stage B: dbq_1 (The Market Revolution and American Lives, ALTON-composed) -> real-source DBQ on the market revolution. 같은 위치(ap_frq #1)·같은 시험 구간(DBQ)·같은 시대. 순서: 배치 ush-real-b 적재 → 이 계획으로 새 버전(v3) 초안 → 확인 → '새 버전 공개'. 두 계획(US1·US2)은 서로 독립이다.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "position": 1,
+   "removeKey": "ush-p1-b:ap_us_history-dbq_1-k0",
+   "addKey": "ush-real-b:ap_us_history-real_b_dbq_market-k0",
+   "remove": {
+    "kind": "dbq",
+    "period": 4,
+    "template": "dbq"
+   },
+   "add": {
+    "kind": "dbq",
+    "period": 4,
+    "template": "dbq"
+   }
+  }
+ ]
+}

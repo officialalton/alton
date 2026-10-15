@@ -24,7 +24,7 @@ export type UshFrqPayload = {
   prompt: { scenario: string; task: string; requirements: string[]; parts?: { label: "A" | "B" | "C"; prompt: string; points: 1 }[] };
   sources: UshSource[];
   rubric: { rubric_id: typeof USH_RUBRIC_ID; total_points: number; rows: UshRubricRow[]; scoring_notes: string[] };
-  expected_features: { defensible_theses?: string[]; contextualization_ideas?: string[]; outside_evidence?: string[]; reasoning_types?: string[]; doc_uses?: { source_id: string; usable_for: string; sourcing?: string }[]; saq_answers?: Record<string, string[]>; common_pitfalls: string[]; facts: string[] };
+  expected_features: { defensible_theses?: string[]; contextualization_ideas?: string[]; outside_evidence?: string[]; reasoning_types?: string[]; doc_uses?: { source_id: string; usable_for: string; sourcing?: string }[]; evidence_map?: { line: string; supports: string[]; complicates: string[] }[]; saq_answers?: Record<string, string[]>; common_pitfalls: string[]; facts: string[] };
   samples: UshSample[];
   provenance: { kind: "alton_composed"; note: string };
 };

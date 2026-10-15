@@ -1,0 +1,172 @@
+{
+ "schema": "ap-screen-evidence/v3",
+ "generator": "playwright",
+ "limitations": "Automated screen check (Playwright): covers display, input, answer/explanation exposure and clipping only. It does NOT verify graph meaning, figure correctness, or naturalness of wording — that still needs human review.",
+ "generatedAt": "2026-10-15T19:02:23.712Z",
+ "entries": [
+  {
+   "candidate_key": "ush-real-b:ap_us_history-real_b_dbq_market-k0",
+   "checker_kind": "automated",
+   "content_hash": "4950d80931c344687c98545270f0713baf3fa2ec8d26672b42831d562ac39037",
+   "problem_version_id": "46e55d31-a158-4970-a0b9-8b51ba2ee103",
+   "kind": "frq_bundle",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/ush-real-b/ush-real-b_ap_us_history-real_b_dbq_market-k0-390x844.jpg",
+   "timestamp": "2026-10-15T19:02:17.026Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "1/1 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "3 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 1 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-b:ap_us_history-real_b_dbq_regulation-k0",
+   "checker_kind": "automated",
+   "content_hash": "1d97f747b48962b0ea6f741d107e8721451b438ce68645be9579873c23f05f61",
+   "problem_version_id": "df201a5d-2cb0-4a99-87c8-b982c3491cae",
+   "kind": "frq_bundle",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/ush-real-b/ush-real-b_ap_us_history-real_b_dbq_regulation-k0-390x844.jpg",
+   "timestamp": "2026-10-15T19:02:17.419Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "1/1 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "2 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 1 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-b:ap_us_history-real_b_dbq_market-k0",
+   "checker_kind": "automated",
+   "content_hash": "4950d80931c344687c98545270f0713baf3fa2ec8d26672b42831d562ac39037",
+   "problem_version_id": "46e55d31-a158-4970-a0b9-8b51ba2ee103",
+   "kind": "frq_bundle",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/ush-real-b/ush-real-b_ap_us_history-real_b_dbq_market-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T19:02:21.611Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "1/1 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "3 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 1 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-b:ap_us_history-real_b_dbq_regulation-k0",
+   "checker_kind": "automated",
+   "content_hash": "1d97f747b48962b0ea6f741d107e8721451b438ce68645be9579873c23f05f61",
+   "problem_version_id": "df201a5d-2cb0-4a99-87c8-b982c3491cae",
+   "kind": "frq_bundle",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/ush-real-b/ush-real-b_ap_us_history-real_b_dbq_regulation-k0-1280x800.jpg",
+   "timestamp": "2026-10-15T19:02:22.100Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "1/1 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "2 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 1 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  }
+ ]
+}
