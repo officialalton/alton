@@ -28,7 +28,7 @@ export function planUshDraftSet(o: { setId: string; keys: SetKeys; hasVirtual: b
   }
   if (notReady.length) problems.push(`문제은행 변환·검증이 끝나지 않은 문항 ${notReady.length}건: ${notReady.slice(0, 8).join(", ")}${notReady.length > 8 ? " …" : ""}`);
   const comp: UshSetItem[] = []; let pos = 1;
-  for (const key of mcKeys) { const st = stockBy.get(key); if (!st) continue; for (const m of st.members) comp.push({ kind: "mc", unit: m.unit, skill: m.skill, candidateKey: key, position: pos++, stim: st.stim }); }
+  for (const key of mcKeys) { const st = stockBy.get(key); if (!st) continue; for (const m of st.members) comp.push({ kind: "mc", unit: m.unit, dbUnit: st.keyUnit, skill: m.skill, candidateKey: key, position: pos++, stim: st.stim }); }
   for (const [i, key] of frqKeys.entries()) { const st = stockBy.get(key); comp.push({ kind: "frq", unit: null, skill: null, candidateKey: key, position: i + 1, template: st?.template, period: st?.period }); }
   for (const v of verifyUshFullComposition(comp)) problems.push(`독립 검증: ${v}`);
   const tpls = frqKeys.map((k) => stockBy.get(k)?.template); if (tpls.join() !== USH_FRQ_TEMPLATES.join()) problems.push(`독립 검증: FRQ 순서가 saq1·saq2·saq3·dbq·leq 가 아님(${tpls.join(",")})`);
