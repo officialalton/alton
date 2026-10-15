@@ -1,0 +1,1612 @@
+[
+ {
+  "cellId": "ap_us_history-real_a_gm",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_a_gm-k0",
+  "keywordCode": "7.6",
+  "unitCode": "7",
+  "skillPrimary": "1.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_a_gm",
+  "reviewState": "sample_unverified",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "ush-real-a-2026-10-15",
+  "run": "ush-real-a",
+  "stockKey": "ush-real-a:ap_us_history-real_a_gm-k0",
+  "pipeline": "real_source_v1",
+  "validation": "needs_review",
+  "gateVersion": "ush-real-a-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-a:ap_us_history-real_a_gm-k0",
+  "canonicalKey": "ush-real-a:ap_us_history-real_a_gm-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:7.6",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|7.6|1.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "ush-real-a",
+    "gateVersion": "ush-real-a-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "stat-black-pop-region-1900-1940"
+  ],
+  "replaces": "US1 u747",
+  "payload": {
+   "archetype": "ush_real_real_a_gm",
+   "topic": "7.6",
+   "skill": "1.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(table)\nBlack population of the United States by region, census counts 1900-1940\nCampbell Gibson and Kay Jung, U.S. Census Bureau, Population Division, 2002 (Working Paper No. 56, Sept. 2002; figures from decennial censuses). U.S. Census Bureau. Reuse: public domain (U.S. government work). excerpted (selected rows/columns; values unchanged). Census Bureau, Working Paper No. 56, Tables 1-5 (\"Black\" is the Census Bureau's category label for the population counted). Counts are residents at each census.\n\nThe table for this source appears below.",
+   "stimulus": {
+    "kind": "table",
+    "description": "The Black population of the United States in four Census regions and in the nation as a whole, in each census year from 1900 to 1940.",
+    "data": {
+     "columns": [
+      "Year",
+      "Northeast",
+      "Midwest",
+      "South",
+      "West",
+      "United States"
+     ],
+     "rows": [
+      [
+       "1900",
+       "385,020",
+       "495,751",
+       "7,922,969",
+       "30,254",
+       "8,833,994"
+      ],
+      [
+       "1910",
+       "484,176",
+       "543,498",
+       "8,749,427",
+       "50,662",
+       "9,827,763"
+      ],
+      [
+       "1920",
+       "679,234",
+       "793,075",
+       "8,912,231",
+       "78,591",
+       "10,463,131"
+      ],
+      [
+       "1930",
+       "1,146,985",
+       "1,262,234",
+       "9,361,577",
+       "120,347",
+       "11,891,143"
+      ],
+      [
+       "1940",
+       "1,369,875",
+       "1,420,318",
+       "9,904,619",
+       "170,706",
+       "12,865,518"
+      ]
+     ]
+    }
+   },
+   "ush_set": {
+    "period": 7,
+    "stim_type": "quantitative",
+    "theme": "The Great Migration",
+    "title": "Where the Black Population Lived, 1900-1940",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "table",
+      "title": "Black population of the United States by region, census counts 1900-1940",
+      "attribution": "Campbell Gibson and Kay Jung, U.S. Census Bureau, Population Division, 2002 (Working Paper No. 56, Sept. 2002; figures from decennial censuses). U.S. Census Bureau. Reuse: public domain (U.S. government work). excerpted (selected rows/columns; values unchanged).",
+      "real_data": true,
+      "source_registry_id": "stat-black-pop-region-1900-1940",
+      "source_sha256": "b9b4d44d3a397a4ef3729065ae2cea58ca6f10aa6a537aaac3822600db962dfa"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_1B",
+     "topic": "7.6",
+     "skill": "1.B",
+     "stem": "Which of the following most directly contributed to the change in the Black population of the Northeast and Midwest between 1910 and 1930 shown in the table?",
+     "options": [
+      {
+       "text": "Northern factories recruited Black workers during and after World War I as European immigration declined.",
+       "why": "Northern war production created a demand for industrial labor while immigration from Europe fell, and the table shows the Black population of the Northeast rising from 484,176 in 1910 to 1,146,985 in 1930.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Emancipation Proclamation of 1863, which immediately moved most formerly enslaved Southerners to northern cities.",
+       "why": "The table shows 7,922,969 Black residents still living in the South in 1900, almost four decades after 1863, so emancipation did not directly cause the movement of 1910 to 1930.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Dust Bowl, which forced large numbers of farm families to leave the southern Plains in the 1930s.",
+       "why": "The Dust Bowl began in the 1930s, after most of the increase shown between 1910 and 1930 had already occurred.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "A sharp fall in northern factory hiring during World War I, which sent Black workers back to Southern farms.",
+       "why": "Northern hiring rose during the war, and the table shows the Black population of the Midwest growing from 543,498 in 1910 to 793,075 in 1920, not shrinking.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Northern factories recruited Black workers during and after World War I as European immigration declined.\". Northern war production created a demand for industrial labor while immigration from Europe fell, and the table shows the Black population of the Northeast rising from 484,176 in 1910 to 1,146,985 in 1930.\n\"The Emancipation Proclamation of 1863, which immediately moved most formerly enslaved Southerners to northern cities.\" is incorrect: The table shows 7,922,969 Black residents still living in the South in 1900, almost four decades after 1863, so emancipation did not directly cause the movement of 1910 to 1930.\n\"The Dust Bowl, which forced large numbers of farm families to leave the southern Plains in the 1930s.\" is incorrect: The Dust Bowl began in the 1930s, after most of the increase shown between 1910 and 1930 had already occurred.\n\"A sharp fall in northern factory hiring during World War I, which sent Black workers back to Southern farms.\" is incorrect: Northern hiring rose during the war, and the table shows the Black population of the Midwest growing from 543,498 in 1910 to 793,075 in 1920, not shrinking.",
+     "est_seconds": 75,
+     "facts": [
+      "Large numbers of Black Southerners moved to northern cities during and after World War I, a movement called the Great Migration.",
+      "World War I cut off most immigration from Europe, and northern industries recruited Black workers.",
+      "The Dust Bowl was a drought-driven crisis of the 1930s."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.B",
+      "key_evidence_in_source": "Northeast 484,176 (1910) to 1,146,985 (1930); Midwest 543,498 (1910) to 1,262,234 (1930) while the South grew from 8,749,427 to 9,361,577"
+     }
+    },
+    {
+     "archetype": "ush_real_3A",
+     "topic": "7.6",
+     "skill": "3.A",
+     "stem": "Which of the following claims is best supported by the data in the table?",
+     "options": [
+      {
+       "text": "From 1910 to 1940 the Black population grew much faster in the Northeast and Midwest than in the South.",
+       "why": "The Northeast rose from 484,176 to 1,369,875 and the Midwest from 543,498 to 1,420,318, each rising by more than 160 percent, while the South rose from 8,749,427 to 9,904,619, an increase of about 13 percent.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Black population of the South declined between every pair of census years after 1900.",
+       "why": "The South's Black population rose in every decade shown, from 7,922,969 in 1900 to 9,904,619 in 1940.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "By 1940 the majority of the nation's Black population lived in the Northeast, Midwest, and West combined.",
+       "why": "In 1940 the South had 9,904,619 of the nation's 12,865,518 Black residents, about three-fourths of the total.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "The West had a larger Black population than the Midwest in every census year shown.",
+       "why": "The West had 30,254 Black residents in 1900 and 170,706 in 1940, far fewer than the Midwest's 495,751 and 1,420,318.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"From 1910 to 1940 the Black population grew much faster in the Northeast and Midwest than in the South.\". The Northeast rose from 484,176 to 1,369,875 and the Midwest from 543,498 to 1,420,318, each rising by more than 160 percent, while the South rose from 8,749,427 to 9,904,619, an increase of about 13 percent.\n\"The Black population of the South declined between every pair of census years after 1900.\" is incorrect: The South's Black population rose in every decade shown, from 7,922,969 in 1900 to 9,904,619 in 1940.\n\"By 1940 the majority of the nation's Black population lived in the Northeast, Midwest, and West combined.\" is incorrect: In 1940 the South had 9,904,619 of the nation's 12,865,518 Black residents, about three-fourths of the total.\n\"The West had a larger Black population than the Midwest in every census year shown.\" is incorrect: The West had 30,254 Black residents in 1900 and 170,706 in 1940, far fewer than the Midwest's 495,751 and 1,420,318.",
+     "est_seconds": 75,
+     "facts": [
+      "The table reports census counts of the Black population by region for 1900 to 1940.",
+      "The South remained home to most of the Black population in 1940."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "Northeast and Midwest each rose by more than 160 percent (1910-1940) while the South rose about 13 percent"
+     }
+    },
+    {
+     "archetype": "ush_real_4A",
+     "topic": "6.4",
+     "skill": "4.A",
+     "stem": "Which of the following was part of the historical context for the movement of Black Southerners to northern cities in the early twentieth century?",
+     "options": [
+      {
+       "text": "Jim Crow segregation and sharecropping limited Black Southerners' political rights and economic opportunity.",
+       "why": "Southern states enforced segregation and disfranchised Black voters, and many Black farmers were trapped in debt as sharecroppers, which pushed many to look for work and rights elsewhere.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Federal troops enforced the voting rights of Black Southerners across the South throughout the early twentieth century.",
+       "why": "Federal troops left the South in 1877 when Reconstruction ended, and by the early twentieth century many Black Southerners were barred from voting.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The Supreme Court ruled in Plessy v. Ferguson that segregation in public facilities was unconstitutional.",
+       "why": "Plessy v. Ferguson (1896) upheld segregation under the doctrine of separate but equal, so the ruling supported Jim Crow rather than ending it.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "The collapse of crop prices in the Great Depression began the movement of Black Southerners northward.",
+       "why": "The table shows the Black population of the Northeast rising from 385,020 in 1900 to 679,234 in 1920, well before the Depression began in 1929.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Jim Crow segregation and sharecropping limited Black Southerners' political rights and economic opportunity.\". Southern states enforced segregation and disfranchised Black voters, and many Black farmers were trapped in debt as sharecroppers, which pushed many to look for work and rights elsewhere.\n\"Federal troops enforced the voting rights of Black Southerners across the South throughout the early twentieth century.\" is incorrect: Federal troops left the South in 1877 when Reconstruction ended, and by the early twentieth century many Black Southerners were barred from voting.\n\"The Supreme Court ruled in Plessy v. Ferguson that segregation in public facilities was unconstitutional.\" is incorrect: Plessy v. Ferguson (1896) upheld segregation under the doctrine of separate but equal, so the ruling supported Jim Crow rather than ending it.\n\"The collapse of crop prices in the Great Depression began the movement of Black Southerners northward.\" is incorrect: The table shows the Black population of the Northeast rising from 385,020 in 1900 to 679,234 in 1920, well before the Depression began in 1929.",
+     "est_seconds": 75,
+     "facts": [
+      "Jim Crow laws enforced segregation in the South and disfranchisement kept most Black Southerners from voting.",
+      "Sharecropping tied many Black farmers to debt.",
+      "Plessy v. Ferguson (1896) upheld segregated facilities as separate but equal.",
+      "Federal troops withdrew from the South in 1877."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "(context; the table shows the South's Black population growing slowly while northern regions grew quickly from 1900 on)"
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_us_history-real_a_imm",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_a_imm-k0",
+  "keywordCode": "7.8",
+  "unitCode": "7",
+  "skillPrimary": "1.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_a_imm",
+  "reviewState": "sample_unverified",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "ush-real-a-2026-10-15",
+  "run": "ush-real-a",
+  "stockKey": "ush-real-a:ap_us_history-real_a_imm-k0",
+  "pipeline": "real_source_v1",
+  "validation": "needs_review",
+  "gateVersion": "ush-real-a-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-a:ap_us_history-real_a_imm-k0",
+  "canonicalKey": "ush-real-a:ap_us_history-real_a_imm-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:7.8",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|7.8|1.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "ush-real-a",
+    "gateVersion": "ush-real-a-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "stat-foreign-born-1850-1940"
+  ],
+  "replaces": "US2 u719",
+  "payload": {
+   "archetype": "ush_real_real_a_imm",
+   "topic": "7.8",
+   "skill": "1.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(table)\nForeign-born population of the United States, 1850-1940 (census counts)\nCampbell Gibson and Kay Jung, U.S. Census Bureau, Population Division, 2006 (Working Paper No. 81, Feb. 2006; figures from decennial censuses). U.S. Census Bureau. Reuse: public domain (U.S. government work). excerpted (selected rows/columns; values unchanged). Census Bureau, Working Paper No. 81, Table 1. Counts are residents at each census, not annual arrivals; the foreign-born population is the number of residents who were born outside the United States.\n\nThe table for this source appears below.",
+   "stimulus": {
+    "kind": "table",
+    "description": "The total population of the United States, the number of foreign-born residents, and the foreign-born share of the population in each census year from 1850 to 1940.",
+    "data": {
+     "columns": [
+      "Year",
+      "Total population",
+      "Foreign-born population",
+      "Foreign-born as percent of total population"
+     ],
+     "rows": [
+      [
+       "1850",
+       "23,191,876",
+       "2,244,602",
+       "9.7"
+      ],
+      [
+       "1860",
+       "31,443,321",
+       "4,138,697",
+       "13.2"
+      ],
+      [
+       "1870",
+       "38,558,371",
+       "5,567,229",
+       "14.4"
+      ],
+      [
+       "1880",
+       "50,155,783",
+       "6,679,943",
+       "13.3"
+      ],
+      [
+       "1890",
+       "62,622,250",
+       "9,249,547",
+       "14.8"
+      ],
+      [
+       "1900",
+       "75,994,575",
+       "10,341,276",
+       "13.6"
+      ],
+      [
+       "1910",
+       "91,972,266",
+       "13,515,886",
+       "14.7"
+      ],
+      [
+       "1920",
+       "105,710,620",
+       "13,920,692",
+       "13.2"
+      ],
+      [
+       "1930",
+       "122,775,046",
+       "14,204,149",
+       "11.6"
+      ],
+      [
+       "1940",
+       "131,669,275",
+       "11,594,896",
+       "8.8"
+      ]
+     ]
+    }
+   },
+   "ush_set": {
+    "period": 7,
+    "stim_type": "quantitative",
+    "theme": "Immigration restriction in the 1920s",
+    "title": "The Foreign-Born Population of the United States, 1850-1940",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "table",
+      "title": "Foreign-born population of the United States, 1850-1940 (census counts)",
+      "attribution": "Campbell Gibson and Kay Jung, U.S. Census Bureau, Population Division, 2006 (Working Paper No. 81, Feb. 2006; figures from decennial censuses). U.S. Census Bureau. Reuse: public domain (U.S. government work). excerpted (selected rows/columns; values unchanged).",
+      "real_data": true,
+      "source_registry_id": "stat-foreign-born-1850-1940",
+      "source_sha256": "79a3ee506e5145bcbb7fabcf26d4681e18da666a98f0000cf72138f532682b0b"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_1B",
+     "topic": "7.8",
+     "skill": "1.B",
+     "stem": "Which of the following most directly helped cause the decline in the foreign-born share of the population between 1920 and 1940 shown in the table?",
+     "options": [
+      {
+       "text": "Congress used national-origins quotas in the 1920s to sharply reduce new immigration.",
+       "why": "The Emergency Quota Act of 1921 and the Immigration Act of 1924 limited arrivals by national origin, so few new immigrants arrived and the foreign-born share of the population fell.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Immigration and Nationality Act of 1965 ended the national-origins quota system.",
+       "why": "That law was passed in 1965, decades after the decline shown between 1920 and 1940.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Chinese Exclusion Act of 1882 barred most new immigrants from entering the country.",
+       "why": "The 1882 law barred Chinese laborers only, and the table shows the foreign-born share rising from 13.3 percent in 1880 to 14.8 percent in 1890.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "The federal government deported most foreign-born residents during the Great Depression.",
+       "why": "The table still shows 11,594,896 foreign-born residents in 1940, so mass deportation of most of them did not happen.",
+       "value": null,
+       "label": "overstated"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Congress used national-origins quotas in the 1920s to sharply reduce new immigration.\". The Emergency Quota Act of 1921 and the Immigration Act of 1924 limited arrivals by national origin, so few new immigrants arrived and the foreign-born share of the population fell.\n\"The Immigration and Nationality Act of 1965 ended the national-origins quota system.\" is incorrect: That law was passed in 1965, decades after the decline shown between 1920 and 1940.\n\"The Chinese Exclusion Act of 1882 barred most new immigrants from entering the country.\" is incorrect: The 1882 law barred Chinese laborers only, and the table shows the foreign-born share rising from 13.3 percent in 1880 to 14.8 percent in 1890.\n\"The federal government deported most foreign-born residents during the Great Depression.\" is incorrect: The table still shows 11,594,896 foreign-born residents in 1940, so mass deportation of most of them did not happen.",
+     "est_seconds": 75,
+     "facts": [
+      "The Emergency Quota Act (1921) and the Immigration Act of 1924 set national-origins quotas that sharply cut immigration.",
+      "The Chinese Exclusion Act (1882) barred Chinese laborers.",
+      "The Immigration and Nationality Act of 1965 ended national-origins quotas."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.B",
+      "key_evidence_in_source": "foreign-born share 13.2 percent (1920), 11.6 (1930), 8.8 (1940)"
+     }
+    },
+    {
+     "archetype": "ush_real_4B",
+     "topic": "7.8",
+     "skill": "4.B",
+     "stem": "Which of the following broader developments of the 1920s helps explain why Congress restricted immigration, as reflected in the table?",
+     "options": [
+      {
+       "text": "Nativism and fear of foreign radicals after World War I and the Red Scare.",
+       "why": "Many Americans blamed immigrants for radicalism after the war and the Red Scare of 1919-1920, and nativist feeling pushed Congress to pass quota laws in 1921 and 1924.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Growing demand for cheap immigrant labor to build the transcontinental railroads.",
+       "why": "The first transcontinental railroad was completed in 1869, and railroad construction did not drive immigration policy in the 1920s.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "A new agreement among labor unions that open immigration benefited American workers.",
+       "why": "The American Federation of Labor and many other unions supported restriction in the 1920s because they feared wage competition from new immigrants.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "A widespread belief that the nation needed more European settlers to farm the Great Plains.",
+       "why": "Plains settlement had been promoted in the late nineteenth century, and by the 1920s the frontier was long closed, so this did not shape the quota laws.",
+       "value": null,
+       "label": "unrelated_development"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Nativism and fear of foreign radicals after World War I and the Red Scare.\". Many Americans blamed immigrants for radicalism after the war and the Red Scare of 1919-1920, and nativist feeling pushed Congress to pass quota laws in 1921 and 1924.\n\"Growing demand for cheap immigrant labor to build the transcontinental railroads.\" is incorrect: The first transcontinental railroad was completed in 1869, and railroad construction did not drive immigration policy in the 1920s.\n\"A new agreement among labor unions that open immigration benefited American workers.\" is incorrect: The American Federation of Labor and many other unions supported restriction in the 1920s because they feared wage competition from new immigrants.\n\"A widespread belief that the nation needed more European settlers to farm the Great Plains.\" is incorrect: Plains settlement had been promoted in the late nineteenth century, and by the 1920s the frontier was long closed, so this did not shape the quota laws.",
+     "est_seconds": 75,
+     "facts": [
+      "The Red Scare of 1919-1920 involved fear of foreign radicals.",
+      "Nativism was strong in the 1920s and shaped the Emergency Quota Act (1921) and the Immigration Act of 1924.",
+      "The American Federation of Labor supported immigration restriction."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "(context) the foreign-born share fell after 1920 when the quota laws took effect"
+     }
+    },
+    {
+     "archetype": "ush_real_5A",
+     "topic": "6.9",
+     "skill": "5.A",
+     "stem": "Which of the following earlier policies is most similar to the immigration restrictions of the 1920s reflected in the table?",
+     "options": [
+      {
+       "text": "The Chinese Exclusion Act of 1882, which barred Chinese laborers from entering the United States.",
+       "why": "Like the 1920s quota laws, the 1882 law restricted immigration on the basis of national origin and race, and it was the first major federal law restricting immigration by group.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Homestead Act of 1862, which gave settlers free public land in the West.",
+       "why": "The Homestead Act encouraged settlement of western land and did not restrict immigrants, so it is the opposite of a restriction.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The Dawes Act of 1887, which divided reservation land into individual allotments for Native Americans.",
+       "why": "The Dawes Act concerned Native American land ownership and assimilation, not the entry of immigrants into the United States.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The Pendleton Civil Service Act of 1883, which set up merit-based hiring for federal jobs.",
+       "why": "The Pendleton Act reformed federal hiring and did not limit immigration.",
+       "value": null,
+       "label": "unrelated_development"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"The Chinese Exclusion Act of 1882, which barred Chinese laborers from entering the United States.\". Like the 1920s quota laws, the 1882 law restricted immigration on the basis of national origin and race, and it was the first major federal law restricting immigration by group.\n\"The Homestead Act of 1862, which gave settlers free public land in the West.\" is incorrect: The Homestead Act encouraged settlement of western land and did not restrict immigrants, so it is the opposite of a restriction.\n\"The Dawes Act of 1887, which divided reservation land into individual allotments for Native Americans.\" is incorrect: The Dawes Act concerned Native American land ownership and assimilation, not the entry of immigrants into the United States.\n\"The Pendleton Civil Service Act of 1883, which set up merit-based hiring for federal jobs.\" is incorrect: The Pendleton Act reformed federal hiring and did not limit immigration.",
+     "est_seconds": 75,
+     "facts": [
+      "The Chinese Exclusion Act (1882) barred Chinese laborers and was the first major federal law restricting a group of immigrants.",
+      "The Homestead Act (1862), the Dawes Act (1887) and the Pendleton Act (1883) are not immigration laws."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.A",
+      "key_evidence_in_source": "(connection to an earlier policy; the table shows a foreign-born share of 13.3 percent in 1880 and 14.8 percent in 1890 before any quota law)"
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_us_history-real_a_saq3_own",
+  "apSubjectCode": "ap_us_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_a_saq3_own-k0",
+  "keywordCode": "8.4",
+  "unitCode": "8",
+  "skillPrimary": "1.B",
+  "structure": "frq_multipart",
+  "archetype": "ushfrq_real_a_saq3_own",
+  "reviewState": "sample_unverified",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "gateOverride": "ush-real-a-2026-10-15",
+  "run": "ush-real-a",
+  "stockKey": "ush-real-a:ap_us_history-real_a_saq3_own-k0",
+  "pipeline": "real_source_v1",
+  "validation": "needs_review",
+  "gateVersion": "ush-real-a-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-a:ap_us_history-real_a_saq3_own-k0",
+  "canonicalKey": "ush-real-a:ap_us_history-real_a_saq3_own-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:8.4",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|8.4|1.B|frq_multipart|na",
+  "history": [
+   {
+    "run": "ush-real-a",
+    "gateVersion": "ush-real-a-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "stat-homeownership-1900-1980"
+  ],
+  "replaces": "US1 saq3_1",
+  "payload": {
+   "archetype": "ushfrq_real_a_saq3_own",
+   "template": "saq3",
+   "topic": "8.4",
+   "extra_topics": [],
+   "skill": "1.B",
+   "representative_skill": "1.B",
+   "calculator": "na",
+   "title": "Homeownership in the United States, 1900-1980",
+   "set_intro": "Historical source (real document)\n(table)\nHomeownership rates (percent) for the United States, New York and Mississippi, 1900-1980\nU.S. Census Bureau (Historical Census of Housing Tables), Historical Census of Housing Tables: Homeownership (table compiled from decennial censuses 1900-2000; page last revised October 8, 2021). U.S. Census Bureau. Reuse: public domain (U.S. government work). excerpted (selected rows/columns; values unchanged). Census Bureau, Historical Census of Housing Tables: Homeownership. Each figure is the homeownership rate in percent at the census year shown.\n\nThe table for this source appears below.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Homeownership rates, in percent, for the United States, New York, and Mississippi in each census year from 1900 to 1980.",
+    "data": {
+     "columns": [
+      "Year",
+      "United States",
+      "New York",
+      "Mississippi"
+     ],
+     "rows": [
+      [
+       "1900",
+       "46.5",
+       "33.2",
+       "34.5"
+      ],
+      [
+       "1910",
+       "45.9",
+       "31.0",
+       "34.0"
+      ],
+      [
+       "1920",
+       "45.6",
+       "30.7",
+       "34.0"
+      ],
+      [
+       "1930",
+       "47.8",
+       "37.1",
+       "32.5"
+      ],
+      [
+       "1940",
+       "43.6",
+       "30.3",
+       "33.3"
+      ],
+      [
+       "1950",
+       "55.0",
+       "37.9",
+       "47.8"
+      ],
+      [
+       "1960",
+       "61.9",
+       "44.8",
+       "57.7"
+      ],
+      [
+       "1970",
+       "62.9",
+       "47.3",
+       "66.3"
+      ],
+      [
+       "1980",
+       "64.4",
+       "48.6",
+       "71.0"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly identify ONE trend or pattern shown in the data in the table.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "8.4"
+     ],
+     "model_answer": "The national homeownership rate rose from 43.6 percent in 1940 to 55.0 percent in 1950 and 61.9 percent in 1960.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Students identify one accurate trend or pattern from the table. Acceptable answers include: the national rate rising sharply after 1940; the national rate staying between about 44 and 48 percent from 1900 to 1940; Mississippi's rate rising from the low 30s to over 70 percent and passing the national rate by 1970; or New York's rate staying below the national rate in every year shown.",
+       "required_elements": [
+        "The national homeownership rate rose from 43.6 percent in 1940 to 55.0 percent in 1950 and 61.9 percent in 1960.",
+        "The national rate stayed between about 44 and 48 percent from 1900 to 1940 and then rose sharply after 1940.",
+        "Mississippi's rate rose from 33.3 percent in 1940 to 71.0 percent in 1980 and passed the national rate by 1970.",
+        "New York's rate was below the national rate in every year shown, although it also rose after 1940."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain ONE specific historical cause of the trend or pattern you identified in part A.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "8.4"
+     ],
+     "model_answer": "The GI Bill of 1944 gave returning veterans home loans guaranteed by the Veterans Administration with little or no down payment, which let millions of families buy homes after the war.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Students explain one specific historical cause that fits the trend they named in part A. Examples: the GI Bill of 1944 and VA-guaranteed home loans; Federal Housing Administration mortgage insurance; mass-produced suburban housing such as Levittown; postwar prosperity, rising wages and the baby boom; or the Great Depression for the low rates in 1940.",
+       "required_elements": [
+        "The GI Bill of 1944 gave returning veterans home loans guaranteed by the Veterans Administration with little or no down payment, which let millions of families buy homes after the war.",
+        "The Federal Housing Administration insured long-term mortgages with small down payments, which made home loans affordable for many more families.",
+        "Builders such as Levitt and Sons used mass-production methods to build affordable single-family houses in the suburbs, which made it possible for more families to buy.",
+        "Postwar prosperity, rising wages, and a baby boom raised demand for single-family houses, which raised the homeownership rate.",
+        "The Great Depression, with mass unemployment and widespread foreclosures, helps explain why the national rate fell to 43.6 percent in 1940."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE specific effect of, or development related to, the trend or pattern shown in the table in the period 1945 to 1980.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "8.4"
+     ],
+     "model_answer": "Millions of families moved to new suburbs, and the suburban population grew, which increased reliance on cars and led to highway building such as the Interstate Highway System of 1956.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Students explain one specific effect of, or development connected to, the rise in homeownership between 1945 and 1980. Examples: suburban growth and car dependence; the Interstate Highway System; exclusion of Black families from suburbs through redlining and restrictive covenants and persistent residential segregation; white flight and urban decline; consumer demand for cars, appliances and furnishings; or the Fair Housing Act of 1968.",
+       "required_elements": [
+        "Millions of families moved to new suburbs, and the suburban population grew, which increased reliance on cars and led to highway building such as the Interstate Highway System of 1956.",
+        "Redlining, discriminatory lending, and restrictive covenants largely kept Black families out of the new suburbs, which reinforced residential segregation.",
+        "As many middle-class white families moved to the suburbs, cities lost residents and tax revenue, which contributed to urban decline.",
+        "Rising homeownership increased demand for cars, appliances, and furnishings, which fed the postwar consumer economy.",
+        "Discrimination in housing led to the Fair Housing Act of 1968, which banned discrimination in the sale and rental of housing."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 3 points.\nPart A (0-1): Students identify one accurate trend or pattern from the table. Acceptable answers include: the national rate rising sharply after 1940; the national rate staying between about 44 and 48 percent from 1900 to 1940; Mississippi's rate rising from the low 30s to over 70 percent and passing the national rate by 1970; or New York's rate staying below the national rate in every year shown.\n   - 1: The response accurately identifies one trend or pattern shown in the table, such as the national rate rising from 43.6 percent in 1940 to 61.9 percent in 1960.\n   - 0: The response misreads the table, gives a vague statement, or names no trend that the data support.\nPart B (0-1): Students explain one specific historical cause that fits the trend they named in part A. Examples: the GI Bill of 1944 and VA-guaranteed home loans; Federal Housing Administration mortgage insurance; mass-produced suburban housing such as Levittown; postwar prosperity, rising wages and the baby boom; or the Great Depression for the low rates in 1940.\n   - 1: The response explains how one specific, accurate development from the period caused or contributed to the trend identified in part A.\n   - 0: The response gives no cause, gives a cause from the wrong period, or does not explain how the cause connects to the trend.\nPart C (0-1): Students explain one specific effect of, or development connected to, the rise in homeownership between 1945 and 1980. Examples: suburban growth and car dependence; the Interstate Highway System; exclusion of Black families from suburbs through redlining and restrictive covenants and persistent residential segregation; white flight and urban decline; consumer demand for cars, appliances and furnishings; or the Fair Housing Act of 1968.\n   - 1: The response explains one specific, accurate effect of or development related to rising homeownership between 1945 and 1980.\n   - 0: The response gives no effect, an inaccurate one, or one outside the period or not connected to homeownership and suburban growth.\nNote: Each part is worth one point. Parts are scored separately, but part B must explain a cause of a trend that the data actually show.\nNote: In part A, accept an accurate reading of any column. Students do not need to quote exact numbers.\nNote: In part B, a bare name such as 'the GI Bill' with no explanation does not earn the point. The response must show how the development produced the trend.\nNote: In part C, accept effects on suburbs, cities, race and housing, or the national economy if they are tied to homeownership and housing between 1945 and 1980.\nAcceptable answers for A: The national homeownership rate rose from 43.6 percent in 1940 to 55.0 percent in 1950 and 61.9 percent in 1960. / The national rate stayed between about 44 and 48 percent from 1900 to 1940 and then rose sharply after 1940. / Mississippi's rate rose from 33.3 percent in 1940 to 71.0 percent in 1980 and passed the national rate by 1970. / New York's rate was below the national rate in every year shown, although it also rose after 1940.\nAcceptable answers for B: The GI Bill of 1944 gave returning veterans home loans guaranteed by the Veterans Administration with little or no down payment, which let millions of families buy homes after the war. / The Federal Housing Administration insured long-term mortgages with small down payments, which made home loans affordable for many more families. / Builders such as Levitt and Sons used mass-production methods to build affordable single-family houses in the suburbs, which made it possible for more families to buy. / Postwar prosperity, rising wages, and a baby boom raised demand for single-family houses, which raised the homeownership rate. / The Great Depression, with mass unemployment and widespread foreclosures, helps explain why the national rate fell to 43.6 percent in 1940.\nAcceptable answers for C: Millions of families moved to new suburbs, and the suburban population grew, which increased reliance on cars and led to highway building such as the Interstate Highway System of 1956. / Redlining, discriminatory lending, and restrictive covenants largely kept Black families out of the new suburbs, which reinforced residential segregation. / As many middle-class white families moved to the suburbs, cities lost residents and tax revenue, which contributed to urban decline. / Rising homeownership increased demand for cars, appliances, and furnishings, which fed the postwar consumer economy. / Discrimination in housing led to the Fair Housing Act of 1968, which banned discrimination in the sale and rental of housing.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) One trend in the table is that the national homeownership rate jumped after World War II. It was 43.6 percent in 1940, then 55.0 percent in 1950 and 61.9 percent in 1960, after staying between about 44 and 48 percent for the first forty years of the century.\n\n(B) One cause was the GI Bill of 1944, which gave returning veterans home loans guaranteed by the Veterans Administration, with little or no down payment. Millions of veterans who could never have saved for a down payment were able to buy houses, so the rate rose much faster than it had before the war.\n\n(C) One effect was the rapid growth of the suburbs. Builders such as Levitt and Sons mass-produced houses on open land, and families relied on cars to get to work. However, many of these suburbs kept Black families out through restrictive covenants and discriminatory lending, so suburban growth also reinforced residential segregation.\n   - \"43.6 percent in 1940, then 55.0 percent in 1950 and 61.9 percent in 1960\" - Reads the table correctly with exact figures, so the trend is specific and supported by the data. Earns the Part A point.\n   - \"the GI Bill of 1944, which gave returning veterans home loans guaranteed by the Veterans Administration\" - Names an accurate, specific cause with correct details from the right period.\n   - \"so the rate rose much faster than it had before the war\" - Connects the cause to the trend identified in part A, which the rubric requires. Earns the Part B point.\n   - \"the rapid growth of the suburbs\" - Gives an accurate development tied to rising homeownership between 1945 and 1980.\n   - \"restrictive covenants and discriminatory lending\" - Backs the effect with specific, accurate evidence about who could buy in the new suburbs. Earns the Part C point.\n\nSample response, middle score (2/3; Part A 1, Part B 1, Part C 0):\n(A) The table shows that the homeownership rate in the United States went up a lot after 1940. It was 43.6 percent in 1940 and it reached 61.9 percent by 1960.\n\n(B) A cause of this was the government. The government helped people buy homes after the war and that is why the rate went up so much.\n\n(C) One effect was that many Americans moved from cities to the suburbs. New suburban towns such as Levittown were built quickly, and people relied on cars to get to work, which helped the highway system grow. Cities lost many of their middle-class residents and lost tax money as a result.\n   - \"It was 43.6 percent in 1940 and it reached 61.9 percent by 1960.\" - Accurate figures from the table support a clear trend. This earns the Part A point.\n   - \"The government helped people buy homes after the war\" - Vague. It never names a program or says how the government made it easier to buy a home, so the Part B point is not earned.\n   - \"New suburban towns such as Levittown were built quickly\" - Accurate and specific development connected to rising homeownership.\n   - \"Cities lost many of their middle-class residents and lost tax money\" - Explains an accurate consequence of suburban growth. This earns the Part C point.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) The homeownership rate was higher in 1960 than in 1940. It went from 43.6 percent to 61.9 percent.\n\n(B) This happened because after the war things were different and a lot of people wanted to buy houses.\n\n(C) The effect was that the United States changed a lot after World War II. People lived in different places and the country became more modern and prosperous.\n   - \"It went from 43.6 percent to 61.9 percent.\" - Accurate reading of the table, so this earns the Part A point.\n   - \"after the war things were different and a lot of people wanted to buy houses\" - Restates the trend and names no specific cause, so the Part B point is not earned.\n   - \"the United States changed a lot after World War II\" - Too general. It names no specific effect such as suburban growth, segregation, or highway building.",
+   "ush_frq": {
+    "schema_version": "ush-frq-1",
+    "task_type": "saq",
+    "template": "saq3",
+    "period": 8,
+    "periods": [
+     8
+    ],
+    "title": "Homeownership in the United States, 1900-1980",
+    "prompt": {
+     "scenario": "The table below, from the U.S. Census Bureau, gives homeownership rates (percent) for the United States, New York, and Mississippi in census years from 1900 to 1980.",
+     "task": "Using the table, answer parts A, B, and C.",
+     "requirements": [
+      "Answer all three parts.",
+      "Each part is worth one point.",
+      "Use specific historical evidence for parts B and C."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly identify ONE trend or pattern shown in the data in the table.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain ONE specific historical cause of the trend or pattern you identified in part A.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain ONE specific effect of, or development related to, the trend or pattern shown in the table in the period 1945 to 1980.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "table",
+      "title": "Homeownership rates (percent) for the United States, New York and Mississippi, 1900-1980",
+      "attribution": "U.S. Census Bureau (Historical Census of Housing Tables), Historical Census of Housing Tables: Homeownership (table compiled from decennial censuses 1900-2000; page last revised October 8, 2021). U.S. Census Bureau. Reuse: public domain (U.S. government work). excerpted (selected rows/columns; values unchanged).",
+      "real_data": true,
+      "source_registry_id": "stat-homeownership-1900-1980",
+      "source_sha256": "963d86e578e26cbe76ae7adc415f3729dca120f9de03dc12b01c596f35716e04",
+      "body": "Homeownership rates, in percent, for the United States, New York, and Mississippi in each census year from 1900 to 1980.",
+      "table": {
+       "columns": [
+        "Year",
+        "United States",
+        "New York",
+        "Mississippi"
+       ],
+       "rows": [
+        [
+         "1900",
+         "46.5",
+         "33.2",
+         "34.5"
+        ],
+        [
+         "1910",
+         "45.9",
+         "31.0",
+         "34.0"
+        ],
+        [
+         "1920",
+         "45.6",
+         "30.7",
+         "34.0"
+        ],
+        [
+         "1930",
+         "47.8",
+         "37.1",
+         "32.5"
+        ],
+        [
+         "1940",
+         "43.6",
+         "30.3",
+         "33.3"
+        ],
+        [
+         "1950",
+         "55.0",
+         "37.9",
+         "47.8"
+        ],
+        [
+         "1960",
+         "61.9",
+         "44.8",
+         "57.7"
+        ],
+        [
+         "1970",
+         "62.9",
+         "47.3",
+         "66.3"
+        ],
+        [
+         "1980",
+         "64.4",
+         "48.6",
+         "71.0"
+        ]
+       ]
+      },
+      "provenance": {
+       "kind": "real_historical_source",
+       "real_data": true,
+       "note": "registry stat-homeownership-1900-1980"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "ushistory-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response misreads the table, gives a vague statement, or names no trend that the data support.",
+        "1": "The response accurately identifies one trend or pattern shown in the table, such as the national rate rising from 43.6 percent in 1940 to 61.9 percent in 1960."
+       },
+       "task_specific": "Students identify one accurate trend or pattern from the table. Acceptable answers include: the national rate rising sharply after 1940; the national rate staying between about 44 and 48 percent from 1900 to 1940; Mississippi's rate rising from the low 30s to over 70 percent and passing the national rate by 1970; or New York's rate staying below the national rate in every year shown."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no cause, gives a cause from the wrong period, or does not explain how the cause connects to the trend.",
+        "1": "The response explains how one specific, accurate development from the period caused or contributed to the trend identified in part A."
+       },
+       "task_specific": "Students explain one specific historical cause that fits the trend they named in part A. Examples: the GI Bill of 1944 and VA-guaranteed home loans; Federal Housing Administration mortgage insurance; mass-produced suburban housing such as Levittown; postwar prosperity, rising wages and the baby boom; or the Great Depression for the low rates in 1940."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no effect, an inaccurate one, or one outside the period or not connected to homeownership and suburban growth.",
+        "1": "The response explains one specific, accurate effect of or development related to rising homeownership between 1945 and 1980."
+       },
+       "task_specific": "Students explain one specific effect of, or development connected to, the rise in homeownership between 1945 and 1980. Examples: suburban growth and car dependence; the Interstate Highway System; exclusion of Black families from suburbs through redlining and restrictive covenants and persistent residential segregation; white flight and urban decline; consumer demand for cars, appliances and furnishings; or the Fair Housing Act of 1968."
+      }
+     ],
+     "scoring_notes": [
+      "Each part is worth one point. Parts are scored separately, but part B must explain a cause of a trend that the data actually show.",
+      "In part A, accept an accurate reading of any column. Students do not need to quote exact numbers.",
+      "In part B, a bare name such as 'the GI Bill' with no explanation does not earn the point. The response must show how the development produced the trend.",
+      "In part C, accept effects on suburbs, cities, race and housing, or the national economy if they are tied to homeownership and housing between 1945 and 1980."
+     ]
+    },
+    "expected_features": {
+     "saq_answers": {
+      "a": [
+       "The national homeownership rate rose from 43.6 percent in 1940 to 55.0 percent in 1950 and 61.9 percent in 1960.",
+       "The national rate stayed between about 44 and 48 percent from 1900 to 1940 and then rose sharply after 1940.",
+       "Mississippi's rate rose from 33.3 percent in 1940 to 71.0 percent in 1980 and passed the national rate by 1970.",
+       "New York's rate was below the national rate in every year shown, although it also rose after 1940."
+      ],
+      "b": [
+       "The GI Bill of 1944 gave returning veterans home loans guaranteed by the Veterans Administration with little or no down payment, which let millions of families buy homes after the war.",
+       "The Federal Housing Administration insured long-term mortgages with small down payments, which made home loans affordable for many more families.",
+       "Builders such as Levitt and Sons used mass-production methods to build affordable single-family houses in the suburbs, which made it possible for more families to buy.",
+       "Postwar prosperity, rising wages, and a baby boom raised demand for single-family houses, which raised the homeownership rate.",
+       "The Great Depression, with mass unemployment and widespread foreclosures, helps explain why the national rate fell to 43.6 percent in 1940."
+      ],
+      "c": [
+       "Millions of families moved to new suburbs, and the suburban population grew, which increased reliance on cars and led to highway building such as the Interstate Highway System of 1956.",
+       "Redlining, discriminatory lending, and restrictive covenants largely kept Black families out of the new suburbs, which reinforced residential segregation.",
+       "As many middle-class white families moved to the suburbs, cities lost residents and tax revenue, which contributed to urban decline.",
+       "Rising homeownership increased demand for cars, appliances, and furnishings, which fed the postwar consumer economy.",
+       "Discrimination in housing led to the Fair Housing Act of 1968, which banned discrimination in the sale and rental of housing."
+      ]
+     },
+     "common_pitfalls": [
+      "Reading the Mississippi column as the national trend.",
+      "Naming a program without saying what it did.",
+      "Giving 1930s relief programs as the cause of the post-1945 rise."
+     ],
+     "facts": [
+      "The Servicemen's Readjustment Act (GI Bill) was passed in 1944 and provided VA-guaranteed home loans.",
+      "The Federal Housing Administration was created in 1934 and insured mortgages.",
+      "Levitt and Sons built the Levittown developments beginning in 1947.",
+      "The Interstate Highway Act was passed in 1956.",
+      "The Fair Housing Act was passed in 1968."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 3,
+      "essay": "(A) One trend in the table is that the national homeownership rate jumped after World War II. It was 43.6 percent in 1940, then 55.0 percent in 1950 and 61.9 percent in 1960, after staying between about 44 and 48 percent for the first forty years of the century.\n\n(B) One cause was the GI Bill of 1944, which gave returning veterans home loans guaranteed by the Veterans Administration, with little or no down payment. Millions of veterans who could never have saved for a down payment were able to buy houses, so the rate rose much faster than it had before the war.\n\n(C) One effect was the rapid growth of the suburbs. Builders such as Levitt and Sons mass-produced houses on open land, and families relied on cars to get to work. However, many of these suburbs kept Black families out through restrictive covenants and discriminatory lending, so suburban growth also reinforced residential segregation.",
+      "word_count": 156,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "43.6 percent in 1940, then 55.0 percent in 1950 and 61.9 percent in 1960",
+        "comment": "Reads the table correctly with exact figures, so the trend is specific and supported by the data. Earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "the GI Bill of 1944, which gave returning veterans home loans guaranteed by the Veterans Administration",
+        "comment": "Names an accurate, specific cause with correct details from the right period.",
+        "row_id": "b"
+       },
+       {
+        "quote": "so the rate rose much faster than it had before the war",
+        "comment": "Connects the cause to the trend identified in part A, which the rubric requires. Earns the Part B point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "the rapid growth of the suburbs",
+        "comment": "Gives an accurate development tied to rising homeownership between 1945 and 1980.",
+        "row_id": "c"
+       },
+       {
+        "quote": "restrictive covenants and discriminatory lending",
+        "comment": "Backs the effect with specific, accurate evidence about who could buy in the new suburbs. Earns the Part C point.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 2,
+      "essay": "(A) The table shows that the homeownership rate in the United States went up a lot after 1940. It was 43.6 percent in 1940 and it reached 61.9 percent by 1960.\n\n(B) A cause of this was the government. The government helped people buy homes after the war and that is why the rate went up so much.\n\n(C) One effect was that many Americans moved from cities to the suburbs. New suburban towns such as Levittown were built quickly, and people relied on cars to get to work, which helped the highway system grow. Cities lost many of their middle-class residents and lost tax money as a result.",
+      "word_count": 109,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 0,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "It was 43.6 percent in 1940 and it reached 61.9 percent by 1960.",
+        "comment": "Accurate figures from the table support a clear trend. This earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "The government helped people buy homes after the war",
+        "comment": "Vague. It never names a program or says how the government made it easier to buy a home, so the Part B point is not earned.",
+        "row_id": "b"
+       },
+       {
+        "quote": "New suburban towns such as Levittown were built quickly",
+        "comment": "Accurate and specific development connected to rising homeownership.",
+        "row_id": "c"
+       },
+       {
+        "quote": "Cities lost many of their middle-class residents and lost tax money",
+        "comment": "Explains an accurate consequence of suburban growth. This earns the Part C point.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) The homeownership rate was higher in 1960 than in 1940. It went from 43.6 percent to 61.9 percent.\n\n(B) This happened because after the war things were different and a lot of people wanted to buy houses.\n\n(C) The effect was that the United States changed a lot after World War II. People lived in different places and the country became more modern and prosperous.",
+      "word_count": 66,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "It went from 43.6 percent to 61.9 percent.",
+        "comment": "Accurate reading of the table, so this earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "after the war things were different and a lot of people wanted to buy houses",
+        "comment": "Restates the trend and names no specific cause, so the Part B point is not earned.",
+        "row_id": "b"
+       },
+       {
+        "quote": "the United States changed a lot after World War II",
+        "comment": "Too general. It names no specific effect such as suburban growth, segregation, or highway building.",
+        "row_id": "c"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_composed",
+     "note": "Prompts, rubric and sample responses are ALTON-authored practice material; the table is a real Census Bureau source (see sources[0].source_registry_id)."
+    }
+   },
+   "design": {
+    "source_fixed_first": true,
+    "evidence_in_source": "national rate 43.6 (1940), 55.0 (1950), 61.9 (1960), 62.9 (1970), 64.4 (1980); Mississippi 33.3 (1940) to 71.0 (1980); New York below the national rate in every year shown"
+   }
+  }
+ },
+ {
+  "cellId": "ap_us_history-real_a_saq3_plains",
+  "apSubjectCode": "ap_us_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_a_saq3_plains-k0",
+  "keywordCode": "6.2",
+  "unitCode": "6",
+  "skillPrimary": "1.B",
+  "structure": "frq_multipart",
+  "archetype": "ushfrq_real_a_saq3_plains",
+  "reviewState": "sample_unverified",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "gateOverride": "ush-real-a-2026-10-15",
+  "run": "ush-real-a",
+  "stockKey": "ush-real-a:ap_us_history-real_a_saq3_plains-k0",
+  "pipeline": "real_source_v1",
+  "validation": "needs_review",
+  "gateVersion": "ush-real-a-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-a:ap_us_history-real_a_saq3_plains-k0",
+  "canonicalKey": "ush-real-a:ap_us_history-real_a_saq3_plains-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:6.2",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|6.2|1.B|frq_multipart|na",
+  "history": [
+   {
+    "run": "ush-real-a",
+    "gateVersion": "ush-real-a-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "stat-plains-state-pop-1870-1900"
+  ],
+  "replaces": "US2 saq3_3",
+  "payload": {
+   "archetype": "ushfrq_real_a_saq3_plains",
+   "template": "saq3",
+   "topic": "6.2",
+   "extra_topics": [],
+   "skill": "1.B",
+   "representative_skill": "1.B",
+   "calculator": "na",
+   "title": "Population of Four Plains States, 1870-1900",
+   "set_intro": "Historical source (real document)\n(table)\nTotal population of Kansas, Nebraska, North Dakota and South Dakota, census counts 1870-1900\nCampbell Gibson and Kay Jung, U.S. Census Bureau, Population Division, 2002 (Working Paper No. 56, Sept. 2002; figures from decennial censuses). U.S. Census Bureau. Reuse: public domain (U.S. government work). excerpted (selected rows/columns; values unchanged). Census Bureau, Working Paper No. 56. Each figure is the total population at the census year shown. For North and South Dakota, the 1870 and 1880 figures are for the area of the present state, and the source notes that the division of Dakota Territory's population between the two is partly estimated.\n\nThe table for this source appears below.",
+   "stimulus": {
+    "kind": "table",
+    "description": "The total population of Kansas, Nebraska, North Dakota, and South Dakota in each census year from 1870 to 1900.",
+    "data": {
+     "columns": [
+      "Year",
+      "Kansas",
+      "Nebraska",
+      "North Dakota",
+      "South Dakota"
+     ],
+     "rows": [
+      [
+       "1870",
+       "364,399",
+       "122,993",
+       "2,405",
+       "11,776"
+      ],
+      [
+       "1880",
+       "996,096",
+       "452,402",
+       "36,909",
+       "98,268"
+      ],
+      [
+       "1890",
+       "1,427,096",
+       "1,058,910",
+       "182,719",
+       "328,808"
+      ],
+      [
+       "1900",
+       "1,470,495",
+       "1,066,300",
+       "319,146",
+       "401,570"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly identify ONE trend or pattern shown in the table between 1870 and 1900.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "6.2"
+     ],
+     "model_answer": "Population grew rapidly in all four states between 1870 and 1890; Kansas rose from 364,399 to 1,427,096 and Nebraska from 122,993 to 1,058,910.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Students identify one accurate trend or pattern from the table. Acceptable answers include: rapid population growth in all four states from 1870 to 1890; Kansas and Nebraska growing very little between 1890 and 1900 while North and South Dakota kept growing; or the Dakotas growing from very small populations in 1870 to more than 300,000 by 1900.",
+       "required_elements": [
+        "Population grew rapidly in all four states between 1870 and 1890; Kansas rose from 364,399 to 1,427,096 and Nebraska from 122,993 to 1,058,910.",
+        "Kansas and Nebraska grew very little in the 1890s (1,427,096 to 1,470,495 and 1,058,910 to 1,066,300), while North and South Dakota kept growing.",
+        "North and South Dakota grew from very small populations in 1870 (2,405 and 11,776) to more than 300,000 each by 1900."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain ONE specific historical cause of the trend or pattern you identified in part A.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "6.2"
+     ],
+     "model_answer": "The Homestead Act of 1862 offered 160 acres of public land to settlers who lived on and improved it for five years, which drew farm families to the Plains and raised the population.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Students explain one specific historical cause that fits the trend they named in part A. Examples: the Homestead Act's 160-acre claims; federal land grants to railroads under the Pacific Railway Acts, along with railroad promotion of settlement; immigrant recruitment in Europe; or drought, falling crop prices and the Panic of 1893 for the slowdown in the 1890s.",
+       "required_elements": [
+        "The Homestead Act of 1862 offered 160 acres of public land to settlers who lived on and improved it for five years, which drew farm families to the Plains and raised the population.",
+        "Federal land grants under the Pacific Railway Acts led railroads to build lines across the Plains and to sell land and advertise for settlers, so population grew quickly once track reached an area.",
+        "Railroads and state immigration boards recruited settlers in Europe, including Germans and Scandinavians, which brought many new residents to the Plains states.",
+        "Drought, falling crop prices, and the Panic of 1893 ruined many Plains farmers in the early 1890s, which explains why growth in Kansas and Nebraska nearly stopped."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE specific effect of, or development related to, the settlement of the Great Plains in the period 1865 to 1898.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "6.2"
+     ],
+     "model_answer": "Settlement and railroad building helped destroy the bison herds and pushed Plains nations onto reservations, and the Dawes Act of 1887 later divided reservation land into individual allotments.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Students explain one specific effect of, or development connected to, Plains settlement from 1865 to 1898. Examples: Native nations displaced, the bison destroyed, and the Dawes Act passed; farmer protest through the Grange, the Farmers' Alliances, and the Populist Party; railroad regulation through Granger laws, Munn v. Illinois, and the Interstate Commerce Act; the 1890 census report that a frontier line no longer existed; or greater commercial farming for national and world markets.",
+       "required_elements": [
+        "Settlement and railroad building helped destroy the bison herds and pushed Plains nations onto reservations, and the Dawes Act of 1887 later divided reservation land into individual allotments.",
+        "Farmers who resented railroad rates, debt, and low prices organized the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of railroads and free coinage of silver.",
+        "Farmer pressure led to state Granger laws regulating railroads, which the Supreme Court upheld in Munn v. Illinois in 1877, and later to the Interstate Commerce Act of 1887.",
+        "The Superintendent of the Census reported in 1890 that a frontier line no longer existed, and Frederick Jackson Turner made that report the starting point of his 1893 frontier thesis."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 3 points.\nPart A (0-1): Students identify one accurate trend or pattern from the table. Acceptable answers include: rapid population growth in all four states from 1870 to 1890; Kansas and Nebraska growing very little between 1890 and 1900 while North and South Dakota kept growing; or the Dakotas growing from very small populations in 1870 to more than 300,000 by 1900.\n   - 1: The response accurately identifies one trend or pattern shown in the table, such as Kansas rising from about 364,000 in 1870 to about 1,427,000 in 1890.\n   - 0: The response misreads the table, gives a vague statement, or names no trend that the data support.\nPart B (0-1): Students explain one specific historical cause that fits the trend they named in part A. Examples: the Homestead Act's 160-acre claims; federal land grants to railroads under the Pacific Railway Acts, along with railroad promotion of settlement; immigrant recruitment in Europe; or drought, falling crop prices and the Panic of 1893 for the slowdown in the 1890s.\n   - 1: The response explains how one specific, accurate development from the period caused or contributed to the trend identified in part A.\n   - 0: The response gives no cause, gives a cause from the wrong period, or does not explain how the cause connects to the trend.\nPart C (0-1): Students explain one specific effect of, or development connected to, Plains settlement from 1865 to 1898. Examples: Native nations displaced, the bison destroyed, and the Dawes Act passed; farmer protest through the Grange, the Farmers' Alliances, and the Populist Party; railroad regulation through Granger laws, Munn v. Illinois, and the Interstate Commerce Act; the 1890 census report that a frontier line no longer existed; or greater commercial farming for national and world markets.\n   - 1: The response explains one specific, accurate effect of or development related to Great Plains settlement between 1865 and 1898.\n   - 0: The response gives no effect, an inaccurate one, or one outside the period or not connected to Plains settlement.\nNote: Each part is worth one point. Parts are scored separately, but part B must explain a cause of a trend that the data actually show.\nNote: In part A, accept an accurate reading of any column. Students do not need to quote exact numbers.\nNote: In part B, a bare name such as 'the Homestead Act' with no explanation does not earn the point. The response must show how the development produced the trend.\nNote: In part C, accept effects on Native peoples, farmers, railroads, politics, or the national economy if they are tied to western settlement in the period.\nAcceptable answers for A: Population grew rapidly in all four states between 1870 and 1890; Kansas rose from 364,399 to 1,427,096 and Nebraska from 122,993 to 1,058,910. / Kansas and Nebraska grew very little in the 1890s (1,427,096 to 1,470,495 and 1,058,910 to 1,066,300), while North and South Dakota kept growing. / North and South Dakota grew from very small populations in 1870 (2,405 and 11,776) to more than 300,000 each by 1900.\nAcceptable answers for B: The Homestead Act of 1862 offered 160 acres of public land to settlers who lived on and improved it for five years, which drew farm families to the Plains and raised the population. / Federal land grants under the Pacific Railway Acts led railroads to build lines across the Plains and to sell land and advertise for settlers, so population grew quickly once track reached an area. / Railroads and state immigration boards recruited settlers in Europe, including Germans and Scandinavians, which brought many new residents to the Plains states. / Drought, falling crop prices, and the Panic of 1893 ruined many Plains farmers in the early 1890s, which explains why growth in Kansas and Nebraska nearly stopped.\nAcceptable answers for C: Settlement and railroad building helped destroy the bison herds and pushed Plains nations onto reservations, and the Dawes Act of 1887 later divided reservation land into individual allotments. / Farmers who resented railroad rates, debt, and low prices organized the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of railroads and free coinage of silver. / Farmer pressure led to state Granger laws regulating railroads, which the Supreme Court upheld in Munn v. Illinois in 1877, and later to the Interstate Commerce Act of 1887. / The Superintendent of the Census reported in 1890 that a frontier line no longer existed, and Frederick Jackson Turner made that report the starting point of his 1893 frontier thesis.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) One trend in the table is that the Plains states grew very fast between 1870 and 1890. Kansas went from 364,399 people in 1870 to 1,427,096 in 1890, and Nebraska went from 122,993 to 1,058,910.\n\n(B) One cause of this growth was the Homestead Act of 1862, which gave settlers 160 acres of public land if they lived on it and farmed it for five years. Land that cost almost nothing drew families from the East and from Europe to places like Kansas and Nebraska, so the population multiplied.\n\n(C) One effect of Plains settlement was that farmers organized politically. Plains farmers depended on railroads to ship their wheat and corn and resented high rates, debt, and falling crop prices, so they joined the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of the railroads and free coinage of silver.\n   - \"Kansas went from 364,399 people in 1870 to 1,427,096 in 1890\" - Reads the table correctly and gives exact figures to show the growth trend from 1870 to 1890. Earns the Part A point.\n   - \"gave settlers 160 acres of public land if they lived on it and farmed it for five years\" - Names an accurate, specific cause with correct details from the right period. It goes beyond a bare name of the act.\n   - \"so the population multiplied\" - Connects the cause to the trend from part A, which the rubric requires. Earns the Part B point.\n   - \"formed the Populist Party\" - Gives an accurate development tied to Plains settlement between 1865 and 1898.\n   - \"whose 1892 Omaha Platform called for government ownership of the railroads\" - Backs the effect with specific, accurate evidence tied to farmers' complaints about railroads. Earns the Part C point.\n\nSample response, middle score (2/3; Part A 1, Part B 1, Part C 0):\n(A) The population in all four states grew a lot between 1870 and 1890. For example, South Dakota went from 11,776 people in 1870 to 328,808 in 1890.\n\n(B) A cause of this was the Homestead Act. It was passed in 1862 and many people moved to the Plains because of it.\n\n(C) One effect of the settlement of the Great Plains was that Native Americans were pushed off their land. As settlers and railroads spread across the Plains, the buffalo herds were destroyed and Plains nations were forced onto reservations. Later the Dawes Act of 1887 broke up reservation land into individual allotments.\n   - \"South Dakota went from 11,776 people in 1870 to 328,808 in 1890\" - Accurate figures from the table support a clear trend. This earns the Part A point.\n   - \"many people moved to the Plains because of it\" - Names a valid cause but never says what the Homestead Act offered or how it drew settlers, so it only restates the trend. No credit for Part B.\n   - \"the buffalo herds were destroyed and Plains nations were forced onto reservations\" - Accurate and specific development tied to settlement and railroad building.\n   - \"the Dawes Act of 1887 broke up reservation land into individual allotments\" - Correct evidence from the period. This earns the Part C point.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) One trend is that the population of the states went up between 1870 and 1900. For Kansas it went from 364,399 to 1,470,495.\n\n(B) The population went up because people wanted to move to the Plains and there was a lot of land there.\n\n(C) Settlement of the Great Plains was important in American history. People moved west and built farms and towns, and the country grew.\n   - \"For Kansas it went from 364,399 to 1,470,495.\" - Accurate reading of the table, so this earns the Part A point.\n   - \"people wanted to move to the Plains and there was a lot of land there\" - Restates the trend and names no specific development such as the Homestead Act or railroad land grants. No credit for Part B.\n   - \"Settlement of the Great Plains was important in American history\" - A vague claim of importance. Part C needs one specific, accurate effect such as farmer protest or Native displacement.",
+   "ush_frq": {
+    "schema_version": "ush-frq-1",
+    "task_type": "saq",
+    "template": "saq3",
+    "period": 6,
+    "periods": [
+     6
+    ],
+    "title": "Population of Four Plains States, 1870-1900",
+    "prompt": {
+     "scenario": "The table below, from the U.S. Census Bureau, gives the total population of Kansas, Nebraska, North Dakota, and South Dakota in census years from 1870 to 1900.",
+     "task": "Using the table, answer parts A, B, and C.",
+     "requirements": [
+      "Answer all three parts.",
+      "Each part is worth one point.",
+      "Use specific historical evidence for parts B and C."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly identify ONE trend or pattern shown in the table between 1870 and 1900.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain ONE specific historical cause of the trend or pattern you identified in part A.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain ONE specific effect of, or development related to, the settlement of the Great Plains in the period 1865 to 1898.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "table",
+      "title": "Total population of Kansas, Nebraska, North Dakota and South Dakota, census counts 1870-1900",
+      "attribution": "Campbell Gibson and Kay Jung, U.S. Census Bureau, Population Division, 2002 (Working Paper No. 56, Sept. 2002; figures from decennial censuses). U.S. Census Bureau. Reuse: public domain (U.S. government work). excerpted (selected rows/columns; values unchanged).",
+      "real_data": true,
+      "source_registry_id": "stat-plains-state-pop-1870-1900",
+      "source_sha256": "17a7005c0b058d391cd30655409a773151808293ddace51a5664aa4ef8480e1f",
+      "body": "The total population of Kansas, Nebraska, North Dakota, and South Dakota in each census year from 1870 to 1900.",
+      "table": {
+       "columns": [
+        "Year",
+        "Kansas",
+        "Nebraska",
+        "North Dakota",
+        "South Dakota"
+       ],
+       "rows": [
+        [
+         "1870",
+         "364,399",
+         "122,993",
+         "2,405",
+         "11,776"
+        ],
+        [
+         "1880",
+         "996,096",
+         "452,402",
+         "36,909",
+         "98,268"
+        ],
+        [
+         "1890",
+         "1,427,096",
+         "1,058,910",
+         "182,719",
+         "328,808"
+        ],
+        [
+         "1900",
+         "1,470,495",
+         "1,066,300",
+         "319,146",
+         "401,570"
+        ]
+       ]
+      },
+      "provenance": {
+       "kind": "real_historical_source",
+       "real_data": true,
+       "note": "registry stat-plains-state-pop-1870-1900"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "ushistory-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response misreads the table, gives a vague statement, or names no trend that the data support.",
+        "1": "The response accurately identifies one trend or pattern shown in the table, such as Kansas rising from about 364,000 in 1870 to about 1,427,000 in 1890."
+       },
+       "task_specific": "Students identify one accurate trend or pattern from the table. Acceptable answers include: rapid population growth in all four states from 1870 to 1890; Kansas and Nebraska growing very little between 1890 and 1900 while North and South Dakota kept growing; or the Dakotas growing from very small populations in 1870 to more than 300,000 by 1900."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no cause, gives a cause from the wrong period, or does not explain how the cause connects to the trend.",
+        "1": "The response explains how one specific, accurate development from the period caused or contributed to the trend identified in part A."
+       },
+       "task_specific": "Students explain one specific historical cause that fits the trend they named in part A. Examples: the Homestead Act's 160-acre claims; federal land grants to railroads under the Pacific Railway Acts, along with railroad promotion of settlement; immigrant recruitment in Europe; or drought, falling crop prices and the Panic of 1893 for the slowdown in the 1890s."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no effect, an inaccurate one, or one outside the period or not connected to Plains settlement.",
+        "1": "The response explains one specific, accurate effect of or development related to Great Plains settlement between 1865 and 1898."
+       },
+       "task_specific": "Students explain one specific effect of, or development connected to, Plains settlement from 1865 to 1898. Examples: Native nations displaced, the bison destroyed, and the Dawes Act passed; farmer protest through the Grange, the Farmers' Alliances, and the Populist Party; railroad regulation through Granger laws, Munn v. Illinois, and the Interstate Commerce Act; the 1890 census report that a frontier line no longer existed; or greater commercial farming for national and world markets."
+      }
+     ],
+     "scoring_notes": [
+      "Each part is worth one point. Parts are scored separately, but part B must explain a cause of a trend that the data actually show.",
+      "In part A, accept an accurate reading of any column. Students do not need to quote exact numbers.",
+      "In part B, a bare name such as 'the Homestead Act' with no explanation does not earn the point. The response must show how the development produced the trend.",
+      "In part C, accept effects on Native peoples, farmers, railroads, politics, or the national economy if they are tied to western settlement in the period."
+     ]
+    },
+    "expected_features": {
+     "saq_answers": {
+      "a": [
+       "Population grew rapidly in all four states between 1870 and 1890; Kansas rose from 364,399 to 1,427,096 and Nebraska from 122,993 to 1,058,910.",
+       "Kansas and Nebraska grew very little in the 1890s (1,427,096 to 1,470,495 and 1,058,910 to 1,066,300), while North and South Dakota kept growing.",
+       "North and South Dakota grew from very small populations in 1870 (2,405 and 11,776) to more than 300,000 each by 1900."
+      ],
+      "b": [
+       "The Homestead Act of 1862 offered 160 acres of public land to settlers who lived on and improved it for five years, which drew farm families to the Plains and raised the population.",
+       "Federal land grants under the Pacific Railway Acts led railroads to build lines across the Plains and to sell land and advertise for settlers, so population grew quickly once track reached an area.",
+       "Railroads and state immigration boards recruited settlers in Europe, including Germans and Scandinavians, which brought many new residents to the Plains states.",
+       "Drought, falling crop prices, and the Panic of 1893 ruined many Plains farmers in the early 1890s, which explains why growth in Kansas and Nebraska nearly stopped."
+      ],
+      "c": [
+       "Settlement and railroad building helped destroy the bison herds and pushed Plains nations onto reservations, and the Dawes Act of 1887 later divided reservation land into individual allotments.",
+       "Farmers who resented railroad rates, debt, and low prices organized the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of railroads and free coinage of silver.",
+       "Farmer pressure led to state Granger laws regulating railroads, which the Supreme Court upheld in Munn v. Illinois in 1877, and later to the Interstate Commerce Act of 1887.",
+       "The Superintendent of the Census reported in 1890 that a frontier line no longer existed, and Frederick Jackson Turner made that report the starting point of his 1893 frontier thesis."
+      ]
+     },
+     "common_pitfalls": [
+      "Reading the Dakotas' 1870 figures as state populations of established states.",
+      "Naming the Homestead Act without saying what it offered.",
+      "Giving twentieth-century developments such as the Dust Bowl as effects of 1865-1898 settlement."
+     ],
+     "facts": [
+      "The Homestead Act of 1862 offered 160 acres of public land to settlers who lived on and improved it for five years.",
+      "The Pacific Railway Acts gave land grants to railroads.",
+      "The Dawes Act was passed in 1887.",
+      "The Populist Party's 1892 Omaha Platform called for government ownership of railroads and free coinage of silver.",
+      "Munn v. Illinois (1877) upheld state regulation of grain elevators and railroad rates.",
+      "The Interstate Commerce Act was passed in 1887."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 3,
+      "essay": "(A) One trend in the table is that the Plains states grew very fast between 1870 and 1890. Kansas went from 364,399 people in 1870 to 1,427,096 in 1890, and Nebraska went from 122,993 to 1,058,910.\n\n(B) One cause of this growth was the Homestead Act of 1862, which gave settlers 160 acres of public land if they lived on it and farmed it for five years. Land that cost almost nothing drew families from the East and from Europe to places like Kansas and Nebraska, so the population multiplied.\n\n(C) One effect of Plains settlement was that farmers organized politically. Plains farmers depended on railroads to ship their wheat and corn and resented high rates, debt, and falling crop prices, so they joined the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of the railroads and free coinage of silver.",
+      "word_count": 152,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "Kansas went from 364,399 people in 1870 to 1,427,096 in 1890",
+        "comment": "Reads the table correctly and gives exact figures to show the growth trend from 1870 to 1890. Earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "gave settlers 160 acres of public land if they lived on it and farmed it for five years",
+        "comment": "Names an accurate, specific cause with correct details from the right period. It goes beyond a bare name of the act.",
+        "row_id": "b"
+       },
+       {
+        "quote": "so the population multiplied",
+        "comment": "Connects the cause to the trend from part A, which the rubric requires. Earns the Part B point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "formed the Populist Party",
+        "comment": "Gives an accurate development tied to Plains settlement between 1865 and 1898.",
+        "row_id": "c"
+       },
+       {
+        "quote": "whose 1892 Omaha Platform called for government ownership of the railroads",
+        "comment": "Backs the effect with specific, accurate evidence tied to farmers' complaints about railroads. Earns the Part C point.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 2,
+      "essay": "(A) The population in all four states grew a lot between 1870 and 1890. For example, South Dakota went from 11,776 people in 1870 to 328,808 in 1890.\n\n(B) A cause of this was the Homestead Act. It was passed in 1862 and many people moved to the Plains because of it.\n\n(C) One effect of the settlement of the Great Plains was that Native Americans were pushed off their land. As settlers and railroads spread across the Plains, the buffalo herds were destroyed and Plains nations were forced onto reservations. Later the Dawes Act of 1887 broke up reservation land into individual allotments.",
+      "word_count": 104,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 0,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "South Dakota went from 11,776 people in 1870 to 328,808 in 1890",
+        "comment": "Accurate figures from the table support a clear trend. This earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "many people moved to the Plains because of it",
+        "comment": "Names a valid cause but never says what the Homestead Act offered or how it drew settlers, so it only restates the trend. No credit for Part B.",
+        "row_id": "b"
+       },
+       {
+        "quote": "the buffalo herds were destroyed and Plains nations were forced onto reservations",
+        "comment": "Accurate and specific development tied to settlement and railroad building.",
+        "row_id": "c"
+       },
+       {
+        "quote": "the Dawes Act of 1887 broke up reservation land into individual allotments",
+        "comment": "Correct evidence from the period. This earns the Part C point.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) One trend is that the population of the states went up between 1870 and 1900. For Kansas it went from 364,399 to 1,470,495.\n\n(B) The population went up because people wanted to move to the Plains and there was a lot of land there.\n\n(C) Settlement of the Great Plains was important in American history. People moved west and built farms and towns, and the country grew.",
+      "word_count": 68,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "For Kansas it went from 364,399 to 1,470,495.",
+        "comment": "Accurate reading of the table, so this earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "people wanted to move to the Plains and there was a lot of land there",
+        "comment": "Restates the trend and names no specific development such as the Homestead Act or railroad land grants. No credit for Part B.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Settlement of the Great Plains was important in American history",
+        "comment": "A vague claim of importance. Part C needs one specific, accurate effect such as farmer protest or Native displacement.",
+        "row_id": "c"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_composed",
+     "note": "Prompts, rubric and sample responses are ALTON-authored practice material; the table is a real Census Bureau source (see sources[0].source_registry_id)."
+    }
+   },
+   "design": {
+    "source_fixed_first": true,
+    "evidence_in_source": "Kansas 364,399 (1870) to 1,427,096 (1890) to 1,470,495 (1900); Nebraska 122,993 to 1,058,910 to 1,066,300; North Dakota 2,405 to 182,719 to 319,146; South Dakota 11,776 to 328,808 to 401,570"
+   }
+  }
+ }
+]
