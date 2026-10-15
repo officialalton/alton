@@ -3,7 +3,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { isEnglishPassage, REAL_TEXT_MARKER } from "../ap-exam/stimulus-display";
 import { passageRequiresFigure } from "../problem-figures/check";
-import { locate, realAttribution, realDisplay, realHeadnote, realItemViolations, realSet, resolveEvidence, unitOfLine, type RealItemRaw } from "./englit-real";
+import { groupOfEntry, locate, realAttribution, realDisplay, realHeadnote, realItemViolations, realSet, resolveEvidence, unitOfLine, type RealItemRaw } from "./englit-real";
 import type { Registry } from "./englit-sources";
 
 const SRC = path.resolve("data/ap/englit-sources");
@@ -31,6 +31,12 @@ describe("real-text set building", () => {
   });
   it("headnote states author, year and excerpt status", () => {
     expect(realHeadnote(entry("dickinson-chariot"))).toContain("(1890)"); expect(realHeadnote(entry("chekhov-lady-dog"))).toContain("translated by Constance Garnett"); expect(realHeadnote(entry("chopin-silk-stockings"))).toContain("excerpt");
+  });
+  it("Stage 2 entries: novel excerpt is a 'longer' set with a novel headnote; Dover Beach keeps 4 standard stanzas (37 lines); extended excerpts start with the Stage 1 excerpt verbatim", () => {
+    expect(groupOfEntry(entry("austen-persuasion-ch1"))).toBe("longer"); expect(groupOfEntry(entry("ibsen-dolls-house"))).toBe("longer"); expect(groupOfEntry(entry("chopin-silk-stockings-long"))).toBe("short");
+    expect(realHeadnote(entry("austen-persuasion-ch1"))).toContain("passage from a novel"); expect(realSet(entry("austen-persuasion-ch1"), text("austen-persuasion-ch1")).form).toBe("prose");
+    const d = realSet(entry("arnold-dover-beach"), text("arnold-dover-beach")); expect(d.stanzas.map((x) => x.length)).toEqual([14, 6, 8, 9]); expect(d.stanzas.flat().length).toBe(37);
+    expect(text("crane-open-boat-q2").startsWith(text("crane-open-boat").trim())).toBe(true); expect(text("chopin-silk-stockings-long").startsWith(text("chopin-silk-stockings").trim())).toBe(true);
   });
   it("prose is wrapped by the shared 56-char rule and paragraphs stay paragraphs", () => {
     const s = realSet(entry("chopin-silk-stockings"), text("chopin-silk-stockings")); expect(s.stanzas.length).toBe(7); expect(s.stanzas.flat().every((l) => l.length <= 56)).toBe(true);

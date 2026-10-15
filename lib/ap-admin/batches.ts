@@ -146,6 +146,8 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "lt-p1c", title: "AP English Literature P1-c MC (장편 묶음 1)", itemsFile: "lt-p1c-items.json", loadLabel: "lt-p1c-2026-10-15", supplement: true, passKeysFile: "lt-p1c-pass-keys.json", evidenceFile: "evidence-lt.json" },
   // 2026-10-15 AP English Literature Stage 1 실제 작품(공유 영역) 3건: LT1 시 세트 p03 → Dickinson, LT1 FRQ Q1 → Hopkins, LT2 FRQ Q2 → Chekhov(docs/ap/englit-groundwork.md "Stage 1"). 새 버전 계획: data/ap/stock/lt1-v2-real-1-swap-plan.json, lt2-v2-real-1-swap-plan.json
   { id: "lt-real-1", title: "AP English Literature Stage 1 실제 작품 3건 (시 MC 세트 1 + FRQ Q1·Q2)", itemsFile: "lt-real-1-items.json", loadLabel: "lt-real-1-2026-10-15", supplement: true, passKeysFile: "lt-real-1-pass-keys.json", evidenceFile: "evidence-lt-real-1.json" },
+  // 2026-10-15 AP English Literature Stage 2 실제 작품(공유 영역) 5건: LT1 단편 세트 s05 → Chopin, LT1 장편 세트 l04 → Austen, LT1 FRQ Q2 → Crane, LT2 시 세트 p05 → Arnold, LT2 희곡 세트 l01 → Ibsen(docs/ap/englit-groundwork.md "Stage 2"). 새 버전 계획(게시 v2 → v3): data/ap/stock/lt1-v3-real-2-swap-plan.json, lt2-v3-real-2-swap-plan.json
+  { id: "lt-real-2", title: "AP English Literature Stage 2 실제 작품 5건 (MC 세트 4 + FRQ Q2)", itemsFile: "lt-real-2-items.json", loadLabel: "lt-real-2-2026-10-15", supplement: true, passKeysFile: "lt-real-2-pass-keys.json", evidenceFile: "evidence-lt-real-2.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
 ];
 

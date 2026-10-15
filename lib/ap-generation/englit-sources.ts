@@ -2,7 +2,7 @@
 // 원칙: 텍스트는 권위 있는 저장소의 원문에서 코드로 잘라낸다(기억에서 옮기지 않는다). 등록부에는 제목·저자·연도/판본·저장소·URL·재사용 근거·발췌 경계·변경 사항·sha256 을 남긴다.
 import { createHash } from "node:crypto";
 
-export type SourceGenre = "poetry" | "short_fiction" | "drama";
+export type SourceGenre = "poetry" | "short_fiction" | "long_fiction" | "drama";
 export type SourceEntry = {
   id: string; title: string; author: string; translator?: string; genre: SourceGenre; form: "poem" | "prose" | "drama";
   year_first_published: number; edition: string; period: string; region: string; perspective: string;

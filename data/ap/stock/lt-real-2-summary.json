@@ -1,0 +1,251 @@
+{
+ "run": "lt-real-2",
+ "generatedAt": "2026-10-15",
+ "execution": "englit-real-4",
+ "passed": [
+  {
+   "stockKey": "lt-real-2:ap_english_literature-real-ls3-k0",
+   "replaces": "LT1 s05 (ALTON short-fiction set, 13 items)"
+  },
+  {
+   "stockKey": "lt-real-2:ap_english_literature-real-ll4-k0",
+   "replaces": "LT1 l04 (ALTON longer-prose set, 10 items)"
+  },
+  {
+   "stockKey": "lt-real-2:ap_english_literature-real-ls5-k0",
+   "replaces": "LT2 p05 (ALTON poetry set, 13 items)"
+  },
+  {
+   "stockKey": "lt-real-2:ap_english_literature-real-ll1-k0",
+   "replaces": "LT2 l01 (ALTON drama set, 8 items)"
+  },
+  {
+   "stockKey": "lt-real-2:ap_english_literature-real-rf3-k0",
+   "replaces": "LT1 FRQ Q2 fb2 (ALTON prose passage)"
+  }
+ ],
+ "selection": {
+  "LT1": {
+   "sets": [
+    "ls3",
+    "ll4"
+   ],
+   "candidates": [
+    18,
+    14
+   ],
+   "combinationsChecked": 7783776,
+   "categories": {
+    "1": 10,
+    "2": 3,
+    "3": 10,
+    "4": 13,
+    "5": 7,
+    "6": 7,
+    "7": 5
+   },
+   "distanceToOfficialTarget": 4,
+   "bounds": {
+    "1": [
+     8,
+     11
+    ],
+    "2": [
+     1,
+     4
+    ],
+    "3": [
+     8,
+     11
+    ],
+    "4": [
+     11,
+     15
+    ],
+    "5": [
+     5,
+     8
+    ],
+    "6": [
+     5,
+     8
+    ],
+    "7": [
+     5,
+     8
+    ]
+   }
+  },
+  "LT2": {
+   "sets": [
+    "ls5",
+    "ll1"
+   ],
+   "candidates": [
+    14,
+    8
+   ],
+   "combinationsChecked": 14,
+   "categories": {
+    "1": 8,
+    "2": 3,
+    "3": 10,
+    "4": 12,
+    "5": 7,
+    "6": 7,
+    "7": 8
+   },
+   "distanceToOfficialTarget": 6,
+   "bounds": {
+    "1": [
+     8,
+     11
+    ],
+    "2": [
+     1,
+     4
+    ],
+    "3": [
+     8,
+     11
+    ],
+    "4": [
+     11,
+     15
+    ],
+    "5": [
+     5,
+     8
+    ],
+    "6": [
+     5,
+     8
+    ],
+    "7": [
+     5,
+     8
+    ]
+   }
+  }
+ },
+ "frqProcessEssay": {
+  "path": "production processEssay (2 runs, lower kept), rubric englit-v1, leave-one-out anchors",
+  "rows": [
+   {
+    "cell": "ap_english_literature-real-rf3",
+    "tier": "high",
+    "target": 6,
+    "got": 6,
+    "status": "done"
+   },
+   {
+    "cell": "ap_english_literature-real-rf3",
+    "tier": "mid",
+    "target": 4,
+    "got": 4,
+    "status": "done"
+   },
+   {
+    "cell": "ap_english_literature-real-rf3",
+    "tier": "low",
+    "target": 2,
+    "got": 2,
+    "status": "done"
+   }
+  ],
+  "mae": 0,
+  "ordering": [
+   {
+    "cell": "ap_english_literature-real-rf3",
+    "ok": true,
+    "h": 6,
+    "m": 4,
+    "l": 2
+   }
+  ]
+ },
+ "unresolved": [
+  {
+   "set": "ls5",
+   "entry": "arnold-dover-beach",
+   "skill": "4.B",
+   "reasons": []
+  },
+  {
+   "set": "ls5x",
+   "entry": "arnold-dover-beach",
+   "skill": "5.B",
+   "reasons": []
+  },
+  {
+   "set": "ls5x",
+   "entry": "arnold-dover-beach",
+   "skill": "3.B",
+   "reasons": [
+    "solver_reports_second_defensible_option"
+   ]
+  },
+  {
+   "set": "ls5x",
+   "entry": "arnold-dover-beach",
+   "skill": "5.C",
+   "reasons": []
+  },
+  {
+   "set": "ll1",
+   "entry": "ibsen-dolls-house",
+   "skill": "2.B",
+   "reasons": []
+  },
+  {
+   "set": "ll1",
+   "entry": "ibsen-dolls-house",
+   "skill": "6.B",
+   "reasons": [
+    "adversary_missing",
+    "judge_missing",
+    "deterministic_1"
+   ]
+  },
+  {
+   "set": "ll1",
+   "entry": "ibsen-dolls-house",
+   "skill": "6.A",
+   "reasons": []
+  },
+  {
+   "set": "ls3",
+   "entry": "chopin-silk-stockings-long",
+   "skill": "3.C",
+   "reasons": []
+  },
+  {
+   "set": "ll4",
+   "entry": "austen-persuasion-ch1",
+   "skill": "1.A",
+   "reasons": []
+  },
+  {
+   "set": "ll4",
+   "entry": "austen-persuasion-ch1",
+   "skill": "3.C",
+   "reasons": []
+  },
+  {
+   "set": "ll4",
+   "entry": "austen-persuasion-ch1",
+   "skill": "7.D",
+   "reasons": [
+    "solver_reports_second_defensible_option"
+   ]
+  },
+  {
+   "set": "ll4x",
+   "entry": "austen-persuasion-ch1",
+   "skill": "3.E",
+   "reasons": [
+    "solver_reports_second_defensible_option"
+   ]
+  }
+ ]
+}
