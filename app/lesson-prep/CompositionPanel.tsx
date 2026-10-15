@@ -26,6 +26,7 @@ import type {
   UnitMaterial,
 } from "@/lib/unit-composition";
 import LearningText from "@/app/session/[id]/LearningText";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { stripInlineOptions } from "@/lib/problem-text";
 import { SKILL_CODES, domainShort, skillLabel } from "@/lib/problem-taxonomy";
@@ -565,6 +566,7 @@ Couldn&apos;t read the published version, so no preview is available.
     );
   }
   return (
+    <PassageRefsScope>
     <div className="mt-2 rounded-lg bg-grey-100 px-4 py-3" data-testid="problem-preview">
       <ProblemFigure spec={pv.figure} text={problemText(pv.passage, pv.options)} className="mb-2" />
       <LearningText
@@ -582,6 +584,7 @@ Couldn&apos;t read the published version, so no preview is available.
         </ol>
       )}
     </div>
+    </PassageRefsScope>
   );
 }
 

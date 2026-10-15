@@ -1,0 +1,90 @@
+{
+ "runs": [
+  "macro-hard-b"
+ ],
+ "rows": 45,
+ "passed": 29,
+ "rejected": 16,
+ "passRate": 0.644,
+ "mc": {
+  "rows": 45,
+  "passed": 29,
+  "passRate": 0.644
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "3": 12,
+  "4": 1,
+  "5": 12,
+  "6": 4
+ },
+ "skillsPassed": {
+  "3.C": 14,
+  "2.B": 7,
+  "2.C": 4,
+  "3.A": 3,
+  "3.B": 1
+ },
+ "figPassed": {
+  "graph": 6,
+  "none": 11,
+  "table": 12
+ },
+ "figAll": {
+  "graph": 9,
+  "none": 18,
+  "table": 18
+ },
+ "figPassRate": {
+  "graph": "6/9",
+  "none": "11/18",
+  "table": "12/18"
+ },
+ "renderTypesPassed": {
+  "ap_graph:econ_curves": 6,
+  "none": 11,
+  "ap_table": 12
+ },
+ "archetypesPassed": {
+  "ma_h_gap_tax": 3,
+  "ma_h_shock_fiscal_vs_self": 2,
+  "ma_h_mpc_table_gap": 2,
+  "ma_h_two_policy_net": 3,
+  "ma_h_adas_table_shift": 1,
+  "ma_h_ulc_adas": 1,
+  "ma_h_phillips_expect": 2,
+  "ma_h_debt_path": 2,
+  "ma_h_crowding_table": 3,
+  "ma_h_money_growth_real": 2,
+  "ma_h_fx_two_events": 2,
+  "ma_h_real_rate_fx": 2,
+  "ma_h_mix_open": 2,
+  "ma_h_lr_phillips_policy": 1,
+  "ma_h_lf_two_events": 1
+ },
+ "archetypesAll": {
+  "ma_h_gap_tax": 3,
+  "ma_h_shock_fiscal_vs_self": 3,
+  "ma_h_mpc_table_gap": 3,
+  "ma_h_two_policy_net": 3,
+  "ma_h_adas_table_shift": 3,
+  "ma_h_ulc_adas": 3,
+  "ma_h_phillips_expect": 3,
+  "ma_h_debt_path": 3,
+  "ma_h_crowding_table": 3,
+  "ma_h_money_growth_real": 3,
+  "ma_h_fx_two_events": 3,
+  "ma_h_real_rate_fx": 3,
+  "ma_h_mix_open": 3,
+  "ma_h_lr_phillips_policy": 3,
+  "ma_h_lf_two_events": 3
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "macro-hard-b": 1.4918
+ }
+}

@@ -2,7 +2,7 @@
 // 원칙: 공개된 문제 버전·세트 스냅샷은 불변. 교정 = (1) 문제마다 "새 버전"(해설만 다름)을 기존 RPC 로 만들어 공개하고 후보에 연결 → (2) 세트는 mock_exam_refresh_explanations 로 version_no+1 초안 → 기존 공개 흐름.
 // 응시·답안·결과·공개본은 쓰지 않는다. 쓰기는 환경 가드 + dry-run 계획 해시 + 감사 로그(ap_stock_admin_runs). 교정 문안은 교정 파일(data/ap/stock/tex-corrections.json)에 있고 "변환 전 해시"에 묶여 있다.
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { readFileSync } from "../ap-generation/data-fs";
 import path from "node:path";
 import { autoMathExplanation } from "../ap-exam/explanation-math";
 import { planConversion } from "../ap-exam/convert";

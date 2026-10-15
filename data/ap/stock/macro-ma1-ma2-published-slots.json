@@ -1,0 +1,1352 @@
+{
+ "generatedAt": "2026-10-15T20:58:26.462Z",
+ "note": "SELECT 전용 조회(supabase db query --linked)",
+ "sets": [
+  {
+   "access_tier": "tutoring",
+   "ap_label": "full_practice",
+   "id": "d734d73e-2f4d-4c6a-ba53-97400dfc0172",
+   "name": "AP Macroeconomics — Practice Exam 1",
+   "set_group_id": "11cc6603-0671-4ef7-93b7-02b2011294d4",
+   "status": "archived",
+   "version_no": 1
+  },
+  {
+   "access_tier": "free",
+   "ap_label": "full_practice",
+   "id": "710bd1bc-ded7-404e-b3e3-0ebfddb0fba7",
+   "name": "AP Macroeconomics — Practice Exam 1",
+   "set_group_id": "11cc6603-0671-4ef7-93b7-02b2011294d4",
+   "status": "published",
+   "version_no": 2
+  },
+  {
+   "access_tier": "free",
+   "ap_label": "full_practice",
+   "id": "042a13b2-d4f0-42df-81d0-13cfc8ad3d7a",
+   "name": "AP Macroeconomics — Practice Exam 2",
+   "set_group_id": "6b0b98c9-71e4-4db7-a257-26c3d857590e",
+   "status": "published",
+   "version_no": 1
+  }
+ ],
+ "MA1": {
+  "sourceSetId": "710bd1bc-ded7-404e-b3e3-0ebfddb0fba7",
+  "sourceSetName": "AP Macroeconomics — Practice Exam 1",
+  "sourceVersionNo": 2,
+  "accessTier": "free",
+  "setGroupId": "11cc6603-0671-4ef7-93b7-02b2011294d4",
+  "slots": [
+   {
+    "section": "ap_frq",
+    "position": 1,
+    "candidateKey": "macro-p2-f:ap_macroeconomics-f01-k0"
+   },
+   {
+    "section": "ap_frq",
+    "position": 2,
+    "candidateKey": "macro-p1-b:ap_macroeconomics-f09-k0"
+   },
+   {
+    "section": "ap_frq",
+    "position": 3,
+    "candidateKey": "macro-p2-f:ap_macroeconomics-f05-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 1,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m02-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 2,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m05-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 3,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m01-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 4,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m02-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 5,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m05-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 6,
+    "candidateKey": "macro-p1-a:ap_macroeconomics-m04-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 7,
+    "candidateKey": "macro-p1-a:ap_macroeconomics-m05-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 8,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m09-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 9,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m11-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 10,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m13-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 11,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m08-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 12,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m13-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 13,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m15-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 14,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m16-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 15,
+    "candidateKey": "macro-p1-a:ap_macroeconomics-m13-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 16,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m18-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 17,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m21-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 18,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m25-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 19,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m27-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 20,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m28-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 21,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m29-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 22,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m23-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 23,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m24-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 24,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m26-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 25,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m27-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 26,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m29-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 27,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m30-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 28,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m33-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 29,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m38-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 30,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m40-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 31,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m31-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 32,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m32-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 33,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m33-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 34,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m34-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 35,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m35-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 36,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m37-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 37,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m38-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 38,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m40-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 39,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m41-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 40,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m44-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 41,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m45-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 42,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m47-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 43,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m48-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 44,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m50-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 45,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m51-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 46,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m52-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 47,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m53-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 48,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m42-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 49,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m44-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 50,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m45-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 51,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m49-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 52,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m50-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 53,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m51-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 54,
+    "candidateKey": "macro-p3:ap_macroeconomics-m01-k3"
+   },
+   {
+    "section": "ap_mc",
+    "position": 55,
+    "candidateKey": "macro-p1-a:ap_macroeconomics-m25-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 56,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m54-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 57,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m56-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 58,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m60-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 59,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m56-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 60,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m59-k1"
+   }
+  ]
+ },
+ "MA2": {
+  "sourceSetId": "042a13b2-d4f0-42df-81d0-13cfc8ad3d7a",
+  "sourceSetName": "AP Macroeconomics — Practice Exam 2",
+  "sourceVersionNo": 1,
+  "accessTier": "free",
+  "setGroupId": "6b0b98c9-71e4-4db7-a257-26c3d857590e",
+  "slots": [
+   {
+    "section": "ap_frq",
+    "position": 1,
+    "candidateKey": "macro-p1-b:ap_macroeconomics-f03-k0"
+   },
+   {
+    "section": "ap_frq",
+    "position": 2,
+    "candidateKey": "macro-p2-f:ap_macroeconomics-f07-k0"
+   },
+   {
+    "section": "ap_frq",
+    "position": 3,
+    "candidateKey": "macro-p2-f:ap_macroeconomics-f09-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 1,
+    "candidateKey": "macro-p1-a:ap_macroeconomics-m01-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 2,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m01-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 3,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m02-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 4,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m04-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 5,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m07-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 6,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m08-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 7,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m12-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 8,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m14-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 9,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m15-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 10,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m16-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 11,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m07-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 12,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m09-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 13,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m10-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 14,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m17-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 15,
+    "candidateKey": "macro-p1-a:ap_macroeconomics-m13-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 16,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m18-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 17,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m20-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 18,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m21-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 19,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m22-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 20,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m23-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 21,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m24-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 22,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m25-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 23,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m26-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 24,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m27-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 25,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m28-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 26,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m30-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 27,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m22-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 28,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m27-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 29,
+    "candidateKey": "macro-p1-a:ap_macroeconomics-m16-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 30,
+    "candidateKey": "macro-p1-a:ap_macroeconomics-m17-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 31,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m32-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 32,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m33-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 33,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m35-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 34,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m36-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 35,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m37-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 36,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m38-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 37,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m39-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 38,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m40-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 39,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m41-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 40,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m36-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 41,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m40-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 42,
+    "candidateKey": "macro-p1-a:ap_macroeconomics-m19-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 43,
+    "candidateKey": "macro-p1-a:ap_macroeconomics-m21-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 44,
+    "candidateKey": "macro-p1-a:ap_macroeconomics-m22-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 45,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m45-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 46,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m49-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 47,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m43-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 48,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m44-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 49,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m47-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 50,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m49-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 51,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m50-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 52,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m52-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 53,
+    "candidateKey": "macro-p3:ap_macroeconomics-m01-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 54,
+    "candidateKey": "macro-p3:ap_macroeconomics-m02-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 55,
+    "candidateKey": "macro-p1-a:ap_macroeconomics-m24-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 56,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m54-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 57,
+    "candidateKey": "macro-p2-a:ap_macroeconomics-m59-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 58,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m54-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 59,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m55-k1"
+   },
+   {
+    "section": "ap_mc",
+    "position": 60,
+    "candidateKey": "macro-p2-b:ap_macroeconomics-m57-k0"
+   }
+  ]
+ },
+ "convertedKeys": [
+  "macro-p1-a:ap_macroeconomics-m01-k0",
+  "macro-p1-a:ap_macroeconomics-m01-k1",
+  "macro-p1-a:ap_macroeconomics-m02-k0",
+  "macro-p1-a:ap_macroeconomics-m02-k1",
+  "macro-p1-a:ap_macroeconomics-m03-k0",
+  "macro-p1-a:ap_macroeconomics-m03-k1",
+  "macro-p1-a:ap_macroeconomics-m04-k0",
+  "macro-p1-a:ap_macroeconomics-m04-k1",
+  "macro-p1-a:ap_macroeconomics-m05-k0",
+  "macro-p1-a:ap_macroeconomics-m05-k1",
+  "macro-p1-a:ap_macroeconomics-m06-k0",
+  "macro-p1-a:ap_macroeconomics-m06-k1",
+  "macro-p1-a:ap_macroeconomics-m07-k0",
+  "macro-p1-a:ap_macroeconomics-m07-k1",
+  "macro-p1-a:ap_macroeconomics-m08-k0",
+  "macro-p1-a:ap_macroeconomics-m08-k1",
+  "macro-p1-a:ap_macroeconomics-m09-k0",
+  "macro-p1-a:ap_macroeconomics-m10-k0",
+  "macro-p1-a:ap_macroeconomics-m10-k1",
+  "macro-p1-a:ap_macroeconomics-m11-k0",
+  "macro-p1-a:ap_macroeconomics-m13-k0",
+  "macro-p1-a:ap_macroeconomics-m13-k1",
+  "macro-p1-a:ap_macroeconomics-m14-k0",
+  "macro-p1-a:ap_macroeconomics-m14-k1",
+  "macro-p1-a:ap_macroeconomics-m15-k1",
+  "macro-p1-a:ap_macroeconomics-m16-k1",
+  "macro-p1-a:ap_macroeconomics-m17-k0",
+  "macro-p1-a:ap_macroeconomics-m17-k1",
+  "macro-p1-a:ap_macroeconomics-m18-k0",
+  "macro-p1-a:ap_macroeconomics-m19-k0",
+  "macro-p1-a:ap_macroeconomics-m19-k1",
+  "macro-p1-a:ap_macroeconomics-m21-k0",
+  "macro-p1-a:ap_macroeconomics-m22-k0",
+  "macro-p1-a:ap_macroeconomics-m23-k1",
+  "macro-p1-a:ap_macroeconomics-m24-k0",
+  "macro-p1-a:ap_macroeconomics-m24-k1",
+  "macro-p1-a:ap_macroeconomics-m25-k1",
+  "macro-p1-b:ap_macroeconomics-f03-k0",
+  "macro-p1-b:ap_macroeconomics-f04-k0",
+  "macro-p1-b:ap_macroeconomics-f05-k0",
+  "macro-p1-b:ap_macroeconomics-f07-k0",
+  "macro-p1-b:ap_macroeconomics-f09-k0",
+  "macro-p2-a:ap_macroeconomics-m01-k0",
+  "macro-p2-a:ap_macroeconomics-m02-k0",
+  "macro-p2-a:ap_macroeconomics-m02-k1",
+  "macro-p2-a:ap_macroeconomics-m04-k1",
+  "macro-p2-a:ap_macroeconomics-m05-k0",
+  "macro-p2-a:ap_macroeconomics-m06-k0",
+  "macro-p2-a:ap_macroeconomics-m06-k1",
+  "macro-p2-a:ap_macroeconomics-m07-k0",
+  "macro-p2-a:ap_macroeconomics-m07-k1",
+  "macro-p2-a:ap_macroeconomics-m08-k0",
+  "macro-p2-a:ap_macroeconomics-m08-k1",
+  "macro-p2-a:ap_macroeconomics-m09-k0",
+  "macro-p2-a:ap_macroeconomics-m09-k1",
+  "macro-p2-a:ap_macroeconomics-m10-k0",
+  "macro-p2-a:ap_macroeconomics-m10-k1",
+  "macro-p2-a:ap_macroeconomics-m11-k0",
+  "macro-p2-a:ap_macroeconomics-m12-k0",
+  "macro-p2-a:ap_macroeconomics-m12-k1",
+  "macro-p2-a:ap_macroeconomics-m13-k0",
+  "macro-p2-a:ap_macroeconomics-m14-k0",
+  "macro-p2-a:ap_macroeconomics-m14-k1",
+  "macro-p2-a:ap_macroeconomics-m15-k1",
+  "macro-p2-a:ap_macroeconomics-m16-k0",
+  "macro-p2-a:ap_macroeconomics-m18-k0",
+  "macro-p2-a:ap_macroeconomics-m18-k1",
+  "macro-p2-a:ap_macroeconomics-m19-k0",
+  "macro-p2-a:ap_macroeconomics-m20-k0",
+  "macro-p2-a:ap_macroeconomics-m21-k0",
+  "macro-p2-a:ap_macroeconomics-m21-k1",
+  "macro-p2-a:ap_macroeconomics-m22-k0",
+  "macro-p2-a:ap_macroeconomics-m22-k1",
+  "macro-p2-a:ap_macroeconomics-m23-k0",
+  "macro-p2-a:ap_macroeconomics-m23-k1",
+  "macro-p2-a:ap_macroeconomics-m24-k0",
+  "macro-p2-a:ap_macroeconomics-m25-k0",
+  "macro-p2-a:ap_macroeconomics-m25-k1",
+  "macro-p2-a:ap_macroeconomics-m26-k0",
+  "macro-p2-a:ap_macroeconomics-m26-k1",
+  "macro-p2-a:ap_macroeconomics-m27-k0",
+  "macro-p2-a:ap_macroeconomics-m27-k1",
+  "macro-p2-a:ap_macroeconomics-m28-k0",
+  "macro-p2-a:ap_macroeconomics-m28-k1",
+  "macro-p2-a:ap_macroeconomics-m29-k1",
+  "macro-p2-a:ap_macroeconomics-m30-k0",
+  "macro-p2-a:ap_macroeconomics-m30-k1",
+  "macro-p2-a:ap_macroeconomics-m32-k0",
+  "macro-p2-a:ap_macroeconomics-m32-k1",
+  "macro-p2-a:ap_macroeconomics-m33-k0",
+  "macro-p2-a:ap_macroeconomics-m33-k1",
+  "macro-p2-a:ap_macroeconomics-m34-k0",
+  "macro-p2-a:ap_macroeconomics-m34-k1",
+  "macro-p2-a:ap_macroeconomics-m35-k0",
+  "macro-p2-a:ap_macroeconomics-m35-k1",
+  "macro-p2-a:ap_macroeconomics-m36-k0",
+  "macro-p2-a:ap_macroeconomics-m37-k0",
+  "macro-p2-a:ap_macroeconomics-m38-k0",
+  "macro-p2-a:ap_macroeconomics-m38-k1",
+  "macro-p2-a:ap_macroeconomics-m39-k1",
+  "macro-p2-a:ap_macroeconomics-m40-k0",
+  "macro-p2-a:ap_macroeconomics-m40-k1",
+  "macro-p2-a:ap_macroeconomics-m41-k0",
+  "macro-p2-a:ap_macroeconomics-m42-k0",
+  "macro-p2-a:ap_macroeconomics-m42-k1",
+  "macro-p2-a:ap_macroeconomics-m44-k0",
+  "macro-p2-a:ap_macroeconomics-m45-k0",
+  "macro-p2-a:ap_macroeconomics-m45-k1",
+  "macro-p2-a:ap_macroeconomics-m46-k0",
+  "macro-p2-a:ap_macroeconomics-m46-k1",
+  "macro-p2-a:ap_macroeconomics-m47-k1",
+  "macro-p2-a:ap_macroeconomics-m48-k0",
+  "macro-p2-a:ap_macroeconomics-m49-k0",
+  "macro-p2-a:ap_macroeconomics-m49-k1",
+  "macro-p2-a:ap_macroeconomics-m50-k0",
+  "macro-p2-a:ap_macroeconomics-m50-k1",
+  "macro-p2-a:ap_macroeconomics-m51-k1",
+  "macro-p2-a:ap_macroeconomics-m52-k1",
+  "macro-p2-a:ap_macroeconomics-m53-k0",
+  "macro-p2-a:ap_macroeconomics-m54-k0",
+  "macro-p2-a:ap_macroeconomics-m54-k1",
+  "macro-p2-a:ap_macroeconomics-m56-k0",
+  "macro-p2-a:ap_macroeconomics-m57-k0",
+  "macro-p2-a:ap_macroeconomics-m57-k1",
+  "macro-p2-a:ap_macroeconomics-m59-k0",
+  "macro-p2-a:ap_macroeconomics-m59-k1",
+  "macro-p2-a:ap_macroeconomics-m60-k0",
+  "macro-p2-b:ap_macroeconomics-m01-k0",
+  "macro-p2-b:ap_macroeconomics-m01-k1",
+  "macro-p2-b:ap_macroeconomics-m02-k0",
+  "macro-p2-b:ap_macroeconomics-m04-k0",
+  "macro-p2-b:ap_macroeconomics-m05-k0",
+  "macro-p2-b:ap_macroeconomics-m06-k0",
+  "macro-p2-b:ap_macroeconomics-m06-k1",
+  "macro-p2-b:ap_macroeconomics-m07-k0",
+  "macro-p2-b:ap_macroeconomics-m08-k0",
+  "macro-p2-b:ap_macroeconomics-m08-k1",
+  "macro-p2-b:ap_macroeconomics-m09-k0",
+  "macro-p2-b:ap_macroeconomics-m10-k0",
+  "macro-p2-b:ap_macroeconomics-m13-k1",
+  "macro-p2-b:ap_macroeconomics-m15-k0",
+  "macro-p2-b:ap_macroeconomics-m16-k0",
+  "macro-p2-b:ap_macroeconomics-m17-k0",
+  "macro-p2-b:ap_macroeconomics-m18-k0",
+  "macro-p2-b:ap_macroeconomics-m19-k0",
+  "macro-p2-b:ap_macroeconomics-m21-k0",
+  "macro-p2-b:ap_macroeconomics-m21-k1",
+  "macro-p2-b:ap_macroeconomics-m22-k0",
+  "macro-p2-b:ap_macroeconomics-m23-k0",
+  "macro-p2-b:ap_macroeconomics-m24-k1",
+  "macro-p2-b:ap_macroeconomics-m25-k0",
+  "macro-p2-b:ap_macroeconomics-m25-k1",
+  "macro-p2-b:ap_macroeconomics-m26-k0",
+  "macro-p2-b:ap_macroeconomics-m27-k0",
+  "macro-p2-b:ap_macroeconomics-m27-k1",
+  "macro-p2-b:ap_macroeconomics-m28-k0",
+  "macro-p2-b:ap_macroeconomics-m28-k1",
+  "macro-p2-b:ap_macroeconomics-m29-k0",
+  "macro-p2-b:ap_macroeconomics-m30-k0",
+  "macro-p2-b:ap_macroeconomics-m31-k0",
+  "macro-p2-b:ap_macroeconomics-m32-k0",
+  "macro-p2-b:ap_macroeconomics-m33-k0",
+  "macro-p2-b:ap_macroeconomics-m34-k0",
+  "macro-p2-b:ap_macroeconomics-m35-k1",
+  "macro-p2-b:ap_macroeconomics-m36-k0",
+  "macro-p2-b:ap_macroeconomics-m36-k1",
+  "macro-p2-b:ap_macroeconomics-m37-k0",
+  "macro-p2-b:ap_macroeconomics-m38-k0",
+  "macro-p2-b:ap_macroeconomics-m39-k0",
+  "macro-p2-b:ap_macroeconomics-m40-k0",
+  "macro-p2-b:ap_macroeconomics-m40-k1",
+  "macro-p2-b:ap_macroeconomics-m41-k0",
+  "macro-p2-b:ap_macroeconomics-m42-k0",
+  "macro-p2-b:ap_macroeconomics-m43-k0",
+  "macro-p2-b:ap_macroeconomics-m44-k0",
+  "macro-p2-b:ap_macroeconomics-m44-k1",
+  "macro-p2-b:ap_macroeconomics-m45-k0",
+  "macro-p2-b:ap_macroeconomics-m47-k1",
+  "macro-p2-b:ap_macroeconomics-m49-k0",
+  "macro-p2-b:ap_macroeconomics-m49-k1",
+  "macro-p2-b:ap_macroeconomics-m50-k0",
+  "macro-p2-b:ap_macroeconomics-m50-k1",
+  "macro-p2-b:ap_macroeconomics-m51-k0",
+  "macro-p2-b:ap_macroeconomics-m52-k1",
+  "macro-p2-b:ap_macroeconomics-m54-k1",
+  "macro-p2-b:ap_macroeconomics-m55-k1",
+  "macro-p2-b:ap_macroeconomics-m56-k0",
+  "macro-p2-b:ap_macroeconomics-m57-k0",
+  "macro-p2-b:ap_macroeconomics-m59-k1",
+  "macro-p2-f:ap_macroeconomics-f01-k0",
+  "macro-p2-f:ap_macroeconomics-f02-k0",
+  "macro-p2-f:ap_macroeconomics-f04-k0",
+  "macro-p2-f:ap_macroeconomics-f05-k0",
+  "macro-p2-f:ap_macroeconomics-f06-k0",
+  "macro-p2-f:ap_macroeconomics-f07-k0",
+  "macro-p2-f:ap_macroeconomics-f08-k0",
+  "macro-p2-f:ap_macroeconomics-f09-k0",
+  "macro-p2-f:ap_macroeconomics-f10-k0",
+  "macro-p3:ap_macroeconomics-m01-k0",
+  "macro-p3:ap_macroeconomics-m01-k1",
+  "macro-p3:ap_macroeconomics-m01-k3",
+  "macro-p3:ap_macroeconomics-m02-k0",
+  "macro-p3:ap_macroeconomics-m03-k3"
+ ],
+ "dbKeywordCodes": {
+  "macro-p1-a:ap_macroeconomics-m01-k0": "1.2",
+  "macro-p1-a:ap_macroeconomics-m01-k1": "1.2",
+  "macro-p1-a:ap_macroeconomics-m02-k0": "1.4",
+  "macro-p1-a:ap_macroeconomics-m02-k1": "1.4",
+  "macro-p1-a:ap_macroeconomics-m03-k0": "1.6",
+  "macro-p1-a:ap_macroeconomics-m03-k1": "1.6",
+  "macro-p1-a:ap_macroeconomics-m04-k0": "2.1",
+  "macro-p1-a:ap_macroeconomics-m04-k1": "2.1",
+  "macro-p1-a:ap_macroeconomics-m05-k0": "2.3",
+  "macro-p1-a:ap_macroeconomics-m05-k1": "2.3",
+  "macro-p1-a:ap_macroeconomics-m06-k0": "2.4",
+  "macro-p1-a:ap_macroeconomics-m06-k1": "2.4",
+  "macro-p1-a:ap_macroeconomics-m07-k0": "2.3",
+  "macro-p1-a:ap_macroeconomics-m07-k1": "2.3",
+  "macro-p1-a:ap_macroeconomics-m08-k0": "3.2",
+  "macro-p1-a:ap_macroeconomics-m08-k1": "3.2",
+  "macro-p1-a:ap_macroeconomics-m09-k0": "3.6",
+  "macro-p1-a:ap_macroeconomics-m09-k1": "3.6",
+  "macro-p1-a:ap_macroeconomics-m10-k0": "3.5",
+  "macro-p1-a:ap_macroeconomics-m10-k1": "3.5",
+  "macro-p1-a:ap_macroeconomics-m11-k0": "3.7",
+  "macro-p1-a:ap_macroeconomics-m11-k1": "3.7",
+  "macro-p1-a:ap_macroeconomics-m12-k0": "3.8",
+  "macro-p1-a:ap_macroeconomics-m12-k1": "3.8",
+  "macro-p1-a:ap_macroeconomics-m13-k0": "3.3",
+  "macro-p1-a:ap_macroeconomics-m13-k1": "3.3",
+  "macro-p1-a:ap_macroeconomics-m14-k0": "4.4",
+  "macro-p1-a:ap_macroeconomics-m14-k1": "4.4",
+  "macro-p1-a:ap_macroeconomics-m15-k0": "4.5",
+  "macro-p1-a:ap_macroeconomics-m15-k1": "4.5",
+  "macro-p1-a:ap_macroeconomics-m16-k0": "4.7",
+  "macro-p1-a:ap_macroeconomics-m16-k1": "4.7",
+  "macro-p1-a:ap_macroeconomics-m17-k0": "4.6",
+  "macro-p1-a:ap_macroeconomics-m17-k1": "4.6",
+  "macro-p1-a:ap_macroeconomics-m18-k0": "4.2",
+  "macro-p1-a:ap_macroeconomics-m18-k1": "4.2",
+  "macro-p1-a:ap_macroeconomics-m19-k0": "5.1",
+  "macro-p1-a:ap_macroeconomics-m19-k1": "5.1",
+  "macro-p1-a:ap_macroeconomics-m20-k0": "5.2",
+  "macro-p1-a:ap_macroeconomics-m20-k1": "5.2",
+  "macro-p1-a:ap_macroeconomics-m21-k0": "5.5",
+  "macro-p1-a:ap_macroeconomics-m21-k1": "5.5",
+  "macro-p1-a:ap_macroeconomics-m22-k0": "5.3",
+  "macro-p1-a:ap_macroeconomics-m22-k1": "5.3",
+  "macro-p1-a:ap_macroeconomics-m23-k0": "6.4",
+  "macro-p1-a:ap_macroeconomics-m23-k1": "6.4",
+  "macro-p1-a:ap_macroeconomics-m24-k0": "6.3",
+  "macro-p1-a:ap_macroeconomics-m24-k1": "6.3",
+  "macro-p1-a:ap_macroeconomics-m25-k0": "6.2",
+  "macro-p1-a:ap_macroeconomics-m25-k1": "6.2",
+  "macro-p1-a:ap_macroeconomics-m26-k0": "1.2",
+  "macro-p1-a:ap_macroeconomics-m26-k1": "1.2",
+  "macro-p1-b:ap_macroeconomics-f01-k0": "3.5",
+  "macro-p1-b:ap_macroeconomics-f02-k0": "6.4",
+  "macro-p1-b:ap_macroeconomics-f03-k0": "4.6",
+  "macro-p1-b:ap_macroeconomics-f04-k0": "2.6",
+  "macro-p1-b:ap_macroeconomics-f05-k0": "1.3",
+  "macro-p1-b:ap_macroeconomics-f06-k0": "5.5",
+  "macro-p1-b:ap_macroeconomics-f07-k0": "4.4",
+  "macro-p1-b:ap_macroeconomics-f08-k0": "5.2",
+  "macro-p1-b:ap_macroeconomics-f09-k0": "3.2",
+  "macro-p1-b:ap_macroeconomics-f10-k0": "6.4",
+  "macro-p2-a:ap_macroeconomics-m01-k0": "1.1",
+  "macro-p2-a:ap_macroeconomics-m01-k1": "1.1",
+  "macro-p2-a:ap_macroeconomics-m02-k0": "1.2",
+  "macro-p2-a:ap_macroeconomics-m02-k1": "1.2",
+  "macro-p2-a:ap_macroeconomics-m03-k0": "1.2",
+  "macro-p2-a:ap_macroeconomics-m03-k1": "1.2",
+  "macro-p2-a:ap_macroeconomics-m04-k0": "1.3",
+  "macro-p2-a:ap_macroeconomics-m04-k1": "1.3",
+  "macro-p2-a:ap_macroeconomics-m05-k0": "1.4",
+  "macro-p2-a:ap_macroeconomics-m05-k1": "1.4",
+  "macro-p2-a:ap_macroeconomics-m06-k0": "1.6",
+  "macro-p2-a:ap_macroeconomics-m06-k1": "1.6",
+  "macro-p2-a:ap_macroeconomics-m07-k0": "1.6",
+  "macro-p2-a:ap_macroeconomics-m07-k1": "1.6",
+  "macro-p2-a:ap_macroeconomics-m08-k0": "2.1",
+  "macro-p2-a:ap_macroeconomics-m08-k1": "2.1",
+  "macro-p2-a:ap_macroeconomics-m09-k0": "2.1",
+  "macro-p2-a:ap_macroeconomics-m09-k1": "2.1",
+  "macro-p2-a:ap_macroeconomics-m10-k0": "2.2",
+  "macro-p2-a:ap_macroeconomics-m10-k1": "2.2",
+  "macro-p2-a:ap_macroeconomics-m11-k0": "2.3",
+  "macro-p2-a:ap_macroeconomics-m11-k1": "2.3",
+  "macro-p2-a:ap_macroeconomics-m12-k0": "2.4",
+  "macro-p2-a:ap_macroeconomics-m12-k1": "2.4",
+  "macro-p2-a:ap_macroeconomics-m13-k0": "2.4",
+  "macro-p2-a:ap_macroeconomics-m13-k1": "2.4",
+  "macro-p2-a:ap_macroeconomics-m14-k0": "2.5",
+  "macro-p2-a:ap_macroeconomics-m14-k1": "2.5",
+  "macro-p2-a:ap_macroeconomics-m15-k0": "2.5",
+  "macro-p2-a:ap_macroeconomics-m15-k1": "2.5",
+  "macro-p2-a:ap_macroeconomics-m16-k0": "2.6",
+  "macro-p2-a:ap_macroeconomics-m16-k1": "2.6",
+  "macro-p2-a:ap_macroeconomics-m17-k0": "2.7",
+  "macro-p2-a:ap_macroeconomics-m17-k1": "2.7",
+  "macro-p2-a:ap_macroeconomics-m18-k0": "3.1",
+  "macro-p2-a:ap_macroeconomics-m18-k1": "3.1",
+  "macro-p2-a:ap_macroeconomics-m19-k0": "3.1",
+  "macro-p2-a:ap_macroeconomics-m19-k1": "3.1",
+  "macro-p2-a:ap_macroeconomics-m20-k0": "3.2",
+  "macro-p2-a:ap_macroeconomics-m20-k1": "3.2",
+  "macro-p2-a:ap_macroeconomics-m21-k0": "3.2",
+  "macro-p2-a:ap_macroeconomics-m21-k1": "3.2",
+  "macro-p2-a:ap_macroeconomics-m22-k0": "3.3",
+  "macro-p2-a:ap_macroeconomics-m22-k1": "3.3",
+  "macro-p2-a:ap_macroeconomics-m23-k0": "3.4",
+  "macro-p2-a:ap_macroeconomics-m23-k1": "3.4",
+  "macro-p2-a:ap_macroeconomics-m24-k0": "3.5",
+  "macro-p2-a:ap_macroeconomics-m24-k1": "3.5",
+  "macro-p2-a:ap_macroeconomics-m25-k0": "3.6",
+  "macro-p2-a:ap_macroeconomics-m25-k1": "3.6",
+  "macro-p2-a:ap_macroeconomics-m26-k0": "3.6",
+  "macro-p2-a:ap_macroeconomics-m26-k1": "3.6",
+  "macro-p2-a:ap_macroeconomics-m27-k0": "3.7",
+  "macro-p2-a:ap_macroeconomics-m27-k1": "3.7",
+  "macro-p2-a:ap_macroeconomics-m28-k0": "3.8",
+  "macro-p2-a:ap_macroeconomics-m28-k1": "3.8",
+  "macro-p2-a:ap_macroeconomics-m29-k0": "3.8",
+  "macro-p2-a:ap_macroeconomics-m29-k1": "3.8",
+  "macro-p2-a:ap_macroeconomics-m30-k0": "3.9",
+  "macro-p2-a:ap_macroeconomics-m30-k1": "3.9",
+  "macro-p2-a:ap_macroeconomics-m31-k0": "4.1",
+  "macro-p2-a:ap_macroeconomics-m31-k1": "4.1",
+  "macro-p2-a:ap_macroeconomics-m32-k0": "4.2",
+  "macro-p2-a:ap_macroeconomics-m32-k1": "4.2",
+  "macro-p2-a:ap_macroeconomics-m33-k0": "4.3",
+  "macro-p2-a:ap_macroeconomics-m33-k1": "4.3",
+  "macro-p2-a:ap_macroeconomics-m34-k0": "4.4",
+  "macro-p2-a:ap_macroeconomics-m34-k1": "4.4",
+  "macro-p2-a:ap_macroeconomics-m35-k0": "4.4",
+  "macro-p2-a:ap_macroeconomics-m35-k1": "4.4",
+  "macro-p2-a:ap_macroeconomics-m36-k0": "4.5",
+  "macro-p2-a:ap_macroeconomics-m36-k1": "4.5",
+  "macro-p2-a:ap_macroeconomics-m37-k0": "4.5",
+  "macro-p2-a:ap_macroeconomics-m37-k1": "4.5",
+  "macro-p2-a:ap_macroeconomics-m38-k0": "4.6",
+  "macro-p2-a:ap_macroeconomics-m38-k1": "4.6",
+  "macro-p2-a:ap_macroeconomics-m39-k0": "4.6",
+  "macro-p2-a:ap_macroeconomics-m39-k1": "4.6",
+  "macro-p2-a:ap_macroeconomics-m40-k0": "4.7",
+  "macro-p2-a:ap_macroeconomics-m40-k1": "4.7",
+  "macro-p2-a:ap_macroeconomics-m41-k0": "4.7",
+  "macro-p2-a:ap_macroeconomics-m41-k1": "4.7",
+  "macro-p2-a:ap_macroeconomics-m42-k0": "5.1",
+  "macro-p2-a:ap_macroeconomics-m42-k1": "5.1",
+  "macro-p2-a:ap_macroeconomics-m43-k0": "5.2",
+  "macro-p2-a:ap_macroeconomics-m43-k1": "5.2",
+  "macro-p2-a:ap_macroeconomics-m44-k0": "5.2",
+  "macro-p2-a:ap_macroeconomics-m44-k1": "5.2",
+  "macro-p2-a:ap_macroeconomics-m45-k0": "5.2",
+  "macro-p2-a:ap_macroeconomics-m45-k1": "5.2",
+  "macro-p2-a:ap_macroeconomics-m46-k0": "5.3",
+  "macro-p2-a:ap_macroeconomics-m46-k1": "5.3",
+  "macro-p2-a:ap_macroeconomics-m47-k0": "5.4",
+  "macro-p2-a:ap_macroeconomics-m47-k1": "5.4",
+  "macro-p2-a:ap_macroeconomics-m48-k0": "5.4",
+  "macro-p2-a:ap_macroeconomics-m48-k1": "5.4",
+  "macro-p2-a:ap_macroeconomics-m49-k0": "5.5",
+  "macro-p2-a:ap_macroeconomics-m49-k1": "5.5",
+  "macro-p2-a:ap_macroeconomics-m50-k0": "5.5",
+  "macro-p2-a:ap_macroeconomics-m50-k1": "5.5",
+  "macro-p2-a:ap_macroeconomics-m51-k0": "5.6",
+  "macro-p2-a:ap_macroeconomics-m51-k1": "5.6",
+  "macro-p2-a:ap_macroeconomics-m52-k0": "5.6",
+  "macro-p2-a:ap_macroeconomics-m52-k1": "5.6",
+  "macro-p2-a:ap_macroeconomics-m53-k0": "5.7",
+  "macro-p2-a:ap_macroeconomics-m53-k1": "5.7",
+  "macro-p2-a:ap_macroeconomics-m54-k0": "6.1",
+  "macro-p2-a:ap_macroeconomics-m54-k1": "6.1",
+  "macro-p2-a:ap_macroeconomics-m55-k0": "6.2",
+  "macro-p2-a:ap_macroeconomics-m55-k1": "6.2",
+  "macro-p2-a:ap_macroeconomics-m56-k0": "6.3",
+  "macro-p2-a:ap_macroeconomics-m56-k1": "6.3",
+  "macro-p2-a:ap_macroeconomics-m57-k0": "6.4",
+  "macro-p2-a:ap_macroeconomics-m57-k1": "6.4",
+  "macro-p2-a:ap_macroeconomics-m58-k0": "6.5",
+  "macro-p2-a:ap_macroeconomics-m58-k1": "6.5",
+  "macro-p2-a:ap_macroeconomics-m59-k0": "6.6",
+  "macro-p2-a:ap_macroeconomics-m59-k1": "6.6",
+  "macro-p2-a:ap_macroeconomics-m60-k0": "6.6",
+  "macro-p2-a:ap_macroeconomics-m60-k1": "6.6",
+  "macro-p2-b:ap_macroeconomics-m01-k0": "1.1",
+  "macro-p2-b:ap_macroeconomics-m01-k1": "1.1",
+  "macro-p2-b:ap_macroeconomics-m02-k0": "1.2",
+  "macro-p2-b:ap_macroeconomics-m02-k1": "1.2",
+  "macro-p2-b:ap_macroeconomics-m03-k0": "1.3",
+  "macro-p2-b:ap_macroeconomics-m03-k1": "1.3",
+  "macro-p2-b:ap_macroeconomics-m04-k0": "1.3",
+  "macro-p2-b:ap_macroeconomics-m04-k1": "1.3",
+  "macro-p2-b:ap_macroeconomics-m05-k0": "1.5",
+  "macro-p2-b:ap_macroeconomics-m05-k1": "1.5",
+  "macro-p2-b:ap_macroeconomics-m06-k0": "1.6",
+  "macro-p2-b:ap_macroeconomics-m06-k1": "1.6",
+  "macro-p2-b:ap_macroeconomics-m07-k0": "2.1",
+  "macro-p2-b:ap_macroeconomics-m07-k1": "2.1",
+  "macro-p2-b:ap_macroeconomics-m08-k0": "2.1",
+  "macro-p2-b:ap_macroeconomics-m08-k1": "2.1",
+  "macro-p2-b:ap_macroeconomics-m09-k0": "2.2",
+  "macro-p2-b:ap_macroeconomics-m09-k1": "2.2",
+  "macro-p2-b:ap_macroeconomics-m10-k0": "2.3",
+  "macro-p2-b:ap_macroeconomics-m10-k1": "2.3",
+  "macro-p2-b:ap_macroeconomics-m11-k0": "2.3",
+  "macro-p2-b:ap_macroeconomics-m11-k1": "2.3",
+  "macro-p2-b:ap_macroeconomics-m12-k0": "2.4",
+  "macro-p2-b:ap_macroeconomics-m12-k1": "2.4",
+  "macro-p2-b:ap_macroeconomics-m13-k0": "2.4",
+  "macro-p2-b:ap_macroeconomics-m13-k1": "2.4",
+  "macro-p2-b:ap_macroeconomics-m14-k0": "2.5",
+  "macro-p2-b:ap_macroeconomics-m14-k1": "2.5",
+  "macro-p2-b:ap_macroeconomics-m15-k0": "2.6",
+  "macro-p2-b:ap_macroeconomics-m15-k1": "2.6",
+  "macro-p2-b:ap_macroeconomics-m16-k0": "2.6",
+  "macro-p2-b:ap_macroeconomics-m16-k1": "2.6",
+  "macro-p2-b:ap_macroeconomics-m17-k0": "2.7",
+  "macro-p2-b:ap_macroeconomics-m17-k1": "2.7",
+  "macro-p2-b:ap_macroeconomics-m18-k0": "3.1",
+  "macro-p2-b:ap_macroeconomics-m18-k1": "3.1",
+  "macro-p2-b:ap_macroeconomics-m19-k0": "3.2",
+  "macro-p2-b:ap_macroeconomics-m19-k1": "3.2",
+  "macro-p2-b:ap_macroeconomics-m20-k0": "3.2",
+  "macro-p2-b:ap_macroeconomics-m20-k1": "3.2",
+  "macro-p2-b:ap_macroeconomics-m21-k0": "3.2",
+  "macro-p2-b:ap_macroeconomics-m21-k1": "3.2",
+  "macro-p2-b:ap_macroeconomics-m22-k0": "3.4",
+  "macro-p2-b:ap_macroeconomics-m22-k1": "3.4",
+  "macro-p2-b:ap_macroeconomics-m23-k0": "3.5",
+  "macro-p2-b:ap_macroeconomics-m23-k1": "3.5",
+  "macro-p2-b:ap_macroeconomics-m24-k0": "3.6",
+  "macro-p2-b:ap_macroeconomics-m24-k1": "3.6",
+  "macro-p2-b:ap_macroeconomics-m25-k0": "3.6",
+  "macro-p2-b:ap_macroeconomics-m25-k1": "3.6",
+  "macro-p2-b:ap_macroeconomics-m26-k0": "3.7",
+  "macro-p2-b:ap_macroeconomics-m26-k1": "3.7",
+  "macro-p2-b:ap_macroeconomics-m27-k0": "3.7",
+  "macro-p2-b:ap_macroeconomics-m27-k1": "3.7",
+  "macro-p2-b:ap_macroeconomics-m28-k0": "3.8",
+  "macro-p2-b:ap_macroeconomics-m28-k1": "3.8",
+  "macro-p2-b:ap_macroeconomics-m29-k0": "3.8",
+  "macro-p2-b:ap_macroeconomics-m29-k1": "3.8",
+  "macro-p2-b:ap_macroeconomics-m30-k0": "3.9",
+  "macro-p2-b:ap_macroeconomics-m30-k1": "3.9",
+  "macro-p2-b:ap_macroeconomics-m31-k0": "4.1",
+  "macro-p2-b:ap_macroeconomics-m31-k1": "4.1",
+  "macro-p2-b:ap_macroeconomics-m32-k0": "4.2",
+  "macro-p2-b:ap_macroeconomics-m32-k1": "4.2",
+  "macro-p2-b:ap_macroeconomics-m33-k0": "4.3",
+  "macro-p2-b:ap_macroeconomics-m33-k1": "4.3",
+  "macro-p2-b:ap_macroeconomics-m34-k0": "4.4",
+  "macro-p2-b:ap_macroeconomics-m34-k1": "4.4",
+  "macro-p2-b:ap_macroeconomics-m35-k0": "4.4",
+  "macro-p2-b:ap_macroeconomics-m35-k1": "4.4",
+  "macro-p2-b:ap_macroeconomics-m36-k0": "4.5",
+  "macro-p2-b:ap_macroeconomics-m36-k1": "4.5",
+  "macro-p2-b:ap_macroeconomics-m37-k0": "4.6",
+  "macro-p2-b:ap_macroeconomics-m37-k1": "4.6",
+  "macro-p2-b:ap_macroeconomics-m38-k0": "4.6",
+  "macro-p2-b:ap_macroeconomics-m38-k1": "4.6",
+  "macro-p2-b:ap_macroeconomics-m39-k0": "4.7",
+  "macro-p2-b:ap_macroeconomics-m39-k1": "4.7",
+  "macro-p2-b:ap_macroeconomics-m40-k0": "4.7",
+  "macro-p2-b:ap_macroeconomics-m40-k1": "4.7",
+  "macro-p2-b:ap_macroeconomics-m41-k0": "4.7",
+  "macro-p2-b:ap_macroeconomics-m41-k1": "4.7",
+  "macro-p2-b:ap_macroeconomics-m42-k0": "5.2",
+  "macro-p2-b:ap_macroeconomics-m42-k1": "5.2",
+  "macro-p2-b:ap_macroeconomics-m43-k0": "5.2",
+  "macro-p2-b:ap_macroeconomics-m43-k1": "5.2",
+  "macro-p2-b:ap_macroeconomics-m44-k0": "5.2",
+  "macro-p2-b:ap_macroeconomics-m44-k1": "5.2",
+  "macro-p2-b:ap_macroeconomics-m45-k0": "5.3",
+  "macro-p2-b:ap_macroeconomics-m45-k1": "5.3",
+  "macro-p2-b:ap_macroeconomics-m46-k0": "5.4",
+  "macro-p2-b:ap_macroeconomics-m46-k1": "5.4",
+  "macro-p2-b:ap_macroeconomics-m47-k0": "5.4",
+  "macro-p2-b:ap_macroeconomics-m47-k1": "5.4",
+  "macro-p2-b:ap_macroeconomics-m48-k0": "5.5",
+  "macro-p2-b:ap_macroeconomics-m48-k1": "5.5",
+  "macro-p2-b:ap_macroeconomics-m49-k0": "5.5",
+  "macro-p2-b:ap_macroeconomics-m49-k1": "5.5",
+  "macro-p2-b:ap_macroeconomics-m50-k0": "5.6",
+  "macro-p2-b:ap_macroeconomics-m50-k1": "5.6",
+  "macro-p2-b:ap_macroeconomics-m51-k0": "5.6",
+  "macro-p2-b:ap_macroeconomics-m51-k1": "5.6",
+  "macro-p2-b:ap_macroeconomics-m52-k0": "5.7",
+  "macro-p2-b:ap_macroeconomics-m52-k1": "5.7",
+  "macro-p2-b:ap_macroeconomics-m53-k0": "6.1",
+  "macro-p2-b:ap_macroeconomics-m53-k1": "6.1",
+  "macro-p2-b:ap_macroeconomics-m54-k0": "6.1",
+  "macro-p2-b:ap_macroeconomics-m54-k1": "6.1",
+  "macro-p2-b:ap_macroeconomics-m55-k0": "6.2",
+  "macro-p2-b:ap_macroeconomics-m55-k1": "6.2",
+  "macro-p2-b:ap_macroeconomics-m56-k0": "6.3",
+  "macro-p2-b:ap_macroeconomics-m56-k1": "6.3",
+  "macro-p2-b:ap_macroeconomics-m57-k0": "6.5",
+  "macro-p2-b:ap_macroeconomics-m57-k1": "6.5",
+  "macro-p2-b:ap_macroeconomics-m58-k0": "6.5",
+  "macro-p2-b:ap_macroeconomics-m58-k1": "6.5",
+  "macro-p2-b:ap_macroeconomics-m59-k0": "6.6",
+  "macro-p2-b:ap_macroeconomics-m59-k1": "6.6",
+  "macro-p2-f:ap_macroeconomics-f01-k0": "3.5",
+  "macro-p2-f:ap_macroeconomics-f01-k1": "3.5",
+  "macro-p2-f:ap_macroeconomics-f02-k0": "4.6",
+  "macro-p2-f:ap_macroeconomics-f02-k1": "4.6",
+  "macro-p2-f:ap_macroeconomics-f03-k0": "6.4",
+  "macro-p2-f:ap_macroeconomics-f03-k1": "6.4",
+  "macro-p2-f:ap_macroeconomics-f04-k0": "3.2",
+  "macro-p2-f:ap_macroeconomics-f04-k1": "3.2",
+  "macro-p2-f:ap_macroeconomics-f05-k0": "6.4",
+  "macro-p2-f:ap_macroeconomics-f05-k1": "6.4",
+  "macro-p2-f:ap_macroeconomics-f06-k0": "2.6",
+  "macro-p2-f:ap_macroeconomics-f06-k1": "2.6",
+  "macro-p2-f:ap_macroeconomics-f07-k0": "5.5",
+  "macro-p2-f:ap_macroeconomics-f07-k1": "5.5",
+  "macro-p2-f:ap_macroeconomics-f08-k0": "4.4",
+  "macro-p2-f:ap_macroeconomics-f08-k1": "4.4",
+  "macro-p2-f:ap_macroeconomics-f09-k0": "5.2",
+  "macro-p2-f:ap_macroeconomics-f09-k1": "5.2",
+  "macro-p2-f:ap_macroeconomics-f10-k0": "1.3",
+  "macro-p2-f:ap_macroeconomics-f10-k1": "1.3",
+  "macro-p3:ap_macroeconomics-m01-k0": "5.2",
+  "macro-p3:ap_macroeconomics-m01-k1": "5.2",
+  "macro-p3:ap_macroeconomics-m01-k2": "5.2",
+  "macro-p3:ap_macroeconomics-m01-k3": "5.2",
+  "macro-p3:ap_macroeconomics-m02-k0": "5.1",
+  "macro-p3:ap_macroeconomics-m02-k1": "5.1",
+  "macro-p3:ap_macroeconomics-m02-k2": "5.1",
+  "macro-p3:ap_macroeconomics-m02-k3": "5.1",
+  "macro-p3:ap_macroeconomics-m03-k0": "5.2",
+  "macro-p3:ap_macroeconomics-m03-k1": "5.2",
+  "macro-p3:ap_macroeconomics-m03-k2": "5.2",
+  "macro-p3:ap_macroeconomics-m03-k3": "5.2"
+ },
+ "usedByGroup": {
+  "11cc6603-0671-4ef7-93b7-02b2011294d4": [
+   "macro-p1-a:ap_macroeconomics-m04-k0",
+   "macro-p1-a:ap_macroeconomics-m05-k0",
+   "macro-p1-a:ap_macroeconomics-m13-k0",
+   "macro-p1-a:ap_macroeconomics-m25-k1",
+   "macro-p1-b:ap_macroeconomics-f09-k0",
+   "macro-p2-a:ap_macroeconomics-m02-k0",
+   "macro-p2-a:ap_macroeconomics-m05-k0",
+   "macro-p2-a:ap_macroeconomics-m09-k0",
+   "macro-p2-a:ap_macroeconomics-m11-k0",
+   "macro-p2-a:ap_macroeconomics-m13-k0",
+   "macro-p2-a:ap_macroeconomics-m18-k0",
+   "macro-p2-a:ap_macroeconomics-m21-k0",
+   "macro-p2-a:ap_macroeconomics-m25-k0",
+   "macro-p2-a:ap_macroeconomics-m27-k1",
+   "macro-p2-a:ap_macroeconomics-m28-k0",
+   "macro-p2-a:ap_macroeconomics-m29-k1",
+   "macro-p2-a:ap_macroeconomics-m33-k0",
+   "macro-p2-a:ap_macroeconomics-m38-k0",
+   "macro-p2-a:ap_macroeconomics-m40-k0",
+   "macro-p2-a:ap_macroeconomics-m44-k0",
+   "macro-p2-a:ap_macroeconomics-m45-k0",
+   "macro-p2-a:ap_macroeconomics-m47-k1",
+   "macro-p2-a:ap_macroeconomics-m48-k0",
+   "macro-p2-a:ap_macroeconomics-m50-k1",
+   "macro-p2-a:ap_macroeconomics-m51-k1",
+   "macro-p2-a:ap_macroeconomics-m52-k1",
+   "macro-p2-a:ap_macroeconomics-m53-k0",
+   "macro-p2-a:ap_macroeconomics-m54-k0",
+   "macro-p2-a:ap_macroeconomics-m56-k0",
+   "macro-p2-a:ap_macroeconomics-m60-k0",
+   "macro-p2-b:ap_macroeconomics-m01-k0",
+   "macro-p2-b:ap_macroeconomics-m02-k0",
+   "macro-p2-b:ap_macroeconomics-m05-k0",
+   "macro-p2-b:ap_macroeconomics-m08-k0",
+   "macro-p2-b:ap_macroeconomics-m13-k1",
+   "macro-p2-b:ap_macroeconomics-m15-k0",
+   "macro-p2-b:ap_macroeconomics-m16-k0",
+   "macro-p2-b:ap_macroeconomics-m23-k0",
+   "macro-p2-b:ap_macroeconomics-m24-k1",
+   "macro-p2-b:ap_macroeconomics-m26-k0",
+   "macro-p2-b:ap_macroeconomics-m27-k0",
+   "macro-p2-b:ap_macroeconomics-m29-k0",
+   "macro-p2-b:ap_macroeconomics-m30-k0",
+   "macro-p2-b:ap_macroeconomics-m31-k0",
+   "macro-p2-b:ap_macroeconomics-m32-k0",
+   "macro-p2-b:ap_macroeconomics-m33-k0",
+   "macro-p2-b:ap_macroeconomics-m34-k0",
+   "macro-p2-b:ap_macroeconomics-m35-k1",
+   "macro-p2-b:ap_macroeconomics-m37-k0",
+   "macro-p2-b:ap_macroeconomics-m38-k0",
+   "macro-p2-b:ap_macroeconomics-m40-k0",
+   "macro-p2-b:ap_macroeconomics-m41-k0",
+   "macro-p2-b:ap_macroeconomics-m42-k0",
+   "macro-p2-b:ap_macroeconomics-m44-k0",
+   "macro-p2-b:ap_macroeconomics-m45-k0",
+   "macro-p2-b:ap_macroeconomics-m49-k0",
+   "macro-p2-b:ap_macroeconomics-m50-k0",
+   "macro-p2-b:ap_macroeconomics-m51-k0",
+   "macro-p2-b:ap_macroeconomics-m56-k0",
+   "macro-p2-b:ap_macroeconomics-m59-k1",
+   "macro-p2-f:ap_macroeconomics-f01-k0",
+   "macro-p2-f:ap_macroeconomics-f05-k0",
+   "macro-p3:ap_macroeconomics-m01-k3"
+  ],
+  "6b0b98c9-71e4-4db7-a257-26c3d857590e": [
+   "macro-p1-a:ap_macroeconomics-m01-k0",
+   "macro-p1-a:ap_macroeconomics-m13-k1",
+   "macro-p1-a:ap_macroeconomics-m16-k1",
+   "macro-p1-a:ap_macroeconomics-m17-k0",
+   "macro-p1-a:ap_macroeconomics-m19-k0",
+   "macro-p1-a:ap_macroeconomics-m21-k0",
+   "macro-p1-a:ap_macroeconomics-m22-k0",
+   "macro-p1-a:ap_macroeconomics-m24-k0",
+   "macro-p1-b:ap_macroeconomics-f03-k0",
+   "macro-p2-a:ap_macroeconomics-m01-k0",
+   "macro-p2-a:ap_macroeconomics-m02-k1",
+   "macro-p2-a:ap_macroeconomics-m04-k1",
+   "macro-p2-a:ap_macroeconomics-m07-k0",
+   "macro-p2-a:ap_macroeconomics-m08-k0",
+   "macro-p2-a:ap_macroeconomics-m12-k0",
+   "macro-p2-a:ap_macroeconomics-m14-k0",
+   "macro-p2-a:ap_macroeconomics-m15-k1",
+   "macro-p2-a:ap_macroeconomics-m16-k0",
+   "macro-p2-a:ap_macroeconomics-m18-k1",
+   "macro-p2-a:ap_macroeconomics-m20-k0",
+   "macro-p2-a:ap_macroeconomics-m21-k1",
+   "macro-p2-a:ap_macroeconomics-m22-k0",
+   "macro-p2-a:ap_macroeconomics-m23-k0",
+   "macro-p2-a:ap_macroeconomics-m24-k0",
+   "macro-p2-a:ap_macroeconomics-m25-k1",
+   "macro-p2-a:ap_macroeconomics-m26-k0",
+   "macro-p2-a:ap_macroeconomics-m27-k0",
+   "macro-p2-a:ap_macroeconomics-m28-k1",
+   "macro-p2-a:ap_macroeconomics-m30-k0",
+   "macro-p2-a:ap_macroeconomics-m32-k1",
+   "macro-p2-a:ap_macroeconomics-m33-k1",
+   "macro-p2-a:ap_macroeconomics-m35-k0",
+   "macro-p2-a:ap_macroeconomics-m36-k0",
+   "macro-p2-a:ap_macroeconomics-m37-k0",
+   "macro-p2-a:ap_macroeconomics-m38-k1",
+   "macro-p2-a:ap_macroeconomics-m39-k1",
+   "macro-p2-a:ap_macroeconomics-m40-k1",
+   "macro-p2-a:ap_macroeconomics-m41-k0",
+   "macro-p2-a:ap_macroeconomics-m45-k1",
+   "macro-p2-a:ap_macroeconomics-m49-k0",
+   "macro-p2-a:ap_macroeconomics-m54-k1",
+   "macro-p2-a:ap_macroeconomics-m59-k0",
+   "macro-p2-b:ap_macroeconomics-m07-k0",
+   "macro-p2-b:ap_macroeconomics-m09-k0",
+   "macro-p2-b:ap_macroeconomics-m10-k0",
+   "macro-p2-b:ap_macroeconomics-m17-k0",
+   "macro-p2-b:ap_macroeconomics-m22-k0",
+   "macro-p2-b:ap_macroeconomics-m27-k1",
+   "macro-p2-b:ap_macroeconomics-m36-k1",
+   "macro-p2-b:ap_macroeconomics-m40-k1",
+   "macro-p2-b:ap_macroeconomics-m43-k0",
+   "macro-p2-b:ap_macroeconomics-m44-k1",
+   "macro-p2-b:ap_macroeconomics-m47-k1",
+   "macro-p2-b:ap_macroeconomics-m49-k1",
+   "macro-p2-b:ap_macroeconomics-m50-k1",
+   "macro-p2-b:ap_macroeconomics-m52-k1",
+   "macro-p2-b:ap_macroeconomics-m54-k1",
+   "macro-p2-b:ap_macroeconomics-m55-k1",
+   "macro-p2-b:ap_macroeconomics-m57-k0",
+   "macro-p2-f:ap_macroeconomics-f07-k0",
+   "macro-p2-f:ap_macroeconomics-f09-k0",
+   "macro-p3:ap_macroeconomics-m01-k0",
+   "macro-p3:ap_macroeconomics-m02-k0"
+  ]
+ }
+}

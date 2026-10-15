@@ -29,8 +29,10 @@ export function solveUshSets(ids: string[], items: UshItem[], o: { timeMs: numbe
     cons.push({ coef: count((c) => c.members.length), sense: "=", rhs: USH_MC_COUNT });
     const sc = count(() => 1); cons.push({ coef: sc, sense: ">=", rhs: USH_SET_COUNT.min }); cons.push({ coef: sc, sense: "<=", rhs: USH_SET_COUNT.max });
     for (const k of UNITS) {
-      const co = count((c) => c.members.filter((m) => m.unit === k).length); const b = bounds[k]; const t = USH_FULL_TARGET.units[k]; const d = dv.get(`${s}|${k}`)!;
+      // 관리자 새 버전·초안은 단원을 후보 keyword_code 단원(keyUnit, 세트 전 문항에 같은 값)으로 센다 → 그 기준이 정본 제약·목표. 문항별 토픽 단원 범위도 검증기가 요구하므로 함께 건다.
+      const co = count((c) => (c.keyUnit === k ? c.members.length : 0)); const topicCo = count((c) => c.members.filter((m) => m.unit === k).length); const b = bounds[k]; const t = USH_FULL_TARGET.units[k]; const d = dv.get(`${s}|${k}`)!;
       cons.push({ coef: co, sense: ">=", rhs: b.min }); cons.push({ coef: co, sense: "<=", rhs: b.max });
+      cons.push({ coef: topicCo, sense: ">=", rhs: b.min }); cons.push({ coef: topicCo, sense: "<=", rhs: b.max });
       cons.push({ coef: [...co, [d, -1]], sense: "<=", rhs: t }); cons.push({ coef: [...co.map(([j, v]) => [j, -v] as [number, number]), [d, -1]], sense: "<=", rhs: -t });
     }
     for (const cat of ["1", "2", "3", "4", "5"]) cons.push({ coef: count((c) => c.members.filter((m) => m.cat === cat).length), sense: ">=", rhs: USH_SKILL_CATEGORY_MIN });

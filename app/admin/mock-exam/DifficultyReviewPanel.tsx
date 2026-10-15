@@ -3,6 +3,7 @@ import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 
 import { useCallback, useEffect, useState } from "react";
 import LearningText from "@/app/session/[id]/LearningText";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import {
   getDifficultyReviewDetailAction,
   listDifficultyReviewAction,
@@ -58,6 +59,7 @@ function DetailView({ d }: { d: DifficultyReviewDetail }) {
   const hasBasis = judge.hardJudge || judge.advisory || judge.recipeCheck;
   return (
     <div className="space-y-4 text-[12.5px]" data-testid="difficulty-detail">
+      <PassageRefsScope>
       <div className="rounded-lg bg-grey-100 p-3">
         {d.passage && <LearningText className="whitespace-pre-wrap text-ink" text={d.passage} />}
         {d.question && <LearningText className="mt-2 whitespace-pre-wrap font-semibold text-ink" text={d.question} />}
@@ -75,6 +77,7 @@ function DetailView({ d }: { d: DifficultyReviewDetail }) {
         {d.answers && d.answers.length > 0 && <p className="mt-2 text-ink">정답: {d.answers.join(", ")}</p>}
         {d.explanation && <div className="mt-2 text-grey-600"><span>해설: </span><LearningText className="inline whitespace-pre-wrap" text={d.explanation} /></div>}
       </div>
+      </PassageRefsScope>
 
       <section data-testid="difficulty-basis">
         <h4 className="text-[12.5px] font-bold text-ink">AI 판정 근거</h4>

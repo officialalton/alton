@@ -21,6 +21,7 @@ import {
 import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
 import ProblemWorkBoardCanvas, { type ProblemBoardHandle } from "./ProblemWorkBoard";
 import LearningText from "./LearningText";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import RwStimulusView from "./RwStimulusView";
 import { stripInlineOptions } from "@/lib/problem-text";
 import PdfPageAnnotationLayer from "./PdfPageAnnotationLayer";
@@ -541,8 +542,8 @@ export default function ProblemsPanel({
           const showGradeForm = isTeacher && !p.planned && p.latestWorkId && (!p.graded || regrading.has(p.problemId));
 
           return (
+            <PassageRefsScope key={p.problemId}>
             <article
-              key={p.problemId}
               id={`problem-${p.problemId}`}
               className="border-[1.5px] border-grey-200 rounded-2xl px-5 sm:px-7 py-6 mb-5 scroll-mt-[72px]"
             >
@@ -1086,6 +1087,7 @@ export default function ProblemsPanel({
                 </>
               )}
             </article>
+            </PassageRefsScope>
           );
         })}
       </div>

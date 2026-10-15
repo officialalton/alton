@@ -1,7 +1,7 @@
 // 재고 배치 레지스트리와 저장소 산출물 읽기. 배치 정의는 scripts/ap-generation/owner-load.sh(graph|siblings|supp)와 owner-run-bc-topup-load.md 의 값을 그대로 옮긴 것이다.
 // 산출물(data/ap/stock/*, data/ap/screen-evidence/*.json, data/ap/render-check/report.json)은 배포 번들에 포함돼(next.config.ts outputFileTracingIncludes)
 // 서버가 파일 시스템에서 읽는다. 업로드 경로는 없다 — 임의 파일을 올려 DB 에 쓰는 통로를 만들지 않는다. 새 배치는 저장소 커밋 → 배포로만 들어온다.
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "../ap-generation/data-fs";
 import path from "node:path";
 import type { RenderReportRow, ScreenEvidence } from "../ap-generation/verify-guard";
 import type { StockItem } from "../ap-generation/stock";
@@ -77,6 +77,9 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "macro-p2b", title: "AP Macroeconomics P2 MC-b (통과 62)", itemsFile: "macro-p2b-items.json", loadLabel: "macro-p2b-2026-10-14", supplement: true, passKeysFile: "macro-p2b-pass-keys.json", evidenceFile: "evidence-macro-s2.json" },
   { id: "macro-p2f", title: "AP Macroeconomics P2 FRQ (통과 9)", itemsFile: "macro-p2f-items.json", loadLabel: "macro-p2f-2026-10-14", supplement: true, passKeysFile: "macro-p2f-pass-keys.json", evidenceFile: "evidence-macro-s2.json" },
   { id: "macro-p3", title: "AP Macroeconomics P3 MC 보충(마지막 부족 칸) (통과 5)", itemsFile: "macro-p3-items.json", loadLabel: "macro-p3-2026-10-14", supplement: true, passKeysFile: "macro-p3-pass-keys.json", evidenceFile: "evidence-macro-s2.json" },
+  // 2026-10-15 AP Macroeconomics macro-hard(exam_prep 보강, docs/ap/macroeconomics-groundwork.md §8): 2배치. 증거 파일은 evidence-macro-hard.json. MA1·MA2 v3 정확 배정: data/ap/stock/exact-assign-macro-ma1-ma2-v3.json
+  { id: "macro-hard-a", title: "AP Macroeconomics hard-a exam_prep 보강 (단원 1·2·4·6 다단계 계산·해석) (통과 42)", itemsFile: "macro-hard-a-items.json", loadLabel: "macro-hard-a-2026-10-15", supplement: true, passKeysFile: "macro-hard-a-pass-keys.json", evidenceFile: "evidence-macro-hard.json" },
+  { id: "macro-hard-b", title: "AP Macroeconomics hard-b exam_prep 보강 (단원 3·4·5·6 다단계 계산·해석) (통과 29)", itemsFile: "macro-hard-b-items.json", loadLabel: "macro-hard-b-2026-10-15", supplement: true, passKeysFile: "macro-hard-b-pass-keys.json", evidenceFile: "evidence-macro-hard.json" },
   // 2026-10-14 AP Psychology(docs/ap/psychology-groundwork.md): 파일럿 2 + 본 실행 + 보강 3배치. 한 증거 파일(evidence-psych-s2.json)을 공유한다. PS1·PS2 정확 배정: data/ap/stock/exact-assign-psych-ps1-ps2.json
   { id: "psych-p1a", title: "AP Psychology P1-a MC 파일럿 (통과 52)", itemsFile: "psych-p1a-items.json", loadLabel: "psych-p1a-2026-10-14", supplement: true, passKeysFile: "psych-p1a-pass-keys.json", evidenceFile: "evidence-psych-s2.json" },
   { id: "psych-p1b", title: "AP Psychology P1-b FRQ (통과 5)", itemsFile: "psych-p1b-items.json", loadLabel: "psych-p1b-2026-10-14", supplement: true, passKeysFile: "psych-p1b-pass-keys.json", evidenceFile: "evidence-psych-s2.json" },
@@ -93,6 +96,10 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "ush-real-a", title: "AP U.S. History Stage A 실제 Census 자료 4건 (MC 세트 2 + SAQ3 2)", itemsFile: "ush-real-a-items.json", loadLabel: "ush-real-a-2026-10-15", supplement: true, passKeysFile: "ush-real-a-pass-keys.json", evidenceFile: "evidence-ush-real-a.json" },
   // 2026-10-15 US History Stage B(docs/ap/ushistory-groundwork.md §10): 게시 US2 dbq_1·US1 dbq_2 의 가공 문서 7개 세트를 실제 자료 7개 DBQ 로 교체하는 2건. 새 버전 계획: data/ap/stock/us2-v3-real-b-swap-plan.json, us1-v3-real-b-swap-plan.json. 한 증거 파일(evidence-ush-real-b.json).
   { id: "ush-real-b", title: "AP U.S. History Stage B 실제 자료 DBQ 2건 (US2 시장 혁명 + US1 기업 규제)", itemsFile: "ush-real-b-items.json", loadLabel: "ush-real-b-2026-10-15", supplement: true, passKeysFile: "ush-real-b-pass-keys.json", evidenceFile: "evidence-ush-real-b.json" },
+  // 2026-10-15 US History Stage C(docs/ap/ushistory-groundwork.md §11): 게시 US2 u526·u408 과 US1 u528·u531 의 ALTON 작성 1차 자료 세트 4개를 실제 1차 자료 세트로 교체. 새 버전 계획: data/ap/stock/us1-v4-real-cd-swap-plan.json, us2-v4-real-cd-swap-plan.json(Stage D 와 한 계획). 한 증거 파일(evidence-ush-real-c.json).
+  { id: "ush-real-c", title: "AP U.S. History Stage C 실제 1차 자료 MC 세트 4건 (Emancipation·Monroe·Fugitive Slave Act·Richmond diary)", itemsFile: "ush-real-c-items.json", loadLabel: "ush-real-c-2026-10-15", supplement: true, passKeysFile: "ush-real-c-pass-keys.json", evidenceFile: "evidence-ush-real-c.json" },
+  // 2026-10-15 US History Stage D(§11): 게시 US2 u527·u720 과 US1 u616 의 2차 자료(텍스트) MC 세트 3개를 실제 지도·만평 세트로 교체(US2 u617 은 변환하지 않음). 한 증거 파일(evidence-ush-real-d.json).
+  { id: "ush-real-d", title: "AP U.S. History Stage D 실제 지도·만평 MC 세트 3건 (Reynolds 1856·School Begins 1899·Indian reservations 1892)", itemsFile: "ush-real-d-items.json", loadLabel: "ush-real-d-2026-10-15", supplement: true, passKeysFile: "ush-real-d-pass-keys.json", evidenceFile: "evidence-ush-real-d.json" },
   // 2026-10-13 AP Computer Science A(docs/ap/csa-groundwork.md §9): 파일럿 2 + s2 보충 5 + 부족분 2배치. 한 증거 파일(evidence-csa-s2.json)을 공유한다. CS1·CS2 정확 배정: data/ap/stock/exact-assign-csa-cs1-cs2.json
   { id: "csa-p1a", title: "AP Computer Science A P1-a (MC 파일럿) (통과 22)", itemsFile: "csa-p1a-items.json", loadLabel: "csa-p1a-2026-10-13", supplement: true, passKeysFile: "csa-p1a-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },
   { id: "csa-p1b", title: "AP Computer Science A P1-b (FRQ 파일럿) (통과 3)", itemsFile: "csa-p1b-items.json", loadLabel: "csa-p1b-2026-10-13", supplement: true, passKeysFile: "csa-p1b-pass-keys.json", evidenceFile: "evidence-csa-s2.json" },

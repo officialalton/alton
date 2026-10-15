@@ -1,6 +1,6 @@
 // 6세트 배정용 재고 로더(읽기 전용, DB 없음). six-set-plan.ts 와 같은 재고 정의(자동 통과·결함 0·완전 중복 제외·렌더 게이트 통과)에
 // 화면 증거 보유 여부·신규(graph-s*) 여부·표현 종류를 덧붙인다. 문항군 = 구조 look-alike 군집(AB+BC 합산).
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "../../lib/ap-generation/data-fs";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { clusterLookAlikes } from "../../lib/ap-exam/look-alike";
 import { STOCK_FILES } from "./keys-file";

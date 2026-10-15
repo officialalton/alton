@@ -4,6 +4,7 @@ import { useState } from "react";
 import { dedupeStem } from "@/lib/problem-text-guards";
 import type { MockExamSetContentItem } from "@/lib/mock-exam/set-content";
 import LearningText from "@/app/session/[id]/LearningText";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
@@ -43,6 +44,7 @@ export default function MockExamSetContentViewer({ items, autoMath = false }: { 
       </div>
 
       {current && (
+        <PassageRefsScope>
         <div className="min-w-0 flex-1 rounded-lg border border-grey-200 bg-white p-4">
           <p className="mb-2 text-[12px] font-bold text-grey-500">
             {SECTION_LABEL[current.section] ?? current.section} {current.position} · {current.satDomain}
@@ -106,6 +108,7 @@ export default function MockExamSetContentViewer({ items, autoMath = false }: { 
             </button>
           </div>
         </div>
+        </PassageRefsScope>
       )}
     </div>
   );
