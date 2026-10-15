@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { logLearningEventAction } from "./activity-tracking";
 import LearningText, { InlineLearningText } from "@/app/session/[id]/LearningText";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import { stripInlineOptions } from "@/lib/problem-text";
@@ -415,6 +416,7 @@ function GradeBadge({ entry }: { entry: ProblemHistoryEntry }) {
 
 function HistoryDetail({ entry: e, isFreeMember }: { entry: ProblemHistoryEntry; isFreeMember: boolean }) {
   return (
+    <PassageRefsScope>
     <div className="mt-3 rounded-lg bg-grey-100 px-4 py-3" data-testid="history-detail">
       <ProblemFigure spec={e.figure} text={problemText(e.passage, e.options)} className="mb-2" />
       <LearningText text={stripInlineOptions(e.passage, e.options) || "(No text)"} className="learning-body text-[13.5px] leading-[1.75] text-ink" />
@@ -468,5 +470,6 @@ function HistoryDetail({ entry: e, isFreeMember }: { entry: ProblemHistoryEntry;
       )}
       {!e.graded && !isFreeMember && <p className="mt-2 text-[12px] text-grey-500">The answer and explanation will appear here once your teacher grades it.</p>}
     </div>
+    </PassageRefsScope>
   );
 }

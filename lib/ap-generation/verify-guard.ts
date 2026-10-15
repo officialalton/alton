@@ -1,7 +1,7 @@
 // AP 검증 기록 스크립트(mark-verified.ts)의 실행 대상 허용 목록과 증거·해시 검사(순수 함수, DB 접근 없음).
 // 허용 대상은 둘뿐: 로컬 Supabase(127.0.0.1/localhost), 비프로덕션 프로젝트 ref NONPROD_REF(명시 확인 플래그가 있을 때만). 그 외·프로덕션은 거부.
 import { createHash } from "node:crypto";
-import { existsSync } from "node:fs";
+import { existsSync } from "./data-fs";
 import path from "node:path";
 
 export const NONPROD_REF = "worpsqwqgnspddnrtnvq";

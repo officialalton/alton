@@ -18,6 +18,7 @@ import {
 } from "./problem-error-report-actions";
 import { REPORT_TYPE_LABEL, SOURCE_LABEL, VERDICT_EFFECT, VERDICT_LABEL, type ReportType, type Verdict } from "@/lib/problem-error-reports/labels";
 import LearningText from "@/app/session/[id]/LearningText";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { problemText } from "@/lib/problem-figures/label-rule";
@@ -324,6 +325,7 @@ function ReportDetail({ problemId, versionId, onBack, onNext }: { problemId: str
         </p>
       )}
 
+      <PassageRefsScope>
       <section className="rounded-lg border border-grey-200 bg-white p-4">
         <div className="mb-2 flex flex-wrap items-center gap-1.5 text-[11px] font-bold text-grey-500">
           <span>{d.problem.satDomain ?? "영역 없음"}{d.problem.skillCode ? ` · ${d.problem.skillCode}` : ""}</span>
@@ -357,6 +359,7 @@ function ReportDetail({ problemId, versionId, onBack, onNext }: { problemId: str
           </div>
         )}
       </section>
+      </PassageRefsScope>
 
       <section className="rounded-lg border border-grey-200 bg-white p-4">
         <h3 className="mb-2 text-[13px] font-bold">신고 {d.reportTotal}건 {openReports > 0 ? `(열림 ${openReports})` : "(모두 처리됨)"}</h3>

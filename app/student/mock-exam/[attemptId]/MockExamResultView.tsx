@@ -14,6 +14,7 @@ import { attemptLabel } from "@/lib/mock-exam/open-list";
 import { satDomainDisplayName, satSkillDisplayName } from "@/lib/sat-keywords/taxonomy";
 import { satDomainDescription, satSkillDescription } from "@/lib/sat-keywords/skill-descriptions";
 import LearningText from "@/app/session/[id]/LearningText";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import { breakOptionAnalysis } from "@/lib/mock-exam/explanation-format";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
@@ -278,6 +279,7 @@ export function ItemDetail({
   viewerIsOwner?: boolean;
 }) {
   return (
+    <PassageRefsScope>
     <div className="rounded-lg border border-grey-200 bg-white p-4 lg:h-full lg:overflow-y-auto" data-testid="mock-exam-item-detail">
       <ItemHeader key={item.setItemId} item={item} attemptId={attemptId} viewerIsOwner={viewerIsOwner} />
       <ItemProblem item={item} attemptId={attemptId} />
@@ -286,6 +288,7 @@ export function ItemDetail({
       </div>
       <ItemTools item={item} attemptId={attemptId} studentId={studentId} viewerIsOwner={viewerIsOwner} reportRole={reportRole} reportStatus={reportStatus} />
     </div>
+    </PassageRefsScope>
   );
 }
 
@@ -681,6 +684,7 @@ export default function MockExamResultView({
           {attempt.items.length === 0 ? (
             <p className="text-[12.5px] text-grey-400">There are no questions to review.</p>
           ) : (
+            <PassageRefsScope>
             <div className="grid grid-cols-1 gap-4 lg:h-[calc(100vh-2rem)] lg:grid-cols-[230px_minmax(0,1fr)_minmax(240px,320px)] lg:items-stretch">
               {/* 왼쪽: 문항 목록 + 필터 */}
               <div className="rounded-lg border border-grey-200 bg-white p-3 lg:h-full lg:overflow-y-auto">
@@ -764,6 +768,7 @@ export default function MockExamResultView({
                 </div>
               )}
             </div>
+            </PassageRefsScope>
           )}
         </div>
       )}

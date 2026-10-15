@@ -1,0 +1,706 @@
+{
+ "_note": "SELECT-only snapshot 2026-10-15 (supabase db query --linked; mock_exam_set_items join ap_candidate_problems) of the PUBLISHED US1 v3 / US2 v3 (after Stages A and B) slots; convertedKeys carried from the v2 snapshot.",
+ "US1": {
+  "setId": "7f54635c-5471-483c-85bb-f0df4bf6c1fa",
+  "sourceSetName": "AP U.S. History \u2014 Practice Exam 1",
+  "sourceVersionNo": 3,
+  "slots": [
+   {
+    "section": "ap_frq",
+    "position": 1,
+    "candidateKey": "ush-real-b:ap_us_history-real_b_dbq_regulation-k0"
+   },
+   {
+    "section": "ap_frq",
+    "position": 2,
+    "candidateKey": "ush-p1-b:ap_us_history-leq_3-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 1,
+    "candidateKey": "ush-p2-a:ap_us_history-u102-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 2,
+    "candidateKey": "ush-p2-a:ap_us_history-u102-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 3,
+    "candidateKey": "ush-p2-a:ap_us_history-u102-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 4,
+    "candidateKey": "ush-p3-a:ap_us_history-u201-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 5,
+    "candidateKey": "ush-p3-a:ap_us_history-u201-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 6,
+    "candidateKey": "ush-p3-a:ap_us_history-u201-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 7,
+    "candidateKey": "ush-p2-a:ap_us_history-u418-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 8,
+    "candidateKey": "ush-p2-a:ap_us_history-u418-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 9,
+    "candidateKey": "ush-p2-a:ap_us_history-u418-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 10,
+    "candidateKey": "ush-p2-a:ap_us_history-u418-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 11,
+    "candidateKey": "ush-p2-a:ap_us_history-u315-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 12,
+    "candidateKey": "ush-p2-a:ap_us_history-u315-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 13,
+    "candidateKey": "ush-p2-a:ap_us_history-u315-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 14,
+    "candidateKey": "ush-p2-a:ap_us_history-u315-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 15,
+    "candidateKey": "ush-p2-a:ap_us_history-u316-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 16,
+    "candidateKey": "ush-p2-a:ap_us_history-u316-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 17,
+    "candidateKey": "ush-p2-a:ap_us_history-u316-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 18,
+    "candidateKey": "ush-p3-a:ap_us_history-u406-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 19,
+    "candidateKey": "ush-p3-a:ap_us_history-u406-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 20,
+    "candidateKey": "ush-p3-a:ap_us_history-u406-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 21,
+    "candidateKey": "ush-p3-a:ap_us_history-u406-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 22,
+    "candidateKey": "ush-p2-a:ap_us_history-u528-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 23,
+    "candidateKey": "ush-p2-a:ap_us_history-u528-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 24,
+    "candidateKey": "ush-p2-a:ap_us_history-u528-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 25,
+    "candidateKey": "ush-p2-a:ap_us_history-u528-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 26,
+    "candidateKey": "ush-p2-a:ap_us_history-u531-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 27,
+    "candidateKey": "ush-p2-a:ap_us_history-u531-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 28,
+    "candidateKey": "ush-p2-a:ap_us_history-u531-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 29,
+    "candidateKey": "ush-p2-a:ap_us_history-u531-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 30,
+    "candidateKey": "ush-p2-a:ap_us_history-u635-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 31,
+    "candidateKey": "ush-p2-a:ap_us_history-u635-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 32,
+    "candidateKey": "ush-p2-a:ap_us_history-u635-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 33,
+    "candidateKey": "ush-p2-a:ap_us_history-u635-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 34,
+    "candidateKey": "ush-p3-a:ap_us_history-u616-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 35,
+    "candidateKey": "ush-p3-a:ap_us_history-u616-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 36,
+    "candidateKey": "ush-p3-a:ap_us_history-u616-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 37,
+    "candidateKey": "ush-p3-a:ap_us_history-u616-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 38,
+    "candidateKey": "ush-p2-a:ap_us_history-u745-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 39,
+    "candidateKey": "ush-p2-a:ap_us_history-u745-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 40,
+    "candidateKey": "ush-p2-a:ap_us_history-u745-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 41,
+    "candidateKey": "ush-p2-a:ap_us_history-u745-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 42,
+    "candidateKey": "ush-real-a:ap_us_history-real_a_gm-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 43,
+    "candidateKey": "ush-real-a:ap_us_history-real_a_gm-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 44,
+    "candidateKey": "ush-real-a:ap_us_history-real_a_gm-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 45,
+    "candidateKey": "ush-p2-a:ap_us_history-u850-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 46,
+    "candidateKey": "ush-p2-a:ap_us_history-u850-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 47,
+    "candidateKey": "ush-p2-a:ap_us_history-u850-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 48,
+    "candidateKey": "ush-p2-a:ap_us_history-u850-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 49,
+    "candidateKey": "ush-p3-a:ap_us_history-u821-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 50,
+    "candidateKey": "ush-p3-a:ap_us_history-u821-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 51,
+    "candidateKey": "ush-p3-a:ap_us_history-u821-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 52,
+    "candidateKey": "ush-p2-a:ap_us_history-u957-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 53,
+    "candidateKey": "ush-p2-a:ap_us_history-u957-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 54,
+    "candidateKey": "ush-p2-a:ap_us_history-u957-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 55,
+    "candidateKey": "ush-p2-a:ap_us_history-u957-k0"
+   },
+   {
+    "section": "ap_saq",
+    "position": 1,
+    "candidateKey": "ush-p1-b:ap_us_history-saq1_5-k0"
+   },
+   {
+    "section": "ap_saq",
+    "position": 2,
+    "candidateKey": "ush-p1-b:ap_us_history-saq2_2-k0"
+   },
+   {
+    "section": "ap_saq",
+    "position": 3,
+    "candidateKey": "ush-real-a:ap_us_history-real_a_saq3_own-k0"
+   }
+  ]
+ },
+ "US2": {
+  "setId": "6d7d6905-73ae-4d9e-80fe-96d349af2275",
+  "sourceSetName": "AP U.S. History \u2014 Practice Exam 2",
+  "sourceVersionNo": 3,
+  "slots": [
+   {
+    "section": "ap_frq",
+    "position": 1,
+    "candidateKey": "ush-real-b:ap_us_history-real_b_dbq_market-k0"
+   },
+   {
+    "section": "ap_frq",
+    "position": 2,
+    "candidateKey": "ush-p1-b:ap_us_history-leq_1-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 1,
+    "candidateKey": "ush-p2-a:ap_us_history-u104-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 2,
+    "candidateKey": "ush-p2-a:ap_us_history-u104-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 3,
+    "candidateKey": "ush-p2-a:ap_us_history-u104-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 4,
+    "candidateKey": "ush-p2-a:ap_us_history-u104-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 5,
+    "candidateKey": "ush-p2-a:ap_us_history-u207-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 6,
+    "candidateKey": "ush-p2-a:ap_us_history-u207-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 7,
+    "candidateKey": "ush-p2-a:ap_us_history-u207-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 8,
+    "candidateKey": "ush-p2-a:ap_us_history-u207-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 9,
+    "candidateKey": "ush-p2-a:ap_us_history-u312-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 10,
+    "candidateKey": "ush-p2-a:ap_us_history-u312-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 11,
+    "candidateKey": "ush-p2-a:ap_us_history-u312-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 12,
+    "candidateKey": "ush-p2-a:ap_us_history-u312-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 13,
+    "candidateKey": "ush-p3-a:ap_us_history-u303-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 14,
+    "candidateKey": "ush-p3-a:ap_us_history-u303-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 15,
+    "candidateKey": "ush-p3-a:ap_us_history-u303-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 16,
+    "candidateKey": "ush-p3-a:ap_us_history-u303-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 17,
+    "candidateKey": "ush-p2-a:ap_us_history-u421-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 18,
+    "candidateKey": "ush-p2-a:ap_us_history-u421-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 19,
+    "candidateKey": "ush-p2-a:ap_us_history-u421-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 20,
+    "candidateKey": "ush-p3-a:ap_us_history-u408-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 21,
+    "candidateKey": "ush-p3-a:ap_us_history-u408-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 22,
+    "candidateKey": "ush-p3-a:ap_us_history-u408-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 23,
+    "candidateKey": "ush-p3-a:ap_us_history-u408-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 24,
+    "candidateKey": "ush-p2-a:ap_us_history-u526-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 25,
+    "candidateKey": "ush-p2-a:ap_us_history-u526-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 26,
+    "candidateKey": "ush-p2-a:ap_us_history-u526-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 27,
+    "candidateKey": "ush-p2-a:ap_us_history-u527-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 28,
+    "candidateKey": "ush-p2-a:ap_us_history-u527-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 29,
+    "candidateKey": "ush-p2-a:ap_us_history-u527-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 30,
+    "candidateKey": "ush-p2-a:ap_us_history-u527-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 31,
+    "candidateKey": "ush-p2-a:ap_us_history-u640-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 32,
+    "candidateKey": "ush-p2-a:ap_us_history-u640-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 33,
+    "candidateKey": "ush-p2-a:ap_us_history-u640-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 34,
+    "candidateKey": "ush-p2-a:ap_us_history-u640-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 35,
+    "candidateKey": "ush-p3-a:ap_us_history-u617-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 36,
+    "candidateKey": "ush-p3-a:ap_us_history-u617-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 37,
+    "candidateKey": "ush-p3-a:ap_us_history-u617-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 38,
+    "candidateKey": "ush-p3-a:ap_us_history-u617-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 39,
+    "candidateKey": "ush-real-a:ap_us_history-real_a_imm-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 40,
+    "candidateKey": "ush-real-a:ap_us_history-real_a_imm-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 41,
+    "candidateKey": "ush-real-a:ap_us_history-real_a_imm-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 42,
+    "candidateKey": "ush-p3-a:ap_us_history-u720-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 43,
+    "candidateKey": "ush-p3-a:ap_us_history-u720-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 44,
+    "candidateKey": "ush-p3-a:ap_us_history-u720-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 45,
+    "candidateKey": "ush-p3-a:ap_us_history-u720-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 46,
+    "candidateKey": "ush-p2-a:ap_us_history-u853-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 47,
+    "candidateKey": "ush-p2-a:ap_us_history-u853-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 48,
+    "candidateKey": "ush-p2-a:ap_us_history-u853-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 49,
+    "candidateKey": "ush-p2-a:ap_us_history-u853-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 50,
+    "candidateKey": "ush-p2-a:ap_us_history-u856-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 51,
+    "candidateKey": "ush-p2-a:ap_us_history-u856-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 52,
+    "candidateKey": "ush-p2-a:ap_us_history-u856-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 53,
+    "candidateKey": "ush-p2-a:ap_us_history-u959-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 54,
+    "candidateKey": "ush-p2-a:ap_us_history-u959-k0"
+   },
+   {
+    "section": "ap_mc",
+    "position": 55,
+    "candidateKey": "ush-p2-a:ap_us_history-u959-k0"
+   },
+   {
+    "section": "ap_saq",
+    "position": 1,
+    "candidateKey": "ush-p1-b:ap_us_history-saq1_3-k0"
+   },
+   {
+    "section": "ap_saq",
+    "position": 2,
+    "candidateKey": "ush-p1-b:ap_us_history-saq2_1-k0"
+   },
+   {
+    "section": "ap_saq",
+    "position": 3,
+    "candidateKey": "ush-real-a:ap_us_history-real_a_saq3_plains-k0"
+   }
+  ]
+ },
+ "convertedKeys": {
+  "ush-p2-a:ap_us_history-u745-k0": 1,
+  "ush-p2-a:ap_us_history-u634-k0": 1,
+  "ush-p1-a:ap_us_history-u201-k0": 1,
+  "ush-p2-a:ap_us_history-u207-k0": 1,
+  "ush-p2-a:ap_us_history-u315-k0": 1,
+  "ush-p2-a:ap_us_history-u420-k0": 1,
+  "ush-p2-a:ap_us_history-u852-k0": 1,
+  "ush-p2-a:ap_us_history-u424-k0": 1,
+  "ush-p2-a:ap_us_history-u313-k0": 1,
+  "ush-p2-a:ap_us_history-u422-k0": 1,
+  "ush-p2-a:ap_us_history-u855-k0": 1,
+  "ush-p2-a:ap_us_history-u856-k0": 1,
+  "ush-p2-a:ap_us_history-u532-k0": 1,
+  "ush-p2-a:ap_us_history-u960-k0": 1,
+  "ush-p2-a:ap_us_history-u851-k0": 1,
+  "ush-p2-a:ap_us_history-u102-k0": 1,
+  "ush-p2-a:ap_us_history-u309-k0": 1,
+  "ush-p2-a:ap_us_history-u208-k0": 1,
+  "ush-p2-a:ap_us_history-u101-k0": 1,
+  "ush-p2-a:ap_us_history-u421-k0": 1,
+  "ush-p2-a:ap_us_history-u529-k0": 1,
+  "ush-p2-a:ap_us_history-u635-k0": 1,
+  "ush-p2-a:ap_us_history-u528-k0": 1,
+  "ush-p2-a:ap_us_history-u743-k0": 1,
+  "ush-p2-a:ap_us_history-u746-k0": 1,
+  "ush-p2-a:ap_us_history-u957-k0": 1,
+  "ush-p3-a:ap_us_history-u305-k0": 1,
+  "ush-p3-a:ap_us_history-u509-k0": 1,
+  "ush-p3-a:ap_us_history-u614-k0": 1,
+  "ush-p3-a:ap_us_history-u616-k0": 1,
+  "ush-p3-a:ap_us_history-u720-k0": 1,
+  "ush-p3-a:ap_us_history-u924-k0": 1,
+  "ush-p3-a:ap_us_history-u407-k0": 1,
+  "ush-p3-a:ap_us_history-u304-k0": 1,
+  "ush-p3-a:ap_us_history-u718-k0": 1,
+  "ush-p3-a:ap_us_history-u613-k0": 1,
+  "ush-p2-a:ap_us_history-u742-k0": 1,
+  "ush-p2-a:ap_us_history-u849-k0": 1,
+  "ush-p3-a:ap_us_history-u823-k0": 1,
+  "ush-p3-a:ap_us_history-u406-k0": 1,
+  "ush-p3-a:ap_us_history-u303-k0": 1,
+  "ush-p3-a:ap_us_history-u612-k0": 1,
+  "ush-p3-a:ap_us_history-u719-k0": 1,
+  "ush-p3-a:ap_us_history-u617-k0": 1,
+  "ush-p3-a:ap_us_history-u511-k0": 1,
+  "ush-p3-a:ap_us_history-u615-k0": 1,
+  "ush-real-a:ap_us_history-real_a_gm-k0": 1,
+  "ush-real-a:ap_us_history-real_a_imm-k0": 1,
+  "ush-p2-a:ap_us_history-u316-k0": 1,
+  "ush-p2-a:ap_us_history-u312-k0": 1,
+  "ush-p2-a:ap_us_history-u530-k0": 1,
+  "ush-p2-a:ap_us_history-u744-k0": 1,
+  "ush-p2-a:ap_us_history-u853-k0": 1,
+  "ush-p2-a:ap_us_history-u850-k0": 1,
+  "ush-p2-a:ap_us_history-u310-k0": 1,
+  "ush-p2-a:ap_us_history-u311-k0": 1,
+  "ush-p2-a:ap_us_history-u418-k0": 1,
+  "ush-p2-a:ap_us_history-u104-k0": 1,
+  "ush-p2-a:ap_us_history-u527-k0": 1,
+  "ush-p2-a:ap_us_history-u526-k0": 1,
+  "ush-p2-a:ap_us_history-u314-k0": 1,
+  "ush-p2-a:ap_us_history-u531-k0": 1,
+  "ush-p2-a:ap_us_history-u639-k0": 1,
+  "ush-p2-a:ap_us_history-u741-k0": 1,
+  "ush-p2-a:ap_us_history-u959-k0": 1,
+  "ush-p2-a:ap_us_history-u640-k0": 1,
+  "ush-p2-a:ap_us_history-u747-k0": 1,
+  "ush-p2-a:ap_us_history-u748-k0": 1,
+  "ush-p1-a:ap_us_history-u504-k0": 1,
+  "ush-p3-a:ap_us_history-u822-k0": 1,
+  "ush-p3-a:ap_us_history-u201-k0": 1,
+  "ush-p3-a:ap_us_history-u408-k0": 1,
+  "ush-p3-a:ap_us_history-u202-k0": 1,
+  "ush-p3-a:ap_us_history-u510-k0": 1,
+  "ush-p3-a:ap_us_history-u821-k0": 1,
+  "ush-p1-b:ap_us_history-dbq_2-k0": 1,
+  "ush-p1-b:ap_us_history-saq2_1-k0": 1,
+  "ush-p1-b:ap_us_history-leq_1-k0": 1,
+  "ush-p1-b:ap_us_history-dbq_1-k0": 1,
+  "ush-p1-b:ap_us_history-leq_3-k0": 1,
+  "ush-p1-b:ap_us_history-saq1_3-k0": 1,
+  "ush-p1-b:ap_us_history-saq3_1-k0": 1,
+  "ush-p1-b:ap_us_history-saq1_5-k0": 1,
+  "ush-p1-b:ap_us_history-saq3_3-k0": 1,
+  "ush-p1-b:ap_us_history-saq2_2-k0": 1,
+  "ush-real-a:ap_us_history-real_a_saq3_plains-k0": 1,
+  "ush-real-a:ap_us_history-real_a_saq3_own-k0": 1
+ }
+}

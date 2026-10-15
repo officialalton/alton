@@ -1,0 +1,176 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "US2",
+ "sourceSetName": "AP U.S. History — Practice Exam 2",
+ "sourceVersionNo": 3,
+ "generatedBy": "scripts/ap-generation/ush-stage-cd-plans.ts",
+ "note": "Stage C·D: MC 자료 세트 4개를 실제 자료 세트로 교체(같은 크기·시대·후보 단원·스킬 범주 순서). 순서: 배치 ush-real-c·ush-real-d 적재 → 이 계획으로 새 버전(v4) 초안 → 확인 → '새 버전 공개'. 두 계획(US1·US2)은 서로 독립이다.",
+ "swapCount": 4,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "position": 24,
+   "removeKey": "ush-p2-a:ap_us_history-u526-k0",
+   "addKey": "ush-real-c:ap_us_history-real_c_emanc-k0",
+   "remove": {
+    "kind": "mc_set",
+    "units": [
+     "5",
+     "5",
+     "5"
+    ],
+    "skills": [
+     "2.A",
+     "4.B",
+     "1.A"
+    ],
+    "period": 5,
+    "theme": "Emancipation Proclamation and its military effects",
+    "stim": "primary_text"
+   },
+   "add": {
+    "kind": "mc_set",
+    "units": [
+     "5",
+     "5",
+     "5"
+    ],
+    "skills": [
+     "2.A",
+     "4.B",
+     "1.A"
+    ],
+    "period": 5,
+    "theme": "The Emancipation Proclamation",
+    "stim": "primary_text"
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 20,
+   "removeKey": "ush-p3-a:ap_us_history-u408-k0",
+   "addKey": "ush-real-c:ap_us_history-real_c_monroe-k0",
+   "remove": {
+    "kind": "mc_set",
+    "units": [
+     "4",
+     "4",
+     "4",
+     "3"
+    ],
+    "skills": [
+     "2.B",
+     "3.A",
+     "4.B",
+     "5.A"
+    ],
+    "period": 4,
+    "theme": "Monroe Doctrine",
+    "stim": "primary_text"
+   },
+   "add": {
+    "kind": "mc_set",
+    "units": [
+     "4",
+     "4",
+     "4",
+     "3"
+    ],
+    "skills": [
+     "2.B",
+     "3.A",
+     "4.B",
+     "5.A"
+    ],
+    "period": 4,
+    "theme": "The Monroe Doctrine",
+    "stim": "primary_text"
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 27,
+   "removeKey": "ush-p2-a:ap_us_history-u527-k0",
+   "addKey": "ush-real-d:ap_us_history-real_d_reynolds-k0",
+   "remove": {
+    "kind": "mc_set",
+    "units": [
+     "5",
+     "5",
+     "5",
+     "5"
+    ],
+    "skills": [
+     "3.A",
+     "3.D",
+     "4.B",
+     "5.B"
+    ],
+    "period": 5,
+    "theme": "Kansas-Nebraska Act and the rise of the Republican Party",
+    "stim": "secondary_text"
+   },
+   "add": {
+    "kind": "mc_set",
+    "units": [
+     "5",
+     "5",
+     "5",
+     "5"
+    ],
+    "skills": [
+     "3.A",
+     "3.D",
+     "4.B",
+     "5.B"
+    ],
+    "period": 5,
+    "theme": "The 1856 political map of free and slave territory",
+    "stim": "visual"
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 42,
+   "removeKey": "ush-p3-a:ap_us_history-u720-k0",
+   "addKey": "ush-real-d:ap_us_history-real_d_school-k0",
+   "remove": {
+    "kind": "mc_set",
+    "units": [
+     "7",
+     "7",
+     "7",
+     "7"
+    ],
+    "skills": [
+     "3.B",
+     "3.D",
+     "4.A",
+     "5.B"
+    ],
+    "period": 7,
+    "theme": "Spanish-American War and the acquisition of overseas territories",
+    "stim": "secondary_text"
+   },
+   "add": {
+    "kind": "mc_set",
+    "units": [
+     "7",
+     "7",
+     "7",
+     "7"
+    ],
+    "skills": [
+     "3.B",
+     "3.D",
+     "4.A",
+     "5.B"
+    ],
+    "period": 7,
+    "theme": "Cartoon on U.S. rule of the new possessions of 1898",
+    "stim": "visual"
+   }
+  }
+ ]
+}

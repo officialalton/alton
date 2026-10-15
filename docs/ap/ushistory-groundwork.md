@@ -151,3 +151,54 @@
 - Document 7(US2) 지도의 작은 인쇄 글자·범례는 390px 에서 읽을 수 없어 확대 링크로만 읽는다(앱 안 확대 뷰어는 만들지 않았다).
 - 한 문제에 이미지가 둘 이상이면 이미지는 문서 본문 **아래**에 한꺼번에 나온다(문서 사이에 끼워 넣지 않음). 문서 인라인 배치는 폴리싱 라운드 후보.
 - 새 버전 공개·DB 적재는 실행하지 않았다. 적재 후 `review_env_ready`·`release_tier` 가 채워져야 새 버전 미리보기가 통과한다(미리보기가 사유를 알려 준다).
+
+## 11. Stage C·D — 게시 US1·US2 의 가공 1차·2차 자료 MC 세트 7개를 실제 자료 세트로 교체 (2026-10-15, 브랜치 `ush-real-cd`, DB 쓰기 없음)
+오너 정책(`docs/POLICY-DECISIONS.md` 2026-10-15)대로 **자료를 먼저 고정**하고(레지스트리 `data/ap/ush-sources/registry.json`: 저자·연도·저장소·권리 문구·수정 표시·해시), 스킬 → 정답 근거(자료 안 증거) → 오답 근거는 그 자료에서 설계했다(`ush-real-c-content.ts`·`ush-real-d-content.ts`, 문항마다 `design.key_evidence_in_source`·`facts`·옵션별 `why`). 가공 세트는 삭제·표지 변경 없이 보존하고, 게시 v3 → **새 버전 v4** 로만 바뀐다. 칸 크기(3·4문항)·시대·후보 단원(keyword_code, DB 기준)·문항별 토픽 단원·스킬 범주 순서·난이도 라벨은 교체되는 세트와 같다(DB 에서 읽은 단원 기준 구성 검사가 그대로 통과).
+**게시 상태 확인**: 2026-10-15 SELECT 전용(`supabase db query --linked`)으로 US1·US2 모두 **v3 가 게시**(v1·v2 보관)인 것을 확인했고 슬롯을 `data/ap/stock/ush-us1-us2-published-v3-slots.json` 에 저장했다(`mock_exam_set_items` ⨝ `ap_candidate_problems`, 60칸씩).
+
+| 시험·칸 | 교체 전(ALTON 작성) | 교체 후 키 | 자료 | 시대·단원 | 스킬(그대로) |
+|---|---|---|---|---|---|
+| US2 ap_mc 24–26 `u526` | 가공 북군 대위 편지 | `ush-real-c:…real_c_emanc-k0` | Emancipation Proclamation 발췌(레지스트리 기존 `txt-emancipation-1863`) | 5 · 5.9 | 2.A·4.B·1.A |
+| US2 ap_mc 20–23 `u408` | 가공 볼티모어 선주 편지 | `…real_c_monroe-k0` | Monroe 7차 연두교서 1823(`txt-monroe-1823`) | 4 · 4.4 | 2.B·3.A·4.B·5.A |
+| US1 ap_mc 22–25 `u528` | 가공 오하이오 타운 연설 | `…real_c_fsa-k0` | 도망노예법 1850 제5·6·7·8조(`txt-fugitive-slave-act-1850`) | 5 · 5.4 | 2.A·3.A·4.A·1.B |
+| US1 ap_mc 26–29 `u531` | 가공 조지아 병사 아내 편지 | `…real_c_jones-k0` | J. B. Jones, *A Rebel War Clerk's Diary* 1863 리치먼드 빵 폭동 일기(`txt-jones-diary-1863`) | 5 · 5.9 | 2.A·3.A·4.A·5.A |
+| US2 ap_mc 27–30 `u527` | 가공 현대 역사가(2차) | `ush-real-d:…real_d_reynolds-k0` | Reynolds 1856 정치 지도(기존 `map-reynolds-1856`) | 5 · 5.6 | 3.A·3.D·4.B·5.B |
+| US2 ap_mc 42–45 `u720` | 가공 외교사가(2차) | `…real_d_school-k0` | Puck 만평 'School begins' 1899(`img-school-begins-1899`) | 7 · 7.2 | 3.B·3.D·4.A·5.B |
+| US1 ap_mc 34–37 `u616` | 가공 역사가(2차) | `…real_d_reserv-k0` | 1892 연방 인디언 보호구역 지도(`map-indian-reservations-1892`) | 6 · 6.3 | 3.A·3.D·4.A·5.A |
+**변환하지 않은 칸(미해결, 가공 세트 그대로)**: US2 `u617`(Plessy/짐 크로, 2차 자료 둘의 짝지은 세트). 1896 전후 시대 6 에 맞는 **공개 도메인 시각·정량 자료를 확인하지 못했다**(LoC 검색에서 시대 맞는 짐 크로 사진·만평이 안 나왔고, 시대 7 의 FSA 사진은 세트 시대·토픽을 바꾸게 된다). 현대 학술 서술은 저작권이라 쓰지 않았다. 짝지은 세트 최소 1(US2 에는 `u959` 도 있음)은 유지된다. 만평·사진을 찾으면 같은 절차로 후속 라운드에서 변환한다. 나머지 가공 세트는 '가공' 표지로 보존.
+**자료 유형**: Stage C 는 `primary_text` 그대로. Stage D 는 `ush_set.stim_type = "visual"` (지도·만평) — 구성 규칙의 4개 유형 최소(paired≥1·quantitative≥1·primary≥5·secondary≥2)는 교체 뒤에도 충족(US1 2차 4→3, US2 2차 6→4; 계획기·검증기가 확인).
+
+### 새 실제 자료와 다운로드(전부 허용 도메인; 커밋 대상은 아래 발췌·이미지뿐, 원본 파일은 커밋하지 않음; 큰 PDF 스캔은 내려받지 않았다)
+| 파일(레지스트리 id) | 출처 | 크기 | 권리(항목 페이지 확인) | 원본 해시(sha256 앞 16) |
+|---|---|---|---|---|
+| `txt-monroe-1823` ← monroe.asp (발췌 212 단어, 3구간) | avalon.law.yale.edu | 10.5 KB(html) | 대통령 메시지(정부 저작물, 1823) | 원본 `98c19828…`, 발췌 `6226fefd…` |
+| `txt-fugitive-slave-act-1850` ← fugitive.asp (290 단어, 4구간) | avalon.law.yale.edu | 21 KB(html) | 의회 법률(정부 저작물, 1850) | 원본 `9e0aaf64…`, 발췌 `a614227b…` |
+| `txt-jones-diary-1863` ← pg31087.txt (238 단어, 4구간) | gutenberg.org #31087 | 1.99 MB(txt, 1·2권 합본) | 1866 출판, Gutenberg 미국 내 제한 없음 | 원본 `2d09350d…`, 발췌 `3d966a8c…` |
+| `img-school-begins-1899`(`28668v.jpg` 1024×662) | loc.gov/pictures/item/2012647459 | 177,467 B(JPEG) | LoC 'No known restrictions on publication.' | `8b79f1f7…` |
+| `map-indian-reservations-1892`(IIIF 12.5%, 1311×839) | loc.gov/item/2009579467 (tile.loc.gov) | 279,525 B(JPEG) | LoC 지도과 자료 'free to use and reuse'(Rights Advisory 없음) | `33d21576…` |
+기존 레지스트리 재사용: `txt-emancipation-1863`, `map-reynolds-1856`. 발췌는 저장소 원문에서 **앵커 문구→연속 구간을 코드로 잘라**(`scripts/ap-generation/ush-real-cd-sources.py`) 해시를 고정했다(손으로 옮기지 않음). 학생 화면 본문은 `ush-real-cd-build.ts` 의 `setIntro()`(레지스트리→코드)가 만들고 게이트가 글자 그대로 일치하는지 점검한다. 이미지는 `data/ap/ush-sources/files/<id>/image.jpg` + `public/ap-sources/<id>/image.jpg`(LoC 원본 그대로, 수정 없음).
+- 지도·만평 사용 범위: 눈으로 읽을 수 있는 글자·색·배치만 문항 근거로 썼다(Reynolds 지도 아래 통계표는 읽을 수 없어 쓰지 않음, 1892 지도 범례도 쓰지 않음). 'School begins' 는 인종 희화를 포함한 1899년 제국주의 지지 관점의 자료이며 자료 소개가 이를 역사 자료로 제시한다.
+
+### 독립 검증(`scripts/ap-generation/ush-real-cd-verify.ts`, 동기 호출; 이미지 세트는 풀이·점검 요청에 **이미지를 첨부**)
+- 블라인드 풀이(Opus·Sonnet, Sonnet 은 선택지 역순) 27문항 54표 **전원 키와 일치**(두 모델 모두 'certain'/'likely', 'also defensible' 최종 0), Fable 사실 점검(키·근거 공개; 이미지 세트는 이미지 첨부) 전 문항 sound·플래그 0(최종).
+- 과정에서 **고친 것**: (1) 길이 단서 — 처음 문항 27개 중 대부분의 키가 가장 길었다(게이트 `key_is_longest_option`·`key_much_longer`) → 키를 줄이고 오답을 같은 문체·길이로 보강해 **키가 가장 긴 선택지인 문항 0**(테스트 고정). (2) Fable 이 지적한 자료 오독 — Monroe 해설이 발췌에 없는 러시아 제안을 언급, '미국 체제를 옹호한다'는 발췌에 없는 구절, 도망노예법 해설이 법이 영토를 다룬다고 쓴 것, Jones 문항의 '투기꾼·extortioners' 근거가 발췌에 없어 Jones 발췌에 해당 구간 추가(레지스트리 재해시), Jones '현재형', Emancipation '전쟁 전 요구' 오기, Gadsden 해설 과장, Reynolds 문항 시점 모호(1857 Dred Scott 도 가능) → 줄기에 '1855·1856' 명시. 1라운드 기록은 `data/ap/sample-2027/ush-real-c/*.round1.*`·`round1-verification.json`.
+- 비용: 이 브랜치 **$1.79**(원장 219.13 → 220.92; 한도 $10·누적 중단 $260·원장 중단선 $295 이내). 사실 점검도 LLM 이며 **역사 교사 검수가 아니다**.
+
+### 화면 증거·배치·렌더·계획
+- 격리 스택 `ALTON_apushcd`(포트 +100, 가드 통과)에서 후보 7개 × 390×844·1280×800 = **54항목, 점검 전부 pass**(보기 보임 54, 그림 렌더 24(이미지 세트 12문항×2), 정답·해설 비노출 54, 잘림 없음 54; 수식 원문 없음 54). 증거 `data/ap/screen-evidence/evidence-ush-real-c.json`(30)·`evidence-ush-real-d.json`(24), 스크린샷 `docs/ap/screen-evidence/ush-real-cd/`. 시드 정리(`local-demo-seed.ts cleanup`)·개발 서버 종료(내가 시작한 PID)·`isolated-stack.sh stop`·`config.toml` 원복·컨테이너 0·임시 `.env.local` 원복 확인.
+- 배치 `ush-real-c`(4키)·`ush-real-d`(3키)를 `lib/ap-admin/batches.ts` 에 등록(보조 적재; `ush-*-items.json` 규칙으로 키 파일·render-check·supp 자동 인식). `render-check.ts` 재생성: 보고서(report.json·md)만 바뀜.
+- 새 버전 계획(게시 v3 → v4; **Stage C 와 D 를 한 계획으로**): `data/ap/stock/us1-v4-real-cd-swap-plan.json`(교체 3건: `ap_mc` #22 `u528`, #26 `u531`, #34 `u616`), `us2-v4-real-cd-swap-plan.json`(교체 4건: #24 `u526`, #20 `u408`, #27 `u527`, #42 `u720`). 생성기 `scripts/ap-generation/ush-stage-cd-plans.ts [--write]`(입력 = 게시 US1 v3·US2 v3 SELECT 전용 스냅샷). 두 계획은 서로 독립(교체해 넣는 세트가 다름)이라 순서 무관.
+- 테스트 `lib/ap-admin/ush-stage-cd-plans.test.ts`(20): 관리자 새 버전 흐름(`resolveSwaps` + `checkNewVersionComposition`, `fullPracticeUnitBounds`, **DB 단원 = 후보 keyword_code 단원**)을 라이브 스냅샷에서 재현해 0 위반(세트 통째 교체), 독립 검증기(`verifyUshAssignment`, 두 시험 합) 0 위반·DB 단원 수 범위 안·다른 칸 그대로·교체 문항의 크기·시대·keyUnit·토픽 단원·스킬 범주 동일·다른 시험에는 적용 불가, 배치 등록·키 파일·증거 전 항목 pass·레지스트리·게이트·변환 가능·검증 기록, 난이도 라벨 동일·키가 가장 긴 선택지 아님·정답 위치 분산, 변조(발췌 글자·ALTON 표지·이미지 출처·해시) 검출, 표시문 = 코드 생성 문안·이미지 칸에 출처 실림, 레지스트리 자료 중복 없음.
+
+### 관리자 작업 순서(DB 쓰기 전부 관리자 화면 — 이 브랜치는 쓰지 않았다)
+1. 이 브랜치를 통합 브랜치에 병합·배포한다(배치 파일·증거·계획·**이미지 `public/ap-sources/img-school-begins-1899`, `map-indian-reservations-1892`** 가 번들에 실려야 한다).
+2. 관리자 → Mock Exams → AP 재고 관리 → **배치 전체 적재**: 배치 **`ush-real-c`**(4키)와 **`ush-real-d`**(3키)를 각각 미리보기(dry-run, 쓰기 0) → "확인했습니다" → 실행(① 적재 ② 렌더 기록 ③ 화면 기록 ④ 문제은행 변환). **건너뜀 허용은 켜지 않는다**(7키 모두 렌더 보고서·화면 증거 해시 일치). 건너뜀·'검증 미완료'가 보이면 진행하지 말고 payload 와 배포본 불일치부터 푼다. 현황 표에서 두 배치가 4/4·3/3 변환·`review_env_ready` 인지 확인.
+3. **새 버전 — `AP U.S. History — Practice Exam 1`**: 계획 `us1-v4-real-cd-swap-plan.json`(교체 3건) 선택 → 미리보기(검증 통과·구성 전/후·기존 응시 수 확인; source version 이 v3 인지) → 확인 → 초안 v4 생성 → 초안에서 세트 위치 22–25·26–29(1차 자료)·34–37(지도)이 새 자료인지 확인 → **'새 버전 공개'**(공개 범위는 이전 공개본에서 승계).
+4. **새 버전 — `AP U.S. History — Practice Exam 2`**: 계획 `us2-v4-real-cd-swap-plan.json`(교체 4건) 동일 절차(위치 20–23·24–26·27–30(지도)·42–45(만평)). 3·4 는 서로 독립이라 순서 무관. 미리보기가 source version 불일치를 보이면 그 사이 다른 v4 가 만들어진 것이니 `ush-stage-cd-plans.ts` 를 새 스냅샷으로 다시 만든다.
+5. 공개 뒤 두 시험의 해당 문항을 학생 화면(휴대폰 폭 포함)에서 한 번씩 연다: 지도·만평이 문서 본문 **아래**에 보이는지, 출처 캡션·정답/해설 비노출. 기존 v3 응시 이력은 새 버전 정책대로 건드리지 않는다.
+
+### Stage C·D 의 한계·UNVERIFIED
+- 사실 정확성은 LLM 검사(Opus·Sonnet 풀이, Fable 점검)로 보증한 것이며 **역사 교사 검수가 아니다**. 지도·만평 문항의 근거(색·글자·배치)는 이미지를 첨부한 모델 검사와 개발자 육안으로 확인했다.
+- 도망노예법(290 단어)·Jones 일기(238 단어)는 발췌가 길다(학생 화면에서 스크롤). Jones 는 Confederate 관료의 시점('mob'·'extortioners')이며 자료 소개가 이를 밝힌다. 'School begins' 는 제국주의 지지 관점의 1899년 만평(인종 희화 포함)이다. 1892 지도는 보호구역을 주색으로 표시하고 범례는 작아 문항이 쓰지 않는다.
+- 앱 안 확대 뷰어는 없다(지도 글자는 390px 에서 작음; Stage B 의 '새 탭 원본 보기' 링크는 이 세트에도 적용). 문서 인라인 배치는 폴리싱 라운드 후보.
+- US2 `u617` 미변환(위 사유). 새 버전 공개·DB 적재는 실행하지 않았다. 적재 후 `review_env_ready`·`release_tier` 가 채워져야 새 버전 미리보기가 통과한다(미리보기가 사유를 알려 준다).

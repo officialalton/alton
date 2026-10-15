@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 import path from "node:path";
 
+// 어느 방식(npm run build / next build)으로 빌드해도 AP 재고 JSON 의 .gz 가 만들어지게 한다(scripts/pack-ap-data.cjs). 런타임·dev 에서는 돌지 않는다.
+if (process.argv.includes("build")) require("./scripts/pack-ap-data.cjs").packApData();
+
 // pdf.mjs 본체는 추적기가 이미 따라가므로, req.resolve 로만 찾는 워커 파일만 명시한다(.min.mjs 는 .map 이 없어 5MB 절감).
 const PDF_FILES = ["./node_modules/pdfjs-dist/legacy/build/pdf.worker.min.mjs"];
 // lib/curriculum-assets/pdf.ts · lib/universities/crawler.ts 를 번들에 포함하는 페이지(서버 액션은 import 한 페이지의 함수에서 실행된다).
@@ -29,7 +32,11 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     ...Object.fromEntries(PDF_ROUTES.map((r) => [r, PDF_FILES])),
     // 관리자 'AP 재고 관리'(2026-10-12): 서버 액션이 저장소에 커밋된 재고 산출물을 파일로 읽는다(스크린샷 PNG 는 제외 — 화면 증거 JSON 만).
-    "/admin/page": [...PDF_FILES, "./data/ap/stock/*.json", "./data/ap/stock/assembled/*.json","./data/ap/render-check/report.json", "./data/ap/screen-evidence/*.json", "./data/ap/curriculum-2027/*.json"],
+    // 2026-10-15 크기 절감: 원본 JSON(약 49 MB)은 아래 excludes 로 빼고, 빌드 직전 scripts/pack-ap-data.cjs 가 만든 `.json.gz`(약 6 MB)만 넣는다.
+    // 읽기는 lib/ap-generation/data-fs.ts 가 원본이 없을 때 .gz 로 대신한다. curriculum-2027 은 압축하지 않고 그대로 둔다(0.8 MB).
+    "/admin/page": [...PDF_FILES, "./data/ap/stock/*.json.gz", "./data/ap/stock/assembled/*.json.gz", "./data/ap/render-check/report.json.gz", "./data/ap/screen-evidence/*.json.gz", "./data/ap/curriculum-2027/*.json", "./docs/tickets.md",
+      // figure-qa-hash.ts 는 figure-qa-snapshot.test.ts 를 해시에 넣는다 → 테스트 파일 제외 규칙의 예외로 다시 넣는다.
+      "./lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts"],
   },
   // 런타임에 읽지 않는 저장소 자료(스크린샷·생성 로그·문서·스크립트)는 함수에 넣지 않는다. 서버 코드가
   // path.join(process.cwd(), "data/…") 처럼 동적 경로로 읽으면 추적기가 디렉터리 전체를 끌어오기 때문이다.
@@ -53,7 +60,14 @@ const nextConfig: NextConfig = {
       "data/ap/render-check/*/**",
       "data/mock-exam-generation/{cb-hard,gapfill-*,inputs,math-archetype-*,mockgen-*,position-fix,rebalance-*,rw-*,unique-sets-*}/**",
       "data/mock-exam-generation/*.json",
+      "**/*.test.{ts,tsx}",
+      "tsconfig.tsbuildinfo",
+      "docs/*/**",
+      "docs/*.md", // docs/tickets.md 는 /admin 에서만 includes 로 다시 넣는다(app/admin/dev-log-data.ts)
     ],
+    // /admin 은 .gz 만 쓴다(위 includes). 다른 라우트는 data/ap JSON 을 읽지 않는다.
+    "/admin/page": ["data/ap/stock/**/*.json", "data/ap/screen-evidence/*.json", "data/ap/render-check/*.json", "public/**", "app/admin/**/*.{ts,tsx}"],
+    // public/** 은 정적 자산(CDN)이고 서버가 파일로 읽지 않는다. app/admin 소스는 이미 컴파일돼 있어 런타임에 읽지 않는다(figure-qa 해시가 읽는 app 소스는 app/session/[id]/ProblemFigure.tsx 뿐).
   },
 };
 

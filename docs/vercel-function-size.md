@@ -50,3 +50,9 @@ playwright / typescript / vitest / sharp 는 어느 서버 trace에도 없음(�
 - Settings > Git: 사용하지 않는 브랜치의 Preview 자동 배포 끄기(Ignored Build Step 또는 "Preview 배포는 특정 브랜치만").
 - 동일 커밋 재배포/수동 `vercel deploy` 남발 자제. 필요 시 `vercel deploy --prebuilt` 대신 Git 통합 하나로 통일.
 - Hobby 크론은 하루 1회 초과 시 배포 실패(MEMORY 참고) — 크론 표현식 확인.
+
+## 2026-10-15 추가: /admin 99.3 MB -> 37.5 MB (.nft 중복 제거 실측)
+앞 표의 131 MB 는 nft 목록의 중복 경로를 두 번 센 값이다. 같은 방법으로 다시 재면 이번 작업 전 /admin 은 **99.3 MB**(data/ap/stock 36.5 + screen-evidence 10.0 + render-check 2.1 등), 이후 **37.5 MB**. 전체 79개 람다 합계 274 MB.
+- 재고 JSON(원본 약 49 MB)을 `.json.gz`(약 6 MB)로 보낸다. `scripts/pack-ap-data.cjs` 가 빌드 때 만들고(`npm run build`·`next build` 모두; .gitignore), `lib/ap-generation/data-fs.ts`(readFileSync·existsSync·readdirSync 대체)가 **원본이 없을 때만** .gz 를 읽는다 → 로컬·스크립트 동작은 그대로. /admin 추적에서는 원본 JSON·public/**·app/admin 소스·docs/*.md(tickets.md 만 includes)·테스트 파일(figure-qa-snapshot.test.ts 만 includes — figure-qa-hash.ts 가 해시에 넣는다)을 뺀다.
+- 새 AP 재고 읽기 코드는 `node:fs` 대신 `lib/ap-generation/data-fs` 를 import 해야 /admin 에서 동작한다(원본이 번들에 없다). 그렇지 않으면 배포에서만 ENOENT.
+- 검증: `scripts/dev/admin-data-parity.ts` 를 저장소와 .gz 만 있는 폴더에서 각각 실행해 22개 섹션(배치 레지스트리·적재 항목·배정 보고서·스왑 계획·12개 과목 풀) 해시가 동일함을 확인. `scripts/dev/admin-ap-smoke.ts` 를 .gz 전용 폴더에서 격리 스택에 실행해 적재(import→render→screen→convert)·load check·batch status·초안 세트 저장·새 버전 미리보기/초안·launch gate 통과. PDF 는 `scripts/verify-pdf-trace.ts`(빌드 후)로 7개 PDF 라우트의 .nft 파일만 복사한 폴더에서 pdf.worker.min.mjs 를 찾아 2쪽 PDF 의 쪽수·텍스트를 읽음.

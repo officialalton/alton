@@ -1,5 +1,5 @@
 // 풀 모의고사가 쓰거나 쓰기로 예약한 문항(저장소 산출물 기준) — 부분 연습 세트 재구성의 제외 목록. 파일 읽기만 한다(DB 없음).
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "../ap-generation/data-fs";
 import { published } from "../../scripts/ap-generation/assign-pool";
 
 type G = "mcA" | "mcB" | "frqA" | "frqB";

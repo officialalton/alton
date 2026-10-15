@@ -2,7 +2,7 @@
 // Authoritative source: docs/contracts/terms-of-use-en.md and privacy-policy-en.md. A drift test
 // (lib/legal/site-documents.test.ts) fails if any source paragraph is missing from this content.
 // Inline markup: **bold** and [label](href).
-import { CONTACT_EMAIL } from "@/lib/legal";
+import { CONTACT_EMAIL, TRADEMARK_NOTICE } from "@/lib/legal";
 import { RECORDING_CLAUSE_HEADING, RECORDING_CLAUSE_PARAGRAPHS } from "./recording-clause";
 
 export type SiteBlock = { t: "p"; text: string } | { t: "ul"; items: string[] } | { t: "h3"; text: string };
@@ -13,6 +13,10 @@ const p = (text: string): SiteBlock => ({ t: "p", text });
 const ul = (...items: string[]): SiteBlock => ({ t: "ul", items });
 
 const MEDIA_BLOCKS: SiteBlock[] = [{ t: "h3", text: RECORDING_CLAUSE_HEADING }, ...RECORDING_CLAUSE_PARAGRAPHS.map((text) => p(text))];
+
+const AI_P1 = 'For some practice exams (for example AP English Language, AP English Literature and the AP history essay questions), you may type a written response and ALTON can generate an AI-estimated score and feedback for it. When this feature is on, ALTON sends the text of your written response, together with the question, any source documents and scoring guidance, to Anthropic, an AI model provider acting on our behalf. We do not send your name, email address or other contact details with it.';
+const AI_P2 = 'ALTON stores the estimated score, the feedback, the model used and its cost with your practice attempt so you can review it. These records are treated as learning data under the Retention Schedule below. ALTON does not opt in to any use of your written responses to train AI models.';
+const AI_P3 = 'AI-estimated scores are practice feedback only. They are estimates and can be wrong, they are not official College Board scores, and they do not predict a score on any real exam. Please do not include sensitive personal information in your written responses.';
 
 export const RETENTION_INTRO =
   "Retention schedule. ALTON keeps records for these periods. Preservation exceptions are limited to what is necessary for a legal requirement, an active dispute or legal hold, or an accounting or safety need, and are reviewed at least every 12 months:";
@@ -89,6 +93,7 @@ export const TERMS_SECTIONS: SiteSection[] = [
       p(
         "ALTON does not guarantee any score, score improvement, admission or other outcome. Practice scores and estimates in ALTON are internal learning estimates. They are not official College Board scores and may differ from results on the actual SAT or AP exams. SAT and AP are trademarks of their respective owners, and ALTON is not affiliated with or endorsed by them unless we say so."
       ),
+      p(TRADEMARK_NOTICE),
     ],
   },
   {
@@ -180,7 +185,7 @@ export const PRIVACY_SECTIONS: SiteSection[] = [
       p("Depending on how you use ALTON, we collect:"),
       ul(
         "**Account information:** name, email address, date of birth, grade, and (optionally) school.",
-        "**Learning data:** practice test attempts, answers, scores and results; saved questions; vocabulary lists; and your mistake notebook.",
+        "**Learning data:** practice test attempts, answers (including any written responses you type), scores and results; saved questions; vocabulary lists; and your mistake notebook.",
         "**Study work:** notes, whiteboard scratch work and highlights you create while studying.",
         "**Usage data:** activity information such as the last day you were active.",
         "**Consultation and family information:** consultation requests and the contact information of a parent or guardian.",
@@ -196,6 +201,7 @@ export const PRIVACY_SECTIONS: SiteSection[] = [
     blocks: [
       ul(
         "To create and run your account, grade practice tests, and show your results, mistake notebook and vocabulary builder.",
+        "To generate AI-estimated scores and feedback for written practice responses, as described in the AI-Estimated Scoring section below.",
         "To provide tutoring and consulting, including scheduling, lessons held over Google Meet, and lesson records.",
         "To manage contracts, lesson credits and payments.",
         "To communicate with you and your family about your account, lessons and service updates.",
@@ -228,6 +234,7 @@ export const PRIVACY_SECTIONS: SiteSection[] = [
         "Google — Workspace, Calendar and Meet, used for lessons and consultations.",
         "DocuSign — electronic signature of tutoring contracts.",
         "Stripe — payment processing for lesson credits.",
+        "Anthropic — AI model provider used to generate estimated scores and feedback for written practice responses.",
         "An email delivery provider — account, scheduling and service emails."
       ),
     ],
@@ -280,6 +287,7 @@ export const PRIVACY_SECTIONS: SiteSection[] = [
       p('We may update this policy. When we do, we will change the "Last updated" date above and, for material changes, notify account holders through ALTON or by email.'),
     ],
   },
+  { id: "ai-essay-scoring", title: "AI-Estimated Scoring of Written Responses", blocks: [p(AI_P1), p(AI_P2), p(AI_P3)] },
   { id: "lesson-media", title: "Regular-lesson media and AI records", blocks: MEDIA_BLOCKS },
   { id: "retention-schedule", title: "Retention schedule", blocks: RETENTION_BLOCKS },
   { id: "privacy-requests", title: "Privacy requests", blocks: [REQUESTS_PARAGRAPH] },

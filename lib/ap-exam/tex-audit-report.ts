@@ -1,5 +1,5 @@
 // AP 재고 전수 원문 수식 점검 보고(파일만 읽음 — DB·네트워크 없음). CLI: scripts/ap-generation/tex-audit.ts
-import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync } from "../ap-generation/data-fs";
 import path from "node:path";
 import { auditPayload, type TexHit } from "./tex-audit";
 
