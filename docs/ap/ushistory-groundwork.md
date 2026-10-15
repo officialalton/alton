@@ -51,3 +51,37 @@
 - 두 시험이 같은 시대의 세트를 2개 안팎씩 쓴다(주제·후보는 겹치지 않는다). 시험당 1차 자료 세트가 5개로 내부 최소(5)에 가깝다.
 - 이미 있는 DB 에 적재하지 않았다(원격 DB 쓰기 없음). 배치는 `STOCK_BATCHES` 에 등록만 했다. 적재 후 변환·검증 상태가 채워져야 `planDraftSet` 이 저장 가능해진다.
 - 응시 화면의 시간·읽기 15분·Bluebook 도구 동작은 `ushistory-facts.md` §4. DBQ 문서 표시는 지문 패널의 단일 텍스트이다(문서 7개 + 표). 폴리싱은 마일스톤 종료 라운드 대상.
+
+## 9. Stage A — 게시 US1·US2 의 가공 표 자료 4칸을 실제 Census 자료로 교체 (2026-10-15, 브랜치 `ush-real-a`, DB 쓰기 없음)
+정책: `docs/POLICY-DECISIONS.md` 2026-10-15(실제 자료·전체 출처 기록, 자료를 먼저 고정한 뒤 스킬·문항·키 근거·오답 근거 설계, 대량 재생성 없음, 새 버전 흐름으로 소규모 교체, 미해결 문항은 출시 제외). 감사: `docs/ap/ushistory-material-audit.md` §4 Stage A.
+
+| 칸 | 교체 전(가공) | 교체 후(실제) 후보 키 | 실제 자료(레지스트리 id) | 위치·구성 |
+|---|---|---|---|---|
+| US1 MC `u747`(위치 42–44) | Calder City 가공 표 | `ush-real-a:ap_us_history-real_a_gm-k0` | `stat-black-pop-region-1900-1940` — Census WP 56 표 1–5, 지역별 흑인 인구 1900–1940 | 단원 7·7·6, 스킬 1.B·3.A·4.A, 시대 7, 자료 유형 quantitative(그대로) |
+| US2 MC `u719`(위치 39–41) | Bayhaven 항구 가공 표 | `ush-real-a:ap_us_history-real_a_imm-k0` | `stat-foreign-born-1850-1940`(1단계 레지스트리 자료) — Census WP 81 표 1 | 단원 7·7·6, 스킬 1.B·4.B·5.A, 시대 7, quantitative |
+| US1 SAQ q3 `saq3_1`(ap_saq 3) | Dunmore County 가공 표 | `ush-real-a:ap_us_history-real_a_saq3_own-k0` | `stat-homeownership-1900-1980` — Census 'Historical Census of Housing: Homeownership Rates'(미국·뉴욕·미시시피 1900–1980) | 시대 8 그대로(US1 SAQ 시대 5/7/8 유지), saq3, 스킬 1.B |
+| US2 SAQ q3 `saq3_3`(ap_saq 3) | Wheatley County 가공 표 | `ush-real-a:ap_us_history-real_a_saq3_plains-k0` | `stat-plains-state-pop-1870-1900` — Census WP 56 표 31·42·49·56(캔자스·네브래스카·노스/사우스다코타 총인구) | 시대 6 그대로(US2 SAQ 시대 8/4/6 유지), saq3, 스킬 1.B |
+
+- **자료 출처·권리**: 셋 다 미국 연방기관(Census Bureau) 간행물·표(17 U.S.C. 105, 저작권 주장 없음 → 퍼블릭 도메인), 도메인 허용 목록(census.gov) 안. 수치는 공식 파일에서 **코드로 추출**했다(`scripts/ap-generation/ush-real-a-sources.py`; WP 56 PDF `pdftotext` 의 표 1–5·31·42·49·56, 호머오너십은 `owner-tab.txt`). 지역 합 = 전국 합계를 코드가 검사한다(1900–1940 전 행 일치). 레지스트리 3건 추가(총 13건): 표 해시 `b9b4d44d…`(흑인 인구), `17a7005c…`(평원 4개 주), `963d86e5…`(자가 보유율); 원본 파일 해시(WP 56 PDF `1e60f6a4…`, owner-tab.txt `fb32f67a…`)·검색일 2026-10-15·URL·호출번호를 레지스트리와 `data/ap/ush-sources/files/<id>/SOURCE.md` 에 기록. 원본 PDF·txt 는 커밋하지 않았다(PDF 1.6 MB).
+  - 평원 표의 1890 행은 '인디언 보호구역 제외' 줄을 썼고, 노스·사우스다코타의 1870·1880 값은 다코타 준주를 현재 주 면적으로 나눈 **부분 추정치**라고 원문이 밝힌 것을 학생 화면 자료 소개에 그대로 적었다(Fable 사실 점검이 "이 시기 '주'가 아니다"를 한 차례 지적 → 문항·답안에서 '주'가 아닌 '네 지역'으로 고침).
+  - 인구 표 용어: Census 표의 범주명은 'Black'(1900–1950 조사는 'Negro' 용어였음)이며, 자료 소개에 범주명이 Census 의 것이라고 적었다.
+- **설계 기록(자료 → 스킬 → 키 근거 → 오답 근거 → 확인 사실)**: 문항별 정의는 `scripts/ap-generation/ush-real-a-content.ts`(순수 데이터)에 있고, 각 문항의 `payload.items[].design.key_evidence_in_source`(자료 안 정답 근거 — 표의 구체 수치)·`facts`(확인해야 할 역사 사실)·옵션별 `why`(키 근거·오답별 틀린 이유)와 `label`(오답 유형)에 남는다. 정답 위치는 자료 순서와 무관하게 흩었다(키 위치 US1 gm = C·A·D, US2 imm = B·D·C).
+- **게이트**: 기존 MC 게이트(`itemViolations`·표 수치 검사)와 실제 자료 게이트(레지스트리 대조·ALTON 작성 표지 금지·표 글자 그대로) + 신규 `realFrqViolations`(SAQ: 표가 레지스트리와 같은지·ALTON 표지 금지·FRQ 공통 게이트에서 'ALTON 작성 출처' 규칙만 제외). 그림 게이트(`gateCandidate`)·변환(`planConversion`) 통과.
+- **독립 검증**(`scripts/ap-generation/ush-real-a-verify.ts`, 동기 호출): MC 6문항 — Opus·Sonnet 블라인드 풀이(Sonnet 은 선택지 역순) 12표 전원 키와 일치(전부 certain), Fable 사실 점검(키·근거 공개) 전 문항 sound(Fable 이 1회 'first major federal law' 문구를 contested 로 지적 → '여러 최초 연방법 중 하나'로 고쳐 재점검 통과). SAQ 2건 — 샘플 답안 3단계×독립 채점기 2(Opus·Sonnet) 총점이 의도(3/2/1)와 정확히 일치·채점기 간 편차 0, Fable 사실 점검(과제·기대 답안·루브릭·샘플) 전부 sound. 비용 **$1.33**(원장 누적 204.08 → 205.41; 한도 $6·중단 $220 이내). 미해결 칸 **없음**.
+- **화면 증거**(격리 스택 `ALTON_apusha`, 포트 +100, 가드 통과): 후보 4개 × 390×844·1280×800 = 16항목, 검사 전부 pass(표 렌더 16, FRQ 입력 4, 정답·해설 비노출 16, 잘림 없음 16). 증거 `data/ap/screen-evidence/evidence-ush-real-a.json`, 스크린샷 `docs/ap/screen-evidence/ush-real-a/`. 종료 후 시드 정리·`isolated-stack.sh stop`·`config.toml` 원복·컨테이너 0 확인. 모바일(390)에서 표는 가로 스크롤 래퍼에 든다("Scroll for more" 안내).
+- **배치·렌더**: `lib/ap-admin/batches.ts` 에 `ush-real-a`(`ush-real-a-2026-10-15`, 보조 적재, 증거 `evidence-ush-real-a.json`) 등록. `keys-file.ts`·`render-check.ts`·`supp-batches.ts` 는 `ush-*-items.json` 파일명 규칙(`ushItemNames`)으로 자동 인식한다. `render-check.ts` 재생성(보고서 4행 추가: ap_us_history 114행, 표 렌더 18 통과). 다른 과목 스냅샷 파일(이전 병합으로 이미 바뀐 템플릿)은 이 변경과 무관하므로 되돌리고 보고서·US History 항목만 반영했다.
+- **새 버전 계획**: `data/ap/stock/us1-v2-real-a-swap-plan.json`(교체 2건 = MC 세트 1(3칸 통째) + SAQ 1), `us2-v2-real-a-swap-plan.json`(교체 2건). 생성기 `scripts/ap-generation/ush-stage-a-plans.ts [--write]`(입력: 게시 v1 슬롯 SELECT 전용 스냅샷 `data/ap/stock/ush-us1-us2-published-v1-slots.json` — 2026-10-15 `supabase db query --linked` 조회, **US1·US2 모두 게시 v1**), 검증 `lib/ap-admin/ush-stage-a-plans.test.ts`(관리자 새 버전 흐름 `resolveSwaps`+`checkNewVersionComposition` 재현, 교체 뒤 독립 검증기 위반 0·단원 수/스킬 범주 수/자료 유형/SAQ 시대 그대로·시험 간 겹침 0, 배치 등록·통과 키 일치·레지스트리·표 변조 검출). 두 계획은 서로 독립(교체해 넣는 문항이 다름)이라 순서 제약이 없다.
+
+### 관리자 작업 순서(DB 쓰기 전부 관리자 화면 — 이 브랜치는 쓰지 않았다)
+1. 이 브랜치를 통합 브랜치에 병합·배포(배치 파일·증거·계획이 번들에 실려야 한다).
+2. 관리자 → Mock Exams → AP 재고 관리 → **배치 전체 적재**: 배치 **`ush-real-a`**(4키) 선택 → 미리보기(단계별 dry-run, 쓰기 0) → "확인했습니다" → 실행 (① 적재 → ② 렌더 기록 → ③ 화면 기록 → ④ 문제은행 변환). **건너뜀 허용은 켜지 않는다**: 4키 모두 렌더 보고서·화면 증거(해시 일치)가 있으므로 엄격 모드에서 멈춤 없이 끝나야 한다. 건너뜀·"검증 미완료"가 보이면 진행하지 말고 원인(증거 해시 불일치 = payload 가 배포본과 다름)을 먼저 해결. 실행 뒤 현황 표에서 `ush-real-a` 가 4/4 변환·`review_env_ready` 인지 확인.
+3. **새 버전 — `AP U.S. History — Practice Exam 1`**: 계획 `us1-v2-real-a-swap-plan.json`(교체 2건: ap_mc #42 세트 `u747`→`real_a_gm`, ap_saq #3 `saq3_1`→`real_a_saq3_own`) 선택 → 미리보기(검증 통과·구성 전/후·기존 응시 수 확인) → 확인 → 초안 v2 생성 → 초안을 확인(문항 3칸 세트가 42–44, SAQ 3번) → **'새 버전 공개'**(공개 범위는 이전 공개본에서 승계).
+4. **새 버전 — `AP U.S. History — Practice Exam 2`**: 계획 `us2-v2-real-a-swap-plan.json`(ap_mc #39 세트 `u719`→`real_a_imm`, ap_saq #3 `saq3_3`→`real_a_saq3_plains`) 동일 절차 → 공개. 3·4 는 서로 독립이라 어느 쪽을 먼저 해도 된다.
+5. 공개 뒤 두 시험의 해당 문항을 학생 화면에서 한 번씩 연다(표 렌더·출처 표기·정답/해설 비노출). 응시 이력은 새 버전 정책대로 기존 v1 응시를 건드리지 않는다.
+
+### Stage A 의 한계·UNVERIFIED
+- 사실 정확성은 LLM 검사(Opus 풀이·Sonnet 풀이·Fable 사실 점검·채점기)로 보증한 것이며 **역사 교사 검수가 아니다**. 숫자는 코드가 공식 파일에서 추출하고 지역 합계 검증을 통과했지만 Census 표 자체의 기준 변경(1890 보호구역 포함/제외, 용어 변화)은 자료 소개의 한 줄 안내 수준이다.
+- 샘플 답안 채점은 모델 채점기 결과이며 공식 College Board 채점 지침과의 일치는 검증하지 않았다.
+- Lange 사진(`img-migrant-mother-1936`)은 시대 7 이라 SAQ 시대 서로 다름 규칙 때문에 쓰지 못했다(US1 은 SAQ2 가 시대 7, US2 의 q3 는 시대 6). Keppler 만화(1889, 시대 6)는 후속 DBQ(단계 B) 문서 후보라 겹침을 피해 쓰지 않았다. US1 SAQ q3 는 사진·지도가 아니라 **표**(비텍스트)다. 지도·사진 자료의 MC 전환은 단계 D.
+- MC 문항의 토픽 코드는 실제 내용에 맞게 다시 붙였다(예: US1 u747 Q2 7.8 → 7.6). **단원·스킬 범주는 칸과 동일**(구성 규칙·검증기 영향 없음).
+- 새 버전 공개와 DB 적재는 실행하지 않았다. 적재 후 `review_env_ready`·`release_tier` 가 채워져야 새 버전 미리보기가 통과한다(미리보기가 사유를 알려 준다).

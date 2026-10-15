@@ -104,7 +104,7 @@ function main() {
     if (!g) { unresolved.push(`${q.slot} (${id}: no grading record)`); continue; }
     rec = saqRecord(q, g.scores); const p = rec.payload.ush_frq as UshFrqPayload; let ok = g.ok === true;
     const v = gates(rec); if (v.length) { ok = false; console.log(id, "gate:", v); }
-    p.verification = undefined as never; (rec.payload as Json).verification = { fact_checker: ver.models.fact, graders: ver.models.graders, fact_verdicts: g.factVerdicts, flags: g.flags, sample_totals: g.totals, grader_totals: g.graderTotals };
+    void p; (rec.payload as Json).verification = { fact_checker: ver.models.fact, graders: ver.models.graders, fact_verdicts: g.factVerdicts, flags: g.flags, sample_totals: g.totals, grader_totals: g.graderTotals };
     rec.reviewState = ok ? "verified_by_independent_models" : "has_unresolved_items"; rec.validation = ok ? "auto_passed" : "needs_review";
     if (ok) out.push(rec); else unresolved.push(`${q.slot} (${id})`);
   }
